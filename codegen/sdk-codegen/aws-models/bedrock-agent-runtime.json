@@ -275,6 +275,29 @@
                 "smithy.api#pattern": "^[0-9a-zA-Z]+$"
             }
         },
+        "com.amazonaws.bedrockagentruntime#AgentCollaboration": {
+            "type": "enum",
+            "members": {
+                "SUPERVISOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPERVISOR"
+                    }
+                },
+                "SUPERVISOR_ROUTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPERVISOR_ROUTER"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentruntime#AgentCollaboratorInputPayload": {
             "type": "structure",
             "members": {
@@ -1688,6 +1711,138 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the JSON-formatted string returned by the API invoked by the code interpreter.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#CollaborationInstruction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Collaborator": {
+            "type": "structure",
+            "members": {
+                "customerEncryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the AWS KMS key that encrypts the inline collaborator. \n        </p>"
+                    }
+                },
+                "foundationModel": {
+                    "target": "com.amazonaws.bedrockagentruntime#ModelIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The foundation model used by the inline collaborator agent.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "instruction": {
+                    "target": "com.amazonaws.bedrockagentruntime#Instruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Instruction that tell the inline collaborator agent what it should do and how it should interact with users.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "idleSessionTTLInSeconds": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionTTL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The number of seconds for which the Amazon Bedrock keeps information about the user's conversation with the inline collaborator agent.</p>\n         <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.\n        </p>"
+                    }
+                },
+                "actionGroups": {
+                    "target": "com.amazonaws.bedrockagentruntime#AgentActionGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            List of action groups with each action group defining tasks the inline collaborator agent needs to carry out.\n        </p>"
+                    }
+                },
+                "knowledgeBases": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBases",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Knowledge base associated with the inline collaborator agent.\n        </p>"
+                    }
+                },
+                "guardrailConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailConfigurationWithArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Details of the guardwrail associated with the inline collaborator.\n        </p>"
+                    }
+                },
+                "promptOverrideConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#PromptOverrideConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains configurations to override prompt templates in different parts of an inline collaborator sequence. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html\">Advanced prompts</a>.\n        </p>"
+                    }
+                },
+                "agentCollaboration": {
+                    "target": "com.amazonaws.bedrockagentruntime#AgentCollaboration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Defines how the inline supervisor agent handles information across multiple collaborator agents to coordinate a final response.\n        </p>"
+                    }
+                },
+                "collaboratorConfigurations": {
+                    "target": "com.amazonaws.bedrockagentruntime#CollaboratorConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Settings of the collaborator agent.\n        </p>"
+                    }
+                },
+                "agentName": {
+                    "target": "com.amazonaws.bedrockagentruntime#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Name of the inline collaborator agent which must be the same name as specified for <code>collaboratorName</code>.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n           List of inline collaborators. \n        </p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#CollaboratorConfiguration": {
+            "type": "structure",
+            "members": {
+                "collaboratorName": {
+                    "target": "com.amazonaws.bedrockagentruntime#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Name of the inline collaborator agent which must be the same name as specified for <code>agentName</code>.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaboratorInstruction": {
+                    "target": "com.amazonaws.bedrockagentruntime#CollaborationInstruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Instructions that tell the inline collaborator agent what it should do and how it should interact with users.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentAliasArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#AgentAliasArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the inline collaborator agent.\n        </p>"
+                    }
+                },
+                "relayConversationHistory": {
+                    "target": "com.amazonaws.bedrockagentruntime#RelayConversationHistory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A relay conversation history for the inline collaborator agent.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Settings of an inline collaborator agent.\n        </p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#CollaboratorConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#CollaboratorConfiguration"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Collaborators": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#Collaborator"
             }
         },
         "com.amazonaws.bedrockagentruntime#ConfirmationState": {
@@ -5118,6 +5273,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Contains information about the files used by code interpreter.\n        </p>"
                     }
+                },
+                "conversationHistory": {
+                    "target": "com.amazonaws.bedrockagentruntime#ConversationHistory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains the conversation history that persist across sessions.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -5878,42 +6039,10 @@
         "com.amazonaws.bedrockagentruntime#InvokeInlineAgentRequest": {
             "type": "structure",
             "members": {
-                "sessionId": {
-                    "target": "com.amazonaws.bedrockagentruntime#SessionId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n            The unique identifier of the session. Use the same value across requests to continue the same conversation.\n        </p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "customerEncryptionKeyArn": {
                     "target": "com.amazonaws.bedrockagentruntime#KmsKeyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the Amazon Web Services KMS key to use to encrypt your inline agent. \n        </p>"
-                    }
-                },
-                "endSession": {
-                    "target": "smithy.api#Boolean",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies whether to end the session with the inline agent or not.\n        </p>"
-                    }
-                },
-                "enableTrace": {
-                    "target": "smithy.api#Boolean",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies whether to turn on the trace or not to track the agent's reasoning process. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html\">Using trace</a>.\n            \n        </p>"
-                    }
-                },
-                "inputText": {
-                    "target": "com.amazonaws.bedrockagentruntime#InputText",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n            The prompt text to send to the agent.\n        </p>\n         <note>\n            <p>If you include <code>returnControlInvocationResults</code> in the <code>sessionState</code> field, the <code>inputText</code> field will be ignored.</p>\n         </note>"
-                    }
-                },
-                "inlineSessionState": {
-                    "target": "com.amazonaws.bedrockagentruntime#InlineSessionState",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n            Parameters that specify the various attributes of a sessions. You can include attributes for the session or prompt or, if you configured an \n            action group to return control, results from invocation of the action group. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html\">Control session context</a>.\n        </p>\n         <note>\n            <p>If you include <code>returnControlInvocationResults</code> in the <code>sessionState</code> field, the <code>inputText</code> field will be ignored.</p>\n         </note>"
                     }
                 },
                 "foundationModel": {
@@ -5960,16 +6089,66 @@
                         "smithy.api#documentation": "<p>\n           Configurations for advanced prompts used to override the default prompts to enhance the accuracy of the inline agent.\n        </p>"
                     }
                 },
-                "bedrockModelConfigurations": {
-                    "target": "com.amazonaws.bedrockagentruntime#InlineBedrockModelConfigurations",
+                "agentCollaboration": {
+                    "target": "com.amazonaws.bedrockagentruntime#AgentCollaboration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Model settings for the request.</p>"
+                        "smithy.api#documentation": "<p>\n            Defines how the inline collaborator agent handles information across multiple collaborator agents to coordinate a final response. The inline collaborator agent can also be the supervisor.\n        </p>"
+                    }
+                },
+                "collaboratorConfigurations": {
+                    "target": "com.amazonaws.bedrockagentruntime#CollaboratorConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Settings for an inline agent collaborator called with <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeInlineAgent.html\">InvokeInlineAgent</a>.\n        </p>"
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The unique identifier of the session. Use the same value across requests to continue the same conversation.\n        </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "endSession": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether to end the session with the inline agent or not.\n        </p>"
+                    }
+                },
+                "enableTrace": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether to turn on the trace or not to track the agent's reasoning process. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html\">Using trace</a>.\n            \n        </p>"
+                    }
+                },
+                "inputText": {
+                    "target": "com.amazonaws.bedrockagentruntime#InputText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The prompt text to send to the agent.\n        </p>\n         <note>\n            <p>If you include <code>returnControlInvocationResults</code> in the <code>sessionState</code> field, the <code>inputText</code> field will be ignored.</p>\n         </note>"
                     }
                 },
                 "streamingConfigurations": {
                     "target": "com.amazonaws.bedrockagentruntime#StreamingConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>\n           Specifies the configurations for streaming.\n        </p>\n         <note>\n            <p>To use agent streaming, you need permissions to perform the <code>bedrock:InvokeModelWithResponseStream</code> action.</p>\n         </note>"
+                    }
+                },
+                "inlineSessionState": {
+                    "target": "com.amazonaws.bedrockagentruntime#InlineSessionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Parameters that specify the various attributes of a sessions. You can include attributes for the session or prompt or, if you configured an \n            action group to return control, results from invocation of the action group. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html\">Control session context</a>.\n        </p>\n         <note>\n            <p>If you include <code>returnControlInvocationResults</code> in the <code>sessionState</code> field, the <code>inputText</code> field will be ignored.</p>\n         </note>"
+                    }
+                },
+                "collaborators": {
+                    "target": "com.amazonaws.bedrockagentruntime#Collaborators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            List of collaborator inline agents.\n        </p>"
+                    }
+                },
+                "bedrockModelConfigurations": {
+                    "target": "com.amazonaws.bedrockagentruntime#InlineBedrockModelConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model settings for the request.</p>"
                     }
                 }
             },
@@ -7864,6 +8043,12 @@
                         "smithy.api#documentation": "<p>Specifies whether to override the default parser Lambda function when parsing the raw foundation model output in the part of the agent sequence defined by the <code>promptType</code>. If you set the field as <code>OVERRIDDEN</code>, the <code>overrideLambda</code> field in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html\">PromptOverrideConfiguration</a> must be specified with the ARN of a Lambda function.</p>"
                     }
                 },
+                "foundationModel": {
+                    "target": "com.amazonaws.bedrockagentruntime#ModelIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The foundation model to use.\n        </p>"
+                    }
+                },
                 "additionalModelRequestFields": {
                     "target": "smithy.api#Document",
                     "traits": {
@@ -8267,6 +8452,23 @@
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the reasoning that the model used to return the content in the content block.</p>",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RelayConversationHistory": {
+            "type": "enum",
+            "members": {
+                "TO_COLLABORATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TO_COLLABORATOR"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagentruntime#RepromptResponse": {
@@ -10906,6 +11108,13 @@
                     "target": "com.amazonaws.bedrockagentruntime#CallerChain",
                     "traits": {
                         "smithy.api#documentation": "<p>The part's caller chain.</p>"
+                    }
+                },
+                "eventTime": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time of the trace.\n        </p>",
+                        "smithy.api#timestampFormat": "date-time"
                     }
                 },
                 "collaboratorName": {

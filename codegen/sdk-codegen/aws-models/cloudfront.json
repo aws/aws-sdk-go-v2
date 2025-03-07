@@ -118,7 +118,7 @@
                 "ICPRecordalStatus": {
                     "target": "com.amazonaws.cloudfront#ICPRecordalStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Internet Content Provider (ICP) recordal status for a CNAME. The ICPRecordalStatus\n\t\t\tis set to APPROVED for all CNAMEs (aliases) in regions outside of China.</p>\n         <p>The status values returned are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>APPROVED</b> indicates that the associated CNAME\n\t\t\t\t\thas a valid ICP recordal number. Multiple CNAMEs can be associated with a\n\t\t\t\t\tdistribution, and CNAMEs can correspond to different ICP recordals. To be marked\n\t\t\t\t\tas APPROVED, that is, valid to use with China region, a CNAME must have one ICP\n\t\t\t\t\trecordal number associated with it.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SUSPENDED</b> indicates that the associated CNAME\n\t\t\t\t\tdoes not have a valid ICP recordal number.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PENDING</b> indicates that CloudFront can't determine\n\t\t\t\t\tthe ICP recordal status of the CNAME associated with the distribution because\n\t\t\t\t\tthere was an error in trying to determine the status. You can try again to see\n\t\t\t\t\tif the error is resolved in which case CloudFront returns an APPROVED or SUSPENDED\n\t\t\t\t\tstatus.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Internet Content Provider (ICP) recordal status for a CNAME. The ICPRecordalStatus\n\t\t\tis set to APPROVED for all CNAMEs (aliases) in Amazon Web Services Regions outside of China.</p>\n         <p>The status values returned are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>APPROVED</b> indicates that the associated CNAME\n\t\t\t\t\thas a valid ICP recordal number. Multiple CNAMEs can be associated with a\n\t\t\t\t\tdistribution, and CNAMEs can correspond to different ICP recordals. To be marked\n\t\t\t\t\tas APPROVED, that is, valid to use with the China Regions, a CNAME must have one ICP\n\t\t\t\t\trecordal number associated with it.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SUSPENDED</b> indicates that the associated CNAME\n\t\t\t\t\tdoes not have a valid ICP recordal number.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PENDING</b> indicates that CloudFront can't determine\n\t\t\t\t\tthe ICP recordal status of the CNAME associated with the distribution because\n\t\t\t\t\tthere was an error in trying to determine the status. You can try again to see\n\t\t\t\t\tif the error is resolved in which case CloudFront returns an APPROVED or SUSPENDED\n\t\t\t\t\tstatus.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4632,7 +4632,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables additional CloudWatch metrics for the specified CloudFront distribution. The\n\t\t\tadditional metrics incur an additional cost.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html#monitoring-console.distributions-additional\">Viewing additional CloudFront distribution metrics</a> in\n\t\t\tthe <i>Amazon CloudFront Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Enables or disables additional Amazon CloudWatch metrics for the specified CloudFront distribution. The\n\t\t\tadditional metrics incur an additional cost.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html#monitoring-console.distributions-additional\">Viewing additional CloudFront distribution metrics</a> in\n\t\t\tthe <i>Amazon CloudFront Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2020-05-31/distributions/{DistributionId}/monitoring-subscription",
@@ -4654,7 +4654,7 @@
                 "MonitoringSubscription": {
                     "target": "com.amazonaws.cloudfront#MonitoringSubscription",
                     "traits": {
-                        "smithy.api#documentation": "<p>A monitoring subscription. This structure contains information about whether\n\t\t\tadditional CloudWatch metrics are enabled for a given CloudFront distribution.</p>",
+                        "smithy.api#documentation": "<p>A monitoring subscription. This structure contains information about whether additional CloudWatch\n\t\t\tmetrics are enabled for a given CloudFront distribution.</p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "MonitoringSubscription"
@@ -18134,7 +18134,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This operation is not supported in this region.</p>",
+                "smithy.api#documentation": "<p>This operation is not supported in this Amazon Web Services Region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

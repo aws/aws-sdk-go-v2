@@ -2478,6 +2478,28 @@
                 "smithy.api#documentation": "<p>Settings for a foundation model used to parse documents for a data source.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#BedrockFoundationModelContextEnrichmentConfiguration": {
+            "type": "structure",
+            "members": {
+                "enrichmentStrategyConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#EnrichmentStrategyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrichment stategy used to provide additional context. For example, Neptune GraphRAG uses\n      Amazon Bedrock foundation models to perform chunk entity extraction.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelArn": {
+                    "target": "com.amazonaws.bedrockagent#BedrockModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the foundation model used for context enrichment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Context enrichment configuration is used to provide additional context to the RAG application\n      using Amazon Bedrock foundation models.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#BedrockModelArn": {
             "type": "string",
             "traits": {
@@ -2856,6 +2878,38 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "S3"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#ContextEnrichmentConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#ContextEnrichmentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method used for context enrichment. It must be Amazon Bedrock foundation models.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "bedrockFoundationModelConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#BedrockFoundationModelContextEnrichmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the Amazon Bedrock foundation model used for context enrichment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Context enrichment configuration is used to provide additional context to the RAG application.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#ContextEnrichmentType": {
+            "type": "enum",
+            "members": {
+                "BEDROCK_FOUNDATION_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEDROCK_FOUNDATION_MODEL"
                     }
                 }
             }
@@ -6294,6 +6348,32 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#EnrichmentStrategyConfiguration": {
+            "type": "structure",
+            "members": {
+                "method": {
+                    "target": "com.amazonaws.bedrockagent#EnrichmentStrategyMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method used for the context enrichment strategy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The strategy used for performing context enrichment.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#EnrichmentStrategyMethod": {
+            "type": "enum",
+            "members": {
+                "CHUNK_ENTITY_EXTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHUNK_ENTITY_EXTRACTION"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#ErrorMessage": {
             "type": "string",
             "traits": {
@@ -9155,6 +9235,18 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagent#GraphArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN for Neptune Analytics graph database",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):neptune-graph:[a-zA-Z0-9-]*:[0-9]{12}:graph/g-[a-zA-Z0-9]{10}$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagent#GuardrailConfiguration": {
             "type": "structure",
             "members": {
@@ -10340,6 +10432,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MONGO_DB_ATLAS"
+                    }
+                },
+                "NEPTUNE_ANALYTICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEPTUNE_ANALYTICS"
                     }
                 }
             }
@@ -12489,6 +12587,50 @@
                     "min": 1,
                     "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.bedrockagent#NeptuneAnalyticsConfiguration": {
+            "type": "structure",
+            "members": {
+                "graphArn": {
+                    "target": "com.amazonaws.bedrockagent#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Neptune Analytics vector store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldMapping": {
+                    "target": "com.amazonaws.bedrockagent#NeptuneAnalyticsFieldMapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the names of the fields to which to map information about the vector store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the storage configuration of the knowledge base in \n      Amazon Neptune Analytics. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-neptune.html\">Create a vector index \n      in Amazon Neptune Analytics</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#NeptuneAnalyticsFieldMapping": {
+            "type": "structure",
+            "members": {
+                "textField": {
+                    "target": "com.amazonaws.bedrockagent#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in which Amazon Bedrock stores the raw text from your data. The text\n     is split according to the chunking strategy you choose.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadataField": {
+                    "target": "com.amazonaws.bedrockagent#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in which Amazon Bedrock stores metadata about the vector store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the names of the fields to which to map information about the vector store.</p>"
             }
         },
         "com.amazonaws.bedrockagent#NextToken": {
@@ -15296,6 +15438,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the storage configuration of the knowledge base in MongoDB Atlas.</p>"
                     }
+                },
+                "neptuneAnalyticsConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#NeptuneAnalyticsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the Neptune Analytics configuration of the knowledge base in Amazon Neptune. For more information, \n    see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-neptune.html\">Create a\n    vector index in Amazon Neptune Analytics.</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17652,6 +17800,12 @@
                     "target": "com.amazonaws.bedrockagent#ParsingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configurations for a parser to use for parsing documents in your data source. If you exclude this field, the default parser will be used.</p>"
+                    }
+                },
+                "contextEnrichmentConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#ContextEnrichmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context enrichment configuration used for ingestion of the data into the vector\n      store.</p>"
                     }
                 }
             },

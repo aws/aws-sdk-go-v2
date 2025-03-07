@@ -1933,7 +1933,7 @@
                 "graphName": {
                     "target": "com.amazonaws.neptunegraph#GraphName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the new Neptune Analytics graph to be created.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. </p>",
+                        "smithy.api#documentation": "<p>A name for the new Neptune Analytics graph to be created.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1976,7 +1976,7 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Min = 128</p>",
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Min = 16</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1998,7 +1998,7 @@
                 "name": {
                     "target": "com.amazonaws.neptunegraph#GraphName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The graph name. For example: <code>my-graph-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. </p>",
+                        "smithy.api#documentation": "<p>The graph name. For example: <code>my-graph-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2030,7 +2030,7 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>\n         <p>Min = 128</p>"
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>\n         <p>Min = 16</p>"
                     }
                 },
                 "endpoint": {
@@ -2142,7 +2142,7 @@
                 "snapshotName": {
                     "target": "com.amazonaws.neptunegraph#SnapshotName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens.</p>",
+                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2256,7 +2256,7 @@
                 "graphName": {
                     "target": "com.amazonaws.neptunegraph#GraphName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the new Neptune Analytics graph to be created.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. </p>",
+                        "smithy.api#documentation": "<p>A name for the new Neptune Analytics graph to be created.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2311,7 +2311,7 @@
                 "minProvisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 128</p>"
+                        "smithy.api#documentation": "<p>The minimum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 16</p>"
                     }
                 },
                 "failOnError": {
@@ -2760,7 +2760,7 @@
                 "name": {
                     "target": "com.amazonaws.neptunegraph#SnapshotName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens.</p>",
+                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3972,7 +3972,7 @@
                 "name": {
                     "target": "com.amazonaws.neptunegraph#SnapshotName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens.</p>",
+                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4744,7 +4744,7 @@
                 "name": {
                     "target": "com.amazonaws.neptunegraph#SnapshotName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens.</p>",
+                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6411,14 +6411,14 @@
                 "graphName": {
                     "target": "com.amazonaws.neptunegraph#GraphName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the new Neptune Analytics graph to be created from the snapshot.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. </p>",
+                        "smithy.api#documentation": "<p>A name for the new Neptune Analytics graph to be created from the snapshot.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>\n         <p>Min = 128</p>"
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>\n         <p>Min = 16</p>"
                     }
                 },
                 "deletionProtection": {
@@ -7395,7 +7395,7 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>\n         <p>Min = 128</p>"
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>\n         <p>Min = 16</p>"
                     }
                 },
                 "deletionProtection": {
