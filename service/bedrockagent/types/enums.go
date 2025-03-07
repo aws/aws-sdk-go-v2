@@ -214,6 +214,23 @@ func (ContentDataSourceType) Values() []ContentDataSourceType {
 	}
 }
 
+type ContextEnrichmentType string
+
+// Enum values for ContextEnrichmentType
+const (
+	ContextEnrichmentTypeBedrockFoundationModel ContextEnrichmentType = "BEDROCK_FOUNDATION_MODEL"
+)
+
+// Values returns all known values for ContextEnrichmentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextEnrichmentType) Values() []ContextEnrichmentType {
+	return []ContextEnrichmentType{
+		"BEDROCK_FOUNDATION_MODEL",
+	}
+}
+
 type ConversationRole string
 
 // Enum values for ConversationRole
@@ -430,6 +447,23 @@ func (EmbeddingDataType) Values() []EmbeddingDataType {
 	return []EmbeddingDataType{
 		"FLOAT32",
 		"BINARY",
+	}
+}
+
+type EnrichmentStrategyMethod string
+
+// Enum values for EnrichmentStrategyMethod
+const (
+	EnrichmentStrategyMethodChunkEntityExtraction EnrichmentStrategyMethod = "CHUNK_ENTITY_EXTRACTION"
+)
+
+// Values returns all known values for EnrichmentStrategyMethod. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnrichmentStrategyMethod) Values() []EnrichmentStrategyMethod {
+	return []EnrichmentStrategyMethod{
+		"CHUNK_ENTITY_EXTRACTION",
 	}
 }
 
@@ -800,6 +834,7 @@ const (
 	KnowledgeBaseStorageTypeRedisEnterpriseCloud KnowledgeBaseStorageType = "REDIS_ENTERPRISE_CLOUD"
 	KnowledgeBaseStorageTypeRds                  KnowledgeBaseStorageType = "RDS"
 	KnowledgeBaseStorageTypeMongoDbAtlas         KnowledgeBaseStorageType = "MONGO_DB_ATLAS"
+	KnowledgeBaseStorageTypeNeptuneAnalytics     KnowledgeBaseStorageType = "NEPTUNE_ANALYTICS"
 )
 
 // Values returns all known values for KnowledgeBaseStorageType. Note that this
@@ -813,6 +848,7 @@ func (KnowledgeBaseStorageType) Values() []KnowledgeBaseStorageType {
 		"REDIS_ENTERPRISE_CLOUD",
 		"RDS",
 		"MONGO_DB_ATLAS",
+		"NEPTUNE_ANALYTICS",
 	}
 }
 

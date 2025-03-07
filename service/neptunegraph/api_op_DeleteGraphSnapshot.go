@@ -60,7 +60,7 @@ type DeleteGraphSnapshotOutput struct {
 	//
 	// The name must contain from 1 to 63 letters, numbers, or hyphens, and its first
 	// character must be a letter. It cannot end with a hyphen or contain two
-	// consecutive hyphens.
+	// consecutive hyphens. Only lowercase letters are allowed.
 	//
 	// This member is required.
 	Name *string

@@ -7258,6 +7258,25 @@ func awsRestjson1_serializeDocumentBedrockFoundationModelConfiguration(v *types.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBedrockFoundationModelContextEnrichmentConfiguration(v *types.BedrockFoundationModelContextEnrichmentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnrichmentStrategyConfiguration != nil {
+		ok := object.Key("enrichmentStrategyConfiguration")
+		if err := awsRestjson1_serializeDocumentEnrichmentStrategyConfiguration(v.EnrichmentStrategyConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelArn != nil {
+		ok := object.Key("modelArn")
+		ok.String(*v.ModelArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentByteContentDoc(v *types.ByteContentDoc, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7473,6 +7492,25 @@ func awsRestjson1_serializeDocumentContentBlocks(v []types.ContentBlock, value s
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentContextEnrichmentConfiguration(v *types.ContextEnrichmentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BedrockFoundationModelConfiguration != nil {
+		ok := object.Key("bedrockFoundationModelConfiguration")
+		if err := awsRestjson1_serializeDocumentBedrockFoundationModelContextEnrichmentConfiguration(v.BedrockFoundationModelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 
@@ -7782,6 +7820,18 @@ func awsRestjson1_serializeDocumentEnabledMemoryTypes(v []types.MemoryType, valu
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEnrichmentStrategyConfiguration(v *types.EnrichmentStrategyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Method) > 0 {
+		ok := object.Key("method")
+		ok.String(string(v.Method))
+	}
+
 	return nil
 }
 
@@ -8819,6 +8869,42 @@ func awsRestjson1_serializeDocumentMongoDbAtlasFieldMapping(v *types.MongoDbAtla
 	if v.VectorField != nil {
 		ok := object.Key("vectorField")
 		ok.String(*v.VectorField)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNeptuneAnalyticsConfiguration(v *types.NeptuneAnalyticsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldMapping != nil {
+		ok := object.Key("fieldMapping")
+		if err := awsRestjson1_serializeDocumentNeptuneAnalyticsFieldMapping(v.FieldMapping, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GraphArn != nil {
+		ok := object.Key("graphArn")
+		ok.String(*v.GraphArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNeptuneAnalyticsFieldMapping(v *types.NeptuneAnalyticsFieldMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataField != nil {
+		ok := object.Key("metadataField")
+		ok.String(*v.MetadataField)
+	}
+
+	if v.TextField != nil {
+		ok := object.Key("textField")
+		ok.String(*v.TextField)
 	}
 
 	return nil
@@ -10309,6 +10395,13 @@ func awsRestjson1_serializeDocumentStorageConfiguration(v *types.StorageConfigur
 		}
 	}
 
+	if v.NeptuneAnalyticsConfiguration != nil {
+		ok := object.Key("neptuneAnalyticsConfiguration")
+		if err := awsRestjson1_serializeDocumentNeptuneAnalyticsConfiguration(v.NeptuneAnalyticsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OpensearchServerlessConfiguration != nil {
 		ok := object.Key("opensearchServerlessConfiguration")
 		if err := awsRestjson1_serializeDocumentOpenSearchServerlessConfiguration(v.OpensearchServerlessConfiguration, ok); err != nil {
@@ -10745,6 +10838,13 @@ func awsRestjson1_serializeDocumentVectorIngestionConfiguration(v *types.VectorI
 	if v.ChunkingConfiguration != nil {
 		ok := object.Key("chunkingConfiguration")
 		if err := awsRestjson1_serializeDocumentChunkingConfiguration(v.ChunkingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContextEnrichmentConfiguration != nil {
+		ok := object.Key("contextEnrichmentConfiguration")
+		if err := awsRestjson1_serializeDocumentContextEnrichmentConfiguration(v.ContextEnrichmentConfiguration, ok); err != nil {
 			return err
 		}
 	}

@@ -4130,7 +4130,7 @@ func (e *TrustedSignerDoesNotExist) ErrorCode() string {
 }
 func (e *TrustedSignerDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This operation is not supported in this region.
+// This operation is not supported in this Amazon Web Services Region.
 type UnsupportedOperation struct {
 	Message *string
 

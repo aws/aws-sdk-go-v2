@@ -887,6 +887,26 @@ type BedrockFoundationModelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Context enrichment configuration is used to provide additional context to the
+// RAG application using Amazon Bedrock foundation models.
+type BedrockFoundationModelContextEnrichmentConfiguration struct {
+
+	// The enrichment stategy used to provide additional context. For example, Neptune
+	// GraphRAG uses Amazon Bedrock foundation models to perform chunk entity
+	// extraction.
+	//
+	// This member is required.
+	EnrichmentStrategyConfiguration *EnrichmentStrategyConfiguration
+
+	// The Amazon Resource Name (ARN) of the foundation model used for context
+	// enrichment.
+	//
+	// This member is required.
+	ModelArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about content defined inline in bytes.
 type ByteContentDoc struct {
 
@@ -1142,6 +1162,23 @@ type ContentBlockMemberText struct {
 }
 
 func (*ContentBlockMemberText) isContentBlock() {}
+
+// Context enrichment configuration is used to provide additional context to the
+// RAG application.
+type ContextEnrichmentConfiguration struct {
+
+	// The method used for context enrichment. It must be Amazon Bedrock foundation
+	// models.
+	//
+	// This member is required.
+	Type ContextEnrichmentType
+
+	// The configuration of the Amazon Bedrock foundation model used for context
+	// enrichment.
+	BedrockFoundationModelConfiguration *BedrockFoundationModelContextEnrichmentConfiguration
+
+	noSmithyDocumentSerde
+}
 
 // The configuration of filtering the data source content. For example,
 // configuring regular expression patterns to include or exclude certain content.
@@ -1506,6 +1543,17 @@ type EmbeddingModelConfiguration struct {
 
 	// The vector configuration details on the Bedrock embeddings model.
 	BedrockEmbeddingModelConfiguration *BedrockEmbeddingModelConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The strategy used for performing context enrichment.
+type EnrichmentStrategyConfiguration struct {
+
+	// The method used for the context enrichment strategy.
+	//
+	// This member is required.
+	Method EnrichmentStrategyMethod
 
 	noSmithyDocumentSerde
 }
@@ -3314,6 +3362,45 @@ type MultipleNodeInputConnectionsFlowValidationDetails struct {
 }
 
 // Contains details about the storage configuration of the knowledge base in
+// Amazon Neptune Analytics. For more information, see [Create a vector index in Amazon Neptune Analytics].
+//
+// [Create a vector index in Amazon Neptune Analytics]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-neptune.html
+type NeptuneAnalyticsConfiguration struct {
+
+	// Contains the names of the fields to which to map information about the vector
+	// store.
+	//
+	// This member is required.
+	FieldMapping *NeptuneAnalyticsFieldMapping
+
+	// The Amazon Resource Name (ARN) of the Neptune Analytics vector store.
+	//
+	// This member is required.
+	GraphArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the names of the fields to which to map information about the vector
+// store.
+type NeptuneAnalyticsFieldMapping struct {
+
+	// The name of the field in which Amazon Bedrock stores metadata about the vector
+	// store.
+	//
+	// This member is required.
+	MetadataField *string
+
+	// The name of the field in which Amazon Bedrock stores the raw text from your
+	// data. The text is split according to the chunking strategy you choose.
+	//
+	// This member is required.
+	TextField *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the storage configuration of the knowledge base in
 // Amazon OpenSearch Service. For more information, see [Create a vector index in Amazon OpenSearch Service].
 //
 // [Create a vector index in Amazon OpenSearch Service]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
@@ -4641,6 +4728,12 @@ type StorageConfiguration struct {
 	// Contains the storage configuration of the knowledge base in MongoDB Atlas.
 	MongoDbAtlasConfiguration *MongoDbAtlasConfiguration
 
+	// Contains details about the Neptune Analytics configuration of the knowledge
+	// base in Amazon Neptune. For more information, see [Create a vector index in Amazon Neptune Analytics.].
+	//
+	// [Create a vector index in Amazon Neptune Analytics.]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-neptune.html
+	NeptuneAnalyticsConfiguration *NeptuneAnalyticsConfiguration
+
 	// Contains the storage configuration of the knowledge base in Amazon OpenSearch
 	// Service.
 	OpensearchServerlessConfiguration *OpenSearchServerlessConfiguration
@@ -5137,6 +5230,10 @@ type VectorIngestionConfiguration struct {
 	// an excerpt from a data source that is returned when the knowledge base that it
 	// belongs to is queried.
 	ChunkingConfiguration *ChunkingConfiguration
+
+	// The context enrichment configuration used for ingestion of the data into the
+	// vector store.
+	ContextEnrichmentConfiguration *ContextEnrichmentConfiguration
 
 	// A custom document transformer for parsed data source documents.
 	CustomTransformationConfiguration *CustomTransformationConfiguration

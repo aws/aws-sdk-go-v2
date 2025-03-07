@@ -43,7 +43,7 @@ type UpdateGraphInput struct {
 	// The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the
 	// graph.
 	//
-	// Min = 128
+	// Min = 16
 	ProvisionedMemory *int32
 
 	// Specifies whether or not the graph can be reachable over the internet. All

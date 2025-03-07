@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables additional CloudWatch metrics for the specified CloudFront
-// distribution. The additional metrics incur an additional cost.
+// Enables or disables additional Amazon CloudWatch metrics for the specified
+// CloudFront distribution. The additional metrics incur an additional cost.
 //
 // For more information, see [Viewing additional CloudFront distribution metrics] in the Amazon CloudFront Developer Guide.
 //

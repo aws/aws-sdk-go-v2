@@ -74,6 +74,9 @@ type CreateLoadBalancerInput struct {
 	// (IPv4 addresses) and dualstack (IPv4 and IPv6 addresses).
 	IpAddressType types.IpAddressType
 
+	// [Application Load Balancers] The IPAM pools to use with the load balancer.
+	IpamPools *types.IpamPools
+
 	// The nodes of an Internet-facing load balancer have public IP addresses. The DNS
 	// name of an Internet-facing load balancer is publicly resolvable to the public IP
 	// addresses of the nodes. Therefore, Internet-facing load balancers can route

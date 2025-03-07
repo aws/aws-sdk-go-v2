@@ -43,6 +43,7 @@
         "api_op_GetTrustStoreCaCertificatesBundle.go",
         "api_op_GetTrustStoreRevocationContent.go",
         "api_op_ModifyCapacityReservation.go",
+        "api_op_ModifyIpPools.go",
         "api_op_ModifyListener.go",
         "api_op_ModifyListenerAttributes.go",
         "api_op_ModifyLoadBalancerAttributes.go",

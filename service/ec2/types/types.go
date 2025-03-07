@@ -324,6 +324,11 @@ type Address struct {
 	// The ID of an address pool.
 	PublicIpv4Pool *string
 
+	// The service that manages the elastic IP address.
+	//
+	// The only option supported today is alb .
+	ServiceManaged ServiceManaged
+
 	// Any tags assigned to the Elastic IP address.
 	Tags []Tag
 

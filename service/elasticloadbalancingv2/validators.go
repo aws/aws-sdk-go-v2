@@ -570,6 +570,26 @@ func (m *validateOpModifyCapacityReservation) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyIpPools struct {
+}
+
+func (*validateOpModifyIpPools) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyIpPools) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyIpPoolsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyIpPoolsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyListenerAttributes struct {
 }
 
@@ -980,6 +1000,10 @@ func addOpGetTrustStoreRevocationContentValidationMiddleware(stack *middleware.S
 
 func addOpModifyCapacityReservationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyCapacityReservation{}, middleware.After)
+}
+
+func addOpModifyIpPoolsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyIpPools{}, middleware.After)
 }
 
 func addOpModifyListenerAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -1725,6 +1749,21 @@ func validateOpModifyCapacityReservationInput(v *ModifyCapacityReservationInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyCapacityReservationInput"}
+	if v.LoadBalancerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyIpPoolsInput(v *ModifyIpPoolsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyIpPoolsInput"}
 	if v.LoadBalancerArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerArn"))
 	}

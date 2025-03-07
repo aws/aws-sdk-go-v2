@@ -1,0 +1,8 @@
+{
+    "id": "f87343de-1070-4683-851a-2fc096d61409",
+    "type": "feature",
+    "description": "Add serviceManaged field to DescribeAddresses API response.",
+    "modules": [
+        "service/ec2"
+    ]
+}

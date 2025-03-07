@@ -389,6 +389,16 @@ type HttpRequestMethodConditionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// An IPAM pool is a collection of IP address CIDRs. IPAM pools enable you to
+// organize your IP addresses according to your routing and security needs.
+type IpamPools struct {
+
+	// The ID of the IPv4 IPAM pool.
+	Ipv4IpamPoolId *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an Elastic Load Balancing resource limit for your Amazon Web
 // Services account.
 //
@@ -610,6 +620,10 @@ type LoadBalancer struct {
 	// [Network Load Balancers and Gateway Load Balancers] The possible values are ipv4
 	// (IPv4 addresses) and dualstack (IPv4 and IPv6 addresses).
 	IpAddressType IpAddressType
+
+	// [Application Load Balancers] The IPAM pool in use by the load balancer, if
+	// configured.
+	IpamPools *IpamPools
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	LoadBalancerArn *string
@@ -1430,7 +1444,8 @@ type TargetGroupAttribute struct {
 	//
 	//   - target_health_state.unhealthy.connection_termination.enabled - Indicates
 	//   whether the load balancer terminates connections to unhealthy targets. The value
-	//   is true or false . The default is true .
+	//   is true or false . The default is true . This attribute can't be enabled for
+	//   UDP and TCP_UDP target groups.
 	//
 	//   - target_health_state.unhealthy.draining_interval_seconds - The amount of time
 	//   for Elastic Load Balancing to wait before changing the state of an unhealthy

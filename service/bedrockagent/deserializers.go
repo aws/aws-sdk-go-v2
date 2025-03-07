@@ -15628,6 +15628,51 @@ func awsRestjson1_deserializeDocumentBedrockFoundationModelConfiguration(v **typ
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBedrockFoundationModelContextEnrichmentConfiguration(v **types.BedrockFoundationModelContextEnrichmentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BedrockFoundationModelContextEnrichmentConfiguration
+	if *v == nil {
+		sv = &types.BedrockFoundationModelContextEnrichmentConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enrichmentStrategyConfiguration":
+			if err := awsRestjson1_deserializeDocumentEnrichmentStrategyConfiguration(&sv.EnrichmentStrategyConfiguration, value); err != nil {
+				return err
+			}
+
+		case "modelArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BedrockModelArn to be of type string, got %T instead", value)
+				}
+				sv.ModelArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCachePointBlock(v **types.CachePointBlock, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16106,6 +16151,51 @@ func awsRestjson1_deserializeDocumentContentBlocks(v *[]types.ContentBlock, valu
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentContextEnrichmentConfiguration(v **types.ContextEnrichmentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContextEnrichmentConfiguration
+	if *v == nil {
+		sv = &types.ContextEnrichmentConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bedrockFoundationModelConfiguration":
+			if err := awsRestjson1_deserializeDocumentBedrockFoundationModelContextEnrichmentConfiguration(&sv.BedrockFoundationModelConfiguration, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContextEnrichmentType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ContextEnrichmentType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -16930,6 +17020,46 @@ func awsRestjson1_deserializeDocumentEnabledMemoryTypes(v *[]types.MemoryType, v
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEnrichmentStrategyConfiguration(v **types.EnrichmentStrategyConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EnrichmentStrategyConfiguration
+	if *v == nil {
+		sv = &types.EnrichmentStrategyConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "method":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnrichmentStrategyMethod to be of type string, got %T instead", value)
+				}
+				sv.Method = types.EnrichmentStrategyMethod(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -21158,6 +21288,100 @@ func awsRestjson1_deserializeDocumentMultipleNodeInputConnectionsFlowValidationD
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNeptuneAnalyticsConfiguration(v **types.NeptuneAnalyticsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NeptuneAnalyticsConfiguration
+	if *v == nil {
+		sv = &types.NeptuneAnalyticsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fieldMapping":
+			if err := awsRestjson1_deserializeDocumentNeptuneAnalyticsFieldMapping(&sv.FieldMapping, value); err != nil {
+				return err
+			}
+
+		case "graphArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GraphArn to be of type string, got %T instead", value)
+				}
+				sv.GraphArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNeptuneAnalyticsFieldMapping(v **types.NeptuneAnalyticsFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NeptuneAnalyticsFieldMapping
+	if *v == nil {
+		sv = &types.NeptuneAnalyticsFieldMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metadataField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
+				}
+				sv.MetadataField = ptr.String(jtv)
+			}
+
+		case "textField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
+				}
+				sv.TextField = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOpenSearchServerlessConfiguration(v **types.OpenSearchServerlessConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -24932,6 +25156,11 @@ func awsRestjson1_deserializeDocumentStorageConfiguration(v **types.StorageConfi
 				return err
 			}
 
+		case "neptuneAnalyticsConfiguration":
+			if err := awsRestjson1_deserializeDocumentNeptuneAnalyticsConfiguration(&sv.NeptuneAnalyticsConfiguration, value); err != nil {
+				return err
+			}
+
 		case "opensearchServerlessConfiguration":
 			if err := awsRestjson1_deserializeDocumentOpenSearchServerlessConfiguration(&sv.OpensearchServerlessConfiguration, value); err != nil {
 				return err
@@ -26487,6 +26716,11 @@ func awsRestjson1_deserializeDocumentVectorIngestionConfiguration(v **types.Vect
 		switch key {
 		case "chunkingConfiguration":
 			if err := awsRestjson1_deserializeDocumentChunkingConfiguration(&sv.ChunkingConfiguration, value); err != nil {
+				return err
+			}
+
+		case "contextEnrichmentConfiguration":
+			if err := awsRestjson1_deserializeDocumentContextEnrichmentConfiguration(&sv.ContextEnrichmentConfiguration, value); err != nil {
 				return err
 			}
 

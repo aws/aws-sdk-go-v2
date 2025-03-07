@@ -1,0 +1,8 @@
+{
+    "id": "29b570c0-fe2b-4e9b-a591-4c6541712757",
+    "type": "feature",
+    "description": "Support Multi Agent Collaboration within Inline Agents",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

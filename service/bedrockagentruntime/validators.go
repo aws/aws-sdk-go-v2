@@ -723,6 +723,101 @@ func validateByteContentFile(v *types.ByteContentFile) error {
 	}
 }
 
+func validateCollaborator(v *types.Collaborator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Collaborator"}
+	if v.FoundationModel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FoundationModel"))
+	}
+	if v.Instruction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Instruction"))
+	}
+	if v.ActionGroups != nil {
+		if err := validateAgentActionGroups(v.ActionGroups); err != nil {
+			invalidParams.AddNested("ActionGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KnowledgeBases != nil {
+		if err := validateKnowledgeBases(v.KnowledgeBases); err != nil {
+			invalidParams.AddNested("KnowledgeBases", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GuardrailConfiguration != nil {
+		if err := validateGuardrailConfigurationWithArn(v.GuardrailConfiguration); err != nil {
+			invalidParams.AddNested("GuardrailConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PromptOverrideConfiguration != nil {
+		if err := validatePromptOverrideConfiguration(v.PromptOverrideConfiguration); err != nil {
+			invalidParams.AddNested("PromptOverrideConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CollaboratorConfigurations != nil {
+		if err := validateCollaboratorConfigurations(v.CollaboratorConfigurations); err != nil {
+			invalidParams.AddNested("CollaboratorConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCollaboratorConfiguration(v *types.CollaboratorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CollaboratorConfiguration"}
+	if v.CollaboratorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaboratorName"))
+	}
+	if v.CollaboratorInstruction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaboratorInstruction"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCollaboratorConfigurations(v []types.CollaboratorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CollaboratorConfigurations"}
+	for i := range v {
+		if err := validateCollaboratorConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCollaborators(v []types.Collaborator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Collaborators"}
+	for i := range v {
+		if err := validateCollaborator(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConversationHistory(v *types.ConversationHistory) error {
 	if v == nil {
 		return nil
@@ -1136,6 +1231,11 @@ func validateInlineSessionState(v *types.InlineSessionState) error {
 	if v.Files != nil {
 		if err := validateInputFiles(v.Files); err != nil {
 			invalidParams.AddNested("Files", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConversationHistory != nil {
+		if err := validateConversationHistory(v.ConversationHistory); err != nil {
+			invalidParams.AddNested("ConversationHistory", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2327,14 +2427,6 @@ func validateOpInvokeInlineAgentInput(v *InvokeInlineAgentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InvokeInlineAgentInput"}
-	if v.SessionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
-	}
-	if v.InlineSessionState != nil {
-		if err := validateInlineSessionState(v.InlineSessionState); err != nil {
-			invalidParams.AddNested("InlineSessionState", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.FoundationModel == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FoundationModel"))
 	}
@@ -2359,6 +2451,24 @@ func validateOpInvokeInlineAgentInput(v *InvokeInlineAgentInput) error {
 	if v.PromptOverrideConfiguration != nil {
 		if err := validatePromptOverrideConfiguration(v.PromptOverrideConfiguration); err != nil {
 			invalidParams.AddNested("PromptOverrideConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CollaboratorConfigurations != nil {
+		if err := validateCollaboratorConfigurations(v.CollaboratorConfigurations); err != nil {
+			invalidParams.AddNested("CollaboratorConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if v.InlineSessionState != nil {
+		if err := validateInlineSessionState(v.InlineSessionState); err != nil {
+			invalidParams.AddNested("InlineSessionState", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Collaborators != nil {
+		if err := validateCollaborators(v.Collaborators); err != nil {
+			invalidParams.AddNested("Collaborators", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

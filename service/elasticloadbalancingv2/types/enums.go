@@ -346,6 +346,23 @@ func (RedirectActionStatusCodeEnum) Values() []RedirectActionStatusCodeEnum {
 	}
 }
 
+type RemoveIpamPoolEnum string
+
+// Enum values for RemoveIpamPoolEnum
+const (
+	RemoveIpamPoolEnumIpv4 RemoveIpamPoolEnum = "ipv4"
+)
+
+// Values returns all known values for RemoveIpamPoolEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemoveIpamPoolEnum) Values() []RemoveIpamPoolEnum {
+	return []RemoveIpamPoolEnum{
+		"ipv4",
+	}
+}
+
 type RevocationType string
 
 // Enum values for RevocationType

@@ -583,6 +583,86 @@ type CodeInterpreterInvocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+// List of inline collaborators.
+type Collaborator struct {
+
+	//  The foundation model used by the inline collaborator agent.
+	//
+	// This member is required.
+	FoundationModel *string
+
+	//  Instruction that tell the inline collaborator agent what it should do and how
+	// it should interact with users.
+	//
+	// This member is required.
+	Instruction *string
+
+	//  List of action groups with each action group defining tasks the inline
+	// collaborator agent needs to carry out.
+	ActionGroups []AgentActionGroup
+
+	//  Defines how the inline supervisor agent handles information across multiple
+	// collaborator agents to coordinate a final response.
+	AgentCollaboration AgentCollaboration
+
+	//  Name of the inline collaborator agent which must be the same name as specified
+	// for collaboratorName .
+	AgentName *string
+
+	//  Settings of the collaborator agent.
+	CollaboratorConfigurations []CollaboratorConfiguration
+
+	//  The Amazon Resource Name (ARN) of the AWS KMS key that encrypts the inline
+	// collaborator.
+	CustomerEncryptionKeyArn *string
+
+	//  Details of the guardwrail associated with the inline collaborator.
+	GuardrailConfiguration *GuardrailConfigurationWithArn
+
+	//  The number of seconds for which the Amazon Bedrock keeps information about the
+	// user's conversation with the inline collaborator agent.
+	//
+	// A user interaction remains active for the amount of time specified. If no
+	// conversation occurs during this time, the session expires and Amazon Bedrock
+	// deletes any data provided before the timeout.
+	IdleSessionTTLInSeconds *int32
+
+	//  Knowledge base associated with the inline collaborator agent.
+	KnowledgeBases []KnowledgeBase
+
+	//  Contains configurations to override prompt templates in different parts of an
+	// inline collaborator sequence. For more information, see [Advanced prompts].
+	//
+	// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
+	PromptOverrideConfiguration *PromptOverrideConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Settings of an inline collaborator agent.
+type CollaboratorConfiguration struct {
+
+	//  Instructions that tell the inline collaborator agent what it should do and how
+	// it should interact with users.
+	//
+	// This member is required.
+	CollaboratorInstruction *string
+
+	//  Name of the inline collaborator agent which must be the same name as specified
+	// for agentName .
+	//
+	// This member is required.
+	CollaboratorName *string
+
+	//  The Amazon Resource Name (ARN) of the inline collaborator agent.
+	AgentAliasArn *string
+
+	//  A relay conversation history for the inline collaborator agent.
+	RelayConversationHistory RelayConversationHistory
+
+	noSmithyDocumentSerde
+}
+
 // A content block.
 //
 // The following types satisfy this interface:
@@ -1870,6 +1950,9 @@ type InlineBedrockModelConfigurations struct {
 // [Lambda function]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html
 type InlineSessionState struct {
 
+	//  Contains the conversation history that persist across sessions.
+	ConversationHistory *ConversationHistory
+
 	//  Contains information about the files used by code interpreter.
 	Files []InputFile
 
@@ -2995,6 +3078,9 @@ type PromptConfiguration struct {
 	// [Configure the prompt templates]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts-configure.html
 	// [Prompt template placeholder variables]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
 	BasePromptTemplate *string
+
+	//  The foundation model to use.
+	FoundationModel *string
 
 	// Contains inference parameters to use when the agent invokes a foundation model
 	// in the part of the agent sequence defined by the promptType . For more
@@ -4478,6 +4564,9 @@ type TracePart struct {
 
 	// The part's collaborator name.
 	CollaboratorName *string
+
+	//  The time of the trace.
+	EventTime *time.Time
 
 	// The unique identifier of the session with the agent.
 	SessionId *string

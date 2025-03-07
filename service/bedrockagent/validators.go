@@ -1677,6 +1677,28 @@ func validateBedrockFoundationModelConfiguration(v *types.BedrockFoundationModel
 	}
 }
 
+func validateBedrockFoundationModelContextEnrichmentConfiguration(v *types.BedrockFoundationModelContextEnrichmentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BedrockFoundationModelContextEnrichmentConfiguration"}
+	if v.EnrichmentStrategyConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnrichmentStrategyConfiguration"))
+	} else if v.EnrichmentStrategyConfiguration != nil {
+		if err := validateEnrichmentStrategyConfiguration(v.EnrichmentStrategyConfiguration); err != nil {
+			invalidParams.AddNested("EnrichmentStrategyConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateByteContentDoc(v *types.ByteContentDoc) error {
 	if v == nil {
 		return nil
@@ -1880,6 +1902,26 @@ func validateContentBlocks(v []types.ContentBlock) error {
 	for i := range v {
 		if err := validateContentBlock(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContextEnrichmentConfiguration(v *types.ContextEnrichmentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextEnrichmentConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.BedrockFoundationModelConfiguration != nil {
+		if err := validateBedrockFoundationModelContextEnrichmentConfiguration(v.BedrockFoundationModelConfiguration); err != nil {
+			invalidParams.AddNested("BedrockFoundationModelConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2156,6 +2198,21 @@ func validateDocumentMetadata(v *types.DocumentMetadata) error {
 		if err := validateCustomS3Location(v.S3Location); err != nil {
 			invalidParams.AddNested("S3Location", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEnrichmentStrategyConfiguration(v *types.EnrichmentStrategyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnrichmentStrategyConfiguration"}
+	if len(v.Method) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Method"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3010,6 +3067,46 @@ func validateMongoDbAtlasFieldMapping(v *types.MongoDbAtlasFieldMapping) error {
 	if v.VectorField == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VectorField"))
 	}
+	if v.TextField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextField"))
+	}
+	if v.MetadataField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataField"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNeptuneAnalyticsConfiguration(v *types.NeptuneAnalyticsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NeptuneAnalyticsConfiguration"}
+	if v.GraphArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if v.FieldMapping == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldMapping"))
+	} else if v.FieldMapping != nil {
+		if err := validateNeptuneAnalyticsFieldMapping(v.FieldMapping); err != nil {
+			invalidParams.AddNested("FieldMapping", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNeptuneAnalyticsFieldMapping(v *types.NeptuneAnalyticsFieldMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NeptuneAnalyticsFieldMapping"}
 	if v.TextField == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TextField"))
 	}
@@ -4172,6 +4269,11 @@ func validateStorageConfiguration(v *types.StorageConfiguration) error {
 			invalidParams.AddNested("MongoDbAtlasConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.NeptuneAnalyticsConfiguration != nil {
+		if err := validateNeptuneAnalyticsConfiguration(v.NeptuneAnalyticsConfiguration); err != nil {
+			invalidParams.AddNested("NeptuneAnalyticsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4552,6 +4654,11 @@ func validateVectorIngestionConfiguration(v *types.VectorIngestionConfiguration)
 	if v.ParsingConfiguration != nil {
 		if err := validateParsingConfiguration(v.ParsingConfiguration); err != nil {
 			invalidParams.AddNested("ParsingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContextEnrichmentConfiguration != nil {
+		if err := validateContextEnrichmentConfiguration(v.ContextEnrichmentConfiguration); err != nil {
+			invalidParams.AddNested("ContextEnrichmentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

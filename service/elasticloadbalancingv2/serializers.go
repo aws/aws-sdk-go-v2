@@ -2467,6 +2467,76 @@ func (m *awsAwsquery_serializeOpModifyCapacityReservation) HandleSerialize(ctx c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpModifyIpPools struct {
+}
+
+func (*awsAwsquery_serializeOpModifyIpPools) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyIpPools) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyIpPoolsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyIpPools")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentModifyIpPoolsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpModifyListener struct {
 }
 
@@ -3870,6 +3940,18 @@ func awsAwsquery_serializeDocumentHttpRequestMethodConditionConfig(v *types.Http
 	return nil
 }
 
+func awsAwsquery_serializeDocumentIpamPools(v *types.IpamPools, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Ipv4IpamPoolId != nil {
+		objectKey := object.Key("Ipv4IpamPoolId")
+		objectKey.String(*v.Ipv4IpamPoolId)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentListenerArns(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -4130,6 +4212,16 @@ func awsAwsquery_serializeDocumentRedirectActionConfig(v *types.RedirectActionCo
 		objectKey.String(string(v.StatusCode))
 	}
 
+	return nil
+}
+
+func awsAwsquery_serializeDocumentRemoveIpamPools(v []types.RemoveIpamPoolEnum, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -4718,6 +4810,13 @@ func awsAwsquery_serializeOpDocumentCreateLoadBalancerInput(v *CreateLoadBalance
 	if len(v.IpAddressType) > 0 {
 		objectKey := object.Key("IpAddressType")
 		objectKey.String(string(v.IpAddressType))
+	}
+
+	if v.IpamPools != nil {
+		objectKey := object.Key("IpamPools")
+		if err := awsAwsquery_serializeDocumentIpamPools(v.IpamPools, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {
@@ -5453,6 +5552,32 @@ func awsAwsquery_serializeOpDocumentModifyCapacityReservationInput(v *ModifyCapa
 	if v.ResetCapacityReservation != nil {
 		objectKey := object.Key("ResetCapacityReservation")
 		objectKey.Boolean(*v.ResetCapacityReservation)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentModifyIpPoolsInput(v *ModifyIpPoolsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.IpamPools != nil {
+		objectKey := object.Key("IpamPools")
+		if err := awsAwsquery_serializeDocumentIpamPools(v.IpamPools, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.LoadBalancerArn != nil {
+		objectKey := object.Key("LoadBalancerArn")
+		objectKey.String(*v.LoadBalancerArn)
+	}
+
+	if v.RemoveIpamPools != nil {
+		objectKey := object.Key("RemoveIpamPools")
+		if err := awsAwsquery_serializeDocumentRemoveIpamPools(v.RemoveIpamPools, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -239,6 +239,15 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "cognito-idp.ap-southeast-4.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-5",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-5",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "cognito-idp.ap-southeast-5.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -648,6 +657,15 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-gov-west-1",
 				},
 				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "cognito-idp.us-gov-east-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1",

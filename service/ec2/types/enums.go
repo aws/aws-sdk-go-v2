@@ -7875,6 +7875,25 @@ func (ServiceConnectivityType) Values() []ServiceConnectivityType {
 	}
 }
 
+type ServiceManaged string
+
+// Enum values for ServiceManaged
+const (
+	ServiceManagedAlb ServiceManaged = "alb"
+	ServiceManagedNlb ServiceManaged = "nlb"
+)
+
+// Values returns all known values for ServiceManaged. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceManaged) Values() []ServiceManaged {
+	return []ServiceManaged{
+		"alb",
+		"nlb",
+	}
+}
+
 type ServiceState string
 
 // Enum values for ServiceState

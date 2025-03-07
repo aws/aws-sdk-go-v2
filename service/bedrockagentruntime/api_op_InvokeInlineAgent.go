@@ -75,8 +75,21 @@ type InvokeInlineAgentInput struct {
 	// agent needs to carry out.
 	ActionGroups []types.AgentActionGroup
 
+	//  Defines how the inline collaborator agent handles information across multiple
+	// collaborator agents to coordinate a final response. The inline collaborator
+	// agent can also be the supervisor.
+	AgentCollaboration types.AgentCollaboration
+
 	// Model settings for the request.
 	BedrockModelConfigurations *types.InlineBedrockModelConfigurations
+
+	//  Settings for an inline agent collaborator called with [InvokeInlineAgent].
+	//
+	// [InvokeInlineAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeInlineAgent.html
+	CollaboratorConfigurations []types.CollaboratorConfiguration
+
+	//  List of collaborator inline agents.
+	Collaborators []types.Collaborator
 
 	//  The Amazon Resource Name (ARN) of the Amazon Web Services KMS key to use to
 	// encrypt your inline agent.

@@ -41,7 +41,7 @@ type CreateGraphUsingImportTaskInput struct {
 	//
 	// The name must contain from 1 to 63 letters, numbers, or hyphens, and its first
 	// character must be a letter. It cannot end with a hyphen or contain two
-	// consecutive hyphens.
+	// consecutive hyphens. Only lowercase letters are allowed.
 	//
 	// This member is required.
 	GraphName *string
@@ -100,7 +100,7 @@ type CreateGraphUsingImportTaskInput struct {
 	MaxProvisionedMemory *int32
 
 	// The minimum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use
-	// for the graph. Default: 128
+	// for the graph. Default: 16
 	MinProvisionedMemory *int32
 
 	// The parquet type of the import task.

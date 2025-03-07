@@ -42,6 +42,27 @@ func (ActionInvocationType) Values() []ActionInvocationType {
 	}
 }
 
+type AgentCollaboration string
+
+// Enum values for AgentCollaboration
+const (
+	AgentCollaborationSupervisor       AgentCollaboration = "SUPERVISOR"
+	AgentCollaborationSupervisorRouter AgentCollaboration = "SUPERVISOR_ROUTER"
+	AgentCollaborationDisabled         AgentCollaboration = "DISABLED"
+)
+
+// Values returns all known values for AgentCollaboration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentCollaboration) Values() []AgentCollaboration {
+	return []AgentCollaboration{
+		"SUPERVISOR",
+		"SUPERVISOR_ROUTER",
+		"DISABLED",
+	}
+}
+
 type AttributeType string
 
 // Enum values for AttributeType
@@ -772,6 +793,25 @@ const (
 func (QueryTransformationType) Values() []QueryTransformationType {
 	return []QueryTransformationType{
 		"QUERY_DECOMPOSITION",
+	}
+}
+
+type RelayConversationHistory string
+
+// Enum values for RelayConversationHistory
+const (
+	RelayConversationHistoryToCollaborator RelayConversationHistory = "TO_COLLABORATOR"
+	RelayConversationHistoryDisabled       RelayConversationHistory = "DISABLED"
+)
+
+// Values returns all known values for RelayConversationHistory. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RelayConversationHistory) Values() []RelayConversationHistory {
+	return []RelayConversationHistory{
+		"TO_COLLABORATOR",
+		"DISABLED",
 	}
 }
 

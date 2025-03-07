@@ -1171,9 +1171,28 @@ func awsRestjson1_serializeOpDocumentInvokeInlineAgentInput(v *InvokeInlineAgent
 		}
 	}
 
+	if len(v.AgentCollaboration) > 0 {
+		ok := object.Key("agentCollaboration")
+		ok.String(string(v.AgentCollaboration))
+	}
+
 	if v.BedrockModelConfigurations != nil {
 		ok := object.Key("bedrockModelConfigurations")
 		if err := awsRestjson1_serializeDocumentInlineBedrockModelConfigurations(v.BedrockModelConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CollaboratorConfigurations != nil {
+		ok := object.Key("collaboratorConfigurations")
+		if err := awsRestjson1_serializeDocumentCollaboratorConfigurations(v.CollaboratorConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Collaborators != nil {
+		ok := object.Key("collaborators")
+		if err := awsRestjson1_serializeDocumentCollaborators(v.Collaborators, ok); err != nil {
 			return err
 		}
 	}
@@ -2769,6 +2788,131 @@ func awsRestjson1_serializeDocumentByteContentFile(v *types.ByteContentFile, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCollaborator(v *types.Collaborator, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActionGroups != nil {
+		ok := object.Key("actionGroups")
+		if err := awsRestjson1_serializeDocumentAgentActionGroups(v.ActionGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AgentCollaboration) > 0 {
+		ok := object.Key("agentCollaboration")
+		ok.String(string(v.AgentCollaboration))
+	}
+
+	if v.AgentName != nil {
+		ok := object.Key("agentName")
+		ok.String(*v.AgentName)
+	}
+
+	if v.CollaboratorConfigurations != nil {
+		ok := object.Key("collaboratorConfigurations")
+		if err := awsRestjson1_serializeDocumentCollaboratorConfigurations(v.CollaboratorConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomerEncryptionKeyArn != nil {
+		ok := object.Key("customerEncryptionKeyArn")
+		ok.String(*v.CustomerEncryptionKeyArn)
+	}
+
+	if v.FoundationModel != nil {
+		ok := object.Key("foundationModel")
+		ok.String(*v.FoundationModel)
+	}
+
+	if v.GuardrailConfiguration != nil {
+		ok := object.Key("guardrailConfiguration")
+		if err := awsRestjson1_serializeDocumentGuardrailConfigurationWithArn(v.GuardrailConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IdleSessionTTLInSeconds != nil {
+		ok := object.Key("idleSessionTTLInSeconds")
+		ok.Integer(*v.IdleSessionTTLInSeconds)
+	}
+
+	if v.Instruction != nil {
+		ok := object.Key("instruction")
+		ok.String(*v.Instruction)
+	}
+
+	if v.KnowledgeBases != nil {
+		ok := object.Key("knowledgeBases")
+		if err := awsRestjson1_serializeDocumentKnowledgeBases(v.KnowledgeBases, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PromptOverrideConfiguration != nil {
+		ok := object.Key("promptOverrideConfiguration")
+		if err := awsRestjson1_serializeDocumentPromptOverrideConfiguration(v.PromptOverrideConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCollaboratorConfiguration(v *types.CollaboratorConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgentAliasArn != nil {
+		ok := object.Key("agentAliasArn")
+		ok.String(*v.AgentAliasArn)
+	}
+
+	if v.CollaboratorInstruction != nil {
+		ok := object.Key("collaboratorInstruction")
+		ok.String(*v.CollaboratorInstruction)
+	}
+
+	if v.CollaboratorName != nil {
+		ok := object.Key("collaboratorName")
+		ok.String(*v.CollaboratorName)
+	}
+
+	if len(v.RelayConversationHistory) > 0 {
+		ok := object.Key("relayConversationHistory")
+		ok.String(string(v.RelayConversationHistory))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCollaboratorConfigurations(v []types.CollaboratorConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCollaboratorConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCollaborators(v []types.Collaborator, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCollaborator(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContentBlock(v types.ContentBlock, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3406,6 +3550,13 @@ func awsRestjson1_serializeDocumentInlineSessionState(v *types.InlineSessionStat
 	object := value.Object()
 	defer object.Close()
 
+	if v.ConversationHistory != nil {
+		ok := object.Key("conversationHistory")
+		if err := awsRestjson1_serializeDocumentConversationHistory(v.ConversationHistory, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Files != nil {
 		ok := object.Key("files")
 		if err := awsRestjson1_serializeDocumentInputFiles(v.Files, ok); err != nil {
@@ -3914,6 +4065,11 @@ func awsRestjson1_serializeDocumentPromptConfiguration(v *types.PromptConfigurat
 	if v.BasePromptTemplate != nil {
 		ok := object.Key("basePromptTemplate")
 		ok.String(*v.BasePromptTemplate)
+	}
+
+	if v.FoundationModel != nil {
+		ok := object.Key("foundationModel")
+		ok.String(*v.FoundationModel)
 	}
 
 	if v.InferenceConfiguration != nil {
