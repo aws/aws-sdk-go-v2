@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/athena v1.50.1
 	github.com/aws/aws-sdk-go-v2/service/batch v1.51.1
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.58.1
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.45.1
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.45.2
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.48.2
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.44.1
@@ -20,7 +20,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.40.1
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.51.1
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.51.2
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.52.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.51.1
@@ -29,14 +29,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.41.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.207.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.208.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.42.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.54.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.29.1
-	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.44.1
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.45.0
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/emr v1.48.1
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.37.1

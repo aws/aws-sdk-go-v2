@@ -1,3 +1,7 @@
+# v1.45.2 (2025-03-07)
+
+* **Documentation**: Documentation updates for Amazon CloudFront.
+
 # v1.45.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

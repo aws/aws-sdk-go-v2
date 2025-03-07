@@ -1,3 +1,7 @@
+# v1.45.0 (2025-03-07)
+
+* **Feature**: This release adds support for assigning IP addresses to Application Load Balancers from VPC IP Address Manager pools.
+
 # v1.44.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

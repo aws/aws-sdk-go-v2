@@ -1,8 +1,0 @@
-{
-    "id": "2b2c7723-9819-4473-b0d6-2501c9295cfa",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon CloudFront.",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

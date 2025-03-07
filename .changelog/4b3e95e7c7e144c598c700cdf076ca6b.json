@@ -1,8 +1,0 @@
-{
-    "id": "4b3e95e7-c7e1-44c5-98c7-00cdf076ca6b",
-    "type": "feature",
-    "description": "Introduces support for Neptune Analytics as a vector data store and adds Context Enrichment Configurations, enabling use cases such as GraphRAG.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

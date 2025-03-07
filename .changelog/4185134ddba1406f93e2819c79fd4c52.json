@@ -1,8 +1,0 @@
-{
-    "id": "4185134d-dba1-406f-93e2-819c79fd4c52",
-    "type": "feature",
-    "description": "This release adds support for assigning IP addresses to Application Load Balancers from VPC IP Address Manager pools.",
-    "modules": [
-        "service/elasticloadbalancingv2"
-    ]
-}

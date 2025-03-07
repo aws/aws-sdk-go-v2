@@ -1,3 +1,19 @@
+# Release (2025-03-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.38.0](service/bedrockagent/CHANGELOG.md#v1380-2025-03-07)
+  * **Feature**: Introduces support for Neptune Analytics as a vector data store and adds Context Enrichment Configurations, enabling use cases such as GraphRAG.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.39.0](service/bedrockagentruntime/CHANGELOG.md#v1390-2025-03-07)
+  * **Feature**: Support Multi Agent Collaboration within Inline Agents
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.45.2](service/cloudfront/CHANGELOG.md#v1452-2025-03-07)
+  * **Documentation**: Documentation updates for Amazon CloudFront.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.208.0](service/ec2/CHANGELOG.md#v12080-2025-03-07)
+  * **Feature**: Add serviceManaged field to DescribeAddresses API response.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.45.0](service/elasticloadbalancingv2/CHANGELOG.md#v1450-2025-03-07)
+  * **Feature**: This release adds support for assigning IP addresses to Application Load Balancers from VPC IP Address Manager pools.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.17.2](service/neptunegraph/CHANGELOG.md#v1172-2025-03-07)
+  * **Documentation**: Several small updates to resolve customer requests.
+
 # Release (2025-03-06)
 
 ## Module Highlights

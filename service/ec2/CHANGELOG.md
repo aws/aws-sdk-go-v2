@@ -1,3 +1,7 @@
+# v1.208.0 (2025-03-07)
+
+* **Feature**: Add serviceManaged field to DescribeAddresses API response.
+
 # v1.207.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

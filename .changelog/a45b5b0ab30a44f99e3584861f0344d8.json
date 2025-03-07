@@ -1,8 +1,0 @@
-{
-    "id": "a45b5b0a-b30a-44f9-9e35-84861f0344d8",
-    "type": "documentation",
-    "description": "Several small updates to resolve customer requests.",
-    "modules": [
-        "service/neptunegraph"
-    ]
-}

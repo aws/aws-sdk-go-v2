@@ -1,3 +1,7 @@
+# v1.17.2 (2025-03-07)
+
+* **Documentation**: Several small updates to resolve customer requests.
+
 # v1.17.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

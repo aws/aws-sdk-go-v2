@@ -1,3 +1,7 @@
+# v1.38.0 (2025-03-07)
+
+* **Feature**: Introduces support for Neptune Analytics as a vector data store and adds Context Enrichment Configurations, enabling use cases such as GraphRAG.
+
 # v1.37.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

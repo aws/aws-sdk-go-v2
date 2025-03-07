@@ -1,3 +1,7 @@
+# v1.39.0 (2025-03-07)
+
+* **Feature**: Support Multi Agent Collaboration within Inline Agents
+
 # v1.38.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.
