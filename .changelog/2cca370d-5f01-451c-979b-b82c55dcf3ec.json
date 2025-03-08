@@ -1,0 +1,9 @@
+{
+    "id": "2cca370d-5f01-451c-979b-b82c55dcf3ec",
+    "type": "bugfix",
+    "description": "allow nested list indices in expressions",
+    "collapse": false,
+    "modules": [
+        "feature/dynamodb/expression"
+    ]
+}
