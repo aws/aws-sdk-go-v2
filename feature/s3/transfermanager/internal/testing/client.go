@@ -224,6 +224,16 @@ func (c *TransferManagerLoggingClient) GetObject(ctx context.Context, params *s3
 	return &s3.GetObjectOutput{}, nil
 }
 
+func (c *TransferManagerLoggingClient) HeadObject(ctx context.Context, params *s3.HeadObjectInput, optFns ...func(*s3.Options)) (*s3.HeadObjectOutput, error) {
+	c.m.Lock()
+	defer c.m.Unlock()
+
+	return &s3.HeadObjectOutput{
+		PartsCount:    aws.Int32(c.PartsCount),
+		ContentLength: aws.Int64(int64(len(c.Data))),
+	}, nil
+}
+
 // NewUploadLoggingClient returns a new TransferManagerLoggingClient for upload testing.
 func NewUploadLoggingClient(ignoredOps []string) (*TransferManagerLoggingClient, *[]string, *[]interface{}) {
 	c := &TransferManagerLoggingClient{
@@ -302,7 +312,7 @@ var ErrReaderFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInpu
 var PartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	return &s3.GetObjectOutput{
 		Body:          ioutil.NopCloser(bytes.NewReader(c.Data)),
-		ContentLength: aws.Int64(8 * 1024 * 1024),
+		ContentLength: aws.Int64(int64(len(c.Data))),
 		PartsCount:    aws.Int32(c.PartsCount),
 	}, nil
 }

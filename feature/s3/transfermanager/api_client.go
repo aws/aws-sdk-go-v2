@@ -14,13 +14,15 @@ const defaultMaxUploadParts = 10000
 const minPartSizeBytes = 1024 * 1024 * 8
 
 // defaultMultipartUploadThreshold is the default size threshold in bytes indicating when to use multipart upload.
-const defaultMultipartUploadThreshold = 1024 * 1024 * 16
+const defaultMultipartUploadThreshold = 1024 * 1024 * 32
 
 // defaultTransferConcurrency is the default number of goroutines to spin up when
 // using PutObject().
 const defaultTransferConcurrency = 5
 
 const defaultPartBodyMaxRetries = 3
+
+const defaultGetBufferSize = 1024 * 1024 * 16
 
 // Client provides the API client to make operations call for Amazon Simple
 // Storage Service's Transfer Manager
@@ -43,6 +45,7 @@ func New(s3Client S3APIClient, opts Options, optFns ...func(*Options)) *Client {
 	resolveMultipartUploadThreshold(&opts)
 	resolveMultipartDownloadType(&opts)
 	resolvePartBodyMaxRetries(&opts)
+	resolveGetBufferSize(&opts)
 
 	return &Client{
 		options: opts,

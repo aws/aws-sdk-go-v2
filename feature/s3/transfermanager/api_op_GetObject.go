@@ -28,6 +28,14 @@ func (e *errReadingBody) Error() string {
 	return fmt.Sprintf("failed to read part body: %v", e.err)
 }
 
+type errInvalidRange struct {
+	max int64
+}
+
+func (e *errInvalidRange) Error() string {
+	return fmt.Sprintf("invalid input range, must be between 0 and %d", e.max)
+}
+
 // GetObjectInput represents a request to the GetObject() or DownloadObject() call. It contains common fields
 // of s3 GetObject input
 type GetObjectInput struct {
@@ -36,6 +44,8 @@ type GetObjectInput struct {
 
 	// Key of the object to get.
 	Key string
+
+	Reader *ConcurrentReader
 
 	// To retrieve the checksum, this mode must be enabled.
 	//
@@ -539,7 +549,7 @@ func (o *GetObjectOutput) mapFromGetObjectOutput(out *s3.GetObjectOutput, checks
 // download. These options are copies of the original Options instance, the client of which GetObject is called from.
 // Modifying the options will not impact the original Client and Options instance.
 func (c *Client) GetObject(ctx context.Context, input *GetObjectInput, opts ...func(*Options)) (*GetObjectOutput, error) {
-	i := getter{in: input, options: c.options.Copy()}
+	i := getter{in: input, options: c.options.Copy(), r: input.Reader}
 	for _, opt := range opts {
 		opt(&i.options)
 	}
@@ -552,6 +562,7 @@ type getter struct {
 	in      *GetObjectInput
 	out     *GetObjectOutput
 	w       *types.WriteAtBuffer
+	r       *ConcurrentReader
 
 	wg sync.WaitGroup
 	m  sync.Mutex
@@ -564,7 +575,7 @@ type getter struct {
 	err error
 }
 
-func (g *getter) get(ctx context.Context) (*GetObjectOutput, error) {
+func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 	if err := g.init(ctx); err != nil {
 		return nil, fmt.Errorf("unable to initialize download: %w", err)
 	}
@@ -577,48 +588,34 @@ func (g *getter) get(ctx context.Context) (*GetObjectOutput, error) {
 			)
 		}}
 
+	defer close(g.r.ch)
 	if g.in.PartNumber > 0 {
 		return g.singleDownload(ctx, clientOptions...)
 	}
 
-	var output *GetObjectOutput
 	if g.options.MultipartDownloadType == types.MultipartDownloadTypePart {
 		if g.in.Range != "" {
 			return g.singleDownload(ctx, clientOptions...)
 		}
-		output = g.getChunk(ctx, 1, "", clientOptions...)
-		if g.getErr() != nil {
-			return output, g.err
+		// must know the part size before creating stream reader
+		out, err := g.options.S3.HeadObject(ctx, &s3.HeadObjectInput{
+			Bucket:     aws.String(g.in.Bucket),
+			Key:        aws.String(g.in.Key),
+			PartNumber: aws.Int32(1),
+		}, clientOptions...)
+		if err != nil {
+			g.r.setErr(err)
+			return nil, err
 		}
 
-		if output.PartsCount > 1 {
-			partSize := output.ContentLength
-			ch := make(chan getChunk, g.options.Concurrency)
-			for i := 0; i < g.options.Concurrency; i++ {
-				g.wg.Add(1)
-				go g.downloadPart(ctx, ch, clientOptions...)
-			}
-
-			for i := int32(2); i <= output.PartsCount; i++ {
-				if g.getErr() != nil {
-					break
-				}
-
-				ch <- getChunk{w: g.w, start: g.pos - g.offset, part: i}
-				g.pos += partSize
-			}
-
-			close(ch)
-			g.wg.Wait()
-		}
-	} else {
-		if g.in.Range == "" {
-			output = g.getChunk(ctx, 0, g.byteRange(), clientOptions...)
-		} else {
-			g.pos, g.totalBytes = g.getDownloadRange()
-			g.offset = g.pos
-		}
-		total := g.totalBytes
+		partsCount := int32(math.Max(float64(aws.ToInt32(out.PartsCount)), 1))
+		partSize := int64(math.Max(float64(aws.ToInt64(out.ContentLength)), 1))
+		sectionParts := int32(math.Max(1, float64(g.options.GetBufferSize/partSize)))
+		capacity := sectionParts
+		g.r.setPartSize(partSize)
+		g.r.setCapacity(int32(math.Min(float64(capacity), float64(partsCount))))
+		g.r.setPartsCount(partsCount)
+		g.r.setSectionParts(sectionParts)
 
 		ch := make(chan getChunk, g.options.Concurrency)
 		for i := 0; i < g.options.Concurrency; i++ {
@@ -626,14 +623,87 @@ func (g *getter) get(ctx context.Context) (*GetObjectOutput, error) {
 			go g.downloadPart(ctx, ch, clientOptions...)
 		}
 
-		// Assign work
-		for g.getErr() == nil {
-			if g.pos >= total {
-				break // We're finished queuing chunks
+		var i int32
+		for i < partsCount {
+			if g.getErr() != nil {
+				break
 			}
 
-			// Queue the next range of bytes to read.
-			ch <- getChunk{w: g.w, start: g.pos - g.offset, withRange: g.byteRange()}
+			if g.r.getRead() == capacity {
+				capacity = int32(math.Min(float64(capacity+sectionParts), float64(partsCount)))
+				g.r.setCapacity(capacity)
+			}
+
+			if i == capacity {
+				continue
+			}
+
+			ch <- getChunk{start: g.pos - g.offset, part: i + 1, index: i}
+			i++
+			g.pos += partSize
+		}
+
+		close(ch)
+		g.wg.Wait()
+	} else {
+		out, err := g.options.S3.HeadObject(ctx, &s3.HeadObjectInput{
+			Bucket: aws.String(g.in.Bucket),
+			Key:    aws.String(g.in.Key),
+		}, clientOptions...)
+		if err != nil {
+			g.r.setErr(err)
+			return nil, err
+		}
+		if aws.ToInt64(out.ContentLength) == 0 {
+			return g.singleDownload(ctx, clientOptions...)
+		}
+		g.totalBytes = aws.ToInt64(out.ContentLength)
+		if g.in.Range != "" {
+			start, totalBytes := g.getDownloadRange()
+			if start < 0 || start >= g.totalBytes || totalBytes > g.totalBytes || start >= totalBytes {
+				err := &errInvalidRange{
+					max: g.totalBytes - 1,
+				}
+				g.r.setErr(err)
+				return nil, err
+			}
+			g.pos = start
+			g.totalBytes = totalBytes
+			g.offset = start
+		}
+		total := g.totalBytes - g.offset
+
+		partsCount := int32((total-1)/g.options.PartSizeBytes + 1)
+		sectionParts := int32(math.Max(1, float64(g.options.GetBufferSize/g.options.PartSizeBytes)))
+		capacity := sectionParts
+		g.r.setPartSize(g.options.PartSizeBytes)
+		g.r.setCapacity(int32(math.Min(float64(capacity), float64(partsCount))))
+		g.r.setPartsCount(partsCount)
+		g.r.setSectionParts(sectionParts)
+
+		ch := make(chan getChunk, g.options.Concurrency)
+		for i := 0; i < g.options.Concurrency; i++ {
+			g.wg.Add(1)
+			go g.downloadPart(ctx, ch, clientOptions...)
+		}
+
+		var i int32
+		for i < partsCount {
+			if g.getErr() != nil {
+				break
+			}
+
+			if g.r.getRead() == capacity {
+				capacity = int32(math.Min(float64(capacity+sectionParts), float64(partsCount)))
+				g.r.setCapacity(capacity)
+			}
+
+			if i == capacity {
+				continue
+			}
+
+			ch <- getChunk{start: g.pos - g.offset, withRange: g.byteRange(), index: i}
+			i++
 			g.pos += g.options.PartSizeBytes
 		}
 
@@ -643,12 +713,12 @@ func (g *getter) get(ctx context.Context) (*GetObjectOutput, error) {
 	}
 
 	if g.err != nil {
+		g.r.setErr(g.err)
 		return nil, g.err
 	}
 
-	g.out.Body = io.NopCloser(bytes.NewReader(g.w.Bytes()))
 	g.out.ContentLength = g.written
-	g.out.ContentRange = fmt.Sprintf("bytes=%d-%d", g.offset, g.totalBytes-1)
+	g.out.ContentRange = fmt.Sprintf("bytes=%d-%d", g.offset, g.offset+g.written-1)
 	return g.out, nil
 }
 
@@ -656,14 +726,13 @@ func (g *getter) init(ctx context.Context) error {
 	if g.options.PartSizeBytes < minPartSizeBytes {
 		return fmt.Errorf("part size must be at least %d bytes", minPartSizeBytes)
 	}
-
-	if g.options.PartBodyMaxRetries < 0 {
-		return fmt.Errorf("part body retry must be non-negative")
+	if g.r == nil {
+		return fmt.Errorf("reader is required in input")
 	}
 
+	g.r.ch = make(chan outChunk, g.options.Concurrency)
 	g.options.Logger = logging.WithContext(ctx, g.options.Logger)
 	g.totalBytes = -1
-	g.w = types.NewWriteAtBuffer(make([]byte, 0))
 
 	return nil
 }
@@ -672,9 +741,21 @@ func (g *getter) singleDownload(ctx context.Context, clientOptions ...func(*s3.O
 	params := g.in.mapGetObjectInput(!g.options.DisableChecksumValidation)
 	out, err := g.options.S3.GetObject(ctx, params, clientOptions...)
 	if err != nil {
+		g.r.setErr(err)
 		return nil, err
 	}
 
+	buf, err := io.ReadAll(out.Body)
+	if err != nil {
+		g.r.setErr(err)
+		return nil, err
+	}
+
+	g.r.setPartSize(int64(math.Max(1, float64(aws.ToInt64(out.ContentLength)))))
+	g.r.setCapacity(1)
+	g.r.setPartsCount(1)
+	g.r.setSectionParts(1)
+	g.r.ch <- outChunk{body: bytes.NewReader(buf), length: aws.ToInt64(out.ContentLength)}
 	var output GetObjectOutput
 	output.mapFromGetObjectOutput(out, params.ChecksumMode)
 	return &output, nil
@@ -699,22 +780,6 @@ func (g *getter) downloadPart(ctx context.Context, ch chan getChunk, clientOptio
 	}
 }
 
-// getChunk grabs a chunk of data from the body.
-// Not thread safe. Should only used when grabbing data on a single thread.
-func (g *getter) getChunk(ctx context.Context, part int32, rng string, clientOptions ...func(*s3.Options)) *GetObjectOutput {
-	chunk := getChunk{w: g.w, start: g.pos - g.offset, part: part, withRange: rng}
-
-	output, err := g.downloadChunk(ctx, chunk, clientOptions...)
-	if err != nil {
-		g.setErr(err)
-		return output
-	}
-
-	g.setOutput(output)
-	g.pos += output.ContentLength
-	return output
-}
-
 // downloadChunk downloads the chunk from s3
 func (g *getter) downloadChunk(ctx context.Context, chunk getChunk, clientOptions ...func(*s3.Options)) (*GetObjectOutput, error) {
 	params := g.in.mapGetObjectInput(!g.options.DisableChecksumValidation)
@@ -725,103 +790,23 @@ func (g *getter) downloadChunk(ctx context.Context, chunk getChunk, clientOption
 		params.Range = aws.String(chunk.withRange)
 	}
 
-	var out *s3.GetObjectOutput
-	var n int64
-	var err error
-	for retry := 0; retry < g.options.PartBodyMaxRetries; retry++ {
-		out, n, err = g.tryDownloadChunk(ctx, params, &chunk, clientOptions...)
-		if err == nil {
-			break
-		}
-		// Check if the returned error is an errReadingBody.
-		// If err is errReadingBody this indicates that an error
-		// occurred while copying the http response body.
-		// If this occurs we unwrap the err to set the underlying error
-		// and attempt any remaining retries.
-		if bodyErr, ok := err.(*errReadingBody); ok {
-			err = bodyErr
-		} else {
-			return nil, err
-		}
-
-		chunk.cur = 0
-
-		g.options.Logger.Logf(logging.Debug,
-			"object part body download interrupted %s, err, %v, retrying attempt %d",
-			aws.ToString(params.Key), err, retry)
-	}
-
-	g.incrWritten(n)
-
-	var output *GetObjectOutput
-	if out != nil {
-		output = &GetObjectOutput{}
-		output.mapFromGetObjectOutput(out, params.ChecksumMode)
-	}
-	return output, err
-}
-
-func (g *getter) tryDownloadChunk(ctx context.Context, params *s3.GetObjectInput, chunk *getChunk, clientOptions ...func(*s3.Options)) (*s3.GetObjectOutput, int64, error) {
 	out, err := g.options.S3.GetObject(ctx, params, clientOptions...)
 	if err != nil {
-		return nil, 0, err
+		return nil, err
 	}
 
-	g.setTotalBytes(out) // Set total if not yet set.
-
-	var n int64
 	defer out.Body.Close()
-	n, err = io.Copy(chunk, out.Body)
+	buf, err := io.ReadAll(out.Body)
+	g.incrWritten(int64(len(buf)))
+
 	if err != nil {
-		return nil, 0, &errReadingBody{err: err}
+		return nil, err
 	}
+	g.r.ch <- outChunk{body: bytes.NewReader(buf), index: chunk.index, length: aws.ToInt64(out.ContentLength)}
 
-	return out, n, nil
-}
-
-func (g *getter) incrWritten(n int64) {
-	g.m.Lock()
-	defer g.m.Unlock()
-
-	g.written += n
-}
-
-// getTotalBytes is a thread-safe getter for retrieving the total byte status.
-func (g *getter) getTotalBytes() int64 {
-	g.m.Lock()
-	defer g.m.Unlock()
-
-	return g.totalBytes
-}
-
-// setTotalBytes is a thread-safe setter for setting the total byte status.
-// Will extract the object's total bytes from the Content-Range if the file
-// will be chunked, or Content-Length. Content-Length is used when the response
-// does not include a Content-Range. Meaning the object was not chunked. This
-// occurs when the full file fits within the PartSize directive.
-func (g *getter) setTotalBytes(resp *s3.GetObjectOutput) {
-	g.m.Lock()
-	defer g.m.Unlock()
-
-	if g.totalBytes >= 0 {
-		return
-	}
-
-	if resp.ContentRange == nil {
-		// ContentRange is nil when the full file contents is provided, and
-		// is not chunked. Use ContentLength instead.
-		g.totalBytes = aws.ToInt64(resp.ContentLength)
-	} else {
-		parts := strings.Split(*resp.ContentRange, "/")
-		totalStr := parts[len(parts)-1]
-		total, err := strconv.ParseInt(totalStr, 10, 64)
-		if err != nil {
-			g.err = err
-			return
-		}
-
-		g.totalBytes = total
-	}
+	output := &GetObjectOutput{}
+	output.mapFromGetObjectOutput(out, params.ChecksumMode)
+	return output, err
 }
 
 func (g *getter) setOutput(resp *GetObjectOutput) {
@@ -832,6 +817,13 @@ func (g *getter) setOutput(resp *GetObjectOutput) {
 		return
 	}
 	g.out = resp
+}
+
+func (g *getter) incrWritten(n int64) {
+	g.m.Lock()
+	defer g.m.Unlock()
+
+	g.written += n
 }
 
 func (g *getter) getDownloadRange() (int64, int64) {
@@ -855,10 +847,7 @@ func (g *getter) getDownloadRange() (int64, int64) {
 // byteRange returns a HTTP Byte-Range header value that should be used by the
 // client to request a chunk range.
 func (g *getter) byteRange() string {
-	if g.totalBytes >= 0 {
-		return fmt.Sprintf("bytes=%d-%d", g.pos, int64(math.Min(float64(g.totalBytes-1), float64(g.pos+g.options.PartSizeBytes-1))))
-	}
-	return fmt.Sprintf("bytes=%d-%d", g.pos, g.pos+g.options.PartSizeBytes-1)
+	return fmt.Sprintf("bytes=%d-%d", g.pos, int64(math.Min(float64(g.totalBytes-1), float64(g.pos+g.options.PartSizeBytes-1))))
 }
 
 func (g *getter) getErr() error {
@@ -876,18 +865,206 @@ func (g *getter) setErr(e error) {
 }
 
 type getChunk struct {
-	w io.WriterAt
-
 	start int64
 	cur   int64
 
 	part      int32
 	withRange string
+
+	index int32
 }
 
-func (c *getChunk) Write(p []byte) (int, error) {
-	n, err := c.w.WriteAt(p, c.start+c.cur)
-	c.cur += int64(n)
+type outChunk struct {
+	body  io.Reader
+	index int32
 
-	return n, err
+	length int64
+	cur    int64
+}
+
+type ConcurrentReader struct {
+	ch  chan outChunk
+	buf map[int32]*outChunk
+
+	partsCount   int32
+	capacity     int32
+	count        int32
+	read         int32
+	sectionParts int32
+
+	written  int64
+	partSize int64
+
+	m sync.Mutex
+
+	err error
+}
+
+func NewConcurrentReader() *ConcurrentReader {
+	return &ConcurrentReader{
+		buf:      make(map[int32]*outChunk),
+		partSize: 1, // just a placeholder value
+	}
+}
+
+func (r *ConcurrentReader) Read(p []byte) (int, error) {
+	if cap(p) == 0 {
+		return 0, nil
+	}
+
+	var written int
+
+	for r.count < r.getCapacity() {
+		if e := r.getErr(); e != nil && e != io.EOF {
+			r.incrWritten(int64(written))
+			r.clean()
+			return written, r.getErr()
+		}
+		if written >= cap(p) {
+			r.incrWritten(int64(written))
+			return written, r.getErr()
+		}
+
+		oc, ok := <-r.ch
+		if !ok {
+			r.incrWritten(int64(written))
+			return written, r.getErr()
+		}
+		
+		r.count++
+		index := r.partSize*int64(oc.index) - r.written
+
+		if index < int64(cap(p)) {
+			n, err := oc.body.Read(p[index:])
+			oc.cur += int64(n)
+			written += n
+			if err != nil && err != io.EOF {
+				r.setErr(err)
+				r.clean()
+				r.incrWritten(int64(written))
+				return written, r.getErr()
+			}
+		}
+		if oc.cur < oc.length {
+			r.buf[oc.index] = &oc
+		} else {
+			r.incrRead(1)
+			if r.getRead() >= r.partsCount {
+				r.setErr(io.EOF)
+			}
+		}
+	}
+
+	minIndex := int32(r.written / r.partSize)
+	maxIndex := int32(math.Min(float64(((r.written + int64(cap(p)) - 1) / r.partSize)), float64(r.getCapacity()-1)))
+	for i := minIndex; i <= maxIndex; i++ {
+		if e := r.getErr(); e != nil && e != io.EOF {
+			r.incrWritten(int64(written))
+			r.clean()
+			return written, r.getErr()
+		}
+
+		c, ok := r.buf[i]
+		if ok {
+			index := int64(i)*r.partSize + c.cur - r.written
+			n, err := c.body.Read(p[index:])
+			c.cur += int64(n)
+			written += n
+			if err != nil && err != io.EOF {
+				r.setErr(err)
+				r.clean()
+				r.incrWritten(int64(written))
+				return written, r.getErr()
+			}
+			if c.cur >= c.length {
+				r.incrRead(1)
+				delete(r.buf, i)
+				if r.getRead() >= r.partsCount {
+					r.setErr(io.EOF)
+				}
+			}
+		}
+	}
+
+	r.incrWritten(int64(written))
+	return written, r.getErr()
+}
+
+func (r *ConcurrentReader) setPartSize(n int64) {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	r.partSize = n
+}
+
+func (r *ConcurrentReader) setCapacity(n int32) {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	r.capacity = n
+}
+
+func (r *ConcurrentReader) getCapacity() int32 {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	return r.capacity
+}
+
+func (r *ConcurrentReader) setSectionParts(n int32) {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	r.sectionParts = n
+}
+
+func (r *ConcurrentReader) setPartsCount(n int32) {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	r.partsCount = n
+}
+
+func (r *ConcurrentReader) incrWritten(n int64) {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	r.written += n
+}
+
+func (r *ConcurrentReader) incrRead(n int32) {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	r.read += n
+}
+
+func (r *ConcurrentReader) getRead() int32 {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	return r.read
+}
+
+func (r *ConcurrentReader) setErr(err error) {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	r.err = err
+}
+
+func (r *ConcurrentReader) getErr() error {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	return r.err
+}
+
+func (r *ConcurrentReader) clean() {
+	for {
+		_, ok := <-r.ch
+		if !ok {
+			break
+		}
+	}
 }

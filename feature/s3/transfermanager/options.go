@@ -39,6 +39,9 @@ type Options struct {
 
 	// Logger to send logging message to
 	Logger logging.Logger
+
+	// Max size for the get object buffer
+	GetBufferSize int64
 }
 
 func (o *Options) init() {
@@ -77,6 +80,12 @@ func resolveMultipartDownloadType(o *Options) {
 func resolvePartBodyMaxRetries(o *Options) {
 	if o.PartBodyMaxRetries == 0 {
 		o.PartBodyMaxRetries = defaultPartBodyMaxRetries
+	}
+}
+
+func resolveGetBufferSize(o *Options) {
+	if o.GetBufferSize == 0 {
+		o.GetBufferSize = defaultGetBufferSize
 	}
 }
 

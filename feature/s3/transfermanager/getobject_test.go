@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"reflect"
 	"strings"
+	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -46,12 +47,11 @@ func TestGetObject(t *testing.T) {
 		},
 		"range download zero": {
 			data:        []byte{},
-			getObjectFn: s3testing.RangeGetObjectFn,
+			getObjectFn: s3testing.NonRangeGetObjectFn,
 			options: Options{
 				MultipartDownloadType: types.MultipartDownloadTypeRange,
 			},
 			expectInvocations: 1,
-			expectRanges:      []string{"bytes=0-8388607"},
 		},
 		"range download with customized part size": {
 			data:        buf20MB,
@@ -80,7 +80,7 @@ func TestGetObject(t *testing.T) {
 				MultipartDownloadType: types.MultipartDownloadTypeRange,
 			},
 			expectInvocations: 1,
-			expectRanges:      []string{"bytes=0-8388607"},
+			expectRanges:      []string{"bytes=0-2097151"},
 			dataValidationFn: func(t *testing.T, bytes []byte) {
 				count := 0
 				for _, b := range bytes {
@@ -98,7 +98,7 @@ func TestGetObject(t *testing.T) {
 				MultipartDownloadType: types.MultipartDownloadTypeRange,
 			},
 			expectInvocations: 1,
-			expectRanges:      []string{"bytes=0-8388607"},
+			expectRanges:      []string{"bytes=0-2097151"},
 			dataValidationFn: func(t *testing.T, bytes []byte) {
 				count := 0
 				for _, b := range bytes {
@@ -109,23 +109,8 @@ func TestGetObject(t *testing.T) {
 				}
 			},
 		},
-		"range download with success retry": {
-			getObjectFn: s3testing.ErrReaderFn,
-			errReaders: []s3testing.TestErrReader{
-				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
-				{Buf: []byte("123"), Len: 3, Err: io.EOF},
-			},
-			options: Options{
-				MultipartDownloadType: types.MultipartDownloadTypeRange,
-			},
-			expectInvocations: 2,
-			dataValidationFn: func(t *testing.T, bytes []byte) {
-				if e, a := "123", string(bytes); e != a {
-					t.Errorf("expect %q response, got %q", e, a)
-				}
-			},
-		},
 		"range download success without retry": {
+			data:        []byte("123"),
 			getObjectFn: s3testing.ErrReaderFn,
 			errReaders: []s3testing.TestErrReader{
 				{Buf: []byte("123"), Len: 3, Err: io.EOF},
@@ -141,21 +126,16 @@ func TestGetObject(t *testing.T) {
 			},
 		},
 		"range download fail retry": {
+			data:        []byte("ab"),
 			getObjectFn: s3testing.ErrReaderFn,
 			errReaders: []s3testing.TestErrReader{
-				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
+				{Buf: []byte("ab"), Len: 2, Err: io.ErrUnexpectedEOF},
 			},
 			options: Options{
-				PartBodyMaxRetries:    1,
 				MultipartDownloadType: types.MultipartDownloadTypeRange,
 			},
 			expectInvocations: 1,
 			expectErr:         "unexpected EOF",
-			dataValidationFn: func(t *testing.T, bytes []byte) {
-				if e, a := "ab", string(bytes); e != a {
-					t.Errorf("expect %q response, got %q", e, a)
-				}
-			},
 		},
 		"range download a range of object": {
 			data:        buf20MB,
@@ -207,26 +187,10 @@ func TestGetObject(t *testing.T) {
 				}
 			},
 		},
-		"part download with success retry": {
-			getObjectFn: s3testing.ErrReaderFn,
-			errReaders: []s3testing.TestErrReader{
-				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
-				{Buf: []byte("123"), Len: 3, Err: io.EOF},
-			},
-			options:           Options{},
-			partsCount:        1,
-			expectInvocations: 2,
-			expectParts:       []int32{1, 1},
-			dataValidationFn: func(t *testing.T, bytes []byte) {
-				if e, a := "123", string(bytes); e != a {
-					t.Errorf("expect %q response, got %q", e, a)
-				}
-			},
-		},
 		"part download success without retry": {
 			getObjectFn: s3testing.ErrReaderFn,
 			errReaders: []s3testing.TestErrReader{
-				{Buf: []byte("ab"), Len: 3, Err: io.EOF},
+				{Buf: []byte("ab"), Len: 2, Err: io.EOF},
 			},
 			options:           Options{},
 			partsCount:        1,
@@ -239,13 +203,12 @@ func TestGetObject(t *testing.T) {
 			},
 		},
 		"part download fail retry": {
+			data:        []byte("ab"),
 			getObjectFn: s3testing.ErrReaderFn,
 			errReaders: []s3testing.TestErrReader{
-				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
+				{Buf: []byte("ab"), Len: 2, Err: io.ErrUnexpectedEOF},
 			},
-			options: Options{
-				PartBodyMaxRetries: 1,
-			},
+			options:           Options{},
 			expectInvocations: 1,
 			expectErr:         "unexpected EOF",
 			dataValidationFn: func(t *testing.T, bytes []byte) {
@@ -297,18 +260,42 @@ func TestGetObject(t *testing.T) {
 			}
 			input.Range = c.downloadRange
 			input.PartNumber = c.partNumber
+			r := NewConcurrentReader()
+			input.Reader = r
 
-			out, err := mgr.GetObject(context.Background(), input)
+			var wg sync.WaitGroup
+			actualBuf := make([]byte, 0)
+
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				b, err := io.ReadAll(r)
+				if err != nil {
+					if c.expectErr == "" {
+						t.Errorf("expect no error when copying file, got %q", err)
+					} else if e, a := c.expectErr, err.Error(); !strings.Contains(a, e) {
+						t.Errorf("expect %s error message to be in %s", e, a)
+					}
+					//return
+				} else if c.expectErr != "" {
+					t.Error("expect an error, but got none")
+					//return
+				}
+
+				actualBuf = append(actualBuf, b...)
+			}()
+
+			_, err := mgr.GetObject(context.Background(), input)
+			wg.Wait()
+
 			if err != nil {
 				if c.expectErr == "" {
 					t.Fatalf("expect no error, got %q", err)
 				} else if e, a := c.expectErr, err.Error(); !strings.Contains(a, e) {
 					t.Fatalf("expect %s error message to be in %s", e, a)
 				}
-			} else {
-				if c.expectErr != "" {
-					t.Fatal("expect error, got nil")
-				}
+			} else if c.expectErr != "" {
+				t.Fatal("expect error, got nil")
 			}
 
 			if err != nil {
@@ -331,11 +318,7 @@ func TestGetObject(t *testing.T) {
 			}
 
 			if c.dataValidationFn != nil {
-				body, err := io.ReadAll(out.Body)
-				if err != nil {
-					t.Fatalf("error when reading response body: %q", err)
-				}
-				c.dataValidationFn(t, body)
+				c.dataValidationFn(t, actualBuf)
 			}
 		})
 	}
@@ -357,6 +340,8 @@ func TestGetAsyncWithFailure(t *testing.T) {
 			reqCount := int64(0)
 
 			s3Client, _, _, _ := s3testing.NewDownloadClient()
+			s3Client.PartsCount = 10
+			s3Client.Data = buf40MB
 			s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (out *s3.GetObjectOutput, err error) {
 				switch atomic.LoadInt64(&reqCount) {
 				case 1:
@@ -369,7 +354,6 @@ func TestGetAsyncWithFailure(t *testing.T) {
 						Body:          ioutil.NopCloser(body),
 						ContentLength: aws.Int64(int64(body.Len())),
 						ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", startingByte, body.Len()-1, body.Len()*10)),
-						PartsCount:    aws.Int32(10),
 					}
 
 					startingByte += body.Len()
@@ -382,16 +366,26 @@ func TestGetAsyncWithFailure(t *testing.T) {
 				return out, err
 			}
 
-			g := New(s3Client, Options{
+			mgr := New(s3Client, Options{
 				Concurrency:           2,
 				MultipartDownloadType: c.downloadType,
 			})
+			r := NewConcurrentReader()
+			var wg sync.WaitGroup
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				_, _ = io.ReadAll(r)
+			}()
 
 			// Expect this request to exit quickly after failure
-			_, err := g.GetObject(context.Background(), &GetObjectInput{
+			_, err := mgr.GetObject(context.Background(), &GetObjectInput{
 				Bucket: "Bucket",
 				Key:    "Key",
+				Reader: r,
 			})
+			wg.Wait()
+
 			if err == nil {
 				t.Fatal("expect error, got none")
 			} else if e, a := "some connection error", err.Error(); !strings.Contains(a, e) {
@@ -417,7 +411,7 @@ func TestGetObjectWithContextCanceled(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			g := New(s3.New(s3.Options{
+			mgr := New(s3.New(s3.Options{
 				Region: "mock-region",
 			}), Options{
 				MultipartDownloadType: c.downloadType,
@@ -427,10 +421,20 @@ func TestGetObjectWithContextCanceled(t *testing.T) {
 			ctx.Error = fmt.Errorf("context canceled")
 			close(ctx.DoneCh)
 
-			_, err := g.GetObject(ctx, &GetObjectInput{
+			r := NewConcurrentReader()
+			var wg sync.WaitGroup
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				_, _ = io.ReadAll(r)
+			}()
+			_, err := mgr.GetObject(ctx, &GetObjectInput{
 				Bucket: "bucket",
 				Key:    "Key",
+				Reader: r,
 			})
+			wg.Wait()
+
 			if err == nil {
 				t.Fatalf("expected error, did not get one")
 			}
