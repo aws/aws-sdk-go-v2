@@ -21467,7 +21467,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         For a batch of security controls and standards, identifies whether each control is currently enabled or disabled in a standard.\n      </p>",
+                "smithy.api#documentation": "<p>\n         For a batch of security controls and standards, identifies whether each control is currently enabled or disabled in a standard.\n      </p>\n         <p>\n         Calls to this operation return a <code>RESOURCE_NOT_FOUND_EXCEPTION</code> error when the standard subscription for the association has a <code>NOT_READY_FOR_UPDATES</code> value for <code>StandardsControlsUpdatable</code>.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/associations/batchGet",
@@ -22033,7 +22033,7 @@
                     "target": "com.amazonaws.securityhub#StandardsControlAssociationUpdates",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n         Updates the enablement status of a security control in a specified standard.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         Updates the enablement status of a security control in a specified standard.\n      </p>\n         <p>\n         Calls to this operation return a <code>RESOURCE_NOT_FOUND_EXCEPTION</code> error when the standard subscription for the control has <code>StandardsControlsUpdatable</code> value <code>NOT_READY_FOR_UPDATES</code>.\n      </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -24709,7 +24709,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of security standards controls.</p>\n         <p>For each control, the results include information about whether it is currently enabled,\n         the severity, and a link to remediation information.</p>",
+                "smithy.api#documentation": "<p>Returns a list of security standards controls.</p>\n         <p>For each control, the results include information about whether it is currently enabled,\n         the severity, and a link to remediation information.</p>\n         <p>This operation returns an empty list for standard subscriptions where <code>StandardsControlsUpdatable</code> has value <code>NOT_READY_FOR_UPDATES</code>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/standards/controls/{StandardsSubscriptionArn+}",
@@ -28770,7 +28770,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Specifies whether a control is currently enabled or disabled in each enabled standard in the calling account.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Specifies whether a control is currently enabled or disabled in each enabled standard in the calling account.\n      </p>\n         <p>This operation omits standards control associations for standard subscriptions where <code>StandardsControlsUpdatable</code> has value <code>NOT_READY_FOR_UPDATES</code>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/associations",
@@ -34197,6 +34197,23 @@
                 "target": "com.amazonaws.securityhub#StandardsControl"
             }
         },
+        "com.amazonaws.securityhub#StandardsControlsUpdatable": {
+            "type": "enum",
+            "members": {
+                "READY_FOR_UPDATES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY_FOR_UPDATES"
+                    }
+                },
+                "NOT_READY_FOR_UPDATES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_READY_FOR_UPDATES"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityhub#StandardsInputParameterMap": {
             "type": "map",
             "key": {
@@ -34310,6 +34327,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The status of the standard subscription.</p>\n         <p>The status values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - Standard is in the process of being enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> - Standard is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INCOMPLETE</code> - Standard could not be enabled completely. Some controls may not be available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - Standard is in the process of being disabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Standard could not be disabled.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
+                    }
+                },
+                "StandardsControlsUpdatable": {
+                    "target": "com.amazonaws.securityhub#StandardsControlsUpdatable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the controls associated with this standards subscription can be viewed and updated.</p>\n         <p>The values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READY_FOR_UPDATES</code> - Controls associated with this standards subscription can be viewed and updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_READY_FOR_UPDATES</code> - Controls associated with this standards subscription cannot be retrieved or updated yet. Security Hub is still processing a request to create the controls.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "StandardsStatusReason": {
@@ -34662,6 +34685,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NO_AVAILABLE_CONFIGURATION_RECORDER"
+                    }
+                },
+                "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED"
                     }
                 },
                 "INTERNAL_ERROR": {
@@ -36385,7 +36414,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used to control whether an individual security standard control is enabled or\n         disabled.</p>",
+                "smithy.api#documentation": "<p>Used to control whether an individual security standard control is enabled or\n         disabled.</p>\n         <p>Calls to this operation return a <code>RESOURCE_NOT_FOUND_EXCEPTION</code> error when the standard subscription for the control has <code>StandardsControlsUpdatable</code> value <code>NOT_READY_FOR_UPDATES</code>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To update the enablement status of a standard control",

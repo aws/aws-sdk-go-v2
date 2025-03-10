@@ -89,7 +89,7 @@
                         "*,authorization,date,x-amz-date,x-amz-security-token,x-amz-target,content-type,x-amz-content-sha256,x-amz-user-agent,x-amzn-platform-id,x-amzn-trace-id,amz-sdk-invocation-id,amz-sdk-request"
                     ]
                 },
-                "smithy.api#documentation": "<p>Amazon Timestream for InfluxDB is a managed time-series database engine that makes it easy for application developers and DevOps teams to run InfluxDB databases on Amazon Web Services for near real-time time-series applications using open-source APIs. With Amazon Timestream for InfluxDB, it is easy to set up, operate, and scale time-series workloads that can answer queries with single-digit millisecond query response time.</p>",
+                "smithy.api#documentation": "<p>Amazon Timestream for InfluxDB is a managed time-series database engine that makes it\n            easy for application developers and DevOps teams to run InfluxDB databases on Amazon Web Services for near real-time time-series applications using open-source APIs. With Amazon Timestream for InfluxDB, it is easy to set up, operate, and scale time-series workloads that can answer queries with single-digit millisecond query response time.</p>",
                 "smithy.api#title": "Timestream InfluxDB",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -915,13 +915,13 @@
                 "username": {
                     "target": "com.amazonaws.timestreaminfluxdb#Username",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the initial admin user created in InfluxDB. Must start with a letter and can't end with a hyphen or contain two consecutive hyphens. For example, my-user1. This username will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. These attributes will be stored in a secret created in Amazon Web Services Secrets Manager in your account.</p>"
+                        "smithy.api#documentation": "<p>The username of the initial admin user created in InfluxDB. Must start with a letter and can't end with a hyphen or contain two consecutive hyphens. For example, my-user1. This username will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. These attributes will be stored in a secret created in Secrets Manager in your account.</p>"
                     }
                 },
                 "password": {
                     "target": "com.amazonaws.timestreaminfluxdb#Password",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the initial admin user created in InfluxDB. This password will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. These attributes will be stored in a secret created in Amazon Web Services Secrets Manager in your account.</p>",
+                        "smithy.api#documentation": "<p>The password of the initial admin user created in InfluxDB. This password will allow\n            you to access the InfluxDB UI to perform various administrative tasks and also use the\n            InfluxDB CLI to create an operator token. These attributes will be stored in a secret created in Secrets Manager in your account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1116,7 +1116,7 @@
                 "password": {
                     "target": "com.amazonaws.timestreaminfluxdb#Password",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the initial admin user created in InfluxDB. This password will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. These attributes will be stored in a Secret created in Amazon Web Services SecretManager in your account.</p>",
+                        "smithy.api#documentation": "<p>The password of the initial admin user created in InfluxDB. This password will allow\n            you to access the InfluxDB UI to perform various administrative tasks and also use the\n            InfluxDB CLI to create an operator token. These attributes will be stored in a Secret\n            created in Secrets Manager in your account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1337,7 +1337,7 @@
                 "influxAuthParametersSecretArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
                     }
                 },
                 "dbClusterId": {
@@ -1799,7 +1799,7 @@
                 "name": {
                     "target": "com.amazonaws.timestreaminfluxdb#DbInstanceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>This customer-supplied name uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and Amazon Web Services CLI commands.</p>",
+                        "smithy.api#documentation": "<p>This customer-supplied name uniquely identifies the DB instance when interacting with\n            the Amazon Timestream for InfluxDB API and CLI commands.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2284,7 +2284,7 @@
                 "influxAuthParametersSecretArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
                     }
                 },
                 "dbClusterId": {
@@ -2542,7 +2542,7 @@
                 "influxAuthParametersSecretArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
                     }
                 },
                 "vpcSubnetIds": {
@@ -2738,7 +2738,7 @@
                 "influxAuthParametersSecretArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
                     }
                 },
                 "dbClusterId": {
@@ -2961,7 +2961,7 @@
                 "pprofDisabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Disable the /debug/pprof HTTP endpoint. This endpoint provides runtime profiling data and can be helpful when debugging.</p>\n         <p>Default: false</p>"
+                        "smithy.api#documentation": "<p>Disable the /debug/pprof HTTP endpoint. This endpoint provides runtime profiling data and can be helpful when debugging.</p>\n         <p>Default: true</p>"
                     }
                 },
                 "queryInitialMemoryBytes": {
@@ -4284,7 +4284,7 @@
                 "name": {
                     "target": "com.amazonaws.timestreaminfluxdb#DbInstanceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>This customer-supplied name uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and Amazon Web Services CLI commands.</p>",
+                        "smithy.api#documentation": "<p>This customer-supplied name uniquely identifies the DB instance when interacting with\n            the Amazon Timestream for InfluxDB API and CLI commands.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4389,7 +4389,7 @@
                 "influxAuthParametersSecretArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
                     }
                 },
                 "dbClusterId": {

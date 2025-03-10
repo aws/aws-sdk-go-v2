@@ -5726,7 +5726,7 @@
                 "DisconnectTimestamp": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the customer endpoint disconnected from Amazon Connect.</p>"
+                        "smithy.api#documentation": "<p>The date and time that the customer endpoint disconnected from the current contact, in UTC\n   time. In transfer scenarios, the DisconnectTimestamp of the previous contact indicates the date\n   and time when that contact ended.</p>"
                     }
                 },
                 "LastUpdateTimestamp": {
@@ -7645,7 +7645,7 @@
                 "RelatedContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>"
+                        "smithy.api#documentation": "<p>The unique identifier for an Amazon Connect contact. This identifier is related to the\n   contact starting.</p>"
                     }
                 },
                 "Attributes": {
@@ -7708,6 +7708,12 @@
                     "target": "com.amazonaws.connect#SegmentAttributes",
                     "traits": {
                         "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments (unique\n   contact ID) using an attribute map. The attributes are standard Amazon Connect attributes.\n   They can be accessed in flows.</p>\n         <p>Attribute keys can include only alphanumeric, -, and _.</p>\n         <p>This field can be used to set Segment Contact Expiry as a duration in minutes.</p>\n         <note>\n            <p>To set contact expiry, a ValueMap must be specified containing the integer number of\n    minutes the contact will be active for before expiring, with <code>SegmentAttributes</code> like\n    { <code> \"connect:ContactExpiry\": {\"ValueMap\" : { \"ExpiryDuration\": { \"ValueInteger\":\n     135}}}}</code>. </p>\n         </note>"
+                    }
+                },
+                "PreviousContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the previous contact when creating a transfer contact. This value can be provided\n   only for external audio contacts. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html\">Integrate Amazon Connect Contact Lens\n    with external voice systems</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>"
                     }
                 }
             },
@@ -12860,7 +12866,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Describes the specified contact. </p>\n         <important>\n            <ul>\n               <li>\n                  <p>\n                     <code>CustomerEndpoint</code> and <code>SystemEndpoint</code> are only populated for EMAIL contacts. </p>\n               </li>\n               <li>\n                  <p>Contact information remains available in Amazon Connect for 24 months from the\n     <code>InitiationTimestamp</code>, and then it is deleted. Only contact information that is available in\n     Amazon Connect is returned by this API.</p>\n               </li>\n            </ul>\n         </important>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Describes the specified contact. </p>\n         <important>\n            <ul>\n               <li>\n                  <p>\n                     <code>CustomerEndpoint</code> and <code>SystemEndpoint</code> are only populated for\n      EMAIL contacts. </p>\n               </li>\n               <li>\n                  <p>Contact information remains available in Amazon Connect for 24 months from the\n       <code>InitiationTimestamp</code>, and then it is deleted. Only contact information that is\n      available in Amazon Connect is returned by this API.</p>\n               </li>\n            </ul>\n         </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/contacts/{InstanceId}/{ContactId}",
@@ -25244,7 +25250,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a list of analysis segments for a real-time analysis session. </p>",
+                "smithy.api#documentation": "<p>Provides a list of analysis segments for a real-time chat analysis session. This API\n   supports CHAT channels only. </p>\n         <important>\n            <p>This API does not support VOICE. If you attempt to use it for VOICE, an\n     <code>InvalidRequestException</code> occurs.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/list-real-time-analysis-segments-v2/{InstanceId}/{ContactId}",
@@ -25313,7 +25319,7 @@
                 "Channel": {
                     "target": "com.amazonaws.connect#RealTimeContactAnalysisSupportedChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The channel of the contact. <code>Voice</code> will not be returned. </p>",
+                        "smithy.api#documentation": "<p>The channel of the contact. </p>\n         <important>\n            <p>Only <code>CHAT</code> is supported. This API does not support <code>VOICE</code>. If you\n    attempt to use it for the VOICE channel, an <code>InvalidRequestException</code> error\n    occurs.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -40356,7 +40362,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Transfers contacts from one agent or queue to another agent or queue at any point after a\n   contact is created. You can transfer a contact to another queue by providing the flow which\n   orchestrates the contact to the destination queue. This gives you more control over contact\n   handling and helps you adhere to the service level agreement (SLA) guaranteed to your\n   customers.</p>\n         <p>Note the following requirements:</p>\n         <ul>\n            <li>\n               <p>Transfer is supported for only <code>TASK</code> contacts.</p>\n            </li>\n            <li>\n               <p>Do not use both <code>QueueId</code> and <code>UserId</code> in the same call.</p>\n            </li>\n            <li>\n               <p>The following flow types are supported: Inbound flow, Transfer to agent flow, and Transfer\n     to queue flow.</p>\n            </li>\n            <li>\n               <p>The <code>TransferContact</code> API can be called only on active contacts.</p>\n            </li>\n            <li>\n               <p>A contact cannot be transferred more than 11 times.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Transfers <code>TASK</code> or <code>EMAIL</code>\n    contacts from one agent or queue to another agent or queue at any point\n   after a contact is created. You can transfer a contact to another queue by providing the flow\n   which orchestrates the contact to the destination queue. This gives you more control over contact\n   handling and helps you adhere to the service level agreement (SLA) guaranteed to your\n   customers.</p>\n         <p>Note the following requirements:</p>\n         <ul>\n            <li>\n               <p>Transfer is supported for only <code>TASK</code> and <code>EMAIL</code> contacts.</p>\n            </li>\n            <li>\n               <p>Do not use both <code>QueueId</code> and <code>UserId</code> in the same call.</p>\n            </li>\n            <li>\n               <p>The following flow types are supported: Inbound flow, Transfer to agent flow, and Transfer\n     to queue flow.</p>\n            </li>\n            <li>\n               <p>The <code>TransferContact</code> API can be called only on active contacts.</p>\n            </li>\n            <li>\n               <p>A contact cannot be transferred more than 11 times.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/transfer",

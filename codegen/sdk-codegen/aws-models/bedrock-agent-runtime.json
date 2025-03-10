@@ -159,6 +159,43 @@
                     "traits": {
                         "smithy.api#enumValue": "AMAZON.CodeInterpreter"
                     }
+                },
+                "ANTHROPIC_COMPUTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANTHROPIC.Computer"
+                    }
+                },
+                "ANTHROPIC_BASH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANTHROPIC.Bash"
+                    }
+                },
+                "ANTHROPIC_TEXTEDITOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANTHROPIC.TextEditor"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ActionGroupSignatureParams": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "max": 100
+                    }
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "max": 100
+                    }
                 }
             }
         },
@@ -225,7 +262,7 @@
                 "parentActionGroupSignature": {
                     "target": "com.amazonaws.bedrockagentruntime#ActionGroupSignature",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. \n            You must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields blank for this action group.\n        </p>\n         <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to <code>AMAZON.CodeInterpreter</code>. You must \n            leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields blank for this action group.</p>\n         <p>During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request,\n            it will invoke this action group instead and return an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html\">Observation</a> reprompting the user for more information.</p>"
+                        "smithy.api#documentation": "<p>Specify a built-in or computer use action for this action group. If you specify a value, you must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields empty for this action group. </p>\n         <ul>\n            <li>\n               <p>To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. </p>\n            </li>\n            <li>\n               <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to <code>AMAZON.CodeInterpreter</code>.</p>\n            </li>\n            <li>\n               <p>To allow your agent to use an Anthropic computer use tool, specify one of the following values. </p>\n               <important>\n                  <p>\n            Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only.          \n            When operating computer use functionality, we recommend taking additional security precautions,\n            such as executing computer actions in virtual environments with restricted data access and limited internet connectivity. \n             For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n          </p>\n               </important>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Computer</code> - Gives the agent permission to use the mouse and keyboard and\n              take screenshots.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.TextEditor</code> - Gives the agent permission to view, create and edit files.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Bash</code> - Gives the agent permission to run commands in a bash shell.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "actionGroupExecutor": {
@@ -244,6 +281,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#FunctionSchema",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Contains details about the function schema for the action group or the JSON or YAML-formatted payload defining the schema.\n        </p>"
+                    }
+                },
+                "parentActionGroupSignatureParams": {
+                    "target": "com.amazonaws.bedrockagentruntime#ActionGroupSignatureParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The configuration settings for a computer use action.            \n        </p>\n         <important>\n            <p>Computer use is a new Anthropic Claude model capability (in beta) available with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.</p>\n         </important>"
                     }
                 }
             },
@@ -1904,6 +1947,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The body of the API response.</p>"
                     }
+                },
+                "images": {
+                    "target": "com.amazonaws.bedrockagentruntime#ImageInputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists details, including format and source, for the image in the response from the function call. You can specify only one image and the function in the <code>returnControlInvocationResults</code> \n      must be a computer use action.\n      For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -2083,7 +2132,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a session to temporarily store conversations for generative AI (GenAI) applications built with open-source\n         frameworks such as LangGraph and LlamaIndex. Sessions enable you to save the state of\n         conversations at checkpoints, with the added security and infrastructure of Amazon Web Services. For more information, see\n         <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>\n         <p>By default, Amazon Bedrock uses Amazon Web Services-managed keys for session encryption, including session metadata,\n         or you can use your own KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/session-encryption.html\">Amazon Bedrock session encryption</a>.</p>\n         <note>\n            <p>\n            You use a session to store state and conversation history for generative AI applications built with open-source frameworks. \n            For Amazon Bedrock Agents, the service automatically manages conversation context and associates them with the agent-specific sessionId you specify in the \n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/API_agent-runtime_InvokeAgent.html\">InvokeAgent</a> API operation.\n         </p>\n         </note>\n         <p>Related APIs:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListSessions.html\">ListSessions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetSession.html\">GetSession</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_EndSession.html\">EndSession</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_DeleteSession.html\">DeleteSession</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a session to temporarily store conversations for generative AI (GenAI) applications built with open-source\n         frameworks such as LangGraph and LlamaIndex. Sessions enable you to save the state of\n         conversations at checkpoints, with the added security and infrastructure of Amazon Web Services. For more information, see\n         <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>\n         <p>By default, Amazon Bedrock uses Amazon Web Services-managed keys for session encryption, including session metadata,\n         or you can use your own KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/session-encryption.html\">Amazon Bedrock session encryption</a>.</p>\n         <note>\n            <p>\n            You use a session to store state and conversation history for generative AI applications built with open-source frameworks. \n            For Amazon Bedrock Agents, the service automatically manages conversation context and associates them with the agent-specific sessionId you specify in the \n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html\">InvokeAgent</a> API operation.\n         </p>\n         </note>\n         <p>Related APIs:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListSessions.html\">ListSessions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetSession.html\">GetSession</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_EndSession.html\">EndSession</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_DeleteSession.html\">DeleteSession</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "PUT",
@@ -3536,7 +3585,7 @@
                 "responseBody": {
                     "target": "com.amazonaws.bedrockagentruntime#ResponseBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response from the function call using the parameters. The key of the object is the content type (currently, only <code>TEXT</code> is supported). The response may be returned directly or from the Lambda function.</p>"
+                        "smithy.api#documentation": "<p>The response from the function call using the parameters. The response might be returned directly or from the Lambda function. \n      Specify <code>TEXT</code> or <code>IMAGES</code>. The key of the object is the content type. You can only specify one type. If you\n      specify <code>IMAGES</code>, you can specify only one image. You can specify images only when the function in the <code>returnControlInvocationResults</code> \n      is a computer use action. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.</p>"
                     }
                 },
                 "responseState": {
@@ -4948,6 +4997,80 @@
                         "smithy.api#enumValue": "webp"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ImageInput": {
+            "type": "structure",
+            "members": {
+                "format": {
+                    "target": "com.amazonaws.bedrockagentruntime#ImageInputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of image in the result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockagentruntime#ImageInputSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the image in the result.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an image in the result from a function in the action group invocation. You can specify images only when the function\n      is a computer use action. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ImageInputFormat": {
+            "type": "enum",
+            "members": {
+                "PNG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "png"
+                    }
+                },
+                "JPEG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "jpeg"
+                    }
+                },
+                "GIF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gif"
+                    }
+                },
+                "WEBP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "webp"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ImageInputSource": {
+            "type": "union",
+            "members": {
+                "bytes": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The raw image bytes for the image. If you use an Amazon Web Services SDK, you don't need to encode the image bytes in base64.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the source of an input image in the result from a function in the action group invocation.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ImageInputs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#ImageInput"
             }
         },
         "com.amazonaws.bedrockagentruntime#ImageSource": {
@@ -9066,7 +9189,7 @@
                 "notEquals": {
                     "target": "com.amazonaws.bedrockagentruntime#FilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base data sources that contain a metadata attribute whose name matches the <code>key</code> and whose value doesn't match the <code>value</code> in this object are returned.</p>\n         <p>The following example would return data sources that don't contain an <code>animal</code> attribute whose value is <code>cat</code>.</p>\n         <p>\n            <code>\"notEquals\": { \"key\": \"animal\", \"value\": \"cat\" }</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned when:</p>\n         <ul>\n            <li>\n               <p>It contains a metadata attribute whose name matches the <code>key</code> and whose value doesn't match the <code>value</code>\n                    in this object.</p>\n            </li>\n            <li>\n               <p>The key is not present in the document.</p>\n            </li>\n         </ul>\n         <p>The following example would return data sources that don't contain an <code>animal</code> attribute whose value is <code>cat</code>.</p>\n         <p>\n            <code>\"notEquals\": { \"key\": \"animal\", \"value\": \"cat\" }</code>\n         </p>"
                     }
                 },
                 "greaterThan": {
@@ -9647,7 +9770,7 @@
                 "type": {
                     "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource that contains your data for retrieving information and generating responses.</p>\n         <p>If you choose to use <code>EXTERNAL_SOURCES</code>, then currently only Anthropic Claude 3 Sonnet models for knowledge bases are supported.</p>",
+                        "smithy.api#documentation": "<p>The type of resource that contains your data for retrieving information and generating responses.</p>\n         <note>\n            <p>If you choose to use <code>EXTERNAL_SOURCES</code>, then currently only Anthropic Claude 3 Sonnet models for knowledge bases are supported.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10470,13 +10593,13 @@
                 "sessionAttributes": {
                     "target": "com.amazonaws.bedrockagentruntime#SessionAttributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains attributes that persist across a session and the values of those attributes.</p>"
+                        "smithy.api#documentation": "<p>Contains attributes that persist across a session and the values of those attributes. If <code>sessionAttributes</code> are passed to a supervisor agent in <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-multi-agent-collaboration.html\">multi-agent collaboration</a>, it will be forwarded to all agent collaborators.</p>"
                     }
                 },
                 "promptSessionAttributes": {
                     "target": "com.amazonaws.bedrockagentruntime#PromptSessionAttributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains attributes that persist across a prompt and the values of those attributes. These attributes replace the $prompt_session_attributes$ placeholder variable in the orchestration prompt template. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html\">Prompt template placeholder variables</a>.</p>"
+                        "smithy.api#documentation": "<p>Contains attributes that persist across a prompt and the values of those attributes. </p>\n         <ul>\n            <li>\n               <p>In orchestration prompt template, these attributes replace the $prompt_session_attributes$ placeholder variable.  For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html\">Prompt template placeholder variables</a>.</p>\n            </li>\n            <li>\n               <p>In <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-multi-agent-collaboration.html\">multi-agent collaboration</a>, the <code>promptSessionAttributes</code> will only be used by supervisor agent when $prompt_session_attributes$ is present in prompt template. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "returnControlInvocationResults": {
