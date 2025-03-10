@@ -1,3 +1,7 @@
+# v1.48.0 (2025-03-10)
+
+* **Feature**: Releasing minor partition endpoint updates.
+
 # v1.47.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

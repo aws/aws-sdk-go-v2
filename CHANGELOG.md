@@ -1,3 +1,23 @@
+# Release (2025-03-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.39.0](service/bedrockagent/CHANGELOG.md#v1390-2025-03-10)
+  * **Feature**: Add support for computer use tools
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.40.0](service/bedrockagentruntime/CHANGELOG.md#v1400-2025-03-10)
+  * **Feature**: Add support for computer use tools
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.127.0](service/connect/CHANGELOG.md#v11270-2025-03-10)
+  * **Feature**: Add support for contact transfers in external voice systems.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.48.0](service/costexplorer/CHANGELOG.md#v1480-2025-03-10)
+  * **Feature**: Releasing minor partition endpoint updates.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.70.0](service/medialive/CHANGELOG.md#v1700-2025-03-10)
+  * **Feature**: Adds defaultFontSize and defaultLineHeight as options in the EbuTtDDestinationSettings within the caption descriptions for an output stream.
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorad`: [v1.11.0](service/pcaconnectorad/CHANGELOG.md#v1110-2025-03-10)
+  * **Feature**: PrivateCA Connector for Active Directory now supports dual stack endpoints. This release adds the IpAddressType option to the VpcInformation on a Connector which determines whether the endpoint supports IPv4 only or IPv4 and IPv6 traffic.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.57.0](service/securityhub/CHANGELOG.md#v1570-2025-03-10)
+  * **Feature**: This release adds new StandardsControlsUpdatable field to the StandardsSubscription resource
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.10.2](service/timestreaminfluxdb/CHANGELOG.md#v1102-2025-03-10)
+  * **Documentation**: This release updates the default value of pprof-disabled from false to true.
+
 # Release (2025-03-07)
 
 ## Module Highlights

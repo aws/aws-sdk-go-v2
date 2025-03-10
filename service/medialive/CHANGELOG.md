@@ -1,3 +1,7 @@
+# v1.70.0 (2025-03-10)
+
+* **Feature**: Adds defaultFontSize and defaultLineHeight as options in the EbuTtDDestinationSettings within the caption descriptions for an output stream.
+
 # v1.69.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

@@ -1,3 +1,7 @@
+# v1.10.2 (2025-03-10)
+
+* **Documentation**: This release updates the default value of pprof-disabled from false to true.
+
 # v1.10.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

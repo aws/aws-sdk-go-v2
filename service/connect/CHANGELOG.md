@@ -1,3 +1,7 @@
+# v1.127.0 (2025-03-10)
+
+* **Feature**: Add support for contact transfers in external voice systems.
+
 # v1.126.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

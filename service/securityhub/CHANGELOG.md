@@ -1,3 +1,7 @@
+# v1.57.0 (2025-03-10)
+
+* **Feature**: This release adds new StandardsControlsUpdatable field to the StandardsSubscription resource
+
 # v1.56.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

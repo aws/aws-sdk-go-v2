@@ -1,8 +1,0 @@
-{
-    "id": "d728f60d-65c2-4556-8939-7861e704fe74",
-    "type": "feature",
-    "description": "Adds defaultFontSize and defaultLineHeight as options in the EbuTtDDestinationSettings within the caption descriptions for an output stream.",
-    "modules": [
-        "service/medialive"
-    ]
-}

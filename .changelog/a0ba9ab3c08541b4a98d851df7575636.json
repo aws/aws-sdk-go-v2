@@ -1,8 +1,0 @@
-{
-    "id": "a0ba9ab3-c085-41b4-a98d-851df7575636",
-    "type": "feature",
-    "description": "Add support for computer use tools",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.40.0 (2025-03-10)
+
+* **Feature**: Add support for computer use tools
+
 # v1.39.0 (2025-03-07)
 
 * **Feature**: Support Multi Agent Collaboration within Inline Agents

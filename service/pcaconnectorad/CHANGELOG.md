@@ -1,3 +1,7 @@
+# v1.11.0 (2025-03-10)
+
+* **Feature**: PrivateCA Connector for Active Directory now supports dual stack endpoints. This release adds the IpAddressType option to the VpcInformation on a Connector which determines whether the endpoint supports IPv4 only or IPv4 and IPv6 traffic.
+
 # v1.10.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.
