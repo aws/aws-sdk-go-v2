@@ -1,0 +1,8 @@
+{
+    "id": "a6e9d32a-eeb5-41fe-a8ad-094512b76ea2",
+    "type": "feature",
+    "description": "Releasing minor partition endpoint updates.",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

@@ -2483,6 +2483,11 @@ func awsRestjson1_serializeOpDocumentCreateContactInput(v *CreateContactInput, v
 		ok.String(*v.Name)
 	}
 
+	if v.PreviousContactId != nil {
+		ok := object.Key("PreviousContactId")
+		ok.String(*v.PreviousContactId)
+	}
+
 	if v.References != nil {
 		ok := object.Key("References")
 		if err := awsRestjson1_serializeDocumentContactReferences(v.References, ok); err != nil {

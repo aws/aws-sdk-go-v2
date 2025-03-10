@@ -1,0 +1,8 @@
+{
+    "id": "ce2eadcf-cd99-4259-bd99-76d18b5dea81",
+    "type": "feature",
+    "description": "This release adds new StandardsControlsUpdatable field to the StandardsSubscription resource",
+    "modules": [
+        "service/securityhub"
+    ]
+}

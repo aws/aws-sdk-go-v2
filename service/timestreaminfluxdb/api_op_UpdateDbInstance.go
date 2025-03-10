@@ -82,8 +82,7 @@ type UpdateDbInstanceOutput struct {
 	Id *string
 
 	// This customer-supplied name uniquely identifies the DB instance when
-	// interacting with the Amazon Timestream for InfluxDB API and Amazon Web Services
-	// CLI commands.
+	// interacting with the Amazon Timestream for InfluxDB API and CLI commands.
 	//
 	// This member is required.
 	Name *string
@@ -118,10 +117,10 @@ type UpdateDbInstanceOutput struct {
 	// The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.
 	Endpoint *string
 
-	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
-	// secret containing the initial InfluxDB authorization parameters. The secret
-	// value is a JSON formatted key-value pair holding InfluxDB authorization values:
-	// organization, bucket, username, and password.
+	// The Amazon Resource Name (ARN) of the Secrets Manager secret containing the
+	// initial InfluxDB authorization parameters. The secret value is a JSON formatted
+	// key-value pair holding InfluxDB authorization values: organization, bucket,
+	// username, and password.
 	InfluxAuthParametersSecretArn *string
 
 	// Specifies the DbInstance's role in the cluster.

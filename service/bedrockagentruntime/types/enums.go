@@ -8,6 +8,9 @@ type ActionGroupSignature string
 const (
 	ActionGroupSignatureAmazonUserinput       ActionGroupSignature = "AMAZON.UserInput"
 	ActionGroupSignatureAmazonCodeinterpreter ActionGroupSignature = "AMAZON.CodeInterpreter"
+	ActionGroupSignatureAnthropicComputer     ActionGroupSignature = "ANTHROPIC.Computer"
+	ActionGroupSignatureAnthropicBash         ActionGroupSignature = "ANTHROPIC.Bash"
+	ActionGroupSignatureAnthropicTexteditor   ActionGroupSignature = "ANTHROPIC.TextEditor"
 )
 
 // Values returns all known values for ActionGroupSignature. Note that this can be
@@ -18,6 +21,9 @@ func (ActionGroupSignature) Values() []ActionGroupSignature {
 	return []ActionGroupSignature{
 		"AMAZON.UserInput",
 		"AMAZON.CodeInterpreter",
+		"ANTHROPIC.Computer",
+		"ANTHROPIC.Bash",
+		"ANTHROPIC.TextEditor",
 	}
 }
 
@@ -560,6 +566,29 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageFormat) Values() []ImageFormat {
 	return []ImageFormat{
+		"png",
+		"jpeg",
+		"gif",
+		"webp",
+	}
+}
+
+type ImageInputFormat string
+
+// Enum values for ImageInputFormat
+const (
+	ImageInputFormatPng  ImageInputFormat = "png"
+	ImageInputFormatJpeg ImageInputFormat = "jpeg"
+	ImageInputFormatGif  ImageInputFormat = "gif"
+	ImageInputFormatWebp ImageInputFormat = "webp"
+)
+
+// Values returns all known values for ImageInputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageInputFormat) Values() []ImageInputFormat {
+	return []ImageInputFormat{
 		"png",
 		"jpeg",
 		"gif",

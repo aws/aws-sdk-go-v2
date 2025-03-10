@@ -31986,6 +31986,32 @@ func awsRestjson1_deserializeDocumentEbuTtDDestinationSettings(v **types.EbuTtDD
 				sv.CopyrightHolder = ptr.String(jtv)
 			}
 
+		case "defaultFontSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max800 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DefaultFontSize = ptr.Int32(int32(i64))
+			}
+
+		case "defaultLineHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin80Max800 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DefaultLineHeight = ptr.Int32(int32(i64))
+			}
+
 		case "fillLineGap":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -1262,6 +1262,9 @@ type VpcInformation struct {
 	// This member is required.
 	SecurityGroupIds []string
 
+	// The VPC IP address type.
+	IpAddressType IpAddressType
+
 	noSmithyDocumentSerde
 }
 

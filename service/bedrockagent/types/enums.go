@@ -8,6 +8,9 @@ type ActionGroupSignature string
 const (
 	ActionGroupSignatureAmazonUserinput       ActionGroupSignature = "AMAZON.UserInput"
 	ActionGroupSignatureAmazonCodeinterpreter ActionGroupSignature = "AMAZON.CodeInterpreter"
+	ActionGroupSignatureAnthropicComputer     ActionGroupSignature = "ANTHROPIC.Computer"
+	ActionGroupSignatureAnthropicBash         ActionGroupSignature = "ANTHROPIC.Bash"
+	ActionGroupSignatureAnthropicTexteditor   ActionGroupSignature = "ANTHROPIC.TextEditor"
 )
 
 // Values returns all known values for ActionGroupSignature. Note that this can be
@@ -18,6 +21,9 @@ func (ActionGroupSignature) Values() []ActionGroupSignature {
 	return []ActionGroupSignature{
 		"AMAZON.UserInput",
 		"AMAZON.CodeInterpreter",
+		"ANTHROPIC.Computer",
+		"ANTHROPIC.Bash",
+		"ANTHROPIC.TextEditor",
 	}
 }
 

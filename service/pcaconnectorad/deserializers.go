@@ -7767,6 +7767,15 @@ func awsRestjson1_deserializeDocumentVpcInformation(v **types.VpcInformation, va
 
 	for key, value := range shape {
 		switch key {
+		case "IpAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IpAddressType(jtv)
+			}
+
 		case "SecurityGroupIds":
 			if err := awsRestjson1_deserializeDocumentSecurityGroupIdList(&sv.SecurityGroupIds, value); err != nil {
 				return err

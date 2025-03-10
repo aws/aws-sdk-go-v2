@@ -85,12 +85,20 @@ type CreateContactInput struct {
 	// The name of a the contact.
 	Name *string
 
+	// The ID of the previous contact when creating a transfer contact. This value can
+	// be provided only for external audio contacts. For more information, see [Integrate Amazon Connect Contact Lens with external voice systems]in the
+	// Amazon Connect Administrator Guide.
+	//
+	// [Integrate Amazon Connect Contact Lens with external voice systems]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
+	PreviousContactId *string
+
 	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
 	// Tasks can have the following reference types at the time of creation: URL |
 	// NUMBER | STRING | DATE | EMAIL | ATTACHMENT.
 	References map[string]types.Reference
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The unique identifier for an Amazon Connect contact. This identifier is related
+	// to the contact starting.
 	RelatedContactId *string
 
 	// A set of system defined key-value pairs stored on individual contact segments

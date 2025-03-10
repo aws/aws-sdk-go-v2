@@ -3150,6 +3150,11 @@ func awsRestjson1_serializeDocumentVpcInformation(v *types.VpcInformation, value
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("SecurityGroupIds")
 		if err := awsRestjson1_serializeDocumentSecurityGroupIdList(v.SecurityGroupIds, ok); err != nil {

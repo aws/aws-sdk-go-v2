@@ -1,0 +1,8 @@
+{
+    "id": "e6926e89-848b-449f-97f7-1e3b4e87d870",
+    "type": "feature",
+    "description": "Add support for contact transfers in external voice systems.",
+    "modules": [
+        "service/connect"
+    ]
+}

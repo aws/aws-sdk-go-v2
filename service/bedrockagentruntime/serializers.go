@@ -2501,6 +2501,17 @@ func awsRestjson1_serializeDocumentActionGroupExecutor(v types.ActionGroupExecut
 	return nil
 }
 
+func awsRestjson1_serializeDocumentActionGroupSignatureParams(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAdditionalModelRequestFields(v map[string]document.Interface, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2570,6 +2581,13 @@ func awsRestjson1_serializeDocumentAgentActionGroup(v *types.AgentActionGroup, v
 	if len(v.ParentActionGroupSignature) > 0 {
 		ok := object.Key("parentActionGroupSignature")
 		ok.String(string(v.ParentActionGroupSignature))
+	}
+
+	if v.ParentActionGroupSignatureParams != nil {
+		ok := object.Key("parentActionGroupSignatureParams")
+		if err := awsRestjson1_serializeDocumentActionGroupSignatureParams(v.ParentActionGroupSignatureParams, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2952,6 +2970,13 @@ func awsRestjson1_serializeDocumentContentBody(v *types.ContentBody, value smith
 	if v.Body != nil {
 		ok := object.Key("body")
 		ok.String(*v.Body)
+	}
+
+	if v.Images != nil {
+		ok := object.Key("images")
+		if err := awsRestjson1_serializeDocumentImageInputs(v.Images, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3414,6 +3439,54 @@ func awsRestjson1_serializeDocumentImageBlock(v *types.ImageBlock, value smithyj
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImageInput(v *types.ImageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Format) > 0 {
+		ok := object.Key("format")
+		ok.String(string(v.Format))
+	}
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		if err := awsRestjson1_serializeDocumentImageInputSource(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImageInputs(v []types.ImageInput, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentImageInput(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImageInputSource(v types.ImageInputSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ImageInputSourceMemberBytes:
+		av := object.Key("bytes")
+		av.Base64EncodeBytes(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 

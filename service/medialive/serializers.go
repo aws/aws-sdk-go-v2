@@ -12890,6 +12890,16 @@ func awsRestjson1_serializeDocumentEbuTtDDestinationSettings(v *types.EbuTtDDest
 		ok.String(*v.CopyrightHolder)
 	}
 
+	if v.DefaultFontSize != nil {
+		ok := object.Key("defaultFontSize")
+		ok.Integer(*v.DefaultFontSize)
+	}
+
+	if v.DefaultLineHeight != nil {
+		ok := object.Key("defaultLineHeight")
+		ok.Integer(*v.DefaultLineHeight)
+	}
+
 	if len(v.FillLineGap) > 0 {
 		ok := object.Key("fillLineGap")
 		ok.String(string(v.FillLineGap))

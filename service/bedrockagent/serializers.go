@@ -558,6 +558,13 @@ func awsRestjson1_serializeOpDocumentCreateAgentActionGroupInput(v *CreateAgentA
 		ok.String(string(v.ParentActionGroupSignature))
 	}
 
+	if v.ParentActionGroupSignatureParams != nil {
+		ok := object.Key("parentActionGroupSignatureParams")
+		if err := awsRestjson1_serializeDocumentActionGroupSignatureParams(v.ParentActionGroupSignatureParams, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6038,6 +6045,13 @@ func awsRestjson1_serializeOpDocumentUpdateAgentActionGroupInput(v *UpdateAgentA
 		ok.String(string(v.ParentActionGroupSignature))
 	}
 
+	if v.ParentActionGroupSignatureParams != nil {
+		ok := object.Key("parentActionGroupSignatureParams")
+		if err := awsRestjson1_serializeDocumentActionGroupSignatureParams(v.ParentActionGroupSignatureParams, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7100,6 +7114,17 @@ func awsRestjson1_serializeDocumentActionGroupExecutor(v types.ActionGroupExecut
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentActionGroupSignatureParams(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

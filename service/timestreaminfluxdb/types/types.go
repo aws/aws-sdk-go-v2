@@ -123,8 +123,7 @@ type DbInstanceSummary struct {
 	Id *string
 
 	// This customer-supplied name uniquely identifies the DB instance when
-	// interacting with the Amazon Timestream for InfluxDB API and Amazon Web Services
-	// CLI commands.
+	// interacting with the Amazon Timestream for InfluxDB API and CLI commands.
 	//
 	// This member is required.
 	Name *string
@@ -272,7 +271,7 @@ type InfluxDBv2Parameters struct {
 	// Disable the /debug/pprof HTTP endpoint. This endpoint provides runtime
 	// profiling data and can be helpful when debugging.
 	//
-	// Default: false
+	// Default: true
 	PprofDisabled *bool
 
 	// Number of queries allowed to execute concurrently. Setting to 0 allows an

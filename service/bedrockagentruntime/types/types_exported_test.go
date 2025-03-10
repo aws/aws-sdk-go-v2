@@ -274,6 +274,24 @@ func ExampleFunctionSchema_outputUsage() {
 
 var _ []types.FunctionDefinition
 
+func ExampleImageInputSource_outputUsage() {
+	var union types.ImageInputSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ImageInputSourceMemberBytes:
+		_ = v.Value // Value is []byte
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []byte
+
 func ExampleImageSource_outputUsage() {
 	var union types.ImageSource
 	// type switches can be used to check the union value

@@ -33,6 +33,10 @@ type BatchUpdateStandardsControlAssociationsInput struct {
 
 	//  Updates the enablement status of a security control in a specified standard.
 	//
+	// Calls to this operation return a RESOURCE_NOT_FOUND_EXCEPTION error when the
+	// standard subscription for the control has StandardsControlsUpdatable value
+	// NOT_READY_FOR_UPDATES .
+	//
 	// This member is required.
 	StandardsControlAssociationUpdates []types.StandardsControlAssociationUpdate
 

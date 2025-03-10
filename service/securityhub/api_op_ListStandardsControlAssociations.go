@@ -14,6 +14,9 @@ import (
 //	Specifies whether a control is currently enabled or disabled in each enabled
 //
 // standard in the calling account.
+//
+// This operation omits standards control associations for standard subscriptions
+// where StandardsControlsUpdatable has value NOT_READY_FOR_UPDATES .
 func (c *Client) ListStandardsControlAssociations(ctx context.Context, params *ListStandardsControlAssociationsInput, optFns ...func(*Options)) (*ListStandardsControlAssociationsOutput, error) {
 	if params == nil {
 		params = &ListStandardsControlAssociationsInput{}

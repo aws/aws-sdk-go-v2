@@ -117,23 +117,44 @@ type AgentActionGroup struct {
 	// YAML-formatted payload defining the schema.
 	FunctionSchema FunctionSchema
 
-	//  To allow your agent to request the user for additional information when trying
-	// to complete a task, set this field to AMAZON.UserInput . You must leave the
-	// description , apiSchema , and actionGroupExecutor fields blank for this action
-	// group.
+	// Specify a built-in or computer use action for this action group. If you specify
+	// a value, you must leave the description , apiSchema , and actionGroupExecutor
+	// fields empty for this action group.
 	//
-	// To allow your agent to generate, run, and troubleshoot code when trying to
-	// complete a task, set this field to AMAZON.CodeInterpreter . You must leave the
-	// description , apiSchema , and actionGroupExecutor fields blank for this action
-	// group.
+	//   - To allow your agent to request the user for additional information when
+	//   trying to complete a task, set this field to AMAZON.UserInput .
 	//
-	// During orchestration, if your agent determines that it needs to invoke an API
-	// in an action group, but doesn't have enough information to complete the API
-	// request, it will invoke this action group instead and return an [Observation]reprompting the
-	// user for more information.
+	//   - To allow your agent to generate, run, and troubleshoot code when trying to
+	//   complete a task, set this field to AMAZON.CodeInterpreter .
 	//
-	// [Observation]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
+	//   - To allow your agent to use an Anthropic computer use tool, specify one of
+	//   the following values.
+	//
+	// Computer use is a new Anthropic Claude model capability (in beta) available
+	//   with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. When operating
+	//   computer use functionality, we recommend taking additional security precautions,
+	//   such as executing computer actions in virtual environments with restricted data
+	//   access and limited internet connectivity. For more information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools].
+	//
+	//   - ANTHROPIC.Computer - Gives the agent permission to use the mouse and
+	//   keyboard and take screenshots.
+	//
+	//   - ANTHROPIC.TextEditor - Gives the agent permission to view, create and edit
+	//   files.
+	//
+	//   - ANTHROPIC.Bash - Gives the agent permission to run commands in a bash shell.
+	//
+	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
 	ParentActionGroupSignature ActionGroupSignature
+
+	//  The configuration settings for a computer use action.
+	//
+	// Computer use is a new Anthropic Claude model capability (in beta) available
+	// with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]
+	// .
+	//
+	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+	ParentActionGroupSignatureParams map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -692,6 +713,14 @@ type ContentBody struct {
 
 	// The body of the API response.
 	Body *string
+
+	// Lists details, including format and source, for the image in the response from
+	// the function call. You can specify only one image and the function in the
+	// returnControlInvocationResults must be a computer use action. For more
+	// information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools].
+	//
+	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+	Images []ImageInput
 
 	noSmithyDocumentSerde
 }
@@ -1378,9 +1407,14 @@ type FunctionResult struct {
 	// The name of the function that was called.
 	Function *string
 
-	// The response from the function call using the parameters. The key of the object
-	// is the content type (currently, only TEXT is supported). The response may be
-	// returned directly or from the Lambda function.
+	// The response from the function call using the parameters. The response might be
+	// returned directly or from the Lambda function. Specify TEXT or IMAGES . The key
+	// of the object is the content type. You can only specify one type. If you specify
+	// IMAGES , you can specify only one image. You can specify images only when the
+	// function in the returnControlInvocationResults is a computer use action. For
+	// more information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools].
+	//
+	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
 	ResponseBody map[string]ContentBody
 
 	// Controls the final response state returned to end user when API/Function
@@ -1709,6 +1743,47 @@ type ImageBlock struct {
 
 	noSmithyDocumentSerde
 }
+
+// Details about an image in the result from a function in the action group
+// invocation. You can specify images only when the function is a computer use
+// action. For more information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools].
+//
+// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+type ImageInput struct {
+
+	// The type of image in the result.
+	//
+	// This member is required.
+	Format ImageInputFormat
+
+	// The source of the image in the result.
+	//
+	// This member is required.
+	Source ImageInputSource
+
+	noSmithyDocumentSerde
+}
+
+// Details about the source of an input image in the result from a function in the
+// action group invocation.
+//
+// The following types satisfy this interface:
+//
+//	ImageInputSourceMemberBytes
+type ImageInputSource interface {
+	isImageInputSource()
+}
+
+//	The raw image bytes for the image. If you use an Amazon Web Services SDK, you
+//
+// don't need to encode the image bytes in base64.
+type ImageInputSourceMemberBytes struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*ImageInputSourceMemberBytes) isImageInputSource() {}
 
 // The source for an image.
 //
@@ -3654,9 +3729,12 @@ type RetrievalFilterMemberListContains struct {
 
 func (*RetrievalFilterMemberListContains) isRetrievalFilter() {}
 
-// Knowledge base data sources that contain a metadata attribute whose name
-// matches the key and whose value doesn't match the value in this object are
-// returned.
+// Knowledge base data sources are returned when:
+//
+//   - It contains a metadata attribute whose name matches the key and whose value
+//     doesn't match the value in this object.
+//
+//   - The key is not present in the document.
 //
 // The following example would return data sources that don't contain an animal
 // attribute whose value is cat .
@@ -4262,10 +4340,15 @@ type SessionState struct {
 	KnowledgeBaseConfigurations []KnowledgeBaseConfiguration
 
 	// Contains attributes that persist across a prompt and the values of those
-	// attributes. These attributes replace the $prompt_session_attributes$
-	// placeholder variable in the orchestration prompt template. For more information,
-	// see [Prompt template placeholder variables].
+	// attributes.
 	//
+	//   - In orchestration prompt template, these attributes replace the
+	//   $prompt_session_attributes$ placeholder variable. For more information, see [Prompt template placeholder variables].
+	//
+	//   - In [multi-agent collaboration], the promptSessionAttributes will only be used by supervisor agent when
+	//   $prompt_session_attributes$ is present in prompt template.
+	//
+	// [multi-agent collaboration]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-multi-agent-collaboration.html
 	// [Prompt template placeholder variables]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
 	PromptSessionAttributes map[string]string
 
@@ -4279,7 +4362,10 @@ type SessionState struct {
 	ReturnControlInvocationResults []InvocationResultMember
 
 	// Contains attributes that persist across a session and the values of those
-	// attributes.
+	// attributes. If sessionAttributes are passed to a supervisor agent in [multi-agent collaboration], it will
+	// be forwarded to all agent collaborators.
+	//
+	// [multi-agent collaboration]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-multi-agent-collaboration.html
 	SessionAttributes map[string]string
 
 	noSmithyDocumentSerde
@@ -4678,6 +4764,7 @@ func (*UnknownUnionMember) isFlowTrace()                                   {}
 func (*UnknownUnionMember) isFlowTraceNodeInputContent()                   {}
 func (*UnknownUnionMember) isFlowTraceNodeOutputContent()                  {}
 func (*UnknownUnionMember) isFunctionSchema()                              {}
+func (*UnknownUnionMember) isImageInputSource()                            {}
 func (*UnknownUnionMember) isImageSource()                                 {}
 func (*UnknownUnionMember) isInlineAgentResponseStream()                   {}
 func (*UnknownUnionMember) isInputPrompt()                                 {}

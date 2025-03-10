@@ -1,0 +1,8 @@
+{
+    "id": "43779574-3bf1-42a0-82e5-81aa6aab0e76",
+    "type": "feature",
+    "description": "Add support for computer use tools",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

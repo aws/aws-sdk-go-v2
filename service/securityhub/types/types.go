@@ -17871,6 +17871,19 @@ type StandardsSubscription struct {
 	// This member is required.
 	StandardsSubscriptionArn *string
 
+	// Indicates whether the controls associated with this standards subscription can
+	// be viewed and updated.
+	//
+	// The values are as follows:
+	//
+	//   - READY_FOR_UPDATES - Controls associated with this standards subscription can
+	//   be viewed and updated.
+	//
+	//   - NOT_READY_FOR_UPDATES - Controls associated with this standards subscription
+	//   cannot be retrieved or updated yet. Security Hub is still processing a request
+	//   to create the controls.
+	StandardsControlsUpdatable StandardsControlsUpdatable
+
 	// The reason for the current status.
 	StandardsStatusReason *StandardsStatusReason
 

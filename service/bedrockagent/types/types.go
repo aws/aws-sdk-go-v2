@@ -262,6 +262,15 @@ type AgentActionGroup struct {
 	// from the user. Each function represents an action in an action group.
 	FunctionSchema FunctionSchema
 
+	// The configuration settings for a computer use action.
+	//
+	// Computer use is a new Anthropic Claude model capability (in beta) available
+	// with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]
+	// .
+	//
+	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+	ParentActionGroupSignatureParams map[string]string
+
 	// If this field is set as AMAZON.UserInput , the agent can request the user for
 	// additional information when trying to complete a task. The description ,
 	// apiSchema , and actionGroupExecutor fields must be blank for this action group.
@@ -3691,7 +3700,7 @@ type PromptConfiguration struct {
 
 	// Specifies whether to override the default parser Lambda function when parsing
 	// the raw foundation model output in the part of the agent sequence defined by the
-	// promptType . If you set the field as OVERRIDEN , the overrideLambda field in
+	// promptType . If you set the field as OVERRIDDEN , the overrideLambda field in
 	// the [PromptOverrideConfiguration]must be specified with the ARN of a Lambda function.
 	//
 	// [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html

@@ -5868,6 +5868,11 @@ func awsRestjson1_deserializeDocumentContentBody(v **types.ContentBody, value in
 				sv.Body = ptr.String(jtv)
 			}
 
+		case "images":
+			if err := awsRestjson1_deserializeDocumentImageInputs(&sv.Images, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7343,6 +7348,131 @@ func awsRestjson1_deserializeDocumentGuardrailWordPolicyAssessment(v **types.Gua
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageInput(v **types.ImageInput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageInput
+	if *v == nil {
+		sv = &types.ImageInput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageInputFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.ImageInputFormat(jtv)
+			}
+
+		case "source":
+			if err := awsRestjson1_deserializeDocumentImageInputSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageInputs(v *[]types.ImageInput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ImageInput
+	if *v == nil {
+		cv = []types.ImageInput{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ImageInput
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentImageInput(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageInputSource(v *types.ImageInputSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ImageInputSource
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "bytes":
+			var mv []byte
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Blob to be []byte, got %T instead", value)
+				}
+				dv, err := base64.StdEncoding.DecodeString(jtv)
+				if err != nil {
+					return fmt.Errorf("failed to base64 decode Blob, %w", err)
+				}
+				mv = dv
+			}
+			uv = &types.ImageInputSourceMemberBytes{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

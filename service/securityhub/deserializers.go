@@ -67539,6 +67539,15 @@ func awsRestjson1_deserializeDocumentStandardsSubscription(v **types.StandardsSu
 				sv.StandardsArn = ptr.String(jtv)
 			}
 
+		case "StandardsControlsUpdatable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StandardsControlsUpdatable to be of type string, got %T instead", value)
+				}
+				sv.StandardsControlsUpdatable = types.StandardsControlsUpdatable(jtv)
+			}
+
 		case "StandardsInput":
 			if err := awsRestjson1_deserializeDocumentStandardsInputParameterMap(&sv.StandardsInput, value); err != nil {
 				return err

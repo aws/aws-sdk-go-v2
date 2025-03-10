@@ -607,6 +607,11 @@ func validateApiResult(v *types.ApiResult) error {
 	if v.ActionGroup == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionGroup"))
 	}
+	if v.ResponseBody != nil {
+		if err := validateResponseBody(v.ResponseBody); err != nil {
+			invalidParams.AddNested("ResponseBody", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -809,6 +814,23 @@ func validateCollaborators(v []types.Collaborator) error {
 	for i := range v {
 		if err := validateCollaborator(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContentBody(v *types.ContentBody) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentBody"}
+	if v.Images != nil {
+		if err := validateImageInputs(v.Images); err != nil {
+			invalidParams.AddNested("Images", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1059,6 +1081,11 @@ func validateFunctionResult(v *types.FunctionResult) error {
 	if v.ActionGroup == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionGroup"))
 	}
+	if v.ResponseBody != nil {
+		if err := validateResponseBody(v.ResponseBody); err != nil {
+			invalidParams.AddNested("ResponseBody", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1168,6 +1195,41 @@ func validateImageBlock(v *types.ImageBlock) error {
 	} else if v.Source != nil {
 		if err := validateImageSource(v.Source); err != nil {
 			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImageInput(v *types.ImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageInput"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImageInputs(v []types.ImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageInputs"}
+	for i := range v {
+		if err := validateImageInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1839,6 +1901,24 @@ func validateRerankSourcesList(v []types.RerankSource) error {
 	for i := range v {
 		if err := validateRerankSource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseBody(v map[string]types.ContentBody) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseBody"}
+	for key := range v {
+		value := v[key]
+		if err := validateContentBody(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

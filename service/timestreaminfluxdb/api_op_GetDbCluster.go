@@ -76,10 +76,10 @@ type GetDbClusterOutput struct {
 	// The configured failover mode for the DB cluster.
 	FailoverMode types.FailoverMode
 
-	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
-	// secret containing the initial InfluxDB authorization parameters. The secret
-	// value is a JSON formatted key-value pair holding InfluxDB authorization values:
-	// organization, bucket, username, and password.
+	// The Amazon Resource Name (ARN) of the Secrets Manager secret containing the
+	// initial InfluxDB authorization parameters. The secret value is a JSON formatted
+	// key-value pair holding InfluxDB authorization values: organization, bucket,
+	// username, and password.
 	InfluxAuthParametersSecretArn *string
 
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.

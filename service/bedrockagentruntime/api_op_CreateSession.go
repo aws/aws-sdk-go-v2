@@ -40,7 +40,7 @@ import (
 // [Store and retrieve conversation history and context with Amazon Bedrock sessions]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
 // [DeleteSession]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_DeleteSession.html
 // [Amazon Bedrock session encryption]: https://docs.aws.amazon.com/bedrock/latest/userguide/session-encryption.html
-// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/API_agent-runtime_InvokeAgent.html
+// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 // [EndSession]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_EndSession.html
 // [ListSessions]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListSessions.html
 // [GetSession]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetSession.html

@@ -270,14 +270,17 @@ type ConnectorStatusReason string
 
 // Enum values for ConnectorStatusReason
 const (
-	ConnectorStatusReasonDirectoryAccessDenied     ConnectorStatusReason = "DIRECTORY_ACCESS_DENIED"
-	ConnectorStatusReasonInternalFailure           ConnectorStatusReason = "INTERNAL_FAILURE"
-	ConnectorStatusReasonPrivatecaAccessDenied     ConnectorStatusReason = "PRIVATECA_ACCESS_DENIED"
-	ConnectorStatusReasonPrivatecaResourceNotFound ConnectorStatusReason = "PRIVATECA_RESOURCE_NOT_FOUND"
-	ConnectorStatusReasonSecurityGroupNotInVpc     ConnectorStatusReason = "SECURITY_GROUP_NOT_IN_VPC"
-	ConnectorStatusReasonVpcAccessDenied           ConnectorStatusReason = "VPC_ACCESS_DENIED"
-	ConnectorStatusReasonVpcEndpointLimitExceeded  ConnectorStatusReason = "VPC_ENDPOINT_LIMIT_EXCEEDED"
-	ConnectorStatusReasonVpcResourceNotFound       ConnectorStatusReason = "VPC_RESOURCE_NOT_FOUND"
+	ConnectorStatusReasonCaCertificateRegistrationFailed ConnectorStatusReason = "CA_CERTIFICATE_REGISTRATION_FAILED"
+	ConnectorStatusReasonDirectoryAccessDenied           ConnectorStatusReason = "DIRECTORY_ACCESS_DENIED"
+	ConnectorStatusReasonInternalFailure                 ConnectorStatusReason = "INTERNAL_FAILURE"
+	ConnectorStatusReasonInsufficientFreeAddresses       ConnectorStatusReason = "INSUFFICIENT_FREE_ADDRESSES"
+	ConnectorStatusReasonInvalidSubnetIpProtocol         ConnectorStatusReason = "INVALID_SUBNET_IP_PROTOCOL"
+	ConnectorStatusReasonPrivatecaAccessDenied           ConnectorStatusReason = "PRIVATECA_ACCESS_DENIED"
+	ConnectorStatusReasonPrivatecaResourceNotFound       ConnectorStatusReason = "PRIVATECA_RESOURCE_NOT_FOUND"
+	ConnectorStatusReasonSecurityGroupNotInVpc           ConnectorStatusReason = "SECURITY_GROUP_NOT_IN_VPC"
+	ConnectorStatusReasonVpcAccessDenied                 ConnectorStatusReason = "VPC_ACCESS_DENIED"
+	ConnectorStatusReasonVpcEndpointLimitExceeded        ConnectorStatusReason = "VPC_ENDPOINT_LIMIT_EXCEEDED"
+	ConnectorStatusReasonVpcResourceNotFound             ConnectorStatusReason = "VPC_RESOURCE_NOT_FOUND"
 )
 
 // Values returns all known values for ConnectorStatusReason. Note that this can
@@ -286,8 +289,11 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectorStatusReason) Values() []ConnectorStatusReason {
 	return []ConnectorStatusReason{
+		"CA_CERTIFICATE_REGISTRATION_FAILED",
 		"DIRECTORY_ACCESS_DENIED",
 		"INTERNAL_FAILURE",
+		"INSUFFICIENT_FREE_ADDRESSES",
+		"INVALID_SUBNET_IP_PROTOCOL",
 		"PRIVATECA_ACCESS_DENIED",
 		"PRIVATECA_RESOURCE_NOT_FOUND",
 		"SECURITY_GROUP_NOT_IN_VPC",
@@ -366,6 +372,25 @@ func (HashAlgorithm) Values() []HashAlgorithm {
 		"SHA256",
 		"SHA384",
 		"SHA512",
+	}
+}
+
+type IpAddressType string
+
+// Enum values for IpAddressType
+const (
+	IpAddressTypeIpv4      IpAddressType = "IPV4"
+	IpAddressTypeDualstack IpAddressType = "DUALSTACK"
+)
+
+// Values returns all known values for IpAddressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IpAddressType) Values() []IpAddressType {
+	return []IpAddressType{
+		"IPV4",
+		"DUALSTACK",
 	}
 }
 
@@ -459,6 +484,7 @@ const (
 	ServicePrincipalNameStatusReasonDirectoryNotReachable        ServicePrincipalNameStatusReason = "DIRECTORY_NOT_REACHABLE"
 	ServicePrincipalNameStatusReasonDirectoryResourceNotFound    ServicePrincipalNameStatusReason = "DIRECTORY_RESOURCE_NOT_FOUND"
 	ServicePrincipalNameStatusReasonSpnExistsOnDifferentAdObject ServicePrincipalNameStatusReason = "SPN_EXISTS_ON_DIFFERENT_AD_OBJECT"
+	ServicePrincipalNameStatusReasonSpnLimitExceeded             ServicePrincipalNameStatusReason = "SPN_LIMIT_EXCEEDED"
 	ServicePrincipalNameStatusReasonInternalFailure              ServicePrincipalNameStatusReason = "INTERNAL_FAILURE"
 )
 
@@ -473,6 +499,7 @@ func (ServicePrincipalNameStatusReason) Values() []ServicePrincipalNameStatusRea
 		"DIRECTORY_NOT_REACHABLE",
 		"DIRECTORY_RESOURCE_NOT_FOUND",
 		"SPN_EXISTS_ON_DIFFERENT_AD_OBJECT",
+		"SPN_LIMIT_EXCEEDED",
 		"INTERNAL_FAILURE",
 	}
 }
@@ -501,6 +528,7 @@ type ValidationExceptionReason string
 // Enum values for ValidationExceptionReason
 const (
 	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
+	ValidationExceptionReasonInvalidCaSubject      ValidationExceptionReason = "INVALID_CA_SUBJECT"
 	ValidationExceptionReasonInvalidPermission     ValidationExceptionReason = "INVALID_PERMISSION"
 	ValidationExceptionReasonInvalidState          ValidationExceptionReason = "INVALID_STATE"
 	ValidationExceptionReasonMismatchedConnector   ValidationExceptionReason = "MISMATCHED_CONNECTOR"
@@ -517,6 +545,7 @@ const (
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
 		"FIELD_VALIDATION_FAILED",
+		"INVALID_CA_SUBJECT",
 		"INVALID_PERMISSION",
 		"INVALID_STATE",
 		"MISMATCHED_CONNECTOR",

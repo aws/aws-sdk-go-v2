@@ -950,7 +950,9 @@ type Contact struct {
 	// Information about the call disconnect experience.
 	DisconnectDetails *DisconnectDetails
 
-	// The timestamp when the customer endpoint disconnected from Amazon Connect.
+	// The date and time that the customer endpoint disconnected from the current
+	// contact, in UTC time. In transfer scenarios, the DisconnectTimestamp of the
+	// previous contact indicates the date and time when that contact ended.
 	DisconnectTimestamp *time.Time
 
 	// The identifier for the contact.

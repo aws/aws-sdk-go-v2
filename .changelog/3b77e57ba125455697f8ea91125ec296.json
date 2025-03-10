@@ -1,0 +1,8 @@
+{
+    "id": "3b77e57b-a125-4556-97f8-ea91125ec296",
+    "type": "feature",
+    "description": "PrivateCA Connector for Active Directory now supports dual stack endpoints. This release adds the IpAddressType option to the VpcInformation on a Connector which determines whether the endpoint supports IPv4 only or IPv4 and IPv6 traffic.",
+    "modules": [
+        "service/pcaconnectorad"
+    ]
+}

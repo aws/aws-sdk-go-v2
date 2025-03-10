@@ -1,0 +1,8 @@
+{
+    "id": "2cc0c676-956e-4efa-886f-60e7a2229b01",
+    "type": "documentation",
+    "description": "This release updates the default value of pprof-disabled from false to true.",
+    "modules": [
+        "service/timestreaminfluxdb"
+    ]
+}

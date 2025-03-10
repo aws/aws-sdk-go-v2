@@ -40,7 +40,7 @@ type CreateConnectorInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// Security group IDs that describe the inbound and outbound rules.
+	// Information about your VPC and security groups used with the connector.
 	//
 	// This member is required.
 	VpcInformation *types.VpcInformation

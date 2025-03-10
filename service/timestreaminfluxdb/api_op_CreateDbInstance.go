@@ -50,7 +50,7 @@ type CreateDbInstanceInput struct {
 	// The password of the initial admin user created in InfluxDB. This password will
 	// allow you to access the InfluxDB UI to perform various administrative tasks and
 	// also use the InfluxDB CLI to create an operator token. These attributes will be
-	// stored in a Secret created in Amazon Web Services SecretManager in your account.
+	// stored in a Secret created in Secrets Manager in your account.
 	//
 	// This member is required.
 	Password *string
@@ -180,10 +180,10 @@ type CreateDbInstanceOutput struct {
 	// The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.
 	Endpoint *string
 
-	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
-	// secret containing the initial InfluxDB authorization parameters. The secret
-	// value is a JSON formatted key-value pair holding InfluxDB authorization values:
-	// organization, bucket, username, and password.
+	// The Amazon Resource Name (ARN) of the Secrets Manager secret containing the
+	// initial InfluxDB authorization parameters. The secret value is a JSON formatted
+	// key-value pair holding InfluxDB authorization values: organization, bucket,
+	// username, and password.
 	InfluxAuthParametersSecretArn *string
 
 	// Specifies the DbInstance's role in the cluster.
