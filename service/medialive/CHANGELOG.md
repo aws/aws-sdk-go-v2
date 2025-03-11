@@ -1,3 +1,7 @@
+# v1.71.0 (2025-03-11)
+
+* **Feature**: Add an enum option DISABLED for Output Locking Mode under Global Configuration.
+
 # v1.70.0 (2025-03-10)
 
 * **Feature**: Adds defaultFontSize and defaultLineHeight as options in the EbuTtDDestinationSettings within the caption descriptions for an output stream.

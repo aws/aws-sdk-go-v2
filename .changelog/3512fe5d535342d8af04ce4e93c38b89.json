@@ -1,8 +1,0 @@
-{
-    "id": "3512fe5d-5353-42d8-af04-ce4e93c38b89",
-    "type": "feature",
-    "description": "This release adds the GroupLongName field to the response of the DescribeAvailabilityZones API.",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.36.0 (2025-03-11)
+
+* **Feature**: Adding componentArn to network reachability details
+
 # v1.35.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

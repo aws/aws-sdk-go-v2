@@ -1,3 +1,7 @@
+# v1.43.0 (2025-03-11)
+
+* **Feature**: This release adds Amazon ECR to Amazon ECR pull through cache rules support.
+
 # v1.42.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

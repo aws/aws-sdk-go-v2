@@ -1,3 +1,7 @@
+# v1.54.2 (2025-03-11)
+
+* **Documentation**: This is a documentation only update for Amazon ECS to address various tickets.
+
 # v1.54.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

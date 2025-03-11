@@ -1,3 +1,7 @@
+# v1.180.2 (2025-03-11)
+
+* No change notes available for this release.
+
 # v1.180.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

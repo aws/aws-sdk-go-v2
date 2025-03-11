@@ -1,8 +1,0 @@
-{
-    "id": "74884ba4-88df-444c-8b43-fff063ca5f94",
-    "type": "feature",
-    "description": "Add extra check during output checksum validation so the validation skip warning would not be logged if object is not fetched from s3",
-    "modules": [
-        "service/internal/checksum"
-    ]
-}

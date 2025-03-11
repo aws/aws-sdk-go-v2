@@ -1,3 +1,7 @@
+# v1.209.0 (2025-03-11)
+
+* **Feature**: This release adds the GroupLongName field to the response of the DescribeAvailabilityZones API.
+
 # v1.208.0 (2025-03-07)
 
 * **Feature**: Add serviceManaged field to DescribeAddresses API response.

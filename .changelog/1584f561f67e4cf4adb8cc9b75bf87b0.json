@@ -1,8 +1,0 @@
-{
-    "id": "1584f561-f67e-4cf4-adb8-cc9b75bf87b0",
-    "type": "feature",
-    "description": "Adding componentArn to network reachability details",
-    "modules": [
-        "service/inspector2"
-    ]
-}

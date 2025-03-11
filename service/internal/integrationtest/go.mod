@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.36.3
 	github.com/aws/aws-sdk-go-v2/config v1.29.9
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.65
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.66
 	github.com/aws/aws-sdk-go-v2/service/acm v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.35.1
@@ -29,9 +29,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.41.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.208.0
-	github.com/aws/aws-sdk-go-v2/service/ecr v1.42.1
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.54.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.209.0
+	github.com/aws/aws-sdk-go-v2/service/ecr v1.43.0
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.54.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.29.1
@@ -62,7 +62,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.49.1
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.35.1
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.78.1
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.78.2
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.54.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.2
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.33.1
@@ -79,7 +79,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/waf v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.26.1
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.55.0
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.55.1
 	github.com/aws/smithy-go v1.22.2
 )
 
@@ -92,7 +92,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.3 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.3.34 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.12.3 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.6.2 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.7.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.10.15 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.12.15 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.18.15 // indirect

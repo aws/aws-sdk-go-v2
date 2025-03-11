@@ -1,8 +1,0 @@
-{
-    "id": "55c21a8e-8be9-4c99-8678-0fa1f28e742e",
-    "type": "feature",
-    "description": "This release adds Amazon ECR to Amazon ECR pull through cache rules support.",
-    "modules": [
-        "service/ecr"
-    ]
-}

@@ -1,3 +1,22 @@
+# Release (2025-03-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.209.0](service/ec2/CHANGELOG.md#v12090-2025-03-11)
+  * **Feature**: This release adds the GroupLongName field to the response of the DescribeAvailabilityZones API.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.43.0](service/ecr/CHANGELOG.md#v1430-2025-03-11)
+  * **Feature**: This release adds Amazon ECR to Amazon ECR pull through cache rules support.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.54.2](service/ecs/CHANGELOG.md#v1542-2025-03-11)
+  * **Documentation**: This is a documentation only update for Amazon ECS to address various tickets.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.36.0](service/inspector2/CHANGELOG.md#v1360-2025-03-11)
+  * **Feature**: Adding componentArn to network reachability details
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.7.0](service/internal/checksum/CHANGELOG.md#v170-2025-03-11)
+  * **Feature**: Add extra check during output checksum validation so the validation skip warning would not be logged if object is not fetched from s3
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.71.0](service/medialive/CHANGELOG.md#v1710-2025-03-11)
+  * **Feature**: Add an enum option DISABLED for Output Locking Mode under Global Configuration.
+
 # Release (2025-03-10)
 
 ## Module Highlights
