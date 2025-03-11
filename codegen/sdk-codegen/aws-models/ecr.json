@@ -1928,14 +1928,14 @@
                 "ecrRepositoryPrefix": {
                     "target": "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The repository name prefix to use when caching images from the source registry.</p>",
+                        "smithy.api#documentation": "<p>The repository name prefix to use when caching images from the source registry.</p>\n         <important>\n            <p>There is always an assumed <code>/</code> applied to the end of the prefix. If you\n                specify <code>ecr-public</code> as the prefix, Amazon ECR treats that as\n                    <code>ecr-public/</code>.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "upstreamRegistryUrl": {
                     "target": "com.amazonaws.ecr#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry URL of the upstream public registry to use as the source for the pull\n            through cache rule. The following is the syntax to use for each supported upstream\n            registry.</p>\n         <ul>\n            <li>\n               <p>Amazon ECR Public (<code>ecr-public</code>) - <code>public.ecr.aws</code>\n               </p>\n            </li>\n            <li>\n               <p>Docker Hub (<code>docker-hub</code>) -\n                    <code>registry-1.docker.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Quay (<code>quay</code>) - <code>quay.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Kubernetes (<code>k8s</code>) - <code>registry.k8s.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitHub Container Registry (<code>github-container-registry</code>) -\n                        <code>ghcr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Microsoft Azure Container Registry (<code>azure-container-registry</code>) -\n                        <code><custom>.azurecr.io</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The registry URL of the upstream public registry to use as the source for the pull\n            through cache rule. The following is the syntax to use for each supported upstream\n            registry.</p>\n         <ul>\n            <li>\n               <p>Amazon ECR (<code>ecr</code>) –\n                    <code>dkr.ecr.<region>.amazonaws.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon ECR Public (<code>ecr-public</code>) – <code>public.ecr.aws</code>\n               </p>\n            </li>\n            <li>\n               <p>Docker Hub (<code>docker-hub</code>) –\n                    <code>registry-1.docker.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitHub Container Registry (<code>github-container-registry</code>) –\n                        <code>ghcr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitLab Container Registry (<code>gitlab-container-registry</code>) –\n                        <code>registry.gitlab.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Kubernetes (<code>k8s</code>) – <code>registry.k8s.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Microsoft Azure Container Registry (<code>azure-container-registry</code>) –\n                        <code><custom>.azurecr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Quay (<code>quay</code>) – <code>quay.io</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1955,6 +1955,18 @@
                     "target": "com.amazonaws.ecr#CredentialArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that identifies the credentials to authenticate\n            to the upstream registry.</p>"
+                    }
+                },
+                "customRoleArn": {
+                    "target": "com.amazonaws.ecr#CustomRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the IAM role to be assumed by Amazon ECR to authenticate to\n            the ECR upstream registry. This role must be in the same account as the registry that\n            you are configuring.</p>"
+                    }
+                },
+                "upstreamRepositoryPrefix": {
+                    "target": "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository name prefix of the upstream registry to match with the upstream\n            repository name. When this field isn't specified, Amazon ECR will use the\n            <code>ROOT</code>.</p>"
                     }
                 }
             },
@@ -1999,6 +2011,18 @@
                     "target": "com.amazonaws.ecr#CredentialArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret associated with the pull through cache\n            rule.</p>"
+                    }
+                },
+                "customRoleArn": {
+                    "target": "com.amazonaws.ecr#CustomRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role associated with the pull through cache rule.</p>"
+                    }
+                },
+                "upstreamRepositoryPrefix": {
+                    "target": "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upstream repository prefix associated with the pull through cache rule.</p>"
                     }
                 }
             },
@@ -2518,6 +2542,18 @@
                     "target": "com.amazonaws.ecr#CredentialArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret associated with the pull through cache\n            rule.</p>"
+                    }
+                },
+                "customRoleArn": {
+                    "target": "com.amazonaws.ecr#CustomRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role associated with the pull through cache rule.</p>"
+                    }
+                },
+                "upstreamRepositoryPrefix": {
+                    "target": "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upstream repository prefix associated with the pull through cache rule.</p>"
                     }
                 }
             },
@@ -3814,7 +3850,7 @@
                 "value": {
                     "target": "com.amazonaws.ecr#AccountSettingName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting value for the setting name. The following are valid values for the basic scan\n            type being used: <code>AWS_NATIVE</code> or <code>CLAIR</code>. The following are valid\n            values for the registry policy scope being used: <code>V1</code> or\n            <code>V2</code>.</p>"
+                        "smithy.api#documentation": "<p>The setting value for the setting name. The following are valid values for the basic\n            scan type being used: <code>AWS_NATIVE</code> or <code>CLAIR</code>. The following are\n            valid values for the registry policy scope being used: <code>V1</code> or\n                <code>V2</code>.</p>"
                     }
                 }
             },
@@ -4497,7 +4533,7 @@
                 "imageSizeInBytes": {
                     "target": "com.amazonaws.ecr#ImageSizeInBytes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size, in bytes, of the image in the repository.</p>\n         <p>If the image is a manifest list, this will be the max size of all manifests in the\n            list.</p>\n         <note>\n            <p>Beginning with Docker version 1.9, the Docker client compresses image layers\n                before pushing them to a V2 Docker registry. The output of the <code>docker\n                    images</code> command shows the uncompressed image size, so it may return a\n                larger image size than the image sizes returned by <a>DescribeImages</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The size, in bytes, of the image in the repository.</p>\n         <p>If the image is a manifest list, this will be the max size of all manifests in the\n            list.</p>\n         <note>\n            <p>Starting with Docker version 1.9, the Docker client compresses image layers before\n                pushing them to a V2 Docker registry. The output of the <code>docker images</code>\n                command shows the uncompressed image size. Therefore, Docker might return a larger\n                image than the image sizes returned by <a>DescribeImages</a>.</p>\n         </note>"
                     }
                 },
                 "imagePushedAt": {
@@ -5900,6 +5936,18 @@
                         "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret associated with the pull through cache rule.</p>"
                     }
                 },
+                "customRoleArn": {
+                    "target": "com.amazonaws.ecr#CustomRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role associated with the pull through cache rule.</p>"
+                    }
+                },
+                "upstreamRepositoryPrefix": {
+                    "target": "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upstream repository prefix associated with the pull through cache rule.</p>"
+                    }
+                },
                 "upstreamRegistry": {
                     "target": "com.amazonaws.ecr#UpstreamRegistry",
                     "traits": {
@@ -5954,7 +6002,7 @@
                     "min": 2,
                     "max": 30
                 },
-                "smithy.api#pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+                "smithy.api#pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"
             }
         },
         "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefixList": {
@@ -6947,7 +6995,7 @@
                 "repositoryPolicy": {
                     "target": "com.amazonaws.ecr#RepositoryPolicyText",
                     "traits": {
-                        "smithy.api#documentation": "<p>he repository policy to apply to repositories created using the template. A repository\n            policy is a permissions policy associated with a repository to control access\n            permissions. </p>"
+                        "smithy.api#documentation": "<p>The repository policy to apply to repositories created using the template. A\n            repository policy is a permissions policy associated with a repository to control access\n            permissions. </p>"
                     }
                 },
                 "lifecyclePolicy": {
@@ -8165,8 +8213,13 @@
                 "credentialArn": {
                     "target": "com.amazonaws.ecr#CredentialArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that identifies the credentials to authenticate\n            to the upstream registry.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that identifies the credentials to authenticate\n            to the upstream registry.</p>"
+                    }
+                },
+                "customRoleArn": {
+                    "target": "com.amazonaws.ecr#CustomRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the IAM role to be assumed by Amazon ECR to authenticate to the\n            ECR upstream registry. This role must be in the same account as the registry that you\n            are configuring.</p>"
                     }
                 }
             },
@@ -8199,6 +8252,18 @@
                     "target": "com.amazonaws.ecr#CredentialArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret associated with the pull through cache\n            rule.</p>"
+                    }
+                },
+                "customRoleArn": {
+                    "target": "com.amazonaws.ecr#CustomRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role associated with the pull through cache rule.</p>"
+                    }
+                },
+                "upstreamRepositoryPrefix": {
+                    "target": "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upstream repository prefix associated with the pull through cache rule.</p>"
                     }
                 }
             },
@@ -8455,6 +8520,12 @@
         "com.amazonaws.ecr#UpstreamRegistry": {
             "type": "enum",
             "members": {
+                "Ecr": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ecr"
+                    }
+                },
                 "EcrPublic": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -8574,6 +8645,18 @@
                     "target": "com.amazonaws.ecr#CredentialArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret associated with the pull through cache\n            rule.</p>"
+                    }
+                },
+                "customRoleArn": {
+                    "target": "com.amazonaws.ecr#CustomRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role associated with the pull through cache rule.</p>"
+                    }
+                },
+                "upstreamRepositoryPrefix": {
+                    "target": "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upstream repository prefix associated with the pull through cache rule.</p>"
                     }
                 },
                 "isValid": {
