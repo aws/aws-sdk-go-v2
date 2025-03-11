@@ -2356,6 +2356,7 @@ type GlobalConfigurationOutputLockingMode string
 const (
 	GlobalConfigurationOutputLockingModeEpochLocking    GlobalConfigurationOutputLockingMode = "EPOCH_LOCKING"
 	GlobalConfigurationOutputLockingModePipelineLocking GlobalConfigurationOutputLockingMode = "PIPELINE_LOCKING"
+	GlobalConfigurationOutputLockingModeDisabled        GlobalConfigurationOutputLockingMode = "DISABLED"
 )
 
 // Values returns all known values for GlobalConfigurationOutputLockingMode. Note
@@ -2367,6 +2368,7 @@ func (GlobalConfigurationOutputLockingMode) Values() []GlobalConfigurationOutput
 	return []GlobalConfigurationOutputLockingMode{
 		"EPOCH_LOCKING",
 		"PIPELINE_LOCKING",
+		"DISABLED",
 	}
 }
 

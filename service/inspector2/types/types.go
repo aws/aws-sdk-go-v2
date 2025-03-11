@@ -3351,6 +3351,10 @@ type Step struct {
 	// This member is required.
 	ComponentType *string
 
+	// The component ARN. The ARN can be null and is not displayed in the Amazon Web
+	// Services console.
+	ComponentArn *string
+
 	noSmithyDocumentSerde
 }
 

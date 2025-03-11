@@ -178,8 +178,6 @@ type AwsVpcConfiguration struct {
 	//   - When you use create-service or update-service , the default is DISABLED .
 	//
 	//   - When the service deploymentController is ECS , the value must be DISABLED .
-	//
-	//   - When you use create-service or update-service , the default is ENABLED .
 	AssignPublicIp AssignPublicIp
 
 	// The IDs of the security groups associated with the task or service. If you
@@ -533,8 +531,8 @@ type ClusterServiceConnectDefaultsRequest struct {
 	// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map
 	// namespace that's used when you create a service and don't specify a Service
 	// Connect configuration. The namespace name can include up to 1024 characters. The
-	// name is case-sensitive. The name can't include hyphens (-), tilde (~), greater
-	// than (>), less than (<), or slash (/).
+	// name is case-sensitive. The name can't include greater than (>), less than (<),
+	// double quotation marks ("), or slash (/).
 	//
 	// If you enter an existing namespace name or ARN, then that namespace will be
 	// used. Any namespace type is supported. The namespace must be in this account and
@@ -5182,11 +5180,7 @@ type TaskDefinition struct {
 	//
 	// If you're using the EC2 launch type or the external launch type, this field is
 	// optional. Supported values are between 128 CPU units ( 0.125 vCPUs) and 196608
-	// CPU units ( 192 vCPUs).
-	//
-	// If you're using the Fargate launch type, this field is required and you must
-	// use one of the following values, which determines your range of supported values
-	// for the memory parameter. The CPU units cannot be less than 1 vCPU when you use
+	// CPU units ( 192 vCPUs). The CPU units cannot be less than 1 vCPU when you use
 	// Windows containers on Fargate.
 	//
 	//   - 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB), 2048 (2

@@ -18784,6 +18784,15 @@ func awsRestjson1_deserializeDocumentStep(v **types.Step, value interface{}) err
 
 	for key, value := range shape {
 		switch key {
+		case "componentArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComponentArn to be of type string, got %T instead", value)
+				}
+				sv.ComponentArn = ptr.String(jtv)
+			}
+
 		case "componentId":
 			if value != nil {
 				jtv, ok := value.(string)

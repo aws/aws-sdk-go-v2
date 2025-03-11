@@ -285,6 +285,10 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 
 // The specified parameter isn't valid. Review the available parameters for the
 // API request.
+//
+// For more information about service event errors, see [Amazon ECS service event messages].
+//
+// [Amazon ECS service event messages]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html
 type InvalidParameterException struct {
 	Message *string
 

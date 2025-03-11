@@ -1,0 +1,8 @@
+{
+    "id": "a9f894ee-a65e-4904-acba-16597235a29c",
+    "type": "feature",
+    "description": "Add an enum option DISABLED for Output Locking Mode under Global Configuration.",
+    "modules": [
+        "service/medialive"
+    ]
+}

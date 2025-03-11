@@ -374,6 +374,7 @@ type UpstreamRegistry string
 
 // Enum values for UpstreamRegistry
 const (
+	UpstreamRegistryEcr                     UpstreamRegistry = "ecr"
 	UpstreamRegistryEcrPublic               UpstreamRegistry = "ecr-public"
 	UpstreamRegistryQuay                    UpstreamRegistry = "quay"
 	UpstreamRegistryK8s                     UpstreamRegistry = "k8s"
@@ -389,6 +390,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (UpstreamRegistry) Values() []UpstreamRegistry {
 	return []UpstreamRegistry{
+		"ecr",
 		"ecr-public",
 		"quay",
 		"k8s",

@@ -55,6 +55,11 @@ type DescribeAvailabilityZonesInput struct {
 
 	// The filters.
 	//
+	//   - group-long-name - The long name of the zone group for the Availability Zone
+	//   (for example, US West (Oregon) 1 ), the Local Zone (for example, for Zone
+	//   group us-west-2-lax-1 , it is US West (Los Angeles) , or the Wavelength Zone
+	//   (for example, for Zone group us-east-1-wl1 , it is US East (Verizon) .
+	//
 	//   - group-name - The name of the zone group for the Availability Zone (for
 	//   example, us-east-1-zg-1 ), the Local Zone (for example, us-west-2-lax-1 ), or
 	//   the Wavelength Zone (for example, us-east-1-wl1 ).
