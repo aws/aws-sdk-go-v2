@@ -652,7 +652,6 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		g.r.setPartSize(partSize)
 		g.r.setCapacity(int32(math.Min(float64(capacity), float64(partsCount))))
 		g.r.setPartsCount(partsCount)
-		g.r.setSectionParts(sectionParts)
 
 		ch := make(chan getChunk, g.options.Concurrency)
 		for i := 0; i < g.options.Concurrency; i++ {
@@ -716,7 +715,6 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		g.r.setPartSize(g.options.PartSizeBytes)
 		g.r.setCapacity(int32(math.Min(float64(capacity), float64(partsCount))))
 		g.r.setPartsCount(partsCount)
-		g.r.setSectionParts(sectionParts)
 
 		ch := make(chan getChunk, g.options.Concurrency)
 		for i := 0; i < g.options.Concurrency; i++ {
@@ -764,7 +762,7 @@ func (g *getter) init(ctx context.Context) error {
 		return fmt.Errorf("part size must be at least %d bytes", minPartSizeBytes)
 	}
 	if g.r == nil {
-		return fmt.Errorf("reader is required in input")
+		return fmt.Errorf("concurrent reader is required in input")
 	}
 
 	g.r.ch = make(chan outChunk, g.options.Concurrency)
@@ -790,7 +788,6 @@ func (g *getter) singleDownload(ctx context.Context, clientOptions ...func(*s3.O
 	g.r.setPartSize(int64(math.Max(1, float64(aws.ToInt64(out.ContentLength)))))
 	g.r.setCapacity(1)
 	g.r.setPartsCount(1)
-	g.r.setSectionParts(1)
 	g.r.ch <- outChunk{body: bytes.NewReader(buf), length: aws.ToInt64(out.ContentLength)}
 	var output GetObjectOutput
 	output.mapFromGetObjectOutput(out, params.ChecksumMode)
@@ -926,11 +923,10 @@ type ConcurrentReader struct {
 	ch  chan outChunk
 	buf map[int32]*outChunk
 
-	partsCount   int32
-	capacity     int32
-	count        int32
-	read         int32
-	sectionParts int32
+	partsCount int32
+	capacity   int32
+	count      int32
+	read       int32
 
 	written  int64
 	partSize int64
@@ -961,23 +957,23 @@ func (r *ConcurrentReader) Read(p []byte) (int, error) {
 
 	for r.count < r.getCapacity() {
 		if e := r.getErr(); e != nil && e != io.EOF {
-			r.incrWritten(int64(written))
+			r.written += int64(written)
 			r.clean()
 			return written, r.getErr()
 		}
 		if written >= cap(p) {
-			r.incrWritten(int64(written))
+			r.written += int64(written)
 			return written, r.getErr()
 		}
 
 		oc, ok := <-r.ch
 		if !ok {
-			r.incrWritten(int64(written))
+			r.written += int64(written)
 			return written, r.getErr()
 		}
 
 		r.count++
-		index := r.partSize*int64(oc.index) - r.written
+		index := r.getPartSize()*int64(oc.index) - r.written
 
 		if index < int64(cap(p)) {
 			n, err := oc.body.Read(p[index:])
@@ -986,7 +982,7 @@ func (r *ConcurrentReader) Read(p []byte) (int, error) {
 			if err != nil && err != io.EOF {
 				r.setErr(err)
 				r.clean()
-				r.incrWritten(int64(written))
+				r.written += int64(written)
 				return written, r.getErr()
 			}
 		}
@@ -1000,25 +996,26 @@ func (r *ConcurrentReader) Read(p []byte) (int, error) {
 		}
 	}
 
-	minIndex := int32(r.written / r.partSize)
-	maxIndex := int32(math.Min(float64(((r.written + int64(cap(p)) - 1) / r.partSize)), float64(r.getCapacity()-1)))
+	partSize := r.getPartSize()
+	minIndex := int32(r.written / partSize)
+	maxIndex := int32(math.Min(float64(((r.written + int64(cap(p)) - 1) / partSize)), float64(r.getCapacity()-1)))
 	for i := minIndex; i <= maxIndex; i++ {
 		if e := r.getErr(); e != nil && e != io.EOF {
-			r.incrWritten(int64(written))
+			r.written += int64(written)
 			r.clean()
 			return written, r.getErr()
 		}
 
 		c, ok := r.buf[i]
 		if ok {
-			index := int64(i)*r.partSize + c.cur - r.written
+			index := int64(i)*partSize + c.cur - r.written
 			n, err := c.body.Read(p[index:])
 			c.cur += int64(n)
 			written += n
 			if err != nil && err != io.EOF {
 				r.setErr(err)
 				r.clean()
-				r.incrWritten(int64(written))
+				r.written += int64(written)
 				return written, r.getErr()
 			}
 			if c.cur >= c.length {
@@ -1031,7 +1028,7 @@ func (r *ConcurrentReader) Read(p []byte) (int, error) {
 		}
 	}
 
-	r.incrWritten(int64(written))
+	r.written += int64(written)
 	return written, r.getErr()
 }
 
@@ -1040,6 +1037,13 @@ func (r *ConcurrentReader) setPartSize(n int64) {
 	defer r.m.Unlock()
 
 	r.partSize = n
+}
+
+func (r *ConcurrentReader) getPartSize() int64 {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	return r.partSize
 }
 
 func (r *ConcurrentReader) setCapacity(n int32) {
@@ -1056,25 +1060,11 @@ func (r *ConcurrentReader) getCapacity() int32 {
 	return r.capacity
 }
 
-func (r *ConcurrentReader) setSectionParts(n int32) {
-	r.m.Lock()
-	defer r.m.Unlock()
-
-	r.sectionParts = n
-}
-
 func (r *ConcurrentReader) setPartsCount(n int32) {
 	r.m.Lock()
 	defer r.m.Unlock()
 
 	r.partsCount = n
-}
-
-func (r *ConcurrentReader) incrWritten(n int64) {
-	r.m.Lock()
-	defer r.m.Unlock()
-
-	r.written += n
 }
 
 func (r *ConcurrentReader) incrRead(n int32) {
