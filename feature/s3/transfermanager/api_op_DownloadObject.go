@@ -15,7 +15,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
-	"github.com/aws/smithy-go/logging"
 	smithymiddleware "github.com/aws/smithy-go/middleware"
 )
 
@@ -571,7 +570,7 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	}
 
 	var output *DownloadObjectOutput
-	if d.options.MultipartDownloadType == types.MultipartDownloadTypePart {
+	if d.options.GetObjectType == types.GetObjectParts {
 		if d.in.Range != "" {
 			return d.singleDownload(ctx, clientOptions...)
 		}
@@ -649,7 +648,6 @@ func (d *downloader) init(ctx context.Context) error {
 		return fmt.Errorf("part body retry must be non-negative")
 	}
 
-	d.options.Logger = logging.WithContext(ctx, d.options.Logger)
 	d.totalBytes = -1
 
 	return nil
@@ -731,10 +729,6 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 		}
 
 		chunk.cur = 0
-
-		d.options.Logger.Logf(logging.Debug,
-			"object part body download interrupted %s, err, %v, retrying attempt %d",
-			aws.ToString(params.Key), err, retry)
 	}
 
 	d.incrWritten(n)
