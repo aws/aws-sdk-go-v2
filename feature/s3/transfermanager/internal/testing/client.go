@@ -224,6 +224,7 @@ func (c *TransferManagerLoggingClient) GetObject(ctx context.Context, params *s3
 	return &s3.GetObjectOutput{}, nil
 }
 
+// HeadObject is the S3 HeadObject API
 func (c *TransferManagerLoggingClient) HeadObject(ctx context.Context, params *s3.HeadObjectInput, optFns ...func(*s3.Options)) (*s3.HeadObjectOutput, error) {
 	c.m.Lock()
 	defer c.m.Unlock()
