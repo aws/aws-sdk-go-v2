@@ -16,7 +16,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
-	"github.com/aws/smithy-go/logging"
 	smithymiddleware "github.com/aws/smithy-go/middleware"
 )
 
@@ -548,6 +547,44 @@ func (o *GetObjectOutput) mapFromGetObjectOutput(out *s3.GetObjectOutput, checks
 // Additional functional options can be provided to configure the individual
 // download. These options are copies of the original Options instance, the client of which GetObject is called from.
 // Modifying the options will not impact the original Client and Options instance.
+//
+// Before calling GetObject to download object, you must create a ConcurrentReader and use that reader to
+// copy response content to your final destination file or buffer. This new reader type implements io.Reader to
+// concurrently download parts of large object while limiting the max local cache size during download to prevent
+// too much memory space consumption when getting large objects up to multi-gigabytes. You could configure that buffer
+// size by changing Options.GetBufferSize.
+//
+// Example of creating ConcurrentReader to call GetObject:
+//
+//	file, err := os.Create("your filename")
+//	if err != nil {
+//		log.Fatal("error when creating local file: ", err)
+//	}
+//	r := transfermanager.NewConcurrentReader()
+//	var wg sync.WaitGroup
+//	wg.Add(1)
+//
+// // You must read from the r in a separate goroutine to drive getter to get all parts.
+//
+//	go func() {
+//		defer wg.Done()
+//		_, err := io.Copy(file, r)
+//		if err != nil {
+//			log.Fatal("error when writing to local file: ", err)
+//		}
+//	}()
+//
+//	out, err := svc.GetObject(context.Background(), &transfermanager.GetObjectInput{
+//		Bucket: "your-bucket",
+//		Key:    "your-key",
+//		Reader: r,
+//	})
+//
+//	// must wait for r.Read() to finish
+//	wg.Wait()
+//	if err != nil {
+//		log.Fatal("error when downloading file: ", err)
+//	}
 func (c *Client) GetObject(ctx context.Context, input *GetObjectInput, opts ...func(*Options)) (*GetObjectOutput, error) {
 	i := getter{in: input, options: c.options.Copy(), r: input.Reader}
 	for _, opt := range opts {
@@ -593,7 +630,7 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		return g.singleDownload(ctx, clientOptions...)
 	}
 
-	if g.options.MultipartDownloadType == types.MultipartDownloadTypePart {
+	if g.options.GetObjectType == types.GetObjectParts {
 		if g.in.Range != "" {
 			return g.singleDownload(ctx, clientOptions...)
 		}
@@ -731,7 +768,6 @@ func (g *getter) init(ctx context.Context) error {
 	}
 
 	g.r.ch = make(chan outChunk, g.options.Concurrency)
-	g.options.Logger = logging.WithContext(ctx, g.options.Logger)
 	g.totalBytes = -1
 
 	return nil
@@ -844,7 +880,7 @@ func (g *getter) getDownloadRange() (int64, int64) {
 	return start, end + 1
 }
 
-// byteRange returns a HTTP Byte-Range header value that should be used by the
+// byteRange returns an HTTP Byte-Range header value that should be used by the
 // client to request a chunk range.
 func (g *getter) byteRange() string {
 	return fmt.Sprintf("bytes=%d-%d", g.pos, int64(math.Min(float64(g.totalBytes-1), float64(g.pos+g.options.PartSizeBytes-1))))
@@ -930,7 +966,7 @@ func (r *ConcurrentReader) Read(p []byte) (int, error) {
 			r.incrWritten(int64(written))
 			return written, r.getErr()
 		}
-		
+
 		r.count++
 		index := r.partSize*int64(oc.index) - r.written
 

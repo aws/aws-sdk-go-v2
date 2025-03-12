@@ -39,8 +39,8 @@ func TestGetObject(t *testing.T) {
 			data:        buf20MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
 			options: Options{
-				MultipartDownloadType: types.MultipartDownloadTypeRange,
-				Concurrency:           1,
+				GetObjectType: types.GetObjectRanges,
+				Concurrency:   1,
 			},
 			expectInvocations: 3,
 			expectRanges:      []string{"bytes=0-8388607", "bytes=8388608-16777215", "bytes=16777216-20971519"},
@@ -49,7 +49,7 @@ func TestGetObject(t *testing.T) {
 			data:        []byte{},
 			getObjectFn: s3testing.NonRangeGetObjectFn,
 			options: Options{
-				MultipartDownloadType: types.MultipartDownloadTypeRange,
+				GetObjectType: types.GetObjectRanges,
 			},
 			expectInvocations: 1,
 		},
@@ -57,9 +57,9 @@ func TestGetObject(t *testing.T) {
 			data:        buf20MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
 			options: Options{
-				MultipartDownloadType: types.MultipartDownloadTypeRange,
-				PartSizeBytes:         10 * 1024 * 1024,
-				Concurrency:           1,
+				GetObjectType: types.GetObjectRanges,
+				PartSizeBytes: 10 * 1024 * 1024,
+				Concurrency:   1,
 			},
 			expectInvocations: 2,
 			expectRanges:      []string{"bytes=0-10485759", "bytes=10485760-20971519"},
@@ -68,7 +68,7 @@ func TestGetObject(t *testing.T) {
 			data:        buf20MB,
 			getObjectFn: s3testing.ErrRangeGetObjectFn,
 			options: Options{
-				MultipartDownloadType: types.MultipartDownloadTypeRange,
+				GetObjectType: types.GetObjectRanges,
 			},
 			expectInvocations: 2,
 			expectErr:         "s3 service error",
@@ -77,7 +77,7 @@ func TestGetObject(t *testing.T) {
 			data:        buf2MB,
 			getObjectFn: s3testing.NonRangeGetObjectFn,
 			options: Options{
-				MultipartDownloadType: types.MultipartDownloadTypeRange,
+				GetObjectType: types.GetObjectRanges,
 			},
 			expectInvocations: 1,
 			expectRanges:      []string{"bytes=0-2097151"},
@@ -95,7 +95,7 @@ func TestGetObject(t *testing.T) {
 			data:        buf2MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
 			options: Options{
-				MultipartDownloadType: types.MultipartDownloadTypeRange,
+				GetObjectType: types.GetObjectRanges,
 			},
 			expectInvocations: 1,
 			expectRanges:      []string{"bytes=0-2097151"},
@@ -116,7 +116,7 @@ func TestGetObject(t *testing.T) {
 				{Buf: []byte("123"), Len: 3, Err: io.EOF},
 			},
 			options: Options{
-				MultipartDownloadType: types.MultipartDownloadTypeRange,
+				GetObjectType: types.GetObjectRanges,
 			},
 			expectInvocations: 1,
 			dataValidationFn: func(t *testing.T, bytes []byte) {
@@ -132,7 +132,7 @@ func TestGetObject(t *testing.T) {
 				{Buf: []byte("ab"), Len: 2, Err: io.ErrUnexpectedEOF},
 			},
 			options: Options{
-				MultipartDownloadType: types.MultipartDownloadTypeRange,
+				GetObjectType: types.GetObjectRanges,
 			},
 			expectInvocations: 1,
 			expectErr:         "unexpected EOF",
@@ -141,8 +141,8 @@ func TestGetObject(t *testing.T) {
 			data:        buf20MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
 			options: Options{
-				MultipartDownloadType: types.MultipartDownloadTypeRange,
-				Concurrency:           1,
+				GetObjectType: types.GetObjectRanges,
+				Concurrency:   1,
 			},
 			downloadRange:     "bytes=0-10485759",
 			expectInvocations: 2,
@@ -326,11 +326,11 @@ func TestGetObject(t *testing.T) {
 
 func TestGetAsyncWithFailure(t *testing.T) {
 	cases := map[string]struct {
-		downloadType types.MultipartDownloadType
+		downloadType types.GetObjectType
 	}{
 		"part download by default": {},
 		"range download": {
-			downloadType: types.MultipartDownloadTypeRange,
+			downloadType: types.GetObjectRanges,
 		},
 	}
 
@@ -367,8 +367,8 @@ func TestGetAsyncWithFailure(t *testing.T) {
 			}
 
 			mgr := New(s3Client, Options{
-				Concurrency:           2,
-				MultipartDownloadType: c.downloadType,
+				Concurrency:   2,
+				GetObjectType: c.downloadType,
 			})
 			r := NewConcurrentReader()
 			var wg sync.WaitGroup
@@ -401,11 +401,11 @@ func TestGetAsyncWithFailure(t *testing.T) {
 
 func TestGetObjectWithContextCanceled(t *testing.T) {
 	cases := map[string]struct {
-		downloadType types.MultipartDownloadType
+		downloadType types.GetObjectType
 	}{
 		"part download by default": {},
 		"range download": {
-			downloadType: types.MultipartDownloadTypeRange,
+			downloadType: types.GetObjectRanges,
 		},
 	}
 
@@ -414,7 +414,7 @@ func TestGetObjectWithContextCanceled(t *testing.T) {
 			mgr := New(s3.New(s3.Options{
 				Region: "mock-region",
 			}), Options{
-				MultipartDownloadType: c.downloadType,
+				GetObjectType: c.downloadType,
 			})
 
 			ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}

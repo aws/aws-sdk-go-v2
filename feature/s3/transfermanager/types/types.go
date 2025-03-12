@@ -346,13 +346,13 @@ type Metadata struct {
 	values map[interface{}]interface{}
 }
 
-// MultipartDownloadType specifies how transfer manager should perform multipart download
-type MultipartDownloadType string
+// GetObjectType specifies how transfer manager should perform multipart download
+type GetObjectType string
 
 // Enum values for MultipartDownloadType
 const (
-	MultipartDownloadTypePart  MultipartDownloadType = "PART"
-	MultipartDownloadTypeRange                       = "RANGE"
+	GetObjectParts  GetObjectType = "PART"
+	GetObjectRanges               = "RANGE"
 )
 
 // ChecksumMode indicates if the response checksum validation is enabled
