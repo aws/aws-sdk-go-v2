@@ -2,7 +2,6 @@ package transfermanager
 
 import (
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
-	"github.com/aws/smithy-go/logging"
 )
 
 // Options provides params needed for transfer api calls
@@ -32,13 +31,10 @@ type Options struct {
 	Concurrency int
 
 	// The type indicating if object is multi-downloaded in parts or ranges
-	MultipartDownloadType types.MultipartDownloadType
+	GetObjectType types.GetObjectType
 
 	// PartBodyMaxRetries is the number of retry attempts to make for failed part downloads.
 	PartBodyMaxRetries int
-
-	// Logger to send logging message to
-	Logger logging.Logger
 
 	// Max size for the get object buffer
 	GetBufferSize int64
@@ -71,9 +67,9 @@ func resolveMultipartUploadThreshold(o *Options) {
 	}
 }
 
-func resolveMultipartDownloadType(o *Options) {
-	if o.MultipartDownloadType == "" {
-		o.MultipartDownloadType = types.MultipartDownloadTypePart
+func resolveGetObjectType(o *Options) {
+	if o.GetObjectType == "" {
+		o.GetObjectType = types.GetObjectParts
 	}
 }
 

@@ -15,6 +15,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 
@@ -223,6 +224,7 @@ type getObjectTestData struct {
 	Body        io.Reader
 	ExpectBody  []byte
 	ExpectError string
+	OptFns      []func(*Options)
 }
 
 // UniqueID returns a unique UUID-like identifier for use in generating
@@ -276,7 +278,7 @@ func testPutObject(t *testing.T, bucket string, testData putObjectTestData, opts
 	}
 }
 
-func testGetObject(t *testing.T, bucket string, testData getObjectTestData, opts ...func(options *Options)) {
+func testGetObject(t *testing.T, bucket string, testData getObjectTestData) {
 	key := UniqueID()
 
 	_, err := s3Client.PutObject(context.Background(),
@@ -289,11 +291,25 @@ func testGetObject(t *testing.T, bucket string, testData getObjectTestData, opts
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	resp, err := s3TransferManagerClient.GetObject(context.Background(),
+	var b []byte
+	r := NewConcurrentReader()
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		b, err = ioutil.ReadAll(r)
+		if err != nil {
+			t.Fatal("error when reading response body: ", err)
+		}
+	}()
+
+	_, err = s3TransferManagerClient.GetObject(context.Background(),
 		&GetObjectInput{
 			Bucket: bucket,
 			Key:    key,
-		}, opts...)
+			Reader: r,
+		}, testData.OptFns...)
+	wg.Wait()
 	if err != nil {
 		if len(testData.ExpectError) == 0 {
 			t.Fatalf("expect no error, got %v", err)
@@ -310,13 +326,12 @@ func testGetObject(t *testing.T, bucket string, testData getObjectTestData, opts
 		return
 	}
 
-	b, _ := ioutil.ReadAll(resp.Body)
 	if e, a := testData.ExpectBody, b; !bytes.EqualFold(e, a) {
 		t.Errorf("expect %s, got %s", e, a)
 	}
 }
 
-func testDownloadObject(t *testing.T, bucket string, testData getObjectTestData, opts ...func(options *Options)) {
+func testDownloadObject(t *testing.T, bucket string, testData getObjectTestData) {
 	key := UniqueID()
 
 	_, err := s3Client.PutObject(context.Background(),
@@ -335,7 +350,7 @@ func testDownloadObject(t *testing.T, bucket string, testData getObjectTestData,
 			Bucket:   bucket,
 			Key:      key,
 			WriterAt: w,
-		}, opts...)
+		}, testData.OptFns...)
 	if err != nil {
 		if len(testData.ExpectError) == 0 {
 			t.Fatalf("expect no error, got %v", err)
