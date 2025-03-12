@@ -67,7 +67,6 @@ func TestConcurrentReader(t *testing.T) {
 			r.ch = make(chan outChunk, c.concurrency)
 			r.setCapacity(int32(math.Min(float64(c.sectionParts), float64(c.partsCount))))
 			r.setPartSize(c.partSize)
-			r.setSectionParts(c.sectionParts)
 			r.setPartsCount(c.partsCount)
 			ctx := context.Background()
 			var wg sync.WaitGroup
@@ -107,7 +106,6 @@ func TestConcurrentReader(t *testing.T) {
 				}
 
 				if i == r.getCapacity() {
-					//fmt.Println("continue since reach capacity ", i)
 					continue
 				}
 
