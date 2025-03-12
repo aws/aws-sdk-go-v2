@@ -918,6 +918,10 @@ type outChunk struct {
 	cur    int64
 }
 
+// ConcurrentReader receives object parts from working goroutines, composes those chunks in order and read
+// to user's buffer. ConcurrentReader limits the max number of chunks it could receive and read at the same
+// time so getter won't send following parts' request to s3 until user reads all current chunks, which avoids
+// too much memory consumption when caching large object parts
 type ConcurrentReader struct {
 	ch  chan outChunk
 	buf map[int32]*outChunk
@@ -936,6 +940,7 @@ type ConcurrentReader struct {
 	err error
 }
 
+// NewConcurrentReader returns a ConcurrentReader used in GetObject input
 func NewConcurrentReader() *ConcurrentReader {
 	return &ConcurrentReader{
 		buf:      make(map[int32]*outChunk),
@@ -943,6 +948,10 @@ func NewConcurrentReader() *ConcurrentReader {
 	}
 }
 
+// Read implements io.Reader to compose object parts in order and read to p.
+// It will receive up to r.capacity chunks, read them to p if any chunk index
+// fits into p scope, otherwise it will buffer those chunks and read them in
+// following calls
 func (r *ConcurrentReader) Read(p []byte) (int, error) {
 	if cap(p) == 0 {
 		return 0, nil
