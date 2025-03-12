@@ -299,7 +299,7 @@ func testGetObject(t *testing.T, bucket string, testData getObjectTestData) {
 		defer wg.Done()
 		b, err = ioutil.ReadAll(r)
 		if err != nil {
-			t.Fatal("error when reading response body: ", err)
+			t.Errorf("error when reading response body: %v", err)
 		}
 	}()
 
