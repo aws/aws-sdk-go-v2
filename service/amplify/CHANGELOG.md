@@ -1,3 +1,7 @@
+# v1.31.0 (2025-03-13)
+
+* **Feature**: Introduced support for Skew Protection. Added enableSkewProtection field to createBranch and updateBranch API.
+
 # v1.30.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

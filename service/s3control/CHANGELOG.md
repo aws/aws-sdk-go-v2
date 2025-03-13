@@ -1,3 +1,7 @@
+# v1.55.0 (2025-03-13)
+
+* **Feature**: Updating GetDataAccess response for S3 Access Grants to include the matched Grantee for the requested prefix
+
 # v1.54.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

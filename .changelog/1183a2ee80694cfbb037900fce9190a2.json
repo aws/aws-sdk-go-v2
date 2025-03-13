@@ -1,8 +1,0 @@
-{
-    "id": "1183a2ee-8069-4cfb-b037-900fce9190a2",
-    "type": "feature",
-    "description": "IVS Real-Time now offers customers the ability to adjust the participant \u0026 composition recording segment duration",
-    "modules": [
-        "service/ivsrealtime"
-    ]
-}

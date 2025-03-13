@@ -1,3 +1,7 @@
+# v1.24.0 (2025-03-13)
+
+* **Feature**: IVS Real-Time now offers customers the ability to adjust the participant & composition recording segment duration
+
 # v1.23.0 (2025-03-06)
 
 * **Feature**: IVS Real-Time now offers customers the ability to merge fragmented recordings in the event of a participant disconnect.

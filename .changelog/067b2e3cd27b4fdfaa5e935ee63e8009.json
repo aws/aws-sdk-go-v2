@@ -1,8 +1,0 @@
-{
-    "id": "067b2e3c-d27b-4fdf-aa5e-935ee63e8009",
-    "type": "feature",
-    "description": "This release adds the ResetChannelState and ResetOriginEndpointState operation to reset MediaPackage V2 channel and origin endpoint. This release also adds a new field, UrlEncodeChildManifest, for HLS/LL-HLS to allow URL-encoding child manifest query string based on the requirements of AWS SigV4.",
-    "modules": [
-        "service/mediapackagev2"
-    ]
-}

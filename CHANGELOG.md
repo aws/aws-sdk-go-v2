@@ -1,3 +1,30 @@
+# Release (2025-03-13)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.40.0](service/acmpca/CHANGELOG.md#v1400-2025-03-13)
+  * **Feature**: Private Certificate Authority service now supports P521 and RSA3072 key algorithms.
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.31.0](service/amplify/CHANGELOG.md#v1310-2025-03-13)
+  * **Feature**: Introduced support for Skew Protection. Added enableSkewProtection field to createBranch and updateBranch API.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.47.0](service/cloudwatchlogs/CHANGELOG.md#v1470-2025-03-13)
+  * **Feature**: Updated CreateLogAnomalyDetector to accept only kms key arn
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.56.0](service/codebuild/CHANGELOG.md#v1560-2025-03-13)
+  * **Feature**: AWS CodeBuild now supports webhook filtering by organization name
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.27.0](service/datazone/CHANGELOG.md#v1270-2025-03-13)
+  * **Feature**: This release adds support to update projects and environments
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.42.0](service/dynamodb/CHANGELOG.md#v1420-2025-03-13)
+  * **Feature**: Generate account endpoints for DynamoDB requests using ARN-sourced account ID when available
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.210.0](service/ec2/CHANGELOG.md#v12100-2025-03-13)
+  * **Feature**: This release changes the CreateLaunchTemplate, CreateLaunchTemplateVersion, ModifyLaunchTemplate CLI and SDKs such that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.24.0](service/ivsrealtime/CHANGELOG.md#v1240-2025-03-13)
+  * **Feature**: IVS Real-Time now offers customers the ability to adjust the participant & composition recording segment duration
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.22.0](service/mediapackagev2/CHANGELOG.md#v1220-2025-03-13)
+  * **Feature**: This release adds the ResetChannelState and ResetOriginEndpointState operation to reset MediaPackage V2 channel and origin endpoint. This release also adds a new field, UrlEncodeChildManifest, for HLS/LL-HLS to allow URL-encoding child manifest query string based on the requirements of AWS SigV4.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.55.0](service/s3control/CHANGELOG.md#v1550-2025-03-13)
+  * **Feature**: Updating GetDataAccess response for S3 Access Grants to include the matched Grantee for the requested prefix
+
 # Release (2025-03-11)
 
 ## General Highlights

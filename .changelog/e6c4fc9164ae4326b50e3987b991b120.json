@@ -1,8 +1,0 @@
-{
-    "id": "e6c4fc91-64ae-4326-b50e-3987b991b120",
-    "type": "feature",
-    "description": "This release changes the CreateLaunchTemplate, CreateLaunchTemplateVersion, ModifyLaunchTemplate CLI and SDKs such that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.",
-    "modules": [
-        "service/ec2"
-    ]
-}

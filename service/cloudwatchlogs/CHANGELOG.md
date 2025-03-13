@@ -1,3 +1,7 @@
+# v1.47.0 (2025-03-13)
+
+* **Feature**: Updated CreateLogAnomalyDetector to accept only kms key arn
+
 # v1.46.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

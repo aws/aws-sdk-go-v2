@@ -1,3 +1,7 @@
+# v1.42.0 (2025-03-13)
+
+* **Feature**: Generate account endpoints for DynamoDB requests using ARN-sourced account ID when available
+
 # v1.41.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

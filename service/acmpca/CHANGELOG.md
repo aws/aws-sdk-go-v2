@@ -1,3 +1,7 @@
+# v1.40.0 (2025-03-13)
+
+* **Feature**: Private Certificate Authority service now supports P521 and RSA3072 key algorithms.
+
 # v1.39.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

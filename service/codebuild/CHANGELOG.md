@@ -1,3 +1,7 @@
+# v1.56.0 (2025-03-13)
+
+* **Feature**: AWS CodeBuild now supports webhook filtering by organization name
+
 # v1.55.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

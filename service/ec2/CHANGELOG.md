@@ -1,3 +1,7 @@
+# v1.210.0 (2025-03-13)
+
+* **Feature**: This release changes the CreateLaunchTemplate, CreateLaunchTemplateVersion, ModifyLaunchTemplate CLI and SDKs such that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.
+
 # v1.209.0 (2025-03-11)
 
 * **Feature**: This release adds the GroupLongName field to the response of the DescribeAvailabilityZones API.

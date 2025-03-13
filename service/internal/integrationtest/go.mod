@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.48.2
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.44.1
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.55.1
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.56.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.40.1
@@ -28,8 +28,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.1
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.41.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.209.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.42.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.210.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.54.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.35.1
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.1
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.40.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.1
-	github.com/aws/aws-sdk-go-v2/service/glue v1.106.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.106.2
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.40.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.26.1
@@ -55,7 +55,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.24.1
-	github.com/aws/aws-sdk-go-v2/service/polly v1.47.1
+	github.com/aws/aws-sdk-go-v2/service/polly v1.47.2
 	github.com/aws/aws-sdk-go-v2/service/rds v1.94.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.54.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.46.1
@@ -63,11 +63,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.78.2
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.54.1
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.55.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.2
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/ses v1.30.1
-	github.com/aws/aws-sdk-go-v2/service/sfn v1.35.1
+	github.com/aws/aws-sdk-go-v2/service/sfn v1.35.2
 	github.com/aws/aws-sdk-go-v2/service/shield v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/sns v1.34.2

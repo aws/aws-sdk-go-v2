@@ -1,3 +1,7 @@
+# v1.27.0 (2025-03-13)
+
+* **Feature**: This release adds support to update projects and environments
+
 # v1.26.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

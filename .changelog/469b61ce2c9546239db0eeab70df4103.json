@@ -1,8 +1,0 @@
-{
-    "id": "469b61ce-2c95-4623-9db0-eeab70df4103",
-    "type": "feature",
-    "description": "This release adds support to update projects and environments",
-    "modules": [
-        "service/datazone"
-    ]
-}
