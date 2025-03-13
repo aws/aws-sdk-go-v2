@@ -1252,6 +1252,8 @@ const (
 	ProjectStatusActive       ProjectStatus = "ACTIVE"
 	ProjectStatusDeleting     ProjectStatus = "DELETING"
 	ProjectStatusDeleteFailed ProjectStatus = "DELETE_FAILED"
+	ProjectStatusUpdating     ProjectStatus = "UPDATING"
+	ProjectStatusUpdateFailed ProjectStatus = "UPDATE_FAILED"
 )
 
 // Values returns all known values for ProjectStatus. Note that this can be
@@ -1263,6 +1265,8 @@ func (ProjectStatus) Values() []ProjectStatus {
 		"ACTIVE",
 		"DELETING",
 		"DELETE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
 	}
 }
 

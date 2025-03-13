@@ -40,6 +40,10 @@ type UpdateEnvironmentInput struct {
 	// This member is required.
 	Identifier *string
 
+	// The blueprint version to which the environment should be updated. You can only
+	// specify the following string for this parameter: latest .
+	BlueprintVersion *string
+
 	// The description to be updated as part of the UpdateEnvironment action.
 	Description *string
 
@@ -48,6 +52,9 @@ type UpdateEnvironmentInput struct {
 
 	// The name to be updated as part of the UpdateEnvironment action.
 	Name *string
+
+	// The user parameters of the environment.
+	UserParameters []types.EnvironmentParameter
 
 	noSmithyDocumentSerde
 }
@@ -100,6 +107,9 @@ type UpdateEnvironmentOutput struct {
 
 	// The blueprint identifier of the environment.
 	EnvironmentBlueprintId *string
+
+	// The configuration ID of the environment.
+	EnvironmentConfigurationId *string
 
 	// The profile identifier of the environment.
 	EnvironmentProfileId *string

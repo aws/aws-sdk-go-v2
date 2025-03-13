@@ -43,6 +43,12 @@ type ListExportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *ListExportsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableArn
+
+}
+
 type ListExportsOutput struct {
 
 	// A list of ExportSummary objects.

@@ -395,6 +395,12 @@ type QueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *QueryInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 // Represents the output of a Query operation.
 type QueryOutput struct {
 

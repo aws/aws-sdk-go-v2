@@ -3244,6 +3244,13 @@ func awsRestjson1_serializeDocumentAutoParticipantRecordingConfiguration(v *type
 	object := value.Object()
 	defer object.Close()
 
+	if v.HlsConfiguration != nil {
+		ok := object.Key("hlsConfiguration")
+		if err := awsRestjson1_serializeDocumentParticipantRecordingHlsConfiguration(v.HlsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MediaTypes != nil {
 		ok := object.Key("mediaTypes")
 		if err := awsRestjson1_serializeDocumentParticipantRecordingMediaTypeList(v.MediaTypes, ok); err != nil {
@@ -3283,6 +3290,18 @@ func awsRestjson1_serializeDocumentChannelDestinationConfiguration(v *types.Chan
 	if v.EncoderConfigurationArn != nil {
 		ok := object.Key("encoderConfigurationArn")
 		ok.String(*v.EncoderConfigurationArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCompositionRecordingHlsConfiguration(v *types.CompositionRecordingHlsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TargetSegmentDurationSeconds != nil {
+		ok := object.Key("targetSegmentDurationSeconds")
+		ok.Integer(*v.TargetSegmentDurationSeconds)
 	}
 
 	return nil
@@ -3431,6 +3450,18 @@ func awsRestjson1_serializeDocumentParticipantAttributes(v map[string]string, va
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParticipantRecordingHlsConfiguration(v *types.ParticipantRecordingHlsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TargetSegmentDurationSeconds != nil {
+		ok := object.Key("targetSegmentDurationSeconds")
+		ok.Integer(*v.TargetSegmentDurationSeconds)
+	}
+
 	return nil
 }
 
@@ -3599,6 +3630,13 @@ func awsRestjson1_serializeDocumentRecordingConfiguration(v *types.RecordingConf
 	if len(v.Format) > 0 {
 		ok := object.Key("format")
 		ok.String(string(v.Format))
+	}
+
+	if v.HlsConfiguration != nil {
+		ok := object.Key("hlsConfiguration")
+		if err := awsRestjson1_serializeDocumentCompositionRecordingHlsConfiguration(v.HlsConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

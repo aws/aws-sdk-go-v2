@@ -135,6 +135,12 @@ type GetItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *GetItemInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 // Represents the output of a GetItem operation.
 type GetItemOutput struct {
 

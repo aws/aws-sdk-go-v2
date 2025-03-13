@@ -96,8 +96,8 @@ type CreateLogAnomalyDetectorInput struct {
 	// a user must have permissions for both this key and for the anomaly detector to
 	// retrieve information about the anomalies that it finds.
 	//
-	// For more information about using a KMS key and to see the required IAM policy,
-	// see [Use a KMS key with an anomaly detector].
+	// Make sure the value provided is a valid KMS key ARN. For more information about
+	// using a KMS key and to see the required IAM policy, see [Use a KMS key with an anomaly detector].
 	//
 	// [Use a KMS key with an anomaly detector]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/LogsAnomalyDetection-KMS.html
 	KmsKeyId *string

@@ -1,0 +1,8 @@
+{
+    "id": "a50f7cf4-ddad-4acb-adb2-a34686e71be6",
+    "type": "feature",
+    "description": "Updating GetDataAccess response for S3 Access Grants to include the matched Grantee for the requested prefix",
+    "modules": [
+        "service/s3control"
+    ]
+}

@@ -74,6 +74,12 @@ type UpdateTimeToLiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *UpdateTimeToLiveInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 type UpdateTimeToLiveOutput struct {
 
 	// Represents the output of an UpdateTimeToLive operation.

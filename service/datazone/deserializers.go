@@ -4355,6 +4355,15 @@ func awsRestjson1_deserializeOpDocumentCreateEnvironmentOutput(v **CreateEnviron
 				sv.EnvironmentBlueprintId = ptr.String(jtv)
 			}
 
+		case "environmentConfigurationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentConfigurationId to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentConfigurationId = ptr.String(jtv)
+			}
+
 		case "environmentProfileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14081,6 +14090,15 @@ func awsRestjson1_deserializeOpDocumentGetEnvironmentOutput(v **GetEnvironmentOu
 					return fmt.Errorf("expected EnvironmentBlueprintId to be of type string, got %T instead", value)
 				}
 				sv.EnvironmentBlueprintId = ptr.String(jtv)
+			}
+
+		case "environmentConfigurationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentConfigurationId to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentConfigurationId = ptr.String(jtv)
 			}
 
 		case "environmentProfileId":
@@ -30485,6 +30503,15 @@ func awsRestjson1_deserializeOpDocumentUpdateEnvironmentOutput(v **UpdateEnviron
 				sv.EnvironmentBlueprintId = ptr.String(jtv)
 			}
 
+		case "environmentConfigurationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentConfigurationId to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentConfigurationId = ptr.String(jtv)
+			}
+
 		case "environmentProfileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -39820,6 +39847,15 @@ func awsRestjson1_deserializeDocumentEnvironmentConfigurationUserParameter(v **t
 				sv.EnvironmentConfigurationName = ptr.String(jtv)
 			}
 
+		case "environmentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentId to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentId = ptr.String(jtv)
+			}
+
 		case "environmentParameters":
 			if err := awsRestjson1_deserializeDocumentEnvironmentParametersList(&sv.EnvironmentParameters, value); err != nil {
 				return err
@@ -40397,6 +40433,15 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 					return fmt.Errorf("expected DomainId to be of type string, got %T instead", value)
 				}
 				sv.DomainId = ptr.String(jtv)
+			}
+
+		case "environmentConfigurationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentConfigurationId to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentConfigurationId = ptr.String(jtv)
 			}
 
 		case "environmentProfileId":

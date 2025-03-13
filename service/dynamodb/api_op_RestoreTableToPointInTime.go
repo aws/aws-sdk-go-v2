@@ -116,6 +116,12 @@ type RestoreTableToPointInTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *RestoreTableToPointInTimeInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TargetTableName
+
+}
+
 type RestoreTableToPointInTimeOutput struct {
 
 	// Represents the properties of a table.

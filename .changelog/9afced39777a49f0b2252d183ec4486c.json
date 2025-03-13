@@ -1,0 +1,8 @@
+{
+    "id": "9afced39-777a-49f0-b225-2d183ec4486c",
+    "type": "feature",
+    "description": "Private Certificate Authority service now supports P521 and RSA3072 key algorithms.",
+    "modules": [
+        "service/acmpca"
+    ]
+}

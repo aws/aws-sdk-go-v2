@@ -12,8 +12,7 @@ import (
 )
 
 // Describes the Availability Zones, Local Zones, and Wavelength Zones that are
-// available to you. If there is an event impacting a zone, you can use this
-// request to view the state and any provided messages for that zone.
+// available to you.
 //
 // For more information about Availability Zones, Local Zones, and Wavelength
 // Zones, see [Regions and zones]in the Amazon EC2 User Guide.

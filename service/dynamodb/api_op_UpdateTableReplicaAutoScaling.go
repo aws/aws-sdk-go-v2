@@ -53,6 +53,12 @@ type UpdateTableReplicaAutoScalingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *UpdateTableReplicaAutoScalingInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 type UpdateTableReplicaAutoScalingOutput struct {
 
 	// Returns information about the auto scaling settings of a table with replicas.

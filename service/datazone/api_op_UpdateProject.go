@@ -52,6 +52,13 @@ type UpdateProjectInput struct {
 	// The name to be updated as part of the UpdateProject action.
 	Name *string
 
+	// The project profile version to which the project should be updated. You can
+	// only specify the following string for this parameter: latest .
+	ProjectProfileVersion *string
+
+	// The user parameters of the project.
+	UserParameters []types.EnvironmentConfigurationUserParameter
+
 	noSmithyDocumentSerde
 }
 

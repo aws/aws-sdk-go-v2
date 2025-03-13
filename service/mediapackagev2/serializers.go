@@ -2197,6 +2197,175 @@ func awsRestjson1_serializeOpDocumentPutOriginEndpointPolicyInput(v *PutOriginEn
 	return nil
 }
 
+type awsRestjson1_serializeOpResetChannelState struct {
+}
+
+func (*awsRestjson1_serializeOpResetChannelState) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpResetChannelState) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ResetChannelStateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/channelGroup/{ChannelGroupName}/channel/{ChannelName}/reset")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsResetChannelStateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsResetChannelStateInput(v *ResetChannelStateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChannelGroupName == nil || len(*v.ChannelGroupName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelGroupName must not be empty")}
+	}
+	if v.ChannelGroupName != nil {
+		if err := encoder.SetURI("ChannelGroupName").String(*v.ChannelGroupName); err != nil {
+			return err
+		}
+	}
+
+	if v.ChannelName == nil || len(*v.ChannelName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelName must not be empty")}
+	}
+	if v.ChannelName != nil {
+		if err := encoder.SetURI("ChannelName").String(*v.ChannelName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpResetOriginEndpointState struct {
+}
+
+func (*awsRestjson1_serializeOpResetOriginEndpointState) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpResetOriginEndpointState) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ResetOriginEndpointStateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/reset")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsResetOriginEndpointStateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsResetOriginEndpointStateInput(v *ResetOriginEndpointStateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChannelGroupName == nil || len(*v.ChannelGroupName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelGroupName must not be empty")}
+	}
+	if v.ChannelGroupName != nil {
+		if err := encoder.SetURI("ChannelGroupName").String(*v.ChannelGroupName); err != nil {
+			return err
+		}
+	}
+
+	if v.ChannelName == nil || len(*v.ChannelName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelName must not be empty")}
+	}
+	if v.ChannelName != nil {
+		if err := encoder.SetURI("ChannelName").String(*v.ChannelName); err != nil {
+			return err
+		}
+	}
+
+	if v.OriginEndpointName == nil || len(*v.OriginEndpointName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member OriginEndpointName must not be empty")}
+	}
+	if v.OriginEndpointName != nil {
+		if err := encoder.SetURI("OriginEndpointName").String(*v.OriginEndpointName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 
@@ -2881,6 +3050,11 @@ func awsRestjson1_serializeDocumentCreateHlsManifestConfiguration(v *types.Creat
 		}
 	}
 
+	if v.UrlEncodeChildManifest != nil {
+		ok := object.Key("UrlEncodeChildManifest")
+		ok.Boolean(*v.UrlEncodeChildManifest)
+	}
+
 	return nil
 }
 
@@ -2940,6 +3114,11 @@ func awsRestjson1_serializeDocumentCreateLowLatencyHlsManifestConfiguration(v *t
 		if err := awsRestjson1_serializeDocumentStartTag(v.StartTag, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.UrlEncodeChildManifest != nil {
+		ok := object.Key("UrlEncodeChildManifest")
+		ok.Boolean(*v.UrlEncodeChildManifest)
 	}
 
 	return nil

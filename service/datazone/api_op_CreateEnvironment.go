@@ -131,6 +131,9 @@ type CreateEnvironmentOutput struct {
 	// The ID of the blueprint with which this Amazon DataZone environment was created.
 	EnvironmentBlueprintId *string
 
+	// The configuration ID of the environment.
+	EnvironmentConfigurationId *string
+
 	// The ID of the environment profile with which this Amazon DataZone environment
 	// was created.
 	EnvironmentProfileId *string

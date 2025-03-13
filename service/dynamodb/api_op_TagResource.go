@@ -63,6 +63,12 @@ type TagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *TagResourceInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.ResourceArn
+
+}
+
 type TagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

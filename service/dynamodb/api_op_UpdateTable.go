@@ -156,6 +156,12 @@ type UpdateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *UpdateTableInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 // Represents the output of an UpdateTable operation.
 type UpdateTableOutput struct {
 

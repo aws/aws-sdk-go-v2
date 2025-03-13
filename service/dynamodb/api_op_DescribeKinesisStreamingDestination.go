@@ -39,6 +39,12 @@ type DescribeKinesisStreamingDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *DescribeKinesisStreamingDestinationInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 type DescribeKinesisStreamingDestinationOutput struct {
 
 	// The list of replica structures for the table being described.

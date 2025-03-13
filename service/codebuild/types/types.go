@@ -1785,32 +1785,6 @@ type ProjectEnvironment struct {
 
 	// The type of build environment to use for related builds.
 	//
-	//   - The environment type ARM_CONTAINER is available only in regions US East (N.
-	//   Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific
-	//   (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and EU (Frankfurt).
-	//
-	//   - The environment type LINUX_CONTAINER is available only in regions US East
-	//   (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland),
-	//   EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia
-	//   Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China
-	//   (Ningxia).
-	//
-	//   - The environment type LINUX_GPU_CONTAINER is available only in regions US
-	//   East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU
-	//   (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
-	//   (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and
-	//   China (Ningxia).
-	//
-	//   - The environment types ARM_LAMBDA_CONTAINER and LINUX_LAMBDA_CONTAINER are
-	//   available only in regions US East (N. Virginia), US East (Ohio), US West
-	//   (Oregon), Asia Pacific (Mumbai), Asia Pacific (Singapore), Asia Pacific
-	//   (Sydney), Asia Pacific (Tokyo), EU (Frankfurt), EU (Ireland), and South America
-	//   (São Paulo).
-	//
-	//   - The environment types WINDOWS_CONTAINER and WINDOWS_SERVER_2019_CONTAINER
-	//   are available only in regions US East (N. Virginia), US East (Ohio), US West
-	//   (Oregon), and EU (Ireland).
-	//
 	// If you're using compute fleets during project creation, type will be ignored.
 	//
 	// For more information, see [Build environment compute types] in the CodeBuild user guide.
@@ -2745,9 +2719,9 @@ type WebhookFilter struct {
 	// This member is required.
 	Pattern *string
 
-	//  The type of webhook filter. There are nine webhook filter types: EVENT ,
+	//  The type of webhook filter. There are 11 webhook filter types: EVENT ,
 	// ACTOR_ACCOUNT_ID , HEAD_REF , BASE_REF , FILE_PATH , COMMIT_MESSAGE , TAG_NAME ,
-	// RELEASE_NAME , and WORKFLOW_NAME .
+	// RELEASE_NAME , REPOSITORY_NAME , ORGANIZATION_NAME , and WORKFLOW_NAME .
 	//
 	//   - EVENT
 	//
@@ -2788,18 +2762,14 @@ type WebhookFilter struct {
 	//   - A webhook triggers a build when the path of a changed file matches the
 	//   regular expression pattern .
 	//
-	// Works with GitHub and Bitbucket events push and pull requests events. Also
-	//   works with GitHub Enterprise push events, but does not work with GitHub
-	//   Enterprise pull request events.
+	// Works with push and pull request events only.
 	//
 	//   - COMMIT_MESSAGE
 	//
 	//   - A webhook triggers a build when the head commit message matches the regular
 	//   expression pattern .
 	//
-	// Works with GitHub and Bitbucket events push and pull requests events. Also
-	//   works with GitHub Enterprise push events, but does not work with GitHub
-	//   Enterprise pull request events.
+	// Works with push and pull request events only.
 	//
 	//   - TAG_NAME
 	//
@@ -2818,9 +2788,16 @@ type WebhookFilter struct {
 	//   - REPOSITORY_NAME
 	//
 	//   - A webhook triggers a build when the repository name matches the regular
-	//   expression pattern.
+	//   expression pattern .
 	//
 	// Works with GitHub global or organization webhooks only.
+	//
+	//   - ORGANIZATION_NAME
+	//
+	//   - A webhook triggers a build when the organization name matches the regular
+	//   expression pattern .
+	//
+	// Works with GitHub global webhooks only.
 	//
 	//   - WORKFLOW_NAME
 	//

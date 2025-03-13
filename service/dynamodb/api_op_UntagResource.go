@@ -61,6 +61,12 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *UntagResourceInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.ResourceArn
+
+}
+
 type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

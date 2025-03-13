@@ -216,6 +216,18 @@ var defaultPartitions = endpoints.Partitions{
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "polly-fips.ca-central-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "polly-fips.ca-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "polly.ca-central-1.api.aws",
@@ -273,6 +285,15 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "polly.eu-west-3.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "fips-ca-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "polly-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "fips-us-east-1",

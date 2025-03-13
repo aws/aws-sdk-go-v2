@@ -1068,16 +1068,17 @@ type WebhookFilterType string
 
 // Enum values for WebhookFilterType
 const (
-	WebhookFilterTypeEvent          WebhookFilterType = "EVENT"
-	WebhookFilterTypeBaseRef        WebhookFilterType = "BASE_REF"
-	WebhookFilterTypeHeadRef        WebhookFilterType = "HEAD_REF"
-	WebhookFilterTypeActorAccountId WebhookFilterType = "ACTOR_ACCOUNT_ID"
-	WebhookFilterTypeFilePath       WebhookFilterType = "FILE_PATH"
-	WebhookFilterTypeCommitMessage  WebhookFilterType = "COMMIT_MESSAGE"
-	WebhookFilterTypeWorkflowName   WebhookFilterType = "WORKFLOW_NAME"
-	WebhookFilterTypeTagName        WebhookFilterType = "TAG_NAME"
-	WebhookFilterTypeReleaseName    WebhookFilterType = "RELEASE_NAME"
-	WebhookFilterTypeRepositoryName WebhookFilterType = "REPOSITORY_NAME"
+	WebhookFilterTypeEvent            WebhookFilterType = "EVENT"
+	WebhookFilterTypeBaseRef          WebhookFilterType = "BASE_REF"
+	WebhookFilterTypeHeadRef          WebhookFilterType = "HEAD_REF"
+	WebhookFilterTypeActorAccountId   WebhookFilterType = "ACTOR_ACCOUNT_ID"
+	WebhookFilterTypeFilePath         WebhookFilterType = "FILE_PATH"
+	WebhookFilterTypeCommitMessage    WebhookFilterType = "COMMIT_MESSAGE"
+	WebhookFilterTypeWorkflowName     WebhookFilterType = "WORKFLOW_NAME"
+	WebhookFilterTypeTagName          WebhookFilterType = "TAG_NAME"
+	WebhookFilterTypeReleaseName      WebhookFilterType = "RELEASE_NAME"
+	WebhookFilterTypeRepositoryName   WebhookFilterType = "REPOSITORY_NAME"
+	WebhookFilterTypeOrganizationName WebhookFilterType = "ORGANIZATION_NAME"
 )
 
 // Values returns all known values for WebhookFilterType. Note that this can be
@@ -1096,6 +1097,7 @@ func (WebhookFilterType) Values() []WebhookFilterType {
 		"TAG_NAME",
 		"RELEASE_NAME",
 		"REPOSITORY_NAME",
+		"ORGANIZATION_NAME",
 	}
 }
 

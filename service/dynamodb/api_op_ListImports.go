@@ -43,6 +43,12 @@ type ListImportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *ListImportsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableArn
+
+}
+
 type ListImportsOutput struct {
 
 	//  A list of ImportSummary objects.

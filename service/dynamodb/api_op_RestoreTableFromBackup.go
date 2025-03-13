@@ -84,6 +84,12 @@ type RestoreTableFromBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *RestoreTableFromBackupInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TargetTableName
+
+}
+
 type RestoreTableFromBackupOutput struct {
 
 	// The description of the table created from an existing backup.

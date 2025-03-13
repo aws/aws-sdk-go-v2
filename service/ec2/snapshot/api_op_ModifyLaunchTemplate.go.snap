@@ -2,6 +2,7 @@ ModifyLaunchTemplate
 	Initialize stack step
 		spanInitializeStart
 		RegisterServiceMetadata
+		OperationIdempotencyTokenAutoFill
 		legacyEndpointContextSetter
 		SetLogger
 		spanInitializeEnd

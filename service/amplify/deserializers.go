@@ -7271,6 +7271,15 @@ func awsRestjson1_deserializeDocumentBranch(v **types.Branch, value interface{})
 				sv.EnablePullRequestPreview = ptr.Bool(jtv)
 			}
 
+		case "enableSkewProtection":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableSkewProtection to be of type *bool, got %T instead", value)
+				}
+				sv.EnableSkewProtection = ptr.Bool(jtv)
+			}
+
 		case "environmentVariables":
 			if err := awsRestjson1_deserializeDocumentEnvironmentVariables(&sv.EnvironmentVariables, value); err != nil {
 				return err

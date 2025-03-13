@@ -197,6 +197,14 @@ type CreateHlsManifestConfiguration struct {
 	// optionally specify whether to include a PRECISE value in the EXT-X-START tag.
 	StartTag *StartTag
 
+	// When enabled, MediaPackage URL-encodes the query string for API requests for
+	// HLS child manifests to comply with Amazon Web Services Signature Version 4
+	// (SigV4) signature signing protocol. For more information, see [Amazon Web Services Signature Version 4 for API requests]in Identity and
+	// Access Management User Guide.
+	//
+	// [Amazon Web Services Signature Version 4 for API requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html
+	UrlEncodeChildManifest *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -244,6 +252,14 @@ type CreateLowLatencyHlsManifestConfiguration struct {
 	// configuration object with a valid TimeOffset. When you do, you can also
 	// optionally specify whether to include a PRECISE value in the EXT-X-START tag.
 	StartTag *StartTag
+
+	// When enabled, MediaPackage URL-encodes the query string for API requests for
+	// LL-HLS child manifests to comply with Amazon Web Services Signature Version 4
+	// (SigV4) signature signing protocol. For more information, see [Amazon Web Services Signature Version 4 for API requests]in Identity and
+	// Access Management User Guide.
+	//
+	// [Amazon Web Services Signature Version 4 for API requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html
+	UrlEncodeChildManifest *bool
 
 	noSmithyDocumentSerde
 }
@@ -564,6 +580,14 @@ type GetHlsManifestConfiguration struct {
 	// optionally specify whether to include a PRECISE value in the EXT-X-START tag.
 	StartTag *StartTag
 
+	// When enabled, MediaPackage URL-encodes the query string for API requests for
+	// HLS child manifests to comply with Amazon Web Services Signature Version 4
+	// (SigV4) signature signing protocol. For more information, see [Amazon Web Services Signature Version 4 for API requests]in Identity and
+	// Access Management User Guide.
+	//
+	// [Amazon Web Services Signature Version 4 for API requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html
+	UrlEncodeChildManifest *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -616,6 +640,14 @@ type GetLowLatencyHlsManifestConfiguration struct {
 	// configuration object with a valid TimeOffset. When you do, you can also
 	// optionally specify whether to include a PRECISE value in the EXT-X-START tag.
 	StartTag *StartTag
+
+	// When enabled, MediaPackage URL-encodes the query string for API requests for
+	// LL-HLS child manifests to comply with Amazon Web Services Signature Version 4
+	// (SigV4) signature signing protocol. For more information, see [Amazon Web Services Signature Version 4 for API requests]in Identity and
+	// Access Management User Guide.
+	//
+	// [Amazon Web Services Signature Version 4 for API requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html
+	UrlEncodeChildManifest *bool
 
 	noSmithyDocumentSerde
 }

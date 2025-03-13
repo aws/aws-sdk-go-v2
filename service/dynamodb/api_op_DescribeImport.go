@@ -37,6 +37,12 @@ type DescribeImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *DescribeImportInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.ImportArn
+
+}
+
 type DescribeImportOutput struct {
 
 	//  Represents the properties of the table created for the import, and parameters

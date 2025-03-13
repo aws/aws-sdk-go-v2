@@ -107,6 +107,14 @@ type GetDataAccessOutput struct {
 	// The temporary credential token that S3 Access Grants vends.
 	Credentials *types.Credentials
 
+	// The user, group, or role that was granted access to the S3 location scope. For
+	// directory identities, this API also returns the grants of the IAM role used for
+	// the identity-aware request. For more information on identity-aware sessions, see
+	// [Granting permissions to use identity-aware console sessions].
+	//
+	// [Granting permissions to use identity-aware console sessions]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_sts-setcontext.html
+	Grantee *types.Grantee
+
 	// The S3 URI path of the data to which you are being granted temporary access
 	// credentials.
 	MatchedGrantTarget *string

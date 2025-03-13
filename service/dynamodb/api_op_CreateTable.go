@@ -253,6 +253,12 @@ type CreateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *CreateTableInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 // Represents the output of a CreateTable operation.
 type CreateTableOutput struct {
 

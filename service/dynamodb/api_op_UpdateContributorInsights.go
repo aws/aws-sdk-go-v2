@@ -52,6 +52,12 @@ type UpdateContributorInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *UpdateContributorInsightsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 type UpdateContributorInsightsOutput struct {
 
 	// The status of contributor insights

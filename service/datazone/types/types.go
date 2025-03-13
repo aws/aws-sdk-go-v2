@@ -1950,6 +1950,9 @@ type EnvironmentConfigurationUserParameter struct {
 	// The environment configuration name.
 	EnvironmentConfigurationName *string
 
+	// The ID of the environment.
+	EnvironmentId *string
+
 	// The environment parameters.
 	EnvironmentParameters []EnvironmentParameter
 
@@ -2085,6 +2088,9 @@ type EnvironmentSummary struct {
 
 	// The description of the environment.
 	Description *string
+
+	// The configuration ID with which the environment is created.
+	EnvironmentConfigurationId *string
 
 	// The identifier of the environment profile with which the environment was
 	// created.
@@ -2992,7 +2998,8 @@ type LakeFormationConfiguration struct {
 	LocationRegistrationExcludeS3Locations []string
 
 	// The role that is used to manage read/write access to the chosen Amazon S3
-	// bucket(s) for Data Lake using AWS Lake Formation hybrid access mode.
+	// bucket(s) for Data Lake using Amazon Web Services Lake Formation hybrid access
+	// mode.
 	LocationRegistrationRole *string
 
 	noSmithyDocumentSerde

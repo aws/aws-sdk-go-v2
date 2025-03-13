@@ -95,6 +95,12 @@ type PutResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *PutResourcePolicyInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.ResourceArn
+
+}
+
 type PutResourcePolicyOutput struct {
 
 	// A unique string that represents the revision ID of the policy. If you're

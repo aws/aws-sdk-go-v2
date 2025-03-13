@@ -450,6 +450,46 @@ func (m *validateOpPutOriginEndpointPolicy) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpResetChannelState struct {
+}
+
+func (*validateOpResetChannelState) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResetChannelState) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResetChannelStateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResetChannelStateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpResetOriginEndpointState struct {
+}
+
+func (*validateOpResetOriginEndpointState) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResetOriginEndpointState) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResetOriginEndpointStateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResetOriginEndpointStateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -636,6 +676,14 @@ func addOpPutChannelPolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutOriginEndpointPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutOriginEndpointPolicy{}, middleware.After)
+}
+
+func addOpResetChannelStateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResetChannelState{}, middleware.After)
+}
+
+func addOpResetOriginEndpointStateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResetOriginEndpointState{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1498,6 +1546,45 @@ func validateOpPutOriginEndpointPolicyInput(v *PutOriginEndpointPolicyInput) err
 	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResetChannelStateInput(v *ResetChannelStateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResetChannelStateInput"}
+	if v.ChannelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelGroupName"))
+	}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResetOriginEndpointStateInput(v *ResetOriginEndpointStateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResetOriginEndpointStateInput"}
+	if v.ChannelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelGroupName"))
+	}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.OriginEndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginEndpointName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

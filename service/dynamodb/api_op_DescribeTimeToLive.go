@@ -39,6 +39,12 @@ type DescribeTimeToLiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *DescribeTimeToLiveInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 type DescribeTimeToLiveOutput struct {
 
 	//

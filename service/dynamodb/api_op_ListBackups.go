@@ -82,6 +82,12 @@ type ListBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *ListBackupsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 type ListBackupsOutput struct {
 
 	// List of BackupSummary objects.

@@ -110,6 +110,9 @@ type GetChannelOutput struct {
 	// InputType is CMAF .
 	OutputHeaderConfiguration *types.OutputHeaderConfiguration
 
+	// The time that the channel was last reset.
+	ResetAt *time.Time
+
 	// The comma-separated list of tag key:value pairs assigned to the channel.
 	Tags map[string]string
 

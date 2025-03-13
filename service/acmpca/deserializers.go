@@ -1971,6 +1971,9 @@ func awsAwsjson11_deserializeOpErrorListTags(response *smithyhttp.Response, meta
 	case strings.EqualFold("InvalidStateException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidStateException(response, errorBody)
 
+	case strings.EqualFold("RequestFailedException", errorCode):
+		return awsAwsjson11_deserializeErrorRequestFailedException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 

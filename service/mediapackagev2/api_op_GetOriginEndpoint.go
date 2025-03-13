@@ -122,6 +122,9 @@ type GetOriginEndpointOutput struct {
 	// A low-latency HLS manifest configuration.
 	LowLatencyHlsManifests []types.GetLowLatencyHlsManifestConfiguration
 
+	// The time that the origin endpoint was last reset.
+	ResetAt *time.Time
+
 	// The size of the window (in seconds) to create a window of the live stream
 	// that's available for on-demand viewing. Viewers can start-over or catch-up on
 	// content that falls within the window.

@@ -43,6 +43,12 @@ type ListContributorInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *ListContributorInsightsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 type ListContributorInsightsOutput struct {
 
 	// A list of ContributorInsightsSummary.

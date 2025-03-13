@@ -73,6 +73,12 @@ type CreateBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *CreateBackupInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 type CreateBackupOutput struct {
 
 	// Contains the details of the backup created for the table.

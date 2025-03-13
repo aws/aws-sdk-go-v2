@@ -20,6 +20,9 @@ type AutoParticipantRecordingConfiguration struct {
 	// This member is required.
 	StorageConfigurationArn *string
 
+	// HLS configuration object for individual participant recording.
+	HlsConfiguration *ParticipantRecordingHlsConfiguration
+
 	// Types of media to be recorded. Default: AUDIO_VIDEO .
 	MediaTypes []ParticipantRecordingMediaType
 
@@ -100,6 +103,18 @@ type Composition struct {
 	//
 	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// An object representing a configuration of HLS recordings for server-side
+// composition.
+type CompositionRecordingHlsConfiguration struct {
+
+	// Defines the target duration for recorded segments generated when using
+	// composite recording. Segments may have durations shorter than the specified
+	// value when needed to ensure each segment begins with a keyframe. Default: 2.
+	TargetSegmentDurationSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -561,9 +576,7 @@ type Participant struct {
 
 	// S3 prefix of the S3 bucket where the participant is being recorded, if
 	// individual participant recording is enabled, or "" (empty string), if recording
-	// is not enabled. If individual participant recording merge is enabled, and if a
-	// stage publisher disconnects from a stage and then reconnects, IVS tries to
-	// record to the same S3 prefix as the previous session. See Merge Fragmented Individual Participant Recordings.
+	// is not enabled.
 	RecordingS3Prefix *string
 
 	// The participant’s recording state.
@@ -580,6 +593,18 @@ type Participant struct {
 	// encoded text. This field is exposed to all stage participants and should not be
 	// used for personally identifying, confidential, or sensitive information.
 	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// An object representing a configuration of participant HLS recordings for
+// individual participant recording.
+type ParticipantRecordingHlsConfiguration struct {
+
+	// Defines the target duration for recorded segments generated when recording a
+	// stage participant. Segments may have durations longer than the specified value
+	// when needed to ensure each segment begins with a keyframe. Default: 6.
+	TargetSegmentDurationSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -800,6 +825,10 @@ type RecordingConfiguration struct {
 
 	// The recording format for storing a recording in Amazon S3.
 	Format RecordingConfigurationFormat
+
+	// An HLS configuration object to return information about how the recording will
+	// be configured.
+	HlsConfiguration *CompositionRecordingHlsConfiguration
 
 	noSmithyDocumentSerde
 }

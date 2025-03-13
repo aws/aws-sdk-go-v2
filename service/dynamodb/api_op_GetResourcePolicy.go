@@ -67,6 +67,12 @@ type GetResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *GetResourcePolicyInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.ResourceArn
+
+}
+
 type GetResourcePolicyOutput struct {
 
 	// The resource-based policy document attached to the resource, which can be a

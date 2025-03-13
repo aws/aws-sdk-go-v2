@@ -50,6 +50,12 @@ type DescribeGlobalTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *DescribeGlobalTableInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.GlobalTableName
+
+}
+
 type DescribeGlobalTableOutput struct {
 
 	// Contains the details of the global table.

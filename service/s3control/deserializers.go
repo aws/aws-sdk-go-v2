@@ -6885,6 +6885,12 @@ func awsRestxml_deserializeOpDocumentGetDataAccessOutput(v **GetDataAccessOutput
 				return err
 			}
 
+		case strings.EqualFold("Grantee", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentGrantee(&sv.Grantee, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("MatchedGrantTarget", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

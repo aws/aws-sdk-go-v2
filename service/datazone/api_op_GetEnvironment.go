@@ -91,6 +91,9 @@ type GetEnvironmentOutput struct {
 	// The blueprint with which the environment is created.
 	EnvironmentBlueprintId *string
 
+	// The configuration ID that is used to create the environment.
+	EnvironmentConfigurationId *string
+
 	// The ID of the environment profile with which the environment is created.
 	EnvironmentProfileId *string
 

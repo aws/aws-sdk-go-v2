@@ -14440,6 +14440,11 @@ func awsRestjson1_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironment
 	object := value.Object()
 	defer object.Close()
 
+	if v.BlueprintVersion != nil {
+		ok := object.Key("blueprintVersion")
+		ok.String(*v.BlueprintVersion)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -14455,6 +14460,13 @@ func awsRestjson1_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironment
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.UserParameters != nil {
+		ok := object.Key("userParameters")
+		if err := awsRestjson1_serializeDocumentEnvironmentParametersList(v.UserParameters, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -15177,6 +15189,18 @@ func awsRestjson1_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.ProjectProfileVersion != nil {
+		ok := object.Key("projectProfileVersion")
+		ok.String(*v.ProjectProfileVersion)
+	}
+
+	if v.UserParameters != nil {
+		ok := object.Key("userParameters")
+		if err := awsRestjson1_serializeDocumentEnvironmentConfigurationUserParametersList(v.UserParameters, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -16882,6 +16906,11 @@ func awsRestjson1_serializeDocumentEnvironmentConfigurationUserParameter(v *type
 	if v.EnvironmentConfigurationName != nil {
 		ok := object.Key("environmentConfigurationName")
 		ok.String(*v.EnvironmentConfigurationName)
+	}
+
+	if v.EnvironmentId != nil {
+		ok := object.Key("environmentId")
+		ok.String(*v.EnvironmentId)
 	}
 
 	if v.EnvironmentParameters != nil {

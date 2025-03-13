@@ -67,7 +67,7 @@ type CreateBranchInput struct {
 	// access specific Amazon Web Services resources based on the role's permissions.
 	// For more information about the SSR Compute role, see [Adding an SSR Compute role]in the Amplify User Guide.
 	//
-	// [Adding an SSR Compute role]: https://docs.aws.amazon.com/latest/userguide/amplify-SSR-compute-role.html
+	// [Adding an SSR Compute role]: https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html
 	ComputeRoleArn *string
 
 	// The description for the branch.
@@ -94,6 +94,18 @@ type CreateBranchInput struct {
 
 	//  Enables pull request previews for this branch.
 	EnablePullRequestPreview *bool
+
+	// Specifies whether the skew protection feature is enabled for the branch.
+	//
+	// Deployment skew protection is available to Amplify applications to eliminate
+	// version skew issues between client and servers in web applications. When you
+	// apply skew protection to a branch, you can ensure that your clients always
+	// interact with the correct version of server-side assets, regardless of when a
+	// deployment occurs. For more information about skew protection, see [Skew protection for Amplify deployments]in the
+	// Amplify User Guide.
+	//
+	// [Skew protection for Amplify deployments]: https://docs.aws.amazon.com/amplify/latest/userguide/skew-protection.html
+	EnableSkewProtection *bool
 
 	//  The environment variables for the branch.
 	EnvironmentVariables map[string]string

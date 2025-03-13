@@ -1,0 +1,8 @@
+{
+    "id": "b57fc9fe-d9b3-47b0-8d6f-9d6a057a094e",
+    "type": "feature",
+    "description": "Updated CreateLogAnomalyDetector to accept only kms key arn",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

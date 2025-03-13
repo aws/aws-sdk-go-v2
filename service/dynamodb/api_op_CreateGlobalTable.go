@@ -95,6 +95,12 @@ type CreateGlobalTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *CreateGlobalTableInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.GlobalTableName
+
+}
+
 type CreateGlobalTableOutput struct {
 
 	// Contains the details of the global table.

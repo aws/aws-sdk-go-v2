@@ -50,6 +50,12 @@ type ListTagsOfResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *ListTagsOfResourceInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.ResourceArn
+
+}
+
 type ListTagsOfResourceOutput struct {
 
 	// If this value is returned, there are additional results to be displayed. To

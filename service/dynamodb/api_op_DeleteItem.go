@@ -203,6 +203,12 @@ type DeleteItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *DeleteItemInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 // Represents the output of a DeleteItem operation.
 type DeleteItemOutput struct {
 

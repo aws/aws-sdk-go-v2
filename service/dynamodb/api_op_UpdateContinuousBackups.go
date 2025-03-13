@@ -56,6 +56,12 @@ type UpdateContinuousBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *UpdateContinuousBackupsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 type UpdateContinuousBackupsOutput struct {
 
 	// Represents the continuous backups and point in time recovery settings on the

@@ -54,6 +54,12 @@ type DescribeTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *DescribeTableInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 // Represents the output of a DescribeTable operation.
 type DescribeTableOutput struct {
 

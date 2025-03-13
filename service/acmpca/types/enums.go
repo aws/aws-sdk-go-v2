@@ -230,9 +230,11 @@ type KeyAlgorithm string
 // Enum values for KeyAlgorithm
 const (
 	KeyAlgorithmRsa2048      KeyAlgorithm = "RSA_2048"
+	KeyAlgorithmRsa3072      KeyAlgorithm = "RSA_3072"
 	KeyAlgorithmRsa4096      KeyAlgorithm = "RSA_4096"
 	KeyAlgorithmEcPrime256v1 KeyAlgorithm = "EC_prime256v1"
 	KeyAlgorithmEcSecp384r1  KeyAlgorithm = "EC_secp384r1"
+	KeyAlgorithmEcSecp521r1  KeyAlgorithm = "EC_secp521r1"
 	KeyAlgorithmSm2          KeyAlgorithm = "SM2"
 )
 
@@ -243,9 +245,11 @@ const (
 func (KeyAlgorithm) Values() []KeyAlgorithm {
 	return []KeyAlgorithm{
 		"RSA_2048",
+		"RSA_3072",
 		"RSA_4096",
 		"EC_prime256v1",
 		"EC_secp384r1",
+		"EC_secp521r1",
 		"SM2",
 	}
 }

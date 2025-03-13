@@ -67,6 +67,19 @@ type ImportTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *ImportTableInput) bindEndpointParams(p *EndpointParameters) {
+	func() {
+		v1 := in.TableCreationParameters
+		var v2 *string
+		if v1 != nil {
+			v3 := v1.TableName
+			v2 = v3
+		}
+		p.ResourceArn = v2
+	}()
+
+}
+
 type ImportTableOutput struct {
 
 	//  Represents the properties of the table created for the import, and parameters

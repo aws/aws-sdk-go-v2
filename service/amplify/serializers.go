@@ -466,6 +466,11 @@ func awsRestjson1_serializeOpDocumentCreateBranchInput(v *CreateBranchInput, val
 		ok.Boolean(*v.EnablePullRequestPreview)
 	}
 
+	if v.EnableSkewProtection != nil {
+		ok := object.Key("enableSkewProtection")
+		ok.Boolean(*v.EnableSkewProtection)
+	}
+
 	if v.EnvironmentVariables != nil {
 		ok := object.Key("environmentVariables")
 		if err := awsRestjson1_serializeDocumentEnvironmentVariables(v.EnvironmentVariables, ok); err != nil {
@@ -3452,6 +3457,11 @@ func awsRestjson1_serializeOpDocumentUpdateBranchInput(v *UpdateBranchInput, val
 	if v.EnablePullRequestPreview != nil {
 		ok := object.Key("enablePullRequestPreview")
 		ok.Boolean(*v.EnablePullRequestPreview)
+	}
+
+	if v.EnableSkewProtection != nil {
+		ok := object.Key("enableSkewProtection")
+		ok.Boolean(*v.EnableSkewProtection)
 	}
 
 	if v.EnvironmentVariables != nil {

@@ -338,6 +338,30 @@ func TestCheckSnapshot_PutOriginEndpointPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ResetChannelState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResetChannelState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ResetChannelState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ResetOriginEndpointState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResetOriginEndpointState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ResetOriginEndpointState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -666,6 +690,30 @@ func TestUpdateSnapshot_PutOriginEndpointPolicy(t *testing.T) {
 	_, err := svc.PutOriginEndpointPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutOriginEndpointPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ResetChannelState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResetChannelState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ResetChannelState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ResetOriginEndpointState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResetOriginEndpointState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ResetOriginEndpointState")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

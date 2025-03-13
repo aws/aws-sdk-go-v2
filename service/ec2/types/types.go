@@ -842,7 +842,7 @@ type AvailabilityZone struct {
 	// opt-in-not-required .
 	//
 	// For Local Zones and Wavelength Zones, this parameter is the opt-in status. The
-	// possible values are opted-in , and not-opted-in .
+	// possible values are opted-in and not-opted-in .
 	OptInStatus AvailabilityZoneOptInStatus
 
 	// The ID of the zone that handles some of the Local Zone or Wavelength Zone
@@ -856,8 +856,8 @@ type AvailabilityZone struct {
 	// The name of the Region.
 	RegionName *string
 
-	// The state of the Availability Zone, Local Zone, or Wavelength Zone. This value
-	// is always available .
+	// The state of the Availability Zone, Local Zone, or Wavelength Zone. The
+	// possible values are available , unavailable , and constrained .
 	State AvailabilityZoneState
 
 	// The ID of the Availability Zone, Local Zone, or Wavelength Zone.
@@ -866,8 +866,9 @@ type AvailabilityZone struct {
 	// The name of the Availability Zone, Local Zone, or Wavelength Zone.
 	ZoneName *string
 
-	// The type of zone. The valid values are availability-zone , local-zone , and
-	// wavelength-zone .
+	// The type of zone.
+	//
+	// Valid values: availability-zone | local-zone | wavelength-zone
 	ZoneType *string
 
 	noSmithyDocumentSerde
@@ -5388,12 +5389,12 @@ type FleetEbsBlockDeviceRequest struct {
 	// Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed
 	// KMS key to use for EBS encryption.
 	//
-	// This parameter is only supported on BlockDeviceMapping objects called by [CreateFleet], [RequestSpotInstances],
-	// and [RunInstances].
+	// This parameter is only supported on BlockDeviceMapping objects called by [RunInstances], [RequestSpotFleet],
+	// and [RequestSpotInstances].
 	//
-	// [CreateFleet]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet.html
 	// [RequestSpotInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
 	// [RunInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
+	// [RequestSpotFleet]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html
 	KmsKeyId *string
 
 	// The ID of the snapshot.
@@ -5582,6 +5583,21 @@ type FleetLaunchTemplateOverridesRequest struct {
 	// The block device mapping, which defines the EBS volumes and instance store
 	// volumes to attach to the instance at launch. For more information, see [Block device mappings for volumes on Amazon EC2 instances]in the
 	// Amazon EC2 User Guide.
+	//
+	// To override a block device mapping specified in the launch template:
+	//
+	//   - Specify the exact same DeviceName here as specified in the launch template.
+	//
+	//   - Only specify the parameters you want to change.
+	//
+	//   - Any parameters you don't specify here will keep their original launch
+	//   template values.
+	//
+	// To add a new block device mapping:
+	//
+	//   - Specify a DeviceName that doesn't exist in the launch template.
+	//
+	//   - Specify all desired parameters here.
 	//
 	// [Block device mappings for volumes on Amazon EC2 instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
 	BlockDeviceMappings []FleetBlockDeviceMappingRequest
@@ -7479,10 +7495,6 @@ type InstanceEventWindowAssociationTarget struct {
 
 	// The instance tags associated with the event window. Any instances associated
 	// with the tags will be associated with the event window.
-	//
-	// Note that while you can't create tag keys beginning with aws: , you can specify
-	// existing Amazon Web Services managed tag keys (with the aws: prefix) when
-	// specifying them as targets to associate with the event window.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -8268,6 +8280,8 @@ type InstanceRequirements struct {
 	//   - For instance types with FPGA accelerators, specify fpga .
 	//
 	//   - For instance types with GPU accelerators, specify gpu .
+	//
+	//   - For instance types with Inference accelerators, specify inference .
 	//
 	//   - For instance types with Inference accelerators, specify inference .
 	//
@@ -13854,11 +13868,11 @@ type OperatorRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describes whether the resource is managed by a service provider and, if so,
+// Describes whether the resource is managed by an service provider and, if so,
 // describes the service provider that manages it.
 type OperatorResponse struct {
 
-	// If true , the resource is managed by a service provider.
+	// If true , the resource is managed by an service provider.
 	Managed *bool
 
 	// If managed is true , then the principal is returned. The principal is the

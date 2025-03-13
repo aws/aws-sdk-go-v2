@@ -80,6 +80,12 @@ type UpdateGlobalTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *UpdateGlobalTableInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.GlobalTableName
+
+}
+
 type UpdateGlobalTableOutput struct {
 
 	// Contains the details of the global table.

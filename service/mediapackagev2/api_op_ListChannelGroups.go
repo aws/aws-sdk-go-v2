@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves all channel groups that are configured in AWS Elemental MediaPackage,
-// including the channels and origin endpoints that are associated with it.
+// Retrieves all channel groups that are configured in Elemental MediaPackage.
 func (c *Client) ListChannelGroups(ctx context.Context, params *ListChannelGroupsInput, optFns ...func(*Options)) (*ListChannelGroupsOutput, error) {
 	if params == nil {
 		params = &ListChannelGroupsInput{}

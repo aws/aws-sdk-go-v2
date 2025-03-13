@@ -326,6 +326,12 @@ type ScanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *ScanInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 // Represents the output of a Scan operation.
 type ScanOutput struct {
 

@@ -37,6 +37,12 @@ type DescribeExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *DescribeExportInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.ExportArn
+
+}
+
 type DescribeExportOutput struct {
 
 	// Represents the properties of the export.

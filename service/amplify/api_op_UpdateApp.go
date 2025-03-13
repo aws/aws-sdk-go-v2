@@ -72,7 +72,7 @@ type UpdateAppInput struct {
 	// specific Amazon Web Services resources based on the role's permissions. For more
 	// information about the SSR Compute role, see [Adding an SSR Compute role]in the Amplify User Guide.
 	//
-	// [Adding an SSR Compute role]: https://docs.aws.amazon.com/latest/userguide/amplify-SSR-compute-role.html
+	// [Adding an SSR Compute role]: https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html
 	ComputeRoleArn *string
 
 	// The custom HTTP headers for an Amplify app.

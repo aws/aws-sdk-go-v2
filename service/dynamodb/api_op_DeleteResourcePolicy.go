@@ -63,6 +63,12 @@ type DeleteResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *DeleteResourcePolicyInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.ResourceArn
+
+}
+
 type DeleteResourcePolicyOutput struct {
 
 	// A unique string that represents the revision ID of the policy. If you're

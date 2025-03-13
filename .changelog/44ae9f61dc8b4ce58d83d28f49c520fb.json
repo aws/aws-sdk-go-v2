@@ -1,0 +1,8 @@
+{
+    "id": "44ae9f61-dc8b-4ce5-8d83-d28f49c520fb",
+    "type": "feature",
+    "description": "Generate account endpoints for DynamoDB requests using ARN-sourced account ID when available",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

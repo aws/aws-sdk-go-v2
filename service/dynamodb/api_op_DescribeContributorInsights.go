@@ -43,6 +43,12 @@ type DescribeContributorInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *DescribeContributorInsightsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 type DescribeContributorInsightsOutput struct {
 
 	// List of names of the associated contributor insights rules.

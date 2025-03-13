@@ -50,6 +50,12 @@ type EnableKinesisStreamingDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *EnableKinesisStreamingDestinationInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 type EnableKinesisStreamingDestinationOutput struct {
 
 	// The current status of the replication.

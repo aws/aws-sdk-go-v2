@@ -46,7 +46,11 @@ type CreateDataSourceInput struct {
 	// This member is required.
 	ProjectIdentifier *string
 
-	// The type of the data source.
+	// The type of the data source. In Amazon DataZone, you can use data sources to
+	// import technical metadata of assets (data) from the source databases or data
+	// warehouses into Amazon DataZone. In the current release of Amazon DataZone, you
+	// can create and run data sources for Amazon Web Services Glue and Amazon
+	// Redshift.
 	//
 	// This member is required.
 	Type *string

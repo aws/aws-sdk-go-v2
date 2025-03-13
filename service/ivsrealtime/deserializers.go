@@ -6118,6 +6118,11 @@ func awsRestjson1_deserializeDocumentAutoParticipantRecordingConfiguration(v **t
 
 	for key, value := range shape {
 		switch key {
+		case "hlsConfiguration":
+			if err := awsRestjson1_deserializeDocumentParticipantRecordingHlsConfiguration(&sv.HlsConfiguration, value); err != nil {
+				return err
+			}
+
 		case "mediaTypes":
 			if err := awsRestjson1_deserializeDocumentParticipantRecordingMediaTypeList(&sv.MediaTypes, value); err != nil {
 				return err
@@ -6296,6 +6301,50 @@ func awsRestjson1_deserializeDocumentComposition(v **types.Composition, value in
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCompositionRecordingHlsConfiguration(v **types.CompositionRecordingHlsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CompositionRecordingHlsConfiguration
+	if *v == nil {
+		sv = &types.CompositionRecordingHlsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "targetSegmentDurationSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CompositionRecordingTargetSegmentDurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetSegmentDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -7960,6 +8009,50 @@ func awsRestjson1_deserializeDocumentParticipantList(v *[]types.ParticipantSumma
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentParticipantRecordingHlsConfiguration(v **types.ParticipantRecordingHlsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ParticipantRecordingHlsConfiguration
+	if *v == nil {
+		sv = &types.ParticipantRecordingHlsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "targetSegmentDurationSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ParticipantRecordingTargetSegmentDurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetSegmentDurationSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentParticipantRecordingMediaTypeList(v *[]types.ParticipantRecordingMediaType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8781,6 +8874,11 @@ func awsRestjson1_deserializeDocumentRecordingConfiguration(v **types.RecordingC
 					return fmt.Errorf("expected RecordingConfigurationFormat to be of type string, got %T instead", value)
 				}
 				sv.Format = types.RecordingConfigurationFormat(jtv)
+			}
+
+		case "hlsConfiguration":
+			if err := awsRestjson1_deserializeDocumentCompositionRecordingHlsConfiguration(&sv.HlsConfiguration, value); err != nil {
+				return err
 			}
 
 		default:

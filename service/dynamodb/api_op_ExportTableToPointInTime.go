@@ -100,6 +100,12 @@ type ExportTableToPointInTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *ExportTableToPointInTimeInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableArn
+
+}
+
 type ExportTableToPointInTimeOutput struct {
 
 	// Contains a description of the table export.

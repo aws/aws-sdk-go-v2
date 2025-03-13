@@ -40,6 +40,12 @@ type DeleteBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *DeleteBackupInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.BackupArn
+
+}
+
 type DeleteBackupOutput struct {
 
 	// Contains the description of the backup created for the table.

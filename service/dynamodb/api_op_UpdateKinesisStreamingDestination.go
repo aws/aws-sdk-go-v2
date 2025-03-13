@@ -47,6 +47,12 @@ type UpdateKinesisStreamingDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *UpdateKinesisStreamingDestinationInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ResourceArn = in.TableName
+
+}
+
 type UpdateKinesisStreamingDestinationOutput struct {
 
 	// The status of the attempt to update the Kinesis streaming destination output.

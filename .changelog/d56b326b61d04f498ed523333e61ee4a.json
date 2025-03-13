@@ -1,0 +1,8 @@
+{
+    "id": "d56b326b-61d0-4f49-8ed5-23333e61ee4a",
+    "type": "feature",
+    "description": "AWS CodeBuild now supports webhook filtering by organization name",
+    "modules": [
+        "service/codebuild"
+    ]
+}
