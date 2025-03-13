@@ -4307,7 +4307,7 @@
                 "type": {
                     "target": "com.amazonaws.datazone#DataSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the data source.</p>",
+                        "smithy.api#documentation": "<p>The type of the data source. In Amazon DataZone, you can use data sources to import\n         technical metadata of assets (data) from the source databases or data warehouses into\n         Amazon DataZone. In the current release of Amazon DataZone, you can create and run data\n         sources for Amazon Web Services Glue and Amazon Redshift.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5248,6 +5248,12 @@
                     "target": "com.amazonaws.datazone#EnvironmentBlueprintId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the blueprint with which this Amazon DataZone environment was created.</p>"
+                    }
+                },
+                "environmentConfigurationId": {
+                    "target": "com.amazonaws.datazone#EnvironmentConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration ID of the environment.</p>"
                     }
                 }
             },
@@ -12815,6 +12821,12 @@
         "com.amazonaws.datazone#EnvironmentConfigurationUserParameter": {
             "type": "structure",
             "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment.</p>"
+                    }
+                },
                 "environmentConfigurationName": {
                     "target": "com.amazonaws.datazone#EnvironmentConfigurationName",
                     "traits": {
@@ -13224,6 +13236,12 @@
                     "target": "com.amazonaws.datazone#EnvironmentStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the environment.</p>"
+                    }
+                },
+                "environmentConfigurationId": {
+                    "target": "com.amazonaws.datazone#EnvironmentConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration ID with which the environment is created.</p>"
                     }
                 }
             },
@@ -15985,6 +16003,12 @@
                     "target": "com.amazonaws.datazone#EnvironmentBlueprintId",
                     "traits": {
                         "smithy.api#documentation": "<p>The blueprint with which the environment is created.</p>"
+                    }
+                },
+                "environmentConfigurationId": {
+                    "target": "com.amazonaws.datazone#EnvironmentConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration ID that is used to create the environment.</p>"
                     }
                 }
             },
@@ -19270,13 +19294,13 @@
                 "validateCredentials": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Speciefies whether to validate credentials of the Amazon Web Services Glue connection.</p>"
+                        "smithy.api#documentation": "<p>Speciefies whether to validate credentials of the Amazon Web Services Glue\n         connection.</p>"
                     }
                 },
                 "validateForComputeEnvironments": {
                     "target": "com.amazonaws.datazone#ComputeEnvironmentsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Speciefies whether to validate for compute environments of the Amazon Web Services Glue connection.</p>"
+                        "smithy.api#documentation": "<p>Speciefies whether to validate for compute environments of the Amazon Web Services Glue\n         connection.</p>"
                     }
                 },
                 "sparkProperties": {
@@ -19918,7 +19942,7 @@
                 "glueLineageSyncEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a connection.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a\n         connection.</p>"
                     }
                 }
             },
@@ -19938,7 +19962,7 @@
                 "glueLineageSyncEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a connection.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a\n         connection.</p>"
                     }
                 }
             },
@@ -19952,7 +19976,7 @@
                 "glueLineageSyncEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a connection.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a\n         connection.</p>"
                     }
                 }
             },
@@ -20330,7 +20354,7 @@
                 "locationRegistrationRole": {
                     "target": "com.amazonaws.datazone#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The role that is used to manage read/write access to the chosen Amazon S3 bucket(s) for\n         Data Lake using AWS Lake Formation hybrid access mode.</p>"
+                        "smithy.api#documentation": "<p>The role that is used to manage read/write access to the chosen Amazon S3 bucket(s) for\n         Data Lake using Amazon Web Services Lake Formation hybrid access mode.</p>"
                     }
                 },
                 "locationRegistrationExcludeS3Locations": {
@@ -20812,7 +20836,7 @@
                 "numQueriesFailed": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of queries that failed in the SQL query run details of a data lineage run.</p>"
+                        "smithy.api#documentation": "<p>The number of queries that failed in the SQL query run details of a data lineage\n         run.</p>"
                     }
                 },
                 "errorMessages": {
@@ -25427,7 +25451,7 @@
                 "aWSManagedClientApplicationReference": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services managed client application reference in the OAuth2Client application.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services managed client application reference in the OAuth2Client\n         application.</p>",
                         "smithy.api#length": {
                             "max": 2048
                         },
@@ -26511,6 +26535,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
                     }
                 }
             }
@@ -30042,7 +30078,7 @@
                 "glueConnectionName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Glue connection name in the Spark Amazon Web Services Glue properties.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Glue connection name in the Spark Amazon Web Services Glue\n         properties.</p>",
                         "smithy.api#length": {
                             "max": 256
                         }
@@ -30051,7 +30087,7 @@
                 "glueVersion": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Glue version in the Spark Amazon Web Services Glue properties.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Glue version in the Spark Amazon Web Services Glue\n         properties.</p>",
                         "smithy.api#length": {
                             "max": 256
                         }
@@ -30113,13 +30149,13 @@
                 "glueConnectionName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Glue connection name in the Spark Amazon Web Services Glue properties. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Glue connection name in the Spark Amazon Web Services Glue\n         properties. </p>"
                     }
                 },
                 "glueVersion": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Glue version in the Spark Amazon Web Services Glue properties. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Glue version in the Spark Amazon Web Services Glue properties.\n      </p>"
                     }
                 },
                 "idleTimeout": {
@@ -33564,6 +33600,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The glossary terms to be updated as part of the <code>UpdateEnvironment</code>\n         action.</p>"
                     }
+                },
+                "blueprintVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blueprint version to which the environment should be updated. You can only specify\n         the following string for this parameter: <code>latest</code>.</p>"
+                    }
+                },
+                "userParameters": {
+                    "target": "com.amazonaws.datazone#EnvironmentParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user parameters of the environment.</p>"
+                    }
                 }
             },
             "traits": {
@@ -33706,6 +33754,12 @@
                     "target": "com.amazonaws.datazone#EnvironmentBlueprintId",
                     "traits": {
                         "smithy.api#documentation": "<p>The blueprint identifier of the environment.</p>"
+                    }
+                },
+                "environmentConfigurationId": {
+                    "target": "com.amazonaws.datazone#EnvironmentConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration ID of the environment.</p>"
                     }
                 }
             },
@@ -34367,6 +34421,18 @@
                     "target": "com.amazonaws.datazone#EnvironmentDeploymentDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>The environment deployment details of the project.</p>"
+                    }
+                },
+                "userParameters": {
+                    "target": "com.amazonaws.datazone#EnvironmentConfigurationUserParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user parameters of the project.</p>"
+                    }
+                },
+                "projectProfileVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project profile version to which the project should be updated. You can only specify\n         the following string for this parameter: <code>latest</code>.</p>"
                     }
                 }
             },

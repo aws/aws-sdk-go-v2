@@ -923,6 +923,12 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>If a stage publisher disconnects and then reconnects within the specified interval, \n\t  the multiple recordings will be considered a single recording and merged together.</p>\n         <p>The default value is 0, which disables merging.</p>"
                     }
+                },
+                "hlsConfiguration": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantRecordingHlsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>HLS configuration object for individual participant recording.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1064,6 +1070,31 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9-_]*$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#CompositionRecordingHlsConfiguration": {
+            "type": "structure",
+            "members": {
+                "targetSegmentDurationSeconds": {
+                    "target": "com.amazonaws.ivsrealtime#CompositionRecordingTargetSegmentDurationSeconds",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Defines the target duration for recorded segments generated when using composite recording. \n\t  Segments may have durations shorter than the specified value when needed to ensure each segment \n\t  begins with a keyframe. Default: 2.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing a configuration of HLS recordings for server-side composition.</p>"
+            }
+        },
+        "com.amazonaws.ivsrealtime#CompositionRecordingTargetSegmentDurationSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 2,
+                "smithy.api#range": {
+                    "min": 2,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.ivsrealtime#CompositionState": {
@@ -4419,7 +4450,7 @@
                 "recordingS3Prefix": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantRecordingS3Prefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>S3 prefix of the S3 bucket where the participant is being recorded, if individual\n         participant recording is enabled, or <code>\"\"</code> (empty string), if recording is not\n         enabled. If individual participant recording merge is enabled, and if a stage publisher \n\t\t disconnects from a stage and then reconnects, IVS tries to record to the same S3 prefix as \n\t\t the previous session. See \n\t\t <a href=\"/ivs/latest/RealTimeUserGuide/rt-individual-participant-recording.html#ind-part-rec-merge-frag\">\n\t\t Merge Fragmented Individual Participant Recordings</a>.</p>"
+                        "smithy.api#documentation": "<p>S3 prefix of the S3 bucket where the participant is being recorded, if individual\n         participant recording is enabled, or <code>\"\"</code> (empty string), if recording is not\n         enabled.</p>"
                     }
                 },
                 "recordingState": {
@@ -4530,6 +4561,21 @@
                 ]
             }
         },
+        "com.amazonaws.ivsrealtime#ParticipantRecordingHlsConfiguration": {
+            "type": "structure",
+            "members": {
+                "targetSegmentDurationSeconds": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantRecordingTargetSegmentDurationSeconds",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Defines the target duration for recorded segments generated when recording a stage participant. \n\t  Segments may have durations longer than the specified value when needed to ensure each segment begins with a keyframe. \n\t  Default: 6.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing a configuration of participant HLS recordings for individual participant recording.</p>"
+            }
+        },
         "com.amazonaws.ivsrealtime#ParticipantRecordingMediaType": {
             "type": "enum",
             "members": {
@@ -4624,6 +4670,16 @@
                         "name": "DISABLED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantRecordingTargetSegmentDurationSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 6,
+                "smithy.api#range": {
+                    "min": 2,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.ivsrealtime#ParticipantState": {
@@ -5203,6 +5259,12 @@
         "com.amazonaws.ivsrealtime#RecordingConfiguration": {
             "type": "structure",
             "members": {
+                "hlsConfiguration": {
+                    "target": "com.amazonaws.ivsrealtime#CompositionRecordingHlsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An HLS configuration object to return information about how the recording will be configured.</p>"
+                    }
+                },
                 "format": {
                     "target": "com.amazonaws.ivsrealtime#RecordingConfigurationFormat",
                     "traits": {

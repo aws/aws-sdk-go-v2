@@ -404,7 +404,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.cloudwatchlogs#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the KMS key assigned to this anomaly detector, if any.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the KMS key assigned to this anomaly detector, if any.</p>"
                     }
                 },
                 "creationTimeStamp": {
@@ -1114,9 +1114,9 @@
                     }
                 },
                 "kmsKeyId": {
-                    "target": "com.amazonaws.cloudwatchlogs#KmsKeyId",
+                    "target": "com.amazonaws.cloudwatchlogs#DetectorKmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optionally assigns a KMS key to secure this anomaly detector and its findings. If a key is \n       assigned, the anomalies found and the model used by this detector are encrypted at rest with the key. If \n       a key is assigned to an anomaly detector, a user must have permissions for both this key and for the \n       anomaly detector to retrieve information about the anomalies that it finds.</p>\n         <p>For more information about using a KMS key and to see the required IAM\n       policy, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/LogsAnomalyDetection-KMS.html\">Use a KMS key with an anomaly detector</a>.</p>"
+                        "smithy.api#documentation": "<p>Optionally assigns a KMS key to secure this anomaly detector and its findings. If a key is \n       assigned, the anomalies found and the model used by this detector are encrypted at rest with the key. If \n       a key is assigned to an anomaly detector, a user must have permissions for both this key and for the \n       anomaly detector to retrieve information about the anomalies that it finds.</p>\n         <p> Make sure the value provided is a valid KMS key ARN. For more information about using a KMS key and to see the required IAM\n       policy, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/LogsAnomalyDetection-KMS.html\">Use a KMS key with an anomaly detector</a>.</p>"
                     }
                 },
                 "anomalyVisibilityTime": {
@@ -3825,6 +3825,16 @@
                 "target": "com.amazonaws.cloudwatchlogs#Destination"
             }
         },
+        "com.amazonaws.cloudwatchlogs#DetectorKmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:kms:[-a-z0-9]*:[0-9]*:key/[-a-z0-9]*$"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#DetectorName": {
             "type": "string",
             "traits": {
@@ -4448,7 +4458,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists log events from the specified log group. You can list all the log events or filter the results\n      using a filter pattern, a time range, and the name of the log stream.</p>\n         <p>You must have the <code>logs:FilterLogEvents</code> permission to perform this operation.</p>\n         <p>You can specify the log group to search by using either <code>logGroupIdentifier</code> or <code>logGroupName</code>.\n      You must include one of these two parameters, but you can't include both.\n    </p>\n         <p>By default, this operation returns as many log events as can fit in 1 MB (up to 10,000\n      log events) or all the events found within the specified time range. If the results include a\n      token, that means there are more log events available. You can get additional results by\n      specifying the token in a subsequent call. This operation can return empty results while there\n      are more log events available through the token.</p>\n         <p>The returned log events are sorted by event timestamp, the timestamp when the event was ingested\n    by CloudWatch Logs, and the ID of the <code>PutLogEvents</code> request.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n      view data from the linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>",
+                "smithy.api#documentation": "<p>Lists log events from the specified log group. You can list all the log events or filter the results\n      using one or more of the following:</p>\n         <ul>\n            <li>\n               <p>A filter pattern</p>\n            </li>\n            <li>\n               <p>A time range</p>\n            </li>\n            <li>\n               <p>The log stream name, or a log stream name prefix that matches mutltiple log streams</p>\n            </li>\n         </ul>\n         <p>You must have the <code>logs:FilterLogEvents</code> permission to perform this operation.</p>\n         <p>You can specify the log group to search by using either <code>logGroupIdentifier</code> or <code>logGroupName</code>.\n      You must include one of these two parameters, but you can't include both.\n    </p>\n         <p>\n            <code>FilterLogEvents</code> is a paginated operation. Each page returned can contain up to 1 MB of log events or up to 10,000 log events. A returned page might only be partially full, or even empty. \n      For example, if the result of a query would return 15,000 log events, the first page isn't guaranteed to have 10,000 log events even if they all fit into 1 MB.</p>\n         <p>Partially full or empty pages\n      don't necessarily mean that pagination is finished. If the results include a <code>nextToken</code>, there might be more log events available. You can return these additional log events by providing the nextToken in a subsequent\n      <code>FilterLogEvents</code> operation. If the results don't include a <code>nextToken</code>, then pagination is finished. </p>\n         <note>\n            <p>If you set <code>startFromHead</code> to <code>true</code> and you don’t include <code>endTime</code> in your request, you can end up in a situation where the pagination doesn't terminate. \n      This can happen when the new log events are being added to the target log streams\n      faster than they are being read. This situation is a good use case for the CloudWatch Logs <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs_LiveTail.html\">Live Tail</a> feature.</p>\n         </note>\n         <p>The returned log events are sorted by event timestamp, the timestamp when the event was ingested\n    by CloudWatch Logs, and the ID of the <code>PutLogEvents</code> request.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n      view data from the linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>\n         <note>\n            <p>If you are using <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html\">log transformation</a>, the <code>FilterLogEvents</code> operation returns only the original versions of log events, before they \n      were transformed. To view the transformed versions, you must use a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html\">CloudWatch Logs query.</a>\n            </p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4552,7 +4562,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use when requesting the next set of items. The token expires after 24 hours.</p>"
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of items. The token expires after 24 hours.</p>\n         <p>If the results don't include a <code>nextToken</code>, then pagination is finished. </p>"
                     }
                 }
             },
@@ -5051,7 +5061,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the log anomaly detector that you specify.</p>"
+                "smithy.api#documentation": "<p>Retrieves information about the log anomaly detector that you specify. The KMS key ARN detected is valid.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#GetLogAnomalyDetectorRequest": {
@@ -5102,7 +5112,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.cloudwatchlogs#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the KMS key assigned to this anomaly detector, if any.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the KMS key assigned to this anomaly detector, if any.</p>"
                     }
                 },
                 "creationTimeStamp": {
@@ -5150,7 +5160,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists log events from the specified log stream. You can list all of the log events or\n      filter using a time range.</p>\n         <p>By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). \n      You can get additional log events by specifying one of the tokens in a subsequent call.\n      This operation can return empty results while there are more log events available through the token.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n      view data from the linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>\n         <p>You can specify the log group to search by using either <code>logGroupIdentifier</code> or <code>logGroupName</code>.\n      You must include one of these two parameters, but you can't include both.\n    </p>",
+                "smithy.api#documentation": "<p>Lists log events from the specified log stream. You can list all of the log events or\n      filter using a time range.</p>\n         <p>\n            <code>GetLogEvents</code> is a paginated operation. Each page returned can contain up to 1 MB of log events or up to 10,000 log events. A returned page might only be partially full, or even empty. \n      For example, if the result of a query would return 15,000 log events, the first page isn't guaranteed to have 10,000 log events even if they all fit into 1 MB.</p>\n         <p>Partially full or empty pages\n      don't necessarily mean that pagination is finished. As long as the <code>nextBackwardToken</code> or <code>nextForwardToken</code> returned is NOT equal to the <code>nextToken</code> \n      that you passed into the API call, there might be more \n      log events available. The token that you use depends on the direction you want to move in along the log stream. The returned tokens are never null.</p>\n         <note>\n            <p>If you set <code>startFromHead</code> to <code>true</code> and you don’t include <code>endTime</code> in your request, you can end up in a situation where the pagination doesn't terminate. \n      This can happen when the new log events are being added to the target log streams\n      faster than they are being read. This situation is a good use case for the CloudWatch Logs <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs_LiveTail.html\">Live Tail</a> feature.</p>\n         </note>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n      view data from the linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>\n         <p>You can specify the log group to search by using either <code>logGroupIdentifier</code> or <code>logGroupName</code>.\n      You must include one of these two parameters, but you can't include both.\n    </p>\n         <note>\n            <p>If you are using <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html\">log transformation</a>, the <code>GetLogEvents</code> operation returns only the original versions of log events, before they \n      were transformed. To view the transformed versions, you must use a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html\">CloudWatch Logs query.</a>\n            </p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextForwardToken",

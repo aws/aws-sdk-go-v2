@@ -3319,6 +3319,12 @@
                         "smithy.api#enumValue": "RSA_2048"
                     }
                 },
+                "RSA_3072": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RSA_3072"
+                    }
+                },
                 "RSA_4096": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -3335,6 +3341,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EC_secp384r1"
+                    }
+                },
+                "EC_secp521r1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC_secp521r1"
                     }
                 },
                 "SM2": {
@@ -3616,6 +3628,9 @@
                 },
                 {
                     "target": "com.amazonaws.acmpca#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.acmpca#RequestFailedException"
                 },
                 {
                     "target": "com.amazonaws.acmpca#ResourceNotFoundException"
