@@ -2079,6 +2079,23 @@
                 }
             }
         },
+        "com.amazonaws.glue#AllowFullTableExternalDataAccessEnum": {
+            "type": "enum",
+            "members": {
+                "True": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "True"
+                    }
+                },
+                "False": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "False"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#AllowedValue": {
             "type": "structure",
             "members": {
@@ -5159,6 +5176,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of <code>PrincipalPermissions</code> objects. Creates a set of default permissions on the database(s) for principals. Used by Amazon Web Services Lake Formation. Not used in the normal course of Glue operations.</p>"
                     }
+                },
+                "AllowFullTableExternalDataAccess": {
+                    "target": "com.amazonaws.glue#AllowFullTableExternalDataAccessEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Allows third-party engines to access data in Amazon S3 locations that are registered with Lake Formation.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -5387,6 +5410,12 @@
                     "target": "com.amazonaws.glue#PrincipalPermissionsList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of <code>PrincipalPermissions</code> objects. Creates a set of default permissions on the database(s) for principals. Used by Amazon Web Services Lake Formation. Typically should be explicitly set as an empty list.</p>"
+                    }
+                },
+                "AllowFullTableExternalDataAccess": {
+                    "target": "com.amazonaws.glue#AllowFullTableExternalDataAccessEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Allows third-party engines to access data in Amazon S3 locations that are registered with Lake Formation.\n    </p>"
                     }
                 }
             },
