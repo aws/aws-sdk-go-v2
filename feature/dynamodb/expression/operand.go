@@ -171,17 +171,25 @@ func (nb NameBuilder) AppendName(field NameBuilder) NameBuilder {
 	if len(nb.names) != 0 && len(field.names) != 0 {
 		lastLeftName := len(nb.names) - 1
 		firstRightName := lastLeftName + 1
-		if v := names[firstRightName]; len(v) > 0 && v[0] == '[' {
-			if end := strings.Index(v, "]"); end != -1 {
-				names[lastLeftName] += v[0 : end+1]
-				names[firstRightName] = v[end+1:]
-				// Remove the name if it is empty after moving the index.
-				if len(names[firstRightName]) == 0 {
-					copy(names[firstRightName:], names[firstRightName+1:])
-					names[len(names)-1] = ""
-					names = names[:len(names)-1]
-				}
+
+		v := names[firstRightName]
+		end := strings.Index(v, "]")
+
+		for len(v) > 0 && v[0] == '[' && end != -1 {
+			names[lastLeftName] += v[0 : end+1]
+			names[firstRightName] = v[end+1:]
+
+			// Remove the name if it is empty after moving the index.
+			if len(names[firstRightName]) == 0 {
+				copy(names[firstRightName:], names[firstRightName+1:])
+				names[len(names)-1] = ""
+				names = names[:len(names)-1]
+
+				break
 			}
+
+			v = v[end+1:]
+			end = strings.Index(v, "]")
 		}
 	}
 
@@ -603,8 +611,42 @@ func (nb NameBuilder) BuildOperand() (Operand, error) {
 			return Operand{}, newInvalidParameterError("BuildOperand", "NameBuilder")
 		}
 
-		if idx := strings.Index(word, "]"); idx != -1 && idx != len(word)-1 {
+		numOpenBrackets := strings.Count(word, "[")
+		numCloseBrackets := strings.Count(word, "]")
+
+		// mismatched brackets
+		if numOpenBrackets != numCloseBrackets {
 			return Operand{}, newInvalidParameterError("BuildOperand", "NameBuilder")
+		}
+
+		openPositions := make([]int, 0, numOpenBrackets)
+		closePositions := make([]int, 0, numCloseBrackets)
+
+		for i, char := range word {
+			if char == '[' {
+				openPositions = append(openPositions, i)
+			} else if char == ']' {
+				closePositions = append(closePositions, i)
+			}
+		}
+
+		for idx := range closePositions {
+			openPosition := openPositions[idx]
+			closePosition := closePositions[idx]
+			if openPosition > closePosition {
+				return Operand{}, newInvalidParameterError("BuildOperand", "NameBuilder")
+			}
+
+			part := word[openPosition+1 : closePosition]
+			if len(part) == 0 {
+				return Operand{}, newInvalidParameterError("BuildOperand", "NameBuilder")
+			}
+
+			for _, c := range []byte(part) {
+				if c < '0' || c > '9' {
+					return Operand{}, newInvalidParameterError("BuildOperand", "NameBuilder")
+				}
+			}
 		}
 
 		if word[len(word)-1] == ']' {
