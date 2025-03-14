@@ -54,6 +54,10 @@ type RevokePermissionsInput struct {
 	// environment.
 	CatalogId *string
 
+	// A Lake Formation condition, which applies to permissions and opt-ins that
+	// contain an expression.
+	Condition *types.Condition
+
 	// Indicates a list of permissions for which to revoke the grant option allowing
 	// the principal to pass permissions to other principals.
 	PermissionsWithGrantOption []types.Permission

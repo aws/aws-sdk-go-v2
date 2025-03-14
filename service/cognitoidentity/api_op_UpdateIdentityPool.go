@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an identity pool.
+// Updates the configuration of an identity pool.
 //
-// You must use AWS Developer credentials to call this API.
+// If you don't provide a value for a parameter, Amazon Cognito sets it to its
+// default value.
+//
+// You must use Amazon Web Services developer credentials to call this operation.
 func (c *Client) UpdateIdentityPool(ctx context.Context, params *UpdateIdentityPoolInput, optFns ...func(*Options)) (*UpdateIdentityPoolOutput, error) {
 	if params == nil {
 		params = &UpdateIdentityPoolInput{}

@@ -811,6 +811,10 @@ type Catalog struct {
 	// This member is required.
 	Name *string
 
+	//  Allows third-party engines to access data in Amazon S3 locations that are
+	// registered with Lake Formation.
+	AllowFullTableExternalDataAccess AllowFullTableExternalDataAccessEnum
+
 	// The ID of the catalog. To grant access to the default catalog, this field
 	// should not be provided.
 	CatalogId *string
@@ -944,6 +948,10 @@ type CatalogImportStatus struct {
 
 // A structure that describes catalog properties.
 type CatalogInput struct {
+
+	//  Allows third-party engines to access data in Amazon S3 locations that are
+	// registered with Lake Formation.
+	AllowFullTableExternalDataAccess AllowFullTableExternalDataAccessEnum
 
 	// A CatalogProperties object that specifies data lake access properties and other
 	// custom properties.

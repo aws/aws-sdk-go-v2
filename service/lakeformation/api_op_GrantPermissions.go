@@ -66,6 +66,10 @@ type GrantPermissionsInput struct {
 	// environment.
 	CatalogId *string
 
+	// A Lake Formation condition, which applies to permissions and opt-ins that
+	// contain an expression.
+	Condition *types.Condition
+
 	// Indicates a list of the granted permissions that the principal may pass to
 	// other users. These permissions may only be a subset of the permissions granted
 	// in the Privileges .

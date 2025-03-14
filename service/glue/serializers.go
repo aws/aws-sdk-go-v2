@@ -16379,6 +16379,11 @@ func awsAwsjson11_serializeDocumentCatalogInput(v *types.CatalogInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AllowFullTableExternalDataAccess) > 0 {
+		ok := object.Key("AllowFullTableExternalDataAccess")
+		ok.String(string(v.AllowFullTableExternalDataAccess))
+	}
+
 	if v.CatalogProperties != nil {
 		ok := object.Key("CatalogProperties")
 		if err := awsAwsjson11_serializeDocumentCatalogProperties(v.CatalogProperties, ok); err != nil {

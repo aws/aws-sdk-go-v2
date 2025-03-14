@@ -14,7 +14,7 @@ import (
 // Sets the roles for an identity pool. These roles are used when making calls to GetCredentialsForIdentity
 // action.
 //
-// You must use AWS Developer credentials to call this API.
+// You must use Amazon Web Services developer credentials to call this operation.
 func (c *Client) SetIdentityPoolRoles(ctx context.Context, params *SetIdentityPoolRolesInput, optFns ...func(*Options)) (*SetIdentityPoolRolesOutput, error) {
 	if params == nil {
 		params = &SetIdentityPoolRolesInput{}
@@ -46,8 +46,8 @@ type SetIdentityPoolRolesInput struct {
 
 	// How users for a specific identity provider are to mapped to roles. This is a
 	// string to RoleMappingobject map. The string identifies the identity provider, for example,
-	// "graph.facebook.com" or
-	// "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
+	// graph.facebook.com or
+	// cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id .
 	//
 	// Up to 25 rules can be specified per identity provider.
 	RoleMappings map[string]types.RoleMapping

@@ -72,6 +72,10 @@ type BatchPermissionsRequestEntry struct {
 	// This member is required.
 	Id *string
 
+	// A Lake Formation condition, which applies to permissions and opt-ins that
+	// contain an expression.
+	Condition *Condition
+
 	// The permissions to be granted.
 	Permissions []Permission
 
@@ -778,6 +782,10 @@ type ResourceInfo struct {
 
 	// Whether or not the resource is a federated resource.
 	WithFederation *bool
+
+	// Grants the calling principal the permissions to perform all supported Lake
+	// Formation operations on the registered data location.
+	WithPrivilegedAccess *bool
 
 	noSmithyDocumentSerde
 }

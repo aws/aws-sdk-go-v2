@@ -66,6 +66,26 @@ func (AggFunction) Values() []AggFunction {
 	}
 }
 
+type AllowFullTableExternalDataAccessEnum string
+
+// Enum values for AllowFullTableExternalDataAccessEnum
+const (
+	AllowFullTableExternalDataAccessEnumTrue  AllowFullTableExternalDataAccessEnum = "True"
+	AllowFullTableExternalDataAccessEnumFalse AllowFullTableExternalDataAccessEnum = "False"
+)
+
+// Values returns all known values for AllowFullTableExternalDataAccessEnum. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AllowFullTableExternalDataAccessEnum) Values() []AllowFullTableExternalDataAccessEnum {
+	return []AllowFullTableExternalDataAccessEnum{
+		"True",
+		"False",
+	}
+}
+
 type AuthenticationType string
 
 // Enum values for AuthenticationType

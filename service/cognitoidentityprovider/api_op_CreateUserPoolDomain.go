@@ -72,7 +72,7 @@ type CreateUserPoolDomainInput struct {
 	// Certificate Manager certificate in the us-east-1 Region.
 	//
 	// Provide this parameter only if you want to use a [custom domain] for your user pool.
-	// Otherwise, you can omit this parameter and use a prefix domaininstead.
+	// Otherwise, you can omit this parameter and use a [prefix domain]instead.
 	//
 	// When you create a custom domain, the passkey RP ID defaults to the custom
 	// domain. If you had a prefix domain active, this will cause passkey integration
@@ -81,6 +81,7 @@ type CreateUserPoolDomainInput struct {
 	// prefix domain.
 	//
 	// [custom domain]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html
+	// [prefix domain]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain-prefix.html
 	CustomDomainConfig *types.CustomDomainConfigType
 
 	// The version of managed login branding that you want to apply to your domain. A

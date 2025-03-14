@@ -40,6 +40,10 @@ type DeleteLakeFormationOptInInput struct {
 	// This member is required.
 	Resource *types.Resource
 
+	// A Lake Formation condition, which applies to permissions and opt-ins that
+	// contain an expression.
+	Condition *types.Condition
+
 	noSmithyDocumentSerde
 }
 

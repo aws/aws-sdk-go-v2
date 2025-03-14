@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an
+// Generates (or retrieves) IdentityID. Supplying multiple logins will create an
 // implicit linked account.
 //
 // This is a public API. You do not need any credentials to call this API.
@@ -37,7 +37,7 @@ type GetIdInput struct {
 	// This member is required.
 	IdentityPoolId *string
 
-	// A standard AWS account ID (9+ digits).
+	// A standard Amazon Web Services account ID (9+ digits).
 	AccountId *string
 
 	// A set of optional name-value pairs that map provider names to provider tokens.

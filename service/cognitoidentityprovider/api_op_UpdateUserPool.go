@@ -110,8 +110,9 @@ type UpdateUserPoolInput struct {
 	// remembering in your user pool.
 	//
 	// When you provide a value for any DeviceConfiguration field, you activate the
-	// Amazon Cognito device-remembering feature. For more infor
+	// Amazon Cognito device-remembering feature. For more information, see [Working with devices].
 	//
+	// [Working with devices]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
 	// [Working with user devices in your user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
 	DeviceConfiguration *types.DeviceConfigurationType
 

@@ -801,6 +801,13 @@ func awsRestjson1_serializeOpDocumentCreateLakeFormationOptInInput(v *CreateLake
 	object := value.Object()
 	defer object.Close()
 
+	if v.Condition != nil {
+		ok := object.Key("Condition")
+		if err := awsRestjson1_serializeDocumentCondition(v.Condition, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Principal != nil {
 		ok := object.Key("Principal")
 		if err := awsRestjson1_serializeDocumentDataLakePrincipal(v.Principal, ok); err != nil {
@@ -1258,6 +1265,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteLakeFormationOptInInput(v *Delete
 func awsRestjson1_serializeOpDocumentDeleteLakeFormationOptInInput(v *DeleteLakeFormationOptInInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Condition != nil {
+		ok := object.Key("Condition")
+		if err := awsRestjson1_serializeDocumentCondition(v.Condition, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Principal != nil {
 		ok := object.Key("Principal")
@@ -3323,6 +3337,13 @@ func awsRestjson1_serializeOpDocumentGrantPermissionsInput(v *GrantPermissionsIn
 		ok.String(*v.CatalogId)
 	}
 
+	if v.Condition != nil {
+		ok := object.Key("Condition")
+		if err := awsRestjson1_serializeDocumentCondition(v.Condition, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Permissions != nil {
 		ok := object.Key("Permissions")
 		if err := awsRestjson1_serializeDocumentPermissionList(v.Permissions, ok); err != nil {
@@ -4330,6 +4351,11 @@ func awsRestjson1_serializeOpDocumentRegisterResourceInput(v *RegisterResourceIn
 		ok.Boolean(*v.WithFederation)
 	}
 
+	if v.WithPrivilegedAccess {
+		ok := object.Key("WithPrivilegedAccess")
+		ok.Boolean(v.WithPrivilegedAccess)
+	}
+
 	return nil
 }
 
@@ -4504,6 +4530,13 @@ func awsRestjson1_serializeOpDocumentRevokePermissionsInput(v *RevokePermissions
 	if v.CatalogId != nil {
 		ok := object.Key("CatalogId")
 		ok.String(*v.CatalogId)
+	}
+
+	if v.Condition != nil {
+		ok := object.Key("Condition")
+		if err := awsRestjson1_serializeDocumentCondition(v.Condition, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Permissions != nil {
@@ -5654,6 +5687,13 @@ func awsRestjson1_serializeDocumentBatchPermissionsRequestEntry(v *types.BatchPe
 	object := value.Object()
 	defer object.Close()
 
+	if v.Condition != nil {
+		ok := object.Key("Condition")
+		if err := awsRestjson1_serializeDocumentCondition(v.Condition, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Id != nil {
 		ok := object.Key("Id")
 		ok.String(*v.Id)
@@ -5735,6 +5775,18 @@ func awsRestjson1_serializeDocumentColumnWildcard(v *types.ColumnWildcard, value
 		if err := awsRestjson1_serializeDocumentColumnNames(v.ExcludedColumnNames, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCondition(v *types.Condition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Expression != nil {
+		ok := object.Key("Expression")
+		ok.String(*v.Expression)
 	}
 
 	return nil

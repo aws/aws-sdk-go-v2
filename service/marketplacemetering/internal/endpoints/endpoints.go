@@ -246,6 +246,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "metering.marketplace.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "aws-marketplace",
+				},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
@@ -253,6 +256,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "metering.marketplace-fips.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "aws-marketplace",
+				},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
@@ -260,6 +266,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "metering.marketplace-fips.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "aws-marketplace",
+				},
 			},
 			{
 				Variant: 0,
@@ -267,10 +276,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "metering.marketplace.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "aws-marketplace",
+				},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "cn-northwest-1",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso",

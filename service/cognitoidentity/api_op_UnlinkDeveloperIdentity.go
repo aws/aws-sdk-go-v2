@@ -15,7 +15,7 @@ import (
 // Cognito identity, you remove all federated identities as well as the developer
 // user identifier, the Cognito identity becomes inaccessible.
 //
-// You must use AWS Developer credentials to call this API.
+// You must use Amazon Web Services developer credentials to call this operation.
 func (c *Client) UnlinkDeveloperIdentity(ctx context.Context, params *UnlinkDeveloperIdentityInput, optFns ...func(*Options)) (*UnlinkDeveloperIdentityOutput, error) {
 	if params == nil {
 		params = &UnlinkDeveloperIdentityInput{}

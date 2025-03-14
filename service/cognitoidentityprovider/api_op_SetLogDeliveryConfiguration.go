@@ -13,7 +13,9 @@ import (
 
 // Sets up or modifies the logging configuration of a user pool. User pools can
 // export user notification logs and, when threat protection is active,
-// user-activity logs. For more information, see Exporting user pool logs.
+// user-activity logs. For more information, see [Exporting user pool logs].
+//
+// [Exporting user pool logs]: https://docs.aws.amazon.com/cognito/latest/developerguide/exporting-quotas-and-usage.html
 func (c *Client) SetLogDeliveryConfiguration(ctx context.Context, params *SetLogDeliveryConfigurationInput, optFns ...func(*Options)) (*SetLogDeliveryConfigurationOutput, error) {
 	if params == nil {
 		params = &SetLogDeliveryConfigurationInput{}

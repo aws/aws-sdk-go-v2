@@ -13,7 +13,7 @@ import (
 // Deletes an identity pool. Once a pool is deleted, users will not be able to
 // authenticate with the pool.
 //
-// You must use AWS Developer credentials to call this API.
+// You must use Amazon Web Services developer credentials to call this operation.
 func (c *Client) DeleteIdentityPool(ctx context.Context, params *DeleteIdentityPoolInput, optFns ...func(*Options)) (*DeleteIdentityPoolOutput, error) {
 	if params == nil {
 		params = &DeleteIdentityPoolInput{}

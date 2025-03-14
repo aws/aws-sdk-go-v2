@@ -13,7 +13,7 @@ import (
 // Registers the resource as managed by the Data Catalog.
 //
 // To add or update data, Lake Formation needs read/write access to the chosen
-// Amazon S3 path. Choose a role that you know has permission to do this, or choose
+// data location. Choose a role that you know has permission to do this, or choose
 // the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you
 // register the first Amazon S3 path, the service-linked role and a new inline
 // policy are created on your behalf. Lake Formation adds the first path to the
@@ -68,6 +68,10 @@ type RegisterResourceInput struct {
 
 	// Whether or not the resource is a federated resource.
 	WithFederation *bool
+
+	// Grants the calling principal the permissions to perform all supported Lake
+	// Formation operations on the registered data location.
+	WithPrivilegedAccess bool
 
 	noSmithyDocumentSerde
 }

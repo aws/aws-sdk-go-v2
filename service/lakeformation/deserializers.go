@@ -1355,6 +1355,9 @@ func awsRestjson1_deserializeOpErrorCreateLakeFormationOptIn(response *smithyhtt
 	case strings.EqualFold("OperationTimeoutException", errorCode):
 		return awsRestjson1_deserializeErrorOperationTimeoutException(response, errorBody)
 
+	case strings.EqualFold("ResourceNumberLimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNumberLimitExceededException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -9632,6 +9635,11 @@ func awsRestjson1_deserializeDocumentBatchPermissionsRequestEntry(v **types.Batc
 
 	for key, value := range shape {
 		switch key {
+		case "Condition":
+			if err := awsRestjson1_deserializeDocumentCondition(&sv.Condition, value); err != nil {
+				return err
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12163,6 +12171,15 @@ func awsRestjson1_deserializeDocumentResourceInfo(v **types.ResourceInfo, value 
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.WithFederation = ptr.Bool(jtv)
+			}
+
+		case "WithPrivilegedAccess":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.WithPrivilegedAccess = ptr.Bool(jtv)
 			}
 
 		default:

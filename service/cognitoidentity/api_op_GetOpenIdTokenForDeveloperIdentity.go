@@ -25,7 +25,7 @@ import (
 // providing the existing IdentityId . This API will create the identity in the
 // specified IdentityPoolId .
 //
-// You must use AWS Developer credentials to call this API.
+// You must use Amazon Web Services developer credentials to call this operation.
 func (c *Client) GetOpenIdTokenForDeveloperIdentity(ctx context.Context, params *GetOpenIdTokenForDeveloperIdentityInput, optFns ...func(*Options)) (*GetOpenIdTokenForDeveloperIdentityOutput, error) {
 	if params == nil {
 		params = &GetOpenIdTokenForDeveloperIdentityInput{}
@@ -71,11 +71,11 @@ type GetOpenIdTokenForDeveloperIdentityInput struct {
 	// The expiration time of the token, in seconds. You can specify a custom
 	// expiration time for the token so that you can cache it. If you don't provide an
 	// expiration time, the token is valid for 15 minutes. You can exchange the token
-	// with Amazon STS for temporary AWS credentials, which are valid for a maximum of
-	// one hour. The maximum token duration you can set is 24 hours. You should take
-	// care in setting the expiration time for a token, as there are significant
-	// security implications: an attacker could use a leaked token to access your AWS
-	// resources for the token's duration.
+	// with Amazon STS for temporary Amazon Web Services credentials, which are valid
+	// for a maximum of one hour. The maximum token duration you can set is 24 hours.
+	// You should take care in setting the expiration time for a token, as there are
+	// significant security implications: an attacker could use a leaked token to
+	// access your Amazon Web Services resources for the token's duration.
 	//
 	// Please provide for a small grace period, usually no more than 5 minutes, to
 	// account for clock skew.

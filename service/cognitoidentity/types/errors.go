@@ -115,8 +115,15 @@ func (e *InternalErrorException) ErrorCode() string {
 }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Thrown if the identity pool has no role associated for the given auth type
-// (auth/unauth) or if the AssumeRole fails.
+// If you provided authentication information in the request, the identity pool
+// has no authenticated role configured, or STS returned an error response to the
+// request to assume the authenticated role from the identity pool. If you provided
+// no authentication information in the request, the identity pool has no
+// unauthenticated role configured, or STS returned an error response to the
+// request to assume the unauthenticated role from the identity pool.
+//
+// Your role trust policy must grant AssumeRoleWithWebIdentity permissions to
+// cognito-identity.amazonaws.com .
 type InvalidIdentityPoolConfigurationException struct {
 	Message *string
 

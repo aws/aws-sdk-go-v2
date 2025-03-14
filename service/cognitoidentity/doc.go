@@ -14,8 +14,8 @@
 // one or more third-party identity providers (Facebook, Google, or Login with
 // Amazon) or an Amazon Cognito user pool, and you can also choose to support
 // unauthenticated access from your app. Cognito delivers a unique identifier for
-// each user and acts as an OpenID token provider trusted by AWS Security Token
-// Service (STS) to access temporary, limited-privilege AWS credentials.
+// each user and acts as an OpenID token provider trusted by Security Token Service
+// (STS) to access temporary, limited-privilege Amazon Web Services credentials.
 //
 // For a description of the authentication flow from the Amazon Cognito Developer
 // Guide see [Authentication Flow].

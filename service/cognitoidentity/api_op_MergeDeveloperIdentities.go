@@ -24,7 +24,7 @@ import (
 // DestinationUserIdentifier , together should not be larger than 20. Otherwise, an
 // exception will be thrown.
 //
-// You must use AWS Developer credentials to call this API.
+// You must use Amazon Web Services developer credentials to call this operation.
 func (c *Client) MergeDeveloperIdentities(ctx context.Context, params *MergeDeveloperIdentitiesInput, optFns ...func(*Options)) (*MergeDeveloperIdentitiesOutput, error) {
 	if params == nil {
 		params = &MergeDeveloperIdentitiesInput{}

@@ -12,12 +12,14 @@ import (
 )
 
 // Creates a new identity pool. The identity pool is a store of user identity
-// information that is specific to your AWS account. The keys for
+// information that is specific to your Amazon Web Services account. The keys for
 // SupportedLoginProviders are as follows:
 //
 //   - Facebook: graph.facebook.com
 //
 //   - Google: accounts.google.com
+//
+//   - Sign in With Apple: appleid.apple.com
 //
 //   - Amazon: www.amazon.com
 //
@@ -25,7 +27,10 @@ import (
 //
 //   - Digits: www.digits.com
 //
-// You must use AWS Developer credentials to call this API.
+// If you don't provide a value for a parameter, Amazon Cognito sets it to its
+// default value.
+//
+// You must use Amazon Web Services developer credentials to call this operation.
 func (c *Client) CreateIdentityPool(ctx context.Context, params *CreateIdentityPoolInput, optFns ...func(*Options)) (*CreateIdentityPoolOutput, error) {
 	if params == nil {
 		params = &CreateIdentityPoolInput{}

@@ -35318,6 +35318,15 @@ func awsAwsjson11_deserializeDocumentCatalog(v **types.Catalog, value interface{
 
 	for key, value := range shape {
 		switch key {
+		case "AllowFullTableExternalDataAccess":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AllowFullTableExternalDataAccessEnum to be of type string, got %T instead", value)
+				}
+				sv.AllowFullTableExternalDataAccess = types.AllowFullTableExternalDataAccessEnum(jtv)
+			}
+
 		case "CatalogId":
 			if value != nil {
 				jtv, ok := value.(string)
