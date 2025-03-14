@@ -1,3 +1,7 @@
+# v1.107.0 (2025-03-14)
+
+* **Feature**: This release added AllowFullTableExternalDataAccess to glue catalog resource.
+
 # v1.106.2 (2025-03-13)
 
 * No change notes available for this release.

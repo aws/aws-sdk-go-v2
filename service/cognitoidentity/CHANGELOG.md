@@ -1,3 +1,7 @@
+# v1.29.3 (2025-03-14)
+
+* **Documentation**: Updated API model build artifacts for identity pools
+
 # v1.29.2 (2025-03-07)
 
 * No change notes available for this release.

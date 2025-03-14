@@ -1,8 +1,0 @@
-{
-    "id": "bbccb7f7-bfd3-49e1-8306-1df66cdc50fa",
-    "type": "feature",
-    "description": "This release added AllowFullTableExternalDataAccess to glue catalog resource.",
-    "modules": [
-        "service/glue"
-    ]
-}

@@ -1,3 +1,15 @@
+# Release (2025-03-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentity`: [v1.29.3](service/cognitoidentity/CHANGELOG.md#v1293-2025-03-14)
+  * **Documentation**: Updated API model build artifacts for identity pools
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.51.3](service/cognitoidentityprovider/CHANGELOG.md#v1513-2025-03-14)
+  * **Documentation**: Minor description updates to API parameters
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.107.0](service/glue/CHANGELOG.md#v11070-2025-03-14)
+  * **Feature**: This release added AllowFullTableExternalDataAccess to glue catalog resource.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.41.0](service/lakeformation/CHANGELOG.md#v1410-2025-03-14)
+  * **Feature**: This release added "condition" to LakeFormation OptIn APIs, also added WithPrivilegedAccess flag to RegisterResource and DescribeResource.
+
 # Release (2025-03-13)
 
 ## General Highlights
