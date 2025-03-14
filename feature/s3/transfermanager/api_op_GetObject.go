@@ -779,6 +779,7 @@ func (g *getter) singleDownload(ctx context.Context, clientOptions ...func(*s3.O
 		return nil, err
 	}
 
+	defer out.Body.Close()
 	buf, err := io.ReadAll(out.Body)
 	if err != nil {
 		g.r.setErr(err)
