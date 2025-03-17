@@ -1,3 +1,7 @@
+# v1.10.0 (2025-03-17)
+
+* **Feature**: Adjust Vietnam PaymentVoucherNumber regex and minor API change.
+
 # v1.9.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

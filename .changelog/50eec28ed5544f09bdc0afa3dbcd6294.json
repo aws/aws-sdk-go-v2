@@ -1,8 +1,0 @@
-{
-    "id": "50eec28e-d554-4f09-bdc0-afa3dbcd6294",
-    "type": "feature",
-    "description": "Adjust Vietnam PaymentVoucherNumber regex and minor API change.",
-    "modules": [
-        "service/taxsettings"
-    ]
-}

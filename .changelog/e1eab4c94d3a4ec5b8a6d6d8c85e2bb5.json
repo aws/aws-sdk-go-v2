@@ -1,8 +1,0 @@
-{
-    "id": "e1eab4c9-4d3a-4ec5-b8a6-d6d8c85e2bb5",
-    "type": "feature",
-    "description": "This release adds support for adding, removing, and listing SLO time exclusion windows with the BatchUpdateExclusionWindows and ListServiceLevelObjectiveExclusionWindows APIs.",
-    "modules": [
-        "service/applicationsignals"
-    ]
-}

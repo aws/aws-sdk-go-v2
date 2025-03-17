@@ -1,3 +1,7 @@
+# v1.2.0 (2025-03-17)
+
+* **Feature**: Provide support for vector map styles in the GetStaticMap operation.
+
 # v1.1.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

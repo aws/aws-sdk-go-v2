@@ -1,3 +1,7 @@
+# v1.59.0 (2025-03-17)
+
+* **Feature**: AWS WAF now lets you inspect fragments of request URIs. You can specify the scope of the URI to inspect and narrow the set of URI fragments.
+
 # v1.58.0 (2025-03-06)
 
 * **Feature**: You can now perform an exact match or rate limit aggregation against the web request's JA4 fingerprint.

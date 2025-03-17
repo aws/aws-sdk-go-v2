@@ -1,3 +1,7 @@
+# v1.10.0 (2025-03-17)
+
+* **Feature**: This release adds support for adding, removing, and listing SLO time exclusion windows with the BatchUpdateExclusionWindows and ListServiceLevelObjectiveExclusionWindows APIs.
+
 # v1.9.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

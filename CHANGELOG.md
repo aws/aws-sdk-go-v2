@@ -1,3 +1,19 @@
+# Release (2025-03-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression`: [v1.7.75](feature/dynamodb/expression/CHANGELOG.md#v1775-2025-03-17)
+  * **Bug Fix**: allow nested list indices in expressions
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.10.0](service/applicationsignals/CHANGELOG.md#v1100-2025-03-17)
+  * **Feature**: This release adds support for adding, removing, and listing SLO time exclusion windows with the BatchUpdateExclusionWindows and ListServiceLevelObjectiveExclusionWindows APIs.
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.2.0](service/geomaps/CHANGELOG.md#v120-2025-03-17)
+  * **Feature**: Provide support for vector map styles in the GetStaticMap operation.
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.24.0](service/rum/CHANGELOG.md#v1240-2025-03-17)
+  * **Feature**: CloudWatch RUM now supports unminification of JS error stack traces.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.10.0](service/taxsettings/CHANGELOG.md#v1100-2025-03-17)
+  * **Feature**: Adjust Vietnam PaymentVoucherNumber regex and minor API change.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.59.0](service/wafv2/CHANGELOG.md#v1590-2025-03-17)
+  * **Feature**: AWS WAF now lets you inspect fragments of request URIs. You can specify the scope of the URI to inspect and narrow the set of URI fragments.
+
 # Release (2025-03-14)
 
 ## Module Highlights
