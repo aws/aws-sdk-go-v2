@@ -1,0 +1,8 @@
+{
+    "id": "72b6ce89-ad0d-4c4a-9123-69c7d3d7f0ea",
+    "type": "feature",
+    "description": "AWS WAF now lets you inspect fragments of request URIs. You can specify the scope of the URI to inspect and narrow the set of URI fragments.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

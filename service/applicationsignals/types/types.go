@@ -7,6 +7,28 @@ import (
 	"time"
 )
 
+// An array of structures, where each structure includes an error indicating that
+// one of the requests in the array was not valid.
+type BatchUpdateExclusionWindowsError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The error message.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The SLO ID in the error.
+	//
+	// This member is required.
+	SloId *string
+
+	noSmithyDocumentSerde
+}
+
 // This object defines the length of the look-back window used to calculate one
 // burn rate metric for this SLO. The burn rate measures how fast the service is
 // consuming the error budget, relative to the attainment goal of the SLO. A burn
@@ -87,6 +109,30 @@ type Dimension struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The core SLO time window exclusion object that includes Window, StartTime,
+// RecurrenceRule, and Reason.
+type ExclusionWindow struct {
+
+	// The SLO time window exclusion .
+	//
+	// This member is required.
+	Window *Window
+
+	// A description explaining why this time period should be excluded from SLO
+	// calculations.
+	Reason *string
+
+	// The recurrence rule for the SLO time window exclusion. Supports both cron and
+	// rate expressions.
+	RecurrenceRule *RecurrenceRule
+
+	// The start of the SLO time window exclusion. Defaults to current time if not
+	// specified.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -377,6 +423,17 @@ type MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric struct {
 }
 
 func (*MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric) isMonitoredRequestCountMetricDataQueries() {
+}
+
+// The recurrence rule for the SLO time window exclusion .
+type RecurrenceRule struct {
+
+	// A cron or rate expression that specifies the schedule for the exclusion window.
+	//
+	// This member is required.
+	Expression *string
+
+	noSmithyDocumentSerde
 }
 
 // This structure contains information about the performance metric that a
@@ -1199,6 +1256,23 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The object that defines the time length of an exclusion window.
+type Window struct {
+
+	// The number of time units for the exclusion window length.
+	//
+	// This member is required.
+	Duration *int32
+
+	// The unit of time for the exclusion window duration. Valid values: MINUTE, HOUR,
+	// DAY, MONTH.
+	//
+	// This member is required.
+	DurationUnit DurationUnit
 
 	noSmithyDocumentSerde
 }

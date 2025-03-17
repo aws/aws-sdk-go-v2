@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a tile. Map tiles are used by clients to render a map. they're
+// GetTile returns a tile. Map tiles are used by clients to render a map. they're
 // addressed using a grid arrangement with an X coordinate, Y coordinate, and Z
 // (zoom) level.
 func (c *Client) GetTile(ctx context.Context, params *GetTileInput, optFns ...func(*Options)) (*GetTileOutput, error) {
@@ -66,7 +66,7 @@ type GetTileOutput struct {
 	// This member is required.
 	PricingBucket *string
 
-	// The blob represents a vector tile in mvt format for the GetTile API.
+	// The blob represents a vector tile in mvt or a raster tile in an image format.
 	Blob []byte
 
 	// Header that instructs caching configuration for the client.

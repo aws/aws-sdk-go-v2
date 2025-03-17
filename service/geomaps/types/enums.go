@@ -21,6 +21,44 @@ func (ColorScheme) Values() []ColorScheme {
 	}
 }
 
+type LabelSize string
+
+// Enum values for LabelSize
+const (
+	LabelSizeSmall LabelSize = "Small"
+	LabelSizeLarge LabelSize = "Large"
+)
+
+// Values returns all known values for LabelSize. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LabelSize) Values() []LabelSize {
+	return []LabelSize{
+		"Small",
+		"Large",
+	}
+}
+
+type MapFeatureMode string
+
+// Enum values for MapFeatureMode
+const (
+	MapFeatureModeEnabled  MapFeatureMode = "Enabled"
+	MapFeatureModeDisabled MapFeatureMode = "Disabled"
+)
+
+// Values returns all known values for MapFeatureMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MapFeatureMode) Values() []MapFeatureMode {
+	return []MapFeatureMode{
+		"Enabled",
+		"Disabled",
+	}
+}
+
 type MapStyle string
 
 // Enum values for MapStyle
@@ -72,6 +110,7 @@ type StaticMapStyle string
 // Enum values for StaticMapStyle
 const (
 	StaticMapStyleSatellite StaticMapStyle = "Satellite"
+	StaticMapStyleStandard  StaticMapStyle = "Standard"
 )
 
 // Values returns all known values for StaticMapStyle. Note that this can be
@@ -81,6 +120,7 @@ const (
 func (StaticMapStyle) Values() []StaticMapStyle {
 	return []StaticMapStyle{
 		"Satellite",
+		"Standard",
 	}
 }
 

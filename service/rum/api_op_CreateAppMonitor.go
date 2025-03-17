@@ -42,12 +42,6 @@ func (c *Client) CreateAppMonitor(ctx context.Context, params *CreateAppMonitorI
 
 type CreateAppMonitorInput struct {
 
-	// The top-level internet domain name for which your application has
-	// administrative authority.
-	//
-	// This member is required.
-	Domain *string
-
 	// A name for the app monitor.
 	//
 	// This member is required.
@@ -81,6 +75,18 @@ type CreateAppMonitorInput struct {
 	//
 	// If you omit this parameter, the default is false .
 	CwLogEnabled *bool
+
+	//  A structure that contains the configuration for how an app monitor can
+	// deobfuscate stack traces.
+	DeobfuscationConfiguration *types.DeobfuscationConfiguration
+
+	// The top-level internet domain name for which your application has
+	// administrative authority.
+	Domain *string
+
+	//  List the domain names for which your application has administrative authority.
+	// The CreateAppMonitor requires either the domain or the domain list.
+	DomainList []string
 
 	// Assigns one or more tags (key-value pairs) to the app monitor.
 	//

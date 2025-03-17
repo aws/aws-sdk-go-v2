@@ -387,9 +387,23 @@ func awsRestjson1_serializeOpDocumentCreateAppMonitorInput(v *CreateAppMonitorIn
 		ok.Boolean(*v.CwLogEnabled)
 	}
 
+	if v.DeobfuscationConfiguration != nil {
+		ok := object.Key("DeobfuscationConfiguration")
+		if err := awsRestjson1_serializeDocumentDeobfuscationConfiguration(v.DeobfuscationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Domain != nil {
 		ok := object.Key("Domain")
 		ok.String(*v.Domain)
+	}
+
+	if v.DomainList != nil {
+		ok := object.Key("DomainList")
+		if err := awsRestjson1_serializeDocumentAppMonitorDomainList(v.DomainList, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {
@@ -1708,9 +1722,23 @@ func awsRestjson1_serializeOpDocumentUpdateAppMonitorInput(v *UpdateAppMonitorIn
 		ok.Boolean(*v.CwLogEnabled)
 	}
 
+	if v.DeobfuscationConfiguration != nil {
+		ok := object.Key("DeobfuscationConfiguration")
+		if err := awsRestjson1_serializeDocumentDeobfuscationConfiguration(v.DeobfuscationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Domain != nil {
 		ok := object.Key("Domain")
 		ok.String(*v.Domain)
+	}
+
+	if v.DomainList != nil {
+		ok := object.Key("DomainList")
+		if err := awsRestjson1_serializeDocumentAppMonitorDomainList(v.DomainList, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1922,6 +1950,17 @@ func awsRestjson1_serializeDocumentAppMonitorDetails(v *types.AppMonitorDetails,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAppMonitorDomainList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCustomEvents(v *types.CustomEvents, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1929,6 +1968,20 @@ func awsRestjson1_serializeDocumentCustomEvents(v *types.CustomEvents, value smi
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
 		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeobfuscationConfiguration(v *types.DeobfuscationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JavaScriptSourceMaps != nil {
+		ok := object.Key("JavaScriptSourceMaps")
+		if err := awsRestjson1_serializeDocumentJavaScriptSourceMaps(v.JavaScriptSourceMaps, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1953,6 +2006,23 @@ func awsRestjson1_serializeDocumentFavoritePages(v []string, value smithyjson.Va
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJavaScriptSourceMaps(v *types.JavaScriptSourceMaps, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Uri != nil {
+		ok := object.Key("S3Uri")
+		ok.String(*v.S3Uri)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
 	return nil
 }
 

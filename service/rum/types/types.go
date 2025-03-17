@@ -30,9 +30,16 @@ type AppMonitor struct {
 	// copy of the telemetry data that RUM collects using CloudWatch Logs.
 	DataStorage *DataStorage
 
+	//  A structure that contains the configuration for how an app monitor can
+	// deobfuscate stack traces.
+	DeobfuscationConfiguration *DeobfuscationConfiguration
+
 	// The top-level internet domain name for which your application has
 	// administrative authority.
 	Domain *string
+
+	//  List the domain names for which your application has administrative authority.
+	DomainList []string
 
 	// The unique ID of this app monitor.
 	Id *string
@@ -256,6 +263,37 @@ type DataStorage struct {
 	// copies of the data that RUM collects in CloudWatch Logs. If it does, this
 	// structure also contains the name of the log group.
 	CwLog *CwLog
+
+	noSmithyDocumentSerde
+}
+
+//	A structure that contains the configuration for how an app monitor can
+//
+// deobfuscate stack traces.
+type DeobfuscationConfiguration struct {
+
+	//  A structure that contains the configuration for how an app monitor can
+	// unminify JavaScript error stack traces using source maps.
+	JavaScriptSourceMaps *JavaScriptSourceMaps
+
+	noSmithyDocumentSerde
+}
+
+//	A structure that contains the configuration for how an app monitor can
+//
+// unminify JavaScript error stack traces using source maps.
+type JavaScriptSourceMaps struct {
+
+	//  Specifies whether JavaScript error stack traces should be unminified for this
+	// app monitor. The default is for JavaScript error stack trace unminification to
+	// be DISABLED .
+	//
+	// This member is required.
+	Status DeobfuscationStatus
+
+	//  The S3Uri of the bucket or folder that stores the source map files. It is
+	// required if status is ENABLED.
+	S3Uri *string
 
 	noSmithyDocumentSerde
 }

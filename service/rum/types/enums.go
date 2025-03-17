@@ -21,6 +21,25 @@ func (CustomEventsStatus) Values() []CustomEventsStatus {
 	}
 }
 
+type DeobfuscationStatus string
+
+// Enum values for DeobfuscationStatus
+const (
+	DeobfuscationStatusEnabled  DeobfuscationStatus = "ENABLED"
+	DeobfuscationStatusDisabled DeobfuscationStatus = "DISABLED"
+)
+
+// Values returns all known values for DeobfuscationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeobfuscationStatus) Values() []DeobfuscationStatus {
+	return []DeobfuscationStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type MetricDestination string
 
 // Enum values for MetricDestination

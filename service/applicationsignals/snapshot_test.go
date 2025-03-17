@@ -74,6 +74,18 @@ func TestCheckSnapshot_BatchGetServiceLevelObjectiveBudgetReport(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchUpdateExclusionWindows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateExclusionWindows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchUpdateExclusionWindows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateServiceLevelObjective(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateServiceLevelObjective(context.Background(), nil, func(o *Options) {
@@ -139,6 +151,18 @@ func TestCheckSnapshot_ListServiceDependents(t *testing.T) {
 	_, err := svc.ListServiceDependents(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListServiceDependents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListServiceLevelObjectiveExclusionWindows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceLevelObjectiveExclusionWindows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListServiceLevelObjectiveExclusionWindows")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -253,6 +277,18 @@ func TestUpdateSnapshot_BatchGetServiceLevelObjectiveBudgetReport(t *testing.T) 
 	}
 }
 
+func TestUpdateSnapshot_BatchUpdateExclusionWindows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateExclusionWindows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchUpdateExclusionWindows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateServiceLevelObjective(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateServiceLevelObjective(context.Background(), nil, func(o *Options) {
@@ -318,6 +354,18 @@ func TestUpdateSnapshot_ListServiceDependents(t *testing.T) {
 	_, err := svc.ListServiceDependents(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListServiceDependents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListServiceLevelObjectiveExclusionWindows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceLevelObjectiveExclusionWindows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListServiceLevelObjectiveExclusionWindows")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

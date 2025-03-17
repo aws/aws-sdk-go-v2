@@ -3443,6 +3443,11 @@ func awsRestjson1_deserializeDocumentAppMonitor(v **types.AppMonitor, value inte
 				return err
 			}
 
+		case "DeobfuscationConfiguration":
+			if err := awsRestjson1_deserializeDocumentDeobfuscationConfiguration(&sv.DeobfuscationConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Domain":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3450,6 +3455,11 @@ func awsRestjson1_deserializeDocumentAppMonitor(v **types.AppMonitor, value inte
 					return fmt.Errorf("expected AppMonitorDomain to be of type string, got %T instead", value)
 				}
 				sv.Domain = ptr.String(jtv)
+			}
+
+		case "DomainList":
+			if err := awsRestjson1_deserializeDocumentAppMonitorDomainList(&sv.DomainList, value); err != nil {
+				return err
 			}
 
 		case "Id":
@@ -3620,6 +3630,42 @@ func awsRestjson1_deserializeDocumentAppMonitorConfiguration(v **types.AppMonito
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAppMonitorDomainList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AppMonitorDomain to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -4096,6 +4142,42 @@ func awsRestjson1_deserializeDocumentDataStorage(v **types.DataStorage, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDeobfuscationConfiguration(v **types.DeobfuscationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeobfuscationConfiguration
+	if *v == nil {
+		sv = &types.DeobfuscationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "JavaScriptSourceMaps":
+			if err := awsRestjson1_deserializeDocumentJavaScriptSourceMaps(&sv.JavaScriptSourceMaps, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDimensionKeysMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4286,6 +4368,55 @@ func awsRestjson1_deserializeDocumentInvalidPolicyRevisionIdException(v **types.
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJavaScriptSourceMaps(v **types.JavaScriptSourceMaps, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JavaScriptSourceMaps
+	if *v == nil {
+		sv = &types.JavaScriptSourceMaps{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeobfuscationS3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeobfuscationStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.DeobfuscationStatus(jtv)
 			}
 
 		default:

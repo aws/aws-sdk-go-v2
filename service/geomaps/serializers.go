@@ -261,8 +261,16 @@ func awsRestjson1_serializeOpHttpBindingsGetStaticMapInput(v *GetStaticMapInput,
 		encoder.SetQuery("center").String(*v.Center)
 	}
 
+	if len(v.ColorScheme) > 0 {
+		encoder.SetQuery("color-scheme").String(string(v.ColorScheme))
+	}
+
 	if v.CompactOverlay != nil {
 		encoder.SetQuery("compact-overlay").String(*v.CompactOverlay)
+	}
+
+	if v.CropLabels != nil {
+		encoder.SetQuery("crop-labels").Boolean(*v.CropLabels)
 	}
 
 	if v.FileName == nil || len(*v.FileName) == 0 {
@@ -286,8 +294,24 @@ func awsRestjson1_serializeOpHttpBindingsGetStaticMapInput(v *GetStaticMapInput,
 		encoder.SetQuery("key").String(*v.Key)
 	}
 
+	if len(v.LabelSize) > 0 {
+		encoder.SetQuery("label-size").String(string(v.LabelSize))
+	}
+
+	if v.Language != nil {
+		encoder.SetQuery("lang").String(*v.Language)
+	}
+
 	if v.Padding != nil {
 		encoder.SetQuery("padding").Integer(*v.Padding)
+	}
+
+	if len(v.PointsOfInterests) > 0 {
+		encoder.SetQuery("pois").String(string(v.PointsOfInterests))
+	}
+
+	if v.PoliticalView != nil {
+		encoder.SetQuery("political-view").String(*v.PoliticalView)
 	}
 
 	if v.Radius != nil {

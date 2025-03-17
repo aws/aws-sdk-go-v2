@@ -4034,6 +4034,13 @@ func awsAwsjson11_serializeDocumentFieldToMatch(v *types.FieldToMatch, value smi
 		}
 	}
 
+	if v.UriFragment != nil {
+		ok := object.Key("UriFragment")
+		if err := awsAwsjson11_serializeDocumentUriFragment(v.UriFragment, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UriPath != nil {
 		ok := object.Key("UriPath")
 		if err := awsAwsjson11_serializeDocumentUriPath(v.UriPath, ok); err != nil {
@@ -5896,6 +5903,18 @@ func awsAwsjson11_serializeDocumentTokenDomains(v []string, value smithyjson.Val
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUriFragment(v *types.UriFragment, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FallbackBehavior) > 0 {
+		ok := object.Key("FallbackBehavior")
+		ok.String(string(v.FallbackBehavior))
+	}
+
 	return nil
 }
 

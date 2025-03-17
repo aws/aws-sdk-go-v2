@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the style.
+// GetStyleDescriptor returns information about the style.
 func (c *Client) GetStyleDescriptor(ctx context.Context, params *GetStyleDescriptorInput, optFns ...func(*Options)) (*GetStyleDescriptorOutput, error) {
 	if params == nil {
 		params = &GetStyleDescriptorInput{}
@@ -62,8 +62,6 @@ type GetStyleDescriptorInput struct {
 	//   - KEN : Kenya's view on the Ilemi Triangle
 	//
 	//   - MAR : Morocco's view on Western Sahara
-	//
-	//   - PAK : Pakistan's view on Jammu and Kashmir and the Junagadh Area
 	//
 	//   - RUS : Russia's view on Crimea
 	//

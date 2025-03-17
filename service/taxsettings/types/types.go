@@ -809,7 +809,7 @@ type TaxRegistration struct {
 	// This member is required.
 	RegistrationId *string
 
-	// Type of your tax registration. This can be either VAT or GST .
+	// Type of your tax registration.
 	//
 	// This member is required.
 	RegistrationType TaxRegistrationType
@@ -1037,16 +1037,20 @@ type VerificationDetails struct {
 // Additional tax information to specify for a TRN in Vietnam.
 type VietnamAdditionalInfo struct {
 
-	// The electronic transaction code number on the tax return document.
+	// The electronic transaction code number on the tax return document. This field
+	// must be provided for successful API operation.
 	ElectronicTransactionCodeNumber *string
 
-	// The enterprise identification number for tax registration.
+	// The enterprise identification number for tax registration. This field must be
+	// provided for successful API operation.
 	EnterpriseIdentificationNumber *string
 
-	// The payment voucher number on the tax return payment document.
+	// The payment voucher number on the tax return payment document. This field must
+	// be provided for successful API operation.
 	PaymentVoucherNumber *string
 
-	// The date on the tax return payment document.
+	// The date on the tax return payment document. This field must be provided for
+	// successful API operation.
 	PaymentVoucherNumberDate *string
 
 	noSmithyDocumentSerde

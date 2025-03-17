@@ -74,9 +74,17 @@ type UpdateAppMonitorInput struct {
 	// more than 30 days, but it does incur Amazon CloudWatch Logs charges.
 	CwLogEnabled *bool
 
+	//  A structure that contains the configuration for how an app monitor can
+	// deobfuscate stack traces.
+	DeobfuscationConfiguration *types.DeobfuscationConfiguration
+
 	// The top-level internet domain name for which your application has
 	// administrative authority.
 	Domain *string
+
+	//  List the domain names for which your application has administrative authority.
+	// The UpdateAppMonitor allows either the domain or the domain list.
+	DomainList []string
 
 	noSmithyDocumentSerde
 }

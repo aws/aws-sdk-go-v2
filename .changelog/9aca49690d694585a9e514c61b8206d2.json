@@ -1,0 +1,8 @@
+{
+    "id": "9aca4969-0d69-4585-a9e5-14c61b8206d2",
+    "type": "feature",
+    "description": "Provide support for vector map styles in the GetStaticMap operation.",
+    "modules": [
+        "service/geomaps"
+    ]
+}

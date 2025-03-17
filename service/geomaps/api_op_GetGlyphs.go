@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the map's glyphs.
+// GetGlyphs returns the map's glyphs.
 func (c *Client) GetGlyphs(ctx context.Context, params *GetGlyphsInput, optFns ...func(*Options)) (*GetGlyphsOutput, error) {
 	if params == nil {
 		params = &GetGlyphsInput{}

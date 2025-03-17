@@ -466,6 +466,38 @@ func addOpUpdateRumMetricDefinitionValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpUpdateRumMetricDefinition{}, middleware.After)
 }
 
+func validateDeobfuscationConfiguration(v *types.DeobfuscationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeobfuscationConfiguration"}
+	if v.JavaScriptSourceMaps != nil {
+		if err := validateJavaScriptSourceMaps(v.JavaScriptSourceMaps); err != nil {
+			invalidParams.AddNested("JavaScriptSourceMaps", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJavaScriptSourceMaps(v *types.JavaScriptSourceMaps) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JavaScriptSourceMaps"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetricDefinitionRequest(v *types.MetricDefinitionRequest) error {
 	if v == nil {
 		return nil
@@ -623,8 +655,10 @@ func validateOpCreateAppMonitorInput(v *CreateAppMonitorInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	if v.DeobfuscationConfiguration != nil {
+		if err := validateDeobfuscationConfiguration(v.DeobfuscationConfiguration); err != nil {
+			invalidParams.AddNested("DeobfuscationConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -873,6 +907,11 @@ func validateOpUpdateAppMonitorInput(v *UpdateAppMonitorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAppMonitorInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DeobfuscationConfiguration != nil {
+		if err := validateDeobfuscationConfiguration(v.DeobfuscationConfiguration); err != nil {
+			invalidParams.AddNested("DeobfuscationConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

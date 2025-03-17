@@ -1,0 +1,8 @@
+{
+    "id": "1c6b0dcf-8c97-422b-acb1-8a91c5bc3048",
+    "type": "feature",
+    "description": "CloudWatch RUM now supports unminification of JS error stack traces.",
+    "modules": [
+        "service/rum"
+    ]
+}

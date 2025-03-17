@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides high-quality static map images with customizable options. You can
-// modify the map's appearance and overlay additional information. It's an ideal
-// solution for applications requiring tailored static map snapshots.
+// GetStaticMap provides high-quality static map images with customizable options.
+// You can modify the map's appearance and overlay additional information. It's an
+// ideal solution for applications requiring tailored static map snapshots.
 func (c *Client) GetStaticMap(ctx context.Context, params *GetStaticMapInput, optFns ...func(*Options)) (*GetStaticMapOutput, error) {
 	if params == nil {
 		params = &GetStaticMapInput{}
@@ -73,6 +73,16 @@ type GetStaticMapInput struct {
 	// Example: 49.295,-123.108
 	Center *string
 
+	// Sets color tone for map, such as dark and light for specific map styles. It
+	// only applies to vector map styles, such as Standard.
+	//
+	// Example: Light
+	//
+	// Default value: Light
+	//
+	// Valid values for ColorScheme are case sensitive.
+	ColorScheme types.ColorScheme
+
 	// Takes in a string to draw geometries on the image. The input is a comma
 	// separated format as follows format: [Lon, Lat]
 	//
@@ -83,6 +93,10 @@ type GetStaticMapInput struct {
 	// Currently it supports the following geometry types: point, line and polygon. It
 	// does not support multiPoint , multiLine and multiPolgyon.
 	CompactOverlay *string
+
+	// It is a flag that takes in true or false. It prevents the labels that are on
+	// the edge of the image from being cut or obscured.
+	CropLabels *bool
 
 	// Takes in a string to draw geometries on the image. The input is a valid GeoJSON
 	// collection object.
@@ -97,6 +111,154 @@ type GetStaticMapInput struct {
 	// SigV4 signature must be provided when making a request.
 	Key *string
 
+	// Overrides the label size auto-calculated by FileName . Takes in one of the
+	// values - Small or Large .
+	LabelSize types.LabelSize
+
+	// Specifies the language on the map labels using the BCP 47 language tag, limited
+	// to ISO 639-1 two-letter language codes. If the specified language data isn't
+	// available for the map image, the labels will default to the regional primary
+	// language.
+	//
+	// Supported codes:
+	//
+	//   - ar
+	//
+	//   - as
+	//
+	//   - az
+	//
+	//   - be
+	//
+	//   - bg
+	//
+	//   - bn
+	//
+	//   - bs
+	//
+	//   - ca
+	//
+	//   - cs
+	//
+	//   - cy
+	//
+	//   - da
+	//
+	//   - de
+	//
+	//   - el
+	//
+	//   - en
+	//
+	//   - es
+	//
+	//   - et
+	//
+	//   - eu
+	//
+	//   - fi
+	//
+	//   - fo
+	//
+	//   - fr
+	//
+	//   - ga
+	//
+	//   - gl
+	//
+	//   - gn
+	//
+	//   - gu
+	//
+	//   - he
+	//
+	//   - hi
+	//
+	//   - hr
+	//
+	//   - hu
+	//
+	//   - hy
+	//
+	//   - id
+	//
+	//   - is
+	//
+	//   - it
+	//
+	//   - ja
+	//
+	//   - ka
+	//
+	//   - kk
+	//
+	//   - km
+	//
+	//   - kn
+	//
+	//   - ko
+	//
+	//   - ky
+	//
+	//   - lt
+	//
+	//   - lv
+	//
+	//   - mk
+	//
+	//   - ml
+	//
+	//   - mr
+	//
+	//   - ms
+	//
+	//   - mt
+	//
+	//   - my
+	//
+	//   - nl
+	//
+	//   - no
+	//
+	//   - or
+	//
+	//   - pa
+	//
+	//   - pl
+	//
+	//   - pt
+	//
+	//   - ro
+	//
+	//   - ru
+	//
+	//   - sk
+	//
+	//   - sl
+	//
+	//   - sq
+	//
+	//   - sr
+	//
+	//   - sv
+	//
+	//   - ta
+	//
+	//   - te
+	//
+	//   - th
+	//
+	//   - tr
+	//
+	//   - uk
+	//
+	//   - uz
+	//
+	//   - vi
+	//
+	//   - zh
+	Language *string
+
 	// Applies additional space (in pixels) around overlay feature to prevent them
 	// from being cut or obscured.
 	//
@@ -108,6 +270,45 @@ type GetStaticMapInput struct {
 	//
 	// Example: 100
 	Padding *int32
+
+	// Determines if the result image will display icons representing points of
+	// interest on the map.
+	PointsOfInterests types.MapFeatureMode
+
+	// Specifies the political view, using ISO 3166-2 or ISO 3166-3 country code
+	// format.
+	//
+	// The following political views are currently supported:
+	//
+	//   - ARG : Argentina's view on the Southern Patagonian Ice Field and Tierra Del
+	//   Fuego, including the Falkland Islands, South Georgia, and South Sandwich Islands
+	//
+	//   - EGY : Egypt's view on Bir Tawil
+	//
+	//   - IND : India's view on Gilgit-Baltistan
+	//
+	//   - KEN : Kenya's view on the Ilemi Triangle
+	//
+	//   - MAR : Morocco's view on Western Sahara
+	//
+	//   - RUS : Russia's view on Crimea
+	//
+	//   - SDN : Sudan's view on the Halaib Triangle
+	//
+	//   - SRB : Serbia's view on Kosovo, Vukovar, and Sarengrad Islands
+	//
+	//   - SUR : Suriname's view on the Courantyne Headwaters and Lawa Headwaters
+	//
+	//   - SYR : Syria's view on the Golan Heights
+	//
+	//   - TUR : Turkey's view on Cyprus and Northern Cyprus
+	//
+	//   - TZA : Tanzania's view on Lake Malawi
+	//
+	//   - URY : Uruguay's view on Rincon de Artigas
+	//
+	//   - VNM : Vietnam's view on the Paracel Islands and Spratly Islands
+	PoliticalView *string
 
 	// Used with center parameter, it specifies the zoom of the image where you can
 	// control it on a granular level. Takes in any value >= 1 .
@@ -125,7 +326,7 @@ type GetStaticMapInput struct {
 	// Example: KilometersMiles, Miles, Kilometers, MilesKilometers
 	ScaleBarUnit types.ScaleBarUnit
 
-	// Style specifies the desired map style for the Style APIs.
+	// Style specifies the desired map style.
 	Style types.StaticMapStyle
 
 	// Specifies the zoom level of the map image.

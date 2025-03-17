@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the map's sprites.
+// GetSprites returns the map's sprites.
 func (c *Client) GetSprites(ctx context.Context, params *GetSpritesInput, optFns ...func(*Options)) (*GetSpritesOutput, error) {
 	if params == nil {
 		params = &GetSpritesInput{}
