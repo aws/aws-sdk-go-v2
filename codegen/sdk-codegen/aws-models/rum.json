@@ -41,6 +41,12 @@
                         "smithy.api#documentation": "<p>The top-level internet domain name for which your application has administrative authority.</p>"
                     }
                 },
+                "DomainList": {
+                    "target": "com.amazonaws.rum#AppMonitorDomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         List the domain names for which your application has administrative authority. \n      </p>"
+                    }
+                },
                 "Id": {
                     "target": "com.amazonaws.rum#AppMonitorId",
                     "traits": {
@@ -87,6 +93,12 @@
                     "target": "com.amazonaws.rum#CustomEvents",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n      custom events.</p>\n         <p>For more information about custom events, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
+                    }
+                },
+                "DeobfuscationConfiguration": {
+                    "target": "com.amazonaws.rum#DeobfuscationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can deobfuscate stack traces.\n      </p>"
                     }
                 }
             },
@@ -190,7 +202,19 @@
                     "min": 1,
                     "max": 253
                 },
-                "smithy.api#pattern": "^(localhost)$|^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|(?=^[a-zA-Z0-9\\.\\*-]{4,253}$)(?!.*\\.-)(?!.*-\\.)(?!.*\\.\\.)(?!.*[^\\.]{64,})^(\\*\\.)?(?![-\\.\\*])[^\\*]{1,}\\.(?!.*--)(?=.*[a-zA-Z])[^\\*]{1,}[^\\*-]$"
+                "smithy.api#pattern": "^(localhost)$|^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|(?=^[a-zA-Z0-9\\.\\*-]{4,253}$)(?!.*\\.-)(?!.*-\\.)(?!.*\\.\\.)(?!.*[^\\.]{64,})^(\\*\\.)?(?![-\\.\\*])[^\\*]{1,}\\.(\\*|(?!.*--)(?=.*[a-zA-Z])[^\\*]{1,}[^\\*-])$"
+            }
+        },
+        "com.amazonaws.rum#AppMonitorDomainList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rum#AppMonitorDomain"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.rum#AppMonitorId": {
@@ -775,8 +799,13 @@
                 "Domain": {
                     "target": "com.amazonaws.rum#AppMonitorDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The top-level internet domain name for which your application has administrative authority.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The top-level internet domain name for which your application has administrative authority.</p>"
+                    }
+                },
+                "DomainList": {
+                    "target": "com.amazonaws.rum#AppMonitorDomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         List the domain names for which your application has administrative authority. The <code>CreateAppMonitor</code> requires either the domain or the domain list.\n      </p>"
                     }
                 },
                 "Tags": {
@@ -801,6 +830,12 @@
                     "target": "com.amazonaws.rum#CustomEvents",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n         custom events. If you omit this parameter, custom events are <code>DISABLED</code>.</p>\n         <p>For more information about custom events, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
+                    }
+                },
+                "DeobfuscationConfiguration": {
+                    "target": "com.amazonaws.rum#DeobfuscationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can deobfuscate stack traces.\n      </p>"
                     }
                 }
             }
@@ -1085,6 +1120,45 @@
         "com.amazonaws.rum#DeleteRumMetricsDestinationResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.rum#DeobfuscationConfiguration": {
+            "type": "structure",
+            "members": {
+                "JavaScriptSourceMaps": {
+                    "target": "com.amazonaws.rum#JavaScriptSourceMaps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can unminify JavaScript error stack traces using source maps.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can deobfuscate stack traces.\n      </p>"
+            }
+        },
+        "com.amazonaws.rum#DeobfuscationS3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9][-.a-z0-9]{1,61}(?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/?$"
+            }
+        },
+        "com.amazonaws.rum#DeobfuscationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ENABLED",
+                        "value": "ENABLED"
+                    },
+                    {
+                        "name": "DISABLED",
+                        "value": "DISABLED"
+                    }
+                ]
+            }
         },
         "com.amazonaws.rum#DestinationArn": {
             "type": "string",
@@ -1456,6 +1530,27 @@
                 "smithy.api#documentation": "<p>The policy revision ID that you provided doeesn't match the latest policy revision ID.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rum#JavaScriptSourceMaps": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.rum#DeobfuscationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Specifies whether JavaScript error stack traces should be unminified for this app monitor. The default is for JavaScript error stack trace unminification to be <code>DISABLED</code>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Uri": {
+                    "target": "com.amazonaws.rum#DeobfuscationS3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The S3Uri of the bucket or folder that stores the source map files. It is required if status is ENABLED.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can unminify JavaScript error stack traces using source maps.\n      </p>"
             }
         },
         "com.amazonaws.rum#JsonValue": {
@@ -3507,6 +3602,12 @@
                         "smithy.api#documentation": "<p>The top-level internet domain name for which your application has administrative authority.</p>"
                     }
                 },
+                "DomainList": {
+                    "target": "com.amazonaws.rum#AppMonitorDomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         List the domain names for which your application has administrative authority. The <code>UpdateAppMonitor</code> allows either the domain or the domain list.\n      </p>"
+                    }
+                },
                 "AppMonitorConfiguration": {
                     "target": "com.amazonaws.rum#AppMonitorConfiguration",
                     "traits": {
@@ -3523,6 +3624,12 @@
                     "target": "com.amazonaws.rum#CustomEvents",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n         custom events. The default is for custom events to be <code>DISABLED</code>.</p>\n         <p>For more information about custom events, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
+                    }
+                },
+                "DeobfuscationConfiguration": {
+                    "target": "com.amazonaws.rum#DeobfuscationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can deobfuscate stack traces.\n      </p>"
                     }
                 }
             }

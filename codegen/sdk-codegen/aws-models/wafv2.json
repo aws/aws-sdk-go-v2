@@ -5660,6 +5660,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Available for use with Amazon CloudFront distributions and Application Load Balancers. Match against the request's JA4 fingerprint. The JA4 fingerprint is a 36-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. WAF calculates and logs this fingerprint for each\n\t\t\t\t\t\trequest that has enough TLS Client Hello information for the calculation. Almost \n                        all web requests include this information.</p>\n         <note>\n            <p>You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>.  </p>\n         </note>\n         <p>You can obtain the JA4 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n         <p>Provide the JA4 fingerprint string from the logs in your string match statement\n\t\t\t\t\t\t\tspecification, to match with any future requests that have the same TLS configuration.</p>"
                     }
+                },
+                "UriFragment": {
+                    "target": "com.amazonaws.wafv2#UriFragment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Inspect fragments of the request URI. You must configure scope and pattern matching filters in \n         the <code>UriFragment</code> object, to define the fragment of a URI that WAF inspects. </p>\n         <p>Only the first 8 KB (8192 bytes) of a request's URI fragments and only the first 200 URI fragments\n         are forwarded to WAF for inspection by the underlying host service. You must\n         configure how to handle any oversize URI fragment content in the <code>UriFragment</code> object.\n         WAF applies the pattern matching filters to the cookies that it receives from the\n         underlying host service. </p>"
+                    }
                 }
             },
             "traits": {
@@ -12762,6 +12768,20 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.wafv2#UriFragment": {
+            "type": "structure",
+            "members": {
+                "FallbackBehavior": {
+                    "target": "com.amazonaws.wafv2#FallbackBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What WAF should do if it fails to completely parse the JSON body. The options are\n            the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EVALUATE_AS_STRING</code> - Inspect the body as plain text. WAF\n                  applies the text transformations and inspection criteria that you defined for the\n                  JSON inspection to the body text string.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement.\n                  WAF applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n                  statement.</p>\n            </li>\n         </ul>\n         <p>If you don't provide this setting, WAF parses and evaluates the content only up to the\n            first parsing failure that it encounters. </p>\n         <p>Example JSON: <code>{ \"UriFragment\": { \"FallbackBehavior\": \"MATCH\"} }</code>\n         </p>\n         <note>\n            <p>WAF parsing doesn't fully validate the input JSON string, so parsing can succeed even for invalid JSON. When \n               parsing succeeds, WAF doesn't apply the fallback behavior. For more information, \n               see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-fields-list.html#waf-rule-statement-request-component-json-body\">JSON body</a> \n               in the <i>WAF Developer Guide</i>.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Inspect fragments of the request URI. You can specify the parts of the URI fragment to \n         inspect and you can narrow the set of URI fragments to inspect by including or excluding specific \n         keys.\n      </p>\n         <p>This is used to indicate the web request component to inspect, in the <a>FieldToMatch</a> specification. </p>\n         <p>Example JSON: <code>\"UriFragment\": { \"MatchPattern\": { \"All\": {} }, \"MatchScope\": \"KEY\",\n               \"OversizeHandling\": \"MATCH\" }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#UriPath": {

@@ -13,7 +13,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request was denied because of insufficient access or permissions. Check with an administrator to verify your permissions.</p>",
+                "smithy.api#documentation": "<p>The request was denied because of insufficient access or permissions. Check with an\n         administrator to verify your permissions.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -92,7 +92,7 @@
                 "target": "com.amazonaws.geomaps#GetGlyphsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the map's glyphs.</p>",
+                "smithy.api#documentation": "<p>\n            <code>GetGlyphs</code> returns the map's glyphs.</p>",
                 "smithy.api#http": {
                     "uri": "/glyphs/{FontStack}/{FontUnicodeRange}",
                     "method": "GET"
@@ -122,7 +122,7 @@
                 "FontStack": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the <code>FontStack</code> to retrieve. </p>\n         <p>Example: <code>Amazon Ember Bold,Noto Sans Bold</code>.</p>\n         <p>The supported font stacks are as follows:</p>\n         <ul>\n            <li>\n               <p>Amazon Ember Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Bold Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Bold,Noto Sans Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC BdItalic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Bold Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Bold,Noto Sans Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans Arabic Condensed Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Light</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Light Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC LtItalic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Regular Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Regular,Noto Sans Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC RgItalic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC ThItalic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Thin</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Thin Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Heavy</p>\n            </li>\n            <li>\n               <p>Amazon Ember Heavy Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Light</p>\n            </li>\n            <li>\n               <p>Amazon Ember Light Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Medium</p>\n            </li>\n            <li>\n               <p>Amazon Ember Medium Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Medium,Noto Sans Medium</p>\n            </li>\n            <li>\n               <p>Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular Italic,Noto Sans Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular,Noto Sans Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular,Noto Sans Regular,Noto Sans Arabic Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Thin</p>\n            </li>\n            <li>\n               <p>Amazon Ember Thin Italic</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_Bd</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_BdIt</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_Lt</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_LtIt</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_Rg</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_RgIt</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_Th</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_ThIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Bd</p>\n            </li>\n            <li>\n               <p>AmazonEmber_BdIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_He</p>\n            </li>\n            <li>\n               <p>AmazonEmber_HeIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Lt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_LtIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Md</p>\n            </li>\n            <li>\n               <p>AmazonEmber_MdIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Rg</p>\n            </li>\n            <li>\n               <p>AmazonEmber_RgIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Th</p>\n            </li>\n            <li>\n               <p>AmazonEmber_ThIt</p>\n            </li>\n            <li>\n               <p>Noto Sans Black</p>\n            </li>\n            <li>\n               <p>Noto Sans Black Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Bold</p>\n            </li>\n            <li>\n               <p>Noto Sans Bold Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Extra Bold</p>\n            </li>\n            <li>\n               <p>Noto Sans Extra Bold Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Extra Light</p>\n            </li>\n            <li>\n               <p>Noto Sans Extra Light Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Light</p>\n            </li>\n            <li>\n               <p>Noto Sans Light Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Medium</p>\n            </li>\n            <li>\n               <p>Noto Sans Medium Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Regular</p>\n            </li>\n            <li>\n               <p>Noto Sans Semi Bold</p>\n            </li>\n            <li>\n               <p>Noto Sans Semi Bold Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Thin</p>\n            </li>\n            <li>\n               <p>Noto Sans Thin Italic</p>\n            </li>\n            <li>\n               <p>NotoSans-Bold</p>\n            </li>\n            <li>\n               <p>NotoSans-Italic</p>\n            </li>\n            <li>\n               <p>NotoSans-Medium</p>\n            </li>\n            <li>\n               <p>NotoSans-Regular</p>\n            </li>\n            <li>\n               <p>Open Sans Regular,Arial Unicode MS Regular</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Name of the <code>FontStack</code> to retrieve. </p>\n         <p>Example: <code>Amazon Ember Bold,Noto Sans Bold</code>.</p>\n         <p>The supported font stacks are as follows:</p>\n         <ul>\n            <li>\n               <p>Amazon Ember Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Bold Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Bold,Noto Sans Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC BdItalic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Bold Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Bold,Noto Sans Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans Arabic Condensed\n               Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Light</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Light Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC LtItalic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Regular Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Regular,Noto Sans Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed\n               Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC RgItalic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC ThItalic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Thin</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Thin Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Heavy</p>\n            </li>\n            <li>\n               <p>Amazon Ember Heavy Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Light</p>\n            </li>\n            <li>\n               <p>Amazon Ember Light Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Medium</p>\n            </li>\n            <li>\n               <p>Amazon Ember Medium Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Medium,Noto Sans Medium</p>\n            </li>\n            <li>\n               <p>Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular Italic,Noto Sans Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular,Noto Sans Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular,Noto Sans Regular,Noto Sans Arabic Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Thin</p>\n            </li>\n            <li>\n               <p>Amazon Ember Thin Italic</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_Bd</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_BdIt</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_Lt</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_LtIt</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_Rg</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_RgIt</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_Th</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_ThIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Bd</p>\n            </li>\n            <li>\n               <p>AmazonEmber_BdIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_He</p>\n            </li>\n            <li>\n               <p>AmazonEmber_HeIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Lt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_LtIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Md</p>\n            </li>\n            <li>\n               <p>AmazonEmber_MdIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Rg</p>\n            </li>\n            <li>\n               <p>AmazonEmber_RgIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Th</p>\n            </li>\n            <li>\n               <p>AmazonEmber_ThIt</p>\n            </li>\n            <li>\n               <p>Noto Sans Black</p>\n            </li>\n            <li>\n               <p>Noto Sans Black Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Bold</p>\n            </li>\n            <li>\n               <p>Noto Sans Bold Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Extra Bold</p>\n            </li>\n            <li>\n               <p>Noto Sans Extra Bold Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Extra Light</p>\n            </li>\n            <li>\n               <p>Noto Sans Extra Light Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Light</p>\n            </li>\n            <li>\n               <p>Noto Sans Light Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Medium</p>\n            </li>\n            <li>\n               <p>Noto Sans Medium Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Regular</p>\n            </li>\n            <li>\n               <p>Noto Sans Semi Bold</p>\n            </li>\n            <li>\n               <p>Noto Sans Semi Bold Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Thin</p>\n            </li>\n            <li>\n               <p>Noto Sans Thin Italic</p>\n            </li>\n            <li>\n               <p>NotoSans-Bold</p>\n            </li>\n            <li>\n               <p>NotoSans-Italic</p>\n            </li>\n            <li>\n               <p>NotoSans-Medium</p>\n            </li>\n            <li>\n               <p>NotoSans-Regular</p>\n            </li>\n            <li>\n               <p>Open Sans Regular,Arial Unicode MS Regular</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#length": {
                             "max": 1000
@@ -157,7 +157,7 @@
                 "ContentType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as the HTTP body.</p>",
+                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as\n         the HTTP body.</p>",
                         "smithy.api#httpHeader": "Content-Type"
                     }
                 },
@@ -189,7 +189,7 @@
                 "target": "com.amazonaws.geomaps#GetSpritesResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the map's sprites.</p>",
+                "smithy.api#documentation": "<p>\n            <code>GetSprites</code> returns the map's sprites.</p>",
                 "smithy.api#http": {
                     "uri": "/styles/{Style}/{ColorScheme}/{Variant}/sprites/{FileName}",
                     "method": "GET"
@@ -238,7 +238,7 @@
                 "ColorScheme": {
                     "target": "com.amazonaws.geomaps#ColorScheme",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets color tone for map such as dark and light for specific map styles. It applies to only vector map styles such as Standard and Monochrome.</p>\n         <p>Example: <code>Light</code>\n         </p>\n         <p>Default value: <code>Light</code>\n         </p>\n         <note>\n            <p>Valid values for ColorScheme are case sensitive.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Sets color tone for map such as dark and light for specific map styles. It applies to\n         only vector map styles such as Standard and Monochrome.</p>\n         <p>Example: <code>Light</code>\n         </p>\n         <p>Default value: <code>Light</code>\n         </p>\n         <note>\n            <p>Valid values for ColorScheme are case sensitive.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -246,7 +246,7 @@
                 "Variant": {
                     "target": "com.amazonaws.geomaps#Variant",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optimizes map styles for specific use case or industry. You can choose allowed variant only with Standard map style.</p>\n         <p>Example: <code>Default</code>\n         </p>\n         <note>\n            <p>Valid values for Variant are case sensitive.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Optimizes map styles for specific use case or industry. You can choose allowed variant\n         only with Standard map style.</p>\n         <p>Example: <code>Default</code>\n         </p>\n         <note>\n            <p>Valid values for Variant are case sensitive.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -269,7 +269,7 @@
                 "ContentType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as the HTTP body.</p>",
+                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as\n         the HTTP body.</p>",
                         "smithy.api#httpHeader": "Content-Type"
                     }
                 },
@@ -316,7 +316,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p>Provides high-quality static map images with customizable options. You can modify the map's appearance and overlay additional information. It's an ideal solution for applications requiring tailored static map snapshots.</p>",
+                "smithy.api#documentation": "<p>\n            <code>GetStaticMap</code> provides high-quality static map images with customizable\n         options. You can modify the map's appearance and overlay additional information. It's an\n         ideal solution for applications requiring tailored static map snapshots.</p>",
                 "smithy.api#http": {
                     "uri": "/static/{FileName}",
                     "method": "GET"
@@ -368,17 +368,31 @@
                         "smithy.api#httpQuery": "center"
                     }
                 },
+                "ColorScheme": {
+                    "target": "com.amazonaws.geomaps#ColorScheme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets color tone for map, such as dark and light for specific map styles. It only applies to vector map styles, such as Standard.</p>\n         <p>Example: <code>Light</code>\n         </p>\n         <p>Default value: <code>Light</code>\n         </p>\n         <note>\n            <p>Valid values for <code>ColorScheme</code> are case sensitive.</p>\n         </note>",
+                        "smithy.api#httpQuery": "color-scheme"
+                    }
+                },
                 "CompactOverlay": {
                     "target": "com.amazonaws.geomaps#CompactOverlay",
                     "traits": {
-                        "smithy.api#documentation": "<p>Takes in a string to draw geometries on the image. The input is a comma separated format as follows format:\n         <code>[Lon, Lat]</code>\n         </p>\n         <p>Example:\n         <code>line:-122.407653,37.798557,-122.413291,37.802443;color=%23DD0000;width=7;outline-color=#00DD00;outline-width=5yd|point:-122.40572,37.80004;label=Fog Hill Market;size=large;text-color=%23DD0000;color=#EE4B2B</code>\n         </p>\n         <note>\n            <p>Currently it supports the following geometry types: point, line and polygon. It does not support multiPoint , multiLine and multiPolgyon.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Takes in a string to draw geometries on the image. The input is a comma separated format\n         as follows format: <code>[Lon, Lat]</code>\n         </p>\n         <p>Example:\n            <code>line:-122.407653,37.798557,-122.413291,37.802443;color=%23DD0000;width=7;outline-color=#00DD00;outline-width=5yd|point:-122.40572,37.80004;label=Fog\n            Hill Market;size=large;text-color=%23DD0000;color=#EE4B2B</code>\n         </p>\n         <note>\n            <p>Currently it supports the following geometry types: point, line and polygon. It does\n            not support multiPoint , multiLine and multiPolgyon.</p>\n         </note>",
                         "smithy.api#httpQuery": "compact-overlay"
+                    }
+                },
+                "CropLabels": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>It is a flag that takes in true or false. It prevents the labels that are on the edge of\n         the image from being cut or obscured.</p>",
+                        "smithy.api#httpQuery": "crop-labels"
                     }
                 },
                 "GeoJsonOverlay": {
                     "target": "com.amazonaws.geomaps#GeoJsonOverlay",
                     "traits": {
-                        "smithy.api#documentation": "<p>Takes in a string to draw geometries on the image. The input is a valid GeoJSON\n         collection object. </p>\n         <p>Example:\n            <code>{\"type\":\"FeatureCollection\",\"features\": [{\"type\":\"Feature\",\"geometry\":{\"type\":\"MultiPoint\",\"coordinates\": [[-90.076345,51.504107],[-0.074451,51.506892]]},\"properties\": {\"color\":\"#00DD00\"}}]}</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Takes in a string to draw geometries on the image. The input is a valid GeoJSON\n         collection object. </p>\n         <p>Example: <code>{\"type\":\"FeatureCollection\",\"features\":\n            [{\"type\":\"Feature\",\"geometry\":{\"type\":\"MultiPoint\",\"coordinates\":\n            [[-90.076345,51.504107],[-0.074451,51.506892]]},\"properties\":\n            {\"color\":\"#00DD00\"}}]}</code>\n         </p>",
                         "smithy.api#httpQuery": "geojson-overlay"
                     }
                 },
@@ -401,11 +415,39 @@
                         "smithy.api#httpQuery": "key"
                     }
                 },
+                "LabelSize": {
+                    "target": "com.amazonaws.geomaps#LabelSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overrides the label size auto-calculated by <code>FileName</code>. Takes in one of the\n         values - <code>Small</code> or <code>Large</code>.</p>",
+                        "smithy.api#httpQuery": "label-size"
+                    }
+                },
+                "Language": {
+                    "target": "com.amazonaws.geomaps#LanguageTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the language on the map labels using the BCP 47 language tag, limited to ISO\n         639-1 two-letter language codes. If the specified language data isn't available for the map\n         image, the labels will default to the regional primary language.</p>\n         <p>Supported codes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ar</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>as</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>az</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>be</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>bg</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>bn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>bs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ca</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>da</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>de</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>el</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>en</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>es</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>et</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eu</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>fi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>fo</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>fr</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ga</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>gl</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>gn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>gu</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>he</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>hi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>hr</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>hu</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>hy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>is</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>it</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ja</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ka</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>kk</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>km</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>kn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ko</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ky</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>lt</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>lv</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mk</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ml</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mr</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ms</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mt</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>my</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>nl</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>no</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>or</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pa</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pl</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pt</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ro</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ru</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sk</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sl</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sq</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sr</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sv</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ta</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>te</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>th</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tr</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>uk</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>uz</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>vi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "lang"
+                    }
+                },
                 "Padding": {
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>Applies additional space (in pixels) around overlay feature to prevent them from being\n         cut or obscured.</p>\n         <note>\n            <p>Value for max and min is determined by:</p>\n            <p>Min: <code>1</code>\n            </p>\n            <p>Max: <code>min(height, width)/4</code>\n            </p>\n         </note>\n         <p>Example: <code>100</code>\n         </p>",
                         "smithy.api#httpQuery": "padding"
+                    }
+                },
+                "PoliticalView": {
+                    "target": "com.amazonaws.geomaps#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the political view, using ISO 3166-2 or ISO 3166-3 country code format.</p>\n         <p>The following political views are currently supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ARG</code>: Argentina's view on the Southern Patagonian Ice Field and Tierra\n               Del Fuego, including the Falkland Islands, South Georgia, and South Sandwich\n               Islands</p>\n            </li>\n            <li>\n               <p>\n                  <code>EGY</code>: Egypt's view on Bir Tawil</p>\n            </li>\n            <li>\n               <p>\n                  <code>IND</code>: India's view on Gilgit-Baltistan</p>\n            </li>\n            <li>\n               <p>\n                  <code>KEN</code>: Kenya's view on the Ilemi Triangle</p>\n            </li>\n            <li>\n               <p>\n                  <code>MAR</code>: Morocco's view on Western Sahara</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUS</code>: Russia's view on Crimea</p>\n            </li>\n            <li>\n               <p>\n                  <code>SDN</code>: Sudan's view on the Halaib Triangle</p>\n            </li>\n            <li>\n               <p>\n                  <code>SRB</code>: Serbia's view on Kosovo, Vukovar, and Sarengrad Islands</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUR</code>: Suriname's view on the Courantyne Headwaters and Lawa\n               Headwaters</p>\n            </li>\n            <li>\n               <p>\n                  <code>SYR</code>: Syria's view on the Golan Heights</p>\n            </li>\n            <li>\n               <p>\n                  <code>TUR</code>: Turkey's view on Cyprus and Northern Cyprus</p>\n            </li>\n            <li>\n               <p>\n                  <code>TZA</code>: Tanzania's view on Lake Malawi</p>\n            </li>\n            <li>\n               <p>\n                  <code>URY</code>: Uruguay's view on Rincon de Artigas</p>\n            </li>\n            <li>\n               <p>\n                  <code>VNM</code>: Vietnam's view on the Paracel Islands and Spratly Islands</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "political-view"
+                    }
+                },
+                "PointsOfInterests": {
+                    "target": "com.amazonaws.geomaps#MapFeatureMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines if the result image will display icons representing points of interest on the map.</p>",
+                        "smithy.api#httpQuery": "pois"
                     }
                 },
                 "Radius": {
@@ -435,7 +477,7 @@
                 "Style": {
                     "target": "com.amazonaws.geomaps#StaticMapStyle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Style specifies the desired map style for the <code>Style</code> APIs.</p>",
+                        "smithy.api#documentation": "<p>\n            <code>Style</code> specifies the desired map style.</p>",
                         "smithy.api#httpQuery": "style"
                     }
                 },
@@ -474,14 +516,14 @@
                 "Blob": {
                     "target": "smithy.api#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blob represents a map image as a <code>jpeg</code> for\n         the <code>GetStaticMap</code> API.</p>",
+                        "smithy.api#documentation": "<p>The blob represents a map image as a <code>jpeg</code> for the <code>GetStaticMap</code>\n         API.</p>",
                         "smithy.api#httpPayload": {}
                     }
                 },
                 "ContentType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as the HTTP body.</p>",
+                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as\n         the HTTP body.</p>",
                         "smithy.api#httpHeader": "Content-Type"
                     }
                 },
@@ -521,7 +563,7 @@
                 "target": "com.amazonaws.geomaps#GetStyleDescriptorResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the style.</p>",
+                "smithy.api#documentation": "<p>\n            <code>GetStyleDescriptor</code> returns information about the style.</p>",
                 "smithy.api#http": {
                     "uri": "/styles/{Style}/descriptor",
                     "method": "GET"
@@ -558,14 +600,14 @@
                 "ColorScheme": {
                     "target": "com.amazonaws.geomaps#ColorScheme",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets color tone for map such as dark and light for specific map styles. It applies to only vector map styles such as Standard and Monochrome.</p>\n         <p>Example: <code>Light</code>\n         </p>\n         <p>Default value: <code>Light</code>\n         </p>\n         <note>\n            <p>Valid values for ColorScheme are case sensitive.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Sets color tone for map such as dark and light for specific map styles. It applies to\n         only vector map styles such as Standard and Monochrome.</p>\n         <p>Example: <code>Light</code>\n         </p>\n         <p>Default value: <code>Light</code>\n         </p>\n         <note>\n            <p>Valid values for ColorScheme are case sensitive.</p>\n         </note>",
                         "smithy.api#httpQuery": "color-scheme"
                     }
                 },
                 "PoliticalView": {
                     "target": "com.amazonaws.geomaps#CountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the political view using ISO 3166-2 or ISO 3166-3 country code format.</p>\n         <p>The following political views are currently supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ARG</code>: Argentina's view on the Southern Patagonian Ice Field and Tierra Del Fuego, including the Falkland Islands, South Georgia, and South Sandwich Islands</p>\n            </li>\n            <li>\n               <p>\n                  <code>EGY</code>: Egypt's view on Bir Tawil</p>\n            </li>\n            <li>\n               <p>\n                  <code>IND</code>: India's view on Gilgit-Baltistan</p>\n            </li>\n            <li>\n               <p>\n                  <code>KEN</code>: Kenya's view on the Ilemi Triangle</p>\n            </li>\n            <li>\n               <p>\n                  <code>MAR</code>: Morocco's view on Western Sahara</p>\n            </li>\n            <li>\n               <p>\n                  <code>PAK</code>: Pakistan's view on Jammu and Kashmir and the Junagadh Area</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUS</code>: Russia's view on Crimea</p>\n            </li>\n            <li>\n               <p>\n                  <code>SDN</code>: Sudan's view on the Halaib Triangle</p>\n            </li>\n            <li>\n               <p>\n                  <code>SRB</code>: Serbia's view on Kosovo, Vukovar, and Sarengrad Islands</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUR</code>: Suriname's view on the Courantyne Headwaters and Lawa Headwaters</p>\n            </li>\n            <li>\n               <p>\n                  <code>SYR</code>: Syria's view on the Golan Heights</p>\n            </li>\n            <li>\n               <p>\n                  <code>TUR</code>: Turkey's view on Cyprus and Northern Cyprus</p>\n            </li>\n            <li>\n               <p>\n                  <code>TZA</code>: Tanzania's view on Lake Malawi</p>\n            </li>\n            <li>\n               <p>\n                  <code>URY</code>: Uruguay's view on Rincon de Artigas</p>\n            </li>\n            <li>\n               <p>\n                  <code>VNM</code>: Vietnam's view on the Paracel Islands and Spratly Islands</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the political view using ISO 3166-2 or ISO 3166-3 country code format.</p>\n         <p>The following political views are currently supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ARG</code>: Argentina's view on the Southern Patagonian Ice Field and Tierra\n               Del Fuego, including the Falkland Islands, South Georgia, and South Sandwich\n               Islands</p>\n            </li>\n            <li>\n               <p>\n                  <code>EGY</code>: Egypt's view on Bir Tawil</p>\n            </li>\n            <li>\n               <p>\n                  <code>IND</code>: India's view on Gilgit-Baltistan</p>\n            </li>\n            <li>\n               <p>\n                  <code>KEN</code>: Kenya's view on the Ilemi Triangle</p>\n            </li>\n            <li>\n               <p>\n                  <code>MAR</code>: Morocco's view on Western Sahara</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUS</code>: Russia's view on Crimea</p>\n            </li>\n            <li>\n               <p>\n                  <code>SDN</code>: Sudan's view on the Halaib Triangle</p>\n            </li>\n            <li>\n               <p>\n                  <code>SRB</code>: Serbia's view on Kosovo, Vukovar, and Sarengrad Islands</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUR</code>: Suriname's view on the Courantyne Headwaters and Lawa\n               Headwaters</p>\n            </li>\n            <li>\n               <p>\n                  <code>SYR</code>: Syria's view on the Golan Heights</p>\n            </li>\n            <li>\n               <p>\n                  <code>TUR</code>: Turkey's view on Cyprus and Northern Cyprus</p>\n            </li>\n            <li>\n               <p>\n                  <code>TZA</code>: Tanzania's view on Lake Malawi</p>\n            </li>\n            <li>\n               <p>\n                  <code>URY</code>: Uruguay's view on Rincon de Artigas</p>\n            </li>\n            <li>\n               <p>\n                  <code>VNM</code>: Vietnam's view on the Paracel Islands and Spratly Islands</p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "political-view"
                     }
                 },
@@ -587,14 +629,14 @@
                 "Blob": {
                     "target": "smithy.api#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>This Blob contains the body of the style descriptor which is in application/json format.</p>",
+                        "smithy.api#documentation": "<p>This Blob contains the body of the style descriptor which is in application/json\n         format.</p>",
                         "smithy.api#httpPayload": {}
                     }
                 },
                 "ContentType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as the HTTP body.</p>",
+                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as\n         the HTTP body.</p>",
                         "smithy.api#httpHeader": "Content-Type"
                     }
                 },
@@ -641,7 +683,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p>Returns a tile. Map tiles are used by clients to render a map. they're addressed using a grid arrangement with an X coordinate, Y coordinate, and Z (zoom) level.</p>",
+                "smithy.api#documentation": "<p>\n            <code>GetTile</code> returns a tile. Map tiles are used by clients to render a map.\n         they're addressed using a grid arrangement with an X coordinate, Y coordinate, and Z (zoom)\n         level.</p>",
                 "smithy.api#http": {
                     "uri": "/tiles/{Tileset}/{Z}/{X}/{Y}",
                     "method": "GET"
@@ -723,14 +765,14 @@
                 "Blob": {
                     "target": "smithy.api#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blob represents a vector tile in <code>mvt</code> format for the\n            <code>GetTile</code> API.</p>",
+                        "smithy.api#documentation": "<p>The blob represents a vector tile in <code>mvt</code> or a raster tile in an image\n         format.</p>",
                         "smithy.api#httpPayload": {}
                     }
                 },
                 "ContentType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as the HTTP body.</p>",
+                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as\n         the HTTP body.</p>",
                         "smithy.api#httpHeader": "Content-Type"
                     }
                 },
@@ -773,10 +815,49 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or failure.</p>",
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or\n         failure.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.geomaps#LabelSize": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "SMALL",
+                        "value": "Small"
+                    },
+                    {
+                        "name": "LARGE",
+                        "value": "Large"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#LanguageTag": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 35
+                }
+            }
+        },
+        "com.amazonaws.geomaps#MapFeatureMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ENABLED",
+                        "value": "Enabled"
+                    },
+                    {
+                        "name": "DISABLED",
+                        "value": "Disabled"
+                    }
+                ]
             }
         },
         "com.amazonaws.geomaps#MapStyle": {
@@ -843,20 +924,20 @@
                         ],
                         "aws-us-gov": [
                             {
-                                "endpoint": "https://maps.geo.{region}.us-gov.{dnsSuffix}/v2"
+                                "endpoint": "https://maps.geo.{region}.{dnsSuffix}/v2"
                             },
                             {
-                                "endpoint": "https://maps.geo-fips.{region}.us-gov.{dualStackDnsSuffix}/v2",
+                                "endpoint": "https://maps.geo-fips.{region}.{dualStackDnsSuffix}/v2",
                                 "fips": true,
                                 "dualStack": true
                             },
                             {
-                                "endpoint": "https://maps.geo-fips.{region}.us-gov.{dnsSuffix}/v2",
+                                "endpoint": "https://maps.geo-fips.{region}.{dnsSuffix}/v2",
                                 "fips": true,
                                 "dualStack": false
                             },
                             {
-                                "endpoint": "https://maps.geo.{region}.us-gov.{dualStackDnsSuffix}/v2",
+                                "endpoint": "https://maps.geo.{region}.{dualStackDnsSuffix}/v2",
                                 "fips": false,
                                 "dualStack": true
                             }
@@ -881,7 +962,7 @@
                         "x-cache"
                     ]
                 },
-                "smithy.api#documentation": "<p>\n         Integrate high-quality base map data into your applications using \n         <a href=\"https://maplibre.org\">MapLibre</a>. Capabilities include:\n     </p>\n         <ul>\n            <li>\n               <p>Access to comprehensive base map data, allowing you to tailor the map display to your specific needs.</p>\n            </li>\n            <li>\n               <p>Multiple pre-designed map styles suited for various application types, such as navigation, logistics, or data visualization.</p>\n            </li>\n            <li>\n               <p>Generation of static map images for scenarios where interactive maps aren't suitable, such as:</p>\n               <ul>\n                  <li>\n                     <p>Embedding in emails or documents</p>\n                  </li>\n                  <li>\n                     <p>Displaying in low-bandwidth environments</p>\n                  </li>\n                  <li>\n                     <p>Creating printable maps</p>\n                  </li>\n                  <li>\n                     <p>Enhancing application performance by reducing client-side rendering</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p> Integrate high-quality base map data into your applications using <a href=\"https://maplibre.org\">MapLibre</a>. Capabilities include: </p>\n         <ul>\n            <li>\n               <p>Access to comprehensive base map data, allowing you to tailor the map display to\n               your specific needs.</p>\n            </li>\n            <li>\n               <p>Multiple pre-designed map styles suited for various application types, such as\n               navigation, logistics, or data visualization.</p>\n            </li>\n            <li>\n               <p>Generation of static map images for scenarios where interactive maps aren't\n               suitable, such as:</p>\n               <ul>\n                  <li>\n                     <p>Embedding in emails or documents</p>\n                  </li>\n                  <li>\n                     <p>Displaying in low-bandwidth environments</p>\n                  </li>\n                  <li>\n                     <p>Creating printable maps</p>\n                  </li>\n                  <li>\n                     <p>Enhancing application performance by reducing client-side rendering</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Location Service Maps V2",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1213,7 +1294,7 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://maps.geo.{Region}.us-gov.{PartitionResult#dnsSuffix}/v2",
+                                                        "url": "https://maps.geo.{Region}.{PartitionResult#dnsSuffix}/v2",
                                                         "properties": {},
                                                         "headers": {}
                                                     },
@@ -1256,7 +1337,7 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://maps.geo-fips.{Region}.us-gov.{PartitionResult#dualStackDnsSuffix}/v2",
+                                                        "url": "https://maps.geo-fips.{Region}.{PartitionResult#dualStackDnsSuffix}/v2",
                                                         "properties": {},
                                                         "headers": {}
                                                     },
@@ -1299,7 +1380,7 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://maps.geo-fips.{Region}.us-gov.{PartitionResult#dnsSuffix}/v2",
+                                                        "url": "https://maps.geo-fips.{Region}.{PartitionResult#dnsSuffix}/v2",
                                                         "properties": {},
                                                         "headers": {}
                                                     },
@@ -1342,7 +1423,7 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://maps.geo.{Region}.us-gov.{PartitionResult#dualStackDnsSuffix}/v2",
+                                                        "url": "https://maps.geo.{Region}.{PartitionResult#dualStackDnsSuffix}/v2",
                                                         "properties": {},
                                                         "headers": {}
                                                     },
@@ -1714,7 +1795,7 @@
                             "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://maps.geo-fips.us-gov-west-1.us-gov.api.aws/v2"
+                                    "url": "https://maps.geo-fips.us-gov-west-1.api.aws/v2"
                                 }
                             },
                             "params": {
@@ -1727,7 +1808,7 @@
                             "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://maps.geo-fips.us-gov-west-1.us-gov.amazonaws.com/v2"
+                                    "url": "https://maps.geo-fips.us-gov-west-1.amazonaws.com/v2"
                                 }
                             },
                             "params": {
@@ -1740,7 +1821,7 @@
                             "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://maps.geo.us-gov-west-1.us-gov.api.aws/v2"
+                                    "url": "https://maps.geo.us-gov-west-1.api.aws/v2"
                                 }
                             },
                             "params": {
@@ -1753,7 +1834,7 @@
                             "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://maps.geo.us-gov-west-1.us-gov.amazonaws.com/v2"
+                                    "url": "https://maps.geo.us-gov-west-1.amazonaws.com/v2"
                                 }
                             },
                             "params": {
@@ -2034,6 +2115,10 @@
                     {
                         "name": "SATELLITE",
                         "value": "Satellite"
+                    },
+                    {
+                        "name": "STANDARD",
+                        "value": "Standard"
                     }
                 ]
             }
@@ -2079,7 +2164,7 @@
                 "Reason": {
                     "target": "com.amazonaws.geomaps#ValidationExceptionReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field where thebb invalid entry was detected.</p>",
+                        "smithy.api#documentation": "<p>The field where the invalid entry was detected.</p>",
                         "smithy.api#jsonName": "reason",
                         "smithy.api#required": {}
                     }
@@ -2120,7 +2205,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the Amazon Location service.</p>"
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the Amazon Location\n         service.</p>"
             }
         },
         "com.amazonaws.geomaps#ValidationExceptionFieldList": {

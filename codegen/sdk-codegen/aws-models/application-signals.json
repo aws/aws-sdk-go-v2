@@ -44,6 +44,9 @@
                     "target": "com.amazonaws.applicationsignals#BatchGetServiceLevelObjectiveBudgetReport"
                 },
                 {
+                    "target": "com.amazonaws.applicationsignals#BatchUpdateExclusionWindows"
+                },
+                {
                     "target": "com.amazonaws.applicationsignals#GetService"
                 },
                 {
@@ -51,6 +54,9 @@
                 },
                 {
                     "target": "com.amazonaws.applicationsignals#ListServiceDependents"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ListServiceLevelObjectiveExclusionWindows"
                 },
                 {
                     "target": "com.amazonaws.applicationsignals#ListServiceOperations"
@@ -548,6 +554,123 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.applicationsignals#BatchUpdateExclusionWindows": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationsignals#BatchUpdateExclusionWindowsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationsignals#BatchUpdateExclusionWindowsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationsignals#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Add or remove time window exclusions for one or more Service Level Objectives (SLOs).</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/exclusion-windows",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchUpdateExclusionWindowsError": {
+            "type": "structure",
+            "members": {
+                "SloId": {
+                    "target": "com.amazonaws.applicationsignals#ServiceLevelObjectiveId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SLO ID in the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.applicationsignals#ExclusionWindowErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.applicationsignals#ExclusionWindowErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of structures, where each structure includes an error indicating that one of the requests in the array was not valid.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchUpdateExclusionWindowsErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#BatchUpdateExclusionWindowsError"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchUpdateExclusionWindowsInput": {
+            "type": "structure",
+            "members": {
+                "SloIds": {
+                    "target": "com.amazonaws.applicationsignals#ServiceLevelObjectiveIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of SLO IDs to add or remove exclusion windows from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AddExclusionWindows": {
+                    "target": "com.amazonaws.applicationsignals#ExclusionWindows",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of exclusion windows to add to the specified SLOs. You can add up to 10 exclusion windows per SLO.</p>"
+                    }
+                },
+                "RemoveExclusionWindows": {
+                    "target": "com.amazonaws.applicationsignals#ExclusionWindows",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of exclusion windows to remove from the specified SLOs. The window configuration must match an existing exclusion window.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchUpdateExclusionWindowsOutput": {
+            "type": "structure",
+            "members": {
+                "SloIds": {
+                    "target": "com.amazonaws.applicationsignals#ServiceLevelObjectiveIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of SLO IDs that were successfully processed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.applicationsignals#BatchUpdateExclusionWindowsErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of errors that occurred while processing the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.applicationsignals#BudgetRequestsRemaining": {
             "type": "integer"
         },
@@ -888,6 +1011,82 @@
                     "traits": {
                         "smithy.api#enumValue": "RequestBased"
                     }
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#ExclusionDuration": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#ExclusionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#ExclusionWindow": {
+            "type": "structure",
+            "members": {
+                "Window": {
+                    "target": "com.amazonaws.applicationsignals#Window",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SLO time window exclusion .</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the SLO time window exclusion. Defaults to current time if not specified.</p>"
+                    }
+                },
+                "RecurrenceRule": {
+                    "target": "com.amazonaws.applicationsignals#RecurrenceRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recurrence rule for the SLO time window exclusion. Supports both cron and rate expressions.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.applicationsignals#ExclusionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description explaining why this time period should be excluded from SLO calculations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The core SLO time window exclusion object that includes Window, StartTime, RecurrenceRule, and Reason.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#ExclusionWindowErrorCode": {
+            "type": "string"
+        },
+        "com.amazonaws.applicationsignals#ExclusionWindowErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.applicationsignals#ExclusionWindows": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#ExclusionWindow"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#Expression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
                 }
             }
         },
@@ -1345,6 +1544,107 @@
                     "target": "com.amazonaws.applicationsignals#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Include this value in your next use of this API to get next set \n         of service dependents.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#ListServiceLevelObjectiveExclusionWindows": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationsignals#ListServiceLevelObjectiveExclusionWindowsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationsignals#ListServiceLevelObjectiveExclusionWindowsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationsignals#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves all exclusion windows configured for a specific SLO.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/slo/{Id}/exclusion-windows",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "outputToken": "NextToken",
+                    "items": "ExclusionWindows"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#ListServiceLevelObjectiveExclusionWindowsInput": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.applicationsignals#ServiceLevelObjectiveId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the SLO to list exclusion windows for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.applicationsignals#ListServiceLevelObjectiveExclusionWindowsMaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.\n         \n      </p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.applicationsignals#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include this value, if it was returned by the previous operation, to get the next set of service level objectives.\n         \n      </p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.applicationsignals#ServiceLevelObjectiveResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.applicationsignals#ListServiceLevelObjectiveExclusionWindowsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#ListServiceLevelObjectiveExclusionWindowsOutput": {
+            "type": "structure",
+            "members": {
+                "ExclusionWindows": {
+                    "target": "com.amazonaws.applicationsignals#ExclusionWindows",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of exclusion windows configured for the SLO.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.applicationsignals#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include this value, if it was returned by the previous operation, to get the next set of service level objectives.\n         \n      </p>"
                     }
                 }
             },
@@ -2029,6 +2329,21 @@
                 "smithy.api#range": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.applicationsignals#RecurrenceRule": {
+            "type": "structure",
+            "members": {
+                "Expression": {
+                    "target": "com.amazonaws.applicationsignals#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A cron or rate expression that specifies the schedule for the exclusion window.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The recurrence rule for the SLO time window exclusion .</p>"
             }
         },
         "com.amazonaws.applicationsignals#RequestBasedServiceLevelIndicator": {
@@ -3530,6 +3845,28 @@
         },
         "com.amazonaws.applicationsignals#WarningThreshold": {
             "type": "double"
+        },
+        "com.amazonaws.applicationsignals#Window": {
+            "type": "structure",
+            "members": {
+                "DurationUnit": {
+                    "target": "com.amazonaws.applicationsignals#DurationUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of time for the exclusion window duration. Valid values: MINUTE, HOUR, DAY, MONTH.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Duration": {
+                    "target": "com.amazonaws.applicationsignals#ExclusionDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of time units for the exclusion window length.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object that defines the time length of an exclusion window.</p>"
+            }
         }
     }
 }

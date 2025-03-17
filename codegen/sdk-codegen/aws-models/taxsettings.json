@@ -70,12 +70,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.taxsettings#AccountId"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 5
-                }
             }
         },
         "com.amazonaws.taxsettings#AccountMetaData": {
@@ -589,6 +583,10 @@
                     "target": "com.amazonaws.taxsettings#AccountIds",
                     "traits": {
                         "smithy.api#documentation": "<p>List of unique account identifiers. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5
+                        },
                         "smithy.api#required": {}
                     }
                 }
@@ -654,6 +652,10 @@
                     "target": "com.amazonaws.taxsettings#AccountIds",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      List of unique account identifiers.\n    </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5
+                        },
                         "smithy.api#required": {}
                     }
                 }
@@ -754,6 +756,10 @@
                     "target": "com.amazonaws.taxsettings#AccountIds",
                     "traits": {
                         "smithy.api#documentation": "<p> List of unique account identifiers.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 550
+                        },
                         "smithy.api#required": {}
                     }
                 },
@@ -2192,7 +2198,7 @@
         "com.amazonaws.taxsettings#PaymentVoucherNumber": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^\\d{17}$"
+                "smithy.api#pattern": "^(\\d{17}|[A-Za-z]{3}\\d{13})$"
             }
         },
         "com.amazonaws.taxsettings#PersonType": {
@@ -2368,6 +2374,10 @@
                     "target": "com.amazonaws.taxsettings#AccountIds",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The list of unique account identifiers.\n    </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 550
+                        },
                         "smithy.api#required": {}
                     }
                 },
@@ -2380,7 +2390,7 @@
                 "exemptionType": {
                     "target": "com.amazonaws.taxsettings#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The exemption type.\n    </p>",
+                        "smithy.api#documentation": "<p>The exemption type. Use the supported tax exemption type description.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3114,7 +3124,7 @@
                 "registrationType": {
                     "target": "com.amazonaws.taxsettings#TaxRegistrationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type of your tax registration. This can be either <code>VAT</code> or <code>GST</code>.\n    </p>",
+                        "smithy.api#documentation": "<p>Type of your tax registration.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4642,25 +4652,25 @@
                 "enterpriseIdentificationNumber": {
                     "target": "com.amazonaws.taxsettings#EnterpriseIdentificationNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The enterprise identification number for tax registration.</p>"
+                        "smithy.api#documentation": "<p>The enterprise identification number for tax registration. This field must be provided for successful API operation.</p>"
                     }
                 },
                 "electronicTransactionCodeNumber": {
                     "target": "com.amazonaws.taxsettings#ElectronicTransactionCodeNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The electronic transaction code number on the tax return document.</p>"
+                        "smithy.api#documentation": "<p>The electronic transaction code number on the tax return document. This field must be provided for successful API operation.</p>"
                     }
                 },
                 "paymentVoucherNumber": {
                     "target": "com.amazonaws.taxsettings#PaymentVoucherNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The payment voucher number on the tax return payment document.</p>"
+                        "smithy.api#documentation": "<p>The payment voucher number on the tax return payment document. This field must be provided for successful API operation.</p>"
                     }
                 },
                 "paymentVoucherNumberDate": {
                     "target": "com.amazonaws.taxsettings#DateString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date on the tax return payment document.</p>"
+                        "smithy.api#documentation": "<p>The date on the tax return payment document. This field must be provided for successful API operation.</p>"
                     }
                 }
             },
