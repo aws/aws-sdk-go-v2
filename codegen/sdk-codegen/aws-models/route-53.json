@@ -3456,6 +3456,18 @@
                         "smithy.api#enumValue": "mx-central-1"
                     }
                 },
+                "us_isof_south_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-isof-south-1"
+                    }
+                },
+                "us_isof_east_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-isof-east-1"
+                    }
+                },
                 "ap_southeast_7": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -8979,7 +8991,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the resource record sets in a specified hosted zone.</p>\n         <p>\n            <code>ListResourceRecordSets</code> returns up to 300 resource record sets at a time\n\t\t\tin ASCII order, beginning at a position specified by the <code>name</code> and\n\t\t\t\t<code>type</code> elements.</p>\n         <p>\n            <b>Sort order</b>\n         </p>\n         <p>\n            <code>ListResourceRecordSets</code> sorts results first by DNS name with the labels\n\t\t\treversed, for example:</p>\n         <p>\n            <code>com.example.www.</code>\n         </p>\n         <p>Note the trailing dot, which can change the sort order when the record name contains\n\t\t\tcharacters that appear before <code>.</code> (decimal 46) in the ASCII table. These\n\t\t\tcharacters include the following: <code>! \" # $ % & ' ( ) * + , -</code>\n         </p>\n         <p>When multiple records have the same DNS name, <code>ListResourceRecordSets</code>\n\t\t\tsorts results by the record type.</p>\n         <p>\n            <b>Specifying where to start listing records</b>\n         </p>\n         <p>You can use the name and type elements to specify the resource record set that the\n\t\t\tlist begins with:</p>\n         <dl>\n            <dt>If you do not specify Name or Type</dt>\n            <dd>\n               <p>The results begin with the first resource record set that the hosted zone\n\t\t\t\t\t\tcontains.</p>\n            </dd>\n            <dt>If you specify Name but not Type</dt>\n            <dd>\n               <p>The results begin with the first resource record set in the list whose\n\t\t\t\t\t\tname is greater than or equal to <code>Name</code>.</p>\n            </dd>\n            <dt>If you specify Type but not Name</dt>\n            <dd>\n               <p>Amazon Route 53 returns the <code>InvalidInput</code> error.</p>\n            </dd>\n            <dt>If you specify both Name and Type</dt>\n            <dd>\n               <p>The results begin with the first resource record set in the list whose\n\t\t\t\t\t\tname is greater than or equal to <code>Name</code>, and whose type is\n\t\t\t\t\t\tgreater than or equal to <code>Type</code>.</p>\n            </dd>\n         </dl>\n         <p>\n            <b>Resource record sets that are PENDING</b>\n         </p>\n         <p>This action returns the most current version of the records. This includes records\n\t\t\tthat are <code>PENDING</code>, and that are not yet available on all Route 53 DNS\n\t\t\tservers.</p>\n         <p>\n            <b>Changing resource record sets</b>\n         </p>\n         <p>To ensure that you get an accurate listing of the resource record sets for a hosted\n\t\t\tzone at a point in time, do not submit a <code>ChangeResourceRecordSets</code> request\n\t\t\twhile you're paging through the results of a <code>ListResourceRecordSets</code>\n\t\t\trequest. If you do, some pages may display results without the latest changes while\n\t\t\tother pages display results with the latest changes.</p>\n         <p>\n            <b>Displaying the next page of results</b>\n         </p>\n         <p>If a <code>ListResourceRecordSets</code> command returns more than one page of\n\t\t\tresults, the value of <code>IsTruncated</code> is <code>true</code>. To display the next\n\t\t\tpage of results, get the values of <code>NextRecordName</code>,\n\t\t\t\t<code>NextRecordType</code>, and <code>NextRecordIdentifier</code> (if any) from the\n\t\t\tresponse. Then submit another <code>ListResourceRecordSets</code> request, and specify\n\t\t\tthose values for <code>StartRecordName</code>, <code>StartRecordType</code>, and\n\t\t\t\t<code>StartRecordIdentifier</code>.</p>",
+                "smithy.api#documentation": "<p>Lists the resource record sets in a specified hosted zone.</p>\n         <p>\n            <code>ListResourceRecordSets</code> returns up to 300 resource record sets at a time\n\t\t\tin ASCII order, beginning at a position specified by the <code>name</code> and\n\t\t\t\t<code>type</code> elements.</p>\n         <p>\n            <b>Sort order</b>\n         </p>\n         <p>\n            <code>ListResourceRecordSets</code> sorts results first by DNS name with the labels\n\t\t\treversed, for example:</p>\n         <p>\n            <code>com.example.www.</code>\n         </p>\n         <p>Note the trailing dot, which can change the sort order when the record name contains\n\t\t\tcharacters that appear before <code>.</code> (decimal 46) in the ASCII table. These\n\t\t\tcharacters include the following: <code>! \" # $ % & ' ( ) * + , -</code>\n         </p>\n         <p>When multiple records have the same DNS name, <code>ListResourceRecordSets</code>\n\t\t\tsorts results by the record type.</p>\n         <p>\n            <b>Specifying where to start listing records</b>\n         </p>\n         <p>You can use the name and type elements to specify the resource record set that the\n\t\t\tlist begins with:</p>\n         <dl>\n            <dt>If you do not specify Name or Type</dt>\n            <dd>\n               <p>The results begin with the first resource record set that the hosted zone\n\t\t\t\t\t\tcontains.</p>\n            </dd>\n            <dt>If you specify Name but not Type</dt>\n            <dd>\n               <p>The results begin with the first resource record set in the list whose\n\t\t\t\t\t\tname is greater than or equal to <code>Name</code>.</p>\n            </dd>\n            <dt>If you specify Type but not Name</dt>\n            <dd>\n               <p>Amazon Route 53 returns the <code>InvalidInput</code> error.</p>\n            </dd>\n            <dt>If you specify both Name and Type</dt>\n            <dd>\n               <p>The results begin with the first resource record set in the list whose\n\t\t\t\t\t\tname is greater than or equal to <code>Name</code>, and whose type is\n\t\t\t\t\t\tgreater than or equal to <code>Type</code>.</p>\n               <note>\n                  <p>Type is only used to sort between records with the same record Name.</p>\n               </note>\n            </dd>\n         </dl>\n         <p>\n            <b>Resource record sets that are PENDING</b>\n         </p>\n         <p>This action returns the most current version of the records. This includes records\n\t\t\tthat are <code>PENDING</code>, and that are not yet available on all Route 53 DNS\n\t\t\tservers.</p>\n         <p>\n            <b>Changing resource record sets</b>\n         </p>\n         <p>To ensure that you get an accurate listing of the resource record sets for a hosted\n\t\t\tzone at a point in time, do not submit a <code>ChangeResourceRecordSets</code> request\n\t\t\twhile you're paging through the results of a <code>ListResourceRecordSets</code>\n\t\t\trequest. If you do, some pages may display results without the latest changes while\n\t\t\tother pages display results with the latest changes.</p>\n         <p>\n            <b>Displaying the next page of results</b>\n         </p>\n         <p>If a <code>ListResourceRecordSets</code> command returns more than one page of\n\t\t\tresults, the value of <code>IsTruncated</code> is <code>true</code>. To display the next\n\t\t\tpage of results, get the values of <code>NextRecordName</code>,\n\t\t\t\t<code>NextRecordType</code>, and <code>NextRecordIdentifier</code> (if any) from the\n\t\t\tresponse. Then submit another <code>ListResourceRecordSets</code> request, and specify\n\t\t\tthose values for <code>StartRecordName</code>, <code>StartRecordType</code>, and\n\t\t\t\t<code>StartRecordIdentifier</code>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2013-04-01/hostedzone/{HostedZoneId}/rrset",
@@ -12547,6 +12559,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "mx-central-1"
+                    }
+                },
+                "us_isof_south_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-isof-south-1"
+                    }
+                },
+                "us_isof_east_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-isof-east-1"
                     }
                 },
                 "ap_southeast_7": {

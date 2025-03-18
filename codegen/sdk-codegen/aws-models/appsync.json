@@ -2999,6 +2999,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the <code>DomainName</code>.</p>"
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.appsync#TagMap"
                 }
             },
             "traits": {
@@ -4838,6 +4841,15 @@
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of your Amazon Route 53 hosted zone.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.appsync#TagMap"
+                },
+                "domainNameArn": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain name.</p>"
                     }
                 }
             },
