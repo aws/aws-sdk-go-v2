@@ -1,3 +1,7 @@
+# v1.23.0 (2025-03-18)
+
+* **Feature**: This release adds support for PySpark jobs. Customers can now analyze data by running jobs using approved PySpark analysis templates.
+
 # v1.22.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

@@ -1,3 +1,15 @@
+# Release (2025-03-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.45.0](service/appsync/CHANGELOG.md#v1450-2025-03-18)
+  * **Feature**: Providing Tagging support for DomainName in AppSync
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.23.0](service/cleanrooms/CHANGELOG.md#v1230-2025-03-18)
+  * **Feature**: This release adds support for PySpark jobs. Customers can now analyze data by running jobs using approved PySpark analysis templates.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.70.0](service/mediaconvert/CHANGELOG.md#v1700-2025-03-18)
+  * **Feature**: This release adds support for AVC passthrough, the ability to specify PTS offset without padding, and an A/V segment matching feature.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.50.0](service/route53/CHANGELOG.md#v1500-2025-03-18)
+  * **Feature**: Amazon Route 53 now supports the iso-f regions for private DNS Amazon VPCs and cloudwatch healthchecks.
+
 # Release (2025-03-17)
 
 ## Module Highlights

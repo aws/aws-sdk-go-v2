@@ -1,8 +1,0 @@
-{
-    "id": "40e23bd5-08e9-4cd5-8ed6-eb0cc2c51148",
-    "type": "feature",
-    "description": "This release adds support for AVC passthrough, the ability to specify PTS offset without padding, and an A/V segment matching feature.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}
