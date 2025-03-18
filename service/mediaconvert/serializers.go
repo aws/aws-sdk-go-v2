@@ -8092,6 +8092,11 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 		}
 	}
 
+	if v.AudioPtsOffsetDelta != nil {
+		ok := object.Key("audioPtsOffsetDelta")
+		ok.Integer(*v.AudioPtsOffsetDelta)
+	}
+
 	if v.Bitrate != nil {
 		ok := object.Key("bitrate")
 		ok.Integer(*v.Bitrate)
@@ -8353,6 +8358,11 @@ func awsRestjson1_serializeDocumentM3u8Settings(v *types.M3u8Settings, value smi
 		if err := awsRestjson1_serializeDocument__listOf__integerMin32Max8182(v.AudioPids, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.AudioPtsOffsetDelta != nil {
+		ok := object.Key("audioPtsOffsetDelta")
+		ok.Integer(*v.AudioPtsOffsetDelta)
 	}
 
 	if len(v.DataPTSControl) > 0 {

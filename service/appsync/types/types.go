@@ -686,8 +686,14 @@ type DomainNameConfig struct {
 	// The domain name.
 	DomainName *string
 
+	// The Amazon Resource Name (ARN) of the domain name.
+	DomainNameArn *string
+
 	// The ID of your Amazon Route 53 hosted zone.
 	HostedZoneId *string
+
+	// A map with keys of TagKey objects and values of TagValue objects.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

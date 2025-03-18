@@ -14284,6 +14284,15 @@ func awsRestjson1_deserializeDocumentDomainNameConfig(v **types.DomainNameConfig
 				sv.DomainName = ptr.String(jtv)
 			}
 
+		case "domainNameArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DomainNameArn = ptr.String(jtv)
+			}
+
 		case "hostedZoneId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14291,6 +14300,11 @@ func awsRestjson1_deserializeDocumentDomainNameConfig(v **types.DomainNameConfig
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.HostedZoneId = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		default:

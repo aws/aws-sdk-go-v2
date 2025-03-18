@@ -35,8 +35,14 @@ type CreateConfiguredTableInput struct {
 	// This member is required.
 	AllowedColumns []string
 
-	// The analysis method for the configured tables. The only valid value is
-	// currently `DIRECT_QUERY`.
+	// The analysis method allowed for the configured tables.
+	//
+	// DIRECT_QUERY allows SQL queries to be run directly on this table.
+	//
+	// DIRECT_JOB allows PySpark jobs to be run directly on this table.
+	//
+	// MULTIPLE allows both SQL queries and PySpark jobs to be run directly on this
+	// table.
 	//
 	// This member is required.
 	AnalysisMethod types.AnalysisMethod
@@ -53,6 +59,10 @@ type CreateConfiguredTableInput struct {
 
 	// A description for the configured table.
 	Description *string
+
+	//  The analysis methods to enable for the configured table. When configured, you
+	// must specify at least two analysis methods.
+	SelectedAnalysisMethods []types.SelectedAnalysisMethod
 
 	// An optional label that you can assign to a resource when you create it. Each
 	// tag consists of a key and an optional value, both of which you define. When you

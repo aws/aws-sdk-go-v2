@@ -57,6 +57,10 @@ type CreateCollaborationInput struct {
 	// An indicator as to whether query logging has been enabled or disabled for the
 	// collaboration.
 	//
+	// When ENABLED , Clean Rooms logs details about queries run within this
+	// collaboration and those logs can be viewed in Amazon CloudWatch Logs. The
+	// default value is DISABLED .
+	//
 	// This member is required.
 	QueryLogStatus types.CollaborationQueryLogStatus
 
@@ -64,11 +68,6 @@ type CreateCollaborationInput struct {
 	AnalyticsEngine types.AnalyticsEngine
 
 	// The ML abilities granted to the collaboration creator.
-	//
-	// Custom ML modeling is in beta release and is subject to change. For beta terms
-	// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
-	//
-	// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
 	CreatorMLMemberAbilities *types.MLMemberAbilities
 
 	// The collaboration creator's payment responsibilities set by the collaboration
@@ -81,6 +80,13 @@ type CreateCollaborationInput struct {
 	// The settings for client-side encryption with Cryptographic Computing for Clean
 	// Rooms.
 	DataEncryptionMetadata *types.DataEncryptionMetadata
+
+	// Specifies whether job logs are enabled for this collaboration.
+	//
+	// When ENABLED , Clean Rooms logs details about jobs run within this
+	// collaboration; those logs can be viewed in Amazon CloudWatch Logs. The default
+	// value is DISABLED .
+	JobLogStatus types.CollaborationJobLogStatus
 
 	// An optional label that you can assign to a resource when you create it. Each
 	// tag consists of a key and an optional value, both of which you define. When you

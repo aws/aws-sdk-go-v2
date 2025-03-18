@@ -59,6 +59,9 @@ func ExampleAnalysisSource_outputUsage() {
 	var union types.AnalysisSource
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.AnalysisSourceMemberArtifacts:
+		_ = v.Value // Value is types.AnalysisTemplateArtifacts
+
 	case *types.AnalysisSourceMemberText:
 		_ = v.Value // Value is string
 
@@ -71,7 +74,26 @@ func ExampleAnalysisSource_outputUsage() {
 	}
 }
 
+var _ *types.AnalysisTemplateArtifacts
 var _ *string
+
+func ExampleAnalysisSourceMetadata_outputUsage() {
+	var union types.AnalysisSourceMetadata
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AnalysisSourceMetadataMemberArtifacts:
+		_ = v.Value // Value is types.AnalysisTemplateArtifactMetadata
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AnalysisTemplateArtifactMetadata
 
 func ExampleComputeConfiguration_outputUsage() {
 	var union types.ComputeConfiguration
@@ -196,6 +218,68 @@ func ExampleConfiguredTableAssociationAnalysisRulePolicyV1_outputUsage() {
 var _ *types.ConfiguredTableAssociationAnalysisRuleCustom
 var _ *types.ConfiguredTableAssociationAnalysisRuleAggregation
 var _ *types.ConfiguredTableAssociationAnalysisRuleList
+
+func ExampleConsolidatedPolicy_outputUsage() {
+	var union types.ConsolidatedPolicy
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConsolidatedPolicyMemberV1:
+		_ = v.Value // Value is types.ConsolidatedPolicyV1
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.ConsolidatedPolicyV1
+
+func ExampleConsolidatedPolicyV1_outputUsage() {
+	var union types.ConsolidatedPolicyV1
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConsolidatedPolicyV1MemberAggregation:
+		_ = v.Value // Value is types.ConsolidatedPolicyAggregation
+
+	case *types.ConsolidatedPolicyV1MemberCustom:
+		_ = v.Value // Value is types.ConsolidatedPolicyCustom
+
+	case *types.ConsolidatedPolicyV1MemberList:
+		_ = v.Value // Value is types.ConsolidatedPolicyList
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ConsolidatedPolicyCustom
+var _ *types.ConsolidatedPolicyList
+var _ *types.ConsolidatedPolicyAggregation
+
+func ExampleMembershipProtectedJobOutputConfiguration_outputUsage() {
+	var union types.MembershipProtectedJobOutputConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MembershipProtectedJobOutputConfigurationMemberS3:
+		_ = v.Value // Value is types.ProtectedJobS3OutputConfigurationInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ProtectedJobS3OutputConfigurationInput
 
 func ExampleMembershipProtectedQueryOutputConfiguration_outputUsage() {
 	var union types.MembershipProtectedQueryOutputConfiguration
@@ -322,6 +406,86 @@ func ExamplePrivacyImpact_outputUsage() {
 }
 
 var _ *types.DifferentialPrivacyPrivacyImpact
+
+func ExampleProtectedJobConfigurationDetails_outputUsage() {
+	var union types.ProtectedJobConfigurationDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProtectedJobConfigurationDetailsMemberDirectAnalysisConfigurationDetails:
+		_ = v.Value // Value is types.ProtectedJobDirectAnalysisConfigurationDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ProtectedJobDirectAnalysisConfigurationDetails
+
+func ExampleProtectedJobOutput_outputUsage() {
+	var union types.ProtectedJobOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProtectedJobOutputMemberMemberList:
+		_ = v.Value // Value is []types.ProtectedJobSingleMemberOutput
+
+	case *types.ProtectedJobOutputMemberS3:
+		_ = v.Value // Value is types.ProtectedJobS3Output
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.ProtectedJobSingleMemberOutput
+var _ *types.ProtectedJobS3Output
+
+func ExampleProtectedJobOutputConfigurationInput_outputUsage() {
+	var union types.ProtectedJobOutputConfigurationInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProtectedJobOutputConfigurationInputMemberMember:
+		_ = v.Value // Value is types.ProtectedJobMemberOutputConfigurationInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ProtectedJobMemberOutputConfigurationInput
+
+func ExampleProtectedJobOutputConfigurationOutput_outputUsage() {
+	var union types.ProtectedJobOutputConfigurationOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProtectedJobOutputConfigurationOutputMemberMember:
+		_ = v.Value // Value is types.ProtectedJobMemberOutputConfigurationOutput
+
+	case *types.ProtectedJobOutputConfigurationOutputMemberS3:
+		_ = v.Value // Value is types.ProtectedJobS3OutputConfigurationOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ProtectedJobMemberOutputConfigurationOutput
+var _ *types.ProtectedJobS3OutputConfigurationOutput
 
 func ExampleProtectedQueryOutput_outputUsage() {
 	var union types.ProtectedQueryOutput

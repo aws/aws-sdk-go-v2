@@ -34,12 +34,27 @@ type UpdateMembershipInput struct {
 	// This member is required.
 	MembershipIdentifier *string
 
+	//  The default job result configuration.
+	DefaultJobResultConfiguration *types.MembershipProtectedJobResultConfiguration
+
 	// The default protected query result configuration as specified by the member who
 	// can receive results.
 	DefaultResultConfiguration *types.MembershipProtectedQueryResultConfiguration
 
+	// An indicator as to whether job logging has been enabled or disabled for the
+	// collaboration.
+	//
+	// When ENABLED , Clean Rooms logs details about jobs run within this collaboration
+	// and those logs can be viewed in Amazon CloudWatch Logs. The default value is
+	// DISABLED .
+	JobLogStatus types.MembershipJobLogStatus
+
 	// An indicator as to whether query logging has been enabled or disabled for the
 	// membership.
+	//
+	// When ENABLED , Clean Rooms logs details about queries run within this
+	// collaboration and those logs can be viewed in Amazon CloudWatch Logs. The
+	// default value is DISABLED .
 	QueryLogStatus types.MembershipQueryLogStatus
 
 	noSmithyDocumentSerde

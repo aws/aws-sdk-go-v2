@@ -1,0 +1,8 @@
+{
+    "id": "2bbebc45-12fd-4914-9a99-40da5a442d7b",
+    "type": "feature",
+    "description": "This release adds support for PySpark jobs. Customers can now analyze data by running jobs using approved PySpark analysis templates.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

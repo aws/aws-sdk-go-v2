@@ -18163,6 +18163,19 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				return err
 			}
 
+		case "audioPtsOffsetDelta":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMinNegative10000Max10000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AudioPtsOffsetDelta = ptr.Int32(int32(i64))
+			}
+
 		case "bitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18676,6 +18689,19 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 		case "audioPids":
 			if err := awsRestjson1_deserializeDocument__listOf__integerMin32Max8182(&sv.AudioPids, value); err != nil {
 				return err
+			}
+
+		case "audioPtsOffsetDelta":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMinNegative10000Max10000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AudioPtsOffsetDelta = ptr.Int32(int32(i64))
 			}
 
 		case "dataPTSControl":

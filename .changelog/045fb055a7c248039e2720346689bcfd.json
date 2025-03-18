@@ -1,0 +1,8 @@
+{
+    "id": "045fb055-a7c2-4803-9e27-20346689bcfd",
+    "type": "feature",
+    "description": "Providing Tagging support for DomainName in AppSync",
+    "modules": [
+        "service/appsync"
+    ]
+}

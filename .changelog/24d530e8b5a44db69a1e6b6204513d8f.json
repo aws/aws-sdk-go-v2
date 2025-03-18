@@ -1,0 +1,8 @@
+{
+    "id": "24d530e8-b5a4-4db6-9a1e-6b6204513d8f",
+    "type": "feature",
+    "description": "Amazon Route 53 now supports the iso-f regions for private DNS Amazon VPCs and cloudwatch healthchecks.",
+    "modules": [
+        "service/route53"
+    ]
+}

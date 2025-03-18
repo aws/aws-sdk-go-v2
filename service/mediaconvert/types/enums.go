@@ -1819,6 +1819,7 @@ type CmafSegmentLengthControl string
 const (
 	CmafSegmentLengthControlExact       CmafSegmentLengthControl = "EXACT"
 	CmafSegmentLengthControlGopMultiple CmafSegmentLengthControl = "GOP_MULTIPLE"
+	CmafSegmentLengthControlMatch       CmafSegmentLengthControl = "MATCH"
 )
 
 // Values returns all known values for CmafSegmentLengthControl. Note that this
@@ -1829,6 +1830,7 @@ func (CmafSegmentLengthControl) Values() []CmafSegmentLengthControl {
 	return []CmafSegmentLengthControl{
 		"EXACT",
 		"GOP_MULTIPLE",
+		"MATCH",
 	}
 }
 
@@ -2614,6 +2616,7 @@ type DashIsoSegmentLengthControl string
 const (
 	DashIsoSegmentLengthControlExact       DashIsoSegmentLengthControl = "EXACT"
 	DashIsoSegmentLengthControlGopMultiple DashIsoSegmentLengthControl = "GOP_MULTIPLE"
+	DashIsoSegmentLengthControlMatch       DashIsoSegmentLengthControl = "MATCH"
 )
 
 // Values returns all known values for DashIsoSegmentLengthControl. Note that this
@@ -2624,6 +2627,7 @@ func (DashIsoSegmentLengthControl) Values() []DashIsoSegmentLengthControl {
 	return []DashIsoSegmentLengthControl{
 		"EXACT",
 		"GOP_MULTIPLE",
+		"MATCH",
 	}
 }
 
@@ -5512,6 +5516,7 @@ type HlsSegmentLengthControl string
 const (
 	HlsSegmentLengthControlExact       HlsSegmentLengthControl = "EXACT"
 	HlsSegmentLengthControlGopMultiple HlsSegmentLengthControl = "GOP_MULTIPLE"
+	HlsSegmentLengthControlMatch       HlsSegmentLengthControl = "MATCH"
 )
 
 // Values returns all known values for HlsSegmentLengthControl. Note that this can
@@ -5522,6 +5527,7 @@ func (HlsSegmentLengthControl) Values() []HlsSegmentLengthControl {
 	return []HlsSegmentLengthControl{
 		"EXACT",
 		"GOP_MULTIPLE",
+		"MATCH",
 	}
 }
 
@@ -8717,8 +8723,9 @@ type TsPtsOffset string
 
 // Enum values for TsPtsOffset
 const (
-	TsPtsOffsetAuto    TsPtsOffset = "AUTO"
-	TsPtsOffsetSeconds TsPtsOffset = "SECONDS"
+	TsPtsOffsetAuto         TsPtsOffset = "AUTO"
+	TsPtsOffsetSeconds      TsPtsOffset = "SECONDS"
+	TsPtsOffsetMilliseconds TsPtsOffset = "MILLISECONDS"
 )
 
 // Values returns all known values for TsPtsOffset. Note that this can be expanded
@@ -8729,6 +8736,7 @@ func (TsPtsOffset) Values() []TsPtsOffset {
 	return []TsPtsOffset{
 		"AUTO",
 		"SECONDS",
+		"MILLISECONDS",
 	}
 }
 

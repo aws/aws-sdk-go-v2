@@ -554,6 +554,18 @@ func TestCheckSnapshot_GetPrivacyBudgetTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetProtectedJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProtectedJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProtectedJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetProtectedQuery(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetProtectedQuery(context.Background(), nil, func(o *Options) {
@@ -782,6 +794,18 @@ func TestCheckSnapshot_ListPrivacyBudgetTemplates(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListProtectedJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProtectedJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListProtectedJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListProtectedQueries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListProtectedQueries(context.Background(), nil, func(o *Options) {
@@ -835,6 +859,18 @@ func TestCheckSnapshot_PreviewPrivacyImpact(t *testing.T) {
 	_, err := svc.PreviewPrivacyImpact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PreviewPrivacyImpact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartProtectedJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartProtectedJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartProtectedJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1003,6 +1039,18 @@ func TestCheckSnapshot_UpdatePrivacyBudgetTemplate(t *testing.T) {
 	_, err := svc.UpdatePrivacyBudgetTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdatePrivacyBudgetTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateProtectedJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProtectedJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProtectedJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1513,6 +1561,18 @@ func TestUpdateSnapshot_GetPrivacyBudgetTemplate(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetProtectedJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProtectedJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProtectedJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetProtectedQuery(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetProtectedQuery(context.Background(), nil, func(o *Options) {
@@ -1741,6 +1801,18 @@ func TestUpdateSnapshot_ListPrivacyBudgetTemplates(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListProtectedJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProtectedJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListProtectedJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListProtectedQueries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListProtectedQueries(context.Background(), nil, func(o *Options) {
@@ -1794,6 +1866,18 @@ func TestUpdateSnapshot_PreviewPrivacyImpact(t *testing.T) {
 	_, err := svc.PreviewPrivacyImpact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PreviewPrivacyImpact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartProtectedJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartProtectedJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartProtectedJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1962,6 +2046,18 @@ func TestUpdateSnapshot_UpdatePrivacyBudgetTemplate(t *testing.T) {
 	_, err := svc.UpdatePrivacyBudgetTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdatePrivacyBudgetTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProtectedJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProtectedJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProtectedJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

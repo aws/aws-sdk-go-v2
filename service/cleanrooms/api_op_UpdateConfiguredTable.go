@@ -35,11 +35,24 @@ type UpdateConfiguredTableInput struct {
 	// This member is required.
 	ConfiguredTableIdentifier *string
 
+	//  The analysis method for the configured table.
+	//
+	// DIRECT_QUERY allows SQL queries to be run directly on this table.
+	//
+	// DIRECT_JOB allows PySpark jobs to be run directly on this table.
+	//
+	// MULTIPLE allows both SQL queries and PySpark jobs to be run directly on this
+	// table.
+	AnalysisMethod types.AnalysisMethod
+
 	// A new description for the configured table.
 	Description *string
 
 	// A new name for the configured table.
 	Name *string
+
+	//  The selected analysis methods for the table configuration update.
+	SelectedAnalysisMethods []types.SelectedAnalysisMethod
 
 	noSmithyDocumentSerde
 }

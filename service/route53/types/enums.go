@@ -128,6 +128,8 @@ const (
 	CloudWatchRegionCaWest1      CloudWatchRegion = "ca-west-1"
 	CloudWatchRegionApSoutheast5 CloudWatchRegion = "ap-southeast-5"
 	CloudWatchRegionMxCentral1   CloudWatchRegion = "mx-central-1"
+	CloudWatchRegionUsIsofSouth1 CloudWatchRegion = "us-isof-south-1"
+	CloudWatchRegionUsIsofEast1  CloudWatchRegion = "us-isof-east-1"
 	CloudWatchRegionApSoutheast7 CloudWatchRegion = "ap-southeast-7"
 )
 
@@ -175,6 +177,8 @@ func (CloudWatchRegion) Values() []CloudWatchRegion {
 		"ca-west-1",
 		"ap-southeast-5",
 		"mx-central-1",
+		"us-isof-south-1",
+		"us-isof-east-1",
 		"ap-southeast-7",
 	}
 }
@@ -600,6 +604,8 @@ const (
 	VPCRegionCaWest1      VPCRegion = "ca-west-1"
 	VPCRegionApSoutheast5 VPCRegion = "ap-southeast-5"
 	VPCRegionMxCentral1   VPCRegion = "mx-central-1"
+	VPCRegionUsIsofSouth1 VPCRegion = "us-isof-south-1"
+	VPCRegionUsIsofEast1  VPCRegion = "us-isof-east-1"
 	VPCRegionApSoutheast7 VPCRegion = "ap-southeast-7"
 )
 
@@ -647,6 +653,8 @@ func (VPCRegion) Values() []VPCRegion {
 		"ca-west-1",
 		"ap-southeast-5",
 		"mx-central-1",
+		"us-isof-south-1",
+		"us-isof-east-1",
 		"ap-southeast-7",
 	}
 }

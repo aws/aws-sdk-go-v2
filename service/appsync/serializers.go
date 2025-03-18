@@ -1010,6 +1010,13 @@ func awsRestjson1_serializeOpDocumentCreateDomainNameInput(v *CreateDomainNameIn
 		ok.String(*v.DomainName)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

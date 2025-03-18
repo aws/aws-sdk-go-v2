@@ -38,12 +38,29 @@ type CreateMembershipInput struct {
 	// An indicator as to whether query logging has been enabled or disabled for the
 	// membership.
 	//
+	// When ENABLED , Clean Rooms logs details about queries run within this
+	// collaboration and those logs can be viewed in Amazon CloudWatch Logs. The
+	// default value is DISABLED .
+	//
 	// This member is required.
 	QueryLogStatus types.MembershipQueryLogStatus
+
+	// The default job result configuration that determines how job results are
+	// protected and managed within this membership. This configuration applies to all
+	// jobs.
+	DefaultJobResultConfiguration *types.MembershipProtectedJobResultConfiguration
 
 	// The default protected query result configuration as specified by the member who
 	// can receive results.
 	DefaultResultConfiguration *types.MembershipProtectedQueryResultConfiguration
+
+	// An indicator as to whether job logging has been enabled or disabled for the
+	// collaboration.
+	//
+	// When ENABLED , Clean Rooms logs details about jobs run within this collaboration
+	// and those logs can be viewed in Amazon CloudWatch Logs. The default value is
+	// DISABLED .
+	JobLogStatus types.MembershipJobLogStatus
 
 	// The payment responsibilities accepted by the collaboration member.
 	//
