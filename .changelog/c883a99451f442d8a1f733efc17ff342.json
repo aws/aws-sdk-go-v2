@@ -1,8 +1,0 @@
-{
-    "id": "c883a994-51f4-42d8-a1f7-33efc17ff342",
-    "type": "feature",
-    "description": "Update IAM Role ARN Validation to Support Role Paths",
-    "modules": [
-        "service/neptunegraph"
-    ]
-}

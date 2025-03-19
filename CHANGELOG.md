@@ -1,3 +1,15 @@
+# Release (2025-03-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.210.1](service/ec2/CHANGELOG.md#v12101-2025-03-19)
+  * **Documentation**: Doc-only updates for EC2 for March 2025.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.71.0](service/lambda/CHANGELOG.md#v1710-2025-03-19)
+  * **Feature**: Add Ruby 3.4 (ruby3.4) support to AWS Lambda.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.39.0](service/mediaconnect/CHANGELOG.md#v1390-2025-03-19)
+  * **Feature**: This release adds support for NDI flow outputs in AWS Elemental MediaConnect. You can now send content from your MediaConnect transport streams directly to your NDI environment using the new NDI output type.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.181.0](service/sagemaker/CHANGELOG.md#v11810-2025-03-19)
+  * **Feature**: Added support for g6, g6e, m6i, c6i instance types in SageMaker Processing Jobs.
+
 # Release (2025-03-18)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "618cdb1f-f9c0-411a-92ee-f03db6828536",
-    "type": "feature",
-    "description": "Support custom prompt routers for evaluation jobs",
-    "modules": [
-        "service/bedrock"
-    ]
-}

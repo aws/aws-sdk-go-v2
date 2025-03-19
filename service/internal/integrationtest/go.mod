@@ -29,7 +29,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.42.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.210.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.210.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.54.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.35.1
@@ -50,7 +50,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.1
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/kms v1.38.1
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.70.1
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.71.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.43.1
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.36.1

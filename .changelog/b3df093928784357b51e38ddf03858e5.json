@@ -1,8 +1,0 @@
-{
-    "id": "b3df0939-2878-4357-b51e-38ddf03858e5",
-    "type": "feature",
-    "description": "Added support for g6, g6e, m6i, c6i instance types in SageMaker Processing Jobs.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

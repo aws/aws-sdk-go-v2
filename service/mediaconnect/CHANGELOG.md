@@ -1,3 +1,7 @@
+# v1.39.0 (2025-03-19)
+
+* **Feature**: This release adds support for NDI flow outputs in AWS Elemental MediaConnect. You can now send content from your MediaConnect transport streams directly to your NDI environment using the new NDI output type.
+
 # v1.38.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

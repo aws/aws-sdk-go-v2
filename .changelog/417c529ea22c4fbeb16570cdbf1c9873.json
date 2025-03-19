@@ -1,8 +1,0 @@
-{
-    "id": "417c529e-a22c-4fbe-b165-70cdbf1c9873",
-    "type": "feature",
-    "description": "This release adds support for NDI flow outputs in AWS Elemental MediaConnect. You can now send content from your MediaConnect transport streams directly to your NDI environment using the new NDI output type.",
-    "modules": [
-        "service/mediaconnect"
-    ]
-}
