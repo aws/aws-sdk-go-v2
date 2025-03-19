@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a gateway. Before you can delete a gateway, you must deregister its
+//	Deletes a gateway. Before you can delete a gateway, you must deregister its
+//
 // instances and delete its bridges.
 func (c *Client) DeleteGateway(ctx context.Context, params *DeleteGatewayInput, optFns ...func(*Options)) (*DeleteGatewayOutput, error) {
 	if params == nil {
@@ -29,7 +30,7 @@ func (c *Client) DeleteGateway(ctx context.Context, params *DeleteGatewayInput, 
 
 type DeleteGatewayInput struct {
 
-	// The ARN of the gateway that you want to delete.
+	//  The Amazon Resource Name (ARN) of the gateway that you want to delete.
 	//
 	// This member is required.
 	GatewayArn *string
@@ -39,7 +40,7 @@ type DeleteGatewayInput struct {
 
 type DeleteGatewayOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway that was deleted.
+	//  The ARN of the gateway that was deleted.
 	GatewayArn *string
 
 	// Metadata pertaining to the operation's result.

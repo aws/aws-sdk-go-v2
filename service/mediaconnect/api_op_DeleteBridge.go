@@ -28,7 +28,7 @@ func (c *Client) DeleteBridge(ctx context.Context, params *DeleteBridgeInput, op
 
 type DeleteBridgeInput struct {
 
-	// The ARN of the bridge that you want to delete.
+	//  The Amazon Resource Name (ARN) of the bridge that you want to delete.
 	//
 	// This member is required.
 	BridgeArn *string
@@ -38,7 +38,7 @@ type DeleteBridgeInput struct {
 
 type DeleteBridgeOutput struct {
 
-	// The Amazon Resource Number (ARN) of the deleted bridge.
+	//  The ARN of the deleted bridge.
 	BridgeArn *string
 
 	// Metadata pertaining to the operation's result.

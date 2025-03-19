@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// You can change an entitlement's description, subscribers, and encryption. If
-// you change the subscribers, the service will remove the outputs that are are
-// used by the subscribers that are removed.
+//	Updates an entitlement. You can change an entitlement's description,
+//
+// subscribers, and encryption. If you change the subscribers, the service will
+// remove the outputs that are are used by the subscribers that are removed.
 func (c *Client) UpdateFlowEntitlement(ctx context.Context, params *UpdateFlowEntitlementInput, optFns ...func(*Options)) (*UpdateFlowEntitlementOutput, error) {
 	if params == nil {
 		params = &UpdateFlowEntitlementInput{}
@@ -29,37 +30,36 @@ func (c *Client) UpdateFlowEntitlement(ctx context.Context, params *UpdateFlowEn
 	return out, nil
 }
 
-// The entitlement fields that you want to update.
 type UpdateFlowEntitlementInput struct {
 
-	// The ARN of the entitlement that you want to update.
+	//  The Amazon Resource Name (ARN) of the entitlement that you want to update.
 	//
 	// This member is required.
 	EntitlementArn *string
 
-	// The flow that is associated with the entitlement that you want to update.
+	//  The ARN of the flow that is associated with the entitlement that you want to
+	// update.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// A description of the entitlement. This description appears only on the AWS
-	// Elemental MediaConnect console and will not be seen by the subscriber or end
-	// user.
+	//  A description of the entitlement. This description appears only on the
+	// MediaConnect console and will not be seen by the subscriber or end user.
 	Description *string
 
-	// The type of encryption that will be used on the output associated with this
+	//  The type of encryption that will be used on the output associated with this
 	// entitlement. Allowable encryption types: static-key, speke.
 	Encryption *types.UpdateEncryption
 
-	// An indication of whether you want to enable the entitlement to allow access, or
-	// disable it to stop streaming content to the subscriber’s flow temporarily. If
+	//  An indication of whether you want to enable the entitlement to allow access,
+	// or disable it to stop streaming content to the subscriber’s flow temporarily. If
 	// you don’t specify the entitlementStatus field in your request, MediaConnect
 	// leaves the value unchanged.
 	EntitlementStatus types.EntitlementStatus
 
-	// The AWS account IDs that you want to share your content with. The receiving
-	// accounts (subscribers) will be allowed to create their own flow using your
-	// content as the source.
+	//  The Amazon Web Services account IDs that you want to share your content with.
+	// The receiving accounts (subscribers) will be allowed to create their own flow
+	// using your content as the source.
 	Subscribers []string
 
 	noSmithyDocumentSerde
@@ -67,10 +67,10 @@ type UpdateFlowEntitlementInput struct {
 
 type UpdateFlowEntitlementOutput struct {
 
-	// The new configuration of the entitlement that you updated.
+	//  The new configuration of the entitlement that you updated.
 	Entitlement *types.Entitlement
 
-	// The ARN of the flow that this entitlement was granted on.
+	//  The ARN of the flow that this entitlement was granted on.
 	FlowArn *string
 
 	// Metadata pertaining to the operation's result.

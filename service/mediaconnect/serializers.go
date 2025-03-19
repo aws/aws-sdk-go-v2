@@ -798,6 +798,11 @@ func awsRestjson1_serializeOpDocumentCreateFlowInput(v *CreateFlowInput, value s
 		}
 	}
 
+	if len(v.FlowSize) > 0 {
+		ok := object.Key("flowSize")
+		ok.String(string(v.FlowSize))
+	}
+
 	if v.Maintenance != nil {
 		ok := object.Key("maintenance")
 		if err := awsRestjson1_serializeDocumentAddMaintenance(v.Maintenance, ok); err != nil {
@@ -815,6 +820,13 @@ func awsRestjson1_serializeOpDocumentCreateFlowInput(v *CreateFlowInput, value s
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.NdiConfig != nil {
+		ok := object.Key("ndiConfig")
+		if err := awsRestjson1_serializeDocumentNdiConfig(v.NdiConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Outputs != nil {
@@ -937,7 +949,7 @@ func awsRestjson1_serializeOpDocumentCreateGatewayInput(v *CreateGatewayInput, v
 
 	if v.EgressCidrBlocks != nil {
 		ok := object.Key("egressCidrBlocks")
-		if err := awsRestjson1_serializeDocument__listOf__string(v.EgressCidrBlocks, ok); err != nil {
+		if err := awsRestjson1_serializeDocument__listOfString(v.EgressCidrBlocks, ok); err != nil {
 			return err
 		}
 	}
@@ -3367,7 +3379,7 @@ func awsRestjson1_serializeOpDocumentTagResourceInput(v *TagResourceInput, value
 
 	if v.Tags != nil {
 		ok := object.Key("tags")
-		if err := awsRestjson1_serializeDocument__mapOf__string(v.Tags, ok); err != nil {
+		if err := awsRestjson1_serializeDocument__mapOfString(v.Tags, ok); err != nil {
 			return err
 		}
 	}
@@ -3966,6 +3978,13 @@ func awsRestjson1_serializeOpDocumentUpdateFlowInput(v *UpdateFlowInput, value s
 		}
 	}
 
+	if v.NdiConfig != nil {
+		ok := object.Key("ndiConfig")
+		if err := awsRestjson1_serializeDocumentNdiConfig(v.NdiConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SourceFailoverConfig != nil {
 		ok := object.Key("sourceFailoverConfig")
 		if err := awsRestjson1_serializeDocumentUpdateFailoverConfig(v.SourceFailoverConfig, ok); err != nil {
@@ -4097,7 +4116,7 @@ func awsRestjson1_serializeOpDocumentUpdateFlowEntitlementInput(v *UpdateFlowEnt
 
 	if v.Subscribers != nil {
 		ok := object.Key("subscribers")
-		if err := awsRestjson1_serializeDocument__listOf__string(v.Subscribers, ok); err != nil {
+		if err := awsRestjson1_serializeDocument__listOfString(v.Subscribers, ok); err != nil {
 			return err
 		}
 	}
@@ -4327,7 +4346,7 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 
 	if v.CidrAllowList != nil {
 		ok := object.Key("cidrAllowList")
-		if err := awsRestjson1_serializeDocument__listOf__string(v.CidrAllowList, ok); err != nil {
+		if err := awsRestjson1_serializeDocument__listOfString(v.CidrAllowList, ok); err != nil {
 			return err
 		}
 	}
@@ -4364,6 +4383,16 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 	if v.MinLatency != nil {
 		ok := object.Key("minLatency")
 		ok.Integer(*v.MinLatency)
+	}
+
+	if v.NdiProgramName != nil {
+		ok := object.Key("ndiProgramName")
+		ok.String(*v.NdiProgramName)
+	}
+
+	if v.NdiSpeedHqQuality != nil {
+		ok := object.Key("ndiSpeedHqQuality")
+		ok.Integer(*v.NdiSpeedHqQuality)
 	}
 
 	if len(v.OutputStatus) > 0 {
@@ -4704,17 +4733,6 @@ func awsRestjson1_serializeOpDocumentUpdateGatewayInstanceInput(v *UpdateGateway
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOf__string(v []string, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		av.String(v[i])
-	}
-	return nil
-}
-
 func awsRestjson1_serializeDocument__listOfAddBridgeOutputRequest(v []types.AddBridgeOutputRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4858,6 +4876,19 @@ func awsRestjson1_serializeDocument__listOfMediaStreamSourceConfigurationRequest
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfNdiDiscoveryServerConfig(v []types.NdiDiscoveryServerConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentNdiDiscoveryServerConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfSetSourceRequest(v []types.SetSourceRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4867,6 +4898,17 @@ func awsRestjson1_serializeDocument__listOfSetSourceRequest(v []types.SetSourceR
 		if err := awsRestjson1_serializeDocumentSetSourceRequest(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfString(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4897,7 +4939,7 @@ func awsRestjson1_serializeDocument__listOfVpcInterfaceRequest(v []types.VpcInte
 	return nil
 }
 
-func awsRestjson1_serializeDocument__mapOf__string(v map[string]string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__mapOfString(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5139,7 +5181,7 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 
 	if v.CidrAllowList != nil {
 		ok := object.Key("cidrAllowList")
-		if err := awsRestjson1_serializeDocument__listOf__string(v.CidrAllowList, ok); err != nil {
+		if err := awsRestjson1_serializeDocument__listOfString(v.CidrAllowList, ok); err != nil {
 			return err
 		}
 	}
@@ -5181,6 +5223,16 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.NdiProgramName != nil {
+		ok := object.Key("ndiProgramName")
+		ok.String(*v.NdiProgramName)
+	}
+
+	if v.NdiSpeedHqQuality != nil {
+		ok := object.Key("ndiSpeedHqQuality")
+		ok.Integer(*v.NdiSpeedHqQuality)
 	}
 
 	if len(v.OutputStatus) > 0 {
@@ -5503,7 +5555,7 @@ func awsRestjson1_serializeDocumentGrantEntitlementRequest(v *types.GrantEntitle
 
 	if v.Subscribers != nil {
 		ok := object.Key("subscribers")
-		if err := awsRestjson1_serializeDocument__listOf__string(v.Subscribers, ok); err != nil {
+		if err := awsRestjson1_serializeDocument__listOfString(v.Subscribers, ok); err != nil {
 			return err
 		}
 	}
@@ -5654,6 +5706,52 @@ func awsRestjson1_serializeDocumentMulticastSourceSettings(v *types.MulticastSou
 	if v.MulticastSourceIp != nil {
 		ok := object.Key("multicastSourceIp")
 		ok.String(*v.MulticastSourceIp)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNdiConfig(v *types.NdiConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MachineName != nil {
+		ok := object.Key("machineName")
+		ok.String(*v.MachineName)
+	}
+
+	if v.NdiDiscoveryServers != nil {
+		ok := object.Key("ndiDiscoveryServers")
+		if err := awsRestjson1_serializeDocument__listOfNdiDiscoveryServerConfig(v.NdiDiscoveryServers, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.NdiState) > 0 {
+		ok := object.Key("ndiState")
+		ok.String(string(v.NdiState))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNdiDiscoveryServerConfig(v *types.NdiDiscoveryServerConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DiscoveryServerAddress != nil {
+		ok := object.Key("discoveryServerAddress")
+		ok.String(*v.DiscoveryServerAddress)
+	}
+
+	if v.DiscoveryServerPort != nil {
+		ok := object.Key("discoveryServerPort")
+		ok.Integer(*v.DiscoveryServerPort)
+	}
+
+	if v.VpcInterfaceAdapter != nil {
+		ok := object.Key("vpcInterfaceAdapter")
+		ok.String(*v.VpcInterfaceAdapter)
 	}
 
 	return nil
@@ -6105,7 +6203,7 @@ func awsRestjson1_serializeDocumentVpcInterfaceRequest(v *types.VpcInterfaceRequ
 
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("securityGroupIds")
-		if err := awsRestjson1_serializeDocument__listOf__string(v.SecurityGroupIds, ok); err != nil {
+		if err := awsRestjson1_serializeDocument__listOfString(v.SecurityGroupIds, ok); err != nil {
 			return err
 		}
 	}

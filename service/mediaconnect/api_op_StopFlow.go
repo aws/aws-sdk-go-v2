@@ -29,7 +29,7 @@ func (c *Client) StopFlow(ctx context.Context, params *StopFlowInput, optFns ...
 
 type StopFlowInput struct {
 
-	// The ARN of the flow that you want to stop.
+	//  The Amazon Resource Name (ARN) of the flow that you want to stop.
 	//
 	// This member is required.
 	FlowArn *string
@@ -39,10 +39,10 @@ type StopFlowInput struct {
 
 type StopFlowOutput struct {
 
-	// The ARN of the flow that you stopped.
+	//  The ARN of the flow that you stopped.
 	FlowArn *string
 
-	// The status of the flow when the StopFlow process begins.
+	//  The status of the flow when the StopFlow process begins.
 	Status types.Status
 
 	// Metadata pertaining to the operation's result.

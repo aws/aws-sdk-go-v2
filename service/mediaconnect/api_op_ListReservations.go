@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays a list of all reservations that have been purchased by this account in
-// the current AWS Region. This list includes all reservations in all states (such
-// as active and expired).
+//	Displays a list of all reservations that have been purchased by this account
+//
+// in the current Amazon Web Services Region. This list includes all reservations
+// in all states (such as active and expired).
 func (c *Client) ListReservations(ctx context.Context, params *ListReservationsInput, optFns ...func(*Options)) (*ListReservationsOutput, error) {
 	if params == nil {
 		params = &ListReservationsInput{}
@@ -31,20 +32,24 @@ func (c *Client) ListReservations(ctx context.Context, params *ListReservationsI
 
 type ListReservationsInput struct {
 
-	// The maximum number of results to return per API request. For example, you
-	// submit a ListReservations request with MaxResults set at 5. Although 20 items
-	// match your request, the service returns no more than the first 5 items. (The
-	// service also returns a NextToken value that you can use to fetch the next batch
-	// of results.) The service might return fewer results than the MaxResults value.
-	// If MaxResults is not included in the request, the service defaults to pagination
-	// with a maximum of 10 results per page.
+	//  The maximum number of results to return per API request.
+	//
+	// For example, you submit a ListReservations request with MaxResults set at 5.
+	// Although 20 items match your request, the service returns no more than the first
+	// 5 items. (The service also returns a NextToken value that you can use to fetch
+	// the next batch of results.)
+	//
+	// The service might return fewer results than the MaxResults value. If MaxResults
+	// is not included in the request, the service defaults to pagination with a
+	// maximum of 10 results per page.
 	MaxResults *int32
 
-	// The token that identifies which batch of results that you want to see. For
-	// example, you submit a ListReservations request with MaxResults set at 5. The
-	// service returns the first batch of results (up to 5) and a NextToken value. To
-	// see the next batch of results, you can submit the ListOfferings request a second
-	// time and specify the NextToken value.
+	//  The token that identifies the batch of results that you want to see.
+	//
+	// For example, you submit a ListReservations request with MaxResults set at 5.
+	// The service returns the first batch of results (up to 5) and a NextToken value.
+	// To see the next batch of results, you can submit the ListOfferings request a
+	// second time and specify the NextToken value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,15 +57,16 @@ type ListReservationsInput struct {
 
 type ListReservationsOutput struct {
 
-	// The token that identifies which batch of results that you want to see. For
-	// example, you submit a ListReservations request with MaxResults set at 5. The
-	// service returns the first batch of results (up to 5) and a NextToken value. To
-	// see the next batch of results, you can submit the ListReservations request a
+	//  The token that identifies the batch of results that you want to see.
+	//
+	// For example, you submit a ListReservations request with MaxResults set at 5.
+	// The service returns the first batch of results (up to 5) and a NextToken value.
+	// To see the next batch of results, you can submit the ListReservations request a
 	// second time and specify the NextToken value.
 	NextToken *string
 
-	// A list of all reservations that have been purchased by this account in the
-	// current AWS Region.
+	//  A list of all reservations that have been purchased by this account in the
+	// current Amazon Web Services Region.
 	Reservations []types.Reservation
 
 	// Metadata pertaining to the operation's result.
@@ -171,13 +177,16 @@ func (c *Client) addOperationListReservationsMiddlewares(stack *middleware.Stack
 
 // ListReservationsPaginatorOptions is the paginator options for ListReservations
 type ListReservationsPaginatorOptions struct {
-	// The maximum number of results to return per API request. For example, you
-	// submit a ListReservations request with MaxResults set at 5. Although 20 items
-	// match your request, the service returns no more than the first 5 items. (The
-	// service also returns a NextToken value that you can use to fetch the next batch
-	// of results.) The service might return fewer results than the MaxResults value.
-	// If MaxResults is not included in the request, the service defaults to pagination
-	// with a maximum of 10 results per page.
+	//  The maximum number of results to return per API request.
+	//
+	// For example, you submit a ListReservations request with MaxResults set at 5.
+	// Although 20 items match your request, the service returns no more than the first
+	// 5 items. (The service also returns a NextToken value that you can use to fetch
+	// the next batch of results.)
+	//
+	// The service might return fewer results than the MaxResults value. If MaxResults
+	// is not included in the request, the service defaults to pagination with a
+	// maximum of 10 results per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

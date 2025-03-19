@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a media stream from a flow. This action is only available if the media
+//	Removes a media stream from a flow. This action is only available if the media
+//
 // stream is not associated with a source or output.
 func (c *Client) RemoveFlowMediaStream(ctx context.Context, params *RemoveFlowMediaStreamInput, optFns ...func(*Options)) (*RemoveFlowMediaStreamOutput, error) {
 	if params == nil {
@@ -29,12 +30,12 @@ func (c *Client) RemoveFlowMediaStream(ctx context.Context, params *RemoveFlowMe
 
 type RemoveFlowMediaStreamInput struct {
 
-	// The Amazon Resource Name (ARN) of the flow.
+	//  The Amazon Resource Name (ARN) of the flow that you want to update.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// The name of the media stream that you want to remove.
+	//  The name of the media stream that you want to remove.
 	//
 	// This member is required.
 	MediaStreamName *string
@@ -44,10 +45,10 @@ type RemoveFlowMediaStreamInput struct {
 
 type RemoveFlowMediaStreamOutput struct {
 
-	// The Amazon Resource Name (ARN) of the flow.
+	//  The ARN of the flow that was updated.
 	FlowArn *string
 
-	// The name of the media stream that was removed.
+	//  The name of the media stream that was removed.
 	MediaStreamName *string
 
 	// Metadata pertaining to the operation's result.

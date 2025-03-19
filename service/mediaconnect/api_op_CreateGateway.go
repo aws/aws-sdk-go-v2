@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new gateway. The request must include at least one network (up to 4).
+//	Creates a new gateway. The request must include at least one network (up to
+//
+// four).
 func (c *Client) CreateGateway(ctx context.Context, params *CreateGatewayInput, optFns ...func(*Options)) (*CreateGatewayOutput, error) {
 	if params == nil {
 		params = &CreateGatewayInput{}
@@ -27,10 +29,9 @@ func (c *Client) CreateGateway(ctx context.Context, params *CreateGatewayInput, 
 	return out, nil
 }
 
-// Creates a new gateway. The request must include at least one network (up to 4).
 type CreateGatewayInput struct {
 
-	// The range of IP addresses that are allowed to contribute content or initiate
+	//  The range of IP addresses that are allowed to contribute content or initiate
 	// output requests for flows communicating with this gateway. These IP addresses
 	// should be in the form of a Classless Inter-Domain Routing (CIDR) block; for
 	// example, 10.0.0.0/16.
@@ -38,13 +39,13 @@ type CreateGatewayInput struct {
 	// This member is required.
 	EgressCidrBlocks []string
 
-	// The name of the gateway. This name can not be modified after the gateway is
+	//  The name of the gateway. This name can not be modified after the gateway is
 	// created.
 	//
 	// This member is required.
 	Name *string
 
-	// The list of networks that you want to add.
+	//  The list of networks that you want to add to the gateway.
 	//
 	// This member is required.
 	Networks []types.GatewayNetwork
@@ -54,7 +55,7 @@ type CreateGatewayInput struct {
 
 type CreateGatewayOutput struct {
 
-	// The settings for a gateway, including its networks.
+	//  The gateway that you created.
 	Gateway *types.Gateway
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays the details of an offering. The response includes the offering
+//	Displays the details of an offering. The response includes the offering
+//
 // description, duration, outbound bandwidth, price, and Amazon Resource Name
 // (ARN).
 func (c *Client) DescribeOffering(ctx context.Context, params *DescribeOfferingInput, optFns ...func(*Options)) (*DescribeOfferingOutput, error) {
@@ -31,7 +32,7 @@ func (c *Client) DescribeOffering(ctx context.Context, params *DescribeOfferingI
 
 type DescribeOfferingInput struct {
 
-	// The Amazon Resource Name (ARN) of the offering.
+	//  The ARN of the offering.
 	//
 	// This member is required.
 	OfferingArn *string
@@ -41,8 +42,7 @@ type DescribeOfferingInput struct {
 
 type DescribeOfferingOutput struct {
 
-	// A savings plan that reserves a certain amount of outbound bandwidth usage at a
-	// discounted rate each month over a period of time.
+	// The offering that you requested a description of.
 	Offering *types.Offering
 
 	// Metadata pertaining to the operation's result.

@@ -27,15 +27,14 @@ func (c *Client) AddBridgeOutputs(ctx context.Context, params *AddBridgeOutputsI
 	return out, nil
 }
 
-// A request to add outputs to the specified bridge.
 type AddBridgeOutputsInput struct {
 
-	// The ARN of the bridge that you want to update.
+	//  The Amazon Resource Name (ARN) of the bridge that you want to update.
 	//
 	// This member is required.
 	BridgeArn *string
 
-	// The outputs that you want to add to this bridge.
+	//  The outputs that you want to add to this bridge.
 	//
 	// This member is required.
 	Outputs []types.AddBridgeOutputRequest
@@ -45,10 +44,10 @@ type AddBridgeOutputsInput struct {
 
 type AddBridgeOutputsOutput struct {
 
-	// The Amazon Resource Number (ARN) of the bridge.
+	//  The ARN of the bridge that you added outputs to.
 	BridgeArn *string
 
-	// The outputs that you added to this bridge.
+	//  The outputs that you added to this bridge.
 	Outputs []types.BridgeOutput
 
 	// Metadata pertaining to the operation's result.

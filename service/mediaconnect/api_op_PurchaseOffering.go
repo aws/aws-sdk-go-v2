@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Submits a request to purchase an offering. If you already have an active
+//	Submits a request to purchase an offering. If you already have an active
+//
 // reservation, you can't purchase another offering.
 func (c *Client) PurchaseOffering(ctx context.Context, params *PurchaseOfferingInput, optFns ...func(*Options)) (*PurchaseOfferingOutput, error) {
 	if params == nil {
@@ -28,25 +29,26 @@ func (c *Client) PurchaseOffering(ctx context.Context, params *PurchaseOfferingI
 	return out, nil
 }
 
-// A request to purchase a offering.
 type PurchaseOfferingInput struct {
 
-	// The Amazon Resource Name (ARN) of the offering.
+	//  The Amazon Resource Name (ARN) of the offering.
 	//
 	// This member is required.
 	OfferingArn *string
 
-	// The name that you want to use for the reservation.
+	//  The name that you want to use for the reservation.
 	//
 	// This member is required.
 	ReservationName *string
 
-	// The date and time that you want the reservation to begin, in Coordinated
-	// Universal Time (UTC). You can specify any date and time between 12:00am on the
-	// first day of the current month to the current time on today's date, inclusive.
-	// Specify the start in a 24-hour notation. Use the following format:
-	// YYYY-MM-DDTHH:mm:SSZ, where T and Z are literal characters. For example, to
-	// specify 11:30pm on March 5, 2020, enter 2020-03-05T23:30:00Z.
+	//  The date and time that you want the reservation to begin, in Coordinated
+	// Universal Time (UTC).
+	//
+	// You can specify any date and time between 12:00am on the first day of the
+	// current month to the current time on today's date, inclusive. Specify the start
+	// in a 24-hour notation. Use the following format: YYYY-MM-DDTHH:mm:SSZ , where T
+	// and Z are literal characters. For example, to specify 11:30pm on March 5, 2020,
+	// enter 2020-03-05T23:30:00Z .
 	//
 	// This member is required.
 	Start *string
@@ -56,12 +58,8 @@ type PurchaseOfferingInput struct {
 
 type PurchaseOfferingOutput struct {
 
-	// A pricing agreement for a discounted rate for a specific outbound bandwidth
-	// that your MediaConnect account will use each month over a specific time period.
-	// The discounted rate in the reservation applies to outbound bandwidth for all
-	// flows from your account until your account reaches the amount of bandwidth in
-	// your reservation. If you use more outbound bandwidth than the agreed upon amount
-	// in a single month, the overage is charged at the on-demand rate.
+	// The details of the reservation that you just created when you purchased the
+	// offering.
 	Reservation *types.Reservation
 
 	// Metadata pertaining to the operation's result.

@@ -29,7 +29,7 @@ func (c *Client) DeleteFlow(ctx context.Context, params *DeleteFlowInput, optFns
 
 type DeleteFlowInput struct {
 
-	// The ARN of the flow that you want to delete.
+	//  The Amazon Resource Name (ARN) of the flow that you want to delete.
 	//
 	// This member is required.
 	FlowArn *string
@@ -39,10 +39,10 @@ type DeleteFlowInput struct {
 
 type DeleteFlowOutput struct {
 
-	// The ARN of the flow that was deleted.
+	//  The ARN of the flow that was deleted.
 	FlowArn *string
 
-	// The status of the flow when the DeleteFlow process begins.
+	//  The status of the flow when the DeleteFlow process begins.
 	Status types.Status
 
 	// Metadata pertaining to the operation's result.

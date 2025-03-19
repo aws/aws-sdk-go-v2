@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration of an existing Gateway Instance.
+// Updates an existing gateway instance.
 func (c *Client) UpdateGatewayInstance(ctx context.Context, params *UpdateGatewayInstanceInput, optFns ...func(*Options)) (*UpdateGatewayInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateGatewayInstanceInput{}
@@ -27,18 +27,14 @@ func (c *Client) UpdateGatewayInstance(ctx context.Context, params *UpdateGatewa
 	return out, nil
 }
 
-// A request to update gateway instance state.
 type UpdateGatewayInstanceInput struct {
 
-	// The Amazon Resource Name (ARN) of the instance that you want to update.
+	// The Amazon Resource Name (ARN) of the gateway instance that you want to update.
 	//
 	// This member is required.
 	GatewayInstanceArn *string
 
-	// The availability of the instance to host new bridges. The bridgePlacement
-	// property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be
-	// deployed to this instance. If it is AVAILABLE, new bridges can be added to this
-	// instance.
+	// The state of the instance. ACTIVE or INACTIVE .
 	BridgePlacement types.BridgePlacement
 
 	noSmithyDocumentSerde
@@ -46,13 +42,10 @@ type UpdateGatewayInstanceInput struct {
 
 type UpdateGatewayInstanceOutput struct {
 
-	// The availability of the instance to host new bridges. The bridgePlacement
-	// property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be
-	// deployed to this instance. If it is AVAILABLE, new bridges can be added to this
-	// instance.
+	// The state of the instance. ACTIVE or INACTIVE .
 	BridgePlacement types.BridgePlacement
 
-	// The Amazon Resource Name (ARN) of the instance.
+	// The ARN of the instance that was updated.
 	GatewayInstanceArn *string
 
 	// Metadata pertaining to the operation's result.

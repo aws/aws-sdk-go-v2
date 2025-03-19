@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a VPC Interface from an existing flow. This request can be made only on
-// a VPC interface that does not have a Source or Output associated with it. If the
-// VPC interface is referenced by a Source or Output, you must first delete or
+//	Removes a VPC Interface from an existing flow. This request can be made only
+//
+// on a VPC interface that does not have a Source or Output associated with it. If
+// the VPC interface is referenced by a Source or Output, you must first delete or
 // update the Source or Output to no longer reference the VPC interface.
 func (c *Client) RemoveFlowVpcInterface(ctx context.Context, params *RemoveFlowVpcInterfaceInput, optFns ...func(*Options)) (*RemoveFlowVpcInterfaceOutput, error) {
 	if params == nil {
@@ -31,12 +32,13 @@ func (c *Client) RemoveFlowVpcInterface(ctx context.Context, params *RemoveFlowV
 
 type RemoveFlowVpcInterfaceInput struct {
 
-	// The flow that you want to remove a VPC interface from.
+	//  The Amazon Resource Name (ARN) of the flow that you want to remove a VPC
+	// interface from.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// The name of the VPC interface that you want to remove.
+	//  The name of the VPC interface that you want to remove.
 	//
 	// This member is required.
 	VpcInterfaceName *string
@@ -46,14 +48,14 @@ type RemoveFlowVpcInterfaceInput struct {
 
 type RemoveFlowVpcInterfaceOutput struct {
 
-	// The ARN of the flow that is associated with the VPC interface you removed.
+	//  The ARN of the flow that is associated with the VPC interface you removed.
 	FlowArn *string
 
-	// IDs of network interfaces associated with the removed VPC interface that Media
-	// Connect was unable to remove.
+	//  IDs of network interfaces associated with the removed VPC interface that
+	// MediaConnect was unable to remove.
 	NonDeletedNetworkInterfaceIds []string
 
-	// The name of the VPC interface that was removed.
+	//  The name of the VPC interface that was removed.
 	VpcInterfaceName *string
 
 	// Metadata pertaining to the operation's result.

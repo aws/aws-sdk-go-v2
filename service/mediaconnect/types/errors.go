@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Exception raised by AWS Elemental MediaConnect. See the error message and
-// documentation for the operation for more information on the cause of this
+// Exception raised by Elemental MediaConnect when adding the flow output. See the
+// error message for the operation for more information on the cause of this
 // exception.
 type AddFlowOutputs420Exception struct {
 	Message *string
@@ -35,9 +35,8 @@ func (e *AddFlowOutputs420Exception) ErrorCode() string {
 }
 func (e *AddFlowOutputs420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception raised by AWS Elemental MediaConnect. See the error message and
-// documentation for the operation for more information on the cause of this
-// exception.
+// This exception is thrown if the request contains a semantic error. The precise
+// meaning depends on the API, and is documented in the error message.
 type BadRequestException struct {
 	Message *string
 
@@ -63,9 +62,9 @@ func (e *BadRequestException) ErrorCode() string {
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception raised by AWS Elemental MediaConnect. See the error message and
-// documentation for the operation for more information on the cause of this
-// exception.
+// The requested operation would cause a conflict with the current state of a
+// service resource associated with the request. Resolve the conflict before
+// retrying this request.
 type ConflictException struct {
 	Message *string
 
@@ -91,8 +90,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception raised by AWS Elemental MediaConnect. See the error message and
-// documentation for the operation for more information on the cause of this
+// Exception raised by Elemental MediaConnect when creating the bridge. See the
+// error message for the operation for more information on the cause of this
 // exception.
 type CreateBridge420Exception struct {
 	Message *string
@@ -119,8 +118,8 @@ func (e *CreateBridge420Exception) ErrorCode() string {
 }
 func (e *CreateBridge420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception raised by AWS Elemental MediaConnect. See the error message and
-// documentation for the operation for more information on the cause of this
+// Exception raised by Elemental MediaConnect when creating the flow. See the
+// error message for the operation for more information on the cause of this
 // exception.
 type CreateFlow420Exception struct {
 	Message *string
@@ -147,8 +146,8 @@ func (e *CreateFlow420Exception) ErrorCode() string {
 }
 func (e *CreateFlow420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception raised by AWS Elemental MediaConnect. See the error message and
-// documentation for the operation for more information on the cause of this
+// Exception raised by Elemental MediaConnect when creating the gateway. See the
+// error message for the operation for more information on the cause of this
 // exception.
 type CreateGateway420Exception struct {
 	Message *string
@@ -175,9 +174,7 @@ func (e *CreateGateway420Exception) ErrorCode() string {
 }
 func (e *CreateGateway420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception raised by AWS Elemental MediaConnect. See the error message and
-// documentation for the operation for more information on the cause of this
-// exception.
+// You do not have sufficient access to perform this action.
 type ForbiddenException struct {
 	Message *string
 
@@ -203,8 +200,8 @@ func (e *ForbiddenException) ErrorCode() string {
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception raised by AWS Elemental MediaConnect. See the error message and
-// documentation for the operation for more information on the cause of this
+// Exception raised by Elemental MediaConnect when granting the entitlement. See
+// the error message for the operation for more information on the cause of this
 // exception.
 type GrantFlowEntitlements420Exception struct {
 	Message *string
@@ -231,9 +228,7 @@ func (e *GrantFlowEntitlements420Exception) ErrorCode() string {
 }
 func (e *GrantFlowEntitlements420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception raised by AWS Elemental MediaConnect. See the error message and
-// documentation for the operation for more information on the cause of this
-// exception.
+// The server encountered an internal error and is unable to complete the request.
 type InternalServerErrorException struct {
 	Message *string
 
@@ -259,9 +254,7 @@ func (e *InternalServerErrorException) ErrorCode() string {
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Exception raised by AWS Elemental MediaConnect. See the error message and
-// documentation for the operation for more information on the cause of this
-// exception.
+// One or more of the resources in the request does not exist in the system.
 type NotFoundException struct {
 	Message *string
 
@@ -287,9 +280,7 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception raised by AWS Elemental MediaConnect. See the error message and
-// documentation for the operation for more information on the cause of this
-// exception.
+// The service is currently unavailable or busy.
 type ServiceUnavailableException struct {
 	Message *string
 
@@ -315,9 +306,7 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Exception raised by AWS Elemental MediaConnect. See the error message and
-// documentation for the operation for more information on the cause of this
-// exception.
+// The request was denied due to request throttling.
 type TooManyRequestsException struct {
 	Message *string
 

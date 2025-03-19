@@ -10,14 +10,14 @@ import (
 // Add a flow source to an existing bridge.
 type AddBridgeFlowSourceRequest struct {
 
-	// The Amazon Resource Number (ARN) of the cloud flow to use as a source of this
+	//  The Amazon Resource Number (ARN) of the flow to use as a source of this
 	// bridge.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// The name of the flow source. This name is used to reference the source and must
-	// be unique among sources in this bridge.
+	//  The name of the flow source. This name is used to reference the source and
+	// must be unique among sources in this bridge.
 	//
 	// This member is required.
 	Name *string
@@ -31,33 +31,36 @@ type AddBridgeFlowSourceRequest struct {
 // Add a network output to an existing bridge.
 type AddBridgeNetworkOutputRequest struct {
 
-	// The network output IP Address.
+	//  The network output IP Address.
 	//
 	// This member is required.
 	IpAddress *string
 
-	// The network output name. This name is used to reference the output and must be
+	//  The network output name. This name is used to reference the output and must be
 	// unique among outputs in this bridge.
 	//
 	// This member is required.
 	Name *string
 
-	// The network output's gateway network name.
+	//  The network output's gateway network name.
 	//
 	// This member is required.
 	NetworkName *string
 
-	// The network output port.
+	//  The network output port.
 	//
 	// This member is required.
 	Port *int32
 
-	// The network output protocol.
+	//  The network output protocol.
+	//
+	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
+	// reference is maintained for legacy purposes only.
 	//
 	// This member is required.
 	Protocol Protocol
 
-	// The network output TTL.
+	//  The network output TTL.
 	//
 	// This member is required.
 	Ttl *int32
@@ -68,62 +71,70 @@ type AddBridgeNetworkOutputRequest struct {
 // Add a network source to an existing bridge.
 type AddBridgeNetworkSourceRequest struct {
 
-	// The network source multicast IP.
+	//  The network source multicast IP.
 	//
 	// This member is required.
 	MulticastIp *string
 
-	// The name of the network source. This name is used to reference the source and
+	//  The name of the network source. This name is used to reference the source and
 	// must be unique among sources in this bridge.
 	//
 	// This member is required.
 	Name *string
 
-	// The network source's gateway network name.
+	//  The network source's gateway network name.
 	//
 	// This member is required.
 	NetworkName *string
 
-	// The network source port.
+	//  The network source port.
 	//
 	// This member is required.
 	Port *int32
 
-	// The network source protocol.
+	//  The network source protocol.
+	//
+	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
+	// reference is maintained for legacy purposes only.
 	//
 	// This member is required.
 	Protocol Protocol
 
-	// The settings related to the multicast source.
+	//  The settings related to the multicast source.
 	MulticastSourceSettings *MulticastSourceSettings
 
 	noSmithyDocumentSerde
 }
 
-// Add an output to a bridge.
+// Add outputs to the specified bridge.
 type AddBridgeOutputRequest struct {
 
-	// Add a network output to an existing bridge.
+	//  The network output of the bridge. A network output is delivered to your
+	// premises.
 	NetworkOutput *AddBridgeNetworkOutputRequest
 
 	noSmithyDocumentSerde
 }
 
-// Add a source to an existing bridge.
+// Add an output to a bridge.
 type AddBridgeSourceRequest struct {
 
-	// Add a flow source to an existing bridge.
+	//  The source of the flow.
 	FlowSource *AddBridgeFlowSourceRequest
 
-	// Add a network source to an existing bridge.
+	//  The source of the network.
 	NetworkSource *AddBridgeNetworkSourceRequest
 
 	noSmithyDocumentSerde
 }
 
+//	Create a bridge with the egress bridge type. An egress bridge is a
+//
+// cloud-to-ground bridge. The content comes from an existing MediaConnect flow and
+// is delivered to your premises.
 type AddEgressGatewayBridgeRequest struct {
 
-	// The maximum expected bitrate (in bps).
+	//  The maximum expected bitrate (in bps) of the egress bridge.
 	//
 	// This member is required.
 	MaxBitrate *int32
@@ -131,14 +142,17 @@ type AddEgressGatewayBridgeRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Create a bridge with the ingress bridge type. An ingress bridge is a
+// ground-to-cloud bridge. The content originates at your premises and is delivered
+// to the cloud.
 type AddIngressGatewayBridgeRequest struct {
 
-	// The maximum expected bitrate (in bps).
+	//  The maximum expected bitrate (in bps) of the ingress bridge.
 	//
 	// This member is required.
 	MaxBitrate *int32
 
-	// The maximum number of expected outputs.
+	//  The maximum number of expected outputs on the ingress bridge.
 	//
 	// This member is required.
 	MaxOutputs *int32
@@ -146,17 +160,23 @@ type AddIngressGatewayBridgeRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Create maintenance setting for a flow
+// Create a maintenance setting for a flow.
 type AddMaintenance struct {
 
-	// A day of a week when the maintenance will happen. Use
-	// Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+	//  A day of a week when the maintenance will happen.
 	//
 	// This member is required.
 	MaintenanceDay MaintenanceDay
 
-	// UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes
-	// must be 00. Example: 13:00. The default value is 02:00.
+	//  UTC time when the maintenance will happen.
+	//
+	// Use 24-hour HH:MM format.
+	//
+	// Minutes must be 00.
+	//
+	// Example: 13:00.
+	//
+	// The default value is 02:00.
 	//
 	// This member is required.
 	MaintenanceStartHour *string
@@ -167,105 +187,115 @@ type AddMaintenance struct {
 // The media stream that you want to add to the flow.
 type AddMediaStreamRequest struct {
 
-	// A unique identifier for the media stream.
+	//  A unique identifier for the media stream.
 	//
 	// This member is required.
 	MediaStreamId *int32
 
-	// A name that helps you distinguish one media stream from another.
+	//  A name that helps you distinguish one media stream from another.
 	//
 	// This member is required.
 	MediaStreamName *string
 
-	// The type of media stream.
+	//  The type of media stream.
 	//
 	// This member is required.
 	MediaStreamType MediaStreamType
 
-	// The attributes that you want to assign to the new media stream.
+	//  The attributes that you want to assign to the new media stream.
 	Attributes *MediaStreamAttributesRequest
 
-	// The sample rate (in Hz) for the stream. If the media stream type is video or
+	//  The sample rate (in Hz) for the stream. If the media stream type is video or
 	// ancillary data, set this value to 90000. If the media stream type is audio, set
 	// this value to either 48000 or 96000.
 	ClockRate *int32
 
-	// A description that can help you quickly identify what your media stream is used
-	// for.
+	//  A description that can help you quickly identify what your media stream is
+	// used for.
 	Description *string
 
-	// The resolution of the video.
+	//  The resolution of the video.
 	VideoFormat *string
 
 	noSmithyDocumentSerde
 }
 
-// The output that you want to add to this flow.
+// A request to add an output to a flow.
 type AddOutputRequest struct {
 
-	// The protocol to use for the output.
+	//  The protocol to use for the output.
+	//
+	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
+	// reference is maintained for legacy purposes only.
 	//
 	// This member is required.
 	Protocol Protocol
 
-	// The range of IP addresses that should be allowed to initiate output requests to
-	// this flow. These IP addresses should be in the form of a Classless Inter-Domain
-	// Routing (CIDR) block; for example, 10.0.0.0/16.
+	//  The range of IP addresses that should be allowed to initiate output requests
+	// to this flow. These IP addresses should be in the form of a Classless
+	// Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
 	CidrAllowList []string
 
-	// A description of the output. This description appears only on the AWS Elemental
-	// MediaConnect console and will not be seen by the end user.
+	//  A description of the output. This description appears only on the Audit
+	// Manager console and will not be seen by the end user.
 	Description *string
 
-	// The IP address from which video will be sent to output destinations.
+	//  The IP address from which video will be sent to output destinations.
 	Destination *string
 
-	// The type of key used for the encryption. If no keyType is provided, the service
-	// will use the default setting (static-key). Allowable encryption types:
+	//  The type of key used for the encryption. If no keyType is provided, the
+	// service will use the default setting (static-key). Allowable encryption types:
 	// static-key.
 	Encryption *Encryption
 
-	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
-	// Zixi-based, and Fujitsu-based streams.
+	//  The maximum latency in milliseconds. This parameter applies only to RIST-based
+	// and Zixi-based streams.
 	MaxLatency *int32
 
-	// The media streams that are associated with the output, and the parameters for
+	//  The media streams that are associated with the output, and the parameters for
 	// those associations.
 	MediaStreamOutputConfigurations []MediaStreamOutputConfigurationRequest
 
-	// The minimum latency in milliseconds for SRT-based streams. In streams that use
+	//  The minimum latency in milliseconds for SRT-based streams. In streams that use
 	// the SRT protocol, this value that you set on your MediaConnect source or output
 	// represents the minimal potential latency of that connection. The latency of the
 	// stream is set to the highest number between the sender’s minimum latency and the
 	// receiver’s minimum latency.
 	MinLatency *int32
 
-	// The name of the output. This value must be unique within the current flow.
+	//  The name of the output. This value must be unique within the current flow.
 	Name *string
 
-	// An indication of whether the new output should be enabled or disabled as soon
+	//  A suffix for the names of the NDI sources that the flow creates. If a custom
+	// name isn't specified, MediaConnect uses the output name.
+	NdiProgramName *string
+
+	// A quality setting for the NDI Speed HQ encoder.
+	NdiSpeedHqQuality *int32
+
+	//  An indication of whether the new output should be enabled or disabled as soon
 	// as it is created. If you don't specify the outputStatus field in your request,
 	// MediaConnect sets it to ENABLED.
 	OutputStatus OutputStatus
 
-	// The port to use when content is distributed to this output.
+	//  The port to use when content is distributed to this output.
 	Port *int32
 
-	// The remote ID for the Zixi-pull output stream.
+	//  The remote ID for the Zixi-pull output stream.
 	RemoteId *string
 
-	// The port that the flow uses to send outbound requests to initiate connection
+	//  The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
 	SenderControlPort *int32
 
-	// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
+	//  The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 	SmoothingLatency *int32
 
-	// The stream ID that you want to use for this transport. This parameter applies
+	//  The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi and SRT caller-based streams.
 	StreamId *string
 
-	// The name of the VPC interface attachment to use for this output.
+	//  The name of the VPC interface attachment to use for this output.
 	VpcInterfaceAttachment *VpcInterfaceAttachment
 
 	noSmithyDocumentSerde
@@ -274,7 +304,7 @@ type AddOutputRequest struct {
 // Specifies the configuration for audio stream metrics monitoring.
 type AudioMonitoringSetting struct {
 
-	// Detects periods of silence.
+	//  Detects periods of silence.
 	SilentAudio *SilentAudio
 
 	noSmithyDocumentSerde
@@ -283,71 +313,82 @@ type AudioMonitoringSetting struct {
 // Configures settings for the BlackFrames metric.
 type BlackFrames struct {
 
-	// Indicates whether the BlackFrames metric is enabled or disabled.
+	//  Indicates whether the BlackFrames metric is enabled or disabled..
 	State State
 
-	// Specifies the number of consecutive seconds of black frames that triggers an
+	//  Specifies the number of consecutive seconds of black frames that triggers an
 	// event or alert.
 	ThresholdSeconds *int32
 
 	noSmithyDocumentSerde
 }
 
-// A Bridge is the connection between your datacenter's Instances and the AWS
-// cloud. A bridge can be used to send video from the AWS cloud to your datacenter
-// or from your datacenter to the AWS cloud.
+//	A Bridge is the connection between your data center's Instances and the Amazon
+//
+// Web Services cloud. A bridge can be used to send video from the Amazon Web
+// Services cloud to your data center or from your data center to the Amazon Web
+// Services cloud.
 type Bridge struct {
 
-	// The Amazon Resource Number (ARN) of the bridge.
+	//  The Amazon Resource Number (ARN) of the bridge.
 	//
 	// This member is required.
 	BridgeArn *string
 
+	// The state of the bridge.
+	//
 	// This member is required.
 	BridgeState BridgeState
 
-	// The name of the bridge.
+	//  The name of the bridge.
 	//
 	// This member is required.
 	Name *string
 
-	// The placement Amazon Resource Number (ARN) of the bridge.
+	//  The placement Amazon Resource Number (ARN) of the bridge.
 	//
 	// This member is required.
 	PlacementArn *string
 
+	//  Messages with details about the bridge.
 	BridgeMessages []MessageDetail
 
+	//  An egress bridge is a cloud-to-ground bridge. The content comes from an
+	// existing MediaConnect flow and is delivered to your premises.
 	EgressGatewayBridge *EgressGatewayBridge
 
+	//  An ingress bridge is a ground-to-cloud bridge. The content originates at your
+	// premises and is delivered to the cloud.
 	IngressGatewayBridge *IngressGatewayBridge
 
-	// The outputs on this bridge.
+	//  The outputs on this bridge.
 	Outputs []BridgeOutput
 
-	// The settings for source failover.
+	//  The settings for source failover.
 	SourceFailoverConfig *FailoverConfig
 
-	// The sources on this bridge.
+	//  The sources on this bridge.
 	Sources []BridgeSource
 
 	noSmithyDocumentSerde
 }
 
-// The output of the bridge. A flow output is delivered to the AWS cloud.
+//	The output of the bridge. A flow output is delivered to the Amazon Web
+//
+// Services cloud.
 type BridgeFlowOutput struct {
 
-	// The Amazon Resource Number (ARN) of the cloud flow.
+	//  The Amazon Resource Number (ARN) of the cloud flow.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// The Amazon Resource Number (ARN) of the flow source.
+	//  The Amazon Resource Number (ARN) of the flow source.
 	//
 	// This member is required.
 	FlowSourceArn *string
 
-	// The name of the bridge's output.
+	//  The name of the bridge's output.
 	//
 	// This member is required.
 	Name *string
@@ -355,24 +396,25 @@ type BridgeFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
-// The source of the bridge. A flow source originates in MediaConnect as an
+//	The source of the bridge. A flow source originates in MediaConnect as an
+//
 // existing cloud flow.
 type BridgeFlowSource struct {
 
-	// The ARN of the cloud flow used as a source of this bridge.
+	//  The ARN of the cloud flow used as a source of this bridge.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// The name of the flow source.
+	//  The name of the flow source.
 	//
 	// This member is required.
 	Name *string
 
-	// The name of the VPC interface attachment to use for this source.
+	//  The name of the VPC interface attachment to use for this source.
 	FlowVpcInterfaceAttachment *VpcInterfaceAttachment
 
-	// The Amazon Resource Number (ARN) of the output.
+	//  The Amazon Resource Number (ARN) of the output.
 	OutputArn *string
 
 	noSmithyDocumentSerde
@@ -381,32 +423,35 @@ type BridgeFlowSource struct {
 // The output of the bridge. A network output is delivered to your premises.
 type BridgeNetworkOutput struct {
 
-	// The network output IP Address.
+	//  The network output IP address.
 	//
 	// This member is required.
 	IpAddress *string
 
-	// The network output name.
+	//  The network output name.
 	//
 	// This member is required.
 	Name *string
 
-	// The network output's gateway network name.
+	//  The network output's gateway network name.
 	//
 	// This member is required.
 	NetworkName *string
 
-	// The network output port.
+	//  The network output's port.
 	//
 	// This member is required.
 	Port *int32
 
-	// The network output protocol.
+	//  The network output protocol.
+	//
+	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
+	// reference is maintained for legacy purposes only.
 	//
 	// This member is required.
 	Protocol Protocol
 
-	// The network output TTL.
+	//  The network output TTL.
 	//
 	// This member is required.
 	Ttl *int32
@@ -417,27 +462,30 @@ type BridgeNetworkOutput struct {
 // The source of the bridge. A network source originates at your premises.
 type BridgeNetworkSource struct {
 
-	// The network source multicast IP.
+	//  The network source multicast IP.
 	//
 	// This member is required.
 	MulticastIp *string
 
-	// The name of the network source.
+	//  The name of the network source.
 	//
 	// This member is required.
 	Name *string
 
-	// The network source's gateway network name.
+	//  The network source's gateway network name.
 	//
 	// This member is required.
 	NetworkName *string
 
-	// The network source port.
+	//  The network source port.
 	//
 	// This member is required.
 	Port *int32
 
-	// The network source protocol.
+	//  The network source protocol.
+	//
+	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
+	// reference is maintained for legacy purposes only.
 	//
 	// This member is required.
 	Protocol Protocol
@@ -451,10 +499,10 @@ type BridgeNetworkSource struct {
 // The output of the bridge.
 type BridgeOutput struct {
 
-	// The output of the bridge. A flow output is delivered to the AWS cloud.
+	//  The output of the associated flow.
 	FlowOutput *BridgeFlowOutput
 
-	// The output of the bridge. A network output is delivered to your premises.
+	//  The network output for the bridge.
 	NetworkOutput *BridgeNetworkOutput
 
 	noSmithyDocumentSerde
@@ -463,31 +511,33 @@ type BridgeOutput struct {
 // The bridge's source.
 type BridgeSource struct {
 
-	// The source of the bridge. A flow source originates in MediaConnect as an
-	// existing cloud flow.
+	//  The source of the associated flow.
 	FlowSource *BridgeFlowSource
 
-	// The source of the bridge. A network source originates at your premises.
+	//  The network source for the bridge.
 	NetworkSource *BridgeNetworkSource
 
 	noSmithyDocumentSerde
 }
 
-// The transport parameters that are associated with an outbound media stream.
+//	The transport parameters that you want to associate with an outbound media
+//
+// stream.
 type DestinationConfiguration struct {
 
-	// The IP address where contents of the media stream will be sent.
+	// The IP address where you want MediaConnect to send contents of the media stream.
 	//
 	// This member is required.
 	DestinationIp *string
 
-	// The port to use when the content of the media stream is distributed to the
-	// output.
+	//  The port that you want MediaConnect to use when it distributes the media
+	// stream to the output.
 	//
 	// This member is required.
 	DestinationPort *int32
 
-	// The VPC interface that is used for the media stream associated with the output.
+	//  The VPC interface that you want to use for the media stream associated with
+	// the output.
 	//
 	// This member is required.
 	Interface *Interface
@@ -495,7 +545,7 @@ type DestinationConfiguration struct {
 	// The IP address that the receiver requires in order to establish a connection
 	// with the flow. This value is represented by the elastic network interface IP
 	// address of the VPC. This field applies only to outputs that use the CDI or ST
-	// 2110 JPEG XS protocol.
+	// 2110 JPEG XS or protocol.
 	//
 	// This member is required.
 	OutboundIp *string
@@ -503,8 +553,7 @@ type DestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The transport parameters that you want to associate with an outbound media
-// stream.
+// The definition of a media stream that you want to associate with the output.
 type DestinationConfigurationRequest struct {
 
 	// The IP address where you want MediaConnect to send contents of the media stream.
@@ -512,14 +561,14 @@ type DestinationConfigurationRequest struct {
 	// This member is required.
 	DestinationIp *string
 
-	// The port that you want MediaConnect to use when it distributes the media stream
-	// to the output.
+	//  The port that you want MediaConnect to use when it distributes the media
+	// stream to the output.
 	//
 	// This member is required.
 	DestinationPort *int32
 
-	// The VPC interface that you want to use for the media stream associated with the
-	// output.
+	//  The VPC interface that you want to use for the media stream associated with
+	// the output.
 	//
 	// This member is required.
 	Interface *InterfaceRequest
@@ -527,25 +576,30 @@ type DestinationConfigurationRequest struct {
 	noSmithyDocumentSerde
 }
 
+//	Create a bridge with the egress bridge type. An egress bridge is a
+//
+// cloud-to-ground bridge. The content comes from an existing MediaConnect flow and
+// is delivered to your premises.
 type EgressGatewayBridge struct {
 
-	// The maximum expected bitrate (in bps) of the egress bridge.
+	//  The maximum expected bitrate (in bps) of the egress bridge.
 	//
 	// This member is required.
 	MaxBitrate *int32
 
-	// The ID of the instance running this bridge.
+	//  The ID of the instance running this bridge.
 	InstanceId *string
 
 	noSmithyDocumentSerde
 }
 
-// A collection of parameters that determine how MediaConnect will convert the
+//	A collection of parameters that determine how MediaConnect will convert the
+//
 // content. These fields only apply to outputs on flows that have a CDI source.
 type EncodingParameters struct {
 
-	// A value that is used to calculate compression for an output. The bitrate of the
-	// output is calculated as follows: Output bitrate = (1 / compressionFactor) *
+	//  A value that is used to calculate compression for an output. The bitrate of
+	// the output is calculated as follows: Output bitrate = (1 / compressionFactor) *
 	// (source bitrate) This property only applies to outputs that use the ST 2110 JPEG
 	// XS protocol, with a flow source that uses the CDI protocol. Valid values are
 	// floating point numbers in the range of 3.0 to 10.0, inclusive.
@@ -553,7 +607,7 @@ type EncodingParameters struct {
 	// This member is required.
 	CompressionFactor *float64
 
-	// A setting on the encoder that drives compression settings. This property only
+	//  A setting on the encoder that drives compression settings. This property only
 	// applies to video media streams associated with outputs that use the ST 2110 JPEG
 	// XS protocol, with a flow source that uses the CDI protocol.
 	//
@@ -563,12 +617,13 @@ type EncodingParameters struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of parameters that determine how MediaConnect will convert the
+//	A collection of parameters that determine how MediaConnect will convert the
+//
 // content. These fields only apply to outputs on flows that have a CDI source.
 type EncodingParametersRequest struct {
 
-	// A value that is used to calculate compression for an output. The bitrate of the
-	// output is calculated as follows: Output bitrate = (1 / compressionFactor) *
+	//  A value that is used to calculate compression for an output. The bitrate of
+	// the output is calculated as follows: Output bitrate = (1 / compressionFactor) *
 	// (source bitrate) This property only applies to outputs that use the ST 2110 JPEG
 	// XS protocol, with a flow source that uses the CDI protocol. Valid values are
 	// floating point numbers in the range of 3.0 to 10.0, inclusive.
@@ -576,7 +631,7 @@ type EncodingParametersRequest struct {
 	// This member is required.
 	CompressionFactor *float64
 
-	// A setting on the encoder that drives compression settings. This property only
+	//  A setting on the encoder that drives compression settings. This property only
 	// applies to video media streams associated with outputs that use the ST 2110 JPEG
 	// XS protocol, if at least one source on the flow uses the CDI protocol.
 	//
@@ -589,47 +644,47 @@ type EncodingParametersRequest struct {
 // Information about the encryption of the flow.
 type Encryption struct {
 
-	// The ARN of the role that you created during setup (when you set up AWS
-	// Elemental MediaConnect as a trusted entity).
+	//  The ARN of the role that you created during setup (when you set up
+	// MediaConnect as a trusted entity).
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The type of algorithm that is used for the encryption (such as aes128, aes192,
+	//  The type of algorithm that is used for the encryption (such as aes128, aes192,
 	// or aes256).
 	Algorithm Algorithm
 
-	// A 128-bit, 16-byte hex value represented by a 32-character string, to be used
+	//  A 128-bit, 16-byte hex value represented by a 32-character string, to be used
 	// with the key for encrypting content. This parameter is not valid for static key
 	// encryption.
 	ConstantInitializationVector *string
 
-	// The value of one of the devices that you configured with your digital rights
+	//  The value of one of the devices that you configured with your digital rights
 	// management (DRM) platform key provider. This parameter is required for SPEKE
 	// encryption and is not valid for static key encryption.
 	DeviceId *string
 
-	// The type of key that is used for the encryption. If no keyType is provided, the
-	// service will use the default setting (static-key).
+	//  The type of key that is used for the encryption. If no keyType is provided,
+	// the service will use the default setting (static-key).
 	KeyType KeyType
 
-	// The AWS Region that the API Gateway proxy endpoint was created in. This
-	// parameter is required for SPEKE encryption and is not valid for static key
-	// encryption.
+	//  The Amazon Web Services Region that the API Gateway proxy endpoint was created
+	// in. This parameter is required for SPEKE encryption and is not valid for static
+	// key encryption.
 	Region *string
 
-	// An identifier for the content. The service sends this value to the key server
+	//  An identifier for the content. The service sends this value to the key server
 	// to identify the current endpoint. The resource ID is also known as the content
 	// ID. This parameter is required for SPEKE encryption and is not valid for static
 	// key encryption.
 	ResourceId *string
 
-	// The ARN of the secret that you created in AWS Secrets Manager to store the
+	//  The ARN of the secret that you created in Secrets Manager to store the
 	// encryption key. This parameter is required for static key encryption and is not
 	// valid for SPEKE encryption.
 	SecretArn *string
 
-	// The URL from the API Gateway proxy that you set up to talk to your key server.
+	//  The URL from the API Gateway proxy that you set up to talk to your key server.
 	// This parameter is required for SPEKE encryption and is not valid for static key
 	// encryption.
 	Url *string
@@ -640,34 +695,34 @@ type Encryption struct {
 // The settings for a flow entitlement.
 type Entitlement struct {
 
-	// The ARN of the entitlement.
+	//  The ARN of the entitlement.
 	//
 	// This member is required.
 	EntitlementArn *string
 
-	// The name of the entitlement.
+	//  The name of the entitlement.
 	//
 	// This member is required.
 	Name *string
 
-	// The AWS account IDs that you want to share your content with. The receiving
-	// accounts (subscribers) will be allowed to create their own flow using your
-	// content as the source.
+	//  The Amazon Web Services account IDs that you want to share your content with.
+	// The receiving accounts (subscribers) will be allowed to create their own flow
+	// using your content as the source.
 	//
 	// This member is required.
 	Subscribers []string
 
-	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+	//  Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
 	DataTransferSubscriberFeePercent *int32
 
-	// A description of the entitlement.
+	//  A description of the entitlement.
 	Description *string
 
-	// The type of encryption that will be used on the output that is associated with
+	//  The type of encryption that will be used on the output that is associated with
 	// this entitlement.
 	Encryption *Encryption
 
-	// An indication of whether the entitlement is enabled.
+	//  An indication of whether the entitlement is enabled.
 	EntitlementStatus EntitlementStatus
 
 	noSmithyDocumentSerde
@@ -676,18 +731,21 @@ type Entitlement struct {
 // The settings for source failover.
 type FailoverConfig struct {
 
-	// The type of failover you choose for this flow. MERGE combines the source
+	//  The type of failover you choose for this flow. MERGE combines the source
 	// streams into a single stream, allowing graceful recovery from any single-source
 	// loss. FAILOVER allows switching between different streams.
 	FailoverMode FailoverMode
 
-	// Search window time to look for dash-7 packets
+	//  Search window time to look for dash-7 packets.
 	RecoveryWindow *int32
 
-	// The priority you want to assign to a source. You can have a primary stream and
+	//  The priority you want to assign to a source. You can have a primary stream and
 	// a backup stream or two equally prioritized streams.
 	SourcePriority *SourcePriority
 
+	// The state of source failover on the flow. If the state is inactive, the flow
+	// can have only one source. If the state is active, the flow can have one or two
+	// sources.
 	State State
 
 	noSmithyDocumentSerde
@@ -696,111 +754,89 @@ type FailoverConfig struct {
 // The settings for a flow, including its source, outputs, and entitlements.
 type Flow struct {
 
-	// The Availability Zone that you want to create the flow in. These options are
-	// limited to the Availability Zones within the current AWS.
+	//  The Availability Zone that you want to create the flow in. These options are
+	// limited to the Availability Zones within the current Amazon Web Services Region.
 	//
 	// This member is required.
 	AvailabilityZone *string
 
-	// The entitlements in this flow.
+	//  The entitlements in this flow.
 	//
 	// This member is required.
 	Entitlements []Entitlement
 
-	// The Amazon Resource Name (ARN) of the flow.
+	//  The Amazon Resource Name (ARN) of the flow.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// The name of the flow.
+	//  The name of the flow.
 	//
 	// This member is required.
 	Name *string
 
-	// The outputs in this flow.
+	//  The outputs in this flow.
 	//
 	// This member is required.
 	Outputs []Output
 
-	// The settings for the source of the flow.
+	//  The source for the flow.
 	//
 	// This member is required.
 	Source *Source
 
-	// The current status of the flow.
+	//  The current status of the flow.
 	//
 	// This member is required.
 	Status Status
 
-	// A description of the flow. This value is not used or seen outside of the
-	// current AWS Elemental MediaConnect account.
+	//  A description of the flow. This value is not used or seen outside of the
+	// current MediaConnect account.
 	Description *string
 
-	// The IP address from which video will be sent to output destinations.
+	//  The IP address from which video will be sent to output destinations.
 	EgressIp *string
 
-	// The maintenance setting of a flow
+	//  Determines the processing capacity and feature set of the flow. Set this
+	// optional parameter to LARGE if you want to enable NDI outputs on the flow.
+	FlowSize FlowSize
+
+	//  The maintenance settings for the flow.
 	Maintenance *Maintenance
 
-	// The media streams that are associated with the flow. After you associate a
+	//  The media streams that are associated with the flow. After you associate a
 	// media stream with a source, you can also associate it with outputs on the flow.
 	MediaStreams []MediaStream
 
-	// The settings for source failover.
+	// Specifies the configuration settings for NDI outputs. Required when the flow
+	// includes NDI outputs.
+	NdiConfig *NdiConfig
+
+	//  The settings for the source failover.
 	SourceFailoverConfig *FailoverConfig
 
-	// The settings for source monitoring.
+	//  The settings for source monitoring.
 	SourceMonitoringConfig *MonitoringConfig
 
+	// The settings for the sources that are assigned to the flow.
 	Sources []Source
 
-	// The VPC Interfaces for this flow.
+	//  The VPC Interfaces for this flow.
 	VpcInterfaces []VpcInterface
 
 	noSmithyDocumentSerde
 }
 
-// FMTP
+// A set of parameters that define the media stream.
 type Fmtp struct {
 
 	// The format of the audio channel.
 	ChannelOrder *string
 
-	// The format that is used for the representation of color.
+	// The format used for the representation of color.
 	Colorimetry Colorimetry
 
 	// The frame rate for the video stream, in frames/second. For example: 60000/1001.
-	// If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if
-	// you specify 60, MediaConnect uses 60/1 as the exactFramerate.
-	ExactFramerate *string
-
-	// The pixel aspect ratio (PAR) of the video.
-	Par *string
-
-	// The encoding range of the video.
-	Range Range
-
-	// The type of compression that was used to smooth the video’s appearance
-	ScanMode ScanMode
-
-	// The transfer characteristic system (TCS) that is used in the video.
-	Tcs Tcs
-
-	noSmithyDocumentSerde
-}
-
-// The settings that you want to use to define the media stream.
-type FmtpRequest struct {
-
-	// The format of the audio channel.
-	ChannelOrder *string
-
-	// The format that is used for the representation of color.
-	Colorimetry Colorimetry
-
-	// The frame rate for the video stream, in frames/second. For example: 60000/1001.
-	// If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if
-	// you specify 60, MediaConnect uses 60/1 as the exactFramerate.
 	ExactFramerate *string
 
 	// The pixel aspect ratio (PAR) of the video.
@@ -818,15 +854,44 @@ type FmtpRequest struct {
 	noSmithyDocumentSerde
 }
 
+// The settings that you want to use to define the media stream.
+type FmtpRequest struct {
+
+	//  The format of the audio channel.
+	ChannelOrder *string
+
+	//  The format that is used for the representation of color.
+	Colorimetry Colorimetry
+
+	//  The frame rate for the video stream, in frames/second. For example:
+	// 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For
+	// example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate .
+	ExactFramerate *string
+
+	//  The pixel aspect ratio (PAR) of the video.
+	Par *string
+
+	//  The encoding range of the video.
+	Range Range
+
+	//  The type of compression that was used to smooth the video’s appearance.
+	ScanMode ScanMode
+
+	//  The transfer characteristic system (TCS) that is used in the video.
+	Tcs Tcs
+
+	noSmithyDocumentSerde
+}
+
 // The frame resolution used by the video stream.
 type FrameResolution struct {
 
-	// The number of pixels in the height of the video frame.
+	//  The number of pixels in the height of the video frame.
 	//
 	// This member is required.
 	FrameHeight *int32
 
-	// The number of pixels in the width of the video frame.
+	//  The number of pixels in the width of the video frame.
 	//
 	// This member is required.
 	FrameWidth *int32
@@ -840,7 +905,7 @@ type FrozenFrames struct {
 	// Indicates whether the FrozenFrames metric is enabled or disabled.
 	State State
 
-	// Specifies the number of consecutive seconds of a static image that triggers an
+	//  Specifies the number of consecutive seconds of a static image that triggers an
 	// event or alert.
 	ThresholdSeconds *int32
 
@@ -850,32 +915,33 @@ type FrozenFrames struct {
 // The settings for a gateway, including its networks.
 type Gateway struct {
 
-	// The range of IP addresses that contribute content or initiate output requests
+	//  The range of IP addresses that contribute content or initiate output requests
 	// for flows communicating with this gateway. These IP addresses should be in the
 	// form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
 	//
 	// This member is required.
 	EgressCidrBlocks []string
 
-	// The Amazon Resource Name (ARN) of the gateway.
+	//  The Amazon Resource Name (ARN) of the gateway.
 	//
 	// This member is required.
 	GatewayArn *string
 
-	// The name of the gateway. This name can not be modified after the gateway is
+	//  The name of the gateway. This name can not be modified after the gateway is
 	// created.
 	//
 	// This member is required.
 	Name *string
 
-	// The list of networks in the gateway.
+	//  The list of networks in the gateway.
 	//
 	// This member is required.
 	Networks []GatewayNetwork
 
+	// Messages with information about the gateway.
 	GatewayMessages []MessageDetail
 
-	// The current status of the gateway.
+	//  The current status of the gateway.
 	GatewayState GatewayState
 
 	noSmithyDocumentSerde
@@ -884,12 +950,12 @@ type Gateway struct {
 // The source configuration for cloud flows receiving a stream from a bridge.
 type GatewayBridgeSource struct {
 
-	// The ARN of the bridge feeding this flow.
+	//  The ARN of the bridge feeding this flow.
 	//
 	// This member is required.
 	BridgeArn *string
 
-	// The name of the VPC interface attachment to use for this bridge source.
+	//  The name of the VPC interface attachment to use for this bridge source.
 	VpcInterfaceAttachment *VpcInterfaceAttachment
 
 	noSmithyDocumentSerde
@@ -900,8 +966,8 @@ type GatewayInstance struct {
 
 	// The availability of the instance to host new bridges. The bridgePlacement
 	// property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be
-	// deployed to this instance. If it is AVAILABLE, new bridges can be added to this
-	// instance.
+	// deployed to this instance. If it is AVAILABLE, new bridges can be deployed to
+	// this instance.
 	//
 	// This member is required.
 	BridgePlacement BridgePlacement
@@ -916,13 +982,12 @@ type GatewayInstance struct {
 	// This member is required.
 	GatewayArn *string
 
-	// The Amazon Resource Name (ARN) of the gateway.
+	// The ARN of the gateway.
 	//
 	// This member is required.
 	GatewayInstanceArn *string
 
-	// The managed instance ID generated by the SSM install. This will begin with
-	// "mi-".
+	// The instance ID generated by the SSM install. This will begin with "mi-".
 	//
 	// This member is required.
 	InstanceId *string
@@ -932,11 +997,12 @@ type GatewayInstance struct {
 	// This member is required.
 	InstanceState InstanceState
 
-	// The running bridge count.
+	//  The running bridge count.
 	//
 	// This member is required.
 	RunningBridgeCount *int32
 
+	//  Messages with information about the gateway.
 	InstanceMessages []MessageDetail
 
 	noSmithyDocumentSerde
@@ -964,36 +1030,38 @@ type GatewayNetwork struct {
 // The entitlements that you want to grant on a flow.
 type GrantEntitlementRequest struct {
 
-	// The AWS account IDs that you want to share your content with. The receiving
-	// accounts (subscribers) will be allowed to create their own flows using your
-	// content as the source.
+	//  The Amazon Web Services account IDs that you want to share your content with.
+	// The receiving accounts (subscribers) will be allowed to create their own flows
+	// using your content as the source.
 	//
 	// This member is required.
 	Subscribers []string
 
-	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+	//  Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
 	DataTransferSubscriberFeePercent *int32
 
-	// A description of the entitlement. This description appears only on the AWS
-	// Elemental MediaConnect console and will not be seen by the subscriber or end
-	// user.
+	//  A description of the entitlement. This description appears only on the
+	// MediaConnect console and will not be seen by the subscriber or end user.
 	Description *string
 
-	// The type of encryption that will be used on the output that is associated with
+	//  The type of encryption that will be used on the output that is associated with
 	// this entitlement. Allowable encryption types: static-key, speke.
 	Encryption *Encryption
 
-	// An indication of whether the new entitlement should be enabled or disabled as
+	//  An indication of whether the new entitlement should be enabled or disabled as
 	// soon as it is created. If you don’t specify the entitlementStatus field in your
 	// request, MediaConnect sets it to ENABLED.
 	EntitlementStatus EntitlementStatus
 
-	// The name of the entitlement. This value must be unique within the current flow.
+	//  The name of the entitlement. This value must be unique within the current flow.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
+// Create a bridge with the ingress bridge type. An ingress bridge is a
+// ground-to-cloud bridge. The content originates at your premises and is delivered
+// to the cloud.
 type IngressGatewayBridge struct {
 
 	// The maximum expected bitrate (in bps) of the ingress bridge.
@@ -1015,17 +1083,18 @@ type IngressGatewayBridge struct {
 // The transport parameters that are associated with an incoming media stream.
 type InputConfiguration struct {
 
-	// The IP address that the flow listens on for incoming content for a media stream.
+	//  The IP address that the flow listens on for incoming content for a media
+	// stream.
 	//
 	// This member is required.
 	InputIp *string
 
-	// The port that the flow listens on for an incoming media stream.
+	//  The port that the flow listens on for an incoming media stream.
 	//
 	// This member is required.
 	InputPort *int32
 
-	// The VPC interface where the media stream comes in from.
+	//  The VPC interface where the media stream comes in from.
 	//
 	// This member is required.
 	Interface *Interface
@@ -1033,16 +1102,17 @@ type InputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The transport parameters that you want to associate with an incoming media
+//	The transport parameters that you want to associate with an incoming media
+//
 // stream.
 type InputConfigurationRequest struct {
 
-	// The port that you want the flow to listen on for an incoming media stream.
+	//  The port that you want the flow to listen on for an incoming media stream.
 	//
 	// This member is required.
 	InputPort *int32
 
-	// The VPC interface that you want to use for the incoming media stream.
+	//  The VPC interface that you want to use for the incoming media stream.
 	//
 	// This member is required.
 	Interface *InterfaceRequest
@@ -1050,11 +1120,12 @@ type InputConfigurationRequest struct {
 	noSmithyDocumentSerde
 }
 
-// The VPC interface that is used for the media stream associated with the source
+//	The VPC interface that is used for the media stream associated with the source
+//
 // or output.
 type Interface struct {
 
-	// The name of the VPC interface.
+	//  The name of the VPC interface.
 	//
 	// This member is required.
 	Name *string
@@ -1062,11 +1133,12 @@ type Interface struct {
 	noSmithyDocumentSerde
 }
 
-// The VPC interface that you want to designate where the media stream is coming
+//	The VPC interface that you want to designate where the media stream is coming
+//
 // from or going to.
 type InterfaceRequest struct {
 
-	// The name of the VPC interface.
+	//  The name of the VPC interface.
 	//
 	// This member is required.
 	Name *string
@@ -1077,25 +1149,27 @@ type InterfaceRequest struct {
 // Displays details of the selected bridge.
 type ListedBridge struct {
 
-	// The ARN of the bridge.
+	//  The ARN of the bridge.
 	//
 	// This member is required.
 	BridgeArn *string
 
+	// The state of the bridge.
+	//
 	// This member is required.
 	BridgeState BridgeState
 
-	// The type of the bridge.
+	//  The type of the bridge.
 	//
 	// This member is required.
 	BridgeType *string
 
-	// The name of the bridge.
+	//  The name of the bridge.
 	//
 	// This member is required.
 	Name *string
 
-	// The ARN of the gateway associated with the bridge.
+	//  The ARN of the gateway associated with the bridge.
 	//
 	// This member is required.
 	PlacementArn *string
@@ -1103,79 +1177,83 @@ type ListedBridge struct {
 	noSmithyDocumentSerde
 }
 
-// An entitlement that has been granted to you from other AWS accounts.
+//	An entitlement that has been granted to you from other Amazon Web Services
+//
+// accounts.
 type ListedEntitlement struct {
 
-	// The ARN of the entitlement.
+	//  The ARN of the entitlement.
 	//
 	// This member is required.
 	EntitlementArn *string
 
-	// The name of the entitlement.
+	//  The name of the entitlement.
 	//
 	// This member is required.
 	EntitlementName *string
 
-	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+	//  Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
 	DataTransferSubscriberFeePercent *int32
 
 	noSmithyDocumentSerde
 }
 
-// Provides a summary of a flow, including its ARN, Availability Zone, and source
-// type.
+// A summary of a flow, including its ARN, Availability Zone, and source type.
 type ListedFlow struct {
 
-	// The Availability Zone that the flow was created in.
+	//  The Availability Zone that the flow was created in.
 	//
 	// This member is required.
 	AvailabilityZone *string
 
-	// A description of the flow.
+	//  A description of the flow.
 	//
 	// This member is required.
 	Description *string
 
-	// The ARN of the flow.
+	//  The ARN of the flow.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// The name of the flow.
+	//  The name of the flow.
 	//
 	// This member is required.
 	Name *string
 
-	// The type of source. This value is either owned (originated somewhere other than
-	// an AWS Elemental MediaConnect flow owned by another AWS account) or entitled
-	// (originated at an AWS Elemental MediaConnect flow owned by another AWS account).
+	//  The type of source. This value is either owned (originated somewhere other
+	// than an MediaConnect flow owned by another Amazon Web Services account) or
+	// entitled (originated at a MediaConnect flow owned by another Amazon Web Services
+	// account).
 	//
 	// This member is required.
 	SourceType SourceType
 
-	// The current status of the flow.
+	//  The current status of the flow.
 	//
 	// This member is required.
 	Status Status
 
-	// The maintenance setting of a flow
+	//  The maintenance settings for the flow.
 	Maintenance *Maintenance
 
 	noSmithyDocumentSerde
 }
 
-// Provides a summary of a gateway, including its name, ARN, and status.
+// A summary of a gateway, including its name, ARN, and status.
 type ListedGateway struct {
 
-	// The Amazon Resource Name (ARN) of the gateway.
+	//  The Amazon Resource Name (ARN) of the gateway.
 	//
 	// This member is required.
 	GatewayArn *string
 
+	//  The status of the gateway.
+	//
 	// This member is required.
 	GatewayState GatewayState
 
-	// The name of the gateway.
+	//  The name of the gateway.
 	//
 	// This member is required.
 	Name *string
@@ -1183,93 +1261,92 @@ type ListedGateway struct {
 	noSmithyDocumentSerde
 }
 
-// Provides a summary of an instance.
+// A summary of an instance.
 type ListedGatewayInstance struct {
 
-	// The Amazon Resource Name (ARN) of the gateway.
+	//  The Amazon Resource Name (ARN) of the gateway.
 	//
 	// This member is required.
 	GatewayArn *string
 
-	// The Amazon Resource Name (ARN) of the instance.
+	//  The Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	GatewayInstanceArn *string
 
-	// The managed instance ID generated by the SSM install. This will begin with
+	//  The managed instance ID generated by the SSM install. This will begin with
 	// "mi-".
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The status of the instance.
+	//  The status of the instance.
 	InstanceState InstanceState
 
 	noSmithyDocumentSerde
 }
 
-// The maintenance setting of a flow
+// The maintenance setting of a flow.
 type Maintenance struct {
 
-	// A day of a week when the maintenance will happen. Use
+	//  A day of a week when the maintenance will happen. Use
 	// Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
 	MaintenanceDay MaintenanceDay
 
-	// The Maintenance has to be performed before this deadline in ISO UTC format.
+	//  The Maintenance has to be performed before this deadline in ISO UTC format.
 	// Example: 2021-01-30T08:30:00Z.
 	MaintenanceDeadline *string
 
-	// A scheduled date in ISO UTC format when the maintenance will happen. Use
+	//  A scheduled date in ISO UTC format when the maintenance will happen. Use
 	// YYYY-MM-DD format. Example: 2021-01-30.
 	MaintenanceScheduledDate *string
 
-	// UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes
+	//  UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes
 	// must be 00. Example: 13:00. The default value is 02:00.
 	MaintenanceStartHour *string
 
 	noSmithyDocumentSerde
 }
 
-// A single track or stream of media that contains video, audio, or ancillary
-// data. After you add a media stream to a flow, you can associate it with sources
-// and outputs on that flow, as long as they use the CDI protocol or the ST 2110
-// JPEG XS protocol. Each source or output can consist of one or many media
-// streams.
+//	A media stream represents one component of your content, such as video, audio,
+//
+// or ancillary data. After you add a media stream to your flow, you can associate
+// it with sources and outputs that use the ST 2110 JPEG XS or CDI protocol.
 type MediaStream struct {
 
-	// The format type number (sometimes referred to as RTP payload type) of the media
-	// stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS
-	// outputs, you need to provide this value to the receiver.
+	//  The format type number (sometimes referred to as RTP payload type) of the
+	// media stream. MediaConnect assigns this value to the media stream. For ST 2110
+	// JPEG XS outputs, you need to provide this value to the receiver.
 	//
 	// This member is required.
 	Fmt *int32
 
-	// A unique identifier for the media stream.
+	//  A unique identifier for the media stream.
 	//
 	// This member is required.
 	MediaStreamId *int32
 
-	// A name that helps you distinguish one media stream from another.
+	//  A name that helps you distinguish one media stream from another.
 	//
 	// This member is required.
 	MediaStreamName *string
 
-	// The type of media stream.
+	//  The type of media stream.
 	//
 	// This member is required.
 	MediaStreamType MediaStreamType
 
-	// Attributes that are related to the media stream.
+	//  Attributes that are related to the media stream.
 	Attributes *MediaStreamAttributes
 
-	// The sample rate for the stream. This value is measured in Hz.
+	//  The sample rate for the stream. This value is measured in Hz.
 	ClockRate *int32
 
-	// A description that can help you quickly identify what your media stream is used
-	// for.
+	//  A description that can help you quickly identify what your media stream is
+	// used for.
 	Description *string
 
-	// The resolution of the video.
+	//  The resolution of the video.
 	VideoFormat *string
 
 	noSmithyDocumentSerde
@@ -1278,7 +1355,7 @@ type MediaStream struct {
 // Attributes that are related to the media stream.
 type MediaStreamAttributes struct {
 
-	// A set of parameters that define the media stream.
+	// The settings that you want to use to define the media stream.
 	//
 	// This member is required.
 	Fmtp *Fmtp
@@ -1301,11 +1378,12 @@ type MediaStreamAttributesRequest struct {
 	noSmithyDocumentSerde
 }
 
-// The media stream that is associated with the output, and the parameters for
+//	The media stream that is associated with the output, and the parameters for
+//
 // that association.
 type MediaStreamOutputConfiguration struct {
 
-	// The format that was used to encode the data. For ancillary data streams, set
+	//  The format that was used to encode the data. For ancillary data streams, set
 	// the encoding name to smpte291. For audio streams, set the encoding name to pcm.
 	// For video, 2110 streams, set the encoding name to raw. For video, JPEG XS
 	// streams, set the encoding name to jxsv.
@@ -1313,25 +1391,27 @@ type MediaStreamOutputConfiguration struct {
 	// This member is required.
 	EncodingName EncodingName
 
-	// The name of the media stream.
+	//  The name of the media stream.
 	//
 	// This member is required.
 	MediaStreamName *string
 
-	// The transport parameters that are associated with each outbound media stream.
+	//  The transport parameters that are associated with each outbound media stream.
 	DestinationConfigurations []DestinationConfiguration
 
-	// Encoding parameters
+	// A collection of parameters that determine how MediaConnect will convert the
+	// content. These fields only apply to outputs on flows that have a CDI source.
 	EncodingParameters *EncodingParameters
 
 	noSmithyDocumentSerde
 }
 
-// The media stream that you want to associate with the output, and the parameters
-// for that association.
+//	The media stream that you want to associate with the output, and the
+//
+// parameters for that association.
 type MediaStreamOutputConfigurationRequest struct {
 
-	// The format that will be used to encode the data. For ancillary data streams,
+	//  The format that will be used to encode the data. For ancillary data streams,
 	// set the encoding name to smpte291. For audio streams, set the encoding name to
 	// pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS
 	// streams, set the encoding name to jxsv.
@@ -1339,15 +1419,15 @@ type MediaStreamOutputConfigurationRequest struct {
 	// This member is required.
 	EncodingName EncodingName
 
-	// The name of the media stream that is associated with the output.
+	//  The name of the media stream that is associated with the output.
 	//
 	// This member is required.
 	MediaStreamName *string
 
-	// The transport parameters that you want to associate with the media stream.
+	//  The media streams that you want to associate with the output.
 	DestinationConfigurations []DestinationConfigurationRequest
 
-	// A collection of parameters that determine how MediaConnect will convert the
+	//  A collection of parameters that determine how MediaConnect will convert the
 	// content. These fields only apply to outputs on flows that have a CDI source.
 	EncodingParameters *EncodingParametersRequest
 
@@ -1358,6 +1438,29 @@ type MediaStreamOutputConfigurationRequest struct {
 // that association.
 type MediaStreamSourceConfiguration struct {
 
+	//  The format that was used to encode the data. For ancillary data streams, set
+	// the encoding name to smpte291. For audio streams, set the encoding name to pcm.
+	// For video, 2110 streams, set the encoding name to raw. For video, JPEG XS
+	// streams, set the encoding name to jxsv.
+	//
+	// This member is required.
+	EncodingName EncodingName
+
+	// A name that helps you distinguish one media stream from another.
+	//
+	// This member is required.
+	MediaStreamName *string
+
+	// The media streams that you want to associate with the source.
+	InputConfigurations []InputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The media stream that you want to associate with the source, and the parameters
+// for that association.
+type MediaStreamSourceConfigurationRequest struct {
+
 	// The format that was used to encode the data. For ancillary data streams, set
 	// the encoding name to smpte291. For audio streams, set the encoding name to pcm.
 	// For video, 2110 streams, set the encoding name to raw. For video, JPEG XS
@@ -1371,48 +1474,27 @@ type MediaStreamSourceConfiguration struct {
 	// This member is required.
 	MediaStreamName *string
 
-	// The transport parameters that are associated with an incoming media stream.
-	InputConfigurations []InputConfiguration
-
-	noSmithyDocumentSerde
-}
-
-// The definition of a media stream that you want to associate with the source.
-type MediaStreamSourceConfigurationRequest struct {
-
-	// The format you want to use to encode the data. For ancillary data streams, set
-	// the encoding name to smpte291. For audio streams, set the encoding name to pcm.
-	// For video, 2110 streams, set the encoding name to raw. For video, JPEG XS
-	// streams, set the encoding name to jxsv.
-	//
-	// This member is required.
-	EncodingName EncodingName
-
-	// The name of the media stream.
-	//
-	// This member is required.
-	MediaStreamName *string
-
-	// The transport parameters that you want to associate with the media stream.
+	// The media streams that you want to associate with the source.
 	InputConfigurations []InputConfigurationRequest
 
 	noSmithyDocumentSerde
 }
 
+// The details of an error message.
 type MessageDetail struct {
 
-	// The error code.
+	//  The error code.
 	//
 	// This member is required.
 	Code *string
 
-	// The specific error message that MediaConnect returns to help you understand the
-	// reason that the request did not succeed.
+	//  The specific error message that MediaConnect returns to help you understand
+	// the reason that the request did not succeed.
 	//
 	// This member is required.
 	Message *string
 
-	// The name of the resource.
+	//  The name of the resource.
 	ResourceName *string
 
 	noSmithyDocumentSerde
@@ -1421,7 +1503,7 @@ type MessageDetail struct {
 // Messages that provide the state of the flow.
 type Messages struct {
 
-	// A list of errors that might have been generated from processes on this flow.
+	//  A list of errors that might have been generated from processes on this flow.
 	//
 	// This member is required.
 	Errors []string
@@ -1432,16 +1514,16 @@ type Messages struct {
 // The settings for source monitoring.
 type MonitoringConfig struct {
 
-	// Contains the settings for audio stream metrics monitoring.
+	//  Contains the settings for audio stream metrics monitoring.
 	AudioMonitoringSettings []AudioMonitoringSetting
 
-	// Indicates whether content quality analysis is enabled or disabled.
+	//  Indicates whether content quality analysis is enabled or disabled.
 	ContentQualityAnalysisState ContentQualityAnalysisState
 
-	// The state of thumbnail monitoring.
+	//  Indicates whether thumbnails are enabled or disabled.
 	ThumbnailState ThumbnailState
 
-	// Contains the settings for video stream metrics monitoring.
+	//  Contains the settings for video stream metrics monitoring.
 	VideoMonitoringSettings []VideoMonitoringSetting
 
 	noSmithyDocumentSerde
@@ -1450,56 +1532,100 @@ type MonitoringConfig struct {
 // The settings related to the multicast source.
 type MulticastSourceSettings struct {
 
-	// The IP address of the source for source-specific multicast (SSM).
+	//  The IP address of the source for source-specific multicast (SSM).
 	MulticastSourceIp *string
 
 	noSmithyDocumentSerde
 }
 
-// A savings plan that reserves a certain amount of outbound bandwidth usage at a
+// Specifies the configuration settings for NDI outputs. Required when the flow
+// includes NDI outputs.
+type NdiConfig struct {
+
+	// A prefix for the names of the NDI sources that the flow creates. If a custom
+	// name isn't specified, MediaConnect generates a unique 12-character ID as the
+	// prefix.
+	MachineName *string
+
+	// A list of up to three NDI discovery server configurations. While not required
+	// by the API, this configuration is necessary for NDI functionality to work
+	// properly.
+	NdiDiscoveryServers []NdiDiscoveryServerConfig
+
+	// A setting that controls whether NDI outputs can be used in the flow. Must be
+	// ENABLED to add NDI outputs. Default is DISABLED.
+	NdiState NdiState
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration settings for individual NDI discovery servers. A
+// maximum of 3 servers is allowed.
+type NdiDiscoveryServerConfig struct {
+
+	// The unique network address of the NDI discovery server.
+	//
+	// This member is required.
+	DiscoveryServerAddress *string
+
+	// The identifier for the Virtual Private Cloud (VPC) network interface used by
+	// the flow.
+	//
+	// This member is required.
+	VpcInterfaceAdapter *string
+
+	// The port for the NDI discovery server. Defaults to 5959 if a custom port isn't
+	// specified.
+	DiscoveryServerPort *int32
+
+	noSmithyDocumentSerde
+}
+
+//	A savings plan that reserves a certain amount of outbound bandwidth usage at a
+//
 // discounted rate each month over a period of time.
 type Offering struct {
 
-	// The type of currency that is used for billing. The currencyCode used for all
+	//  The type of currency that is used for billing. The currencyCode used for all
 	// reservations is US dollars.
 	//
 	// This member is required.
 	CurrencyCode *string
 
-	// The length of time that your reservation would be active.
+	//  The length of time that your reservation would be active.
 	//
 	// This member is required.
 	Duration *int32
 
-	// The unit of measurement for the duration of the offering.
+	//  The unit of measurement for the duration of the offering.
 	//
 	// This member is required.
 	DurationUnits DurationUnits
 
-	// The Amazon Resource Name (ARN) that MediaConnect assigns to the offering.
+	//  The Amazon Resource Name (ARN) that MediaConnect assigns to the offering.
 	//
 	// This member is required.
 	OfferingArn *string
 
-	// A description of the offering.
+	//  A description of the offering.
 	//
 	// This member is required.
 	OfferingDescription *string
 
-	// The cost of a single unit. This value, in combination with priceUnits, makes up
-	// the rate.
+	//  The cost of a single unit. This value, in combination with priceUnits, makes
+	// up the rate.
 	//
 	// This member is required.
 	PricePerUnit *string
 
-	// The unit of measurement that is used for billing. This value, in combination
+	//  The unit of measurement that is used for billing. This value, in combination
 	// with pricePerUnit, makes up the rate.
 	//
 	// This member is required.
 	PriceUnits PriceUnits
 
-	// A definition of the amount of outbound bandwidth that you would be reserving if
-	// you purchase the offering.
+	//  A definition of the amount of outbound bandwidth that you would be reserving
+	// if you purchase the offering.
 	//
 	// This member is required.
 	ResourceSpecification *ResourceSpecification
@@ -1510,69 +1636,70 @@ type Offering struct {
 // The settings for an output.
 type Output struct {
 
-	// The name of the output. This value must be unique within the current flow.
+	//  The name of the output. This value must be unique within the current flow.
 	//
 	// This member is required.
 	Name *string
 
-	// The ARN of the output.
+	//  The ARN of the output.
 	//
 	// This member is required.
 	OutputArn *string
 
-	// The ARN of the bridge that added this output.
+	//  The ARN of the bridge added to this output.
 	BridgeArn *string
 
-	// The bridge output ports currently in use.
+	//  The bridge output ports currently in use.
 	BridgePorts []int32
 
-	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+	//  Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
 	DataTransferSubscriberFeePercent *int32
 
-	// A description of the output.
+	//  A description of the output.
 	Description *string
 
-	// The address where you want to send the output.
+	//  The address where you want to send the output.
 	Destination *string
 
-	// The type of key used for the encryption. If no keyType is provided, the service
-	// will use the default setting (static-key).
+	//  The type of key used for the encryption. If no keyType is provided, the
+	// service will use the default setting (static-key).
 	Encryption *Encryption
 
-	// The ARN of the entitlement on the originator''s flow. This value is relevant
+	//  The ARN of the entitlement on the originator''s flow. This value is relevant
 	// only on entitled flows.
 	EntitlementArn *string
 
-	// The IP address that the receiver requires in order to establish a connection
+	//  The IP address that the receiver requires in order to establish a connection
 	// with the flow. For public networking, the ListenerAddress is represented by the
 	// elastic IP address of the flow. For private networking, the ListenerAddress is
 	// represented by the elastic network interface IP address of the VPC. This field
 	// applies only to outputs that use the Zixi pull or SRT listener protocol.
 	ListenerAddress *string
 
-	// The input ARN of the AWS Elemental MediaLive channel. This parameter is
-	// relevant only for outputs that were added by creating a MediaLive input.
+	//  The input ARN of the MediaLive channel. This parameter is relevant only for
+	// outputs that were added by creating a MediaLive input.
 	MediaLiveInputArn *string
 
-	// The configuration for each media stream that is associated with the output.
+	//  The configuration for each media stream that is associated with the output.
 	MediaStreamOutputConfigurations []MediaStreamOutputConfiguration
 
-	// An indication of whether the output is transmitting data or not.
+	//  An indication of whether the output is transmitting data or not.
 	OutputStatus OutputStatus
 
-	// The port to use when content is distributed to this output.
+	//  The port to use when content is distributed to this output.
 	Port *int32
 
-	// Attributes related to the transport stream that are used in the output.
+	//  Attributes related to the transport stream that are used in the output.
 	Transport *Transport
 
-	// The name of the VPC interface attachment to use for this output.
+	//  The name of the VPC interface attachment to use for this output.
 	VpcInterfaceAttachment *VpcInterfaceAttachment
 
 	noSmithyDocumentSerde
 }
 
-// A pricing agreement for a discounted rate for a specific outbound bandwidth
+//	A pricing agreement for a discounted rate for a specific outbound bandwidth
+//
 // that your MediaConnect account will use each month over a specific time period.
 // The discounted rate in the reservation applies to outbound bandwidth for all
 // flows from your account until your account reaches the amount of bandwidth in
@@ -1580,77 +1707,77 @@ type Output struct {
 // in a single month, the overage is charged at the on-demand rate.
 type Reservation struct {
 
-	// The type of currency that is used for billing. The currencyCode used for your
+	//  The type of currency that is used for billing. The currencyCode used for your
 	// reservation is US dollars.
 	//
 	// This member is required.
 	CurrencyCode *string
 
-	// The length of time that this reservation is active. MediaConnect defines this
+	//  The length of time that this reservation is active. MediaConnect defines this
 	// value in the offering.
 	//
 	// This member is required.
 	Duration *int32
 
-	// The unit of measurement for the duration of the reservation. MediaConnect
+	//  The unit of measurement for the duration of the reservation. MediaConnect
 	// defines this value in the offering.
 	//
 	// This member is required.
 	DurationUnits DurationUnits
 
-	// The day and time that this reservation expires. This value is calculated based
+	//  The day and time that this reservation expires. This value is calculated based
 	// on the start date and time that you set and the offering's duration.
 	//
 	// This member is required.
 	End *string
 
-	// The Amazon Resource Name (ARN) that MediaConnect assigns to the offering.
+	//  The Amazon Resource Name (ARN) that MediaConnect assigns to the offering.
 	//
 	// This member is required.
 	OfferingArn *string
 
-	// A description of the offering. MediaConnect defines this value in the offering.
+	//  A description of the offering. MediaConnect defines this value in the offering.
 	//
 	// This member is required.
 	OfferingDescription *string
 
-	// The cost of a single unit. This value, in combination with priceUnits, makes up
-	// the rate. MediaConnect defines this value in the offering.
+	//  The cost of a single unit. This value, in combination with priceUnits, makes
+	// up the rate. MediaConnect defines this value in the offering.
 	//
 	// This member is required.
 	PricePerUnit *string
 
-	// The unit of measurement that is used for billing. This value, in combination
+	//  The unit of measurement that is used for billing. This value, in combination
 	// with pricePerUnit, makes up the rate. MediaConnect defines this value in the
 	// offering.
 	//
 	// This member is required.
 	PriceUnits PriceUnits
 
-	// The Amazon Resource Name (ARN) that MediaConnect assigns to the reservation
+	//  The Amazon Resource Name (ARN) that MediaConnect assigns to the reservation
 	// when you purchase an offering.
 	//
 	// This member is required.
 	ReservationArn *string
 
-	// The name that you assigned to the reservation when you purchased the offering.
+	//  The name that you assigned to the reservation when you purchased the offering.
 	//
 	// This member is required.
 	ReservationName *string
 
-	// The status of your reservation.
+	//  The status of your reservation.
 	//
 	// This member is required.
 	ReservationState ReservationState
 
-	// A definition of the amount of outbound bandwidth that you would be reserving if
-	// you purchase the offering. MediaConnect defines the values that make up the
+	//  A definition of the amount of outbound bandwidth that you would be reserving
+	// if you purchase the offering. MediaConnect defines the values that make up the
 	// resourceSpecification in the offering.
 	//
 	// This member is required.
 	ResourceSpecification *ResourceSpecification
 
-	// The day and time that the reservation becomes active. You set this value when
+	//  The day and time that the reservation becomes active. You set this value when
 	// you purchase the offering.
 	//
 	// This member is required.
@@ -1662,12 +1789,12 @@ type Reservation struct {
 // A definition of what is being billed for, including the type and amount.
 type ResourceSpecification struct {
 
-	// The type of resource and the unit that is being billed for.
+	//  The type of resource and the unit that is being billed for.
 	//
 	// This member is required.
 	ResourceType ResourceType
 
-	// The amount of outbound bandwidth that is discounted in the offering.
+	//  The amount of outbound bandwidth that is discounted in the offering.
 	ReservedBitrate *int32
 
 	noSmithyDocumentSerde
@@ -1676,12 +1803,12 @@ type ResourceSpecification struct {
 // The source configuration for cloud flows receiving a stream from a bridge.
 type SetGatewayBridgeSourceRequest struct {
 
-	// The ARN of the bridge feeding this flow.
+	//  The ARN of the bridge feeding this flow.
 	//
 	// This member is required.
 	BridgeArn *string
 
-	// The name of the VPC interface attachment to use for this bridge source.
+	//  The name of the VPC interface attachment to use for this bridge source.
 	VpcInterfaceAttachment *VpcInterfaceAttachment
 
 	noSmithyDocumentSerde
@@ -1690,74 +1817,77 @@ type SetGatewayBridgeSourceRequest struct {
 // The settings for the source of the flow.
 type SetSourceRequest struct {
 
-	// The type of encryption that is used on the content ingested from this source.
+	//  The type of encryption that is used on the content ingested from this source.
 	// Allowable encryption types: static-key.
 	Decryption *Encryption
 
-	// A description for the source. This value is not used or seen outside of the
-	// current AWS Elemental MediaConnect account.
+	//  A description for the source. This value is not used or seen outside of the
+	// current MediaConnect account.
 	Description *string
 
-	// The ARN of the entitlement that allows you to subscribe to this flow. The
+	//  The ARN of the entitlement that allows you to subscribe to this flow. The
 	// entitlement is set by the flow originator, and the ARN is generated as part of
 	// the originator's flow.
 	EntitlementArn *string
 
-	// The source configuration for cloud flows receiving a stream from a bridge.
+	//  The source configuration for cloud flows receiving a stream from a bridge.
 	GatewayBridgeSource *SetGatewayBridgeSourceRequest
 
-	// The port that the flow will be listening on for incoming content.
+	//  The port that the flow will be listening on for incoming content.
 	IngestPort *int32
 
-	// The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.
+	//  The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate *int32
 
-	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
-	// Zixi-based, and Fujitsu-based streams.
+	//  The maximum latency in milliseconds. This parameter applies only to RIST-based
+	// and Zixi-based streams.
 	MaxLatency *int32
 
-	// The size of the buffer (in milliseconds) to use to sync incoming source data.
+	//  The size of the buffer (in milliseconds) to use to sync incoming source data.
 	MaxSyncBuffer *int32
 
-	// The media streams that are associated with the source, and the parameters for
+	//  The media streams that are associated with the source, and the parameters for
 	// those associations.
 	MediaStreamSourceConfigurations []MediaStreamSourceConfigurationRequest
 
-	// The minimum latency in milliseconds for SRT-based streams. In streams that use
+	//  The minimum latency in milliseconds for SRT-based streams. In streams that use
 	// the SRT protocol, this value that you set on your MediaConnect source or output
 	// represents the minimal potential latency of that connection. The latency of the
 	// stream is set to the highest number between the sender’s minimum latency and the
 	// receiver’s minimum latency.
 	MinLatency *int32
 
-	// The name of the source.
+	//  The name of the source.
 	Name *string
 
-	// The protocol that is used by the source.
+	//  The protocol that is used by the source.
+	//
+	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
+	// reference is maintained for legacy purposes only.
 	Protocol Protocol
 
-	// The port that the flow uses to send outbound requests to initiate connection
+	//  The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
 	SenderControlPort *int32
 
-	// The IP address that the flow communicates with to initiate connection with the
+	//  The IP address that the flow communicates with to initiate connection with the
 	// sender.
 	SenderIpAddress *string
 
-	// Source IP or domain name for SRT-caller protocol.
+	//  Source IP or domain name for SRT-caller protocol.
 	SourceListenerAddress *string
 
-	// Source port for SRT-caller protocol.
+	//  Source port for SRT-caller protocol.
 	SourceListenerPort *int32
 
-	// The stream ID that you want to use for this transport. This parameter applies
+	//  The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi and SRT caller-based streams.
 	StreamId *string
 
-	// The name of the VPC interface to use for this source.
+	//  The name of the VPC interface to use for this source.
 	VpcInterfaceName *string
 
-	// The range of IP addresses that should be allowed to contribute content to your
+	//  The range of IP addresses that should be allowed to contribute content to your
 	// source. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	WhitelistCidr *string
@@ -1781,59 +1911,59 @@ type SilentAudio struct {
 // The settings for the source of the flow.
 type Source struct {
 
-	// The name of the source.
+	//  The name of the source.
 	//
 	// This member is required.
 	Name *string
 
-	// The ARN of the source.
+	//  The ARN of the source.
 	//
 	// This member is required.
 	SourceArn *string
 
-	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+	//  Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
 	DataTransferSubscriberFeePercent *int32
 
-	// The type of encryption that is used on the content ingested from this source.
+	//  The type of encryption that is used on the content ingested from this source.
 	Decryption *Encryption
 
-	// A description for the source. This value is not used or seen outside of the
-	// current AWS Elemental MediaConnect account.
+	//  A description for the source. This value is not used or seen outside of the
+	// current MediaConnect account.
 	Description *string
 
-	// The ARN of the entitlement that allows you to subscribe to content that comes
-	// from another AWS account. The entitlement is set by the content originator and
-	// the ARN is generated as part of the originator's flow.
+	//  The ARN of the entitlement that allows you to subscribe to content that comes
+	// from another Amazon Web Services account. The entitlement is set by the content
+	// originator and the ARN is generated as part of the originator's flow.
 	EntitlementArn *string
 
-	// The source configuration for cloud flows receiving a stream from a bridge.
+	//  The source configuration for cloud flows receiving a stream from a bridge.
 	GatewayBridgeSource *GatewayBridgeSource
 
-	// The IP address that the flow will be listening on for incoming content.
+	//  The IP address that the flow will be listening on for incoming content.
 	IngestIp *string
 
-	// The port that the flow will be listening on for incoming content.
+	//  The port that the flow will be listening on for incoming content.
 	IngestPort *int32
 
-	// The media streams that are associated with the source, and the parameters for
+	//  The media streams that are associated with the source, and the parameters for
 	// those associations.
 	MediaStreamSourceConfigurations []MediaStreamSourceConfiguration
 
-	// The port that the flow uses to send outbound requests to initiate connection
-	// with the sender.
+	//  The IP address that the flow communicates with to initiate connection with the
+	// sender.
 	SenderControlPort *int32
 
-	// The IP address that the flow communicates with to initiate connection with the
-	// sender.
+	//  The port that the flow uses to send outbound requests to initiate connection
+	// with the sender.
 	SenderIpAddress *string
 
-	// Attributes related to the transport stream that are used in the source.
+	//  Attributes related to the transport stream that are used in the source.
 	Transport *Transport
 
-	// The name of the VPC interface that is used for this source.
+	//  The name of the VPC interface that is used for this source.
 	VpcInterfaceName *string
 
-	// The range of IP addresses that should be allowed to contribute content to your
+	//  The range of IP addresses that should be allowed to contribute content to your
 	// source. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	WhitelistCidr *string
@@ -1841,26 +1971,28 @@ type Source struct {
 	noSmithyDocumentSerde
 }
 
-// The priority you want to assign to a source. You can have a primary stream and
+//	The priority you want to assign to a source. You can have a primary stream and
+//
 // a backup stream or two equally prioritized streams.
 type SourcePriority struct {
 
-	// The name of the source you choose as the primary source for this flow.
+	//  The name of the source you choose as the primary source for this flow.
 	PrimarySource *string
 
 	noSmithyDocumentSerde
 }
 
-// The details of the thumbnail, including thumbnail base64 string, timecode and
+//	The details of the thumbnail, including thumbnail base64 string, timecode and
+//
 // the time when thumbnail was generated.
 type ThumbnailDetails struct {
 
-	// The ARN of the flow that DescribeFlowSourceThumbnail was performed on.
+	//  The ARN of the flow that DescribeFlowSourceThumbnail was performed on.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// Status code and messages about the flow source thumbnail.
+	//  Status code and messages about the flow source thumbnail.
 	//
 	// This member is required.
 	ThumbnailMessages []MessageDetail
@@ -1868,10 +2000,10 @@ type ThumbnailDetails struct {
 	// Thumbnail Base64 string.
 	Thumbnail *string
 
-	// Timecode of thumbnail.
+	//  Timecode of thumbnail.
 	Timecode *string
 
-	// The timestamp of when thumbnail was generated.
+	//  The timestamp of when thumbnail was generated.
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
@@ -1880,54 +2012,64 @@ type ThumbnailDetails struct {
 // Attributes related to the transport stream that are used in a source or output.
 type Transport struct {
 
-	// The protocol that is used by the source or output.
+	//  The protocol that is used by the source or output.
+	//
+	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
+	// reference is maintained for legacy purposes only.
 	//
 	// This member is required.
 	Protocol Protocol
 
-	// The range of IP addresses that should be allowed to initiate output requests to
-	// this flow. These IP addresses should be in the form of a Classless Inter-Domain
-	// Routing (CIDR) block; for example, 10.0.0.0/16.
+	//  The range of IP addresses that should be allowed to initiate output requests
+	// to this flow. These IP addresses should be in the form of a Classless
+	// Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16
 	CidrAllowList []string
 
-	// The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.
+	//  The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate *int32
 
-	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
-	// Zixi-based, and Fujitsu-based streams.
+	//  The maximum latency in milliseconds. This parameter applies only to RIST-based
+	// and Zixi-based streams.
 	MaxLatency *int32
 
-	// The size of the buffer (in milliseconds) to use to sync incoming source data.
+	//  The size of the buffer (in milliseconds) to use to sync incoming source data.
 	MaxSyncBuffer *int32
 
-	// The minimum latency in milliseconds for SRT-based streams. In streams that use
+	//  The minimum latency in milliseconds for SRT-based streams. In streams that use
 	// the SRT protocol, this value that you set on your MediaConnect source or output
 	// represents the minimal potential latency of that connection. The latency of the
 	// stream is set to the highest number between the sender’s minimum latency and the
 	// receiver’s minimum latency.
 	MinLatency *int32
 
-	// The remote ID for the Zixi-pull stream.
+	// A suffix for the names of the NDI sources that the flow creates. If a custom
+	// name isn't specified, MediaConnect uses the output name.
+	NdiProgramName *string
+
+	// A quality setting for the NDI Speed HQ encoder.
+	NdiSpeedHqQuality *int32
+
+	//  The remote ID for the Zixi-pull stream.
 	RemoteId *string
 
-	// The port that the flow uses to send outbound requests to initiate connection
+	//  The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
 	SenderControlPort *int32
 
-	// The IP address that the flow communicates with to initiate connection with the
+	//  The IP address that the flow communicates with to initiate connection with the
 	// sender.
 	SenderIpAddress *string
 
-	// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
+	//  The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 	SmoothingLatency *int32
 
-	// Source IP or domain name for SRT-caller protocol.
+	//  Source IP or domain name for SRT-caller protocol.
 	SourceListenerAddress *string
 
-	// Source port for SRT-caller protocol.
+	//  Source port for SRT-caller protocol.
 	SourceListenerPort *int32
 
-	// The stream ID that you want to use for this transport. This parameter applies
+	//  The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi and SRT caller-based streams.
 	StreamId *string
 
@@ -1937,7 +2079,7 @@ type Transport struct {
 // The metadata of the transport stream in the current flow's source.
 type TransportMediaInfo struct {
 
-	// The list of transport stream programs in the current flow's source.
+	//  The list of transport stream programs in the current flow's source.
 	//
 	// This member is required.
 	Programs []TransportStreamProgram
@@ -1948,32 +2090,32 @@ type TransportMediaInfo struct {
 // The metadata of an elementary transport stream.
 type TransportStream struct {
 
-	// The Packet ID (PID) as it is reported in the Program Map Table.
+	//  The Packet ID (PID) as it is reported in the Program Map Table.
 	//
 	// This member is required.
 	Pid *int32
 
-	// The Stream Type as it is reported in the Program Map Table.
+	//  The Stream Type as it is reported in the Program Map Table.
 	//
 	// This member is required.
 	StreamType *string
 
-	// The number of channels in the audio stream.
+	//  The number of channels in the audio stream.
 	Channels *int32
 
-	// The codec used by the stream.
+	//  The codec used by the stream.
 	Codec *string
 
-	// The frame rate used by the video stream.
+	//  The frame rate used by the video stream.
 	FrameRate *string
 
 	// The frame resolution used by the video stream.
 	FrameResolution *FrameResolution
 
-	// The sample rate used by the audio stream.
+	//  The sample rate used by the audio stream.
 	SampleRate *int32
 
-	// The sample bit size used by the audio stream.
+	//  The sample bit size used by the audio stream.
 	SampleSize *int32
 
 	noSmithyDocumentSerde
@@ -1982,29 +2124,29 @@ type TransportStream struct {
 // The metadata of a single transport stream program.
 type TransportStreamProgram struct {
 
-	// The Program Clock Reference (PCR) Packet ID (PID) as it is reported in the
+	//  The Program Clock Reference (PCR) Packet ID (PID) as it is reported in the
 	// Program Association Table.
 	//
 	// This member is required.
 	PcrPid *int32
 
-	// The program number as it is reported in the Program Association Table.
+	//  The program number as it is reported in the Program Association Table.
 	//
 	// This member is required.
 	ProgramNumber *int32
 
-	// The program Packet ID (PID) as it is reported in the Program Association Table.
+	//  The program Packet ID (PID) as it is reported in the Program Association Table.
 	//
 	// This member is required.
 	ProgramPid *int32
 
-	// The list of elementary transport streams in the program. The list includes
+	//  The list of elementary transport streams in the program. The list includes
 	// video, audio, and data streams.
 	//
 	// This member is required.
 	Streams []TransportStream
 
-	// The program name as it is reported in the Program Association Table.
+	//  The program name as it is reported in the Program Association Table.
 	ProgramName *string
 
 	noSmithyDocumentSerde
@@ -2013,7 +2155,8 @@ type TransportStreamProgram struct {
 // Update the flow source of the bridge.
 type UpdateBridgeFlowSourceRequest struct {
 
-	// The ARN of the cloud flow to use as a source of this bridge.
+	//  The Amazon Resource Name (ARN) that identifies the MediaConnect resource from
+	// which to delete tags.
 	FlowArn *string
 
 	// The name of the VPC interface attachment to use for this source.
@@ -2035,6 +2178,9 @@ type UpdateBridgeNetworkOutputRequest struct {
 	Port *int32
 
 	// The network output protocol.
+	//
+	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
+	// reference is maintained for legacy purposes only.
 	Protocol Protocol
 
 	// The network output TTL.
@@ -2046,7 +2192,7 @@ type UpdateBridgeNetworkOutputRequest struct {
 // Update the network source of the bridge.
 type UpdateBridgeNetworkSourceRequest struct {
 
-	// The network source multicast IP.
+	//  The network source multicast IP.
 	MulticastIp *string
 
 	// The settings related to the multicast source.
@@ -2059,14 +2205,18 @@ type UpdateBridgeNetworkSourceRequest struct {
 	Port *int32
 
 	// The network source protocol.
+	//
+	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
+	// reference is maintained for legacy purposes only.
 	Protocol Protocol
 
 	noSmithyDocumentSerde
 }
 
+// Update an existing egress-type bridge.
 type UpdateEgressGatewayBridgeRequest struct {
 
-	// Update an existing egress-type bridge.
+	// The maximum expected bitrate (in bps).
 	MaxBitrate *int32
 
 	noSmithyDocumentSerde
@@ -2075,45 +2225,45 @@ type UpdateEgressGatewayBridgeRequest struct {
 // Information about the encryption of the flow.
 type UpdateEncryption struct {
 
-	// The type of algorithm that is used for the encryption (such as aes128, aes192,
+	//  The type of algorithm that is used for the encryption (such as aes128, aes192,
 	// or aes256).
 	Algorithm Algorithm
 
-	// A 128-bit, 16-byte hex value represented by a 32-character string, to be used
+	//  A 128-bit, 16-byte hex value represented by a 32-character string, to be used
 	// with the key for encrypting content. This parameter is not valid for static key
 	// encryption.
 	ConstantInitializationVector *string
 
-	// The value of one of the devices that you configured with your digital rights
+	//  The value of one of the devices that you configured with your digital rights
 	// management (DRM) platform key provider. This parameter is required for SPEKE
 	// encryption and is not valid for static key encryption.
 	DeviceId *string
 
-	// The type of key that is used for the encryption. If no keyType is provided, the
-	// service will use the default setting (static-key).
+	//  The type of key that is used for the encryption. If no keyType is provided,
+	// the service will use the default setting (static-key).
 	KeyType KeyType
 
-	// The AWS Region that the API Gateway proxy endpoint was created in. This
-	// parameter is required for SPEKE encryption and is not valid for static key
-	// encryption.
+	//  The Amazon Web Services Region that the API Gateway proxy endpoint was created
+	// in. This parameter is required for SPEKE encryption and is not valid for static
+	// key encryption.
 	Region *string
 
-	// An identifier for the content. The service sends this value to the key server
+	//  An identifier for the content. The service sends this value to the key server
 	// to identify the current endpoint. The resource ID is also known as the content
 	// ID. This parameter is required for SPEKE encryption and is not valid for static
 	// key encryption.
 	ResourceId *string
 
-	// The ARN of the role that you created during setup (when you set up AWS
-	// Elemental MediaConnect as a trusted entity).
+	//  The ARN of the role that you created during setup (when you set up
+	// MediaConnect as a trusted entity).
 	RoleArn *string
 
-	// The ARN of the secret that you created in AWS Secrets Manager to store the
+	//  The ARN of the secret that you created in Secrets Manager to store the
 	// encryption key. This parameter is required for static key encryption and is not
 	// valid for SPEKE encryption.
 	SecretArn *string
 
-	// The URL from the API Gateway proxy that you set up to talk to your key server.
+	//  The URL from the API Gateway proxy that you set up to talk to your key server.
 	// This parameter is required for SPEKE encryption and is not valid for static key
 	// encryption.
 	Url *string
@@ -2124,18 +2274,21 @@ type UpdateEncryption struct {
 // The settings for source failover.
 type UpdateFailoverConfig struct {
 
-	// The type of failover you choose for this flow. MERGE combines the source
+	//  The type of failover you choose for this flow. MERGE combines the source
 	// streams into a single stream, allowing graceful recovery from any single-source
 	// loss. FAILOVER allows switching between different streams.
 	FailoverMode FailoverMode
 
-	// Recovery window time to look for dash-7 packets
+	//  Recovery window time to look for dash-7 packets.
 	RecoveryWindow *int32
 
-	// The priority you want to assign to a source. You can have a primary stream and
+	//  The priority you want to assign to a source. You can have a primary stream and
 	// a backup stream or two equally prioritized streams.
 	SourcePriority *SourcePriority
 
+	// The state of source failover on the flow. If the state is inactive, the flow
+	// can have only one source. If the state is active, the flow can have one or two
+	// sources.
 	State State
 
 	noSmithyDocumentSerde
@@ -2144,38 +2297,38 @@ type UpdateFailoverConfig struct {
 // The source configuration for cloud flows receiving a stream from a bridge.
 type UpdateGatewayBridgeSourceRequest struct {
 
-	// The ARN of the bridge feeding this flow.
+	//  The ARN of the bridge feeding this flow.
 	BridgeArn *string
 
-	// The name of the VPC interface attachment to use for this bridge source.
+	//  The name of the VPC interface attachment to use for this bridge source.
 	VpcInterfaceAttachment *VpcInterfaceAttachment
 
 	noSmithyDocumentSerde
 }
 
+// Update an existing ingress-type bridge.
 type UpdateIngressGatewayBridgeRequest struct {
 
-	// The maximum expected bitrate (in bps).
+	//  The maximum expected bitrate (in bps).
 	MaxBitrate *int32
 
-	// The maximum number of expected outputs.
+	//  The maximum number of expected outputs.
 	MaxOutputs *int32
 
 	noSmithyDocumentSerde
 }
 
-// Update maintenance setting for a flow
+// Update maintenance setting for a flow.
 type UpdateMaintenance struct {
 
-	// A day of a week when the maintenance will happen. use
-	// Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+	//  A day of a week when the maintenance will happen.
 	MaintenanceDay MaintenanceDay
 
-	// A scheduled date in ISO UTC format when the maintenance will happen. Use
+	//  A scheduled date in ISO UTC format when the maintenance will happen. Use
 	// YYYY-MM-DD format. Example: 2021-01-30.
 	MaintenanceScheduledDate *string
 
-	// UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes
+	//  UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes
 	// must be 00. Example: 13:00. The default value is 02:00.
 	MaintenanceStartHour *string
 
@@ -2194,35 +2347,35 @@ type VideoMonitoringSetting struct {
 	noSmithyDocumentSerde
 }
 
-// The settings for a VPC Source.
+// The settings for a VPC source.
 type VpcInterface struct {
 
-	// Immutable and has to be a unique against other VpcInterfaces in this Flow.
+	//  Immutable and has to be a unique against other VpcInterfaces in this Flow.
 	//
 	// This member is required.
 	Name *string
 
-	// IDs of the network interfaces created in customer's account by MediaConnect.
+	//  IDs of the network interfaces created in customer's account by MediaConnect.
 	//
 	// This member is required.
 	NetworkInterfaceIds []string
 
-	// The type of network interface.
+	//  The type of network interface.
 	//
 	// This member is required.
 	NetworkInterfaceType NetworkInterfaceType
 
-	// Role Arn MediaConnect can assumes to create ENIs in customer's account
+	//  A role Arn MediaConnect can assume to create ENIs in your account.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Security Group IDs to be used on ENI.
+	//  Security Group IDs to be used on ENI.
 	//
 	// This member is required.
 	SecurityGroupIds []string
 
-	// Subnet must be in the AZ of the Flow
+	//  Subnet must be in the AZ of the Flow.
 	//
 	// This member is required.
 	SubnetId *string
@@ -2233,38 +2386,44 @@ type VpcInterface struct {
 // The settings for attaching a VPC interface to an resource.
 type VpcInterfaceAttachment struct {
 
-	// The name of the VPC interface to use for this resource.
+	//  The name of the VPC interface to use for this resource.
 	VpcInterfaceName *string
 
 	noSmithyDocumentSerde
 }
 
-// Desired VPC Interface for a Flow
+// The details of the VPC interfaces that you want to add to the flow.
 type VpcInterfaceRequest struct {
 
-	// The name of the VPC Interface. This value must be unique within the current
-	// flow.
+	// The name for the VPC interface. This name must be unique within the flow.
 	//
 	// This member is required.
 	Name *string
 
-	// Role Arn MediaConnect can assumes to create ENIs in customer's account
+	// The Amazon Resource Name (ARN) of the role that you created when you set up
+	// MediaConnect as a trusted service.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Security Group IDs to be used on ENI.
+	// A virtual firewall to control inbound and outbound traffic.
 	//
 	// This member is required.
 	SecurityGroupIds []string
 
-	// Subnet must be in the AZ of the Flow
+	//  The subnet IDs that you want to use for your VPC interface. A range of IP
+	// addresses in your VPC. When you create your VPC, you specify a range of IPv4
+	// addresses for the VPC in the form of a Classless Inter-Domain Routing (CIDR)
+	// block; for example, 10.0.0.0/16. This is the primary CIDR block for your VPC.
+	// When you create a subnet for your VPC, you specify the CIDR block for the
+	// subnet, which is a subset of the VPC CIDR block. The subnets that you use across
+	// all VPC interfaces on the flow must be in the same Availability Zone as the
+	// flow.
 	//
 	// This member is required.
 	SubnetId *string
 
-	// The type of network interface. If this value is not included in the request,
-	// MediaConnect uses ENA as the networkInterfaceType.
+	// The type of network interface.
 	NetworkInterfaceType NetworkInterfaceType
 
 	noSmithyDocumentSerde

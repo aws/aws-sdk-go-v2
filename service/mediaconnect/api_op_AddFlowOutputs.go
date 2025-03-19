@@ -27,15 +27,14 @@ func (c *Client) AddFlowOutputs(ctx context.Context, params *AddFlowOutputsInput
 	return out, nil
 }
 
-// A request to add outputs to the specified flow.
 type AddFlowOutputsInput struct {
 
-	// The flow that you want to add outputs to.
+	//  The Amazon Resource Name (ARN) of the flow that you want to add outputs to.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// A list of outputs that you want to add.
+	//  A list of outputs that you want to add to the flow.
 	//
 	// This member is required.
 	Outputs []types.AddOutputRequest
@@ -45,10 +44,10 @@ type AddFlowOutputsInput struct {
 
 type AddFlowOutputsOutput struct {
 
-	// The ARN of the flow that these outputs were added to.
+	//  The ARN of the flow that these outputs were added to.
 	FlowArn *string
 
-	// The details of the newly added outputs.
+	//  The details of the newly added outputs.
 	Outputs []types.Output
 
 	// Metadata pertaining to the operation's result.

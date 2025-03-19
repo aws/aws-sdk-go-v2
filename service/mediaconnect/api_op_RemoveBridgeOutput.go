@@ -28,12 +28,12 @@ func (c *Client) RemoveBridgeOutput(ctx context.Context, params *RemoveBridgeOut
 
 type RemoveBridgeOutputInput struct {
 
-	// The ARN of the bridge that you want to update.
+	//  The Amazon Resource Name (ARN) of the bridge that you want to update.
 	//
 	// This member is required.
 	BridgeArn *string
 
-	// The name of the bridge output that you want to remove.
+	//  The name of the bridge output that you want to remove.
 	//
 	// This member is required.
 	OutputName *string
@@ -42,8 +42,11 @@ type RemoveBridgeOutputInput struct {
 }
 
 type RemoveBridgeOutputOutput struct {
+
+	//  The ARN of the bridge from which the output was removed.
 	BridgeArn *string
 
+	//  The name of the bridge output that was removed.
 	OutputName *string
 
 	// Metadata pertaining to the operation's result.

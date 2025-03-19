@@ -97,8 +97,6 @@ type ListClustersOutput struct {
 	// If the result of the previous ListClusters request was truncated, the response
 	// includes a NextToken . To retrieve the next set of clusters, use the token in
 	// the next request.
-	//
-	// This member is required.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -206,6 +204,98 @@ func (c *Client) addOperationListClustersMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
+
+// ListClustersPaginatorOptions is the paginator options for ListClusters
+type ListClustersPaginatorOptions struct {
+	// Set the maximum number of SageMaker HyperPod clusters to list.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListClustersPaginator is a paginator for ListClusters
+type ListClustersPaginator struct {
+	options   ListClustersPaginatorOptions
+	client    ListClustersAPIClient
+	params    *ListClustersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListClustersPaginator returns a new ListClustersPaginator
+func NewListClustersPaginator(client ListClustersAPIClient, params *ListClustersInput, optFns ...func(*ListClustersPaginatorOptions)) *ListClustersPaginator {
+	if params == nil {
+		params = &ListClustersInput{}
+	}
+
+	options := ListClustersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListClustersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListClustersPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListClusters page.
+func (p *ListClustersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListClustersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListClusters(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListClustersAPIClient is a client that implements the ListClusters operation.
+type ListClustersAPIClient interface {
+	ListClusters(context.Context, *ListClustersInput, ...func(*Options)) (*ListClustersOutput, error)
+}
+
+var _ ListClustersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListClusters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -1251,7 +1251,7 @@ func TestEndpointCase33(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://api.sagemaker.us-gov-west-1.amazonaws.com")
+	uri, _ := url.Parse("https://api-fips.sagemaker.us-gov-west-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -1325,7 +1325,7 @@ func TestEndpointCase35(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://api.sagemaker.us-gov-east-1.amazonaws.com")
+	uri, _ := url.Parse("https://api-fips.sagemaker.us-gov-east-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,

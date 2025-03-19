@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds VPC interfaces to flow
+// Adds VPC interfaces to a flow.
 func (c *Client) AddFlowVpcInterfaces(ctx context.Context, params *AddFlowVpcInterfacesInput, optFns ...func(*Options)) (*AddFlowVpcInterfacesOutput, error) {
 	if params == nil {
 		params = &AddFlowVpcInterfacesInput{}
@@ -27,15 +27,14 @@ func (c *Client) AddFlowVpcInterfaces(ctx context.Context, params *AddFlowVpcInt
 	return out, nil
 }
 
-// A request to add VPC interfaces to the flow.
 type AddFlowVpcInterfacesInput struct {
 
-	// The flow that you want to mutate.
+	//  The Amazon Resource Name (ARN) of the flow that you want to update.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// A list of VPC interfaces that you want to add.
+	//  A list of VPC interfaces that you want to add to the flow.
 	//
 	// This member is required.
 	VpcInterfaces []types.VpcInterfaceRequest
@@ -45,10 +44,10 @@ type AddFlowVpcInterfacesInput struct {
 
 type AddFlowVpcInterfacesOutput struct {
 
-	// The ARN of the flow that these VPC interfaces were added to.
+	//  The ARN of the flow that these VPC interfaces were added to.
 	FlowArn *string
 
-	// The details of the newly added VPC interfaces.
+	//  The details of the newly added VPC interfaces.
 	VpcInterfaces []types.VpcInterface
 
 	// Metadata pertaining to the operation's result.

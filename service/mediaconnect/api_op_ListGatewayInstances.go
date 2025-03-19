@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays a list of instances associated with the AWS account. This request
-// returns a paginated result. You can use the filterArn property to display only
-// the instances associated with the selected Gateway Amazon Resource Name (ARN).
+//	Displays a list of instances associated with the Amazon Web Services account.
+//
+// This request returns a paginated result. You can use the filterArn property to
+// display only the instances associated with the selected Gateway Amazon Resource
+// Name (ARN).
 func (c *Client) ListGatewayInstances(ctx context.Context, params *ListGatewayInstancesInput, optFns ...func(*Options)) (*ListGatewayInstancesOutput, error) {
 	if params == nil {
 		params = &ListGatewayInstancesInput{}
@@ -31,24 +33,28 @@ func (c *Client) ListGatewayInstances(ctx context.Context, params *ListGatewayIn
 
 type ListGatewayInstancesInput struct {
 
-	// Filter the list results to display only the instances associated with the
-	// selected Gateway Amazon Resource Name (ARN).
+	//  Filter the list results to display only the instances associated with the
+	// selected Gateway ARN.
 	FilterArn *string
 
-	// The maximum number of results to return per API request. For example, you
-	// submit a ListInstances request with MaxResults set at 5. Although 20 items match
-	// your request, the service returns no more than the first 5 items. (The service
-	// also returns a NextToken value that you can use to fetch the next batch of
-	// results.) The service might return fewer results than the MaxResults value. If
-	// MaxResults is not included in the request, the service defaults to pagination
-	// with a maximum of 10 results per page.
+	//  The maximum number of results to return per API request.
+	//
+	// For example, you submit a ListInstances request with MaxResults set at 5.
+	// Although 20 items match your request, the service returns no more than the first
+	// 5 items. (The service also returns a NextToken value that you can use to fetch
+	// the next batch of results.)
+	//
+	// The service might return fewer results than the MaxResults value. If MaxResults
+	// is not included in the request, the service defaults to pagination with a
+	// maximum of 10 results per page.
 	MaxResults *int32
 
-	// The token that identifies which batch of results that you want to see. For
-	// example, you submit a ListInstances request with MaxResults set at 5. The
+	//  The token that identifies the batch of results that you want to see.
+	//
+	// For example, you submit a ListInstances request with MaxResults set at 5. The
 	// service returns the first batch of results (up to 5) and a NextToken value. To
-	// see the next batch of results, you can submit the ListInstances request a second
-	// time and specify the NextToken value.
+	// see the next batch of results, you can submit the ListInstances request a
+	// second time and specify the NextToken value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,14 +62,15 @@ type ListGatewayInstancesInput struct {
 
 type ListGatewayInstancesOutput struct {
 
-	// A list of instance summaries.
+	//  A list of instance summaries.
 	Instances []types.ListedGatewayInstance
 
-	// The token that identifies which batch of results that you want to see. For
-	// example, you submit a ListInstances request with MaxResults set at 5. The
+	//  The token that identifies the batch of results that you want to see.
+	//
+	// For example, you submit a ListInstances request with MaxResults set at 5. The
 	// service returns the first batch of results (up to 5) and a NextToken value. To
-	// see the next batch of results, you can submit the ListInstances request a second
-	// time and specify the NextToken value.
+	// see the next batch of results, you can submit the ListInstances request a
+	// second time and specify the NextToken value.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -175,13 +182,16 @@ func (c *Client) addOperationListGatewayInstancesMiddlewares(stack *middleware.S
 // ListGatewayInstancesPaginatorOptions is the paginator options for
 // ListGatewayInstances
 type ListGatewayInstancesPaginatorOptions struct {
-	// The maximum number of results to return per API request. For example, you
-	// submit a ListInstances request with MaxResults set at 5. Although 20 items match
-	// your request, the service returns no more than the first 5 items. (The service
-	// also returns a NextToken value that you can use to fetch the next batch of
-	// results.) The service might return fewer results than the MaxResults value. If
-	// MaxResults is not included in the request, the service defaults to pagination
-	// with a maximum of 10 results per page.
+	//  The maximum number of results to return per API request.
+	//
+	// For example, you submit a ListInstances request with MaxResults set at 5.
+	// Although 20 items match your request, the service returns no more than the first
+	// 5 items. (The service also returns a NextToken value that you can use to fetch
+	// the next batch of results.)
+	//
+	// The service might return fewer results than the MaxResults value. If MaxResults
+	// is not included in the request, the service defaults to pagination with a
+	// maximum of 10 results per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -15,9 +15,10 @@ import (
 	"time"
 )
 
-// Displays the details of a flow. The response includes the flow ARN, name, and
-// Availability Zone, as well as details about the source, outputs, and
-// entitlements.
+//	Displays the details of a flow. The response includes the flow Amazon Resource
+//
+// Name (ARN), name, and Availability Zone, as well as details about the source,
+// outputs, and entitlements.
 func (c *Client) DescribeFlow(ctx context.Context, params *DescribeFlowInput, optFns ...func(*Options)) (*DescribeFlowOutput, error) {
 	if params == nil {
 		params = &DescribeFlowInput{}
@@ -35,7 +36,7 @@ func (c *Client) DescribeFlow(ctx context.Context, params *DescribeFlowInput, op
 
 type DescribeFlowInput struct {
 
-	// The ARN of the flow that you want to describe.
+	//  The ARN of the flow that you want to describe.
 	//
 	// This member is required.
 	FlowArn *string
@@ -45,10 +46,11 @@ type DescribeFlowInput struct {
 
 type DescribeFlowOutput struct {
 
-	// The settings for a flow, including its source, outputs, and entitlements.
+	// The flow that you requested a description of.
 	Flow *types.Flow
 
-	// Messages that provide the state of the flow.
+	//  Any errors that apply currently to the flow. If there are no errors,
+	// MediaConnect will not include this field in the response.
 	Messages *types.Messages
 
 	// Metadata pertaining to the operation's result.
@@ -374,6 +376,21 @@ func flowActiveStateRetryable(ctx context.Context, input *DescribeFlowInput, out
 		var errorType *types.ServiceUnavailableException
 		if errors.As(err, &errorType) {
 			return true, nil
+		}
+	}
+
+	if err == nil {
+		v1 := output.Flow
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
+		}
+		expectedValue := "STANDBY"
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 

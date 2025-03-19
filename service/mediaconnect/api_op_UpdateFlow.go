@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates flow
+// Updates an existing flow.
 func (c *Client) UpdateFlow(ctx context.Context, params *UpdateFlowInput, optFns ...func(*Options)) (*UpdateFlowOutput, error) {
 	if params == nil {
 		params = &UpdateFlowInput{}
@@ -27,21 +27,24 @@ func (c *Client) UpdateFlow(ctx context.Context, params *UpdateFlowInput, optFns
 	return out, nil
 }
 
-// A request to update flow.
 type UpdateFlowInput struct {
 
-	// The flow that you want to update.
+	//  The Amazon Resource Name (ARN) of the flow that you want to update.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// Update maintenance setting for a flow
+	//  The maintenance setting of the flow.
 	Maintenance *types.UpdateMaintenance
 
-	// The settings for source failover.
+	//  Specifies the configuration settings for NDI outputs. Required when the flow
+	// includes NDI outputs.
+	NdiConfig *types.NdiConfig
+
+	//  The settings for source failover.
 	SourceFailoverConfig *types.UpdateFailoverConfig
 
-	// The settings for source monitoring.
+	//  The settings for source monitoring.
 	SourceMonitoringConfig *types.MonitoringConfig
 
 	noSmithyDocumentSerde
@@ -49,7 +52,7 @@ type UpdateFlowInput struct {
 
 type UpdateFlowOutput struct {
 
-	// The settings for a flow, including its source, outputs, and entitlements.
+	//  The updated flow.
 	Flow *types.Flow
 
 	// Metadata pertaining to the operation's result.

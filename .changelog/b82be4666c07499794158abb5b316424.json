@@ -1,0 +1,8 @@
+{
+    "id": "b82be466-6c07-4997-9415-8abb5b316424",
+    "type": "documentation",
+    "description": "Doc-only updates for EC2 for March 2025.",
+    "modules": [
+        "service/ec2"
+    ]
+}

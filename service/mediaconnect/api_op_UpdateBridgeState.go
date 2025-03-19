@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the bridge state
+// Updates the bridge state.
 func (c *Client) UpdateBridgeState(ctx context.Context, params *UpdateBridgeStateInput, optFns ...func(*Options)) (*UpdateBridgeStateOutput, error) {
 	if params == nil {
 		params = &UpdateBridgeStateInput{}
@@ -27,14 +27,16 @@ func (c *Client) UpdateBridgeState(ctx context.Context, params *UpdateBridgeStat
 	return out, nil
 }
 
-// A request to update the bridge state.
 type UpdateBridgeStateInput struct {
 
-	// The ARN of the bridge that you want to update.
+	//  The Amazon Resource Name (ARN) of the bridge that you want to update the state
+	// of.
 	//
 	// This member is required.
 	BridgeArn *string
 
+	//  The desired state for the bridge.
+	//
 	// This member is required.
 	DesiredState types.DesiredState
 
@@ -43,10 +45,10 @@ type UpdateBridgeStateInput struct {
 
 type UpdateBridgeStateOutput struct {
 
-	// The Amazon Resource Number (ARN) of the bridge.
+	// The ARN of the updated bridge.
 	BridgeArn *string
 
-	// The state of the bridge. ACTIVE or STANDBY.
+	//  The new state of the bridge.
 	DesiredState types.DesiredState
 
 	// Metadata pertaining to the operation's result.

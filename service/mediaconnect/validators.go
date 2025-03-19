@@ -1260,6 +1260,23 @@ func validate__listOfMediaStreamSourceConfigurationRequest(v []types.MediaStream
 	}
 }
 
+func validate__listOfNdiDiscoveryServerConfig(v []types.NdiDiscoveryServerConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfNdiDiscoveryServerConfig"}
+	for i := range v {
+		if err := validateNdiDiscoveryServerConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validate__listOfSetSourceRequest(v []types.SetSourceRequest) error {
 	if v == nil {
 		return nil
@@ -1689,6 +1706,41 @@ func validateMediaStreamSourceConfigurationRequest(v *types.MediaStreamSourceCon
 	}
 }
 
+func validateNdiConfig(v *types.NdiConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NdiConfig"}
+	if v.NdiDiscoveryServers != nil {
+		if err := validate__listOfNdiDiscoveryServerConfig(v.NdiDiscoveryServers); err != nil {
+			invalidParams.AddNested("NdiDiscoveryServers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNdiDiscoveryServerConfig(v *types.NdiDiscoveryServerConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NdiDiscoveryServerConfig"}
+	if v.DiscoveryServerAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DiscoveryServerAddress"))
+	}
+	if v.VpcInterfaceAdapter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcInterfaceAdapter"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSetGatewayBridgeSourceRequest(v *types.SetGatewayBridgeSourceRequest) error {
 	if v == nil {
 		return nil
@@ -1968,6 +2020,11 @@ func validateOpCreateFlowInput(v *CreateFlowInput) error {
 	if v.Maintenance != nil {
 		if err := validateAddMaintenance(v.Maintenance); err != nil {
 			invalidParams.AddNested("Maintenance", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NdiConfig != nil {
+		if err := validateNdiConfig(v.NdiConfig); err != nil {
+			invalidParams.AddNested("NdiConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2526,6 +2583,11 @@ func validateOpUpdateFlowInput(v *UpdateFlowInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowInput"}
 	if v.FlowArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if v.NdiConfig != nil {
+		if err := validateNdiConfig(v.NdiConfig); err != nil {
+			invalidParams.AddNested("NdiConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

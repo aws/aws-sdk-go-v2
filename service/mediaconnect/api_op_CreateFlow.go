@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new flow. The request must include one source. The request optionally
-// can include outputs (up to 50) and entitlements (up to 50).
+//	Creates a new flow. The request must include one source. The request
+//
+// optionally can include outputs (up to 50) and entitlements (up to 50).
 func (c *Client) CreateFlow(ctx context.Context, params *CreateFlowInput, optFns ...func(*Options)) (*CreateFlowOutput, error) {
 	if params == nil {
 		params = &CreateFlowInput{}
@@ -28,44 +29,51 @@ func (c *Client) CreateFlow(ctx context.Context, params *CreateFlowInput, optFns
 	return out, nil
 }
 
-// Creates a new flow. The request must include one source. The request optionally
-// can include outputs (up to 50) and entitlements (up to 50).
 type CreateFlowInput struct {
 
-	// The name of the flow.
+	//  The name of the flow.
 	//
 	// This member is required.
 	Name *string
 
-	// The Availability Zone that you want to create the flow in. These options are
-	// limited to the Availability Zones within the current AWS Region.
+	//  The Availability Zone that you want to create the flow in. These options are
+	// limited to the Availability Zones within the current Amazon Web Services Region.
 	AvailabilityZone *string
 
-	// The entitlements that you want to grant on a flow.
+	//  The entitlements that you want to grant on a flow.
 	Entitlements []types.GrantEntitlementRequest
 
-	// Create maintenance setting for a flow
+	//  Determines the processing capacity and feature set of the flow. Set this
+	// optional parameter to LARGE if you want to enable NDI outputs on the flow.
+	FlowSize types.FlowSize
+
+	//  The maintenance settings you want to use for the flow.
 	Maintenance *types.AddMaintenance
 
-	// The media streams that you want to add to the flow. You can associate these
+	//  The media streams that you want to add to the flow. You can associate these
 	// media streams with sources and outputs on the flow.
 	MediaStreams []types.AddMediaStreamRequest
 
-	// The outputs that you want to add to this flow.
+	//  Specifies the configuration settings for NDI outputs. Required when the flow
+	// includes NDI outputs.
+	NdiConfig *types.NdiConfig
+
+	//  The outputs that you want to add to this flow.
 	Outputs []types.AddOutputRequest
 
-	// The settings for the source of the flow.
+	//  The settings for the source that you want to use for the new flow.
 	Source *types.SetSourceRequest
 
-	// The settings for source failover.
+	//  The settings for source failover.
 	SourceFailoverConfig *types.FailoverConfig
 
-	// The settings for source monitoring.
+	//  The settings for source monitoring.
 	SourceMonitoringConfig *types.MonitoringConfig
 
+	// The sources that are assigned to the flow.
 	Sources []types.SetSourceRequest
 
-	// The VPC interfaces you want on the flow.
+	//  The VPC interfaces you want on the flow.
 	VpcInterfaces []types.VpcInterfaceRequest
 
 	noSmithyDocumentSerde
@@ -73,7 +81,7 @@ type CreateFlowInput struct {
 
 type CreateFlowOutput struct {
 
-	// The settings for a flow, including its source, outputs, and entitlements.
+	//  The flow that you created.
 	Flow *types.Flow
 
 	// Metadata pertaining to the operation's result.

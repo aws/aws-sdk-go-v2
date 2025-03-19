@@ -28,12 +28,12 @@ func (c *Client) RemoveBridgeSource(ctx context.Context, params *RemoveBridgeSou
 
 type RemoveBridgeSourceInput struct {
 
-	// The ARN of the bridge that you want to update.
+	//  The Amazon Resource Name (ARN) of the bridge that you want to update.
 	//
 	// This member is required.
 	BridgeArn *string
 
-	// The name of the bridge source that you want to remove.
+	//  The name of the bridge source that you want to remove.
 	//
 	// This member is required.
 	SourceName *string
@@ -42,8 +42,11 @@ type RemoveBridgeSourceInput struct {
 }
 
 type RemoveBridgeSourceOutput struct {
+
+	//  The ARN of the bridge from which the source was removed.
 	BridgeArn *string
 
+	//  The name of the bridge source that was removed.
 	SourceName *string
 
 	// Metadata pertaining to the operation's result.

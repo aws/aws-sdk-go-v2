@@ -27,23 +27,22 @@ func (c *Client) UpdateBridgeSource(ctx context.Context, params *UpdateBridgeSou
 	return out, nil
 }
 
-// The fields that you want to update in the bridge source.
 type UpdateBridgeSourceInput struct {
 
-	// The ARN of the bridge that you want to update.
+	//  The Amazon Resource Name (ARN) of the bridge that you want to update.
 	//
 	// This member is required.
 	BridgeArn *string
 
-	// The name of the source that you want to update.
+	//  The name of the source that you want to update.
 	//
 	// This member is required.
 	SourceName *string
 
-	// Update the flow source of the bridge.
+	//  The name of the flow that you want to update.
 	FlowSource *types.UpdateBridgeFlowSourceRequest
 
-	// Update the network source of the bridge.
+	//  The network for the bridge source.
 	NetworkSource *types.UpdateBridgeNetworkSourceRequest
 
 	noSmithyDocumentSerde
@@ -51,10 +50,10 @@ type UpdateBridgeSourceInput struct {
 
 type UpdateBridgeSourceOutput struct {
 
-	// The Amazon Resource Number (ARN) of the bridge.
+	//  The ARN of the updated bridge source.
 	BridgeArn *string
 
-	// The bridge's source.
+	//  The updated bridge source.
 	Source *types.BridgeSource
 
 	// Metadata pertaining to the operation's result.

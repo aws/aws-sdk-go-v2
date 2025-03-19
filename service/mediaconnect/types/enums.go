@@ -266,6 +266,25 @@ func (FailoverMode) Values() []FailoverMode {
 	}
 }
 
+type FlowSize string
+
+// Enum values for FlowSize
+const (
+	FlowSizeMedium FlowSize = "MEDIUM"
+	FlowSizeLarge  FlowSize = "LARGE"
+)
+
+// Values returns all known values for FlowSize. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowSize) Values() []FlowSize {
+	return []FlowSize{
+		"MEDIUM",
+		"LARGE",
+	}
+}
+
 type GatewayState string
 
 // Enum values for GatewayState
@@ -391,6 +410,25 @@ func (MediaStreamType) Values() []MediaStreamType {
 	}
 }
 
+type NdiState string
+
+// Enum values for NdiState
+const (
+	NdiStateEnabled  NdiState = "ENABLED"
+	NdiStateDisabled NdiState = "DISABLED"
+)
+
+// Values returns all known values for NdiState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NdiState) Values() []NdiState {
+	return []NdiState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type NetworkInterfaceType string
 
 // Enum values for NetworkInterfaceType
@@ -461,6 +499,7 @@ const (
 	ProtocolSrtCaller    Protocol = "srt-caller"
 	ProtocolFujitsuQos   Protocol = "fujitsu-qos"
 	ProtocolUdp          Protocol = "udp"
+	ProtocolNdiSpeedHq   Protocol = "ndi-speed-hq"
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
@@ -480,6 +519,7 @@ func (Protocol) Values() []Protocol {
 		"srt-caller",
 		"fujitsu-qos",
 		"udp",
+		"ndi-speed-hq",
 	}
 }
 

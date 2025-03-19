@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays the thumbnail details of a flow's source stream.
+// Describes the thumbnail for the flow source.
 func (c *Client) DescribeFlowSourceThumbnail(ctx context.Context, params *DescribeFlowSourceThumbnailInput, optFns ...func(*Options)) (*DescribeFlowSourceThumbnailOutput, error) {
 	if params == nil {
 		params = &DescribeFlowSourceThumbnailInput{}
@@ -29,7 +29,7 @@ func (c *Client) DescribeFlowSourceThumbnail(ctx context.Context, params *Descri
 
 type DescribeFlowSourceThumbnailInput struct {
 
-	// The Amazon Resource Name (ARN) of the flow.
+	//  The Amazon Resource Name (ARN) of the flow.
 	//
 	// This member is required.
 	FlowArn *string

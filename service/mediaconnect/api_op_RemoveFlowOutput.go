@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes an output from an existing flow. This request can be made only on an
+//	Removes an output from an existing flow. This request can be made only on an
+//
 // output that does not have an entitlement associated with it. If the output has
 // an entitlement, you must revoke the entitlement instead. When an entitlement is
 // revoked from a flow, the service automatically removes the associated output.
@@ -31,12 +32,13 @@ func (c *Client) RemoveFlowOutput(ctx context.Context, params *RemoveFlowOutputI
 
 type RemoveFlowOutputInput struct {
 
-	// The flow that you want to remove an output from.
+	//  The Amazon Resource Name (ARN) of the flow that you want to remove an output
+	// from.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// The ARN of the output that you want to remove.
+	//  The ARN of the output that you want to remove.
 	//
 	// This member is required.
 	OutputArn *string
@@ -46,10 +48,10 @@ type RemoveFlowOutputInput struct {
 
 type RemoveFlowOutputOutput struct {
 
-	// The ARN of the flow that is associated with the output you removed.
+	//  The ARN of the flow that the output was removed from.
 	FlowArn *string
 
-	// The ARN of the output that was removed.
+	//  The ARN of the output that was removed.
 	OutputArn *string
 
 	// Metadata pertaining to the operation's result.

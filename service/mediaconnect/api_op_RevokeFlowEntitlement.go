@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Revokes an entitlement from a flow. Once an entitlement is revoked, the content
-// becomes unavailable to the subscriber and the associated output is removed.
+//	Revokes an entitlement from a flow. Once an entitlement is revoked, the
+//
+// content becomes unavailable to the subscriber and the associated output is
+// removed.
 func (c *Client) RevokeFlowEntitlement(ctx context.Context, params *RevokeFlowEntitlementInput, optFns ...func(*Options)) (*RevokeFlowEntitlementOutput, error) {
 	if params == nil {
 		params = &RevokeFlowEntitlementInput{}
@@ -29,12 +31,12 @@ func (c *Client) RevokeFlowEntitlement(ctx context.Context, params *RevokeFlowEn
 
 type RevokeFlowEntitlementInput struct {
 
-	// The ARN of the entitlement that you want to revoke.
+	//  The Amazon Resource Name (ARN) of the entitlement that you want to revoke.
 	//
 	// This member is required.
 	EntitlementArn *string
 
-	// The flow that you want to revoke an entitlement from.
+	//  The flow that you want to revoke an entitlement from.
 	//
 	// This member is required.
 	FlowArn *string
@@ -44,10 +46,10 @@ type RevokeFlowEntitlementInput struct {
 
 type RevokeFlowEntitlementOutput struct {
 
-	// The ARN of the entitlement that was revoked.
+	//  The ARN of the entitlement that was revoked.
 	EntitlementArn *string
 
-	// The ARN of the flow that the entitlement was revoked from.
+	//  The ARN of the flow that the entitlement was revoked from.
 	FlowArn *string
 
 	// Metadata pertaining to the operation's result.

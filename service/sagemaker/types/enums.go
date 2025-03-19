@@ -5418,6 +5418,39 @@ const (
 	ProcessingInstanceTypeMlR5d12xlarge  ProcessingInstanceType = "ml.r5d.12xlarge"
 	ProcessingInstanceTypeMlR5d16xlarge  ProcessingInstanceType = "ml.r5d.16xlarge"
 	ProcessingInstanceTypeMlR5d24xlarge  ProcessingInstanceType = "ml.r5d.24xlarge"
+	ProcessingInstanceTypeMlG6Xlarge     ProcessingInstanceType = "ml.g6.xlarge"
+	ProcessingInstanceTypeMlG62xlarge    ProcessingInstanceType = "ml.g6.2xlarge"
+	ProcessingInstanceTypeMlG64xlarge    ProcessingInstanceType = "ml.g6.4xlarge"
+	ProcessingInstanceTypeMlG68xlarge    ProcessingInstanceType = "ml.g6.8xlarge"
+	ProcessingInstanceTypeMlG612xlarge   ProcessingInstanceType = "ml.g6.12xlarge"
+	ProcessingInstanceTypeMlG616xlarge   ProcessingInstanceType = "ml.g6.16xlarge"
+	ProcessingInstanceTypeMlG624xlarge   ProcessingInstanceType = "ml.g6.24xlarge"
+	ProcessingInstanceTypeMlG648xlarge   ProcessingInstanceType = "ml.g6.48xlarge"
+	ProcessingInstanceTypeMlG6eXlarge    ProcessingInstanceType = "ml.g6e.xlarge"
+	ProcessingInstanceTypeMlG6e2xlarge   ProcessingInstanceType = "ml.g6e.2xlarge"
+	ProcessingInstanceTypeMlG6e4xlarge   ProcessingInstanceType = "ml.g6e.4xlarge"
+	ProcessingInstanceTypeMlG6e8xlarge   ProcessingInstanceType = "ml.g6e.8xlarge"
+	ProcessingInstanceTypeMlG6e12xlarge  ProcessingInstanceType = "ml.g6e.12xlarge"
+	ProcessingInstanceTypeMlG6e16xlarge  ProcessingInstanceType = "ml.g6e.16xlarge"
+	ProcessingInstanceTypeMlG6e24xlarge  ProcessingInstanceType = "ml.g6e.24xlarge"
+	ProcessingInstanceTypeMlG6e48xlarge  ProcessingInstanceType = "ml.g6e.48xlarge"
+	ProcessingInstanceTypeMlM6iLarge     ProcessingInstanceType = "ml.m6i.large"
+	ProcessingInstanceTypeMlM6iXlarge    ProcessingInstanceType = "ml.m6i.xlarge"
+	ProcessingInstanceTypeMlM6i2xlarge   ProcessingInstanceType = "ml.m6i.2xlarge"
+	ProcessingInstanceTypeMlM6i4xlarge   ProcessingInstanceType = "ml.m6i.4xlarge"
+	ProcessingInstanceTypeMlM6i8xlarge   ProcessingInstanceType = "ml.m6i.8xlarge"
+	ProcessingInstanceTypeMlM6i12xlarge  ProcessingInstanceType = "ml.m6i.12xlarge"
+	ProcessingInstanceTypeMlM6i16xlarge  ProcessingInstanceType = "ml.m6i.16xlarge"
+	ProcessingInstanceTypeMlM6i24xlarge  ProcessingInstanceType = "ml.m6i.24xlarge"
+	ProcessingInstanceTypeMlM6i32xlarge  ProcessingInstanceType = "ml.m6i.32xlarge"
+	ProcessingInstanceTypeMlC6iXlarge    ProcessingInstanceType = "ml.c6i.xlarge"
+	ProcessingInstanceTypeMlC6i2xlarge   ProcessingInstanceType = "ml.c6i.2xlarge"
+	ProcessingInstanceTypeMlC6i4xlarge   ProcessingInstanceType = "ml.c6i.4xlarge"
+	ProcessingInstanceTypeMlC6i8xlarge   ProcessingInstanceType = "ml.c6i.8xlarge"
+	ProcessingInstanceTypeMlC6i12xlarge  ProcessingInstanceType = "ml.c6i.12xlarge"
+	ProcessingInstanceTypeMlC6i16xlarge  ProcessingInstanceType = "ml.c6i.16xlarge"
+	ProcessingInstanceTypeMlC6i24xlarge  ProcessingInstanceType = "ml.c6i.24xlarge"
+	ProcessingInstanceTypeMlC6i32xlarge  ProcessingInstanceType = "ml.c6i.32xlarge"
 )
 
 // Values returns all known values for ProcessingInstanceType. Note that this can
@@ -5486,6 +5519,39 @@ func (ProcessingInstanceType) Values() []ProcessingInstanceType {
 		"ml.r5d.12xlarge",
 		"ml.r5d.16xlarge",
 		"ml.r5d.24xlarge",
+		"ml.g6.xlarge",
+		"ml.g6.2xlarge",
+		"ml.g6.4xlarge",
+		"ml.g6.8xlarge",
+		"ml.g6.12xlarge",
+		"ml.g6.16xlarge",
+		"ml.g6.24xlarge",
+		"ml.g6.48xlarge",
+		"ml.g6e.xlarge",
+		"ml.g6e.2xlarge",
+		"ml.g6e.4xlarge",
+		"ml.g6e.8xlarge",
+		"ml.g6e.12xlarge",
+		"ml.g6e.16xlarge",
+		"ml.g6e.24xlarge",
+		"ml.g6e.48xlarge",
+		"ml.m6i.large",
+		"ml.m6i.xlarge",
+		"ml.m6i.2xlarge",
+		"ml.m6i.4xlarge",
+		"ml.m6i.8xlarge",
+		"ml.m6i.12xlarge",
+		"ml.m6i.16xlarge",
+		"ml.m6i.24xlarge",
+		"ml.m6i.32xlarge",
+		"ml.c6i.xlarge",
+		"ml.c6i.2xlarge",
+		"ml.c6i.4xlarge",
+		"ml.c6i.8xlarge",
+		"ml.c6i.12xlarge",
+		"ml.c6i.16xlarge",
+		"ml.c6i.24xlarge",
+		"ml.c6i.32xlarge",
 	}
 }
 

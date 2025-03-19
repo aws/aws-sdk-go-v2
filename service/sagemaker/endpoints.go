@@ -408,7 +408,7 @@ func (r *resolver) ResolveEndpoint(
 					if _PartitionResult.Name == "aws-us-gov" {
 						uriString := func() string {
 							var out strings.Builder
-							out.WriteString("https://api.sagemaker.")
+							out.WriteString("https://api-fips.sagemaker.")
 							out.WriteString(_Region)
 							out.WriteString(".amazonaws.com")
 							return out.String()

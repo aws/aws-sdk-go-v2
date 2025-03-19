@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the bridge
+// Updates the bridge.
 func (c *Client) UpdateBridge(ctx context.Context, params *UpdateBridgeInput, optFns ...func(*Options)) (*UpdateBridgeOutput, error) {
 	if params == nil {
 		params = &UpdateBridgeInput{}
@@ -27,19 +27,22 @@ func (c *Client) UpdateBridge(ctx context.Context, params *UpdateBridgeInput, op
 	return out, nil
 }
 
-// A request to update the bridge.
 type UpdateBridgeInput struct {
 
-	// The Amazon Resource Number (ARN) of the bridge that you want to update.
+	//  TheAmazon Resource Name (ARN) of the bridge that you want to update.
 	//
 	// This member is required.
 	BridgeArn *string
 
+	//  A cloud-to-ground bridge. The content comes from an existing MediaConnect flow
+	// and is delivered to your premises.
 	EgressGatewayBridge *types.UpdateEgressGatewayBridgeRequest
 
+	//  A ground-to-cloud bridge. The content originates at your premises and is
+	// delivered to the cloud.
 	IngressGatewayBridge *types.UpdateIngressGatewayBridgeRequest
 
-	// The settings for source failover.
+	//  The settings for source failover.
 	SourceFailoverConfig *types.UpdateFailoverConfig
 
 	noSmithyDocumentSerde
@@ -47,9 +50,7 @@ type UpdateBridgeInput struct {
 
 type UpdateBridgeOutput struct {
 
-	// A Bridge is the connection between your datacenter's Instances and the AWS
-	// cloud. A bridge can be used to send video from the AWS cloud to your datacenter
-	// or from your datacenter to the AWS cloud.
+	//  The bridge that was updated.
 	Bridge *types.Bridge
 
 	// Metadata pertaining to the operation's result.

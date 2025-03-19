@@ -27,10 +27,9 @@ func (c *Client) UpdateFlowSource(ctx context.Context, params *UpdateFlowSourceI
 	return out, nil
 }
 
-// A request to update the source of a flow.
 type UpdateFlowSourceInput struct {
 
-	// The flow that is associated with the source that you want to update.
+	//  The ARN of the flow that you want to update.
 	//
 	// This member is required.
 	FlowArn *string
@@ -40,37 +39,37 @@ type UpdateFlowSourceInput struct {
 	// This member is required.
 	SourceArn *string
 
-	// The type of encryption used on the content ingested from this source. Allowable
-	// encryption types: static-key.
+	// The type of encryption that is used on the content ingested from the source.
 	Decryption *types.UpdateEncryption
 
-	// A description for the source. This value is not used or seen outside of the
-	// current AWS Elemental MediaConnect account.
+	// A description of the source. This description is not visible outside of the
+	// current Amazon Web Services account.
 	Description *string
 
-	// The ARN of the entitlement that allows you to subscribe to this flow. The
-	// entitlement is set by the flow originator, and the ARN is generated as part of
-	// the originator's flow.
+	// The Amazon Resource Name (ARN) of the entitlement that allows you to subscribe
+	// to the flow. The entitlement is set by the content originator, and the ARN is
+	// generated as part of the originator's flow.
 	EntitlementArn *string
 
 	// The source configuration for cloud flows receiving a stream from a bridge.
 	GatewayBridgeSource *types.UpdateGatewayBridgeSourceRequest
 
-	// The port that the flow will be listening on for incoming content.
+	// The port that the flow listens on for incoming content. If the protocol of the
+	// source is Zixi, the port must be set to 2088.
 	IngestPort *int32
 
-	// The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.
+	// The maximum bitrate for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate *int32
 
-	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
-	// Zixi-based, and Fujitsu-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to RIST-based
+	// and Zixi-based streams.
 	MaxLatency *int32
 
 	// The size of the buffer (in milliseconds) to use to sync incoming source data.
 	MaxSyncBuffer *int32
 
-	// The media streams that are associated with the source, and the parameters for
-	// those associations.
+	// The media stream that is associated with the source, and the parameters for
+	// that association.
 	MediaStreamSourceConfigurations []types.MediaStreamSourceConfigurationRequest
 
 	// The minimum latency in milliseconds for SRT-based streams. In streams that use
@@ -80,7 +79,10 @@ type UpdateFlowSourceInput struct {
 	// receiver’s minimum latency.
 	MinLatency *int32
 
-	// The protocol that is used by the source.
+	// The protocol that the source uses to deliver the content to MediaConnect.
+	//
+	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
+	// reference is maintained for legacy purposes only.
 	Protocol types.Protocol
 
 	// The port that the flow uses to send outbound requests to initiate connection
@@ -91,7 +93,7 @@ type UpdateFlowSourceInput struct {
 	// sender.
 	SenderIpAddress *string
 
-	// Source IP or domain name for SRT-caller protocol.
+	// The source IP or domain name for SRT-caller protocol.
 	SourceListenerAddress *string
 
 	// Source port for SRT-caller protocol.
@@ -101,12 +103,12 @@ type UpdateFlowSourceInput struct {
 	// only to Zixi and SRT caller-based streams.
 	StreamId *string
 
-	// The name of the VPC interface to use for this source.
+	// The name of the VPC interface that you want to send your output to.
 	VpcInterfaceName *string
 
-	// The range of IP addresses that should be allowed to contribute content to your
-	// source. These IP addresses should be in the form of a Classless Inter-Domain
-	// Routing (CIDR) block; for example, 10.0.0.0/16.
+	// The range of IP addresses that are allowed to contribute content to your
+	// source. Format the IP addresses as a Classless Inter-Domain Routing (CIDR)
+	// block; for example, 10.0.0.0/16.
 	WhitelistCidr *string
 
 	noSmithyDocumentSerde
@@ -114,10 +116,10 @@ type UpdateFlowSourceInput struct {
 
 type UpdateFlowSourceOutput struct {
 
-	// The ARN of the flow that you want to update.
+	// The ARN of the flow that you was updated.
 	FlowArn *string
 
-	// The settings for the source of the flow.
+	// The details of the sources that are assigned to the flow.
 	Source *types.Source
 
 	// Metadata pertaining to the operation's result.

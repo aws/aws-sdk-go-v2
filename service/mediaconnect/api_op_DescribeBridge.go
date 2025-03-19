@@ -29,7 +29,7 @@ func (c *Client) DescribeBridge(ctx context.Context, params *DescribeBridgeInput
 
 type DescribeBridgeInput struct {
 
-	// The ARN of the bridge that you want to describe.
+	//  The Amazon Resource Name (ARN) of the bridge that you want to describe.
 	//
 	// This member is required.
 	BridgeArn *string
@@ -39,9 +39,7 @@ type DescribeBridgeInput struct {
 
 type DescribeBridgeOutput struct {
 
-	// A Bridge is the connection between your datacenter's Instances and the AWS
-	// cloud. A bridge can be used to send video from the AWS cloud to your datacenter
-	// or from your datacenter to the AWS cloud.
+	// The bridge that you requested a description of.
 	Bridge *types.Bridge
 
 	// Metadata pertaining to the operation's result.

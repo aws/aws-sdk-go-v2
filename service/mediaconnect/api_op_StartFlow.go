@@ -29,7 +29,7 @@ func (c *Client) StartFlow(ctx context.Context, params *StartFlowInput, optFns .
 
 type StartFlowInput struct {
 
-	// The ARN of the flow that you want to start.
+	//  The Amazon Resource Name (ARN) of the flow that you want to start.
 	//
 	// This member is required.
 	FlowArn *string
@@ -39,10 +39,10 @@ type StartFlowInput struct {
 
 type StartFlowOutput struct {
 
-	// The ARN of the flow that you started.
+	//  The ARN of the flow that you started.
 	FlowArn *string
 
-	// The status of the flow when the StartFlow process begins.
+	//  The status of the flow when the StartFlow process begins.
 	Status types.Status
 
 	// Metadata pertaining to the operation's result.

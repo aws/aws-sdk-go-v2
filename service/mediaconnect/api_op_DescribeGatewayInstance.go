@@ -29,7 +29,7 @@ func (c *Client) DescribeGatewayInstance(ctx context.Context, params *DescribeGa
 
 type DescribeGatewayInstanceInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway instance that you want to
+	//  The Amazon Resource Name (ARN) of the gateway instance that you want to
 	// describe.
 	//
 	// This member is required.
@@ -40,7 +40,7 @@ type DescribeGatewayInstanceInput struct {
 
 type DescribeGatewayInstanceOutput struct {
 
-	// The settings for an instance in a gateway.
+	// The gateway instance that you requested a description of.
 	GatewayInstance *types.GatewayInstance
 
 	// Metadata pertaining to the operation's result.

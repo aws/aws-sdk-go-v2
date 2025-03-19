@@ -12,8 +12,11 @@ import (
 	"time"
 )
 
-// Displays details of the flow's source stream. The response contains information
-// about the contents of the stream and its programs.
+//	The DescribeFlowSourceMetadata API is used to view information about the
+//
+// flow's source transport stream and programs. This API displays status messages
+// about the flow's source as well as details about the program's video, audio, and
+// other data.
 func (c *Client) DescribeFlowSourceMetadata(ctx context.Context, params *DescribeFlowSourceMetadataInput, optFns ...func(*Options)) (*DescribeFlowSourceMetadataOutput, error) {
 	if params == nil {
 		params = &DescribeFlowSourceMetadataInput{}
@@ -31,7 +34,7 @@ func (c *Client) DescribeFlowSourceMetadata(ctx context.Context, params *Describ
 
 type DescribeFlowSourceMetadataInput struct {
 
-	// The Amazon Resource Name (ARN) of the flow.
+	//  The Amazon Resource Name (ARN) of the flow.
 	//
 	// This member is required.
 	FlowArn *string
@@ -41,17 +44,17 @@ type DescribeFlowSourceMetadataInput struct {
 
 type DescribeFlowSourceMetadataOutput struct {
 
-	// The ARN of the flow that DescribeFlowSourceMetadata was performed on.
+	//  The ARN of the flow that DescribeFlowSourceMetadata was performed on.
 	FlowArn *string
 
-	// Provides a status code and message regarding issues found with the flow source
+	//  Provides a status code and message regarding issues found with the flow source
 	// metadata.
 	Messages []types.MessageDetail
 
-	// The timestamp of the most recent change in metadata for this flow’s source.
+	//  The timestamp of the most recent change in metadata for this flow’s source.
 	Timestamp *time.Time
 
-	// The metadata of the transport stream in the current flow's source.
+	//  Information about the flow's transport media.
 	TransportMediaInfo *types.TransportMediaInfo
 
 	// Metadata pertaining to the operation's result.

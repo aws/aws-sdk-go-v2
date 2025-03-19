@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays the details of a gateway. The response includes the gateway ARN, name,
-// and CIDR blocks, as well as details about the networks.
+//	Displays the details of a gateway. The response includes the gateway Amazon
+//
+// Resource Name (ARN), name, and CIDR blocks, as well as details about the
+// networks.
 func (c *Client) DescribeGateway(ctx context.Context, params *DescribeGatewayInput, optFns ...func(*Options)) (*DescribeGatewayOutput, error) {
 	if params == nil {
 		params = &DescribeGatewayInput{}
@@ -30,7 +32,7 @@ func (c *Client) DescribeGateway(ctx context.Context, params *DescribeGatewayInp
 
 type DescribeGatewayInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway that you want to describe.
+	//  The ARN of the gateway that you want to describe.
 	//
 	// This member is required.
 	GatewayArn *string
@@ -40,7 +42,7 @@ type DescribeGatewayInput struct {
 
 type DescribeGatewayOutput struct {
 
-	// The settings for a gateway, including its networks.
+	// The gateway that you wanted to describe.
 	Gateway *types.Gateway
 
 	// Metadata pertaining to the operation's result.

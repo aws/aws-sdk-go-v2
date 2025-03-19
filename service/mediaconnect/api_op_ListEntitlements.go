@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays a list of all entitlements that have been granted to this account.
+//	Displays a list of all entitlements that have been granted to this account.
+//
 // This request returns 20 results per page.
 func (c *Client) ListEntitlements(ctx context.Context, params *ListEntitlementsInput, optFns ...func(*Options)) (*ListEntitlementsOutput, error) {
 	if params == nil {
@@ -30,19 +31,23 @@ func (c *Client) ListEntitlements(ctx context.Context, params *ListEntitlementsI
 
 type ListEntitlementsInput struct {
 
-	// The maximum number of results to return per API request. For example, you
-	// submit a ListEntitlements request with MaxResults set at 5. Although 20 items
-	// match your request, the service returns no more than the first 5 items. (The
-	// service also returns a NextToken value that you can use to fetch the next batch
-	// of results.) The service might return fewer results than the MaxResults value.
-	// If MaxResults is not included in the request, the service defaults to pagination
-	// with a maximum of 20 results per page.
+	//  The maximum number of results to return per API request.
+	//
+	// For example, you submit a ListEntitlements request with set at 5. Although 20
+	// items match your request, the service returns no more than the first 5 items.
+	// (The service also returns a NextToken value that you can use to fetch the next
+	// batch of results.)
+	//
+	// The service might return fewer results than the MaxResults value. If MaxResults
+	// is not included in the request, the service defaults to pagination with a
+	// maximum of 20 results per page.
 	MaxResults *int32
 
-	// The token that identifies which batch of results that you want to see. For
-	// example, you submit a ListEntitlements request with MaxResults set at 5. The
-	// service returns the first batch of results (up to 5) and a NextToken value. To
-	// see the next batch of results, you can submit the ListEntitlements request a
+	//  The token that identifies the batch of results that you want to see.
+	//
+	// For example, you submit a ListEntitlements request with MaxResults set at 5.
+	// The service returns the first batch of results (up to 5) and a NextToken value.
+	// To see the next batch of results, you can submit the ListEntitlements request a
 	// second time and specify the NextToken value.
 	NextToken *string
 
@@ -51,13 +56,15 @@ type ListEntitlementsInput struct {
 
 type ListEntitlementsOutput struct {
 
-	// A list of entitlements that have been granted to you from other AWS accounts.
+	// A list of entitlements that have been granted to you from other Amazon Web
+	// Services accounts.
 	Entitlements []types.ListedEntitlement
 
-	// The token that identifies which batch of results that you want to see. For
-	// example, you submit a ListEntitlements request with MaxResults set at 5. The
-	// service returns the first batch of results (up to 5) and a NextToken value. To
-	// see the next batch of results, you can submit the ListEntitlements request a
+	// The token that identifies the batch of results that you want to see.
+	//
+	// For example, you submit a ListEntitlements request with MaxResults set at 5.
+	// The service returns the first batch of results (up to 5) and a NextToken value.
+	// To see the next batch of results, you can submit the ListEntitlements request a
 	// second time and specify the NextToken value.
 	NextToken *string
 
@@ -169,13 +176,16 @@ func (c *Client) addOperationListEntitlementsMiddlewares(stack *middleware.Stack
 
 // ListEntitlementsPaginatorOptions is the paginator options for ListEntitlements
 type ListEntitlementsPaginatorOptions struct {
-	// The maximum number of results to return per API request. For example, you
-	// submit a ListEntitlements request with MaxResults set at 5. Although 20 items
-	// match your request, the service returns no more than the first 5 items. (The
-	// service also returns a NextToken value that you can use to fetch the next batch
-	// of results.) The service might return fewer results than the MaxResults value.
-	// If MaxResults is not included in the request, the service defaults to pagination
-	// with a maximum of 20 results per page.
+	//  The maximum number of results to return per API request.
+	//
+	// For example, you submit a ListEntitlements request with set at 5. Although 20
+	// items match your request, the service returns no more than the first 5 items.
+	// (The service also returns a NextToken value that you can use to fetch the next
+	// batch of results.)
+	//
+	// The service might return fewer results than the MaxResults value. If MaxResults
+	// is not included in the request, the service defaults to pagination with a
+	// maximum of 20 results per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -27,39 +27,36 @@ func (c *Client) CreateBridge(ctx context.Context, params *CreateBridgeInput, op
 	return out, nil
 }
 
-// Creates a new bridge. The request must include one source.
 type CreateBridgeInput struct {
 
-	// The name of the bridge. This name can not be modified after the bridge is
+	//  The name of the bridge. This name can not be modified after the bridge is
 	// created.
 	//
 	// This member is required.
 	Name *string
 
-	// The bridge placement Amazon Resource Number (ARN).
+	//  The bridge placement Amazon Resource Number (ARN).
 	//
 	// This member is required.
 	PlacementArn *string
 
-	// The sources that you want to add to this bridge.
+	//  The sources that you want to add to this bridge.
 	//
 	// This member is required.
 	Sources []types.AddBridgeSourceRequest
 
-	// Create a bridge with the egress bridge type. An egress bridge is a
-	// cloud-to-ground bridge. The content comes from an existing MediaConnect flow and
-	// is delivered to your premises.
+	// An egress bridge is a cloud-to-ground bridge. The content comes from an
+	// existing MediaConnect flow and is delivered to your premises.
 	EgressGatewayBridge *types.AddEgressGatewayBridgeRequest
 
-	// Create a bridge with the ingress bridge type. An ingress bridge is a
-	// ground-to-cloud bridge. The content originates at your premises and is delivered
-	// to the cloud.
+	// An ingress bridge is a ground-to-cloud bridge. The content originates at your
+	// premises and is delivered to the cloud.
 	IngressGatewayBridge *types.AddIngressGatewayBridgeRequest
 
-	// The outputs that you want to add to this bridge.
+	//  The outputs that you want to add to this bridge.
 	Outputs []types.AddBridgeOutputRequest
 
-	// The settings for source failover.
+	//  The settings for source failover.
 	SourceFailoverConfig *types.FailoverConfig
 
 	noSmithyDocumentSerde
@@ -67,9 +64,7 @@ type CreateBridgeInput struct {
 
 type CreateBridgeOutput struct {
 
-	// A Bridge is the connection between your datacenter's Instances and the AWS
-	// cloud. A bridge can be used to send video from the AWS cloud to your datacenter
-	// or from your datacenter to the AWS cloud.
+	//  The name of the bridge that was created.
 	Bridge *types.Bridge
 
 	// Metadata pertaining to the operation's result.

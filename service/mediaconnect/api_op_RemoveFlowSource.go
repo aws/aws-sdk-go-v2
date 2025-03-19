@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a source from an existing flow. This request can be made only if there
+//	Removes a source from an existing flow. This request can be made only if there
+//
 // is more than one source on the flow.
 func (c *Client) RemoveFlowSource(ctx context.Context, params *RemoveFlowSourceInput, optFns ...func(*Options)) (*RemoveFlowSourceOutput, error) {
 	if params == nil {
@@ -29,12 +30,13 @@ func (c *Client) RemoveFlowSource(ctx context.Context, params *RemoveFlowSourceI
 
 type RemoveFlowSourceInput struct {
 
-	// The flow that you want to remove a source from.
+	//  The Amazon Resource Name (ARN) of the flow that you want to remove a source
+	// from.
 	//
 	// This member is required.
 	FlowArn *string
 
-	// The ARN of the source that you want to remove.
+	//  The ARN of the source that you want to remove.
 	//
 	// This member is required.
 	SourceArn *string
@@ -44,10 +46,10 @@ type RemoveFlowSourceInput struct {
 
 type RemoveFlowSourceOutput struct {
 
-	// The ARN of the flow that is associated with the source you removed.
+	//  The ARN of the flow that the source was removed from.
 	FlowArn *string
 
-	// The ARN of the source that was removed.
+	//  The ARN of the source that was removed.
 	SourceArn *string
 
 	// Metadata pertaining to the operation's result.
