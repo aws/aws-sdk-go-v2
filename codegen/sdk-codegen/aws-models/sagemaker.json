@@ -2866,7 +2866,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data generated from\n            an Athena query execution.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker\n            uses to encrypt data generated from an Athena query execution.</p>"
                     }
                 },
                 "OutputFormat": {
@@ -14385,7 +14385,7 @@
                 "ProcessingInputs": {
                     "target": "com.amazonaws.sagemaker#ProcessingInputs",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of inputs configuring the data to download into the \n            processing container.</p>"
+                        "smithy.api#documentation": "<p>An array of inputs configuring the data to download into the processing\n            container.</p>"
                     }
                 },
                 "ProcessingOutputConfig": {
@@ -14398,7 +14398,7 @@
                     "target": "com.amazonaws.sagemaker#ProcessingJobName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> The name of the processing job. The name must be unique within an Amazon Web Services Region in the\n            Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p> The name of the processing job. The name must be unique within an Amazon Web Services\n            Region in the Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14427,13 +14427,13 @@
                 "Environment": {
                     "target": "com.amazonaws.sagemaker#ProcessingEnvironmentMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container. Up to \n            100 key and values entries in the map are supported.</p>"
+                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container. Up to 100 key and values\n            entries in the map are supported.</p>"
                     }
                 },
                 "NetworkConfig": {
                     "target": "com.amazonaws.sagemaker#NetworkConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Networking options for a processing job, such as whether to allow inbound and \n            outbound network calls to and from processing containers, and the VPC subnets and \n            security groups to use for VPC-enabled processing jobs.</p>"
+                        "smithy.api#documentation": "<p>Networking options for a processing job, such as whether to allow inbound and outbound\n            network calls to and from processing containers, and the VPC subnets and security groups\n            to use for VPC-enabled processing jobs.</p>"
                     }
                 },
                 "RoleArn": {
@@ -14447,7 +14447,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management\n                User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and\n                Cost Management User Guide</i>.</p>"
                     }
                 },
                 "ExperimentConfig": {
@@ -16140,24 +16140,24 @@
                 "LocalPath": {
                     "target": "com.amazonaws.sagemaker#ProcessingLocalPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The local path where you want Amazon SageMaker to download the Dataset Definition inputs to run a\n            processing job. <code>LocalPath</code> is an absolute path to the input data. This is a required\n            parameter when <code>AppManaged</code> is <code>False</code> (default).</p>"
+                        "smithy.api#documentation": "<p>The local path where you want Amazon SageMaker to download the Dataset Definition inputs to run a\n            processing job. <code>LocalPath</code> is an absolute path to the input data. This is a\n            required parameter when <code>AppManaged</code> is <code>False</code> (default).</p>"
                     }
                 },
                 "DataDistributionType": {
                     "target": "com.amazonaws.sagemaker#DataDistributionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the generated dataset is <code>FullyReplicated</code> or\n            <code>ShardedByS3Key</code> (default).</p>"
+                        "smithy.api#documentation": "<p>Whether the generated dataset is <code>FullyReplicated</code> or\n                <code>ShardedByS3Key</code> (default).</p>"
                     }
                 },
                 "InputMode": {
                     "target": "com.amazonaws.sagemaker#InputMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to use <code>File</code> or <code>Pipe</code> input mode. In <code>File</code> (default) mode,\n            Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store\n            (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used\n            input mode. In <code>Pipe</code> mode, Amazon SageMaker streams input data from the source directly to your\n            algorithm without using the EBS volume.</p>"
+                        "smithy.api#documentation": "<p>Whether to use <code>File</code> or <code>Pipe</code> input mode. In <code>File</code>\n            (default) mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic\n            Block Store (Amazon EBS) volumes before starting your training algorithm. This is the\n            most commonly used input mode. In <code>Pipe</code> mode, Amazon SageMaker streams input data from\n            the source directly to your algorithm without using the EBS volume.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration for Dataset Definition inputs. The Dataset Definition input must specify\n            exactly one of either <code>AthenaDatasetDefinition</code> or <code>RedshiftDatasetDefinition</code>\n            types.</p>"
+                "smithy.api#documentation": "<p>Configuration for Dataset Definition inputs. The Dataset Definition input must specify\n            exactly one of either <code>AthenaDatasetDefinition</code> or\n                <code>RedshiftDatasetDefinition</code> types.</p>"
             }
         },
         "com.amazonaws.sagemaker#DebugHookConfig": {
@@ -25928,7 +25928,7 @@
                     "target": "com.amazonaws.sagemaker#ProcessingJobName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the processing job. The name must be unique within an Amazon Web Services Region in the\n            Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of the processing job. The name must be unique within an Amazon Web Services\n            Region in the Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -25956,7 +25956,7 @@
                     "target": "com.amazonaws.sagemaker#ProcessingJobName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the processing job. The name must be unique within an Amazon Web Services Region in the\n            Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of the processing job. The name must be unique within an Amazon Web Services\n            Region in the Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -39696,7 +39696,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the list of instances (also called <i>nodes</i> interchangeably)\n         in a SageMaker HyperPod cluster.</p>"
+                "smithy.api#documentation": "<p>Retrieves the list of instances (also called <i>nodes</i> interchangeably)\n         in a SageMaker HyperPod cluster.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ClusterNodeSummaries",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.sagemaker#ListClusterNodesRequest": {
@@ -39763,9 +39769,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The next token specified for listing instances in a SageMaker HyperPod cluster.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The next token specified for listing instances in a SageMaker HyperPod cluster.</p>"
                     }
                 },
                 "ClusterNodeSummaries": {
@@ -39890,7 +39894,13 @@
                 "target": "com.amazonaws.sagemaker#ListClustersResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the list of SageMaker HyperPod clusters.</p>"
+                "smithy.api#documentation": "<p>Retrieves the list of SageMaker HyperPod clusters.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ClusterSummaries",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.sagemaker#ListClustersRequest": {
@@ -39955,9 +39965,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>If the result of the previous <code>ListClusters</code> request was truncated, the\n         response includes a <code>NextToken</code>. To retrieve the next set of clusters, use the\n         token in the next request.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>If the result of the previous <code>ListClusters</code> request was truncated, the\n         response includes a <code>NextToken</code>. To retrieve the next set of clusters, use the\n         token in the next request.</p>"
                     }
                 },
                 "ClusterSummaries": {
@@ -51579,7 +51587,7 @@
                 "EnableInterContainerTrafficEncryption": {
                     "target": "com.amazonaws.sagemaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to encrypt all communications between distributed processing jobs. Choose\n            <code>True</code> to encrypt communications. Encryption provides greater security for distributed\n            processing jobs, but the processing might take longer.</p>"
+                        "smithy.api#documentation": "<p>Whether to encrypt all communications between distributed processing jobs. Choose\n                <code>True</code> to encrypt communications. Encryption provides greater security\n            for distributed processing jobs, but the processing might take longer.</p>"
                     }
                 },
                 "EnableNetworkIsolation": {
@@ -54708,14 +54716,14 @@
                     "target": "com.amazonaws.sagemaker#ProcessingVolumeSizeInGB",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The size of the ML storage volume in gigabytes that you want to provision. You must\n            specify sufficient ML storage for your scenario.</p>\n         <note>\n            <p>Certain Nitro-based instances include local storage with a fixed total size,\n                dependent on the instance type. When using these instances for processing, Amazon SageMaker mounts\n                the local instance storage instead of Amazon EBS gp2 storage. You can't request a\n                <code>VolumeSizeInGB</code> greater than the total size of the local instance\n                storage.</p>\n            <p>For a list of instance types that support local instance storage, including the\n                total size per instance type, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The size of the ML storage volume in gigabytes that you want to provision. You must\n            specify sufficient ML storage for your scenario.</p>\n         <note>\n            <p>Certain Nitro-based instances include local storage with a fixed total size,\n                dependent on the instance type. When using these instances for processing, Amazon SageMaker\n                mounts the local instance storage instead of Amazon EBS gp2 storage. You can't request a\n                    <code>VolumeSizeInGB</code> greater than the total size of the local instance\n                storage.</p>\n            <p>For a list of instance types that support local instance storage, including the\n                total size per instance type, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "VolumeKmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the\n            storage volume attached to the ML compute instance(s) that run the processing job.\n        </p>\n         <note>\n            <p>Certain Nitro-based instances include local storage, dependent on the instance\n                type. Local storage volumes are encrypted using a hardware module on the instance.\n                You can't request a <code>VolumeKmsKeyId</code> when using an instance type with\n                local storage.</p>\n            <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n            <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD\n                Instance Store Volumes</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker\n            uses to encrypt data on the storage volume attached to the ML compute instance(s) that\n            run the processing job. </p>\n         <note>\n            <p>Certain Nitro-based instances include local storage, dependent on the instance\n                type. Local storage volumes are encrypted using a hardware module on the instance.\n                You can't request a <code>VolumeKmsKeyId</code> when using an instance type with\n                local storage.</p>\n            <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n            <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD\n                    Instance Store Volumes</a>.</p>\n         </note>"
                     }
                 }
             },
@@ -54765,7 +54773,7 @@
                     "target": "com.amazonaws.sagemaker#FeatureGroupName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the Amazon SageMaker FeatureGroup to use as the destination for processing job output. Note that your \n            processing script is responsible for putting records into your Feature Store.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon SageMaker FeatureGroup to use as the destination for processing job output.\n            Note that your processing script is responsible for putting records into your Feature\n            Store.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -54788,13 +54796,13 @@
                 "AppManaged": {
                     "target": "com.amazonaws.sagemaker#AppManaged",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>True</code>, input operations such as data download are managed natively by the\n            processing job application. When <code>False</code> (default), input operations are managed by Amazon SageMaker.</p>"
+                        "smithy.api#documentation": "<p>When <code>True</code>, input operations such as data download are managed natively by\n            the processing job application. When <code>False</code> (default), input operations are\n            managed by Amazon SageMaker.</p>"
                     }
                 },
                 "S3Input": {
                     "target": "com.amazonaws.sagemaker#ProcessingS3Input",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for downloading input data from Amazon S3 into the processing container.</p>"
+                        "smithy.api#documentation": "<p>Configuration for downloading input data from Amazon S3 into the processing\n            container.</p>"
                     }
                 },
                 "DatasetDefinition": {
@@ -54805,7 +54813,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The inputs for a processing job. The processing input must specify exactly one of either\n            <code>S3Input</code> or <code>DatasetDefinition</code> types.</p>"
+                "smithy.api#documentation": "<p>The inputs for a processing job. The processing input must specify exactly one of\n            either <code>S3Input</code> or <code>DatasetDefinition</code> types.</p>"
             }
         },
         "com.amazonaws.sagemaker#ProcessingInputs": {
@@ -55191,6 +55199,204 @@
                     "traits": {
                         "smithy.api#enumValue": "ml.r5d.24xlarge"
                     }
+                },
+                "ML_G6_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.xlarge"
+                    }
+                },
+                "ML_G6_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.2xlarge"
+                    }
+                },
+                "ML_G6_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.4xlarge"
+                    }
+                },
+                "ML_G6_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.8xlarge"
+                    }
+                },
+                "ML_G6_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.12xlarge"
+                    }
+                },
+                "ML_G6_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.16xlarge"
+                    }
+                },
+                "ML_G6_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.24xlarge"
+                    }
+                },
+                "ML_G6_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.48xlarge"
+                    }
+                },
+                "ML_G6E_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.xlarge"
+                    }
+                },
+                "ML_G6E_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.2xlarge"
+                    }
+                },
+                "ML_G6E_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.4xlarge"
+                    }
+                },
+                "ML_G6E_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.8xlarge"
+                    }
+                },
+                "ML_G6E_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.12xlarge"
+                    }
+                },
+                "ML_G6E_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.16xlarge"
+                    }
+                },
+                "ML_G6E_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.24xlarge"
+                    }
+                },
+                "ML_G6E_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.48xlarge"
+                    }
+                },
+                "ML_M6I_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.large"
+                    }
+                },
+                "ML_M6I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.xlarge"
+                    }
+                },
+                "ML_M6I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.2xlarge"
+                    }
+                },
+                "ML_M6I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.4xlarge"
+                    }
+                },
+                "ML_M6I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.8xlarge"
+                    }
+                },
+                "ML_M6I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.12xlarge"
+                    }
+                },
+                "ML_M6I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.16xlarge"
+                    }
+                },
+                "ML_M6I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.24xlarge"
+                    }
+                },
+                "ML_M6I_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.32xlarge"
+                    }
+                },
+                "ML_C6I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c6i.xlarge"
+                    }
+                },
+                "ML_C6I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c6i.2xlarge"
+                    }
+                },
+                "ML_C6I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c6i.4xlarge"
+                    }
+                },
+                "ML_C6I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c6i.8xlarge"
+                    }
+                },
+                "ML_C6I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c6i.12xlarge"
+                    }
+                },
+                "ML_C6I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c6i.16xlarge"
+                    }
+                },
+                "ML_C6I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c6i.24xlarge"
+                    }
+                },
+                "ML_C6I_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c6i.32xlarge"
+                    }
                 }
             }
         },
@@ -55254,7 +55460,7 @@
                 "ExitMessage": {
                     "target": "com.amazonaws.sagemaker#ExitMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string, up to one KB in size, that contains metadata from the processing\n            container when the processing job exits.</p>"
+                        "smithy.api#documentation": "<p>A string, up to one KB in size, that contains metadata from the processing container\n            when the processing job exits.</p>"
                     }
                 },
                 "FailureReason": {
@@ -55296,7 +55502,7 @@
                 "AutoMLJobArn": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AutoML job associated with this processing job.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AutoML job associated with this processing\n            job.</p>"
                     }
                 },
                 "TrainingJobArn": {
@@ -55308,12 +55514,12 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management\n                User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and\n                Cost Management User Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An Amazon SageMaker processing job that is used to analyze data and evaluate models. For more information,\n            see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/processing-job.html\">Process\n                Data and Evaluate Models</a>.</p>"
+                "smithy.api#documentation": "<p>An Amazon SageMaker processing job that is used to analyze data and evaluate models. For more\n            information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/processing-job.html\">Process Data and Evaluate\n                Models</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#ProcessingJobArn": {
@@ -55500,12 +55706,12 @@
                 "AppManaged": {
                     "target": "com.amazonaws.sagemaker#AppManaged",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>True</code>, output operations such as data upload are managed natively by the\n            processing job application. When <code>False</code> (default), output operations are managed by\n            Amazon SageMaker.</p>"
+                        "smithy.api#documentation": "<p>When <code>True</code>, output operations such as data upload are managed natively by\n            the processing job application. When <code>False</code> (default), output operations are\n            managed by Amazon SageMaker.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the results of a processing job. The processing output must specify exactly one of\n            either <code>S3Output</code> or <code>FeatureStoreOutput</code> types.</p>"
+                "smithy.api#documentation": "<p>Describes the results of a processing job. The processing output must specify exactly\n            one of either <code>S3Output</code> or <code>FeatureStoreOutput</code> types.</p>"
             }
         },
         "com.amazonaws.sagemaker#ProcessingOutputConfig": {
@@ -55515,14 +55721,14 @@
                     "target": "com.amazonaws.sagemaker#ProcessingOutputs",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>An array of outputs configuring the data to upload from the processing container.</p>",
+                        "smithy.api#documentation": "<p>An array of outputs configuring the data to upload from the processing\n            container.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the processing\n            job output. <code>KmsKeyId</code> can be an ID of a KMS key, ARN of a KMS key, alias of\n            a KMS key, or alias of a KMS key. The <code>KmsKeyId</code> is applied to all\n            outputs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker\n            uses to encrypt the processing job output. <code>KmsKeyId</code> can be an ID of a KMS\n            key, ARN of a KMS key, or alias of a KMS key. The <code>KmsKeyId</code> is applied to\n            all outputs.</p>"
                     }
                 }
             },
@@ -55616,45 +55822,45 @@
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The URI of the Amazon S3 prefix Amazon SageMaker downloads data required to run a processing job.</p>",
+                        "smithy.api#documentation": "<p>The URI of the Amazon S3 prefix Amazon SageMaker downloads data required to run a processing\n            job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LocalPath": {
                     "target": "com.amazonaws.sagemaker#ProcessingLocalPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The local path in your container where you want Amazon SageMaker to write input data to. \n            <code>LocalPath</code> is an absolute path to the input data and must begin with \n            <code>/opt/ml/processing/</code>. <code>LocalPath</code> is a required \n            parameter when <code>AppManaged</code> is <code>False</code> (default).</p>"
+                        "smithy.api#documentation": "<p>The local path in your container where you want Amazon SageMaker to write input data to.\n                <code>LocalPath</code> is an absolute path to the input data and must begin with\n                <code>/opt/ml/processing/</code>. <code>LocalPath</code> is a required parameter\n            when <code>AppManaged</code> is <code>False</code> (default).</p>"
                     }
                 },
                 "S3DataType": {
                     "target": "com.amazonaws.sagemaker#ProcessingS3DataType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Whether you use an <code>S3Prefix</code> or a <code>ManifestFile</code> for\n            the data type. If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key\n            name prefix. Amazon SageMaker uses all objects with the specified key name prefix for the processing\n            job. If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object\n            that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for\n            the processing job.</p>",
+                        "smithy.api#documentation": "<p>Whether you use an <code>S3Prefix</code> or a <code>ManifestFile</code> for the data\n            type. If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name\n            prefix. Amazon SageMaker uses all objects with the specified key name prefix for the processing job.\n            If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that is\n            a manifest file containing a list of object keys that you want Amazon SageMaker to use for the\n            processing job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "S3InputMode": {
                     "target": "com.amazonaws.sagemaker#ProcessingS3InputMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to use <code>File</code> or <code>Pipe</code> input mode. In File mode, Amazon SageMaker copies the data \n            from the input source onto the local ML storage volume before starting your processing \n            container. This is the most commonly used input mode. In <code>Pipe</code> mode, Amazon SageMaker \n            streams input data from the source directly to your processing container into named \n            pipes without using the ML storage volume.</p>"
+                        "smithy.api#documentation": "<p>Whether to use <code>File</code> or <code>Pipe</code> input mode. In File mode, Amazon SageMaker\n            copies the data from the input source onto the local ML storage volume before starting\n            your processing container. This is the most commonly used input mode. In\n                <code>Pipe</code> mode, Amazon SageMaker streams input data from the source directly to your\n            processing container into named pipes without using the ML storage volume.</p>"
                     }
                 },
                 "S3DataDistributionType": {
                     "target": "com.amazonaws.sagemaker#ProcessingS3DataDistributionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to distribute the data from Amazon S3 to all processing instances with \n            <code>FullyReplicated</code>, or whether the data from Amazon S3 is shared by Amazon S3 key, \n            downloading one shard of data to each processing instance.</p>"
+                        "smithy.api#documentation": "<p>Whether to distribute the data from Amazon S3 to all processing instances with\n                <code>FullyReplicated</code>, or whether the data from Amazon S3 is shared by Amazon S3 key,\n            downloading one shard of data to each processing instance.</p>"
                     }
                 },
                 "S3CompressionType": {
                     "target": "com.amazonaws.sagemaker#ProcessingS3CompressionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to GZIP-decompress the data in Amazon S3 as it is streamed into the processing \n            container. <code>Gzip</code> can only be used when <code>Pipe</code> mode is \n            specified as the <code>S3InputMode</code>. In <code>Pipe</code> mode, Amazon SageMaker streams input \n            data from the source directly to your container without using the EBS volume.</p>"
+                        "smithy.api#documentation": "<p>Whether to GZIP-decompress the data in Amazon S3 as it is streamed into the processing\n            container. <code>Gzip</code> can only be used when <code>Pipe</code> mode is specified\n            as the <code>S3InputMode</code>. In <code>Pipe</code> mode, Amazon SageMaker streams input data from\n            the source directly to your container without using the EBS volume.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration for downloading input data from Amazon S3 into the processing container.</p>"
+                "smithy.api#documentation": "<p>Configuration for downloading input data from Amazon S3 into the processing\n            container.</p>"
             }
         },
         "com.amazonaws.sagemaker#ProcessingS3InputMode": {
@@ -55688,7 +55894,7 @@
                 "LocalPath": {
                     "target": "com.amazonaws.sagemaker#ProcessingLocalPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The local path of a directory where you want Amazon SageMaker to upload its contents to Amazon S3. \n            <code>LocalPath</code> is an absolute path to a directory containing output files. \n            This directory will be created by the platform and exist when your container's \n            entrypoint is invoked.</p>"
+                        "smithy.api#documentation": "<p>The local path of a directory where you want Amazon SageMaker to upload its contents to Amazon S3.\n                <code>LocalPath</code> is an absolute path to a directory containing output files.\n            This directory will be created by the platform and exist when your container's\n            entrypoint is invoked.</p>"
                     }
                 },
                 "S3UploadMode": {
@@ -55734,7 +55940,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures conditions under which the processing job should be stopped, such as how long \n            the processing job has been running. After the condition is met, the processing job is stopped.</p>"
+                "smithy.api#documentation": "<p>Configures conditions under which the processing job should be stopped, such as how\n            long the processing job has been running. After the condition is met, the processing job\n            is stopped.</p>"
             }
         },
         "com.amazonaws.sagemaker#ProcessingVolumeSizeInGB": {
@@ -59428,7 +59634,7 @@
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The IAM role attached to your Redshift cluster that Amazon SageMaker uses to generate datasets.</p>",
+                        "smithy.api#documentation": "<p>The IAM role attached to your Redshift cluster that Amazon SageMaker uses to generate\n            datasets.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -59443,7 +59649,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data from a\n            Redshift execution.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker\n            uses to encrypt data from a Redshift execution.</p>"
                     }
                 },
                 "OutputFormat": {
@@ -62458,7 +62664,7 @@
                                                                 }
                                                             ],
                                                             "endpoint": {
-                                                                "url": "https://api.sagemaker.{Region}.amazonaws.com",
+                                                                "url": "https://api-fips.sagemaker.{Region}.amazonaws.com",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -62993,7 +63199,7 @@
                             "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://api.sagemaker.us-gov-west-1.amazonaws.com"
+                                    "url": "https://api-fips.sagemaker.us-gov-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
@@ -63019,7 +63225,7 @@
                             "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://api.sagemaker.us-gov-east-1.amazonaws.com"
+                                    "url": "https://api-fips.sagemaker.us-gov-east-1.amazonaws.com"
                                 }
                             },
                             "params": {

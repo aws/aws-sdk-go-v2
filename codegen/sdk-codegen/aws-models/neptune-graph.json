@@ -6551,7 +6551,7 @@
         "com.amazonaws.neptunegraph#RoleArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"
+                "smithy.api#pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)(/[\\w+=,.@-]+)+$"
             }
         },
         "com.amazonaws.neptunegraph#SecurityGroupId": {

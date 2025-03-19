@@ -2784,7 +2784,7 @@
                 "ProvisionedPollerConfig": {
                     "target": "com.amazonaws.lambda#ProvisionedPollerConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode configuration for the event source.\n  For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">Provisioned Mode</a>.</p>"
+                        "smithy.api#documentation": "<p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source.\n  For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">provisioned mode</a>.</p>"
                     }
                 }
             },
@@ -4357,7 +4357,7 @@
                 "ProvisionedPollerConfig": {
                     "target": "com.amazonaws.lambda#ProvisionedPollerConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode configuration for the event source.\n  For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">Provisioned Mode</a>.</p>"
+                        "smithy.api#documentation": "<p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source.\n  For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">provisioned mode</a>.</p>"
                     }
                 }
             },
@@ -6885,7 +6885,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request body could not be parsed as JSON.</p>",
+                "smithy.api#documentation": "<p>The request body could not be parsed as JSON, or a request header is invalid. For example, the 'x-amzn-RequestId'\n      header is not a valid UUID string.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -9940,7 +9940,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">\n      Provisioned Mode</a> configuration for the event source. Use Provisioned Mode to customize the minimum and maximum number of event pollers\n      for your event source. An event poller is a compute unit that provides approximately 5 MBps of throughput.</p>"
+                "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">\n      provisioned mode</a> configuration for the event source. Use Provisioned Mode to customize the minimum and maximum number of event pollers\n      for your event source. An event poller is a compute unit that provides approximately 5 MBps of throughput.</p>"
             }
         },
         "com.amazonaws.lambda#PublishLayerVersion": {
@@ -11324,6 +11324,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ruby3.3"
+                    }
+                },
+                "ruby34": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ruby3.4"
                     }
                 },
                 "python311": {
@@ -12763,7 +12769,7 @@
                 "ProvisionedPollerConfig": {
                     "target": "com.amazonaws.lambda#ProvisionedPollerConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode configuration for the event source.\n  For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">Provisioned Mode</a>.</p>"
+                        "smithy.api#documentation": "<p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source.\n  For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">provisioned mode</a>.</p>"
                     }
                 }
             },
