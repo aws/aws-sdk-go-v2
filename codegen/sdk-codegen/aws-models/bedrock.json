@@ -3181,11 +3181,23 @@
                 }
             }
         },
+        "com.amazonaws.bedrock#EvaluationBedrockKnowledgeBaseIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#KnowledgeBaseId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.bedrock#EvaluationBedrockModel": {
             "type": "structure",
             "members": {
                 "modelIdentifier": {
-                    "target": "com.amazonaws.bedrock#EvaluationModelIdentifier",
+                    "target": "com.amazonaws.bedrock#EvaluationBedrockModelIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the Amazon Bedrock model or inference profile specified.</p>",
                         "smithy.api#required": {}
@@ -3208,6 +3220,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the ARN of the Amazon Bedrock model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a> specified in your evaluation job. Each Amazon Bedrock model supports different <code>inferenceParams</code>. To learn more about supported inference parameters for Amazon Bedrock models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>.</p>\n         <p>The <code>inferenceParams</code> are specified using JSON. To successfully insert JSON as string make sure that all quotations are properly escaped. For example, <code>\"temperature\":\"0.25\"</code> key value pair would need to be formatted as <code>\\\"temperature\\\":\\\"0.25\\\"</code> to successfully accepted in the request.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationBedrockModelIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:((:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:application-inference-profile/[a-z0-9]{12})|([0-9]{12}:inference-profile/(([a-z-]{2,8}.)[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))|([0-9]{12}:(default-prompt-router|prompt-router)/[a-zA-Z0-9-:.]+)))|(([a-z]{2}[.]{1})([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|arn:aws(-[^:]+)?:sagemaker:[a-z0-9-]{1,20}:[0-9]{12}:endpoint/[a-z0-9-]{1,63}$"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationBedrockModelIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#EvaluationBedrockModelIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.bedrock#EvaluationConfig": {
@@ -3335,6 +3369,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration details of the inference model for an evaluation job.</p>\n         <p>For automated model evaluation jobs, only a single model is supported.</p>\n         <p>For human-based model evaluation jobs, your annotator can compare the responses for up to two different models.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationInferenceConfigSummary": {
+            "type": "structure",
+            "members": {
+                "modelConfigSummary": {
+                    "target": "com.amazonaws.bedrock#EvaluationModelConfigSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the models used in an Amazon Bedrock model evaluation job. These resources can be models in Amazon Bedrock\n         or models outside of Amazon Bedrock that you use to generate your own inference response data.</p>"
+                    }
+                },
+                "ragConfigSummary": {
+                    "target": "com.amazonaws.bedrock#EvaluationRagConfigSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the RAG resources used in an Amazon Bedrock Knowledge Base evaluation job. These resources can be Knowledge Bases in\n         Amazon Bedrock or RAG sources outside of Amazon Bedrock that you use to generate your own inference response data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the models, Knowledge Bases, or other RAG sources evaluated in a model or Knowledge Base evaluation job.</p>"
             }
         },
         "com.amazonaws.bedrock#EvaluationJobArn": {
@@ -3509,10 +3563,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Defines the Amazon Bedrock model or inference profile and inference parameters you want used.</p>"
                     }
+                },
+                "precomputedInferenceSource": {
+                    "target": "com.amazonaws.bedrock#EvaluationPrecomputedInferenceSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the model used to generate inference response data for a model evaluation job where you provide your own inference response data.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Defines the models used in the model evaluation job.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationModelConfigSummary": {
+            "type": "structure",
+            "members": {
+                "bedrockModelIdentifiers": {
+                    "target": "com.amazonaws.bedrock#EvaluationBedrockModelIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the models used for the evaluation job.</p>"
+                    }
+                },
+                "precomputedInferenceSourceIdentifiers": {
+                    "target": "com.amazonaws.bedrock#EvaluationPrecomputedInferenceSourceIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A label that identifies the models used for a model evaluation job where you provide your own inference response data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the models used in an Amazon Bedrock model evaluation job. These resources can be models in Amazon Bedrock\n         or models outside of Amazon Bedrock that you use to generate your own inference response data.</p>"
             }
         },
         "com.amazonaws.bedrock#EvaluationModelConfigs": {
@@ -3523,28 +3603,6 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 2
-                }
-            }
-        },
-        "com.amazonaws.bedrock#EvaluationModelIdentifier": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 2048
-                },
-                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:((:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:application-inference-profile/[a-z0-9]{12})|([0-9]{12}:inference-profile/(([a-z-]{2,8}.)[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))|([0-9]{12}:(default-prompt-router|prompt-router)/[a-zA-Z0-9-:.]+)))|(([a-z]{2}[.]{1})([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|arn:aws(-[^:]+)?:sagemaker:[a-z0-9-]{1,20}:[0-9]{12}:endpoint/[a-z0-9-]{1,63}$"
-            }
-        },
-        "com.amazonaws.bedrock#EvaluationModelIdentifiers": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.bedrock#EvaluationModelIdentifier"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
                     "max": 2
                 }
             }
@@ -3572,6 +3630,135 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The  Amazon S3 location where the results of your evaluation job are saved.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationPrecomputedInferenceSource": {
+            "type": "structure",
+            "members": {
+                "inferenceSourceIdentifier": {
+                    "target": "com.amazonaws.bedrock#EvaluationPrecomputedInferenceSourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A label that identifies a model used in a model evaluation job where you provide your own inference response data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a model used for a model evaluation job where you provide your own inference response data.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationPrecomputedInferenceSourceIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]([a-zA-Z0-9._-]){0,255}$"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationPrecomputedInferenceSourceIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#EvaluationPrecomputedInferenceSourceIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationPrecomputedRagSourceConfig": {
+            "type": "union",
+            "members": {
+                "retrieveSourceConfig": {
+                    "target": "com.amazonaws.bedrock#EvaluationPrecomputedRetrieveSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of a RAG source used for a retrieve-only Knowledge Base evaluation job where you provide your own inference response data.</p>"
+                    }
+                },
+                "retrieveAndGenerateSourceConfig": {
+                    "target": "com.amazonaws.bedrock#EvaluationPrecomputedRetrieveAndGenerateSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of a RAG source used for a retrieve-and-generate Knowledge Base evaluation job where you provide your own inference response data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a RAG source used for a Knowledge Base evaluation job where you provide your own inference response data.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationPrecomputedRagSourceIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]([a-zA-Z0-9._-]){0,255}$"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationPrecomputedRagSourceIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#EvaluationPrecomputedRagSourceIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationPrecomputedRetrieveAndGenerateSourceConfig": {
+            "type": "structure",
+            "members": {
+                "ragSourceIdentifier": {
+                    "target": "com.amazonaws.bedrock#EvaluationPrecomputedRagSourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A label that identifies the RAG source used for a retrieve-and-generate Knowledge Base evaluation job where you provide your own inference response data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a RAG source used for a retrieve-and-generate Knowledge Base evaluation job where you provide your own inference response data.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationPrecomputedRetrieveSourceConfig": {
+            "type": "structure",
+            "members": {
+                "ragSourceIdentifier": {
+                    "target": "com.amazonaws.bedrock#EvaluationPrecomputedRagSourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A label that identifies the RAG source used for a retrieve-only Knowledge Base evaluation job where you provide your own inference response data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a RAG source used for a retrieve-only Knowledge Base evaluation job where you provide your own inference response data.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluationRagConfigSummary": {
+            "type": "structure",
+            "members": {
+                "bedrockKnowledgeBaseIdentifiers": {
+                    "target": "com.amazonaws.bedrock#EvaluationBedrockKnowledgeBaseIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the Knowledge Base resources used for a Knowledge Base evaluation job where Amazon Bedrock invokes the Knowledge Base for you.</p>"
+                    }
+                },
+                "precomputedRagSourceIdentifiers": {
+                    "target": "com.amazonaws.bedrock#EvaluationPrecomputedRagSourceIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A label that identifies the RAG sources used for a Knowledge Base evaluation job where you provide your own inference response data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the RAG resources used in an Amazon Bedrock Knowledge Base evaluation job. These resources can be Knowledge Bases in Amazon Bedrock\n         or RAG sources outside of Amazon Bedrock that you use to generate your own inference response data.</p>"
             }
         },
         "com.amazonaws.bedrock#EvaluationRatingMethod": {
@@ -3642,16 +3829,24 @@
                     }
                 },
                 "modelIdentifiers": {
-                    "target": "com.amazonaws.bedrock#EvaluationModelIdentifiers",
+                    "target": "com.amazonaws.bedrock#EvaluationBedrockModelIdentifiers",
                     "traits": {
                         "smithy.api#addedDefault": {},
                         "smithy.api#default": [],
+                        "smithy.api#deprecated": {
+                            "since": "2025-03-07",
+                            "message": "Inference identifiers should be retrieved from the inferenceConfigSummary"
+                        },
                         "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the model(s) used for the evaluation job.</p>"
                     }
                 },
                 "ragIdentifiers": {
-                    "target": "com.amazonaws.bedrock#RAGIdentifiers",
+                    "target": "com.amazonaws.bedrock#EvaluationBedrockKnowledgeBaseIdentifiers",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "since": "2025-03-07",
+                            "message": "Inference identifiers should be retrieved from the inferenceConfigSummary"
+                        },
                         "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the knowledge base resources used for a knowledge base evaluation job.</p>"
                     }
                 },
@@ -3659,6 +3854,12 @@
                     "target": "com.amazonaws.bedrock#EvaluatorModelIdentifiers",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the models used to compute the metrics for a knowledge base evaluation job.</p>"
+                    }
+                },
+                "inferenceConfigSummary": {
+                    "target": "com.amazonaws.bedrock#EvaluationInferenceConfigSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the models, Knowledge Bases, or other RAG sources evaluated in a model or Knowledge Base evaluation job.</p>"
                     }
                 },
                 "applicationType": {
@@ -3747,7 +3948,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}$|(^[a-z0-9-]+[.][a-z0-9-]+([.][a-z0-9-]+)*(:[a-z0-9-]+)?$)|^[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}|)$"
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:((:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:inference-profile/(([a-z-]{2,8}.)[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))))$|(^[a-z0-9-]+[.][a-z0-9-]+([.][a-z0-9-]+)*(:[a-z0-9-]+)?$)|^[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}|)$"
             }
         },
         "com.amazonaws.bedrock#EvaluatorModelIdentifiers": {
@@ -10142,7 +10343,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-:]{1,63}/[a-z0-9]{12}$)|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}$)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$"
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-:]{1,63}/[a-z0-9]{12}$)|(:foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$)|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+$)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$"
             }
         },
         "com.amazonaws.bedrock#ModelIdentifier": {
@@ -11227,22 +11428,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains configuration details for knowledge base retrieval and response generation.</p>"
                     }
+                },
+                "precomputedRagSourceConfig": {
+                    "target": "com.amazonaws.bedrock#EvaluationPrecomputedRagSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details about the RAG source used to generate inference response data for a Knowledge Base evaluation job.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains configuration details for retrieval of information and response generation.</p>"
-            }
-        },
-        "com.amazonaws.bedrock#RAGIdentifiers": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.bedrock#KnowledgeBaseId"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 1
-                }
             }
         },
         "com.amazonaws.bedrock#RAGStopSequences": {
