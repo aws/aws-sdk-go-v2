@@ -1,0 +1,8 @@
+{
+    "id": "7df9c5c7-9e4d-4ff9-8fea-385eb0105c02",
+    "type": "documentation",
+    "description": "Add ExemptAssumeRoot parameter to adapt for new AWS AssumeRoot capability.",
+    "modules": [
+        "service/controlcatalog"
+    ]
+}

@@ -167,6 +167,9 @@ func ExampleIngressStringToEvaluate_outputUsage() {
 	var union types.IngressStringToEvaluate
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.IngressStringToEvaluateMemberAnalysis:
+		_ = v.Value // Value is types.IngressAnalysis
+
 	case *types.IngressStringToEvaluateMemberAttribute:
 		_ = v.Value // Value is types.IngressStringEmailAttribute
 
@@ -180,6 +183,7 @@ func ExampleIngressStringToEvaluate_outputUsage() {
 }
 
 var _ types.IngressStringEmailAttribute
+var _ *types.IngressAnalysis
 
 func ExampleIngressTlsProtocolToEvaluate_outputUsage() {
 	var union types.IngressTlsProtocolToEvaluate
@@ -305,6 +309,9 @@ func ExampleRuleBooleanToEvaluate_outputUsage() {
 	var union types.RuleBooleanToEvaluate
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.RuleBooleanToEvaluateMemberAnalysis:
+		_ = v.Value // Value is types.Analysis
+
 	case *types.RuleBooleanToEvaluateMemberAttribute:
 		_ = v.Value // Value is types.RuleBooleanEmailAttribute
 
@@ -320,6 +327,7 @@ func ExampleRuleBooleanToEvaluate_outputUsage() {
 	}
 }
 
+var _ *types.Analysis
 var _ types.RuleBooleanEmailAttribute
 var _ *types.RuleIsInAddressList
 
@@ -401,6 +409,9 @@ func ExampleRuleStringToEvaluate_outputUsage() {
 	var union types.RuleStringToEvaluate
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.RuleStringToEvaluateMemberAnalysis:
+		_ = v.Value // Value is types.Analysis
+
 	case *types.RuleStringToEvaluateMemberAttribute:
 		_ = v.Value // Value is types.RuleStringEmailAttribute
 
@@ -418,6 +429,7 @@ func ExampleRuleStringToEvaluate_outputUsage() {
 
 var _ types.RuleStringEmailAttribute
 var _ *string
+var _ *types.Analysis
 
 func ExampleRuleVerdictToEvaluate_outputUsage() {
 	var union types.RuleVerdictToEvaluate

@@ -1354,6 +1354,11 @@ func validateEvaluationModelConfig(v types.EvaluationModelConfig) error {
 			invalidParams.AddNested("[bedrockModel]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.EvaluationModelConfigMemberPrecomputedInferenceSource:
+		if err := validateEvaluationPrecomputedInferenceSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[precomputedInferenceSource]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1386,6 +1391,75 @@ func validateEvaluationOutputDataConfig(v *types.EvaluationOutputDataConfig) err
 	invalidParams := smithy.InvalidParamsError{Context: "EvaluationOutputDataConfig"}
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationPrecomputedInferenceSource(v *types.EvaluationPrecomputedInferenceSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationPrecomputedInferenceSource"}
+	if v.InferenceSourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InferenceSourceIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationPrecomputedRagSourceConfig(v types.EvaluationPrecomputedRagSourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationPrecomputedRagSourceConfig"}
+	switch uv := v.(type) {
+	case *types.EvaluationPrecomputedRagSourceConfigMemberRetrieveAndGenerateSourceConfig:
+		if err := validateEvaluationPrecomputedRetrieveAndGenerateSourceConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[retrieveAndGenerateSourceConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.EvaluationPrecomputedRagSourceConfigMemberRetrieveSourceConfig:
+		if err := validateEvaluationPrecomputedRetrieveSourceConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[retrieveSourceConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationPrecomputedRetrieveAndGenerateSourceConfig(v *types.EvaluationPrecomputedRetrieveAndGenerateSourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationPrecomputedRetrieveAndGenerateSourceConfig"}
+	if v.RagSourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RagSourceIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationPrecomputedRetrieveSourceConfig(v *types.EvaluationPrecomputedRetrieveSourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationPrecomputedRetrieveSourceConfig"}
+	if v.RagSourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RagSourceIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2287,6 +2361,11 @@ func validateRAGConfig(v types.RAGConfig) error {
 	case *types.RAGConfigMemberKnowledgeBaseConfig:
 		if err := validateKnowledgeBaseConfig(uv.Value); err != nil {
 			invalidParams.AddNested("[knowledgeBaseConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RAGConfigMemberPrecomputedRagSourceConfig:
+		if err := validateEvaluationPrecomputedRagSourceConfig(uv.Value); err != nil {
+			invalidParams.AddNested("[precomputedRagSourceConfig]", err.(smithy.InvalidParamsError))
 		}
 
 	}

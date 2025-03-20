@@ -730,10 +730,21 @@ type IngressStringExpression struct {
 //
 // The following types satisfy this interface:
 //
+//	IngressStringToEvaluateMemberAnalysis
 //	IngressStringToEvaluateMemberAttribute
 type IngressStringToEvaluate interface {
 	isIngressStringToEvaluate()
 }
+
+// The structure type for a string condition stating the Add On ARN and its
+// returned value.
+type IngressStringToEvaluateMemberAnalysis struct {
+	Value IngressAnalysis
+
+	noSmithyDocumentSerde
+}
+
+func (*IngressStringToEvaluateMemberAnalysis) isIngressStringToEvaluate() {}
 
 // The enum type representing the allowed attribute types for a string condition.
 type IngressStringToEvaluateMemberAttribute struct {
@@ -1233,11 +1244,22 @@ type RuleBooleanExpression struct {
 //
 // The following types satisfy this interface:
 //
+//	RuleBooleanToEvaluateMemberAnalysis
 //	RuleBooleanToEvaluateMemberAttribute
 //	RuleBooleanToEvaluateMemberIsInAddressList
 type RuleBooleanToEvaluate interface {
 	isRuleBooleanToEvaluate()
 }
+
+// The Add On ARN and its returned value to evaluate in a boolean condition
+// expression.
+type RuleBooleanToEvaluateMemberAnalysis struct {
+	Value Analysis
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleBooleanToEvaluateMemberAnalysis) isRuleBooleanToEvaluate() {}
 
 // The boolean type representing the allowed attribute types for an email.
 type RuleBooleanToEvaluateMemberAttribute struct {
@@ -1497,11 +1519,22 @@ type RuleStringExpression struct {
 //
 // The following types satisfy this interface:
 //
+//	RuleStringToEvaluateMemberAnalysis
 //	RuleStringToEvaluateMemberAttribute
 //	RuleStringToEvaluateMemberMimeHeaderAttribute
 type RuleStringToEvaluate interface {
 	isRuleStringToEvaluate()
 }
+
+// The Add On ARN and its returned value to evaluate in a string condition
+// expression.
+type RuleStringToEvaluateMemberAnalysis struct {
+	Value Analysis
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleStringToEvaluateMemberAnalysis) isRuleStringToEvaluate() {}
 
 // The email attribute to evaluate in a string condition expression.
 type RuleStringToEvaluateMemberAttribute struct {

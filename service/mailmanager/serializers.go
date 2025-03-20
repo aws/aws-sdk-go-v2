@@ -4163,6 +4163,12 @@ func awsAwsjson10_serializeDocumentIngressStringToEvaluate(v types.IngressString
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.IngressStringToEvaluateMemberAnalysis:
+		av := object.Key("Analysis")
+		if err := awsAwsjson10_serializeDocumentIngressAnalysis(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.IngressStringToEvaluateMemberAttribute:
 		av := object.Key("Attribute")
 		av.String(string(uv.Value))
@@ -4535,6 +4541,12 @@ func awsAwsjson10_serializeDocumentRuleBooleanToEvaluate(v types.RuleBooleanToEv
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.RuleBooleanToEvaluateMemberAnalysis:
+		av := object.Key("Analysis")
+		if err := awsAwsjson10_serializeDocumentAnalysis(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.RuleBooleanToEvaluateMemberAttribute:
 		av := object.Key("Attribute")
 		av.String(string(uv.Value))
@@ -4826,6 +4838,12 @@ func awsAwsjson10_serializeDocumentRuleStringToEvaluate(v types.RuleStringToEval
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.RuleStringToEvaluateMemberAnalysis:
+		av := object.Key("Analysis")
+		if err := awsAwsjson10_serializeDocumentAnalysis(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.RuleStringToEvaluateMemberAttribute:
 		av := object.Key("Attribute")
 		av.String(string(uv.Value))

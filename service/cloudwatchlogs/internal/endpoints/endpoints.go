@@ -242,20 +242,8 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ap-southeast-5",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
-				Region:  "ap-southeast-5",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Hostname: "logs.ap-southeast-5.api.aws",
-			},
-			endpoints.EndpointKey{
 				Region: "ap-southeast-7",
 			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "ap-southeast-7",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Hostname: "logs.ap-southeast-7.api.aws",
-			},
 			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
@@ -443,12 +431,6 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "mx-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
-				Region:  "mx-central-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Hostname: "logs.mx-central-1.api.aws",
-			},
-			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -558,8 +540,20 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "cn-north-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "cn-north-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.cn-north-1.api.amazonwebservices.com.cn",
+			},
+			endpoints.EndpointKey{
 				Region: "cn-northwest-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "cn-northwest-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.cn-northwest-1.api.amazonwebservices.com.cn",
+			},
 		},
 	},
 	{
@@ -730,6 +724,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "logs.us-gov-east-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.us-gov-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -737,6 +737,12 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "logs.us-gov-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.us-gov-west-1.api.aws",
 			},
 		},
 	},

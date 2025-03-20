@@ -155,6 +155,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "datazone.ap-northeast-3.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.ap-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-south-2",
 			}: endpoints.Endpoint{
 				Hostname: "datazone.ap-south-2.api.aws",
@@ -249,6 +254,11 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "me-south-1",
 			}: endpoints.Endpoint{
 				Hostname: "datazone.me-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "mx-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.mx-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "sa-east-1",

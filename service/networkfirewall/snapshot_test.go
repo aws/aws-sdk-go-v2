@@ -218,6 +218,18 @@ func TestCheckSnapshot_DescribeFirewallPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeFlowOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeFlowOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeFlowOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeLoggingConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeLoggingConfiguration(context.Background(), nil, func(o *Options) {
@@ -338,6 +350,30 @@ func TestCheckSnapshot_ListFirewalls(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListFlowOperationResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlowOperationResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFlowOperationResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListFlowOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlowOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFlowOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListRuleGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRuleGroups(context.Background(), nil, func(o *Options) {
@@ -391,6 +427,30 @@ func TestCheckSnapshot_StartAnalysisReport(t *testing.T) {
 	_, err := svc.StartAnalysisReport(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartAnalysisReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartFlowCapture(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartFlowCapture(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartFlowCapture")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartFlowFlush(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartFlowFlush(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartFlowFlush")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -697,6 +757,18 @@ func TestUpdateSnapshot_DescribeFirewallPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeFlowOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeFlowOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeFlowOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeLoggingConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeLoggingConfiguration(context.Background(), nil, func(o *Options) {
@@ -817,6 +889,30 @@ func TestUpdateSnapshot_ListFirewalls(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListFlowOperationResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlowOperationResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFlowOperationResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFlowOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlowOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFlowOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListRuleGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRuleGroups(context.Background(), nil, func(o *Options) {
@@ -870,6 +966,30 @@ func TestUpdateSnapshot_StartAnalysisReport(t *testing.T) {
 	_, err := svc.StartAnalysisReport(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartAnalysisReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartFlowCapture(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartFlowCapture(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartFlowCapture")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartFlowFlush(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartFlowFlush(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartFlowFlush")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

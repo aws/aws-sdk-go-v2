@@ -5562,6 +5562,12 @@ func awsRestjson1_serializeDocumentEvaluationModelConfig(v types.EvaluationModel
 			return err
 		}
 
+	case *types.EvaluationModelConfigMemberPrecomputedInferenceSource:
+		av := object.Key("precomputedInferenceSource")
+		if err := awsRestjson1_serializeDocumentEvaluationPrecomputedInferenceSource(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -5592,6 +5598,66 @@ func awsRestjson1_serializeDocumentEvaluationOutputDataConfig(v *types.Evaluatio
 	if v.S3Uri != nil {
 		ok := object.Key("s3Uri")
 		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationPrecomputedInferenceSource(v *types.EvaluationPrecomputedInferenceSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InferenceSourceIdentifier != nil {
+		ok := object.Key("inferenceSourceIdentifier")
+		ok.String(*v.InferenceSourceIdentifier)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationPrecomputedRagSourceConfig(v types.EvaluationPrecomputedRagSourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.EvaluationPrecomputedRagSourceConfigMemberRetrieveAndGenerateSourceConfig:
+		av := object.Key("retrieveAndGenerateSourceConfig")
+		if err := awsRestjson1_serializeDocumentEvaluationPrecomputedRetrieveAndGenerateSourceConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.EvaluationPrecomputedRagSourceConfigMemberRetrieveSourceConfig:
+		av := object.Key("retrieveSourceConfig")
+		if err := awsRestjson1_serializeDocumentEvaluationPrecomputedRetrieveSourceConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationPrecomputedRetrieveAndGenerateSourceConfig(v *types.EvaluationPrecomputedRetrieveAndGenerateSourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RagSourceIdentifier != nil {
+		ok := object.Key("ragSourceIdentifier")
+		ok.String(*v.RagSourceIdentifier)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationPrecomputedRetrieveSourceConfig(v *types.EvaluationPrecomputedRetrieveSourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RagSourceIdentifier != nil {
+		ok := object.Key("ragSourceIdentifier")
+		ok.String(*v.RagSourceIdentifier)
 	}
 
 	return nil
@@ -6658,6 +6724,12 @@ func awsRestjson1_serializeDocumentRAGConfig(v types.RAGConfig, value smithyjson
 	case *types.RAGConfigMemberKnowledgeBaseConfig:
 		av := object.Key("knowledgeBaseConfig")
 		if err := awsRestjson1_serializeDocumentKnowledgeBaseConfig(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RAGConfigMemberPrecomputedRagSourceConfig:
+		av := object.Key("precomputedRagSourceConfig")
+		if err := awsRestjson1_serializeDocumentEvaluationPrecomputedRagSourceConfig(uv.Value, av); err != nil {
 			return err
 		}
 

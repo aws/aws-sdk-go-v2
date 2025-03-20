@@ -112,6 +112,9 @@ func ExampleEvaluationModelConfig_outputUsage() {
 	case *types.EvaluationModelConfigMemberBedrockModel:
 		_ = v.Value // Value is types.EvaluationBedrockModel
 
+	case *types.EvaluationModelConfigMemberPrecomputedInferenceSource:
+		_ = v.Value // Value is types.EvaluationPrecomputedInferenceSource
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -121,7 +124,30 @@ func ExampleEvaluationModelConfig_outputUsage() {
 	}
 }
 
+var _ *types.EvaluationPrecomputedInferenceSource
 var _ *types.EvaluationBedrockModel
+
+func ExampleEvaluationPrecomputedRagSourceConfig_outputUsage() {
+	var union types.EvaluationPrecomputedRagSourceConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluationPrecomputedRagSourceConfigMemberRetrieveAndGenerateSourceConfig:
+		_ = v.Value // Value is types.EvaluationPrecomputedRetrieveAndGenerateSourceConfig
+
+	case *types.EvaluationPrecomputedRagSourceConfigMemberRetrieveSourceConfig:
+		_ = v.Value // Value is types.EvaluationPrecomputedRetrieveSourceConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EvaluationPrecomputedRetrieveAndGenerateSourceConfig
+var _ *types.EvaluationPrecomputedRetrieveSourceConfig
 
 func ExampleEvaluatorModelConfig_outputUsage() {
 	var union types.EvaluatorModelConfig
@@ -260,6 +286,9 @@ func ExampleRAGConfig_outputUsage() {
 	case *types.RAGConfigMemberKnowledgeBaseConfig:
 		_ = v.Value // Value is types.KnowledgeBaseConfig
 
+	case *types.RAGConfigMemberPrecomputedRagSourceConfig:
+		_ = v.Value // Value is types.EvaluationPrecomputedRagSourceConfig
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -269,6 +298,7 @@ func ExampleRAGConfig_outputUsage() {
 	}
 }
 
+var _ types.EvaluationPrecomputedRagSourceConfig
 var _ types.KnowledgeBaseConfig
 
 func ExampleRequestMetadataFilters_outputUsage() {

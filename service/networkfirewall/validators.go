@@ -150,6 +150,26 @@ func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeFlowOperation struct {
+}
+
+func (*validateOpDescribeFlowOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFlowOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFlowOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFlowOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeResourcePolicy struct {
 }
 
@@ -210,6 +230,46 @@ func (m *validateOpGetAnalysisReportResults) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListFlowOperationResults struct {
+}
+
+func (*validateOpListFlowOperationResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFlowOperationResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFlowOperationResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFlowOperationResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListFlowOperations struct {
+}
+
+func (*validateOpListFlowOperations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFlowOperations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFlowOperationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFlowOperationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -265,6 +325,46 @@ func (m *validateOpStartAnalysisReport) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartAnalysisReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartFlowCapture struct {
+}
+
+func (*validateOpStartFlowCapture) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartFlowCapture) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartFlowCaptureInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartFlowCaptureInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartFlowFlush struct {
+}
+
+func (*validateOpStartFlowFlush) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartFlowFlush) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartFlowFlushInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartFlowFlushInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -498,6 +598,10 @@ func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
 }
 
+func addOpDescribeFlowOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFlowOperation{}, middleware.After)
+}
+
 func addOpDescribeResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeResourcePolicy{}, middleware.After)
 }
@@ -510,6 +614,14 @@ func addOpGetAnalysisReportResultsValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetAnalysisReportResults{}, middleware.After)
 }
 
+func addOpListFlowOperationResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFlowOperationResults{}, middleware.After)
+}
+
+func addOpListFlowOperationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFlowOperations{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -520,6 +632,14 @@ func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartAnalysisReportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAnalysisReport{}, middleware.After)
+}
+
+func addOpStartFlowCaptureValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartFlowCapture{}, middleware.After)
+}
+
+func addOpStartFlowFlushValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartFlowFlush{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -726,6 +846,45 @@ func validateFirewallPolicy(v *types.FirewallPolicy) error {
 	if v.PolicyVariables != nil {
 		if err := validatePolicyVariables(v.PolicyVariables); err != nil {
 			invalidParams.AddNested("PolicyVariables", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowFilter(v *types.FlowFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowFilter"}
+	if v.SourceAddress != nil {
+		if err := validateAddress(v.SourceAddress); err != nil {
+			invalidParams.AddNested("SourceAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationAddress != nil {
+		if err := validateAddress(v.DestinationAddress); err != nil {
+			invalidParams.AddNested("DestinationAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowFilters(v []types.FlowFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowFilters"}
+	for i := range v {
+		if err := validateFlowFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1657,6 +1816,24 @@ func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	}
 }
 
+func validateOpDescribeFlowOperationInput(v *DescribeFlowOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFlowOperationInput"}
+	if v.FirewallArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallArn"))
+	}
+	if v.FlowOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowOperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeResourcePolicyInput(v *DescribeResourcePolicyInput) error {
 	if v == nil {
 		return nil
@@ -1694,6 +1871,39 @@ func validateOpGetAnalysisReportResultsInput(v *GetAnalysisReportResultsInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "GetAnalysisReportResultsInput"}
 	if v.AnalysisReportId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AnalysisReportId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFlowOperationResultsInput(v *ListFlowOperationResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFlowOperationResultsInput"}
+	if v.FirewallArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallArn"))
+	}
+	if v.FlowOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowOperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFlowOperationsInput(v *ListFlowOperationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFlowOperationsInput"}
+	if v.FirewallArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1742,6 +1952,50 @@ func validateOpStartAnalysisReportInput(v *StartAnalysisReportInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartAnalysisReportInput"}
 	if len(v.AnalysisType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AnalysisType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartFlowCaptureInput(v *StartFlowCaptureInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartFlowCaptureInput"}
+	if v.FirewallArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallArn"))
+	}
+	if v.FlowFilters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowFilters"))
+	} else if v.FlowFilters != nil {
+		if err := validateFlowFilters(v.FlowFilters); err != nil {
+			invalidParams.AddNested("FlowFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartFlowFlushInput(v *StartFlowFlushInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartFlowFlushInput"}
+	if v.FirewallArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallArn"))
+	}
+	if v.FlowFilters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowFilters"))
+	} else if v.FlowFilters != nil {
+		if err := validateFlowFilters(v.FlowFilters); err != nil {
+			invalidParams.AddNested("FlowFilters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

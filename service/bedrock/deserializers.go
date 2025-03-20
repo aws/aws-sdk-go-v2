@@ -11379,6 +11379,42 @@ func awsRestjson1_deserializeDocumentErrorMessages(v *[]string, value interface{
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEvaluationBedrockKnowledgeBaseIdentifiers(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected KnowledgeBaseId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEvaluationBedrockModel(v **types.EvaluationBedrockModel, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11414,7 +11450,7 @@ func awsRestjson1_deserializeDocumentEvaluationBedrockModel(v **types.Evaluation
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected EvaluationModelIdentifier to be of type string, got %T instead", value)
+					return fmt.Errorf("expected EvaluationBedrockModelIdentifier to be of type string, got %T instead", value)
 				}
 				sv.ModelIdentifier = ptr.String(jtv)
 			}
@@ -11430,6 +11466,42 @@ func awsRestjson1_deserializeDocumentEvaluationBedrockModel(v **types.Evaluation
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEvaluationBedrockModelIdentifiers(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EvaluationBedrockModelIdentifier to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -11700,6 +11772,47 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEvaluationInferenceConfigSummary(v **types.EvaluationInferenceConfigSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EvaluationInferenceConfigSummary
+	if *v == nil {
+		sv = &types.EvaluationInferenceConfigSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "modelConfigSummary":
+			if err := awsRestjson1_deserializeDocumentEvaluationModelConfigSummary(&sv.ModelConfigSummary, value); err != nil {
+				return err
+			}
+
+		case "ragConfigSummary":
+			if err := awsRestjson1_deserializeDocumentEvaluationRagConfigSummary(&sv.RagConfigSummary, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEvaluationMetricNames(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11766,6 +11879,16 @@ loop:
 			uv = &types.EvaluationModelConfigMemberBedrockModel{Value: mv}
 			break loop
 
+		case "precomputedInferenceSource":
+			var mv types.EvaluationPrecomputedInferenceSource
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEvaluationPrecomputedInferenceSource(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.EvaluationModelConfigMemberPrecomputedInferenceSource{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -11808,7 +11931,7 @@ func awsRestjson1_deserializeDocumentEvaluationModelConfigs(v *[]types.Evaluatio
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentEvaluationModelIdentifiers(v *[]string, value interface{}) error {
+func awsRestjson1_deserializeDocumentEvaluationModelConfigSummary(v **types.EvaluationModelConfigSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11816,31 +11939,36 @@ func awsRestjson1_deserializeDocumentEvaluationModelIdentifiers(v *[]string, val
 		return nil
 	}
 
-	shape, ok := value.([]interface{})
+	shape, ok := value.(map[string]interface{})
 	if !ok {
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []string
+	var sv *types.EvaluationModelConfigSummary
 	if *v == nil {
-		cv = []string{}
+		sv = &types.EvaluationModelConfigSummary{}
 	} else {
-		cv = *v
+		sv = *v
 	}
 
-	for _, value := range shape {
-		var col string
-		if value != nil {
-			jtv, ok := value.(string)
-			if !ok {
-				return fmt.Errorf("expected EvaluationModelIdentifier to be of type string, got %T instead", value)
+	for key, value := range shape {
+		switch key {
+		case "bedrockModelIdentifiers":
+			if err := awsRestjson1_deserializeDocumentEvaluationBedrockModelIdentifiers(&sv.BedrockModelIdentifiers, value); err != nil {
+				return err
 			}
-			col = jtv
-		}
-		cv = append(cv, col)
 
+		case "precomputedInferenceSourceIdentifiers":
+			if err := awsRestjson1_deserializeDocumentEvaluationPrecomputedInferenceSourceIdentifiers(&sv.PrecomputedInferenceSourceIdentifiers, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
 	}
-	*v = cv
+	*v = sv
 	return nil
 }
 
@@ -11873,6 +12001,289 @@ func awsRestjson1_deserializeDocumentEvaluationOutputDataConfig(v **types.Evalua
 					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
 				}
 				sv.S3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEvaluationPrecomputedInferenceSource(v **types.EvaluationPrecomputedInferenceSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EvaluationPrecomputedInferenceSource
+	if *v == nil {
+		sv = &types.EvaluationPrecomputedInferenceSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inferenceSourceIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EvaluationPrecomputedInferenceSourceIdentifier to be of type string, got %T instead", value)
+				}
+				sv.InferenceSourceIdentifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEvaluationPrecomputedInferenceSourceIdentifiers(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EvaluationPrecomputedInferenceSourceIdentifier to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEvaluationPrecomputedRagSourceConfig(v *types.EvaluationPrecomputedRagSourceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.EvaluationPrecomputedRagSourceConfig
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "retrieveAndGenerateSourceConfig":
+			var mv types.EvaluationPrecomputedRetrieveAndGenerateSourceConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEvaluationPrecomputedRetrieveAndGenerateSourceConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.EvaluationPrecomputedRagSourceConfigMemberRetrieveAndGenerateSourceConfig{Value: mv}
+			break loop
+
+		case "retrieveSourceConfig":
+			var mv types.EvaluationPrecomputedRetrieveSourceConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEvaluationPrecomputedRetrieveSourceConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.EvaluationPrecomputedRagSourceConfigMemberRetrieveSourceConfig{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEvaluationPrecomputedRagSourceIdentifiers(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EvaluationPrecomputedRagSourceIdentifier to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEvaluationPrecomputedRetrieveAndGenerateSourceConfig(v **types.EvaluationPrecomputedRetrieveAndGenerateSourceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EvaluationPrecomputedRetrieveAndGenerateSourceConfig
+	if *v == nil {
+		sv = &types.EvaluationPrecomputedRetrieveAndGenerateSourceConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ragSourceIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EvaluationPrecomputedRagSourceIdentifier to be of type string, got %T instead", value)
+				}
+				sv.RagSourceIdentifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEvaluationPrecomputedRetrieveSourceConfig(v **types.EvaluationPrecomputedRetrieveSourceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EvaluationPrecomputedRetrieveSourceConfig
+	if *v == nil {
+		sv = &types.EvaluationPrecomputedRetrieveSourceConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ragSourceIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EvaluationPrecomputedRagSourceIdentifier to be of type string, got %T instead", value)
+				}
+				sv.RagSourceIdentifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEvaluationRagConfigSummary(v **types.EvaluationRagConfigSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EvaluationRagConfigSummary
+	if *v == nil {
+		sv = &types.EvaluationRagConfigSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bedrockKnowledgeBaseIdentifiers":
+			if err := awsRestjson1_deserializeDocumentEvaluationBedrockKnowledgeBaseIdentifiers(&sv.BedrockKnowledgeBaseIdentifiers, value); err != nil {
+				return err
+			}
+
+		case "precomputedRagSourceIdentifiers":
+			if err := awsRestjson1_deserializeDocumentEvaluationPrecomputedRagSourceIdentifiers(&sv.PrecomputedRagSourceIdentifiers, value); err != nil {
+				return err
 			}
 
 		default:
@@ -11972,6 +12383,11 @@ func awsRestjson1_deserializeDocumentEvaluationSummary(v **types.EvaluationSumma
 				return err
 			}
 
+		case "inferenceConfigSummary":
+			if err := awsRestjson1_deserializeDocumentEvaluationInferenceConfigSummary(&sv.InferenceConfigSummary, value); err != nil {
+				return err
+			}
+
 		case "jobArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12000,12 +12416,12 @@ func awsRestjson1_deserializeDocumentEvaluationSummary(v **types.EvaluationSumma
 			}
 
 		case "modelIdentifiers":
-			if err := awsRestjson1_deserializeDocumentEvaluationModelIdentifiers(&sv.ModelIdentifiers, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentEvaluationBedrockModelIdentifiers(&sv.ModelIdentifiers, value); err != nil {
 				return err
 			}
 
 		case "ragIdentifiers":
-			if err := awsRestjson1_deserializeDocumentRAGIdentifiers(&sv.RagIdentifiers, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentEvaluationBedrockKnowledgeBaseIdentifiers(&sv.RagIdentifiers, value); err != nil {
 				return err
 			}
 
@@ -16800,6 +17216,14 @@ loop:
 			uv = &types.RAGConfigMemberKnowledgeBaseConfig{Value: mv}
 			break loop
 
+		case "precomputedRagSourceConfig":
+			var mv types.EvaluationPrecomputedRagSourceConfig
+			if err := awsRestjson1_deserializeDocumentEvaluationPrecomputedRagSourceConfig(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.RAGConfigMemberPrecomputedRagSourceConfig{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -16834,42 +17258,6 @@ func awsRestjson1_deserializeDocumentRagConfigs(v *[]types.RAGConfig, value inte
 		var col types.RAGConfig
 		if err := awsRestjson1_deserializeDocumentRAGConfig(&col, value); err != nil {
 			return err
-		}
-		cv = append(cv, col)
-
-	}
-	*v = cv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentRAGIdentifiers(v *[]string, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.([]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var cv []string
-	if *v == nil {
-		cv = []string{}
-	} else {
-		cv = *v
-	}
-
-	for _, value := range shape {
-		var col string
-		if value != nil {
-			jtv, ok := value.(string)
-			if !ok {
-				return fmt.Errorf("expected KnowledgeBaseId to be of type string, got %T instead", value)
-			}
-			col = jtv
 		}
 		cv = append(cv, col)
 

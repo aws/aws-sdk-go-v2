@@ -1575,12 +1575,35 @@ func validateIngressStringExpression(v *types.IngressStringExpression) error {
 	invalidParams := smithy.InvalidParamsError{Context: "IngressStringExpression"}
 	if v.Evaluate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Evaluate"))
+	} else if v.Evaluate != nil {
+		if err := validateIngressStringToEvaluate(v.Evaluate); err != nil {
+			invalidParams.AddNested("Evaluate", err.(smithy.InvalidParamsError))
+		}
 	}
 	if len(v.Operator) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
 	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIngressStringToEvaluate(v types.IngressStringToEvaluate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IngressStringToEvaluate"}
+	switch uv := v.(type) {
+	case *types.IngressStringToEvaluateMemberAnalysis:
+		if err := validateIngressAnalysis(&uv.Value); err != nil {
+			invalidParams.AddNested("[Analysis]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1838,6 +1861,11 @@ func validateRuleBooleanToEvaluate(v types.RuleBooleanToEvaluate) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RuleBooleanToEvaluate"}
 	switch uv := v.(type) {
+	case *types.RuleBooleanToEvaluateMemberAnalysis:
+		if err := validateAnalysis(&uv.Value); err != nil {
+			invalidParams.AddNested("[Analysis]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.RuleBooleanToEvaluateMemberIsInAddressList:
 		if err := validateRuleIsInAddressList(&uv.Value); err != nil {
 			invalidParams.AddNested("[IsInAddressList]", err.(smithy.InvalidParamsError))
@@ -2014,12 +2042,35 @@ func validateRuleStringExpression(v *types.RuleStringExpression) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RuleStringExpression"}
 	if v.Evaluate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Evaluate"))
+	} else if v.Evaluate != nil {
+		if err := validateRuleStringToEvaluate(v.Evaluate); err != nil {
+			invalidParams.AddNested("Evaluate", err.(smithy.InvalidParamsError))
+		}
 	}
 	if len(v.Operator) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
 	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleStringToEvaluate(v types.RuleStringToEvaluate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleStringToEvaluate"}
+	switch uv := v.(type) {
+	case *types.RuleStringToEvaluateMemberAnalysis:
+		if err := validateAnalysis(&uv.Value); err != nil {
+			invalidParams.AddNested("[Analysis]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

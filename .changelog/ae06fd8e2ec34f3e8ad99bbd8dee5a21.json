@@ -1,0 +1,8 @@
+{
+    "id": "ae06fd8e-2ec3-4f3e-8ad9-9bbd8dee5a21",
+    "type": "feature",
+    "description": "You can now use flow operations to either flush or capture traffic monitored in your firewall's flow table.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

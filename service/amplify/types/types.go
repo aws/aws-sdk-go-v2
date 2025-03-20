@@ -743,7 +743,7 @@ type Step struct {
 	// This member is required.
 	StepName *string
 
-	//  The URL to the artifact for the execution step.
+	//  The URL to the build artifact for the execution step.
 	ArtifactsUrl *string
 
 	//  The context for the current step. Includes a build image if the step is build.
@@ -862,6 +862,9 @@ type Webhook struct {
 	//
 	// This member is required.
 	WebhookUrl *string
+
+	// The unique ID of an Amplify app.
+	AppId *string
 
 	noSmithyDocumentSerde
 }

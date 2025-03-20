@@ -8883,6 +8883,15 @@ func awsRestjson1_deserializeDocumentWebhook(v **types.Webhook, value interface{
 
 	for key, value := range shape {
 		switch key {
+		case "appId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppId to be of type string, got %T instead", value)
+				}
+				sv.AppId = ptr.String(jtv)
+			}
+
 		case "branchName":
 			if value != nil {
 				jtv, ok := value.(string)

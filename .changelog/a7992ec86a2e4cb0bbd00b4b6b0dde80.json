@@ -1,0 +1,8 @@
+{
+    "id": "a7992ec8-6a2e-4cb0-bbd0-0b4b6b0dde80",
+    "type": "feature",
+    "description": "Added appId field to Webhook responses",
+    "modules": [
+        "service/amplify"
+    ]
+}

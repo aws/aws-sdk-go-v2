@@ -638,6 +638,123 @@ type FirewallStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Any number of arrays, where each array is a single flow identified in the scope
+// of the operation. If multiple flows were in the scope of the operation, multiple
+// Flows arrays are returned.
+type Flow struct {
+
+	// Returned as info about age of the flows identified by the flow operation.
+	Age *int32
+
+	// Returns the number of bytes received or transmitted in a specific flow.
+	ByteCount int64
+
+	// A single IP address specification. This is used in the MatchAttributes source and destination
+	// specifications.
+	DestinationAddress *Address
+
+	// The destination port to inspect for. You can specify an individual port, for
+	// example 1994 and you can specify a port range, for example 1990:1994 . To match
+	// with any port, specify ANY .
+	DestinationPort *string
+
+	// Returns the total number of data packets received or transmitted in a flow.
+	PacketCount *int32
+
+	// The protocols to inspect for, specified using the assigned internet protocol
+	// number (IANA) for each protocol. If not specified, this matches with any
+	// protocol.
+	Protocol *string
+
+	// A single IP address specification. This is used in the MatchAttributes source and destination
+	// specifications.
+	SourceAddress *Address
+
+	// The source port to inspect for. You can specify an individual port, for example
+	// 1994 and you can specify a port range, for example 1990:1994 . To match with any
+	// port, specify ANY .
+	SourcePort *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the scope a flow operation. You can use up to 20 filters to configure a
+// single flow operation.
+type FlowFilter struct {
+
+	// A single IP address specification. This is used in the MatchAttributes source and destination
+	// specifications.
+	DestinationAddress *Address
+
+	// The destination port to inspect for. You can specify an individual port, for
+	// example 1994 and you can specify a port range, for example 1990:1994 . To match
+	// with any port, specify ANY .
+	DestinationPort *string
+
+	// The protocols to inspect for, specified using the assigned internet protocol
+	// number (IANA) for each protocol. If not specified, this matches with any
+	// protocol.
+	Protocols []string
+
+	// A single IP address specification. This is used in the MatchAttributes source and destination
+	// specifications.
+	SourceAddress *Address
+
+	// The source port to inspect for. You can specify an individual port, for example
+	// 1994 and you can specify a port range, for example 1990:1994 . To match with any
+	// port, specify ANY .
+	SourcePort *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a flow operation, such as related statuses, unique
+// identifiers, and all filters defined in the operation.
+//
+// Flow operations let you manage the flows tracked in the flow table, also known
+// as the firewall table.
+//
+// A flow is network traffic that is monitored by a firewall, either by stateful
+// or stateless rules. For traffic to be considered part of a flow, it must share
+// Destination, DestinationPort, Direction, Protocol, Source, and SourcePort.
+type FlowOperation struct {
+
+	// Defines the scope a flow operation. You can use up to 20 filters to configure a
+	// single flow operation.
+	FlowFilters []FlowFilter
+
+	// The reqested FlowOperation ignores flows with an age (in seconds) lower than
+	// MinimumFlowAgeInSeconds . You provide this for start commands.
+	MinimumFlowAgeInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// An array of objects with metadata about the requested FlowOperation .
+type FlowOperationMetadata struct {
+
+	// A unique identifier for the flow operation. This ID is returned in the
+	// responses to start and list commands. You provide to describe commands.
+	FlowOperationId *string
+
+	// Returns the status of the flow operation. This string is returned in the
+	// responses to start, list, and describe commands.
+	//
+	// If the status is COMPLETED_WITH_ERRORS , results may be returned with any number
+	// of Flows missing from the response. If the status is FAILED , Flows returned
+	// will be empty.
+	FlowOperationStatus FlowOperationStatus
+
+	// Defines the type of FlowOperation .
+	FlowOperationType FlowOperationType
+
+	// A timestamp indicating when the Suricata engine identified flows impacted by an
+	// operation.
+	FlowRequestTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Describes the amount of time that can pass without any traffic sent through the
 // firewall before the firewall determines that the connection is idle and Network
 // Firewall removes the flow entry from its flow table. Existing connections and
@@ -891,26 +1008,29 @@ type LoggingConfiguration struct {
 // items such as IP address, CIDR range, port number, protocol, and TCP flags.
 type MatchAttributes struct {
 
-	// The destination ports to inspect for. If not specified, this matches with any
-	// destination port. This setting is only used for protocols 6 (TCP) and 17 (UDP).
+	// The destination port to inspect for. You can specify an individual port, for
+	// example 1994 and you can specify a port range, for example 1990:1994 . To match
+	// with any port, specify ANY .
 	//
-	// You can specify individual ports, for example 1994 and you can specify port
-	// ranges, for example 1990:1994 .
+	// This setting is only used for protocols 6 (TCP) and 17 (UDP).
 	DestinationPorts []PortRange
 
 	// The destination IP addresses and address ranges to inspect for, in CIDR
 	// notation. If not specified, this matches with any destination address.
 	Destinations []Address
 
-	// The protocols to inspect for, specified using each protocol's assigned internet
-	// protocol number (IANA). If not specified, this matches with any protocol.
+	// The protocols to inspect for, specified using the assigned internet protocol
+	// number (IANA) for each protocol. If not specified, this matches with any
+	// protocol.
 	Protocols []int32
 
-	// The source ports to inspect for. If not specified, this matches with any source
-	// port. This setting is only used for protocols 6 (TCP) and 17 (UDP).
+	// The source port to inspect for. You can specify an individual port, for example
+	// 1994 and you can specify a port range, for example 1990:1994 . To match with any
+	// port, specify ANY .
 	//
-	// You can specify individual ports, for example 1994 and you can specify port
-	// ranges, for example 1990:1994 .
+	// If not specified, this matches with any source port.
+	//
+	// This setting is only used for protocols 6 (TCP) and 17 (UDP).
 	SourcePorts []PortRange
 
 	// The source IP addresses and address ranges to inspect for, in CIDR notation. If
@@ -1385,9 +1505,11 @@ type ServerCertificateScope struct {
 	// CIDR notation. If not specified, this matches with any destination address.
 	Destinations []Address
 
-	// The protocols to decrypt for inspection, specified using each protocol's
-	// assigned internet protocol number (IANA). Network Firewall currently supports
-	// only TCP.
+	// The protocols to inspect for, specified using the assigned internet protocol
+	// number (IANA) for each protocol. If not specified, this matches with any
+	// protocol.
+	//
+	// Network Firewall currently supports only TCP.
 	Protocols []int32
 
 	// The source ports to decrypt for inspection, in Transmission Control Protocol

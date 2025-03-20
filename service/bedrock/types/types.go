@@ -378,11 +378,30 @@ type EvaluationInferenceConfigMemberRagConfigs struct {
 
 func (*EvaluationInferenceConfigMemberRagConfigs) isEvaluationInferenceConfig() {}
 
+// Identifies the models, Knowledge Bases, or other RAG sources evaluated in a
+// model or Knowledge Base evaluation job.
+type EvaluationInferenceConfigSummary struct {
+
+	// A summary of the models used in an Amazon Bedrock model evaluation job. These
+	// resources can be models in Amazon Bedrock or models outside of Amazon Bedrock
+	// that you use to generate your own inference response data.
+	ModelConfigSummary *EvaluationModelConfigSummary
+
+	// A summary of the RAG resources used in an Amazon Bedrock Knowledge Base
+	// evaluation job. These resources can be Knowledge Bases in Amazon Bedrock or RAG
+	// sources outside of Amazon Bedrock that you use to generate your own inference
+	// response data.
+	RagConfigSummary *EvaluationRagConfigSummary
+
+	noSmithyDocumentSerde
+}
+
 // Defines the models used in the model evaluation job.
 //
 // The following types satisfy this interface:
 //
 //	EvaluationModelConfigMemberBedrockModel
+//	EvaluationModelConfigMemberPrecomputedInferenceSource
 type EvaluationModelConfig interface {
 	isEvaluationModelConfig()
 }
@@ -397,6 +416,31 @@ type EvaluationModelConfigMemberBedrockModel struct {
 
 func (*EvaluationModelConfigMemberBedrockModel) isEvaluationModelConfig() {}
 
+// Defines the model used to generate inference response data for a model
+// evaluation job where you provide your own inference response data.
+type EvaluationModelConfigMemberPrecomputedInferenceSource struct {
+	Value EvaluationPrecomputedInferenceSource
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationModelConfigMemberPrecomputedInferenceSource) isEvaluationModelConfig() {}
+
+// A summary of the models used in an Amazon Bedrock model evaluation job. These
+// resources can be models in Amazon Bedrock or models outside of Amazon Bedrock
+// that you use to generate your own inference response data.
+type EvaluationModelConfigSummary struct {
+
+	// The Amazon Resource Names (ARNs) of the models used for the evaluation job.
+	BedrockModelIdentifiers []string
+
+	// A label that identifies the models used for a model evaluation job where you
+	// provide your own inference response data.
+	PrecomputedInferenceSourceIdentifiers []string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon S3 location where the results of your evaluation job are saved.
 type EvaluationOutputDataConfig struct {
 
@@ -404,6 +448,97 @@ type EvaluationOutputDataConfig struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a model used for a model evaluation job where you provide your own
+// inference response data.
+type EvaluationPrecomputedInferenceSource struct {
+
+	// A label that identifies a model used in a model evaluation job where you
+	// provide your own inference response data.
+	//
+	// This member is required.
+	InferenceSourceIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a RAG source used for a Knowledge Base evaluation job where you
+// provide your own inference response data.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationPrecomputedRagSourceConfigMemberRetrieveAndGenerateSourceConfig
+//	EvaluationPrecomputedRagSourceConfigMemberRetrieveSourceConfig
+type EvaluationPrecomputedRagSourceConfig interface {
+	isEvaluationPrecomputedRagSourceConfig()
+}
+
+// A summary of a RAG source used for a retrieve-and-generate Knowledge Base
+// evaluation job where you provide your own inference response data.
+type EvaluationPrecomputedRagSourceConfigMemberRetrieveAndGenerateSourceConfig struct {
+	Value EvaluationPrecomputedRetrieveAndGenerateSourceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationPrecomputedRagSourceConfigMemberRetrieveAndGenerateSourceConfig) isEvaluationPrecomputedRagSourceConfig() {
+}
+
+// A summary of a RAG source used for a retrieve-only Knowledge Base evaluation
+// job where you provide your own inference response data.
+type EvaluationPrecomputedRagSourceConfigMemberRetrieveSourceConfig struct {
+	Value EvaluationPrecomputedRetrieveSourceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationPrecomputedRagSourceConfigMemberRetrieveSourceConfig) isEvaluationPrecomputedRagSourceConfig() {
+}
+
+// A summary of a RAG source used for a retrieve-and-generate Knowledge Base
+// evaluation job where you provide your own inference response data.
+type EvaluationPrecomputedRetrieveAndGenerateSourceConfig struct {
+
+	// A label that identifies the RAG source used for a retrieve-and-generate
+	// Knowledge Base evaluation job where you provide your own inference response
+	// data.
+	//
+	// This member is required.
+	RagSourceIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a RAG source used for a retrieve-only Knowledge Base evaluation
+// job where you provide your own inference response data.
+type EvaluationPrecomputedRetrieveSourceConfig struct {
+
+	// A label that identifies the RAG source used for a retrieve-only Knowledge Base
+	// evaluation job where you provide your own inference response data.
+	//
+	// This member is required.
+	RagSourceIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the RAG resources used in an Amazon Bedrock Knowledge Base
+// evaluation job. These resources can be Knowledge Bases in Amazon Bedrock or RAG
+// sources outside of Amazon Bedrock that you use to generate your own inference
+// response data.
+type EvaluationRagConfigSummary struct {
+
+	// The Amazon Resource Names (ARNs) of the Knowledge Base resources used for a
+	// Knowledge Base evaluation job where Amazon Bedrock invokes the Knowledge Base
+	// for you.
+	BedrockKnowledgeBaseIdentifiers []string
+
+	// A label that identifies the RAG sources used for a Knowledge Base evaluation
+	// job where you provide your own inference response data.
+	PrecomputedRagSourceIdentifiers []string
 
 	noSmithyDocumentSerde
 }
@@ -449,11 +584,21 @@ type EvaluationSummary struct {
 	// a knowledge base evaluation job.
 	EvaluatorModelIdentifiers []string
 
+	// Identifies the models, Knowledge Bases, or other RAG sources evaluated in a
+	// model or Knowledge Base evaluation job.
+	InferenceConfigSummary *EvaluationInferenceConfigSummary
+
 	// The Amazon Resource Names (ARNs) of the model(s) used for the evaluation job.
+	//
+	// Deprecated: Inference identifiers should be retrieved from the
+	// inferenceConfigSummary
 	ModelIdentifiers []string
 
 	// The Amazon Resource Names (ARNs) of the knowledge base resources used for a
 	// knowledge base evaluation job.
+	//
+	// Deprecated: Inference identifiers should be retrieved from the
+	// inferenceConfigSummary
 	RagIdentifiers []string
 
 	noSmithyDocumentSerde
@@ -2409,6 +2554,7 @@ type QueryTransformationConfiguration struct {
 // The following types satisfy this interface:
 //
 //	RAGConfigMemberKnowledgeBaseConfig
+//	RAGConfigMemberPrecomputedRagSourceConfig
 type RAGConfig interface {
 	isRAGConfig()
 }
@@ -2422,6 +2568,16 @@ type RAGConfigMemberKnowledgeBaseConfig struct {
 }
 
 func (*RAGConfigMemberKnowledgeBaseConfig) isRAGConfig() {}
+
+// Contains configuration details about the RAG source used to generate inference
+// response data for a Knowledge Base evaluation job.
+type RAGConfigMemberPrecomputedRagSourceConfig struct {
+	Value EvaluationPrecomputedRagSourceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*RAGConfigMemberPrecomputedRagSourceConfig) isRAGConfig() {}
 
 // A mapping of a metadata key to a value that it should or should not equal.
 type RequestMetadataBaseFilters struct {
@@ -2952,19 +3108,20 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isCustomizationConfig()                {}
-func (*UnknownUnionMember) isEndpointConfig()                     {}
-func (*UnknownUnionMember) isEvaluationConfig()                   {}
-func (*UnknownUnionMember) isEvaluationDatasetLocation()          {}
-func (*UnknownUnionMember) isEvaluationInferenceConfig()          {}
-func (*UnknownUnionMember) isEvaluationModelConfig()              {}
-func (*UnknownUnionMember) isEvaluatorModelConfig()               {}
-func (*UnknownUnionMember) isInferenceProfileModelSource()        {}
-func (*UnknownUnionMember) isInvocationLogSource()                {}
-func (*UnknownUnionMember) isKnowledgeBaseConfig()                {}
-func (*UnknownUnionMember) isModelDataSource()                    {}
-func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()  {}
-func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig() {}
-func (*UnknownUnionMember) isRAGConfig()                          {}
-func (*UnknownUnionMember) isRequestMetadataFilters()             {}
-func (*UnknownUnionMember) isRetrievalFilter()                    {}
+func (*UnknownUnionMember) isCustomizationConfig()                  {}
+func (*UnknownUnionMember) isEndpointConfig()                       {}
+func (*UnknownUnionMember) isEvaluationConfig()                     {}
+func (*UnknownUnionMember) isEvaluationDatasetLocation()            {}
+func (*UnknownUnionMember) isEvaluationInferenceConfig()            {}
+func (*UnknownUnionMember) isEvaluationModelConfig()                {}
+func (*UnknownUnionMember) isEvaluationPrecomputedRagSourceConfig() {}
+func (*UnknownUnionMember) isEvaluatorModelConfig()                 {}
+func (*UnknownUnionMember) isInferenceProfileModelSource()          {}
+func (*UnknownUnionMember) isInvocationLogSource()                  {}
+func (*UnknownUnionMember) isKnowledgeBaseConfig()                  {}
+func (*UnknownUnionMember) isModelDataSource()                      {}
+func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()    {}
+func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig()   {}
+func (*UnknownUnionMember) isRAGConfig()                            {}
+func (*UnknownUnionMember) isRequestMetadataFilters()               {}
+func (*UnknownUnionMember) isRetrievalFilter()                      {}

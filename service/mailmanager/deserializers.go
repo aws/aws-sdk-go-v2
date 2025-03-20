@@ -9612,6 +9612,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "Analysis":
+			var mv types.IngressAnalysis
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentIngressAnalysis(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.IngressStringToEvaluateMemberAnalysis{Value: mv}
+			break loop
+
 		case "Attribute":
 			var mv types.IngressStringEmailAttribute
 			if value != nil {
@@ -11055,6 +11065,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "Analysis":
+			var mv types.Analysis
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentAnalysis(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RuleBooleanToEvaluateMemberAnalysis{Value: mv}
+			break loop
+
 		case "Attribute":
 			var mv types.RuleBooleanEmailAttribute
 			if value != nil {
@@ -11823,6 +11843,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "Analysis":
+			var mv types.Analysis
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentAnalysis(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RuleStringToEvaluateMemberAnalysis{Value: mv}
+			break loop
+
 		case "Attribute":
 			var mv types.RuleStringEmailAttribute
 			if value != nil {

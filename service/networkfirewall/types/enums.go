@@ -109,6 +109,48 @@ func (FirewallStatusValue) Values() []FirewallStatusValue {
 	}
 }
 
+type FlowOperationStatus string
+
+// Enum values for FlowOperationStatus
+const (
+	FlowOperationStatusCompleted           FlowOperationStatus = "COMPLETED"
+	FlowOperationStatusInProgress          FlowOperationStatus = "IN_PROGRESS"
+	FlowOperationStatusFailed              FlowOperationStatus = "FAILED"
+	FlowOperationStatusCompletedWithErrors FlowOperationStatus = "COMPLETED_WITH_ERRORS"
+)
+
+// Values returns all known values for FlowOperationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowOperationStatus) Values() []FlowOperationStatus {
+	return []FlowOperationStatus{
+		"COMPLETED",
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETED_WITH_ERRORS",
+	}
+}
+
+type FlowOperationType string
+
+// Enum values for FlowOperationType
+const (
+	FlowOperationTypeFlowFlush   FlowOperationType = "FLOW_FLUSH"
+	FlowOperationTypeFlowCapture FlowOperationType = "FLOW_CAPTURE"
+)
+
+// Values returns all known values for FlowOperationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowOperationType) Values() []FlowOperationType {
+	return []FlowOperationType{
+		"FLOW_FLUSH",
+		"FLOW_CAPTURE",
+	}
+}
+
 type GeneratedRulesType string
 
 // Enum values for GeneratedRulesType
