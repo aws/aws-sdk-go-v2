@@ -1,3 +1,7 @@
+# v1.47.0 (2025-03-20)
+
+* **Feature**: You can now use flow operations to either flush or capture traffic monitored in your firewall's flow table.
+
 # v1.46.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

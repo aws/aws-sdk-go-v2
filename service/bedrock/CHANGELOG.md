@@ -1,3 +1,7 @@
+# v1.29.0 (2025-03-20)
+
+* **Feature**: With this release, Bedrock Evaluation will now support bring your own inference responses.
+
 # v1.28.1 (2025-03-14)
 
 * No change notes available for this release.

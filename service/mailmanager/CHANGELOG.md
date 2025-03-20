@@ -1,3 +1,7 @@
+# v1.11.0 (2025-03-20)
+
+* **Feature**: Amazon SES Mail Manager. Extended rule string and boolean expressions to support analysis in condition evaluation. Extended ingress point string expression to support analysis in condition evaluation
+
 # v1.10.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

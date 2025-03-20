@@ -1,3 +1,7 @@
+# v1.47.1 (2025-03-20)
+
+* No change notes available for this release.
+
 # v1.47.0 (2025-03-13)
 
 * **Feature**: Updated CreateLogAnomalyDetector to accept only kms key arn

@@ -1,8 +1,0 @@
-{
-    "id": "79e45bf8-1713-448e-ac20-3a3cc687d588",
-    "type": "feature",
-    "description": "With this release, Bedrock Evaluation will now support bring your own inference responses.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

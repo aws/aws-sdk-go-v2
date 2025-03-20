@@ -1,3 +1,17 @@
+# Release (2025-03-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.32.0](service/amplify/CHANGELOG.md#v1320-2025-03-20)
+  * **Feature**: Added appId field to Webhook responses
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.29.0](service/bedrock/CHANGELOG.md#v1290-2025-03-20)
+  * **Feature**: With this release, Bedrock Evaluation will now support bring your own inference responses.
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.7.2](service/controlcatalog/CHANGELOG.md#v172-2025-03-20)
+  * **Documentation**: Add ExemptAssumeRoot parameter to adapt for new AWS AssumeRoot capability.
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.11.0](service/mailmanager/CHANGELOG.md#v1110-2025-03-20)
+  * **Feature**: Amazon SES Mail Manager. Extended rule string and boolean expressions to support analysis in condition evaluation. Extended ingress point string expression to support analysis in condition evaluation
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.47.0](service/networkfirewall/CHANGELOG.md#v1470-2025-03-20)
+  * **Feature**: You can now use flow operations to either flush or capture traffic monitored in your firewall's flow table.
+
 # Release (2025-03-19)
 
 ## Module Highlights

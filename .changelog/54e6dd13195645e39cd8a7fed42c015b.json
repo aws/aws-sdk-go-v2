@@ -1,8 +1,0 @@
-{
-    "id": "54e6dd13-1956-45e3-9cd8-a7fed42c015b",
-    "type": "feature",
-    "description": "Amazon SES Mail Manager. Extended rule string and boolean expressions to support analysis in condition evaluation. Extended ingress point string expression to support analysis in condition evaluation",
-    "modules": [
-        "service/mailmanager"
-    ]
-}

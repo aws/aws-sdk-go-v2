@@ -1,3 +1,7 @@
+# v1.27.1 (2025-03-20)
+
+* No change notes available for this release.
+
 # v1.27.0 (2025-03-13)
 
 * **Feature**: This release adds support to update projects and environments

@@ -1,3 +1,7 @@
+# v1.32.0 (2025-03-20)
+
+* **Feature**: Added appId field to Webhook responses
+
 # v1.31.0 (2025-03-13)
 
 * **Feature**: Introduced support for Skew Protection. Added enableSkewProtection field to createBranch and updateBranch API.
