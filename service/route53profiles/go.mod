@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/route53profiles
+module github.com/Enflick/aws-sdk-go-v2/service/route53profiles
 
 go 1.20
 

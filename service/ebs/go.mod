@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/ebs
+module github.com/Enflick/aws-sdk-go-v2/service/ebs
 
 go 1.20
 

@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings
+module github.com/Enflick/aws-sdk-go-v2/service/chimesdkmeetings
 
 go 1.20
 

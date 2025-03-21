@@ -12,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/document"
-	internaldocument "github.com/aws/aws-sdk-go-v2/service/bedrockruntime/internal/document"
+	internaldocument "github.com/Enflick/aws-sdk-go-v2/service/bedrockruntime/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
 	smithy "github.com/aws/smithy-go"
 	smithyio "github.com/aws/smithy-go/io"

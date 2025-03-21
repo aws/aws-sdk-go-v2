@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice
+module github.com/Enflick/aws-sdk-go-v2/service/applicationdiscoveryservice
 
 go 1.20
 

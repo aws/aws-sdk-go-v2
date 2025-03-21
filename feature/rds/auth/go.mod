@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/feature/rds/auth
+module github.com/Enflick/aws-sdk-go-v2/feature/rds/auth
 
 go 1.20
 

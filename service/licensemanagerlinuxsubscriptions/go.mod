@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions
+module github.com/Enflick/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions
 
 go 1.20
 

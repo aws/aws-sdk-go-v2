@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/ivs
+module github.com/Enflick/aws-sdk-go-v2/service/ivs
 
 go 1.20
 

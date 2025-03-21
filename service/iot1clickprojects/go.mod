@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/iot1clickprojects
+module github.com/Enflick/aws-sdk-go-v2/service/iot1clickprojects
 
 go 1.20
 

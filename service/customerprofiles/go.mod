@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/customerprofiles
+module github.com/Enflick/aws-sdk-go-v2/service/customerprofiles
 
 go 1.20
 

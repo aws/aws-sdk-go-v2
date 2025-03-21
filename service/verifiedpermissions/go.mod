@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/verifiedpermissions
+module github.com/Enflick/aws-sdk-go-v2/service/verifiedpermissions
 
 go 1.20
 

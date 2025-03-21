@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/b2bi
+module github.com/Enflick/aws-sdk-go-v2/service/b2bi
 
 go 1.20
 

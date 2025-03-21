@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression
+module github.com/Enflick/aws-sdk-go-v2/feature/dynamodb/expression
 
 go 1.20
 

@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/lookoutmetrics
+module github.com/Enflick/aws-sdk-go-v2/service/lookoutmetrics
 
 go 1.20
 

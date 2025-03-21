@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/healthlake
+module github.com/Enflick/aws-sdk-go-v2/service/healthlake
 
 go 1.20
 

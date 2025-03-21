@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/iotfleetwise
+module github.com/Enflick/aws-sdk-go-v2/service/iotfleetwise
 
 go 1.20
 

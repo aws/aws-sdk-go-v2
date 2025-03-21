@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/emrcontainers
+module github.com/Enflick/aws-sdk-go-v2/service/emrcontainers
 
 go 1.20
 

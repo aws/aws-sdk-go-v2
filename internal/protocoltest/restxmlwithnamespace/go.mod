@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace
+module github.com/Enflick/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace
 
 go 1.20
 

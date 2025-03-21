@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/cloudtraildata
+module github.com/Enflick/aws-sdk-go-v2/service/cloudtraildata
 
 go 1.20
 

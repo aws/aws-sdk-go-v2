@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/marketplacemetering
+module github.com/Enflick/aws-sdk-go-v2/service/marketplacemetering
 
 go 1.20
 

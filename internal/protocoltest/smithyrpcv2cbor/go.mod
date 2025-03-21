@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor
+module github.com/Enflick/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor
 
 go 1.20
 

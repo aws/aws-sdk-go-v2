@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime
+module github.com/Enflick/aws-sdk-go-v2/service/sagemakera2iruntime
 
 go 1.20
 

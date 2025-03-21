@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/kafka
+module github.com/Enflick/aws-sdk-go-v2/service/kafka
 
 go 1.20
 

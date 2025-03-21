@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/ioteventsdata
+module github.com/Enflick/aws-sdk-go-v2/service/ioteventsdata
 
 go 1.20
 

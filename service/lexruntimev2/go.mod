@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/lexruntimev2
+module github.com/Enflick/aws-sdk-go-v2/service/lexruntimev2
 
 go 1.20
 

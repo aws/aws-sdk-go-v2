@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/internal/v4a
+module github.com/Enflick/aws-sdk-go-v2/internal/v4a
 
 go 1.20
 

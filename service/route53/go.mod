@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/route53
+module github.com/Enflick/aws-sdk-go-v2/service/route53
 
 go 1.20
 

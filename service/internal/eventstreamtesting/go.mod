@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting
+module github.com/Enflick/aws-sdk-go-v2/service/internal/eventstreamtesting
 
 go 1.20
 

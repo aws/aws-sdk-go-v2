@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/example/service/dynamodb/listItems
+module github.com/Enflick/aws-sdk-go-v2/example/service/dynamodb/listItems
 
 go 1.20
 

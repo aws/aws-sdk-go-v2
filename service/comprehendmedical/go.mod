@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/comprehendmedical
+module github.com/Enflick/aws-sdk-go-v2/service/comprehendmedical
 
 go 1.20
 

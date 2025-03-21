@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/example/service/s3/listObjects
+module github.com/Enflick/aws-sdk-go-v2/example/service/s3/listObjects
 
 go 1.20
 

@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/sfn
+module github.com/Enflick/aws-sdk-go-v2/service/sfn
 
 go 1.20
 

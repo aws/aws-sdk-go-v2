@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/internal/configsources/configtesting
+module github.com/Enflick/aws-sdk-go-v2/internal/configsources/configtesting
 
 go 1.20
 

@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/pcaconnectorad
+module github.com/Enflick/aws-sdk-go-v2/service/pcaconnectorad
 
 go 1.20
 

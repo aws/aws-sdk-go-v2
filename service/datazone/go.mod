@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/datazone
+module github.com/Enflick/aws-sdk-go-v2/service/datazone
 
 go 1.20
 

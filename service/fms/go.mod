@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/fms
+module github.com/Enflick/aws-sdk-go-v2/service/fms
 
 go 1.20
 

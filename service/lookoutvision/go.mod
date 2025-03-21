@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/lookoutvision
+module github.com/Enflick/aws-sdk-go-v2/service/lookoutvision
 
 go 1.20
 

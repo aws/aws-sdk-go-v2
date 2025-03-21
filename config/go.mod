@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/config
+module github.com/Enflick/aws-sdk-go-v2/config
 
 go 1.20
 

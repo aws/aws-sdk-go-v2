@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness
+module github.com/Enflick/aws-sdk-go-v2/service/route53recoveryreadiness
 
 go 1.20
 

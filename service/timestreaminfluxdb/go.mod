@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb
+module github.com/Enflick/aws-sdk-go-v2/service/timestreaminfluxdb
 
 go 1.20
 

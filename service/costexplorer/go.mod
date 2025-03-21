@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/costexplorer
+module github.com/Enflick/aws-sdk-go-v2/service/costexplorer
 
 go 1.20
 

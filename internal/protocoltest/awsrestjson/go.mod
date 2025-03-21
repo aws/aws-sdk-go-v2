@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson
+module github.com/Enflick/aws-sdk-go-v2/internal/protocoltest/awsrestjson
 
 go 1.20
 

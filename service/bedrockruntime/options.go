@@ -6,7 +6,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
+	internalauthsmithy "github.com/Enflick/aws-sdk-go-v2/internal/auth/smithy"
 	smithyauth "github.com/aws/smithy-go/auth"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"

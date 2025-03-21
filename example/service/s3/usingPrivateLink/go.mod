@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/example/service/s3/usingPrivateLink
+module github.com/Enflick/aws-sdk-go-v2/example/service/s3/usingPrivateLink
 
 go 1.20
 

@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/internal/codegen/defaults
+module github.com/Enflick/aws-sdk-go-v2/internal/codegen/defaults
 
 go 1.20
 

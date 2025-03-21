@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/auditmanager
+module github.com/Enflick/aws-sdk-go-v2/service/auditmanager
 
 go 1.20
 

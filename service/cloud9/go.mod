@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/cloud9
+module github.com/Enflick/aws-sdk-go-v2/service/cloud9
 
 go 1.20
 

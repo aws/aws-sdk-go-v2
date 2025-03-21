@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/chatbot
+module github.com/Enflick/aws-sdk-go-v2/service/chatbot
 
 go 1.20
 

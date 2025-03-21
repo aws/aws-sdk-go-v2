@@ -7,4 +7,6 @@ require (
 
 replace github.com/aws/aws-sdk-go-v2 => ./
 
+replace github.com/aws/aws-sdk-go-v2/aws => ./aws
+
 go 1.20

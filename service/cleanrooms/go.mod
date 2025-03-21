@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/cleanrooms
+module github.com/Enflick/aws-sdk-go-v2/service/cleanrooms
 
 go 1.20
 

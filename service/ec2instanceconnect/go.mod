@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect
+module github.com/Enflick/aws-sdk-go-v2/service/ec2instanceconnect
 
 go 1.20
 

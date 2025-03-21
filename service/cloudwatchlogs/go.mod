@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs
+module github.com/Enflick/aws-sdk-go-v2/service/cloudwatchlogs
 
 go 1.20
 

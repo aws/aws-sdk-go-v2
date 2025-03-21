@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/internal/configsources
+module github.com/Enflick/aws-sdk-go-v2/internal/configsources
 
 go 1.20
 
