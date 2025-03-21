@@ -5,4 +5,6 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0
 )
 
+replace github.com/aws/aws-sdk-go-v2 => ./
+
 go 1.20
