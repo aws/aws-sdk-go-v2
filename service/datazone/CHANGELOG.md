@@ -1,3 +1,7 @@
+# v1.28.0 (2025-03-21)
+
+* **Feature**: Add support for overriding selection of default AWS IAM Identity Center instance as part of Amazon DataZone domain APIs.
+
 # v1.27.1 (2025-03-20)
 
 * No change notes available for this release.

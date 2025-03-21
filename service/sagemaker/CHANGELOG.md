@@ -1,3 +1,7 @@
+# v1.182.0 (2025-03-21)
+
+* **Feature**: This release does the following: 1.) Adds DurationHours as a required field to the SearchTrainingPlanOfferings action in the SageMaker AI API; 2.) Adds support for G6e instance types for SageMaker AI inference optimization jobs.
+
 # v1.181.0 (2025-03-19)
 
 * **Feature**: Added support for g6, g6e, m6i, c6i instance types in SageMaker Processing Jobs.

@@ -1,8 +1,0 @@
-{
-    "id": "8e00ee30-3643-425b-a037-7c823e7a5efd",
-    "type": "feature",
-    "description": "Adds dual-stack (IPv4 and IPv6) endpoint support for route53-recovery-control-config operations, opt-in dual-stack addresses for cluster endpoints, and UpdateCluster API to update the network-type of clusters between IPv4 and dual-stack.",
-    "modules": [
-        "service/route53recoverycontrolconfig"
-    ]
-}

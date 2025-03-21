@@ -1,3 +1,15 @@
+# Release (2025-03-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.30.0](service/bedrock/CHANGELOG.md#v1300-2025-03-21)
+  * **Feature**: A CustomModelUnit(CMU) is an abstract view of the hardware utilization that Bedrock needs to host a a single copy of your custom imported model. Bedrock determines the number of CMUs that a model copy needs when you import the custom model. You can use CMUs to estimate the cost of Inference's.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.28.0](service/datazone/CHANGELOG.md#v1280-2025-03-21)
+  * **Feature**: Add support for overriding selection of default AWS IAM Identity Center instance as part of Amazon DataZone domain APIs.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.27.0](service/route53recoverycontrolconfig/CHANGELOG.md#v1270-2025-03-21)
+  * **Feature**: Adds dual-stack (IPv4 and IPv6) endpoint support for route53-recovery-control-config operations, opt-in dual-stack addresses for cluster endpoints, and UpdateCluster API to update the network-type of clusters between IPv4 and dual-stack.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.182.0](service/sagemaker/CHANGELOG.md#v11820-2025-03-21)
+  * **Feature**: This release does the following: 1.) Adds DurationHours as a required field to the SearchTrainingPlanOfferings action in the SageMaker AI API; 2.) Adds support for G6e instance types for SageMaker AI inference optimization jobs.
+
 # Release (2025-03-20)
 
 ## Module Highlights

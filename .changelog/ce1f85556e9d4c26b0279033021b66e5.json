@@ -1,8 +1,0 @@
-{
-    "id": "ce1f8555-6e9d-4c26-b027-9033021b66e5",
-    "type": "feature",
-    "description": "Add support for overriding selection of default AWS IAM Identity Center instance as part of Amazon DataZone domain APIs.",
-    "modules": [
-        "service/datazone"
-    ]
-}

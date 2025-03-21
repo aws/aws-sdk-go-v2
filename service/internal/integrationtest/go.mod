@@ -26,7 +26,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.51.1
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.31.1
-	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.1
+	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.2
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.42.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.210.1
@@ -45,7 +45,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/glue v1.107.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.1
-	github.com/aws/aws-sdk-go-v2/service/iam v1.40.1
+	github.com/aws/aws-sdk-go-v2/service/iam v1.40.2
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.1
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.33.1
@@ -69,7 +69,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ses v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.35.2
 	github.com/aws/aws-sdk-go-v2/service/shield v1.30.1
-	github.com/aws/aws-sdk-go-v2/service/snowball v1.31.1
+	github.com/aws/aws-sdk-go-v2/service/snowball v1.31.2
 	github.com/aws/aws-sdk-go-v2/service/sns v1.34.2
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.38.1
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.57.2
