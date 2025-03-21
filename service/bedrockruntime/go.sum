@@ -1,9 +1,13 @@
 github.com/Enflick/aws-sdk-go-v2 v1.0.0 h1:SLF9VAnnuiIVEBP7IwmcMG+jk4ZSvtKCUm7EqroqvmY=
 github.com/Enflick/aws-sdk-go-v2 v1.0.0/go.mod h1:iWRaPnxOA+H/4w3rG0gCvbLxseTMxgPMwVi8JmLLNrs=
+github.com/Enflick/aws-sdk-go-v2 v1.0.1-0.20250321225839-d02e88778f51 h1:lpnt83GicbX71QZjdUjUh1ED2i71Jh0X631UiDycOkc=
+github.com/Enflick/aws-sdk-go-v2 v1.0.1-0.20250321225839-d02e88778f51/go.mod h1:bz7vjmT1c7CMXkBXslkXa/vHdycgkpUS0cZ/1/0rAsw=
 github.com/Enflick/aws-sdk-go-v2/internal/configsources v0.0.0-20250321221718-8b300ea454e4 h1:wxqpE7vMRzmMBs/ySDk0S3YugB0or5caDUeQqF+JzGE=
 github.com/Enflick/aws-sdk-go-v2/internal/configsources v0.0.0-20250321221718-8b300ea454e4/go.mod h1:TvgAv4DUzLDE5KUN3nilvU10lxZVg1QARcx9GR4VMv4=
 github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.26.1 h1:nTOWCzqT20Muat5amktS5NwATkp6AWBTMYweQMtXvBk=
 github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.26.1/go.mod h1:0b5Rq7rUvSQFYHI1UO0zFTV/S6j6DUyuykXA80C+YOI=
+github.com/aws/smithy-go v1.20.0 h1:6+kZsCXZwKxZS9RfISnPc4EXlHoyAkm2hPuM8X2BrrQ=
+github.com/aws/smithy-go v1.20.0/go.mod h1:uo5RKksAl4PzhqaAbjd4rLgFoq5koTsQKYuGe7dklGc=
 github.com/aws/smithy-go v1.20.1 h1:4SZlSlMr36UEqC7XOyRVb27XMeZubNcBNN+9IgEPIQw=
 github.com/aws/smithy-go v1.20.1/go.mod h1:krry+ya/rV9RDcV/Q16kpu6ypI4K2czasz0NC3qS14E=
 github.com/aws/smithy-go v1.20.3 h1:ryHwveWzPV5BIof6fyDvor6V3iUL7nTfiTKXHiW05nE=
