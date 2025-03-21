@@ -249,6 +249,12 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "cleanrooms-fips.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "cleanrooms.us-east-1.api.aws",
@@ -264,6 +270,12 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "cleanrooms-fips.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "cleanrooms.us-east-2.api.aws",
@@ -276,6 +288,12 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "cleanrooms-fips.us-west-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "cleanrooms-fips.us-west-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region:  "us-west-2",

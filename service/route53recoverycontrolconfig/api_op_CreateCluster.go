@@ -43,6 +43,10 @@ type CreateClusterInput struct {
 	// idempotent API request with an action, specify a client token in the request.
 	ClientToken *string
 
+	// The network type of the cluster. NetworkType can be one of the following: IPV4,
+	// DUALSTACK.
+	NetworkType types.NetworkType
+
 	// The tags associated with the cluster.
 	Tags map[string]string
 

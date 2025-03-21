@@ -1,0 +1,8 @@
+{
+    "id": "0c023433-110c-47ab-8b27-deefb2952ad8",
+    "type": "feature",
+    "description": "This release does the following: 1.) Adds DurationHours as a required field to the SearchTrainingPlanOfferings action in the SageMaker AI API; 2.) Adds support for G6e instance types for SageMaker AI inference optimization jobs.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

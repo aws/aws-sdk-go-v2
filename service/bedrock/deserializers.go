@@ -4257,6 +4257,11 @@ func awsRestjson1_deserializeOpDocumentGetImportedModelOutput(v **GetImportedMod
 				sv.CreationTime = ptr.Time(t)
 			}
 
+		case "customModelUnits":
+			if err := awsRestjson1_deserializeDocumentCustomModelUnits(&sv.CustomModelUnits, value); err != nil {
+				return err
+			}
+
 		case "instructSupported":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11264,6 +11269,59 @@ func awsRestjson1_deserializeDocumentCustomModelSummaryList(v *[]types.CustomMod
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomModelUnits(v **types.CustomModelUnits, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomModelUnits
+	if *v == nil {
+		sv = &types.CustomModelUnits{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customModelUnitsPerModelCopy":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CustomModelUnitsPerModelCopy = ptr.Int32(int32(i64))
+			}
+
+		case "customModelUnitsVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomModelUnitsVersion to be of type string, got %T instead", value)
+				}
+				sv.CustomModelUnitsVersion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

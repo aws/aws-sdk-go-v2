@@ -42,6 +42,11 @@ func (c *Client) SearchTrainingPlanOfferings(ctx context.Context, params *Search
 
 type SearchTrainingPlanOfferingsInput struct {
 
+	// The desired duration in hours for the training plan offerings.
+	//
+	// This member is required.
+	DurationHours *int64
+
 	// The number of instances you want to reserve in the training plan offerings.
 	// This allows you to specify the quantity of compute resources needed for your
 	// SageMaker training jobs or SageMaker HyperPod clusters, helping you find
@@ -73,9 +78,6 @@ type SearchTrainingPlanOfferingsInput struct {
 	//
 	// This member is required.
 	TargetResources []types.SageMakerResourceName
-
-	// The desired duration in hours for the training plan offerings.
-	DurationHours *int64
 
 	// A filter to search for reserved capacity offerings with an end time before a
 	// specified date.

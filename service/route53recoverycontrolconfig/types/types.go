@@ -111,6 +111,10 @@ type Cluster struct {
 	// The name of the cluster.
 	Name *string
 
+	// The network type of the cluster. NetworkType can be one of the following: IPV4,
+	// DUALSTACK.
+	NetworkType NetworkType
+
 	// The Amazon Web Services account ID of the cluster owner.
 	Owner *string
 

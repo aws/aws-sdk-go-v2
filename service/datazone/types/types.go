@@ -5190,6 +5190,9 @@ func (*SelfGrantStatusOutputMemberRedshiftSelfGrantStatus) isSelfGrantStatusOutp
 // The single sign-on details in Amazon DataZone.
 type SingleSignOn struct {
 
+	// The ARN of the IDC instance.
+	IdcInstanceArn *string
+
 	// The type of single sign-on in Amazon DataZone.
 	Type AuthType
 

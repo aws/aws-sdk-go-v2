@@ -158,6 +158,15 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region:  "aws-global",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "iam.global.api.aws",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "aws-global-fips",
 			}: endpoints.Endpoint{
 				Hostname: "iam-fips.amazonaws.com",

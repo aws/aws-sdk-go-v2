@@ -1,0 +1,8 @@
+{
+    "id": "9f4866e9-f16d-41ac-a6de-d0f2bfb6cb2b",
+    "type": "feature",
+    "description": "A CustomModelUnit(CMU) is an abstract view of the hardware utilization that Bedrock needs to host a a single copy of your custom imported model. Bedrock determines the number of CMUs that a model copy needs when you import the custom model. You can use CMUs to estimate the cost of Inference's.",
+    "modules": [
+        "service/bedrock"
+    ]
+}

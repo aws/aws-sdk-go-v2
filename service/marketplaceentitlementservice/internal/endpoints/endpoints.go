@@ -154,6 +154,12 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-east-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "entitlement-marketplace.us-east-1.api.aws",
+			},
 		},
 	},
 	{

@@ -19041,6 +19041,11 @@ func awsRestjson1_serializeDocumentSingleSignOn(v *types.SingleSignOn, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.IdcInstanceArn != nil {
+		ok := object.Key("idcInstanceArn")
+		ok.String(*v.IdcInstanceArn)
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))

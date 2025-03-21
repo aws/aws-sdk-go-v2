@@ -243,6 +243,12 @@ var defaultPartitions = endpoints.Partitions{
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "route53profiles-fips.ca-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "route53profiles.ca-central-1.api.aws",
@@ -250,6 +256,12 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "ca-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "route53profiles-fips.ca-west-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region:  "ca-west-1",
 				Variant: endpoints.DualStackVariant,
@@ -369,6 +381,12 @@ var defaultPartitions = endpoints.Partitions{
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "route53profiles-fips.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "route53profiles.us-east-1.api.aws",
@@ -376,6 +394,12 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-east-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "route53profiles-fips.us-east-2.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region:  "us-east-2",
 				Variant: endpoints.DualStackVariant,
@@ -387,6 +411,12 @@ var defaultPartitions = endpoints.Partitions{
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "route53profiles-fips.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "route53profiles.us-west-1.api.aws",
@@ -394,6 +424,12 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "route53profiles-fips.us-west-2.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region:  "us-west-2",
 				Variant: endpoints.DualStackVariant,
@@ -561,6 +597,12 @@ var defaultPartitions = endpoints.Partitions{
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "route53profiles-fips.us-gov-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "route53profiles.us-gov-east-1.api.aws",
@@ -568,6 +610,12 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "route53profiles-fips.us-gov-west-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region:  "us-gov-west-1",
 				Variant: endpoints.DualStackVariant,

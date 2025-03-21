@@ -49286,6 +49286,15 @@ func awsRestjson1_deserializeDocumentSingleSignOn(v **types.SingleSignOn, value 
 
 	for key, value := range shape {
 		switch key {
+		case "idcInstanceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IdcInstanceArn = ptr.String(jtv)
+			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
