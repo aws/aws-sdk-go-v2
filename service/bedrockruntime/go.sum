@@ -4,5 +4,8 @@ github.com/Enflick/aws-sdk-go-v2/internal/configsources v0.0.0-20250321221718-8b
 github.com/Enflick/aws-sdk-go-v2/internal/configsources v0.0.0-20250321221718-8b300ea454e4/go.mod h1:TvgAv4DUzLDE5KUN3nilvU10lxZVg1QARcx9GR4VMv4=
 github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.26.1 h1:nTOWCzqT20Muat5amktS5NwATkp6AWBTMYweQMtXvBk=
 github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.26.1/go.mod h1:0b5Rq7rUvSQFYHI1UO0zFTV/S6j6DUyuykXA80C+YOI=
+github.com/aws/smithy-go v1.20.1 h1:4SZlSlMr36UEqC7XOyRVb27XMeZubNcBNN+9IgEPIQw=
+github.com/aws/smithy-go v1.20.1/go.mod h1:krry+ya/rV9RDcV/Q16kpu6ypI4K2czasz0NC3qS14E=
 github.com/aws/smithy-go v1.20.3 h1:ryHwveWzPV5BIof6fyDvor6V3iUL7nTfiTKXHiW05nE=
 github.com/aws/smithy-go v1.20.3/go.mod h1:krry+ya/rV9RDcV/Q16kpu6ypI4K2czasz0NC3qS14E=
+github.com/jmespath/go-jmespath v0.4.0/go.mod h1:T8mJZnbsbmF+m6zOOFylbeCJqk5+pHWvzYPziyZiYoo=
