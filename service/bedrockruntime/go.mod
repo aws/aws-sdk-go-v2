@@ -18,4 +18,4 @@ replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../internal/co
 
 replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../internal/endpoints/v2/
 
-replace github.com/aws/smithy-go => github.com/aws/smithy-go v1.19.0
+replace github.com/aws/smithy-go => github.com/aws/smithy-go v1.20.0
