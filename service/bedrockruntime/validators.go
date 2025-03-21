@@ -5,7 +5,7 @@ package bedrockruntime
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	"github.com/Enflick/aws-sdk-go-v2/service/bedrockruntime/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )

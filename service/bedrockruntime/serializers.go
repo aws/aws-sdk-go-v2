@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/document"
 	internaldocument "github.com/Enflick/aws-sdk-go-v2/service/bedrockruntime/internal/document"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	"github.com/Enflick/aws-sdk-go-v2/service/bedrockruntime/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
