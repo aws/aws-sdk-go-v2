@@ -1,6 +1,8 @@
 package transfermanager
 
-import "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+import (
+	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+)
 
 // Options provides params needed for transfer api calls
 type Options struct {
@@ -16,7 +18,7 @@ type Options struct {
 	MultipartUploadThreshold int64
 
 	// Option to disable checksum validation for download
-	DisableChecksum bool
+	DisableChecksumValidation bool
 
 	// Checksum algorithm to use for upload
 	ChecksumAlgorithm types.ChecksumAlgorithm
@@ -27,6 +29,15 @@ type Options struct {
 	//
 	// The concurrency pool is not shared between calls to Upload.
 	Concurrency int
+
+	// The type indicating if object is multi-downloaded in parts or ranges
+	GetObjectType types.GetObjectType
+
+	// PartBodyMaxRetries is the number of retry attempts to make for failed part downloads.
+	PartBodyMaxRetries int
+
+	// Max size for the get object buffer
+	GetBufferSize int64
 }
 
 func (o *Options) init() {
@@ -53,6 +64,24 @@ func resolveChecksumAlgorithm(o *Options) {
 func resolveMultipartUploadThreshold(o *Options) {
 	if o.MultipartUploadThreshold == 0 {
 		o.MultipartUploadThreshold = defaultMultipartUploadThreshold
+	}
+}
+
+func resolveGetObjectType(o *Options) {
+	if o.GetObjectType == "" {
+		o.GetObjectType = types.GetObjectParts
+	}
+}
+
+func resolvePartBodyMaxRetries(o *Options) {
+	if o.PartBodyMaxRetries == 0 {
+		o.PartBodyMaxRetries = defaultPartBodyMaxRetries
+	}
+}
+
+func resolveGetBufferSize(o *Options) {
+	if o.GetBufferSize == 0 {
+		o.GetBufferSize = defaultGetBufferSize
 	}
 }
 
