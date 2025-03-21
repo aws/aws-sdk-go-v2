@@ -29768,6 +29768,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The single sign-on user assignment in Amazon DataZone.</p>"
                     }
+                },
+                "idcInstanceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IDC instance.</p>",
+                        "smithy.api#pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"
+                    }
                 }
             },
             "traits": {

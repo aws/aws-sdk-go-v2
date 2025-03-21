@@ -2556,6 +2556,32 @@
                 "target": "com.amazonaws.bedrock#CustomModelSummary"
             }
         },
+        "com.amazonaws.bedrock#CustomModelUnits": {
+            "type": "structure",
+            "members": {
+                "customModelUnitsPerModelCopy": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of custom model units used to host a model copy. </p>"
+                    }
+                },
+                "customModelUnitsVersion": {
+                    "target": "com.amazonaws.bedrock#CustomModelUnitsVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the custom model unit. Use to determine the billing rate for the custom model unit.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <code>CustomModelUnit</code> (CMU) is an abstract view of the hardware utilization that \n     Amazon Bedrock needs to host a single copy of your custom model. A model copy represents a \n     single instance of your imported model that is ready to serve inference requests. Amazon Bedrock \n     determines the number of custom model units that a model copy needs when you import the custom model.\n </p>\n         <p>You can use <code>CustomModelUnits</code> to estimate the cost of running\n     your custom model. For more information, see Calculate the cost of running a custom model in the\n     Amazon Bedrock user guide.\n </p>"
+            }
+        },
+        "com.amazonaws.bedrock#CustomModelUnitsVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^v\\d+.\\d+$"
+            }
+        },
         "com.amazonaws.bedrock#CustomizationConfig": {
             "type": "union",
             "members": {
@@ -5026,6 +5052,12 @@
                     "target": "com.amazonaws.bedrock#InstructSupported",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies if the imported model supports converse.</p>"
+                    }
+                },
+                "customModelUnits": {
+                    "target": "com.amazonaws.bedrock#CustomModelUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the hardware utilization for a single copy of the model.</p>"
                     }
                 }
             },
