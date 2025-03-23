@@ -15,7 +15,6 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"sync"
 	"testing"
 	"time"
 
@@ -220,11 +219,19 @@ type putObjectTestData struct {
 	ExpectError string
 }
 
-type getObjectTestData struct {
+type downloadObjectTestData struct {
 	Body        io.Reader
 	ExpectBody  []byte
 	ExpectError string
 	OptFns      []func(*Options)
+}
+
+type getObjectTestData struct {
+	Body            io.Reader
+	ExpectBody      []byte
+	ExpectGetError  string
+	ExpectReadError string
+	OptFns          []func(*Options)
 }
 
 // UniqueID returns a unique UUID-like identifier for use in generating
@@ -291,47 +298,50 @@ func testGetObject(t *testing.T, bucket string, testData getObjectTestData) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	var b []byte
-	r := NewConcurrentReader()
-	var wg sync.WaitGroup
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		b, err = ioutil.ReadAll(r)
-		if err != nil {
-			t.Errorf("error when reading response body: %v", err)
-		}
-	}()
-
-	_, err = s3TransferManagerClient.GetObject(context.Background(),
+	out, err := s3TransferManagerClient.GetObject(context.Background(),
 		&GetObjectInput{
 			Bucket: bucket,
 			Key:    key,
-			Reader: r,
 		}, testData.OptFns...)
-	wg.Wait()
+
 	if err != nil {
-		if len(testData.ExpectError) == 0 {
-			t.Fatalf("expect no error, got %v", err)
+		if len(testData.ExpectGetError) == 0 {
+			t.Fatalf("expect no error when getting object, got %v", err)
 		}
-		if e, a := testData.ExpectError, err.Error(); !strings.Contains(a, e) {
+		if e, a := testData.ExpectGetError, err.Error(); !strings.Contains(a, e) {
 			t.Fatalf("expect error to contain %v, got %v", e, a)
 		}
 	} else {
-		if e := testData.ExpectError; len(e) != 0 {
-			t.Fatalf("expect error: %v, got none", e)
+		if e := testData.ExpectGetError; len(e) != 0 {
+			t.Fatalf("expect error when getting object: %v, got none", e)
 		}
 	}
-	if len(testData.ExpectError) != 0 {
+	if len(testData.ExpectGetError) != 0 {
 		return
 	}
 
+	b, err := io.ReadAll(out.Body)
+	if err != nil {
+		if len(testData.ExpectReadError) == 0 {
+			t.Fatalf("expect no error when reading responses, got %v", err)
+		}
+		if e, a := testData.ExpectReadError, err.Error(); !strings.Contains(a, e) {
+			t.Fatalf("expect error to contain %v, got %v", e, a)
+		}
+	} else {
+		if e := testData.ExpectReadError; len(e) != 0 {
+			t.Fatalf("expect error when reading responses: %v, got none", e)
+		}
+	}
+	if len(testData.ExpectReadError) != 0 {
+		return
+	}
 	if e, a := testData.ExpectBody, b; !bytes.EqualFold(e, a) {
 		t.Errorf("expect %s, got %s", e, a)
 	}
 }
 
-func testDownloadObject(t *testing.T, bucket string, testData getObjectTestData) {
+func testDownloadObject(t *testing.T, bucket string, testData downloadObjectTestData) {
 	key := UniqueID()
 
 	_, err := s3Client.PutObject(context.Background(),
