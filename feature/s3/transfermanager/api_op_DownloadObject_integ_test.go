@@ -11,7 +11,7 @@ import (
 )
 
 func TestInteg_DownloadObject(t *testing.T) {
-	cases := map[string]getObjectTestData{
+	cases := map[string]downloadObjectTestData{
 		"part get seekable body":     {Body: strings.NewReader("hello world"), ExpectBody: []byte("hello world")},
 		"part get empty string body": {Body: strings.NewReader(""), ExpectBody: []byte("")},
 		"part get multipart body":    {Body: bytes.NewReader(largeObjectBuf), ExpectBody: largeObjectBuf},

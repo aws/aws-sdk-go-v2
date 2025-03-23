@@ -8,7 +8,6 @@ import (
 	"io/ioutil"
 	"reflect"
 	"strings"
-	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -32,7 +31,8 @@ func TestGetObject(t *testing.T) {
 		partNumber        int32
 		partsCount        int32
 		expectParts       []int32
-		expectErr         string
+		expectGetErr      string
+		expectReadErr     string
 		dataValidationFn  func(*testing.T, []byte)
 	}{
 		"range download in order": {
@@ -71,7 +71,7 @@ func TestGetObject(t *testing.T) {
 				GetObjectType: types.GetObjectRanges,
 			},
 			expectInvocations: 2,
-			expectErr:         "s3 service error",
+			expectReadErr:     "s3 service error",
 		},
 		"content length download single chunk": {
 			data:        buf2MB,
@@ -135,7 +135,7 @@ func TestGetObject(t *testing.T) {
 				GetObjectType: types.GetObjectRanges,
 			},
 			expectInvocations: 1,
-			expectErr:         "unexpected EOF",
+			expectReadErr:     "unexpected EOF",
 		},
 		"range download a range of object": {
 			data:        buf20MB,
@@ -144,9 +144,19 @@ func TestGetObject(t *testing.T) {
 				GetObjectType: types.GetObjectRanges,
 				Concurrency:   1,
 			},
-			downloadRange:     "bytes=0-10485759",
+			downloadRange:     "bytes=1-10485759",
 			expectInvocations: 2,
-			expectRanges:      []string{"bytes=0-8388607", "bytes=8388608-10485759"},
+			expectRanges:      []string{"bytes=1-8388608", "bytes=8388609-10485759"},
+		},
+		"range download invalid range": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			options: Options{
+				GetObjectType: types.GetObjectRanges,
+				Concurrency:   1,
+			},
+			downloadRange: "bytes=1--1",
+			expectGetErr:  "invalid input range",
 		},
 		"parts download in order": {
 			data:        buf2MB,
@@ -172,7 +182,7 @@ func TestGetObject(t *testing.T) {
 			options:           Options{},
 			partsCount:        3,
 			expectInvocations: 2,
-			expectErr:         "s3 service error",
+			expectReadErr:     "s3 service error",
 		},
 		"part download single chunk": {
 			data:              []byte("123"),
@@ -210,7 +220,7 @@ func TestGetObject(t *testing.T) {
 			},
 			options:           Options{},
 			expectInvocations: 1,
-			expectErr:         "unexpected EOF",
+			expectReadErr:     "unexpected EOF",
 			dataValidationFn: func(t *testing.T, bytes []byte) {
 				if e, a := "ab", string(bytes); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
@@ -260,42 +270,32 @@ func TestGetObject(t *testing.T) {
 			}
 			input.Range = c.downloadRange
 			input.PartNumber = c.partNumber
-			r := NewConcurrentReader()
-			input.Reader = r
 
-			var wg sync.WaitGroup
-			actualBuf := make([]byte, 0)
-
-			wg.Add(1)
-			go func() {
-				defer wg.Done()
-				b, err := io.ReadAll(r)
-				if err != nil {
-					if c.expectErr == "" {
-						t.Errorf("expect no error when copying file, got %q", err)
-					} else if e, a := c.expectErr, err.Error(); !strings.Contains(a, e) {
-						t.Errorf("expect %s error message to be in %s", e, a)
-					}
-					//return
-				} else if c.expectErr != "" {
-					t.Error("expect an error, but got none")
-					//return
-				}
-
-				actualBuf = append(actualBuf, b...)
-			}()
-
-			_, err := mgr.GetObject(context.Background(), input)
-			wg.Wait()
+			out, err := mgr.GetObject(context.Background(), input)
 
 			if err != nil {
-				if c.expectErr == "" {
-					t.Fatalf("expect no error, got %q", err)
-				} else if e, a := c.expectErr, err.Error(); !strings.Contains(a, e) {
+				if c.expectGetErr == "" {
+					t.Fatalf("expect no error when getting object, got %q", err)
+				} else if e, a := c.expectGetErr, err.Error(); !strings.Contains(a, e) {
 					t.Fatalf("expect %s error message to be in %s", e, a)
 				}
-			} else if c.expectErr != "" {
-				t.Fatal("expect error, got nil")
+			} else if c.expectGetErr != "" {
+				t.Fatal("expect error when getting object, got nil")
+			}
+
+			if err != nil {
+				return
+			}
+
+			actualBuf, err := io.ReadAll(out.Body)
+			if err != nil {
+				if c.expectReadErr == "" {
+					t.Fatalf("expect no error when reading response, got %q", err)
+				} else if e, a := c.expectReadErr, err.Error(); !strings.Contains(a, e) {
+					t.Fatalf("expect %s error message to be in %s", e, a)
+				}
+			} else if c.expectReadErr != "" {
+				t.Fatal("expect error when reading response, got nil")
 			}
 
 			if err != nil {
@@ -370,21 +370,13 @@ func TestGetAsyncWithFailure(t *testing.T) {
 				Concurrency:   2,
 				GetObjectType: c.downloadType,
 			})
-			r := NewConcurrentReader()
-			var wg sync.WaitGroup
-			wg.Add(1)
-			go func() {
-				defer wg.Done()
-				_, _ = io.ReadAll(r)
-			}()
 
 			// Expect this request to exit quickly after failure
-			_, err := mgr.GetObject(context.Background(), &GetObjectInput{
+			out, err := mgr.GetObject(context.Background(), &GetObjectInput{
 				Bucket: "Bucket",
 				Key:    "Key",
-				Reader: r,
 			})
-			wg.Wait()
+			_, err = io.ReadAll(out.Body)
 
 			if err == nil {
 				t.Fatal("expect error, got none")
@@ -421,19 +413,10 @@ func TestGetObjectWithContextCanceled(t *testing.T) {
 			ctx.Error = fmt.Errorf("context canceled")
 			close(ctx.DoneCh)
 
-			r := NewConcurrentReader()
-			var wg sync.WaitGroup
-			wg.Add(1)
-			go func() {
-				defer wg.Done()
-				_, _ = io.ReadAll(r)
-			}()
 			_, err := mgr.GetObject(ctx, &GetObjectInput{
 				Bucket: "bucket",
 				Key:    "Key",
-				Reader: r,
 			})
-			wg.Wait()
 
 			if err == nil {
 				t.Fatalf("expected error, did not get one")

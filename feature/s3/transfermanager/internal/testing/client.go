@@ -33,6 +33,7 @@ type TransferManagerLoggingClient struct {
 	// params for download test
 
 	Data       []byte
+	PartsData  [][]byte
 	PartsCount int32
 
 	GetObjectInvocations int
@@ -314,6 +315,16 @@ var PartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObject
 	return &s3.GetObjectOutput{
 		Body:          ioutil.NopCloser(bytes.NewReader(c.Data)),
 		ContentLength: aws.Int64(int64(len(c.Data))),
+		PartsCount:    aws.Int32(c.PartsCount),
+	}, nil
+}
+
+// ReaderPartGetObjectFn mocks getobject behavior of s3 client to return object parts according to params.PartNumber
+var ReaderPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	index := aws.ToInt32(params.PartNumber) - 1
+	return &s3.GetObjectOutput{
+		Body:          ioutil.NopCloser(bytes.NewReader(c.PartsData[index])),
+		ContentLength: aws.Int64(int64(len(c.PartsData[index]))),
 		PartsCount:    aws.Int32(c.PartsCount),
 	}, nil
 }
