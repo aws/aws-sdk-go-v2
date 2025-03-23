@@ -157,7 +157,7 @@ func TestConcurrentReader(t *testing.T) {
 			getObjectFn: s3testing.RangeGetObjectFn,
 		},
 		"range get multiple goroutines with large part size": {
-			partSize:     100000,
+			partSize:     10000,
 			partsCount:   10000,
 			sectionParts: 6,
 			options: Options{
