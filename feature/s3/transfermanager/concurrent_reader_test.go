@@ -97,7 +97,6 @@ func TestConcurrentReader(t *testing.T) {
 			options: Options{
 				GetObjectType: types.GetObjectRanges,
 				Concurrency:   1,
-				PartSizeBytes: 10,
 			},
 			getObjectFn: s3testing.RangeGetObjectFn,
 		},
@@ -108,7 +107,6 @@ func TestConcurrentReader(t *testing.T) {
 			options: Options{
 				GetObjectType: types.GetObjectRanges,
 				Concurrency:   3,
-				PartSizeBytes: 1000,
 			},
 			getObjectFn: s3testing.RangeGetObjectFn,
 		},
@@ -119,7 +117,6 @@ func TestConcurrentReader(t *testing.T) {
 			options: Options{
 				GetObjectType: types.GetObjectRanges,
 				Concurrency:   3,
-				PartSizeBytes: 1000,
 			},
 			getObjectFn: s3testing.RangeGetObjectFn,
 		},
@@ -130,7 +127,6 @@ func TestConcurrentReader(t *testing.T) {
 			options: Options{
 				GetObjectType: types.GetObjectRanges,
 				Concurrency:   5,
-				PartSizeBytes: 10,
 			},
 			getObjectFn: s3testing.RangeGetObjectFn,
 		},
@@ -141,7 +137,6 @@ func TestConcurrentReader(t *testing.T) {
 			options: Options{
 				GetObjectType: types.GetObjectRanges,
 				Concurrency:   5,
-				PartSizeBytes: 10,
 			},
 			getObjectFn: s3testing.RangeGetObjectFn,
 		},
@@ -152,18 +147,16 @@ func TestConcurrentReader(t *testing.T) {
 			options: Options{
 				GetObjectType: types.GetObjectRanges,
 				Concurrency:   5,
-				PartSizeBytes: 10,
 			},
 			getObjectFn: s3testing.RangeGetObjectFn,
 		},
 		"range get multiple goroutines with large part size": {
-			partSize:     10000,
+			partSize:     1000,
 			partsCount:   10000,
 			sectionParts: 6,
 			options: Options{
 				GetObjectType: types.GetObjectRanges,
 				Concurrency:   5,
-				PartSizeBytes: 100000,
 			},
 			getObjectFn: s3testing.RangeGetObjectFn,
 		},
