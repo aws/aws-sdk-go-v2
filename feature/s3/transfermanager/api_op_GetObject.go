@@ -549,7 +549,6 @@ func (o *GetObjectOutput) mapFromHeadObjectOutput(out *s3.HeadObjectOutput, chec
 	o.ContentDisposition = aws.ToString(out.ContentDisposition)
 	o.ContentEncoding = aws.ToString(out.ContentEncoding)
 	o.ContentLanguage = aws.ToString(out.ContentLanguage)
-	o.ContentRange = aws.ToString(out.ContentRange)
 	o.ContentType = aws.ToString(out.ContentType)
 	o.ETag = aws.ToString(out.ETag)
 	o.Expiration = aws.ToString(out.Expiration)
@@ -642,6 +641,8 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		}
 
 		output.mapFromHeadObjectOutput(out, g.in.ChecksumMode, !g.options.DisableChecksumValidation, r)
+		contentLength := getTotalBytes(out)
+		output.ContentRange = fmt.Sprintf("bytes=0-%d/%d", contentLength-1, contentLength)
 
 		partsCount := max(aws.ToInt32(out.PartsCount), 1)
 		partSize := max(aws.ToInt64(out.ContentLength), 1)
@@ -678,6 +679,7 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 
 		output.mapFromHeadObjectOutput(out, g.in.ChecksumMode, !g.options.DisableChecksumValidation, r)
 		output.ContentLength = contentLength
+		output.ContentRange = fmt.Sprintf("bytes=%d-%d/%d", pos, total-1, out.ContentLength)
 
 		partsCount := int32((contentLength-1)/g.options.PartSizeBytes + 1)
 		sectionParts := int32(max(1, g.options.GetBufferSize/g.options.PartSizeBytes))

@@ -40,9 +40,9 @@ type concurrentReader struct {
 	readCount    int32
 	totalBytes   int64
 	index        int32
-
-	written  int64
-	partSize int64
+	done         bool
+	written      int64
+	partSize     int64
 
 	ctx context.Context
 	m   sync.Mutex
@@ -64,19 +64,18 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 			)
 		}}
 
-	var wg sync.WaitGroup
-	wg.Add(1)
-	var done bool
 	r.ch = make(chan outChunk, r.options.Concurrency)
 	var written int
 	var err error
+	var wg sync.WaitGroup
+	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		written, err = r.read(p)
 		if err != nil {
 			r.setErr(err)
 		}
-		done = true // don't need to consider data race here since only this gorotuine would change the value
+		r.setDone(true)
 	}()
 
 	ch := make(chan getChunk, r.options.Concurrency)
@@ -86,7 +85,7 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 	}
 
 	for r.index < r.partsCount {
-		if r.getErr() != nil || done {
+		if r.getErr() != nil || r.getDone() {
 			break
 		}
 
@@ -112,6 +111,7 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 	wg.Wait()
 
 	r.written += int64(written)
+	r.setDone(false)
 	return written, r.getErr()
 }
 
@@ -268,6 +268,20 @@ func (r *concurrentReader) getCapacity() int32 {
 	defer r.m.Unlock()
 
 	return r.capacity
+}
+
+func (r *concurrentReader) setDone(done bool) {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	r.done = done
+}
+
+func (r *concurrentReader) getDone() bool {
+	r.m.Lock()
+	defer r.m.Unlock()
+
+	return r.done
 }
 
 func (r *concurrentReader) setErr(err error) {
