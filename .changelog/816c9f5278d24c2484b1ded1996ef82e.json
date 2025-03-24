@@ -1,8 +1,0 @@
-{
-    "id": "816c9f52-78d2-4c24-84b1-ded1996ef82e",
-    "type": "feature",
-    "description": "ClusterName/ClusterIdentifier, ComputeNodeGroupName/ComputeNodeGroupIdentifier, and QueueName/QueueIdentifier can now have 10 characters, and a minimum of 3 characters. The TagResource API action can now return ServiceQuotaExceededException.",
-    "modules": [
-        "service/pcs"
-    ]
-}

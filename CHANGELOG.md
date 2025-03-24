@@ -1,3 +1,18 @@
+# Release (2025-03-24)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.47.0](service/iotwireless/CHANGELOG.md#v1470-2025-03-24)
+  * **Feature**: Mark EutranCid under LteNmr optional.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.4.0](service/pcs/CHANGELOG.md#v140-2025-03-24)
+  * **Feature**: ClusterName/ClusterIdentifier, ComputeNodeGroupName/ComputeNodeGroupIdentifier, and QueueName/QueueIdentifier can now have 10 characters, and a minimum of 3 characters. The TagResource API action can now return ServiceQuotaExceededException.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.16.2](service/qconnect/CHANGELOG.md#v1162-2025-03-24)
+  * **Documentation**: Provides the correct value for supported model ID.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.58.0](service/ssm/CHANGELOG.md#v1580-2025-03-24)
+  * **Feature**: This release adds the AvailableSecurityUpdatesComplianceStatus field to patch baseline operations, as well as the AvailableSecurityUpdateCount and InstancesWithAvailableSecurityUpdates to patch state operations. Applies to Windows Server managed nodes only.
+
 # Release (2025-03-21)
 
 ## Module Highlights

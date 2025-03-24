@@ -1,3 +1,7 @@
+# v1.16.2 (2025-03-24)
+
+* **Documentation**: Provides the correct value for supported model ID.
+
 # v1.16.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.
