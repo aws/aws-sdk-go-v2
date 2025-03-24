@@ -90,7 +90,7 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 		}
 
 		if r.index == r.getCapacity() {
-			time.Sleep(time.Microsecond)
+			time.Sleep(10 * time.Millisecond)
 			continue
 		}
 
