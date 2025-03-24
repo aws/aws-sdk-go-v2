@@ -850,7 +850,7 @@
                 "modelId": {
                     "target": "com.amazonaws.qconnect#AIPromptModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n        <code>CLAUDE_3_HAIKU_20240307_V1</code>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n      <code>anthropic.claude-3-haiku-20240307-v1:0</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -985,7 +985,7 @@
                 "modelId": {
                     "target": "com.amazonaws.qconnect#AIPromptModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n        <code>CLAUDE_3_HAIKU_20240307_V1</code>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n      <code>anthropic.claude-3-haiku-20240307-v1:0</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1303,7 +1303,7 @@
                 "locale": {
                     "target": "com.amazonaws.qconnect#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The locale to which specifies the language and region settings that determine the response\n      language for <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html\">QueryAssistant</a>.</p>\n         <note>\n            <p>Changing this locale to anything other than <code>en_US</code> will turn off\n        recommendations triggered by contact transcripts for agent assistance, as this feature is\n        not supported in multiple languages.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The locale to which specifies the language and region settings that determine the response\n      language for <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html\">QueryAssistant</a>.</p>\n         <note>\n            <p>Changing this locale to anything other than <code>en_US</code>, <code>en_GB</code>, or\n          <code>en_AU</code> will turn off recommendations triggered by contact transcripts for\n        agent assistance, as this feature is not supported in multiple languages.</p>\n         </note>"
                     }
                 }
             },
@@ -3378,7 +3378,7 @@
                 "modelId": {
                     "target": "com.amazonaws.qconnect#AIPromptModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n        <code>CLAUDE_3_HAIKU_20240307_V1</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n      <code>anthropic.claude-3-haiku-20240307-v1:0</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13227,7 +13227,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the AI Agent that is set for use by defafult on an Amazon Q in Connect\n      Assistant.</p>",
+                "smithy.api#documentation": "<p>Removes the AI Agent that is set for use by default on an Amazon Q in Connect\n      Assistant.</p>",
                 "smithy.api#http": {
                     "uri": "/assistants/{assistantId}/aiagentConfiguration",
                     "method": "DELETE",
@@ -14028,7 +14028,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The conversation history data to included in conversation context data before the the\n      Amazon Q in Connect session..</p>"
+                "smithy.api#documentation": "<p>The conversation history data to included in conversation context data before the\n      Amazon Q in Connect session.</p>"
             }
         },
         "com.amazonaws.qconnect#SelfServiceConversationHistoryList": {
@@ -15407,7 +15407,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the AI Agent that is set for use by defafult on an Amazon Q in Connect\n      Assistant.</p>",
+                "smithy.api#documentation": "<p>Updates the AI Agent that is set for use by default on an Amazon Q in Connect\n      Assistant.</p>",
                 "smithy.api#http": {
                     "uri": "/assistants/{assistantId}/aiagentConfiguration",
                     "method": "POST"

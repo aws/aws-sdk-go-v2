@@ -4328,6 +4328,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the patches to use to update the managed nodes, including target operating\n   systems and source repositories. Applies to Linux managed nodes only.</p>"
                     }
+                },
+                "AvailableSecurityUpdatesComplianceStatus": {
+                    "target": "com.amazonaws.ssm#PatchComplianceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether managed nodes for which there are available security-related patches that\n   have not been approved by the baseline are being defined as <code>COMPLIANT</code> or\n    <code>NON_COMPLIANT</code>. This option is specified when the <code>CreatePatchBaseline</code>\n   or <code>UpdatePatchBaseline</code> commands are run.</p>\n         <p>Applies to Windows Server managed nodes only.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6816,6 +6822,12 @@
                     "target": "com.amazonaws.ssm#PatchSourceList",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the patches to use to update the managed nodes, including target operating\n   systems and source repositories. Applies to Linux managed nodes only.</p>"
+                    }
+                },
+                "AvailableSecurityUpdatesComplianceStatus": {
+                    "target": "com.amazonaws.ssm#PatchComplianceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status you want to assign to security patches that are available but not\n   approved because they don't meet the installation criteria specified in the patch\n   baseline.</p>\n         <p>Example scenario: Security patches that you might want installed can be skipped if you have\n   specified a long period to wait after a patch is released before installation. If an update to\n   the patch is released during your specified waiting period, the waiting period for installing the\n   patch starts over. If the waiting period is too long, multiple versions of the patch could be\n   released but never installed.</p>\n         <p>Supported for Windows Server managed nodes only.</p>"
                     }
                 },
                 "ClientToken": {
@@ -10349,6 +10361,13 @@
                     "traits": {
                         "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of managed nodes with patches installed that are specified as other than\n    <code>Critical</code> or <code>Security</code> but aren't compliant with the patch baseline. The\n   status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
+                    }
+                },
+                "InstancesWithAvailableSecurityUpdates": {
+                    "target": "com.amazonaws.ssm#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The number of managed nodes for which security-related patches are available but not\n   approved because because they didn't meet the patch baseline requirements. For example, an\n   updated version of a patch might have been released before the specified auto-approval period was\n   over.</p>\n         <p>Applies to Windows Server managed nodes only.</p>"
                     }
                 }
             },
@@ -14520,6 +14539,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the patches to use to update the managed nodes, including target operating\n   systems and source repositories. Applies to Linux managed nodes only.</p>"
                     }
+                },
+                "AvailableSecurityUpdatesComplianceStatus": {
+                    "target": "com.amazonaws.ssm#PatchComplianceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the compliance status of managed nodes for which security-related patches are\n   available but were not approved. This preference is specified when the\n    <code>CreatePatchBaseline</code> or <code>UpdatePatchBaseline</code> commands are run.</p>\n         <p>Applies to Windows Server managed nodes only.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15507,6 +15532,13 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of patches from the patch baseline that aren't applicable for the managed node\n   and therefore aren't installed on the node. This number may be truncated if the list of patch\n   names is very large. The number of patches beyond this limit are reported in\n    <code>UnreportedNotApplicableCount</code>.</p>"
+                    }
+                },
+                "AvailableSecurityUpdateCount": {
+                    "target": "com.amazonaws.ssm#PatchAvailableSecurityUpdateCount",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The number of security-related patches that are available but not approved because they\n   didn't meet the patch baseline requirements. For example, an updated version of a patch might\n   have been released before the specified auto-approval period was over.</p>\n         <p>Applies to Windows Server managed nodes only.</p>"
                     }
                 },
                 "OperationStartTime": {
@@ -20768,13 +20800,13 @@
                 "AccountIdsToAdd": {
                     "target": "com.amazonaws.ssm#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services users that should have access to the document. The account IDs can either be a\n   group of account IDs or <i>All</i>. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services users that should have access to the document. The account IDs can either be a\n   group of account IDs or <i>All</i>. You must specify a value for this parameter or\n   the <code>AccountIdsToRemove</code> parameter.</p>"
                     }
                 },
                 "AccountIdsToRemove": {
                     "target": "com.amazonaws.ssm#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services users that should no longer have access to the document. The Amazon Web Services user\n   can either be a group of account IDs or <i>All</i>. This action has a higher\n   priority than <code>AccountIdsToAdd</code>. If you specify an ID to add and the same ID to\n   remove, the system removes access to the document. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services users that should no longer have access to the document. The Amazon Web Services user\n   can either be a group of account IDs or <i>All</i>. This action has a higher\n   priority than <code>AccountIdsToAdd</code>. If you specify an ID to add and the same ID to\n   remove, the system removes access to the document. You must specify a value for this parameter or\n   the <code>AccountIdsToAdd</code> parameter.</p>"
                     }
                 },
                 "SharedDocumentVersion": {
@@ -24311,6 +24343,12 @@
         "com.amazonaws.ssm#PatchArch": {
             "type": "string"
         },
+        "com.amazonaws.ssm#PatchAvailableSecurityUpdateCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.ssm#PatchBaselineIdentity": {
             "type": "structure",
             "members": {
@@ -24495,6 +24533,12 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
                     }
+                },
+                "AvailableSecurityUpdate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE_SECURITY_UPDATE"
+                    }
                 }
             }
         },
@@ -24545,6 +24589,23 @@
                 "smithy.api#range": {
                     "min": 10,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssm#PatchComplianceStatus": {
+            "type": "enum",
+            "members": {
+                "Compliant": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLIANT"
+                    }
+                },
+                "NonCompliant": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NON_COMPLIANT"
+                    }
                 }
             }
         },
@@ -25677,7 +25738,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#PSParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fully qualified name of the parameter that you want to create or update.</p>\n         <note>\n            <p>You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name\n    itself.</p>\n         </note>\n         <p>The fully qualified name includes the complete hierarchy of the parameter path and name. For\n   parameters in a hierarchy, you must include a leading forward slash character (/) when you create\n   or reference a parameter. For example: <code>/Dev/DBServer/MySQL/db-string13</code>\n         </p>\n         <p>Naming Constraints:</p>\n         <ul>\n            <li>\n               <p>Parameter names are case sensitive.</p>\n            </li>\n            <li>\n               <p>A parameter name must be unique within an Amazon Web Services Region</p>\n            </li>\n            <li>\n               <p>A parameter name can't be prefixed with \"<code>aws</code>\" or \"<code>ssm</code>\"\n     (case-insensitive).</p>\n            </li>\n            <li>\n               <p>Parameter names can include only the following symbols and letters:\n      <code>a-zA-Z0-9_.-</code>\n               </p>\n               <p>In addition, the slash character ( / ) is used to delineate hierarchies in parameter\n     names. For example: <code>/Dev/Production/East/Project-ABC/MyParameter</code>\n               </p>\n            </li>\n            <li>\n               <p>A parameter name can't include spaces.</p>\n            </li>\n            <li>\n               <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p>\n            </li>\n         </ul>\n         <p>For additional information about valid values for parameter names, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html\">Creating Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>The maximum length constraint of 2048 characters listed below includes 1037 characters\n    reserved for internal use by Systems Manager. The maximum length for a parameter name that you create is\n    1011 characters. This includes the characters in the ARN that precede the name you specify, such\n    as <code>arn:aws:ssm:us-east-2:111122223333:parameter/</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The fully qualified name of the parameter that you want to create or update.</p>\n         <note>\n            <p>You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name\n    itself.</p>\n         </note>\n         <p>The fully qualified name includes the complete hierarchy of the parameter path and name. For\n   parameters in a hierarchy, you must include a leading forward slash character (/) when you create\n   or reference a parameter. For example: <code>/Dev/DBServer/MySQL/db-string13</code>\n         </p>\n         <p>Naming Constraints:</p>\n         <ul>\n            <li>\n               <p>Parameter names are case sensitive.</p>\n            </li>\n            <li>\n               <p>A parameter name must be unique within an Amazon Web Services Region</p>\n            </li>\n            <li>\n               <p>A parameter name can't be prefixed with \"<code>aws</code>\" or \"<code>ssm</code>\"\n     (case-insensitive).</p>\n            </li>\n            <li>\n               <p>Parameter names can include only the following symbols and letters:\n      <code>a-zA-Z0-9_.-</code>\n               </p>\n               <p>In addition, the slash character ( / ) is used to delineate hierarchies in parameter\n     names. For example: <code>/Dev/Production/East/Project-ABC/MyParameter</code>\n               </p>\n            </li>\n            <li>\n               <p>A parameter name can't include spaces.</p>\n            </li>\n            <li>\n               <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p>\n            </li>\n         </ul>\n         <p>For additional information about valid values for parameter names, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html\">Creating Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>The reported maximum length of 2048 characters for a parameter name includes 1037\n    characters that are reserved for internal use by Systems Manager. The maximum length for a parameter name\n    that you specify is 1011 characters.</p>\n            <p>This count of 1011 characters includes the characters in the ARN that precede the name you\n    specify. This ARN length will vary depending on your partition and Region. For example, the\n    following 45 characters count toward the 1011 character maximum for a parameter created in the\n    US East (Ohio) Region: <code>arn:aws:ssm:us-east-2:111122223333:parameter/</code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -31484,6 +31545,12 @@
                         "smithy.api#documentation": "<p>Information about the patches to use to update the managed nodes, including target operating\n   systems and source repositories. Applies to Linux managed nodes only.</p>"
                     }
                 },
+                "AvailableSecurityUpdatesComplianceStatus": {
+                    "target": "com.amazonaws.ssm#PatchComplianceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status to be assigned to security patches that are available but not approved\n   because they don't meet the installation criteria specified in the patch baseline.</p>\n         <p>Example scenario: Security patches that you might want installed can be skipped if you have\n   specified a long period to wait after a patch is released before installation. If an update to\n   the patch is released during your specified waiting period, the waiting period for installing the\n   patch starts over. If the waiting period is too long, multiple versions of the patch could be\n   released but never installed.</p>\n         <p>Supported for Windows Server managed nodes only.</p>"
+                    }
+                },
                 "Replace": {
                     "target": "com.amazonaws.ssm#Boolean",
                     "traits": {
@@ -31582,6 +31649,12 @@
                     "target": "com.amazonaws.ssm#PatchSourceList",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the patches to use to update the managed nodes, including target operating\n   systems and source repositories. Applies to Linux managed nodes only.</p>"
+                    }
+                },
+                "AvailableSecurityUpdatesComplianceStatus": {
+                    "target": "com.amazonaws.ssm#PatchComplianceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the compliance status of managed nodes for which security-related patches are\n   available but were not approved. This preference is specified when the\n    <code>CreatePatchBaseline</code> or <code>UpdatePatchBaseline</code> commands are run.</p>\n         <p>Applies to Windows Server managed nodes only.</p>"
                     }
                 }
             },

@@ -858,7 +858,7 @@
         "com.amazonaws.pcs#ClusterIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{1,40})$"
+                "smithy.api#pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{3,40})$"
             }
         },
         "com.amazonaws.pcs#ClusterList": {
@@ -871,10 +871,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 3,
                     "max": 40
                 },
-                "smithy.api#pattern": "^(?!pcs_)^(?![A-Za-z0-9]{10}$)[A-Za-z][A-Za-z0-9-]+$"
+                "smithy.api#pattern": "^(?!pcs_)^[A-Za-z][A-Za-z0-9-]+$"
             }
         },
         "com.amazonaws.pcs#ClusterResource": {
@@ -1213,7 +1213,7 @@
         "com.amazonaws.pcs#ComputeNodeGroupIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{1,25})$"
+                "smithy.api#pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{3,25})$"
             }
         },
         "com.amazonaws.pcs#ComputeNodeGroupList": {
@@ -1226,10 +1226,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 3,
                     "max": 25
                 },
-                "smithy.api#pattern": "^(?!pcs_)^(?![A-Za-z0-9]{10}$)[A-Za-z][A-Za-z0-9-]+$"
+                "smithy.api#pattern": "^(?!pcs_)^[A-Za-z][A-Za-z0-9-]+$"
             }
         },
         "com.amazonaws.pcs#ComputeNodeGroupResource": {
@@ -2142,6 +2142,23 @@
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
                     "Cluster"
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetCluster_AccessDeniedException",
+                        "params": {
+                            "clusterIdentifier": "pcs_donotexist"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.pcs#AccessDeniedException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
                 ]
             }
         },
@@ -2207,6 +2224,24 @@
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
                     "ComputeNodeGroup"
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetComputeNodeGroup_AccessDeniedException",
+                        "params": {
+                            "clusterIdentifier": "pcs_donotexist",
+                            "computeNodeGroupIdentifier": "pcs_donotexist"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.pcs#AccessDeniedException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
                 ]
             }
         },
@@ -2276,6 +2311,24 @@
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
                     "Queue"
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetQueueFailure_AccessDeniedException",
+                        "params": {
+                            "clusterIdentifier": "pcs_donotexist",
+                            "queueIdentifier": "pcs_donotexist"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.pcs#AccessDeniedException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
                 ]
             }
         },
@@ -2394,6 +2447,19 @@
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
                     "Cluster"
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListClustersSuccess",
+                        "params": {},
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
                 ]
             }
         },
@@ -2480,6 +2546,23 @@
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
                     "ComputeNodeGroup"
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListComputeNodeGroups_AccessDeniedException",
+                        "params": {
+                            "clusterIdentifier": "pcs_donotexist"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.pcs#AccessDeniedException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
                 ]
             }
         },
@@ -2571,6 +2654,23 @@
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
                     "Queue"
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListQueueFailure_AccessDeniedException",
+                        "params": {
+                            "clusterIdentifier": "pcs_donotexist"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.pcs#AccessDeniedException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
                 ]
             }
         },
@@ -2837,7 +2937,7 @@
         "com.amazonaws.pcs#QueueIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{1,25})$"
+                "smithy.api#pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{3,25})$"
             }
         },
         "com.amazonaws.pcs#QueueList": {
@@ -2850,10 +2950,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 3,
                     "max": 25
                 },
-                "smithy.api#pattern": "^(?!pcs_)^(?![A-Za-z0-9]{10}$)[A-Za-z][A-Za-z0-9-]+$"
+                "smithy.api#pattern": "^(?!pcs_)^[A-Za-z][A-Za-z0-9-]+$"
             }
         },
         "com.amazonaws.pcs#QueueResource": {
@@ -3476,6 +3576,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.pcs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pcs#ServiceQuotaExceededException"
                 }
             ],
             "traits": {
