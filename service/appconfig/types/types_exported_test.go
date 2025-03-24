@@ -4,7 +4,7 @@ package types_test
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	"github.com/Enflick/aws-sdk-go-v2/service/appconfig/types"
 )
 
 func ExampleBadRequestDetails_outputUsage() {

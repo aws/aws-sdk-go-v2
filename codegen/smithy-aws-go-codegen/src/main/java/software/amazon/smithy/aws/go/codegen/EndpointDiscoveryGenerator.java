@@ -348,7 +348,7 @@ if (serviceSupportsCustomDiscoveryEndpoint(model, service)) {
                     writer.write("$L := make(map[string]string, 0)", IDENTIFIER_MAP);
 
                     // include region at a minimum
-                    // see https://github.com/aws/aws-sdk-go-v2/issues/2163
+                    // see https://github.com/Enflick/aws-sdk-go-v2/issues/2163
                     writer.write("$L[$S] = region", IDENTIFIER_MAP, "sdk#Region");
 
                     for (MemberShape member : getMembersUsedAsIdForDiscovery(model, service, operation)) {

@@ -7,13 +7,13 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
-	internalendpoints "github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints"
-	"github.com/aws/smithy-go/encoding/httpbinding"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/s3shared"
+	internalendpoints "github.com/Enflick/aws-sdk-go-v2/service/s3/internal/endpoints"
+	"github.com/Enflick/smithy-go/encoding/httpbinding"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // EndpointResolver interface for resolving service endpoints.
@@ -263,7 +263,7 @@ func removeBucketFromPath(u *url.URL, bucket string) {
 // DNS compatible or the EndpointResolver resolves an aws.Endpoint with
 // HostnameImmutable member set to true.
 //
-// https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Endpoint.HostnameImmutable
+// https://pkg.go.dev/github.com/Enflick/aws-sdk-go-v2/aws#Endpoint.HostnameImmutable
 func hostCompatibleBucketName(u *url.URL, bucket string) bool {
 	// Bucket might be DNS compatible but dots in the hostname will fail
 	// certificate validation, so do not use host-style.

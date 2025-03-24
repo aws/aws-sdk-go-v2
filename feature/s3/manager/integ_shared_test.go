@@ -12,12 +12,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/config"
-	"github.com/aws/aws-sdk-go-v2/feature/s3/manager"
-	"github.com/aws/aws-sdk-go-v2/feature/s3/manager/internal/integration"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
-	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/config"
+	"github.com/Enflick/aws-sdk-go-v2/feature/s3/manager"
+	"github.com/Enflick/aws-sdk-go-v2/feature/s3/manager/internal/integration"
+	"github.com/Enflick/aws-sdk-go-v2/service/s3"
+	s3types "github.com/Enflick/aws-sdk-go-v2/service/s3/types"
 )
 
 var integConfig aws.Config

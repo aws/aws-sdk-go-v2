@@ -4,7 +4,7 @@ package types
 
 import (
 	"fmt"
-	smithy "github.com/aws/smithy-go"
+	smithy "github.com/Enflick/smithy-go"
 )
 
 // Your IAM user or role does not have permission to call the Amazon Lex V2 APIs

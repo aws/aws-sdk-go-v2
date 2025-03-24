@@ -15,11 +15,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
-	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	v4 "github.com/Enflick/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/integrationtest"
+	"github.com/Enflick/aws-sdk-go-v2/service/s3"
+	s3types "github.com/Enflick/aws-sdk-go-v2/service/s3/types"
 )
 
 func TestInteg_PresignURL(t *testing.T) {

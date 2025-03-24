@@ -3,7 +3,7 @@
 package types
 
 import (
-	smithydocument "github.com/aws/smithy-go/document"
+	smithydocument "github.com/Enflick/smithy-go/document"
 )
 
 // Contains information about the comma-separated value (CSV) file to select from.

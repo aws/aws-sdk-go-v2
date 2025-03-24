@@ -5,10 +5,10 @@ package migrationhuborchestrator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // Get a specific step in a template.

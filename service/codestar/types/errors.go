@@ -4,7 +4,7 @@ package types
 
 import (
 	"fmt"
-	smithy "github.com/aws/smithy-go"
+	smithy "github.com/Enflick/smithy-go"
 )
 
 // Another modification is being made. That modification must complete before you

@@ -12,7 +12,7 @@ body:
       options:
         - label: I have searched (https://github.com/aws/aws-sdk/issues?q=is%3Aissue) for past instances of this issue
           required: true
-        - label: I have verified all of my SDK modules are up-to-date (you can perform a bulk update with `go get -u github.com/aws/aws-sdk-go-v2/...`)
+        - label: I have verified all of my SDK modules are up-to-date (you can perform a bulk update with `go get -u github.com/Enflick/aws-sdk-go-v2/...`)
           required: true
 
   - type: textarea

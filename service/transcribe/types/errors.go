@@ -4,7 +4,7 @@ package types
 
 import (
 	"fmt"
-	smithy "github.com/aws/smithy-go"
+	smithy "github.com/Enflick/smithy-go"
 )
 
 // Your request didn't pass one or more validation tests. This can occur when the

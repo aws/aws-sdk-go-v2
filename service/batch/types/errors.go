@@ -4,7 +4,7 @@ package types
 
 import (
 	"fmt"
-	smithy "github.com/aws/smithy-go"
+	smithy "github.com/Enflick/smithy-go"
 )
 
 // These errors are usually caused by a client action. One example cause is using

@@ -3,7 +3,7 @@ package manager
 import (
 	"context"
 
-	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/Enflick/aws-sdk-go-v2/service/s3"
 )
 
 // DeleteObjectsAPIClient is an S3 API client that can invoke the DeleteObjects operation.

@@ -5,7 +5,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/aws/smithy-go"
+	"github.com/Enflick/smithy-go"
 )
 
 // GetErrorInfo util looks for code, __type, and message members in the

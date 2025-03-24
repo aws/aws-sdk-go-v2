@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/aws/aws-sdk-go-v2/service/sso"
-	"github.com/aws/aws-sdk-go-v2/service/sso/types"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/internal/sdk"
+	"github.com/Enflick/aws-sdk-go-v2/service/sso"
+	"github.com/Enflick/aws-sdk-go-v2/service/sso/types"
 )
 
 type mockClient struct {

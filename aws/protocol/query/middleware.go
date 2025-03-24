@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // AddAsGetRequestMiddleware adds a middleware to the Serialize stack after the

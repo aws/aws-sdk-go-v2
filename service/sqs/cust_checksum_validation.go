@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	sqstypes "github.com/aws/aws-sdk-go-v2/service/sqs/types"
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	sqstypes "github.com/Enflick/aws-sdk-go-v2/service/sqs/types"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 // addValidateSendMessageChecksum adds the ValidateMessageChecksum middleware

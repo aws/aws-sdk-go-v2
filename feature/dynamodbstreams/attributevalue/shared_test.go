@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/service/dynamodbstreams/types"
 )
 
 type testTextMarshaler struct {

@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/service/health"
-	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
+	"github.com/Enflick/aws-sdk-go-v2/service/health"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/integrationtest"
 )
 
 func TestInteg_00_DescribeEntityAggregates(t *testing.T) {

@@ -9,14 +9,14 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/aws/smithy-go"
-	smithyxml "github.com/aws/smithy-go/encoding/xml"
-	"github.com/aws/smithy-go/middleware"
-	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/smithy-go"
+	smithyxml "github.com/Enflick/smithy-go/encoding/xml"
+	"github.com/Enflick/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/ptr"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 
-	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53/types"
+	awsmiddle "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/service/route53/types"
 )
 
 // HandleCustomErrorDeserialization check if Route53 response is an error and needs

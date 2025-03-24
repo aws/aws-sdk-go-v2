@@ -11,6 +11,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         java-17-amazon-corretto-jdk \
     && rm -rf /var/list/apt/lists/*
 
-ADD . /go/src/github.com/aws/aws-sdk-go-v2
-WORKDIR /go/src/github.com/aws/aws-sdk-go-v2
+ADD . /go/src/github.com/Enflick/aws-sdk-go-v2
+WORKDIR /go/src/github.com/Enflick/aws-sdk-go-v2
 CMD ["make", "unit"]

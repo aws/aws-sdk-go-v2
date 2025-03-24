@@ -3,7 +3,7 @@
 package types
 
 import (
-	smithydocument "github.com/aws/smithy-go/document"
+	smithydocument "github.com/Enflick/smithy-go/document"
 )
 
 // An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId and JoinToken

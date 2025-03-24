@@ -3,7 +3,7 @@
 package types
 
 import (
-	smithydocument "github.com/aws/smithy-go/document"
+	smithydocument "github.com/Enflick/smithy-go/document"
 )
 
 // Provides the MIME content of the updated email message as an S3 object. All

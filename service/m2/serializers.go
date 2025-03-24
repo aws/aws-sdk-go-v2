@@ -6,13 +6,13 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/m2/types"
-	smithy "github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/encoding/httpbinding"
-	smithyjson "github.com/aws/smithy-go/encoding/json"
-	"github.com/aws/smithy-go/middleware"
-	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/encoding/httpbinding"
+	smithyjson "github.com/Enflick/smithy-go/encoding/json"
+	"github.com/Enflick/smithy-go/middleware"
+	smithytime "github.com/Enflick/smithy-go/time"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 type awsRestjson1_serializeOpCancelBatchJobExecution struct {

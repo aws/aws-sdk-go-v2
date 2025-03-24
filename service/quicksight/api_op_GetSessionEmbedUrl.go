@@ -5,9 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // Generates a session URL and authorization code that you can use to embed the

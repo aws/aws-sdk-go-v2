@@ -178,17 +178,17 @@ func main() {
         var docId = query.get('doc');
         var operation = query.get('operation');
         if (docId === null || operation === null) {
-            window.location = 'https://pkg.go.dev/github.com/aws/aws-sdk-go-v2';
+            window.location = 'https://pkg.go.dev/github.com/Enflick/aws-sdk-go-v2';
             return;
         }
 
         var service = docToPkg[docId];
         if (service === undefined) {
-            window.location = 'https://pkg.go.dev/github.com/aws/aws-sdk-go-v2';
+            window.location = 'https://pkg.go.dev/github.com/Enflick/aws-sdk-go-v2';
             return;
         }
 
-		window.location = 'https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/' + service + '#Client.' + operation;
+		window.location = 'https://pkg.go.dev/github.com/Enflick/aws-sdk-go-v2/service/' + service + '#Client.' + operation;
 		})();
     </script>
 </html>`

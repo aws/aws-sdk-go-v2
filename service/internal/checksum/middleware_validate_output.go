@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/logging"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/logging"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // outputValidationAlgorithmsUsedKey is the metadata key for indexing the algorithms

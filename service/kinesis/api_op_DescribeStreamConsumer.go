@@ -5,11 +5,11 @@ package kinesis
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
-	"github.com/aws/smithy-go/middleware"
-	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/service/kinesis/types"
+	"github.com/Enflick/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/ptr"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // To get the description of a registered consumer, provide the ARN of the

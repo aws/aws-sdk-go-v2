@@ -5,10 +5,10 @@ package dlm
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/dlm/types"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/service/dlm/types"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // Gets summary information about all or the specified data lifecycle policies.

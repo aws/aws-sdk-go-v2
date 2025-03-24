@@ -9,17 +9,17 @@ import (
 	"os"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/credentials"
-	"github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
-	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds"
-	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
-	"github.com/aws/aws-sdk-go-v2/credentials/ssocreds"
-	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
-	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
-	"github.com/aws/aws-sdk-go-v2/service/sso"
-	"github.com/aws/aws-sdk-go-v2/service/ssooidc"
-	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/credentials"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/ec2rolecreds"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/endpointcreds"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/processcreds"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/ssocreds"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/stscreds"
+	"github.com/Enflick/aws-sdk-go-v2/feature/ec2/imds"
+	"github.com/Enflick/aws-sdk-go-v2/service/sso"
+	"github.com/Enflick/aws-sdk-go-v2/service/ssooidc"
+	"github.com/Enflick/aws-sdk-go-v2/service/sts"
 )
 
 const (

@@ -20,10 +20,10 @@ import (
 	"strings"
 	"time"
 
-	signerCrypto "github.com/aws/aws-sdk-go-v2/internal/v4a/internal/crypto"
-	v4Internal "github.com/aws/aws-sdk-go-v2/internal/v4a/internal/v4"
-	"github.com/aws/smithy-go/encoding/httpbinding"
-	"github.com/aws/smithy-go/logging"
+	signerCrypto "github.com/Enflick/aws-sdk-go-v2/internal/v4a/internal/crypto"
+	v4Internal "github.com/Enflick/aws-sdk-go-v2/internal/v4a/internal/v4"
+	"github.com/Enflick/smithy-go/encoding/httpbinding"
+	"github.com/Enflick/smithy-go/logging"
 )
 
 const (

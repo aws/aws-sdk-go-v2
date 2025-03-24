@@ -7,9 +7,9 @@
 // The best way to get started working with the SDK is to use `go get` to add the
 // SDK and desired service clients to your Go dependencies explicitly.
 //
-//	go get github.com/aws/aws-sdk-go-v2
-//	go get github.com/aws/aws-sdk-go-v2/config
-//	go get github.com/aws/aws-sdk-go-v2/service/dynamodb
+//	go get github.com/Enflick/aws-sdk-go-v2
+//	go get github.com/Enflick/aws-sdk-go-v2/config
+//	go get github.com/Enflick/aws-sdk-go-v2/service/dynamodb
 //
 // # Hello AWS
 //
@@ -23,9 +23,9 @@
 //	    "fmt"
 //	    "log"
 //
-//	    "github.com/aws/aws-sdk-go-v2/aws"
-//	    "github.com/aws/aws-sdk-go-v2/config"
-//	    "github.com/aws/aws-sdk-go-v2/service/dynamodb"
+//	    "github.com/Enflick/aws-sdk-go-v2/aws"
+//	    "github.com/Enflick/aws-sdk-go-v2/config"
+//	    "github.com/Enflick/aws-sdk-go-v2/service/dynamodb"
 //	)
 //
 //	func main() {

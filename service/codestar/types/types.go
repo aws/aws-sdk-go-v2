@@ -3,7 +3,7 @@
 package types
 
 import (
-	smithydocument "github.com/aws/smithy-go/document"
+	smithydocument "github.com/Enflick/smithy-go/document"
 )
 
 // Location and destination information about the source code files provided with

@@ -6,16 +6,16 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/aws/smithy-go/middleware"
-	"github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/transport/http"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/internal/v4a"
-	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
-	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared/arn"
-	s3arn "github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
-	"github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/internal/v4a"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/s3shared"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/s3shared/arn"
+	s3arn "github.com/Enflick/aws-sdk-go-v2/service/s3/internal/arn"
+	"github.com/Enflick/aws-sdk-go-v2/service/s3/internal/endpoints"
 )
 
 const (

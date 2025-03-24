@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
+	"github.com/Enflick/aws-sdk-go-v2/aws/ratelimit"
 )
 
 // BackoffDelayer provides the interface for determining the delay to before

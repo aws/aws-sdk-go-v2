@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	v4 "github.com/Enflick/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 const (

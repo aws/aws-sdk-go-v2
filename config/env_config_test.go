@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
-	"github.com/aws/smithy-go/ptr"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/feature/ec2/imds"
+	"github.com/Enflick/aws-sdk-go-v2/internal/awstesting"
+	"github.com/Enflick/smithy-go/ptr"
 )
 
 var _ sharedConfigProfileProvider = (*EnvConfig)(nil)

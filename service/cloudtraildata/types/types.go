@@ -3,7 +3,7 @@
 package types
 
 import (
-	smithydocument "github.com/aws/smithy-go/document"
+	smithydocument "github.com/Enflick/smithy-go/document"
 )
 
 // An event from a source outside of Amazon Web Services that you want CloudTrail

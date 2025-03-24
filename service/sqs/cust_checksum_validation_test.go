@@ -6,10 +6,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	sqstypes "github.com/aws/aws-sdk-go-v2/service/sqs/types"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	sqstypes "github.com/Enflick/aws-sdk-go-v2/service/sqs/types"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 func TestValidateSendMessageChecksum(t *testing.T) {

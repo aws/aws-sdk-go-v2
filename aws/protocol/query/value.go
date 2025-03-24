@@ -4,7 +4,7 @@ import (
 	"math/big"
 	"net/url"
 
-	"github.com/aws/smithy-go/encoding/httpbinding"
+	"github.com/Enflick/smithy-go/encoding/httpbinding"
 )
 
 // Value represents a Query Value type.

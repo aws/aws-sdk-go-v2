@@ -3,8 +3,8 @@
 package configtesting
 
 import (
-	"github.com/aws/aws-sdk-go-v2/config"
-	svcExternal "github.com/aws/aws-sdk-go-v2/service/internal/s3shared/config"
+	"github.com/Enflick/aws-sdk-go-v2/config"
+	svcExternal "github.com/Enflick/aws-sdk-go-v2/service/internal/s3shared/config"
 )
 
 // UseARNRegionProvider Assertions

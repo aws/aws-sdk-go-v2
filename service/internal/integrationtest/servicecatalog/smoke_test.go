@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/integrationtest"
+	"github.com/Enflick/aws-sdk-go-v2/service/servicecatalog"
 )
 
 func TestInteg_00_ListAcceptedPortfolioShares(t *testing.T) {

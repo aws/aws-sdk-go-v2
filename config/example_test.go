@@ -8,13 +8,13 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
-	"github.com/aws/aws-sdk-go-v2/config"
-	"github.com/aws/aws-sdk-go-v2/credentials"
-	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	awshttp "github.com/Enflick/aws-sdk-go-v2/aws/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/config"
+	"github.com/Enflick/aws-sdk-go-v2/credentials"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/stscreds"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 func ExampleWithCredentialsCacheOptions() {
@@ -76,8 +76,8 @@ func ExampleWithCredentialsProvider() {
 }
 
 func ExampleWithAPIOptions() {
-	// import "github.com/aws/smithy-go/middleware"
-	// import smithyhttp "github.com/aws/smithy-go/transport/http"
+	// import "github.com/Enflick/smithy-go/middleware"
+	// import smithyhttp "github.com/Enflick/smithy-go/transport/http"
 
 	cfg, err := config.LoadDefaultConfig(context.TODO(),
 		config.WithAPIOptions([]func(*middleware.Stack) error{

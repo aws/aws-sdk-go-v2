@@ -11,11 +11,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
-	"github.com/aws/aws-sdk-go-v2/internal/ini"
-	"github.com/aws/smithy-go/logging"
-	"github.com/aws/smithy-go/ptr"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/feature/ec2/imds"
+	"github.com/Enflick/aws-sdk-go-v2/internal/ini"
+	"github.com/Enflick/smithy-go/logging"
+	"github.com/Enflick/smithy-go/ptr"
 )
 
 var _ regionProvider = (*SharedConfig)(nil)

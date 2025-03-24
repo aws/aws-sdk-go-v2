@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 
-	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
+	"github.com/Enflick/aws-sdk-go-v2/internal/sdkio"
 )
 
 var randBytes = func() []byte {

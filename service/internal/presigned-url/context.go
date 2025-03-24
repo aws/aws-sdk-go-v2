@@ -3,13 +3,13 @@ package presignedurl
 import (
 	"context"
 
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 // WithIsPresigning adds the isPresigning sentinel value to a context to signal
 // that the middleware stack is using the presign flow.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func WithIsPresigning(ctx context.Context) context.Context {
 	return middleware.WithStackValue(ctx, isPresigningKey{}, true)
@@ -18,7 +18,7 @@ func WithIsPresigning(ctx context.Context) context.Context {
 // GetIsPresigning returns if the context contains the isPresigning sentinel
 // value for presigning flows.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func GetIsPresigning(ctx context.Context) bool {
 	v, _ := middleware.GetStackValue(ctx, isPresigningKey{}).(bool)

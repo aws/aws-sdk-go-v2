@@ -3,7 +3,7 @@ package defaults
 import (
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
 )
 
 // Configuration is the set of SDK configuration options that are determined based

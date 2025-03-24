@@ -3,8 +3,8 @@ package dynamodb
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	"github.com/Enflick/aws-sdk-go-v2/internal/awsutil"
+	"github.com/Enflick/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // BatchGetItemPaginatorOptions is the paginator options for BatchGetItem

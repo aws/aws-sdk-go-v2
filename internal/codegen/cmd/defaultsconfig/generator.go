@@ -42,7 +42,7 @@ func (g *generationContext) AddSDKImport(pkg, alias string) (s string) {
 	}
 
 	g.Imports[Import{
-		Package: path.Join("github.com/aws/aws-sdk-go-v2", pkg),
+		Package: path.Join("github.com/Enflick/aws-sdk-go-v2", pkg),
 		Alias:   alias,
 	}] = struct{}{}
 

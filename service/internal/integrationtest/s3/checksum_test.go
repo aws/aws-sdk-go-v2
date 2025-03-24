@@ -12,11 +12,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/types"
-	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
-	"github.com/aws/smithy-go/logging"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/service/s3"
+	"github.com/Enflick/aws-sdk-go-v2/service/s3/types"
+	s3types "github.com/Enflick/aws-sdk-go-v2/service/s3/types"
+	"github.com/Enflick/smithy-go/logging"
 )
 
 type retryClient struct {

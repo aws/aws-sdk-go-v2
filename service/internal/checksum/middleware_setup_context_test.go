@@ -7,8 +7,8 @@ import (
 	"context"
 	"testing"
 
-	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
-	"github.com/aws/smithy-go/middleware"
+	internalcontext "github.com/Enflick/aws-sdk-go-v2/internal/context"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 func TestSetupInput(t *testing.T) {

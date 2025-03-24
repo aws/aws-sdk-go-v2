@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/Enflick/aws-sdk-go-v2/internal/sdk"
 )
 
 // AnonymousCredentials provides a sentinel CredentialsProvider that should be

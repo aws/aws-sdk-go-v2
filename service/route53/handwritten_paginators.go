@@ -3,7 +3,7 @@ package route53
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/route53/types"
+	"github.com/Enflick/aws-sdk-go-v2/service/route53/types"
 )
 
 // ListResourceRecordSetsAPIClient is a client that implements the ListResourceRecordSets

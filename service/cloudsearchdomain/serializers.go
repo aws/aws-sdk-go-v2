@@ -5,10 +5,10 @@ package cloudsearchdomain
 import (
 	"context"
 	"fmt"
-	smithy "github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/encoding/httpbinding"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	smithy "github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/encoding/httpbinding"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 type awsRestjson1_serializeOpSearch struct {

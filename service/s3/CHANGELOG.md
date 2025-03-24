@@ -153,7 +153,7 @@
 
 # v1.43.0 (2023-11-17)
 
-* **Feature**: **BREAKING CHANGE** Correct nullability of a large number of S3 structure fields. See https://github.com/aws/aws-sdk-go-v2/issues/2162.
+* **Feature**: **BREAKING CHANGE** Correct nullability of a large number of S3 structure fields. See https://github.com/Enflick/aws-sdk-go-v2/issues/2162.
 * **Feature**: Removes all default 0 values for numbers and false values for booleans
 
 # v1.42.2 (2023-11-15)
@@ -239,7 +239,7 @@
 # v1.34.0 (2023-06-13)
 
 * **Feature**: Integrate double encryption feature to SDKs.
-* **Bug Fix**: Fix HeadObject to return types.Nound when an object does not exist. Fixes [2084](https://github.com/aws/aws-sdk-go-v2/issues/2084)
+* **Bug Fix**: Fix HeadObject to return types.Nound when an object does not exist. Fixes [2084](https://github.com/Enflick/aws-sdk-go-v2/issues/2084)
 * **Dependency Update**: Updated to the latest SDK module versions
 
 # v1.33.1 (2023-05-04)
@@ -380,7 +380,7 @@
 
 # v1.27.0 (2022-07-01)
 
-* **Feature**: Add presign support for HeadBucket, DeleteObject, and DeleteBucket. Fixes [#1076](https://github.com/aws/aws-sdk-go-v2/issues/1076).
+* **Feature**: Add presign support for HeadBucket, DeleteObject, and DeleteBucket. Fixes [#1076](https://github.com/Enflick/aws-sdk-go-v2/issues/1076).
 
 # v1.26.12 (2022-06-29)
 
@@ -438,14 +438,14 @@
 # v1.25.0 (2022-02-24)
 
 * **Feature**: API client updated
-* **Feature**: Adds RetryMaxAttempts and RetryMod to API client Options. This allows the API clients' default Retryer to be configured from the shared configuration files or environment variables. Adding a new Retry mode of `Adaptive`. `Adaptive` retry mode is an experimental mode, adding client rate limiting when throttles reponses are received from an API. See [retry.AdaptiveMode](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/retry#AdaptiveMode) for more details, and configuration options.
+* **Feature**: Adds RetryMaxAttempts and RetryMod to API client Options. This allows the API clients' default Retryer to be configured from the shared configuration files or environment variables. Adding a new Retry mode of `Adaptive`. `Adaptive` retry mode is an experimental mode, adding client rate limiting when throttles reponses are received from an API. See [retry.AdaptiveMode](https://pkg.go.dev/github.com/Enflick/aws-sdk-go-v2/aws/retry#AdaptiveMode) for more details, and configuration options.
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
 * **Bug Fix**: Fixes the AWS Sigv4 signer to trim header value's whitespace when computing the canonical headers block of the string to sign.
 * **Dependency Update**: Updated to the latest SDK module versions
 
 # v1.24.1 (2022-01-28)
 
-* **Bug Fix**: Updates SDK API client deserialization to pre-allocate byte slice and string response payloads, [#1565](https://github.com/aws/aws-sdk-go-v2/pull/1565). Thanks to [Tyson Mote](https://github.com/tysonmote) for submitting this PR.
+* **Bug Fix**: Updates SDK API client deserialization to pre-allocate byte slice and string response payloads, [#1565](https://github.com/Enflick/aws-sdk-go-v2/pull/1565). Thanks to [Tyson Mote](https://github.com/tysonmote) for submitting this PR.
 
 # v1.24.0 (2022-01-14)
 
@@ -466,7 +466,7 @@
 # v1.21.0 (2021-12-02)
 
 * **Feature**: API client updated
-* **Bug Fix**: Fixes a bug that prevented aws.EndpointResolverWithOptions from being used by the service client. ([#1514](https://github.com/aws/aws-sdk-go-v2/pull/1514))
+* **Bug Fix**: Fixes a bug that prevented aws.EndpointResolverWithOptions from being used by the service client. ([#1514](https://github.com/Enflick/aws-sdk-go-v2/pull/1514))
 * **Dependency Update**: Updated to the latest SDK module versions
 
 # v1.20.0 (2021-11-30)
@@ -527,7 +527,7 @@
 
 # v1.12.0 (2021-08-04)
 
-* **Feature**: Add `HeadObject` presign support. ([#1346](https://github.com/aws/aws-sdk-go-v2/pull/1346))
+* **Feature**: Add `HeadObject` presign support. ([#1346](https://github.com/Enflick/aws-sdk-go-v2/pull/1346))
 * **Dependency Update**: Updated `github.com/aws/smithy-go` to latest version.
 * **Dependency Update**: Updated to the latest SDK module versions
 

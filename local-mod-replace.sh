@@ -33,7 +33,7 @@ if [ "$PROJECT_DIR" != "" ]; then
   cd "$PROJECT_DIR" || exit
 fi
 
-go mod graph | awk '{print $1}' | cut -d '@' -f 1 | sort | uniq | grep "github.com/aws/aws-sdk-go-v2" | while read x; do
+go mod graph | awk '{print $1}' | cut -d '@' -f 1 | sort | uniq | grep "github.com/Enflick/aws-sdk-go-v2" | while read x; do
   repPath=${x/github.com\/aws\/aws-sdk-go-v2/${SDK_SOURCE_DIR}}
   echo -replace $x=$repPath
 done | xargs go mod edit

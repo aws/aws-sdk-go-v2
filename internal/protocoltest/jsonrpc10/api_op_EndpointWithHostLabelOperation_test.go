@@ -4,12 +4,12 @@ package jsonrpc10
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
-	"github.com/aws/smithy-go/middleware"
-	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
-	"github.com/aws/smithy-go/ptr"
-	smithytesting "github.com/aws/smithy-go/testing"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	protocoltesthttp "github.com/Enflick/aws-sdk-go-v2/internal/protocoltest"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyprivateprotocol "github.com/Enflick/smithy-go/private/protocol"
+	"github.com/Enflick/smithy-go/ptr"
+	smithytesting "github.com/Enflick/smithy-go/testing"
 	"io"
 	"net/http"
 	"net/url"

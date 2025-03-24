@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/Enflick/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
 func examplePEMReader() io.Reader {

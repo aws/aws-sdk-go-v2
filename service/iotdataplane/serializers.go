@@ -7,11 +7,11 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	smithy "github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/encoding/httpbinding"
-	"github.com/aws/smithy-go/middleware"
-	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	smithy "github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/encoding/httpbinding"
+	"github.com/Enflick/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/ptr"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 type awsRestjson1_serializeOpDeleteThingShadow struct {

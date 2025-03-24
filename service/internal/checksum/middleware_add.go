@@ -1,7 +1,7 @@
 package checksum
 
 import (
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 // InputMiddlewareOptions provides the options for the request

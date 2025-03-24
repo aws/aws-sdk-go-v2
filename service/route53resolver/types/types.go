@@ -3,7 +3,7 @@
 package types
 
 import (
-	smithydocument "github.com/aws/smithy-go/document"
+	smithydocument "github.com/Enflick/smithy-go/document"
 )
 
 // For Resolver list operations ([ListResolverEndpoints] , [ListResolverRules], [ListResolverRuleAssociations], [ListResolverQueryLogConfigs], [ListResolverQueryLogConfigAssociations]), and [ListResolverDnssecConfigs]), an optional specification to

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	awshttp "github.com/Enflick/aws-sdk-go-v2/aws/transport/http"
 )
 
 // ResponseError provides the HTTP centric error type wrapping the underlying error

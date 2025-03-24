@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 
-	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/auth"
-	"github.com/aws/smithy-go/logging"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	v4 "github.com/Enflick/aws-sdk-go-v2/aws/signer/v4"
+	internalauthsmithy "github.com/Enflick/aws-sdk-go-v2/internal/auth/smithy"
+	"github.com/Enflick/aws-sdk-go-v2/internal/sdk"
+	"github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/auth"
+	"github.com/Enflick/smithy-go/logging"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // ExpressSigner signs requests for the sigv4-s3express auth scheme.

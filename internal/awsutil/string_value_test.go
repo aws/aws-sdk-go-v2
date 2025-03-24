@@ -3,8 +3,8 @@ package awsutil_test
 import (
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/smithy-go/ptr"
+	"github.com/Enflick/aws-sdk-go-v2/internal/awsutil"
+	"github.com/Enflick/smithy-go/ptr"
 )
 
 type testStruct struct {

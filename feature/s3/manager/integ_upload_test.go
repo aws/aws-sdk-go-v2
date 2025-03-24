@@ -22,12 +22,12 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/feature/s3/manager"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
-	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	v4 "github.com/Enflick/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/Enflick/aws-sdk-go-v2/feature/s3/manager"
+	"github.com/Enflick/aws-sdk-go-v2/service/s3"
+	s3types "github.com/Enflick/aws-sdk-go-v2/service/s3/types"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 var integBuf12MB = make([]byte, 1024*1024*12)

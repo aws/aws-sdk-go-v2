@@ -358,7 +358,7 @@
 # v1.14.0 (2022-02-24)
 
 * **Feature**: API client updated
-* **Feature**: Adds RetryMaxAttempts and RetryMod to API client Options. This allows the API clients' default Retryer to be configured from the shared configuration files or environment variables. Adding a new Retry mode of `Adaptive`. `Adaptive` retry mode is an experimental mode, adding client rate limiting when throttles reponses are received from an API. See [retry.AdaptiveMode](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/retry#AdaptiveMode) for more details, and configuration options.
+* **Feature**: Adds RetryMaxAttempts and RetryMod to API client Options. This allows the API clients' default Retryer to be configured from the shared configuration files or environment variables. Adding a new Retry mode of `Adaptive`. `Adaptive` retry mode is an experimental mode, adding client rate limiting when throttles reponses are received from an API. See [retry.AdaptiveMode](https://pkg.go.dev/github.com/Enflick/aws-sdk-go-v2/aws/retry#AdaptiveMode) for more details, and configuration options.
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
 * **Dependency Update**: Updated to the latest SDK module versions
 
@@ -384,7 +384,7 @@
 # v1.10.0 (2021-12-02)
 
 * **Feature**: API client updated
-* **Bug Fix**: Fixes a bug that prevented aws.EndpointResolverWithOptions from being used by the service client. ([#1514](https://github.com/aws/aws-sdk-go-v2/pull/1514))
+* **Bug Fix**: Fixes a bug that prevented aws.EndpointResolverWithOptions from being used by the service client. ([#1514](https://github.com/Enflick/aws-sdk-go-v2/pull/1514))
 * **Dependency Update**: Updated to the latest SDK module versions
 
 # v1.9.1 (2021-11-19)
@@ -425,7 +425,7 @@
 
 # v1.5.2 (2021-08-04)
 
-* **Bug Fix**: Fixed an issue that caused one or more API operations to fail when attempting to resolve the service endpoint. ([#1349](https://github.com/aws/aws-sdk-go-v2/pull/1349))
+* **Bug Fix**: Fixed an issue that caused one or more API operations to fail when attempting to resolve the service endpoint. ([#1349](https://github.com/Enflick/aws-sdk-go-v2/pull/1349))
 * **Dependency Update**: Updated `github.com/aws/smithy-go` to latest version.
 * **Dependency Update**: Updated to the latest SDK module versions
 

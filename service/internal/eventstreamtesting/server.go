@@ -15,11 +15,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
-	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
-	"github.com/aws/aws-sdk-go-v2/credentials"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/aws/protocol/eventstream"
+	"github.com/Enflick/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	awshttp "github.com/Enflick/aws-sdk-go-v2/aws/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/credentials"
 )
 
 const (

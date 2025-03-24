@@ -2,7 +2,7 @@ package imds
 
 import (
 	"context"
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 type getIdentityMiddleware struct {

@@ -5,14 +5,14 @@ package s3control
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
-	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
-	smithy "github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/middleware"
-	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/Enflick/aws-sdk-go-v2/service/s3control/internal/customizations"
+	"github.com/Enflick/aws-sdk-go-v2/service/s3control/types"
+	smithy "github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/ptr"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 	"strings"
 )
 

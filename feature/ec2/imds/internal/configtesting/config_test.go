@@ -1,8 +1,8 @@
 package configtesting
 
 import (
-	"github.com/aws/aws-sdk-go-v2/config"
-	imdsconfig "github.com/aws/aws-sdk-go-v2/feature/ec2/imds/internal/config"
+	"github.com/Enflick/aws-sdk-go-v2/config"
+	imdsconfig "github.com/Enflick/aws-sdk-go-v2/feature/ec2/imds/internal/config"
 )
 
 var _ imdsconfig.EndpointModeResolver = (*config.LoadOptions)(nil)

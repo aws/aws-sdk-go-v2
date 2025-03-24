@@ -1,8 +1,8 @@
 package configtesting
 
 import (
-	"github.com/aws/aws-sdk-go-v2/config"
-	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	"github.com/Enflick/aws-sdk-go-v2/config"
+	internalConfig "github.com/Enflick/aws-sdk-go-v2/internal/configsources"
 )
 
 // EnableEndpointDiscoveryProvider Assertions

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/auth"
-	"github.com/aws/smithy-go/auth/bearer"
+	"github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/auth"
+	"github.com/Enflick/smithy-go/auth/bearer"
 )
 
 // BearerTokenAdapter adapts smithy bearer.Token to smithy auth.Identity.

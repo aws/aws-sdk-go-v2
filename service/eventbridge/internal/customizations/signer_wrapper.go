@@ -5,17 +5,17 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/internal/v4a"
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	v4 "github.com/Enflick/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/Enflick/aws-sdk-go-v2/internal/v4a"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 type signerVersionKey struct{}
 
 // GetSignerVersion retrieves the signer version to use for signing
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func GetSignerVersion(ctx context.Context) (v string) {
 	v, _ = middleware.GetStackValue(ctx, signerVersionKey{}).(string)
@@ -24,7 +24,7 @@ func GetSignerVersion(ctx context.Context) (v string) {
 
 // SetSignerVersion sets the signer version to be used for signing the request
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func SetSignerVersion(ctx context.Context, version string) context.Context {
 	return middleware.WithStackValue(ctx, signerVersionKey{}, version)

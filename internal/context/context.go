@@ -3,7 +3,7 @@ package context
 import (
 	"context"
 
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 type s3BackendKey struct{}

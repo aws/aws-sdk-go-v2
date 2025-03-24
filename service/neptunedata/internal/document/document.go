@@ -5,17 +5,17 @@ package document
 import (
 	"bytes"
 	"encoding/json"
-	smithydocument "github.com/aws/smithy-go/document"
-	smithydocumentjson "github.com/aws/smithy-go/document/json"
+	smithydocument "github.com/Enflick/smithy-go/document"
+	smithydocumentjson "github.com/Enflick/smithy-go/document/json"
 )
 
-// github.com/aws/aws-sdk-go-v2/service/neptunedata/internal/document.smithyDocument
+// github.com/Enflick/aws-sdk-go-v2/service/neptunedata/internal/document.smithyDocument
 // is an interface which is used to bind a document type to its service client.
 type smithyDocument interface {
 	isSmithyDocument()
 }
 
-// github.com/aws/aws-sdk-go-v2/service/neptunedata/internal/document.Interface is
+// github.com/Enflick/aws-sdk-go-v2/service/neptunedata/internal/document.Interface is
 // a JSON-like data model type that is protocol agnostic and is usedto send
 // open-content to a service.
 type Interface interface {
@@ -85,7 +85,7 @@ func NewDocumentUnmarshaler(v interface{}) Interface {
 	}
 }
 
-// github.com/aws/aws-sdk-go-v2/service/neptunedata/internal/document.IsInterface
+// github.com/Enflick/aws-sdk-go-v2/service/neptunedata/internal/document.IsInterface
 // returns whether the given Interface implementation is a valid client
 // implementation
 func IsInterface(v Interface) (ok bool) {

@@ -5,10 +5,10 @@ package restxml
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/smithy-go/middleware"
-	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyrequestcompression "github.com/Enflick/smithy-go/private/requestcompression"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 func (c *Client) PutWithContentEncoding(ctx context.Context, params *PutWithContentEncodingInput, optFns ...func(*Options)) (*PutWithContentEncodingOutput, error) {

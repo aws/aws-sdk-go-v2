@@ -5,11 +5,11 @@ package kinesis
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
-	"github.com/aws/smithy-go/middleware"
-	"github.com/aws/smithy-go/ptr"
-	smithysync "github.com/aws/smithy-go/sync"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/service/kinesis/types"
+	"github.com/Enflick/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/ptr"
+	smithysync "github.com/Enflick/smithy-go/sync"
 	"sync"
 )
 

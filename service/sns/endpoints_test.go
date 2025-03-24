@@ -4,9 +4,9 @@ package sns
 
 import (
 	"context"
-	smithy "github.com/aws/smithy-go"
-	smithyendpoints "github.com/aws/smithy-go/endpoints"
-	"github.com/aws/smithy-go/ptr"
+	smithy "github.com/Enflick/smithy-go"
+	smithyendpoints "github.com/Enflick/smithy-go/endpoints"
+	"github.com/Enflick/smithy-go/ptr"
 	"net/http"
 	"net/url"
 	"reflect"

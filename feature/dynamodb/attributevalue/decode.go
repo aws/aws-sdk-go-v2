@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	"github.com/Enflick/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // An Unmarshaler is an interface to provide custom unmarshaling of

@@ -13,7 +13,7 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.ec2#AwsEc2",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query"
+          "module": "github.com/Enflick/aws-sdk-go-v2/internal/protocoltest/ec2query"
         }
       }
     },
@@ -29,7 +29,7 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.json#JsonProtocol",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc"
+          "module": "github.com/Enflick/aws-sdk-go-v2/internal/protocoltest/jsonrpc"
         }
       }
     },
@@ -45,7 +45,7 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.json10#JsonRpc10",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10"
+          "module": "github.com/Enflick/aws-sdk-go-v2/internal/protocoltest/jsonrpc10"
         }
       }
     },
@@ -61,7 +61,7 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.query#AwsQuery",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/query"
+          "module": "github.com/Enflick/aws-sdk-go-v2/internal/protocoltest/query"
         }
       }
     },
@@ -77,7 +77,7 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.restjson#RestJson",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson"
+          "module": "github.com/Enflick/aws-sdk-go-v2/internal/protocoltest/awsrestjson"
         }
       }
     },
@@ -93,7 +93,7 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.restxml#RestXml",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml"
+          "module": "github.com/Enflick/aws-sdk-go-v2/internal/protocoltest/restxml"
         }
       }
     },
@@ -109,7 +109,7 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.restxml.xmlns#RestXmlWithNamespace",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace"
+          "module": "github.com/Enflick/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace"
         }
       }
     },
@@ -125,7 +125,7 @@
       "plugins": {
         "go-codegen": {
           "service": "smithy.protocoltests.rpcv2Cbor#RpcV2Protocol",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor"
+          "module": "github.com/Enflick/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor"
         }
       }
     }

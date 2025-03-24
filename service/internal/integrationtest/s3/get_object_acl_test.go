@@ -5,11 +5,11 @@ package s3
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/integrationtest"
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/Enflick/aws-sdk-go-v2/service/s3"
 )
 
 func TestInteg_XSIType(t *testing.T) {

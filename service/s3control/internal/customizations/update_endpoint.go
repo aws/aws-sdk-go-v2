@@ -1,12 +1,12 @@
 package customizations
 
 import (
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/middleware"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/s3shared"
 
-	internalendpoints "github.com/aws/aws-sdk-go-v2/service/s3control/internal/endpoints"
+	internalendpoints "github.com/Enflick/aws-sdk-go-v2/service/s3control/internal/endpoints"
 )
 
 // EndpointResolver interface for resolving service endpoints.

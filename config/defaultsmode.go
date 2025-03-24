@@ -4,8 +4,8 @@ import (
 	"context"
 	"os"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/feature/ec2/imds"
 )
 
 const execEnvVar = "AWS_EXECUTION_ENV"

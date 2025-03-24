@@ -510,7 +510,7 @@
 
 # v1.2.0 (2021-08-04)
 
-* **Feature**: Add IsSet helper for ConditionBuilder and KeyConditionBuilder ([#1329](https://github.com/aws/aws-sdk-go-v2/pull/1329))
+* **Feature**: Add IsSet helper for ConditionBuilder and KeyConditionBuilder ([#1329](https://github.com/Enflick/aws-sdk-go-v2/pull/1329))
 * **Dependency Update**: Updated to the latest SDK module versions
 
 # v1.1.3 (2021-07-15)

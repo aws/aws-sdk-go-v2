@@ -5,9 +5,9 @@ package timestreamwrite
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
-	tw "github.com/aws/aws-sdk-go-v2/service/timestreamwrite"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/integrationtest"
+	tw "github.com/Enflick/aws-sdk-go-v2/service/timestreamwrite"
 	"testing"
 	"time"
 )

@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"text/template"
 
-	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
+	"github.com/Enflick/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
 )
 
 var tmpl = template.Must(template.New("generate").

@@ -2,8 +2,8 @@ package config
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/stscreds"
+	"github.com/Enflick/aws-sdk-go-v2/internal/awstesting"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -11,7 +11,7 @@ import (
 	"testing"
 )
 
-// see https://github.com/aws/aws-sdk-go-v2/issues/2015
+// see https://github.com/Enflick/aws-sdk-go-v2/issues/2015
 func TestResolveWebIdentityWithOptions(t *testing.T) {
 
 	t.Run("token from env", func(t *testing.T) {

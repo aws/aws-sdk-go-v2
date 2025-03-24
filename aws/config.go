@@ -3,9 +3,9 @@ package aws
 import (
 	"net/http"
 
-	smithybearer "github.com/aws/smithy-go/auth/bearer"
-	"github.com/aws/smithy-go/logging"
-	"github.com/aws/smithy-go/middleware"
+	smithybearer "github.com/Enflick/smithy-go/auth/bearer"
+	"github.com/Enflick/smithy-go/logging"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 // HTTPClient provides the interface to provide custom HTTPClients. Generally

@@ -3,8 +3,8 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/document"
-	smithydocument "github.com/aws/smithy-go/document"
+	"github.com/Enflick/aws-sdk-go-v2/service/opensearchserverless/document"
+	smithydocument "github.com/Enflick/smithy-go/document"
 )
 
 // Details about an OpenSearch Serverless access policy.

@@ -9,13 +9,13 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
-	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	v4Internal "github.com/Enflick/aws-sdk-go-v2/aws/signer/internal/v4"
+	internalauth "github.com/Enflick/aws-sdk-go-v2/internal/auth"
+	"github.com/Enflick/aws-sdk-go-v2/internal/sdk"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 const computePayloadHashMiddlewareID = "ComputePayloadHash"
@@ -398,7 +398,7 @@ type payloadHashKey struct{}
 
 // GetPayloadHash retrieves the payload hash to use for signing
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func GetPayloadHash(ctx context.Context) (v string) {
 	v, _ = middleware.GetStackValue(ctx, payloadHashKey{}).(string)
@@ -407,7 +407,7 @@ func GetPayloadHash(ctx context.Context) (v string) {
 
 // SetPayloadHash sets the payload hash to be used for signing the request
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func SetPayloadHash(ctx context.Context, hash string) context.Context {
 	return middleware.WithStackValue(ctx, payloadHashKey{}, hash)

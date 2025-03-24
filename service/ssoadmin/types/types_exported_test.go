@@ -4,7 +4,7 @@ package types_test
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	"github.com/Enflick/aws-sdk-go-v2/service/ssoadmin/types"
 )
 
 func ExampleAuthenticationMethod_outputUsage() {

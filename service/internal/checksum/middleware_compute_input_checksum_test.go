@@ -15,11 +15,11 @@ import (
 	"testing"
 	"testing/iotest"
 
-	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
-	"github.com/aws/smithy-go/logging"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	v4 "github.com/Enflick/aws-sdk-go-v2/aws/signer/v4"
+	internalcontext "github.com/Enflick/aws-sdk-go-v2/internal/context"
+	"github.com/Enflick/smithy-go/logging"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // TODO test cases:

@@ -441,14 +441,14 @@
 
 # v1.7.0 (2022-02-24)
 
-* **Feature**: Fixes [#645](https://github.com/aws/aws-sdk-go-v2/issues/645), [#411](https://github.com/aws/aws-sdk-go-v2/issues/411) by adding support for (un)marshaling AttributeValue maps to Go maps key types of string, number, bool, and types implementing encoding.Text(un)Marshaler interface
+* **Feature**: Fixes [#645](https://github.com/Enflick/aws-sdk-go-v2/issues/645), [#411](https://github.com/Enflick/aws-sdk-go-v2/issues/411) by adding support for (un)marshaling AttributeValue maps to Go maps key types of string, number, bool, and types implementing encoding.Text(un)Marshaler interface
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
-* **Bug Fix**: Fixes [#1569](https://github.com/aws/aws-sdk-go-v2/issues/1569) inconsistent serialization of Go struct field names
+* **Bug Fix**: Fixes [#1569](https://github.com/Enflick/aws-sdk-go-v2/issues/1569) inconsistent serialization of Go struct field names
 * **Dependency Update**: Updated to the latest SDK module versions
 
 # v1.6.0 (2022-01-14)
 
-* **Feature**: Adds new MarshalWithOptions and UnmarshalWithOptions helpers allowing Encoding and Decoding options to be specified when serializing AttributeValues. Addresses issue: https://github.com/aws/aws-sdk-go-v2/issues/1494
+* **Feature**: Adds new MarshalWithOptions and UnmarshalWithOptions helpers allowing Encoding and Decoding options to be specified when serializing AttributeValues. Addresses issue: https://github.com/Enflick/aws-sdk-go-v2/issues/1494
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
 * **Dependency Update**: Updated to the latest SDK module versions
 

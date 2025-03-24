@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/service/codestar"
+	"github.com/Enflick/aws-sdk-go-v2/service/codestar"
 
-	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/integrationtest"
 )
 
 func TestInteg_00_ListProjects(t *testing.T) {

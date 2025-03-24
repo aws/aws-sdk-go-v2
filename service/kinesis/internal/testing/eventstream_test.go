@@ -8,14 +8,14 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
-	"github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting"
-	"github.com/aws/aws-sdk-go-v2/service/kinesis"
-	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
-	"github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/aws/protocol/eventstream"
+	"github.com/Enflick/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/eventstreamtesting"
+	"github.com/Enflick/aws-sdk-go-v2/service/kinesis"
+	"github.com/Enflick/aws-sdk-go-v2/service/kinesis/types"
+	"github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 func removeValidationMiddleware(stack *middleware.Stack) error {

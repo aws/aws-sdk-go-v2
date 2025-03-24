@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/smithy-go/logging"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	v4 "github.com/Enflick/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/Enflick/smithy-go/logging"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 type httpPresignerFunc func(

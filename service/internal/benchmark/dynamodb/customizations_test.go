@@ -13,8 +13,8 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/Enflick/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/Enflick/aws-sdk-go-v2/service/dynamodb"
 	awsOld "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/corehandlers"
 	credsOld "github.com/aws/aws-sdk-go/aws/credentials"

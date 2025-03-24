@@ -209,7 +209,7 @@ copy-attributevalue-feature:
 	find . -name "*.go" | grep -v "doc.go" | xargs -I % rm % && \
 	find ../../dynamodb/attributevalue -name "*.go" | grep -v "doc.go" | xargs -I % cp % . && \
 	ls *.go | grep -v "convert.go" | grep -v "doc.go" | \
-		xargs -I % sed -i.bk -E 's:github.com/aws/aws-sdk-go-v2/(service|feature)/dynamodb:github.com/aws/aws-sdk-go-v2/\1/dynamodbstreams:g' % &&  \
+		xargs -I % sed -i.bk -E 's:github.com/Enflick/aws-sdk-go-v2/(service|feature)/dynamodb:github.com/Enflick/aws-sdk-go-v2/\1/dynamodbstreams:g' % &&  \
 	ls *.go | grep -v "convert.go" | grep -v "doc.go" | \
 		xargs -I % sed -i.bk 's:DynamoDB:DynamoDBStreams:g' % &&  \
 	ls *.go | grep -v "doc.go" | \
@@ -520,7 +520,7 @@ list-deps-%:
 	@# e.g. list-deps-internal_protocoltest
 	@cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst list-deps-,,$@)) ${EACHMODULE_FLAGS} \
-		"go list -m all | grep -v 'github.com/aws/aws-sdk-go-v2'" | sort -u
+		"go list -m all | grep -v 'github.com/Enflick/aws-sdk-go-v2'" | sort -u
 
 ###################
 # Sandbox Testing #

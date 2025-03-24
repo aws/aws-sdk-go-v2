@@ -9,10 +9,10 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/manager/internal/testing"
-	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	s3testing "github.com/Enflick/aws-sdk-go-v2/feature/s3/manager/internal/testing"
+	"github.com/Enflick/aws-sdk-go-v2/internal/sdkio"
+	"github.com/Enflick/aws-sdk-go-v2/service/s3"
 )
 
 type testReader struct {

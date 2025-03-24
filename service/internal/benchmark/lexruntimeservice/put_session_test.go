@@ -7,17 +7,17 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	smithyClient "github.com/aws/aws-sdk-go-v2/service/lexruntimeservice"
-	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
+	"github.com/Enflick/aws-sdk-go-v2/internal/awstesting/unit"
+	smithyClient "github.com/Enflick/aws-sdk-go-v2/service/lexruntimeservice"
+	"github.com/Enflick/aws-sdk-go-v2/service/lexruntimeservice/types"
+	"github.com/Enflick/smithy-go/ptr"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 	v1Aws "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/corehandlers"
 	v1Creds "github.com/aws/aws-sdk-go/aws/credentials"
 	v1Request "github.com/aws/aws-sdk-go/aws/request"
 	v1Unit "github.com/aws/aws-sdk-go/awstesting/unit"
 	v1Client "github.com/aws/aws-sdk-go/service/lexruntimeservice"
-	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func BenchmarkPutSession(b *testing.B) {

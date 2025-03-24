@@ -22,7 +22,7 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
  * A class of constants for dependencies used by this package.
  */
 public class AwsGoDependency {
-    public static final String AWS_SOURCE_PATH = "github.com/aws/aws-sdk-go-v2";
+    public static final String AWS_SOURCE_PATH = "github.com/Enflick/aws-sdk-go-v2";
 
     public static final GoDependency AWS_REST_JSON_PROTOCOL = aws("aws/protocol/restjson");
     public static final GoDependency AWS_QUERY_PROTOCOL = aws("aws/protocol/query");

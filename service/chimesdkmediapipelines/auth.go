@@ -5,11 +5,11 @@ package chimesdkmediapipelines
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	smithy "github.com/aws/smithy-go"
-	smithyauth "github.com/aws/smithy-go/auth"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	smithy "github.com/Enflick/smithy-go"
+	smithyauth "github.com/Enflick/smithy-go/auth"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 func bindAuthParamsRegion(params *AuthResolverParameters, _ interface{}, options Options) {

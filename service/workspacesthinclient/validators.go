@@ -5,8 +5,8 @@ package workspacesthinclient
 import (
 	"context"
 	"fmt"
-	smithy "github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/middleware"
+	smithy "github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 type validateOpCreateEnvironment struct {

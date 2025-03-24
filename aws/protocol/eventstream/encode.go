@@ -6,7 +6,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/aws/smithy-go/logging"
+	"github.com/Enflick/smithy-go/logging"
 	"hash"
 	"hash/crc32"
 	"io"

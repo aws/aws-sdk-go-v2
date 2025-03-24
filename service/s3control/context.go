@@ -3,7 +3,7 @@ package s3control
 import (
 	"context"
 
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 // stashOperationInput clones the operation input at the start of the serialize

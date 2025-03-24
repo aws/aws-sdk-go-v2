@@ -3,7 +3,7 @@ package retry
 import (
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
 )
 
 var _ aws.RetryerV2 = (*withIsErrorRetryable)(nil)

@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	smithy "github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/middleware"
+	smithy "github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 // SigV4 is a constant representing
@@ -138,7 +138,7 @@ type disableDoubleEncoding struct{}
 // SetDisableDoubleEncoding sets or modifies the disable double encoding option
 // on the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func SetDisableDoubleEncoding(ctx context.Context, value bool) context.Context {
 	return middleware.WithStackValue(ctx, disableDoubleEncoding{}, value)
@@ -147,7 +147,7 @@ func SetDisableDoubleEncoding(ctx context.Context, value bool) context.Context {
 // GetDisableDoubleEncoding retrieves the disable double encoding option
 // from the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func GetDisableDoubleEncoding(ctx context.Context) (value bool, ok bool) {
 	value, ok = middleware.GetStackValue(ctx, disableDoubleEncoding{}).(bool)

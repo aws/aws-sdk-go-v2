@@ -5,9 +5,9 @@ package codegurureviewer
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
-	smithy "github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 type validateOpAssociateRepository struct {

@@ -3,8 +3,8 @@ package middleware
 import (
 	"net/http"
 
-	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics"
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/aws/middleware/private/metrics"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 func WithMetricMiddlewares(

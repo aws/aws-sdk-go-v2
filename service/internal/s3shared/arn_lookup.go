@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/middleware"
 
-	"github.com/aws/aws-sdk-go-v2/aws/arn"
+	"github.com/Enflick/aws-sdk-go-v2/aws/arn"
 )
 
 // ARNLookup is the initial middleware that looks up if an arn is provided.
@@ -56,7 +56,7 @@ type arnResourceKey struct{}
 
 // SetARNResourceOnContext sets the S3 ARN on the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func setARNResourceOnContext(ctx context.Context, value arn.ARN) context.Context {
 	return middleware.WithStackValue(ctx, arnResourceKey{}, value)
@@ -65,7 +65,7 @@ func setARNResourceOnContext(ctx context.Context, value arn.ARN) context.Context
 // GetARNResourceFromContext returns an ARN from context and a bool indicating
 // presence of ARN on ctx.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func GetARNResourceFromContext(ctx context.Context) (arn.ARN, bool) {
 	v, ok := middleware.GetStackValue(ctx, arnResourceKey{}).(arn.ARN)

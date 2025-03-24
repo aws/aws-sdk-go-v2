@@ -3,8 +3,8 @@ package checksum
 import (
 	"context"
 
-	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
-	"github.com/aws/smithy-go/middleware"
+	internalcontext "github.com/Enflick/aws-sdk-go-v2/internal/context"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 // setupChecksumContext is the initial middleware that looks up the input

@@ -10,9 +10,9 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/manager/internal/testing"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	s3testing "github.com/Enflick/aws-sdk-go-v2/feature/s3/manager/internal/testing"
+	"github.com/Enflick/aws-sdk-go-v2/service/s3"
 )
 
 var mockErrResponse = []byte(`<?xml version="1.0" encoding="UTF-8"?>

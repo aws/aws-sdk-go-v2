@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
 )
 
 // DescribeStreamPaginatorOptions is the paginator options for DescribeStream

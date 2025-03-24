@@ -4,7 +4,7 @@ package chimesdkidentity
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
 	"os"
 	"reflect"
 	"testing"

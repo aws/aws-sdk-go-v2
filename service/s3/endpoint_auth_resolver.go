@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	smithyauth "github.com/aws/smithy-go/auth"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	smithyauth "github.com/Enflick/smithy-go/auth"
 )
 
 type endpointAuthResolver struct {

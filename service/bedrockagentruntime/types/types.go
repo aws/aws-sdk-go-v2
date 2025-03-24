@@ -3,8 +3,8 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/document"
-	smithydocument "github.com/aws/smithy-go/document"
+	"github.com/Enflick/aws-sdk-go-v2/service/bedrockagentruntime/document"
+	smithydocument "github.com/Enflick/smithy-go/document"
 )
 
 // Contains information about the action group being invoked. For more information

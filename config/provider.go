@@ -5,16 +5,16 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
-	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds"
-	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
-	"github.com/aws/aws-sdk-go-v2/credentials/ssocreds"
-	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
-	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
-	smithybearer "github.com/aws/smithy-go/auth/bearer"
-	"github.com/aws/smithy-go/logging"
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/ec2rolecreds"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/endpointcreds"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/processcreds"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/ssocreds"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/stscreds"
+	"github.com/Enflick/aws-sdk-go-v2/feature/ec2/imds"
+	smithybearer "github.com/Enflick/smithy-go/auth/bearer"
+	"github.com/Enflick/smithy-go/logging"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 // sharedConfigProfileProvider provides access to the shared config profile

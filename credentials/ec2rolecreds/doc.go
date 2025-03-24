@@ -53,6 +53,6 @@
 //
 // # EC2 IMDS API Client
 //
-// See the github.com/aws/aws-sdk-go-v2/feature/ec2/imds module for more details on
+// See the github.com/Enflick/aws-sdk-go-v2/feature/ec2/imds module for more details on
 // configuring the client, and options available.
 package ec2rolecreds

@@ -9,11 +9,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/aws/aws-sdk-go-v2/internal/sync/singleflight"
-	"github.com/aws/smithy-go/container/private/cache"
-	"github.com/aws/smithy-go/container/private/cache/lru"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/internal/sdk"
+	"github.com/Enflick/aws-sdk-go-v2/internal/sync/singleflight"
+	"github.com/Enflick/smithy-go/container/private/cache"
+	"github.com/Enflick/smithy-go/container/private/cache/lru"
 )
 
 const s3ExpressCacheCap = 100

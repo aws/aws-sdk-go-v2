@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	awsarn "github.com/aws/aws-sdk-go-v2/aws/arn"
-	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared/arn"
+	awsarn "github.com/Enflick/aws-sdk-go-v2/aws/arn"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/s3shared/arn"
 )
 
 const (

@@ -3,17 +3,17 @@ package retry
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics"
+	"github.com/Enflick/aws-sdk-go-v2/aws/middleware/private/metrics"
 	"strconv"
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/aws/smithy-go/logging"
-	smithymiddle "github.com/aws/smithy-go/middleware"
-	"github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	awsmiddle "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/internal/sdk"
+	"github.com/Enflick/smithy-go/logging"
+	smithymiddle "github.com/Enflick/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/transport/http"
 )
 
 // RequestCloner is a function that can take an input request type and clone
@@ -296,7 +296,7 @@ type retryMetadataKey struct{}
 // getRetryMetadata retrieves retryMetadata from the context and a bool
 // indicating if it was set.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func getRetryMetadata(ctx context.Context) (metadata retryMetadata, ok bool) {
 	metadata, ok = smithymiddle.GetStackValue(ctx, retryMetadataKey{}).(retryMetadata)
@@ -305,7 +305,7 @@ func getRetryMetadata(ctx context.Context) (metadata retryMetadata, ok bool) {
 
 // setRetryMetadata sets the retryMetadata on the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func setRetryMetadata(ctx context.Context, metadata retryMetadata) context.Context {
 	return smithymiddle.WithStackValue(ctx, retryMetadataKey{}, metadata)

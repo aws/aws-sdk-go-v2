@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	awsarn "github.com/aws/aws-sdk-go-v2/aws/arn"
-	s3arn "github.com/aws/aws-sdk-go-v2/service/internal/s3shared/arn"
-	"github.com/aws/smithy-go/middleware"
+	awsarn "github.com/Enflick/aws-sdk-go-v2/aws/arn"
+	s3arn "github.com/Enflick/aws-sdk-go-v2/service/internal/s3shared/arn"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 type updateOutpostARN struct {

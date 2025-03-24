@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"github.com/aws/smithy-go/auth"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/smithy-go/auth"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // HTTPAuthScheme is the SDK's internal implementation of smithyhttp.AuthScheme

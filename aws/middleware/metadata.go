@@ -3,9 +3,9 @@ package middleware
 import (
 	"context"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
 
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 // RegisterServiceMetadata registers metadata about the service and operation into the middleware context
@@ -54,7 +54,7 @@ type (
 
 // GetServiceID retrieves the service id from the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func GetServiceID(ctx context.Context) (v string) {
 	v, _ = middleware.GetStackValue(ctx, serviceIDKey{}).(string)
@@ -63,7 +63,7 @@ func GetServiceID(ctx context.Context) (v string) {
 
 // GetSigningName retrieves the service signing name from the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 //
 // Deprecated: This value is unstable. The resolved signing name is available
@@ -75,7 +75,7 @@ func GetSigningName(ctx context.Context) (v string) {
 
 // GetSigningRegion retrieves the region from the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 //
 // Deprecated: This value is unstable. The resolved signing region is available
@@ -87,7 +87,7 @@ func GetSigningRegion(ctx context.Context) (v string) {
 
 // GetRegion retrieves the endpoint region from the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func GetRegion(ctx context.Context) (v string) {
 	v, _ = middleware.GetStackValue(ctx, regionKey{}).(string)
@@ -96,7 +96,7 @@ func GetRegion(ctx context.Context) (v string) {
 
 // GetOperationName retrieves the service operation metadata from the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func GetOperationName(ctx context.Context) (v string) {
 	v, _ = middleware.GetStackValue(ctx, operationNameKey{}).(string)
@@ -105,7 +105,7 @@ func GetOperationName(ctx context.Context) (v string) {
 
 // GetPartitionID retrieves the endpoint partition id from the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func GetPartitionID(ctx context.Context) string {
 	v, _ := middleware.GetStackValue(ctx, partitionIDKey{}).(string)
@@ -115,7 +115,7 @@ func GetPartitionID(ctx context.Context) string {
 // GetRequiresLegacyEndpoints the flag used to indicate if legacy endpoint
 // customizations need to be executed.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func GetRequiresLegacyEndpoints(ctx context.Context) bool {
 	v, _ := middleware.GetStackValue(ctx, requiresLegacyEndpointsKey{}).(bool)
@@ -125,7 +125,7 @@ func GetRequiresLegacyEndpoints(ctx context.Context) bool {
 // SetRequiresLegacyEndpoints set or modifies the flag indicated that
 // legacy endpoint customizations are needed.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func SetRequiresLegacyEndpoints(ctx context.Context, value bool) context.Context {
 	return middleware.WithStackValue(ctx, requiresLegacyEndpointsKey{}, value)
@@ -133,7 +133,7 @@ func SetRequiresLegacyEndpoints(ctx context.Context, value bool) context.Context
 
 // SetSigningName set or modifies the sigv4 or sigv4a signing name on the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 //
 // Deprecated: This value is unstable. Use WithSigV4SigningName client option
@@ -144,7 +144,7 @@ func SetSigningName(ctx context.Context, value string) context.Context {
 
 // SetSigningRegion sets or modifies the region on the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 //
 // Deprecated: This value is unstable. Use WithSigV4SigningRegion client option
@@ -155,7 +155,7 @@ func SetSigningRegion(ctx context.Context, value string) context.Context {
 
 // SetServiceID sets the service id on the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func SetServiceID(ctx context.Context, value string) context.Context {
 	return middleware.WithStackValue(ctx, serviceIDKey{}, value)
@@ -163,7 +163,7 @@ func SetServiceID(ctx context.Context, value string) context.Context {
 
 // setRegion sets the endpoint region on the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func setRegion(ctx context.Context, value string) context.Context {
 	return middleware.WithStackValue(ctx, regionKey{}, value)
@@ -171,7 +171,7 @@ func setRegion(ctx context.Context, value string) context.Context {
 
 // setOperationName sets the service operation on the context.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func setOperationName(ctx context.Context, value string) context.Context {
 	return middleware.WithStackValue(ctx, operationNameKey{}, value)
@@ -179,7 +179,7 @@ func setOperationName(ctx context.Context, value string) context.Context {
 
 // SetPartitionID sets the partition id of a resolved region on the context
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func SetPartitionID(ctx context.Context, value string) context.Context {
 	return middleware.WithStackValue(ctx, partitionIDKey{}, value)

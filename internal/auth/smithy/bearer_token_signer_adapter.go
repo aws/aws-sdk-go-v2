@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/auth"
-	"github.com/aws/smithy-go/auth/bearer"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/auth"
+	"github.com/Enflick/smithy-go/auth/bearer"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // BearerTokenSignerAdapter adapts smithy bearer.Signer to smithy http

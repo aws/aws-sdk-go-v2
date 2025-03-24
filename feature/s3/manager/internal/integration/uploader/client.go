@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	awshttp "github.com/Enflick/aws-sdk-go-v2/aws/transport/http"
 )
 
 func NewHTTPClient(cfg ClientConfig) aws.HTTPClient {

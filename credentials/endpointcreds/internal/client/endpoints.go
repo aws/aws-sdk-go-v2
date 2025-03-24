@@ -2,7 +2,7 @@ package client
 
 import (
 	"context"
-	"github.com/aws/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 type resolveEndpointV2Middleware struct {

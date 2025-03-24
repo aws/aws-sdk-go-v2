@@ -2,8 +2,8 @@ package middleware
 
 import (
 	"context"
-	smithymiddleware "github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	smithymiddleware "github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 	"os"
 	"testing"
 )

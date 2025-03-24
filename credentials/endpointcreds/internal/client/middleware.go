@@ -7,9 +7,9 @@ import (
 	"io"
 	"net/url"
 
-	"github.com/aws/smithy-go"
-	smithymiddleware "github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/smithy-go"
+	smithymiddleware "github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 type buildEndpoint struct {
@@ -106,7 +106,7 @@ func (d *deserializeOpGetCredential) HandleDeserialize(ctx context.Context, in s
 
 func deserializeError(response *smithyhttp.Response) error {
 	// we could be talking to anything, json isn't guaranteed
-	// see https://github.com/aws/aws-sdk-go-v2/issues/2316
+	// see https://github.com/Enflick/aws-sdk-go-v2/issues/2316
 	if response.Header.Get("Content-Type") == "application/json" {
 		return deserializeJSONError(response)
 	}

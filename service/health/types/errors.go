@@ -4,7 +4,7 @@ package types
 
 import (
 	"fmt"
-	smithy "github.com/aws/smithy-go"
+	smithy "github.com/Enflick/smithy-go"
 )
 
 // [EnableHealthServiceAccessForOrganization] is already in progress. Wait for the action to complete before trying again.

@@ -4,7 +4,7 @@ package types_test
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	"github.com/Enflick/aws-sdk-go-v2/service/inspector2/types"
 )
 
 func ExampleAggregationRequest_outputUsage() {

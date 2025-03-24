@@ -5,13 +5,13 @@ package s3
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	internalChecksum "github.com/aws/aws-sdk-go-v2/service/internal/checksum"
-	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
-	"github.com/aws/aws-sdk-go-v2/service/s3/types"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/aws-sdk-go-v2/aws/signer/v4"
+	internalChecksum "github.com/Enflick/aws-sdk-go-v2/service/internal/checksum"
+	s3cust "github.com/Enflick/aws-sdk-go-v2/service/s3/internal/customizations"
+	"github.com/Enflick/aws-sdk-go-v2/service/s3/types"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // This operation is not supported by directory buckets.

@@ -99,7 +99,7 @@ tasks.register("generate-smithy-build") {
                     .withMember("plugins", Node.objectNode()
                             .withMember("go-codegen", Node.objectNodeBuilder()
                                     .withMember("service", service.id.toString())
-                                    .withMember("module", "github.com/aws/aws-sdk-go-v2/service/$sdkId")
+                                    .withMember("module", "github.com/Enflick/aws-sdk-go-v2/service/$sdkId")
                                     .build()))
                     .build()
             projectionsBuilder.withMember(sdkId + "." + service.version.toLowerCase(), projectionContents)

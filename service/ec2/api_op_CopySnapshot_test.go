@@ -4,11 +4,11 @@ package ec2
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/internal/awstesting/unit"
+	presignedurlcust "github.com/Enflick/aws-sdk-go-v2/service/internal/presigned-url"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 	"net/http"
 	"strings"
 	"testing"

@@ -13,8 +13,8 @@ type ServiceBaseEndpointProvider interface {
 // IgnoreConfiguredEndpointsProvider is needed to search for all providers
 // that provide a flag to disable configured endpoints.
 //
-// Currently duplicated from github.com/aws/aws-sdk-go-v2/config because
-// service packages cannot import github.com/aws/aws-sdk-go-v2/config
+// Currently duplicated from github.com/Enflick/aws-sdk-go-v2/config because
+// service packages cannot import github.com/Enflick/aws-sdk-go-v2/config
 // due to result import cycle error.
 type IgnoreConfiguredEndpointsProvider interface {
 	GetIgnoreConfiguredEndpoints(ctx context.Context) (bool, bool, error)
@@ -23,8 +23,8 @@ type IgnoreConfiguredEndpointsProvider interface {
 // GetIgnoreConfiguredEndpoints is used in knowing when to disable configured
 // endpoints feature.
 //
-// Currently duplicated from github.com/aws/aws-sdk-go-v2/config because
-// service packages cannot import github.com/aws/aws-sdk-go-v2/config
+// Currently duplicated from github.com/Enflick/aws-sdk-go-v2/config because
+// service packages cannot import github.com/Enflick/aws-sdk-go-v2/config
 // due to result import cycle error.
 func GetIgnoreConfiguredEndpoints(ctx context.Context, configs []interface{}) (value bool, found bool, err error) {
 	for _, cfg := range configs {

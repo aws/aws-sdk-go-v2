@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/route53"
-	"github.com/aws/aws-sdk-go-v2/service/route53/types"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/service/route53"
+	"github.com/Enflick/aws-sdk-go-v2/service/route53/types"
 )
 
 func TestCustomErrorDeserialization(t *testing.T) {

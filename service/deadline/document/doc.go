@@ -61,6 +61,6 @@
 //	   // handle unknown case
 //	}
 //
-// The mapping of Go types to document types is covered in more depth in https://pkg.go.dev/github.com/aws/smithy-go/document
+// The mapping of Go types to document types is covered in more depth in https://pkg.go.dev/github.com/Enflick/smithy-go/document
 // including more in depth examples that cover user-defined structure types.
 package document

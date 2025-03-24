@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	smithytesting "github.com/aws/smithy-go/testing"
+	smithytesting "github.com/Enflick/smithy-go/testing"
 )
 
 func TestEncode(t *testing.T) {

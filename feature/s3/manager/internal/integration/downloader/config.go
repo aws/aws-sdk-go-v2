@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/feature/s3/manager"
+	"github.com/Enflick/aws-sdk-go-v2/feature/s3/manager"
 )
 
 type SDKConfig struct {

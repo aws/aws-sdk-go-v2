@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/endpoints/v2"
-	"github.com/aws/smithy-go/logging"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/internal/endpoints/v2"
+	"github.com/Enflick/smithy-go/logging"
 )
 
 type testCase struct {

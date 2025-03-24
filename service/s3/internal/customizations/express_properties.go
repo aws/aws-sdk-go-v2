@@ -1,6 +1,6 @@
 package customizations
 
-import "github.com/aws/smithy-go"
+import "github.com/Enflick/smithy-go"
 
 // GetPropertiesBackend returns a resolved endpoint backend from the property
 // set.

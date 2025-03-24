@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/smithy-go/middleware"
-	"github.com/aws/smithy-go/transport/http"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	"github.com/Enflick/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/transport/http"
 )
 
 // removeBucketFromPathMiddleware needs to be executed after serialize step is performed
@@ -47,7 +47,7 @@ type removeBucketKey struct {
 
 // setBucketToRemoveOnContext sets the bucket name to be removed.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func setBucketToRemoveOnContext(ctx context.Context, bucket string) context.Context {
 	return middleware.WithStackValue(ctx, removeBucketKey{}, bucket)
@@ -55,7 +55,7 @@ func setBucketToRemoveOnContext(ctx context.Context, bucket string) context.Cont
 
 // getRemoveBucketFromPath returns the bucket name to remove from the path.
 //
-// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// Scoped to stack values. Use github.com/Enflick/smithy-go/middleware#ClearStackValues
 // to clear all stack values.
 func getRemoveBucketFromPath(ctx context.Context) (string, bool) {
 	v, ok := middleware.GetStackValue(ctx, removeBucketKey{}).(string)

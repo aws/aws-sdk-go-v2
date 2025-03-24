@@ -5,14 +5,14 @@ package eventbridge
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
-	"github.com/aws/aws-sdk-go-v2/internal/v4a"
-	smithyauth "github.com/aws/smithy-go/auth"
-	"github.com/aws/smithy-go/logging"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	internalauthsmithy "github.com/Enflick/aws-sdk-go-v2/internal/auth/smithy"
+	"github.com/Enflick/aws-sdk-go-v2/internal/v4a"
+	smithyauth "github.com/Enflick/smithy-go/auth"
+	"github.com/Enflick/smithy-go/logging"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 	"net/http"
 )
 

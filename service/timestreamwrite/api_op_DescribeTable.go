@@ -5,11 +5,11 @@ package timestreamwrite
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	awsmiddleware "github.com/Enflick/aws-sdk-go-v2/aws/middleware"
+	internalEndpointDiscovery "github.com/Enflick/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	"github.com/Enflick/aws-sdk-go-v2/service/timestreamwrite/types"
+	"github.com/Enflick/smithy-go/middleware"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 // Returns information about the table, including the table name, database name,

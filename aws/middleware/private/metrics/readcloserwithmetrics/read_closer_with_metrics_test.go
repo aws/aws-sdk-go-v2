@@ -2,8 +2,8 @@ package readcloserwithmetrics
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics"
-	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics/testutils"
+	"github.com/Enflick/aws-sdk-go-v2/aws/middleware/private/metrics"
+	"github.com/Enflick/aws-sdk-go-v2/aws/middleware/private/metrics/testutils"
 	"io"
 	"testing"
 )

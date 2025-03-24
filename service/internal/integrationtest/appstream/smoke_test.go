@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/service/appstream"
+	"github.com/Enflick/aws-sdk-go-v2/service/appstream"
 
-	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/integrationtest"
 )
 
 func TestInteg_00_DescribeStacks(t *testing.T) {

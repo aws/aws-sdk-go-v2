@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics"
-	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics/emf"
+	"github.com/Enflick/aws-sdk-go-v2/aws/middleware/private/metrics"
+	"github.com/Enflick/aws-sdk-go-v2/aws/middleware/private/metrics/emf"
 )
 
 // EMFPublisher is a MetricPublisher implementation that publishes metrics to stdout using EMF format.

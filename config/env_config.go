@@ -10,9 +10,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
-	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/feature/ec2/imds"
+	smithyrequestcompression "github.com/Enflick/smithy-go/private/requestcompression"
 )
 
 // CredentialsSourceName provides a name of the provider when config is

@@ -9,12 +9,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
-	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics"
-	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/types"
-	"github.com/aws/smithy-go"
-	smithytime "github.com/aws/smithy-go/time"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/integrationtest"
+	"github.com/Enflick/aws-sdk-go-v2/service/marketplacecommerceanalytics"
+	"github.com/Enflick/aws-sdk-go-v2/service/marketplacecommerceanalytics/types"
+	"github.com/Enflick/smithy-go"
+	smithytime "github.com/Enflick/smithy-go/time"
 )
 
 func TestInteg_00_GenerateDataSet(t *testing.T) {

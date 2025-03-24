@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	sdkrand "github.com/aws/aws-sdk-go-v2/internal/rand"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	sdkrand "github.com/Enflick/aws-sdk-go-v2/internal/rand"
+	"github.com/Enflick/aws-sdk-go-v2/internal/sdk"
 )
 
 type stubCredentialsProvider struct {

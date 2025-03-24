@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/aws/ratelimit"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 var _ aws.Retryer = (*Standard)(nil)

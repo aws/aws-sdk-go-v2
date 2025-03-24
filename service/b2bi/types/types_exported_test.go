@@ -4,7 +4,7 @@ package types_test
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	"github.com/Enflick/aws-sdk-go-v2/service/b2bi/types"
 )
 
 func ExampleCapabilityConfiguration_outputUsage() {

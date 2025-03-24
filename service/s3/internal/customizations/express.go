@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
-	"github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/auth"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	internalauthsmithy "github.com/Enflick/aws-sdk-go-v2/internal/auth/smithy"
+	"github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/auth"
 )
 
 // S3ExpressCredentialsProvider retrieves credentials for the S3Express storage

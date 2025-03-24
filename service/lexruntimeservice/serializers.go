@@ -7,13 +7,13 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
-	smithy "github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/encoding/httpbinding"
-	smithyjson "github.com/aws/smithy-go/encoding/json"
-	"github.com/aws/smithy-go/middleware"
-	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/Enflick/aws-sdk-go-v2/service/lexruntimeservice/types"
+	smithy "github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/encoding/httpbinding"
+	smithyjson "github.com/Enflick/smithy-go/encoding/json"
+	"github.com/Enflick/smithy-go/middleware"
+	"github.com/Enflick/smithy-go/ptr"
+	smithyhttp "github.com/Enflick/smithy-go/transport/http"
 )
 
 type awsRestjson1_serializeOpDeleteSession struct {

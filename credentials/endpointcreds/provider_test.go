@@ -12,9 +12,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/aws/smithy-go"
+	"github.com/Enflick/aws-sdk-go-v2/credentials/endpointcreds"
+	"github.com/Enflick/aws-sdk-go-v2/internal/sdk"
+	"github.com/Enflick/smithy-go"
 )
 
 type mockClient func(*http.Request) (*http.Response, error)

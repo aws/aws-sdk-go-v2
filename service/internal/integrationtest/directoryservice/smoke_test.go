@@ -9,12 +9,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/directoryservice"
-	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	"github.com/Enflick/aws-sdk-go-v2/aws"
+	"github.com/Enflick/aws-sdk-go-v2/service/directoryservice"
+	"github.com/Enflick/aws-sdk-go-v2/service/directoryservice/types"
 
-	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
-	"github.com/aws/smithy-go"
+	"github.com/Enflick/aws-sdk-go-v2/service/internal/integrationtest"
+	"github.com/Enflick/smithy-go"
 )
 
 func TestInteg_00_DescribeDirectories(t *testing.T) {

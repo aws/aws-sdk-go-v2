@@ -4,7 +4,7 @@ package types_test
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	"github.com/Enflick/aws-sdk-go-v2/service/groundstation/types"
 )
 
 func ExampleConfigDetails_outputUsage() {
