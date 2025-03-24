@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/Enflick/aws-sdk-go-v2/service/bedrockruntime/types"
-	smithy "github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/middleware"
+	smithy "github.com/Enflick/smithy-go"
+	"github.com/Enflick/smithy-go/middleware"
 )
 
 type validateOpConverse struct {

@@ -3,8 +3,8 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/document"
-	smithydocument "github.com/aws/smithy-go/document"
+	"github.com/Enflick/aws-sdk-go-v2/service/bedrockruntime/document"
+	smithydocument "github.com/Enflick/smithy-go/document"
 )
 
 // The model must request at least one tool (no text is generated).
