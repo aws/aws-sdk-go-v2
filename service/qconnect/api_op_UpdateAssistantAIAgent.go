@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the AI Agent that is set for use by defafult on an Amazon Q in Connect
+// Updates the AI Agent that is set for use by default on an Amazon Q in Connect
 // Assistant.
 func (c *Client) UpdateAssistantAIAgent(ctx context.Context, params *UpdateAssistantAIAgentInput, optFns ...func(*Options)) (*UpdateAssistantAIAgentOutput, error) {
 	if params == nil {

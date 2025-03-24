@@ -1830,13 +1830,14 @@ type PatchComplianceDataState string
 
 // Enum values for PatchComplianceDataState
 const (
-	PatchComplianceDataStateInstalled              PatchComplianceDataState = "INSTALLED"
-	PatchComplianceDataStateInstalledOther         PatchComplianceDataState = "INSTALLED_OTHER"
-	PatchComplianceDataStateInstalledPendingReboot PatchComplianceDataState = "INSTALLED_PENDING_REBOOT"
-	PatchComplianceDataStateInstalledRejected      PatchComplianceDataState = "INSTALLED_REJECTED"
-	PatchComplianceDataStateMissing                PatchComplianceDataState = "MISSING"
-	PatchComplianceDataStateNotApplicable          PatchComplianceDataState = "NOT_APPLICABLE"
-	PatchComplianceDataStateFailed                 PatchComplianceDataState = "FAILED"
+	PatchComplianceDataStateInstalled               PatchComplianceDataState = "INSTALLED"
+	PatchComplianceDataStateInstalledOther          PatchComplianceDataState = "INSTALLED_OTHER"
+	PatchComplianceDataStateInstalledPendingReboot  PatchComplianceDataState = "INSTALLED_PENDING_REBOOT"
+	PatchComplianceDataStateInstalledRejected       PatchComplianceDataState = "INSTALLED_REJECTED"
+	PatchComplianceDataStateMissing                 PatchComplianceDataState = "MISSING"
+	PatchComplianceDataStateNotApplicable           PatchComplianceDataState = "NOT_APPLICABLE"
+	PatchComplianceDataStateFailed                  PatchComplianceDataState = "FAILED"
+	PatchComplianceDataStateAvailableSecurityUpdate PatchComplianceDataState = "AVAILABLE_SECURITY_UPDATE"
 )
 
 // Values returns all known values for PatchComplianceDataState. Note that this
@@ -1852,6 +1853,7 @@ func (PatchComplianceDataState) Values() []PatchComplianceDataState {
 		"MISSING",
 		"NOT_APPLICABLE",
 		"FAILED",
+		"AVAILABLE_SECURITY_UPDATE",
 	}
 }
 
@@ -1879,6 +1881,25 @@ func (PatchComplianceLevel) Values() []PatchComplianceLevel {
 		"LOW",
 		"INFORMATIONAL",
 		"UNSPECIFIED",
+	}
+}
+
+type PatchComplianceStatus string
+
+// Enum values for PatchComplianceStatus
+const (
+	PatchComplianceStatusCompliant    PatchComplianceStatus = "COMPLIANT"
+	PatchComplianceStatusNonCompliant PatchComplianceStatus = "NON_COMPLIANT"
+)
+
+// Values returns all known values for PatchComplianceStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PatchComplianceStatus) Values() []PatchComplianceStatus {
+	return []PatchComplianceStatus{
+		"COMPLIANT",
+		"NON_COMPLIANT",
 	}
 }
 

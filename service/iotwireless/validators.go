@@ -2703,9 +2703,6 @@ func validateLteNmrObj(v *types.LteNmrObj) error {
 	if v.Earfcn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Earfcn"))
 	}
-	if v.EutranCid == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EutranCid"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

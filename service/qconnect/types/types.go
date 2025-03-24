@@ -434,7 +434,7 @@ type AIPromptData struct {
 	AssistantId *string
 
 	// The identifier of the model used for this AI Prompt. Model Ids supported are:
-	// CLAUDE_3_HAIKU_20240307_V1 .
+	// anthropic.claude-3-haiku-20240307-v1:0 .
 	//
 	// This member is required.
 	ModelId *string
@@ -514,7 +514,7 @@ type AIPromptSummary struct {
 	AssistantId *string
 
 	// The identifier of the model used for this AI Prompt. Model Ids supported are:
-	// CLAUDE_3_HAIKU_20240307_V1 .
+	// anthropic.claude-3-haiku-20240307-v1:0 .
 	//
 	// This member is required.
 	ModelId *string
@@ -625,9 +625,9 @@ type AnswerRecommendationAIAgentConfiguration struct {
 	// The locale to which specifies the language and region settings that determine
 	// the response language for [QueryAssistant].
 	//
-	// Changing this locale to anything other than en_US will turn off recommendations
-	// triggered by contact transcripts for agent assistance, as this feature is not
-	// supported in multiple languages.
+	// Changing this locale to anything other than en_US , en_GB , or en_AU will turn
+	// off recommendations triggered by contact transcripts for agent assistance, as
+	// this feature is not supported in multiple languages.
 	//
 	// [QueryAssistant]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html
 	Locale *string
@@ -4126,7 +4126,7 @@ type SelfServiceAIAgentConfiguration struct {
 }
 
 // The conversation history data to included in conversation context data before
-// the the Amazon Q in Connect session..
+// the Amazon Q in Connect session.
 type SelfServiceConversationHistory struct {
 
 	// The number of turn of the conversation history data.

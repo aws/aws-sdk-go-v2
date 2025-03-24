@@ -54,9 +54,9 @@ type CreateFuotaTaskInput struct {
 	// The description of the new resource.
 	Description *string
 
-	// The Descriptor specifies some metadata about the File being transferred using
-	// FUOTA e.g. the software version. It is sent transparently to the device. It is a
-	// binary field encoded in base64
+	// The descriptor is the metadata about the file that is transferred to the device
+	// using FUOTA, such as the software version. It is a binary field encoded in
+	// base64.
 	Descriptor *string
 
 	// The interval for sending fragments in milliseconds, rounded to the nearest

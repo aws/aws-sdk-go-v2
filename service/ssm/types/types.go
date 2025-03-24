@@ -1007,6 +1007,14 @@ type BaselineOverride struct {
 	// Applies to Linux managed nodes only.
 	ApprovedPatchesEnableNonSecurity bool
 
+	// Indicates whether managed nodes for which there are available security-related
+	// patches that have not been approved by the baseline are being defined as
+	// COMPLIANT or NON_COMPLIANT . This option is specified when the
+	// CreatePatchBaseline or UpdatePatchBaseline commands are run.
+	//
+	// Applies to Windows Server managed nodes only.
+	AvailableSecurityUpdatesComplianceStatus PatchComplianceStatus
+
 	// A set of patch filters, typically used for approval rules.
 	GlobalFilters *PatchFilterGroup
 
@@ -2730,6 +2738,14 @@ type InstancePatchState struct {
 	//
 	// This member is required.
 	PatchGroup *string
+
+	// The number of security-related patches that are available but not approved
+	// because they didn't meet the patch baseline requirements. For example, an
+	// updated version of a patch might have been released before the specified
+	// auto-approval period was over.
+	//
+	// Applies to Windows Server managed nodes only.
+	AvailableSecurityUpdateCount *int32
 
 	// The number of patches per node that are specified as Critical for compliance
 	// reporting in the patch baseline aren't installed. These patches might be

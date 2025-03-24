@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the AI Agent that is set for use by defafult on an Amazon Q in Connect
+// Removes the AI Agent that is set for use by default on an Amazon Q in Connect
 // Assistant.
 func (c *Client) RemoveAssistantAIAgent(ctx context.Context, params *RemoveAssistantAIAgentInput, optFns ...func(*Options)) (*RemoveAssistantAIAgentOutput, error) {
 	if params == nil {

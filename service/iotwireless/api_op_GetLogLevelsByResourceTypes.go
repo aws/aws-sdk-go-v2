@@ -12,8 +12,8 @@ import (
 )
 
 // Returns current default log levels or log levels by resource types. Based on
-// resource types, log levels can be for wireless device log options or wireless
-// gateway log options.
+// the resource type, log levels can be returned for wireless device, wireless
+// gateway, or FUOTA task log options.
 func (c *Client) GetLogLevelsByResourceTypes(ctx context.Context, params *GetLogLevelsByResourceTypesInput, optFns ...func(*Options)) (*GetLogLevelsByResourceTypesOutput, error) {
 	if params == nil {
 		params = &GetLogLevelsByResourceTypesInput{}
@@ -40,7 +40,7 @@ type GetLogLevelsByResourceTypesOutput struct {
 	// more detailed logs.
 	DefaultLogLevel types.LogLevel
 
-	// The list of fuota task log options.
+	// The list of FUOTA task log options.
 	FuotaTaskLogOptions []types.FuotaTaskLogOption
 
 	// The list of wireless device log options.

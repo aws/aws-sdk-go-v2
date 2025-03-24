@@ -21,7 +21,10 @@
 // or an entire group of devices in a multicast group.
 //
 // To connect to the AWS IoT Wireless Service, use the Service endpoints as
-// described in [IoT Wireless Service endpoints]in the AWS General Reference.
+// described in [IoT Wireless Service endpoints]. You can use both IPv4 and IPv6 protocols to connect to the
+// endpoints and send requests to the AWS IoT Wireless service. For more
+// information, see [Using IPv6 with AWS IoT Wireless].
 //
 // [IoT Wireless Service endpoints]: https://docs.aws.amazon.com/general/latest/gr/iot-lorawan.html#iot-wireless_region
+// [Using IPv6 with AWS IoT Wireless]: https://docs.aws.amazon.com/iot-wireless/latest/developerguide/wireless-ipv6-access.html
 package iotwireless

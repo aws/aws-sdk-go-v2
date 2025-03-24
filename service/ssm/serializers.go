@@ -9190,6 +9190,11 @@ func awsAwsjson11_serializeDocumentBaselineOverride(v *types.BaselineOverride, v
 		ok.Boolean(v.ApprovedPatchesEnableNonSecurity)
 	}
 
+	if len(v.AvailableSecurityUpdatesComplianceStatus) > 0 {
+		ok := object.Key("AvailableSecurityUpdatesComplianceStatus")
+		ok.String(string(v.AvailableSecurityUpdatesComplianceStatus))
+	}
+
 	if v.GlobalFilters != nil {
 		ok := object.Key("GlobalFilters")
 		if err := awsAwsjson11_serializeDocumentPatchFilterGroup(v.GlobalFilters, ok); err != nil {
@@ -12609,6 +12614,11 @@ func awsAwsjson11_serializeOpDocumentCreatePatchBaselineInput(v *CreatePatchBase
 	if v.ApprovedPatchesEnableNonSecurity != nil {
 		ok := object.Key("ApprovedPatchesEnableNonSecurity")
 		ok.Boolean(*v.ApprovedPatchesEnableNonSecurity)
+	}
+
+	if len(v.AvailableSecurityUpdatesComplianceStatus) > 0 {
+		ok := object.Key("AvailableSecurityUpdatesComplianceStatus")
+		ok.String(string(v.AvailableSecurityUpdatesComplianceStatus))
 	}
 
 	if v.ClientToken != nil {
@@ -16389,6 +16399,11 @@ func awsAwsjson11_serializeOpDocumentUpdatePatchBaselineInput(v *UpdatePatchBase
 	if v.ApprovedPatchesEnableNonSecurity != nil {
 		ok := object.Key("ApprovedPatchesEnableNonSecurity")
 		ok.Boolean(*v.ApprovedPatchesEnableNonSecurity)
+	}
+
+	if len(v.AvailableSecurityUpdatesComplianceStatus) > 0 {
+		ok := object.Key("AvailableSecurityUpdatesComplianceStatus")
+		ok.String(string(v.AvailableSecurityUpdatesComplianceStatus))
 	}
 
 	if v.BaselineId != nil {

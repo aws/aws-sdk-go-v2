@@ -1,0 +1,8 @@
+{
+    "id": "3d83ac8b-7cdb-469f-9503-c261248dbee5",
+    "type": "feature",
+    "description": "Mark EutranCid under LteNmr optional.",
+    "modules": [
+        "service/iotwireless"
+    ]
+}

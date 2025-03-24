@@ -1,0 +1,8 @@
+{
+    "id": "74b51e7f-5b8e-49f3-874b-d93174c40379",
+    "type": "documentation",
+    "description": "Provides the correct value for supported model ID.",
+    "modules": [
+        "service/qconnect"
+    ]
+}

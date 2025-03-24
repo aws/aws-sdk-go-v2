@@ -29584,6 +29584,19 @@ func awsAwsjson11_deserializeDocumentInstancePatchState(v **types.InstancePatchS
 
 	for key, value := range shape {
 		switch key {
+		case "AvailableSecurityUpdateCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PatchAvailableSecurityUpdateCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AvailableSecurityUpdateCount = ptr.Int32(int32(i64))
+			}
+
 		case "BaselineId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -46322,6 +46335,19 @@ func awsAwsjson11_deserializeOpDocumentDescribePatchGroupStateOutput(v **Describ
 				sv.Instances = int32(i64)
 			}
 
+		case "InstancesWithAvailableSecurityUpdates":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstancesWithAvailableSecurityUpdates = ptr.Int32(int32(i64))
+			}
+
 		case "InstancesWithCriticalNonCompliantPatches":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -48533,6 +48559,15 @@ func awsAwsjson11_deserializeOpDocumentGetPatchBaselineOutput(v **GetPatchBaseli
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.ApprovedPatchesEnableNonSecurity = ptr.Bool(jtv)
+			}
+
+		case "AvailableSecurityUpdatesComplianceStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PatchComplianceStatus to be of type string, got %T instead", value)
+				}
+				sv.AvailableSecurityUpdatesComplianceStatus = types.PatchComplianceStatus(jtv)
 			}
 
 		case "BaselineId":
@@ -51228,6 +51263,15 @@ func awsAwsjson11_deserializeOpDocumentUpdatePatchBaselineOutput(v **UpdatePatch
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.ApprovedPatchesEnableNonSecurity = ptr.Bool(jtv)
+			}
+
+		case "AvailableSecurityUpdatesComplianceStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PatchComplianceStatus to be of type string, got %T instead", value)
+				}
+				sv.AvailableSecurityUpdatesComplianceStatus = types.PatchComplianceStatus(jtv)
 			}
 
 		case "BaselineId":

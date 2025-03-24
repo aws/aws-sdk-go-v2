@@ -37,9 +37,9 @@ type UpdateFuotaTaskInput struct {
 	// The description of the new resource.
 	Description *string
 
-	// The Descriptor specifies some metadata about the File being transferred using
-	// FUOTA e.g. the software version. It is sent transparently to the device. It is a
-	// binary field encoded in base64
+	// The descriptor is the metadata about the file that is transferred to the device
+	// using FUOTA, such as the software version. It is a binary field encoded in
+	// base64.
 	Descriptor *string
 
 	// The S3 URI points to a firmware update image that is to be used with a FUOTA

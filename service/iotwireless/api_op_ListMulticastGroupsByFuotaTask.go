@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all multicast groups associated with a fuota task.
+// List all multicast groups associated with a FUOTA task.
 func (c *Client) ListMulticastGroupsByFuotaTask(ctx context.Context, params *ListMulticastGroupsByFuotaTaskInput, optFns ...func(*Options)) (*ListMulticastGroupsByFuotaTaskOutput, error) {
 	if params == nil {
 		params = &ListMulticastGroupsByFuotaTaskInput{}

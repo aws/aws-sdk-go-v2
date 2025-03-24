@@ -12,7 +12,7 @@ import (
 )
 
 // Set default log level, or log levels by resource types. This can be for
-// wireless device log options or wireless gateways log options and is used to
+// wireless device, wireless gateway, or FUOTA task log options, and is used to
 // control the log messages that'll be displayed in CloudWatch.
 func (c *Client) UpdateLogLevelsByResourceTypes(ctx context.Context, params *UpdateLogLevelsByResourceTypesInput, optFns ...func(*Options)) (*UpdateLogLevelsByResourceTypesOutput, error) {
 	if params == nil {
@@ -36,7 +36,7 @@ type UpdateLogLevelsByResourceTypesInput struct {
 	// more detailed logs.
 	DefaultLogLevel types.LogLevel
 
-	// The list of fuota task log options.
+	// The list of FUOTA task log options.
 	FuotaTaskLogOptions []types.FuotaTaskLogOption
 
 	// The list of wireless device log options.

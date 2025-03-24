@@ -41,7 +41,7 @@ type CreateAIPromptInput struct {
 	AssistantId *string
 
 	// The identifier of the model used for this AI Prompt. Model Ids supported are:
-	// CLAUDE_3_HAIKU_20240307_V1
+	// anthropic.claude-3-haiku-20240307-v1:0
 	//
 	// This member is required.
 	ModelId *string

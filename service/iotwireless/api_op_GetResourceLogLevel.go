@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Fetches the log-level override, if any, for a given resource-ID and
-// resource-type. It can be used for a wireless device, wireless gateway or fuota
-// task.
+// Fetches the log-level override, if any, for a given resource ID and resource
+// type..
 func (c *Client) GetResourceLogLevel(ctx context.Context, params *GetResourceLogLevelInput, optFns ...func(*Options)) (*GetResourceLogLevelOutput, error) {
 	if params == nil {
 		params = &GetResourceLogLevelInput{}
@@ -31,13 +30,13 @@ func (c *Client) GetResourceLogLevel(ctx context.Context, params *GetResourceLog
 
 type GetResourceLogLevelInput struct {
 
-	// The identifier of the resource. For a Wireless Device, it is the wireless
-	// device ID. For a wireless gateway, it is the wireless gateway ID.
+	// The unique identifier of the resource, which can be the wireless gateway ID,
+	// the wireless device ID, or the FUOTA task ID.
 	//
 	// This member is required.
 	ResourceIdentifier *string
 
-	// The type of the resource, which can be WirelessDevice , WirelessGateway or
+	// The type of resource, which can be WirelessDevice , WirelessGateway , or
 	// FuotaTask .
 	//
 	// This member is required.

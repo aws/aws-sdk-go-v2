@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a multicast group if it is not in use by a fuota task.
+// Deletes a multicast group if it is not in use by a FUOTA task.
 func (c *Client) DeleteMulticastGroup(ctx context.Context, params *DeleteMulticastGroupInput, optFns ...func(*Options)) (*DeleteMulticastGroupOutput, error) {
 	if params == nil {
 		params = &DeleteMulticastGroupInput{}

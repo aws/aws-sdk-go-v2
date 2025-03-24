@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a multicast group from a fuota task.
+// Disassociates a multicast group from a FUOTA task.
 func (c *Client) DisassociateMulticastGroupFromFuotaTask(ctx context.Context, params *DisassociateMulticastGroupFromFuotaTaskInput, optFns ...func(*Options)) (*DisassociateMulticastGroupFromFuotaTaskOutput, error) {
 	if params == nil {
 		params = &DisassociateMulticastGroupFromFuotaTaskInput{}

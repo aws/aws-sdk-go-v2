@@ -424,12 +424,12 @@ type FuotaTask struct {
 }
 
 // The log options for a FUOTA task event and can be used to set log levels for a
-// specific fuota task event.
+// specific FUOTA task event.
 //
-// For a LoRaWAN FuotaTask type, possible event for a log message is Fuota .
+// For a LoRaWAN FUOTA task, the only possible event for a log message is Fuota .
 type FuotaTaskEventLogOption struct {
 
-	// The event for a log message, if the log message is tied to a fuota task.
+	// The event for a log message, if the log message is tied to a FUOTA task.
 	//
 	// This member is required.
 	Event FuotaTaskEvent
@@ -444,8 +444,8 @@ type FuotaTaskEventLogOption struct {
 	noSmithyDocumentSerde
 }
 
-// The log options for fuota tasks and can be used to set log levels for a
-// specific type of fuota task.
+// The log options for FUOTA tasks and can be used to set log levels for a
+// specific type of FUOTA task.
 type FuotaTaskLogOption struct {
 
 	// The log level for a log message. The log levels can be disabled, or set to ERROR
@@ -455,7 +455,7 @@ type FuotaTaskLogOption struct {
 	// This member is required.
 	LogLevel LogLevel
 
-	// The fuota task type.
+	// The FUOTA task type.
 	//
 	// This member is required.
 	Type FuotaTaskType
@@ -1005,8 +1005,8 @@ type LoRaWANMulticast struct {
 	DlClass DlClass
 
 	// Specify the list of gateways to which you want to send the multicast downlink
-	// messages. The multicast message will be sent to each gateway in the sequence
-	// provided in the list.
+	// messages. The multicast message will be sent to each gateway in the list, with
+	// the transmission interval as the time interval between each message.
 	ParticipatingGateways *ParticipatingGatewaysMulticast
 
 	// Supported RfRegions
@@ -1029,8 +1029,8 @@ type LoRaWANMulticastGet struct {
 	NumberOfDevicesRequested *int32
 
 	// Specify the list of gateways to which you want to send the multicast downlink
-	// messages. The multicast message will be sent to each gateway in the sequence
-	// provided in the list.
+	// messages. The multicast message will be sent to each gateway in the list, with
+	// the transmission interval as the time interval between each message.
 	ParticipatingGateways *ParticipatingGatewaysMulticast
 
 	// Supported RfRegions
@@ -1213,16 +1213,14 @@ type LteNmrObj struct {
 	// This member is required.
 	Earfcn *int32
 
-	// E-UTRAN (Evolved Universal Terrestrial Radio Access Network) cell global
-	// identifier (EUTRANCID).
-	//
-	// This member is required.
-	EutranCid *int32
-
 	// Physical cell ID.
 	//
 	// This member is required.
 	Pci *int32
+
+	// E-UTRAN (Evolved Universal Terrestrial Radio Access Network) cell global
+	// identifier (EUTRANCID).
+	EutranCid *int32
 
 	// Signal power of the reference signal received, measured in dBm
 	// (decibel-milliwatts).
@@ -1441,18 +1439,19 @@ type ParticipatingGateways struct {
 }
 
 // Specify the list of gateways to which you want to send the multicast downlink
-// messages. The multicast message will be sent to each gateway in the sequence
-// provided in the list.
+// messages. The multicast message will be sent to each gateway in the list, with
+// the transmission interval as the time interval between each message.
 type ParticipatingGatewaysMulticast struct {
 
-	// The list of gateways that you want to use for sending the multicast downlink.
-	// Each downlink will be sent to all the gateways in the list with transmission
-	// interval between them. If list is empty the gateway list will be dynamically
-	// selected similar to the case of no ParticipatingGateways
+	// The list of gateways that you want to use for sending the multicast downlink
+	// message. Each downlink message will be sent to all the gateways in the list in
+	// the order that you provided. If the gateway list is empty, then AWS IoT Core for
+	// LoRaWAN chooses the gateways that were most recently used by the devices to send
+	// an uplink message.
 	GatewayList []string
 
-	// The duration of time for which AWS IoT Core for LoRaWAN will wait before
-	// transmitting the multicast payload to the next gateway in the list.
+	// The duration of time in milliseconds for which AWS IoT Core for LoRaWAN will
+	// wait before transmitting the multicast payload to the next gateway in the list.
 	TransmissionInterval *int32
 
 	noSmithyDocumentSerde
