@@ -10,7 +10,7 @@
 #  - feat-foo
 
 if [ -z "$SMITHY_GO_REPOSITORY" ]; then
-    SMITHY_GO_REPOSITORY=aws/smithy-go
+    SMITHY_GO_REPOSITORY=Enflick/smithy-go
 fi
 
 if [ -z "$RUNNER_TMPDIR" ]; then
