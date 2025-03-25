@@ -20,7 +20,7 @@ require (
 	github.com/Enflick/aws-sdk-go-v2/service/sso v1.20.9 // indirect
 	github.com/Enflick/aws-sdk-go-v2/service/ssooidc v1.24.3 // indirect
 	github.com/Enflick/aws-sdk-go-v2/service/sts v1.28.10 // indirect
-	github.com/aws/smithy-go v1.20.2 // indirect
+	github.com/Enflick/smithy-go v1.3.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )
 

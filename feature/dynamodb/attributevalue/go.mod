@@ -9,7 +9,7 @@ require (
 )
 
 require (
-	github.com/aws/smithy-go v1.20.2 // indirect
+	github.com/Enflick/smithy-go v1.3.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )
 

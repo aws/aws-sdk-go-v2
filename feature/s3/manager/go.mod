@@ -6,7 +6,7 @@ require (
 	github.com/Enflick/aws-sdk-go-v2 v1.27.0
 	github.com/Enflick/aws-sdk-go-v2/config v1.27.16
 	github.com/Enflick/aws-sdk-go-v2/service/s3 v1.54.3
-	github.com/aws/smithy-go v1.20.2
+	github.com/Enflick/smithy-go v1.3.0
 )
 
 require (
