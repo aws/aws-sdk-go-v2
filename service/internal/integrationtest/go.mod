@@ -1,7 +1,7 @@
 module github.com/Enflick/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
-	github.com/Enflick/aws-sdk-go-v2 v1.27.0
+	github.com/Enflick/aws-sdk-go-v2 v1.3.0
 	github.com/Enflick/aws-sdk-go-v2/config v1.27.16
 	github.com/Enflick/aws-sdk-go-v2/feature/s3/manager v1.16.21
 	github.com/Enflick/aws-sdk-go-v2/service/acm v1.26.0

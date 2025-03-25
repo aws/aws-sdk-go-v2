@@ -3,7 +3,7 @@ module github.com/Enflick/aws-sdk-go-v2/feature/dynamodb/expression
 go 1.20
 
 require (
-	github.com/Enflick/aws-sdk-go-v2 v1.27.0
+	github.com/Enflick/aws-sdk-go-v2 v1.3.0
 	github.com/Enflick/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.13.20
 	github.com/Enflick/aws-sdk-go-v2/service/dynamodb v1.32.6
 )

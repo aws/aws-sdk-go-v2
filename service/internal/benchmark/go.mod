@@ -3,7 +3,7 @@ module github.com/Enflick/aws-sdk-go-v2/service/internal/benchmark
 go 1.20
 
 require (
-	github.com/Enflick/aws-sdk-go-v2 v1.27.0
+	github.com/Enflick/aws-sdk-go-v2 v1.3.0
 	github.com/Enflick/aws-sdk-go-v2/service/dynamodb v1.32.6
 	github.com/Enflick/aws-sdk-go-v2/service/lexruntimeservice v1.20.8
 	github.com/Enflick/aws-sdk-go-v2/service/s3 v1.54.3

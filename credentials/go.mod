@@ -3,7 +3,7 @@ module github.com/Enflick/aws-sdk-go-v2/credentials
 go 1.20
 
 require (
-	github.com/Enflick/aws-sdk-go-v2 v1.27.0
+	github.com/Enflick/aws-sdk-go-v2 v1.3.0
 	github.com/Enflick/aws-sdk-go-v2/feature/ec2/imds v1.16.3
 	github.com/Enflick/aws-sdk-go-v2/service/sso v1.20.9
 	github.com/Enflick/aws-sdk-go-v2/service/ssooidc v1.24.3

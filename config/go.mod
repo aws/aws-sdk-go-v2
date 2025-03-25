@@ -3,7 +3,7 @@ module github.com/Enflick/aws-sdk-go-v2/config
 go 1.20
 
 require (
-	github.com/Enflick/aws-sdk-go-v2 v1.27.0
+	github.com/Enflick/aws-sdk-go-v2 v1.3.0
 	github.com/Enflick/aws-sdk-go-v2/credentials v1.17.16
 	github.com/Enflick/aws-sdk-go-v2/feature/ec2/imds v1.16.3
 	github.com/Enflick/aws-sdk-go-v2/internal/ini v1.8.0
