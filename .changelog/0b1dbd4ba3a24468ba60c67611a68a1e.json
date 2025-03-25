@@ -1,0 +1,8 @@
+{
+    "id": "0b1dbd4b-a3a2-4468-ba60-c67611a68a1e",
+    "type": "feature",
+    "description": "Added support to override upgrade-blocking readiness checks via force flag when updating a cluster.",
+    "modules": [
+        "service/eks"
+    ]
+}

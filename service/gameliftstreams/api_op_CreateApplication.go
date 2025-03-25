@@ -27,7 +27,9 @@ import (
 // If the request is successful, Amazon GameLift Streams begins to create an
 // application and sets the status to INITIALIZED . When an application reaches
 // READY status, you can use the application to set up stream groups and start
-// streams. To track application status, call GetApplication.
+// streams. To track application status, call [GetApplication].
+//
+// [GetApplication]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetApplication.html
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -45,18 +47,17 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 
 type CreateApplicationInput struct {
 
-	// The location of the content that you want to stream. Enter the URI of an Amazon
-	// S3 location (bucket name and prefixes) that contains your content. Use the
-	// following format for the URI: s3://[bucket name]/[prefix] . The location can
-	// have a multi-level prefix structure, but it must include all the files needed to
-	// run the content. Amazon GameLift Streams copies everything under the specified
+	// The location of the content that you want to stream. Enter an Amazon S3 URI to
+	// a bucket that contains your game or other application. The location can have a
+	// multi-level prefix structure, but it must include all the files needed to run
+	// the content. Amazon GameLift Streams copies everything under the specified
 	// location.
 	//
 	// This value is immutable. To designate a different content location, create a
 	// new application.
 	//
-	// The S3 bucket and the Amazon GameLift Streams application must be in the same
-	// Amazon Web Services Region.
+	// The Amazon S3 bucket and the Amazon GameLift Streams application must be in the
+	// same Amazon Web Services Region.
 	//
 	// This member is required.
 	ApplicationSourceUri *string
@@ -73,15 +74,14 @@ type CreateApplicationInput struct {
 	// This member is required.
 	ExecutablePath *string
 
-	// A set of configuration settings to run the application on a stream group. This
-	// configures the operating system, and can include compatibility layers and other
-	// drivers.
+	// Configuration settings that identify the operating system for an application
+	// resource. This can also include a compatibility layer and other drivers.
 	//
 	// A runtime environment can be one of the following:
 	//
 	//   - For Linux applications
 	//
-	//   - Ubuntu 22.04 LTS( Type=UBUNTU, Version=22_04_LTS )
+	//   - Ubuntu 22.04 LTS ( Type=UBUNTU, Version=22_04_LTS )
 	//
 	//   - For Windows applications
 	//
@@ -95,8 +95,7 @@ type CreateApplicationInput struct {
 	RuntimeEnvironment *types.RuntimeEnvironment
 
 	// An Amazon S3 URI to a bucket where you would like Amazon GameLift Streams to
-	// save application logs. Use the following format for the URI: s3://[bucket
-	// name]/[prefix] . Required if you specify one or more LogPaths .
+	// save application logs. Required if you specify one or more ApplicationLogPaths .
 	//
 	// The log bucket must have permissions that give Amazon GameLift Streams access
 	// to write the log files. For more information, see Getting Started in the Amazon
@@ -105,10 +104,12 @@ type CreateApplicationInput struct {
 
 	// Locations of log files that your content generates during a stream session.
 	// Enter path values that are relative to the ApplicationSourceUri location. You
-	// can specify up to 10 log locations. Amazon GameLift Streams uploads designated
-	// log files to the Amazon S3 bucket that you specify in ApplicationLogOutputUri
-	// at the end of a stream session. To retrieve stored log files, call GetStreamSessionand get the
+	// can specify up to 10 log paths. Amazon GameLift Streams uploads designated log
+	// files to the Amazon S3 bucket that you specify in ApplicationLogOutputUri at
+	// the end of a stream session. To retrieve stored log files, call [GetStreamSession]and get the
 	// LogFileLocationUri .
+	//
+	// [GetStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
 	ApplicationLogPaths []string
 
 	//  A unique identifier that represents a client request. The request is
@@ -119,12 +120,13 @@ type CreateApplicationInput struct {
 	// A list of labels to assign to the new application resource. Tags are
 	// developer-defined key-value pairs. Tagging Amazon Web Services resources is
 	// useful for resource management, access management and cost allocation. See [Tagging Amazon Web Services Resources]in
-	// the Amazon Web Services General Reference. You can use TagResourceto add tags, UntagResource to remove
-	// tags, and ListTagsForResourceto view tags on existing resources. The maximum tag limit might be
-	// lower than stated. See the Amazon Web Services General Reference for actual
-	// tagging limits.
+	// the Amazon Web Services General Reference. You can use [TagResource]to add tags, [UntagResource] to remove
+	// tags, and [ListTagsForResource]to view tags on existing resources.
 	//
 	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [TagResource]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_TagResource.html
+	// [UntagResource]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UntagResource.html
+	// [ListTagsForResource]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_ListTagsForResource.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -140,14 +142,15 @@ type CreateApplicationOutput struct {
 	Arn *string
 
 	// An Amazon S3 URI to a bucket where you would like Amazon GameLift Streams to
-	// save application logs. Use the following format for the URI: s3://[bucket
-	// name]/[prefix] . Required if you specify one or more LogPaths .
+	// save application logs. Required if you specify one or more ApplicationLogPaths .
 	ApplicationLogOutputUri *string
 
 	// Locations of log files that your content generates during a stream session.
 	// Amazon GameLift Streams uploads log files to the Amazon S3 bucket that you
 	// specify in ApplicationLogOutputUri at the end of a stream session. To retrieve
-	// stored log files, call GetStreamSessionand get the LogFileLocationUri .
+	// stored log files, call [GetStreamSession]and get the LogFileLocationUri .
+	//
+	// [GetStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
 	ApplicationLogPaths []string
 
 	// The original Amazon S3 location of uploaded stream content for the application.
@@ -169,8 +172,8 @@ type CreateApplicationOutput struct {
 	ExecutablePath *string
 
 	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 or ID-
-	// 9ZY8X7Wv6 .
+	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or
+	// ID- a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Id *string
@@ -182,15 +185,14 @@ type CreateApplicationOutput struct {
 	// A set of replication statuses for each location.
 	ReplicationStatuses []types.ReplicationStatus
 
-	//  A set of configuration settings to run the application on a stream group. This
-	// configures the operating system, and can include compatibility layers and other
-	// drivers.
+	//  Configuration settings that identify the operating system for an application
+	// resource. This can also include a compatibility layer and other drivers.
 	//
 	// A runtime environment can be one of the following:
 	//
 	//   - For Linux applications
 	//
-	//   - Ubuntu 22.04 LTS( Type=UBUNTU, Version=22_04_LTS )
+	//   - Ubuntu 22.04 LTS ( Type=UBUNTU, Version=22_04_LTS )
 	//
 	//   - For Windows applications
 	//

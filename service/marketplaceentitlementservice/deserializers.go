@@ -274,6 +274,15 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 
 	for key, value := range shape {
 		switch key {
+		case "CustomerAWSAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CustomerAWSAccountId = ptr.String(jtv)
+			}
+
 		case "CustomerIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)

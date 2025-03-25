@@ -67,6 +67,11 @@ type CreatePartnerAppInput struct {
 	// Partner AI App user.
 	EnableIamSessionBasedIdentity *bool
 
+	// SageMaker Partner AI Apps uses Amazon Web Services KMS to encrypt data at rest
+	// using an Amazon Web Services managed key by default. For more control, specify a
+	// customer managed key.
+	KmsKeyId *string
+
 	// Maintenance configuration settings for the SageMaker Partner AI App.
 	MaintenanceConfig *types.PartnerAppMaintenanceConfig
 

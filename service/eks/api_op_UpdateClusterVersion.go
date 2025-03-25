@@ -57,6 +57,10 @@ type UpdateClusterVersionInput struct {
 	// of the request.
 	ClientRequestToken *string
 
+	// Set this value to true to override upgrade-blocking readiness checks when
+	// updating a cluster.
+	Force bool
+
 	noSmithyDocumentSerde
 }
 

@@ -11,35 +11,38 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// BatchMeterUsage is called from a SaaS application listed on AWS Marketplace to
-// post metering records for a set of customers.
+//	The CustomerIdentifier parameter is scheduled for deprecation. Use
 //
-// For identical requests, the API is idempotent; requests can be retried with the
-// same records or a subset of the input records.
+// CustomerAWSAccountID instead.
 //
-// Every request to BatchMeterUsage is for one product. If you need to meter usage
-// for multiple products, you must make multiple calls to BatchMeterUsage .
+// These parameters are mutually exclusive. You can't specify both
+// CustomerIdentifier and CustomerAWSAccountID in the same request.
 //
-// Usage records are expected to be submitted as quickly as possible after the
-// event that is being recorded, and are not accepted more than 6 hours after the
-// event.
+// To post metering records for customers, SaaS applications call BatchMeterUsage ,
+// which is used for metering SaaS flexible consumption pricing (FCP). Identical
+// requests are idempotent and can be retried with the same records or a subset of
+// records. Each BatchMeterUsage request is for only one product. If you want to
+// meter usage for multiple products, you must make multiple BatchMeterUsage calls.
 //
-// BatchMeterUsage can process up to 25 UsageRecords at a time.
+// Usage records should be submitted in quick succession following a recorded
+// event. Usage records aren't accepted 6 hours or more after an event.
 //
-// A UsageRecord can optionally include multiple usage allocations, to provide
-// customers with usage data split into buckets by tags that you define (or allow
-// the customer to define).
+// BatchMeterUsage can process up to 25 UsageRecords at a time, and each request
+// must be less than 1 MB in size. Optionally, you can have multiple usage
+// allocations for usage data that's split into buckets according to predefined
+// tags.
 //
-// BatchMeterUsage returns a list of UsageRecordResult objects, showing the result
-// for each UsageRecord , as well as a list of UnprocessedRecords , indicating
-// errors in the service side that you should retry.
+// BatchMeterUsage returns a list of UsageRecordResult objects, which have each
+// UsageRecord . It also returns a list of UnprocessedRecords , which indicate
+// errors on the service side that should be retried.
 //
-// BatchMeterUsage requests must be less than 1MB in size.
+// For Amazon Web Services Regions that support BatchMeterUsage , see [BatchMeterUsage Region support].
 //
-// For an example of using BatchMeterUsage , see [BatchMeterUsage code example] in the AWS Marketplace Seller
-// Guide.
+// For an example of BatchMeterUsage , see [BatchMeterUsage code example] in the Amazon Web Services Marketplace
+// Seller Guide.
 //
 // [BatchMeterUsage code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
+// [BatchMeterUsage Region support]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
 func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInput, optFns ...func(*Options)) (*BatchMeterUsageOutput, error) {
 	if params == nil {
 		params = &BatchMeterUsageInput{}
@@ -59,9 +62,9 @@ func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInp
 // usage within your application.
 type BatchMeterUsageInput struct {
 
-	// Product code is used to uniquely identify a product in AWS Marketplace. The
-	// product code should be the same as the one used during the publishing of a new
-	// product.
+	// Product code is used to uniquely identify a product in Amazon Web Services
+	// Marketplace. The product code should be the same as the one used during the
+	// publishing of a new product.
 	//
 	// This member is required.
 	ProductCode *string
@@ -80,8 +83,8 @@ type BatchMeterUsageInput struct {
 type BatchMeterUsageOutput struct {
 
 	// Contains all UsageRecords processed by BatchMeterUsage . These records were
-	// either honored by AWS Marketplace Metering Service or were invalid. Invalid
-	// records should be fixed before being resubmitted.
+	// either honored by Amazon Web Services Marketplace Metering Service or were
+	// invalid. Invalid records should be fixed before being resubmitted.
 	Results []types.UsageRecordResult
 
 	// Contains all UsageRecords that were not processed by BatchMeterUsage . This is a

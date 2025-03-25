@@ -1,0 +1,8 @@
+{
+    "id": "4c25c61c-9617-49b2-9e68-48d298021c74",
+    "type": "feature",
+    "description": "Minor updates to improve developer experience.",
+    "modules": [
+        "service/gameliftstreams"
+    ]
+}

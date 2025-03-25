@@ -907,8 +907,8 @@ type BedrockFoundationModelContextEnrichmentConfiguration struct {
 	// This member is required.
 	EnrichmentStrategyConfiguration *EnrichmentStrategyConfiguration
 
-	// The Amazon Resource Name (ARN) of the foundation model used for context
-	// enrichment.
+	// The Amazon Resource Name (ARN) of the model used to create vector embeddings
+	// for the knowledge base.
 	//
 	// This member is required.
 	ModelArn *string
@@ -3409,6 +3409,61 @@ type NeptuneAnalyticsFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the Managed Cluster configuration of the knowledge base
+// in Amazon OpenSearch Service. For more information, see [Create a vector index in OpenSearch Managed Cluster].
+//
+// [Create a vector index in OpenSearch Managed Cluster]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-osm.html
+type OpenSearchManagedClusterConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the OpenSearch domain.
+	//
+	// This member is required.
+	DomainArn *string
+
+	// The endpoint URL the OpenSearch domain.
+	//
+	// This member is required.
+	DomainEndpoint *string
+
+	// Contains the names of the fields to which to map information about the vector
+	// store.
+	//
+	// This member is required.
+	FieldMapping *OpenSearchManagedClusterFieldMapping
+
+	// The name of the vector store.
+	//
+	// This member is required.
+	VectorIndexName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the names of the fields to which to map information about the vector
+// store.
+type OpenSearchManagedClusterFieldMapping struct {
+
+	// The name of the field in which Amazon Bedrock stores metadata about the vector
+	// store.
+	//
+	// This member is required.
+	MetadataField *string
+
+	// The name of the field in which Amazon Bedrock stores the raw text from your
+	// data. The text is split according to the chunking strategy you choose.
+	//
+	// This member is required.
+	TextField *string
+
+	// The name of the field in which Amazon Bedrock stores the vector embeddings for
+	// your data sources.
+	//
+	// This member is required.
+	VectorField *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the storage configuration of the knowledge base in
 // Amazon OpenSearch Service. For more information, see [Create a vector index in Amazon OpenSearch Service].
 //
@@ -4742,6 +4797,12 @@ type StorageConfiguration struct {
 	//
 	// [Create a vector index in Amazon Neptune Analytics.]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-neptune.html
 	NeptuneAnalyticsConfiguration *NeptuneAnalyticsConfiguration
+
+	// Contains details about the storage configuration of the knowledge base in
+	// OpenSearch Managed Cluster. For more information, see [Create a vector index in Amazon OpenSearch Service].
+	//
+	// [Create a vector index in Amazon OpenSearch Service]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-osm.html
+	OpensearchManagedClusterConfiguration *OpenSearchManagedClusterConfiguration
 
 	// Contains the storage configuration of the knowledge base in Amazon OpenSearch
 	// Service.

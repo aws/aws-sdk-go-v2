@@ -9,7 +9,9 @@ import (
 
 // Describes an application resource that represents a collection of content for
 // streaming with Amazon GameLift Streams. To retrieve additional application
-// details, call GetApplication.
+// details, call [GetApplication].
+//
+// [GetApplication]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetApplication.html
 type ApplicationSummary struct {
 
 	// An Amazon Resource Name (ARN) that's assigned to an application resource and
@@ -28,8 +30,8 @@ type ApplicationSummary struct {
 	Description *string
 
 	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 or ID-
-	// 9ZY8X7Wv6 .
+	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or
+	// ID- a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Id *string
@@ -38,15 +40,14 @@ type ApplicationSummary struct {
 	// expressed using in ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC).
 	LastUpdatedAt *time.Time
 
-	//  A set of configuration settings to run the application on a stream group. This
-	// configures the operating system, and can include compatibility layers and other
-	// drivers.
+	//  Configuration settings that identify the operating system for an application
+	// resource. This can also include a compatibility layer and other drivers.
 	//
 	// A runtime environment can be one of the following:
 	//
 	//   - For Linux applications
 	//
-	//   - Ubuntu 22.04 LTS( Type=UBUNTU, Version=22_04_LTS )
+	//   - Ubuntu 22.04 LTS ( Type=UBUNTU, Version=22_04_LTS )
 	//
 	//   - For Windows applications
 	//
@@ -79,24 +80,18 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the Amazon GameLift Streams application that a stream group hosts.
+// Represents the default Amazon GameLift Streams application that a stream group
+// hosts.
 type DefaultApplication struct {
 
-	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4 or ID-
-	// 1AB2C3De4 .
+	// An [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Format example:
+	// arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Arn *string
 
-	// The default application of the stream group.
-	//
-	// This value is an [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource.
-	// Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 or ID-
-	// 9ZY8X7Wv6 .
-	//
-	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	// An ID that uniquely identifies the application resource. For example:
+	// a-9ZY8X7Wv6 .
 	Id *string
 
 	noSmithyDocumentSerde
@@ -120,7 +115,9 @@ type ExportFilesMetadata struct {
 	// or another similar name.
 	OutputUri *string
 
-	// The result of the ExportStreamSessionFiles operation.
+	// The result of the [ExportStreamSessionFiles] operation.
+	//
+	// [ExportStreamSessionFiles]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_ExportStreamSessionFiles.html
 	Status ExportFilesStatus
 
 	// A short description of the reason the export is in FAILED status.
@@ -132,13 +129,18 @@ type ExportFilesMetadata struct {
 // Configuration settings that define a stream group's stream capacity for a
 // location. When configuring a location for the first time, you must specify a
 // numeric value for at least one of the two capacity types. To update the capacity
-// for an existing stream group, call UpdateStreamGroup. To add a new location and specify its
-// capacity, call AddStreamGroupLocations.
+// for an existing stream group, call [UpdateStreamGroup]. To add a new location and specify its
+// capacity, call [AddStreamGroupLocations].
+//
+// [UpdateStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UpdateStreamGroup.html
+// [AddStreamGroupLocations]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_AddStreamGroupLocations.html
 type LocationConfiguration struct {
 
 	//  A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, see the Regions and quotas section in the
-	// Amazon GameLift Streams Developer Guide .
+	// that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon GameLift Streams
+	// Developer Guide.
+	//
+	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	//
 	// This member is required.
 	LocationName *string
@@ -176,8 +178,10 @@ type LocationState struct {
 	IdleCapacity *int32
 
 	//  A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, see the Regions and quotas section in the
-	// Amazon GameLift Streams Developer Guide .
+	// that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon GameLift Streams
+	// Developer Guide.
+	//
+	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	LocationName *string
 
 	//  The streaming capacity that Amazon GameLift Streams can allocate in response
@@ -220,8 +224,10 @@ type LocationState struct {
 type ReplicationStatus struct {
 
 	//  A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, see the Regions and quotas section in the
-	// Amazon GameLift Streams Developer Guide .
+	// that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon GameLift Streams
+	// Developer Guide.
+	//
+	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Location *string
 
 	// The current status of the replication process.
@@ -237,7 +243,7 @@ type ReplicationStatus struct {
 //
 //   - For Linux applications
 //
-//   - Ubuntu 22.04 LTS( Type=UBUNTU, Version=22_04_LTS )
+//   - Ubuntu 22.04 LTS ( Type=UBUNTU, Version=22_04_LTS )
 //
 //   - For Windows applications
 //
@@ -263,12 +269,14 @@ type RuntimeEnvironment struct {
 }
 
 // Describes a Amazon GameLift Streams stream group resource for hosting content
-// streams. To retrieve additional stream group details, call GetStreamGroup.
+// streams. To retrieve additional stream group details, call [GetStreamGroup].
+//
+// [GetStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamGroup.html
 type StreamGroupSummary struct {
 
 	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4 or ID-
-	// 1AB2C3De4 .
+	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or
+	// ID- sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -287,8 +295,8 @@ type StreamGroupSummary struct {
 	Description *string
 
 	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4 or ID-
-	// 1AB2C3De4 .
+	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or
+	// ID- sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Id *string
@@ -324,8 +332,8 @@ type StreamGroupSummary struct {
 	//
 	//   - gen5n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
-	//   supports DirectX 12. Compatible with most Unreal Engine 5.x builds, 32-bit
-	//   applications, and anti-cheat technology. Uses NVIDIA A10G Tensor GPU.
+	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.4, 32
+	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA A10G Tensor GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -359,8 +367,8 @@ type StreamGroupSummary struct {
 	//
 	//   - gen4n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
-	//   supports DirectX 12. Compatible with most Unreal Engine 5.2 and 5.3 builds,
-	//   32-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor GPU.
+	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.4, 32
+	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -397,12 +405,14 @@ type StreamGroupSummary struct {
 }
 
 // Describes a Amazon GameLift Streams stream session. To retrieve additional
-// details for the stream session, call GetStreamSession.
+// details for the stream session, call [GetStreamSession].
+//
+// [GetStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
 type StreamSessionSummary struct {
 
 	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 or ID-
-	// 9ZY8X7Wv6 .
+	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or
+	// ID- a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	ApplicationArn *string
@@ -427,8 +437,10 @@ type StreamSessionSummary struct {
 	// The location where Amazon GameLift Streams is hosting the stream session.
 	//
 	// A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, see the Regions and quotas section in the
-	// Amazon GameLift Streams Developer Guide .
+	// that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon GameLift Streams
+	// Developer Guide.
+	//
+	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Location *string
 
 	// The data transfer protocol in use with the stream session.

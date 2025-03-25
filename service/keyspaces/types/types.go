@@ -493,7 +493,7 @@ type ReplicationGroupStatus struct {
 
 // The replication specification of the keyspace includes:
 //
-//   - regionList - up to six Amazon Web Services Regions where the keyspace is
+//   - regionList - the Amazon Web Services Regions where the keyspace is
 //     replicated in.
 //
 //   - replicationStrategy - the required value is SINGLE_REGION or MULTI_REGION .
@@ -505,8 +505,8 @@ type ReplicationSpecification struct {
 	// This member is required.
 	ReplicationStrategy Rs
 
-	//  The regionList can contain up to six Amazon Web Services Regions where the
-	// keyspace is replicated in.
+	//  The regionList contains the Amazon Web Services Regions where the keyspace is
+	// replicated in.
 	RegionList []string
 
 	noSmithyDocumentSerde

@@ -835,12 +835,13 @@ type KnowledgeBaseStorageType string
 
 // Enum values for KnowledgeBaseStorageType
 const (
-	KnowledgeBaseStorageTypeOpensearchServerless KnowledgeBaseStorageType = "OPENSEARCH_SERVERLESS"
-	KnowledgeBaseStorageTypePinecone             KnowledgeBaseStorageType = "PINECONE"
-	KnowledgeBaseStorageTypeRedisEnterpriseCloud KnowledgeBaseStorageType = "REDIS_ENTERPRISE_CLOUD"
-	KnowledgeBaseStorageTypeRds                  KnowledgeBaseStorageType = "RDS"
-	KnowledgeBaseStorageTypeMongoDbAtlas         KnowledgeBaseStorageType = "MONGO_DB_ATLAS"
-	KnowledgeBaseStorageTypeNeptuneAnalytics     KnowledgeBaseStorageType = "NEPTUNE_ANALYTICS"
+	KnowledgeBaseStorageTypeOpensearchServerless     KnowledgeBaseStorageType = "OPENSEARCH_SERVERLESS"
+	KnowledgeBaseStorageTypePinecone                 KnowledgeBaseStorageType = "PINECONE"
+	KnowledgeBaseStorageTypeRedisEnterpriseCloud     KnowledgeBaseStorageType = "REDIS_ENTERPRISE_CLOUD"
+	KnowledgeBaseStorageTypeRds                      KnowledgeBaseStorageType = "RDS"
+	KnowledgeBaseStorageTypeMongoDbAtlas             KnowledgeBaseStorageType = "MONGO_DB_ATLAS"
+	KnowledgeBaseStorageTypeNeptuneAnalytics         KnowledgeBaseStorageType = "NEPTUNE_ANALYTICS"
+	KnowledgeBaseStorageTypeOpensearchManagedCluster KnowledgeBaseStorageType = "OPENSEARCH_MANAGED_CLUSTER"
 )
 
 // Values returns all known values for KnowledgeBaseStorageType. Note that this
@@ -855,6 +856,7 @@ func (KnowledgeBaseStorageType) Values() []KnowledgeBaseStorageType {
 		"RDS",
 		"MONGO_DB_ATLAS",
 		"NEPTUNE_ANALYTICS",
+		"OPENSEARCH_MANAGED_CLUSTER",
 	}
 }
 

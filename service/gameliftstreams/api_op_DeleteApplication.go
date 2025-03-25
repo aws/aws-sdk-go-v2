@@ -23,16 +23,20 @@ import (
 //     application that's in PROCESSING or INITIALIZED status.
 //
 //   - The application is not the default application of any stream groups. You
-//     must first delete the stream group by using DeleteStreamGroup.
+//     must first delete the stream group by using [DeleteStreamGroup].
 //
 //   - The application is not linked to any stream groups. You must first unlink
-//     the stream group by using DisassociateApplications.
+//     the stream group by using [DisassociateApplications].
 //
 //   - An application is not streaming in any ongoing stream session. You must
-//     wait until the client ends the stream session or call TerminateStreamSessionto end the stream.
+//     wait until the client ends the stream session or call [TerminateStreamSession]to end the stream.
 //
 // If any active stream groups exist for this application, this request returns a
 // ValidationException .
+//
+// [DisassociateApplications]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_DisassociateApplications.html
+// [TerminateStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_TerminateStreamSession.html
+// [DeleteStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_DeleteStreamGroup.html
 func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicationInput, optFns ...func(*Options)) (*DeleteApplicationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationInput{}
@@ -51,8 +55,8 @@ func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicatio
 type DeleteApplicationInput struct {
 
 	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 or ID-
-	// 9ZY8X7Wv6 .
+	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or
+	// ID- a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//

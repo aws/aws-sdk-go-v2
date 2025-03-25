@@ -15,11 +15,13 @@ import (
 // account has access to.
 //
 // In the returned list of stream sessions, the ExportFilesMetadata property only
-// shows the Status value. To get the OutpurUri and StatusReason values, use GetStreamSession.
+// shows the Status value. To get the OutpurUri and StatusReason values, use [GetStreamSession].
 //
 // We don't recommend using this operation to regularly check stream session
 // statuses because it's costly. Instead, to check status updates for a specific
-// stream session, use GetStreamSession.
+// stream session, use [GetStreamSession].
+//
+// [GetStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
 func (c *Client) ListStreamSessionsByAccount(ctx context.Context, params *ListStreamSessionsByAccountInput, optFns ...func(*Options)) (*ListStreamSessionsByAccountOutput, error) {
 	if params == nil {
 		params = &ListStreamSessionsByAccountInput{}

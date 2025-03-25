@@ -43,7 +43,7 @@ type AddStreamGroupLocationsInput struct {
 	//  A stream group to add the specified locations to.
 	//
 	// This value is a Amazon Resource Name (ARN) that uniquely identifies the stream
-	// group resource. Format example: 1AB2C3De4 .
+	// group resource. Format example: sg-1AB2C3De4 .
 	//
 	// This member is required.
 	Identifier *string
@@ -59,7 +59,7 @@ type AddStreamGroupLocationsInput struct {
 type AddStreamGroupLocationsOutput struct {
 
 	// This value is the Amazon Resource Name (ARN) that uniquely identifies the
-	// stream group resource. Format example: 1AB2C3De4 .
+	// stream group resource. Format example: sg-1AB2C3De4 .
 	//
 	// This member is required.
 	Identifier *string

@@ -48,8 +48,8 @@ func (c *Client) CreateStreamSessionConnection(ctx context.Context, params *Crea
 type CreateStreamSessionConnectionInput struct {
 
 	// [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4 or ID-
-	// 1AB2C3De4 .
+	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or ID-
+	// sg-1AB2C3De4 .
 	//
 	// The stream group that you want to run this stream session with. The stream
 	// group must be in ACTIVE status and have idle stream capacity.

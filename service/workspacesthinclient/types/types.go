@@ -71,6 +71,9 @@ type Device struct {
 	Status DeviceStatus
 
 	// The tag keys and optional values for the resource.
+	//
+	// Deprecated: This field will be removed in future releases. Use
+	// ListTagsForResource API instead.
 	Tags map[string]string
 
 	// The timestamp of when the device was updated.
@@ -195,6 +198,9 @@ type Environment struct {
 	SoftwareSetUpdateSchedule SoftwareSetUpdateSchedule
 
 	// The tag keys and optional values for the resource.
+	//
+	// Deprecated: This field will be removed in future releases. Use
+	// ListTagsForResource API instead.
 	Tags map[string]string
 
 	// The timestamp of when the device was updated.
@@ -315,6 +321,9 @@ type SoftwareSet struct {
 	SupportedUntil *time.Time
 
 	// The tag keys and optional values for the resource.
+	//
+	// Deprecated: This field will be removed in future releases. Use
+	// ListTagsForResource API instead.
 	Tags map[string]string
 
 	// An option to define if the software set has been validated.

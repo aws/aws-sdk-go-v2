@@ -21423,6 +21423,127 @@ func awsRestjson1_deserializeDocumentNeptuneAnalyticsFieldMapping(v **types.Nept
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOpenSearchManagedClusterConfiguration(v **types.OpenSearchManagedClusterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenSearchManagedClusterConfiguration
+	if *v == nil {
+		sv = &types.OpenSearchManagedClusterConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domainArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OpenSearchManagedClusterDomainArn to be of type string, got %T instead", value)
+				}
+				sv.DomainArn = ptr.String(jtv)
+			}
+
+		case "domainEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OpenSearchManagedClusterDomainEndpoint to be of type string, got %T instead", value)
+				}
+				sv.DomainEndpoint = ptr.String(jtv)
+			}
+
+		case "fieldMapping":
+			if err := awsRestjson1_deserializeDocumentOpenSearchManagedClusterFieldMapping(&sv.FieldMapping, value); err != nil {
+				return err
+			}
+
+		case "vectorIndexName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OpenSearchManagedClusterIndexName to be of type string, got %T instead", value)
+				}
+				sv.VectorIndexName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOpenSearchManagedClusterFieldMapping(v **types.OpenSearchManagedClusterFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenSearchManagedClusterFieldMapping
+	if *v == nil {
+		sv = &types.OpenSearchManagedClusterFieldMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metadataField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
+				}
+				sv.MetadataField = ptr.String(jtv)
+			}
+
+		case "textField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
+				}
+				sv.TextField = ptr.String(jtv)
+			}
+
+		case "vectorField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
+				}
+				sv.VectorField = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOpenSearchServerlessConfiguration(v **types.OpenSearchServerlessConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25199,6 +25320,11 @@ func awsRestjson1_deserializeDocumentStorageConfiguration(v **types.StorageConfi
 
 		case "neptuneAnalyticsConfiguration":
 			if err := awsRestjson1_deserializeDocumentNeptuneAnalyticsConfiguration(&sv.NeptuneAnalyticsConfiguration, value); err != nil {
+				return err
+			}
+
+		case "opensearchManagedClusterConfiguration":
+			if err := awsRestjson1_deserializeDocumentOpenSearchManagedClusterConfiguration(&sv.OpensearchManagedClusterConfiguration, value); err != nil {
 				return err
 			}
 

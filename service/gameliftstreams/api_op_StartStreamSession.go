@@ -22,7 +22,7 @@ import (
 // To start a new stream session, specify a stream group and application ID, along
 // with the transport protocol and signal request settings to use with the stream.
 // You must have associated at least one application to the stream group before
-// starting a stream session, either when creating the stream group, or by using AssociateApplications.
+// starting a stream session, either when creating the stream group, or by using [AssociateApplications].
 //
 // For stream groups that have multiple locations, provide a set of locations
 // ordered by priority by setting Locations . Amazon GameLift Streams will start a
@@ -47,6 +47,8 @@ import (
 //     certain time, set by ClientToken . In this case, Amazon GameLift Streams stops
 //     processing the request, and the stream session object status changes to ERROR
 //     with status reason placementTimeout .
+//
+// [AssociateApplications]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_AssociateApplications.html
 func (c *Client) StartStreamSession(ctx context.Context, params *StartStreamSessionInput, optFns ...func(*Options)) (*StartStreamSessionOutput, error) {
 	if params == nil {
 		params = &StartStreamSessionInput{}
@@ -65,8 +67,8 @@ func (c *Client) StartStreamSession(ctx context.Context, params *StartStreamSess
 type StartStreamSessionInput struct {
 
 	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 or ID-
-	// 9ZY8X7Wv6 .
+	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or
+	// ID- a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -77,8 +79,8 @@ type StartStreamSessionInput struct {
 	//
 	// This value is an [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource.
 	// Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4 or ID-
-	// 1AB2C3De4 .
+	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or ID-
+	// sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -143,8 +145,10 @@ type StartStreamSessionInput struct {
 	// the primary location.
 	//
 	// This value is A set of location names. For example, us-east-1 . For a complete
-	// list of locations that Amazon GameLift Streams supports, see the Regions and
-	// quotas section in the Amazon GameLift Streams Developer Guide .
+	// list of locations that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon
+	// GameLift Streams Developer Guide.
+	//
+	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Locations []string
 
 	// The maximum length of time (in seconds) that Amazon GameLift Streams keeps the
@@ -186,7 +190,7 @@ type StartStreamSessionOutput struct {
 	AdditionalLaunchArgs []string
 
 	// An [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Format example:
-	// arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 .
+	// arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	ApplicationArn *string
@@ -220,8 +224,10 @@ type StartStreamSessionOutput struct {
 	//  The location where Amazon GameLift Streams is streaming your application from.
 	//
 	// A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, see the Regions and quotas section in the
-	// Amazon GameLift Streams Developer Guide .
+	// that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon GameLift Streams
+	// Developer Guide.
+	//
+	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Location *string
 
 	// Access location for log files that your content generates during a stream

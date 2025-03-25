@@ -186,9 +186,6 @@ func validateUsageRecord(v *types.UsageRecord) error {
 	if v.Timestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
 	}
-	if v.CustomerIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomerIdentifier"))
-	}
 	if v.Dimension == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Dimension"))
 	}

@@ -1,0 +1,8 @@
+{
+    "id": "a6691fc4-4bba-4f2e-a032-378022080ae6",
+    "type": "feature",
+    "description": "Deprecate tags field in Get API responses",
+    "modules": [
+        "service/workspacesthinclient"
+    ]
+}

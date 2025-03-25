@@ -3120,6 +3120,55 @@ func validateNeptuneAnalyticsFieldMapping(v *types.NeptuneAnalyticsFieldMapping)
 	}
 }
 
+func validateOpenSearchManagedClusterConfiguration(v *types.OpenSearchManagedClusterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenSearchManagedClusterConfiguration"}
+	if v.DomainEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainEndpoint"))
+	}
+	if v.DomainArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainArn"))
+	}
+	if v.VectorIndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VectorIndexName"))
+	}
+	if v.FieldMapping == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldMapping"))
+	} else if v.FieldMapping != nil {
+		if err := validateOpenSearchManagedClusterFieldMapping(v.FieldMapping); err != nil {
+			invalidParams.AddNested("FieldMapping", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenSearchManagedClusterFieldMapping(v *types.OpenSearchManagedClusterFieldMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenSearchManagedClusterFieldMapping"}
+	if v.VectorField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VectorField"))
+	}
+	if v.TextField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextField"))
+	}
+	if v.MetadataField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataField"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpenSearchServerlessConfiguration(v *types.OpenSearchServerlessConfiguration) error {
 	if v == nil {
 		return nil
@@ -4247,6 +4296,11 @@ func validateStorageConfiguration(v *types.StorageConfiguration) error {
 	if v.OpensearchServerlessConfiguration != nil {
 		if err := validateOpenSearchServerlessConfiguration(v.OpensearchServerlessConfiguration); err != nil {
 			invalidParams.AddNested("OpensearchServerlessConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpensearchManagedClusterConfiguration != nil {
+		if err := validateOpenSearchManagedClusterConfiguration(v.OpensearchManagedClusterConfiguration); err != nil {
+			invalidParams.AddNested("OpensearchManagedClusterConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.PineconeConfiguration != nil {

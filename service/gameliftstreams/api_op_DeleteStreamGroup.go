@@ -14,10 +14,12 @@ import (
 // group. To delete a stream group, specify the unique stream group identifier.
 // During the deletion process, the stream group's status is DELETING . This
 // operation stops streams in progress and prevents new streams from starting. As a
-// best practice, before deleting the stream group, call ListStreamSessionsto check for streams in
+// best practice, before deleting the stream group, call [ListStreamSessions]to check for streams in
 // progress and take action to stop them. When you delete a stream group, any
 // application associations referring to that stream group are automatically
 // removed.
+//
+// [ListStreamSessions]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_ListStreamSessions.html
 func (c *Client) DeleteStreamGroup(ctx context.Context, params *DeleteStreamGroupInput, optFns ...func(*Options)) (*DeleteStreamGroupOutput, error) {
 	if params == nil {
 		params = &DeleteStreamGroupInput{}
@@ -36,7 +38,7 @@ func (c *Client) DeleteStreamGroup(ctx context.Context, params *DeleteStreamGrou
 type DeleteStreamGroupInput struct {
 
 	// The unique ID value of the stream group resource to delete. Format example:
-	// 1AB2C3De4 .
+	// sg-1AB2C3De4 .
 	//
 	// This member is required.
 	Identifier *string

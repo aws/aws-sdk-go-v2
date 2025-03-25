@@ -6,8 +6,9 @@ type GetEntitlementFilterName string
 
 // Enum values for GetEntitlementFilterName
 const (
-	GetEntitlementFilterNameCustomerIdentifier GetEntitlementFilterName = "CUSTOMER_IDENTIFIER"
-	GetEntitlementFilterNameDimension          GetEntitlementFilterName = "DIMENSION"
+	GetEntitlementFilterNameCustomerIdentifier   GetEntitlementFilterName = "CUSTOMER_IDENTIFIER"
+	GetEntitlementFilterNameDimension            GetEntitlementFilterName = "DIMENSION"
+	GetEntitlementFilterNameCustomerAwsAccountId GetEntitlementFilterName = "CUSTOMER_AWS_ACCOUNT_ID"
 )
 
 // Values returns all known values for GetEntitlementFilterName. Note that this
@@ -18,5 +19,6 @@ func (GetEntitlementFilterName) Values() []GetEntitlementFilterName {
 	return []GetEntitlementFilterName{
 		"CUSTOMER_IDENTIFIER",
 		"DIMENSION",
+		"CUSTOMER_AWS_ACCOUNT_ID",
 	}
 }

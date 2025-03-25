@@ -39,8 +39,8 @@ type GetStreamSessionInput struct {
 	//
 	// This value is an [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource.
 	// Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4 or ID-
-	// 1AB2C3De4 .
+	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or ID-
+	// sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -88,7 +88,8 @@ type GetStreamSessionOutput struct {
 	// The application streaming in this session.
 	//
 	// This value is an [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Format
-	// example: arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 .
+	// example: arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6
+	// .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	ApplicationArn *string
@@ -122,8 +123,10 @@ type GetStreamSessionOutput struct {
 	// The location where Amazon GameLift Streams is hosting the stream session.
 	//
 	// A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, see the Regions and quotas section in the
-	// Amazon GameLift Streams Developer Guide .
+	// that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon GameLift Streams
+	// Developer Guide.
+	//
+	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Location *string
 
 	// Access location for log files that your content generates during a stream

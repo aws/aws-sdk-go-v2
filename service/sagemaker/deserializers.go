@@ -99261,6 +99261,31 @@ func awsAwsjson11_deserializeOpDocumentDescribePartnerAppOutput(v **DescribePart
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
 
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		case "LastModifiedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "MaintenanceConfig":
 			if err := awsAwsjson11_deserializeDocumentPartnerAppMaintenanceConfig(&sv.MaintenanceConfig, value); err != nil {
 				return err

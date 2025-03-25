@@ -16,13 +16,19 @@ import (
 // is resolved through this API to obtain a CustomerIdentifier along with the
 // CustomerAWSAccountId and ProductCode .
 //
-// The API needs to called from the seller account id used to publish the SaaS
-// application to successfully resolve the token.
+// To successfully resolve the token, the API must be called from the account that
+// was used to publish the SaaS application. For an example of using
+// ResolveCustomer , see [ResolveCustomer code example] in the Amazon Web Services Marketplace Seller Guide.
 //
-// For an example of using ResolveCustomer , see [ResolveCustomer code example] in the AWS Marketplace Seller
-// Guide.
+// Permission is required for this operation. Your IAM role or user performing
+// this operation requires a policy to allow the aws-marketplace:ResolveCustomer
+// action. For more information, see [Actions, resources, and condition keys for Amazon Web Services Marketplace Metering Service]in the Service Authorization Reference.
+//
+// For Amazon Web Services Regions that support ResolveCustomer , see [ResolveCustomer Region support].
 //
 // [ResolveCustomer code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-resolvecustomer-example
+// [Actions, resources, and condition keys for Amazon Web Services Marketplace Metering Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsmarketplacemeteringservice.html
+// [ResolveCustomer Region support]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#resolvecustomer-region-support
 func (c *Client) ResolveCustomer(ctx context.Context, params *ResolveCustomerInput, optFns ...func(*Options)) (*ResolveCustomerOutput, error) {
 	if params == nil {
 		params = &ResolveCustomerInput{}
@@ -53,12 +59,11 @@ type ResolveCustomerInput struct {
 }
 
 // The result of the ResolveCustomer operation. Contains the CustomerIdentifier
-//
 // along with the CustomerAWSAccountId and ProductCode .
 type ResolveCustomerOutput struct {
 
-	// The CustomerAWSAccountId provides the AWS account ID associated with the
-	// CustomerIdentifier for the individual customer.
+	// The CustomerAWSAccountId provides the Amazon Web Services account ID associated
+	// with the CustomerIdentifier for the individual customer.
 	CustomerAWSAccountId *string
 
 	// The CustomerIdentifier is used to identify an individual customer in your

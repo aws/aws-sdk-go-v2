@@ -57,8 +57,8 @@ func (c *Client) ExportStreamSessionFiles(ctx context.Context, params *ExportStr
 type ExportStreamSessionFilesInput struct {
 
 	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4 or ID-
-	// 1AB2C3De4 .
+	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or
+	// ID- sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//

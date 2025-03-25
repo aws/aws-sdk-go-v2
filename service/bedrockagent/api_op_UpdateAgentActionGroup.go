@@ -112,7 +112,8 @@ type UpdateAgentActionGroupInput struct {
 	// The configuration settings for a computer use action.
 	//
 	// Computer use is a new Anthropic Claude model capability (in beta) available
-	// with Claude 3.7 and Claude 3.5 Sonnet v2 only. For more information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools].
+	// with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]
+	// .
 	//
 	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
 	ParentActionGroupSignatureParams map[string]string

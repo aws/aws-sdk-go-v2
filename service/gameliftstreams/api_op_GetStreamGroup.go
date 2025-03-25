@@ -36,7 +36,7 @@ func (c *Client) GetStreamGroup(ctx context.Context, params *GetStreamGroupInput
 type GetStreamGroupInput struct {
 
 	// The unique ID value of the stream group resource to retrieve. Format example:
-	// 1AB2C3De4 .
+	// sg-1AB2C3De4 .
 	//
 	// This member is required.
 	Identifier *string
@@ -58,7 +58,8 @@ type GetStreamGroupOutput struct {
 	// any of these applications by using this stream group.
 	//
 	// This value is a set of [Amazon Resource Names (ARNs)] that uniquely identify application resources. Format
-	// example: arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 .
+	// example: arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6
+	// .
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	AssociatedApplications []string
@@ -67,15 +68,15 @@ type GetStreamGroupOutput struct {
 	// expressed using in ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC).
 	CreatedAt *time.Time
 
-	// The Amazon GameLift Streams application that is associated with this stream
-	// group.
+	// The default Amazon GameLift Streams application that is associated with this
+	// stream group.
 	DefaultApplication *types.DefaultApplication
 
 	// A descriptive label for the stream group.
 	Description *string
 
 	// A unique ID value that is assigned to the resource when it's created. Format
-	// example: 1AB2C3De4 .
+	// example: sg-1AB2C3De4 .
 	Id *string
 
 	// A timestamp that indicates when this resource was last updated. Timestamps are
@@ -141,8 +142,8 @@ type GetStreamGroupOutput struct {
 	//
 	//   - gen5n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
-	//   supports DirectX 12. Compatible with most Unreal Engine 5.x builds, 32-bit
-	//   applications, and anti-cheat technology. Uses NVIDIA A10G Tensor GPU.
+	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.4, 32
+	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA A10G Tensor GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -176,8 +177,8 @@ type GetStreamGroupOutput struct {
 	//
 	//   - gen4n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
-	//   supports DirectX 12. Compatible with most Unreal Engine 5.2 and 5.3 builds,
-	//   32-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor GPU.
+	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.4, 32
+	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor GPU.
 	//
 	//   - Reference resolution: 1080p
 	//

@@ -40,7 +40,7 @@ type RemoveStreamGroupLocationsInput struct {
 	//  A stream group to remove the specified locations from.
 	//
 	// This value is a Amazon Resource Name (ARN) that uniquely identifies the stream
-	// group resource. Format example: 1AB2C3De4 .
+	// group resource. Format example: sg-1AB2C3De4 .
 	//
 	// This member is required.
 	Identifier *string
@@ -48,8 +48,10 @@ type RemoveStreamGroupLocationsInput struct {
 	//  A set of locations to remove this stream group.
 	//
 	// A set of location names. For example, us-east-1 . For a complete list of
-	// locations that Amazon GameLift Streams supports, see the Regions and quotas
-	// section in the Amazon GameLift Streams Developer Guide .
+	// locations that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon
+	// GameLift Streams Developer Guide.
+	//
+	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	//
 	// This member is required.
 	Locations []string

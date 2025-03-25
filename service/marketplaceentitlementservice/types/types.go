@@ -12,6 +12,9 @@ import (
 // application or some amount of data capacity in a multi-tenant database.
 type Entitlement struct {
 
+	//  The CustomerAWSAccountID parameter specifies the AWS account ID of the buyer.
+	CustomerAWSAccountId *string
+
 	// The customer identifier is a handle to each unique customer in an application.
 	// Customer identifiers are obtained through the ResolveCustomer operation in AWS
 	// Marketplace Metering Service.

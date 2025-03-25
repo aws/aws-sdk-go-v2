@@ -36439,6 +36439,11 @@ func awsAwsjson11_serializeOpDocumentCreatePartnerAppInput(v *CreatePartnerAppIn
 		ok.String(*v.ExecutionRoleArn)
 	}
 
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
 	if v.MaintenanceConfig != nil {
 		ok := object.Key("MaintenanceConfig")
 		if err := awsAwsjson11_serializeDocumentPartnerAppMaintenanceConfig(v.MaintenanceConfig, ok); err != nil {

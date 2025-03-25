@@ -38,8 +38,8 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 type UpdateApplicationInput struct {
 
 	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 or ID-
-	// 9ZY8X7Wv6 .
+	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or
+	// ID- a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -47,8 +47,7 @@ type UpdateApplicationInput struct {
 	Identifier *string
 
 	// An Amazon S3 URI to a bucket where you would like Amazon GameLift Streams to
-	// save application logs. Use the following format for the URI: s3://[bucket
-	// name]/[prefix] . Required if you specify one or more LogPaths .
+	// save application logs. Required if you specify one or more ApplicationLogPaths .
 	//
 	// The log bucket must have permissions that give Amazon GameLift Streams access
 	// to write the log files. For more information, see Getting Started in the Amazon
@@ -57,10 +56,12 @@ type UpdateApplicationInput struct {
 
 	// Locations of log files that your content generates during a stream session.
 	// Enter path values that are relative to the ApplicationSourceUri location. You
-	// can specify up to 10 log locations. Amazon GameLift Streams uploads designated
-	// log files to the Amazon S3 bucket that you specify in ApplicationLogOutputUri
-	// at the end of a stream session. To retrieve stored log files, call GetStreamSessionand get the
+	// can specify up to 10 log paths. Amazon GameLift Streams uploads designated log
+	// files to the Amazon S3 bucket that you specify in ApplicationLogOutputUri at
+	// the end of a stream session. To retrieve stored log files, call [GetStreamSession]and get the
 	// LogFileLocationUri .
+	//
+	// [GetStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
 	ApplicationLogPaths []string
 
 	// A human-readable label for the application.
@@ -79,14 +80,15 @@ type UpdateApplicationOutput struct {
 	Arn *string
 
 	// An Amazon S3 URI to a bucket where you would like Amazon GameLift Streams to
-	// save application logs. Use the following format for the URI: s3://[bucket
-	// name]/[prefix] . Required if you specify one or more LogPaths .
+	// save application logs. Required if you specify one or more ApplicationLogPaths .
 	ApplicationLogOutputUri *string
 
 	// Locations of log files that your content generates during a stream session.
 	// Amazon GameLift Streams uploads log files to the Amazon S3 bucket that you
 	// specify in ApplicationLogOutputUri at the end of a stream session. To retrieve
-	// stored log files, call GetStreamSessionand get the LogFileLocationUri .
+	// stored log files, call [GetStreamSession]and get the LogFileLocationUri .
+	//
+	// [GetStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
 	ApplicationLogPaths []string
 
 	// The original Amazon S3 location of uploaded stream content for the application.
@@ -96,7 +98,8 @@ type UpdateApplicationOutput struct {
 	// any of these stream groups to stream your application.
 	//
 	// This value is a set of [Amazon Resource Names (ARNs)] that uniquely identify stream group resources. Format
-	// example: arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4 .
+	// example: arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4
+	// .
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	AssociatedStreamGroups []string
@@ -113,8 +116,8 @@ type UpdateApplicationOutput struct {
 	ExecutablePath *string
 
 	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 or ID-
-	// 9ZY8X7Wv6 .
+	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or
+	// ID- a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Id *string
@@ -126,15 +129,14 @@ type UpdateApplicationOutput struct {
 	// A set of replication statuses for each location.
 	ReplicationStatuses []types.ReplicationStatus
 
-	//  A set of configuration settings to run the application on a stream group. This
-	// configures the operating system, and can include compatibility layers and other
-	// drivers.
+	//  Configuration settings that identify the operating system for an application
+	// resource. This can also include a compatibility layer and other drivers.
 	//
 	// A runtime environment can be one of the following:
 	//
 	//   - For Linux applications
 	//
-	//   - Ubuntu 22.04 LTS( Type=UBUNTU, Version=22_04_LTS )
+	//   - Ubuntu 22.04 LTS ( Type=UBUNTU, Version=22_04_LTS )
 	//
 	//   - For Windows applications
 	//

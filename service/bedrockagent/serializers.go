@@ -8935,6 +8935,57 @@ func awsRestjson1_serializeDocumentNeptuneAnalyticsFieldMapping(v *types.Neptune
 	return nil
 }
 
+func awsRestjson1_serializeDocumentOpenSearchManagedClusterConfiguration(v *types.OpenSearchManagedClusterConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainArn != nil {
+		ok := object.Key("domainArn")
+		ok.String(*v.DomainArn)
+	}
+
+	if v.DomainEndpoint != nil {
+		ok := object.Key("domainEndpoint")
+		ok.String(*v.DomainEndpoint)
+	}
+
+	if v.FieldMapping != nil {
+		ok := object.Key("fieldMapping")
+		if err := awsRestjson1_serializeDocumentOpenSearchManagedClusterFieldMapping(v.FieldMapping, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VectorIndexName != nil {
+		ok := object.Key("vectorIndexName")
+		ok.String(*v.VectorIndexName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOpenSearchManagedClusterFieldMapping(v *types.OpenSearchManagedClusterFieldMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataField != nil {
+		ok := object.Key("metadataField")
+		ok.String(*v.MetadataField)
+	}
+
+	if v.TextField != nil {
+		ok := object.Key("textField")
+		ok.String(*v.TextField)
+	}
+
+	if v.VectorField != nil {
+		ok := object.Key("vectorField")
+		ok.String(*v.VectorField)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOpenSearchServerlessConfiguration(v *types.OpenSearchServerlessConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10423,6 +10474,13 @@ func awsRestjson1_serializeDocumentStorageConfiguration(v *types.StorageConfigur
 	if v.NeptuneAnalyticsConfiguration != nil {
 		ok := object.Key("neptuneAnalyticsConfiguration")
 		if err := awsRestjson1_serializeDocumentNeptuneAnalyticsConfiguration(v.NeptuneAnalyticsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OpensearchManagedClusterConfiguration != nil {
+		ok := object.Key("opensearchManagedClusterConfiguration")
+		if err := awsRestjson1_serializeDocumentOpenSearchManagedClusterConfiguration(v.OpensearchManagedClusterConfiguration, ok); err != nil {
 			return err
 		}
 	}

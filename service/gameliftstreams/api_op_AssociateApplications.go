@@ -13,7 +13,9 @@ import (
 // When you associate, or link, an application with a stream group, then Amazon
 // GameLift Streams can launch the application using the stream group's allocated
 // compute resources. The stream group must be in ACTIVE status. You can reverse
-// this action by using DisassociateApplications.
+// this action by using [DisassociateApplications].
+//
+// [DisassociateApplications]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_DisassociateApplications.html
 func (c *Client) AssociateApplications(ctx context.Context, params *AssociateApplicationsInput, optFns ...func(*Options)) (*AssociateApplicationsOutput, error) {
 	if params == nil {
 		params = &AssociateApplicationsInput{}
@@ -35,8 +37,8 @@ type AssociateApplicationsInput struct {
 	//
 	// This value is a set of either [Amazon Resource Names (ARN)] or IDs that uniquely identify application
 	// resources. Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 or ID-
-	// 9ZY8X7Wv6 .
+	// arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or ID-
+	// a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Names (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -47,8 +49,8 @@ type AssociateApplicationsInput struct {
 	//
 	// This value is a [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource.
 	// Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4 or ID-
-	// 1AB2C3De4 .
+	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or ID-
+	// sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -64,8 +66,8 @@ type AssociateApplicationsOutput struct {
 	//
 	// This value is a set of either [Amazon Resource Names (ARN)] or IDs that uniquely identify application
 	// resources. Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 or ID-
-	// 9ZY8X7Wv6 .
+	// arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or ID-
+	// a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Names (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	ApplicationArns []string
@@ -74,8 +76,8 @@ type AssociateApplicationsOutput struct {
 	//
 	// This value is a [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource.
 	// Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4 or ID-
-	// 1AB2C3De4 .
+	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or ID-
+	// sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Arn *string

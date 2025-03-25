@@ -35,13 +35,17 @@ import (
 //     terminated. This offers a cost control measure at the expense of a greater
 //     startup time (typically under 5 minutes).
 //
-// To adjust the capacity of any ACTIVE stream group, call UpdateStreamGroup.
+// To adjust the capacity of any ACTIVE stream group, call [UpdateStreamGroup].
 //
 // If the request is successful, Amazon GameLift Streams begins creating the
 // stream group. Amazon GameLift Streams assigns a unique ID to the stream group
 // resource and sets the status to ACTIVATING . When the stream group reaches
-// ACTIVE status, you can start stream sessions by using StartStreamSession. To check the stream
-// group's status, call GetStreamGroup.
+// ACTIVE status, you can start stream sessions by using [StartStreamSession]. To check the stream
+// group's status, call [GetStreamGroup].
+//
+// [GetStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamGroup.html
+// [UpdateStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UpdateStreamGroup.html
+// [StartStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_StartStreamSession.html
 func (c *Client) CreateStreamGroup(ctx context.Context, params *CreateStreamGroupInput, optFns ...func(*Options)) (*CreateStreamGroupOutput, error) {
 	if params == nil {
 		params = &CreateStreamGroupInput{}
@@ -74,8 +78,8 @@ type CreateStreamGroupInput struct {
 	//
 	//   - gen5n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
-	//   supports DirectX 12. Compatible with most Unreal Engine 5.x builds, 32-bit
-	//   applications, and anti-cheat technology. Uses NVIDIA A10G Tensor GPU.
+	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.4, 32
+	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA A10G Tensor GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -109,8 +113,8 @@ type CreateStreamGroupInput struct {
 	//
 	//   - gen4n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
-	//   supports DirectX 12. Compatible with most Unreal Engine 5.2 and 5.3 builds,
-	//   32-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor GPU.
+	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.4, 32
+	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -164,13 +168,15 @@ type CreateStreamGroupInput struct {
 	LocationConfigurations []types.LocationConfiguration
 
 	// A list of labels to assign to the new stream group resource. Tags are
-	// developer-defined key-value pairs. It is useful to tag Amazon Web Services
-	// resources for resource management, access management, and cost allocation. See [Tagging Amazon Web Services Resources]
-	// in the Amazon Web Services General Reference. You can use TagResource, UntagResource, and ListTagsForResource to add,
-	// remove, and view tags on existing resources. The maximum tag limit might be
-	// lower than stated. See the Amazon Web Services for actual tagging limits.
+	// developer-defined key-value pairs. Tagging Amazon Web Services resources is
+	// useful for resource management, access management and cost allocation. See [Tagging Amazon Web Services Resources]in
+	// the Amazon Web Services General Reference. You can use [TagResource]to add tags, [UntagResource] to remove
+	// tags, and [ListTagsForResource]to view tags on existing resources.
 	//
 	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [TagResource]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_TagResource.html
+	// [UntagResource]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UntagResource.html
+	// [ListTagsForResource]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_ListTagsForResource.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -190,7 +196,8 @@ type CreateStreamGroupOutput struct {
 	// any of these applications by using this stream group.
 	//
 	// This value is a set of [Amazon Resource Names (ARNs)] that uniquely identify application resources. Format
-	// example: arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6 .
+	// example: arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6
+	// .
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	AssociatedApplications []string
@@ -199,15 +206,15 @@ type CreateStreamGroupOutput struct {
 	// expressed using in ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC).
 	CreatedAt *time.Time
 
-	// The Amazon GameLift Streams application that is associated with this stream
-	// group.
+	// The default Amazon GameLift Streams application that is associated with this
+	// stream group.
 	DefaultApplication *types.DefaultApplication
 
 	// A descriptive label for the stream group.
 	Description *string
 
 	// A unique ID value that is assigned to the resource when it's created. Format
-	// example: 1AB2C3De4 .
+	// example: sg-1AB2C3De4 .
 	Id *string
 
 	// A timestamp that indicates when this resource was last updated. Timestamps are
@@ -273,8 +280,8 @@ type CreateStreamGroupOutput struct {
 	//
 	//   - gen5n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
-	//   supports DirectX 12. Compatible with most Unreal Engine 5.x builds, 32-bit
-	//   applications, and anti-cheat technology. Uses NVIDIA A10G Tensor GPU.
+	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.4, 32
+	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA A10G Tensor GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -308,8 +315,8 @@ type CreateStreamGroupOutput struct {
 	//
 	//   - gen4n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
-	//   supports DirectX 12. Compatible with most Unreal Engine 5.2 and 5.3 builds,
-	//   32-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor GPU.
+	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.4, 32
+	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor GPU.
 	//
 	//   - Reference resolution: 1080p
 	//

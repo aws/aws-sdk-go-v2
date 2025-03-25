@@ -49,14 +49,9 @@ type UsageAllocation struct {
 // prevent double charges.
 type UsageRecord struct {
 
-	// The CustomerIdentifier is obtained through the ResolveCustomer operation and
-	// represents an individual buyer in your application.
-	//
-	// This member is required.
-	CustomerIdentifier *string
-
-	// During the process of registering a product on AWS Marketplace, dimensions are
-	// specified. These represent different units of value in your application.
+	// During the process of registering a product on Amazon Web Services Marketplace,
+	// dimensions are specified. These represent different units of value in your
+	// application.
 	//
 	// This member is required.
 	Dimension *string
@@ -68,6 +63,13 @@ type UsageRecord struct {
 	//
 	// This member is required.
 	Timestamp *time.Time
+
+	//  The CustomerAWSAccountID parameter specifies the AWS account ID of the buyer.
+	CustomerAWSAccountId *string
+
+	// The CustomerIdentifier is obtained through the ResolveCustomer operation and
+	// represents an individual buyer in your application.
+	CustomerIdentifier *string
 
 	// The quantity of usage consumed by the customer for the given dimension and
 	// time. Defaults to 0 if not specified.
@@ -102,7 +104,7 @@ type UsageRecordResult struct {
 	//   active agreement or subscription with this product. Future UsageRecords for
 	//   this customer will fail until the customer subscribes to your product.
 	//
-	//   - The customer's AWS account was suspended.
+	//   - The customer's Amazon Web Services account was suspended.
 	//
 	//   - DuplicateRecord- Indicates that the UsageRecord was invalid and not honored.
 	//   A previously metered UsageRecord had the same customer, dimension, and time,

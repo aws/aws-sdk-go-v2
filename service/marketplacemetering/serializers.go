@@ -326,6 +326,11 @@ func awsAwsjson11_serializeDocumentUsageRecord(v *types.UsageRecord, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomerAWSAccountId != nil {
+		ok := object.Key("CustomerAWSAccountId")
+		ok.String(*v.CustomerAWSAccountId)
+	}
+
 	if v.CustomerIdentifier != nil {
 		ok := object.Key("CustomerIdentifier")
 		ok.String(*v.CustomerIdentifier)

@@ -68,6 +68,13 @@ type DescribePartnerAppOutput struct {
 	// The ARN of the IAM role associated with the SageMaker Partner AI App.
 	ExecutionRoleArn *string
 
+	// The Amazon Web Services KMS customer managed key used to encrypt the data at
+	// rest associated with SageMaker Partner AI Apps.
+	KmsKeyId *string
+
+	// The time that the SageMaker Partner AI App was last modified.
+	LastModifiedTime *time.Time
+
 	// Maintenance configuration settings for the SageMaker Partner AI App.
 	MaintenanceConfig *types.PartnerAppMaintenanceConfig
 

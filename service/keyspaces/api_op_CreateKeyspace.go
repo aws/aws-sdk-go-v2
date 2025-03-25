@@ -48,8 +48,7 @@ type CreateKeyspaceInput struct {
 	//
 	//   - regionList - if the replicationStrategy is MULTI_REGION , the regionList
 	//   requires the current Region and at least one additional Amazon Web Services
-	//   Region where the keyspace is going to be replicated in. The maximum number of
-	//   supported replication Regions including the current Region is six.
+	//   Region where the keyspace is going to be replicated in.
 	ReplicationSpecification *types.ReplicationSpecification
 
 	// A list of key-value pair tags to be attached to the keyspace.

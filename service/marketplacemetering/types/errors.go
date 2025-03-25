@@ -119,7 +119,7 @@ func (e *ExpiredTokenException) ErrorCode() string {
 func (e *ExpiredTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal error has occurred. Retry your request. If the problem persists,
-// post a message with details on the AWS forums.
+// post a message with details on the Amazon Web Services forums.
 type InternalServiceErrorException struct {
 	Message *string
 
@@ -173,9 +173,9 @@ func (e *InvalidCustomerIdentifierException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The endpoint being called is in a AWS Region different from your EC2 instance,
-// ECS task, or EKS pod. The Region of the Metering Service endpoint and the AWS
-// Region of the resource must match.
+// The endpoint being called is in a Amazon Web Services Region different from
+// your EC2 instance, ECS task, or EKS pod. The Region of the Metering Service
+// endpoint and the Amazon Web Services Region of the resource must match.
 type InvalidEndpointRegionException struct {
 	Message *string
 
@@ -254,8 +254,8 @@ func (e *InvalidPublicKeyVersionException) ErrorCode() string {
 }
 func (e *InvalidPublicKeyVersionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// RegisterUsage must be called in the same AWS Region the ECS task was launched
-// in. This prevents a container from hardcoding a Region (e.g.
+// RegisterUsage must be called in the same Amazon Web Services Region the ECS
+// task was launched in. This prevents a container from hardcoding a Region (e.g.
 // withRegion(“us-east-1”) when calling RegisterUsage .
 type InvalidRegionException struct {
 	Message *string
@@ -334,8 +334,7 @@ func (e *InvalidTokenException) ErrorCode() string {
 }
 func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The usage allocation objects are invalid, or the number of allocations is
-// greater than 500 for a single usage record.
+// Sum of allocated usage quantities is not equal to the usage quantity.
 type InvalidUsageAllocationsException struct {
 	Message *string
 
@@ -388,8 +387,9 @@ func (e *InvalidUsageDimensionException) ErrorCode() string {
 }
 func (e *InvalidUsageDimensionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS Marketplace does not support metering usage from the underlying platform.
-// Currently, Amazon ECS, Amazon EKS, and AWS Fargate are supported.
+// Amazon Web Services Marketplace does not support metering usage from the
+// underlying platform. Currently, Amazon ECS, Amazon EKS, and Fargate are
+// supported.
 type PlatformNotSupportedException struct {
 	Message *string
 

@@ -1,0 +1,8 @@
+{
+    "id": "a1e031a3-6f9f-49fc-8535-4075a0782976",
+    "type": "feature",
+    "description": "Removing replication region limitation for Amazon Keyspaces Multi-Region Replication APIs.",
+    "modules": [
+        "service/keyspaces"
+    ]
+}

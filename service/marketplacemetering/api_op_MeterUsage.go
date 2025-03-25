@@ -12,11 +12,12 @@ import (
 	"time"
 )
 
-// API to emit metering records. For identical requests, the API is idempotent. It
-// simply returns the metering record ID.
+// API to emit metering records. For identical requests, the API is idempotent and
+// returns the metering record ID. This is used for metering flexible consumption
+// pricing (FCP) Amazon Machine Images (AMI) and container products.
 //
-// MeterUsage is authenticated on the buyer's AWS account using credentials from
-// the EC2 instance, ECS task, or EKS pod.
+// MeterUsage is authenticated on the buyer's Amazon Web Services account using
+// credentials from the Amazon EC2 instance, Amazon ECS task, or Amazon EKS pod.
 //
 // MeterUsage can optionally include multiple usage allocations, to provide
 // customers with usage data split into buckets by tags that you define (or allow
@@ -25,6 +26,11 @@ import (
 // Usage records are expected to be submitted as quickly as possible after the
 // event that is being recorded, and are not accepted more than 6 hours after the
 // event.
+//
+// For Amazon Web Services Regions that support MeterUsage , see [MeterUsage Region support for Amazon EC2] and [MeterUsage Region support for Amazon ECS and Amazon EKS].
+//
+// [MeterUsage Region support for Amazon ECS and Amazon EKS]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#meterusage-region-support-ecs-eks
+// [MeterUsage Region support for Amazon EC2]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#meterusage-region-support-ec2
 func (c *Client) MeterUsage(ctx context.Context, params *MeterUsageInput, optFns ...func(*Options)) (*MeterUsageOutput, error) {
 	if params == nil {
 		params = &MeterUsageInput{}
@@ -42,15 +48,15 @@ func (c *Client) MeterUsage(ctx context.Context, params *MeterUsageInput, optFns
 
 type MeterUsageInput struct {
 
-	// Product code is used to uniquely identify a product in AWS Marketplace. The
-	// product code should be the same as the one used during the publishing of a new
-	// product.
+	// Product code is used to uniquely identify a product in Amazon Web Services
+	// Marketplace. The product code should be the same as the one used during the
+	// publishing of a new product.
 	//
 	// This member is required.
 	ProductCode *string
 
 	// Timestamp, in UTC, for which the usage is being reported. Your application can
-	// meter usage for up to one hour in the past. Make sure the timestamp value is
+	// meter usage for up to six hours in the past. Make sure the timestamp value is
 	// not before the start of the software usage.
 	//
 	// This member is required.
