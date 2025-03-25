@@ -1,3 +1,7 @@
+# v1.61.0 (2025-03-25)
+
+* **Feature**: Added support to override upgrade-blocking readiness checks via force flag when updating a cluster.
+
 # v1.60.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

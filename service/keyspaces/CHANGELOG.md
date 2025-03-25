@@ -1,3 +1,7 @@
+# v1.18.0 (2025-03-25)
+
+* **Feature**: Removing replication region limitation for Amazon Keyspaces Multi-Region Replication APIs.
+
 # v1.17.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

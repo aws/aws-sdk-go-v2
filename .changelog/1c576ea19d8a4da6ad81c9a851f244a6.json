@@ -1,8 +1,0 @@
-{
-    "id": "1c576ea1-9d8a-4da6-ad81-c9a851f244a6",
-    "type": "feature",
-    "description": "This release enhances the GetEntitlements API to support new filter CUSTOMER_AWS_ACCOUNT_ID in request and CustomerAWSAccountId field in response.",
-    "modules": [
-        "service/marketplaceentitlementservice"
-    ]
-}

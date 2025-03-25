@@ -1,8 +1,0 @@
-{
-    "id": "174a5c2f-0857-466a-b450-06adbb7edd82",
-    "type": "feature",
-    "description": "Adding support for Amazon OpenSearch Managed clusters as a vector database in Knowledge Bases for Amazon Bedrock",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

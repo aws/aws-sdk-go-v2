@@ -1,3 +1,7 @@
+# v1.27.0 (2025-03-25)
+
+* **Feature**: This release enhances the BatchMeterUsage API to support new field CustomerAWSAccountId in request and response and making CustomerIdentifier optional. CustomerAWSAccountId or CustomerIdentifier must be provided in request but not both.
+
 # v1.26.3 (2025-03-24)
 
 * No change notes available for this release.

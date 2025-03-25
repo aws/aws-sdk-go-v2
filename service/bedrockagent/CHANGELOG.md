@@ -1,3 +1,7 @@
+# v1.40.0 (2025-03-25)
+
+* **Feature**: Adding support for Amazon OpenSearch Managed clusters as a vector database in Knowledge Bases for Amazon Bedrock
+
 # v1.39.0 (2025-03-10)
 
 * **Feature**: Add support for computer use tools

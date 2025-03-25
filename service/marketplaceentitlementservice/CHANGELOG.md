@@ -1,3 +1,7 @@
+# v1.27.0 (2025-03-25)
+
+* **Feature**: This release enhances the GetEntitlements API to support new filter CUSTOMER_AWS_ACCOUNT_ID in request and CustomerAWSAccountId field in response.
+
 # v1.26.2 (2025-03-21)
 
 * No change notes available for this release.

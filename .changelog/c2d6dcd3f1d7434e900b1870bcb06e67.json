@@ -1,8 +1,0 @@
-{
-    "id": "c2d6dcd3-f1d7-434e-900b-1870bcb06e67",
-    "type": "feature",
-    "description": "This release enhances the BatchMeterUsage API to support new field CustomerAWSAccountId in request and response and making CustomerIdentifier optional. CustomerAWSAccountId or CustomerIdentifier must be provided in request but not both.",
-    "modules": [
-        "service/marketplacemetering"
-    ]
-}

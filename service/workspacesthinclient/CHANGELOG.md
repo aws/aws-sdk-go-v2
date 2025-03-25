@@ -1,3 +1,7 @@
+# v1.13.0 (2025-03-25)
+
+* **Feature**: Deprecate tags field in Get API responses
+
 # v1.12.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

@@ -1,3 +1,7 @@
+# v1.183.0 (2025-03-25)
+
+* **Feature**: This release adds support for customer-managed KMS keys in Amazon SageMaker Partner AI Apps
+
 # v1.182.0 (2025-03-21)
 
 * **Feature**: This release does the following: 1.) Adds DurationHours as a required field to the SearchTrainingPlanOfferings action in the SageMaker AI API; 2.) Adds support for G6e instance types for SageMaker AI inference optimization jobs.

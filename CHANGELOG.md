@@ -1,3 +1,26 @@
+# Release (2025-03-25)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.40.0](service/bedrockagent/CHANGELOG.md#v1400-2025-03-25)
+  * **Feature**: Adding support for Amazon OpenSearch Managed clusters as a vector database in Knowledge Bases for Amazon Bedrock
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.61.0](service/eks/CHANGELOG.md#v1610-2025-03-25)
+  * **Feature**: Added support to override upgrade-blocking readiness checks via force flag when updating a cluster.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.1.0](service/gameliftstreams/CHANGELOG.md#v110-2025-03-25)
+  * **Feature**: Minor updates to improve developer experience.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.18.0](service/keyspaces/CHANGELOG.md#v1180-2025-03-25)
+  * **Feature**: Removing replication region limitation for Amazon Keyspaces Multi-Region Replication APIs.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.27.0](service/marketplaceentitlementservice/CHANGELOG.md#v1270-2025-03-25)
+  * **Feature**: This release enhances the GetEntitlements API to support new filter CUSTOMER_AWS_ACCOUNT_ID in request and CustomerAWSAccountId field in response.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.27.0](service/marketplacemetering/CHANGELOG.md#v1270-2025-03-25)
+  * **Feature**: This release enhances the BatchMeterUsage API to support new field CustomerAWSAccountId in request and response and making CustomerIdentifier optional. CustomerAWSAccountId or CustomerIdentifier must be provided in request but not both.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.183.0](service/sagemaker/CHANGELOG.md#v11830-2025-03-25)
+  * **Feature**: This release adds support for customer-managed KMS keys in Amazon SageMaker Partner AI Apps
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.13.0](service/workspacesthinclient/CHANGELOG.md#v1130-2025-03-25)
+  * **Feature**: Deprecate tags field in Get API responses
+
 # Release (2025-03-24)
 
 ## General Highlights
