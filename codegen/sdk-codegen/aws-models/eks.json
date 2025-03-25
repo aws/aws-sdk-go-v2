@@ -2086,6 +2086,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ThrottlingException"
                 }
             ],
             "traits": {
@@ -2164,6 +2167,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ThrottlingException"
                 }
             ],
             "traits": {
@@ -6090,6 +6096,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ThrottlingException"
                 }
             ],
             "traits": {
@@ -6216,7 +6225,7 @@
                 "licenses": {
                     "target": "com.amazonaws.eks#LicenseList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Includes all of the claims in the license token necessary to validate the license for\n\t    extended support.</p>"
+                        "smithy.api#documentation": "<p>Includes all of the claims in the license token necessary to validate the license for\n            extended support.</p>"
                     }
                 },
                 "tags": {
@@ -7168,6 +7177,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The request is invalid given the state of the cluster. Check the state of the cluster\n            and the associated operations.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.eks#InvalidStateException": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS cluster associated with the exception.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.eks#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Amazon EKS detected upgrade readiness issues. Call the <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_ListInsights.html\">\n               <code>ListInsights</code>\n            </a> API to view detected upgrade blocking issues.\n            Pass the <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateClusterVersion.html#API_UpdateClusterVersion_RequestBody\">\n               <code>force</code>\n            </a> flag when updating to override upgrade readiness\n            errors.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -10238,6 +10266,25 @@
                 }
             }
         },
+        "com.amazonaws.eks#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS cluster associated with the exception.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.eks#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request or operation couldn't be performed because a service is throttling\n            requests.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
         "com.amazonaws.eks#Timestamp": {
             "type": "timestamp"
         },
@@ -10612,6 +10659,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ThrottlingException"
                 }
             ],
             "traits": {
@@ -10718,6 +10768,9 @@
                     "target": "com.amazonaws.eks#InvalidRequestException"
                 },
                 {
+                    "target": "com.amazonaws.eks#InvalidStateException"
+                },
+                {
                     "target": "com.amazonaws.eks#ResourceInUseException"
                 },
                 {
@@ -10725,6 +10778,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ThrottlingException"
                 }
             ],
             "traits": {
@@ -10759,6 +10815,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\nthe idempotency of the request.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "force": {
+                    "target": "com.amazonaws.eks#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to override upgrade-blocking readiness checks when\n            updating a cluster.</p>"
                     }
                 }
             },

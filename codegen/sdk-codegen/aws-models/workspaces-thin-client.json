@@ -25,7 +25,8 @@
         "com.amazonaws.workspacesthinclient#ActivationCode": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-z]{2}[a-z0-9]{6}$"
+                "smithy.api#pattern": "^[a-z]{2}[a-z0-9]{6}$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesthinclient#ApplyTimeOf": {
@@ -663,6 +664,10 @@
                 "tags": {
                     "target": "com.amazonaws.workspacesthinclient#TagsMap",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This field will be removed in future releases. Use ListTagsForResource API instead.",
+                            "since": "2025-03-25"
+                        },
                         "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
                     }
                 }
@@ -993,6 +998,10 @@
                 "tags": {
                     "target": "com.amazonaws.workspacesthinclient#TagsMap",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This field will be removed in future releases. Use ListTagsForResource API instead.",
+                            "since": "2025-03-25"
+                        },
                         "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
                     }
                 },
@@ -1957,6 +1966,10 @@
                 "tags": {
                     "target": "com.amazonaws.workspacesthinclient#TagsMap",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This field will be removed in future releases. Use ListTagsForResource API instead.",
+                            "since": "2025-03-25"
+                        },
                         "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
                     }
                 }

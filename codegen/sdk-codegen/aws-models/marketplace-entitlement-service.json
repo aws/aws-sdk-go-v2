@@ -766,6 +766,12 @@
                         "smithy.api#documentation": "<p>The customer identifier is a handle to each unique customer in an application. Customer\n   identifiers are obtained through the ResolveCustomer operation in AWS Marketplace Metering\n   Service.</p>"
                     }
                 },
+                "CustomerAWSAccountId": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The <code>CustomerAWSAccountID</code> parameter specifies the AWS account ID of the buyer.\n    </p>"
+                    }
+                },
                 "Value": {
                     "target": "com.amazonaws.marketplaceentitlementservice#EntitlementValue",
                     "traits": {
@@ -857,6 +863,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DIMENSION"
                     }
+                },
+                "CUSTOMER_AWS_ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_AWS_ACCOUNT_ID"
+                    }
                 }
             }
         },
@@ -889,7 +901,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>GetEntitlements retrieves entitlement values for a given product. The results can be\n      filtered based on customer identifier or product dimensions.</p>",
+                "smithy.api#documentation": "<p>GetEntitlements retrieves entitlement values for a given product. The results can be\n      filtered based on customer identifier, AWS account ID, or product dimensions.</p>\n         <important>\n            <p>\n       The <code>CustomerIdentifier</code> parameter is on path for deprecation. Use <code>CustomerAWSAccountID</code> instead.</p>\n            <p>These parameters are mutually exclusive. You can't specify both <code>CustomerIdentifier</code> and <code>CustomerAWSAccountID</code> in the same request.\n     </p>\n         </important>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -910,7 +922,7 @@
                 "Filter": {
                     "target": "com.amazonaws.marketplaceentitlementservice#GetEntitlementFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter is used to return entitlements for a specific customer or for a specific\n      dimension. Filters are described as keys mapped to a lists of values. Filtered requests are\n        <i>unioned</i> for each value in the value list, and then\n        <i>intersected</i> for each filter key.</p>"
+                        "smithy.api#documentation": "<p>Filter is used to return entitlements for a specific customer or for a specific\n      dimension. Filters are described as keys mapped to a lists of values. Filtered requests are\n        <i>unioned</i> for each value in the value list, and then\n        <i>intersected</i> for each filter key.</p>\n         <p>\n            <code>CustomerIdentifier</code> and <code>CustomerAWSAccountID</code> are mutually exclusive. You can't specify both in the same request.\n   </p>"
                     }
                 },
                 "NextToken": {
