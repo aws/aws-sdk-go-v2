@@ -9,10 +9,10 @@ require (
 )
 
 require (
-	github.com/Enflick/aws-sdk-go-v2/internal/configsources v1.3.7 // indirect
-	github.com/Enflick/aws-sdk-go-v2/internal/endpoints/v2 v2.6.7 // indirect
+	github.com/Enflick/aws-sdk-go-v2/internal/configsources v0.0.0-20250325155711-0a4bf6fdbeb3 // indirect
+	github.com/Enflick/aws-sdk-go-v2/internal/endpoints/v2 v2.0.0-20250325155711-0a4bf6fdbeb3 // indirect
 	github.com/Enflick/aws-sdk-go-v2/service/dynamodbstreams v1.20.8 // indirect
-	github.com/Enflick/aws-sdk-go-v2/service/internal/accept-encoding v1.11.2 // indirect
+	github.com/Enflick/aws-sdk-go-v2/service/internal/accept-encoding v0.0.0-20250325155711-0a4bf6fdbeb3 // indirect
 	github.com/Enflick/aws-sdk-go-v2/service/internal/endpoint-discovery v1.9.8 // indirect
 	github.com/Enflick/smithy-go v1.3.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
