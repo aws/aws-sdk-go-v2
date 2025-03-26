@@ -1,3 +1,21 @@
+# Release (2025-03-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.16.0](service/arczonalshift/CHANGELOG.md#v1160-2025-03-26)
+  * **Feature**: Add new shiftType field for ARC zonal shifts.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.32.0](service/directconnect/CHANGELOG.md#v1320-2025-03-26)
+  * **Feature**: With this release, AWS Direct Connect allows you to tag your Direct Connect gateways. Tags are metadata that you can create and use to manage your Direct Connect gateways. For more information about tagging, see AWS Tagging Strategies.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.71.0](service/mediaconvert/CHANGELOG.md#v1710-2025-03-26)
+  * **Feature**: This release adds a configurable Quality Level setting for the top rendition of Auto ABR jobs
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.46.0](service/mediatailor/CHANGELOG.md#v1460-2025-03-26)
+  * **Feature**: Add support for log filtering which allow customers to filter out selected event types from logs.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.48.0](service/polly/CHANGELOG.md#v1480-2025-03-26)
+  * **Feature**: Added support for the new voice - Jihye (ko-KR). Jihye is available as a Neural voice only.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.94.2](service/rds/CHANGELOG.md#v1942-2025-03-26)
+  * **Documentation**: Add note about the Availability Zone where RDS restores the DB cluster for the RestoreDBClusterToPointInTime operation.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.60.0](service/wafv2/CHANGELOG.md#v1600-2025-03-26)
+  * **Feature**: This release adds the ability to associate an AWS WAF v2 web ACL with an AWS Amplify App.
+
 # Release (2025-03-25)
 
 ## General Highlights

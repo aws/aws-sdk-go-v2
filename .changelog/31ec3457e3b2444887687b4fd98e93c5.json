@@ -1,8 +1,0 @@
-{
-    "id": "31ec3457-e3b2-4448-8768-7b4fd98e93c5",
-    "type": "feature",
-    "description": "Add support for log filtering which allow customers to filter out selected event types from logs.",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

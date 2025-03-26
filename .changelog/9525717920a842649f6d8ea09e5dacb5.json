@@ -1,8 +1,0 @@
-{
-    "id": "95257179-20a8-4264-9f6d-8ea09e5dacb5",
-    "type": "feature",
-    "description": "This release adds a configurable Quality Level setting for the top rendition of Auto ABR jobs",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

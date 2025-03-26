@@ -1,3 +1,7 @@
+# v1.60.0 (2025-03-26)
+
+* **Feature**: This release adds the ability to associate an AWS WAF v2 web ACL with an AWS Amplify App.
+
 # v1.59.0 (2025-03-17)
 
 * **Feature**: AWS WAF now lets you inspect fragments of request URIs. You can specify the scope of the URI to inspect and narrow the set of URI fragments.

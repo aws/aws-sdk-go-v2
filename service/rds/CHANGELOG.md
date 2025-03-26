@@ -1,3 +1,7 @@
+# v1.94.2 (2025-03-26)
+
+* **Documentation**: Add note about the Availability Zone where RDS restores the DB cluster for the RestoreDBClusterToPointInTime operation.
+
 # v1.94.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

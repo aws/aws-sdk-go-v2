@@ -1,3 +1,7 @@
+# v1.48.0 (2025-03-26)
+
+* **Feature**: Added support for the new voice - Jihye (ko-KR). Jihye is available as a Neural voice only.
+
 # v1.47.2 (2025-03-13)
 
 * No change notes available for this release.

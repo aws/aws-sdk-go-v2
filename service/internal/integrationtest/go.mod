@@ -25,7 +25,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.51.1
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.30.1
-	github.com/aws/aws-sdk-go-v2/service/directconnect v1.31.1
+	github.com/aws/aws-sdk-go-v2/service/directconnect v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.2
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.42.0
@@ -55,8 +55,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.24.1
-	github.com/aws/aws-sdk-go-v2/service/polly v1.47.2
-	github.com/aws/aws-sdk-go-v2/service/rds v1.94.1
+	github.com/aws/aws-sdk-go-v2/service/polly v1.48.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.94.2
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.54.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.46.1
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.50.0

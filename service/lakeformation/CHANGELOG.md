@@ -1,3 +1,7 @@
+# v1.41.1 (2025-03-26)
+
+* No change notes available for this release.
+
 # v1.41.0 (2025-03-14)
 
 * **Feature**: This release added "condition" to LakeFormation OptIn APIs, also added WithPrivilegedAccess flag to RegisterResource and DescribeResource.

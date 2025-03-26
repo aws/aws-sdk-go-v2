@@ -1,8 +1,0 @@
-{
-    "id": "3d62f1eb-4669-413c-94e7-b94ef467a8ea",
-    "type": "documentation",
-    "description": "Add note about the Availability Zone where RDS restores the DB cluster for the RestoreDBClusterToPointInTime operation.",
-    "modules": [
-        "service/rds"
-    ]
-}

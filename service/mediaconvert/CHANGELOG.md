@@ -1,3 +1,7 @@
+# v1.71.0 (2025-03-26)
+
+* **Feature**: This release adds a configurable Quality Level setting for the top rendition of Auto ABR jobs
+
 # v1.70.0 (2025-03-18)
 
 * **Feature**: This release adds support for AVC passthrough, the ability to specify PTS offset without padding, and an A/V segment matching feature.

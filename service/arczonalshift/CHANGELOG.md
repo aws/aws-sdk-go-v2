@@ -1,3 +1,7 @@
+# v1.16.0 (2025-03-26)
+
+* **Feature**: Add new shiftType field for ARC zonal shifts.
+
 # v1.15.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.
