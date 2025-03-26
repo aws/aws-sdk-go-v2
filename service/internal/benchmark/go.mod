@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/Enflick/aws-sdk-go-v2 v1.3.0
-	github.com/Enflick/aws-sdk-go-v2/service/dynamodb v1.32.6
+	github.com/Enflick/aws-sdk-go-v2/service/dynamodb v0.0.0-20250325221836-b4195dfa2eb5
 	github.com/Enflick/aws-sdk-go-v2/service/lexruntimeservice v1.20.8
 	github.com/Enflick/aws-sdk-go-v2/service/s3 v1.54.3
 	github.com/Enflick/aws-sdk-go-v2/service/schemas v1.24.8
@@ -13,15 +13,15 @@ require (
 )
 
 require (
-	github.com/Enflick/aws-sdk-go-v2/aws/protocol/eventstream v1.6.2 // indirect
-	github.com/Enflick/aws-sdk-go-v2/internal/configsources v0.0.0-20250325155711-0a4bf6fdbeb3 // indirect
+	github.com/Enflick/aws-sdk-go-v2/aws/protocol/eventstream v0.0.0-20250325221836-b4195dfa2eb5 // indirect
+	github.com/Enflick/aws-sdk-go-v2/internal/configsources v0.0.0-20250325221836-b4195dfa2eb5 // indirect
 	github.com/Enflick/aws-sdk-go-v2/internal/endpoints/v2 v2.0.0-20250325155711-0a4bf6fdbeb3 // indirect
-	github.com/Enflick/aws-sdk-go-v2/internal/v4a v1.3.7 // indirect
-	github.com/Enflick/aws-sdk-go-v2/service/internal/accept-encoding v0.0.0-20250325155711-0a4bf6fdbeb3 // indirect
-	github.com/Enflick/aws-sdk-go-v2/service/internal/checksum v1.3.9 // indirect
-	github.com/Enflick/aws-sdk-go-v2/service/internal/endpoint-discovery v1.9.8 // indirect
-	github.com/Enflick/aws-sdk-go-v2/service/internal/presigned-url v0.0.0-20250325155711-0a4bf6fdbeb3 // indirect
-	github.com/Enflick/aws-sdk-go-v2/service/internal/s3shared v1.17.7 // indirect
+	github.com/Enflick/aws-sdk-go-v2/internal/v4a v0.0.0-20250325221836-b4195dfa2eb5 // indirect
+	github.com/Enflick/aws-sdk-go-v2/service/internal/accept-encoding v0.0.0-20250325221836-b4195dfa2eb5 // indirect
+	github.com/Enflick/aws-sdk-go-v2/service/internal/checksum v0.0.0-20250325221836-b4195dfa2eb5 // indirect
+	github.com/Enflick/aws-sdk-go-v2/service/internal/endpoint-discovery v0.0.0-20250325221836-b4195dfa2eb5 // indirect
+	github.com/Enflick/aws-sdk-go-v2/service/internal/presigned-url v0.0.0-20250325221836-b4195dfa2eb5 // indirect
+	github.com/Enflick/aws-sdk-go-v2/service/internal/s3shared v0.0.0-20250325221836-b4195dfa2eb5 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )
 
