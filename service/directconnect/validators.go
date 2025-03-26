@@ -1611,6 +1611,11 @@ func validateOpCreateDirectConnectGatewayInput(v *CreateDirectConnectGatewayInpu
 	if v.DirectConnectGatewayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectConnectGatewayName"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

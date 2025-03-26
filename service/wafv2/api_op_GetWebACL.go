@@ -29,20 +29,19 @@ func (c *Client) GetWebACL(ctx context.Context, params *GetWebACLInput, optFns .
 
 type GetWebACLInput struct {
 
+	// The Amazon Resource Name (ARN) of the web ACL that you want to retrieve.
+	ARN *string
+
 	// The unique identifier for the web ACL. This ID is returned in the responses to
 	// create and list commands. You provide it to operations like update and delete.
-	//
-	// This member is required.
 	Id *string
 
 	// The name of the web ACL. You cannot change the name of a web ACL after you
 	// create it.
-	//
-	// This member is required.
 	Name *string
 
 	// Specifies whether this is for a global resource type, such as a Amazon
-	// CloudFront distribution.
+	// CloudFront distribution. For an Amplify application, use CLOUDFRONT .
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -51,8 +50,6 @@ type GetWebACLInput struct {
 	//   --scope=CLOUDFRONT --region=us-east-1 .
 	//
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
-	//
-	// This member is required.
 	Scope types.Scope
 
 	noSmithyDocumentSerde
@@ -155,9 +152,6 @@ func (c *Client) addOperationGetWebACLMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpGetWebACLValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWebACL(options.Region), middleware.Before); err != nil {

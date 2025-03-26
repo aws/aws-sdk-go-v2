@@ -8218,6 +8218,40 @@ func awsRestjson1_deserializeDocumentAutomatedAbrSettings(v **types.AutomatedAbr
 				sv.MaxAbrBitrate = ptr.Int32(int32(i64))
 			}
 
+		case "maxQualityLevel":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MaxQualityLevel = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MaxQualityLevel = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMin1Max10 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "maxRenditions":
 			if value != nil {
 				jtv, ok := value.(json.Number)

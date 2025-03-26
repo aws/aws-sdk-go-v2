@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Probe operation analyzes the provided media file and returns comprehensive
-// metadata about its container format, tracks, and any encountered errors.
+// Use Probe to obtain detailed information about your input media files. Probe
+// returns a JSON that includes container, codec, frame rate, resolution, track
+// count, audio layout, captions, and more. You can use this information to learn
+// more about your media files, or to help make decisions while automating your
+// transcoding workflow.
 func (c *Client) Probe(ctx context.Context, params *ProbeInput, optFns ...func(*Options)) (*ProbeOutput, error) {
 	if params == nil {
 		params = &ProbeInput{}
@@ -30,7 +33,7 @@ func (c *Client) Probe(ctx context.Context, params *ProbeInput, optFns ...func(*
 
 type ProbeInput struct {
 
-	// The list of input media files to be probed.
+	// Specify a media file to probe.
 	InputFiles []types.ProbeInputFile
 
 	noSmithyDocumentSerde
@@ -38,7 +41,7 @@ type ProbeInput struct {
 
 type ProbeOutput struct {
 
-	// List of probe results for the input media file(s).
+	// Probe results for your media file.
 	ProbeResults []types.ProbeResult
 
 	// Metadata pertaining to the operation's result.

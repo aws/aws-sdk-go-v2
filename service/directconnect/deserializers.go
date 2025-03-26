@@ -8279,6 +8279,11 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 				sv.StateChangeError = ptr.String(jtv)
 			}
 
+		case "tags":
+			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

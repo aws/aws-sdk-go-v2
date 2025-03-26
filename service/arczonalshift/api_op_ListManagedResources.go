@@ -38,9 +38,9 @@ type ListManagedResourcesInput struct {
 	MaxResults *int32
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it indicates
+	// received a nextToken response in the previous request. If you did, it indicates
 	// that more output is available. Set this parameter to the value provided by the
-	// previous call's NextToken response to request the next page of results.
+	// previous call's nextToken response to request the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,9 +54,9 @@ type ListManagedResourcesOutput struct {
 	Items []types.ManagedResourceSummary
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it indicates
+	// received a nextToken response in the previous request. If you did, it indicates
 	// that more output is available. Set this parameter to the value provided by the
-	// previous call's NextToken response to request the next page of results.
+	// previous call's nextToken response to request the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

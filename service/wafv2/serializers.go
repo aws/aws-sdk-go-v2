@@ -6794,6 +6794,11 @@ func awsAwsjson11_serializeOpDocumentGetWebACLInput(v *GetWebACLInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.ARN != nil {
+		ok := object.Key("ARN")
+		ok.String(*v.ARN)
+	}
+
 	if v.Id != nil {
 		ok := object.Key("Id")
 		ok.String(*v.Id)

@@ -1,0 +1,8 @@
+{
+    "id": "bd2d7850-3efc-49e2-a6b4-60208e2348c5",
+    "type": "feature",
+    "description": "Added support for the new voice - Jihye (ko-KR). Jihye is available as a Neural voice only.",
+    "modules": [
+        "service/polly"
+    ]
+}

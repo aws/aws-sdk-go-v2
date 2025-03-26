@@ -457,22 +457,22 @@ type AudioNormalizationSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Properties specific to audio tracks.
+// Details about the media file's audio track.
 type AudioProperties struct {
 
 	// The bit depth of the audio track.
 	BitDepth *int32
 
-	// The bit rate of the audio track in bits per second.
+	// The bit rate of the audio track, in bits per second.
 	BitRate *int32
 
-	// The number of audio channels.
+	// The number of audio channels in the audio track.
 	Channels *int32
 
-	// the calculated frame rate of the asset.
+	// The frame rate of the video or audio track.
 	FrameRate *FrameRate
 
-	// the language code of the track
+	// The language code of the audio track, in three character ISO 639-3 format.
 	LanguageCode *string
 
 	// The sample rate of the audio track.
@@ -661,6 +661,14 @@ type AutomatedAbrSettings struct {
 	// your content. Note that the instantaneous maximum bitrate may vary above the
 	// value that you specify.
 	MaxAbrBitrate *int32
+
+	// Optional. Specify the QVBR quality level to use for all renditions in your
+	// automated ABR stack. To have MediaConvert automatically determine the quality
+	// level: Leave blank. To manually specify a quality level: Enter an integer from 1
+	// to 10. MediaConvert will use a quality level up to the value that you specify,
+	// depending on your source. For more information about QVBR quality levels, see:
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/qvbr-guidelines.html
+	MaxQualityLevel *float64
 
 	// Optional. The maximum number of renditions that MediaConvert will create in
 	// your automated ABR stack. The number of renditions is determined automatically,
@@ -2032,16 +2040,20 @@ type ColorCorrector struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the container format of the media file.
+// The container of your media file. This information helps you understand the
+// overall structure and details of your media, including format, duration, and
+// track layout.
 type Container struct {
 
-	// The duration of the media file in seconds.
+	// The total duration of your media file, in seconds.
 	Duration *float64
 
-	// The format of the container
+	// The format of your media file. For example: MP4, QuickTime (MOV), Matroska
+	// (MKV), or WebM. Note that this will be blank if your media file has a format
+	// that the MediaConvert Probe operation does not recognize.
 	Format Format
 
-	// List of Track objects.
+	// Details about each track (video, audio, or data) in the media file.
 	Tracks []Track
 
 	noSmithyDocumentSerde
@@ -2347,10 +2359,10 @@ type DashIsoImageBasedTrickPlaySettings struct {
 	noSmithyDocumentSerde
 }
 
-// Properties specific to data tracks.
+// Details about the media file's data track.
 type DataProperties struct {
 
-	// the language code of the track
+	// The language code of the data track, in three character ISO 639-3 format.
 	LanguageCode *string
 
 	noSmithyDocumentSerde
@@ -3356,13 +3368,17 @@ type FrameCaptureSettings struct {
 	noSmithyDocumentSerde
 }
 
-// the calculated frame rate of the asset.
+// The frame rate of the video or audio track.
 type FrameRate struct {
 
-	// the denominator of the frame rate of the asset.
+	// The denominator, or bottom number, in the fractional frame rate. For example,
+	// if your frame rate is 24000 / 1001 (23.976 frames per second), then the
+	// denominator would be 1001.
 	Denominator *int32
 
-	// the numerator of the frame rate of the asset.
+	// The numerator, or top number, in the fractional frame rate. For example, if
+	// your frame rate is 24000 / 1001 (23.976 frames per second), then the numerator
+	// would be 24000.
 	Numerator *int32
 
 	noSmithyDocumentSerde
@@ -6163,19 +6179,19 @@ type M3u8Settings struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata about the file.
+// Metadata and other file information.
 type Metadata struct {
 
-	// The ETag of the file.
+	// The entity tag (ETag) of the file.
 	ETag *string
 
-	// The size of the file in bytes.
+	// The size of the media file, in bytes.
 	FileSize *int64
 
-	// The last modification time of the file.
+	// The last modification timestamp of the media file, in Unix time.
 	LastModified *time.Time
 
-	// The MIME type of the file.
+	// The MIME type of the media file.
 	MimeType *string
 
 	noSmithyDocumentSerde
@@ -7383,23 +7399,24 @@ type PresetSettings struct {
 // The input file that needs to be analyzed.
 type ProbeInputFile struct {
 
-	// The URI to your input file(s) that is stored in Amazon S3 or on an HTTP(S)
-	// server.
+	// Specify the S3, HTTP, or HTTPS URL for your media file.
 	FileUrl *string
 
 	noSmithyDocumentSerde
 }
 
-// The metadata and analysis results for a media file.
+// Probe results for your media file.
 type ProbeResult struct {
 
-	// Information about the container format of the media file.
+	// The container of your media file. This information helps you understand the
+	// overall structure and details of your media, including format, duration, and
+	// track layout.
 	Container *Container
 
-	// Metadata about the file.
+	// Metadata and other file information.
 	Metadata *Metadata
 
-	// List of Track mapping objects.
+	// An array containing track mapping information.
 	TrackMappings []TrackMapping
 
 	noSmithyDocumentSerde
@@ -8098,43 +8115,43 @@ type Timing struct {
 	noSmithyDocumentSerde
 }
 
-// The track information such as codec, duration, etc.
+// Details about each track (video, audio, or data) in the media file.
 type Track struct {
 
-	// Properties specific to audio tracks.
+	// Details about the media file's audio track.
 	AudioProperties *AudioProperties
 
-	// The codec used for the track.
+	// The codec of the audio or video track, or caption format of the data track.
 	Codec Codec
 
-	// Properties specific to data tracks.
+	// Details about the media file's data track.
 	DataProperties *DataProperties
 
-	// The duration of the track in seconds.
+	// The duration of the track, in seconds.
 	Duration *float64
 
-	// The index of the track.
+	// The unique index number of the track, starting at 1.
 	Index *int32
 
-	// The type of the track (video, audio, or data).
+	// The type of track: video, audio, or data.
 	TrackType TrackType
 
-	// Properties specific to video tracks.
+	// Details about the media file's video track.
 	VideoProperties *VideoProperties
 
 	noSmithyDocumentSerde
 }
 
-// Track mapping information.
+// An array containing track mapping information.
 type TrackMapping struct {
 
-	// The indexes of the audio tracks.
+	// The index numbers of the audio tracks in your media file.
 	AudioTrackIndexes []int32
 
-	// The indexes of the data tracks.
+	// The index numbers of the data tracks in your media file.
 	DataTrackIndexes []int32
 
-	// The indexes of the video tracks.
+	// The index numbers of the video tracks in your media file.
 	VideoTrackIndexes []int32
 
 	noSmithyDocumentSerde
@@ -8764,31 +8781,31 @@ type VideoPreprocessor struct {
 	noSmithyDocumentSerde
 }
 
-// Properties specific to video tracks.
+// Details about the media file's video track.
 type VideoProperties struct {
 
 	// The bit depth of the video track.
 	BitDepth *int32
 
-	// The bit rate of the video track in bits per second.
+	// The bit rate of the video track, in bits per second.
 	BitRate *int32
 
-	// the color primaries.
+	// The color space color primaries of the video track.
 	ColorPrimaries ColorPrimaries
 
-	// the calculated frame rate of the asset.
+	// The frame rate of the video or audio track.
 	FrameRate *FrameRate
 
-	// The height of the video track in pixels.
+	// The height of the video track, in pixels.
 	Height *int32
 
-	// the matrix coefficients.
+	// The color space matrix coefficients of the video track.
 	MatrixCoefficients MatrixCoefficients
 
-	// the transfer characteristics.
+	// The color space transfer characteristics of the video track.
 	TransferCharacteristics TransferCharacteristics
 
-	// The width of the video track in pixels.
+	// The width of the video track, in pixels.
 	Width *int32
 
 	noSmithyDocumentSerde

@@ -134,9 +134,10 @@ type AdConditioningConfiguration struct {
 	// receives these ads from the ADS. TRANSCODE indicates that MediaTailor must
 	// transcode the ads. NONE indicates that you have already transcoded the ads
 	// outside of MediaTailor and don't need them transcoded as part of the ad
-	// insertion workflow. For more information about ad conditioning see [https://docs.aws.amazon.com/precondition-ads.html].
+	// insertion workflow. For more information about ad conditioning see [Using preconditioned ads]in the
+	// Elemental MediaTailor user guide.
 	//
-	// [https://docs.aws.amazon.com/precondition-ads.html]: https://docs.aws.amazon.com/precondition-ads.html
+	// [Using preconditioned ads]: https://docs.aws.amazon.com/mediatailor/latest/ug/precondition-ads.html
 	//
 	// This member is required.
 	StreamingMediaFileConditioning StreamingMediaFileConditioning
@@ -155,6 +156,26 @@ type AdMarkerPassthrough struct {
 
 	// Enables ad marker passthrough for your configuration.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Settings for customizing what events are included in logs for interactions with
+// the ad decision server (ADS).
+//
+// For more information about ADS logs, inlcuding descriptions of the event types,
+// see [MediaTailor ADS logs description and event types]in Elemental MediaTailor User Guide.
+//
+// [MediaTailor ADS logs description and event types]: https://docs.aws.amazon.com/mediatailor/latest/ug/ads-log-format.html
+type AdsInteractionLog struct {
+
+	// Indicates that MediaTailor won't emit the selected events in the logs for
+	// playback sessions that are initialized with this configuration.
+	ExcludeEventTypes []AdsInteractionExcludeEventType
+
+	// Indicates that MediaTailor emits RAW_ADS_RESPONSE logs for playback sessions
+	// that are initialized with this configuration.
+	PublishOptInEventTypes []AdsInteractionPublishOptInEventType
 
 	noSmithyDocumentSerde
 }
@@ -672,6 +693,10 @@ type LogConfiguration struct {
 	// This member is required.
 	PercentEnabled int32
 
+	// Settings for customizing what events are included in logs for interactions with
+	// the ad decision server (ADS).
+	AdsInteractionLog *AdsInteractionLog
+
 	// The method used for collecting logs from AWS Elemental MediaTailor.
 	// LEGACY_CLOUDWATCH indicates that MediaTailor is sending logs directly to Amazon
 	// CloudWatch Logs. VENDED_LOGS indicates that MediaTailor is sending logs to
@@ -679,6 +704,10 @@ type LogConfiguration struct {
 	// destinations are CloudWatch Logs log group, Amazon S3 bucket, and Amazon Data
 	// Firehose stream.
 	EnabledLoggingStrategies []LoggingStrategy
+
+	// Settings for customizing what events are included in logs for interactions with
+	// the origin server.
+	ManifestServiceInteractionLog *ManifestServiceInteractionLog
 
 	noSmithyDocumentSerde
 }
@@ -704,6 +733,22 @@ type ManifestProcessingRules struct {
 	// value of 60 , but no ads are filled for that ad break, MediaTailor will not set
 	// the value to 0 .
 	AdMarkerPassthrough *AdMarkerPassthrough
+
+	noSmithyDocumentSerde
+}
+
+// Settings for customizing what events are included in logs for interactions with
+// the origin server.
+//
+// For more information about manifest service logs, including descriptions of the
+// event types, see [MediaTailor manifest logs description and event types]in Elemental MediaTailor User Guide.
+//
+// [MediaTailor manifest logs description and event types]: https://docs.aws.amazon.com/mediatailor/latest/ug/log-types.html
+type ManifestServiceInteractionLog struct {
+
+	// Indicates that MediaTailor won't emit the selected events in the logs for
+	// playback sessions that are initialized with this configuration.
+	ExcludeEventTypes []ManifestServiceExcludeEventType
 
 	noSmithyDocumentSerde
 }

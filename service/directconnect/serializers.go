@@ -4784,6 +4784,13 @@ func awsAwsjson11_serializeOpDocumentCreateDirectConnectGatewayInput(v *CreateDi
 		ok.String(*v.DirectConnectGatewayName)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

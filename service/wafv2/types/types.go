@@ -346,6 +346,8 @@ type Body struct {
 	//   limit for each resource type in the web ACL AssociationConfig , for additional
 	//   processing fees.
 	//
+	//   - For Amplify, use the CloudFront limit.
+	//
 	// The options for oversize handling are the following:
 	//
 	//   - CONTINUE - Inspect the available body contents normally, according to the
@@ -1045,6 +1047,8 @@ type FieldToMatch struct {
 	//   limit for each resource type in the web ACL AssociationConfig , for additional
 	//   processing fees.
 	//
+	//   - For Amplify, use the CloudFront limit.
+	//
 	// For information about how to handle oversized request bodies, see the Body
 	// object configuration.
 	Body *Body
@@ -1139,6 +1143,8 @@ type FieldToMatch struct {
 	//   Access, the default limit is 16 KB (16,384 bytes), and you can increase the
 	//   limit for each resource type in the web ACL AssociationConfig , for additional
 	//   processing fees.
+	//
+	//   - For Amplify, use the CloudFront limit.
 	//
 	// For information about how to handle oversized request bodies, see the JsonBody
 	// object configuration.
@@ -1911,6 +1917,8 @@ type JsonBody struct {
 	//   Access, the default limit is 16 KB (16,384 bytes), and you can increase the
 	//   limit for each resource type in the web ACL AssociationConfig , for additional
 	//   processing fees.
+	//
+	//   - For Amplify, use the CloudFront limit.
 	//
 	// The options for oversize handling are the following:
 	//
@@ -4930,7 +4938,8 @@ type VisibilityConfig struct {
 // ACL with one or more Amazon Web Services resources to protect. The resource
 // types include Amazon CloudFront distribution, Amazon API Gateway REST API,
 // Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App
-// Runner service, and Amazon Web Services Verified Access instance.
+// Runner service, Amplify application, and Amazon Web Services Verified Access
+// instance.
 type WebACL struct {
 
 	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with

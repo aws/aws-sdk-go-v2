@@ -16,16 +16,16 @@ import (
 // Availability Zone in an Amazon Web Services Region, to help your application
 // recover immediately, for example, from a developer's bad code deployment or from
 // an Amazon Web Services infrastructure failure in a single Availability Zone. You
-// can start a zonal shift in Route 53 ARC only for managed resources in your
-// Amazon Web Services account in an Amazon Web Services Region. Resources are
-// automatically registered with Route 53 ARC by Amazon Web Services services.
+// can start a zonal shift in ARC only for managed resources in your Amazon Web
+// Services account in an Amazon Web Services Region. Resources are automatically
+// registered with ARC by Amazon Web Services services.
 //
 // At this time, you can only start a zonal shift for Network Load Balancers and
 // Application Load Balancers with cross-zone load balancing turned off.
 //
 // When you start a zonal shift, traffic for the resource is no longer routed to
-// the Availability Zone. The zonal shift is created immediately in Route 53 ARC.
-// However, it can take a short time, typically up to a few minutes, for existing,
+// the Availability Zone. The zonal shift is created immediately in ARC. However,
+// it can take a short time, typically up to a few minutes, for existing,
 // in-progress connections in the Availability Zone to complete.
 //
 // For more information, see [Zonal shift] in the Amazon Route 53 Application Recovery
@@ -64,9 +64,9 @@ type StartZonalShiftInput struct {
 	// This member is required.
 	Comment *string
 
-	// The length of time that you want a zonal shift to be active, which Route 53 ARC
-	// converts to an expiry time (expiration time). Zonal shifts are temporary. You
-	// can set a zonal shift to be active initially for up to three days (72 hours).
+	// The length of time that you want a zonal shift to be active, which ARC converts
+	// to an expiry time (expiration time). Zonal shifts are temporary. You can set a
+	// zonal shift to be active initially for up to three days (72 hours).
 	//
 	// If you want to still keep traffic away from an Availability Zone, you can
 	// update the zonal shift and set a new expiration. You can also cancel a zonal
@@ -121,9 +121,9 @@ type StartZonalShiftOutput struct {
 	// However, you can update a zonal shift to set a new expiration at any time.
 	//
 	// When you start a zonal shift, you specify how long you want it to be active,
-	// which Route 53 ARC converts to an expiry time (expiration time). You can cancel
-	// a zonal shift when you're ready to restore traffic to the Availability Zone, or
-	// just wait for it to expire. Or you can update the zonal shift to specify another
+	// which ARC converts to an expiry time (expiration time). You can cancel a zonal
+	// shift when you're ready to restore traffic to the Availability Zone, or just
+	// wait for it to expire. Or you can update the zonal shift to specify another
 	// length of time to expire in.
 	//
 	// This member is required.

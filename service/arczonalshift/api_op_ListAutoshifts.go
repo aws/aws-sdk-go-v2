@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of autoshifts for an Amazon Web Services Region. By default, the
-// call returns only ACTIVE autoshifts. Optionally, you can specify the status
+// Returns the autoshifts for an Amazon Web Services Region. By default, the call
+// returns only ACTIVE autoshifts. Optionally, you can specify the status
 // parameter to return COMPLETED autoshifts.
 func (c *Client) ListAutoshifts(ctx context.Context, params *ListAutoshiftsInput, optFns ...func(*Options)) (*ListAutoshiftsOutput, error) {
 	if params == nil {
@@ -35,9 +35,9 @@ type ListAutoshiftsInput struct {
 	MaxResults *int32
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it indicates
+	// received a nextToken response in the previous request. If you did, it indicates
 	// that more output is available. Set this parameter to the value provided by the
-	// previous call's NextToken response to request the next page of results.
+	// previous call's nextToken response to request the next page of results.
 	NextToken *string
 
 	// The status of the autoshift.
@@ -52,9 +52,9 @@ type ListAutoshiftsOutput struct {
 	Items []types.AutoshiftSummary
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it indicates
+	// received a nextToken response in the previous request. If you did, it indicates
 	// that more output is available. Set this parameter to the value provided by the
-	// previous call's NextToken response to request the next page of results.
+	// previous call's nextToken response to request the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

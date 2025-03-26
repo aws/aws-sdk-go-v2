@@ -610,26 +610,6 @@ func (m *validateOpGetWebACLForResource) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpGetWebACL struct {
-}
-
-func (*validateOpGetWebACL) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetWebACL) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetWebACLInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetWebACLInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpListAPIKeys struct {
 }
 
@@ -1188,10 +1168,6 @@ func addOpGetSampledRequestsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetWebACLForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWebACLForResource{}, middleware.After)
-}
-
-func addOpGetWebACLValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetWebACL{}, middleware.After)
 }
 
 func addOpListAPIKeysValidationMiddleware(stack *middleware.Stack) error {
@@ -4179,27 +4155,6 @@ func validateOpGetWebACLForResourceInput(v *GetWebACLForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetWebACLForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpGetWebACLInput(v *GetWebACLInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetWebACLInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if len(v.Scope) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

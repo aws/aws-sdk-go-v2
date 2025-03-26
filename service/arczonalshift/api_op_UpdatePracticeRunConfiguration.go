@@ -51,7 +51,7 @@ type UpdatePracticeRunConfigurationInput struct {
 	BlockedDates []string
 
 	// Add, change, or remove windows of days and times for when you can, optionally,
-	// block Route 53 ARC from starting a practice run for a resource.
+	// block ARC from starting a practice run for a resource.
 	//
 	// The format for blocked windows is: DAY:HH:SS-DAY:HH:SS. Keep in mind, when you
 	// specify dates, that dates and times for practice runs are in UTC. Also, be aware

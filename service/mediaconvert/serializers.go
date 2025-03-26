@@ -3831,6 +3831,24 @@ func awsRestjson1_serializeDocumentAutomatedAbrSettings(v *types.AutomatedAbrSet
 		ok.Integer(*v.MaxAbrBitrate)
 	}
 
+	if v.MaxQualityLevel != nil {
+		ok := object.Key("maxQualityLevel")
+		switch {
+		case math.IsNaN(*v.MaxQualityLevel):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxQualityLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxQualityLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxQualityLevel)
+
+		}
+	}
+
 	if v.MaxRenditions != nil {
 		ok := object.Key("maxRenditions")
 		ok.Integer(*v.MaxRenditions)

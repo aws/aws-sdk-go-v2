@@ -323,8 +323,18 @@ func awsRestjson1_deserializeOpDocumentConfigureLogsForPlaybackConfigurationOutp
 
 	for key, value := range shape {
 		switch key {
+		case "AdsInteractionLog":
+			if err := awsRestjson1_deserializeDocumentAdsInteractionLog(&sv.AdsInteractionLog, value); err != nil {
+				return err
+			}
+
 		case "EnabledLoggingStrategies":
 			if err := awsRestjson1_deserializeDocument__listOfLoggingStrategies(&sv.EnabledLoggingStrategies, value); err != nil {
+				return err
+			}
+
+		case "ManifestServiceInteractionLog":
+			if err := awsRestjson1_deserializeDocumentManifestServiceInteractionLog(&sv.ManifestServiceInteractionLog, value); err != nil {
 				return err
 			}
 
@@ -7510,6 +7520,78 @@ func awsRestjson1_deserializeErrorBadRequestException(response *smithyhttp.Respo
 	return output
 }
 
+func awsRestjson1_deserializeDocument__adsInteractionExcludeEventTypesList(v *[]types.AdsInteractionExcludeEventType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AdsInteractionExcludeEventType
+	if *v == nil {
+		cv = []types.AdsInteractionExcludeEventType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AdsInteractionExcludeEventType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AdsInteractionExcludeEventType to be of type string, got %T instead", value)
+			}
+			col = types.AdsInteractionExcludeEventType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__adsInteractionPublishOptInEventTypesList(v *[]types.AdsInteractionPublishOptInEventType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AdsInteractionPublishOptInEventType
+	if *v == nil {
+		cv = []types.AdsInteractionPublishOptInEventType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AdsInteractionPublishOptInEventType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AdsInteractionPublishOptInEventType to be of type string, got %T instead", value)
+			}
+			col = types.AdsInteractionPublishOptInEventType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOf__string(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8058,6 +8140,42 @@ func awsRestjson1_deserializeDocument__listOfVodSource(v *[]types.VodSource, val
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__manifestServiceExcludeEventTypesList(v *[]types.ManifestServiceExcludeEventType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ManifestServiceExcludeEventType
+	if *v == nil {
+		cv = []types.ManifestServiceExcludeEventType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ManifestServiceExcludeEventType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ManifestServiceExcludeEventType to be of type string, got %T instead", value)
+			}
+			col = types.ManifestServiceExcludeEventType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__mapOf__string(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8437,6 +8555,47 @@ func awsRestjson1_deserializeDocumentAdMarkupTypes(v *[]types.AdMarkupType, valu
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAdsInteractionLog(v **types.AdsInteractionLog, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdsInteractionLog
+	if *v == nil {
+		sv = &types.AdsInteractionLog{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExcludeEventTypes":
+			if err := awsRestjson1_deserializeDocument__adsInteractionExcludeEventTypesList(&sv.ExcludeEventTypes, value); err != nil {
+				return err
+			}
+
+		case "PublishOptInEventTypes":
+			if err := awsRestjson1_deserializeDocument__adsInteractionPublishOptInEventTypesList(&sv.PublishOptInEventTypes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -9798,8 +9957,18 @@ func awsRestjson1_deserializeDocumentLogConfiguration(v **types.LogConfiguration
 
 	for key, value := range shape {
 		switch key {
+		case "AdsInteractionLog":
+			if err := awsRestjson1_deserializeDocumentAdsInteractionLog(&sv.AdsInteractionLog, value); err != nil {
+				return err
+			}
+
 		case "EnabledLoggingStrategies":
 			if err := awsRestjson1_deserializeDocument__listOfLoggingStrategies(&sv.EnabledLoggingStrategies, value); err != nil {
+				return err
+			}
+
+		case "ManifestServiceInteractionLog":
+			if err := awsRestjson1_deserializeDocumentManifestServiceInteractionLog(&sv.ManifestServiceInteractionLog, value); err != nil {
 				return err
 			}
 
@@ -9921,6 +10090,42 @@ func awsRestjson1_deserializeDocumentManifestProcessingRules(v **types.ManifestP
 		switch key {
 		case "AdMarkerPassthrough":
 			if err := awsRestjson1_deserializeDocumentAdMarkerPassthrough(&sv.AdMarkerPassthrough, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentManifestServiceInteractionLog(v **types.ManifestServiceInteractionLog, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManifestServiceInteractionLog
+	if *v == nil {
+		sv = &types.ManifestServiceInteractionLog{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExcludeEventTypes":
+			if err := awsRestjson1_deserializeDocument__manifestServiceExcludeEventTypesList(&sv.ExcludeEventTypes, value); err != nil {
 				return err
 			}
 

@@ -177,9 +177,23 @@ func awsRestjson1_serializeOpDocumentConfigureLogsForPlaybackConfigurationInput(
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdsInteractionLog != nil {
+		ok := object.Key("AdsInteractionLog")
+		if err := awsRestjson1_serializeDocumentAdsInteractionLog(v.AdsInteractionLog, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EnabledLoggingStrategies != nil {
 		ok := object.Key("EnabledLoggingStrategies")
 		if err := awsRestjson1_serializeDocument__listOfLoggingStrategies(v.EnabledLoggingStrategies, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ManifestServiceInteractionLog != nil {
+		ok := object.Key("ManifestServiceInteractionLog")
+		if err := awsRestjson1_serializeDocumentManifestServiceInteractionLog(v.ManifestServiceInteractionLog, ok); err != nil {
 			return err
 		}
 	}
@@ -3988,6 +4002,28 @@ func awsRestjson1_serializeOpDocumentUpdateVodSourceInput(v *UpdateVodSourceInpu
 	return nil
 }
 
+func awsRestjson1_serializeDocument__adsInteractionExcludeEventTypesList(v []types.AdsInteractionExcludeEventType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__adsInteractionPublishOptInEventTypesList(v []types.AdsInteractionPublishOptInEventType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfAdBreak(v []types.AdBreak, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4060,6 +4096,17 @@ func awsRestjson1_serializeDocument__listOfSegmentDeliveryConfiguration(v []type
 		if err := awsRestjson1_serializeDocumentSegmentDeliveryConfiguration(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__manifestServiceExcludeEventTypesList(v []types.ManifestServiceExcludeEventType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -4184,6 +4231,27 @@ func awsRestjson1_serializeDocumentAdMarkupTypes(v []types.AdMarkupType, value s
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAdsInteractionLog(v *types.AdsInteractionLog, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExcludeEventTypes != nil {
+		ok := object.Key("ExcludeEventTypes")
+		if err := awsRestjson1_serializeDocument__adsInteractionExcludeEventTypesList(v.ExcludeEventTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PublishOptInEventTypes != nil {
+		ok := object.Key("PublishOptInEventTypes")
+		if err := awsRestjson1_serializeDocument__adsInteractionPublishOptInEventTypesList(v.PublishOptInEventTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4543,6 +4611,20 @@ func awsRestjson1_serializeDocumentManifestProcessingRules(v *types.ManifestProc
 	if v.AdMarkerPassthrough != nil {
 		ok := object.Key("AdMarkerPassthrough")
 		if err := awsRestjson1_serializeDocumentAdMarkerPassthrough(v.AdMarkerPassthrough, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentManifestServiceInteractionLog(v *types.ManifestServiceInteractionLog, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExcludeEventTypes != nil {
+		ok := object.Key("ExcludeEventTypes")
+		if err := awsRestjson1_serializeDocument__manifestServiceExcludeEventTypesList(v.ExcludeEventTypes, ok); err != nil {
 			return err
 		}
 	}

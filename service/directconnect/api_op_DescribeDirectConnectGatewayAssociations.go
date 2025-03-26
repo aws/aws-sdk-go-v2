@@ -39,6 +39,18 @@ import (
 // The response contains the association between the Direct Connect gateway and
 //
 //	transit gateway.
+//
+//	- A Direct Connect gateway and a virtual private gateway
+//
+// The response contains the association between the Direct Connect gateway and
+//
+//	virtual private gateway.
+//
+//	- A Direct Connect gateway association to a Cloud WAN core network
+//
+// The response contains the Cloud WAN core network ID that the Direct Connect
+//
+//	gateway is associated to.
 func (c *Client) DescribeDirectConnectGatewayAssociations(ctx context.Context, params *DescribeDirectConnectGatewayAssociationsInput, optFns ...func(*Options)) (*DescribeDirectConnectGatewayAssociationsOutput, error) {
 	if params == nil {
 		params = &DescribeDirectConnectGatewayAssociationsInput{}

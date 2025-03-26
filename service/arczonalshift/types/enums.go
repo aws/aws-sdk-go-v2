@@ -89,6 +89,7 @@ const (
 	ConflictExceptionReasonPracticeConfigurationAlreadyExists ConflictExceptionReason = "PracticeConfigurationAlreadyExists"
 	ConflictExceptionReasonAutoshiftEnabled                   ConflictExceptionReason = "AutoShiftEnabled"
 	ConflictExceptionReasonPracticeConfigurationDoesNotExist  ConflictExceptionReason = "PracticeConfigurationDoesNotExist"
+	ConflictExceptionReasonZonalAutoshiftActive               ConflictExceptionReason = "ZonalAutoshiftActive"
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
@@ -103,6 +104,7 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 		"PracticeConfigurationAlreadyExists",
 		"AutoShiftEnabled",
 		"PracticeConfigurationDoesNotExist",
+		"ZonalAutoshiftActive",
 	}
 }
 
@@ -146,20 +148,44 @@ func (PracticeRunOutcome) Values() []PracticeRunOutcome {
 	}
 }
 
+type ShiftType string
+
+// Enum values for ShiftType
+const (
+	ShiftTypeZonalShift     ShiftType = "ZONAL_SHIFT"
+	ShiftTypePracticeRun    ShiftType = "PRACTICE_RUN"
+	ShiftTypeFisExperiment  ShiftType = "FIS_EXPERIMENT"
+	ShiftTypeZonalAutoshift ShiftType = "ZONAL_AUTOSHIFT"
+)
+
+// Values returns all known values for ShiftType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ShiftType) Values() []ShiftType {
+	return []ShiftType{
+		"ZONAL_SHIFT",
+		"PRACTICE_RUN",
+		"FIS_EXPERIMENT",
+		"ZONAL_AUTOSHIFT",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
 const (
-	ValidationExceptionReasonInvalidExpiresIn          ValidationExceptionReason = "InvalidExpiresIn"
-	ValidationExceptionReasonInvalidStatus             ValidationExceptionReason = "InvalidStatus"
-	ValidationExceptionReasonMissingValue              ValidationExceptionReason = "MissingValue"
-	ValidationExceptionReasonInvalidToken              ValidationExceptionReason = "InvalidToken"
-	ValidationExceptionReasonInvalidResourceIdentifier ValidationExceptionReason = "InvalidResourceIdentifier"
-	ValidationExceptionReasonInvalidAz                 ValidationExceptionReason = "InvalidAz"
-	ValidationExceptionReasonUnsupportedAz             ValidationExceptionReason = "UnsupportedAz"
-	ValidationExceptionReasonInvalidAlarmCondition     ValidationExceptionReason = "InvalidAlarmCondition"
-	ValidationExceptionReasonInvalidConditionType      ValidationExceptionReason = "InvalidConditionType"
-	ValidationExceptionReasonInvalidPracticeBlocker    ValidationExceptionReason = "InvalidPracticeBlocker"
+	ValidationExceptionReasonInvalidExpiresIn              ValidationExceptionReason = "InvalidExpiresIn"
+	ValidationExceptionReasonInvalidStatus                 ValidationExceptionReason = "InvalidStatus"
+	ValidationExceptionReasonMissingValue                  ValidationExceptionReason = "MissingValue"
+	ValidationExceptionReasonInvalidToken                  ValidationExceptionReason = "InvalidToken"
+	ValidationExceptionReasonInvalidResourceIdentifier     ValidationExceptionReason = "InvalidResourceIdentifier"
+	ValidationExceptionReasonInvalidAz                     ValidationExceptionReason = "InvalidAz"
+	ValidationExceptionReasonUnsupportedAz                 ValidationExceptionReason = "UnsupportedAz"
+	ValidationExceptionReasonInvalidAlarmCondition         ValidationExceptionReason = "InvalidAlarmCondition"
+	ValidationExceptionReasonInvalidConditionType          ValidationExceptionReason = "InvalidConditionType"
+	ValidationExceptionReasonInvalidPracticeBlocker        ValidationExceptionReason = "InvalidPracticeBlocker"
+	ValidationExceptionReasonFisExperimentUpdateNotAllowed ValidationExceptionReason = "FISExperimentUpdateNotAllowed"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -178,6 +204,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"InvalidAlarmCondition",
 		"InvalidConditionType",
 		"InvalidPracticeBlocker",
+		"FISExperimentUpdateNotAllowed",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "02e9d952-f1c1-42e1-b74e-a7bc5038d226",
+    "type": "feature",
+    "description": "This release adds the ability to associate an AWS WAF v2 web ACL with an AWS Amplify App.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

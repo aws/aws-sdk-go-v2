@@ -16,7 +16,10 @@ import (
 // point in time before LatestRestorableTime for up to BackupRetentionPeriod days.
 // The target DB cluster is created from the source DB cluster with the same
 // configuration as the original DB cluster, except that the new DB cluster is
-// created with the default DB security group.
+// created with the default DB security group. Unless the RestoreType is set to
+// copy-on-write , the restore may occur in a different Availability Zone (AZ) from
+// the original DB cluster. The AZ where RDS restores the DB cluster depends on the
+// AZs in the specified subnet group.
 //
 // For Aurora, this operation only restores the DB cluster, not the DB instances
 // for that DB cluster. You must invoke the CreateDBInstance operation to create

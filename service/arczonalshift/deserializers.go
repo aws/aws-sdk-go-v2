@@ -3270,7 +3270,7 @@ func awsRestjson1_deserializeDocumentControlCondition(v **types.ControlCondition
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected MetricIdentifier to be of type string, got %T instead", value)
 				}
 				sv.AlarmIdentifier = ptr.String(jtv)
 			}
@@ -3751,6 +3751,15 @@ func awsRestjson1_deserializeDocumentZonalShiftInResource(v **types.ZonalShiftIn
 				sv.ResourceIdentifier = ptr.String(jtv)
 			}
 
+		case "shiftType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShiftType to be of type string, got %T instead", value)
+				}
+				sv.ShiftType = types.ShiftType(jtv)
+			}
+
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3925,6 +3934,15 @@ func awsRestjson1_deserializeDocumentZonalShiftSummary(v **types.ZonalShiftSumma
 					return fmt.Errorf("expected ResourceIdentifier to be of type string, got %T instead", value)
 				}
 				sv.ResourceIdentifier = ptr.String(jtv)
+			}
+
+		case "shiftType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShiftType to be of type string, got %T instead", value)
+				}
+				sv.ShiftType = types.ShiftType(jtv)
 			}
 
 		case "startTime":

@@ -15,10 +15,10 @@ import (
 // notification enables you to be notified, through Amazon EventBridge, when there
 // is an autoshift event for zonal autoshift.
 //
-// If the status is ENABLED , Route 53 ARC includes all autoshift events when you
-// use the EventBridge pattern Autoshift In Progress . When the status is DISABLED
-// , Route 53 ARC includes only autoshift events for autoshifts when one or more of
-// your resources is included in the autoshift.
+// If the status is ENABLED , ARC includes all autoshift events when you use the
+// EventBridge pattern Autoshift In Progress . When the status is DISABLED , ARC
+// includes only autoshift events for autoshifts when one or more of your resources
+// is included in the autoshift.
 //
 // For more information, see [Notifications for practice runs and autoshifts] in the Amazon Route 53 Application Recovery
 // Controller Developer Guide.
@@ -42,10 +42,10 @@ func (c *Client) UpdateAutoshiftObserverNotificationStatus(ctx context.Context, 
 type UpdateAutoshiftObserverNotificationStatusInput struct {
 
 	// The status to set for autoshift observer notification. If the status is ENABLED
-	// , Route 53 ARC includes all autoshift events when you use the Amazon EventBridge
-	// pattern Autoshift In Progress . When the status is DISABLED , Route 53 ARC
-	// includes only autoshift events for autoshifts when one or more of your resources
-	// is included in the autoshift.
+	// , ARC includes all autoshift events when you use the Amazon EventBridge pattern
+	// Autoshift In Progress . When the status is DISABLED , ARC includes only
+	// autoshift events for autoshifts when one or more of your resources is included
+	// in the autoshift.
 	//
 	// This member is required.
 	Status types.AutoshiftObserverNotificationStatus

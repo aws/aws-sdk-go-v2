@@ -18,10 +18,10 @@ import (
 // alarm, to monitor application health during practice runs and, optionally, a
 // blocking alarm, to block practice runs from starting.
 //
-// When a resource has a practice run configuration, Route 53 ARC starts zonal
-// shifts for the resource weekly, to shift traffic for practice runs. Practice
-// runs help you to ensure that shifting away traffic from an Availability Zone
-// during an autoshift is safe for your application.
+// When a resource has a practice run configuration, ARC starts zonal shifts for
+// the resource weekly, to shift traffic for practice runs. Practice runs help you
+// to ensure that shifting away traffic from an Availability Zone during an
+// autoshift is safe for your application.
 //
 // For more information, see [Considerations when you configure zonal autoshift] in the Amazon Route 53 Application Recovery
 // Controller Developer Guide.
@@ -48,10 +48,10 @@ type CreatePracticeRunConfigurationInput struct {
 	// you specify that ends a practice run when the alarm is in an ALARM state.
 	//
 	// Configure the alarm to monitor the health of your application when traffic is
-	// shifted away from an Availability Zone during each weekly practice run. You
-	// should configure the alarm to go into an ALARM state if your application is
-	// impacted by the zonal shift, and you want to stop the zonal shift, to let
-	// traffic for the resource return to the Availability Zone.
+	// shifted away from an Availability Zone during each practice run. You should
+	// configure the alarm to go into an ALARM state if your application is impacted
+	// by the zonal shift, and you want to stop the zonal shift, to let traffic for the
+	// resource return to the Availability Zone.
 	//
 	// This member is required.
 	OutcomeAlarms []types.ControlCondition
@@ -66,8 +66,8 @@ type CreatePracticeRunConfigurationInput struct {
 	// This member is required.
 	ResourceIdentifier *string
 
-	// Optionally, you can block Route 53 ARC from starting practice runs for a
-	// resource on specific calendar dates.
+	// Optionally, you can block ARC from starting practice runs for a resource on
+	// specific calendar dates.
 	//
 	// The format for blocked dates is: YYYY-MM-DD. Keep in mind, when you specify
 	// dates, that dates and times for practice runs are in UTC. Separate multiple
@@ -78,8 +78,8 @@ type CreatePracticeRunConfigurationInput struct {
 	// could set a blocked date for 2024-05-01 .
 	BlockedDates []string
 
-	// Optionally, you can block Route 53 ARC from starting practice runs for specific
-	// windows of days and times.
+	// Optionally, you can block ARC from starting practice runs for specific windows
+	// of days and times.
 	//
 	// The format for blocked windows is: DAY:HH:SS-DAY:HH:SS. Keep in mind, when you
 	// specify dates, that dates and times for practice runs are in UTC. Also, be aware
@@ -92,9 +92,8 @@ type CreatePracticeRunConfigurationInput struct {
 	BlockedWindows []string
 
 	// An Amazon CloudWatch alarm that you can specify for zonal autoshift practice
-	// runs. This alarm blocks Route 53 ARC from starting practice run zonal shifts,
-	// and ends a practice run that's in progress, when the alarm is in an ALARM
-	// state.
+	// runs. This alarm blocks ARC from starting practice run zonal shifts, and ends a
+	// practice run that's in progress, when the alarm is in an ALARM state.
 	BlockingAlarms []types.ControlCondition
 
 	noSmithyDocumentSerde

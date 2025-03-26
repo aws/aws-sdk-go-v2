@@ -14,11 +14,10 @@ import (
 // Lists all active and completed zonal shifts in Amazon Route 53 Application
 // Recovery Controller in your Amazon Web Services account in this Amazon Web
 // Services Region. ListZonalShifts returns customer-initiated zonal shifts, as
-// well as practice run zonal shifts that Route 53 ARC started on your behalf for
-// zonal autoshift.
+// well as practice run zonal shifts that ARC started on your behalf for zonal
+// autoshift.
 //
-// The ListZonalShifts operation does not list autoshifts. For more information
-// about listing autoshifts, see [">ListAutoshifts].
+// For more information about listing autoshifts, see [">ListAutoshifts].
 //
 // [">ListAutoshifts]: https://docs.aws.amazon.com/arc-zonal-shift/latest/api/API_ListAutoshifts.html
 func (c *Client) ListZonalShifts(ctx context.Context, params *ListZonalShiftsInput, optFns ...func(*Options)) (*ListZonalShiftsOutput, error) {
@@ -42,9 +41,9 @@ type ListZonalShiftsInput struct {
 	MaxResults *int32
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it indicates
+	// received a nextToken response in the previous request. If you did, it indicates
 	// that more output is available. Set this parameter to the value provided by the
-	// previous call's NextToken response to request the next page of results.
+	// previous call's nextToken response to request the next page of results.
 	NextToken *string
 
 	// The identifier for the resource that you want to list zonal shifts for. The
@@ -71,9 +70,9 @@ type ListZonalShiftsOutput struct {
 	Items []types.ZonalShiftSummary
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it indicates
+	// received a nextToken response in the previous request. If you did, it indicates
 	// that more output is available. Set this parameter to the value provided by the
-	// previous call's NextToken response to request the next page of results.
+	// previous call's nextToken response to request the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

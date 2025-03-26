@@ -47,7 +47,7 @@ type CheckCapacityInput struct {
 	Rules []types.Rule
 
 	// Specifies whether this is for a global resource type, such as a Amazon
-	// CloudFront distribution.
+	// CloudFront distribution. For an Amplify application, use CLOUDFRONT .
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:

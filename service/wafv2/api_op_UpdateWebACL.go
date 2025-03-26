@@ -34,7 +34,8 @@ import (
 // ACL with one or more Amazon Web Services resources to protect. The resource
 // types include Amazon CloudFront distribution, Amazon API Gateway REST API,
 // Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App
-// Runner service, and Amazon Web Services Verified Access instance.
+// Runner service, Amplify application, and Amazon Web Services Verified Access
+// instance.
 //
 // # Temporary inconsistencies during updates
 //
@@ -102,7 +103,7 @@ type UpdateWebACLInput struct {
 	Name *string
 
 	// Specifies whether this is for a global resource type, such as a Amazon
-	// CloudFront distribution.
+	// CloudFront distribution. For an Amplify application, use CLOUDFRONT .
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:

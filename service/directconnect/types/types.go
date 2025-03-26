@@ -7,14 +7,16 @@ import (
 	"time"
 )
 
-// The Amazon Web Services Cloud WAN core network that the Direct Connect
-// attachment is associated with.
+// The Amazon Web Services Cloud WAN core network that the Direct Connect gateway
+// is associated to. This is only returned when a Direct Connect gateway is
+// associated to a Cloud WAN core network.
 type AssociatedCoreNetwork struct {
 
-	// the ID of the Direct Connect attachment
+	// the ID of the Direct Connect gateway attachment.
 	AttachmentId *string
 
-	// The ID of the Cloud WAN core network.
+	// The ID of the Cloud WAN core network that the Direct Connect gateway is
+	// associated to.
 	Id *string
 
 	// The account owner of the Cloud WAN core network.
@@ -246,6 +248,9 @@ type DirectConnectGateway struct {
 	// The error message if the state of an object failed to advance.
 	StateChangeError *string
 
+	// Information about a tag.
+	Tags []Tag
+
 	noSmithyDocumentSerde
 }
 
@@ -256,7 +261,7 @@ type DirectConnectGatewayAssociation struct {
 	// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
 	AllowedPrefixesToDirectConnectGateway []RouteFilterPrefix
 
-	// The ID of the Cloud WAN core network associated with the Direct Connect
+	// The ID of the Cloud WAN core network associated with the Direct Connect gateway
 	// attachment.
 	AssociatedCoreNetwork *AssociatedCoreNetwork
 
@@ -1107,6 +1112,9 @@ type VirtualInterface struct {
 	//   - available : A virtual interface that is able to forward traffic.
 	//
 	//   - down : A virtual interface that is BGP down.
+	//
+	//   - testing : A virtual interface is in this state immediately after calling StartBgpFailoverTest
+	//   and remains in this state during the duration of the test.
 	//
 	//   - deleting : A virtual interface is in this state immediately after calling DeleteVirtualInterface
 	//   until it can no longer forward traffic.

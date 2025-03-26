@@ -42,6 +42,122 @@ func (AdMarkupType) Values() []AdMarkupType {
 	}
 }
 
+type AdsInteractionExcludeEventType string
+
+// Enum values for AdsInteractionExcludeEventType
+const (
+	AdsInteractionExcludeEventTypeAdMarkerFound                                AdsInteractionExcludeEventType = "AD_MARKER_FOUND"
+	AdsInteractionExcludeEventTypeNonAdMarkerFound                             AdsInteractionExcludeEventType = "NON_AD_MARKER_FOUND"
+	AdsInteractionExcludeEventTypeMakingAdsRequest                             AdsInteractionExcludeEventType = "MAKING_ADS_REQUEST"
+	AdsInteractionExcludeEventTypeModifiedTargetUrl                            AdsInteractionExcludeEventType = "MODIFIED_TARGET_URL"
+	AdsInteractionExcludeEventTypeVastRedirect                                 AdsInteractionExcludeEventType = "VAST_REDIRECT"
+	AdsInteractionExcludeEventTypeEmptyVastResponse                            AdsInteractionExcludeEventType = "EMPTY_VAST_RESPONSE"
+	AdsInteractionExcludeEventTypeEmptyVmapResponse                            AdsInteractionExcludeEventType = "EMPTY_VMAP_RESPONSE"
+	AdsInteractionExcludeEventTypeVastResponse                                 AdsInteractionExcludeEventType = "VAST_RESPONSE"
+	AdsInteractionExcludeEventTypeRedirectedVastResponse                       AdsInteractionExcludeEventType = "REDIRECTED_VAST_RESPONSE"
+	AdsInteractionExcludeEventTypeFilledAvail                                  AdsInteractionExcludeEventType = "FILLED_AVAIL"
+	AdsInteractionExcludeEventTypeFilledOverlayAvail                           AdsInteractionExcludeEventType = "FILLED_OVERLAY_AVAIL"
+	AdsInteractionExcludeEventTypeBeaconFired                                  AdsInteractionExcludeEventType = "BEACON_FIRED"
+	AdsInteractionExcludeEventTypeWarningNoAdvertisements                      AdsInteractionExcludeEventType = "WARNING_NO_ADVERTISEMENTS"
+	AdsInteractionExcludeEventTypeWarningVpaidAdDropped                        AdsInteractionExcludeEventType = "WARNING_VPAID_AD_DROPPED"
+	AdsInteractionExcludeEventTypeWarningUrlVariableSubstitutionFailed         AdsInteractionExcludeEventType = "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED"
+	AdsInteractionExcludeEventTypeErrorUnknown                                 AdsInteractionExcludeEventType = "ERROR_UNKNOWN"
+	AdsInteractionExcludeEventTypeErrorUnknownHost                             AdsInteractionExcludeEventType = "ERROR_UNKNOWN_HOST"
+	AdsInteractionExcludeEventTypeErrorDisallowedHost                          AdsInteractionExcludeEventType = "ERROR_DISALLOWED_HOST"
+	AdsInteractionExcludeEventTypeErrorAdsIo                                   AdsInteractionExcludeEventType = "ERROR_ADS_IO"
+	AdsInteractionExcludeEventTypeErrorAdsTimeout                              AdsInteractionExcludeEventType = "ERROR_ADS_TIMEOUT"
+	AdsInteractionExcludeEventTypeErrorAdsResponseParse                        AdsInteractionExcludeEventType = "ERROR_ADS_RESPONSE_PARSE"
+	AdsInteractionExcludeEventTypeErrorAdsResponseUnknownRootElement           AdsInteractionExcludeEventType = "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT"
+	AdsInteractionExcludeEventTypeErrorAdsInvalidResponse                      AdsInteractionExcludeEventType = "ERROR_ADS_INVALID_RESPONSE"
+	AdsInteractionExcludeEventTypeErrorVastRedirectEmptyResponse               AdsInteractionExcludeEventType = "ERROR_VAST_REDIRECT_EMPTY_RESPONSE"
+	AdsInteractionExcludeEventTypeErrorVastRedirectMultipleVast                AdsInteractionExcludeEventType = "ERROR_VAST_REDIRECT_MULTIPLE_VAST"
+	AdsInteractionExcludeEventTypeErrorVastRedirectFailed                      AdsInteractionExcludeEventType = "ERROR_VAST_REDIRECT_FAILED"
+	AdsInteractionExcludeEventTypeErrorVastMissingMediafiles                   AdsInteractionExcludeEventType = "ERROR_VAST_MISSING_MEDIAFILES"
+	AdsInteractionExcludeEventTypeErrorVastMissingCreatives                    AdsInteractionExcludeEventType = "ERROR_VAST_MISSING_CREATIVES"
+	AdsInteractionExcludeEventTypeErrorVastMissingOverlays                     AdsInteractionExcludeEventType = "ERROR_VAST_MISSING_OVERLAYS"
+	AdsInteractionExcludeEventTypeErrorVastMissingImpression                   AdsInteractionExcludeEventType = "ERROR_VAST_MISSING_IMPRESSION"
+	AdsInteractionExcludeEventTypeErrorVastInvalidVastAdTagUri                 AdsInteractionExcludeEventType = "ERROR_VAST_INVALID_VAST_AD_TAG_URI"
+	AdsInteractionExcludeEventTypeErrorVastMultipleTrackingEvents              AdsInteractionExcludeEventType = "ERROR_VAST_MULTIPLE_TRACKING_EVENTS"
+	AdsInteractionExcludeEventTypeErrorVastMultipleLinear                      AdsInteractionExcludeEventType = "ERROR_VAST_MULTIPLE_LINEAR"
+	AdsInteractionExcludeEventTypeErrorVastInvalidMediaFile                    AdsInteractionExcludeEventType = "ERROR_VAST_INVALID_MEDIA_FILE"
+	AdsInteractionExcludeEventTypeErrorFiringBeaconFailed                      AdsInteractionExcludeEventType = "ERROR_FIRING_BEACON_FAILED"
+	AdsInteractionExcludeEventTypeErrorPersonalizationDisabled                 AdsInteractionExcludeEventType = "ERROR_PERSONALIZATION_DISABLED"
+	AdsInteractionExcludeEventTypeVodTimeBasedAvailPlanVastResponseForOffset   AdsInteractionExcludeEventType = "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET"
+	AdsInteractionExcludeEventTypeVodTimeBasedAvailPlanSuccess                 AdsInteractionExcludeEventType = "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS"
+	AdsInteractionExcludeEventTypeVodTimeBasedAvailPlanWarningNoAdvertisements AdsInteractionExcludeEventType = "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS"
+	AdsInteractionExcludeEventTypeInterstitialVodSuccess                       AdsInteractionExcludeEventType = "INTERSTITIAL_VOD_SUCCESS"
+	AdsInteractionExcludeEventTypeInterstitialVodFailure                       AdsInteractionExcludeEventType = "INTERSTITIAL_VOD_FAILURE"
+)
+
+// Values returns all known values for AdsInteractionExcludeEventType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdsInteractionExcludeEventType) Values() []AdsInteractionExcludeEventType {
+	return []AdsInteractionExcludeEventType{
+		"AD_MARKER_FOUND",
+		"NON_AD_MARKER_FOUND",
+		"MAKING_ADS_REQUEST",
+		"MODIFIED_TARGET_URL",
+		"VAST_REDIRECT",
+		"EMPTY_VAST_RESPONSE",
+		"EMPTY_VMAP_RESPONSE",
+		"VAST_RESPONSE",
+		"REDIRECTED_VAST_RESPONSE",
+		"FILLED_AVAIL",
+		"FILLED_OVERLAY_AVAIL",
+		"BEACON_FIRED",
+		"WARNING_NO_ADVERTISEMENTS",
+		"WARNING_VPAID_AD_DROPPED",
+		"WARNING_URL_VARIABLE_SUBSTITUTION_FAILED",
+		"ERROR_UNKNOWN",
+		"ERROR_UNKNOWN_HOST",
+		"ERROR_DISALLOWED_HOST",
+		"ERROR_ADS_IO",
+		"ERROR_ADS_TIMEOUT",
+		"ERROR_ADS_RESPONSE_PARSE",
+		"ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT",
+		"ERROR_ADS_INVALID_RESPONSE",
+		"ERROR_VAST_REDIRECT_EMPTY_RESPONSE",
+		"ERROR_VAST_REDIRECT_MULTIPLE_VAST",
+		"ERROR_VAST_REDIRECT_FAILED",
+		"ERROR_VAST_MISSING_MEDIAFILES",
+		"ERROR_VAST_MISSING_CREATIVES",
+		"ERROR_VAST_MISSING_OVERLAYS",
+		"ERROR_VAST_MISSING_IMPRESSION",
+		"ERROR_VAST_INVALID_VAST_AD_TAG_URI",
+		"ERROR_VAST_MULTIPLE_TRACKING_EVENTS",
+		"ERROR_VAST_MULTIPLE_LINEAR",
+		"ERROR_VAST_INVALID_MEDIA_FILE",
+		"ERROR_FIRING_BEACON_FAILED",
+		"ERROR_PERSONALIZATION_DISABLED",
+		"VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET",
+		"VOD_TIME_BASED_AVAIL_PLAN_SUCCESS",
+		"VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS",
+		"INTERSTITIAL_VOD_SUCCESS",
+		"INTERSTITIAL_VOD_FAILURE",
+	}
+}
+
+type AdsInteractionPublishOptInEventType string
+
+// Enum values for AdsInteractionPublishOptInEventType
+const (
+	AdsInteractionPublishOptInEventTypeRawAdsResponse AdsInteractionPublishOptInEventType = "RAW_ADS_RESPONSE"
+)
+
+// Values returns all known values for AdsInteractionPublishOptInEventType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdsInteractionPublishOptInEventType) Values() []AdsInteractionPublishOptInEventType {
+	return []AdsInteractionPublishOptInEventType{
+		"RAW_ADS_RESPONSE",
+	}
+}
+
 type AlertCategory string
 
 // Enum values for AlertCategory
@@ -153,6 +269,86 @@ const (
 func (LogType) Values() []LogType {
 	return []LogType{
 		"AS_RUN",
+	}
+}
+
+type ManifestServiceExcludeEventType string
+
+// Enum values for ManifestServiceExcludeEventType
+const (
+	ManifestServiceExcludeEventTypeGeneratedManifest                   ManifestServiceExcludeEventType = "GENERATED_MANIFEST"
+	ManifestServiceExcludeEventTypeOriginManifest                      ManifestServiceExcludeEventType = "ORIGIN_MANIFEST"
+	ManifestServiceExcludeEventTypeSessionInitialized                  ManifestServiceExcludeEventType = "SESSION_INITIALIZED"
+	ManifestServiceExcludeEventTypeTrackingResponse                    ManifestServiceExcludeEventType = "TRACKING_RESPONSE"
+	ManifestServiceExcludeEventTypeConfigSyntaxError                   ManifestServiceExcludeEventType = "CONFIG_SYNTAX_ERROR"
+	ManifestServiceExcludeEventTypeConfigSecurityError                 ManifestServiceExcludeEventType = "CONFIG_SECURITY_ERROR"
+	ManifestServiceExcludeEventTypeUnknownHost                         ManifestServiceExcludeEventType = "UNKNOWN_HOST"
+	ManifestServiceExcludeEventTypeTimeoutError                        ManifestServiceExcludeEventType = "TIMEOUT_ERROR"
+	ManifestServiceExcludeEventTypeConnectionError                     ManifestServiceExcludeEventType = "CONNECTION_ERROR"
+	ManifestServiceExcludeEventTypeIoError                             ManifestServiceExcludeEventType = "IO_ERROR"
+	ManifestServiceExcludeEventTypeUnknownError                        ManifestServiceExcludeEventType = "UNKNOWN_ERROR"
+	ManifestServiceExcludeEventTypeHostDisallowed                      ManifestServiceExcludeEventType = "HOST_DISALLOWED"
+	ManifestServiceExcludeEventTypeParsingError                        ManifestServiceExcludeEventType = "PARSING_ERROR"
+	ManifestServiceExcludeEventTypeManifestError                       ManifestServiceExcludeEventType = "MANIFEST_ERROR"
+	ManifestServiceExcludeEventTypeNoMasterOrMediaPlaylist             ManifestServiceExcludeEventType = "NO_MASTER_OR_MEDIA_PLAYLIST"
+	ManifestServiceExcludeEventTypeNoMasterPlaylist                    ManifestServiceExcludeEventType = "NO_MASTER_PLAYLIST"
+	ManifestServiceExcludeEventTypeNoMediaPlaylist                     ManifestServiceExcludeEventType = "NO_MEDIA_PLAYLIST"
+	ManifestServiceExcludeEventTypeIncompatibleHlsVersion              ManifestServiceExcludeEventType = "INCOMPATIBLE_HLS_VERSION"
+	ManifestServiceExcludeEventTypeScte35ParsingError                  ManifestServiceExcludeEventType = "SCTE35_PARSING_ERROR"
+	ManifestServiceExcludeEventTypeInvalidSinglePeriodDashManifest     ManifestServiceExcludeEventType = "INVALID_SINGLE_PERIOD_DASH_MANIFEST"
+	ManifestServiceExcludeEventTypeUnsupportedSinglePeriodDashManifest ManifestServiceExcludeEventType = "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST"
+	ManifestServiceExcludeEventTypeLastPeriodMissingAudio              ManifestServiceExcludeEventType = "LAST_PERIOD_MISSING_AUDIO"
+	ManifestServiceExcludeEventTypeLastPeriodMissingAudioWarning       ManifestServiceExcludeEventType = "LAST_PERIOD_MISSING_AUDIO_WARNING"
+	ManifestServiceExcludeEventTypeErrorOriginPrefixInterpolation      ManifestServiceExcludeEventType = "ERROR_ORIGIN_PREFIX_INTERPOLATION"
+	ManifestServiceExcludeEventTypeErrorAdsInterpolation               ManifestServiceExcludeEventType = "ERROR_ADS_INTERPOLATION"
+	ManifestServiceExcludeEventTypeErrorLivePreRollAdsInterpolation    ManifestServiceExcludeEventType = "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION"
+	ManifestServiceExcludeEventTypeErrorCdnAdSegmentInterpolation      ManifestServiceExcludeEventType = "ERROR_CDN_AD_SEGMENT_INTERPOLATION"
+	ManifestServiceExcludeEventTypeErrorCdnContentSegmentInterpolation ManifestServiceExcludeEventType = "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION"
+	ManifestServiceExcludeEventTypeErrorSlateAdUrlInterpolation        ManifestServiceExcludeEventType = "ERROR_SLATE_AD_URL_INTERPOLATION"
+	ManifestServiceExcludeEventTypeErrorProfileNameInterpolation       ManifestServiceExcludeEventType = "ERROR_PROFILE_NAME_INTERPOLATION"
+	ManifestServiceExcludeEventTypeErrorBumperStartInterpolation       ManifestServiceExcludeEventType = "ERROR_BUMPER_START_INTERPOLATION"
+	ManifestServiceExcludeEventTypeErrorBumperEndInterpolation         ManifestServiceExcludeEventType = "ERROR_BUMPER_END_INTERPOLATION"
+)
+
+// Values returns all known values for ManifestServiceExcludeEventType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManifestServiceExcludeEventType) Values() []ManifestServiceExcludeEventType {
+	return []ManifestServiceExcludeEventType{
+		"GENERATED_MANIFEST",
+		"ORIGIN_MANIFEST",
+		"SESSION_INITIALIZED",
+		"TRACKING_RESPONSE",
+		"CONFIG_SYNTAX_ERROR",
+		"CONFIG_SECURITY_ERROR",
+		"UNKNOWN_HOST",
+		"TIMEOUT_ERROR",
+		"CONNECTION_ERROR",
+		"IO_ERROR",
+		"UNKNOWN_ERROR",
+		"HOST_DISALLOWED",
+		"PARSING_ERROR",
+		"MANIFEST_ERROR",
+		"NO_MASTER_OR_MEDIA_PLAYLIST",
+		"NO_MASTER_PLAYLIST",
+		"NO_MEDIA_PLAYLIST",
+		"INCOMPATIBLE_HLS_VERSION",
+		"SCTE35_PARSING_ERROR",
+		"INVALID_SINGLE_PERIOD_DASH_MANIFEST",
+		"UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST",
+		"LAST_PERIOD_MISSING_AUDIO",
+		"LAST_PERIOD_MISSING_AUDIO_WARNING",
+		"ERROR_ORIGIN_PREFIX_INTERPOLATION",
+		"ERROR_ADS_INTERPOLATION",
+		"ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION",
+		"ERROR_CDN_AD_SEGMENT_INTERPOLATION",
+		"ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION",
+		"ERROR_SLATE_AD_URL_INTERPOLATION",
+		"ERROR_PROFILE_NAME_INTERPOLATION",
+		"ERROR_BUMPER_START_INTERPOLATION",
+		"ERROR_BUMPER_END_INTERPOLATION",
 	}
 }
 

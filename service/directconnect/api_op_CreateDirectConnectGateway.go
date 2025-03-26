@@ -47,6 +47,9 @@ type CreateDirectConnectGatewayInput struct {
 	// 64512.
 	AmazonSideAsn *int64
 
+	// The key-value pair tags associated with the request.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

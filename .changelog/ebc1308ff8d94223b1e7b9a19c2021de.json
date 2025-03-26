@@ -1,0 +1,8 @@
+{
+    "id": "ebc1308f-f8d9-4223-b1e7-b9a19c2021de",
+    "type": "feature",
+    "description": "Add new shiftType field for ARC zonal shifts.",
+    "modules": [
+        "service/arczonalshift"
+    ]
+}

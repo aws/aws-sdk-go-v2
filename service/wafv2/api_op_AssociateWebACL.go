@@ -84,6 +84,9 @@ type AssociateWebACLInput struct {
 	//   - For an Amazon Web Services Verified Access instance:
 	//   arn:partition:ec2:region:account-id:verified-access-instance/instance-id
 	//
+	//   - For an Amplify application:
+	//   arn:partition:amplify:region:account-id:apps/app-id
+	//
 	// This member is required.
 	ResourceArn *string
 
