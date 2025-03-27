@@ -16,7 +16,7 @@
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
 import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
-import software.amazon.smithy.aws.go.codegen.customization.S3ModelUtils;
+import software.amazon.smithy.aws.go.codegen.customization.service.s3.S3ModelUtils;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
