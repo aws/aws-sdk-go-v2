@@ -1115,6 +1115,25 @@ func (ResourceStatus) Values() []ResourceStatus {
 	}
 }
 
+type ScanType string
+
+// Enum values for ScanType
+const (
+	ScanTypeFull    ScanType = "FULL"
+	ScanTypePartial ScanType = "PARTIAL"
+)
+
+// Values returns all known values for ScanType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScanType) Values() []ScanType {
+	return []ScanType{
+		"FULL",
+		"PARTIAL",
+	}
+}
+
 type StackDriftDetectionStatus string
 
 // Enum values for StackDriftDetectionStatus

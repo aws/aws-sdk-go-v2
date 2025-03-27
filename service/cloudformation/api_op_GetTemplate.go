@@ -48,8 +48,6 @@ type GetTemplateInput struct {
 	//   ID.
 	//
 	//   - Deleted stacks: You must specify the unique stack ID.
-	//
-	// Default: There is no default value.
 	StackName *string
 
 	// For templates that include transforms, the stage of the template that

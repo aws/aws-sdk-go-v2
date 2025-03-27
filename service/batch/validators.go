@@ -1246,6 +1246,21 @@ func validateFairsharePolicy(v *types.FairsharePolicy) error {
 	}
 }
 
+func validateFirelensConfiguration(v *types.FirelensConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FirelensConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImagePullSecret(v *types.ImagePullSecret) error {
 	if v == nil {
 		return nil
@@ -1721,6 +1736,11 @@ func validateTaskContainerProperties(v *types.TaskContainerProperties) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TaskContainerProperties"}
+	if v.FirelensConfiguration != nil {
+		if err := validateFirelensConfiguration(v.FirelensConfiguration); err != nil {
+			invalidParams.AddNested("FirelensConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Image == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Image"))
 	}

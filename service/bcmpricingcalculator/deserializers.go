@@ -10418,6 +10418,11 @@ func awsAwsjson10_deserializeOpDocumentGetPreferencesOutput(v **GetPreferencesOu
 				return err
 			}
 
+		case "standaloneAccountRateTypeSelections":
+			if err := awsAwsjson10_deserializeDocumentRateTypes(&sv.StandaloneAccountRateTypeSelections, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -11384,6 +11389,11 @@ func awsAwsjson10_deserializeOpDocumentUpdatePreferencesOutput(v **UpdatePrefere
 
 		case "memberAccountRateTypeSelections":
 			if err := awsAwsjson10_deserializeDocumentRateTypes(&sv.MemberAccountRateTypeSelections, value); err != nil {
+				return err
+			}
+
+		case "standaloneAccountRateTypeSelections":
+			if err := awsAwsjson10_deserializeDocumentRateTypes(&sv.StandaloneAccountRateTypeSelections, value); err != nil {
 				return err
 			}
 

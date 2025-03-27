@@ -28,13 +28,13 @@ import (
 //
 // # Learn more
 //
-// [Amazon GameLift Realtime Servers]
+// [Amazon GameLift Amazon GameLift Realtime]
 //
 // # Related actions
 //
 // [All APIs by task]
 //
-// [Amazon GameLift Realtime Servers]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+// [Amazon GameLift Amazon GameLift Realtime]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
 // [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) UpdateScript(ctx context.Context, params *UpdateScriptInput, optFns ...func(*Options)) (*UpdateScriptOutput, error) {
 	if params == nil {

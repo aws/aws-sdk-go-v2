@@ -50,8 +50,6 @@ func (c *Client) DescribeStackResources(ctx context.Context, params *DescribeSta
 type DescribeStackResourcesInput struct {
 
 	// The logical name of the resource as specified in the template.
-	//
-	// Default: There is no default value.
 	LogicalResourceId *string
 
 	// The name or unique identifier that corresponds to a physical instance ID of a
@@ -64,8 +62,6 @@ type DescribeStackResourcesInput struct {
 	//
 	// Required: Conditional. If you don't specify PhysicalResourceId , you must
 	// specify StackName .
-	//
-	// Default: There is no default value.
 	PhysicalResourceId *string
 
 	// The name or the unique stack ID that is associated with the stack, which aren't
@@ -75,8 +71,6 @@ type DescribeStackResourcesInput struct {
 	//   ID.
 	//
 	//   - Deleted stacks: You must specify the unique stack ID.
-	//
-	// Default: There is no default value.
 	//
 	// Required: Conditional. If you don't specify StackName , you must specify
 	// PhysicalResourceId .

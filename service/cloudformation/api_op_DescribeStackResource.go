@@ -35,8 +35,6 @@ type DescribeStackResourceInput struct {
 
 	// The logical name of the resource as specified in the template.
 	//
-	// Default: There is no default value.
-	//
 	// This member is required.
 	LogicalResourceId *string
 
@@ -47,8 +45,6 @@ type DescribeStackResourceInput struct {
 	//   ID.
 	//
 	//   - Deleted stacks: You must specify the unique stack ID.
-	//
-	// Default: There is no default value.
 	//
 	// This member is required.
 	StackName *string

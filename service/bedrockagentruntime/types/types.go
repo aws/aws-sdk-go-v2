@@ -1094,6 +1094,7 @@ func (*FlowResponseStreamMemberFlowTraceEvent) isFlowResponseStream() {}
 // The following types satisfy this interface:
 //
 //	FlowTraceMemberConditionNodeResultTrace
+//	FlowTraceMemberNodeActionTrace
 //	FlowTraceMemberNodeInputTrace
 //	FlowTraceMemberNodeOutputTrace
 //
@@ -1110,6 +1111,18 @@ type FlowTraceMemberConditionNodeResultTrace struct {
 }
 
 func (*FlowTraceMemberConditionNodeResultTrace) isFlowTrace() {}
+
+// Contains information about an action (operation) called by a node. For more
+// information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
+//
+// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+type FlowTraceMemberNodeActionTrace struct {
+	Value FlowTraceNodeActionEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowTraceMemberNodeActionTrace) isFlowTrace() {}
 
 // Contains information about the input into a node.
 type FlowTraceMemberNodeInputTrace struct {
@@ -1179,6 +1192,39 @@ type FlowTraceEvent struct {
 	//
 	// This member is required.
 	Trace FlowTrace
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an action (operation) called by a node in an Amazon
+// Bedrock flow. The service generates action events for calls made by prompt
+// nodes, agent nodes, and Amazon Web Services Lambda nodes.
+type FlowTraceNodeActionEvent struct {
+
+	// The name of the node that called the operation.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The name of the operation that the node called.
+	//
+	// This member is required.
+	OperationName *string
+
+	// The ID of the request that the node made to the operation.
+	//
+	// This member is required.
+	RequestId *string
+
+	// The name of the service that the node called.
+	//
+	// This member is required.
+	ServiceName *string
+
+	// The date and time that the operation was called.
+	//
+	// This member is required.
+	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -4431,7 +4477,21 @@ type Span struct {
 // Configurations for streaming.
 type StreamingConfigurations struct {
 
-	//  The guardrail interval to apply as response is generated.
+	//  The guardrail interval to apply as response is generated. By default, the
+	// guardrail interval is set to 50 characters. If a larger interval is specified,
+	// the response will be generated in larger chunks with fewer ApplyGuardrail
+	// calls. The following examples show the response generated for Hello, I am an
+	// agent input string.
+	//
+	// Example response in chunks: Interval set to 3 characters
+	//
+	//     'Hel', 'lo, ','I am', ' an', ' Age', 'nt'
+	//
+	// Each chunk has at least 3 characters except for the last chunk
+	//
+	// Example response in chunks: Interval set to 20 or more characters
+	//
+	//     Hello, I am an Agent
 	ApplyGuardrailInterval *int32
 
 	//  Specifies whether to enable streaming for the final response. This is set to

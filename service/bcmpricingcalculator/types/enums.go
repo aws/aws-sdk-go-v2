@@ -192,6 +192,7 @@ const (
 	BillScenarioStatusReady  BillScenarioStatus = "READY"
 	BillScenarioStatusLocked BillScenarioStatus = "LOCKED"
 	BillScenarioStatusFailed BillScenarioStatus = "FAILED"
+	BillScenarioStatusStale  BillScenarioStatus = "STALE"
 )
 
 // Values returns all known values for BillScenarioStatus. Note that this can be
@@ -203,6 +204,7 @@ func (BillScenarioStatus) Values() []BillScenarioStatus {
 		"READY",
 		"LOCKED",
 		"FAILED",
+		"STALE",
 	}
 }
 

@@ -23,15 +23,6 @@ import (
 //     processed, the actions it took, and the final result it yielded. For more
 //     information, see [Trace enablement].
 //
-//   - To stream agent responses, make sure that only orchestration prompt is
-//     enabled. Agent streaming is not supported for the following steps:
-//
-//   - Pre-processing
-//
-//   - Post-processing
-//
-//   - Agent with 1 Knowledge base and User Input not enabled
-//
 //   - End a conversation by setting endSession to true .
 //
 //   - In the sessionState object, you can include attributes for the session or

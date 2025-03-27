@@ -80,12 +80,12 @@ type CreateBuildInput struct {
 	// default value. You can't change a build's operating system later.
 	//
 	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
-	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use Amazon GameLift server
-	// SDK 4.x., first update the game server build to server SDK 5.x, and then deploy
-	// to AL2023 instances. See [Migrate to Amazon GameLift server SDK version 5.]
+	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use server SDK version 4.x
+	// for Amazon GameLift, first update the game server build to server SDK 5.x, and
+	// then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
 	//
+	// [Migrate to server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	// [Amazon Linux 2 FAQs]: https://aws.amazon.com/amazon-linux-2/faqs/
-	// [Migrate to Amazon GameLift server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	OperatingSystem types.OperatingSystem
 
 	// A server SDK version you used when integrating your game server build with

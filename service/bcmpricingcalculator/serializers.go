@@ -3904,6 +3904,13 @@ func awsAwsjson10_serializeOpDocumentUpdatePreferencesInput(v *UpdatePreferences
 		}
 	}
 
+	if v.StandaloneAccountRateTypeSelections != nil {
+		ok := object.Key("standaloneAccountRateTypeSelections")
+		if err := awsAwsjson10_serializeDocumentRateTypes(v.StandaloneAccountRateTypeSelections, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

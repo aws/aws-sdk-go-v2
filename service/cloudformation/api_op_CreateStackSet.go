@@ -43,20 +43,27 @@ type CreateStackSetInput struct {
 	//
 	// Specify an IAM role only if you are using customized administrator roles to
 	// control which users or groups can manage specific stack sets within the same
-	// administrator account. For more information, see [Prerequisites for using StackSets]in the CloudFormation User
+	// administrator account. For more information, see [Grant self-managed permissions]in the CloudFormation User
 	// Guide.
 	//
-	// [Prerequisites for using StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+	// Valid only if the permissions model is SELF_MANAGED .
+	//
+	// [Grant self-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
 	AdministrationRoleARN *string
 
 	// Describes whether StackSets automatically deploys to Organizations accounts
-	// that are added to the target organization or organizational unit (OU). Specify
-	// only if PermissionModel is SERVICE_MANAGED .
+	// that are added to the target organization or organizational unit (OU). For more
+	// information, see [Manage automatic deployments for CloudFormation StackSets that use service-managed permissions]in the CloudFormation User Guide.
+	//
+	// Required if the permissions model is SERVICE_MANAGED . (Not used with
+	// self-managed permissions.)
+	//
+	// [Manage automatic deployments for CloudFormation StackSets that use service-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-manage-auto-deployment.html
 	AutoDeployment *types.AutoDeployment
 
-	// [Service-managed permissions] Specifies whether you are acting as an account
-	// administrator in the organization's management account or as a delegated
-	// administrator in a member account.
+	// Specifies whether you are acting as an account administrator in the
+	// organization's management account or as a delegated administrator in a member
+	// account.
 	//
 	// By default, SELF is specified. Use SELF for stack sets with self-managed
 	// permissions.
@@ -73,6 +80,8 @@ type CreateStackSetInput struct {
 	//
 	// Stack sets with service-managed permissions are created in the management
 	// account, including stack sets that are created by delegated administrators.
+	//
+	// Valid only if the permissions model is SERVICE_MANAGED .
 	//
 	// [Register a delegated administrator]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
 	CallAs types.CallAs
@@ -163,6 +172,8 @@ type CreateStackSetInput struct {
 	//
 	// Specify an IAM role only if you are using customized execution roles to control
 	// which stack resources users and groups can include in their stack sets.
+	//
+	// Valid only if the permissions model is SELF_MANAGED .
 	ExecutionRoleName *string
 
 	// Describes whether StackSets performs non-conflicting operations concurrently

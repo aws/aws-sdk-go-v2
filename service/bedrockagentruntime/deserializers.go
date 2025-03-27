@@ -12373,6 +12373,16 @@ loop:
 			uv = &types.FlowTraceMemberConditionNodeResultTrace{Value: mv}
 			break loop
 
+		case "nodeActionTrace":
+			var mv types.FlowTraceNodeActionEvent
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentFlowTraceNodeActionEvent(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FlowTraceMemberNodeActionTrace{Value: mv}
+			break loop
+
 		case "nodeInputTrace":
 			var mv types.FlowTraceNodeInputEvent
 			destAddr := &mv
@@ -12560,6 +12570,86 @@ func awsRestjson1_deserializeDocumentFlowTraceEvent(v **types.FlowTraceEvent, va
 		case "trace":
 			if err := awsRestjson1_deserializeDocumentFlowTrace(&sv.Trace, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFlowTraceNodeActionEvent(v **types.FlowTraceNodeActionEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FlowTraceNodeActionEvent
+	if *v == nil {
+		sv = &types.FlowTraceNodeActionEvent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nodeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.NodeName = ptr.String(jtv)
+			}
+
+		case "operationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OperationName = ptr.String(jtv)
+			}
+
+		case "requestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		case "serviceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServiceName = ptr.String(jtv)
+			}
+
+		case "timestamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateTimestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.Timestamp = ptr.Time(t)
 			}
 
 		default:

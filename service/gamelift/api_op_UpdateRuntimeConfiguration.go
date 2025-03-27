@@ -56,9 +56,9 @@ type UpdateRuntimeConfigurationInput struct {
 	FleetId *string
 
 	// Instructions for launching server processes on fleet computes. Server processes
-	// run either a custom game build executable or a Realtime Servers script. The
-	// runtime configuration lists the types of server processes to run, how to launch
-	// them, and the number of processes to run concurrently.
+	// run either a custom game build executable or a Amazon GameLift Realtime script.
+	// The runtime configuration lists the types of server processes to run, how to
+	// launch them, and the number of processes to run concurrently.
 	//
 	// This member is required.
 	RuntimeConfiguration *types.RuntimeConfiguration

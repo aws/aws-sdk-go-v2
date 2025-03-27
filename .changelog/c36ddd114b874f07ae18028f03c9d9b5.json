@@ -1,0 +1,8 @@
+{
+    "id": "c36ddd11-4b87-4f07-ae18-028f03c9d9b5",
+    "type": "feature",
+    "description": "This release adds AwsAdditionalDetails in the CreateTokenWithIAM API response.",
+    "modules": [
+        "service/ssooidc"
+    ]
+}

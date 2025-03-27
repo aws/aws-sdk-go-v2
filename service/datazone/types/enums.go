@@ -1322,6 +1322,7 @@ type RuleAction string
 
 // Enum values for RuleAction
 const (
+	RuleActionCreateListingChangeSet    RuleAction = "CREATE_LISTING_CHANGE_SET"
 	RuleActionCreateSubscriptionRequest RuleAction = "CREATE_SUBSCRIPTION_REQUEST"
 )
 
@@ -1331,6 +1332,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (RuleAction) Values() []RuleAction {
 	return []RuleAction{
+		"CREATE_LISTING_CHANGE_SET",
 		"CREATE_SUBSCRIPTION_REQUEST",
 	}
 }

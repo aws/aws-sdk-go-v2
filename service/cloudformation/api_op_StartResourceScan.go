@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +34,9 @@ type StartResourceScanInput struct {
 	// you plan to retry requests so that CloudFormation knows that you're not
 	// attempting to start a new resource scan.
 	ClientRequestToken *string
+
+	// The scan filters to use.
+	ScanFilters []types.ScanFilter
 
 	noSmithyDocumentSerde
 }

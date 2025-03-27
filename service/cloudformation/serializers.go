@@ -6553,6 +6553,16 @@ func awsAwsquery_serializeDocumentResourceToImport(v *types.ResourceToImport, va
 	return nil
 }
 
+func awsAwsquery_serializeDocumentResourceTypeFilters(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentResourceTypes(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -6615,6 +6625,32 @@ func awsAwsquery_serializeDocumentRollbackTriggers(v []types.RollbackTrigger, va
 	for i := range v {
 		av := array.Value()
 		if err := awsAwsquery_serializeDocumentRollbackTrigger(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentScanFilter(v *types.ScanFilter, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Types != nil {
+		objectKey := object.Key("Types")
+		if err := awsAwsquery_serializeDocumentResourceTypeFilters(v.Types, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentScanFilters(v []types.ScanFilter, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentScanFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -8472,6 +8508,11 @@ func awsAwsquery_serializeOpDocumentListResourceScansInput(v *ListResourceScansI
 		objectKey.String(*v.NextToken)
 	}
 
+	if len(v.ScanTypeFilter) > 0 {
+		objectKey := object.Key("ScanTypeFilter")
+		objectKey.String(string(v.ScanTypeFilter))
+	}
+
 	return nil
 }
 
@@ -9160,6 +9201,13 @@ func awsAwsquery_serializeOpDocumentStartResourceScanInput(v *StartResourceScanI
 	if v.ClientRequestToken != nil {
 		objectKey := object.Key("ClientRequestToken")
 		objectKey.String(*v.ClientRequestToken)
+	}
+
+	if v.ScanFilters != nil {
+		objectKey := object.Key("ScanFilters")
+		if err := awsAwsquery_serializeDocumentScanFilters(v.ScanFilters, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil

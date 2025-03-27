@@ -68,12 +68,15 @@ type DescribeResourceScanOutput struct {
 	// a Status set to COMPLETE , EXPIRED , or FAILED .
 	ResourcesScanned *int32
 
+	// The scan filters that were used.
+	ScanFilters []types.ScanFilter
+
 	// The time that the resource scan was started.
 	StartTime *time.Time
 
 	// Status of the resource scan.
 	//
-	// INPROGRESS
+	// IN_PROGRESS
 	//
 	// The resource scan is still in progress.
 	//

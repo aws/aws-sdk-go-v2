@@ -14,23 +14,23 @@ import (
 // Retrieves information on the compute resources in an Amazon GameLift fleet. Use
 // the pagination parameters to retrieve results in a set of sequential pages.
 //
-// Request options:
+// Request options
 //
 //   - Retrieve a list of all computes in a fleet. Specify a fleet ID.
 //
 //   - Retrieve a list of all computes in a specific fleet location. Specify a
 //     fleet ID and location.
 //
-// Results:
+// # Results
 //
 // If successful, this operation returns information on a set of computes.
 // Depending on the type of fleet, the result includes the following information:
 //
-//   - For managed EC2 fleets (compute type EC2 ), this operation returns
+//   - For a managed EC2 fleet (compute type EC2 ), this operation returns
 //     information about the EC2 instance. Compute names are EC2 instance IDs.
 //
-//   - For Anywhere fleets (compute type ANYWHERE ), this operation returns compute
-//     names and details as provided when the compute was registered with
+//   - For an Anywhere fleet (compute type ANYWHERE ), this operation returns
+//     compute names and details from when the compute was registered with
 //     RegisterCompute . This includes GameLiftServiceSdkEndpoint or
 //     GameLiftAgentEndpoint .
 func (c *Client) ListCompute(ctx context.Context, params *ListComputeInput, optFns ...func(*Options)) (*ListComputeOutput, error) {

@@ -515,8 +515,8 @@ type ComputeResource struct {
 
 	// Key-value pair tags to be applied to Amazon EC2 resources that are launched in
 	// the compute environment. For Batch, these take the form of "String1": "String2"
-	// , where String1 is the tag key and String2 is the tag value-for example, {
-	// "Name": "Batch Instance - C4OnDemand" } . This is helpful for recognizing your
+	// , where String1 is the tag key and String2 is the tag value (for example, {
+	// "Name": "Batch Instance - C4OnDemand" } ). This is helpful for recognizing your
 	// Batch instances in the Amazon EC2 console. Updating these tags requires an
 	// infrastructure update to the compute environment. For more information, see [Updating compute environments]in
 	// the Batch User Guide. These tags aren't seen when using the Batch
@@ -803,8 +803,8 @@ type ComputeResourceUpdate struct {
 
 	// Key-value pair tags to be applied to Amazon EC2 resources that are launched in
 	// the compute environment. For Batch, these take the form of "String1": "String2"
-	// , where String1 is the tag key and String2 is the tag value-for example, {
-	// "Name": "Batch Instance - C4OnDemand" } . This is helpful for recognizing your
+	// , where String1 is the tag key and String2 is the tag value (for example, {
+	// "Name": "Batch Instance - C4OnDemand" } ). This is helpful for recognizing your
 	// Batch instances in the Amazon EC2 console. These tags aren't seen when using the
 	// Batch ListTagsForResource API operation.
 	//
@@ -915,6 +915,10 @@ type ContainerDetail struct {
 	// The Amazon Resource Name (ARN) of the container instance that the container is
 	// running on.
 	ContainerInstanceArn *string
+
+	// Determines whether execute command functionality is turned on for this task. If
+	// true , execute command functionality is turned on all the containers in the task.
+	EnableExecuteCommand *bool
 
 	// The environment variables to pass to a container.
 	//
@@ -1174,6 +1178,10 @@ type ContainerProperties struct {
 	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
 	// [https://docs.docker.com/engine/reference/builder/#cmd]: https://docs.docker.com/engine/reference/builder/#cmd
 	Command []string
+
+	// Determines whether execute command functionality is turned on for this task. If
+	// true , execute command functionality is turned on all the containers in the task.
+	EnableExecuteCommand *bool
 
 	// The environment variables to pass to a container. This parameter maps to Env in
 	// the [Create a container]section of the [Docker Remote API] and the --env option to [docker run].
@@ -1545,6 +1553,10 @@ type EcsTaskDetails struct {
 	// A list of containers that are included in the taskProperties list.
 	Containers []TaskContainerDetails
 
+	// Determines whether execute command functionality is turned on for this task. If
+	// true , execute command functionality is turned on all the containers in the task.
+	EnableExecuteCommand *bool
+
 	// The amount of ephemeral storage allocated for the task.
 	EphemeralStorage *EphemeralStorage
 
@@ -1600,6 +1612,10 @@ type EcsTaskProperties struct {
 	//
 	// This member is required.
 	Containers []TaskContainerProperties
+
+	// Determines whether execute command functionality is turned on for this task. If
+	// true , execute command functionality is turned on all the containers in the task.
+	EnableExecuteCommand *bool
 
 	// The amount of ephemeral storage to allocate for the task. This parameter is
 	// used to expand the total amount of ephemeral storage available, beyond the
@@ -2486,9 +2502,9 @@ type EksPodPropertiesOverride struct {
 	Containers []EksContainerOverride
 
 	// The overrides for the initContainers defined in the Amazon EKS pod. These
-	// containers run before application containers, always runs to completion, and
-	// must complete successfully before the next container starts. These containers
-	// are registered with the Amazon EKS Connector agent and persists the registration
+	// containers run before application containers, always run to completion, and must
+	// complete successfully before the next container starts. These containers are
+	// registered with the Amazon EKS Connector agent and persists the registration
 	// information in the Kubernetes backend data store. For more information, see [Init Containers]in
 	// the Kubernetes documentation.
 	//
@@ -2637,41 +2653,40 @@ type EvaluateOnExit struct {
 	noSmithyDocumentSerde
 }
 
-// The fair share policy for a scheduling policy.
+// The fair-share scheduling policy details.
 type FairsharePolicy struct {
 
-	// A value used to reserve some of the available maximum vCPU for fair share
+	// A value used to reserve some of the available maximum vCPU for share
 	// identifiers that aren't already used.
 	//
 	// The reserved ratio is (computeReservation/100)^ActiveFairShares  where
-	// ActiveFairShares is the number of active fair share identifiers.
+	// ActiveFairShares is the number of active share identifiers.
 	//
 	// For example, a computeReservation value of 50 indicates that Batch reserves 50%
-	// of the maximum available vCPU if there's only one fair share identifier. It
-	// reserves 25% if there are two fair share identifiers. It reserves 12.5% if there
-	// are three fair share identifiers. A computeReservation value of 25 indicates
-	// that Batch should reserve 25% of the maximum available vCPU if there's only one
-	// fair share identifier, 6.25% if there are two fair share identifiers, and 1.56%
-	// if there are three fair share identifiers.
+	// of the maximum available vCPU if there's only one share identifier. It reserves
+	// 25% if there are two share identifiers. It reserves 12.5% if there are three
+	// share identifiers. A computeReservation value of 25 indicates that Batch should
+	// reserve 25% of the maximum available vCPU if there's only one share identifier,
+	// 6.25% if there are two fair share identifiers, and 1.56% if there are three
+	// share identifiers.
 	//
 	// The minimum value is 0 and the maximum value is 99.
 	ComputeReservation *int32
 
-	// The amount of time (in seconds) to use to calculate a fair share percentage for
-	// each fair share identifier in use. A value of zero (0) indicates the default
-	// minimum time window (600 seconds). The maximum supported value is 604800 (1
-	// week).
+	// The amount of time (in seconds) to use to calculate a fair-share percentage for
+	// each share identifier in use. A value of zero (0) indicates the default minimum
+	// time window (600 seconds). The maximum supported value is 604800 (1 week).
 	//
 	// The decay allows for more recently run jobs to have more weight than jobs that
 	// ran earlier. Consider adjusting this number if you have jobs that (on average)
 	// run longer than ten minutes, or a large difference in job count or job run times
-	// between share identifiers, and the allocation of resources doesn’t meet your
+	// between share identifiers, and the allocation of resources doesn't meet your
 	// needs.
 	ShareDecaySeconds *int32
 
-	// An array of SharedIdentifier objects that contain the weights for the fair
-	// share identifiers for the fair share policy. Fair share identifiers that aren't
-	// included have a default weight of 1.0 .
+	// An array of SharedIdentifier objects that contain the weights for the share
+	// identifiers for the fair-share policy. Share identifiers that aren't included
+	// have a default weight of 1.0 .
 	ShareDistribution []ShareAttributes
 
 	noSmithyDocumentSerde
@@ -2693,12 +2708,38 @@ type FargatePlatformConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The FireLens configuration for the container. This is used to specify and
+// configure a log router for container logs. For more information, see [Custom log]routing in
+// the Amazon Elastic Container Service Developer Guide.
+//
+// [Custom log]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+type FirelensConfiguration struct {
+
+	// The log router to use. The valid values are fluentd or fluentbit .
+	//
+	// This member is required.
+	Type FirelensConfigurationType
+
+	// The options to use when configuring the log router. This field is optional and
+	// can be used to specify a custom configuration file or to add additional
+	// metadata, such as the task, task definition, cluster, and container instance
+	// details to the log event. If specified, the syntax to use is
+	// "options":{"enable-ecs-log-metadata":"true|false","config-file-type:"s3|file","config-file-value":"arn:aws:s3:::mybucket/fluent.conf|filepath"}
+	// . For more information, see [Creating a task definition that uses a FireLens configuration]in the Amazon Elastic Container Service Developer
+	// Guide.
+	//
+	// [Creating a task definition that uses a FireLens configuration]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-taskdef
+	Options map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Contains a list of the first 100 RUNNABLE jobs associated to a single job queue.
 type FrontOfQueueDetail struct {
 
 	// The Amazon Resource Names (ARNs) of the first 100 RUNNABLE jobs in a named job
 	// queue. For first-in-first-out (FIFO) job queues, jobs are ordered based on their
-	// submission time. For fair share scheduling (FSS) job queues, jobs are ordered
+	// submission time. For fair-share scheduling (FSS) job queues, jobs are ordered
 	// based on their job priority and share usage.
 	Jobs []FrontOfQueueJobSummary
 
@@ -2841,7 +2882,7 @@ type JobDefinition struct {
 	RetryStrategy *RetryStrategy
 
 	// The scheduling priority of the job definition. This only affects jobs in job
-	// queues with a fair share policy. Jobs with a higher scheduling priority are
+	// queues with a fair-share policy. Jobs with a higher scheduling priority are
 	// scheduled before jobs with a lower scheduling priority.
 	SchedulingPriority *int32
 
@@ -2984,7 +3025,7 @@ type JobDetail struct {
 	RetryStrategy *RetryStrategy
 
 	// The scheduling policy of the job definition. This only affects jobs in job
-	// queues with a fair share policy. Jobs with a higher scheduling priority are
+	// queues with a fair-share policy. Jobs with a higher scheduling priority are
 	// scheduled before jobs with a lower scheduling priority.
 	SchedulingPriority *int32
 
@@ -3403,9 +3444,8 @@ type LinuxParameters struct {
 	//
 	// If a maxSwap value of 0 is specified, the container doesn't use swap. Accepted
 	// values are 0 or any positive integer. If the maxSwap parameter is omitted, the
-	// container doesn't use the swap configuration for the container instance that
-	// it's running on. A maxSwap value must be set for the swappiness parameter to be
-	// used.
+	// container doesn't use the swap configuration for the container instance on which
+	// it runs. A maxSwap value must be set for the swappiness parameter to be used.
 	//
 	// This parameter isn't applicable to jobs that are running on Fargate resources.
 	// Don't provide it for these jobs.
@@ -3550,6 +3590,10 @@ type LogConfiguration struct {
 	// Jobs that are running on Fargate resources are restricted to the awslogs and
 	// splunk log drivers.
 	//
+	// awsfirelens Specifies the firelens logging driver. For more information on
+	// configuring Firelens, see [Send Amazon ECS logs to an Amazon Web Services service or Amazon Web Services Partner]in the Amazon Elastic Container Service Developer
+	// Guide.
+	//
 	// awslogs Specifies the Amazon CloudWatch Logs logging driver. For more
 	// information, see [Using the awslogs log driver]in the Batch User Guide and [Amazon CloudWatch Logs logging driver] in the Docker documentation.
 	//
@@ -3586,6 +3630,7 @@ type LogConfiguration struct {
 	// [Syslog logging driver]: https://docs.docker.com/config/containers/logging/syslog/
 	// [JSON File logging driver]: https://docs.docker.com/config/containers/logging/json-file/
 	// [Splunk logging driver]: https://docs.docker.com/config/containers/logging/splunk/
+	// [Send Amazon ECS logs to an Amazon Web Services service or Amazon Web Services Partner]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
 	// [Amazon CloudWatch Logs logging driver]: https://docs.docker.com/config/containers/logging/awslogs/
 	// [available on GitHub]: https://github.com/aws/amazon-ecs-agent
 	// [Using the awslogs log driver]: https://docs.aws.amazon.com/batch/latest/userguide/using_awslogs.html
@@ -4020,17 +4065,17 @@ type SchedulingPolicyDetail struct {
 	// This member is required.
 	Arn *string
 
-	// The name of the scheduling policy.
+	// The name of the fair-share scheduling policy.
 	//
 	// This member is required.
 	Name *string
 
-	// The fair share policy for the scheduling policy.
+	// The fair-share scheduling policy details.
 	FairsharePolicy *FairsharePolicy
 
-	// The tags that you apply to the scheduling policy to categorize and organize
-	// your resources. Each tag consists of a key and an optional value. For more
-	// information, see [Tagging Amazon Web Services resources]in Amazon Web Services General Reference.
+	// The tags that you apply to the fair-share scheduling policy to categorize and
+	// organize your resources. Each tag consists of a key and an optional value. For
+	// more information, see [Tagging Amazon Web Services resources]in Amazon Web Services General Reference.
 	//
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
@@ -4084,18 +4129,18 @@ type Secret struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the weights for the fair share identifiers for the fair share policy.
-// Fair share identifiers that aren't included have a default weight of 1.0 .
+// Specifies the weights for the share identifiers for the fair-share policy.
+// Share identifiers that aren't included have a default weight of 1.0 .
 type ShareAttributes struct {
 
-	// A fair share identifier or fair share identifier prefix. If the string ends
-	// with an asterisk (*), this entry specifies the weight factor to use for fair
-	// share identifiers that start with that prefix. The list of fair share
-	// identifiers in a fair share policy can't overlap. For example, you can't have
-	// one that specifies a shareIdentifier of UserA* and another that specifies a
-	// shareIdentifier of UserA-1 .
+	// A share identifier or share identifier prefix. If the string ends with an
+	// asterisk (*), this entry specifies the weight factor to use for share
+	// identifiers that start with that prefix. The list of share identifiers in a
+	// fair-share policy can't overlap. For example, you can't have one that specifies
+	// a shareIdentifier of UserA* and another that specifies a shareIdentifier of
+	// UserA-1 .
 	//
-	// There can be no more than 500 fair share identifiers active in a job queue.
+	// There can be no more than 500 share identifiers active in a job queue.
 	//
 	// The string is limited to 255 alphanumeric characters, and can be followed by an
 	// asterisk (*).
@@ -4103,10 +4148,10 @@ type ShareAttributes struct {
 	// This member is required.
 	ShareIdentifier *string
 
-	// The weight factor for the fair share identifier. The default value is 1.0. A
-	// lower value has a higher priority for compute resources. For example, jobs that
-	// use a share identifier with a weight factor of 0.125 (1/8) get 8 times the
-	// compute resources of jobs that use a share identifier with a weight factor of 1.
+	// The weight factor for the share identifier. The default value is 1.0. A lower
+	// value has a higher priority for compute resources. For example, jobs that use a
+	// share identifier with a weight factor of 0.125 (1/8) get 8 times the compute
+	// resources of jobs that use a share identifier with a weight factor of 1.
 	//
 	// The smallest supported value is 0.0001, and the largest supported value is
 	// 999.9999.
@@ -4184,6 +4229,13 @@ type TaskContainerDetails struct {
 
 	// The exit code returned upon completion.
 	ExitCode *int32
+
+	// The FireLens configuration for the container. This is used to specify and
+	// configure a log router for container logs. For more information, see [Custom log]routing in
+	// the Amazon Elastic Container Service Developer Guide.
+	//
+	// [Custom log]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+	FirelensConfiguration *FirelensConfiguration
 
 	// The image used to start a container. This string is passed directly to the
 	// Docker daemon. By default, images in the Docker Hub registry are available.
@@ -4448,6 +4500,13 @@ type TaskContainerProperties struct {
 	// [Application Architecture]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html
 	Essential *bool
 
+	// The FireLens configuration for the container. This is used to specify and
+	// configure a log router for container logs. For more information, see [Custom log]routing in
+	// the Amazon Elastic Container Service Developer Guide.
+	//
+	// [Custom log]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+	FirelensConfiguration *FirelensConfiguration
+
 	// Linux-specific modifications that are applied to the container, such as Linux
 	// kernel capabilities. For more information, see [KernelCapabilities].
 	//
@@ -4656,8 +4715,9 @@ type Ulimit struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the infrastructure update policy for the compute environment. For
-// more information about infrastructure updates, see [Updating compute environments]in the Batch User Guide.
+// Specifies the infrastructure update policy for the Amazon EC2 compute
+// environment. For more information about infrastructure updates, see [Updating compute environments]in the
+// Batch User Guide.
 //
 // [Updating compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
 type UpdatePolicy struct {

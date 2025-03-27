@@ -41,8 +41,6 @@ type ListStackResourcesInput struct {
 	//
 	//   - Deleted stacks: You must specify the unique stack ID.
 	//
-	// Default: There is no default value.
-	//
 	// This member is required.
 	StackName *string
 

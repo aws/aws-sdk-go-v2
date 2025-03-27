@@ -5822,6 +5822,15 @@ func awsRestjson1_deserializeDocumentContainerDetail(v **types.ContainerDetail, 
 				sv.ContainerInstanceArn = ptr.String(jtv)
 			}
 
+		case "enableExecuteCommand":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableExecuteCommand = ptr.Bool(jtv)
+			}
+
 		case "environment":
 			if err := awsRestjson1_deserializeDocumentEnvironmentVariables(&sv.Environment, value); err != nil {
 				return err
@@ -6055,6 +6064,15 @@ func awsRestjson1_deserializeDocumentContainerProperties(v **types.ContainerProp
 		case "command":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Command, value); err != nil {
 				return err
+			}
+
+		case "enableExecuteCommand":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableExecuteCommand = ptr.Bool(jtv)
 			}
 
 		case "environment":
@@ -6597,6 +6615,15 @@ func awsRestjson1_deserializeDocumentEcsTaskDetails(v **types.EcsTaskDetails, va
 				return err
 			}
 
+		case "enableExecuteCommand":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableExecuteCommand = ptr.Bool(jtv)
+			}
+
 		case "ephemeralStorage":
 			if err := awsRestjson1_deserializeDocumentEphemeralStorage(&sv.EphemeralStorage, value); err != nil {
 				return err
@@ -6705,6 +6732,15 @@ func awsRestjson1_deserializeDocumentEcsTaskProperties(v **types.EcsTaskProperti
 		case "containers":
 			if err := awsRestjson1_deserializeDocumentListTaskContainerProperties(&sv.Containers, value); err != nil {
 				return err
+			}
+
+		case "enableExecuteCommand":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableExecuteCommand = ptr.Bool(jtv)
 			}
 
 		case "ephemeralStorage":
@@ -8817,6 +8853,87 @@ func awsRestjson1_deserializeDocumentFargatePlatformConfiguration(v **types.Farg
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFirelensConfiguration(v **types.FirelensConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FirelensConfiguration
+	if *v == nil {
+		sv = &types.FirelensConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "options":
+			if err := awsRestjson1_deserializeDocumentFirelensConfigurationOptionsMap(&sv.Options, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FirelensConfigurationType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.FirelensConfigurationType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFirelensConfigurationOptionsMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -12313,6 +12430,11 @@ func awsRestjson1_deserializeDocumentTaskContainerDetails(v **types.TaskContaine
 				sv.ExitCode = ptr.Int32(int32(i64))
 			}
 
+		case "firelensConfiguration":
+			if err := awsRestjson1_deserializeDocumentFirelensConfiguration(&sv.FirelensConfiguration, value); err != nil {
+				return err
+			}
+
 		case "image":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12469,6 +12591,11 @@ func awsRestjson1_deserializeDocumentTaskContainerProperties(v **types.TaskConta
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.Essential = ptr.Bool(jtv)
+			}
+
+		case "firelensConfiguration":
+			if err := awsRestjson1_deserializeDocumentFirelensConfiguration(&sv.FirelensConfiguration, value); err != nil {
+				return err
 			}
 
 		case "image":

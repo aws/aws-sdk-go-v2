@@ -1,0 +1,8 @@
+{
+    "id": "3af98968-4357-4ccf-b01d-b7f611e06e28",
+    "type": "feature",
+    "description": "Amazon GameLift Servers add support for additional instance types.",
+    "modules": [
+        "service/gamelift"
+    ]
+}

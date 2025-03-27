@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the preferences for the Amazon Web Services Cost Explorer service.
+// Updates the preferences for Pricing Calculator.
 func (c *Client) UpdatePreferences(ctx context.Context, params *UpdatePreferencesInput, optFns ...func(*Options)) (*UpdatePreferencesOutput, error) {
 	if params == nil {
 		params = &UpdatePreferencesInput{}
@@ -35,6 +35,9 @@ type UpdatePreferencesInput struct {
 	//  The updated preferred rate types for member accounts.
 	MemberAccountRateTypeSelections []types.RateType
 
+	//  The updated preferred rate types for a standalone account.
+	StandaloneAccountRateTypeSelections []types.RateType
+
 	noSmithyDocumentSerde
 }
 
@@ -45,6 +48,9 @@ type UpdatePreferencesOutput struct {
 
 	//  The updated preferred rate types for member accounts.
 	MemberAccountRateTypeSelections []types.RateType
+
+	//  The updated preferred rate types for a standalone account.
+	StandaloneAccountRateTypeSelections []types.RateType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

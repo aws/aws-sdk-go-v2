@@ -47,8 +47,6 @@ type DescribeStackEventsInput struct {
 	//   ID.
 	//
 	//   - Deleted stacks: You must specify the unique stack ID.
-	//
-	// Default: There is no default value.
 	StackName *string
 
 	noSmithyDocumentSerde

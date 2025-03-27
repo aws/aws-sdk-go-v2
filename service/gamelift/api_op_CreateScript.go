@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new script record for your Realtime Servers script. Realtime scripts
-// are JavaScript that provide configuration settings and optional custom game
-// logic for your game. The script is deployed when you create a Realtime Servers
-// fleet to host your game sessions. Script logic is executed during an active game
-// session.
+// Creates a new script record for your Amazon GameLift Realtime script. Realtime
+// scripts are JavaScript that provide configuration settings and optional custom
+// game logic for your game. The script is deployed when you create a Amazon
+// GameLift Realtime fleet to host your game sessions. Script logic is executed
+// during an active game session.
 //
 // To create a new script record, specify a script name and provide the script
 // file(s). The script files and all dependencies must be zipped into a single
@@ -36,7 +36,7 @@ import (
 //
 // # Learn more
 //
-// [Amazon GameLift Realtime Servers]
+// [Amazon GameLift Amazon GameLift Realtime]
 //
 // [Set Up a Role for Amazon GameLift Access]
 //
@@ -45,7 +45,7 @@ import (
 // [All APIs by task]
 //
 // [Set Up a Role for Amazon GameLift Access]: https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html
-// [Amazon GameLift Realtime Servers]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+// [Amazon GameLift Amazon GameLift Realtime]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
 // [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, optFns ...func(*Options)) (*CreateScriptOutput, error) {
 	if params == nil {

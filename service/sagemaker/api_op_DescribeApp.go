@@ -92,6 +92,9 @@ type DescribeAppOutput struct {
 	// result, this value is set to the same value as LastHealthCheckTimestamp .
 	LastUserActivityTimestamp *time.Time
 
+	//  Indicates whether the application is launched in recovery mode.
+	RecoveryMode *bool
+
 	// The instance type and the Amazon Resource Name (ARN) of the SageMaker AI image
 	// created on the instance.
 	ResourceSpec *types.ResourceSpec

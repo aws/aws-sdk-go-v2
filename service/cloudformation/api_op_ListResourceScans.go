@@ -38,6 +38,10 @@ type ListResourceScansInput struct {
 	// A string that identifies the next page of resource scan results.
 	NextToken *string
 
+	// The scan type that you want to get summary information about. The default is
+	// FULL .
+	ScanTypeFilter types.ScanType
+
 	noSmithyDocumentSerde
 }
 

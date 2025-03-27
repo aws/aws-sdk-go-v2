@@ -201,6 +201,9 @@ func ExampleFlowTrace_outputUsage() {
 	case *types.FlowTraceMemberConditionNodeResultTrace:
 		_ = v.Value // Value is types.FlowTraceConditionNodeResultEvent
 
+	case *types.FlowTraceMemberNodeActionTrace:
+		_ = v.Value // Value is types.FlowTraceNodeActionEvent
+
 	case *types.FlowTraceMemberNodeInputTrace:
 		_ = v.Value // Value is types.FlowTraceNodeInputEvent
 
@@ -216,6 +219,7 @@ func ExampleFlowTrace_outputUsage() {
 	}
 }
 
+var _ *types.FlowTraceNodeActionEvent
 var _ *types.FlowTraceNodeInputEvent
 var _ *types.FlowTraceConditionNodeResultEvent
 var _ *types.FlowTraceNodeOutputEvent

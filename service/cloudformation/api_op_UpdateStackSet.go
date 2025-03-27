@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the stack set, and associated stack instances in the specified accounts
+// Updates the stack set and associated stack instances in the specified accounts
 // and Amazon Web Services Regions.
 //
 // Even if the stack set operation created by updating the stack set fails
@@ -57,25 +57,29 @@ type UpdateStackSetInput struct {
 	// stack instances with their existing stack instance status.
 	Accounts []string
 
-	// The Amazon Resource Name (ARN) of the IAM role to use to update this stack set.
+	// [Self-managed permissions] The Amazon Resource Name (ARN) of the IAM role to
+	// use to update this stack set.
 	//
 	// Specify an IAM role only if you are using customized administrator roles to
 	// control which users or groups can manage specific stack sets within the same
-	// administrator account. For more information, see [Prerequisites for using CloudFormation StackSets]in the CloudFormation User
+	// administrator account. For more information, see [Grant self-managed permissions]in the CloudFormation User
 	// Guide.
 	//
 	// If you specified a customized administrator role when you created the stack
 	// set, you must specify a customized administrator role, even if it is the same
 	// customized administrator role used with this stack set previously.
 	//
-	// [Prerequisites for using CloudFormation StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+	// [Grant self-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
 	AdministrationRoleARN *string
 
 	// [Service-managed permissions] Describes whether StackSets automatically deploys
 	// to Organizations accounts that are added to a target organization or
-	// organizational unit (OU).
+	// organizational unit (OU). For more information, see [Manage automatic deployments for CloudFormation StackSets that use service-managed permissions]in the CloudFormation User
+	// Guide.
 	//
 	// If you specify AutoDeployment , don't specify DeploymentTargets or Regions .
+	//
+	// [Manage automatic deployments for CloudFormation StackSets that use service-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-manage-auto-deployment.html
 	AutoDeployment *types.AutoDeployment
 
 	// [Service-managed permissions] Specifies whether you are acting as an account
@@ -184,8 +188,8 @@ type UpdateStackSetInput struct {
 	// A brief description of updates that you are making.
 	Description *string
 
-	// The name of the IAM execution role to use to update the stack set. If you do
-	// not specify an execution role, CloudFormation uses the
+	// [Self-managed permissions] The name of the IAM execution role to use to update
+	// the stack set. If you do not specify an execution role, CloudFormation uses the
 	// AWSCloudFormationStackSetExecutionRole role for the stack set operation.
 	//
 	// Specify an IAM role only if you are using customized execution roles to control

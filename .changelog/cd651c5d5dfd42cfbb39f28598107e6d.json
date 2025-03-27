@@ -1,0 +1,8 @@
+{
+    "id": "cd651c5d-5dfd-42cf-bb39-f28598107e6d",
+    "type": "feature",
+    "description": "bedrock flow now support node action trace.",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

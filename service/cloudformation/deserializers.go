@@ -16669,6 +16669,19 @@ func awsAwsquery_deserializeDocumentResourceScanSummary(v **types.ResourceScanSu
 				sv.ResourceScanId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ScanType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ScanType = types.ScanType(xtv)
+			}
+
 		case strings.EqualFold("StartTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -16853,6 +16866,86 @@ func awsAwsquery_deserializeDocumentResourceTargetDefinition(v **types.ResourceT
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentResourceTypeFilters(v *[]string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []string
+	if *v == nil {
+		sv = make([]string, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				col = xtv
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentResourceTypeFiltersUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
+	if *v == nil {
+		sv = make([]string, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv string
+		t := decoder.StartEl
+		_ = t
+		val, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if val == nil {
+			break
+		}
+		{
+			xtv := string(val)
+			mv = xtv
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentResourceTypes(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17114,6 +17207,116 @@ func awsAwsquery_deserializeDocumentRollbackTriggersUnwrapped(v *[]types.Rollbac
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		destAddr := &mv
 		if err := awsAwsquery_deserializeDocumentRollbackTrigger(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsAwsquery_deserializeDocumentScanFilter(v **types.ScanFilter, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ScanFilter
+	if *v == nil {
+		sv = &types.ScanFilter{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Types", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentResourceTypeFilters(&sv.Types, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentScanFilters(v *[]types.ScanFilter, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.ScanFilter
+	if *v == nil {
+		sv = make([]types.ScanFilter, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ScanFilter
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentScanFilter(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentScanFiltersUnwrapped(v *[]types.ScanFilter, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ScanFilter
+	if *v == nil {
+		sv = make([]types.ScanFilter, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.ScanFilter
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentScanFilter(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
 		mv = *destAddr
@@ -26304,6 +26507,12 @@ func awsAwsquery_deserializeOpDocumentDescribeResourceScanOutput(v **DescribeRes
 		case strings.EqualFold("ResourceTypes", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentResourceTypes(&sv.ResourceTypes, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("ScanFilters", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentScanFilters(&sv.ScanFilters, nodeDecoder); err != nil {
 				return err
 			}
 

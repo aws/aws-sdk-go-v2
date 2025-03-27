@@ -34099,6 +34099,11 @@ func awsAwsjson11_serializeOpDocumentCreateAppInput(v *CreateAppInput, value smi
 		ok.String(*v.DomainId)
 	}
 
+	if v.RecoveryMode != nil {
+		ok := object.Key("RecoveryMode")
+		ok.Boolean(*v.RecoveryMode)
+	}
+
 	if v.ResourceSpec != nil {
 		ok := object.Key("ResourceSpec")
 		if err := awsAwsjson11_serializeDocumentResourceSpec(v.ResourceSpec, ok); err != nil {

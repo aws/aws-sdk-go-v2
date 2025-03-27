@@ -3387,6 +3387,11 @@ func awsRestjson1_serializeDocumentContainerProperties(v *types.ContainerPropert
 		}
 	}
 
+	if v.EnableExecuteCommand != nil {
+		ok := object.Key("enableExecuteCommand")
+		ok.Boolean(*v.EnableExecuteCommand)
+	}
+
 	if v.Environment != nil {
 		ok := object.Key("environment")
 		if err := awsRestjson1_serializeDocumentEnvironmentVariables(v.Environment, ok); err != nil {
@@ -3646,6 +3651,11 @@ func awsRestjson1_serializeDocumentEcsTaskProperties(v *types.EcsTaskProperties,
 		if err := awsRestjson1_serializeDocumentListTaskContainerProperties(v.Containers, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.EnableExecuteCommand != nil {
+		ok := object.Key("enableExecuteCommand")
+		ok.Boolean(*v.EnableExecuteCommand)
 	}
 
 	if v.EphemeralStorage != nil {
@@ -4437,6 +4447,36 @@ func awsRestjson1_serializeDocumentFargatePlatformConfiguration(v *types.Fargate
 		ok.String(*v.PlatformVersion)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFirelensConfiguration(v *types.FirelensConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Options != nil {
+		ok := object.Key("options")
+		if err := awsRestjson1_serializeDocumentFirelensConfigurationOptionsMap(v.Options, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFirelensConfigurationOptionsMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 
@@ -5342,6 +5382,13 @@ func awsRestjson1_serializeDocumentTaskContainerProperties(v *types.TaskContaine
 	if v.Essential != nil {
 		ok := object.Key("essential")
 		ok.Boolean(*v.Essential)
+	}
+
+	if v.FirelensConfiguration != nil {
+		ok := object.Key("firelensConfiguration")
+		if err := awsRestjson1_serializeDocumentFirelensConfiguration(v.FirelensConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Image != nil {

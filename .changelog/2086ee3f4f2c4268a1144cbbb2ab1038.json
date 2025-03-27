@@ -1,0 +1,8 @@
+{
+    "id": "2086ee3f-4f2c-4268-a114-4cbbb2ab1038",
+    "type": "feature",
+    "description": "This release adds new action type of Create Listing Changeset for the Metadata Enforcement Rule feature.",
+    "modules": [
+        "service/datazone"
+    ]
+}

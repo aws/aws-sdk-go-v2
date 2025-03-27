@@ -47,6 +47,9 @@ type CreateAppInput struct {
 	// This member is required.
 	DomainId *string
 
+	//  Indicates whether the application is launched in recovery mode.
+	RecoveryMode *bool
+
 	// The instance type and the Amazon Resource Name (ARN) of the SageMaker AI image
 	// created on the instance.
 	//

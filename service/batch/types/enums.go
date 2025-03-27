@@ -231,6 +231,25 @@ func (EFSTransitEncryption) Values() []EFSTransitEncryption {
 	}
 }
 
+type FirelensConfigurationType string
+
+// Enum values for FirelensConfigurationType
+const (
+	FirelensConfigurationTypeFluentd   FirelensConfigurationType = "fluentd"
+	FirelensConfigurationTypeFluentbit FirelensConfigurationType = "fluentbit"
+)
+
+// Values returns all known values for FirelensConfigurationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FirelensConfigurationType) Values() []FirelensConfigurationType {
+	return []FirelensConfigurationType{
+		"fluentd",
+		"fluentbit",
+	}
+}
+
 type JobDefinitionType string
 
 // Enum values for JobDefinitionType
@@ -365,13 +384,14 @@ type LogDriver string
 
 // Enum values for LogDriver
 const (
-	LogDriverJsonFile LogDriver = "json-file"
-	LogDriverSyslog   LogDriver = "syslog"
-	LogDriverJournald LogDriver = "journald"
-	LogDriverGelf     LogDriver = "gelf"
-	LogDriverFluentd  LogDriver = "fluentd"
-	LogDriverAwslogs  LogDriver = "awslogs"
-	LogDriverSplunk   LogDriver = "splunk"
+	LogDriverJsonFile    LogDriver = "json-file"
+	LogDriverSyslog      LogDriver = "syslog"
+	LogDriverJournald    LogDriver = "journald"
+	LogDriverGelf        LogDriver = "gelf"
+	LogDriverFluentd     LogDriver = "fluentd"
+	LogDriverAwslogs     LogDriver = "awslogs"
+	LogDriverSplunk      LogDriver = "splunk"
+	LogDriverAwsfirelens LogDriver = "awsfirelens"
 )
 
 // Values returns all known values for LogDriver. Note that this can be expanded
@@ -387,6 +407,7 @@ func (LogDriver) Values() []LogDriver {
 		"fluentd",
 		"awslogs",
 		"splunk",
+		"awsfirelens",
 	}
 }
 

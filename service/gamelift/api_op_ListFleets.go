@@ -23,8 +23,8 @@ import (
 //   - To get a list of all fleets where a specific game build is deployed,
 //     provide the build ID.
 //
-//   - To get a list of all Realtime Servers fleets with a specific configuration
-//     script, provide the script ID.
+//   - To get a list of all Amazon GameLift Realtime fleets with a specific
+//     configuration script, provide the script ID.
 //
 // Use the pagination parameters to retrieve results as a set of sequential pages.
 //

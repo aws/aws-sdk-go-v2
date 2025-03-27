@@ -146,8 +146,8 @@ type CreateFleetInput struct {
 	// managed EC2 fleets. You can leave this parameter empty when creating the fleet,
 	// but you must call [https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings]to set it before players can connect to game sessions. As a
 	// best practice, we recommend opening ports for remote access only when you need
-	// them and closing them when you're finished. For Realtime Servers fleets, Amazon
-	// GameLift automatically sets TCP and UDP ranges.
+	// them and closing them when you're finished. For Amazon GameLift Realtime fleets,
+	// Amazon GameLift automatically sets TCP and UDP ranges.
 	//
 	// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings
 	EC2InboundPermissions []types.IpPermission

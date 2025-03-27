@@ -92477,6 +92477,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeAppOutput(v **DescribeAppOutput, 
 				}
 			}
 
+		case "RecoveryMode":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RecoveryMode = ptr.Bool(jtv)
+			}
+
 		case "ResourceSpec":
 			if err := awsAwsjson11_deserializeDocumentResourceSpec(&sv.ResourceSpec, value); err != nil {
 				return err

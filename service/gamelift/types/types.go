@@ -154,12 +154,12 @@ type Build struct {
 	// determines the type of fleet resources that you can use for this build.
 	//
 	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
-	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use Amazon GameLift server
-	// SDK 4.x., first update the game server build to server SDK 5.x, and then deploy
-	// to AL2023 instances. See [Migrate to Amazon GameLift server SDK version 5.]
+	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use server SDK version 4.x
+	// for Amazon GameLift, first update the game server build to server SDK 5.x, and
+	// then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
 	//
+	// [Migrate to server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	// [Amazon Linux 2 FAQs]: https://aws.amazon.com/amazon-linux-2/faqs/
-	// [Migrate to Amazon GameLift server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	OperatingSystem OperatingSystem
 
 	// The Amazon GameLift Server SDK version used to develop your game server.
@@ -293,12 +293,12 @@ type Compute struct {
 	// The type of operating system on the compute resource.
 	//
 	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
-	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use Amazon GameLift server
-	// SDK 4.x., first update the game server build to server SDK 5.x, and then deploy
-	// to AL2023 instances. See [Migrate to Amazon GameLift server SDK version 5.]
+	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use server SDK version 4.x
+	// for Amazon GameLift, first update the game server build to server SDK 5.x, and
+	// then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
 	//
+	// [Migrate to server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	// [Amazon Linux 2 FAQs]: https://aws.amazon.com/amazon-linux-2/faqs/
-	// [Migrate to Amazon GameLift server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	OperatingSystem OperatingSystem
 
 	// The Amazon EC2 instance type that the fleet uses. For registered computes in an
@@ -627,12 +627,12 @@ type ContainerGroupDefinition struct {
 	// The platform that all containers in the container group definition run on.
 	//
 	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
-	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use Amazon GameLift server
-	// SDK 4.x, first update the game server build to server SDK 5.x, and then deploy
-	// to AL2023 instances. See [Migrate to Amazon GameLift server SDK version 5.]
+	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use server SDK version 4.x
+	// for Amazon GameLift, first update the game server build to server SDK 5.x, and
+	// then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
 	//
+	// [Migrate to server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	// [Amazon Linux 2 FAQs]: https://aws.amazon.com/amazon-linux-2/faqs/
-	// [Migrate to Amazon GameLift server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	OperatingSystem ContainerOperatingSystem
 
 	// Current status of the container group definition resource. Values include:
@@ -1083,7 +1083,9 @@ type Event struct {
 	//
 	//   - SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT -- The server process did not
 	//   call InitSDK() within the time expected (5 minutes). Check your game session
-	//   log to see why InitSDK() was not called in time.
+	//   log to see why InitSDK() was not called in time. This event is not emitted for
+	//   managed container fleets and Anywhere fleets unless they're deployed with the
+	//   Amazon GameLift Agent.
 	//
 	//   - SERVER_PROCESS_PROCESS_READY_TIMEOUT -- The server process did not call
 	//   ProcessReady() within the time expected (5 minutes) after calling InitSDK() .
@@ -1169,7 +1171,7 @@ type FilterConfiguration struct {
 // based on the fleet's compute type, as follows:
 //
 //   - EC2 fleet attributes identify a Build resource (for fleets with customer
-//     game server builds) or a Script resource (for Realtime Servers fleets).
+//     game server builds) or a Script resource (for Amazon GameLift Realtime fleets).
 //
 //   - Amazon GameLift Anywhere fleets have an abbreviated set of attributes,
 //     because most fleet configurations are set directly on the fleet's computes.
@@ -1295,12 +1297,12 @@ type FleetAttributes struct {
 	// fleet. This attribute is used with fleets where ComputeType is EC2 .
 	//
 	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
-	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use Amazon GameLift server
-	// SDK 4.x., first update the game server build to server SDK 5.x, and then deploy
-	// to AL2023 instances. See [Migrate to Amazon GameLift server SDK version 5.]
+	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use server SDK version 4.x
+	// for Amazon GameLift, first update the game server build to server SDK 5.x, and
+	// then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
 	//
+	// [Migrate to server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	// [Amazon Linux 2 FAQs]: https://aws.amazon.com/amazon-linux-2/faqs/
-	// [Migrate to Amazon GameLift server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	OperatingSystem OperatingSystem
 
 	// A policy that puts limits on the number of game sessions that a player can
@@ -2254,13 +2256,12 @@ type GameSessionPlacement struct {
 	// until placement status is FULFILLED .
 	Port *int32
 
-	// A prioritized list of locations to use with a game session placement request
-	// and instructions on how to use it. This list overrides a queue's prioritized
-	// location list for a single game session placement request only. The list can
-	// include Amazon Web Services Regions, local zones, and custom locations (for
-	// Anywhere fleets). The fallback strategy instructs Amazon GameLift to use the
-	// override list for the first placement attempt only or for all placement
-	// attempts.
+	// An alternative priority list of locations that's included with a game session
+	// placement request. When provided, the list overrides a queue's location order
+	// list for this game session placement request only. The list might include Amazon
+	// Web Services Regions, local zones, and custom locations (for Anywhere fleets).
+	// The fallback strategy tells Amazon GameLift what action to take (if any) in the
+	// event that it failed to place a new game session.
 	PriorityConfigurationOverride *PriorityConfigurationOverride
 
 	// Time stamp indicating when this request was placed in the queue. Format is a
@@ -2404,12 +2405,12 @@ type Instance struct {
 	// Operating system that is running on this EC2 instance.
 	//
 	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
-	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use Amazon GameLift server
-	// SDK 4.x., first update the game server build to server SDK 5.x, and then deploy
-	// to AL2023 instances. See [Migrate to Amazon GameLift server SDK version 5.]
+	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use server SDK version 4.x
+	// for Amazon GameLift, first update the game server build to server SDK 5.x, and
+	// then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
 	//
+	// [Migrate to server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	// [Amazon Linux 2 FAQs]: https://aws.amazon.com/amazon-linux-2/faqs/
-	// [Migrate to Amazon GameLift server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	OperatingSystem OperatingSystem
 
 	// Current status of the instance. Possible statuses include the following:
@@ -2509,8 +2510,8 @@ type InstanceDefinition struct {
 // address/port number combination, which must fall into the fleet's allowed
 // ranges.
 //
-// For Realtime Servers fleets, Amazon GameLift automatically opens two port
-// ranges, one for TCP messaging and one for UDP.
+// For Amazon GameLift Realtime fleets, Amazon GameLift automatically opens two
+// port ranges, one for TCP messaging and one for UDP.
 type IpPermission struct {
 
 	// A starting value for a range of allowed port numbers.
@@ -2694,7 +2695,8 @@ type LogConfiguration struct {
 	//   that you define. Each container emits a log stream, which is organized in the
 	//   log group.
 	//
-	//   - S3 -- Store logs in an Amazon S3 bucket that you define.
+	//   - S3 -- Store logs in an Amazon S3 bucket that you define. This bucket must
+	//   reside in the fleet's home Amazon Web Services Region.
 	//
 	//   - NONE -- Don't collect container logs.
 	LogDestination LogDestination
@@ -3162,26 +3164,25 @@ type PlayerSession struct {
 	noSmithyDocumentSerde
 }
 
-// Custom prioritization settings for a game session queue to use when searching
-// for available game servers to place new game sessions. This configuration
-// replaces the default FleetIQ prioritization process.
+// Custom prioritization settings to use with a game session queue. Prioritization
+// settings determine how the queue selects a game hosting resource to start a new
+// game session. This configuration replaces the default prioritization process for
+// queues.
 //
-// By default, a queue makes placements based on the following default
-// prioritizations:
+// By default, a queue makes game session placements based on the following
+// criteria:
 //
-//   - If player latency data is included in a game session request, Amazon
-//     GameLift prioritizes placing game sessions where the average player latency is
-//     lowest. Amazon GameLift re-orders the queue's destinations and locations (for
-//     multi-location fleets) based on the following priorities: (1) the lowest average
-//     latency across all players, (2) the lowest hosting cost, (3) the queue's default
-//     destination order, and then (4), an alphabetic list of locations.
+//   - When a game session request does not include player latency data, Amazon
+//     GameLift places game sessions based on the following priorities: (1) the queue's
+//     default destination order, and (2) for multi-location fleets, an alphabetic list
+//     of locations.
 //
-//   - If player latency data is not included, Amazon GameLift prioritizes placing
-//     game sessions in the queue's first destination. If that fleet has multiple
-//     locations, the game session is placed on the first location (when listed
-//     alphabetically). Amazon GameLift re-orders the queue's destinations and
-//     locations (for multi-location fleets) based on the following priorities: (1) the
-//     queue's default destination order, and then (2) an alphabetic list of locations.
+//   - When a game session request includes player latency data, Amazon GameLift
+//     re-orders the queue's destinations to make placements where the average player
+//     latency is lowest. It reorders based the following priorities: (1) the lowest
+//     average latency across all players, (2) the lowest hosting cost, (3) the queue's
+//     default destination order, and (4) for multi-location fleets, an alphabetic list
+//     of locations.
 type PriorityConfiguration struct {
 
 	// The prioritization order to use for fleet locations, when the PriorityOrder
@@ -3199,9 +3200,9 @@ type PriorityConfiguration struct {
 	//   latency is lowest. Player latency data is provided in each game session
 	//   placement request.
 	//
-	//   - COST -- Amazon GameLift prioritizes destinations with the lowest current
-	//   hosting costs. Cost is evaluated based on the location, instance type, and fleet
-	//   type (Spot or On-Demand) of each destination in the queue.
+	//   - COST -- Amazon GameLift prioritizes queue destinations with the lowest
+	//   current hosting costs. Cost is evaluated based on the destination's location,
+	//   instance type, and fleet type (Spot or On-Demand).
 	//
 	//   - DESTINATION -- Amazon GameLift prioritizes based on the list order of
 	//   destinations in the queue configuration.
@@ -3214,16 +3215,16 @@ type PriorityConfiguration struct {
 }
 
 // An alternate list of prioritized locations for use with a game session queue.
-// When this property is included in a [StartGameSessionPlacement]request, this list overrides the queue's
-// default location prioritization, as defined in the queue's PriorityConfigurationsetting
-// (LocationOrder). This property overrides the queue's default priority list for
-// individual placement requests only. Use this property only with queues that have
-// a PriorityConfiguration setting that prioritizes first.
+// When this property is included in a [StartGameSessionPlacement]request, the alternate list overrides the
+// queue's default location priorities, as defined in the queue's PriorityConfigurationsetting
+// (LocationOrder). The override is valid for an individual placement request only.
+// Use this property only with queues that have a PriorityConfiguration setting
+// that prioritizes LOCATION first.
 //
 // A priority configuration override list does not override a queue's
 // FilterConfiguration setting, if the queue has one. Filter configurations are
 // used to limit placements to a subset of the locations in a queue's destinations.
-// If the override list includes a location that's not included in the
+// If the override list includes a location that's not on in the
 // FilterConfiguration allowed list, Amazon GameLift won't attempt to place a game
 // session there.
 //
@@ -3239,17 +3240,14 @@ type PriorityConfigurationOverride struct {
 	// This member is required.
 	LocationOrder []string
 
-	// Instructions for how to use the override list if the first round of placement
-	// attempts fails. The first round is a failure if Amazon GameLift searches all
-	// listed locations, in all of the queue's destinations, without finding an
-	// available hosting resource for a new game session. Valid strategies include:
+	// Instructions for how to proceed if placement fails in every location on the
+	// priority override list. Valid strategies include:
 	//
-	//   - DEFAULT_AFTER_SINGLE_PASS -- After the first round of placement attempts,
-	//   discard the override list and use the queue's default location priority list.
-	//   Continue to use the queue's default list until the placement request times out.
+	//   - DEFAULT_AFTER_SINGLE_PASS -- After attempting to place a new game session in
+	//   every location on the priority override list, try to place a game session in
+	//   queue's other locations. This is the default behavior.
 	//
-	//   - NONE -- Continue to use the override list for all rounds of placement
-	//   attempts until the placement request times out.
+	//   - NONE -- Limit placements to locations on the priority override list only.
 	PlacementFallbackStrategy PlacementFallbackStrategy
 
 	noSmithyDocumentSerde
@@ -3314,9 +3312,9 @@ type RoutingStrategy struct {
 
 // A set of instructions that define the set of server processes to run on
 // computes in a fleet. Server processes run either an executable in a custom game
-// build or a Realtime Servers script. Amazon GameLift launches the processes,
-// manages their life cycle, and replaces them as needed. Computes check regularly
-// for an updated runtime configuration.
+// build or a Amazon GameLift Realtime script. Amazon GameLift launches the
+// processes, manages their life cycle, and replaces them as needed. Computes check
+// regularly for an updated runtime configuration.
 //
 // An Amazon GameLift instance is limited to 50 processes running concurrently. To
 // calculate the total number of processes defined in a runtime configuration, add
@@ -3548,8 +3546,8 @@ type Script struct {
 }
 
 // A set of instructions for launching server processes on fleet computes. Server
-// processes run either an executable in a custom game build or a Realtime Servers
-// script. Server process configurations are part of a fleet's runtime
+// processes run either an executable in a custom game build or a Amazon GameLift
+// Realtime script. Server process configurations are part of a fleet's runtime
 // configuration.
 type ServerProcess struct {
 

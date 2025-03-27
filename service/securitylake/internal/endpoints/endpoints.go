@@ -224,6 +224,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "securitylake-fips.us-east-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "securitylake-fips.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-east-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -231,6 +237,12 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "securitylake-fips.us-east-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "securitylake-fips.us-east-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-west-1",
@@ -242,6 +254,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "securitylake-fips.us-west-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "securitylake-fips.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -249,6 +267,12 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "securitylake-fips.us-west-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "securitylake-fips.us-west-2.api.aws",
 			},
 		},
 	},
@@ -416,6 +440,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "securitylake.us-gov-east-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "securitylake.us-gov-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-gov-east-1-fips",
 			}: endpoints.Endpoint{
 				Hostname: "securitylake.us-gov-east-1.amazonaws.com",
@@ -432,6 +462,12 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "securitylake.us-gov-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "securitylake.us-gov-west-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1-fips",

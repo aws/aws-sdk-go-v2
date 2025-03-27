@@ -1,0 +1,8 @@
+{
+    "id": "858cda07-6bf2-40ed-89b6-023f94abcfd9",
+    "type": "feature",
+    "description": "add: recovery mode for SageMaker Studio apps",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

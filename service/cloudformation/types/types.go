@@ -913,12 +913,15 @@ type ResourceScanSummary struct {
 	// The Amazon Resource Name (ARN) of the resource scan.
 	ResourceScanId *string
 
+	// The scan type that has been completed.
+	ScanType ScanType
+
 	// The time that the resource scan was started.
 	StartTime *time.Time
 
 	// Status of the resource scan.
 	//
-	// INPROGRESS
+	// IN_PROGRESS
 	//
 	// The resource scan is still in progress.
 	//
@@ -1092,6 +1095,25 @@ type RollbackTrigger struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter that is used to specify which resource types to scan.
+type ScanFilter struct {
+
+	// An array of strings where each string represents an Amazon Web Services
+	// resource type you want to scan. Each string defines the resource type using the
+	// format AWS::ServiceName::ResourceType , for example, AWS::DynamoDB::Table . For
+	// the full list of supported resource types, see the [Resource type support]table in the CloudFormation
+	// User Guide.
+	//
+	// To scan all resource types within a service, you can use a wildcard,
+	// represented by an asterisk ( * ). You can place a asterisk at only the end of
+	// the string, for example, AWS::S3::* .
+	//
+	// [Resource type support]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
+	Types []string
 
 	noSmithyDocumentSerde
 }
@@ -2447,6 +2469,9 @@ type StackSetOperation struct {
 // For more information about maximum concurrent accounts and failure tolerance,
 // see [Stack set operation options].
 //
+// StackSetOperationPreferences don't apply to AutoDeployment , even if it's
+// enabled.
+//
 // [Stack set operation options]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-ops-options
 type StackSetOperationPreferences struct {
 
@@ -2531,8 +2556,6 @@ type StackSetOperationPreferences struct {
 	RegionConcurrencyType RegionConcurrencyType
 
 	// The order of the Regions where you want to perform the stack operation.
-	//
-	// RegionOrder isn't followed if AutoDeployment is enabled.
 	RegionOrder []string
 
 	noSmithyDocumentSerde

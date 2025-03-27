@@ -141,235 +141,390 @@ var defaultPartitions = endpoints.Partitions{
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
 				Region: "af-south-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.af-south-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "af-south-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "af-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.af-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.ap-east-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ap-east-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.ap-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.ap-northeast-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ap-northeast-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-northeast-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.ap-northeast-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.ap-northeast-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ap-northeast-2",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-northeast-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.ap-northeast-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-3",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.ap-northeast-3.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ap-northeast-3",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-northeast-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.ap-northeast-3.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-south-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.ap-south-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ap-south-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.ap-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-south-2",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.ap-south-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ap-south-2",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-south-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.ap-south-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.ap-southeast-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ap-southeast-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.ap-southeast-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-2",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.ap-southeast-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ap-southeast-2",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.ap-southeast-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-3",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.ap-southeast-3.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ap-southeast-3",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.ap-southeast-3.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-4",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.ap-southeast-4.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ap-southeast-4",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-4",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.ap-southeast-4.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ca-central-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.ca-central-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ca-central-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "applicationinsights-fips.ca-central-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights-fips.ca-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.ca-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ca-west-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.ca-west-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ca-west-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "applicationinsights-fips.ca-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights-fips.ca-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.ca-west-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-central-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.eu-central-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "eu-central-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.eu-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-central-2",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.eu-central-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "eu-central-2",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-central-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.eu-central-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-north-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.eu-north-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "eu-north-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-north-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.eu-north-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-south-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.eu-south-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "eu-south-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.eu-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-south-2",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.eu-south-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "eu-south-2",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-south-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.eu-south-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-west-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.eu-west-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "eu-west-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.eu-west-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-west-2",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.eu-west-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "eu-west-2",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-west-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.eu-west-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-west-3",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.eu-west-3.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "eu-west-3",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-west-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.eu-west-3.api.aws",
 			},
 			endpoints.EndpointKey{
-				Region: "il-central-1",
+				Region: "fips-ca-central-1",
 			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.il-central-1.amazonaws.com",
+				Hostname: "applicationinsights-fips.ca-central-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
-					Region: "il-central-1",
+					Region: "ca-central-1",
 				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
-				Region: "me-central-1",
+				Region: "fips-ca-west-1",
 			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.me-central-1.amazonaws.com",
+				Hostname: "applicationinsights-fips.ca-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
-					Region: "me-central-1",
+					Region: "ca-west-1",
 				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
-				Region: "me-south-1",
+				Region: "fips-us-east-1",
 			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.me-south-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "me-south-1",
-				},
-			},
-			endpoints.EndpointKey{
-				Region: "sa-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.sa-east-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "sa-east-1",
-				},
-			},
-			endpoints.EndpointKey{
-				Region: "us-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.us-east-1.amazonaws.com",
+				Hostname: "applicationinsights-fips.us-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",
 				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
-				Region: "us-east-2",
+				Region: "fips-us-east-2",
 			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.us-east-2.amazonaws.com",
+				Hostname: "applicationinsights-fips.us-east-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-2",
 				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
-				Region: "us-west-1",
+				Region: "fips-us-west-1",
 			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.us-west-1.amazonaws.com",
+				Hostname: "applicationinsights-fips.us-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-1",
 				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
-				Region: "us-west-2",
+				Region: "fips-us-west-2",
 			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.us-west-2.amazonaws.com",
+				Hostname: "applicationinsights-fips.us-west-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-2",
 				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "il-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "il-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.il-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "me-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "me-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.me-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "me-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "me-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.me-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "sa-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "sa-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.sa-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "us-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "applicationinsights-fips.us-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights-fips.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "us-east-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "applicationinsights-fips.us-east-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights-fips.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "us-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "applicationinsights-fips.us-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights-fips.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "us-west-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "applicationinsights-fips.us-west-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights-fips.us-west-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.us-west-2.api.aws",
 			},
 		},
 	},
@@ -410,19 +565,21 @@ var defaultPartitions = endpoints.Partitions{
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
 				Region: "cn-north-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.cn-north-1.amazonaws.com.cn",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "cn-north-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "cn-north-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.cn-north-1.api.amazonwebservices.com.cn",
 			},
 			endpoints.EndpointKey{
 				Region: "cn-northwest-1",
-			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.cn-northwest-1.amazonaws.com.cn",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "cn-northwest-1",
-				},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "cn-northwest-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.cn-northwest-1.api.amazonwebservices.com.cn",
 			},
 		},
 	},
@@ -546,20 +703,64 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
-				Region: "us-gov-east-1",
+				Region: "fips-us-gov-east-1",
 			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.us-gov-east-1.amazonaws.com",
+				Hostname: "applicationinsights-fips.us-gov-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-east-1",
 				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
-				Region: "us-gov-west-1",
+				Region: "fips-us-gov-west-1",
 			}: endpoints.Endpoint{
-				Hostname: "applicationinsights.us-gov-west-1.amazonaws.com",
+				Hostname: "applicationinsights-fips.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "applicationinsights-fips.us-gov-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights-fips.us-gov-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.us-gov-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "applicationinsights-fips.us-gov-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights-fips.us-gov-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "applicationinsights.us-gov-west-1.api.aws",
 			},
 		},
 	},

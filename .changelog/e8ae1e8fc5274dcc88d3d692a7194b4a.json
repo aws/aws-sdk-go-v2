@@ -1,0 +1,8 @@
+{
+    "id": "e8ae1e8f-c527-4dcc-88d3-d692a7194b4a",
+    "type": "feature",
+    "description": "This release will enable two features: Firelens log driver, and Execute Command on Batch jobs on ECS. Both features will be passed through to ECS.",
+    "modules": [
+        "service/batch"
+    ]
+}

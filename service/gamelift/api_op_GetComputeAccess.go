@@ -17,7 +17,15 @@ import (
 //
 // # Request options
 //
-// To request access to a compute, specify the compute name and the fleet ID.
+// Provide the fleet ID and compute name. The compute name varies depending on the
+// type of fleet.
+//
+//   - For a compute in a managed EC2 fleet, provide an instance ID. Each instance
+//     in the fleet is a compute.
+//
+//   - For a compute in a managed container fleet, provide a compute name. In a
+//     container fleet, each game server container group on a fleet instance is
+//     assigned a compute name.
 //
 // # Results
 //
@@ -47,9 +55,10 @@ func (c *Client) GetComputeAccess(ctx context.Context, params *GetComputeAccessI
 type GetComputeAccessInput struct {
 
 	// A unique identifier for the compute resource that you want to connect to. For
-	// an EC2 fleet compute, use the instance ID. Use [https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute.html]to retrieve compute identifiers.
+	// an EC2 fleet, use an instance ID. For a managed container fleet, use a compute
+	// name. You can retrieve a fleet's compute names by calling [ListCompute].
 	//
-	// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute.html]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute.html
+	// [ListCompute]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute.html
 	//
 	// This member is required.
 	ComputeName *string
