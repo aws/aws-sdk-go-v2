@@ -68,6 +68,18 @@
                         "smithy.api#enumValue": "BOTTLEROCKET_x86_64"
                     }
                 },
+                "BOTTLEROCKET_ARM_64_FIPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTTLEROCKET_ARM_64_FIPS"
+                    }
+                },
+                "BOTTLEROCKET_x86_64_FIPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTTLEROCKET_x86_64_FIPS"
+                    }
+                },
                 "BOTTLEROCKET_ARM_64_NVIDIA": {
                     "target": "smithy.api#Unit",
                     "traits": {

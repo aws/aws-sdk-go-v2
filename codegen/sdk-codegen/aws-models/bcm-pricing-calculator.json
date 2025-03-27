@@ -3088,6 +3088,12 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
                     }
+                },
+                "STALE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STALE"
+                    }
                 }
             }
         },
@@ -4181,7 +4187,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to retrieve applicable rate type preferences for the account"
                 },
-                "smithy.api#documentation": "<p>\n        Retrieves the current preferences for the Amazon Web Services Cost Explorer service.\n        </p>",
+                "smithy.api#documentation": "<p>\n        Retrieves the current preferences for Pricing Calculator.\n        </p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -4205,6 +4211,12 @@
                     "target": "com.amazonaws.bcmpricingcalculator#RateTypes",
                     "traits": {
                         "smithy.api#documentation": "<p>\n        The preferred rate types for member accounts.\n        </p>"
+                    }
+                },
+                "standaloneAccountRateTypeSelections": {
+                    "target": "com.amazonaws.bcmpricingcalculator#RateTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                        The preferred rate types for a standalone account.\n                </p>"
                     }
                 }
             },
@@ -6345,7 +6357,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update rate type preferences for the account"
                 },
-                "smithy.api#documentation": "<p>\n                        Updates the preferences for the Amazon Web Services Cost Explorer service.\n                </p>",
+                "smithy.api#documentation": "<p>\n                        Updates the preferences for Pricing Calculator.\n                </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -6362,6 +6374,12 @@
                     "target": "com.amazonaws.bcmpricingcalculator#RateTypes",
                     "traits": {
                         "smithy.api#documentation": "<p>\n                        The updated preferred rate types for member accounts.\n                </p>"
+                    }
+                },
+                "standaloneAccountRateTypeSelections": {
+                    "target": "com.amazonaws.bcmpricingcalculator#RateTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                        The updated preferred rate types for a standalone account.\n                </p>"
                     }
                 }
             },
@@ -6382,6 +6400,12 @@
                     "target": "com.amazonaws.bcmpricingcalculator#RateTypes",
                     "traits": {
                         "smithy.api#documentation": "<p>\n                        The updated preferred rate types for member accounts.\n                </p>"
+                    }
+                },
+                "standaloneAccountRateTypeSelections": {
+                    "target": "com.amazonaws.bcmpricingcalculator#RateTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                        The updated preferred rate types for a standalone account.\n                </p>"
                     }
                 }
             },

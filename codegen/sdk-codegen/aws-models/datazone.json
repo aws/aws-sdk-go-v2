@@ -28463,6 +28463,12 @@
         "com.amazonaws.datazone#RuleAction": {
             "type": "enum",
             "members": {
+                "CREATE_LISTING_CHANGE_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_LISTING_CHANGE_SET"
+                    }
+                },
                 "CREATE_SUBSCRIPTION_REQUEST": {
                     "target": "smithy.api#Unit",
                     "traits": {

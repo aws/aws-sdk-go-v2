@@ -3196,6 +3196,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about an output from a condition node.</p>"
                     }
+                },
+                "nodeActionTrace": {
+                    "target": "com.amazonaws.bedrockagentruntime#FlowTraceNodeActionEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about an action (operation) called by a node.\n            For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3274,6 +3280,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about a trace, which tracks an input or output for a node in the flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceNodeActionEvent": {
+            "type": "structure",
+            "members": {
+                "nodeName": {
+                    "target": "com.amazonaws.bedrockagentruntime#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node that called the operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timestamp": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the operation was called.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the request that the node made to the operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service that the node called.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operationName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation that the node called.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an action (operation) called by a node in an Amazon Bedrock flow. The service generates action events for calls made by prompt nodes,\n            agent nodes, and Amazon Web Services Lambda nodes. </p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagentruntime#FlowTraceNodeInputContent": {
@@ -5867,7 +5917,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n    </note>\n         <p>Sends a prompt for the agent to process and respond to. Note the following fields for the request:</p>\n         <ul>\n            <li>\n               <p>To continue the same conversation with an agent, use the same <code>sessionId</code> value in the request.</p>\n            </li>\n            <li>\n               <p>To activate trace enablement, turn <code>enableTrace</code> to <code>true</code>. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events\">Trace enablement</a>.</p>\n            </li>\n            <li>\n               <p>To stream agent responses, make sure that only orchestration prompt is enabled. Agent streaming is not supported for the following steps:\n        </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Pre-processing</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Post-processing</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Agent with 1 Knowledge base and <code>User Input</code> not enabled</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>End a conversation by setting <code>endSession</code> to <code>true</code>.</p>\n            </li>\n            <li>\n               <p>In the <code>sessionState</code> object, you can include attributes for the session or prompt or, if you configured an action group to return control, results from invocation of the action group.</p>\n            </li>\n         </ul>\n         <p>The response contains both <b>chunk</b> and <b>trace</b> attributes.</p>\n         <p>The final response is returned in the <code>bytes</code> field of the <code>chunk</code> object. The <code>InvokeAgent</code> returns one chunk for the entire interaction.</p>\n         <ul>\n            <li>\n               <p>The <code>attribution</code> object contains citations for parts of the response.</p>\n            </li>\n            <li>\n               <p>If you set <code>enableTrace</code> to <code>true</code> in the request, you can trace the agent's steps and reasoning process that led it to the response.</p>\n            </li>\n            <li>\n               <p>If the action predicted was configured to return control, the response returns parameters for the action, elicited from the user, in the <code>returnControl</code> field.</p>\n            </li>\n            <li>\n               <p>Errors are also surfaced in the response.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n    </note>\n         <p>Sends a prompt for the agent to process and respond to. Note the following fields for the request:</p>\n         <ul>\n            <li>\n               <p>To continue the same conversation with an agent, use the same <code>sessionId</code> value in the request.</p>\n            </li>\n            <li>\n               <p>To activate trace enablement, turn <code>enableTrace</code> to <code>true</code>. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events\">Trace enablement</a>.</p>\n            </li>\n            <li>\n               <p>End a conversation by setting <code>endSession</code> to <code>true</code>.</p>\n            </li>\n            <li>\n               <p>In the <code>sessionState</code> object, you can include attributes for the session or prompt or, if you configured an action group to return control, results from invocation of the action group.</p>\n            </li>\n         </ul>\n         <p>The response contains both <b>chunk</b> and <b>trace</b> attributes.</p>\n         <p>The final response is returned in the <code>bytes</code> field of the <code>chunk</code> object. The <code>InvokeAgent</code> returns one chunk for the entire interaction.</p>\n         <ul>\n            <li>\n               <p>The <code>attribution</code> object contains citations for parts of the response.</p>\n            </li>\n            <li>\n               <p>If you set <code>enableTrace</code> to <code>true</code> in the request, you can trace the agent's steps and reasoning process that led it to the response.</p>\n            </li>\n            <li>\n               <p>If the action predicted was configured to return control, the response returns parameters for the action, elicited from the user, in the <code>returnControl</code> field.</p>\n            </li>\n            <li>\n               <p>Errors are also surfaced in the response.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -10795,7 +10845,7 @@
                 "applyGuardrailInterval": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The guardrail interval to apply as response is generated.\n        </p>",
+                        "smithy.api#documentation": "<p> The guardrail interval to apply as response is generated. By default, the guardrail\n            interval is set to 50 characters. If a larger interval is specified, the response will\n            be generated in larger chunks with fewer <code>ApplyGuardrail</code> calls. The\n            following examples show the response generated for <i>Hello, I am an\n                agent</i> input string.</p>\n         <p>\n            <b>Example response in chunks: Interval set to 3 characters</b>\n         </p>\n         <p>\n            <code>'Hel', 'lo, ','I am', ' an', ' Age', 'nt'</code>\n         </p>\n         <p>Each chunk has at least 3 characters except for the last chunk</p>\n         <p>\n            <b>Example response in chunks: Interval set to 20 or more characters</b>\n         </p>\n         <p>\n            <code>Hello, I am an Agent</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1
                         }
@@ -10803,7 +10853,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Configurations for streaming.</p>"
+                "smithy.api#documentation": "<p>Configurations for streaming.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#SummaryText": {
