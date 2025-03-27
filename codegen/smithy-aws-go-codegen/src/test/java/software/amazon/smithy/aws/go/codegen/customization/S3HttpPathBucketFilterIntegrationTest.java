@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
+import software.amazon.smithy.aws.go.codegen.customization.service.s3.S3HttpPathBucketFilterIntegration;
+import software.amazon.smithy.aws.go.codegen.customization.service.s3.S3ModelUtils;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ShapeId;

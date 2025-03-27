@@ -19,6 +19,7 @@ package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
 import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
+import software.amazon.smithy.aws.go.codegen.customization.service.s3.S3ModelUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;

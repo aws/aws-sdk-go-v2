@@ -27,7 +27,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import software.amazon.smithy.aws.go.codegen.customization.S3ModelUtils;
+import software.amazon.smithy.aws.go.codegen.customization.service.s3.S3ModelUtils;
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
