@@ -1,3 +1,7 @@
+# v1.41.0 (2025-03-27)
+
+* **Feature**: bedrock flow now support node action trace.
+
 # v1.40.0 (2025-03-10)
 
 * **Feature**: Add support for computer use tools

@@ -1,3 +1,7 @@
+# v1.184.0 (2025-03-27)
+
+* **Feature**: add: recovery mode for SageMaker Studio apps
+
 # v1.183.0 (2025-03-25)
 
 * **Feature**: This release adds support for customer-managed KMS keys in Amazon SageMaker Partner AI Apps

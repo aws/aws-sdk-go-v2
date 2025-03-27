@@ -1,8 +1,0 @@
-{
-    "id": "5ceb0e5a-dda9-4e28-8e39-828ef070d78d",
-    "type": "feature",
-    "description": "Update IAM dual-stack endpoints for BJS, IAD and PDT partitions",
-    "modules": [
-        "service/iam"
-    ]
-}

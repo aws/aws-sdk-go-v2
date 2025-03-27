@@ -1,3 +1,7 @@
+# v1.4.0 (2025-03-27)
+
+* **Feature**: Added standaloneAccountRateTypeSelections for GetPreferences and UpdatePreferences APIs. Added STALE enum value to status attribute in GetBillScenario and UpdateBillScenario APIs.
+
 # v1.3.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

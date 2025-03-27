@@ -1,3 +1,7 @@
+# v1.59.0 (2025-03-27)
+
+* **Feature**: Adding support for the new parameter "ScanFilters" in the CloudFormation StartResourceScan API. When this parameter is included, the StartResourceScan API will initiate a scan limited to the resource types specified by the parameter.
+
 # v1.58.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

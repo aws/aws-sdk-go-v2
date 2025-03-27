@@ -1,3 +1,7 @@
+# v1.52.0 (2025-03-27)
+
+* **Feature**: This release will enable two features: Firelens log driver, and Execute Command on Batch jobs on ECS. Both features will be passed through to ECS.
+
 # v1.51.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

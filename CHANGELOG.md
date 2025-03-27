@@ -1,3 +1,30 @@
+# Release (2025-03-27)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.52.0](service/batch/CHANGELOG.md#v1520-2025-03-27)
+  * **Feature**: This release will enable two features: Firelens log driver, and Execute Command on Batch jobs on ECS. Both features will be passed through to ECS.
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.4.0](service/bcmpricingcalculator/CHANGELOG.md#v140-2025-03-27)
+  * **Feature**: Added standaloneAccountRateTypeSelections for GetPreferences and UpdatePreferences APIs. Added STALE enum value to status attribute in GetBillScenario and UpdateBillScenario APIs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.41.0](service/bedrockagentruntime/CHANGELOG.md#v1410-2025-03-27)
+  * **Feature**: bedrock flow now support node action trace.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.59.0](service/cloudformation/CHANGELOG.md#v1590-2025-03-27)
+  * **Feature**: Adding support for the new parameter "ScanFilters" in the CloudFormation StartResourceScan API. When this parameter is included, the StartResourceScan API will initiate a scan limited to the resource types specified by the parameter.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.29.0](service/datazone/CHANGELOG.md#v1290-2025-03-27)
+  * **Feature**: This release adds new action type of Create Listing Changeset for the Metadata Enforcement Rule feature.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.62.0](service/eks/CHANGELOG.md#v1620-2025-03-27)
+  * **Feature**: Added support for BOTTLEROCKET FIPS AMIs to AMI types in US regions.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.41.0](service/gamelift/CHANGELOG.md#v1410-2025-03-27)
+  * **Feature**: Amazon GameLift Servers add support for additional instance types.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.41.0](service/iam/CHANGELOG.md#v1410-2025-03-27)
+  * **Feature**: Update IAM dual-stack endpoints for BJS, IAD and PDT partitions
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.184.0](service/sagemaker/CHANGELOG.md#v11840-2025-03-27)
+  * **Feature**: add: recovery mode for SageMaker Studio apps
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.30.0](service/ssooidc/CHANGELOG.md#v1300-2025-03-27)
+  * **Feature**: This release adds AwsAdditionalDetails in the CreateTokenWithIAM API response.
+
 # Release (2025-03-26)
 
 ## Module Highlights

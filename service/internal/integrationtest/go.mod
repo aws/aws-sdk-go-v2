@@ -2,16 +2,16 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.36.3
-	github.com/aws/aws-sdk-go-v2/config v1.29.11
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.68
+	github.com/aws/aws-sdk-go-v2/config v1.29.12
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.69
 	github.com/aws/aws-sdk-go-v2/service/acm v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/athena v1.50.1
-	github.com/aws/aws-sdk-go-v2/service/batch v1.51.1
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.58.1
+	github.com/aws/aws-sdk-go-v2/service/batch v1.52.0
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.59.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.45.2
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.48.2
@@ -39,13 +39,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.45.0
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/emr v1.48.1
-	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.37.1
+	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.37.2
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.1
-	github.com/aws/aws-sdk-go-v2/service/gamelift v1.40.1
+	github.com/aws/aws-sdk-go-v2/service/gamelift v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/glue v1.107.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.1
-	github.com/aws/aws-sdk-go-v2/service/iam v1.40.2
+	github.com/aws/aws-sdk-go-v2/service/iam v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.1
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.33.1
@@ -55,7 +55,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.24.1
-	github.com/aws/aws-sdk-go-v2/service/polly v1.48.0
+	github.com/aws/aws-sdk-go-v2/service/polly v1.48.1
 	github.com/aws/aws-sdk-go-v2/service/rds v1.94.2
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.54.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.46.1
@@ -71,12 +71,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/shield v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.31.2
 	github.com/aws/aws-sdk-go-v2/service/sns v1.34.2
-	github.com/aws/aws-sdk-go-v2/service/sqs v1.38.2
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.38.3
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.58.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.33.17
 	github.com/aws/aws-sdk-go-v2/service/support v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.30.1
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.25.1
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.25.2
 	github.com/aws/aws-sdk-go-v2/service/waf v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.55.1
@@ -85,7 +85,7 @@ require (
 
 require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.10 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.64 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.65 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.30 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.34 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.34 // indirect
@@ -97,7 +97,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.12.15 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.18.15 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sso v1.25.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.29.2 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.30.0 // indirect
 )
 
 go 1.22

@@ -1,3 +1,7 @@
+# v1.41.0 (2025-03-27)
+
+* **Feature**: Amazon GameLift Servers add support for additional instance types.
+
 # v1.40.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

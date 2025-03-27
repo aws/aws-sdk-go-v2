@@ -1,8 +1,0 @@
-{
-    "id": "a24eab93-3d24-4d9a-9d4d-6599db45817e",
-    "type": "feature",
-    "description": "Added support for BOTTLEROCKET FIPS AMIs to AMI types in US regions.",
-    "modules": [
-        "service/eks"
-    ]
-}

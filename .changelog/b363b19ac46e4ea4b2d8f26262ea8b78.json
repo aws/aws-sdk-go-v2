@@ -1,8 +1,0 @@
-{
-    "id": "b363b19a-c46e-4ea4-b2d8-f26262ea8b78",
-    "type": "feature",
-    "description": "Added standaloneAccountRateTypeSelections for GetPreferences and UpdatePreferences APIs. Added STALE enum value to status attribute in GetBillScenario and UpdateBillScenario APIs.",
-    "modules": [
-        "service/bcmpricingcalculator"
-    ]
-}
