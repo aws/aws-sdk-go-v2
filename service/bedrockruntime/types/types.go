@@ -378,12 +378,12 @@ type Message struct {
 	// The message content.
 	//
 	// This member is required.
-	Content []ContentBlock
+	Content []ContentBlock `json:"content"`
 
 	// The role that the message plays in the message.
 	//
 	// This member is required.
-	Role ConversationRole
+	Role ConversationRole `json:"role"`
 
 	noSmithyDocumentSerde
 }
