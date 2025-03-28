@@ -11695,6 +11695,11 @@ func awsRestjson1_serializeDocumentEndpointConfiguration(v *types.EndpointConfig
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.Types != nil {
 		ok := object.Key("types")
 		if err := awsRestjson1_serializeDocumentListOfEndpointType(v.Types, ok); err != nil {

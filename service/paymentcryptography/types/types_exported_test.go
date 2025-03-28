@@ -7,10 +7,31 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
 )
 
+func ExampleDiffieHellmanDerivationData_outputUsage() {
+	var union types.DiffieHellmanDerivationData
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DiffieHellmanDerivationDataMemberSharedInformation:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleExportKeyMaterial_outputUsage() {
 	var union types.ExportKeyMaterial
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock:
+		_ = v.Value // Value is types.ExportDiffieHellmanTr31KeyBlock
+
 	case *types.ExportKeyMaterialMemberKeyCryptogram:
 		_ = v.Value // Value is types.ExportKeyCryptogram
 
@@ -32,11 +53,15 @@ func ExampleExportKeyMaterial_outputUsage() {
 var _ *types.ExportKeyCryptogram
 var _ *types.ExportTr34KeyBlock
 var _ *types.ExportTr31KeyBlock
+var _ *types.ExportDiffieHellmanTr31KeyBlock
 
 func ExampleImportKeyMaterial_outputUsage() {
 	var union types.ImportKeyMaterial
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock:
+		_ = v.Value // Value is types.ImportDiffieHellmanTr31KeyBlock
+
 	case *types.ImportKeyMaterialMemberKeyCryptogram:
 		_ = v.Value // Value is types.ImportKeyCryptogram
 
@@ -62,6 +87,7 @@ func ExampleImportKeyMaterial_outputUsage() {
 }
 
 var _ *types.RootCertificatePublicKey
+var _ *types.ImportDiffieHellmanTr31KeyBlock
 var _ *types.ImportKeyCryptogram
 var _ *types.TrustedCertificatePublicKey
 var _ *types.ImportTr34KeyBlock

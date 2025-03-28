@@ -402,8 +402,8 @@ type DomainName struct {
 	// DomainName migration.
 	DomainNameStatusMessage *string
 
-	// The endpoint configuration of this DomainName showing the endpoint types of the
-	// domain name.
+	// The endpoint configuration of this DomainName showing the endpoint types and IP
+	// address types of the domain name.
 	EndpointConfiguration *EndpointConfiguration
 
 	// A stringified JSON policy document that applies to the API Gateway Management
@@ -483,8 +483,15 @@ type DomainNameAccessAssociation struct {
 }
 
 // The endpoint configuration to indicate the types of endpoints an API (RestApi)
-// or its custom domain name (DomainName) has.
+// or its custom domain name (DomainName) has and the IP address types that can
+// invoke it.
 type EndpointConfiguration struct {
+
+	// The IP address types that can invoke an API (RestApi) or a DomainName. Use ipv4
+	// to allow only IPv4 addresses to invoke an API or DomainName, or use dualstack
+	// to allow both IPv4 and IPv6 addresses to invoke an API or a DomainName. For the
+	// PRIVATE endpoint type, only dualstack is supported.
+	IpAddressType IpAddressType
 
 	// A list of endpoint types of an API (RestApi) or its custom domain name
 	// (DomainName). For an edge-optimized API and its custom domain name, the endpoint
@@ -1052,8 +1059,8 @@ type RestApi struct {
 	// endpoint.
 	DisableExecuteApiEndpoint bool
 
-	// The endpoint configuration of this RestApi showing the endpoint types of the
-	// API.
+	// The endpoint configuration of this RestApi showing the endpoint types and IP
+	// address types of the API.
 	EndpointConfiguration *EndpointConfiguration
 
 	// The API's identifier. This identifier is unique across all of your APIs in API

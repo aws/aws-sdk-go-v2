@@ -78,6 +78,10 @@ type CreateKeyInput struct {
 	// This member is required.
 	KeyAttributes *types.KeyAttributes
 
+	// The cryptographic usage of an ECDH derived key as deﬁned in section A.5.2 of
+	// the TR-31 spec.
+	DeriveKeyUsage types.DeriveKeyUsage
+
 	// Specifies whether to enable the key. If the key is enabled, it is activated for
 	// use within the service. If the key is not enabled, then it is created but not
 	// activated. The default value is enabled.

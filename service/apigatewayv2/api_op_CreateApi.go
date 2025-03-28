@@ -74,6 +74,9 @@ type CreateApiInput struct {
 	// WebSocket APIs.
 	DisableSchemaValidation *bool
 
+	// The IP address types that can invoke the API.
+	IpAddressType types.IpAddressType
+
 	// This property is part of quick create. If you don't specify a routeKey, a
 	// default route of $default is created. The $default route acts as a catch-all
 	// for any request made to your API, for a particular stage. The $default route
@@ -148,6 +151,9 @@ type CreateApiOutput struct {
 	// properties of your OpenAPI definition which are ignored during import. Supported
 	// only for HTTP APIs.
 	ImportInfo []string
+
+	// The IP address types that can invoke the API.
+	IpAddressType types.IpAddressType
 
 	// The name of the API.
 	Name *string

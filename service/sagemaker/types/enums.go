@@ -6491,6 +6491,25 @@ func (RedshiftResultFormat) Values() []RedshiftResultFormat {
 	}
 }
 
+type Relation string
+
+// Enum values for Relation
+const (
+	RelationEqualTo              Relation = "EqualTo"
+	RelationGreaterThanOrEqualTo Relation = "GreaterThanOrEqualTo"
+)
+
+// Values returns all known values for Relation. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Relation) Values() []Relation {
+	return []Relation{
+		"EqualTo",
+		"GreaterThanOrEqualTo",
+	}
+}
+
 type RepositoryAccessMode string
 
 // Enum values for RepositoryAccessMode

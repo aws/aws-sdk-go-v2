@@ -1,0 +1,8 @@
+{
+    "id": "f05bf6f8-a3fd-484d-8c17-badd1d041037",
+    "type": "feature",
+    "description": "TransformAmiVersion for Batch Transform and SageMaker Search Service Aggregate Search API Extension",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

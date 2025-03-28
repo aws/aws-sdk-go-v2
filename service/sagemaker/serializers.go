@@ -33290,6 +33290,11 @@ func awsAwsjson11_serializeDocumentTransformResources(v *types.TransformResource
 		ok.String(string(v.InstanceType))
 	}
 
+	if v.TransformAmiVersion != nil {
+		ok := object.Key("TransformAmiVersion")
+		ok.String(*v.TransformAmiVersion)
+	}
+
 	if v.VolumeKmsKeyId != nil {
 		ok := object.Key("VolumeKmsKeyId")
 		ok.String(*v.VolumeKmsKeyId)

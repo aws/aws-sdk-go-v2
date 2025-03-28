@@ -24833,6 +24833,15 @@ func awsRestjson1_deserializeDocumentEndpointConfiguration(v **types.EndpointCon
 
 	for key, value := range shape {
 		switch key {
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IpAddressType(jtv)
+			}
+
 		case "types":
 			if err := awsRestjson1_deserializeDocumentListOfEndpointType(&sv.Types, value); err != nil {
 				return err

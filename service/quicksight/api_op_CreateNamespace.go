@@ -21,7 +21,7 @@ import (
 // Amazon Web Services account is subscribed to Amazon QuickSight. The namespace
 // must be unique within the Amazon Web Services account. By default, there is a
 // limit of 100 namespaces per Amazon Web Services account. To increase your limit,
-// create a ticket with Amazon Web Services Support.
+// create a ticket with Amazon Web ServicesSupport.
 func (c *Client) CreateNamespace(ctx context.Context, params *CreateNamespaceInput, optFns ...func(*Options)) (*CreateNamespaceOutput, error) {
 	if params == nil {
 		params = &CreateNamespaceInput{}

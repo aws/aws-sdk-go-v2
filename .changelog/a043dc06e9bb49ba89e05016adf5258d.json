@@ -1,0 +1,8 @@
+{
+    "id": "a043dc06-e9bb-49ba-89e0-5016adf5258d",
+    "type": "feature",
+    "description": "RLS permission dataset with userAs: RLS_RULES flag, Q in QuickSight/Threshold Alerts/Schedules/Snapshots in QS embedding, toggle dataset refresh email alerts via API, transposed table with options: column width, type and index, toggle Q\u0026A on dashboards, Oracle Service Name when creating data source.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

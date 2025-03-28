@@ -2,6 +2,59 @@
 
 package types
 
+type DeriveKeyUsage string
+
+// Enum values for DeriveKeyUsage
+const (
+	DeriveKeyUsageTr31B0BaseDerivationKey          DeriveKeyUsage = "TR31_B0_BASE_DERIVATION_KEY"
+	DeriveKeyUsageTr31C0CardVerificationKey        DeriveKeyUsage = "TR31_C0_CARD_VERIFICATION_KEY"
+	DeriveKeyUsageTr31D0SymmetricDataEncryptionKey DeriveKeyUsage = "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY"
+	DeriveKeyUsageTr31E0EmvMkeyAppCryptograms      DeriveKeyUsage = "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS"
+	DeriveKeyUsageTr31E1EmvMkeyConfidentiality     DeriveKeyUsage = "TR31_E1_EMV_MKEY_CONFIDENTIALITY"
+	DeriveKeyUsageTr31E2EmvMkeyIntegrity           DeriveKeyUsage = "TR31_E2_EMV_MKEY_INTEGRITY"
+	DeriveKeyUsageTr31E4EmvMkeyDynamicNumbers      DeriveKeyUsage = "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS"
+	DeriveKeyUsageTr31E5EmvMkeyCardPersonalization DeriveKeyUsage = "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION"
+	DeriveKeyUsageTr31E6EmvMkeyOther               DeriveKeyUsage = "TR31_E6_EMV_MKEY_OTHER"
+	DeriveKeyUsageTr31K0KeyEncryptionKey           DeriveKeyUsage = "TR31_K0_KEY_ENCRYPTION_KEY"
+	DeriveKeyUsageTr31K1KeyBlockProtectionKey      DeriveKeyUsage = "TR31_K1_KEY_BLOCK_PROTECTION_KEY"
+	DeriveKeyUsageTr31M3Iso97973MacKey             DeriveKeyUsage = "TR31_M3_ISO_9797_3_MAC_KEY"
+	DeriveKeyUsageTr31M1Iso97971MacKey             DeriveKeyUsage = "TR31_M1_ISO_9797_1_MAC_KEY"
+	DeriveKeyUsageTr31M6Iso97975CmacKey            DeriveKeyUsage = "TR31_M6_ISO_9797_5_CMAC_KEY"
+	DeriveKeyUsageTr31M7HmacKey                    DeriveKeyUsage = "TR31_M7_HMAC_KEY"
+	DeriveKeyUsageTr31P0PinEncryptionKey           DeriveKeyUsage = "TR31_P0_PIN_ENCRYPTION_KEY"
+	DeriveKeyUsageTr31P1PinGenerationKey           DeriveKeyUsage = "TR31_P1_PIN_GENERATION_KEY"
+	DeriveKeyUsageTr31V1Ibm3624PinVerificationKey  DeriveKeyUsage = "TR31_V1_IBM3624_PIN_VERIFICATION_KEY"
+	DeriveKeyUsageTr31V2VisaPinVerificationKey     DeriveKeyUsage = "TR31_V2_VISA_PIN_VERIFICATION_KEY"
+)
+
+// Values returns all known values for DeriveKeyUsage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeriveKeyUsage) Values() []DeriveKeyUsage {
+	return []DeriveKeyUsage{
+		"TR31_B0_BASE_DERIVATION_KEY",
+		"TR31_C0_CARD_VERIFICATION_KEY",
+		"TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY",
+		"TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS",
+		"TR31_E1_EMV_MKEY_CONFIDENTIALITY",
+		"TR31_E2_EMV_MKEY_INTEGRITY",
+		"TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS",
+		"TR31_E5_EMV_MKEY_CARD_PERSONALIZATION",
+		"TR31_E6_EMV_MKEY_OTHER",
+		"TR31_K0_KEY_ENCRYPTION_KEY",
+		"TR31_K1_KEY_BLOCK_PROTECTION_KEY",
+		"TR31_M3_ISO_9797_3_MAC_KEY",
+		"TR31_M1_ISO_9797_1_MAC_KEY",
+		"TR31_M6_ISO_9797_5_CMAC_KEY",
+		"TR31_M7_HMAC_KEY",
+		"TR31_P0_PIN_ENCRYPTION_KEY",
+		"TR31_P1_PIN_GENERATION_KEY",
+		"TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
+		"TR31_V2_VISA_PIN_VERIFICATION_KEY",
+	}
+}
+
 type KeyAlgorithm string
 
 // Enum values for KeyAlgorithm
@@ -16,6 +69,7 @@ const (
 	KeyAlgorithmRsa4096     KeyAlgorithm = "RSA_4096"
 	KeyAlgorithmEccNistP256 KeyAlgorithm = "ECC_NIST_P256"
 	KeyAlgorithmEccNistP384 KeyAlgorithm = "ECC_NIST_P384"
+	KeyAlgorithmEccNistP521 KeyAlgorithm = "ECC_NIST_P521"
 )
 
 // Values returns all known values for KeyAlgorithm. Note that this can be
@@ -34,6 +88,7 @@ func (KeyAlgorithm) Values() []KeyAlgorithm {
 		"RSA_4096",
 		"ECC_NIST_P256",
 		"ECC_NIST_P384",
+		"ECC_NIST_P521",
 	}
 }
 
@@ -76,6 +131,46 @@ func (KeyClass) Values() []KeyClass {
 		"ASYMMETRIC_KEY_PAIR",
 		"PRIVATE_KEY",
 		"PUBLIC_KEY",
+	}
+}
+
+type KeyDerivationFunction string
+
+// Enum values for KeyDerivationFunction
+const (
+	KeyDerivationFunctionNistSp800 KeyDerivationFunction = "NIST_SP800"
+	KeyDerivationFunctionAnsiX963  KeyDerivationFunction = "ANSI_X963"
+)
+
+// Values returns all known values for KeyDerivationFunction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KeyDerivationFunction) Values() []KeyDerivationFunction {
+	return []KeyDerivationFunction{
+		"NIST_SP800",
+		"ANSI_X963",
+	}
+}
+
+type KeyDerivationHashAlgorithm string
+
+// Enum values for KeyDerivationHashAlgorithm
+const (
+	KeyDerivationHashAlgorithmSha256 KeyDerivationHashAlgorithm = "SHA_256"
+	KeyDerivationHashAlgorithmSha384 KeyDerivationHashAlgorithm = "SHA_384"
+	KeyDerivationHashAlgorithmSha512 KeyDerivationHashAlgorithm = "SHA_512"
+)
+
+// Values returns all known values for KeyDerivationHashAlgorithm. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KeyDerivationHashAlgorithm) Values() []KeyDerivationHashAlgorithm {
+	return []KeyDerivationHashAlgorithm{
+		"SHA_256",
+		"SHA_384",
+		"SHA_512",
 	}
 }
 
@@ -225,6 +320,31 @@ func (KeyUsage) Values() []KeyUsage {
 		"TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
 		"TR31_V2_VISA_PIN_VERIFICATION_KEY",
 		"TR31_K2_TR34_ASYMMETRIC_KEY",
+	}
+}
+
+type SymmetricKeyAlgorithm string
+
+// Enum values for SymmetricKeyAlgorithm
+const (
+	SymmetricKeyAlgorithmTdes2key SymmetricKeyAlgorithm = "TDES_2KEY"
+	SymmetricKeyAlgorithmTdes3key SymmetricKeyAlgorithm = "TDES_3KEY"
+	SymmetricKeyAlgorithmAes128   SymmetricKeyAlgorithm = "AES_128"
+	SymmetricKeyAlgorithmAes192   SymmetricKeyAlgorithm = "AES_192"
+	SymmetricKeyAlgorithmAes256   SymmetricKeyAlgorithm = "AES_256"
+)
+
+// Values returns all known values for SymmetricKeyAlgorithm. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SymmetricKeyAlgorithm) Values() []SymmetricKeyAlgorithm {
+	return []SymmetricKeyAlgorithm{
+		"TDES_2KEY",
+		"TDES_3KEY",
+		"AES_128",
+		"AES_192",
+		"AES_256",
 	}
 }
 

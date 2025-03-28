@@ -264,6 +264,15 @@ func awsRestjson1_deserializeOpDocumentCreateApiOutput(v **CreateApiOutput, valu
 				return err
 			}
 
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IpAddressType(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4737,6 +4746,15 @@ func awsRestjson1_deserializeOpDocumentGetApiOutput(v **GetApiOutput, value inte
 		case "importInfo":
 			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.ImportInfo, value); err != nil {
 				return err
+			}
+
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IpAddressType(jtv)
 			}
 
 		case "name":
@@ -9811,6 +9829,15 @@ func awsRestjson1_deserializeOpDocumentImportApiOutput(v **ImportApiOutput, valu
 				return err
 			}
 
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IpAddressType(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10097,6 +10124,15 @@ func awsRestjson1_deserializeOpDocumentReimportApiOutput(v **ReimportApiOutput, 
 		case "importInfo":
 			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.ImportInfo, value); err != nil {
 				return err
+			}
+
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IpAddressType(jtv)
 			}
 
 		case "name":
@@ -10682,6 +10718,15 @@ func awsRestjson1_deserializeOpDocumentUpdateApiOutput(v **UpdateApiOutput, valu
 		case "importInfo":
 			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.ImportInfo, value); err != nil {
 				return err
+			}
+
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IpAddressType(jtv)
 			}
 
 		case "name":
@@ -14083,6 +14128,15 @@ func awsRestjson1_deserializeDocumentApi(v **types.Api, value interface{}) error
 				return err
 			}
 
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IpAddressType(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14877,6 +14931,15 @@ func awsRestjson1_deserializeDocumentDomainNameConfiguration(v **types.DomainNam
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.HostedZoneId = ptr.String(jtv)
+			}
+
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IpAddressType(jtv)
 			}
 
 		case "ownershipVerificationCertificateArn":

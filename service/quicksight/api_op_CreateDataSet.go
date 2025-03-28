@@ -101,6 +101,10 @@ type CreateDataSetInput struct {
 	// the dataset.
 	Tags []types.Tag
 
+	// The usage of the dataset. RLS_RULES must be specified for RLS permission
+	// datasets.
+	UseAs types.DataSetUseAs
+
 	noSmithyDocumentSerde
 }
 

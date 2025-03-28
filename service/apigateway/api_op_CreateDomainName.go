@@ -63,8 +63,8 @@ type CreateDomainNameInput struct {
 	// key.
 	CertificatePrivateKey *string
 
-	// The endpoint configuration of this DomainName showing the endpoint types of the
-	// domain name.
+	// The endpoint configuration of this DomainName showing the endpoint types and IP
+	// address types of the domain name.
 	EndpointConfiguration *types.EndpointConfiguration
 
 	// The mutual TLS authentication configuration for a custom domain name. If
@@ -153,8 +153,8 @@ type CreateDomainNameOutput struct {
 	// DomainName migration.
 	DomainNameStatusMessage *string
 
-	// The endpoint configuration of this DomainName showing the endpoint types of the
-	// domain name.
+	// The endpoint configuration of this DomainName showing the endpoint types and IP
+	// address types of the domain name.
 	EndpointConfiguration *types.EndpointConfiguration
 
 	// A stringified JSON policy document that applies to the API Gateway Management

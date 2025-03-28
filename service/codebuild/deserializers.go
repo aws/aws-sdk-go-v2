@@ -10165,6 +10165,15 @@ func awsAwsjson11_deserializeDocumentProjectCache(v **types.ProjectCache, value 
 
 	for key, value := range shape {
 		switch key {
+		case "cacheNamespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CacheNamespace = ptr.String(jtv)
+			}
+
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -82991,6 +82991,59 @@ func awsAwsjson11_deserializeDocumentTimeSeriesTransformations(v **types.TimeSer
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTotalHits(v **types.TotalHits, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TotalHits
+	if *v == nil {
+		sv = &types.TotalHits{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Relation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Relation to be of type string, got %T instead", value)
+				}
+				sv.Relation = types.Relation(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Value = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTrackingServerSummary(v **types.TrackingServerSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -85455,6 +85508,15 @@ func awsAwsjson11_deserializeDocumentTransformResources(v **types.TransformResou
 					return fmt.Errorf("expected TransformInstanceType to be of type string, got %T instead", value)
 				}
 				sv.InstanceType = types.TransformInstanceType(jtv)
+			}
+
+		case "TransformAmiVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TransformAmiVersion to be of type string, got %T instead", value)
+				}
+				sv.TransformAmiVersion = ptr.String(jtv)
 			}
 
 		case "VolumeKmsKeyId":
@@ -105975,6 +106037,11 @@ func awsAwsjson11_deserializeOpDocumentSearchOutput(v **SearchOutput, value inte
 
 		case "Results":
 			if err := awsAwsjson11_deserializeDocumentSearchResultsList(&sv.Results, value); err != nil {
+				return err
+			}
+
+		case "TotalHits":
+			if err := awsAwsjson11_deserializeDocumentTotalHits(&sv.TotalHits, value); err != nil {
 				return err
 			}
 

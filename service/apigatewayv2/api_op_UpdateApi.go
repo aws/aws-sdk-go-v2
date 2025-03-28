@@ -69,6 +69,9 @@ type UpdateApiInput struct {
 	// WebSocket APIs.
 	DisableSchemaValidation *bool
 
+	// The IP address types that can invoke your API or domain name.
+	IpAddressType types.IpAddressType
+
 	// The name of the API.
 	Name *string
 
@@ -141,6 +144,9 @@ type UpdateApiOutput struct {
 	// properties of your OpenAPI definition which are ignored during import. Supported
 	// only for HTTP APIs.
 	ImportInfo []string
+
+	// The IP address types that can invoke the API.
+	IpAddressType types.IpAddressType
 
 	// The name of the API.
 	Name *string

@@ -5095,6 +5095,55 @@ func validateAmazonOpenSearchParameters(v *types.AmazonOpenSearchParameters) err
 	}
 }
 
+func validateAmazonQInQuickSightConsoleConfigurations(v *types.AmazonQInQuickSightConsoleConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AmazonQInQuickSightConsoleConfigurations"}
+	if v.DataQnA != nil {
+		if err := validateDataQnAConfigurations(v.DataQnA); err != nil {
+			invalidParams.AddNested("DataQnA", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GenerativeAuthoring != nil {
+		if err := validateGenerativeAuthoringConfigurations(v.GenerativeAuthoring); err != nil {
+			invalidParams.AddNested("GenerativeAuthoring", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExecutiveSummary != nil {
+		if err := validateExecutiveSummaryConfigurations(v.ExecutiveSummary); err != nil {
+			invalidParams.AddNested("ExecutiveSummary", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataStories != nil {
+		if err := validateDataStoriesConfigurations(v.DataStories); err != nil {
+			invalidParams.AddNested("DataStories", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAmazonQInQuickSightDashboardConfigurations(v *types.AmazonQInQuickSightDashboardConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AmazonQInQuickSightDashboardConfigurations"}
+	if v.ExecutiveSummary != nil {
+		if err := validateExecutiveSummaryConfigurations(v.ExecutiveSummary); err != nil {
+			invalidParams.AddNested("ExecutiveSummary", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAnalysisDefaults(v *types.AnalysisDefaults) error {
 	if v == nil {
 		return nil
@@ -5887,6 +5936,11 @@ func validateAssetBundleImportJobDataSetOverrideParameters(v *types.AssetBundleI
 	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobDataSetOverrideParameters"}
 	if v.DataSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.DataSetRefreshProperties != nil {
+		if err := validateDataSetRefreshProperties(v.DataSetRefreshProperties); err != nil {
+			invalidParams.AddNested("DataSetRefreshProperties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8993,6 +9047,18 @@ func validateDataPathSort(v *types.DataPathSort) error {
 	}
 }
 
+func validateDataQnAConfigurations(v *types.DataQnAConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataQnAConfigurations"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataSetIdentifierDeclaration(v *types.DataSetIdentifierDeclaration) error {
 	if v == nil {
 		return nil
@@ -9152,9 +9218,7 @@ func validateDataSetRefreshProperties(v *types.DataSetRefreshProperties) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DataSetRefreshProperties"}
-	if v.RefreshConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RefreshConfiguration"))
-	} else if v.RefreshConfiguration != nil {
+	if v.RefreshConfiguration != nil {
 		if err := validateRefreshConfiguration(v.RefreshConfiguration); err != nil {
 			invalidParams.AddNested("RefreshConfiguration", err.(smithy.InvalidParamsError))
 		}
@@ -9425,6 +9489,18 @@ func validateDataSourceSearchFilterList(v []types.DataSourceSearchFilter) error 
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataStoriesConfigurations(v *types.DataStoriesConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataStoriesConfigurations"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -10103,6 +10179,18 @@ func validateExcludePeriodConfiguration(v *types.ExcludePeriodConfiguration) err
 	if len(v.Granularity) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Granularity"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExecutiveSummaryConfigurations(v *types.ExecutiveSummaryConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExecutiveSummaryConfigurations"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -11544,6 +11632,18 @@ func validateGaugeChartVisual(v *types.GaugeChartVisual) error {
 			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGenerativeAuthoringConfigurations(v *types.GenerativeAuthoringConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerativeAuthoringConfigurations"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -16183,6 +16283,18 @@ func validateRdsParameters(v *types.RdsParameters) error {
 	}
 }
 
+func validateRecentSnapshotsConfigurations(v *types.RecentSnapshotsConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecentSnapshotsConfigurations"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRedshiftIAMParameters(v *types.RedshiftIAMParameters) error {
 	if v == nil {
 		return nil
@@ -16443,6 +16555,26 @@ func validateRegisteredUserConsoleFeatureConfigurations(v *types.RegisteredUserC
 			invalidParams.AddNested("SharedView", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AmazonQInQuickSight != nil {
+		if err := validateAmazonQInQuickSightConsoleConfigurations(v.AmazonQInQuickSight); err != nil {
+			invalidParams.AddNested("AmazonQInQuickSight", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Schedules != nil {
+		if err := validateSchedulesConfigurations(v.Schedules); err != nil {
+			invalidParams.AddNested("Schedules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RecentSnapshots != nil {
+		if err := validateRecentSnapshotsConfigurations(v.RecentSnapshots); err != nil {
+			invalidParams.AddNested("RecentSnapshots", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ThresholdAlerts != nil {
+		if err := validateThresholdAlertsConfigurations(v.ThresholdAlerts); err != nil {
+			invalidParams.AddNested("ThresholdAlerts", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -16488,6 +16620,26 @@ func validateRegisteredUserDashboardFeatureConfigurations(v *types.RegisteredUse
 	if v.Bookmarks != nil {
 		if err := validateBookmarksConfigurations(v.Bookmarks); err != nil {
 			invalidParams.AddNested("Bookmarks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AmazonQInQuickSight != nil {
+		if err := validateAmazonQInQuickSightDashboardConfigurations(v.AmazonQInQuickSight); err != nil {
+			invalidParams.AddNested("AmazonQInQuickSight", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Schedules != nil {
+		if err := validateSchedulesConfigurations(v.Schedules); err != nil {
+			invalidParams.AddNested("Schedules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RecentSnapshots != nil {
+		if err := validateRecentSnapshotsConfigurations(v.RecentSnapshots); err != nil {
+			invalidParams.AddNested("RecentSnapshots", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ThresholdAlerts != nil {
+		if err := validateThresholdAlertsConfigurations(v.ThresholdAlerts); err != nil {
+			invalidParams.AddNested("ThresholdAlerts", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -17112,6 +17264,18 @@ func validateScatterPlotVisual(v *types.ScatterPlotVisual) error {
 			invalidParams.AddNested("ColumnHierarchies", err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchedulesConfigurations(v *types.SchedulesConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SchedulesConfigurations"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -18519,6 +18683,11 @@ func validateTableFieldOptions(v *types.TableFieldOptions) error {
 			invalidParams.AddNested("SelectedFieldOptions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TransposedTableOptions != nil {
+		if err := validateTransposedTableOptionList(v.TransposedTableOptions); err != nil {
+			invalidParams.AddNested("TransposedTableOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -18942,6 +19111,18 @@ func validateTextConditionalFormat(v *types.TextConditionalFormat) error {
 			invalidParams.AddNested("Icon", err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateThresholdAlertsConfigurations(v *types.ThresholdAlertsConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ThresholdAlertsConfigurations"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -19808,6 +19989,38 @@ func validateTransformOperationList(v []types.TransformOperation) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TransformOperationList"}
 	for i := range v {
 		if err := validateTransformOperation(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransposedTableOption(v *types.TransposedTableOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransposedTableOption"}
+	if len(v.ColumnType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransposedTableOptionList(v []types.TransposedTableOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransposedTableOptionList"}
+	for i := range v {
+		if err := validateTransposedTableOption(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

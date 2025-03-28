@@ -18397,6 +18397,31 @@ type TimeSeriesTransformations struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the total number of matching results and indicates how accurate that
+// count is.
+//
+// The Value field provides the count, which may be exact or estimated. The
+// Relation field indicates whether it's an exact figure or a lower bound. This
+// helps understand the full scope of search results, especially when dealing with
+// large result sets.
+type TotalHits struct {
+
+	// Indicates the relationship between the returned Value and the actual total
+	// number of matching results. Possible values are:
+	//
+	//   - EqualTo : The Value is the exact count of matching results.
+	//
+	//   - GreaterThanOrEqualTo : The Value is a lower bound of the actual count of
+	//   matching results.
+	Relation Relation
+
+	// The total number of matching results. This value may be exact or an estimate,
+	// depending on the Relation field.
+	Value *int64
+
+	noSmithyDocumentSerde
+}
+
 // The summary of the tracking server to list.
 type TrackingServerSummary struct {
 
@@ -19476,6 +19501,21 @@ type TransformResources struct {
 	//
 	// This member is required.
 	InstanceType TransformInstanceType
+
+	// Specifies an option from a collection of preconfigured Amazon Machine Image
+	// (AMI) images. Each image is configured by Amazon Web Services with a set of
+	// software and driver versions.
+	//
+	// al2-ami-sagemaker-batch-gpu-470
+	//   - Accelerator: GPU
+	//
+	//   - NVIDIA driver version: 470
+	//
+	// al2-ami-sagemaker-batch-gpu-535
+	//   - Accelerator: GPU
+	//
+	//   - NVIDIA driver version: 535
+	TransformAmiVersion *string
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
 	// that Amazon SageMaker uses to encrypt model data on the storage volume attached

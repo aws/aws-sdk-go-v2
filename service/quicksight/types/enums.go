@@ -294,7 +294,8 @@ type AssetBundleExportJobDataSetPropertyToOverride string
 
 // Enum values for AssetBundleExportJobDataSetPropertyToOverride
 const (
-	AssetBundleExportJobDataSetPropertyToOverrideName AssetBundleExportJobDataSetPropertyToOverride = "Name"
+	AssetBundleExportJobDataSetPropertyToOverrideName                           AssetBundleExportJobDataSetPropertyToOverride = "Name"
+	AssetBundleExportJobDataSetPropertyToOverrideRefreshFailureEmailAlertStatus AssetBundleExportJobDataSetPropertyToOverride = "RefreshFailureEmailAlertStatus"
 )
 
 // Values returns all known values for
@@ -305,6 +306,7 @@ const (
 func (AssetBundleExportJobDataSetPropertyToOverride) Values() []AssetBundleExportJobDataSetPropertyToOverride {
 	return []AssetBundleExportJobDataSetPropertyToOverride{
 		"Name",
+		"RefreshFailureEmailAlertStatus",
 	}
 }
 
@@ -1532,6 +1534,23 @@ func (DatasetParameterValueType) Values() []DatasetParameterValueType {
 	return []DatasetParameterValueType{
 		"MULTI_VALUED",
 		"SINGLE_VALUED",
+	}
+}
+
+type DataSetUseAs string
+
+// Enum values for DataSetUseAs
+const (
+	DataSetUseAsRlsRules DataSetUseAs = "RLS_RULES"
+)
+
+// Values returns all known values for DataSetUseAs. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSetUseAs) Values() []DataSetUseAs {
+	return []DataSetUseAs{
+		"RLS_RULES",
 	}
 }
 
@@ -3802,6 +3821,25 @@ func (QAResultType) Values() []QAResultType {
 	}
 }
 
+type QBusinessInsightsStatus string
+
+// Enum values for QBusinessInsightsStatus
+const (
+	QBusinessInsightsStatusEnabled  QBusinessInsightsStatus = "ENABLED"
+	QBusinessInsightsStatusDisabled QBusinessInsightsStatus = "DISABLED"
+)
+
+// Values returns all known values for QBusinessInsightsStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QBusinessInsightsStatus) Values() []QBusinessInsightsStatus {
+	return []QBusinessInsightsStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type QSearchStatus string
 
 // Enum values for QSearchStatus
@@ -3979,6 +4017,25 @@ func (ReferenceLineValueLabelRelativePosition) Values() []ReferenceLineValueLabe
 	return []ReferenceLineValueLabelRelativePosition{
 		"BEFORE_CUSTOM_LABEL",
 		"AFTER_CUSTOM_LABEL",
+	}
+}
+
+type RefreshFailureAlertStatus string
+
+// Enum values for RefreshFailureAlertStatus
+const (
+	RefreshFailureAlertStatusEnabled  RefreshFailureAlertStatus = "ENABLED"
+	RefreshFailureAlertStatusDisabled RefreshFailureAlertStatus = "DISABLED"
+)
+
+// Values returns all known values for RefreshFailureAlertStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RefreshFailureAlertStatus) Values() []RefreshFailureAlertStatus {
+	return []RefreshFailureAlertStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -5333,6 +5390,25 @@ func (TopicUserExperienceVersion) Values() []TopicUserExperienceVersion {
 	return []TopicUserExperienceVersion{
 		"LEGACY",
 		"NEW_READER_EXPERIENCE",
+	}
+}
+
+type TransposedColumnType string
+
+// Enum values for TransposedColumnType
+const (
+	TransposedColumnTypeRowHeaderColumn TransposedColumnType = "ROW_HEADER_COLUMN"
+	TransposedColumnTypeValueColumn     TransposedColumnType = "VALUE_COLUMN"
+)
+
+// Values returns all known values for TransposedColumnType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransposedColumnType) Values() []TransposedColumnType {
+	return []TransposedColumnType{
+		"ROW_HEADER_COLUMN",
+		"VALUE_COLUMN",
 	}
 }
 

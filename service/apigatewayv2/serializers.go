@@ -122,6 +122,11 @@ func awsRestjson1_serializeOpDocumentCreateApiInput(v *CreateApiInput, value smi
 		ok.Boolean(*v.DisableSchemaValidation)
 	}
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -5534,6 +5539,11 @@ func awsRestjson1_serializeOpDocumentUpdateApiInput(v *UpdateApiInput, value smi
 		ok.Boolean(*v.DisableSchemaValidation)
 	}
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -7167,6 +7177,11 @@ func awsRestjson1_serializeDocumentDomainNameConfiguration(v *types.DomainNameCo
 	if v.HostedZoneId != nil {
 		ok := object.Key("hostedZoneId")
 		ok.String(*v.HostedZoneId)
+	}
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
 	}
 
 	if v.OwnershipVerificationCertificateArn != nil {

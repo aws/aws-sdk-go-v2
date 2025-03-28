@@ -233,6 +233,36 @@ type AmazonOpenSearchParameters struct {
 	noSmithyDocumentSerde
 }
 
+// A collection of Amazon Q feature configurations in an embedded Amazon
+// QuickSight console.
+type AmazonQInQuickSightConsoleConfigurations struct {
+
+	// Adds generative Q&A capabilitiees to an embedded Amazon QuickSight console.
+	DataQnA *DataQnAConfigurations
+
+	// Adds the data stories feature to an embedded Amazon QuickSight console.
+	DataStories *DataStoriesConfigurations
+
+	// Adds the executive summaries feature to an embedded Amazon QuickSight console.
+	ExecutiveSummary *ExecutiveSummaryConfigurations
+
+	// Adds the generative BI authoring experience to an embedded Amazon QuickSight
+	// console.
+	GenerativeAuthoring *GenerativeAuthoringConfigurations
+
+	noSmithyDocumentSerde
+}
+
+// A collection of Amazon Q feature configurations in an embedded Amazon
+// QuickSight dashboard.
+type AmazonQInQuickSightDashboardConfigurations struct {
+
+	// A generated executive summary of an embedded Amazon QuickSight dashboard.
+	ExecutiveSummary *ExecutiveSummaryConfigurations
+
+	noSmithyDocumentSerde
+}
+
 // Metadata structure for an analysis in Amazon QuickSight
 type Analysis struct {
 
@@ -1050,6 +1080,9 @@ type AssetBundleImportJobDataSetOverrideParameters struct {
 	// This member is required.
 	DataSetId *string
 
+	// The refresh properties of a dataset.
+	DataSetRefreshProperties *DataSetRefreshProperties
+
 	// A new name for the dataset.
 	Name *string
 
@@ -1611,6 +1644,13 @@ type AssetBundleResourcePermissions struct {
 
 // An array of analysis level configurations.
 type AssetOptions struct {
+
+	// A list of dataset ARNS to exclude from Dashboard Q&A.
+	ExcludedDataSetArns []string
+
+	// Determines whether insight summaries from Amazon Q Business are allowed in
+	// Dashboard Q&A.
+	QBusinessInsightsStatus QBusinessInsightsStatus
 
 	// Determines the timezone for the analysis.
 	Timezone *string
@@ -3942,6 +3982,12 @@ type DashboardPublishOptions struct {
 	// The data point tool tip options of a dashboard.
 	DataPointTooltipOption *DataPointTooltipOption
 
+	// Adds Q&A capabilities to an Amazon QuickSight dashboard. If no topic is linked,
+	// Dashboard Q&A uses the data values that are rendered on the dashboard. End users
+	// can use Dashboard Q&A to ask for different slices of the data that they see on
+	// the dashboard. If a topic is linked, Topic Q&A is used.
+	DataQAEnabledOption *DataQAEnabledOption
+
 	// Export to .csv option.
 	ExportToCSVOption *ExportToCSVOption
 
@@ -4545,6 +4591,29 @@ type DataPointTooltipOption struct {
 	noSmithyDocumentSerde
 }
 
+// Adds Q&A capabilities to a dashboard. If no topic is linked, Dashboard Q&A uses
+// the data values that are rendered on the dashboard. End users can use Dashboard
+// Q&A to ask for different slices of the data that they see on the dashboard. If a
+// topic is linked, Topic Q&A is enabled.
+type DataQAEnabledOption struct {
+
+	// The status of the Data Q&A option on the dashboard.
+	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
+}
+
+// The generative Q&A settings of an embedded Amazon QuickSight console.
+type DataQnAConfigurations struct {
+
+	// The generative Q&A settings of an embedded Amazon QuickSight console.
+	//
+	// This member is required.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
 // Dataset.
 type DataSet struct {
 
@@ -4608,6 +4677,9 @@ type DataSet struct {
 
 	// The element you can use to define tags for row-level security.
 	RowLevelPermissionTagConfiguration *RowLevelPermissionTagConfiguration
+
+	// The usage of the dataset.
+	UseAs DataSetUseAs
 
 	noSmithyDocumentSerde
 }
@@ -4713,9 +4785,10 @@ type DataSetReference struct {
 // The refresh properties of a dataset.
 type DataSetRefreshProperties struct {
 
+	// The failure configuration for a dataset.
+	FailureConfiguration *RefreshFailureConfiguration
+
 	// The refresh configuration for a dataset.
-	//
-	// This member is required.
 	RefreshConfiguration *RefreshConfiguration
 
 	noSmithyDocumentSerde
@@ -4820,6 +4893,9 @@ type DataSetSummary struct {
 
 	// Whether or not the row level permission tags are applied.
 	RowLevelPermissionTagConfigurationApplied bool
+
+	// The usage of the dataset.
+	UseAs DataSetUseAs
 
 	noSmithyDocumentSerde
 }
@@ -5280,6 +5356,17 @@ type DataSourceSummary struct {
 
 	// The type of the data source.
 	Type DataSourceType
+
+	noSmithyDocumentSerde
+}
+
+// The data story settings of an embedded Amazon QuickSight console.
+type DataStoriesConfigurations struct {
+
+	// The data story settings of an embedded Amazon QuickSight console.
+	//
+	// This member is required.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }
@@ -6159,6 +6246,19 @@ type ExcludePeriodConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The executive summary settings of an embedded Amazon QuickSight console or
+// dashboard.
+type ExecutiveSummaryConfigurations struct {
+
+	// The executive summary settings of an embedded Amazon QuickSight console or
+	// dashboard.
+	//
+	// This member is required.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
 // The option that determines the hierarchy of the fields that are built within a
 // visual's field wells. These fields can't be duplicated to other visuals.
 type ExplicitHierarchy struct {
@@ -6219,7 +6319,7 @@ type FailedKeyRegistrationEntry struct {
 	// user error. If the value of this property is True , the error was caused by user
 	// error. If the value of this property is False , the error occurred on the
 	// backend. If your job continues fail and with a False SenderFault value, contact
-	// Amazon Web Services Support.
+	// Amazon Web ServicesSupport.
 	//
 	// This member is required.
 	SenderFault bool
@@ -7690,6 +7790,17 @@ type GeneratedAnswerResult struct {
 
 	// The name of the topic.
 	TopicName *string
+
+	noSmithyDocumentSerde
+}
+
+// The generative BI authoring settings of an embedded Amazon QuickSight console.
+type GenerativeAuthoringConfigurations struct {
+
+	// The generative BI authoring settings of an embedded Amazon QuickSight console.
+	//
+	// This member is required.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }
@@ -10893,6 +11004,11 @@ type OracleParameters struct {
 	// This member is required.
 	Port *int32
 
+	// A Boolean value that indicates whether the Database uses a service name or an
+	// SID. If this value is left blank, the default value is SID . If this value is
+	// set to false , the value is SID .
+	UseServiceName bool
+
 	noSmithyDocumentSerde
 }
 
@@ -12376,6 +12492,17 @@ type RdsParameters struct {
 	noSmithyDocumentSerde
 }
 
+// The recent snapshots configuration for an embedded Amazon QuickSight dashboard.
+type RecentSnapshotsConfigurations struct {
+
+	// The recent snapshots configuration for an embedded Amazon QuickSight dashboard.
+	//
+	// This member is required.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
 // A structure that grants Amazon QuickSight access to your cluster and make a
 // call to the redshift:GetClusterCredentials API. For more information on the
 // redshift:GetClusterCredentials API, see [GetClusterCredentials]GetClusterCredentials .
@@ -12623,6 +12750,25 @@ type RefreshConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The failure configuration of a dataset.
+type RefreshFailureConfiguration struct {
+
+	// The email alert configuration for a dataset refresh failure.
+	EmailAlert *RefreshFailureEmailAlert
+
+	noSmithyDocumentSerde
+}
+
+// The configuration settings for the email alerts that are sent when a dataset
+// refresh fails.
+type RefreshFailureEmailAlert struct {
+
+	// The status value that determines if email alerts are sent.
+	AlertStatus RefreshFailureAlertStatus
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the interval between each scheduled refresh of a dataset.
 type RefreshFrequency struct {
 
@@ -12724,11 +12870,23 @@ type RegisteredCustomerManagedKey struct {
 // The feature configurations of an embedded Amazon QuickSight console.
 type RegisteredUserConsoleFeatureConfigurations struct {
 
+	// The Amazon Q configurations of an embedded Amazon QuickSight console.
+	AmazonQInQuickSight *AmazonQInQuickSightConsoleConfigurations
+
+	// The recent snapshots configuration for an embedded Amazon QuickSight dashboard.
+	RecentSnapshots *RecentSnapshotsConfigurations
+
+	// The schedules configuration for an embedded Amazon QuickSight dashboard.
+	Schedules *SchedulesConfigurations
+
 	// The shared view settings of an embedded dashboard.
 	SharedView *SharedViewConfigurations
 
 	// The state persistence configurations of an embedded Amazon QuickSight console.
 	StatePersistence *StatePersistenceConfigurations
+
+	// The threshold alerts configuration for an embedded Amazon QuickSight dashboard.
+	ThresholdAlerts *ThresholdAlertsConfigurations
 
 	noSmithyDocumentSerde
 }
@@ -12755,14 +12913,26 @@ type RegisteredUserDashboardEmbeddingConfiguration struct {
 // The feature configuration for an embedded dashboard.
 type RegisteredUserDashboardFeatureConfigurations struct {
 
+	// The Amazon Q configurations of an embedded Amazon QuickSight dashboard.
+	AmazonQInQuickSight *AmazonQInQuickSightDashboardConfigurations
+
 	// The bookmarks configuration for an embedded dashboard in Amazon QuickSight.
 	Bookmarks *BookmarksConfigurations
+
+	// The recent snapshots configuration for an Amazon QuickSight embedded dashboard
+	RecentSnapshots *RecentSnapshotsConfigurations
+
+	// The schedules configuration for an embedded Amazon QuickSight dashboard.
+	Schedules *SchedulesConfigurations
 
 	// The shared view settings of an embedded dashboard.
 	SharedView *SharedViewConfigurations
 
 	// The state persistence settings of an embedded dashboard.
 	StatePersistence *StatePersistenceConfigurations
+
+	// The threshold alerts configuration for an Amazon QuickSight embedded dashboard.
+	ThresholdAlerts *ThresholdAlertsConfigurations
 
 	noSmithyDocumentSerde
 }
@@ -13536,6 +13706,17 @@ type ScheduleRefreshOnEntity struct {
 
 	// The day of the week that you want to schedule a refresh on.
 	DayOfWeek DayOfWeek
+
+	noSmithyDocumentSerde
+}
+
+// The schedules configuration for an embedded Amazon QuickSight dashboard.
+type SchedulesConfigurations struct {
+
+	// The schedules configuration for an embedded Amazon QuickSight dashboard.
+	//
+	// This member is required.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }
@@ -15098,6 +15279,9 @@ type TableFieldOptions struct {
 	// The field options to be configured to a table.
 	SelectedFieldOptions []TableFieldOption
 
+	// The TableOptions of a transposed table.
+	TransposedTableOptions []TransposedTableOption
+
 	noSmithyDocumentSerde
 }
 
@@ -15810,6 +15994,17 @@ type ThousandSeparatorOptions struct {
 
 	// Determines the visibility of the thousands separator.
 	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// The threshold alerts configuration for an embedded Amazon QuickSight dashboard.
+type ThresholdAlertsConfigurations struct {
+
+	// The threshold alerts configuration for an embedded Amazon QuickSight dashboard.
+	//
+	// This member is required.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }
@@ -17045,6 +17240,29 @@ type TransformOperationMemberUntagColumnOperation struct {
 }
 
 func (*TransformOperationMemberUntagColumnOperation) isTransformOperation() {}
+
+// The column option of the transposed table.
+type TransposedTableOption struct {
+
+	// The column type of the column in a transposed table. Choose one of the
+	// following options:
+	//
+	//   - ROW_HEADER_COLUMN : Refers to the leftmost column of the row header in the
+	//   transposed table.
+	//
+	//   - VALUE_COLUMN : Refers to all value columns in the transposed table.
+	//
+	// This member is required.
+	ColumnType TransposedColumnType
+
+	// The index of a columns in a transposed table. The index range is 0-9999.
+	ColumnIndex *int32
+
+	// The width of a column in a transposed table.
+	ColumnWidth *string
+
+	noSmithyDocumentSerde
+}
 
 // Aggregated field wells of a tree map.
 type TreeMapAggregatedFieldWells struct {

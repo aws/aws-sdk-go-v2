@@ -3478,6 +3478,11 @@ func awsAwsjson11_serializeDocumentProjectCache(v *types.ProjectCache, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.CacheNamespace != nil {
+		ok := object.Key("cacheNamespace")
+		ok.String(*v.CacheNamespace)
+	}
+
 	if v.Location != nil {
 		ok := object.Key("location")
 		ok.String(*v.Location)

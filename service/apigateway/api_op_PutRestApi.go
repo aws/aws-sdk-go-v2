@@ -90,8 +90,8 @@ type PutRestApiOutput struct {
 	// endpoint.
 	DisableExecuteApiEndpoint bool
 
-	// The endpoint configuration of this RestApi showing the endpoint types of the
-	// API.
+	// The endpoint configuration of this RestApi showing the endpoint types and IP
+	// address types of the API.
 	EndpointConfiguration *types.EndpointConfiguration
 
 	// The API's identifier. This identifier is unique across all of your APIs in API

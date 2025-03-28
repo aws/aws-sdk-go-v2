@@ -25,6 +25,30 @@ type Alias struct {
 	noSmithyDocumentSerde
 }
 
+// Derivation data used to derive an ECDH key.
+//
+// The following types satisfy this interface:
+//
+//	DiffieHellmanDerivationDataMemberSharedInformation
+type DiffieHellmanDerivationData interface {
+	isDiffieHellmanDerivationData()
+}
+
+// A byte string containing information that binds the ECDH derived key to the two
+// parties involved or to the context of the key.
+//
+// It may include details like identities of the two parties deriving the key,
+// context of the operation, session IDs, and optionally a nonce. It must not
+// contain zero bytes, and re-using shared information for multiple ECDH key
+// derivations is not recommended.
+type DiffieHellmanDerivationDataMemberSharedInformation struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*DiffieHellmanDerivationDataMemberSharedInformation) isDiffieHellmanDerivationData() {}
+
 // The attributes for IPEK generation during export.
 type ExportAttributes struct {
 
@@ -41,6 +65,53 @@ type ExportAttributes struct {
 	// the input data is 16 bytes of zero and retaining the 3 highest order bytes of
 	// the encrypted result.
 	KeyCheckValueAlgorithm KeyCheckValueAlgorithm
+
+	noSmithyDocumentSerde
+}
+
+// Parameter information for key material export using the asymmetric ECDH key
+// exchange method.
+type ExportDiffieHellmanTr31KeyBlock struct {
+
+	// The keyARN of the certificate that signed the client's PublicKeyCertificate .
+	//
+	// This member is required.
+	CertificateAuthorityPublicKeyIdentifier *string
+
+	// Derivation data used to derive an ECDH key.
+	//
+	// This member is required.
+	DerivationData DiffieHellmanDerivationData
+
+	// The key algorithm of the derived ECDH key.
+	//
+	// This member is required.
+	DeriveKeyAlgorithm SymmetricKeyAlgorithm
+
+	// The key derivation function to use for deriving a key using ECDH.
+	//
+	// This member is required.
+	KeyDerivationFunction KeyDerivationFunction
+
+	// The hash type to use for deriving a key using ECDH.
+	//
+	// This member is required.
+	KeyDerivationHashAlgorithm KeyDerivationHashAlgorithm
+
+	// The keyARN of the asymmetric ECC key.
+	//
+	// This member is required.
+	PrivateKeyIdentifier *string
+
+	// The client's public key certificate in PEM format (base64 encoded) to use for
+	// ECDH key derivation.
+	//
+	// This member is required.
+	PublicKeyCertificate *string
+
+	// Optional metadata for export associated with the key material. This data is
+	// signed but transmitted in clear text.
+	KeyBlockHeaders *KeyBlockHeaders
 
 	noSmithyDocumentSerde
 }
@@ -87,12 +158,23 @@ type ExportKeyCryptogram struct {
 //
 // The following types satisfy this interface:
 //
+//	ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock
 //	ExportKeyMaterialMemberKeyCryptogram
 //	ExportKeyMaterialMemberTr31KeyBlock
 //	ExportKeyMaterialMemberTr34KeyBlock
 type ExportKeyMaterial interface {
 	isExportKeyMaterial()
 }
+
+// Parameter information for key material export using the asymmetric ECDH key
+// exchange method.
+type ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock struct {
+	Value ExportDiffieHellmanTr31KeyBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock) isExportKeyMaterial() {}
 
 // Parameter information for key material export using asymmetric RSA wrap and
 // unwrap key exchange method
@@ -186,6 +268,54 @@ type ExportTr34KeyBlock struct {
 	noSmithyDocumentSerde
 }
 
+// Parameter information for key material import using the asymmetric ECDH key
+// exchange method.
+type ImportDiffieHellmanTr31KeyBlock struct {
+
+	// The keyARN of the certificate that signed the client's PublicKeyCertificate .
+	//
+	// This member is required.
+	CertificateAuthorityPublicKeyIdentifier *string
+
+	// Derivation data used to derive an ECDH key.
+	//
+	// This member is required.
+	DerivationData DiffieHellmanDerivationData
+
+	// The key algorithm of the derived ECDH key.
+	//
+	// This member is required.
+	DeriveKeyAlgorithm SymmetricKeyAlgorithm
+
+	// The key derivation function to use for deriving a key using ECDH.
+	//
+	// This member is required.
+	KeyDerivationFunction KeyDerivationFunction
+
+	// The hash type to use for deriving a key using ECDH.
+	//
+	// This member is required.
+	KeyDerivationHashAlgorithm KeyDerivationHashAlgorithm
+
+	// The keyARN of the asymmetric ECC key.
+	//
+	// This member is required.
+	PrivateKeyIdentifier *string
+
+	// The client's public key certificate in PEM format (base64 encoded) to use for
+	// ECDH key derivation.
+	//
+	// This member is required.
+	PublicKeyCertificate *string
+
+	// The ECDH wrapped key block to import.
+	//
+	// This member is required.
+	WrappedKeyBlock *string
+
+	noSmithyDocumentSerde
+}
+
 // Parameter information for key material import using asymmetric RSA wrap and
 // unwrap key exchange method.
 type ImportKeyCryptogram struct {
@@ -226,6 +356,7 @@ type ImportKeyCryptogram struct {
 //
 // The following types satisfy this interface:
 //
+//	ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock
 //	ImportKeyMaterialMemberKeyCryptogram
 //	ImportKeyMaterialMemberRootCertificatePublicKey
 //	ImportKeyMaterialMemberTr31KeyBlock
@@ -234,6 +365,16 @@ type ImportKeyCryptogram struct {
 type ImportKeyMaterial interface {
 	isImportKeyMaterial()
 }
+
+// Parameter information for key material import using the asymmetric ECDH key
+// exchange method.
+type ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock struct {
+	Value ImportDiffieHellmanTr31KeyBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock) isImportKeyMaterial() {}
 
 // Parameter information for key material import using asymmetric RSA wrap and
 // unwrap key exchange method.
@@ -414,6 +555,10 @@ type Key struct {
 	// delete the key. This value is present only when when the KeyState is
 	// DELETE_COMPLETE and the Amazon Web Services Payment Cryptography key is deleted.
 	DeleteTimestamp *time.Time
+
+	// The cryptographic usage of an ECDH derived key as deﬁned in section A.5.2 of
+	// the TR-31 spec.
+	DeriveKeyUsage DeriveKeyUsage
 
 	// The date and time after which Amazon Web Services Payment Cryptography will
 	// start using the key material for cryptographic operations.
@@ -693,5 +838,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isExportKeyMaterial() {}
-func (*UnknownUnionMember) isImportKeyMaterial() {}
+func (*UnknownUnionMember) isDiffieHellmanDerivationData() {}
+func (*UnknownUnionMember) isExportKeyMaterial()           {}
+func (*UnknownUnionMember) isImportKeyMaterial()           {}

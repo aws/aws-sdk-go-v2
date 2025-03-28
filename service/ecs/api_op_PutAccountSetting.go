@@ -55,10 +55,6 @@ type PutAccountSettingInput struct {
 	//   resource. You must turn on this setting to use Amazon ECS features such as
 	//   resource tagging.
 	//
-	//   - fargateFIPSMode - When turned on, you can run Fargate workloads in a manner
-	//   that is compliant with Federal Information Processing Standard (FIPS-140). For
-	//   more information, see [Fargate Federal Information Processing Standard (FIPS-140)].
-	//
 	//   - containerInstanceLongArnFormat - When modified, the Amazon Resource Name
 	//   (ARN) and resource ID format of the resource type for a specified user, role, or
 	//   the root user for an account is affected. The opt-in and opt-out account setting
@@ -117,7 +113,6 @@ type PutAccountSettingInput struct {
 	//
 	// [Grant permission to tag resources on creation]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html
 	// [Using a VPC in dual-stack mode]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-task-networking.html#fargate-task-networking-vpc-dual-stack
-	// [Fargate Federal Information Processing Standard (FIPS-140)]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html
 	// [Amazon Web Services Fargate task maintenance]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
 	// [Elastic Network Interface Trunking]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
 	// [Protecting Amazon ECS workloads with Amazon ECS Runtime Monitoring]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html

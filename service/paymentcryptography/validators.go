@@ -459,6 +459,39 @@ func validateExportAttributes(v *types.ExportAttributes) error {
 	}
 }
 
+func validateExportDiffieHellmanTr31KeyBlock(v *types.ExportDiffieHellmanTr31KeyBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportDiffieHellmanTr31KeyBlock"}
+	if v.PrivateKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateKeyIdentifier"))
+	}
+	if v.CertificateAuthorityPublicKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityPublicKeyIdentifier"))
+	}
+	if v.PublicKeyCertificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyCertificate"))
+	}
+	if len(v.DeriveKeyAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeriveKeyAlgorithm"))
+	}
+	if len(v.KeyDerivationFunction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyDerivationFunction"))
+	}
+	if len(v.KeyDerivationHashAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyDerivationHashAlgorithm"))
+	}
+	if v.DerivationData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DerivationData"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExportDukptInitialKey(v *types.ExportDukptInitialKey) error {
 	if v == nil {
 		return nil
@@ -498,6 +531,11 @@ func validateExportKeyMaterial(v types.ExportKeyMaterial) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportKeyMaterial"}
 	switch uv := v.(type) {
+	case *types.ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock:
+		if err := validateExportDiffieHellmanTr31KeyBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[DiffieHellmanTr31KeyBlock]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ExportKeyMaterialMemberKeyCryptogram:
 		if err := validateExportKeyCryptogram(&uv.Value); err != nil {
 			invalidParams.AddNested("[KeyCryptogram]", err.(smithy.InvalidParamsError))
@@ -560,6 +598,42 @@ func validateExportTr34KeyBlock(v *types.ExportTr34KeyBlock) error {
 	}
 }
 
+func validateImportDiffieHellmanTr31KeyBlock(v *types.ImportDiffieHellmanTr31KeyBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportDiffieHellmanTr31KeyBlock"}
+	if v.PrivateKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateKeyIdentifier"))
+	}
+	if v.CertificateAuthorityPublicKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityPublicKeyIdentifier"))
+	}
+	if v.PublicKeyCertificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyCertificate"))
+	}
+	if len(v.DeriveKeyAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeriveKeyAlgorithm"))
+	}
+	if len(v.KeyDerivationFunction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyDerivationFunction"))
+	}
+	if len(v.KeyDerivationHashAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyDerivationHashAlgorithm"))
+	}
+	if v.DerivationData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DerivationData"))
+	}
+	if v.WrappedKeyBlock == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WrappedKeyBlock"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImportKeyCryptogram(v *types.ImportKeyCryptogram) error {
 	if v == nil {
 		return nil
@@ -594,6 +668,11 @@ func validateImportKeyMaterial(v types.ImportKeyMaterial) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportKeyMaterial"}
 	switch uv := v.(type) {
+	case *types.ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock:
+		if err := validateImportDiffieHellmanTr31KeyBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[DiffieHellmanTr31KeyBlock]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ImportKeyMaterialMemberKeyCryptogram:
 		if err := validateImportKeyCryptogram(&uv.Value); err != nil {
 			invalidParams.AddNested("[KeyCryptogram]", err.(smithy.InvalidParamsError))

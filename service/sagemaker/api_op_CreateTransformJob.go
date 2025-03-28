@@ -32,8 +32,8 @@ import (
 //   - TransformOutput - Identifies the Amazon S3 location where you want Amazon
 //     SageMaker to save the results from the transform job.
 //
-//   - TransformResources - Identifies the ML compute instances for the transform
-//     job.
+//   - TransformResources - Identifies the ML compute instances and AMI image
+//     versions for the transform job.
 //
 // For more information about how batch transformation works, see [Batch Transform].
 //

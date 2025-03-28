@@ -1054,6 +1054,9 @@ type GuardrailUsage struct {
 	// This member is required.
 	WordPolicyUnits *int32
 
+	// The content policy image units processed by the guardrail.
+	ContentPolicyImageUnits *int32
+
 	noSmithyDocumentSerde
 }
 

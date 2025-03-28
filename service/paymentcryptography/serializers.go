@@ -1235,6 +1235,22 @@ func (m *awsAwsjson10_serializeOpUpdateAlias) HandleSerialize(ctx context.Contex
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentDiffieHellmanDerivationData(v types.DiffieHellmanDerivationData, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.DiffieHellmanDerivationDataMemberSharedInformation:
+		av := object.Key("SharedInformation")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentExportAttributes(v *types.ExportAttributes, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1249,6 +1265,57 @@ func awsAwsjson10_serializeDocumentExportAttributes(v *types.ExportAttributes, v
 	if len(v.KeyCheckValueAlgorithm) > 0 {
 		ok := object.Key("KeyCheckValueAlgorithm")
 		ok.String(string(v.KeyCheckValueAlgorithm))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentExportDiffieHellmanTr31KeyBlock(v *types.ExportDiffieHellmanTr31KeyBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateAuthorityPublicKeyIdentifier != nil {
+		ok := object.Key("CertificateAuthorityPublicKeyIdentifier")
+		ok.String(*v.CertificateAuthorityPublicKeyIdentifier)
+	}
+
+	if v.DerivationData != nil {
+		ok := object.Key("DerivationData")
+		if err := awsAwsjson10_serializeDocumentDiffieHellmanDerivationData(v.DerivationData, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.DeriveKeyAlgorithm) > 0 {
+		ok := object.Key("DeriveKeyAlgorithm")
+		ok.String(string(v.DeriveKeyAlgorithm))
+	}
+
+	if v.KeyBlockHeaders != nil {
+		ok := object.Key("KeyBlockHeaders")
+		if err := awsAwsjson10_serializeDocumentKeyBlockHeaders(v.KeyBlockHeaders, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.KeyDerivationFunction) > 0 {
+		ok := object.Key("KeyDerivationFunction")
+		ok.String(string(v.KeyDerivationFunction))
+	}
+
+	if len(v.KeyDerivationHashAlgorithm) > 0 {
+		ok := object.Key("KeyDerivationHashAlgorithm")
+		ok.String(string(v.KeyDerivationHashAlgorithm))
+	}
+
+	if v.PrivateKeyIdentifier != nil {
+		ok := object.Key("PrivateKeyIdentifier")
+		ok.String(*v.PrivateKeyIdentifier)
+	}
+
+	if v.PublicKeyCertificate != nil {
+		ok := object.Key("PublicKeyCertificate")
+		ok.String(*v.PublicKeyCertificate)
 	}
 
 	return nil
@@ -1293,6 +1360,12 @@ func awsAwsjson10_serializeDocumentExportKeyMaterial(v types.ExportKeyMaterial, 
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock:
+		av := object.Key("DiffieHellmanTr31KeyBlock")
+		if err := awsAwsjson10_serializeDocumentExportDiffieHellmanTr31KeyBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ExportKeyMaterialMemberKeyCryptogram:
 		av := object.Key("KeyCryptogram")
 		if err := awsAwsjson10_serializeDocumentExportKeyCryptogram(&uv.Value, av); err != nil {
@@ -1376,6 +1449,55 @@ func awsAwsjson10_serializeDocumentExportTr34KeyBlock(v *types.ExportTr34KeyBloc
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentImportDiffieHellmanTr31KeyBlock(v *types.ImportDiffieHellmanTr31KeyBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateAuthorityPublicKeyIdentifier != nil {
+		ok := object.Key("CertificateAuthorityPublicKeyIdentifier")
+		ok.String(*v.CertificateAuthorityPublicKeyIdentifier)
+	}
+
+	if v.DerivationData != nil {
+		ok := object.Key("DerivationData")
+		if err := awsAwsjson10_serializeDocumentDiffieHellmanDerivationData(v.DerivationData, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.DeriveKeyAlgorithm) > 0 {
+		ok := object.Key("DeriveKeyAlgorithm")
+		ok.String(string(v.DeriveKeyAlgorithm))
+	}
+
+	if len(v.KeyDerivationFunction) > 0 {
+		ok := object.Key("KeyDerivationFunction")
+		ok.String(string(v.KeyDerivationFunction))
+	}
+
+	if len(v.KeyDerivationHashAlgorithm) > 0 {
+		ok := object.Key("KeyDerivationHashAlgorithm")
+		ok.String(string(v.KeyDerivationHashAlgorithm))
+	}
+
+	if v.PrivateKeyIdentifier != nil {
+		ok := object.Key("PrivateKeyIdentifier")
+		ok.String(*v.PrivateKeyIdentifier)
+	}
+
+	if v.PublicKeyCertificate != nil {
+		ok := object.Key("PublicKeyCertificate")
+		ok.String(*v.PublicKeyCertificate)
+	}
+
+	if v.WrappedKeyBlock != nil {
+		ok := object.Key("WrappedKeyBlock")
+		ok.String(*v.WrappedKeyBlock)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentImportKeyCryptogram(v *types.ImportKeyCryptogram, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1415,6 +1537,12 @@ func awsAwsjson10_serializeDocumentImportKeyMaterial(v types.ImportKeyMaterial, 
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock:
+		av := object.Key("DiffieHellmanTr31KeyBlock")
+		if err := awsAwsjson10_serializeDocumentImportDiffieHellmanTr31KeyBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ImportKeyMaterialMemberKeyCryptogram:
 		av := object.Key("KeyCryptogram")
 		if err := awsAwsjson10_serializeDocumentImportKeyCryptogram(&uv.Value, av); err != nil {
@@ -1733,6 +1861,11 @@ func awsAwsjson10_serializeOpDocumentCreateAliasInput(v *CreateAliasInput, value
 func awsAwsjson10_serializeOpDocumentCreateKeyInput(v *CreateKeyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.DeriveKeyUsage) > 0 {
+		ok := object.Key("DeriveKeyUsage")
+		ok.String(string(v.DeriveKeyUsage))
+	}
 
 	if v.Enabled != nil {
 		ok := object.Key("Enabled")

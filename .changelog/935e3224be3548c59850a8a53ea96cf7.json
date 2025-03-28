@@ -1,0 +1,8 @@
+{
+    "id": "935e3224-be35-48c5-9850-a8a53ea96cf7",
+    "type": "feature",
+    "description": "Launching Multi-modality Content Filter for Amazon Bedrock Guardrails.",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

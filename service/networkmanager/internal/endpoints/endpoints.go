@@ -158,6 +158,24 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region:  "aws-global",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "networkmanager-fips.us-west-2.api.aws",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "aws-global",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "networkmanager.us-west-2.api.aws",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "fips-aws-global",
 			}: endpoints.Endpoint{
 				Hostname: "networkmanager-fips.us-west-2.amazonaws.com",
@@ -336,6 +354,24 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "networkmanager.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "aws-us-gov-global",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "networkmanager.us-gov-west-1.api.aws",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "aws-us-gov-global",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "networkmanager.us-gov-west-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},

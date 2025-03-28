@@ -99,6 +99,9 @@ type ReimportApiOutput struct {
 	// only for HTTP APIs.
 	ImportInfo []string
 
+	// The IP address types that can invoke the API.
+	IpAddressType types.IpAddressType
+
 	// The name of the API.
 	Name *string
 

@@ -46868,6 +46868,11 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobDataSetOverrideParamete
 				sv.DataSetId = ptr.String(jtv)
 			}
 
+		case "DataSetRefreshProperties":
+			if err := awsRestjson1_deserializeDocumentDataSetRefreshProperties(&sv.DataSetRefreshProperties, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -49004,6 +49009,20 @@ func awsRestjson1_deserializeDocumentAssetOptions(v **types.AssetOptions, value 
 
 	for key, value := range shape {
 		switch key {
+		case "ExcludedDataSetArns":
+			if err := awsRestjson1_deserializeDocumentDataSetArnsList(&sv.ExcludedDataSetArns, value); err != nil {
+				return err
+			}
+
+		case "QBusinessInsightsStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QBusinessInsightsStatus to be of type string, got %T instead", value)
+				}
+				sv.QBusinessInsightsStatus = types.QBusinessInsightsStatus(jtv)
+			}
+
 		case "Timezone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -56986,6 +57005,11 @@ func awsRestjson1_deserializeDocumentDashboardPublishOptions(v **types.Dashboard
 				return err
 			}
 
+		case "DataQAEnabledOption":
+			if err := awsRestjson1_deserializeDocumentDataQAEnabledOption(&sv.DataQAEnabledOption, value); err != nil {
+				return err
+			}
+
 		case "ExportToCSVOption":
 			if err := awsRestjson1_deserializeDocumentExportToCSVOption(&sv.ExportToCSVOption, value); err != nil {
 				return err
@@ -58682,6 +58706,46 @@ func awsRestjson1_deserializeDocumentDataPointTooltipOption(v **types.DataPointT
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDataQAEnabledOption(v **types.DataQAEnabledOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataQAEnabledOption
+	if *v == nil {
+		sv = &types.DataQAEnabledOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDataSet(v **types.DataSet, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -58838,6 +58902,15 @@ func awsRestjson1_deserializeDocumentDataSet(v **types.DataSet, value interface{
 		case "RowLevelPermissionTagConfiguration":
 			if err := awsRestjson1_deserializeDocumentRowLevelPermissionTagConfiguration(&sv.RowLevelPermissionTagConfiguration, value); err != nil {
 				return err
+			}
+
+		case "UseAs":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSetUseAs to be of type string, got %T instead", value)
+				}
+				sv.UseAs = types.DataSetUseAs(jtv)
 			}
 
 		default:
@@ -59242,6 +59315,11 @@ func awsRestjson1_deserializeDocumentDataSetRefreshProperties(v **types.DataSetR
 
 	for key, value := range shape {
 		switch key {
+		case "FailureConfiguration":
+			if err := awsRestjson1_deserializeDocumentRefreshFailureConfiguration(&sv.FailureConfiguration, value); err != nil {
+				return err
+			}
+
 		case "RefreshConfiguration":
 			if err := awsRestjson1_deserializeDocumentRefreshConfiguration(&sv.RefreshConfiguration, value); err != nil {
 				return err
@@ -59437,6 +59515,15 @@ func awsRestjson1_deserializeDocumentDataSetSummary(v **types.DataSetSummary, va
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.RowLevelPermissionTagConfigurationApplied = jtv
+			}
+
+		case "UseAs":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSetUseAs to be of type string, got %T instead", value)
+				}
+				sv.UseAs = types.DataSetUseAs(jtv)
 			}
 
 		default:
@@ -79709,6 +79796,15 @@ func awsRestjson1_deserializeDocumentOracleParameters(v **types.OracleParameters
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case "UseServiceName":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.UseServiceName = jtv
+			}
+
 		default:
 			_, _ = key, value
 
@@ -85663,6 +85759,82 @@ func awsRestjson1_deserializeDocumentRefreshConfiguration(v **types.RefreshConfi
 		case "IncrementalRefresh":
 			if err := awsRestjson1_deserializeDocumentIncrementalRefresh(&sv.IncrementalRefresh, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRefreshFailureConfiguration(v **types.RefreshFailureConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RefreshFailureConfiguration
+	if *v == nil {
+		sv = &types.RefreshFailureConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EmailAlert":
+			if err := awsRestjson1_deserializeDocumentRefreshFailureEmailAlert(&sv.EmailAlert, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRefreshFailureEmailAlert(v **types.RefreshFailureEmailAlert, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RefreshFailureEmailAlert
+	if *v == nil {
+		sv = &types.RefreshFailureEmailAlert{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AlertStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RefreshFailureAlertStatus to be of type string, got %T instead", value)
+				}
+				sv.AlertStatus = types.RefreshFailureAlertStatus(jtv)
 			}
 
 		default:
@@ -93654,6 +93826,11 @@ func awsRestjson1_deserializeDocumentTableFieldOptions(v **types.TableFieldOptio
 				return err
 			}
 
+		case "TransposedTableOptions":
+			if err := awsRestjson1_deserializeDocumentTransposedTableOptionList(&sv.TransposedTableOptions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -100102,6 +100279,102 @@ func awsRestjson1_deserializeDocumentTransformOperationList(v *[]types.Transform
 		if err := awsRestjson1_deserializeDocumentTransformOperation(&col, value); err != nil {
 			return err
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTransposedTableOption(v **types.TransposedTableOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TransposedTableOption
+	if *v == nil {
+		sv = &types.TransposedTableOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ColumnIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TransposedColumnIndex to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ColumnIndex = ptr.Int32(int32(i64))
+			}
+
+		case "ColumnType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TransposedColumnType to be of type string, got %T instead", value)
+				}
+				sv.ColumnType = types.TransposedColumnType(jtv)
+			}
+
+		case "ColumnWidth":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PixelLength to be of type string, got %T instead", value)
+				}
+				sv.ColumnWidth = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTransposedTableOptionList(v *[]types.TransposedTableOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TransposedTableOption
+	if *v == nil {
+		cv = []types.TransposedTableOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TransposedTableOption
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTransposedTableOption(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

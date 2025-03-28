@@ -1645,6 +1645,12 @@ type ProjectCache struct {
 	// This member is required.
 	Type CacheType
 
+	// Defines the scope of the cache. You can use this namespace to share a cache
+	// across multiple projects. For more information, see [Cache sharing between projects]in the CodeBuild User Guide.
+	//
+	// [Cache sharing between projects]: https://docs.aws.amazon.com/codebuild/latest/userguide/caching-s3.html#caching-s3-sharing
+	CacheNamespace *string
+
 	// Information about the cache location:
 	//
 	//   - NO_CACHE or LOCAL : This value is ignored.

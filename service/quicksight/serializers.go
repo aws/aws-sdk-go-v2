@@ -1367,6 +1367,11 @@ func awsRestjson1_serializeOpDocumentCreateDataSetInput(v *CreateDataSetInput, v
 		}
 	}
 
+	if len(v.UseAs) > 0 {
+		ok := object.Key("UseAs")
+		ok.String(string(v.UseAs))
+	}
+
 	return nil
 }
 
@@ -20564,6 +20569,55 @@ func awsRestjson1_serializeDocumentAmazonOpenSearchParameters(v *types.AmazonOpe
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAmazonQInQuickSightConsoleConfigurations(v *types.AmazonQInQuickSightConsoleConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataQnA != nil {
+		ok := object.Key("DataQnA")
+		if err := awsRestjson1_serializeDocumentDataQnAConfigurations(v.DataQnA, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataStories != nil {
+		ok := object.Key("DataStories")
+		if err := awsRestjson1_serializeDocumentDataStoriesConfigurations(v.DataStories, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExecutiveSummary != nil {
+		ok := object.Key("ExecutiveSummary")
+		if err := awsRestjson1_serializeDocumentExecutiveSummaryConfigurations(v.ExecutiveSummary, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GenerativeAuthoring != nil {
+		ok := object.Key("GenerativeAuthoring")
+		if err := awsRestjson1_serializeDocumentGenerativeAuthoringConfigurations(v.GenerativeAuthoring, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAmazonQInQuickSightDashboardConfigurations(v *types.AmazonQInQuickSightDashboardConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExecutiveSummary != nil {
+		ok := object.Key("ExecutiveSummary")
+		if err := awsRestjson1_serializeDocumentExecutiveSummaryConfigurations(v.ExecutiveSummary, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAnalysisDefaults(v *types.AnalysisDefaults, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -21701,6 +21755,13 @@ func awsRestjson1_serializeDocumentAssetBundleImportJobDataSetOverrideParameters
 		ok.String(*v.DataSetId)
 	}
 
+	if v.DataSetRefreshProperties != nil {
+		ok := object.Key("DataSetRefreshProperties")
+		if err := awsRestjson1_serializeDocumentDataSetRefreshProperties(v.DataSetRefreshProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -22565,6 +22626,18 @@ func awsRestjson1_serializeDocumentAssetBundleRestrictiveResourceIdList(v []stri
 func awsRestjson1_serializeDocumentAssetOptions(v *types.AssetOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ExcludedDataSetArns != nil {
+		ok := object.Key("ExcludedDataSetArns")
+		if err := awsRestjson1_serializeDocumentDataSetArnsList(v.ExcludedDataSetArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.QBusinessInsightsStatus) > 0 {
+		ok := object.Key("QBusinessInsightsStatus")
+		ok.String(string(v.QBusinessInsightsStatus))
+	}
 
 	if v.Timezone != nil {
 		ok := object.Key("Timezone")
@@ -26176,6 +26249,13 @@ func awsRestjson1_serializeDocumentDashboardPublishOptions(v *types.DashboardPub
 		}
 	}
 
+	if v.DataQAEnabledOption != nil {
+		ok := object.Key("DataQAEnabledOption")
+		if err := awsRestjson1_serializeDocumentDataQAEnabledOption(v.DataQAEnabledOption, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ExportToCSVOption != nil {
 		ok := object.Key("ExportToCSVOption")
 		if err := awsRestjson1_serializeDocumentExportToCSVOption(v.ExportToCSVOption, ok); err != nil {
@@ -26838,6 +26918,41 @@ func awsRestjson1_serializeDocumentDataPointTooltipOption(v *types.DataPointTool
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDataQAEnabledOption(v *types.DataQAEnabledOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AvailabilityStatus) > 0 {
+		ok := object.Key("AvailabilityStatus")
+		ok.String(string(v.AvailabilityStatus))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataQnAConfigurations(v *types.DataQnAConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataSetArnsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDataSetConfiguration(v *types.DataSetConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -27045,6 +27160,13 @@ func awsRestjson1_serializeDocumentDataSetReferenceList(v []types.DataSetReferen
 func awsRestjson1_serializeDocumentDataSetRefreshProperties(v *types.DataSetRefreshProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.FailureConfiguration != nil {
+		ok := object.Key("FailureConfiguration")
+		if err := awsRestjson1_serializeDocumentRefreshFailureConfiguration(v.FailureConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.RefreshConfiguration != nil {
 		ok := object.Key("RefreshConfiguration")
@@ -27375,6 +27497,18 @@ func awsRestjson1_serializeDocumentDataSourceSearchFilterList(v []types.DataSour
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataStoriesConfigurations(v *types.DataStoriesConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
 	return nil
 }
 
@@ -28695,6 +28829,18 @@ func awsRestjson1_serializeDocumentExcludePeriodConfiguration(v *types.ExcludePe
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
 		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExecutiveSummaryConfigurations(v *types.ExecutiveSummaryConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
 	}
 
 	return nil
@@ -30943,6 +31089,18 @@ func awsRestjson1_serializeDocumentGaugeChartVisual(v *types.GaugeChartVisual, v
 	if v.VisualId != nil {
 		ok := object.Key("VisualId")
 		ok.String(*v.VisualId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGenerativeAuthoringConfigurations(v *types.GenerativeAuthoringConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
 	}
 
 	return nil
@@ -35773,6 +35931,11 @@ func awsRestjson1_serializeDocumentOracleParameters(v *types.OracleParameters, v
 		ok.Integer(*v.Port)
 	}
 
+	if v.UseServiceName {
+		ok := object.Key("UseServiceName")
+		ok.Boolean(v.UseServiceName)
+	}
+
 	return nil
 }
 
@@ -38264,6 +38427,18 @@ func awsRestjson1_serializeDocumentRdsParameters(v *types.RdsParameters, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRecentSnapshotsConfigurations(v *types.RecentSnapshotsConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRedshiftIAMParameters(v *types.RedshiftIAMParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -38569,6 +38744,32 @@ func awsRestjson1_serializeDocumentRefreshConfiguration(v *types.RefreshConfigur
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRefreshFailureConfiguration(v *types.RefreshFailureConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EmailAlert != nil {
+		ok := object.Key("EmailAlert")
+		if err := awsRestjson1_serializeDocumentRefreshFailureEmailAlert(v.EmailAlert, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRefreshFailureEmailAlert(v *types.RefreshFailureEmailAlert, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AlertStatus) > 0 {
+		ok := object.Key("AlertStatus")
+		ok.String(string(v.AlertStatus))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRefreshFrequency(v *types.RefreshFrequency, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -38653,6 +38854,27 @@ func awsRestjson1_serializeDocumentRegisteredUserConsoleFeatureConfigurations(v 
 	object := value.Object()
 	defer object.Close()
 
+	if v.AmazonQInQuickSight != nil {
+		ok := object.Key("AmazonQInQuickSight")
+		if err := awsRestjson1_serializeDocumentAmazonQInQuickSightConsoleConfigurations(v.AmazonQInQuickSight, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RecentSnapshots != nil {
+		ok := object.Key("RecentSnapshots")
+		if err := awsRestjson1_serializeDocumentRecentSnapshotsConfigurations(v.RecentSnapshots, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Schedules != nil {
+		ok := object.Key("Schedules")
+		if err := awsRestjson1_serializeDocumentSchedulesConfigurations(v.Schedules, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SharedView != nil {
 		ok := object.Key("SharedView")
 		if err := awsRestjson1_serializeDocumentSharedViewConfigurations(v.SharedView, ok); err != nil {
@@ -38663,6 +38885,13 @@ func awsRestjson1_serializeDocumentRegisteredUserConsoleFeatureConfigurations(v 
 	if v.StatePersistence != nil {
 		ok := object.Key("StatePersistence")
 		if err := awsRestjson1_serializeDocumentStatePersistenceConfigurations(v.StatePersistence, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ThresholdAlerts != nil {
+		ok := object.Key("ThresholdAlerts")
+		if err := awsRestjson1_serializeDocumentThresholdAlertsConfigurations(v.ThresholdAlerts, ok); err != nil {
 			return err
 		}
 	}
@@ -38693,9 +38922,30 @@ func awsRestjson1_serializeDocumentRegisteredUserDashboardFeatureConfigurations(
 	object := value.Object()
 	defer object.Close()
 
+	if v.AmazonQInQuickSight != nil {
+		ok := object.Key("AmazonQInQuickSight")
+		if err := awsRestjson1_serializeDocumentAmazonQInQuickSightDashboardConfigurations(v.AmazonQInQuickSight, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Bookmarks != nil {
 		ok := object.Key("Bookmarks")
 		if err := awsRestjson1_serializeDocumentBookmarksConfigurations(v.Bookmarks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RecentSnapshots != nil {
+		ok := object.Key("RecentSnapshots")
+		if err := awsRestjson1_serializeDocumentRecentSnapshotsConfigurations(v.RecentSnapshots, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Schedules != nil {
+		ok := object.Key("Schedules")
+		if err := awsRestjson1_serializeDocumentSchedulesConfigurations(v.Schedules, ok); err != nil {
 			return err
 		}
 	}
@@ -38710,6 +38960,13 @@ func awsRestjson1_serializeDocumentRegisteredUserDashboardFeatureConfigurations(
 	if v.StatePersistence != nil {
 		ok := object.Key("StatePersistence")
 		if err := awsRestjson1_serializeDocumentStatePersistenceConfigurations(v.StatePersistence, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ThresholdAlerts != nil {
+		ok := object.Key("ThresholdAlerts")
+		if err := awsRestjson1_serializeDocumentThresholdAlertsConfigurations(v.ThresholdAlerts, ok); err != nil {
 			return err
 		}
 	}
@@ -39688,6 +39945,18 @@ func awsRestjson1_serializeDocumentScheduleRefreshOnEntity(v *types.ScheduleRefr
 	if len(v.DayOfWeek) > 0 {
 		ok := object.Key("DayOfWeek")
 		ok.String(string(v.DayOfWeek))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchedulesConfigurations(v *types.SchedulesConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
 	}
 
 	return nil
@@ -41934,6 +42203,13 @@ func awsRestjson1_serializeDocumentTableFieldOptions(v *types.TableFieldOptions,
 		}
 	}
 
+	if v.TransposedTableOptions != nil {
+		ok := object.Key("TransposedTableOptions")
+		if err := awsRestjson1_serializeDocumentTransposedTableOptionList(v.TransposedTableOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -42635,6 +42911,18 @@ func awsRestjson1_serializeDocumentThousandSeparatorOptions(v *types.ThousandSep
 	if len(v.Visibility) > 0 {
 		ok := object.Key("Visibility")
 		ok.String(string(v.Visibility))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentThresholdAlertsConfigurations(v *types.ThresholdAlertsConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
 	}
 
 	return nil
@@ -44455,6 +44743,41 @@ func awsRestjson1_serializeDocumentTransformOperationList(v []types.TransformOpe
 			continue
 		}
 		if err := awsRestjson1_serializeDocumentTransformOperation(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTransposedTableOption(v *types.TransposedTableOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ColumnIndex != nil {
+		ok := object.Key("ColumnIndex")
+		ok.Integer(*v.ColumnIndex)
+	}
+
+	if len(v.ColumnType) > 0 {
+		ok := object.Key("ColumnType")
+		ok.String(string(v.ColumnType))
+	}
+
+	if v.ColumnWidth != nil {
+		ok := object.Key("ColumnWidth")
+		ok.String(*v.ColumnWidth)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTransposedTableOptionList(v []types.TransposedTableOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTransposedTableOption(&v[i], av); err != nil {
 			return err
 		}
 	}

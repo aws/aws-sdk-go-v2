@@ -93,6 +93,9 @@ type SearchOutput struct {
 	// A list of SearchRecord objects.
 	Results []types.SearchRecord
 
+	// The total number of matching results.
+	TotalHits *types.TotalHits
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

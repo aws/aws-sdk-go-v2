@@ -3171,6 +3171,15 @@ func awsAwsjson10_deserializeDocumentKey(v **types.Key, value interface{}) error
 				}
 			}
 
+		case "DeriveKeyUsage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeriveKeyUsage to be of type string, got %T instead", value)
+				}
+				sv.DeriveKeyUsage = types.DeriveKeyUsage(jtv)
+			}
+
 		case "Enabled":
 			if value != nil {
 				jtv, ok := value.(bool)

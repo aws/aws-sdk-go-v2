@@ -1,0 +1,8 @@
+{
+    "id": "da514259-0324-4f39-830e-a8fa404670e9",
+    "type": "feature",
+    "description": "Adds support for setting the IP address type to allow dual-stack or IPv4 address types to invoke your APIs or domain names.",
+    "modules": [
+        "service/apigatewayv2"
+    ]
+}
