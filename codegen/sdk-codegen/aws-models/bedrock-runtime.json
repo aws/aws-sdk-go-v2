@@ -2301,6 +2301,9 @@
                 "smithy.api#documentation": "<p>An assessment of a content policy for a guardrail.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#GuardrailContentPolicyImageUnitsProcessed": {
+            "type": "integer"
+        },
         "com.amazonaws.bedrockruntime#GuardrailContentPolicyUnitsProcessed": {
             "type": "integer"
         },
@@ -3385,6 +3388,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The contextual grounding policy units processed by the guardrail.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "contentPolicyImageUnits": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailContentPolicyImageUnitsProcessed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content policy image units processed by the guardrail.</p>"
                     }
                 }
             },

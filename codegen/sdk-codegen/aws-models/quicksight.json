@@ -586,6 +586,52 @@
                 "smithy.api#documentation": "<p>The parameters for OpenSearch.</p>"
             }
         },
+        "com.amazonaws.quicksight#AmazonQInQuickSightConsoleConfigurations": {
+            "type": "structure",
+            "members": {
+                "DataQnA": {
+                    "target": "com.amazonaws.quicksight#DataQnAConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adds generative Q&A capabilitiees to an embedded Amazon QuickSight console.</p>"
+                    }
+                },
+                "GenerativeAuthoring": {
+                    "target": "com.amazonaws.quicksight#GenerativeAuthoringConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adds the generative BI authoring experience to an embedded Amazon QuickSight console.</p>"
+                    }
+                },
+                "ExecutiveSummary": {
+                    "target": "com.amazonaws.quicksight#ExecutiveSummaryConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adds the executive summaries feature to an embedded Amazon QuickSight console.</p>"
+                    }
+                },
+                "DataStories": {
+                    "target": "com.amazonaws.quicksight#DataStoriesConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adds the data stories feature to an embedded Amazon QuickSight console.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of Amazon Q feature configurations in an embedded Amazon QuickSight console.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AmazonQInQuickSightDashboardConfigurations": {
+            "type": "structure",
+            "members": {
+                "ExecutiveSummary": {
+                    "target": "com.amazonaws.quicksight#ExecutiveSummaryConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generated executive summary of an embedded Amazon QuickSight dashboard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of Amazon Q feature configurations in an embedded Amazon QuickSight dashboard.</p>"
+            }
+        },
         "com.amazonaws.quicksight#Analysis": {
             "type": "structure",
             "members": {
@@ -1677,6 +1723,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Name"
                     }
+                },
+                "REFRESH_FAILURE_EMAIL_ALERT_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RefreshFailureEmailAlertStatus"
+                    }
                 }
             }
         },
@@ -2528,6 +2580,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A new name for the dataset.</p>"
                     }
+                },
+                "DataSetRefreshProperties": {
+                    "target": "com.amazonaws.quicksight#DataSetRefreshProperties"
                 }
             },
             "traits": {
@@ -3573,6 +3628,18 @@
                     "target": "com.amazonaws.quicksight#DayOfTheWeek",
                     "traits": {
                         "smithy.api#documentation": "<p>Determines the week start day for an analysis.</p>"
+                    }
+                },
+                "QBusinessInsightsStatus": {
+                    "target": "com.amazonaws.quicksight#QBusinessInsightsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether insight summaries from Amazon Q Business are allowed in Dashboard Q&A.</p>"
+                    }
+                },
+                "ExcludedDataSetArns": {
+                    "target": "com.amazonaws.quicksight#DataSetArnsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of dataset ARNS to exclude from Dashboard Q&A.</p>"
                     }
                 }
             },
@@ -9147,6 +9214,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for the performance optimization of the dataset that contains a <code>UniqueKey</code> configuration.</p>"
                     }
+                },
+                "UseAs": {
+                    "target": "com.amazonaws.quicksight#DataSetUseAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The usage of the dataset. <code>RLS_RULES</code> must be specified for RLS permission datasets.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10136,7 +10209,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>(Enterprise edition only) Creates a new namespace for you to use with Amazon QuickSight.</p>\n         <p>A namespace allows you to isolate the Amazon QuickSight users and groups that are registered\n            for that namespace. Users that access the namespace can share assets only with other\n            users or groups in the same namespace. They can't see users and groups in other\n            namespaces. You can create a namespace after your Amazon Web Services account is subscribed to\n            Amazon QuickSight. The namespace must be unique within the Amazon Web Services account. By default, there is a\n            limit of 100 namespaces per Amazon Web Services account. To increase your limit, create a ticket with\n            Amazon Web Services Support. </p>",
+                "smithy.api#documentation": "<p>(Enterprise edition only) Creates a new namespace for you to use with Amazon QuickSight.</p>\n         <p>A namespace allows you to isolate the Amazon QuickSight users and groups that are registered\n            for that namespace. Users that access the namespace can share assets only with other\n            users or groups in the same namespace. They can't see users and groups in other\n            namespaces. You can create a namespace after your Amazon Web Services account is subscribed to\n            Amazon QuickSight. The namespace must be unique within the Amazon Web Services account. By default, there is a\n            limit of 100 namespaces per Amazon Web Services account. To increase your limit, create a ticket with\n            Amazon Web ServicesSupport. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}",
@@ -12350,6 +12423,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The data point tool tip options of a dashboard.</p>"
                     }
+                },
+                "DataQAEnabledOption": {
+                    "target": "com.amazonaws.quicksight#DataQAEnabledOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adds Q&A capabilities to an Amazon QuickSight dashboard. If no topic is linked, Dashboard Q&A uses the data values that are rendered on the dashboard. End users can use Dashboard Q&A to ask for different slices of the data that they see on the dashboard. If a topic is linked, Topic Q&A is used.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13319,6 +13398,36 @@
                 "smithy.api#documentation": "<p>The data point tooltip options.</p>"
             }
         },
+        "com.amazonaws.quicksight#DataQAEnabledOption": {
+            "type": "structure",
+            "members": {
+                "AvailabilityStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Data Q&A option on the dashboard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Adds Q&A capabilities to a dashboard. If no topic is linked, Dashboard Q&A uses the data values that are rendered on the dashboard. End users can use Dashboard Q&A to ask for different slices of the data that they see on the dashboard. If a topic is linked, Topic Q&A is enabled.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataQnAConfigurations": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The generative Q&A settings of an embedded Amazon QuickSight console.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The generative Q&A settings of an embedded Amazon QuickSight console.</p>"
+            }
+        },
         "com.amazonaws.quicksight#DataSet": {
             "type": "structure",
             "members": {
@@ -13429,6 +13538,12 @@
                     "target": "com.amazonaws.quicksight#PerformanceConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The performance optimization configuration of a dataset.</p>"
+                    }
+                },
+                "UseAs": {
+                    "target": "com.amazonaws.quicksight#DataSetUseAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The usage of the dataset.</p>"
                     }
                 }
             },
@@ -13645,8 +13760,13 @@
                 "RefreshConfiguration": {
                     "target": "com.amazonaws.quicksight#RefreshConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The refresh configuration for a dataset.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The refresh configuration for a dataset.</p>"
+                    }
+                },
+                "FailureConfiguration": {
+                    "target": "com.amazonaws.quicksight#RefreshFailureConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure configuration for a dataset.</p>"
                     }
                 }
             },
@@ -13776,6 +13896,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates if the dataset has column level permission configured.</p>"
                     }
+                },
+                "UseAs": {
+                    "target": "com.amazonaws.quicksight#DataSetUseAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The usage of the dataset.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13808,6 +13934,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The usage configuration to apply to child datasets that reference this dataset as a source.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetUseAs": {
+            "type": "enum",
+            "members": {
+                "RLS_RULES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RLS_RULES"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#DataSource": {
@@ -14475,6 +14612,22 @@
                         "smithy.api#enumValue": "BIGQUERY"
                     }
                 }
+            }
+        },
+        "com.amazonaws.quicksight#DataStoriesConfigurations": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The data story settings of an embedded Amazon QuickSight console.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data story settings of an embedded Amazon QuickSight console.</p>"
             }
         },
         "com.amazonaws.quicksight#Database": {
@@ -24794,6 +24947,22 @@
                 "smithy.api#documentation": "<p>The exclude period of <code>TimeRangeFilter</code> or <code>RelativeDatesFilter</code>.</p>"
             }
         },
+        "com.amazonaws.quicksight#ExecutiveSummaryConfigurations": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The executive summary settings of an embedded Amazon QuickSight console or dashboard.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The executive summary settings of an embedded Amazon QuickSight console or dashboard.</p>"
+            }
+        },
         "com.amazonaws.quicksight#ExplicitHierarchy": {
             "type": "structure",
             "members": {
@@ -24920,7 +25089,7 @@
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A boolean that indicates whether a <code>FailedKeyRegistrationEntry</code> resulted from user error. If the value of this property is <code>True</code>, the error was caused by user error. If the value of this property is <code>False</code>, the error occurred on the backend. If your job continues fail and with a <code>False</code>\n            <code>SenderFault</code> value, contact Amazon Web Services Support.</p>",
+                        "smithy.api#documentation": "<p>A boolean that indicates whether a <code>FailedKeyRegistrationEntry</code> resulted from user error. If the value of this property is <code>True</code>, the error was caused by user error. If the value of this property is <code>False</code>, the error occurred on the backend. If your job continues fail and with a <code>False</code>\n            <code>SenderFault</code> value, contact Amazon Web ServicesSupport.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -28067,6 +28236,22 @@
                         "smithy.api#enumValue": "ANSWER_DOWNGRADE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.quicksight#GenerativeAuthoringConfigurations": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The generative BI authoring settings of an embedded Amazon QuickSight console.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The generative BI authoring settings of an embedded Amazon QuickSight console.</p>"
             }
         },
         "com.amazonaws.quicksight#GeoSpatialColumnGroup": {
@@ -39555,6 +39740,13 @@
                         "smithy.api#documentation": "<p>The database.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "UseServiceName": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether the <code>Database</code> uses a service name or an SID. If this value is left blank, the default value is <code>SID</code>. If this value is set to <code>false</code>, the value is <code>SID</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -42074,7 +42266,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Predicts existing visuals or generates new visuals to answer a given query.</p>",
+                "smithy.api#documentation": "<p>Predicts existing visuals or generates new visuals to answer a given query.</p>\n         <p>This API uses <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation.html\">trusted identity propagation</a> to ensure that an end user is authenticated and receives the embed URL that is specific to that user. The IAM Identity Center application that the user has logged into needs to have <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-using-customermanagedapps-specify-trusted-apps.html\">trusted Identity Propagation enabled for Amazon QuickSight</a> with the scope value set to <code>quicksight:read</code>. Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions.</p>\n         <p>We recommend enabling the <code>QSearchStatus</code> API to unlock the full potential of <code>PredictQnA</code>. When <code>QSearchStatus</code> is enabled, it first checks the specified dashboard for any existing visuals that match the question. If no matching visuals are found, <code>PredictQnA</code> uses generative Q&A to provide an answer. To update the <code>QSearchStatus</code>, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateQuickSightQSearchConfiguration.html\">UpdateQuickSightQSearchConfiguration</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/qa/predict",
@@ -42519,6 +42711,23 @@
         },
         "com.amazonaws.quicksight#QAUrl": {
             "type": "string"
+        },
+        "com.amazonaws.quicksight#QBusinessInsightsStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
         },
         "com.amazonaws.quicksight#QSearchStatus": {
             "type": "enum",
@@ -44495,6 +44704,22 @@
                 "smithy.api#documentation": "<p>The parameters for Amazon RDS.</p>"
             }
         },
+        "com.amazonaws.quicksight#RecentSnapshotsConfigurations": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The recent snapshots configuration for an embedded Amazon QuickSight dashboard.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The recent snapshots configuration for an embedded Amazon QuickSight dashboard.</p>"
+            }
+        },
         "com.amazonaws.quicksight#RecoveryWindowInDays": {
             "type": "long",
             "traits": {
@@ -44916,6 +45141,51 @@
                 "smithy.api#documentation": "<p>The refresh configuration of a dataset.</p>"
             }
         },
+        "com.amazonaws.quicksight#RefreshFailureAlertStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#RefreshFailureConfiguration": {
+            "type": "structure",
+            "members": {
+                "EmailAlert": {
+                    "target": "com.amazonaws.quicksight#RefreshFailureEmailAlert",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email alert configuration for a dataset refresh failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The failure configuration of a dataset.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RefreshFailureEmailAlert": {
+            "type": "structure",
+            "members": {
+                "AlertStatus": {
+                    "target": "com.amazonaws.quicksight#RefreshFailureAlertStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status value that determines if email alerts are sent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for the email alerts that are sent when a dataset refresh fails.</p>"
+            }
+        },
         "com.amazonaws.quicksight#RefreshFrequency": {
             "type": "structure",
             "members": {
@@ -45248,6 +45518,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The shared view settings of an embedded dashboard.</p>"
                     }
+                },
+                "AmazonQInQuickSight": {
+                    "target": "com.amazonaws.quicksight#AmazonQInQuickSightConsoleConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Q configurations of an embedded Amazon QuickSight console.</p>"
+                    }
+                },
+                "Schedules": {
+                    "target": "com.amazonaws.quicksight#SchedulesConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedules configuration for an embedded Amazon QuickSight dashboard.</p>"
+                    }
+                },
+                "RecentSnapshots": {
+                    "target": "com.amazonaws.quicksight#RecentSnapshotsConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recent snapshots configuration for an embedded Amazon QuickSight dashboard.</p>"
+                    }
+                },
+                "ThresholdAlerts": {
+                    "target": "com.amazonaws.quicksight#ThresholdAlertsConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold alerts configuration for an embedded Amazon QuickSight dashboard.</p>"
+                    }
                 }
             },
             "traits": {
@@ -45294,6 +45588,30 @@
                     "target": "com.amazonaws.quicksight#BookmarksConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>The bookmarks configuration for an embedded dashboard in Amazon QuickSight.</p>"
+                    }
+                },
+                "AmazonQInQuickSight": {
+                    "target": "com.amazonaws.quicksight#AmazonQInQuickSightDashboardConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Q configurations of an embedded Amazon QuickSight dashboard.</p>"
+                    }
+                },
+                "Schedules": {
+                    "target": "com.amazonaws.quicksight#SchedulesConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedules configuration for an embedded Amazon QuickSight dashboard.</p>"
+                    }
+                },
+                "RecentSnapshots": {
+                    "target": "com.amazonaws.quicksight#RecentSnapshotsConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recent snapshots configuration for an Amazon QuickSight embedded dashboard</p>"
+                    }
+                },
+                "ThresholdAlerts": {
+                    "target": "com.amazonaws.quicksight#ThresholdAlertsConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold alerts configuration for an Amazon QuickSight embedded dashboard.</p>"
                     }
                 }
             },
@@ -46891,6 +47209,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The refresh on entity for weekly or monthly schedules.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SchedulesConfigurations": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The schedules configuration for an embedded Amazon QuickSight dashboard.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The schedules configuration for an embedded Amazon QuickSight dashboard.</p>"
             }
         },
         "com.amazonaws.quicksight#ScrollBarOptions": {
@@ -51681,6 +52015,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The settings for the pinned columns of a table visual.</p>"
                     }
+                },
+                "TransposedTableOptions": {
+                    "target": "com.amazonaws.quicksight#TransposedTableOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>TableOptions</code> of a transposed table.</p>"
+                    }
                 }
             },
             "traits": {
@@ -53251,6 +53591,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The options that determine the thousands separator configuration.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ThresholdAlertsConfigurations": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The threshold alerts configuration for an embedded Amazon QuickSight dashboard.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The threshold alerts configuration for an embedded Amazon QuickSight dashboard.</p>"
             }
         },
         "com.amazonaws.quicksight#ThrottlingException": {
@@ -55845,6 +56201,73 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TransposedColumnIndex": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>The integer value of a column index in the transposed table.</p>",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 9999
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TransposedColumnType": {
+            "type": "enum",
+            "members": {
+                "ROW_HEADER_COLUMN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROW_HEADER_COLUMN"
+                    }
+                },
+                "VALUE_COLUMN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE_COLUMN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TransposedTableOption": {
+            "type": "structure",
+            "members": {
+                "ColumnIndex": {
+                    "target": "com.amazonaws.quicksight#TransposedColumnIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of a columns in a transposed table. The index range is 0-9999.</p>"
+                    }
+                },
+                "ColumnWidth": {
+                    "target": "com.amazonaws.quicksight#PixelLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The width of a column in a transposed table.</p>"
+                    }
+                },
+                "ColumnType": {
+                    "target": "com.amazonaws.quicksight#TransposedColumnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column type of the column in a transposed table. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ROW_HEADER_COLUMN</code>: Refers to the leftmost column of the row header in the transposed table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VALUE_COLUMN</code>: Refers to all value columns in the transposed table.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The column option of the transposed table.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TransposedTableOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#TransposedTableOption"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of <code>TransposedTableOption</code> configurations.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10001
                 }
             }
         },

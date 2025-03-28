@@ -139,6 +139,13 @@
                         "smithy.api#jsonName": "importInfo"
                     }
                 },
+                "IpAddressType": {
+                    "target": "com.amazonaws.apigatewayv2#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address types that can invoke the API.</p>",
+                        "smithy.api#jsonName": "ipAddressType"
+                    }
+                },
                 "Name": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
@@ -1876,6 +1883,13 @@
                         "smithy.api#jsonName": "disableExecuteApiEndpoint"
                     }
                 },
+                "IpAddressType": {
+                    "target": "com.amazonaws.apigatewayv2#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address types that can invoke the API.</p>",
+                        "smithy.api#jsonName": "ipAddressType"
+                    }
+                },
                 "Name": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
@@ -2006,6 +2020,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The validation information during API import. This may include particular properties of your OpenAPI definition which are ignored during import. Supported only for HTTP APIs.</p>",
                         "smithy.api#jsonName": "importInfo"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.apigatewayv2#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address types that can invoke the API.</p>",
+                        "smithy.api#jsonName": "ipAddressType"
                     }
                 },
                 "Name": {
@@ -4767,6 +4788,13 @@
                         "smithy.api#jsonName": "hostedZoneId"
                     }
                 },
+                "IpAddressType": {
+                    "target": "com.amazonaws.apigatewayv2#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address types that can invoke the domain name. Use ipv4 to allow only IPv4 addresses to invoke your domain name, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your domain name.</p>",
+                        "smithy.api#jsonName": "ipAddressType"
+                    }
+                },
                 "SecurityPolicy": {
                     "target": "com.amazonaws.apigatewayv2#SecurityPolicy",
                     "traits": {
@@ -5228,6 +5256,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The validation information during API import. This may include particular properties of your OpenAPI definition which are ignored during import. Supported only for HTTP APIs.</p>",
                         "smithy.api#jsonName": "importInfo"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.apigatewayv2#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address types that can invoke the API.</p>",
+                        "smithy.api#jsonName": "ipAddressType"
                     }
                 },
                 "Name": {
@@ -7650,6 +7685,13 @@
                         "smithy.api#jsonName": "importInfo"
                     }
                 },
+                "IpAddressType": {
+                    "target": "com.amazonaws.apigatewayv2#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address types that can invoke the API.</p>",
+                        "smithy.api#jsonName": "ipAddressType"
+                    }
+                },
                 "Name": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
@@ -7975,6 +8017,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents an API method integration type.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#IpAddressType": {
+            "type": "enum",
+            "members": {
+                "ipv4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "dualstack": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dualstack"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The IP address types that can invoke your API or domain name.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#JWTConfiguration": {
@@ -8348,6 +8410,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The validation information during API import. This may include particular properties of your OpenAPI definition which are ignored during import. Supported only for HTTP APIs.</p>",
                         "smithy.api#jsonName": "importInfo"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.apigatewayv2#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address types that can invoke the API.</p>",
+                        "smithy.api#jsonName": "ipAddressType"
                     }
                 },
                 "Name": {
@@ -9302,6 +9371,13 @@
                         "smithy.api#jsonName": "disableExecuteApiEndpoint"
                     }
                 },
+                "IpAddressType": {
+                    "target": "com.amazonaws.apigatewayv2#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address types that can invoke your API or domain name.</p>",
+                        "smithy.api#jsonName": "ipAddressType"
+                    }
+                },
                 "Name": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
@@ -9414,6 +9490,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The validation information during API import. This may include particular properties of your OpenAPI definition which are ignored during import. Supported only for HTTP APIs.</p>",
                         "smithy.api#jsonName": "importInfo"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.apigatewayv2#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address types that can invoke the API.</p>",
+                        "smithy.api#jsonName": "ipAddressType"
                     }
                 },
                 "Name": {

@@ -15006,7 +15006,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a transform job. A transform job uses a trained model to get inferences on a\n            dataset and saves these results to an Amazon S3 location that you specify.</p>\n         <p>To perform batch transformations, you create a transform job and use the data that you\n            have readily available.</p>\n         <p>In the request body, you provide the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TransformJobName</code> - Identifies the transform job. The name must be\n                    unique within an Amazon Web Services Region in an Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ModelName</code> - Identifies the model to use. <code>ModelName</code>\n                    must be the name of an existing Amazon SageMaker model in the same Amazon Web Services Region and Amazon Web Services\n\t\t    account. For information on creating a model, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html\">CreateModel</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TransformInput</code> - Describes the dataset to be transformed and the\n                    Amazon S3 location where it is stored.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TransformOutput</code> - Identifies the Amazon S3 location where you want\n                    Amazon SageMaker to save the results from the transform job.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TransformResources</code> - Identifies the ML compute instances for the\n                    transform job.</p>\n            </li>\n         </ul>\n         <p>For more information about how batch transformation works, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html\">Batch\n                Transform</a>.</p>"
+                "smithy.api#documentation": "<p>Starts a transform job. A transform job uses a trained model to get inferences on a\n            dataset and saves these results to an Amazon S3 location that you specify.</p>\n         <p>To perform batch transformations, you create a transform job and use the data that you\n            have readily available.</p>\n         <p>In the request body, you provide the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TransformJobName</code> - Identifies the transform job. The name must be\n                    unique within an Amazon Web Services Region in an Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ModelName</code> - Identifies the model to use. <code>ModelName</code>\n                    must be the name of an existing Amazon SageMaker model in the same Amazon Web Services Region and Amazon Web Services\n\t\t    account. For information on creating a model, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html\">CreateModel</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TransformInput</code> - Describes the dataset to be transformed and the\n                    Amazon S3 location where it is stored.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TransformOutput</code> - Identifies the Amazon S3 location where you want\n                    Amazon SageMaker to save the results from the transform job.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TransformResources</code> - Identifies the ML compute instances and AMI\n                    image versions for the transform job.</p>\n            </li>\n         </ul>\n         <p>For more information about how batch transformation works, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html\">Batch\n                Transform</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateTransformJobRequest": {
@@ -31543,25 +31543,25 @@
                     "target": "com.amazonaws.sagemaker#ResourcePropertyName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A resource property name. For example, <code>TrainingJobName</code>. For\n      valid property names, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SearchRecord.html\">SearchRecord</a>.\n      You must specify a valid property for the resource.</p>",
+                        "smithy.api#documentation": "<p>A resource property name. For example, <code>TrainingJobName</code>. For valid property\n      names, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SearchRecord.html\">SearchRecord</a>. You must\n      specify a valid property for the resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Operator": {
                     "target": "com.amazonaws.sagemaker#Operator",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean binary operator that is used to evaluate the filter. The operator field\n      contains one of the following values:</p>\n         <dl>\n            <dt>Equals</dt>\n            <dd>\n               <p>The value of <code>Name</code> equals <code>Value</code>.</p>\n            </dd>\n            <dt>NotEquals</dt>\n            <dd>\n               <p>The value of <code>Name</code> doesn't equal <code>Value</code>.</p>\n            </dd>\n            <dt>Exists</dt>\n            <dd>\n               <p>The <code>Name</code> property exists.</p>\n            </dd>\n            <dt>NotExists</dt>\n            <dd>\n               <p>The <code>Name</code> property does not exist.</p>\n            </dd>\n            <dt>GreaterThan</dt>\n            <dd>\n               <p>The value of <code>Name</code> is greater than <code>Value</code>.\n            Not supported for text properties.</p>\n            </dd>\n            <dt>GreaterThanOrEqualTo</dt>\n            <dd>\n               <p>The value of <code>Name</code> is greater than or equal to <code>Value</code>.\n            Not supported for text properties.</p>\n            </dd>\n            <dt>LessThan</dt>\n            <dd>\n               <p>The value of <code>Name</code> is less than <code>Value</code>.\n            Not supported for text properties.</p>\n            </dd>\n            <dt>LessThanOrEqualTo</dt>\n            <dd>\n               <p>The value of <code>Name</code> is less than or equal to <code>Value</code>.\n            Not supported for text properties.</p>\n            </dd>\n            <dt>In</dt>\n            <dd>\n               <p>The value of <code>Name</code> is one of the comma delimited strings in\n            <code>Value</code>. Only supported for text properties.</p>\n            </dd>\n            <dt>Contains</dt>\n            <dd>\n               <p>The value of <code>Name</code> contains the string <code>Value</code>.\n            Only supported for text properties.</p>\n               <p>A <code>SearchExpression</code> can include the <code>Contains</code> operator\n            multiple times when the value of <code>Name</code> is one of the following:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Experiment.DisplayName</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Experiment.ExperimentName</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Experiment.Tags</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Trial.DisplayName</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Trial.TrialName</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Trial.Tags</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TrialComponent.DisplayName</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TrialComponent.TrialComponentName</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TrialComponent.Tags</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TrialComponent.InputArtifacts</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TrialComponent.OutputArtifacts</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>A <code>SearchExpression</code> can include only one <code>Contains</code> operator\n            for all other values of <code>Name</code>. In these cases, if you include multiple\n            <code>Contains</code> operators in the <code>SearchExpression</code>, the result is\n            the following error message: \"<code>'CONTAINS' operator usage limit of 1\n            exceeded.</code>\"</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>A Boolean binary operator that is used to evaluate the filter. The operator field contains\n      one of the following values:</p>\n         <dl>\n            <dt>Equals</dt>\n            <dd>\n               <p>The value of <code>Name</code> equals <code>Value</code>.</p>\n            </dd>\n            <dt>NotEquals</dt>\n            <dd>\n               <p>The value of <code>Name</code> doesn't equal <code>Value</code>.</p>\n            </dd>\n            <dt>Exists</dt>\n            <dd>\n               <p>The <code>Name</code> property exists.</p>\n            </dd>\n            <dt>NotExists</dt>\n            <dd>\n               <p>The <code>Name</code> property does not exist.</p>\n            </dd>\n            <dt>GreaterThan</dt>\n            <dd>\n               <p>The value of <code>Name</code> is greater than <code>Value</code>. Not supported for\n            text properties.</p>\n            </dd>\n            <dt>GreaterThanOrEqualTo</dt>\n            <dd>\n               <p>The value of <code>Name</code> is greater than or equal to <code>Value</code>. Not\n            supported for text properties.</p>\n            </dd>\n            <dt>LessThan</dt>\n            <dd>\n               <p>The value of <code>Name</code> is less than <code>Value</code>. Not supported for\n            text properties.</p>\n            </dd>\n            <dt>LessThanOrEqualTo</dt>\n            <dd>\n               <p>The value of <code>Name</code> is less than or equal to <code>Value</code>. Not\n            supported for text properties.</p>\n            </dd>\n            <dt>In</dt>\n            <dd>\n               <p>The value of <code>Name</code> is one of the comma delimited strings in\n              <code>Value</code>. Only supported for text properties.</p>\n            </dd>\n            <dt>Contains</dt>\n            <dd>\n               <p>The value of <code>Name</code> contains the string <code>Value</code>. Only\n            supported for text properties.</p>\n               <p>A <code>SearchExpression</code> can include the <code>Contains</code> operator\n            multiple times when the value of <code>Name</code> is one of the following:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Experiment.DisplayName</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Experiment.ExperimentName</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Experiment.Tags</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Trial.DisplayName</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Trial.TrialName</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Trial.Tags</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TrialComponent.DisplayName</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TrialComponent.TrialComponentName</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TrialComponent.Tags</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TrialComponent.InputArtifacts</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TrialComponent.OutputArtifacts</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>A <code>SearchExpression</code> can include only one <code>Contains</code> operator\n            for all other values of <code>Name</code>. In these cases, if you include multiple\n              <code>Contains</code> operators in the <code>SearchExpression</code>, the result is\n            the following error message: \"<code>'CONTAINS' operator usage limit of 1\n              exceeded.</code>\"</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.sagemaker#FilterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value used with <code>Name</code> and <code>Operator</code> to determine which\n        resources satisfy the filter's condition. For numerical properties, <code>Value</code>\n        must be an integer or floating-point decimal. For timestamp properties,\n        <code>Value</code> must be an ISO 8601 date-time string of the following format:\n        <code>YYYY-mm-dd'T'HH:MM:SS</code>.</p>"
+                        "smithy.api#documentation": "<p>A value used with <code>Name</code> and <code>Operator</code> to determine which resources\n      satisfy the filter's condition. For numerical properties, <code>Value</code> must be an\n      integer or floating-point decimal. For timestamp properties, <code>Value</code> must be an ISO\n      8601 date-time string of the following format: <code>YYYY-mm-dd'T'HH:MM:SS</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A conditional statement for a search expression that includes a resource property, a\n      Boolean operator, and a value. Resources that match the statement are returned in the\n      results from the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html\">Search</a> API.</p>\n         <p>If you specify a <code>Value</code>, but not an <code>Operator</code>, SageMaker uses the\n      equals operator.</p>\n         <p>In search, there are several property types:</p>\n         <dl>\n            <dt>Metrics</dt>\n            <dd>\n               <p>To define a metric filter, enter a value using the form\n            <code>\"Metrics.<name>\"</code>, where <code><name></code> is\n            a metric name. For example, the following filter searches for training jobs\n            with an <code>\"accuracy\"</code> metric greater than\n            <code>\"0.9\"</code>:</p>\n               <p>\n                  <code>{</code>\n               </p>\n               <p>\n                  <code>\"Name\": \"Metrics.accuracy\",</code>\n               </p>\n               <p>\n                  <code>\"Operator\": \"GreaterThan\",</code>\n               </p>\n               <p>\n                  <code>\"Value\": \"0.9\"</code>\n               </p>\n               <p>\n                  <code>}</code>\n               </p>\n            </dd>\n            <dt>HyperParameters</dt>\n            <dd>\n               <p>To define a hyperparameter filter, enter a value with the form\n            <code>\"HyperParameters.<name>\"</code>. Decimal hyperparameter\n            values are treated as a decimal in a comparison if the specified\n            <code>Value</code> is also a decimal value. If the specified\n            <code>Value</code> is an integer, the decimal hyperparameter values are\n            treated as integers. For example, the following filter is satisfied by\n            training jobs with a <code>\"learning_rate\"</code> hyperparameter that is\n            less than <code>\"0.5\"</code>:</p>\n               <p>\n                  <code> {</code>\n               </p>\n               <p>\n                  <code> \"Name\": \"HyperParameters.learning_rate\",</code>\n               </p>\n               <p>\n                  <code> \"Operator\": \"LessThan\",</code>\n               </p>\n               <p>\n                  <code> \"Value\": \"0.5\"</code>\n               </p>\n               <p>\n                  <code> }</code>\n               </p>\n            </dd>\n            <dt>Tags</dt>\n            <dd>\n               <p>To define a tag filter, enter a value with the form\n            <code>Tags.<key></code>.</p>\n            </dd>\n         </dl>"
+                "smithy.api#documentation": "<p>A conditional statement for a search expression that includes a resource property, a\n      Boolean operator, and a value. Resources that match the statement are returned in the results\n      from the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html\">Search</a> API.</p>\n         <p>If you specify a <code>Value</code>, but not an <code>Operator</code>, SageMaker uses the\n      equals operator.</p>\n         <p>In search, there are several property types:</p>\n         <dl>\n            <dt>Metrics</dt>\n            <dd>\n               <p>To define a metric filter, enter a value using the form\n              <code>\"Metrics.<name>\"</code>, where <code><name></code> is a metric name.\n            For example, the following filter searches for training jobs with an\n              <code>\"accuracy\"</code> metric greater than <code>\"0.9\"</code>:</p>\n               <p>\n                  <code>{</code>\n               </p>\n               <p>\n                  <code>\"Name\": \"Metrics.accuracy\",</code>\n               </p>\n               <p>\n                  <code>\"Operator\": \"GreaterThan\",</code>\n               </p>\n               <p>\n                  <code>\"Value\": \"0.9\"</code>\n               </p>\n               <p>\n                  <code>}</code>\n               </p>\n            </dd>\n            <dt>HyperParameters</dt>\n            <dd>\n               <p>To define a hyperparameter filter, enter a value with the form\n              <code>\"HyperParameters.<name>\"</code>. Decimal hyperparameter values are treated\n            as a decimal in a comparison if the specified <code>Value</code> is also a decimal\n            value. If the specified <code>Value</code> is an integer, the decimal hyperparameter\n            values are treated as integers. For example, the following filter is satisfied by\n            training jobs with a <code>\"learning_rate\"</code> hyperparameter that is less than\n              <code>\"0.5\"</code>:</p>\n               <p>\n                  <code> {</code>\n               </p>\n               <p>\n                  <code> \"Name\": \"HyperParameters.learning_rate\",</code>\n               </p>\n               <p>\n                  <code> \"Operator\": \"LessThan\",</code>\n               </p>\n               <p>\n                  <code> \"Value\": \"0.5\"</code>\n               </p>\n               <p>\n                  <code> }</code>\n               </p>\n            </dd>\n            <dt>Tags</dt>\n            <dd>\n               <p>To define a tag filter, enter a value with the form\n            <code>Tags.<key></code>.</p>\n            </dd>\n         </dl>"
             }
         },
         "com.amazonaws.sagemaker#FilterList": {
@@ -32334,7 +32334,7 @@
                 "target": "com.amazonaws.sagemaker#GetSearchSuggestionsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>An auto-complete API for the search functionality in the SageMaker console. It returns\n      suggestions of possible matches for the property name to use in <code>Search</code>\n      queries. Provides suggestions for <code>HyperParameters</code>, <code>Tags</code>, and\n      <code>Metrics</code>.</p>"
+                "smithy.api#documentation": "<p>An auto-complete API for the search functionality in the SageMaker console. It returns\n      suggestions of possible matches for the property name to use in <code>Search</code> queries.\n      Provides suggestions for <code>HyperParameters</code>, <code>Tags</code>, and\n        <code>Metrics</code>.</p>"
             }
         },
         "com.amazonaws.sagemaker#GetSearchSuggestionsRequest": {
@@ -32365,7 +32365,7 @@
                 "PropertyNameSuggestions": {
                     "target": "com.amazonaws.sagemaker#PropertyNameSuggestionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of property names for a <code>Resource</code> that match a\n      <code>SuggestionQuery</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of property names for a <code>Resource</code> that match a\n        <code>SuggestionQuery</code>.</p>"
                     }
                 }
             },
@@ -51582,7 +51582,7 @@
                     "target": "com.amazonaws.sagemaker#ResourcePropertyName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the property to use in the nested filters. The value must match a listed property name,\n      such as <code>InputDataConfig</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the property to use in the nested filters. The value must match a listed\n      property name, such as <code>InputDataConfig</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -51590,13 +51590,13 @@
                     "target": "com.amazonaws.sagemaker#FilterList",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A list of filters. Each filter acts on a property. Filters must contain at least one\n      <code>Filters</code> value. For example, a <code>NestedFilters</code> call might\n      include a filter on the <code>PropertyName</code> parameter of the\n      <code>InputDataConfig</code> property:\n      <code>InputDataConfig.DataSource.S3DataSource.S3Uri</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of filters. Each filter acts on a property. Filters must contain at least one\n        <code>Filters</code> value. For example, a <code>NestedFilters</code> call might include a\n      filter on the <code>PropertyName</code> parameter of the <code>InputDataConfig</code>\n      property: <code>InputDataConfig.DataSource.S3DataSource.S3Uri</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of nested <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Filter.html\">Filter</a> objects. A resource must satisfy the conditions\n      of all filters to be included in the results returned from the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html\">Search</a> API.</p>\n         <p>For example, to filter on a training job's <code>InputDataConfig</code> property with a\n      specific channel name and <code>S3Uri</code> prefix, define the following filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>'{Name:\"InputDataConfig.ChannelName\", \"Operator\":\"Equals\", \"Value\":\"train\"}',</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>'{Name:\"InputDataConfig.DataSource.S3DataSource.S3Uri\", \"Operator\":\"Contains\",\n            \"Value\":\"mybucket/catdata\"}'</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A list of nested <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Filter.html\">Filter</a> objects. A resource must\n      satisfy the conditions of all filters to be included in the results returned from the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html\">Search</a>\n      API.</p>\n         <p>For example, to filter on a training job's <code>InputDataConfig</code> property with a\n      specific channel name and <code>S3Uri</code> prefix, define the following filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>'{Name:\"InputDataConfig.ChannelName\", \"Operator\":\"Equals\", \"Value\":\"train\"}',</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>'{Name:\"InputDataConfig.DataSource.S3DataSource.S3Uri\", \"Operator\":\"Contains\",\n            \"Value\":\"mybucket/catdata\"}'</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sagemaker#NestedFiltersList": {
@@ -58381,7 +58381,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A property name returned from a <code>GetSearchSuggestions</code> call that specifies\n      a value in the <code>PropertyNameQuery</code> field.</p>"
+                "smithy.api#documentation": "<p>A property name returned from a <code>GetSearchSuggestions</code> call that specifies a\n      value in the <code>PropertyNameQuery</code> field.</p>"
             }
         },
         "com.amazonaws.sagemaker#PropertyNameSuggestionList": {
@@ -59894,6 +59894,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Metadata for a register model job step.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#Relation": {
+            "type": "enum",
+            "members": {
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EqualTo"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreaterThanOrEqualTo"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#ReleaseNotes": {
@@ -63839,7 +63856,7 @@
                 "target": "com.amazonaws.sagemaker#SearchResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Finds SageMaker resources that match a search query. Matching resources are returned\n      as a list of <code>SearchRecord</code> objects in the response. You can sort the search\n      results by any resource property in a ascending or descending order.</p>\n         <p>You can query against the following value types: numeric, text, Boolean, and\n      timestamp.</p>\n         <note>\n            <p>The Search API may provide access to otherwise restricted data. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html\">Amazon SageMaker \n      API Permissions: Actions, Permissions, and Resources Reference</a> for more\n        information.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Finds SageMaker resources that match a search query. Matching resources are returned as a list\n      of <code>SearchRecord</code> objects in the response. You can sort the search results by any\n      resource property in a ascending or descending order.</p>\n         <p>You can query against the following value types: numeric, text, Boolean, and\n      timestamp.</p>\n         <note>\n            <p>The Search API may provide access to otherwise restricted data. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html\">Amazon SageMaker API\n          Permissions: Actions, Permissions, and Resources Reference</a> for more\n        information.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -63872,12 +63889,12 @@
                 "Operator": {
                     "target": "com.amazonaws.sagemaker#BooleanOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean operator used to evaluate the search expression. If you want every\n      conditional statement in all lists to be satisfied for the entire search expression to\n      be true, specify <code>And</code>. If only a single conditional statement needs to be\n      true for the entire search expression to be true, specify <code>Or</code>. The default\n      value is <code>And</code>.</p>"
+                        "smithy.api#documentation": "<p>A Boolean operator used to evaluate the search expression. If you want every conditional\n      statement in all lists to be satisfied for the entire search expression to be true, specify\n        <code>And</code>. If only a single conditional statement needs to be true for the entire\n      search expression to be true, specify <code>Or</code>. The default value is\n      <code>And</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A multi-expression that searches for the specified resource or resources in a search. All resource\n      objects that satisfy the expression's condition are included in the search results. You must specify at\n      least one subexpression, filter, or nested filter. A <code>SearchExpression</code> can contain up to\n      twenty elements.</p>\n         <p>A <code>SearchExpression</code> contains the following components:</p>\n         <ul>\n            <li>\n               <p>A list of <code>Filter</code> objects. Each filter defines a simple Boolean\n          expression comprised of a resource property name, Boolean operator, and\n          value.</p>\n            </li>\n            <li>\n               <p>A list of <code>NestedFilter</code> objects. Each nested filter defines a list\n          of Boolean expressions using a list of resource properties. A nested filter is\n          satisfied if a single object in the list satisfies all Boolean\n          expressions.</p>\n            </li>\n            <li>\n               <p>A list of <code>SearchExpression</code> objects. A search expression object\n          can be nested in a list of search expression objects.</p>\n            </li>\n            <li>\n               <p>A Boolean operator: <code>And</code> or <code>Or</code>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A multi-expression that searches for the specified resource or resources in a search. All\n      resource objects that satisfy the expression's condition are included in the search results.\n      You must specify at least one subexpression, filter, or nested filter. A\n        <code>SearchExpression</code> can contain up to twenty elements.</p>\n         <p>A <code>SearchExpression</code> contains the following components:</p>\n         <ul>\n            <li>\n               <p>A list of <code>Filter</code> objects. Each filter defines a simple Boolean expression\n          comprised of a resource property name, Boolean operator, and value.</p>\n            </li>\n            <li>\n               <p>A list of <code>NestedFilter</code> objects. Each nested filter defines a list of\n          Boolean expressions using a list of resource properties. A nested filter is satisfied if a\n          single object in the list satisfies all Boolean expressions.</p>\n            </li>\n            <li>\n               <p>A list of <code>SearchExpression</code> objects. A search expression object can be\n          nested in a list of search expression objects.</p>\n            </li>\n            <li>\n               <p>A Boolean operator: <code>And</code> or <code>Or</code>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sagemaker#SearchExpressionList": {
@@ -63983,25 +64000,25 @@
                 "SearchExpression": {
                     "target": "com.amazonaws.sagemaker#SearchExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean conditional statement. Resources must satisfy this condition to be\n      included in search results. You must provide at least one subexpression, filter, or\n      nested filter. The maximum number of recursive <code>SubExpressions</code>,\n      <code>NestedFilters</code>, and <code>Filters</code> that can be included in a\n      <code>SearchExpression</code> object is 50.</p>"
+                        "smithy.api#documentation": "<p>A Boolean conditional statement. Resources must satisfy this condition to be included in\n      search results. You must provide at least one subexpression, filter, or nested filter. The\n      maximum number of recursive <code>SubExpressions</code>, <code>NestedFilters</code>, and\n        <code>Filters</code> that can be included in a <code>SearchExpression</code> object is\n      50.</p>"
                     }
                 },
                 "SortBy": {
                     "target": "com.amazonaws.sagemaker#ResourcePropertyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the resource property used to sort the <code>SearchResults</code>. The\n      default is <code>LastModifiedTime</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the resource property used to sort the <code>SearchResults</code>. The default\n      is <code>LastModifiedTime</code>.</p>"
                     }
                 },
                 "SortOrder": {
                     "target": "com.amazonaws.sagemaker#SearchSortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>How <code>SearchResults</code> are ordered. Valid values are <code>Ascending</code> or\n      <code>Descending</code>. The default is <code>Descending</code>.</p>"
+                        "smithy.api#documentation": "<p>How <code>SearchResults</code> are ordered. Valid values are <code>Ascending</code> or\n        <code>Descending</code>. The default is <code>Descending</code>.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If more than <code>MaxResults</code> resources match the specified\n      <code>SearchExpression</code>, the response includes a\n      <code>NextToken</code>. The <code>NextToken</code> can be passed to the next\n      <code>SearchRequest</code> to continue retrieving results.</p>"
+                        "smithy.api#documentation": "<p>If more than <code>MaxResults</code> resources match the specified\n        <code>SearchExpression</code>, the response includes a <code>NextToken</code>. The\n        <code>NextToken</code> can be passed to the next <code>SearchRequest</code> to continue\n      retrieving results.</p>"
                     }
                 },
                 "MaxResults": {
@@ -64013,13 +64030,13 @@
                 "CrossAccountFilterOption": {
                     "target": "com.amazonaws.sagemaker#CrossAccountFilterOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A cross account filter option. When the value is <code>\"CrossAccount\"</code> the \n      search results will only include resources made discoverable to you from other \n      accounts. When the value is <code>\"SameAccount\"</code> or <code>null</code> the \n      search results will only include resources from your account. Default is \n      <code>null</code>. For more information on searching for resources made \n      discoverable to your account, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html\">\n        Search discoverable resources</a> in the SageMaker Developer Guide.\n      The maximum number of <code>ResourceCatalog</code>s viewable is 1000.\n    </p>"
+                        "smithy.api#documentation": "<p> A cross account filter option. When the value is <code>\"CrossAccount\"</code> the search\n      results will only include resources made discoverable to you from other accounts. When the\n      value is <code>\"SameAccount\"</code> or <code>null</code> the search results will only include\n      resources from your account. Default is <code>null</code>. For more information on searching\n      for resources made discoverable to your account, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html\"> Search\n        discoverable resources</a> in the SageMaker Developer Guide. The maximum number of\n        <code>ResourceCatalog</code>s viewable is 1000. </p>"
                     }
                 },
                 "VisibilityConditions": {
                     "target": "com.amazonaws.sagemaker#VisibilityConditionsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Limits the results of your search request to the resources that you can access.\n    </p>"
+                        "smithy.api#documentation": "<p> Limits the results of your search request to the resources that you can access. </p>"
                     }
                 }
             },
@@ -64040,6 +64057,12 @@
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If the result of the previous <code>Search</code> request was truncated, the response\n      includes a NextToken. To retrieve the next set of results, use the token in the next\n      request.</p>"
+                    }
+                },
+                "TotalHits": {
+                    "target": "com.amazonaws.sagemaker#TotalHits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of matching results.</p>"
                     }
                 }
             },
@@ -67121,12 +67144,12 @@
                 "PropertyNameQuery": {
                     "target": "com.amazonaws.sagemaker#PropertyNameQuery",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines a property name hint. Only property\n      names that begin with the specified hint are included in the response.</p>"
+                        "smithy.api#documentation": "<p>Defines a property name hint. Only property names that begin with the specified hint are\n      included in the response.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specified in the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_GetSearchSuggestions.html\">GetSearchSuggestions</a> request.\n      Limits the property names that are included in the response.</p>"
+                "smithy.api#documentation": "<p>Specified in the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_GetSearchSuggestions.html\">GetSearchSuggestions</a> request. Limits the property names that are included in the\n      response.</p>"
             }
         },
         "com.amazonaws.sagemaker#SynthesizedJsonHumanLoopActivationConditions": {
@@ -68229,6 +68252,26 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#TotalHits": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of matching results. This value may be exact or an estimate, depending on\n      the <code>Relation</code> field.</p>"
+                    }
+                },
+                "Relation": {
+                    "target": "com.amazonaws.sagemaker#Relation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the relationship between the returned <code>Value</code> and the actual total\n      number of matching results. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EqualTo</code>: The <code>Value</code> is the exact count of matching\n          results.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GreaterThanOrEqualTo</code>: The <code>Value</code> is a lower bound of the\n          actual count of matching results.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the total number of matching results and indicates how accurate that count\n      is.</p>\n         <p>The <code>Value</code> field provides the count, which may be exact or estimated. The\n        <code>Relation</code> field indicates whether it's an exact figure or a lower bound. This\n      helps understand the full scope of search results, especially when dealing with large result\n      sets.</p>"
             }
         },
         "com.amazonaws.sagemaker#TotalInstanceCount": {
@@ -70375,6 +70418,16 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#TransformAmiVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
+            }
+        },
         "com.amazonaws.sagemaker#TransformDataSource": {
             "type": "structure",
             "members": {
@@ -71449,6 +71502,12 @@
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume\n            attached to the ML compute instance(s) that run the batch transform job.</p>\n         <note>\n            <p>Certain Nitro-based instances include local storage, dependent on the instance\n                type. Local storage volumes are encrypted using a hardware module on the instance.\n                You can't request a <code>VolumeKmsKeyId</code> when using an instance type with\n                local storage.</p>\n            <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n            <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD\n                Instance Store Volumes</a>.</p>\n         </note>\n         <p>\n            The <code>VolumeKmsKeyId</code> can be any of the following formats:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TransformAmiVersion": {
+                    "target": "com.amazonaws.sagemaker#TransformAmiVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an option from a collection of preconfigured Amazon Machine Image (AMI)\n            images. Each image is configured by Amazon Web Services with a set of software and driver\n            versions.</p>\n         <dl>\n            <dt>al2-ami-sagemaker-batch-gpu-470</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Accelerator: GPU</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA driver version: 470</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>al2-ami-sagemaker-batch-gpu-535</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Accelerator: GPU</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA driver version: 535</p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -76162,7 +76221,7 @@
                 "Key": {
                     "target": "com.amazonaws.sagemaker#VisibilityConditionsKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key that specifies the tag that you're using to filter the search results. It must be in the following format: <code>Tags.<key></code>.</p>"
+                        "smithy.api#documentation": "<p>The key that specifies the tag that you're using to filter the search results. It must be\n      in the following format: <code>Tags.<key></code>.</p>"
                     }
                 },
                 "Value": {
@@ -76173,7 +76232,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The list of key-value pairs used to filter your search results. If a search result contains a key from your list, it is included in the final search response if the value associated with the key in the result matches the value you specified. \n      If the value doesn't match, the result is excluded from the search response. Any resources that don't have a key from the list that you've provided will also be included in the search response.</p>"
+                "smithy.api#documentation": "<p>The list of key-value pairs used to filter your search results. If a search result\n      contains a key from your list, it is included in the final search response if the value\n      associated with the key in the result matches the value you specified. If the value doesn't\n      match, the result is excluded from the search response. Any resources that don't have a key\n      from the list that you've provided will also be included in the search response.</p>"
             }
         },
         "com.amazonaws.sagemaker#VisibilityConditionsKey": {

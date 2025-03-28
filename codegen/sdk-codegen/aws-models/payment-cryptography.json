@@ -291,6 +291,16 @@
                             "UnstableTrait"
                         ]
                     }
+                },
+                "DeriveKeyUsage": {
+                    "target": "com.amazonaws.paymentcryptography#DeriveKeyUsage",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>The cryptographic usage of an ECDH derived key as deﬁned in section A.5.2 of the TR-31 spec.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -456,6 +466,103 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.paymentcryptography#DeriveKeyUsage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TR31_B0_BASE_DERIVATION_KEY",
+                        "name": "TR31_B0_BASE_DERIVATION_KEY"
+                    },
+                    {
+                        "value": "TR31_C0_CARD_VERIFICATION_KEY",
+                        "name": "TR31_C0_CARD_VERIFICATION_KEY"
+                    },
+                    {
+                        "value": "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY",
+                        "name": "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY"
+                    },
+                    {
+                        "value": "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS",
+                        "name": "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS"
+                    },
+                    {
+                        "value": "TR31_E1_EMV_MKEY_CONFIDENTIALITY",
+                        "name": "TR31_E1_EMV_MKEY_CONFIDENTIALITY"
+                    },
+                    {
+                        "value": "TR31_E2_EMV_MKEY_INTEGRITY",
+                        "name": "TR31_E2_EMV_MKEY_INTEGRITY"
+                    },
+                    {
+                        "value": "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS",
+                        "name": "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS"
+                    },
+                    {
+                        "value": "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION",
+                        "name": "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION"
+                    },
+                    {
+                        "value": "TR31_E6_EMV_MKEY_OTHER",
+                        "name": "TR31_E6_EMV_MKEY_OTHER"
+                    },
+                    {
+                        "value": "TR31_K0_KEY_ENCRYPTION_KEY",
+                        "name": "TR31_K0_KEY_ENCRYPTION_KEY"
+                    },
+                    {
+                        "value": "TR31_K1_KEY_BLOCK_PROTECTION_KEY",
+                        "name": "TR31_K1_KEY_BLOCK_PROTECTION_KEY"
+                    },
+                    {
+                        "value": "TR31_M3_ISO_9797_3_MAC_KEY",
+                        "name": "TR31_M3_ISO_9797_3_MAC_KEY"
+                    },
+                    {
+                        "value": "TR31_M1_ISO_9797_1_MAC_KEY",
+                        "name": "TR31_M1_ISO_9797_1_MAC_KEY"
+                    },
+                    {
+                        "value": "TR31_M6_ISO_9797_5_CMAC_KEY",
+                        "name": "TR31_M6_ISO_9797_5_CMAC_KEY"
+                    },
+                    {
+                        "value": "TR31_M7_HMAC_KEY",
+                        "name": "TR31_M7_HMAC_KEY"
+                    },
+                    {
+                        "value": "TR31_P0_PIN_ENCRYPTION_KEY",
+                        "name": "TR31_P0_PIN_ENCRYPTION_KEY"
+                    },
+                    {
+                        "value": "TR31_P1_PIN_GENERATION_KEY",
+                        "name": "TR31_P1_PIN_GENERATION_KEY"
+                    },
+                    {
+                        "value": "TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
+                        "name": "TR31_V1_IBM3624_PIN_VERIFICATION_KEY"
+                    },
+                    {
+                        "value": "TR31_V2_VISA_PIN_VERIFICATION_KEY",
+                        "name": "TR31_V2_VISA_PIN_VERIFICATION_KEY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.paymentcryptography#DiffieHellmanDerivationData": {
+            "type": "union",
+            "members": {
+                "SharedInformation": {
+                    "target": "com.amazonaws.paymentcryptography#SharedInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A byte string containing information that binds the ECDH derived key to the two parties involved or to the context of the key.</p>\n         <p>It may include details like identities of the two parties deriving the key, context of the operation, session IDs, and optionally a nonce. It must not contain zero bytes, and re-using shared information for multiple ECDH key derivations is not recommended.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Derivation data used to derive an ECDH key.</p>"
+            }
+        },
         "com.amazonaws.paymentcryptography#EvenHexLengthBetween16And32": {
             "type": "string",
             "traits": {
@@ -484,6 +591,66 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The attributes for IPEK generation during export.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ExportDiffieHellmanTr31KeyBlock": {
+            "type": "structure",
+            "members": {
+                "PrivateKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>keyARN</code> of the asymmetric ECC key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CertificateAuthorityPublicKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>keyARN</code> of the certificate that signed the client's <code>PublicKeyCertificate</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublicKeyCertificate": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client's public key certificate in PEM format (base64 encoded) to use for ECDH key derivation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeriveKeyAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#SymmetricKeyAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key algorithm of the derived ECDH key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyDerivationFunction": {
+                    "target": "com.amazonaws.paymentcryptography#KeyDerivationFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key derivation function to use for deriving a key using ECDH.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyDerivationHashAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyDerivationHashAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hash type to use for deriving a key using ECDH.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DerivationData": {
+                    "target": "com.amazonaws.paymentcryptography#DiffieHellmanDerivationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Derivation data used to derive an ECDH key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyBlockHeaders": {
+                    "target": "com.amazonaws.paymentcryptography#KeyBlockHeaders"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for key material export using the asymmetric ECDH key exchange method.</p>"
             }
         },
         "com.amazonaws.paymentcryptography#ExportDukptInitialKey": {
@@ -612,6 +779,12 @@
                     "target": "com.amazonaws.paymentcryptography#ExportKeyCryptogram",
                     "traits": {
                         "smithy.api#documentation": "<p>Parameter information for key material export using asymmetric RSA wrap and unwrap key exchange method</p>"
+                    }
+                },
+                "DiffieHellmanTr31KeyBlock": {
+                    "target": "com.amazonaws.paymentcryptography#ExportDiffieHellmanTr31KeyBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for key material export using the asymmetric ECDH key exchange method.</p>"
                     }
                 }
             },
@@ -1133,6 +1306,70 @@
                 "smithy.api#pattern": "^[0-9A-F]{20}$|^[0-9A-F]{24}$"
             }
         },
+        "com.amazonaws.paymentcryptography#ImportDiffieHellmanTr31KeyBlock": {
+            "type": "structure",
+            "members": {
+                "PrivateKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>keyARN</code> of the asymmetric ECC key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CertificateAuthorityPublicKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>keyARN</code> of the certificate that signed the client's <code>PublicKeyCertificate</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublicKeyCertificate": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client's public key certificate in PEM format (base64 encoded) to use for ECDH key derivation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeriveKeyAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#SymmetricKeyAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key algorithm of the derived ECDH key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyDerivationFunction": {
+                    "target": "com.amazonaws.paymentcryptography#KeyDerivationFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key derivation function to use for deriving a key using ECDH.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyDerivationHashAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyDerivationHashAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hash type to use for deriving a key using ECDH.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DerivationData": {
+                    "target": "com.amazonaws.paymentcryptography#DiffieHellmanDerivationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Derivation data used to derive an ECDH key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WrappedKeyBlock": {
+                    "target": "com.amazonaws.paymentcryptography#Tr31WrappedKeyBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ECDH wrapped key block to import.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for key material import using the asymmetric ECDH key exchange method.</p>"
+            }
+        },
         "com.amazonaws.paymentcryptography#ImportKey": {
             "type": "operation",
             "input": {
@@ -1169,7 +1406,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Imports symmetric keys and public key certificates in PEM format (base64 encoded) into Amazon Web Services Payment Cryptography.</p>\n         <p>Amazon Web Services Payment Cryptography simplifies key exchange by replacing the existing paper-based approach with a modern electronic approach. With <code>ImportKey</code> you can import symmetric keys using either symmetric and asymmetric key exchange mechanisms.</p>\n         <p>For symmetric key exchange, Amazon Web Services Payment Cryptography uses the ANSI X9 TR-31 norm in accordance with PCI PIN guidelines. And for asymmetric key exchange, Amazon Web Services Payment Cryptography supports ANSI X9 TR-34 norm and RSA wrap and unwrap key exchange mechanisms. Asymmetric key exchange methods are typically used to establish bi-directional trust between the two parties exhanging keys and are used for initial key exchange such as Key Encryption Key (KEK) or Zone Master Key (ZMK). After which you can import working keys using symmetric method to perform various cryptographic operations within Amazon Web Services Payment Cryptography.</p>\n         <p>The TR-34 norm is intended for exchanging 3DES keys only and keys are imported in a WrappedKeyBlock format. Key attributes (such as KeyUsage, KeyAlgorithm, KeyModesOfUse, Exportability) are contained within the key block. With RSA wrap and unwrap, you can exchange both 3DES and AES-128 keys. The keys are imported in a WrappedKeyCryptogram format and you will need to specify the key attributes during import. </p>\n         <p>You can also import a <i>root public key certificate</i>, used to sign other public key certificates, or a <i>trusted public key certificate</i> under an already established root public key certificate.</p>\n         <p>\n            <b>To import a public root key certificate</b>\n         </p>\n         <p>You can also import a <i>root public key certificate</i>, used to sign other public key certificates, or a <i>trusted public key certificate</i> under an already established root public key certificate.</p>\n         <p>\n            <b>To import a public root key certificate</b>\n         </p>\n         <p>Using this operation, you can import the public component (in PEM cerificate format) of your private root key. You can use the imported public root key certificate for digital signatures, for example signing wrapping key or signing key in TR-34, within your Amazon Web Services Payment Cryptography account.</p>\n         <p>Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: <code>RootCertificatePublicKey</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyClass</code>: <code>PUBLIC_KEY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyModesOfUse</code>: <code>Verify</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyUsage</code>: <code>TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PublicKeyCertificate</code>: The public key certificate in PEM format (base64 encoded) of the private root key under import.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To import a trusted public key certificate</b>\n         </p>\n         <p>The root public key certificate must be in place and operational before you import a trusted public key certificate. Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: <code>TrustedCertificatePublicKey</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CertificateAuthorityPublicKeyIdentifier</code>: <code>KeyArn</code> of the <code>RootCertificatePublicKey</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyModesOfUse</code> and <code>KeyUsage</code>: Corresponding to the cryptographic operations such as wrap, sign, or encrypt that you will allow the trusted public key certificate to perform.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PublicKeyCertificate</code>: The trusted public key certificate in PEM format (base64 encoded) under import.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To import initial keys (KEK or ZMK or similar) using TR-34</b>\n         </p>\n         <p>Using this operation, you can import initial key using TR-34 asymmetric key exchange. In TR-34 terminology, the sending party of the key is called Key Distribution Host (KDH) and the receiving party of the key is called Key Receiving Device (KRD). During the key import process, KDH is the user who initiates the key import and KRD is Amazon Web Services Payment Cryptography who receives the key.</p>\n         <p>To initiate TR-34 key import, the KDH must obtain an import token by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html\">GetParametersForImport</a>. This operation generates an encryption keypair for the purpose of key import, signs the key and returns back the wrapping key certificate (also known as KRD wrapping certificate) and the root certificate chain. The KDH must trust and install the KRD wrapping certificate on its HSM and use it to encrypt (wrap) the KDH key during TR-34 WrappedKeyBlock generation. The import token and associated KRD wrapping certificate expires after 7 days.</p>\n         <p>Next the KDH generates a key pair for the purpose of signing the encrypted KDH key and provides the public certificate of the signing key to Amazon Web Services Payment Cryptography. The KDH will also need to import the root certificate chain of the KDH signing certificate by calling <code>ImportKey</code> for <code>RootCertificatePublicKey</code>. For more information on TR-34 key import, see section <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-import.html\">Importing symmetric keys</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: Use <code>Tr34KeyBlock</code> parameters.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CertificateAuthorityPublicKeyIdentifier</code>: The <code>KeyARN</code> of the certificate chain that signed the KDH signing key certificate.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ImportToken</code>: Obtained from KRD by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html\">GetParametersForImport</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappedKeyBlock</code>: The TR-34 wrapped key material from KDH. It contains the KDH key under import, wrapped with KRD wrapping certificate and signed by KDH signing private key. This TR-34 key block is typically generated by the KDH Hardware Security Module (HSM) outside of Amazon Web Services Payment Cryptography.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SigningKeyCertificate</code>: The public key certificate in PEM format (base64 encoded) of the KDH signing key generated under the root certificate (CertificateAuthorityPublicKeyIdentifier) imported in Amazon Web Services Payment Cryptography.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To import initial keys (KEK or ZMK or similar) using RSA Wrap and Unwrap</b>\n         </p>\n         <p>Using this operation, you can import initial key using asymmetric RSA wrap and unwrap key exchange method. To initiate import, call <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html\">GetParametersForImport</a> with <code>KeyMaterial</code> set to <code>KEY_CRYPTOGRAM</code> to generate an import token. This operation also generates an encryption keypair for the purpose of key import, signs the key and returns back the wrapping key certificate in PEM format (base64 encoded) and its root certificate chain. The import token and associated KRD wrapping certificate expires after 7 days. </p>\n         <p>You must trust and install the wrapping certificate and its certificate chain on the sending HSM and use it to wrap the key under export for WrappedKeyCryptogram generation. Next call <code>ImportKey</code> with <code>KeyMaterial</code> set to <code>KEY_CRYPTOGRAM</code> and provide the <code>ImportToken</code> and <code>KeyAttributes</code> for the key under import.</p>\n         <p>\n            <b>To import working keys using TR-31</b>\n         </p>\n         <p>Amazon Web Services Payment Cryptography uses TR-31 symmetric key exchange norm to import working keys. A KEK must be established within Amazon Web Services Payment Cryptography by using TR-34 key import or by using <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html\">CreateKey</a>. To initiate a TR-31 key import, set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: Use <code>Tr31KeyBlock</code> parameters.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappedKeyBlock</code>: The TR-31 wrapped key material. It contains the key under import, encrypted using KEK. The TR-31 key block is typically generated by a HSM outside of Amazon Web Services Payment Cryptography. </p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappingKeyIdentifier</code>: The <code>KeyArn</code> of the KEK that Amazon Web Services Payment Cryptography uses to decrypt or unwrap the key under import.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ExportKey.html\">ExportKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html\">GetParametersForImport</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Imports symmetric keys and public key certificates in PEM format (base64 encoded) into Amazon Web Services Payment Cryptography.</p>\n         <p>Amazon Web Services Payment Cryptography simplifies key exchange by replacing the existing paper-based approach with a modern electronic approach. With <code>ImportKey</code> you can import symmetric keys using either symmetric and asymmetric key exchange mechanisms.</p>\n         <p>For symmetric key exchange, Amazon Web Services Payment Cryptography uses the ANSI X9 TR-31 norm in accordance with PCI PIN guidelines. And for asymmetric key exchange, Amazon Web Services Payment Cryptography supports ANSI X9 TR-34 norm and RSA wrap and unwrap key exchange mechanisms. Asymmetric key exchange methods are typically used to establish bi-directional trust between the two parties exhanging keys and are used for initial key exchange such as Key Encryption Key (KEK) or Zone Master Key (ZMK). After which you can import working keys using symmetric method to perform various cryptographic operations within Amazon Web Services Payment Cryptography.</p>\n         <p>The TR-34 norm is intended for exchanging 3DES keys only and keys are imported in a WrappedKeyBlock format. Key attributes (such as KeyUsage, KeyAlgorithm, KeyModesOfUse, Exportability) are contained within the key block. With RSA wrap and unwrap, you can exchange both 3DES and AES-128 keys. The keys are imported in a WrappedKeyCryptogram format and you will need to specify the key attributes during import. </p>\n         <p>You can also import a <i>root public key certificate</i>, used to sign other public key certificates, or a <i>trusted public key certificate</i> under an already established root public key certificate.</p>\n         <p>\n            <b>To import a public root key certificate</b>\n         </p>\n         <p>Using this operation, you can import the public component (in PEM cerificate format) of your private root key. You can use the imported public root key certificate for digital signatures, for example signing wrapping key or signing key in TR-34, within your Amazon Web Services Payment Cryptography account.</p>\n         <p>Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: <code>RootCertificatePublicKey</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyClass</code>: <code>PUBLIC_KEY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyModesOfUse</code>: <code>Verify</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyUsage</code>: <code>TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PublicKeyCertificate</code>: The public key certificate in PEM format (base64 encoded) of the private root key under import.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To import a trusted public key certificate</b>\n         </p>\n         <p>The root public key certificate must be in place and operational before you import a trusted public key certificate. Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: <code>TrustedCertificatePublicKey</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CertificateAuthorityPublicKeyIdentifier</code>: <code>KeyArn</code> of the <code>RootCertificatePublicKey</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyModesOfUse</code> and <code>KeyUsage</code>: Corresponding to the cryptographic operations such as wrap, sign, or encrypt that you will allow the trusted public key certificate to perform.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PublicKeyCertificate</code>: The trusted public key certificate in PEM format (base64 encoded) under import.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To import initial keys (KEK or ZMK or similar) using TR-34</b>\n         </p>\n         <p>Using this operation, you can import initial key using TR-34 asymmetric key exchange. In TR-34 terminology, the sending party of the key is called Key Distribution Host (KDH) and the receiving party of the key is called Key Receiving Device (KRD). During the key import process, KDH is the user who initiates the key import and KRD is Amazon Web Services Payment Cryptography who receives the key.</p>\n         <p>To initiate TR-34 key import, the KDH must obtain an import token by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html\">GetParametersForImport</a>. This operation generates an encryption keypair for the purpose of key import, signs the key and returns back the wrapping key certificate (also known as KRD wrapping certificate) and the root certificate chain. The KDH must trust and install the KRD wrapping certificate on its HSM and use it to encrypt (wrap) the KDH key during TR-34 WrappedKeyBlock generation. The import token and associated KRD wrapping certificate expires after 7 days.</p>\n         <p>Next the KDH generates a key pair for the purpose of signing the encrypted KDH key and provides the public certificate of the signing key to Amazon Web Services Payment Cryptography. The KDH will also need to import the root certificate chain of the KDH signing certificate by calling <code>ImportKey</code> for <code>RootCertificatePublicKey</code>. For more information on TR-34 key import, see section <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-import.html\">Importing symmetric keys</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: Use <code>Tr34KeyBlock</code> parameters.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CertificateAuthorityPublicKeyIdentifier</code>: The <code>KeyARN</code> of the certificate chain that signed the KDH signing key certificate.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ImportToken</code>: Obtained from KRD by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html\">GetParametersForImport</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappedKeyBlock</code>: The TR-34 wrapped key material from KDH. It contains the KDH key under import, wrapped with KRD wrapping certificate and signed by KDH signing private key. This TR-34 key block is typically generated by the KDH Hardware Security Module (HSM) outside of Amazon Web Services Payment Cryptography.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SigningKeyCertificate</code>: The public key certificate in PEM format (base64 encoded) of the KDH signing key generated under the root certificate (CertificateAuthorityPublicKeyIdentifier) imported in Amazon Web Services Payment Cryptography.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To import initial keys (KEK or ZMK or similar) using RSA Wrap and Unwrap</b>\n         </p>\n         <p>Using this operation, you can import initial key using asymmetric RSA wrap and unwrap key exchange method. To initiate import, call <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html\">GetParametersForImport</a> with <code>KeyMaterial</code> set to <code>KEY_CRYPTOGRAM</code> to generate an import token. This operation also generates an encryption keypair for the purpose of key import, signs the key and returns back the wrapping key certificate in PEM format (base64 encoded) and its root certificate chain. The import token and associated KRD wrapping certificate expires after 7 days. </p>\n         <p>You must trust and install the wrapping certificate and its certificate chain on the sending HSM and use it to wrap the key under export for WrappedKeyCryptogram generation. Next call <code>ImportKey</code> with <code>KeyMaterial</code> set to <code>KEY_CRYPTOGRAM</code> and provide the <code>ImportToken</code> and <code>KeyAttributes</code> for the key under import.</p>\n         <p>\n            <b>To import working keys using TR-31</b>\n         </p>\n         <p>Amazon Web Services Payment Cryptography uses TR-31 symmetric key exchange norm to import working keys. A KEK must be established within Amazon Web Services Payment Cryptography by using TR-34 key import or by using <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html\">CreateKey</a>. To initiate a TR-31 key import, set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: Use <code>Tr31KeyBlock</code> parameters.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappedKeyBlock</code>: The TR-31 wrapped key material. It contains the key under import, encrypted using KEK. The TR-31 key block is typically generated by a HSM outside of Amazon Web Services Payment Cryptography. </p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappingKeyIdentifier</code>: The <code>KeyArn</code> of the KEK that Amazon Web Services Payment Cryptography uses to decrypt or unwrap the key under import.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ExportKey.html\">ExportKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html\">GetParametersForImport</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.paymentcryptography#ImportKeyCryptogram": {
@@ -1277,6 +1514,12 @@
                     "target": "com.amazonaws.paymentcryptography#ImportKeyCryptogram",
                     "traits": {
                         "smithy.api#documentation": "<p>Parameter information for key material import using asymmetric RSA wrap and unwrap key exchange method.</p>"
+                    }
+                },
+                "DiffieHellmanTr31KeyBlock": {
+                    "target": "com.amazonaws.paymentcryptography#ImportDiffieHellmanTr31KeyBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for key material import using the asymmetric ECDH key exchange method.</p>"
                     }
                 }
             },
@@ -1514,6 +1757,16 @@
                             "UnstableTrait"
                         ]
                     }
+                },
+                "DeriveKeyUsage": {
+                    "target": "com.amazonaws.paymentcryptography#DeriveKeyUsage",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The cryptographic usage of an ECDH derived key as deﬁned in section A.5.2 of the TR-31 spec.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -1572,6 +1825,10 @@
                     {
                         "value": "ECC_NIST_P384",
                         "name": "ECC_NIST_P384"
+                    },
+                    {
+                        "value": "ECC_NIST_P521",
+                        "name": "ECC_NIST_P521"
                     }
                 ]
             }
@@ -1707,6 +1964,46 @@
                         "name": "PUBLIC_KEY"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyDerivationFunction": {
+            "type": "enum",
+            "members": {
+                "NIST_SP800": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NIST_SP800"
+                    }
+                },
+                "ANSI_X963": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANSI_X963"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyDerivationHashAlgorithm": {
+            "type": "enum",
+            "members": {
+                "SHA_256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHA_256"
+                    }
+                },
+                "SHA_384": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHA_384"
+                    }
+                },
+                "SHA_512": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHA_512"
+                    }
+                }
             }
         },
         "com.amazonaws.paymentcryptography#KeyExportability": {
@@ -3266,6 +3563,16 @@
                 "smithy.api#httpError": 503
             }
         },
+        "com.amazonaws.paymentcryptography#SharedInformation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$"
+            }
+        },
         "com.amazonaws.paymentcryptography#StartKeyUsage": {
             "type": "operation",
             "input": {
@@ -3410,6 +3717,41 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#SymmetricKeyAlgorithm": {
+            "type": "enum",
+            "members": {
+                "TDES_2KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TDES_2KEY"
+                    }
+                },
+                "TDES_3KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TDES_3KEY"
+                    }
+                },
+                "AES_128": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AES_128"
+                    }
+                },
+                "AES_192": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AES_192"
+                    }
+                },
+                "AES_256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AES_256"
+                    }
+                }
             }
         },
         "com.amazonaws.paymentcryptography#Tag": {
