@@ -1,3 +1,7 @@
+# v1.34.0 (2025-03-28)
+
+* **Feature**: Add support for NetworkManager Dualstack endpoints.
+
 # v1.33.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

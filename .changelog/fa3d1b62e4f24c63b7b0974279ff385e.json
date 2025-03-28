@@ -1,8 +1,0 @@
-{
-    "id": "fa3d1b62-e4f2-4c63-b7b0-974279ff385e",
-    "type": "feature",
-    "description": "This release adds support for cacheNamespace in ProjectCache",
-    "modules": [
-        "service/codebuild"
-    ]
-}

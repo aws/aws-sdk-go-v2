@@ -1,8 +1,0 @@
-{
-    "id": "0775ecf7-85e0-403b-b043-1ccd7b9731c1",
-    "type": "feature",
-    "description": "Add support for NetworkManager Dualstack endpoints.",
-    "modules": [
-        "service/networkmanager"
-    ]
-}

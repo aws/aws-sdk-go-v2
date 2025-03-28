@@ -1,3 +1,7 @@
+# v1.27.0 (2025-03-28)
+
+* **Feature**: Launching Multi-modality Content Filter for Amazon Bedrock Guardrails.
+
 # v1.26.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

@@ -1,8 +1,0 @@
-{
-    "id": "ee324574-1a8b-4207-bf01-9b336c1fcfd5",
-    "type": "feature",
-    "description": "Add support for Marketplace Metering Service dual-stack endpoints.",
-    "modules": [
-        "service/marketplacemetering"
-    ]
-}

@@ -1,3 +1,27 @@
+# Release (2025-03-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.30.0](service/apigateway/CHANGELOG.md#v1300-2025-03-28)
+  * **Feature**: Adds support for setting the IP address type to allow dual-stack or IPv4 address types to invoke your APIs or domain names.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.27.0](service/apigatewayv2/CHANGELOG.md#v1270-2025-03-28)
+  * **Feature**: Adds support for setting the IP address type to allow dual-stack or IPv4 address types to invoke your APIs or domain names.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.27.0](service/bedrockruntime/CHANGELOG.md#v1270-2025-03-28)
+  * **Feature**: Launching Multi-modality Content Filter for Amazon Bedrock Guardrails.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.57.0](service/codebuild/CHANGELOG.md#v1570-2025-03-28)
+  * **Feature**: This release adds support for cacheNamespace in ProjectCache
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.54.3](service/ecs/CHANGELOG.md#v1543-2025-03-28)
+  * **Documentation**: This is an Amazon ECS documentation only release that addresses tickets.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.28.0](service/marketplacemetering/CHANGELOG.md#v1280-2025-03-28)
+  * **Feature**: Add support for Marketplace Metering Service dual-stack endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.34.0](service/networkmanager/CHANGELOG.md#v1340-2025-03-28)
+  * **Feature**: Add support for NetworkManager Dualstack endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.18.0](service/paymentcryptography/CHANGELOG.md#v1180-2025-03-28)
+  * **Feature**: The service adds support for transferring AES-256 and other keys between the service and other service providers and HSMs. This feature uses ECDH to derive a one-time key transport key to enable these secure key exchanges.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.85.0](service/quicksight/CHANGELOG.md#v1850-2025-03-28)
+  * **Feature**: RLS permission dataset with userAs: RLS_RULES flag, Q in QuickSight/Threshold Alerts/Schedules/Snapshots in QS embedding, toggle dataset refresh email alerts via API, transposed table with options: column width, type and index, toggle Q&A on dashboards, Oracle Service Name when creating data source.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.185.0](service/sagemaker/CHANGELOG.md#v11850-2025-03-28)
+  * **Feature**: TransformAmiVersion for Batch Transform and SageMaker Search Service Aggregate Search API Extension
+
 # Release (2025-03-27)
 
 ## General Highlights

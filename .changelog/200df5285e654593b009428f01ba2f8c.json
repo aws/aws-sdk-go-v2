@@ -1,8 +1,0 @@
-{
-    "id": "200df528-5e65-4593-b009-428f01ba2f8c",
-    "type": "documentation",
-    "description": "This is an Amazon ECS documentation only release that addresses tickets.",
-    "modules": [
-        "service/ecs"
-    ]
-}

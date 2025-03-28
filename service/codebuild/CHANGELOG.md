@@ -1,3 +1,7 @@
+# v1.57.0 (2025-03-28)
+
+* **Feature**: This release adds support for cacheNamespace in ProjectCache
+
 # v1.56.0 (2025-03-13)
 
 * **Feature**: AWS CodeBuild now supports webhook filtering by organization name
