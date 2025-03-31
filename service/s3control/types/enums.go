@@ -1007,6 +1007,37 @@ func (S3StorageClass) Values() []S3StorageClass {
 	}
 }
 
+type ScopePermission string
+
+// Enum values for ScopePermission
+const (
+	ScopePermissionGetObject                  ScopePermission = "GetObject"
+	ScopePermissionGetObjectAttributes        ScopePermission = "GetObjectAttributes"
+	ScopePermissionListMultipartUploadParts   ScopePermission = "ListMultipartUploadParts"
+	ScopePermissionListBucket                 ScopePermission = "ListBucket"
+	ScopePermissionListBucketMultipartUploads ScopePermission = "ListBucketMultipartUploads"
+	ScopePermissionPutObject                  ScopePermission = "PutObject"
+	ScopePermissionDeleteObject               ScopePermission = "DeleteObject"
+	ScopePermissionAbortMultipartUpload       ScopePermission = "AbortMultipartUpload"
+)
+
+// Values returns all known values for ScopePermission. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScopePermission) Values() []ScopePermission {
+	return []ScopePermission{
+		"GetObject",
+		"GetObjectAttributes",
+		"ListMultipartUploadParts",
+		"ListBucket",
+		"ListBucketMultipartUploads",
+		"PutObject",
+		"DeleteObject",
+		"AbortMultipartUpload",
+	}
+}
+
 type SseKmsEncryptedObjectsStatus string
 
 // Enum values for SseKmsEncryptedObjectsStatus

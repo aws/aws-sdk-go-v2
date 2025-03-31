@@ -4550,6 +4550,32 @@ func awsRestjson1_deserializeDocumentTokenUsage(v **types.TokenUsage, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "cacheReadInputTokens":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CacheReadInputTokens = ptr.Int32(int32(i64))
+			}
+
+		case "cacheWriteInputTokens":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CacheWriteInputTokens = ptr.Int32(int32(i64))
+			}
+
 		case "inputTokens":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5419,6 +5445,46 @@ func awsRestjson1_deserializeDocumentAsyncInvokeSummary(v **types.AsyncInvokeSum
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCachePointBlock(v **types.CachePointBlock, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CachePointBlock
+	if *v == nil {
+		sv = &types.CachePointBlock{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CachePointType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.CachePointType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5479,6 +5545,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "cachePoint":
+			var mv types.CachePointBlock
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCachePointBlock(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ContentBlockMemberCachePoint{Value: mv}
+			break loop
+
 		case "document":
 			var mv types.DocumentBlock
 			destAddr := &mv

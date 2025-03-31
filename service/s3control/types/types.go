@@ -2607,6 +2607,24 @@ type S3Tag struct {
 	noSmithyDocumentSerde
 }
 
+// You can use the access point scope to restrict access to specific prefixes, API
+// operations, or a combination of both.
+//
+// For more information, see [Manage the scope of your access points for directory buckets.]
+//
+// [Manage the scope of your access points for directory buckets.]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets-manage-scope.html
+type Scope struct {
+
+	// You can include one or more API operations as permissions.
+	Permissions []ScopePermission
+
+	// You can specify any amount of prefixes, but the total length of characters of
+	// all prefixes must be less than 512 KB in size.
+	Prefixes []string
+
+	noSmithyDocumentSerde
+}
+
 type SelectionCriteria struct {
 
 	// A container for the delimiter of the selection criteria being used.

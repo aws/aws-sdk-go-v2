@@ -45,6 +45,10 @@ type GetCapacityTaskInput struct {
 
 type GetCapacityTaskOutput struct {
 
+	// The ID of the Outpost asset. An Outpost asset can be a single server within an
+	// Outposts rack or an Outposts server configuration.
+	AssetId *string
+
 	// ID of the capacity task.
 	CapacityTaskId *string
 
@@ -57,9 +61,18 @@ type GetCapacityTaskOutput struct {
 	//
 	//   - IN_PROGRESS - The capacity task is running and cannot be cancelled.
 	//
+	//   - FAILED - The capacity task could not be completed.
+	//
+	//   - COMPLETED - The capacity task has completed successfully.
+	//
 	//   - WAITING_FOR_EVACUATION - The capacity task requires capacity to run. You
 	//   must stop the recommended EC2 running instances to free up capacity for the task
 	//   to run.
+	//
+	//   - CANCELLATION_IN_PROGRESS - The capacity task has been cancelled and is in
+	//   the process of cleaning up resources.
+	//
+	//   - CANCELLED - The capacity task is cancelled.
 	CapacityTaskStatus types.CapacityTaskStatus
 
 	// The date the capacity task ran successfully.

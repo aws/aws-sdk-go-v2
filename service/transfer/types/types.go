@@ -1076,6 +1076,10 @@ type DescribedUser struct {
 
 	// Specifies the public key portion of the Secure Shell (SSH) keys stored for the
 	// described user.
+	//
+	// To delete the public key body, set its value to zero keys, as shown here:
+	//
+	//     SshPublicKeys: []
 	SshPublicKeys []SshPublicKey
 
 	// Specifies the key-value pairs for the user requested. Tag can be used to search
@@ -1121,6 +1125,14 @@ type DescribedWebApp struct {
 	// the value that you use when you configure Origins on CloudFront.
 	WebAppEndpoint *string
 
+	//  Setting for the type of endpoint policy for the web app. The default value is
+	// STANDARD .
+	//
+	// If your web app was created in an Amazon Web Services GovCloud (US) Region, the
+	// value of this parameter can be FIPS , which indicates the web app endpoint is
+	// FIPS-compliant.
+	WebAppEndpointPolicy WebAppEndpointPolicy
+
 	// A union that contains the value for number of concurrent connections or the
 	// user sessions on your web app.
 	WebAppUnits WebAppUnits
@@ -1142,7 +1154,7 @@ type DescribedWebAppCustomization struct {
 	// This member is required.
 	WebAppId *string
 
-	// Returns a icon file data string (in base64 encoding).
+	// Returns an icon file data string (in base64 encoding).
 	FaviconFile []byte
 
 	// Returns a logo file data string (in base64 encoding).

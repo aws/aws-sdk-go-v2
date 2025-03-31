@@ -1,0 +1,8 @@
+{
+    "id": "ce547a4e-9051-4c5e-bf2a-d6116328085f",
+    "type": "feature",
+    "description": "Release VPC Route Server, a new feature allowing dynamic routing in VPCs.",
+    "modules": [
+        "service/ec2"
+    ]
+}

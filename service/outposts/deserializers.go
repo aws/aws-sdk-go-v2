@@ -1075,6 +1075,15 @@ func awsRestjson1_deserializeOpDocumentGetCapacityTaskOutput(v **GetCapacityTask
 
 	for key, value := range shape {
 		switch key {
+		case "AssetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AssetId to be of type string, got %T instead", value)
+				}
+				sv.AssetId = ptr.String(jtv)
+			}
+
 		case "CapacityTaskId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4205,6 +4214,15 @@ func awsRestjson1_deserializeOpDocumentStartCapacityTaskOutput(v **StartCapacity
 
 	for key, value := range shape {
 		switch key {
+		case "AssetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AssetId to be of type string, got %T instead", value)
+				}
+				sv.AssetId = ptr.String(jtv)
+			}
+
 		case "CapacityTaskId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6377,6 +6395,15 @@ func awsRestjson1_deserializeDocumentCapacityTaskSummary(v **types.CapacityTaskS
 
 	for key, value := range shape {
 		switch key {
+		case "AssetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AssetId to be of type string, got %T instead", value)
+				}
+				sv.AssetId = ptr.String(jtv)
+			}
+
 		case "CapacityTaskId":
 			if value != nil {
 				jtv, ok := value.(string)

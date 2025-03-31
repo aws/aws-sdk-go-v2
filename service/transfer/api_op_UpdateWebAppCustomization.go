@@ -34,7 +34,7 @@ type UpdateWebAppCustomizationInput struct {
 	// This member is required.
 	WebAppId *string
 
-	// Specify icon file data string (in base64 encoding).
+	// Specify an icon file data string (in base64 encoding).
 	FaviconFile []byte
 
 	// Specify logo file data string (in base64 encoding).

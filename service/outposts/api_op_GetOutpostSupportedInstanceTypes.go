@@ -36,6 +36,10 @@ type GetOutpostSupportedInstanceTypesInput struct {
 	// This member is required.
 	OutpostIdentifier *string
 
+	// The ID of the Outpost asset. An Outpost asset can be a single server within an
+	// Outposts rack or an Outposts server configuration.
+	AssetId *string
+
 	// The maximum page size.
 	MaxResults *int32
 

@@ -386,7 +386,7 @@ func (r *resolver) ResolveEndpoint(
 									var out strings.Builder
 									out.WriteString("https://")
 									out.WriteString(_EndpointId)
-									out.WriteString(".endpoints.email.")
+									out.WriteString(".endpoints.email.global.")
 									out.WriteString(_PartitionResult.DualStackDnsSuffix)
 									return out.String()
 								}()

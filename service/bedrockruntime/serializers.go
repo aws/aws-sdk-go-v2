@@ -1006,11 +1006,29 @@ func awsRestjson1_serializeDocumentAutoToolChoice(v *types.AutoToolChoice, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCachePointBlock(v *types.CachePointBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContentBlock(v types.ContentBlock, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ContentBlockMemberCachePoint:
+		av := object.Key("cachePoint")
+		if err := awsRestjson1_serializeDocumentCachePointBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ContentBlockMemberDocument:
 		av := object.Key("document")
 		if err := awsRestjson1_serializeDocumentDocumentBlock(&uv.Value, av); err != nil {
@@ -1639,6 +1657,12 @@ func awsRestjson1_serializeDocumentSystemContentBlock(v types.SystemContentBlock
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.SystemContentBlockMemberCachePoint:
+		av := object.Key("cachePoint")
+		if err := awsRestjson1_serializeDocumentCachePointBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.SystemContentBlockMemberGuardContent:
 		av := object.Key("guardContent")
 		if err := awsRestjson1_serializeDocumentGuardrailConverseContentBlock(uv.Value, av); err != nil {
@@ -1707,6 +1731,12 @@ func awsRestjson1_serializeDocumentTool(v types.Tool, value smithyjson.Value) er
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ToolMemberCachePoint:
+		av := object.Key("cachePoint")
+		if err := awsRestjson1_serializeDocumentCachePointBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ToolMemberToolSpec:
 		av := object.Key("toolSpec")
 		if err := awsRestjson1_serializeDocumentToolSpecification(&uv.Value, av); err != nil {

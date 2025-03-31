@@ -312,6 +312,12 @@ type EndpointParameters struct {
 	//
 	// AWS::S3Control::UseArnRegion
 	UseArnRegion *bool
+
+	// Internal parameter to indicate whether S3Express operation should use control
+	// plane, (ex. ListDirectoryAccessPoints)
+	//
+	// Parameter is required.
+	UseS3ExpressControlEndpoint *bool
 }
 
 // ValidateRequired validates required parameters are set.
@@ -384,60 +390,12 @@ func (r *resolver) ResolveEndpoint(
 	if exprVal := params.Region; exprVal != nil {
 		_Region := *exprVal
 		_ = _Region
-		if _Region == "snow" {
-			if exprVal := params.Endpoint; exprVal != nil {
-				_Endpoint := *exprVal
-				_ = _Endpoint
-				if exprVal := rulesfn.ParseURL(_Endpoint); exprVal != nil {
-					_url := *exprVal
-					_ = _url
-					if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
-						_partitionResult := *exprVal
-						_ = _partitionResult
-						if _UseDualStack == true {
-							return endpoint, fmt.Errorf("endpoint rule error, %s", "S3 Snow does not support DualStack")
-						}
-						if _UseFIPS == true {
-							return endpoint, fmt.Errorf("endpoint rule error, %s", "S3 Snow does not support FIPS")
-						}
-						uriString := func() string {
-							var out strings.Builder
-							out.WriteString(_url.Scheme)
-							out.WriteString("://")
-							out.WriteString(_url.Authority)
-							return out.String()
-						}()
-
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-							Properties: func() smithy.Properties {
-								var out smithy.Properties
-								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-									{
-										SchemeID: "aws.auth#sigv4",
-										SignerProperties: func() smithy.Properties {
-											var sp smithy.Properties
-											smithyhttp.SetDisableDoubleEncoding(&sp, true)
-
-											smithyhttp.SetSigV4SigningName(&sp, "s3")
-											smithyhttp.SetSigV4ASigningName(&sp, "s3")
-
-											smithyhttp.SetSigV4SigningRegion(&sp, _Region)
-											return sp
-										}(),
-									},
-								})
-								return out
-							}(),
-						}, nil
-					}
-					return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
+		if _UseFIPS == true {
+			if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
+				_partitionResult := *exprVal
+				_ = _partitionResult
+				if _partitionResult.Name == "aws-cn" {
+					return endpoint, fmt.Errorf("endpoint rule error, %s", "Partition does not support FIPS")
 				}
 			}
 		}
@@ -447,11 +405,6 @@ func (r *resolver) ResolveEndpoint(
 			if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
 				_partitionResult := *exprVal
 				_ = _partitionResult
-				if _UseFIPS == true {
-					if _partitionResult.Name == "aws-cn" {
-						return endpoint, fmt.Errorf("endpoint rule error, %s", "Partition does not support FIPS")
-					}
-				}
 				if exprVal := params.RequiresAccountId; exprVal != nil {
 					_RequiresAccountId := *exprVal
 					_ = _RequiresAccountId
@@ -684,6 +637,599 @@ func (r *resolver) ResolveEndpoint(
 				return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid region: region was not a valid DNS name.")
 			}
 			return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
+		}
+		if exprVal := params.AccessPointName; exprVal != nil {
+			_AccessPointName := *exprVal
+			_ = _AccessPointName
+			if exprVal := rulesfn.SubString(_AccessPointName, 0, 7, true); exprVal != nil {
+				_accessPointSuffix := *exprVal
+				_ = _accessPointSuffix
+				if _accessPointSuffix == "--xa-s3" {
+					if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
+						_partitionResult := *exprVal
+						_ = _partitionResult
+						if _UseDualStack == true {
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "S3Express does not support Dual-stack.")
+						}
+						if exprVal := rulesfn.SubString(_AccessPointName, 7, 15, true); exprVal != nil {
+							_s3expressAvailabilityZoneId := *exprVal
+							_ = _s3expressAvailabilityZoneId
+							if exprVal := rulesfn.SubString(_AccessPointName, 15, 17, true); exprVal != nil {
+								_s3expressAvailabilityZoneDelim := *exprVal
+								_ = _s3expressAvailabilityZoneDelim
+								if _s3expressAvailabilityZoneDelim == "--" {
+									if _UseFIPS == true {
+										uriString := func() string {
+											var out strings.Builder
+											out.WriteString("https://s3express-control-fips.")
+											out.WriteString(_Region)
+											out.WriteString(".")
+											out.WriteString(_partitionResult.DnsSuffix)
+											return out.String()
+										}()
+
+										uri, err := url.Parse(uriString)
+										if err != nil {
+											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+										}
+
+										return smithyendpoints.Endpoint{
+											URI:     *uri,
+											Headers: http.Header{},
+											Properties: func() smithy.Properties {
+												var out smithy.Properties
+												smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+													{
+														SchemeID: "aws.auth#sigv4",
+														SignerProperties: func() smithy.Properties {
+															var sp smithy.Properties
+															smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+															smithyhttp.SetSigV4SigningName(&sp, "s3express")
+															smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+															smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+															return sp
+														}(),
+													},
+												})
+												return out
+											}(),
+										}, nil
+									}
+									uriString := func() string {
+										var out strings.Builder
+										out.WriteString("https://s3express-control.")
+										out.WriteString(_Region)
+										out.WriteString(".")
+										out.WriteString(_partitionResult.DnsSuffix)
+										return out.String()
+									}()
+
+									uri, err := url.Parse(uriString)
+									if err != nil {
+										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+									}
+
+									return smithyendpoints.Endpoint{
+										URI:     *uri,
+										Headers: http.Header{},
+										Properties: func() smithy.Properties {
+											var out smithy.Properties
+											smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+												{
+													SchemeID: "aws.auth#sigv4",
+													SignerProperties: func() smithy.Properties {
+														var sp smithy.Properties
+														smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+														smithyhttp.SetSigV4SigningName(&sp, "s3express")
+														smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+														smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+														return sp
+													}(),
+												},
+											})
+											return out
+										}(),
+									}, nil
+								}
+							}
+						}
+						if exprVal := rulesfn.SubString(_AccessPointName, 7, 16, true); exprVal != nil {
+							_s3expressAvailabilityZoneId := *exprVal
+							_ = _s3expressAvailabilityZoneId
+							if exprVal := rulesfn.SubString(_AccessPointName, 16, 18, true); exprVal != nil {
+								_s3expressAvailabilityZoneDelim := *exprVal
+								_ = _s3expressAvailabilityZoneDelim
+								if _s3expressAvailabilityZoneDelim == "--" {
+									if _UseFIPS == true {
+										uriString := func() string {
+											var out strings.Builder
+											out.WriteString("https://s3express-control-fips.")
+											out.WriteString(_Region)
+											out.WriteString(".")
+											out.WriteString(_partitionResult.DnsSuffix)
+											return out.String()
+										}()
+
+										uri, err := url.Parse(uriString)
+										if err != nil {
+											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+										}
+
+										return smithyendpoints.Endpoint{
+											URI:     *uri,
+											Headers: http.Header{},
+											Properties: func() smithy.Properties {
+												var out smithy.Properties
+												smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+													{
+														SchemeID: "aws.auth#sigv4",
+														SignerProperties: func() smithy.Properties {
+															var sp smithy.Properties
+															smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+															smithyhttp.SetSigV4SigningName(&sp, "s3express")
+															smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+															smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+															return sp
+														}(),
+													},
+												})
+												return out
+											}(),
+										}, nil
+									}
+									uriString := func() string {
+										var out strings.Builder
+										out.WriteString("https://s3express-control.")
+										out.WriteString(_Region)
+										out.WriteString(".")
+										out.WriteString(_partitionResult.DnsSuffix)
+										return out.String()
+									}()
+
+									uri, err := url.Parse(uriString)
+									if err != nil {
+										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+									}
+
+									return smithyendpoints.Endpoint{
+										URI:     *uri,
+										Headers: http.Header{},
+										Properties: func() smithy.Properties {
+											var out smithy.Properties
+											smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+												{
+													SchemeID: "aws.auth#sigv4",
+													SignerProperties: func() smithy.Properties {
+														var sp smithy.Properties
+														smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+														smithyhttp.SetSigV4SigningName(&sp, "s3express")
+														smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+														smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+														return sp
+													}(),
+												},
+											})
+											return out
+										}(),
+									}, nil
+								}
+							}
+						}
+						if exprVal := rulesfn.SubString(_AccessPointName, 7, 20, true); exprVal != nil {
+							_s3expressAvailabilityZoneId := *exprVal
+							_ = _s3expressAvailabilityZoneId
+							if exprVal := rulesfn.SubString(_AccessPointName, 20, 22, true); exprVal != nil {
+								_s3expressAvailabilityZoneDelim := *exprVal
+								_ = _s3expressAvailabilityZoneDelim
+								if _s3expressAvailabilityZoneDelim == "--" {
+									if _UseFIPS == true {
+										uriString := func() string {
+											var out strings.Builder
+											out.WriteString("https://s3express-control-fips.")
+											out.WriteString(_Region)
+											out.WriteString(".")
+											out.WriteString(_partitionResult.DnsSuffix)
+											return out.String()
+										}()
+
+										uri, err := url.Parse(uriString)
+										if err != nil {
+											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+										}
+
+										return smithyendpoints.Endpoint{
+											URI:     *uri,
+											Headers: http.Header{},
+											Properties: func() smithy.Properties {
+												var out smithy.Properties
+												smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+													{
+														SchemeID: "aws.auth#sigv4",
+														SignerProperties: func() smithy.Properties {
+															var sp smithy.Properties
+															smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+															smithyhttp.SetSigV4SigningName(&sp, "s3express")
+															smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+															smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+															return sp
+														}(),
+													},
+												})
+												return out
+											}(),
+										}, nil
+									}
+									uriString := func() string {
+										var out strings.Builder
+										out.WriteString("https://s3express-control.")
+										out.WriteString(_Region)
+										out.WriteString(".")
+										out.WriteString(_partitionResult.DnsSuffix)
+										return out.String()
+									}()
+
+									uri, err := url.Parse(uriString)
+									if err != nil {
+										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+									}
+
+									return smithyendpoints.Endpoint{
+										URI:     *uri,
+										Headers: http.Header{},
+										Properties: func() smithy.Properties {
+											var out smithy.Properties
+											smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+												{
+													SchemeID: "aws.auth#sigv4",
+													SignerProperties: func() smithy.Properties {
+														var sp smithy.Properties
+														smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+														smithyhttp.SetSigV4SigningName(&sp, "s3express")
+														smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+														smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+														return sp
+													}(),
+												},
+											})
+											return out
+										}(),
+									}, nil
+								}
+							}
+						}
+						if exprVal := rulesfn.SubString(_AccessPointName, 7, 21, true); exprVal != nil {
+							_s3expressAvailabilityZoneId := *exprVal
+							_ = _s3expressAvailabilityZoneId
+							if exprVal := rulesfn.SubString(_AccessPointName, 21, 23, true); exprVal != nil {
+								_s3expressAvailabilityZoneDelim := *exprVal
+								_ = _s3expressAvailabilityZoneDelim
+								if _s3expressAvailabilityZoneDelim == "--" {
+									if _UseFIPS == true {
+										uriString := func() string {
+											var out strings.Builder
+											out.WriteString("https://s3express-control-fips.")
+											out.WriteString(_Region)
+											out.WriteString(".")
+											out.WriteString(_partitionResult.DnsSuffix)
+											return out.String()
+										}()
+
+										uri, err := url.Parse(uriString)
+										if err != nil {
+											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+										}
+
+										return smithyendpoints.Endpoint{
+											URI:     *uri,
+											Headers: http.Header{},
+											Properties: func() smithy.Properties {
+												var out smithy.Properties
+												smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+													{
+														SchemeID: "aws.auth#sigv4",
+														SignerProperties: func() smithy.Properties {
+															var sp smithy.Properties
+															smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+															smithyhttp.SetSigV4SigningName(&sp, "s3express")
+															smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+															smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+															return sp
+														}(),
+													},
+												})
+												return out
+											}(),
+										}, nil
+									}
+									uriString := func() string {
+										var out strings.Builder
+										out.WriteString("https://s3express-control.")
+										out.WriteString(_Region)
+										out.WriteString(".")
+										out.WriteString(_partitionResult.DnsSuffix)
+										return out.String()
+									}()
+
+									uri, err := url.Parse(uriString)
+									if err != nil {
+										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+									}
+
+									return smithyendpoints.Endpoint{
+										URI:     *uri,
+										Headers: http.Header{},
+										Properties: func() smithy.Properties {
+											var out smithy.Properties
+											smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+												{
+													SchemeID: "aws.auth#sigv4",
+													SignerProperties: func() smithy.Properties {
+														var sp smithy.Properties
+														smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+														smithyhttp.SetSigV4SigningName(&sp, "s3express")
+														smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+														smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+														return sp
+													}(),
+												},
+											})
+											return out
+										}(),
+									}, nil
+								}
+							}
+						}
+						if exprVal := rulesfn.SubString(_AccessPointName, 7, 27, true); exprVal != nil {
+							_s3expressAvailabilityZoneId := *exprVal
+							_ = _s3expressAvailabilityZoneId
+							if exprVal := rulesfn.SubString(_AccessPointName, 27, 29, true); exprVal != nil {
+								_s3expressAvailabilityZoneDelim := *exprVal
+								_ = _s3expressAvailabilityZoneDelim
+								if _s3expressAvailabilityZoneDelim == "--" {
+									if _UseFIPS == true {
+										uriString := func() string {
+											var out strings.Builder
+											out.WriteString("https://s3express-control-fips.")
+											out.WriteString(_Region)
+											out.WriteString(".")
+											out.WriteString(_partitionResult.DnsSuffix)
+											return out.String()
+										}()
+
+										uri, err := url.Parse(uriString)
+										if err != nil {
+											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+										}
+
+										return smithyendpoints.Endpoint{
+											URI:     *uri,
+											Headers: http.Header{},
+											Properties: func() smithy.Properties {
+												var out smithy.Properties
+												smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+													{
+														SchemeID: "aws.auth#sigv4",
+														SignerProperties: func() smithy.Properties {
+															var sp smithy.Properties
+															smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+															smithyhttp.SetSigV4SigningName(&sp, "s3express")
+															smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+															smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+															return sp
+														}(),
+													},
+												})
+												return out
+											}(),
+										}, nil
+									}
+									uriString := func() string {
+										var out strings.Builder
+										out.WriteString("https://s3express-control.")
+										out.WriteString(_Region)
+										out.WriteString(".")
+										out.WriteString(_partitionResult.DnsSuffix)
+										return out.String()
+									}()
+
+									uri, err := url.Parse(uriString)
+									if err != nil {
+										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+									}
+
+									return smithyendpoints.Endpoint{
+										URI:     *uri,
+										Headers: http.Header{},
+										Properties: func() smithy.Properties {
+											var out smithy.Properties
+											smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+												{
+													SchemeID: "aws.auth#sigv4",
+													SignerProperties: func() smithy.Properties {
+														var sp smithy.Properties
+														smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+														smithyhttp.SetSigV4SigningName(&sp, "s3express")
+														smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+														smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+														return sp
+													}(),
+												},
+											})
+											return out
+										}(),
+									}, nil
+								}
+							}
+						}
+						return endpoint, fmt.Errorf("endpoint rule error, %s", "Unrecognized S3Express Access Point name format.")
+					}
+					return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
+				}
+			}
+		}
+		if exprVal := params.UseS3ExpressControlEndpoint; exprVal != nil {
+			_UseS3ExpressControlEndpoint := *exprVal
+			_ = _UseS3ExpressControlEndpoint
+			if _UseS3ExpressControlEndpoint == true {
+				if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
+					_partitionResult := *exprVal
+					_ = _partitionResult
+					if _UseFIPS == true {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://s3express-control-fips.")
+							out.WriteString(_Region)
+							out.WriteString(".")
+							out.WriteString(_partitionResult.DnsSuffix)
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+									{
+										SchemeID: "aws.auth#sigv4",
+										SignerProperties: func() smithy.Properties {
+											var sp smithy.Properties
+											smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+											smithyhttp.SetSigV4SigningName(&sp, "s3express")
+											smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+											smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+											return sp
+										}(),
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+					uriString := func() string {
+						var out strings.Builder
+						out.WriteString("https://s3express-control.")
+						out.WriteString(_Region)
+						out.WriteString(".")
+						out.WriteString(_partitionResult.DnsSuffix)
+						return out.String()
+					}()
+
+					uri, err := url.Parse(uriString)
+					if err != nil {
+						return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+					}
+
+					return smithyendpoints.Endpoint{
+						URI:     *uri,
+						Headers: http.Header{},
+						Properties: func() smithy.Properties {
+							var out smithy.Properties
+							smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+								{
+									SchemeID: "aws.auth#sigv4",
+									SignerProperties: func() smithy.Properties {
+										var sp smithy.Properties
+										smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+										smithyhttp.SetSigV4SigningName(&sp, "s3express")
+										smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+										smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+										return sp
+									}(),
+								},
+							})
+							return out
+						}(),
+					}, nil
+				}
+				return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
+			}
+		}
+		if _Region == "snow" {
+			if exprVal := params.Endpoint; exprVal != nil {
+				_Endpoint := *exprVal
+				_ = _Endpoint
+				if exprVal := rulesfn.ParseURL(_Endpoint); exprVal != nil {
+					_url := *exprVal
+					_ = _url
+					if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
+						_partitionResult := *exprVal
+						_ = _partitionResult
+						if _UseDualStack == true {
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "S3 Snow does not support DualStack")
+						}
+						if _UseFIPS == true {
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "S3 Snow does not support FIPS")
+						}
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString(_url.Scheme)
+							out.WriteString("://")
+							out.WriteString(_url.Authority)
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+									{
+										SchemeID: "aws.auth#sigv4",
+										SignerProperties: func() smithy.Properties {
+											var sp smithy.Properties
+											smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+											smithyhttp.SetSigV4SigningName(&sp, "s3")
+											smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+											smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+											return sp
+										}(),
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+					return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
+				}
+			}
 		}
 		if exprVal := params.AccessPointName; exprVal != nil {
 			_AccessPointName := *exprVal
@@ -1405,11 +1951,6 @@ func (r *resolver) ResolveEndpoint(
 			_partitionResult := *exprVal
 			_ = _partitionResult
 			if rulesfn.IsValidHostLabel(_Region, true) {
-				if _UseFIPS == true {
-					if _partitionResult.Name == "aws-cn" {
-						return endpoint, fmt.Errorf("endpoint rule error, %s", "Partition does not support FIPS")
-					}
-				}
 				if exprVal := params.RequiresAccountId; exprVal != nil {
 					_RequiresAccountId := *exprVal
 					_ = _RequiresAccountId

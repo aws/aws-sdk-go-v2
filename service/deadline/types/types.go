@@ -254,8 +254,6 @@ type AssignedTaskRunSessionActionDefinition struct {
 	StepId *string
 
 	// The task ID.
-	//
-	// This member is required.
 	TaskId *string
 
 	noSmithyDocumentSerde
@@ -2286,6 +2284,14 @@ type SearchTermFilterExpression struct {
 	// This member is required.
 	SearchTerm *string
 
+	// Specifies how Deadline Cloud matches your search term in the results. If you
+	// don't specify a matchType the default is FUZZY_MATCH .
+	//
+	//   - FUZZY_MATCH - Matches if a portion of the search term is found in the result.
+	//
+	//   - CONTAINS - Matches if the exact search term is contained in the result.
+	MatchType SearchTermMatchingType
+
 	noSmithyDocumentSerde
 }
 
@@ -3084,8 +3090,6 @@ type TaskRunSessionActionDefinition struct {
 	StepId *string
 
 	// The task ID.
-	//
-	// This member is required.
 	TaskId *string
 
 	noSmithyDocumentSerde
@@ -3100,8 +3104,6 @@ type TaskRunSessionActionDefinitionSummary struct {
 	StepId *string
 
 	// The task ID.
-	//
-	// This member is required.
 	TaskId *string
 
 	noSmithyDocumentSerde
@@ -3203,7 +3205,8 @@ type UpdatedSessionActionInfo struct {
 	// The date and time the resource ended running.
 	EndedAt *time.Time
 
-	// The process exit code.
+	// The process exit code. The default Deadline Cloud worker agent converts
+	// unsigned 32-bit exit codes to signed 32-bit exit codes.
 	ProcessExitCode *int32
 
 	// A message to indicate the progress of the updated session action.

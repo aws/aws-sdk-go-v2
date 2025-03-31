@@ -96,11 +96,23 @@ type AutoToolChoice struct {
 	noSmithyDocumentSerde
 }
 
+// Defines a section of content to be cached for reuse in subsequent API calls.
+type CachePointBlock struct {
+
+	// Specifies the type of cache point within the CachePointBlock.
+	//
+	// This member is required.
+	Type CachePointType
+
+	noSmithyDocumentSerde
+}
+
 // A block of content for a message that you pass to, or receive from, a model
 // with the [Converse]or [ConverseStream] API operations.
 //
 // The following types satisfy this interface:
 //
+//	ContentBlockMemberCachePoint
 //	ContentBlockMemberDocument
 //	ContentBlockMemberGuardContent
 //	ContentBlockMemberImage
@@ -115,6 +127,15 @@ type AutoToolChoice struct {
 type ContentBlock interface {
 	isContentBlock()
 }
+
+// CachePoint to include in the message.
+type ContentBlockMemberCachePoint struct {
+	Value CachePointBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberCachePoint) isContentBlock() {}
 
 // A document to include in the message.
 type ContentBlockMemberDocument struct {
@@ -1406,11 +1427,21 @@ type SpecificToolChoice struct {
 //
 // The following types satisfy this interface:
 //
+//	SystemContentBlockMemberCachePoint
 //	SystemContentBlockMemberGuardContent
 //	SystemContentBlockMemberText
 type SystemContentBlock interface {
 	isSystemContentBlock()
 }
+
+// CachePoint to include in the system prompt.
+type SystemContentBlockMemberCachePoint struct {
+	Value CachePointBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*SystemContentBlockMemberCachePoint) isSystemContentBlock() {}
 
 // A content block to assess with the guardrail. Use with the [Converse] or [ConverseStream] API operations.
 //
@@ -1470,6 +1501,12 @@ type TokenUsage struct {
 	// This member is required.
 	TotalTokens *int32
 
+	// The number of input tokens read from the cache for the request.
+	CacheReadInputTokens *int32
+
+	// The number of input tokens written to the cache for the request.
+	CacheWriteInputTokens *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -1478,12 +1515,22 @@ type TokenUsage struct {
 //
 // The following types satisfy this interface:
 //
+//	ToolMemberCachePoint
 //	ToolMemberToolSpec
 //
 // [Tool use (function calling)]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type Tool interface {
 	isTool()
 }
+
+// CachePoint to include in the tool configuration.
+type ToolMemberCachePoint struct {
+	Value CachePointBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolMemberCachePoint) isTool() {}
 
 // The specfication for the tool.
 type ToolMemberToolSpec struct {

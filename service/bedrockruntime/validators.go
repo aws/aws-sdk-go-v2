@@ -212,12 +212,32 @@ func validateAsyncInvokeS3OutputDataConfig(v *types.AsyncInvokeS3OutputDataConfi
 	}
 }
 
+func validateCachePointBlock(v *types.CachePointBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CachePointBlock"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContentBlock(v types.ContentBlock) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContentBlock"}
 	switch uv := v.(type) {
+	case *types.ContentBlockMemberCachePoint:
+		if err := validateCachePointBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[cachePoint]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ContentBlockMemberDocument:
 		if err := validateDocumentBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[document]", err.(smithy.InvalidParamsError))
@@ -593,6 +613,11 @@ func validateSystemContentBlock(v types.SystemContentBlock) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SystemContentBlock"}
 	switch uv := v.(type) {
+	case *types.SystemContentBlockMemberCachePoint:
+		if err := validateCachePointBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[cachePoint]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.SystemContentBlockMemberGuardContent:
 		if err := validateGuardrailConverseContentBlock(uv.Value); err != nil {
 			invalidParams.AddNested("[guardContent]", err.(smithy.InvalidParamsError))
@@ -664,6 +689,11 @@ func validateTool(v types.Tool) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tool"}
 	switch uv := v.(type) {
+	case *types.ToolMemberCachePoint:
+		if err := validateCachePointBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[cachePoint]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ToolMemberToolSpec:
 		if err := validateToolSpecification(&uv.Value); err != nil {
 			invalidParams.AddNested("[toolSpec]", err.(smithy.InvalidParamsError))

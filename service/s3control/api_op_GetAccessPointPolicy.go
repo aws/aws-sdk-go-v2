@@ -15,8 +15,6 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets.
-//
 // Returns the access point policy associated with the specified access point.
 //
 // The following actions are related to GetAccessPointPolicy :

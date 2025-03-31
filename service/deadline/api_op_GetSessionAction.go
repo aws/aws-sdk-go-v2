@@ -82,7 +82,8 @@ type GetSessionActionOutput struct {
 	// The date and time the resource ended running.
 	EndedAt *time.Time
 
-	// The exit code to exit the session.
+	// The process exit code. The default Deadline Cloud worker agent converts
+	// unsigned 32-bit exit codes to signed 32-bit exit codes.
 	ProcessExitCode *int32
 
 	// The message that communicates the progress of the session action.

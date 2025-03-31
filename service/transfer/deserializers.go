@@ -10465,6 +10465,15 @@ func awsAwsjson11_deserializeDocumentDescribedWebApp(v **types.DescribedWebApp, 
 				sv.WebAppEndpoint = ptr.String(jtv)
 			}
 
+		case "WebAppEndpointPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WebAppEndpointPolicy to be of type string, got %T instead", value)
+				}
+				sv.WebAppEndpointPolicy = types.WebAppEndpointPolicy(jtv)
+			}
+
 		case "WebAppId":
 			if value != nil {
 				jtv, ok := value.(string)

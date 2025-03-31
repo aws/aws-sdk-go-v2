@@ -4902,6 +4902,13 @@ func awsRestjson1_serializeOpDocumentUpdateClusterConfigInput(v *UpdateClusterCo
 		}
 	}
 
+	if v.RemoteNetworkConfig != nil {
+		ok := object.Key("remoteNetworkConfig")
+		if err := awsRestjson1_serializeDocumentRemoteNetworkConfigRequest(v.RemoteNetworkConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourcesVpcConfig != nil {
 		ok := object.Key("resourcesVpcConfig")
 		if err := awsRestjson1_serializeDocumentVpcConfigRequest(v.ResourcesVpcConfig, ok); err != nil {

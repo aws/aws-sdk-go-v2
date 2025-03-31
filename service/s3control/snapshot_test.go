@@ -278,6 +278,18 @@ func TestCheckSnapshot_DeleteAccessPointPolicyForObjectLambda(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAccessPointScope(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccessPointScope(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAccessPointScope")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteBucket(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteBucket(context.Background(), nil, func(o *Options) {
@@ -590,6 +602,18 @@ func TestCheckSnapshot_GetAccessPointPolicyStatusForObjectLambda(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAccessPointScope(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccessPointScope(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAccessPointScope")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetBucket(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetBucket(context.Background(), nil, func(o *Options) {
@@ -830,6 +854,18 @@ func TestCheckSnapshot_ListAccessPoints(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAccessPointsForDirectoryBuckets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAccessPointsForDirectoryBuckets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAccessPointsForDirectoryBuckets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAccessPointsForObjectLambda(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAccessPointsForObjectLambda(context.Background(), nil, func(o *Options) {
@@ -967,6 +1003,18 @@ func TestCheckSnapshot_PutAccessPointPolicyForObjectLambda(t *testing.T) {
 	_, err := svc.PutAccessPointPolicyForObjectLambda(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutAccessPointPolicyForObjectLambda")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAccessPointScope(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccessPointScope(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAccessPointScope")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1393,6 +1441,18 @@ func TestUpdateSnapshot_DeleteAccessPointPolicyForObjectLambda(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteAccessPointScope(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccessPointScope(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAccessPointScope")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteBucket(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteBucket(context.Background(), nil, func(o *Options) {
@@ -1705,6 +1765,18 @@ func TestUpdateSnapshot_GetAccessPointPolicyStatusForObjectLambda(t *testing.T) 
 	}
 }
 
+func TestUpdateSnapshot_GetAccessPointScope(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccessPointScope(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAccessPointScope")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetBucket(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetBucket(context.Background(), nil, func(o *Options) {
@@ -1945,6 +2017,18 @@ func TestUpdateSnapshot_ListAccessPoints(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAccessPointsForDirectoryBuckets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAccessPointsForDirectoryBuckets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAccessPointsForDirectoryBuckets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAccessPointsForObjectLambda(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAccessPointsForObjectLambda(context.Background(), nil, func(o *Options) {
@@ -2082,6 +2166,18 @@ func TestUpdateSnapshot_PutAccessPointPolicyForObjectLambda(t *testing.T) {
 	_, err := svc.PutAccessPointPolicyForObjectLambda(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutAccessPointPolicyForObjectLambda")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAccessPointScope(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccessPointScope(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAccessPointScope")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -694,6 +694,25 @@ func (TransferTableStatus) Values() []TransferTableStatus {
 	}
 }
 
+type WebAppEndpointPolicy string
+
+// Enum values for WebAppEndpointPolicy
+const (
+	WebAppEndpointPolicyFips     WebAppEndpointPolicy = "FIPS"
+	WebAppEndpointPolicyStandard WebAppEndpointPolicy = "STANDARD"
+)
+
+// Values returns all known values for WebAppEndpointPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebAppEndpointPolicy) Values() []WebAppEndpointPolicy {
+	return []WebAppEndpointPolicy{
+		"FIPS",
+		"STANDARD",
+	}
+}
+
 type WorkflowStepType string
 
 // Enum values for WorkflowStepType

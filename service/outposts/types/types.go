@@ -59,7 +59,8 @@ type Address struct {
 // Information about hardware assets.
 type AssetInfo struct {
 
-	//  The ID of the asset.
+	//  The ID of the asset. An Outpost asset can be a single server within an
+	// Outposts rack or an Outposts server configuration.
 	AssetId *string
 
 	//  The position of an asset in a rack.
@@ -83,7 +84,8 @@ type AssetInstance struct {
 	// The ID of the Amazon Web Services account.
 	AccountId *string
 
-	// The ID of the asset.
+	// The ID of the asset. An Outpost asset can be a single server within an Outposts
+	// rack or an Outposts server configuration.
 	AssetId *string
 
 	// The Amazon Web Services service name of the instance.
@@ -155,6 +157,10 @@ type CapacityTaskFailure struct {
 
 // The summary of the capacity task.
 type CapacityTaskSummary struct {
+
+	// The ID of the asset. An Outpost asset can be a single server within an Outposts
+	// rack or an Outposts server configuration.
+	AssetId *string
 
 	// The ID of the specified capacity task.
 	CapacityTaskId *string
@@ -361,7 +367,8 @@ type LineItem struct {
 // Information about a line item asset.
 type LineItemAssetInformation struct {
 
-	//  The ID of the asset.
+	//  The ID of the asset. An Outpost asset can be a single server within an
+	// Outposts rack or an Outposts server configuration.
 	AssetId *string
 
 	//  The MAC addresses of the asset.

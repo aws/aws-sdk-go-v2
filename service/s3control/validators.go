@@ -370,6 +370,26 @@ func (m *validateOpDeleteAccessPointPolicy) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAccessPointScope struct {
+}
+
+func (*validateOpDeleteAccessPointScope) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccessPointScope) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccessPointScopeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccessPointScopeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBucket struct {
 }
 
@@ -890,6 +910,26 @@ func (m *validateOpGetAccessPointPolicyStatus) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAccessPointScope struct {
+}
+
+func (*validateOpGetAccessPointScope) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessPointScope) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessPointScopeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessPointScopeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetBucket struct {
 }
 
@@ -1270,6 +1310,26 @@ func (m *validateOpListAccessGrantsLocations) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAccessPointsForDirectoryBuckets struct {
+}
+
+func (*validateOpListAccessPointsForDirectoryBuckets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAccessPointsForDirectoryBuckets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAccessPointsForDirectoryBucketsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAccessPointsForDirectoryBucketsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAccessPointsForObjectLambda struct {
 }
 
@@ -1525,6 +1585,26 @@ func (m *validateOpPutAccessPointPolicy) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutAccessPointPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAccessPointScope struct {
+}
+
+func (*validateOpPutAccessPointScope) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccessPointScope) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccessPointScopeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccessPointScopeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1942,6 +2022,10 @@ func addOpDeleteAccessPointPolicyValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDeleteAccessPointPolicy{}, middleware.After)
 }
 
+func addOpDeleteAccessPointScopeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccessPointScope{}, middleware.After)
+}
+
 func addOpDeleteBucketValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBucket{}, middleware.After)
 }
@@ -2046,6 +2130,10 @@ func addOpGetAccessPointPolicyStatusValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpGetAccessPointPolicyStatus{}, middleware.After)
 }
 
+func addOpGetAccessPointScopeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessPointScope{}, middleware.After)
+}
+
 func addOpGetBucketValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBucket{}, middleware.After)
 }
@@ -2122,6 +2210,10 @@ func addOpListAccessGrantsLocationsValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpListAccessGrantsLocations{}, middleware.After)
 }
 
+func addOpListAccessPointsForDirectoryBucketsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAccessPointsForDirectoryBuckets{}, middleware.After)
+}
+
 func addOpListAccessPointsForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccessPointsForObjectLambda{}, middleware.After)
 }
@@ -2172,6 +2264,10 @@ func addOpPutAccessPointPolicyForObjectLambdaValidationMiddleware(stack *middlew
 
 func addOpPutAccessPointPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAccessPointPolicy{}, middleware.After)
+}
+
+func addOpPutAccessPointScopeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccessPointScope{}, middleware.After)
 }
 
 func addOpPutBucketLifecycleConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -4000,6 +4096,24 @@ func validateOpDeleteAccessPointPolicyInput(v *DeleteAccessPointPolicyInput) err
 	}
 }
 
+func validateOpDeleteAccessPointScopeInput(v *DeleteAccessPointScopeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessPointScopeInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteBucketInput(v *DeleteBucketInput) error {
 	if v == nil {
 		return nil
@@ -4463,6 +4577,24 @@ func validateOpGetAccessPointPolicyStatusInput(v *GetAccessPointPolicyStatusInpu
 	}
 }
 
+func validateOpGetAccessPointScopeInput(v *GetAccessPointScopeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessPointScopeInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetBucketInput(v *GetBucketInput) error {
 	if v == nil {
 		return nil
@@ -4796,6 +4928,21 @@ func validateOpListAccessGrantsLocationsInput(v *ListAccessGrantsLocationsInput)
 	}
 }
 
+func validateOpListAccessPointsForDirectoryBucketsInput(v *ListAccessPointsForDirectoryBucketsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAccessPointsForDirectoryBucketsInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAccessPointsForObjectLambdaInput(v *ListAccessPointsForObjectLambdaInput) error {
 	if v == nil {
 		return nil
@@ -5011,6 +5158,27 @@ func validateOpPutAccessPointPolicyInput(v *PutAccessPointPolicyInput) error {
 	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccessPointScopeInput(v *PutAccessPointScopeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccessPointScopeInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Scope == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

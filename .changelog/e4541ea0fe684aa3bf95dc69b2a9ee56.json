@@ -1,0 +1,8 @@
+{
+    "id": "e4541ea0-fe68-4aa3-bf95-dc69b2a9ee56",
+    "type": "feature",
+    "description": "Add support for updating RemoteNetworkConfig for hybrid nodes on EKS UpdateClusterConfig API",
+    "modules": [
+        "service/eks"
+    ]
+}

@@ -1707,7 +1707,7 @@ func TestEndpointCase48(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://abc123.456def.endpoints.email.api.aws")
+	uri, _ := url.Parse("https://abc123.456def.endpoints.email.global.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:     *uri,

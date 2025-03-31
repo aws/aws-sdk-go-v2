@@ -37,9 +37,8 @@ type CreateJobInput struct {
 	// This member is required.
 	FarmId *string
 
-	// The priority of the job on a scale of 0 to 100. The highest priority (first
-	// scheduled) is 100. When two jobs have the same priority, the oldest job is
-	// scheduled first.
+	// The priority of the job. The highest priority (first scheduled) is 100. When
+	// two jobs have the same priority, the oldest job is scheduled first.
 	//
 	// This member is required.
 	Priority *int32

@@ -17,8 +17,6 @@ import (
 	"time"
 )
 
-// This operation is not supported by directory buckets.
-//
 // Returns configuration information about the specified access point.
 //
 // All Amazon S3 on Outposts REST API requests for this action require an

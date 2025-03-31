@@ -145,8 +145,8 @@ type CreateClusterInput struct {
 	// [Local clusters for Amazon EKS on Amazon Web Services Outposts]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-overview.html
 	OutpostConfig *types.OutpostConfigRequest
 
-	// The configuration in the cluster for EKS Hybrid Nodes. You can't change or
-	// update this configuration after the cluster is created.
+	// The configuration in the cluster for EKS Hybrid Nodes. You can add, change, or
+	// remove this configuration after the cluster is created.
 	RemoteNetworkConfig *types.RemoteNetworkConfigRequest
 
 	// Enable or disable the block storage capability of EKS Auto Mode when creating

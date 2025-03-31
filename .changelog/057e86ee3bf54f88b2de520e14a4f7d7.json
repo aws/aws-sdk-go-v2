@@ -1,0 +1,8 @@
+{
+    "id": "057e86ee-3bf5-4f88-b2de-520e14a4f7d7",
+    "type": "feature",
+    "description": "Add dual-stack support to global endpoints.",
+    "modules": [
+        "service/sesv2"
+    ]
+}

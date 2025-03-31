@@ -1,0 +1,8 @@
+{
+    "id": "bca1c035-3fb1-4176-baba-f916a4632168",
+    "type": "feature",
+    "description": "Enabling Asset Level Capacity Management feature, which allows customers to create a Capacity Task for a single Asset on their active Outpost.",
+    "modules": [
+        "service/outposts"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "be64093a-dc85-4ef0-8639-03ab92ba7d9e",
+    "type": "feature",
+    "description": "Add WebAppEndpointPolicy support for WebApps",
+    "modules": [
+        "service/transfer"
+    ]
+}

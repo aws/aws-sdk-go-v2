@@ -30,6 +30,9 @@ func ExampleContentBlock_outputUsage() {
 	var union types.ContentBlock
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ContentBlockMemberCachePoint:
+		_ = v.Value // Value is types.CachePointBlock
+
 	case *types.ContentBlockMemberDocument:
 		_ = v.Value // Value is types.DocumentBlock
 
@@ -66,6 +69,7 @@ func ExampleContentBlock_outputUsage() {
 var _ *types.DocumentBlock
 var _ *string
 var _ types.ReasoningContentBlock
+var _ *types.CachePointBlock
 var _ types.GuardrailConverseContentBlock
 var _ *types.ImageBlock
 var _ *types.ToolResultBlock
@@ -375,6 +379,9 @@ func ExampleSystemContentBlock_outputUsage() {
 	var union types.SystemContentBlock
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.SystemContentBlockMemberCachePoint:
+		_ = v.Value // Value is types.CachePointBlock
+
 	case *types.SystemContentBlockMemberGuardContent:
 		_ = v.Value // Value is types.GuardrailConverseContentBlock
 
@@ -391,12 +398,16 @@ func ExampleSystemContentBlock_outputUsage() {
 }
 
 var _ *string
+var _ *types.CachePointBlock
 var _ types.GuardrailConverseContentBlock
 
 func ExampleTool_outputUsage() {
 	var union types.Tool
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ToolMemberCachePoint:
+		_ = v.Value // Value is types.CachePointBlock
+
 	case *types.ToolMemberToolSpec:
 		_ = v.Value // Value is types.ToolSpecification
 
@@ -410,6 +421,7 @@ func ExampleTool_outputUsage() {
 }
 
 var _ *types.ToolSpecification
+var _ *types.CachePointBlock
 
 func ExampleToolChoice_outputUsage() {
 	var union types.ToolChoice

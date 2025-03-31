@@ -374,6 +374,18 @@ func TestCheckSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateRouteServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateRouteServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateRouteServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateRouteTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateRouteTable(context.Background(), nil, func(o *Options) {
@@ -1334,6 +1346,42 @@ func TestCheckSnapshot_CreateRoute(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRouteServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRouteServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRouteServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateRouteServerEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRouteServerEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRouteServerEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateRouteServerPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRouteServerPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRouteServerPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateRouteTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRouteTable(context.Background(), nil, func(o *Options) {
@@ -2263,6 +2311,42 @@ func TestCheckSnapshot_DeleteRoute(t *testing.T) {
 	_, err := svc.DeleteRoute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteRoute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRouteServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRouteServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRouteServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRouteServerEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRouteServerEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRouteServerEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRouteServerPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRouteServerPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRouteServerPeer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4010,6 +4094,42 @@ func TestCheckSnapshot_DescribeReservedInstancesOfferings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeRouteServerEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRouteServerEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeRouteServerEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeRouteServerPeers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRouteServerPeers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeRouteServerPeers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeRouteServers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRouteServers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeRouteServers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeRouteTables(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeRouteTables(context.Background(), nil, func(o *Options) {
@@ -4934,6 +5054,18 @@ func TestCheckSnapshot_DisableIpamOrganizationAdminAccount(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisableRouteServerPropagation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableRouteServerPropagation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableRouteServerPropagation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableSerialConsoleAccess(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableSerialConsoleAccess(context.Background(), nil, func(o *Options) {
@@ -5107,6 +5239,18 @@ func TestCheckSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 	_, err := svc.DisassociateNatGatewayAddress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisassociateNatGatewayAddress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateRouteServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateRouteServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateRouteServer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5347,6 +5491,18 @@ func TestCheckSnapshot_EnableReachabilityAnalyzerOrganizationSharing(t *testing.
 	_, err := svc.EnableReachabilityAnalyzerOrganizationSharing(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "EnableReachabilityAnalyzerOrganizationSharing")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableRouteServerPropagation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableRouteServerPropagation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableRouteServerPropagation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5899,6 +6055,42 @@ func TestCheckSnapshot_GetReservedInstancesExchangeQuote(t *testing.T) {
 	_, err := svc.GetReservedInstancesExchangeQuote(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetReservedInstancesExchangeQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRouteServerAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouteServerAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRouteServerAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRouteServerPropagations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouteServerPropagations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRouteServerPropagations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRouteServerRoutingDatabase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouteServerRoutingDatabase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRouteServerRoutingDatabase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6643,6 +6835,18 @@ func TestCheckSnapshot_ModifyReservedInstances(t *testing.T) {
 	_, err := svc.ModifyReservedInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyReservedInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyRouteServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyRouteServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyRouteServer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8269,6 +8473,18 @@ func TestUpdateSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateRouteServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateRouteServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateRouteServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateRouteTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateRouteTable(context.Background(), nil, func(o *Options) {
@@ -9229,6 +9445,42 @@ func TestUpdateSnapshot_CreateRoute(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateRouteServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRouteServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRouteServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRouteServerEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRouteServerEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRouteServerEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRouteServerPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRouteServerPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRouteServerPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateRouteTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRouteTable(context.Background(), nil, func(o *Options) {
@@ -10158,6 +10410,42 @@ func TestUpdateSnapshot_DeleteRoute(t *testing.T) {
 	_, err := svc.DeleteRoute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteRoute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRouteServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRouteServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRouteServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRouteServerEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRouteServerEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRouteServerEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRouteServerPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRouteServerPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRouteServerPeer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11905,6 +12193,42 @@ func TestUpdateSnapshot_DescribeReservedInstancesOfferings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeRouteServerEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRouteServerEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeRouteServerEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeRouteServerPeers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRouteServerPeers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeRouteServerPeers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeRouteServers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRouteServers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeRouteServers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeRouteTables(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeRouteTables(context.Background(), nil, func(o *Options) {
@@ -12829,6 +13153,18 @@ func TestUpdateSnapshot_DisableIpamOrganizationAdminAccount(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisableRouteServerPropagation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableRouteServerPropagation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableRouteServerPropagation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisableSerialConsoleAccess(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableSerialConsoleAccess(context.Background(), nil, func(o *Options) {
@@ -13002,6 +13338,18 @@ func TestUpdateSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 	_, err := svc.DisassociateNatGatewayAddress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateNatGatewayAddress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateRouteServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateRouteServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateRouteServer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -13242,6 +13590,18 @@ func TestUpdateSnapshot_EnableReachabilityAnalyzerOrganizationSharing(t *testing
 	_, err := svc.EnableReachabilityAnalyzerOrganizationSharing(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EnableReachabilityAnalyzerOrganizationSharing")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableRouteServerPropagation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableRouteServerPropagation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableRouteServerPropagation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -13794,6 +14154,42 @@ func TestUpdateSnapshot_GetReservedInstancesExchangeQuote(t *testing.T) {
 	_, err := svc.GetReservedInstancesExchangeQuote(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetReservedInstancesExchangeQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRouteServerAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouteServerAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRouteServerAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRouteServerPropagations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouteServerPropagations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRouteServerPropagations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRouteServerRoutingDatabase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouteServerRoutingDatabase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRouteServerRoutingDatabase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14538,6 +14934,18 @@ func TestUpdateSnapshot_ModifyReservedInstances(t *testing.T) {
 	_, err := svc.ModifyReservedInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyReservedInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyRouteServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyRouteServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyRouteServer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

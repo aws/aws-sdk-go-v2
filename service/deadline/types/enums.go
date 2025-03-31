@@ -755,6 +755,25 @@ func (RunAs) Values() []RunAs {
 	}
 }
 
+type SearchTermMatchingType string
+
+// Enum values for SearchTermMatchingType
+const (
+	SearchTermMatchingTypeFuzzyMatch SearchTermMatchingType = "FUZZY_MATCH"
+	SearchTermMatchingTypeContains   SearchTermMatchingType = "CONTAINS"
+)
+
+// Values returns all known values for SearchTermMatchingType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchTermMatchingType) Values() []SearchTermMatchingType {
+	return []SearchTermMatchingType{
+		"FUZZY_MATCH",
+		"CONTAINS",
+	}
+}
+
 type ServiceManagedFleetOperatingSystemFamily string
 
 // Enum values for ServiceManagedFleetOperatingSystemFamily

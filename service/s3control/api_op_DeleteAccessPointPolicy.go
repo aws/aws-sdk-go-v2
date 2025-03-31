@@ -15,8 +15,6 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets.
-//
 // Deletes the access point policy for the specified access point.
 //
 // All Amazon S3 on Outposts REST API requests for this action require an

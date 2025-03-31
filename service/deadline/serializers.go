@@ -12328,6 +12328,11 @@ func awsRestjson1_serializeDocumentSearchTermFilterExpression(v *types.SearchTer
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.MatchType) > 0 {
+		ok := object.Key("matchType")
+		ok.String(string(v.MatchType))
+	}
+
 	if v.SearchTerm != nil {
 		ok := object.Key("searchTerm")
 		ok.String(*v.SearchTerm)

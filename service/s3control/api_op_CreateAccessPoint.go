@@ -16,10 +16,8 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets.
-//
-// Creates an access point and associates it with the specified bucket. For more
-// information, see [Managing Data Access with Amazon S3 Access Points]in the Amazon S3 User Guide.
+// Creates an access point and associates it to a specified bucket. For more
+// information, see [Managing access to shared datasets in general purpose buckets with access points]or [Managing access to shared datasets in directory buckets with access points] in the Amazon S3 User Guide.
 //
 // S3 on Outposts only supports VPC-style access points.
 //
@@ -40,11 +38,15 @@ import (
 //
 // [ListAccessPoints]
 //
+// [ListAccessPointsForDirectoryBuckets]
+//
+// [ListAccessPointsForDirectoryBuckets]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForDirectoryBuckets.html
 // [ListAccessPoints]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
-// [Managing Data Access with Amazon S3 Access Points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
 // [GetAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
+// [Managing access to shared datasets in general purpose buckets with access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
 // [Accessing Amazon S3 on Outposts using virtual private cloud (VPC) only access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
 // [DeleteAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
+// [Managing access to shared datasets in directory buckets with access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html
 // [Examples]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples
 func (c *Client) CreateAccessPoint(ctx context.Context, params *CreateAccessPointInput, optFns ...func(*Options)) (*CreateAccessPointOutput, error) {
 	if params == nil {
@@ -87,6 +89,13 @@ type CreateAccessPointInput struct {
 
 	// The name you want to assign to this access point.
 	//
+	// For directory buckets, the access point name must consist of a base name that
+	// you provide and suffix that includes the ZoneID (Amazon Web Services
+	// Availability Zone or Local Zone) of your bucket location, followed by --xa-s3 .
+	// For more information, see [Managing access to shared datasets in directory buckets with access points]in the Amazon S3 User Guide.
+	//
+	// [Managing access to shared datasets in directory buckets with access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html
+	//
 	// This member is required.
 	Name *string
 
@@ -103,6 +112,15 @@ type CreateAccessPointInput struct {
 	// point.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
 
+	// For directory buckets, you can filter access control to specific prefixes, API
+	// operations, or a combination of both. For more information, see [Managing access to shared datasets in directory buckets with access points]in the Amazon
+	// S3 User Guide.
+	//
+	// Scope is not supported for access points for general purpose buckets.
+	//
+	// [Managing access to shared datasets in directory buckets with access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html
+	Scope *types.Scope
+
 	// If you include this field, Amazon S3 restricts access to this access point to
 	// requests from the specified virtual private cloud (VPC).
 	//
@@ -115,6 +133,7 @@ type CreateAccessPointInput struct {
 func (in *CreateAccessPointInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.AccountId = in.AccountId
+	p.AccessPointName = in.Name
 	p.Bucket = in.Bucket
 	p.RequiresAccountId = ptr.Bool(true)
 }

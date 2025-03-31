@@ -5465,6 +5465,11 @@ func awsAwsjson11_serializeOpDocumentCreateWebAppInput(v *CreateWebAppInput, val
 		}
 	}
 
+	if len(v.WebAppEndpointPolicy) > 0 {
+		ok := object.Key("WebAppEndpointPolicy")
+		ok.String(string(v.WebAppEndpointPolicy))
+	}
+
 	if v.WebAppUnits != nil {
 		ok := object.Key("WebAppUnits")
 		if err := awsAwsjson11_serializeDocumentWebAppUnits(v.WebAppUnits, ok); err != nil {

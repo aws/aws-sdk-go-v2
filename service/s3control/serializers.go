@@ -661,6 +661,19 @@ func awsRestxml_serializeOpDocumentCreateAccessPointInput(v *CreateAccessPointIn
 			return err
 		}
 	}
+	if v.Scope != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Scope",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentScope(v.Scope, el); err != nil {
+			return err
+		}
+	}
 	if v.VpcConfiguration != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -1933,6 +1946,82 @@ func (m *awsRestxml_serializeOpDeleteAccessPointPolicyForObjectLambda) HandleSer
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestxml_serializeOpHttpBindingsDeleteAccessPointPolicyForObjectLambdaInput(v *DeleteAccessPointPolicyForObjectLambdaInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccountId != nil {
+		locationName := "X-Amz-Account-Id"
+		encoder.SetHeader(locationName).String(*v.AccountId)
+	}
+
+	if v.Name == nil || len(*v.Name) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
+	if v.Name != nil {
+		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpDeleteAccessPointScope struct {
+}
+
+func (*awsRestxml_serializeOpDeleteAccessPointScope) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpDeleteAccessPointScope) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteAccessPointScopeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20180820/accesspoint/{Name}/scope")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsDeleteAccessPointScopeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsDeleteAccessPointScopeInput(v *DeleteAccessPointScopeInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -3927,6 +4016,82 @@ func awsRestxml_serializeOpHttpBindingsGetAccessPointPolicyStatusForObjectLambda
 	return nil
 }
 
+type awsRestxml_serializeOpGetAccessPointScope struct {
+}
+
+func (*awsRestxml_serializeOpGetAccessPointScope) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpGetAccessPointScope) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAccessPointScopeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20180820/accesspoint/{Name}/scope")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsGetAccessPointScopeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsGetAccessPointScopeInput(v *GetAccessPointScopeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccountId != nil {
+		locationName := "X-Amz-Account-Id"
+		encoder.SetHeader(locationName).String(*v.AccountId)
+	}
+
+	if v.Name == nil || len(*v.Name) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
+	if v.Name != nil {
+		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestxml_serializeOpGetBucket struct {
 }
 
@@ -5473,6 +5638,85 @@ func awsRestxml_serializeOpHttpBindingsListAccessPointsInput(v *ListAccessPoints
 	return nil
 }
 
+type awsRestxml_serializeOpListAccessPointsForDirectoryBuckets struct {
+}
+
+func (*awsRestxml_serializeOpListAccessPointsForDirectoryBuckets) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpListAccessPointsForDirectoryBuckets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAccessPointsForDirectoryBucketsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20180820/accesspointfordirectory")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsListAccessPointsForDirectoryBucketsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsListAccessPointsForDirectoryBucketsInput(v *ListAccessPointsForDirectoryBucketsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccountId != nil {
+		locationName := "X-Amz-Account-Id"
+		encoder.SetHeader(locationName).String(*v.AccountId)
+	}
+
+	if v.DirectoryBucket != nil {
+		encoder.SetQuery("directoryBucket").String(*v.DirectoryBucket)
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestxml_serializeOpListAccessPointsForObjectLambda struct {
 }
 
@@ -6525,6 +6769,118 @@ func awsRestxml_serializeOpDocumentPutAccessPointPolicyForObjectLambdaInput(v *P
 		}
 		el := value.MemberElement(root)
 		el.String(*v.Policy)
+	}
+	return nil
+}
+
+type awsRestxml_serializeOpPutAccessPointScope struct {
+}
+
+func (*awsRestxml_serializeOpPutAccessPointScope) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpPutAccessPointScope) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutAccessPointScopeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20180820/accesspoint/{Name}/scope")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsPutAccessPointScopeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "PutAccessPointScopeRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://awss3control.amazonaws.com/doc/2018-08-20/"))
+	if err := awsRestxml_serializeOpDocumentPutAccessPointScopeInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsPutAccessPointScopeInput(v *PutAccessPointScopeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccountId != nil {
+		locationName := "X-Amz-Account-Id"
+		encoder.SetHeader(locationName).String(*v.AccountId)
+	}
+
+	if v.Name == nil || len(*v.Name) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
+	if v.Name != nil {
+		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentPutAccessPointScopeInput(v *PutAccessPointScopeInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Scope != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Scope",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentScope(v.Scope, el); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -10193,6 +10549,26 @@ func awsRestxml_serializeDocumentObjectLambdaTransformationConfigurationsList(v 
 	return nil
 }
 
+func awsRestxml_serializeDocumentPrefixesList(v []string, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "Prefix",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		am := array.Member()
+		am.String(v[i])
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentPrefixLevel(v *types.PrefixLevel, value smithyxml.Value) error {
 	defer value.Close()
 	if v.StorageMetrics != nil {
@@ -11662,6 +12038,57 @@ func awsRestxml_serializeDocumentS3UserMetadata(v map[string]string, value smith
 		}
 		entry.MemberElement(valueElement).String(v[key])
 		entry.Close()
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentScope(v *types.Scope, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Permissions != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Permissions",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentScopePermissionList(v.Permissions, el); err != nil {
+			return err
+		}
+	}
+	if v.Prefixes != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Prefixes",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentPrefixesList(v.Prefixes, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentScopePermissionList(v []types.ScopePermission, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "Permission",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		am := array.Member()
+		am.String(string(v[i]))
 	}
 	return nil
 }

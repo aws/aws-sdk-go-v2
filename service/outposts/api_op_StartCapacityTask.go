@@ -41,6 +41,10 @@ type StartCapacityTaskInput struct {
 	// This member is required.
 	OutpostIdentifier *string
 
+	// The ID of the Outpost asset. An Outpost asset can be a single server within an
+	// Outposts rack or an Outposts server configuration.
+	AssetId *string
+
 	// You can request a dry run to determine if the instance type and instance size
 	// changes is above or below available instance capacity. Requesting a dry run does
 	// not make any changes to your plan.
@@ -67,6 +71,10 @@ type StartCapacityTaskInput struct {
 }
 
 type StartCapacityTaskOutput struct {
+
+	// The ID of the asset. An Outpost asset can be a single server within an Outposts
+	// rack or an Outposts server configuration.
+	AssetId *string
 
 	// ID of the capacity task that you want to start.
 	CapacityTaskId *string

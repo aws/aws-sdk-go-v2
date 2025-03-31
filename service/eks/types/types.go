@@ -428,8 +428,8 @@ type Cluster struct {
 	// [Amazon EKS local cluster platform versions]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-platform-versions.html
 	PlatformVersion *string
 
-	// The configuration in the cluster for EKS Hybrid Nodes. You can't change or
-	// update this configuration after the cluster is created.
+	// The configuration in the cluster for EKS Hybrid Nodes. You can add, change, or
+	// remove this configuration after the cluster is created.
 	RemoteNetworkConfig *RemoteNetworkConfigResponse
 
 	// The VPC configuration used by the cluster control plane. Amazon EKS VPC
@@ -1895,8 +1895,8 @@ type RemoteAccessConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration in the cluster for EKS Hybrid Nodes. You can't change or
-// update this configuration after the cluster is created.
+// The configuration in the cluster for EKS Hybrid Nodes. You can add, change, or
+// remove this configuration after the cluster is created.
 type RemoteNetworkConfigRequest struct {
 
 	// The list of network CIDRs that can contain hybrid nodes.
@@ -1955,8 +1955,8 @@ type RemoteNetworkConfigRequest struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration in the cluster for EKS Hybrid Nodes. You can't change or
-// update this configuration after the cluster is created.
+// The configuration in the cluster for EKS Hybrid Nodes. You can add, change, or
+// remove this configuration after the cluster is created.
 type RemoteNetworkConfigResponse struct {
 
 	// The list of network CIDRs that can contain hybrid nodes.

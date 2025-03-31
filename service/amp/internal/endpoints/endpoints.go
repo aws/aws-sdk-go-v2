@@ -224,6 +224,19 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.DualStackVariant,
 			}: {},
 			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {},
+			endpoints.EndpointKey{
+				Region: "us-east-1-fips",
+			}: endpoints.Endpoint{
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "us-east-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -231,12 +244,38 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.DualStackVariant,
 			}: {},
 			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant,
+			}: {},
+			endpoints.EndpointKey{
+				Region: "us-east-2-fips",
+			}: endpoints.Endpoint{
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region:  "us-west-2",
 				Variant: endpoints.DualStackVariant,
 			}: {},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant,
+			}: {},
+			endpoints.EndpointKey{
+				Region: "us-west-2-fips",
+			}: endpoints.Endpoint{
+				Deprecated: aws.TrueTernary,
+			},
 		},
 	},
 	{

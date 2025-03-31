@@ -1140,6 +1140,10 @@ func awsRestjson1_serializeOpHttpBindingsGetOutpostSupportedInstanceTypesInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AssetId != nil {
+		encoder.SetQuery("AssetId").String(*v.AssetId)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
@@ -2166,6 +2170,11 @@ func awsRestjson1_serializeOpHttpBindingsStartCapacityTaskInput(v *StartCapacity
 func awsRestjson1_serializeOpDocumentStartCapacityTaskInput(v *StartCapacityTaskInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AssetId != nil {
+		ok := object.Key("AssetId")
+		ok.String(*v.AssetId)
+	}
 
 	if v.DryRun {
 		ok := object.Key("DryRun")

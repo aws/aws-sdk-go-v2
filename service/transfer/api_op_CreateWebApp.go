@@ -33,16 +33,32 @@ type CreateWebAppInput struct {
 	// You can provide a structure that contains the details for the identity provider
 	// to use with your web app.
 	//
+	// For more details about this parameter, see [Configure your identity provider for Transfer Family web apps].
+	//
+	// [Configure your identity provider for Transfer Family web apps]: https://docs.aws.amazon.com/transfer/latest/userguide/webapp-identity-center.html
+	//
 	// This member is required.
 	IdentityProviderDetails types.WebAppIdentityProviderDetails
 
 	// The AccessEndpoint is the URL that you provide to your users for them to
 	// interact with the Transfer Family web app. You can specify a custom URL or use
 	// the default value.
+	//
+	// Before you enter a custom URL for this parameter, follow the steps described in [Update your access endpoint with a custom URL]
+	// .
+	//
+	// [Update your access endpoint with a custom URL]: https://docs.aws.amazon.com/transfer/latest/userguide/webapp-customize.html
 	AccessEndpoint *string
 
 	// Key-value pairs that can be used to group and search for web apps.
 	Tags []types.Tag
+
+	//  Setting for the type of endpoint policy for the web app. The default value is
+	// STANDARD .
+	//
+	// If you are creating the web app in an Amazon Web Services GovCloud (US) Region,
+	// you can set this parameter to FIPS .
+	WebAppEndpointPolicy types.WebAppEndpointPolicy
 
 	// A union that contains the value for number of concurrent connections or the
 	// user sessions on your web app.
