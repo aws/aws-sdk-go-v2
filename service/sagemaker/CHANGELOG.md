@@ -1,3 +1,7 @@
+# v1.185.1 (2025-03-31)
+
+* No change notes available for this release.
+
 # v1.185.0 (2025-03-28)
 
 * **Feature**: TransformAmiVersion for Batch Transform and SageMaker Search Service Aggregate Search API Extension

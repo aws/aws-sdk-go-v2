@@ -1,3 +1,7 @@
+# v1.56.0 (2025-03-31)
+
+* **Feature**: Amazon S3 adds support for S3 Access Points for directory buckets in AWS Dedicated Local Zones
+
 # v1.55.0 (2025-03-13)
 
 * **Feature**: Updating GetDataAccess response for S3 Access Grants to include the matched Grantee for the requested prefix

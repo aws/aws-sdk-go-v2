@@ -1,3 +1,7 @@
+# v1.63.0 (2025-03-31)
+
+* **Feature**: Add support for updating RemoteNetworkConfig for hybrid nodes on EKS UpdateClusterConfig API
+
 # v1.62.0 (2025-03-27)
 
 * **Feature**: Added support for BOTTLEROCKET FIPS AMIs to AMI types in US regions.

@@ -1,3 +1,30 @@
+# Release (2025-03-31)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.28.0](service/bedrockruntime/CHANGELOG.md#v1280-2025-03-31)
+  * **Feature**: Add Prompt Caching support to Converse and ConverseStream APIs
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.10.0](service/deadline/CHANGELOG.md#v1100-2025-03-31)
+  * **Feature**: With this release you can use a new field to specify the search term match type. Search term match types currently support fuzzy and contains matching.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.211.0](service/ec2/CHANGELOG.md#v12110-2025-03-31)
+  * **Feature**: Release VPC Route Server, a new feature allowing dynamic routing in VPCs.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.63.0](service/eks/CHANGELOG.md#v1630-2025-03-31)
+  * **Feature**: Add support for updating RemoteNetworkConfig for hybrid nodes on EKS UpdateClusterConfig API
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.28.0](service/marketplaceentitlementservice/CHANGELOG.md#v1280-2025-03-31)
+  * **Feature**: Add support for Marketplace Entitlement Service dual-stack endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.50.0](service/outposts/CHANGELOG.md#v1500-2025-03-31)
+  * **Feature**: Enabling Asset Level Capacity Management feature, which allows customers to create a Capacity Task for a single Asset on their active Outpost.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.79.0](service/s3/CHANGELOG.md#v1790-2025-03-31)
+  * **Feature**: Amazon S3 adds support for S3 Access Points for directory buckets in AWS Dedicated Local Zones
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.56.0](service/s3control/CHANGELOG.md#v1560-2025-03-31)
+  * **Feature**: Amazon S3 adds support for S3 Access Points for directory buckets in AWS Dedicated Local Zones
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.44.0](service/sesv2/CHANGELOG.md#v1440-2025-03-31)
+  * **Feature**: Add dual-stack support to global endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.58.0](service/transfer/CHANGELOG.md#v1580-2025-03-31)
+  * **Feature**: Add WebAppEndpointPolicy support for WebApps
+
 # Release (2025-03-28)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.10.0 (2025-03-31)
+
+* **Feature**: With this release you can use a new field to specify the search term match type. Search term match types currently support fuzzy and contains matching.
+
 # v1.9.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

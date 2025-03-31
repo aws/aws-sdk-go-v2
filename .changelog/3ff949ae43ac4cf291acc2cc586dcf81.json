@@ -1,8 +1,0 @@
-{
-    "id": "3ff949ae-43ac-4cf2-91ac-c2cc586dcf81",
-    "type": "feature",
-    "description": "Add Prompt Caching support to Converse and ConverseStream APIs",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

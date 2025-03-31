@@ -1,8 +1,0 @@
-{
-    "id": "4518e43e-8d91-4005-9645-071f7cf42f46",
-    "type": "feature",
-    "description": "With this release you can use a new field to specify the search term match type. Search term match types currently support fuzzy and contains matching.",
-    "modules": [
-        "service/deadline"
-    ]
-}

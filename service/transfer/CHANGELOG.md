@@ -1,3 +1,7 @@
+# v1.58.0 (2025-03-31)
+
+* **Feature**: Add WebAppEndpointPolicy support for WebApps
+
 # v1.57.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

@@ -1,8 +1,0 @@
-{
-    "id": "16bf3b40-9dfb-4586-ba28-8e651252a7ae",
-    "type": "feature",
-    "description": "Amazon S3 adds support for S3 Access Points for directory buckets in AWS Dedicated Local Zones",
-    "modules": [
-        "service/s3control"
-    ]
-}

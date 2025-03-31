@@ -1,3 +1,7 @@
+# v1.28.0 (2025-03-31)
+
+* **Feature**: Add Prompt Caching support to Converse and ConverseStream APIs
+
 # v1.27.0 (2025-03-28)
 
 * **Feature**: Launching Multi-modality Content Filter for Amazon Bedrock Guardrails.

@@ -1,3 +1,7 @@
+# v1.44.0 (2025-03-31)
+
+* **Feature**: Add dual-stack support to global endpoints.
+
 # v1.43.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

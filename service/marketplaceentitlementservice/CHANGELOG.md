@@ -1,3 +1,7 @@
+# v1.28.0 (2025-03-31)
+
+* **Feature**: Add support for Marketplace Entitlement Service dual-stack endpoints.
+
 # v1.27.0 (2025-03-25)
 
 * **Feature**: This release enhances the GetEntitlements API to support new filter CUSTOMER_AWS_ACCOUNT_ID in request and CustomerAWSAccountId field in response.

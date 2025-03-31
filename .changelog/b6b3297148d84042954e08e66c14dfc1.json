@@ -1,8 +1,0 @@
-{
-    "id": "b6b32971-48d8-4042-954e-08e66c14dfc1",
-    "type": "feature",
-    "description": "Add support for Marketplace Entitlement Service dual-stack endpoints.",
-    "modules": [
-        "service/marketplaceentitlementservice"
-    ]
-}
