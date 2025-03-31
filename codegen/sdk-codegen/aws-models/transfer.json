@@ -1365,14 +1365,14 @@
                 "IdentityProviderDetails": {
                     "target": "com.amazonaws.transfer#WebAppIdentityProviderDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can provide a structure that contains the details for the identity provider to use with your web app.</p>",
+                        "smithy.api#documentation": "<p>You can provide a structure that contains the details for the identity provider to use with your web app.</p>\n         <p>For more details about this parameter, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/webapp-identity-center.html\">Configure your identity provider for Transfer Family web apps</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AccessEndpoint": {
                     "target": "com.amazonaws.transfer#WebAppAccessEndpoint",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccessEndpoint</code> is the URL that you provide to your users for them to interact with the Transfer Family web app. You can specify a custom URL or use the default value.</p>"
+                        "smithy.api#documentation": "<p>The <code>AccessEndpoint</code> is the URL that you provide to your users for them to interact with the Transfer Family web app. You can specify a custom URL or use the default value.</p>\n         <p>Before you enter a custom URL for this parameter, follow the steps described in \n      <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/webapp-customize.html\">Update your access endpoint with a custom URL</a>.</p>"
                     }
                 },
                 "WebAppUnits": {
@@ -1385,6 +1385,12 @@
                     "target": "com.amazonaws.transfer#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for web apps.</p>"
+                    }
+                },
+                "WebAppEndpointPolicy": {
+                    "target": "com.amazonaws.transfer#WebAppEndpointPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>.\n    </p>\n         <p>If you are creating the web app in an Amazon Web Services GovCloud (US) Region, you can set this parameter to <code>FIPS</code>.</p>"
                     }
                 }
             },
@@ -3929,7 +3935,7 @@
                     "target": "com.amazonaws.transfer#SshPublicKeys",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>Specifies the public key portion of the Secure Shell (SSH) keys stored for the described\n      user.</p>"
+                        "smithy.api#documentation": "<p>Specifies the public key portion of the Secure Shell (SSH) keys stored for the described\n      user.</p>\n         <note>\n            <p>To delete the public key body, set its value to zero keys, as shown here:</p>\n            <p>\n               <code>SshPublicKeys: []</code>\n            </p>\n         </note>"
                     }
                 },
                 "Tags": {
@@ -3996,6 +4002,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for web apps. Tags are metadata attached to web apps for any purpose.</p>"
                     }
+                },
+                "WebAppEndpointPolicy": {
+                    "target": "com.amazonaws.transfer#WebAppEndpointPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>.\n    </p>\n         <p>If your web app was created in an Amazon Web Services GovCloud (US) Region, the value of this parameter can be <code>FIPS</code>, which indicates the web app endpoint is FIPS-compliant.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4034,7 +4046,7 @@
                 "FaviconFile": {
                     "target": "com.amazonaws.transfer#WebAppFaviconFile",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns a icon file data string (in base64 encoding).</p>"
+                        "smithy.api#documentation": "<p>Returns an icon file data string (in base64 encoding).</p>"
                     }
                 }
             },
@@ -10912,7 +10924,7 @@
                 "FaviconFile": {
                     "target": "com.amazonaws.transfer#WebAppFaviconFile",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify icon file data string (in base64 encoding).</p>"
+                        "smithy.api#documentation": "<p>Specify an icon file data string (in base64 encoding).</p>"
                     }
                 }
             },
@@ -11177,6 +11189,23 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.transfer#WebAppEndpointPolicy": {
+            "type": "enum",
+            "members": {
+                "FIPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIPS"
+                    }
+                },
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
                 }
             }
         },

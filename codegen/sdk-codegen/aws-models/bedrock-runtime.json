@@ -1058,6 +1058,32 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockruntime#CachePointBlock": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockruntime#CachePointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of cache point within the CachePointBlock.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a section of content to be cached for reuse in subsequent API calls.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CachePointType": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockruntime#ConflictException": {
             "type": "structure",
             "members": {
@@ -1114,6 +1140,12 @@
                     "target": "com.amazonaws.bedrockruntime#GuardrailConverseContentBlock",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the content to assess with the guardrail. If you don't specify\n            <code>guardContent</code> in a call to the Converse API, the guardrail (if passed in the\n         Converse API) assesses the entire message.</p>\n         <p>For more information, see  <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n\n      </p>"
+                    }
+                },
+                "cachePoint": {
+                    "target": "com.amazonaws.bedrockruntime#CachePointBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>CachePoint to include in the message.</p>"
                     }
                 },
                 "reasoningContent": {
@@ -4769,6 +4801,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A content block to assess with the guardrail. Use with the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> API operations. </p>\n         <p>For more information, see <i>Use a guardrail with the Converse\n            API</i> in the <i>Amazon Bedrock User Guide</i>.</p>"
                     }
+                },
+                "cachePoint": {
+                    "target": "com.amazonaws.bedrockruntime#CachePointBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>CachePoint to include in the system prompt.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4892,6 +4930,24 @@
                         },
                         "smithy.api#required": {}
                     }
+                },
+                "cacheReadInputTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of input tokens read from the cache for the request.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "cacheWriteInputTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of input tokens written to the cache for the request.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
                 }
             },
             "traits": {
@@ -4905,6 +4961,12 @@
                     "target": "com.amazonaws.bedrockruntime#ToolSpecification",
                     "traits": {
                         "smithy.api#documentation": "<p>The specfication for the tool.</p>"
+                    }
+                },
+                "cachePoint": {
+                    "target": "com.amazonaws.bedrockruntime#CachePointBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>CachePoint to include in the tool configuration.</p>"
                     }
                 }
             },

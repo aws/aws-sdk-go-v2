@@ -88,6 +88,9 @@
                     "target": "com.amazonaws.s3control#DeleteAccessPointPolicyForObjectLambda"
                 },
                 {
+                    "target": "com.amazonaws.s3control#DeleteAccessPointScope"
+                },
+                {
                     "target": "com.amazonaws.s3control#DeleteBucket"
                 },
                 {
@@ -166,6 +169,9 @@
                     "target": "com.amazonaws.s3control#GetAccessPointPolicyStatusForObjectLambda"
                 },
                 {
+                    "target": "com.amazonaws.s3control#GetAccessPointScope"
+                },
+                {
                     "target": "com.amazonaws.s3control#GetBucket"
                 },
                 {
@@ -226,6 +232,9 @@
                     "target": "com.amazonaws.s3control#ListAccessPoints"
                 },
                 {
+                    "target": "com.amazonaws.s3control#ListAccessPointsForDirectoryBuckets"
+                },
+                {
                     "target": "com.amazonaws.s3control#ListAccessPointsForObjectLambda"
                 },
                 {
@@ -260,6 +269,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3control#PutAccessPointPolicyForObjectLambda"
+                },
+                {
+                    "target": "com.amazonaws.s3control#PutAccessPointScope"
                 },
                 {
                     "target": "com.amazonaws.s3control#PutBucketLifecycleConfiguration"
@@ -396,6 +408,11 @@
                             "required": false,
                             "documentation": "When an Access Point ARN is provided and this flag is enabled, the SDK MUST use the ARN's region when constructing the endpoint instead of the client's configured region.",
                             "type": "Boolean"
+                        },
+                        "UseS3ExpressControlEndpoint": {
+                            "required": false,
+                            "documentation": "Internal parameter to indicate whether S3Express operation should use control plane, (ex. ListDirectoryAccessPoints)",
+                            "type": "Boolean"
                         }
                     },
                     "rules": [
@@ -414,99 +431,41 @@
                                 {
                                     "conditions": [
                                         {
-                                            "fn": "stringEquals",
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "aws.partition",
                                             "argv": [
                                                 {
                                                     "ref": "Region"
-                                                },
-                                                "snow"
-                                            ]
-                                        },
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
                                                 }
                                             ],
-                                            "assign": "url"
-                                        }
-                                    ],
-                                    "rules": [
+                                            "assign": "partitionResult"
+                                        },
                                         {
-                                            "conditions": [
+                                            "fn": "stringEquals",
+                                            "argv": [
                                                 {
-                                                    "fn": "aws.partition",
+                                                    "fn": "getAttr",
                                                     "argv": [
                                                         {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "partitionResult"
-                                                }
-                                            ],
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "error": "S3 Snow does not support DualStack",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "error": "S3 Snow does not support FIPS",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "{url#scheme}://{url#authority}",
-                                                        "properties": {
-                                                            "authSchemes": [
-                                                                {
-                                                                    "disableDoubleEncoding": true,
-                                                                    "name": "sigv4",
-                                                                    "signingName": "s3",
-                                                                    "signingRegion": "{Region}"
-                                                                }
-                                                            ]
+                                                            "ref": "partitionResult"
                                                         },
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ],
-                                            "type": "tree"
+                                                        "name"
+                                                    ]
+                                                },
+                                                "aws-cn"
+                                            ]
                                         }
                                     ],
-                                    "type": "tree"
+                                    "error": "Partition does not support FIPS",
+                                    "type": "error"
                                 },
                                 {
                                     "conditions": [
@@ -533,36 +492,6 @@
                                                 }
                                             ],
                                             "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "stringEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "fn": "getAttr",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "partitionResult"
-                                                                        },
-                                                                        "name"
-                                                                    ]
-                                                                },
-                                                                "aws-cn"
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "error": "Partition does not support FIPS",
-                                                    "type": "error"
-                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -837,6 +766,691 @@
                                                     "conditions": [],
                                                     "error": "Invalid region: region was not a valid DNS name.",
                                                     "type": "error"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "AccessPointName"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "substring",
+                                            "argv": [
+                                                {
+                                                    "ref": "AccessPointName"
+                                                },
+                                                0,
+                                                7,
+                                                true
+                                            ],
+                                            "assign": "accessPointSuffix"
+                                        },
+                                        {
+                                            "fn": "stringEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "accessPointSuffix"
+                                                },
+                                                "--xa-s3"
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "partitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "S3Express does not support Dual-stack.",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "substring",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "AccessPointName"
+                                                                },
+                                                                7,
+                                                                15,
+                                                                true
+                                                            ],
+                                                            "assign": "s3expressAvailabilityZoneId"
+                                                        },
+                                                        {
+                                                            "fn": "substring",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "AccessPointName"
+                                                                },
+                                                                15,
+                                                                17,
+                                                                true
+                                                            ],
+                                                            "assign": "s3expressAvailabilityZoneDelim"
+                                                        },
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "s3expressAvailabilityZoneDelim"
+                                                                },
+                                                                "--"
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "UseFIPS"
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://s3express-control-fips.{Region}.{partitionResult#dnsSuffix}",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "disableDoubleEncoding": true,
+                                                                            "name": "sigv4",
+                                                                            "signingName": "s3express",
+                                                                            "signingRegion": "{Region}"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://s3express-control.{Region}.{partitionResult#dnsSuffix}",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "disableDoubleEncoding": true,
+                                                                            "name": "sigv4",
+                                                                            "signingName": "s3express",
+                                                                            "signingRegion": "{Region}"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "substring",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "AccessPointName"
+                                                                },
+                                                                7,
+                                                                16,
+                                                                true
+                                                            ],
+                                                            "assign": "s3expressAvailabilityZoneId"
+                                                        },
+                                                        {
+                                                            "fn": "substring",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "AccessPointName"
+                                                                },
+                                                                16,
+                                                                18,
+                                                                true
+                                                            ],
+                                                            "assign": "s3expressAvailabilityZoneDelim"
+                                                        },
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "s3expressAvailabilityZoneDelim"
+                                                                },
+                                                                "--"
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "UseFIPS"
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://s3express-control-fips.{Region}.{partitionResult#dnsSuffix}",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "disableDoubleEncoding": true,
+                                                                            "name": "sigv4",
+                                                                            "signingName": "s3express",
+                                                                            "signingRegion": "{Region}"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://s3express-control.{Region}.{partitionResult#dnsSuffix}",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "disableDoubleEncoding": true,
+                                                                            "name": "sigv4",
+                                                                            "signingName": "s3express",
+                                                                            "signingRegion": "{Region}"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "substring",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "AccessPointName"
+                                                                },
+                                                                7,
+                                                                20,
+                                                                true
+                                                            ],
+                                                            "assign": "s3expressAvailabilityZoneId"
+                                                        },
+                                                        {
+                                                            "fn": "substring",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "AccessPointName"
+                                                                },
+                                                                20,
+                                                                22,
+                                                                true
+                                                            ],
+                                                            "assign": "s3expressAvailabilityZoneDelim"
+                                                        },
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "s3expressAvailabilityZoneDelim"
+                                                                },
+                                                                "--"
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "UseFIPS"
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://s3express-control-fips.{Region}.{partitionResult#dnsSuffix}",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "disableDoubleEncoding": true,
+                                                                            "name": "sigv4",
+                                                                            "signingName": "s3express",
+                                                                            "signingRegion": "{Region}"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://s3express-control.{Region}.{partitionResult#dnsSuffix}",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "disableDoubleEncoding": true,
+                                                                            "name": "sigv4",
+                                                                            "signingName": "s3express",
+                                                                            "signingRegion": "{Region}"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "substring",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "AccessPointName"
+                                                                },
+                                                                7,
+                                                                21,
+                                                                true
+                                                            ],
+                                                            "assign": "s3expressAvailabilityZoneId"
+                                                        },
+                                                        {
+                                                            "fn": "substring",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "AccessPointName"
+                                                                },
+                                                                21,
+                                                                23,
+                                                                true
+                                                            ],
+                                                            "assign": "s3expressAvailabilityZoneDelim"
+                                                        },
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "s3expressAvailabilityZoneDelim"
+                                                                },
+                                                                "--"
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "UseFIPS"
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://s3express-control-fips.{Region}.{partitionResult#dnsSuffix}",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "disableDoubleEncoding": true,
+                                                                            "name": "sigv4",
+                                                                            "signingName": "s3express",
+                                                                            "signingRegion": "{Region}"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://s3express-control.{Region}.{partitionResult#dnsSuffix}",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "disableDoubleEncoding": true,
+                                                                            "name": "sigv4",
+                                                                            "signingName": "s3express",
+                                                                            "signingRegion": "{Region}"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "substring",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "AccessPointName"
+                                                                },
+                                                                7,
+                                                                27,
+                                                                true
+                                                            ],
+                                                            "assign": "s3expressAvailabilityZoneId"
+                                                        },
+                                                        {
+                                                            "fn": "substring",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "AccessPointName"
+                                                                },
+                                                                27,
+                                                                29,
+                                                                true
+                                                            ],
+                                                            "assign": "s3expressAvailabilityZoneDelim"
+                                                        },
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "s3expressAvailabilityZoneDelim"
+                                                                },
+                                                                "--"
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "UseFIPS"
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://s3express-control-fips.{Region}.{partitionResult#dnsSuffix}",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "disableDoubleEncoding": true,
+                                                                            "name": "sigv4",
+                                                                            "signingName": "s3express",
+                                                                            "signingRegion": "{Region}"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://s3express-control.{Region}.{partitionResult#dnsSuffix}",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "disableDoubleEncoding": true,
+                                                                            "name": "sigv4",
+                                                                            "signingName": "s3express",
+                                                                            "signingRegion": "{Region}"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "Unrecognized S3Express Access Point name format.",
+                                                    "type": "error"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseS3ExpressControlEndpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseS3ExpressControlEndpoint"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "partitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://s3express-control-fips.{Region}.{partitionResult#dnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "disableDoubleEncoding": true,
+                                                                    "name": "sigv4",
+                                                                    "signingName": "s3express",
+                                                                    "signingRegion": "{Region}"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://s3express-control.{Region}.{partitionResult#dnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "disableDoubleEncoding": true,
+                                                                    "name": "sigv4",
+                                                                    "signingName": "s3express",
+                                                                    "signingRegion": "{Region}"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "stringEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                },
+                                                "snow"
+                                            ]
+                                        },
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "partitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "S3 Snow does not support DualStack",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "S3 Snow does not support FIPS",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "{url#scheme}://{url#authority}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "disableDoubleEncoding": true,
+                                                                    "name": "sigv4",
+                                                                    "signingName": "s3",
+                                                                    "signingRegion": "{Region}"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
                                                 }
                                             ],
                                             "type": "tree"
@@ -2123,36 +2737,6 @@
                                                 {
                                                     "conditions": [
                                                         {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "stringEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "fn": "getAttr",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "partitionResult"
-                                                                        },
-                                                                        "name"
-                                                                    ]
-                                                                },
-                                                                "aws-cn"
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "error": "Partition does not support FIPS",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
                                                             "fn": "isSet",
                                                             "argv": [
                                                                 {
@@ -3189,27 +3773,7 @@
                         {
                             "documentation": "gov cloud with fips@cn-north-1",
                             "expect": {
-                                "endpoint": {
-                                    "headers": {
-                                        "x-amz-account-id": [
-                                            "123456789012"
-                                        ],
-                                        "x-amz-outpost-id": [
-                                            "op-01234567890123456"
-                                        ]
-                                    },
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingName": "s3-outposts",
-                                                "signingRegion": "cn-north-1",
-                                                "disableDoubleEncoding": true
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://s3-outposts-fips.cn-north-1.amazonaws.com.cn"
-                                }
+                                "error": "Partition does not support FIPS"
                             },
                             "operationInputs": [
                                 {
@@ -6506,6 +7070,817 @@
                                 "UseFIPS": false,
                                 "UseDualStack": true
                             }
+                        },
+                        {
+                            "documentation": "Access Point APIs on express bucket routed to s3express-control",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3express",
+                                                "signingRegion": "us-east-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://s3express-control.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "CreateAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "Bucket": "mybucket--abcd-ab1--x-s3",
+                                        "AccountId": "871317572157",
+                                        "Scope": {
+                                            "Prefixes": [],
+                                            "Permissions": []
+                                        }
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "GetAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "DeleteAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "PutAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "Scope": {
+                                            "Prefixes": [],
+                                            "Permissions": []
+                                        }
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "GetAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "DeleteAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "PutAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "Policy": "my-policy"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "GetAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "DeleteAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "GetAccessPointPolicyStatus",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "AccountId": "871317572157",
+                                "AccessPointName": "myaccesspoint--abcd-ab1--xa-s3",
+                                "Region": "us-east-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Access Point APIs on express bucket routed to s3express-control for List",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3express",
+                                                "signingRegion": "us-east-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://s3express-control.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "ListAccessPointsForDirectoryBuckets",
+                                    "operationParams": {
+                                        "DirectoryBucket": "mybucket--abcd-ab1--x-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "AccountId": "871317572157",
+                                "Region": "us-east-1",
+                                "UseS3ExpressControlEndpoint": true,
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Access Point APIs on express bucket routed to s3express-control for FIPS",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3express",
+                                                "signingRegion": "us-east-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://s3express-control-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "CreateAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "Bucket": "mybucket--abcd-ab1--x-s3",
+                                        "AccountId": "871317572157",
+                                        "Scope": {
+                                            "Prefixes": [],
+                                            "Permissions": []
+                                        }
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "GetAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "DeleteAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "PutAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "Scope": {
+                                            "Prefixes": [],
+                                            "Permissions": []
+                                        }
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "GetAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "DeleteAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "PutAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "Policy": "my-policy"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "GetAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "DeleteAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "GetAccessPointPolicyStatus",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "AccountId": "871317572157",
+                                "AccessPointName": "myaccesspoint--abcd-ab1--xa-s3",
+                                "Region": "us-east-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "Access Point APIs on express bucket routed to s3express-control for FIPS for List",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3express",
+                                                "signingRegion": "us-east-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://s3express-control-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "ListAccessPointsForDirectoryBuckets",
+                                    "operationParams": {
+                                        "DirectoryBucket": "mybucket--abcd-ab1--x-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "AccountId": "871317572157",
+                                "Region": "us-east-1",
+                                "UseS3ExpressControlEndpoint": true,
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "Access Point APIs on express bucket routed to s3express-control for china region",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3express",
+                                                "signingRegion": "cn-north-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://s3express-control.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "CreateAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "Bucket": "mybucket--abcd-ab1--x-s3",
+                                        "AccountId": "871317572157",
+                                        "Scope": {
+                                            "Prefixes": [],
+                                            "Permissions": []
+                                        }
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "GetAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "DeleteAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "PutAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "Scope": {
+                                            "Prefixes": [],
+                                            "Permissions": []
+                                        }
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "GetAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "DeleteAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "PutAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "Policy": "my-policy"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "GetAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "DeleteAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "GetAccessPointPolicyStatus",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "AccessPointName": "myaccesspoint--abcd-ab1--xa-s3",
+                                "AccountId": "871317572157",
+                                "Region": "cn-north-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Access Point APIs on express bucket routed to s3express-control for china region for List",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3express",
+                                                "signingRegion": "cn-north-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://s3express-control.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "ListAccessPointsForDirectoryBuckets",
+                                    "operationParams": {
+                                        "DirectoryBucket": "mybucket--abcd-ab1--x-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "AccountId": "871317572157",
+                                "Region": "cn-north-1",
+                                "UseS3ExpressControlEndpoint": true,
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Error when Access Point APIs on express bucket routed to s3express-control for china and FIPS",
+                            "expect": {
+                                "error": "Partition does not support FIPS"
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "CreateAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "Bucket": "mybucket--abcd-ab1--x-s3",
+                                        "AccountId": "871317572157",
+                                        "Scope": {
+                                            "Prefixes": [],
+                                            "Permissions": []
+                                        }
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "GetAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "DeleteAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "ListAccessPointsForDirectoryBuckets",
+                                    "operationParams": {
+                                        "DirectoryBucket": "mybucket--abcd-ab1--x-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "PutAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "Scope": {
+                                            "Prefixes": [],
+                                            "Permissions": []
+                                        }
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "GetAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "DeleteAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "PutAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "Policy": "my-policy"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "GetAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "DeleteAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "GetAccessPointPolicyStatus",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint--abcd-ab1--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "AccountId": "871317572157",
+                                "Region": "cn-north-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "Error Access Point APIs on express bucket routed to s3express-control invalid zone",
+                            "expect": {
+                                "error": "Unrecognized S3Express Access Point name format."
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "CreateAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint-garbage-zone--xa-s3",
+                                        "Bucket": "mybucket-garbage-zone-garbage-zone",
+                                        "AccountId": "871317572157",
+                                        "Scope": {
+                                            "Prefixes": [],
+                                            "Permissions": []
+                                        }
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "GetAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint-garbage-zone--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "DeleteAccessPoint",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint-garbage-zone--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "PutAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint-garbage-zone--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "Scope": {
+                                            "Prefixes": [],
+                                            "Permissions": []
+                                        }
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "GetAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint-garbage-zone--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "DeleteAccessPointScope",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint-garbage-zone--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "PutAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint-garbage-zone--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "Policy": "my-policy"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "GetAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint-garbage-zone--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "DeleteAccessPointPolicy",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint-garbage-zone--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "GetAccessPointPolicyStatus",
+                                    "operationParams": {
+                                        "Name": "myaccesspoint-garbage-zone--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "AccessPointName": "myaccesspoint-garbage-zone--xa-s3",
+                                "AccountId": "871317572157",
+                                "Region": "us-east-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
                         }
                     ],
                     "version": "1.0"
@@ -7709,7 +9084,7 @@
                 "target": "com.amazonaws.s3control#CreateAccessPointResult"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This operation is not supported by directory buckets.</p>\n         </note>\n         <p>Creates an access point and associates it with the specified bucket. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">Managing\n            Data Access with Amazon S3 Access Points</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p></p>\n         <note>\n            <p>S3 on Outposts only supports VPC-style access points. </p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\"> Accessing Amazon S3 on Outposts using\n               virtual private cloud (VPC) only access points</a> in the\n               <i>Amazon S3 User Guide</i>.</p>\n         </note>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples\">Examples</a> section.</p>\n         <p></p>\n         <p>The following actions are related to <code>CreateAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html\">GetAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html\">DeleteAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates an access point and associates it to a specified bucket. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">Managing\n               access to shared datasets in general purpose buckets with access points</a> or <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing\n                  access to shared datasets in directory buckets with access points</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p></p>\n         <note>\n            <p>S3 on Outposts only supports VPC-style access points. </p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\"> Accessing Amazon S3 on Outposts using\n               virtual private cloud (VPC) only access points</a> in the\n               <i>Amazon S3 User Guide</i>.</p>\n         </note>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples\">Examples</a> section.</p>\n         <p></p>\n         <p>The following actions are related to <code>CreateAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html\">GetAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html\">DeleteAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForDirectoryBuckets.html\">ListAccessPointsForDirectoryBuckets</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -7823,9 +9198,12 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#AccessPointName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name you want to assign to this access point.</p>",
+                        "smithy.api#documentation": "<p>The name you want to assign to this access point.</p>\n         <p>For directory buckets, the access point name must consist of a base name that you provide and suffix that includes the <code>ZoneID</code> (Amazon Web Services Availability Zone or Local Zone) of your bucket location, followed by <code>--xa-s3</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing access to shared datasets in directory buckets with access points</a> in the Amazon S3 User Guide.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccessPointName"
+                        }
                     }
                 },
                 "Bucket": {
@@ -7854,6 +9232,12 @@
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the S3 bucket associated with this access point.</p>\n         <p>For same account access point when your bucket and access point belong to the same account owner, the <code>BucketAccountId</code> is not required. \n         For cross-account access point when your bucket and access point are not in the same account, the <code>BucketAccountId</code> is required.\n      </p>"
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.s3control#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For directory buckets, you can filter access control to specific prefixes, API operations, or a combination of both. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing access to shared datasets in directory buckets with access points</a> in the Amazon S3 User Guide.</p>\n         <note>\n            <p>Scope is not supported for access points for general purpose buckets.</p>\n         </note>"
                     }
                 }
             },
@@ -8591,7 +9975,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This operation is not supported by directory buckets.</p>\n         </note>\n         <p>Deletes the specified access point.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html#API_control_DeleteAccessPoint_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>DeleteAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html\">GetAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes the specified access point.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html#API_control_DeleteAccessPoint_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>DeleteAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html\">GetAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -8669,7 +10053,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This operation is not supported by directory buckets.</p>\n         </note>\n         <p>Deletes the access point policy for the specified access point.</p>\n         <p></p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html#API_control_DeleteAccessPointPolicy_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>DeleteAccessPointPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html\">PutAccessPointPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html\">GetAccessPointPolicy</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes the access point policy for the specified access point.</p>\n         <p></p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html#API_control_DeleteAccessPointPolicy_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>DeleteAccessPointPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html\">PutAccessPointPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html\">GetAccessPointPolicy</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -8788,6 +10172,62 @@
                     "target": "com.amazonaws.s3control#AccessPointName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the access point you want to delete.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccessPointName"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#DeleteAccessPointScope": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#DeleteAccessPointScopeRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Deletes an existing access point scope for a directory bucket.</p>\n         <note>\n            <p>When you delete the scope of an access point, all prefixes and permissions are deleted.</p>\n         </note>\n         <p>To use this operation, you must have the permission to perform the\n         <code>s3express:DeleteAccessPointScope</code> action.</p>\n         <p>For information about REST API errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses\">REST error responses</a>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v20180820/accesspoint/{Name}/scope",
+                    "code": 200
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    },
+                    "UseS3ExpressControlEndpoint": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#DeleteAccessPointScopeRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Web Services account ID that owns the access point with the scope that you want to delete.\n      </p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.s3control#AccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the access point with the scope that you want to delete.\n      </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -10394,7 +11834,7 @@
                 "target": "com.amazonaws.s3control#GetAccessPointResult"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This operation is not supported by directory buckets.</p>\n         </note>\n         <p>Returns configuration information about the specified access point.</p>\n         <p></p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>GetAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html\">DeleteAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns configuration information about the specified access point.</p>\n         <p></p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>GetAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html\">DeleteAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -10571,7 +12011,7 @@
                 "target": "com.amazonaws.s3control#GetAccessPointPolicyResult"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This operation is not supported by directory buckets.</p>\n         </note>\n         <p>Returns the access point policy associated with the specified access point.</p>\n         <p>The following actions are related to <code>GetAccessPointPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html\">PutAccessPointPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html\">DeleteAccessPointPolicy</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns the access point policy associated with the specified access point.</p>\n         <p>The following actions are related to <code>GetAccessPointPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html\">PutAccessPointPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html\">DeleteAccessPointPolicy</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -10922,6 +12362,76 @@
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the S3 bucket associated with this access point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#GetAccessPointScope": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#GetAccessPointScopeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#GetAccessPointScopeResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Returns the access point scope for a directory bucket.</p>\n         <p>To use this operation, you must have the permission to perform the\n         <code>s3express:GetAccessPointScope</code> action.</p>\n         <p>For information about REST API errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses\">REST error responses</a>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/accesspoint/{Name}/scope",
+                    "code": 200
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    },
+                    "UseS3ExpressControlEndpoint": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetAccessPointScopeRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Web Services account ID that owns the access point with the scope that you want to retrieve.\n      </p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.s3control#AccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the access point with the scope you want to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccessPointName"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#GetAccessPointScopeResult": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.s3control#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contents of the access point scope.</p>"
                     }
                 }
             },
@@ -13774,6 +15284,99 @@
                 }
             }
         },
+        "com.amazonaws.s3control#ListAccessPointsForDirectoryBuckets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#ListAccessPointsForDirectoryBucketsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#ListAccessPointsForDirectoryBucketsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the access points that are owned by the Amazon Web Services account and that are associated with the specified directory bucket.</p>\n         <p>To list access points for general purpose buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccesspoints</a>.</p>\n         <p>To use this operation, you must have the permission to perform the\n         <code>s3express:ListAccessPointsForDirectoryBuckets</code> action.</p>\n         <p>For information about REST API errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses\">REST error responses</a>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/accesspointfordirectory",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AccessPointList",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    },
+                    "UseS3ExpressControlEndpoint": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#ListAccessPointsForDirectoryBucketsRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the access points.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "DirectoryBucket": {
+                    "target": "com.amazonaws.s3control#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the directory bucket associated with the access points you want to list.</p>",
+                        "smithy.api#httpQuery": "directoryBucket"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.s3control#NonEmptyMaxLength1024String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         If <code>NextToken</code> is returned, there are more access points available than requested in the <code>maxResults</code> value. The value of <code>NextToken</code> is a\n         unique pagination token for each page. Make the call again using the returned token to\n         retrieve the next page. Keep all other arguments unchanged. Each pagination token expires\n         after 24 hours.\n      </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.s3control#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of access points that you would like returned in the <code>ListAccessPointsForDirectoryBuckets</code> response. If the directory bucket is associated with more than this number of access points, the results include the pagination token <code>NextToken</code>. Make another call using the <code>NextToken</code> to retrieve more results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#ListAccessPointsForDirectoryBucketsResult": {
+            "type": "structure",
+            "members": {
+                "AccessPointList": {
+                    "target": "com.amazonaws.s3control#AccessPointList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains identification and configuration information for one or more access points associated with the directory bucket.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.s3control#NonEmptyMaxLength1024String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         If <code>NextToken</code> is returned, there are more access points available than requested in the <code>maxResults</code> value. The value of <code>NextToken</code> is a\n         unique pagination token for each page. Make the call again using the returned token to\n         retrieve the next page. Keep all other arguments unchanged. Each pagination token expires\n         after 24 hours.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.s3control#ListAccessPointsForObjectLambda": {
             "type": "operation",
             "input": {
@@ -15673,6 +17276,15 @@
                 "smithy.api#documentation": "<p>A container for the prefix-level storage metrics for S3 Storage Lens.</p>"
             }
         },
+        "com.amazonaws.s3control#PrefixesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#Prefix",
+                "traits": {
+                    "smithy.api#xmlName": "Prefix"
+                }
+            }
+        },
         "com.amazonaws.s3control#Priority": {
             "type": "integer",
             "traits": {
@@ -15910,7 +17522,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This operation is not supported by directory buckets.</p>\n         </note>\n         <p>Associates an access policy with the specified access point. Each access point can have only one policy,\n         so a request made to this API replaces any existing policy associated with the specified\n         access point.</p>\n         <p></p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html#API_control_PutAccessPointPolicy_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>PutAccessPointPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html\">GetAccessPointPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html\">DeleteAccessPointPolicy</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Associates an access policy with the specified access point. Each access point can have only one policy,\n         so a request made to this API replaces any existing policy associated with the specified\n         access point.</p>\n         <p></p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html#API_control_PutAccessPointPolicy_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>PutAccessPointPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html\">GetAccessPointPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html\">DeleteAccessPointPolicy</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -16015,7 +17627,70 @@
                 "Policy": {
                     "target": "com.amazonaws.s3control#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The policy that you want to apply to the specified access point. For more information about access point\n         policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">Managing data access with Amazon S3\n            access points</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The policy that you want to apply to the specified access point. For more information about access point\n         policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">Managing access to shared datasets in general purpose buckets with\n            access points</a> or <a href=\"AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing access to shared datasets in directory bucekts with access points</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#PutAccessPointScope": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#PutAccessPointScopeRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or replaces the access point scope for a directory bucket. You can use the access point scope to restrict access to specific prefixes, API operations, or a combination of both.</p>\n         <p>You can include one or more of the following API operations as permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PutObjet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetObject</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteObject</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListBucket</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetObjectAttributes</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AbortMultipartUpload</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListBucketMultipartUpload</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListMultiPartUploadParts</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>You can specify any amount of prefixes, but the total length of characters of all prefixes must be less than 512 KB in size.</p>\n         </note>\n         <p>To use this operation, you must have the permission to perform the\n         <code>s3express:PutAccessPointScope</code> action.</p>\n         <p>For information about REST API errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses\">REST error responses</a>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v20180820/accesspoint/{Name}/scope",
+                    "code": 200
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    },
+                    "UseS3ExpressControlEndpoint": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#PutAccessPointScopeRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Web Services account ID that owns the access point with scope that you want to create or replace.\n      </p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.s3control#AccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the access point with the scope that you want to create or replace.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccessPointName"
+                        }
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.s3control#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object prefixes, API operations, or a combination of both.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -18337,6 +20012,90 @@
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for the use of SSE-S3 to encrypt generated manifest objects.</p>",
                 "smithy.api#xmlName": "SSE-S3"
+            }
+        },
+        "com.amazonaws.s3control#Scope": {
+            "type": "structure",
+            "members": {
+                "Prefixes": {
+                    "target": "com.amazonaws.s3control#PrefixesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can specify any amount of prefixes, but the total length of characters of all prefixes must be less than 512 KB in size.</p>",
+                        "smithy.api#xmlName": "Prefixes"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.s3control#ScopePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can include one or more API operations as permissions.</p>",
+                        "smithy.api#xmlName": "Permissions"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You can use the access point scope to restrict access to specific prefixes, API operations, or a combination of both.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets-manage-scope.html\">Manage the scope of your access points for directory buckets.</a>\n         </p>"
+            }
+        },
+        "com.amazonaws.s3control#ScopePermission": {
+            "type": "enum",
+            "members": {
+                "GetObject": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GetObject"
+                    }
+                },
+                "GetObjectAttributes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GetObjectAttributes"
+                    }
+                },
+                "ListMultipartUploadParts": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ListMultipartUploadParts"
+                    }
+                },
+                "ListBucket": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ListBucket"
+                    }
+                },
+                "ListBucketMultipartUploads": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ListBucketMultipartUploads"
+                    }
+                },
+                "PutObject": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PutObject"
+                    }
+                },
+                "DeleteObject": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeleteObject"
+                    }
+                },
+                "AbortMultipartUpload": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AbortMultipartUpload"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#ScopePermissionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#ScopePermission",
+                "traits": {
+                    "smithy.api#xmlName": "Permission"
+                }
             }
         },
         "com.amazonaws.s3control#SecretAccessKey": {

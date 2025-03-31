@@ -252,6 +252,16 @@
                 "smithy.api#pattern": "^(\\w+)$"
             }
         },
+        "com.amazonaws.outposts#AssetIdInput": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^\\d{10}$"
+            }
+        },
         "com.amazonaws.outposts#AssetIdList": {
             "type": "list",
             "member": {
@@ -264,7 +274,7 @@
                 "AssetId": {
                     "target": "com.amazonaws.outposts#AssetId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ID of the asset. </p>"
+                        "smithy.api#documentation": "<p> The ID of the asset. An Outpost asset can be a single server within an Outposts rack or an Outposts server configuration.</p>"
                     }
                 },
                 "RackId": {
@@ -314,7 +324,7 @@
                 "AssetId": {
                     "target": "com.amazonaws.outposts#AssetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the asset.</p>"
+                        "smithy.api#documentation": "<p>The ID of the asset. An Outpost asset can be a single server within an Outposts rack or an Outposts server configuration.</p>"
                     }
                 },
                 "AccountId": {
@@ -786,6 +796,12 @@
                     "target": "com.amazonaws.outposts#OrderId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Amazon Web Services Outposts order of the host associated with the capacity task.</p>"
+                    }
+                },
+                "AssetId": {
+                    "target": "com.amazonaws.outposts#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset. An Outpost asset can be a single server within an Outposts rack or an Outposts server configuration.</p>"
                     }
                 },
                 "CapacityTaskStatus": {
@@ -1670,6 +1686,12 @@
                         "smithy.api#documentation": "<p>ID of the Amazon Web Services Outposts order associated with the specified capacity task.</p>"
                     }
                 },
+                "AssetId": {
+                    "target": "com.amazonaws.outposts#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Outpost asset. An Outpost asset can be a single server within an Outposts rack or an Outposts server configuration.</p>"
+                    }
+                },
                 "RequestedInstancePools": {
                     "target": "com.amazonaws.outposts#RequestedInstancePools",
                     "traits": {
@@ -1692,7 +1714,7 @@
                 "CapacityTaskStatus": {
                     "target": "com.amazonaws.outposts#CapacityTaskStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status of the capacity task.</p>\n         <p>A capacity task can have one of the following statuses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REQUESTED</code> - The capacity task was created and is awaiting the next step\n          by Amazon Web Services Outposts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - The capacity task is running and cannot be\n          cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WAITING_FOR_EVACUATION</code> - The capacity task requires capacity to run. You\n          must stop the recommended EC2 running instances to free up capacity for the task to\n          run.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Status of the capacity task.</p>\n         <p>A capacity task can have one of the following statuses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REQUESTED</code> - The capacity task was created and is awaiting the next step\n          by Amazon Web Services Outposts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - The capacity task is running and cannot be cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The capacity task could not be completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - The capacity task has completed successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WAITING_FOR_EVACUATION</code> - The capacity task requires capacity to run. You must stop the recommended EC2 running instances to free up capacity for the task to run.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLATION_IN_PROGRESS</code> - The capacity task has been cancelled and is in the process of cleaning up resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - The capacity task is cancelled.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Failed": {
@@ -2109,6 +2131,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID for the Amazon Web Services Outposts order.</p>",
                         "smithy.api#httpQuery": "OrderId"
+                    }
+                },
+                "AssetId": {
+                    "target": "com.amazonaws.outposts#AssetIdInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Outpost asset. An Outpost asset can be a single server within an Outposts rack or an Outposts server configuration.</p>",
+                        "smithy.api#httpQuery": "AssetId"
                     }
                 },
                 "MaxResults": {
@@ -2528,7 +2557,7 @@
                 "AssetId": {
                     "target": "com.amazonaws.outposts#AssetId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ID of the asset. </p>"
+                        "smithy.api#documentation": "<p> The ID of the asset. An Outpost asset can be a single server within an Outposts rack or an Outposts server configuration.</p>"
                     }
                 },
                 "MacAddressList": {
@@ -5624,6 +5653,12 @@
                         "smithy.api#documentation": "<p>The ID of the Amazon Web Services Outposts order associated with the specified capacity task.</p>"
                     }
                 },
+                "AssetId": {
+                    "target": "com.amazonaws.outposts#AssetIdInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Outpost asset. An Outpost asset can be a single server within an Outposts rack or an Outposts server configuration.</p>"
+                    }
+                },
                 "InstancePools": {
                     "target": "com.amazonaws.outposts#RequestedInstancePools",
                     "traits": {
@@ -5674,6 +5709,12 @@
                     "target": "com.amazonaws.outposts#OrderId",
                     "traits": {
                         "smithy.api#documentation": "<p>ID of the Amazon Web Services Outposts order of the host associated with the capacity task.</p>"
+                    }
+                },
+                "AssetId": {
+                    "target": "com.amazonaws.outposts#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset. An Outpost asset can be a single server within an Outposts rack or an Outposts server configuration.</p>"
                     }
                 },
                 "RequestedInstancePools": {
@@ -5779,7 +5820,7 @@
                 "AssetId": {
                     "target": "com.amazonaws.outposts#AssetId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ID of the Outpost server. </p>",
+                        "smithy.api#documentation": "<p> The ID of the Outpost server.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6415,7 +6456,7 @@
                 "PowerConnector": {
                     "target": "com.amazonaws.outposts#PowerConnector",
                     "traits": {
-                        "smithy.api#documentation": "<p>The power connector that Amazon Web Services should plan to provide for connections to the hardware.\n      Note the correlation between <code>PowerPhase</code> and <code>PowerConnector</code>. </p>\n         <ul>\n            <li>\n               <p>Single-phase AC feed</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>L6-30P</b> – (common in US); 30A; single phase</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>IEC309 (blue)</b> – P+N+E, 6hr; 32 A; single\n              phase</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Three-phase AC feed</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>AH530P7W (red)</b> – 3P+N+E, 7hr; 30A; three\n              phase</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>AH532P6W (red)</b> – 3P+N+E, 6hr; 32A; three\n              phase</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>CS8365C</b> – (common in US); 3P+E, 50A; three phase</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The power connector that Amazon Web Services should plan to provide for connections to the hardware.\n      Note the correlation between <code>PowerPhase</code> and <code>PowerConnector</code>. </p>\n         <ul>\n            <li>\n               <p>Single-phase AC feed</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>L6-30P</b> – (common in US); 30A; single phase</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>IEC309 (blue)</b> – P+N+E, 6hr; 32 A; single\n              phase</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Three-phase AC feed</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>AH530P7W (red)</b> – 3P+N+E, 7hr; 30A; three phase</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>AH532P6W (red)</b> – 3P+N+E, 6hr; 32A; three phase</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>CS8365C</b> – (common in US); 3P+E, 50A; three phase</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "PowerFeedDrop": {

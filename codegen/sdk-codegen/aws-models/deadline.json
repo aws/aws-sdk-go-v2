@@ -414,8 +414,7 @@
                 "taskId": {
                     "target": "com.amazonaws.deadline#TaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The task ID.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The task ID.</p>"
                     }
                 },
                 "stepId": {
@@ -1741,8 +1740,10 @@
                 ],
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
+                    "disableConditionKeyInheritance": true,
                     "name": "budget"
-                }
+                },
+                "smithy.api#documentation": "Represents a budget that limits the expenses allowed on a queue or farm"
             }
         },
         "com.amazonaws.deadline#BudgetSchedule": {
@@ -2658,7 +2659,7 @@
                 "priority": {
                     "target": "com.amazonaws.deadline#JobPriority",
                     "traits": {
-                        "smithy.api#documentation": "<p>The priority of the job on a scale of 0 to 100. The highest priority (first scheduled)\n         is 100. When two jobs have the same priority, the oldest job is scheduled first.</p>",
+                        "smithy.api#documentation": "<p>The priority of the job. The highest priority (first scheduled) is 100. When two jobs\n         have the same priority, the oldest job is scheduled first.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3237,7 +3238,7 @@
                 "priority": {
                     "target": "com.amazonaws.deadline#Priority",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the priority of the environments in the queue from 0 to 10,000, where 0 is the\n         highest priority. If two environments share the same priority value, the environment\n         created first takes higher priority.</p>",
+                        "smithy.api#documentation": "<p>Sets the priority of the environments in the queue from 0 to 10,000, where 0 is the\n         highest priority (activated first and deactivated last). If two environments share the same\n         priority value, the environment created first takes higher priority.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3687,9 +3688,17 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "aws.iam#iamAction": {
                     "name": "CreateWorker",
-                    "documentation": "Grants permission to create a worker"
+                    "documentation": "Grants permission to create a worker",
+                    "requiredActions": [
+                        "deadline:TagResource",
+                        "deadline:ListTagsForResource"
+                    ]
                 },
                 "smithy.api#documentation": "<p>Creates a worker. A worker tells your instance how much processing power (vCPU), and\n         memory (GiB) you’ll need to assemble the digital assets held within a particular instance.\n         You can specify certain instance types to use, or let the worker know which instances types\n         to exclude.</p>",
                 "smithy.api#endpoint": {
@@ -6702,7 +6711,8 @@
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
                     "name": "farm"
-                }
+                },
+                "smithy.api#documentation": "Represents a farm that contains Deadline Cloud queues and fleets"
             }
         },
         "com.amazonaws.deadline#FarmSummaries": {
@@ -6824,8 +6834,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[0-9A-Za-z ]*$",
-                "smithy.api#sensitive": {}
+                "smithy.api#pattern": "^[0-9A-Za-z ]*$"
             }
         },
         "com.amazonaws.deadline#FileSystemLocationType": {
@@ -7122,7 +7131,8 @@
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
                     "name": "fleet"
-                }
+                },
+                "smithy.api#documentation": "Represents a fleet of workers that process Deadline Cloud jobs"
             }
         },
         "com.amazonaws.deadline#FleetStatus": {
@@ -9449,7 +9459,7 @@
                 "processExitCode": {
                     "target": "com.amazonaws.deadline#ProcessExitCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The exit code to exit the session.</p>"
+                        "smithy.api#documentation": "<p>The process exit code. The default Deadline Cloud worker agent converts unsigned\n         32-bit exit codes to signed 32-bit exit codes.</p>"
                     }
                 },
                 "progressMessage": {
@@ -11205,7 +11215,13 @@
         "com.amazonaws.deadline#JobParameters": {
             "type": "map",
             "key": {
-                "target": "com.amazonaws.deadline#String"
+                "target": "com.amazonaws.deadline#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 1024
+                    }
+                }
             },
             "value": {
                 "target": "com.amazonaws.deadline#JobParameter"
@@ -11315,8 +11331,10 @@
                 ],
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
+                    "disableConditionKeyInheritance": true,
                     "name": "job"
-                }
+                },
+                "smithy.api#documentation": "Represents the steps and tasks for a Deadline Cloud processing job"
             }
         },
         "com.amazonaws.deadline#JobRunAsUser": {
@@ -11711,7 +11729,8 @@
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
                     "name": "license-endpoint"
-                }
+                },
+                "smithy.api#documentation": "Represents a license endpoint that is for licensed software or a product used within Deadline Cloud"
             }
         },
         "com.amazonaws.deadline#LicenseEndpointStatus": {
@@ -14916,6 +14935,14 @@
                         "ids": {
                             "licenseEndpointId": "resourceArn"
                         }
+                    },
+                    {
+                        "resource": "com.amazonaws.deadline#WorkerResource",
+                        "ids": {
+                            "farmId": "resourceArn",
+                            "fleetId": "resourceArn",
+                            "workerId": "resourceArn"
+                        }
                     }
                 ]
             }
@@ -15466,8 +15493,10 @@
                 },
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
+                    "disableConditionKeyInheritance": true,
                     "name": "metered-product"
-                }
+                },
+                "smithy.api#documentation": "Represents a product with a license endpoint that is metered for use in Deadline Cloud"
             }
         },
         "com.amazonaws.deadline#MeteredProductSummary": {
@@ -15576,7 +15605,8 @@
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
                     "name": "monitor"
-                }
+                },
+                "smithy.api#documentation": "Represents a monitor that is used to manage Deadline Cloud resources"
             }
         },
         "com.amazonaws.deadline#MonitorSummaries": {
@@ -16404,7 +16434,8 @@
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
                     "name": "queue"
-                }
+                },
+                "smithy.api#documentation": "Represents a queue of Deadline Cloud jobs"
             }
         },
         "com.amazonaws.deadline#QueueStatus": {
@@ -17227,10 +17258,34 @@
                         "smithy.api#documentation": "<p>The term to search for.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "matchType": {
+                    "target": "com.amazonaws.deadline#SearchTermMatchingType",
+                    "traits": {
+                        "smithy.api#default": "FUZZY_MATCH",
+                        "smithy.api#documentation": "<p>Specifies how Deadline Cloud matches your search term in the results. If you don't\n         specify a <code>matchType</code> the default is <code>FUZZY_MATCH</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FUZZY_MATCH</code> - Matches if a portion of the search term is found in the result.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONTAINS</code> - Matches if the exact search term is contained in the result.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Searches for a particular search term.</p>"
+            }
+        },
+        "com.amazonaws.deadline#SearchTermMatchingType": {
+            "type": "enum",
+            "members": {
+                "FUZZY_MATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FUZZY_MATCH"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                }
             }
         },
         "com.amazonaws.deadline#SearchWorkers": {
@@ -19187,6 +19242,14 @@
                         "ids": {
                             "licenseEndpointId": "resourceArn"
                         }
+                    },
+                    {
+                        "resource": "com.amazonaws.deadline#WorkerResource",
+                        "ids": {
+                            "farmId": "resourceArn",
+                            "fleetId": "resourceArn",
+                            "workerId": "resourceArn"
+                        }
                     }
                 ]
             }
@@ -19273,8 +19336,7 @@
                 "taskId": {
                     "target": "com.amazonaws.deadline#TaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The task ID.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The task ID.</p>"
                     }
                 },
                 "stepId": {
@@ -19302,8 +19364,7 @@
                 "taskId": {
                     "target": "com.amazonaws.deadline#TaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The task ID.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The task ID.</p>"
                     }
                 },
                 "stepId": {
@@ -19783,6 +19844,14 @@
                         "resource": "com.amazonaws.deadline#LicenseEndpointResource",
                         "ids": {
                             "licenseEndpointId": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.deadline#WorkerResource",
+                        "ids": {
+                            "farmId": "resourceArn",
+                            "fleetId": "resourceArn",
+                            "workerId": "resourceArn"
                         }
                     }
                 ]
@@ -21655,7 +21724,7 @@
                 "processExitCode": {
                     "target": "com.amazonaws.deadline#ProcessExitCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process exit code.</p>"
+                        "smithy.api#documentation": "<p>The process exit code. The default Deadline Cloud worker agent converts unsigned\n         32-bit exit codes to signed 32-bit exit codes.</p>"
                     }
                 },
                 "progressMessage": {
@@ -22189,7 +22258,8 @@
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
                     "name": "worker"
-                }
+                },
+                "smithy.api#documentation": "Represents a worker that is part of a fleet on a farm"
             }
         },
         "com.amazonaws.deadline#WorkerSearchSummaries": {

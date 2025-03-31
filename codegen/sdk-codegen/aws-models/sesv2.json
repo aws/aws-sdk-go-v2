@@ -6704,7 +6704,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all of the contact lists available.</p>",
+                "smithy.api#documentation": "<p>Lists all of the contact lists available.</p>\n         <p>If your output includes a \"NextToken\" field with a string value, this indicates there may be additional\n            contacts on the filtered list - regardless of the number of contacts returned.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/email/contact-lists",
@@ -11427,7 +11427,7 @@
                                                                 {
                                                                     "conditions": [],
                                                                     "endpoint": {
-                                                                        "url": "https://{EndpointId}.endpoints.email.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "url": "https://{EndpointId}.endpoints.email.global.{PartitionResult#dualStackDnsSuffix}",
                                                                         "properties": {
                                                                             "authSchemes": [
                                                                                 {
@@ -12412,7 +12412,7 @@
                                             }
                                         ]
                                     },
-                                    "url": "https://abc123.456def.endpoints.email.api.aws"
+                                    "url": "https://abc123.456def.endpoints.email.global.api.aws"
                                 }
                             },
                             "params": {
