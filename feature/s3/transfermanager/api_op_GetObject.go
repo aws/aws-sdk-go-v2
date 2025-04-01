@@ -623,6 +623,7 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		partSize: 1,
 		options:  g.options.Copy(),
 		in:       g.in,
+		ch:       make(chan outChunk, g.options.Concurrency),
 	}
 
 	output := &GetObjectOutput{}
@@ -679,7 +680,7 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 
 		output.mapFromHeadObjectOutput(out, g.in.ChecksumMode, !g.options.DisableChecksumValidation, r)
 		output.ContentLength = contentLength
-		output.ContentRange = fmt.Sprintf("bytes=%d-%d/%d", pos, total-1, out.ContentLength)
+		output.ContentRange = fmt.Sprintf("bytes=%d-%d/%d", pos, total-1, aws.ToInt64(out.ContentLength))
 
 		partsCount := int32((contentLength-1)/g.options.PartSizeBytes + 1)
 		sectionParts := int32(max(1, g.options.GetBufferSize/g.options.PartSizeBytes))

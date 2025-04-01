@@ -179,6 +179,7 @@ func TestConcurrentReader(t *testing.T) {
 				capacity: int32(math.Min(float64(c.sectionParts), float64(c.partsCount))),
 				buf:      make(map[int32]*outChunk),
 				ctx:      ctx,
+				ch:       make(chan outChunk, c.options.Concurrency),
 			}
 
 			expectBuf := make([]byte, 0)
