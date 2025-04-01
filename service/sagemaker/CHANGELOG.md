@@ -1,3 +1,7 @@
+# v1.186.0 (2025-04-01)
+
+* **Feature**: Added tagging support for SageMaker notebook instance lifecycle configurations
+
 # v1.185.1 (2025-03-31)
 
 * No change notes available for this release.

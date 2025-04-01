@@ -1,3 +1,7 @@
+# v1.24.0 (2025-04-01)
+
+* **Feature**: This release adds support for updating the analytics engine of a collaboration.
+
 # v1.23.2 (2025-03-21)
 
 * No change notes available for this release.

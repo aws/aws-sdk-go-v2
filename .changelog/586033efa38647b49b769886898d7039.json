@@ -1,8 +1,0 @@
-{
-    "id": "586033ef-a386-47b4-9b76-9886898d7039",
-    "type": "feature",
-    "description": "Added tagging support for SageMaker notebook instance lifecycle configurations",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

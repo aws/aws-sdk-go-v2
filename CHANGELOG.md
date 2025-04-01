@@ -1,3 +1,11 @@
+# Release (2025-04-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.24.0](service/cleanrooms/CHANGELOG.md#v1240-2025-04-01)
+  * **Feature**: This release adds support for updating the analytics engine of a collaboration.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.186.0](service/sagemaker/CHANGELOG.md#v11860-2025-04-01)
+  * **Feature**: Added tagging support for SageMaker notebook instance lifecycle configurations
+
 # Release (2025-03-31)
 
 ## General Highlights

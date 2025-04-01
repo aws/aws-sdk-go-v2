@@ -42,7 +42,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.37.2
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.1
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.41.0
-	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.1
+	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/glue v1.107.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.41.0
