@@ -15436,6 +15436,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the collaboration.</p>"
                     }
+                },
+                "analyticsEngine": {
+                    "target": "com.amazonaws.cleanrooms#AnalyticsEngine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analytics engine.</p>"
+                    }
                 }
             }
         },
