@@ -266,18 +266,6 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 		}
 	}
 
-	// buffer all remaining chunks that worker goroutines sent late
-	//for r.receiveCount < r.getCapacity() {
-	//	oc, ok := <-r.ch
-	//	fmt.Println("received chunk ", oc.index)
-	//	if !ok {
-	//		break
-	//	}
-	//
-	//	r.receiveCount++
-	//	r.buf[oc.index] = &oc
-	//}
-
 	//fmt.Println("hi receive count ", r.receiveCount)
 	//fmt.Println("but capacity is ", r.getCapacity())
 	//fmt.Println("ch remains ", len(r.ch))
