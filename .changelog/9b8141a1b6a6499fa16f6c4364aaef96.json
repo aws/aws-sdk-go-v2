@@ -1,0 +1,8 @@
+{
+    "id": "9b8141a1-b6a6-499f-a16f-6c4364aaef96",
+    "type": "feature",
+    "description": "This release adds support for updating the analytics engine of a collaboration.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

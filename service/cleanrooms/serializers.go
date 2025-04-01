@@ -6402,6 +6402,11 @@ func awsRestjson1_serializeOpDocumentUpdateCollaborationInput(v *UpdateCollabora
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AnalyticsEngine) > 0 {
+		ok := object.Key("analyticsEngine")
+		ok.String(string(v.AnalyticsEngine))
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)

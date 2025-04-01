@@ -35,6 +35,9 @@ type UpdateCollaborationInput struct {
 	// This member is required.
 	CollaborationIdentifier *string
 
+	// The analytics engine.
+	AnalyticsEngine types.AnalyticsEngine
+
 	// A description of the collaboration.
 	Description *string
 

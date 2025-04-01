@@ -62,6 +62,13 @@ type CreateNotebookInstanceLifecycleConfigInput struct {
 	// string.
 	OnStart []types.NotebookInstanceLifecycleHook
 
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see [Tagging Amazon Web Services Resources].
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 
