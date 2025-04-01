@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"io"
 	"sync"
-	"time"
 )
 
 type outChunk struct {
@@ -43,6 +42,7 @@ type concurrentReader struct {
 	done         bool
 	written      int64
 	partSize     int64
+	invocations  int32
 
 	ctx context.Context
 	m   sync.Mutex
@@ -64,7 +64,7 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 			)
 		}}
 
-	r.ch = make(chan outChunk, r.options.Concurrency)
+	//r.ch = make(chan outChunk, r.options.Concurrency)
 	var written int
 	var err error
 	var wg sync.WaitGroup
@@ -84,13 +84,13 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 		go r.downloadPart(r.ctx, ch, clientOptions...)
 	}
 
+	//fmt.Println("start sending chunks")
 	for r.index < r.partsCount {
 		if r.getErr() != nil || r.getDone() {
 			break
 		}
 
 		if r.index == r.getCapacity() {
-			time.Sleep(10 * time.Millisecond)
 			continue
 		}
 
@@ -107,11 +107,15 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 	close(ch)
 	r.wg.Wait()
 
-	close(r.ch)
+	if e := r.getErr(); e != nil && e != io.EOF {
+		close(r.ch)
+	}
 	wg.Wait()
 
 	r.written += int64(written)
 	r.setDone(false)
+	//fmt.Println("finish Read ", r.invocations)
+	r.invocations++
 	return written, r.getErr()
 }
 
@@ -154,6 +158,7 @@ func (r *concurrentReader) downloadChunk(ctx context.Context, chunk getChunk, cl
 		return nil, err
 	}
 	r.ch <- outChunk{body: bytes.NewReader(buf), index: chunk.index, length: aws.ToInt64(out.ContentLength)}
+	//fmt.Println("sent chunk ", chunk.index)
 
 	output := &GetObjectOutput{}
 	output.mapFromGetObjectOutput(out, params.ChecksumMode)
@@ -179,45 +184,7 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 	}
 
 	var written int
-
-	for r.receiveCount < r.getCapacity() {
-		if e := r.getErr(); e != nil && e != io.EOF {
-			r.clean()
-			return written, e
-		}
-
-		oc, ok := <-r.ch
-		if !ok {
-			break
-		}
-
-		r.receiveCount++
-
-		index := r.partSize*int64(oc.index) - r.written
-
-		if index < int64(cap(p)) {
-			n, err := oc.body.Read(p[index:])
-			oc.cur += int64(n)
-			written += n
-			if err != nil && err != io.EOF {
-				r.setErr(err)
-				r.clean()
-				return written, r.getErr()
-			}
-		}
-		if oc.cur < oc.length {
-			r.buf[oc.index] = &oc
-		} else {
-			r.readCount++
-			if r.readCount == r.getCapacity() {
-				capacity := min(r.getCapacity()+r.sectionParts, r.partsCount)
-				r.setCapacity(capacity)
-			}
-			if r.readCount >= r.partsCount {
-				r.setErr(io.EOF)
-			}
-		}
-	}
+	c := 0
 
 	partSize := r.partSize
 	minIndex := int32(r.written / partSize)
@@ -244,6 +211,7 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 				delete(r.buf, i)
 				if r.readCount == r.getCapacity() {
 					capacity := min(r.getCapacity()+r.sectionParts, r.partsCount)
+					//fmt.Println("update capacity to ", capacity, "during buffer")
 					r.setCapacity(capacity)
 				}
 				if r.readCount >= r.partsCount {
@@ -253,6 +221,66 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 		}
 	}
 
+	for r.receiveCount < r.getCapacity() {
+		if c == 0 {
+			//fmt.Println("start receiving chunks")
+			c++
+		}
+		if e := r.getErr(); e != nil && e != io.EOF {
+			r.clean()
+			return written, e
+		}
+
+		oc, ok := <-r.ch
+		//fmt.Println("received chunk ", oc.index)
+		if !ok {
+			break
+		}
+
+		r.receiveCount++
+
+		index := r.partSize*int64(oc.index) - r.written
+
+		if index < int64(cap(p)) {
+			n, err := oc.body.Read(p[index:])
+			oc.cur += int64(n)
+			written += n
+			if err != nil && err != io.EOF {
+				r.setErr(err)
+				r.clean()
+				return written, r.getErr()
+			}
+		}
+		if oc.cur < oc.length {
+			r.buf[oc.index] = &oc
+		} else {
+			r.readCount++
+			if r.readCount == r.getCapacity() {
+				capacity := min(r.getCapacity()+r.sectionParts, r.partsCount)
+				//fmt.Println("update capacity to ", capacity, " during receive")
+				r.setCapacity(capacity)
+			}
+			if r.readCount >= r.partsCount {
+				r.setErr(io.EOF)
+			}
+		}
+	}
+
+	// buffer all remaining chunks that worker goroutines sent late
+	//for r.receiveCount < r.getCapacity() {
+	//	oc, ok := <-r.ch
+	//	fmt.Println("received chunk ", oc.index)
+	//	if !ok {
+	//		break
+	//	}
+	//
+	//	r.receiveCount++
+	//	r.buf[oc.index] = &oc
+	//}
+
+	//fmt.Println("hi receive count ", r.receiveCount)
+	//fmt.Println("but capacity is ", r.getCapacity())
+	//fmt.Println("ch remains ", len(r.ch))
 	return written, r.getErr()
 }
 
