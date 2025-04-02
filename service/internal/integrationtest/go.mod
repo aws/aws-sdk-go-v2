@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.48.2
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.44.1
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.57.0
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.58.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.40.2
@@ -30,8 +30,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.42.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.211.0
-	github.com/aws/aws-sdk-go-v2/service/ecr v1.43.0
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.54.3
+	github.com/aws/aws-sdk-go-v2/service/ecr v1.43.1
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.54.4
 	github.com/aws/aws-sdk-go-v2/service/efs v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.29.1

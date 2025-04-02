@@ -1,3 +1,7 @@
+# v1.54.4 (2025-04-02)
+
+* **Documentation**: This is an Amazon ECS documentation only update to address various tickets.
+
 # v1.54.3 (2025-03-28)
 
 * **Documentation**: This is an Amazon ECS documentation only release that addresses tickets.

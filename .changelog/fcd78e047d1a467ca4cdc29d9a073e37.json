@@ -1,8 +1,0 @@
-{
-    "id": "fcd78e04-7d1a-467c-a4cd-c29d9a073e37",
-    "type": "feature",
-    "description": "Release feature of errorlogging for lex bot, customer can config this feature in bot version to generate log for error exception which helps debug",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.43.1 (2025-04-02)
+
+* **Documentation**: Fix for customer issues related to AWS account ID and size limitation for token.
+
 # v1.43.0 (2025-03-11)
 
 * **Feature**: This release adds Amazon ECR to Amazon ECR pull through cache rules support.

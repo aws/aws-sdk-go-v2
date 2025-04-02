@@ -1,3 +1,19 @@
+# Release (2025-04-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.11.0](service/applicationsignals/CHANGELOG.md#v1110-2025-04-02)
+  * **Feature**: Application Signals now supports creating Service Level Objectives on service dependencies. Users can now create or update SLOs on discovered service dependencies to monitor their standard application metrics.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.58.0](service/codebuild/CHANGELOG.md#v1580-2025-04-02)
+  * **Feature**: This release adds support for environment type WINDOWS_SERVER_2022_CONTAINER in ProjectEnvironment
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.43.1](service/ecr/CHANGELOG.md#v1431-2025-04-02)
+  * **Documentation**: Fix for customer issues related to AWS account ID and size limitation for token.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.54.4](service/ecs/CHANGELOG.md#v1544-2025-04-02)
+  * **Documentation**: This is an Amazon ECS documentation only update to address various tickets.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.51.0](service/lexmodelsv2/CHANGELOG.md#v1510-2025-04-02)
+  * **Feature**: Release feature of errorlogging for lex bot, customer can config this feature in bot version to generate log for error exception which helps debug
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.72.0](service/medialive/CHANGELOG.md#v1720-2025-04-02)
+  * **Feature**: Added support for SMPTE 2110 inputs when running a channel in a MediaLive Anywhere cluster. This feature enables ingestion of SMPTE 2110-compliant video, audio, and ancillary streams by reading SDP files that AWS Elemental MediaLive can retrieve from a network source.
+
 # Release (2025-04-01)
 
 ## Module Highlights

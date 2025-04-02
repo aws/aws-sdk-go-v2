@@ -1,3 +1,7 @@
+# v1.58.0 (2025-04-02)
+
+* **Feature**: This release adds support for environment type WINDOWS_SERVER_2022_CONTAINER in ProjectEnvironment
+
 # v1.57.0 (2025-03-28)
 
 * **Feature**: This release adds support for cacheNamespace in ProjectCache

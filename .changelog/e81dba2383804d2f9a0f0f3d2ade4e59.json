@@ -1,8 +1,0 @@
-{
-    "id": "e81dba23-8380-4d2f-9a0f-0f3d2ade4e59",
-    "type": "documentation",
-    "description": "This is an Amazon ECS documentation only update to address various tickets.",
-    "modules": [
-        "service/ecs"
-    ]
-}

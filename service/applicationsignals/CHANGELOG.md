@@ -1,3 +1,7 @@
+# v1.11.0 (2025-04-02)
+
+* **Feature**: Application Signals now supports creating Service Level Objectives on service dependencies. Users can now create or update SLOs on discovered service dependencies to monitor their standard application metrics.
+
 # v1.10.0 (2025-03-17)
 
 * **Feature**: This release adds support for adding, removing, and listing SLO time exclusion windows with the BatchUpdateExclusionWindows and ListServiceLevelObjectiveExclusionWindows APIs.

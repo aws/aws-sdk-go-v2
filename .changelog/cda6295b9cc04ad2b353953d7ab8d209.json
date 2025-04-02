@@ -1,8 +1,0 @@
-{
-    "id": "cda6295b-9cc0-4ad2-b353-953d7ab8d209",
-    "type": "feature",
-    "description": "Application Signals now supports creating Service Level Objectives on service dependencies. Users can now create or update SLOs on discovered service dependencies to monitor their standard application metrics.",
-    "modules": [
-        "service/applicationsignals"
-    ]
-}
