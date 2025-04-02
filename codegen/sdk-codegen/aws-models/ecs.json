@@ -10556,7 +10556,7 @@
                 "serviceRevisionArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the service revision deployed as part of the rollback.</p>\n         <p>When the type is <code>GPU</code>, the value is the number of physical\n\t\t\t\t<code>GPUs</code> the Amazon ECS container agent reserves for the container. The number\n\t\t\tof GPUs that's reserved for all containers in a task can't exceed the number of\n\t\t\tavailable GPUs on the container instance that the task is launched on.</p>\n         <p>When the type is <code>InferenceAccelerator</code>, the <code>value</code> matches the\n\t\t\t\t<code>deviceName</code> for an <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html\">InferenceAccelerator</a> specified in a task definition.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the service revision deployed as part of the rollback.</p>"
                     }
                 }
             },

@@ -3206,6 +3206,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "errorLogSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#ErrorLogSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows you to configure destinations where error logs will be published during the bot import process.</p>"
+                    }
+                },
                 "idleSessionTTLInSeconds": {
                     "target": "com.amazonaws.lexmodelsv2#SessionTTL",
                     "traits": {
@@ -5576,6 +5582,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of bot members in a network to be created.</p>"
                     }
+                },
+                "errorLogSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#ErrorLogSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the configuration for error logging during bot creation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5655,6 +5667,12 @@
                     "target": "com.amazonaws.lexmodelsv2#BotMembers",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of bots in a network that was created.</p>"
+                    }
+                },
+                "errorLogSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#ErrorLogSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration settings for delivering error logs to Cloudwatch Logs in an Amazon Lex bot response.</p>"
                     }
                 }
             },
@@ -6029,6 +6047,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the configuration of the built-in <code>Amazon.QnAIntent</code>. The <code>AMAZON.QnAIntent</code> intent is called when\n         Amazon Lex can't determine another intent to invoke. If you specify this field, you can't specify the <code>kendraConfiguration</code> field.</p>"
                     }
+                },
+                "qInConnectIntentConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#QInConnectIntentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Qinconnect intent configuration details for the create intent request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6144,6 +6168,12 @@
                     "target": "com.amazonaws.lexmodelsv2#QnAIntentConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the the configuration of the built-in <code>Amazon.QnAIntent</code>.</p>"
+                    }
+                },
+                "qInConnectIntentConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#QInConnectIntentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Qinconnect intent configuration details for the create intent response.</p>"
                     }
                 }
             },
@@ -9508,6 +9538,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If the <code>botStatus</code> is <code>Failed</code>, this contains\n         a list of reasons that the bot couldn't be built.</p>"
                     }
+                },
+                "errorLogSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#ErrorLogSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration for error logging that specifies where and how bot errors are recorded, including destinations like CloudWatch Logs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10295,6 +10331,12 @@
                     "target": "com.amazonaws.lexmodelsv2#QnAIntentConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the configuration of the built-in <code>Amazon.QnAIntent</code>.</p>"
+                    }
+                },
+                "qInConnectIntentConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#QInConnectIntentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Qinconnect intent configuration details for the describe intent response.</p>"
                     }
                 }
             },
@@ -11476,6 +11518,21 @@
                         "smithy.api#enumValue": "INTERNAL_SERVER_FAILURE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ErrorLogSettings": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings parameters for the error logs, when it is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings parameters for the error logs, whether it is enabled or disabled.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#ErrorMessage": {
@@ -18779,6 +18836,41 @@
                 "smithy.api#documentation": "<p>Specifies a list of message groups that Amazon Lex sends to a user to\n         elicit a response.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#QInConnectAssistantARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#QInConnectAssistantConfiguration": {
+            "type": "structure",
+            "members": {
+                "assistantArn": {
+                    "target": "com.amazonaws.lexmodelsv2#QInConnectAssistantARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The assistant Arn details of the Qinconnect assistant configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details of the Qinconnect assistant.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#QInConnectIntentConfiguration": {
+            "type": "structure",
+            "members": {
+                "qInConnectAssistantConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#QInConnectAssistantConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Qinconnect assistant configuration details of the Qinconnect intent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details of the Qinconnect intent.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#QnAIntentConfiguration": {
             "type": "structure",
             "members": {
@@ -23325,6 +23417,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of bot members in the network associated \n         with the update action.</p>"
                     }
+                },
+                "errorLogSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#ErrorLogSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows you to modify how Amazon Lex logs errors during bot interactions, including destinations for error logs and the types of errors to be captured.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23398,6 +23496,12 @@
                     "target": "com.amazonaws.lexmodelsv2#BotMembers",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of bot members in the network that was updated.</p>"
+                    }
+                },
+                "errorLogSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#ErrorLogSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for managing error logs within the response of an update bot operation.</p>"
                     }
                 }
             },
@@ -23676,6 +23780,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the configuration of the built-in <code>Amazon.QnAIntent</code>. The <code>AMAZON.QnAIntent</code> intent is called when\n         Amazon Lex can't determine another intent to invoke. If you specify this field, you can't specify the <code>kendraConfiguration</code> field.</p>"
                     }
+                },
+                "qInConnectIntentConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#QInConnectIntentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Qinconnect intent configuration details for the update intent request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23803,6 +23913,12 @@
                     "target": "com.amazonaws.lexmodelsv2#QnAIntentConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the configuration of the built-in <code>Amazon.QnAIntent</code>.</p>"
+                    }
+                },
+                "qInConnectIntentConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#QInConnectIntentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Qinconnect intent configuration details for the update intent response.</p>"
                     }
                 }
             },

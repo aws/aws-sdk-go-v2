@@ -4053,6 +4053,12 @@
                         "smithy.api#enumValue": "WINDOWS_SERVER_2019_CONTAINER"
                     }
                 },
+                "WINDOWS_SERVER_2022_CONTAINER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2022_CONTAINER"
+                    }
+                },
                 "LINUX_LAMBDA_CONTAINER": {
                     "target": "smithy.api#Unit",
                     "traits": {

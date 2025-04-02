@@ -6143,6 +6143,13 @@
                         "smithy.api#documentation": "Multicast Input settings.",
                         "smithy.api#jsonName": "multicastSettings"
                     }
+                },
+                "Smpte2110ReceiverGroupSettings": {
+                    "target": "com.amazonaws.medialive#Smpte2110ReceiverGroupSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.",
+                        "smithy.api#jsonName": "smpte2110ReceiverGroupSettings"
+                    }
                 }
             },
             "traits": {
@@ -10635,6 +10642,13 @@
                     "traits": {
                         "smithy.api#documentation": "Multicast Input settings.",
                         "smithy.api#jsonName": "multicastSettings"
+                    }
+                },
+                "Smpte2110ReceiverGroupSettings": {
+                    "target": "com.amazonaws.medialive#Smpte2110ReceiverGroupSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.",
+                        "smithy.api#jsonName": "smpte2110ReceiverGroupSettings"
                     }
                 }
             },
@@ -18923,6 +18937,13 @@
                         "smithy.api#documentation": "Multicast Input settings.",
                         "smithy.api#jsonName": "multicastSettings"
                     }
+                },
+                "Smpte2110ReceiverGroupSettings": {
+                    "target": "com.amazonaws.medialive#Smpte2110ReceiverGroupSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.",
+                        "smithy.api#jsonName": "smpte2110ReceiverGroupSettings"
+                    }
                 }
             },
             "traits": {
@@ -20461,6 +20482,28 @@
                 "smithy.api#documentation": "Input resolution based on lines of vertical resolution in the input; SD is less than 720 lines, HD is 720 to 1080 lines, UHD is greater than 1080 lines"
             }
         },
+        "com.amazonaws.medialive#InputSdpLocation": {
+            "type": "structure",
+            "members": {
+                "MediaIndex": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The index of the media stream in the SDP file for one SMPTE 2110 stream.",
+                        "smithy.api#jsonName": "mediaIndex"
+                    }
+                },
+                "SdpUrl": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The URL of the SDP file for one SMPTE 2110 stream.",
+                        "smithy.api#jsonName": "sdpUrl"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The location of the SDP file for one of the SMPTE 2110 streams in a receiver group."
+            }
+        },
         "com.amazonaws.medialive#InputSecurityGroup": {
             "type": "structure",
             "members": {
@@ -20917,6 +20960,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MULTICAST"
+                    }
+                },
+                "SMPTE_2110_RECEIVER_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_2110_RECEIVER_GROUP"
                     }
                 }
             },
@@ -30946,6 +30995,64 @@
                 "smithy.api#documentation": "Smpte2038 Data Preference"
             }
         },
+        "com.amazonaws.medialive#Smpte2110ReceiverGroup": {
+            "type": "structure",
+            "members": {
+                "SdpSettings": {
+                    "target": "com.amazonaws.medialive#Smpte2110ReceiverGroupSdpSettings",
+                    "traits": {
+                        "smithy.api#documentation": "The single Smpte2110ReceiverGroupSdpSettings that identify the video, audio, and ancillary streams for this receiver group.",
+                        "smithy.api#jsonName": "sdpSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A receiver group is a collection of video, audio, and ancillary streams that you want to group together and attach to one input."
+            }
+        },
+        "com.amazonaws.medialive#Smpte2110ReceiverGroupSdpSettings": {
+            "type": "structure",
+            "members": {
+                "AncillarySdps": {
+                    "target": "com.amazonaws.medialive#__listOfInputSdpLocation",
+                    "traits": {
+                        "smithy.api#documentation": "A list of InputSdpLocations. Each item in the list specifies the SDP file and index for one ancillary SMPTE 2110 stream.\nEach stream encapsulates one captions stream (out of any number you can include) or the single SCTE 35 stream that you can include.",
+                        "smithy.api#jsonName": "ancillarySdps"
+                    }
+                },
+                "AudioSdps": {
+                    "target": "com.amazonaws.medialive#__listOfInputSdpLocation",
+                    "traits": {
+                        "smithy.api#documentation": "A list of InputSdpLocations. Each item in the list specifies the SDP file and index for one audio SMPTE 2110 stream.",
+                        "smithy.api#jsonName": "audioSdps"
+                    }
+                },
+                "VideoSdp": {
+                    "target": "com.amazonaws.medialive#InputSdpLocation",
+                    "traits": {
+                        "smithy.api#documentation": "The InputSdpLocation that specifies the SDP file and index for the single video SMPTE 2110 stream for this 2110 input.",
+                        "smithy.api#jsonName": "videoSdp"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Information about the SDP files that describe the SMPTE 2110 streams that go into one SMPTE 2110 receiver group."
+            }
+        },
+        "com.amazonaws.medialive#Smpte2110ReceiverGroupSettings": {
+            "type": "structure",
+            "members": {
+                "Smpte2110ReceiverGroups": {
+                    "target": "com.amazonaws.medialive#__listOfSmpte2110ReceiverGroup",
+                    "traits": {
+                        "smithy.api#jsonName": "smpte2110ReceiverGroups"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configures the sources for the SMPTE 2110 Receiver Group input."
+            }
+        },
         "com.amazonaws.medialive#SmpteTtDestinationSettings": {
             "type": "structure",
             "members": {},
@@ -35412,6 +35519,13 @@
                         "smithy.api#documentation": "Multicast Input settings.",
                         "smithy.api#jsonName": "multicastSettings"
                     }
+                },
+                "Smpte2110ReceiverGroupSettings": {
+                    "target": "com.amazonaws.medialive#Smpte2110ReceiverGroupSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.",
+                        "smithy.api#jsonName": "smpte2110ReceiverGroupSettings"
+                    }
                 }
             },
             "traits": {
@@ -37799,6 +37913,15 @@
                 "smithy.api#documentation": "Placeholder documentation for __listOfInputRequestDestinationRoute"
             }
         },
+        "com.amazonaws.medialive#__listOfInputSdpLocation": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#InputSdpLocation"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfInputSdpLocation"
+            }
+        },
         "com.amazonaws.medialive#__listOfInputSecurityGroup": {
             "type": "list",
             "member": {
@@ -38148,6 +38271,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfSignalMapSummary"
+            }
+        },
+        "com.amazonaws.medialive#__listOfSmpte2110ReceiverGroup": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#Smpte2110ReceiverGroup"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfSmpte2110ReceiverGroup"
             }
         },
         "com.amazonaws.medialive#__listOfSrtCallerSource": {

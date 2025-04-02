@@ -917,6 +917,28 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.applicationsignals#DependencyConfig": {
+            "type": "structure",
+            "members": {
+                "DependencyKeyAttributes": {
+                    "target": "com.amazonaws.applicationsignals#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a string-to-string map. It can \n         include the following fields.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Type</code> designates the type of object this is.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType</code> specifies the type of the resource. This field is used only\n            when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field\n            is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Identifier</code> identifies the resource objects of this resource. \n            This is used only if the value of the <code>Type</code> field\n            is <code>Resource</code> or <code>AWS::Resource</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DependencyOperationName": {
+                    "target": "com.amazonaws.applicationsignals#OperationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the called operation in the dependency.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>.</p>\n         <p>When creating a service dependency SLO, you must specify the <code>KeyAttributes</code> of the service, and the <code>DependencyConfig</code> for the dependency. You can specify the <code>OperationName</code> of the service, from which it calls the dependency. Alternatively, \n         you can exclude <code>OperationName</code> and the SLO will monitor all of the service's operations that call the dependency.</p>"
+            }
+        },
         "com.amazonaws.applicationsignals#Dimension": {
             "type": "structure",
             "members": {
@@ -1700,6 +1722,12 @@
                         "smithy.api#httpQuery": "OperationName"
                     }
                 },
+                "DependencyConfig": {
+                    "target": "com.amazonaws.applicationsignals#DependencyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>"
+                    }
+                },
                 "MaxResults": {
                     "target": "com.amazonaws.applicationsignals#ListServiceLevelObjectivesMaxResults",
                     "traits": {
@@ -1713,6 +1741,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Include this value, if it was returned by the previous operation, to get the next set of service level objectives.</p>",
                         "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MetricSourceTypes": {
+                    "target": "com.amazonaws.applicationsignals#MetricSourceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this optional field to only include SLOs with the specified metric source types in the output. Supported types are:</p>\n         <ul>\n            <li>\n               <p>Service operation</p>\n            </li>\n            <li>\n               <p>Service dependency</p>\n            </li>\n            <li>\n               <p>CloudWatch metric</p>\n            </li>\n         </ul>"
                     }
                 },
                 "IncludeLinkedAccounts": {
@@ -2240,6 +2274,41 @@
                 "target": "com.amazonaws.applicationsignals#MetricReference"
             }
         },
+        "com.amazonaws.applicationsignals#MetricSourceType": {
+            "type": "enum",
+            "members": {
+                "SERVICE_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ServiceOperation"
+                    }
+                },
+                "CLOUDWATCH_METRIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CloudWatchMetric"
+                    }
+                },
+                "SERVICE_DEPENDENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ServiceDependency"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#MetricSourceTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#MetricSourceType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.applicationsignals#MetricStat": {
             "type": "structure",
             "members": {
@@ -2434,6 +2503,12 @@
                         "smithy.api#documentation": "<p>This structure defines the metric that is used as the \"good request\" or \"bad request\"\n         value for a request-based SLO. \n         This value observed for the metric defined in  \n         <code>TotalRequestCountMetric</code> is divided by the number found for \n         <code>MonitoredRequestCountMetric</code> to determine the percentage of successful requests that \n         this SLO tracks.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "DependencyConfig": {
+                    "target": "com.amazonaws.applicationsignals#DependencyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>"
+                    }
                 }
             },
             "traits": {
@@ -2471,6 +2546,12 @@
                     "target": "com.amazonaws.applicationsignals#MonitoredRequestCountMetricDataQueries",
                     "traits": {
                         "smithy.api#documentation": "<p>Use this structure to define the metric that you want to use as the \"good request\" or \"bad request\"\n         value for a request-based SLO. \n         This value observed for the metric defined in  \n         <code>TotalRequestCountMetric</code> will be divided by the number found for \n         <code>MonitoredRequestCountMetric</code> to determine the percentage of successful requests that \n         this SLO tracks.</p>"
+                    }
+                },
+                "DependencyConfig": {
+                    "target": "com.amazonaws.applicationsignals#DependencyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>"
                     }
                 }
             },
@@ -2801,6 +2882,12 @@
                         "smithy.api#documentation": "<p>If this SLO monitors a CloudWatch metric or the result of a CloudWatch metric math expression, \n         this structure includes the information about that metric or expression. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "DependencyConfig": {
+                    "target": "com.amazonaws.applicationsignals#DependencyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>"
+                    }
                 }
             },
             "traits": {
@@ -2844,6 +2931,12 @@
                     "target": "com.amazonaws.applicationsignals#MetricDataQueries",
                     "traits": {
                         "smithy.api#documentation": "<p>If this SLO monitors a CloudWatch metric or the result of a CloudWatch metric math expression, \n     use this structure to specify that metric or expression. </p>"
+                    }
+                },
+                "DependencyConfig": {
+                    "target": "com.amazonaws.applicationsignals#DependencyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>"
                     }
                 }
             },
@@ -2946,6 +3039,12 @@
                     "target": "com.amazonaws.applicationsignals#BurnRateConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>Each object in this array defines the length of the look-back window used to calculate one burn rate metric\n         for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>"
+                    }
+                },
+                "MetricSourceType": {
+                    "target": "com.amazonaws.applicationsignals#MetricSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays the SLI metric source type for this SLO. Supported types are:</p>\n         <ul>\n            <li>\n               <p>Service operation</p>\n            </li>\n            <li>\n               <p>Service dependency</p>\n            </li>\n            <li>\n               <p>CloudWatch metric</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3230,10 +3329,28 @@
                         "smithy.api#documentation": "<p>If this service level objective is specific to a single operation, this \n      field displays the name of that operation.</p>"
                     }
                 },
+                "DependencyConfig": {
+                    "target": "com.amazonaws.applicationsignals#DependencyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>"
+                    }
+                },
                 "CreatedTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that this service level objective was created. It is expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.</p>"
+                    }
+                },
+                "EvaluationType": {
+                    "target": "com.amazonaws.applicationsignals#EvaluationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays whether this is a period-based SLO or a request-based SLO.</p>"
+                    }
+                },
+                "MetricSourceType": {
+                    "target": "com.amazonaws.applicationsignals#MetricSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays the SLI metric source type for this SLO. Supported types are:</p>\n         <ul>\n            <li>\n               <p>Service operation</p>\n            </li>\n            <li>\n               <p>Service dependency</p>\n            </li>\n            <li>\n               <p>CloudWatch metric</p>\n            </li>\n         </ul>"
                     }
                 }
             },
