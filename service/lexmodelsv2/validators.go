@@ -3349,6 +3349,11 @@ func validateBotImportSpecification(v *types.BotImportSpecification) error {
 			invalidParams.AddNested("DataPrivacy", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ErrorLogSettings != nil {
+		if err := validateErrorLogSettings(v.ErrorLogSettings); err != nil {
+			invalidParams.AddNested("ErrorLogSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4223,6 +4228,21 @@ func validateElicitationCodeHookInvocationSetting(v *types.ElicitationCodeHookIn
 	invalidParams := smithy.InvalidParamsError{Context: "ElicitationCodeHookInvocationSetting"}
 	if v.EnableCodeHookInvocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnableCodeHookInvocation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateErrorLogSettings(v *types.ErrorLogSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ErrorLogSettings"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5274,6 +5294,38 @@ func validatePromptSpecification(v *types.PromptSpecification) error {
 	if v.PromptAttemptsSpecification != nil {
 		if err := validatePromptAttemptsSpecificationMap(v.PromptAttemptsSpecification); err != nil {
 			invalidParams.AddNested("PromptAttemptsSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQInConnectAssistantConfiguration(v *types.QInConnectAssistantConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QInConnectAssistantConfiguration"}
+	if v.AssistantArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQInConnectIntentConfiguration(v *types.QInConnectIntentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QInConnectIntentConfiguration"}
+	if v.QInConnectAssistantConfiguration != nil {
+		if err := validateQInConnectAssistantConfiguration(v.QInConnectAssistantConfiguration); err != nil {
+			invalidParams.AddNested("QInConnectAssistantConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6670,6 +6722,11 @@ func validateOpCreateBotInput(v *CreateBotInput) error {
 			invalidParams.AddNested("BotMembers", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ErrorLogSettings != nil {
+		if err := validateErrorLogSettings(v.ErrorLogSettings); err != nil {
+			invalidParams.AddNested("ErrorLogSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6838,6 +6895,11 @@ func validateOpCreateIntentInput(v *CreateIntentInput) error {
 	if v.QnAIntentConfiguration != nil {
 		if err := validateQnAIntentConfiguration(v.QnAIntentConfiguration); err != nil {
 			invalidParams.AddNested("QnAIntentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QInConnectIntentConfiguration != nil {
+		if err := validateQInConnectIntentConfiguration(v.QInConnectIntentConfiguration); err != nil {
+			invalidParams.AddNested("QInConnectIntentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8751,6 +8813,11 @@ func validateOpUpdateBotInput(v *UpdateBotInput) error {
 			invalidParams.AddNested("BotMembers", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ErrorLogSettings != nil {
+		if err := validateErrorLogSettings(v.ErrorLogSettings); err != nil {
+			invalidParams.AddNested("ErrorLogSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -8907,6 +8974,11 @@ func validateOpUpdateIntentInput(v *UpdateIntentInput) error {
 	if v.QnAIntentConfiguration != nil {
 		if err := validateQnAIntentConfiguration(v.QnAIntentConfiguration); err != nil {
 			invalidParams.AddNested("QnAIntentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QInConnectIntentConfiguration != nil {
+		if err := validateQInConnectIntentConfiguration(v.QInConnectIntentConfiguration); err != nil {
+			invalidParams.AddNested("QInConnectIntentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

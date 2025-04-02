@@ -112,6 +112,9 @@ type DescribeIntentOutput struct {
 	// The identifier of the built-in intent that this intent is derived from, if any.
 	ParentIntentSignature *string
 
+	// Qinconnect intent configuration details for the describe intent response.
+	QInConnectIntentConfiguration *types.QInConnectIntentConfiguration
+
 	// Details about the configuration of the built-in Amazon.QnAIntent .
 	QnAIntentConfiguration *types.QnAIntentConfiguration
 

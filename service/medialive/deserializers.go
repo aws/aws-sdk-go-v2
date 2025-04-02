@@ -8864,6 +8864,11 @@ func awsRestjson1_deserializeOpDocumentDescribeInputOutput(v **DescribeInputOutp
 				return err
 			}
 
+		case "smpte2110ReceiverGroupSettings":
+			if err := awsRestjson1_deserializeDocumentSmpte2110ReceiverGroupSettings(&sv.Smpte2110ReceiverGroupSettings, value); err != nil {
+				return err
+			}
+
 		case "sources":
 			if err := awsRestjson1_deserializeDocument__listOfInputSource(&sv.Sources, value); err != nil {
 				return err
@@ -25035,6 +25040,40 @@ func awsRestjson1_deserializeDocument__listOfInputDeviceUhdAudioChannelPairConfi
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfInputSdpLocation(v *[]types.InputSdpLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InputSdpLocation
+	if *v == nil {
+		cv = []types.InputSdpLocation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InputSdpLocation
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentInputSdpLocation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfInputSecurityGroup(v *[]types.InputSecurityGroup, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25945,6 +25984,40 @@ func awsRestjson1_deserializeDocument__listOfSignalMapSummary(v *[]types.SignalM
 		var col types.SignalMapSummary
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentSignalMapSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfSmpte2110ReceiverGroup(v *[]types.Smpte2110ReceiverGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Smpte2110ReceiverGroup
+	if *v == nil {
+		cv = []types.Smpte2110ReceiverGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Smpte2110ReceiverGroup
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSmpte2110ReceiverGroup(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -36106,6 +36179,11 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				return err
 			}
 
+		case "smpte2110ReceiverGroupSettings":
+			if err := awsRestjson1_deserializeDocumentSmpte2110ReceiverGroupSettings(&sv.Smpte2110ReceiverGroupSettings, value); err != nil {
+				return err
+			}
+
 		case "sources":
 			if err := awsRestjson1_deserializeDocument__listOfInputSource(&sv.Sources, value); err != nil {
 				return err
@@ -37427,6 +37505,59 @@ func awsRestjson1_deserializeDocumentInputPrepareScheduleActionSettings(v **type
 		case "urlPath":
 			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.UrlPath, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInputSdpLocation(v **types.InputSdpLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InputSdpLocation
+	if *v == nil {
+		sv = &types.InputSdpLocation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "mediaIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MediaIndex = ptr.Int32(int32(i64))
+			}
+
+		case "sdpUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SdpUrl = ptr.String(jtv)
 			}
 
 		default:
@@ -44732,6 +44863,124 @@ func awsRestjson1_deserializeDocumentSignalMapSummary(v **types.SignalMapSummary
 
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSmpte2110ReceiverGroup(v **types.Smpte2110ReceiverGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Smpte2110ReceiverGroup
+	if *v == nil {
+		sv = &types.Smpte2110ReceiverGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "sdpSettings":
+			if err := awsRestjson1_deserializeDocumentSmpte2110ReceiverGroupSdpSettings(&sv.SdpSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSmpte2110ReceiverGroupSdpSettings(v **types.Smpte2110ReceiverGroupSdpSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Smpte2110ReceiverGroupSdpSettings
+	if *v == nil {
+		sv = &types.Smpte2110ReceiverGroupSdpSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ancillarySdps":
+			if err := awsRestjson1_deserializeDocument__listOfInputSdpLocation(&sv.AncillarySdps, value); err != nil {
+				return err
+			}
+
+		case "audioSdps":
+			if err := awsRestjson1_deserializeDocument__listOfInputSdpLocation(&sv.AudioSdps, value); err != nil {
+				return err
+			}
+
+		case "videoSdp":
+			if err := awsRestjson1_deserializeDocumentInputSdpLocation(&sv.VideoSdp, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSmpte2110ReceiverGroupSettings(v **types.Smpte2110ReceiverGroupSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Smpte2110ReceiverGroupSettings
+	if *v == nil {
+		sv = &types.Smpte2110ReceiverGroupSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "smpte2110ReceiverGroups":
+			if err := awsRestjson1_deserializeDocument__listOfSmpte2110ReceiverGroup(&sv.Smpte2110ReceiverGroups, value); err != nil {
 				return err
 			}
 

@@ -93,6 +93,9 @@ type UpdateIntentInput struct {
 	// The signature of the new built-in intent to use as the parent of this intent.
 	ParentIntentSignature *string
 
+	// Qinconnect intent configuration details for the update intent request.
+	QInConnectIntentConfiguration *types.QInConnectIntentConfiguration
+
 	// Specifies the configuration of the built-in Amazon.QnAIntent . The
 	// AMAZON.QnAIntent intent is called when Amazon Lex can't determine another intent
 	// to invoke. If you specify this field, you can't specify the kendraConfiguration
@@ -166,6 +169,9 @@ type UpdateIntentOutput struct {
 
 	// The updated built-in intent that is the parent of this intent.
 	ParentIntentSignature *string
+
+	// Qinconnect intent configuration details for the update intent response.
+	QInConnectIntentConfiguration *types.QInConnectIntentConfiguration
 
 	// Details about the configuration of the built-in Amazon.QnAIntent .
 	QnAIntentConfiguration *types.QnAIntentConfiguration

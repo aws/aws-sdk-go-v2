@@ -1063,6 +1063,11 @@ func awsRestjson1_deserializeOpDocumentCreateBotOutput(v **CreateBotOutput, valu
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "errorLogSettings":
+			if err := awsRestjson1_deserializeDocumentErrorLogSettings(&sv.ErrorLogSettings, value); err != nil {
+				return err
+			}
+
 		case "idleSessionTTLInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2540,6 +2545,11 @@ func awsRestjson1_deserializeOpDocumentCreateIntentOutput(v **CreateIntentOutput
 					return fmt.Errorf("expected IntentSignature to be of type string, got %T instead", value)
 				}
 				sv.ParentIntentSignature = ptr.String(jtv)
+			}
+
+		case "qInConnectIntentConfiguration":
+			if err := awsRestjson1_deserializeDocumentQInConnectIntentConfiguration(&sv.QInConnectIntentConfiguration, value); err != nil {
+				return err
 			}
 
 		case "qnAIntentConfiguration":
@@ -6429,6 +6439,11 @@ func awsRestjson1_deserializeOpDocumentDescribeBotOutput(v **DescribeBotOutput, 
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "errorLogSettings":
+			if err := awsRestjson1_deserializeDocumentErrorLogSettings(&sv.ErrorLogSettings, value); err != nil {
+				return err
+			}
+
 		case "failureReasons":
 			if err := awsRestjson1_deserializeDocumentFailureReasons(&sv.FailureReasons, value); err != nil {
 				return err
@@ -9089,6 +9104,11 @@ func awsRestjson1_deserializeOpDocumentDescribeIntentOutput(v **DescribeIntentOu
 					return fmt.Errorf("expected IntentSignature to be of type string, got %T instead", value)
 				}
 				sv.ParentIntentSignature = ptr.String(jtv)
+			}
+
+		case "qInConnectIntentConfiguration":
+			if err := awsRestjson1_deserializeDocumentQInConnectIntentConfiguration(&sv.QInConnectIntentConfiguration, value); err != nil {
+				return err
 			}
 
 		case "qnAIntentConfiguration":
@@ -19044,6 +19064,11 @@ func awsRestjson1_deserializeOpDocumentUpdateBotOutput(v **UpdateBotOutput, valu
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "errorLogSettings":
+			if err := awsRestjson1_deserializeDocumentErrorLogSettings(&sv.ErrorLogSettings, value); err != nil {
+				return err
+			}
+
 		case "idleSessionTTLInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -20420,6 +20445,11 @@ func awsRestjson1_deserializeOpDocumentUpdateIntentOutput(v **UpdateIntentOutput
 					return fmt.Errorf("expected IntentSignature to be of type string, got %T instead", value)
 				}
 				sv.ParentIntentSignature = ptr.String(jtv)
+			}
+
+		case "qInConnectIntentConfiguration":
+			if err := awsRestjson1_deserializeDocumentQInConnectIntentConfiguration(&sv.QInConnectIntentConfiguration, value); err != nil {
+				return err
 			}
 
 		case "qnAIntentConfiguration":
@@ -24667,6 +24697,11 @@ func awsRestjson1_deserializeDocumentBotImportSpecification(v **types.BotImportS
 				return err
 			}
 
+		case "errorLogSettings":
+			if err := awsRestjson1_deserializeDocumentErrorLogSettings(&sv.ErrorLogSettings, value); err != nil {
+				return err
+			}
+
 		case "idleSessionTTLInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -27978,6 +28013,46 @@ func awsRestjson1_deserializeDocumentEncryptionSetting(v **types.EncryptionSetti
 					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentErrorLogSettings(v **types.ErrorLogSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ErrorLogSettings
+	if *v == nil {
+		sv = &types.ErrorLogSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -31399,6 +31474,82 @@ func awsRestjson1_deserializeDocumentPromptSpecification(v **types.PromptSpecifi
 
 		case "promptAttemptsSpecification":
 			if err := awsRestjson1_deserializeDocumentPromptAttemptsSpecificationMap(&sv.PromptAttemptsSpecification, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQInConnectAssistantConfiguration(v **types.QInConnectAssistantConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QInConnectAssistantConfiguration
+	if *v == nil {
+		sv = &types.QInConnectAssistantConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "assistantArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QInConnectAssistantARN to be of type string, got %T instead", value)
+				}
+				sv.AssistantArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQInConnectIntentConfiguration(v **types.QInConnectIntentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QInConnectIntentConfiguration
+	if *v == nil {
+		sv = &types.QInConnectIntentConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "qInConnectAssistantConfiguration":
+			if err := awsRestjson1_deserializeDocumentQInConnectAssistantConfiguration(&sv.QInConnectAssistantConfiguration, value); err != nil {
 				return err
 			}
 

@@ -942,9 +942,23 @@ func awsRestjson1_serializeOpDocumentListServiceLevelObjectivesInput(v *ListServ
 	object := value.Object()
 	defer object.Close()
 
+	if v.DependencyConfig != nil {
+		ok := object.Key("DependencyConfig")
+		if err := awsRestjson1_serializeDocumentDependencyConfig(v.DependencyConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KeyAttributes != nil {
 		ok := object.Key("KeyAttributes")
 		if err := awsRestjson1_serializeDocumentAttributes(v.KeyAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricSourceTypes != nil {
+		ok := object.Key("MetricSourceTypes")
+		if err := awsRestjson1_serializeDocumentMetricSourceTypes(v.MetricSourceTypes, ok); err != nil {
 			return err
 		}
 	}
@@ -1621,6 +1635,25 @@ func awsRestjson1_serializeDocumentCalendarInterval(v *types.CalendarInterval, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDependencyConfig(v *types.DependencyConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DependencyKeyAttributes != nil {
+		ok := object.Key("DependencyKeyAttributes")
+		if err := awsRestjson1_serializeDocumentAttributes(v.DependencyKeyAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DependencyOperationName != nil {
+		ok := object.Key("DependencyOperationName")
+		ok.String(*v.DependencyOperationName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDimension(v *types.Dimension, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1850,6 +1883,17 @@ func awsRestjson1_serializeDocumentMetricDataQuery(v *types.MetricDataQuery, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMetricSourceTypes(v []types.MetricSourceType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMetricStat(v *types.MetricStat, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1956,6 +2000,13 @@ func awsRestjson1_serializeDocumentRequestBasedServiceLevelIndicatorMetricConfig
 	object := value.Object()
 	defer object.Close()
 
+	if v.DependencyConfig != nil {
+		ok := object.Key("DependencyConfig")
+		if err := awsRestjson1_serializeDocumentDependencyConfig(v.DependencyConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KeyAttributes != nil {
 		ok := object.Key("KeyAttributes")
 		if err := awsRestjson1_serializeDocumentAttributes(v.KeyAttributes, ok); err != nil {
@@ -2047,6 +2098,13 @@ func awsRestjson1_serializeDocumentServiceLevelIndicatorConfig(v *types.ServiceL
 func awsRestjson1_serializeDocumentServiceLevelIndicatorMetricConfig(v *types.ServiceLevelIndicatorMetricConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DependencyConfig != nil {
+		ok := object.Key("DependencyConfig")
+		if err := awsRestjson1_serializeDocumentDependencyConfig(v.DependencyConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.KeyAttributes != nil {
 		ok := object.Key("KeyAttributes")

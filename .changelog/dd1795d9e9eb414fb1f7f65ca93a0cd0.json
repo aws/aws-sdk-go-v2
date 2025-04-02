@@ -1,0 +1,8 @@
+{
+    "id": "dd1795d9-e9eb-414f-b1f7-f65ca93a0cd0",
+    "type": "documentation",
+    "description": "Fix for customer issues related to AWS account ID and size limitation for token.",
+    "modules": [
+        "service/ecr"
+    ]
+}

@@ -3755,6 +3755,10 @@ type Input struct {
 	// A list of IDs for all the Input Security Groups attached to the input.
 	SecurityGroups []string
 
+	// Include this parameter if the input is a SMPTE 2110 input, to identify the
+	// stream sources for this input.
+	Smpte2110ReceiverGroupSettings *Smpte2110ReceiverGroupSettings
+
 	// A list of the sources of the input (PULL-type).
 	Sources []InputSource
 
@@ -4287,6 +4291,19 @@ type InputRequestDestinationRoute struct {
 
 	// An optional gateway for the route.
 	Gateway *string
+
+	noSmithyDocumentSerde
+}
+
+// The location of the SDP file for one of the SMPTE 2110 streams in a receiver
+// group.
+type InputSdpLocation struct {
+
+	// The index of the media stream in the SDP file for one SMPTE 2110 stream.
+	MediaIndex *int32
+
+	// The URL of the SDP file for one SMPTE 2110 stream.
+	SdpUrl *string
 
 	noSmithyDocumentSerde
 }
@@ -6877,6 +6894,47 @@ type SignalMapSummary struct {
 
 	// Represents the tags associated with a resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A receiver group is a collection of video, audio, and ancillary streams that
+// you want to group together and attach to one input.
+type Smpte2110ReceiverGroup struct {
+
+	// The single Smpte2110ReceiverGroupSdpSettings that identify the video, audio,
+	// and ancillary streams for this receiver group.
+	SdpSettings *Smpte2110ReceiverGroupSdpSettings
+
+	noSmithyDocumentSerde
+}
+
+// Information about the SDP files that describe the SMPTE 2110 streams that go
+// into one SMPTE 2110 receiver group.
+type Smpte2110ReceiverGroupSdpSettings struct {
+
+	// A list of InputSdpLocations. Each item in the list specifies the SDP file and
+	// index for one ancillary SMPTE 2110 stream. Each stream encapsulates one captions
+	// stream (out of any number you can include) or the single SCTE 35 stream that you
+	// can include.
+	AncillarySdps []InputSdpLocation
+
+	// A list of InputSdpLocations. Each item in the list specifies the SDP file and
+	// index for one audio SMPTE 2110 stream.
+	AudioSdps []InputSdpLocation
+
+	// The InputSdpLocation that specifies the SDP file and index for the single video
+	// SMPTE 2110 stream for this 2110 input.
+	VideoSdp *InputSdpLocation
+
+	noSmithyDocumentSerde
+}
+
+// Configures the sources for the SMPTE 2110 Receiver Group input.
+type Smpte2110ReceiverGroupSettings struct {
+
+	// Placeholder documentation for __listOfSmpte2110ReceiverGroup
+	Smpte2110ReceiverGroups []Smpte2110ReceiverGroup
 
 	noSmithyDocumentSerde
 }

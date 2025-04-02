@@ -297,6 +297,7 @@ const (
 	EnvironmentTypeLinuxGpuContainer          EnvironmentType = "LINUX_GPU_CONTAINER"
 	EnvironmentTypeArmContainer               EnvironmentType = "ARM_CONTAINER"
 	EnvironmentTypeWindowsServer2019Container EnvironmentType = "WINDOWS_SERVER_2019_CONTAINER"
+	EnvironmentTypeWindowsServer2022Container EnvironmentType = "WINDOWS_SERVER_2022_CONTAINER"
 	EnvironmentTypeLinuxLambdaContainer       EnvironmentType = "LINUX_LAMBDA_CONTAINER"
 	EnvironmentTypeArmLambdaContainer         EnvironmentType = "ARM_LAMBDA_CONTAINER"
 	EnvironmentTypeLinuxEc2                   EnvironmentType = "LINUX_EC2"
@@ -316,6 +317,7 @@ func (EnvironmentType) Values() []EnvironmentType {
 		"LINUX_GPU_CONTAINER",
 		"ARM_CONTAINER",
 		"WINDOWS_SERVER_2019_CONTAINER",
+		"WINDOWS_SERVER_2022_CONTAINER",
 		"LINUX_LAMBDA_CONTAINER",
 		"ARM_LAMBDA_CONTAINER",
 		"LINUX_EC2",

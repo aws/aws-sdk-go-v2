@@ -63,6 +63,10 @@ type CreateInputInput struct {
 	// creation.
 	RoleArn *string
 
+	// Include this parameter if the input is a SMPTE 2110 input, to identify the
+	// stream sources for this input.
+	Smpte2110ReceiverGroupSettings *types.Smpte2110ReceiverGroupSettings
+
 	// The source URLs for a PULL-type input. Every PULL type input needs exactly two
 	// source URLs for redundancy. Only specify sources for PULL type Inputs. Leave
 	// Destinations empty.

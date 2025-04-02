@@ -190,6 +190,26 @@ func (m *validateOpListServiceLevelObjectiveExclusionWindows) HandleInitialize(c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListServiceLevelObjectives struct {
+}
+
+func (*validateOpListServiceLevelObjectives) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListServiceLevelObjectives) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListServiceLevelObjectivesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListServiceLevelObjectivesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListServiceOperations struct {
 }
 
@@ -346,6 +366,10 @@ func addOpListServiceLevelObjectiveExclusionWindowsValidationMiddleware(stack *m
 	return stack.Initialize.Add(&validateOpListServiceLevelObjectiveExclusionWindows{}, middleware.After)
 }
 
+func addOpListServiceLevelObjectivesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListServiceLevelObjectives{}, middleware.After)
+}
+
 func addOpListServiceOperationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListServiceOperations{}, middleware.After)
 }
@@ -415,6 +439,24 @@ func validateCalendarInterval(v *types.CalendarInterval) error {
 	}
 	if v.Duration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Duration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDependencyConfig(v *types.DependencyConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DependencyConfig"}
+	if v.DependencyKeyAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DependencyKeyAttributes"))
+	}
+	if v.DependencyOperationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DependencyOperationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -692,6 +734,11 @@ func validateRequestBasedServiceLevelIndicatorMetricConfig(v *types.RequestBased
 			invalidParams.AddNested("MonitoredRequestCountMetric", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DependencyConfig != nil {
+		if err := validateDependencyConfig(v.DependencyConfig); err != nil {
+			invalidParams.AddNested("DependencyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -750,6 +797,11 @@ func validateServiceLevelIndicatorMetricConfig(v *types.ServiceLevelIndicatorMet
 	if v.MetricDataQueries != nil {
 		if err := validateMetricDataQueries(v.MetricDataQueries); err != nil {
 			invalidParams.AddNested("MetricDataQueries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DependencyConfig != nil {
+		if err := validateDependencyConfig(v.DependencyConfig); err != nil {
+			invalidParams.AddNested("DependencyConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -995,6 +1047,23 @@ func validateOpListServiceLevelObjectiveExclusionWindowsInput(v *ListServiceLeve
 	invalidParams := smithy.InvalidParamsError{Context: "ListServiceLevelObjectiveExclusionWindowsInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListServiceLevelObjectivesInput(v *ListServiceLevelObjectivesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListServiceLevelObjectivesInput"}
+	if v.DependencyConfig != nil {
+		if err := validateDependencyConfig(v.DependencyConfig); err != nil {
+			invalidParams.AddNested("DependencyConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

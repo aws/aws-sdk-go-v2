@@ -157,6 +157,9 @@ type CreateIntentInput struct {
 	// A unique identifier for the built-in intent to base this intent on.
 	ParentIntentSignature *string
 
+	// Qinconnect intent configuration details for the create intent request.
+	QInConnectIntentConfiguration *types.QInConnectIntentConfiguration
+
 	// Specifies the configuration of the built-in Amazon.QnAIntent . The
 	// AMAZON.QnAIntent intent is called when Amazon Lex can't determine another intent
 	// to invoke. If you specify this field, you can't specify the kendraConfiguration
@@ -223,6 +226,9 @@ type CreateIntentOutput struct {
 
 	// The signature of the parent intent specified for the intent.
 	ParentIntentSignature *string
+
+	// Qinconnect intent configuration details for the create intent response.
+	QInConnectIntentConfiguration *types.QInConnectIntentConfiguration
 
 	// Details about the the configuration of the built-in Amazon.QnAIntent .
 	QnAIntentConfiguration *types.QnAIntentConfiguration

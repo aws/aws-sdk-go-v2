@@ -1,0 +1,8 @@
+{
+    "id": "f4ba6dc7-739c-40dc-a8af-6c660b63e72b",
+    "type": "feature",
+    "description": "Added support for SMPTE 2110 inputs when running a channel in a MediaLive Anywhere cluster. This feature enables ingestion of SMPTE 2110-compliant video, audio, and ancillary streams by reading SDP files that AWS Elemental MediaLive can retrieve from a network source.",
+    "modules": [
+        "service/medialive"
+    ]
+}

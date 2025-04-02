@@ -77,6 +77,10 @@ type UpdateBotInput struct {
 	// A description of the bot.
 	Description *string
 
+	// Allows you to modify how Amazon Lex logs errors during bot interactions,
+	// including destinations for error logs and the types of errors to be captured.
+	ErrorLogSettings *types.ErrorLogSettings
+
 	noSmithyDocumentSerde
 }
 
@@ -107,6 +111,9 @@ type UpdateBotOutput struct {
 
 	// The description of the bot after the update.
 	Description *string
+
+	// Settings for managing error logs within the response of an update bot operation.
+	ErrorLogSettings *types.ErrorLogSettings
 
 	// The session timeout, in seconds, for the bot after the update.
 	IdleSessionTTLInSeconds *int32

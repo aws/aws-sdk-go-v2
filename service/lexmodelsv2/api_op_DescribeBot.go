@@ -67,6 +67,10 @@ type DescribeBotOutput struct {
 	// The description of the bot.
 	Description *string
 
+	// Contains the configuration for error logging that specifies where and how bot
+	// errors are recorded, including destinations like CloudWatch Logs.
+	ErrorLogSettings *types.ErrorLogSettings
+
 	// If the botStatus is Failed , this contains a list of reasons that the bot
 	// couldn't be built.
 	FailureReasons []string

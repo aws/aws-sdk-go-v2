@@ -44,6 +44,27 @@ func (EvaluationType) Values() []EvaluationType {
 	}
 }
 
+type MetricSourceType string
+
+// Enum values for MetricSourceType
+const (
+	MetricSourceTypeServiceOperation  MetricSourceType = "ServiceOperation"
+	MetricSourceTypeCloudwatchMetric  MetricSourceType = "CloudWatchMetric"
+	MetricSourceTypeServiceDependency MetricSourceType = "ServiceDependency"
+)
+
+// Values returns all known values for MetricSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricSourceType) Values() []MetricSourceType {
+	return []MetricSourceType{
+		"ServiceOperation",
+		"CloudWatchMetric",
+		"ServiceDependency",
+	}
+}
+
 type ServiceLevelIndicatorComparisonOperator string
 
 // Enum values for ServiceLevelIndicatorComparisonOperator

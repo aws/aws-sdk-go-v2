@@ -329,7 +329,7 @@ type ImageDetail struct {
 	// Starting with Docker version 1.9, the Docker client compresses image layers
 	// before pushing them to a V2 Docker registry. The output of the docker images
 	// command shows the uncompressed image size. Therefore, Docker might return a
-	// larger image than the image sizes returned by DescribeImages.
+	// larger image than the image shown in the Amazon Web Services Management Console.
 	ImageSizeInBytes *int64
 
 	// The list of tags associated with this image.

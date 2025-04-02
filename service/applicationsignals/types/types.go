@@ -85,6 +85,43 @@ type CalendarInterval struct {
 	noSmithyDocumentSerde
 }
 
+// Identifies the dependency using the DependencyKeyAttributes and
+// DependencyOperationName .
+//
+// When creating a service dependency SLO, you must specify the KeyAttributes of
+// the service, and the DependencyConfig for the dependency. You can specify the
+// OperationName of the service, from which it calls the dependency. Alternatively,
+// you can exclude OperationName and the SLO will monitor all of the service's
+// operations that call the dependency.
+type DependencyConfig struct {
+
+	// This is a string-to-string map. It can include the following fields.
+	//
+	//   - Type designates the type of object this is.
+	//
+	//   - ResourceType specifies the type of the resource. This field is used only
+	//   when the value of the Type field is Resource or AWS::Resource .
+	//
+	//   - Name specifies the name of the object. This is used only if the value of the
+	//   Type field is Service , RemoteService , or AWS::Service .
+	//
+	//   - Identifier identifies the resource objects of this resource. This is used
+	//   only if the value of the Type field is Resource or AWS::Resource .
+	//
+	//   - Environment specifies the location where this object is hosted, or what it
+	//   belongs to.
+	//
+	// This member is required.
+	DependencyKeyAttributes map[string]string
+
+	// The name of the called operation in the dependency.
+	//
+	// This member is required.
+	DependencyOperationName *string
+
+	noSmithyDocumentSerde
+}
+
 // A dimension is a name/value pair that is part of the identity of a metric.
 // Because dimensions are part of the unique identifier for a metric, whenever you
 // add a unique name/value pair to one of your metrics, you are creating a new
@@ -498,6 +535,10 @@ type RequestBasedServiceLevelIndicatorMetric struct {
 	// This member is required.
 	TotalRequestCountMetric []MetricDataQuery
 
+	// Identifies the dependency using the DependencyKeyAttributes and
+	// DependencyOperationName .
+	DependencyConfig *DependencyConfig
+
 	// This is a string-to-string map that contains information about the type of
 	// object that this SLO is related to. It can include the following fields.
 	//
@@ -530,6 +571,10 @@ type RequestBasedServiceLevelIndicatorMetric struct {
 // Use this structure to specify the information for the metric that a
 // period-based SLO will monitor.
 type RequestBasedServiceLevelIndicatorMetricConfig struct {
+
+	// Identifies the dependency using the DependencyKeyAttributes and
+	// DependencyOperationName .
+	DependencyConfig *DependencyConfig
 
 	// If this SLO is related to a metric collected by Application Signals, you must
 	// use this field to specify which service the SLO metric is related to. To do so,
@@ -832,6 +877,10 @@ type ServiceLevelIndicatorMetric struct {
 	// This member is required.
 	MetricDataQueries []MetricDataQuery
 
+	// Identifies the dependency using the DependencyKeyAttributes and
+	// DependencyOperationName .
+	DependencyConfig *DependencyConfig
+
 	// This is a string-to-string map that contains information about the type of
 	// object that this SLO is related to. It can include the following fields.
 	//
@@ -864,6 +913,10 @@ type ServiceLevelIndicatorMetric struct {
 // Use this structure to specify the information for the metric that a
 // period-based SLO will monitor.
 type ServiceLevelIndicatorMetricConfig struct {
+
+	// Identifies the dependency using the DependencyKeyAttributes and
+	// DependencyOperationName .
+	DependencyConfig *DependencyConfig
 
 	// If this SLO is related to a metric collected by Application Signals, you must
 	// use this field to specify which service the SLO metric is related to. To do so,
@@ -963,6 +1016,15 @@ type ServiceLevelObjective struct {
 
 	// Displays whether this is a period-based SLO or a request-based SLO.
 	EvaluationType EvaluationType
+
+	// Displays the SLI metric source type for this SLO. Supported types are:
+	//
+	//   - Service operation
+	//
+	//   - Service dependency
+	//
+	//   - CloudWatch metric
+	MetricSourceType MetricSourceType
 
 	// A structure containing information about the performance metric that this SLO
 	// monitors, if this is a request-based SLO.
@@ -1114,6 +1176,13 @@ type ServiceLevelObjectiveSummary struct {
 	// expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
 	CreatedTime *time.Time
 
+	// Identifies the dependency using the DependencyKeyAttributes and
+	// DependencyOperationName .
+	DependencyConfig *DependencyConfig
+
+	// Displays whether this is a period-based SLO or a request-based SLO.
+	EvaluationType EvaluationType
+
 	// This is a string-to-string map. It can include the following fields.
 	//
 	//   - Type designates the type of object this service level objective is for.
@@ -1130,6 +1199,15 @@ type ServiceLevelObjectiveSummary struct {
 	//   - Environment specifies the location where this object is hosted, or what it
 	//   belongs to.
 	KeyAttributes map[string]string
+
+	// Displays the SLI metric source type for this SLO. Supported types are:
+	//
+	//   - Service operation
+	//
+	//   - Service dependency
+	//
+	//   - CloudWatch metric
+	MetricSourceType MetricSourceType
 
 	// If this service level objective is specific to a single operation, this field
 	// displays the name of that operation.

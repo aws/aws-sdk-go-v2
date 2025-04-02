@@ -3323,6 +3323,51 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDependencyConfig(v **types.DependencyConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DependencyConfig
+	if *v == nil {
+		sv = &types.DependencyConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DependencyKeyAttributes":
+			if err := awsRestjson1_deserializeDocumentAttributes(&sv.DependencyKeyAttributes, value); err != nil {
+				return err
+			}
+
+		case "DependencyOperationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OperationName to be of type string, got %T instead", value)
+				}
+				sv.DependencyOperationName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDimension(v **types.Dimension, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4234,6 +4279,11 @@ func awsRestjson1_deserializeDocumentRequestBasedServiceLevelIndicatorMetric(v *
 
 	for key, value := range shape {
 		switch key {
+		case "DependencyConfig":
+			if err := awsRestjson1_deserializeDocumentDependencyConfig(&sv.DependencyConfig, value); err != nil {
+				return err
+			}
+
 		case "KeyAttributes":
 			if err := awsRestjson1_deserializeDocumentAttributes(&sv.KeyAttributes, value); err != nil {
 				return err
@@ -4725,6 +4775,11 @@ func awsRestjson1_deserializeDocumentServiceLevelIndicatorMetric(v **types.Servi
 
 	for key, value := range shape {
 		switch key {
+		case "DependencyConfig":
+			if err := awsRestjson1_deserializeDocumentDependencyConfig(&sv.DependencyConfig, value); err != nil {
+				return err
+			}
+
 		case "KeyAttributes":
 			if err := awsRestjson1_deserializeDocumentAttributes(&sv.KeyAttributes, value); err != nil {
 				return err
@@ -4851,6 +4906,15 @@ func awsRestjson1_deserializeDocumentServiceLevelObjective(v **types.ServiceLeve
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "MetricSourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MetricSourceType to be of type string, got %T instead", value)
+				}
+				sv.MetricSourceType = types.MetricSourceType(jtv)
 			}
 
 		case "Name":
@@ -5301,9 +5365,32 @@ func awsRestjson1_deserializeDocumentServiceLevelObjectiveSummary(v **types.Serv
 				}
 			}
 
+		case "DependencyConfig":
+			if err := awsRestjson1_deserializeDocumentDependencyConfig(&sv.DependencyConfig, value); err != nil {
+				return err
+			}
+
+		case "EvaluationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EvaluationType to be of type string, got %T instead", value)
+				}
+				sv.EvaluationType = types.EvaluationType(jtv)
+			}
+
 		case "KeyAttributes":
 			if err := awsRestjson1_deserializeDocumentAttributes(&sv.KeyAttributes, value); err != nil {
 				return err
+			}
+
+		case "MetricSourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MetricSourceType to be of type string, got %T instead", value)
+				}
+				sv.MetricSourceType = types.MetricSourceType(jtv)
 			}
 
 		case "Name":

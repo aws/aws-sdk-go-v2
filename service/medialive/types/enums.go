@@ -4432,18 +4432,19 @@ type InputType string
 
 // Enum values for InputType
 const (
-	InputTypeUdpPush      InputType = "UDP_PUSH"
-	InputTypeRtpPush      InputType = "RTP_PUSH"
-	InputTypeRtmpPush     InputType = "RTMP_PUSH"
-	InputTypeRtmpPull     InputType = "RTMP_PULL"
-	InputTypeUrlPull      InputType = "URL_PULL"
-	InputTypeMp4File      InputType = "MP4_FILE"
-	InputTypeMediaconnect InputType = "MEDIACONNECT"
-	InputTypeInputDevice  InputType = "INPUT_DEVICE"
-	InputTypeAwsCdi       InputType = "AWS_CDI"
-	InputTypeTsFile       InputType = "TS_FILE"
-	InputTypeSrtCaller    InputType = "SRT_CALLER"
-	InputTypeMulticast    InputType = "MULTICAST"
+	InputTypeUdpPush                InputType = "UDP_PUSH"
+	InputTypeRtpPush                InputType = "RTP_PUSH"
+	InputTypeRtmpPush               InputType = "RTMP_PUSH"
+	InputTypeRtmpPull               InputType = "RTMP_PULL"
+	InputTypeUrlPull                InputType = "URL_PULL"
+	InputTypeMp4File                InputType = "MP4_FILE"
+	InputTypeMediaconnect           InputType = "MEDIACONNECT"
+	InputTypeInputDevice            InputType = "INPUT_DEVICE"
+	InputTypeAwsCdi                 InputType = "AWS_CDI"
+	InputTypeTsFile                 InputType = "TS_FILE"
+	InputTypeSrtCaller              InputType = "SRT_CALLER"
+	InputTypeMulticast              InputType = "MULTICAST"
+	InputTypeSmpte2110ReceiverGroup InputType = "SMPTE_2110_RECEIVER_GROUP"
 )
 
 // Values returns all known values for InputType. Note that this can be expanded
@@ -4464,6 +4465,7 @@ func (InputType) Values() []InputType {
 		"TS_FILE",
 		"SRT_CALLER",
 		"MULTICAST",
+		"SMPTE_2110_RECEIVER_GROUP",
 	}
 }
 

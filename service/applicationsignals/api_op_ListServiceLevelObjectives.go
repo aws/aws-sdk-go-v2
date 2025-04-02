@@ -29,6 +29,10 @@ func (c *Client) ListServiceLevelObjectives(ctx context.Context, params *ListSer
 
 type ListServiceLevelObjectivesInput struct {
 
+	// Identifies the dependency using the DependencyKeyAttributes and
+	// DependencyOperationName .
+	DependencyConfig *types.DependencyConfig
+
 	// If you are using this operation in a monitoring account, specify true to
 	// include SLO from source accounts in the returned data.
 	//
@@ -61,6 +65,16 @@ type ListServiceLevelObjectivesInput struct {
 	// The maximum number of results to return in one operation. If you omit this
 	// parameter, the default of 50 is used.
 	MaxResults *int32
+
+	// Use this optional field to only include SLOs with the specified metric source
+	// types in the output. Supported types are:
+	//
+	//   - Service operation
+	//
+	//   - Service dependency
+	//
+	//   - CloudWatch metric
+	MetricSourceTypes []types.MetricSourceType
 
 	// Include this value, if it was returned by the previous operation, to get the
 	// next set of service level objectives.
@@ -155,6 +169,9 @@ func (c *Client) addOperationListServiceLevelObjectivesMiddlewares(stack *middle
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
+	if err = addOpListServiceLevelObjectivesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceLevelObjectives(options.Region), middleware.Before); err != nil {

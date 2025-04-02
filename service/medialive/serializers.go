@@ -1630,6 +1630,13 @@ func awsRestjson1_serializeOpDocumentCreateInputInput(v *CreateInputInput, value
 		ok.String(*v.RoleArn)
 	}
 
+	if v.Smpte2110ReceiverGroupSettings != nil {
+		ok := object.Key("smpte2110ReceiverGroupSettings")
+		if err := awsRestjson1_serializeDocumentSmpte2110ReceiverGroupSettings(v.Smpte2110ReceiverGroupSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Sources != nil {
 		ok := object.Key("sources")
 		if err := awsRestjson1_serializeDocument__listOfInputSourceRequest(v.Sources, ok); err != nil {
@@ -9345,6 +9352,13 @@ func awsRestjson1_serializeOpDocumentUpdateInputInput(v *UpdateInputInput, value
 		ok.String(*v.RoleArn)
 	}
 
+	if v.Smpte2110ReceiverGroupSettings != nil {
+		ok := object.Key("smpte2110ReceiverGroupSettings")
+		if err := awsRestjson1_serializeDocumentSmpte2110ReceiverGroupSettings(v.Smpte2110ReceiverGroupSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Sources != nil {
 		ok := object.Key("sources")
 		if err := awsRestjson1_serializeDocument__listOfInputSourceRequest(v.Sources, ok); err != nil {
@@ -10509,6 +10523,19 @@ func awsRestjson1_serializeDocument__listOfInputRequestDestinationRoute(v []type
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfInputSdpLocation(v []types.InputSdpLocation, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentInputSdpLocation(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfInputSourceRequest(v []types.InputSourceRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -10787,6 +10814,19 @@ func awsRestjson1_serializeDocument__listOfScte35Descriptor(v []types.Scte35Desc
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentScte35Descriptor(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfSmpte2110ReceiverGroup(v []types.Smpte2110ReceiverGroup, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSmpte2110ReceiverGroup(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -14889,6 +14929,23 @@ func awsRestjson1_serializeDocumentInputRequestDestinationRoute(v *types.InputRe
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInputSdpLocation(v *types.InputSdpLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MediaIndex != nil {
+		ok := object.Key("mediaIndex")
+		ok.Integer(*v.MediaIndex)
+	}
+
+	if v.SdpUrl != nil {
+		ok := object.Key("sdpUrl")
+		ok.String(*v.SdpUrl)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInputSettings(v *types.InputSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17602,6 +17659,62 @@ func awsRestjson1_serializeDocumentScte35TimeSignalScheduleActionSettings(v *typ
 	if v.Scte35Descriptors != nil {
 		ok := object.Key("scte35Descriptors")
 		if err := awsRestjson1_serializeDocument__listOfScte35Descriptor(v.Scte35Descriptors, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSmpte2110ReceiverGroup(v *types.Smpte2110ReceiverGroup, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SdpSettings != nil {
+		ok := object.Key("sdpSettings")
+		if err := awsRestjson1_serializeDocumentSmpte2110ReceiverGroupSdpSettings(v.SdpSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSmpte2110ReceiverGroupSdpSettings(v *types.Smpte2110ReceiverGroupSdpSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AncillarySdps != nil {
+		ok := object.Key("ancillarySdps")
+		if err := awsRestjson1_serializeDocument__listOfInputSdpLocation(v.AncillarySdps, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AudioSdps != nil {
+		ok := object.Key("audioSdps")
+		if err := awsRestjson1_serializeDocument__listOfInputSdpLocation(v.AudioSdps, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VideoSdp != nil {
+		ok := object.Key("videoSdp")
+		if err := awsRestjson1_serializeDocumentInputSdpLocation(v.VideoSdp, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSmpte2110ReceiverGroupSettings(v *types.Smpte2110ReceiverGroupSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Smpte2110ReceiverGroups != nil {
+		ok := object.Key("smpte2110ReceiverGroups")
+		if err := awsRestjson1_serializeDocument__listOfSmpte2110ReceiverGroup(v.Smpte2110ReceiverGroups, ok); err != nil {
 			return err
 		}
 	}

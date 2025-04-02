@@ -557,6 +557,13 @@ func awsRestjson1_serializeOpDocumentCreateBotInput(v *CreateBotInput, value smi
 		ok.String(*v.Description)
 	}
 
+	if v.ErrorLogSettings != nil {
+		ok := object.Key("errorLogSettings")
+		if err := awsRestjson1_serializeDocumentErrorLogSettings(v.ErrorLogSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IdleSessionTTLInSeconds != nil {
 		ok := object.Key("idleSessionTTLInSeconds")
 		ok.Integer(*v.IdleSessionTTLInSeconds)
@@ -1310,6 +1317,13 @@ func awsRestjson1_serializeOpDocumentCreateIntentInput(v *CreateIntentInput, val
 	if v.ParentIntentSignature != nil {
 		ok := object.Key("parentIntentSignature")
 		ok.String(*v.ParentIntentSignature)
+	}
+
+	if v.QInConnectIntentConfiguration != nil {
+		ok := object.Key("qInConnectIntentConfiguration")
+		if err := awsRestjson1_serializeDocumentQInConnectIntentConfiguration(v.QInConnectIntentConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.QnAIntentConfiguration != nil {
@@ -9568,6 +9582,13 @@ func awsRestjson1_serializeOpDocumentUpdateBotInput(v *UpdateBotInput, value smi
 		ok.String(*v.Description)
 	}
 
+	if v.ErrorLogSettings != nil {
+		ok := object.Key("errorLogSettings")
+		if err := awsRestjson1_serializeDocumentErrorLogSettings(v.ErrorLogSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IdleSessionTTLInSeconds != nil {
 		ok := object.Key("idleSessionTTLInSeconds")
 		ok.Integer(*v.IdleSessionTTLInSeconds)
@@ -10258,6 +10279,13 @@ func awsRestjson1_serializeOpDocumentUpdateIntentInput(v *UpdateIntentInput, val
 	if v.ParentIntentSignature != nil {
 		ok := object.Key("parentIntentSignature")
 		ok.String(*v.ParentIntentSignature)
+	}
+
+	if v.QInConnectIntentConfiguration != nil {
+		ok := object.Key("qInConnectIntentConfiguration")
+		if err := awsRestjson1_serializeDocumentQInConnectIntentConfiguration(v.QInConnectIntentConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.QnAIntentConfiguration != nil {
@@ -11727,6 +11755,13 @@ func awsRestjson1_serializeDocumentBotImportSpecification(v *types.BotImportSpec
 		}
 	}
 
+	if v.ErrorLogSettings != nil {
+		ok := object.Key("errorLogSettings")
+		if err := awsRestjson1_serializeDocumentErrorLogSettings(v.ErrorLogSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IdleSessionTTLInSeconds != nil {
 		ok := object.Key("idleSessionTTLInSeconds")
 		ok.Integer(*v.IdleSessionTTLInSeconds)
@@ -12687,6 +12722,18 @@ func awsRestjson1_serializeDocumentEncryptionSetting(v *types.EncryptionSetting,
 	if v.KmsKeyArn != nil {
 		ok := object.Key("kmsKeyArn")
 		ok.String(*v.KmsKeyArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentErrorLogSettings(v *types.ErrorLogSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil
@@ -13944,6 +13991,32 @@ func awsRestjson1_serializeDocumentPromptSpecification(v *types.PromptSpecificat
 	if v.PromptAttemptsSpecification != nil {
 		ok := object.Key("promptAttemptsSpecification")
 		if err := awsRestjson1_serializeDocumentPromptAttemptsSpecificationMap(v.PromptAttemptsSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQInConnectAssistantConfiguration(v *types.QInConnectAssistantConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssistantArn != nil {
+		ok := object.Key("assistantArn")
+		ok.String(*v.AssistantArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQInConnectIntentConfiguration(v *types.QInConnectIntentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.QInConnectAssistantConfiguration != nil {
+		ok := object.Key("qInConnectAssistantConfiguration")
+		if err := awsRestjson1_serializeDocumentQInConnectAssistantConfiguration(v.QInConnectAssistantConfiguration, ok); err != nil {
 			return err
 		}
 	}
