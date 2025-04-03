@@ -690,7 +690,7 @@ func TestDownload_WithMismatch(t *testing.T) {
 					ETag:          aws.String(etag),
 				}
 			}
-		case 3:
+		case 1:
 			// Give a chance for the multipart chunks to be queued up
 			time.Sleep(1 * time.Second)
 			// mock the precondition error when object is synchronously updated
