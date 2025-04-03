@@ -358,8 +358,8 @@ func (d *downloader) downloadChunk(chunk dlchunk) error {
 
 	// Get the next byte range of data
 	params.Range = aws.String(chunk.ByteRange())
-	if params.VersionId == nil && d.etag != "" {
-		params.IfMatch = aws.String(d.etag)
+	if params.VersionId == nil && d.getETag() != "" {
+		params.IfMatch = aws.String(d.getETag())
 	}
 
 	var n int64
@@ -476,6 +476,13 @@ func (d *downloader) setETag(resp *s3.GetObjectOutput) {
 		return
 	}
 	d.etag = aws.ToString(resp.ETag)
+}
+
+func (d *downloader) getETag() string {
+	d.m.Lock()
+	defer d.m.Unlock()
+
+	return d.etag
 }
 
 func (d *downloader) incrWritten(n int64) {

@@ -691,6 +691,8 @@ func TestDownload_WithMismatch(t *testing.T) {
 				}
 			}
 		case 3:
+			// Give a chance for the multipart chunks to be queued up
+			time.Sleep(1 * time.Second)
 			// mock the precondition error when object is synchronously updated
 			err = fmt.Errorf("api error PreconditionFailed")
 		default:
