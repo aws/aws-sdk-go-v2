@@ -12535,6 +12535,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the VPC endpoint service in your account that is connected to your MongoDB Atlas cluster.</p>"
                     }
+                },
+                "textIndexName": {
+                    "target": "com.amazonaws.bedrockagent#MongoDbAtlasIndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the text search index in the MongoDB collection. This is required for using the hybrid search\n      feature.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14279,6 +14285,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the field in which Amazon Bedrock stores metadata about the vector store.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "customMetadataField": {
+                    "target": "com.amazonaws.bedrockagent#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide a name for the universal metadata field where Amazon Bedrock will store any custom metadata from \n      your data source.</p>"
                     }
                 }
             },

@@ -153,6 +153,140 @@
                 "smithy.api#documentation": "<p>Used to associate a configuration set with a MailManager archive.</p>"
             }
         },
+        "com.amazonaws.sesv2#Attachment": {
+            "type": "structure",
+            "members": {
+                "RawContent": {
+                    "target": "com.amazonaws.sesv2#RawAttachmentData",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The raw data of the attachment. It needs to be base64-encoded if you are accessing Amazon SES\n            directly through the HTTPS interface. If you are accessing Amazon SES using an Amazon Web Services\n            SDK, the SDK takes care of the base 64-encoding for you.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentDisposition": {
+                    "target": "com.amazonaws.sesv2#AttachmentContentDisposition",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A standard descriptor indicating how the attachment should be rendered in the email.\n            Supported values: <code>ATTACHMENT</code> or <code>INLINE</code>.</p>"
+                    }
+                },
+                "FileName": {
+                    "target": "com.amazonaws.sesv2#AttachmentFileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file name for the attachment as it will appear in the email.\n            Amazon SES restricts certain file extensions. To ensure attachments are accepted,\n            check the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/mime-types.html\">Unsupported attachment types</a>\n            in the Amazon SES Developer Guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentDescription": {
+                    "target": "com.amazonaws.sesv2#AttachmentContentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A brief description of the attachment content.</p>"
+                    }
+                },
+                "ContentId": {
+                    "target": "com.amazonaws.sesv2#AttachmentContentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Unique identifier for the attachment, used for referencing attachments with INLINE disposition in HTML content.</p>"
+                    }
+                },
+                "ContentTransferEncoding": {
+                    "target": "com.amazonaws.sesv2#AttachmentContentTransferEncoding",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies how the attachment is encoded.\n            Supported values: <code>BASE64</code>, <code>QUOTED_PRINTABLE</code>, <code>SEVEN_BIT</code>.</p>"
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.sesv2#AttachmentContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The MIME type of the attachment.</p>\n         <note>\n            <p>Example: <code>application/pdf</code>, <code>image/jpeg</code>\n            </p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Contains metadata and attachment raw content.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#AttachmentContentDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.sesv2#AttachmentContentDisposition": {
+            "type": "enum",
+            "members": {
+                "ATTACHMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACHMENT"
+                    }
+                },
+                "INLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INLINE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sesv2#AttachmentContentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 78
+                }
+            }
+        },
+        "com.amazonaws.sesv2#AttachmentContentTransferEncoding": {
+            "type": "enum",
+            "members": {
+                "BASE64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASE64"
+                    }
+                },
+                "QUOTED_PRINTABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUOTED_PRINTABLE"
+                    }
+                },
+                "SEVEN_BIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEVEN_BIT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sesv2#AttachmentContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 78
+                }
+            }
+        },
+        "com.amazonaws.sesv2#AttachmentFileName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.sesv2#AttachmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#Attachment"
+            }
+        },
         "com.amazonaws.sesv2#AttributesData": {
             "type": "string"
         },
@@ -3609,7 +3743,7 @@
                 "Simple": {
                     "target": "com.amazonaws.sesv2#Message",
                     "traits": {
-                        "smithy.api#documentation": "<p>The simple email message. The message consists of a subject and a message body.</p>"
+                        "smithy.api#documentation": "<p>The simple email message. The message consists of a subject, message body and attachments list.</p>"
                     }
                 },
                 "Raw": {
@@ -3626,7 +3760,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that defines the entire content of the email, including the message headers\n            and the body content. You can create a simple email message, in which you specify the\n            subject and the text and HTML versions of the message body. You can also create raw\n            messages, in which you specify a complete MIME-formatted message. Raw messages can\n            include attachments and custom headers.</p>"
+                "smithy.api#documentation": "<p>An object that defines the entire content of the email, including the message headers, body content,\n            and attachments. For a simple email message, you specify the subject and provide both text\n            and HTML versions of the message body. You can also add attachments to simple and templated\n            messages. For a raw message, you provide a complete MIME-formatted message, which can\n            include custom headers and attachments.</p>"
             }
         },
         "com.amazonaws.sesv2#EmailInsights": {
@@ -8059,6 +8193,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of message headers that will be added to the email message.</p>"
                     }
+                },
+                "Attachments": {
+                    "target": "com.amazonaws.sesv2#AttachmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The List of attachments to include in your email. All recipients will receive the same attachments.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10139,6 +10279,9 @@
                     "max": 255
                 }
             }
+        },
+        "com.amazonaws.sesv2#RawAttachmentData": {
+            "type": "blob"
         },
         "com.amazonaws.sesv2#RawMessage": {
             "type": "structure",
@@ -12917,6 +13060,12 @@
                     "target": "com.amazonaws.sesv2#MessageHeaderList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of message headers that will be added to the email message.</p>"
+                    }
+                },
+                "Attachments": {
+                    "target": "com.amazonaws.sesv2#AttachmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The List of attachments to include in your email. All recipients will receive the same attachments.</p>"
                     }
                 }
             },

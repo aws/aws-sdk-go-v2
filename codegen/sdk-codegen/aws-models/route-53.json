@@ -10920,6 +10920,18 @@
                     "traits": {
                         "smithy.api#enumValue": "ap-southeast-7"
                     }
+                },
+                "us_gov_east_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-gov-east-1"
+                    }
+                },
+                "us_gov_west_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-gov-west-1"
+                    }
                 }
             },
             "traits": {

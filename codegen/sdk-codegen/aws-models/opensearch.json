@@ -2044,18 +2044,18 @@
                 "key": {
                     "target": "com.amazonaws.opensearch#AppConfigType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the item to configure, such as admin role for the OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The configuration item to set, such as the admin role for the OpenSearch application.</p>"
                     }
                 },
                 "value": {
                     "target": "com.amazonaws.opensearch#AppConfigValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the value to configure for the key, such as an IAM user ARN.</p>"
+                        "smithy.api#documentation": "<p>The value assigned to the configuration key, such as an IAM user ARN.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configurations of the OpenSearch Application.</p>"
+                "smithy.api#documentation": "<p>Configuration settings for an OpenSearch application. For more information, see \n   see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html\">Using the OpenSearch user interface in Amazon OpenSearch Service</a>.</p>"
             }
         },
         "com.amazonaws.opensearch#AppConfigType": {
@@ -2159,7 +2159,7 @@
                 "id": {
                     "target": "com.amazonaws.opensearch#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier for an OpenSearch application.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of an OpenSearch application.</p>"
                     }
                 },
                 "arn": {
@@ -2168,36 +2168,36 @@
                 "name": {
                     "target": "com.amazonaws.opensearch#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of an OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The name of an OpenSearch application.</p>"
                     }
                 },
                 "endpoint": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Endpoint URL of an OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The endpoint URL of an OpenSearch application.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.opensearch#ApplicationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status of an OpenSearch Application. Possible values are <code>CREATING</code>, <code>UPDATING</code>,<code> DELETING</code>, <code>FAILED</code>, <code>ACTIVE</code>, and <code>DELETED</code>.</p>"
+                        "smithy.api#documentation": "<p>The current status of an OpenSearch application. Possible values: <code>CREATING</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>FAILED</code>, <code>ACTIVE</code>, and <code>DELETED</code>.</p>"
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.opensearch#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Timestamp at which an OpenSearch Application was created.</p>"
+                        "smithy.api#documentation": "<p>The timestamp when an OpenSearch application was created.</p>"
                     }
                 },
                 "lastUpdatedAt": {
                     "target": "com.amazonaws.opensearch#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Timestamp at which an OpenSearch Application was last updated.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of the last update to an OpenSearch application.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Basic information of the OpenSearch Application.</p>"
+                "smithy.api#documentation": "<p>Basic details of an OpenSearch application.</p>"
             }
         },
         "com.amazonaws.opensearch#AssociatePackage": {
@@ -3646,7 +3646,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an OpenSearch Application.</p>",
+                "smithy.api#documentation": "<p>Creates an OpenSearch UI application. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html\">Using the OpenSearch user interface in Amazon OpenSearch Service</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/opensearch/application",
@@ -3660,33 +3660,33 @@
                 "clientToken": {
                     "target": "com.amazonaws.opensearch#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique client idempotency token. It will be auto generated if not provided.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.opensearch#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the OpenSearch Appication to create. Application names are unique across the applications\n  owned by an account within an Amazon Web Services Region.</p>",
+                        "smithy.api#documentation": "<p>The unique name of the OpenSearch application. Names must be unique within an Amazon Web Services Region for each account.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "dataSources": {
                     "target": "com.amazonaws.opensearch#DataSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data sources to be associated with the OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The data sources to link to the OpenSearch application.</p>"
                     }
                 },
                 "iamIdentityCenterOptions": {
                     "target": "com.amazonaws.opensearch#IamIdentityCenterOptionsInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings of IAM Identity Center for the OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>Configuration settings for integrating Amazon Web Services IAM Identity Center with the OpenSearch application.</p>"
                     }
                 },
                 "appConfigs": {
                     "target": "com.amazonaws.opensearch#AppConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configurations of the OpenSearch Application, inlcuding admin configuration.</p>"
+                        "smithy.api#documentation": "<p>Configuration settings for the OpenSearch application, including administrative options.</p>"
                     }
                 },
                 "tagList": {
@@ -3703,13 +3703,13 @@
                 "id": {
                     "target": "com.amazonaws.opensearch#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier for the created OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier assigned to the OpenSearch application.</p>"
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.opensearch#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the created OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The name of the OpenSearch application.</p>"
                     }
                 },
                 "arn": {
@@ -3718,19 +3718,19 @@
                 "dataSources": {
                     "target": "com.amazonaws.opensearch#DataSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data sources associated with the created OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The data sources linked to the OpenSearch application.</p>"
                     }
                 },
                 "iamIdentityCenterOptions": {
                     "target": "com.amazonaws.opensearch#IamIdentityCenterOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings of IAM Identity Center for the created OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The IAM Identity Center settings configured for the OpenSearch application.</p>"
                     }
                 },
                 "appConfigs": {
                     "target": "com.amazonaws.opensearch#AppConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configurations of the OpenSearch Application, inlcuding admin configuration.</p>"
+                        "smithy.api#documentation": "<p>Configuration settings for the OpenSearch application, including administrative options.</p>"
                     }
                 },
                 "tagList": {
@@ -3739,7 +3739,7 @@
                 "createdAt": {
                     "target": "com.amazonaws.opensearch#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Timestamp when the OpenSearch Application was created.</p>"
+                        "smithy.api#documentation": "<p>The timestamp indicating when the OpenSearch application was created.</p>"
                     }
                 }
             },
@@ -3884,7 +3884,7 @@
                 "IdentityCenterOptions": {
                     "target": "com.amazonaws.opensearch#IdentityCenterOptionsInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options for IAM Identity Center Option control for the domain.</p>"
+                        "smithy.api#documentation": "<p>Configuration options for enabling and managing IAM Identity Center integration within a domain.</p>"
                     }
                 },
                 "TagList": {
@@ -4417,7 +4417,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing OpenSearch Application.</p>",
+                "smithy.api#documentation": "<p>Deletes a specified OpenSearch application.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2021-01-01/opensearch/application/{id}",
@@ -4431,7 +4431,7 @@
                 "id": {
                     "target": "com.amazonaws.opensearch#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier for the OpenSearch Application that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the OpenSearch application to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6626,7 +6626,7 @@
                 "IdentityCenterOptions": {
                     "target": "com.amazonaws.opensearch#IdentityCenterOptionsStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container for IAM Identity Center Option control for the domain.</p>"
+                        "smithy.api#documentation": "<p>Configuration options for enabling and managing IAM Identity Center integration within a domain.</p>"
                     }
                 },
                 "AutoTuneOptions": {
@@ -6916,7 +6916,7 @@
                 "NodeType": {
                     "target": "com.amazonaws.opensearch#NodeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the nodes is a data, master, or ultrawarm node.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the nodes is a data, master, or UltraWarm node.</p>"
                     }
                 },
                 "AvailabilityZone": {
@@ -6946,7 +6946,7 @@
                 "StorageVolumeType": {
                     "target": "com.amazonaws.opensearch#VolumeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the nodes has EBS storage, indicates if the volume type is GP2 or GP3. Only applicable\n   for data nodes. </p>"
+                        "smithy.api#documentation": "<p>If the nodes has EBS storage, indicates if the volume type is gp2 or gp3. Only applicable\n   for data nodes. </p>"
                     }
                 },
                 "StorageSize": {
@@ -7320,7 +7320,7 @@
                 "IdentityCenterOptions": {
                     "target": "com.amazonaws.opensearch#IdentityCenterOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container for IAM Identity Center Option control for the domain.</p>"
+                        "smithy.api#documentation": "<p>Configuration options for controlling IAM Identity Center integration within a domain.</p>"
                     }
                 },
                 "AutoTuneOptions": {
@@ -7751,7 +7751,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Check the configuration and status of an existing OpenSearch Application.</p>",
+                "smithy.api#documentation": "<p>Retrieves the configuration and status of an existing OpenSearch application.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/opensearch/application/{id}",
@@ -7765,7 +7765,7 @@
                 "id": {
                     "target": "com.amazonaws.opensearch#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier of the checked OpenSearch Application.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the OpenSearch application to retrieve.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7781,7 +7781,7 @@
                 "id": {
                     "target": "com.amazonaws.opensearch#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier of the checked OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the OpenSearch application.</p>"
                     }
                 },
                 "arn": {
@@ -7790,49 +7790,49 @@
                 "name": {
                     "target": "com.amazonaws.opensearch#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the checked OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The name of the OpenSearch application.</p>"
                     }
                 },
                 "endpoint": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Endpoint URL of the checked OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The endpoint URL of the OpenSearch application.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.opensearch#ApplicationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Current status of the checked OpenSearch Application. Possible values are <code>CREATING</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>FAILED</code>, <code>ACTIVE</code>, and <code>DELETED</code>.</p>"
+                        "smithy.api#documentation": "<p>The current status of the OpenSearch application. Possible values: <code>CREATING</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>FAILED</code>, <code>ACTIVE</code>, and <code>DELETED</code>.</p>"
                     }
                 },
                 "iamIdentityCenterOptions": {
                     "target": "com.amazonaws.opensearch#IamIdentityCenterOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>IAM Identity Center settings for the checked OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The IAM Identity Center settings configured for the OpenSearch application.</p>"
                     }
                 },
                 "dataSources": {
                     "target": "com.amazonaws.opensearch#DataSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>Associated data sources to the checked OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The data sources associated with the OpenSearch application.</p>"
                     }
                 },
                 "appConfigs": {
                     "target": "com.amazonaws.opensearch#AppConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>App configurations of the checked OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The configuration settings of the OpenSearch application.</p>"
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.opensearch#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Timestamp at which the checked OpenSearch Application was created.</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the OpenSearch application was created.</p>"
                     }
                 },
                 "lastUpdatedAt": {
                     "target": "com.amazonaws.opensearch#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Timestamp at which the checked OpenSearch Application was last updated.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of the last update to the OpenSearch application.</p>"
                     }
                 }
             },
@@ -8507,7 +8507,7 @@
                 "enabled": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>IAM Identity Center is enabled for the OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether IAM Identity Center is enabled for the OpenSearch Application.</p>"
                     }
                 },
                 "iamIdentityCenterInstanceArn": {
@@ -8516,7 +8516,7 @@
                 "iamRoleForIdentityCenterApplicationArn": {
                     "target": "com.amazonaws.opensearch#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name of the IAM Identity Center's Application created for the OpenSearch Application after enabling IAM Identity Center.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role assigned to the IAM Identity Center application for the OpenSearch Application.</p>"
                     }
                 },
                 "iamIdentityCenterApplicationArn": {
@@ -8524,7 +8524,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings for IAM Identity Center for an OpenSearch Application.</p>"
+                "smithy.api#documentation": "<p>Configuration settings for IAM Identity Center in an OpenSearch Application.</p>"
             }
         },
         "com.amazonaws.opensearch#IamIdentityCenterOptionsInput": {
@@ -8533,7 +8533,7 @@
                 "enabled": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable/disable settings for IAM Identity Center.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether IAM Identity Center is enabled or disabled.</p>"
                     }
                 },
                 "iamIdentityCenterInstanceArn": {
@@ -8542,12 +8542,12 @@
                 "iamRoleForIdentityCenterApplicationArn": {
                     "target": "com.amazonaws.opensearch#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name of IAM Identity Center's application.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM role associated with the IAM Identity Center application.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings for IAM Identity Center.</p>"
+                "smithy.api#documentation": "<p>Configuration settings for enabling and managing IAM Identity Center.</p>"
             }
         },
         "com.amazonaws.opensearch#Id": {
@@ -8582,42 +8582,42 @@
                 "EnabledAPIAccess": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>True to enable IAM Identity Center for API access in Amazon OpenSearch Service.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether IAM Identity Center is enabled for the application.</p>"
                     }
                 },
                 "IdentityCenterInstanceARN": {
                     "target": "com.amazonaws.opensearch#IdentityCenterInstanceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for IAM Identity Center Instance.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center instance.</p>"
                     }
                 },
                 "SubjectKey": {
                     "target": "com.amazonaws.opensearch#SubjectKeyIdCOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the attribute that contains the subject (username, userID, email) of IAM Identity Center.</p>"
+                        "smithy.api#documentation": "<p>Specifies the attribute that contains the subject identifier (such as username, user ID, or email) in IAM Identity Center.</p>"
                     }
                 },
                 "RolesKey": {
                     "target": "com.amazonaws.opensearch#RolesKeyIdCOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the attribute that contains the backend role (groupName, groupID) of IAM Identity Center</p>"
+                        "smithy.api#documentation": "<p>Specifies the attribute that contains the backend role identifier (such as group name or group ID) in IAM Identity Center.</p>"
                     }
                 },
                 "IdentityCenterApplicationARN": {
                     "target": "com.amazonaws.opensearch#IdentityCenterApplicationARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for IAM Identity Center Application which will integrate with Amazon OpenSearch Service.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center application that integrates with Amazon OpenSearch Service.</p>"
                     }
                 },
                 "IdentityStoreId": {
                     "target": "com.amazonaws.opensearch#IdentityStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of IAM Identity Store.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the IAM Identity Store.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for IAM Identity Center Options settings.</p>"
+                "smithy.api#documentation": "<p>Settings container for integrating IAM Identity Center with OpenSearch UI applications, \n   which enables enabling secure user authentication and access control across multiple data sources.\n   This setup supports single sign-on (SSO) through IAM Identity Center, allowing centralized user management.</p>"
             }
         },
         "com.amazonaws.opensearch#IdentityCenterOptionsInput": {
@@ -8626,30 +8626,30 @@
                 "EnabledAPIAccess": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>True to enable IAM Identity Center for API access in Amazon OpenSearch Service.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether IAM Identity Center is enabled for API access in Amazon OpenSearch Service.</p>"
                     }
                 },
                 "IdentityCenterInstanceARN": {
                     "target": "com.amazonaws.opensearch#IdentityCenterInstanceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for IAM Identity Center Instance which will be used for IAM Identity Center Application creation.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance used to create an OpenSearch UI application that uses IAM Identity Center for authentication.</p>"
                     }
                 },
                 "SubjectKey": {
                     "target": "com.amazonaws.opensearch#SubjectKeyIdCOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the attribute that contains the subject (username, userID, email) of IAM Identity Center.</p>"
+                        "smithy.api#documentation": "<p>Specifies the attribute that contains the subject identifier (such as username, user ID, or email) in IAM Identity Center.</p>"
                     }
                 },
                 "RolesKey": {
                     "target": "com.amazonaws.opensearch#RolesKeyIdCOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the attribute that contains the backend role (groupName, groupID) of IAM Identity Center</p>"
+                        "smithy.api#documentation": "<p>Specifies the attribute that contains the backend role identifier (such as group name or group ID) in IAM Identity Center.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for IAM Identity Center Options settings.</p>"
+                "smithy.api#documentation": "<p>Configuration settings for enabling and managing IAM Identity Center.</p>"
             }
         },
         "com.amazonaws.opensearch#IdentityCenterOptionsStatus": {
@@ -8658,20 +8658,20 @@
                 "Options": {
                     "target": "com.amazonaws.opensearch#IdentityCenterOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container for IAM Identity Center Options settings.</p>",
+                        "smithy.api#documentation": "<p>Configuration settings for IAM Identity Center integration.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.opensearch#OptionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of IAM Identity Center Options settings for a domain.</p>",
+                        "smithy.api#documentation": "<p>The status of IAM Identity Center configuration settings for a domain.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The status of IAM Identity Center Options settings for a domain.</p>"
+                "smithy.api#documentation": "<p>The status of IAM Identity Center configuration settings for a domain.</p>"
             }
         },
         "com.amazonaws.opensearch#IdentityPoolId": {
@@ -9223,7 +9223,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List all OpenSearch Applications under your account.</p>",
+                "smithy.api#documentation": "<p>Lists all OpenSearch applications under your account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/opensearch/list-applications",
@@ -9249,7 +9249,7 @@
                 "statuses": {
                     "target": "com.amazonaws.opensearch#ApplicationStatuses",
                     "traits": {
-                        "smithy.api#documentation": "<p>OpenSearch Application Status can be used as filters for the listing request. Possible values are <code>CREATING</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>FAILED</code>, <code>ACTIVE</code>, and <code>DELETED</code>.</p>",
+                        "smithy.api#documentation": "<p>Filters the list of OpenSearch applications by status. Possible values: <code>CREATING</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>FAILED</code>, <code>ACTIVE</code>, and <code>DELETED</code>.</p>",
                         "smithy.api#httpQuery": "statuses"
                     }
                 },
@@ -9271,7 +9271,7 @@
                 "ApplicationSummaries": {
                     "target": "com.amazonaws.opensearch#ApplicationSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>Summary of the OpenSearch Applications, including ID, ARN, name, endpoint, status, create time and last update time.</p>"
+                        "smithy.api#documentation": "<p>Summarizes OpenSearch applications, including ID, ARN, name, endpoint, status, creation time, and last update time.</p>"
                     }
                 },
                 "nextToken": {
@@ -10697,24 +10697,24 @@
                 "Enabled": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A boolean that indicates whether a particular node type is enabled or not.</p>"
+                        "smithy.api#documentation": "<p>A boolean value indicating whether a specific node type is active or inactive.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.opensearch#OpenSearchPartitionInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type of a particular node type in the cluster.</p>"
+                        "smithy.api#documentation": "<p>The instance type of a particular node within the cluster.</p>"
                     }
                 },
                 "Count": {
                     "target": "com.amazonaws.opensearch#IntegerClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of nodes of a particular node type in the cluster.</p>"
+                        "smithy.api#documentation": "<p>The number of nodes of a specific type within the cluster.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for specifying configuration of any node type.</p>"
+                "smithy.api#documentation": "<p>Configuration options for defining the setup of any node type within the cluster.</p>"
             }
         },
         "com.amazonaws.opensearch#NodeId": {
@@ -10732,18 +10732,18 @@
                 "NodeType": {
                     "target": "com.amazonaws.opensearch#NodeOptionsNodeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container for node type like coordinating.</p>"
+                        "smithy.api#documentation": "<p>Defines the type of node, such as coordinating nodes.</p>"
                     }
                 },
                 "NodeConfig": {
                     "target": "com.amazonaws.opensearch#NodeConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container for specifying configuration of any node type.</p>"
+                        "smithy.api#documentation": "<p>Configuration options for defining the setup of any node type.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for specifying node type.</p>"
+                "smithy.api#documentation": "<p>Configuration settings for defining the node type within a cluster.</p>"
             }
         },
         "com.amazonaws.opensearch#NodeOptionsList": {
@@ -11965,7 +11965,7 @@
                 "PackageOwner": {
                     "target": "com.amazonaws.opensearch#PackageOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the package who is allowed to create/update a package and add users to the package scope.</p>"
+                        "smithy.api#documentation": "<p>The owner of the package who is allowed to create and update a package and add users to the package scope.</p>"
                     }
                 },
                 "PackageVendingOptions": {
@@ -11977,7 +11977,7 @@
                 "PackageEncryptionOptions": {
                     "target": "com.amazonaws.opensearch#PackageEncryptionOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Package Encryption Options for a package.</p>"
+                        "smithy.api#documentation": "<p>Encryption options for a package.</p>"
                     }
                 }
             },
@@ -11998,7 +11998,7 @@
                 "PrerequisitePackageIDList": {
                     "target": "com.amazonaws.opensearch#PackageIDList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of package IDs that must be associated with the domain with or before the package can be associated.</p>"
+                        "smithy.api#documentation": "<p>List of package IDs that must be linked to the domain before or simultaneously with the package association.</p>"
                     }
                 },
                 "AssociationConfiguration": {
@@ -12030,13 +12030,13 @@
                 "KmsKeyIdentifier": {
                     "target": "com.amazonaws.opensearch#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p> KMS key ID for encrypting the package.</p>"
+                        "smithy.api#documentation": "<p>KMS key ID for encrypting the package.</p>"
                     }
                 },
                 "EncryptionEnabled": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>This indicates whether encryption is enabled for the package.</p>",
+                        "smithy.api#documentation": "<p>Whether encryption is enabled for the package.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12223,13 +12223,13 @@
                 "VendingEnabled": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>This indicates whether vending is enabled for the package to determine if package can be used by other users.\n  </p>",
+                        "smithy.api#documentation": "<p>Indicates whether the package vending feature is enabled, allowing the package to be used by other users.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The vending options for a package to determine if the package can be used by other users.\n  </p>"
+                "smithy.api#documentation": "<p>Configuration options for determining whether a package can be made available for use by other users.</p>"
             }
         },
         "com.amazonaws.opensearch#PackageVersion": {
@@ -14019,7 +14019,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the OpenSearch Application. </p>",
+                "smithy.api#documentation": "<p>Updates the configuration and settings of an existing OpenSearch application.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2021-01-01/opensearch/application/{id}",
@@ -14033,7 +14033,7 @@
                 "id": {
                     "target": "com.amazonaws.opensearch#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier of the OpenSearch Application to be updated.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the OpenSearch application to be updated.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -14041,13 +14041,13 @@
                 "dataSources": {
                     "target": "com.amazonaws.opensearch#DataSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data sources to be associated with the OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The data sources to associate with the OpenSearch application.</p>"
                     }
                 },
                 "appConfigs": {
                     "target": "com.amazonaws.opensearch#AppConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configurations to be changed for the OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The configuration settings to modify for the OpenSearch application.</p>"
                     }
                 }
             },
@@ -14061,13 +14061,13 @@
                 "id": {
                     "target": "com.amazonaws.opensearch#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier of the updated OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the updated OpenSearch application.</p>"
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.opensearch#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the updated OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The name of the updated OpenSearch application.</p>"
                     }
                 },
                 "arn": {
@@ -14076,31 +14076,31 @@
                 "dataSources": {
                     "target": "com.amazonaws.opensearch#DataSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data sources associated with the updated OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The data sources associated with the updated OpenSearch application.</p>"
                     }
                 },
                 "iamIdentityCenterOptions": {
                     "target": "com.amazonaws.opensearch#IamIdentityCenterOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>IAM Identity Center settings for the updated OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The IAM Identity Center configuration for the updated OpenSearch application.</p>"
                     }
                 },
                 "appConfigs": {
                     "target": "com.amazonaws.opensearch#AppConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configurations for the updated OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The configuration settings for the updated OpenSearch application.</p>"
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.opensearch#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Timestamp at which the OpenSearch Application was created.</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the OpenSearch application was originally created.</p>"
                     }
                 },
                 "lastUpdatedAt": {
                     "target": "com.amazonaws.opensearch#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Timestamp at which the OpenSearch Application was last updated.</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the OpenSearch application was last updated.</p>"
                     }
                 }
             },

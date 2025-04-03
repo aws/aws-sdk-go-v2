@@ -1374,6 +1374,12 @@
                         "smithy.api#documentation": "<p>If you choose an Authenticated ingress endpoint, you must configure either an SMTP password or a secret\n            ARN.</p>"
                     }
                 },
+                "NetworkConfiguration": {
+                    "target": "com.amazonaws.mailmanager#NetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the network configuration for the ingress point.\n            This allows you to create an IPv4-only, Dual-Stack, or PrivateLink type of ingress point. If not specified, the default network type is IPv4-only.\n        </p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.mailmanager#TagList",
                     "traits": {
@@ -3289,6 +3295,12 @@
                         "smithy.api#documentation": "<p>The authentication configuration of the ingress endpoint resource.</p>"
                     }
                 },
+                "NetworkConfiguration": {
+                    "target": "com.amazonaws.mailmanager#NetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network configuration for the ingress point.</p>"
+                    }
+                },
                 "CreatedTimestamp": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -4071,6 +4083,60 @@
                 "smithy.api#documentation": "<p>The union type representing the allowed types for the left hand side of an IP\n            condition.</p>"
             }
         },
+        "com.amazonaws.mailmanager#IngressIpv6Attribute": {
+            "type": "enum",
+            "members": {
+                "SENDER_IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SENDER_IPV6"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mailmanager#IngressIpv6Expression": {
+            "type": "structure",
+            "members": {
+                "Evaluate": {
+                    "target": "com.amazonaws.mailmanager#IngressIpv6ToEvaluate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The left hand side argument of an IPv6 condition expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.mailmanager#IngressIpOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The matching operator for an IPv6 condition expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.mailmanager#Ipv6Cidrs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The right hand side argument of an IPv6 condition expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The union type representing the allowed types for the left hand side of an IPv6 condition.</p>"
+            }
+        },
+        "com.amazonaws.mailmanager#IngressIpv6ToEvaluate": {
+            "type": "union",
+            "members": {
+                "Attribute": {
+                    "target": "com.amazonaws.mailmanager#IngressIpv6Attribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enum type representing the allowed attribute types for an IPv6 condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure for an IPv6 based condition matching on the incoming mail.</p>"
+            }
+        },
         "com.amazonaws.mailmanager#IngressIsInAddressList": {
             "type": "structure",
             "members": {
@@ -4521,6 +4587,23 @@
                 "smithy.api#documentation": "<p>The union type representing the allowed types for the left hand side of a TLS\n            condition.</p>"
             }
         },
+        "com.amazonaws.mailmanager#IpType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "DUAL_STACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUAL_STACK"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mailmanager#Ipv4Cidr": {
             "type": "string",
             "traits": {
@@ -4531,6 +4614,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mailmanager#Ipv4Cidr"
+            }
+        },
+        "com.amazonaws.mailmanager#Ipv6Cidr": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 49
+                },
+                "smithy.api#pattern": "^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:))\\/(12[0-8]|1[0-1][0-9]|[1-9][0-9]|[0-9])$"
+            }
+        },
+        "com.amazonaws.mailmanager#Ipv6Cidrs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mailmanager#Ipv6Cidr"
             }
         },
         "com.amazonaws.mailmanager#JobId": {
@@ -6517,6 +6615,26 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$"
             }
         },
+        "com.amazonaws.mailmanager#NetworkConfiguration": {
+            "type": "union",
+            "members": {
+                "PublicNetworkConfiguration": {
+                    "target": "com.amazonaws.mailmanager#PublicNetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the network configuration for the public ingress point.</p>"
+                    }
+                },
+                "PrivateNetworkConfiguration": {
+                    "target": "com.amazonaws.mailmanager#PrivateNetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the network configuration for the private ingress point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The network type (IPv4-only, Dual-Stack, PrivateLink) of the ingress endpoint resource.</p>"
+            }
+        },
         "com.amazonaws.mailmanager#NoAuthentication": {
             "type": "structure",
             "members": {},
@@ -6555,6 +6673,12 @@
                     "target": "com.amazonaws.mailmanager#IngressIpv4Expression",
                     "traits": {
                         "smithy.api#documentation": "<p>This represents an IP based condition matching on the incoming mail. It performs the\n            operation configured in 'Operator' and evaluates the 'Protocol' object against the\n            'Value'.</p>"
+                    }
+                },
+                "Ipv6Expression": {
+                    "target": "com.amazonaws.mailmanager#IngressIpv6Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This represents an IPv6 based condition matching on the incoming mail. It performs the\n            operation configured in 'Operator' and evaluates the 'Protocol' object against the\n            'Value'.</p>"
                     }
                 },
                 "TlsExpression": {
@@ -6617,6 +6741,37 @@
             "type": "string",
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.mailmanager#PrivateNetworkConfiguration": {
+            "type": "structure",
+            "members": {
+                "VpcEndpointId": {
+                    "target": "com.amazonaws.mailmanager#VpcEndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPC endpoint to associate with this private ingress point.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the network configuration for the private ingress point.</p>"
+            }
+        },
+        "com.amazonaws.mailmanager#PublicNetworkConfiguration": {
+            "type": "structure",
+            "members": {
+                "IpType": {
+                    "target": "com.amazonaws.mailmanager#IpType",
+                    "traits": {
+                        "smithy.api#default": "IPV4",
+                        "smithy.api#documentation": "<p>The IP address type for the public ingress point. Valid values are IPV4 and DUAL_STACK.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the network configuration for the public ingress point.</p>"
             }
         },
         "com.amazonaws.mailmanager#QBusinessApplicationId": {
@@ -7596,9 +7751,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 18
+                    "max": 43
                 },
-                "smithy.api#pattern": "^(([0-9]|.|/)*)$"
+                "smithy.api#pattern": "^(([0-9]|.|:|/)*)$"
             }
         },
         "com.amazonaws.mailmanager#RuleIpToEvaluate": {
@@ -9582,6 +9737,12 @@
                 "smithy.api#documentation": "<p>The request validation has failed. For details, see the accompanying error message.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.mailmanager#VpcEndpointId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^vpce-[a-zA-Z0-9]{17}$"
             }
         }
     }

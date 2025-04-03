@@ -7322,6 +7322,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated phone number order time stamp, in ISO 8601 format.</p>"
                     }
+                },
+                "FocDate": {
+                    "target": "com.amazonaws.chimesdkvoice#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Firm Order Commitment (FOC) date for phone number porting orders. This field is null\n         if a phone number order is not a porting order.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10939,6 +10945,9 @@
                 "target": "com.amazonaws.chimesdkvoice#ValidateE911AddressResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkvoice#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.chimesdkvoice#BadRequestException"
                 },

@@ -2978,6 +2978,12 @@
                         "smithy.api#enumValue": "wo-SN"
                     }
                 },
+                "ZH_HK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-HK"
+                    }
+                },
                 "ZU_ZA": {
                     "target": "smithy.api#Unit",
                     "traits": {
