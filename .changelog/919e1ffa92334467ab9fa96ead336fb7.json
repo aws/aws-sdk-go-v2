@@ -1,8 +1,0 @@
-{
-    "id": "919e1ffa-9233-4467-ab9f-a96ead336fb7",
-    "type": "feature",
-    "description": "This release enables customers to provide attachments in the SESv2 SendEmail and SendBulkEmail APIs.",
-    "modules": [
-        "service/sesv2"
-    ]
-}

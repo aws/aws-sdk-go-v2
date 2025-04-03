@@ -1,8 +1,0 @@
-{
-    "id": "d28e180e-1497-4e48-b7ea-ff194dcafb9c",
-    "type": "feature",
-    "description": "Added FOC date as an attribute of PhoneNumberOrder, added AccessDeniedException as a possible return type of ValidateE911Address",
-    "modules": [
-        "service/chimesdkvoice"
-    ]
-}

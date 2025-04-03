@@ -1,3 +1,7 @@
+# v1.43.2 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.43.1 (2025-04-02)
 
 * **Documentation**: Fix for customer issues related to AWS account ID and size limitation for token.

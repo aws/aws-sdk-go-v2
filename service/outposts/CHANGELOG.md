@@ -1,3 +1,7 @@
+# v1.50.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.50.0 (2025-03-31)
 
 * **Feature**: Enabling Asset Level Capacity Management feature, which allows customers to create a Capacity Task for a single Asset on their active Outpost.

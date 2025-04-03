@@ -1,3 +1,7 @@
+# v1.47.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.47.0 (2025-03-24)
 
 * **Feature**: Mark EutranCid under LteNmr optional.

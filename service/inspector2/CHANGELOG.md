@@ -1,3 +1,7 @@
+# v1.36.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.36.0 (2025-03-11)
 
 * **Feature**: Adding componentArn to network reachability details

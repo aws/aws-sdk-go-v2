@@ -1,3 +1,7 @@
+# v1.58.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.58.0 (2025-03-31)
 
 * **Feature**: Add WebAppEndpointPolicy support for WebApps

@@ -1,3 +1,7 @@
+# v1.45.0 (2025-04-03)
+
+* **Feature**: This release enables customers to provide attachments in the SESv2 SendEmail and SendBulkEmail APIs.
+
 # v1.44.0 (2025-03-31)
 
 * **Feature**: Add dual-stack support to global endpoints.

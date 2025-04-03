@@ -1,3 +1,7 @@
+# v1.2.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.2.0 (2025-03-17)
 
 * **Feature**: Provide support for vector map styles in the GetStaticMap operation.

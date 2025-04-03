@@ -1,3 +1,7 @@
+# v1.24.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.24.0 (2025-03-17)
 
 * **Feature**: CloudWatch RUM now supports unminification of JS error stack traces.

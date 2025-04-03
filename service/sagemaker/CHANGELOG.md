@@ -1,3 +1,7 @@
+# v1.187.0 (2025-04-03)
+
+* **Feature**: Adds support for i3en, m7i, r7i instance types for SageMaker Hyperpod
+
 # v1.186.0 (2025-04-01)
 
 * **Feature**: Added tagging support for SageMaker notebook instance lifecycle configurations

@@ -1,3 +1,7 @@
+# v1.45.3 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.45.2 (2025-03-07)
 
 * **Documentation**: Documentation updates for Amazon CloudFront.

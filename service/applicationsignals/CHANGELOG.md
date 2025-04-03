@@ -1,3 +1,7 @@
+# v1.11.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.11.0 (2025-04-02)
 
 * **Feature**: Application Signals now supports creating Service Level Objectives on service dependencies. Users can now create or update SLOs on discovered service dependencies to monitor their standard application metrics.

@@ -1,8 +1,0 @@
-{
-    "id": "fd615191-b35f-40de-8e7c-be44acce160e",
-    "type": "feature",
-    "description": "Added optional \"customMetadataField\" for Amazon Aurora knowledge bases, allowing single-column metadata. Also added optional \"textIndexName\" for MongoDB Atlas knowledge bases, enabling hybrid search support.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

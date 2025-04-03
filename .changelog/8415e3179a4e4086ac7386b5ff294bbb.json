@@ -1,8 +1,0 @@
-{
-    "id": "8415e317-9a4e-4086-ac73-86b5ff294bbb",
-    "type": "feature",
-    "description": "Adds support for i3en, m7i, r7i instance types for SageMaker Hyperpod",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

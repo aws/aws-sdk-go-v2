@@ -1,3 +1,7 @@
+# v1.45.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.45.0 (2025-03-18)
 
 * **Feature**: Providing Tagging support for DomainName in AppSync

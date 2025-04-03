@@ -1,3 +1,7 @@
+# v1.12.0 (2025-04-03)
+
+* **Feature**: Add support for Dual_Stack and PrivateLink types of IngressPoint. For configuration requests, SES Mail Manager will now accept both IPv4/IPv6 dual-stack endpoints and AWS PrivateLink VPC endpoints for email receiving.
+
 # v1.11.0 (2025-03-20)
 
 * **Feature**: Amazon SES Mail Manager. Extended rule string and boolean expressions to support analysis in condition evaluation. Extended ingress point string expression to support analysis in condition evaluation

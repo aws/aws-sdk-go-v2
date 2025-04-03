@@ -1,3 +1,7 @@
+# v1.32.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.32.0 (2025-03-20)
 
 * **Feature**: Added appId field to Webhook responses

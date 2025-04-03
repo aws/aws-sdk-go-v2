@@ -1,3 +1,28 @@
+# Release (2025-04-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression`: [v1.7.76](feature/dynamodb/expression/CHANGELOG.md#v1776-2025-04-03)
+  * **Bug Fix**: allow nested list indices in expressions
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.41.0](service/bedrockagent/CHANGELOG.md#v1410-2025-04-03)
+  * **Feature**: Added optional "customMetadataField" for Amazon Aurora knowledge bases, allowing single-column metadata. Also added optional "textIndexName" for MongoDB Atlas knowledge bases, enabling hybrid search support.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.22.0](service/chimesdkvoice/CHANGELOG.md#v1220-2025-04-03)
+  * **Feature**: Added FOC date as an attribute of PhoneNumberOrder, added AccessDeniedException as a possible return type of ValidateE911Address
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.12.0](service/mailmanager/CHANGELOG.md#v1120-2025-04-03)
+  * **Feature**: Add support for Dual_Stack and PrivateLink types of IngressPoint. For configuration requests, SES Mail Manager will now accept both IPv4/IPv6 dual-stack endpoints and AWS PrivateLink VPC endpoints for email receiving.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.46.2](service/opensearch/CHANGELOG.md#v1462-2025-04-03)
+  * **Documentation**: Improve descriptions for various API commands and data types.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.51.0](service/route53/CHANGELOG.md#v1510-2025-04-03)
+  * **Feature**: Added us-gov-east-1 and us-gov-west-1 as valid Latency Based Routing regions for change-resource-record-sets.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.187.0](service/sagemaker/CHANGELOG.md#v11870-2025-04-03)
+  * **Feature**: Adds support for i3en, m7i, r7i instance types for SageMaker Hyperpod
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.45.0](service/sesv2/CHANGELOG.md#v1450-2025-04-03)
+  * **Feature**: This release enables customers to provide attachments in the SESv2 SendEmail and SendBulkEmail APIs.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.45.0](service/transcribe/CHANGELOG.md#v1450-2025-04-03)
+  * **Feature**: This Feature Adds Support for the "zh-HK" Locale for Batch Operations
+
 # Release (2025-04-02)
 
 ## Module Highlights

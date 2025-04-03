@@ -1,3 +1,7 @@
+# v1.18.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.18.0 (2025-03-25)
 
 * **Feature**: Removing replication region limitation for Amazon Keyspaces Multi-Region Replication APIs.

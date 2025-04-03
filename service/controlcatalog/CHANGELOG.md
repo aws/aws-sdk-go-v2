@@ -1,3 +1,7 @@
+# v1.7.3 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.7.2 (2025-03-20)
 
 * **Documentation**: Add ExemptAssumeRoot parameter to adapt for new AWS AssumeRoot capability.

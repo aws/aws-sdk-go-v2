@@ -1,3 +1,7 @@
+# v1.13.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.13.0 (2025-03-25)
 
 * **Feature**: Deprecate tags field in Get API responses

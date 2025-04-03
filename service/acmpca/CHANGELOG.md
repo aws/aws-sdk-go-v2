@@ -1,3 +1,7 @@
+# v1.40.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.40.0 (2025-03-13)
 
 * **Feature**: Private Certificate Authority service now supports P521 and RSA3072 key algorithms.

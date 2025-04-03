@@ -1,3 +1,7 @@
+# v1.48.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.48.0 (2025-03-10)
 
 * **Feature**: Releasing minor partition endpoint updates.

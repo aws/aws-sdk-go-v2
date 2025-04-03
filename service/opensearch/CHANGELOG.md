@@ -1,3 +1,7 @@
+# v1.46.2 (2025-04-03)
+
+* **Documentation**: Improve descriptions for various API commands and data types.
+
 # v1.46.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

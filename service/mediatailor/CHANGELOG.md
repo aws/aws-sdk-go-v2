@@ -1,3 +1,7 @@
+# v1.46.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.46.0 (2025-03-26)
 
 * **Feature**: Add support for log filtering which allow customers to filter out selected event types from logs.

@@ -1,3 +1,7 @@
+# v1.58.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.58.0 (2025-04-02)
 
 * **Feature**: This release adds support for environment type WINDOWS_SERVER_2022_CONTAINER in ProjectEnvironment

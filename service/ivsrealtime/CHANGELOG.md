@@ -1,3 +1,7 @@
+# v1.24.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.24.0 (2025-03-13)
 
 * **Feature**: IVS Real-Time now offers customers the ability to adjust the participant & composition recording segment duration

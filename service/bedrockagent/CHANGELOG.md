@@ -1,3 +1,7 @@
+# v1.41.0 (2025-04-03)
+
+* **Feature**: Added optional "customMetadataField" for Amazon Aurora knowledge bases, allowing single-column metadata. Also added optional "textIndexName" for MongoDB Atlas knowledge bases, enabling hybrid search support.
+
 # v1.40.0 (2025-03-25)
 
 * **Feature**: Adding support for Amazon OpenSearch Managed clusters as a vector database in Knowledge Bases for Amazon Bedrock

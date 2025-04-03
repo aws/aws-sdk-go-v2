@@ -1,3 +1,7 @@
+# v1.71.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.71.0 (2025-03-26)
 
 * **Feature**: This release adds a configurable Quality Level setting for the top rendition of Auto ABR jobs

@@ -1,3 +1,7 @@
+# v1.4.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.4.0 (2025-03-24)
 
 * **Feature**: ClusterName/ClusterIdentifier, ComputeNodeGroupName/ComputeNodeGroupIdentifier, and QueueName/QueueIdentifier can now have 10 characters, and a minimum of 3 characters. The TagResource API action can now return ServiceQuotaExceededException.

@@ -1,3 +1,7 @@
+# v1.48.3 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.48.2 (2025-03-06)
 
 * **Documentation**: Doc-only update for CloudTrail.

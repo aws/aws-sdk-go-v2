@@ -1,3 +1,7 @@
+# v1.47.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.47.0 (2025-03-04.2)
 
 * **Feature**: AWS IoT SiteWise now supports MQTT-enabled, V3 gateways. Configure data destinations for real-time ingestion into AWS IoT SiteWise or buffered ingestion using Amazon S3 storage. You can also use path filters for precise data collection from specific MQTT topics.

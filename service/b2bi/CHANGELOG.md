@@ -1,3 +1,7 @@
+# v1.0.0-preview.67 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.0.0-preview.66 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

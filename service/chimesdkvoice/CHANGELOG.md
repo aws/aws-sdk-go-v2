@@ -1,3 +1,7 @@
+# v1.22.0 (2025-04-03)
+
+* **Feature**: Added FOC date as an attribute of PhoneNumberOrder, added AccessDeniedException as a possible return type of ValidateE911Address
+
 # v1.21.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

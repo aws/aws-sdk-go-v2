@@ -1,8 +1,0 @@
-{
-    "id": "b6ce9d90-c3a2-45e2-a04b-933ba266393d",
-    "type": "feature",
-    "description": "Add support for Dual_Stack and PrivateLink types of IngressPoint. For configuration requests, SES Mail Manager will now accept both IPv4/IPv6 dual-stack endpoints and AWS PrivateLink VPC endpoints for email receiving.",
-    "modules": [
-        "service/mailmanager"
-    ]
-}

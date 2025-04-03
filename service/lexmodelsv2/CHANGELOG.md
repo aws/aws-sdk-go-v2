@@ -1,3 +1,7 @@
+# v1.51.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.51.0 (2025-04-02)
 
 * **Feature**: Release feature of errorlogging for lex bot, customer can config this feature in bot version to generate log for error exception which helps debug

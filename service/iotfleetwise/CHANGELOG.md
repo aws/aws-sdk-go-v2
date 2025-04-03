@@ -1,3 +1,7 @@
+# v1.25.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.25.0 (2025-03-05)
 
 * **Feature**: This release adds floating point support for CAN/OBD signals and adds support for signed OBD signals.

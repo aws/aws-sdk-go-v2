@@ -1,3 +1,7 @@
+# v1.28.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.28.0 (2025-03-28)
 
 * **Feature**: Add support for Marketplace Metering Service dual-stack endpoints.

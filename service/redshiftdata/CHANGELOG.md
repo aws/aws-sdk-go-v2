@@ -1,3 +1,7 @@
+# v1.33.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.33.0 (2025-03-06)
 
 * **Feature**: This release adds support for ListStatements API to filter statements by ClusterIdentifier, WorkgroupName, and Database.

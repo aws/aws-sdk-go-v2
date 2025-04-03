@@ -1,3 +1,7 @@
+# v1.45.0 (2025-04-03)
+
+* **Feature**: This Feature Adds Support for the "zh-HK" Locale for Batch Operations
+
 # v1.44.2 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

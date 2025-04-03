@@ -1,3 +1,7 @@
+# v1.32.1 (2025-04-03)
+
+* No change notes available for this release.
+
 # v1.32.0 (2025-03-26)
 
 * **Feature**: With this release, AWS Direct Connect allows you to tag your Direct Connect gateways. Tags are metadata that you can create and use to manage your Direct Connect gateways. For more information about tagging, see AWS Tagging Strategies.
