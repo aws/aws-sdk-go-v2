@@ -675,7 +675,6 @@ func TestDownload_WithFailure(t *testing.T) {
 func TestDownload_WithMismatch(t *testing.T) {
 	reqCount := int64(0)
 	body := bytes.NewReader(make([]byte, manager.DefaultDownloadPartSize))
-	startingByte := 0
 
 	client := mockDownloadCLient(func(ctx context.Context, params *s3.GetObjectInput, optFns ...func(*s3.Options)) (out *s3.GetObjectOutput, err error) {
 		switch atomic.LoadInt64(&reqCount) {
@@ -687,11 +686,10 @@ func TestDownload_WithMismatch(t *testing.T) {
 				out = &s3.GetObjectOutput{
 					Body:          ioutil.NopCloser(body),
 					ContentLength: aws.Int64(int64(body.Len())),
-					ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", startingByte, body.Len()-1, body.Len()*10)),
+					ContentRange:  aws.String(fmt.Sprintf("bytes 0-%d/%d", body.Len()-1, body.Len()*10)),
 					ETag:          aws.String(etag),
 				}
 			}
-			startingByte += body.Len()
 		case 3:
 			// mock the precondition error when object is synchronously updated
 			err = fmt.Errorf("api error PreconditionFailed")
@@ -703,9 +701,8 @@ func TestDownload_WithMismatch(t *testing.T) {
 				out = &s3.GetObjectOutput{
 					Body:          ioutil.NopCloser(body),
 					ContentLength: aws.Int64(int64(body.Len())),
-					ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", startingByte, body.Len()-1, body.Len()*10)),
+					ContentRange:  aws.String(fmt.Sprintf("bytes 0-%d/%d", body.Len()-1, body.Len()*10)),
 				}
-				startingByte += body.Len()
 			}
 		}
 		atomic.AddInt64(&reqCount, 1)
