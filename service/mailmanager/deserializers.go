@@ -9277,6 +9277,98 @@ func awsAwsjson10_deserializeDocumentIngressIpv4Expression(v **types.IngressIpv4
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentIngressIpv6Expression(v **types.IngressIpv6Expression, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IngressIpv6Expression
+	if *v == nil {
+		sv = &types.IngressIpv6Expression{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Evaluate":
+			if err := awsAwsjson10_deserializeDocumentIngressIpv6ToEvaluate(&sv.Evaluate, value); err != nil {
+				return err
+			}
+
+		case "Operator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IngressIpOperator to be of type string, got %T instead", value)
+				}
+				sv.Operator = types.IngressIpOperator(jtv)
+			}
+
+		case "Values":
+			if err := awsAwsjson10_deserializeDocumentIpv6Cidrs(&sv.Values, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentIngressIpv6ToEvaluate(v *types.IngressIpv6ToEvaluate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.IngressIpv6ToEvaluate
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "Attribute":
+			var mv types.IngressIpv6Attribute
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IngressIpv6Attribute to be of type string, got %T instead", value)
+				}
+				mv = types.IngressIpv6Attribute(jtv)
+			}
+			uv = &types.IngressIpv6ToEvaluateMemberAttribute{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentIngressIsInAddressList(v **types.IngressIsInAddressList, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9776,6 +9868,42 @@ func awsAwsjson10_deserializeDocumentIpv4Cidrs(v *[]string, value interface{}) e
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentIpv6Cidrs(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Ipv6Cidr to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentMessageBody(v **types.MessageBody, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9989,6 +10117,56 @@ func awsAwsjson10_deserializeDocumentMetadata(v **types.Metadata, value interfac
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentNetworkConfiguration(v *types.NetworkConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.NetworkConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "PrivateNetworkConfiguration":
+			var mv types.PrivateNetworkConfiguration
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentPrivateNetworkConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.NetworkConfigurationMemberPrivateNetworkConfiguration{Value: mv}
+			break loop
+
+		case "PublicNetworkConfiguration":
+			var mv types.PublicNetworkConfiguration
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentPublicNetworkConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.NetworkConfigurationMemberPublicNetworkConfiguration{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentNoAuthentication(v **types.NoAuthentication, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10058,6 +10236,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.PolicyConditionMemberIpExpression{Value: mv}
+			break loop
+
+		case "Ipv6Expression":
+			var mv types.IngressIpv6Expression
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentIngressIpv6Expression(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PolicyConditionMemberIpv6Expression{Value: mv}
 			break loop
 
 		case "StringExpression":
@@ -10198,6 +10386,86 @@ func awsAwsjson10_deserializeDocumentPolicyStatementList(v *[]types.PolicyStatem
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentPrivateNetworkConfiguration(v **types.PrivateNetworkConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PrivateNetworkConfiguration
+	if *v == nil {
+		sv = &types.PrivateNetworkConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "VpcEndpointId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcEndpointId to be of type string, got %T instead", value)
+				}
+				sv.VpcEndpointId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentPublicNetworkConfiguration(v **types.PublicNetworkConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PublicNetworkConfiguration
+	if *v == nil {
+		sv = &types.PublicNetworkConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IpType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpType to be of type string, got %T instead", value)
+				}
+				sv.IpType = types.IpType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -14371,6 +14639,11 @@ func awsAwsjson10_deserializeOpDocumentGetIngressPointOutput(v **GetIngressPoint
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "NetworkConfiguration":
+			if err := awsAwsjson10_deserializeDocumentNetworkConfiguration(&sv.NetworkConfiguration, value); err != nil {
+				return err
 			}
 
 		case "RuleSetId":

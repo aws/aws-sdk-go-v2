@@ -600,6 +600,46 @@ type IngressIpv4Expression struct {
 	noSmithyDocumentSerde
 }
 
+// The union type representing the allowed types for the left hand side of an IPv6
+// condition.
+type IngressIpv6Expression struct {
+
+	// The left hand side argument of an IPv6 condition expression.
+	//
+	// This member is required.
+	Evaluate IngressIpv6ToEvaluate
+
+	// The matching operator for an IPv6 condition expression.
+	//
+	// This member is required.
+	Operator IngressIpOperator
+
+	// The right hand side argument of an IPv6 condition expression.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The structure for an IPv6 based condition matching on the incoming mail.
+//
+// The following types satisfy this interface:
+//
+//	IngressIpv6ToEvaluateMemberAttribute
+type IngressIpv6ToEvaluate interface {
+	isIngressIpv6ToEvaluate()
+}
+
+// An enum type representing the allowed attribute types for an IPv6 condition.
+type IngressIpv6ToEvaluateMemberAttribute struct {
+	Value IngressIpv6Attribute
+
+	noSmithyDocumentSerde
+}
+
+func (*IngressIpv6ToEvaluateMemberAttribute) isIngressIpv6ToEvaluate() {}
+
 // The address lists and the address list attribute value that is evaluated in a
 // policy statement's conditional expression to either deny or block the incoming
 // email.
@@ -862,6 +902,35 @@ type Metadata struct {
 	noSmithyDocumentSerde
 }
 
+// The network type (IPv4-only, Dual-Stack, PrivateLink) of the ingress endpoint
+// resource.
+//
+// The following types satisfy this interface:
+//
+//	NetworkConfigurationMemberPrivateNetworkConfiguration
+//	NetworkConfigurationMemberPublicNetworkConfiguration
+type NetworkConfiguration interface {
+	isNetworkConfiguration()
+}
+
+// Specifies the network configuration for the private ingress point.
+type NetworkConfigurationMemberPrivateNetworkConfiguration struct {
+	Value PrivateNetworkConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*NetworkConfigurationMemberPrivateNetworkConfiguration) isNetworkConfiguration() {}
+
+// Specifies the network configuration for the public ingress point.
+type NetworkConfigurationMemberPublicNetworkConfiguration struct {
+	Value PublicNetworkConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*NetworkConfigurationMemberPublicNetworkConfiguration) isNetworkConfiguration() {}
+
 // Explicitly indicate that the relay destination server does not require SMTP
 // credential authentication.
 type NoAuthentication struct {
@@ -875,6 +944,7 @@ type NoAuthentication struct {
 //
 //	PolicyConditionMemberBooleanExpression
 //	PolicyConditionMemberIpExpression
+//	PolicyConditionMemberIpv6Expression
 //	PolicyConditionMemberStringExpression
 //	PolicyConditionMemberTlsExpression
 type PolicyCondition interface {
@@ -902,6 +972,17 @@ type PolicyConditionMemberIpExpression struct {
 }
 
 func (*PolicyConditionMemberIpExpression) isPolicyCondition() {}
+
+// This represents an IPv6 based condition matching on the incoming mail. It
+// performs the operation configured in 'Operator' and evaluates the 'Protocol'
+// object against the 'Value'.
+type PolicyConditionMemberIpv6Expression struct {
+	Value IngressIpv6Expression
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyConditionMemberIpv6Expression) isPolicyCondition() {}
 
 // This represents a string based condition matching on the incoming mail. It
 // performs the string operation configured in 'Operator' and evaluates the
@@ -939,6 +1020,29 @@ type PolicyStatement struct {
 	//
 	// This member is required.
 	Conditions []PolicyCondition
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the network configuration for the private ingress point.
+type PrivateNetworkConfiguration struct {
+
+	// The identifier of the VPC endpoint to associate with this private ingress point.
+	//
+	// This member is required.
+	VpcEndpointId *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the network configuration for the public ingress point.
+type PublicNetworkConfiguration struct {
+
+	// The IP address type for the public ingress point. Valid values are IPV4 and
+	// DUAL_STACK.
+	//
+	// This member is required.
+	IpType IpType
 
 	noSmithyDocumentSerde
 }
@@ -1768,9 +1872,11 @@ func (*UnknownUnionMember) isArchiveStringToEvaluate()        {}
 func (*UnknownUnionMember) isExportDestinationConfiguration() {}
 func (*UnknownUnionMember) isIngressBooleanToEvaluate()       {}
 func (*UnknownUnionMember) isIngressIpToEvaluate()            {}
+func (*UnknownUnionMember) isIngressIpv6ToEvaluate()          {}
 func (*UnknownUnionMember) isIngressPointConfiguration()      {}
 func (*UnknownUnionMember) isIngressStringToEvaluate()        {}
 func (*UnknownUnionMember) isIngressTlsProtocolToEvaluate()   {}
+func (*UnknownUnionMember) isNetworkConfiguration()           {}
 func (*UnknownUnionMember) isPolicyCondition()                {}
 func (*UnknownUnionMember) isRelayAuthentication()            {}
 func (*UnknownUnionMember) isRuleAction()                     {}

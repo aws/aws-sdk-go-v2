@@ -1906,6 +1906,41 @@ func addOpUpdateEmailTemplateValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpUpdateEmailTemplate{}, middleware.After)
 }
 
+func validateAttachment(v *types.Attachment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Attachment"}
+	if v.RawContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RawContent"))
+	}
+	if v.FileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttachmentList(v []types.Attachment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttachmentList"}
+	for i := range v {
+		if err := validateAttachment(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBatchGetMetricDataQueries(v []types.BatchGetMetricDataQuery) error {
 	if v == nil {
 		return nil
@@ -2348,6 +2383,11 @@ func validateMessage(v *types.Message) error {
 			invalidParams.AddNested("Headers", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Attachments != nil {
+		if err := validateAttachmentList(v.Attachments); err != nil {
+			invalidParams.AddNested("Attachments", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2590,6 +2630,11 @@ func validateTemplate(v *types.Template) error {
 	if v.Headers != nil {
 		if err := validateMessageHeaderList(v.Headers); err != nil {
 			invalidParams.AddNested("Headers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Attachments != nil {
+		if err := validateAttachmentList(v.Attachments); err != nil {
+			invalidParams.AddNested("Attachments", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

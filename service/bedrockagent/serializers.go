@@ -8869,6 +8869,11 @@ func awsRestjson1_serializeDocumentMongoDbAtlasConfiguration(v *types.MongoDbAtl
 		}
 	}
 
+	if v.TextIndexName != nil {
+		ok := object.Key("textIndexName")
+		ok.String(*v.TextIndexName)
+	}
+
 	if v.VectorIndexName != nil {
 		ok := object.Key("vectorIndexName")
 		ok.String(*v.VectorIndexName)
@@ -9812,6 +9817,11 @@ func awsRestjson1_serializeDocumentRdsConfiguration(v *types.RdsConfiguration, v
 func awsRestjson1_serializeDocumentRdsFieldMapping(v *types.RdsFieldMapping, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CustomMetadataField != nil {
+		ok := object.Key("customMetadataField")
+		ok.String(*v.CustomMetadataField)
+	}
 
 	if v.MetadataField != nil {
 		ok := object.Key("metadataField")

@@ -15259,6 +15259,9 @@ func awsRestjson1_deserializeOpErrorValidateE911Address(response *smithyhttp.Res
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
@@ -17804,6 +17807,19 @@ func awsRestjson1_deserializeDocumentPhoneNumberOrder(v **types.PhoneNumberOrder
 					return err
 				}
 				sv.CreatedTimestamp = ptr.Time(t)
+			}
+
+		case "FocDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Iso8601Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.FocDate = ptr.Time(t)
 			}
 
 		case "OrderedPhoneNumbers":

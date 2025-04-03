@@ -2,6 +2,48 @@
 
 package types
 
+type AttachmentContentDisposition string
+
+// Enum values for AttachmentContentDisposition
+const (
+	AttachmentContentDispositionAttachment AttachmentContentDisposition = "ATTACHMENT"
+	AttachmentContentDispositionInline     AttachmentContentDisposition = "INLINE"
+)
+
+// Values returns all known values for AttachmentContentDisposition. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttachmentContentDisposition) Values() []AttachmentContentDisposition {
+	return []AttachmentContentDisposition{
+		"ATTACHMENT",
+		"INLINE",
+	}
+}
+
+type AttachmentContentTransferEncoding string
+
+// Enum values for AttachmentContentTransferEncoding
+const (
+	AttachmentContentTransferEncodingBase64          AttachmentContentTransferEncoding = "BASE64"
+	AttachmentContentTransferEncodingQuotedPrintable AttachmentContentTransferEncoding = "QUOTED_PRINTABLE"
+	AttachmentContentTransferEncodingSevenBit        AttachmentContentTransferEncoding = "SEVEN_BIT"
+)
+
+// Values returns all known values for AttachmentContentTransferEncoding. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttachmentContentTransferEncoding) Values() []AttachmentContentTransferEncoding {
+	return []AttachmentContentTransferEncoding{
+		"BASE64",
+		"QUOTED_PRINTABLE",
+		"SEVEN_BIT",
+	}
+}
+
 type BehaviorOnMxFailure string
 
 // Enum values for BehaviorOnMxFailure

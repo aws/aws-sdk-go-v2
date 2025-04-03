@@ -21204,6 +21204,15 @@ func awsRestjson1_deserializeDocumentMongoDbAtlasConfiguration(v **types.MongoDb
 				return err
 			}
 
+		case "textIndexName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MongoDbAtlasIndexName to be of type string, got %T instead", value)
+				}
+				sv.TextIndexName = ptr.String(jtv)
+			}
+
 		case "vectorIndexName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23583,6 +23592,15 @@ func awsRestjson1_deserializeDocumentRdsFieldMapping(v **types.RdsFieldMapping, 
 
 	for key, value := range shape {
 		switch key {
+		case "customMetadataField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
+				}
+				sv.CustomMetadataField = ptr.String(jtv)
+			}
+
 		case "metadataField":
 			if value != nil {
 				jtv, ok := value.(string)

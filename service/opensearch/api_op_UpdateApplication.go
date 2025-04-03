@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Update the OpenSearch Application.
+// Updates the configuration and settings of an existing OpenSearch application.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationInput{}
@@ -30,15 +30,15 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 
 type UpdateApplicationInput struct {
 
-	// Unique identifier of the OpenSearch Application to be updated.
+	// The unique identifier for the OpenSearch application to be updated.
 	//
 	// This member is required.
 	Id *string
 
-	// Configurations to be changed for the OpenSearch Application.
+	// The configuration settings to modify for the OpenSearch application.
 	AppConfigs []types.AppConfig
 
-	// Data sources to be associated with the OpenSearch Application.
+	// The data sources to associate with the OpenSearch application.
 	DataSources []types.DataSource
 
 	noSmithyDocumentSerde
@@ -46,7 +46,7 @@ type UpdateApplicationInput struct {
 
 type UpdateApplicationOutput struct {
 
-	// Configurations for the updated OpenSearch Application.
+	// The configuration settings for the updated OpenSearch application.
 	AppConfigs []types.AppConfig
 
 	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
@@ -55,22 +55,22 @@ type UpdateApplicationOutput struct {
 	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
 	Arn *string
 
-	// Timestamp at which the OpenSearch Application was created.
+	// The timestamp when the OpenSearch application was originally created.
 	CreatedAt *time.Time
 
-	// Data sources associated with the updated OpenSearch Application.
+	// The data sources associated with the updated OpenSearch application.
 	DataSources []types.DataSource
 
-	// IAM Identity Center settings for the updated OpenSearch Application.
+	// The IAM Identity Center configuration for the updated OpenSearch application.
 	IamIdentityCenterOptions *types.IamIdentityCenterOptions
 
-	// Unique identifier of the updated OpenSearch Application.
+	// The unique identifier of the updated OpenSearch application.
 	Id *string
 
-	// Timestamp at which the OpenSearch Application was last updated.
+	// The timestamp when the OpenSearch application was last updated.
 	LastUpdatedAt *time.Time
 
-	// Name of the updated OpenSearch Application.
+	// The name of the updated OpenSearch application.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

@@ -284,6 +284,23 @@ func (IngressIpv4Attribute) Values() []IngressIpv4Attribute {
 	}
 }
 
+type IngressIpv6Attribute string
+
+// Enum values for IngressIpv6Attribute
+const (
+	IngressIpv6AttributeSenderIpv6 IngressIpv6Attribute = "SENDER_IPV6"
+)
+
+// Values returns all known values for IngressIpv6Attribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IngressIpv6Attribute) Values() []IngressIpv6Attribute {
+	return []IngressIpv6Attribute{
+		"SENDER_IPV6",
+	}
+}
+
 type IngressPointStatus string
 
 // Enum values for IngressPointStatus
@@ -443,6 +460,25 @@ func (IngressTlsProtocolOperator) Values() []IngressTlsProtocolOperator {
 	return []IngressTlsProtocolOperator{
 		"MINIMUM_TLS_VERSION",
 		"IS",
+	}
+}
+
+type IpType string
+
+// Enum values for IpType
+const (
+	IpTypeIpv4      IpType = "IPV4"
+	IpTypeDualStack IpType = "DUAL_STACK"
+)
+
+// Values returns all known values for IpType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IpType) Values() []IpType {
+	return []IpType{
+		"IPV4",
+		"DUAL_STACK",
 	}
 }
 

@@ -1701,6 +1701,31 @@ const (
 	ClusterInstanceTypeMlR6i16xlarge   ClusterInstanceType = "ml.r6i.16xlarge"
 	ClusterInstanceTypeMlR6i24xlarge   ClusterInstanceType = "ml.r6i.24xlarge"
 	ClusterInstanceTypeMlR6i32xlarge   ClusterInstanceType = "ml.r6i.32xlarge"
+	ClusterInstanceTypeMlI3enLarge     ClusterInstanceType = "ml.i3en.large"
+	ClusterInstanceTypeMlI3enXlarge    ClusterInstanceType = "ml.i3en.xlarge"
+	ClusterInstanceTypeMlI3en2xlarge   ClusterInstanceType = "ml.i3en.2xlarge"
+	ClusterInstanceTypeMlI3en3xlarge   ClusterInstanceType = "ml.i3en.3xlarge"
+	ClusterInstanceTypeMlI3en6xlarge   ClusterInstanceType = "ml.i3en.6xlarge"
+	ClusterInstanceTypeMlI3en12xlarge  ClusterInstanceType = "ml.i3en.12xlarge"
+	ClusterInstanceTypeMlI3en24xlarge  ClusterInstanceType = "ml.i3en.24xlarge"
+	ClusterInstanceTypeMlM7iLarge      ClusterInstanceType = "ml.m7i.large"
+	ClusterInstanceTypeMlM7iXlarge     ClusterInstanceType = "ml.m7i.xlarge"
+	ClusterInstanceTypeMlM7i2xlarge    ClusterInstanceType = "ml.m7i.2xlarge"
+	ClusterInstanceTypeMlM7i4xlarge    ClusterInstanceType = "ml.m7i.4xlarge"
+	ClusterInstanceTypeMlM7i8xlarge    ClusterInstanceType = "ml.m7i.8xlarge"
+	ClusterInstanceTypeMlM7i12xlarge   ClusterInstanceType = "ml.m7i.12xlarge"
+	ClusterInstanceTypeMlM7i16xlarge   ClusterInstanceType = "ml.m7i.16xlarge"
+	ClusterInstanceTypeMlM7i24xlarge   ClusterInstanceType = "ml.m7i.24xlarge"
+	ClusterInstanceTypeMlM7i48xlarge   ClusterInstanceType = "ml.m7i.48xlarge"
+	ClusterInstanceTypeMlR7iLarge      ClusterInstanceType = "ml.r7i.large"
+	ClusterInstanceTypeMlR7iXlarge     ClusterInstanceType = "ml.r7i.xlarge"
+	ClusterInstanceTypeMlR7i2xlarge    ClusterInstanceType = "ml.r7i.2xlarge"
+	ClusterInstanceTypeMlR7i4xlarge    ClusterInstanceType = "ml.r7i.4xlarge"
+	ClusterInstanceTypeMlR7i8xlarge    ClusterInstanceType = "ml.r7i.8xlarge"
+	ClusterInstanceTypeMlR7i12xlarge   ClusterInstanceType = "ml.r7i.12xlarge"
+	ClusterInstanceTypeMlR7i16xlarge   ClusterInstanceType = "ml.r7i.16xlarge"
+	ClusterInstanceTypeMlR7i24xlarge   ClusterInstanceType = "ml.r7i.24xlarge"
+	ClusterInstanceTypeMlR7i48xlarge   ClusterInstanceType = "ml.r7i.48xlarge"
 )
 
 // Values returns all known values for ClusterInstanceType. Note that this can be
@@ -1795,6 +1820,31 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.r6i.16xlarge",
 		"ml.r6i.24xlarge",
 		"ml.r6i.32xlarge",
+		"ml.i3en.large",
+		"ml.i3en.xlarge",
+		"ml.i3en.2xlarge",
+		"ml.i3en.3xlarge",
+		"ml.i3en.6xlarge",
+		"ml.i3en.12xlarge",
+		"ml.i3en.24xlarge",
+		"ml.m7i.large",
+		"ml.m7i.xlarge",
+		"ml.m7i.2xlarge",
+		"ml.m7i.4xlarge",
+		"ml.m7i.8xlarge",
+		"ml.m7i.12xlarge",
+		"ml.m7i.16xlarge",
+		"ml.m7i.24xlarge",
+		"ml.m7i.48xlarge",
+		"ml.r7i.large",
+		"ml.r7i.xlarge",
+		"ml.r7i.2xlarge",
+		"ml.r7i.4xlarge",
+		"ml.r7i.8xlarge",
+		"ml.r7i.12xlarge",
+		"ml.r7i.16xlarge",
+		"ml.r7i.24xlarge",
+		"ml.r7i.48xlarge",
 	}
 }
 

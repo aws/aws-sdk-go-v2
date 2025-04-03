@@ -4093,6 +4093,48 @@ func awsAwsjson10_serializeDocumentIngressIpv4Expression(v *types.IngressIpv4Exp
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentIngressIpv6Expression(v *types.IngressIpv6Expression, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Evaluate != nil {
+		ok := object.Key("Evaluate")
+		if err := awsAwsjson10_serializeDocumentIngressIpv6ToEvaluate(v.Evaluate, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("Operator")
+		ok.String(string(v.Operator))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson10_serializeDocumentIpv6Cidrs(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentIngressIpv6ToEvaluate(v types.IngressIpv6ToEvaluate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.IngressIpv6ToEvaluateMemberAttribute:
+		av := object.Key("Attribute")
+		av.String(string(uv.Value))
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentIngressIsInAddressList(v *types.IngressIsInAddressList, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4231,6 +4273,41 @@ func awsAwsjson10_serializeDocumentIpv4Cidrs(v []string, value smithyjson.Value)
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentIpv6Cidrs(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentNetworkConfiguration(v types.NetworkConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.NetworkConfigurationMemberPrivateNetworkConfiguration:
+		av := object.Key("PrivateNetworkConfiguration")
+		if err := awsAwsjson10_serializeDocumentPrivateNetworkConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.NetworkConfigurationMemberPublicNetworkConfiguration:
+		av := object.Key("PublicNetworkConfiguration")
+		if err := awsAwsjson10_serializeDocumentPublicNetworkConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentNoAuthentication(v *types.NoAuthentication, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4252,6 +4329,12 @@ func awsAwsjson10_serializeDocumentPolicyCondition(v types.PolicyCondition, valu
 	case *types.PolicyConditionMemberIpExpression:
 		av := object.Key("IpExpression")
 		if err := awsAwsjson10_serializeDocumentIngressIpv4Expression(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.PolicyConditionMemberIpv6Expression:
+		av := object.Key("Ipv6Expression")
+		if err := awsAwsjson10_serializeDocumentIngressIpv6Expression(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4319,6 +4402,30 @@ func awsAwsjson10_serializeDocumentPolicyStatementList(v []types.PolicyStatement
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentPrivateNetworkConfiguration(v *types.PrivateNetworkConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.VpcEndpointId != nil {
+		ok := object.Key("VpcEndpointId")
+		ok.String(*v.VpcEndpointId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentPublicNetworkConfiguration(v *types.PublicNetworkConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IpType) > 0 {
+		ok := object.Key("IpType")
+		ok.String(string(v.IpType))
+	}
+
 	return nil
 }
 
@@ -5198,6 +5305,13 @@ func awsAwsjson10_serializeOpDocumentCreateIngressPointInput(v *CreateIngressPoi
 	if v.IngressPointName != nil {
 		ok := object.Key("IngressPointName")
 		ok.String(*v.IngressPointName)
+	}
+
+	if v.NetworkConfiguration != nil {
+		ok := object.Key("NetworkConfiguration")
+		if err := awsAwsjson10_serializeDocumentNetworkConfiguration(v.NetworkConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RuleSetId != nil {

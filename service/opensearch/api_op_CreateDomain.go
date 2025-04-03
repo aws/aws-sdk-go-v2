@@ -111,7 +111,8 @@ type CreateDomainInput struct {
 	// change your address type later.
 	IPAddressType types.IPAddressType
 
-	// Options for IAM Identity Center Option control for the domain.
+	// Configuration options for enabling and managing IAM Identity Center integration
+	// within a domain.
 	IdentityCenterOptions *types.IdentityCenterOptionsInput
 
 	// Key-value pairs to configure log publishing.

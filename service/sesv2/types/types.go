@@ -53,6 +53,49 @@ type ArchivingOptions struct {
 	noSmithyDocumentSerde
 }
 
+// Contains metadata and attachment raw content.
+type Attachment struct {
+
+	// The file name for the attachment as it will appear in the email. Amazon SES
+	// restricts certain file extensions. To ensure attachments are accepted, check the
+	// [Unsupported attachment types]in the Amazon SES Developer Guide.
+	//
+	// [Unsupported attachment types]: https://docs.aws.amazon.com/ses/latest/dg/mime-types.html
+	//
+	// This member is required.
+	FileName *string
+
+	//  The raw data of the attachment. It needs to be base64-encoded if you are
+	// accessing Amazon SES directly through the HTTPS interface. If you are accessing
+	// Amazon SES using an Amazon Web Services SDK, the SDK takes care of the base
+	// 64-encoding for you.
+	//
+	// This member is required.
+	RawContent []byte
+
+	//  A brief description of the attachment content.
+	ContentDescription *string
+
+	//  A standard descriptor indicating how the attachment should be rendered in the
+	// email. Supported values: ATTACHMENT or INLINE .
+	ContentDisposition AttachmentContentDisposition
+
+	//  Unique identifier for the attachment, used for referencing attachments with
+	// INLINE disposition in HTML content.
+	ContentId *string
+
+	//  Specifies how the attachment is encoded. Supported values: BASE64 ,
+	// QUOTED_PRINTABLE , SEVEN_BIT .
+	ContentTransferEncoding AttachmentContentTransferEncoding
+
+	//  The MIME type of the attachment.
+	//
+	// Example: application/pdf , image/jpeg
+	ContentType *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a single metric data query to include in a batch.
 type BatchGetMetricDataQuery struct {
 
@@ -1068,10 +1111,11 @@ type DomainIspPlacement struct {
 }
 
 // An object that defines the entire content of the email, including the message
-// headers and the body content. You can create a simple email message, in which
-// you specify the subject and the text and HTML versions of the message body. You
-// can also create raw messages, in which you specify a complete MIME-formatted
-// message. Raw messages can include attachments and custom headers.
+// headers, body content, and attachments. For a simple email message, you specify
+// the subject and provide both text and HTML versions of the message body. You can
+// also add attachments to simple and templated messages. For a raw message, you
+// provide a complete MIME-formatted message, which can include custom headers and
+// attachments.
 type EmailContent struct {
 
 	// The raw email message. The message has to meet the following criteria:
@@ -1100,7 +1144,8 @@ type EmailContent struct {
 	// [RFC 5321]: https://tools.ietf.org/html/rfc5321
 	Raw *RawMessage
 
-	// The simple email message. The message consists of a subject and a message body.
+	// The simple email message. The message consists of a subject, message body and
+	// attachments list.
 	Simple *Message
 
 	// The template to use for the email message.
@@ -1766,6 +1811,10 @@ type Message struct {
 	//
 	// This member is required.
 	Subject *Content
+
+	//  The List of attachments to include in your email. All recipients will receive
+	// the same attachments.
+	Attachments []Attachment
 
 	// The list of message headers that will be added to the email message.
 	Headers []MessageHeader
@@ -2444,6 +2493,10 @@ type Tag struct {
 // name or ARN of an email template previously saved in your Amazon SES account or
 // by providing the full template content.
 type Template struct {
+
+	//  The List of attachments to include in your email. All recipients will receive
+	// the same attachments.
+	Attachments []Attachment
 
 	// The list of message headers that will be added to the email message.
 	Headers []MessageHeader

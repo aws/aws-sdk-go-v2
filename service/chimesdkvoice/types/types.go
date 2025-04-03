@@ -387,6 +387,10 @@ type PhoneNumberOrder struct {
 	// The phone number order creation time stamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
 
+	// The Firm Order Commitment (FOC) date for phone number porting orders. This
+	// field is null if a phone number order is not a porting order.
+	FocDate *time.Time
+
 	// The type of phone number being ordered, local or toll-free.
 	OrderType PhoneNumberOrderType
 

@@ -1550,6 +1550,27 @@ func validateIngressIpv4Expression(v *types.IngressIpv4Expression) error {
 	}
 }
 
+func validateIngressIpv6Expression(v *types.IngressIpv6Expression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IngressIpv6Expression"}
+	if v.Evaluate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Evaluate"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIngressIsInAddressList(v *types.IngressIsInAddressList) error {
 	if v == nil {
 		return nil
@@ -1633,6 +1654,30 @@ func validateIngressTlsProtocolExpression(v *types.IngressTlsProtocolExpression)
 	}
 }
 
+func validateNetworkConfiguration(v types.NetworkConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkConfiguration"}
+	switch uv := v.(type) {
+	case *types.NetworkConfigurationMemberPrivateNetworkConfiguration:
+		if err := validatePrivateNetworkConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[PrivateNetworkConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.NetworkConfigurationMemberPublicNetworkConfiguration:
+		if err := validatePublicNetworkConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[PublicNetworkConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePolicyCondition(v types.PolicyCondition) error {
 	if v == nil {
 		return nil
@@ -1647,6 +1692,11 @@ func validatePolicyCondition(v types.PolicyCondition) error {
 	case *types.PolicyConditionMemberIpExpression:
 		if err := validateIngressIpv4Expression(&uv.Value); err != nil {
 			invalidParams.AddNested("[IpExpression]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.PolicyConditionMemberIpv6Expression:
+		if err := validateIngressIpv6Expression(&uv.Value); err != nil {
+			invalidParams.AddNested("[Ipv6Expression]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.PolicyConditionMemberStringExpression:
@@ -1715,6 +1765,36 @@ func validatePolicyStatementList(v []types.PolicyStatement) error {
 		if err := validatePolicyStatement(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivateNetworkConfiguration(v *types.PrivateNetworkConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateNetworkConfiguration"}
+	if v.VpcEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcEndpointId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePublicNetworkConfiguration(v *types.PublicNetworkConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublicNetworkConfiguration"}
+	if len(v.IpType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IpType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2312,6 +2392,11 @@ func validateOpCreateIngressPointInput(v *CreateIngressPointInput) error {
 	}
 	if v.TrafficPolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrafficPolicyId"))
+	}
+	if v.NetworkConfiguration != nil {
+		if err := validateNetworkConfiguration(v.NetworkConfiguration); err != nil {
+			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {

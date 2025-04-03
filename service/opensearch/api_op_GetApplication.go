@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Check the configuration and status of an existing OpenSearch Application.
+// Retrieves the configuration and status of an existing OpenSearch application.
 func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput, optFns ...func(*Options)) (*GetApplicationOutput, error) {
 	if params == nil {
 		params = &GetApplicationInput{}
@@ -30,7 +30,7 @@ func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput
 
 type GetApplicationInput struct {
 
-	// Unique identifier of the checked OpenSearch Application.
+	// The unique identifier of the OpenSearch application to retrieve.
 	//
 	// This member is required.
 	Id *string
@@ -40,7 +40,7 @@ type GetApplicationInput struct {
 
 type GetApplicationOutput struct {
 
-	// App configurations of the checked OpenSearch Application.
+	// The configuration settings of the OpenSearch application.
 	AppConfigs []types.AppConfig
 
 	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
@@ -49,29 +49,29 @@ type GetApplicationOutput struct {
 	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
 	Arn *string
 
-	// Timestamp at which the checked OpenSearch Application was created.
+	// The timestamp when the OpenSearch application was created.
 	CreatedAt *time.Time
 
-	// Associated data sources to the checked OpenSearch Application.
+	// The data sources associated with the OpenSearch application.
 	DataSources []types.DataSource
 
-	// Endpoint URL of the checked OpenSearch Application.
+	// The endpoint URL of the OpenSearch application.
 	Endpoint *string
 
-	// IAM Identity Center settings for the checked OpenSearch Application.
+	// The IAM Identity Center settings configured for the OpenSearch application.
 	IamIdentityCenterOptions *types.IamIdentityCenterOptions
 
-	// Unique identifier of the checked OpenSearch Application.
+	// The unique identifier of the OpenSearch application.
 	Id *string
 
-	// Timestamp at which the checked OpenSearch Application was last updated.
+	// The timestamp of the last update to the OpenSearch application.
 	LastUpdatedAt *time.Time
 
-	// Name of the checked OpenSearch Application.
+	// The name of the OpenSearch application.
 	Name *string
 
-	// Current status of the checked OpenSearch Application. Possible values are
-	// CREATING , UPDATING , DELETING , FAILED , ACTIVE , and DELETED .
+	// The current status of the OpenSearch application. Possible values: CREATING ,
+	// UPDATING , DELETING , FAILED , ACTIVE , and DELETED .
 	Status types.ApplicationStatus
 
 	// Metadata pertaining to the operation's result.

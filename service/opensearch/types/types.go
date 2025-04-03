@@ -198,20 +198,23 @@ type AIMLOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Configurations of the OpenSearch Application.
+// Configuration settings for an OpenSearch application. For more information, see
+// see [Using the OpenSearch user interface in Amazon OpenSearch Service].
+//
+// [Using the OpenSearch user interface in Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html
 type AppConfig struct {
 
-	// Specify the item to configure, such as admin role for the OpenSearch
-	// Application.
+	// The configuration item to set, such as the admin role for the OpenSearch
+	// application.
 	Key AppConfigType
 
-	// Specifies the value to configure for the key, such as an IAM user ARN.
+	// The value assigned to the configuration key, such as an IAM user ARN.
 	Value *string
 
 	noSmithyDocumentSerde
 }
 
-// Basic information of the OpenSearch Application.
+// Basic details of an OpenSearch application.
 type ApplicationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
@@ -220,23 +223,23 @@ type ApplicationSummary struct {
 	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
 	Arn *string
 
-	// Timestamp at which an OpenSearch Application was created.
+	// The timestamp when an OpenSearch application was created.
 	CreatedAt *time.Time
 
-	// Endpoint URL of an OpenSearch Application.
+	// The endpoint URL of an OpenSearch application.
 	Endpoint *string
 
-	// Unique identifier for an OpenSearch application.
+	// The unique identifier of an OpenSearch application.
 	Id *string
 
-	// Timestamp at which an OpenSearch Application was last updated.
+	// The timestamp of the last update to an OpenSearch application.
 	LastUpdatedAt *time.Time
 
-	// Name of an OpenSearch Application.
+	// The name of an OpenSearch application.
 	Name *string
 
-	// Status of an OpenSearch Application. Possible values are CREATING , UPDATING ,
-	// DELETING , FAILED , ACTIVE , and DELETED .
+	// The current status of an OpenSearch application. Possible values: CREATING ,
+	// UPDATING , DELETING , FAILED , ACTIVE , and DELETED .
 	Status ApplicationStatus
 
 	noSmithyDocumentSerde
@@ -921,7 +924,8 @@ type DomainConfig struct {
 	// change your address type later.
 	IPAddressType *IPAddressTypeStatus
 
-	// Container for IAM Identity Center Option control for the domain.
+	// Configuration options for enabling and managing IAM Identity Center integration
+	// within a domain.
 	IdentityCenterOptions *IdentityCenterOptionsStatus
 
 	// Key-value pairs to configure log publishing.
@@ -1065,7 +1069,7 @@ type DomainNodesStatus struct {
 	// Indicates if the node is active or in standby.
 	NodeStatus NodeStatus
 
-	// Indicates whether the nodes is a data, master, or ultrawarm node.
+	// Indicates whether the nodes is a data, master, or UltraWarm node.
 	NodeType NodeType
 
 	// The storage size of the node, in GiB.
@@ -1074,7 +1078,7 @@ type DomainNodesStatus struct {
 	// Indicates if the node has EBS or instance storage.
 	StorageType *string
 
-	// If the nodes has EBS storage, indicates if the volume type is GP2 or GP3. Only
+	// If the nodes has EBS storage, indicates if the volume type is gp2 or gp3. Only
 	// applicable for data nodes.
 	StorageVolumeType VolumeType
 
@@ -1228,7 +1232,8 @@ type DomainStatus struct {
 	// The type of IP addresses supported by the endpoint for the domain.
 	IPAddressType IPAddressType
 
-	// Container for IAM Identity Center Option control for the domain.
+	// Configuration options for controlling IAM Identity Center integration within a
+	// domain.
 	IdentityCenterOptions *IdentityCenterOptions
 
 	// Log publishing options for the domain.
@@ -1444,10 +1449,10 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for IAM Identity Center for an OpenSearch Application.
+// Configuration settings for IAM Identity Center in an OpenSearch Application.
 type IamIdentityCenterOptions struct {
 
-	// IAM Identity Center is enabled for the OpenSearch Application.
+	// Indicates whether IAM Identity Center is enabled for the OpenSearch Application.
 	Enabled *bool
 
 	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
@@ -1462,17 +1467,17 @@ type IamIdentityCenterOptions struct {
 	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
 	IamIdentityCenterInstanceArn *string
 
-	// Amazon Resource Name of the IAM Identity Center's Application created for the
-	// OpenSearch Application after enabling IAM Identity Center.
+	// The Amazon Resource Name (ARN) of the IAM role assigned to the IAM Identity
+	// Center application for the OpenSearch Application.
 	IamRoleForIdentityCenterApplicationArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Settings for IAM Identity Center.
+// Configuration settings for enabling and managing IAM Identity Center.
 type IamIdentityCenterOptionsInput struct {
 
-	// Enable/disable settings for IAM Identity Center.
+	// Specifies whether IAM Identity Center is enabled or disabled.
 	Enabled *bool
 
 	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
@@ -1481,69 +1486,73 @@ type IamIdentityCenterOptionsInput struct {
 	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
 	IamIdentityCenterInstanceArn *string
 
-	// Amazon Resource Name of IAM Identity Center's application.
+	// The ARN of the IAM role associated with the IAM Identity Center application.
 	IamRoleForIdentityCenterApplicationArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Container for IAM Identity Center Options settings.
+// Settings container for integrating IAM Identity Center with OpenSearch UI
+// applications, which enables enabling secure user authentication and access
+// control across multiple data sources. This setup supports single sign-on (SSO)
+// through IAM Identity Center, allowing centralized user management.
 type IdentityCenterOptions struct {
 
-	// True to enable IAM Identity Center for API access in Amazon OpenSearch Service.
+	// Indicates whether IAM Identity Center is enabled for the application.
 	EnabledAPIAccess *bool
 
-	// The ARN for IAM Identity Center Application which will integrate with Amazon
+	// The ARN of the IAM Identity Center application that integrates with Amazon
 	// OpenSearch Service.
 	IdentityCenterApplicationARN *string
 
-	// The ARN for IAM Identity Center Instance.
+	// The Amazon Resource Name (ARN) of the IAM Identity Center instance.
 	IdentityCenterInstanceARN *string
 
-	// The ID of IAM Identity Store.
+	// The identifier of the IAM Identity Store.
 	IdentityStoreId *string
 
-	// Specify the attribute that contains the backend role (groupName, groupID) of
-	// IAM Identity Center
+	// Specifies the attribute that contains the backend role identifier (such as
+	// group name or group ID) in IAM Identity Center.
 	RolesKey RolesKeyIdCOption
 
-	// Specify the attribute that contains the subject (username, userID, email) of
-	// IAM Identity Center.
+	// Specifies the attribute that contains the subject identifier (such as username,
+	// user ID, or email) in IAM Identity Center.
 	SubjectKey SubjectKeyIdCOption
 
 	noSmithyDocumentSerde
 }
 
-// Container for IAM Identity Center Options settings.
+// Configuration settings for enabling and managing IAM Identity Center.
 type IdentityCenterOptionsInput struct {
 
-	// True to enable IAM Identity Center for API access in Amazon OpenSearch Service.
+	// Indicates whether IAM Identity Center is enabled for API access in Amazon
+	// OpenSearch Service.
 	EnabledAPIAccess *bool
 
-	// The ARN for IAM Identity Center Instance which will be used for IAM Identity
-	// Center Application creation.
+	// The ARN of the IAM Identity Center instance used to create an OpenSearch UI
+	// application that uses IAM Identity Center for authentication.
 	IdentityCenterInstanceARN *string
 
-	// Specify the attribute that contains the backend role (groupName, groupID) of
-	// IAM Identity Center
+	// Specifies the attribute that contains the backend role identifier (such as
+	// group name or group ID) in IAM Identity Center.
 	RolesKey RolesKeyIdCOption
 
-	// Specify the attribute that contains the subject (username, userID, email) of
-	// IAM Identity Center.
+	// Specifies the attribute that contains the subject identifier (such as username,
+	// user ID, or email) in IAM Identity Center.
 	SubjectKey SubjectKeyIdCOption
 
 	noSmithyDocumentSerde
 }
 
-// The status of IAM Identity Center Options settings for a domain.
+// The status of IAM Identity Center configuration settings for a domain.
 type IdentityCenterOptionsStatus struct {
 
-	// Container for IAM Identity Center Options settings.
+	// Configuration settings for IAM Identity Center integration.
 	//
 	// This member is required.
 	Options *IdentityCenterOptions
 
-	// The status of IAM Identity Center Options settings for a domain.
+	// The status of IAM Identity Center configuration settings for a domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -1843,28 +1852,29 @@ type NaturalLanguageQueryGenerationOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for specifying configuration of any node type.
+// Configuration options for defining the setup of any node type within the
+// cluster.
 type NodeConfig struct {
 
-	// The number of nodes of a particular node type in the cluster.
+	// The number of nodes of a specific type within the cluster.
 	Count *int32
 
-	// A boolean that indicates whether a particular node type is enabled or not.
+	// A boolean value indicating whether a specific node type is active or inactive.
 	Enabled *bool
 
-	// The instance type of a particular node type in the cluster.
+	// The instance type of a particular node within the cluster.
 	Type OpenSearchPartitionInstanceType
 
 	noSmithyDocumentSerde
 }
 
-// Container for specifying node type.
+// Configuration settings for defining the node type within a cluster.
 type NodeOption struct {
 
-	// Container for specifying configuration of any node type.
+	// Configuration options for defining the setup of any node type.
 	NodeConfig *NodeConfig
 
-	// Container for node type like coordinating.
+	// Defines the type of node, such as coordinating nodes.
 	NodeType NodeOptionsNodeType
 
 	noSmithyDocumentSerde
@@ -2108,7 +2118,7 @@ type PackageDetails struct {
 	// User-specified description of the package.
 	PackageDescription *string
 
-	// Package Encryption Options for a package.
+	// Encryption options for a package.
 	PackageEncryptionOptions *PackageEncryptionOptions
 
 	// The unique identifier of the package.
@@ -2117,7 +2127,7 @@ type PackageDetails struct {
 	// The user-specified name of the package.
 	PackageName *string
 
-	// The owner of the package who is allowed to create/update a package and add
+	// The owner of the package who is allowed to create and update a package and add
 	// users to the package scope.
 	PackageOwner *string
 
@@ -2145,8 +2155,8 @@ type PackageDetailsForAssociation struct {
 	// The configuration parameters for associating the package with a domain.
 	AssociationConfiguration *PackageAssociationConfiguration
 
-	// List of package IDs that must be associated with the domain with or before the
-	// package can be associated.
+	// List of package IDs that must be linked to the domain before or simultaneously
+	// with the package association.
 	PrerequisitePackageIDList []string
 
 	noSmithyDocumentSerde
@@ -2155,12 +2165,12 @@ type PackageDetailsForAssociation struct {
 // Encryption options for a package.
 type PackageEncryptionOptions struct {
 
-	// This indicates whether encryption is enabled for the package.
+	// Whether encryption is enabled for the package.
 	//
 	// This member is required.
 	EncryptionEnabled *bool
 
-	//  KMS key ID for encrypting the package.
+	// KMS key ID for encrypting the package.
 	KmsKeyIdentifier *string
 
 	noSmithyDocumentSerde
@@ -2178,12 +2188,12 @@ type PackageSource struct {
 	noSmithyDocumentSerde
 }
 
-// The vending options for a package to determine if the package can be used by
-// other users.
+// Configuration options for determining whether a package can be made available
+// for use by other users.
 type PackageVendingOptions struct {
 
-	// This indicates whether vending is enabled for the package to determine if
-	// package can be used by other users.
+	// Indicates whether the package vending feature is enabled, allowing the package
+	// to be used by other users.
 	//
 	// This member is required.
 	VendingEnabled *bool

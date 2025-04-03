@@ -66,6 +66,9 @@ type GetIngressPointOutput struct {
 	// The timestamp of when the ingress endpoint was last updated.
 	LastUpdatedTimestamp *time.Time
 
+	// The network configuration for the ingress point.
+	NetworkConfiguration types.NetworkConfiguration
+
 	// The identifier of a rule set resource associated with the ingress endpoint.
 	RuleSetId *string
 

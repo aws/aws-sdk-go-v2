@@ -235,6 +235,7 @@ const (
 	LanguageCodeUkUa  LanguageCode = "uk-UA"
 	LanguageCodeUzUz  LanguageCode = "uz-UZ"
 	LanguageCodeWoSn  LanguageCode = "wo-SN"
+	LanguageCodeZhHk  LanguageCode = "zh-HK"
 	LanguageCodeZuZa  LanguageCode = "zu-ZA"
 )
 
@@ -346,6 +347,7 @@ func (LanguageCode) Values() []LanguageCode {
 		"uk-UA",
 		"uz-UZ",
 		"wo-SN",
+		"zh-HK",
 		"zu-ZA",
 	}
 }

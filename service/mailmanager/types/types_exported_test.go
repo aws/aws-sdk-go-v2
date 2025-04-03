@@ -141,6 +141,24 @@ func ExampleIngressIpToEvaluate_outputUsage() {
 
 var _ types.IngressIpv4Attribute
 
+func ExampleIngressIpv6ToEvaluate_outputUsage() {
+	var union types.IngressIpv6ToEvaluate
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IngressIpv6ToEvaluateMemberAttribute:
+		_ = v.Value // Value is types.IngressIpv6Attribute
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.IngressIpv6Attribute
+
 func ExampleIngressPointConfiguration_outputUsage() {
 	var union types.IngressPointConfiguration
 	// type switches can be used to check the union value
@@ -203,6 +221,28 @@ func ExampleIngressTlsProtocolToEvaluate_outputUsage() {
 
 var _ types.IngressTlsAttribute
 
+func ExampleNetworkConfiguration_outputUsage() {
+	var union types.NetworkConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.NetworkConfigurationMemberPrivateNetworkConfiguration:
+		_ = v.Value // Value is types.PrivateNetworkConfiguration
+
+	case *types.NetworkConfigurationMemberPublicNetworkConfiguration:
+		_ = v.Value // Value is types.PublicNetworkConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PublicNetworkConfiguration
+var _ *types.PrivateNetworkConfiguration
+
 func ExamplePolicyCondition_outputUsage() {
 	var union types.PolicyCondition
 	// type switches can be used to check the union value
@@ -212,6 +252,9 @@ func ExamplePolicyCondition_outputUsage() {
 
 	case *types.PolicyConditionMemberIpExpression:
 		_ = v.Value // Value is types.IngressIpv4Expression
+
+	case *types.PolicyConditionMemberIpv6Expression:
+		_ = v.Value // Value is types.IngressIpv6Expression
 
 	case *types.PolicyConditionMemberStringExpression:
 		_ = v.Value // Value is types.IngressStringExpression
@@ -229,6 +272,7 @@ func ExamplePolicyCondition_outputUsage() {
 }
 
 var _ *types.IngressStringExpression
+var _ *types.IngressIpv6Expression
 var _ *types.IngressBooleanExpression
 var _ *types.IngressTlsProtocolExpression
 var _ *types.IngressIpv4Expression

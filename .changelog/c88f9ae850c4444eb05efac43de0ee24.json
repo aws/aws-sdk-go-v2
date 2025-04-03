@@ -1,0 +1,8 @@
+{
+    "id": "c88f9ae8-50c4-444e-b05e-fac43de0ee24",
+    "type": "documentation",
+    "description": "Improve descriptions for various API commands and data types.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

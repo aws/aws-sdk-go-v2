@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing OpenSearch Application.
+// Deletes a specified OpenSearch application.
 func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicationInput, optFns ...func(*Options)) (*DeleteApplicationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicatio
 
 type DeleteApplicationInput struct {
 
-	// Unique identifier for the OpenSearch Application that you want to delete.
+	// The unique identifier of the OpenSearch application to delete.
 	//
 	// This member is required.
 	Id *string

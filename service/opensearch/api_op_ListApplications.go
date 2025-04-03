@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all OpenSearch Applications under your account.
+// Lists all OpenSearch applications under your account.
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationsInput{}
@@ -38,9 +38,8 @@ type ListApplicationsInput struct {
 	// using the returned token to retrieve the next page.
 	NextToken *string
 
-	// OpenSearch Application Status can be used as filters for the listing request.
-	// Possible values are CREATING , UPDATING , DELETING , FAILED , ACTIVE , and
-	// DELETED .
+	// Filters the list of OpenSearch applications by status. Possible values: CREATING
+	// , UPDATING , DELETING , FAILED , ACTIVE , and DELETED .
 	Statuses []types.ApplicationStatus
 
 	noSmithyDocumentSerde
@@ -48,8 +47,8 @@ type ListApplicationsInput struct {
 
 type ListApplicationsOutput struct {
 
-	// Summary of the OpenSearch Applications, including ID, ARN, name, endpoint,
-	// status, create time and last update time.
+	// Summarizes OpenSearch applications, including ID, ARN, name, endpoint, status,
+	// creation time, and last update time.
 	ApplicationSummaries []types.ApplicationSummary
 
 	// When nextToken is returned, there are more results available. The value of

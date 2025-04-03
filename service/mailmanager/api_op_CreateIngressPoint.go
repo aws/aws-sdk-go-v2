@@ -59,6 +59,11 @@ type CreateIngressPointInput struct {
 	// SMTP password or a secret ARN.
 	IngressPointConfiguration types.IngressPointConfiguration
 
+	// Specifies the network configuration for the ingress point. This allows you to
+	// create an IPv4-only, Dual-Stack, or PrivateLink type of ingress point. If not
+	// specified, the default network type is IPv4-only.
+	NetworkConfiguration types.NetworkConfiguration
+
 	// The tags used to organize, track, or control access for the resource. For
 	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags []types.Tag

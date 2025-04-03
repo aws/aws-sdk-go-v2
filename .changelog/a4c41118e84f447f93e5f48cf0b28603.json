@@ -1,0 +1,8 @@
+{
+    "id": "a4c41118-e84f-447f-93e5-f48cf0b28603",
+    "type": "feature",
+    "description": "This Feature Adds Support for the \"zh-HK\" Locale for Batch Operations",
+    "modules": [
+        "service/transcribe"
+    ]
+}

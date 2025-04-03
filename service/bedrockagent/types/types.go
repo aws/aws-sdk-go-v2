@@ -3326,6 +3326,10 @@ type MongoDbAtlasConfiguration struct {
 	// MongoDB Atlas cluster.
 	EndpointServiceName *string
 
+	// The name of the text search index in the MongoDB collection. This is required
+	// for using the hybrid search feature.
+	TextIndexName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -4246,6 +4250,10 @@ type RdsFieldMapping struct {
 	//
 	// This member is required.
 	VectorField *string
+
+	// Provide a name for the universal metadata field where Amazon Bedrock will store
+	// any custom metadata from your data source.
+	CustomMetadataField *string
 
 	noSmithyDocumentSerde
 }

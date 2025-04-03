@@ -8356,6 +8356,61 @@ func awsRestjson1_serializeDocumentArchivingOptions(v *types.ArchivingOptions, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAttachment(v *types.Attachment, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContentDescription != nil {
+		ok := object.Key("ContentDescription")
+		ok.String(*v.ContentDescription)
+	}
+
+	if len(v.ContentDisposition) > 0 {
+		ok := object.Key("ContentDisposition")
+		ok.String(string(v.ContentDisposition))
+	}
+
+	if v.ContentId != nil {
+		ok := object.Key("ContentId")
+		ok.String(*v.ContentId)
+	}
+
+	if len(v.ContentTransferEncoding) > 0 {
+		ok := object.Key("ContentTransferEncoding")
+		ok.String(string(v.ContentTransferEncoding))
+	}
+
+	if v.ContentType != nil {
+		ok := object.Key("ContentType")
+		ok.String(*v.ContentType)
+	}
+
+	if v.FileName != nil {
+		ok := object.Key("FileName")
+		ok.String(*v.FileName)
+	}
+
+	if v.RawContent != nil {
+		ok := object.Key("RawContent")
+		ok.Base64EncodeBytes(v.RawContent)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAttachmentList(v []types.Attachment, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAttachment(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBatchGetMetricDataQueries(v []types.BatchGetMetricDataQuery, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -9185,6 +9240,13 @@ func awsRestjson1_serializeDocumentMessage(v *types.Message, value smithyjson.Va
 	object := value.Object()
 	defer object.Close()
 
+	if v.Attachments != nil {
+		ok := object.Key("Attachments")
+		if err := awsRestjson1_serializeDocumentAttachmentList(v.Attachments, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Body != nil {
 		ok := object.Key("Body")
 		if err := awsRestjson1_serializeDocumentBody(v.Body, ok); err != nil {
@@ -9576,6 +9638,13 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 func awsRestjson1_serializeDocumentTemplate(v *types.Template, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Attachments != nil {
+		ok := object.Key("Attachments")
+		if err := awsRestjson1_serializeDocumentAttachmentList(v.Attachments, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Headers != nil {
 		ok := object.Key("Headers")

@@ -111,7 +111,7 @@ type UpdateDomainConfigInput struct {
 	// can't change it.
 	IPAddressType types.IPAddressType
 
-	// Container for IAM Identity Center Options settings.
+	// Configuration settings for enabling and managing IAM Identity Center.
 	IdentityCenterOptions *types.IdentityCenterOptionsInput
 
 	// Options to publish OpenSearch logs to Amazon CloudWatch Logs.

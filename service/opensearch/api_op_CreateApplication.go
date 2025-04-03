@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// Creates an OpenSearch Application.
+// Creates an OpenSearch UI application. For more information, see [Using the OpenSearch user interface in Amazon OpenSearch Service].
+//
+// [Using the OpenSearch user interface in Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -30,23 +32,24 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 
 type CreateApplicationInput struct {
 
-	// Name of the OpenSearch Appication to create. Application names are unique
-	// across the applications owned by an account within an Amazon Web Services
-	// Region.
+	// The unique name of the OpenSearch application. Names must be unique within an
+	// Amazon Web Services Region for each account.
 	//
 	// This member is required.
 	Name *string
 
-	// Configurations of the OpenSearch Application, inlcuding admin configuration.
+	// Configuration settings for the OpenSearch application, including administrative
+	// options.
 	AppConfigs []types.AppConfig
 
-	// A unique client idempotency token. It will be auto generated if not provided.
+	// Unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
 
-	// Data sources to be associated with the OpenSearch Application.
+	// The data sources to link to the OpenSearch application.
 	DataSources []types.DataSource
 
-	// Settings of IAM Identity Center for the OpenSearch Application.
+	// Configuration settings for integrating Amazon Web Services IAM Identity Center
+	// with the OpenSearch application.
 	IamIdentityCenterOptions *types.IamIdentityCenterOptionsInput
 
 	// A list of tags attached to a domain.
@@ -57,7 +60,8 @@ type CreateApplicationInput struct {
 
 type CreateApplicationOutput struct {
 
-	// Configurations of the OpenSearch Application, inlcuding admin configuration.
+	// Configuration settings for the OpenSearch application, including administrative
+	// options.
 	AppConfigs []types.AppConfig
 
 	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
@@ -66,19 +70,19 @@ type CreateApplicationOutput struct {
 	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
 	Arn *string
 
-	// Timestamp when the OpenSearch Application was created.
+	// The timestamp indicating when the OpenSearch application was created.
 	CreatedAt *time.Time
 
-	// Data sources associated with the created OpenSearch Application.
+	// The data sources linked to the OpenSearch application.
 	DataSources []types.DataSource
 
-	// Settings of IAM Identity Center for the created OpenSearch Application.
+	// The IAM Identity Center settings configured for the OpenSearch application.
 	IamIdentityCenterOptions *types.IamIdentityCenterOptions
 
-	// Unique identifier for the created OpenSearch Application.
+	// The unique identifier assigned to the OpenSearch application.
 	Id *string
 
-	// Name of the created OpenSearch Application.
+	// The name of the OpenSearch application.
 	Name *string
 
 	// A list of tags attached to a domain.
