@@ -1606,7 +1606,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You do not have the necessary permissons for this action.</p>",
+                "smithy.api#documentation": "<p>You do not have the necessary permissions for this action.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1868,7 +1868,7 @@
                     }
                 },
                 "EventSourceArn": {
-                    "target": "com.amazonaws.eventbridge#Arn",
+                    "target": "com.amazonaws.eventbridge#EventBusArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the event bus associated with the archive. Only events from this event bus are\n      sent to the archive.</p>"
                     }
@@ -2793,13 +2793,13 @@
                 "ResourceConfigurationArn": {
                     "target": "com.amazonaws.eventbridge#ResourceConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource configuration for the resource endpoint.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon VPC Lattice resource configuration for the resource endpoint.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource configuration for the resource endpoint.</p>"
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon VPC Lattice resource configuration for the resource endpoint.</p>"
             }
         },
         "com.amazonaws.eventbridge#ConnectivityResourceParameters": {
@@ -2952,7 +2952,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an archive of events with the specified settings. When you create an archive,\n      incoming events might not immediately start being sent to the archive. Allow a short period of\n      time for changes to take effect. If you do not specify a pattern to filter events sent to the\n      archive, all events are sent to the archive except replayed events. Replayed events are not\n      sent to an archive.</p>\n         <note>\n            <p>Archives and schema discovery are not supported for event buses encrypted using a\n        customer managed key. EventBridge returns an error if:</p>\n            <ul>\n               <li>\n                  <p>You call <code>\n                        <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateArchive.html\">CreateArchive</a>\n                     </code> on an event bus set to use a customer managed key for encryption.</p>\n               </li>\n               <li>\n                  <p>You call <code>\n                        <a href=\"https://docs.aws.amazon.com/eventbridge/latest/schema-reference/v1-discoverers.html#CreateDiscoverer\">CreateDiscoverer</a>\n                     </code> on an event bus set to use a customer managed key for encryption.</p>\n               </li>\n               <li>\n                  <p>You call <code>\n                        <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_UpdatedEventBus.html\">UpdatedEventBus</a>\n                     </code> to set a customer managed key on an event bus with an archives or schema discovery enabled.</p>\n               </li>\n            </ul>\n            <p>To enable archives or schema discovery on an event bus, choose to\n        use an Amazon Web Services owned key. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html\">Data encryption in EventBridge</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates an archive of events with the specified settings. When you create an archive,\n      incoming events might not immediately start being sent to the archive. Allow a short period of\n      time for changes to take effect. If you do not specify a pattern to filter events sent to the\n      archive, all events are sent to the archive except replayed events. Replayed events are not\n      sent to an archive.</p>\n         <important>\n            <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a \n        customer managed key for any archives for the event bus as well. </p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html\">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         </important>"
             }
         },
         "com.amazonaws.eventbridge#CreateArchiveRequest": {
@@ -2966,7 +2966,7 @@
                     }
                 },
                 "EventSourceArn": {
-                    "target": "com.amazonaws.eventbridge#Arn",
+                    "target": "com.amazonaws.eventbridge#EventBusArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the event bus that sends events to the archive.</p>",
                         "smithy.api#required": {}
@@ -2988,6 +2988,12 @@
                     "target": "com.amazonaws.eventbridge#RetentionDays",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of days to retain events for. Default value is 0. If set to 0, events are\n      retained indefinitely</p>"
+                    }
+                },
+                "KmsKeyIdentifier": {
+                    "target": "com.amazonaws.eventbridge#KmsKeyIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the KMS\n      customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key \n      Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>\n         <p>If you do not specify a customer managed key identifier, EventBridge uses an\n        Amazon Web Services owned key to encrypt the archive.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html\">Identify and view keys</a> in the <i>Key Management Service\n                                Developer Guide</i>. </p>\n         <important>\n            <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a \n        customer managed key for any archives for the event bus as well. </p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html\">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         </important>"
                     }
                 }
             },
@@ -3231,7 +3237,7 @@
                 "InvocationConnectivityParameters": {
                     "target": "com.amazonaws.eventbridge#ConnectivityResourceParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>For connections to private resource endpoints, the parameters to use for invoking the resource endpoint.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-target-connection-private.html\">Connecting to private resources</a> in the <i>\n               <i>Amazon EventBridge User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>For connections to private APIs, the parameters to use for invoking the API.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/connection-private.html\">Connecting to private APIs</a> in the <i>\n               <i>Amazon EventBridge User Guide</i>\n            </i>.</p>"
                     }
                 }
             },
@@ -3451,7 +3457,7 @@
                 "KmsKeyIdentifier": {
                     "target": "com.amazonaws.eventbridge#KmsKeyIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the KMS\n      customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key \n      Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>\n         <p>If you do not specify a customer managed key identifier, EventBridge uses an\n        Amazon Web Services owned key to encrypt events on the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html\">Managing keys</a> in the <i>Key Management Service\n                                Developer Guide</i>. </p>\n         <note>\n            <p>Archives and schema discovery are not supported for event buses encrypted using a\n        customer managed key. EventBridge returns an error if:</p>\n            <ul>\n               <li>\n                  <p>You call <code>\n                        <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateArchive.html\">CreateArchive</a>\n                     </code> on an event bus set to use a customer managed key for encryption.</p>\n               </li>\n               <li>\n                  <p>You call <code>\n                        <a href=\"https://docs.aws.amazon.com/eventbridge/latest/schema-reference/v1-discoverers.html#CreateDiscoverer\">CreateDiscoverer</a>\n                     </code> on an event bus set to use a customer managed key for encryption.</p>\n               </li>\n               <li>\n                  <p>You call <code>\n                        <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_UpdatedEventBus.html\">UpdatedEventBus</a>\n                     </code> to set a customer managed key on an event bus with an archives or schema discovery enabled.</p>\n               </li>\n            </ul>\n            <p>To enable archives or schema discovery on an event bus, choose to\n        use an Amazon Web Services owned key. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html\">Data encryption in EventBridge</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The identifier of the KMS\n      customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key \n      Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>\n         <p>If you do not specify a customer managed key identifier, EventBridge uses an\n        Amazon Web Services owned key to encrypt events on the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html\">Identify and view keys</a> in the <i>Key Management Service\n                                Developer Guide</i>. </p>\n         <note>\n            <p>Schema discovery is not supported for event buses encrypted using a\n        customer managed key. EventBridge returns an error if you call <code>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/schema-reference/v1-discoverers.html#CreateDiscoverer\">CreateDiscoverer</a>\n               </code> on an event bus set to use a customer managed key for encryption.</p>\n            <p>To enable schema discovery on an event bus, choose to\n        use an Amazon Web Services owned key. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption-event-bus-cmkey.html\">Encrypting events</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         </note>\n         <important>\n            <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a \n        customer managed key for any archives for the event bus as well. </p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html\">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         </important>"
                     }
                 },
                 "DeadLetterConfig": {
@@ -4227,7 +4233,7 @@
                     }
                 },
                 "EventSourceArn": {
-                    "target": "com.amazonaws.eventbridge#Arn",
+                    "target": "com.amazonaws.eventbridge#EventBusArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the event source associated with the archive.</p>"
                     }
@@ -4254,6 +4260,12 @@
                     "target": "com.amazonaws.eventbridge#ArchiveStateReason",
                     "traits": {
                         "smithy.api#documentation": "<p>The reason that the archive is in the state.</p>"
+                    }
+                },
+                "KmsKeyIdentifier": {
+                    "target": "com.amazonaws.eventbridge#KmsKeyIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the KMS\n      customer managed key for EventBridge to use to encrypt this archive, if one has been specified.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html\">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
                     }
                 },
                 "RetentionDays": {
@@ -4350,7 +4362,7 @@
                 "ResourceAssociationArn": {
                     "target": "com.amazonaws.eventbridge#ResourceAssociationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>For connections to private APIs, the Amazon Resource Name (ARN) of the resource association EventBridge created between the connection and the private API's resource configuration.</p>",
+                        "smithy.api#documentation": "<p>For connections to private APIs, the Amazon Resource Name (ARN) of the resource association EventBridge created between the connection and the private API's resource configuration.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/connection-private.html#connection-private-snra\">\n      Managing service network resource associations for connections</a> in the <i>\n               <i>Amazon EventBridge User Guide</i>\n            </i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4383,7 +4395,7 @@
                 "InvocationConnectivityParameters": {
                     "target": "com.amazonaws.eventbridge#DescribeConnectionConnectivityParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>For connections to private resource endpoints. The parameters EventBridge uses to invoke the resource endpoint.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-target-connection-private.html\">Connecting to private resources</a> in the <i>\n               <i>Amazon EventBridge User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>For connections to private APIs The parameters EventBridge uses to invoke the resource\n      endpoint.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/connection-private.html\">Connecting to private APIs</a> in the <i>\n               <i>Amazon EventBridge User Guide</i>\n            </i>.</p>"
                     }
                 },
                 "ConnectionState": {
@@ -4862,7 +4874,7 @@
                     }
                 },
                 "EventSourceArn": {
-                    "target": "com.amazonaws.eventbridge#Arn",
+                    "target": "com.amazonaws.eventbridge#ArchiveArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the archive events were replayed from.</p>"
                     }
@@ -5497,6 +5509,16 @@
                 "smithy.api#documentation": "<p>An event bus receives events from a source, uses rules to evaluate them, applies any\n      configured input transformation, and routes them to the appropriate target(s). Your account's\n      default event bus receives events from Amazon Web Services services. A custom event bus can\n      receive events from your custom applications and services. A partner event bus receives events\n      from an event source created by an SaaS partner. These events come from the partners services\n      or applications.</p>"
             }
         },
+        "com.amazonaws.eventbridge#EventBusArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:.+\\/.+$"
+            }
+        },
         "com.amazonaws.eventbridge#EventBusDescription": {
             "type": "string",
             "traits": {
@@ -5905,7 +5927,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-/:]*$"
             }
         },
         "com.amazonaws.eventbridge#LaunchType": {
@@ -6059,7 +6082,7 @@
                     }
                 },
                 "EventSourceArn": {
-                    "target": "com.amazonaws.eventbridge#Arn",
+                    "target": "com.amazonaws.eventbridge#EventBusArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the event source associated with the archive.</p>"
                     }
@@ -6544,7 +6567,7 @@
                     }
                 },
                 "EventSourceArn": {
-                    "target": "com.amazonaws.eventbridge#Arn",
+                    "target": "com.amazonaws.eventbridge#ArchiveArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the archive from which the events are replayed.</p>"
                     }
@@ -7255,7 +7278,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends custom events to Amazon EventBridge so that they can be matched to rules.</p>\n         <p>The maximum size for a PutEvents event entry is 256 KB. Entry size is calculated including\n      the event and any necessary characters and keys of the JSON representation of the event. To\n      learn more, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-putevent-size.html\">Calculating PutEvents event entry\n        size</a> in the <i>\n               <i>Amazon EventBridge User Guide</i>\n            </i>\n         </p>\n         <p>PutEvents accepts the data in JSON format. For the JSON number (integer) data type, the\n      constraints are: a minimum value of -9,223,372,036,854,775,808 and a maximum value of\n      9,223,372,036,854,775,807.</p>\n         <note>\n            <p>PutEvents will only process nested JSON up to 1000 levels deep.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Sends custom events to Amazon EventBridge so that they can be matched to rules.</p>\n         <p>You can batch multiple event entries into one request for efficiency. \n      However, the total entry size must be less than 256KB. You can calculate the entry size before you send the events. \n      For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-putevents.html#eb-putevent-size\">Calculating PutEvents event entry\n        size</a> in the <i>\n               <i>Amazon EventBridge User Guide</i>\n            </i>.</p>\n         <p>PutEvents accepts the data in JSON format. For the JSON number (integer) data type, the\n      constraints are: a minimum value of -9,223,372,036,854,775,808 and a maximum value of\n      9,223,372,036,854,775,807.</p>\n         <note>\n            <p>PutEvents will only process nested JSON up to 1000 levels deep.</p>\n         </note>"
             }
         },
         "com.amazonaws.eventbridge#PutEventsRequest": {
@@ -8110,7 +8133,7 @@
                     }
                 },
                 "EventSourceArn": {
-                    "target": "com.amazonaws.eventbridge#Arn",
+                    "target": "com.amazonaws.eventbridge#ArchiveArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the archive to replay event from.</p>"
                     }
@@ -8633,20 +8656,20 @@
                 "Name": {
                     "target": "com.amazonaws.eventbridge#SageMakerPipelineParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of parameter to start execution of a SageMaker Model Building\n      Pipeline.</p>",
+                        "smithy.api#documentation": "<p>Name of parameter to start execution of a SageMaker AI Model Building\n      Pipeline.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.eventbridge#SageMakerPipelineParameterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Value of parameter to start execution of a SageMaker Model Building\n      Pipeline.</p>",
+                        "smithy.api#documentation": "<p>Value of parameter to start execution of a SageMaker AI Model Building\n      Pipeline.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Name/Value pair of a parameter to start execution of a SageMaker Model Building\n      Pipeline.</p>"
+                "smithy.api#documentation": "<p>Name/Value pair of a parameter to start execution of a SageMaker AI Model Building\n      Pipeline.</p>"
             }
         },
         "com.amazonaws.eventbridge#SageMakerPipelineParameterList": {
@@ -8686,12 +8709,12 @@
                 "PipelineParameterList": {
                     "target": "com.amazonaws.eventbridge#SageMakerPipelineParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of Parameter names and values for SageMaker Model Building Pipeline\n      execution.</p>"
+                        "smithy.api#documentation": "<p>List of Parameter names and values for SageMaker AI Model Building Pipeline\n      execution.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These are custom parameters to use when the target is a SageMaker Model Building\n      Pipeline that starts based on EventBridge events.</p>"
+                "smithy.api#documentation": "<p>These are custom parameters to use when the target is a SageMaker AI Model Building\n      Pipeline that starts based on EventBridge events.</p>"
             }
         },
         "com.amazonaws.eventbridge#ScheduleExpression": {
@@ -8819,7 +8842,7 @@
                     }
                 },
                 "EventSourceArn": {
-                    "target": "com.amazonaws.eventbridge#Arn",
+                    "target": "com.amazonaws.eventbridge#ArchiveArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the archive to replay events from.</p>",
                         "smithy.api#required": {}
@@ -9105,7 +9128,7 @@
                 "SageMakerPipelineParameters": {
                     "target": "com.amazonaws.eventbridge#SageMakerPipelineParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the SageMaker Model Building Pipeline parameters to start execution of a\n        SageMaker Model Building Pipeline.</p>\n         <p>If you specify a SageMaker Model Building Pipeline as a target, you can use this\n      to specify parameters to start a pipeline execution based on EventBridge events.</p>"
+                        "smithy.api#documentation": "<p>Contains the SageMaker AI Model Building Pipeline parameters to start execution of a\n        SageMaker AI Model Building Pipeline.</p>\n         <p>If you specify a SageMaker AI Model Building Pipeline as a target, you can use this\n      to specify parameters to start a pipeline execution based on EventBridge events.</p>"
                     }
                 },
                 "DeadLetterConfig": {
@@ -9520,6 +9543,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of days to retain events in the archive.</p>"
                     }
+                },
+                "KmsKeyIdentifier": {
+                    "target": "com.amazonaws.eventbridge#KmsKeyIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the KMS\n      customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key \n      Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>\n         <p>If you do not specify a customer managed key identifier, EventBridge uses an\n        Amazon Web Services owned key to encrypt the archive.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html\">Identify and view keys</a> in the <i>Key Management Service\n                                Developer Guide</i>. </p>\n         <important>\n            <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a \n        customer managed key for any archives for the event bus as well. </p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html\">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         </important>"
+                    }
                 }
             },
             "traits": {
@@ -9751,7 +9780,7 @@
                 "InvocationConnectivityParameters": {
                     "target": "com.amazonaws.eventbridge#ConnectivityResourceParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>For connections to private resource endpoints, the parameters to use for invoking the resource endpoint.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-target-connection-private.html\">Connecting to private resources</a> in the <i>\n               <i>Amazon EventBridge User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>For connections to private APIs, the parameters to use for invoking the API.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/connection-private.html\">Connecting to private APIs</a> in the <i>\n               <i>Amazon EventBridge User Guide</i>\n            </i>.</p>"
                     }
                 }
             },
@@ -9965,7 +9994,7 @@
                 "KmsKeyIdentifier": {
                     "target": "com.amazonaws.eventbridge#KmsKeyIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the KMS\n      customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key \n      Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>\n         <p>If you do not specify a customer managed key identifier, EventBridge uses an\n        Amazon Web Services owned key to encrypt events on the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html\">Managing keys</a> in the <i>Key Management Service\n                                Developer Guide</i>. </p>\n         <note>\n            <p>Archives and schema discovery are not supported for event buses encrypted using a\n        customer managed key. EventBridge returns an error if:</p>\n            <ul>\n               <li>\n                  <p>You call <code>\n                        <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateArchive.html\">CreateArchive</a>\n                     </code> on an event bus set to use a customer managed key for encryption.</p>\n               </li>\n               <li>\n                  <p>You call <code>\n                        <a href=\"https://docs.aws.amazon.com/eventbridge/latest/schema-reference/v1-discoverers.html#CreateDiscoverer\">CreateDiscoverer</a>\n                     </code> on an event bus set to use a customer managed key for encryption.</p>\n               </li>\n               <li>\n                  <p>You call <code>\n                        <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_UpdatedEventBus.html\">UpdatedEventBus</a>\n                     </code> to set a customer managed key on an event bus with an archives or schema discovery enabled.</p>\n               </li>\n            </ul>\n            <p>To enable archives or schema discovery on an event bus, choose to\n        use an Amazon Web Services owned key. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html\">Data encryption in EventBridge</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The identifier of the KMS\n      customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key \n      Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>\n         <p>If you do not specify a customer managed key identifier, EventBridge uses an\n        Amazon Web Services owned key to encrypt events on the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html\">Identify and view keys</a> in the <i>Key Management Service\n                                Developer Guide</i>. </p>\n         <note>\n            <p>Schema discovery is not supported for event buses encrypted using a\n        customer managed key. EventBridge returns an error if you call <code>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/schema-reference/v1-discoverers.html#CreateDiscoverer\">CreateDiscoverer</a>\n               </code> on an event bus set to use a customer managed key for encryption.</p>\n            <p>To enable schema discovery on an event bus, choose to\n        use an Amazon Web Services owned key. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption-event-bus-cmkey.html\">Encrypting events</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         </note>\n         <important>\n            <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a \n        customer managed key for any archives for the event bus as well. </p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html\">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         </important>"
                     }
                 },
                 "Description": {

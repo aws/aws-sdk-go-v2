@@ -76,6 +76,20 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Adds an existing user, group, or computer as a group member.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To add a member to the Marketing group",
+                        "documentation": "The following command adds an existing user to the Marketing group in the europe.example.com domain.",
+                        "input": {
+                            "ClientToken": "550e8400-e29b-41d4-a716-446655440000",
+                            "DirectoryId": "d-12233abcde",
+                            "GroupName": "Marketing",
+                            "MemberName": "Pat Candella",
+                            "MemberRealm": "europe.example.com"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/GroupMemberships/AddGroupMember",
                     "method": "POST"
@@ -238,6 +252,32 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a new group.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a group",
+                        "documentation": "The following command creates a distribution list group named AcctngMail.",
+                        "input": {
+                            "ClientToken": "550e8400-e29b-41d4-a716-446655440000",
+                            "DirectoryId": "d-12233abcde",
+                            "GroupScope": "DomainLocal",
+                            "GroupType": "Distribution",
+                            "OtherAttributes": {
+                                "displayName": {
+                                    "S": "Acctng-mailing-list"
+                                },
+                                "description": {
+                                    "S": "Accounting dept mailing list"
+                                }
+                            },
+                            "SAMAccountName": "AcctngMail"
+                        },
+                        "output": {
+                            "DirectoryId": "d-12233abcde",
+                            "SAMAccountName": "AcctngMail",
+                            "SID": "S-1-5-33-123"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Groups/CreateGroup",
                     "method": "POST"
@@ -348,6 +388,33 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a new user.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a new user in the directory",
+                        "documentation": "The following command",
+                        "input": {
+                            "ClientToken": "550e8400-e29b-41d4-a716-446655440000",
+                            "DirectoryId": "d-12233abcde",
+                            "EmailAddress": "pcandella@exampledomain.com",
+                            "GivenName": "Pat Candella",
+                            "OtherAttributes": {
+                                "department": {
+                                    "S": "HR"
+                                },
+                                "homePhone": {
+                                    "S": "212-555-0100"
+                                }
+                            },
+                            "SAMAccountName": "pcandella",
+                            "Surname": "Candella"
+                        },
+                        "output": {
+                            "DirectoryId": "d-12233abcde",
+                            "SAMAccountName": "pcandella",
+                            "SID": "S-1-5-99-789"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Users/CreateUser",
                     "method": "POST"
@@ -467,6 +534,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a group.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a group",
+                        "documentation": "The following command deletes the marketing group from the specified directory.",
+                        "input": {
+                            "ClientToken": "550e8400-e29b-41d4-a716-446655440000",
+                            "DirectoryId": "d-12233abcde",
+                            "SAMAccountName": "marketing"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Groups/DeleteGroup",
                     "method": "POST"
@@ -543,6 +622,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a user.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a user",
+                        "documentation": "The following command deletes a group from the directory.",
+                        "input": {
+                            "ClientToken": "550e8400-e29b-41d4-a716-446655440000",
+                            "DirectoryId": "d-12233abcde",
+                            "SAMAccountName": "pcandella"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Users/DeleteUser",
                     "method": "POST"
@@ -616,6 +707,41 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns information about a specific group.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To return the attributes of a group",
+                        "documentation": "The following command returns the mapped attributes for a group along with the display name, description, and GUID for the group.",
+                        "input": {
+                            "DirectoryId": "d-12233abcde",
+                            "OtherAttributes": [
+                                "displayName",
+                                "description",
+                                "objectGUID"
+                            ],
+                            "Realm": "example.domain.com",
+                            "SAMAccountName": "DevOpsMail"
+                        },
+                        "output": {
+                            "DirectoryId": "d-12233abcde",
+                            "DistinguishedName": "DevOpsmail",
+                            "GroupScope": "Global",
+                            "GroupType": "Distribution",
+                            "OtherAttributes": {
+                                "displayName": {
+                                    "S": "DevOps mailing list"
+                                },
+                                "description": {
+                                    "S": "A group for DevOps email."
+                                },
+                                "objectGUID": {
+                                    "S": "123456789"
+                                }
+                            },
+                            "SAMAccountName": "DevOpsMail",
+                            "SID": "S-1-5-55-678"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Groups/DescribeGroup",
                     "method": "POST"
@@ -668,7 +794,7 @@
                 "OtherAttributes": {
                     "target": "com.amazonaws.directoryservicedata#LdapDisplayNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p> One or more attributes to be returned for the group. For a list of supported attributes,\n      see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data-attributes.html\">Directory Service Data Attributes</a>.\n    </p>"
+                        "smithy.api#documentation": "<p> One or more attributes to be returned for the group. For a list of supported attributes,\n      see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data_attributes.html\">Directory Service Data Attributes</a>.\n    </p>"
                     }
                 }
             },
@@ -762,6 +888,48 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns information about a specific user.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To return the attributes of a user",
+                        "documentation": "The following command returns the mapped attributes for a user along with the department, manager, IP phone, and date the user last set a password.",
+                        "input": {
+                            "DirectoryId": "d-12233abcde",
+                            "OtherAttributes": [
+                                "department",
+                                "manager",
+                                "ipPhone",
+                                "pwdLastSet"
+                            ],
+                            "Realm": "examplecorp.com",
+                            "SAMAccountName": "twhitlock"
+                        },
+                        "output": {
+                            "DirectoryId": "d-12233abcde",
+                            "DistinguishedName": "Terry Whitlock",
+                            "EmailAddress": "terry.whitlock@examplecorp.com",
+                            "Enabled": true,
+                            "GivenName": "Terry Whitlock",
+                            "OtherAttributes": {
+                                "department": {
+                                    "S": "communications"
+                                },
+                                "manager": {
+                                    "S": "OU=Users,DC=mmajors"
+                                },
+                                "ipPhone": {
+                                    "S": "111.111.111.111"
+                                },
+                                "pwdLastSet": {
+                                    "N": 0
+                                }
+                            },
+                            "SAMAccountName": "twhitlock",
+                            "SID": "123-456-7890",
+                            "Surname": "Whitlock",
+                            "UserPrincipalName": "terry.whitlock"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Users/DescribeUser",
                     "method": "POST"
@@ -858,7 +1026,7 @@
                 "UserPrincipalName": {
                     "target": "com.amazonaws.directoryservicedata#UserPrincipalName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The UPN that is an Internet-style login name for a user and is based on the Internet\n      standard <a href=\"https://www.ietf.org/rfc/rfc0822.txt\">RFC 822</a>. The UPN is shorter\n      than the distinguished name and easier to remember. </p>"
+                        "smithy.api#documentation": "<p> The UPN that is an Internet-style login name for a user and is based on the Internet\n      standard <a href=\"https://datatracker.ietf.org/doc/html/rfc822\">RFC 822</a>. The UPN is shorter\n      than the distinguished name and easier to remember. </p>"
                     }
                 },
                 "EmailAddress": {
@@ -1729,6 +1897,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p> Deactivates an active user account. For information about how to enable an inactive user\n      account, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/devguide/API_ResetUserPassword.html\">ResetUserPassword</a>\n      in the <i>Directory Service API Reference</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To disable a user account",
+                        "documentation": "The following command disables the account for twhitlock.",
+                        "input": {
+                            "ClientToken": "550e8400-e29b-41d4-a716-446655440000",
+                            "DirectoryId": "d-12233abcde",
+                            "SAMAccountName": "twhitlock"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Users/DisableUser",
                     "method": "POST"
@@ -2020,6 +2200,38 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p> Returns member information for the specified group. </p>\n         <p> This operation supports pagination with the use of the <code>NextToken</code> request and\n      response parameters. If more results are available, the\n        <code>ListGroupMembers.NextToken</code> member contains a token that you pass in the next\n      call to <code>ListGroupMembers</code>. This retrieves the next set of items. </p>\n         <p> You can also specify a maximum number of return results with the <code>MaxResults</code>\n      parameter. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list members of a group",
+                        "documentation": "The following command lists Marketing users in the trusted domain example.local.",
+                        "input": {
+                            "DirectoryId": "d-12233abcde",
+                            "SAMAccountName": "marketing",
+                            "MemberRealm": "example.local",
+                            "Realm": "examplecorp.com"
+                        },
+                        "output": {
+                            "DirectoryId": "d-12233abcde",
+                            "Members": [
+                                {
+                                    "SID": "S-1-5-11-111",
+                                    "SAMAccountName": "twhitlock",
+                                    "MemberType": "USER"
+                                },
+                                {
+                                    "SID": "S-1-5-11-112",
+                                    "SAMAccountName": "pcandella",
+                                    "MemberType": "USER"
+                                },
+                                {
+                                    "SID": "S-1-5-11-113",
+                                    "SAMAccountName": "jstiles",
+                                    "MemberType": "USER"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/GroupMemberships/ListGroupMembers",
                     "method": "POST"
@@ -2145,6 +2357,36 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p> Returns group information for the specified directory. </p>\n         <p> This operation supports pagination with the use of the <code>NextToken</code> request and\n      response parameters. If more results are available, the <code>ListGroups.NextToken</code>\n      member contains a token that you pass in the next call to <code>ListGroups</code>. This\n      retrieves the next set of items. </p>\n         <p> You can also specify a maximum number of return results with the <code>MaxResults</code>\n      parameter. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list domain groups",
+                        "documentation": "The following command lists the name and default attributes for groups on the examplecorp.com domain.",
+                        "input": {
+                            "DirectoryId": "d-12233abcde",
+                            "MaxResults": 123,
+                            "NextToken": "123456",
+                            "Realm": "examplecorp.com"
+                        },
+                        "output": {
+                            "DirectoryId": "d-12233abcde",
+                            "Groups": [
+                                {
+                                    "GroupScope": "BuiltinLocal",
+                                    "GroupType": "Security",
+                                    "SAMAccountName": "Administrators",
+                                    "SID": "S-1-5-32-544"
+                                },
+                                {
+                                    "GroupScope": "BuiltinLocal",
+                                    "GroupType": "Security",
+                                    "SAMAccountName": "Users",
+                                    "SID": "S-1-5-32-545"
+                                }
+                            ],
+                            "NextToken": "223456"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Groups/ListGroups",
                     "method": "POST"
@@ -2188,6 +2430,35 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p> Returns group information for the specified member. </p>\n         <p> This operation supports pagination with the use of the <code>NextToken</code> request and\n      response parameters. If more results are available, the\n        <code>ListGroupsForMember.NextToken</code> member contains a token that you pass in the next\n      call to <code>ListGroupsForMember</code>. This retrieves the next set of items. </p>\n         <p> You can also specify a maximum number of return results with the <code>MaxResults</code>\n      parameter. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list groups for a member",
+                        "documentation": "The following command",
+                        "input": {
+                            "DirectoryId": "d-12233abcde",
+                            "SAMAccountName": "twhitlock",
+                            "MemberRealm": "example.local",
+                            "Realm": "examplecorp.com"
+                        },
+                        "output": {
+                            "DirectoryId": "d-12233abcde",
+                            "Groups": [
+                                {
+                                    "GroupScope": "BuiltinLocal",
+                                    "GroupType": "Security",
+                                    "SAMAccountName": "Administrators",
+                                    "SID": "S-1-5-32-544"
+                                },
+                                {
+                                    "GroupScope": "BuiltinLocal",
+                                    "GroupType": "Security",
+                                    "SAMAccountName": "Users",
+                                    "SID": "S-1-5-32-545"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/GroupMemberships/ListGroupsForMember",
                     "method": "POST"
@@ -2379,6 +2650,36 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p> Returns user information for the specified directory. </p>\n         <p> This operation supports pagination with the use of the <code>NextToken</code> request and\n      response parameters. If more results are available, the <code>ListUsers.NextToken</code>\n      member contains a token that you pass in the next call to <code>ListUsers</code>. This\n      retrieves the next set of items. </p>\n         <p> You can also specify a maximum number of return results with the <code>MaxResults</code>\n      parameter. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list users in a realm",
+                        "documentation": "The following command lists users on the examplecorp.com domain.",
+                        "input": {
+                            "DirectoryId": "d-12233abcde",
+                            "Realm": "examplecorp.com"
+                        },
+                        "output": {
+                            "DirectoryId": "d-12233abcde",
+                            "Users": [
+                                {
+                                    "SID": "S-1-5-11-111",
+                                    "SAMAccountName": "twhitlock",
+                                    "Enabled": true
+                                },
+                                {
+                                    "SID": "S-1-5-11-112",
+                                    "SAMAccountName": "pcandella",
+                                    "Enabled": true
+                                },
+                                {
+                                    "SID": "S-1-5-11-113",
+                                    "SAMAccountName": "jstiles",
+                                    "Enabled": true
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Users/ListUsers",
                     "method": "POST"
@@ -2594,6 +2895,20 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p> Removes a member from a group. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To remove a member from a group",
+                        "documentation": "The following command removes the specified member from the example.local domain.",
+                        "input": {
+                            "ClientToken": "550e8400-e29b-41d4-a716-446655440000",
+                            "DirectoryId": "d-12233abcde",
+                            "GroupName": "DevOps",
+                            "MemberName": "Pat Candella",
+                            "MemberRealm": "example.local"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/GroupMemberships/RemoveGroupMember",
                     "method": "POST"
@@ -2699,6 +3014,40 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p> Searches the specified directory for a group. You can find groups that match the\n        <code>SearchString</code> parameter with the value of their attributes included in the\n        <code>SearchString</code> parameter. </p>\n         <p> This operation supports pagination with the use of the <code>NextToken</code> request and\n      response parameters. If more results are available, the <code>SearchGroups.NextToken</code>\n      member contains a token that you pass in the next call to <code>SearchGroups</code>. This\n      retrieves the next set of items. </p>\n         <p> You can also specify a maximum number of return results with the <code>MaxResults</code>\n      parameter. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To search for groups",
+                        "documentation": "The following command searches the examplecorp.com domain for groups with the GroupType security.",
+                        "input": {
+                            "DirectoryId": "d-12233abcde",
+                            "MaxResults": 123,
+                            "NextToken": "123456",
+                            "Realm": "examplecorp.com",
+                            "SearchAttributes": [
+                                "GroupScope"
+                            ],
+                            "SearchString": "Security"
+                        },
+                        "output": {
+                            "DirectoryId": "d-12233abcde",
+                            "Groups": [
+                                {
+                                    "GroupScope": "BuiltinLocal",
+                                    "GroupType": "Security",
+                                    "SAMAccountName": "Administrators",
+                                    "SID": "S-1-5-32-544"
+                                },
+                                {
+                                    "GroupScope": "BuiltinLocal",
+                                    "GroupType": "Security",
+                                    "SAMAccountName": "Users",
+                                    "SID": "S-1-5-32-545"
+                                }
+                            ],
+                            "NextToken": "223456"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Groups/SearchGroups",
                     "method": "POST"
@@ -2829,6 +3178,41 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p> Searches the specified directory for a user. You can find users that match the\n        <code>SearchString</code> parameter with the value of their attributes included in the\n        <code>SearchString</code> parameter.</p>\n         <p> This operation supports pagination with the use of the <code>NextToken</code> request and\n      response parameters. If more results are available, the <code>SearchUsers.NextToken</code>\n      member contains a token that you pass in the next call to <code>SearchUsers</code>. This\n      retrieves the next set of items. </p>\n         <p> You can also specify a maximum number of return results with the <code>MaxResults</code>\n      parameter. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To search for users",
+                        "documentation": "The following command searches for users in the domain based on the SearchAttributes.",
+                        "input": {
+                            "DirectoryId": "d-12233abcde",
+                            "Realm": "examplecorp.com",
+                            "SearchAttributes": [
+                                "department"
+                            ],
+                            "SearchString": "DevOps"
+                        },
+                        "output": {
+                            "DirectoryId": "d-12233abcde",
+                            "NextToken": "223456",
+                            "Users": [
+                                {
+                                    "SID": "S-1-5-11-111",
+                                    "SAMAccountName": "twhitlock",
+                                    "EmailAddress": "twhitlock@examplecorp.com"
+                                },
+                                {
+                                    "SID": "S-1-5-11-112",
+                                    "SAMAccountName": "pcandella",
+                                    "EmailAddress": "pcandella@examplecorp.com"
+                                },
+                                {
+                                    "SID": "S-1-5-11-113",
+                                    "SAMAccountName": "jstiles",
+                                    "EmailAddress": "jstiles@examplecorp.com"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Users/SearchUsers",
                     "method": "POST"
@@ -3014,6 +3398,29 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p> Updates group information. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a group",
+                        "documentation": "The following command updates the preferred language and country attributes for the GuestsLocal group.",
+                        "input": {
+                            "ClientToken": "550e8400-e29b-41d4-a716-446655440000",
+                            "DirectoryId": "d-12233abcde",
+                            "GroupScope": "Global",
+                            "GroupType": "Security",
+                            "OtherAttributes": {
+                                "preferredLanguage": {
+                                    "S": "English"
+                                },
+                                "co": {
+                                    "S": "US"
+                                }
+                            },
+                            "SAMAccountName": "GuestsLocal",
+                            "UpdateType": "REPLACE"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Groups/UpdateGroup",
                     "method": "POST"
@@ -3137,6 +3544,45 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p> Updates user information. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update user attributes",
+                        "documentation": "The following command",
+                        "input": {
+                            "ClientToken": "550e8400-e29b-41d4-a716-446655440000",
+                            "DirectoryId": "d-12233abcde",
+                            "EmailAddress": "twhitlock@examplecorp.com",
+                            "GivenName": "Terry",
+                            "OtherAttributes": {
+                                "telephoneNumber": {
+                                    "S": "212-555-1111"
+                                },
+                                "homePhone": {
+                                    "S": "333-333-3333"
+                                },
+                                "physicalDeliveryOfficeName": {
+                                    "S": "Example Company"
+                                },
+                                "streetAddress": {
+                                    "S": "123 Any Street"
+                                },
+                                "postalCode": {
+                                    "S": "54321"
+                                },
+                                "st": {
+                                    "S": "WA"
+                                },
+                                "co": {
+                                    "S": "US"
+                                }
+                            },
+                            "SAMAccountName": "twhitlock",
+                            "Surname": "Whitlock",
+                            "UpdateType": "ADD"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/Users/UpdateUser",
                     "method": "POST"
@@ -3182,7 +3628,7 @@
                 "OtherAttributes": {
                     "target": "com.amazonaws.directoryservicedata#Attributes",
                     "traits": {
-                        "smithy.api#documentation": "<p> An expression that defines one or more attribute names with the data type and value of\n      each attribute. A key is an attribute name, and the value is a list of maps. For a list of\n      supported attributes, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data-attributes.html\">Directory Service Data Attributes</a>. </p>\n         <note>\n            <p> Attribute names are case insensitive. </p>\n         </note>"
+                        "smithy.api#documentation": "<p> An expression that defines one or more attribute names with the data type and value of\n      each attribute. A key is an attribute name, and the value is a list of maps. For a list of\n      supported attributes, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data_attributes.html\">Directory Service Data Attributes</a>. </p>\n         <note>\n            <p> Attribute names are case insensitive. </p>\n         </note>"
                     }
                 },
                 "UpdateType": {
@@ -3235,7 +3681,7 @@
                 "UserPrincipalName": {
                     "target": "com.amazonaws.directoryservicedata#UserPrincipalName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The UPN that is an internet-style login name for a user and based on the internet\n      standard <a href=\"https://www.ietf.org/rfc/rfc0822.txt\">RFC 822</a>. The UPN is shorter\n      than the distinguished name and easier to remember. </p>"
+                        "smithy.api#documentation": "<p> The UPN that is an internet-style login name for a user and based on the internet\n      standard <a href=\"https://datatracker.ietf.org/doc/html/rfc822\">RFC 822</a>. The UPN is shorter\n      than the distinguished name and easier to remember. </p>"
                     }
                 },
                 "EmailAddress": {

@@ -17645,7 +17645,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates or replaces the access point scope for a directory bucket. You can use the access point scope to restrict access to specific prefixes, API operations, or a combination of both.</p>\n         <p>You can include one or more of the following API operations as permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PutObjet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetObject</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteObject</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListBucket</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetObjectAttributes</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AbortMultipartUpload</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListBucketMultipartUpload</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListMultiPartUploadParts</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>You can specify any amount of prefixes, but the total length of characters of all prefixes must be less than 512 KB in size.</p>\n         </note>\n         <p>To use this operation, you must have the permission to perform the\n         <code>s3express:PutAccessPointScope</code> action.</p>\n         <p>For information about REST API errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses\">REST error responses</a>.</p>",
+                "smithy.api#documentation": "<p>Creates or replaces the access point scope for a directory bucket. You can use the access point scope to restrict access to specific prefixes, API operations, or a combination of both.</p>\n         <note>\n            <p>You can specify any amount of prefixes, but the total length of characters of all prefixes must be less than 256 bytes in size.</p>\n         </note>\n         <p>To use this operation, you must have the permission to perform the\n         <code>s3express:PutAccessPointScope</code> action.</p>\n         <p>For information about REST API errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses\">REST error responses</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v20180820/accesspoint/{Name}/scope",
@@ -20020,7 +20020,7 @@
                 "Prefixes": {
                     "target": "com.amazonaws.s3control#PrefixesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can specify any amount of prefixes, but the total length of characters of all prefixes must be less than 512 KB in size.</p>",
+                        "smithy.api#documentation": "<p>You can specify any amount of prefixes, but the total length of characters of all prefixes must be less than 256 bytes in size.</p>",
                         "smithy.api#xmlName": "Prefixes"
                     }
                 },
