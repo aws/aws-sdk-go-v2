@@ -67,7 +67,7 @@ type UpdateUserInput struct {
 	//
 	// Attribute names are case insensitive.
 	//
-	// [Directory Service Data Attributes]: https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data-attributes.html
+	// [Directory Service Data Attributes]: https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data_attributes.html
 	OtherAttributes map[string]types.AttributeValue
 
 	//  The last name of the user.

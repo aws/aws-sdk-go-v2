@@ -1,0 +1,8 @@
+{
+    "id": "99661c65-79f6-42d1-a74d-031839a39752",
+    "type": "documentation",
+    "description": "Doc-only updates for Amazon EC2",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "93eb93d3-8af8-49a7-b623-2fb893101d64",
+    "type": "documentation",
+    "description": "Updated max size of Prefixes parameter of Scope data type.",
+    "modules": [
+        "service/s3control"
+    ]
+}

@@ -58,12 +58,11 @@ type CreateConnectionInput struct {
 	// A description for the connection to create.
 	Description *string
 
-	// For connections to private resource endpoints, the parameters to use for
-	// invoking the resource endpoint.
+	// For connections to private APIs, the parameters to use for invoking the API.
 	//
-	// For more information, see [Connecting to private resources] in the Amazon EventBridge User Guide .
+	// For more information, see [Connecting to private APIs] in the Amazon EventBridge User Guide .
 	//
-	// [Connecting to private resources]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-target-connection-private.html
+	// [Connecting to private APIs]: https://docs.aws.amazon.com/eventbridge/latest/userguide/connection-private.html
 	InvocationConnectivityParameters *types.ConnectivityResourceParameters
 
 	noSmithyDocumentSerde

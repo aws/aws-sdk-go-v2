@@ -2619,7 +2619,7 @@ type Scope struct {
 	Permissions []ScopePermission
 
 	// You can specify any amount of prefixes, but the total length of characters of
-	// all prefixes must be less than 512 KB in size.
+	// all prefixes must be less than 256 bytes in size.
 	Prefixes []string
 
 	noSmithyDocumentSerde

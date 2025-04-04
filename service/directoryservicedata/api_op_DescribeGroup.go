@@ -42,7 +42,7 @@ type DescribeGroupInput struct {
 	//  One or more attributes to be returned for the group. For a list of supported
 	// attributes, see [Directory Service Data Attributes].
 	//
-	// [Directory Service Data Attributes]: https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data-attributes.html
+	// [Directory Service Data Attributes]: https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data_attributes.html
 	OtherAttributes []string
 
 	//  The domain name that's associated with the group.

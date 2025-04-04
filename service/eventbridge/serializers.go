@@ -5029,6 +5029,11 @@ func awsAwsjson11_serializeOpDocumentCreateArchiveInput(v *CreateArchiveInput, v
 		ok.String(*v.EventSourceArn)
 	}
 
+	if v.KmsKeyIdentifier != nil {
+		ok := object.Key("KmsKeyIdentifier")
+		ok.String(*v.KmsKeyIdentifier)
+	}
+
 	if v.RetentionDays != nil {
 		ok := object.Key("RetentionDays")
 		ok.Integer(*v.RetentionDays)
@@ -6119,6 +6124,11 @@ func awsAwsjson11_serializeOpDocumentUpdateArchiveInput(v *UpdateArchiveInput, v
 	if v.EventPattern != nil {
 		ok := object.Key("EventPattern")
 		ok.String(*v.EventPattern)
+	}
+
+	if v.KmsKeyIdentifier != nil {
+		ok := object.Key("KmsKeyIdentifier")
+		ok.String(*v.KmsKeyIdentifier)
 	}
 
 	if v.RetentionDays != nil {

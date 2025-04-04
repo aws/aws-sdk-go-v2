@@ -1,0 +1,8 @@
+{
+    "id": "7784dda2-7500-462b-8274-f6d47f87f160",
+    "type": "feature",
+    "description": "Amazon EventBridge adds support for customer-managed keys on Archives and validations for two fields: eventSourceArn and kmsKeyIdentifier.",
+    "modules": [
+        "service/eventbridge"
+    ]
+}

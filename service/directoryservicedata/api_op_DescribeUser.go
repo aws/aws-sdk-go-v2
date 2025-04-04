@@ -99,7 +99,7 @@ type DescribeUserOutput struct {
 	// Internet standard [RFC 822]. The UPN is shorter than the distinguished name and easier
 	// to remember.
 	//
-	// [RFC 822]: https://www.ietf.org/rfc/rfc0822.txt
+	// [RFC 822]: https://datatracker.ietf.org/doc/html/rfc822
 	UserPrincipalName *string
 
 	// Metadata pertaining to the operation's result.

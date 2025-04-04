@@ -1,0 +1,8 @@
+{
+    "id": "fdef7155-6f3a-457b-9c5f-6b44a390db01",
+    "type": "documentation",
+    "description": "Doc only update - fixed broken links.",
+    "modules": [
+        "service/directoryservicedata"
+    ]
+}
