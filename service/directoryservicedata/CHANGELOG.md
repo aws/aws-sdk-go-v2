@@ -1,3 +1,7 @@
+# v1.3.3 (2025-04-04)
+
+* **Documentation**: Doc only update - fixed broken links.
+
 # v1.3.2 (2025-04-03)
 
 * No change notes available for this release.

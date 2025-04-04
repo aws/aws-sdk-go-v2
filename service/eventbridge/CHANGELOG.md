@@ -1,3 +1,7 @@
+# v1.38.0 (2025-04-04)
+
+* **Feature**: Amazon EventBridge adds support for customer-managed keys on Archives and validations for two fields: eventSourceArn and kmsKeyIdentifier.
+
 # v1.37.3 (2025-04-03)
 
 * No change notes available for this release.

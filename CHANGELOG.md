@@ -1,3 +1,15 @@
+# Release (2025-04-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/directoryservicedata`: [v1.3.3](service/directoryservicedata/CHANGELOG.md#v133-2025-04-04)
+  * **Documentation**: Doc only update - fixed broken links.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.211.2](service/ec2/CHANGELOG.md#v12112-2025-04-04)
+  * **Documentation**: Doc-only updates for Amazon EC2
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.38.0](service/eventbridge/CHANGELOG.md#v1380-2025-04-04)
+  * **Feature**: Amazon EventBridge adds support for customer-managed keys on Archives and validations for two fields: eventSourceArn and kmsKeyIdentifier.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.56.2](service/s3control/CHANGELOG.md#v1562-2025-04-04)
+  * **Documentation**: Updated max size of Prefixes parameter of Scope data type.
+
 # Release (2025-04-03)
 
 ## General Highlights

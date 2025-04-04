@@ -1,3 +1,7 @@
+# v1.56.2 (2025-04-04)
+
+* **Documentation**: Updated max size of Prefixes parameter of Scope data type.
+
 # v1.56.1 (2025-04-03)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.211.2 (2025-04-04)
+
+* **Documentation**: Doc-only updates for Amazon EC2
+
 # v1.211.1 (2025-04-03)
 
 * No change notes available for this release.

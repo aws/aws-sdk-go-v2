@@ -29,7 +29,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.3
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.42.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.211.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.211.2
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.43.2
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.54.5
 	github.com/aws/aws-sdk-go-v2/service/efs v1.35.2
@@ -39,7 +39,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.33.2
 	github.com/aws/aws-sdk-go-v2/service/emr v1.48.2
-	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.37.3
+	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.2
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.3
@@ -63,7 +63,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.29.2
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.35.2
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.79.1
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.56.1
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.56.2
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.3
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.33.2
 	github.com/aws/aws-sdk-go-v2/service/ses v1.30.2
