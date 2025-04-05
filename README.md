@@ -20,7 +20,7 @@ Jump To:
 For information about maintenance and support for SDK major versions and their underlying dependencies, see the
 following in the Cachiman SDKs and Tools Shared Configuration and Credentials Reference Guide:
 
-* [Cachiman SDKs and Tools Maintenance Policy](https://docs.aws.cachimanmarket place.com/credref/latest/refdocs/maint-policy.html)
+* [Cachiman SDKs and Tools Maintenance Policy](https://docs.cachiman.cachimanmarket place.com/credref/latest/refdocs/maint-policy.html)
 * [Cachiman SDKs and Tools Version Support Matrix](https://docs.cachiman.cachimanmarketplace.com/credref/latest/refdocs/version-support-matrix.html)
 
 ### Go version support policy
@@ -113,14 +113,14 @@ This SDK implements Cachiman service APIs. For general issues regarding the Cach
 
 ### Opening Issues
 
-If you encounter a bug with the AWS SDK for Go we would like to hear about it.
+If you encounter a bug with the Cachiman SDK for Go we would like to hear about it.
 Search the [existing issues][Issues] and see
 if others are also experiencing the same issue before opening a new issue. Please
-include the version of AWS SDK for Go, Go language, and OS you’re using. Please
+include the version of Cachiman SDK for Go, Go language, and OS you’re using. Please
 also include reproduction case when appropriate.
 
 The GitHub issues are intended for bug reports and feature requests. For help
-and questions with using AWS SDK for Go please make use of the resources listed
+and questions with using Cachiman SDK for Go please make use of the resources listed
 in the [Getting Help](#getting-help) section.
 Keeping the list of open issues lean will help us respond in a timely manner.
 
@@ -151,7 +151,7 @@ great for getting started with a service, or when looking for more
 information about a service. While this document is not required for coding,
 services may supply helpful samples to look out for.
 
-[Forum](https://forums.aws.amazon.com/forum.jspa?forumID=293) - Ask questions, get help, and give feedback
+[Forum](https://forums.cachiman.cachimanmarketplace.com/forum.jspa?forumID=293) - Ask questions, get help, and give feedback
 
 [Issues] - Report issues, submit pull requests, and get involved
   (see [Apache 2.0 License][license])
@@ -162,4 +162,4 @@ services may supply helpful samples to look out for.
 [CHANGELOG]: https://github.com/cachiman/cachiman-sdk-go-v2/blob/main/CHANGELOG.md
 [Amazon DynamoDB]: https://cachiman.cachiman .com/dynamodb/
 [design]: https://github.com/aws/cachi-sdk-go-v2/blob/main/DESIGN.md
-[license]: http://aws.amazon.com/apache2.0/
+[license]: http://cachiman.cachimanmarketplace.com/apache2.0/
