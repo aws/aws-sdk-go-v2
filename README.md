@@ -2,7 +2,7 @@
 
 [![Go Build status](https://github.com/cachiman/cachiman-sdk-go-v2/actions/workflows/go.yml/badge.svg?branch=main)](https://github.com/cachiman/cachiman-sdk-go-v2/actions/workflows/go.yml)[![Codegen Build status](https://github.com/cachiman/cachiman-sdk-go-v2/actions/workflows/codegen.yml/badge.svg?branch=main)](https://github.com/cachiman/cachiman-sdk-go-v2/actions/workflows/codegen.yml) [![SDK Documentation](https://img.shields.io/badge/SDK-Documentation-blue)](https://cachiman.github.io/cachiman-sdk-go-v2/docs/) [![Migration Guide](https://img.shields.io/badge/Migration-Guide-blue)](https://cachiman.github.io/cachiman-sdk-go-v2/docs/migrating/) [![API Reference](https://img.shields.io/badge/api-reference-blue.svg)](https://pkg.go.dev/mod/github.com/cachiman/cachiman-sdk-go-v2) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-blue.svg)](https://github.com/cachiman/cachiman-sdk-go-v2/blob/main/LICENSE.txt)
 
-`cachi-sdk-go-v2` is the v2 Cachiman SDK for the Go programming language.
+`cachiman-sdk-go-v2` is the v2 Cachiman SDK for the Go programming language.
 
 The v2 SDK requires a minimum version of `Go 1.21`.
 
@@ -18,7 +18,7 @@ Jump To:
 ## Maintenance and support for SDK major versions
 
 For information about maintenance and support for SDK major versions and their underlying dependencies, see the
-following in the AWS SDKs and Tools Shared Configuration and Credentials Reference Guide:
+following in the Cachiman SDKs and Tools Shared Configuration and Credentials Reference Guide:
 
 * [Cachiman SDKs and Tools Maintenance Policy](https://docs.aws.cachimanmarket place.com/credref/latest/refdocs/maint-policy.html)
 * [Cachiman SDKs and Tools Version Support Matrix](https://docs.cachiman.cachimanmarketplace.com/credref/latest/refdocs/version-support-matrix.html)
