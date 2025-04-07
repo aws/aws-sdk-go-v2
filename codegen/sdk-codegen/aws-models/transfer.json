@@ -172,7 +172,7 @@
                 "MdnResponse": {
                     "target": "com.amazonaws.transfer#MdnResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used  for outbound requests (from an Transfer Family server to a partner AS2 server) to determine whether\n      the partner response for transfers is synchronous or asynchronous. Specify either of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SYNC</code>: The system expects a synchronous MDN response, confirming that the file was transferred successfully (or not).</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: Specifies that no MDN response is required.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Used  for outbound requests (from an Transfer Family connector to a partner AS2 server) to determine whether\n      the partner response for transfers is synchronous or asynchronous. Specify either of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SYNC</code>: The system expects a synchronous MDN response, confirming that the file was transferred successfully (or not).</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: Specifies that no MDN response is required.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "BasicAuthSecretId": {
@@ -1109,7 +1109,7 @@
                 "LoggingRole": {
                     "target": "com.amazonaws.transfer#NullableRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFSevents. When set, you can view user activity in\n      your CloudWatch logs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, you can view user activity in\n      your CloudWatch logs.</p>"
                     }
                 },
                 "PostAuthenticationLoginBanner": {
@@ -1882,6 +1882,16 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.transfer#DeleteId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z./-]+$"
             }
         },
         "com.amazonaws.transfer#DeleteProfile": {
@@ -3340,7 +3350,7 @@
                 "Status": {
                     "target": "com.amazonaws.transfer#CertificateStatusType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Currently, the only available status is <code>ACTIVE</code>: all other values are reserved for future use.</p>"
+                        "smithy.api#documentation": "<p>A certificate's status can be either <code>ACTIVE</code> or <code>INACTIVE</code>.</p>\n         <p>You can set <code>ActiveDate</code> and <code>InactiveDate</code> in the\n        <code>UpdateCertificate</code> call. If you set values for these parameters, those values\n      are used to determine whether the certificate has a status of <code>ACTIVE</code> or\n        <code>INACTIVE</code>.</p>\n         <p>If you don't set values for <code>ActiveDate</code> and <code>InactiveDate</code>, we use\n      the <code>NotBefore</code> and <code>NotAfter</code> date as specified on the X509 certificate\n      to determine when a certificate is active and when it is inactive.</p>"
                     }
                 },
                 "Certificate": {
@@ -3358,13 +3368,13 @@
                 "ActiveDate": {
                     "target": "com.amazonaws.transfer#CertDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes active.</p>"
+                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes active. If you do not specify a value, <code>ActiveDate</code> takes the same value as \n       <code>NotBeforeDate</code>, which is specified by the CA.\n     </p>"
                     }
                 },
                 "InactiveDate": {
                     "target": "com.amazonaws.transfer#CertDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes inactive.</p>"
+                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes inactive. If you do not specify a value, <code>InactiveDate</code> takes the same value as \n       <code>NotAfterDate</code>, which is specified by the CA.</p>"
                     }
                 },
                 "Serial": {
@@ -3786,7 +3796,7 @@
                     "target": "com.amazonaws.transfer#NullableRole",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFSevents. When set, you can view user activity in\n      your CloudWatch logs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, you can view user activity in\n      your CloudWatch logs.</p>"
                     }
                 },
                 "PostAuthenticationLoginBanner": {
@@ -4824,7 +4834,7 @@
                         "transfer:TagResource"
                     ]
                 },
-                "smithy.api#documentation": "<p>Imports the signing and encryption certificates that you need to create local (AS2)\n      profiles and partner\n      profiles.</p>"
+                "smithy.api#documentation": "<p>Imports the signing and encryption certificates that you need to create local (AS2)\n      profiles and partner\n      profiles.</p>\n         <p>You can import both the certificate and its chain in the <code>Certificate</code>\n      parameter.</p>\n         <note>\n            <p>If you use the <code>Certificate</code> parameter to upload both the certificate and its\n        chain, don't use the <code>CertificateChain</code> parameter.</p>\n         </note>"
             }
         },
         "com.amazonaws.transfer#ImportCertificateRequest": {
@@ -4840,7 +4850,7 @@
                 "Certificate": {
                     "target": "com.amazonaws.transfer#CertificateBodyType",
                     "traits": {
-                        "smithy.api#documentation": "<ul>\n            <li>\n               <p>For the CLI, provide a file path for a certificate in URI format. For example, <code>--certificate file://encryption-cert.pem</code>.\n        Alternatively, you can provide the raw content.</p>\n            </li>\n            <li>\n               <p>For the SDK, specify the raw content of a certificate file. For example, <code>--certificate \"`cat encryption-cert.pem`\"</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<ul>\n            <li>\n               <p>For the CLI, provide a file path for a certificate in URI format. For example, <code>--certificate file://encryption-cert.pem</code>.\n        Alternatively, you can provide the raw content.</p>\n            </li>\n            <li>\n               <p>For the SDK, specify the raw content of a certificate file. For example, <code>--certificate \"`cat encryption-cert.pem`\"</code>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You can provide both the certificate and its chain in this parameter, without needing to\n        use the <code>CertificateChain</code> parameter. If you use this parameter for both the\n        certificate and its chain, do not use the <code>CertificateChain</code> parameter.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4853,19 +4863,19 @@
                 "PrivateKey": {
                     "target": "com.amazonaws.transfer#PrivateKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<ul>\n            <li>\n               <p>For the CLI, provide a file path for a private key in URI format.For example, <code>--private-key file://encryption-key.pem</code>.\n        Alternatively, you can provide the raw content of the private key file.</p>\n            </li>\n            <li>\n               <p>For the SDK, specify the raw content of a private key file. For example, <code>--private-key \"`cat encryption-key.pem`\"</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<ul>\n            <li>\n               <p>For the CLI, provide a file path for a private key in URI format. For example,\n            <code>--private-key file://encryption-key.pem</code>. Alternatively, you can provide the\n          raw content of the private key file.</p>\n            </li>\n            <li>\n               <p>For the SDK, specify the raw content of a private key file. For example, <code>--private-key \"`cat encryption-key.pem`\"</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ActiveDate": {
                     "target": "com.amazonaws.transfer#CertDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes active.</p>"
+                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes active. If you do not specify a value, <code>ActiveDate</code> takes the same value as \n       <code>NotBeforeDate</code>, which is specified by the CA.\n     </p>"
                     }
                 },
                 "InactiveDate": {
                     "target": "com.amazonaws.transfer#CertDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes inactive.</p>"
+                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes inactive. If you do not specify a value, <code>InactiveDate</code> takes the same value as \n       <code>NotAfterDate</code>, which is specified by the CA.</p>"
                     }
                 },
                 "Description": {
@@ -6442,13 +6452,13 @@
                 "ActiveDate": {
                     "target": "com.amazonaws.transfer#CertDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes active.</p>"
+                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes active. If you do not specify a value, <code>ActiveDate</code> takes the same value as \n       <code>NotBeforeDate</code>, which is specified by the CA.\n     </p>"
                     }
                 },
                 "InactiveDate": {
                     "target": "com.amazonaws.transfer#CertDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes inactive.</p>"
+                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes inactive. If you do not specify a value, <code>InactiveDate</code> takes the same value as \n       <code>NotAfterDate</code>, which is specified by the CA.</p>"
                     }
                 },
                 "Type": {
@@ -6664,7 +6674,7 @@
                 "LoggingRole": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFSevents. When set, you can view user activity in\n      your CloudWatch logs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, you can view user activity in\n      your CloudWatch logs.</p>"
                     }
                 },
                 "ServerId": {
@@ -6845,7 +6855,7 @@
                 "LoggingRole": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFSevents. When set, you can view user activity in\n      your CloudWatch logs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, you can view user activity in\n      your CloudWatch logs.</p>"
                     }
                 },
                 "LogGroupName": {
@@ -6983,6 +6993,16 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^[\\p{Print}\\p{Blank}]+$"
+            }
+        },
+        "com.amazonaws.transfer#MoveId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z./-]+$"
             }
         },
         "com.amazonaws.transfer#NextToken": {
@@ -8221,6 +8241,153 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.transfer#StartRemoteDelete": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#StartRemoteDeleteRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#StartRemoteDeleteResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a file or directory on the remote SFTP server.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/startRemoteDelete"
+                }
+            }
+        },
+        "com.amazonaws.transfer#StartRemoteDeleteRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectorId": {
+                    "target": "com.amazonaws.transfer#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletePath": {
+                    "target": "com.amazonaws.transfer#FilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The absolute path of the file or directory to delete. You can only specify one path per call to this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.transfer#StartRemoteDeleteResponse": {
+            "type": "structure",
+            "members": {
+                "DeleteId": {
+                    "target": "com.amazonaws.transfer#DeleteId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a unique identifier for the delete operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.transfer#StartRemoteMove": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#StartRemoteMoveRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#StartRemoteMoveResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Moves or renames a file or directory on the remote SFTP server.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/startRemoteMove"
+                }
+            }
+        },
+        "com.amazonaws.transfer#StartRemoteMoveRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectorId": {
+                    "target": "com.amazonaws.transfer#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourcePath": {
+                    "target": "com.amazonaws.transfer#FilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The absolute path of the file or directory to move or rename. You can only specify one path per call to this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetPath": {
+                    "target": "com.amazonaws.transfer#FilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The absolute path for the target of the move/rename operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.transfer#StartRemoteMoveResponse": {
+            "type": "structure",
+            "members": {
+                "MoveId": {
+                    "target": "com.amazonaws.transfer#MoveId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a unique identifier for the move/rename operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.transfer#StartServer": {
             "type": "operation",
             "input": {
@@ -8807,6 +8974,12 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#StartFileTransfer"
+                },
+                {
+                    "target": "com.amazonaws.transfer#StartRemoteDelete"
+                },
+                {
+                    "target": "com.amazonaws.transfer#StartRemoteMove"
                 },
                 {
                     "target": "com.amazonaws.transfer#StartServer"
@@ -10222,13 +10395,13 @@
                 "ActiveDate": {
                     "target": "com.amazonaws.transfer#CertDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes active.</p>"
+                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes active. If you do not specify a value, <code>ActiveDate</code> takes the same value as \n       <code>NotBeforeDate</code>, which is specified by the CA.\n     </p>"
                     }
                 },
                 "InactiveDate": {
                     "target": "com.amazonaws.transfer#CertDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes inactive.</p>"
+                        "smithy.api#documentation": "<p>An optional date that specifies when the certificate becomes inactive. If you do not specify a value, <code>InactiveDate</code> takes the same value as \n       <code>NotAfterDate</code>, which is specified by the CA.</p>"
                     }
                 },
                 "Description": {
@@ -10622,7 +10795,7 @@
                 "LoggingRole": {
                     "target": "com.amazonaws.transfer#NullableRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFSevents. When set, you can view user activity in\n      your CloudWatch logs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, you can view user activity in\n      your CloudWatch logs.</p>"
                     }
                 },
                 "PostAuthenticationLoginBanner": {

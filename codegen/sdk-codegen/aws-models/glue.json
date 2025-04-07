@@ -7449,6 +7449,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#Condition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
             }
         },
         "com.amazonaws.glue#ConfigValueString": {
@@ -8141,6 +8147,27 @@
                 }
             }
         },
+        "com.amazonaws.glue#ConnectionString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.glue#ConnectionStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#ConnectionString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.glue#ConnectionType": {
             "type": "enum",
             "members": {
@@ -8356,7 +8383,7 @@
             "type": "structure",
             "members": {
                 "Connections": {
-                    "target": "com.amazonaws.glue#OrchestrationStringList",
+                    "target": "com.amazonaws.glue#ConnectionStringList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of connections used by the job.</p>"
                     }
@@ -12205,7 +12232,7 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.glue#GenericString",
+                    "target": "com.amazonaws.glue#WorkflowDescriptionString",
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the workflow.</p>"
                     }
@@ -44398,7 +44425,7 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.glue#GenericString",
+                    "target": "com.amazonaws.glue#WorkflowDescriptionString",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the workflow.</p>"
                     }
@@ -45151,6 +45178,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A workflow is a collection of multiple dependent Glue \n      jobs and crawlers that are run to complete a complex ETL task. A\n      workflow manages the execution and monitoring of all its jobs and crawlers.</p>"
+            }
+        },
+        "com.amazonaws.glue#WorkflowDescriptionString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 120000
+                }
             }
         },
         "com.amazonaws.glue#WorkflowGraph": {

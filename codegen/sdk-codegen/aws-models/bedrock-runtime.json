@@ -805,6 +805,12 @@
                         "smithy.api#documentation": "<p>The content details used in the request to apply the guardrail.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "outputScope": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailOutputScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the scope of the output that you get in the response. Set to <code>FULL</code> to return the entire output, including any detected and non-detected entries in the response for enhanced debugging.</p>\n         <p>Note that the full output scope doesn't apply to word filters or regex in sensitive information filters. It does apply to all other filtering policies, including sensitive information with filters that can detect personally identifiable information (PII).</p>"
+                    }
                 }
             },
             "traits": {
@@ -826,6 +832,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The action taken in the response from the guardrail.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "actionReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the action taken when harmful content is detected.</p>"
                     }
                 },
                 "outputs": {
@@ -2196,6 +2208,12 @@
                         "smithy.api#documentation": "<p>The guardrail action.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "detected": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether content that breaches the guardrail configuration is detected.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2315,6 +2333,12 @@
                     "traits": {
                         "smithy.api#enumValue": "BLOCKED"
                     }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
                 }
             }
         },
@@ -2422,6 +2446,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The action performed by the guardrails contextual grounding filter.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "detected": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether content that fails the contextual grounding evaluation (grounding or relevance score less than the corresponding threshold) was detected.</p>"
                     }
                 }
             },
@@ -2650,6 +2680,12 @@
                         "smithy.api#documentation": "<p>The action for the custom word.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "detected": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether custom word content that breaches the guardrail configuration is detected.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2798,6 +2834,12 @@
                         "smithy.api#documentation": "<p>The action for the managed word.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "detected": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether managed word content that breaches the guardrail configuration is detected.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2841,6 +2883,23 @@
                 "target": "com.amazonaws.bedrockruntime#GuardrailOutputContent"
             }
         },
+        "com.amazonaws.bedrockruntime#GuardrailOutputScope": {
+            "type": "enum",
+            "members": {
+                "INTERVENTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERVENTIONS"
+                    }
+                },
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockruntime#GuardrailOutputText": {
             "type": "string"
         },
@@ -2866,6 +2925,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The PII entity filter action.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "detected": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether personally identifiable information (PII) that breaches the guardrail configuration is detected.</p>"
                     }
                 }
             },
@@ -3100,6 +3165,12 @@
                         "smithy.api#documentation": "<p>The region filter action.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "detected": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether custom regex entities that breach the guardrail configuration are detected.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3133,6 +3204,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "BLOCKED"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
                 }
             }
@@ -3282,6 +3359,12 @@
                         "smithy.api#documentation": "<p>The action the guardrail should take when it intervenes on a topic.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "detected": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether topic content that breaches the guardrail configuration is detected.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3301,6 +3384,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "BLOCKED"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
                 }
             }
@@ -3348,6 +3437,12 @@
                     "traits": {
                         "smithy.api#enumValue": "disabled"
                     }
+                },
+                "ENABLED_FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled_full"
+                    }
                 }
             }
         },
@@ -3370,6 +3465,12 @@
                     "target": "com.amazonaws.bedrockruntime#GuardrailAssessmentListMap",
                     "traits": {
                         "smithy.api#documentation": "<p>the output assessments.</p>"
+                    }
+                },
+                "actionReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the reason for the action taken when harmful content is detected.</p>"
                     }
                 }
             },
@@ -3446,6 +3547,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "BLOCKED"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
                 }
             }
@@ -5260,6 +5367,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED_FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED_FULL"
                     }
                 }
             }

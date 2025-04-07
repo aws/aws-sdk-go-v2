@@ -41,6 +41,18 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.codebuild#AccountSuspendedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.codebuild#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CodeBuild access has been suspended for the calling Amazon Web Services account.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.codebuild#ArtifactNamespace": {
             "type": "enum",
             "members": {
@@ -321,6 +333,65 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.codebuild#BatchGetCommandExecutions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codebuild#BatchGetCommandExecutionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.codebuild#BatchGetCommandExecutionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codebuild#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the command executions.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#BatchGetCommandExecutionsInput": {
+            "type": "structure",
+            "members": {
+                "sandboxId": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>sandboxId</code> or <code>sandboxArn</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "commandExecutionIds": {
+                    "target": "com.amazonaws.codebuild#CommandExecutionIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comma separated list of <code>commandExecutionIds</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codebuild#BatchGetCommandExecutionsOutput": {
+            "type": "structure",
+            "members": {
+                "commandExecutions": {
+                    "target": "com.amazonaws.codebuild#CommandExecutions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the requested command executions.</p>"
+                    }
+                },
+                "commandExecutionsNotFound": {
+                    "target": "com.amazonaws.codebuild#CommandExecutionIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of command executions for which information could not be found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.codebuild#BatchGetFleets": {
             "type": "operation",
             "input": {
@@ -522,6 +593,58 @@
                     "target": "com.amazonaws.codebuild#ReportArns",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      An array of ARNs passed to <code>BatchGetReportGroups</code> that are not associated with a <code>Report</code>.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codebuild#BatchGetSandboxes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codebuild#BatchGetSandboxesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.codebuild#BatchGetSandboxesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codebuild#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the sandbox status.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#BatchGetSandboxesInput": {
+            "type": "structure",
+            "members": {
+                "ids": {
+                    "target": "com.amazonaws.codebuild#SandboxIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comma separated list of <code>sandboxIds</code> or <code>sandboxArns</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codebuild#BatchGetSandboxesOutput": {
+            "type": "structure",
+            "members": {
+                "sandboxes": {
+                    "target": "com.amazonaws.codebuild#Sandboxes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the requested sandboxes.</p>"
+                    }
+                },
+                "sandboxesNotFound": {
+                    "target": "com.amazonaws.codebuild#SandboxIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of sandboxes for which information could not be found.</p>"
                     }
                 }
             },
@@ -1558,6 +1681,9 @@
                     "target": "com.amazonaws.codebuild#BatchGetBuilds"
                 },
                 {
+                    "target": "com.amazonaws.codebuild#BatchGetCommandExecutions"
+                },
+                {
                     "target": "com.amazonaws.codebuild#BatchGetFleets"
                 },
                 {
@@ -1568,6 +1694,9 @@
                 },
                 {
                     "target": "com.amazonaws.codebuild#BatchGetReports"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#BatchGetSandboxes"
                 },
                 {
                     "target": "com.amazonaws.codebuild#CreateFleet"
@@ -1636,6 +1765,9 @@
                     "target": "com.amazonaws.codebuild#ListBuildsForProject"
                 },
                 {
+                    "target": "com.amazonaws.codebuild#ListCommandExecutionsForSandbox"
+                },
+                {
                     "target": "com.amazonaws.codebuild#ListCuratedEnvironmentImages"
                 },
                 {
@@ -1652,6 +1784,12 @@
                 },
                 {
                     "target": "com.amazonaws.codebuild#ListReportsForReportGroup"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#ListSandboxes"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#ListSandboxesForProject"
                 },
                 {
                     "target": "com.amazonaws.codebuild#ListSharedProjects"
@@ -1678,10 +1816,22 @@
                     "target": "com.amazonaws.codebuild#StartBuildBatch"
                 },
                 {
+                    "target": "com.amazonaws.codebuild#StartCommandExecution"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#StartSandbox"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#StartSandboxConnection"
+                },
+                {
                     "target": "com.amazonaws.codebuild#StopBuild"
                 },
                 {
                     "target": "com.amazonaws.codebuild#StopBuildBatch"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#StopSandbox"
                 },
                 {
                     "target": "com.amazonaws.codebuild#UpdateFleet"
@@ -2810,6 +2960,118 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.codebuild#CodeCoverage"
+            }
+        },
+        "com.amazonaws.codebuild#CommandExecution": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the command execution.</p>"
+                    }
+                },
+                "sandboxId": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>sandboxId</code>.</p>"
+                    }
+                },
+                "submitTime": {
+                    "target": "com.amazonaws.codebuild#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the command execution process was initially submitted, expressed in Unix time format.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.codebuild#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the command execution process started, expressed in Unix time format.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.codebuild#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the command execution process ended, expressed in Unix time format.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the command execution.</p>"
+                    }
+                },
+                "command": {
+                    "target": "com.amazonaws.codebuild#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command that needs to be executed.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.codebuild#CommandType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command type.</p>"
+                    }
+                },
+                "exitCode": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exit code to return upon completion.</p>"
+                    }
+                },
+                "standardOutputContent": {
+                    "target": "com.amazonaws.codebuild#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text written by the command to stdout.</p>"
+                    }
+                },
+                "standardErrContent": {
+                    "target": "com.amazonaws.codebuild#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text written by the command to stderr.</p>"
+                    }
+                },
+                "logs": {
+                    "target": "com.amazonaws.codebuild#LogsLocation"
+                },
+                "sandboxArn": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>sandboxArn</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains command execution information.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#CommandExecutionIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codebuild#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.codebuild#CommandExecutions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codebuild#CommandExecution"
+            }
+        },
+        "com.amazonaws.codebuild#CommandType": {
+            "type": "enum",
+            "members": {
+                "SHELL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHELL"
+                    }
+                }
             }
         },
         "com.amazonaws.codebuild#ComputeConfiguration": {
@@ -5332,6 +5594,85 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.codebuild#ListCommandExecutionsForSandbox": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codebuild#ListCommandExecutionsForSandboxInput"
+            },
+            "output": {
+                "target": "com.amazonaws.codebuild#ListCommandExecutionsForSandboxOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codebuild#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of command executions for a sandbox.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "commandExecutions",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.codebuild#ListCommandExecutionsForSandboxInput": {
+            "type": "structure",
+            "members": {
+                "sandboxId": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>sandboxId</code> or <code>sandboxArn</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.codebuild#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of sandbox records to be retrieved.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.codebuild#SortOrderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order in which sandbox records should be retrieved.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codebuild#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token, if any, to get paginated results. You will get this value from previous execution of list sandboxes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codebuild#ListCommandExecutionsForSandboxOutput": {
+            "type": "structure",
+            "members": {
+                "commandExecutions": {
+                    "target": "com.amazonaws.codebuild#CommandExecutions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the requested command executions.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the next token to get paginated results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.codebuild#ListCuratedEnvironmentImages": {
             "type": "operation",
             "input": {
@@ -5735,6 +6076,154 @@
                     "target": "com.amazonaws.codebuild#ReportArns",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The list of returned ARNs for the reports in the current Amazon Web Services account.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codebuild#ListSandboxes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codebuild#ListSandboxesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.codebuild#ListSandboxesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codebuild#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of sandboxes.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "ids",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.codebuild#ListSandboxesForProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codebuild#ListSandboxesForProjectInput"
+            },
+            "output": {
+                "target": "com.amazonaws.codebuild#ListSandboxesForProjectOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codebuild#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of sandboxes for a given project.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "ids",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.codebuild#ListSandboxesForProjectInput": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CodeBuild project name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.codebuild#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of sandbox records to be retrieved.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.codebuild#SortOrderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order in which sandbox records should be retrieved.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codebuild#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token, if any, to get paginated results. You will get this value from previous execution of list sandboxes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codebuild#ListSandboxesForProjectOutput": {
+            "type": "structure",
+            "members": {
+                "ids": {
+                    "target": "com.amazonaws.codebuild#SandboxIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the requested sandbox IDs.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the next token to get paginated results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codebuild#ListSandboxesInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.codebuild#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of sandbox records to be retrieved.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.codebuild#SortOrderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order in which sandbox records should be retrieved.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token, if any, to get paginated results. You will get this value from previous execution of list sandboxes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codebuild#ListSandboxesOutput": {
+            "type": "structure",
+            "members": {
+                "ids": {
+                    "target": "com.amazonaws.codebuild#SandboxIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the requested sandbox IDs.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the next token to get paginated results.</p>"
                     }
                 }
             },
@@ -7698,6 +8187,266 @@
                 "smithy.api#documentation": "<p> Information about the S3 bucket where the raw data of a report are exported. </p>"
             }
         },
+        "com.amazonaws.codebuild#SSMSession": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the session.</p>"
+                    }
+                },
+                "tokenValue": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An encrypted token value containing session and caller information.</p>"
+                    }
+                },
+                "streamUrl": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and receive output from the node.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Session Manager session.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#Sandbox": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the sandbox.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sandbox.</p>"
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CodeBuild project name.</p>"
+                    }
+                },
+                "requestTime": {
+                    "target": "com.amazonaws.codebuild#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the sandbox process was initially requested, expressed in Unix time format.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.codebuild#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the sandbox process started, expressed in Unix time format.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.codebuild#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the sandbox process ended, expressed in Unix time format.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the sandbox.</p>"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.codebuild#ProjectSource"
+                },
+                "sourceVersion": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any version identifier for the version of the sandbox to be built.</p>"
+                    }
+                },
+                "secondarySources": {
+                    "target": "com.amazonaws.codebuild#ProjectSources",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of <code>ProjectSource</code> objects. </p>"
+                    }
+                },
+                "secondarySourceVersions": {
+                    "target": "com.amazonaws.codebuild#ProjectSecondarySourceVersions",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of <code>ProjectSourceVersion</code> objects.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.codebuild#ProjectEnvironment"
+                },
+                "fileSystemLocations": {
+                    "target": "com.amazonaws.codebuild#ProjectFileSystemLocations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object \n      specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, \n      <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System.\n  </p>"
+                    }
+                },
+                "timeoutInMinutes": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before timing out this sandbox if it does not\n            get marked as completed.</p>"
+                    }
+                },
+                "queuedTimeoutInMinutes": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of minutes a sandbox is allowed to be queued before it times out. </p>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.codebuild#VpcConfig"
+                },
+                "logConfig": {
+                    "target": "com.amazonaws.codebuild#LogsConfig"
+                },
+                "encryptionKey": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Key Management Service customer master key (CMK) to be used for encrypting the sandbox output\n            artifacts.</p>"
+                    }
+                },
+                "serviceRole": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a service role used for this sandbox.</p>"
+                    }
+                },
+                "currentSession": {
+                    "target": "com.amazonaws.codebuild#SandboxSession",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current session for the sandbox.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains sandbox information.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#SandboxIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codebuild#NonEmptyString"
+            }
+        },
+        "com.amazonaws.codebuild#SandboxSession": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the sandbox session.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the sandbox session.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.codebuild#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the sandbox session started, expressed in Unix time format.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.codebuild#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the sandbox session ended, expressed in Unix time format.</p>"
+                    }
+                },
+                "currentPhase": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current phase for the sandbox.</p>"
+                    }
+                },
+                "phases": {
+                    "target": "com.amazonaws.codebuild#SandboxSessionPhases",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of <code>SandboxSessionPhase</code> objects. </p>"
+                    }
+                },
+                "resolvedSourceVersion": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the version of this sandbox's source code.</p>"
+                    }
+                },
+                "logs": {
+                    "target": "com.amazonaws.codebuild#LogsLocation"
+                },
+                "networkInterface": {
+                    "target": "com.amazonaws.codebuild#NetworkInterface"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the sandbox session.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#SandboxSessionPhase": {
+            "type": "structure",
+            "members": {
+                "phaseType": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the sandbox phase.</p>"
+                    }
+                },
+                "phaseStatus": {
+                    "target": "com.amazonaws.codebuild#StatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the sandbox phase. Valid values include:</p>\n         <dl>\n            <dt>FAILED</dt>\n            <dd>\n               <p>The sandbox phase failed.</p>\n            </dd>\n            <dt>FAULT</dt>\n            <dd>\n               <p>The sandbox phase faulted.</p>\n            </dd>\n            <dt>IN_PROGRESS</dt>\n            <dd>\n               <p>The sandbox phase is still in progress.</p>\n            </dd>\n            <dt>STOPPED</dt>\n            <dd>\n               <p>The sandbox phase stopped.</p>\n            </dd>\n            <dt>SUCCEEDED</dt>\n            <dd>\n               <p>The sandbox phase succeeded.</p>\n            </dd>\n            <dt>TIMED_OUT</dt>\n            <dd>\n               <p>The sandbox phase timed out.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.codebuild#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the sandbox phase started, expressed in Unix time format.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.codebuild#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the sandbox phase ended, expressed in Unix time format.</p>"
+                    }
+                },
+                "durationInSeconds": {
+                    "target": "com.amazonaws.codebuild#WrapperLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How long, in seconds, between the starting and ending times of the sandbox's\n            phase.</p>"
+                    }
+                },
+                "contexts": {
+                    "target": "com.amazonaws.codebuild#PhaseContexts",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of <code>PhaseContext</code> objects. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the sandbox phase.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#SandboxSessionPhases": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codebuild#SandboxSessionPhase"
+            }
+        },
+        "com.amazonaws.codebuild#Sandboxes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codebuild#Sandbox"
+            }
+        },
         "com.amazonaws.codebuild#ScalingConfigurationInput": {
             "type": "structure",
             "members": {
@@ -8494,6 +9243,174 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.codebuild#StartCommandExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codebuild#StartCommandExecutionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.codebuild#StartCommandExecutionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codebuild#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a command execution.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#StartCommandExecutionInput": {
+            "type": "structure",
+            "members": {
+                "sandboxId": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>sandboxId</code> or <code>sandboxArn</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "command": {
+                    "target": "com.amazonaws.codebuild#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command that needs to be executed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.codebuild#CommandType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codebuild#StartCommandExecutionOutput": {
+            "type": "structure",
+            "members": {
+                "commandExecution": {
+                    "target": "com.amazonaws.codebuild#CommandExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the requested command executions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codebuild#StartSandbox": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codebuild#StartSandboxInput"
+            },
+            "output": {
+                "target": "com.amazonaws.codebuild#StartSandboxOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codebuild#AccountSuspendedException"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a sandbox.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#StartSandboxConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codebuild#StartSandboxConnectionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.codebuild#StartSandboxConnectionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codebuild#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a sandbox connection.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#StartSandboxConnectionInput": {
+            "type": "structure",
+            "members": {
+                "sandboxId": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>sandboxId</code> or <code>sandboxArn</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codebuild#StartSandboxConnectionOutput": {
+            "type": "structure",
+            "members": {
+                "ssmSession": {
+                    "target": "com.amazonaws.codebuild#SSMSession",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Session Manager session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codebuild#StartSandboxInput": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CodeBuild project name.</p>"
+                    }
+                },
+                "idempotencyToken": {
+                    "target": "com.amazonaws.codebuild#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique client token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codebuild#StartSandboxOutput": {
+            "type": "structure",
+            "members": {
+                "sandbox": {
+                    "target": "com.amazonaws.codebuild#Sandbox",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the requested sandbox.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.codebuild#StatusType": {
             "type": "enum",
             "members": {
@@ -8623,6 +9540,55 @@
                     "target": "com.amazonaws.codebuild#Build",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the build.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codebuild#StopSandbox": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codebuild#StopSandboxInput"
+            },
+            "output": {
+                "target": "com.amazonaws.codebuild#StopSandboxOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codebuild#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.codebuild#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a sandbox.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#StopSandboxInput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the requested sandbox ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codebuild#StopSandboxOutput": {
+            "type": "structure",
+            "members": {
+                "sandbox": {
+                    "target": "com.amazonaws.codebuild#Sandbox",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the requested sandbox.</p>"
                     }
                 }
             },

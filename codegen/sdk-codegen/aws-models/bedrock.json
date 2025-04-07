@@ -6280,10 +6280,54 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The output modalities selected for the guardrail content filter.</p>"
                     }
+                },
+                "inputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailContentFilterAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when harmful content is detected in the input. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the\n               trace response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailContentFilterAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when harmful content is detected in the output. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "inputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether guardrail evaluation is enabled on the input. When disabled, you aren't\n         charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
+                },
+                "outputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether guardrail evaluation is enabled on the output. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains filter strengths for harmful content. Guardrails support the following content filters to detect and filter harmful user inputs and FM-generated outputs.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Hate</b> – Describes language or a statement that discriminates, criticizes, insults, denounces, or dehumanizes a person or group on the basis of an identity (such as race, ethnicity, gender, religion, sexual orientation, ability, and national origin).</p>\n            </li>\n            <li>\n               <p>\n                  <b>Insults</b> – Describes language or a statement that includes demeaning, humiliating, mocking, insulting, or belittling language. This type of language is also labeled as bullying.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Sexual</b> – Describes language or a statement that indicates sexual interest, activity, or arousal using direct or indirect references to body parts, physical traits, or sex.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Violence</b> – Describes language or a statement that includes glorification of or threats to inflict physical pain, hurt, or injury toward a person, group or thing.</p>\n            </li>\n         </ul>\n         <p>Content filtering depends on the confidence classification of user inputs and FM\n         responses across each of the four harmful categories. All input and output statements are\n         classified into one of four confidence levels (NONE, LOW, MEDIUM, HIGH) for each\n         harmful category. For example, if a statement is classified as\n         <i>Hate</i> with HIGH confidence, the likelihood of the statement\n         representing hateful content is high. A single statement can be classified across\n         multiple categories with varying confidence levels. For example, a single statement\n         can be classified as <i>Hate</i> with HIGH confidence, <i>Insults</i> with LOW confidence, <i>Sexual</i> with NONE confidence, and <i>Violence</i> with MEDIUM confidence.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters.html\">Guardrails content filters</a>.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax\">GetGuardrail response body</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContentFilterAction": {
+            "type": "enum",
+            "members": {
+                "BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCK"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrock#GuardrailContentFilterConfig": {
@@ -6320,6 +6364,30 @@
                     "target": "com.amazonaws.bedrock#GuardrailModalities",
                     "traits": {
                         "smithy.api#documentation": "<p>The output modalities selected for the guardrail content filter configuration.</p>"
+                    }
+                },
+                "inputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailContentFilterAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when harmful content is detected. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the\n               trace response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailContentFilterAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when harmful content is detected in the output. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "inputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable guardrail evaluation on the input. When disabled, you aren't\n         charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
+                },
+                "outputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable guardrail evaluation on the output. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
                     }
                 }
             },
@@ -6421,6 +6489,26 @@
                 "smithy.api#documentation": "<p>Contains details about how to handle harmful content.</p>"
             }
         },
+        "com.amazonaws.bedrock#GuardrailContextualGroundingAction": {
+            "type": "enum",
+            "members": {
+                "BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCK"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrock#GuardrailContextualGroundingFilter": {
             "type": "structure",
             "members": {
@@ -6439,6 +6527,18 @@
                             "min": 0
                         },
                         "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when content fails the contextual grounding evaluation. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether contextual grounding is enabled for evaluation. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
                     }
                 }
             },
@@ -6464,6 +6564,18 @@
                             "min": 0
                         },
                         "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when content fails the contextual grounding evaluation. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable contextual grounding evaluation. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
                     }
                 }
             },
@@ -6649,6 +6761,30 @@
                         "smithy.api#documentation": "<p>ManagedWords$type\n         The managed word type that was configured for the guardrail.\n         (For now, we only offer profanity word list)</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "inputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailWordAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when harmful content is detected in the input. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailWordAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when harmful content is detected in the output. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "inputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether guardrail evaluation is enabled on the input. When disabled, you aren't\n         charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
+                },
+                "outputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether guardrail evaluation is enabled on the output. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6663,6 +6799,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The managed word type to configure for the guardrail.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "inputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailWordAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when harmful content is detected in the input. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailWordAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when harmful content is detected in the output. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "inputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable guardrail evaluation on the input. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
+                },
+                "outputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable guardrail evaluation on the output. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
                     }
                 }
             },
@@ -6770,6 +6930,30 @@
                         "smithy.api#documentation": "<p>The configured guardrail action when PII entity is detected.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "inputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailSensitiveInformationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when harmful content is detected in the input. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ANONYMIZE</code> – Mask the content and replace it with identifier\n               tags.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the\n               trace response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailSensitiveInformationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when harmful content is detected in the output. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ANONYMIZE</code> – Mask the content and replace it with identifier\n               tags.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the\n               trace response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "inputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether guardrail evaluation is enabled on the input. When disabled, you aren't\n         charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
+                },
+                "outputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether guardrail evaluation is enabled on the output. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6791,6 +6975,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configure guardrail action when the PII entity is detected.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "inputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailSensitiveInformationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when harmful content is detected in the input. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ANONYMIZE</code> – Mask the content and replace it with identifier\n               tags.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the\n               trace response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailSensitiveInformationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when harmful content is detected in the output. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ANONYMIZE</code> – Mask the content and replace it with identifier\n               tags.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the\n               trace response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "inputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable guardrail evaluation on the input. When disabled, you aren't\n         charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
+                },
+                "outputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable guardrail evaluation on the output. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
                     }
                 }
             },
@@ -7030,6 +7238,30 @@
                         "smithy.api#documentation": "<p>The action taken when a match to the regular expression is detected.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "inputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailSensitiveInformationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when harmful content is detected in the input. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailSensitiveInformationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when harmful content is detected in the output. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "inputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether guardrail evaluation is enabled on the input. When disabled, you aren't\n         charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
+                },
+                "outputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether guardrail evaluation is enabled on the output. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7077,6 +7309,30 @@
                         "smithy.api#documentation": "<p>The guardrail action to configure when matching regular expression is detected.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "inputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailSensitiveInformationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when harmful content is detected in the input. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailSensitiveInformationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when harmful content is detected in the output. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "inputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable guardrail evaluation on the input. When disabled, you aren't\n         charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
+                },
+                "outputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable guardrail evaluation on the output. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7114,6 +7370,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ANONYMIZE"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
                 }
             }
@@ -7322,10 +7584,54 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies to deny the topic.</p>"
                     }
+                },
+                "inputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailTopicAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when harmful content is detected in the input. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailTopicAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when harmful content is detected in the output. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "inputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether guardrail evaluation is enabled on the input. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
+                },
+                "outputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether guardrail evaluation is enabled on the output. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about topics for the guardrail to identify and deny.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax\">GetGuardrail response body</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailTopicAction": {
+            "type": "enum",
+            "members": {
+                "BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCK"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrock#GuardrailTopicConfig": {
@@ -7356,6 +7662,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies to deny the topic.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "inputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailTopicAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when harmful content is detected in the input. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailTopicAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when harmful content is detected in the output. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "inputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable guardrail evaluation on the input. When disabled, you aren't\n         charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
+                },
+                "outputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable guardrail evaluation on the output. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
                     }
                 }
             },
@@ -7490,10 +7820,54 @@
                         },
                         "smithy.api#required": {}
                     }
+                },
+                "inputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailWordAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when harmful content is detected in the input. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailWordAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take when harmful content is detected in the output. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "inputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether guardrail evaluation is enabled on the input. When disabled, you aren't\n         charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
+                },
+                "outputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether guardrail evaluation is enabled on the output. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A word configured for the guardrail.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailWordAction": {
+            "type": "enum",
+            "members": {
+                "BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCK"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrock#GuardrailWordConfig": {
@@ -7508,6 +7882,30 @@
                             "max": 100
                         },
                         "smithy.api#required": {}
+                    }
+                },
+                "inputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailWordAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when harmful content is detected in the input. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputAction": {
+                    "target": "com.amazonaws.bedrock#GuardrailWordAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when harmful content is detected in the output. Supported values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BLOCK</code> – Block the content and replace it with blocked\n               messaging.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Take no action but return detection information in the trace\n               response.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "inputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable guardrail evaluation on the intput. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
+                    }
+                },
+                "outputEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable guardrail evaluation on the output. When disabled, you\n         aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>"
                     }
                 }
             },

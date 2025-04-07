@@ -1851,7 +1851,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 150
-                }
+                },
+                "smithy.api#pattern": "^[A-Za-z_][A-Za-z\\d_]*$"
             }
         },
         "com.amazonaws.personalize#ColumnNamesList": {
@@ -4295,7 +4296,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a dataset. You can't delete a dataset if an associated\n        <code>DatasetImportJob</code> or <code>SolutionVersion</code> is in the\n      CREATE PENDING or IN PROGRESS state. For more information on datasets, see\n        <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes a dataset. You can't delete a dataset if an associated\n        <code>DatasetImportJob</code> or <code>SolutionVersion</code> is in the\n      CREATE PENDING or IN PROGRESS state. For more information about deleting datasets,\n      see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/delete-dataset.html\">Deleting a dataset</a>.\n    </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5517,6 +5518,44 @@
         "com.amazonaws.personalize#ErrorMessage": {
             "type": "string"
         },
+        "com.amazonaws.personalize#EventParameters": {
+            "type": "structure",
+            "members": {
+                "eventType": {
+                    "target": "com.amazonaws.personalize#EventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event type to be considered for solution creation.</p>"
+                    }
+                },
+                "eventValueThreshold": {
+                    "target": "com.amazonaws.personalize#EventTypeThresholdValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold of the event type. Only events with a value greater or equal to this threshold will be considered for solution creation.</p>"
+                    }
+                },
+                "weight": {
+                    "target": "com.amazonaws.personalize#EventTypeWeight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weight of the event type. A higher weight means higher importance of the event type for the created solution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the parameters of events, which are used in solution creation.</p>"
+            }
+        },
+        "com.amazonaws.personalize#EventParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalize#EventParameters"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.personalize#EventTracker": {
             "type": "structure",
             "members": {
@@ -5632,6 +5671,18 @@
                 }
             }
         },
+        "com.amazonaws.personalize#EventTypeThresholdValue": {
+            "type": "double"
+        },
+        "com.amazonaws.personalize#EventTypeWeight": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.personalize#EventValueThreshold": {
             "type": "string",
             "traits": {
@@ -5639,6 +5690,20 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.personalize#EventsConfig": {
+            "type": "structure",
+            "members": {
+                "eventParametersList": {
+                    "target": "com.amazonaws.personalize#EventParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of event parameters, which includes event types and their event value thresholds and weights.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of events, which are used in solution creation.</p>"
             }
         },
         "com.amazonaws.personalize#ExcludedDatasetColumns": {
@@ -8447,6 +8512,12 @@
                         "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_AutoMLConfig.html\">AutoMLConfig</a> object containing a list of recipes to search\n      when AutoML is performed.</p>"
                     }
                 },
+                "eventsConfig": {
+                    "target": "com.amazonaws.personalize#EventsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of an event, which includes a list of event parameters. You can specify up to 10 event parameters. Events are used in solution creation.</p>"
+                    }
+                },
                 "optimizationObjective": {
                     "target": "com.amazonaws.personalize#OptimizationObjective",
                     "traits": {
@@ -8519,6 +8590,12 @@
             "members": {
                 "autoTrainingConfig": {
                     "target": "com.amazonaws.personalize#AutoTrainingConfig"
+                },
+                "eventsConfig": {
+                    "target": "com.amazonaws.personalize#EventsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of an event, which includes a list of event parameters. You can specify up to 10 event parameters. Events are used in solution creation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8938,7 +9015,8 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.personalize#TagKeys": {
@@ -9018,7 +9096,8 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.personalize#Tags": {

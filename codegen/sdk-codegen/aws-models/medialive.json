@@ -6150,6 +6150,12 @@
                         "smithy.api#documentation": "Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.",
                         "smithy.api#jsonName": "smpte2110ReceiverGroupSettings"
                     }
+                },
+                "SdiSources": {
+                    "target": "com.amazonaws.medialive#InputSdiSources",
+                    "traits": {
+                        "smithy.api#jsonName": "sdiSources"
+                    }
                 }
             },
             "traits": {
@@ -6879,6 +6885,13 @@
                         "smithy.api#documentation": "The current state of the Node.",
                         "smithy.api#jsonName": "state"
                     }
+                },
+                "SdiSourceMappings": {
+                    "target": "com.amazonaws.medialive#SdiSourceMappings",
+                    "traits": {
+                        "smithy.api#documentation": "An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.",
+                        "smithy.api#jsonName": "sdiSourceMappings"
+                    }
                 }
             },
             "traits": {
@@ -6967,6 +6980,107 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for CreatePartnerInputResponse",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medialive#CreateSdiSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#CreateSdiSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#CreateSdiSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Create an SdiSource for each video source that uses the SDI protocol. You will reference the SdiSource when you create an SDI input in MediaLive. You will also reference it in an SdiSourceMapping, in order to create a connection between the logical SdiSource and the physical SDI card and port that the physical SDI source uses.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/prod/sdiSources",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.medialive#CreateSdiSourceRequest": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.medialive#SdiSourceMode",
+                    "traits": {
+                        "smithy.api#documentation": "Applies only if the type is QUAD. Specify the mode for handling the quad-link signal: QUADRANT or INTERLEAVE.",
+                        "smithy.api#jsonName": "mode"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a name that is unique in the AWS account. We recommend you assign a name that describes the source, for example curling-cameraA. Names are case-sensitive.",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "An ID that you assign to a create request. This ID ensures idempotency when creating resources.",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "requestId"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.medialive#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A collection of key-value pairs.",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.medialive#SdiSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the  type of the SDI source: SINGLE: The source  is a single-link source. QUAD: The source  is one part of a quad-link source.",
+                        "smithy.api#jsonName": "type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A request to create a SdiSource.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#CreateSdiSourceResponse": {
+            "type": "structure",
+            "members": {
+                "SdiSource": {
+                    "target": "com.amazonaws.medialive#SdiSource",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for the SDI source.",
+                        "smithy.api#jsonName": "sdiSource"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for CreateSdiSourceResponse",
                 "smithy.api#output": {}
             }
         },
@@ -8706,6 +8820,13 @@
                         "smithy.api#documentation": "The current state of the Node.",
                         "smithy.api#jsonName": "state"
                     }
+                },
+                "SdiSourceMappings": {
+                    "target": "com.amazonaws.medialive#SdiSourceMappings",
+                    "traits": {
+                        "smithy.api#documentation": "An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.",
+                        "smithy.api#jsonName": "sdiSourceMappings"
+                    }
                 }
             },
             "traits": {
@@ -8977,6 +9098,82 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for DeleteScheduleResponse",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medialive#DeleteSdiSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#DeleteSdiSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#DeleteSdiSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Delete an SdiSource. The SdiSource must not be part of any SidSourceMapping and must not be attached to any input.",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/prod/sdiSources/{SdiSourceId}",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.medialive#DeleteSdiSourceRequest": {
+            "type": "structure",
+            "members": {
+                "SdiSourceId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the SdiSource.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for DeleteSdiSourceRequest",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#DeleteSdiSourceResponse": {
+            "type": "structure",
+            "members": {
+                "SdiSource": {
+                    "target": "com.amazonaws.medialive#SdiSource",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for the SDI source.",
+                        "smithy.api#jsonName": "sdiSource"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for DeleteSdiSourceResponse",
                 "smithy.api#output": {}
             }
         },
@@ -10650,6 +10847,12 @@
                         "smithy.api#documentation": "Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.",
                         "smithy.api#jsonName": "smpte2110ReceiverGroupSettings"
                     }
+                },
+                "SdiSources": {
+                    "target": "com.amazonaws.medialive#InputSdiSources",
+                    "traits": {
+                        "smithy.api#jsonName": "sdiSources"
+                    }
                 }
             },
             "traits": {
@@ -11549,6 +11752,13 @@
                         "smithy.api#documentation": "The current state of the Node.",
                         "smithy.api#jsonName": "state"
                     }
+                },
+                "SdiSourceMappings": {
+                    "target": "com.amazonaws.medialive#SdiSourceMappings",
+                    "traits": {
+                        "smithy.api#documentation": "An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.",
+                        "smithy.api#jsonName": "sdiSourceMappings"
+                    }
                 }
             },
             "traits": {
@@ -11634,6 +11844,13 @@
                     "traits": {
                         "smithy.api#documentation": "The current state of the Node.",
                         "smithy.api#jsonName": "state"
+                    }
+                },
+                "SdiSourceMappings": {
+                    "target": "com.amazonaws.medialive#SdiSourceMappings",
+                    "traits": {
+                        "smithy.api#documentation": "An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.",
+                        "smithy.api#jsonName": "sdiSourceMappings"
                     }
                 }
             },
@@ -12078,6 +12295,79 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for DescribeScheduleResponse",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medialive#DescribeSdiSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#DescribeSdiSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#DescribeSdiSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Gets details about a SdiSource.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/prod/sdiSources/{SdiSourceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.medialive#DescribeSdiSourceRequest": {
+            "type": "structure",
+            "members": {
+                "SdiSourceId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Get details about an SdiSource.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for DescribeSdiSourceRequest",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#DescribeSdiSourceResponse": {
+            "type": "structure",
+            "members": {
+                "SdiSource": {
+                    "target": "com.amazonaws.medialive#SdiSource",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for the SDI source.",
+                        "smithy.api#jsonName": "sdiSource"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for DescribeSdiSourceResponse",
                 "smithy.api#output": {}
             }
         },
@@ -18944,6 +19234,12 @@
                         "smithy.api#documentation": "Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.",
                         "smithy.api#jsonName": "smpte2110ReceiverGroupSettings"
                     }
+                },
+                "SdiSources": {
+                    "target": "com.amazonaws.medialive#InputSdiSources",
+                    "traits": {
+                        "smithy.api#jsonName": "sdiSources"
+                    }
                 }
             },
             "traits": {
@@ -20482,6 +20778,15 @@
                 "smithy.api#documentation": "Input resolution based on lines of vertical resolution in the input; SD is less than 720 lines, HD is 720 to 1080 lines, UHD is greater than 1080 lines"
             }
         },
+        "com.amazonaws.medialive#InputSdiSources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#__string"
+            },
+            "traits": {
+                "smithy.api#documentation": "SDI Sources for this Input."
+            }
+        },
         "com.amazonaws.medialive#InputSdpLocation": {
             "type": "structure",
             "members": {
@@ -20966,6 +21271,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SMPTE_2110_RECEIVER_GROUP"
+                    }
+                },
+                "SDI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SDI"
                     }
                 }
             },
@@ -22882,6 +23193,93 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.medialive#ListSdiSources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#ListSdiSourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#ListSdiSourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "List all the SdiSources in the AWS account.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/prod/sdiSources",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "SdiSources",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.medialive#ListSdiSourcesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.medialive#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of items to return.",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The token to retrieve the next page of results.",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ListSdiSourcesRequest",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#ListSdiSourcesResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                },
+                "SdiSources": {
+                    "target": "com.amazonaws.medialive#__listOfSdiSourceSummary",
+                    "traits": {
+                        "smithy.api#jsonName": "sdiSources"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ListSdiSourcesResponse",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.medialive#ListSignalMaps": {
             "type": "operation",
             "input": {
@@ -24384,6 +24782,9 @@
                     "target": "com.amazonaws.medialive#CreatePartnerInput"
                 },
                 {
+                    "target": "com.amazonaws.medialive#CreateSdiSource"
+                },
+                {
                     "target": "com.amazonaws.medialive#CreateSignalMap"
                 },
                 {
@@ -24435,6 +24836,9 @@
                     "target": "com.amazonaws.medialive#DeleteSchedule"
                 },
                 {
+                    "target": "com.amazonaws.medialive#DeleteSdiSource"
+                },
+                {
                     "target": "com.amazonaws.medialive#DeleteSignalMap"
                 },
                 {
@@ -24484,6 +24888,9 @@
                 },
                 {
                     "target": "com.amazonaws.medialive#DescribeSchedule"
+                },
+                {
+                    "target": "com.amazonaws.medialive#DescribeSdiSource"
                 },
                 {
                     "target": "com.amazonaws.medialive#DescribeThumbnails"
@@ -24553,6 +24960,9 @@
                 },
                 {
                     "target": "com.amazonaws.medialive#ListReservations"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ListSdiSources"
                 },
                 {
                     "target": "com.amazonaws.medialive#ListSignalMaps"
@@ -24661,6 +25071,9 @@
                 },
                 {
                     "target": "com.amazonaws.medialive#UpdateReservation"
+                },
+                {
+                    "target": "com.amazonaws.medialive#UpdateSdiSource"
                 }
             ],
             "traits": {
@@ -30595,6 +31008,260 @@
                 "smithy.api#documentation": "Corresponds to the web_delivery_allowed_flag parameter. A value of WEB_DELIVERY_NOT_ALLOWED corresponds to 0 (false) in the SCTE-35 specification. If you include one of the \"restriction\" flags then you must include all four of them."
             }
         },
+        "com.amazonaws.medialive#SdiSource": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of this SdiSource. It is automatically assigned when the SdiSource is created.",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the SdiSource. Unique in the AWS account.The ID is the resource-id portion of the ARN.",
+                        "smithy.api#jsonName": "id"
+                    }
+                },
+                "Inputs": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "The list of inputs that are currently using this SDI source. This list will be empty if the SdiSource has just been deleted.",
+                        "smithy.api#jsonName": "inputs"
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.medialive#SdiSourceMode",
+                    "traits": {
+                        "smithy.api#documentation": "Applies only if the type is QUAD. The mode for handling the quad-link signal QUADRANT or INTERLEAVE.",
+                        "smithy.api#jsonName": "mode"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the SdiSource.",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.medialive#SdiSourceState",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies whether the SDI source is attached to an SDI input (IN_USE) or not (IDLE).",
+                        "smithy.api#jsonName": "state"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.medialive#SdiSourceType",
+                    "traits": {
+                        "smithy.api#jsonName": "type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Used in CreateSdiSourceResponse, DeleteSdiSourceResponse, DescribeSdiSourceResponse, ListSdiSourcesResponse, UpdateSdiSourceResponse"
+            }
+        },
+        "com.amazonaws.medialive#SdiSourceMapping": {
+            "type": "structure",
+            "members": {
+                "CardNumber": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "A number that uniquely identifies the SDI card on the node hardware.",
+                        "smithy.api#jsonName": "cardNumber"
+                    }
+                },
+                "ChannelNumber": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "A number that uniquely identifies a port on the SDI card.",
+                        "smithy.api#jsonName": "channelNumber"
+                    }
+                },
+                "SdiSource": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the SdiSource to associate with this port on this card. You can use the ListSdiSources operation to discover all the IDs.",
+                        "smithy.api#jsonName": "sdiSource"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Used in DescribeNodeSummary, DescribeNodeResult."
+            }
+        },
+        "com.amazonaws.medialive#SdiSourceMappingUpdateRequest": {
+            "type": "structure",
+            "members": {
+                "CardNumber": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "A number that uniquely identifies the SDI card on the node hardware. For information about how physical cards are identified on your node hardware, see the documentation for your node hardware. The numbering always starts at 1.",
+                        "smithy.api#jsonName": "cardNumber"
+                    }
+                },
+                "ChannelNumber": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "A number that uniquely identifies a port on the card. This must be an SDI port (not a timecode port, for example). For information about how ports are identified on physical cards, see the documentation for your node hardware.",
+                        "smithy.api#jsonName": "channelNumber"
+                    }
+                },
+                "SdiSource": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of a SDI source streaming on the given SDI capture card port.",
+                        "smithy.api#jsonName": "sdiSource"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Used in SdiSourceMappingsUpdateRequest. One SDI source mapping. It connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses. You must specify all three parameters in this object."
+            }
+        },
+        "com.amazonaws.medialive#SdiSourceMappings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#SdiSourceMapping"
+            },
+            "traits": {
+                "smithy.api#documentation": "Used in SdiSourceMappings."
+            }
+        },
+        "com.amazonaws.medialive#SdiSourceMappingsUpdateRequest": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#SdiSourceMappingUpdateRequest"
+            },
+            "traits": {
+                "smithy.api#documentation": "Used in the SdiSourceMappingsUpdateRequest, which is a parameter of the UpdateNodeRequest, which is used in the UpdateNodeRequest operation. This means that you create a mapping for an SDI source by updating a Node. You can't create the mapping when you first create the Node."
+            }
+        },
+        "com.amazonaws.medialive#SdiSourceMode": {
+            "type": "enum",
+            "members": {
+                "QUADRANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUADRANT"
+                    }
+                },
+                "INTERLEAVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERLEAVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Used in SdiSource, CreateSdiSourceRequest, UpdateSdiSourceRequest."
+            }
+        },
+        "com.amazonaws.medialive#SdiSourceState": {
+            "type": "enum",
+            "members": {
+                "IDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDLE"
+                    }
+                },
+                "IN_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_USE"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Used in SdiSource, DescribeNodeRequest, DescribeNodeResult"
+            }
+        },
+        "com.amazonaws.medialive#SdiSourceSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of this SdiSource. It is automatically assigned when the SdiSource is created.",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the SdiSource. Unique in the AWS account.The ID is the resource-id portion of the ARN.",
+                        "smithy.api#jsonName": "id"
+                    }
+                },
+                "Inputs": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "The list of inputs that are currently using this SDI source. This list will be empty if the SdiSource has just been deleted.",
+                        "smithy.api#jsonName": "inputs"
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.medialive#SdiSourceMode",
+                    "traits": {
+                        "smithy.api#documentation": "Applies only if the type is QUAD. The mode for handling the quad-link signal QUADRANT or INTERLEAVE.",
+                        "smithy.api#jsonName": "mode"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the SdiSource.",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.medialive#SdiSourceState",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies whether the SDI source is attached to an SDI input (IN_USE) or not (IDLE).",
+                        "smithy.api#jsonName": "state"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.medialive#SdiSourceType",
+                    "traits": {
+                        "smithy.api#jsonName": "type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Used in CreateSdiSourceResponse, DeleteSdiSourceResponse, DescribeSdiSourceResponse, ListSdiSourcesResponse, UpdateSdiSourceResponse"
+            }
+        },
+        "com.amazonaws.medialive#SdiSourceType": {
+            "type": "enum",
+            "members": {
+                "SINGLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE"
+                    }
+                },
+                "QUAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUAD"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Used in SdiSource, CreateSdiSourceRequest, UpdateSdiSourceRequest."
+            }
+        },
         "com.amazonaws.medialive#SignalMapMonitorDeploymentStatus": {
             "type": "enum",
             "members": {
@@ -35526,6 +36193,12 @@
                         "smithy.api#documentation": "Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.",
                         "smithy.api#jsonName": "smpte2110ReceiverGroupSettings"
                     }
+                },
+                "SdiSources": {
+                    "target": "com.amazonaws.medialive#InputSdiSources",
+                    "traits": {
+                        "smithy.api#jsonName": "sdiSources"
+                    }
                 }
             },
             "traits": {
@@ -36032,6 +36705,13 @@
                         "smithy.api#documentation": "The initial role of the Node in the Cluster. ACTIVE means the Node is available for encoding. BACKUP means the Node is a redundant Node and might get used if an ACTIVE Node fails.",
                         "smithy.api#jsonName": "role"
                     }
+                },
+                "SdiSourceMappings": {
+                    "target": "com.amazonaws.medialive#SdiSourceMappingsUpdateRequest",
+                    "traits": {
+                        "smithy.api#documentation": "The mappings of a SDI capture card port to a logical SDI data stream",
+                        "smithy.api#jsonName": "sdiSourceMappings"
+                    }
                 }
             },
             "traits": {
@@ -36110,6 +36790,13 @@
                     "traits": {
                         "smithy.api#documentation": "The current state of the Node.",
                         "smithy.api#jsonName": "state"
+                    }
+                },
+                "SdiSourceMappings": {
+                    "target": "com.amazonaws.medialive#SdiSourceMappings",
+                    "traits": {
+                        "smithy.api#documentation": "An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.",
+                        "smithy.api#jsonName": "sdiSourceMappings"
                     }
                 }
             },
@@ -36265,6 +36952,13 @@
                         "smithy.api#documentation": "The current state of the Node.",
                         "smithy.api#jsonName": "state"
                     }
+                },
+                "SdiSourceMappings": {
+                    "target": "com.amazonaws.medialive#SdiSourceMappings",
+                    "traits": {
+                        "smithy.api#documentation": "An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.",
+                        "smithy.api#jsonName": "sdiSourceMappings"
+                    }
                 }
             },
             "traits": {
@@ -36378,6 +37072,100 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for UpdateReservationResponse",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medialive#UpdateSdiSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#UpdateSdiSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#UpdateSdiSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Change some of the settings in an SdiSource.",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/prod/sdiSources/{SdiSourceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.medialive#UpdateSdiSourceRequest": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.medialive#SdiSourceMode",
+                    "traits": {
+                        "smithy.api#documentation": "Include this parameter only if you want to change the name of the SdiSource. Specify a name that is unique in the AWS account. We recommend you assign a name that describes the source, for example curling-cameraA. Names are case-sensitive.",
+                        "smithy.api#jsonName": "mode"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Include this parameter only if you want to change the name of the SdiSource. Specify a name that is unique in the AWS account. We recommend you assign a name that describes the source, for example curling-cameraA. Names are case-sensitive.",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "SdiSourceId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the SdiSource",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.medialive#SdiSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "Include this parameter only if you want to change the mode. Specify the type of the SDI source: SINGLE: The source is a single-link source. QUAD: The source is one part of a quad-link source.",
+                        "smithy.api#jsonName": "type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A request to update the SdiSource.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#UpdateSdiSourceResponse": {
+            "type": "structure",
+            "members": {
+                "SdiSource": {
+                    "target": "com.amazonaws.medialive#SdiSource",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for the SDI source.",
+                        "smithy.api#jsonName": "sdiSource"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for UpdateSdiSourceResponse",
                 "smithy.api#output": {}
             }
         },
@@ -38262,6 +39050,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfScte35Descriptor"
+            }
+        },
+        "com.amazonaws.medialive#__listOfSdiSourceSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#SdiSourceSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfSdiSourceSummary"
             }
         },
         "com.amazonaws.medialive#__listOfSignalMapSummary": {
