@@ -1,3 +1,21 @@
+# Release (2025-04-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.31.0](service/bedrock/CHANGELOG.md#v1310-2025-04-07)
+  * **Feature**: New options for how to handle harmful content detected by Amazon Bedrock Guardrails.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.29.0](service/bedrockruntime/CHANGELOG.md#v1290-2025-04-07)
+  * **Feature**: New options for how to handle harmful content detected by Amazon Bedrock Guardrails.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.59.0](service/codebuild/CHANGELOG.md#v1590-2025-04-07)
+  * **Feature**: AWS CodeBuild now offers an enhanced debugging experience.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.108.0](service/glue/CHANGELOG.md#v11080-2025-04-07)
+  * **Feature**: Add input validations for multiple Glue APIs
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.73.0](service/medialive/CHANGELOG.md#v1730-2025-04-07)
+  * **Feature**: AWS Elemental MediaLive now supports SDI inputs to MediaLive Anywhere Channels in workflows that use AWS SDKs.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.41.0](service/personalize/CHANGELOG.md#v1410-2025-04-07)
+  * **Feature**: Add support for eventsConfig for CreateSolution, UpdateSolution, DescribeSolution, DescribeSolutionVersion. Add support for GetSolutionMetrics to return weighted NDCG metrics when eventsConfig is enabled for the solution.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.59.0](service/transfer/CHANGELOG.md#v1590-2025-04-07)
+  * **Feature**: This launch enables customers to manage contents of their remote directories, by deleting old files or moving files to archive folders in remote servers once they have been retrieved. Customers will be able to automate the process using event-driven architecture.
+
 # Release (2025-04-04)
 
 ## Module Highlights

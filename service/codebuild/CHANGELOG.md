@@ -1,3 +1,7 @@
+# v1.59.0 (2025-04-07)
+
+* **Feature**: AWS CodeBuild now offers an enhanced debugging experience.
+
 # v1.58.1 (2025-04-03)
 
 * No change notes available for this release.

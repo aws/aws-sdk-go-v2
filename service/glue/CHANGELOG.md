@@ -1,3 +1,7 @@
+# v1.108.0 (2025-04-07)
+
+* **Feature**: Add input validations for multiple Glue APIs
+
 # v1.107.1 (2025-04-03)
 
 * No change notes available for this release.

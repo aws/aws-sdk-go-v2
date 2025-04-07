@@ -1,3 +1,7 @@
+# v1.41.0 (2025-04-07)
+
+* **Feature**: Add support for eventsConfig for CreateSolution, UpdateSolution, DescribeSolution, DescribeSolutionVersion. Add support for GetSolutionMetrics to return weighted NDCG metrics when eventsConfig is enabled for the solution.
+
 # v1.40.2 (2025-04-03)
 
 * No change notes available for this release.

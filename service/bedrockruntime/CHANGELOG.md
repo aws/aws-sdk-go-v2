@@ -1,3 +1,7 @@
+# v1.29.0 (2025-04-07)
+
+* **Feature**: New options for how to handle harmful content detected by Amazon Bedrock Guardrails.
+
 # v1.28.1 (2025-04-03)
 
 * No change notes available for this release.

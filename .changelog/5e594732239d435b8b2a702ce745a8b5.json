@@ -1,8 +1,0 @@
-{
-    "id": "5e594732-239d-435b-8b2a-702ce745a8b5",
-    "type": "feature",
-    "description": "Add support for eventsConfig for CreateSolution, UpdateSolution, DescribeSolution, DescribeSolutionVersion. Add support for GetSolutionMetrics to return weighted NDCG metrics when eventsConfig is enabled for the solution.",
-    "modules": [
-        "service/personalize"
-    ]
-}

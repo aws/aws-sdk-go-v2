@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.48.3
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.44.2
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.58.1
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.59.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.28.2
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.40.3
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.2
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.3
-	github.com/aws/aws-sdk-go-v2/service/glue v1.107.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.108.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/iam v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.26.2

@@ -1,8 +1,0 @@
-{
-    "id": "85faf92b-9294-44b1-a0db-5c762c83ff03",
-    "type": "feature",
-    "description": "This launch enables customers to manage contents of their remote directories, by deleting old files or moving files to archive folders in remote servers once they have been retrieved. Customers will be able to automate the process using event-driven architecture.",
-    "modules": [
-        "service/transfer"
-    ]
-}

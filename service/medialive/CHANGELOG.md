@@ -1,3 +1,7 @@
+# v1.73.0 (2025-04-07)
+
+* **Feature**: AWS Elemental MediaLive now supports SDI inputs to MediaLive Anywhere Channels in workflows that use AWS SDKs.
+
 # v1.72.1 (2025-04-03)
 
 * No change notes available for this release.
