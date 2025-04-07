@@ -14,6 +14,11 @@ import (
 
 // Imports the signing and encryption certificates that you need to create local
 // (AS2) profiles and partner profiles.
+//
+// You can import both the certificate and its chain in the Certificate parameter.
+//
+// If you use the Certificate parameter to upload both the certificate and its
+// chain, don't use the CertificateChain parameter.
 func (c *Client) ImportCertificate(ctx context.Context, params *ImportCertificateInput, optFns ...func(*Options)) (*ImportCertificateOutput, error) {
 	if params == nil {
 		params = &ImportCertificateInput{}
@@ -38,6 +43,10 @@ type ImportCertificateInput struct {
 	//   - For the SDK, specify the raw content of a certificate file. For example,
 	//   --certificate "`cat encryption-cert.pem`" .
 	//
+	// You can provide both the certificate and its chain in this parameter, without
+	// needing to use the CertificateChain parameter. If you use this parameter for
+	// both the certificate and its chain, do not use the CertificateChain parameter.
+	//
 	// This member is required.
 	Certificate *string
 
@@ -52,7 +61,9 @@ type ImportCertificateInput struct {
 	// This member is required.
 	Usage types.CertificateUsageType
 
-	// An optional date that specifies when the certificate becomes active.
+	// An optional date that specifies when the certificate becomes active. If you do
+	// not specify a value, ActiveDate takes the same value as NotBeforeDate , which is
+	// specified by the CA.
 	ActiveDate *time.Time
 
 	// An optional list of certificates that make up the chain for the certificate
@@ -62,10 +73,12 @@ type ImportCertificateInput struct {
 	// A short description that helps identify the certificate.
 	Description *string
 
-	// An optional date that specifies when the certificate becomes inactive.
+	// An optional date that specifies when the certificate becomes inactive. If you
+	// do not specify a value, InactiveDate takes the same value as NotAfterDate ,
+	// which is specified by the CA.
 	InactiveDate *time.Time
 
-	//   - For the CLI, provide a file path for a private key in URI format.For
+	//   - For the CLI, provide a file path for a private key in URI format. For
 	//   example, --private-key file://encryption-key.pem . Alternatively, you can
 	//   provide the raw content of the private key file.
 	//

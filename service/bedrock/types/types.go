@@ -920,8 +920,34 @@ type GuardrailContentFilter struct {
 	// This member is required.
 	Type GuardrailContentFilterType
 
+	// The action to take when harmful content is detected in the input. Supported
+	// values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	InputAction GuardrailContentFilterAction
+
+	// Indicates whether guardrail evaluation is enabled on the input. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	InputEnabled *bool
+
 	// The input modalities selected for the guardrail content filter.
 	InputModalities []GuardrailModality
+
+	// The action to take when harmful content is detected in the output. Supported
+	// values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	OutputAction GuardrailContentFilterAction
+
+	// Indicates whether guardrail evaluation is enabled on the output. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	OutputEnabled *bool
 
 	// The output modalities selected for the guardrail content filter.
 	OutputModalities []GuardrailModality
@@ -984,8 +1010,34 @@ type GuardrailContentFilterConfig struct {
 	// This member is required.
 	Type GuardrailContentFilterType
 
+	// Specifies the action to take when harmful content is detected. Supported values
+	// include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	InputAction GuardrailContentFilterAction
+
+	// Specifies whether to enable guardrail evaluation on the input. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	InputEnabled *bool
+
 	// The input modalities selected for the guardrail content filter configuration.
 	InputModalities []GuardrailModality
+
+	// Specifies the action to take when harmful content is detected in the output.
+	// Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	OutputAction GuardrailContentFilterAction
+
+	// Specifies whether to enable guardrail evaluation on the output. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	OutputEnabled *bool
 
 	// The output modalities selected for the guardrail content filter configuration.
 	OutputModalities []GuardrailModality
@@ -1034,6 +1086,19 @@ type GuardrailContextualGroundingFilter struct {
 	// This member is required.
 	Type GuardrailContextualGroundingFilterType
 
+	// The action to take when content fails the contextual grounding evaluation.
+	// Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	Action GuardrailContextualGroundingAction
+
+	// Indicates whether contextual grounding is enabled for evaluation. When
+	// disabled, you aren't charged for the evaluation. The evaluation doesn't appear
+	// in the response.
+	Enabled *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1049,6 +1114,19 @@ type GuardrailContextualGroundingFilterConfig struct {
 	//
 	// This member is required.
 	Type GuardrailContextualGroundingFilterType
+
+	// Specifies the action to take when content fails the contextual grounding
+	// evaluation. Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	Action GuardrailContextualGroundingAction
+
+	// Specifies whether to enable contextual grounding evaluation. When disabled, you
+	// aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1085,6 +1163,32 @@ type GuardrailManagedWords struct {
 	// This member is required.
 	Type GuardrailManagedWordsType
 
+	// The action to take when harmful content is detected in the input. Supported
+	// values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	InputAction GuardrailWordAction
+
+	// Indicates whether guardrail evaluation is enabled on the input. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	InputEnabled *bool
+
+	// The action to take when harmful content is detected in the output. Supported
+	// values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	OutputAction GuardrailWordAction
+
+	// Indicates whether guardrail evaluation is enabled on the output. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	OutputEnabled *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1095,6 +1199,32 @@ type GuardrailManagedWordsConfig struct {
 	//
 	// This member is required.
 	Type GuardrailManagedWordsType
+
+	// Specifies the action to take when harmful content is detected in the input.
+	// Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	InputAction GuardrailWordAction
+
+	// Specifies whether to enable guardrail evaluation on the input. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	InputEnabled *bool
+
+	// Specifies the action to take when harmful content is detected in the output.
+	// Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	OutputAction GuardrailWordAction
+
+	// Specifies whether to enable guardrail evaluation on the output. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	OutputEnabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1111,6 +1241,36 @@ type GuardrailPiiEntity struct {
 	//
 	// This member is required.
 	Type GuardrailPiiEntityType
+
+	// The action to take when harmful content is detected in the input. Supported
+	// values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - ANONYMIZE – Mask the content and replace it with identifier tags.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	InputAction GuardrailSensitiveInformationAction
+
+	// Indicates whether guardrail evaluation is enabled on the input. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	InputEnabled *bool
+
+	// The action to take when harmful content is detected in the output. Supported
+	// values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - ANONYMIZE – Mask the content and replace it with identifier tags.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	OutputAction GuardrailSensitiveInformationAction
+
+	// Indicates whether guardrail evaluation is enabled on the output. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	OutputEnabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1327,6 +1487,36 @@ type GuardrailPiiEntityConfig struct {
 	// This member is required.
 	Type GuardrailPiiEntityType
 
+	// Specifies the action to take when harmful content is detected in the input.
+	// Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - ANONYMIZE – Mask the content and replace it with identifier tags.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	InputAction GuardrailSensitiveInformationAction
+
+	// Specifies whether to enable guardrail evaluation on the input. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	InputEnabled *bool
+
+	// Specifies the action to take when harmful content is detected in the output.
+	// Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - ANONYMIZE – Mask the content and replace it with identifier tags.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	OutputAction GuardrailSensitiveInformationAction
+
+	// Specifies whether to enable guardrail evaluation on the output. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	OutputEnabled *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1351,6 +1541,32 @@ type GuardrailRegex struct {
 	// The description of the regular expression for the guardrail.
 	Description *string
 
+	// The action to take when harmful content is detected in the input. Supported
+	// values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	InputAction GuardrailSensitiveInformationAction
+
+	// Indicates whether guardrail evaluation is enabled on the input. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	InputEnabled *bool
+
+	// The action to take when harmful content is detected in the output. Supported
+	// values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	OutputAction GuardrailSensitiveInformationAction
+
+	// Indicates whether guardrail evaluation is enabled on the output. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	OutputEnabled *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1374,6 +1590,32 @@ type GuardrailRegexConfig struct {
 
 	// The description of the regular expression to configure for the guardrail.
 	Description *string
+
+	// Specifies the action to take when harmful content is detected in the input.
+	// Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	InputAction GuardrailSensitiveInformationAction
+
+	// Specifies whether to enable guardrail evaluation on the input. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	InputEnabled *bool
+
+	// Specifies the action to take when harmful content is detected in the output.
+	// Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	OutputAction GuardrailSensitiveInformationAction
+
+	// Specifies whether to enable guardrail evaluation on the output. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	OutputEnabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1477,6 +1719,32 @@ type GuardrailTopic struct {
 	// categorized as belonging to the topic.
 	Examples []string
 
+	// The action to take when harmful content is detected in the input. Supported
+	// values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	InputAction GuardrailTopicAction
+
+	// Indicates whether guardrail evaluation is enabled on the input. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	InputEnabled *bool
+
+	// The action to take when harmful content is detected in the output. Supported
+	// values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	OutputAction GuardrailTopicAction
+
+	// Indicates whether guardrail evaluation is enabled on the output. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	OutputEnabled *bool
+
 	// Specifies to deny the topic.
 	Type GuardrailTopicType
 
@@ -1504,6 +1772,32 @@ type GuardrailTopicConfig struct {
 	// A list of prompts, each of which is an example of a prompt that can be
 	// categorized as belonging to the topic.
 	Examples []string
+
+	// Specifies the action to take when harmful content is detected in the input.
+	// Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	InputAction GuardrailTopicAction
+
+	// Specifies whether to enable guardrail evaluation on the input. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	InputEnabled *bool
+
+	// Specifies the action to take when harmful content is detected in the output.
+	// Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	OutputAction GuardrailTopicAction
+
+	// Specifies whether to enable guardrail evaluation on the output. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	OutputEnabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1544,6 +1838,32 @@ type GuardrailWord struct {
 	// This member is required.
 	Text *string
 
+	// The action to take when harmful content is detected in the input. Supported
+	// values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	InputAction GuardrailWordAction
+
+	// Indicates whether guardrail evaluation is enabled on the input. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	InputEnabled *bool
+
+	// The action to take when harmful content is detected in the output. Supported
+	// values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	OutputAction GuardrailWordAction
+
+	// Indicates whether guardrail evaluation is enabled on the output. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	OutputEnabled *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1554,6 +1874,32 @@ type GuardrailWordConfig struct {
 	//
 	// This member is required.
 	Text *string
+
+	// Specifies the action to take when harmful content is detected in the input.
+	// Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	InputAction GuardrailWordAction
+
+	// Specifies whether to enable guardrail evaluation on the intput. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	InputEnabled *bool
+
+	// Specifies the action to take when harmful content is detected in the output.
+	// Supported values include:
+	//
+	//   - BLOCK – Block the content and replace it with blocked messaging.
+	//
+	//   - NONE – Take no action but return detection information in the trace response.
+	OutputAction GuardrailWordAction
+
+	// Specifies whether to enable guardrail evaluation on the output. When disabled,
+	// you aren't charged for the evaluation. The evaluation doesn't appear in the
+	// response.
+	OutputEnabled *bool
 
 	noSmithyDocumentSerde
 }

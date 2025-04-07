@@ -39359,7 +39359,7 @@ func awsAwsjson11_deserializeDocumentConnectionsList(v **types.ConnectionsList, 
 	for key, value := range shape {
 		switch key {
 		case "Connections":
-			if err := awsAwsjson11_deserializeDocumentOrchestrationStringList(&sv.Connections, value); err != nil {
+			if err := awsAwsjson11_deserializeDocumentConnectionStringList(&sv.Connections, value); err != nil {
 				return err
 			}
 
@@ -39369,6 +39369,42 @@ func awsAwsjson11_deserializeDocumentConnectionsList(v **types.ConnectionsList, 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConnectionStringList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ConnectionString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

@@ -4624,6 +4624,81 @@ func awsAwsjson11_serializeDocumentDataSource(v *types.DataSource, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEventParameters(v *types.EventParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventType != nil {
+		ok := object.Key("eventType")
+		ok.String(*v.EventType)
+	}
+
+	if v.EventValueThreshold != nil {
+		ok := object.Key("eventValueThreshold")
+		switch {
+		case math.IsNaN(*v.EventValueThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.EventValueThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.EventValueThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.EventValueThreshold)
+
+		}
+	}
+
+	if v.Weight != nil {
+		ok := object.Key("weight")
+		switch {
+		case math.IsNaN(*v.Weight):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Weight, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Weight, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Weight)
+
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEventParametersList(v []types.EventParameters, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentEventParameters(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEventsConfig(v *types.EventsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventParametersList != nil {
+		ok := object.Key("eventParametersList")
+		if err := awsAwsjson11_serializeDocumentEventParametersList(v.EventParametersList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentExcludedDatasetColumns(v map[string][]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4959,6 +5034,13 @@ func awsAwsjson11_serializeDocumentSolutionConfig(v *types.SolutionConfig, value
 		}
 	}
 
+	if v.EventsConfig != nil {
+		ok := object.Key("eventsConfig")
+		if err := awsAwsjson11_serializeDocumentEventsConfig(v.EventsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EventValueThreshold != nil {
 		ok := object.Key("eventValueThreshold")
 		ok.String(*v.EventValueThreshold)
@@ -5002,6 +5084,13 @@ func awsAwsjson11_serializeDocumentSolutionUpdateConfig(v *types.SolutionUpdateC
 	if v.AutoTrainingConfig != nil {
 		ok := object.Key("autoTrainingConfig")
 		if err := awsAwsjson11_serializeDocumentAutoTrainingConfig(v.AutoTrainingConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EventsConfig != nil {
+		ok := object.Key("eventsConfig")
+		if err := awsAwsjson11_serializeDocumentEventsConfig(v.EventsConfig, ok); err != nil {
 			return err
 		}
 	}

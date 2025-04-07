@@ -50,6 +50,9 @@ type UpdateNodeInput struct {
 	// ACTIVE Node fails.
 	Role types.NodeRole
 
+	// The mappings of a SDI capture card port to a logical SDI data stream
+	SdiSourceMappings []types.SdiSourceMappingUpdateRequest
+
 	noSmithyDocumentSerde
 }
 
@@ -86,6 +89,10 @@ type UpdateNodeOutput struct {
 	// is available for encoding. BACKUP means the Node is a redundant Node and might
 	// get used if an ACTIVE Node fails.
 	Role types.NodeRole
+
+	// An array of SDI source mappings. Each mapping connects one logical SdiSource to
+	// the physical SDI card and port that the physical SDI source uses.
+	SdiSourceMappings []types.SdiSourceMapping
 
 	// The current state of the Node.
 	State types.NodeState

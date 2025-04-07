@@ -1,0 +1,8 @@
+{
+    "id": "f1bb65cf-4688-448c-82fa-f084c42ba100",
+    "type": "feature",
+    "description": "AWS CodeBuild now offers an enhanced debugging experience.",
+    "modules": [
+        "service/codebuild"
+    ]
+}

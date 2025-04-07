@@ -196,6 +196,26 @@ func (FoundationModelLifecycleStatus) Values() []FoundationModelLifecycleStatus 
 	}
 }
 
+type GuardrailContentFilterAction string
+
+// Enum values for GuardrailContentFilterAction
+const (
+	GuardrailContentFilterActionBlock GuardrailContentFilterAction = "BLOCK"
+	GuardrailContentFilterActionNone  GuardrailContentFilterAction = "NONE"
+)
+
+// Values returns all known values for GuardrailContentFilterAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailContentFilterAction) Values() []GuardrailContentFilterAction {
+	return []GuardrailContentFilterAction{
+		"BLOCK",
+		"NONE",
+	}
+}
+
 type GuardrailContentFilterType string
 
 // Enum values for GuardrailContentFilterType
@@ -220,6 +240,26 @@ func (GuardrailContentFilterType) Values() []GuardrailContentFilterType {
 		"INSULTS",
 		"MISCONDUCT",
 		"PROMPT_ATTACK",
+	}
+}
+
+type GuardrailContextualGroundingAction string
+
+// Enum values for GuardrailContextualGroundingAction
+const (
+	GuardrailContextualGroundingActionBlock GuardrailContextualGroundingAction = "BLOCK"
+	GuardrailContextualGroundingActionNone  GuardrailContextualGroundingAction = "NONE"
+)
+
+// Values returns all known values for GuardrailContextualGroundingAction. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailContextualGroundingAction) Values() []GuardrailContextualGroundingAction {
+	return []GuardrailContextualGroundingAction{
+		"BLOCK",
+		"NONE",
 	}
 }
 
@@ -385,6 +425,7 @@ type GuardrailSensitiveInformationAction string
 const (
 	GuardrailSensitiveInformationActionBlock     GuardrailSensitiveInformationAction = "BLOCK"
 	GuardrailSensitiveInformationActionAnonymize GuardrailSensitiveInformationAction = "ANONYMIZE"
+	GuardrailSensitiveInformationActionNone      GuardrailSensitiveInformationAction = "NONE"
 )
 
 // Values returns all known values for GuardrailSensitiveInformationAction. Note
@@ -396,6 +437,7 @@ func (GuardrailSensitiveInformationAction) Values() []GuardrailSensitiveInformat
 	return []GuardrailSensitiveInformationAction{
 		"BLOCK",
 		"ANONYMIZE",
+		"NONE",
 	}
 }
 
@@ -426,6 +468,25 @@ func (GuardrailStatus) Values() []GuardrailStatus {
 	}
 }
 
+type GuardrailTopicAction string
+
+// Enum values for GuardrailTopicAction
+const (
+	GuardrailTopicActionBlock GuardrailTopicAction = "BLOCK"
+	GuardrailTopicActionNone  GuardrailTopicAction = "NONE"
+)
+
+// Values returns all known values for GuardrailTopicAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailTopicAction) Values() []GuardrailTopicAction {
+	return []GuardrailTopicAction{
+		"BLOCK",
+		"NONE",
+	}
+}
+
 type GuardrailTopicType string
 
 // Enum values for GuardrailTopicType
@@ -440,6 +501,25 @@ const (
 func (GuardrailTopicType) Values() []GuardrailTopicType {
 	return []GuardrailTopicType{
 		"DENY",
+	}
+}
+
+type GuardrailWordAction string
+
+// Enum values for GuardrailWordAction
+const (
+	GuardrailWordActionBlock GuardrailWordAction = "BLOCK"
+	GuardrailWordActionNone  GuardrailWordAction = "NONE"
+)
+
+// Values returns all known values for GuardrailWordAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailWordAction) Values() []GuardrailWordAction {
+	return []GuardrailWordAction{
+		"BLOCK",
+		"NONE",
 	}
 }
 

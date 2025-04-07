@@ -92,6 +92,10 @@ type CreateNodeOutput struct {
 	// get used if an ACTIVE Node fails.
 	Role types.NodeRole
 
+	// An array of SDI source mappings. Each mapping connects one logical SdiSource to
+	// the physical SDI card and port that the physical SDI source uses.
+	SdiSourceMappings []types.SdiSourceMapping
+
 	// The current state of the Node.
 	State types.NodeState
 

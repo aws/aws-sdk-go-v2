@@ -5871,6 +5871,16 @@ func awsRestjson1_serializeDocumentGuardrailContentFilterConfig(v *types.Guardra
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.InputAction) > 0 {
+		ok := object.Key("inputAction")
+		ok.String(string(v.InputAction))
+	}
+
+	if v.InputEnabled != nil {
+		ok := object.Key("inputEnabled")
+		ok.Boolean(*v.InputEnabled)
+	}
+
 	if v.InputModalities != nil {
 		ok := object.Key("inputModalities")
 		if err := awsRestjson1_serializeDocumentGuardrailModalities(v.InputModalities, ok); err != nil {
@@ -5881,6 +5891,16 @@ func awsRestjson1_serializeDocumentGuardrailContentFilterConfig(v *types.Guardra
 	if len(v.InputStrength) > 0 {
 		ok := object.Key("inputStrength")
 		ok.String(string(v.InputStrength))
+	}
+
+	if len(v.OutputAction) > 0 {
+		ok := object.Key("outputAction")
+		ok.String(string(v.OutputAction))
+	}
+
+	if v.OutputEnabled != nil {
+		ok := object.Key("outputEnabled")
+		ok.Boolean(*v.OutputEnabled)
 	}
 
 	if v.OutputModalities != nil {
@@ -5933,6 +5953,16 @@ func awsRestjson1_serializeDocumentGuardrailContentPolicyConfig(v *types.Guardra
 func awsRestjson1_serializeDocumentGuardrailContextualGroundingFilterConfig(v *types.GuardrailContextualGroundingFilterConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("action")
+		ok.String(string(v.Action))
+	}
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
 
 	if v.Threshold != nil {
 		ok := object.Key("threshold")
@@ -6004,6 +6034,26 @@ func awsRestjson1_serializeDocumentGuardrailManagedWordsConfig(v *types.Guardrai
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.InputAction) > 0 {
+		ok := object.Key("inputAction")
+		ok.String(string(v.InputAction))
+	}
+
+	if v.InputEnabled != nil {
+		ok := object.Key("inputEnabled")
+		ok.Boolean(*v.InputEnabled)
+	}
+
+	if len(v.OutputAction) > 0 {
+		ok := object.Key("outputAction")
+		ok.String(string(v.OutputAction))
+	}
+
+	if v.OutputEnabled != nil {
+		ok := object.Key("outputEnabled")
+		ok.Boolean(*v.OutputEnabled)
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
@@ -6045,6 +6095,26 @@ func awsRestjson1_serializeDocumentGuardrailPiiEntityConfig(v *types.GuardrailPi
 		ok.String(string(v.Action))
 	}
 
+	if len(v.InputAction) > 0 {
+		ok := object.Key("inputAction")
+		ok.String(string(v.InputAction))
+	}
+
+	if v.InputEnabled != nil {
+		ok := object.Key("inputEnabled")
+		ok.Boolean(*v.InputEnabled)
+	}
+
+	if len(v.OutputAction) > 0 {
+		ok := object.Key("outputAction")
+		ok.String(string(v.OutputAction))
+	}
+
+	if v.OutputEnabled != nil {
+		ok := object.Key("outputEnabled")
+		ok.Boolean(*v.OutputEnabled)
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
@@ -6067,9 +6137,29 @@ func awsRestjson1_serializeDocumentGuardrailRegexConfig(v *types.GuardrailRegexC
 		ok.String(*v.Description)
 	}
 
+	if len(v.InputAction) > 0 {
+		ok := object.Key("inputAction")
+		ok.String(string(v.InputAction))
+	}
+
+	if v.InputEnabled != nil {
+		ok := object.Key("inputEnabled")
+		ok.Boolean(*v.InputEnabled)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.OutputAction) > 0 {
+		ok := object.Key("outputAction")
+		ok.String(string(v.OutputAction))
+	}
+
+	if v.OutputEnabled != nil {
+		ok := object.Key("outputEnabled")
+		ok.Boolean(*v.OutputEnabled)
 	}
 
 	if v.Pattern != nil {
@@ -6130,9 +6220,29 @@ func awsRestjson1_serializeDocumentGuardrailTopicConfig(v *types.GuardrailTopicC
 		}
 	}
 
+	if len(v.InputAction) > 0 {
+		ok := object.Key("inputAction")
+		ok.String(string(v.InputAction))
+	}
+
+	if v.InputEnabled != nil {
+		ok := object.Key("inputEnabled")
+		ok.Boolean(*v.InputEnabled)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.OutputAction) > 0 {
+		ok := object.Key("outputAction")
+		ok.String(string(v.OutputAction))
+	}
+
+	if v.OutputEnabled != nil {
+		ok := object.Key("outputEnabled")
+		ok.Boolean(*v.OutputEnabled)
 	}
 
 	if len(v.Type) > 0 {
@@ -6184,6 +6294,26 @@ func awsRestjson1_serializeDocumentGuardrailTopicsConfig(v []types.GuardrailTopi
 func awsRestjson1_serializeDocumentGuardrailWordConfig(v *types.GuardrailWordConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.InputAction) > 0 {
+		ok := object.Key("inputAction")
+		ok.String(string(v.InputAction))
+	}
+
+	if v.InputEnabled != nil {
+		ok := object.Key("inputEnabled")
+		ok.Boolean(*v.InputEnabled)
+	}
+
+	if len(v.OutputAction) > 0 {
+		ok := object.Key("outputAction")
+		ok.String(string(v.OutputAction))
+	}
+
+	if v.OutputEnabled != nil {
+		ok := object.Key("outputEnabled")
+		ok.Boolean(*v.OutputEnabled)
+	}
 
 	if v.Text != nil {
 		ok := object.Key("text")

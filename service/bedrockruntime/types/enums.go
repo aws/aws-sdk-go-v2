@@ -191,6 +191,7 @@ type GuardrailContentPolicyAction string
 // Enum values for GuardrailContentPolicyAction
 const (
 	GuardrailContentPolicyActionBlocked GuardrailContentPolicyAction = "BLOCKED"
+	GuardrailContentPolicyActionNone    GuardrailContentPolicyAction = "NONE"
 )
 
 // Values returns all known values for GuardrailContentPolicyAction. Note that
@@ -201,6 +202,7 @@ const (
 func (GuardrailContentPolicyAction) Values() []GuardrailContentPolicyAction {
 	return []GuardrailContentPolicyAction{
 		"BLOCKED",
+		"NONE",
 	}
 }
 
@@ -362,6 +364,25 @@ func (GuardrailManagedWordType) Values() []GuardrailManagedWordType {
 	}
 }
 
+type GuardrailOutputScope string
+
+// Enum values for GuardrailOutputScope
+const (
+	GuardrailOutputScopeInterventions GuardrailOutputScope = "INTERVENTIONS"
+	GuardrailOutputScopeFull          GuardrailOutputScope = "FULL"
+)
+
+// Values returns all known values for GuardrailOutputScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailOutputScope) Values() []GuardrailOutputScope {
+	return []GuardrailOutputScope{
+		"INTERVENTIONS",
+		"FULL",
+	}
+}
+
 type GuardrailPiiEntityType string
 
 // Enum values for GuardrailPiiEntityType
@@ -445,6 +466,7 @@ type GuardrailSensitiveInformationPolicyAction string
 const (
 	GuardrailSensitiveInformationPolicyActionAnonymized GuardrailSensitiveInformationPolicyAction = "ANONYMIZED"
 	GuardrailSensitiveInformationPolicyActionBlocked    GuardrailSensitiveInformationPolicyAction = "BLOCKED"
+	GuardrailSensitiveInformationPolicyActionNone       GuardrailSensitiveInformationPolicyAction = "NONE"
 )
 
 // Values returns all known values for GuardrailSensitiveInformationPolicyAction.
@@ -456,6 +478,7 @@ func (GuardrailSensitiveInformationPolicyAction) Values() []GuardrailSensitiveIn
 	return []GuardrailSensitiveInformationPolicyAction{
 		"ANONYMIZED",
 		"BLOCKED",
+		"NONE",
 	}
 }
 
@@ -484,6 +507,7 @@ type GuardrailTopicPolicyAction string
 // Enum values for GuardrailTopicPolicyAction
 const (
 	GuardrailTopicPolicyActionBlocked GuardrailTopicPolicyAction = "BLOCKED"
+	GuardrailTopicPolicyActionNone    GuardrailTopicPolicyAction = "NONE"
 )
 
 // Values returns all known values for GuardrailTopicPolicyAction. Note that this
@@ -493,6 +517,7 @@ const (
 func (GuardrailTopicPolicyAction) Values() []GuardrailTopicPolicyAction {
 	return []GuardrailTopicPolicyAction{
 		"BLOCKED",
+		"NONE",
 	}
 }
 
@@ -517,8 +542,9 @@ type GuardrailTrace string
 
 // Enum values for GuardrailTrace
 const (
-	GuardrailTraceEnabled  GuardrailTrace = "enabled"
-	GuardrailTraceDisabled GuardrailTrace = "disabled"
+	GuardrailTraceEnabled     GuardrailTrace = "enabled"
+	GuardrailTraceDisabled    GuardrailTrace = "disabled"
+	GuardrailTraceEnabledFull GuardrailTrace = "enabled_full"
 )
 
 // Values returns all known values for GuardrailTrace. Note that this can be
@@ -529,6 +555,7 @@ func (GuardrailTrace) Values() []GuardrailTrace {
 	return []GuardrailTrace{
 		"enabled",
 		"disabled",
+		"enabled_full",
 	}
 }
 
@@ -537,6 +564,7 @@ type GuardrailWordPolicyAction string
 // Enum values for GuardrailWordPolicyAction
 const (
 	GuardrailWordPolicyActionBlocked GuardrailWordPolicyAction = "BLOCKED"
+	GuardrailWordPolicyActionNone    GuardrailWordPolicyAction = "NONE"
 )
 
 // Values returns all known values for GuardrailWordPolicyAction. Note that this
@@ -546,6 +574,7 @@ const (
 func (GuardrailWordPolicyAction) Values() []GuardrailWordPolicyAction {
 	return []GuardrailWordPolicyAction{
 		"BLOCKED",
+		"NONE",
 	}
 }
 
@@ -677,8 +706,9 @@ type Trace string
 
 // Enum values for Trace
 const (
-	TraceEnabled  Trace = "ENABLED"
-	TraceDisabled Trace = "DISABLED"
+	TraceEnabled     Trace = "ENABLED"
+	TraceDisabled    Trace = "DISABLED"
+	TraceEnabledFull Trace = "ENABLED_FULL"
 )
 
 // Values returns all known values for Trace. Note that this can be expanded in
@@ -689,6 +719,7 @@ func (Trace) Values() []Trace {
 	return []Trace{
 		"ENABLED",
 		"DISABLED",
+		"ENABLED_FULL",
 	}
 }
 

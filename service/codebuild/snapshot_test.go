@@ -98,6 +98,18 @@ func TestCheckSnapshot_BatchGetBuilds(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchGetCommandExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetCommandExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetCommandExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetFleets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetFleets(context.Background(), nil, func(o *Options) {
@@ -139,6 +151,18 @@ func TestCheckSnapshot_BatchGetReports(t *testing.T) {
 	_, err := svc.BatchGetReports(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "BatchGetReports")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetSandboxes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetSandboxes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetSandboxes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -410,6 +434,18 @@ func TestCheckSnapshot_ListBuildsForProject(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCommandExecutionsForSandbox(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCommandExecutionsForSandbox(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCommandExecutionsForSandbox")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCuratedEnvironmentImages(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCuratedEnvironmentImages(context.Background(), nil, func(o *Options) {
@@ -475,6 +511,30 @@ func TestCheckSnapshot_ListReportsForReportGroup(t *testing.T) {
 	_, err := svc.ListReportsForReportGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListReportsForReportGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSandboxes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSandboxes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSandboxes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSandboxesForProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSandboxesForProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSandboxesForProject")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -578,6 +638,42 @@ func TestCheckSnapshot_StartBuildBatch(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartCommandExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCommandExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartCommandExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartSandbox(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSandbox(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartSandbox")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartSandboxConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSandboxConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartSandboxConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopBuild(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopBuild(context.Background(), nil, func(o *Options) {
@@ -595,6 +691,18 @@ func TestCheckSnapshot_StopBuildBatch(t *testing.T) {
 	_, err := svc.StopBuildBatch(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopBuildBatch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopSandbox(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopSandbox(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopSandbox")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -697,6 +805,18 @@ func TestUpdateSnapshot_BatchGetBuilds(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchGetCommandExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetCommandExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetCommandExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetFleets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetFleets(context.Background(), nil, func(o *Options) {
@@ -738,6 +858,18 @@ func TestUpdateSnapshot_BatchGetReports(t *testing.T) {
 	_, err := svc.BatchGetReports(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchGetReports")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetSandboxes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetSandboxes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetSandboxes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1009,6 +1141,18 @@ func TestUpdateSnapshot_ListBuildsForProject(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListCommandExecutionsForSandbox(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCommandExecutionsForSandbox(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCommandExecutionsForSandbox")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCuratedEnvironmentImages(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCuratedEnvironmentImages(context.Background(), nil, func(o *Options) {
@@ -1074,6 +1218,30 @@ func TestUpdateSnapshot_ListReportsForReportGroup(t *testing.T) {
 	_, err := svc.ListReportsForReportGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListReportsForReportGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSandboxes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSandboxes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSandboxes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSandboxesForProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSandboxesForProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSandboxesForProject")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1177,6 +1345,42 @@ func TestUpdateSnapshot_StartBuildBatch(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartCommandExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCommandExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartCommandExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartSandbox(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSandbox(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartSandbox")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartSandboxConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSandboxConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartSandboxConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopBuild(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopBuild(context.Background(), nil, func(o *Options) {
@@ -1194,6 +1398,18 @@ func TestUpdateSnapshot_StopBuildBatch(t *testing.T) {
 	_, err := svc.StopBuildBatch(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopBuildBatch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopSandbox(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopSandbox(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopSandbox")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -197,6 +197,15 @@ func awsRestjson1_deserializeOpDocumentApplyGuardrailOutput(v **ApplyGuardrailOu
 				sv.Action = types.GuardrailAction(jtv)
 			}
 
+		case "actionReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ActionReason = ptr.String(jtv)
+			}
+
 		case "assessments":
 			if err := awsRestjson1_deserializeDocumentGuardrailAssessmentList(&sv.Assessments, value); err != nil {
 				return err
@@ -3018,6 +3027,15 @@ func awsRestjson1_deserializeDocumentGuardrailContentFilter(v **types.GuardrailC
 				sv.Confidence = types.GuardrailContentFilterConfidence(jtv)
 			}
 
+		case "detected":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Detected = ptr.Bool(jtv)
+			}
+
 		case "filterStrength":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3144,6 +3162,15 @@ func awsRestjson1_deserializeDocumentGuardrailContextualGroundingFilter(v **type
 					return fmt.Errorf("expected GuardrailContextualGroundingPolicyAction to be of type string, got %T instead", value)
 				}
 				sv.Action = types.GuardrailContextualGroundingPolicyAction(jtv)
+			}
+
+		case "detected":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Detected = ptr.Bool(jtv)
 			}
 
 		case "score":
@@ -3374,6 +3401,15 @@ func awsRestjson1_deserializeDocumentGuardrailCustomWord(v **types.GuardrailCust
 				sv.Action = types.GuardrailWordPolicyAction(jtv)
 			}
 
+		case "detected":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Detected = ptr.Bool(jtv)
+			}
+
 		case "match":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3568,6 +3604,15 @@ func awsRestjson1_deserializeDocumentGuardrailManagedWord(v **types.GuardrailMan
 				sv.Action = types.GuardrailWordPolicyAction(jtv)
 			}
 
+		case "detected":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Detected = ptr.Bool(jtv)
+			}
+
 		case "match":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3660,6 +3705,15 @@ func awsRestjson1_deserializeDocumentGuardrailPiiEntityFilter(v **types.Guardrai
 				sv.Action = types.GuardrailSensitiveInformationPolicyAction(jtv)
 			}
 
+		case "detected":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Detected = ptr.Bool(jtv)
+			}
+
 		case "match":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3750,6 +3804,15 @@ func awsRestjson1_deserializeDocumentGuardrailRegexFilter(v **types.GuardrailReg
 					return fmt.Errorf("expected GuardrailSensitiveInformationPolicyAction to be of type string, got %T instead", value)
 				}
 				sv.Action = types.GuardrailSensitiveInformationPolicyAction(jtv)
+			}
+
+		case "detected":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Detected = ptr.Bool(jtv)
 			}
 
 		case "match":
@@ -3951,6 +4014,15 @@ func awsRestjson1_deserializeDocumentGuardrailTopic(v **types.GuardrailTopic, va
 				sv.Action = types.GuardrailTopicPolicyAction(jtv)
 			}
 
+		case "detected":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Detected = ptr.Bool(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4070,6 +4142,15 @@ func awsRestjson1_deserializeDocumentGuardrailTraceAssessment(v **types.Guardrai
 
 	for key, value := range shape {
 		switch key {
+		case "actionReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ActionReason = ptr.String(jtv)
+			}
+
 		case "inputAssessment":
 			if err := awsRestjson1_deserializeDocumentGuardrailAssessmentMap(&sv.InputAssessment, value); err != nil {
 				return err

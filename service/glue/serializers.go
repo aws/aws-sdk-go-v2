@@ -17692,11 +17692,22 @@ func awsAwsjson11_serializeDocumentConnectionsList(v *types.ConnectionsList, val
 
 	if v.Connections != nil {
 		ok := object.Key("Connections")
-		if err := awsAwsjson11_serializeDocumentOrchestrationStringList(v.Connections, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentConnectionStringList(v.Connections, ok); err != nil {
 			return err
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConnectionStringList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -21570,17 +21581,6 @@ func awsAwsjson11_serializeDocumentOrchestrationArgumentsMap(v map[string]string
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
-	}
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentOrchestrationStringList(v []string, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		av.String(v[i])
 	}
 	return nil
 }

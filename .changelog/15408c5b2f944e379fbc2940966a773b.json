@@ -1,0 +1,8 @@
+{
+    "id": "15408c5b-2f94-4e37-9fbc-2940966a773b",
+    "type": "feature",
+    "description": "New options for how to handle harmful content detected by Amazon Bedrock Guardrails.",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

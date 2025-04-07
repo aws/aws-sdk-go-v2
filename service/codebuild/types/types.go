@@ -780,6 +780,52 @@ type CodeCoverageReportSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains command execution information.
+type CommandExecution struct {
+
+	// The command that needs to be executed.
+	Command *string
+
+	// When the command execution process ended, expressed in Unix time format.
+	EndTime *time.Time
+
+	// The exit code to return upon completion.
+	ExitCode *string
+
+	// The ID of the command execution.
+	Id *string
+
+	// Information about build logs in CloudWatch Logs.
+	Logs *LogsLocation
+
+	// A sandboxArn .
+	SandboxArn *string
+
+	// A sandboxId .
+	SandboxId *string
+
+	// The text written by the command to stderr.
+	StandardErrContent *string
+
+	// The text written by the command to stdout.
+	StandardOutputContent *string
+
+	// When the command execution process started, expressed in Unix time format.
+	StartTime *time.Time
+
+	// The status of the command execution.
+	Status *string
+
+	// When the command execution process was initially submitted, expressed in Unix
+	// time format.
+	SubmitTime *time.Time
+
+	// The command type.
+	Type CommandType
+
+	noSmithyDocumentSerde
+}
+
 // Contains compute attributes. These attributes only need be specified when your
 // project's or fleet's computeType is set to ATTRIBUTE_BASED_COMPUTE .
 type ComputeConfiguration struct {
@@ -2411,6 +2457,148 @@ type S3ReportExportConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Contains sandbox information.
+type Sandbox struct {
+
+	// The ARN of the sandbox.
+	Arn *string
+
+	// The current session for the sandbox.
+	CurrentSession *SandboxSession
+
+	// The Key Management Service customer master key (CMK) to be used for encrypting
+	// the sandbox output artifacts.
+	EncryptionKey *string
+
+	// When the sandbox process ended, expressed in Unix time format.
+	EndTime *time.Time
+
+	// Information about the build environment of the build project.
+	Environment *ProjectEnvironment
+
+	//  An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
+	// ProjectFileSystemLocation object specifies the identifier , location ,
+	// mountOptions , mountPoint , and type of a file system created using Amazon
+	// Elastic File System.
+	FileSystemLocations []ProjectFileSystemLocation
+
+	// The ID of the sandbox.
+	Id *string
+
+	//  Information about logs for a build project. These can be logs in CloudWatch
+	// Logs, built in a specified S3 bucket, or both.
+	LogConfig *LogsConfig
+
+	// The CodeBuild project name.
+	ProjectName *string
+
+	// The number of minutes a sandbox is allowed to be queued before it times out.
+	QueuedTimeoutInMinutes *int32
+
+	// When the sandbox process was initially requested, expressed in Unix time format.
+	RequestTime *time.Time
+
+	//  An array of ProjectSourceVersion objects.
+	SecondarySourceVersions []ProjectSourceVersion
+
+	//  An array of ProjectSource objects.
+	SecondarySources []ProjectSource
+
+	// The name of a service role used for this sandbox.
+	ServiceRole *string
+
+	// Information about the build input source code for the build project.
+	Source *ProjectSource
+
+	// Any version identifier for the version of the sandbox to be built.
+	SourceVersion *string
+
+	// When the sandbox process started, expressed in Unix time format.
+	StartTime *time.Time
+
+	// The status of the sandbox.
+	Status *string
+
+	// How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before
+	// timing out this sandbox if it does not get marked as completed.
+	TimeoutInMinutes *int32
+
+	// Information about the VPC configuration that CodeBuild accesses.
+	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the sandbox session.
+type SandboxSession struct {
+
+	// The current phase for the sandbox.
+	CurrentPhase *string
+
+	// When the sandbox session ended, expressed in Unix time format.
+	EndTime *time.Time
+
+	// The ID of the sandbox session.
+	Id *string
+
+	// Information about build logs in CloudWatch Logs.
+	Logs *LogsLocation
+
+	// Describes a network interface.
+	NetworkInterface *NetworkInterface
+
+	//  An array of SandboxSessionPhase objects.
+	Phases []SandboxSessionPhase
+
+	// An identifier for the version of this sandbox's source code.
+	ResolvedSourceVersion *string
+
+	// When the sandbox session started, expressed in Unix time format.
+	StartTime *time.Time
+
+	// The status of the sandbox session.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the sandbox phase.
+type SandboxSessionPhase struct {
+
+	//  An array of PhaseContext objects.
+	Contexts []PhaseContext
+
+	// How long, in seconds, between the starting and ending times of the sandbox's
+	// phase.
+	DurationInSeconds *int64
+
+	// When the sandbox phase ended, expressed in Unix time format.
+	EndTime *time.Time
+
+	// The current status of the sandbox phase. Valid values include:
+	//
+	// FAILED The sandbox phase failed.
+	//
+	// FAULT The sandbox phase faulted.
+	//
+	// IN_PROGRESS The sandbox phase is still in progress.
+	//
+	// STOPPED The sandbox phase stopped.
+	//
+	// SUCCEEDED The sandbox phase succeeded.
+	//
+	// TIMED_OUT The sandbox phase timed out.
+	PhaseStatus StatusType
+
+	// The name of the sandbox phase.
+	PhaseType *string
+
+	// When the sandbox phase started, expressed in Unix time format.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The scaling configuration input of a compute fleet.
 type ScalingConfigurationInput struct {
 
@@ -2500,6 +2688,22 @@ type SourceCredentialsInfo struct {
 	//  The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE,
 	// GITLAB, GITLAB_SELF_MANAGED, or BITBUCKET.
 	ServerType ServerType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the Session Manager session.
+type SSMSession struct {
+
+	// The ID of the session.
+	SessionId *string
+
+	// A URL back to SSM Agent on the managed node that the Session Manager client
+	// uses to send commands and receive output from the node.
+	StreamUrl *string
+
+	// An encrypted token value containing session and caller information.
+	TokenValue *string
 
 	noSmithyDocumentSerde
 }

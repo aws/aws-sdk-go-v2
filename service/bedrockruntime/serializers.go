@@ -121,6 +121,11 @@ func awsRestjson1_serializeOpDocumentApplyGuardrailInput(v *ApplyGuardrailInput,
 		}
 	}
 
+	if len(v.OutputScope) > 0 {
+		ok := object.Key("outputScope")
+		ok.String(string(v.OutputScope))
+	}
+
 	if len(v.Source) > 0 {
 		ok := object.Key("source")
 		ok.String(string(v.Source))

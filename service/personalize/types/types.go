@@ -1176,6 +1176,33 @@ type DefaultIntegerHyperParameterRange struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the parameters of events, which are used in solution creation.
+type EventParameters struct {
+
+	// The name of the event type to be considered for solution creation.
+	EventType *string
+
+	// The threshold of the event type. Only events with a value greater or equal to
+	// this threshold will be considered for solution creation.
+	EventValueThreshold *float64
+
+	// The weight of the event type. A higher weight means higher importance of the
+	// event type for the created solution.
+	Weight *float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration of events, which are used in solution creation.
+type EventsConfig struct {
+
+	// A list of event parameters, which includes event types and their event value
+	// thresholds and weights.
+	EventParametersList []EventParameters
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about an event tracker.
 type EventTracker struct {
 
@@ -1908,6 +1935,11 @@ type SolutionConfig struct {
 	// training a model.
 	EventValueThreshold *string
 
+	// Describes the configuration of an event, which includes a list of event
+	// parameters. You can specify up to 10 event parameters. Events are used in
+	// solution creation.
+	EventsConfig *EventsConfig
+
 	// Lists the feature transformation parameters.
 	FeatureTransformationParameters map[string]string
 
@@ -1965,6 +1997,11 @@ type SolutionUpdateConfig struct {
 
 	// The automatic training configuration to use when performAutoTraining is true.
 	AutoTrainingConfig *AutoTrainingConfig
+
+	// Describes the configuration of an event, which includes a list of event
+	// parameters. You can specify up to 10 event parameters. Events are used in
+	// solution creation.
+	EventsConfig *EventsConfig
 
 	noSmithyDocumentSerde
 }

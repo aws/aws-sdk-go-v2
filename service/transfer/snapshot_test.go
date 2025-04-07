@@ -698,6 +698,30 @@ func TestCheckSnapshot_StartFileTransfer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartRemoteDelete(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartRemoteDelete(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartRemoteDelete")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartRemoteMove(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartRemoteMove(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartRemoteMove")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartServer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartServer(context.Background(), nil, func(o *Options) {
@@ -1518,6 +1542,30 @@ func TestUpdateSnapshot_StartFileTransfer(t *testing.T) {
 	_, err := svc.StartFileTransfer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartFileTransfer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartRemoteDelete(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartRemoteDelete(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartRemoteDelete")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartRemoteMove(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartRemoteMove(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartRemoteMove")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

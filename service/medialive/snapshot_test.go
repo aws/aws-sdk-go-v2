@@ -326,6 +326,18 @@ func TestCheckSnapshot_CreatePartnerInput(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateSdiSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSdiSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSdiSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateSignalMap(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSignalMap(context.Background(), nil, func(o *Options) {
@@ -530,6 +542,18 @@ func TestCheckSnapshot_DeleteSchedule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteSdiSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSdiSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSdiSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteSignalMap(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteSignalMap(context.Background(), nil, func(o *Options) {
@@ -727,6 +751,18 @@ func TestCheckSnapshot_DescribeSchedule(t *testing.T) {
 	_, err := svc.DescribeSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeSdiSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSdiSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSdiSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1003,6 +1039,18 @@ func TestCheckSnapshot_ListReservations(t *testing.T) {
 	_, err := svc.ListReservations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListReservations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSdiSources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSdiSources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSdiSources")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1441,6 +1489,18 @@ func TestCheckSnapshot_UpdateReservation(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateSdiSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSdiSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSdiSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AcceptInputDeviceTransfer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AcceptInputDeviceTransfer(context.Background(), nil, func(o *Options) {
@@ -1705,6 +1765,18 @@ func TestUpdateSnapshot_CreatePartnerInput(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateSdiSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSdiSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSdiSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateSignalMap(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSignalMap(context.Background(), nil, func(o *Options) {
@@ -1909,6 +1981,18 @@ func TestUpdateSnapshot_DeleteSchedule(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteSdiSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSdiSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSdiSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteSignalMap(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteSignalMap(context.Background(), nil, func(o *Options) {
@@ -2106,6 +2190,18 @@ func TestUpdateSnapshot_DescribeSchedule(t *testing.T) {
 	_, err := svc.DescribeSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeSdiSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSdiSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSdiSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2382,6 +2478,18 @@ func TestUpdateSnapshot_ListReservations(t *testing.T) {
 	_, err := svc.ListReservations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListReservations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSdiSources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSdiSources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSdiSources")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2814,6 +2922,18 @@ func TestUpdateSnapshot_UpdateReservation(t *testing.T) {
 	_, err := svc.UpdateReservation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateReservation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSdiSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSdiSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSdiSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

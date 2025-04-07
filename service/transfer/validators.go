@@ -930,6 +930,46 @@ func (m *validateOpStartFileTransfer) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartRemoteDelete struct {
+}
+
+func (*validateOpStartRemoteDelete) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartRemoteDelete) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartRemoteDeleteInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartRemoteDeleteInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartRemoteMove struct {
+}
+
+func (*validateOpStartRemoteMove) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartRemoteMove) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartRemoteMoveInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartRemoteMoveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartServer struct {
 }
 
@@ -1432,6 +1472,14 @@ func addOpStartDirectoryListingValidationMiddleware(stack *middleware.Stack) err
 
 func addOpStartFileTransferValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartFileTransfer{}, middleware.After)
+}
+
+func addOpStartRemoteDeleteValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartRemoteDelete{}, middleware.After)
+}
+
+func addOpStartRemoteMoveValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartRemoteMove{}, middleware.After)
 }
 
 func addOpStartServerValidationMiddleware(stack *middleware.Stack) error {
@@ -2649,6 +2697,45 @@ func validateOpStartFileTransferInput(v *StartFileTransferInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartFileTransferInput"}
 	if v.ConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartRemoteDeleteInput(v *StartRemoteDeleteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRemoteDeleteInput"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if v.DeletePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeletePath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartRemoteMoveInput(v *StartRemoteMoveInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRemoteMoveInput"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if v.SourcePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourcePath"))
+	}
+	if v.TargetPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

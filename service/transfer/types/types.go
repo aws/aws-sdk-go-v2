@@ -62,7 +62,7 @@ type As2ConnectorConfig struct {
 	// A unique identifier for the AS2 local profile.
 	LocalProfileId *string
 
-	// Used for outbound requests (from an Transfer Family server to a partner AS2
+	// Used for outbound requests (from an Transfer Family connector to a partner AS2
 	// server) to determine whether the partner response for transfers is synchronous
 	// or asynchronous. Specify either of the following values:
 	//
@@ -499,7 +499,9 @@ type DescribedCertificate struct {
 	// This member is required.
 	Arn *string
 
-	// An optional date that specifies when the certificate becomes active.
+	// An optional date that specifies when the certificate becomes active. If you do
+	// not specify a value, ActiveDate takes the same value as NotBeforeDate , which is
+	// specified by the CA.
 	ActiveDate *time.Time
 
 	// The file name for the certificate.
@@ -515,7 +517,9 @@ type DescribedCertificate struct {
 	// The name or description that's used to identity the certificate.
 	Description *string
 
-	// An optional date that specifies when the certificate becomes inactive.
+	// An optional date that specifies when the certificate becomes inactive. If you
+	// do not specify a value, InactiveDate takes the same value as NotAfterDate ,
+	// which is specified by the CA.
 	InactiveDate *time.Time
 
 	// The final date that the certificate is valid.
@@ -527,8 +531,15 @@ type DescribedCertificate struct {
 	// The serial number for the certificate.
 	Serial *string
 
-	// Currently, the only available status is ACTIVE : all other values are reserved
-	// for future use.
+	// A certificate's status can be either ACTIVE or INACTIVE .
+	//
+	// You can set ActiveDate and InactiveDate in the UpdateCertificate call. If you
+	// set values for these parameters, those values are used to determine whether the
+	// certificate has a status of ACTIVE or INACTIVE .
+	//
+	// If you don't set values for ActiveDate and InactiveDate , we use the NotBefore
+	// and NotAfter date as specified on the X509 certificate to determine when a
+	// certificate is active and when it is inactive.
 	Status CertificateStatusType
 
 	// Key-value pairs that can be used to group and search for certificates.
@@ -874,7 +885,7 @@ type DescribedServer struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or
-	// Amazon EFSevents. When set, you can view user activity in your CloudWatch logs.
+	// Amazon EFS events. When set, you can view user activity in your CloudWatch logs.
 	LoggingRole *string
 
 	// Specifies a string to display when users connect to a server. This string is
@@ -1596,7 +1607,9 @@ type ListedAgreement struct {
 // Describes the properties of a certificate.
 type ListedCertificate struct {
 
-	// An optional date that specifies when the certificate becomes active.
+	// An optional date that specifies when the certificate becomes active. If you do
+	// not specify a value, ActiveDate takes the same value as NotBeforeDate , which is
+	// specified by the CA.
 	ActiveDate *time.Time
 
 	// The Amazon Resource Name (ARN) of the specified certificate.
@@ -1609,7 +1622,9 @@ type ListedCertificate struct {
 	// The name or short description that's used to identify the certificate.
 	Description *string
 
-	// An optional date that specifies when the certificate becomes inactive.
+	// An optional date that specifies when the certificate becomes inactive. If you
+	// do not specify a value, InactiveDate takes the same value as NotAfterDate ,
+	// which is specified by the CA.
 	InactiveDate *time.Time
 
 	// The certificate can be either ACTIVE , PENDING_ROTATION , or INACTIVE .
@@ -1775,7 +1790,7 @@ type ListedServer struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or
-	// Amazon EFSevents. When set, you can view user activity in your CloudWatch logs.
+	// Amazon EFS events. When set, you can view user activity in your CloudWatch logs.
 	LoggingRole *string
 
 	// Specifies the unique system assigned identifier for the servers that were
@@ -1904,7 +1919,7 @@ type LoggingConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or
-	// Amazon EFSevents. When set, you can view user activity in your CloudWatch logs.
+	// Amazon EFS events. When set, you can view user activity in your CloudWatch logs.
 	LoggingRole *string
 
 	noSmithyDocumentSerde

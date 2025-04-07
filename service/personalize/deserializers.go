@@ -12361,6 +12361,184 @@ func awsAwsjson11_deserializeDocumentDefaultIntegerHyperParameterRanges(v *[]typ
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEventParameters(v **types.EventParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EventParameters
+	if *v == nil {
+		sv = &types.EventParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "eventType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventType to be of type string, got %T instead", value)
+				}
+				sv.EventType = ptr.String(jtv)
+			}
+
+		case "eventValueThreshold":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EventValueThreshold = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.EventValueThreshold = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected EventTypeThresholdValue to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "weight":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Weight = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Weight = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected EventTypeWeight to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEventParametersList(v *[]types.EventParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EventParameters
+	if *v == nil {
+		cv = []types.EventParameters{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EventParameters
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentEventParameters(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEventsConfig(v **types.EventsConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EventsConfig
+	if *v == nil {
+		sv = &types.EventsConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "eventParametersList":
+			if err := awsAwsjson11_deserializeDocumentEventParametersList(&sv.EventParametersList, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEventTracker(v **types.EventTracker, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15177,6 +15355,11 @@ func awsAwsjson11_deserializeDocumentSolutionConfig(v **types.SolutionConfig, va
 				return err
 			}
 
+		case "eventsConfig":
+			if err := awsAwsjson11_deserializeDocumentEventsConfig(&sv.EventsConfig, value); err != nil {
+				return err
+			}
+
 		case "eventValueThreshold":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15372,6 +15555,11 @@ func awsAwsjson11_deserializeDocumentSolutionUpdateConfig(v **types.SolutionUpda
 		switch key {
 		case "autoTrainingConfig":
 			if err := awsAwsjson11_deserializeDocumentAutoTrainingConfig(&sv.AutoTrainingConfig, value); err != nil {
+				return err
+			}
+
+		case "eventsConfig":
+			if err := awsAwsjson11_deserializeDocumentEventsConfig(&sv.EventsConfig, value); err != nil {
 				return err
 			}
 

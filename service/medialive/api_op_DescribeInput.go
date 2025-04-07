@@ -95,6 +95,9 @@ type DescribeInputOutput struct {
 	// creation.
 	RoleArn *string
 
+	// SDI Sources for this Input.
+	SdiSources []string
+
 	// A list of IDs for all the Input Security Groups attached to the input.
 	SecurityGroups []string
 

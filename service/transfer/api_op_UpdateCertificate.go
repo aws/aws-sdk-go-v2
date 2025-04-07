@@ -34,13 +34,17 @@ type UpdateCertificateInput struct {
 	// This member is required.
 	CertificateId *string
 
-	// An optional date that specifies when the certificate becomes active.
+	// An optional date that specifies when the certificate becomes active. If you do
+	// not specify a value, ActiveDate takes the same value as NotBeforeDate , which is
+	// specified by the CA.
 	ActiveDate *time.Time
 
 	// A short description to help identify the certificate.
 	Description *string
 
-	// An optional date that specifies when the certificate becomes inactive.
+	// An optional date that specifies when the certificate becomes inactive. If you
+	// do not specify a value, InactiveDate takes the same value as NotAfterDate ,
+	// which is specified by the CA.
 	InactiveDate *time.Time
 
 	noSmithyDocumentSerde

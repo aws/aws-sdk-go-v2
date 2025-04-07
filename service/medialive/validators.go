@@ -650,6 +650,26 @@ func (m *validateOpDeleteSchedule) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteSdiSource struct {
+}
+
+func (*validateOpDeleteSdiSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSdiSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSdiSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSdiSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteSignalMap struct {
 }
 
@@ -965,6 +985,26 @@ func (m *validateOpDescribeSchedule) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeSdiSource struct {
+}
+
+func (*validateOpDescribeSdiSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSdiSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSdiSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSdiSourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1830,6 +1870,26 @@ func (m *validateOpUpdateReservation) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSdiSource struct {
+}
+
+func (*validateOpUpdateSdiSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSdiSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSdiSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSdiSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAcceptInputDeviceTransferValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptInputDeviceTransfer{}, middleware.After)
 }
@@ -1958,6 +2018,10 @@ func addOpDeleteScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSchedule{}, middleware.After)
 }
 
+func addOpDeleteSdiSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSdiSource{}, middleware.After)
+}
+
 func addOpDeleteSignalMapValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSignalMap{}, middleware.After)
 }
@@ -2020,6 +2084,10 @@ func addOpDescribeReservationValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDescribeScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSchedule{}, middleware.After)
+}
+
+func addOpDescribeSdiSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSdiSource{}, middleware.After)
 }
 
 func addOpDescribeThumbnailsValidationMiddleware(stack *middleware.Stack) error {
@@ -2192,6 +2260,10 @@ func addOpUpdateNodeStateValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateReservationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateReservation{}, middleware.After)
+}
+
+func addOpUpdateSdiSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSdiSource{}, middleware.After)
 }
 
 func validate__listOfAudioChannelMapping(v []types.AudioChannelMapping) error {
@@ -5387,6 +5459,21 @@ func validateOpDeleteScheduleInput(v *DeleteScheduleInput) error {
 	}
 }
 
+func validateOpDeleteSdiSourceInput(v *DeleteSdiSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSdiSourceInput"}
+	if v.SdiSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SdiSourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteSignalMapInput(v *DeleteSignalMapInput) error {
 	if v == nil {
 		return nil
@@ -5634,6 +5721,21 @@ func validateOpDescribeScheduleInput(v *DescribeScheduleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeScheduleInput"}
 	if v.ChannelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSdiSourceInput(v *DescribeSdiSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSdiSourceInput"}
+	if v.SdiSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SdiSourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6333,6 +6435,21 @@ func validateOpUpdateReservationInput(v *UpdateReservationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateReservationInput"}
 	if v.ReservationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReservationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSdiSourceInput(v *UpdateSdiSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSdiSourceInput"}
+	if v.SdiSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SdiSourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

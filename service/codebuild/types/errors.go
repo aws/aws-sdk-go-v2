@@ -34,6 +34,33 @@ func (e *AccountLimitExceededException) ErrorCode() string {
 }
 func (e *AccountLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The CodeBuild access has been suspended for the calling Amazon Web Services
+// account.
+type AccountSuspendedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccountSuspendedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccountSuspendedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccountSuspendedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "AccountSuspendedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *AccountSuspendedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The input value that was provided is not valid.
 type InvalidInputException struct {
 	Message *string

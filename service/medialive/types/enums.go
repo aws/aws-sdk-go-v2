@@ -4445,6 +4445,7 @@ const (
 	InputTypeSrtCaller              InputType = "SRT_CALLER"
 	InputTypeMulticast              InputType = "MULTICAST"
 	InputTypeSmpte2110ReceiverGroup InputType = "SMPTE_2110_RECEIVER_GROUP"
+	InputTypeSdi                    InputType = "SDI"
 )
 
 // Values returns all known values for InputType. Note that this can be expanded
@@ -4466,6 +4467,7 @@ func (InputType) Values() []InputType {
 		"SRT_CALLER",
 		"MULTICAST",
 		"SMPTE_2110_RECEIVER_GROUP",
+		"SDI",
 	}
 }
 
@@ -6174,6 +6176,65 @@ func (Scte35WebDeliveryAllowedFlag) Values() []Scte35WebDeliveryAllowedFlag {
 	return []Scte35WebDeliveryAllowedFlag{
 		"WEB_DELIVERY_NOT_ALLOWED",
 		"WEB_DELIVERY_ALLOWED",
+	}
+}
+
+type SdiSourceMode string
+
+// Enum values for SdiSourceMode
+const (
+	SdiSourceModeQuadrant   SdiSourceMode = "QUADRANT"
+	SdiSourceModeInterleave SdiSourceMode = "INTERLEAVE"
+)
+
+// Values returns all known values for SdiSourceMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SdiSourceMode) Values() []SdiSourceMode {
+	return []SdiSourceMode{
+		"QUADRANT",
+		"INTERLEAVE",
+	}
+}
+
+type SdiSourceState string
+
+// Enum values for SdiSourceState
+const (
+	SdiSourceStateIdle    SdiSourceState = "IDLE"
+	SdiSourceStateInUse   SdiSourceState = "IN_USE"
+	SdiSourceStateDeleted SdiSourceState = "DELETED"
+)
+
+// Values returns all known values for SdiSourceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SdiSourceState) Values() []SdiSourceState {
+	return []SdiSourceState{
+		"IDLE",
+		"IN_USE",
+		"DELETED",
+	}
+}
+
+type SdiSourceType string
+
+// Enum values for SdiSourceType
+const (
+	SdiSourceTypeSingle SdiSourceType = "SINGLE"
+	SdiSourceTypeQuad   SdiSourceType = "QUAD"
+)
+
+// Values returns all known values for SdiSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SdiSourceType) Values() []SdiSourceType {
+	return []SdiSourceType{
+		"SINGLE",
+		"QUAD",
 	}
 }
 

@@ -139,7 +139,7 @@ type UpdateServerInput struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or
-	// Amazon EFSevents. When set, you can view user activity in your CloudWatch logs.
+	// Amazon EFS events. When set, you can view user activity in your CloudWatch logs.
 	LoggingRole *string
 
 	// Specifies a string to display when users connect to a server. This string is

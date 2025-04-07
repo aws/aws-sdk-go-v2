@@ -1809,6 +1809,10 @@ type DescribeNodeSummary struct {
 	// get used if an ACTIVE Node fails.
 	Role NodeRole
 
+	// An array of SDI source mappings. Each mapping connects one logical SdiSource to
+	// the physical SDI card and port that the physical SDI source uses.
+	SdiSourceMappings []SdiSourceMapping
+
 	// The current state of the Node.
 	State NodeState
 
@@ -3751,6 +3755,9 @@ type Input struct {
 	// The Amazon Resource Name (ARN) of the role this input assumes during and after
 	// creation.
 	RoleArn *string
+
+	// SDI Sources for this Input.
+	SdiSources []string
 
 	// A list of IDs for all the Input Security Groups attached to the input.
 	SecurityGroups []string
@@ -6847,6 +6854,109 @@ type Scte35TimeSignalScheduleActionSettings struct {
 	//
 	// This member is required.
 	Scte35Descriptors []Scte35Descriptor
+
+	noSmithyDocumentSerde
+}
+
+// Used in CreateSdiSourceResponse, DeleteSdiSourceResponse,
+// DescribeSdiSourceResponse, ListSdiSourcesResponse, UpdateSdiSourceResponse
+type SdiSource struct {
+
+	// The ARN of this SdiSource. It is automatically assigned when the SdiSource is
+	// created.
+	Arn *string
+
+	// The ID of the SdiSource. Unique in the AWS account.The ID is the resource-id
+	// portion of the ARN.
+	Id *string
+
+	// The list of inputs that are currently using this SDI source. This list will be
+	// empty if the SdiSource has just been deleted.
+	Inputs []string
+
+	// Applies only if the type is QUAD. The mode for handling the quad-link signal
+	// QUADRANT or INTERLEAVE.
+	Mode SdiSourceMode
+
+	// The name of the SdiSource.
+	Name *string
+
+	// Specifies whether the SDI source is attached to an SDI input (IN_USE) or not
+	// (IDLE).
+	State SdiSourceState
+
+	// Used in SdiSource, CreateSdiSourceRequest, UpdateSdiSourceRequest.
+	Type SdiSourceType
+
+	noSmithyDocumentSerde
+}
+
+// Used in DescribeNodeSummary, DescribeNodeResult.
+type SdiSourceMapping struct {
+
+	// A number that uniquely identifies the SDI card on the node hardware.
+	CardNumber *int32
+
+	// A number that uniquely identifies a port on the SDI card.
+	ChannelNumber *int32
+
+	// The ID of the SdiSource to associate with this port on this card. You can use
+	// the ListSdiSources operation to discover all the IDs.
+	SdiSource *string
+
+	noSmithyDocumentSerde
+}
+
+// Used in SdiSourceMappingsUpdateRequest. One SDI source mapping. It connects one
+// logical SdiSource to the physical SDI card and port that the physical SDI source
+// uses. You must specify all three parameters in this object.
+type SdiSourceMappingUpdateRequest struct {
+
+	// A number that uniquely identifies the SDI card on the node hardware. For
+	// information about how physical cards are identified on your node hardware, see
+	// the documentation for your node hardware. The numbering always starts at 1.
+	CardNumber *int32
+
+	// A number that uniquely identifies a port on the card. This must be an SDI port
+	// (not a timecode port, for example). For information about how ports are
+	// identified on physical cards, see the documentation for your node hardware.
+	ChannelNumber *int32
+
+	// The ID of a SDI source streaming on the given SDI capture card port.
+	SdiSource *string
+
+	noSmithyDocumentSerde
+}
+
+// Used in CreateSdiSourceResponse, DeleteSdiSourceResponse,
+// DescribeSdiSourceResponse, ListSdiSourcesResponse, UpdateSdiSourceResponse
+type SdiSourceSummary struct {
+
+	// The ARN of this SdiSource. It is automatically assigned when the SdiSource is
+	// created.
+	Arn *string
+
+	// The ID of the SdiSource. Unique in the AWS account.The ID is the resource-id
+	// portion of the ARN.
+	Id *string
+
+	// The list of inputs that are currently using this SDI source. This list will be
+	// empty if the SdiSource has just been deleted.
+	Inputs []string
+
+	// Applies only if the type is QUAD. The mode for handling the quad-link signal
+	// QUADRANT or INTERLEAVE.
+	Mode SdiSourceMode
+
+	// The name of the SdiSource.
+	Name *string
+
+	// Specifies whether the SDI source is attached to an SDI input (IN_USE) or not
+	// (IDLE).
+	State SdiSourceState
+
+	// Used in SdiSource, CreateSdiSourceRequest, UpdateSdiSourceRequest.
+	Type SdiSourceType
 
 	noSmithyDocumentSerde
 }

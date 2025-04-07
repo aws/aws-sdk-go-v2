@@ -54,6 +54,16 @@ type ApplyGuardrailInput struct {
 	// This member is required.
 	Source types.GuardrailContentSource
 
+	// Specifies the scope of the output that you get in the response. Set to FULL to
+	// return the entire output, including any detected and non-detected entries in the
+	// response for enhanced debugging.
+	//
+	// Note that the full output scope doesn't apply to word filters or regex in
+	// sensitive information filters. It does apply to all other filtering policies,
+	// including sensitive information with filters that can detect personally
+	// identifiable information (PII).
+	OutputScope types.GuardrailOutputScope
+
 	noSmithyDocumentSerde
 }
 
@@ -78,6 +88,9 @@ type ApplyGuardrailOutput struct {
 	//
 	// This member is required.
 	Usage *types.GuardrailUsage
+
+	// The reason for the action taken when harmful content is detected.
+	ActionReason *string
 
 	// The guardrail coverage details in the apply guardrail response.
 	GuardrailCoverage *types.GuardrailCoverage

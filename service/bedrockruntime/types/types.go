@@ -630,6 +630,9 @@ type GuardrailContentFilter struct {
 	// This member is required.
 	Type GuardrailContentFilterType
 
+	// Indicates whether content that breaches the guardrail configuration is detected.
+	Detected *bool
+
 	// The filter strength setting for the guardrail content filter.
 	FilterStrength GuardrailContentFilterStrength
 
@@ -670,6 +673,11 @@ type GuardrailContextualGroundingFilter struct {
 	//
 	// This member is required.
 	Type GuardrailContextualGroundingFilterType
+
+	// Indicates whether content that fails the contextual grounding evaluation
+	// (grounding or relevance score less than the corresponding threshold) was
+	// detected.
+	Detected *bool
 
 	noSmithyDocumentSerde
 }
@@ -789,6 +797,10 @@ type GuardrailCustomWord struct {
 	// This member is required.
 	Match *string
 
+	// Indicates whether custom word content that breaches the guardrail configuration
+	// is detected.
+	Detected *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -874,6 +886,10 @@ type GuardrailManagedWord struct {
 	// This member is required.
 	Type GuardrailManagedWordType
 
+	// Indicates whether managed word content that breaches the guardrail
+	// configuration is detected.
+	Detected *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -904,6 +920,10 @@ type GuardrailPiiEntityFilter struct {
 	// This member is required.
 	Type GuardrailPiiEntityType
 
+	// Indicates whether personally identifiable information (PII) that breaches the
+	// guardrail configuration is detected.
+	Detected *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -914,6 +934,10 @@ type GuardrailRegexFilter struct {
 	//
 	// This member is required.
 	Action GuardrailSensitiveInformationPolicyAction
+
+	// Indicates whether custom regex entities that breach the guardrail configuration
+	// are detected.
+	Detected *bool
 
 	// The regesx filter match.
 	Match *string
@@ -1013,6 +1037,10 @@ type GuardrailTopic struct {
 	// This member is required.
 	Type GuardrailTopicType
 
+	// Indicates whether topic content that breaches the guardrail configuration is
+	// detected.
+	Detected *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1029,6 +1057,9 @@ type GuardrailTopicPolicyAssessment struct {
 
 // A Top level guardrail trace object. For more information, see ConverseTrace.
 type GuardrailTraceAssessment struct {
+
+	// Provides the reason for the action taken when harmful content is detected.
+	ActionReason *string
 
 	// The input assessment.
 	InputAssessment map[string]GuardrailAssessment

@@ -13247,6 +13247,24 @@ func awsRestjson1_deserializeDocumentGuardrailContentFilter(v **types.GuardrailC
 
 	for key, value := range shape {
 		switch key {
+		case "inputAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailContentFilterAction to be of type string, got %T instead", value)
+				}
+				sv.InputAction = types.GuardrailContentFilterAction(jtv)
+			}
+
+		case "inputEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.InputEnabled = ptr.Bool(jtv)
+			}
+
 		case "inputModalities":
 			if err := awsRestjson1_deserializeDocumentGuardrailModalities(&sv.InputModalities, value); err != nil {
 				return err
@@ -13259,6 +13277,24 @@ func awsRestjson1_deserializeDocumentGuardrailContentFilter(v **types.GuardrailC
 					return fmt.Errorf("expected GuardrailFilterStrength to be of type string, got %T instead", value)
 				}
 				sv.InputStrength = types.GuardrailFilterStrength(jtv)
+			}
+
+		case "outputAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailContentFilterAction to be of type string, got %T instead", value)
+				}
+				sv.OutputAction = types.GuardrailContentFilterAction(jtv)
+			}
+
+		case "outputEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.OutputEnabled = ptr.Bool(jtv)
 			}
 
 		case "outputModalities":
@@ -13385,6 +13421,24 @@ func awsRestjson1_deserializeDocumentGuardrailContextualGroundingFilter(v **type
 
 	for key, value := range shape {
 		switch key {
+		case "action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailContextualGroundingAction to be of type string, got %T instead", value)
+				}
+				sv.Action = types.GuardrailContextualGroundingAction(jtv)
+			}
+
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
 		case "threshold":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13599,6 +13653,42 @@ func awsRestjson1_deserializeDocumentGuardrailManagedWords(v **types.GuardrailMa
 
 	for key, value := range shape {
 		switch key {
+		case "inputAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailWordAction to be of type string, got %T instead", value)
+				}
+				sv.InputAction = types.GuardrailWordAction(jtv)
+			}
+
+		case "inputEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.InputEnabled = ptr.Bool(jtv)
+			}
+
+		case "outputAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailWordAction to be of type string, got %T instead", value)
+				}
+				sv.OutputAction = types.GuardrailWordAction(jtv)
+			}
+
+		case "outputEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.OutputEnabled = ptr.Bool(jtv)
+			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13718,6 +13808,42 @@ func awsRestjson1_deserializeDocumentGuardrailPiiEntity(v **types.GuardrailPiiEn
 				sv.Action = types.GuardrailSensitiveInformationAction(jtv)
 			}
 
+		case "inputAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailSensitiveInformationAction to be of type string, got %T instead", value)
+				}
+				sv.InputAction = types.GuardrailSensitiveInformationAction(jtv)
+			}
+
+		case "inputEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.InputEnabled = ptr.Bool(jtv)
+			}
+
+		case "outputAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailSensitiveInformationAction to be of type string, got %T instead", value)
+				}
+				sv.OutputAction = types.GuardrailSensitiveInformationAction(jtv)
+			}
+
+		case "outputEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.OutputEnabled = ptr.Bool(jtv)
+			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13776,6 +13902,24 @@ func awsRestjson1_deserializeDocumentGuardrailRegex(v **types.GuardrailRegex, va
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "inputAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailSensitiveInformationAction to be of type string, got %T instead", value)
+				}
+				sv.InputAction = types.GuardrailSensitiveInformationAction(jtv)
+			}
+
+		case "inputEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.InputEnabled = ptr.Bool(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13783,6 +13927,24 @@ func awsRestjson1_deserializeDocumentGuardrailRegex(v **types.GuardrailRegex, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "outputAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailSensitiveInformationAction to be of type string, got %T instead", value)
+				}
+				sv.OutputAction = types.GuardrailSensitiveInformationAction(jtv)
+			}
+
+		case "outputEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.OutputEnabled = ptr.Bool(jtv)
 			}
 
 		case "pattern":
@@ -14095,6 +14257,24 @@ func awsRestjson1_deserializeDocumentGuardrailTopic(v **types.GuardrailTopic, va
 				return err
 			}
 
+		case "inputAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailTopicAction to be of type string, got %T instead", value)
+				}
+				sv.InputAction = types.GuardrailTopicAction(jtv)
+			}
+
+		case "inputEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.InputEnabled = ptr.Bool(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14102,6 +14282,24 @@ func awsRestjson1_deserializeDocumentGuardrailTopic(v **types.GuardrailTopic, va
 					return fmt.Errorf("expected GuardrailTopicName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "outputAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailTopicAction to be of type string, got %T instead", value)
+				}
+				sv.OutputAction = types.GuardrailTopicAction(jtv)
+			}
+
+		case "outputEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.OutputEnabled = ptr.Bool(jtv)
 			}
 
 		case "type":
@@ -14250,6 +14448,42 @@ func awsRestjson1_deserializeDocumentGuardrailWord(v **types.GuardrailWord, valu
 
 	for key, value := range shape {
 		switch key {
+		case "inputAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailWordAction to be of type string, got %T instead", value)
+				}
+				sv.InputAction = types.GuardrailWordAction(jtv)
+			}
+
+		case "inputEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.InputEnabled = ptr.Bool(jtv)
+			}
+
+		case "outputAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailWordAction to be of type string, got %T instead", value)
+				}
+				sv.OutputAction = types.GuardrailWordAction(jtv)
+			}
+
+		case "outputEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.OutputEnabled = ptr.Bool(jtv)
+			}
+
 		case "text":
 			if value != nil {
 				jtv, ok := value.(string)

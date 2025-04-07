@@ -70,6 +70,26 @@ func (m *validateOpBatchGetBuilds) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetCommandExecutions struct {
+}
+
+func (*validateOpBatchGetCommandExecutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetCommandExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetCommandExecutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetCommandExecutionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetFleets struct {
 }
 
@@ -145,6 +165,26 @@ func (m *validateOpBatchGetReports) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchGetReportsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetSandboxes struct {
+}
+
+func (*validateOpBatchGetSandboxes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetSandboxes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetSandboxesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetSandboxesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +570,26 @@ func (m *validateOpListBuildsForProject) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCommandExecutionsForSandbox struct {
+}
+
+func (*validateOpListCommandExecutionsForSandbox) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCommandExecutionsForSandbox) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCommandExecutionsForSandboxInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCommandExecutionsForSandboxInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListReportsForReportGroup struct {
 }
 
@@ -545,6 +605,26 @@ func (m *validateOpListReportsForReportGroup) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListReportsForReportGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSandboxesForProject struct {
+}
+
+func (*validateOpListSandboxesForProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSandboxesForProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSandboxesForProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSandboxesForProjectInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +690,46 @@ func (m *validateOpStartBuild) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCommandExecution struct {
+}
+
+func (*validateOpStartCommandExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCommandExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCommandExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCommandExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartSandboxConnection struct {
+}
+
+func (*validateOpStartSandboxConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSandboxConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSandboxConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSandboxConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopBuildBatch struct {
 }
 
@@ -645,6 +765,26 @@ func (m *validateOpStopBuild) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopBuildInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopSandbox struct {
+}
+
+func (*validateOpStopSandbox) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopSandbox) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopSandboxInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopSandboxInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -762,6 +902,10 @@ func addOpBatchGetBuildsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetBuilds{}, middleware.After)
 }
 
+func addOpBatchGetCommandExecutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetCommandExecutions{}, middleware.After)
+}
+
 func addOpBatchGetFleetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetFleets{}, middleware.After)
 }
@@ -776,6 +920,10 @@ func addOpBatchGetReportGroupsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpBatchGetReportsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetReports{}, middleware.After)
+}
+
+func addOpBatchGetSandboxesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetSandboxes{}, middleware.After)
 }
 
 func addOpCreateFleetValidationMiddleware(stack *middleware.Stack) error {
@@ -854,8 +1002,16 @@ func addOpListBuildsForProjectValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpListBuildsForProject{}, middleware.After)
 }
 
+func addOpListCommandExecutionsForSandboxValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCommandExecutionsForSandbox{}, middleware.After)
+}
+
 func addOpListReportsForReportGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListReportsForReportGroup{}, middleware.After)
+}
+
+func addOpListSandboxesForProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSandboxesForProject{}, middleware.After)
 }
 
 func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -870,12 +1026,24 @@ func addOpStartBuildValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartBuild{}, middleware.After)
 }
 
+func addOpStartCommandExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCommandExecution{}, middleware.After)
+}
+
+func addOpStartSandboxConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSandboxConnection{}, middleware.After)
+}
+
 func addOpStopBuildBatchValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopBuildBatch{}, middleware.After)
 }
 
 func addOpStopBuildValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopBuild{}, middleware.After)
+}
+
+func addOpStopSandboxValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopSandbox{}, middleware.After)
 }
 
 func addOpUpdateFleetValidationMiddleware(stack *middleware.Stack) error {
@@ -1358,6 +1526,24 @@ func validateOpBatchGetBuildsInput(v *BatchGetBuildsInput) error {
 	}
 }
 
+func validateOpBatchGetCommandExecutionsInput(v *BatchGetCommandExecutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetCommandExecutionsInput"}
+	if v.SandboxId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SandboxId"))
+	}
+	if v.CommandExecutionIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommandExecutionIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetFleetsInput(v *BatchGetFleetsInput) error {
 	if v == nil {
 		return nil
@@ -1410,6 +1596,21 @@ func validateOpBatchGetReportsInput(v *BatchGetReportsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetReportsInput"}
 	if v.ReportArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReportArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetSandboxesInput(v *BatchGetSandboxesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetSandboxesInput"}
+	if v.Ids == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ids"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1791,6 +1992,21 @@ func validateOpListBuildsForProjectInput(v *ListBuildsForProjectInput) error {
 	}
 }
 
+func validateOpListCommandExecutionsForSandboxInput(v *ListCommandExecutionsForSandboxInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCommandExecutionsForSandboxInput"}
+	if v.SandboxId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SandboxId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListReportsForReportGroupInput(v *ListReportsForReportGroupInput) error {
 	if v == nil {
 		return nil
@@ -1798,6 +2014,21 @@ func validateOpListReportsForReportGroupInput(v *ListReportsForReportGroupInput)
 	invalidParams := smithy.InvalidParamsError{Context: "ListReportsForReportGroupInput"}
 	if v.ReportGroupArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReportGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSandboxesForProjectInput(v *ListSandboxesForProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSandboxesForProjectInput"}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1954,6 +2185,39 @@ func validateOpStartBuildInput(v *StartBuildInput) error {
 	}
 }
 
+func validateOpStartCommandExecutionInput(v *StartCommandExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCommandExecutionInput"}
+	if v.SandboxId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SandboxId"))
+	}
+	if v.Command == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Command"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartSandboxConnectionInput(v *StartSandboxConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSandboxConnectionInput"}
+	if v.SandboxId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SandboxId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopBuildBatchInput(v *StopBuildBatchInput) error {
 	if v == nil {
 		return nil
@@ -1974,6 +2238,21 @@ func validateOpStopBuildInput(v *StopBuildInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopBuildInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopSandboxInput(v *StopSandboxInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopSandboxInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}

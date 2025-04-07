@@ -1,0 +1,8 @@
+{
+    "id": "a2dd8ba9-80ab-4452-a110-1337b4cc9a72",
+    "type": "feature",
+    "description": "AWS Elemental MediaLive now supports SDI inputs to MediaLive Anywhere Channels in workflows that use AWS SDKs.",
+    "modules": [
+        "service/medialive"
+    ]
+}

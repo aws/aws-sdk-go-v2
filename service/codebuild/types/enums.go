@@ -234,6 +234,23 @@ func (CacheType) Values() []CacheType {
 	}
 }
 
+type CommandType string
+
+// Enum values for CommandType
+const (
+	CommandTypeShell CommandType = "SHELL"
+)
+
+// Values returns all known values for CommandType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CommandType) Values() []CommandType {
+	return []CommandType{
+		"SHELL",
+	}
+}
+
 type ComputeType string
 
 // Enum values for ComputeType
