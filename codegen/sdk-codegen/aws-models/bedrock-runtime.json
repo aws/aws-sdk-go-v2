@@ -1061,6 +1061,36 @@
                 "smithy.api#documentation": "<p>The Model automatically decides if a tool should be called or whether to generate text instead.\n         For example, <code>{\"auto\" : {}}</code>.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#BidirectionalInputPayloadPart": {
+            "type": "structure",
+            "members": {
+                "bytes": {
+                    "target": "com.amazonaws.bedrockruntime#PartBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio content for the bidirectional input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Payload content for the bidirectional input. The input is an audio stream.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#BidirectionalOutputPayloadPart": {
+            "type": "structure",
+            "members": {
+                "bytes": {
+                    "target": "com.amazonaws.bedrockruntime#PartBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speech output of the bidirectional stream.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output from the bidirectional stream. The output is speech and a text transcription.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockruntime#Body": {
             "type": "blob",
             "traits": {
@@ -3715,6 +3745,9 @@
                     "target": "com.amazonaws.bedrockruntime#InvokeModel"
                 },
                 {
+                    "target": "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStream"
+                },
+                {
                     "target": "com.amazonaws.bedrockruntime#InvokeModelWithResponseStream"
                 }
             ]
@@ -3891,6 +3924,164 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Model performance settings for the request.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-PerformanceConfig-Latency"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStream": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ModelErrorException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ModelNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ModelStreamErrorException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ModelTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Invoke the specified Amazon Bedrock model to run inference using the bidirectional stream. The response is returned in a stream that remains open for 8 minutes. A single session can contain multiple prompts and responses from the model. The prompts to the model are provided as audio files and the model's responses are spoken back to the user and transcribed.</p>\n         <p>It is possible for users to interrupt the model's response with a new prompt, which will halt the response speech. The model will retain contextual awareness of the conversation while pivoting to respond to the new prompt.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/model/{modelId}/invoke-with-bidirectional-stream"
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamInput": {
+            "type": "union",
+            "members": {
+                "chunk": {
+                    "target": "com.amazonaws.bedrockruntime#BidirectionalInputPayloadPart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio chunk that is used as input for the invocation step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Payload content, the speech chunk, for the bidirectional input of the invocation step.</p>",
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamOutput": {
+            "type": "union",
+            "members": {
+                "chunk": {
+                    "target": "com.amazonaws.bedrockruntime#BidirectionalOutputPayloadPart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speech chunk that was provided as output from the invocation step.</p>"
+                    }
+                },
+                "internalServerException": {
+                    "target": "com.amazonaws.bedrockruntime#InternalServerException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request encountered an unknown internal error.</p>"
+                    }
+                },
+                "modelStreamErrorException": {
+                    "target": "com.amazonaws.bedrockruntime#ModelStreamErrorException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request encountered an error with the model stream.</p>"
+                    }
+                },
+                "validationException": {
+                    "target": "com.amazonaws.bedrockruntime#ValidationException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>"
+                    }
+                },
+                "throttlingException": {
+                    "target": "com.amazonaws.bedrockruntime#ThrottlingException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>"
+                    }
+                },
+                "modelTimeoutException": {
+                    "target": "com.amazonaws.bedrockruntime#ModelTimeoutException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection was closed because a request was not received within the timeout period.</p>"
+                    }
+                },
+                "serviceUnavailableException": {
+                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request has failed due to a temporary failure of the server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output from the bidirectional stream that was used for model invocation.</p>",
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamRequest": {
+            "type": "structure",
+            "members": {
+                "modelId": {
+                    "target": "com.amazonaws.bedrockruntime#InvokeModelIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model ID or ARN of the model ID to use. Currently, only <code>amazon.nova-sonic-v1:0</code> is supported.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prompt and inference parameters in the format specified in the <code>BidirectionalInputPayloadPart</code> in the header. You must provide the body in JSON format. To see the format and content of the request and response bodies for different models, refer to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters</a>. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html\">Run inference</a> in the Bedrock User Guide.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamResponse": {
+            "type": "structure",
+            "members": {
+                "body": {
+                    "target": "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Streaming response from the model in the format specified by the <code>BidirectionalOutputPayloadPart</code> header.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
                     }
                 }
             },

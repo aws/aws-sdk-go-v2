@@ -193,6 +193,12 @@
                     "traits": {
                         "smithy.api#enumValue": "UNKNOWN_ERROR"
                     }
+                },
+                "INSUFFICIENT_PERMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_PERMISSIONS"
+                    }
                 }
             }
         },
@@ -6775,7 +6781,7 @@
                 "ActiveDirectoryStatus": {
                     "target": "com.amazonaws.storagegateway#ActiveDirectoryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the status of the gateway as a member of the Active Directory domain.</p>\n         <note>\n            <p>This field is only used as part of a <code>JoinDomain</code> request. It is not\n            affected by Active Directory connectivity changes that occur after the\n               <code>JoinDomain</code> request succeeds.</p>\n         </note>\n         <ul>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code>: Indicates that the <code>JoinDomain</code> operation\n               failed due to an authentication error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DETACHED</code>: Indicates that gateway is not joined to a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JOINED</code>: Indicates that the gateway has successfully joined a\n               domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JOINING</code>: Indicates that a <code>JoinDomain</code> operation is in\n               progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_ERROR</code>: Indicates that <code>JoinDomain</code> operation\n               failed due to a network or connectivity error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code>: Indicates that the <code>JoinDomain</code> operation failed\n               because the operation didn't complete within the allotted time.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN_ERROR</code>: Indicates that the <code>JoinDomain</code> operation\n               failed due to another type of error.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the status of the gateway as a member of the Active Directory domain.</p>\n         <note>\n            <p>This field is only used as part of a <code>JoinDomain</code> request. It is not\n            affected by Active Directory connectivity changes that occur after the\n               <code>JoinDomain</code> request succeeds.</p>\n         </note>\n         <ul>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code>: Indicates that the <code>JoinDomain</code> operation\n               failed due to an authentication error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DETACHED</code>: Indicates that gateway is not joined to a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JOINED</code>: Indicates that the gateway has successfully joined a\n               domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JOINING</code>: Indicates that a <code>JoinDomain</code> operation is in\n               progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_PERMISSIONS</code>: Indicates that the <code>JoinDomain</code>\n               operation failed because the specified user lacks the necessary permissions to join\n               the domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_ERROR</code>: Indicates that <code>JoinDomain</code> operation\n               failed due to a network or connectivity error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code>: Indicates that the <code>JoinDomain</code> operation failed\n               because the operation didn't complete within the allotted time.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN_ERROR</code>: Indicates that the <code>JoinDomain</code> operation\n               failed due to another type of error.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -6866,7 +6872,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of existing cache reports for all file shares associated with your\n            Amazon Web Services account. This list includes all information provided by the\n            <code>DescribeCacheReport</code> action, such as report name, status, completion\n         progress, start time, end time, filters, and tags.</p>"
+                "smithy.api#documentation": "<p>Returns a list of existing cache reports for all file shares associated with your\n            Amazon Web Services account. This list includes all information provided by the\n            <code>DescribeCacheReport</code> action, such as report name, status, completion\n         progress, start time, end time, filters, and tags.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "CacheReportList"
+                }
             }
         },
         "com.amazonaws.storagegateway#ListCacheReportsInput": {
@@ -7725,7 +7736,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1000
+                    "max": 2000
                 }
             }
         },
@@ -9207,14 +9218,14 @@
                 "LocationARN": {
                     "target": "com.amazonaws.storagegateway#LocationARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon S3 bucket where the cache report will be saved.</p>\n         <note>\n            <p>We do not recommend saving the cache report to the same Amazon S3 bucket for\n            which you are generating the report.</p>\n            <p>This field does not accept access point ARNs.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The ARN of the Amazon S3 bucket where you want to save the cache report.</p>\n         <note>\n            <p>We do not recommend saving the cache report to the same Amazon S3 bucket for\n            which you are generating the report.</p>\n            <p>This field does not accept access point ARNs.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "BucketRegion": {
                     "target": "com.amazonaws.storagegateway#RegionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the Amazon S3 bucket associated with the file\n         share for which you want to generate the cache report.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the Amazon S3 bucket where you want to save the\n         cache report.</p>",
                         "smithy.api#required": {}
                     }
                 },

@@ -218,6 +218,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Greece.</p>"
                     }
+                },
+                "uzbekistanAdditionalInfo": {
+                    "target": "com.amazonaws.taxsettings#UzbekistanAdditionalInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Additional tax information to specify for a TRN in Uzbekistan.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -339,6 +345,12 @@
                     "target": "com.amazonaws.taxsettings#GreeceAdditionalInfo",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Greece.\n    </p>"
+                    }
+                },
+                "uzbekistanAdditionalInfo": {
+                    "target": "com.amazonaws.taxsettings#UzbekistanAdditionalInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Additional tax information associated with your TRN in Uzbekistan.\n    </p>"
                     }
                 }
             },
@@ -4541,6 +4553,43 @@
                 "smithy.api#pattern": "^https.*\\S.*$"
             }
         },
+        "com.amazonaws.taxsettings#UzbekistanAdditionalInfo": {
+            "type": "structure",
+            "members": {
+                "taxRegistrationNumberType": {
+                    "target": "com.amazonaws.taxsettings#UzbekistanTaxRegistrationNumberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The tax registration number type. The tax registration number type valid values are <code>Business</code> and <code>Individual</code>.\n    </p>"
+                    }
+                },
+                "vatRegistrationNumber": {
+                    "target": "com.amazonaws.taxsettings#VatRegistrationNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The unique 12-digit number issued to identify VAT-registered identities in Uzbekistan.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Additional tax information to specify for a TRN in Uzbekistan.\n    </p>"
+            }
+        },
+        "com.amazonaws.taxsettings#UzbekistanTaxRegistrationNumberType": {
+            "type": "enum",
+            "members": {
+                "BUSINESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Business"
+                    }
+                },
+                "INDIVIDUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Individual"
+                    }
+                }
+            }
+        },
         "com.amazonaws.taxsettings#ValidationException": {
             "type": "structure",
             "members": {
@@ -4624,6 +4673,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.taxsettings#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.taxsettings#VatRegistrationNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
         "com.amazonaws.taxsettings#VerificationDetails": {
