@@ -2364,6 +2364,11 @@ func validateUpdateVehicleRequestItem(v *types.UpdateVehicleRequestItem) error {
 			invalidParams.AddNested("StateTemplatesToAdd", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.StateTemplatesToUpdate != nil {
+		if err := validateStateTemplateAssociations(v.StateTemplatesToUpdate); err != nil {
+			invalidParams.AddNested("StateTemplatesToUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3299,6 +3304,11 @@ func validateOpUpdateVehicleInput(v *UpdateVehicleInput) error {
 	if v.StateTemplatesToAdd != nil {
 		if err := validateStateTemplateAssociations(v.StateTemplatesToAdd); err != nil {
 			invalidParams.AddNested("StateTemplatesToAdd", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StateTemplatesToUpdate != nil {
+		if err := validateStateTemplateAssociations(v.StateTemplatesToUpdate); err != nil {
+			invalidParams.AddNested("StateTemplatesToUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

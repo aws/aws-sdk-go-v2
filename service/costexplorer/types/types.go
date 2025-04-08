@@ -810,7 +810,7 @@ type DimensionValues struct {
 	// Not all dimensions are supported in each API. Refer to the documentation for
 	// each specific API to see what is supported.
 	//
-	// LINK_ACCOUNT_NAME and SERVICE_CODE can only be used in [CostCategoryRule].
+	// LINKED_ACCOUNT_NAME and SERVICE_CODE can only be used in [CostCategoryRule].
 	//
 	// ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE can only be
 	// used in [AnomalySubscriptions].

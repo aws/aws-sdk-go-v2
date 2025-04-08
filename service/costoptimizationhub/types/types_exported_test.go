@@ -14,6 +14,9 @@ func ExampleResourceDetails_outputUsage() {
 	case *types.ResourceDetailsMemberComputeSavingsPlans:
 		_ = v.Value // Value is types.ComputeSavingsPlans
 
+	case *types.ResourceDetailsMemberDynamoDbReservedCapacity:
+		_ = v.Value // Value is types.DynamoDbReservedCapacity
+
 	case *types.ResourceDetailsMemberEbsVolume:
 		_ = v.Value // Value is types.EbsVolume
 
@@ -37,6 +40,9 @@ func ExampleResourceDetails_outputUsage() {
 
 	case *types.ResourceDetailsMemberLambdaFunction:
 		_ = v.Value // Value is types.LambdaFunction
+
+	case *types.ResourceDetailsMemberMemoryDbReservedInstances:
+		_ = v.Value // Value is types.MemoryDbReservedInstances
 
 	case *types.ResourceDetailsMemberOpenSearchReservedInstances:
 		_ = v.Value // Value is types.OpenSearchReservedInstances
@@ -69,6 +75,8 @@ var _ *types.ComputeSavingsPlans
 var _ *types.Ec2AutoScalingGroup
 var _ *types.RdsReservedInstances
 var _ *types.OpenSearchReservedInstances
+var _ *types.DynamoDbReservedCapacity
+var _ *types.MemoryDbReservedInstances
 var _ *types.Ec2ReservedInstances
 var _ *types.SageMakerSavingsPlans
 var _ *types.Ec2Instance

@@ -5424,6 +5424,13 @@ func awsAwsjson10_serializeDocumentUpdateVehicleRequestItem(v *types.UpdateVehic
 		}
 	}
 
+	if v.StateTemplatesToUpdate != nil {
+		ok := object.Key("stateTemplatesToUpdate")
+		if err := awsAwsjson10_serializeDocumentStateTemplateAssociations(v.StateTemplatesToUpdate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.VehicleName != nil {
 		ok := object.Key("vehicleName")
 		ok.String(*v.VehicleName)
@@ -6830,6 +6837,13 @@ func awsAwsjson10_serializeOpDocumentUpdateVehicleInput(v *UpdateVehicleInput, v
 	if v.StateTemplatesToRemove != nil {
 		ok := object.Key("stateTemplatesToRemove")
 		if err := awsAwsjson10_serializeDocumentStateTemplateAssociationIdentifiers(v.StateTemplatesToRemove, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StateTemplatesToUpdate != nil {
+		ok := object.Key("stateTemplatesToUpdate")
+		if err := awsAwsjson10_serializeDocumentStateTemplateAssociations(v.StateTemplatesToUpdate, ok); err != nil {
 			return err
 		}
 	}

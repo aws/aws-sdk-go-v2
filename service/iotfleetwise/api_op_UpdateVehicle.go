@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a vehicle.
+//	Updates a vehicle.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
 func (c *Client) UpdateVehicle(ctx context.Context, params *UpdateVehicleInput, optFns ...func(*Options)) (*UpdateVehicleOutput, error) {
 	if params == nil {
 		params = &UpdateVehicleInput{}
@@ -57,6 +63,10 @@ type UpdateVehicleInput struct {
 
 	// Remove state templates from the vehicle.
 	StateTemplatesToRemove []string
+
+	// Change the stateTemplateUpdateStrategy of state templates already associated
+	// with the vehicle.
+	StateTemplatesToUpdate []types.StateTemplateAssociation
 
 	noSmithyDocumentSerde
 }

@@ -166,6 +166,101 @@ func (c *Client) addOperationGetAnomalySubscriptionsMiddlewares(stack *middlewar
 	return nil
 }
 
+// GetAnomalySubscriptionsPaginatorOptions is the paginator options for
+// GetAnomalySubscriptions
+type GetAnomalySubscriptionsPaginatorOptions struct {
+	// The number of entries a paginated response contains.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetAnomalySubscriptionsPaginator is a paginator for GetAnomalySubscriptions
+type GetAnomalySubscriptionsPaginator struct {
+	options   GetAnomalySubscriptionsPaginatorOptions
+	client    GetAnomalySubscriptionsAPIClient
+	params    *GetAnomalySubscriptionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetAnomalySubscriptionsPaginator returns a new
+// GetAnomalySubscriptionsPaginator
+func NewGetAnomalySubscriptionsPaginator(client GetAnomalySubscriptionsAPIClient, params *GetAnomalySubscriptionsInput, optFns ...func(*GetAnomalySubscriptionsPaginatorOptions)) *GetAnomalySubscriptionsPaginator {
+	if params == nil {
+		params = &GetAnomalySubscriptionsInput{}
+	}
+
+	options := GetAnomalySubscriptionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetAnomalySubscriptionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextPageToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetAnomalySubscriptionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetAnomalySubscriptions page.
+func (p *GetAnomalySubscriptionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetAnomalySubscriptionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextPageToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.GetAnomalySubscriptions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// GetAnomalySubscriptionsAPIClient is a client that implements the
+// GetAnomalySubscriptions operation.
+type GetAnomalySubscriptionsAPIClient interface {
+	GetAnomalySubscriptions(context.Context, *GetAnomalySubscriptionsInput, ...func(*Options)) (*GetAnomalySubscriptionsOutput, error)
+}
+
+var _ GetAnomalySubscriptionsAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opGetAnomalySubscriptions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

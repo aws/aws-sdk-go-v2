@@ -56,8 +56,8 @@ func (c *Client) StartCacheReport(ctx context.Context, params *StartCacheReportI
 
 type StartCacheReportInput struct {
 
-	// The Amazon Web Services Region of the Amazon S3 bucket associated with the file
-	// share for which you want to generate the cache report.
+	// The Amazon Web Services Region of the Amazon S3 bucket where you want to save
+	// the cache report.
 	//
 	// This member is required.
 	BucketRegion *string
@@ -74,7 +74,7 @@ type StartCacheReportInput struct {
 	// This member is required.
 	FileShareARN *string
 
-	// The ARN of the Amazon S3 bucket where the cache report will be saved.
+	// The ARN of the Amazon S3 bucket where you want to save the cache report.
 	//
 	// We do not recommend saving the cache report to the same Amazon S3 bucket for
 	// which you are generating the report.

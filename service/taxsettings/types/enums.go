@@ -345,6 +345,26 @@ func (UkraineTrnType) Values() []UkraineTrnType {
 	}
 }
 
+type UzbekistanTaxRegistrationNumberType string
+
+// Enum values for UzbekistanTaxRegistrationNumberType
+const (
+	UzbekistanTaxRegistrationNumberTypeBusiness   UzbekistanTaxRegistrationNumberType = "Business"
+	UzbekistanTaxRegistrationNumberTypeIndividual UzbekistanTaxRegistrationNumberType = "Individual"
+)
+
+// Values returns all known values for UzbekistanTaxRegistrationNumberType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UzbekistanTaxRegistrationNumberType) Values() []UzbekistanTaxRegistrationNumberType {
+	return []UzbekistanTaxRegistrationNumberType{
+		"Business",
+		"Individual",
+	}
+}
+
 type ValidationExceptionErrorCode string
 
 // Enum values for ValidationExceptionErrorCode

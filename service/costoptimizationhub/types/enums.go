@@ -173,6 +173,8 @@ const (
 	ResourceTypeElastiCacheReservedInstances ResourceType = "ElastiCacheReservedInstances"
 	ResourceTypeRdsDbInstanceStorage         ResourceType = "RdsDbInstanceStorage"
 	ResourceTypeRdsDbInstance                ResourceType = "RdsDbInstance"
+	ResourceTypeDynamoDbReservedCapacity     ResourceType = "DynamoDbReservedCapacity"
+	ResourceTypeMemoryDbReservedInstances    ResourceType = "MemoryDbReservedInstances"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -196,6 +198,8 @@ func (ResourceType) Values() []ResourceType {
 		"ElastiCacheReservedInstances",
 		"RdsDbInstanceStorage",
 		"RdsDbInstance",
+		"DynamoDbReservedCapacity",
+		"MemoryDbReservedInstances",
 	}
 }
 

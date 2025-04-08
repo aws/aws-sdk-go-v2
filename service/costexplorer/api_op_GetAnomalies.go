@@ -181,6 +181,98 @@ func (c *Client) addOperationGetAnomaliesMiddlewares(stack *middleware.Stack, op
 	return nil
 }
 
+// GetAnomaliesPaginatorOptions is the paginator options for GetAnomalies
+type GetAnomaliesPaginatorOptions struct {
+	// The number of entries a paginated response contains.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetAnomaliesPaginator is a paginator for GetAnomalies
+type GetAnomaliesPaginator struct {
+	options   GetAnomaliesPaginatorOptions
+	client    GetAnomaliesAPIClient
+	params    *GetAnomaliesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetAnomaliesPaginator returns a new GetAnomaliesPaginator
+func NewGetAnomaliesPaginator(client GetAnomaliesAPIClient, params *GetAnomaliesInput, optFns ...func(*GetAnomaliesPaginatorOptions)) *GetAnomaliesPaginator {
+	if params == nil {
+		params = &GetAnomaliesInput{}
+	}
+
+	options := GetAnomaliesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetAnomaliesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextPageToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetAnomaliesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetAnomalies page.
+func (p *GetAnomaliesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetAnomaliesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextPageToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.GetAnomalies(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// GetAnomaliesAPIClient is a client that implements the GetAnomalies operation.
+type GetAnomaliesAPIClient interface {
+	GetAnomalies(context.Context, *GetAnomaliesInput, ...func(*Options)) (*GetAnomaliesOutput, error)
+}
+
+var _ GetAnomaliesAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opGetAnomalies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

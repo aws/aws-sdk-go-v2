@@ -14,7 +14,7 @@ import (
 //	Request a cost allocation tag backfill. This will backfill the activation
 //
 // status (either active or inactive ) for all tag keys from para:BackfillFrom up
-// to the when this request is made.
+// to the time this request is made.
 //
 // You can request a backfill once every 24 hours.
 func (c *Client) StartCostAllocationTagBackfill(ctx context.Context, params *StartCostAllocationTagBackfillInput, optFns ...func(*Options)) (*StartCostAllocationTagBackfillOutput, error) {

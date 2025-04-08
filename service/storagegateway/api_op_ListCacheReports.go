@@ -157,6 +157,87 @@ func (c *Client) addOperationListCacheReportsMiddlewares(stack *middleware.Stack
 	return nil
 }
 
+// ListCacheReportsPaginatorOptions is the paginator options for ListCacheReports
+type ListCacheReportsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListCacheReportsPaginator is a paginator for ListCacheReports
+type ListCacheReportsPaginator struct {
+	options   ListCacheReportsPaginatorOptions
+	client    ListCacheReportsAPIClient
+	params    *ListCacheReportsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListCacheReportsPaginator returns a new ListCacheReportsPaginator
+func NewListCacheReportsPaginator(client ListCacheReportsAPIClient, params *ListCacheReportsInput, optFns ...func(*ListCacheReportsPaginatorOptions)) *ListCacheReportsPaginator {
+	if params == nil {
+		params = &ListCacheReportsInput{}
+	}
+
+	options := ListCacheReportsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListCacheReportsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListCacheReportsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListCacheReports page.
+func (p *ListCacheReportsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListCacheReportsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListCacheReports(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListCacheReportsAPIClient is a client that implements the ListCacheReports
+// operation.
+type ListCacheReportsAPIClient interface {
+	ListCacheReports(context.Context, *ListCacheReportsInput, ...func(*Options)) (*ListCacheReportsOutput, error)
+}
+
+var _ ListCacheReportsAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListCacheReports(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -80,8 +80,6 @@ type GetCostForecastInput struct {
 	//
 	//   - LINKED_ACCOUNT
 	//
-	//   - LINKED_ACCOUNT_NAME
-	//
 	//   - OPERATION
 	//
 	//   - PURCHASE_TYPE

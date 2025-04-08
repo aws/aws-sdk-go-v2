@@ -1862,6 +1862,12 @@ type UpdateVehicleError struct {
 }
 
 // Information about the vehicle to update.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
 type UpdateVehicleRequestItem struct {
 
 	// The unique ID of the vehicle to update.
@@ -1894,6 +1900,10 @@ type UpdateVehicleRequestItem struct {
 
 	// Remove existing state template associations from the vehicle.
 	StateTemplatesToRemove []string
+
+	// Change the stateTemplateUpdateStrategy of state templates already associated
+	// with the vehicle.
+	StateTemplatesToUpdate []StateTemplateAssociation
 
 	noSmithyDocumentSerde
 }

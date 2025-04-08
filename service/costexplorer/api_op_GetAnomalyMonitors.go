@@ -163,6 +163,100 @@ func (c *Client) addOperationGetAnomalyMonitorsMiddlewares(stack *middleware.Sta
 	return nil
 }
 
+// GetAnomalyMonitorsPaginatorOptions is the paginator options for
+// GetAnomalyMonitors
+type GetAnomalyMonitorsPaginatorOptions struct {
+	// The number of entries that a paginated response contains.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetAnomalyMonitorsPaginator is a paginator for GetAnomalyMonitors
+type GetAnomalyMonitorsPaginator struct {
+	options   GetAnomalyMonitorsPaginatorOptions
+	client    GetAnomalyMonitorsAPIClient
+	params    *GetAnomalyMonitorsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetAnomalyMonitorsPaginator returns a new GetAnomalyMonitorsPaginator
+func NewGetAnomalyMonitorsPaginator(client GetAnomalyMonitorsAPIClient, params *GetAnomalyMonitorsInput, optFns ...func(*GetAnomalyMonitorsPaginatorOptions)) *GetAnomalyMonitorsPaginator {
+	if params == nil {
+		params = &GetAnomalyMonitorsInput{}
+	}
+
+	options := GetAnomalyMonitorsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetAnomalyMonitorsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextPageToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetAnomalyMonitorsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetAnomalyMonitors page.
+func (p *GetAnomalyMonitorsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetAnomalyMonitorsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextPageToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.GetAnomalyMonitors(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// GetAnomalyMonitorsAPIClient is a client that implements the GetAnomalyMonitors
+// operation.
+type GetAnomalyMonitorsAPIClient interface {
+	GetAnomalyMonitors(context.Context, *GetAnomalyMonitorsInput, ...func(*Options)) (*GetAnomalyMonitorsOutput, error)
+}
+
+var _ GetAnomalyMonitorsAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opGetAnomalyMonitors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

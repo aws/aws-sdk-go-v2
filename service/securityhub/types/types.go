@@ -17598,7 +17598,7 @@ type Standard struct {
 	// The name of the standard.
 	Name *string
 
-	// The ARN of a standard.
+	// The ARN of the standard.
 	StandardsArn *string
 
 	// Provides details about the management of a standard.
@@ -17823,7 +17823,7 @@ type StandardsManagedBy struct {
 	noSmithyDocumentSerde
 }
 
-// The reason for the current status of a standard subscription.
+// The reason for the current status of your subscription to the standard.
 type StandardsStatusReason struct {
 
 	// The reason code that represents the reason for the current status of a standard
@@ -17838,7 +17838,7 @@ type StandardsStatusReason struct {
 // A resource that represents your subscription to a supported standard.
 type StandardsSubscription struct {
 
-	// The ARN of a standard.
+	// The ARN of the standard.
 	//
 	// This member is required.
 	StandardsArn *string
@@ -17848,40 +17848,38 @@ type StandardsSubscription struct {
 	// This member is required.
 	StandardsInput map[string]string
 
-	// The status of the standard subscription.
+	// The status of your subscription to the standard. Possible values are:
 	//
-	// The status values are as follows:
+	//   - PENDING - The standard is in the process of being enabled. Or the standard
+	//   is already enabled and Security Hub is adding new controls to the standard.
 	//
-	//   - PENDING - Standard is in the process of being enabled.
+	//   - READY - The standard is enabled.
 	//
-	//   - READY - Standard is enabled.
+	//   - INCOMPLETE - The standard could not be enabled completely. One or more
+	//   errors ( StandardsStatusReason ) occurred when Security Hub attempted to
+	//   enable the standard.
 	//
-	//   - INCOMPLETE - Standard could not be enabled completely. Some controls may not
-	//   be available.
+	//   - DELETING - The standard is in the process of being disabled.
 	//
-	//   - DELETING - Standard is in the process of being disabled.
-	//
-	//   - FAILED - Standard could not be disabled.
+	//   - FAILED - The standard could not be disabled. One or more errors (
+	//   StandardsStatusReason ) occurred when Security Hub attempted to disable the
+	//   standard.
 	//
 	// This member is required.
 	StandardsStatus StandardsStatus
 
-	// The ARN of a resource that represents your subscription to a supported standard.
+	// The ARN of the resource that represents your subscription to the standard.
 	//
 	// This member is required.
 	StandardsSubscriptionArn *string
 
-	// Indicates whether the controls associated with this standards subscription can
-	// be viewed and updated.
+	// Specifies whether you can retrieve information about and configure individual
+	// controls that apply to the standard. Possible values are:
 	//
-	// The values are as follows:
+	//   - READY_FOR_UPDATES - Controls in the standard can be retrieved and configured.
 	//
-	//   - READY_FOR_UPDATES - Controls associated with this standards subscription can
-	//   be viewed and updated.
-	//
-	//   - NOT_READY_FOR_UPDATES - Controls associated with this standards subscription
-	//   cannot be retrieved or updated yet. Security Hub is still processing a request
-	//   to create the controls.
+	//   - NOT_READY_FOR_UPDATES - Controls in the standard cannot be retrieved or
+	//   configured.
 	StandardsControlsUpdatable StandardsControlsUpdatable
 
 	// The reason for the current status.

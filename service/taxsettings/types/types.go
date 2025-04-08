@@ -108,6 +108,9 @@ type AdditionalInfoRequest struct {
 	//  Additional tax information associated with your TRN in Ukraine.
 	UkraineAdditionalInfo *UkraineAdditionalInfo
 
+	//  Additional tax information to specify for a TRN in Uzbekistan.
+	UzbekistanAdditionalInfo *UzbekistanAdditionalInfo
+
 	// Additional tax information to specify for a TRN in Vietnam.
 	VietnamAdditionalInfo *VietnamAdditionalInfo
 
@@ -175,6 +178,9 @@ type AdditionalInfoResponse struct {
 
 	//  Additional tax information associated with your TRN in Ukraine.
 	UkraineAdditionalInfo *UkraineAdditionalInfo
+
+	//  Additional tax information associated with your TRN in Uzbekistan.
+	UzbekistanAdditionalInfo *UzbekistanAdditionalInfo
 
 	// Additional tax information to specify for a TRN in Vietnam.
 	VietnamAdditionalInfo *VietnamAdditionalInfo
@@ -1005,6 +1011,20 @@ type UkraineAdditionalInfo struct {
 	//
 	// This member is required.
 	UkraineTrnType UkraineTrnType
+
+	noSmithyDocumentSerde
+}
+
+// Additional tax information to specify for a TRN in Uzbekistan.
+type UzbekistanAdditionalInfo struct {
+
+	//  The tax registration number type. The tax registration number type valid
+	// values are Business and Individual .
+	TaxRegistrationNumberType UzbekistanTaxRegistrationNumberType
+
+	//  The unique 12-digit number issued to identify VAT-registered identities in
+	// Uzbekistan.
+	VatRegistrationNumber *string
 
 	noSmithyDocumentSerde
 }

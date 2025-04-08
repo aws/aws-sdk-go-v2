@@ -6,13 +6,14 @@ type ActiveDirectoryStatus string
 
 // Enum values for ActiveDirectoryStatus
 const (
-	ActiveDirectoryStatusAccessDenied ActiveDirectoryStatus = "ACCESS_DENIED"
-	ActiveDirectoryStatusDetached     ActiveDirectoryStatus = "DETACHED"
-	ActiveDirectoryStatusJoined       ActiveDirectoryStatus = "JOINED"
-	ActiveDirectoryStatusJoining      ActiveDirectoryStatus = "JOINING"
-	ActiveDirectoryStatusNetworkError ActiveDirectoryStatus = "NETWORK_ERROR"
-	ActiveDirectoryStatusTimeout      ActiveDirectoryStatus = "TIMEOUT"
-	ActiveDirectoryStatusUnknownError ActiveDirectoryStatus = "UNKNOWN_ERROR"
+	ActiveDirectoryStatusAccessDenied            ActiveDirectoryStatus = "ACCESS_DENIED"
+	ActiveDirectoryStatusDetached                ActiveDirectoryStatus = "DETACHED"
+	ActiveDirectoryStatusJoined                  ActiveDirectoryStatus = "JOINED"
+	ActiveDirectoryStatusJoining                 ActiveDirectoryStatus = "JOINING"
+	ActiveDirectoryStatusNetworkError            ActiveDirectoryStatus = "NETWORK_ERROR"
+	ActiveDirectoryStatusTimeout                 ActiveDirectoryStatus = "TIMEOUT"
+	ActiveDirectoryStatusUnknownError            ActiveDirectoryStatus = "UNKNOWN_ERROR"
+	ActiveDirectoryStatusInsufficientPermissions ActiveDirectoryStatus = "INSUFFICIENT_PERMISSIONS"
 )
 
 // Values returns all known values for ActiveDirectoryStatus. Note that this can
@@ -28,6 +29,7 @@ func (ActiveDirectoryStatus) Values() []ActiveDirectoryStatus {
 		"NETWORK_ERROR",
 		"TIMEOUT",
 		"UNKNOWN_ERROR",
+		"INSUFFICIENT_PERMISSIONS",
 	}
 }
 

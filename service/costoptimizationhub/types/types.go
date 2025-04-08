@@ -74,7 +74,7 @@ type ComputeSavingsPlans struct {
 // The Compute Savings Plans configuration used for recommendations.
 type ComputeSavingsPlansConfiguration struct {
 
-	// The account scope that you want your recommendations for. Amazon Web Services
+	// The account scope for which you want recommendations. Amazon Web Services
 	// calculates recommendations including the management account and member accounts
 	// if the value is set to PAYER . If the value is LINKED , recommendations are
 	// calculated for individual member accounts only.
@@ -97,6 +97,52 @@ type DbInstanceConfiguration struct {
 
 	// The DB instance class of the DB instance.
 	DbInstanceClass *string
+
+	noSmithyDocumentSerde
+}
+
+// The DynamoDB reserved capacity recommendation details.
+type DynamoDbReservedCapacity struct {
+
+	// The DynamoDB reserved capacity configuration used for recommendations.
+	Configuration *DynamoDbReservedCapacityConfiguration
+
+	// Cost impact of the purchase recommendation.
+	CostCalculation *ReservedInstancesCostCalculation
+
+	noSmithyDocumentSerde
+}
+
+// The DynamoDB reserved capacity configuration used for recommendations.
+type DynamoDbReservedCapacityConfiguration struct {
+
+	// The account scope for which you want recommendations.
+	AccountScope *string
+
+	// The capacity unit of the recommended reservation.
+	CapacityUnits *string
+
+	// How much purchasing this reserved capacity costs you on a monthly basis.
+	MonthlyRecurringCost *string
+
+	// The number of reserved capacity units that Amazon Web Services recommends that
+	// you purchase.
+	NumberOfCapacityUnitsToPurchase *string
+
+	// The payment option for the commitment.
+	PaymentOption *string
+
+	// The Amazon Web Services Region of the commitment.
+	ReservedInstancesRegion *string
+
+	// The service for which you want recommendations.
+	Service *string
+
+	// The reserved capacity recommendation term in years.
+	Term *string
+
+	// How much purchasing this reserved capacity costs you upfront.
+	UpfrontCost *string
 
 	noSmithyDocumentSerde
 }
@@ -200,7 +246,7 @@ type Ec2InstanceSavingsPlans struct {
 // The EC2 instance Savings Plans configuration used for recommendations.
 type Ec2InstanceSavingsPlansConfiguration struct {
 
-	// The account scope that you want your recommendations for.
+	// The account scope for which you want recommendations.
 	AccountScope *string
 
 	// The hourly commitment for the Savings Plans type.
@@ -236,7 +282,7 @@ type Ec2ReservedInstances struct {
 // The EC2 reserved instances configuration used for recommendations.
 type Ec2ReservedInstancesConfiguration struct {
 
-	// The account scope that you want your recommendations for.
+	// The account scope for which you want recommendations.
 	AccountScope *string
 
 	// Determines whether the recommendation is for a current generation instance.
@@ -248,7 +294,7 @@ type Ec2ReservedInstancesConfiguration struct {
 	// The type of instance that Amazon Web Services recommends.
 	InstanceType *string
 
-	// How much purchasing reserved instances costs you on a monthly basis.
+	// How much purchasing these reserved instances costs you on a monthly basis.
 	MonthlyRecurringCost *string
 
 	// The number of normalized units that Amazon Web Services recommends that you
@@ -272,7 +318,7 @@ type Ec2ReservedInstancesConfiguration struct {
 	// The Amazon Web Services Region of the commitment.
 	ReservedInstancesRegion *string
 
-	// The service that you want your recommendations for.
+	// The service for which you want recommendations.
 	Service *string
 
 	// Determines whether the recommendation is size flexible.
@@ -326,7 +372,7 @@ type ElastiCacheReservedInstances struct {
 // The ElastiCache reserved instances configuration used for recommendations.
 type ElastiCacheReservedInstancesConfiguration struct {
 
-	// The account scope that you want your recommendations for.
+	// The account scope for which you want recommendations.
 	AccountScope *string
 
 	// Determines whether the recommendation is for a current generation instance.
@@ -338,7 +384,7 @@ type ElastiCacheReservedInstancesConfiguration struct {
 	// The type of instance that Amazon Web Services recommends.
 	InstanceType *string
 
-	// How much purchasing reserved instances costs you on a monthly basis.
+	// How much purchasing these reserved instances costs you on a monthly basis.
 	MonthlyRecurringCost *string
 
 	// The number of normalized units that Amazon Web Services recommends that you
@@ -354,7 +400,7 @@ type ElastiCacheReservedInstancesConfiguration struct {
 	// The Amazon Web Services Region of the commitment.
 	ReservedInstancesRegion *string
 
-	// The service that you want your recommendations for.
+	// The service for which you want recommendations.
 	Service *string
 
 	// Determines whether the recommendation is size flexible.
@@ -390,7 +436,7 @@ type EstimatedDiscounts struct {
 // Filters recommendations by different dimensions.
 type Filter struct {
 
-	// The account that the recommendation is for.
+	// The account to which the recommendation applies.
 	AccountIds []string
 
 	// The type of action you can take by adopting the recommendation.
@@ -456,6 +502,70 @@ type LambdaFunctionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The MemoryDB reserved instances recommendation details.
+//
+// MemoryDB reserved instances are referred to as "MemoryDB reserved nodes" in
+// customer-facing documentation.
+type MemoryDbReservedInstances struct {
+
+	// The MemoryDB reserved instances configuration used for recommendations.
+	Configuration *MemoryDbReservedInstancesConfiguration
+
+	// Cost impact of the purchase recommendation.
+	CostCalculation *ReservedInstancesCostCalculation
+
+	noSmithyDocumentSerde
+}
+
+// The MemoryDB reserved instances configuration used for recommendations.
+//
+// MemoryDB reserved instances are referred to as "MemoryDB reserved nodes" in
+// customer-facing documentation.
+type MemoryDbReservedInstancesConfiguration struct {
+
+	// The account scope for which you want recommendations.
+	AccountScope *string
+
+	// Determines whether the recommendation is for a current generation instance.
+	CurrentGeneration *string
+
+	// The instance family of the recommended reservation.
+	InstanceFamily *string
+
+	// The type of instance that Amazon Web Services recommends.
+	InstanceType *string
+
+	// How much purchasing these reserved instances costs you on a monthly basis.
+	MonthlyRecurringCost *string
+
+	// The number of normalized units that Amazon Web Services recommends that you
+	// purchase.
+	NormalizedUnitsToPurchase *string
+
+	// The number of instances that Amazon Web Services recommends that you purchase.
+	NumberOfInstancesToPurchase *string
+
+	// The payment option for the commitment.
+	PaymentOption *string
+
+	// The Amazon Web Services Region of the commitment.
+	ReservedInstancesRegion *string
+
+	// The service for which you want recommendations.
+	Service *string
+
+	// Determines whether the recommendation is size flexible.
+	SizeFlexEligible *bool
+
+	// The reserved instances recommendation term in years.
+	Term *string
+
+	// How much purchasing these reserved instances costs you upfront.
+	UpfrontCost *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for the EC2 Auto Scaling group with mixed instance types.
 type MixedInstanceConfiguration struct {
 
@@ -480,7 +590,7 @@ type OpenSearchReservedInstances struct {
 // The OpenSearch reserved instances configuration used for recommendations.
 type OpenSearchReservedInstancesConfiguration struct {
 
-	// The account scope that you want your recommendations for.
+	// The account scope for which you want recommendations.
 	AccountScope *string
 
 	// Determines whether the recommendation is for a current generation instance.
@@ -489,7 +599,7 @@ type OpenSearchReservedInstancesConfiguration struct {
 	// The type of instance that Amazon Web Services recommends.
 	InstanceType *string
 
-	// How much purchasing reserved instances costs you on a monthly basis.
+	// How much purchasing these reserved instances costs you on a monthly basis.
 	MonthlyRecurringCost *string
 
 	// The number of normalized units that Amazon Web Services recommends that you
@@ -505,7 +615,7 @@ type OpenSearchReservedInstancesConfiguration struct {
 	// The Amazon Web Services Region of the commitment.
 	ReservedInstancesRegion *string
 
-	// The service that you want your recommendations for.
+	// The service for which you want recommendations.
 	Service *string
 
 	// Determines whether the recommendation is size flexible.
@@ -599,7 +709,7 @@ type RdsReservedInstances struct {
 // The RDS reserved instances configuration used for recommendations.
 type RdsReservedInstancesConfiguration struct {
 
-	// The account scope that you want your recommendations for.
+	// The account scope for which you want recommendations.
 	AccountScope *string
 
 	// Determines whether the recommendation is for a current generation instance.
@@ -640,7 +750,7 @@ type RdsReservedInstancesConfiguration struct {
 	// The Amazon Web Services Region of the commitment.
 	ReservedInstancesRegion *string
 
-	// The service that you want your recommendations for.
+	// The service for which you want recommendations.
 	Service *string
 
 	// Determines whether the recommendation is size flexible.
@@ -658,7 +768,7 @@ type RdsReservedInstancesConfiguration struct {
 // Describes a recommendation.
 type Recommendation struct {
 
-	// The account that the recommendation is for.
+	// The account to which the recommendation applies.
 	AccountId *string
 
 	// The type of tasks that can be carried out by this action.
@@ -757,7 +867,7 @@ type RedshiftReservedInstances struct {
 // The Redshift reserved instances configuration used for recommendations.
 type RedshiftReservedInstancesConfiguration struct {
 
-	// The account scope that you want your recommendations for.
+	// The account scope for which you want recommendations.
 	AccountScope *string
 
 	// Determines whether the recommendation is for a current generation instance.
@@ -769,7 +879,7 @@ type RedshiftReservedInstancesConfiguration struct {
 	// The type of instance that Amazon Web Services recommends.
 	InstanceType *string
 
-	// How much purchasing reserved instances costs you on a monthly basis.
+	// How much purchasing these reserved instances costs you on a monthly basis.
 	MonthlyRecurringCost *string
 
 	// The number of normalized units that Amazon Web Services recommends that you
@@ -785,7 +895,7 @@ type RedshiftReservedInstancesConfiguration struct {
 	// The Amazon Web Services Region of the commitment.
 	ReservedInstancesRegion *string
 
-	// The service that you want your recommendations for.
+	// The service for which you want recommendations.
 	Service *string
 
 	// Determines whether the recommendation is size flexible.
@@ -847,6 +957,7 @@ type ResourceCostCalculation struct {
 // The following types satisfy this interface:
 //
 //	ResourceDetailsMemberComputeSavingsPlans
+//	ResourceDetailsMemberDynamoDbReservedCapacity
 //	ResourceDetailsMemberEbsVolume
 //	ResourceDetailsMemberEc2AutoScalingGroup
 //	ResourceDetailsMemberEc2Instance
@@ -855,6 +966,7 @@ type ResourceCostCalculation struct {
 //	ResourceDetailsMemberEcsService
 //	ResourceDetailsMemberElastiCacheReservedInstances
 //	ResourceDetailsMemberLambdaFunction
+//	ResourceDetailsMemberMemoryDbReservedInstances
 //	ResourceDetailsMemberOpenSearchReservedInstances
 //	ResourceDetailsMemberRdsDbInstance
 //	ResourceDetailsMemberRdsDbInstanceStorage
@@ -873,6 +985,15 @@ type ResourceDetailsMemberComputeSavingsPlans struct {
 }
 
 func (*ResourceDetailsMemberComputeSavingsPlans) isResourceDetails() {}
+
+// The DynamoDB reserved capacity recommendation details.
+type ResourceDetailsMemberDynamoDbReservedCapacity struct {
+	Value DynamoDbReservedCapacity
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberDynamoDbReservedCapacity) isResourceDetails() {}
 
 // The Amazon Elastic Block Store volume recommendation details.
 type ResourceDetailsMemberEbsVolume struct {
@@ -945,6 +1066,15 @@ type ResourceDetailsMemberLambdaFunction struct {
 }
 
 func (*ResourceDetailsMemberLambdaFunction) isResourceDetails() {}
+
+// The MemoryDB reserved instances recommendation details.
+type ResourceDetailsMemberMemoryDbReservedInstances struct {
+	Value MemoryDbReservedInstances
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberMemoryDbReservedInstances) isResourceDetails() {}
 
 // The OpenSearch reserved instances recommendation details.
 type ResourceDetailsMemberOpenSearchReservedInstances struct {
@@ -1035,7 +1165,7 @@ type SageMakerSavingsPlans struct {
 // The SageMaker Savings Plans configuration used for recommendations.
 type SageMakerSavingsPlansConfiguration struct {
 
-	// The account scope that you want your recommendations for.
+	// The account scope for which you want recommendations.
 	AccountScope *string
 
 	// The hourly commitment for the Savings Plans type.

@@ -1546,6 +1546,159 @@ func awsAwsjson10_deserializeDocumentDbInstanceConfiguration(v **types.DbInstanc
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentDynamoDbReservedCapacity(v **types.DynamoDbReservedCapacity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DynamoDbReservedCapacity
+	if *v == nil {
+		sv = &types.DynamoDbReservedCapacity{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "configuration":
+			if err := awsAwsjson10_deserializeDocumentDynamoDbReservedCapacityConfiguration(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "costCalculation":
+			if err := awsAwsjson10_deserializeDocumentReservedInstancesCostCalculation(&sv.CostCalculation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentDynamoDbReservedCapacityConfiguration(v **types.DynamoDbReservedCapacityConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DynamoDbReservedCapacityConfiguration
+	if *v == nil {
+		sv = &types.DynamoDbReservedCapacityConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accountScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccountScope = ptr.String(jtv)
+			}
+
+		case "capacityUnits":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CapacityUnits = ptr.String(jtv)
+			}
+
+		case "monthlyRecurringCost":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.MonthlyRecurringCost = ptr.String(jtv)
+			}
+
+		case "numberOfCapacityUnitsToPurchase":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NumberOfCapacityUnitsToPurchase = ptr.String(jtv)
+			}
+
+		case "paymentOption":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PaymentOption = ptr.String(jtv)
+			}
+
+		case "reservedInstancesRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ReservedInstancesRegion = ptr.String(jtv)
+			}
+
+		case "service":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Service = ptr.String(jtv)
+			}
+
+		case "term":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Term = ptr.String(jtv)
+			}
+
+		case "upfrontCost":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.UpfrontCost = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentEbsVolume(v **types.EbsVolume, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2701,6 +2854,195 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionConfiguration(v **types.Lambd
 		case "compute":
 			if err := awsAwsjson10_deserializeDocumentComputeConfiguration(&sv.Compute, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentMemoryDbReservedInstances(v **types.MemoryDbReservedInstances, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MemoryDbReservedInstances
+	if *v == nil {
+		sv = &types.MemoryDbReservedInstances{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "configuration":
+			if err := awsAwsjson10_deserializeDocumentMemoryDbReservedInstancesConfiguration(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "costCalculation":
+			if err := awsAwsjson10_deserializeDocumentReservedInstancesCostCalculation(&sv.CostCalculation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentMemoryDbReservedInstancesConfiguration(v **types.MemoryDbReservedInstancesConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MemoryDbReservedInstancesConfiguration
+	if *v == nil {
+		sv = &types.MemoryDbReservedInstancesConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accountScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccountScope = ptr.String(jtv)
+			}
+
+		case "currentGeneration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CurrentGeneration = ptr.String(jtv)
+			}
+
+		case "instanceFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.InstanceFamily = ptr.String(jtv)
+			}
+
+		case "instanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = ptr.String(jtv)
+			}
+
+		case "monthlyRecurringCost":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.MonthlyRecurringCost = ptr.String(jtv)
+			}
+
+		case "normalizedUnitsToPurchase":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NormalizedUnitsToPurchase = ptr.String(jtv)
+			}
+
+		case "numberOfInstancesToPurchase":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NumberOfInstancesToPurchase = ptr.String(jtv)
+			}
+
+		case "paymentOption":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PaymentOption = ptr.String(jtv)
+			}
+
+		case "reservedInstancesRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ReservedInstancesRegion = ptr.String(jtv)
+			}
+
+		case "service":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Service = ptr.String(jtv)
+			}
+
+		case "sizeFlexEligible":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.SizeFlexEligible = ptr.Bool(jtv)
+			}
+
+		case "term":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Term = ptr.String(jtv)
+			}
+
+		case "upfrontCost":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.UpfrontCost = ptr.String(jtv)
 			}
 
 		default:
@@ -4371,6 +4713,16 @@ loop:
 			uv = &types.ResourceDetailsMemberComputeSavingsPlans{Value: mv}
 			break loop
 
+		case "dynamoDbReservedCapacity":
+			var mv types.DynamoDbReservedCapacity
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentDynamoDbReservedCapacity(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceDetailsMemberDynamoDbReservedCapacity{Value: mv}
+			break loop
+
 		case "ebsVolume":
 			var mv types.EbsVolume
 			destAddr := &mv
@@ -4449,6 +4801,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ResourceDetailsMemberLambdaFunction{Value: mv}
+			break loop
+
+		case "memoryDbReservedInstances":
+			var mv types.MemoryDbReservedInstances
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentMemoryDbReservedInstances(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceDetailsMemberMemoryDbReservedInstances{Value: mv}
 			break loop
 
 		case "openSearchReservedInstances":

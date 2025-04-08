@@ -45,7 +45,7 @@ type GetRecommendationInput struct {
 
 type GetRecommendationOutput struct {
 
-	// The account that the recommendation is for.
+	// The account to which the recommendation applies.
 	AccountId *string
 
 	// The type of action you can take by adopting the recommendation.

@@ -100,6 +100,9 @@ type JoinDomainOutput struct {
 	//
 	//   - JOINING : Indicates that a JoinDomain operation is in progress.
 	//
+	//   - INSUFFICIENT_PERMISSIONS : Indicates that the JoinDomain operation failed
+	//   because the specified user lacks the necessary permissions to join the domain.
+	//
 	//   - NETWORK_ERROR : Indicates that JoinDomain operation failed due to a network
 	//   or connectivity error.
 	//
