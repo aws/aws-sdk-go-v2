@@ -380,26 +380,6 @@ type EncoderOptions struct {
 	// Default encoding is time.RFC3339Nano in a DynamoDB String (S) data type.
 	EncodeTime func(time.Time) (types.AttributeValue, error)
 
-	// When enabled, the encoder will use implementations of
-	// encoding.TextMarshaler and encoding.BinaryMarshaler when present on
-	// marshaled values.
-	//
-	// Implementations are checked in the following order:
-	//   - [Marshaler]
-	//   - encoding.TextMarshaler
-	//   - encoding.BinaryMarshaler
-	//
-	// The results of a MarshalText call will convert to string (S), results
-	// from a MarshalBinary call will convert to binary (B).
-	UseEncodingMarshalers bool
-
-	// When enabled, the encoder will omit null (NULL) attribute values
-	// returned from custom marshalers tagged with `omitempty`.
-	//
-	// NULL attribute values returned from the standard marshaling routine will
-	// always respect omitempty regardless of this setting.
-	OmitNullAttributeValues bool
-
 	// When enabled, the encoder will omit empty time attribute values
 	OmitEmptyTime bool
 }
@@ -460,9 +440,24 @@ func (e *Encoder) encode(v reflect.Value, fieldTag tag) (types.AttributeValue, e
 	v = valueElem(v)
 
 	if v.Kind() != reflect.Invalid {
-		if av, err := e.tryMarshaler(v); err != nil {
+		// time.Time implements too many interfaces so we handle is a special case
+		if t, ok := v.Interface().(time.Time); ok {
+			if fieldTag.OmitEmpty && t.IsZero() {
+				return nil, nil
+			}
+
+			if fieldTag.AsUnixTime {
+				return UnixTime(t).MarshalDynamoDBAttributeValue()
+			} else {
+				if e.options.EncodeTime != nil {
+					return e.options.EncodeTime(t)
+				} else {
+					return defaultEncodeTime(t)
+				}
+			}
+		} else if av, err := e.tryMarshaler(v); err != nil {
 			return nil, err
-		} else if e.options.OmitNullAttributeValues && fieldTag.OmitEmpty && isNullAttributeValue(av) {
+		} else if fieldTag.OmitEmpty && isNullAttributeValue(av) {
 			return nil, nil
 		} else if av != nil {
 			return av, nil
@@ -864,11 +859,8 @@ func (e *Encoder) tryMarshaler(v reflect.Value) (types.AttributeValue, error) {
 	if m, ok := i.(Marshaler); ok {
 		return m.MarshalDynamoDBAttributeValue()
 	}
-	if e.options.UseEncodingMarshalers {
-		return e.tryEncodingMarshaler(i)
-	}
 
-	return nil, nil
+	return e.tryEncodingMarshaler(i)
 }
 
 func (e *Encoder) tryEncodingMarshaler(v any) (types.AttributeValue, error) {

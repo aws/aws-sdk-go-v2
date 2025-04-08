@@ -1,0 +1,10 @@
+{
+    "id": "76d4eb00-c7b5-4bc1-9313-fcef69122c6e",
+    "type": "feature",
+    "description": "remove all of the opt-in flags that should be default",
+    "collapse": false,
+    "modules": [
+        "feature/dynamodb/attributevalue",
+        "feature/dynamodbstreams/attributevalue"
+    ]
+}

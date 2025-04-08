@@ -1328,9 +1328,7 @@ func TestUnmarshalIndividualSetValues(t *testing.T) {
 		},
 	}
 	var actual testStringSetWithUnmarshaler
-	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
-		o.FixUnmarshalIndividualSetValues = true
-	})
+	err := UnmarshalWithOptions(in, &actual)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

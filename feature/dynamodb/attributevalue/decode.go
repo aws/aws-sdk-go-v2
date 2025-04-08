@@ -243,11 +243,6 @@ type DecoderOptions struct {
 	// call UnmarshalText on the target. If the attributevalue is a binary, its
 	// value will be used to call UnmarshalBinary.
 	UseEncodingUnmarshalers bool
-
-	// When enabled, the decoder will call Unmarshaler.UnmarshalDynamoDBAttributeValue
-	// for each individual set item instead of the whole set at once.
-	// See issue #2895.
-	FixUnmarshalIndividualSetValues bool
 }
 
 // A Decoder provides unmarshaling AttributeValues to Go value types.
@@ -452,15 +447,11 @@ func (d *Decoder) decodeBinarySet(bs [][]byte, v reflect.Value) error {
 		}
 		u, elem := indirect[Unmarshaler](v.Index(i), indirectOptions{})
 		if u != nil {
-			if d.options.FixUnmarshalIndividualSetValues {
-				err := u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberB{Value: bs[i]})
-				if err != nil {
-					return err
-				}
-				continue
-			} else {
-				return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberBS{Value: bs})
+			err := u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberB{Value: bs[i]})
+			if err != nil {
+				return err
 			}
+			continue
 		}
 		if err := d.decodeBinary(bs[i], elem); err != nil {
 			return err
@@ -595,15 +586,11 @@ func (d *Decoder) decodeNumberSet(ns []string, v reflect.Value) error {
 		}
 		u, elem := indirect[Unmarshaler](v.Index(i), indirectOptions{})
 		if u != nil {
-			if d.options.FixUnmarshalIndividualSetValues {
-				err := u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberN{Value: ns[i]})
-				if err != nil {
-					return err
-				}
-				continue
-			} else {
-				return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberNS{Value: ns})
+			err := u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberN{Value: ns[i]})
+			if err != nil {
+				return err
 			}
+			continue
 		}
 		if err := d.decodeNumber(ns[i], elem, tag{}); err != nil {
 			return err
@@ -825,15 +812,11 @@ func (d *Decoder) decodeStringSet(ss []string, v reflect.Value) error {
 		}
 		u, elem := indirect[Unmarshaler](v.Index(i), indirectOptions{})
 		if u != nil {
-			if d.options.FixUnmarshalIndividualSetValues {
-				err := u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberS{Value: ss[i]})
-				if err != nil {
-					return err
-				}
-				continue
-			} else {
-				return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberSS{Value: ss})
+			err := u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberS{Value: ss[i]})
+			if err != nil {
+				return err
 			}
+			continue
 		}
 		if err := d.decodeString(ss[i], elem, tag{}); err != nil {
 			return err

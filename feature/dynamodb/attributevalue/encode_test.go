@@ -128,52 +128,25 @@ func (v customAVAndTextMarshaler) MarshalText() ([]byte, error) {
 
 func TestEncodingMarshalers(t *testing.T) {
 	cases := []struct {
-		input         any
-		expected      types.AttributeValue
-		useMarshalers bool
+		input    any
+		expected types.AttributeValue
 	}{
 		{
-			input: customTextMarshaler{1, 2},
-			expected: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
-				"I": &types.AttributeValueMemberN{Value: "1"},
-				"J": &types.AttributeValueMemberN{Value: "2"},
-			}},
-			useMarshalers: false,
+			input:    customTextMarshaler{1, 2},
+			expected: &types.AttributeValueMemberS{Value: "{I: 1, J: 2}"},
 		},
 		{
-			input:         customTextMarshaler{1, 2},
-			expected:      &types.AttributeValueMemberS{Value: "{I: 1, J: 2}"},
-			useMarshalers: true,
+			input:    customBinaryMarshaler{1, 2},
+			expected: &types.AttributeValueMemberB{Value: []byte{1, 2}},
 		},
 		{
-			input: customBinaryMarshaler{1, 2},
-			expected: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
-				"I": &types.AttributeValueMemberN{Value: "1"},
-				"J": &types.AttributeValueMemberN{Value: "2"},
-			}},
-			useMarshalers: false,
-		},
-		{
-			input:         customBinaryMarshaler{1, 2},
-			expected:      &types.AttributeValueMemberB{Value: []byte{1, 2}},
-			useMarshalers: true,
-		},
-		{
-			input:         customAVAndTextMarshaler{1, 2},
-			expected:      &types.AttributeValueMemberNS{Value: []string{"1", "2"}},
-			useMarshalers: false,
-		},
-		{
-			input:         customAVAndTextMarshaler{1, 2},
-			expected:      &types.AttributeValueMemberNS{Value: []string{"1", "2"}},
-			useMarshalers: true,
+			input:    customAVAndTextMarshaler{1, 2},
+			expected: &types.AttributeValueMemberNS{Value: []string{"1", "2"}},
 		},
 	}
 
 	for _, testCase := range cases {
-		actual, err := MarshalWithOptions(testCase.input, func(o *EncoderOptions) {
-			o.UseEncodingMarshalers = testCase.useMarshalers
-		})
+		actual, err := MarshalWithOptions(testCase.input)
 		if err != nil {
 			t.Errorf("got unexpected error %v for input %v", err, testCase.input)
 		}
@@ -444,7 +417,6 @@ func TestMarshalOmitEmptyCustom(t *testing.T) {
 
 	actual, err := MarshalWithOptions(m, func(eo *EncoderOptions) {
 		eo.TagKey = "tagkey"
-		eo.OmitNullAttributeValues = true
 		eo.NullEmptySets = true
 	})
 	if err != nil {
