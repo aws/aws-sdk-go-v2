@@ -1,3 +1,7 @@
+# v1.26.0 (2025-04-08)
+
+* **Feature**: This release adds the option to update the strategy of state templates already associated to a vehicle, without the need to remove and re-add them.
+
 # v1.25.1 (2025-04-03)
 
 * No change notes available for this release.

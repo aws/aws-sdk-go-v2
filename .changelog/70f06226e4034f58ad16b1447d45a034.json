@@ -1,8 +1,0 @@
-{
-    "id": "70f06226-e403-4f58-ad16-b1447d45a034",
-    "type": "feature",
-    "description": "Uzbekistan Launch on TaxSettings Page",
-    "modules": [
-        "service/taxsettings"
-    ]
-}

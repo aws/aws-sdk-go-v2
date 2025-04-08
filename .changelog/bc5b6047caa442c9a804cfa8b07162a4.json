@@ -1,8 +1,0 @@
-{
-    "id": "bc5b6047-caa4-42c9-a804-cfa8b07162a4",
-    "type": "feature",
-    "description": "Added new ActiveDirectoryStatus value, ListCacheReports paginator, and support for longer pagination tokens.",
-    "modules": [
-        "service/storagegateway"
-    ]
-}

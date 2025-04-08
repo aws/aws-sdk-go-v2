@@ -1,8 +1,0 @@
-{
-    "id": "65e32daf-afa2-477c-9c29-91f5b00a6f63",
-    "type": "feature",
-    "description": "This release adds resource type \"MemoryDbReservedInstances\" and resource type \"DynamoDbReservedCapacity\" to the GetRecommendation, ListRecommendations, and ListRecommendationSummaries APIs to support new MemoryDB and DynamoDB RI recommendations.",
-    "modules": [
-        "service/costoptimizationhub"
-    ]
-}

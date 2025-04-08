@@ -1,3 +1,7 @@
+# v1.57.2 (2025-04-08)
+
+* **Documentation**: Documentation updates for AWS Security Hub.
+
 # v1.57.1 (2025-04-03)
 
 * No change notes available for this release.

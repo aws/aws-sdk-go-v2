@@ -1,8 +1,0 @@
-{
-    "id": "4aec941d-ebfd-4e43-89f1-a6b0743a7e8d",
-    "type": "documentation",
-    "description": "**Note**: The release of InvokeModelWithBidirectionalStream has been withheld from the Go SDK due to event stream compatibility issues.",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

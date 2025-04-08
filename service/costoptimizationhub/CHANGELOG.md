@@ -1,3 +1,7 @@
+# v1.14.0 (2025-04-08)
+
+* **Feature**: This release adds resource type "MemoryDbReservedInstances" and resource type "DynamoDbReservedCapacity" to the GetRecommendation, ListRecommendations, and ListRecommendationSummaries APIs to support new MemoryDB and DynamoDB RI recommendations.
+
 # v1.13.2 (2025-04-03)
 
 * No change notes available for this release.

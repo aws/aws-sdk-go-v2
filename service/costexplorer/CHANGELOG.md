@@ -1,3 +1,7 @@
+# v1.49.0 (2025-04-08)
+
+* **Feature**: This release supports Pagination traits on Cost Anomaly Detection APIs.
+
 # v1.48.1 (2025-04-03)
 
 * No change notes available for this release.

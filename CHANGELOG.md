@@ -1,3 +1,19 @@
+# Release (2025-04-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.49.0](service/costexplorer/CHANGELOG.md#v1490-2025-04-08)
+  * **Feature**: This release supports Pagination traits on Cost Anomaly Detection APIs.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.14.0](service/costoptimizationhub/CHANGELOG.md#v1140-2025-04-08)
+  * **Feature**: This release adds resource type "MemoryDbReservedInstances" and resource type "DynamoDbReservedCapacity" to the GetRecommendation, ListRecommendations, and ListRecommendationSummaries APIs to support new MemoryDB and DynamoDB RI recommendations.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.26.0](service/iotfleetwise/CHANGELOG.md#v1260-2025-04-08)
+  * **Feature**: This release adds the option to update the strategy of state templates already associated to a vehicle, without the need to remove and re-add them.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.57.2](service/securityhub/CHANGELOG.md#v1572-2025-04-08)
+  * **Documentation**: Documentation updates for AWS Security Hub.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.37.0](service/storagegateway/CHANGELOG.md#v1370-2025-04-08)
+  * **Feature**: Added new ActiveDirectoryStatus value, ListCacheReports paginator, and support for longer pagination tokens.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.11.0](service/taxsettings/CHANGELOG.md#v1110-2025-04-08)
+  * **Feature**: Uzbekistan Launch on TaxSettings Page
+
 # Release (2025-04-07)
 
 ## Module Highlights

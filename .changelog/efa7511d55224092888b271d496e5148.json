@@ -1,8 +1,0 @@
-{
-    "id": "efa7511d-5522-4092-888b-271d496e5148",
-    "type": "feature",
-    "description": "This release supports Pagination traits on Cost Anomaly Detection APIs.",
-    "modules": [
-        "service/costexplorer"
-    ]
-}
