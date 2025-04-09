@@ -184,7 +184,7 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 	}
 
 	var written int
-	c := 0
+	//c := 0
 
 	partSize := r.partSize
 	minIndex := int32(r.written / partSize)
@@ -222,10 +222,10 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 	}
 
 	for r.receiveCount < r.getCapacity() {
-		if c == 0 {
-			//fmt.Println("start receiving chunks")
-			c++
-		}
+		//if c == 0 {
+		//fmt.Println("start receiving chunks")
+		//c++
+		//}
 		if e := r.getErr(); e != nil && e != io.EOF {
 			r.clean()
 			return written, e
