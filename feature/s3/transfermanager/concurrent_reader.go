@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"io"
 	"sync"
+	"time"
 )
 
 type outChunk struct {
@@ -42,7 +43,6 @@ type concurrentReader struct {
 	done         bool
 	written      int64
 	partSize     int64
-	invocations  int32
 
 	ctx context.Context
 	m   sync.Mutex
@@ -64,6 +64,7 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 			)
 		}}
 
+	r.ch = make(chan outChunk, r.options.Concurrency)
 	var written int
 	var err error
 	var wg sync.WaitGroup
@@ -89,6 +90,7 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 		}
 
 		if r.index == r.getCapacity() {
+			time.Sleep(time.Millisecond)
 			continue
 		}
 
@@ -105,9 +107,7 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 	close(ch)
 	r.wg.Wait()
 
-	if e := r.getErr(); e != nil && e != io.EOF {
-		close(r.ch)
-	}
+	close(r.ch)
 	wg.Wait()
 
 	r.written += int64(written)
@@ -180,40 +180,6 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 
 	var written int
 
-	partSize := r.partSize
-	minIndex := int32(r.written / partSize)
-	maxIndex := min(int32((r.written+int64(cap(p))-1)/partSize), r.getCapacity()-1)
-	for i := minIndex; i <= maxIndex; i++ {
-		if e := r.getErr(); e != nil && e != io.EOF {
-			r.clean()
-			return written, r.getErr()
-		}
-
-		c, ok := r.buf[i]
-		if ok {
-			index := int64(i)*partSize + c.cur - r.written
-			n, err := c.body.Read(p[index:])
-			c.cur += int64(n)
-			written += n
-			if err != nil && err != io.EOF {
-				r.setErr(err)
-				r.clean()
-				return written, r.getErr()
-			}
-			if c.cur >= c.length {
-				r.readCount++
-				delete(r.buf, i)
-				if r.readCount == r.getCapacity() {
-					capacity := min(r.getCapacity()+r.sectionParts, r.partsCount)
-					r.setCapacity(capacity)
-				}
-				if r.readCount >= r.partsCount {
-					r.setErr(io.EOF)
-				}
-			}
-		}
-	}
-
 	for r.receiveCount < r.getCapacity() {
 		if e := r.getErr(); e != nil && e != io.EOF {
 			r.clean()
@@ -249,6 +215,40 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 			}
 			if r.readCount >= r.partsCount {
 				r.setErr(io.EOF)
+			}
+		}
+	}
+
+	partSize := r.partSize
+	minIndex := int32(r.written / partSize)
+	maxIndex := min(int32((r.written+int64(cap(p))-1)/partSize), r.getCapacity()-1)
+	for i := minIndex; i <= maxIndex; i++ {
+		if e := r.getErr(); e != nil && e != io.EOF {
+			r.clean()
+			return written, r.getErr()
+		}
+
+		c, ok := r.buf[i]
+		if ok {
+			index := int64(i)*partSize + c.cur - r.written
+			n, err := c.body.Read(p[index:])
+			c.cur += int64(n)
+			written += n
+			if err != nil && err != io.EOF {
+				r.setErr(err)
+				r.clean()
+				return written, r.getErr()
+			}
+			if c.cur >= c.length {
+				r.readCount++
+				delete(r.buf, i)
+				if r.readCount == r.getCapacity() {
+					capacity := min(r.getCapacity()+r.sectionParts, r.partsCount)
+					r.setCapacity(capacity)
+				}
+				if r.readCount >= r.partsCount {
+					r.setErr(io.EOF)
+				}
 			}
 		}
 	}
