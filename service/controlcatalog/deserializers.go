@@ -197,6 +197,22 @@ func awsRestjson1_deserializeOpDocumentGetControlOutput(v **GetControlOutput, va
 				sv.Behavior = types.ControlBehavior(jtv)
 			}
 
+		case "CreateTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -228,6 +244,15 @@ func awsRestjson1_deserializeOpDocumentGetControlOutput(v **GetControlOutput, va
 		case "RegionConfiguration":
 			if err := awsRestjson1_deserializeDocumentRegionConfiguration(&sv.RegionConfiguration, value); err != nil {
 				return err
+			}
+
+		case "Severity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlSeverity to be of type string, got %T instead", value)
+				}
+				sv.Severity = types.ControlSeverity(jtv)
 			}
 
 		default:
@@ -1510,6 +1535,31 @@ func awsRestjson1_deserializeDocumentControlSummary(v **types.ControlSummary, va
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "Behavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlBehavior to be of type string, got %T instead", value)
+				}
+				sv.Behavior = types.ControlBehavior(jtv)
+			}
+
+		case "CreateTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1519,6 +1569,11 @@ func awsRestjson1_deserializeDocumentControlSummary(v **types.ControlSummary, va
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "Implementation":
+			if err := awsRestjson1_deserializeDocumentImplementationSummary(&sv.Implementation, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1526,6 +1581,15 @@ func awsRestjson1_deserializeDocumentControlSummary(v **types.ControlSummary, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "Severity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlSeverity to be of type string, got %T instead", value)
+				}
+				sv.Severity = types.ControlSeverity(jtv)
 			}
 
 		default:
@@ -1719,6 +1783,64 @@ func awsRestjson1_deserializeDocumentImplementationDetails(v **types.Implementat
 
 	for key, value := range shape {
 		switch key {
+		case "Identifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImplementationIdentifier to be of type string, got %T instead", value)
+				}
+				sv.Identifier = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImplementationType to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImplementationSummary(v **types.ImplementationSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImplementationSummary
+	if *v == nil {
+		sv = &types.ImplementationSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Identifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImplementationIdentifier to be of type string, got %T instead", value)
+				}
+				sv.Identifier = ptr.String(jtv)
+			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)

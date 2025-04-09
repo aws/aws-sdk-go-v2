@@ -41,6 +41,9 @@ type RegisterAgentInput struct {
 	// This member is required.
 	DiscoveryData *types.DiscoveryData
 
+	// Tags assigned to an Agent .
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

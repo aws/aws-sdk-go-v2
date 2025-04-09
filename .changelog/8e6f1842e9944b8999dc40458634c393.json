@@ -1,0 +1,8 @@
+{
+    "id": "8e6f1842-e994-4b89-99dc-40458634c393",
+    "type": "feature",
+    "description": "This launch includes 2 enhancements to SFTP connectors user-experience: 1) Customers can self-serve concurrent connections setting for their connectors, and 2) Customers can discover the public host key of remote servers using their SFTP connectors.",
+    "modules": [
+        "service/transfer"
+    ]
+}

@@ -4791,13 +4791,16 @@ type HudiTarget struct {
 // Compaction metrics for Iceberg for the optimizer run.
 type IcebergCompactionMetrics struct {
 
+	// The number of DPU hours consumed by the job.
+	DpuHours float64
+
 	// The duration of the job in hours.
 	JobDurationInHour float64
 
 	// The number of bytes removed by the compaction job run.
 	NumberOfBytesCompacted int64
 
-	// The number of DPU hours consumed by the job.
+	// The number of DPUs consumed by the job, rounded up to the nearest whole number.
 	NumberOfDpus int32
 
 	// The number of files removed by the compaction job run.
@@ -4839,10 +4842,13 @@ type IcebergOrphanFileDeletionConfiguration struct {
 // Orphan file deletion metrics for Iceberg for the optimizer run.
 type IcebergOrphanFileDeletionMetrics struct {
 
+	// The number of DPU hours consumed by the job.
+	DpuHours float64
+
 	// The duration of the job in hours.
 	JobDurationInHour float64
 
-	// The number of DPU hours consumed by the job.
+	// The number of DPUs consumed by the job, rounded up to the nearest whole number.
 	NumberOfDpus int32
 
 	// The number of orphan files deleted by the orphan file deletion job run.
@@ -4874,13 +4880,16 @@ type IcebergRetentionConfiguration struct {
 // Snapshot retention metrics for Iceberg for the optimizer run.
 type IcebergRetentionMetrics struct {
 
+	// The number of DPU hours consumed by the job.
+	DpuHours float64
+
 	// The duration of the job in hours.
 	JobDurationInHour float64
 
 	// The number of data files deleted by the retention job run.
 	NumberOfDataFilesDeleted int64
 
-	// The number of DPU hours consumed by the job.
+	// The number of DPUs consumed by the job, rounded up to the nearest whole number.
 	NumberOfDpus int32
 
 	// The number of manifest files deleted by the retention job run.
@@ -7791,7 +7800,7 @@ type RunMetrics struct {
 	// The number of bytes removed by the compaction job run.
 	NumberOfBytesCompacted *string
 
-	// The number of DPU hours consumed by the job.
+	// The number of DPUs consumed by the job, rounded up to the nearest whole number.
 	NumberOfDpus *string
 
 	// The number of files removed by the compaction job run.

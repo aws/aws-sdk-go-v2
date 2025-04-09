@@ -48054,6 +48054,40 @@ func awsAwsjson11_deserializeDocumentIcebergCompactionMetrics(v **types.IcebergC
 
 	for key, value := range shape {
 		switch key {
+		case "DpuHours":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DpuHours = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DpuHours = f64
+
+				default:
+					return fmt.Errorf("expected dpuHours to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "JobDurationInHour":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -48211,6 +48245,40 @@ func awsAwsjson11_deserializeDocumentIcebergOrphanFileDeletionMetrics(v **types.
 
 	for key, value := range shape {
 		switch key {
+		case "DpuHours":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DpuHours = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DpuHours = f64
+
+				default:
+					return fmt.Errorf("expected dpuHours to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "JobDurationInHour":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -48368,6 +48436,40 @@ func awsAwsjson11_deserializeDocumentIcebergRetentionMetrics(v **types.IcebergRe
 
 	for key, value := range shape {
 		switch key {
+		case "DpuHours":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DpuHours = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DpuHours = f64
+
+				default:
+					return fmt.Errorf("expected dpuHours to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "JobDurationInHour":
 			if value != nil {
 				switch jtv := value.(type) {

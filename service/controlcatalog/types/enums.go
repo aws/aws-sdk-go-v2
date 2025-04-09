@@ -41,3 +41,26 @@ func (ControlScope) Values() []ControlScope {
 		"REGIONAL",
 	}
 }
+
+type ControlSeverity string
+
+// Enum values for ControlSeverity
+const (
+	ControlSeverityLow      ControlSeverity = "LOW"
+	ControlSeverityMedium   ControlSeverity = "MEDIUM"
+	ControlSeverityHigh     ControlSeverity = "HIGH"
+	ControlSeverityCritical ControlSeverity = "CRITICAL"
+)
+
+// Values returns all known values for ControlSeverity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ControlSeverity) Values() []ControlSeverity {
+	return []ControlSeverity{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+		"CRITICAL",
+	}
+}

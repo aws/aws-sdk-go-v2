@@ -2128,17 +2128,24 @@ type ServiceMetadata struct {
 
 // Contains the details for an SFTP connector object. The connector object is used
 // for transferring files to and from a partner's SFTP server.
-//
-// Because the SftpConnectorConfig data type is used for both creating and
-// updating SFTP connectors, its parameters, TrustedHostKeys and UserSecretId are
-// marked as not required. This is a bit misleading, as they are not required when
-// you are updating an existing SFTP connector, but are required when you are
-// creating a new SFTP connector.
 type SftpConnectorConfig struct {
+
+	// Specify the number of concurrent connections that your connector creates to the
+	// remote server. The default value is 5 (this is also the maximum value allowed).
+	//
+	// This parameter specifies the number of active connections that your connector
+	// can establish with the remote server at the same time. Increasing this value can
+	// enhance connector performance when transferring large file batches by enabling
+	// parallel operations.
+	MaxConcurrentConnections *int32
 
 	// The public portion of the host key, or keys, that are used to identify the
 	// external server to which you are connecting. You can use the ssh-keyscan
 	// command against the SFTP server to retrieve the necessary key.
+	//
+	// TrustedHostKeys is optional for CreateConnector . If not provided, you can use
+	// TestConnection to retrieve the server host key during the initial connection
+	// attempt, and subsequently update the connector with the observed host key.
 	//
 	// The three standard SSH public key format elements are <key type> , <body base64>
 	// , and an optional <comment> , with spaces between each element. Specify only the
@@ -2168,7 +2175,23 @@ type SftpConnectorConfig struct {
 	// The identifier for the secret (in Amazon Web Services Secrets Manager) that
 	// contains the SFTP user's private key, password, or both. The identifier must be
 	// the Amazon Resource Name (ARN) of the secret.
+	//
+	//   - Required when creating an SFTP connector
+	//
+	//   - Optional when updating an existing SFTP connector
 	UserSecretId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details for an SFTP connector connection.
+type SftpConnectorConnectionDetails struct {
+
+	// The SSH public key of the remote SFTP server. This is returned during the
+	// initial connection attempt when you call TestConnection . It allows you to
+	// retrieve the valid server host key to update the connector when you are unable
+	// to obtain it in advance.
+	HostKey *string
 
 	noSmithyDocumentSerde
 }

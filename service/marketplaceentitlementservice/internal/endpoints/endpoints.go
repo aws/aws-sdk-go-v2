@@ -208,6 +208,16 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "cn-northwest-1",
 				},
 			},
+			endpoints.EndpointKey{
+				Region:  "cn-northwest-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:  "entitlement-marketplace.cn-northwest-1.api.amazonwebservices.com.cn",
+				Protocols: []string{"https"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-northwest-1",
+				},
+			},
 		},
 	},
 	{

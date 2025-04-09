@@ -2155,6 +2155,13 @@ func awsRestjson1_serializeOpDocumentRegisterAgentInput(v *RegisterAgentInput, v
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

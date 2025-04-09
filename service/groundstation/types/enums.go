@@ -88,8 +88,8 @@ type CapabilityHealth string
 
 // Enum values for CapabilityHealth
 const (
-	CapabilityHealthUnhealthy CapabilityHealth = "UNHEALTHY"
 	CapabilityHealthHealthy   CapabilityHealth = "HEALTHY"
+	CapabilityHealthUnhealthy CapabilityHealth = "UNHEALTHY"
 )
 
 // Values returns all known values for CapabilityHealth. Note that this can be
@@ -98,8 +98,8 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CapabilityHealth) Values() []CapabilityHealth {
 	return []CapabilityHealth{
-		"UNHEALTHY",
 		"HEALTHY",
+		"UNHEALTHY",
 	}
 }
 
@@ -138,9 +138,9 @@ type ConfigCapabilityType string
 const (
 	ConfigCapabilityTypeAntennaDownlink            ConfigCapabilityType = "antenna-downlink"
 	ConfigCapabilityTypeAntennaDownlinkDemodDecode ConfigCapabilityType = "antenna-downlink-demod-decode"
-	ConfigCapabilityTypeAntennaUplink              ConfigCapabilityType = "antenna-uplink"
-	ConfigCapabilityTypeDataflowEndpoint           ConfigCapabilityType = "dataflow-endpoint"
 	ConfigCapabilityTypeTracking                   ConfigCapabilityType = "tracking"
+	ConfigCapabilityTypeDataflowEndpoint           ConfigCapabilityType = "dataflow-endpoint"
+	ConfigCapabilityTypeAntennaUplink              ConfigCapabilityType = "antenna-uplink"
 	ConfigCapabilityTypeUplinkEcho                 ConfigCapabilityType = "uplink-echo"
 	ConfigCapabilityTypeS3Recording                ConfigCapabilityType = "s3-recording"
 )
@@ -153,9 +153,9 @@ func (ConfigCapabilityType) Values() []ConfigCapabilityType {
 	return []ConfigCapabilityType{
 		"antenna-downlink",
 		"antenna-downlink-demod-decode",
-		"antenna-uplink",
-		"dataflow-endpoint",
 		"tracking",
+		"dataflow-endpoint",
+		"antenna-uplink",
 		"uplink-echo",
 		"s3-recording",
 	}
@@ -165,19 +165,19 @@ type ContactStatus string
 
 // Enum values for ContactStatus
 const (
-	ContactStatusAvailable        ContactStatus = "AVAILABLE"
-	ContactStatusAwsCancelled     ContactStatus = "AWS_CANCELLED"
-	ContactStatusAwsFailed        ContactStatus = "AWS_FAILED"
-	ContactStatusCancelled        ContactStatus = "CANCELLED"
-	ContactStatusCancelling       ContactStatus = "CANCELLING"
-	ContactStatusCompleted        ContactStatus = "COMPLETED"
-	ContactStatusFailed           ContactStatus = "FAILED"
+	ContactStatusScheduling       ContactStatus = "SCHEDULING"
 	ContactStatusFailedToSchedule ContactStatus = "FAILED_TO_SCHEDULE"
+	ContactStatusScheduled        ContactStatus = "SCHEDULED"
+	ContactStatusCancelled        ContactStatus = "CANCELLED"
+	ContactStatusAwsCancelled     ContactStatus = "AWS_CANCELLED"
+	ContactStatusPrepass          ContactStatus = "PREPASS"
 	ContactStatusPass             ContactStatus = "PASS"
 	ContactStatusPostpass         ContactStatus = "POSTPASS"
-	ContactStatusPrepass          ContactStatus = "PREPASS"
-	ContactStatusScheduled        ContactStatus = "SCHEDULED"
-	ContactStatusScheduling       ContactStatus = "SCHEDULING"
+	ContactStatusCompleted        ContactStatus = "COMPLETED"
+	ContactStatusFailed           ContactStatus = "FAILED"
+	ContactStatusAvailable        ContactStatus = "AVAILABLE"
+	ContactStatusCancelling       ContactStatus = "CANCELLING"
+	ContactStatusAwsFailed        ContactStatus = "AWS_FAILED"
 )
 
 // Values returns all known values for ContactStatus. Note that this can be
@@ -186,19 +186,19 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ContactStatus) Values() []ContactStatus {
 	return []ContactStatus{
-		"AVAILABLE",
-		"AWS_CANCELLED",
-		"AWS_FAILED",
-		"CANCELLED",
-		"CANCELLING",
-		"COMPLETED",
-		"FAILED",
+		"SCHEDULING",
 		"FAILED_TO_SCHEDULE",
+		"SCHEDULED",
+		"CANCELLED",
+		"AWS_CANCELLED",
+		"PREPASS",
 		"PASS",
 		"POSTPASS",
-		"PREPASS",
-		"SCHEDULED",
-		"SCHEDULING",
+		"COMPLETED",
+		"FAILED",
+		"AVAILABLE",
+		"CANCELLING",
+		"AWS_FAILED",
 	}
 }
 
@@ -206,9 +206,9 @@ type Criticality string
 
 // Enum values for Criticality
 const (
+	CriticalityRequired  Criticality = "REQUIRED"
 	CriticalityPreferred Criticality = "PREFERRED"
 	CriticalityRemoved   Criticality = "REMOVED"
-	CriticalityRequired  Criticality = "REQUIRED"
 )
 
 // Values returns all known values for Criticality. Note that this can be expanded
@@ -217,9 +217,9 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (Criticality) Values() []Criticality {
 	return []Criticality{
+		"REQUIRED",
 		"PREFERRED",
 		"REMOVED",
-		"REQUIRED",
 	}
 }
 
@@ -366,9 +366,9 @@ type Polarization string
 
 // Enum values for Polarization
 const (
+	PolarizationRightHand Polarization = "RIGHT_HAND"
 	PolarizationLeftHand  Polarization = "LEFT_HAND"
 	PolarizationNone      Polarization = "NONE"
-	PolarizationRightHand Polarization = "RIGHT_HAND"
 )
 
 // Values returns all known values for Polarization. Note that this can be
@@ -377,8 +377,8 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (Polarization) Values() []Polarization {
 	return []Polarization{
+		"RIGHT_HAND",
 		"LEFT_HAND",
 		"NONE",
-		"RIGHT_HAND",
 	}
 }

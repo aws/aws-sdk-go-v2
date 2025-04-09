@@ -13801,6 +13801,19 @@ func awsAwsjson11_deserializeDocumentSftpConnectorConfig(v **types.SftpConnector
 
 	for key, value := range shape {
 		switch key {
+		case "MaxConcurrentConnections":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxConcurrentConnections to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxConcurrentConnections = ptr.Int32(int32(i64))
+			}
+
 		case "TrustedHostKeys":
 			if err := awsAwsjson11_deserializeDocumentSftpConnectorTrustedHostKeyList(&sv.TrustedHostKeys, value); err != nil {
 				return err
@@ -13813,6 +13826,46 @@ func awsAwsjson11_deserializeDocumentSftpConnectorConfig(v **types.SftpConnector
 					return fmt.Errorf("expected SecretId to be of type string, got %T instead", value)
 				}
 				sv.UserSecretId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSftpConnectorConnectionDetails(v **types.SftpConnectorConnectionDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SftpConnectorConnectionDetails
+	if *v == nil {
+		sv = &types.SftpConnectorConnectionDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HostKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SftpConnectorHostKey to be of type string, got %T instead", value)
+				}
+				sv.HostKey = ptr.String(jtv)
 			}
 
 		default:
@@ -16385,6 +16438,11 @@ func awsAwsjson11_deserializeOpDocumentTestConnectionOutput(v **TestConnectionOu
 					return fmt.Errorf("expected ConnectorId to be of type string, got %T instead", value)
 				}
 				sv.ConnectorId = ptr.String(jtv)
+			}
+
+		case "SftpConnectionDetails":
+			if err := awsAwsjson11_deserializeDocumentSftpConnectorConnectionDetails(&sv.SftpConnectionDetails, value); err != nil {
+				return err
 			}
 
 		case "Status":

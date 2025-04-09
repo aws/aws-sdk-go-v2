@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +43,9 @@ type TestConnectionOutput struct {
 
 	// Returns the identifier of the connector object that you are testing.
 	ConnectorId *string
+
+	// Structure that contains the SFTP connector host key.
+	SftpConnectionDetails *types.SftpConnectorConnectionDetails
 
 	// Returns OK for successful test, or ERROR if the test fails.
 	Status *string

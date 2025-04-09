@@ -1,0 +1,8 @@
+{
+    "id": "08a986f4-bd43-4e39-936c-5298dae53626",
+    "type": "documentation",
+    "description": "Documentation update for secondary indexes and Create_Table.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

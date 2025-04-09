@@ -159,6 +159,20 @@ type ControlSummary struct {
 	// This member is required.
 	Name *string
 
+	// An enumerated type, with the following possible values:
+	Behavior ControlBehavior
+
+	// A timestamp that notes the time when the control was released (start of its
+	// life) as a governance capability in Amazon Web Services.
+	CreateTime *time.Time
+
+	// An object of type ImplementationSummary that describes how the control is
+	// implemented.
+	Implementation *ImplementationSummary
+
+	// An enumerated type, with the following possible values:
+	Severity ControlSeverity
+
 	noSmithyDocumentSerde
 }
 
@@ -227,6 +241,34 @@ type ImplementationDetails struct {
 	//
 	// This member is required.
 	Type *string
+
+	// A service-specific identifier for the control, assigned by the service that
+	// implemented the control. For example, this identifier could be an Amazon Web
+	// Services Config Rule ID or a Security Hub Control ID.
+	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of how the control is implemented, including the Amazon Web Services
+// service that enforces the control and its service-specific identifier. For
+// example, the value of this field could indicate that the control is implemented
+// as an Amazon Web Services Config Rule or an Amazon Web Services Security Hub
+// control.
+type ImplementationSummary struct {
+
+	// A string that represents the Amazon Web Services service that implements this
+	// control. For example, a value of AWS::Config::ConfigRule indicates that the
+	// control is implemented by Amazon Web Services Config, and
+	// AWS::SecurityHub::SecurityControl indicates implementation by Amazon Web
+	// Services Security Hub.
+	//
+	// This member is required.
+	Type *string
+
+	// The identifier originally assigned by the Amazon Web Services service that
+	// implements the control. For example, CODEPIPELINE_DEPLOYMENT_COUNT_CHECK .
+	Identifier *string
 
 	noSmithyDocumentSerde
 }

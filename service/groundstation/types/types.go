@@ -803,7 +803,7 @@ type IntegerRange struct {
 	noSmithyDocumentSerde
 }
 
-// AWS Key Management Service (KMS) Key.
+// KMS key info.
 //
 // The following types satisfy this interface:
 //

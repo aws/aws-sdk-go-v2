@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Returns details about a specific control, most notably a list of Amazon Web
@@ -100,6 +101,10 @@ type GetControlOutput struct {
 	// This member is required.
 	RegionConfiguration *types.RegionConfiguration
 
+	// A timestamp that notes the time when the control was released (start of its
+	// life) as a governance capability in Amazon Web Services.
+	CreateTime *time.Time
+
 	// Returns information about the control, as an ImplementationDetails object that
 	// shows the underlying implementation type for a control.
 	Implementation *types.ImplementationDetails
@@ -108,6 +113,9 @@ type GetControlOutput struct {
 	// control supports. An empty list is returned for controls that don’t support
 	// parameters.
 	Parameters []types.ControlParameter
+
+	// An enumerated type, with the following possible values:
+	Severity types.ControlSeverity
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

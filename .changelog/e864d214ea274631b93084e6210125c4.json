@@ -1,0 +1,8 @@
+{
+    "id": "e864d214-ea27-4631-b930-84e6210125c4",
+    "type": "feature",
+    "description": "The GetControl API now surfaces a control's Severity, CreateTime, and Identifier for a control's Implementation. The ListControls API now surfaces a control's Behavior, Severity, CreateTime, and Identifier for a control's Implementation.",
+    "modules": [
+        "service/controlcatalog"
+    ]
+}

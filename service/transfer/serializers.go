@@ -4922,6 +4922,11 @@ func awsAwsjson11_serializeDocumentSftpConnectorConfig(v *types.SftpConnectorCon
 	object := value.Object()
 	defer object.Close()
 
+	if v.MaxConcurrentConnections != nil {
+		ok := object.Key("MaxConcurrentConnections")
+		ok.Integer(*v.MaxConcurrentConnections)
+	}
+
 	if v.TrustedHostKeys != nil {
 		ok := object.Key("TrustedHostKeys")
 		if err := awsAwsjson11_serializeDocumentSftpConnectorTrustedHostKeyList(v.TrustedHostKeys, ok); err != nil {
