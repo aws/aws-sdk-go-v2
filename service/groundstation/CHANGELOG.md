@@ -1,3 +1,7 @@
+# v1.33.0 (2025-04-09)
+
+* **Feature**: Support tagging Agents and adjust input field validations
+
 # v1.32.2 (2025-04-03)
 
 * No change notes available for this release.

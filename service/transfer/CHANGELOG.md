@@ -1,3 +1,7 @@
+# v1.60.0 (2025-04-09)
+
+* **Feature**: This launch includes 2 enhancements to SFTP connectors user-experience: 1) Customers can self-serve concurrent connections setting for their connectors, and 2) Customers can discover the public host key of remote servers using their SFTP connectors.
+
 # v1.59.0 (2025-04-07)
 
 * **Feature**: This launch enables customers to manage contents of their remote directories, by deleting old files or moving files to archive folders in remote servers once they have been retrieved. Customers will be able to automate the process using event-driven architecture.

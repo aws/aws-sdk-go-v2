@@ -1,3 +1,22 @@
+# Release (2025-04-09)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression`: [v1.7.77](feature/dynamodb/expression/CHANGELOG.md#v1777-2025-04-09)
+  * **Bug Fix**: allow nested list indices in expressions
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.8.0](service/controlcatalog/CHANGELOG.md#v180-2025-04-09)
+  * **Feature**: The GetControl API now surfaces a control's Severity, CreateTime, and Identifier for a control's Implementation. The ListControls API now surfaces a control's Behavior, Severity, CreateTime, and Identifier for a control's Implementation.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.42.2](service/dynamodb/CHANGELOG.md#v1422-2025-04-09)
+  * **Documentation**: Documentation update for secondary indexes and Create_Table.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.109.0](service/glue/CHANGELOG.md#v11090-2025-04-09)
+  * **Feature**: The TableOptimizer APIs in AWS Glue now return the DpuHours field in each TableOptimizerRun, providing clients visibility to the DPU-hours used for billing in managed Apache Iceberg table compaction optimization.
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.33.0](service/groundstation/CHANGELOG.md#v1330-2025-04-09)
+  * **Feature**: Support tagging Agents and adjust input field validations
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.60.0](service/transfer/CHANGELOG.md#v1600-2025-04-09)
+  * **Feature**: This launch includes 2 enhancements to SFTP connectors user-experience: 1) Customers can self-serve concurrent connections setting for their connectors, and 2) Customers can discover the public host key of remote servers using their SFTP connectors.
+
 # Release (2025-04-08)
 
 ## Module Highlights

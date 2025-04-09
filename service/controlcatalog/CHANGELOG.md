@@ -1,3 +1,7 @@
+# v1.8.0 (2025-04-09)
+
+* **Feature**: The GetControl API now surfaces a control's Severity, CreateTime, and Identifier for a control's Implementation. The ListControls API now surfaces a control's Behavior, Severity, CreateTime, and Identifier for a control's Implementation.
+
 # v1.7.3 (2025-04-03)
 
 * No change notes available for this release.

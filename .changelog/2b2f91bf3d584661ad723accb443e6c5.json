@@ -1,8 +1,0 @@
-{
-    "id": "2b2f91bf-3d58-4661-ad72-3accb443e6c5",
-    "type": "feature",
-    "description": "Support tagging Agents and adjust input field validations",
-    "modules": [
-        "service/groundstation"
-    ]
-}
