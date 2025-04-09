@@ -25666,11 +25666,18 @@
                         "smithy.api#documentation": "<p>The number of files removed by the compaction job run.</p>"
                     }
                 },
+                "DpuHours": {
+                    "target": "com.amazonaws.glue#dpuHours",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of DPU hours consumed by the job.</p>"
+                    }
+                },
                 "NumberOfDpus": {
                     "target": "com.amazonaws.glue#dpuCounts",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of DPU hours consumed by the job.</p>"
+                        "smithy.api#documentation": "<p>The number of DPUs consumed by the job, rounded up to the nearest whole number.</p>"
                     }
                 },
                 "JobDurationInHour": {
@@ -25736,11 +25743,18 @@
                         "smithy.api#documentation": "<p>The number of orphan files deleted by the orphan file deletion job run.</p>"
                     }
                 },
+                "DpuHours": {
+                    "target": "com.amazonaws.glue#dpuHours",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of DPU hours consumed by the job.</p>"
+                    }
+                },
                 "NumberOfDpus": {
                     "target": "com.amazonaws.glue#dpuCounts",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of DPU hours consumed by the job.</p>"
+                        "smithy.api#documentation": "<p>The number of DPUs consumed by the job, rounded up to the nearest whole number.</p>"
                     }
                 },
                 "JobDurationInHour": {
@@ -25805,11 +25819,18 @@
                         "smithy.api#documentation": "<p>The number of manifest lists deleted by the retention job run.</p>"
                     }
                 },
+                "DpuHours": {
+                    "target": "com.amazonaws.glue#dpuHours",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of DPU hours consumed by the job.</p>"
+                    }
+                },
                 "NumberOfDpus": {
                     "target": "com.amazonaws.glue#dpuCounts",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of DPU hours consumed by the job.</p>"
+                        "smithy.api#documentation": "<p>The number of DPUs consumed by the job, rounded up to the nearest whole number.</p>"
                     }
                 },
                 "JobDurationInHour": {
@@ -35002,7 +35023,7 @@
                 "NumberOfDpus": {
                     "target": "com.amazonaws.glue#MessageString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of DPU hours consumed by the job.</p>"
+                        "smithy.api#documentation": "<p>The number of DPUs consumed by the job, rounded up to the nearest whole number.</p>"
                     }
                 },
                 "JobDurationInHour": {
@@ -45489,6 +45510,12 @@
             }
         },
         "com.amazonaws.glue#dpuDurationInHour": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.glue#dpuHours": {
             "type": "double",
             "traits": {
                 "smithy.api#default": 0

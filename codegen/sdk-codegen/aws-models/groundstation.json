@@ -94,26 +94,32 @@
             }
         },
         "com.amazonaws.groundstation#AgentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#AggregateStatus": {
@@ -138,18 +144,20 @@
             }
         },
         "com.amazonaws.groundstation#AngleUnits": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DEGREE_ANGLE",
-                        "name": "DEGREE_ANGLE"
-                    },
-                    {
-                        "value": "RADIAN",
-                        "name": "RADIAN"
+            "type": "enum",
+            "members": {
+                "DEGREE_ANGLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEGREE_ANGLE"
                     }
-                ]
+                },
+                "RADIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RADIAN"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#AntennaDemodDecodeDetails": {
@@ -249,18 +257,20 @@
             }
         },
         "com.amazonaws.groundstation#AuditResults": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HEALTHY",
-                        "name": "HEALTHY"
-                    },
-                    {
-                        "value": "UNHEALTHY",
-                        "name": "UNHEALTHY"
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
                     }
-                ]
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#AwsGroundStationAgentEndpoint": {
@@ -305,22 +315,26 @@
             }
         },
         "com.amazonaws.groundstation#BandwidthUnits": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GHz",
-                        "name": "GHZ"
-                    },
-                    {
-                        "value": "MHz",
-                        "name": "MHZ"
-                    },
-                    {
-                        "value": "kHz",
-                        "name": "KHZ"
+            "type": "enum",
+            "members": {
+                "GHZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GHz"
                     }
-                ]
+                },
+                "MHZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MHz"
+                    }
+                },
+                "KHZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "kHz"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#BucketArn": {
@@ -398,53 +412,67 @@
             }
         },
         "com.amazonaws.groundstation#CapabilityHealth": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UNHEALTHY",
-                        "name": "UNHEALTHY"
-                    },
-                    {
-                        "value": "HEALTHY",
-                        "name": "HEALTHY"
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
                     }
-                ]
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#CapabilityHealthReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NO_REGISTERED_AGENT",
-                        "name": "NO_REGISTERED_AGENT"
-                    },
-                    {
-                        "value": "INVALID_IP_OWNERSHIP",
-                        "name": "INVALID_IP_OWNERSHIP"
-                    },
-                    {
-                        "value": "NOT_AUTHORIZED_TO_CREATE_SLR",
-                        "name": "NOT_AUTHORIZED_TO_CREATE_SLR"
-                    },
-                    {
-                        "value": "UNVERIFIED_IP_OWNERSHIP",
-                        "name": "UNVERIFIED_IP_OWNERSHIP"
-                    },
-                    {
-                        "value": "INITIALIZING_DATAPLANE",
-                        "name": "INITIALIZING_DATAPLANE"
-                    },
-                    {
-                        "value": "DATAPLANE_FAILURE",
-                        "name": "DATAPLANE_FAILURE"
-                    },
-                    {
-                        "value": "HEALTHY",
-                        "name": "HEALTHY"
+            "type": "enum",
+            "members": {
+                "NO_REGISTERED_AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_REGISTERED_AGENT"
                     }
-                ]
+                },
+                "INVALID_IP_OWNERSHIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_IP_OWNERSHIP"
+                    }
+                },
+                "NOT_AUTHORIZED_TO_CREATE_SLR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_AUTHORIZED_TO_CREATE_SLR"
+                    }
+                },
+                "UNVERIFIED_IP_OWNERSHIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNVERIFIED_IP_OWNERSHIP"
+                    }
+                },
+                "INITIALIZING_DATAPLANE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZING_DATAPLANE"
+                    }
+                },
+                "DATAPLANE_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATAPLANE_FAILURE"
+                    }
+                },
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#CapabilityHealthReasonList": {
@@ -486,21 +514,18 @@
                 "bytesSent": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Bytes sent by the component.</p>"
                     }
                 },
                 "bytesReceived": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Bytes received by the component.</p>"
                     }
                 },
                 "packetsDropped": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Packets dropped by component.</p>"
                     }
                 },
@@ -606,42 +631,59 @@
                     "type": "AWS::GroundStation::Config",
                     "service": "GroundStation",
                     "resource": "Config"
-                }
+                },
+                "smithy.api#length": {
+                    "min": 82,
+                    "max": 424
+                },
+                "smithy.api#pattern": "^arn:aws:groundstation:[-a-z0-9]{1,50}:[0-9]{12}:config/[a-z0-9]+(-[a-z0-9]+){0,4}/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(/.{1,256})?$"
             }
         },
         "com.amazonaws.groundstation#ConfigCapabilityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "antenna-downlink",
-                        "name": "ANTENNA_DOWNLINK"
-                    },
-                    {
-                        "value": "antenna-downlink-demod-decode",
-                        "name": "ANTENNA_DOWNLINK_DEMOD_DECODE"
-                    },
-                    {
-                        "value": "antenna-uplink",
-                        "name": "ANTENNA_UPLINK"
-                    },
-                    {
-                        "value": "dataflow-endpoint",
-                        "name": "DATAFLOW_ENDPOINT"
-                    },
-                    {
-                        "value": "tracking",
-                        "name": "TRACKING"
-                    },
-                    {
-                        "value": "uplink-echo",
-                        "name": "UPLINK_ECHO"
-                    },
-                    {
-                        "value": "s3-recording",
-                        "name": "S3_RECORDING"
+            "type": "enum",
+            "members": {
+                "ANTENNA_DOWNLINK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "antenna-downlink"
                     }
-                ]
+                },
+                "ANTENNA_DOWNLINK_DEMOD_DECODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "antenna-downlink-demod-decode"
+                    }
+                },
+                "TRACKING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tracking"
+                    }
+                },
+                "DATAFLOW_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dataflow-endpoint"
+                    }
+                },
+                "ANTENNA_UPLINK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "antenna-uplink"
+                    }
+                },
+                "UPLINK_ECHO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "uplink-echo"
+                    }
+                },
+                "S3_RECORDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "s3-recording"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#ConfigDetails": {
@@ -951,62 +993,86 @@
             }
         },
         "com.amazonaws.groundstation#ContactStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "AWS_CANCELLED",
-                        "name": "AWS_CANCELLED"
-                    },
-                    {
-                        "value": "AWS_FAILED",
-                        "name": "AWS_FAILED"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "CANCELLING",
-                        "name": "CANCELLING"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "FAILED_TO_SCHEDULE",
-                        "name": "FAILED_TO_SCHEDULE"
-                    },
-                    {
-                        "value": "PASS",
-                        "name": "PASS"
-                    },
-                    {
-                        "value": "POSTPASS",
-                        "name": "POSTPASS"
-                    },
-                    {
-                        "value": "PREPASS",
-                        "name": "PREPASS"
-                    },
-                    {
-                        "value": "SCHEDULED",
-                        "name": "SCHEDULED"
-                    },
-                    {
-                        "value": "SCHEDULING",
-                        "name": "SCHEDULING"
+            "type": "enum",
+            "members": {
+                "SCHEDULING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCHEDULING"
                     }
-                ]
+                },
+                "FAILED_TO_SCHEDULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_TO_SCHEDULE"
+                    }
+                },
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCHEDULED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "AWS_CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_CANCELLED"
+                    }
+                },
+                "PREPASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREPASS"
+                    }
+                },
+                "PASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASS"
+                    }
+                },
+                "POSTPASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POSTPASS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLING"
+                    }
+                },
+                "AWS_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#CreateConfig": {
@@ -1100,7 +1166,7 @@
                 "endpointDetails": {
                     "target": "com.amazonaws.groundstation#EndpointDetailsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Endpoint details of each endpoint in the dataflow endpoint group.</p>",
+                        "smithy.api#documentation": "<p>Endpoint details of each endpoint in the dataflow endpoint group.\n\n         All dataflow endpoints within a single dataflow endpoint group must be of the same type.\n         You cannot mix <a href=\"https://docs.aws.amazon.com/ground-station/latest/APIReference/API_AwsGroundStationAgentEndpoint.html\">\n            AWS Ground Station Agent endpoints</a> with\n         <a href=\"https://docs.aws.amazon.com/ground-station/latest/APIReference/API_DataflowEndpoint.html\">Dataflow endpoints</a> in the same group.\n         If your use case requires both types of endpoints, you must create separate dataflow endpoint\n         groups for each type.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1167,7 +1233,6 @@
                 "enabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Whether to set the ephemeris status to <code>ENABLED</code> after validation.</p>\n         <p>Setting this to false will set the ephemeris status to <code>DISABLED</code> after validation.</p>"
                     }
                 },
@@ -1304,22 +1369,26 @@
             }
         },
         "com.amazonaws.groundstation#Criticality": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PREFERRED",
-                        "name": "PREFERRED"
-                    },
-                    {
-                        "value": "REMOVED",
-                        "name": "REMOVED"
-                    },
-                    {
-                        "value": "REQUIRED",
-                        "name": "REQUIRED"
+            "type": "enum",
+            "members": {
+                "REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUIRED"
                     }
-                ]
+                },
+                "PREFERRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREFERRED"
+                    }
+                },
+                "REMOVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVED"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#CustomerEphemerisPriority": {
@@ -1464,7 +1533,12 @@
                     "type": "AWS::GroundStation::DataflowEndpointGroup",
                     "service": "GroundStation",
                     "resource": "DataflowEndpointGroup"
-                }
+                },
+                "smithy.api#length": {
+                    "min": 97,
+                    "max": 146
+                },
+                "smithy.api#pattern": "^arn:aws:groundstation:[-a-z0-9]{1,50}:[0-9]{12}:dataflow-endpoint-group/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
         "com.amazonaws.groundstation#DataflowEndpointGroupDurationInSeconds": {
@@ -2011,7 +2085,6 @@
                 "enabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Whether or not the ephemeris is enabled.</p>"
                     }
                 },
@@ -2141,14 +2214,14 @@
             }
         },
         "com.amazonaws.groundstation#EirpUnits": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "dBW",
-                        "name": "DBW"
+            "type": "enum",
+            "members": {
+                "DBW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dBW"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.groundstation#Elevation": {
@@ -2224,30 +2297,38 @@
             }
         },
         "com.amazonaws.groundstation#EndpointStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "created",
-                        "name": "created"
-                    },
-                    {
-                        "value": "creating",
-                        "name": "creating"
-                    },
-                    {
-                        "value": "deleted",
-                        "name": "deleted"
-                    },
-                    {
-                        "value": "deleting",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "failed",
-                        "name": "failed"
+            "type": "enum",
+            "members": {
+                "created": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "created"
                     }
-                ]
+                },
+                "creating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "creating"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleted"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                },
+                "failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#EphemeridesList": {
@@ -2336,35 +2417,43 @@
             }
         },
         "com.amazonaws.groundstation#EphemerisInvalidReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "METADATA_INVALID",
-                        "name": "METADATA_INVALID",
-                        "documentation": "Provided spacecraft identifiers such as spacecraft NORAD Id are invalid"
-                    },
-                    {
-                        "value": "TIME_RANGE_INVALID",
-                        "name": "TIME_RANGE_INVALID",
-                        "documentation": "Start, end, or expiration time(s) are invalid for the provided ephemeris"
-                    },
-                    {
-                        "value": "TRAJECTORY_INVALID",
-                        "name": "TRAJECTORY_INVALID",
-                        "documentation": "Provided ephemeris defines invalid spacecraft trajectory"
-                    },
-                    {
-                        "value": "KMS_KEY_INVALID",
-                        "name": "KMS_KEY_INVALID",
-                        "documentation": "Provided KMS key is invalid"
-                    },
-                    {
-                        "value": "VALIDATION_ERROR",
-                        "name": "VALIDATION_ERROR",
-                        "documentation": "Internal Service Error occurred while processing ephemeris"
+            "type": "enum",
+            "members": {
+                "METADATA_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Provided spacecraft identifiers such as spacecraft NORAD Id are invalid",
+                        "smithy.api#enumValue": "METADATA_INVALID"
                     }
-                ]
+                },
+                "TIME_RANGE_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Start, end, or expiration time(s) are invalid for the provided ephemeris",
+                        "smithy.api#enumValue": "TIME_RANGE_INVALID"
+                    }
+                },
+                "TRAJECTORY_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Provided ephemeris defines invalid spacecraft trajectory",
+                        "smithy.api#enumValue": "TRAJECTORY_INVALID"
+                    }
+                },
+                "KMS_KEY_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Provided KMS key is invalid",
+                        "smithy.api#enumValue": "KMS_KEY_INVALID"
+                    }
+                },
+                "VALIDATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Internal Service Error occurred while processing ephemeris",
+                        "smithy.api#enumValue": "VALIDATION_ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#EphemerisItem": {
@@ -2391,7 +2480,6 @@
                 "enabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Whether or not the ephemeris is enabled.</p>"
                     }
                 },
@@ -2461,49 +2549,61 @@
             }
         },
         "com.amazonaws.groundstation#EphemerisSource": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CUSTOMER_PROVIDED",
-                        "name": "CUSTOMER_PROVIDED"
-                    },
-                    {
-                        "value": "SPACE_TRACK",
-                        "name": "SPACE_TRACK"
+            "type": "enum",
+            "members": {
+                "CUSTOMER_PROVIDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_PROVIDED"
                     }
-                ]
+                },
+                "SPACE_TRACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPACE_TRACK"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#EphemerisStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VALIDATING",
-                        "name": "VALIDATING"
-                    },
-                    {
-                        "value": "INVALID",
-                        "name": "INVALID"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
-                    },
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "EXPIRED",
-                        "name": "EXPIRED"
+            "type": "enum",
+            "members": {
+                "VALIDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATING"
                     }
-                ]
+                },
+                "INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#EphemerisStatusList": {
@@ -2577,22 +2677,26 @@
             }
         },
         "com.amazonaws.groundstation#FrequencyUnits": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GHz",
-                        "name": "GHZ"
-                    },
-                    {
-                        "value": "MHz",
-                        "name": "MHZ"
-                    },
-                    {
-                        "value": "kHz",
-                        "name": "KHZ"
+            "type": "enum",
+            "members": {
+                "GHZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GHz"
                     }
-                ]
+                },
+                "MHZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MHz"
+                    }
+                },
+                "KHZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "kHz"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#GetAgentConfiguration": {
@@ -4148,7 +4252,7 @@
                     "min": 2,
                     "max": 8192
                 },
-                "smithy.api#pattern": "^[{}\\[\\]:.,\"0-9A-z\\-_\\s]{2,8192}$"
+                "smithy.api#pattern": "^[{}\\[\\]:.,\"0-9A-Za-z\\-_\\s]{2,8192}$"
             }
         },
         "com.amazonaws.groundstation#KeyAliasArn": {
@@ -4161,7 +4265,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^arn:aws[a-zA-Z-]{0,16}:kms:[a-z]{2}(-[a-z]{1,16}){1,3}-\\d{1}:\\d{12}:((alias/[a-zA-Z0-9:/_-]{1,256}))$"
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]{0,16}:kms:[-a-z0-9]{1,50}:[0-9]{12}:((alias/[a-zA-Z0-9:/_-]{1,256}))$"
             }
         },
         "com.amazonaws.groundstation#KeyAliasName": {
@@ -4205,7 +4309,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>AWS Key Management Service (KMS) Key.</p>"
+                "smithy.api#documentation": "<p>KMS key info.</p>"
             }
         },
         "com.amazonaws.groundstation#ListConfigs": {
@@ -4898,7 +5002,12 @@
                     "type": "AWS::GroundStation::MissionProfile",
                     "service": "GroundStation",
                     "resource": "MissionProfile"
-                }
+                },
+                "smithy.api#length": {
+                    "min": 89,
+                    "max": 138
+                },
+                "smithy.api#pattern": "^arn:aws:groundstation:[-a-z0-9]{1,50}:[0-9]{12}:mission-profile/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
         "com.amazonaws.groundstation#MissionProfileIdResponse": {
@@ -4986,7 +5095,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 0,
+                    "min": 1,
                     "max": 100
                 }
             }
@@ -5002,22 +5111,26 @@
             }
         },
         "com.amazonaws.groundstation#Polarization": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LEFT_HAND",
-                        "name": "LEFT_HAND"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "RIGHT_HAND",
-                        "name": "RIGHT_HAND"
+            "type": "enum",
+            "members": {
+                "RIGHT_HAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RIGHT_HAND"
                     }
-                ]
+                },
+                "LEFT_HAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEFT_HAND"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.groundstation#PositiveDurationInSeconds": {
@@ -5118,6 +5231,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Detailed information about the agent being registered.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.groundstation#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags assigned to an <code>Agent</code>.</p>"
                     }
                 }
             }
@@ -5550,6 +5669,9 @@
                 "polarization": {
                     "target": "com.amazonaws.groundstation#Polarization",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#default": "NONE",
                         "smithy.api#documentation": "<p>Polarization of a spectral <code>Config</code>. Capturing both <code>\"RIGHT_HAND\"</code> and <code>\"LEFT_HAND\"</code> polarization requires two separate configs.</p>"
                     }
                 }
@@ -6179,8 +6301,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 128
+                    "min": 36,
+                    "max": 36
                 },
                 "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
@@ -6233,7 +6355,12 @@
                     "type": "AWS::GroundStation::Satellite",
                     "service": "com.amazon.awsgsaascontrolplanelambda.r20190311#GroundStation",
                     "resource": "com.amazon.awsgsaascontrolplanelambda.r20190311#Satellite"
-                }
+                },
+                "smithy.api#length": {
+                    "min": 82,
+                    "max": 132
+                },
+                "smithy.api#pattern": "^arn:aws:groundstation:([-a-z0-9]{1,50})?:[0-9]{12}:satellite/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         }
     }
