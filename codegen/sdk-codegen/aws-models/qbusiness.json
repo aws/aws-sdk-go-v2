@@ -6845,6 +6845,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If the <code>maxResults</code> response was incomplete because there is more data to\n            retrieve, Amazon Q Business returns a pagination token in the response. You can use this\n            pagination token to retrieve the next set of Amazon Q Business chat controls\n            configured.</p>"
                     }
+                },
+                "hallucinationReductionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#HallucinationReductionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The hallucination reduction settings for your application.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8207,6 +8213,37 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qbusiness#GroupSummary"
+            }
+        },
+        "com.amazonaws.qbusiness#HallucinationReductionConfiguration": {
+            "type": "structure",
+            "members": {
+                "hallucinationReductionControl": {
+                    "target": "com.amazonaws.qbusiness#HallucinationReductionControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls whether hallucination reduction has been enabled or disabled for your\n            application. The default status is <code>DISABLED</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information required to setup hallucination reduction. For more\n            information, see <a href=\"amazonq/latest/qbusiness-ug/hallucination-reduction.html\">hallucination reduction</a>.</p>\n         <note>\n            <p>The hallucination reduction feature won't work if chat orchestration controls are\n                enabled for your application.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.qbusiness#HallucinationReductionControl": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.qbusiness#HookConfiguration": {
@@ -13291,6 +13328,23 @@
                 "smithy.api#pattern": "^\\P{C}*$"
             }
         },
+        "com.amazonaws.qbusiness#SystemMessageType": {
+            "type": "enum",
+            "members": {
+                "RESPONSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESPONSE"
+                    }
+                },
+                "GROUNDED_RESPONSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUNDED_RESPONSE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.qbusiness#Tag": {
             "type": "structure",
             "members": {
@@ -13464,6 +13518,12 @@
         "com.amazonaws.qbusiness#TextOutputEvent": {
             "type": "structure",
             "members": {
+                "systemMessageType": {
+                    "target": "com.amazonaws.qbusiness#SystemMessageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of AI-generated message in a <code>TextOutputEvent</code>. Amazon Q Business\n            currently supports two types of messages:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RESPONSE</code> - The Amazon Q Business system response.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GROUNDED_RESPONSE</code> - The corrected, hallucination-reduced,\n                    response returned by Amazon Q Business. Available only if hallucination reduction is\n                    supported and configured for the application and detected in the end user chat\n                    query by Amazon Q Business.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "conversationId": {
                     "target": "com.amazonaws.qbusiness#ConversationId",
                     "traits": {
@@ -13926,6 +13986,12 @@
                     "target": "com.amazonaws.qbusiness#CreatorModeConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration details for <code>CREATOR_MODE</code>.</p>"
+                    }
+                },
+                "hallucinationReductionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#HallucinationReductionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The hallucination reduction settings for your application.</p>"
                     }
                 }
             },
@@ -14556,6 +14622,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#InternalServerException"

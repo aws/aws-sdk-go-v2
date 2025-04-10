@@ -3641,6 +3641,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of dataset ARNS to exclude from Dashboard Q&A.</p>"
                     }
+                },
+                "CustomActionDefaults": {
+                    "target": "com.amazonaws.quicksight#VisualCustomActionDefaults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of visual custom actions for the analysis.</p>"
+                    }
                 }
             },
             "traits": {
@@ -48980,6 +48986,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The layout content type of the sheet. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PAGINATED</code>: Creates a sheet for a paginated report.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERACTIVE</code>: Creates a sheet for an interactive dashboard.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "CustomActionDefaults": {
+                    "target": "com.amazonaws.quicksight#VisualCustomActionDefaults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of visual custom actions for the sheet.</p>"
+                    }
                 }
             },
             "traits": {
@@ -62701,6 +62713,20 @@
                 "smithy.api#documentation": "<p>A custom action defined on a visual.</p>"
             }
         },
+        "com.amazonaws.quicksight#VisualCustomActionDefaults": {
+            "type": "structure",
+            "members": {
+                "highlightOperation": {
+                    "target": "com.amazonaws.quicksight#VisualHighlightOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of highlight operations available for visuals in an analysis or sheet.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of custom actions applied to visuals in an analysis or sheet.</p>"
+            }
+        },
         "com.amazonaws.quicksight#VisualCustomActionList": {
             "type": "list",
             "member": {
@@ -62779,6 +62805,44 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DATA_POINT_MENU"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#VisualHighlightOperation": {
+            "type": "structure",
+            "members": {
+                "Trigger": {
+                    "target": "com.amazonaws.quicksight#VisualHighlightTrigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether a highlight operation is initiated by a click or hover, or whether it's disabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines what initiates a highlight operation on a visual, such as a click or hover.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#VisualHighlightTrigger": {
+            "type": "enum",
+            "members": {
+                "DATA_POINT_CLICK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_POINT_CLICK"
+                    }
+                },
+                "DATA_POINT_HOVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_POINT_HOVER"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
                 }
             }

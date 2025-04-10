@@ -4516,6 +4516,32 @@
                 "smithy.api#documentation": "Cmaf Id3 Behavior"
             }
         },
+        "com.amazonaws.medialive#CmafIngestCaptionLanguageMapping": {
+            "type": "structure",
+            "members": {
+                "CaptionChannel": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max4",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "A number for the channel for this caption, 1 to 4.",
+                        "smithy.api#jsonName": "captionChannel",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.medialive#__stringMin3Max3",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Language code for the language of the caption in this channel.  For example, ger/deu. See http://www.loc.gov/standards/iso639-2",
+                        "smithy.api#jsonName": "languageCode",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Add an array item for each language. Follow the order of the caption descriptions. For example, if the first caption description is for German, then the first array item must be for German, and its caption channel must be set to 1. The second array item must be 2, and so on."
+            }
+        },
         "com.amazonaws.medialive#CmafIngestGroupSettings": {
             "type": "structure",
             "members": {
@@ -4604,6 +4630,34 @@
                         "smithy.api#documentation": "Change the modifier that MediaLive automatically adds to the Streams() name that identifies an ID3 track. The default is \"id3\", which means the default name will be Streams(id3.cmfm). Any string you enter here will replace the \"id3\" string.\\nThe modifier can only contain: numbers, letters, plus (+), minus (-), underscore (_) and period (.) and has a maximum length of 100 characters.",
                         "smithy.api#jsonName": "id3NameModifier"
                     }
+                },
+                "CaptionLanguageMappings": {
+                    "target": "com.amazonaws.medialive#__listOfCmafIngestCaptionLanguageMapping",
+                    "traits": {
+                        "smithy.api#documentation": "An array that identifies the languages in the four caption channels in the embedded captions.",
+                        "smithy.api#jsonName": "captionLanguageMappings"
+                    }
+                },
+                "TimedMetadataId3Frame": {
+                    "target": "com.amazonaws.medialive#CmafTimedMetadataId3Frame",
+                    "traits": {
+                        "smithy.api#documentation": "Set to none if you don't want to insert a timecode in the output. Otherwise choose the frame type for the timecode.",
+                        "smithy.api#jsonName": "timedMetadataId3Frame"
+                    }
+                },
+                "TimedMetadataId3Period": {
+                    "target": "com.amazonaws.medialive#__integerMin0Max10000",
+                    "traits": {
+                        "smithy.api#documentation": "If you set up to insert a timecode in the output, specify the frequency for the frame, in seconds.",
+                        "smithy.api#jsonName": "timedMetadataId3Period"
+                    }
+                },
+                "TimedMetadataPassthrough": {
+                    "target": "com.amazonaws.medialive#CmafTimedMetadataPassthrough",
+                    "traits": {
+                        "smithy.api#documentation": "Set to enabled to pass through ID3 metadata from the input sources.",
+                        "smithy.api#jsonName": "timedMetadataPassthrough"
+                    }
                 }
             },
             "traits": {
@@ -4683,6 +4737,52 @@
             },
             "traits": {
                 "smithy.api#documentation": "Cmaf Nielsen Id3 Behavior"
+            }
+        },
+        "com.amazonaws.medialive#CmafTimedMetadataId3Frame": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "PRIV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIV"
+                    }
+                },
+                "TDRL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TDRL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Cmaf Timed Metadata Id3 Frame"
+            }
+        },
+        "com.amazonaws.medialive#CmafTimedMetadataPassthrough": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Cmaf Timed Metadata Passthrough"
             }
         },
         "com.amazonaws.medialive#ColorCorrection": {
@@ -19723,6 +19823,13 @@
                         "smithy.api#documentation": "An array of eight audio configurations, one for each audio pair in the source. Set up each audio configuration either to exclude the pair, or to format it and include it in the output from the device. This parameter applies only to UHD devices, and only when the device is configured as the source for a MediaConnect flow. For an HD device, you configure the audio by setting up audio selectors in the channel configuration.",
                         "smithy.api#jsonName": "audioChannelPairs"
                     }
+                },
+                "InputResolution": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the resolution of the Link device's source (HD or UHD). Make sure the resolution matches the current source from the device. This value determines MediaLive resource allocation and billing for this input. Only UHD devices can specify this parameter.",
+                        "smithy.api#jsonName": "inputResolution"
+                    }
                 }
             },
             "traits": {
@@ -20407,6 +20514,13 @@
                     "traits": {
                         "smithy.api#documentation": "An array of eight audio configurations, one for each audio pair in the source. Each audio configuration specifies either to exclude the pair, or to format it and include it in the output from the UHD device. Applies only when the device is configured as the source for a MediaConnect flow.",
                         "smithy.api#jsonName": "audioChannelPairs"
+                    }
+                },
+                "InputResolution": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The resolution of the Link device's source (HD or UHD). This value determines MediaLive resource allocation and billing for this input.",
+                        "smithy.api#jsonName": "inputResolution"
                     }
                 }
             },
@@ -38483,6 +38597,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfCloudWatchAlarmTemplateSummary"
+            }
+        },
+        "com.amazonaws.medialive#__listOfCmafIngestCaptionLanguageMapping": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#CmafIngestCaptionLanguageMapping"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfCmafIngestCaptionLanguageMapping"
             }
         },
         "com.amazonaws.medialive#__listOfColorCorrection": {

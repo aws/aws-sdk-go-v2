@@ -87,6 +87,9 @@
                     "target": "com.amazonaws.m2#CancelBatchJobExecution"
                 },
                 {
+                    "target": "com.amazonaws.m2#CreateDataSetExportTask"
+                },
+                {
                     "target": "com.amazonaws.m2#CreateDataSetImportTask"
                 },
                 {
@@ -105,6 +108,9 @@
                     "target": "com.amazonaws.m2#GetDataSetDetails"
                 },
                 {
+                    "target": "com.amazonaws.m2#GetDataSetExportTask"
+                },
+                {
                     "target": "com.amazonaws.m2#GetDataSetImportTask"
                 },
                 {
@@ -121,6 +127,9 @@
                 },
                 {
                     "target": "com.amazonaws.m2#ListBatchJobRestartPoints"
+                },
+                {
+                    "target": "com.amazonaws.m2#ListDataSetExportHistory"
                 },
                 {
                     "target": "com.amazonaws.m2#ListDataSetImportHistory"
@@ -1664,6 +1673,105 @@
                 }
             }
         },
+        "com.amazonaws.m2#CreateDataSetExportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.m2#CreateDataSetExportTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.m2#CreateDataSetExportTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.m2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.m2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "s3:GetObject"
+                    ],
+                    "documentation": "Grants permission to create a data set export task"
+                },
+                "smithy.api#documentation": "<p>Starts a data set export task for a specific application.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/applications/{applicationId}/dataset-export-task",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.m2#CreateDataSetExportTaskRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.m2#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the application for which you want to export data sets.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "exportConfig": {
+                    "target": "com.amazonaws.m2#DataSetExportConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data set export task configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.m2#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request to create a data set export. The service generates the clientToken when the API call is triggered. The token expires after one hour, so if you retry the API within this timeframe with the same clientToken, you will get the same response. The service also handles deleting the clientToken after it expires.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.m2#KMSKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a customer managed key.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.m2#CreateDataSetExportTaskResponse": {
+            "type": "structure",
+            "members": {
+                "taskId": {
+                    "target": "com.amazonaws.m2#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task identifier. This operation is asynchronous. Use this identifier with the <a>GetDataSetExportTask</a> operation to obtain the status of this task.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.m2#CreateDataSetImportTask": {
             "type": "operation",
             "input": {
@@ -2046,6 +2154,149 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Defines a data set.</p>"
+            }
+        },
+        "com.amazonaws.m2#DataSetExportConfig": {
+            "type": "union",
+            "members": {
+                "s3Location": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the data sets.</p>"
+                    }
+                },
+                "dataSets": {
+                    "target": "com.amazonaws.m2#DataSetExportList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data sets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies one or more data sets you want to import with the <a>CreateDataSetExportTask</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.m2#DataSetExportItem": {
+            "type": "structure",
+            "members": {
+                "datasetName": {
+                    "target": "com.amazonaws.m2#String200",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "externalLocation": {
+                    "target": "com.amazonaws.m2#ExternalLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the data set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a specific data set to export from an external location.</p>"
+            }
+        },
+        "com.amazonaws.m2#DataSetExportList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.m2#DataSetExportItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.m2#DataSetExportSummary": {
+            "type": "structure",
+            "members": {
+                "total": {
+                    "target": "com.amazonaws.m2#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of data set exports.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "succeeded": {
+                    "target": "com.amazonaws.m2#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of data set exports that have succeeded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failed": {
+                    "target": "com.amazonaws.m2#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of data set exports that have failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "pending": {
+                    "target": "com.amazonaws.m2#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of data set exports that are pending.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inProgress": {
+                    "target": "com.amazonaws.m2#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of data set exports that are in progress.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a summary of data set exports.</p>"
+            }
+        },
+        "com.amazonaws.m2#DataSetExportTask": {
+            "type": "structure",
+            "members": {
+                "taskId": {
+                    "target": "com.amazonaws.m2#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data set export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.m2#DataSetTaskLifecycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the data set export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "summary": {
+                    "target": "com.amazonaws.m2#DataSetExportSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the data set export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If dataset exports failed, the failure reason will show here.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a data set export task.</p>"
+            }
+        },
+        "com.amazonaws.m2#DataSetExportTaskList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.m2#DataSetExportTask"
             }
         },
         "com.amazonaws.m2#DataSetImportConfig": {
@@ -3585,6 +3836,109 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.m2#GetDataSetExportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.m2#GetDataSetExportTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.m2#GetDataSetExportTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.m2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.m2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to export a data set at the specified S3 location"
+                },
+                "smithy.api#documentation": "<p>Gets the status of a data set import task initiated with the <a>CreateDataSetExportTask</a> operation.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications/{applicationId}/dataset-export-tasks/{taskId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.m2#GetDataSetExportTaskRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.m2#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "taskId": {
+                    "target": "com.amazonaws.m2#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task identifier returned by the <a>CreateDataSetExportTask</a> operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.m2#GetDataSetExportTaskResponse": {
+            "type": "structure",
+            "members": {
+                "taskId": {
+                    "target": "com.amazonaws.m2#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.m2#DataSetTaskLifecycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "summary": {
+                    "target": "com.amazonaws.m2#DataSetExportSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the status of the task.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If dataset export failed, the failure reason will show here.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a customer managed key used for exported data set encryption.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.m2#GetDataSetImportTask": {
             "type": "operation",
             "input": {
@@ -4152,6 +4506,25 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies if a step can be restarted or not.</p>"
                     }
+                },
+                "stepCheckpoint": {
+                    "target": "com.amazonaws.m2#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>A registered step-level checkpoint identifier that can be used for restarting an Amazon Web Services Blu Age application batch job.</p>"
+                    }
+                },
+                "stepCheckpointStatus": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The step-level checkpoint status for an Amazon Web Services Blu Age application batch job.</p>"
+                    }
+                },
+                "stepCheckpointTime": {
+                    "target": "com.amazonaws.m2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The step-level checkpoint status for an Amazon Web Services Blu Age application batch job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4185,10 +4558,34 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The procedure step name that a batch job was restarted to.</p>"
                     }
+                },
+                "stepCheckpoint": {
+                    "target": "com.amazonaws.m2#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Skip selected step and issue a restart from immediate successor step for an Amazon Web Services Blu Age application batch job.</p>"
+                    }
+                },
+                "skip": {
+                    "target": "com.amazonaws.m2#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The step-level checkpoint timestamp (creation or last modification) for an Amazon Web Services Blu Age application batch job.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides step/procedure step information for a restart batch job operation.</p>"
+            }
+        },
+        "com.amazonaws.m2#KMSKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:/_-]+$"
             }
         },
         "com.amazonaws.m2#ListApplicationVersions": {
@@ -4688,6 +5085,103 @@
                     "target": "com.amazonaws.m2#BatchJobStepList",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns all the batch job steps and related information for a batch job that previously ran.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.m2#ListDataSetExportHistory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.m2#ListDataSetExportHistoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.m2#ListDataSetExportHistoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.m2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.m2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list data set export history"
+                },
+                "smithy.api#documentation": "<p>Lists the data set exports for the specified application.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications/{applicationId}/dataset-export-tasks",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "dataSetExportTasks"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.m2#ListDataSetExportHistoryRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.m2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token returned from a previous call to\n  this operation. This specifies the next item to return. To return to the beginning of the \n  list, exclude this parameter.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.m2#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of objects to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "applicationId": {
+                    "target": "com.amazonaws.m2#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.m2#ListDataSetExportHistoryResponse": {
+            "type": "structure",
+            "members": {
+                "dataSetExportTasks": {
+                    "target": "com.amazonaws.m2#DataSetExportTaskList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data set export tasks.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.m2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are more items to return, this contains a token \n  that is passed to a subsequent call to this operation to retrieve the next set of items.</p>"
                     }
                 }
             },

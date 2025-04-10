@@ -11347,7 +11347,7 @@
                 "Engine": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Modifies the engine listed in a cluster message. The options are redis, memcached or valkey.</p>"
+                        "smithy.api#documentation": "<p>The engine type used by the cache cluster. The options are valkey, memcached or redis.</p>"
                     }
                 },
                 "EngineVersion": {
@@ -11402,6 +11402,12 @@
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
                         "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> |\n            <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            to 7.1 or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                    }
+                },
+                "ScaleConfig": {
+                    "target": "com.amazonaws.elasticache#ScaleConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures horizontal or vertical scaling for Memcached clusters, specifying the scaling percentage and interval.</p>"
                     }
                 }
             },
@@ -13226,6 +13232,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A setting that allows you to migrate your clients to use in-transit encryption, with\n            no downtime.</p>"
                     }
+                },
+                "ScaleConfig": {
+                    "target": "com.amazonaws.elasticache#ScaleConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scaling configuration changes that are pending for the Memcached cluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14589,6 +14601,26 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elasticache#ScaleConfig": {
+            "type": "structure",
+            "members": {
+                "ScalePercentage": {
+                    "target": "com.amazonaws.elasticache#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage by which to scale the Memcached cluster, either horizontally by adding nodes or vertically by increasing resources.</p>"
+                    }
+                },
+                "ScaleIntervalMinutes": {
+                    "target": "com.amazonaws.elasticache#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time interval in seconds between scaling operations when performing gradual scaling for a Memcached cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for horizontal or vertical scaling operations on Memcached clusters.</p>"
             }
         },
         "com.amazonaws.elasticache#SecurityGroupIdsList": {
