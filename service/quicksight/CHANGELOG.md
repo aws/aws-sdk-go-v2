@@ -1,3 +1,7 @@
+# v1.86.0 (2025-04-10)
+
+* **Feature**: Add support to analysis and sheet level highlighting in QuickSight.
+
 # v1.85.1 (2025-04-03)
 
 * No change notes available for this release.

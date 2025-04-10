@@ -1,3 +1,7 @@
+# v1.74.0 (2025-04-10)
+
+* **Feature**: AWS Elemental MediaLive / Features : Add support for CMAF Ingest CaptionLanguageMappings, TimedMetadataId3 settings, and Link InputResolution.
+
 # v1.73.0 (2025-04-07)
 
 * **Feature**: AWS Elemental MediaLive now supports SDI inputs to MediaLive Anywhere Channels in workflows that use AWS SDKs.

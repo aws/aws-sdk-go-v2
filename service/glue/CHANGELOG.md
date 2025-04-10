@@ -1,3 +1,7 @@
+# v1.109.1 (2025-04-10)
+
+* No change notes available for this release.
+
 # v1.109.0 (2025-04-09)
 
 * **Feature**: The TableOptimizer APIs in AWS Glue now return the DpuHours field in each TableOptimizerRun, providing clients visibility to the DPU-hours used for billing in managed Apache Iceberg table compaction optimization.

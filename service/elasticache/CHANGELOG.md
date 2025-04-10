@@ -1,3 +1,7 @@
+# v1.46.0 (2025-04-10)
+
+* **Feature**: AWS ElastiCache SDK now supports using MemcachedUpgradeConfig parameter with ModifyCacheCluster API to enable updating Memcached cache node types. Please refer to updated AWS ElastiCache public documentation for detailed information on API usage and implementation.
+
 # v1.45.2 (2025-04-03)
 
 * No change notes available for this release.

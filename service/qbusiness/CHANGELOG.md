@@ -1,3 +1,7 @@
+# v1.24.0 (2025-04-10)
+
+* **Feature**: Adds functionality to enable/disable a new Q Business Hallucination Reduction feature. If enabled, Q Business will detect and attempt to remove Hallucinations from certain Chat requests.
+
 # v1.23.2 (2025-04-03)
 
 * No change notes available for this release.

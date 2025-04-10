@@ -1,3 +1,7 @@
+# v1.42.3 (2025-04-10)
+
+* No change notes available for this release.
+
 # v1.42.2 (2025-04-09)
 
 * **Documentation**: Documentation update for secondary indexes and Create_Table.

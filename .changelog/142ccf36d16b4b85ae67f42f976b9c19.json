@@ -1,8 +1,0 @@
-{
-    "id": "142ccf36-d16b-4b85-ae67-f42f976b9c19",
-    "type": "feature",
-    "description": "Application Auto Scaling now supports horizontal scaling for Elasticache Memcached self-designed clusters using target tracking scaling policies and scheduled scaling.",
-    "modules": [
-        "service/applicationautoscaling"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.51.1 (2025-04-10)
+
+* No change notes available for this release.
+
 # v1.51.0 (2025-04-03)
 
 * **Feature**: Added us-gov-east-1 and us-gov-west-1 as valid Latency Based Routing regions for change-resource-record-sets.

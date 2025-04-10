@@ -1,8 +1,0 @@
-{
-    "id": "9bd460e2-226c-4515-b1ba-3d4746010af4",
-    "type": "feature",
-    "description": "AWS ElastiCache SDK now supports using MemcachedUpgradeConfig parameter with ModifyCacheCluster API to enable updating Memcached cache node types. Please refer to updated AWS ElastiCache public documentation for detailed information on API usage and implementation.",
-    "modules": [
-        "service/elasticache"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "3d50e5ce-bc7d-42c5-a323-a2d4a4b61785",
-    "type": "feature",
-    "description": "AWS Elemental MediaLive / Features : Add support for CMAF Ingest CaptionLanguageMappings, TimedMetadataId3 settings, and Link InputResolution.",
-    "modules": [
-        "service/medialive"
-    ]
-}

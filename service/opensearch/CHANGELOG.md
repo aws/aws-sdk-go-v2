@@ -1,3 +1,7 @@
+# v1.46.3 (2025-04-10)
+
+* No change notes available for this release.
+
 # v1.46.2 (2025-04-03)
 
 * **Documentation**: Improve descriptions for various API commands and data types.

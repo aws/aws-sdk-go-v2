@@ -1,3 +1,24 @@
+# Release (2025-04-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression`: [v1.7.78](feature/dynamodb/expression/CHANGELOG.md#v1778-2025-04-10)
+  * **Bug Fix**: allow nested list indices in expressions
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.36.0](service/applicationautoscaling/CHANGELOG.md#v1360-2025-04-10)
+  * **Feature**: Application Auto Scaling now supports horizontal scaling for Elasticache Memcached self-designed clusters using target tracking scaling policies and scheduled scaling.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.46.0](service/elasticache/CHANGELOG.md#v1460-2025-04-10)
+  * **Feature**: AWS ElastiCache SDK now supports using MemcachedUpgradeConfig parameter with ModifyCacheCluster API to enable updating Memcached cache node types. Please refer to updated AWS ElastiCache public documentation for detailed information on API usage and implementation.
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.21.0](service/m2/CHANGELOG.md#v1210-2025-04-10)
+  * **Feature**: Introduce three new APIs: CreateDataSetExportTask, GetDataSetExportTask and ListDataSetExportHistory. Add support for batch restart for Blu Age applications.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.74.0](service/medialive/CHANGELOG.md#v1740-2025-04-10)
+  * **Feature**: AWS Elemental MediaLive / Features : Add support for CMAF Ingest CaptionLanguageMappings, TimedMetadataId3 settings, and Link InputResolution.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.24.0](service/qbusiness/CHANGELOG.md#v1240-2025-04-10)
+  * **Feature**: Adds functionality to enable/disable a new Q Business Hallucination Reduction feature. If enabled, Q Business will detect and attempt to remove Hallucinations from certain Chat requests.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.86.0](service/quicksight/CHANGELOG.md#v1860-2025-04-10)
+  * **Feature**: Add support to analysis and sheet level highlighting in QuickSight.
+
 # Release (2025-04-09)
 
 ## General Highlights

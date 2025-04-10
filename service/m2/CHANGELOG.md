@@ -1,3 +1,7 @@
+# v1.21.0 (2025-04-10)
+
+* **Feature**: Introduce three new APIs: CreateDataSetExportTask, GetDataSetExportTask and ListDataSetExportHistory. Add support for batch restart for Blu Age applications.
+
 # v1.20.2 (2025-04-03)
 
 * No change notes available for this release.
