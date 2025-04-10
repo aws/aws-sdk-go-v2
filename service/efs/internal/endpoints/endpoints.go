@@ -933,6 +933,26 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIsoE,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "eu-isoe-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-isoe-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "elasticfilesystem-fips.eu-isoe-west-1.cloud.adc-e.uk",
+			},
+			endpoints.EndpointKey{
+				Region: "fips-eu-isoe-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.eu-isoe-west-1.cloud.adc-e.uk",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-isoe-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+		},
 	},
 	{
 		ID: "aws-iso-f",

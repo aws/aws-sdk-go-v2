@@ -38,13 +38,14 @@ import (
 // the target tracking policy could instruct the scalable target to scale out
 // again.
 //
-// For more information, see [Target tracking scaling policies] and [Step scaling policies] in the Application Auto Scaling User Guide.
+// For more information, see [Target tracking scaling policies], [Step scaling policies], and [Predictive scaling policies] in the Application Auto Scaling User Guide.
 //
 // If a scalable target is deregistered, the scalable target is no longer
 // available to use scaling policies. Any scaling policies that were specified for
 // the scalable target are deleted.
 //
 // [Step scaling policies]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
+// [Predictive scaling policies]: https://docs.aws.amazon.com/autoscaling/application/userguide/aas-create-predictive-scaling-policy.html
 // [Target tracking scaling policies]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
 func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyInput, optFns ...func(*Options)) (*PutScalingPolicyOutput, error) {
 	if params == nil {
@@ -133,6 +134,10 @@ type PutScalingPolicyInput struct {
 	//   replication-group and the unique identifier is the replication group name.
 	//   Example: replication-group/mycluster .
 	//
+	//   - Amazon ElastiCache cache cluster - The resource type is cache-cluster and
+	//   the unique identifier is the cache cluster name. Example:
+	//   cache-cluster/mycluster .
+	//
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
 	//
@@ -204,6 +209,9 @@ type PutScalingPolicyInput struct {
 	//   - kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	//   brokers in an Amazon MSK cluster.
 	//
+	//   - elasticache:cache-cluster:Nodes - The number of nodes for an Amazon
+	//   ElastiCache cache cluster.
+	//
 	//   - elasticache:replication-group:NodeGroups - The number of node groups for an
 	//   Amazon ElastiCache replication group.
 	//
@@ -242,9 +250,12 @@ type PutScalingPolicyInput struct {
 	// StepScaling —Not supported for DynamoDB, Amazon Comprehend, Lambda, Amazon
 	// Keyspaces, Amazon MSK, Amazon ElastiCache, or Neptune.
 	//
-	// For more information, see [Target tracking scaling policies] and [Step scaling policies] in the Application Auto Scaling User Guide.
+	// PredictiveScaling —Only supported for Amazon ECS.
+	//
+	// For more information, see [Target tracking scaling policies], [Step scaling policies], and [Predictive scaling policies] in the Application Auto Scaling User Guide.
 	//
 	// [Step scaling policies]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
+	// [Predictive scaling policies]: https://docs.aws.amazon.com/autoscaling/application/userguide/aas-create-predictive-scaling-policy.html
 	// [Target tracking scaling policies]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
 	PolicyType types.PolicyType
 

@@ -16,7 +16,8 @@
 //
 //   - Amazon ECS services
 //
-//   - Amazon ElastiCache for Redis clusters (replication groups)
+//   - Amazon ElastiCache replication groups (Redis OSS and Valkey) and Memcached
+//     clusters
 //
 //   - Amazon EMR clusters
 //

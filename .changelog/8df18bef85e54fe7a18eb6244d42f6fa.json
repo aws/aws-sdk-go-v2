@@ -1,0 +1,8 @@
+{
+    "id": "8df18bef-85e5-4fe7-a18e-b6244d42f6fa",
+    "type": "feature",
+    "description": "Adds functionality to enable/disable a new Q Business Hallucination Reduction feature. If enabled, Q Business will detect and attempt to remove Hallucinations from certain Chat requests.",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

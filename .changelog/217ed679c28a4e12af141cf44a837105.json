@@ -1,0 +1,8 @@
+{
+    "id": "217ed679-c28a-4e12-af14-1cf44a837105",
+    "type": "feature",
+    "description": "Add support to analysis and sheet level highlighting in QuickSight.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

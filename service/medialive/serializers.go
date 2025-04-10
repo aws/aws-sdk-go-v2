@@ -10800,6 +10800,19 @@ func awsRestjson1_serializeDocument__listOfChannelPipelineIdToRestart(v []types.
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfCmafIngestCaptionLanguageMapping(v []types.CmafIngestCaptionLanguageMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCmafIngestCaptionLanguageMapping(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfColorCorrection(v []types.ColorCorrection, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -12805,9 +12818,33 @@ func awsRestjson1_serializeDocumentClusterNetworkSettingsUpdateRequest(v *types.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCmafIngestCaptionLanguageMapping(v *types.CmafIngestCaptionLanguageMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CaptionChannel != nil {
+		ok := object.Key("captionChannel")
+		ok.Integer(*v.CaptionChannel)
+	}
+
+	if v.LanguageCode != nil {
+		ok := object.Key("languageCode")
+		ok.String(*v.LanguageCode)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCmafIngestGroupSettings(v *types.CmafIngestGroupSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CaptionLanguageMappings != nil {
+		ok := object.Key("captionLanguageMappings")
+		if err := awsRestjson1_serializeDocument__listOfCmafIngestCaptionLanguageMapping(v.CaptionLanguageMappings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Destination != nil {
 		ok := object.Key("destination")
@@ -12869,6 +12906,21 @@ func awsRestjson1_serializeDocumentCmafIngestGroupSettings(v *types.CmafIngestGr
 	if v.SendDelayMs != nil {
 		ok := object.Key("sendDelayMs")
 		ok.Integer(*v.SendDelayMs)
+	}
+
+	if len(v.TimedMetadataId3Frame) > 0 {
+		ok := object.Key("timedMetadataId3Frame")
+		ok.String(string(v.TimedMetadataId3Frame))
+	}
+
+	if v.TimedMetadataId3Period != nil {
+		ok := object.Key("timedMetadataId3Period")
+		ok.Integer(*v.TimedMetadataId3Period)
+	}
+
+	if len(v.TimedMetadataPassthrough) > 0 {
+		ok := object.Key("timedMetadataPassthrough")
+		ok.String(string(v.TimedMetadataPassthrough))
 	}
 
 	return nil
@@ -15185,6 +15237,11 @@ func awsRestjson1_serializeDocumentInputDeviceConfigurableSettings(v *types.Inpu
 	if len(v.ConfiguredInput) > 0 {
 		ok := object.Key("configuredInput")
 		ok.String(string(v.ConfiguredInput))
+	}
+
+	if v.InputResolution != nil {
+		ok := object.Key("inputResolution")
+		ok.String(*v.InputResolution)
 	}
 
 	if v.LatencyMs != nil {

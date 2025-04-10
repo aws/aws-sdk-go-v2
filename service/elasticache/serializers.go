@@ -5843,6 +5843,23 @@ func awsAwsquery_serializeDocumentReshardingConfigurationList(v []types.Reshardi
 	return nil
 }
 
+func awsAwsquery_serializeDocumentScaleConfig(v *types.ScaleConfig, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ScaleIntervalMinutes != nil {
+		objectKey := object.Key("ScaleIntervalMinutes")
+		objectKey.Integer(*v.ScaleIntervalMinutes)
+	}
+
+	if v.ScalePercentage != nil {
+		objectKey := object.Key("ScalePercentage")
+		objectKey.Integer(*v.ScalePercentage)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentSecurityGroupIdsList(v []string, value query.Value) error {
 	array := value.Array("SecurityGroupId")
 
@@ -7970,6 +7987,13 @@ func awsAwsquery_serializeOpDocumentModifyCacheClusterInput(v *ModifyCacheCluste
 	if v.PreferredMaintenanceWindow != nil {
 		objectKey := object.Key("PreferredMaintenanceWindow")
 		objectKey.String(*v.PreferredMaintenanceWindow)
+	}
+
+	if v.ScaleConfig != nil {
+		objectKey := object.Key("ScaleConfig")
+		if err := awsAwsquery_serializeDocumentScaleConfig(v.ScaleConfig, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.SecurityGroupIds != nil {

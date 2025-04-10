@@ -50,6 +50,26 @@ func (m *validateOpCreateApplication) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDataSetExportTask struct {
+}
+
+func (*validateOpCreateDataSetExportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataSetExportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataSetExportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataSetExportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDataSetImportTask struct {
 }
 
@@ -250,6 +270,26 @@ func (m *validateOpGetDataSetDetails) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataSetExportTask struct {
+}
+
+func (*validateOpGetDataSetExportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataSetExportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataSetExportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataSetExportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDataSetImportTask struct {
 }
 
@@ -385,6 +425,26 @@ func (m *validateOpListBatchJobRestartPoints) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListBatchJobRestartPointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataSetExportHistory struct {
+}
+
+func (*validateOpListDataSetExportHistory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataSetExportHistory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataSetExportHistoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataSetExportHistoryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -618,6 +678,10 @@ func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateApplication{}, middleware.After)
 }
 
+func addOpCreateDataSetExportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataSetExportTask{}, middleware.After)
+}
+
 func addOpCreateDataSetImportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataSetImportTask{}, middleware.After)
 }
@@ -658,6 +722,10 @@ func addOpGetDataSetDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataSetDetails{}, middleware.After)
 }
 
+func addOpGetDataSetExportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataSetExportTask{}, middleware.After)
+}
+
 func addOpGetDataSetImportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataSetImportTask{}, middleware.After)
 }
@@ -684,6 +752,10 @@ func addOpListBatchJobExecutionsValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListBatchJobRestartPointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBatchJobRestartPoints{}, middleware.After)
+}
+
+func addOpListDataSetExportHistoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataSetExportHistory{}, middleware.After)
 }
 
 func addOpListDataSetImportHistoryValidationMiddleware(stack *middleware.Stack) error {
@@ -813,6 +885,60 @@ func validateDataSet(v *types.DataSet) error {
 	} else if v.RecordLength != nil {
 		if err := validateRecordLength(v.RecordLength); err != nil {
 			invalidParams.AddNested("RecordLength", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetExportConfig(v types.DataSetExportConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetExportConfig"}
+	switch uv := v.(type) {
+	case *types.DataSetExportConfigMemberDataSets:
+		if err := validateDataSetExportList(uv.Value); err != nil {
+			invalidParams.AddNested("[dataSets]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetExportItem(v *types.DataSetExportItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetExportItem"}
+	if v.DatasetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
+	}
+	if v.ExternalLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExternalLocation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetExportList(v []types.DataSetExportItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetExportList"}
+	for i := range v {
+		if err := validateDataSetExportItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1207,6 +1333,28 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 	}
 }
 
+func validateOpCreateDataSetExportTaskInput(v *CreateDataSetExportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataSetExportTaskInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.ExportConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportConfig"))
+	} else if v.ExportConfig != nil {
+		if err := validateDataSetExportConfig(v.ExportConfig); err != nil {
+			invalidParams.AddNested("ExportConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDataSetImportTaskInput(v *CreateDataSetImportTaskInput) error {
 	if v == nil {
 		return nil
@@ -1398,6 +1546,24 @@ func validateOpGetDataSetDetailsInput(v *GetDataSetDetailsInput) error {
 	}
 }
 
+func validateOpGetDataSetExportTaskInput(v *GetDataSetExportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataSetExportTaskInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.TaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDataSetImportTaskInput(v *GetDataSetImportTaskInput) error {
 	if v == nil {
 		return nil
@@ -1504,6 +1670,21 @@ func validateOpListBatchJobRestartPointsInput(v *ListBatchJobRestartPointsInput)
 	}
 	if v.ExecutionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataSetExportHistoryInput(v *ListDataSetExportHistoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataSetExportHistoryInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

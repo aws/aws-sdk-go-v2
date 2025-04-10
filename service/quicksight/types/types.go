@@ -1645,6 +1645,9 @@ type AssetBundleResourcePermissions struct {
 // An array of analysis level configurations.
 type AssetOptions struct {
 
+	// A list of visual custom actions for the analysis.
+	CustomActionDefaults *VisualCustomActionDefaults
+
 	// A list of dataset ARNS to exclude from Dashboard Q&A.
 	ExcludedDataSetArns []string
 
@@ -14067,6 +14070,9 @@ type SheetDefinition struct {
 	//   - INTERACTIVE : Creates a sheet for an interactive dashboard.
 	ContentType SheetContentType
 
+	// A list of visual custom actions for the sheet.
+	CustomActionDefaults *VisualCustomActionDefaults
+
 	// A description of the sheet.
 	Description *string
 
@@ -17908,6 +17914,15 @@ type VisualCustomAction struct {
 	noSmithyDocumentSerde
 }
 
+// A list of custom actions applied to visuals in an analysis or sheet.
+type VisualCustomActionDefaults struct {
+
+	// A list of highlight operations available for visuals in an analysis or sheet.
+	HighlightOperation *VisualHighlightOperation
+
+	noSmithyDocumentSerde
+}
+
 // The operation that is defined by the custom action.
 //
 // This is a union type structure. For this structure to be valid, only one of the
@@ -17927,6 +17942,19 @@ type VisualCustomActionOperation struct {
 
 	// The URL operation that opens a link to another webpage.
 	URLOperation *CustomActionURLOperation
+
+	noSmithyDocumentSerde
+}
+
+// Defines what initiates a highlight operation on a visual, such as a click or
+// hover.
+type VisualHighlightOperation struct {
+
+	// Specifies whether a highlight operation is initiated by a click or hover, or
+	// whether it's disabled.
+	//
+	// This member is required.
+	Trigger VisualHighlightTrigger
 
 	noSmithyDocumentSerde
 }

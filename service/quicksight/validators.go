@@ -5205,6 +5205,11 @@ func validateAnalysisDefinition(v *types.AnalysisDefinition) error {
 			invalidParams.AddNested("AnalysisDefaults", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Options != nil {
+		if err := validateAssetOptions(v.Options); err != nil {
+			invalidParams.AddNested("Options", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.StaticFiles != nil {
 		if err := validateStaticFileList(v.StaticFiles); err != nil {
 			invalidParams.AddNested("StaticFiles", err.(smithy.InvalidParamsError))
@@ -6696,6 +6701,23 @@ func validateAssetBundleResourcePermissions(v *types.AssetBundleResourcePermissi
 	}
 	if v.Actions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetOptions(v *types.AssetOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetOptions"}
+	if v.CustomActionDefaults != nil {
+		if err := validateVisualCustomActionDefaults(v.CustomActionDefaults); err != nil {
+			invalidParams.AddNested("CustomActionDefaults", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8905,6 +8927,11 @@ func validateDashboardVersionDefinition(v *types.DashboardVersionDefinition) err
 	if v.AnalysisDefaults != nil {
 		if err := validateAnalysisDefaults(v.AnalysisDefaults); err != nil {
 			invalidParams.AddNested("AnalysisDefaults", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Options != nil {
+		if err := validateAssetOptions(v.Options); err != nil {
+			invalidParams.AddNested("Options", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.StaticFiles != nil {
@@ -17610,6 +17637,11 @@ func validateSheetDefinition(v *types.SheetDefinition) error {
 			invalidParams.AddNested("SheetControlLayouts", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CustomActionDefaults != nil {
+		if err := validateVisualCustomActionDefaults(v.CustomActionDefaults); err != nil {
+			invalidParams.AddNested("CustomActionDefaults", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -19056,6 +19088,11 @@ func validateTemplateVersionDefinition(v *types.TemplateVersionDefinition) error
 	if v.AnalysisDefaults != nil {
 		if err := validateAnalysisDefaults(v.AnalysisDefaults); err != nil {
 			invalidParams.AddNested("AnalysisDefaults", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Options != nil {
+		if err := validateAssetOptions(v.Options); err != nil {
+			invalidParams.AddNested("Options", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.StaticFiles != nil {
@@ -20570,6 +20607,23 @@ func validateVisualCustomAction(v *types.VisualCustomAction) error {
 	}
 }
 
+func validateVisualCustomActionDefaults(v *types.VisualCustomActionDefaults) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VisualCustomActionDefaults"}
+	if v.HighlightOperation != nil {
+		if err := validateVisualHighlightOperation(v.HighlightOperation); err != nil {
+			invalidParams.AddNested("HighlightOperation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVisualCustomActionList(v []types.VisualCustomAction) error {
 	if v == nil {
 		return nil
@@ -20628,6 +20682,21 @@ func validateVisualCustomActionOperationList(v []types.VisualCustomActionOperati
 		if err := validateVisualCustomActionOperation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVisualHighlightOperation(v *types.VisualHighlightOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VisualHighlightOperation"}
+	if len(v.Trigger) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Trigger"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

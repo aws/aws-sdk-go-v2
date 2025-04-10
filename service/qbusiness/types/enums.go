@@ -516,6 +516,26 @@ func (GroupStatus) Values() []GroupStatus {
 	}
 }
 
+type HallucinationReductionControl string
+
+// Enum values for HallucinationReductionControl
+const (
+	HallucinationReductionControlEnabled  HallucinationReductionControl = "ENABLED"
+	HallucinationReductionControlDisabled HallucinationReductionControl = "DISABLED"
+)
+
+// Values returns all known values for HallucinationReductionControl. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HallucinationReductionControl) Values() []HallucinationReductionControl {
+	return []HallucinationReductionControl{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type IdentityType string
 
 // Enum values for IdentityType
@@ -1096,6 +1116,25 @@ func (SubscriptionType) Values() []SubscriptionType {
 	return []SubscriptionType{
 		"Q_LITE",
 		"Q_BUSINESS",
+	}
+}
+
+type SystemMessageType string
+
+// Enum values for SystemMessageType
+const (
+	SystemMessageTypeResponse         SystemMessageType = "RESPONSE"
+	SystemMessageTypeGroundedResponse SystemMessageType = "GROUNDED_RESPONSE"
+)
+
+// Values returns all known values for SystemMessageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SystemMessageType) Values() []SystemMessageType {
+	return []SystemMessageType{
+		"RESPONSE",
+		"GROUNDED_RESPONSE",
 	}
 }
 

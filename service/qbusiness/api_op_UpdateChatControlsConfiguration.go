@@ -45,6 +45,9 @@ type UpdateChatControlsConfigurationInput struct {
 	// The configuration details for CREATOR_MODE .
 	CreatorModeConfiguration *types.CreatorModeConfiguration
 
+	//  The hallucination reduction settings for your application.
+	HallucinationReductionConfiguration *types.HallucinationReductionConfiguration
+
 	//  The chat response orchestration settings for your application.
 	OrchestrationConfiguration *types.OrchestrationConfiguration
 

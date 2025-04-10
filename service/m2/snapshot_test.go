@@ -86,6 +86,18 @@ func TestCheckSnapshot_CreateApplication(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDataSetExportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataSetExportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataSetExportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDataSetImportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataSetImportTask(context.Background(), nil, func(o *Options) {
@@ -206,6 +218,18 @@ func TestCheckSnapshot_GetDataSetDetails(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDataSetExportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataSetExportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataSetExportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDataSetImportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataSetImportTask(context.Background(), nil, func(o *Options) {
@@ -307,6 +331,18 @@ func TestCheckSnapshot_ListBatchJobRestartPoints(t *testing.T) {
 	_, err := svc.ListBatchJobRestartPoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListBatchJobRestartPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataSetExportHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataSetExportHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataSetExportHistory")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -493,6 +529,18 @@ func TestUpdateSnapshot_CreateApplication(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateDataSetExportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataSetExportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataSetExportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDataSetImportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataSetImportTask(context.Background(), nil, func(o *Options) {
@@ -613,6 +661,18 @@ func TestUpdateSnapshot_GetDataSetDetails(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDataSetExportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataSetExportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataSetExportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDataSetImportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataSetImportTask(context.Background(), nil, func(o *Options) {
@@ -714,6 +774,18 @@ func TestUpdateSnapshot_ListBatchJobRestartPoints(t *testing.T) {
 	_, err := svc.ListBatchJobRestartPoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBatchJobRestartPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataSetExportHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataSetExportHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataSetExportHistory")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

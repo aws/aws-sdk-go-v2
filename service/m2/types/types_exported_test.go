@@ -89,6 +89,28 @@ var _ *types.VsamDetailAttributes
 var _ *types.PsDetailAttributes
 var _ *types.GdgDetailAttributes
 
+func ExampleDataSetExportConfig_outputUsage() {
+	var union types.DataSetExportConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DataSetExportConfigMemberDataSets:
+		_ = v.Value // Value is []types.DataSetExportItem
+
+	case *types.DataSetExportConfigMemberS3Location:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ []types.DataSetExportItem
+
 func ExampleDataSetImportConfig_outputUsage() {
 	var union types.DataSetImportConfig
 	// type switches can be used to check the union value

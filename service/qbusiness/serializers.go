@@ -6365,6 +6365,13 @@ func awsRestjson1_serializeOpDocumentUpdateChatControlsConfigurationInput(v *Upd
 		}
 	}
 
+	if v.HallucinationReductionConfiguration != nil {
+		ok := object.Key("hallucinationReductionConfiguration")
+		if err := awsRestjson1_serializeDocumentHallucinationReductionConfiguration(v.HallucinationReductionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OrchestrationConfiguration != nil {
 		ok := object.Key("orchestrationConfiguration")
 		if err := awsRestjson1_serializeDocumentOrchestrationConfiguration(v.OrchestrationConfiguration, ok); err != nil {
@@ -8741,6 +8748,18 @@ func awsRestjson1_serializeDocumentGroupMembers(v *types.GroupMembers, value smi
 		if err := awsRestjson1_serializeDocumentS3(v.S3PathForGroupMembers, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHallucinationReductionConfiguration(v *types.HallucinationReductionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.HallucinationReductionControl) > 0 {
+		ok := object.Key("hallucinationReductionControl")
+		ok.String(string(v.HallucinationReductionControl))
 	}
 
 	return nil

@@ -90,6 +90,8 @@ const (
 	MetricTypeCassandraReadCapacityUtilization                                   MetricType = "CassandraReadCapacityUtilization"
 	MetricTypeCassandraWriteCapacityUtilization                                  MetricType = "CassandraWriteCapacityUtilization"
 	MetricTypeKafkaBrokerStorageUtilization                                      MetricType = "KafkaBrokerStorageUtilization"
+	MetricTypeElastiCacheEngineCPUUtilization                                    MetricType = "ElastiCacheEngineCPUUtilization"
+	MetricTypeElastiCacheDatabaseMemoryUsagePercentage                           MetricType = "ElastiCacheDatabaseMemoryUsagePercentage"
 	MetricTypeElastiCachePrimaryEngineCPUUtilization                             MetricType = "ElastiCachePrimaryEngineCPUUtilization"
 	MetricTypeElastiCacheReplicaEngineCPUUtilization                             MetricType = "ElastiCacheReplicaEngineCPUUtilization"
 	MetricTypeElastiCacheDatabaseMemoryUsageCountedForEvictPercentage            MetricType = "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"
@@ -125,6 +127,8 @@ func (MetricType) Values() []MetricType {
 		"CassandraReadCapacityUtilization",
 		"CassandraWriteCapacityUtilization",
 		"KafkaBrokerStorageUtilization",
+		"ElastiCacheEngineCPUUtilization",
+		"ElastiCacheDatabaseMemoryUsagePercentage",
 		"ElastiCachePrimaryEngineCPUUtilization",
 		"ElastiCacheReplicaEngineCPUUtilization",
 		"ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage",
@@ -219,6 +223,7 @@ const (
 	ScalableDimensionCassandraTableReadCapacityUnits                  ScalableDimension = "cassandra:table:ReadCapacityUnits"
 	ScalableDimensionCassandraTableWriteCapacityUnits                 ScalableDimension = "cassandra:table:WriteCapacityUnits"
 	ScalableDimensionKafkaBrokerStorageVolumeSize                     ScalableDimension = "kafka:broker-storage:VolumeSize"
+	ScalableDimensionElastiCacheCacheClusterNodes                     ScalableDimension = "elasticache:cache-cluster:Nodes"
 	ScalableDimensionElastiCacheReplicationGroupNodeGroups            ScalableDimension = "elasticache:replication-group:NodeGroups"
 	ScalableDimensionElastiCacheReplicationGroupReplicas              ScalableDimension = "elasticache:replication-group:Replicas"
 	ScalableDimensionNeptuneClusterReadReplicaCount                   ScalableDimension = "neptune:cluster:ReadReplicaCount"
@@ -250,6 +255,7 @@ func (ScalableDimension) Values() []ScalableDimension {
 		"cassandra:table:ReadCapacityUnits",
 		"cassandra:table:WriteCapacityUnits",
 		"kafka:broker-storage:VolumeSize",
+		"elasticache:cache-cluster:Nodes",
 		"elasticache:replication-group:NodeGroups",
 		"elasticache:replication-group:Replicas",
 		"neptune:cluster:ReadReplicaCount",

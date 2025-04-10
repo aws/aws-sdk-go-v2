@@ -1533,6 +1533,26 @@ type ClusterNetworkSettingsUpdateRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Add an array item for each language. Follow the order of the caption
+// descriptions. For example, if the first caption description is for German, then
+// the first array item must be for German, and its caption channel must be set to
+// 1. The second array item must be 2, and so on.
+type CmafIngestCaptionLanguageMapping struct {
+
+	// A number for the channel for this caption, 1 to 4.
+	//
+	// This member is required.
+	CaptionChannel *int32
+
+	// Language code for the language of the caption in this channel. For example,
+	// ger/deu. See http://www.loc.gov/standards/iso639-2
+	//
+	// This member is required.
+	LanguageCode *string
+
+	noSmithyDocumentSerde
+}
+
 // Cmaf Ingest Group Settings
 type CmafIngestGroupSettings struct {
 
@@ -1540,6 +1560,10 @@ type CmafIngestGroupSettings struct {
 	//
 	// This member is required.
 	Destination *OutputLocationRef
+
+	// An array that identifies the languages in the four caption channels in the
+	// embedded captions.
+	CaptionLanguageMappings []CmafIngestCaptionLanguageMapping
 
 	// Set to ENABLED to enable ID3 metadata insertion. To include metadata, you
 	// configure other parameters in the output group, or you add an ID3 action to the
@@ -1597,6 +1621,17 @@ type CmafIngestGroupSettings struct {
 
 	// Number of milliseconds to delay the output from the second pipeline.
 	SendDelayMs *int32
+
+	// Set to none if you don't want to insert a timecode in the output. Otherwise
+	// choose the frame type for the timecode.
+	TimedMetadataId3Frame CmafTimedMetadataId3Frame
+
+	// If you set up to insert a timecode in the output, specify the frequency for the
+	// frame, in seconds.
+	TimedMetadataId3Period *int32
+
+	// Set to enabled to pass through ID3 metadata from the input sources.
+	TimedMetadataPassthrough CmafTimedMetadataPassthrough
 
 	noSmithyDocumentSerde
 }
@@ -3954,6 +3989,12 @@ type InputDeviceConfigurableSettings struct {
 	// you want to use a specific source, specify the source.
 	ConfiguredInput InputDeviceConfiguredInput
 
+	// Choose the resolution of the Link device's source (HD or UHD). Make sure the
+	// resolution matches the current source from the device. This value determines
+	// MediaLive resource allocation and billing for this input. Only UHD devices can
+	// specify this parameter.
+	InputResolution *string
+
 	// The Link device's buffer size (latency) in milliseconds (ms).
 	LatencyMs *int32
 
@@ -4193,6 +4234,10 @@ type InputDeviceUhdSettings struct {
 
 	// The height of the video source, in pixels.
 	Height *int32
+
+	// The resolution of the Link device's source (HD or UHD). This value determines
+	// MediaLive resource allocation and billing for this input.
+	InputResolution *string
 
 	// The Link device's buffer size (latency) in milliseconds (ms). You can specify
 	// this value.

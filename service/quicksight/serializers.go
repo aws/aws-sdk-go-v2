@@ -22627,6 +22627,13 @@ func awsRestjson1_serializeDocumentAssetOptions(v *types.AssetOptions, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomActionDefaults != nil {
+		ok := object.Key("CustomActionDefaults")
+		if err := awsRestjson1_serializeDocumentVisualCustomActionDefaults(v.CustomActionDefaults, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ExcludedDataSetArns != nil {
 		ok := object.Key("ExcludedDataSetArns")
 		if err := awsRestjson1_serializeDocumentDataSetArnsList(v.ExcludedDataSetArns, ok); err != nil {
@@ -40503,6 +40510,13 @@ func awsRestjson1_serializeDocumentSheetDefinition(v *types.SheetDefinition, val
 		ok.String(string(v.ContentType))
 	}
 
+	if v.CustomActionDefaults != nil {
+		ok := object.Key("CustomActionDefaults")
+		if err := awsRestjson1_serializeDocumentVisualCustomActionDefaults(v.CustomActionDefaults, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -45597,6 +45611,20 @@ func awsRestjson1_serializeDocumentVisualCustomAction(v *types.VisualCustomActio
 	return nil
 }
 
+func awsRestjson1_serializeDocumentVisualCustomActionDefaults(v *types.VisualCustomActionDefaults, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HighlightOperation != nil {
+		ok := object.Key("highlightOperation")
+		if err := awsRestjson1_serializeDocumentVisualHighlightOperation(v.HighlightOperation, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentVisualCustomActionList(v []types.VisualCustomAction, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -45655,6 +45683,18 @@ func awsRestjson1_serializeDocumentVisualCustomActionOperationList(v []types.Vis
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVisualHighlightOperation(v *types.VisualHighlightOperation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Trigger) > 0 {
+		ok := object.Key("Trigger")
+		ok.String(string(v.Trigger))
+	}
+
 	return nil
 }
 

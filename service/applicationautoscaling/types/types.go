@@ -559,6 +559,10 @@ type ScalableTarget struct {
 	//   replication-group and the unique identifier is the replication group name.
 	//   Example: replication-group/mycluster .
 	//
+	//   - Amazon ElastiCache cache cluster - The resource type is cache-cluster and
+	//   the unique identifier is the cache cluster name. Example:
+	//   cache-cluster/mycluster .
+	//
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
 	//
@@ -635,6 +639,9 @@ type ScalableTarget struct {
 	//
 	//   - kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	//   brokers in an Amazon MSK cluster.
+	//
+	//   - elasticache:cache-cluster:Nodes - The number of nodes for an Amazon
+	//   ElastiCache cache cluster.
 	//
 	//   - elasticache:replication-group:NodeGroups - The number of node groups for an
 	//   Amazon ElastiCache replication group.
@@ -780,6 +787,10 @@ type ScalingActivity struct {
 	//   replication-group and the unique identifier is the replication group name.
 	//   Example: replication-group/mycluster .
 	//
+	//   - Amazon ElastiCache cache cluster - The resource type is cache-cluster and
+	//   the unique identifier is the cache cluster name. Example:
+	//   cache-cluster/mycluster .
+	//
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
 	//
@@ -850,6 +861,9 @@ type ScalingActivity struct {
 	//
 	//   - kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	//   brokers in an Amazon MSK cluster.
+	//
+	//   - elasticache:cache-cluster:Nodes - The number of nodes for an Amazon
+	//   ElastiCache cache cluster.
 	//
 	//   - elasticache:replication-group:NodeGroups - The number of node groups for an
 	//   Amazon ElastiCache replication group.
@@ -938,6 +952,8 @@ type ScalingPolicy struct {
 	// StepScaling —Not supported for DynamoDB, Amazon Comprehend, Lambda, Amazon
 	// Keyspaces, Amazon MSK, Amazon ElastiCache, or Neptune.
 	//
+	// PredictiveScaling —Only supported for Amazon ECS
+	//
 	// This member is required.
 	PolicyType PolicyType
 
@@ -1001,6 +1017,10 @@ type ScalingPolicy struct {
 	//   - Amazon ElastiCache replication group - The resource type is
 	//   replication-group and the unique identifier is the replication group name.
 	//   Example: replication-group/mycluster .
+	//
+	//   - Amazon ElastiCache cache cluster - The resource type is cache-cluster and
+	//   the unique identifier is the cache cluster name. Example:
+	//   cache-cluster/mycluster .
 	//
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
@@ -1072,6 +1092,9 @@ type ScalingPolicy struct {
 	//
 	//   - kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	//   brokers in an Amazon MSK cluster.
+	//
+	//   - elasticache:cache-cluster:Nodes - The number of nodes for an Amazon
+	//   ElastiCache cache cluster.
 	//
 	//   - elasticache:replication-group:NodeGroups - The number of node groups for an
 	//   Amazon ElastiCache replication group.
@@ -1183,6 +1206,10 @@ type ScheduledAction struct {
 	//   - Amazon ElastiCache replication group - The resource type is
 	//   replication-group and the unique identifier is the replication group name.
 	//   Example: replication-group/mycluster .
+	//
+	//   - Amazon ElastiCache cache cluster - The resource type is cache-cluster and
+	//   the unique identifier is the cache cluster name. Example:
+	//   cache-cluster/mycluster .
 	//
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
@@ -1301,6 +1328,9 @@ type ScheduledAction struct {
 	//
 	//   - kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	//   brokers in an Amazon MSK cluster.
+	//
+	//   - elasticache:cache-cluster:Nodes - The number of nodes for an Amazon
+	//   ElastiCache cache cluster.
 	//
 	//   - elasticache:replication-group:NodeGroups - The number of node groups for an
 	//   Amazon ElastiCache replication group.

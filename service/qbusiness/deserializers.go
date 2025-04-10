@@ -4460,6 +4460,11 @@ func awsRestjson1_deserializeOpDocumentGetChatControlsConfigurationOutput(v **Ge
 				return err
 			}
 
+		case "hallucinationReductionConfiguration":
+			if err := awsRestjson1_deserializeDocumentHallucinationReductionConfiguration(&sv.HallucinationReductionConfiguration, value); err != nil {
+				return err
+			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11866,6 +11871,9 @@ func awsRestjson1_deserializeOpErrorUpdateUser(response *smithyhttp.Response, me
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -13350,6 +13358,15 @@ func awsRestjson1_deserializeDocumentTextOutputEvent(v **types.TextOutputEvent, 
 					return fmt.Errorf("expected MessageId to be of type string, got %T instead", value)
 				}
 				sv.SystemMessageId = ptr.String(jtv)
+			}
+
+		case "systemMessageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SystemMessageType to be of type string, got %T instead", value)
+				}
+				sv.SystemMessageType = types.SystemMessageType(jtv)
 			}
 
 		case "userMessageId":
@@ -17514,6 +17531,46 @@ func awsRestjson1_deserializeDocumentGroupSummaryList(v *[]types.GroupSummary, v
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHallucinationReductionConfiguration(v **types.HallucinationReductionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HallucinationReductionConfiguration
+	if *v == nil {
+		sv = &types.HallucinationReductionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "hallucinationReductionControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HallucinationReductionControl to be of type string, got %T instead", value)
+				}
+				sv.HallucinationReductionControl = types.HallucinationReductionControl(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

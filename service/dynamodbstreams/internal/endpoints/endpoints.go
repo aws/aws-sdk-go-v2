@@ -410,19 +410,30 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname:          "streams.dynamodb-fips.{region}.cloud.adc-e.uk",
-				Protocols:         []string{"https"},
+				Protocols:         []string{"http", "https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "dynamodb",
+				},
 			},
 			{
 				Variant: 0,
 			}: {
 				Hostname:          "streams.dynamodb.{region}.cloud.adc-e.uk",
-				Protocols:         []string{"https"},
+				Protocols:         []string{"http", "https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "dynamodb",
+				},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsIsoE,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "eu-isoe-west-1",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso-f",

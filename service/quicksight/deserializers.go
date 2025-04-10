@@ -49009,6 +49009,11 @@ func awsRestjson1_deserializeDocumentAssetOptions(v **types.AssetOptions, value 
 
 	for key, value := range shape {
 		switch key {
+		case "CustomActionDefaults":
+			if err := awsRestjson1_deserializeDocumentVisualCustomActionDefaults(&sv.CustomActionDefaults, value); err != nil {
+				return err
+			}
+
 		case "ExcludedDataSetArns":
 			if err := awsRestjson1_deserializeDocumentDataSetArnsList(&sv.ExcludedDataSetArns, value); err != nil {
 				return err
@@ -89397,6 +89402,11 @@ func awsRestjson1_deserializeDocumentSheetDefinition(v **types.SheetDefinition, 
 				sv.ContentType = types.SheetContentType(jtv)
 			}
 
+		case "CustomActionDefaults":
+			if err := awsRestjson1_deserializeDocumentVisualCustomActionDefaults(&sv.CustomActionDefaults, value); err != nil {
+				return err
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -102099,6 +102109,42 @@ func awsRestjson1_deserializeDocumentVisualCustomAction(v **types.VisualCustomAc
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentVisualCustomActionDefaults(v **types.VisualCustomActionDefaults, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VisualCustomActionDefaults
+	if *v == nil {
+		sv = &types.VisualCustomActionDefaults{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "highlightOperation":
+			if err := awsRestjson1_deserializeDocumentVisualHighlightOperation(&sv.HighlightOperation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentVisualCustomActionList(v *[]types.VisualCustomAction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -102215,6 +102261,46 @@ func awsRestjson1_deserializeDocumentVisualCustomActionOperationList(v *[]types.
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVisualHighlightOperation(v **types.VisualHighlightOperation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VisualHighlightOperation
+	if *v == nil {
+		sv = &types.VisualHighlightOperation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Trigger":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VisualHighlightTrigger to be of type string, got %T instead", value)
+				}
+				sv.Trigger = types.VisualHighlightTrigger(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

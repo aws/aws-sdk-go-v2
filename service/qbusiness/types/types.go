@@ -1723,6 +1723,20 @@ type GroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration information required to setup hallucination reduction. For more
+// information, see hallucination reduction.
+//
+// The hallucination reduction feature won't work if chat orchestration controls
+// are enabled for your application.
+type HallucinationReductionConfiguration struct {
+
+	// Controls whether hallucination reduction has been enabled or disabled for your
+	// application. The default status is DISABLED .
+	HallucinationReductionControl HallucinationReductionControl
+
+	noSmithyDocumentSerde
+}
+
 // Provides the configuration information for invoking a Lambda function in Lambda
 // to alter document metadata and content when ingesting documents into Amazon Q
 // Business.
@@ -2871,6 +2885,17 @@ type TextOutputEvent struct {
 
 	// The identifier of an AI-generated message in a TextOutputEvent .
 	SystemMessageId *string
+
+	// The type of AI-generated message in a TextOutputEvent . Amazon Q Business
+	// currently supports two types of messages:
+	//
+	//   - RESPONSE - The Amazon Q Business system response.
+	//
+	//   - GROUNDED_RESPONSE - The corrected, hallucination-reduced, response returned
+	//   by Amazon Q Business. Available only if hallucination reduction is supported and
+	//   configured for the application and detected in the end user chat query by Amazon
+	//   Q Business.
+	SystemMessageType SystemMessageType
 
 	// The identifier of an end user message in a TextOutputEvent .
 	UserMessageId *string

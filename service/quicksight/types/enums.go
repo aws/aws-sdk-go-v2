@@ -5582,6 +5582,27 @@ func (VisualCustomActionTrigger) Values() []VisualCustomActionTrigger {
 	}
 }
 
+type VisualHighlightTrigger string
+
+// Enum values for VisualHighlightTrigger
+const (
+	VisualHighlightTriggerDataPointClick VisualHighlightTrigger = "DATA_POINT_CLICK"
+	VisualHighlightTriggerDataPointHover VisualHighlightTrigger = "DATA_POINT_HOVER"
+	VisualHighlightTriggerNone           VisualHighlightTrigger = "NONE"
+)
+
+// Values returns all known values for VisualHighlightTrigger. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VisualHighlightTrigger) Values() []VisualHighlightTrigger {
+	return []VisualHighlightTrigger{
+		"DATA_POINT_CLICK",
+		"DATA_POINT_HOVER",
+		"NONE",
+	}
+}
+
 type VisualRole string
 
 // Enum values for VisualRole

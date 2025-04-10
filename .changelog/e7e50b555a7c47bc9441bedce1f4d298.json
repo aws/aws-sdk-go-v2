@@ -1,0 +1,8 @@
+{
+    "id": "e7e50b55-5a7c-47bc-9441-bedce1f4d298",
+    "type": "feature",
+    "description": "Introduce three new APIs: CreateDataSetExportTask, GetDataSetExportTask and ListDataSetExportHistory. Add support for batch restart for Blu Age applications.",
+    "modules": [
+        "service/m2"
+    ]
+}

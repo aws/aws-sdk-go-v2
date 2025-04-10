@@ -25243,6 +25243,40 @@ func awsRestjson1_deserializeDocument__listOfCloudWatchAlarmTemplateSummary(v *[
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfCmafIngestCaptionLanguageMapping(v *[]types.CmafIngestCaptionLanguageMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CmafIngestCaptionLanguageMapping
+	if *v == nil {
+		cv = []types.CmafIngestCaptionLanguageMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CmafIngestCaptionLanguageMapping
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCmafIngestCaptionLanguageMapping(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfColorCorrection(v *[]types.ColorCorrection, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31175,6 +31209,59 @@ func awsRestjson1_deserializeDocumentClusterNetworkSettings(v **types.ClusterNet
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCmafIngestCaptionLanguageMapping(v **types.CmafIngestCaptionLanguageMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CmafIngestCaptionLanguageMapping
+	if *v == nil {
+		sv = &types.CmafIngestCaptionLanguageMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "captionChannel":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max4 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CaptionChannel = ptr.Int32(int32(i64))
+			}
+
+		case "languageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin3Max3 to be of type string, got %T instead", value)
+				}
+				sv.LanguageCode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCmafIngestGroupSettings(v **types.CmafIngestGroupSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31197,6 +31284,11 @@ func awsRestjson1_deserializeDocumentCmafIngestGroupSettings(v **types.CmafInges
 
 	for key, value := range shape {
 		switch key {
+		case "captionLanguageMappings":
+			if err := awsRestjson1_deserializeDocument__listOfCmafIngestCaptionLanguageMapping(&sv.CaptionLanguageMappings, value); err != nil {
+				return err
+			}
+
 		case "destination":
 			if err := awsRestjson1_deserializeDocumentOutputLocationRef(&sv.Destination, value); err != nil {
 				return err
@@ -31307,6 +31399,37 @@ func awsRestjson1_deserializeDocumentCmafIngestGroupSettings(v **types.CmafInges
 					return err
 				}
 				sv.SendDelayMs = ptr.Int32(int32(i64))
+			}
+
+		case "timedMetadataId3Frame":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafTimedMetadataId3Frame to be of type string, got %T instead", value)
+				}
+				sv.TimedMetadataId3Frame = types.CmafTimedMetadataId3Frame(jtv)
+			}
+
+		case "timedMetadataId3Period":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max10000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimedMetadataId3Period = ptr.Int32(int32(i64))
+			}
+
+		case "timedMetadataPassthrough":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafTimedMetadataPassthrough to be of type string, got %T instead", value)
+				}
+				sv.TimedMetadataPassthrough = types.CmafTimedMetadataPassthrough(jtv)
 			}
 
 		default:
@@ -38153,6 +38276,15 @@ func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDevic
 					return err
 				}
 				sv.Height = ptr.Int32(int32(i64))
+			}
+
+		case "inputResolution":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.InputResolution = ptr.String(jtv)
 			}
 
 		case "latencyMs":

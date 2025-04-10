@@ -130,8 +130,8 @@ type ModifyCacheClusterInput struct {
 	// "Default".
 	CacheSecurityGroupNames []string
 
-	// Modifies the engine listed in a cluster message. The options are redis,
-	// memcached or valkey.
+	// The engine type used by the cache cluster. The options are valkey, memcached or
+	// redis.
 	Engine *string
 
 	// The upgraded version of the cache engine to be run on the cache nodes.
@@ -295,6 +295,10 @@ type ModifyCacheClusterInput struct {
 	//
 	// Example: sun:23:00-mon:01:30
 	PreferredMaintenanceWindow *string
+
+	// Configures horizontal or vertical scaling for Memcached clusters, specifying
+	// the scaling percentage and interval.
+	ScaleConfig *types.ScaleConfig
 
 	// Specifies the VPC Security Groups associated with the cluster.
 	//

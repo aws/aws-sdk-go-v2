@@ -319,8 +319,19 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:    partitionRegexp.AwsIsoE,
-		IsRegionalized: true,
+		RegionRegex:       partitionRegexp.AwsIsoE,
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-iso-e-global",
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "aws-iso-e-global",
+			}: endpoints.Endpoint{
+				Hostname: "route53.cloud.adc-e.uk",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-isoe-west-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-iso-f",

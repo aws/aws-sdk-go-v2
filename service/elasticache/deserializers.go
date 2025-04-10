@@ -20832,6 +20832,12 @@ func awsAwsquery_deserializeDocumentPendingModifiedValues(v **types.PendingModif
 				sv.NumCacheNodes = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("ScaleConfig", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentScaleConfig(&sv.ScaleConfig, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("TransitEncryptionEnabled", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -22788,6 +22794,76 @@ func awsAwsquery_deserializeDocumentReshardingStatus(v **types.ReshardingStatus,
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentSlotMigration(&sv.SlotMigration, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentScaleConfig(v **types.ScaleConfig, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ScaleConfig
+	if *v == nil {
+		sv = &types.ScaleConfig{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ScaleIntervalMinutes", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ScaleIntervalMinutes = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("ScalePercentage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ScalePercentage = ptr.Int32(int32(i64))
 			}
 
 		default:

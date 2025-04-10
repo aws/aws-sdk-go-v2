@@ -55,6 +55,9 @@ type GetChatControlsConfigurationOutput struct {
 	// The configuration details for CREATOR_MODE .
 	CreatorModeConfiguration *types.AppliedCreatorModeConfiguration
 
+	//  The hallucination reduction settings for your application.
+	HallucinationReductionConfiguration *types.HallucinationReductionConfiguration
+
 	// If the maxResults response was incomplete because there is more data to
 	// retrieve, Amazon Q Business returns a pagination token in the response. You can
 	// use this pagination token to retrieve the next set of Amazon Q Business chat

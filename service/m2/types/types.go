@@ -324,6 +324,105 @@ type DatasetDetailOrgAttributesMemberVsam struct {
 
 func (*DatasetDetailOrgAttributesMemberVsam) isDatasetDetailOrgAttributes() {}
 
+// Identifies one or more data sets you want to import with the CreateDataSetExportTask operation.
+//
+// The following types satisfy this interface:
+//
+//	DataSetExportConfigMemberDataSets
+//	DataSetExportConfigMemberS3Location
+type DataSetExportConfig interface {
+	isDataSetExportConfig()
+}
+
+// The data sets.
+type DataSetExportConfigMemberDataSets struct {
+	Value []DataSetExportItem
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSetExportConfigMemberDataSets) isDataSetExportConfig() {}
+
+// The Amazon S3 location of the data sets.
+type DataSetExportConfigMemberS3Location struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSetExportConfigMemberS3Location) isDataSetExportConfig() {}
+
+// Identifies a specific data set to export from an external location.
+type DataSetExportItem struct {
+
+	// The data set.
+	//
+	// This member is required.
+	DatasetName *string
+
+	// The location of the data set.
+	//
+	// This member is required.
+	ExternalLocation ExternalLocation
+
+	noSmithyDocumentSerde
+}
+
+// Represents a summary of data set exports.
+type DataSetExportSummary struct {
+
+	// The number of data set exports that have failed.
+	//
+	// This member is required.
+	Failed int32
+
+	// The number of data set exports that are in progress.
+	//
+	// This member is required.
+	InProgress int32
+
+	// The number of data set exports that are pending.
+	//
+	// This member is required.
+	Pending int32
+
+	// The number of data set exports that have succeeded.
+	//
+	// This member is required.
+	Succeeded int32
+
+	// The total number of data set exports.
+	//
+	// This member is required.
+	Total int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a data set export task.
+type DataSetExportTask struct {
+
+	// The status of the data set export task.
+	//
+	// This member is required.
+	Status DataSetTaskLifecycle
+
+	// A summary of the data set export task.
+	//
+	// This member is required.
+	Summary *DataSetExportSummary
+
+	// The identifier of the data set export task.
+	//
+	// This member is required.
+	TaskId *string
+
+	// If dataset exports failed, the failure reason will show here.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
 // Identifies one or more data sets you want to import with the CreateDataSetImportTask operation.
 //
 // The following types satisfy this interface:
@@ -814,6 +913,18 @@ type JobStep struct {
 	// The number of a procedure step.
 	ProcStepNumber int32
 
+	// A registered step-level checkpoint identifier that can be used for restarting
+	// an Amazon Web Services Blu Age application batch job.
+	StepCheckpoint *int32
+
+	// The step-level checkpoint status for an Amazon Web Services Blu Age application
+	// batch job.
+	StepCheckpointStatus *string
+
+	// The step-level checkpoint status for an Amazon Web Services Blu Age application
+	// batch job.
+	StepCheckpointTime *time.Time
+
 	// The condition code of a step.
 	StepCondCode *string
 
@@ -839,6 +950,14 @@ type JobStepRestartMarker struct {
 
 	// The procedure step name that a batch job was restarted from.
 	FromProcStep *string
+
+	// The step-level checkpoint timestamp (creation or last modification) for an
+	// Amazon Web Services Blu Age application batch job.
+	Skip *bool
+
+	// Skip selected step and issue a restart from immediate successor step for an
+	// Amazon Web Services Blu Age application batch job.
+	StepCheckpoint *int32
 
 	// The procedure step name that a batch job was restarted to.
 	ToProcStep *string
@@ -1171,6 +1290,7 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isBatchJobDefinition()         {}
 func (*UnknownUnionMember) isBatchJobIdentifier()         {}
 func (*UnknownUnionMember) isDatasetDetailOrgAttributes() {}
+func (*UnknownUnionMember) isDataSetExportConfig()        {}
 func (*UnknownUnionMember) isDataSetImportConfig()        {}
 func (*UnknownUnionMember) isDatasetOrgAttributes()       {}
 func (*UnknownUnionMember) isDefinition()                 {}

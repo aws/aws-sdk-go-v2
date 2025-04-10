@@ -1359,6 +1359,9 @@ type PendingModifiedValues struct {
 	// running Memcached, this value must be between 1 and 40.
 	NumCacheNodes *int32
 
+	// The scaling configuration changes that are pending for the Memcached cluster.
+	ScaleConfig *ScaleConfig
+
 	// A flag that enables in-transit encryption when set to true.
 	TransitEncryptionEnabled *bool
 
@@ -1927,6 +1930,21 @@ type ReshardingStatus struct {
 
 	// Represents the progress of an online resharding operation.
 	SlotMigration *SlotMigration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for horizontal or vertical scaling operations on
+// Memcached clusters.
+type ScaleConfig struct {
+
+	// The time interval in seconds between scaling operations when performing gradual
+	// scaling for a Memcached cluster.
+	ScaleIntervalMinutes *int32
+
+	// The percentage by which to scale the Memcached cluster, either horizontally by
+	// adding nodes or vertically by increasing resources.
+	ScalePercentage *int32
 
 	noSmithyDocumentSerde
 }

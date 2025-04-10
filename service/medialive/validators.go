@@ -2385,6 +2385,23 @@ func validate__listOfCaptionSelector(v []types.CaptionSelector) error {
 	}
 }
 
+func validate__listOfCmafIngestCaptionLanguageMapping(v []types.CmafIngestCaptionLanguageMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfCmafIngestCaptionLanguageMapping"}
+	for i := range v {
+		if err := validateCmafIngestCaptionLanguageMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validate__listOfColorCorrection(v []types.ColorCorrection) error {
 	if v == nil {
 		return nil
@@ -3204,6 +3221,24 @@ func validateCaptionSelectorSettings(v *types.CaptionSelectorSettings) error {
 	}
 }
 
+func validateCmafIngestCaptionLanguageMapping(v *types.CmafIngestCaptionLanguageMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CmafIngestCaptionLanguageMapping"}
+	if v.CaptionChannel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaptionChannel"))
+	}
+	if v.LanguageCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCmafIngestGroupSettings(v *types.CmafIngestGroupSettings) error {
 	if v == nil {
 		return nil
@@ -3211,6 +3246,11 @@ func validateCmafIngestGroupSettings(v *types.CmafIngestGroupSettings) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CmafIngestGroupSettings"}
 	if v.Destination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if v.CaptionLanguageMappings != nil {
+		if err := validate__listOfCmafIngestCaptionLanguageMapping(v.CaptionLanguageMappings); err != nil {
+			invalidParams.AddNested("CaptionLanguageMappings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1240,6 +1240,47 @@ func (CmafNielsenId3Behavior) Values() []CmafNielsenId3Behavior {
 	}
 }
 
+type CmafTimedMetadataId3Frame string
+
+// Enum values for CmafTimedMetadataId3Frame
+const (
+	CmafTimedMetadataId3FrameNone CmafTimedMetadataId3Frame = "NONE"
+	CmafTimedMetadataId3FramePriv CmafTimedMetadataId3Frame = "PRIV"
+	CmafTimedMetadataId3FrameTdrl CmafTimedMetadataId3Frame = "TDRL"
+)
+
+// Values returns all known values for CmafTimedMetadataId3Frame. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CmafTimedMetadataId3Frame) Values() []CmafTimedMetadataId3Frame {
+	return []CmafTimedMetadataId3Frame{
+		"NONE",
+		"PRIV",
+		"TDRL",
+	}
+}
+
+type CmafTimedMetadataPassthrough string
+
+// Enum values for CmafTimedMetadataPassthrough
+const (
+	CmafTimedMetadataPassthroughDisabled CmafTimedMetadataPassthrough = "DISABLED"
+	CmafTimedMetadataPassthroughEnabled  CmafTimedMetadataPassthrough = "ENABLED"
+)
+
+// Values returns all known values for CmafTimedMetadataPassthrough. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CmafTimedMetadataPassthrough) Values() []CmafTimedMetadataPassthrough {
+	return []CmafTimedMetadataPassthrough{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type ColorSpace string
 
 // Enum values for ColorSpace

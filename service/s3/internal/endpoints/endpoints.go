@@ -823,19 +823,24 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname:          "s3-fips.{region}.cloud.adc-e.uk",
-				Protocols:         []string{"https"},
-				SignatureVersions: []string{"v4"},
+				Protocols:         []string{"http", "https"},
+				SignatureVersions: []string{"s3v4"},
 			},
 			{
 				Variant: 0,
 			}: {
 				Hostname:          "s3.{region}.cloud.adc-e.uk",
-				Protocols:         []string{"https"},
-				SignatureVersions: []string{"v4"},
+				Protocols:         []string{"http", "https"},
+				SignatureVersions: []string{"s3v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsIsoE,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "eu-isoe-west-1",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso-f",
