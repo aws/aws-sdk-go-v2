@@ -297,6 +297,16 @@ var ErrRangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetOb
 	return out, err
 }
 
+// MismatchRangeGetObjectFn mocks getobject behavior of s3 client to return mismatch error when object is updated during ranges GET
+var MismatchRangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	out, err := RangeGetObjectFn(c, params)
+	c.index++
+	if c.index > 1 {
+		return &s3.GetObjectOutput{}, fmt.Errorf("PreconditionFailed")
+	}
+	return out, err
+}
+
 // NonRangeGetObjectFn mocks getobject behavior of s3 client to return the whole object
 var NonRangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	return &s3.GetObjectOutput{
@@ -344,6 +354,16 @@ var ErrPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObj
 	c.index++
 	if c.index > 1 {
 		return &s3.GetObjectOutput{}, fmt.Errorf("s3 service error")
+	}
+	return out, err
+}
+
+// MismatchPartGetObjectFn mocks getobject behavior of s3 client to return mismatch error when object is updated during parts GET
+var MismatchPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	out, err := PartGetObjectFn(c, params)
+	c.index++
+	if c.index > 1 {
+		return &s3.GetObjectOutput{}, fmt.Errorf("PreconditionFailed")
 	}
 	return out, err
 }
