@@ -1389,9 +1389,7 @@
                 "Sentiment": {
                     "target": "com.amazonaws.connectcontactlens#SentimentValue",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The sentiment detected for this piece of transcript.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The sentiment detected for this piece of transcript.</p>"
                     }
                 },
                 "IssuesDetected": {

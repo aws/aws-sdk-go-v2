@@ -858,7 +858,7 @@
         "com.amazonaws.pcs#ClusterIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{3,40})$"
+                "smithy.api#pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{2,40})$"
             }
         },
         "com.amazonaws.pcs#ClusterList": {
@@ -1213,7 +1213,7 @@
         "com.amazonaws.pcs#ComputeNodeGroupIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{3,25})$"
+                "smithy.api#pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{2,25})$"
             }
         },
         "com.amazonaws.pcs#ComputeNodeGroupList": {
@@ -2937,7 +2937,7 @@
         "com.amazonaws.pcs#QueueIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{3,25})$"
+                "smithy.api#pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{2,25})$"
             }
         },
         "com.amazonaws.pcs#QueueList": {

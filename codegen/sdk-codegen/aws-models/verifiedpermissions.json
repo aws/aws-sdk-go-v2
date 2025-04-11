@@ -1722,6 +1722,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Descriptive text that you can provide to help with identification \n            of the current policy store.</p>"
                     }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.verifiedpermissions#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the policy store can be deleted. If enabled, the policy store can't be deleted.</p>\n         <p>The default state is <code>DISABLED</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2044,6 +2050,11 @@
             "output": {
                 "target": "com.amazonaws.verifiedpermissions#DeletePolicyStoreOutput"
             },
+            "errors": [
+                {
+                    "target": "com.amazonaws.verifiedpermissions#InvalidStateException"
+                }
+            ],
             "traits": {
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete the specified policy store"
@@ -2146,6 +2157,23 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.verifiedpermissions#DeletionProtection": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.verifiedpermissions#DeterminingPolicyItem": {
@@ -2722,6 +2750,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Descriptive text that you can provide to help with identification \n            of the current policy store.</p>"
                     }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.verifiedpermissions#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the policy store can be deleted. If enabled, the policy store can't be deleted.</p>\n         <p>The default state is <code>DISABLED</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3194,6 +3228,22 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.verifiedpermissions#InvalidStateException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy store can't be deleted because deletion protection is enabled. To delete this policy store, disable deletion protection.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 406
             }
         },
         "com.amazonaws.verifiedpermissions#IpAddr": {
@@ -5957,6 +6007,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that defines the validation settings that want to enable for the\n            policy store.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.verifiedpermissions#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the policy store can be deleted. If enabled, the policy store can't be deleted.</p>\n         <p>When you call <code>UpdatePolicyStore</code>, this parameter is unchanged unless explicitly included in the call.</p>"
                     }
                 },
                 "description": {
