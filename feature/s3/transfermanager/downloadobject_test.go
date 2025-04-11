@@ -80,6 +80,16 @@ func TestDownloadObject(t *testing.T) {
 			expectInvocations: 2,
 			expectErr:         "s3 service error",
 		},
+		"range download with mismatch error": {
+			data:        buf20MB,
+			getObjectFn: s3testing.MismatchRangeGetObjectFn,
+			options: Options{
+				Concurrency:   1,
+				GetObjectType: types.GetObjectRanges,
+			},
+			expectInvocations: 2,
+			expectErr:         "PreconditionFailed",
+		},
 		"content length download single chunk": {
 			data:        buf2MB,
 			getObjectFn: s3testing.NonRangeGetObjectFn,
@@ -222,6 +232,16 @@ func TestDownloadObject(t *testing.T) {
 			partsCount:        3,
 			expectInvocations: 2,
 			expectErr:         "s3 service error",
+		},
+		"part download with mismatch error": {
+			data:        buf2MB,
+			getObjectFn: s3testing.MismatchPartGetObjectFn,
+			options: Options{
+				Concurrency: 1,
+			},
+			partsCount:        3,
+			expectInvocations: 2,
+			expectErr:         "PreconditionFailed",
 		},
 		"part download single chunk": {
 			data:              []byte("123"),
