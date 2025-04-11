@@ -17,6 +17,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
+var etag = "myetag"
+
 // TransferManagerLoggingClient is a mock client that can be used to record and stub responses for testing the transfer manager.
 type TransferManagerLoggingClient struct {
 	// params for upload test
@@ -40,6 +42,8 @@ type TransferManagerLoggingClient struct {
 
 	RetrievedRanges []string
 	RetrievedParts  []int32
+	Versions        []string
+	Etags           []string
 
 	ErrReaders []TestErrReader
 	index      int
@@ -217,6 +221,8 @@ func (c *TransferManagerLoggingClient) GetObject(ctx context.Context, params *s3
 	if params.PartNumber != nil {
 		c.RetrievedParts = append(c.RetrievedParts, aws.ToInt32(params.PartNumber))
 	}
+	c.Versions = append(c.Versions, aws.ToString(params.VersionId))
+	c.Etags = append(c.Etags, aws.ToString(params.IfMatch))
 
 	if c.GetObjectFn != nil {
 		return c.GetObjectFn(c, params)
@@ -233,6 +239,7 @@ func (c *TransferManagerLoggingClient) HeadObject(ctx context.Context, params *s
 	return &s3.HeadObjectOutput{
 		PartsCount:    aws.Int32(c.PartsCount),
 		ContentLength: aws.Int64(int64(len(c.Data))),
+		ETag:          aws.String(etag),
 	}, nil
 }
 
@@ -246,10 +253,10 @@ func NewUploadLoggingClient(ignoredOps []string) (*TransferManagerLoggingClient,
 }
 
 // NewDownloadClient returns a new TransferManagerLoggingClient for download testing
-func NewDownloadClient() (*TransferManagerLoggingClient, *int, *[]int32, *[]string) {
+func NewDownloadClient() (*TransferManagerLoggingClient, *int, *[]int32, *[]string, *[]string, *[]string) {
 	c := &TransferManagerLoggingClient{}
 
-	return c, &c.GetObjectInvocations, &c.RetrievedParts, &c.RetrievedRanges
+	return c, &c.GetObjectInvocations, &c.RetrievedParts, &c.RetrievedRanges, &c.Versions, &c.Etags
 }
 
 var rangeValueRegex = regexp.MustCompile(`bytes=(\d+)-(\d+)`)
@@ -276,6 +283,7 @@ var RangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjec
 		Body:          ioutil.NopCloser(bytes.NewReader(bodyBytes)),
 		ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, fin-1, len(c.Data))),
 		ContentLength: aws.Int64(int64(len(bodyBytes))),
+		ETag:          aws.String(etag),
 	}, nil
 }
 
@@ -316,6 +324,7 @@ var PartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObject
 		Body:          ioutil.NopCloser(bytes.NewReader(c.Data)),
 		ContentLength: aws.Int64(int64(len(c.Data))),
 		PartsCount:    aws.Int32(c.PartsCount),
+		ETag:          aws.String(etag),
 	}, nil
 }
 

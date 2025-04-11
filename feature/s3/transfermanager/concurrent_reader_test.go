@@ -165,7 +165,7 @@ func TestConcurrentReader(t *testing.T) {
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			ctx := context.Background()
-			s3Client, _, _, _ := s3testing.NewDownloadClient()
+			s3Client := &s3testing.TransferManagerLoggingClient{}
 			s3Client.GetObjectFn = c.getObjectFn
 			r := &concurrentReader{
 				partSize:     c.partSize,

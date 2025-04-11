@@ -693,6 +693,7 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		r.pos = pos
 	}
 
+	r.etag = output.ETag
 	output.Body = r
 	return output, nil
 }
