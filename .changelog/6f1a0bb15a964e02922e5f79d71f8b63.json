@@ -1,0 +1,8 @@
+{
+    "id": "6f1a0bb1-5a96-4e02-922e-5f79d71f8b63",
+    "type": "feature",
+    "description": "Adds deletion protection support to policy stores. Deletion protection is disabled by default, can be enabled via the CreatePolicyStore or UpdatePolicyStore APIs, and is visible in GetPolicyStore.",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}

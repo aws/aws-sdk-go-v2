@@ -381,6 +381,54 @@ func (r *resolver) ResolveEndpoint(
 					}
 				}
 			}
+			if _PartitionResult.Name == "aws-cn" {
+				if _UseFIPS == false {
+					if _UseDualStack == true {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://metering-marketplace.")
+							out.WriteString(_Region)
+							out.WriteString(".")
+							out.WriteString(_PartitionResult.DualStackDnsSuffix)
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+						}, nil
+					}
+				}
+			}
+			if _PartitionResult.Name == "aws-us-gov" {
+				if _UseFIPS == false {
+					if _UseDualStack == true {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://metering-marketplace.")
+							out.WriteString(_Region)
+							out.WriteString(".")
+							out.WriteString(_PartitionResult.DualStackDnsSuffix)
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+						}, nil
+					}
+				}
+			}
 			if _UseFIPS == true {
 				if _UseDualStack == true {
 					if true == _PartitionResult.SupportsFIPS {

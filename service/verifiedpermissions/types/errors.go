@@ -88,6 +88,33 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The policy store can't be deleted because deletion protection is enabled. To
+// delete this policy store, disable deletion protection.
+type InvalidStateException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidStateException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidStateException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidStateException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidStateException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request failed because it references a resource that doesn't exist.
 type ResourceNotFoundException struct {
 	Message *string

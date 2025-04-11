@@ -1,0 +1,8 @@
+{
+    "id": "52483441-c7b3-488b-9268-722f621a683d",
+    "type": "feature",
+    "description": "Changed the minimum length of clusterIdentifier, computeNodeGroupIdentifier, and queueIdentifier to 3.",
+    "modules": [
+        "service/pcs"
+    ]
+}

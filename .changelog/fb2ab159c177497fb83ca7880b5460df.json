@@ -1,0 +1,8 @@
+{
+    "id": "fb2ab159-c177-497f-b83c-a7880b5460df",
+    "type": "feature",
+    "description": "Add support for Marketplace Entitlement Service dual-stack endpoints for CN and GOV regions",
+    "modules": [
+        "service/marketplaceentitlementservice"
+    ]
+}

@@ -47,6 +47,13 @@ type UpdatePolicyStoreInput struct {
 	// This member is required.
 	ValidationSettings *types.ValidationSettings
 
+	// Specifies whether the policy store can be deleted. If enabled, the policy store
+	// can't be deleted.
+	//
+	// When you call UpdatePolicyStore , this parameter is unchanged unless explicitly
+	// included in the call.
+	DeletionProtection types.DeletionProtection
+
 	// Descriptive text that you can provide to help with identification of the
 	// current policy store.
 	Description *string

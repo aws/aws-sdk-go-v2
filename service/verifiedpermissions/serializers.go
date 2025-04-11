@@ -2739,6 +2739,11 @@ func awsAwsjson10_serializeOpDocumentCreatePolicyStoreInput(v *CreatePolicyStore
 		ok.String(*v.ClientToken)
 	}
 
+	if len(v.DeletionProtection) > 0 {
+		ok := object.Key("deletionProtection")
+		ok.String(string(v.DeletionProtection))
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -3188,6 +3193,11 @@ func awsAwsjson10_serializeOpDocumentUpdatePolicyInput(v *UpdatePolicyInput, val
 func awsAwsjson10_serializeOpDocumentUpdatePolicyStoreInput(v *UpdatePolicyStoreInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.DeletionProtection) > 0 {
+		ok := object.Key("deletionProtection")
+		ok.String(string(v.DeletionProtection))
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")

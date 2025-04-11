@@ -1,0 +1,8 @@
+{
+    "id": "ecfaea3e-ad72-4fe7-a550-e0fa7e545112",
+    "type": "feature",
+    "description": "Add support for Detective DualStack endpoints",
+    "modules": [
+        "service/detective"
+    ]
+}

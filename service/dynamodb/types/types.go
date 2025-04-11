@@ -956,7 +956,8 @@ type CreateGlobalSecondaryIndexAction struct {
 
 	// The maximum number of read and write units for the global secondary index being
 	// created. If you use this parameter, you must specify MaxReadRequestUnits ,
-	// MaxWriteRequestUnits , or both.
+	// MaxWriteRequestUnits , or both. You must use either OnDemand Throughput or
+	// ProvisionedThroughput based on your table's capacity mode.
 	OnDemandThroughput *OnDemandThroughput
 
 	// Represents the provisioned throughput settings for the specified global
@@ -2352,8 +2353,9 @@ type Projection struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the provisioned throughput settings for a specified table or index.
-// The settings can be modified using the UpdateTable operation.
+// Represents the provisioned throughput settings for the specified global
+// secondary index. You must use ProvisionedThroughput or OnDemandThroughput based
+// on your table’s capacity mode.
 //
 // For current minimum and maximum provisioned throughput values, see [Service, Account, and Table Quotas] in the
 // Amazon DynamoDB Developer Guide.
@@ -3143,8 +3145,9 @@ type TableCreationParameters struct {
 	// MaxWriteRequestUnits , or both.
 	OnDemandThroughput *OnDemandThroughput
 
-	// Represents the provisioned throughput settings for a specified table or index.
-	// The settings can be modified using the UpdateTable operation.
+	// Represents the provisioned throughput settings for the specified global
+	// secondary index. You must use ProvisionedThroughput or OnDemandThroughput based
+	// on your table’s capacity mode.
 	//
 	// For current minimum and maximum provisioned throughput values, see [Service, Account, and Table Quotas] in the
 	// Amazon DynamoDB Developer Guide.
@@ -3441,13 +3444,15 @@ type TableDescription struct {
 }
 
 // Represents the warm throughput value (in read units per second and write units
-// per second) of the base table.
+// per second) of the table. Warm throughput is applicable for DynamoDB Standard-IA
+// tables and specifies the minimum provisioned capacity maintained for immediate
+// data access.
 type TableWarmThroughputDescription struct {
 
 	// Represents the base table's warm throughput value in read units per second.
 	ReadUnitsPerSecond *int64
 
-	// Represents warm throughput value of the base table..
+	// Represents warm throughput value of the base table.
 	Status TableStatus
 
 	// Represents the base table's warm throughput value in write units per second.

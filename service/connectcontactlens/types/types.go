@@ -160,13 +160,11 @@ type Transcript struct {
 	// This member is required.
 	ParticipantRole *string
 
-	// The sentiment detected for this piece of transcript.
-	//
-	// This member is required.
-	Sentiment SentimentValue
-
 	// List of positions where issues were detected on the transcript.
 	IssuesDetected []IssueDetected
+
+	// The sentiment detected for this piece of transcript.
+	Sentiment SentimentValue
 
 	noSmithyDocumentSerde
 }

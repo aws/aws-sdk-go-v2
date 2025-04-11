@@ -1,0 +1,8 @@
+{
+    "id": "12c0518a-8ddc-45de-923b-40447506a903",
+    "type": "feature",
+    "description": "Raise hard limit of authorized principals per SubscriptionTarget from 10 to 20.",
+    "modules": [
+        "service/datazone"
+    ]
+}

@@ -65,6 +65,12 @@ type GetPolicyStoreOutput struct {
 	// This member is required.
 	ValidationSettings *types.ValidationSettings
 
+	// Specifies whether the policy store can be deleted. If enabled, the policy store
+	// can't be deleted.
+	//
+	// The default state is DISABLED .
+	DeletionProtection types.DeletionProtection
+
 	// Descriptive text that you can provide to help with identification of the
 	// current policy store.
 	Description *string
