@@ -184,7 +184,6 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 	}
 
 	var written int
-	//c := 0
 
 	partSize := r.partSize
 	minIndex := int32(r.written / partSize)
@@ -258,7 +257,7 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 			}
 		}
 	}
-	
+
 	return written, r.getErr()
 }
 
