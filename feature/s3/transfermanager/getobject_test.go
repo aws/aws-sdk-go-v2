@@ -19,6 +19,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
+var etag string = "myetag"
+var vID string = "myversion"
+
 func TestGetObject(t *testing.T) {
 	cases := map[string]struct {
 		data              []byte
@@ -26,8 +29,11 @@ func TestGetObject(t *testing.T) {
 		getObjectFn       func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
 		options           Options
 		downloadRange     string
+		versionID         string
 		expectInvocations int
 		expectRanges      []string
+		expectVersions    []string
+		expectETags       []string
 		partNumber        int32
 		partsCount        int32
 		expectParts       []int32
@@ -44,6 +50,7 @@ func TestGetObject(t *testing.T) {
 			},
 			expectInvocations: 3,
 			expectRanges:      []string{"bytes=0-8388607", "bytes=8388608-16777215", "bytes=16777216-20971519"},
+			expectETags:       []string{etag, etag, etag},
 		},
 		"range download zero": {
 			data:        []byte{},
@@ -53,7 +60,7 @@ func TestGetObject(t *testing.T) {
 			},
 			expectInvocations: 1,
 		},
-		"range download with customized part size": {
+		"range download with customized part size and versionID": {
 			data:        buf20MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
 			options: Options{
@@ -61,8 +68,10 @@ func TestGetObject(t *testing.T) {
 				PartSizeBytes: 10 * 1024 * 1024,
 				Concurrency:   1,
 			},
+			versionID:         vID,
 			expectInvocations: 2,
 			expectRanges:      []string{"bytes=0-10485759", "bytes=10485760-20971519"},
+			expectVersions:    []string{vID, vID},
 		},
 		"range download with s3 error": {
 			data:        buf20MB,
@@ -81,6 +90,7 @@ func TestGetObject(t *testing.T) {
 			},
 			expectInvocations: 1,
 			expectRanges:      []string{"bytes=0-2097151"},
+			expectETags:       []string{etag},
 			dataValidationFn: func(t *testing.T, bytes []byte) {
 				count := 0
 				for _, b := range bytes {
@@ -97,7 +107,9 @@ func TestGetObject(t *testing.T) {
 			options: Options{
 				GetObjectType: types.GetObjectRanges,
 			},
+			versionID:         vID,
 			expectInvocations: 1,
+			expectVersions:    []string{vID},
 			expectRanges:      []string{"bytes=0-2097151"},
 			dataValidationFn: func(t *testing.T, bytes []byte) {
 				count := 0
@@ -146,7 +158,18 @@ func TestGetObject(t *testing.T) {
 			},
 			downloadRange:     "bytes=1-10485759",
 			expectInvocations: 2,
+			expectETags:       []string{etag, etag},
 			expectRanges:      []string{"bytes=1-8388608", "bytes=8388609-10485759"},
+		},
+		"range download a range of object with part number": {
+			data:        buf20MB,
+			getObjectFn: s3testing.NonRangeGetObjectFn,
+			options: Options{
+				GetObjectType: types.GetObjectRanges,
+			},
+			downloadRange:     "bytes=1-10485759",
+			partNumber:        5,
+			expectInvocations: 1,
 		},
 		"range download invalid range": {
 			data:        buf20MB,
@@ -166,7 +189,17 @@ func TestGetObject(t *testing.T) {
 			},
 			partsCount:        3,
 			expectInvocations: 3,
+			expectETags:       []string{etag, etag, etag},
 			expectParts:       []int32{1, 2, 3},
+		},
+		"parts download with version ID": {
+			data:              buf2MB,
+			getObjectFn:       s3testing.PartGetObjectFn,
+			options:           Options{},
+			partsCount:        3,
+			versionID:         vID,
+			expectInvocations: 3,
+			expectVersions:    []string{vID, vID, vID},
 		},
 		"part download zero": {
 			data:              buf2MB,
@@ -257,7 +290,7 @@ func TestGetObject(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			s3Client, invocations, parts, ranges := s3testing.NewDownloadClient()
+			s3Client, invocations, parts, ranges, versions, etags := s3testing.NewDownloadClient()
 			s3Client.Data = c.data
 			s3Client.GetObjectFn = c.getObjectFn
 			s3Client.ErrReaders = c.errReaders
@@ -270,6 +303,7 @@ func TestGetObject(t *testing.T) {
 			}
 			input.Range = c.downloadRange
 			input.PartNumber = c.partNumber
+			input.VersionID = c.versionID
 
 			out, err := mgr.GetObject(context.Background(), input)
 
@@ -316,6 +350,16 @@ func TestGetObject(t *testing.T) {
 					t.Errorf("expect %v ranges, got %v", e, a)
 				}
 			}
+			if len(c.expectVersions) > 0 {
+				if e, a := c.expectVersions, *versions; !reflect.DeepEqual(e, a) {
+					t.Errorf("expect %v versions, got %v", e, a)
+				}
+			}
+			if len(c.expectETags) > 0 {
+				if e, a := c.expectETags, *etags; !reflect.DeepEqual(e, a) {
+					t.Errorf("expect %v etags, got %v", e, a)
+				}
+			}
 
 			if c.dataValidationFn != nil {
 				c.dataValidationFn(t, actualBuf)
@@ -339,7 +383,7 @@ func TestGetAsyncWithFailure(t *testing.T) {
 			startingByte := 0
 			reqCount := int64(0)
 
-			s3Client, _, _, _ := s3testing.NewDownloadClient()
+			s3Client := &s3testing.TransferManagerLoggingClient{}
 			s3Client.PartsCount = 10
 			s3Client.Data = buf40MB
 			s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (out *s3.GetObjectOutput, err error) {

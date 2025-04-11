@@ -12,14 +12,6 @@ import (
 	"sync"
 )
 
-type outChunk struct {
-	body  io.Reader
-	index int32
-
-	length int64
-	cur    int64
-}
-
 // concurrentReader receives object parts from working goroutines, composes those chunks in order and read
 // to user's buffer. ConcurrentReader limits the max number of chunks it could receive and read at the same
 // time so getter won't send following parts' request to s3 until user reads all current chunks, which avoids
@@ -43,6 +35,7 @@ type concurrentReader struct {
 	written      int64
 	partSize     int64
 	invocations  int32
+	etag         string
 
 	ctx context.Context
 	m   sync.Mutex
@@ -64,7 +57,6 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 			)
 		}}
 
-	//r.ch = make(chan outChunk, r.options.Concurrency)
 	var written int
 	var err error
 	var wg sync.WaitGroup
@@ -84,7 +76,6 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 		go r.downloadPart(r.ctx, ch, clientOptions...)
 	}
 
-	//fmt.Println("start sending chunks")
 	for r.index < r.partsCount {
 		if r.getErr() != nil || r.getDone() {
 			break
@@ -113,8 +104,7 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 	wg.Wait()
 
 	r.written += int64(written)
-	r.setDone(false)
-	//fmt.Println("finish Read ", r.invocations)
+	r.done = false
 	r.invocations++
 	return written, r.getErr()
 }
@@ -145,6 +135,9 @@ func (r *concurrentReader) downloadChunk(ctx context.Context, chunk getChunk, cl
 	if chunk.withRange != "" {
 		params.Range = aws.String(chunk.withRange)
 	}
+	if params.VersionId == nil {
+		params.IfMatch = aws.String(r.etag)
+	}
 
 	out, err := r.options.S3.GetObject(ctx, params, clientOptions...)
 	if err != nil {
@@ -158,7 +151,6 @@ func (r *concurrentReader) downloadChunk(ctx context.Context, chunk getChunk, cl
 		return nil, err
 	}
 	r.ch <- outChunk{body: bytes.NewReader(buf), index: chunk.index, length: aws.ToInt64(out.ContentLength)}
-	//fmt.Println("sent chunk ", chunk.index)
 
 	output := &GetObjectOutput{}
 	output.mapFromGetObjectOutput(out, params.ChecksumMode)
@@ -176,6 +168,14 @@ type getChunk struct {
 	withRange string
 
 	index int32
+}
+
+type outChunk struct {
+	body  io.Reader
+	index int32
+
+	length int64
+	cur    int64
 }
 
 func (r *concurrentReader) read(p []byte) (int, error) {
@@ -211,7 +211,6 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 				delete(r.buf, i)
 				if r.readCount == r.getCapacity() {
 					capacity := min(r.getCapacity()+r.sectionParts, r.partsCount)
-					//fmt.Println("update capacity to ", capacity, "during buffer")
 					r.setCapacity(capacity)
 				}
 				if r.readCount >= r.partsCount {
@@ -222,17 +221,12 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 	}
 
 	for r.receiveCount < r.getCapacity() {
-		//if c == 0 {
-		//fmt.Println("start receiving chunks")
-		//c++
-		//}
 		if e := r.getErr(); e != nil && e != io.EOF {
 			r.clean()
 			return written, e
 		}
 
 		oc, ok := <-r.ch
-		//fmt.Println("received chunk ", oc.index)
 		if !ok {
 			break
 		}
@@ -257,7 +251,6 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 			r.readCount++
 			if r.readCount == r.getCapacity() {
 				capacity := min(r.getCapacity()+r.sectionParts, r.partsCount)
-				//fmt.Println("update capacity to ", capacity, " during receive")
 				r.setCapacity(capacity)
 			}
 			if r.readCount >= r.partsCount {
@@ -265,10 +258,7 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 			}
 		}
 	}
-
-	//fmt.Println("hi receive count ", r.receiveCount)
-	//fmt.Println("but capacity is ", r.getCapacity())
-	//fmt.Println("ch remains ", len(r.ch))
+	
 	return written, r.getErr()
 }
 
