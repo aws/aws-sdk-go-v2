@@ -1,8 +1,0 @@
-{
-    "id": "33230802-8f93-4fc0-80db-08871e11e0c7",
-    "type": "feature",
-    "description": "Add support for Marketplace Metering Service dual-stack endpoints for CN regions",
-    "modules": [
-        "service/marketplacemetering"
-    ]
-}

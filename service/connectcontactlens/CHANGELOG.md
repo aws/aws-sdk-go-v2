@@ -1,3 +1,7 @@
+# v1.28.0 (2025-04-11)
+
+* **Feature**: Making sentiment optional for ListRealtimeContactAnalysisSegments Response depending on conversational analytics configuration
+
 # v1.27.2 (2025-04-03)
 
 * No change notes available for this release.

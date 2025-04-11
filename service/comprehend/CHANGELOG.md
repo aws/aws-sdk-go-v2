@@ -1,3 +1,7 @@
+# v1.36.4 (2025-04-11)
+
+* No change notes available for this release.
+
 # v1.36.3 (2025-04-03)
 
 * No change notes available for this release.

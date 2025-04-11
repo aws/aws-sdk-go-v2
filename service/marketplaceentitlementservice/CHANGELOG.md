@@ -1,3 +1,7 @@
+# v1.29.0 (2025-04-11)
+
+* **Feature**: Add support for Marketplace Entitlement Service dual-stack endpoints for CN and GOV regions
+
 # v1.28.2 (2025-04-09)
 
 * No change notes available for this release.

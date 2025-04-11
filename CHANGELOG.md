@@ -1,3 +1,24 @@
+# Release (2025-04-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression`: [v1.7.79](feature/dynamodb/expression/CHANGELOG.md#v1779-2025-04-11)
+  * **Bug Fix**: allow nested list indices in expressions
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.28.0](service/connectcontactlens/CHANGELOG.md#v1280-2025-04-11)
+  * **Feature**: Making sentiment optional for ListRealtimeContactAnalysisSegments Response depending on conversational analytics configuration
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.33.0](service/detective/CHANGELOG.md#v1330-2025-04-11)
+  * **Feature**: Add support for Detective DualStack endpoints
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.42.4](service/dynamodb/CHANGELOG.md#v1424-2025-04-11)
+  * **Documentation**: Doc only update for API descriptions.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.29.0](service/marketplaceentitlementservice/CHANGELOG.md#v1290-2025-04-11)
+  * **Feature**: Add support for Marketplace Entitlement Service dual-stack endpoints for CN and GOV regions
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.29.0](service/marketplacemetering/CHANGELOG.md#v1290-2025-04-11)
+  * **Feature**: Add support for Marketplace Metering Service dual-stack endpoints for CN regions
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.23.0](service/verifiedpermissions/CHANGELOG.md#v1230-2025-04-11)
+  * **Feature**: Adds deletion protection support to policy stores. Deletion protection is disabled by default, can be enabled via the CreatePolicyStore or UpdatePolicyStore APIs, and is visible in GetPolicyStore.
+
 # Release (2025-04-10)
 
 ## General Highlights

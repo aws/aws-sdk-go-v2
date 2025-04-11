@@ -1,3 +1,7 @@
+# v1.33.0 (2025-04-11)
+
+* **Feature**: Add support for Detective DualStack endpoints
+
 # v1.32.3 (2025-04-03)
 
 * No change notes available for this release.

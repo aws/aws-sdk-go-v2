@@ -1,3 +1,7 @@
+# v1.42.4 (2025-04-11)
+
+* **Documentation**: Doc only update for API descriptions.
+
 # v1.42.3 (2025-04-10)
 
 * No change notes available for this release.

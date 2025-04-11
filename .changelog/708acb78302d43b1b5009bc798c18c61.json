@@ -1,8 +1,0 @@
-{
-    "id": "708acb78-302d-43b1-b500-9bc798c18c61",
-    "type": "feature",
-    "description": "Making sentiment optional for ListRealtimeContactAnalysisSegments Response depending on conversational analytics configuration",
-    "modules": [
-        "service/connectcontactlens"
-    ]
-}
