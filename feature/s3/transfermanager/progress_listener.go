@@ -42,6 +42,10 @@ func (p *ProgressListeners) Copy() ProgressListeners {
 	objectBytesTransferred := make([]ObjectBytesTransferredListener, len(p.ObjectBytesTransferred))
 	objectTransferComplete := make([]ObjectTransferCompleteListener, len(p.ObjectTransferComplete))
 	objectTransferFailed := make([]ObjectTransferFailedListener, len(p.ObjectTransferFailed))
+	copy(objectTransferStart, p.ObjectTransferStart)
+	copy(objectBytesTransferred, p.ObjectBytesTransferred)
+	copy(objectTransferComplete, p.ObjectTransferComplete)
+	copy(objectTransferFailed, p.ObjectTransferFailed)
 	return ProgressListeners{
 		ObjectTransferStart:    objectTransferStart,
 		ObjectBytesTransferred: objectBytesTransferred,
