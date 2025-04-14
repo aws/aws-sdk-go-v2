@@ -964,7 +964,7 @@
                 "smithy.api#length": {
                     "max": 255
                 },
-                "smithy.api#pattern": "^[a-zA-Z_0-9- \\t]*$"
+                "smithy.api#pattern": "^[a-zA-Z_0-9- ]*$"
             }
         },
         "com.amazonaws.entityresolution#AwsAccountId": {
@@ -2020,7 +2020,7 @@
             "type": "structure",
             "members": {
                 "uniqueId": {
-                    "target": "com.amazonaws.entityresolution#UniqueId",
+                    "target": "com.amazonaws.entityresolution#HeaderSafeUniqueId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique ID that could not be deleted.</p>",
                         "smithy.api#required": {}
@@ -2082,7 +2082,7 @@
             "type": "structure",
             "members": {
                 "uniqueId": {
-                    "target": "com.amazonaws.entityresolution#UniqueId",
+                    "target": "com.amazonaws.entityresolution#HeaderSafeUniqueId",
                     "traits": {
                         "smithy.api#documentation": "<p> The unique ID of the deleted item.</p>",
                         "smithy.api#required": {}
@@ -2110,7 +2110,7 @@
         "com.amazonaws.entityresolution#DisconnectedUniqueIdsList": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.entityresolution#UniqueId"
+                "target": "com.amazonaws.entityresolution#HeaderSafeUniqueId"
             }
         },
         "com.amazonaws.entityresolution#EntityName": {
@@ -2569,7 +2569,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the corresponding Match ID of a customer record if the record has been\n         processed.</p>",
+                "smithy.api#documentation": "<p>Returns the corresponding Match ID of a customer record if the record has been\n         processed in a\n         rule-based matching workflow or ML matching workflow.</p>\n         <p>You can call this API as a dry run of an incremental load on the rule-based\n         matching\n         workflow.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3218,6 +3218,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.entityresolution#HeaderSafeUniqueId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 780
+                },
+                "smithy.api#pattern": "^[a-zA-Z_0-9-+=/,]*$"
+            }
+        },
         "com.amazonaws.entityresolution#IdMappingJobMetrics": {
             "type": "structure",
             "members": {
@@ -3256,10 +3266,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The total number of distinct mapped target records.</p>"
                     }
+                },
+                "uniqueRecordsLoaded": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The\n         number of records remaining after loading and aggregating duplicate records. Duplicates are\n         determined by the field marked as UNIQUE_ID in your schema mapping - records sharing the\n         same value in this field are considered duplicates. For example, if you specified\n         \"customer_id\" as a UNIQUE_ID field and had three records with the same customer_id value,\n         they would count as one unique record in this metric. </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing <code>InputRecords</code>, <code>RecordsNotProcessed</code>,\n            <code>TotalRecordsProcessed</code>, <code>TotalMappedRecords</code>,\n            <code>TotalMappedSourceRecords</code>, and <code>TotalMappedTargetRecords</code>.</p>"
+                "smithy.api#documentation": "<p>An\n         object that contains metrics about an ID mapping job, including counts of input records,\n         processed records, and mapped records between source and target identifiers.\n         </p>"
             }
         },
         "com.amazonaws.entityresolution#IdMappingJobOutputSource": {
@@ -5365,7 +5381,7 @@
                         "smithy.api#length": {
                             "max": 255
                         },
-                        "smithy.api#pattern": "^[a-zA-Z_0-9- \\t]*$",
+                        "smithy.api#pattern": "^[a-zA-Z_0-9- ]*$",
                         "smithy.api#required": {}
                     }
                 },
@@ -5374,7 +5390,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <code>MatchingKeys</code>. The <code>MatchingKeys</code> must have been\n         defined in the <code>SchemaMapping</code>. Two records are considered to match according to\n         this rule if all of the <code>MatchingKeys</code> match.</p>",
                         "smithy.api#length": {
-                            "min": 1,
                             "max": 15
                         },
                         "smithy.api#required": {}
@@ -5571,14 +5586,14 @@
                 "type": {
                     "target": "com.amazonaws.entityresolution#SchemaAttributeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the attribute, selected from a list of values.</p>",
+                        "smithy.api#documentation": "<p>The type of the attribute, selected from a list of values.</p>\n         <note>\n            <p>Normalization is only supported for <code>NAME</code>, <code>ADDRESS</code>,\n               <code>PHONE</code>, and <code>EMAIL_ADDRESS</code>. </p>\n            <p>If you want to normalize <code>NAME_FIRST</code>, <code>NAME_MIDDLE</code>, and\n               <code>NAME_LAST</code>, you must group them by assigning them to the\n               <code>NAME</code>\n               <code>groupName</code>. </p>\n            <p>If you want to normalize <code>ADDRESS_STREET1</code>, <code>ADDRESS_STREET2</code>,\n               <code>ADDRESS_STREET3</code>, <code>ADDRESS_CITY</code>, <code>ADDRESS_STATE</code>,\n               <code>ADDRESS_COUNTRY</code>, and <code>ADDRESS_POSTALCODE</code>, you must group\n            them by assigning them to the <code>ADDRESS</code>\n               <code>groupName</code>. </p>\n            <p>If you want to normalize <code>PHONE_NUMBER</code> and\n            <code>PHONE_COUNTRYCODE</code>, you must group them by assigning them to the\n               <code>PHONE</code>\n               <code>groupName</code>. </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "groupName": {
                     "target": "com.amazonaws.entityresolution#AttributeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that instructs Entity Resolution to combine several columns into a unified\n         column with the identical attribute type. </p>\n         <p>For example, when working with columns such as <code>first_name</code>,\n            <code>middle_name</code>, and <code>last_name</code>, assigning them a common\n            <code>groupName</code> will prompt Entity Resolution to concatenate them into a single\n         value.</p>"
+                        "smithy.api#documentation": "<p>A string that instructs Entity Resolution to combine several columns into a unified\n         column with the identical attribute type. </p>\n         <p>For example, when working with columns such as\n            <code>NAME_FIRST</code>,\n            <code>NAME_MIDDLE</code>,\n         and\n            <code>NAME_LAST</code>,\n         assigning them a common <code>groupName</code> will prompt Entity Resolution to concatenate\n         them into a single value.</p>"
                     }
                 },
                 "matchKey": {
@@ -5596,12 +5611,12 @@
                 "hashed": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates if the column values are hashed in the schema input. If the value is set to\n            <code>TRUE</code>, the column values are hashed. If the value is set to\n            <code>FALSE</code>, the column values are cleartext.</p>"
+                        "smithy.api#documentation": "<p> Indicates if the column values are hashed in the schema input. </p>\n         <p>If the value is set to <code>TRUE</code>, the column values are hashed. </p>\n         <p>If the value is set to <code>FALSE</code>, the column values are cleartext.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing <code>FieldName</code>, <code>Type</code>, <code>GroupName</code>,\n            <code>MatchKey</code>, <code>Hashing</code>, and <code>SubType</code>.</p>"
+                "smithy.api#documentation": "<p>A\n         configuration object for defining input data fields in Entity Resolution. The\n         SchemaInputAttribute specifies how individual fields in your input data should be processed\n         and matched.</p>"
             }
         },
         "com.amazonaws.entityresolution#SchemaInputAttributes": {
@@ -6050,20 +6065,10 @@
                 }
             }
         },
-        "com.amazonaws.entityresolution#UniqueId": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 760
-                },
-                "smithy.api#pattern": "^[a-zA-Z_0-9-+=/,]*$"
-            }
-        },
         "com.amazonaws.entityresolution#UniqueIdList": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.entityresolution#UniqueId"
+                "target": "com.amazonaws.entityresolution#HeaderSafeUniqueId"
             }
         },
         "com.amazonaws.entityresolution#UntagResource": {
