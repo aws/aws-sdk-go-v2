@@ -1382,6 +1382,13 @@ func awsRestjson1_serializeDocumentAdditionalInfoRequest(v *types.AdditionalInfo
 		}
 	}
 
+	if v.IndonesiaAdditionalInfo != nil {
+		ok := object.Key("indonesiaAdditionalInfo")
+		if err := awsRestjson1_serializeDocumentIndonesiaAdditionalInfo(v.IndonesiaAdditionalInfo, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IsraelAdditionalInfo != nil {
 		ok := object.Key("israelAdditionalInfo")
 		if err := awsRestjson1_serializeDocumentIsraelAdditionalInfo(v.IsraelAdditionalInfo, ok); err != nil {
@@ -1649,6 +1656,28 @@ func awsRestjson1_serializeDocumentGreeceAdditionalInfo(v *types.GreeceAdditiona
 	if v.ContractingAuthorityCode != nil {
 		ok := object.Key("contractingAuthorityCode")
 		ok.String(*v.ContractingAuthorityCode)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIndonesiaAdditionalInfo(v *types.IndonesiaAdditionalInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DecisionNumber != nil {
+		ok := object.Key("decisionNumber")
+		ok.String(*v.DecisionNumber)
+	}
+
+	if v.PpnExceptionDesignationCode != nil {
+		ok := object.Key("ppnExceptionDesignationCode")
+		ok.String(*v.PpnExceptionDesignationCode)
+	}
+
+	if len(v.TaxRegistrationNumberType) > 0 {
+		ok := object.Key("taxRegistrationNumberType")
+		ok.String(string(v.TaxRegistrationNumberType))
 	}
 
 	return nil

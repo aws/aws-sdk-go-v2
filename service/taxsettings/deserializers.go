@@ -3001,6 +3001,11 @@ func awsRestjson1_deserializeDocumentAdditionalInfoResponse(v **types.Additional
 				return err
 			}
 
+		case "indonesiaAdditionalInfo":
+			if err := awsRestjson1_deserializeDocumentIndonesiaAdditionalInfo(&sv.IndonesiaAdditionalInfo, value); err != nil {
+				return err
+			}
+
 		case "israelAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentIsraelAdditionalInfo(&sv.IsraelAdditionalInfo, value); err != nil {
 				return err
@@ -3923,6 +3928,64 @@ func awsRestjson1_deserializeDocumentIndiaAdditionalInfo(v **types.IndiaAddition
 					return fmt.Errorf("expected Pan to be of type string, got %T instead", value)
 				}
 				sv.Pan = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIndonesiaAdditionalInfo(v **types.IndonesiaAdditionalInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IndonesiaAdditionalInfo
+	if *v == nil {
+		sv = &types.IndonesiaAdditionalInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "decisionNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DecisionNumber to be of type string, got %T instead", value)
+				}
+				sv.DecisionNumber = ptr.String(jtv)
+			}
+
+		case "ppnExceptionDesignationCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PpnExceptionDesignationCode to be of type string, got %T instead", value)
+				}
+				sv.PpnExceptionDesignationCode = ptr.String(jtv)
+			}
+
+		case "taxRegistrationNumberType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IndonesiaTaxRegistrationNumberType to be of type string, got %T instead", value)
+				}
+				sv.TaxRegistrationNumberType = types.IndonesiaTaxRegistrationNumberType(jtv)
 			}
 
 		default:

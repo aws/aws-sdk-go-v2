@@ -11,7 +11,10 @@ import (
 )
 
 // Returns the corresponding Match ID of a customer record if the record has been
-// processed.
+// processed in a rule-based matching workflow or ML matching workflow.
+//
+// You can call this API as a dry run of an incremental load on the rule-based
+// matching workflow.
 func (c *Client) GetMatchId(ctx context.Context, params *GetMatchIdInput, optFns ...func(*Options)) (*GetMatchIdOutput, error) {
 	if params == nil {
 		params = &GetMatchIdInput{}

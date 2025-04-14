@@ -37,6 +37,37 @@ import (
 //
 //   - The valid personType values are Physical Person and Business .
 //
+// Indonesia
+//
+//   - PutTaxRegistration : The use of this operation to submit tax information is
+//     subject to the [Amazon Web Services service terms]. By submitting, you’re providing consent for Amazon Web
+//     Services to validate NIK, NPWP, and NITKU data, provided by you with the
+//     Directorate General of Taxes of Indonesia in accordance with the Minister of
+//     Finance Regulation (PMK) Number 112/PMK.03/2022.
+//
+//   - BatchPutTaxRegistration : The use of this operation to submit tax
+//     information is subject to the [Amazon Web Services service terms]. By submitting, you’re providing consent for
+//     Amazon Web Services to validate NIK, NPWP, and NITKU data, provided by you with
+//     the Directorate General of Taxes of Indonesia in accordance with the Minister of
+//     Finance Regulation (PMK) Number 112/PMK.03/2022, through our third-party partner
+//     PT Achilles Advanced Management (OnlinePajak).
+//
+//   - You must specify the taxRegistrationNumberType in the
+//     indonesiaAdditionalInfo field of the additionalTaxInformation object.
+//
+//   - If you specify decisionNumber , you must specify the
+//     ppnExceptionDesignationCode in the indonesiaAdditionalInfo field of the
+//     additionalTaxInformation object. If the taxRegistrationNumberType is set to
+//     NPWP or NITKU, valid values for ppnExceptionDesignationCode are either 01 , 02
+//     , 03 , 07 , or 08 .
+//
+// For other taxRegistrationNumberType values, ppnExceptionDesignationCode must be
+//
+//	either 01 , 07 , or 08 .
+//
+//	- If ppnExceptionDesignationCode is 07 , you must specify the decisionNumber
+//	in the indonesiaAdditionalInfo field of the additionalTaxInformation object.
+//
 // Kenya
 //
 //   - You must specify the personType in the kenyaAdditionalInfo field of the
@@ -144,6 +175,7 @@ import (
 //
 //   - The sector valid values are Business and Individual .
 //
+// [Amazon Web Services service terms]: http://aws.amazon.com/service-terms/
 // [Payment preferences]: https://console.aws.amazon.com/billing/home#/paymentpreferences/paymentmethods
 func (c *Client) BatchPutTaxRegistration(ctx context.Context, params *BatchPutTaxRegistrationInput, optFns ...func(*Options)) (*BatchPutTaxRegistrationOutput, error) {
 	if params == nil {

@@ -7511,7 +7511,7 @@ func awsRestjson1_deserializeDocumentDeletedUniqueId(v **types.DeletedUniqueId, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected UniqueId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected HeaderSafeUniqueId to be of type string, got %T instead", value)
 				}
 				sv.UniqueId = ptr.String(jtv)
 			}
@@ -7594,7 +7594,7 @@ func awsRestjson1_deserializeDocumentDeleteUniqueIdError(v **types.DeleteUniqueI
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected UniqueId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected HeaderSafeUniqueId to be of type string, got %T instead", value)
 				}
 				sv.UniqueId = ptr.String(jtv)
 			}
@@ -7667,7 +7667,7 @@ func awsRestjson1_deserializeDocumentDisconnectedUniqueIdsList(v *[]string, valu
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected UniqueId to be of type string, got %T instead", value)
+				return fmt.Errorf("expected HeaderSafeUniqueId to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -7878,6 +7878,19 @@ func awsRestjson1_deserializeDocumentIdMappingJobMetrics(v **types.IdMappingJobM
 					return err
 				}
 				sv.TotalRecordsProcessed = ptr.Int32(int32(i64))
+			}
+
+		case "uniqueRecordsLoaded":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UniqueRecordsLoaded = ptr.Int32(int32(i64))
 			}
 
 		default:

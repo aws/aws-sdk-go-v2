@@ -1,0 +1,8 @@
+{
+    "id": "08f5d7ae-f154-4ef4-80ee-2d954e1c7ace",
+    "type": "feature",
+    "description": "Indonesia SOR Tax Registration Launch",
+    "modules": [
+        "service/taxsettings"
+    ]
+}

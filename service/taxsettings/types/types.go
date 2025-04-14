@@ -75,6 +75,9 @@ type AdditionalInfoRequest struct {
 	// Additional tax information to specify for a TRN in Greece.
 	GreeceAdditionalInfo *GreeceAdditionalInfo
 
+	//
+	IndonesiaAdditionalInfo *IndonesiaAdditionalInfo
+
 	//  Additional tax information to specify for a TRN in Israel.
 	IsraelAdditionalInfo *IsraelAdditionalInfo
 
@@ -145,6 +148,9 @@ type AdditionalInfoResponse struct {
 
 	//  Additional tax information in India.
 	IndiaAdditionalInfo *IndiaAdditionalInfo
+
+	// Additional tax information associated with your TRN in Indonesia.
+	IndonesiaAdditionalInfo *IndonesiaAdditionalInfo
 
 	//  Additional tax information associated with your TRN in Israel.
 	IsraelAdditionalInfo *IsraelAdditionalInfo
@@ -435,6 +441,24 @@ type IndiaAdditionalInfo struct {
 
 	//  India pan information associated with the account.
 	Pan *string
+
+	noSmithyDocumentSerde
+}
+
+// Additional tax information associated with your TRN in Indonesia.
+type IndonesiaAdditionalInfo struct {
+
+	// VAT-exempt customers have a Directorate General of Taxation (DGT) exemption
+	// letter or certificate (Surat Keterangan Bebas) decision number. Non-collected
+	// VAT have a DGT letter or certificate (Surat Keterangan Tidak Dipungut).
+	DecisionNumber *string
+
+	// Exception code if you are designated by Directorate General of Taxation (DGT)
+	// as a VAT collector, non-collected VAT, or VAT-exempt customer.
+	PpnExceptionDesignationCode *string
+
+	// The tax registration number type.
+	TaxRegistrationNumberType IndonesiaTaxRegistrationNumberType
 
 	noSmithyDocumentSerde
 }

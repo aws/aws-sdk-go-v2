@@ -44,8 +44,9 @@ type ErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing InputRecords , RecordsNotProcessed , TotalRecordsProcessed
-// , TotalMappedRecords , TotalMappedSourceRecords , and TotalMappedTargetRecords .
+// An object that contains metrics about an ID mapping job, including counts of
+// input records, processed records, and mapped records between source and target
+// identifiers.
 type IdMappingJobMetrics struct {
 
 	// The total number of records that were input for processing.
@@ -65,6 +66,14 @@ type IdMappingJobMetrics struct {
 
 	// The total number of records that were processed.
 	TotalRecordsProcessed *int32
+
+	// The number of records remaining after loading and aggregating duplicate
+	// records. Duplicates are determined by the field marked as UNIQUE_ID in your
+	// schema mapping - records sharing the same value in this field are considered
+	// duplicates. For example, if you specified "customer_id" as a UNIQUE_ID field and
+	// had three records with the same customer_id value, they would count as one
+	// unique record in this metric.
+	UniqueRecordsLoaded *int32
 
 	noSmithyDocumentSerde
 }
@@ -792,8 +801,9 @@ type RuleBasedProperties struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing FieldName , Type , GroupName , MatchKey , Hashing , and
-// SubType .
+// A configuration object for defining input data fields in Entity Resolution. The
+// SchemaInputAttribute specifies how individual fields in your input data should
+// be processed and matched.
 type SchemaInputAttribute struct {
 
 	// A string containing the field name.
@@ -803,20 +813,34 @@ type SchemaInputAttribute struct {
 
 	// The type of the attribute, selected from a list of values.
 	//
+	// Normalization is only supported for NAME , ADDRESS , PHONE , and EMAIL_ADDRESS .
+	//
+	// If you want to normalize NAME_FIRST , NAME_MIDDLE , and NAME_LAST , you must
+	// group them by assigning them to the NAME groupName .
+	//
+	// If you want to normalize ADDRESS_STREET1 , ADDRESS_STREET2 , ADDRESS_STREET3 ,
+	// ADDRESS_CITY , ADDRESS_STATE , ADDRESS_COUNTRY , and ADDRESS_POSTALCODE , you
+	// must group them by assigning them to the ADDRESS groupName .
+	//
+	// If you want to normalize PHONE_NUMBER and PHONE_COUNTRYCODE , you must group
+	// them by assigning them to the PHONE groupName .
+	//
 	// This member is required.
 	Type SchemaAttributeType
 
 	// A string that instructs Entity Resolution to combine several columns into a
 	// unified column with the identical attribute type.
 	//
-	// For example, when working with columns such as first_name , middle_name , and
-	// last_name , assigning them a common groupName will prompt Entity Resolution to
+	// For example, when working with columns such as NAME_FIRST , NAME_MIDDLE , and
+	// NAME_LAST , assigning them a common groupName will prompt Entity Resolution to
 	// concatenate them into a single value.
 	GroupName *string
 
-	//  Indicates if the column values are hashed in the schema input. If the value is
-	// set to TRUE , the column values are hashed. If the value is set to FALSE , the
-	// column values are cleartext.
+	//  Indicates if the column values are hashed in the schema input.
+	//
+	// If the value is set to TRUE , the column values are hashed.
+	//
+	// If the value is set to FALSE , the column values are cleartext.
 	Hashed *bool
 
 	// A key that allows grouping of multiple input attributes into a unified matching

@@ -66,6 +66,30 @@ func (HeritageStatus) Values() []HeritageStatus {
 	}
 }
 
+type IndonesiaTaxRegistrationNumberType string
+
+// Enum values for IndonesiaTaxRegistrationNumberType
+const (
+	IndonesiaTaxRegistrationNumberTypeNik            IndonesiaTaxRegistrationNumberType = "NIK"
+	IndonesiaTaxRegistrationNumberTypePassportNumber IndonesiaTaxRegistrationNumberType = "PassportNumber"
+	IndonesiaTaxRegistrationNumberTypeNpwp           IndonesiaTaxRegistrationNumberType = "NPWP"
+	IndonesiaTaxRegistrationNumberTypeNitku          IndonesiaTaxRegistrationNumberType = "NITKU"
+)
+
+// Values returns all known values for IndonesiaTaxRegistrationNumberType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IndonesiaTaxRegistrationNumberType) Values() []IndonesiaTaxRegistrationNumberType {
+	return []IndonesiaTaxRegistrationNumberType{
+		"NIK",
+		"PassportNumber",
+		"NPWP",
+		"NITKU",
+	}
+}
+
 type Industries string
 
 // Enum values for Industries
