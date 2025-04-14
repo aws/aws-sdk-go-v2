@@ -1,3 +1,7 @@
+# v1.17.0 (2025-04-14)
+
+* **Feature**: This is to add new metrics to our GetIdMappingJob API and also update uniqueId naming for batchDeleteUniqueIds API to be more accurate
+
 # v1.16.2 (2025-04-03)
 
 * No change notes available for this release.

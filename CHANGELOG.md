@@ -1,3 +1,11 @@
+# Release (2025-04-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.17.0](service/entityresolution/CHANGELOG.md#v1170-2025-04-14)
+  * **Feature**: This is to add new metrics to our GetIdMappingJob API and also update uniqueId naming for batchDeleteUniqueIds API to be more accurate
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.12.0](service/taxsettings/CHANGELOG.md#v1120-2025-04-14)
+  * **Feature**: Indonesia SOR Tax Registration Launch
+
 # Release (2025-04-11)
 
 ## General Highlights

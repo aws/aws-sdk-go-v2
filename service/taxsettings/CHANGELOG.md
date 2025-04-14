@@ -1,3 +1,7 @@
+# v1.12.0 (2025-04-14)
+
+* **Feature**: Indonesia SOR Tax Registration Launch
+
 # v1.11.0 (2025-04-08)
 
 * **Feature**: Uzbekistan Launch on TaxSettings Page

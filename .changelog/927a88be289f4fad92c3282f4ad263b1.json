@@ -1,8 +1,0 @@
-{
-    "id": "927a88be-289f-4fad-92c3-282f4ad263b1",
-    "type": "feature",
-    "description": "This is to add new metrics to our GetIdMappingJob API and also update uniqueId naming for batchDeleteUniqueIds API to be more accurate",
-    "modules": [
-        "service/entityresolution"
-    ]
-}
