@@ -38,6 +38,12 @@ type Options struct {
 
 	// Max size for the get object buffer
 	GetBufferSize int64
+
+	// Registry of progress listener hooks.
+	//
+	// It is safe to modify the registry in per-operation functional options,
+	// the original client-level registry will not be affected.
+	ProgressListeners ProgressListeners
 }
 
 func (o *Options) init() {
@@ -88,5 +94,6 @@ func resolveGetBufferSize(o *Options) {
 // Copy returns new copy of the Options
 func (o Options) Copy() Options {
 	to := o
+	to.ProgressListeners = to.ProgressListeners.Copy()
 	return to
 }
