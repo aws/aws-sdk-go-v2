@@ -66,6 +66,14 @@ type DescribeConnectionOutput struct {
 	// [Connecting to private APIs]: https://docs.aws.amazon.com/eventbridge/latest/userguide/connection-private.html
 	InvocationConnectivityParameters *types.DescribeConnectionConnectivityParameters
 
+	// The identifier of the KMS customer managed key for EventBridge to use to
+	// encrypt the connection, if one has been specified.
+	//
+	// For more information, see [Encrypting connections] in the Amazon EventBridge User Guide.
+	//
+	// [Encrypting connections]: https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-connections.html
+	KmsKeyIdentifier *string
+
 	// A time stamp for the time that the connection was last authorized.
 	LastAuthorizedTime *time.Time
 

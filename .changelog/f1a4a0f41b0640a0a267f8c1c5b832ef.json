@@ -1,0 +1,8 @@
+{
+    "id": "f1a4a0f4-1b06-40a0-a267-f8c1c5b832ef",
+    "type": "feature",
+    "description": "S3 Tables now supports setting encryption configurations on table buckets and tables. Encryption configurations can use server side encryption using AES256 or KMS customer-managed keys.",
+    "modules": [
+        "service/s3tables"
+    ]
+}

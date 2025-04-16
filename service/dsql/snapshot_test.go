@@ -122,6 +122,18 @@ func TestCheckSnapshot_GetCluster(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetVpcEndpointServiceName(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVpcEndpointServiceName(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetVpcEndpointServiceName")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListClusters(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListClusters(context.Background(), nil, func(o *Options) {
@@ -234,6 +246,18 @@ func TestUpdateSnapshot_GetCluster(t *testing.T) {
 	_, err := svc.GetCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetVpcEndpointServiceName(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVpcEndpointServiceName(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetVpcEndpointServiceName")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

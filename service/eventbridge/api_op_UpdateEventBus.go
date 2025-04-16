@@ -51,8 +51,12 @@ type UpdateEventBusInput struct {
 	// For more information, see [Identify and view keys] in the Key Management Service Developer Guide.
 	//
 	// Schema discovery is not supported for event buses encrypted using a customer
-	// managed key. EventBridge returns an error if you call [CreateDiscoverer]on an event bus set to
-	// use a customer managed key for encryption.
+	// managed key. EventBridge returns an error if:
+	//
+	//   - You call [CreateDiscoverer]on an event bus set to use a customer managed key for encryption.
+	//
+	//   - You call [UpdatedEventBus]to set a customer managed key on an event bus with schema
+	//   discovery enabled.
 	//
 	// To enable schema discovery on an event bus, choose to use an Amazon Web
 	// Services owned key. For more information, see [Encrypting events]in the Amazon EventBridge User
@@ -64,6 +68,7 @@ type UpdateEventBusInput struct {
 	//
 	// For more information, see [Encrypting archives] in the Amazon EventBridge User Guide.
 	//
+	// [UpdatedEventBus]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_UpdatedEventBus.html
 	// [Encrypting events]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption-event-bus-cmkey.html
 	// [Identify and view keys]: https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html
 	// [Encrypting archives]: https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html

@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -13,8 +14,13 @@ import (
 // Creates a table bucket. For more information, see [Creating a table bucket] in the Amazon Simple Storage
 // Service User Guide.
 //
-// Permissions You must have the s3tables:CreateTableBucket permission to use this
-// operation.
+// Permissions
+//
+//   - You must have the s3tables:CreateTableBucket permission to use this
+//     operation.
+//
+//   - If you use this operation with the optional encryptionConfiguration
+//     parameter you must have the s3tables:PutTableBucketEncryption permission.
 //
 // [Creating a table bucket]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html
 func (c *Client) CreateTableBucket(ctx context.Context, params *CreateTableBucketInput, optFns ...func(*Options)) (*CreateTableBucketOutput, error) {
@@ -38,6 +44,12 @@ type CreateTableBucketInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The encryption configuration to use for the table bucket. This configuration
+	// specifies the default encryption settings that will be applied to all tables
+	// created in this bucket unless overridden at the table level. The configuration
+	// includes the encryption algorithm and, if using SSE-KMS, the KMS key to use.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	noSmithyDocumentSerde
 }

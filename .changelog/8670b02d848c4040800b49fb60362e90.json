@@ -1,0 +1,8 @@
+{
+    "id": "8670b02d-848c-4040-800b-49fb60362e90",
+    "type": "feature",
+    "description": "Adding support for KmsKeyIdentifer in CreateConnection, UpdateConnection and DescribeConnection APIs",
+    "modules": [
+        "service/eventbridge"
+    ]
+}

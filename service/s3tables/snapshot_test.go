@@ -134,6 +134,18 @@ func TestCheckSnapshot_DeleteTableBucket(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteTableBucketEncryption(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTableBucketEncryption(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTableBucketEncryption")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTableBucketPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTableBucketPolicy(context.Background(), nil, func(o *Options) {
@@ -194,6 +206,18 @@ func TestCheckSnapshot_GetTableBucket(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTableBucketEncryption(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTableBucketEncryption(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTableBucketEncryption")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTableBucketMaintenanceConfiguration(context.Background(), nil, func(o *Options) {
@@ -211,6 +235,18 @@ func TestCheckSnapshot_GetTableBucketPolicy(t *testing.T) {
 	_, err := svc.GetTableBucketPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetTableBucketPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTableEncryption(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTableEncryption(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTableEncryption")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -295,6 +331,18 @@ func TestCheckSnapshot_ListTables(t *testing.T) {
 	_, err := svc.ListTables(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTables")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutTableBucketEncryption(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTableBucketEncryption(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutTableBucketEncryption")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -445,6 +493,18 @@ func TestUpdateSnapshot_DeleteTableBucket(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteTableBucketEncryption(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTableBucketEncryption(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTableBucketEncryption")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTableBucketPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTableBucketPolicy(context.Background(), nil, func(o *Options) {
@@ -505,6 +565,18 @@ func TestUpdateSnapshot_GetTableBucket(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetTableBucketEncryption(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTableBucketEncryption(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTableBucketEncryption")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTableBucketMaintenanceConfiguration(context.Background(), nil, func(o *Options) {
@@ -522,6 +594,18 @@ func TestUpdateSnapshot_GetTableBucketPolicy(t *testing.T) {
 	_, err := svc.GetTableBucketPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetTableBucketPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTableEncryption(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTableEncryption(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTableEncryption")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -606,6 +690,18 @@ func TestUpdateSnapshot_ListTables(t *testing.T) {
 	_, err := svc.ListTables(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTables")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutTableBucketEncryption(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTableBucketEncryption(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutTableBucketEncryption")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

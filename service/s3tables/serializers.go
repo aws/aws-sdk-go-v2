@@ -206,6 +206,13 @@ func awsRestjson1_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("encryptionConfiguration")
+		if err := awsRestjson1_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Format) > 0 {
 		ok := object.Key("format")
 		ok.String(string(v.Format))
@@ -298,6 +305,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateTableBucketInput(v *CreateTableBu
 func awsRestjson1_serializeOpDocumentCreateTableBucketInput(v *CreateTableBucketInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("encryptionConfiguration")
+		if err := awsRestjson1_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Name != nil {
 		ok := object.Key("name")
@@ -535,6 +549,77 @@ func (m *awsRestjson1_serializeOpDeleteTableBucket) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteTableBucketInput(v *DeleteTableBucketInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.TableBucketARN == nil || len(*v.TableBucketARN) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member tableBucketARN must not be empty")}
+	}
+	if v.TableBucketARN != nil {
+		if err := encoder.SetURI("tableBucketARN").String(*v.TableBucketARN); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteTableBucketEncryption struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteTableBucketEncryption) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteTableBucketEncryption) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteTableBucketEncryptionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/buckets/{tableBucketARN}/encryption")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteTableBucketEncryptionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteTableBucketEncryptionInput(v *DeleteTableBucketEncryptionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -951,6 +1036,77 @@ func awsRestjson1_serializeOpHttpBindingsGetTableBucketInput(v *GetTableBucketIn
 	return nil
 }
 
+type awsRestjson1_serializeOpGetTableBucketEncryption struct {
+}
+
+func (*awsRestjson1_serializeOpGetTableBucketEncryption) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetTableBucketEncryption) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetTableBucketEncryptionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/buckets/{tableBucketARN}/encryption")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetTableBucketEncryptionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetTableBucketEncryptionInput(v *GetTableBucketEncryptionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.TableBucketARN == nil || len(*v.TableBucketARN) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member tableBucketARN must not be empty")}
+	}
+	if v.TableBucketARN != nil {
+		if err := encoder.SetURI("tableBucketARN").String(*v.TableBucketARN); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetTableBucketMaintenanceConfiguration struct {
 }
 
@@ -1079,6 +1235,95 @@ func (m *awsRestjson1_serializeOpGetTableBucketPolicy) HandleSerialize(ctx conte
 func awsRestjson1_serializeOpHttpBindingsGetTableBucketPolicyInput(v *GetTableBucketPolicyInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.TableBucketARN == nil || len(*v.TableBucketARN) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member tableBucketARN must not be empty")}
+	}
+	if v.TableBucketARN != nil {
+		if err := encoder.SetURI("tableBucketARN").String(*v.TableBucketARN); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetTableEncryption struct {
+}
+
+func (*awsRestjson1_serializeOpGetTableEncryption) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetTableEncryption) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetTableEncryptionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/tables/{tableBucketARN}/{namespace}/{name}/encryption")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetTableEncryptionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetTableEncryptionInput(v *GetTableEncryptionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Name == nil || len(*v.Name) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+	}
+	if v.Name != nil {
+		if err := encoder.SetURI("name").String(*v.Name); err != nil {
+			return err
+		}
+	}
+
+	if v.Namespace == nil || len(*v.Namespace) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member namespace must not be empty")}
+	}
+	if v.Namespace != nil {
+		if err := encoder.SetURI("namespace").String(*v.Namespace); err != nil {
+			return err
+		}
 	}
 
 	if v.TableBucketARN == nil || len(*v.TableBucketARN) == 0 {
@@ -1686,6 +1931,102 @@ func awsRestjson1_serializeOpHttpBindingsListTablesInput(v *ListTablesInput, enc
 	}
 	if v.TableBucketARN != nil {
 		if err := encoder.SetURI("tableBucketARN").String(*v.TableBucketARN); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutTableBucketEncryption struct {
+}
+
+func (*awsRestjson1_serializeOpPutTableBucketEncryption) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutTableBucketEncryption) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutTableBucketEncryptionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/buckets/{tableBucketARN}/encryption")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutTableBucketEncryptionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutTableBucketEncryptionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutTableBucketEncryptionInput(v *PutTableBucketEncryptionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.TableBucketARN == nil || len(*v.TableBucketARN) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member tableBucketARN must not be empty")}
+	}
+	if v.TableBucketARN != nil {
+		if err := encoder.SetURI("tableBucketARN").String(*v.TableBucketARN); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutTableBucketEncryptionInput(v *PutTableBucketEncryptionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("encryptionConfiguration")
+		if err := awsRestjson1_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -2361,6 +2702,23 @@ func awsRestjson1_serializeOpDocumentUpdateTableMetadataLocationInput(v *UpdateT
 	if v.VersionToken != nil {
 		ok := object.Key("versionToken")
 		ok.String(*v.VersionToken)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEncryptionConfiguration(v *types.EncryptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	if len(v.SseAlgorithm) > 0 {
+		ok := object.Key("sseAlgorithm")
+		ok.String(string(v.SseAlgorithm))
 	}
 
 	return nil

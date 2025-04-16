@@ -58,6 +58,36 @@ type GetTagSyncTaskOutput struct {
 	// The name of the application group.
 	GroupName *string
 
+	// The query you can use to define a resource group or a search for resources. A
+	// ResourceQuery specifies both a query Type and a Query string as JSON string
+	// objects. See the examples section for example JSON strings. For more information
+	// about creating a resource group with a resource query, see [Build queries and groups in Resource Groups]in the Resource
+	// Groups User Guide
+	//
+	// When you combine all of the elements together into a single string, any double
+	// quotes that are embedded inside another double quote pair must be escaped by
+	// preceding the embedded double quote with a backslash character (\). For example,
+	// a complete ResourceQuery parameter must be formatted like the following CLI
+	// parameter example:
+	//
+	//     --resource-query
+	//     '{"Type":"TAG_FILTERS_1_0","Query":"{\"ResourceTypeFilters\":[\"AWS::AllSupported\"],\"TagFilters\":[{\"Key\":\"Stage\",\"Values\":[\"Test\"]}]}"}'
+	//
+	// In the preceding example, all of the double quote characters in the value part
+	// of the Query element must be escaped because the value itself is surrounded by
+	// double quotes. For more information, see [Quoting strings]in the Command Line Interface User
+	// Guide.
+	//
+	// For the complete list of resource types that you can use in the array value for
+	// ResourceTypeFilters , see [Resources you can use with Resource Groups and Tag Editor] in the Resource Groups User Guide. For example:
+	//
+	//     "ResourceTypeFilters":["AWS::S3::Bucket", "AWS::EC2::Instance"]
+	//
+	// [Quoting strings]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-quoting-strings.html
+	// [Resources you can use with Resource Groups and Tag Editor]: https://docs.aws.amazon.com/ARG/latest/userguide/supported-resources.html
+	// [Build queries and groups in Resource Groups]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html
+	ResourceQuery *types.ResourceQuery
+
 	// The Amazon resource name (ARN) of the role assumed by Resource Groups to tag
 	// and untag resources on your behalf.
 	//

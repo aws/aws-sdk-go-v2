@@ -6,12 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new tag-sync task to onboard and sync resources tagged with a
-// specific tag key-value pair to an application.
+// specific tag key-value pair to an application. To start a tag-sync task, you
+// need a [resource tagging role]. The resource tagging role grants permissions to tag and untag
+// applications resources and must include a trust policy that allows Resource
+// Groups to assume the role and perform resource tagging tasks on your behalf.
+//
+// For instructions on creating a tag-sync task, see [Create a tag-sync using the Resource Groups API] in the Amazon Web Services
+// Service Catalog AppRegistry Administrator Guide.
 //
 // # Minimum permissions
 //
@@ -22,6 +29,9 @@ import (
 //   - resource-groups:CreateGroup
 //
 //   - iam:PassRole on the role provided in the request
+//
+// [resource tagging role]: https://docs.aws.amazon.com/servicecatalog/latest/arguide/app-tag-sync.html#tag-sync-role
+// [Create a tag-sync using the Resource Groups API]: https://docs.aws.amazon.com/servicecatalog/latest/arguide/app-tag-sync.html#create-tag-sync
 func (c *Client) StartTagSyncTask(ctx context.Context, params *StartTagSyncTaskInput, optFns ...func(*Options)) (*StartTagSyncTaskOutput, error) {
 	if params == nil {
 		params = &StartTagSyncTaskInput{}
@@ -51,18 +61,53 @@ type StartTagSyncTaskInput struct {
 	// This member is required.
 	RoleArn *string
 
+	// The query you can use to create the tag-sync task. With this method, all
+	// resources matching the query are added to the specified application group. A
+	// ResourceQuery specifies both a query Type and a Query string as JSON string
+	// objects. For more information on defining a resource query for a tag-sync task,
+	// see the tag-based query type in [Types of resource group queries]in Resource Groups User Guide.
+	//
+	// When using the ResourceQuery parameter, you cannot use the TagKey and TagValue
+	// parameters.
+	//
+	// When you combine all of the elements together into a single string, any double
+	// quotes that are embedded inside another double quote pair must be escaped by
+	// preceding the embedded double quote with a backslash character (\). For example,
+	// a complete ResourceQuery parameter must be formatted like the following CLI
+	// parameter example:
+	//
+	//     --resource-query
+	//     '{"Type":"TAG_FILTERS_1_0","Query":"{\"ResourceTypeFilters\":[\"AWS::AllSupported\"],\"TagFilters\":[{\"Key\":\"Stage\",\"Values\":[\"Test\"]}]}"}'
+	//
+	// In the preceding example, all of the double quote characters in the value part
+	// of the Query element must be escaped because the value itself is surrounded by
+	// double quotes. For more information, see [Quoting strings]in the Command Line Interface User
+	// Guide.
+	//
+	// For the complete list of resource types that you can use in the array value for
+	// ResourceTypeFilters , see [Resources you can use with Resource Groups and Tag Editor] in the Resource Groups User Guide. For example:
+	//
+	//     "ResourceTypeFilters":["AWS::S3::Bucket", "AWS::EC2::Instance"]
+	//
+	// [Quoting strings]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-quoting-strings.html
+	// [Resources you can use with Resource Groups and Tag Editor]: https://docs.aws.amazon.com/ARG/latest/userguide/supported-resources.html
+	// [Types of resource group queries]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#getting_started-query_types
+	ResourceQuery *types.ResourceQuery
+
 	// The tag key. Resources tagged with this tag key-value pair will be added to the
 	// application. If a resource with this tag is later untagged, the tag-sync task
 	// removes the resource from the application.
 	//
-	// This member is required.
+	// When using the TagKey parameter, you must also specify the TagValue parameter.
+	// If you specify a tag key-value pair, you can't use the ResourceQuery parameter.
 	TagKey *string
 
 	// The tag value. Resources tagged with this tag key-value pair will be added to
 	// the application. If a resource with this tag is later untagged, the tag-sync
 	// task removes the resource from the application.
 	//
-	// This member is required.
+	// When using the TagValue parameter, you must also specify the TagKey parameter.
+	// If you specify a tag key-value pair, you can't use the ResourceQuery parameter.
 	TagValue *string
 
 	noSmithyDocumentSerde
@@ -76,6 +121,36 @@ type StartTagSyncTaskOutput struct {
 
 	// The name of the application group to onboard and sync resources.
 	GroupName *string
+
+	// The query you can use to define a resource group or a search for resources. A
+	// ResourceQuery specifies both a query Type and a Query string as JSON string
+	// objects. See the examples section for example JSON strings. For more information
+	// about creating a resource group with a resource query, see [Build queries and groups in Resource Groups]in the Resource
+	// Groups User Guide
+	//
+	// When you combine all of the elements together into a single string, any double
+	// quotes that are embedded inside another double quote pair must be escaped by
+	// preceding the embedded double quote with a backslash character (\). For example,
+	// a complete ResourceQuery parameter must be formatted like the following CLI
+	// parameter example:
+	//
+	//     --resource-query
+	//     '{"Type":"TAG_FILTERS_1_0","Query":"{\"ResourceTypeFilters\":[\"AWS::AllSupported\"],\"TagFilters\":[{\"Key\":\"Stage\",\"Values\":[\"Test\"]}]}"}'
+	//
+	// In the preceding example, all of the double quote characters in the value part
+	// of the Query element must be escaped because the value itself is surrounded by
+	// double quotes. For more information, see [Quoting strings]in the Command Line Interface User
+	// Guide.
+	//
+	// For the complete list of resource types that you can use in the array value for
+	// ResourceTypeFilters , see [Resources you can use with Resource Groups and Tag Editor] in the Resource Groups User Guide. For example:
+	//
+	//     "ResourceTypeFilters":["AWS::S3::Bucket", "AWS::EC2::Instance"]
+	//
+	// [Quoting strings]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-quoting-strings.html
+	// [Resources you can use with Resource Groups and Tag Editor]: https://docs.aws.amazon.com/ARG/latest/userguide/supported-resources.html
+	// [Build queries and groups in Resource Groups]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html
+	ResourceQuery *types.ResourceQuery
 
 	// The Amazon resource name (ARN) of the role assumed by the service to tag and
 	// untag resources on your behalf.

@@ -51,6 +51,18 @@ type UpdateConnectionInput struct {
 	// [Connecting to private APIs]: https://docs.aws.amazon.com/eventbridge/latest/userguide/connection-private.html
 	InvocationConnectivityParameters *types.ConnectivityResourceParameters
 
+	// The identifier of the KMS customer managed key for EventBridge to use, if you
+	// choose to use a customer managed key to encrypt this connection. The identifier
+	// can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+	//
+	// If you do not specify a customer managed key identifier, EventBridge uses an
+	// Amazon Web Services owned key to encrypt the connection.
+	//
+	// For more information, see [Identify and view keys] in the Key Management Service Developer Guide.
+	//
+	// [Identify and view keys]: https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html
+	KmsKeyIdentifier *string
+
 	noSmithyDocumentSerde
 }
 

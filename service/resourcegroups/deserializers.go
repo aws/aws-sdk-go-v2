@@ -1525,6 +1525,11 @@ func awsRestjson1_deserializeOpDocumentGetTagSyncTaskOutput(v **GetTagSyncTaskOu
 				sv.GroupName = ptr.String(jtv)
 			}
 
+		case "ResourceQuery":
+			if err := awsRestjson1_deserializeDocumentResourceQuery(&sv.ResourceQuery, value); err != nil {
+				return err
+			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2937,6 +2942,11 @@ func awsRestjson1_deserializeOpDocumentStartTagSyncTaskOutput(v **StartTagSyncTa
 					return fmt.Errorf("expected GroupName to be of type string, got %T instead", value)
 				}
 				sv.GroupName = ptr.String(jtv)
+			}
+
+		case "ResourceQuery":
+			if err := awsRestjson1_deserializeDocumentResourceQuery(&sv.ResourceQuery, value); err != nil {
+				return err
 			}
 
 		case "RoleArn":
@@ -5899,6 +5909,11 @@ func awsRestjson1_deserializeDocumentTagSyncTaskItem(v **types.TagSyncTaskItem, 
 					return fmt.Errorf("expected GroupName to be of type string, got %T instead", value)
 				}
 				sv.GroupName = ptr.String(jtv)
+			}
+
+		case "ResourceQuery":
+			if err := awsRestjson1_deserializeDocumentResourceQuery(&sv.ResourceQuery, value); err != nil {
+				return err
 			}
 
 		case "RoleArn":

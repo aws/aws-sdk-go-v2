@@ -1506,6 +1506,11 @@ func validateRelatedItemInputContent(v types.RelatedItemInputContent) error {
 			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.RelatedItemInputContentMemberSla:
+		if err := validateSlaInputContent(uv.Value); err != nil {
+			invalidParams.AddNested("[sla]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1596,6 +1601,46 @@ func validateSectionsList(v []types.Section) error {
 		if err := validateSection(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSlaInputConfiguration(v *types.SlaInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SlaInputConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.TargetSlaMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetSlaMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSlaInputContent(v types.SlaInputContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SlaInputContent"}
+	switch uv := v.(type) {
+	case *types.SlaInputContentMemberSlaInputConfiguration:
+		if err := validateSlaInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[slaInputConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

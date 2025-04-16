@@ -7,6 +7,28 @@ import (
 	"time"
 )
 
+// Configuration specifying how data should be encrypted. This structure defines
+// the encryption algorithm and optional KMS key to be used for server-side
+// encryption.
+type EncryptionConfiguration struct {
+
+	// The server-side encryption algorithm to use. Valid values are AES256 for
+	// S3-managed encryption keys, or aws:kms for Amazon Web Services KMS-managed
+	// encryption keys. If you choose SSE-KMS encryption you must grant the S3 Tables
+	// maintenance principal access to your KMS key. For more information, see [Permissions requirements for S3 Tables SSE-KMS encryption].
+	//
+	// [Permissions requirements for S3 Tables SSE-KMS encryption]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
+	//
+	// This member is required.
+	SseAlgorithm SSEAlgorithm
+
+	// The Amazon Resource Name (ARN) of the KMS key to use for encryption. This field
+	// is required only when sseAlgorithm is set to aws:kms .
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the compaction settings for an Iceberg table.
 type IcebergCompactionSettings struct {
 
@@ -90,6 +112,13 @@ type NamespaceSummary struct {
 	// This member is required.
 	OwnerAccountId *string
 
+	// The system-assigned unique identifier for the namespace.
+	NamespaceId *string
+
+	// The system-assigned unique identifier for the table bucket that contains this
+	// namespace.
+	TableBucketId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -171,6 +200,9 @@ type TableBucketSummary struct {
 	//
 	// This member is required.
 	OwnerAccountId *string
+
+	// The system-assigned unique identifier for the table bucket.
+	TableBucketId *string
 
 	noSmithyDocumentSerde
 }
@@ -282,6 +314,12 @@ type TableSummary struct {
 	//
 	// This member is required.
 	Type TableType
+
+	// The unique identifier for the namespace that contains this table.
+	NamespaceId *string
+
+	// The unique identifier for the table bucket that contains this table.
+	TableBucketId *string
 
 	noSmithyDocumentSerde
 }

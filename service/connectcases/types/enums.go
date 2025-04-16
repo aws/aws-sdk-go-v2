@@ -135,6 +135,7 @@ const (
 	RelatedItemTypeContact RelatedItemType = "Contact"
 	RelatedItemTypeComment RelatedItemType = "Comment"
 	RelatedItemTypeFile    RelatedItemType = "File"
+	RelatedItemTypeSla     RelatedItemType = "Sla"
 )
 
 // Values returns all known values for RelatedItemType. Note that this can be
@@ -146,6 +147,7 @@ func (RelatedItemType) Values() []RelatedItemType {
 		"Contact",
 		"Comment",
 		"File",
+		"Sla",
 	}
 }
 
@@ -163,6 +165,46 @@ const (
 func (RuleType) Values() []RuleType {
 	return []RuleType{
 		"Required",
+	}
+}
+
+type SlaStatus string
+
+// Enum values for SlaStatus
+const (
+	SlaStatusActive  SlaStatus = "Active"
+	SlaStatusOverdue SlaStatus = "Overdue"
+	SlaStatusMet     SlaStatus = "Met"
+	SlaStatusNotMet  SlaStatus = "NotMet"
+)
+
+// Values returns all known values for SlaStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SlaStatus) Values() []SlaStatus {
+	return []SlaStatus{
+		"Active",
+		"Overdue",
+		"Met",
+		"NotMet",
+	}
+}
+
+type SlaType string
+
+// Enum values for SlaType
+const (
+	SlaTypeCaseField SlaType = "CaseField"
+)
+
+// Values returns all known values for SlaType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SlaType) Values() []SlaType {
+	return []SlaType{
+		"CaseField",
 	}
 }
 

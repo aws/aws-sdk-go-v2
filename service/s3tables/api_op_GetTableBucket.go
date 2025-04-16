@@ -65,6 +65,9 @@ type GetTableBucketOutput struct {
 	// This member is required.
 	OwnerAccountId *string
 
+	// The unique identifier of the table bucket.
+	TableBucketId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

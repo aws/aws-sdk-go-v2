@@ -1033,6 +1033,7 @@ func (*OperandTwoMemberStringValue) isOperandTwo() {}
 //	RelatedItemContentMemberComment
 //	RelatedItemContentMemberContact
 //	RelatedItemContentMemberFile
+//	RelatedItemContentMemberSla
 type RelatedItemContent interface {
 	isRelatedItemContent()
 }
@@ -1064,6 +1065,15 @@ type RelatedItemContentMemberFile struct {
 
 func (*RelatedItemContentMemberFile) isRelatedItemContent() {}
 
+// Represents the content of an SLA to be returned to agents.
+type RelatedItemContentMemberSla struct {
+	Value SlaContent
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemContentMemberSla) isRelatedItemContent() {}
+
 // Details of what related item data is published through the case event stream.
 type RelatedItemEventIncludedData struct {
 
@@ -1082,6 +1092,7 @@ type RelatedItemEventIncludedData struct {
 //	RelatedItemInputContentMemberComment
 //	RelatedItemInputContentMemberContact
 //	RelatedItemInputContentMemberFile
+//	RelatedItemInputContentMemberSla
 type RelatedItemInputContent interface {
 	isRelatedItemInputContent()
 }
@@ -1113,6 +1124,15 @@ type RelatedItemInputContentMemberFile struct {
 
 func (*RelatedItemInputContentMemberFile) isRelatedItemInputContent() {}
 
+// Represents the content of an SLA to be created.
+type RelatedItemInputContentMemberSla struct {
+	Value SlaInputContent
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemInputContentMemberSla) isRelatedItemInputContent() {}
+
 // The list of types of related items and their parameters to use for filtering.
 //
 // The following types satisfy this interface:
@@ -1120,6 +1140,7 @@ func (*RelatedItemInputContentMemberFile) isRelatedItemInputContent() {}
 //	RelatedItemTypeFilterMemberComment
 //	RelatedItemTypeFilterMemberContact
 //	RelatedItemTypeFilterMemberFile
+//	RelatedItemTypeFilterMemberSla
 type RelatedItemTypeFilter interface {
 	isRelatedItemTypeFilter()
 }
@@ -1150,6 +1171,15 @@ type RelatedItemTypeFilterMemberFile struct {
 }
 
 func (*RelatedItemTypeFilterMemberFile) isRelatedItemTypeFilter() {}
+
+// Filter for related items of type SLA .
+type RelatedItemTypeFilterMemberSla struct {
+	Value SlaFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemTypeFilterMemberSla) isRelatedItemTypeFilter() {}
 
 // Required rule type, used to indicate whether a field is required. In the Amazon
 // Connect admin website, case rules are known as case field conditions. For more
@@ -1260,6 +1290,112 @@ type SectionMemberFieldGroup struct {
 
 func (*SectionMemberFieldGroup) isSection() {}
 
+// Represents an SLA configuration.
+type SlaConfiguration struct {
+
+	// Name of an SLA.
+	//
+	// This member is required.
+	Name *string
+
+	// Status of an SLA.
+	//
+	// This member is required.
+	Status SlaStatus
+
+	// Target time by which an SLA should be completed.
+	//
+	// This member is required.
+	TargetTime *time.Time
+
+	// Type of SLA.
+	//
+	// This member is required.
+	Type SlaType
+
+	// Time at which an SLA was completed.
+	CompletionTime *time.Time
+
+	// Unique identifier of a field.
+	FieldId *string
+
+	// Represents a list of target field values for the fieldId specified in
+	// SlaConfiguration.
+	TargetFieldValues []FieldValueUnion
+
+	noSmithyDocumentSerde
+}
+
+// Represents the content of an SLA to be returned to agents.
+type SlaContent struct {
+
+	// Represents an SLA configuration.
+	//
+	// This member is required.
+	SlaConfiguration *SlaConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A filter for related items of type SLA .
+type SlaFilter struct {
+
+	// Name of an SLA.
+	Name *string
+
+	// Status of an SLA.
+	Status SlaStatus
+
+	noSmithyDocumentSerde
+}
+
+// Represents the input configuration of an SLA being created.
+type SlaInputConfiguration struct {
+
+	// Name of an SLA.
+	//
+	// This member is required.
+	Name *string
+
+	// Target duration in minutes within which an SLA should be completed.
+	//
+	// This member is required.
+	TargetSlaMinutes *int64
+
+	// Type of SLA.
+	//
+	// This member is required.
+	Type SlaType
+
+	// Unique identifier of a field.
+	FieldId *string
+
+	// Represents a list of target field values for the fieldId specified in
+	// SlaInputConfiguration. The SLA is considered met if any one of these target
+	// field values matches the actual field value.
+	TargetFieldValues []FieldValueUnion
+
+	noSmithyDocumentSerde
+}
+
+// Represents the content of an SLA.
+//
+// The following types satisfy this interface:
+//
+//	SlaInputContentMemberSlaInputConfiguration
+type SlaInputContent interface {
+	isSlaInputContent()
+}
+
+// Represents an input SLA configuration.
+type SlaInputContentMemberSlaInputConfiguration struct {
+	Value SlaInputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SlaInputContentMemberSlaInputConfiguration) isSlaInputContent() {}
+
 // A structured set of sort terms.
 type Sort struct {
 
@@ -1364,4 +1500,5 @@ func (*UnknownUnionMember) isRelatedItemContent()        {}
 func (*UnknownUnionMember) isRelatedItemInputContent()   {}
 func (*UnknownUnionMember) isRelatedItemTypeFilter()     {}
 func (*UnknownUnionMember) isSection()                   {}
+func (*UnknownUnionMember) isSlaInputContent()           {}
 func (*UnknownUnionMember) isUserUnion()                 {}

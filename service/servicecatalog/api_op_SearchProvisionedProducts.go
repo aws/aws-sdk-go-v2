@@ -37,7 +37,7 @@ type SearchProvisionedProductsInput struct {
 	//   - zh - Chinese
 	AcceptLanguage *string
 
-	// The access level to use to obtain results. The default is User .
+	// The access level to use to obtain results. The default is Account .
 	AccessLevelFilter *types.AccessLevelFilter
 
 	// The search filters.

@@ -4458,6 +4458,12 @@ func awsRestjson1_serializeDocumentRelatedItemInputContent(v types.RelatedItemIn
 			return err
 		}
 
+	case *types.RelatedItemInputContentMemberSla:
+		av := object.Key("sla")
+		if err := awsRestjson1_serializeDocumentSlaInputContent(uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -4485,6 +4491,12 @@ func awsRestjson1_serializeDocumentRelatedItemTypeFilter(v types.RelatedItemType
 	case *types.RelatedItemTypeFilterMemberFile:
 		av := object.Key("file")
 		if err := awsRestjson1_serializeDocumentFileFilter(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RelatedItemTypeFilterMemberSla:
+		av := object.Key("sla")
+		if err := awsRestjson1_serializeDocumentSlaFilter(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4569,6 +4581,91 @@ func awsRestjson1_serializeDocumentSectionsList(v []types.Section, value smithyj
 		if err := awsRestjson1_serializeDocumentSection(v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSlaFieldValueUnionList(v []types.FieldValueUnion, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentFieldValueUnion(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSlaFilter(v *types.SlaFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSlaInputConfiguration(v *types.SlaInputConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldId != nil {
+		ok := object.Key("fieldId")
+		ok.String(*v.FieldId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.TargetFieldValues != nil {
+		ok := object.Key("targetFieldValues")
+		if err := awsRestjson1_serializeDocumentSlaFieldValueUnionList(v.TargetFieldValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetSlaMinutes != nil {
+		ok := object.Key("targetSlaMinutes")
+		ok.Long(*v.TargetSlaMinutes)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSlaInputContent(v types.SlaInputContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.SlaInputContentMemberSlaInputConfiguration:
+		av := object.Key("slaInputConfiguration")
+		if err := awsRestjson1_serializeDocumentSlaInputConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

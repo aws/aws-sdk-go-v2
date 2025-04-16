@@ -61,6 +61,25 @@ func (OpenTableFormat) Values() []OpenTableFormat {
 	}
 }
 
+type SSEAlgorithm string
+
+// Enum values for SSEAlgorithm
+const (
+	SSEAlgorithmAes256 SSEAlgorithm = "AES256"
+	SSEAlgorithmAwsKms SSEAlgorithm = "aws:kms"
+)
+
+// Values returns all known values for SSEAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SSEAlgorithm) Values() []SSEAlgorithm {
+	return []SSEAlgorithm{
+		"AES256",
+		"aws:kms",
+	}
+}
+
 type TableBucketMaintenanceType string
 
 // Enum values for TableBucketMaintenanceType

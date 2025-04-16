@@ -1,0 +1,8 @@
+{
+    "id": "2e15c55a-c16b-4077-bd37-0fb57579de3d",
+    "type": "documentation",
+    "description": "Updated default value for the access-level-filter in SearchProvisionedProducts API to Account. For access to userLevel or roleLevel, the user must provide access-level-filter parameter.",
+    "modules": [
+        "service/servicecatalog"
+    ]
+}

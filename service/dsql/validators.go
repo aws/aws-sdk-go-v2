@@ -89,6 +89,26 @@ func (m *validateOpGetCluster) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetVpcEndpointServiceName struct {
+}
+
+func (*validateOpGetVpcEndpointServiceName) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVpcEndpointServiceName) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVpcEndpointServiceNameInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVpcEndpointServiceNameInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -185,6 +205,10 @@ func addOpGetClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCluster{}, middleware.After)
 }
 
+func addOpGetVpcEndpointServiceNameValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVpcEndpointServiceName{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -254,6 +278,21 @@ func validateOpGetClusterInput(v *GetClusterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetClusterInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetVpcEndpointServiceNameInput(v *GetVpcEndpointServiceNameInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVpcEndpointServiceNameInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}

@@ -51,7 +51,7 @@ type ListGroupsInput struct {
 	//
 	//   - AWS::AppRegistry::Application
 	//
-	//   - AWS::AppRegistry::ApplicationResourceGroups
+	//   - AWS::AppRegistry::ApplicationResourceGroup
 	//
 	//   - AWS::CloudFormation::Stack
 	//

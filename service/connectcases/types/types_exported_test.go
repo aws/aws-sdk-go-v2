@@ -253,6 +253,9 @@ func ExampleRelatedItemContent_outputUsage() {
 	case *types.RelatedItemContentMemberFile:
 		_ = v.Value // Value is types.FileContent
 
+	case *types.RelatedItemContentMemberSla:
+		_ = v.Value // Value is types.SlaContent
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -265,6 +268,7 @@ func ExampleRelatedItemContent_outputUsage() {
 var _ *types.FileContent
 var _ *types.ContactContent
 var _ *types.CommentContent
+var _ *types.SlaContent
 
 func ExampleRelatedItemInputContent_outputUsage() {
 	var union types.RelatedItemInputContent
@@ -279,6 +283,9 @@ func ExampleRelatedItemInputContent_outputUsage() {
 	case *types.RelatedItemInputContentMemberFile:
 		_ = v.Value // Value is types.FileContent
 
+	case *types.RelatedItemInputContentMemberSla:
+		_ = v.Value // Value is types.SlaInputContent
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -290,6 +297,7 @@ func ExampleRelatedItemInputContent_outputUsage() {
 
 var _ *types.FileContent
 var _ *types.CommentContent
+var _ types.SlaInputContent
 var _ *types.Contact
 
 func ExampleRelatedItemTypeFilter_outputUsage() {
@@ -305,6 +313,9 @@ func ExampleRelatedItemTypeFilter_outputUsage() {
 	case *types.RelatedItemTypeFilterMemberFile:
 		_ = v.Value // Value is types.FileFilter
 
+	case *types.RelatedItemTypeFilterMemberSla:
+		_ = v.Value // Value is types.SlaFilter
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -316,6 +327,7 @@ func ExampleRelatedItemTypeFilter_outputUsage() {
 
 var _ *types.FileFilter
 var _ *types.ContactFilter
+var _ *types.SlaFilter
 var _ *types.CommentFilter
 
 func ExampleSection_outputUsage() {
@@ -335,6 +347,24 @@ func ExampleSection_outputUsage() {
 }
 
 var _ *types.FieldGroup
+
+func ExampleSlaInputContent_outputUsage() {
+	var union types.SlaInputContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SlaInputContentMemberSlaInputConfiguration:
+		_ = v.Value // Value is types.SlaInputConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SlaInputConfiguration
 
 func ExampleUserUnion_outputUsage() {
 	var union types.UserUnion

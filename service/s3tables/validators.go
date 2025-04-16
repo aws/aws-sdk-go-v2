@@ -90,6 +90,26 @@ func (m *validateOpDeleteNamespace) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteTableBucketEncryption struct {
+}
+
+func (*validateOpDeleteTableBucketEncryption) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTableBucketEncryption) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTableBucketEncryptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTableBucketEncryptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTableBucket struct {
 }
 
@@ -190,6 +210,26 @@ func (m *validateOpGetNamespace) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTableBucketEncryption struct {
+}
+
+func (*validateOpGetTableBucketEncryption) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableBucketEncryption) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableBucketEncryptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableBucketEncryptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTableBucket struct {
 }
 
@@ -245,6 +285,26 @@ func (m *validateOpGetTableBucketPolicy) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTableBucketPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTableEncryption struct {
+}
+
+func (*validateOpGetTableEncryption) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableEncryption) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableEncryptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableEncryptionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -390,6 +450,26 @@ func (m *validateOpListTables) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutTableBucketEncryption struct {
+}
+
+func (*validateOpPutTableBucketEncryption) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTableBucketEncryption) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTableBucketEncryptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTableBucketEncryptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutTableBucketMaintenanceConfiguration struct {
 }
 
@@ -526,6 +606,10 @@ func addOpDeleteNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNamespace{}, middleware.After)
 }
 
+func addOpDeleteTableBucketEncryptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTableBucketEncryption{}, middleware.After)
+}
+
 func addOpDeleteTableBucketValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTableBucket{}, middleware.After)
 }
@@ -546,6 +630,10 @@ func addOpGetNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetNamespace{}, middleware.After)
 }
 
+func addOpGetTableBucketEncryptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableBucketEncryption{}, middleware.After)
+}
+
 func addOpGetTableBucketValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTableBucket{}, middleware.After)
 }
@@ -556,6 +644,10 @@ func addOpGetTableBucketMaintenanceConfigurationValidationMiddleware(stack *midd
 
 func addOpGetTableBucketPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTableBucketPolicy{}, middleware.After)
+}
+
+func addOpGetTableEncryptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableEncryption{}, middleware.After)
 }
 
 func addOpGetTableValidationMiddleware(stack *middleware.Stack) error {
@@ -586,6 +678,10 @@ func addOpListTablesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTables{}, middleware.After)
 }
 
+func addOpPutTableBucketEncryptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTableBucketEncryption{}, middleware.After)
+}
+
 func addOpPutTableBucketMaintenanceConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutTableBucketMaintenanceConfiguration{}, middleware.After)
 }
@@ -608,6 +704,21 @@ func addOpRenameTableValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateTableMetadataLocationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTableMetadataLocation{}, middleware.After)
+}
+
+func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfiguration"}
+	if len(v.SseAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SseAlgorithm"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateIcebergMetadata(v *types.IcebergMetadata) error {
@@ -728,6 +839,11 @@ func validateOpCreateTableBucketInput(v *CreateTableBucketInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -757,6 +873,11 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 			invalidParams.AddNested("Metadata", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -774,6 +895,21 @@ func validateOpDeleteNamespaceInput(v *DeleteNamespaceInput) error {
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTableBucketEncryptionInput(v *DeleteTableBucketEncryptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTableBucketEncryptionInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -872,6 +1008,21 @@ func validateOpGetNamespaceInput(v *GetNamespaceInput) error {
 	}
 }
 
+func validateOpGetTableBucketEncryptionInput(v *GetTableBucketEncryptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableBucketEncryptionInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTableBucketInput(v *GetTableBucketInput) error {
 	if v == nil {
 		return nil
@@ -909,6 +1060,27 @@ func validateOpGetTableBucketPolicyInput(v *GetTableBucketPolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetTableBucketPolicyInput"}
 	if v.TableBucketARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTableEncryptionInput(v *GetTableEncryptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableEncryptionInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1044,6 +1216,28 @@ func validateOpListTablesInput(v *ListTablesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTablesInput"}
 	if v.TableBucketARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutTableBucketEncryptionInput(v *PutTableBucketEncryptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTableBucketEncryptionInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if v.EncryptionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionConfiguration"))
+	} else if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

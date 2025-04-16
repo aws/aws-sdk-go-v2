@@ -14,11 +14,17 @@ import (
 // Creates a new table associated with the given namespace in a table bucket. For
 // more information, see [Creating an Amazon S3 table]in the Amazon Simple Storage Service User Guide.
 //
-// Permissions You must have the s3tables:CreateTable permission to use this
-// operation.
+// Permissions
 //
-// Additionally, you must have the s3tables:PutTableData permission to use this
-// operation with the optional metadata request parameter.
+//   - You must have the s3tables:CreateTable permission to use this operation.
+//
+//   - If you use this operation with the optional metadata request parameter you
+//     must have the s3tables:PutTableData permission.
+//
+//   - If you use this operation with the optional encryptionConfiguration request
+//     parameter you must have the s3tables:PutTableEncryption permission.
+//
+// Additionally,
 //
 // [Creating an Amazon S3 table]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html
 func (c *Client) CreateTable(ctx context.Context, params *CreateTableInput, optFns ...func(*Options)) (*CreateTableOutput, error) {
@@ -57,6 +63,16 @@ type CreateTableInput struct {
 	//
 	// This member is required.
 	TableBucketARN *string
+
+	// The encryption configuration to use for the table. This configuration specifies
+	// the encryption algorithm and, if using SSE-KMS, the KMS key to use for
+	// encrypting the table.
+	//
+	// If you choose SSE-KMS encryption you must grant the S3 Tables maintenance
+	// principal access to your KMS key. For more information, see [Permissions requirements for S3 Tables SSE-KMS encryption].
+	//
+	// [Permissions requirements for S3 Tables SSE-KMS encryption]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// The metadata for the table.
 	Metadata types.TableMetadata

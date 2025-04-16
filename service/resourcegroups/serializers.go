@@ -1503,6 +1503,13 @@ func awsRestjson1_serializeOpDocumentStartTagSyncTaskInput(v *StartTagSyncTaskIn
 		ok.String(*v.Group)
 	}
 
+	if v.ResourceQuery != nil {
+		ok := object.Key("ResourceQuery")
+		if err := awsRestjson1_serializeDocumentResourceQuery(v.ResourceQuery, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)

@@ -109,6 +109,7 @@ const (
 	AMITypesAl2023Arm64Standard     AMITypes = "AL2023_ARM_64_STANDARD"
 	AMITypesAl2023X8664Neuron       AMITypes = "AL2023_x86_64_NEURON"
 	AMITypesAl2023X8664Nvidia       AMITypes = "AL2023_x86_64_NVIDIA"
+	AMITypesAl2023Arm64Nvidia       AMITypes = "AL2023_ARM_64_NVIDIA"
 )
 
 // Values returns all known values for AMITypes. Note that this can be expanded in
@@ -135,6 +136,7 @@ func (AMITypes) Values() []AMITypes {
 		"AL2023_ARM_64_STANDARD",
 		"AL2023_x86_64_NEURON",
 		"AL2023_x86_64_NVIDIA",
+		"AL2023_ARM_64_NVIDIA",
 	}
 }
 

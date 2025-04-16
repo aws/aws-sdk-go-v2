@@ -122,6 +122,12 @@ type GetTableOutput struct {
 	// The metadata location of the table.
 	MetadataLocation *string
 
+	// The unique identifier of the namespace containing this table.
+	NamespaceId *string
+
+	// The unique identifier of the table bucket containing this table.
+	TableBucketId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

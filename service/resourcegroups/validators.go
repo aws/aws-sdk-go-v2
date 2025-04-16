@@ -748,11 +748,10 @@ func validateOpStartTagSyncTaskInput(v *StartTagSyncTaskInput) error {
 	if v.Group == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Group"))
 	}
-	if v.TagKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
-	}
-	if v.TagValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagValue"))
+	if v.ResourceQuery != nil {
+		if err := validateResourceQuery(v.ResourceQuery); err != nil {
+			invalidParams.AddNested("ResourceQuery", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))

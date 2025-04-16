@@ -1,0 +1,8 @@
+{
+    "id": "30e237e8-c8ba-484a-9841-7d93019b4505",
+    "type": "feature",
+    "description": "Resource Groups: TagSyncTasks can be created with ResourceQuery",
+    "modules": [
+        "service/resourcegroups"
+    ]
+}

@@ -5070,6 +5070,11 @@ func awsAwsjson11_serializeOpDocumentCreateConnectionInput(v *CreateConnectionIn
 		}
 	}
 
+	if v.KmsKeyIdentifier != nil {
+		ok := object.Key("KmsKeyIdentifier")
+		ok.String(*v.KmsKeyIdentifier)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -6165,6 +6170,11 @@ func awsAwsjson11_serializeOpDocumentUpdateConnectionInput(v *UpdateConnectionIn
 		if err := awsAwsjson11_serializeDocumentConnectivityResourceParameters(v.InvocationConnectivityParameters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.KmsKeyIdentifier != nil {
+		ok := object.Key("KmsKeyIdentifier")
+		ok.String(*v.KmsKeyIdentifier)
 	}
 
 	if v.Name != nil {
