@@ -541,19 +541,22 @@ type downloader struct {
 	in      *DownloadObjectInput
 	out     *DownloadObjectOutput
 
-	wg sync.WaitGroup
-	m  sync.Mutex
+	wg             sync.WaitGroup
+	m              sync.Mutex
+	etagOnce       sync.Once
+	totalBytesOnce sync.Once
 
 	offset     int64
 	pos        int64
 	totalBytes int64
 	written    int64
+	etag       string
 
 	err error
 }
 
 func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error) {
-	if err := d.init(ctx); err != nil {
+	if err := d.init(); err != nil {
 		return nil, fmt.Errorf("unable to initialize download: %w", err)
 	}
 
@@ -600,12 +603,12 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 			d.wg.Wait()
 		}
 	} else {
-		if d.in.Range == "" {
-			output = d.getChunk(ctx, 0, d.byteRange(), clientOptions...)
-		} else {
+		if d.in.Range != "" {
 			d.pos, d.totalBytes = d.getDownloadRange()
 			d.offset = d.pos
 		}
+
+		d.getChunk(ctx, 0, d.byteRange(), clientOptions...)
 		total := d.totalBytes
 
 		ch := make(chan dlChunk, d.options.Concurrency)
@@ -639,7 +642,7 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	return d.out, nil
 }
 
-func (d *downloader) init(ctx context.Context) error {
+func (d *downloader) init() error {
 	if d.options.PartSizeBytes < minPartSizeBytes {
 		return fmt.Errorf("part size must be at least %d bytes", minPartSizeBytes)
 	}
@@ -655,7 +658,6 @@ func (d *downloader) init(ctx context.Context) error {
 
 func (d *downloader) singleDownload(ctx context.Context, clientOptions ...func(*s3.Options)) (*DownloadObjectOutput, error) {
 	chunk := dlChunk{w: d.in.WriterAt}
-	// d.in.PartNumber = 0
 	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
 	if err != nil {
 		return nil, err
@@ -708,6 +710,9 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 	if chunk.withRange != "" {
 		params.Range = aws.String(chunk.withRange)
 	}
+	if params.VersionId == nil && d.etag != "" {
+		params.IfMatch = aws.String(d.etag)
+	}
 
 	var out *s3.GetObjectOutput
 	var n int64
@@ -737,6 +742,9 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 	if out != nil {
 		output = &DownloadObjectOutput{}
 		output.mapFromGetObjectOutput(out, params.ChecksumMode)
+		d.etagOnce.Do(func() {
+			d.etag = aws.ToString(out.ETag)
+		})
 	}
 	return output, err
 }
@@ -747,7 +755,9 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		return nil, 0, err
 	}
 
-	d.setTotalBytes(out) // Set total if not yet set.
+	d.totalBytesOnce.Do(func() {
+		d.setTotalBytes(out)
+	}) // Set total in first GET
 
 	var n int64
 	defer out.Body.Close()
@@ -780,9 +790,6 @@ func (d *downloader) getTotalBytes() int64 {
 // does not include a Content-Range. Meaning the object was not chunked. This
 // occurs when the full file fits within the PartSize directive.
 func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
-	d.m.Lock()
-	defer d.m.Unlock()
-
 	if d.totalBytes >= 0 {
 		return
 	}
