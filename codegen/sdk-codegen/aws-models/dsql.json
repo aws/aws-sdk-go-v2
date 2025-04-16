@@ -75,6 +75,11 @@
             "list": {
                 "target": "com.amazonaws.dsql#ListClusters"
             },
+            "operations": [
+                {
+                    "target": "com.amazonaws.dsql#GetVpcEndpointServiceName"
+                }
+            ],
             "collectionOperations": [
                 {
                     "target": "com.amazonaws.dsql#CreateMultiRegionClusters"
@@ -118,7 +123,8 @@
         "com.amazonaws.dsql#ClusterId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "The ID of the cluster"
+                "smithy.api#documentation": "The ID of the cluster",
+                "smithy.api#pattern": "^[a-z0-9]{26}$"
             }
         },
         "com.amazonaws.dsql#ClusterList": {
@@ -1053,7 +1059,7 @@
                     {
                         "id": "GetClusterNotFound",
                         "params": {
-                            "identifier": "someIdentifier"
+                            "identifier": "ruabtlcu6nqjdl6k6jjcug67ta"
                         },
                         "expect": {
                             "failure": {
@@ -1167,6 +1173,98 @@
             },
             "traits": {
                 "smithy.api#documentation": "Output Mixin",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.dsql#GetVpcEndpointServiceName": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dsql#GetVpcEndpointServiceNameInput"
+            },
+            "output": {
+                "target": "com.amazonaws.dsql#GetVpcEndpointServiceNameOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dsql#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.dsql#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dsql#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.dsql#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get the VPC Endpoint Service Name for a cluster"
+                },
+                "smithy.api#documentation": "<p>Retrieves the VPC endpoint service name.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get VPC Endpoint Service Name",
+                        "input": {
+                            "identifier": "kiqenqglxyl2snyvkvnj2c3s2e"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "uri": "/clusters/{identifier}/vpc-endpoint-service-name",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetVpcEndpointServiceNameNotFound",
+                        "params": {
+                            "identifier": "ruabtlcu6nqjdl6k6jjcug67ta"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.dsql#ResourceNotFoundException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.dsql#GetVpcEndpointServiceNameInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.dsql#ClusterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the cluster to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.dsql#GetVpcEndpointServiceNameOutput": {
+            "type": "structure",
+            "members": {
+                "serviceName": {
+                    "target": "com.amazonaws.dsql#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC endpoint service name.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -1438,6 +1536,17 @@
                 "smithy.api#documentation": "<p>The resource could not be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.dsql#ServiceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "VPC Endpoint Service name for a Cluster",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^com\\.amazonaws\\.[a-z0-9-]+\\.dsql-[a-f0-9]{6}$"
             }
         },
         "com.amazonaws.dsql#ServiceQuotaExceededException": {

@@ -165,7 +165,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new table associated with the given namespace in a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html\">Creating an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:CreateTable</code> permission to use this operation. </p>\n               <note>\n                  <p>Additionally, you must have the <code>s3tables:PutTableData</code> permission to use this operation with the optional <code>metadata</code> request parameter. </p>\n               </note>\n            </dd>\n         </dl>",
+                "smithy.api#documentation": "<p>Creates a new table associated with the given namespace in a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html\">Creating an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>You must have the <code>s3tables:CreateTable</code> permission to use this operation. </p>\n                  </li>\n                  <li>\n                     <p>If you use this operation with the optional <code>metadata</code> request parameter you must have the <code>s3tables:PutTableData</code> permission. </p>\n                  </li>\n                  <li>\n                     <p>If you use this operation with the optional <code>encryptionConfiguration</code> request parameter you must have the <code>s3tables:PutTableEncryption</code> permission. </p>\n                  </li>\n               </ul>\n               <note>\n                  <p>Additionally,  </p>\n               </note>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}",
                     "method": "PUT",
@@ -202,7 +202,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html\">Creating a table bucket</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:CreateTableBucket</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#documentation": "<p>Creates a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html\">Creating a table bucket</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>You must have the <code>s3tables:CreateTableBucket</code> permission to use this operation. </p>\n                  </li>\n                  <li>\n                     <p>If you use this operation with the optional <code>encryptionConfiguration</code> parameter you must have the <code>s3tables:PutTableBucketEncryption</code> permission.</p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets",
                     "method": "PUT",
@@ -218,6 +218,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name for the table bucket.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.s3tables#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration to use for the table bucket. This configuration specifies the default encryption settings that will be applied to all tables created in this bucket unless overridden at the table level. The configuration includes the encryption algorithm and, if using SSE-KMS, the KMS key to use.</p>"
                     }
                 }
             },
@@ -277,6 +283,12 @@
                     "target": "com.amazonaws.s3tables#TableMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata for the table.</p>"
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.s3tables#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration to use for the table. This configuration specifies the encryption algorithm and, if using SSE-KMS, the KMS key to use for encrypting the table. </p>\n         <note>\n            <p>If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a>.</p>\n         </note>"
                     }
                 }
             },
@@ -442,6 +454,60 @@
                     "code": 204
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#DeleteTableBucketEncryption": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#DeleteTableBucketEncryptionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the encryption configuration for a table bucket.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:DeleteTableBucketEncryption</code> permission to use this operation.</p>\n            </dd>\n         </dl>",
+                "smithy.api#http": {
+                    "uri": "/buckets/{tableBucketARN}/encryption",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#DeleteTableBucketEncryptionRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.s3tables#DeleteTableBucketPolicy": {
@@ -623,6 +689,32 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.s3tables#EncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "sseAlgorithm": {
+                    "target": "com.amazonaws.s3tables#SSEAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server-side encryption algorithm to use. Valid values are <code>AES256</code> for S3-managed encryption keys, or <code>aws:kms</code> for Amazon Web Services KMS-managed encryption keys. If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key to use for encryption. This field is required only when <code>sseAlgorithm</code> is set to <code>aws:kms</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        },
+                        "smithy.api#pattern": "^(arn:aws[-a-z0-9]*:kms:[-a-z0-9]*:[0-9]{12}:key/.+)$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration specifying how data should be encrypted. This structure defines the encryption algorithm and optional KMS key to be used for server-side encryption.</p>"
+            }
+        },
         "com.amazonaws.s3tables#ErrorMessage": {
             "type": "string"
         },
@@ -752,6 +844,18 @@
                         "smithy.api#documentation": "<p>The ID of the account that owns the namespcace.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "namespaceId": {
+                    "target": "com.amazonaws.s3tables#NamespaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the namespace.</p>"
+                    }
+                },
+                "tableBucketId": {
+                    "target": "com.amazonaws.s3tables#TableBucketId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the table bucket containing this namespace.</p>"
+                    }
                 }
             },
             "traits": {
@@ -872,6 +976,74 @@
                         }
                     }
                 ]
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketEncryption": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#GetTableBucketEncryptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#GetTableBucketEncryptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the encryption configuration for a table bucket.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:GetTableBucketEncryption</code> permission to use this operation.</p>\n            </dd>\n         </dl>",
+                "smithy.api#http": {
+                    "uri": "/buckets/{tableBucketARN}/encryption",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketEncryptionRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketEncryptionResponse": {
+            "type": "structure",
+            "members": {
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.s3tables#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for the table bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.s3tables#GetTableBucketMaintenanceConfiguration": {
@@ -1063,6 +1235,96 @@
                         "smithy.api#documentation": "<p>The date and time the table bucket was created.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "tableBucketId": {
+                    "target": "com.amazonaws.s3tables#TableBucketId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the table bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableEncryption": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#GetTableEncryptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#GetTableEncryptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the encryption configuration for a table.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:GetTableEncryption</code> permission to use this operation.</p>\n            </dd>\n         </dl>",
+                "smithy.api#http": {
+                    "uri": "/tables/{tableBucketARN}/{namespace}/{name}/encryption",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableEncryptionRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket containing the table.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.s3tables#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace associated with the table.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.s3tables#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableEncryptionResponse": {
+            "type": "structure",
+            "members": {
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.s3tables#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for the table.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1496,6 +1758,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "namespaceId": {
+                    "target": "com.amazonaws.s3tables#NamespaceId",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The unique identifier of the namespace containing this table.</p>"
+                    }
+                },
                 "versionToken": {
                     "target": "com.amazonaws.s3tables#VersionToken",
                     "traits": {
@@ -1565,6 +1834,12 @@
                         "smithy.api#documentation": "<p>The format of the table.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "tableBucketId": {
+                    "target": "com.amazonaws.s3tables#TableBucketId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the table bucket containing this table.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1582,7 +1857,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about the compaction settings for an Iceberg table.      \n    </p>"
+                "smithy.api#documentation": "<p>Contains details about the compaction settings for an Iceberg table.</p>"
             }
         },
         "com.amazonaws.s3tables#IcebergMetadata": {
@@ -1632,7 +1907,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about the snapshot management settings for an Iceberg table. The oldest snapshot expires when its age exceeds the <code>maxSnapshotAgeHours</code> and the total number of snapshots exceeds the value for the minimum number of snapshots to keep <code>minSnapshotsToKeep</code>.\n    </p>"
+                "smithy.api#documentation": "<p>Contains details about the snapshot management settings for an Iceberg table. The oldest snapshot expires when its age exceeds the <code>maxSnapshotAgeHours</code> and the total number of snapshots exceeds the value for the minimum number of snapshots to keep <code>minSnapshotsToKeep</code>.</p>"
             }
         },
         "com.amazonaws.s3tables#IcebergUnreferencedFileRemovalSettings": {
@@ -1641,18 +1916,18 @@
                 "unreferencedDays": {
                     "target": "com.amazonaws.s3tables#PositiveInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days an object has to be unreferenced before it is marked as non-current.\n\n       </p>"
+                        "smithy.api#documentation": "<p>The number of days an object has to be unreferenced before it is marked as non-current.</p>"
                     }
                 },
                 "nonCurrentDays": {
                     "target": "com.amazonaws.s3tables#PositiveInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days an object has to be non-current before it is deleted.\n      \n    </p>"
+                        "smithy.api#documentation": "<p>The number of days an object has to be non-current before it is deleted.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about the unreferenced file removal settings for an Iceberg table bucket.     \n    </p>"
+                "smithy.api#documentation": "<p>Contains details about the unreferenced file removal settings for an Iceberg table bucket.</p>"
             }
         },
         "com.amazonaws.s3tables#InternalServerErrorException": {
@@ -2117,6 +2392,9 @@
                 }
             }
         },
+        "com.amazonaws.s3tables#NamespaceId": {
+            "type": "string"
+        },
         "com.amazonaws.s3tables#NamespaceList": {
             "type": "list",
             "member": {
@@ -2181,6 +2459,18 @@
                         "smithy.api#documentation": "<p>The ID of the account that owns the namespace.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "namespaceId": {
+                    "target": "com.amazonaws.s3tables#NamespaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-assigned unique identifier for the namespace.</p>"
+                    }
+                },
+                "tableBucketId": {
+                    "target": "com.amazonaws.s3tables#TableBucketId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-assigned unique identifier for the table bucket that contains this namespace.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2233,6 +2523,67 @@
                     "min": 1,
                     "max": 2147483647
                 }
+            }
+        },
+        "com.amazonaws.s3tables#PutTableBucketEncryption": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#PutTableBucketEncryptionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the encryption configuration for a table bucket.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:PutTableBucketEncryption</code> permission to use this operation.</p>\n               <note>\n                  <p>If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a>\n                  </p>\n               </note>\n            </dd>\n         </dl>",
+                "smithy.api#http": {
+                    "uri": "/buckets/{tableBucketARN}/encryption",
+                    "method": "PUT",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#PutTableBucketEncryptionRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.s3tables#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration to apply to the table bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.s3tables#PutTableBucketMaintenanceConfiguration": {
@@ -2629,10 +2980,16 @@
                     "target": "com.amazonaws.s3tables#NamespaceResource"
                 },
                 {
+                    "target": "com.amazonaws.s3tables#TableBucketEncryptionResource"
+                },
+                {
                     "target": "com.amazonaws.s3tables#TableBucketPolicyResource"
                 },
                 {
                     "target": "com.amazonaws.s3tables#TableBucketResource"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TableEncryptionResource"
                 },
                 {
                     "target": "com.amazonaws.s3tables#TablePolicyResource"
@@ -2652,7 +3009,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>An Amazon S3 table represents a structured dataset consisting of tabular data in <a href=\"https://parquet.apache.org/docs/\">Apache Parquet</a> format and related metadata. This data is stored inside an S3 table as a subresource. All tables in a table bucket are stored in the <a href=\"https://iceberg.apache.org/docs/latest/\">Apache Iceberg</a> table format. Through integration with the <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/glue/latest/dg/catalog-and-crawler.html\">AWS Glue Data Catalog</a> you can interact with your tables using AWS analytics services, such as <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/athena/\">Amazon Athena</a> and <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/redshift/\">Amazon Redshift</a>. Amazon S3 manages maintenance of your tables through automatic file compaction and snapshot management. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets.html\">Amazon S3 table buckets</a>.</p>",
+                "smithy.api#documentation": "<p>An Amazon S3 table represents a structured dataset consisting of tabular data in <a href=\"https://parquet.apache.org/docs/\">Apache Parquet</a> format and related metadata. This data is stored inside an S3 table as a subresource. All tables in a table bucket are stored in the <a href=\"https://iceberg.apache.org/docs/latest/\">Apache Iceberg</a> table format. Through integration with the <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/glue/latest/dg/catalog-and-crawler.html\">Amazon Web Services Glue Data Catalog</a> you can interact with your tables using Amazon Web Services analytics services, such as <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/athena/\">Amazon Athena</a> and <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/redshift/\">Amazon Redshift</a>. Amazon S3 manages maintenance of your tables through automatic file compaction and snapshot management. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets.html\">Amazon S3 table buckets</a>.</p>",
                 "smithy.api#title": "Amazon S3 Tables",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3320,6 +3677,23 @@
                 }
             }
         },
+        "com.amazonaws.s3tables#SSEAlgorithm": {
+            "type": "enum",
+            "members": {
+                "AES256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AES256"
+                    }
+                },
+                "AWS_KMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws:kms"
+                    }
+                }
+            }
+        },
         "com.amazonaws.s3tables#SchemaField": {
             "type": "structure",
             "members": {
@@ -3376,6 +3750,29 @@
                 },
                 "smithy.api#pattern": "^(arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:bucket/[a-z0-9_-]{3,63})$"
             }
+        },
+        "com.amazonaws.s3tables#TableBucketEncryptionResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.s3tables#DeleteTableBucketEncryption"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#GetTableBucketEncryption"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#PutTableBucketEncryption"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "absolute": true,
+                    "template": "com.amazonaws.s3tables#TableBucketARN"
+                }
+            }
+        },
+        "com.amazonaws.s3tables#TableBucketId": {
+            "type": "string"
         },
         "com.amazonaws.s3tables#TableBucketMaintenanceConfiguration": {
             "type": "map",
@@ -3515,6 +3912,12 @@
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
                     }
+                },
+                "tableBucketId": {
+                    "target": "com.amazonaws.s3tables#TableBucketId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-assigned unique identifier for the table bucket.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3525,6 +3928,20 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.s3tables#TableBucketSummary"
+            }
+        },
+        "com.amazonaws.s3tables#TableEncryptionResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.s3tables#GetTableEncryption"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "absolute": true,
+                    "template": "com.amazonaws.s3tables#TableARN"
+                }
             }
         },
         "com.amazonaws.s3tables#TableMaintenanceConfiguration": {
@@ -3777,6 +4194,18 @@
                         "smithy.api#documentation": "<p>The date and time the table was last modified at.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "namespaceId": {
+                    "target": "com.amazonaws.s3tables#NamespaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the namespace that contains this table.</p>"
+                    }
+                },
+                "tableBucketId": {
+                    "target": "com.amazonaws.s3tables#TableBucketId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the table bucket that contains this table.</p>"
                     }
                 }
             },

@@ -1840,7 +1840,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>If you provide a value for <code>PerformedBy.UserArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">connect:DescribeUser</a> permission on the User ARN resource that you provide</p>\n         </note>\n         <p>Creates a case in the specified Cases domain. Case system and custom fields are taken\n      as an array id/value pairs with a declared data types.</p>\n         <p>The following fields are required when creating a case:</p>\n    \n         <ul>\n            <li>\n               <p>\n                  <code>customer_id</code> - You must provide the full customer profile ARN in this format:\n            <code>arn:aws:profile:your_AWS_Region:your_AWS_account\n            ID:domains/your_profiles_domain_name/profiles/profile_ID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>title</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>If you provide a value for <code>PerformedBy.UserArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">connect:DescribeUser</a> permission on the User ARN resource that you provide</p>\n         </note>\n         <p>Creates a case in the specified Cases domain. Case system and custom fields are taken\n      as an array id/value pairs with a declared data types.</p>\n         <p>The following fields are required when creating a case:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>customer_id</code> - You must provide the full customer profile ARN in this format:\n            <code>arn:aws:profile:your_AWS_Region:your_AWS_account\n            ID:domains/your_profiles_domain_name/profiles/profile_ID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>title</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/cases",
                     "method": "POST"
@@ -2037,7 +2037,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a domain, which is a container for all case data, such as cases, fields, templates\n      and layouts. Each Amazon Connect instance can be associated with only one Cases\n      domain.</p>\n         <important>\n            <p>This will not associate your connect instance to Cases domain. Instead, use the\n          Amazon Connect\n        <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html\">CreateIntegrationAssociation</a> API. You need specific IAM\n        permissions to successfully associate the Cases domain. For more information, see\n          <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/required-permissions-iam-cases.html#onboard-cases-iam\">Onboard to Cases</a>.</p>\n      \n         </important>",
+                "smithy.api#documentation": "<p>Creates a domain, which is a container for all case data, such as cases, fields, templates\n      and layouts. Each Amazon Connect instance can be associated with only one Cases\n      domain.</p>\n         <important>\n            <p>This will not associate your connect instance to Cases domain. Instead, use the\n          Amazon Connect\n        <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html\">CreateIntegrationAssociation</a> API. You need specific IAM\n        permissions to successfully associate the Cases domain. For more information, see\n          <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/required-permissions-iam-cases.html#onboard-cases-iam\">Onboard to Cases</a>.</p>\n         </important>",
                 "smithy.api#http": {
                     "uri": "/domains",
                     "method": "POST"
@@ -2566,7 +2566,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a Cases domain.</p>\n    \n         <note>\n            <p>After deleting your domain you must disassociate the deleted domain from your Amazon Connect instance with another API call before being able to use Cases again with this\n          Amazon Connect instance. See <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteIntegrationAssociation.html\">DeleteIntegrationAssociation</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes a Cases domain.</p>\n         <note>\n            <p>After deleting your domain you must disassociate the deleted domain from your Amazon Connect instance with another API call before being able to use Cases again with this\n          Amazon Connect instance. See <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteIntegrationAssociation.html\">DeleteIntegrationAssociation</a>.</p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}",
                     "method": "DELETE"
@@ -2691,7 +2691,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a layout from a cases template. You can delete up to 100 layouts per\n      domain.</p>\n\n         <p>After a layout is deleted:</p>\n         <ul>\n            <li>\n               <p>You can still retrieve the layout by calling <code>GetLayout</code>.</p>\n            </li>\n            <li>\n               <p>You cannot update a deleted layout by calling <code>UpdateLayout</code>; it throws a\n            <code>ValidationException</code>.</p>\n            </li>\n            <li>\n               <p>Deleted layouts are not included in the <code>ListLayouts</code> response.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes a layout from a cases template. You can delete up to 100 layouts per\n      domain.</p>\n         <p>After a layout is deleted:</p>\n         <ul>\n            <li>\n               <p>You can still retrieve the layout by calling <code>GetLayout</code>.</p>\n            </li>\n            <li>\n               <p>You cannot update a deleted layout by calling <code>UpdateLayout</code>; it throws a\n            <code>ValidationException</code>.</p>\n            </li>\n            <li>\n               <p>Deleted layouts are not included in the <code>ListLayouts</code> response.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/layouts/{layoutId}",
                     "method": "DELETE"
@@ -2759,7 +2759,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a cases template. You can delete up to 100 templates per domain.</p>\n\n         <p>After a cases template is deleted:</p>\n         <ul>\n            <li>\n               <p>You can still retrieve the template by calling <code>GetTemplate</code>.</p>\n            </li>\n            <li>\n               <p>You cannot update the template. </p>\n            </li>\n            <li>\n               <p>You cannot create a case by using the deleted template.</p>\n            </li>\n            <li>\n               <p>Deleted templates are not included in the <code>ListTemplates</code> response.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes a cases template. You can delete up to 100 templates per domain.</p>\n         <p>After a cases template is deleted:</p>\n         <ul>\n            <li>\n               <p>You can still retrieve the template by calling <code>GetTemplate</code>.</p>\n            </li>\n            <li>\n               <p>You cannot update the template. </p>\n            </li>\n            <li>\n               <p>You cannot create a case by using the deleted template.</p>\n            </li>\n            <li>\n               <p>Deleted templates are not included in the <code>ListTemplates</code> response.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/templates/{templateId}",
                     "method": "DELETE"
@@ -3417,7 +3417,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>String value type.</p>",
                         "smithy.api#length": {
-                            "max": 1500
+                            "max": 3000
                         }
                     }
                 },
@@ -5203,6 +5203,9 @@
                     "target": "com.amazonaws.connectcases#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.connectcases#InternalServerException"
                 },
                 {
@@ -5301,6 +5304,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the content of a File to be returned to agents.</p>"
                     }
+                },
+                "sla": {
+                    "target": "com.amazonaws.connectcases#SlaContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the content of an SLA to be returned to agents.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5357,6 +5366,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A file of related items.</p>"
                     }
+                },
+                "sla": {
+                    "target": "com.amazonaws.connectcases#SlaInputContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the content of an SLA to be created.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5378,6 +5393,10 @@
                     {
                         "value": "File",
                         "name": "FILE"
+                    },
+                    {
+                        "value": "Sla",
+                        "name": "SLA"
                     }
                 ]
             }
@@ -5401,6 +5420,12 @@
                     "target": "com.amazonaws.connectcases#FileFilter",
                     "traits": {
                         "smithy.api#documentation": "<p>A filter for related items of this type of <code>File</code>.</p>"
+                    }
+                },
+                "sla": {
+                    "target": "com.amazonaws.connectcases#SlaFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Filter for related items of type <code>SLA</code>.</p>"
                     }
                 }
             },
@@ -5879,6 +5904,219 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.connectcases#SlaCompletionTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.connectcases#SlaConfiguration": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.connectcases#SlaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of an SLA.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connectcases#SlaType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of SLA.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.connectcases#SlaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of an SLA.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of a field.</p>"
+                    }
+                },
+                "targetFieldValues": {
+                    "target": "com.amazonaws.connectcases#SlaFieldValueUnionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a list of target field values for the fieldId specified in SlaConfiguration.</p>"
+                    }
+                },
+                "targetTime": {
+                    "target": "com.amazonaws.connectcases#SlaTargetTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Target time by which an SLA should be completed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "completionTime": {
+                    "target": "com.amazonaws.connectcases#SlaCompletionTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time at which an SLA was completed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an SLA configuration.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#SlaContent": {
+            "type": "structure",
+            "members": {
+                "slaConfiguration": {
+                    "target": "com.amazonaws.connectcases#SlaConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents an SLA configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the content of an SLA to be returned to agents.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#SlaFieldValueUnionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#FieldValueUnion"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.connectcases#SlaFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.connectcases#SlaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of an SLA.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.connectcases#SlaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of an SLA.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for related items of type <code>SLA</code>.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#SlaInputConfiguration": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.connectcases#SlaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of an SLA.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connectcases#SlaType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of SLA.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of a field.</p>"
+                    }
+                },
+                "targetFieldValues": {
+                    "target": "com.amazonaws.connectcases#SlaFieldValueUnionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a list of target field values for the fieldId specified in SlaInputConfiguration. \n      The SLA is considered met if any one of these target field values matches the actual field value.</p>"
+                    }
+                },
+                "targetSlaMinutes": {
+                    "target": "com.amazonaws.connectcases#TargetSlaMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Target duration in minutes within which an SLA should be completed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the input configuration of an SLA being created.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#SlaInputContent": {
+            "type": "union",
+            "members": {
+                "slaInputConfiguration": {
+                    "target": "com.amazonaws.connectcases#SlaInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents an input SLA configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the content of an SLA.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#SlaName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^.*[\\S]$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connectcases#SlaStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Active",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "Overdue",
+                        "name": "OVERDUE"
+                    },
+                    {
+                        "value": "Met",
+                        "name": "MET"
+                    },
+                    {
+                        "value": "NotMet",
+                        "name": "NOT_MET"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcases#SlaTargetTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.connectcases#SlaType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CaseField",
+                        "name": "CASE_FIELD"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.connectcases#Sort": {
             "type": "structure",
             "members": {
@@ -5993,6 +6231,15 @@
             },
             "traits": {
                 "smithy.api#sparse": {}
+            }
+        },
+        "com.amazonaws.connectcases#TargetSlaMinutes": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 129600
+                }
             }
         },
         "com.amazonaws.connectcases#Template": {
