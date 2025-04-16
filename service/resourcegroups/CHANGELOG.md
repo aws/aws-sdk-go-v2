@@ -1,3 +1,7 @@
+# v1.29.0 (2025-04-16)
+
+* **Feature**: Resource Groups: TagSyncTasks can be created with ResourceQuery
+
 # v1.28.3 (2025-04-10)
 
 * No change notes available for this release.

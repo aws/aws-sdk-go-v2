@@ -1,8 +1,0 @@
-{
-    "id": "2da0d0f9-3cd5-41ff-adc5-148c06e14b5a",
-    "type": "feature",
-    "description": "Added GetClusterEndpointService API. The new API allows retrieving endpoint service name specific to a cluster.",
-    "modules": [
-        "service/dsql"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "922888c2-fce4-4506-b594-0d112bd86d52",
-    "type": "feature",
-    "description": "Added support for new AL2023 ARM64 NVIDIA AMIs to the supported AMITypes.",
-    "modules": [
-        "service/eks"
-    ]
-}

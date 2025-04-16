@@ -1,3 +1,7 @@
+# v1.33.4 (2025-04-16)
+
+* **Documentation**: Updated default value for the access-level-filter in SearchProvisionedProducts API to Account. For access to userLevel or roleLevel, the user must provide access-level-filter parameter.
+
 # v1.33.3 (2025-04-10)
 
 * No change notes available for this release.

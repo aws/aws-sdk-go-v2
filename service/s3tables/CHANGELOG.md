@@ -1,3 +1,7 @@
+# v1.3.0 (2025-04-16)
+
+* **Feature**: S3 Tables now supports setting encryption configurations on table buckets and tables. Encryption configurations can use server side encryption using AES256 or KMS customer-managed keys.
+
 # v1.2.2 (2025-04-03)
 
 * No change notes available for this release.

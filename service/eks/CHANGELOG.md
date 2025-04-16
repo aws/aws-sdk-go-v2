@@ -1,3 +1,7 @@
+# v1.64.0 (2025-04-16)
+
+* **Feature**: Added support for new AL2023 ARM64 NVIDIA AMIs to the supported AMITypes.
+
 # v1.63.2 (2025-04-10)
 
 * No change notes available for this release.

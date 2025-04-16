@@ -1,3 +1,21 @@
+# Release (2025-04-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.24.0](service/connectcases/CHANGELOG.md#v1240-2025-04-16)
+  * **Feature**: This feature provides capabilities to help track and meet service level agreements (SLAs) on cases programmatically. It allows configuring a new related item of type `Sla` on a case using CreateRelatedItem API and provides the ability to search for this new related item using SearchRelatedItems API.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.2.0](service/dsql/CHANGELOG.md#v120-2025-04-16)
+  * **Feature**: Added GetClusterEndpointService API. The new API allows retrieving endpoint service name specific to a cluster.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.64.0](service/eks/CHANGELOG.md#v1640-2025-04-16)
+  * **Feature**: Added support for new AL2023 ARM64 NVIDIA AMIs to the supported AMITypes.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.39.0](service/eventbridge/CHANGELOG.md#v1390-2025-04-16)
+  * **Feature**: Adding support for KmsKeyIdentifer in CreateConnection, UpdateConnection and DescribeConnection APIs
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroups`: [v1.29.0](service/resourcegroups/CHANGELOG.md#v1290-2025-04-16)
+  * **Feature**: Resource Groups: TagSyncTasks can be created with ResourceQuery
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.3.0](service/s3tables/CHANGELOG.md#v130-2025-04-16)
+  * **Feature**: S3 Tables now supports setting encryption configurations on table buckets and tables. Encryption configurations can use server side encryption using AES256 or KMS customer-managed keys.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.33.4](service/servicecatalog/CHANGELOG.md#v1334-2025-04-16)
+  * **Documentation**: Updated default value for the access-level-filter in SearchProvisionedProducts API to Account. For access to userLevel or roleLevel, the user must provide access-level-filter parameter.
+
 # Release (2025-04-14)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "3c9dd997-d77f-440c-baf0-aac7d8aaa94f",
-    "type": "feature",
-    "description": "This feature provides capabilities to help track and meet service level agreements (SLAs) on cases programmatically. It allows configuring a new related item of type `Sla` on a case using CreateRelatedItem API and provides the ability to search for this new related item using SearchRelatedItems API.",
-    "modules": [
-        "service/connectcases"
-    ]
-}

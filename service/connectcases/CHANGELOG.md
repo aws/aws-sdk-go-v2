@@ -1,3 +1,7 @@
+# v1.24.0 (2025-04-16)
+
+* **Feature**: This feature provides capabilities to help track and meet service level agreements (SLAs) on cases programmatically. It allows configuring a new related item of type `Sla` on a case using CreateRelatedItem API and provides the ability to search for this new related item using SearchRelatedItems API.
+
 # v1.23.2 (2025-04-03)
 
 * No change notes available for this release.

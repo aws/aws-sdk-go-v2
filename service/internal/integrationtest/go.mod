@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.45.2
-	github.com/aws/aws-sdk-go-v2/service/athena v1.50.3
+	github.com/aws/aws-sdk-go-v2/service/athena v1.50.4
 	github.com/aws/aws-sdk-go-v2/service/batch v1.52.2
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.59.2
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.45.3
@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.51.4
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.52.3
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.29.2
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.51.2
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.51.3
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.32.2
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.4
@@ -39,7 +39,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.45.2
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.33.3
 	github.com/aws/aws-sdk-go-v2/service/emr v1.48.3
-	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.38.1
+	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.39.0
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.3
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.3
@@ -48,7 +48,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iam v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.2
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.33.2
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.33.3
 	github.com/aws/aws-sdk-go-v2/service/kms v1.38.3
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.71.2
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.43.2
@@ -64,8 +64,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.35.3
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.79.2
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.56.3
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.3
-	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.33.3
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.4
+	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.33.4
 	github.com/aws/aws-sdk-go-v2/service/ses v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.35.4
 	github.com/aws/aws-sdk-go-v2/service/shield v1.30.2
