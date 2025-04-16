@@ -400,8 +400,11 @@ type EncoderOptions struct {
 	// always respect omitempty regardless of this setting.
 	OmitNullAttributeValues bool
 
+
 	// When enabled, the encoder will omit empty time attribute values
 	OmitEmptyTime bool
+=======
+
 }
 
 // An Encoder provides marshaling Go value types to AttributeValues.
