@@ -101,3 +101,6 @@ role_arn = webident_arn
 
 [profile webident-partial]
 web_identity_token_file = ./testdata/wit.txt
+
+[profile ec2metadata-profilename]
+ec2_instance_profile_name = SharedCfg

@@ -189,7 +189,7 @@ func resolveCredsFromProfile(ctx context.Context, cfg *aws.Config, envConfig *En
 
 	default:
 		ctx = addCredentialSource(ctx, aws.CredentialSourceIMDS)
-		err = resolveEC2RoleCredentials(ctx, cfg, configs)
+		err = resolveEC2RoleCredentials(ctx, cfg, envConfig, sharedConfig, configs)
 	}
 	if err != nil {
 		return ctx, err
@@ -379,7 +379,7 @@ func resolveCredsFromSource(ctx context.Context, cfg *aws.Config, envConfig *Env
 	switch sharedCfg.CredentialSource {
 	case credSourceEc2Metadata:
 		ctx = addCredentialSource(ctx, aws.CredentialSourceIMDS)
-		return ctx, resolveEC2RoleCredentials(ctx, cfg, configs)
+		return ctx, resolveEC2RoleCredentials(ctx, cfg, envConfig, sharedCfg, configs)
 
 	case credSourceEnvironment:
 		ctx = addCredentialSource(ctx, aws.CredentialSourceHTTP)
@@ -402,8 +402,21 @@ func resolveCredsFromSource(ctx context.Context, cfg *aws.Config, envConfig *Env
 	return ctx, nil
 }
 
-func resolveEC2RoleCredentials(ctx context.Context, cfg *aws.Config, configs configs) error {
-	optFns := make([]func(*ec2rolecreds.Options), 0, 2)
+func resolveEC2RoleCredentials(ctx context.Context, cfg *aws.Config, envCfg *EnvConfig, sharedCfg *SharedConfig, configs configs) error {
+	optFns := make([]func(*ec2rolecreds.Options), 0, 3)
+
+	var profile string
+	if sharedCfg != nil && sharedCfg.EC2InstanceProfileName != "" {
+		profile = sharedCfg.EC2InstanceProfileName
+	}
+	if envCfg != nil && envCfg.EC2InstanceProfileName != "" {
+		profile = envCfg.EC2InstanceProfileName
+	}
+	if profile != "" {
+		optFns = append(optFns, func(o *ec2rolecreds.Options) {
+			o.ProfileName = profile // caller options will override
+		})
+	}
 
 	optFn, found, err := getEC2RoleCredentialProviderOptions(ctx, configs)
 	if err != nil {

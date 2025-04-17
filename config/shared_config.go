@@ -82,6 +82,8 @@ const (
 
 	ec2MetadataV1DisabledKey = "ec2_metadata_v1_disabled"
 
+	ec2InstanceProfileNameKey = "ec2_instance_profile_name"
+
 	// Use DualStack Endpoint Resolution
 	useDualStackEndpoint = "use_dualstack_endpoint"
 
@@ -357,6 +359,9 @@ type SharedConfig struct {
 
 	// ResponseChecksumValidation indicates if the response checksum should be validated
 	ResponseChecksumValidation aws.ResponseChecksumValidation
+
+	// Profile name used for fetching IMDS credentials.
+	EC2InstanceProfileName string
 }
 
 func (c SharedConfig) getDefaultsMode(ctx context.Context) (value aws.DefaultsMode, ok bool, err error) {
@@ -877,6 +882,7 @@ func mergeSections(dst *ini.Sections, src ini.Sections) error {
 			ec2MetadataServiceEndpointModeKey,
 			ec2MetadataServiceEndpointKey,
 			ec2MetadataV1DisabledKey,
+			ec2InstanceProfileNameKey,
 			useDualStackEndpoint,
 			useFIPSEndpointKey,
 			defaultsModeKey,
@@ -1109,6 +1115,8 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	}
 	updateString(&c.EC2IMDSEndpoint, section, ec2MetadataServiceEndpointKey)
 	updateBoolPtr(&c.EC2IMDSv1Disabled, section, ec2MetadataV1DisabledKey)
+
+	updateString(&c.EC2InstanceProfileName, section, ec2InstanceProfileNameKey)
 
 	updateUseDualStackEndpoint(&c.UseDualStackEndpoint, section, useDualStackEndpoint)
 	updateUseFIPSEndpoint(&c.UseFIPSEndpoint, section, useFIPSEndpointKey)
@@ -1677,4 +1685,12 @@ func updateUseFIPSEndpoint(dst *aws.FIPSEndpointState, section ini.Section, key 
 	}
 
 	return
+}
+
+func (c SharedConfig) getEC2InstanceProfileName() (string, bool, error) {
+	if len(c.EC2InstanceProfileName) == 0 {
+		return "", false, nil
+	}
+
+	return c.EC2InstanceProfileName, true, nil
 }

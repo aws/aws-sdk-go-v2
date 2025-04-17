@@ -4,10 +4,13 @@ import (
 	"bufio"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"math"
 	"path"
 	"strings"
+	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -17,6 +20,7 @@ import (
 	"github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // ProviderName provides a name of EC2Role provider
@@ -38,6 +42,23 @@ type GetMetadataAPIClient interface {
 //	})
 type Provider struct {
 	options Options
+
+	isLegacyPath atomic.Bool
+
+	mu            sync.Mutex
+	cachedProfile string
+}
+
+func (p *Provider) getCachedProfile() string {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	return p.cachedProfile
+}
+
+func (p *Provider) setCachedProfile(v string) {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	p.cachedProfile = v
 }
 
 // Options is a list of user settable options for setting the behavior of the Provider.
@@ -47,6 +68,12 @@ type Options struct {
 	//
 	// If nil, the provider will default to the EC2 IMDS client.
 	Client GetMetadataAPIClient
+
+	// Explicit EC2 instance profile name to use when fetching credentials.
+	//
+	// If unset, the provider will make an extra initial IMDS call to determine
+	// what profile to use.
+	ProfileName string
 
 	// The chain of providers that was used to create this provider
 	// These values are for reporting purposes and are not meant to be set up directly
@@ -74,18 +101,12 @@ func New(optFns ...func(*Options)) *Provider {
 // Retrieve retrieves credentials from the EC2 service. Error will be returned
 // if the request fails, or unable to extract the desired credentials.
 func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
-	credsList, err := requestCredList(ctx, p.options.Client)
+	profileName, err := p.resolveProfile(ctx)
 	if err != nil {
 		return aws.Credentials{Source: ProviderName}, err
 	}
 
-	if len(credsList) == 0 {
-		return aws.Credentials{Source: ProviderName},
-			fmt.Errorf("unexpected empty EC2 IMDS role list")
-	}
-	credsName := credsList[0]
-
-	roleCreds, err := requestCred(ctx, p.options.Client, credsName)
+	roleCreds, err := p.requestCred(ctx, profileName)
 	if err != nil {
 		return aws.Credentials{Source: ProviderName}, err
 	}
@@ -94,6 +115,7 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 		AccessKeyID:     roleCreds.AccessKeyID,
 		SecretAccessKey: roleCreds.SecretAccessKey,
 		SessionToken:    roleCreds.Token,
+		AccountID:       roleCreds.AccountID,
 		Source:          ProviderName,
 
 		CanExpire: true,
@@ -107,6 +129,59 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 	}
 
 	return creds, nil
+}
+
+func (p *Provider) resolveProfile(ctx context.Context) (string, error) {
+	if p.options.ProfileName != "" {
+		return p.options.ProfileName, nil
+	}
+
+	if cached := p.getCachedProfile(); cached != "" {
+		return cached, nil
+	}
+
+	credsList, err := p.requestCredList(ctx)
+	if err != nil {
+		return "", err
+	}
+	if len(credsList) == 0 {
+		return "", errors.New("unexpected empty EC2 IMDS role list")
+	}
+
+	p.setCachedProfile(credsList[0])
+	return credsList[0], nil
+}
+
+// Indirects the underlying imds.GetMetadata to handle fallback to the "legacy"
+// credentials metadata path. The profile MAY be empty.
+func (p *Provider) getMetadata(ctx context.Context, profile string) (*imds.GetMetadataOutput, error) {
+	isLegacy := p.isLegacyPath.Load()
+	// we only need to fallback when
+	//   1. we haven't already
+	//   2. this request IS NOT using a cached profile - it's either to
+	//      retrieve a profile, or retrieval with an explicit profile from options
+	canFallback := !isLegacy && (profile == "" || profile == p.options.ProfileName)
+
+	ppath := credsPath
+	if isLegacy {
+		ppath = legacyCredsPath
+	}
+
+	if profile != "" { // path.Join will strip the trailing slash, which we don't want
+		ppath = path.Join(ppath, profile)
+	}
+	out, err := p.options.Client.GetMetadata(ctx, &imds.GetMetadataInput{
+		Path: ppath,
+	})
+	if err != nil && is404(err) && canFallback {
+		p.isLegacyPath.Store(true)
+		return p.getMetadata(ctx, profile)
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	return out, nil
 }
 
 // HandleFailToRefresh will extend the credentials Expires time if it it is
@@ -166,21 +241,23 @@ type ec2RoleCredRespBody struct {
 	AccessKeyID     string
 	SecretAccessKey string
 	Token           string
+	AccountID       string
 
 	// Error state
 	Code    string
 	Message string
 }
 
-const iamSecurityCredsPath = "/iam/security-credentials/"
+const (
+	legacyCredsPath = "/iam/security-credentials/"
+	credsPath       = "/iam/security-credentials-extended/"
+)
 
 // requestCredList requests a list of credentials from the EC2 service. If
 // there are no credentials, or there is an error making or receiving the
 // request
-func requestCredList(ctx context.Context, client GetMetadataAPIClient) ([]string, error) {
-	resp, err := client.GetMetadata(ctx, &imds.GetMetadataInput{
-		Path: iamSecurityCredsPath,
-	})
+func (p *Provider) requestCredList(ctx context.Context) ([]string, error) {
+	resp, err := p.getMetadata(ctx, "")
 	if err != nil {
 		return nil, fmt.Errorf("no EC2 IMDS role found, %w", err)
 	}
@@ -203,10 +280,18 @@ func requestCredList(ctx context.Context, client GetMetadataAPIClient) ([]string
 //
 // If the credentials cannot be found, or there is an error reading the response
 // and error will be returned.
-func requestCred(ctx context.Context, client GetMetadataAPIClient, credsName string) (ec2RoleCredRespBody, error) {
-	resp, err := client.GetMetadata(ctx, &imds.GetMetadataInput{
-		Path: path.Join(iamSecurityCredsPath, credsName),
-	})
+func (p *Provider) requestCred(ctx context.Context, credsName string) (ec2RoleCredRespBody, error) {
+	resp, err := p.getMetadata(ctx, credsName)
+	if err != nil && is404(err) && p.getCachedProfile() != "" {
+		// 404 on a cached profile means it isn't stable, so reset it and try again
+		p.setCachedProfile("")
+		credsName, err = p.resolveProfile(ctx)
+		if err != nil {
+			return ec2RoleCredRespBody{}, err
+		}
+
+		resp, err = p.getMetadata(ctx, credsName)
+	}
 	if err != nil {
 		return ec2RoleCredRespBody{},
 			fmt.Errorf("failed to get %s EC2 IMDS role credentials, %w",
@@ -238,4 +323,12 @@ func (p *Provider) ProviderSources() []aws.CredentialSource {
 		return []aws.CredentialSource{aws.CredentialSourceIMDS}
 	} // If no source has been set, assume this is used directly which means just call to assume role
 	return p.options.CredentialSources
+}
+
+func is404(err error) bool {
+	var terr *smithyhttp.ResponseError
+	if errors.As(err, &terr) {
+		return terr.HTTPStatusCode() == 404
+	}
+	return false
 }

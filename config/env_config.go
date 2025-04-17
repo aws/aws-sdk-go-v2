@@ -60,6 +60,8 @@ const (
 	awsEc2MetadataDisabledEnv   = "AWS_EC2_METADATA_DISABLED"
 	awsEc2MetadataV1DisabledEnv = "AWS_EC2_METADATA_V1_DISABLED"
 
+	awsEc2InstanceProfileNameEnv = "AWS_EC2_INSTANCE_PROFILE_NAME"
+
 	awsS3DisableMultiRegionAccessPointsEnv = "AWS_S3_DISABLE_MULTIREGION_ACCESS_POINTS"
 
 	awsUseDualStackEndpointEnv = "AWS_USE_DUALSTACK_ENDPOINT"
@@ -304,6 +306,9 @@ type EnvConfig struct {
 
 	// Indicates whether response checksum should be validated
 	ResponseChecksumValidation aws.ResponseChecksumValidation
+
+	// Profile name used for fetching IMDS credentials.
+	EC2InstanceProfileName string
 }
 
 // loadEnvConfig reads configuration values from the OS's environment variables.
@@ -346,6 +351,8 @@ func NewEnvConfig() (EnvConfig, error) {
 	cfg.RoleSessionName = os.Getenv(awsRoleSessionNameEnv)
 
 	cfg.AppID = os.Getenv(awsSdkUaAppIDEnv)
+
+	cfg.EC2InstanceProfileName = os.Getenv(awsEc2InstanceProfileNameEnv)
 
 	if err := setBoolPtrFromEnvVal(&cfg.DisableRequestCompression, []string{awsDisableRequestCompressionEnv}); err != nil {
 		return cfg, err
@@ -915,4 +922,12 @@ func (c EnvConfig) GetS3DisableExpressAuth() (value, ok bool) {
 	}
 
 	return *c.S3DisableExpressAuth, true
+}
+
+func (c EnvConfig) getEC2InstanceProfileName() (string, bool, error) {
+	if len(c.EC2InstanceProfileName) == 0 {
+		return "", false, nil
+	}
+
+	return c.EC2InstanceProfileName, true, nil
 }

@@ -445,6 +445,22 @@ func getEC2RoleCredentialProviderOptions(ctx context.Context, configs configs) (
 	return
 }
 
+type ec2InstanceProfileNameProvider interface {
+	getEC2InstanceProfileName() (string, bool, error)
+}
+
+func getEC2InstanceProfileName(ctx context.Context, configs configs) (v string, found bool, err error) {
+	for _, config := range configs {
+		if p, ok := config.(ec2InstanceProfileNameProvider); ok {
+			v, found, err = p.getEC2InstanceProfileName()
+			if err != nil || found {
+				break
+			}
+		}
+	}
+	return
+}
+
 // defaultRegionProvider is an interface for retrieving a default region if a region was not resolved from other sources
 type defaultRegionProvider interface {
 	getDefaultRegion(ctx context.Context) (string, bool, error)

@@ -27,6 +27,36 @@ const ec2MetadataResponse = `{
   "LastUpdated": "2009-11-23T00:00:00Z"
 }`
 
+const ec2MetadataResponseLoadOptions = `{
+  "Code": "Success",
+  "Type": "AWS-HMAC",
+  "AccessKeyId": "ec2-access-key-loadopts",
+  "SecretAccessKey": "ec2-secret-key-loadopts",
+  "Token": "token",
+  "Expiration": "2100-01-01T00:00:00Z",
+  "LastUpdated": "2009-11-23T00:00:00Z"
+}`
+
+const ec2MetadataResponseEnvCfg = `{
+  "Code": "Success",
+  "Type": "AWS-HMAC",
+  "AccessKeyId": "ec2-access-key-envcfg",
+  "SecretAccessKey": "ec2-secret-key-envcfg",
+  "Token": "token",
+  "Expiration": "2100-01-01T00:00:00Z",
+  "LastUpdated": "2009-11-23T00:00:00Z"
+}`
+
+const ec2MetadataResponseSharedCfg = `{
+  "Code": "Success",
+  "Type": "AWS-HMAC",
+  "AccessKeyId": "ec2-access-key-sharedcfg",
+  "SecretAccessKey": "ec2-secret-key-sharedcfg",
+  "Token": "token",
+  "Expiration": "2100-01-01T00:00:00Z",
+  "LastUpdated": "2009-11-23T00:00:00Z"
+}`
+
 const assumeRoleRespMsg = `
 <AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
     <AssumeRoleResult>
