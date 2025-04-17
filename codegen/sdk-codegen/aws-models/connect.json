@@ -121,6 +121,12 @@
                         "smithy.api#enumValue": "UPDATE_CASE"
                     }
                 },
+                "ASSIGN_SLA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSIGN_SLA"
+                    }
+                },
                 "END_ASSOCIATED_TASKS": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -2815,6 +2821,27 @@
                 "smithy.api#documentation": "<p>This action must be set if <code>TriggerEventSource</code> is one of the following values:\n    <code>OnPostCallAnalysisAvailable</code> | <code>OnRealTimeCallAnalysisAvailable</code> |\n    <code>OnRealTimeChatAnalysisAvailable</code> | <code>OnPostChatAnalysisAvailable</code>. Contact\n   is categorized using the rule name.</p>\n         <p>\n            <code>RuleName</code> is used as <code>ContactCategory</code>.</p>"
             }
         },
+        "com.amazonaws.connect#AssignSlaActionDefinition": {
+            "type": "structure",
+            "members": {
+                "SlaAssignmentType": {
+                    "target": "com.amazonaws.connect#SlaAssignmentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of SLA assignment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CaseSlaConfiguration": {
+                    "target": "com.amazonaws.connect#CaseSlaConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SLA configuration for Case SLA Assignment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The AssignSla action definition.</p>"
+            }
+        },
         "com.amazonaws.connect#AssociateAnalyticsDataSet": {
             "type": "operation",
             "input": {
@@ -3877,7 +3904,7 @@
                 "DisconnectTimestamp": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the customer endpoint disconnected from Amazon Connect.</p>"
+                        "smithy.api#documentation": "<p>The date and time that the customer endpoint disconnected from the current contact, in UTC\n   time. In transfer scenarios, the DisconnectTimestamp of the previous contact indicates the date\n   and time when that contact ended.</p>"
                     }
                 },
                 "InitialContactId": {
@@ -5049,6 +5076,47 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.connect#CaseSlaConfiguration": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#SlaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of an SLA.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.connect#SlaType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of SLA for Case SlaAssignmentType.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FieldId": {
+                    "target": "com.amazonaws.connect#FieldValueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of a Case field.</p>"
+                    }
+                },
+                "TargetFieldValues": {
+                    "target": "com.amazonaws.connect#SlaFieldValueUnionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a list of target field values for the fieldId specified in CaseSlaConfiguration. \n   The SLA is considered met if any one of these target field values matches the actual field value.</p>"
+                    }
+                },
+                "TargetSlaMinutes": {
+                    "target": "com.amazonaws.connect#TargetSlaMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Target duration in minutes within which an SLA should be completed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SLA configuration for Case SlaAssignmentType.</p>"
             }
         },
         "com.amazonaws.connect#Channel": {
@@ -7261,7 +7329,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>Only the EMAIL channel is supported. The supported initiation methods are: OUTBOUND,\n    AGENT_REPLY, and FLOW.</p>\n         </important>\n         <p>Creates a new EMAIL contact. </p>",
+                "smithy.api#documentation": "<important>\n            <p>Only the EMAIL and VOICE channels are supported. The supported initiation methods for EMAIL are: OUTBOUND,\n    AGENT_REPLY, and FLOW. For VOICE the supported initiation methods are TRANSFER and the subtype connect:ExternalAudio. </p>\n         </important>\n         <p>Creates a new EMAIL or VOICE contact. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/create-contact",
@@ -7645,7 +7713,7 @@
                 "RelatedContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for an Amazon Connect contact. This identifier is related to the\n   contact starting.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>"
                     }
                 },
                 "Attributes": {
@@ -7663,14 +7731,14 @@
                 "Channel": {
                     "target": "com.amazonaws.connect#Channel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The channel for the contact</p>\n         <important>\n            <p>CreateContact only supports the EMAIL channel. The following information that states other\n    channels are supported is incorrect. We are working to update this topic.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The channel for the contact</p>\n         <important>\n            <p>CreateContact only supports the EMAIL and VOICE channels. The following information that states other\n    channels are supported is incorrect. We are working to update this topic.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "InitiationMethod": {
                     "target": "com.amazonaws.connect#ContactInitiationMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how the contact was initiated. </p>\n         <important>\n            <p>CreateContact only supports the following initiation methods: OUTBOUND, AGENT_REPLY, and\n    FLOW. The following information that states other initiation methods are supported is incorrect.\n    We are working to update this topic.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>Indicates how the contact was initiated. </p>\n         <important>\n            <p>CreateContact only supports the following initiation methods: </p>\n            <ul>\n               <li>\n                  <p>For EMAIL: OUTBOUND, AGENT_REPLY, and\n     FLOW. </p>\n               </li>\n               <li>\n                  <p>For VOICE: TRANSFER and the subtype connect:ExternalAudio. </p>\n               </li>\n            </ul>\n            <p>The following information that states other initiation methods are supported is incorrect.\n    We are working to update this topic.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7713,7 +7781,7 @@
                 "PreviousContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the previous contact when creating a transfer contact. This value can be provided\n   only for external audio contacts. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html\">Integrate Amazon Connect Contact Lens\n    with external voice systems</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The ID of the previous contact when creating a transfer contact. This value can be provided\n   only for external audio contacts. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html\">Integrate Amazon Connect Contact Lens\n    with external voice systems</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
                     }
                 }
             },
@@ -17873,6 +17941,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OnCaseUpdate"
+                    }
+                },
+                "OnSlaBreach": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnSlaBreach"
                     }
                 }
             }
@@ -33759,6 +33833,12 @@
                         "smithy.api#documentation": "<p>Information about the update case action.</p>\n         <p>Supported only for <code>TriggerEventSource</code> values: <code>OnCaseCreate</code> |\n    <code>OnCaseUpdate</code>.</p>"
                     }
                 },
+                "AssignSlaAction": {
+                    "target": "com.amazonaws.connect#AssignSlaActionDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the assign SLA action.</p>"
+                    }
+                },
                 "EndAssociatedTasksAction": {
                     "target": "com.amazonaws.connect#EndAssociatedTasksActionDefinition",
                     "traits": {
@@ -36771,7 +36851,7 @@
                 "TrafficType": {
                     "target": "com.amazonaws.connect#TrafficType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Denotes the class of traffic.</p>",
+                        "smithy.api#documentation": "<p>Denotes the class of traffic.</p>\n         <note>\n            <p>Only the CAMPAIGN traffic type is supported.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -36932,6 +37012,50 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.connect#SlaAssignmentType": {
+            "type": "enum",
+            "members": {
+                "CASES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CASES"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#SlaFieldValueUnionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#FieldValueUnion"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.connect#SlaName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^.*[\\S]$"
+            }
+        },
+        "com.amazonaws.connect#SlaType": {
+            "type": "enum",
+            "members": {
+                "CASE_FIELD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CaseField"
+                    }
                 }
             }
         },
@@ -38083,7 +38207,7 @@
                 "Description": {
                     "target": "com.amazonaws.connect#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the voice contact that is shown to an agent in the Contact Control Panel\n   (CCP).</p>"
+                        "smithy.api#documentation": "<p>A description of the voice contact that appears in the agent's snapshot in the CCP logs. For\n   more information about CCP logs, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/download-ccp-logs.html\">Download and review CCP logs</a> in\n   the <i>Amazon Connect Administrator Guide</i>.</p>"
                     }
                 },
                 "References": {
@@ -39082,7 +39206,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>When a contact is being recorded, this API suspends recording whatever is selected in the\n   flow configuration: call, screen, or both. If only call recording or only screen recording is\n   enabled, then it would be suspended. For example, you might suspend the screen recording while\n   collecting sensitive information, such as a credit card number. Then use ResumeContactRecording\n   to restart recording the screen.</p>\n         <p>The period of time that the recording is suspended is filled with silence in the final\n   recording.</p>\n         <p>Voice and screen recordings are supported.</p>",
+                "smithy.api#documentation": "<p>When a contact is being recorded, this API suspends recording whatever is selected in the\n   flow configuration: call (IVR or agent), screen, or both. If only call recording or only screen\n   recording is enabled, then it would be suspended. For example, you might suspend the screen\n   recording while collecting sensitive information, such as a credit card number. Then use\n   <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ResumeContactRecording.html\">ResumeContactRecording</a>\n   to restart recording the screen.</p>\n         <p>The period of time that the recording is suspended is filled with silence in the final recording.\n  </p>\n         <p> Voice (IVR, agent) and screen recordings are supported.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/suspend-recording",
@@ -39443,6 +39567,15 @@
                     "traits": {
                         "smithy.api#enumValue": "PROFICIENCIES"
                     }
+                }
+            }
+        },
+        "com.amazonaws.connect#TargetSlaMinutes": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 129600
                 }
             }
         },
@@ -40362,7 +40495,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Transfers <code>TASK</code> or <code>EMAIL</code>\n    contacts from one agent or queue to another agent or queue at any point\n   after a contact is created. You can transfer a contact to another queue by providing the flow\n   which orchestrates the contact to the destination queue. This gives you more control over contact\n   handling and helps you adhere to the service level agreement (SLA) guaranteed to your\n   customers.</p>\n         <p>Note the following requirements:</p>\n         <ul>\n            <li>\n               <p>Transfer is supported for only <code>TASK</code> and <code>EMAIL</code> contacts.</p>\n            </li>\n            <li>\n               <p>Do not use both <code>QueueId</code> and <code>UserId</code> in the same call.</p>\n            </li>\n            <li>\n               <p>The following flow types are supported: Inbound flow, Transfer to agent flow, and Transfer\n     to queue flow.</p>\n            </li>\n            <li>\n               <p>The <code>TransferContact</code> API can be called only on active contacts.</p>\n            </li>\n            <li>\n               <p>A contact cannot be transferred more than 11 times.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Transfers <code>TASK</code> or <code>EMAIL</code>\n    contacts from one agent or queue to another agent or queue at any point\n   after a contact is created. You can transfer a contact to another queue by providing the flow\n   which orchestrates the contact to the destination queue. This gives you more control over contact\n   handling and helps you adhere to the service level agreement (SLA) guaranteed to your\n   customers.</p>\n         <p>Note the following requirements:</p>\n         <ul>\n            <li>\n               <p>Transfer is only supported for <code>TASK</code> and <code>EMAIL</code> contacts.</p>\n            </li>\n            <li>\n               <p>Do not use both <code>QueueId</code> and <code>UserId</code> in the same call.</p>\n            </li>\n            <li>\n               <p>The following flow types are supported: Inbound flow, Transfer to agent flow, and Transfer\n     to queue flow.</p>\n            </li>\n            <li>\n               <p>The <code>TransferContact</code> API can be called only on active contacts.</p>\n            </li>\n            <li>\n               <p>A contact cannot be transferred more than 11 times.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/transfer",

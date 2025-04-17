@@ -1589,6 +1589,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. \n            This parameter must be set when using r6gd nodes. For more information, see <a href=\"https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html\">Data tiering</a>.</p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.memorydb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the cluster. Returns 'ipv4' for IPv4 only, 'ipv6' for IPv6 only, or 'dual-stack' if the cluster supports both IPv4 and IPv6 addressing.</p>"
+                    }
+                },
+                "IpDiscovery": {
+                    "target": "com.amazonaws.memorydb#IpDiscovery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mechanism that the cluster uses to discover IP addresses. Returns 'ipv4' when DNS endpoints resolve to IPv4 addresses, or 'ipv6' when DNS endpoints resolve to IPv6 addresses.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2188,6 +2200,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. \n            This parameter must be set when using r6gd nodes. For more information, see <a href=\"https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html\">Data tiering</a>.</p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.memorydb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the IP address type for the cluster. Valid values are 'ipv4', 'ipv6', or 'dual_stack'. When set to 'ipv4', the cluster will only be accessible via IPv4 addresses. When set to 'ipv6', the cluster will only be accessible via IPv6 addresses. When set to 'dual_stack', the cluster will be accessible via both IPv4 and IPv6 addresses. If not specified, the default is 'ipv4'.</p>"
+                    }
+                },
+                "IpDiscovery": {
+                    "target": "com.amazonaws.memorydb#IpDiscovery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mechanism for discovering IP addresses for the cluster discovery protocol. Valid values are 'ipv4' or 'ipv6'. When set to 'ipv4', cluster discovery functions such as cluster slots, cluster shards, and cluster nodes return IPv4 addresses for cluster nodes. When set to 'ipv6', the cluster discovery functions return IPv6 addresses for cluster nodes. The value must be compatible with the NetworkType parameter. If not specified, the default is 'ipv4'.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2246,7 +2270,7 @@
                 "MultiRegionClusterNameSuffix": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A suffix to be added to the multi-Region cluster name.</p>",
+                        "smithy.api#documentation": "<p>A suffix to be added to the Multi-Region cluster name. Amazon MemoryDB automatically applies a prefix to the Multi-Region cluster Name when it is created. Each Amazon Region has its own prefix. For instance, a Multi-Region cluster Name created in the US-West-1 region will begin with \"virxk\", along with the suffix name you provide. The suffix guarantees uniqueness of the Multi-Region cluster name across multiple regions.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4732,6 +4756,23 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.memorydb#IpDiscovery": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
+                    }
+                }
+            }
+        },
         "com.amazonaws.memorydb#KeyList": {
             "type": "list",
             "member": {
@@ -4910,7 +4951,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags currently on a named resource.\n         \n         A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track your MemoryDB resources. \n         For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html\">Tagging your MemoryDB resources</a>.</p>"
+                "smithy.api#documentation": "<p>Lists all tags currently on a named resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track your MemoryDB resources. For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html\">Tagging your MemoryDB resources</a>.</p>\n         <p>When you add or remove tags from multi region clusters, you might not immediately see the latest effective tags in the ListTags API response due to it being eventually consistent specifically for multi region clusters. For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html\">Tagging your MemoryDB resources</a>.</p>\n         <p></p>"
             }
         },
         "com.amazonaws.memorydb#ListTagsRequest": {
@@ -5071,6 +5112,35 @@
                 "smithy.api#documentation": "<p>The specified multi-Region parameter group does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.memorydb#NetworkType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
+                    }
+                },
+                "DUAL_STACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dual_stack"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.memorydb#NetworkTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.memorydb#NetworkType"
             }
         },
         "com.amazonaws.memorydb#NoOperationFault": {
@@ -6408,6 +6478,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Availability Zone where the subnet resides</p>"
                     }
+                },
+                "SupportedNetworkTypes": {
+                    "target": "com.amazonaws.memorydb#NetworkTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network types supported by this subnet. Returns an array of strings that can include 'ipv4', 'ipv6', or both, indicating whether the subnet supports IPv4 only, IPv6 only, or dual-stack deployments.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6445,6 +6521,12 @@
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the subnet group.</p>"
+                    }
+                },
+                "SupportedNetworkTypes": {
+                    "target": "com.amazonaws.memorydb#NetworkTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network types supported by this subnet group. Returns an array of strings that can include 'ipv4', 'ipv6', or both, indicating the IP address types that can be used for clusters deployed in this subnet group.</p>"
                     }
                 }
             },
@@ -6717,7 +6799,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your MemoryDB resources. \n\n         When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. For more information, see \n\n         <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/iam.resourcelevelpermissions.html\">Resource-level permissions</a>.</p>\n         <p>For example, you can use cost-allocation tags to your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value \n          (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories \n          (such as cost centers, application names, or owners) to organize your costs across multiple services.\n         \n         For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html\">Using Cost Allocation Tags</a>.</p>"
+                "smithy.api#documentation": "<p> Use this operation to add tags to a resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your MemoryDB resources. For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html\">Tagging your MemoryDB resources</a>.</p>\n         <p>When you add tags to multi region clusters, you might not immediately see the latest effective tags in the ListTags API response due to it being eventually consistent specifically for multi region clusters. For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html\">Tagging your MemoryDB resources</a>.</p>\n         <p>You can specify cost-allocation tags for your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value \n          (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories \n          (such as cost centers, application names, or owners) to organize your costs across multiple services.\n         \n         For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html\">Using Cost Allocation Tags</a>.</p>"
             }
         },
         "com.amazonaws.memorydb#TagResourceRequest": {
@@ -6868,7 +6950,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to remove tags on a resource.</p>"
+                "smithy.api#documentation": "<p>Use this operation to remove tags on a resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your MemoryDB resources. For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html\">Tagging your MemoryDB resources</a>.</p>\n         <p>When you remove tags from multi region clusters, you might not immediately see the latest effective tags in the ListTags API response due to it being eventually consistent specifically for multi region clusters. For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html\">Tagging your MemoryDB resources</a>.</p>\n         <p>You can specify cost-allocation tags for your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value \n         (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories \n         (such as cost centers, application names, or owners) to organize your costs across multiple services.\n         \n         For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html\">Using Cost Allocation Tags</a>.</p>"
             }
         },
         "com.amazonaws.memorydb#UntagResourceRequest": {
@@ -7138,6 +7220,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Access Control List that is associated with the cluster.</p>"
                     }
+                },
+                "IpDiscovery": {
+                    "target": "com.amazonaws.memorydb#IpDiscovery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mechanism for discovering IP addresses for the cluster discovery protocol. Valid values are 'ipv4' or 'ipv6'. When set to 'ipv4', cluster discovery functions such as cluster slots, cluster shards, and cluster nodes will return IPv4 addresses for cluster nodes. When set to 'ipv6', the cluster discovery functions return IPv6 addresses for cluster nodes. The value must be compatible with the NetworkType parameter. If not specified, the default is 'ipv4'.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7227,7 +7315,7 @@
                 "UpdateStrategy": {
                     "target": "com.amazonaws.memorydb#UpdateStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to force the update even if it may cause data loss.</p>"
+                        "smithy.api#documentation": "<p>The strategy to use for the update operation. Supported values are \"coordinated\" or \"uncoordinated\".</p>"
                     }
                 }
             },

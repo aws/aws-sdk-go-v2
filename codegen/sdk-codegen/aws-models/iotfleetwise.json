@@ -24,6 +24,11 @@
                     "target": "com.amazonaws.iotfleetwise#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The fully qualified name of the actuator. For example, the fully qualified name of an\n            actuator might be <code>Vehicle.Front.Left.Door.Lock</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 150
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9_.]+$",
                         "smithy.api#required": {}
                     }
                 },
@@ -174,6 +179,11 @@
                     "target": "com.amazonaws.iotfleetwise#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The fully qualified name of the attribute. For example, the fully qualified name of an\n            attribute might be <code>Vehicle.Body.Engine.Type</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 150
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9_.]+$",
                         "smithy.api#required": {}
                     }
                 },
@@ -379,6 +389,11 @@
                     "target": "com.amazonaws.iotfleetwise#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The fully qualified name of the branch. For example, the fully qualified name of a\n            branch might be <code>Vehicle.Body.Engine</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 150
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9_.]+$",
                         "smithy.api#required": {}
                     }
                 },
@@ -582,7 +597,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.]+$"
             }
         },
         "com.amazonaws.iotfleetwise#CanSignal": {
@@ -665,7 +681,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.]+$"
             }
         },
         "com.amazonaws.iotfleetwise#CloudWatchLogDeliveryOptions": {
@@ -1059,6 +1076,7 @@
                     "target": "com.amazonaws.iotfleetwise#arn",
                     "traits": {
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the vehicle model (model manifest). </p>",
+                        "smithy.api#pattern": "^arn:aws:iotfleetwise:[a-z0-9-]+:[0-9]{12}:model-manifest/[a-zA-Z\\d\\-_:]{1,100}$",
                         "smithy.api#required": {}
                     }
                 },
@@ -1261,6 +1279,9 @@
                     "target": "com.amazonaws.iotfleetwise#listOfStrings",
                     "traits": {
                         "smithy.api#documentation": "<p> A list of nodes, which are a general abstraction of signals. </p>",
+                        "smithy.api#length": {
+                            "max": 500
+                        },
                         "smithy.api#required": {}
                     }
                 },
@@ -1790,6 +1811,11 @@
                     "target": "com.amazonaws.iotfleetwise#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The fully qualified name of the custom property. For example, the fully qualified name\n            of a custom property might be\n                <code>ComplexDataTypes.VehicleDataTypes.SVMCamera.FPS</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 150
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9_.]+$",
                         "smithy.api#required": {}
                     }
                 },
@@ -1842,6 +1868,11 @@
                     "target": "com.amazonaws.iotfleetwise#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The fully qualified name of the custom structure. For example, the fully qualified\n            name of a custom structure might be\n                <code>ComplexDataTypes.VehicleDataTypes.SVMCamera</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 150
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9_.]+$",
                         "smithy.api#required": {}
                     }
                 },
@@ -2889,7 +2920,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 150
-                }
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.]+$"
             }
         },
         "com.amazonaws.iotfleetwise#GetCampaign": {
@@ -4202,7 +4234,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
-                }
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.]+$"
             }
         },
         "com.amazonaws.iotfleetwise#InterfaceIds": {
@@ -7108,7 +7141,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.]+$"
             }
         },
         "com.amazonaws.iotfleetwise#ObdSignal": {
@@ -7257,7 +7291,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
-                }
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.]+$"
             }
         },
         "com.amazonaws.iotfleetwise#ProtocolVersion": {
@@ -7266,7 +7301,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
-                }
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.]+$"
             }
         },
         "com.amazonaws.iotfleetwise#PutEncryptionConfiguration": {
@@ -7769,6 +7805,11 @@
                     "target": "com.amazonaws.iotfleetwise#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The fully qualified name of the sensor. For example, the fully qualified name of a\n            sensor might be <code>Vehicle.Body.Engine.Battery</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 150
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9_.]+$",
                         "smithy.api#required": {}
                     }
                 },
@@ -10633,7 +10674,8 @@
             "traits": {
                 "smithy.api#default": 0,
                 "smithy.api#range": {
-                    "min": 0
+                    "min": 0,
+                    "max": 2147483647
                 }
             }
         },
@@ -10647,7 +10689,8 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1
+                    "min": 1,
+                    "max": 2147483647
                 }
             }
         },
@@ -10655,7 +10698,8 @@
             "type": "long",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1
+                    "min": 1,
+                    "max": 9223372036854775807
                 }
             }
         },

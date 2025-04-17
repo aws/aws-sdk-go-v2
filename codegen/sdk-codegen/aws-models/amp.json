@@ -1405,7 +1405,7 @@
                 "roleConfiguration": {
                     "target": "com.amazonaws.amp#RoleConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scraper role configuration for the workspace.</p>"
+                        "smithy.api#documentation": "<p>Use this structure to enable cross-account access, so that you can use a target account to access Prometheus metrics from source accounts.</p>"
                     }
                 },
                 "clientToken": {
@@ -2384,6 +2384,72 @@
                 }
             }
         },
+        "com.amazonaws.amp#DescribeWorkspaceConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#DescribeWorkspaceConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#DescribeWorkspaceConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this operation to return information about the configuration of a workspace. The configuration details\n        returned include workspace configuration status, label set limits, and retention period.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/workspaces/{workspaceId}/configuration"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amp#DescribeWorkspaceConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace that you want to retrieve information for. To find the IDs of your workspaces, use \n            the <a href=\"https://docs.aws.amazon.com/prometheus/latest/APIReference/API_ListWorkspaces.htm\">ListWorkspaces</a> operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#DescribeWorkspaceConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "workspaceConfiguration": {
+                    "target": "com.amazonaws.amp#WorkspaceConfigurationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains the information about the workspace configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.amp#DescribeWorkspaceRequest": {
             "type": "structure",
             "members": {
@@ -2610,6 +2676,77 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws[-a-z]*:kms:[-a-z0-9]+:[0-9]{12}:key/[-a-f0-9]+$"
+            }
+        },
+        "com.amazonaws.amp#LabelName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+            }
+        },
+        "com.amazonaws.amp#LabelSet": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.amp#LabelName"
+            },
+            "value": {
+                "target": "com.amazonaws.amp#LabelValue"
+            }
+        },
+        "com.amazonaws.amp#LabelValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.amp#LimitsPerLabelSet": {
+            "type": "structure",
+            "members": {
+                "limits": {
+                    "target": "com.amazonaws.amp#LimitsPerLabelSetEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains the information about the limits that apply to time series that match this label set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "labelSet": {
+                    "target": "com.amazonaws.amp#LabelSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This defines one label set that will have an enforced ingestion limit. </p>\n         <p>Label values accept ASCII characters and must contain at least one character that isn't whitespace. ASCII control characters are not accepted. \n            If the label name is metric name label <code>__<i>name</i>__</code>, then the <i>metric</i> part of the name\n            must conform to the following pattern: <code>[a-zA-Z_:][a-zA-Z0-9_:]*</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure defines one label set used to enforce ingestion limits for the workspace, and defines the limit for that label set.</p>\n         <p>A label set is\n            a unique combination of label-value pairs. Use them to control time series ingestion limits and to monitor usage by specific label groups.\n            Example label sets might be <code>team:finance</code> or <code>env:prod</code>\n         </p>"
+            }
+        },
+        "com.amazonaws.amp#LimitsPerLabelSetEntry": {
+            "type": "structure",
+            "members": {
+                "maxSeries": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of active series that can be ingested that match this label set. </p>\n         <p>Setting this to 0 causes no label set limit to be enforced, but it does cause Amazon Managed Service for Prometheus to vend label set metrics to CloudWatch</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains the information about the limits that apply to time series that match one label set.</p>"
+            }
+        },
+        "com.amazonaws.amp#LimitsPerLabelSetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amp#LimitsPerLabelSet"
             }
         },
         "com.amazonaws.amp#ListRuleGroupsNamespaces": {
@@ -3465,18 +3602,18 @@
                 "sourceRoleArn": {
                     "target": "com.amazonaws.amp#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A ARN identifying the source role configuration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role used in the source account to enable cross-account scraping. For information about\n            the contents of this policy, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#cross-account-remote-write\">Cross-account setup</a>.</p>"
                     }
                 },
                 "targetRoleArn": {
                     "target": "com.amazonaws.amp#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A ARN identifying the target role configuration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role used in the target account to enable cross-account scraping. For information about\n            the contents of this policy, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#cross-account-remote-write\">Cross-account setup</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>To configure roles that allows users to write to an Amazon Managed Service for Prometheus workspace in a different account.</p>"
+                "smithy.api#documentation": "<p>Use this structure to enable cross-account access, so that you can use a target account to access Prometheus metrics from source accounts.</p>"
             }
         },
         "com.amazonaws.amp#RuleGroupsNamespace": {
@@ -3862,7 +3999,10 @@
                     }
                 },
                 "roleConfiguration": {
-                    "target": "com.amazonaws.amp#RoleConfiguration"
+                    "target": "com.amazonaws.amp#RoleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure displays information about the IAM roles used for cross-account scraping configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4043,7 +4183,10 @@
                     }
                 },
                 "roleConfiguration": {
-                    "target": "com.amazonaws.amp#RoleConfiguration"
+                    "target": "com.amazonaws.amp#RoleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure displays information about the IAM roles used for cross-account scraping configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4562,7 +4705,7 @@
                 "roleConfiguration": {
                     "target": "com.amazonaws.amp#RoleConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scraper role configuration for the workspace.</p>"
+                        "smithy.api#documentation": "<p>Use this structure to enable cross-account access, so that you can use a target account to access Prometheus metrics from source accounts.</p>"
                     }
                 },
                 "clientToken": {
@@ -4680,6 +4823,100 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the input of an <code>UpdateWorkspaceAlias</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.amp#UpdateWorkspaceConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#UpdateWorkspaceConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#UpdateWorkspaceConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this operation to create or update the label sets, label set limits, and retention period of a workspace.</p>\n         <p>You must specify at least one of <code>limitsPerLabelSet</code> or <code>retentionPeriodInDays</code> for the\n        request to be valid.</p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "PATCH",
+                    "uri": "/workspaces/{workspaceId}/configuration"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#UpdateWorkspaceConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace that you want to update. To find the IDs of your workspaces, use \n            the <a href=\"https://docs.aws.amazon.com/prometheus/latest/APIReference/API_ListWorkspaces.htm\">ListWorkspaces</a> operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.amp#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can include a token in your operation to make it an idempotent opeartion. </p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "limitsPerLabelSet": {
+                    "target": "com.amazonaws.amp#LimitsPerLabelSetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is an array of structures, where each structure defines a label set for the workspace, and \n            defines the ingestion limit for active time series for each of those label sets. Each label name in a label set must be unique.</p>"
+                    }
+                },
+                "retentionPeriodInDays": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how many days that metrics will be retained in the workspace.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#UpdateWorkspaceConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.amp#WorkspaceConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the workspace configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amp#Uri": {
@@ -4807,6 +5044,9 @@
                 },
                 {
                     "target": "com.amazonaws.amp#RuleGroupsNamespace"
+                },
+                {
+                    "target": "com.amazonaws.amp#WorkspaceConfiguration"
                 }
             ],
             "traits": {
@@ -4836,6 +5076,98 @@
                 },
                 "smithy.api#documentation": "<p>An ARN identifying a Workspace.</p>",
                 "smithy.api#pattern": "^arn:aws[-a-z]*:aps:[-a-z0-9]+:[0-9]{12}:workspace/.+$"
+            }
+        },
+        "com.amazonaws.amp#WorkspaceConfiguration": {
+            "type": "resource",
+            "identifiers": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.amp#DescribeWorkspaceConfiguration"
+            },
+            "update": {
+                "target": "com.amazonaws.amp#UpdateWorkspaceConfiguration"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "workspace/{workspaceId}"
+                }
+            }
+        },
+        "com.amazonaws.amp#WorkspaceConfigurationDescription": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.amp#WorkspaceConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure displays the current status of the workspace configuration, and might also contain a reason for that status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "limitsPerLabelSet": {
+                    "target": "com.amazonaws.amp#LimitsPerLabelSetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is an array of structures, where each structure displays one label sets for the workspace and the limits for that label set.</p>"
+                    }
+                },
+                "retentionPeriodInDays": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field displays how many days that metrics are retained in the workspace.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains the description of the workspace configuration.</p>"
+            }
+        },
+        "com.amazonaws.amp#WorkspaceConfigurationStatus": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "com.amazonaws.amp#WorkspaceConfigurationStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the workspace configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status, if a reason is available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure displays the current status of the workspace configuration, and might also contain a reason for that status.</p>"
+            }
+        },
+        "com.amazonaws.amp#WorkspaceConfigurationStatusCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ACTIVE",
+                        "value": "ACTIVE",
+                        "documentation": "Workspace configuration has been updated. Update is disallowed until workspace configuration is ACTIVE and workspace status is ACTIVE."
+                    },
+                    {
+                        "name": "UPDATING",
+                        "value": "UPDATING",
+                        "documentation": "Workspace configuration is being updated. Update is disallowed until workspace configuration is ACTIVE and workspace status is ACTIVE."
+                    },
+                    {
+                        "name": "UPDATE_FAILED",
+                        "value": "UPDATE_FAILED",
+                        "documentation": "Workspace configuration update failed."
+                    }
+                ]
             }
         },
         "com.amazonaws.amp#WorkspaceDescription": {

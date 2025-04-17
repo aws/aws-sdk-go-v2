@@ -866,7 +866,7 @@
                 "NewInstancesProtectedFromScaleIn": {
                     "target": "com.amazonaws.autoscaling#InstanceProtected",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling\n            when scaling in.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling when scaling in. For more information about preventing instances from terminating on scale in, \n            see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html\">Use instance scale-in protection</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n        </p>"
                     }
                 },
                 "ServiceLinkedRoleARN": {
@@ -11224,7 +11224,7 @@
                 "CapacityRebalance": {
                     "target": "com.amazonaws.autoscaling#CapacityRebalanceEnabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables or disables Capacity Rebalancing. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html\">Use Capacity\n            Rebalancing to handle Amazon EC2 Spot Interruptions</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Enables or disables Capacity Rebalancing. If Capacity Rebalancing is disabled, proactive replacement of at-risk Spot Instances does not occur. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html\">Capacity\n            Rebalancing in Auto Scaling to replace at-risk Spot Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <note>\n            <p>To suspend rebalancing across Availability Zones, use the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_SuspendedProcess.html\">SuspendProcesses</a> API.</p>\n         </note>"
                     }
                 },
                 "Context": {
