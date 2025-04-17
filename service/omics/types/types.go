@@ -1197,6 +1197,9 @@ type RunListItem struct {
 	// The run's workflow ID.
 	WorkflowId *string
 
+	// The name of the workflow version.
+	WorkflowVersionName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1483,8 +1486,8 @@ func (*StoreOptionsMemberTsvStoreOptions) isStoreOptions() {}
 // A workflow run task.
 type TaskListItem struct {
 
-	// Set to true if AWS HealthOmics found a matching entry in the run cache for this
-	// task.
+	// Set to true if Amazon Web Services HealthOmics found a matching entry in the
+	// run cache for this task.
 	CacheHit *bool
 
 	// The S3 URI of the cache location.
@@ -1783,6 +1786,39 @@ type WorkflowParameter struct {
 
 	// Whether the parameter is optional.
 	Optional *bool
+
+	noSmithyDocumentSerde
+}
+
+// A list of workflow version items.
+type WorkflowVersionListItem struct {
+
+	// ARN of the workflow version.
+	Arn *string
+
+	// The creation time of the workflow version.
+	CreationTime *time.Time
+
+	// The description of the workflow version.
+	Description *string
+
+	// The digist of the workflow version.
+	Digest *string
+
+	// Metadata for the workflow version.
+	Metadata map[string]string
+
+	// The status of the workflow version.
+	Status WorkflowStatus
+
+	// The type of the workflow version.
+	Type WorkflowType
+
+	// The name of the workflow version.
+	VersionName *string
+
+	// The workflow's ID.
+	WorkflowId *string
 
 	noSmithyDocumentSerde
 }

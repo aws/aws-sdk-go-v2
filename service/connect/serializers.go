@@ -28006,6 +28006,25 @@ func awsRestjson1_serializeDocumentAssignContactCategoryActionDefinition(v *type
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAssignSlaActionDefinition(v *types.AssignSlaActionDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CaseSlaConfiguration != nil {
+		ok := object.Key("CaseSlaConfiguration")
+		if err := awsRestjson1_serializeDocumentCaseSlaConfiguration(v.CaseSlaConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SlaAssignmentType) > 0 {
+		ok := object.Key("SlaAssignmentType")
+		ok.String(string(v.SlaAssignmentType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAttributeAndCondition(v *types.AttributeAndCondition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -28112,6 +28131,40 @@ func awsRestjson1_serializeDocumentCampaign(v *types.Campaign, value smithyjson.
 	if v.CampaignId != nil {
 		ok := object.Key("CampaignId")
 		ok.String(*v.CampaignId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCaseSlaConfiguration(v *types.CaseSlaConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldId != nil {
+		ok := object.Key("FieldId")
+		ok.String(*v.FieldId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.TargetFieldValues != nil {
+		ok := object.Key("TargetFieldValues")
+		if err := awsRestjson1_serializeDocumentSlaFieldValueUnionList(v.TargetFieldValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetSlaMinutes != nil {
+		ok := object.Key("TargetSlaMinutes")
+		ok.Long(*v.TargetSlaMinutes)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
 	}
 
 	return nil
@@ -31575,6 +31628,13 @@ func awsRestjson1_serializeDocumentRuleAction(v *types.RuleAction, value smithyj
 		}
 	}
 
+	if v.AssignSlaAction != nil {
+		ok := object.Key("AssignSlaAction")
+		if err := awsRestjson1_serializeDocumentAssignSlaActionDefinition(v.AssignSlaAction, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CreateCaseAction != nil {
 		ok := object.Key("CreateCaseAction")
 		if err := awsRestjson1_serializeDocumentCreateCaseActionDefinition(v.CreateCaseAction, ok); err != nil {
@@ -32127,6 +32187,19 @@ func awsRestjson1_serializeDocumentSingleSelectQuestionRuleCategoryAutomation(v 
 		ok.String(*v.OptionRefId)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSlaFieldValueUnionList(v []types.FieldValueUnion, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFieldValueUnion(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

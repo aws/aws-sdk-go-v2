@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Only the EMAIL channel is supported. The supported initiation methods are:
-// OUTBOUND, AGENT_REPLY, and FLOW.
+// Only the EMAIL and VOICE channels are supported. The supported initiation
+// methods for EMAIL are: OUTBOUND, AGENT_REPLY, and FLOW. For VOICE the supported
+// initiation methods are TRANSFER and the subtype connect:ExternalAudio.
 //
-// Creates a new EMAIL contact.
+// Creates a new EMAIL or VOICE contact.
 func (c *Client) CreateContact(ctx context.Context, params *CreateContactInput, optFns ...func(*Options)) (*CreateContactOutput, error) {
 	if params == nil {
 		params = &CreateContactInput{}
@@ -34,18 +35,23 @@ type CreateContactInput struct {
 
 	// The channel for the contact
 	//
-	// CreateContact only supports the EMAIL channel. The following information that
-	// states other channels are supported is incorrect. We are working to update this
-	// topic.
+	// CreateContact only supports the EMAIL and VOICE channels. The following
+	// information that states other channels are supported is incorrect. We are
+	// working to update this topic.
 	//
 	// This member is required.
 	Channel types.Channel
 
 	// Indicates how the contact was initiated.
 	//
-	// CreateContact only supports the following initiation methods: OUTBOUND,
-	// AGENT_REPLY, and FLOW. The following information that states other initiation
-	// methods are supported is incorrect. We are working to update this topic.
+	// CreateContact only supports the following initiation methods:
+	//
+	//   - For EMAIL: OUTBOUND, AGENT_REPLY, and FLOW.
+	//
+	//   - For VOICE: TRANSFER and the subtype connect:ExternalAudio.
+	//
+	// The following information that states other initiation methods are supported is
+	// incorrect. We are working to update this topic.
 	//
 	// This member is required.
 	InitiationMethod types.ContactInitiationMethod
@@ -97,8 +103,7 @@ type CreateContactInput struct {
 	// NUMBER | STRING | DATE | EMAIL | ATTACHMENT.
 	References map[string]types.Reference
 
-	// The unique identifier for an Amazon Connect contact. This identifier is related
-	// to the contact starting.
+	// The identifier of the contact in this instance of Amazon Connect.
 	RelatedContactId *string
 
 	// A set of system defined key-value pairs stored on individual contact segments

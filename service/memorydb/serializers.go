@@ -3016,6 +3016,11 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(*v.EngineVersion)
 	}
 
+	if len(v.IpDiscovery) > 0 {
+		ok := object.Key("IpDiscovery")
+		ok.String(string(v.IpDiscovery))
+	}
+
 	if v.KmsKeyId != nil {
 		ok := object.Key("KmsKeyId")
 		ok.String(*v.KmsKeyId)
@@ -3029,6 +3034,11 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 	if v.MultiRegionClusterName != nil {
 		ok := object.Key("MultiRegionClusterName")
 		ok.String(*v.MultiRegionClusterName)
+	}
+
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("NetworkType")
+		ok.String(string(v.NetworkType))
 	}
 
 	if v.NodeType != nil {
@@ -3977,6 +3987,11 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 	if v.EngineVersion != nil {
 		ok := object.Key("EngineVersion")
 		ok.String(*v.EngineVersion)
+	}
+
+	if len(v.IpDiscovery) > 0 {
+		ok := object.Key("IpDiscovery")
+		ok.String(string(v.IpDiscovery))
 	}
 
 	if v.MaintenanceWindow != nil {

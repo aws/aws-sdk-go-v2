@@ -134,6 +134,11 @@ type Cluster struct {
 	// The Redis OSS engine version used by the cluster
 	EngineVersion *string
 
+	// The mechanism that the cluster uses to discover IP addresses. Returns 'ipv4'
+	// when DNS endpoints resolve to IPv4 addresses, or 'ipv6' when DNS endpoints
+	// resolve to IPv6 addresses.
+	IpDiscovery IpDiscovery
+
 	// The ID of the KMS key used to encrypt the cluster
 	KmsKeyId *string
 
@@ -148,6 +153,11 @@ type Cluster struct {
 	// The user-supplied name of the cluster. This identifier is a unique key that
 	// identifies a cluster.
 	Name *string
+
+	// The IP address type for the cluster. Returns 'ipv4' for IPv4 only, 'ipv6' for
+	// IPv6 only, or 'dual-stack' if the cluster supports both IPv4 and IPv6
+	// addressing.
+	NetworkType NetworkType
 
 	// The cluster's node type
 	NodeType *string
@@ -765,6 +775,11 @@ type Subnet struct {
 	// The unique identifier for the subnet.
 	Identifier *string
 
+	// The network types supported by this subnet. Returns an array of strings that
+	// can include 'ipv4', 'ipv6', or both, indicating whether the subnet supports IPv4
+	// only, IPv6 only, or dual-stack deployments.
+	SupportedNetworkTypes []NetworkType
+
 	noSmithyDocumentSerde
 }
 
@@ -790,6 +805,11 @@ type SubnetGroup struct {
 
 	// A list of subnets associated with the subnet group.
 	Subnets []Subnet
+
+	// The network types supported by this subnet group. Returns an array of strings
+	// that can include 'ipv4', 'ipv6', or both, indicating the IP address types that
+	// can be used for clusters deployed in this subnet group.
+	SupportedNetworkTypes []NetworkType
 
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the subnet group.
 	VpcId *string

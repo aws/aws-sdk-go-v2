@@ -11,7 +11,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a workflow.
+// Creates a private workflow.Private workflows depend on a variety of resources
+// that you create and configure before creating the workflow:
+//
+//   - Input data: Input data for the workflow, stored in an S3 bucket or a Amazon
+//     Web Services HealthOmics sequence store.
+//
+//   - Workflow definition files: Define your workflow in one or more workflow
+//     definition files, written in WDL, Nextflow, or CWL. The workflow definition
+//     specifies the inputs and outputs for runs that use the workflow. It also
+//     includes specifications for the runs and run tasks for your workflow, including
+//     compute and memory requirements.
+//
+//   - Parameter template files: Define run parameters using a parameter template
+//     file (written in JSON).
+//
+//   - ECR container images: Create one or more container images for the workflow.
+//     Store the images in a private ECR repository.
+//
+//   - (Optional) Sentieon licenses: Request a Sentieon license if you plan to use
+//     Sentieon software in a private workflow.
+//
+// For more information, see [Creating or updating a private workflow in Amazon Web Services HealthOmics] in the Amazon Web Services HealthOmics User Guide.
+//
+// [Creating or updating a private workflow in Amazon Web Services HealthOmics]: https://docs.aws.amazon.com/omics/latest/dev/creating-private-workflows.html
 func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput, optFns ...func(*Options)) (*CreateWorkflowOutput, error) {
 	if params == nil {
 		params = &CreateWorkflowInput{}
@@ -47,7 +70,7 @@ type CreateWorkflowInput struct {
 	// A description for the workflow.
 	Description *string
 
-	// An engine for the workflow.
+	// The workflow engine for the workflow.
 	Engine types.WorkflowEngine
 
 	// The path of the main definition file for the workflow.
@@ -59,8 +82,18 @@ type CreateWorkflowInput struct {
 	// A parameter template for the workflow.
 	ParameterTemplate map[string]types.WorkflowParameter
 
-	// The default storage capacity for the workflow runs, in gibibytes.
+	// The default static storage capacity (in gibibytes) for runs that use this
+	// workflow or workflow version.
 	StorageCapacity *int32
+
+	//  The default storage type for runs that use this workflow. STATIC storage
+	// allocates a fixed amount of storage. DYNAMIC storage dynamically scales the
+	// storage up or down, based on file system utilization. For more information about
+	// static and dynamic storage, see [Running workflows]in the Amazon Web Services HealthOmics User
+	// Guide.
+	//
+	// [Running workflows]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
+	StorageType types.StorageType
 
 	// Tags for the workflow.
 	Tags map[string]string
@@ -81,6 +114,9 @@ type CreateWorkflowOutput struct {
 
 	// The workflow's tags.
 	Tags map[string]string
+
+	// The universally unique identifier (UUID) value for this workflow.
+	Uuid *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

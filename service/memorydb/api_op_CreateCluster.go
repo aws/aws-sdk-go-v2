@@ -66,6 +66,14 @@ type CreateClusterInput struct {
 	// The version number of the Redis OSS engine to be used for the cluster.
 	EngineVersion *string
 
+	// The mechanism for discovering IP addresses for the cluster discovery protocol.
+	// Valid values are 'ipv4' or 'ipv6'. When set to 'ipv4', cluster discovery
+	// functions such as cluster slots, cluster shards, and cluster nodes return IPv4
+	// addresses for cluster nodes. When set to 'ipv6', the cluster discovery functions
+	// return IPv6 addresses for cluster nodes. The value must be compatible with the
+	// NetworkType parameter. If not specified, the default is 'ipv4'.
+	IpDiscovery types.IpDiscovery
+
 	// The ID of the KMS key used to encrypt the cluster.
 	KmsKeyId *string
 
@@ -94,6 +102,13 @@ type CreateClusterInput struct {
 
 	// The name of the multi-Region cluster to be created.
 	MultiRegionClusterName *string
+
+	// Specifies the IP address type for the cluster. Valid values are 'ipv4', 'ipv6',
+	// or 'dual_stack'. When set to 'ipv4', the cluster will only be accessible via
+	// IPv4 addresses. When set to 'ipv6', the cluster will only be accessible via IPv6
+	// addresses. When set to 'dual_stack', the cluster will be accessible via both
+	// IPv4 and IPv6 addresses. If not specified, the default is 'ipv4'.
+	NetworkType types.NetworkType
 
 	// The number of replicas to apply to each shard. The default value is 1. The
 	// maximum is 5.

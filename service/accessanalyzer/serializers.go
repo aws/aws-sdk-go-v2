@@ -4158,9 +4158,49 @@ func awsRestjson1_serializeDocumentS3BucketConfiguration(v *types.S3BucketConfig
 	return nil
 }
 
+func awsRestjson1_serializeDocumentS3ExpressDirectoryAccessPointConfiguration(v *types.S3ExpressDirectoryAccessPointConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessPointPolicy != nil {
+		ok := object.Key("accessPointPolicy")
+		ok.String(*v.AccessPointPolicy)
+	}
+
+	if v.NetworkOrigin != nil {
+		ok := object.Key("networkOrigin")
+		if err := awsRestjson1_serializeDocumentNetworkOriginConfiguration(v.NetworkOrigin, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3ExpressDirectoryAccessPointConfigurationsMap(v map[string]types.S3ExpressDirectoryAccessPointConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentS3ExpressDirectoryAccessPointConfiguration(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentS3ExpressDirectoryBucketConfiguration(v *types.S3ExpressDirectoryBucketConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccessPoints != nil {
+		ok := object.Key("accessPoints")
+		if err := awsRestjson1_serializeDocumentS3ExpressDirectoryAccessPointConfigurationsMap(v.AccessPoints, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.BucketPolicy != nil {
 		ok := object.Key("bucketPolicy")

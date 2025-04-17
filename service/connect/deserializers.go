@@ -44433,6 +44433,51 @@ func awsRestjson1_deserializeDocumentAssignContactCategoryActionDefinition(v **t
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssignSlaActionDefinition(v **types.AssignSlaActionDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssignSlaActionDefinition
+	if *v == nil {
+		sv = &types.AssignSlaActionDefinition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CaseSlaConfiguration":
+			if err := awsRestjson1_deserializeDocumentCaseSlaConfiguration(&sv.CaseSlaConfiguration, value); err != nil {
+				return err
+			}
+
+		case "SlaAssignmentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SlaAssignmentType to be of type string, got %T instead", value)
+				}
+				sv.SlaAssignmentType = types.SlaAssignmentType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssociatedContactSummary(v **types.AssociatedContactSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45719,6 +45764,82 @@ func awsRestjson1_deserializeDocumentCampaign(v **types.Campaign, value interfac
 					return fmt.Errorf("expected CampaignId to be of type string, got %T instead", value)
 				}
 				sv.CampaignId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCaseSlaConfiguration(v **types.CaseSlaConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CaseSlaConfiguration
+	if *v == nil {
+		sv = &types.CaseSlaConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FieldId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldValueId to be of type string, got %T instead", value)
+				}
+				sv.FieldId = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SlaName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "TargetFieldValues":
+			if err := awsRestjson1_deserializeDocumentSlaFieldValueUnionList(&sv.TargetFieldValues, value); err != nil {
+				return err
+			}
+
+		case "TargetSlaMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TargetSlaMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetSlaMinutes = ptr.Int64(i64)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SlaType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SlaType(jtv)
 			}
 
 		default:
@@ -60905,6 +61026,11 @@ func awsRestjson1_deserializeDocumentRuleAction(v **types.RuleAction, value inte
 				return err
 			}
 
+		case "AssignSlaAction":
+			if err := awsRestjson1_deserializeDocumentAssignSlaActionDefinition(&sv.AssignSlaAction, value); err != nil {
+				return err
+			}
+
 		case "CreateCaseAction":
 			if err := awsRestjson1_deserializeDocumentCreateCaseActionDefinition(&sv.CreateCaseAction, value); err != nil {
 				return err
@@ -62227,6 +62353,40 @@ func awsRestjson1_deserializeDocumentSingleSelectQuestionRuleCategoryAutomation(
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSlaFieldValueUnionList(v *[]types.FieldValueUnion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FieldValueUnion
+	if *v == nil {
+		cv = []types.FieldValueUnion{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FieldValueUnion
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFieldValueUnion(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

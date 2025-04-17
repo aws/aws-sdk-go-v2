@@ -15,7 +15,7 @@ import (
 // cache data in Amazon S3, for inspection or to troubleshoot issues. You can
 // remove old cache data using standard S3 Delete operations.
 //
-// For more information, see [Deleting a run cache] in the AWS HealthOmics User Guide.
+// For more information, see [Deleting a run cache] in the Amazon Web Services HealthOmics User Guide.
 //
 // [Deleting a run cache]: https://docs.aws.amazon.com/omics/latest/dev/workflow-cache-delete.html
 func (c *Client) DeleteRunCache(ctx context.Context, params *DeleteRunCacheInput, optFns ...func(*Options)) (*DeleteRunCacheOutput, error) {

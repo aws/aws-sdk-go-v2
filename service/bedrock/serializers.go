@@ -5245,6 +5245,13 @@ func awsRestjson1_serializeDocumentAutomatedEvaluationConfig(v *types.AutomatedE
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomMetricConfig != nil {
+		ok := object.Key("customMetricConfig")
+		if err := awsRestjson1_serializeDocumentAutomatedEvaluationCustomMetricConfig(v.CustomMetricConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DatasetMetricConfigs != nil {
 		ok := object.Key("datasetMetricConfigs")
 		if err := awsRestjson1_serializeDocumentEvaluationDatasetMetricConfigs(v.DatasetMetricConfigs, ok); err != nil {
@@ -5259,6 +5266,61 @@ func awsRestjson1_serializeDocumentAutomatedEvaluationConfig(v *types.AutomatedE
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutomatedEvaluationCustomMetricConfig(v *types.AutomatedEvaluationCustomMetricConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomMetrics != nil {
+		ok := object.Key("customMetrics")
+		if err := awsRestjson1_serializeDocumentAutomatedEvaluationCustomMetrics(v.CustomMetrics, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EvaluatorModelConfig != nil {
+		ok := object.Key("evaluatorModelConfig")
+		if err := awsRestjson1_serializeDocumentCustomMetricEvaluatorModelConfig(v.EvaluatorModelConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutomatedEvaluationCustomMetrics(v []types.AutomatedEvaluationCustomMetricSource, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentAutomatedEvaluationCustomMetricSource(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutomatedEvaluationCustomMetricSource(v types.AutomatedEvaluationCustomMetricSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition:
+		av := object.Key("customMetricDefinition")
+		if err := awsRestjson1_serializeDocumentCustomMetricDefinition(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -5348,6 +5410,69 @@ func awsRestjson1_serializeDocumentCustomizationConfig(v types.CustomizationConf
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomMetricBedrockEvaluatorModel(v *types.CustomMetricBedrockEvaluatorModel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelIdentifier != nil {
+		ok := object.Key("modelIdentifier")
+		ok.String(*v.ModelIdentifier)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomMetricBedrockEvaluatorModels(v []types.CustomMetricBedrockEvaluatorModel, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCustomMetricBedrockEvaluatorModel(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomMetricDefinition(v *types.CustomMetricDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Instructions != nil {
+		ok := object.Key("instructions")
+		ok.String(*v.Instructions)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.RatingScale != nil {
+		ok := object.Key("ratingScale")
+		if err := awsRestjson1_serializeDocumentRatingScale(v.RatingScale, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomMetricEvaluatorModelConfig(v *types.CustomMetricEvaluatorModelConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BedrockEvaluatorModels != nil {
+		ok := object.Key("bedrockEvaluatorModels")
+		if err := awsRestjson1_serializeDocumentCustomMetricBedrockEvaluatorModels(v.BedrockEvaluatorModels, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6893,6 +7018,71 @@ func awsRestjson1_serializeDocumentRAGStopSequences(v []string, value smithyjson
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRatingScale(v []types.RatingScaleItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRatingScaleItem(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRatingScaleItem(v *types.RatingScaleItem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Definition != nil {
+		ok := object.Key("definition")
+		ok.String(*v.Definition)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		if err := awsRestjson1_serializeDocumentRatingScaleItemValue(v.Value, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRatingScaleItemValue(v types.RatingScaleItemValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RatingScaleItemValueMemberFloatValue:
+		av := object.Key("floatValue")
+		switch {
+		case math.IsNaN(float64(uv.Value)):
+			av.String("NaN")
+
+		case math.IsInf(float64(uv.Value), 1):
+			av.String("Infinity")
+
+		case math.IsInf(float64(uv.Value), -1):
+			av.String("-Infinity")
+
+		default:
+			av.Float(uv.Value)
+
+		}
+
+	case *types.RatingScaleItemValueMemberStringValue:
+		av := object.Key("stringValue")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

@@ -51,6 +51,14 @@ type UpdateClusterInput struct {
 	// and create it anew with the earlier engine version.
 	EngineVersion *string
 
+	// The mechanism for discovering IP addresses for the cluster discovery protocol.
+	// Valid values are 'ipv4' or 'ipv6'. When set to 'ipv4', cluster discovery
+	// functions such as cluster slots, cluster shards, and cluster nodes will return
+	// IPv4 addresses for cluster nodes. When set to 'ipv6', the cluster discovery
+	// functions return IPv6 addresses for cluster nodes. The value must be compatible
+	// with the NetworkType parameter. If not specified, the default is 'ipv4'.
+	IpDiscovery types.IpDiscovery
+
 	// Specifies the weekly time range during which maintenance on the cluster is
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
 	// Clock UTC). The minimum maintenance window is a 60 minute period.

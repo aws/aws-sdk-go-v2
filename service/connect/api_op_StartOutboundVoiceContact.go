@@ -96,8 +96,11 @@ type StartOutboundVoiceContactInput struct {
 	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	// A description of the voice contact that is shown to an agent in the Contact
-	// Control Panel (CCP).
+	// A description of the voice contact that appears in the agent's snapshot in the
+	// CCP logs. For more information about CCP logs, see [Download and review CCP logs]in the Amazon Connect
+	// Administrator Guide.
+	//
+	// [Download and review CCP logs]: https://docs.aws.amazon.com/connect/latest/adminguide/download-ccp-logs.html
 	Description *string
 
 	// The name of a voice contact that is shown to an agent in the Contact Control

@@ -266,6 +266,18 @@ func TestCheckSnapshot_CreateWorkflow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateWorkflowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWorkflowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateWorkflowVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAnnotationStore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAnnotationStore(context.Background(), nil, func(o *Options) {
@@ -403,6 +415,18 @@ func TestCheckSnapshot_DeleteWorkflow(t *testing.T) {
 	_, err := svc.DeleteWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteWorkflowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWorkflowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteWorkflowVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -674,6 +698,18 @@ func TestCheckSnapshot_GetWorkflow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetWorkflowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetWorkflowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetWorkflowVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAnnotationImportJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAnnotationImportJobs(context.Background(), nil, func(o *Options) {
@@ -938,6 +974,18 @@ func TestCheckSnapshot_ListWorkflows(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListWorkflowVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListWorkflowVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListWorkflowVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutS3AccessPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutS3AccessPolicy(context.Background(), nil, func(o *Options) {
@@ -1135,6 +1183,18 @@ func TestCheckSnapshot_UpdateWorkflow(t *testing.T) {
 	_, err := svc.UpdateWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateWorkflowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateWorkflowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateWorkflowVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1357,6 +1417,18 @@ func TestUpdateSnapshot_CreateWorkflow(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateWorkflowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWorkflowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateWorkflowVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAnnotationStore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAnnotationStore(context.Background(), nil, func(o *Options) {
@@ -1494,6 +1566,18 @@ func TestUpdateSnapshot_DeleteWorkflow(t *testing.T) {
 	_, err := svc.DeleteWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteWorkflowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWorkflowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteWorkflowVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1765,6 +1849,18 @@ func TestUpdateSnapshot_GetWorkflow(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetWorkflowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetWorkflowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetWorkflowVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAnnotationImportJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAnnotationImportJobs(context.Background(), nil, func(o *Options) {
@@ -2029,6 +2125,18 @@ func TestUpdateSnapshot_ListWorkflows(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListWorkflowVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListWorkflowVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListWorkflowVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutS3AccessPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutS3AccessPolicy(context.Background(), nil, func(o *Options) {
@@ -2226,6 +2334,18 @@ func TestUpdateSnapshot_UpdateWorkflow(t *testing.T) {
 	_, err := svc.UpdateWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateWorkflowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateWorkflowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateWorkflowVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

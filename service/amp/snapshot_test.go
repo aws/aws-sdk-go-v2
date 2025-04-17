@@ -242,6 +242,18 @@ func TestCheckSnapshot_DescribeWorkspace(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeWorkspaceConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeWorkspaceConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeWorkspaceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDefaultScraperConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDefaultScraperConfiguration(context.Background(), nil, func(o *Options) {
@@ -379,6 +391,18 @@ func TestCheckSnapshot_UpdateWorkspaceAlias(t *testing.T) {
 	_, err := svc.UpdateWorkspaceAlias(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateWorkspaceAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateWorkspaceConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateWorkspaceConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateWorkspaceConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -565,6 +589,18 @@ func TestUpdateSnapshot_DescribeWorkspace(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeWorkspaceConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeWorkspaceConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeWorkspaceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDefaultScraperConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDefaultScraperConfiguration(context.Background(), nil, func(o *Options) {
@@ -702,6 +738,18 @@ func TestUpdateSnapshot_UpdateWorkspaceAlias(t *testing.T) {
 	_, err := svc.UpdateWorkspaceAlias(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateWorkspaceAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateWorkspaceConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateWorkspaceConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateWorkspaceConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

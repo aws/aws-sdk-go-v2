@@ -48,7 +48,8 @@ type UpdateScraperInput struct {
 	// The new Amazon Managed Service for Prometheus workspace to send metrics to.
 	Destination types.Destination
 
-	// The scraper role configuration for the workspace.
+	// Use this structure to enable cross-account access, so that you can use a target
+	// account to access Prometheus metrics from source accounts.
 	RoleConfiguration *types.RoleConfiguration
 
 	// Contains the base-64 encoded YAML configuration for the scraper.

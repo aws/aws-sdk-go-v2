@@ -358,6 +358,20 @@ type AssignContactCategoryActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// The AssignSla action definition.
+type AssignSlaActionDefinition struct {
+
+	// Type of SLA assignment.
+	//
+	// This member is required.
+	SlaAssignmentType SlaAssignmentType
+
+	// The SLA configuration for Case SLA Assignment.
+	CaseSlaConfiguration *CaseSlaConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Contact summary of a contact in contact tree associated with unique identifier.
 type AssociatedContactSummary struct {
 
@@ -370,7 +384,9 @@ type AssociatedContactSummary struct {
 	// The identifier of the contact in this instance of Amazon Connect.
 	ContactId *string
 
-	// The timestamp when the customer endpoint disconnected from Amazon Connect.
+	// The date and time that the customer endpoint disconnected from the current
+	// contact, in UTC time. In transfer scenarios, the DisconnectTimestamp of the
+	// previous contact indicates the date and time when that contact ended.
 	DisconnectTimestamp *time.Time
 
 	// If this contact is related to other contacts, this is the ID of the initial
@@ -691,6 +707,35 @@ type Campaign struct {
 
 	// A unique identifier for a campaign.
 	CampaignId *string
+
+	noSmithyDocumentSerde
+}
+
+// The SLA configuration for Case SlaAssignmentType.
+type CaseSlaConfiguration struct {
+
+	// Name of an SLA.
+	//
+	// This member is required.
+	Name *string
+
+	// Target duration in minutes within which an SLA should be completed.
+	//
+	// This member is required.
+	TargetSlaMinutes *int64
+
+	// Type of SLA for Case SlaAssignmentType.
+	//
+	// This member is required.
+	Type SlaType
+
+	// Unique identifier of a Case field.
+	FieldId *string
+
+	// Represents a list of target field values for the fieldId specified in
+	// CaseSlaConfiguration. The SLA is considered met if any one of these target field
+	// values matches the actual field value.
+	TargetFieldValues []FieldValueUnion
 
 	noSmithyDocumentSerde
 }
@@ -5751,6 +5796,9 @@ type RuleAction struct {
 	// OnPostChatAnalysisAvailable | OnZendeskTicketCreate |
 	// OnZendeskTicketStatusUpdate | OnSalesforceCaseCreate
 	AssignContactCategoryAction *AssignContactCategoryActionDefinition
+
+	// Information about the assign SLA action.
+	AssignSlaAction *AssignSlaActionDefinition
 
 	// Information about the create case action.
 	//

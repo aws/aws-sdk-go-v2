@@ -76,7 +76,8 @@ type CreateScraperInput struct {
 	// the idempotency of the request.
 	ClientToken *string
 
-	// The scraper role configuration for the workspace.
+	// Use this structure to enable cross-account access, so that you can use a target
+	// account to access Prometheus metrics from source accounts.
 	RoleConfiguration *types.RoleConfiguration
 
 	// (Optional) The list of tag keys and values to associate with the scraper.

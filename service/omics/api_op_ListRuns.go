@@ -13,10 +13,11 @@ import (
 
 // Retrieves a list of runs.
 //
-// HealthOmics stores a fixed number of runs that are available to the console and
-// API. If the ListRuns response doesn't include specific runs that you expected,
-// you can find run logs for all runs in the CloudWatch logs. For more information
-// about viewing the run logs, see [CloudWatch logs]in the AWS HealthOmics User Guide.
+// Amazon Web Services HealthOmics stores a fixed number of runs that are
+// available to the console and API. If the ListRuns response doesn't include
+// specific runs that you expected, you can find run logs for all runs in the
+// CloudWatch logs. For more information about viewing the run logs, see [CloudWatch logs]in the
+// Amazon Web Services HealthOmics User Guide.
 //
 // [CloudWatch logs]: https://docs.aws.amazon.com/omics/latest/dev/cloudwatch-logs.html
 func (c *Client) ListRuns(ctx context.Context, params *ListRunsInput, optFns ...func(*Options)) (*ListRunsOutput, error) {

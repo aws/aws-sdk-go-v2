@@ -10676,6 +10676,11 @@ func awsRestjson1_deserializeDocumentAutomatedEvaluationConfig(v **types.Automat
 
 	for key, value := range shape {
 		switch key {
+		case "customMetricConfig":
+			if err := awsRestjson1_deserializeDocumentAutomatedEvaluationCustomMetricConfig(&sv.CustomMetricConfig, value); err != nil {
+				return err
+			}
+
 		case "datasetMetricConfigs":
 			if err := awsRestjson1_deserializeDocumentEvaluationDatasetMetricConfigs(&sv.DatasetMetricConfigs, value); err != nil {
 				return err
@@ -10692,6 +10697,119 @@ func awsRestjson1_deserializeDocumentAutomatedEvaluationConfig(v **types.Automat
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedEvaluationCustomMetricConfig(v **types.AutomatedEvaluationCustomMetricConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedEvaluationCustomMetricConfig
+	if *v == nil {
+		sv = &types.AutomatedEvaluationCustomMetricConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customMetrics":
+			if err := awsRestjson1_deserializeDocumentAutomatedEvaluationCustomMetrics(&sv.CustomMetrics, value); err != nil {
+				return err
+			}
+
+		case "evaluatorModelConfig":
+			if err := awsRestjson1_deserializeDocumentCustomMetricEvaluatorModelConfig(&sv.EvaluatorModelConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedEvaluationCustomMetrics(v *[]types.AutomatedEvaluationCustomMetricSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutomatedEvaluationCustomMetricSource
+	if *v == nil {
+		cv = []types.AutomatedEvaluationCustomMetricSource{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutomatedEvaluationCustomMetricSource
+		if err := awsRestjson1_deserializeDocumentAutomatedEvaluationCustomMetricSource(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedEvaluationCustomMetricSource(v *types.AutomatedEvaluationCustomMetricSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.AutomatedEvaluationCustomMetricSource
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "customMetricDefinition":
+			var mv types.CustomMetricDefinition
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCustomMetricDefinition(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -11137,6 +11255,170 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomMetricBedrockEvaluatorModel(v **types.CustomMetricBedrockEvaluatorModel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomMetricBedrockEvaluatorModel
+	if *v == nil {
+		sv = &types.CustomMetricBedrockEvaluatorModel{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "modelIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EvaluatorModelIdentifier to be of type string, got %T instead", value)
+				}
+				sv.ModelIdentifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomMetricBedrockEvaluatorModels(v *[]types.CustomMetricBedrockEvaluatorModel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CustomMetricBedrockEvaluatorModel
+	if *v == nil {
+		cv = []types.CustomMetricBedrockEvaluatorModel{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CustomMetricBedrockEvaluatorModel
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCustomMetricBedrockEvaluatorModel(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomMetricDefinition(v **types.CustomMetricDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomMetricDefinition
+	if *v == nil {
+		sv = &types.CustomMetricDefinition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "instructions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomMetricInstructions to be of type string, got %T instead", value)
+				}
+				sv.Instructions = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MetricName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "ratingScale":
+			if err := awsRestjson1_deserializeDocumentRatingScale(&sv.RatingScale, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomMetricEvaluatorModelConfig(v **types.CustomMetricEvaluatorModelConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomMetricEvaluatorModelConfig
+	if *v == nil {
+		sv = &types.CustomMetricEvaluatorModelConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bedrockEvaluatorModels":
+			if err := awsRestjson1_deserializeDocumentCustomMetricBedrockEvaluatorModels(&sv.BedrockEvaluatorModels, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -12429,6 +12711,11 @@ func awsRestjson1_deserializeDocumentEvaluationSummary(v **types.EvaluationSumma
 					return err
 				}
 				sv.CreationTime = ptr.Time(t)
+			}
+
+		case "customMetricsEvaluatorModelIdentifiers":
+			if err := awsRestjson1_deserializeDocumentEvaluatorModelIdentifiers(&sv.CustomMetricsEvaluatorModelIdentifiers, value); err != nil {
+				return err
 			}
 
 		case "evaluationTaskTypes":
@@ -17591,6 +17878,164 @@ func awsRestjson1_deserializeDocumentRAGStopSequences(v *[]string, value interfa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRatingScale(v *[]types.RatingScaleItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RatingScaleItem
+	if *v == nil {
+		cv = []types.RatingScaleItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RatingScaleItem
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRatingScaleItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRatingScaleItem(v **types.RatingScaleItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RatingScaleItem
+	if *v == nil {
+		sv = &types.RatingScaleItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "definition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RatingScaleItemDefinition to be of type string, got %T instead", value)
+				}
+				sv.Definition = ptr.String(jtv)
+			}
+
+		case "value":
+			if err := awsRestjson1_deserializeDocumentRatingScaleItemValue(&sv.Value, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRatingScaleItemValue(v *types.RatingScaleItemValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.RatingScaleItemValue
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "floatValue":
+			var mv float32
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					mv = float32(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					mv = float32(f64)
+
+				default:
+					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+			uv = &types.RatingScaleItemValueMemberFloatValue{Value: mv}
+			break loop
+
+		case "stringValue":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.RatingScaleItemValueMemberStringValue{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

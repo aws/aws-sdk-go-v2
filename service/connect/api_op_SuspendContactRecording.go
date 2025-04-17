@@ -12,16 +12,18 @@ import (
 )
 
 // When a contact is being recorded, this API suspends recording whatever is
-// selected in the flow configuration: call, screen, or both. If only call
-// recording or only screen recording is enabled, then it would be suspended. For
-// example, you might suspend the screen recording while collecting sensitive
-// information, such as a credit card number. Then use ResumeContactRecording to
-// restart recording the screen.
+// selected in the flow configuration: call (IVR or agent), screen, or both. If
+// only call recording or only screen recording is enabled, then it would be
+// suspended. For example, you might suspend the screen recording while collecting
+// sensitive information, such as a credit card number. Then use [ResumeContactRecording]to restart
+// recording the screen.
 //
 // The period of time that the recording is suspended is filled with silence in
 // the final recording.
 //
-// Voice and screen recordings are supported.
+// Voice (IVR, agent) and screen recordings are supported.
+//
+// [ResumeContactRecording]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ResumeContactRecording.html
 func (c *Client) SuspendContactRecording(ctx context.Context, params *SuspendContactRecordingInput, optFns ...func(*Options)) (*SuspendContactRecordingOutput, error) {
 	if params == nil {
 		params = &SuspendContactRecordingInput{}

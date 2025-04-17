@@ -43,6 +43,14 @@ const (
 	AccessCheckResourceTypeSnsTopic                 AccessCheckResourceType = "AWS::SNS::Topic"
 	AccessCheckResourceTypeSqsQueue                 AccessCheckResourceType = "AWS::SQS::Queue"
 	AccessCheckResourceTypeRoleTrust                AccessCheckResourceType = "AWS::IAM::AssumeRolePolicyDocument"
+	AccessCheckResourceTypeS3TableBucket            AccessCheckResourceType = "AWS::S3Tables::TableBucket"
+	AccessCheckResourceTypeApiGatewayRestApi        AccessCheckResourceType = "AWS::ApiGateway::RestApi"
+	AccessCheckResourceTypeCodeArtifactDomain       AccessCheckResourceType = "AWS::CodeArtifact::Domain"
+	AccessCheckResourceTypeBackupVault              AccessCheckResourceType = "AWS::Backup::BackupVault"
+	AccessCheckResourceTypeCloudtrailDashboard      AccessCheckResourceType = "AWS::CloudTrail::Dashboard"
+	AccessCheckResourceTypeCloudtrailEventDataStore AccessCheckResourceType = "AWS::CloudTrail::EventDataStore"
+	AccessCheckResourceTypeS3Table                  AccessCheckResourceType = "AWS::S3Tables::Table"
+	AccessCheckResourceTypeS3ExpressAccessPoint     AccessCheckResourceType = "AWS::S3Express::AccessPoint"
 )
 
 // Values returns all known values for AccessCheckResourceType. Note that this can
@@ -69,6 +77,14 @@ func (AccessCheckResourceType) Values() []AccessCheckResourceType {
 		"AWS::SNS::Topic",
 		"AWS::SQS::Queue",
 		"AWS::IAM::AssumeRolePolicyDocument",
+		"AWS::S3Tables::TableBucket",
+		"AWS::ApiGateway::RestApi",
+		"AWS::CodeArtifact::Domain",
+		"AWS::Backup::BackupVault",
+		"AWS::CloudTrail::Dashboard",
+		"AWS::CloudTrail::EventDataStore",
+		"AWS::S3Tables::Table",
+		"AWS::S3Express::AccessPoint",
 	}
 }
 

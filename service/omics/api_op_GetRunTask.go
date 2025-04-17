@@ -47,8 +47,8 @@ type GetRunTaskInput struct {
 
 type GetRunTaskOutput struct {
 
-	// Set to true if AWS HealthOmics found a matching entry in the run cache for this
-	// task.
+	// Set to true if Amazon Web Services HealthOmics found a matching entry in the
+	// run cache for this task.
 	CacheHit *bool
 
 	// The S3 URI of the cache location.

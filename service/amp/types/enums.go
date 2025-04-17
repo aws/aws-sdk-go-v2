@@ -175,6 +175,33 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	}
 }
 
+type WorkspaceConfigurationStatusCode string
+
+// Enum values for WorkspaceConfigurationStatusCode
+const (
+	// Workspace configuration has been updated. Update is disallowed until workspace
+	// configuration is ACTIVE and workspace status is ACTIVE.
+	WorkspaceConfigurationStatusCodeActive WorkspaceConfigurationStatusCode = "ACTIVE"
+	// Workspace configuration is being updated. Update is disallowed until workspace
+	// configuration is ACTIVE and workspace status is ACTIVE.
+	WorkspaceConfigurationStatusCodeUpdating WorkspaceConfigurationStatusCode = "UPDATING"
+	// Workspace configuration update failed.
+	WorkspaceConfigurationStatusCodeUpdateFailed WorkspaceConfigurationStatusCode = "UPDATE_FAILED"
+)
+
+// Values returns all known values for WorkspaceConfigurationStatusCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkspaceConfigurationStatusCode) Values() []WorkspaceConfigurationStatusCode {
+	return []WorkspaceConfigurationStatusCode{
+		"ACTIVE",
+		"UPDATING",
+		"UPDATE_FAILED",
+	}
+}
+
 type WorkspaceStatusCode string
 
 // Enum values for WorkspaceStatusCode

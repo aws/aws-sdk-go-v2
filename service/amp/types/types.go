@@ -102,6 +102,47 @@ type EksConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// This structure defines one label set used to enforce ingestion limits for the
+// workspace, and defines the limit for that label set.
+//
+// A label set is a unique combination of label-value pairs. Use them to control
+// time series ingestion limits and to monitor usage by specific label groups.
+// Example label sets might be team:finance or env:prod
+type LimitsPerLabelSet struct {
+
+	// This defines one label set that will have an enforced ingestion limit.
+	//
+	// Label values accept ASCII characters and must contain at least one character
+	// that isn't whitespace. ASCII control characters are not accepted. If the label
+	// name is metric name label __name__ , then the metric part of the name must
+	// conform to the following pattern: [a-zA-Z_:][a-zA-Z0-9_:]*
+	//
+	// This member is required.
+	LabelSet map[string]string
+
+	// This structure contains the information about the limits that apply to time
+	// series that match this label set.
+	//
+	// This member is required.
+	Limits *LimitsPerLabelSetEntry
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains the information about the limits that apply to time
+// series that match one label set.
+type LimitsPerLabelSetEntry struct {
+
+	// The maximum number of active series that can be ingested that match this label
+	// set.
+	//
+	// Setting this to 0 causes no label set limit to be enforced, but it does cause
+	// Amazon Managed Service for Prometheus to vend label set metrics to CloudWatch
+	MaxSeries *int64
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the logging configuration for the workspace.
 type LoggingConfigurationMetadata struct {
 
@@ -148,14 +189,20 @@ type LoggingConfigurationStatus struct {
 	noSmithyDocumentSerde
 }
 
-// To configure roles that allows users to write to an Amazon Managed Service for
-// Prometheus workspace in a different account.
+// Use this structure to enable cross-account access, so that you can use a target
+// account to access Prometheus metrics from source accounts.
 type RoleConfiguration struct {
 
-	// A ARN identifying the source role configuration.
+	// The Amazon Resource Name (ARN) of the role used in the source account to enable
+	// cross-account scraping. For information about the contents of this policy, see [Cross-account setup].
+	//
+	// [Cross-account setup]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#cross-account-remote-write
 	SourceRoleArn *string
 
-	// A ARN identifying the target role configuration.
+	// The Amazon Resource Name (ARN) of the role used in the target account to enable
+	// cross-account scraping. For information about the contents of this policy, see [Cross-account setup].
+	//
+	// [Cross-account setup]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#cross-account-remote-write
 	TargetRoleArn *string
 
 	noSmithyDocumentSerde
@@ -337,8 +384,8 @@ type ScraperDescription struct {
 	// (Optional) A name associated with the scraper.
 	Alias *string
 
-	// To configure roles that allows users to write to an Amazon Managed Service for
-	// Prometheus workspace in a different account.
+	// This structure displays information about the IAM roles used for cross-account
+	// scraping configuration.
 	RoleConfiguration *RoleConfiguration
 
 	// If there is a failure, the reason for the failure.
@@ -410,8 +457,8 @@ type ScraperSummary struct {
 	// (Optional) A name associated with the scraper.
 	Alias *string
 
-	// To configure roles that allows users to write to an Amazon Managed Service for
-	// Prometheus workspace in a different account.
+	// This structure displays information about the IAM roles used for cross-account
+	// scraping configuration.
 	RoleConfiguration *RoleConfiguration
 
 	// If there is a failure, the reason for the failure.
@@ -453,6 +500,40 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains the description of the workspace configuration.
+type WorkspaceConfigurationDescription struct {
+
+	// This structure displays the current status of the workspace configuration, and
+	// might also contain a reason for that status.
+	//
+	// This member is required.
+	Status *WorkspaceConfigurationStatus
+
+	// This is an array of structures, where each structure displays one label sets
+	// for the workspace and the limits for that label set.
+	LimitsPerLabelSet []LimitsPerLabelSet
+
+	// This field displays how many days that metrics are retained in the workspace.
+	RetentionPeriodInDays *int32
+
+	noSmithyDocumentSerde
+}
+
+// This structure displays the current status of the workspace configuration, and
+// might also contain a reason for that status.
+type WorkspaceConfigurationStatus struct {
+
+	// The current status of the workspace configuration.
+	//
+	// This member is required.
+	StatusCode WorkspaceConfigurationStatusCode
+
+	// The reason for the current status, if a reason is available.
+	StatusReason *string
 
 	noSmithyDocumentSerde
 }

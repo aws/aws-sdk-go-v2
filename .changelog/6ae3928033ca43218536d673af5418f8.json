@@ -1,0 +1,8 @@
+{
+    "id": "6ae39280-33ca-4321-8536-d673af5418f8",
+    "type": "feature",
+    "description": "We've added stricter parameter validations to AWS IoT FleetWise signal catalog, model manifest, and decoder manifest APIs.",
+    "modules": [
+        "service/iotfleetwise"
+    ]
+}

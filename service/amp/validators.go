@@ -270,6 +270,26 @@ func (m *validateOpDescribeScraper) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeWorkspaceConfiguration struct {
+}
+
+func (*validateOpDescribeWorkspaceConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWorkspaceConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWorkspaceConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWorkspaceConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeWorkspace struct {
 }
 
@@ -470,6 +490,26 @@ func (m *validateOpUpdateWorkspaceAlias) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateWorkspaceConfiguration struct {
+}
+
+func (*validateOpUpdateWorkspaceConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateWorkspaceConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateWorkspaceConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateWorkspaceConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateAlertManagerDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAlertManagerDefinition{}, middleware.After)
 }
@@ -522,6 +562,10 @@ func addOpDescribeScraperValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeScraper{}, middleware.After)
 }
 
+func addOpDescribeWorkspaceConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWorkspaceConfiguration{}, middleware.After)
+}
+
 func addOpDescribeWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeWorkspace{}, middleware.After)
 }
@@ -560,6 +604,10 @@ func addOpUpdateScraperValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateWorkspaceAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkspaceAlias{}, middleware.After)
+}
+
+func addOpUpdateWorkspaceConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateWorkspaceConfiguration{}, middleware.After)
 }
 
 func validateAmpConfiguration(v *types.AmpConfiguration) error {
@@ -606,6 +654,41 @@ func validateEksConfiguration(v *types.EksConfiguration) error {
 	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLimitsPerLabelSet(v *types.LimitsPerLabelSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LimitsPerLabelSet"}
+	if v.Limits == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Limits"))
+	}
+	if v.LabelSet == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelSet"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLimitsPerLabelSetList(v []types.LimitsPerLabelSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LimitsPerLabelSetList"}
+	for i := range v {
+		if err := validateLimitsPerLabelSet(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -860,6 +943,21 @@ func validateOpDescribeScraperInput(v *DescribeScraperInput) error {
 	}
 }
 
+func validateOpDescribeWorkspaceConfigurationInput(v *DescribeWorkspaceConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorkspaceConfigurationInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeWorkspaceInput(v *DescribeWorkspaceInput) error {
 	if v == nil {
 		return nil
@@ -1025,6 +1123,26 @@ func validateOpUpdateWorkspaceAliasInput(v *UpdateWorkspaceAliasInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateWorkspaceAliasInput"}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateWorkspaceConfigurationInput(v *UpdateWorkspaceConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateWorkspaceConfigurationInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.LimitsPerLabelSet != nil {
+		if err := validateLimitsPerLabelSetList(v.LimitsPerLabelSet); err != nil {
+			invalidParams.AddNested("LimitsPerLabelSet", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

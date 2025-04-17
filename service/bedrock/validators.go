@@ -1083,6 +1083,73 @@ func validateAutomatedEvaluationConfig(v *types.AutomatedEvaluationConfig) error
 			invalidParams.AddNested("EvaluatorModelConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CustomMetricConfig != nil {
+		if err := validateAutomatedEvaluationCustomMetricConfig(v.CustomMetricConfig); err != nil {
+			invalidParams.AddNested("CustomMetricConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedEvaluationCustomMetricConfig(v *types.AutomatedEvaluationCustomMetricConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedEvaluationCustomMetricConfig"}
+	if v.CustomMetrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomMetrics"))
+	} else if v.CustomMetrics != nil {
+		if err := validateAutomatedEvaluationCustomMetrics(v.CustomMetrics); err != nil {
+			invalidParams.AddNested("CustomMetrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EvaluatorModelConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluatorModelConfig"))
+	} else if v.EvaluatorModelConfig != nil {
+		if err := validateCustomMetricEvaluatorModelConfig(v.EvaluatorModelConfig); err != nil {
+			invalidParams.AddNested("EvaluatorModelConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedEvaluationCustomMetrics(v []types.AutomatedEvaluationCustomMetricSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedEvaluationCustomMetrics"}
+	for i := range v {
+		if err := validateAutomatedEvaluationCustomMetricSource(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedEvaluationCustomMetricSource(v types.AutomatedEvaluationCustomMetricSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedEvaluationCustomMetricSource"}
+	switch uv := v.(type) {
+	case *types.AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition:
+		if err := validateCustomMetricDefinition(&uv.Value); err != nil {
+			invalidParams.AddNested("[customMetricDefinition]", err.(smithy.InvalidParamsError))
+		}
+
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1177,6 +1244,80 @@ func validateCustomizationConfig(v types.CustomizationConfig) error {
 			invalidParams.AddNested("[distillationConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomMetricBedrockEvaluatorModel(v *types.CustomMetricBedrockEvaluatorModel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomMetricBedrockEvaluatorModel"}
+	if v.ModelIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomMetricBedrockEvaluatorModels(v []types.CustomMetricBedrockEvaluatorModel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomMetricBedrockEvaluatorModels"}
+	for i := range v {
+		if err := validateCustomMetricBedrockEvaluatorModel(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomMetricDefinition(v *types.CustomMetricDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomMetricDefinition"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Instructions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Instructions"))
+	}
+	if v.RatingScale != nil {
+		if err := validateRatingScale(v.RatingScale); err != nil {
+			invalidParams.AddNested("RatingScale", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomMetricEvaluatorModelConfig(v *types.CustomMetricEvaluatorModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomMetricEvaluatorModelConfig"}
+	if v.BedrockEvaluatorModels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BedrockEvaluatorModels"))
+	} else if v.BedrockEvaluatorModels != nil {
+		if err := validateCustomMetricBedrockEvaluatorModels(v.BedrockEvaluatorModels); err != nil {
+			invalidParams.AddNested("BedrockEvaluatorModels", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2385,6 +2526,41 @@ func validateRagConfigs(v []types.RAGConfig) error {
 		if err := validateRAGConfig(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRatingScale(v []types.RatingScaleItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RatingScale"}
+	for i := range v {
+		if err := validateRatingScaleItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRatingScaleItem(v *types.RatingScaleItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RatingScaleItem"}
+	if v.Definition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

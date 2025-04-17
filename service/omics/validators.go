@@ -350,6 +350,26 @@ func (m *validateOpCreateWorkflow) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateWorkflowVersion struct {
+}
+
+func (*validateOpCreateWorkflowVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWorkflowVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWorkflowVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWorkflowVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAnnotationStore struct {
 }
 
@@ -585,6 +605,26 @@ func (m *validateOpDeleteWorkflow) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteWorkflowVersion struct {
+}
+
+func (*validateOpDeleteWorkflowVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWorkflowVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWorkflowVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWorkflowVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1030,6 +1070,26 @@ func (m *validateOpGetWorkflow) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetWorkflowVersion struct {
+}
+
+func (*validateOpGetWorkflowVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWorkflowVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWorkflowVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWorkflowVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAnnotationStoreVersions struct {
 }
 
@@ -1265,6 +1325,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListWorkflowVersions struct {
+}
+
+func (*validateOpListWorkflowVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWorkflowVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWorkflowVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWorkflowVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1610,6 +1690,26 @@ func (m *validateOpUpdateWorkflow) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateWorkflowVersion struct {
+}
+
+func (*validateOpUpdateWorkflowVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateWorkflowVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateWorkflowVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateWorkflowVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUploadReadSetPart struct {
 }
 
@@ -1698,6 +1798,10 @@ func addOpCreateWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkflow{}, middleware.After)
 }
 
+func addOpCreateWorkflowVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWorkflowVersion{}, middleware.After)
+}
+
 func addOpDeleteAnnotationStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAnnotationStore{}, middleware.After)
 }
@@ -1744,6 +1848,10 @@ func addOpDeleteVariantStoreValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDeleteWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWorkflow{}, middleware.After)
+}
+
+func addOpDeleteWorkflowVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWorkflowVersion{}, middleware.After)
 }
 
 func addOpGetAnnotationImportJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1834,6 +1942,10 @@ func addOpGetWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkflow{}, middleware.After)
 }
 
+func addOpGetWorkflowVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWorkflowVersion{}, middleware.After)
+}
+
 func addOpListAnnotationStoreVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAnnotationStoreVersions{}, middleware.After)
 }
@@ -1880,6 +1992,10 @@ func addOpListSharesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListWorkflowVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWorkflowVersions{}, middleware.After)
 }
 
 func addOpPutS3AccessPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1948,6 +2064,10 @@ func addOpUpdateVariantStoreValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkflow{}, middleware.After)
+}
+
+func addOpUpdateWorkflowVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateWorkflowVersion{}, middleware.After)
 }
 
 func addOpUploadReadSetPartValidationMiddleware(stack *middleware.Stack) error {
@@ -2542,6 +2662,27 @@ func validateOpCreateWorkflowInput(v *CreateWorkflowInput) error {
 	}
 }
 
+func validateOpCreateWorkflowVersionInput(v *CreateWorkflowVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWorkflowVersionInput"}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
+	}
+	if v.RequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAnnotationStoreInput(v *DeleteAnnotationStoreInput) error {
 	if v == nil {
 		return nil
@@ -2720,6 +2861,24 @@ func validateOpDeleteWorkflowInput(v *DeleteWorkflowInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteWorkflowInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteWorkflowVersionInput(v *DeleteWorkflowVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWorkflowVersionInput"}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3094,6 +3253,24 @@ func validateOpGetWorkflowInput(v *GetWorkflowInput) error {
 	}
 }
 
+func validateOpGetWorkflowVersionInput(v *GetWorkflowVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWorkflowVersionInput"}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAnnotationStoreVersionsInput(v *ListAnnotationStoreVersionsInput) error {
 	if v == nil {
 		return nil
@@ -3272,6 +3449,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWorkflowVersionsInput(v *ListWorkflowVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWorkflowVersionsInput"}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3602,6 +3794,24 @@ func validateOpUpdateWorkflowInput(v *UpdateWorkflowInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateWorkflowInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateWorkflowVersionInput(v *UpdateWorkflowVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateWorkflowVersionInput"}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

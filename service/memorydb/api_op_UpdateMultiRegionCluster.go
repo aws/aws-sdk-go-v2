@@ -49,7 +49,8 @@ type UpdateMultiRegionClusterInput struct {
 	// A request to configure the sharding properties of a cluster
 	ShardConfiguration *types.ShardConfigurationRequest
 
-	// Whether to force the update even if it may cause data loss.
+	// The strategy to use for the update operation. Supported values are
+	// "coordinated" or "uncoordinated".
 	UpdateStrategy types.UpdateStrategy
 
 	noSmithyDocumentSerde

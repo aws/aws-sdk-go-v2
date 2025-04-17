@@ -7,6 +7,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
 )
 
+func ExampleAutomatedEvaluationCustomMetricSource_outputUsage() {
+	var union types.AutomatedEvaluationCustomMetricSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition:
+		_ = v.Value // Value is types.CustomMetricDefinition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CustomMetricDefinition
+
 func ExampleCustomizationConfig_outputUsage() {
 	var union types.CustomizationConfig
 	// type switches can be used to check the union value
@@ -300,6 +318,28 @@ func ExampleRAGConfig_outputUsage() {
 
 var _ types.EvaluationPrecomputedRagSourceConfig
 var _ types.KnowledgeBaseConfig
+
+func ExampleRatingScaleItemValue_outputUsage() {
+	var union types.RatingScaleItemValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RatingScaleItemValueMemberFloatValue:
+		_ = v.Value // Value is float32
+
+	case *types.RatingScaleItemValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *float32
 
 func ExampleRequestMetadataFilters_outputUsage() {
 	var union types.RequestMetadataFilters

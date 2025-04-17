@@ -1,0 +1,8 @@
+{
+    "id": "395f130a-0557-41b6-a49d-ec0342524ab4",
+    "type": "feature",
+    "description": "Added support for IPv6 and dual stack for Valkey and Redis clusters. Customers can now launch new Valkey and Redis clusters with IPv6 and dual stack networking support.",
+    "modules": [
+        "service/memorydb"
+    ]
+}

@@ -12,6 +12,7 @@ const (
 	ActionTypeSendNotification         ActionType = "SEND_NOTIFICATION"
 	ActionTypeCreateCase               ActionType = "CREATE_CASE"
 	ActionTypeUpdateCase               ActionType = "UPDATE_CASE"
+	ActionTypeAssignSla                ActionType = "ASSIGN_SLA"
 	ActionTypeEndAssociatedTasks       ActionType = "END_ASSOCIATED_TASKS"
 	ActionTypeSubmitAutoEvaluation     ActionType = "SUBMIT_AUTO_EVALUATION"
 )
@@ -28,6 +29,7 @@ func (ActionType) Values() []ActionType {
 		"SEND_NOTIFICATION",
 		"CREATE_CASE",
 		"UPDATE_CASE",
+		"ASSIGN_SLA",
 		"END_ASSOCIATED_TASKS",
 		"SUBMIT_AUTO_EVALUATION",
 	}
@@ -790,6 +792,7 @@ const (
 	EventSourceNameOnMetricDataUpdate              EventSourceName = "OnMetricDataUpdate"
 	EventSourceNameOnCaseCreate                    EventSourceName = "OnCaseCreate"
 	EventSourceNameOnCaseUpdate                    EventSourceName = "OnCaseUpdate"
+	EventSourceNameOnSlaBreach                     EventSourceName = "OnSlaBreach"
 )
 
 // Values returns all known values for EventSourceName. Note that this can be
@@ -809,6 +812,7 @@ func (EventSourceName) Values() []EventSourceName {
 		"OnMetricDataUpdate",
 		"OnCaseCreate",
 		"OnCaseUpdate",
+		"OnSlaBreach",
 	}
 }
 
@@ -2632,6 +2636,40 @@ func (SingleSelectQuestionRuleCategoryAutomationCondition) Values() []SingleSele
 	return []SingleSelectQuestionRuleCategoryAutomationCondition{
 		"PRESENT",
 		"NOT_PRESENT",
+	}
+}
+
+type SlaAssignmentType string
+
+// Enum values for SlaAssignmentType
+const (
+	SlaAssignmentTypeCases SlaAssignmentType = "CASES"
+)
+
+// Values returns all known values for SlaAssignmentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SlaAssignmentType) Values() []SlaAssignmentType {
+	return []SlaAssignmentType{
+		"CASES",
+	}
+}
+
+type SlaType string
+
+// Enum values for SlaType
+const (
+	SlaTypeCaseField SlaType = "CaseField"
+)
+
+// Values returns all known values for SlaType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SlaType) Values() []SlaType {
+	return []SlaType{
+		"CaseField",
 	}
 }
 

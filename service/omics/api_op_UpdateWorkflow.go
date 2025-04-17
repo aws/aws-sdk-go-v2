@@ -6,11 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a workflow.
+// Updates information about a workflow. For more information, see [Update a private workflow] in the Amazon
+// Web Services HealthOmics User Guide.
+//
+// [Update a private workflow]: https://docs.aws.amazon.com/omics/latest/dev/update-private-workflow.html
 func (c *Client) UpdateWorkflow(ctx context.Context, params *UpdateWorkflowInput, optFns ...func(*Options)) (*UpdateWorkflowOutput, error) {
 	if params == nil {
 		params = &UpdateWorkflowInput{}
@@ -38,6 +42,19 @@ type UpdateWorkflowInput struct {
 
 	// A name for the workflow.
 	Name *string
+
+	// The default static storage capacity (in gibibytes) for runs that use this
+	// workflow or workflow version.
+	StorageCapacity *int32
+
+	// The default storage type for runs that use this workflow. STATIC storage
+	// allocates a fixed amount of storage. DYNAMIC storage dynamically scales the
+	// storage up or down, based on file system utilization. For more information about
+	// static and dynamic storage, see [Running workflows]in the Amazon Web Services HealthOmics User
+	// Guide.
+	//
+	// [Running workflows]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
+	StorageType types.StorageType
 
 	noSmithyDocumentSerde
 }

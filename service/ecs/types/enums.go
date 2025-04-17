@@ -1052,6 +1052,7 @@ const (
 	SettingNameTagResourceAuthorization        SettingName = "tagResourceAuthorization"
 	SettingNameFargateTaskRetirementWaitPeriod SettingName = "fargateTaskRetirementWaitPeriod"
 	SettingNameGuardDutyActivate               SettingName = "guardDutyActivate"
+	SettingNameDefaultLogDriverMode            SettingName = "defaultLogDriverMode"
 )
 
 // Values returns all known values for SettingName. Note that this can be expanded
@@ -1069,6 +1070,7 @@ func (SettingName) Values() []SettingName {
 		"tagResourceAuthorization",
 		"fargateTaskRetirementWaitPeriod",
 		"guardDutyActivate",
+		"defaultLogDriverMode",
 	}
 }
 

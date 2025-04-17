@@ -19,6 +19,9 @@ type AutomatedEvaluationConfig struct {
 	// This member is required.
 	DatasetMetricConfigs []EvaluationDatasetMetricConfig
 
+	// Defines the configuration of custom metrics to be used in an evaluation job.
+	CustomMetricConfig *AutomatedEvaluationCustomMetricConfig
+
 	// Contains the evaluator model configuration details. EvaluatorModelConfig is
 	// required for evaluation jobs that use a knowledge base or in model evaluation
 	// job that use a model as judge. This model computes all evaluation related
@@ -26,6 +29,48 @@ type AutomatedEvaluationConfig struct {
 	EvaluatorModelConfig EvaluatorModelConfig
 
 	noSmithyDocumentSerde
+}
+
+// Defines the configuration of custom metrics to be used in an evaluation job. To
+// learn more about using custom metrics in Amazon Bedrock evaluation jobs, see [Create a prompt for a custom metrics (LLM-as-a-judge model evaluations)]
+// and [Create a prompt for a custom metrics (RAG evaluations)].
+//
+// [Create a prompt for a custom metrics (RAG evaluations)]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-evaluation-custom-metrics-prompt-formats.html
+// [Create a prompt for a custom metrics (LLM-as-a-judge model evaluations)]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-custom-metrics-prompt-formats.html
+type AutomatedEvaluationCustomMetricConfig struct {
+
+	// Defines a list of custom metrics to be used in an Amazon Bedrock evaluation job.
+	//
+	// This member is required.
+	CustomMetrics []AutomatedEvaluationCustomMetricSource
+
+	// Configuration of the evaluator model you want to use to evaluate custom metrics
+	// in an Amazon Bedrock evaluation job.
+	//
+	// This member is required.
+	EvaluatorModelConfig *CustomMetricEvaluatorModelConfig
+
+	noSmithyDocumentSerde
+}
+
+// An array item definining a single custom metric for use in an Amazon Bedrock
+// evaluation job.
+//
+// The following types satisfy this interface:
+//
+//	AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition
+type AutomatedEvaluationCustomMetricSource interface {
+	isAutomatedEvaluationCustomMetricSource()
+}
+
+// The definition of a custom metric for use in an Amazon Bedrock evaluation job.
+type AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition struct {
+	Value CustomMetricDefinition
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition) isAutomatedEvaluationCustomMetricSource() {
 }
 
 // A JSON array that provides the status of the evaluation jobs being deleted.
@@ -135,6 +180,72 @@ type CustomizationConfigMemberDistillationConfig struct {
 }
 
 func (*CustomizationConfigMemberDistillationConfig) isCustomizationConfig() {}
+
+// Defines the model you want to evaluate custom metrics in an Amazon Bedrock
+// evaluation job.
+type CustomMetricBedrockEvaluatorModel struct {
+
+	// The Amazon Resource Name (ARN) of the evaluator model for custom metrics. For a
+	// list of supported evaluator models, see [Evaluate model performance using another LLM as a judge]and [Evaluate the performance of RAG sources using Amazon Bedrock evaluations].
+	//
+	// [Evaluate the performance of RAG sources using Amazon Bedrock evaluations]: https://docs.aws.amazon.com/bedrock/latest/userguide/evaluation-kb.html
+	// [Evaluate model performance using another LLM as a judge]: https://docs.aws.amazon.com/bedrock/latest/userguide/evaluation-judge.html
+	//
+	// This member is required.
+	ModelIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The definition of a custom metric for use in an Amazon Bedrock evaluation job.
+// A custom metric definition includes a metric name, prompt (instructions) and
+// optionally, a rating scale. Your prompt must include a task description and
+// input variables. The required input variables are different for model-as-a-judge
+// and RAG evaluations.
+//
+// For more information about how to define a custom metric in Amazon Bedrock, see [Create a prompt for a custom metrics (LLM-as-a-judge model evaluations)]
+// and [Create a prompt for a custom metrics (RAG evaluations)].
+//
+// [Create a prompt for a custom metrics (RAG evaluations)]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-evaluation-custom-metrics-prompt-formats.html
+// [Create a prompt for a custom metrics (LLM-as-a-judge model evaluations)]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-custom-metrics-prompt-formats.html
+type CustomMetricDefinition struct {
+
+	// The prompt for a custom metric that instructs the evaluator model how to rate
+	// the model or RAG source under evaluation.
+	//
+	// This member is required.
+	Instructions *string
+
+	// The name for a custom metric. Names must be unique in your Amazon Web Services
+	// region.
+	//
+	// This member is required.
+	Name *string
+
+	// Defines the rating scale to be used for a custom metric. We recommend that you
+	// always define a ratings scale when creating a custom metric. If you don't define
+	// a scale, Amazon Bedrock won't be able to visually display the results of the
+	// evaluation in the console or calculate average values of numerical scores. For
+	// more information on specifying a rating scale, see [Specifying an output schema (rating scale)].
+	//
+	// [Specifying an output schema (rating scale)]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-custom-metrics-prompt-formats.html#model-evaluation-custom-metrics-prompt-formats-schema
+	RatingScale []RatingScaleItem
+
+	noSmithyDocumentSerde
+}
+
+// Configuration of the evaluator model you want to use to evaluate custom metrics
+// in an Amazon Bedrock evaluation job.
+type CustomMetricEvaluatorModelConfig struct {
+
+	// Defines the model you want to evaluate custom metrics in an Amazon Bedrock
+	// evaluation job.
+	//
+	// This member is required.
+	BedrockEvaluatorModels []CustomMetricBedrockEvaluatorModel
+
+	noSmithyDocumentSerde
+}
 
 // Summary information for a custom model.
 type CustomModelSummary struct {
@@ -333,7 +444,7 @@ type EvaluationDatasetMetricConfig struct {
 	// The names of the metrics you want to use for your evaluation job.
 	//
 	// For knowledge base evaluation jobs that evaluate retrieval only, valid values
-	// are " Builtin.ContextRelevance ", " Builtin.ContextConverage ".
+	// are " Builtin.ContextRelevance ", " Builtin.ContextCoverage ".
 	//
 	// For knowledge base evaluation jobs that evaluate retrieval with response
 	// generation, valid values are " Builtin.Correctness ", " Builtin.Completeness ", "
@@ -600,6 +711,10 @@ type EvaluationSummary struct {
 	// Specifies whether the evaluation job is for evaluating a model or evaluating a
 	// knowledge base (retrieval and response generation).
 	ApplicationType ApplicationType
+
+	// The Amazon Resource Names (ARNs) of the models used to compute custom metrics
+	// in an Amazon Bedrock evaluation job.
+	CustomMetricsEvaluatorModelIdentifiers []string
 
 	// The Amazon Resource Names (ARNs) of the models used to compute the metrics for
 	// a knowledge base evaluation job.
@@ -2694,15 +2809,15 @@ type ModelInvocationJobSummary struct {
 	//   location.
 	//
 	//   - Failed – This job has failed. Check the failure message for any further
-	//   details. For further assistance, reach out to the [Amazon Web Services Support Center].
+	//   details. For further assistance, reach out to the [Amazon Web ServicesSupport Center].
 	//
 	//   - Stopped – This job was stopped by a user.
 	//
 	//   - Stopping – This job is being stopped by a user.
 	//
 	// [Format and upload your batch inference data]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data.html
+	// [Amazon Web ServicesSupport Center]: https://console.aws.amazon.com/support/home/
 	// [Quotas for Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html
-	// [Amazon Web Services Support Center]: https://console.aws.amazon.com/support/home/
 	Status ModelInvocationJobStatus
 
 	// The number of hours after which the batch inference job was set to time out.
@@ -2945,6 +3060,52 @@ type RAGConfigMemberPrecomputedRagSourceConfig struct {
 }
 
 func (*RAGConfigMemberPrecomputedRagSourceConfig) isRAGConfig() {}
+
+// Defines the value and corresponding definition for one rating in a custom
+// metric rating scale.
+type RatingScaleItem struct {
+
+	// Defines the definition for one rating in a custom metric rating scale.
+	//
+	// This member is required.
+	Definition *string
+
+	// Defines the value for one rating in a custom metric rating scale.
+	//
+	// This member is required.
+	Value RatingScaleItemValue
+
+	noSmithyDocumentSerde
+}
+
+// Defines the value for one rating in a custom metric rating scale.
+//
+// The following types satisfy this interface:
+//
+//	RatingScaleItemValueMemberFloatValue
+//	RatingScaleItemValueMemberStringValue
+type RatingScaleItemValue interface {
+	isRatingScaleItemValue()
+}
+
+// A floating point number representing the value for a rating in a custom metric
+// rating scale.
+type RatingScaleItemValueMemberFloatValue struct {
+	Value float32
+
+	noSmithyDocumentSerde
+}
+
+func (*RatingScaleItemValueMemberFloatValue) isRatingScaleItemValue() {}
+
+// A string representing the value for a rating in a custom metric rating scale.
+type RatingScaleItemValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*RatingScaleItemValueMemberStringValue) isRatingScaleItemValue() {}
 
 // A mapping of a metadata key to a value that it should or should not equal.
 type RequestMetadataBaseFilters struct {
@@ -3475,20 +3636,22 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isCustomizationConfig()                  {}
-func (*UnknownUnionMember) isEndpointConfig()                       {}
-func (*UnknownUnionMember) isEvaluationConfig()                     {}
-func (*UnknownUnionMember) isEvaluationDatasetLocation()            {}
-func (*UnknownUnionMember) isEvaluationInferenceConfig()            {}
-func (*UnknownUnionMember) isEvaluationModelConfig()                {}
-func (*UnknownUnionMember) isEvaluationPrecomputedRagSourceConfig() {}
-func (*UnknownUnionMember) isEvaluatorModelConfig()                 {}
-func (*UnknownUnionMember) isInferenceProfileModelSource()          {}
-func (*UnknownUnionMember) isInvocationLogSource()                  {}
-func (*UnknownUnionMember) isKnowledgeBaseConfig()                  {}
-func (*UnknownUnionMember) isModelDataSource()                      {}
-func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()    {}
-func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig()   {}
-func (*UnknownUnionMember) isRAGConfig()                            {}
-func (*UnknownUnionMember) isRequestMetadataFilters()               {}
-func (*UnknownUnionMember) isRetrievalFilter()                      {}
+func (*UnknownUnionMember) isAutomatedEvaluationCustomMetricSource() {}
+func (*UnknownUnionMember) isCustomizationConfig()                   {}
+func (*UnknownUnionMember) isEndpointConfig()                        {}
+func (*UnknownUnionMember) isEvaluationConfig()                      {}
+func (*UnknownUnionMember) isEvaluationDatasetLocation()             {}
+func (*UnknownUnionMember) isEvaluationInferenceConfig()             {}
+func (*UnknownUnionMember) isEvaluationModelConfig()                 {}
+func (*UnknownUnionMember) isEvaluationPrecomputedRagSourceConfig()  {}
+func (*UnknownUnionMember) isEvaluatorModelConfig()                  {}
+func (*UnknownUnionMember) isInferenceProfileModelSource()           {}
+func (*UnknownUnionMember) isInvocationLogSource()                   {}
+func (*UnknownUnionMember) isKnowledgeBaseConfig()                   {}
+func (*UnknownUnionMember) isModelDataSource()                       {}
+func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()     {}
+func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig()    {}
+func (*UnknownUnionMember) isRAGConfig()                             {}
+func (*UnknownUnionMember) isRatingScaleItemValue()                  {}
+func (*UnknownUnionMember) isRequestMetadataFilters()                {}
+func (*UnknownUnionMember) isRetrievalFilter()                       {}

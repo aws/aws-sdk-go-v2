@@ -891,6 +891,11 @@ func validateConfiguration(v types.Configuration) error {
 			invalidParams.AddNested("[s3Bucket]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ConfigurationMemberS3ExpressDirectoryBucket:
+		if err := validateS3ExpressDirectoryBucketConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3ExpressDirectoryBucket]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1132,6 +1137,58 @@ func validateS3BucketConfiguration(v *types.S3BucketConfiguration) error {
 	}
 	if v.AccessPoints != nil {
 		if err := validateS3AccessPointConfigurationsMap(v.AccessPoints); err != nil {
+			invalidParams.AddNested("AccessPoints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ExpressDirectoryAccessPointConfiguration(v *types.S3ExpressDirectoryAccessPointConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ExpressDirectoryAccessPointConfiguration"}
+	if v.NetworkOrigin != nil {
+		if err := validateNetworkOriginConfiguration(v.NetworkOrigin); err != nil {
+			invalidParams.AddNested("NetworkOrigin", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ExpressDirectoryAccessPointConfigurationsMap(v map[string]types.S3ExpressDirectoryAccessPointConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ExpressDirectoryAccessPointConfigurationsMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateS3ExpressDirectoryAccessPointConfiguration(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ExpressDirectoryBucketConfiguration(v *types.S3ExpressDirectoryBucketConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ExpressDirectoryBucketConfiguration"}
+	if v.AccessPoints != nil {
+		if err := validateS3ExpressDirectoryAccessPointConfigurationsMap(v.AccessPoints); err != nil {
 			invalidParams.AddNested("AccessPoints", err.(smithy.InvalidParamsError))
 		}
 	}

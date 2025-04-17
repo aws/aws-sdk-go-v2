@@ -8037,6 +8037,15 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				sv.EngineVersion = ptr.String(jtv)
 			}
 
+		case "IpDiscovery":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpDiscovery to be of type string, got %T instead", value)
+				}
+				sv.IpDiscovery = types.IpDiscovery(jtv)
+			}
+
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8071,6 +8080,15 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "NetworkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.NetworkType(jtv)
 			}
 
 		case "NodeType":
@@ -9819,6 +9837,42 @@ func awsAwsjson11_deserializeDocumentMultiRegionParameterGroupNotFoundFault(v **
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkTypeList(v *[]types.NetworkType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkType
+	if *v == nil {
+		cv = []types.NetworkType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+			}
+			col = types.NetworkType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -12278,6 +12332,11 @@ func awsAwsjson11_deserializeDocumentSubnet(v **types.Subnet, value interface{})
 				sv.Identifier = ptr.String(jtv)
 			}
 
+		case "SupportedNetworkTypes":
+			if err := awsAwsjson11_deserializeDocumentNetworkTypeList(&sv.SupportedNetworkTypes, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12338,6 +12397,11 @@ func awsAwsjson11_deserializeDocumentSubnetGroup(v **types.SubnetGroup, value in
 
 		case "Subnets":
 			if err := awsAwsjson11_deserializeDocumentSubnetList(&sv.Subnets, value); err != nil {
+				return err
+			}
+
+		case "SupportedNetworkTypes":
+			if err := awsAwsjson11_deserializeDocumentNetworkTypeList(&sv.SupportedNetworkTypes, value); err != nil {
 				return err
 			}
 

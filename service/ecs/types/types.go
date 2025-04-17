@@ -2968,8 +2968,7 @@ type LogConfiguration struct {
 	// Make sure to specify a log group that the awslogs log driver sends its log
 	// streams to.
 	//
-	// awslogs-stream-prefix Required: Yes, when using the Fargate launch
-	// type.Optional for the EC2 launch type, required for the Fargate launch type.
+	// awslogs-stream-prefix Required: Yes, when using Fargate.Optional when using EC2.
 	//
 	// Use the awslogs-stream-prefix option to associate a log stream with the
 	// specified prefix, the container name, and the ID of the Amazon ECS task that the
@@ -3025,24 +3024,32 @@ type LogConfiguration struct {
 	// Multiline logging performs regular expression parsing and matching of all log
 	// messages. This might have a negative impact on logging performance.
 	//
+	// The following options apply to all supported log drivers.
+	//
 	// mode Required: No
 	//
 	// Valid values: non-blocking | blocking
 	//
-	// This option defines the delivery mode of log messages from the container to
-	// CloudWatch Logs. The delivery mode you choose affects application availability
-	// when the flow of logs from container to CloudWatch is interrupted.
+	// This option defines the delivery mode of log messages from the container to the
+	// log driver specified using logDriver . The delivery mode you choose affects
+	// application availability when the flow of logs from container is interrupted.
 	//
-	// If you use the blocking mode and the flow of logs to CloudWatch is interrupted,
-	// calls from container code to write to the stdout and stderr streams will block.
-	// The logging thread of the application will block as a result. This may cause the
+	// If you use the blocking mode and the flow of logs is interrupted, calls from
+	// container code to write to the stdout and stderr streams will block. The
+	// logging thread of the application will block as a result. This may cause the
 	// application to become unresponsive and lead to container healthcheck failure.
 	//
 	// If you use the non-blocking mode, the container's logs are instead stored in an
 	// in-memory intermediate buffer configured with the max-buffer-size option. This
-	// prevents the application from becoming unresponsive when logs cannot be sent to
-	// CloudWatch. We recommend using this mode if you want to ensure service
-	// availability and are okay with some log loss. For more information, see [Preventing log loss with non-blocking mode in the awslogs container log driver]awslogs .
+	// prevents the application from becoming unresponsive when logs cannot be sent. We
+	// recommend using this mode if you want to ensure service availability and are
+	// okay with some log loss. For more information, see [Preventing log loss with non-blocking mode in the awslogs container log driver]awslogs .
+	//
+	// You can set a default mode for all containers in a specific Amazon Web Services
+	// Region by using the defaultLogDriverMode account setting. If you don't specify
+	// the mode option or configure the account setting, Amazon ECS will default to
+	// the blocking mode. For more information about the account setting, see [Default log driver mode] in the
+	// Amazon Elastic Container Service Developer Guide.
 	//
 	// max-buffer-size Required: No
 	//
@@ -3087,6 +3094,7 @@ type LogConfiguration struct {
 	//
 	// [awslogs-multiline-pattern]: https://docs.docker.com/config/containers/logging/awslogs/#awslogs-multiline-pattern
 	// [Under the hood: FireLens for Amazon ECS Tasks]: http://aws.amazon.com/blogs/containers/under-the-hood-firelens-for-amazon-ecs-tasks/
+	// [Default log driver mode]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#default-log-driver-mode
 	// [awslogs-datetime-format]: https://docs.docker.com/config/containers/logging/awslogs/#awslogs-datetime-format
 	// [Preventing log loss with non-blocking mode in the awslogs container log driver]: http://aws.amazon.com/blogs/containers/preventing-log-loss-with-non-blocking-mode-in-the-awslogs-container-log-driver/
 	Options map[string]string

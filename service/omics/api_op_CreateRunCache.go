@@ -14,10 +14,10 @@ import (
 // You can create a run cache to save the task outputs from completed tasks in a
 // run for a private workflow. Subsequent runs use the task outputs from the cache,
 // rather than computing the task outputs again. You specify an Amazon S3 location
-// where HealthOmics saves the cached data. This data must be immediately
-// accessible (not in an archived state).
+// where Amazon Web Services HealthOmics saves the cached data. This data must be
+// immediately accessible (not in an archived state).
 //
-// For more information, see [Creating a run cache] in the AWS HealthOmics User Guide.
+// For more information, see [Creating a run cache] in the Amazon Web Services HealthOmics User Guide.
 //
 // [Creating a run cache]: https://docs.aws.amazon.com/omics/latest/dev/workflow-cache-create.html
 func (c *Client) CreateRunCache(ctx context.Context, params *CreateRunCacheInput, optFns ...func(*Options)) (*CreateRunCacheOutput, error) {
@@ -44,8 +44,8 @@ type CreateRunCacheInput struct {
 	CacheS3Location *string
 
 	// A unique request token, to ensure idempotency. If you don't specify a token,
-	// HealthOmics automatically generates a universally unique identifier (UUID) for
-	// the request.
+	// Amazon Web Services HealthOmics automatically generates a universally unique
+	// identifier (UUID) for the request.
 	//
 	// This member is required.
 	RequestId *string
@@ -66,13 +66,14 @@ type CreateRunCacheInput struct {
 	// you start a run that uses this cache, you can override the default cache
 	// behavior.
 	//
-	// For more information, see [Run cache behavior] in the AWS HealthOmics User Guide.
+	// For more information, see [Run cache behavior] in the Amazon Web Services HealthOmics User Guide.
 	//
 	// [Run cache behavior]: https://docs.aws.amazon.com/omics/latest/dev/how-run-cache.html#run-cache-behavior
 	CacheBehavior types.CacheBehavior
 
-	// The AWS account ID of the expected owner of the S3 bucket for the run cache. If
-	// not provided, your account ID is set as the owner of the bucket.
+	// The Amazon Web Services account ID of the expected owner of the S3 bucket for
+	// the run cache. If not provided, your account ID is set as the owner of the
+	// bucket.
 	CacheBucketOwnerId *string
 
 	// Enter a description of the run cache.

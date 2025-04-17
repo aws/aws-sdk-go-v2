@@ -11387,6 +11387,86 @@ func awsRestjson1_deserializeDocumentS3BucketConfiguration(v **types.S3BucketCon
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentS3ExpressDirectoryAccessPointConfiguration(v **types.S3ExpressDirectoryAccessPointConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3ExpressDirectoryAccessPointConfiguration
+	if *v == nil {
+		sv = &types.S3ExpressDirectoryAccessPointConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accessPointPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessPointPolicy to be of type string, got %T instead", value)
+				}
+				sv.AccessPointPolicy = ptr.String(jtv)
+			}
+
+		case "networkOrigin":
+			if err := awsRestjson1_deserializeDocumentNetworkOriginConfiguration(&sv.NetworkOrigin, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3ExpressDirectoryAccessPointConfigurationsMap(v *map[string]types.S3ExpressDirectoryAccessPointConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.S3ExpressDirectoryAccessPointConfiguration
+	if *v == nil {
+		mv = map[string]types.S3ExpressDirectoryAccessPointConfiguration{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.S3ExpressDirectoryAccessPointConfiguration
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentS3ExpressDirectoryAccessPointConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentS3ExpressDirectoryBucketConfiguration(v **types.S3ExpressDirectoryBucketConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11409,6 +11489,11 @@ func awsRestjson1_deserializeDocumentS3ExpressDirectoryBucketConfiguration(v **t
 
 	for key, value := range shape {
 		switch key {
+		case "accessPoints":
+			if err := awsRestjson1_deserializeDocumentS3ExpressDirectoryAccessPointConfigurationsMap(&sv.AccessPoints, value); err != nil {
+				return err
+			}
+
 		case "bucketPolicy":
 			if value != nil {
 				jtv, ok := value.(string)

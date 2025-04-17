@@ -49,7 +49,7 @@ type PutS3AccessPolicyOutput struct {
 	// The S3 access point ARN that now has the access policy.
 	S3AccessPointArn *string
 
-	// The AWS-generated Sequence Store or Reference Store ID.
+	// The Amazon Web Services-generated Sequence Store or Reference Store ID.
 	StoreId *string
 
 	// The type of store associated with the access point.

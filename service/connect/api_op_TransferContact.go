@@ -18,7 +18,7 @@ import (
 //
 // Note the following requirements:
 //
-//   - Transfer is supported for only TASK and EMAIL contacts.
+//   - Transfer is only supported for TASK and EMAIL contacts.
 //
 //   - Do not use both QueueId and UserId in the same call.
 //

@@ -14,9 +14,9 @@ import (
 // Describes one or more of your service deployments.
 //
 // A service deployment happens when you release a software update for the
-// service. For more information, see [Amazon ECS service deployments].
+// service. For more information, see [View service history using Amazon ECS service deployments].
 //
-// [Amazon ECS service deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-deployments.html
+// [View service history using Amazon ECS service deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-deployment.html
 func (c *Client) DescribeServiceDeployments(ctx context.Context, params *DescribeServiceDeploymentsInput, optFns ...func(*Options)) (*DescribeServiceDeploymentsOutput, error) {
 	if params == nil {
 		params = &DescribeServiceDeploymentsInput{}

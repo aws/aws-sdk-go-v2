@@ -1,0 +1,8 @@
+{
+    "id": "c17483c6-6e49-4109-b9e5-d2dc5dd32dc3",
+    "type": "feature",
+    "description": "Add Workspace Configuration APIs for Amazon Prometheus",
+    "modules": [
+        "service/amp"
+    ]
+}

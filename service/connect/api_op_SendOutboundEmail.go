@@ -60,6 +60,8 @@ type SendOutboundEmailInput struct {
 
 	// Denotes the class of traffic.
 	//
+	// Only the CAMPAIGN traffic type is supported.
+	//
 	// This member is required.
 	TrafficType types.TrafficType
 

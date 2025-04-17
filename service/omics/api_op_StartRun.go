@@ -12,23 +12,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN.
-// The remaining parameters are copied from the previous run.
+// Starts a new run or duplicates an existing run.
 //
-// StartRun will not support re-run for a workflow that is shared with you.
+// For a new run, specify a unique requestId , the workflowId , and a role ARN. If
+// you're using static run storage (the default), specify the required
+// storageCapacity .
 //
-// HealthOmics stores a fixed number of runs that are available to the console and
-// API. By default, HealthOmics doesn't any remove any runs. If HealthOmics reaches
-// the maximum number of runs, you must manually remove runs. To have older runs
-// removed automatically, set the retention mode to REMOVE .
+// You duplicate a run by specifing a unique requestId , the runID of the run to
+// duplicate, and a role ARN.
 //
-// By default, the run uses STATIC storage. For STATIC storage, set the
-// storageCapacity field. You can set the storage type to DYNAMIC. You do not set
-// storageCapacity , because HealthOmics dynamically scales the storage up or down
-// as required. For more information about static and dynamic storage, see [Running workflows]in the
-// AWS HealthOmics User Guide.
+// For more information about the optional parameters in the StartRun request, see [Starting a run]
+// in the Amazon Web Services HealthOmics User Guide.
 //
-// [Running workflows]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
+// [Starting a run]: https://docs.aws.amazon.com/omics/latest/dev/starting-a-run.html
 func (c *Client) StartRun(ctx context.Context, params *StartRunInput, optFns ...func(*Options)) (*StartRunOutput, error) {
 	if params == nil {
 		params = &StartRunInput{}
@@ -59,7 +55,8 @@ type StartRunInput struct {
 
 	// The cache behavior for the run. You specify this value if you want to override
 	// the default behavior for the cache. You had set the default value when you
-	// created the cache. For more information, see [Run cache behavior]in the AWS HealthOmics User Guide.
+	// created the cache. For more information, see [Run cache behavior]in the Amazon Web Services
+	// HealthOmics User Guide.
 	//
 	// [Run cache behavior]: https://docs.aws.amazon.com/omics/latest/dev/how-run-cache.html#run-cache-behavior
 	CacheBehavior types.CacheBehavior
@@ -85,16 +82,16 @@ type StartRunInput struct {
 
 	// The retention mode for the run. The default value is RETAIN.
 	//
-	// HealthOmics stores a fixed number of runs that are available to the console and
-	// API. In the default mode (RETAIN), you need to remove runs manually when the
-	// number of run exceeds the maximum. If you set the retention mode to REMOVE ,
-	// HealthOmics automatically removes runs (that have mode set to REMOVE) when the
-	// number of run exceeds the maximum. All run logs are available in CloudWatch
-	// logs, if you need information about a run that is no longer available to the
-	// API.
+	// Amazon Web Services HealthOmics stores a fixed number of runs that are
+	// available to the console and API. In the default mode (RETAIN), you need to
+	// remove runs manually when the number of run exceeds the maximum. If you set the
+	// retention mode to REMOVE , Amazon Web Services HealthOmics automatically removes
+	// runs (that have mode set to REMOVE) when the number of run exceeds the maximum.
+	// All run logs are available in CloudWatch logs, if you need information about a
+	// run that is no longer available to the API.
 	//
-	// For more information about retention mode, see [Specifying run retention mode] in the AWS HealthOmics User
-	// Guide.
+	// For more information about retention mode, see [Specifying run retention mode] in the Amazon Web Services
+	// HealthOmics User Guide.
 	//
 	// [Specifying run retention mode]: https://docs.aws.amazon.com/omics/latest/dev/starting-a-run.html
 	RetentionMode types.RunRetentionMode
@@ -105,14 +102,18 @@ type StartRunInput struct {
 	// The ID of a run to duplicate.
 	RunId *string
 
-	// A storage capacity for the run in gibibytes. This field is not required if the
-	// storage type is dynamic (the system ignores any value that you enter).
+	// The static storage capacity (in gibibytes) for this run. This field is not
+	// required if the storage type is dynamic (the system ignores any value that you
+	// enter).
 	StorageCapacity *int32
 
-	// The run's storage type. By default, the run uses STATIC storage type, which
-	// allocates a fixed amount of storage. If you set the storage type to DYNAMIC,
-	// HealthOmics dynamically scales the storage up or down, based on file system
-	// utilization.
+	// The storage type for the run. By default, the run uses STATIC storage type,
+	// which allocates a fixed amount of storage. If you set the storage type to
+	// DYNAMIC, Amazon Web Services HealthOmics dynamically scales the storage up or
+	// down, based on file system utilization. For more information about static and
+	// dynamic storage, see [Running workflows]in the Amazon Web Services HealthOmics User Guide.
+	//
+	// [Running workflows]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
 	StorageType types.StorageType
 
 	// Tags for the run.
@@ -126,6 +127,9 @@ type StartRunInput struct {
 
 	// The run's workflow type.
 	WorkflowType types.WorkflowType
+
+	// The name of the workflow version.
+	WorkflowVersionName *string
 
 	noSmithyDocumentSerde
 }

@@ -80,7 +80,7 @@ type GetWorkflowOutput struct {
 	// The path of the main definition file for the workflow.
 	Main *string
 
-	// Gets metadata for workflow.
+	// Gets metadata for the workflow.
 	Metadata map[string]string
 
 	// The workflow's name.
@@ -95,14 +95,21 @@ type GetWorkflowOutput struct {
 	// The workflow's status message.
 	StatusMessage *string
 
-	// The workflow's default run storage capacity in gibibytes.
+	// The default static storage capacity (in gibibytes) for runs that use this
+	// workflow or workflow version.
 	StorageCapacity *int32
+
+	// The default storage type for runs using this workflow.
+	StorageType types.StorageType
 
 	// The workflow's tags.
 	Tags map[string]string
 
 	// The workflow's type.
 	Type types.WorkflowType
+
+	// The universally unique identifier (UUID) value for this workflow.
+	Uuid *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

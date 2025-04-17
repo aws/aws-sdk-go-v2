@@ -6725,6 +6725,47 @@ func validateAgentConfig(v *types.AgentConfig) error {
 	}
 }
 
+func validateAssignSlaActionDefinition(v *types.AssignSlaActionDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssignSlaActionDefinition"}
+	if len(v.SlaAssignmentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SlaAssignmentType"))
+	}
+	if v.CaseSlaConfiguration != nil {
+		if err := validateCaseSlaConfiguration(v.CaseSlaConfiguration); err != nil {
+			invalidParams.AddNested("CaseSlaConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCaseSlaConfiguration(v *types.CaseSlaConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CaseSlaConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.TargetSlaMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetSlaMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateChatEvent(v *types.ChatEvent) error {
 	if v == nil {
 		return nil
@@ -8084,6 +8125,11 @@ func validateRuleAction(v *types.RuleAction) error {
 	if v.UpdateCaseAction != nil {
 		if err := validateUpdateCaseActionDefinition(v.UpdateCaseAction); err != nil {
 			invalidParams.AddNested("UpdateCaseAction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AssignSlaAction != nil {
+		if err := validateAssignSlaActionDefinition(v.AssignSlaAction); err != nil {
+			invalidParams.AddNested("AssignSlaAction", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SubmitAutoEvaluationAction != nil {
