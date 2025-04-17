@@ -1,3 +1,7 @@
+# v1.128.0 (2025-04-17)
+
+* **Feature**: This release adds following capabilities to Contact Lens Rules APIs 1/ 'ASSIGN_SLA' action and  '$.Case.TemplateId' comparison value for 'OnCaseCreate' and 'OnCaseUpdate' event sources 2/ 'OnSlaBreach' Cases event source which supports '$.RelatedItem.SlaConfiguration.Name' comparison value
+
 # v1.127.1 (2025-04-03)
 
 * No change notes available for this release.

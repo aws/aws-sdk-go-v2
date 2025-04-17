@@ -1,3 +1,7 @@
+# v1.55.0 (2025-04-17)
+
+* **Feature**: Adds a new AccountSetting - defaultLogDriverMode for ECS.
+
 # v1.54.6 (2025-04-10)
 
 * No change notes available for this release.

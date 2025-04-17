@@ -1,3 +1,7 @@
+# v1.30.0 (2025-04-17)
+
+* **Feature**: Add versioning for HealthOmics workflows
+
 # v1.29.2 (2025-04-03)
 
 * No change notes available for this release.

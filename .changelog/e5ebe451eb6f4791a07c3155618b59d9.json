@@ -1,8 +1,0 @@
-{
-    "id": "e5ebe451-eb6f-4791-a07c-3155618b59d9",
-    "type": "feature",
-    "description": "Adds a new AccountSetting - defaultLogDriverMode for ECS.",
-    "modules": [
-        "service/ecs"
-    ]
-}

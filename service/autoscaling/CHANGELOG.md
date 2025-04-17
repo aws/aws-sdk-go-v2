@@ -1,3 +1,7 @@
+# v1.52.4 (2025-04-17)
+
+* **Documentation**: Doc only update for EC2 Auto Scaling.
+
 # v1.52.3 (2025-04-10)
 
 * No change notes available for this release.

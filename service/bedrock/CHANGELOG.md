@@ -1,3 +1,7 @@
+# v1.32.0 (2025-04-17)
+
+* **Feature**: With this release, Bedrock Evaluation will now support custom metrics for evaluation.
+
 # v1.31.0 (2025-04-07)
 
 * **Feature**: New options for how to handle harmful content detected by Amazon Bedrock Guardrails.

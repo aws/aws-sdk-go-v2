@@ -1,3 +1,7 @@
+# v1.39.0 (2025-04-17)
+
+* **Feature**: Added new resource types to evaluate for public access in resource policies and added support for S3 directory bucket access points.
+
 # v1.38.4 (2025-04-10)
 
 * No change notes available for this release.

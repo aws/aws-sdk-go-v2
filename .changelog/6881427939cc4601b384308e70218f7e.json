@@ -1,8 +1,0 @@
-{
-    "id": "68814279-39cc-4601-b384-308e70218f7e",
-    "type": "documentation",
-    "description": "Doc only update for EC2 Auto Scaling.",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

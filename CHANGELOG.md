@@ -1,3 +1,23 @@
+# Release (2025-04-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.39.0](service/accessanalyzer/CHANGELOG.md#v1390-2025-04-17)
+  * **Feature**: Added new resource types to evaluate for public access in resource policies and added support for S3 directory bucket access points.
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.33.0](service/amp/CHANGELOG.md#v1330-2025-04-17)
+  * **Feature**: Add Workspace Configuration APIs for Amazon Prometheus
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.52.4](service/autoscaling/CHANGELOG.md#v1524-2025-04-17)
+  * **Documentation**: Doc only update for EC2 Auto Scaling.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.32.0](service/bedrock/CHANGELOG.md#v1320-2025-04-17)
+  * **Feature**: With this release, Bedrock Evaluation will now support custom metrics for evaluation.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.128.0](service/connect/CHANGELOG.md#v11280-2025-04-17)
+  * **Feature**: This release adds following capabilities to Contact Lens Rules APIs 1/ 'ASSIGN_SLA' action and  '$.Case.TemplateId' comparison value for 'OnCaseCreate' and 'OnCaseUpdate' event sources 2/ 'OnSlaBreach' Cases event source which supports '$.RelatedItem.SlaConfiguration.Name' comparison value
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.55.0](service/ecs/CHANGELOG.md#v1550-2025-04-17)
+  * **Feature**: Adds a new AccountSetting - defaultLogDriverMode for ECS.
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.27.0](service/memorydb/CHANGELOG.md#v1270-2025-04-17)
+  * **Feature**: Added support for IPv6 and dual stack for Valkey and Redis clusters. Customers can now launch new Valkey and Redis clusters with IPv6 and dual stack networking support.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.30.0](service/omics/CHANGELOG.md#v1300-2025-04-17)
+  * **Feature**: Add versioning for HealthOmics workflows
+
 # Release (2025-04-16)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "ef1866ce-f188-4bcf-8563-37ff4d8ad4f4",
-    "type": "feature",
-    "description": "Added new resource types to evaluate for public access in resource policies and added support for S3 directory bucket access points.",
-    "modules": [
-        "service/accessanalyzer"
-    ]
-}

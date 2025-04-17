@@ -1,3 +1,7 @@
+# v1.27.0 (2025-04-17)
+
+* **Feature**: Added support for IPv6 and dual stack for Valkey and Redis clusters. Customers can now launch new Valkey and Redis clusters with IPv6 and dual stack networking support.
+
 # v1.26.2 (2025-04-03)
 
 * No change notes available for this release.

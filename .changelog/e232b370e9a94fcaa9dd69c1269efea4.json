@@ -1,8 +1,0 @@
-{
-    "id": "e232b370-e9a9-4fca-a9dd-69c1269efea4",
-    "type": "feature",
-    "description": "Add versioning for HealthOmics workflows",
-    "modules": [
-        "service/omics"
-    ]
-}

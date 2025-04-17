@@ -1,8 +1,0 @@
-{
-    "id": "32ba7bd5-fd5f-46a7-97ee-b7ec6500fc65",
-    "type": "feature",
-    "description": "With this release, Bedrock Evaluation will now support custom metrics for evaluation.",
-    "modules": [
-        "service/bedrock"
-    ]
-}
