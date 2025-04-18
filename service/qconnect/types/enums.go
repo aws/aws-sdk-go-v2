@@ -47,6 +47,8 @@ type AIPromptAPIFormat string
 const (
 	AIPromptAPIFormatAnthropicClaudeMessages        AIPromptAPIFormat = "ANTHROPIC_CLAUDE_MESSAGES"
 	AIPromptAPIFormatAnthropicClaudeTextCompletions AIPromptAPIFormat = "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+	AIPromptAPIFormatMessages                       AIPromptAPIFormat = "MESSAGES"
+	AIPromptAPIFormatTextCompletions                AIPromptAPIFormat = "TEXT_COMPLETIONS"
 )
 
 // Values returns all known values for AIPromptAPIFormat. Note that this can be
@@ -57,6 +59,8 @@ func (AIPromptAPIFormat) Values() []AIPromptAPIFormat {
 	return []AIPromptAPIFormat{
 		"ANTHROPIC_CLAUDE_MESSAGES",
 		"ANTHROPIC_CLAUDE_TEXT_COMPLETIONS",
+		"MESSAGES",
+		"TEXT_COMPLETIONS",
 	}
 }
 
@@ -913,9 +917,13 @@ type QueryResultType string
 
 // Enum values for QueryResultType
 const (
-	QueryResultTypeKnowledgeContent QueryResultType = "KNOWLEDGE_CONTENT"
-	QueryResultTypeIntentAnswer     QueryResultType = "INTENT_ANSWER"
-	QueryResultTypeGenerativeAnswer QueryResultType = "GENERATIVE_ANSWER"
+	QueryResultTypeKnowledgeContent             QueryResultType = "KNOWLEDGE_CONTENT"
+	QueryResultTypeIntentAnswer                 QueryResultType = "INTENT_ANSWER"
+	QueryResultTypeGenerativeAnswer             QueryResultType = "GENERATIVE_ANSWER"
+	QueryResultTypeGenerativeAnswerChunk        QueryResultType = "GENERATIVE_ANSWER_CHUNK"
+	QueryResultTypeBlockedGenerativeAnswerChunk QueryResultType = "BLOCKED_GENERATIVE_ANSWER_CHUNK"
+	QueryResultTypeIntentAnswerChunk            QueryResultType = "INTENT_ANSWER_CHUNK"
+	QueryResultTypeBlockedIntentAnswerChunk     QueryResultType = "BLOCKED_INTENT_ANSWER_CHUNK"
 )
 
 // Values returns all known values for QueryResultType. Note that this can be
@@ -927,6 +935,10 @@ func (QueryResultType) Values() []QueryResultType {
 		"KNOWLEDGE_CONTENT",
 		"INTENT_ANSWER",
 		"GENERATIVE_ANSWER",
+		"GENERATIVE_ANSWER_CHUNK",
+		"BLOCKED_GENERATIVE_ANSWER_CHUNK",
+		"INTENT_ANSWER_CHUNK",
+		"BLOCKED_INTENT_ANSWER_CHUNK",
 	}
 }
 
@@ -1043,10 +1055,14 @@ type RecommendationType string
 
 // Enum values for RecommendationType
 const (
-	RecommendationTypeKnowledgeContent   RecommendationType = "KNOWLEDGE_CONTENT"
-	RecommendationTypeGenerativeResponse RecommendationType = "GENERATIVE_RESPONSE"
-	RecommendationTypeGenerativeAnswer   RecommendationType = "GENERATIVE_ANSWER"
-	RecommendationTypeDetectedIntent     RecommendationType = "DETECTED_INTENT"
+	RecommendationTypeKnowledgeContent             RecommendationType = "KNOWLEDGE_CONTENT"
+	RecommendationTypeGenerativeResponse           RecommendationType = "GENERATIVE_RESPONSE"
+	RecommendationTypeGenerativeAnswer             RecommendationType = "GENERATIVE_ANSWER"
+	RecommendationTypeDetectedIntent               RecommendationType = "DETECTED_INTENT"
+	RecommendationTypeGenerativeAnswerChunk        RecommendationType = "GENERATIVE_ANSWER_CHUNK"
+	RecommendationTypeBlockedGenerativeAnswerChunk RecommendationType = "BLOCKED_GENERATIVE_ANSWER_CHUNK"
+	RecommendationTypeIntentAnswerChunk            RecommendationType = "INTENT_ANSWER_CHUNK"
+	RecommendationTypeBlockedIntentAnswerChunk     RecommendationType = "BLOCKED_INTENT_ANSWER_CHUNK"
 )
 
 // Values returns all known values for RecommendationType. Note that this can be
@@ -1059,6 +1075,10 @@ func (RecommendationType) Values() []RecommendationType {
 		"GENERATIVE_RESPONSE",
 		"GENERATIVE_ANSWER",
 		"DETECTED_INTENT",
+		"GENERATIVE_ANSWER_CHUNK",
+		"BLOCKED_GENERATIVE_ANSWER_CHUNK",
+		"INTENT_ANSWER_CHUNK",
+		"BLOCKED_INTENT_ANSWER_CHUNK",
 	}
 }
 

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the default values for the quotas for the specified Amazon Web Service. A
-// default value does not reflect any quota increases.
+// Lists the default values for the quotas for the specified Amazon Web Services
+// service. A default value does not reflect any quota increases.
 func (c *Client) ListAWSDefaultServiceQuotas(ctx context.Context, params *ListAWSDefaultServiceQuotasInput, optFns ...func(*Options)) (*ListAWSDefaultServiceQuotasOutput, error) {
 	if params == nil {
 		params = &ListAWSDefaultServiceQuotasInput{}

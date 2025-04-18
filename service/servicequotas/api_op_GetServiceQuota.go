@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the applied quota value for the specified quota. For some quotas,
-// only the default values are available. If the applied quota value is not
-// available for a quota, the quota is not retrieved.
+// Retrieves the applied quota value for the specified account-level or
+// resource-level quota. For some quotas, only the default values are available. If
+// the applied quota value is not available for a quota, the quota is not
+// retrieved.
 func (c *Client) GetServiceQuota(ctx context.Context, params *GetServiceQuotaInput, optFns ...func(*Options)) (*GetServiceQuotaOutput, error) {
 	if params == nil {
 		params = &GetServiceQuotaInput{}
@@ -44,9 +45,7 @@ type GetServiceQuotaInput struct {
 	// This member is required.
 	ServiceCode *string
 
-	// Specifies the Amazon Web Services account or resource to which the quota
-	// applies. The value in this field depends on the context scope associated with
-	// the specified service quota.
+	// Specifies the resource with an Amazon Resource Name (ARN).
 	ContextId *string
 
 	noSmithyDocumentSerde

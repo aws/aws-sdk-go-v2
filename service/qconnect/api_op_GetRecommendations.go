@@ -61,6 +61,10 @@ type GetRecommendationsInput struct {
 	// The maximum number of results to return per page.
 	MaxResults *int32
 
+	// The token for the next set of chunks. Use the value returned in the previous
+	// response in the next request to retrieve the next set of chunks.
+	NextChunkToken *string
+
 	// The duration (in seconds) for which the call waits for a recommendation to be
 	// made available before returning. If a recommendation is available, the call
 	// returns sooner than WaitTimeSeconds . If no messages are available and the wait

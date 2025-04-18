@@ -31,6 +31,11 @@ type CreateAIPromptInput struct {
 
 	// The API Format of the AI Prompt.
 	//
+	// Recommended values: MESSAGES | TEXT_COMPLETIONS
+	//
+	// The values ANTHROPIC_CLAUDE_MESSAGES | ANTHROPIC_CLAUDE_TEXT_COMPLETIONS will
+	// be deprecated.
+	//
 	// This member is required.
 	ApiFormat types.AIPromptAPIFormat
 
@@ -40,8 +45,7 @@ type CreateAIPromptInput struct {
 	// This member is required.
 	AssistantId *string
 
-	// The identifier of the model used for this AI Prompt. Model Ids supported are:
-	// anthropic.claude-3-haiku-20240307-v1:0
+	// The identifier of the model used for this AI Prompt.
 	//
 	// This member is required.
 	ModelId *string

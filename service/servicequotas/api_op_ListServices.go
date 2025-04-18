@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the names and codes for the Amazon Web Services integrated with Service
-// Quotas.
+// Lists the names and codes for the Amazon Web Services services integrated with
+// Service Quotas.
 func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, optFns ...func(*Options)) (*ListServicesOutput, error) {
 	if params == nil {
 		params = &ListServicesInput{}
@@ -59,7 +59,7 @@ type ListServicesOutput struct {
 	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
-	// The list of the Amazon Web Service names and service codes.
+	// The list of the Amazon Web Services service names and service codes.
 	Services []types.ServiceInfo
 
 	// Metadata pertaining to the operation's result.

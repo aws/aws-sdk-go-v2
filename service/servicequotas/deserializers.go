@@ -4198,6 +4198,15 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				sv.Adjustable = jtv
 			}
 
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuotaDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
 		case "ErrorReason":
 			if err := awsAwsjson11_deserializeDocumentErrorReason(&sv.ErrorReason, value); err != nil {
 				return err

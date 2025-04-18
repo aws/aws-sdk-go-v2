@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the applied quota values for the specified Amazon Web Service. For some
-// quotas, only the default values are available. If the applied quota value is not
-// available for a quota, the quota is not retrieved.
+// Lists the applied quota values for the specified Amazon Web Services service.
+// For some quotas, only the default values are available. If the applied quota
+// value is not available for a quota, the quota is not retrieved. Filter responses
+// to return applied quota values at either the account level, resource level, or
+// all levels.
 func (c *Client) ListServiceQuotas(ctx context.Context, params *ListServiceQuotasInput, optFns ...func(*Options)) (*ListServiceQuotasOutput, error) {
 	if params == nil {
 		params = &ListServiceQuotasInput{}
@@ -55,7 +57,8 @@ type ListServiceQuotasInput struct {
 	// response to indicate where the output should continue from.
 	NextToken *string
 
-	// Specifies at which level of granularity that the quota value is applied.
+	// Filters the response to return applied quota values for the ACCOUNT , RESOURCE ,
+	// or ALL levels. ACCOUNT is the default.
 	QuotaAppliedAtLevel types.AppliedLevelEnum
 
 	// Specifies the quota identifier. To find the quota code for a specific quota,

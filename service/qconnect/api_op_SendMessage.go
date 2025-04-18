@@ -54,6 +54,11 @@ type SendMessageInput struct {
 	// information about idempotency, see Making retries safe with idempotent APIs.
 	ClientToken *string
 
+	// The configuration of the [SendMessage] request.
+	//
+	// [SendMessage]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_SendMessage.html
+	Configuration *types.MessageConfiguration
+
 	// The conversation context before the Amazon Q in Connect session.
 	ConversationContext *types.ConversationContext
 
@@ -71,6 +76,11 @@ type SendMessageOutput struct {
 	//
 	// This member is required.
 	RequestMessageId *string
+
+	// The configuration of the [SendMessage] request.
+	//
+	// [SendMessage]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_SendMessage.html
+	Configuration *types.MessageConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

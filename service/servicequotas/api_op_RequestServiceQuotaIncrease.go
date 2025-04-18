@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Submits a quota increase request for the specified quota.
+// Submits a quota increase request for the specified quota at the account or
+// resource level.
 func (c *Client) RequestServiceQuotaIncrease(ctx context.Context, params *RequestServiceQuotaIncreaseInput, optFns ...func(*Options)) (*RequestServiceQuotaIncreaseOutput, error) {
 	if params == nil {
 		params = &RequestServiceQuotaIncreaseInput{}
@@ -47,10 +48,18 @@ type RequestServiceQuotaIncreaseInput struct {
 	// This member is required.
 	ServiceCode *string
 
-	// Specifies the Amazon Web Services account or resource to which the quota
-	// applies. The value in this field depends on the context scope associated with
-	// the specified service quota.
+	// Specifies the resource with an Amazon Resource Name (ARN).
 	ContextId *string
+
+	// Specifies if an Amazon Web Services Support case can be opened for the quota
+	// increase request. This parameter is optional.
+	//
+	// By default, this flag is set to True and Amazon Web Services may create a
+	// support case for some quota increase requests. You can set this flag to False
+	// if you do not want a support case created when you request a quota increase. If
+	// you set the flag to False , Amazon Web Services does not open a support case and
+	// updates the request status to Not approved .
+	SupportCaseAllowed *bool
 
 	noSmithyDocumentSerde
 }

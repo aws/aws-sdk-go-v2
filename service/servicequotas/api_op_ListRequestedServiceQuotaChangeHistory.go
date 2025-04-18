@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the quota increase requests for the specified Amazon Web Service.
+// Retrieves the quota increase requests for the specified Amazon Web Services
+// service. Filter responses to return quota requests at either the account level,
+// resource level, or all levels. Responses include any open or closed requests
+// within 90 days.
 func (c *Client) ListRequestedServiceQuotaChangeHistory(ctx context.Context, params *ListRequestedServiceQuotaChangeHistoryInput, optFns ...func(*Options)) (*ListRequestedServiceQuotaChangeHistoryOutput, error) {
 	if params == nil {
 		params = &ListRequestedServiceQuotaChangeHistoryInput{}
@@ -47,8 +50,8 @@ type ListRequestedServiceQuotaChangeHistoryInput struct {
 	// response to indicate where the output should continue from.
 	NextToken *string
 
-	// Specifies at which level within the Amazon Web Services account the quota
-	// request applies to.
+	// Filters the response to return quota requests for the ACCOUNT , RESOURCE , or
+	// ALL levels. ACCOUNT is the default.
 	QuotaRequestedAtLevel types.AppliedLevelEnum
 
 	// Specifies the service identifier. To find the service code value for an Amazon

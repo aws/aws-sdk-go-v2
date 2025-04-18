@@ -1588,6 +1588,11 @@ func awsAwsjson11_serializeOpDocumentRequestServiceQuotaIncreaseInput(v *Request
 		ok.String(*v.ServiceCode)
 	}
 
+	if v.SupportCaseAllowed != nil {
+		ok := object.Key("SupportCaseAllowed")
+		ok.Boolean(*v.SupportCaseAllowed)
+	}
+
 	return nil
 }
 

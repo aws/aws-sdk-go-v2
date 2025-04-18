@@ -14,12 +14,12 @@ type ErrorReason struct {
 	//
 	//   - DEPENDENCY_ACCESS_DENIED_ERROR - The caller does not have the required
 	//   permissions to complete the action. To resolve the error, you must have
-	//   permission to access the Amazon Web Service or quota.
+	//   permission to access the Amazon Web Services service or quota.
 	//
-	//   - DEPENDENCY_THROTTLING_ERROR - The Amazon Web Service is throttling Service
-	//   Quotas.
+	//   - DEPENDENCY_THROTTLING_ERROR - The Amazon Web Services service is throttling
+	//   Service Quotas.
 	//
-	//   - DEPENDENCY_SERVICE_ERROR - The Amazon Web Service is not available.
+	//   - DEPENDENCY_SERVICE_ERROR - The Amazon Web Services service is not available.
 	//
 	//   - SERVICE_QUOTA_NOT_AVAILABLE_ERROR - There was an error in Service Quotas.
 	ErrorCode ErrorCode
@@ -49,21 +49,32 @@ type MetricInfo struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that describes the context for a service quota. The context
-// identifies what the quota applies to.
+// A structure that describes the context for a resource-level quota. For
+// resource-level quotas, such as Instances per OpenSearch Service Domain , you can
+// apply the quota value at the resource-level for each OpenSearch Service Domain
+// in your Amazon Web Services account. Together the attributes of this structure
+// help you understand how the quota is implemented by Amazon Web Services and how
+// you can manage it. For quotas such as Amazon OpenSearch Service Domains which
+// can be managed at the account-level for each Amazon Web Services Region, the
+// QuotaContext field is absent. See the attribute descriptions below to further
+// understand how to use them.
 type QuotaContextInfo struct {
 
-	// Specifies the Amazon Web Services account or resource to which the quota
-	// applies. The value in this field depends on the context scope associated with
-	// the specified service quota.
+	// Specifies the resource, or resources, to which the quota applies. The value for
+	// this field is either an Amazon Resource Name (ARN) or *. If the value is an ARN,
+	// the quota value applies to that resource. If the value is *, then the quota
+	// value applies to all resources listed in the ContextScopeType field. The quota
+	// value applies to all resources for which you haven’t previously applied a quota
+	// value, and any new resources you create in your Amazon Web Services account.
 	ContextId *string
 
-	// Specifies whether the quota applies to an Amazon Web Services account, or to a
-	// resource.
+	// Specifies the scope to which the quota value is applied. If the scope is
+	// RESOURCE , the quota value is applied to each resource in the Amazon Web
+	// Services account. If the scope is ACCOUNT , the quota value is applied to the
+	// Amazon Web Services account.
 	ContextScope QuotaContextScope
 
-	// When the ContextScope is RESOURCE , then this specifies the resource type of the
-	// specified resource.
+	// Specifies the resource type to which the quota can be applied.
 	ContextScopeType *string
 
 	noSmithyDocumentSerde
@@ -117,8 +128,8 @@ type RequestedServiceQuotaChange struct {
 	// Specifies the quota name.
 	QuotaName *string
 
-	// Specifies at which level within the Amazon Web Services account the quota
-	// request applies to.
+	// Filters the response to return quota requests for the ACCOUNT , RESOURCE , or
+	// ALL levels. ACCOUNT is the default.
 	QuotaRequestedAtLevel AppliedLevelEnum
 
 	// The IAM identity of the requester.
@@ -132,6 +143,27 @@ type RequestedServiceQuotaChange struct {
 	ServiceName *string
 
 	// The state of the quota increase request.
+	//
+	//   - PENDING : The quota increase request is under review by Amazon Web Services.
+	//
+	//   - CASE_OPENED : Service Quotas opened a support case to process the quota
+	//   increase request. Follow-up on the support case for more information.
+	//
+	//   - APPROVED : The quota increase request is approved.
+	//
+	//   - DENIED : The quota increase request can't be approved by Service Quotas.
+	//   Contact Amazon Web Services Support for more details.
+	//
+	//   - NOT APPROVED : The quota increase request can't be approved by Service
+	//   Quotas. Contact Amazon Web Services Support for more details.
+	//
+	//   - CASE_CLOSED : The support case associated with this quota increase request
+	//   was closed. Check the support case correspondence for the outcome of your quota
+	//   request.
+	//
+	//   - INVALID_REQUEST : Service Quotas couldn't process your resource-level quota
+	//   increase request because the Amazon Resource Name (ARN) specified as part of the
+	//   ContextId is invalid.
 	Status RequestStatus
 
 	// The unit of measurement.
@@ -140,7 +172,7 @@ type RequestedServiceQuotaChange struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an Amazon Web Service.
+// Information about an Amazon Web Services service.
 type ServiceInfo struct {
 
 	// Specifies the service identifier. To find the service code value for an Amazon
@@ -159,6 +191,9 @@ type ServiceQuota struct {
 	// Indicates whether the quota value can be increased.
 	Adjustable bool
 
+	// The quota description.
+	Description *string
+
 	// The error code and error reason.
 	ErrorReason *ErrorReason
 
@@ -168,7 +203,8 @@ type ServiceQuota struct {
 	// The period of time.
 	Period *QuotaPeriod
 
-	// Specifies at which level of granularity that the quota value is applied.
+	// Filters the response to return applied quota values for the ACCOUNT , RESOURCE ,
+	// or ALL levels. ACCOUNT is the default.
 	QuotaAppliedAtLevel AppliedLevelEnum
 
 	// The Amazon Resource Name (ARN) of the quota.

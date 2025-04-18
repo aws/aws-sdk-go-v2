@@ -8,5 +8,9 @@
 // number of resources that you can create in your Amazon Web Services account. For
 // more information, see the [Service Quotas User Guide].
 //
+// You need Amazon Web Services CLI version 2.13.20 or higher to view and manage
+// resource-level quotas such as Instances per domain for Amazon OpenSearch
+// Service.
+//
 // [Service Quotas User Guide]: https://docs.aws.amazon.com/servicequotas/latest/userguide/
 package servicequotas

@@ -166,6 +166,9 @@ func ExampleDataDetails_outputUsage() {
 	case *types.DataDetailsMemberContentData:
 		_ = v.Value // Value is types.ContentDataDetails
 
+	case *types.DataDetailsMemberGenerativeChunkData:
+		_ = v.Value // Value is types.GenerativeChunkDataDetails
+
 	case *types.DataDetailsMemberGenerativeData:
 		_ = v.Value // Value is types.GenerativeDataDetails
 
@@ -185,6 +188,7 @@ func ExampleDataDetails_outputUsage() {
 }
 
 var _ *types.ContentDataDetails
+var _ *types.GenerativeChunkDataDetails
 var _ *types.IntentDetectedDataDetails
 var _ *types.GenerativeDataDetails
 var _ *types.SourceContentDataDetails

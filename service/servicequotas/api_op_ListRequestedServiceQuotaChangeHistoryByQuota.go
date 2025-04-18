@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the quota increase requests for the specified quota.
+// Retrieves the quota increase requests for the specified quota. Filter responses
+// to return quota requests at either the account level, resource level, or all
+// levels.
 func (c *Client) ListRequestedServiceQuotaChangeHistoryByQuota(ctx context.Context, params *ListRequestedServiceQuotaChangeHistoryByQuotaInput, optFns ...func(*Options)) (*ListRequestedServiceQuotaChangeHistoryByQuotaOutput, error) {
 	if params == nil {
 		params = &ListRequestedServiceQuotaChangeHistoryByQuotaInput{}
@@ -60,8 +62,8 @@ type ListRequestedServiceQuotaChangeHistoryByQuotaInput struct {
 	// response to indicate where the output should continue from.
 	NextToken *string
 
-	// Specifies at which level within the Amazon Web Services account the quota
-	// request applies to.
+	// Filters the response to return quota requests for the ACCOUNT , RESOURCE , or
+	// ALL levels. ACCOUNT is the default.
 	QuotaRequestedAtLevel types.AppliedLevelEnum
 
 	// Specifies that you want to filter the results to only the requests with the

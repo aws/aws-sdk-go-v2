@@ -4557,6 +4557,10 @@ func awsRestjson1_serializeOpHttpBindingsGetRecommendationsInput(v *GetRecommend
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
+	if v.NextChunkToken != nil {
+		encoder.SetQuery("nextChunkToken").String(*v.NextChunkToken)
+	}
+
 	if v.SessionId == nil || len(*v.SessionId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member sessionId must not be empty")}
 	}
@@ -7151,6 +7155,13 @@ func awsRestjson1_serializeOpDocumentSendMessageInput(v *SendMessageInput, value
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.Configuration != nil {
+		ok := object.Key("configuration")
+		if err := awsRestjson1_serializeDocumentMessageConfiguration(v.Configuration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ConversationContext != nil {
@@ -10278,6 +10289,18 @@ func awsRestjson1_serializeDocumentManualSearchAIAgentConfiguration(v *types.Man
 	if v.Locale != nil {
 		ok := object.Key("locale")
 		ok.String(*v.Locale)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessageConfiguration(v *types.MessageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GenerateFillerMessage != nil {
+		ok := object.Key("generateFillerMessage")
+		ok.Boolean(*v.GenerateFillerMessage)
 	}
 
 	return nil

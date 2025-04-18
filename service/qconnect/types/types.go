@@ -433,8 +433,42 @@ type AIPromptData struct {
 	// This member is required.
 	AssistantId *string
 
-	// The identifier of the model used for this AI Prompt. Model Ids supported are:
-	// anthropic.claude-3-haiku-20240307-v1:0 .
+	// The identifier of the model used for this AI Prompt. The following model Ids
+	// are supported:
+	//
+	//   - anthropic.claude-3-haiku--v1:0
+	//
+	//   - apac.amazon.nova-lite-v1:0
+	//
+	//   - apac.amazon.nova-micro-v1:0
+	//
+	//   - apac.amazon.nova-pro-v1:0
+	//
+	//   - apac.anthropic.claude-3-5-sonnet--v2:0
+	//
+	//   - apac.anthropic.claude-3-haiku-20240307-v1:0
+	//
+	//   - eu.amazon.nova-lite-v1:0
+	//
+	//   - eu.amazon.nova-micro-v1:0
+	//
+	//   - eu.amazon.nova-pro-v1:0
+	//
+	//   - eu.anthropic.claude-3-7-sonnet-20250219-v1:0
+	//
+	//   - eu.anthropic.claude-3-haiku-20240307-v1:0
+	//
+	//   - us.amazon.nova-lite-v1:0
+	//
+	//   - us.amazon.nova-micro-v1:0
+	//
+	//   - us.amazon.nova-pro-v1:0
+	//
+	//   - us.anthropic.claude-3-5-haiku-20241022-v1:0
+	//
+	//   - us.anthropic.claude-3-7-sonnet-20250219-v1:0
+	//
+	//   - us.anthropic.claude-3-haiku-20240307-v1:0
 	//
 	// This member is required.
 	ModelId *string
@@ -1611,6 +1645,7 @@ type CustomerProfileAttributes struct {
 // The following types satisfy this interface:
 //
 //	DataDetailsMemberContentData
+//	DataDetailsMemberGenerativeChunkData
 //	DataDetailsMemberGenerativeData
 //	DataDetailsMemberIntentDetectedData
 //	DataDetailsMemberSourceContentData
@@ -1626,6 +1661,15 @@ type DataDetailsMemberContentData struct {
 }
 
 func (*DataDetailsMemberContentData) isDataDetails() {}
+
+// Details about the generative chunk data.
+type DataDetailsMemberGenerativeChunkData struct {
+	Value GenerativeChunkDataDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDetailsMemberGenerativeChunkData) isDataDetails() {}
 
 // Details about the generative data.
 type DataDetailsMemberGenerativeData struct {
@@ -1919,6 +1963,22 @@ type FixedSizeChunkingConfiguration struct {
 	//
 	// This member is required.
 	OverlapPercentage *int32
+
+	noSmithyDocumentSerde
+}
+
+// Details about the generative chunk data.
+type GenerativeChunkDataDetails struct {
+
+	// A chunk of the LLM response.
+	Completion *string
+
+	// The token for the next set of chunks. Use the value returned in the previous
+	// response in the next request to retrieve the next set of chunks.
+	NextChunkToken *string
+
+	// The references used to generate the LLM response.
+	References []DataSummary
 
 	noSmithyDocumentSerde
 }
@@ -2737,6 +2797,17 @@ type ManualSearchAIAgentConfiguration struct {
 	//
 	// [QueryAssistant]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html
 	Locale *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a [SendMessage] request.
+//
+// [SendMessage]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_SendMessage.html
+type MessageConfiguration struct {
+
+	// Generates a filler response when tool selection is QUESTION .
+	GenerateFillerMessage *bool
 
 	noSmithyDocumentSerde
 }
@@ -4207,6 +4278,12 @@ type SessionData struct {
 
 	// The configuration information for the session integration.
 	IntegrationConfiguration *SessionIntegrationConfiguration
+
+	// The origin of the Session to be listed. SYSTEM for a default Session created by
+	// Amazon Q in Connect or CUSTOMER for a Session created by calling [CreateSession] API.
+	//
+	// [CreateSession]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_CreateSession.html
+	Origin Origin
 
 	// An object that can be used to specify Tag conditions.
 	TagFilter TagFilter

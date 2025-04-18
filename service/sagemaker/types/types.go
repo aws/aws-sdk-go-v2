@@ -12001,6 +12001,9 @@ type ModelPackageSummary struct {
 	//   - PENDING_MANUAL_APPROVAL - The model is waiting for manual approval.
 	ModelApprovalStatus ModelApprovalStatus
 
+	//  A structure describing the current state of the model in its life cycle.
+	ModelLifeCycle *ModelLifeCycle
+
 	// A brief description of the model package.
 	ModelPackageDescription *string
 
@@ -14822,6 +14825,11 @@ type ProductionVariant struct {
 	//   - CUDA version: 12.4
 	//
 	//   - NVIDIA Container Toolkit with disabled CUDA-compat mounting
+	//
+	// al2-ami-sagemaker-inference-neuron-2
+	//   - Accelerator: Inferentia2 and Trainium
+	//
+	//   - Neuron driver version: 2.19
 	InferenceAmiVersion ProductionVariantInferenceAmiVersion
 
 	// Number of instances to launch initially.
@@ -17677,6 +17685,21 @@ type StoppingCondition struct {
 
 	// The maximum length of time, in seconds, that a training or compilation job can
 	// be pending before it is stopped.
+	//
+	// When working with training jobs that use capacity from [training plans], not all Pending job
+	// states count against the MaxPendingTimeInSeconds limit. The following scenarios
+	// do not increment the MaxPendingTimeInSeconds counter:
+	//
+	//   - The plan is in a Scheduled state: Jobs queued (in Pending status) before a
+	//   plan's start date (waiting for scheduled start time)
+	//
+	//   - Between capacity reservations: Jobs temporarily back to Pending status
+	//   between two capacity reservation periods
+	//
+	// MaxPendingTimeInSeconds only increments when jobs are actively waiting for
+	// capacity in an Active plan.
+	//
+	// [training plans]: https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html
 	MaxPendingTimeInSeconds *int32
 
 	// The maximum length of time, in seconds, that a training or compilation job can

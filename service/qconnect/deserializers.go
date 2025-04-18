@@ -3954,6 +3954,9 @@ func awsRestjson1_deserializeOpErrorDeleteContent(response *smithyhttp.Response,
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -11570,6 +11573,11 @@ func awsRestjson1_deserializeOpDocumentSendMessageOutput(v **SendMessageOutput, 
 
 	for key, value := range shape {
 		switch key {
+		case "configuration":
+			if err := awsRestjson1_deserializeDocumentMessageConfiguration(&sv.Configuration, value); err != nil {
+				return err
+			}
+
 		case "nextMessageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18713,6 +18721,16 @@ loop:
 			uv = &types.DataDetailsMemberContentData{Value: mv}
 			break loop
 
+		case "generativeChunkData":
+			var mv types.GenerativeChunkDataDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentGenerativeChunkDataDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataDetailsMemberGenerativeChunkData{Value: mv}
+			break loop
+
 		case "generativeData":
 			var mv types.GenerativeDataDetails
 			destAddr := &mv
@@ -19469,6 +19487,60 @@ func awsRestjson1_deserializeDocumentFixedSizeChunkingConfiguration(v **types.Fi
 					return err
 				}
 				sv.OverlapPercentage = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGenerativeChunkDataDetails(v **types.GenerativeChunkDataDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GenerativeChunkDataDetails
+	if *v == nil {
+		sv = &types.GenerativeChunkDataDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "completion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Completion = ptr.String(jtv)
+			}
+
+		case "nextChunkToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextChunkToken = ptr.String(jtv)
+			}
+
+		case "references":
+			if err := awsRestjson1_deserializeDocumentDataSummaryList(&sv.References, value); err != nil {
+				return err
 			}
 
 		default:
@@ -21473,6 +21545,46 @@ func awsRestjson1_deserializeDocumentManualSearchAIAgentConfiguration(v **types.
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.Locale = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMessageConfiguration(v **types.MessageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MessageConfiguration
+	if *v == nil {
+		sv = &types.MessageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "generateFillerMessage":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.GenerateFillerMessage = ptr.Bool(jtv)
 			}
 
 		default:
@@ -24838,6 +24950,15 @@ func awsRestjson1_deserializeDocumentSessionData(v **types.SessionData, value in
 					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "origin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Origin to be of type string, got %T instead", value)
+				}
+				sv.Origin = types.Origin(jtv)
 			}
 
 		case "sessionArn":

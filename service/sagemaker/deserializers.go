@@ -67152,6 +67152,11 @@ func awsAwsjson11_deserializeDocumentModelPackageSummary(v **types.ModelPackageS
 				sv.ModelApprovalStatus = types.ModelApprovalStatus(jtv)
 			}
 
+		case "ModelLifeCycle":
+			if err := awsAwsjson11_deserializeDocumentModelLifeCycle(&sv.ModelLifeCycle, value); err != nil {
+				return err
+			}
+
 		case "ModelPackageArn":
 			if value != nil {
 				jtv, ok := value.(string)

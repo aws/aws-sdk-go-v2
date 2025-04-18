@@ -5793,9 +5793,10 @@ type ProductionVariantInferenceAmiVersion string
 
 // Enum values for ProductionVariantInferenceAmiVersion
 const (
-	ProductionVariantInferenceAmiVersionAl2Gpu2  ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-2"
-	ProductionVariantInferenceAmiVersionAl2Gpu21 ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-2-1"
-	ProductionVariantInferenceAmiVersionAl2Gpu31 ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-3-1"
+	ProductionVariantInferenceAmiVersionAl2Gpu2    ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-2"
+	ProductionVariantInferenceAmiVersionAl2Gpu21   ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-2-1"
+	ProductionVariantInferenceAmiVersionAl2Gpu31   ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-3-1"
+	ProductionVariantInferenceAmiVersionAl2Neuron2 ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-neuron-2"
 )
 
 // Values returns all known values for ProductionVariantInferenceAmiVersion. Note
@@ -5808,6 +5809,7 @@ func (ProductionVariantInferenceAmiVersion) Values() []ProductionVariantInferenc
 		"al2-ami-sagemaker-inference-gpu-2",
 		"al2-ami-sagemaker-inference-gpu-2-1",
 		"al2-ami-sagemaker-inference-gpu-3-1",
+		"al2-ami-sagemaker-inference-neuron-2",
 	}
 }
 
