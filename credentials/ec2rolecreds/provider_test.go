@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"net/http"
 	"reflect"
 	"strings"
 	"testing"
@@ -19,6 +20,7 @@ import (
 	"github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 const credsRespTmpl = `{
@@ -31,34 +33,76 @@ const credsRespTmpl = `{
   "LastUpdated" : "2009-11-23T00:00:00Z"
 }`
 
+const credsRespTmplWithAccountID = `{
+  "Code": "Success",
+  "Type": "AWS-HMAC",
+  "AccessKeyId" : "accessKey",
+  "SecretAccessKey" : "secret",
+  "AccountId" : "accountId",
+  "Token" : "token",
+  "Expiration" : "%s",
+  "LastUpdated" : "2009-11-23T00:00:00Z"
+}`
+
 const credsFailRespTmpl = `{
   "Code": "ErrorCode",
   "Message": "ErrorMsg",
   "LastUpdated": "2009-11-23T00:00:00Z"
 }`
 
+var err404 = &smithyhttp.ResponseError{
+	Response: &smithyhttp.Response{
+		Response: &http.Response{
+			StatusCode: 404,
+			Body:       http.NoBody,
+		},
+	},
+}
+
 type mockClient struct {
-	t          *testing.T
 	roleName   string
 	failAssume bool
 	expireOn   string
+
+	calls           []string
+	isLegacy        bool
+	fail404         bool
+	returnAccountID bool
 }
 
-func (c mockClient) GetMetadata(
+func (c *mockClient) GetMetadata(
 	ctx context.Context, params *imds.GetMetadataInput, optFns ...func(*imds.Options),
 ) (
 	*imds.GetMetadataOutput, error,
 ) {
+	c.calls = append(c.calls, params.Path)
 	switch params.Path {
-	case iamSecurityCredsPath:
+	case credsPath:
+		if c.isLegacy {
+			return nil, err404
+		}
+		fallthrough
+	case legacyCredsPath:
+		if c.fail404 {
+			return nil, err404
+		}
 		return &imds.GetMetadataOutput{
 			Content: ioutil.NopCloser(strings.NewReader(c.roleName)),
 		}, nil
 
-	case iamSecurityCredsPath + c.roleName:
+	case credsPath + c.roleName:
+		if c.isLegacy {
+			return nil, err404
+		}
+		fallthrough
+	case legacyCredsPath + c.roleName:
 		var w strings.Builder
-		if c.failAssume {
+		if c.fail404 {
+			return nil, err404
+		} else if c.failAssume {
 			fmt.Fprintf(&w, credsFailRespTmpl)
+		} else if c.returnAccountID {
+			fmt.Fprintf(&w, credsRespTmplWithAccountID, c.expireOn)
 		} else {
 			fmt.Fprintf(&w, credsRespTmpl, c.expireOn)
 		}
@@ -67,6 +111,20 @@ func (c mockClient) GetMetadata(
 		}, nil
 	default:
 		return nil, fmt.Errorf("unexpected path, %v", params.Path)
+	}
+}
+
+func (c *mockClient) expectCalls(t *testing.T, calls ...string) {
+	t.Helper()
+
+	if len(calls) != len(c.calls) {
+		t.Fatalf("expected %d calls, got %d", len(calls), len(c.calls))
+	}
+
+	for i, expect := range calls {
+		if expect != c.calls[i] {
+			t.Errorf("expect call to %s, got %s", expect, c.calls[i])
+		}
 	}
 }
 
@@ -80,11 +138,90 @@ func TestProvider(t *testing.T) {
 	defer func() { sdk.NowTime = orig }()
 
 	p := New(func(options *Options) {
-		options.Client = mockClient{
+		options.Client = &mockClient{
 			roleName:   "RoleName",
 			failAssume: false,
 			expireOn:   "2014-12-16T01:51:37Z",
 		}
+	})
+
+	creds, err := p.Retrieve(context.Background())
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := "accessKey", creds.AccessKeyID; e != a {
+		t.Errorf("Expect access key ID to match")
+	}
+	if e, a := "secret", creds.SecretAccessKey; e != a {
+		t.Errorf("Expect secret access key to match")
+	}
+	if e, a := "token", creds.SessionToken; e != a {
+		t.Errorf("Expect session token to match")
+	}
+	if e, a := "", creds.AccountID; e != a {
+		t.Errorf("Expect account ID to match")
+	}
+
+	sdk.NowTime = func() time.Time {
+		return time.Date(2014, 12, 16, 0, 55, 37, 0, time.UTC)
+	}
+
+	if creds.Expired() {
+		t.Errorf("Expect not expired")
+	}
+}
+
+func TestProvider_AccountID(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+
+	p := New(func(options *Options) {
+		options.Client = &mockClient{
+			roleName:        "RoleName",
+			failAssume:      false,
+			expireOn:        "2014-12-16T01:51:37Z",
+			returnAccountID: true,
+		}
+	})
+
+	creds, err := p.Retrieve(context.Background())
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := "accessKey", creds.AccessKeyID; e != a {
+		t.Errorf("Expect access key ID to match")
+	}
+	if e, a := "secret", creds.SecretAccessKey; e != a {
+		t.Errorf("Expect secret access key to match")
+	}
+	if e, a := "token", creds.SessionToken; e != a {
+		t.Errorf("Expect session token to match")
+	}
+	if e, a := "accountId", creds.AccountID; e != a {
+		t.Errorf("Expect account ID to match")
+	}
+
+	sdk.NowTime = func() time.Time {
+		return time.Date(2014, 12, 16, 0, 55, 37, 0, time.UTC)
+	}
+
+	if creds.Expired() {
+		t.Errorf("Expect not expired")
+	}
+}
+
+func TestProvider_LegacyPath(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+
+	m := &mockClient{
+		roleName:   "RoleName",
+		failAssume: false,
+		expireOn:   "2014-12-16T01:51:37Z",
+		isLegacy:   true,
+	}
+	p := New(func(options *Options) {
+		options.Client = m
 	})
 
 	creds, err := p.Retrieve(context.Background())
@@ -108,11 +245,112 @@ func TestProvider(t *testing.T) {
 	if creds.Expired() {
 		t.Errorf("Expect not expired")
 	}
+
+	m.expectCalls(t,
+		"/iam/security-credentials-extended/",
+		"/iam/security-credentials/",
+		"/iam/security-credentials/RoleName",
+	)
+}
+
+func TestProvider_LegacyPath_ProfileOverride(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+
+	m := &mockClient{
+		roleName:   "RoleName",
+		failAssume: false,
+		expireOn:   "2014-12-16T01:51:37Z",
+		isLegacy:   true,
+	}
+
+	p := New(func(options *Options) {
+		options.ProfileName = "RoleName"
+		options.Client = m
+	})
+
+	creds, err := p.Retrieve(context.Background())
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := "accessKey", creds.AccessKeyID; e != a {
+		t.Errorf("Expect access key ID to match")
+	}
+	if e, a := "secret", creds.SecretAccessKey; e != a {
+		t.Errorf("Expect secret access key to match")
+	}
+	if e, a := "token", creds.SessionToken; e != a {
+		t.Errorf("Expect session token to match")
+	}
+
+	sdk.NowTime = func() time.Time {
+		return time.Date(2014, 12, 16, 0, 55, 37, 0, time.UTC)
+	}
+
+	if creds.Expired() {
+		t.Errorf("Expect not expired")
+	}
+
+	m.expectCalls(t,
+		"/iam/security-credentials-extended/RoleName",
+		"/iam/security-credentials/RoleName",
+	)
+}
+
+func TestProvider_LegacyPath_Still404(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+
+	m := &mockClient{
+		roleName: "RoleName",
+		expireOn: "2014-12-16T01:51:37Z",
+		isLegacy: true,
+		fail404:  true,
+	}
+	p := New(func(options *Options) {
+		options.Client = m
+	})
+
+	_, err := p.Retrieve(context.Background())
+	if err == nil {
+		t.Fatal("expect error, got none")
+	}
+
+	m.expectCalls(t,
+		"/iam/security-credentials-extended/",
+		"/iam/security-credentials/",
+	)
+}
+
+func TestProvider_LegacyPath_ProfileOverride_Still404(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+
+	m := &mockClient{
+		roleName: "RoleName",
+		expireOn: "2014-12-16T01:51:37Z",
+		isLegacy: true,
+		fail404:  true,
+	}
+	p := New(func(options *Options) {
+		options.ProfileName = "RoleName"
+		options.Client = m
+	})
+
+	_, err := p.Retrieve(context.Background())
+	if err == nil {
+		t.Fatal("expect error, got none")
+	}
+
+	m.expectCalls(t,
+		"/iam/security-credentials-extended/RoleName",
+		"/iam/security-credentials/RoleName",
+	)
 }
 
 func TestProvider_FailAssume(t *testing.T) {
 	p := New(func(options *Options) {
-		options.Client = mockClient{
+		options.Client = &mockClient{
 			roleName:   "RoleName",
 			failAssume: true,
 			expireOn:   "2014-12-16T01:51:37Z",
@@ -156,7 +394,7 @@ func TestProvider_IsExpired(t *testing.T) {
 	defer func() { sdk.NowTime = orig }()
 
 	p := New(func(options *Options) {
-		options.Client = mockClient{
+		options.Client = &mockClient{
 			roleName:   "RoleName",
 			failAssume: false,
 			expireOn:   "2014-12-16T01:51:37Z",

@@ -568,6 +568,14 @@ func TestNewEnvConfig(t *testing.T) {
 			Config:  EnvConfig{},
 			WantErr: true,
 		},
+		54: {
+			Env: map[string]string{
+				"AWS_EC2_INSTANCE_PROFILE_NAME": "ProfileName",
+			},
+			Config: EnvConfig{
+				EC2InstanceProfileName: "ProfileName",
+			},
+		},
 	}
 
 	for i, c := range cases {
