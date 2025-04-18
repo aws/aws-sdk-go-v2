@@ -791,6 +791,14 @@
                     {
                         "value": "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS",
                         "name": "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+                    },
+                    {
+                        "value": "MESSAGES",
+                        "name": "MESSAGES"
+                    },
+                    {
+                        "value": "TEXT_COMPLETIONS",
+                        "name": "TEXT_COMPLETIONS"
                     }
                 ]
             }
@@ -850,7 +858,7 @@
                 "modelId": {
                     "target": "com.amazonaws.qconnect#AIPromptModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n      <code>anthropic.claude-3-haiku-20240307-v1:0</code>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. The following model Ids are\n      supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>anthropic.claude-3-haiku--v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>apac.amazon.nova-lite-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>apac.amazon.nova-micro-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>apac.amazon.nova-pro-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>apac.anthropic.claude-3-5-sonnet--v2:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>apac.anthropic.claude-3-haiku-20240307-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eu.amazon.nova-lite-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eu.amazon.nova-micro-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eu.amazon.nova-pro-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eu.anthropic.claude-3-7-sonnet-20250219-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eu.anthropic.claude-3-haiku-20240307-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>us.amazon.nova-lite-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>us.amazon.nova-micro-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>us.amazon.nova-pro-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>us.anthropic.claude-3-5-haiku-20241022-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>us.anthropic.claude-3-7-sonnet-20250219-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>us.anthropic.claude-3-haiku-20240307-v1:0</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -985,7 +993,7 @@
                 "modelId": {
                     "target": "com.amazonaws.qconnect#AIPromptModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n      <code>anthropic.claude-3-haiku-20240307-v1:0</code>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n        <code>anthropic.claude-3-haiku-20240307-v1:0</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3378,14 +3386,14 @@
                 "modelId": {
                     "target": "com.amazonaws.qconnect#AIPromptModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n      <code>anthropic.claude-3-haiku-20240307-v1:0</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "apiFormat": {
                     "target": "com.amazonaws.qconnect#AIPromptAPIFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The API Format of the AI Prompt.</p>",
+                        "smithy.api#documentation": "<p>The API Format of the AI Prompt.</p>\n         <p>Recommended values: <code>MESSAGES | TEXT_COMPLETIONS</code>\n         </p>\n         <note>\n            <p>The values <code>ANTHROPIC_CLAUDE_MESSAGES | ANTHROPIC_CLAUDE_TEXT_COMPLETIONS</code>\n        will be deprecated.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4917,6 +4925,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the content data.</p>"
                     }
+                },
+                "generativeChunkData": {
+                    "target": "com.amazonaws.qconnect#GenerativeChunkDataDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the generative chunk data.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5588,6 +5602,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.qconnect#ResourceNotFoundException"
@@ -6428,6 +6445,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configurations for when you choose fixed-size chunking. If you set the\n        <code>chunkingStrategy</code> as <code>NONE</code>, exclude this field.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#GenerativeChunkDataDetails": {
+            "type": "structure",
+            "members": {
+                "completion": {
+                    "target": "com.amazonaws.qconnect#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A chunk of the LLM response.</p>"
+                    }
+                },
+                "references": {
+                    "target": "com.amazonaws.qconnect#DataSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The references used to generate the LLM response.</p>"
+                    }
+                },
+                "nextChunkToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of chunks. Use the value returned in the previous response in\n      the next request to retrieve the next set of chunks.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the generative chunk data.</p>"
             }
         },
         "com.amazonaws.qconnect#GenerativeContentFeedbackData": {
@@ -7461,6 +7504,13 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration (in seconds) for which the call waits for a recommendation to be made\n      available before returning. If a recommendation is available, the call returns sooner than\n        <code>WaitTimeSeconds</code>. If no messages are available and the wait time expires, the\n      call returns successfully with an empty list.</p>",
                         "smithy.api#httpQuery": "waitTimeSeconds"
+                    }
+                },
+                "nextChunkToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of chunks. Use the value returned in the previous response in\n      the next request to retrieve the next set of chunks.</p>",
+                        "smithy.api#httpQuery": "nextChunkToken"
                     }
                 }
             }
@@ -10469,6 +10519,20 @@
                 }
             }
         },
+        "com.amazonaws.qconnect#MessageConfiguration": {
+            "type": "structure",
+            "members": {
+                "generateFillerMessage": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Generates a filler response when tool selection is <code>QUESTION</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_SendMessage.html\">SendMessage</a>\n      request.</p>"
+            }
+        },
         "com.amazonaws.qconnect#MessageData": {
             "type": "union",
             "members": {
@@ -12124,6 +12188,22 @@
                     {
                         "value": "GENERATIVE_ANSWER",
                         "name": "GENERATIVE_ANSWER"
+                    },
+                    {
+                        "value": "GENERATIVE_ANSWER_CHUNK",
+                        "name": "GENERATIVE_ANSWER_CHUNK"
+                    },
+                    {
+                        "value": "BLOCKED_GENERATIVE_ANSWER_CHUNK",
+                        "name": "BLOCKED_GENERATIVE_ANSWER_CHUNK"
+                    },
+                    {
+                        "value": "INTENT_ANSWER_CHUNK",
+                        "name": "INTENT_ANSWER_CHUNK"
+                    },
+                    {
+                        "value": "BLOCKED_INTENT_ANSWER_CHUNK",
+                        "name": "BLOCKED_INTENT_ANSWER_CHUNK"
                     }
                 ]
             }
@@ -13142,6 +13222,22 @@
                     {
                         "value": "DETECTED_INTENT",
                         "name": "DETECTED_INTENT"
+                    },
+                    {
+                        "value": "GENERATIVE_ANSWER_CHUNK",
+                        "name": "GENERATIVE_ANSWER_CHUNK"
+                    },
+                    {
+                        "value": "BLOCKED_GENERATIVE_ANSWER_CHUNK",
+                        "name": "BLOCKED_GENERATIVE_ANSWER_CHUNK"
+                    },
+                    {
+                        "value": "INTENT_ANSWER_CHUNK",
+                        "name": "INTENT_ANSWER_CHUNK"
+                    },
+                    {
+                        "value": "BLOCKED_INTENT_ANSWER_CHUNK",
+                        "name": "BLOCKED_INTENT_ANSWER_CHUNK"
                     }
                 ]
             }
@@ -14028,7 +14124,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The conversation history data to included in conversation context data before the\n      Amazon Q in Connect session.</p>"
+                "smithy.api#documentation": "<p>The conversation history data to included in conversation context data before the Amazon Q\n      in Connect session.</p>"
             }
         },
         "com.amazonaws.qconnect#SelfServiceConversationHistoryList": {
@@ -14160,6 +14256,12 @@
                         "smithy.api#documentation": "<p>The conversation context before the Amazon Q in Connect session.</p>"
                     }
                 },
+                "configuration": {
+                    "target": "com.amazonaws.qconnect#MessageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_SendMessage.html\">SendMessage</a>\n      request.</p>"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#ClientToken",
                     "traits": {
@@ -14180,6 +14282,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the submitted message.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.qconnect#MessageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_SendMessage.html\">SendMessage</a>\n      request.</p>"
                     }
                 },
                 "nextMessageToken": {
@@ -14319,6 +14427,12 @@
                     "target": "com.amazonaws.qconnect#AIAgentConfigurationMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that\n      should be used by Amazon Q in Connect for this Session.</p>"
+                    }
+                },
+                "origin": {
+                    "target": "com.amazonaws.qconnect#Origin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the Session to be listed. <code>SYSTEM</code> for a default Session created\n      by Amazon Q in Connect or <code>CUSTOMER</code> for a Session created by calling <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_CreateSession.html\">CreateSession</a> API.</p>"
                     }
                 }
             },
@@ -14909,7 +15023,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 200000
+                    "max": 1000000
                 },
                 "smithy.api#sensitive": {}
             }

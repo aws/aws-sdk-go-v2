@@ -336,7 +336,7 @@
                 "ErrorCode": {
                     "target": "com.amazonaws.servicequotas#ErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Service Quotas returns the following error values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> - The caller does not have the\n                    required permissions to complete the action. To resolve the error, you must have\n                    permission to access the Amazon Web Service or quota.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPENDENCY_THROTTLING_ERROR</code> - The Amazon Web Service is throttling\n                    Service Quotas. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPENDENCY_SERVICE_ERROR</code> - The Amazon Web Service is not\n                    available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> - There was an error in\n                    Service Quotas.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Service Quotas returns the following error values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> - The caller does not have the\n                    required permissions to complete the action. To resolve the error, you must have\n                    permission to access the Amazon Web Services service or quota.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPENDENCY_THROTTLING_ERROR</code> - The Amazon Web Services service is throttling\n                    Service Quotas. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPENDENCY_SERVICE_ERROR</code> - The Amazon Web Services service is not\n                    available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> - There was an error in\n                    Service Quotas.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ErrorMessage": {
@@ -561,7 +561,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the applied quota value for the specified quota. For some quotas, only the\n            default values are available. If the applied quota value is not available for a quota,\n            the quota is not retrieved.</p>"
+                "smithy.api#documentation": "<p>Retrieves the applied quota value for the specified account-level or resource-level quota. For some quotas, only the\n            default values are available. If the applied quota value is not available for a quota,\n            the quota is not retrieved.</p>"
             }
         },
         "com.amazonaws.servicequotas#GetServiceQuotaIncreaseRequestFromTemplate": {
@@ -668,7 +668,7 @@
                 "ContextId": {
                     "target": "com.amazonaws.servicequotas#QuotaContextId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services account or resource to which the quota applies. The value in this field\n              depends on the context scope associated with the specified service quota.</p>"
+                        "smithy.api#documentation": "<p>Specifies the resource with an Amazon Resource Name (ARN).</p>"
                     }
                 }
             },
@@ -781,7 +781,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the default values for the quotas for the specified Amazon Web Service. A default\n            value does not reflect any quota increases.</p>",
+                "smithy.api#documentation": "<p>Lists the default values for the quotas for the specified Amazon Web Services service. A default\n            value does not reflect any quota increases.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -866,7 +866,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the quota increase requests for the specified Amazon Web Service.</p>",
+                "smithy.api#documentation": "<p>Retrieves the quota increase requests for the specified Amazon Web Services service. Filter responses to return quota requests at \n        either the account level, resource level, or all levels. Responses include any open or closed requests within 90 days.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -904,7 +904,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the quota increase requests for the specified quota.</p>",
+                "smithy.api#documentation": "<p>Retrieves the quota increase requests for the specified quota. Filter responses to return quota requests at either the\n            account level, resource level, or all levels.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -951,7 +951,7 @@
                 "QuotaRequestedAtLevel": {
                     "target": "com.amazonaws.servicequotas#AppliedLevelEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies at which level within the Amazon Web Services account the quota request applies to.</p>"
+                        "smithy.api#documentation": "<p>Filters the response to return quota requests for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>"
                     }
                 }
             },
@@ -1009,7 +1009,7 @@
                 "QuotaRequestedAtLevel": {
                     "target": "com.amazonaws.servicequotas#AppliedLevelEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies at which level within the Amazon Web Services account the quota request applies to.</p>"
+                        "smithy.api#documentation": "<p>Filters the response to return quota requests for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>"
                     }
                 }
             },
@@ -1162,7 +1162,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the applied quota values for the specified Amazon Web Service. For some quotas, only\n            the default values are available. If the applied quota value is not available for a\n            quota, the quota is not retrieved.</p>",
+                "smithy.api#documentation": "<p>Lists the applied quota values for the specified Amazon Web Services service. For some quotas, only\n            the default values are available. If the applied quota value is not available for a\n            quota, the quota is not retrieved. Filter responses to return applied quota values at either the account level,\n            resource level, or all levels.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1202,7 +1202,7 @@
                 "QuotaAppliedAtLevel": {
                     "target": "com.amazonaws.servicequotas#AppliedLevelEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies at which level of granularity that the quota value is applied.</p>"
+                        "smithy.api#documentation": "<p>Filters the response to return applied quota values for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>"
                     }
                 }
             },
@@ -1256,7 +1256,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the names and codes for the Amazon Web Services integrated with Service Quotas.</p>",
+                "smithy.api#documentation": "<p>Lists the names and codes for the Amazon Web Services services integrated with Service Quotas.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1297,7 +1297,7 @@
                 "Services": {
                     "target": "com.amazonaws.servicequotas#ServiceInfoListDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of the Amazon Web Service names and service codes.</p>"
+                        "smithy.api#documentation": "<p>The list of the Amazon Web Services service names and service codes.</p>"
                     }
                 }
             },
@@ -1658,24 +1658,24 @@
                 "ContextScope": {
                     "target": "com.amazonaws.servicequotas#QuotaContextScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the quota applies to an Amazon Web Services account, or to a resource.</p>"
+                        "smithy.api#documentation": "<p>Specifies the scope to which the quota value is applied. If the scope is <code>RESOURCE</code>, the quota value is applied to each resource in the Amazon Web Services account. If the scope is <code>ACCOUNT</code>, the quota value is applied to the Amazon Web Services account.</p>"
                     }
                 },
                 "ContextScopeType": {
                     "target": "com.amazonaws.servicequotas#QuotaContextScopeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the <code>ContextScope</code> is <code>RESOURCE</code>, then this specifies the resource type of the specified resource.</p>"
+                        "smithy.api#documentation": "<p>Specifies the resource type to which the quota can be applied.</p>"
                     }
                 },
                 "ContextId": {
                     "target": "com.amazonaws.servicequotas#QuotaContextId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services account or resource to which the quota applies. The value in this field\n              depends on the context scope associated with the specified service quota.</p>"
+                        "smithy.api#documentation": "<p>Specifies the resource, or resources, to which the quota applies. The value for this field is either an Amazon Resource Name (ARN) or *. If the value is an ARN, the quota value applies to that resource. If the value is *, then the quota value applies to all resources listed in the <code>ContextScopeType</code> field. The quota value applies to all resources for which you haven’t previously applied a quota value, and any new resources you create in your Amazon Web Services account.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that describes the context for a service quota. The context identifies what the quota applies to.</p>"
+                "smithy.api#documentation": "<p>A structure that describes the context for a resource-level quota. For resource-level quotas, such as <code>Instances per OpenSearch Service Domain</code>, you can apply the quota value at the resource-level for each OpenSearch Service Domain in your Amazon Web Services account. Together the attributes of this structure help you understand how the quota is implemented by Amazon Web Services and how you can manage it. For quotas such as <code>Amazon OpenSearch Service Domains</code> which can be managed at the account-level for each Amazon Web Services Region, the <code>QuotaContext</code> field is absent. See the attribute descriptions below to further understand how to use them.</p>"
             }
         },
         "com.amazonaws.servicequotas#QuotaContextScope": {
@@ -1697,6 +1697,16 @@
         },
         "com.amazonaws.servicequotas#QuotaContextScopeType": {
             "type": "string"
+        },
+        "com.amazonaws.servicequotas#QuotaDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 350
+                },
+                "smithy.api#pattern": "^.{0,350}$"
+            }
         },
         "com.amazonaws.servicequotas#QuotaExceededException": {
             "type": "structure",
@@ -1800,7 +1810,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Submits a quota increase request for the specified quota.</p>"
+                "smithy.api#documentation": "<p>Submits a quota increase request for the specified quota at the account or resource level.</p>"
             }
         },
         "com.amazonaws.servicequotas#RequestServiceQuotaIncreaseRequest": {
@@ -1830,7 +1840,13 @@
                 "ContextId": {
                     "target": "com.amazonaws.servicequotas#QuotaContextId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services account or resource to which the quota applies. The value in this field\n              depends on the context scope associated with the specified service quota.</p>"
+                        "smithy.api#documentation": "<p>Specifies the resource with an Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "SupportCaseAllowed": {
+                    "target": "com.amazonaws.servicequotas#SupportCaseAllowed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if an Amazon Web Services Support case can be opened for the quota increase request. This parameter is optional. </p>\n         <p>By default, this flag is set to <code>True</code> and Amazon Web Services may create a support case for some quota increase requests. \n            You can set this flag to <code>False</code> \n           if you do not want a support case created when you request a quota increase. If you set the flag to <code>False</code>, \n            Amazon Web Services does not open a support case and updates the request status to <code>Not approved</code>. </p>"
                     }
                 }
             },
@@ -1947,7 +1963,7 @@
                 "Status": {
                     "target": "com.amazonaws.servicequotas#RequestStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the quota increase request.</p>"
+                        "smithy.api#documentation": "<p>The state of the quota increase request.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>: The quota increase request is under review by Amazon Web Services. </p>\n            </li>\n            <li>\n               <p>\n                  <code>CASE_OPENED</code>: Service Quotas opened a support case to process the quota increase\n                request. Follow-up on the support case for more information.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPROVED</code>: The quota increase request is approved. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DENIED</code>: The quota increase request can't be approved by Service Quotas. Contact\n               Amazon Web Services Support for more details.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT APPROVED</code>: The quota increase request can't be approved by Service Quotas. Contact\n                Amazon Web Services Support for more details.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CASE_CLOSED</code>: The support case associated with this quota increase request was closed.\n            Check the support case correspondence for the outcome of your quota request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_REQUEST</code>: Service Quotas couldn't process your resource-level quota increase request because the\n            Amazon Resource Name (ARN) specified as part of the <code>ContextId</code> is invalid.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Created": {
@@ -1990,7 +2006,7 @@
                 "QuotaRequestedAtLevel": {
                     "target": "com.amazonaws.servicequotas#AppliedLevelEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies at which level within the Amazon Web Services account the quota request applies to.</p>"
+                        "smithy.api#documentation": "<p>Filters the response to return quota requests for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>"
                     }
                 },
                 "QuotaContext": {
@@ -2066,7 +2082,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an Amazon Web Service.</p>"
+                "smithy.api#documentation": "<p>Information about an Amazon Web Services service.</p>"
             }
         },
         "com.amazonaws.servicequotas#ServiceInfoListDefinition": {
@@ -2158,13 +2174,19 @@
                 "QuotaAppliedAtLevel": {
                     "target": "com.amazonaws.servicequotas#AppliedLevelEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies at which level of granularity that the quota value is applied.</p>"
+                        "smithy.api#documentation": "<p>Filters the response to return applied quota values for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>"
                     }
                 },
                 "QuotaContext": {
                     "target": "com.amazonaws.servicequotas#QuotaContextInfo",
                     "traits": {
                         "smithy.api#documentation": "<p>The context for this service quota.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.servicequotas#QuotaDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota description. </p>"
                     }
                 }
             },
@@ -2345,7 +2367,7 @@
                     "name": "servicequotas"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>With Service Quotas, you can view and manage your quotas easily as your Amazon Web Services workloads grow.\n            Quotas, also referred to as limits, are the maximum number of resources that you can\n            create in your Amazon Web Services account. For more information, see the <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/\">Service Quotas User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>With Service Quotas, you can view and manage your quotas easily as your Amazon Web Services workloads grow.\n            Quotas, also referred to as limits, are the maximum number of resources that you can\n            create in your Amazon Web Services account. For more information, see the <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/\">Service Quotas User Guide</a>.</p>\n         <p>You need Amazon Web Services CLI version 2.13.20 or higher to view and manage resource-level quotas such as <code>Instances\n        per domain</code> for Amazon OpenSearch Service.</p>",
                 "smithy.api#title": "Service Quotas",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2389,7 +2411,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2432,7 +2453,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2445,7 +2467,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2459,7 +2480,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2482,7 +2502,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2517,7 +2536,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2528,14 +2546,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2549,14 +2569,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2565,18 +2583,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -2585,7 +2602,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -2605,14 +2623,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2626,7 +2646,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2646,7 +2665,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2657,14 +2675,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -2675,9 +2695,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -3310,6 +3332,9 @@
                 },
                 "smithy.api#pattern": "^(Sum|Maximum)$"
             }
+        },
+        "com.amazonaws.servicequotas#SupportCaseAllowed": {
+            "type": "boolean"
         },
         "com.amazonaws.servicequotas#Tag": {
             "type": "structure",
