@@ -1,8 +1,0 @@
-{
-    "id": "ba9f4934-4f3c-4d62-83ba-254fe7867fa5",
-    "type": "feature",
-    "description": "This release adds support for the following capabilities: Chunking generative answer replies from Amazon Q in Connect. Integration support for the use of additional LLM models with Amazon Q in Connect.",
-    "modules": [
-        "service/qconnect"
-    ]
-}

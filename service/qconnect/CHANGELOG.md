@@ -1,3 +1,7 @@
+# v1.17.0 (2025-04-18)
+
+* **Feature**: This release adds support for the following capabilities: Chunking generative answer replies from Amazon Q in Connect. Integration support for the use of additional LLM models with Amazon Q in Connect.
+
 # v1.16.3 (2025-04-03)
 
 * No change notes available for this release.

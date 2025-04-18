@@ -1,8 +1,0 @@
-{
-    "id": "678cd427-d7c9-4361-a103-4625bd01f309",
-    "type": "feature",
-    "description": "Add new optional SupportCaseAllowed query parameter to the RequestServiceQuotaIncrease API",
-    "modules": [
-        "service/servicequotas"
-    ]
-}

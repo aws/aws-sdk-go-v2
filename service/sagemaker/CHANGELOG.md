@@ -1,3 +1,7 @@
+# v1.188.0 (2025-04-18)
+
+* **Feature**: This release adds a new Neuron driver option in InferenceAmiVersion parameter for ProductionVariant. Additionally, it adds support for fetching model lifecycle status in the ListModelPackages API. Users can now use this API to view the lifecycle stage of models that have been shared with them.
+
 # v1.187.0 (2025-04-03)
 
 * **Feature**: Adds support for i3en, m7i, r7i instance types for SageMaker Hyperpod

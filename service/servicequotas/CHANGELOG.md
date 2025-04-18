@@ -1,3 +1,7 @@
+# v1.27.0 (2025-04-18)
+
+* **Feature**: Add new optional SupportCaseAllowed query parameter to the RequestServiceQuotaIncrease API
+
 # v1.26.3 (2025-04-10)
 
 * No change notes available for this release.
