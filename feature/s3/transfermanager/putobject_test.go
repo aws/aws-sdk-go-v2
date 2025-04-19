@@ -553,6 +553,99 @@ func TestUploadZeroLenObject(t *testing.T) {
 	}
 }
 
+func TestProgressListener_SingleUpload_SeekableBody(t *testing.T) {
+	c, _, _ := s3testing.NewUploadLoggingClient(nil)
+
+	listener := &mockListener{}
+
+	var opts Options
+	opts.ProgressListeners.Register(listener)
+
+	mgr := New(c, opts)
+
+	body := "foobarbaz"
+	in := &PutObjectInput{
+		Bucket: "Bucket",
+		Key:    "Key",
+		Body:   strings.NewReader(body),
+	}
+	out, err := mgr.PutObject(context.Background(), in)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	objectSize := int64(len(body))
+	listener.expectComplete(t, in, out)
+	listener.expectStartTotalBytes(t, objectSize)
+	listener.expectCompleteTotalBytes(t, objectSize)
+	listener.expectByteTransfers(t, objectSize)
+}
+
+func TestProgressListener_SingleUpload_UnseekableBody(t *testing.T) {
+	c, _, _ := s3testing.NewUploadLoggingClient(nil)
+
+	listener := &mockListener{}
+
+	var opts Options
+	opts.ProgressListeners.Register(listener)
+
+	mgr := New(c, opts)
+
+	body := "foobarbaz"
+	in := &PutObjectInput{
+		Bucket: "Bucket",
+		Key:    "Key",
+		Body:   bytes.NewBuffer([]byte(body)),
+	}
+	out, err := mgr.PutObject(context.Background(), in)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	objectSize := int64(len(body))
+	listener.expectComplete(t, in, out)
+	listener.expectStartTotalBytes(t, objectSize)
+	listener.expectCompleteTotalBytes(t, objectSize)
+	listener.expectByteTransfers(t, objectSize)
+}
+
+func TestProgressListener_MultiUpload(t *testing.T) {
+	c, _, _ := s3testing.NewUploadLoggingClient(nil)
+
+	listener := &mockListener{}
+
+	var opts Options
+	opts.ProgressListeners.Register(listener)
+
+	mgr := New(c, opts)
+
+	in := &PutObjectInput{
+		Bucket: "Bucket",
+		Key:    "Key",
+		Body:   bytes.NewReader(buf40MB),
+	}
+	out, err := mgr.PutObject(context.Background(), in)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	objectSize := int64(len(buf40MB))
+	listener.expectComplete(t, in, out)
+	listener.expectStartTotalBytes(t, objectSize)
+	listener.expectCompleteTotalBytes(t, objectSize)
+
+	// 40MB / 8 (default part size) = 5 expected events
+	// we keep the input size a multiple of the part size so the intermediate
+	// byte counts are predictable
+	const eightMB = 1024 * 1024 * 8
+	listener.expectByteTransfers(t,
+		eightMB,
+		eightMB*2,
+		eightMB*3,
+		eightMB*4,
+		eightMB*5)
+}
+
 type testIncompleteReader struct {
 	Size int64
 	read int64
