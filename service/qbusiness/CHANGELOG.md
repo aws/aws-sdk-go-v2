@@ -1,3 +1,7 @@
+# v1.25.0 (2025-04-21)
+
+* **Feature**: The CheckDocumentAccess API for Amazon Q Business is a self-service debugging API that allows administrators to verify document access permissions and review Access Control List (ACL) configurations.
+
 # v1.24.0 (2025-04-10)
 
 * **Feature**: Adds functionality to enable/disable a new Q Business Hallucination Reduction feature. If enabled, Q Business will detect and attempt to remove Hallucinations from certain Chat requests.

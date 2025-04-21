@@ -1,3 +1,7 @@
+# v1.47.0 (2025-04-21)
+
+* **Feature**: Added support for Recurring Prefetch and Traffic Shaping on both Single and Recurring Prefetch. ListPrefetchSchedules now return single prefetchs by default and can be provided scheduleType of SINGLE, RECURRING, AND ALL.
+
 # v1.46.1 (2025-04-03)
 
 * No change notes available for this release.

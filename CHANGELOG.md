@@ -1,3 +1,17 @@
+# Release (2025-04-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.17.0](service/arczonalshift/CHANGELOG.md#v1170-2025-04-21)
+  * **Feature**: Updates to documentation and exception types for Zonal Autoshift
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.31.0](service/budgets/CHANGELOG.md#v1310-2025-04-21)
+  * **Feature**: Releasing the new Budget FilterExpression and Metrics fields to support more granular filtering options. These new fields are intended to replace CostFilters and CostTypes, which are deprecated as of 2025/18/04.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.37.4](service/firehose/CHANGELOG.md#v1374-2025-04-21)
+  * **Documentation**: Documentation update regarding the number of streams you can create using the CreateDeliveryStream API.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.47.0](service/mediatailor/CHANGELOG.md#v1470-2025-04-21)
+  * **Feature**: Added support for Recurring Prefetch and Traffic Shaping on both Single and Recurring Prefetch. ListPrefetchSchedules now return single prefetchs by default and can be provided scheduleType of SINGLE, RECURRING, AND ALL.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.25.0](service/qbusiness/CHANGELOG.md#v1250-2025-04-21)
+  * **Feature**: The CheckDocumentAccess API for Amazon Q Business is a self-service debugging API that allows administrators to verify document access permissions and review Access Control List (ACL) configurations.
+
 # Release (2025-04-18)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.37.4 (2025-04-21)
+
+* **Documentation**: Documentation update regarding the number of streams you can create using the CreateDeliveryStream API.
+
 # v1.37.3 (2025-04-10)
 
 * No change notes available for this release.

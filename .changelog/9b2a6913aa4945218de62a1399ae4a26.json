@@ -1,8 +1,0 @@
-{
-    "id": "9b2a6913-aa49-4521-8de6-2a1399ae4a26",
-    "type": "documentation",
-    "description": "Minor documentation update for the GetConfigurationPolicyAssociation example",
-    "modules": [
-        "service/securityhub"
-    ]
-}

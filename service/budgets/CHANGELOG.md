@@ -1,3 +1,7 @@
+# v1.31.0 (2025-04-21)
+
+* **Feature**: Releasing the new Budget FilterExpression and Metrics fields to support more granular filtering options. These new fields are intended to replace CostFilters and CostTypes, which are deprecated as of 2025/18/04.
+
 # v1.30.3 (2025-04-10)
 
 * No change notes available for this release.

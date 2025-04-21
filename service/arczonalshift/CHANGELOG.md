@@ -1,3 +1,7 @@
+# v1.17.0 (2025-04-21)
+
+* **Feature**: Updates to documentation and exception types for Zonal Autoshift
+
 # v1.16.2 (2025-04-10)
 
 * No change notes available for this release.

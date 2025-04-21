@@ -1,8 +1,0 @@
-{
-    "id": "9ffe3679-3ce6-4be6-aed0-93d3f95b844e",
-    "type": "feature",
-    "description": "Releasing the new Budget FilterExpression and Metrics fields to support more granular filtering options. These new fields are intended to replace CostFilters and CostTypes, which are deprecated as of 2025/18/04.",
-    "modules": [
-        "service/budgets"
-    ]
-}
