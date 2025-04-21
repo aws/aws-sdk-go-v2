@@ -52,6 +52,12 @@ type ListPrefetchSchedulesInput struct {
 	// prefetch schedules to get.
 	NextToken *string
 
+	// The type of prefetch schedules that you want to list. SINGLE indicates that you
+	// want to list the configured single prefetch schedules. RECURRING indicates that
+	// you want to list the configured recurring prefetch schedules. ALL indicates
+	// that you want to list all configured prefetch schedules.
+	ScheduleType types.ListPrefetchScheduleType
+
 	// An optional filtering parameter whereby MediaTailor filters the prefetch
 	// schedules to include only specific streams.
 	StreamId *string

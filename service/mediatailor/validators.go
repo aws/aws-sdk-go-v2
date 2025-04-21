@@ -1269,6 +1269,48 @@ func validatePrefetchRetrieval(v *types.PrefetchRetrieval) error {
 	}
 }
 
+func validateRecurringConsumption(v *types.RecurringConsumption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecurringConsumption"}
+	if v.AvailMatchingCriteria != nil {
+		if err := validate__listOfAvailMatchingCriteria(v.AvailMatchingCriteria); err != nil {
+			invalidParams.AddNested("AvailMatchingCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecurringPrefetchConfiguration(v *types.RecurringPrefetchConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecurringPrefetchConfiguration"}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.RecurringConsumption == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecurringConsumption"))
+	} else if v.RecurringConsumption != nil {
+		if err := validateRecurringConsumption(v.RecurringConsumption); err != nil {
+			invalidParams.AddNested("RecurringConsumption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RecurringRetrieval == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecurringRetrieval"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRequestOutputItem(v *types.RequestOutputItem) error {
 	if v == nil {
 		return nil
@@ -1449,9 +1491,7 @@ func validateOpCreatePrefetchScheduleInput(v *CreatePrefetchScheduleInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePrefetchScheduleInput"}
-	if v.Consumption == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Consumption"))
-	} else if v.Consumption != nil {
+	if v.Consumption != nil {
 		if err := validatePrefetchConsumption(v.Consumption); err != nil {
 			invalidParams.AddNested("Consumption", err.(smithy.InvalidParamsError))
 		}
@@ -1462,11 +1502,14 @@ func validateOpCreatePrefetchScheduleInput(v *CreatePrefetchScheduleInput) error
 	if v.PlaybackConfigurationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlaybackConfigurationName"))
 	}
-	if v.Retrieval == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Retrieval"))
-	} else if v.Retrieval != nil {
+	if v.Retrieval != nil {
 		if err := validatePrefetchRetrieval(v.Retrieval); err != nil {
 			invalidParams.AddNested("Retrieval", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RecurringPrefetchConfiguration != nil {
+		if err := validateRecurringPrefetchConfiguration(v.RecurringPrefetchConfiguration); err != nil {
+			invalidParams.AddNested("RecurringPrefetchConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -1706,9 +1706,23 @@ func awsAwsjson11_serializeDocumentBudget(v *types.Budget, value smithyjson.Valu
 		}
 	}
 
+	if v.FilterExpression != nil {
+		ok := object.Key("FilterExpression")
+		if err := awsAwsjson11_serializeDocumentExpression(v.FilterExpression, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LastUpdatedTime != nil {
 		ok := object.Key("LastUpdatedTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.LastUpdatedTime))
+	}
+
+	if v.Metrics != nil {
+		ok := object.Key("Metrics")
+		if err := awsAwsjson11_serializeDocumentMetrics(v.Metrics, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PlannedBudgetLimits != nil {
@@ -1747,6 +1761,32 @@ func awsAwsjson11_serializeDocumentCalculatedSpend(v *types.CalculatedSpend, val
 	if v.ForecastedSpend != nil {
 		ok := object.Key("ForecastedSpend")
 		if err := awsAwsjson11_serializeDocumentSpend(v.ForecastedSpend, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCostCategoryValues(v *types.CostCategoryValues, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.MatchOptions != nil {
+		ok := object.Key("MatchOptions")
+		if err := awsAwsjson11_serializeDocumentMatchOptions(v.MatchOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson11_serializeDocumentValues(v.Values, ok); err != nil {
 			return err
 		}
 	}
@@ -1871,6 +1911,94 @@ func awsAwsjson11_serializeDocumentDimensionValues(v []string, value smithyjson.
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentExpression(v *types.Expression, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.And != nil {
+		ok := object.Key("And")
+		if err := awsAwsjson11_serializeDocumentExpressions(v.And, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CostCategories != nil {
+		ok := object.Key("CostCategories")
+		if err := awsAwsjson11_serializeDocumentCostCategoryValues(v.CostCategories, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Dimensions != nil {
+		ok := object.Key("Dimensions")
+		if err := awsAwsjson11_serializeDocumentExpressionDimensionValues(v.Dimensions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Not != nil {
+		ok := object.Key("Not")
+		if err := awsAwsjson11_serializeDocumentExpression(v.Not, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Or != nil {
+		ok := object.Key("Or")
+		if err := awsAwsjson11_serializeDocumentExpressions(v.Or, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagValues(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExpressionDimensionValues(v *types.ExpressionDimensionValues, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Key) > 0 {
+		ok := object.Key("Key")
+		ok.String(string(v.Key))
+	}
+
+	if v.MatchOptions != nil {
+		ok := object.Key("MatchOptions")
+		if err := awsAwsjson11_serializeDocumentMatchOptions(v.MatchOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson11_serializeDocumentValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExpressions(v []types.Expression, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentExpression(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentGroups(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1939,6 +2067,28 @@ func awsAwsjson11_serializeDocumentInstanceIds(v []string, value smithyjson.Valu
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMatchOptions(v []types.MatchOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMetrics(v []types.Metric, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -2178,6 +2328,32 @@ func awsAwsjson11_serializeDocumentSubscribers(v []types.Subscriber, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTagValues(v *types.TagValues, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.MatchOptions != nil {
+		ok := object.Key("MatchOptions")
+		if err := awsAwsjson11_serializeDocumentMatchOptions(v.MatchOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson11_serializeDocumentValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTargetIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2207,6 +2383,17 @@ func awsAwsjson11_serializeDocumentTimePeriod(v *types.TimePeriod, value smithyj
 }
 
 func awsAwsjson11_serializeDocumentUsers(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentValues(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -2595,6 +2782,11 @@ func awsAwsjson11_serializeOpDocumentDescribeBudgetInput(v *DescribeBudgetInput,
 		ok.String(*v.BudgetName)
 	}
 
+	if v.ShowFilterExpression != nil {
+		ok := object.Key("ShowFilterExpression")
+		ok.Boolean(*v.ShowFilterExpression)
+	}
+
 	return nil
 }
 
@@ -2671,6 +2863,11 @@ func awsAwsjson11_serializeOpDocumentDescribeBudgetsInput(v *DescribeBudgetsInpu
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.ShowFilterExpression != nil {
+		ok := object.Key("ShowFilterExpression")
+		ok.Boolean(*v.ShowFilterExpression)
 	}
 
 	return nil

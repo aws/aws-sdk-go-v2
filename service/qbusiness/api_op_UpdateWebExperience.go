@@ -64,10 +64,9 @@ type UpdateWebExperienceInput struct {
 	IdentityProviderConfiguration types.IdentityProviderConfiguration
 
 	// Updates the website domain origins that are allowed to embed the Amazon Q
-	// Business web experience.
-	//
-	// The domain origin refers to the base URL for accessing a website including the
-	// protocol ( http/https ), the domain name, and the port number (if specified).
+	// Business web experience. The domain origin refers to the base URL for accessing
+	// a website including the protocol ( http/https ), the domain name, and the port
+	// number (if specified).
 	//
 	//   - Any values except null submitted as part of this update will replace all
 	//   previous values.

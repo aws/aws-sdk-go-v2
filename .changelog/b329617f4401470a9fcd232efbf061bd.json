@@ -1,0 +1,8 @@
+{
+    "id": "b329617f-4401-470a-9fcd-232efbf061bd",
+    "type": "documentation",
+    "description": "Documentation update regarding the number of streams you can create using the CreateDeliveryStream API.",
+    "modules": [
+        "service/firehose"
+    ]
+}

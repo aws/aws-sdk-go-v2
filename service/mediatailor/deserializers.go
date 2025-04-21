@@ -995,9 +995,23 @@ func awsRestjson1_deserializeOpDocumentCreatePrefetchScheduleOutput(v **CreatePr
 				sv.PlaybackConfigurationName = ptr.String(jtv)
 			}
 
+		case "RecurringPrefetchConfiguration":
+			if err := awsRestjson1_deserializeDocumentRecurringPrefetchConfiguration(&sv.RecurringPrefetchConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Retrieval":
 			if err := awsRestjson1_deserializeDocumentPrefetchRetrieval(&sv.Retrieval, value); err != nil {
 				return err
+			}
+
+		case "ScheduleType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrefetchScheduleType to be of type string, got %T instead", value)
+				}
+				sv.ScheduleType = types.PrefetchScheduleType(jtv)
 			}
 
 		case "StreamId":
@@ -4318,9 +4332,23 @@ func awsRestjson1_deserializeOpDocumentGetPrefetchScheduleOutput(v **GetPrefetch
 				sv.PlaybackConfigurationName = ptr.String(jtv)
 			}
 
+		case "RecurringPrefetchConfiguration":
+			if err := awsRestjson1_deserializeDocumentRecurringPrefetchConfiguration(&sv.RecurringPrefetchConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Retrieval":
 			if err := awsRestjson1_deserializeDocumentPrefetchRetrieval(&sv.Retrieval, value); err != nil {
 				return err
+			}
+
+		case "ScheduleType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrefetchScheduleType to be of type string, got %T instead", value)
+				}
+				sv.ScheduleType = types.PrefetchScheduleType(jtv)
 			}
 
 		case "StreamId":
@@ -10445,6 +10473,20 @@ func awsRestjson1_deserializeDocumentPrefetchRetrieval(v **types.PrefetchRetriev
 				}
 			}
 
+		case "TrafficShapingRetrievalWindow":
+			if err := awsRestjson1_deserializeDocumentTrafficShapingRetrievalWindow(&sv.TrafficShapingRetrievalWindow, value); err != nil {
+				return err
+			}
+
+		case "TrafficShapingType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrafficShapingType to be of type string, got %T instead", value)
+				}
+				sv.TrafficShapingType = types.TrafficShapingType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -10508,9 +10550,23 @@ func awsRestjson1_deserializeDocumentPrefetchSchedule(v **types.PrefetchSchedule
 				sv.PlaybackConfigurationName = ptr.String(jtv)
 			}
 
+		case "RecurringPrefetchConfiguration":
+			if err := awsRestjson1_deserializeDocumentRecurringPrefetchConfiguration(&sv.RecurringPrefetchConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Retrieval":
 			if err := awsRestjson1_deserializeDocumentPrefetchRetrieval(&sv.Retrieval, value); err != nil {
 				return err
+			}
+
+		case "ScheduleType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrefetchScheduleType to be of type string, got %T instead", value)
+				}
+				sv.ScheduleType = types.PrefetchScheduleType(jtv)
 			}
 
 		case "StreamId":
@@ -10520,6 +10576,191 @@ func awsRestjson1_deserializeDocumentPrefetchSchedule(v **types.PrefetchSchedule
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.StreamId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRecurringConsumption(v **types.RecurringConsumption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecurringConsumption
+	if *v == nil {
+		sv = &types.RecurringConsumption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailMatchingCriteria":
+			if err := awsRestjson1_deserializeDocument__listOfAvailMatchingCriteria(&sv.AvailMatchingCriteria, value); err != nil {
+				return err
+			}
+
+		case "RetrievedAdExpirationSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RetrievedAdExpirationSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRecurringPrefetchConfiguration(v **types.RecurringPrefetchConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecurringPrefetchConfiguration
+	if *v == nil {
+		sv = &types.RecurringPrefetchConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected __timestampUnix to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "RecurringConsumption":
+			if err := awsRestjson1_deserializeDocumentRecurringConsumption(&sv.RecurringConsumption, value); err != nil {
+				return err
+			}
+
+		case "RecurringRetrieval":
+			if err := awsRestjson1_deserializeDocumentRecurringRetrieval(&sv.RecurringRetrieval, value); err != nil {
+				return err
+			}
+
+		case "StartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected __timestampUnix to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRecurringRetrieval(v **types.RecurringRetrieval, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecurringRetrieval
+	if *v == nil {
+		sv = &types.RecurringRetrieval{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DelayAfterAvailEndSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DelayAfterAvailEndSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "DynamicVariables":
+			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.DynamicVariables, value); err != nil {
+				return err
+			}
+
+		case "TrafficShapingRetrievalWindow":
+			if err := awsRestjson1_deserializeDocumentTrafficShapingRetrievalWindow(&sv.TrafficShapingRetrievalWindow, value); err != nil {
+				return err
+			}
+
+		case "TrafficShapingType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrafficShapingType to be of type string, got %T instead", value)
+				}
+				sv.TrafficShapingType = types.TrafficShapingType(jtv)
 			}
 
 		default:
@@ -11423,6 +11664,50 @@ func awsRestjson1_deserializeDocumentTimeSignalMessage(v **types.TimeSignalMessa
 		case "SegmentationDescriptors":
 			if err := awsRestjson1_deserializeDocumentSegmentationDescriptorList(&sv.SegmentationDescriptors, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTrafficShapingRetrievalWindow(v **types.TrafficShapingRetrievalWindow, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TrafficShapingRetrievalWindow
+	if *v == nil {
+		sv = &types.TrafficShapingRetrievalWindow{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RetrievalWindowDurationSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RetrievalWindowDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:

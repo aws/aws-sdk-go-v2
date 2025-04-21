@@ -871,8 +871,8 @@ type PlaybackConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains settings that determine how and when that
-// MediaTailor places prefetched ads into upcoming ad breaks.
+// For single prefetch, describes how and when that MediaTailor places prefetched
+// ads into upcoming ad breaks.
 type PrefetchConsumption struct {
 
 	// The time when MediaTailor no longer considers the prefetched ads for use in an
@@ -923,6 +923,14 @@ type PrefetchRetrieval struct {
 	// possible.
 	StartTime *time.Time
 
+	// Configuration for spreading ADS traffic across a set window instead of sending
+	// ADS requests for all sessions at the same time.
+	TrafficShapingRetrievalWindow *TrafficShapingRetrievalWindow
+
+	// Indicates if this configuration uses a retrieval window for traffic shaping and
+	// limiting the number of requests to the ADS at one time.
+	TrafficShapingType TrafficShapingType
+
 	noSmithyDocumentSerde
 }
 
@@ -938,14 +946,6 @@ type PrefetchSchedule struct {
 	// This member is required.
 	Arn *string
 
-	// Consumption settings determine how, and when, MediaTailor places the prefetched
-	// ads into ad breaks. Ad consumption occurs within a span of time that you define,
-	// called a consumption window. You can designate which ad breaks that MediaTailor
-	// fills with prefetch ads by setting avail matching criteria.
-	//
-	// This member is required.
-	Consumption *PrefetchConsumption
-
 	// The name of the prefetch schedule. The name must be unique among all prefetch
 	// schedules that are associated with the specified playback configuration.
 	//
@@ -957,15 +957,99 @@ type PrefetchSchedule struct {
 	// This member is required.
 	PlaybackConfigurationName *string
 
+	// Consumption settings determine how, and when, MediaTailor places the prefetched
+	// ads into ad breaks for single prefetch schedules. Ad consumption occurs within a
+	// span of time that you define, called a consumption window. You can designate
+	// which ad breaks that MediaTailor fills with prefetch ads by setting avail
+	// matching criteria.
+	Consumption *PrefetchConsumption
+
+	// The settings that determine how and when MediaTailor prefetches ads and inserts
+	// them into ad breaks.
+	RecurringPrefetchConfiguration *RecurringPrefetchConfiguration
+
 	// A complex type that contains settings for prefetch retrieval from the ad
 	// decision server (ADS).
-	//
-	// This member is required.
 	Retrieval *PrefetchRetrieval
+
+	// The frequency that MediaTailor creates prefetch schedules. SINGLE indicates
+	// that this schedule applies to one ad break. RECURRING indicates that
+	// MediaTailor automatically creates a schedule for each ad avail in a live event.
+	//
+	// For more information about the prefetch types and when you might use each, see [Prefetching ads in Elemental MediaTailor.]
+	//
+	// [Prefetching ads in Elemental MediaTailor.]: https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html
+	ScheduleType PrefetchScheduleType
 
 	// An optional stream identifier that you can specify in order to prefetch for
 	// multiple streams that use the same playback configuration.
 	StreamId *string
+
+	noSmithyDocumentSerde
+}
+
+// The settings that determine how and when MediaTailor places prefetched ads into
+// upcoming ad breaks for recurring prefetch scedules.
+type RecurringConsumption struct {
+
+	// The configuration for the dynamic variables that determine which ad breaks that
+	// MediaTailor inserts prefetched ads in.
+	AvailMatchingCriteria []AvailMatchingCriteria
+
+	// The number of seconds that an ad is available for insertion after it was
+	// prefetched.
+	RetrievedAdExpirationSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that defines how MediaTailor performs recurring prefetch.
+type RecurringPrefetchConfiguration struct {
+
+	// The end time for the window that MediaTailor prefetches and inserts ads in a
+	// live event.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The settings that determine how and when MediaTailor places prefetched ads into
+	// upcoming ad breaks for recurring prefetch scedules.
+	//
+	// This member is required.
+	RecurringConsumption *RecurringConsumption
+
+	// The configuration for prefetch ad retrieval from the ADS.
+	//
+	// This member is required.
+	RecurringRetrieval *RecurringRetrieval
+
+	// The start time for the window that MediaTailor prefetches and inserts ads in a
+	// live event.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// With recurring prefetch, MediaTailor automatically prefetches ads for every
+// avail that occurs during the retrieval window. The following configurations
+// describe the MediaTailor behavior when prefetching ads for a live event.
+type RecurringRetrieval struct {
+
+	// The number of seconds that MediaTailor waits after an ad avail before
+	// prefetching ads for the next avail. If not set, the default is 0 (no delay).
+	DelayAfterAvailEndSeconds *int32
+
+	// The dynamic variables to use for substitution during prefetch requests to the
+	// ADS.
+	DynamicVariables map[string]string
+
+	// Configuration for spreading ADS traffic across a set window instead of sending
+	// ADS requests for all sessions at the same time.
+	TrafficShapingRetrievalWindow *TrafficShapingRetrievalWindow
+
+	// Indicates if this configuration uses a retrieval window for traffic shaping and
+	// limiting the number of requests to the ADS at one time.
+	TrafficShapingType TrafficShapingType
 
 	noSmithyDocumentSerde
 }
@@ -1313,6 +1397,19 @@ type TimeSignalMessage struct {
 	// The configurations for the SCTE-35 segmentation_descriptor message(s) sent with
 	// the time_signal message.
 	SegmentationDescriptors []SegmentationDescriptor
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that tells Elemental MediaTailor how to spread out requests
+// to the ad decision server (ADS). Instead of sending ADS requests for all
+// sessions at the same time, MediaTailor spreads the requests across the amount of
+// time specified in the retrieval window.
+type TrafficShapingRetrievalWindow struct {
+
+	// The amount of time, in seconds, that MediaTailor spreads prefetch requests to
+	// the ADS.
+	RetrievalWindowDurationSeconds *int32
 
 	noSmithyDocumentSerde
 }

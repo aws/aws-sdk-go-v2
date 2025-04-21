@@ -4226,6 +4226,11 @@ func awsAwsjson11_deserializeDocumentBudget(v **types.Budget, value interface{})
 				return err
 			}
 
+		case "FilterExpression":
+			if err := awsAwsjson11_deserializeDocumentExpression(&sv.FilterExpression, value); err != nil {
+				return err
+			}
+
 		case "LastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4240,6 +4245,11 @@ func awsAwsjson11_deserializeDocumentBudget(v **types.Budget, value interface{})
 					return fmt.Errorf("expected GenericTimestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "Metrics":
+			if err := awsAwsjson11_deserializeDocumentMetrics(&sv.Metrics, value); err != nil {
+				return err
 			}
 
 		case "PlannedBudgetLimits":
@@ -4565,6 +4575,56 @@ func awsAwsjson11_deserializeDocumentCalculatedSpend(v **types.CalculatedSpend, 
 
 		case "ForecastedSpend":
 			if err := awsAwsjson11_deserializeDocumentSpend(&sv.ForecastedSpend, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCostCategoryValues(v **types.CostCategoryValues, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CostCategoryValues
+	if *v == nil {
+		sv = &types.CostCategoryValues{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryName to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "MatchOptions":
+			if err := awsAwsjson11_deserializeDocumentMatchOptions(&sv.MatchOptions, value); err != nil {
+				return err
+			}
+
+		case "Values":
+			if err := awsAwsjson11_deserializeDocumentValues(&sv.Values, value); err != nil {
 				return err
 			}
 
@@ -4943,6 +5003,151 @@ func awsAwsjson11_deserializeDocumentExpiredNextTokenException(v **types.Expired
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentExpression(v **types.Expression, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Expression
+	if *v == nil {
+		sv = &types.Expression{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "And":
+			if err := awsAwsjson11_deserializeDocumentExpressions(&sv.And, value); err != nil {
+				return err
+			}
+
+		case "CostCategories":
+			if err := awsAwsjson11_deserializeDocumentCostCategoryValues(&sv.CostCategories, value); err != nil {
+				return err
+			}
+
+		case "Dimensions":
+			if err := awsAwsjson11_deserializeDocumentExpressionDimensionValues(&sv.Dimensions, value); err != nil {
+				return err
+			}
+
+		case "Not":
+			if err := awsAwsjson11_deserializeDocumentExpression(&sv.Not, value); err != nil {
+				return err
+			}
+
+		case "Or":
+			if err := awsAwsjson11_deserializeDocumentExpressions(&sv.Or, value); err != nil {
+				return err
+			}
+
+		case "Tags":
+			if err := awsAwsjson11_deserializeDocumentTagValues(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentExpressionDimensionValues(v **types.ExpressionDimensionValues, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExpressionDimensionValues
+	if *v == nil {
+		sv = &types.ExpressionDimensionValues{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Dimension to be of type string, got %T instead", value)
+				}
+				sv.Key = types.Dimension(jtv)
+			}
+
+		case "MatchOptions":
+			if err := awsAwsjson11_deserializeDocumentMatchOptions(&sv.MatchOptions, value); err != nil {
+				return err
+			}
+
+		case "Values":
+			if err := awsAwsjson11_deserializeDocumentValues(&sv.Values, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentExpressions(v *[]types.Expression, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Expression
+	if *v == nil {
+		cv = []types.Expression{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Expression
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentExpression(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentGroups(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5244,6 +5449,78 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMatchOptions(v *[]types.MatchOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MatchOption
+	if *v == nil {
+		cv = []types.MatchOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MatchOption
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected MatchOption to be of type string, got %T instead", value)
+			}
+			col = types.MatchOption(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMetrics(v *[]types.Metric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Metric
+	if *v == nil {
+		cv = []types.Metric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Metric
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Metric to be of type string, got %T instead", value)
+			}
+			col = types.Metric(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -5887,6 +6164,56 @@ func awsAwsjson11_deserializeDocumentSubscribers(v *[]types.Subscriber, value in
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTagValues(v **types.TagValues, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TagValues
+	if *v == nil {
+		sv = &types.TagValues{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "MatchOptions":
+			if err := awsAwsjson11_deserializeDocumentMatchOptions(&sv.MatchOptions, value); err != nil {
+				return err
+			}
+
+		case "Values":
+			if err := awsAwsjson11_deserializeDocumentValues(&sv.Values, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTargetIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6052,6 +6379,42 @@ func awsAwsjson11_deserializeDocumentUsers(v *[]string, value interface{}) error
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected User to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentValues(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Value to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}

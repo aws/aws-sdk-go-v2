@@ -55,10 +55,11 @@ type GetPrefetchScheduleOutput struct {
 	// The Amazon Resource Name (ARN) of the prefetch schedule.
 	Arn *string
 
-	// Consumption settings determine how, and when, MediaTailor places the prefetched
-	// ads into ad breaks. Ad consumption occurs within a span of time that you define,
-	// called a consumption window. You can designate which ad breaks that MediaTailor
-	// fills with prefetch ads by setting avail matching criteria.
+	// The configuration settings for how and when MediaTailor consumes prefetched ads
+	// from the ad decision server for single prefetch schedules. Each consumption
+	// configuration contains an end time and an optional start time that define the
+	// consumption window. Prefetch schedules automatically expire no earlier than
+	// seven days after the end time.
 	Consumption *types.PrefetchConsumption
 
 	// The name of the prefetch schedule. The name must be unique among all prefetch
@@ -68,9 +69,18 @@ type GetPrefetchScheduleOutput struct {
 	// The name of the playback configuration to create the prefetch schedule for.
 	PlaybackConfigurationName *string
 
+	// The configuration that defines how and when MediaTailor performs ad prefetching
+	// in a live event.
+	RecurringPrefetchConfiguration *types.RecurringPrefetchConfiguration
+
 	// A complex type that contains settings for prefetch retrieval from the ad
 	// decision server (ADS).
 	Retrieval *types.PrefetchRetrieval
+
+	// The frequency that MediaTailor creates prefetch schedules. SINGLE indicates
+	// that this schedule applies to one ad break. RECURRING indicates that
+	// MediaTailor automatically creates a schedule for each ad avail in a live event.
+	ScheduleType types.PrefetchScheduleType
 
 	// An optional stream identifier that you can specify in order to prefetch for
 	// multiple streams that use the same playback configuration.

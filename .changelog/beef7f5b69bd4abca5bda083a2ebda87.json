@@ -1,0 +1,8 @@
+{
+    "id": "beef7f5b-69bd-4abc-a5bd-a083a2ebda87",
+    "type": "feature",
+    "description": "The CheckDocumentAccess API for Amazon Q Business is a self-service debugging API that allows administrators to verify document access permissions and review Access Control List (ACL) configurations.",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

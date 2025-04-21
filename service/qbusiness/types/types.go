@@ -370,6 +370,34 @@ type AppliedOrchestrationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a group associated with a given user in the access control system.
+type AssociatedGroup struct {
+
+	// The name of the group associated with the user. This is used to identify the
+	// group in access control decisions.
+	Name *string
+
+	// The type of the associated group. This indicates the scope of the group's
+	// applicability.
+	Type MembershipType
+
+	noSmithyDocumentSerde
+}
+
+// Represents an associated user in the access control system.
+type AssociatedUser struct {
+
+	// The unique identifier of the associated user. This is used to identify the user
+	// in access control decisions.
+	Id *string
+
+	// The type of the associated user. This indicates the scope of the user's
+	// association.
+	Type MembershipType
+
+	noSmithyDocumentSerde
+}
+
 // An attachment in an Amazon Q Business conversation.
 type Attachment struct {
 
@@ -1250,6 +1278,85 @@ type Document struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the Access Control List (ACL) for a document, containing both
+// allowlist and denylist conditions.
+type DocumentAcl struct {
+
+	// The allowlist conditions for the document. Users or groups matching these
+	// conditions are granted access to the document.
+	Allowlist *DocumentAclMembership
+
+	// The denylist conditions for the document. Users or groups matching these
+	// conditions are denied access to the document, overriding allowlist permissions.
+	DenyList *DocumentAclMembership
+
+	noSmithyDocumentSerde
+}
+
+// Represents a condition in the document's ACL, specifying access rules for users
+// and groups.
+type DocumentAclCondition struct {
+
+	// An array of group identifiers that this condition applies to. Groups listed
+	// here are subject to the access rule defined by this condition.
+	Groups []DocumentAclGroup
+
+	// The logical relation between members in the condition, determining how multiple
+	// user or group conditions are combined.
+	MemberRelation MemberRelation
+
+	// An array of user identifiers that this condition applies to. Users listed here
+	// are subject to the access rule defined by this condition.
+	Users []DocumentAclUser
+
+	noSmithyDocumentSerde
+}
+
+// Represents a group in the document's ACL, used to define access permissions for
+// multiple users collectively.
+type DocumentAclGroup struct {
+
+	// The name of the group in the document's ACL. This is used to identify the group
+	// when applying access rules.
+	Name *string
+
+	// The type of the group. This indicates the scope of the group's applicability in
+	// access control.
+	Type MembershipType
+
+	noSmithyDocumentSerde
+}
+
+// Represents membership rules in the document's ACL, defining how users or groups
+// are associated with access permissions.
+type DocumentAclMembership struct {
+
+	// An array of conditions that define the membership rules. Each condition
+	// specifies criteria for users or groups to be included in this membership.
+	Conditions []DocumentAclCondition
+
+	// The logical relation between members in the membership rule, determining how
+	// multiple conditions are combined.
+	MemberRelation MemberRelation
+
+	noSmithyDocumentSerde
+}
+
+// Represents a user in the document's ACL, used to define access permissions for
+// individual users.
+type DocumentAclUser struct {
+
+	// The unique identifier of the user in the document's ACL. This is used to
+	// identify the user when applying access rules.
+	Id *string
+
+	// The type of the user. This indicates the scope of the user's applicability in
+	// access control.
+	Type MembershipType
+
+	noSmithyDocumentSerde
+}
+
 // A document attribute or metadata field.
 type DocumentAttribute struct {
 
@@ -1764,10 +1871,10 @@ type HookConfiguration struct {
 	// date-time.
 	InvocationCondition *DocumentAttributeCondition
 
-	// The Amazon Resource Name (ARN) of a role with permission to run a Lambda
-	// function during ingestion. For more information, see [IAM roles for Custom Document Enrichment (CDE)].
+	// The Amazon Resource Name (ARN) of the Lambda function sduring ingestion. For
+	// more information, see [Using Lambda functions for Amazon Q Business document enrichment].
 	//
-	// [IAM roles for Custom Document Enrichment (CDE)]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html#cde-iam-role
+	// [Using Lambda functions for Amazon Q Business document enrichment]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/cde-lambda-operations.html
 	LambdaArn *string
 
 	// The Amazon Resource Name (ARN) of a role with permission to run

@@ -45,6 +45,12 @@ type DescribeBudgetInput struct {
 	// This member is required.
 	BudgetName *string
 
+	// Specifies whether the response includes the filter expression associated with
+	// the budget. By showing the filter expression, you can see detailed filtering
+	// logic applied to the budget, such as Amazon Web Services services or tags that
+	// are being tracked.
+	ShowFilterExpression *bool
+
 	noSmithyDocumentSerde
 }
 

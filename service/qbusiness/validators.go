@@ -130,6 +130,26 @@ func (m *validateOpChatSync) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCheckDocumentAccess struct {
+}
+
+func (*validateOpCheckDocumentAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCheckDocumentAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CheckDocumentAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCheckDocumentAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateApplication struct {
 }
 
@@ -1492,6 +1512,10 @@ func addOpChatValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpChatSyncValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpChatSync{}, middleware.After)
+}
+
+func addOpCheckDocumentAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCheckDocumentAccess{}, middleware.After)
 }
 
 func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -3635,6 +3659,30 @@ func validateOpChatSyncInput(v *ChatSyncInput) error {
 		if err := validateChatModeConfiguration(v.ChatModeConfiguration); err != nil {
 			invalidParams.AddNested("ChatModeConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCheckDocumentAccessInput(v *CheckDocumentAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CheckDocumentAccessInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if v.DocumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

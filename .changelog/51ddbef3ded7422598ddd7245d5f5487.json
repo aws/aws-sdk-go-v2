@@ -1,0 +1,8 @@
+{
+    "id": "51ddbef3-ded7-4225-98dd-d7245d5f5487",
+    "type": "feature",
+    "description": "Updates to documentation and exception types for Zonal Autoshift",
+    "modules": [
+        "service/arczonalshift"
+    ]
+}

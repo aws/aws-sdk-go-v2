@@ -163,6 +163,87 @@ func (ComparisonOperator) Values() []ComparisonOperator {
 	}
 }
 
+type Dimension string
+
+// Enum values for Dimension
+const (
+	DimensionAz                  Dimension = "AZ"
+	DimensionInstanceType        Dimension = "INSTANCE_TYPE"
+	DimensionLinkedAccount       Dimension = "LINKED_ACCOUNT"
+	DimensionLinkedAccountName   Dimension = "LINKED_ACCOUNT_NAME"
+	DimensionOperation           Dimension = "OPERATION"
+	DimensionPurchaseType        Dimension = "PURCHASE_TYPE"
+	DimensionRegion              Dimension = "REGION"
+	DimensionService             Dimension = "SERVICE"
+	DimensionServiceCode         Dimension = "SERVICE_CODE"
+	DimensionUsageType           Dimension = "USAGE_TYPE"
+	DimensionUsageTypeGroup      Dimension = "USAGE_TYPE_GROUP"
+	DimensionRecordType          Dimension = "RECORD_TYPE"
+	DimensionOperatingSystem     Dimension = "OPERATING_SYSTEM"
+	DimensionTenancy             Dimension = "TENANCY"
+	DimensionScope               Dimension = "SCOPE"
+	DimensionPlatform            Dimension = "PLATFORM"
+	DimensionSubscriptionId      Dimension = "SUBSCRIPTION_ID"
+	DimensionLegalEntityName     Dimension = "LEGAL_ENTITY_NAME"
+	DimensionInvoicingEntity     Dimension = "INVOICING_ENTITY"
+	DimensionDeploymentOption    Dimension = "DEPLOYMENT_OPTION"
+	DimensionDatabaseEngine      Dimension = "DATABASE_ENGINE"
+	DimensionCacheEngine         Dimension = "CACHE_ENGINE"
+	DimensionInstanceTypeFamily  Dimension = "INSTANCE_TYPE_FAMILY"
+	DimensionBillingEntity       Dimension = "BILLING_ENTITY"
+	DimensionReservationId       Dimension = "RESERVATION_ID"
+	DimensionResourceId          Dimension = "RESOURCE_ID"
+	DimensionRightsizingType     Dimension = "RIGHTSIZING_TYPE"
+	DimensionSavingsPlansType    Dimension = "SAVINGS_PLANS_TYPE"
+	DimensionSavingsPlanArn      Dimension = "SAVINGS_PLAN_ARN"
+	DimensionPaymentOption       Dimension = "PAYMENT_OPTION"
+	DimensionReservationModified Dimension = "RESERVATION_MODIFIED"
+	DimensionTagKey              Dimension = "TAG_KEY"
+	DimensionCostCategoryName    Dimension = "COST_CATEGORY_NAME"
+)
+
+// Values returns all known values for Dimension. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Dimension) Values() []Dimension {
+	return []Dimension{
+		"AZ",
+		"INSTANCE_TYPE",
+		"LINKED_ACCOUNT",
+		"LINKED_ACCOUNT_NAME",
+		"OPERATION",
+		"PURCHASE_TYPE",
+		"REGION",
+		"SERVICE",
+		"SERVICE_CODE",
+		"USAGE_TYPE",
+		"USAGE_TYPE_GROUP",
+		"RECORD_TYPE",
+		"OPERATING_SYSTEM",
+		"TENANCY",
+		"SCOPE",
+		"PLATFORM",
+		"SUBSCRIPTION_ID",
+		"LEGAL_ENTITY_NAME",
+		"INVOICING_ENTITY",
+		"DEPLOYMENT_OPTION",
+		"DATABASE_ENGINE",
+		"CACHE_ENGINE",
+		"INSTANCE_TYPE_FAMILY",
+		"BILLING_ENTITY",
+		"RESERVATION_ID",
+		"RESOURCE_ID",
+		"RIGHTSIZING_TYPE",
+		"SAVINGS_PLANS_TYPE",
+		"SAVINGS_PLAN_ARN",
+		"PAYMENT_OPTION",
+		"RESERVATION_MODIFIED",
+		"TAG_KEY",
+		"COST_CATEGORY_NAME",
+	}
+}
+
 type EventType string
 
 // Enum values for EventType
@@ -208,6 +289,68 @@ func (ExecutionType) Values() []ExecutionType {
 		"RETRY_BUDGET_ACTION",
 		"REVERSE_BUDGET_ACTION",
 		"RESET_BUDGET_ACTION",
+	}
+}
+
+type MatchOption string
+
+// Enum values for MatchOption
+const (
+	MatchOptionEquals             MatchOption = "EQUALS"
+	MatchOptionAbsent             MatchOption = "ABSENT"
+	MatchOptionStartsWith         MatchOption = "STARTS_WITH"
+	MatchOptionEndsWith           MatchOption = "ENDS_WITH"
+	MatchOptionContains           MatchOption = "CONTAINS"
+	MatchOptionGreaterThanOrEqual MatchOption = "GREATER_THAN_OR_EQUAL"
+	MatchOptionCaseSensitive      MatchOption = "CASE_SENSITIVE"
+	MatchOptionCaseInsensitive    MatchOption = "CASE_INSENSITIVE"
+)
+
+// Values returns all known values for MatchOption. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MatchOption) Values() []MatchOption {
+	return []MatchOption{
+		"EQUALS",
+		"ABSENT",
+		"STARTS_WITH",
+		"ENDS_WITH",
+		"CONTAINS",
+		"GREATER_THAN_OR_EQUAL",
+		"CASE_SENSITIVE",
+		"CASE_INSENSITIVE",
+	}
+}
+
+type Metric string
+
+// Enum values for Metric
+const (
+	MetricBlendedCost           Metric = "BlendedCost"
+	MetricUnblendedCost         Metric = "UnblendedCost"
+	MetricAmortizedCost         Metric = "AmortizedCost"
+	MetricNetUnblendedCost      Metric = "NetUnblendedCost"
+	MetricNetAmortizedCost      Metric = "NetAmortizedCost"
+	MetricUsageQuantity         Metric = "UsageQuantity"
+	MetricNormalizedUsageAmount Metric = "NormalizedUsageAmount"
+	MetricHours                 Metric = "Hours"
+)
+
+// Values returns all known values for Metric. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Metric) Values() []Metric {
+	return []Metric{
+		"BlendedCost",
+		"UnblendedCost",
+		"AmortizedCost",
+		"NetUnblendedCost",
+		"NetAmortizedCost",
+		"UsageQuantity",
+		"NormalizedUsageAmount",
+		"Hours",
 	}
 }
 

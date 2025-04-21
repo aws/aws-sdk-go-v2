@@ -66,8 +66,6 @@ type AutoshiftInResource struct {
 // Autoshifts are temporary. When the Availability Zone recovers, Amazon Web
 // Services ends the autoshift, and traffic for the resource is no longer directed
 // to the other Availability Zones in the Region.
-//
-// You can stop an autoshift for a resource by disabling zonal autoshift.
 type AutoshiftSummary struct {
 
 	// The Availability Zone (for example, use1-az1 ) that traffic is shifted away from

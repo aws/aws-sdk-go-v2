@@ -703,6 +703,11 @@ func validateBudget(v *types.Budget) error {
 			invalidParams.AddNested("AutoAdjustData", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FilterExpression != nil {
+		if err := validateExpression(v.FilterExpression); err != nil {
+			invalidParams.AddNested("FilterExpression", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -752,6 +757,73 @@ func validateDefinition(v *types.Definition) error {
 	if v.SsmActionDefinition != nil {
 		if err := validateSsmActionDefinition(v.SsmActionDefinition); err != nil {
 			invalidParams.AddNested("SsmActionDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExpression(v *types.Expression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Expression"}
+	if v.Or != nil {
+		if err := validateExpressions(v.Or); err != nil {
+			invalidParams.AddNested("Or", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.And != nil {
+		if err := validateExpressions(v.And); err != nil {
+			invalidParams.AddNested("And", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Not != nil {
+		if err := validateExpression(v.Not); err != nil {
+			invalidParams.AddNested("Not", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Dimensions != nil {
+		if err := validateExpressionDimensionValues(v.Dimensions); err != nil {
+			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExpressionDimensionValues(v *types.ExpressionDimensionValues) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExpressionDimensionValues"}
+	if len(v.Key) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExpressions(v []types.Expression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Expressions"}
+	for i := range v {
+		if err := validateExpression(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

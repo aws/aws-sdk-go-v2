@@ -13,7 +13,7 @@ import (
 
 // Creates a Firehose stream.
 //
-// By default, you can create up to 50 Firehose streams per Amazon Web Services
+// By default, you can create up to 5,000 Firehose streams per Amazon Web Services
 // Region.
 //
 // This is an asynchronous operation that immediately returns. The initial status

@@ -236,6 +236,27 @@ func (InsertionMode) Values() []InsertionMode {
 	}
 }
 
+type ListPrefetchScheduleType string
+
+// Enum values for ListPrefetchScheduleType
+const (
+	ListPrefetchScheduleTypeSingle    ListPrefetchScheduleType = "SINGLE"
+	ListPrefetchScheduleTypeRecurring ListPrefetchScheduleType = "RECURRING"
+	ListPrefetchScheduleTypeAll       ListPrefetchScheduleType = "ALL"
+)
+
+// Values returns all known values for ListPrefetchScheduleType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListPrefetchScheduleType) Values() []ListPrefetchScheduleType {
+	return []ListPrefetchScheduleType{
+		"SINGLE",
+		"RECURRING",
+		"ALL",
+	}
+}
+
 type LoggingStrategy string
 
 // Enum values for LoggingStrategy
@@ -447,6 +468,25 @@ func (PlaybackMode) Values() []PlaybackMode {
 	}
 }
 
+type PrefetchScheduleType string
+
+// Enum values for PrefetchScheduleType
+const (
+	PrefetchScheduleTypeSingle    PrefetchScheduleType = "SINGLE"
+	PrefetchScheduleTypeRecurring PrefetchScheduleType = "RECURRING"
+)
+
+// Values returns all known values for PrefetchScheduleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrefetchScheduleType) Values() []PrefetchScheduleType {
+	return []PrefetchScheduleType{
+		"SINGLE",
+		"RECURRING",
+	}
+}
+
 type RelativePosition string
 
 // Enum values for RelativePosition
@@ -523,6 +563,23 @@ func (Tier) Values() []Tier {
 	return []Tier{
 		"BASIC",
 		"STANDARD",
+	}
+}
+
+type TrafficShapingType string
+
+// Enum values for TrafficShapingType
+const (
+	TrafficShapingTypeRetrievalWindow TrafficShapingType = "RETRIEVAL_WINDOW"
+)
+
+// Values returns all known values for TrafficShapingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrafficShapingType) Values() []TrafficShapingType {
+	return []TrafficShapingType{
+		"RETRIEVAL_WINDOW",
 	}
 }
 

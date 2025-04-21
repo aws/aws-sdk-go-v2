@@ -48,6 +48,12 @@ type DescribeBudgetsInput struct {
 	// of results that you want to retrieve.
 	NextToken *string
 
+	// Specifies whether the response includes the filter expression associated with
+	// the budgets. By showing the filter expression, you can see detailed filtering
+	// logic applied to the budgets, such as Amazon Web Services services or tags that
+	// are being tracked.
+	ShowFilterExpression *bool
+
 	noSmithyDocumentSerde
 }
 

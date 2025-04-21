@@ -559,11 +559,23 @@ func awsRestjson1_serializeOpDocumentCreatePrefetchScheduleInput(v *CreatePrefet
 		}
 	}
 
+	if v.RecurringPrefetchConfiguration != nil {
+		ok := object.Key("RecurringPrefetchConfiguration")
+		if err := awsRestjson1_serializeDocumentRecurringPrefetchConfiguration(v.RecurringPrefetchConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Retrieval != nil {
 		ok := object.Key("Retrieval")
 		if err := awsRestjson1_serializeDocumentPrefetchRetrieval(v.Retrieval, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ScheduleType) > 0 {
+		ok := object.Key("ScheduleType")
+		ok.String(string(v.ScheduleType))
 	}
 
 	if v.StreamId != nil {
@@ -2628,6 +2640,11 @@ func awsRestjson1_serializeOpDocumentListPrefetchSchedulesInput(v *ListPrefetchS
 		ok.String(*v.NextToken)
 	}
 
+	if len(v.ScheduleType) > 0 {
+		ok := object.Key("ScheduleType")
+		ok.String(string(v.ScheduleType))
+	}
+
 	if v.StreamId != nil {
 		ok := object.Key("StreamId")
 		ok.String(*v.StreamId)
@@ -4677,6 +4694,99 @@ func awsRestjson1_serializeDocumentPrefetchRetrieval(v *types.PrefetchRetrieval,
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
 	}
 
+	if v.TrafficShapingRetrievalWindow != nil {
+		ok := object.Key("TrafficShapingRetrievalWindow")
+		if err := awsRestjson1_serializeDocumentTrafficShapingRetrievalWindow(v.TrafficShapingRetrievalWindow, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TrafficShapingType) > 0 {
+		ok := object.Key("TrafficShapingType")
+		ok.String(string(v.TrafficShapingType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecurringConsumption(v *types.RecurringConsumption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AvailMatchingCriteria != nil {
+		ok := object.Key("AvailMatchingCriteria")
+		if err := awsRestjson1_serializeDocument__listOfAvailMatchingCriteria(v.AvailMatchingCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RetrievedAdExpirationSeconds != nil {
+		ok := object.Key("RetrievedAdExpirationSeconds")
+		ok.Integer(*v.RetrievedAdExpirationSeconds)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecurringPrefetchConfiguration(v *types.RecurringPrefetchConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
+	}
+
+	if v.RecurringConsumption != nil {
+		ok := object.Key("RecurringConsumption")
+		if err := awsRestjson1_serializeDocumentRecurringConsumption(v.RecurringConsumption, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RecurringRetrieval != nil {
+		ok := object.Key("RecurringRetrieval")
+		if err := awsRestjson1_serializeDocumentRecurringRetrieval(v.RecurringRetrieval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecurringRetrieval(v *types.RecurringRetrieval, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DelayAfterAvailEndSeconds != nil {
+		ok := object.Key("DelayAfterAvailEndSeconds")
+		ok.Integer(*v.DelayAfterAvailEndSeconds)
+	}
+
+	if v.DynamicVariables != nil {
+		ok := object.Key("DynamicVariables")
+		if err := awsRestjson1_serializeDocument__mapOf__string(v.DynamicVariables, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TrafficShapingRetrievalWindow != nil {
+		ok := object.Key("TrafficShapingRetrievalWindow")
+		if err := awsRestjson1_serializeDocumentTrafficShapingRetrievalWindow(v.TrafficShapingRetrievalWindow, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TrafficShapingType) > 0 {
+		ok := object.Key("TrafficShapingType")
+		ok.String(string(v.TrafficShapingType))
+	}
+
 	return nil
 }
 
@@ -4909,6 +5019,18 @@ func awsRestjson1_serializeDocumentTimeSignalMessage(v *types.TimeSignalMessage,
 		if err := awsRestjson1_serializeDocumentSegmentationDescriptorList(v.SegmentationDescriptors, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTrafficShapingRetrievalWindow(v *types.TrafficShapingRetrievalWindow, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RetrievalWindowDurationSeconds != nil {
+		ok := object.Key("RetrievalWindowDurationSeconds")
+		ok.Integer(*v.RetrievalWindowDurationSeconds)
 	}
 
 	return nil

@@ -201,16 +201,28 @@ type Budget struct {
 	//   - Amazon ElastiCache
 	//
 	//   - Amazon OpenSearch Service
+	//
+	// Deprecated: CostFilters lack support for newer dimensions and filtering
+	// options. Please consider using the new 'FilterExpression' field.
 	CostFilters map[string][]string
 
 	// The types of costs that are included in this COST budget.
 	//
 	// USAGE , RI_UTILIZATION , RI_COVERAGE , SAVINGS_PLANS_UTILIZATION , and
 	// SAVINGS_PLANS_COVERAGE budgets do not have CostTypes .
+	//
+	// Deprecated: CostTypes lack support for newer record type dimensions and
+	// filtering options. Please consider using the new 'Metrics' field.
 	CostTypes *CostTypes
+
+	// The filtering dimensions for the budget and their corresponding values.
+	FilterExpression *Expression
 
 	// The last time that you updated this budget.
 	LastUpdatedTime *time.Time
+
+	// The definition for how the budget data is aggregated.
+	Metrics []Metric
 
 	// A map containing multiple BudgetLimit , including current or future limits.
 	//
@@ -244,7 +256,7 @@ type Budget struct {
 	// contain BudgetLimit . They don't contain PlannedBudgetLimits .
 	PlannedBudgetLimits map[string]Spend
 
-	// The period of time that's covered by a budget. You setthe start date and end
+	// The period of time that's covered by a budget. You set the start date and end
 	// date. The start date must come before the end date. The end date must come
 	// before 06/15/87 00:00 UTC .
 	//
@@ -346,6 +358,21 @@ type CalculatedSpend struct {
 	noSmithyDocumentSerde
 }
 
+// The cost category values used for filtering the costs.
+type CostCategoryValues struct {
+
+	// The unique name of the cost category.
+	Key *string
+
+	// The match options that you can use to filter your results.
+	MatchOptions []MatchOption
+
+	// The specific value of the cost category.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // The types of cost that are included in a COST budget, such as tax and
 // subscriptions.
 //
@@ -422,6 +449,51 @@ type Definition struct {
 
 	// The Amazon Web Services Systems Manager (SSM) action definition details.
 	SsmActionDefinition *SsmActionDefinition
+
+	noSmithyDocumentSerde
+}
+
+// Use Expression to filter in various Budgets APIs.
+type Expression struct {
+
+	// Return results that match both Dimension objects.
+	And []Expression
+
+	// The filter that's based on CostCategoryValues.
+	CostCategories *CostCategoryValues
+
+	// The specific Dimension to use for Expression.
+	Dimensions *ExpressionDimensionValues
+
+	// Return results that don't match a Dimension object.
+	Not *Expression
+
+	// Return results that match either Dimension object.
+	Or []Expression
+
+	// The specific Tag to use for Expression.
+	Tags *TagValues
+
+	noSmithyDocumentSerde
+}
+
+// Contains the specifications for the filters to use for your request.
+type ExpressionDimensionValues struct {
+
+	// The name of the dimension that you want to filter on.
+	//
+	// This member is required.
+	Key Dimension
+
+	// The metadata values you can specify to filter upon, so that the results all
+	// match at least one of the specified values.
+	//
+	// This member is required.
+	Values []string
+
+	// The match options that you can use to filter your results. You can specify only
+	// one of these values in the array.
+	MatchOptions []MatchOption
 
 	noSmithyDocumentSerde
 }
@@ -660,6 +732,21 @@ type Subscriber struct {
 	//
 	// This member is required.
 	SubscriptionType SubscriptionType
+
+	noSmithyDocumentSerde
+}
+
+// The values that are available for a tag.
+type TagValues struct {
+
+	// The key for the tag.
+	Key *string
+
+	// The match options that you can use to filter your results.
+	MatchOptions []MatchOption
+
+	// The specific value of the tag.
+	Values []string
 
 	noSmithyDocumentSerde
 }

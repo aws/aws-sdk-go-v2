@@ -34,14 +34,6 @@ func (c *Client) CreatePrefetchSchedule(ctx context.Context, params *CreatePrefe
 
 type CreatePrefetchScheduleInput struct {
 
-	// The configuration settings for MediaTailor's consumption of the prefetched ads
-	// from the ad decision server. Each consumption configuration contains an end time
-	// and an optional start time that define the consumption window. Prefetch
-	// schedules automatically expire no earlier than seven days after the end time.
-	//
-	// This member is required.
-	Consumption *types.PrefetchConsumption
-
 	// The name to assign to the schedule request.
 	//
 	// This member is required.
@@ -52,12 +44,30 @@ type CreatePrefetchScheduleInput struct {
 	// This member is required.
 	PlaybackConfigurationName *string
 
+	// The configuration settings for how and when MediaTailor consumes prefetched ads
+	// from the ad decision server for single prefetch schedules. Each consumption
+	// configuration contains an end time and an optional start time that define the
+	// consumption window. Prefetch schedules automatically expire no earlier than
+	// seven days after the end time.
+	Consumption *types.PrefetchConsumption
+
+	// The configuration that defines how and when MediaTailor performs ad prefetching
+	// in a live event.
+	RecurringPrefetchConfiguration *types.RecurringPrefetchConfiguration
+
 	// The configuration settings for retrieval of prefetched ads from the ad decision
 	// server. Only one set of prefetched ads will be retrieved and subsequently
 	// consumed for each ad break.
-	//
-	// This member is required.
 	Retrieval *types.PrefetchRetrieval
+
+	// The frequency that MediaTailor creates prefetch schedules. SINGLE indicates
+	// that this schedule applies to one ad break. RECURRING indicates that
+	// MediaTailor automatically creates a schedule for each ad avail in a live event.
+	//
+	// For more information about the prefetch types and when you might use each, see [Prefetching ads in Elemental MediaTailor.]
+	//
+	// [Prefetching ads in Elemental MediaTailor.]: https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html
+	ScheduleType types.PrefetchScheduleType
 
 	// An optional stream identifier that MediaTailor uses to prefetch ads for
 	// multiple streams that use the same playback configuration. If StreamId is
@@ -74,10 +84,11 @@ type CreatePrefetchScheduleOutput struct {
 	// The ARN to assign to the prefetch schedule.
 	Arn *string
 
-	// The configuration settings for MediaTailor's consumption of the prefetched ads
-	// from the ad decision server. Each consumption configuration contains an end time
-	// and an optional start time that define the consumption window. Prefetch
-	// schedules automatically expire no earlier than seven days after the end time.
+	// The configuration settings for how and when MediaTailor consumes prefetched ads
+	// from the ad decision server for single prefetch schedules. Each consumption
+	// configuration contains an end time and an optional start time that define the
+	// consumption window. Prefetch schedules automatically expire no earlier than
+	// seven days after the end time.
 	Consumption *types.PrefetchConsumption
 
 	// The name to assign to the prefetch schedule.
@@ -86,10 +97,18 @@ type CreatePrefetchScheduleOutput struct {
 	// The name to assign to the playback configuration.
 	PlaybackConfigurationName *string
 
+	// The configuration that defines how MediaTailor performs recurring prefetch.
+	RecurringPrefetchConfiguration *types.RecurringPrefetchConfiguration
+
 	// The configuration settings for retrieval of prefetched ads from the ad decision
 	// server. Only one set of prefetched ads will be retrieved and subsequently
 	// consumed for each ad break.
 	Retrieval *types.PrefetchRetrieval
+
+	// The frequency that MediaTailor creates prefetch schedules. SINGLE indicates
+	// that this schedule applies to one ad break. RECURRING indicates that
+	// MediaTailor automatically creates a schedule for each ad avail in a live event.
+	ScheduleType types.PrefetchScheduleType
 
 	// An optional stream identifier that MediaTailor uses to prefetch ads for
 	// multiple streams that use the same playback configuration. If StreamId is

@@ -134,6 +134,18 @@ func TestCheckSnapshot_ChatSync(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CheckDocumentAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CheckDocumentAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CheckDocumentAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateApplication(context.Background(), nil, func(o *Options) {
@@ -1026,6 +1038,18 @@ func TestUpdateSnapshot_ChatSync(t *testing.T) {
 	_, err := svc.ChatSync(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ChatSync")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CheckDocumentAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CheckDocumentAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CheckDocumentAccess")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

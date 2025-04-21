@@ -1,0 +1,8 @@
+{
+    "id": "05300677-f568-479a-8fbc-ce4b31ecb789",
+    "type": "feature",
+    "description": "Added support for Recurring Prefetch and Traffic Shaping on both Single and Recurring Prefetch. ListPrefetchSchedules now return single prefetchs by default and can be provided scheduleType of SINGLE, RECURRING, AND ALL.",
+    "modules": [
+        "service/mediatailor"
+    ]
+}

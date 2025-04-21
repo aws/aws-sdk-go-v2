@@ -15,6 +15,7 @@
         "api_op_CancelSubscription.go",
         "api_op_Chat.go",
         "api_op_ChatSync.go",
+        "api_op_CheckDocumentAccess.go",
         "api_op_CreateApplication.go",
         "api_op_CreateDataAccessor.go",
         "api_op_CreateDataSource.go",

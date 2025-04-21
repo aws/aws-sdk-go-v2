@@ -186,6 +186,7 @@ const (
 	ValidationExceptionReasonInvalidConditionType          ValidationExceptionReason = "InvalidConditionType"
 	ValidationExceptionReasonInvalidPracticeBlocker        ValidationExceptionReason = "InvalidPracticeBlocker"
 	ValidationExceptionReasonFisExperimentUpdateNotAllowed ValidationExceptionReason = "FISExperimentUpdateNotAllowed"
+	ValidationExceptionReasonAutoshiftUpdateNotAllowed     ValidationExceptionReason = "AutoshiftUpdateNotAllowed"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -205,6 +206,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"InvalidConditionType",
 		"InvalidPracticeBlocker",
 		"FISExperimentUpdateNotAllowed",
+		"AutoshiftUpdateNotAllowed",
 	}
 }
 
