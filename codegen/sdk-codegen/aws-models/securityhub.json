@@ -26108,7 +26108,7 @@
                             "AssociationType": "INHERITED",
                             "UpdatedAt": "2023-01-11T06:17:17.154Z",
                             "AssociationStatus": "FAILED",
-                            "AssociationStatusMessage": "Configuration Policy a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 couldn’t be applied to account 111122223333 in us-east-1 Region. Retry your request."
+                            "AssociationStatusMessage": "Configuration Policy a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 couldn't be applied to account 111122223333 in us-east-1 Region. Retry your request."
                         }
                     }
                 ],

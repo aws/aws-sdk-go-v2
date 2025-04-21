@@ -436,7 +436,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings for customizing what events are included in logs for interactions with the ad decision server (ADS).</p>\n         <p>For more information about ADS logs, inlcuding descriptions of the event types, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/ads-log-format.html\">MediaTailor ADS logs description and event types</a>\n        in Elemental MediaTailor User Guide.</p>"
+                "smithy.api#documentation": "<p>Settings for customizing what events are included in logs for interactions with the ad decision server (ADS).</p>\n         <p>For more information about ADS logs, inlcuding descriptions of the event types, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/ads-log-format.html\">MediaTailor ADS logs description and event types</a>\n            in Elemental MediaTailor User Guide.</p>"
             }
         },
         "com.amazonaws.mediatailor#AdsInteractionPublishOptInEventType": {
@@ -1382,8 +1382,7 @@
                 "Consumption": {
                     "target": "com.amazonaws.mediatailor#PrefetchConsumption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for MediaTailor's <i>consumption</i> of the prefetched ads from the ad decision server. Each consumption configuration contains an end time and an optional start time that define the <i>consumption window</i>. Prefetch schedules automatically expire no earlier than seven days after the end time.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The configuration settings for how and when MediaTailor consumes prefetched ads from the ad decision server for single prefetch schedules. Each consumption configuration contains an end time and an optional start time that define the <i>consumption window</i>. Prefetch schedules automatically expire no earlier than seven days after the end time.</p>"
                     }
                 },
                 "Name": {
@@ -1405,8 +1404,19 @@
                 "Retrieval": {
                     "target": "com.amazonaws.mediatailor#PrefetchRetrieval",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for retrieval of prefetched ads from the ad decision server. Only one set of prefetched ads will be retrieved and subsequently consumed for each ad break.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The configuration settings for retrieval of prefetched ads from the ad decision server. Only one set of prefetched ads will be retrieved and subsequently consumed for each ad break.</p>"
+                    }
+                },
+                "RecurringPrefetchConfiguration": {
+                    "target": "com.amazonaws.mediatailor#RecurringPrefetchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that defines how and when MediaTailor performs ad prefetching in a live event.</p>"
+                    }
+                },
+                "ScheduleType": {
+                    "target": "com.amazonaws.mediatailor#PrefetchScheduleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency that MediaTailor creates prefetch schedules. <code>SINGLE</code> indicates that this schedule applies to one ad break. <code>RECURRING</code> indicates that MediaTailor automatically creates a schedule for each ad avail in a live event.</p>\n         <p>For more information about the prefetch types and when you might use each, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html\">Prefetching ads in Elemental MediaTailor.</a>\n         </p>"
                     }
                 },
                 "StreamId": {
@@ -1429,7 +1439,7 @@
                 "Consumption": {
                     "target": "com.amazonaws.mediatailor#PrefetchConsumption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for MediaTailor's <i>consumption</i> of the prefetched ads from the ad decision server. Each consumption configuration contains an end time and an optional start time that define the <i>consumption window</i>. Prefetch schedules automatically expire no earlier than seven days after the end time.</p>"
+                        "smithy.api#documentation": "<p>The configuration settings for how and when MediaTailor consumes prefetched ads from the ad decision server for single prefetch schedules. Each consumption configuration contains an end time and an optional start time that define the <i>consumption window</i>. Prefetch schedules automatically expire no earlier than seven days after the end time.</p>"
                     }
                 },
                 "Name": {
@@ -1448,6 +1458,18 @@
                     "target": "com.amazonaws.mediatailor#PrefetchRetrieval",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration settings for retrieval of prefetched ads from the ad decision server. Only one set of prefetched ads will be retrieved and subsequently consumed for each ad break.</p>"
+                    }
+                },
+                "RecurringPrefetchConfiguration": {
+                    "target": "com.amazonaws.mediatailor#RecurringPrefetchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that defines how MediaTailor performs recurring prefetch. </p>"
+                    }
+                },
+                "ScheduleType": {
+                    "target": "com.amazonaws.mediatailor#PrefetchScheduleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency that MediaTailor creates prefetch schedules. <code>SINGLE</code> indicates that this schedule applies to one ad break. <code>RECURRING</code> indicates that MediaTailor automatically creates a schedule for each ad avail in a live event.</p>"
                     }
                 },
                 "StreamId": {
@@ -3105,7 +3127,7 @@
                 "Consumption": {
                     "target": "com.amazonaws.mediatailor#PrefetchConsumption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Consumption settings determine how, and when, MediaTailor places the prefetched ads into ad breaks. Ad consumption occurs within a span of time that you define, called a <i>consumption window</i>. You can designate which ad breaks that MediaTailor fills with prefetch ads by setting avail matching criteria.</p>"
+                        "smithy.api#documentation": "<p>The configuration settings for how and when MediaTailor consumes prefetched ads from the ad decision server for single prefetch schedules. Each consumption configuration contains an end time and an optional start time that define the <i>consumption window</i>. Prefetch schedules automatically expire no earlier than seven days after the end time.</p>"
                     }
                 },
                 "Name": {
@@ -3124,6 +3146,18 @@
                     "target": "com.amazonaws.mediatailor#PrefetchRetrieval",
                     "traits": {
                         "smithy.api#documentation": "<p>A complex type that contains settings for prefetch retrieval from the ad decision server (ADS).</p>"
+                    }
+                },
+                "ScheduleType": {
+                    "target": "com.amazonaws.mediatailor#PrefetchScheduleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency that MediaTailor creates prefetch schedules. <code>SINGLE</code> indicates that this schedule applies to one ad break. <code>RECURRING</code> indicates that MediaTailor automatically creates a schedule for each ad avail in a live event.</p>"
+                    }
+                },
+                "RecurringPrefetchConfiguration": {
+                    "target": "com.amazonaws.mediatailor#RecurringPrefetchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that defines how and when MediaTailor performs ad prefetching in a live event.</p>"
                     }
                 },
                 "StreamId": {
@@ -3519,6 +3553,29 @@
                 }
             }
         },
+        "com.amazonaws.mediatailor#ListPrefetchScheduleType": {
+            "type": "enum",
+            "members": {
+                "SINGLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE"
+                    }
+                },
+                "RECURRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECURRING"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediatailor#ListPrefetchSchedules": {
             "type": "operation",
             "input": {
@@ -3567,6 +3624,12 @@
                         "smithy.api#documentation": "<p>Retrieves the prefetch schedule(s) for a specific playback configuration.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "ScheduleType": {
+                    "target": "com.amazonaws.mediatailor#ListPrefetchScheduleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of prefetch schedules that you want to list. <code>SINGLE</code> indicates that you want to list the configured single prefetch schedules. <code>RECURRING</code> \n            indicates that you want to list the configured recurring prefetch schedules. <code>ALL</code> indicates that you want to list all configured prefetch schedules.</p>"
                     }
                 },
                 "StreamId": {
@@ -5262,7 +5325,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains settings that determine how and when that MediaTailor places prefetched ads into upcoming ad breaks.</p>"
+                "smithy.api#documentation": "<p>For single prefetch, describes how and when that MediaTailor places prefetched ads into upcoming ad breaks.</p>"
             }
         },
         "com.amazonaws.mediatailor#PrefetchRetrieval": {
@@ -5286,6 +5349,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time when prefetch retrievals can start for this break. Ad prefetching will be attempted for manifest requests that occur at or after this time. Defaults to the current time. If not specified, the prefetch retrieval starts as soon as possible.</p>"
                     }
+                },
+                "TrafficShapingType": {
+                    "target": "com.amazonaws.mediatailor#TrafficShapingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if this configuration uses a retrieval window for traffic shaping and limiting the number of requests to the ADS at one time.</p>"
+                    }
+                },
+                "TrafficShapingRetrievalWindow": {
+                    "target": "com.amazonaws.mediatailor#TrafficShapingRetrievalWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for spreading ADS traffic across a set window instead of sending ADS requests for all sessions at the same time.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5305,8 +5380,7 @@
                 "Consumption": {
                     "target": "com.amazonaws.mediatailor#PrefetchConsumption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Consumption settings determine how, and when, MediaTailor places the prefetched ads into ad breaks. Ad consumption occurs within a span of time that you define, called a <i>consumption window</i>. You can designate which ad breaks that MediaTailor fills with prefetch ads by setting avail matching criteria.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Consumption settings determine how, and when, MediaTailor places the prefetched ads into ad breaks for single prefetch schedules. Ad consumption occurs within a span of time that you define, called a <i>consumption window</i>. You can designate which ad breaks that MediaTailor fills with prefetch ads by setting avail matching criteria.</p>"
                     }
                 },
                 "Name": {
@@ -5326,8 +5400,19 @@
                 "Retrieval": {
                     "target": "com.amazonaws.mediatailor#PrefetchRetrieval",
                     "traits": {
-                        "smithy.api#documentation": "<p>A complex type that contains settings for prefetch retrieval from the ad decision server (ADS).</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A complex type that contains settings for prefetch retrieval from the ad decision server (ADS).</p>"
+                    }
+                },
+                "ScheduleType": {
+                    "target": "com.amazonaws.mediatailor#PrefetchScheduleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency that MediaTailor creates prefetch schedules. <code>SINGLE</code> indicates that this schedule applies to one ad break. <code>RECURRING</code> indicates that MediaTailor automatically creates a schedule for each ad avail in a live event.</p>\n         <p>For more information about the prefetch types and when you might use each, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html\">Prefetching ads in Elemental MediaTailor.</a>\n         </p>"
+                    }
+                },
+                "RecurringPrefetchConfiguration": {
+                    "target": "com.amazonaws.mediatailor#RecurringPrefetchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings that determine how and when MediaTailor prefetches ads and inserts them into ad breaks.</p>"
                     }
                 },
                 "StreamId": {
@@ -5373,6 +5458,23 @@
                     "template": "prefetchSchedule/{PlaybackConfigurationName}/{Name}"
                 },
                 "smithy.api#noReplace": {}
+            }
+        },
+        "com.amazonaws.mediatailor#PrefetchScheduleType": {
+            "type": "enum",
+            "members": {
+                "SINGLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE"
+                    }
+                },
+                "RECURRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECURRING"
+                    }
+                }
             }
         },
         "com.amazonaws.mediatailor#ProgramResource": {
@@ -5699,6 +5801,93 @@
                         "smithy.api#documentation": "<p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns, and what priority MediaTailor uses when inserting ads. </p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.mediatailor#RecurringConsumption": {
+            "type": "structure",
+            "members": {
+                "RetrievedAdExpirationSeconds": {
+                    "target": "com.amazonaws.mediatailor#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds that an ad is available for insertion after it was prefetched.</p>"
+                    }
+                },
+                "AvailMatchingCriteria": {
+                    "target": "com.amazonaws.mediatailor#__listOfAvailMatchingCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the dynamic variables that determine which ad breaks that MediaTailor inserts prefetched ads in.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings that determine how and when MediaTailor places prefetched ads into upcoming ad breaks for recurring prefetch scedules.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#RecurringPrefetchConfiguration": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.mediatailor#__timestampUnix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time for the window that MediaTailor prefetches and inserts ads in a live event. </p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.mediatailor#__timestampUnix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time for the window that MediaTailor prefetches and inserts ads in a live event. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecurringConsumption": {
+                    "target": "com.amazonaws.mediatailor#RecurringConsumption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings that determine how and when MediaTailor places prefetched ads into upcoming ad breaks for recurring prefetch scedules.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecurringRetrieval": {
+                    "target": "com.amazonaws.mediatailor#RecurringRetrieval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for prefetch ad retrieval from the ADS.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that defines how MediaTailor performs recurring prefetch. </p>"
+            }
+        },
+        "com.amazonaws.mediatailor#RecurringRetrieval": {
+            "type": "structure",
+            "members": {
+                "DynamicVariables": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dynamic variables to use for substitution during prefetch requests to the ADS.</p>"
+                    }
+                },
+                "DelayAfterAvailEndSeconds": {
+                    "target": "com.amazonaws.mediatailor#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds that MediaTailor waits after an ad avail before prefetching ads for the next avail. If not set, the default is 0 (no delay).</p>"
+                    }
+                },
+                "TrafficShapingType": {
+                    "target": "com.amazonaws.mediatailor#TrafficShapingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if this configuration uses a retrieval window for traffic shaping and limiting the number of requests to the ADS at one time.</p>"
+                    }
+                },
+                "TrafficShapingRetrievalWindow": {
+                    "target": "com.amazonaws.mediatailor#TrafficShapingRetrievalWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for spreading ADS traffic across a set window instead of sending ADS requests for all sessions at the same time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>With recurring prefetch, MediaTailor automatically prefetches ads for every avail that occurs during the retrieval window. The following\n        configurations describe the MediaTailor behavior when prefetching ads for a live event.</p>"
             }
         },
         "com.amazonaws.mediatailor#RelativePosition": {
@@ -6400,6 +6589,31 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The SCTE-35 <code>time_signal</code> message can be sent with one or more <code>segmentation_descriptor</code> messages. A <code>time_signal</code> message can be sent only if a single <code>segmentation_descriptor</code> message is sent.</p>\n         <p>The <code>time_signal</code> message contains only the <code>splice_time</code> field which is constructed using a given presentation timestamp. When sending a <code>time_signal</code> message, the <code>splice_command_type</code> field in the <code>splice_info_section</code> message is set to 6 (0x06).</p>\n         <p>See the <code>time_signal()</code> table of the 2022 SCTE-35 specification for more information.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#TrafficShapingRetrievalWindow": {
+            "type": "structure",
+            "members": {
+                "RetrievalWindowDurationSeconds": {
+                    "target": "com.amazonaws.mediatailor#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that MediaTailor spreads prefetch requests to the ADS. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that tells Elemental MediaTailor how to spread out requests to the ad decision server (ADS). Instead of sending ADS requests for all sessions at the same time, MediaTailor spreads the requests across the amount of time specified in the retrieval window.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#TrafficShapingType": {
+            "type": "enum",
+            "members": {
+                "RETRIEVAL_WINDOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETRIEVAL_WINDOW"
+                    }
+                }
             }
         },
         "com.amazonaws.mediatailor#Transition": {

@@ -177,7 +177,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an autoshift. Amazon Web Services starts an autoshift to temporarily move traffic for a resource \n\t\t\taway from an Availability Zone in an Amazon Web Services Region\n\t\t\twhen Amazon Web Services determines that there's an issue in the Availability Zone that could potentially affect customers.\n\t\t\tYou can configure zonal autoshift in ARC for managed resources in your Amazon Web Services account in a Region. \n\t\t\tSupported Amazon Web Services resources are automatically registered with ARC.</p>\n         <p>Autoshifts are temporary. When the Availability Zone recovers, Amazon Web Services ends the autoshift, and \n\t\t\ttraffic for the resource is no longer directed to the other Availability Zones in the Region.</p>\n         <p>You can stop an autoshift for a resource by disabling zonal autoshift.</p>"
+                "smithy.api#documentation": "<p>Information about an autoshift. Amazon Web Services starts an autoshift to temporarily move traffic for a resource \n\t\t\taway from an Availability Zone in an Amazon Web Services Region\n\t\t\twhen Amazon Web Services determines that there's an issue in the Availability Zone that could potentially affect customers.\n\t\t\tYou can configure zonal autoshift in ARC for managed resources in your Amazon Web Services account in a Region. \n\t\t\tSupported Amazon Web Services resources are automatically registered with ARC.</p>\n         <p>Autoshifts are temporary. When the Availability Zone recovers, Amazon Web Services ends the autoshift, and \n\t\t\ttraffic for the resource is no longer directed to the other Availability Zones in the Region.</p>"
             }
         },
         "com.amazonaws.arczonalshift#AutoshiftTriggerResource": {
@@ -1013,7 +1013,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all active and completed zonal shifts in Amazon Route 53 Application Recovery Controller in your Amazon Web Services account in this Amazon Web Services Region.\n   \t\t<code>ListZonalShifts</code> returns customer-initiated zonal shifts, as well as practice run zonal shifts that ARC started on \n   \t\tyour behalf for zonal autoshift.</p>\n         <p>For more information about listing\n   \t\tautoshifts, see <a href=\"https://docs.aws.amazon.com/arc-zonal-shift/latest/api/API_ListAutoshifts.html\">\"&gt;ListAutoshifts</a>.</p>",
+                "smithy.api#documentation": "<p>Lists all active and completed zonal shifts in Amazon Route 53 Application Recovery Controller in your Amazon Web Services account in this Amazon Web Services Region.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/zonalshifts",
@@ -2593,6 +2593,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FISExperimentUpdateNotAllowed"
+                    }
+                },
+                "AUTOSHIFT_UPDATE_NOT_ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoshiftUpdateNotAllowed"
                     }
                 }
             }

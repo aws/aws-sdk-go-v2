@@ -1649,12 +1649,20 @@
                 "CostFilters": {
                     "target": "com.amazonaws.budgets#CostFilters",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "since": "2025-04-18",
+                            "message": "CostFilters lack support for newer dimensions and filtering options. Please consider using the new 'FilterExpression' field."
+                        },
                         "smithy.api#documentation": "<p>The cost filters, such as <code>Region</code>, <code>Service</code>,\n\t\t\t\t<code>LinkedAccount</code>, <code>Tag</code>, or <code>CostCategory</code>, that are\n\t\t\tapplied to a budget.</p>\n         <p>Amazon Web Services Budgets supports the following services as a <code>Service</code> filter for RI budgets:</p>\n         <ul>\n            <li>\n               <p>Amazon EC2</p>\n            </li>\n            <li>\n               <p>Amazon Redshift</p>\n            </li>\n            <li>\n               <p>Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>Amazon ElastiCache</p>\n            </li>\n            <li>\n               <p>Amazon OpenSearch Service</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CostTypes": {
                     "target": "com.amazonaws.budgets#CostTypes",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "since": "2025-04-18",
+                            "message": "CostTypes lack support for newer record type dimensions and filtering options. Please consider using the new 'Metrics' field."
+                        },
                         "smithy.api#documentation": "<p>The types of costs that are included in this <code>COST</code> budget.</p>\n         <p>\n            <code>USAGE</code>, <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>,\n\t\t\t\t<code>SAVINGS_PLANS_UTILIZATION</code>, and <code>SAVINGS_PLANS_COVERAGE</code>\n\t\t\tbudgets do not have <code>CostTypes</code>.</p>"
                     }
                 },
@@ -1668,7 +1676,7 @@
                 "TimePeriod": {
                     "target": "com.amazonaws.budgets#TimePeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The period of time that's covered by a budget. You setthe start date and end date. The\n\t\t\tstart date must come before the end date. The end date must come before <code>06/15/87\n\t\t\t\t00:00 UTC</code>. </p>\n         <p>If you create your budget and don't specify a start date, Amazon Web Services defaults\n\t\t\tto the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For\n\t\t\texample, if you created your budget on January 24, 2018, chose <code>DAILY</code>, and\n\t\t\tdidn't set a start date, Amazon Web Services set your start date to <code>01/24/18 00:00\n\t\t\t\tUTC</code>. If you chose <code>MONTHLY</code>, Amazon Web Services set your start\n\t\t\tdate to <code>01/01/18 00:00 UTC</code>. If you didn't specify an end date, Amazon Web Services set your end date to <code>06/15/87 00:00 UTC</code>. The defaults are\n\t\t\tthe same for the Billing and Cost Management console and the API. </p>\n         <p>You can change either date with the <code>UpdateBudget</code> operation.</p>\n         <p>After the end date, Amazon Web Services deletes the budget and all the associated\n\t\t\tnotifications and subscribers.</p>"
+                        "smithy.api#documentation": "<p>The period of time that's covered by a budget. You set the start date and end date. The\n\t\t\tstart date must come before the end date. The end date must come before <code>06/15/87\n\t\t\t\t00:00 UTC</code>. </p>\n         <p>If you create your budget and don't specify a start date, Amazon Web Services defaults\n\t\t\tto the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For\n\t\t\texample, if you created your budget on January 24, 2018, chose <code>DAILY</code>, and\n\t\t\tdidn't set a start date, Amazon Web Services set your start date to <code>01/24/18 00:00\n\t\t\t\tUTC</code>. If you chose <code>MONTHLY</code>, Amazon Web Services set your start\n\t\t\tdate to <code>01/01/18 00:00 UTC</code>. If you didn't specify an end date, Amazon Web Services set your end date to <code>06/15/87 00:00 UTC</code>. The defaults are\n\t\t\tthe same for the Billing and Cost Management console and the API. </p>\n         <p>You can change either date with the <code>UpdateBudget</code> operation.</p>\n         <p>After the end date, Amazon Web Services deletes the budget and all the associated\n\t\t\tnotifications and subscribers.</p>"
                     }
                 },
                 "CalculatedSpend": {
@@ -1694,6 +1702,18 @@
                     "target": "com.amazonaws.budgets#AutoAdjustData",
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters that determine the budget amount for an auto-adjusting budget.</p>"
+                    }
+                },
+                "FilterExpression": {
+                    "target": "com.amazonaws.budgets#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filtering dimensions for the budget and their corresponding values.</p>"
+                    }
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.budgets#Metrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition for how the budget data is aggregated.</p>"
                     }
                 }
             },
@@ -1905,6 +1925,35 @@
                 "smithy.api#documentation": "<p> The comparison operator of a notification. Currently, the service supports the\n\t\t\tfollowing operators:</p>\n         <p>\n            <code>GREATER_THAN</code>, <code>LESS_THAN</code>, <code>EQUAL_TO</code>\n         </p>"
             }
         },
+        "com.amazonaws.budgets#CostCategoryName": {
+            "type": "string"
+        },
+        "com.amazonaws.budgets#CostCategoryValues": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.budgets#CostCategoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the cost category.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.budgets#Values",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific value of the cost category.</p>"
+                    }
+                },
+                "MatchOptions": {
+                    "target": "com.amazonaws.budgets#MatchOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match options that you can use to filter your results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The cost category values used for filtering the costs.</p>"
+            }
+        },
         "com.amazonaws.budgets#CostFilters": {
             "type": "map",
             "key": {
@@ -2023,7 +2072,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a budget and, if included, notifications and subscribers. </p>\n         <important>\n            <p>Only one of <code>BudgetLimit</code> or <code>PlannedBudgetLimits</code> can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples\">Examples</a> section. </p>\n         </important>"
+                "smithy.api#documentation": "<p>Creates a budget and, if included, notifications and subscribers. </p>\n         <important>\n            <p>Only one of <code>BudgetLimit</code> or <code>PlannedBudgetLimits</code> can be present in\n            the syntax at one time. Use the syntax that matches your use case. The Request Syntax\n            section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>,\n            see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples\">Examples</a> section.</p>\n            <p>Similarly, only one set of filter and metric selections can be present in the syntax\n            at one time. Either <code>FilterExpression</code> and <code>Metrics</code> or\n               <code>CostFilters</code> and <code>CostTypes</code>, not both or a different\n            combination. We recommend using <code>FilterExpression</code> and <code>Metrics</code>\n            as they provide more flexible and powerful filtering capabilities. The Request Syntax\n            section shows the <code>FilterExpression</code>/<code>Metrics</code> syntax.</p>\n         </important>"
             }
         },
         "com.amazonaws.budgets#CreateBudgetAction": {
@@ -2716,7 +2765,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a budget.</p>\n         <important>\n            <p>The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudget.html#API_DescribeBudget_Examples\">Examples</a> section. </p>\n         </important>"
+                "smithy.api#documentation": "<p>Describes a budget.</p>\n         <important>\n            <p>The Request Syntax section shows the <code>BudgetLimit</code> syntax. For\n               <code>PlannedBudgetLimits</code>, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudget.html#API_DescribeBudget_Examples\">Examples</a> section.</p>\n         </important>"
             }
         },
         "com.amazonaws.budgets#DescribeBudgetAction": {
@@ -3235,6 +3284,12 @@
                         "smithy.api#documentation": "<p>The name of the budget that you want a description of.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ShowFilterExpression": {
+                    "target": "com.amazonaws.budgets#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the response includes the filter expression associated with the\n         budget. By showing the filter expression, you can see detailed filtering logic applied to\n         the budget, such as Amazon Web Services services or tags that are being tracked.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3289,7 +3344,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the budgets that are associated with an account.</p>\n         <important>\n            <p>The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudgets.html#API_DescribeBudgets_Examples\">Examples</a> section. </p>\n         </important>",
+                "smithy.api#documentation": "<p>Lists the budgets that are associated with an account.</p>\n         <important>\n            <p>The Request Syntax section shows the <code>BudgetLimit</code> syntax. For\n               <code>PlannedBudgetLimits</code>, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudgets.html#API_DescribeBudgets_Examples\">Examples</a> section.</p>\n         </important>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3318,6 +3373,12 @@
                     "target": "com.amazonaws.budgets#GenericString",
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token that you include in your request to indicate the next set of results that you want to retrieve.</p>"
+                    }
+                },
+                "ShowFilterExpression": {
+                    "target": "com.amazonaws.budgets#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the response includes the filter expression associated with the\n         budgets. By showing the filter expression, you can see detailed filtering logic applied to\n         the budgets, such as Amazon Web Services services or tags that are being tracked.</p>"
                     }
                 }
             },
@@ -3548,6 +3609,209 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.budgets#Dimension": {
+            "type": "enum",
+            "members": {
+                "AZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ"
+                    }
+                },
+                "INSTANCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_TYPE"
+                    }
+                },
+                "LINKED_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINKED_ACCOUNT"
+                    }
+                },
+                "LINKED_ACCOUNT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINKED_ACCOUNT_NAME"
+                    }
+                },
+                "OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPERATION"
+                    }
+                },
+                "PURCHASE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PURCHASE_TYPE"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGION"
+                    }
+                },
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                },
+                "SERVICE_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_CODE"
+                    }
+                },
+                "USAGE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USAGE_TYPE"
+                    }
+                },
+                "USAGE_TYPE_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USAGE_TYPE_GROUP"
+                    }
+                },
+                "RECORD_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECORD_TYPE"
+                    }
+                },
+                "OPERATING_SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPERATING_SYSTEM"
+                    }
+                },
+                "TENANCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TENANCY"
+                    }
+                },
+                "SCOPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCOPE"
+                    }
+                },
+                "PLATFORM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLATFORM"
+                    }
+                },
+                "SUBSCRIPTION_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBSCRIPTION_ID"
+                    }
+                },
+                "LEGAL_ENTITY_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEGAL_ENTITY_NAME"
+                    }
+                },
+                "INVOICING_ENTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVOICING_ENTITY"
+                    }
+                },
+                "DEPLOYMENT_OPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPLOYMENT_OPTION"
+                    }
+                },
+                "DATABASE_ENGINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATABASE_ENGINE"
+                    }
+                },
+                "CACHE_ENGINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CACHE_ENGINE"
+                    }
+                },
+                "INSTANCE_TYPE_FAMILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_TYPE_FAMILY"
+                    }
+                },
+                "BILLING_ENTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BILLING_ENTITY"
+                    }
+                },
+                "RESERVATION_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESERVATION_ID"
+                    }
+                },
+                "RESOURCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_ID"
+                    }
+                },
+                "RIGHTSIZING_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RIGHTSIZING_TYPE"
+                    }
+                },
+                "SAVINGS_PLANS_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAVINGS_PLANS_TYPE"
+                    }
+                },
+                "SAVINGS_PLAN_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAVINGS_PLAN_ARN"
+                    }
+                },
+                "PAYMENT_OPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAYMENT_OPTION"
+                    }
+                },
+                "RESERVATION_MODIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESERVATION_MODIFIED"
+                    }
+                },
+                "TAG_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAG_KEY"
+                    }
+                },
+                "COST_CATEGORY_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COST_CATEGORY_NAME"
+                    }
+                }
+            }
+        },
         "com.amazonaws.budgets#DimensionValue": {
             "type": "string",
             "traits": {
@@ -3752,6 +4016,84 @@
                 "smithy.api#documentation": "<p>The pagination token expired.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.budgets#Expression": {
+            "type": "structure",
+            "members": {
+                "Or": {
+                    "target": "com.amazonaws.budgets#Expressions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Return results that match either Dimension object.</p>"
+                    }
+                },
+                "And": {
+                    "target": "com.amazonaws.budgets#Expressions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Return results that match both Dimension objects.</p>"
+                    }
+                },
+                "Not": {
+                    "target": "com.amazonaws.budgets#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Return results that don't match a Dimension object.</p>"
+                    }
+                },
+                "Dimensions": {
+                    "target": "com.amazonaws.budgets#ExpressionDimensionValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific Dimension to use for Expression.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.budgets#TagValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific Tag to use for Expression.</p>"
+                    }
+                },
+                "CostCategories": {
+                    "target": "com.amazonaws.budgets#CostCategoryValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter that's based on CostCategoryValues.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use Expression to filter in various Budgets APIs.</p>"
+            }
+        },
+        "com.amazonaws.budgets#ExpressionDimensionValues": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.budgets#Dimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dimension that you want to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.budgets#Values",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata values you can specify to filter upon, so that the results all match at least\n\t\t\tone of the specified values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MatchOptions": {
+                    "target": "com.amazonaws.budgets#MatchOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match options that you can use to filter your results. You can specify only one of these\n\t\t\tvalues in the array.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the specifications for the filters to use for your request.</p>"
+            }
+        },
+        "com.amazonaws.budgets#Expressions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.budgets#Expression"
             }
         },
         "com.amazonaws.budgets#GenericString": {
@@ -3966,6 +4308,65 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.budgets#MatchOption": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                },
+                "ABSENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ABSENT"
+                    }
+                },
+                "STARTS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTS_WITH"
+                    }
+                },
+                "ENDS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENDS_WITH"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL"
+                    }
+                },
+                "CASE_SENSITIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CASE_SENSITIVE"
+                    }
+                },
+                "CASE_INSENSITIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CASE_INSENSITIVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.budgets#MatchOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.budgets#MatchOption"
+            }
+        },
         "com.amazonaws.budgets#MaxResults": {
             "type": "integer",
             "traits": {
@@ -3991,6 +4392,71 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.budgets#Metric": {
+            "type": "enum",
+            "members": {
+                "BLENDED_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BlendedCost"
+                    }
+                },
+                "UNBLENDED_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnblendedCost"
+                    }
+                },
+                "AMORTIZED_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmortizedCost"
+                    }
+                },
+                "NET_UNBLENDED_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetUnblendedCost"
+                    }
+                },
+                "NET_AMORTIZED_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetAmortizedCost"
+                    }
+                },
+                "USAGE_QUANTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UsageQuantity"
+                    }
+                },
+                "NORMALIZED_USAGE_AMOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NormalizedUsageAmount"
+                    }
+                },
+                "HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hours"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.budgets#Metrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.budgets#Metric"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
                 }
             }
         },
@@ -4456,6 +4922,16 @@
                 "smithy.api#documentation": "<p> The subscription type of the subscriber. It can be SMS or EMAIL.</p>"
             }
         },
+        "com.amazonaws.budgets#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
         "com.amazonaws.budgets#TagResource": {
             "type": "operation",
             "input": {
@@ -4515,6 +4991,32 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.budgets#TagValues": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.budgets#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key for the tag.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.budgets#Values",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific value of the tag.</p>"
+                    }
+                },
+                "MatchOptions": {
+                    "target": "com.amazonaws.budgets#MatchOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match options that you can use to filter your results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The values that are available for a tag.</p>"
             }
         },
         "com.amazonaws.budgets#TargetId": {
@@ -4719,7 +5221,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a budget. You can change every part of a budget except for the <code>budgetName</code> and the <code>calculatedSpend</code>. When you modify a budget, the <code>calculatedSpend</code> drops to zero until Amazon Web Services has new usage data to use for forecasting.</p>\n         <important>\n            <p>Only one of <code>BudgetLimit</code> or <code>PlannedBudgetLimits</code> can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_UpdateBudget.html#API_UpdateBudget_Examples\">Examples</a> section. </p>\n         </important>"
+                "smithy.api#documentation": "<p>Updates a budget. You can change every part of a budget except for the <code>budgetName</code> and the <code>calculatedSpend</code>. When you modify a budget, the <code>calculatedSpend</code> drops to zero until Amazon Web Services has new usage data to use for forecasting.</p>\n         <important>\n            <p>Only one of <code>BudgetLimit</code> or <code>PlannedBudgetLimits</code> can be present in\n            the syntax at one time. Use the syntax that matches your case. The Request Syntax\n            section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>,\n            see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_UpdateBudget.html#API_UpdateBudget_Examples\">Examples</a> section.</p>\n            <p>Similarly, only one set of filter and metric selections can be present in the syntax\n            at one time. Either <code>FilterExpression</code> and <code>Metrics</code> or\n               <code>CostFilters</code> and <code>CostTypes</code>, not both or a different\n            combination. We recommend using <code>FilterExpression</code> and <code>Metrics</code>\n            as they provide more flexible and powerful filtering capabilities. The Request Syntax\n            section shows the <code>FilterExpression</code>/<code>Metrics</code> syntax.</p>\n         </important>"
             }
         },
         "com.amazonaws.budgets#UpdateBudgetAction": {
@@ -5050,6 +5552,27 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.budgets#Value": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.budgets#Values": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.budgets#Value"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
                 }
             }
         },
