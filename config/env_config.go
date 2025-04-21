@@ -352,7 +352,11 @@ func NewEnvConfig() (EnvConfig, error) {
 
 	cfg.AppID = os.Getenv(awsSdkUaAppIDEnv)
 
-	cfg.EC2InstanceProfileName = os.Getenv(awsEc2InstanceProfileNameEnv)
+	ec2InstanceProfileName, ok := os.LookupEnv(awsEc2InstanceProfileNameEnv)
+	if ok && ec2InstanceProfileName == "" {
+		return cfg, fmt.Errorf("env %s cannot be empty", awsEc2InstanceProfileNameEnv)
+	}
+	cfg.EC2InstanceProfileName = ec2InstanceProfileName
 
 	if err := setBoolPtrFromEnvVal(&cfg.DisableRequestCompression, []string{awsDisableRequestCompressionEnv}); err != nil {
 		return cfg, err
