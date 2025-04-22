@@ -1,0 +1,8 @@
+{
+    "id": "3ca07475-6a71-46be-83f9-123510baff00",
+    "type": "bugfix",
+    "description": "Abort multi part download if the object is modified during download",
+    "modules": [
+        "feature/s3/manager"
+    ]
+}

@@ -27,7 +27,9 @@ type downloadCaptureClient struct {
 	GetObjectFn          func(context.Context, *s3.GetObjectInput, ...func(*s3.Options)) (*s3.GetObjectOutput, error)
 	GetObjectInvocations int
 
-	RetrievedRanges []string
+	RetrievedRanges   []string
+	RetrievedETags    []string
+	RetrievedVersions []string
 
 	lock sync.Mutex
 }
@@ -41,11 +43,13 @@ func (c *downloadCaptureClient) GetObject(ctx context.Context, params *s3.GetObj
 	if params.Range != nil {
 		c.RetrievedRanges = append(c.RetrievedRanges, aws.ToString(params.Range))
 	}
-
+	c.RetrievedETags = append(c.RetrievedETags, aws.ToString(params.IfMatch))
+	c.RetrievedVersions = append(c.RetrievedVersions, aws.ToString(params.VersionId))
 	return c.GetObjectFn(ctx, params, optFns...)
 }
 
 var rangeValueRegex = regexp.MustCompile(`bytes=(\d+)-(\d+)`)
+var etag = "my-etag"
 
 func parseRange(rangeValue string) (start, fin int64) {
 	rng := rangeValueRegex.FindStringSubmatch(rangeValue)
@@ -88,6 +92,30 @@ func newDownloadNonRangeClient(data []byte) (*downloadCaptureClient, *int) {
 	}
 
 	return capture, &capture.GetObjectInvocations
+}
+
+func newDownloadVersionClient(data []byte) (*downloadCaptureClient, *int, *[]string, *[]string) {
+	capture := &downloadCaptureClient{}
+
+	capture.GetObjectFn = func(_ context.Context, params *s3.GetObjectInput, _ ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
+		start, fin := parseRange(aws.ToString(params.Range))
+		fin++
+
+		if fin >= int64(len(data)) {
+			fin = int64(len(data))
+		}
+
+		bodyBytes := data[start:fin]
+
+		return &s3.GetObjectOutput{
+			Body:          ioutil.NopCloser(bytes.NewReader(bodyBytes)),
+			ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, fin-1, len(data))),
+			ContentLength: aws.Int64(int64(len(bodyBytes))),
+			ETag:          aws.String(etag),
+		}, nil
+	}
+
+	return capture, &capture.GetObjectInvocations, &capture.RetrievedETags, &capture.RetrievedVersions
 }
 
 type mockHTTPStatusError struct {
@@ -522,6 +550,73 @@ func TestDownload_WithRange(t *testing.T) {
 	}
 }
 
+func TestDownload_WithVersionID(t *testing.T) {
+	c, invocations, etags, versions := newDownloadVersionClient(buf12MB)
+
+	d := manager.NewDownloader(c)
+
+	w := manager.NewWriteAtBuffer(make([]byte, len(buf12MB)))
+	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
+		Bucket:    aws.String("bucket"),
+		Key:       aws.String("key"),
+		VersionId: aws.String("vid"),
+	})
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := int64(len(buf12MB)), n; e != a {
+		t.Errorf("expect %d buffer length, got %d", e, a)
+	}
+
+	if e, a := 3, *invocations; e != a {
+		t.Errorf("expect %v API calls, got %v", e, a)
+	}
+
+	expectVersions := []string{"vid", "vid", "vid"}
+	if e, a := expectVersions, *versions; !reflect.DeepEqual(e, a) {
+		t.Errorf("expect %v version ids, got %v", e, a)
+	}
+
+	expectETags := []string{"", "", ""}
+	if e, a := expectETags, *etags; !reflect.DeepEqual(e, a) {
+		t.Errorf("expect %v ETags, got %v", e, a)
+	}
+}
+
+func TestDownload_WithETag(t *testing.T) {
+	c, invocations, etags, versions := newDownloadVersionClient(buf12MB)
+
+	d := manager.NewDownloader(c)
+
+	w := manager.NewWriteAtBuffer(make([]byte, len(buf12MB)))
+	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
+		Bucket: aws.String("bucket"),
+		Key:    aws.String("key"),
+	})
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := int64(len(buf12MB)), n; e != a {
+		t.Errorf("expect %d buffer length, got %d", e, a)
+	}
+
+	if e, a := 3, *invocations; e != a {
+		t.Errorf("expect %v API calls, got %v", e, a)
+	}
+
+	expectVersions := []string{"", "", ""}
+	if e, a := expectVersions, *versions; !reflect.DeepEqual(e, a) {
+		t.Errorf("expect %v version ids, got %v", e, a)
+	}
+
+	expectETags := []string{"", etag, etag}
+	if e, a := expectETags, *etags; !reflect.DeepEqual(e, a) {
+		t.Errorf("expect %v ETags, got %v", e, a)
+	}
+}
+
 type mockDownloadCLient func(ctx context.Context, params *s3.GetObjectInput, optFns ...func(*s3.Options)) (*s3.GetObjectOutput, error)
 
 func (m mockDownloadCLient) GetObject(ctx context.Context, params *s3.GetObjectInput, optFns ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
@@ -574,6 +669,63 @@ func TestDownload_WithFailure(t *testing.T) {
 
 	if atomic.LoadInt64(&reqCount) > 3 {
 		t.Errorf("expect no more than 3 requests, but received %d", reqCount)
+	}
+}
+
+func TestDownload_WithMismatch(t *testing.T) {
+	reqCount := int64(0)
+	body := bytes.NewReader(make([]byte, manager.DefaultDownloadPartSize))
+
+	client := mockDownloadCLient(func(ctx context.Context, params *s3.GetObjectInput, optFns ...func(*s3.Options)) (out *s3.GetObjectOutput, err error) {
+		switch atomic.LoadInt64(&reqCount) {
+		case 0:
+			if params.IfMatch != nil {
+				t.Errorf("expect no Etag in first request, got %s", aws.ToString(params.IfMatch))
+				err = fmt.Errorf("invalid input error")
+			} else {
+				out = &s3.GetObjectOutput{
+					Body:          ioutil.NopCloser(body),
+					ContentLength: aws.Int64(int64(body.Len())),
+					ContentRange:  aws.String(fmt.Sprintf("bytes 0-%d/%d", body.Len()-1, body.Len()*10)),
+					ETag:          aws.String(etag),
+				}
+			}
+		case 1:
+			// Give a chance for the multipart chunks to be queued up
+			time.Sleep(1 * time.Second)
+			// mock the precondition error when object is synchronously updated
+			err = fmt.Errorf("api error PreconditionFailed")
+		default:
+			if a := aws.ToString(params.IfMatch); a != etag {
+				t.Errorf("expect subrequests' IfMatch header to be %s, got %s", etag, a)
+				err = fmt.Errorf("invalid input error")
+			} else {
+				out = &s3.GetObjectOutput{
+					Body:          ioutil.NopCloser(body),
+					ContentLength: aws.Int64(int64(body.Len())),
+					ContentRange:  aws.String(fmt.Sprintf("bytes 0-%d/%d", body.Len()-1, body.Len()*10)),
+				}
+			}
+		}
+		atomic.AddInt64(&reqCount, 1)
+		return out, err
+	})
+
+	d := manager.NewDownloader(client, func(d *manager.Downloader) {
+		d.Concurrency = 2
+	})
+
+	w := &manager.WriteAtBuffer{}
+	params := s3.GetObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+	}
+
+	_, err := d.Download(context.Background(), w, &params)
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	} else if e, a := "PreconditionFailed", err.Error(); !strings.Contains(a, e) {
+		t.Fatalf("expect error message to contain %s, but did not %s", e, a)
 	}
 }
 
