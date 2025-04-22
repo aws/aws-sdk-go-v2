@@ -1,3 +1,7 @@
+# v1.18.0 (2025-04-22)
+
+* **Feature**: To expand support for matching records using digital identifiers with TransUnion
+
 # v1.17.0 (2025-04-14)
 
 * **Feature**: This is to add new metrics to our GetIdMappingJob API and also update uniqueId naming for batchDeleteUniqueIds API to be more accurate

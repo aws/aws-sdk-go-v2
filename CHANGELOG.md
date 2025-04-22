@@ -1,3 +1,21 @@
+# Release (2025-04-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.24.0](service/account/CHANGELOG.md#v1240-2025-04-22)
+  * **Feature**: AWS Account Management now supports account name update via IAM principals.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.52.0](service/cognitoidentityprovider/CHANGELOG.md#v1520-2025-04-22)
+  * **Feature**: This release adds refresh token rotation.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.212.0](service/ec2/CHANGELOG.md#v12120-2025-04-22)
+  * **Feature**: Added support for  ClientRouteEnforcementOptions flag in CreateClientVpnEndpoint and ModifyClientVpnEndpoint requests and DescribeClientVpnEndpoints responses
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.18.0](service/entityresolution/CHANGELOG.md#v1180-2025-04-22)
+  * **Feature**: To expand support for matching records using digital identifiers with TransUnion
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.29.0](service/mq/CHANGELOG.md#v1290-2025-04-22)
+  * **Feature**: You can now delete Amazon MQ broker configurations using the DeleteConfiguration API. For more information, see Configurations in the Amazon MQ API Reference.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.27.0](service/redshiftserverless/CHANGELOG.md#v1270-2025-04-22)
+  * **Feature**: Provides new and updated API members to support the Redshift Serverless reservations feature.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.57.0](service/s3control/CHANGELOG.md#v1570-2025-04-22)
+  * **Feature**: Fix endpoint resolution test cases
+
 # Release (2025-04-21)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.57.0 (2025-04-22)
+
+* **Feature**: Fix endpoint resolution test cases
+
 # v1.56.3 (2025-04-10)
 
 * No change notes available for this release.

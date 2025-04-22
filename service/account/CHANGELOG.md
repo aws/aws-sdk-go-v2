@@ -1,3 +1,7 @@
+# v1.24.0 (2025-04-22)
+
+* **Feature**: AWS Account Management now supports account name update via IAM principals.
+
 # v1.23.2 (2025-04-03)
 
 * No change notes available for this release.

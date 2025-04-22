@@ -1,3 +1,7 @@
+# v1.29.0 (2025-04-22)
+
+* **Feature**: You can now delete Amazon MQ broker configurations using the DeleteConfiguration API. For more information, see Configurations in the Amazon MQ API Reference.
+
 # v1.28.3 (2025-04-08)
 
 * No change notes available for this release.

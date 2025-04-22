@@ -1,3 +1,7 @@
+# v1.52.0 (2025-04-22)
+
+* **Feature**: This release adds refresh token rotation.
+
 # v1.51.4 (2025-04-03)
 
 * No change notes available for this release.
