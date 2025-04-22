@@ -2569,7 +2569,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the corresponding Match ID of a customer record if the record has been\n         processed in a\n         rule-based matching workflow or ML matching workflow.</p>\n         <p>You can call this API as a dry run of an incremental load on the rule-based\n         matching\n         workflow.</p>",
+                "smithy.api#documentation": "<p>Returns the corresponding Match ID of a customer record if the record has been processed\n         in a rule-based matching workflow or ML matching workflow.</p>\n         <p>You can call this API as a dry run of an incremental load on the rule-based matching\n         workflow.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -5056,7 +5056,7 @@
                 "type": {
                     "target": "com.amazonaws.entityresolution#SchemaAttributeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the provider schema attribute.</p>",
+                        "smithy.api#documentation": "<p>The type of the provider schema attribute.</p>\n         <p>LiveRamp supports: <code>NAME</code> | <code>NAME_FIRST</code> |\n            <code>NAME_MIDDLE</code> | <code>NAME_LAST</code> | <code>ADDRESS</code> |\n            <code>ADDRESS_STREET1</code> | <code>ADDRESS_STREET2</code> |\n            <code>ADDRESS_STREET3</code> | <code>ADDRESS_CITY</code> | <code>ADDRESS_STATE</code> |\n            <code>ADDRESS_COUNTRY</code> | <code>ADDRESS_POSTALCODE</code> | <code>PHONE</code> |\n            <code>PHONE_NUMBER</code> | <code>EMAIL_ADDRESS</code> | <code>UNIQUE_ID</code> |\n            <code>PROVIDER_ID</code>\n         </p>\n         <p>TransUnion supports: <code>NAME</code> | <code>NAME_FIRST</code> |\n            <code>NAME_LAST</code> | <code>ADDRESS</code> | <code>ADDRESS_CITY</code> |\n            <code>ADDRESS_STATE</code> | <code>ADDRESS_COUNTRY</code> |\n            <code>ADDRESS_POSTALCODE</code> | <code>PHONE_NUMBER</code> | <code>EMAIL_ADDRESS</code>\n         | <code>UNIQUE_ID</code> | <code>DATE</code> | <code>IPV4</code> | <code>IPV6</code> |\n            <code>MAID</code>\n         </p>\n         <p>Unified ID 2.0 supports: <code>PHONE_NUMBER</code> | <code>EMAIL_ADDRESS</code> |\n            <code>UNIQUE_ID</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5570,6 +5570,24 @@
                     "traits": {
                         "smithy.api#enumValue": "PROVIDER_ID"
                     }
+                },
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6"
+                    }
+                },
+                "MAID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAID"
+                    }
                 }
             }
         },
@@ -5586,14 +5604,14 @@
                 "type": {
                     "target": "com.amazonaws.entityresolution#SchemaAttributeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the attribute, selected from a list of values.</p>\n         <note>\n            <p>Normalization is only supported for <code>NAME</code>, <code>ADDRESS</code>,\n               <code>PHONE</code>, and <code>EMAIL_ADDRESS</code>. </p>\n            <p>If you want to normalize <code>NAME_FIRST</code>, <code>NAME_MIDDLE</code>, and\n               <code>NAME_LAST</code>, you must group them by assigning them to the\n               <code>NAME</code>\n               <code>groupName</code>. </p>\n            <p>If you want to normalize <code>ADDRESS_STREET1</code>, <code>ADDRESS_STREET2</code>,\n               <code>ADDRESS_STREET3</code>, <code>ADDRESS_CITY</code>, <code>ADDRESS_STATE</code>,\n               <code>ADDRESS_COUNTRY</code>, and <code>ADDRESS_POSTALCODE</code>, you must group\n            them by assigning them to the <code>ADDRESS</code>\n               <code>groupName</code>. </p>\n            <p>If you want to normalize <code>PHONE_NUMBER</code> and\n            <code>PHONE_COUNTRYCODE</code>, you must group them by assigning them to the\n               <code>PHONE</code>\n               <code>groupName</code>. </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The type of the attribute, selected from a list of values.</p>\n         <p>LiveRamp supports: <code>NAME</code> | <code>NAME_FIRST</code> |\n            <code>NAME_MIDDLE</code> | <code>NAME_LAST</code> | <code>ADDRESS</code> |\n            <code>ADDRESS_STREET1</code> | <code>ADDRESS_STREET2</code> |\n            <code>ADDRESS_STREET3</code> | <code>ADDRESS_CITY</code> | <code>ADDRESS_STATE</code> |\n            <code>ADDRESS_COUNTRY</code> | <code>ADDRESS_POSTALCODE</code> | <code>PHONE</code> |\n            <code>PHONE_NUMBER</code> | <code>EMAIL_ADDRESS</code> | <code>UNIQUE_ID</code> |\n            <code>PROVIDER_ID</code>\n         </p>\n         <p>TransUnion supports: <code>NAME</code> | <code>NAME_FIRST</code> |\n            <code>NAME_LAST</code> | <code>ADDRESS</code> | <code>ADDRESS_CITY</code> |\n            <code>ADDRESS_STATE</code> | <code>ADDRESS_COUNTRY</code> |\n            <code>ADDRESS_POSTALCODE</code> | <code>PHONE_NUMBER</code> | <code>EMAIL_ADDRESS</code>\n         | <code>UNIQUE_ID</code> | <code>IPV4</code> | <code>IPV6</code> | <code>MAID</code>\n         </p>\n         <p>Unified ID 2.0 supports: <code>PHONE_NUMBER</code> | <code>EMAIL_ADDRESS</code> |\n            <code>UNIQUE_ID</code>\n         </p>\n         <note>\n            <p>Normalization is only supported for <code>NAME</code>, <code>ADDRESS</code>,\n               <code>PHONE</code>, and <code>EMAIL_ADDRESS</code>. </p>\n            <p>If you want to normalize <code>NAME_FIRST</code>, <code>NAME_MIDDLE</code>, and\n               <code>NAME_LAST</code>, you must group them by assigning them to the\n               <code>NAME</code>\n               <code>groupName</code>. </p>\n            <p>If you want to normalize <code>ADDRESS_STREET1</code>, <code>ADDRESS_STREET2</code>,\n               <code>ADDRESS_STREET3</code>, <code>ADDRESS_CITY</code>, <code>ADDRESS_STATE</code>,\n               <code>ADDRESS_COUNTRY</code>, and <code>ADDRESS_POSTALCODE</code>, you must group\n            them by assigning them to the <code>ADDRESS</code>\n               <code>groupName</code>. </p>\n            <p>If you want to normalize <code>PHONE_NUMBER</code> and\n            <code>PHONE_COUNTRYCODE</code>, you must group them by assigning them to the\n               <code>PHONE</code>\n               <code>groupName</code>. </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "groupName": {
                     "target": "com.amazonaws.entityresolution#AttributeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that instructs Entity Resolution to combine several columns into a unified\n         column with the identical attribute type. </p>\n         <p>For example, when working with columns such as\n            <code>NAME_FIRST</code>,\n            <code>NAME_MIDDLE</code>,\n         and\n            <code>NAME_LAST</code>,\n         assigning them a common <code>groupName</code> will prompt Entity Resolution to concatenate\n         them into a single value.</p>"
+                        "smithy.api#documentation": "<p>A string that instructs Entity Resolution to combine several columns into a unified\n         column with the identical attribute type. </p>\n         <p>For example, when working with columns such as <code>NAME_FIRST</code>,\n            <code>NAME_MIDDLE</code>, and <code>NAME_LAST</code>, assigning them a common\n            <code>groupName</code> will prompt Entity Resolution to concatenate them into a single\n         value.</p>"
                     }
                 },
                 "matchKey": {
@@ -5616,7 +5634,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A\n         configuration object for defining input data fields in Entity Resolution. The\n         SchemaInputAttribute specifies how individual fields in your input data should be processed\n         and matched.</p>"
+                "smithy.api#documentation": "<p>A configuration object for defining input data fields in Entity Resolution. The\n            <code>SchemaInputAttribute</code> specifies how individual fields in your input data\n         should be processed and matched.</p>"
             }
         },
         "com.amazonaws.entityresolution#SchemaInputAttributes": {

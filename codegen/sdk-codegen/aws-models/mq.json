@@ -1265,6 +1265,71 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mq#DeleteConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mq#DeleteConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mq#DeleteConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mq#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.mq#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mq#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.mq#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.mq#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified configuration.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/configurations/{ConfigurationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mq#DeleteConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationId": {
+                    "target": "com.amazonaws.mq#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID that Amazon MQ generates for the configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mq#DeleteConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "ConfigurationId": {
+                    "target": "com.amazonaws.mq#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID that Amazon MQ generates for the configuration.</p>",
+                        "smithy.api#jsonName": "configurationId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.mq#DeleteTags": {
             "type": "operation",
             "input": {
@@ -3976,6 +4041,9 @@
                 },
                 {
                     "target": "com.amazonaws.mq#DeleteBroker"
+                },
+                {
+                    "target": "com.amazonaws.mq#DeleteConfiguration"
                 },
                 {
                     "target": "com.amazonaws.mq#DeleteTags"

@@ -248,6 +248,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#GetSigningCertificate"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#GetTokensFromRefreshToken"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#GetUICustomization"
                 },
                 {
@@ -1649,7 +1652,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The automated response to a risk level for adaptive authentication in full-function,\n            or <code>ENFORCED</code>, mode. You can assign an action to each risk level that\n            threat protection evaluates.</p>"
+                "smithy.api#documentation": "<p>The automated response to a risk level for adaptive authentication in full-function,\n            or <code>ENFORCED</code>, mode. You can assign an action to each risk level that threat\n            protection evaluates.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AccountTakeoverActionsType": {
@@ -1713,7 +1716,7 @@
                 "NotifyConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#NotifyConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings for composing and sending an email message when threat protection assesses a risk level with adaptive authentication. When you choose to notify\n            users in <code>AccountTakeoverRiskConfiguration</code>, Amazon Cognito sends an email message\n            using the method and template that you set with this data type.</p>"
+                        "smithy.api#documentation": "<p>The settings for composing and sending an email message when threat protection\n            assesses a risk level with adaptive authentication. When you choose to notify users in\n                <code>AccountTakeoverRiskConfiguration</code>, Amazon Cognito sends an email message using\n            the method and template that you set with this data type.</p>"
                     }
                 },
                 "Actions": {
@@ -2798,6 +2801,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#UnexpectedLambdaException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UnsupportedOperationException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#UserLambdaValidationException"
@@ -4734,7 +4740,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>One authentication event that Amazon Cognito logged in a user pool with threat protection active. Contains user and device metadata and a risk assessment from your user\n            pool.</p>"
+                "smithy.api#documentation": "<p>One authentication event that Amazon Cognito logged in a user pool with threat protection\n            active. Contains user and device metadata and a risk assessment from your user\n            pool.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AuthEventsType": {
@@ -5470,7 +5476,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings for user pool actions when Amazon Cognito detects compromised credentials with\n            threat protection in full-function <code>ENFORCED</code> mode.</p>"
+                "smithy.api#documentation": "<p>Settings for user pool actions when Amazon Cognito detects compromised credentials with threat\n            protection in full-function <code>ENFORCED</code> mode.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#CompromisedCredentialsEventActionType": {
@@ -6930,6 +6936,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#FeatureUnavailableInTierException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -7221,6 +7230,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Amazon Cognito creates a session token for each API request in an authentication flow. <code>AuthSessionValidity</code> is the duration, \nin minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires.</p>"
                     }
+                },
+                "RefreshTokenRotation": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RefreshTokenRotationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of your app client for refresh token rotation. When enabled, your\n            app client issues new ID, access, and refresh tokens when users renew their sessions\n            with refresh tokens. When disabled, token refresh issues only ID and access\n            tokens.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7252,6 +7267,9 @@
                 "target": "com.amazonaws.cognitoidentityprovider#CreateUserPoolDomainResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ConcurrentModificationException"
+                },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#FeatureUnavailableInTierException"
                 },
@@ -8047,6 +8065,9 @@
                 "target": "com.amazonaws.cognitoidentityprovider#DeleteUserPoolDomainResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ConcurrentModificationException"
+                },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
@@ -9362,7 +9383,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The feedback that your application submitted to a threat protection event\n            log, as displayed in an <code>AdminListUserAuthEvents</code> response.</p>"
+                "smithy.api#documentation": "<p>The feedback that your application submitted to a threat protection event log, as\n            displayed in an <code>AdminListUserAuthEvents</code> response.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#EventFilterType": {
@@ -9586,6 +9607,23 @@
                 }
             }
         },
+        "com.amazonaws.cognitoidentityprovider#FeatureType": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#FeatureUnavailableInTierException": {
             "type": "structure",
             "members": {
@@ -9622,7 +9660,7 @@
                 "StreamArn": {
                     "target": "com.amazonaws.cognitoidentityprovider#ArnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of an Amazon Data Firehose stream that's the destination for threat protection log export.</p>"
+                        "smithy.api#documentation": "<p>The ARN of an Amazon Data Firehose stream that's the destination for threat protection log\n            export.</p>"
                     }
                 }
             },
@@ -10239,6 +10277,104 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Response from Amazon Cognito for a signing certificate request.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetTokensFromRefreshToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#GetTokensFromRefreshTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#GetTokensFromRefreshTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidLambdaResponseException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#RefreshTokenReuseException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UnexpectedLambdaException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserLambdaValidationException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Given a refresh token, issues new ID, access, and optionally refresh tokens for the\n            user who owns the submitted token. This operation issues a new refresh token and\n            invalidates the original refresh token after an optional grace period when refresh token\n            rotation is enabled. If refresh token rotation is disabled, issues new ID and access\n            tokens only.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetTokensFromRefreshTokenRequest": {
+            "type": "structure",
+            "members": {
+                "RefreshToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TokenModelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A valid refresh token that can authorize the request for new tokens. When refresh\n            token rotation is active in the requested app client, this token is invalidated after\n            the request is complete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app client that issued the refresh token to the user who wants to request new\n            tokens.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientSecret": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSecretType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client secret of the requested app client, if the client has a secret.</p>"
+                    }
+                },
+                "DeviceKey": {
+                    "target": "com.amazonaws.cognitoidentityprovider#DeviceKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you enable device remembering, Amazon Cognito issues a device key that you can use for\n            device authentication that bypasses multi-factor authentication (MFA). To implement\n                <code>GetTokensFromRefreshToken</code> in a user pool with device remembering, you\n            must capture the device key from the initial authentication request. If your application\n            doesn't provide the key of a registered device, Amazon Cognito issues a new one. You must\n            provide the confirmed device key in this request if device remembering is\n            enabled in your user pool.</p>\n         <p>For more information about device remembering, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html\">Working with devices</a>.</p>"
+                    }
+                },
+                "ClientMetadata": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for certain custom\n            workflows that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool triggers.\n            When you use the <code>GetTokensFromRefreshToken</code> API action, Amazon Cognito invokes the\n            Lambda function the pre token generation trigger.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetTokensFromRefreshTokenResponse": {
+            "type": "structure",
+            "members": {
+                "AuthenticationResult": {
+                    "target": "com.amazonaws.cognitoidentityprovider#AuthenticationResultType"
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -11053,6 +11189,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#UnexpectedLambdaException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UnsupportedOperationException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#UserLambdaValidationException"
@@ -12507,13 +12646,13 @@
                 "S3Configuration": {
                     "target": "com.amazonaws.cognitoidentityprovider#S3ConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket destination of user activity log export with threat protection. To activate this setting, your user pool must be on the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html\">\n                     Plus tier</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket destination of user activity log export with threat protection.\n            To activate this setting, your user pool must be on the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html\">\n                     Plus tier</a>.</p>"
                     }
                 },
                 "FirehoseConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#FirehoseConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Data Firehose stream destination of user activity log export with threat protection. To activate this setting, your user pool must be on the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html\">\n                     Plus tier</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Data Firehose stream destination of user activity log export with threat protection.\n            To activate this setting, your user pool must be on the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html\">\n                     Plus tier</a>.</p>"
                     }
                 }
             },
@@ -12814,7 +12953,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for Amazon SES email messages that threat protection sends to a\n            user when your adaptive authentication automated response has a\n                <i>Notify</i> action.</p>"
+                "smithy.api#documentation": "<p>The configuration for Amazon SES email messages that threat protection sends to a user when\n            your adaptive authentication automated response has a <i>Notify</i>\n            action.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#NotifyEmailType": {
@@ -12841,7 +12980,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The template for email messages that threat protection sends to a user when\n            your threat protection automated response has a <i>Notify</i>\n            action.</p>"
+                "smithy.api#documentation": "<p>The template for email messages that threat protection sends to a user when your\n            threat protection automated response has a <i>Notify</i> action.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#NumberAttributeConstraintsType": {
@@ -13328,6 +13467,40 @@
                 "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
             }
         },
+        "com.amazonaws.cognitoidentityprovider#RefreshTokenReuseException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentityprovider#MessageType"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This exception is throw when your application requests token refresh with a refresh\n            token that has been invalidated by refresh-token rotation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#RefreshTokenRotationType": {
+            "type": "structure",
+            "members": {
+                "Feature": {
+                    "target": "com.amazonaws.cognitoidentityprovider#FeatureType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of refresh token rotation for the current app client.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RetryGracePeriodSeconds": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RetryGracePeriodSecondsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a token refresh with <code>GetTokensFromRefreshToken</code>, the\n            original refresh token that you're rotating out can remain valid for a period of time of\n            up to 60 seconds. This allows for client-side retries. When\n                <code>RetryGracePeriodSeconds</code> is <code>0</code>, the grace period is disabled\n            and a successful request immediately invalidates the submitted refresh token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of your app client for refresh token rotation. When enabled, your\n            app client issues new ID, access, and refresh tokens when users renew their sessions\n            with refresh tokens. When disabled, token refresh issues only ID and access\n            tokens.</p>"
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#RefreshTokenValidityType": {
             "type": "integer",
             "traits": {
@@ -13787,6 +13960,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#RetryGracePeriodSecondsType": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 60
+                }
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#RevokeToken": {
             "type": "operation",
             "input": {
@@ -13877,7 +14059,7 @@
                 "CompromisedCredentialsRiskConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#CompromisedCredentialsRiskConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings for compromised-credentials actions and authentication types with threat protection in full-function <code>ENFORCED</code> mode.</p>"
+                        "smithy.api#documentation": "<p>Settings for compromised-credentials actions and authentication types with threat\n            protection in full-function <code>ENFORCED</code> mode.</p>"
                     }
                 },
                 "AccountTakeoverRiskConfiguration": {
@@ -13900,7 +14082,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The settings of risk configuration for threat protection with threat protection in a user pool.</p>"
+                "smithy.api#documentation": "<p>The settings of risk configuration for threat protection with threat protection in a\n            user pool.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#RiskDecisionType": {
@@ -13995,12 +14177,12 @@
                 "BucketArn": {
                     "target": "com.amazonaws.cognitoidentityprovider#S3ArnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of an Amazon S3 bucket that's the destination for threat protection\n            log export.</p>"
+                        "smithy.api#documentation": "<p>The ARN of an Amazon S3 bucket that's the destination for threat protection log\n            export.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration for the Amazon S3 bucket destination of user activity log export with\n            threat protection.</p>"
+                "smithy.api#documentation": "<p>Configuration for the Amazon S3 bucket destination of user activity log export with threat\n            protection.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#SESConfigurationSet": {
@@ -16349,6 +16531,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#ConcurrentModificationException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#FeatureUnavailableInTierException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -16512,6 +16697,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Amazon Cognito creates a session token for each API request in an authentication flow. <code>AuthSessionValidity</code> is the duration, \nin minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires.</p>"
                     }
+                },
+                "RefreshTokenRotation": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RefreshTokenRotationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of your app client for refresh token rotation. When enabled, your\n            app client issues new ID, access, and refresh tokens when users renew their sessions\n            with refresh tokens. When disabled, token refresh issues only ID and access\n            tokens.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16543,6 +16734,9 @@
                 "target": "com.amazonaws.cognitoidentityprovider#UpdateUserPoolDomainResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ConcurrentModificationException"
+                },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#FeatureUnavailableInTierException"
                 },
@@ -17073,7 +17267,7 @@
                 "AdvancedSecurityMode": {
                     "target": "com.amazonaws.cognitoidentityprovider#AdvancedSecurityModeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating mode of threat protection for standard authentication types in\n            your user pool, including username-password and secure remote password (SRP)\n            authentication. </p>",
+                        "smithy.api#documentation": "<p>The operating mode of threat protection for standard authentication types in your user\n            pool, including username-password and secure remote password (SRP) authentication.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17266,13 +17460,19 @@
                 "EnablePropagateAdditionalUserContextData": {
                     "target": "com.amazonaws.cognitoidentityprovider#WrappedBooleanType",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>EnablePropagateAdditionalUserContextData</code> is true, Amazon Cognito accepts an\n                <code>IpAddress</code> value that you send in the <code>UserContextData</code>\n            parameter. The <code>UserContextData</code> parameter sends information to Amazon Cognito\n            threat protection for risk analysis. You can send <code>UserContextData</code> when you\n            sign in Amazon Cognito native users with the <code>InitiateAuth</code> and\n                <code>RespondToAuthChallenge</code> API operations.</p>\n         <p>When <code>EnablePropagateAdditionalUserContextData</code> is false, you can't send\n            your user's source IP address to Amazon Cognito threat protection with unauthenticated API\n            operations. <code>EnablePropagateAdditionalUserContextData</code> doesn't affect whether\n            you can send a source IP address in a <code>ContextData</code> parameter with the\n            authenticated API operations <code>AdminInitiateAuth</code> and\n                <code>AdminRespondToAuthChallenge</code>.</p>\n         <p>You can only activate <code>EnablePropagateAdditionalUserContextData</code> in an app\n            client that has a client secret. For more information about propagation of user context\n            data, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-device-fingerprint\">Adding user device and session data to API requests</a>.</p>"
+                        "smithy.api#documentation": "<p>When <code>EnablePropagateAdditionalUserContextData</code> is true, Amazon Cognito accepts an\n                <code>IpAddress</code> value that you send in the <code>UserContextData</code>\n            parameter. The <code>UserContextData</code> parameter sends information to Amazon Cognito threat\n            protection for risk analysis. You can send <code>UserContextData</code> when you sign in\n            Amazon Cognito native users with the <code>InitiateAuth</code> and\n                <code>RespondToAuthChallenge</code> API operations.</p>\n         <p>When <code>EnablePropagateAdditionalUserContextData</code> is false, you can't send\n            your user's source IP address to Amazon Cognito threat protection with unauthenticated API\n            operations. <code>EnablePropagateAdditionalUserContextData</code> doesn't affect whether\n            you can send a source IP address in a <code>ContextData</code> parameter with the\n            authenticated API operations <code>AdminInitiateAuth</code> and\n                <code>AdminRespondToAuthChallenge</code>.</p>\n         <p>You can only activate <code>EnablePropagateAdditionalUserContextData</code> in an app\n            client that has a client secret. For more information about propagation of user context\n            data, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-device-fingerprint\">Adding user device and session data to API requests</a>.</p>"
                     }
                 },
                 "AuthSessionValidity": {
                     "target": "com.amazonaws.cognitoidentityprovider#AuthSessionValidityType",
                     "traits": {
                         "smithy.api#documentation": "<p>Amazon Cognito creates a session token for each API request in an authentication flow. <code>AuthSessionValidity</code> is the duration, \nin minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires.</p>"
+                    }
+                },
+                "RefreshTokenRotation": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RefreshTokenRotationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of your app client for refresh token rotation. When enabled, your\n            app client issues new ID, access, and refresh tokens when users renew their sessions\n            with refresh tokens. When disabled, token refresh issues only ID and access\n            tokens.</p>"
                     }
                 }
             },
