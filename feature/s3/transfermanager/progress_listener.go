@@ -1,6 +1,9 @@
 package transfermanager
 
-import "context"
+import (
+	"context"
+	"sync/atomic"
+)
 
 // ProgressListeners holds various "transfer progress" hooks that a caller can
 // supply to receive progress updates for potentially long-running transfer
@@ -61,7 +64,7 @@ type ObjectTransferStartListener interface {
 
 // ObjectTransferStartEvent is the event payload for object transfer start.
 type ObjectTransferStartEvent struct {
-	Request    any
+	Input      any
 	TotalBytes int64
 }
 
@@ -92,9 +95,10 @@ type ObjectTransferCompleteListener interface {
 // ObjectTransferCompleteEvent is the event payload for object transfer
 // complete.
 type ObjectTransferCompleteEvent struct {
-	Input      any
-	Output     any
-	TotalBytes int64
+	Input            any
+	Output           any
+	BytesTransferred int64
+	TotalBytes       int64
 }
 
 // ObjectTransferFailedListener is invoked when a single-object transfer fails.
@@ -107,8 +111,80 @@ type ObjectTransferFailedListener interface {
 // ObjectTransferFailedEvent is the event payload for object transfer failure.
 type ObjectTransferFailedEvent struct {
 	Input            any
-	Output           any
 	Error            error
 	BytesTransferred int64
 	TotalBytes       int64
+}
+
+func (p *ProgressListeners) emitObjectTransferStart(ctx context.Context, event *ObjectTransferStartEvent) {
+	for _, l := range p.ObjectTransferStart {
+		l.OnObjectTransferStart(ctx, event)
+	}
+}
+
+func (p *ProgressListeners) emitObjectBytesTransferred(ctx context.Context, event *ObjectBytesTransferredEvent) {
+	for _, l := range p.ObjectBytesTransferred {
+		l.OnObjectBytesTransferred(ctx, event)
+	}
+}
+
+func (p *ProgressListeners) emitObjectTransferComplete(ctx context.Context, event *ObjectTransferCompleteEvent) {
+	for _, l := range p.ObjectTransferComplete {
+		l.OnObjectTransferComplete(ctx, event)
+	}
+}
+
+func (p *ProgressListeners) emitObjectTransferFailed(ctx context.Context, event *ObjectTransferFailedEvent) {
+	for _, l := range p.ObjectTransferFailed {
+		l.OnObjectTransferFailed(ctx, event)
+	}
+}
+
+// reusable single-object progress event emitter
+// used for implementations of:
+//   - GetObject
+//   - PutObject
+//   - DownloadObject
+type singleObjectProgressEmitter struct {
+	Listeners ProgressListeners
+
+	input            any
+	totalBytes       int64
+	bytesTransferred atomic.Int64
+}
+
+func (e *singleObjectProgressEmitter) Start(ctx context.Context, in any, total int64) {
+	e.input = in
+	e.totalBytes = total
+	e.Listeners.emitObjectTransferStart(ctx, &ObjectTransferStartEvent{
+		Input:      in,
+		TotalBytes: total,
+	})
+}
+
+func (e *singleObjectProgressEmitter) BytesTransferred(ctx context.Context, transferred int64) {
+	bytesTransferred := e.bytesTransferred.Add(transferred)
+	e.Listeners.emitObjectBytesTransferred(ctx, &ObjectBytesTransferredEvent{
+		Input:            e.input,
+		TotalBytes:       e.totalBytes,
+		BytesTransferred: bytesTransferred,
+	})
+}
+
+func (e *singleObjectProgressEmitter) Complete(ctx context.Context, out any) {
+	e.Listeners.emitObjectTransferComplete(ctx, &ObjectTransferCompleteEvent{
+		Input:            e.input,
+		TotalBytes:       e.totalBytes,
+		BytesTransferred: e.bytesTransferred.Load(),
+		Output:           out,
+	})
+}
+
+func (e *singleObjectProgressEmitter) Failed(ctx context.Context, err error) {
+	e.Listeners.emitObjectTransferFailed(ctx, &ObjectTransferFailedEvent{
+		Input:            e.input,
+		TotalBytes:       e.totalBytes,
+		BytesTransferred: e.bytesTransferred.Load(),
+		Error:            err,
+	})
 }

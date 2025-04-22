@@ -659,11 +659,13 @@ func (c *Client) PutObject(ctx context.Context, input *PutObjectInput, opts ...f
 
 type uploader struct {
 	options Options
-
-	in *PutObjectInput
+	in      *PutObjectInput
 
 	// PartPool allows for the re-usage of streaming payload part buffers between upload calls
-	partPool bytesBufferPool
+	partPool   bytesBufferPool
+	objectSize int64
+
+	progressEmitter *singleObjectProgressEmitter
 }
 
 func (u *uploader) upload(ctx context.Context) (*PutObjectOutput, error) {
@@ -680,10 +682,10 @@ func (u *uploader) upload(ctx context.Context) (*PutObjectOutput, error) {
 			)
 		}}
 
-	r, _, cleanUp, err := u.nextReader(ctx)
+	r, n, cleanUp, err := u.nextReader(ctx)
 
 	if err == io.EOF {
-		return u.singleUpload(ctx, r, cleanUp, clientOptions...)
+		return u.singleUpload(ctx, r, n, cleanUp, clientOptions...)
 	} else if err != nil {
 		cleanUp()
 		return nil, err
@@ -692,10 +694,13 @@ func (u *uploader) upload(ctx context.Context) (*PutObjectOutput, error) {
 	mu := multiUploader{
 		uploader: u,
 	}
-	return mu.upload(ctx, r, cleanUp, clientOptions...)
+	return mu.upload(ctx, r, n, cleanUp, clientOptions...)
 }
 
 func (u *uploader) init() error {
+	u.progressEmitter = &singleObjectProgressEmitter{
+		Listeners: u.options.ProgressListeners,
+	}
 	if err := u.initSize(); err != nil {
 		return err
 	}
@@ -710,42 +715,48 @@ func (u *uploader) initSize() error {
 		return fmt.Errorf("part size must be at least %d bytes", minPartSizeBytes)
 	}
 
-	var bodySize int64
+	u.objectSize = -1
 	switch r := u.in.Body.(type) {
 	case io.Seeker:
 		n, err := types.SeekerLen(r)
 		if err != nil {
 			return err
 		}
-		bodySize = n
+		u.objectSize = n
 	default:
 		if l := u.in.ContentLength; l > 0 {
-			bodySize = l
+			u.objectSize = l
 		}
 	}
 
 	// Try to adjust partSize if it is too small and account for
 	// integer division truncation.
-	if bodySize/u.options.PartSizeBytes >= int64(defaultMaxUploadParts) {
+	if u.objectSize/u.options.PartSizeBytes >= int64(defaultMaxUploadParts) {
 		// Add one to the part size to account for remainders
 		// during the size calculation. e.g odd number of bytes.
-		u.options.PartSizeBytes = (bodySize / int64(defaultMaxUploadParts)) + 1
+		u.options.PartSizeBytes = (u.objectSize / int64(defaultMaxUploadParts)) + 1
 	}
 	return nil
 }
 
-func (u *uploader) singleUpload(ctx context.Context, r io.Reader, cleanUp func(), clientOptions ...func(*s3.Options)) (*PutObjectOutput, error) {
+func (u *uploader) singleUpload(ctx context.Context, r io.Reader, sz int, cleanUp func(), clientOptions ...func(*s3.Options)) (*PutObjectOutput, error) {
 	defer cleanUp()
 
 	params := u.in.mapSingleUploadInput(r, u.options.ChecksumAlgorithm)
+	objectSize := int64(sz)
 
+	u.progressEmitter.Start(ctx, u.in, objectSize)
 	out, err := u.options.S3.PutObject(ctx, params, clientOptions...)
 	if err != nil {
+		u.progressEmitter.Failed(ctx, err)
 		return nil, err
 	}
 
 	var output PutObjectOutput
 	output.mapFromPutObjectOutput(out, u.in.Bucket, u.in.Key)
+
+	u.progressEmitter.BytesTransferred(ctx, objectSize)
+	u.progressEmitter.Complete(ctx, &output)
 	return &output, nil
 }
 
@@ -784,6 +795,7 @@ type multiUploader struct {
 
 type ulChunk struct {
 	buf     io.Reader
+	buflen  int64
 	partNum *int32
 	cleanup func()
 }
@@ -804,13 +816,15 @@ func (cp completedParts) Swap(i, j int) {
 
 // upload will perform a multipart upload using the firstBuf buffer containing
 // the first chunk of data.
-func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, cleanup func(), clientOptions ...func(*s3.Options)) (*PutObjectOutput, error) {
+func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, firstBuflen int, cleanup func(), clientOptions ...func(*s3.Options)) (*PutObjectOutput, error) {
 	params := u.uploader.in.mapCreateMultipartUploadInput(u.options.ChecksumAlgorithm)
 
 	// Create a multipart
+	u.progressEmitter.Start(ctx, u.in, u.objectSize)
 	resp, err := u.uploader.options.S3.CreateMultipartUpload(ctx, params, clientOptions...)
 	if err != nil {
 		cleanup()
+		u.progressEmitter.Failed(ctx, err)
 		return nil, err
 	}
 	u.uploadID = resp.UploadId
@@ -823,7 +837,12 @@ func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, cleanup 
 	}
 
 	var partNum int32 = 1
-	ch <- ulChunk{buf: firstBuf, partNum: aws.Int32(partNum), cleanup: cleanup}
+	ch <- ulChunk{
+		buf:     firstBuf,
+		buflen:  int64(firstBuflen),
+		partNum: aws.Int32(partNum),
+		cleanup: cleanup,
+	}
 	for u.geterr() == nil && err == nil {
 		partNum++
 		var (
@@ -841,7 +860,12 @@ func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, cleanup 
 			break
 		}
 
-		ch <- ulChunk{buf: data, partNum: aws.Int32(partNum), cleanup: cleanup}
+		ch <- ulChunk{
+			buf:     data,
+			buflen:  int64(nextChunkLen),
+			partNum: aws.Int32(partNum),
+			cleanup: cleanup,
+		}
 	}
 
 	// close the channel, wait for workers and complete upload
@@ -850,6 +874,7 @@ func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, cleanup 
 	completeOut := u.complete(ctx, clientOptions...)
 
 	if err := u.geterr(); err != nil {
+		u.progressEmitter.Failed(ctx, err)
 		return nil, &multipartUploadError{
 			err:      err,
 			uploadID: *u.uploadID,
@@ -858,6 +883,8 @@ func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, cleanup 
 
 	var out PutObjectOutput
 	out.mapFromCompleteMultipartUploadOutput(completeOut, aws.ToString(params.Bucket), aws.ToString(u.uploadID), u.parts)
+
+	u.progressEmitter.Complete(ctx, &out)
 	return &out, nil
 }
 
@@ -908,9 +935,11 @@ func (u *multiUploader) send(ctx context.Context, c ulChunk, clientOptions ...fu
 	params := u.in.mapUploadPartInput(c.buf, c.partNum, u.uploadID, u.options.ChecksumAlgorithm)
 	resp, err := u.options.S3.UploadPart(ctx, params, clientOptions...)
 	if err != nil {
+		// progress failed() is NOT emitted here, it's emitted once at the end
 		return err
 	}
 
+	u.progressEmitter.BytesTransferred(ctx, c.buflen)
 	var completed types.CompletedPart
 	completed.MapFrom(resp, c.partNum)
 
