@@ -76,6 +76,7 @@
         "api_op_GetIdentityProviderByIdentifier.go",
         "api_op_GetLogDeliveryConfiguration.go",
         "api_op_GetSigningCertificate.go",
+        "api_op_GetTokensFromRefreshToken.go",
         "api_op_GetUICustomization.go",
         "api_op_GetUser.go",
         "api_op_GetUserAttributeVerificationCode.go",

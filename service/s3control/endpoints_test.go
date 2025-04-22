@@ -4568,7 +4568,7 @@ func TestEndpointCase92(t *testing.T) {
 // ListRegionalBuckets + OutpostId with fips in CN.
 func TestEndpointCase93(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("0123456789012"),
+		AccountId:         ptr.String("012345678912"),
 		OutpostId:         ptr.String("op-123"),
 		Region:            ptr.String("cn-north-1"),
 		RequiresAccountId: ptr.Bool(true),
@@ -4591,7 +4591,7 @@ func TestEndpointCase93(t *testing.T) {
 // ListRegionalBuckets + invalid OutpostId.
 func TestEndpointCase94(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("0123456789012"),
+		AccountId:         ptr.String("012345678912"),
 		OutpostId:         ptr.String("?outpost/invalid+"),
 		Region:            ptr.String("us-west-1"),
 		RequiresAccountId: ptr.Bool(true),
@@ -4615,7 +4615,7 @@ func TestEndpointCase94(t *testing.T) {
 func TestEndpointCase95(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("arn:aws:s3-outposts:us-west-2:999999:outpost:op-01234567890123456:bucket:mybucket"),
-		AccountId:         ptr.String("0123456789012"),
+		AccountId:         ptr.String("012345678912"),
 		Region:            ptr.String("us-west-2"),
 		RequiresAccountId: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
@@ -4629,7 +4629,7 @@ func TestEndpointCase95(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
-	if e, a := "Invalid ARN: the accountId specified in the ARN (`999999`) does not match the parameter (`0123456789012`)", err.Error(); !strings.Contains(a, e) {
+	if e, a := "Invalid ARN: the accountId specified in the ARN (`999999`) does not match the parameter (`012345678912`)", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }

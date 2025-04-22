@@ -150,6 +150,26 @@ func (m *validateOpGetRegionOptStatus) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAccountName struct {
+}
+
+func (*validateOpPutAccountName) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountName) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountNameInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountNameInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutAlternateContact struct {
 }
 
@@ -236,6 +256,10 @@ func addOpGetPrimaryEmailValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetRegionOptStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRegionOptStatus{}, middleware.After)
+}
+
+func addOpPutAccountNameValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountName{}, middleware.After)
 }
 
 func addOpPutAlternateContactValidationMiddleware(stack *middleware.Stack) error {
@@ -383,6 +407,21 @@ func validateOpGetRegionOptStatusInput(v *GetRegionOptStatusInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetRegionOptStatusInput"}
 	if v.RegionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccountNameInput(v *PutAccountNameInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountNameInput"}
+	if v.AccountName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

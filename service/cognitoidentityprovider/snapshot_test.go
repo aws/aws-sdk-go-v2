@@ -878,6 +878,18 @@ func TestCheckSnapshot_GetSigningCertificate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTokensFromRefreshToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTokensFromRefreshToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTokensFromRefreshToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetUICustomization(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetUICustomization(context.Background(), nil, func(o *Options) {
@@ -2226,6 +2238,18 @@ func TestUpdateSnapshot_GetSigningCertificate(t *testing.T) {
 	_, err := svc.GetSigningCertificate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSigningCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTokensFromRefreshToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTokensFromRefreshToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTokensFromRefreshToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -286,6 +286,12 @@ type UpdateUserPoolClientInput struct {
 	// your own custom set of read attributes.
 	ReadAttributes []string
 
+	// The configuration of your app client for refresh token rotation. When enabled,
+	// your app client issues new ID, access, and refresh tokens when users renew their
+	// sessions with refresh tokens. When disabled, token refresh issues only ID and
+	// access tokens.
+	RefreshTokenRotation *types.RefreshTokenRotationType
+
 	// The refresh token time limit. After this limit expires, your user can't use
 	// their refresh token. To specify the time unit for RefreshTokenValidity as
 	// seconds , minutes , hours , or days , set a TokenValidityUnits value in your

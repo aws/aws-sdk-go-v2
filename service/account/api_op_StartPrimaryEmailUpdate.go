@@ -44,8 +44,8 @@ type StartPrimaryEmailUpdateInput struct {
 	//
 	// [organization's management account]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
 	// [all features enabled]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-	// [delegated admin]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
-	// [trusted access]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+	// [delegated admin]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
+	// [trusted access]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
 	//
 	// This member is required.
 	AccountId *string

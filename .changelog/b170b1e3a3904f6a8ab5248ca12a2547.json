@@ -1,0 +1,8 @@
+{
+    "id": "b170b1e3-a390-4f6a-8ab5-248ca12a2547",
+    "type": "feature",
+    "description": "Added support for  ClientRouteEnforcementOptions flag in CreateClientVpnEndpoint and ModifyClientVpnEndpoint requests and DescribeClientVpnEndpoints responses",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -519,6 +519,193 @@ func awsRestjson1_deserializeOpErrorEnableRegion(response *smithyhttp.Response, 
 	}
 }
 
+type awsRestjson1_deserializeOpGetAccountInformation struct {
+}
+
+func (*awsRestjson1_deserializeOpGetAccountInformation) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetAccountInformation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetAccountInformation(response, &metadata)
+	}
+	output := &GetAccountInformationOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetAccountInformationOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetAccountInformation(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetAccountInformationOutput(v **GetAccountInformationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetAccountInformationOutput
+	if *v == nil {
+		sv = &GetAccountInformationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccountCreatedDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountCreatedDate to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.AccountCreatedDate = ptr.Time(t)
+			}
+
+		case "AccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
+		case "AccountName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountName to be of type string, got %T instead", value)
+				}
+				sv.AccountName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpGetAlternateContact struct {
 }
 
@@ -1359,6 +1546,109 @@ func awsRestjson1_deserializeOpDocumentListRegionsOutput(v **ListRegionsOutput, 
 	return nil
 }
 
+type awsRestjson1_deserializeOpPutAccountName struct {
+}
+
+func (*awsRestjson1_deserializeOpPutAccountName) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpPutAccountName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorPutAccountName(response, &metadata)
+	}
+	output := &PutAccountNameOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorPutAccountName(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestjson1_deserializeOpPutAlternateContact struct {
 }
 
@@ -1736,6 +2026,66 @@ func awsRestjson1_deserializeOpDocumentStartPrimaryEmailUpdateOutput(v **StartPr
 	return nil
 }
 
+func awsRestjson1_deserializeOpHttpBindingsAccessDeniedException(v *types.AccessDeniedException, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ErrorType = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsConflictException(v *types.ConflictException, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ErrorType = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsInternalServerException(v *types.InternalServerException, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ErrorType = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsResourceNotFoundException(v *types.ResourceNotFoundException, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ErrorType = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsTooManyRequestsException(v *types.TooManyRequestsException, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ErrorType = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
 func awsRestjson1_deserializeErrorAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.AccessDeniedException{}
 	var buff [1024]byte
@@ -1768,6 +2118,10 @@ func awsRestjson1_deserializeErrorAccessDeniedException(response *smithyhttp.Res
 	}
 
 	errorBody.Seek(0, io.SeekStart)
+
+	if err := awsRestjson1_deserializeOpHttpBindingsAccessDeniedException(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
 
 	return output
 }
@@ -1805,6 +2159,10 @@ func awsRestjson1_deserializeErrorConflictException(response *smithyhttp.Respons
 
 	errorBody.Seek(0, io.SeekStart)
 
+	if err := awsRestjson1_deserializeOpHttpBindingsConflictException(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
+
 	return output
 }
 
@@ -1840,6 +2198,10 @@ func awsRestjson1_deserializeErrorInternalServerException(response *smithyhttp.R
 	}
 
 	errorBody.Seek(0, io.SeekStart)
+
+	if err := awsRestjson1_deserializeOpHttpBindingsInternalServerException(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
 
 	return output
 }
@@ -1877,6 +2239,10 @@ func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp
 
 	errorBody.Seek(0, io.SeekStart)
 
+	if err := awsRestjson1_deserializeOpHttpBindingsResourceNotFoundException(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
+
 	return output
 }
 
@@ -1912,6 +2278,10 @@ func awsRestjson1_deserializeErrorTooManyRequestsException(response *smithyhttp.
 	}
 
 	errorBody.Seek(0, io.SeekStart)
+
+	if err := awsRestjson1_deserializeOpHttpBindingsTooManyRequestsException(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
 
 	return output
 }
@@ -1974,6 +2344,15 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 
 	for key, value := range shape {
 		switch key {
+		case "errorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorType = ptr.String(jtv)
+			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2090,6 +2469,15 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 
 	for key, value := range shape {
 		switch key {
+		case "errorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorType = ptr.String(jtv)
+			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2269,6 +2657,15 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 
 	for key, value := range shape {
 		switch key {
+		case "errorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorType = ptr.String(jtv)
+			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2392,6 +2789,15 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
+		case "errorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorType = ptr.String(jtv)
+			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2432,6 +2838,15 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 
 	for key, value := range shape {
 		switch key {
+		case "errorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorType = ptr.String(jtv)
+			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)

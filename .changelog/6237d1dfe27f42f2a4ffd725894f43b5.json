@@ -1,0 +1,8 @@
+{
+    "id": "6237d1df-e27f-42f2-a4ff-d725894f43b5",
+    "type": "feature",
+    "description": "Fix endpoint resolution test cases",
+    "modules": [
+        "service/s3control"
+    ]
+}

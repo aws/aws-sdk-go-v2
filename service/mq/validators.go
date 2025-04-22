@@ -110,6 +110,26 @@ func (m *validateOpDeleteBroker) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteConfiguration struct {
+}
+
+func (*validateOpDeleteConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTags struct {
 }
 
@@ -410,6 +430,10 @@ func addOpDeleteBrokerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBroker{}, middleware.After)
 }
 
+func addOpDeleteConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConfiguration{}, middleware.After)
+}
+
 func addOpDeleteTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTags{}, middleware.After)
 }
@@ -697,6 +721,21 @@ func validateOpDeleteBrokerInput(v *DeleteBrokerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBrokerInput"}
 	if v.BrokerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrokerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConfigurationInput(v *DeleteConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfigurationInput"}
+	if v.ConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

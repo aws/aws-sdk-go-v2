@@ -1,0 +1,8 @@
+{
+    "id": "fdebf1f9-9fad-4d62-be93-31addbe5598c",
+    "type": "feature",
+    "description": "AWS Account Management now supports account name update via IAM principals.",
+    "modules": [
+        "service/account"
+    ]
+}

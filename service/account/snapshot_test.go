@@ -110,6 +110,18 @@ func TestCheckSnapshot_EnableRegion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAccountInformation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountInformation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAccountInformation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAlternateContact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAlternateContact(context.Background(), nil, func(o *Options) {
@@ -163,6 +175,18 @@ func TestCheckSnapshot_ListRegions(t *testing.T) {
 	_, err := svc.ListRegions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListRegions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAccountName(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountName(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAccountName")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -253,6 +277,18 @@ func TestUpdateSnapshot_EnableRegion(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAccountInformation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountInformation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAccountInformation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAlternateContact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAlternateContact(context.Background(), nil, func(o *Options) {
@@ -306,6 +342,18 @@ func TestUpdateSnapshot_ListRegions(t *testing.T) {
 	_, err := svc.ListRegions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRegions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAccountName(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountName(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAccountName")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

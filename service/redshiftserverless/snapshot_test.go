@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateNamespace(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateReservation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateReservation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateReservation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateScheduledAction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateScheduledAction(context.Background(), nil, func(o *Options) {
@@ -338,6 +350,30 @@ func TestCheckSnapshot_GetRecoveryPoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetReservation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetReservation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetReservation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetReservationOffering(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetReservationOffering(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetReservationOffering")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
@@ -475,6 +511,30 @@ func TestCheckSnapshot_ListRecoveryPoints(t *testing.T) {
 	_, err := svc.ListRecoveryPoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListRecoveryPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListReservationOfferings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReservationOfferings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListReservationOfferings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListReservations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReservations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListReservations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -805,6 +865,18 @@ func TestUpdateSnapshot_CreateNamespace(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateReservation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateReservation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateReservation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateScheduledAction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateScheduledAction(context.Background(), nil, func(o *Options) {
@@ -1033,6 +1105,30 @@ func TestUpdateSnapshot_GetRecoveryPoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetReservation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetReservation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetReservation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetReservationOffering(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetReservationOffering(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetReservationOffering")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
@@ -1170,6 +1266,30 @@ func TestUpdateSnapshot_ListRecoveryPoints(t *testing.T) {
 	_, err := svc.ListRecoveryPoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRecoveryPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListReservationOfferings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReservationOfferings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListReservationOfferings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListReservations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReservations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListReservations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

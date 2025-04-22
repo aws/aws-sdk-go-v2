@@ -90,6 +90,26 @@ func (m *validateOpCreateNamespace) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateReservation struct {
+}
+
+func (*validateOpCreateReservation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateReservation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateReservationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateReservationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateScheduledAction struct {
 }
 
@@ -445,6 +465,46 @@ func (m *validateOpGetRecoveryPoint) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetRecoveryPointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetReservation struct {
+}
+
+func (*validateOpGetReservation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetReservation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetReservationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetReservationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetReservationOffering struct {
+}
+
+func (*validateOpGetReservationOffering) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetReservationOffering) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetReservationOfferingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetReservationOfferingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -906,6 +966,10 @@ func addOpCreateNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateNamespace{}, middleware.After)
 }
 
+func addOpCreateReservationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateReservation{}, middleware.After)
+}
+
 func addOpCreateScheduledActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateScheduledAction{}, middleware.After)
 }
@@ -976,6 +1040,14 @@ func addOpGetNamespaceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetRecoveryPointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRecoveryPoint{}, middleware.After)
+}
+
+func addOpGetReservationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetReservation{}, middleware.After)
+}
+
+func addOpGetReservationOfferingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetReservationOffering{}, middleware.After)
 }
 
 func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1220,6 +1292,21 @@ func validateOpCreateNamespaceInput(v *CreateNamespaceInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateReservationInput(v *CreateReservationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateReservationInput"}
+	if v.OfferingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OfferingId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1537,6 +1624,36 @@ func validateOpGetRecoveryPointInput(v *GetRecoveryPointInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetRecoveryPointInput"}
 	if v.RecoveryPointId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetReservationInput(v *GetReservationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetReservationInput"}
+	if v.ReservationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReservationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetReservationOfferingInput(v *GetReservationOfferingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetReservationOfferingInput"}
+	if v.OfferingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OfferingId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

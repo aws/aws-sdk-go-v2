@@ -69,6 +69,25 @@ func (NamespaceStatus) Values() []NamespaceStatus {
 	}
 }
 
+type OfferingType string
+
+// Enum values for OfferingType
+const (
+	OfferingTypeAllUpfront OfferingType = "ALL_UPFRONT"
+	OfferingTypeNoUpfront  OfferingType = "NO_UPFRONT"
+)
+
+// Values returns all known values for OfferingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OfferingType) Values() []OfferingType {
+	return []OfferingType{
+		"ALL_UPFRONT",
+		"NO_UPFRONT",
+	}
+}
+
 type PerformanceTargetStatus string
 
 // Enum values for PerformanceTargetStatus

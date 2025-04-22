@@ -13,6 +13,7 @@
         "api_op_CreateTags.go",
         "api_op_CreateUser.go",
         "api_op_DeleteBroker.go",
+        "api_op_DeleteConfiguration.go",
         "api_op_DeleteTags.go",
         "api_op_DeleteUser.go",
         "api_op_DescribeBroker.go",

@@ -240,6 +240,9 @@ const (
 	SchemaAttributeTypeDate              SchemaAttributeType = "DATE"
 	SchemaAttributeTypeString            SchemaAttributeType = "STRING"
 	SchemaAttributeTypeProviderId        SchemaAttributeType = "PROVIDER_ID"
+	SchemaAttributeTypeIpv4              SchemaAttributeType = "IPV4"
+	SchemaAttributeTypeIpv6              SchemaAttributeType = "IPV6"
+	SchemaAttributeTypeMaid              SchemaAttributeType = "MAID"
 )
 
 // Values returns all known values for SchemaAttributeType. Note that this can be
@@ -268,6 +271,9 @@ func (SchemaAttributeType) Values() []SchemaAttributeType {
 		"DATE",
 		"STRING",
 		"PROVIDER_ID",
+		"IPV4",
+		"IPV6",
+		"MAID",
 	}
 }
 

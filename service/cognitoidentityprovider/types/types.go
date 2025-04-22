@@ -1551,6 +1551,27 @@ type RecoveryOptionType struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of your app client for refresh token rotation. When enabled,
+// your app client issues new ID, access, and refresh tokens when users renew their
+// sessions with refresh tokens. When disabled, token refresh issues only ID and
+// access tokens.
+type RefreshTokenRotationType struct {
+
+	// The state of refresh token rotation for the current app client.
+	//
+	// This member is required.
+	Feature FeatureType
+
+	// When you request a token refresh with GetTokensFromRefreshToken , the original
+	// refresh token that you're rotating out can remain valid for a period of time of
+	// up to 60 seconds. This allows for client-side retries. When
+	// RetryGracePeriodSeconds is 0 , the grace period is disabled and a successful
+	// request immediately invalidates the submitted refresh token.
+	RetryGracePeriodSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // One custom scope associated with a user pool resource server. This data type is
 // a member of ResourceServerScopeType . For more information, see [Scopes, M2M, and API authorization with resource servers].
 //
@@ -2348,6 +2369,12 @@ type UserPoolClientType struct {
 	// Cognito only populates ReadAttributes in the API response if you have specified
 	// your own custom set of read attributes.
 	ReadAttributes []string
+
+	// The configuration of your app client for refresh token rotation. When enabled,
+	// your app client issues new ID, access, and refresh tokens when users renew their
+	// sessions with refresh tokens. When disabled, token refresh issues only ID and
+	// access tokens.
+	RefreshTokenRotation *RefreshTokenRotationType
 
 	// The refresh token time limit. After this limit expires, your user can't use
 	// their refresh token. To specify the time unit for RefreshTokenValidity as

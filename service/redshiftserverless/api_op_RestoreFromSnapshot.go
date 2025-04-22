@@ -53,7 +53,7 @@ type RestoreFromSnapshotInput struct {
 	OwnerAccount *string
 
 	// The Amazon Resource Name (ARN) of the snapshot to restore from. Required if
-	// restoring from Amazon Redshift Serverless to a provisioned cluster. Must not be
+	// restoring from a provisioned cluster to Amazon Redshift Serverless. Must not be
 	// specified at the same time as snapshotName .
 	//
 	// The format of the ARN is

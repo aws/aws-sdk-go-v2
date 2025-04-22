@@ -268,6 +268,72 @@ type RecoveryPoint struct {
 	noSmithyDocumentSerde
 }
 
+// Represents an Amazon Redshift Serverless reservation, which gives you the
+// option to commit to a specified number of Redshift Processing Units (RPUs) for a
+// year at a discount from Serverless on-demand (OD) rates.
+type Reservation struct {
+
+	// The number of Redshift Processing Units (RPUs) to reserve.
+	Capacity int32
+
+	// The end date for the serverless reservation. This date is one year after the
+	// start date that you specify.
+	EndDate *time.Time
+
+	// The type of offering for the reservation. The offering class determines the
+	// payment schedule for the reservation.
+	Offering *ReservationOffering
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the serverless
+	// reservation.
+	ReservationArn *string
+
+	// The identifier that uniquely identifies the serverless reservation.
+	ReservationId *string
+
+	// The start date for the serverless reservation. This is the date you specified
+	// for the reservation to start when you created the reservation.
+	StartDate *time.Time
+
+	// The status of the reservation. Possible values include the following:
+	//
+	//   - payment-pending
+	//
+	//   - active
+	//
+	//   - payment-failed
+	//
+	//   - retired
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// The class of offering for the reservation. The offering class determines the
+// payment schedule for the reservation.
+type ReservationOffering struct {
+
+	// The currency code for the offering.
+	CurrencyCode *string
+
+	// The duration, in seconds, for which the reservation reserves the RPUs.
+	Duration int32
+
+	// The rate you are charged for each hour the reservation is active.
+	HourlyCharge float64
+
+	// The offering identifier.
+	OfferingId *string
+
+	// Determines the payment schedule for the reservation.
+	OfferingType OfferingType
+
+	// The up-front price you are charged for the reservation.
+	UpfrontCharge float64
+
+	noSmithyDocumentSerde
+}
+
 // The resource policy object. Currently, you can use policies to share snapshots
 // across Amazon Web Services accounts.
 type ResourcePolicy struct {

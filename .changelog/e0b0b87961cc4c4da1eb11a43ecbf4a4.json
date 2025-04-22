@@ -1,0 +1,8 @@
+{
+    "id": "e0b0b879-61cc-4c4d-a1eb-11a43ecbf4a4",
+    "type": "feature",
+    "description": "Provides new and updated API members to support the Redshift Serverless reservations feature.",
+    "modules": [
+        "service/redshiftserverless"
+    ]
+}

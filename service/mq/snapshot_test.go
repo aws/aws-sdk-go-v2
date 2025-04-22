@@ -122,6 +122,18 @@ func TestCheckSnapshot_DeleteBroker(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTags(context.Background(), nil, func(o *Options) {
@@ -390,6 +402,18 @@ func TestUpdateSnapshot_DeleteBroker(t *testing.T) {
 	_, err := svc.DeleteBroker(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteBroker")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -636,6 +636,25 @@ func (ExplicitAuthFlowsType) Values() []ExplicitAuthFlowsType {
 	}
 }
 
+type FeatureType string
+
+// Enum values for FeatureType
+const (
+	FeatureTypeEnabled  FeatureType = "ENABLED"
+	FeatureTypeDisabled FeatureType = "DISABLED"
+)
+
+// Values returns all known values for FeatureType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureType) Values() []FeatureType {
+	return []FeatureType{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type FeedbackValueType string
 
 // Enum values for FeedbackValueType

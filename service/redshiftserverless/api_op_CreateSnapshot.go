@@ -14,7 +14,7 @@ import (
 // Creates a snapshot of all databases in a namespace. For more information about
 // snapshots, see [Working with snapshots and recovery points].
 //
-// [Working with snapshots and recovery points]: https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery.html
+// [Working with snapshots and recovery points]: https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery-points.html
 func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput, optFns ...func(*Options)) (*CreateSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateSnapshotInput{}

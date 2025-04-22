@@ -1,0 +1,8 @@
+{
+    "id": "0ceb9c94-b7f3-4b2f-9176-28cf0610f840",
+    "type": "feature",
+    "description": "To expand support for matching records using digital identifiers with TransUnion",
+    "modules": [
+        "service/entityresolution"
+    ]
+}

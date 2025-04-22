@@ -14,6 +14,8 @@ type AccessDeniedException struct {
 
 	ErrorCodeOverride *string
 
+	ErrorType *string
+
 	noSmithyDocumentSerde
 }
 
@@ -36,11 +38,14 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 
 // The request could not be processed because of a conflict in the current status
 // of the resource. For example, this happens if you try to enable a Region that is
-// currently being disabled (in a status of DISABLING).
+// currently being disabled (in a status of DISABLING) or if you try to change an
+// account’s root user email to an email address which is already in use.
 type ConflictException struct {
 	Message *string
 
 	ErrorCodeOverride *string
+
+	ErrorType *string
 
 	noSmithyDocumentSerde
 }
@@ -69,6 +74,8 @@ type InternalServerException struct {
 
 	ErrorCodeOverride *string
 
+	ErrorType *string
+
 	noSmithyDocumentSerde
 }
 
@@ -94,6 +101,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	ErrorCodeOverride *string
+
+	ErrorType *string
 
 	noSmithyDocumentSerde
 }
@@ -121,6 +130,8 @@ type TooManyRequestsException struct {
 	Message *string
 
 	ErrorCodeOverride *string
+
+	ErrorType *string
 
 	noSmithyDocumentSerde
 }

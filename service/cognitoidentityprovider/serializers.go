@@ -4166,6 +4166,67 @@ func (m *awsAwsjson11_serializeOpGetSigningCertificate) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetTokensFromRefreshToken struct {
+}
+
+func (*awsAwsjson11_serializeOpGetTokensFromRefreshToken) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetTokensFromRefreshToken) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetTokensFromRefreshTokenInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.GetTokensFromRefreshToken")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetTokensFromRefreshTokenInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetUICustomization struct {
 }
 
@@ -8017,6 +8078,23 @@ func awsAwsjson11_serializeDocumentRecoveryOptionType(v *types.RecoveryOptionTyp
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRefreshTokenRotationType(v *types.RefreshTokenRotationType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Feature) > 0 {
+		ok := object.Key("Feature")
+		ok.String(string(v.Feature))
+	}
+
+	if v.RetryGracePeriodSeconds != nil {
+		ok := object.Key("RetryGracePeriodSeconds")
+		ok.Integer(*v.RetryGracePeriodSeconds)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentResourceServerScopeListType(v []types.ResourceServerScopeType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -9701,6 +9779,13 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolClientInput(v *CreateUserPool
 		}
 	}
 
+	if v.RefreshTokenRotation != nil {
+		ok := object.Key("RefreshTokenRotation")
+		if err := awsAwsjson11_serializeDocumentRefreshTokenRotationType(v.RefreshTokenRotation, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RefreshTokenValidity != 0 {
 		ok := object.Key("RefreshTokenValidity")
 		ok.Integer(v.RefreshTokenValidity)
@@ -10380,6 +10465,40 @@ func awsAwsjson11_serializeOpDocumentGetSigningCertificateInput(v *GetSigningCer
 	if v.UserPoolId != nil {
 		ok := object.Key("UserPoolId")
 		ok.String(*v.UserPoolId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetTokensFromRefreshTokenInput(v *GetTokensFromRefreshTokenInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientId != nil {
+		ok := object.Key("ClientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.ClientMetadata != nil {
+		ok := object.Key("ClientMetadata")
+		if err := awsAwsjson11_serializeDocumentClientMetadataType(v.ClientMetadata, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientSecret != nil {
+		ok := object.Key("ClientSecret")
+		ok.String(*v.ClientSecret)
+	}
+
+	if v.DeviceKey != nil {
+		ok := object.Key("DeviceKey")
+		ok.String(*v.DeviceKey)
+	}
+
+	if v.RefreshToken != nil {
+		ok := object.Key("RefreshToken")
+		ok.String(*v.RefreshToken)
 	}
 
 	return nil
@@ -11524,6 +11643,13 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolClientInput(v *UpdateUserPool
 	if v.ReadAttributes != nil {
 		ok := object.Key("ReadAttributes")
 		if err := awsAwsjson11_serializeDocumentClientPermissionListType(v.ReadAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RefreshTokenRotation != nil {
+		ok := object.Key("RefreshTokenRotation")
+		if err := awsAwsjson11_serializeDocumentRefreshTokenRotationType(v.RefreshTokenRotation, ok); err != nil {
 			return err
 		}
 	}

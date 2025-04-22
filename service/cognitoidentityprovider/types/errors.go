@@ -746,6 +746,33 @@ func (e *PreconditionNotMetException) ErrorCode() string {
 }
 func (e *PreconditionNotMetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is throw when your application requests token refresh with a
+// refresh token that has been invalidated by refresh-token rotation.
+type RefreshTokenReuseException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RefreshTokenReuseException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RefreshTokenReuseException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RefreshTokenReuseException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RefreshTokenReuseException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RefreshTokenReuseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when the Amazon Cognito service can't find the
 // requested resource.
 type ResourceNotFoundException struct {

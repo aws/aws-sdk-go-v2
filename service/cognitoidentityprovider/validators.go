@@ -1350,6 +1350,26 @@ func (m *validateOpGetSigningCertificate) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTokensFromRefreshToken struct {
+}
+
+func (*validateOpGetTokensFromRefreshToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTokensFromRefreshToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTokensFromRefreshTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTokensFromRefreshTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetUICustomization struct {
 }
 
@@ -2518,6 +2538,10 @@ func addOpGetSigningCertificateValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpGetSigningCertificate{}, middleware.After)
 }
 
+func addOpGetTokensFromRefreshTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTokensFromRefreshToken{}, middleware.After)
+}
+
 func addOpGetUICustomizationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUICustomization{}, middleware.After)
 }
@@ -3112,6 +3136,21 @@ func validateRecoveryOptionType(v *types.RecoveryOptionType) error {
 	}
 	if len(v.Name) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRefreshTokenRotationType(v *types.RefreshTokenRotationType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RefreshTokenRotationType"}
+	if len(v.Feature) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Feature"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3991,6 +4030,11 @@ func validateOpCreateUserPoolClientInput(v *CreateUserPoolClientInput) error {
 	if v.ClientName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientName"))
 	}
+	if v.RefreshTokenRotation != nil {
+		if err := validateRefreshTokenRotationType(v.RefreshTokenRotation); err != nil {
+			invalidParams.AddNested("RefreshTokenRotation", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4509,6 +4553,24 @@ func validateOpGetSigningCertificateInput(v *GetSigningCertificateInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetSigningCertificateInput"}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTokensFromRefreshTokenInput(v *GetTokensFromRefreshTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTokensFromRefreshTokenInput"}
+	if v.RefreshToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RefreshToken"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5239,6 +5301,11 @@ func validateOpUpdateUserPoolClientInput(v *UpdateUserPoolClientInput) error {
 	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.RefreshTokenRotation != nil {
+		if err := validateRefreshTokenRotationType(v.RefreshTokenRotation); err != nil {
+			invalidParams.AddNested("RefreshTokenRotation", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
