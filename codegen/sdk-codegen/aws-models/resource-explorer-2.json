@@ -952,7 +952,7 @@
                 "Name": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the property that is included in this view.</p>\n         <p>You can specify the following property names for this field:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Tags</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the property that is included in this view.</p>\n         <p>You can specify the following property names for this field:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tags</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1011
@@ -1400,7 +1400,10 @@
             "type": "structure",
             "members": {
                 "Filters": {
-                    "target": "com.amazonaws.resourceexplorer2#SearchFilter"
+                    "target": "com.amazonaws.resourceexplorer2#SearchFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of strings that specify which resources are included in the results of \n            queries made using this view. When you use this view in a <a>Search</a> \n            operation, the filter string is combined with the search's <code>QueryString</code> \n            parameter using a logical <code>AND</code> operator.</p>\n         <p>For information about the supported syntax, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html\">Search query reference for\n                Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <important>\n            <p>This query string in the context of this operation supports only <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters\">filter\n                    prefixes</a> with optional <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators\">operators</a>. It doesn't support free-form text. For example, the \n                    string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 \n                    resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is\n                    <i>not</i> tagged with a key <code>Stage</code> that has the value\n                    <code>prod</code>.</p>\n         </important>"
+                    }
                 },
                 "MaxResults": {
                     "target": "smithy.api#Integer",
@@ -1425,7 +1428,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from. The pagination tokens expire after 24 hours.</p>",
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from. The pagination tokens expire after 24 hours.</p>\n         <note>\n            <p>The <code>ListResources</code> operation \n            does not generate a <code>NextToken</code> if you set <code>MaxResults</code> to 1000. </p>\n         </note>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 2048

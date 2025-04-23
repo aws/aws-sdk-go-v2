@@ -222,6 +222,9 @@
                     "target": "com.amazonaws.ecs#StartTask"
                 },
                 {
+                    "target": "com.amazonaws.ecs#StopServiceDeployment"
+                },
+                {
                     "target": "com.amazonaws.ecs#StopTask"
                 },
                 {
@@ -10656,7 +10659,7 @@
                 "cluster": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The short name or full Amazon Resource Name (ARN) of the cluster to run your task on.\n\t\t\tIf you do not specify a cluster, the default cluster is assumed.</p>"
+                        "smithy.api#documentation": "<p>The short name or full Amazon Resource Name (ARN) of the cluster to run your task on.\n\t\t\tIf you do not specify a cluster, the default cluster is assumed.</p>\n         <p>Each account receives a default cluster the first time you use the service, but you\n\t\t\tmay also create other clusters.</p>"
                     }
                 },
                 "count": {
@@ -11523,6 +11526,21 @@
                 "smithy.api#documentation": "<p>Information about the circuit breaker used to determine when a service deployment has\n\t\t\tfailed.</p>\n         <p>The deployment circuit breaker is the rolling update mechanism that determines if the\n\t\t\ttasks reach a steady state. The deployment circuit breaker has an option that will\n\t\t\tautomatically roll back a failed deployment to the last cpompleted service revision. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-circuit-breaker.html\">How the Amazon\n\t\t\t\tECS deployment circuit breaker detects failures</a> in the<i> Amazon ECS\n\t\t\t\tDeveloper Guide</i>.</p>"
             }
         },
+        "com.amazonaws.ecs#ServiceDeploymentNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service deploy ARN that you specified in the <code>StopServiceDeployment</code> doesn't exist. You can use <code>ListServiceDeployments</code> to retrieve the service deployment ARNs.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.ecs#ServiceDeploymentRollbackMonitorsStatus": {
             "type": "enum",
             "members": {
@@ -11583,6 +11601,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "ROLLBACK_REQUESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK_REQUESTED"
                     }
                 },
                 "ROLLBACK_IN_PROGRESS": {
@@ -12372,6 +12396,106 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecs#KeyValuePair"
+            }
+        },
+        "com.amazonaws.ecs#StopServiceDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#StopServiceDeploymentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#StopServiceDeploymentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServiceDeploymentNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops an ongoing service deployment.</p>\n         <p>The following stop types are avaiable:</p>\n         <ul>\n            <li>\n               <p>ROLLBACK - This option rolls back the service deployment to the previous\n\t\t\t\t\tservice revision. </p>\n               <p>You can use this option even if you didn't configure the service deployment\n\t\t\t\t\tfor the rollback option. </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/stop-service-deployment.html\">Stopping Amazon ECS\n\t\t\t\tservice deployments</a> in the <i>Amazon Elastic Container Service Developer\n\t\t\tGuide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To stop a service deployment",
+                        "documentation": "This example stops the service deployment using the ROLLBACK option.",
+                        "input": {
+                            "serviceDeploymentArn": "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r",
+                            "stopType": "ROLLBACK"
+                        },
+                        "output": {
+                            "serviceDeploymentArn": "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecs#StopServiceDeploymentRequest": {
+            "type": "structure",
+            "members": {
+                "serviceDeploymentArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service deployment that you want to stop.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stopType": {
+                    "target": "com.amazonaws.ecs#StopServiceDeploymentStopType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How you want Amazon ECS to stop the task. </p>\n         <p>The valid values are <code>ROLLBACK</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#StopServiceDeploymentResponse": {
+            "type": "structure",
+            "members": {
+                "serviceDeploymentArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the stopped service deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#StopServiceDeploymentStopType": {
+            "type": "enum",
+            "members": {
+                "ABORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ABORT"
+                    }
+                },
+                "ROLLBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#StopTask": {
