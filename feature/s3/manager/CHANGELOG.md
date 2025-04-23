@@ -1,3 +1,7 @@
+# v1.17.73 (2025-04-23)
+
+* **Bug Fix**: Abort multi part download if the object is modified during download
+
 # v1.17.72 (2025-04-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

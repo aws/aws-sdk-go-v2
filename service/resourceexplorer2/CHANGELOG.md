@@ -1,3 +1,7 @@
+# v1.17.4 (2025-04-23)
+
+* **Documentation**: Documentation-only update for CreateView option correction
+
 # v1.17.3 (2025-04-11)
 
 * No change notes available for this release.

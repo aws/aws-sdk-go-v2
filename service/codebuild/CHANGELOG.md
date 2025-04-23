@@ -1,3 +1,7 @@
+# v1.60.0 (2025-04-23)
+
+* **Feature**: Add support for custom instance type for reserved capacity fleets
+
 # v1.59.0 (2025-04-07)
 
 * **Feature**: AWS CodeBuild now offers an enhanced debugging experience.

@@ -1,3 +1,7 @@
+# v1.56.0 (2025-04-23)
+
+* **Feature**: Add support to roll back an In_Progress ECS Service Deployment
+
 # v1.55.0 (2025-04-17)
 
 * **Feature**: Adds a new AccountSetting - defaultLogDriverMode for ECS.

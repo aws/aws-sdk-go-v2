@@ -1,3 +1,15 @@
+# Release (2025-04-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.17.73](feature/s3/manager/CHANGELOG.md#v11773-2025-04-23)
+  * **Bug Fix**: Abort multi part download if the object is modified during download
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.60.0](service/codebuild/CHANGELOG.md#v1600-2025-04-23)
+  * **Feature**: Add support for custom instance type for reserved capacity fleets
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.56.0](service/ecs/CHANGELOG.md#v1560-2025-04-23)
+  * **Feature**: Add support to roll back an In_Progress ECS Service Deployment
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.17.4](service/resourceexplorer2/CHANGELOG.md#v1174-2025-04-23)
+  * **Documentation**: Documentation-only update for CreateView option correction
+
 # Release (2025-04-22)
 
 ## Module Highlights
