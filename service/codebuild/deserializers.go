@@ -9313,6 +9313,15 @@ func awsAwsjson11_deserializeDocumentComputeConfiguration(v **types.ComputeConfi
 				sv.Disk = ptr.Int64(i64)
 			}
 
+		case "instanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = ptr.String(jtv)
+			}
+
 		case "machineType":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -557,6 +557,36 @@ func (e *ServerException) ErrorCode() string {
 }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The service deploy ARN that you specified in the StopServiceDeployment doesn't
+// exist. You can use ListServiceDeployments to retrieve the service deployment
+// ARNs.
+type ServiceDeploymentNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceDeploymentNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceDeploymentNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceDeploymentNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceDeploymentNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceDeploymentNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The specified service isn't active. You can't update a service that's inactive.
 // If you have previously deleted a service, you can re-create it with [CreateService].
 //

@@ -1,0 +1,8 @@
+{
+    "id": "b4b16d01-1594-4331-ab70-8fb55a182909",
+    "type": "feature",
+    "description": "Add support to roll back an In_Progress ECS Service Deployment",
+    "modules": [
+        "service/ecs"
+    ]
+}

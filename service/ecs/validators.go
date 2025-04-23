@@ -690,6 +690,26 @@ func (m *validateOpStartTask) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopServiceDeployment struct {
+}
+
+func (*validateOpStopServiceDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopServiceDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopServiceDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopServiceDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopTask struct {
 }
 
@@ -1104,6 +1124,10 @@ func addOpRunTaskValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartTask{}, middleware.After)
+}
+
+func addOpStopServiceDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopServiceDeployment{}, middleware.After)
 }
 
 func addOpStopTaskValidationMiddleware(stack *middleware.Stack) error {
@@ -3132,6 +3156,21 @@ func validateOpStartTaskInput(v *StartTaskInput) error {
 		if err := validateTaskVolumeConfigurations(v.VolumeConfigurations); err != nil {
 			invalidParams.AddNested("VolumeConfigurations", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopServiceDeploymentInput(v *StopServiceDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopServiceDeploymentInput"}
+	if v.ServiceDeploymentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceDeploymentArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

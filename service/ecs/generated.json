@@ -52,6 +52,7 @@
         "api_op_RegisterTaskDefinition.go",
         "api_op_RunTask.go",
         "api_op_StartTask.go",
+        "api_op_StopServiceDeployment.go",
         "api_op_StopTask.go",
         "api_op_SubmitAttachmentStateChanges.go",
         "api_op_SubmitContainerStateChange.go",

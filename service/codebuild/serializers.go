@@ -3734,6 +3734,11 @@ func awsAwsjson11_serializeDocumentComputeConfiguration(v *types.ComputeConfigur
 		ok.Long(*v.Disk)
 	}
 
+	if v.InstanceType != nil {
+		ok := object.Key("instanceType")
+		ok.String(*v.InstanceType)
+	}
+
 	if len(v.MachineType) > 0 {
 		ok := object.Key("machineType")
 		ok.String(string(v.MachineType))

@@ -36,7 +36,7 @@ type IncludedProperty struct {
 	//
 	// You can specify the following property names for this field:
 	//
-	//   - Tags
+	//   - tags
 	//
 	// This member is required.
 	Name *string

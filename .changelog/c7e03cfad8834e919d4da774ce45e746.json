@@ -1,0 +1,8 @@
+{
+    "id": "c7e03cfa-d883-4e91-9d4d-a774ce45e746",
+    "type": "feature",
+    "description": "Add support for custom instance type for reserved capacity fleets",
+    "modules": [
+        "service/codebuild"
+    ]
+}

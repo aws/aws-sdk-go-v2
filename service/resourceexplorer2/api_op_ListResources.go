@@ -32,8 +32,23 @@ func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, 
 
 type ListResourcesInput struct {
 
-	// A search filter defines which resources can be part of a search query result
-	// set.
+	// An array of strings that specify which resources are included in the results of
+	// queries made using this view. When you use this view in a Searchoperation, the filter
+	// string is combined with the search's QueryString parameter using a logical AND
+	// operator.
+	//
+	// For information about the supported syntax, see [Search query reference for Resource Explorer] in the Amazon Web Services
+	// Resource Explorer User Guide.
+	//
+	// This query string in the context of this operation supports only [filter prefixes] with optional [operators]
+	// . It doesn't support free-form text. For example, the string region:us*
+	// service:ec2 -tag:stage=prod includes all Amazon EC2 resources in any Amazon Web
+	// Services Region that begins with the letters us and is not tagged with a key
+	// Stage that has the value prod .
+	//
+	// [filter prefixes]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters
+	// [Search query reference for Resource Explorer]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html
+	// [operators]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators
 	Filters *types.SearchFilter
 
 	// The maximum number of results that you want included on each page of the
@@ -53,6 +68,9 @@ type ListResourcesInput struct {
 	// is available. Set this parameter to the value of the previous call's NextToken
 	// response to indicate where the output should continue from. The pagination
 	// tokens expire after 24 hours.
+	//
+	// The ListResources operation does not generate a NextToken if you set MaxResults
+	// to 1000.
 	NextToken *string
 
 	// Specifies the Amazon resource name (ARN) of the view to use for the query. If

@@ -590,6 +590,18 @@ func TestCheckSnapshot_StartTask(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StopServiceDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopServiceDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopServiceDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopTask(context.Background(), nil, func(o *Options) {
@@ -1290,6 +1302,18 @@ func TestUpdateSnapshot_StartTask(t *testing.T) {
 	_, err := svc.StartTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopServiceDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopServiceDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopServiceDeployment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

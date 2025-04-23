@@ -827,11 +827,15 @@ type CommandExecution struct {
 }
 
 // Contains compute attributes. These attributes only need be specified when your
-// project's or fleet's computeType is set to ATTRIBUTE_BASED_COMPUTE .
+// project's or fleet's computeType is set to ATTRIBUTE_BASED_COMPUTE or
+// CUSTOM_INSTANCE_TYPE .
 type ComputeConfiguration struct {
 
 	// The amount of disk space of the instance type included in your fleet.
 	Disk *int64
+
+	// The EC2 instance type to be launched in your fleet.
+	InstanceType *string
 
 	// The machine type of the instance type included in your fleet.
 	MachineType MachineType
@@ -2641,7 +2645,8 @@ type ScopeConfiguration struct {
 	// This member is required.
 	Name *string
 
-	// The type of scope for a GitHub or GitLab webhook.
+	// The type of scope for a GitHub or GitLab webhook. The scope default is
+	// GITHUB_ORGANIZATION.
 	//
 	// This member is required.
 	Scope WebhookScopeType

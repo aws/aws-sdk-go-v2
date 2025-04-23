@@ -1000,6 +1000,7 @@ const (
 	ServiceDeploymentStatusStopped            ServiceDeploymentStatus = "STOPPED"
 	ServiceDeploymentStatusStopRequested      ServiceDeploymentStatus = "STOP_REQUESTED"
 	ServiceDeploymentStatusInProgress         ServiceDeploymentStatus = "IN_PROGRESS"
+	ServiceDeploymentStatusRollbackRequested  ServiceDeploymentStatus = "ROLLBACK_REQUESTED"
 	ServiceDeploymentStatusRollbackInProgress ServiceDeploymentStatus = "ROLLBACK_IN_PROGRESS"
 	ServiceDeploymentStatusRollbackSuccessful ServiceDeploymentStatus = "ROLLBACK_SUCCESSFUL"
 	ServiceDeploymentStatusRollbackFailed     ServiceDeploymentStatus = "ROLLBACK_FAILED"
@@ -1016,6 +1017,7 @@ func (ServiceDeploymentStatus) Values() []ServiceDeploymentStatus {
 		"STOPPED",
 		"STOP_REQUESTED",
 		"IN_PROGRESS",
+		"ROLLBACK_REQUESTED",
 		"ROLLBACK_IN_PROGRESS",
 		"ROLLBACK_SUCCESSFUL",
 		"ROLLBACK_FAILED",
@@ -1128,6 +1130,26 @@ func (StabilityStatus) Values() []StabilityStatus {
 	return []StabilityStatus{
 		"STEADY_STATE",
 		"STABILIZING",
+	}
+}
+
+type StopServiceDeploymentStopType string
+
+// Enum values for StopServiceDeploymentStopType
+const (
+	StopServiceDeploymentStopTypeAbort    StopServiceDeploymentStopType = "ABORT"
+	StopServiceDeploymentStopTypeRollback StopServiceDeploymentStopType = "ROLLBACK"
+)
+
+// Values returns all known values for StopServiceDeploymentStopType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StopServiceDeploymentStopType) Values() []StopServiceDeploymentStopType {
+	return []StopServiceDeploymentStopType{
+		"ABORT",
+		"ROLLBACK",
 	}
 }
 

@@ -266,6 +266,7 @@ const (
 	ComputeTypeBuildLambda8gb        ComputeType = "BUILD_LAMBDA_8GB"
 	ComputeTypeBuildLambda10gb       ComputeType = "BUILD_LAMBDA_10GB"
 	ComputeTypeAttributeBasedCompute ComputeType = "ATTRIBUTE_BASED_COMPUTE"
+	ComputeTypeCustomInstanceType    ComputeType = "CUSTOM_INSTANCE_TYPE"
 )
 
 // Values returns all known values for ComputeType. Note that this can be expanded
@@ -285,6 +286,7 @@ func (ComputeType) Values() []ComputeType {
 		"BUILD_LAMBDA_8GB",
 		"BUILD_LAMBDA_10GB",
 		"ATTRIBUTE_BASED_COMPUTE",
+		"CUSTOM_INSTANCE_TYPE",
 	}
 }
 
