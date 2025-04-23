@@ -174,6 +174,54 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectLogged:  "Skipped validation of multipart checksum",
 			expectPayload: []byte("hello world"),
 		},
+		"log for no checksum with unfiltered status code": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
+			response: &smithyhttp.Response{
+				Response: &http.Response{
+					StatusCode: 400, // no filter for status code 400
+					Header: func() http.Header {
+						return http.Header{}
+					}(),
+					Body: ioutil.NopCloser(strings.NewReader("hello world")),
+				},
+			},
+			expectLogged:  "Response has no supported checksum. Not validating response payload.",
+			expectPayload: []byte("hello world"),
+		},
+		"do not log for no checksum with filtered status code (404)": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
+			response: &smithyhttp.Response{
+				Response: &http.Response{
+					StatusCode: 404,
+					Header: func() http.Header {
+						return http.Header{}
+					}(),
+					Body: ioutil.NopCloser(strings.NewReader("hello world")),
+				},
+			},
+			expectLogged:  "", // no log for filtered code 404
+			expectPayload: []byte("hello world"),
+		},
+		"do not log for no checksum with filtered status code (206)": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
+			response: &smithyhttp.Response{
+				Response: &http.Response{
+					StatusCode: 206,
+					Header: func() http.Header {
+						return http.Header{}
+					}(),
+					Body: ioutil.NopCloser(strings.NewReader("hello world")),
+				},
+			},
+			expectLogged:  "", // no log for filtered code 206
+			expectPayload: []byte("hello world"),
+		},
 	}
 
 	for name, c := range cases {

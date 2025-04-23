@@ -1,0 +1,9 @@
+{
+    "id": "ebab4889-cccb-49dc-a3bb-6968bc682cf4",
+    "type": "bugfix",
+    "description": "Do not write WARN log for missing checksum for responses with partial content.",
+    "collapse": false,
+    "modules": [
+        "service/internal/checksum"
+    ]
+}
