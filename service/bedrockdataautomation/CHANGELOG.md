@@ -1,3 +1,7 @@
+# v1.3.0 (2025-04-24)
+
+* **Feature**: Added support for modality routing and modality enablement on CreateDataAutomationProject and UpdateDataAutomationProject APIs
+
 # v1.2.2 (2025-04-03)
 
 * No change notes available for this release.

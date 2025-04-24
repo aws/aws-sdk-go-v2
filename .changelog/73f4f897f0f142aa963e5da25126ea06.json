@@ -1,8 +1,0 @@
-{
-    "id": "73f4f897-f0f1-42aa-963e-5da25126ea06",
-    "type": "feature",
-    "description": "Remove redundant validation check.",
-    "modules": [
-        "service/codebuild"
-    ]
-}

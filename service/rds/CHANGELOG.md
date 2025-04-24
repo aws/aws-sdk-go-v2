@@ -1,3 +1,7 @@
+# v1.95.0 (2025-04-24)
+
+* **Feature**: This Amazon RDS release adds support for managed master user passwords for Oracle CDBs.
+
 # v1.94.4 (2025-04-10)
 
 * No change notes available for this release.

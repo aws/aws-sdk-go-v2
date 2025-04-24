@@ -1,8 +1,0 @@
-{
-    "id": "1214932d-535f-46e8-895b-acd9fc9a90b7",
-    "type": "documentation",
-    "description": "Documentation-only update: added valid values for the version property of the Scheduler and SchedulerRequest data types.",
-    "modules": [
-        "service/pcs"
-    ]
-}

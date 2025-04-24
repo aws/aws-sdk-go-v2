@@ -1,3 +1,7 @@
+# v1.43.0 (2025-04-24)
+
+* **Feature**: Add support for ARN-sourced account endpoint generation for TransactWriteItems. This will generate account endpoints for DynamoDB TransactWriteItems requests using ARN-sourced account ID when available.
+
 # v1.42.4 (2025-04-11)
 
 * **Documentation**: Doc only update for API descriptions.

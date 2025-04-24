@@ -1,8 +1,0 @@
-{
-    "id": "00a74a51-b8f2-4f74-888a-af8eb1848182",
-    "type": "feature",
-    "description": "Add data source support to Event APIs",
-    "modules": [
-        "service/appsync"
-    ]
-}

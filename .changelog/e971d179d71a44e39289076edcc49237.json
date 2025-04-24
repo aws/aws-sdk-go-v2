@@ -1,8 +1,0 @@
-{
-    "id": "e971d179-d71a-44e3-9289-076edcc49237",
-    "type": "feature",
-    "description": "This Amazon RDS release adds support for managed master user passwords for Oracle CDBs.",
-    "modules": [
-        "service/rds"
-    ]
-}

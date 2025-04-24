@@ -1,3 +1,7 @@
+# v1.4.2 (2025-04-24)
+
+* **Documentation**: Documentation-only update: added valid values for the version property of the Scheduler and SchedulerRequest data types.
+
 # v1.4.1 (2025-04-03)
 
 * No change notes available for this release.

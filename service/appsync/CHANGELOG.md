@@ -1,3 +1,7 @@
+# v1.46.0 (2025-04-24)
+
+* **Feature**: Add data source support to Event APIs
+
 # v1.45.1 (2025-04-03)
 
 * No change notes available for this release.

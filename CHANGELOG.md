@@ -1,3 +1,24 @@
+# Release (2025-04-24)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.34.0](service/apprunner/CHANGELOG.md#v1340-2025-04-24)
+  * **Feature**: AWS App Runner adds Node.js 22 runtime.
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.46.0](service/appsync/CHANGELOG.md#v1460-2025-04-24)
+  * **Feature**: Add data source support to Event APIs
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.3.0](service/bedrockdataautomation/CHANGELOG.md#v130-2025-04-24)
+  * **Feature**: Added support for modality routing and modality enablement on CreateDataAutomationProject and UpdateDataAutomationProject APIs
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.43.0](service/dynamodb/CHANGELOG.md#v1430-2025-04-24)
+  * **Feature**: Add support for ARN-sourced account endpoint generation for TransactWriteItems. This will generate account endpoints for DynamoDB TransactWriteItems requests using ARN-sourced account ID when available.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.56.1](service/ecs/CHANGELOG.md#v1561-2025-04-24)
+  * **Documentation**: Documentation only release for Amazon ECS
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.4.2](service/pcs/CHANGELOG.md#v142-2025-04-24)
+  * **Documentation**: Documentation-only update: added valid values for the version property of the Scheduler and SchedulerRequest data types.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.95.0](service/rds/CHANGELOG.md#v1950-2025-04-24)
+  * **Feature**: This Amazon RDS release adds support for managed master user passwords for Oracle CDBs.
+
 # Release (2025-04-23)
 
 ## Module Highlights
