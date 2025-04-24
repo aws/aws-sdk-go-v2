@@ -4597,12 +4597,7 @@
             }
         },
         "com.amazonaws.codebuild#FleetCapacity": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#range": {
-                    "min": 1
-                }
-            }
+            "type": "integer"
         },
         "com.amazonaws.codebuild#FleetContextCode": {
             "type": "enum",

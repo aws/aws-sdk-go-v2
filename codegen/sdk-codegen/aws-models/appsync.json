@@ -2206,6 +2206,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the <code>ChannelNamespace</code> was last changed.</p>"
                     }
+                },
+                "handlerConfigs": {
+                    "target": "com.amazonaws.appsync#HandlerConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the <code>OnPublish</code> and <code>OnSubscribe</code> handlers.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2791,6 +2797,12 @@
                 },
                 "tags": {
                     "target": "com.amazonaws.appsync#TagMap"
+                },
+                "handlerConfigs": {
+                    "target": "com.amazonaws.appsync#HandlerConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the <code>OnPublish</code> and <code>OnSubscribe</code> handlers.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6796,6 +6808,65 @@
                 "target": "com.amazonaws.appsync#GraphqlApi"
             }
         },
+        "com.amazonaws.appsync#HandlerBehavior": {
+            "type": "enum",
+            "members": {
+                "CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODE"
+                    }
+                },
+                "DIRECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appsync#HandlerConfig": {
+            "type": "structure",
+            "members": {
+                "behavior": {
+                    "target": "com.amazonaws.appsync#HandlerBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The behavior for the handler.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "integration": {
+                    "target": "com.amazonaws.appsync#Integration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The integration data source configuration for the handler.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a handler.</p>"
+            }
+        },
+        "com.amazonaws.appsync#HandlerConfigs": {
+            "type": "structure",
+            "members": {
+                "onPublish": {
+                    "target": "com.amazonaws.appsync#HandlerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the <code>OnPublish</code> handler.</p>"
+                    }
+                },
+                "onSubscribe": {
+                    "target": "com.amazonaws.appsync#HandlerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the <code>OnSubscribe</code> handler.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the <code>OnPublish</code> and <code>OnSubscribe</code> handlers.</p>"
+            }
+        },
         "com.amazonaws.appsync#HttpDataSourceConfig": {
             "type": "structure",
             "members": {
@@ -6816,6 +6887,27 @@
                 "smithy.api#documentation": "<p>Describes an HTTP data source configuration.</p>"
             }
         },
+        "com.amazonaws.appsync#Integration": {
+            "type": "structure",
+            "members": {
+                "dataSourceName": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the data source that has been configured on the API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lambdaConfig": {
+                    "target": "com.amazonaws.appsync#LambdaConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a Lambda data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The integration data source configuration for the handler.</p>"
+            }
+        },
         "com.amazonaws.appsync#InternalFailureException": {
             "type": "structure",
             "members": {
@@ -6827,6 +6919,23 @@
                 "smithy.api#documentation": "<p>An internal AppSync error occurred. Try your request again.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.appsync#InvokeType": {
+            "type": "enum",
+            "members": {
+                "REQUEST_RESPONSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST_RESPONSE"
+                    }
+                },
+                "EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT"
+                    }
+                }
             }
         },
         "com.amazonaws.appsync#LambdaAuthorizerConfig": {
@@ -6855,6 +6964,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A <code>LambdaAuthorizerConfig</code> specifies how to authorize AppSync\n         API access when using the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API can have only one Lambda authorizer configured at a\n         time.</p>"
+            }
+        },
+        "com.amazonaws.appsync#LambdaConfig": {
+            "type": "structure",
+            "members": {
+                "invokeType": {
+                    "target": "com.amazonaws.appsync#InvokeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation type for a Lambda data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a Lambda data source.</p>"
             }
         },
         "com.amazonaws.appsync#LambdaConflictHandlerConfig": {
@@ -9838,6 +9961,12 @@
                     "target": "com.amazonaws.appsync#Code",
                     "traits": {
                         "smithy.api#documentation": "<p>The event handler functions that run custom business logic to process published events\n         and subscribe requests.</p>"
+                    }
+                },
+                "handlerConfigs": {
+                    "target": "com.amazonaws.appsync#HandlerConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the <code>OnPublish</code> and <code>OnSubscribe</code> handlers.</p>"
                     }
                 }
             },

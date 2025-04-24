@@ -3310,7 +3310,7 @@
                 "version": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the specified scheduling software that Amazon Web Services PCS uses to manage cluster scaling and job scheduling.</p>",
+                        "smithy.api#documentation": "<p>The version of the specified scheduling software that Amazon Web Services PCS uses to manage cluster scaling and job scheduling.\n         For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html\">Slurm versions in\n            Amazon Web Services PCS</a> in the <i>Amazon Web Services PCS User Guide</i>.</p>\n         <p>Valid Values: <code>23.11 | 24.05</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3332,7 +3332,7 @@
                 "version": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the specified scheduling software that Amazon Web Services PCS uses to manage cluster scaling and job scheduling.</p>",
+                        "smithy.api#documentation": "<p>The version of the specified scheduling software that Amazon Web Services PCS uses to manage cluster scaling and job scheduling.\n         For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html\">Slurm versions in\n            Amazon Web Services PCS</a> in the <i>Amazon Web Services PCS User Guide</i>.</p>\n         <p>Valid Values: <code>23.11 | 24.05</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }

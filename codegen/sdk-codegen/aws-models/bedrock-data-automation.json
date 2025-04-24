@@ -767,6 +767,17 @@
                 "smithy.api#documentation": "List of Audio Extraction Category Type"
             }
         },
+        "com.amazonaws.bedrockdataautomation#AudioOverrideConfiguration": {
+            "type": "structure",
+            "members": {
+                "modalityProcessing": {
+                    "target": "com.amazonaws.bedrockdataautomation#ModalityProcessingConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Override Configuration of Audio"
+            }
+        },
         "com.amazonaws.bedrockdataautomation#AudioStandardExtraction": {
             "type": "structure",
             "members": {
@@ -1798,6 +1809,38 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockdataautomation#DesiredModality": {
+            "type": "enum",
+            "members": {
+                "IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE"
+                    }
+                },
+                "DOCUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT"
+                    }
+                },
+                "AUDIO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIO"
+                    }
+                },
+                "VIDEO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Desired Modality types"
+            }
+        },
         "com.amazonaws.bedrockdataautomation#DocumentBoundingBox": {
             "type": "structure",
             "members": {
@@ -1955,6 +1998,9 @@
             "members": {
                 "splitter": {
                     "target": "com.amazonaws.bedrockdataautomation#SplitterConfiguration"
+                },
+                "modalityProcessing": {
+                    "target": "com.amazonaws.bedrockdataautomation#ModalityProcessingConfiguration"
                 }
             },
             "traits": {
@@ -2266,6 +2312,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "List of Image Extraction Category"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ImageOverrideConfiguration": {
+            "type": "structure",
+            "members": {
+                "modalityProcessing": {
+                    "target": "com.amazonaws.bedrockdataautomation#ModalityProcessingConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Override Configuration of Image"
             }
         },
         "com.amazonaws.bedrockdataautomation#ImageStandardExtraction": {
@@ -2622,6 +2679,37 @@
                 }
             }
         },
+        "com.amazonaws.bedrockdataautomation#ModalityProcessingConfiguration": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration to enable/disable processing of modality"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ModalityRoutingConfiguration": {
+            "type": "structure",
+            "members": {
+                "jpeg": {
+                    "target": "com.amazonaws.bedrockdataautomation#DesiredModality"
+                },
+                "png": {
+                    "target": "com.amazonaws.bedrockdataautomation#DesiredModality"
+                },
+                "mp4": {
+                    "target": "com.amazonaws.bedrockdataautomation#DesiredModality"
+                },
+                "mov": {
+                    "target": "com.amazonaws.bedrockdataautomation#DesiredModality"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration for routing file type to desired modality"
+            }
+        },
         "com.amazonaws.bedrockdataautomation#NextToken": {
             "type": "string",
             "traits": {
@@ -2645,6 +2733,18 @@
             "members": {
                 "document": {
                     "target": "com.amazonaws.bedrockdataautomation#DocumentOverrideConfiguration"
+                },
+                "image": {
+                    "target": "com.amazonaws.bedrockdataautomation#ImageOverrideConfiguration"
+                },
+                "video": {
+                    "target": "com.amazonaws.bedrockdataautomation#VideoOverrideConfiguration"
+                },
+                "audio": {
+                    "target": "com.amazonaws.bedrockdataautomation#AudioOverrideConfiguration"
+                },
+                "modalityRouting": {
+                    "target": "com.amazonaws.bedrockdataautomation#ModalityRoutingConfiguration"
                 }
             },
             "traits": {
@@ -3277,6 +3377,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "List of Video Extraction Category Type"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#VideoOverrideConfiguration": {
+            "type": "structure",
+            "members": {
+                "modalityProcessing": {
+                    "target": "com.amazonaws.bedrockdataautomation#ModalityProcessingConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Override Configuration of Video"
             }
         },
         "com.amazonaws.bedrockdataautomation#VideoStandardExtraction": {

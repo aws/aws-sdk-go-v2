@@ -4514,6 +4514,12 @@
                     "traits": {
                         "smithy.api#enumValue": "NODEJS_18"
                     }
+                },
+                "NODEJS_22": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NODEJS_22"
+                    }
                 }
             }
         },

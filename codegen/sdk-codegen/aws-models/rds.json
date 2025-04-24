@@ -4462,7 +4462,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. \n            By default, minor engine upgrades are applied automatically.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster</p>"
+                        "smithy.api#documentation": "<p>Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. \n            By default, minor engine upgrades are applied automatically.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster.</p>\n         <p>For more information about automatic minor version upgrades, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades\">Automatically upgrading the minor engine version</a>.</p>"
                     }
                 },
                 "MonitoringInterval": {
@@ -5076,7 +5076,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. \n          By default, minor engine upgrades are applied automatically.</p>\n         <p>If you create an RDS Custom DB instance, you must set <code>AutoMinorVersionUpgrade</code> to \n          <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. \n          By default, minor engine upgrades are applied automatically.</p>\n         <p>If you create an RDS Custom DB instance, you must set <code>AutoMinorVersionUpgrade</code> to \n          <code>false</code>.</p>\n         <p>For more information about automatic minor version upgrades, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades\">Automatically upgrading the minor engine version</a>.</p>"
                     }
                 },
                 "LicenseModel": {
@@ -5504,7 +5504,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to automatically apply minor engine upgrades to the\n            read replica during the maintenance window.</p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>\n         <p>Default: Inherits the value from the source DB instance.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to automatically apply minor engine upgrades to the\n            read replica during the maintenance window.</p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>\n         <p>Default: Inherits the value from the source DB instance.</p>\n         <p>For more information about automatic minor version upgrades, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades\">Automatically upgrading the minor engine version</a>.</p>"
                     }
                 },
                 "Iops": {
@@ -6933,6 +6933,9 @@
                     "target": "com.amazonaws.rds#InvalidDBInstanceStateFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
+                },
+                {
                     "target": "com.amazonaws.rds#TenantDatabaseAlreadyExistsFault"
                 },
                 {
@@ -6973,9 +6976,7 @@
                 "MasterUserPassword": {
                     "target": "com.amazonaws.rds#SensitiveString",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The password for the master user in your tenant database.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 8 to 30 characters.</p>\n            </li>\n            <li>\n               <p>Can include any printable ASCII character except forward slash\n                    (<code>/</code>), double quote (<code>\"</code>), at symbol (<code>@</code>),\n                    ampersand (<code>&</code>), or single quote (<code>'</code>).</p>\n            </li>\n         </ul>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The password for the master user in your tenant database.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 8 to 30 characters.</p>\n            </li>\n            <li>\n               <p>Can include any printable ASCII character except forward slash\n                    (<code>/</code>), double quote (<code>\"</code>), at symbol (<code>@</code>),\n                    ampersand (<code>&</code>), or single quote (<code>'</code>).</p>\n            </li>\n            <li>\n               <p>Can't be specified when <code>ManageMasterUserPassword</code> is\n                    enabled.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CharacterSetName": {
@@ -6988,6 +6989,18 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>NCHAR</code> value for the tenant database.</p>"
+                    }
+                },
+                "ManageMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't manage the master user password with Amazon Web Services Secrets Manager if <code>MasterUserPassword</code> \n                    is specified.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MasterUserSecretKmsKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB instance.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n            KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n            use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n            managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>"
                     }
                 },
                 "Tags": {
@@ -7528,7 +7541,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether minor version patches are applied automatically.</p>\n         <p>This setting is for Aurora DB clusters and Multi-AZ DB clusters.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether minor version patches are applied automatically.</p>\n         <p>This setting is for Aurora DB clusters and Multi-AZ DB clusters.</p>\n         <p>For more information about automatic minor version upgrades, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades\">Automatically upgrading the minor engine version</a>.</p>"
                     }
                 },
                 "MonitoringInterval": {
@@ -9188,7 +9201,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether minor version patches are applied automatically.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether minor version patches are applied automatically.</p>\n         <p>For more information about automatic minor version upgrades, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades\">Automatically upgrading the minor engine version</a>.</p>"
                     }
                 },
                 "ReadReplicaSourceDBInstanceIdentifier": {
@@ -21871,7 +21884,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. \n            By default, minor engine upgrades are applied automatically.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. \n            By default, minor engine upgrades are applied automatically.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters.</p>\n         <p>For more information about automatic minor version upgrades, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades\">Automatically upgrading the minor engine version</a>.</p>"
                     }
                 },
                 "MonitoringInterval": {
@@ -22328,7 +22341,7 @@
                 "MasterUserPassword": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new password for the master user.</p>\n         <p>Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible. \n        Between the time of the request and the completion of the request,\n        the <code>MasterUserPassword</code> element exists in the\n          <code>PendingModifiedValues</code> element of the operation response.</p>\n         <note>\n            <p>Amazon RDS API operations never return the password, \n              so this operation provides a way to regain access to a primary instance user if the password is lost. \n              This includes restoring privileges that might have been accidentally revoked.</p>\n         </note>\n         <p>This setting doesn't apply to the following DB instances:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora (The password for the master user is managed by the DB cluster. For\n            more information, see <code>ModifyDBCluster</code>.)</p>\n            </li>\n            <li>\n               <p>RDS Custom</p>\n            </li>\n         </ul>\n         <p>Default: Uses existing setting</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be specified if <code>ManageMasterUserPassword</code> is turned on.</p>\n            </li>\n            <li>\n               <p>Can include any printable ASCII character except \"/\", \"\"\", or \"@\". For RDS for Oracle, can't include the \"&\" (ampersand) or  the \"'\" (single quotes) character.</p>\n            </li>\n         </ul>\n         <p>Length Constraints:</p>\n         <ul>\n            <li>\n               <p>RDS for Db2 - Must contain from 8 to 255 characters.</p>\n            </li>\n            <li>\n               <p>RDS for MariaDB - Must contain from 8 to 41 characters.</p>\n            </li>\n            <li>\n               <p>RDS for Microsoft SQL Server - Must contain from 8 to 128 characters.</p>\n            </li>\n            <li>\n               <p>RDS for MySQL - Must contain from 8 to 41 characters.</p>\n            </li>\n            <li>\n               <p>RDS for Oracle - Must contain from 8 to 30 characters.</p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL - Must contain from 8 to 128 characters.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The new password for the master user.</p>\n         <p>Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible. \n        Between the time of the request and the completion of the request,\n        the <code>MasterUserPassword</code> element exists in the\n          <code>PendingModifiedValues</code> element of the operation response.</p>\n         <note>\n            <p>Amazon RDS API operations never return the password, \n              so this operation provides a way to regain access to a primary instance user if the password is lost. \n              This includes restoring privileges that might have been accidentally revoked.</p>\n         </note>\n         <p>This setting doesn't apply to the following DB instances:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora</p>\n               <p>The password for the master user is managed by the DB cluster. For more\n                    information, see <code>ModifyDBCluster</code>.</p>\n            </li>\n            <li>\n               <p>RDS Custom</p>\n            </li>\n            <li>\n               <p>RDS for Oracle CDBs in the multi-tenant configuration</p>\n               <p>Specify the master password in <code>ModifyTenantDatabase</code>\n                    instead.</p>\n            </li>\n         </ul>\n         <p>Default: Uses existing setting</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be specified if <code>ManageMasterUserPassword</code> is turned on.</p>\n            </li>\n            <li>\n               <p>Can include any printable ASCII character except \"/\", \"\"\", or \"@\". For RDS for Oracle, can't include the \"&\" (ampersand) or  the \"'\" (single quotes) character.</p>\n            </li>\n         </ul>\n         <p>Length Constraints:</p>\n         <ul>\n            <li>\n               <p>RDS for Db2 - Must contain from 8 to 255 characters.</p>\n            </li>\n            <li>\n               <p>RDS for MariaDB - Must contain from 8 to 41 characters.</p>\n            </li>\n            <li>\n               <p>RDS for Microsoft SQL Server - Must contain from 8 to 128 characters.</p>\n            </li>\n            <li>\n               <p>RDS for MySQL - Must contain from 8 to 41 characters.</p>\n            </li>\n            <li>\n               <p>RDS for Oracle - Must contain from 8 to 30 characters.</p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL - Must contain from 8 to 128 characters.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DBParameterGroupName": {
@@ -22376,7 +22389,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether minor version upgrades are applied automatically to the DB instance \n          during the maintenance window. An outage occurs when all the following conditions are met:</p>\n         <ul>\n            <li>\n               <p>The automatic upgrade is enabled for the maintenance window.</p>\n            </li>\n            <li>\n               <p>A newer minor version is available.</p>\n            </li>\n            <li>\n               <p>RDS has enabled automatic patching for the engine version.</p>\n            </li>\n         </ul>\n         <p>If any of the preceding conditions isn't met, Amazon RDS applies the change as soon as possible and\n      doesn't cause an outage.</p>\n         <p>For an RDS Custom DB instance, don't enable this setting. Otherwise, the operation returns an error.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether minor version upgrades are applied automatically to the DB instance \n          during the maintenance window. An outage occurs when all the following conditions are met:</p>\n         <ul>\n            <li>\n               <p>The automatic upgrade is enabled for the maintenance window.</p>\n            </li>\n            <li>\n               <p>A newer minor version is available.</p>\n            </li>\n            <li>\n               <p>RDS has enabled automatic patching for the engine version.</p>\n            </li>\n         </ul>\n         <p>If any of the preceding conditions isn't met, Amazon RDS applies the change as soon as possible and\n      doesn't cause an outage.</p>\n         <p>For an RDS Custom DB instance, don't enable this setting. Otherwise, the operation returns an error.</p>\n         <p>For more information about automatic minor version upgrades, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades\">Automatically upgrading the minor engine version</a>.</p>"
                     }
                 },
                 "LicenseModel": {
@@ -22616,13 +22629,13 @@
                 "ManageMasterUserPassword": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.</p>\n         <p>If the DB instance doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn \n            on this management. In this case, you can't specify <code>MasterUserPassword</code>.</p>\n         <p>If the DB instance already manages the master user password with Amazon Web Services Secrets Manager, and you specify that the \n            master user password is not managed with Amazon Web Services Secrets Manager, then you must specify <code>MasterUserPassword</code>. \n            In this case, Amazon RDS deletes the secret and uses the new password for the master user specified by \n            <code>MasterUserPassword</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't manage the master user password with Amazon Web Services Secrets Manager if <code>MasterUserPassword</code> \n                    is specified.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.</p>\n         <p>If the DB instance doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn \n            on this management. In this case, you can't specify <code>MasterUserPassword</code>.</p>\n         <p>If the DB instance already manages the master user password with Amazon Web Services Secrets Manager, and you specify that the \n            master user password is not managed with Amazon Web Services Secrets Manager, then you must specify <code>MasterUserPassword</code>. \n            In this case, Amazon RDS deletes the secret and uses the new password for the master user specified by \n            <code>MasterUserPassword</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't manage the master user password with Amazon Web Services Secrets Manager if <code>MasterUserPassword</code> \n                    is specified.</p>\n            </li>\n            <li>\n               <p>Can't specify for RDS for Oracle CDB instances in the multi-tenant\n                    configuration. Use <code>ModifyTenantDatabase</code> instead.</p>\n            </li>\n            <li>\n               <p>Can't specify the parameters <code>ManageMasterUserPassword</code> and\n                        <code>MultiTenant</code> in the same operation.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "RotateMasterUserPassword": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to rotate the secret managed by Amazon Web Services Secrets Manager for the \n            master user password.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB cluster. The secret value contains the updated password.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>You must apply the change immediately when rotating the master user password.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether to rotate the secret managed by Amazon Web Services Secrets Manager for the \n            master user password.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB instance. The secret value contains the updated password.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>You must apply the change immediately when rotating the master user password.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MasterUserSecretKmsKeyId": {
@@ -23802,6 +23815,9 @@
                     "target": "com.amazonaws.rds#InvalidDBInstanceStateFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
+                },
+                {
                     "target": "com.amazonaws.rds#TenantDatabaseAlreadyExistsFault"
                 },
                 {
@@ -23841,6 +23857,24 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The new name of the tenant database when renaming a tenant database. This parameter\n            isn’t case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be the string null or any other reserved word.</p>\n            </li>\n            <li>\n               <p>Can't be longer than 8 characters.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ManageMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.</p>\n         <p>If the tenant database doesn't manage the master user password with Amazon Web Services Secrets\n            Manager, you can turn on this management. In this case, you can't specify\n                <code>MasterUserPassword</code>.</p>\n         <p>If the tenant database already manages the master user password with Amazon Web Services Secrets\n            Manager, and you specify that the master user password is not managed with Amazon Web Services Secrets\n            Manager, then you must specify <code>MasterUserPassword</code>. In this case, Amazon RDS\n            deletes the secret and uses the new password for the master user specified by\n                <code>MasterUserPassword</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't manage the master user password with Amazon Web Services Secrets Manager if <code>MasterUserPassword</code> \n                    is specified.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "RotateMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to rotate the secret managed by Amazon Web Services Secrets Manager for the \n            master user password.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB instance. The secret value contains the updated password.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>You must apply the change immediately when rotating the master user password.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MasterUserSecretKmsKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if both of the following conditions are met:</p>\n         <ul>\n            <li>\n               <p>The tenant database doesn't manage the master user password in Amazon Web Services Secrets Manager.</p>\n               <p>If the tenant database already manages the master user password in Amazon Web Services Secrets Manager, \n                    you can't change the KMS key used to encrypt the secret.</p>\n            </li>\n            <li>\n               <p>You're turning on <code>ManageMasterUserPassword</code> to manage the master user password \n                    in Amazon Web Services Secrets Manager.</p>\n               <p>If you're turning on <code>ManageMasterUserPassword</code> and don't specify \n                    <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n                    KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n                    use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a self-managed \n                    KMS key.</p>\n            </li>\n         </ul>\n         <p>The Amazon Web Services KMS key identifier is any of the following:</p>\n         <ul>\n            <li>\n               <p>Key ARN</p>\n            </li>\n            <li>\n               <p>Key ID</p>\n            </li>\n            <li>\n               <p>Alias ARN</p>\n            </li>\n            <li>\n               <p>Alias name for the KMS key</p>\n            </li>\n         </ul>\n         <p>To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias\n            ARN.</p>\n         <p>A default KMS key exists for your Amazon Web Services account. Your Amazon Web Services account has a different\n            default KMS key for each Amazon Web Services Region.</p>"
                     }
                 }
             },
@@ -28112,7 +28146,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to automatically apply minor version upgrades to the DB instance \n          during the maintenance window.</p>\n         <p>If you restore an RDS Custom DB instance, you must disable this parameter.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to automatically apply minor version upgrades to the DB instance \n          during the maintenance window.</p>\n         <p>If you restore an RDS Custom DB instance, you must disable this parameter.</p>\n         <p>For more information about automatic minor version upgrades, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades\">Automatically upgrading the minor engine version</a>.</p>"
                     }
                 },
                 "LicenseModel": {
@@ -28308,6 +28342,18 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case,  \n              RDS automatically upgrades your restored DB instance to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
+                },
+                "ManageMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager in the\n            restored DB instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Applies to RDS for Oracle only.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MasterUserSecretKmsKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB instance.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n            KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n            use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n            managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>"
                     }
                 }
             },
@@ -28518,7 +28564,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to automatically apply minor engine upgrades  \n            to the DB instance during the maintenance window. By default, minor engine upgrades \n            are not applied automatically.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to automatically apply minor engine upgrades  \n            to the DB instance during the maintenance window. By default, minor engine upgrades \n            are not applied automatically.</p>\n         <p>For more information about automatic minor version upgrades, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades\">Automatically upgrading the minor engine version</a>.</p>"
                     }
                 },
                 "LicenseModel": {
@@ -28990,7 +29036,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether minor version upgrades are applied automatically to the \n          DB instance during the maintenance window.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether minor version upgrades are applied automatically to the \n          DB instance during the maintenance window.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>\n         <p>For more information about automatic minor version upgrades, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades\">Automatically upgrading the minor engine version</a>.</p>"
                     }
                 },
                 "LicenseModel": {
@@ -29198,6 +29244,18 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              RDS automatically upgrades your restored DB instance to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
+                },
+                "ManageMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager in the\n            restored DB instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Applies to RDS for Oracle only.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MasterUserSecretKmsKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB instance.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n            KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n            use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n            managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>"
                     }
                 }
             },
@@ -31354,6 +31412,9 @@
                         "smithy.api#documentation": "<p>Information about pending changes for a tenant database.</p>"
                     }
                 },
+                "MasterUserSecret": {
+                    "target": "com.amazonaws.rds#MasterUserSecret"
+                },
                 "TagList": {
                     "target": "com.amazonaws.rds#TagList"
                 }
@@ -31609,7 +31670,7 @@
                 "ClientPasswordAuthType": {
                     "target": "com.amazonaws.rds#ClientPasswordAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication the proxy uses for connections from clients.</p>"
+                        "smithy.api#documentation": "<p>The type of authentication the proxy uses for connections from clients. The following values are defaults for the corresponding engines:</p>\n         <ul>\n            <li>\n               <p>RDS for MySQL: <code>MYSQL_CACHING_SHA2_PASSWORD</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for SQL Server: <code>SQL_SERVER_AUTHENTICATION</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL: <code>POSTGRES_SCRAM_SHA2_256</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
