@@ -102,6 +102,10 @@ type ModifyDBInstanceInput struct {
 	//
 	// For an RDS Custom DB instance, don't enable this setting. Otherwise, the
 	// operation returns an error.
+	//
+	// For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version].
+	//
+	// [Automatically upgrading the minor engine version]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades
 	AutoMinorVersionUpgrade *bool
 
 	// The automation mode of the RDS Custom DB instance. If full , the DB instance
@@ -579,6 +583,12 @@ type ModifyDBInstanceInput struct {
 	//   - Can't manage the master user password with Amazon Web Services Secrets
 	//   Manager if MasterUserPassword is specified.
 	//
+	//   - Can't specify for RDS for Oracle CDB instances in the multi-tenant
+	//   configuration. Use ModifyTenantDatabase instead.
+	//
+	//   - Can't specify the parameters ManageMasterUserPassword and MultiTenant in the
+	//   same operation.
+	//
 	// [Password management with Amazon Web Services Secrets Manager]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
 	ManageMasterUserPassword *bool
 
@@ -595,10 +605,16 @@ type ModifyDBInstanceInput struct {
 	//
 	// This setting doesn't apply to the following DB instances:
 	//
-	//   - Amazon Aurora (The password for the master user is managed by the DB
-	//   cluster. For more information, see ModifyDBCluster .)
+	//   - Amazon Aurora
+	//
+	// The password for the master user is managed by the DB cluster. For more
+	//   information, see ModifyDBCluster .
 	//
 	//   - RDS Custom
+	//
+	//   - RDS for Oracle CDBs in the multi-tenant configuration
+	//
+	// Specify the master password in ModifyTenantDatabase instead.
 	//
 	// Default: Uses existing setting
 	//
@@ -922,7 +938,7 @@ type ModifyDBInstanceInput struct {
 	// Manager for the master user password.
 	//
 	// This setting is valid only if the master user password is managed by RDS in
-	// Amazon Web Services Secrets Manager for the DB cluster. The secret value
+	// Amazon Web Services Secrets Manager for the DB instance. The secret value
 	// contains the updated password.
 	//
 	// For more information, see [Password management with Amazon Web Services Secrets Manager] in the Amazon RDS User Guide.

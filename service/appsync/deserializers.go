@@ -13124,6 +13124,11 @@ func awsRestjson1_deserializeDocumentChannelNamespace(v **types.ChannelNamespace
 				}
 			}
 
+		case "handlerConfigs":
+			if err := awsRestjson1_deserializeDocumentHandlerConfigs(&sv.HandlerConfigs, value); err != nil {
+				return err
+			}
+
 		case "lastModified":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15284,6 +15289,92 @@ func awsRestjson1_deserializeDocumentGraphQLSchemaException(v **types.GraphQLSch
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentHandlerConfig(v **types.HandlerConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HandlerConfig
+	if *v == nil {
+		sv = &types.HandlerConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "behavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HandlerBehavior to be of type string, got %T instead", value)
+				}
+				sv.Behavior = types.HandlerBehavior(jtv)
+			}
+
+		case "integration":
+			if err := awsRestjson1_deserializeDocumentIntegration(&sv.Integration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHandlerConfigs(v **types.HandlerConfigs, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HandlerConfigs
+	if *v == nil {
+		sv = &types.HandlerConfigs{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "onPublish":
+			if err := awsRestjson1_deserializeDocumentHandlerConfig(&sv.OnPublish, value); err != nil {
+				return err
+			}
+
+		case "onSubscribe":
+			if err := awsRestjson1_deserializeDocumentHandlerConfig(&sv.OnSubscribe, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentHttpDataSourceConfig(v **types.HttpDataSourceConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15318,6 +15409,51 @@ func awsRestjson1_deserializeDocumentHttpDataSourceConfig(v **types.HttpDataSour
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Endpoint = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIntegration(v **types.Integration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Integration
+	if *v == nil {
+		sv = &types.Integration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dataSourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DataSourceName = ptr.String(jtv)
+			}
+
+		case "lambdaConfig":
+			if err := awsRestjson1_deserializeDocumentLambdaConfig(&sv.LambdaConfig, value); err != nil {
+				return err
 			}
 
 		default:
@@ -15420,6 +15556,46 @@ func awsRestjson1_deserializeDocumentLambdaAuthorizerConfig(v **types.LambdaAuth
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.IdentityValidationExpression = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLambdaConfig(v **types.LambdaConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LambdaConfig
+	if *v == nil {
+		sv = &types.LambdaConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "invokeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InvokeType to be of type string, got %T instead", value)
+				}
+				sv.InvokeType = types.InvokeType(jtv)
 			}
 
 		default:

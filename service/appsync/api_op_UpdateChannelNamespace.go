@@ -43,6 +43,9 @@ type UpdateChannelNamespaceInput struct {
 	// events and subscribe requests.
 	CodeHandlers *string
 
+	// The configuration for the OnPublish and OnSubscribe handlers.
+	HandlerConfigs *types.HandlerConfigs
+
 	// The authorization mode to use for publishing messages on the channel namespace.
 	// This configuration overrides the default Api authorization configuration.
 	PublishAuthModes []types.AuthMode

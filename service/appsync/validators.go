@@ -2053,6 +2053,50 @@ func validateEventLogConfig(v *types.EventLogConfig) error {
 	}
 }
 
+func validateHandlerConfig(v *types.HandlerConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HandlerConfig"}
+	if len(v.Behavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Behavior"))
+	}
+	if v.Integration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Integration"))
+	} else if v.Integration != nil {
+		if err := validateIntegration(v.Integration); err != nil {
+			invalidParams.AddNested("Integration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHandlerConfigs(v *types.HandlerConfigs) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HandlerConfigs"}
+	if v.OnPublish != nil {
+		if err := validateHandlerConfig(v.OnPublish); err != nil {
+			invalidParams.AddNested("OnPublish", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OnSubscribe != nil {
+		if err := validateHandlerConfig(v.OnSubscribe); err != nil {
+			invalidParams.AddNested("OnSubscribe", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHttpDataSourceConfig(v *types.HttpDataSourceConfig) error {
 	if v == nil {
 		return nil
@@ -2062,6 +2106,21 @@ func validateHttpDataSourceConfig(v *types.HttpDataSourceConfig) error {
 		if err := validateAuthorizationConfig(v.AuthorizationConfig); err != nil {
 			invalidParams.AddNested("AuthorizationConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIntegration(v *types.Integration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Integration"}
+	if v.DataSourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2322,6 +2381,11 @@ func validateOpCreateChannelNamespaceInput(v *CreateChannelNamespaceInput) error
 	if v.PublishAuthModes != nil {
 		if err := validateAuthModes(v.PublishAuthModes); err != nil {
 			invalidParams.AddNested("PublishAuthModes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HandlerConfigs != nil {
+		if err := validateHandlerConfigs(v.HandlerConfigs); err != nil {
+			invalidParams.AddNested("HandlerConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3411,6 +3475,11 @@ func validateOpUpdateChannelNamespaceInput(v *UpdateChannelNamespaceInput) error
 	if v.PublishAuthModes != nil {
 		if err := validateAuthModes(v.PublishAuthModes); err != nil {
 			invalidParams.AddNested("PublishAuthModes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HandlerConfigs != nil {
+		if err := validateHandlerConfigs(v.HandlerConfigs); err != nil {
+			invalidParams.AddNested("HandlerConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

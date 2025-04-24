@@ -147,6 +147,29 @@ func (DataAutomationProjectStatus) Values() []DataAutomationProjectStatus {
 	}
 }
 
+type DesiredModality string
+
+// Enum values for DesiredModality
+const (
+	DesiredModalityImage    DesiredModality = "IMAGE"
+	DesiredModalityDocument DesiredModality = "DOCUMENT"
+	DesiredModalityAudio    DesiredModality = "AUDIO"
+	DesiredModalityVideo    DesiredModality = "VIDEO"
+)
+
+// Values returns all known values for DesiredModality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DesiredModality) Values() []DesiredModality {
+	return []DesiredModality{
+		"IMAGE",
+		"DOCUMENT",
+		"AUDIO",
+		"VIDEO",
+	}
+}
+
 type DocumentExtractionGranularityType string
 
 // Enum values for DocumentExtractionGranularityType

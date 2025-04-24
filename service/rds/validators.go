@@ -4449,9 +4449,6 @@ func validateOpCreateTenantDatabaseInput(v *CreateTenantDatabaseInput) error {
 	if v.MasterUsername == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MasterUsername"))
 	}
-	if v.MasterUserPassword == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MasterUserPassword"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

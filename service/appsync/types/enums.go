@@ -456,6 +456,44 @@ func (GraphQLApiVisibility) Values() []GraphQLApiVisibility {
 	}
 }
 
+type HandlerBehavior string
+
+// Enum values for HandlerBehavior
+const (
+	HandlerBehaviorCode   HandlerBehavior = "CODE"
+	HandlerBehaviorDirect HandlerBehavior = "DIRECT"
+)
+
+// Values returns all known values for HandlerBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HandlerBehavior) Values() []HandlerBehavior {
+	return []HandlerBehavior{
+		"CODE",
+		"DIRECT",
+	}
+}
+
+type InvokeType string
+
+// Enum values for InvokeType
+const (
+	InvokeTypeRequestResponse InvokeType = "REQUEST_RESPONSE"
+	InvokeTypeEvent           InvokeType = "EVENT"
+)
+
+// Values returns all known values for InvokeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvokeType) Values() []InvokeType {
+	return []InvokeType{
+		"REQUEST_RESPONSE",
+		"EVENT",
+	}
+}
+
 type MergeType string
 
 // Enum values for MergeType

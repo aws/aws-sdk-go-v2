@@ -216,6 +216,10 @@ type CreateDBInstanceInput struct {
 	//
 	// If you create an RDS Custom DB instance, you must set AutoMinorVersionUpgrade
 	// to false .
+	//
+	// For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version].
+	//
+	// [Automatically upgrading the minor engine version]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone (AZ) where the database will be created. For information

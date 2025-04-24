@@ -1425,6 +1425,20 @@ func awsRestjson1_serializeDocumentAudioExtractionCategoryTypes(v []types.AudioE
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioOverrideConfiguration(v *types.AudioOverrideConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModalityProcessing != nil {
+		ok := object.Key("modalityProcessing")
+		if err := awsRestjson1_serializeDocumentModalityProcessingConfiguration(v.ModalityProcessing, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAudioStandardExtraction(v *types.AudioStandardExtraction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1677,6 +1691,13 @@ func awsRestjson1_serializeDocumentDocumentOverrideConfiguration(v *types.Docume
 	object := value.Object()
 	defer object.Close()
 
+	if v.ModalityProcessing != nil {
+		ok := object.Key("modalityProcessing")
+		if err := awsRestjson1_serializeDocumentModalityProcessingConfiguration(v.ModalityProcessing, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Splitter != nil {
 		ok := object.Key("splitter")
 		if err := awsRestjson1_serializeDocumentSplitterConfiguration(v.Splitter, ok); err != nil {
@@ -1809,6 +1830,20 @@ func awsRestjson1_serializeDocumentImageExtractionCategoryTypes(v []types.ImageE
 	return nil
 }
 
+func awsRestjson1_serializeDocumentImageOverrideConfiguration(v *types.ImageOverrideConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModalityProcessing != nil {
+		ok := object.Key("modalityProcessing")
+		if err := awsRestjson1_serializeDocumentModalityProcessingConfiguration(v.ModalityProcessing, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentImageStandardExtraction(v *types.ImageStandardExtraction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1892,13 +1927,80 @@ func awsRestjson1_serializeDocumentKmsEncryptionContext(v map[string]string, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentModalityProcessingConfiguration(v *types.ModalityProcessingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentModalityRoutingConfiguration(v *types.ModalityRoutingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Jpeg) > 0 {
+		ok := object.Key("jpeg")
+		ok.String(string(v.Jpeg))
+	}
+
+	if len(v.Mov) > 0 {
+		ok := object.Key("mov")
+		ok.String(string(v.Mov))
+	}
+
+	if len(v.Mp4) > 0 {
+		ok := object.Key("mp4")
+		ok.String(string(v.Mp4))
+	}
+
+	if len(v.Png) > 0 {
+		ok := object.Key("png")
+		ok.String(string(v.Png))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOverrideConfiguration(v *types.OverrideConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
+	if v.Audio != nil {
+		ok := object.Key("audio")
+		if err := awsRestjson1_serializeDocumentAudioOverrideConfiguration(v.Audio, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Document != nil {
 		ok := object.Key("document")
 		if err := awsRestjson1_serializeDocumentDocumentOverrideConfiguration(v.Document, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Image != nil {
+		ok := object.Key("image")
+		if err := awsRestjson1_serializeDocumentImageOverrideConfiguration(v.Image, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModalityRouting != nil {
+		ok := object.Key("modalityRouting")
+		if err := awsRestjson1_serializeDocumentModalityRoutingConfiguration(v.ModalityRouting, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Video != nil {
+		ok := object.Key("video")
+		if err := awsRestjson1_serializeDocumentVideoOverrideConfiguration(v.Video, ok); err != nil {
 			return err
 		}
 	}
@@ -2033,6 +2135,20 @@ func awsRestjson1_serializeDocumentVideoExtractionCategoryTypes(v []types.VideoE
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoOverrideConfiguration(v *types.VideoOverrideConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModalityProcessing != nil {
+		ok := object.Key("modalityProcessing")
+		if err := awsRestjson1_serializeDocumentModalityProcessingConfiguration(v.ModalityProcessing, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

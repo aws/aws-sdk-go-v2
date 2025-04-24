@@ -51,6 +51,29 @@ type ModifyTenantDatabaseInput struct {
 	// This member is required.
 	TenantDBName *string
 
+	// Specifies whether to manage the master user password with Amazon Web Services
+	// Secrets Manager.
+	//
+	// If the tenant database doesn't manage the master user password with Amazon Web
+	// Services Secrets Manager, you can turn on this management. In this case, you
+	// can't specify MasterUserPassword .
+	//
+	// If the tenant database already manages the master user password with Amazon Web
+	// Services Secrets Manager, and you specify that the master user password is not
+	// managed with Amazon Web Services Secrets Manager, then you must specify
+	// MasterUserPassword . In this case, Amazon RDS deletes the secret and uses the
+	// new password for the master user specified by MasterUserPassword .
+	//
+	// For more information, see [Password management with Amazon Web Services Secrets Manager] in the Amazon RDS User Guide.
+	//
+	// Constraints:
+	//
+	//   - Can't manage the master user password with Amazon Web Services Secrets
+	//   Manager if MasterUserPassword is specified.
+	//
+	// [Password management with Amazon Web Services Secrets Manager]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+	ManageMasterUserPassword *bool
+
 	// The new password for the master user of the specified tenant database in your
 	// DB instance.
 	//
@@ -68,6 +91,45 @@ type ModifyTenantDatabaseInput struct {
 	//   - Must contain between 8 and 30 characters.
 	MasterUserPassword *string
 
+	// The Amazon Web Services KMS key identifier to encrypt a secret that is
+	// automatically generated and managed in Amazon Web Services Secrets Manager.
+	//
+	// This setting is valid only if both of the following conditions are met:
+	//
+	//   - The tenant database doesn't manage the master user password in Amazon Web
+	//   Services Secrets Manager.
+	//
+	// If the tenant database already manages the master user password in Amazon Web
+	//   Services Secrets Manager, you can't change the KMS key used to encrypt the
+	//   secret.
+	//
+	//   - You're turning on ManageMasterUserPassword to manage the master user
+	//   password in Amazon Web Services Secrets Manager.
+	//
+	// If you're turning on ManageMasterUserPassword and don't specify
+	//   MasterUserSecretKmsKeyId , then the aws/secretsmanager KMS key is used to
+	//   encrypt the secret. If the secret is in a different Amazon Web Services account,
+	//   then you can't use the aws/secretsmanager KMS key to encrypt the secret, and
+	//   you must use a self-managed KMS key.
+	//
+	// The Amazon Web Services KMS key identifier is any of the following:
+	//
+	//   - Key ARN
+	//
+	//   - Key ID
+	//
+	//   - Alias ARN
+	//
+	//   - Alias name for the KMS key
+	//
+	// To use a KMS key in a different Amazon Web Services account, specify the key
+	// ARN or alias ARN.
+	//
+	// A default KMS key exists for your Amazon Web Services account. Your Amazon Web
+	// Services account has a different default KMS key for each Amazon Web Services
+	// Region.
+	MasterUserSecretKmsKeyId *string
+
 	// The new name of the tenant database when renaming a tenant database. This
 	// parameter isn’t case-sensitive.
 	//
@@ -77,6 +139,23 @@ type ModifyTenantDatabaseInput struct {
 	//
 	//   - Can't be longer than 8 characters.
 	NewTenantDBName *string
+
+	// Specifies whether to rotate the secret managed by Amazon Web Services Secrets
+	// Manager for the master user password.
+	//
+	// This setting is valid only if the master user password is managed by RDS in
+	// Amazon Web Services Secrets Manager for the DB instance. The secret value
+	// contains the updated password.
+	//
+	// For more information, see [Password management with Amazon Web Services Secrets Manager] in the Amazon RDS User Guide.
+	//
+	// Constraints:
+	//
+	//   - You must apply the change immediately when rotating the master user
+	//   password.
+	//
+	// [Password management with Amazon Web Services Secrets Manager]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+	RotateMasterUserPassword *bool
 
 	noSmithyDocumentSerde
 }

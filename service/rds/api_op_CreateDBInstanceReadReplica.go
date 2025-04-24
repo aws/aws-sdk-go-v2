@@ -70,6 +70,10 @@ type CreateDBInstanceReadReplicaInput struct {
 	// This setting doesn't apply to RDS Custom DB instances.
 	//
 	// Default: Inherits the value from the source DB instance.
+	//
+	// For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version].
+	//
+	// [Automatically upgrading the minor engine version]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone (AZ) where the read replica will be created.

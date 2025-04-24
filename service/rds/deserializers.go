@@ -4106,6 +4106,9 @@ func awsAwsquery_deserializeOpErrorCreateTenantDatabase(response *smithyhttp.Res
 	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
+	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
+		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
+
 	case strings.EqualFold("TenantDatabaseAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorTenantDatabaseAlreadyExistsFault(response, errorBody)
 
@@ -15072,6 +15075,9 @@ func awsAwsquery_deserializeOpErrorModifyTenantDatabase(response *smithyhttp.Res
 
 	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
+
+	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
+		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
 	case strings.EqualFold("TenantDatabaseAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorTenantDatabaseAlreadyExistsFault(response, errorBody)
@@ -54403,6 +54409,12 @@ func awsAwsquery_deserializeDocumentTenantDatabase(v **types.TenantDatabase, dec
 			{
 				xtv := string(val)
 				sv.MasterUsername = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MasterUserSecret", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentMasterUserSecret(&sv.MasterUserSecret, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("NcharCharacterSetName", t.Name.Local):

@@ -37,18 +37,6 @@ type CreateTenantDatabaseInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The password for the master user in your tenant database.
-	//
-	// Constraints:
-	//
-	//   - Must be 8 to 30 characters.
-	//
-	//   - Can include any printable ASCII character except forward slash ( / ), double
-	//   quote ( " ), at symbol ( @ ), ampersand ( & ), or single quote ( ' ).
-	//
-	// This member is required.
-	MasterUserPassword *string
-
 	// The name for the master user account in your tenant database. RDS creates this
 	// user account in the tenant database and grants privileges to the master user.
 	// This parameter is case-sensitive.
@@ -74,6 +62,51 @@ type CreateTenantDatabaseInput struct {
 	// The character set for your tenant database. If you don't specify a value, the
 	// character set name defaults to AL32UTF8 .
 	CharacterSetName *string
+
+	// Specifies whether to manage the master user password with Amazon Web Services
+	// Secrets Manager.
+	//
+	// For more information, see [Password management with Amazon Web Services Secrets Manager] in the Amazon RDS User Guide.
+	//
+	// Constraints:
+	//
+	//   - Can't manage the master user password with Amazon Web Services Secrets
+	//   Manager if MasterUserPassword is specified.
+	//
+	// [Password management with Amazon Web Services Secrets Manager]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+	ManageMasterUserPassword *bool
+
+	// The password for the master user in your tenant database.
+	//
+	// Constraints:
+	//
+	//   - Must be 8 to 30 characters.
+	//
+	//   - Can include any printable ASCII character except forward slash ( / ), double
+	//   quote ( " ), at symbol ( @ ), ampersand ( & ), or single quote ( ' ).
+	//
+	//   - Can't be specified when ManageMasterUserPassword is enabled.
+	MasterUserPassword *string
+
+	// The Amazon Web Services KMS key identifier to encrypt a secret that is
+	// automatically generated and managed in Amazon Web Services Secrets Manager.
+	//
+	// This setting is valid only if the master user password is managed by RDS in
+	// Amazon Web Services Secrets Manager for the DB instance.
+	//
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
+	// or alias name for the KMS key. To use a KMS key in a different Amazon Web
+	// Services account, specify the key ARN or alias ARN.
+	//
+	// If you don't specify MasterUserSecretKmsKeyId , then the aws/secretsmanager KMS
+	// key is used to encrypt the secret. If the secret is in a different Amazon Web
+	// Services account, then you can't use the aws/secretsmanager KMS key to encrypt
+	// the secret, and you must use a customer managed KMS key.
+	//
+	// There is a default KMS key for your Amazon Web Services account. Your Amazon
+	// Web Services account has a different default KMS key for each Amazon Web
+	// Services Region.
+	MasterUserSecretKmsKeyId *string
 
 	// The NCHAR value for the tenant database.
 	NcharCharacterSetName *string

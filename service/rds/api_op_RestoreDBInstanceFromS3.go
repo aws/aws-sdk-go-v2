@@ -114,6 +114,10 @@ type RestoreDBInstanceFromS3Input struct {
 	// Specifies whether to automatically apply minor engine upgrades to the DB
 	// instance during the maintenance window. By default, minor engine upgrades are
 	// not applied automatically.
+	//
+	// For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version].
+	//
+	// [Automatically upgrading the minor engine version]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone that the DB instance is created in. For information about

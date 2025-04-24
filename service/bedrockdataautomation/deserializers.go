@@ -2602,6 +2602,42 @@ func awsRestjson1_deserializeDocumentAudioExtractionCategoryTypes(v *[]types.Aud
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioOverrideConfiguration(v **types.AudioOverrideConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioOverrideConfiguration
+	if *v == nil {
+		sv = &types.AudioOverrideConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "modalityProcessing":
+			if err := awsRestjson1_deserializeDocumentModalityProcessingConfiguration(&sv.ModalityProcessing, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAudioStandardExtraction(v **types.AudioStandardExtraction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3703,6 +3739,11 @@ func awsRestjson1_deserializeDocumentDocumentOverrideConfiguration(v **types.Doc
 
 	for key, value := range shape {
 		switch key {
+		case "modalityProcessing":
+			if err := awsRestjson1_deserializeDocumentModalityProcessingConfiguration(&sv.ModalityProcessing, value); err != nil {
+				return err
+			}
+
 		case "splitter":
 			if err := awsRestjson1_deserializeDocumentSplitterConfiguration(&sv.Splitter, value); err != nil {
 				return err
@@ -3965,6 +4006,42 @@ func awsRestjson1_deserializeDocumentImageExtractionCategoryTypes(v *[]types.Ima
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentImageOverrideConfiguration(v **types.ImageOverrideConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageOverrideConfiguration
+	if *v == nil {
+		sv = &types.ImageOverrideConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "modalityProcessing":
+			if err := awsRestjson1_deserializeDocumentModalityProcessingConfiguration(&sv.ModalityProcessing, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentImageStandardExtraction(v **types.ImageStandardExtraction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4204,6 +4281,113 @@ func awsRestjson1_deserializeDocumentKmsEncryptionContext(v *map[string]string, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentModalityProcessingConfiguration(v **types.ModalityProcessingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModalityProcessingConfiguration
+	if *v == nil {
+		sv = &types.ModalityProcessingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected State to be of type string, got %T instead", value)
+				}
+				sv.State = types.State(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModalityRoutingConfiguration(v **types.ModalityRoutingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModalityRoutingConfiguration
+	if *v == nil {
+		sv = &types.ModalityRoutingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "jpeg":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DesiredModality to be of type string, got %T instead", value)
+				}
+				sv.Jpeg = types.DesiredModality(jtv)
+			}
+
+		case "mov":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DesiredModality to be of type string, got %T instead", value)
+				}
+				sv.Mov = types.DesiredModality(jtv)
+			}
+
+		case "mp4":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DesiredModality to be of type string, got %T instead", value)
+				}
+				sv.Mp4 = types.DesiredModality(jtv)
+			}
+
+		case "png":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DesiredModality to be of type string, got %T instead", value)
+				}
+				sv.Png = types.DesiredModality(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOverrideConfiguration(v **types.OverrideConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4226,8 +4410,28 @@ func awsRestjson1_deserializeDocumentOverrideConfiguration(v **types.OverrideCon
 
 	for key, value := range shape {
 		switch key {
+		case "audio":
+			if err := awsRestjson1_deserializeDocumentAudioOverrideConfiguration(&sv.Audio, value); err != nil {
+				return err
+			}
+
 		case "document":
 			if err := awsRestjson1_deserializeDocumentDocumentOverrideConfiguration(&sv.Document, value); err != nil {
+				return err
+			}
+
+		case "image":
+			if err := awsRestjson1_deserializeDocumentImageOverrideConfiguration(&sv.Image, value); err != nil {
+				return err
+			}
+
+		case "modalityRouting":
+			if err := awsRestjson1_deserializeDocumentModalityRoutingConfiguration(&sv.ModalityRouting, value); err != nil {
+				return err
+			}
+
+		case "video":
+			if err := awsRestjson1_deserializeDocumentVideoOverrideConfiguration(&sv.Video, value); err != nil {
 				return err
 			}
 
@@ -4780,6 +4984,42 @@ func awsRestjson1_deserializeDocumentVideoExtractionCategoryTypes(v *[]types.Vid
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoOverrideConfiguration(v **types.VideoOverrideConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoOverrideConfiguration
+	if *v == nil {
+		sv = &types.VideoOverrideConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "modalityProcessing":
+			if err := awsRestjson1_deserializeDocumentModalityProcessingConfiguration(&sv.ModalityProcessing, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

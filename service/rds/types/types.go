@@ -601,6 +601,10 @@ type DBCluster struct {
 	// Indicates whether minor version patches are applied automatically.
 	//
 	// This setting is for Aurora DB clusters and Multi-AZ DB clusters.
+	//
+	// For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version].
+	//
+	// [Automatically upgrading the minor engine version]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades
 	AutoMinorVersionUpgrade *bool
 
 	// The time when a stopped DB cluster is restarted automatically.
@@ -1671,6 +1675,10 @@ type DBInstance struct {
 	AssociatedRoles []DBInstanceRole
 
 	// Indicates whether minor version patches are applied automatically.
+	//
+	// For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version].
+	//
+	// [Automatically upgrading the minor engine version]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades
 	AutoMinorVersionUpgrade *bool
 
 	// The time when a stopped DB instance is restarted automatically.
@@ -5151,6 +5159,15 @@ type TenantDatabase struct {
 	// Specifies whether deletion protection is enabled for the DB instance.
 	DeletionProtection *bool
 
+	// Contains the secret managed by RDS in Amazon Web Services Secrets Manager for
+	// the master user password.
+	//
+	// For more information, see [Password management with Amazon Web Services Secrets Manager] in the Amazon RDS User Guide and [Password management with Amazon Web Services Secrets Manager] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Password management with Amazon Web Services Secrets Manager]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html
+	MasterUserSecret *MasterUserSecret
+
 	// The master username of the tenant database.
 	MasterUsername *string
 
@@ -5274,7 +5291,14 @@ type UserAuthConfig struct {
 	// to the underlying database.
 	AuthScheme AuthScheme
 
-	// The type of authentication the proxy uses for connections from clients.
+	// The type of authentication the proxy uses for connections from clients. The
+	// following values are defaults for the corresponding engines:
+	//
+	//   - RDS for MySQL: MYSQL_CACHING_SHA2_PASSWORD
+	//
+	//   - RDS for SQL Server: SQL_SERVER_AUTHENTICATION
+	//
+	//   - RDS for PostgreSQL: POSTGRES_SCRAM_SHA2_256
 	ClientPasswordAuthType ClientPasswordAuthType
 
 	// A user-specified description about the authentication used by a proxy to log in

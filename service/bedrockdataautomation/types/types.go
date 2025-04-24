@@ -21,6 +21,15 @@ type AudioExtractionCategory struct {
 	noSmithyDocumentSerde
 }
 
+// Override Configuration of Audio
+type AudioOverrideConfiguration struct {
+
+	// Configuration to enable/disable processing of modality
+	ModalityProcessing *ModalityProcessingConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Standard Extraction Configuration of Audio
 type AudioStandardExtraction struct {
 
@@ -324,6 +333,9 @@ type DocumentOutputTextFormat struct {
 // Override Configuration of Document
 type DocumentOverrideConfiguration struct {
 
+	// Configuration to enable/disable processing of modality
+	ModalityProcessing *ModalityProcessingConfiguration
+
 	// Configuration of Splitter
 	Splitter *SplitterConfiguration
 
@@ -411,6 +423,15 @@ type ImageExtractionCategory struct {
 	noSmithyDocumentSerde
 }
 
+// Override Configuration of Image
+type ImageOverrideConfiguration struct {
+
+	// Configuration to enable/disable processing of modality
+	ModalityProcessing *ModalityProcessingConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Standard Extraction Configuration of Image
 type ImageStandardExtraction struct {
 
@@ -453,11 +474,50 @@ type ImageStandardOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration to enable/disable processing of modality
+type ModalityProcessingConfiguration struct {
+
+	// State
+	State State
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for routing file type to desired modality
+type ModalityRoutingConfiguration struct {
+
+	// Desired Modality types
+	Jpeg DesiredModality
+
+	// Desired Modality types
+	Mov DesiredModality
+
+	// Desired Modality types
+	Mp4 DesiredModality
+
+	// Desired Modality types
+	Png DesiredModality
+
+	noSmithyDocumentSerde
+}
+
 // Override configuration
 type OverrideConfiguration struct {
 
+	// Override Configuration of Audio
+	Audio *AudioOverrideConfiguration
+
 	// Override Configuration of Document
 	Document *DocumentOverrideConfiguration
+
+	// Override Configuration of Image
+	Image *ImageOverrideConfiguration
+
+	// Configuration for routing file type to desired modality
+	ModalityRouting *ModalityRoutingConfiguration
+
+	// Override Configuration of Video
+	Video *VideoOverrideConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -543,6 +603,15 @@ type VideoExtractionCategory struct {
 
 	// List of Video Extraction Category Type
 	Types []VideoExtractionCategoryType
+
+	noSmithyDocumentSerde
+}
+
+// Override Configuration of Video
+type VideoOverrideConfiguration struct {
+
+	// Configuration to enable/disable processing of modality
+	ModalityProcessing *ModalityProcessingConfiguration
 
 	noSmithyDocumentSerde
 }

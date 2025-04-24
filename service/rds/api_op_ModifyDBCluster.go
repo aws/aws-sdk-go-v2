@@ -98,7 +98,11 @@ type ModifyDBClusterInput struct {
 	// cluster during the maintenance window. By default, minor engine upgrades are
 	// applied automatically.
 	//
-	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters.
+	//
+	// For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version].
+	//
+	// [Automatically upgrading the minor engine version]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades
 	AutoMinorVersionUpgrade *bool
 
 	// The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services

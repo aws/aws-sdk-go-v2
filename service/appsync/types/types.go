@@ -380,6 +380,9 @@ type ChannelNamespace struct {
 	// The date and time that the ChannelNamespace was created.
 	Created *time.Time
 
+	// The configuration for the OnPublish and OnSubscribe handlers.
+	HandlerConfigs *HandlerConfigs
+
 	// The date and time that the ChannelNamespace was last changed.
 	LastModified *time.Time
 
@@ -1110,6 +1113,34 @@ type GraphqlApi struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a handler.
+type HandlerConfig struct {
+
+	// The behavior for the handler.
+	//
+	// This member is required.
+	Behavior HandlerBehavior
+
+	// The integration data source configuration for the handler.
+	//
+	// This member is required.
+	Integration *Integration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the OnPublish and OnSubscribe handlers.
+type HandlerConfigs struct {
+
+	// The configuration for the OnPublish handler.
+	OnPublish *HandlerConfig
+
+	// The configuration for the OnSubscribe handler.
+	OnSubscribe *HandlerConfig
+
+	noSmithyDocumentSerde
+}
+
 // Describes an HTTP data source configuration.
 type HttpDataSourceConfig struct {
 
@@ -1122,6 +1153,20 @@ type HttpDataSourceConfig struct {
 	// port, AppSync uses the default port 80 for the HTTP endpoint and port 443 for
 	// HTTPS endpoints.
 	Endpoint *string
+
+	noSmithyDocumentSerde
+}
+
+// The integration data source configuration for the handler.
+type Integration struct {
+
+	// The unique name of the data source that has been configured on the API.
+	//
+	// This member is required.
+	DataSourceName *string
+
+	// The configuration for a Lambda data source.
+	LambdaConfig *LambdaConfig
 
 	noSmithyDocumentSerde
 }
@@ -1156,6 +1201,15 @@ type LambdaAuthorizerConfig struct {
 	// A regular expression for validation of tokens before the Lambda function is
 	// called.
 	IdentityValidationExpression *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a Lambda data source.
+type LambdaConfig struct {
+
+	// The invocation type for a Lambda data source.
+	InvokeType InvokeType
 
 	noSmithyDocumentSerde
 }

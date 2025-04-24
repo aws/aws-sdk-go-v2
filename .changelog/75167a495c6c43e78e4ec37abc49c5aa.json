@@ -1,0 +1,8 @@
+{
+    "id": "75167a49-5c6c-43e7-8e4e-c37abc49c5aa",
+    "type": "feature",
+    "description": "AWS App Runner adds Node.js 22 runtime.",
+    "modules": [
+        "service/apprunner"
+    ]
+}

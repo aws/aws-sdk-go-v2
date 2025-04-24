@@ -303,6 +303,7 @@ const (
 	RuntimeRuby31     Runtime = "RUBY_31"
 	RuntimePython311  Runtime = "PYTHON_311"
 	RuntimeNodejs18   Runtime = "NODEJS_18"
+	RuntimeNodejs22   Runtime = "NODEJS_22"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -323,6 +324,7 @@ func (Runtime) Values() []Runtime {
 		"RUBY_31",
 		"PYTHON_311",
 		"NODEJS_18",
+		"NODEJS_22",
 	}
 }
 

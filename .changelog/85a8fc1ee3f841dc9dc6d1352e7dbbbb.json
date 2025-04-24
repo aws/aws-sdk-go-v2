@@ -1,0 +1,8 @@
+{
+    "id": "85a8fc1e-e3f8-41dc-9dc6-d1352e7dbbbb",
+    "type": "feature",
+    "description": "Added support for modality routing and modality enablement on CreateDataAutomationProject and UpdateDataAutomationProject APIs",
+    "modules": [
+        "service/bedrockdataautomation"
+    ]
+}

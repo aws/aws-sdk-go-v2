@@ -730,6 +730,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelNamespaceInput(v *CreateChanne
 		ok.String(*v.CodeHandlers)
 	}
 
+	if v.HandlerConfigs != nil {
+		ok := object.Key("handlerConfigs")
+		if err := awsRestjson1_serializeDocumentHandlerConfigs(v.HandlerConfigs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -5998,6 +6005,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelNamespaceInput(v *UpdateChanne
 		ok.String(*v.CodeHandlers)
 	}
 
+	if v.HandlerConfigs != nil {
+		ok := object.Key("handlerConfigs")
+		if err := awsRestjson1_serializeDocumentHandlerConfigs(v.HandlerConfigs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PublishAuthModes != nil {
 		ok := object.Key("publishAuthModes")
 		if err := awsRestjson1_serializeDocumentAuthModes(v.PublishAuthModes, ok); err != nil {
@@ -7419,6 +7433,46 @@ func awsRestjson1_serializeDocumentFunctionsIds(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHandlerConfig(v *types.HandlerConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Behavior) > 0 {
+		ok := object.Key("behavior")
+		ok.String(string(v.Behavior))
+	}
+
+	if v.Integration != nil {
+		ok := object.Key("integration")
+		if err := awsRestjson1_serializeDocumentIntegration(v.Integration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHandlerConfigs(v *types.HandlerConfigs, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OnPublish != nil {
+		ok := object.Key("onPublish")
+		if err := awsRestjson1_serializeDocumentHandlerConfig(v.OnPublish, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OnSubscribe != nil {
+		ok := object.Key("onSubscribe")
+		if err := awsRestjson1_serializeDocumentHandlerConfig(v.OnSubscribe, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentHttpDataSourceConfig(v *types.HttpDataSourceConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7433,6 +7487,25 @@ func awsRestjson1_serializeDocumentHttpDataSourceConfig(v *types.HttpDataSourceC
 	if v.Endpoint != nil {
 		ok := object.Key("endpoint")
 		ok.String(*v.Endpoint)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIntegration(v *types.Integration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataSourceName != nil {
+		ok := object.Key("dataSourceName")
+		ok.String(*v.DataSourceName)
+	}
+
+	if v.LambdaConfig != nil {
+		ok := object.Key("lambdaConfig")
+		if err := awsRestjson1_serializeDocumentLambdaConfig(v.LambdaConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -7455,6 +7528,18 @@ func awsRestjson1_serializeDocumentLambdaAuthorizerConfig(v *types.LambdaAuthori
 	if v.IdentityValidationExpression != nil {
 		ok := object.Key("identityValidationExpression")
 		ok.String(*v.IdentityValidationExpression)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLambdaConfig(v *types.LambdaConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.InvokeType) > 0 {
+		ok := object.Key("invokeType")
+		ok.String(string(v.InvokeType))
 	}
 
 	return nil

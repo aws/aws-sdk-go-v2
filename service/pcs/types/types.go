@@ -594,7 +594,12 @@ type Scheduler struct {
 	Type SchedulerType
 
 	// The version of the specified scheduling software that Amazon Web Services PCS
-	// uses to manage cluster scaling and job scheduling.
+	// uses to manage cluster scaling and job scheduling. For more information, see [Slurm versions in Amazon Web Services PCS]in
+	// the Amazon Web Services PCS User Guide.
+	//
+	// Valid Values: 23.11 | 24.05
+	//
+	// [Slurm versions in Amazon Web Services PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	//
 	// This member is required.
 	Version *string
@@ -612,7 +617,12 @@ type SchedulerRequest struct {
 	Type SchedulerType
 
 	// The version of the specified scheduling software that Amazon Web Services PCS
-	// uses to manage cluster scaling and job scheduling.
+	// uses to manage cluster scaling and job scheduling. For more information, see [Slurm versions in Amazon Web Services PCS]in
+	// the Amazon Web Services PCS User Guide.
+	//
+	// Valid Values: 23.11 | 24.05
+	//
+	// [Slurm versions in Amazon Web Services PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	//
 	// This member is required.
 	Version *string
