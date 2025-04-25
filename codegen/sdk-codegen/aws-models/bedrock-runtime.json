@@ -1948,6 +1948,12 @@
                             "min": 1
                         }
                     }
+                },
+                "s3Location": {
+                    "target": "com.amazonaws.bedrockruntime#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of a document object in an Amazon S3 bucket. To see which models support S3 uploads, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-supported-models-features.html\">Supported models and features for Converse</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3674,6 +3680,12 @@
                             "min": 1
                         }
                     }
+                },
+                "s3Location": {
+                    "target": "com.amazonaws.bedrockruntime#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of an image object in an Amazon S3 bucket. To see which models support S3 uploads, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-supported-models-features.html\">Supported models and features for Converse</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4852,7 +4864,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A storage location in an S3 bucket.</p>"
+                "smithy.api#documentation": "<p>A storage location in an Amazon S3 bucket.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#S3Uri": {
@@ -5677,7 +5689,7 @@
                 "s3Location": {
                     "target": "com.amazonaws.bedrockruntime#S3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of a video object in an S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>The location of a video object in an Amazon S3 bucket. To see which models support S3 uploads, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-supported-models-features.html\">Supported models and features for Converse</a>.</p>"
                     }
                 }
             },
