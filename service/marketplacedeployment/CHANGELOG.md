@@ -1,3 +1,7 @@
+# v1.7.3 (2025-04-25)
+
+* **Documentation**: Doc only update for the AWS Marketplace Deployment Service that fixes several customer-reported issues.
+
 # v1.7.2 (2025-04-03)
 
 * No change notes available for this release.

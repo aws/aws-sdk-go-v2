@@ -1,3 +1,13 @@
+# Release (2025-04-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.30.0](service/bedrockruntime/CHANGELOG.md#v1300-2025-04-25)
+  * **Feature**: You can now reference images and documents stored in Amazon S3 when using InvokeModel and Converse APIs with Amazon Nova Lite and Nova Pro. This enables direct integration of S3-stored multimedia assets in your model requests without manual downloading or base64 encoding.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.56.2](service/ecs/CHANGELOG.md#v1562-2025-04-25)
+  * **Documentation**: Documentation only release for Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacedeployment`: [v1.7.3](service/marketplacedeployment/CHANGELOG.md#v173-2025-04-25)
+  * **Documentation**: Doc only update for the AWS Marketplace Deployment Service that fixes several customer-reported issues.
+
 # Release (2025-04-24)
 
 ## General Highlights

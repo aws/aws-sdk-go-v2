@@ -1,3 +1,7 @@
+# v1.30.0 (2025-04-25)
+
+* **Feature**: You can now reference images and documents stored in Amazon S3 when using InvokeModel and Converse APIs with Amazon Nova Lite and Nova Pro. This enables direct integration of S3-stored multimedia assets in your model requests without manual downloading or base64 encoding.
+
 # v1.29.0 (2025-04-07)
 
 * **Feature**: New options for how to handle harmful content detected by Amazon Bedrock Guardrails.

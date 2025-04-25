@@ -1,8 +1,0 @@
-{
-    "id": "35afedf8-c92c-4edb-ae3f-c3be997e6b8a",
-    "type": "documentation",
-    "description": "Doc only update for the AWS Marketplace Deployment Service that fixes several customer-reported issues.",
-    "modules": [
-        "service/marketplacedeployment"
-    ]
-}
