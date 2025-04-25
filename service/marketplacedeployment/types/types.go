@@ -7,6 +7,10 @@ import (
 )
 
 // The shape containing the requested deployment parameter name and secretString.
+//
+// To support AWS CloudFormation dynamic references to this resource using Quick
+// Launch, this value must match a parameter defined in the CloudFormation
+// templated provided to buyers.
 type DeploymentParameterInput struct {
 
 	// The desired name of the deployment parameter. This is the identifier on which

@@ -5971,6 +5971,16 @@ loop:
 			uv = &types.DocumentSourceMemberBytes{Value: mv}
 			break loop
 
+		case "s3Location":
+			var mv types.S3Location
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3Location(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DocumentSourceMemberS3Location{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -6356,6 +6366,16 @@ loop:
 				mv = dv
 			}
 			uv = &types.ImageSourceMemberBytes{Value: mv}
+			break loop
+
+		case "s3Location":
+			var mv types.S3Location
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3Location(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ImageSourceMemberS3Location{Value: mv}
 			break loop
 
 		default:

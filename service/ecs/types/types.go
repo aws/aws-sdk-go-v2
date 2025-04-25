@@ -4932,35 +4932,10 @@ type Task struct {
 	// optional. Supported values are between 128 CPU units ( 0.125 vCPUs) and 196608
 	// CPU units ( 192 vCPUs). If you do not specify a value, the parameter is ignored.
 	//
-	// If you're using the Fargate launch type, this field is required. You must use
-	// one of the following values. These values determine the range of supported
-	// values for the memory parameter:
+	// This field is required for Fargate. For information about the valid values, see [Task size]
+	// in the Amazon Elastic Container Service Developer Guide.
 	//
-	// The CPU units cannot be less than 1 vCPU when you use Windows containers on
-	// Fargate.
-	//
-	//   - 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB), 2048 (2
-	//   GB)
-	//
-	//   - 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048 (2 GB), 3072 (3
-	//   GB), 4096 (4 GB)
-	//
-	//   - 1024 (1 vCPU) - Available memory values: 2048 (2 GB), 3072 (3 GB), 4096 (4
-	//   GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
-	//
-	//   - 2048 (2 vCPU) - Available memory values: 4096 (4 GB) and 16384 (16 GB) in
-	//   increments of 1024 (1 GB)
-	//
-	//   - 4096 (4 vCPU) - Available memory values: 8192 (8 GB) and 30720 (30 GB) in
-	//   increments of 1024 (1 GB)
-	//
-	//   - 8192 (8 vCPU) - Available memory values: 16 GB and 60 GB in 4 GB increments
-	//
-	// This option requires Linux platform 1.4.0 or later.
-	//
-	//   - 16384 (16vCPU) - Available memory values: 32GB and 120 GB in 8 GB increments
-	//
-	// This option requires Linux platform 1.4.0 or later.
+	// [Task size]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size
 	Cpu *string
 
 	// The Unix timestamp for the time when the task was created. More specifically,
@@ -5178,31 +5153,12 @@ type TaskDefinition struct {
 	//
 	// If you're using the EC2 launch type or the external launch type, this field is
 	// optional. Supported values are between 128 CPU units ( 0.125 vCPUs) and 196608
-	// CPU units ( 192 vCPUs). The CPU units cannot be less than 1 vCPU when you use
-	// Windows containers on Fargate.
+	// CPU units ( 192 vCPUs).
 	//
-	//   - 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB), 2048 (2
-	//   GB)
+	// This field is required for Fargate. For information about the valid values, see [Task size]
+	// in the Amazon Elastic Container Service Developer Guide.
 	//
-	//   - 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048 (2 GB), 3072 (3
-	//   GB), 4096 (4 GB)
-	//
-	//   - 1024 (1 vCPU) - Available memory values: 2048 (2 GB), 3072 (3 GB), 4096 (4
-	//   GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
-	//
-	//   - 2048 (2 vCPU) - Available memory values: 4096 (4 GB) and 16384 (16 GB) in
-	//   increments of 1024 (1 GB)
-	//
-	//   - 4096 (4 vCPU) - Available memory values: 8192 (8 GB) and 30720 (30 GB) in
-	//   increments of 1024 (1 GB)
-	//
-	//   - 8192 (8 vCPU) - Available memory values: 16 GB and 60 GB in 4 GB increments
-	//
-	// This option requires Linux platform 1.4.0 or later.
-	//
-	//   - 16384 (16vCPU) - Available memory values: 32GB and 120 GB in 8 GB increments
-	//
-	// This option requires Linux platform 1.4.0 or later.
+	// [Task size]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size
 	Cpu *string
 
 	// The Unix timestamp for the time when the task definition was deregistered.

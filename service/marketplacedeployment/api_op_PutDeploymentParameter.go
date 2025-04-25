@@ -36,7 +36,7 @@ type PutDeploymentParameterInput struct {
 	// This member is required.
 	AgreementId *string
 
-	// The catalog related to the request. Fixed value: AWS Marketplace
+	// The catalog related to the request. Fixed value: AWSMarketplace
 	//
 	// This member is required.
 	Catalog *string
@@ -54,6 +54,9 @@ type PutDeploymentParameterInput struct {
 
 	// The idempotency token for deployment parameters. A unique identifier for the
 	// new version.
+	//
+	// This field is not required if you're calling using an AWS SDK. Otherwise, a
+	// clientToken must be provided with the request.
 	ClientToken *string
 
 	// The date when deployment parameters expire and are scheduled for deletion.
