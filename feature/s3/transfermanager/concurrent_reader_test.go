@@ -3,10 +3,12 @@ package transfermanager
 import (
 	"bytes"
 	"context"
+	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
+	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"io"
 	"math"
 	"math/rand"
-	"sync"
 	"testing"
 )
 
@@ -14,118 +16,192 @@ func TestConcurrentReader(t *testing.T) {
 	cases := map[string]struct {
 		partSize     int64
 		partsCount   int32
-		concurrency  int
 		sectionParts int32
+		getObjectFn  func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
+		options      Options
 	}{
-		"single goroutine": {
+		"part get single goroutine": {
 			partSize:     10,
 			partsCount:   1000,
-			concurrency:  1,
 			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectParts,
+				Concurrency:   1,
+			},
+			getObjectFn: s3testing.ReaderPartGetObjectFn,
 		},
-		"single goroutine with only one section": {
+		"part get single goroutine with only one section": {
 			partSize:     1000,
 			partsCount:   5,
-			concurrency:  3,
 			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectParts,
+				Concurrency:   3,
+			},
+			getObjectFn: s3testing.ReaderPartGetObjectFn,
 		},
-		"single goroutine with only one part": {
+		"part get single goroutine with only one part": {
 			partSize:     1000,
 			partsCount:   1,
-			concurrency:  3,
 			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectParts,
+				Concurrency:   3,
+			},
+			getObjectFn: s3testing.ReaderPartGetObjectFn,
 		},
-		"multiple goroutines": {
+		"part get multiple goroutines": {
 			partSize:     10,
 			partsCount:   1000,
-			concurrency:  5,
 			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectParts,
+				Concurrency:   5,
+			},
+			getObjectFn: s3testing.ReaderPartGetObjectFn,
 		},
-		"multiple goroutines with only one section": {
+		"part get multiple goroutines with only one section": {
 			partSize:     10,
 			partsCount:   6,
-			concurrency:  5,
 			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectParts,
+				Concurrency:   5,
+			},
+			getObjectFn: s3testing.ReaderPartGetObjectFn,
 		},
-		"multiple goroutines with only one part": {
+		"part get multiple goroutines with only one part": {
 			partSize:     10,
 			partsCount:   1,
-			concurrency:  5,
 			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectParts,
+				Concurrency:   5,
+			},
+			getObjectFn: s3testing.ReaderPartGetObjectFn,
 		},
-		"multiple goroutines with large part size": {
+		"part get multiple goroutines with large part size": {
 			partSize:     10000,
 			partsCount:   10000,
-			concurrency:  5,
 			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectParts,
+				Concurrency:   5,
+			},
+			getObjectFn: s3testing.ReaderPartGetObjectFn,
+		},
+		"range get single goroutine": {
+			partSize:     10,
+			partsCount:   1000,
+			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectRanges,
+				Concurrency:   1,
+			},
+			getObjectFn: s3testing.RangeGetObjectFn,
+		},
+		"range get single goroutine with only one section": {
+			partSize:     1000,
+			partsCount:   5,
+			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectRanges,
+				Concurrency:   3,
+			},
+			getObjectFn: s3testing.RangeGetObjectFn,
+		},
+		"range get single goroutine with only one part": {
+			partSize:     1000,
+			partsCount:   1,
+			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectRanges,
+				Concurrency:   3,
+			},
+			getObjectFn: s3testing.RangeGetObjectFn,
+		},
+		"range get multiple goroutines": {
+			partSize:     10,
+			partsCount:   1000,
+			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectRanges,
+				Concurrency:   5,
+			},
+			getObjectFn: s3testing.RangeGetObjectFn,
+		},
+		"range get multiple goroutines with only one section": {
+			partSize:     10,
+			partsCount:   6,
+			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectRanges,
+				Concurrency:   5,
+			},
+			getObjectFn: s3testing.RangeGetObjectFn,
+		},
+		"range get multiple goroutines with only one part": {
+			partSize:     10,
+			partsCount:   1,
+			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectRanges,
+				Concurrency:   5,
+			},
+			getObjectFn: s3testing.RangeGetObjectFn,
+		},
+		"range get multiple goroutines with large part size": {
+			partSize:     10000,
+			partsCount:   10000,
+			sectionParts: 6,
+			options: Options{
+				GetObjectType: types.GetObjectRanges,
+				Concurrency:   5,
+			},
+			getObjectFn: s3testing.RangeGetObjectFn,
 		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			r := NewConcurrentReader()
-			r.ch = make(chan outChunk, c.concurrency)
-			r.setCapacity(int32(math.Min(float64(c.sectionParts), float64(c.partsCount))))
-			r.setPartSize(c.partSize)
-			r.setPartsCount(c.partsCount)
 			ctx := context.Background()
-			var wg sync.WaitGroup
-			expectBuf := make([]byte, 0)
-			actualBuf := make([]byte, 0)
-
-			wg.Add(1)
-			go func() {
-				defer wg.Done()
-				b, err := io.ReadAll(r)
-				if err != nil {
-					if err != io.EOF {
-						t.Error("error copying file: ", err)
-					}
-					return
-				}
-
-				actualBuf = append(actualBuf, b...)
-			}()
-
-			getter := mockGetter{}
-			ch := make(chan inChunk, c.concurrency)
-
-			for i := 0; i < c.concurrency; i++ {
-				getter.wg.Add(1)
-				go getter.partGet(ctx, ch, r.ch)
+			s3Client := &s3testing.TransferManagerLoggingClient{}
+			s3Client.GetObjectFn = c.getObjectFn
+			r := &concurrentReader{
+				partSize:     c.partSize,
+				partsCount:   c.partsCount,
+				sectionParts: c.sectionParts,
+				options:      c.options,
+				in: &GetObjectInput{
+					Bucket: "bucket",
+					Key:    "key",
+				},
+				capacity: int32(math.Min(float64(c.sectionParts), float64(c.partsCount))),
+				buf:      make(map[int32]*outChunk),
+				ctx:      ctx,
+				ch:       make(chan outChunk, c.options.Concurrency),
 			}
 
-			var i int32
-			for {
-				if i == c.partsCount {
-					break
-				}
-
-				if capacity := r.getCapacity(); r.getRead() == capacity {
-					r.setCapacity(int32(math.Min(float64(capacity+c.sectionParts), float64(c.partsCount))))
-				}
-
-				if i == r.getCapacity() {
-					continue
-				}
-
+			expectBuf := make([]byte, 0)
+			expectPartsData := make([][]byte, c.partsCount)
+			for i := int32(0); i < c.partsCount; i++ {
 				b := make([]byte, c.partSize)
 				if i == c.partsCount-1 {
 					b = make([]byte, rand.Intn(int(c.partSize))+1)
 				}
 				rand.Read(b)
 				expectBuf = append(expectBuf, b...)
-				ch <- inChunk{
-					index: i,
-					body:  b,
-				}
-				i++
+				expectPartsData[i] = b
 			}
+			s3Client.Data = expectBuf
+			s3Client.PartsData = expectPartsData
+			r.options.S3 = s3Client
+			r.totalBytes = int64(len(expectBuf))
 
-			wg.Wait()
-			close(ch)
-			getter.wg.Wait()
-			close(r.ch)
+			actualBuf, err := io.ReadAll(r)
+			if err != nil {
+				t.Fatalf("expect no error when reading, got %v", err)
+			}
 
 			if e, a := len(expectBuf), len(actualBuf); e != a {
 				t.Errorf("expect data sent to have length %d, but got %d", e, a)
@@ -135,29 +211,4 @@ func TestConcurrentReader(t *testing.T) {
 			}
 		})
 	}
-}
-
-type mockGetter struct {
-	wg sync.WaitGroup
-}
-
-func (g *mockGetter) partGet(ctx context.Context, inputCh chan inChunk, outCh chan outChunk) {
-	defer g.wg.Done()
-	for {
-		inC, ok := <-inputCh
-		if !ok {
-			break
-		}
-
-		outCh <- outChunk{
-			index:  inC.index,
-			body:   bytes.NewReader(inC.body),
-			length: int64(len(inC.body)),
-		}
-	}
-}
-
-type inChunk struct {
-	body  []byte
-	index int32
 }
