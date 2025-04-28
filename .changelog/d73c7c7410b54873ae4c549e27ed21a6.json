@@ -1,8 +1,0 @@
-{
-    "id": "d73c7c74-10b5-4873-ae4c-549e27ed21a6",
-    "type": "documentation",
-    "description": "Doc only update for GSI descriptions.",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "abf7ecea-7851-434e-87f7-355ea8056afc",
-    "type": "feature",
-    "description": "Add support for file-based HTTP domain control validation, available through Amazon CloudFront.",
-    "modules": [
-        "service/acm"
-    ]
-}

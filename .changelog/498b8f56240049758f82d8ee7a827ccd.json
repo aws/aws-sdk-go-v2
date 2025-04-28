@@ -1,8 +1,0 @@
-{
-    "id": "498b8f56-2400-4975-8f82-d8ee7a827ccd",
-    "type": "bugfix",
-    "description": "Don't emit warnings about lack of checksum validation for non-200 responses.",
-    "modules": [
-        "service/internal/checksum"
-    ]
-}

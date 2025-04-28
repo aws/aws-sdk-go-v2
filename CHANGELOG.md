@@ -1,3 +1,20 @@
+# Release (2025-04-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.32.0](service/acm/CHANGELOG.md#v1320-2025-04-28)
+  * **Feature**: Add support for file-based HTTP domain control validation, available through Amazon CloudFront.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.46.0](service/cloudfront/CHANGELOG.md#v1460-2025-04-28)
+  * **Feature**: Add distribution tenant, connection group, and multi-tenant distribution APIs to the CloudFront SDK.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.43.1](service/dynamodb/CHANGELOG.md#v1431-2025-04-28)
+  * **Documentation**: Doc only update for GSI descriptions.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.42.0](service/imagebuilder/CHANGELOG.md#v1420-2025-04-28)
+  * **Feature**: Add integration with SSM Parameter Store to Image Builder.
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.7.1](service/internal/checksum/CHANGELOG.md#v171-2025-04-28)
+  * **Bug Fix**: Don't emit warnings about lack of checksum validation for non-200 responses.
+
 # Release (2025-04-25)
 
 ## Module Highlights

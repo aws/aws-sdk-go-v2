@@ -1,3 +1,7 @@
+# v1.42.0 (2025-04-28)
+
+* **Feature**: Add integration with SSM Parameter Store to Image Builder.
+
 # v1.41.2 (2025-04-03)
 
 * No change notes available for this release.
