@@ -1,33 +1,5 @@
 {
     "smithy": "2.0",
-    "metadata": {
-        "suppressions": [
-            {
-                "id": "HttpMethodSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpResponseCodeSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "PaginatedTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpHeaderTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpUriConflict",
-                "namespace": "*"
-            },
-            {
-                "id": "Service",
-                "namespace": "*"
-            }
-        ]
-    },
     "shapes": {
         "com.amazonaws.acm#AccessDeniedException": {
             "type": "structure",
@@ -175,6 +147,12 @@
                         "smithy.api#documentation": "<p>One or more domain names (subject alternative names) \n      included in the certificate. This\n      list contains the domain names that are bound to the public key that is contained in the\n      certificate. The subject alternative names include the canonical domain name (CN) of the\n      certificate and additional domain names that can be used to connect to the website. </p>"
                     }
                 },
+                "ManagedBy": {
+                    "target": "com.amazonaws.acm#CertificateManagedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the Amazon Web Services service that manages the certificate issued by ACM.</p>"
+                    }
+                },
                 "DomainValidationOptions": {
                     "target": "com.amazonaws.acm#DomainValidationList",
                     "traits": {
@@ -318,6 +296,17 @@
                 "smithy.api#documentation": "<p>Contains metadata about an ACM certificate. This structure is returned in the response\n      to a <a>DescribeCertificate</a> request. </p>"
             }
         },
+        "com.amazonaws.acm#CertificateManagedBy": {
+            "type": "enum",
+            "members": {
+                "CLOUDFRONT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDFRONT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.acm#CertificateManager": {
             "type": "service",
             "version": "2015-12-08",
@@ -371,10 +360,10 @@
             "traits": {
                 "aws.api#service": {
                     "sdkId": "ACM",
+                    "endpointPrefix": "acm",
                     "arnNamespace": "acm",
-                    "cloudFormationName": "CertificateManager",
                     "cloudTrailEventSource": "acm.amazonaws.com",
-                    "endpointPrefix": "acm"
+                    "cloudFormationName": "CertificateManager"
                 },
                 "aws.auth#sigv4": {
                     "name": "acm"
@@ -1473,13 +1462,13 @@
                 "SubjectAlternativeNameSummaries": {
                     "target": "com.amazonaws.acm#DomainList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more domain names (subject alternative names) \n      included in the certificate. This\n      list contains the domain names that are bound to the public key that is contained in the\n      certificate. The subject alternative names include the canonical domain name (CN) of the\n      certificate and additional domain names that can be used to connect to the website. </p>\n         <p>When called by <a>ListCertificates</a>, this parameter will only return the first 100 subject alternative\n      names included in the certificate. To display the full list of subject alternative names, use\n      <a>DescribeCertificate</a>.</p>"
+                        "smithy.api#documentation": "<p>One or more domain names (subject alternative names) \n      included in the certificate. This\n      list contains the domain names that are bound to the public key that is contained in the\n      certificate. The subject alternative names include the canonical domain name (CN) of the\n      certificate and additional domain names that can be used to connect to the website. </p>\n         <p>When called by <a href=\"https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html\">ListCertificates</a>, this parameter will only return the first 100 subject alternative\n      names included in the certificate. To display the full list of subject alternative names, use\n        <a href=\"https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html\">DescribeCertificate</a>.</p>"
                     }
                 },
                 "HasAdditionalSubjectAlternativeNames": {
                     "target": "com.amazonaws.acm#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>When called by <a>ListCertificates</a>, indicates whether the full list of subject alternative names has\n      been included in the response. If false, the response includes all of the subject alternative\n      names included in the certificate. If true, the response only includes the first 100 subject\n      alternative names included in the certificate. To display the full list of subject alternative\n      names, use <a>DescribeCertificate</a>.</p>"
+                        "smithy.api#documentation": "<p>When called by <a href=\"https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html\">ListCertificates</a>, indicates whether the full list of subject alternative names has\n      been included in the response. If false, the response includes all of the subject alternative\n      names included in the certificate. If true, the response only includes the first 100 subject\n      alternative names included in the certificate. To display the full list of subject alternative\n      names, use <a href=\"https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html\">DescribeCertificate</a>.</p>"
                     }
                 },
                 "Status": {
@@ -1564,6 +1553,12 @@
                     "target": "com.amazonaws.acm#TStamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the certificate was revoked. This value exists only when the certificate\n      status is <code>REVOKED</code>. </p>"
+                    }
+                },
+                "ManagedBy": {
+                    "target": "com.amazonaws.acm#CertificateManagedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the Amazon Web Services service that manages the certificate issued by ACM.</p>"
                     }
                 }
             },
@@ -1838,13 +1833,19 @@
                 "ValidationStatus": {
                     "target": "com.amazonaws.acm#DomainStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The validation status of the domain name. This can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING_VALIDATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The validation status of the domain name. This can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING_VALIDATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code/>SUCCESS</p>\n            </li>\n            <li>\n               <p>\n                  <code/>FAILED</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ResourceRecord": {
                     "target": "com.amazonaws.acm#ResourceRecord",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the CNAME record that you add to your DNS database for domain validation. For\n      more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html\">Use DNS to Validate Domain Ownership</a>.</p>\n         <p>Note: The CNAME information that you need does not include the name of your domain. If you\n      include\u2028 your domain name in the DNS database CNAME record, validation fails.\u2028 For example, if\n      the name is \"_a79865eb4cd1a6ab990a45779b4e0b96.yourdomain.com\", only\n      \"_a79865eb4cd1a6ab990a45779b4e0b96\" must be used.</p>"
+                        "smithy.api#documentation": "<p>Contains the CNAME record that you add to your DNS database for domain validation. For\n      more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html\">Use DNS to Validate Domain Ownership</a>.</p>\n         <p>Note: The CNAME information that you need does not include the name of your domain. If you\n      include your domain name in the DNS database CNAME record, validation fails. For example, if\n      the name is \"_a79865eb4cd1a6ab990a45779b4e0b96.yourdomain.com\", only\n      \"_a79865eb4cd1a6ab990a45779b4e0b96\" must be used.</p>"
+                    }
+                },
+                "HttpRedirect": {
+                    "target": "com.amazonaws.acm#HttpRedirect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information for HTTP-based domain validation of certificates requested through CloudFront and issued by ACM.\n      This field exists only when the certificate type is <code>AMAZON_ISSUED</code> and the validation method is <code>HTTP</code>.</p>"
                     }
                 },
                 "ValidationMethod": {
@@ -2231,6 +2232,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specify one or more algorithms that can be used to generate key pairs.</p>\n         <p>Default filtering returns only <code>RSA_1024</code> and <code>RSA_2048</code>\n      certificates that have at least one domain. To return other certificate types, provide the\n      desired type signatures in a comma-separated list. For example, <code>\"keyTypes\":\n        [\"RSA_2048\",\"RSA_4096\"]</code> returns both <code>RSA_2048</code> and <code>RSA_4096</code>\n      certificates.</p>"
                     }
+                },
+                "managedBy": {
+                    "target": "com.amazonaws.acm#CertificateManagedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the Amazon Web Services service that manages the certificate issued by ACM.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2342,6 +2349,26 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.acm#HttpRedirect": {
+            "type": "structure",
+            "members": {
+                "RedirectFrom": {
+                    "target": "com.amazonaws.acm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL including the domain to be validated. The certificate authority sends <code>GET</code> requests here during validation.</p>"
+                    }
+                },
+                "RedirectTo": {
+                    "target": "com.amazonaws.acm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL hosting the validation token. <code>RedirectFrom</code> must return this content or redirect here.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information for HTTP-based domain validation of certificates requested through CloudFront and issued by ACM.\n      This field exists only when the certificate type is <code>AMAZON_ISSUED</code> and the validation method is <code>HTTP</code>.</p>"
             }
         },
         "com.amazonaws.acm#IdempotencyToken": {
@@ -2706,7 +2733,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of certificate ARNs and domain names. By default, the API returns RSA_2048 certificates. To return all certificates in the account, include the <code>keyType</code> filter with the values <code>[RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1]</code>.</p>\n         <p>In addition to <code>keyType</code>, you can also filter by the <code>CertificateStatuses</code>, <code>keyUsage</code>, and <code>extendedKeyUsage</code> attributes on the certificate. For more information, see <a>Filters</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of certificate ARNs and domain names. You can request that only\n      certificates that match a specific status be listed. You can also filter by specific\n      attributes of the certificate. Default filtering returns only <code>RSA_2048</code>\n      certificates. For more information, see <a>Filters</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3037,6 +3064,9 @@
                     "target": "com.amazonaws.acm#InvalidArnException"
                 },
                 {
+                    "target": "com.amazonaws.acm#RequestInProgressException"
+                },
+                {
                     "target": "com.amazonaws.acm#ResourceNotFoundException"
                 }
             ],
@@ -3232,6 +3262,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the algorithm of the public and private key pair that your certificate uses to\n      encrypt data. RSA is the default key algorithm for ACM certificates. Elliptic Curve Digital\n      Signature Algorithm (ECDSA) keys are smaller, offering security comparable to RSA keys but\n      with greater computing efficiency. However, ECDSA is not supported by all network clients.\n      Some Amazon Web Services services may require RSA keys, or only support ECDSA keys of a particular size,\n      while others allow the use of either RSA and ECDSA keys to ensure that compatibility is not\n      broken. Check the requirements for the Amazon Web Services service where you plan to deploy your\n      certificate. For more information about selecting an algorithm, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms\">Key\n        algorithms</a>.</p>\n         <note>\n            <p>Algorithms supported for an ACM certificate request include: </p>\n            <ul>\n               <li>\n                  <p>\n                     <code>RSA_2048</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>EC_prime256v1</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>EC_secp384r1</code>\n                  </p>\n               </li>\n            </ul>\n            <p>Other listed algorithms are for imported certificates only. </p>\n         </note>\n         <note>\n            <p>When you request a private PKI certificate signed by a CA from Amazon Web Services Private CA, the\n      specified signing algorithm family (RSA or ECDSA) must match the algorithm family of\n      the CA's secret key.</p>\n         </note>\n         <p>Default: RSA_2048</p>"
                     }
+                },
+                "ManagedBy": {
+                    "target": "com.amazonaws.acm#CertificateManagedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the Amazon Web Services service that manages the certificate issued by ACM.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3403,6 +3439,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SUPERCEDED"
+                    }
+                },
+                "SUPERSEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPERSEDED"
                     }
                 },
                 "CESSATION_OF_OPERATION": {
@@ -3655,6 +3697,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DNS"
+                    }
+                },
+                "HTTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP"
                     }
                 }
             }

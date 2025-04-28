@@ -431,6 +431,188 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.cloudfront#AssociateDistributionTenantWebACL": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#AssociateDistributionTenantWebACLRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#AssociateDistributionTenantWebACLResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates the WAF web ACL with a distribution tenant.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2020-05-31/distribution-tenant/{Id}/associate-web-acl",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#AssociateDistributionTenantWebACLRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WebACLArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the WAF web ACL to associate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current <code>ETag</code> of the distribution tenant. This value is returned in the response of the <code>GetDistributionTenant</code> API operation.</p>",
+                        "smithy.api#httpHeader": "If-Match"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#AssociateDistributionTenantWebACLResult": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.</p>"
+                    }
+                },
+                "WebACLArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the WAF web ACL that you associated with the distribution tenant.</p>"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the distribution tenant.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#AssociateDistributionWebACL": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#AssociateDistributionWebACLRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#AssociateDistributionWebACLResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates the WAF web ACL with a distribution.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2020-05-31/distribution/{Id}/associate-web-acl",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#AssociateDistributionWebACLRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WebACLArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the WAF web ACL to associate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the distribution that you're associating with the WAF web ACL.</p>",
+                        "smithy.api#httpHeader": "If-Match"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#AssociateDistributionWebACLResult": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution.</p>"
+                    }
+                },
+                "WebACLArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the WAF web ACL that you associated with the distribution.</p>"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the distribution.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#AwsAccountNumberList": {
             "type": "list",
             "member": {
@@ -1004,6 +1186,21 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.cloudfront#Certificate": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ACM certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Certificate Manager (ACM) certificate associated with your distribution.</p>"
+            }
+        },
         "com.amazonaws.cloudfront#CertificateSource": {
             "type": "enum",
             "members": {
@@ -1023,6 +1220,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "acm"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#CertificateTransparencyLoggingPreference": {
+            "type": "enum",
+            "members": {
+                "Enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "Disabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
                     }
                 }
             }
@@ -1197,6 +1411,12 @@
                     "target": "com.amazonaws.cloudfront#AssociateAlias"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#AssociateDistributionTenantWebACL"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#AssociateDistributionWebACL"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#CopyDistribution"
                 },
                 {
@@ -1209,10 +1429,16 @@
                     "target": "com.amazonaws.cloudfront#CreateCloudFrontOriginAccessIdentity"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#CreateConnectionGroup"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#CreateContinuousDeploymentPolicy"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#CreateDistribution"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#CreateDistributionTenant"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#CreateDistributionWithTags"
@@ -1228,6 +1454,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#CreateInvalidation"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#CreateInvalidationForDistributionTenant"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#CreateKeyGroup"
@@ -1272,10 +1501,16 @@
                     "target": "com.amazonaws.cloudfront#DeleteCloudFrontOriginAccessIdentity"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#DeleteConnectionGroup"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#DeleteContinuousDeploymentPolicy"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#DeleteDistribution"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#DeleteDistributionTenant"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#DeleteFieldLevelEncryptionConfig"
@@ -1323,6 +1558,12 @@
                     "target": "com.amazonaws.cloudfront#DescribeKeyValueStore"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#DisassociateDistributionTenantWebACL"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#DisassociateDistributionWebACL"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#GetAnycastIpList"
                 },
                 {
@@ -1338,6 +1579,12 @@
                     "target": "com.amazonaws.cloudfront#GetCloudFrontOriginAccessIdentityConfig"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#GetConnectionGroup"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#GetConnectionGroupByRoutingEndpoint"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#GetContinuousDeploymentPolicy"
                 },
                 {
@@ -1348,6 +1595,12 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#GetDistributionConfig"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#GetDistributionTenant"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#GetDistributionTenantByDomain"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#GetFieldLevelEncryption"
@@ -1368,10 +1621,16 @@
                     "target": "com.amazonaws.cloudfront#GetInvalidation"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#GetInvalidationForDistributionTenant"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#GetKeyGroup"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#GetKeyGroupConfig"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#GetManagedCertificateDetails"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#GetMonitoringSubscription"
@@ -1425,6 +1684,9 @@
                     "target": "com.amazonaws.cloudfront#ListConflictingAliases"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#ListConnectionGroups"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#ListContinuousDeploymentPolicies"
                 },
                 {
@@ -1435,6 +1697,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#ListDistributionsByCachePolicyId"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#ListDistributionsByConnectionMode"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#ListDistributionsByKeyGroup"
@@ -1455,6 +1720,15 @@
                     "target": "com.amazonaws.cloudfront#ListDistributionsByWebACLId"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#ListDistributionTenants"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#ListDistributionTenantsByCustomization"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#ListDomainConflicts"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#ListFieldLevelEncryptionConfigs"
                 },
                 {
@@ -1465,6 +1739,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#ListInvalidations"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#ListInvalidationsForDistributionTenant"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#ListKeyGroups"
@@ -1515,13 +1792,22 @@
                     "target": "com.amazonaws.cloudfront#UpdateCloudFrontOriginAccessIdentity"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#UpdateConnectionGroup"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#UpdateContinuousDeploymentPolicy"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UpdateDistribution"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#UpdateDistributionTenant"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#UpdateDistributionWithStagingConfig"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UpdateDomainAssociation"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UpdateFieldLevelEncryptionConfig"
@@ -1558,6 +1844,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UpdateVpcOrigin"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#VerifyDnsConfiguration"
                 }
             ],
             "traits": {
@@ -2526,6 +2815,204 @@
                 "smithy.api#documentation": "<p>A list of aliases (also called CNAMEs) and the CloudFront distributions and Amazon Web Services accounts\n\t\t\tthat they are associated with. In the list, the distribution and account IDs are\n\t\t\tpartially hidden, which allows you to identify the distributions and accounts that you\n\t\t\town, but helps to protect the information of ones that you don't own.</p>"
             }
         },
+        "com.amazonaws.cloudfront#ConnectionGroup": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the connection group.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection group.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connection group.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the connection group was created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the connection group was updated.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cloudfront#Tags"
+                },
+                "Ipv6Enabled": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IPv6 is enabled for the connection group.</p>"
+                    }
+                },
+                "RoutingEndpoint": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing endpoint (also known as the DNS name) that is assigned to the connection group, such as d111111abcdef8.cloudfront.net.</p>"
+                    }
+                },
+                "AnycastIpListId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Anycast static IP list.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the connection group.</p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the connection group is enabled.</p>"
+                    }
+                },
+                "IsDefault": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the connection group is the default connection group for the distribution tenants.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The connection group for your distribution tenants. When you first create a distribution tenant and you don't specify a connection group, CloudFront will automatically create a default connection group for you. When you create a new distribution tenant and don't specify a connection group, the default one will be associated with your distribution tenant.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ConnectionGroupAssociationFilter": {
+            "type": "structure",
+            "members": {
+                "AnycastIpListId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Anycast static IP list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about what CloudFront resources your connection groups are associated with.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ConnectionGroupSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the connection group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connection group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoutingEndpoint": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing endpoint (also known as the DNS name) that is assigned to the connection group, such as d111111abcdef8.cloudfront.net.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the connection group was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the connection group was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the connection group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnycastIpListId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Anycast static IP list.</p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the connection group is enabled</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the connection group.</p>"
+                    }
+                },
+                "IsDefault": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the connection group is the default connection group for the distribution tenants.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary that contains details about your connection groups.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ConnectionGroupSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#ConnectionGroupSummary",
+                "traits": {
+                    "smithy.api#xmlName": "ConnectionGroupSummary"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ConnectionMode": {
+            "type": "enum",
+            "members": {
+                "Direct": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "direct"
+                    }
+                },
+                "TenantOnly": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tenant-only"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudfront#ContentTypeProfile": {
             "type": "structure",
             "members": {
@@ -3185,7 +3672,7 @@
                 "IpCount": {
                     "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of static IP addresses that are allocated to the Anycast static IP list.</p>",
+                        "smithy.api#documentation": "<p>The number of static IP addresses that are allocated to the Anycast static IP list. Valid values: 21 or 3.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3390,6 +3877,101 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#CreateConnectionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#CreateConnectionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#CreateConnectionGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidTagging"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a connection group.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/connection-group",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#CreateConnectionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection group. Enter a friendly identifier that is unique within your Amazon Web Services account. This name can't be updated after you create the connection group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Ipv6Enabled": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable IPv6 for the connection group. The default is <code>true</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesEnableIPv6\">Enable IPv6</a> in the \n  \t<i>Amazon CloudFront Developer Guide</i>.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cloudfront#Tags"
+                },
+                "AnycastIpListId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Anycast static IP list.</p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable the connection group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#CreateConnectionGroupResult": {
+            "type": "structure",
+            "members": {
+                "ConnectionGroup": {
+                    "target": "com.amazonaws.cloudfront#ConnectionGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection group that you created.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the connection group.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#CreateContinuousDeploymentPolicy": {
             "type": "operation",
             "input": {
@@ -3493,6 +4075,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#DistributionAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#EntityNotFound"
@@ -3735,6 +4320,134 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The returned result of the corresponding request.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#CreateDistributionTenant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#CreateDistributionTenantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#CreateDistributionTenantResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#CNAMEAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidAssociation"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidTagging"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a distribution tenant.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/distribution-tenant",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#CreateDistributionTenantRequest": {
+            "type": "structure",
+            "members": {
+                "DistributionId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the multi-tenant distribution to use for creating the distribution tenant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the distribution tenant. Enter a friendly identifier that is unique within your Amazon Web Services account. This name can't be updated after you create the distribution tenant.</p>",
+                        "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]{1,126}[a-zA-Z0-9]$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Domains": {
+                    "target": "com.amazonaws.cloudfront#DomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domains associated with the distribution tenant. You must specify at least one domain in the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cloudfront#Tags"
+                },
+                "Customizations": {
+                    "target": "com.amazonaws.cloudfront#Customizations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant.</p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.cloudfront#Parameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.</p>"
+                    }
+                },
+                "ConnectionGroupId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the connection group to associate with the distribution tenant.</p>"
+                    }
+                },
+                "ManagedCertificateRequest": {
+                    "target": "com.amazonaws.cloudfront#ManagedCertificateRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the CloudFront managed ACM certificate request.</p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the distribution tenant should be enabled when created. If the distribution tenant is disabled, the distribution tenant won't serve traffic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#CreateDistributionTenantResult": {
+            "type": "structure",
+            "members": {
+                "DistributionTenant": {
+                    "target": "com.amazonaws.cloudfront#DistributionTenant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distribution tenant that you created.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the distribution tenant.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -4362,6 +5075,91 @@
                     "uri": "/2020-05-31/distribution/{DistributionId}/invalidation",
                     "code": 201
                 }
+            }
+        },
+        "com.amazonaws.cloudfront#CreateInvalidationForDistributionTenant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#CreateInvalidationForDistributionTenantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#CreateInvalidationForDistributionTenantResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#BatchTooLarge"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InconsistentQuantities"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#MissingBody"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#TooManyInvalidationsInProgress"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an invalidation for a distribution tenant. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html\">Invalidating files</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/distribution-tenant/{Id}/invalidation",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#CreateInvalidationForDistributionTenantRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InvalidationBatch": {
+                    "target": "com.amazonaws.cloudfront#InvalidationBatch",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "InvalidationBatch"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#CreateInvalidationForDistributionTenantResult": {
+            "type": "structure",
+            "members": {
+                "Location": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location for the invalidation.</p>",
+                        "smithy.api#httpHeader": "Location"
+                    }
+                },
+                "Invalidation": {
+                    "target": "com.amazonaws.cloudfront#Invalidation",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudfront#CreateInvalidationRequest": {
@@ -5567,6 +6365,49 @@
                 "smithy.api#documentation": "<p>A custom origin. A custom origin is any origin that is <i>not</i> an\n\t\t\tAmazon S3 bucket, with one exception. An Amazon S3 bucket that is <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html\">configured with\n\t\t\t\tstatic website hosting</a>\n            <i>is</i> a custom origin.</p>"
             }
         },
+        "com.amazonaws.cloudfront#CustomizationActionType": {
+            "type": "enum",
+            "members": {
+                "override": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "override"
+                    }
+                },
+                "disable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#Customizations": {
+            "type": "structure",
+            "members": {
+                "WebAcl": {
+                    "target": "com.amazonaws.cloudfront#WebAclCustomization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WAF web ACL.</p>"
+                    }
+                },
+                "Certificate": {
+                    "target": "com.amazonaws.cloudfront#Certificate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Certificate Manager (ACM) certificate.</p>"
+                    }
+                },
+                "GeoRestrictions": {
+                    "target": "com.amazonaws.cloudfront#GeoRestrictionCustomization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The geographic restrictions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant.</p>"
+            }
+        },
         "com.amazonaws.cloudfront#DefaultCacheBehavior": {
             "type": "structure",
             "members": {
@@ -5877,6 +6718,67 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.cloudfront#DeleteConnectionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#DeleteConnectionGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#CannotDeleteEntityWhileInUse"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#ResourceNotDisabled"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a connection group.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2020-05-31/connection-group/{Id}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DeleteConnectionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the connection group to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the connection group to delete.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.cloudfront#DeleteContinuousDeploymentPolicy": {
             "type": "operation",
             "input": {
@@ -5960,6 +6862,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#ResourceInUse"
                 }
             ],
             "traits": {
@@ -5992,6 +6897,64 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>This action deletes a web distribution. To delete a web distribution using the CloudFront\n\t\t\tAPI, perform the following steps.</p>\n         <p>\n            <b>To delete a web distribution using the CloudFront API:</b>\n         </p>\n         <ol>\n            <li>\n               <p>Disable the web distribution</p>\n            </li>\n            <li>\n               <p>Submit a <code>GET Distribution Config</code> request to get the current\n\t\t\t\t\tconfiguration and the <code>Etag</code> header for the distribution.</p>\n            </li>\n            <li>\n               <p>Update the XML document that was returned in the response to your <code>GET\n\t\t\t\t\t\tDistribution Config</code> request to change the value of\n\t\t\t\t\t\t<code>Enabled</code> to <code>false</code>.</p>\n            </li>\n            <li>\n               <p>Submit a <code>PUT Distribution Config</code> request to update the\n\t\t\t\t\tconfiguration for your distribution. In the request body, include the XML\n\t\t\t\t\tdocument that you updated in Step 3. Set the value of the HTTP\n\t\t\t\t\t\t<code>If-Match</code> header to the value of the <code>ETag</code> header\n\t\t\t\t\tthat CloudFront returned when you submitted the <code>GET Distribution Config</code>\n\t\t\t\t\trequest in Step 2.</p>\n            </li>\n            <li>\n               <p>Review the response to the <code>PUT Distribution Config</code> request to\n\t\t\t\t\tconfirm that the distribution was successfully disabled.</p>\n            </li>\n            <li>\n               <p>Submit a <code>GET Distribution</code> request to confirm that your changes\n\t\t\t\t\thave propagated. When propagation is complete, the value of <code>Status</code>\n\t\t\t\t\tis <code>Deployed</code>.</p>\n            </li>\n            <li>\n               <p>Submit a <code>DELETE Distribution</code> request. Set the value of the HTTP\n\t\t\t\t\t\t<code>If-Match</code> header to the value of the <code>ETag</code> header\n\t\t\t\t\tthat CloudFront returned when you submitted the <code>GET Distribution Config</code>\n\t\t\t\t\trequest in Step 6.</p>\n            </li>\n            <li>\n               <p>Review the response to your <code>DELETE Distribution</code> request to\n\t\t\t\t\tconfirm that the distribution was successfully deleted.</p>\n            </li>\n         </ol>\n         <p>For information about deleting a distribution using the CloudFront console, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html\">Deleting a\n\t\t\t\tDistribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#DeleteDistributionTenant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#DeleteDistributionTenantRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#ResourceNotDisabled"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a distribution tenant. If you use this API operation to delete a distribution tenant that is currently enabled, the request will fail.</p>\n         <p>To delete a distribution tenant, you must first disable the distribution tenant by using the <code>UpdateDistributionTenant</code> API operation.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2020-05-31/distribution-tenant/{Id}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DeleteDistributionTenantRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the distribution tenant. This value is returned in the response of the\n\t\t\t<code>GetDistributionTenant</code> API operation.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#input": {}
             }
         },
@@ -6972,6 +7935,162 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#DisassociateDistributionTenantWebACL": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#DisassociateDistributionTenantWebACLRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#DisassociateDistributionTenantWebACLResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates a distribution tenant from the WAF web ACL.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2020-05-31/distribution-tenant/{Id}/disassociate-web-acl",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DisassociateDistributionTenantWebACLRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the distribution tenant that you're disassociating from the WAF web ACL. This is the <code>ETag</code> value returned in the response to the\n\t\t\t\t<code>GetDistributionTenant</code> API operation.</p>",
+                        "smithy.api#httpHeader": "If-Match"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#DisassociateDistributionTenantWebACLResult": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.</p>"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the distribution tenant.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#DisassociateDistributionWebACL": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#DisassociateDistributionWebACLRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#DisassociateDistributionWebACLResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates a distribution from the WAF web ACL.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2020-05-31/distribution/{Id}/disassociate-web-acl",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DisassociateDistributionWebACLRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the distribution that you're disassociating from the WAF web ACL.</p>",
+                        "smithy.api#httpHeader": "If-Match"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#DisassociateDistributionWebACLResult": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution.</p>"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the distribution.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#Distribution": {
             "type": "structure",
             "members": {
@@ -7187,6 +8306,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>ID of the Anycast static IP list that is associated with the distribution.</p>"
                     }
+                },
+                "TenantConfig": {
+                    "target": "com.amazonaws.cloudfront#TenantConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A distribution tenant configuration.</p>"
+                    }
+                },
+                "ConnectionMode": {
+                    "target": "com.amazonaws.cloudfront#ConnectionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection mode to filter distributions by.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7333,6 +8464,43 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.cloudfront#DistributionResourceId": {
+            "type": "structure",
+            "members": {
+                "DistributionId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the multi-tenant distribution.</p>"
+                    }
+                },
+                "DistributionTenantId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The IDs for the distribution resources.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#DistributionResourceType": {
+            "type": "enum",
+            "members": {
+                "Distribution": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "distribution"
+                    }
+                },
+                "DistributionTenant": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "distribution-tenant"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudfront#DistributionSummary": {
             "type": "structure",
             "members": {
@@ -7348,6 +8516,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) for the distribution. For example:\n\t\t\t\t<code>arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5</code>, where\n\t\t\t\t<code>123456789012</code> is your Amazon Web Services account ID.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the distribution.</p>"
                     }
                 },
                 "Status": {
@@ -7481,6 +8655,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "ConnectionMode": {
+                    "target": "com.amazonaws.cloudfront#ConnectionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection mode to filter distributions by.</p>"
+                    }
+                },
                 "AnycastIpListId": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -7498,6 +8678,376 @@
                 "target": "com.amazonaws.cloudfront#DistributionSummary",
                 "traits": {
                     "smithy.api#xmlName": "DistributionSummary"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DistributionTenant": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.</p>"
+                    }
+                },
+                "DistributionId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the multi-tenant distribution.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the distribution tenant.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the distribution tenant.</p>"
+                    }
+                },
+                "Domains": {
+                    "target": "com.amazonaws.cloudfront#DomainResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domains associated with the distribution tenant.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cloudfront#Tags"
+                },
+                "Customizations": {
+                    "target": "com.amazonaws.cloudfront#Customizations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant.</p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.cloudfront#Parameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.</p>"
+                    }
+                },
+                "ConnectionGroupId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the connection group for the distribution tenant. If you don't specify a connection group, CloudFront uses the default connection group.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the distribution tenant was created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the distribution tenant was updated.</p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the distribution tenant is in an enabled state. If disabled, the distribution tenant won't serve traffic.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the distribution tenant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The distribution tenant.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#DistributionTenantAssociationFilter": {
+            "type": "structure",
+            "members": {
+                "DistributionId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distribution ID to filter by. You can find distribution tenants associated with a specific distribution.</p>"
+                    }
+                },
+                "ConnectionGroupId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the connection group to filter by. You can find distribution tenants associated with a specific connection group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filter by the associated distribution ID or connection group ID.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#DistributionTenantList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#DistributionTenantSummary",
+                "traits": {
+                    "smithy.api#xmlName": "DistributionTenantSummary"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DistributionTenantSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DistributionId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the multi-tenant distribution. For example: <code>EDFDVBD632BHDS5</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the distribution tenant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the distribution tenant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Domains": {
+                    "target": "com.amazonaws.cloudfront#DomainResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domains associated with the distribution tenant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionGroupId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the connection group ID for the distribution tenant. If you don't specify a connection group, CloudFront uses the default connection group.</p>"
+                    }
+                },
+                "Customizations": {
+                    "target": "com.amazonaws.cloudfront#Customizations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the distribution tenant was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the distribution tenant was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the distribution tenant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the distribution tenants are in an enabled state. If disabled, the distribution tenant won't service traffic.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the distribution tenant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the information about a distribution tenant.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#DnsConfiguration": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name that you're verifying.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudfront#DnsConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of your domain name.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>valid-configuration</code>: The domain name is correctly configured and points to the correct routing endpoint of the connection group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>invalid-configuration</code>: There is either a missing DNS record or the DNS record exists but it's using an incorrect routing endpoint. Update the DNS record to point to the correct routing endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown-configuration</code>: CloudFront can't validate your DNS configuration. This status can appear if CloudFront can't verify the DNS record, or the DNS lookup request failed or timed out.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Explains the status of the DNS configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DNS configuration for your domain names.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#DnsConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#DnsConfiguration",
+                "traits": {
+                    "smithy.api#xmlName": "DnsConfiguration"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DnsConfigurationStatus": {
+            "type": "enum",
+            "members": {
+                "Valid": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "valid-configuration"
+                    }
+                },
+                "Invalid": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "invalid-configuration"
+                    }
+                },
+                "Unknown": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknown-configuration"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DomainConflict": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain used to find existing conflicts for domain configurations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.cloudfront#DistributionResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudFront resource type that has a domain conflict.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource that has a domain conflict.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account for the domain conflict.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the domain conflict. Use this information to determine the affected domain, the related resource, and the affected Amazon Web Services account.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#DomainConflictsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#DomainConflict",
+                "traits": {
+                    "smithy.api#xmlName": "DomainConflicts"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DomainItem": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The domain for the specified distribution tenant.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#DomainList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#DomainItem"
+            }
+        },
+        "com.amazonaws.cloudfront#DomainResult": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudfront#DomainStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the domain is active or inactive.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details about the domain result.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#DomainResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#DomainResult"
+            }
+        },
+        "com.amazonaws.cloudfront#DomainStatus": {
+            "type": "enum",
+            "members": {
+                "Active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "active"
+                    }
+                },
+                "Inactive": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inactive"
+                    }
                 }
             }
         },
@@ -7573,12 +9123,12 @@
                 "KinesisStreamConfig": {
                     "target": "com.amazonaws.cloudfront#KinesisStreamConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about the Amazon Kinesis data stream where you are sending real-time\n\t\t\tlog data.</p>"
+                        "smithy.api#documentation": "<p>Contains information about the Amazon Kinesis data stream where you are sending real-time\n\t\t\tlog data in a real-time log configuration.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the Amazon Kinesis data stream where you are sending real-time\n\t\t\tlog data in a real-time log configuration.</p>"
+                "smithy.api#documentation": "<p>Contains information about the Amazon Kinesis data stream where you're sending real-time log data in a real-time log configuration.</p>"
             }
         },
         "com.amazonaws.cloudfront#EndPointList": {
@@ -8448,7 +9998,7 @@
                 "RestrictionType": {
                     "target": "com.amazonaws.cloudfront#GeoRestrictionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method that you want to use to restrict distribution of your content by\n\t\t\tcountry:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>none</code>: No geo restriction is enabled, meaning access to content is\n\t\t\t\t\tnot restricted by client geo location.</p>\n            </li>\n            <li>\n               <p>\n                  <code>blacklist</code>: The <code>Location</code> elements specify the\n\t\t\t\t\tcountries in which you don't want CloudFront to distribute your content.</p>\n            </li>\n            <li>\n               <p>\n                  <code>whitelist</code>: The <code>Location</code> elements specify the\n\t\t\t\t\tcountries in which you want CloudFront to distribute your content.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The method that you want to use to restrict distribution of your content by country:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>none</code>: No geo restriction is enabled, meaning access to content is\n\t\t\t\t\tnot restricted by client geo location.</p>\n            </li>\n            <li>\n               <p>\n                  <code>blacklist</code>: The <code>Location</code> elements specify the\n\t\t\t\t\tcountries in which you don't want CloudFront to distribute your content.</p>\n            </li>\n            <li>\n               <p>\n                  <code>whitelist</code>: The <code>Location</code> elements specify the\n\t\t\t\t\tcountries in which you want CloudFront to distribute your content.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8468,6 +10018,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex type that controls the countries in which your content is distributed. CloudFront\n\t\t\tdetermines the location of your users using <code>MaxMind</code> GeoIP databases.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#GeoRestrictionCustomization": {
+            "type": "structure",
+            "members": {
+                "RestrictionType": {
+                    "target": "com.amazonaws.cloudfront#GeoRestrictionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method that you want to use to restrict distribution of your content by\n\t\t\tcountry:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>none</code>: No geographic restriction is enabled, meaning access to content is\n\t\t\t\t\tnot restricted by client geo location.</p>\n            </li>\n            <li>\n               <p>\n                  <code>blacklist</code>: The <code>Location</code> elements specify the\n\t\t\t\t\tcountries in which you don't want CloudFront to distribute your content.</p>\n            </li>\n            <li>\n               <p>\n                  <code>whitelist</code>: The <code>Location</code> elements specify the\n\t\t\t\t\tcountries in which you want CloudFront to distribute your content.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Locations": {
+                    "target": "com.amazonaws.cloudfront#LocationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locations for geographic restrictions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The customizations that you specified for the distribution tenant for geographic restrictions.</p>"
             }
         },
         "com.amazonaws.cloudfront#GeoRestrictionType": {
@@ -8818,6 +10389,131 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#GetConnectionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#GetConnectionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#GetConnectionGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a connection group.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/connection-group/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetConnectionGroupByRoutingEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#GetConnectionGroupByRoutingEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#GetConnectionGroupByRoutingEndpointResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a connection group by using the endpoint that you specify.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/connection-group",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetConnectionGroupByRoutingEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "RoutingEndpoint": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing endpoint for the target connection group, such as d111111abcdef8.cloudfront.net.</p>",
+                        "smithy.api#httpQuery": "RoutingEndpoint",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetConnectionGroupByRoutingEndpointResult": {
+            "type": "structure",
+            "members": {
+                "ConnectionGroup": {
+                    "target": "com.amazonaws.cloudfront#ConnectionGroup",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the connection group.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetConnectionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID, name, or Amazon Resource Name (ARN) of the connection group.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetConnectionGroupResult": {
+            "type": "structure",
+            "members": {
+                "ConnectionGroup": {
+                    "target": "com.amazonaws.cloudfront#ConnectionGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection group that you retrieved.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the connection group.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#GetContinuousDeploymentPolicy": {
             "type": "operation",
             "input": {
@@ -9089,6 +10785,131 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The returned result of the corresponding request.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetDistributionTenant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#GetDistributionTenantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#GetDistributionTenantResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a distribution tenant.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/distribution-tenant/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetDistributionTenantByDomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#GetDistributionTenantByDomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#GetDistributionTenantByDomainResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a distribution tenant by the associated domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/distribution-tenant",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetDistributionTenantByDomainRequest": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A domain name associated with the target distribution tenant.</p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetDistributionTenantByDomainResult": {
+            "type": "structure",
+            "members": {
+                "DistributionTenant": {
+                    "target": "com.amazonaws.cloudfront#DistributionTenant",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the distribution tenant.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetDistributionTenantRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.  You can specify the ARN ID, or name of the distribution tenant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetDistributionTenantResult": {
+            "type": "structure",
+            "members": {
+                "DistributionTenant": {
+                    "target": "com.amazonaws.cloudfront#DistributionTenant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distribution tenant that you retrieved.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the distribution tenant.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -9468,6 +11289,91 @@
                 }
             }
         },
+        "com.amazonaws.cloudfront#GetInvalidationForDistributionTenant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#GetInvalidationForDistributionTenantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#GetInvalidationForDistributionTenantResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#NoSuchInvalidation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a specific invalidation for a distribution tenant.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/distribution-tenant/{DistributionTenantId}/invalidation/{Id}",
+                    "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "InvalidationForDistributionTenantCompleted": {
+                        "documentation": "Wait until an invalidation for distribution tenant has completed.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Invalidation.Status",
+                                        "expected": "Completed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 20,
+                        "maxDelay": 600
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetInvalidationForDistributionTenantRequest": {
+            "type": "structure",
+            "members": {
+                "DistributionTenantId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the invalidation to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetInvalidationForDistributionTenantResult": {
+            "type": "structure",
+            "members": {
+                "Invalidation": {
+                    "target": "com.amazonaws.cloudfront#Invalidation",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#GetInvalidationRequest": {
             "type": "structure",
             "members": {
@@ -9622,6 +11528,62 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier for this version of the key group.</p>",
                         "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetManagedCertificateDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#GetManagedCertificateDetailsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#GetManagedCertificateDetailsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets details about the CloudFront managed ACM certificate.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/managed-certificate/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetManagedCertificateDetailsRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the multi-tenant distribution.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetManagedCertificateDetailsResult": {
+            "type": "structure",
+            "members": {
+                "ManagedCertificateDetails": {
+                    "target": "com.amazonaws.cloudfront#ManagedCertificateDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the CloudFront managed ACM certificate.</p>",
+                        "smithy.api#httpPayload": {}
                     }
                 }
             },
@@ -10714,6 +12676,19 @@
                 "smithy.api#documentation": "<p>An argument is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudfront#InvalidAssociation": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified CloudFront resource can't be associated.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.cloudfront#InvalidDefaultRootObject": {
@@ -11927,6 +13902,86 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#ListConnectionGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListConnectionGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListConnectionGroupsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the connection groups in your Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/connection-groups",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "items": "ConnectionGroups",
+                    "pageSize": "MaxItems"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListConnectionGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "AssociationFilter": {
+                    "target": "com.amazonaws.cloudfront#ConnectionGroupAssociationFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by associated Anycast IP list ID.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The marker for the next set of connection groups to retrieve.</p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of connection groups to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListConnectionGroupsResult": {
+            "type": "structure",
+            "members": {
+                "NextMarker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. You can use the token from the previous request to define where the current request should begin.</p>"
+                    }
+                },
+                "ConnectionGroups": {
+                    "target": "com.amazonaws.cloudfront#ConnectionGroupSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of connection groups that you retrieved.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#ListContinuousDeploymentPolicies": {
             "type": "operation",
             "input": {
@@ -11985,6 +14040,169 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of continuous deployment policies.</p>",
                         "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionTenants": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListDistributionTenantsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListDistributionTenantsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the distribution tenants in your Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/distribution-tenants",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "items": "DistributionTenantList",
+                    "pageSize": "MaxItems"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionTenantsByCustomization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListDistributionTenantsByCustomizationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListDistributionTenantsByCustomizationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists distribution tenants by the customization that you specify.</p>\n         <p>You must specify either the <code>CertificateArn</code> parameter or <code>WebACLArn</code> parameter, but not both in the same request.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/distribution-tenants-by-customization",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "items": "DistributionTenantList",
+                    "pageSize": "MaxItems"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionTenantsByCustomizationRequest": {
+            "type": "structure",
+            "members": {
+                "WebACLArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by the ARN of the associated WAF web ACL.</p>"
+                    }
+                },
+                "CertificateArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by the ARN of the associated ACM certificate.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The marker for the next set of results.</p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of distribution tenants to return by the specified customization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionTenantsByCustomizationResult": {
+            "type": "structure",
+            "members": {
+                "NextMarker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. You can use the token from the previous request to define where the current request should begin.</p>"
+                    }
+                },
+                "DistributionTenantList": {
+                    "target": "com.amazonaws.cloudfront#DistributionTenantList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of distribution tenants with the specified customization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionTenantsRequest": {
+            "type": "structure",
+            "members": {
+                "AssociationFilter": {
+                    "target": "com.amazonaws.cloudfront#DistributionTenantAssociationFilter"
+                },
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The marker for the next set of results.</p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of distribution tenants to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionTenantsResult": {
+            "type": "structure",
+            "members": {
+                "NextMarker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. You can use the token from the previous request to define where the current request should begin.</p>"
+                    }
+                },
+                "DistributionTenantList": {
+                    "target": "com.amazonaws.cloudfront#DistributionTenantList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of distribution tenants that you retrieved.</p>"
                     }
                 }
             },
@@ -12160,6 +14378,81 @@
                     "target": "com.amazonaws.cloudfront#DistributionIdList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of distribution IDs.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionsByConnectionMode": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListDistributionsByConnectionModeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListDistributionsByConnectionModeResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the distributions by the connection mode that you specify.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/distributionsByConnectionMode/{ConnectionMode}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "DistributionList.NextMarker",
+                    "items": "DistributionList.Items",
+                    "pageSize": "MaxItems"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionsByConnectionModeRequest": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The marker for the next set of distributions to retrieve.</p>",
+                        "smithy.api#httpQuery": "Marker"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of distributions to return.</p>",
+                        "smithy.api#httpQuery": "MaxItems"
+                    }
+                },
+                "ConnectionMode": {
+                    "target": "com.amazonaws.cloudfront#ConnectionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection mode to filter distributions by.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionsByConnectionModeResult": {
+            "type": "structure",
+            "members": {
+                "DistributionList": {
+                    "target": "com.amazonaws.cloudfront#DistributionList",
+                    "traits": {
                         "smithy.api#httpPayload": {}
                     }
                 }
@@ -12654,6 +14947,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#ListDomainConflicts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListDomainConflictsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListDomainConflictsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists existing domain associations that conflict with the domain that you specify.</p>\n         <p>You can use this API operation when transferring domains to identify potential domain conflicts. Domain conflicts must be resolved first before they can be moved.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/domain-conflicts",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "items": "DomainConflicts",
+                    "pageSize": "MaxItems"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListDomainConflictsRequest": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain to check for conflicts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainControlValidationResource": {
+                    "target": "com.amazonaws.cloudfront#DistributionResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distribution resource identifier. This can be the distribution or distribution tenant that has a\n\t\t\tvalid certificate, which covers the domain that you specify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of domain conflicts to return.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The marker for the next set of domain conflicts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListDomainConflictsResult": {
+            "type": "structure",
+            "members": {
+                "DomainConflicts": {
+                    "target": "com.amazonaws.cloudfront#DomainConflictsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the domain conflicts.</p>"
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. You can use the token from the previous request to define where the current request should begin.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#ListFieldLevelEncryptionConfigs": {
             "type": "operation",
             "input": {
@@ -12873,6 +15254,84 @@
                     "items": "InvalidationList.Items",
                     "pageSize": "MaxItems"
                 }
+            }
+        },
+        "com.amazonaws.cloudfront#ListInvalidationsForDistributionTenant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListInvalidationsForDistributionTenantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListInvalidationsForDistributionTenantResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the invalidations for a distribution tenant.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/distribution-tenant/{Id}/invalidation",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "InvalidationList.NextMarker",
+                    "items": "InvalidationList.Items",
+                    "pageSize": "MaxItems"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListInvalidationsForDistributionTenantRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter when paginating results to indicate where to begin in your list of\n\t\t\tinvalidation batches. Because the results are returned in decreasing order from most\n\t\t\trecent to oldest, the most recent results are on the first page, the second page will\n\t\t\tcontain earlier results, and so on. To get the next page of results, set\n\t\t\t\t<code>Marker</code> to the value of the <code>NextMarker</code> from the current\n\t\t\tpage's response. This value is the same as the ID of the last invalidation batch on that\n\t\t\tpage.</p>",
+                        "smithy.api#httpQuery": "Marker"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of invalidations to return for the distribution tenant.</p>",
+                        "smithy.api#httpQuery": "MaxItems"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListInvalidationsForDistributionTenantResult": {
+            "type": "structure",
+            "members": {
+                "InvalidationList": {
+                    "target": "com.amazonaws.cloudfront#InvalidationList",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudfront#ListInvalidationsRequest": {
@@ -13690,6 +16149,112 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex type that specifies whether access logs are written for the distribution.</p>\n         <note>\n            <p>If you already enabled standard logging (legacy) and you want to enable standard logging\n\t\t\t\t(v2) to send your access logs to Amazon S3, we recommend that you specify a\n\t\t\t\t\t<i>different</i> Amazon S3 bucket or use a <i>separate\n\t\t\t\t\tpath</i> in the same bucket (for example, use a log prefix or\n\t\t\t\tpartitioning). This helps you keep track of which log files are associated with\n\t\t\t\twhich logging subscription and prevents log files from overwriting each other. For\n\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html\">Standard logging (access logs)</a> in the\n\t\t\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.cloudfront#ManagedCertificateDetails": {
+            "type": "structure",
+            "members": {
+                "CertificateArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CloudFront managed ACM certificate.</p>"
+                    }
+                },
+                "CertificateStatus": {
+                    "target": "com.amazonaws.cloudfront#ManagedCertificateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the CloudFront managed ACM certificate.</p>\n         <note>\n            <p>Your distribution tenant will be updated with the latest certificate status. When calling the <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistributionTenant.html\">UpdateDistributionTenant</a> operation, use the latest value for the <code>ETag</code>.</p>\n         </note>"
+                    }
+                },
+                "ValidationTokenHost": {
+                    "target": "com.amazonaws.cloudfront#ValidationTokenHost",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the validation token host of the specified CloudFront managed ACM certificate.</p>\n         <ul>\n            <li>\n               <p>For <code>cloudfront</code>, CloudFront will automatically serve the validation token. Choose this mode if you can point the domain's DNS to CloudFront immediately.</p>\n            </li>\n            <li>\n               <p>For <code>self-hosted</code>, you serve the validation token from your existing infrastructure. Choose this mode when you need to maintain current traffic flow while your certificate is being issued. You can place the validation token at the well-known path on your existing web server, wait for ACM to validate and issue the certificate, and then update your DNS to point to CloudFront.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This setting only affects the initial certificate request. Once the DNS points to CloudFront, all future certificate renewals are automatically handled through CloudFront.</p>\n         </note>"
+                    }
+                },
+                "ValidationTokenDetails": {
+                    "target": "com.amazonaws.cloudfront#ValidationTokenDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the validation token of the specified CloudFront managed ACM certificate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the CloudFront managed ACM certificate.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ManagedCertificateRequest": {
+            "type": "structure",
+            "members": {
+                "ValidationTokenHost": {
+                    "target": "com.amazonaws.cloudfront#ValidationTokenHost",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify how the HTTP validation token will be served when requesting the CloudFront managed ACM certificate.</p>\n         <ul>\n            <li>\n               <p>For <code>cloudfront</code>, CloudFront will automatically serve the validation token. Choose this mode if you can point the domain's DNS to CloudFront immediately.</p>\n            </li>\n            <li>\n               <p>For <code>self-hosted</code>, you serve the validation token from your existing infrastructure. Choose this mode when you need to maintain current traffic flow while your certificate is being issued. You can place the validation token at the well-known path on your existing web server, wait for ACM to validate and issue the certificate, and then update your DNS to point to CloudFront.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PrimaryDomainName": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary domain name associated with the CloudFront managed ACM certificate.</p>"
+                    }
+                },
+                "CertificateTransparencyLoggingPreference": {
+                    "target": "com.amazonaws.cloudfront#CertificateTransparencyLoggingPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can opt out of certificate transparency logging by specifying the <code>disabled</code>\n\t\t\toption. Opt in by specifying <code>enabled</code>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency\">Certificate\n\t\t\t\tTransparency Logging </a> in the <i>Certificate Manager User\n\t\t\tGuide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the request for the Amazon CloudFront managed ACM certificate.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ManagedCertificateStatus": {
+            "type": "enum",
+            "members": {
+                "PendingValidation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending-validation"
+                    }
+                },
+                "Issued": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "issued"
+                    }
+                },
+                "Inactive": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inactive"
+                    }
+                },
+                "Expired": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "expired"
+                    }
+                },
+                "ValidationTimedOut": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "validation-timed-out"
+                    }
+                },
+                "Revoked": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "revoked"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudfront#Method": {
@@ -15016,6 +17581,95 @@
                 "smithy.api#documentation": "<p>Contains information about the origins for this distribution.</p>"
             }
         },
+        "com.amazonaws.cloudfront#Parameter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#ParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.cloudfront#ParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ParameterDefinition": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#ParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Definition": {
+                    "target": "com.amazonaws.cloudfront#ParameterDefinitionSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that you assigned to the parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ParameterDefinitionSchema": {
+            "type": "structure",
+            "members": {
+                "StringSchema": {
+                    "target": "com.amazonaws.cloudfront#StringSchemaConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information about the string schema.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information about the parameter definition.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ParameterDefinitions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#ParameterDefinition"
+            }
+        },
+        "com.amazonaws.cloudfront#ParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.cloudfront#ParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#Parameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#Parameter"
+            }
+        },
         "com.amazonaws.cloudfront#ParametersInCacheKeyAndForwardedToOrigin": {
             "type": "structure",
             "members": {
@@ -15120,6 +17774,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PriceClass_All"
+                    }
+                },
+                "None": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
                     }
                 }
             }
@@ -15756,6 +18416,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Cannot delete this resource because it is in use.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.cloudfront#ResourceNotDisabled": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified CloudFront resource hasn't been disabled yet.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -16504,6 +19177,8 @@
                 "OriginAccessIdentity": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
                         "smithy.api#documentation": "<note>\n            <p>If you're using origin access control (OAC) instead of origin access identity,\n\t\t\t\tspecify an empty <code>OriginAccessIdentity</code> element. For more information,\n\t\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html\">Restricting access to an Amazon Web Services</a> in the\n\t\t\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n         </note>\n         <p>The CloudFront origin access identity to associate with the origin. Use an origin access\n\t\t\tidentity to configure the origin so that viewers can <i>only</i> access\n\t\t\tobjects in an Amazon S3 bucket through CloudFront. The format of the value is:</p>\n         <p>\n            <code>origin-access-identity/cloudfront/ID-of-origin-access-identity</code>\n         </p>\n         <p>The <code>\n               <i>ID-of-origin-access-identity</i>\n            </code> is the value that CloudFront\n\t\t\treturned in the <code>ID</code> element when you created the origin access\n\t\t\tidentity.</p>\n         <p>If you want viewers to be able to access objects using either the CloudFront URL or the Amazon S3\n\t\t\tURL, specify an empty <code>OriginAccessIdentity</code> element.</p>\n         <p>To delete the origin access identity from an existing distribution, update the\n\t\t\tdistribution configuration and include an empty <code>OriginAccessIdentity</code>\n\t\t\telement.</p>\n         <p>To replace the origin access identity, update the distribution configuration and\n\t\t\tspecify the new origin access identity.</p>\n         <p>For more information about the origin access identity, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving Private\n\t\t\t\tContent through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -17050,6 +19725,33 @@
                 "smithy.api#documentation": "<p>A complex type that controls whether access logs are written for this streaming\n\t\t\tdistribution.</p>"
             }
         },
+        "com.amazonaws.cloudfront#StringSchemaConfig": {
+            "type": "structure",
+            "members": {
+                "Comment": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment to describe the parameter.</p>"
+                    }
+                },
+                "DefaultValue": {
+                    "target": "com.amazonaws.cloudfront#ParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value of the parameter.</p>"
+                    }
+                },
+                "Required": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the defined parameter is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a string schema.</p>"
+            }
+        },
         "com.amazonaws.cloudfront#Tag": {
             "type": "structure",
             "members": {
@@ -17193,6 +19895,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex type that contains zero or more <code>Tag</code> elements.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#TenantConfig": {
+            "type": "structure",
+            "members": {
+                "ParameterDefinitions": {
+                    "target": "com.amazonaws.cloudfront#ParameterDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters that you specify for a distribution tenant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a distribution tenant.</p>"
             }
         },
         "com.amazonaws.cloudfront#TestFunction": {
@@ -18401,6 +21117,113 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#UpdateConnectionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#UpdateConnectionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#UpdateConnectionGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#ResourceInUse"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a connection group.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2020-05-31/connection-group/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateConnectionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the connection group.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Ipv6Enabled": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable IPv6 for the connection group. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesEnableIPv6\">Enable IPv6</a> in the \n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>"
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the connection group that you're updating.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnycastIpListId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Anycast static IP list.</p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the connection group is enabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateConnectionGroupResult": {
+            "type": "structure",
+            "members": {
+                "ConnectionGroup": {
+                    "target": "com.amazonaws.cloudfront#ConnectionGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection group that you updated.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the connection group.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#UpdateContinuousDeploymentPolicy": {
             "type": "operation",
             "input": {
@@ -18771,6 +21594,140 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#UpdateDistributionTenant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#UpdateDistributionTenantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#UpdateDistributionTenantResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#CNAMEAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidAssociation"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a distribution tenant.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2020-05-31/distribution-tenant/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateDistributionTenantRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DistributionId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the multi-tenant distribution.</p>"
+                    }
+                },
+                "Domains": {
+                    "target": "com.amazonaws.cloudfront#DomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domains to update for the distribution tenant. A domain object can contain only a domain property. You must specify at least one domain. Each distribution tenant can have up to 5 domains.</p>"
+                    }
+                },
+                "Customizations": {
+                    "target": "com.amazonaws.cloudfront#Customizations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant.</p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.cloudfront#Parameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.</p>"
+                    }
+                },
+                "ConnectionGroupId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the target connection group.</p>"
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the distribution tenant to update.  This value is returned in the response of the <code>GetDistributionTenant</code> API operation.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ManagedCertificateRequest": {
+                    "target": "com.amazonaws.cloudfront#ManagedCertificateRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the CloudFront managed ACM certificate request.</p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the distribution tenant should be updated to an enabled state. If you update the distribution tenant and it's not enabled, the distribution tenant won't serve traffic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateDistributionTenantResult": {
+            "type": "structure",
+            "members": {
+                "DistributionTenant": {
+                    "target": "com.amazonaws.cloudfront#DistributionTenant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distribution tenant that you're updating.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the distribution tenant.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#UpdateDistributionWithStagingConfig": {
             "type": "operation",
             "input": {
@@ -19019,6 +21976,99 @@
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The current version of the primary distribution (after it's updated).</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateDomainAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#UpdateDomainAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#UpdateDomainAssociationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#IllegalUpdate"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Moves a domain from its current distribution or distribution tenant to another one.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/domain-association",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateDomainAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetResource": {
+                    "target": "com.amazonaws.cloudfront#DistributionResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target distribution resource for the domain. You can specify either <code>DistributionId</code> or <code>DistributionTenantId</code>, but not both.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the <code>ETag</code> identifier for the distribution or distribution tenant that will be associated with the domain.</p>",
+                        "smithy.api#httpHeader": "If-Match"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateDomainAssociationResult": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain that you're moving.</p>"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The intended destination for the domain.</p>"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the target distribution or distribution tenant that was associated with the domain.</p>",
                         "smithy.api#httpHeader": "ETag"
                     }
                 }
@@ -20343,6 +23393,119 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#ValidationTokenDetail": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RedirectTo": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain to redirect to.</p>"
+                    }
+                },
+                "RedirectFrom": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain to redirect from.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the validation token.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ValidationTokenDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#ValidationTokenDetail"
+            }
+        },
+        "com.amazonaws.cloudfront#ValidationTokenHost": {
+            "type": "enum",
+            "members": {
+                "CloudFront": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cloudfront"
+                    }
+                },
+                "SelfHosted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "self-hosted"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#VerifyDnsConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#VerifyDnsConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#VerifyDnsConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Verify the DNS configuration for your domain names. This API operation checks whether your domain name points to the correct routing endpoint of the connection group, such as d111111abcdef8.cloudfront.net. You can use this API operation to troubleshoot and resolve DNS configuration issues.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/verify-dns-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#VerifyDnsConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name that you're verifying.</p>"
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution tenant.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#VerifyDnsConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "DnsConfigurationList": {
+                    "target": "com.amazonaws.cloudfront#DnsConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of domain names, their statuses, and a description of each status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#ViewerCertificate": {
             "type": "structure",
             "members": {
@@ -20367,7 +23530,7 @@
                 "SSLSupportMethod": {
                     "target": "com.amazonaws.cloudfront#SSLSupportMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs),\n\t\t\tspecify which viewers the distribution accepts HTTPS connections from.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>sni-only</code> – The distribution accepts HTTPS connections from only\n\t\t\t\t\tviewers that support <a href=\"https://en.wikipedia.org/wiki/Server_Name_Indication\">server name\n\t\t\t\t\t\tindication (SNI)</a>. This is recommended. Most browsers and clients\n\t\t\t\t\tsupport SNI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vip</code> – The distribution accepts HTTPS connections from all viewers\n\t\t\t\t\tincluding those that don't support SNI. This is not recommended, and results in\n\t\t\t\t\tadditional monthly charges from CloudFront.</p>\n            </li>\n            <li>\n               <p>\n                  <code>static-ip</code> - Do not specify this value unless your distribution\n\t\t\t\t\thas been enabled for this feature by the CloudFront team. If you have a use case\n\t\t\t\t\tthat requires static IP addresses for a distribution, contact CloudFront through\n\t\t\t\t\tthe <a href=\"https://console.aws.amazon.com/support/home\">Amazon Web ServicesSupport Center</a>.</p>\n            </li>\n         </ul>\n         <p>If the distribution uses the CloudFront domain name such as\n\t\t\t\t<code>d111111abcdef8.cloudfront.net</code>, don't set a value for this field.</p>"
+                        "smithy.api#documentation": "<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs),\n\t\t\tspecify which viewers the distribution accepts HTTPS connections from.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>sni-only</code> – The distribution accepts HTTPS connections from only\n\t\t\t\t\tviewers that support <a href=\"https://en.wikipedia.org/wiki/Server_Name_Indication\">server name\n\t\t\t\t\t\tindication (SNI)</a>. This is recommended. Most browsers and clients\n\t\t\t\t\tsupport SNI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vip</code> – The distribution accepts HTTPS connections from all viewers\n\t\t\t\t\tincluding those that don't support SNI. This is not recommended, and results in\n\t\t\t\t\tadditional monthly charges from CloudFront.</p>\n            </li>\n            <li>\n               <p>\n                  <code>static-ip</code> - Do not specify this value unless your distribution\n\t\t\t\t\thas been enabled for this feature by the CloudFront team. If you have a use case\n\t\t\t\t\tthat requires static IP addresses for a distribution, contact CloudFront through\n\t\t\t\t\tthe <a href=\"https://console.aws.amazon.com/support/home\">Amazon Web Services Support Center</a>.</p>\n            </li>\n         </ul>\n         <p>If the distribution uses the CloudFront domain name such as\n\t\t\t\t<code>d111111abcdef8.cloudfront.net</code>, don't set a value for this field.</p>"
                     }
                 },
                 "MinimumProtocolVersion": {
@@ -20653,6 +23816,27 @@
                 "traits": {
                     "smithy.api#xmlName": "VpcOriginSummary"
                 }
+            }
+        },
+        "com.amazonaws.cloudfront#WebAclCustomization": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.cloudfront#CustomizationActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action for the WAF web ACL customization. You can specify <code>override</code> to specify a separate WAF web ACL for the distribution tenant. If you specify <code>disable</code>, the distribution tenant won't have WAF web ACL protections and won't inherit from the multi-tenant distribution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the WAF web ACL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The WAF web ACL customization specified for the distribution tenant.</p>"
             }
         },
         "com.amazonaws.cloudfront#aliasString": {
