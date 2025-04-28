@@ -1,0 +1,8 @@
+{
+    "id": "2e75f566-e67f-4bd8-be9f-9a9421fed9d8",
+    "type": "bugfix",
+    "description": "[breakfix] update Dataexchange#UpdateRevision$Finalized to be able to serialize a false value",
+    "modules": [
+        "service/dataexchange"
+    ]
+}
