@@ -183,6 +183,9 @@ func ExampleDocumentSource_outputUsage() {
 	case *types.DocumentSourceMemberBytes:
 		_ = v.Value // Value is []byte
 
+	case *types.DocumentSourceMemberS3Location:
+		_ = v.Value // Value is types.S3Location
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -192,6 +195,7 @@ func ExampleDocumentSource_outputUsage() {
 	}
 }
 
+var _ *types.S3Location
 var _ []byte
 
 func ExampleGuardrailContentBlock_outputUsage() {
@@ -281,6 +285,9 @@ func ExampleImageSource_outputUsage() {
 	case *types.ImageSourceMemberBytes:
 		_ = v.Value // Value is []byte
 
+	case *types.ImageSourceMemberS3Location:
+		_ = v.Value // Value is types.S3Location
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -290,6 +297,7 @@ func ExampleImageSource_outputUsage() {
 	}
 }
 
+var _ *types.S3Location
 var _ []byte
 
 func ExamplePromptVariableValues_outputUsage() {

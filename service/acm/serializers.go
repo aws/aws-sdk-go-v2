@@ -1038,6 +1038,11 @@ func awsAwsjson11_serializeDocumentFilters(v *types.Filters, value smithyjson.Va
 		}
 	}
 
+	if len(v.ManagedBy) > 0 {
+		ok := object.Key("managedBy")
+		ok.String(string(v.ManagedBy))
+	}
+
 	return nil
 }
 
@@ -1331,6 +1336,11 @@ func awsAwsjson11_serializeOpDocumentRequestCertificateInput(v *RequestCertifica
 	if len(v.KeyAlgorithm) > 0 {
 		ok := object.Key("KeyAlgorithm")
 		ok.String(string(v.KeyAlgorithm))
+	}
+
+	if len(v.ManagedBy) > 0 {
+		ok := object.Key("ManagedBy")
+		ok.String(string(v.ManagedBy))
 	}
 
 	if v.Options != nil {

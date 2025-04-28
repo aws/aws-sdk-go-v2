@@ -1108,7 +1108,7 @@
                 "parentImage": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The base image for the container recipe.</p>"
+                        "smithy.api#documentation": "<p>The base image for customizations specified in the container recipe. This can \n\t\t\tcontain an Image Builder image resource ARN or a container image URI, for example \n\t\t\t<code>amazonlinux:latest</code>.</p>"
                     }
                 },
                 "dateCreated": {
@@ -3481,13 +3481,19 @@
                 "s3ExportConfiguration": {
                     "target": "com.amazonaws.imagebuilder#S3ExportConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configure export settings to deliver disk images created from your image build, using\n\t\t\ta file format that is compatible with your VMs in that Region.</p>"
+                        "smithy.api#documentation": "<p>Configure export settings to deliver disk images created from your image build, \n\t\t\tusing a file format that is compatible with your VMs in that Region.</p>"
                     }
                 },
                 "fastLaunchConfigurations": {
                     "target": "com.amazonaws.imagebuilder#FastLaunchConfigurationList",
                     "traits": {
                         "smithy.api#documentation": "<p>The Windows faster-launching configurations to use for AMI distribution.</p>"
+                    }
+                },
+                "ssmParameterConfigurations": {
+                    "target": "com.amazonaws.imagebuilder#SsmParameterConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains settings to update Amazon Web Services Systems Manager (SSM) Parameter Store Parameters with \n\t\t\toutput AMI IDs from the build by target Region.</p>"
                     }
                 }
             },
@@ -3519,7 +3525,7 @@
                 "distributions": {
                     "target": "com.amazonaws.imagebuilder#DistributionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The distribution objects that apply Region-specific settings for the deployment of the\n\t\t\timage to targeted Regions.</p>"
+                        "smithy.api#documentation": "<p>The distribution objects that apply Region-specific settings for the deployment of \n\t\t\tthe image to targeted Regions.</p>"
                     }
                 },
                 "timeoutMinutes": {
@@ -5837,7 +5843,7 @@
                 "parentImage": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The base image of the image recipe.</p>"
+                        "smithy.api#documentation": "<p>The base image for customizations specified in the image recipe. You can specify the \n\t\t\tparent image using one of the following options:</p>\n         <ul>\n            <li>\n               <p>AMI ID</p>\n            </li>\n            <li>\n               <p>Image Builder image Amazon Resource Name (ARN)</p>\n            </li>\n            <li>\n               <p>Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>, \n\t\t\t\t\tfollowed by the parameter name or ARN.</p>\n            </li>\n            <li>\n               <p>Amazon Web Services Marketplace product ID</p>\n            </li>\n         </ul>"
                     }
                 },
                 "blockDeviceMappings": {
@@ -7252,7 +7258,7 @@
                 "image": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AMI ID to use as the base image for a container build and test instance. If not\n\t\t\tspecified, Image Builder will use the appropriate ECS-optimized AMI as a base image.</p>"
+                        "smithy.api#documentation": "<p>The base image for a container build and test instance. This can contain an AMI ID \n\t\t\tor it can specify an Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>, \n\t\t\tfollowed by the parameter name or ARN.</p>\n         <p>If not specified, Image Builder uses the appropriate ECS-optimized AMI as a base image.</p>"
                     }
                 },
                 "blockDeviceMappings": {
@@ -11852,6 +11858,66 @@
         "com.amazonaws.imagebuilder#SourceLayerHash": {
             "type": "string"
         },
+        "com.amazonaws.imagebuilder#SsmParameterConfiguration": {
+            "type": "structure",
+            "members": {
+                "amiAccountId": {
+                    "target": "com.amazonaws.imagebuilder#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the account that will own the Parameter in a given Region. During distribution, \n\t\t\tthis account must be specified in distribution settings as a target account for the \n\t\t\tRegion.</p>"
+                    }
+                },
+                "parameterName": {
+                    "target": "com.amazonaws.imagebuilder#SsmParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the name of the Parameter in the target Region or account. The image \n\t\t\tdistribution creates the Parameter if it doesn't already exist. Otherwise, it updates \n\t\t\tthe parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.imagebuilder#SsmParameterDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type specifies what type of value the Parameter contains. We recommend that \n\t\t\tyou use data type <code>aws:ec2:image</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a single Parameter in the Amazon Web Services Systems Manager (SSM) Parameter Store in \n\t\t\ta given Region.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#SsmParameterConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#SsmParameterConfiguration"
+            }
+        },
+        "com.amazonaws.imagebuilder#SsmParameterDataType": {
+            "type": "enum",
+            "members": {
+                "TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "text"
+                    }
+                },
+                "AWS_EC2_IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws:ec2:image"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#SsmParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-\\/]+$"
+            }
+        },
         "com.amazonaws.imagebuilder#StartImagePipelineExecution": {
             "type": "operation",
             "input": {
@@ -12252,7 +12318,7 @@
                     "min": 3,
                     "max": 100
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9]{2,}(?:\\/[a-zA-z0-9-_+]+)*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9]{2,}(?:\\/[a-zA-Z0-9-_+]+)*$"
             }
         },
         "com.amazonaws.imagebuilder#UntagResource": {

@@ -74,6 +74,30 @@ func TestCheckSnapshot_AssociateAlias(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateDistributionTenantWebACL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateDistributionTenantWebACL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateDistributionTenantWebACL")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_AssociateDistributionWebACL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateDistributionWebACL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateDistributionWebACL")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CopyDistribution(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CopyDistribution(context.Background(), nil, func(o *Options) {
@@ -122,6 +146,18 @@ func TestCheckSnapshot_CreateCloudFrontOriginAccessIdentity(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateConnectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConnectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConnectionGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateContinuousDeploymentPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateContinuousDeploymentPolicy(context.Background(), nil, func(o *Options) {
@@ -139,6 +175,18 @@ func TestCheckSnapshot_CreateDistribution(t *testing.T) {
 	_, err := svc.CreateDistribution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateDistribution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDistributionTenant")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -199,6 +247,18 @@ func TestCheckSnapshot_CreateInvalidation(t *testing.T) {
 	_, err := svc.CreateInvalidation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateInvalidation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateInvalidationForDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInvalidationForDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateInvalidationForDistributionTenant")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -374,6 +434,18 @@ func TestCheckSnapshot_DeleteCloudFrontOriginAccessIdentity(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteConnectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConnectionGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteContinuousDeploymentPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteContinuousDeploymentPolicy(context.Background(), nil, func(o *Options) {
@@ -391,6 +463,18 @@ func TestCheckSnapshot_DeleteDistribution(t *testing.T) {
 	_, err := svc.DeleteDistribution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDistribution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDistributionTenant")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -578,6 +662,30 @@ func TestCheckSnapshot_DescribeKeyValueStore(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateDistributionTenantWebACL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateDistributionTenantWebACL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateDistributionTenantWebACL")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateDistributionWebACL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateDistributionWebACL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateDistributionWebACL")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAnycastIpList(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAnycastIpList(context.Background(), nil, func(o *Options) {
@@ -638,6 +746,30 @@ func TestCheckSnapshot_GetCloudFrontOriginAccessIdentityConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetConnectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConnectionGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConnectionGroupByRoutingEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnectionGroupByRoutingEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConnectionGroupByRoutingEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetContinuousDeploymentPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetContinuousDeploymentPolicy(context.Background(), nil, func(o *Options) {
@@ -679,6 +811,30 @@ func TestCheckSnapshot_GetDistributionConfig(t *testing.T) {
 	_, err := svc.GetDistributionConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDistributionConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDistributionTenant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDistributionTenantByDomain(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDistributionTenantByDomain(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDistributionTenantByDomain")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -758,6 +914,18 @@ func TestCheckSnapshot_GetInvalidation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetInvalidationForDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInvalidationForDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetInvalidationForDistributionTenant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetKeyGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetKeyGroup(context.Background(), nil, func(o *Options) {
@@ -775,6 +943,18 @@ func TestCheckSnapshot_GetKeyGroupConfig(t *testing.T) {
 	_, err := svc.GetKeyGroupConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetKeyGroupConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetManagedCertificateDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedCertificateDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetManagedCertificateDetails")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -986,6 +1166,18 @@ func TestCheckSnapshot_ListConflictingAliases(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListConnectionGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectionGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConnectionGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListContinuousDeploymentPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListContinuousDeploymentPolicies(context.Background(), nil, func(o *Options) {
@@ -1027,6 +1219,18 @@ func TestCheckSnapshot_ListDistributionsByCachePolicyId(t *testing.T) {
 	_, err := svc.ListDistributionsByCachePolicyId(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDistributionsByCachePolicyId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDistributionsByConnectionMode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDistributionsByConnectionMode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDistributionsByConnectionMode")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1106,6 +1310,42 @@ func TestCheckSnapshot_ListDistributionsByWebACLId(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListDistributionTenants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDistributionTenants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDistributionTenants")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDistributionTenantsByCustomization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDistributionTenantsByCustomization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDistributionTenantsByCustomization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDomainConflicts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDomainConflicts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDomainConflicts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListFieldLevelEncryptionConfigs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFieldLevelEncryptionConfigs(context.Background(), nil, func(o *Options) {
@@ -1147,6 +1387,18 @@ func TestCheckSnapshot_ListInvalidations(t *testing.T) {
 	_, err := svc.ListInvalidations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListInvalidations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListInvalidationsForDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInvalidationsForDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInvalidationsForDistributionTenant")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1346,6 +1598,18 @@ func TestCheckSnapshot_UpdateCloudFrontOriginAccessIdentity(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateConnectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConnectionGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateContinuousDeploymentPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateContinuousDeploymentPolicy(context.Background(), nil, func(o *Options) {
@@ -1370,11 +1634,35 @@ func TestCheckSnapshot_UpdateDistribution(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDistributionTenant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDistributionWithStagingConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDistributionWithStagingConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateDistributionWithStagingConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateDomainAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDomainAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDomainAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1525,11 +1813,47 @@ func TestCheckSnapshot_UpdateVpcOrigin(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_VerifyDnsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.VerifyDnsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "VerifyDnsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AssociateAlias(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateAlias(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateDistributionTenantWebACL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateDistributionTenantWebACL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateDistributionTenantWebACL")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateDistributionWebACL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateDistributionWebACL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateDistributionWebACL")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1585,6 +1909,18 @@ func TestUpdateSnapshot_CreateCloudFrontOriginAccessIdentity(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateConnectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConnectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConnectionGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateContinuousDeploymentPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateContinuousDeploymentPolicy(context.Background(), nil, func(o *Options) {
@@ -1602,6 +1938,18 @@ func TestUpdateSnapshot_CreateDistribution(t *testing.T) {
 	_, err := svc.CreateDistribution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateDistribution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDistributionTenant")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1662,6 +2010,18 @@ func TestUpdateSnapshot_CreateInvalidation(t *testing.T) {
 	_, err := svc.CreateInvalidation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateInvalidation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateInvalidationForDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInvalidationForDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateInvalidationForDistributionTenant")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1837,6 +2197,18 @@ func TestUpdateSnapshot_DeleteCloudFrontOriginAccessIdentity(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteConnectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConnectionGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteContinuousDeploymentPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteContinuousDeploymentPolicy(context.Background(), nil, func(o *Options) {
@@ -1854,6 +2226,18 @@ func TestUpdateSnapshot_DeleteDistribution(t *testing.T) {
 	_, err := svc.DeleteDistribution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDistribution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDistributionTenant")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2041,6 +2425,30 @@ func TestUpdateSnapshot_DescribeKeyValueStore(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateDistributionTenantWebACL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateDistributionTenantWebACL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateDistributionTenantWebACL")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateDistributionWebACL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateDistributionWebACL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateDistributionWebACL")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAnycastIpList(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAnycastIpList(context.Background(), nil, func(o *Options) {
@@ -2101,6 +2509,30 @@ func TestUpdateSnapshot_GetCloudFrontOriginAccessIdentityConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetConnectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConnectionGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConnectionGroupByRoutingEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnectionGroupByRoutingEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConnectionGroupByRoutingEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetContinuousDeploymentPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetContinuousDeploymentPolicy(context.Background(), nil, func(o *Options) {
@@ -2142,6 +2574,30 @@ func TestUpdateSnapshot_GetDistributionConfig(t *testing.T) {
 	_, err := svc.GetDistributionConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDistributionConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDistributionTenant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDistributionTenantByDomain(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDistributionTenantByDomain(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDistributionTenantByDomain")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2221,6 +2677,18 @@ func TestUpdateSnapshot_GetInvalidation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetInvalidationForDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInvalidationForDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetInvalidationForDistributionTenant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetKeyGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetKeyGroup(context.Background(), nil, func(o *Options) {
@@ -2238,6 +2706,18 @@ func TestUpdateSnapshot_GetKeyGroupConfig(t *testing.T) {
 	_, err := svc.GetKeyGroupConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetKeyGroupConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetManagedCertificateDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedCertificateDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetManagedCertificateDetails")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2449,6 +2929,18 @@ func TestUpdateSnapshot_ListConflictingAliases(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListConnectionGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectionGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConnectionGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListContinuousDeploymentPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListContinuousDeploymentPolicies(context.Background(), nil, func(o *Options) {
@@ -2490,6 +2982,18 @@ func TestUpdateSnapshot_ListDistributionsByCachePolicyId(t *testing.T) {
 	_, err := svc.ListDistributionsByCachePolicyId(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDistributionsByCachePolicyId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDistributionsByConnectionMode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDistributionsByConnectionMode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDistributionsByConnectionMode")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2569,6 +3073,42 @@ func TestUpdateSnapshot_ListDistributionsByWebACLId(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListDistributionTenants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDistributionTenants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDistributionTenants")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDistributionTenantsByCustomization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDistributionTenantsByCustomization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDistributionTenantsByCustomization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDomainConflicts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDomainConflicts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDomainConflicts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListFieldLevelEncryptionConfigs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFieldLevelEncryptionConfigs(context.Background(), nil, func(o *Options) {
@@ -2610,6 +3150,18 @@ func TestUpdateSnapshot_ListInvalidations(t *testing.T) {
 	_, err := svc.ListInvalidations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListInvalidations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListInvalidationsForDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInvalidationsForDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInvalidationsForDistributionTenant")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2809,6 +3361,18 @@ func TestUpdateSnapshot_UpdateCloudFrontOriginAccessIdentity(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateConnectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConnectionGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateContinuousDeploymentPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateContinuousDeploymentPolicy(context.Background(), nil, func(o *Options) {
@@ -2833,11 +3397,35 @@ func TestUpdateSnapshot_UpdateDistribution(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateDistributionTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDistributionTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDistributionTenant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateDistributionWithStagingConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDistributionWithStagingConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDistributionWithStagingConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDomainAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDomainAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDomainAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2982,6 +3570,18 @@ func TestUpdateSnapshot_UpdateVpcOrigin(t *testing.T) {
 	_, err := svc.UpdateVpcOrigin(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateVpcOrigin")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_VerifyDnsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.VerifyDnsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "VerifyDnsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -31,7 +31,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>The AWS Marketplace Deployment Service supports the Quick Launch experience, which is a deployment option for software as a service (SaaS) products. Quick Launch simplifies and reduces the time, resources, and steps required to configure, deploy, and launch a products. The AWS Marketplace Deployment Service provides sellers with a secure method for passing deployment parameters (for example, API keys and external IDs) to buyers during the Quick Launch experience.</p>",
+                "smithy.api#documentation": "<p>The AWS Marketplace Deployment Service supports the Quick Launch experience, which is a deployment option for software as a service (SaaS) products. \n      Quick Launch simplifies and reduces the time, resources, and steps required to configure, deploy, and launch a products. \n      The AWS Marketplace Deployment Service provides sellers with a secure method for passing deployment parameters, such as \n      API keys and external IDs, to buyers during the Quick Launch experience.</p>",
                 "smithy.api#title": "AWS Marketplace Deployment Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -799,7 +799,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The shape containing the requested deployment parameter name and secretString.</p>"
+                "smithy.api#documentation": "<p>The shape containing the requested deployment parameter name and secretString.</p>\n         <note>\n            <p>To support AWS CloudFormation dynamic references to this resource using Quick Launch,\n        this value must match a parameter defined in the CloudFormation templated provided to\n        buyers.</p>\n         </note>"
             }
         },
         "com.amazonaws.marketplacedeployment#DeploymentParameterName": {
@@ -1017,7 +1017,7 @@
                 "catalog": {
                     "target": "com.amazonaws.marketplacedeployment#Catalog",
                     "traits": {
-                        "smithy.api#documentation": "<p>The catalog related to the request. Fixed value: <code>AWS Marketplace</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The catalog related to the request. Fixed value: <code>AWSMarketplace</code>\n         </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1060,7 +1060,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.marketplacedeployment#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token for deployment parameters. A unique identifier for the new version.</p>",
+                        "smithy.api#documentation": "<p>The idempotency token for deployment parameters. A unique identifier for the new version.</p>\n         <note>\n            <p>This field is not required if you're calling using an AWS SDK. Otherwise, a\n          <code>clientToken</code> must be provided with the request.</p>\n         </note>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }

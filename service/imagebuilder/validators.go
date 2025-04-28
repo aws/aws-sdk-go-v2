@@ -1641,6 +1641,11 @@ func validateDistribution(v *types.Distribution) error {
 			invalidParams.AddNested("FastLaunchConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SsmParameterConfigurations != nil {
+		if err := validateSsmParameterConfigurationList(v.SsmParameterConfigurations); err != nil {
+			invalidParams.AddNested("SsmParameterConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1941,6 +1946,38 @@ func validateS3ExportConfiguration(v *types.S3ExportConfiguration) error {
 	}
 	if v.S3Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSsmParameterConfiguration(v *types.SsmParameterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SsmParameterConfiguration"}
+	if v.ParameterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParameterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSsmParameterConfigurationList(v []types.SsmParameterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SsmParameterConfigurationList"}
+	for i := range v {
+		if err := validateSsmParameterConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

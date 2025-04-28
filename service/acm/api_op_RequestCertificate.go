@@ -119,6 +119,10 @@ type RequestCertificateInput struct {
 	// [Key algorithms]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms
 	KeyAlgorithm types.KeyAlgorithm
 
+	// Identifies the Amazon Web Services service that manages the certificate issued
+	// by ACM.
+	ManagedBy types.CertificateManagedBy
+
 	// Currently, you can use this parameter to specify whether to add the certificate
 	// to a certificate transparency log. Certificate transparency makes it possible to
 	// detect SSL/TLS certificates that have been mistakenly or maliciously issued.

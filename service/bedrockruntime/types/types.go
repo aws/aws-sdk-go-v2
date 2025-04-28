@@ -524,6 +524,7 @@ type DocumentBlock struct {
 // The following types satisfy this interface:
 //
 //	DocumentSourceMemberBytes
+//	DocumentSourceMemberS3Location
 type DocumentSource interface {
 	isDocumentSource()
 }
@@ -537,6 +538,18 @@ type DocumentSourceMemberBytes struct {
 }
 
 func (*DocumentSourceMemberBytes) isDocumentSource() {}
+
+// The location of a document object in an Amazon S3 bucket. To see which models
+// support S3 uploads, see [Supported models and features for Converse].
+//
+// [Supported models and features for Converse]: https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-supported-models-features.html
+type DocumentSourceMemberS3Location struct {
+	Value S3Location
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentSourceMemberS3Location) isDocumentSource() {}
 
 // A behavior assessment of the guardrail policies used in a call to the Converse
 // API.
@@ -1149,6 +1162,7 @@ type ImageBlock struct {
 // The following types satisfy this interface:
 //
 //	ImageSourceMemberBytes
+//	ImageSourceMemberS3Location
 type ImageSource interface {
 	isImageSource()
 }
@@ -1162,6 +1176,18 @@ type ImageSourceMemberBytes struct {
 }
 
 func (*ImageSourceMemberBytes) isImageSource() {}
+
+// The location of an image object in an Amazon S3 bucket. To see which models
+// support S3 uploads, see [Supported models and features for Converse].
+//
+// [Supported models and features for Converse]: https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-supported-models-features.html
+type ImageSourceMemberS3Location struct {
+	Value S3Location
+
+	noSmithyDocumentSerde
+}
+
+func (*ImageSourceMemberS3Location) isImageSource() {}
 
 // Base inference parameters to pass to a model in a call to [Converse] or [ConverseStream]. For more
 // information, see [Inference parameters for foundation models].
@@ -1426,7 +1452,7 @@ type ResponseStreamMemberChunk struct {
 
 func (*ResponseStreamMemberChunk) isResponseStream() {}
 
-// A storage location in an S3 bucket.
+// A storage location in an Amazon S3 bucket.
 type S3Location struct {
 
 	// An object URI starting with s3:// .
@@ -1839,7 +1865,10 @@ type VideoSourceMemberBytes struct {
 
 func (*VideoSourceMemberBytes) isVideoSource() {}
 
-// The location of a video object in an S3 bucket.
+// The location of a video object in an Amazon S3 bucket. To see which models
+// support S3 uploads, see [Supported models and features for Converse].
+//
+// [Supported models and features for Converse]: https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-supported-models-features.html
 type VideoSourceMemberS3Location struct {
 	Value S3Location
 

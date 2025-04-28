@@ -4118,8 +4118,8 @@
                                                             "authSchemes": [
                                                                 {
                                                                     "signingRegion": "us-east-1",
-                                                                    "signingName": "dynamodb",
-                                                                    "name": "sigv4"
+                                                                    "name": "sigv4",
+                                                                    "signingName": "dynamodb"
                                                                 }
                                                             ]
                                                         },
@@ -14658,13 +14658,13 @@
                 "ProvisionedThroughput": {
                     "target": "com.amazonaws.dynamodb#ProvisionedThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the provisioned throughput settings for the specified global secondary\n            index.</p>\n         <p>For current minimum and maximum provisioned throughput values, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Service,\n                Account, and Table Quotas</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Represents the provisioned throughput settings for the specified global secondary\n            index. You must use either\n            <code>OnDemandThroughput</code> or <code>ProvisionedThroughput</code> based\n            on your table's capacity mode.</p>\n         <p>For current minimum and maximum provisioned throughput values, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Service,\n                Account, and Table Quotas</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
                     }
                 },
                 "OnDemandThroughput": {
                     "target": "com.amazonaws.dynamodb#OnDemandThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified global secondary index.\n            If you use this parameter, you must specify <code>MaxReadRequestUnits</code>,\n                <code>MaxWriteRequestUnits</code>, or both.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified global secondary index.\n            If you use this parameter, you must specify <code>MaxReadRequestUnits</code>,\n                <code>MaxWriteRequestUnits</code>, or both. You must use either\n        <code>OnDemandThroughput</code> or <code>ProvisionedThroughput</code> based\n        on your table's capacity mode.</p>"
                     }
                 },
                 "WarmThroughput": {

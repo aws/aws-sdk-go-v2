@@ -7205,6 +7205,13 @@ func awsRestjson1_serializeDocumentDistribution(v *types.Distribution, value smi
 		}
 	}
 
+	if v.SsmParameterConfigurations != nil {
+		ok := object.Key("ssmParameterConfigurations")
+		if err := awsRestjson1_serializeDocumentSsmParameterConfigurationList(v.SsmParameterConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8106,6 +8113,41 @@ func awsRestjson1_serializeDocumentSecurityGroupIds(v []string, value smithyjson
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSsmParameterConfiguration(v *types.SsmParameterConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AmiAccountId != nil {
+		ok := object.Key("amiAccountId")
+		ok.String(*v.AmiAccountId)
+	}
+
+	if len(v.DataType) > 0 {
+		ok := object.Key("dataType")
+		ok.String(string(v.DataType))
+	}
+
+	if v.ParameterName != nil {
+		ok := object.Key("parameterName")
+		ok.String(*v.ParameterName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSsmParameterConfigurationList(v []types.SsmParameterConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSsmParameterConfiguration(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

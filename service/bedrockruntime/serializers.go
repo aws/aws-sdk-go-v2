@@ -1136,6 +1136,12 @@ func awsRestjson1_serializeDocumentDocumentSource(v types.DocumentSource, value 
 		av := object.Key("bytes")
 		av.Base64EncodeBytes(uv.Value)
 
+	case *types.DocumentSourceMemberS3Location:
+		av := object.Key("s3Location")
+		if err := awsRestjson1_serializeDocumentS3Location(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -1413,6 +1419,12 @@ func awsRestjson1_serializeDocumentImageSource(v types.ImageSource, value smithy
 	case *types.ImageSourceMemberBytes:
 		av := object.Key("bytes")
 		av.Base64EncodeBytes(uv.Value)
+
+	case *types.ImageSourceMemberS3Location:
+		av := object.Key("s3Location")
+		if err := awsRestjson1_serializeDocumentS3Location(&uv.Value, av); err != nil {
+			return err
+		}
 
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)

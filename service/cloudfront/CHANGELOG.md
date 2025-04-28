@@ -1,3 +1,7 @@
+# v1.46.0 (2025-04-28)
+
+* **Feature**: Add distribution tenant, connection group, and multi-tenant distribution APIs to the CloudFront SDK.
+
 # v1.45.3 (2025-04-03)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.56.2 (2025-04-25)
+
+* **Documentation**: Documentation only release for Amazon ECS.
+
 # v1.56.1 (2025-04-24)
 
 * **Documentation**: Documentation only release for Amazon ECS

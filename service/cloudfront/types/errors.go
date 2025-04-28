@@ -870,6 +870,32 @@ func (e *InvalidArgument) ErrorCode() string {
 }
 func (e *InvalidArgument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified CloudFront resource can't be associated.
+type InvalidAssociation struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidAssociation) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidAssociation) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidAssociation) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidAssociation"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The default root object file name is too big or contains an invalid character.
 type InvalidDefaultRootObject struct {
 	Message *string
@@ -2380,6 +2406,32 @@ func (e *ResourceInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified CloudFront resource hasn't been disabled yet.
+type ResourceNotDisabled struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotDisabled) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotDisabled) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotDisabled) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceNotDisabled"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceNotDisabled) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A response headers policy with this name already exists. You must provide a
 // unique name. To modify an existing response headers policy, use

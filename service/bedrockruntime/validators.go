@@ -311,6 +311,29 @@ func validateDocumentBlock(v *types.DocumentBlock) error {
 	}
 	if v.Source == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateDocumentSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentSource(v types.DocumentSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentSource"}
+	switch uv := v.(type) {
+	case *types.DocumentSourceMemberS3Location:
+		if err := validateS3Location(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3Location]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -496,6 +519,29 @@ func validateImageBlock(v *types.ImageBlock) error {
 	}
 	if v.Source == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateImageSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImageSource(v types.ImageSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageSource"}
+	switch uv := v.(type) {
+	case *types.ImageSourceMemberS3Location:
+		if err := validateS3Location(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3Location]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

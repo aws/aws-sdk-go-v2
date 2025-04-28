@@ -153,6 +153,20 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectAlgorithmsUsed:     []string{"CRC32"},
 			expectPayload:            []byte("hello world"),
 		},
+		"skip non-200": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
+			response: &smithyhttp.Response{
+				Response: &http.Response{
+					StatusCode: 400,
+					Body:       ioutil.NopCloser(strings.NewReader("error")),
+				},
+			},
+			// does not log
+			expectHaveAlgorithmsUsed: false,
+			expectPayload:            []byte("error"),
+		},
 		"success skip ignore multipart checksum": {
 			modifyContext: func(ctx context.Context) context.Context {
 				return setContextOutputValidationMode(ctx, "ENABLED")

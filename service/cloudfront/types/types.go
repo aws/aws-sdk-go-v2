@@ -849,6 +849,17 @@ type CachePolicySummary struct {
 	noSmithyDocumentSerde
 }
 
+// The Certificate Manager (ACM) certificate associated with your distribution.
+type Certificate struct {
+
+	// The Amazon Resource Name (ARN) of the ACM certificate.
+	//
+	// This member is required.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
 // CloudFront origin access identity.
 type CloudFrontOriginAccessIdentity struct {
 
@@ -1015,6 +1026,119 @@ type ConflictingAliasesList struct {
 
 	// The number of conflicting aliases returned in the response.
 	Quantity *int32
+
+	noSmithyDocumentSerde
+}
+
+// The connection group for your distribution tenants. When you first create a
+// distribution tenant and you don't specify a connection group, CloudFront will
+// automatically create a default connection group for you. When you create a new
+// distribution tenant and don't specify a connection group, the default one will
+// be associated with your distribution tenant.
+type ConnectionGroup struct {
+
+	// The ID of the Anycast static IP list.
+	AnycastIpListId *string
+
+	// The Amazon Resource Name (ARN) of the connection group.
+	Arn *string
+
+	// The date and time when the connection group was created.
+	CreatedTime *time.Time
+
+	// Whether the connection group is enabled.
+	Enabled *bool
+
+	// The ID of the connection group.
+	Id *string
+
+	// IPv6 is enabled for the connection group.
+	Ipv6Enabled *bool
+
+	// Whether the connection group is the default connection group for the
+	// distribution tenants.
+	IsDefault *bool
+
+	// The date and time when the connection group was updated.
+	LastModifiedTime *time.Time
+
+	// The name of the connection group.
+	Name *string
+
+	// The routing endpoint (also known as the DNS name) that is assigned to the
+	// connection group, such as d111111abcdef8.cloudfront.net.
+	RoutingEndpoint *string
+
+	// The status of the connection group.
+	Status *string
+
+	// A complex type that contains zero or more Tag elements.
+	Tags *Tags
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about what CloudFront resources your connection groups are
+// associated with.
+type ConnectionGroupAssociationFilter struct {
+
+	// The ID of the Anycast static IP list.
+	AnycastIpListId *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary that contains details about your connection groups.
+type ConnectionGroupSummary struct {
+
+	// The Amazon Resource Name (ARN) of the connection group.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time when the connection group was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The current version of the connection group.
+	//
+	// This member is required.
+	ETag *string
+
+	// The ID of the connection group.
+	//
+	// This member is required.
+	Id *string
+
+	// The date and time when the connection group was updated.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The name of the connection group.
+	//
+	// This member is required.
+	Name *string
+
+	// The routing endpoint (also known as the DNS name) that is assigned to the
+	// connection group, such as d111111abcdef8.cloudfront.net.
+	//
+	// This member is required.
+	RoutingEndpoint *string
+
+	// The ID of the Anycast static IP list.
+	AnycastIpListId *string
+
+	// Whether the connection group is enabled
+	Enabled *bool
+
+	// Whether the connection group is the default connection group for the
+	// distribution tenants.
+	IsDefault *bool
+
+	// The status of the connection group.
+	Status *string
 
 	noSmithyDocumentSerde
 }
@@ -1388,6 +1512,25 @@ type CustomHeaders struct {
 	// header that you want CloudFront to forward to the origin. If Quantity is 0 ,
 	// omit Items .
 	Items []OriginCustomHeader
+
+	noSmithyDocumentSerde
+}
+
+// Customizations for the distribution tenant. For each distribution tenant, you
+// can specify the geographic restrictions, and the Amazon Resource Names (ARNs)
+// for the ACM certificate and WAF web ACL. These are specific values that you can
+// override or disable from the multi-tenant distribution that was used to create
+// the distribution tenant.
+type Customizations struct {
+
+	// The Certificate Manager (ACM) certificate.
+	Certificate *Certificate
+
+	// The geographic restrictions.
+	GeoRestrictions *GeoRestrictionCustomization
+
+	// The WAF web ACL.
+	WebAcl *WebAclCustomization
 
 	noSmithyDocumentSerde
 }
@@ -1802,6 +1945,9 @@ type DistributionConfig struct {
 	// A complex type that contains zero or more CacheBehavior elements.
 	CacheBehaviors *CacheBehaviors
 
+	// The connection mode to filter distributions by.
+	ConnectionMode ConnectionMode
+
 	// The identifier of a continuous deployment policy. For more information, see
 	// CreateContinuousDeploymentPolicy .
 	ContinuousDeploymentPolicyId *string
@@ -1939,6 +2085,9 @@ type DistributionConfig struct {
 	// is not a staging distribution.
 	Staging *bool
 
+	// A distribution tenant configuration.
+	TenantConfig *TenantConfig
+
 	// A complex type that determines the distribution's SSL/TLS configuration for
 	// communicating with viewers.
 	ViewerCertificate *ViewerCertificate
@@ -2050,6 +2199,18 @@ type DistributionList struct {
 	// use for the Marker request parameter to continue listing your distributions
 	// where they left off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
+}
+
+// The IDs for the distribution resources.
+type DistributionResourceId struct {
+
+	// The ID of the multi-tenant distribution.
+	DistributionId *string
+
+	// The ID of the distribution tenant.
+	DistributionTenantId *string
 
 	noSmithyDocumentSerde
 }
@@ -2182,9 +2343,229 @@ type DistributionSummary struct {
 	// ID of the Anycast static IP list that is associated with the distribution.
 	AnycastIpListId *string
 
+	// The connection mode to filter distributions by.
+	ConnectionMode ConnectionMode
+
+	// The current version of the distribution.
+	ETag *string
+
 	// A complex type that contains information about origin groups for this
 	// distribution.
 	OriginGroups *OriginGroups
+
+	noSmithyDocumentSerde
+}
+
+// The distribution tenant.
+type DistributionTenant struct {
+
+	// The Amazon Resource Name (ARN) of the distribution tenant.
+	Arn *string
+
+	// The ID of the connection group for the distribution tenant. If you don't
+	// specify a connection group, CloudFront uses the default connection group.
+	ConnectionGroupId *string
+
+	// The date and time when the distribution tenant was created.
+	CreatedTime *time.Time
+
+	// Customizations for the distribution tenant. For each distribution tenant, you
+	// can specify the geographic restrictions, and the Amazon Resource Names (ARNs)
+	// for the ACM certificate and WAF web ACL. These are specific values that you can
+	// override or disable from the multi-tenant distribution that was used to create
+	// the distribution tenant.
+	Customizations *Customizations
+
+	// The ID of the multi-tenant distribution.
+	DistributionId *string
+
+	// The domains associated with the distribution tenant.
+	Domains []DomainResult
+
+	// Indicates whether the distribution tenant is in an enabled state. If disabled,
+	// the distribution tenant won't serve traffic.
+	Enabled *bool
+
+	// The ID of the distribution tenant.
+	Id *string
+
+	// The date and time when the distribution tenant was updated.
+	LastModifiedTime *time.Time
+
+	// The name of the distribution tenant.
+	Name *string
+
+	// A list of parameter values to add to the resource. A parameter is specified as
+	// a key-value pair. A valid parameter value must exist for any parameter that is
+	// marked as required in the multi-tenant distribution.
+	Parameters []Parameter
+
+	// The status of the distribution tenant.
+	Status *string
+
+	// A complex type that contains zero or more Tag elements.
+	Tags *Tags
+
+	noSmithyDocumentSerde
+}
+
+// Filter by the associated distribution ID or connection group ID.
+type DistributionTenantAssociationFilter struct {
+
+	// The ID of the connection group to filter by. You can find distribution tenants
+	// associated with a specific connection group.
+	ConnectionGroupId *string
+
+	// The distribution ID to filter by. You can find distribution tenants associated
+	// with a specific distribution.
+	DistributionId *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the information about a distribution tenant.
+type DistributionTenantSummary struct {
+
+	// The Amazon Resource Name (ARN) of the distribution tenant.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time when the distribution tenant was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The identifier for the multi-tenant distribution. For example: EDFDVBD632BHDS5 .
+	//
+	// This member is required.
+	DistributionId *string
+
+	// The domains associated with the distribution tenant.
+	//
+	// This member is required.
+	Domains []DomainResult
+
+	// The current version of the distribution tenant.
+	//
+	// This member is required.
+	ETag *string
+
+	// The ID of the distribution tenant.
+	//
+	// This member is required.
+	Id *string
+
+	// The date and time when the distribution tenant was updated.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The name of the distribution tenant.
+	//
+	// This member is required.
+	Name *string
+
+	// The ID of the connection group ID for the distribution tenant. If you don't
+	// specify a connection group, CloudFront uses the default connection group.
+	ConnectionGroupId *string
+
+	// Customizations for the distribution tenant. For each distribution tenant, you
+	// can specify the geographic restrictions, and the Amazon Resource Names (ARNs)
+	// for the ACM certificate and WAF web ACL. These are specific values that you can
+	// override or disable from the multi-tenant distribution that was used to create
+	// the distribution tenant.
+	Customizations *Customizations
+
+	// Indicates whether the distribution tenants are in an enabled state. If
+	// disabled, the distribution tenant won't service traffic.
+	Enabled *bool
+
+	// The status of the distribution tenant.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// The DNS configuration for your domain names.
+type DnsConfiguration struct {
+
+	// The domain name that you're verifying.
+	//
+	// This member is required.
+	Domain *string
+
+	// The status of your domain name.
+	//
+	//   - valid-configuration : The domain name is correctly configured and points to
+	//   the correct routing endpoint of the connection group.
+	//
+	//   - invalid-configuration : There is either a missing DNS record or the DNS
+	//   record exists but it's using an incorrect routing endpoint. Update the DNS
+	//   record to point to the correct routing endpoint.
+	//
+	//   - unknown-configuration : CloudFront can't validate your DNS configuration.
+	//   This status can appear if CloudFront can't verify the DNS record, or the DNS
+	//   lookup request failed or timed out.
+	//
+	// This member is required.
+	Status DnsConfigurationStatus
+
+	// Explains the status of the DNS configuration.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the domain conflict. Use this information to
+// determine the affected domain, the related resource, and the affected Amazon Web
+// Services account.
+type DomainConflict struct {
+
+	// The ID of the Amazon Web Services account for the domain conflict.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The domain used to find existing conflicts for domain configurations.
+	//
+	// This member is required.
+	Domain *string
+
+	// The ID of the resource that has a domain conflict.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The CloudFront resource type that has a domain conflict.
+	//
+	// This member is required.
+	ResourceType DistributionResourceType
+
+	noSmithyDocumentSerde
+}
+
+// The domain for the specified distribution tenant.
+type DomainItem struct {
+
+	// The domain name.
+	//
+	// This member is required.
+	Domain *string
+
+	noSmithyDocumentSerde
+}
+
+// The details about the domain result.
+type DomainResult struct {
+
+	// The specified domain.
+	//
+	// This member is required.
+	Domain *string
+
+	// Whether the domain is active or inactive.
+	Status DomainStatus
 
 	noSmithyDocumentSerde
 }
@@ -2235,7 +2616,7 @@ type EncryptionEntity struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the Amazon Kinesis data stream where you are sending
+// Contains information about the Amazon Kinesis data stream where you're sending
 // real-time log data in a real-time log configuration.
 type EndPoint struct {
 
@@ -2246,7 +2627,7 @@ type EndPoint struct {
 	StreamType *string
 
 	// Contains information about the Amazon Kinesis data stream where you are sending
-	// real-time log data.
+	// real-time log data in a real-time log configuration.
 	KinesisStreamConfig *KinesisStreamConfig
 
 	noSmithyDocumentSerde
@@ -2772,6 +3153,31 @@ type GeoRestriction struct {
 	noSmithyDocumentSerde
 }
 
+// The customizations that you specified for the distribution tenant for
+// geographic restrictions.
+type GeoRestrictionCustomization struct {
+
+	// The method that you want to use to restrict distribution of your content by
+	// country:
+	//
+	//   - none : No geographic restriction is enabled, meaning access to content is
+	//   not restricted by client geo location.
+	//
+	//   - blacklist : The Location elements specify the countries in which you don't
+	//   want CloudFront to distribute your content.
+	//
+	//   - whitelist : The Location elements specify the countries in which you want
+	//   CloudFront to distribute your content.
+	//
+	// This member is required.
+	RestrictionType GeoRestrictionType
+
+	// The locations for geographic restrictions.
+	Locations []string
+
+	noSmithyDocumentSerde
+}
+
 // Amazon CloudFront supports gRPC, an open-source remote procedure call (RPC)
 // framework built on HTTP/2. gRPC offers bi-directional streaming and binary
 // protocol that buffers payloads, making it suitable for applications that require
@@ -3274,6 +3680,76 @@ type LoggingConfig struct {
 	// logging, but you don't want to specify a prefix, you still must include an empty
 	// Prefix element in the Logging element.
 	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the CloudFront managed ACM certificate.
+type ManagedCertificateDetails struct {
+
+	// The ARN of the CloudFront managed ACM certificate.
+	CertificateArn *string
+
+	// The status of the CloudFront managed ACM certificate.
+	//
+	// Your distribution tenant will be updated with the latest certificate status.
+	// When calling the [UpdateDistributionTenant]operation, use the latest value for the ETag .
+	//
+	// [UpdateDistributionTenant]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistributionTenant.html
+	CertificateStatus ManagedCertificateStatus
+
+	// Contains details about the validation token of the specified CloudFront managed
+	// ACM certificate.
+	ValidationTokenDetails []ValidationTokenDetail
+
+	// Contains details about the validation token host of the specified CloudFront
+	// managed ACM certificate.
+	//
+	//   - For cloudfront , CloudFront will automatically serve the validation token.
+	//   Choose this mode if you can point the domain's DNS to CloudFront immediately.
+	//
+	//   - For self-hosted , you serve the validation token from your existing
+	//   infrastructure. Choose this mode when you need to maintain current traffic flow
+	//   while your certificate is being issued. You can place the validation token at
+	//   the well-known path on your existing web server, wait for ACM to validate and
+	//   issue the certificate, and then update your DNS to point to CloudFront.
+	//
+	// This setting only affects the initial certificate request. Once the DNS points
+	// to CloudFront, all future certificate renewals are automatically handled through
+	// CloudFront.
+	ValidationTokenHost ValidationTokenHost
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the request for the Amazon CloudFront managed ACM
+// certificate.
+type ManagedCertificateRequest struct {
+
+	// Specify how the HTTP validation token will be served when requesting the
+	// CloudFront managed ACM certificate.
+	//
+	//   - For cloudfront , CloudFront will automatically serve the validation token.
+	//   Choose this mode if you can point the domain's DNS to CloudFront immediately.
+	//
+	//   - For self-hosted , you serve the validation token from your existing
+	//   infrastructure. Choose this mode when you need to maintain current traffic flow
+	//   while your certificate is being issued. You can place the validation token at
+	//   the well-known path on your existing web server, wait for ACM to validate and
+	//   issue the certificate, and then update your DNS to point to CloudFront.
+	//
+	// This member is required.
+	ValidationTokenHost ValidationTokenHost
+
+	// You can opt out of certificate transparency logging by specifying the disabled
+	// option. Opt in by specifying enabled . For more information, see [Certificate Transparency Logging] in the
+	// Certificate Manager User Guide.
+	//
+	// [Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+	CertificateTransparencyLoggingPreference CertificateTransparencyLoggingPreference
+
+	// The primary domain name associated with the CloudFront managed ACM certificate.
+	PrimaryDomainName *string
 
 	noSmithyDocumentSerde
 }
@@ -3968,6 +4444,51 @@ type OriginSslProtocols struct {
 	//
 	// This member is required.
 	Quantity *int32
+
+	noSmithyDocumentSerde
+}
+
+// A list of parameter values to add to the resource. A parameter is specified as
+// a key-value pair. A valid parameter value must exist for any parameter that is
+// marked as required in the multi-tenant distribution.
+type Parameter struct {
+
+	// The parameter name.
+	//
+	// This member is required.
+	Name *string
+
+	// The parameter value.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of parameter values to add to the resource. A parameter is specified as
+// a key-value pair. A valid parameter value must exist for any parameter that is
+// marked as required in the multi-tenant distribution.
+type ParameterDefinition struct {
+
+	// The value that you assigned to the parameter.
+	//
+	// This member is required.
+	Definition *ParameterDefinitionSchema
+
+	// The name of the parameter.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information about the parameter definition.
+type ParameterDefinitionSchema struct {
+
+	// An object that contains information about the string schema.
+	StringSchema *StringSchemaConfig
 
 	noSmithyDocumentSerde
 }
@@ -5491,6 +6012,23 @@ type StreamingLoggingConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a string schema.
+type StringSchemaConfig struct {
+
+	// Whether the defined parameter is required.
+	//
+	// This member is required.
+	Required *bool
+
+	// A comment to describe the parameter.
+	Comment *string
+
+	// The default value of the parameter.
+	DefaultValue *string
+
+	noSmithyDocumentSerde
+}
+
 // A complex type that contains Tag key and Tag value.
 type Tag struct {
 
@@ -5525,6 +6063,15 @@ type Tags struct {
 
 	// A complex type that contains Tag elements.
 	Items []Tag
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a distribution tenant.
+type TenantConfig struct {
+
+	// The parameters that you specify for a distribution tenant.
+	ParameterDefinitions []ParameterDefinition
 
 	noSmithyDocumentSerde
 }
@@ -5613,6 +6160,23 @@ type TrustedSigners struct {
 
 	// A list of Amazon Web Services account identifiers.
 	Items []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the validation token.
+type ValidationTokenDetail struct {
+
+	// The domain name.
+	//
+	// This member is required.
+	Domain *string
+
+	// The domain to redirect from.
+	RedirectFrom *string
+
+	// The domain to redirect to.
+	RedirectTo *string
 
 	noSmithyDocumentSerde
 }
@@ -5760,14 +6324,14 @@ type ViewerCertificate struct {
 	//
 	//   - static-ip - Do not specify this value unless your distribution has been
 	//   enabled for this feature by the CloudFront team. If you have a use case that
-	//   requires static IP addresses for a distribution, contact CloudFront through the [Amazon Web ServicesSupport Center]
+	//   requires static IP addresses for a distribution, contact CloudFront through the [Amazon Web Services Support Center]
 	//   .
 	//
 	// If the distribution uses the CloudFront domain name such as
 	// d111111abcdef8.cloudfront.net , don't set a value for this field.
 	//
-	// [Amazon Web ServicesSupport Center]: https://console.aws.amazon.com/support/home
 	// [server name indication (SNI)]: https://en.wikipedia.org/wiki/Server_Name_Indication
+	// [Amazon Web Services Support Center]: https://console.aws.amazon.com/support/home
 	SSLSupportMethod SSLSupportMethod
 
 	noSmithyDocumentSerde
@@ -5947,6 +6511,23 @@ type VpcOriginSummary struct {
 	//
 	// This member is required.
 	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// The WAF web ACL customization specified for the distribution tenant.
+type WebAclCustomization struct {
+
+	// The action for the WAF web ACL customization. You can specify override to
+	// specify a separate WAF web ACL for the distribution tenant. If you specify
+	// disable , the distribution tenant won't have WAF web ACL protections and won't
+	// inherit from the multi-tenant distribution.
+	//
+	// This member is required.
+	Action CustomizationActionType
+
+	// The Amazon Resource Name (ARN) of the WAF web ACL.
+	Arn *string
 
 	noSmithyDocumentSerde
 }

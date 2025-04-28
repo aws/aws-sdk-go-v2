@@ -2,6 +2,23 @@
 
 package types
 
+type CertificateManagedBy string
+
+// Enum values for CertificateManagedBy
+const (
+	CertificateManagedByCloudfront CertificateManagedBy = "CLOUDFRONT"
+)
+
+// Values returns all known values for CertificateManagedBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateManagedBy) Values() []CertificateManagedBy {
+	return []CertificateManagedBy{
+		"CLOUDFRONT",
+	}
+}
+
 type CertificateStatus string
 
 // Enum values for CertificateStatus
@@ -315,6 +332,7 @@ const (
 	RevocationReasonCaCompromise         RevocationReason = "CA_COMPROMISE"
 	RevocationReasonAffiliationChanged   RevocationReason = "AFFILIATION_CHANGED"
 	RevocationReasonSuperceded           RevocationReason = "SUPERCEDED"
+	RevocationReasonSuperseded           RevocationReason = "SUPERSEDED"
 	RevocationReasonCessationOfOperation RevocationReason = "CESSATION_OF_OPERATION"
 	RevocationReasonCertificateHold      RevocationReason = "CERTIFICATE_HOLD"
 	RevocationReasonRemoveFromCrl        RevocationReason = "REMOVE_FROM_CRL"
@@ -333,6 +351,7 @@ func (RevocationReason) Values() []RevocationReason {
 		"CA_COMPROMISE",
 		"AFFILIATION_CHANGED",
 		"SUPERCEDED",
+		"SUPERSEDED",
 		"CESSATION_OF_OPERATION",
 		"CERTIFICATE_HOLD",
 		"REMOVE_FROM_CRL",
@@ -383,6 +402,7 @@ type ValidationMethod string
 const (
 	ValidationMethodEmail ValidationMethod = "EMAIL"
 	ValidationMethodDns   ValidationMethod = "DNS"
+	ValidationMethodHttp  ValidationMethod = "HTTP"
 )
 
 // Values returns all known values for ValidationMethod. Note that this can be
@@ -393,5 +413,6 @@ func (ValidationMethod) Values() []ValidationMethod {
 	return []ValidationMethod{
 		"EMAIL",
 		"DNS",
+		"HTTP",
 	}
 }

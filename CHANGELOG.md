@@ -1,3 +1,30 @@
+# Release (2025-04-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.32.0](service/acm/CHANGELOG.md#v1320-2025-04-28)
+  * **Feature**: Add support for file-based HTTP domain control validation, available through Amazon CloudFront.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.46.0](service/cloudfront/CHANGELOG.md#v1460-2025-04-28)
+  * **Feature**: Add distribution tenant, connection group, and multi-tenant distribution APIs to the CloudFront SDK.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.43.1](service/dynamodb/CHANGELOG.md#v1431-2025-04-28)
+  * **Documentation**: Doc only update for GSI descriptions.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.42.0](service/imagebuilder/CHANGELOG.md#v1420-2025-04-28)
+  * **Feature**: Add integration with SSM Parameter Store to Image Builder.
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.7.1](service/internal/checksum/CHANGELOG.md#v171-2025-04-28)
+  * **Bug Fix**: Don't emit warnings about lack of checksum validation for non-200 responses.
+
+# Release (2025-04-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.30.0](service/bedrockruntime/CHANGELOG.md#v1300-2025-04-25)
+  * **Feature**: You can now reference images and documents stored in Amazon S3 when using InvokeModel and Converse APIs with Amazon Nova Lite and Nova Pro. This enables direct integration of S3-stored multimedia assets in your model requests without manual downloading or base64 encoding.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.56.2](service/ecs/CHANGELOG.md#v1562-2025-04-25)
+  * **Documentation**: Documentation only release for Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacedeployment`: [v1.7.3](service/marketplacedeployment/CHANGELOG.md#v173-2025-04-25)
+  * **Documentation**: Doc only update for the AWS Marketplace Deployment Service that fixes several customer-reported issues.
+
 # Release (2025-04-24)
 
 ## General Highlights
