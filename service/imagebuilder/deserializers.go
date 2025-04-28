@@ -16743,6 +16743,11 @@ func awsRestjson1_deserializeDocumentDistribution(v **types.Distribution, value 
 				return err
 			}
 
+		case "ssmParameterConfigurations":
+			if err := awsRestjson1_deserializeDocumentSsmParameterConfigurationList(&sv.SsmParameterConfigurations, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -22782,6 +22787,98 @@ func awsRestjson1_deserializeDocumentSeverityCounts(v **types.SeverityCounts, va
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSsmParameterConfiguration(v **types.SsmParameterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SsmParameterConfiguration
+	if *v == nil {
+		sv = &types.SsmParameterConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "amiAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.AmiAccountId = ptr.String(jtv)
+			}
+
+		case "dataType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SsmParameterDataType to be of type string, got %T instead", value)
+				}
+				sv.DataType = types.SsmParameterDataType(jtv)
+			}
+
+		case "parameterName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SsmParameterName to be of type string, got %T instead", value)
+				}
+				sv.ParameterName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSsmParameterConfigurationList(v *[]types.SsmParameterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SsmParameterConfiguration
+	if *v == nil {
+		cv = []types.SsmParameterConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SsmParameterConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSsmParameterConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

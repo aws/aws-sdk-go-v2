@@ -1,0 +1,8 @@
+{
+    "id": "e30e4b35-4485-4bff-958f-555bde0460a0",
+    "type": "feature",
+    "description": "Add integration with SSM Parameter Store to Image Builder.",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}

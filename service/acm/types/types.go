@@ -72,6 +72,10 @@ type CertificateDetail struct {
 	// NON_REPUDIATION, and more.
 	KeyUsages []KeyUsage
 
+	// Identifies the Amazon Web Services service that manages the certificate issued
+	// by ACM.
+	ManagedBy CertificateManagedBy
+
 	// The time after which the certificate is not valid.
 	NotAfter *time.Time
 
@@ -193,11 +197,14 @@ type CertificateSummary struct {
 	// consists of a name and an object identifier (OID).
 	ExtendedKeyUsages []ExtendedKeyUsageName
 
-	// When called by ListCertificates, indicates whether the full list of subject alternative names
+	// When called by [ListCertificates], indicates whether the full list of subject alternative names
 	// has been included in the response. If false, the response includes all of the
 	// subject alternative names included in the certificate. If true, the response
 	// only includes the first 100 subject alternative names included in the
-	// certificate. To display the full list of subject alternative names, use DescribeCertificate.
+	// certificate. To display the full list of subject alternative names, use [DescribeCertificate].
+	//
+	// [DescribeCertificate]: https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html
+	// [ListCertificates]: https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html
 	HasAdditionalSubjectAlternativeNames *bool
 
 	// The date and time when the certificate was imported. This value exists only
@@ -220,6 +227,10 @@ type CertificateSummary struct {
 	// Possible extension values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT,
 	// NON_REPUDIATION, and more.
 	KeyUsages []KeyUsageName
+
+	// Identifies the Amazon Web Services service that manages the certificate issued
+	// by ACM.
+	ManagedBy CertificateManagedBy
 
 	// The time after which the certificate is not valid.
 	NotAfter *time.Time
@@ -255,9 +266,12 @@ type CertificateSummary struct {
 	// the canonical domain name (CN) of the certificate and additional domain names
 	// that can be used to connect to the website.
 	//
-	// When called by ListCertificates, this parameter will only return the first 100 subject
+	// When called by [ListCertificates], this parameter will only return the first 100 subject
 	// alternative names included in the certificate. To display the full list of
-	// subject alternative names, use DescribeCertificate.
+	// subject alternative names, use [DescribeCertificate].
+	//
+	// [DescribeCertificate]: https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html
+	// [ListCertificates]: https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html
 	SubjectAlternativeNameSummaries []string
 
 	// The source of the certificate. For certificates provided by ACM, this value is
@@ -283,12 +297,17 @@ type DomainValidation struct {
 	// This member is required.
 	DomainName *string
 
+	// Contains information for HTTP-based domain validation of certificates requested
+	// through CloudFront and issued by ACM. This field exists only when the
+	// certificate type is AMAZON_ISSUED and the validation method is HTTP .
+	HttpRedirect *HttpRedirect
+
 	// Contains the CNAME record that you add to your DNS database for domain
 	// validation. For more information, see [Use DNS to Validate Domain Ownership].
 	//
 	// Note: The CNAME information that you need does not include the name of your
-	// domain. If you include  your domain name in the DNS database CNAME record,
-	// validation fails.  For example, if the name is
+	// domain. If you include your domain name in the DNS database CNAME record,
+	// validation fails. For example, if the name is
 	// "_a79865eb4cd1a6ab990a45779b4e0b96.yourdomain.com", only
 	// "_a79865eb4cd1a6ab990a45779b4e0b96" must be used.
 	//
@@ -412,6 +431,26 @@ type Filters struct {
 
 	// Specify one or more KeyUsage extension values.
 	KeyUsage []KeyUsageName
+
+	// Identifies the Amazon Web Services service that manages the certificate issued
+	// by ACM.
+	ManagedBy CertificateManagedBy
+
+	noSmithyDocumentSerde
+}
+
+// Contains information for HTTP-based domain validation of certificates requested
+// through CloudFront and issued by ACM. This field exists only when the
+// certificate type is AMAZON_ISSUED and the validation method is HTTP .
+type HttpRedirect struct {
+
+	// The URL including the domain to be validated. The certificate authority sends
+	// GET requests here during validation.
+	RedirectFrom *string
+
+	// The URL hosting the validation token. RedirectFrom must return this content or
+	// redirect here.
+	RedirectTo *string
 
 	noSmithyDocumentSerde
 }

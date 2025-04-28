@@ -1341,6 +1341,9 @@ func awsAwsjson11_deserializeOpErrorRenewCertificate(response *smithyhttp.Respon
 	case strings.EqualFold("InvalidArnException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArnException(response, errorBody)
 
+	case strings.EqualFold("RequestInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorRequestInProgressException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -2423,6 +2426,15 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				return err
 			}
 
+		case "ManagedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateManagedBy to be of type string, got %T instead", value)
+				}
+				sv.ManagedBy = types.CertificateManagedBy(jtv)
+			}
+
 		case "NotAfter":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2732,6 +2744,15 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 				return err
 			}
 
+		case "ManagedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateManagedBy to be of type string, got %T instead", value)
+				}
+				sv.ManagedBy = types.CertificateManagedBy(jtv)
+			}
+
 		case "NotAfter":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2960,6 +2981,11 @@ func awsAwsjson11_deserializeDocumentDomainValidation(v **types.DomainValidation
 					return fmt.Errorf("expected DomainNameString to be of type string, got %T instead", value)
 				}
 				sv.DomainName = ptr.String(jtv)
+			}
+
+		case "HttpRedirect":
+			if err := awsAwsjson11_deserializeDocumentHttpRedirect(&sv.HttpRedirect, value); err != nil {
+				return err
 			}
 
 		case "ResourceRecord":
@@ -3202,6 +3228,55 @@ func awsAwsjson11_deserializeDocumentExtendedKeyUsageNames(v *[]types.ExtendedKe
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHttpRedirect(v **types.HttpRedirect, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HttpRedirect
+	if *v == nil {
+		sv = &types.HttpRedirect{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RedirectFrom":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RedirectFrom = ptr.String(jtv)
+			}
+
+		case "RedirectTo":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RedirectTo = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

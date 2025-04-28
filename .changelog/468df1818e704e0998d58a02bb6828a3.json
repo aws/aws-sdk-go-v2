@@ -1,0 +1,8 @@
+{
+    "id": "468df181-8e70-4e09-98d5-8a02bb6828a3",
+    "type": "feature",
+    "description": "Add distribution tenant, connection group, and multi-tenant distribution APIs to the CloudFront SDK.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

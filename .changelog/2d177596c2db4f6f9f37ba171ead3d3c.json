@@ -1,0 +1,8 @@
+{
+    "id": "2d177596-c2db-4f6f-9f37-ba171ead3d3c",
+    "type": "feature",
+    "description": "This release adds native h2 support for the bedrock runtime API, the support is only limited to SDKs that support h2 requests natively.",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

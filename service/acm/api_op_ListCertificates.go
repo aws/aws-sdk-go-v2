@@ -11,14 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of certificate ARNs and domain names. By default, the API
-// returns RSA_2048 certificates. To return all certificates in the account,
-// include the keyType filter with the values [RSA_1024, RSA_2048, RSA_3072,
-// RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1] .
-//
-// In addition to keyType , you can also filter by the CertificateStatuses ,
-// keyUsage , and extendedKeyUsage attributes on the certificate. For more
-// information, see Filters.
+// Retrieves a list of certificate ARNs and domain names. You can request that
+// only certificates that match a specific status be listed. You can also filter by
+// specific attributes of the certificate. Default filtering returns only RSA_2048
+// certificates. For more information, see Filters.
 func (c *Client) ListCertificates(ctx context.Context, params *ListCertificatesInput, optFns ...func(*Options)) (*ListCertificatesOutput, error) {
 	if params == nil {
 		params = &ListCertificatesInput{}

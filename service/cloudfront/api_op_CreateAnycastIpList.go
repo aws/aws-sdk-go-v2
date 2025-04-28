@@ -30,7 +30,7 @@ func (c *Client) CreateAnycastIpList(ctx context.Context, params *CreateAnycastI
 type CreateAnycastIpListInput struct {
 
 	// The number of static IP addresses that are allocated to the Anycast static IP
-	// list.
+	// list. Valid values: 21 or 3.
 	//
 	// This member is required.
 	IpCount *int32

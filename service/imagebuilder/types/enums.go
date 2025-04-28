@@ -617,6 +617,25 @@ func (ResourceStatus) Values() []ResourceStatus {
 	}
 }
 
+type SsmParameterDataType string
+
+// Enum values for SsmParameterDataType
+const (
+	SsmParameterDataTypeText        SsmParameterDataType = "text"
+	SsmParameterDataTypeAwsEc2Image SsmParameterDataType = "aws:ec2:image"
+)
+
+// Values returns all known values for SsmParameterDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SsmParameterDataType) Values() []SsmParameterDataType {
+	return []SsmParameterDataType{
+		"text",
+		"aws:ec2:image",
+	}
+}
+
 type TenancyType string
 
 // Enum values for TenancyType

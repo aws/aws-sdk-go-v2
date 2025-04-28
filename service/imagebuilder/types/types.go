@@ -459,7 +459,9 @@ type ContainerRecipe struct {
 	// The owner of the container recipe.
 	Owner *string
 
-	// The base image for the container recipe.
+	// The base image for customizations specified in the container recipe. This can
+	// contain an Image Builder image resource ARN or a container image URI, for
+	// example amazonlinux:latest .
 	ParentImage *string
 
 	// The system platform for the container, such as Windows or Linux.
@@ -619,6 +621,10 @@ type Distribution struct {
 	// Configure export settings to deliver disk images created from your image build,
 	// using a file format that is compatible with your VMs in that Region.
 	S3ExportConfiguration *S3ExportConfiguration
+
+	// Contains settings to update Amazon Web Services Systems Manager (SSM) Parameter
+	// Store Parameters with output AMI IDs from the build by target Region.
+	SsmParameterConfigurations []SsmParameterConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1084,7 +1090,17 @@ type ImageRecipe struct {
 	// The owner of the image recipe.
 	Owner *string
 
-	// The base image of the image recipe.
+	// The base image for customizations specified in the image recipe. You can
+	// specify the parent image using one of the following options:
+	//
+	//   - AMI ID
+	//
+	//   - Image Builder image Amazon Resource Name (ARN)
+	//
+	//   - Amazon Web Services Systems Manager (SSM) Parameter Store Parameter,
+	//   prefixed by ssm: , followed by the parameter name or ARN.
+	//
+	//   - Amazon Web Services Marketplace product ID
 	ParentImage *string
 
 	// The platform of the image recipe.
@@ -1555,8 +1571,11 @@ type InstanceConfiguration struct {
 	// Builder AMI.
 	BlockDeviceMappings []InstanceBlockDeviceMapping
 
-	// The AMI ID to use as the base image for a container build and test instance. If
-	// not specified, Image Builder will use the appropriate ECS-optimized AMI as a
+	// The base image for a container build and test instance. This can contain an AMI
+	// ID or it can specify an Amazon Web Services Systems Manager (SSM) Parameter
+	// Store Parameter, prefixed by ssm: , followed by the parameter name or ARN.
+	//
+	// If not specified, Image Builder uses the appropriate ECS-optimized AMI as a
 	// base image.
 	Image *string
 
@@ -2305,6 +2324,29 @@ type SeverityCounts struct {
 
 	// The number of medium severity findings for the specified filter.
 	Medium *int64
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for a single Parameter in the Amazon Web Services Systems Manager
+// (SSM) Parameter Store in a given Region.
+type SsmParameterConfiguration struct {
+
+	// This is the name of the Parameter in the target Region or account. The image
+	// distribution creates the Parameter if it doesn't already exist. Otherwise, it
+	// updates the parameter.
+	//
+	// This member is required.
+	ParameterName *string
+
+	// Specify the account that will own the Parameter in a given Region. During
+	// distribution, this account must be specified in distribution settings as a
+	// target account for the Region.
+	AmiAccountId *string
+
+	// The data type specifies what type of value the Parameter contains. We recommend
+	// that you use data type aws:ec2:image .
+	DataType SsmParameterDataType
 
 	noSmithyDocumentSerde
 }
