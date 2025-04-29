@@ -87,7 +87,7 @@
                 "Tags": {
                     "target": "com.amazonaws.kinesis#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of up to 10 key-value pairs to use to create the tags.</p>",
+                        "smithy.api#documentation": "<p>A set of up to 50 key-value pairs to use to create the tags. A tag consists of a required key and an optional value. You can add up to 50 tags per resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -300,7 +300,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Kinesis data stream. A stream captures and transports data records that are\n            continuously emitted from different data sources or <i>producers</i>.\n            Scale-out within a stream is explicitly supported by means of shards, which are uniquely\n            identified groups of data records in a stream.</p>\n         <p>You can create your data stream using either on-demand or provisioned capacity mode.\n            Data streams with an on-demand mode require no capacity planning and automatically scale\n            to handle gigabytes of write and read throughput per minute. With the on-demand mode,\n            Kinesis Data Streams automatically manages the shards in order to provide the necessary\n            throughput. For the data streams with a provisioned mode, you must specify the number of\n            shards for the data stream. Each shard can support reads up to five transactions per\n            second, up to a maximum data read total of 2 MiB per second. Each shard can support\n            writes up to 1,000 records per second, up to a maximum data write total of 1 MiB per\n            second. If the amount of data input increases or decreases, you can add or remove\n            shards.</p>\n         <p>The stream name identifies the stream. The name is scoped to the Amazon Web Services\n            account used by the application. It is also scoped by Amazon Web Services Region. That\n            is, two streams in two different accounts can have the same name, and two streams in the\n            same account, but in two different Regions, can have the same name.</p>\n         <p>\n            <code>CreateStream</code> is an asynchronous operation. Upon receiving a\n                <code>CreateStream</code> request, Kinesis Data Streams immediately returns and sets\n            the stream status to <code>CREATING</code>. After the stream is created, Kinesis Data\n            Streams sets the stream status to <code>ACTIVE</code>. You should perform read and write\n            operations only on an <code>ACTIVE</code> stream. </p>\n         <p>You receive a <code>LimitExceededException</code> when making a\n                <code>CreateStream</code> request when you try to do one of the following:</p>\n         <ul>\n            <li>\n               <p>Have more than five streams in the <code>CREATING</code> state at any point in\n                    time.</p>\n            </li>\n            <li>\n               <p>Create more shards than are authorized for your account.</p>\n            </li>\n         </ul>\n         <p>For the default shard limit for an Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Amazon\n                Kinesis Data Streams Limits</a> in the <i>Amazon Kinesis Data Streams\n                Developer Guide</i>. To increase this limit, <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact Amazon Web Services\n                Support</a>.</p>\n         <p>You can use <a>DescribeStreamSummary</a> to check the stream status, which\n            is returned in <code>StreamStatus</code>.</p>\n         <p>\n            <a>CreateStream</a> has a limit of five transactions per second per\n            account.</p>\n         <p>You can add tags to the stream when making a <code>CreateStream</code> request by\n            setting the <code>Tags</code> parameter. If you pass <code>Tags</code> parameter, in\n            addition to having <code>kinesis:createStream</code> permission, you must also have\n                <code>kinesis:addTagsToStream</code> permission for the stream that will be created.\n            Tags will take effect from the <code>CREATING</code> status of the stream. </p>"
+                "smithy.api#documentation": "<p>Creates a Kinesis data stream. A stream captures and transports data records that are\n            continuously emitted from different data sources or <i>producers</i>.\n            Scale-out within a stream is explicitly supported by means of shards, which are uniquely\n            identified groups of data records in a stream.</p>\n         <p>You can create your data stream using either on-demand or provisioned capacity mode.\n            Data streams with an on-demand mode require no capacity planning and automatically scale\n            to handle gigabytes of write and read throughput per minute. With the on-demand mode,\n            Kinesis Data Streams automatically manages the shards in order to provide the necessary\n            throughput. For the data streams with a provisioned mode, you must specify the number of\n            shards for the data stream. Each shard can support reads up to five transactions per\n            second, up to a maximum data read total of 2 MiB per second. Each shard can support\n            writes up to 1,000 records per second, up to a maximum data write total of 1 MiB per\n            second. If the amount of data input increases or decreases, you can add or remove\n            shards.</p>\n         <p>The stream name identifies the stream. The name is scoped to the Amazon Web Services\n            account used by the application. It is also scoped by Amazon Web Services Region. That\n            is, two streams in two different accounts can have the same name, and two streams in the\n            same account, but in two different Regions, can have the same name.</p>\n         <p>\n            <code>CreateStream</code> is an asynchronous operation. Upon receiving a\n                <code>CreateStream</code> request, Kinesis Data Streams immediately returns and sets\n            the stream status to <code>CREATING</code>. After the stream is created, Kinesis Data\n            Streams sets the stream status to <code>ACTIVE</code>. You should perform read and write\n            operations only on an <code>ACTIVE</code> stream. </p>\n         <p>You receive a <code>LimitExceededException</code> when making a\n                <code>CreateStream</code> request when you try to do one of the following:</p>\n         <ul>\n            <li>\n               <p>Have more than five streams in the <code>CREATING</code> state at any point in\n                    time.</p>\n            </li>\n            <li>\n               <p>Create more shards than are authorized for your account.</p>\n            </li>\n         </ul>\n         <p>For the default shard limit for an Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Amazon\n                Kinesis Data Streams Limits</a> in the <i>Amazon Kinesis Data Streams\n                Developer Guide</i>. To increase this limit, <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact Amazon Web Services\n                Support</a>.</p>\n         <p>You can use <a>DescribeStreamSummary</a> to check the stream status, which\n            is returned in <code>StreamStatus</code>.</p>\n         <p>\n            <a>CreateStream</a> has a limit of five transactions per second per\n            account.</p>\n         <p>You can add tags to the stream when making a <code>CreateStream</code> request by setting the <code>Tags</code> parameter. If you pass the <code>Tags</code> parameter, in addition to having the <code>kinesis:CreateStream</code> permission, you must also have the <code>kinesis:AddTagsToStream</code> permission for the stream that will be created. The <code>kinesis:TagResource</code> permission won’t work to tag streams on creation. Tags will take effect from the <code>CREATING</code> status of the stream, but you can't make any updates to the tags until the stream is in <code>ACTIVE</code> state.</p>"
             }
         },
         "com.amazonaws.kinesis#CreateStreamInput": {
@@ -328,7 +328,7 @@
                 "Tags": {
                     "target": "com.amazonaws.kinesis#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of up to 10 key-value pairs to use to create the tags.</p>"
+                        "smithy.api#documentation": "<p>A set of up to 50 key-value pairs to use to create the tags. A tag consists of a required key and an optional value.</p>"
                     }
                 }
             },
@@ -1174,6 +1174,9 @@
                     "target": "com.amazonaws.kinesis#ExpiredIteratorException"
                 },
                 {
+                    "target": "com.amazonaws.kinesis#InternalFailureException"
+                },
+                {
                     "target": "com.amazonaws.kinesis#InvalidArgumentException"
                 },
                 {
@@ -1362,6 +1365,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.kinesis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#InternalFailureException"
                 },
                 {
                     "target": "com.amazonaws.kinesis#InvalidArgumentException"
@@ -1728,6 +1734,9 @@
                     "target": "com.amazonaws.kinesis#ListStreams"
                 },
                 {
+                    "target": "com.amazonaws.kinesis#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.kinesis#ListTagsForStream"
                 },
                 {
@@ -1759,6 +1768,12 @@
                 },
                 {
                     "target": "com.amazonaws.kinesis#SubscribeToShard"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#UntagResource"
                 },
                 {
                     "target": "com.amazonaws.kinesis#UpdateShardCount"
@@ -6180,6 +6195,71 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kinesis#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesis#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesis#ListTagsForResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all tags added to the specified Kinesis resource. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources.</p>\n         <p>For more information about tagging Kinesis resources, see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/tagging.html\">Tag your Amazon Kinesis Data Streams resources</a>.</p>",
+                "smithy.rules#staticContextParams": {
+                    "OperationType": {
+                        "value": "control"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesis#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.kinesis#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis resource for which to list tags.</p>",
+                        "smithy.rules#contextParam": {
+                            "name": "ResourceARN"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesis#ListTagsForResourceOutput": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.kinesis#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tags associated with the specified Kinesis resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kinesis#ListTagsForStream": {
             "type": "operation",
             "input": {
@@ -6502,6 +6582,9 @@
                     "target": "com.amazonaws.kinesis#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.kinesis#InternalFailureException"
+                },
+                {
                     "target": "com.amazonaws.kinesis#InvalidArgumentException"
                 },
                 {
@@ -6628,6 +6711,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.kinesis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#InternalFailureException"
                 },
                 {
                     "target": "com.amazonaws.kinesis#InvalidArgumentException"
@@ -6938,7 +7024,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers a consumer with a Kinesis data stream. When you use this operation, the\n            consumer you register can then call <a>SubscribeToShard</a> to receive data\n            from the stream using enhanced fan-out, at a rate of up to 2 MiB per second for every\n            shard you subscribe to. This rate is unaffected by the total number of consumers that\n            read from the same stream.</p>\n         <p>You can register up to 20 consumers per stream. A given consumer can only be\n            registered with one stream at a time.</p>\n         <p>For an example of how to use this operation, see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/building-enhanced-consumers-api.html\">Enhanced Fan-Out\n                Using the Kinesis Data Streams API</a>.</p>\n         <p>The use of this operation has a limit of five transactions per second per account.\n            Also, only 5 consumers can be created simultaneously. In other words, you cannot have\n            more than 5 consumers in a <code>CREATING</code> status at the same time. Registering a\n            6th consumer while there are 5 in a <code>CREATING</code> status results in a\n                <code>LimitExceededException</code>.</p>",
+                "smithy.api#documentation": "<p>Registers a consumer with a Kinesis data stream. When you use this operation, the\n            consumer you register can then call <a>SubscribeToShard</a> to receive data\n            from the stream using enhanced fan-out, at a rate of up to 2 MiB per second for every\n            shard you subscribe to. This rate is unaffected by the total number of consumers that\n            read from the same stream.</p>\n         <p>You can add tags to the registered consumer when making a <code>RegisterStreamConsumer</code> request by setting the <code>Tags</code> parameter. If you pass the <code>Tags</code> parameter, in addition to having the <code>kinesis:RegisterStreamConsumer</code> permission, you must also have the <code>kinesis:TagResource</code> permission for the consumer that will be registered. Tags will take effect from the <code>CREATING</code> status of the consumer.</p>\n         <p>You can register up to 20 consumers per stream. A given consumer can only be\n            registered with one stream at a time.</p>\n         <p>For an example of how to use this operation, see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/building-enhanced-consumers-api.html\">Enhanced Fan-Out\n                Using the Kinesis Data Streams API</a>.</p>\n         <p>The use of this operation has a limit of five transactions per second per account.\n            Also, only 5 consumers can be created simultaneously. In other words, you cannot have\n            more than 5 consumers in a <code>CREATING</code> status at the same time. Registering a\n            6th consumer while there are 5 in a <code>CREATING</code> status results in a\n                <code>LimitExceededException</code>.</p>",
                 "smithy.rules#staticContextParams": {
                     "OperationType": {
                         "value": "control"
@@ -6964,6 +7050,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>For a given Kinesis data stream, each consumer must have a unique name. However,\n            consumer names don't have to be unique across data streams.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.kinesis#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of up to 50 key-value pairs. A tag consists of a required key and an optional value.</p>"
                     }
                 }
             },
@@ -8051,7 +8143,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata assigned to the stream, consisting of a key-value pair.</p>"
+                "smithy.api#documentation": "<p>Metadata assigned to the stream or consumer, consisting of a key-value pair.</p>"
             }
         },
         "com.amazonaws.kinesis#TagKey": {
@@ -8102,6 +8194,64 @@
                 }
             }
         },
+        "com.amazonaws.kinesis#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesis#TagResourceInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds or updates tags for the specified Kinesis resource. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. You can assign up to 50 tags to a Kinesis resource.</p>",
+                "smithy.rules#staticContextParams": {
+                    "OperationType": {
+                        "value": "control"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesis#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.kinesis#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tags to be added to the Kinesis resource. A tag consists of a required key and an optional value. You can add up to 50 tags per resource.</p>\n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceARN": {
+                    "target": "com.amazonaws.kinesis#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis resource to which to add tags.</p>",
+                        "smithy.rules#contextParam": {
+                            "name": "ResourceARN"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.kinesis#TagValue": {
             "type": "string",
             "traits": {
@@ -8113,6 +8263,64 @@
         },
         "com.amazonaws.kinesis#Timestamp": {
             "type": "timestamp"
+        },
+        "com.amazonaws.kinesis#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesis#UntagResourceInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes tags from the specified Kinesis resource. Removed tags are deleted and can't be recovered after this operation completes successfully.</p>",
+                "smithy.rules#staticContextParams": {
+                    "OperationType": {
+                        "value": "control"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesis#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "TagKeys": {
+                    "target": "com.amazonaws.kinesis#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag key-value pairs. Existing tags of the resource whose keys are members of this list will be removed from the Kinesis resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceARN": {
+                    "target": "com.amazonaws.kinesis#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis resource from which to remove tags.</p>",
+                        "smithy.rules#contextParam": {
+                            "name": "ResourceARN"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.kinesis#UpdateShardCount": {
             "type": "operation",

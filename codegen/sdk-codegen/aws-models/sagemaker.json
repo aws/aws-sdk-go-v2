@@ -1600,6 +1600,12 @@
                         "smithy.api#enumValue": "ml.p5.48xlarge"
                     }
                 },
+                "ML_P5EN_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p5en.48xlarge"
+                    }
+                },
                 "ML_M6I_LARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -14679,9 +14685,7 @@
                 "ServiceCatalogProvisioningDetails": {
                     "target": "com.amazonaws.sagemaker#ServiceCatalogProvisioningDetails",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The product ID and provisioning artifact ID to provision a service catalog. The provisioning \n            artifact ID will default to the latest provisioning artifact ID of the product, if you don't \n            provide the provisioning artifact ID. For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service\n                Catalog</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The product ID and provisioning artifact ID to provision a service catalog. The provisioning \n            artifact ID will default to the latest provisioning artifact ID of the product, if you don't \n            provide the provisioning artifact ID. For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service\n                Catalog</a>.</p>"
                     }
                 },
                 "Tags": {
@@ -26333,9 +26337,7 @@
                 "ServiceCatalogProvisioningDetails": {
                     "target": "com.amazonaws.sagemaker#ServiceCatalogProvisioningDetails",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Information used to provision a service catalog product. For information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service\n            Catalog</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Information used to provision a service catalog product. For information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service\n            Catalog</a>.</p>"
                     }
                 },
                 "ServiceCatalogProvisionedProductDetails": {
