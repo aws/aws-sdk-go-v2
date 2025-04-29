@@ -1831,10 +1831,12 @@ type GroupSummary struct {
 }
 
 // Configuration information required to setup hallucination reduction. For more
-// information, see hallucination reduction.
+// information, see [hallucination reduction].
 //
 // The hallucination reduction feature won't work if chat orchestration controls
 // are enabled for your application.
+//
+// [hallucination reduction]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/hallucination-reduction.html
 type HallucinationReductionConfiguration struct {
 
 	// Controls whether hallucination reduction has been enabled or disabled for your

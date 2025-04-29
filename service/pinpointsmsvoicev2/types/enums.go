@@ -793,8 +793,10 @@ type ProtectStatus string
 
 // Enum values for ProtectStatus
 const (
-	ProtectStatusAllow ProtectStatus = "ALLOW"
-	ProtectStatusBlock ProtectStatus = "BLOCK"
+	ProtectStatusAllow   ProtectStatus = "ALLOW"
+	ProtectStatusBlock   ProtectStatus = "BLOCK"
+	ProtectStatusMonitor ProtectStatus = "MONITOR"
+	ProtectStatusFilter  ProtectStatus = "FILTER"
 )
 
 // Values returns all known values for ProtectStatus. Note that this can be
@@ -805,6 +807,8 @@ func (ProtectStatus) Values() []ProtectStatus {
 	return []ProtectStatus{
 		"ALLOW",
 		"BLOCK",
+		"MONITOR",
+		"FILTER",
 	}
 }
 

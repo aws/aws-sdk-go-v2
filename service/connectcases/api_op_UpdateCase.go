@@ -54,7 +54,7 @@ type UpdateCaseInput struct {
 	// This member is required.
 	Fields []types.FieldValue
 
-	// Represents the identity of the person who performed the action.
+	// Represents the entity that performed the action.
 	PerformedBy types.UserUnion
 
 	noSmithyDocumentSerde

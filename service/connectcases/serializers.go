@@ -4750,6 +4750,10 @@ func awsRestjson1_serializeDocumentUserUnion(v types.UserUnion, value smithyjson
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.UserUnionMemberCustomEntity:
+		av := object.Key("customEntity")
+		av.String(uv.Value)
+
 	case *types.UserUnionMemberUserArn:
 		av := object.Key("userArn")
 		av.String(uv.Value)

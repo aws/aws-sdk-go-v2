@@ -544,6 +544,7 @@ const (
 	IdentityTypeAwsIamIdpOidc    IdentityType = "AWS_IAM_IDP_OIDC"
 	IdentityTypeAwsIamIdc        IdentityType = "AWS_IAM_IDC"
 	IdentityTypeAwsQuicksightIdp IdentityType = "AWS_QUICKSIGHT_IDP"
+	IdentityTypeAnonymous        IdentityType = "ANONYMOUS"
 )
 
 // Values returns all known values for IdentityType. Note that this can be
@@ -556,6 +557,7 @@ func (IdentityType) Values() []IdentityType {
 		"AWS_IAM_IDP_OIDC",
 		"AWS_IAM_IDC",
 		"AWS_QUICKSIGHT_IDP",
+		"ANONYMOUS",
 	}
 }
 

@@ -65,13 +65,6 @@ type DescribeProjectOutput struct {
 	// This member is required.
 	ProjectStatus types.ProjectStatus
 
-	// Information used to provision a service catalog product. For information, see [What is Amazon Web Services Service Catalog].
-	//
-	// [What is Amazon Web Services Service Catalog]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
-	//
-	// This member is required.
-	ServiceCatalogProvisioningDetails *types.ServiceCatalogProvisioningDetails
-
 	// Information about the user who created or modified an experiment, trial, trial
 	// component, lineage group, project, or model card.
 	CreatedBy *types.UserContext
@@ -88,6 +81,11 @@ type DescribeProjectOutput struct {
 
 	// Information about a provisioned service catalog product.
 	ServiceCatalogProvisionedProductDetails *types.ServiceCatalogProvisionedProductDetails
+
+	// Information used to provision a service catalog product. For information, see [What is Amazon Web Services Service Catalog].
+	//
+	// [What is Amazon Web Services Service Catalog]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
+	ServiceCatalogProvisioningDetails *types.ServiceCatalogProvisioningDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

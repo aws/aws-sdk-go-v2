@@ -66,7 +66,7 @@ type CreateCaseInput struct {
 	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	// Represents the identity of the person who performed the action.
+	// Represents the entity that performed the action.
 	PerformedBy types.UserUnion
 
 	noSmithyDocumentSerde

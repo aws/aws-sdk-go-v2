@@ -818,6 +818,18 @@ func TestCheckSnapshot_DisassociateOpsItemRelatedItem(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAccessToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccessToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAccessToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAutomationExecution(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAutomationExecution(context.Background(), nil, func(o *Options) {
@@ -1519,6 +1531,18 @@ func TestCheckSnapshot_SendCommand(t *testing.T) {
 	_, err := svc.SendCommand(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SendCommand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartAccessRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAccessRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAccessRequest")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2545,6 +2569,18 @@ func TestUpdateSnapshot_DisassociateOpsItemRelatedItem(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAccessToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccessToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAccessToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAutomationExecution(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAutomationExecution(context.Background(), nil, func(o *Options) {
@@ -3246,6 +3282,18 @@ func TestUpdateSnapshot_SendCommand(t *testing.T) {
 	_, err := svc.SendCommand(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SendCommand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartAccessRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAccessRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAccessRequest")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -15663,9 +15663,7 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 	if v.ProjectName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
-	if v.ServiceCatalogProvisioningDetails == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceCatalogProvisioningDetails"))
-	} else if v.ServiceCatalogProvisioningDetails != nil {
+	if v.ServiceCatalogProvisioningDetails != nil {
 		if err := validateServiceCatalogProvisioningDetails(v.ServiceCatalogProvisioningDetails); err != nil {
 			invalidParams.AddNested("ServiceCatalogProvisioningDetails", err.(smithy.InvalidParamsError))
 		}
