@@ -1,3 +1,26 @@
+# Release (2025-04-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.25.0](service/connectcases/CHANGELOG.md#v1250-2025-04-29)
+  * **Feature**: Introduces CustomEntity as part of the UserUnion data type. This field is used to indicate the entity who is performing the API action.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.34.3](service/dataexchange/CHANGELOG.md#v1343-2025-04-29)
+  * **Bug Fix**: **BREAKING CHANGE**: The type of Dataexchange#UpdateRevision$Finalized has been changed from `bool` to `*bool`. efore this change, the field was incorrectly marked as having a default value of false by the service, which made it functionally impossible for users to set this value to false
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.34.0](service/kinesis/CHANGELOG.md#v1340-2025-04-29)
+  * **Feature**: Amazon KDS now supports tagging and attribute-based access control (ABAC) for enhanced fan-out consumers.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.20.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1200-2025-04-29)
+  * **Feature**: AWS End User Messaging has added MONITOR and FILTER functionality to SMS Protect.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.26.0](service/qbusiness/CHANGELOG.md#v1260-2025-04-29)
+  * **Feature**: Add support for anonymous user access for Q Business applications
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.189.0](service/sagemaker/CHANGELOG.md#v11890-2025-04-29)
+  * **Feature**: Introduced support for P5en instance types on SageMaker Studio for JupyterLab and CodeEditor applications.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.14.0](service/sagemakermetrics/CHANGELOG.md#v1140-2025-04-29)
+  * **Feature**: SageMaker Metrics Service now supports FIPS endpoint in all US and Canada Commercial regions.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.59.0](service/ssm/CHANGELOG.md#v1590-2025-04-29)
+  * **Feature**: This release adds support for just-In-time node access in AWS Systems Manager. Just-in-time node access enables customers to move towards zero standing privileges by requiring operators to request access and obtain approval before remotely connecting to nodes managed by the SSM Agent.
+* `github.com/aws/aws-sdk-go-v2/service/ssmguiconnect`: [v1.0.0](service/ssmguiconnect/CHANGELOG.md#v100-2025-04-29)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds API support for the connection recording GUI Connect feature of AWS Systems Manager
+
 # Release (2025-04-28)
 
 ## General Highlights

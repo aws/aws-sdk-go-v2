@@ -1,8 +1,0 @@
-{
-    "id": "91197bab-66dd-4ce3-9b40-96fed0ee8207",
-    "type": "feature",
-    "description": "Add support for anonymous user access for Q Business applications",
-    "modules": [
-        "service/qbusiness"
-    ]
-}

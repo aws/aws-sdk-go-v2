@@ -1,8 +1,0 @@
-{
-    "id": "a0eb4882-74fa-41da-b82a-08898134e5ca",
-    "type": "feature",
-    "description": "Introduces CustomEntity as part of the UserUnion data type. This field is used to indicate the entity who is performing the API action.",
-    "modules": [
-        "service/connectcases"
-    ]
-}

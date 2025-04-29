@@ -1,3 +1,7 @@
+# v1.14.0 (2025-04-29)
+
+* **Feature**: SageMaker Metrics Service now supports FIPS endpoint in all US and Canada Commercial regions.
+
 # v1.13.3 (2025-04-03)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.189.0 (2025-04-29)
+
+* **Feature**: Introduced support for P5en instance types on SageMaker Studio for JupyterLab and CodeEditor applications.
+
 # v1.188.0 (2025-04-18)
 
 * **Feature**: This release adds a new Neuron driver option in InferenceAmiVersion parameter for ProductionVariant. Additionally, it adds support for fetching model lifecycle status in the ListModelPackages API. Users can now use this API to view the lifecycle stage of models that have been shared with them.

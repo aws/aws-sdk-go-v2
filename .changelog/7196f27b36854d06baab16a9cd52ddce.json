@@ -1,8 +1,0 @@
-{
-    "id": "7196f27b-3685-4d06-baab-16a9cd52ddce",
-    "type": "feature",
-    "description": "AWS End User Messaging has added MONITOR and FILTER functionality to SMS Protect.",
-    "modules": [
-        "service/pinpointsmsvoicev2"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "d95aa2c1-82cc-45ba-b7ef-db839e5c3a4c",
-    "type": "feature",
-    "description": "SageMaker Metrics Service now supports FIPS endpoint in all US and Canada Commercial regions.",
-    "modules": [
-        "service/sagemakermetrics"
-    ]
-}

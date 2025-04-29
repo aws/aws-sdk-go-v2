@@ -1,3 +1,7 @@
+# v1.34.3 (2025-04-29)
+
+* **Bug Fix**: **BREAKING CHANGE**: The type of Dataexchange#UpdateRevision$Finalized has been changed from `bool` to `*bool`. efore this change, the field was incorrectly marked as having a default value of false by the service, which made it functionally impossible for users to set this value to false
+
 # v1.34.2 (2025-04-03)
 
 * No change notes available for this release.

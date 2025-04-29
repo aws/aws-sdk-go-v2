@@ -1,8 +1,0 @@
-{
-    "id": "7e33a4f1-8e0a-48a3-ad9e-f977a53d8747",
-    "type": "feature",
-    "description": "This release adds API support for the connection recording GUI Connect feature of AWS Systems Manager",
-    "modules": [
-        "service/ssmguiconnect"
-    ]
-}
