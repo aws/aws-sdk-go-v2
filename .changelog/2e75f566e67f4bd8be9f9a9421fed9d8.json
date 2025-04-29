@@ -1,0 +1,8 @@
+{
+    "id": "2e75f566-e67f-4bd8-be9f-9a9421fed9d8",
+    "type": "bugfix",
+    "description": "**BREAKING CHANGE**: The type of Dataexchange#UpdateRevision$Finalized has been changed from `bool` to `*bool`. efore this change, the field was incorrectly marked as having a default value of false by the service, which made it functionally impossible for users to set this value to false",
+    "modules": [
+        "service/dataexchange"
+    ]
+}

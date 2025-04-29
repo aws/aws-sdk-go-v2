@@ -3153,9 +3153,9 @@ func awsRestjson1_serializeOpDocumentUpdateRevisionInput(v *UpdateRevisionInput,
 		ok.String(*v.Comment)
 	}
 
-	if v.Finalized {
+	if v.Finalized != nil {
 		ok := object.Key("Finalized")
-		ok.Boolean(v.Finalized)
+		ok.Boolean(*v.Finalized)
 	}
 
 	return nil
