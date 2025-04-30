@@ -1,0 +1,8 @@
+{
+    "id": "3ef6da04-a759-4c8f-b30b-c3bcf4f9dd90",
+    "type": "feature",
+    "description": "Support for Custom Orchestration within InlineAgents",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

@@ -47,6 +47,10 @@ import (
 //	- A [SessionTimeoutException]object is returned when the session times out, after it has been kept
 //	open for three hours.
 //
+// The StartLiveTail API routes requests to streaming-logs.Region.amazonaws.com
+// using SDK host prefix injection. VPC endpoint support is not available for this
+// API.
+//
 // You can end a session before it times out by closing the session stream or by
 // closing the client that is receiving the stream. The session also ends if the
 // established connection between the client and the server breaks.

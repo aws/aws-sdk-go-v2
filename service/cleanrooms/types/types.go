@@ -4156,6 +4156,80 @@ type ProtectedQuery struct {
 	noSmithyDocumentSerde
 }
 
+//	Contains the output information for a protected query with a distribute output
+//
+// configuration.
+//
+// This output type allows query results to be distributed to multiple receivers,
+// including S3 and collaboration members. It is only available for queries using
+// the Spark analytics engine.
+type ProtectedQueryDistributeOutput struct {
+
+	//  Contains the output results for each member location specified in the
+	// distribute output configuration. Each entry provides details about the result
+	// distribution to a specific collaboration member.
+	MemberList []ProtectedQuerySingleMemberOutput
+
+	// Contains output information for protected queries with an S3 output type.
+	S3 *ProtectedQueryS3Output
+
+	noSmithyDocumentSerde
+}
+
+//	Specifies the configuration for distributing protected query results to
+//
+// multiple receivers, including S3 and collaboration members.
+type ProtectedQueryDistributeOutputConfiguration struct {
+
+	//  A list of locations where you want to distribute the protected query results.
+	// Each location must specify either an S3 destination or a collaboration member
+	// destination.
+	//
+	// You can't specify more than one S3 location.
+	//
+	// You can't specify the query runner's account as a member location.
+	//
+	// You must include either an S3 or member output configuration for each location,
+	// but not both.
+	//
+	// This member is required.
+	Locations []ProtectedQueryDistributeOutputConfigurationLocation
+
+	noSmithyDocumentSerde
+}
+
+//	Specifies where you'll distribute the results of your protected query. You
+//
+// must configure either an S3 destination or a collaboration member destination.
+//
+// The following types satisfy this interface:
+//
+//	ProtectedQueryDistributeOutputConfigurationLocationMemberMember
+//	ProtectedQueryDistributeOutputConfigurationLocationMemberS3
+type ProtectedQueryDistributeOutputConfigurationLocation interface {
+	isProtectedQueryDistributeOutputConfigurationLocation()
+}
+
+// Contains configuration details for the protected query member output.
+type ProtectedQueryDistributeOutputConfigurationLocationMemberMember struct {
+	Value ProtectedQueryMemberOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProtectedQueryDistributeOutputConfigurationLocationMemberMember) isProtectedQueryDistributeOutputConfigurationLocation() {
+}
+
+// Contains the configuration to write the query results to S3.
+type ProtectedQueryDistributeOutputConfigurationLocationMemberS3 struct {
+	Value ProtectedQueryS3OutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProtectedQueryDistributeOutputConfigurationLocationMemberS3) isProtectedQueryDistributeOutputConfigurationLocation() {
+}
+
 // Details of errors thrown by the protected query.
 type ProtectedQueryError struct {
 
@@ -4187,11 +4261,25 @@ type ProtectedQueryMemberOutputConfiguration struct {
 //
 // The following types satisfy this interface:
 //
+//	ProtectedQueryOutputMemberDistribute
 //	ProtectedQueryOutputMemberMemberList
 //	ProtectedQueryOutputMemberS3
 type ProtectedQueryOutput interface {
 	isProtectedQueryOutput()
 }
+
+// Contains output information for protected queries that use a distribute output
+// type. This output type lets you send query results to multiple locations -
+// either to S3 or to collaboration members.
+//
+// You can only use the distribute output type with the Spark analytics engine.
+type ProtectedQueryOutputMemberDistribute struct {
+	Value ProtectedQueryDistributeOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProtectedQueryOutputMemberDistribute) isProtectedQueryOutput() {}
 
 // The list of member Amazon Web Services account(s) that received the results of
 // the query.
@@ -4203,7 +4291,7 @@ type ProtectedQueryOutputMemberMemberList struct {
 
 func (*ProtectedQueryOutputMemberMemberList) isProtectedQueryOutput() {}
 
-// If present, the output for a protected query with an `S3` output type.
+// If present, the output for a protected query with an S3 output type.
 type ProtectedQueryOutputMemberS3 struct {
 	Value ProtectedQueryS3Output
 
@@ -4216,11 +4304,21 @@ func (*ProtectedQueryOutputMemberS3) isProtectedQueryOutput() {}
 //
 // The following types satisfy this interface:
 //
+//	ProtectedQueryOutputConfigurationMemberDistribute
 //	ProtectedQueryOutputConfigurationMemberMember
 //	ProtectedQueryOutputConfigurationMemberS3
 type ProtectedQueryOutputConfiguration interface {
 	isProtectedQueryOutputConfiguration()
 }
+
+// Required configuration for a protected query with a distribute output type.
+type ProtectedQueryOutputConfigurationMemberDistribute struct {
+	Value ProtectedQueryDistributeOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProtectedQueryOutputConfigurationMemberDistribute) isProtectedQueryOutputConfiguration() {}
 
 // Required configuration for a protected query with a member output type.
 type ProtectedQueryOutputConfigurationMemberMember struct {
@@ -4840,33 +4938,34 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAnalysisRulePolicy()                             {}
-func (*UnknownUnionMember) isAnalysisRulePolicyV1()                           {}
-func (*UnknownUnionMember) isAnalysisSource()                                 {}
-func (*UnknownUnionMember) isAnalysisSourceMetadata()                         {}
-func (*UnknownUnionMember) isComputeConfiguration()                           {}
-func (*UnknownUnionMember) isConfigurationDetails()                           {}
-func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicy()              {}
-func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicyV1()            {}
-func (*UnknownUnionMember) isConfiguredTableAssociationAnalysisRulePolicy()   {}
-func (*UnknownUnionMember) isConfiguredTableAssociationAnalysisRulePolicyV1() {}
-func (*UnknownUnionMember) isConsolidatedPolicy()                             {}
-func (*UnknownUnionMember) isConsolidatedPolicyV1()                           {}
-func (*UnknownUnionMember) isMembershipProtectedJobOutputConfiguration()      {}
-func (*UnknownUnionMember) isMembershipProtectedQueryOutputConfiguration()    {}
-func (*UnknownUnionMember) isPreviewPrivacyImpactParametersInput()            {}
-func (*UnknownUnionMember) isPrivacyBudget()                                  {}
-func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersInput()           {}
-func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersOutput()          {}
-func (*UnknownUnionMember) isPrivacyBudgetTemplateUpdateParameters()          {}
-func (*UnknownUnionMember) isPrivacyImpact()                                  {}
-func (*UnknownUnionMember) isProtectedJobConfigurationDetails()               {}
-func (*UnknownUnionMember) isProtectedJobOutput()                             {}
-func (*UnknownUnionMember) isProtectedJobOutputConfigurationInput()           {}
-func (*UnknownUnionMember) isProtectedJobOutputConfigurationOutput()          {}
-func (*UnknownUnionMember) isProtectedQueryOutput()                           {}
-func (*UnknownUnionMember) isProtectedQueryOutputConfiguration()              {}
-func (*UnknownUnionMember) isQueryConstraint()                                {}
-func (*UnknownUnionMember) isSchemaTypeProperties()                           {}
-func (*UnknownUnionMember) isSnowflakeTableSchema()                           {}
-func (*UnknownUnionMember) isTableReference()                                 {}
+func (*UnknownUnionMember) isAnalysisRulePolicy()                                  {}
+func (*UnknownUnionMember) isAnalysisRulePolicyV1()                                {}
+func (*UnknownUnionMember) isAnalysisSource()                                      {}
+func (*UnknownUnionMember) isAnalysisSourceMetadata()                              {}
+func (*UnknownUnionMember) isComputeConfiguration()                                {}
+func (*UnknownUnionMember) isConfigurationDetails()                                {}
+func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicy()                   {}
+func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicyV1()                 {}
+func (*UnknownUnionMember) isConfiguredTableAssociationAnalysisRulePolicy()        {}
+func (*UnknownUnionMember) isConfiguredTableAssociationAnalysisRulePolicyV1()      {}
+func (*UnknownUnionMember) isConsolidatedPolicy()                                  {}
+func (*UnknownUnionMember) isConsolidatedPolicyV1()                                {}
+func (*UnknownUnionMember) isMembershipProtectedJobOutputConfiguration()           {}
+func (*UnknownUnionMember) isMembershipProtectedQueryOutputConfiguration()         {}
+func (*UnknownUnionMember) isPreviewPrivacyImpactParametersInput()                 {}
+func (*UnknownUnionMember) isPrivacyBudget()                                       {}
+func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersInput()                {}
+func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersOutput()               {}
+func (*UnknownUnionMember) isPrivacyBudgetTemplateUpdateParameters()               {}
+func (*UnknownUnionMember) isPrivacyImpact()                                       {}
+func (*UnknownUnionMember) isProtectedJobConfigurationDetails()                    {}
+func (*UnknownUnionMember) isProtectedJobOutput()                                  {}
+func (*UnknownUnionMember) isProtectedJobOutputConfigurationInput()                {}
+func (*UnknownUnionMember) isProtectedJobOutputConfigurationOutput()               {}
+func (*UnknownUnionMember) isProtectedQueryDistributeOutputConfigurationLocation() {}
+func (*UnknownUnionMember) isProtectedQueryOutput()                                {}
+func (*UnknownUnionMember) isProtectedQueryOutputConfiguration()                   {}
+func (*UnknownUnionMember) isQueryConstraint()                                     {}
+func (*UnknownUnionMember) isSchemaTypeProperties()                                {}
+func (*UnknownUnionMember) isSnowflakeTableSchema()                                {}
+func (*UnknownUnionMember) isTableReference()                                      {}

@@ -684,6 +684,25 @@ func (NodeType) Values() []NodeType {
 	}
 }
 
+type OrchestrationType string
+
+// Enum values for OrchestrationType
+const (
+	OrchestrationTypeDefault             OrchestrationType = "DEFAULT"
+	OrchestrationTypeCustomOrchestration OrchestrationType = "CUSTOM_ORCHESTRATION"
+)
+
+// Values returns all known values for OrchestrationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrchestrationType) Values() []OrchestrationType {
+	return []OrchestrationType{
+		"DEFAULT",
+		"CUSTOM_ORCHESTRATION",
+	}
+}
+
 type ParameterType string
 
 // Enum values for ParameterType

@@ -1,0 +1,8 @@
+{
+    "id": "f45e2f01-bed4-4293-a338-c188375f746e",
+    "type": "feature",
+    "description": "This release adds support for ProtectedQuery results to be delivered to more than one collaboration member via the new distribute output configuration in StartProtectedQuery.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

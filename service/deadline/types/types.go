@@ -454,6 +454,16 @@ type CustomerManagedFleetConfiguration struct {
 	// The storage profile ID.
 	StorageProfileId *string
 
+	// Specifies whether tags associated with a fleet are attached to workers when the
+	// worker is launched.
+	//
+	// When the tagPropagationMode is set to PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH any
+	// tag associated with a fleet is attached to workers when they launch. If the tags
+	// for a fleet change, the tags associated with running workers do not change.
+	//
+	// If you don't specify tagPropagationMode , the default is NO_PROPAGATION .
+	TagPropagationMode TagPropagationMode
+
 	noSmithyDocumentSerde
 }
 

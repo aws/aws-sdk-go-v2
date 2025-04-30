@@ -1176,6 +1176,11 @@ func awsRestjson1_serializeOpDocumentInvokeInlineAgentInput(v *InvokeInlineAgent
 		ok.String(string(v.AgentCollaboration))
 	}
 
+	if v.AgentName != nil {
+		ok := object.Key("agentName")
+		ok.String(*v.AgentName)
+	}
+
 	if v.BedrockModelConfigurations != nil {
 		ok := object.Key("bedrockModelConfigurations")
 		if err := awsRestjson1_serializeDocumentInlineBedrockModelConfigurations(v.BedrockModelConfigurations, ok); err != nil {
@@ -1200,6 +1205,13 @@ func awsRestjson1_serializeOpDocumentInvokeInlineAgentInput(v *InvokeInlineAgent
 	if v.CustomerEncryptionKeyArn != nil {
 		ok := object.Key("customerEncryptionKeyArn")
 		ok.String(*v.CustomerEncryptionKeyArn)
+	}
+
+	if v.CustomOrchestration != nil {
+		ok := object.Key("customOrchestration")
+		if err := awsRestjson1_serializeDocumentCustomOrchestration(v.CustomOrchestration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.EnableTrace != nil {
@@ -1251,6 +1263,11 @@ func awsRestjson1_serializeOpDocumentInvokeInlineAgentInput(v *InvokeInlineAgent
 		if err := awsRestjson1_serializeDocumentKnowledgeBases(v.KnowledgeBases, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.OrchestrationType) > 0 {
+		ok := object.Key("orchestrationType")
+		ok.String(string(v.OrchestrationType))
 	}
 
 	if v.PromptOverrideConfiguration != nil {
@@ -2996,6 +3013,20 @@ func awsRestjson1_serializeDocumentConversationHistory(v *types.ConversationHist
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCustomOrchestration(v *types.CustomOrchestration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Executor != nil {
+		ok := object.Key("executor")
+		if err := awsRestjson1_serializeDocumentOrchestrationExecutor(v.Executor, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentExternalSource(v *types.ExternalSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4073,6 +4104,22 @@ func awsRestjson1_serializeDocumentOrchestrationConfiguration(v *types.Orchestra
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOrchestrationExecutor(v types.OrchestrationExecutor, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.OrchestrationExecutorMemberLambda:
+		av := object.Key("lambda")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 

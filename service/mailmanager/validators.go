@@ -1873,6 +1873,11 @@ func validateRuleAction(v types.RuleAction) error {
 			invalidParams.AddNested("[DeliverToQBusiness]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.RuleActionMemberPublishToSns:
+		if err := validateSnsAction(&uv.Value); err != nil {
+			invalidParams.AddNested("[PublishToSns]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.RuleActionMemberRelay:
 		if err := validateRelayAction(&uv.Value); err != nil {
 			invalidParams.AddNested("[Relay]", err.(smithy.InvalidParamsError))
@@ -2226,6 +2231,24 @@ func validateSendAction(v *types.SendAction) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendAction"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnsAction(v *types.SnsAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnsAction"}
+	if v.TopicArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
+	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}

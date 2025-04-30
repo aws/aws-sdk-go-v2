@@ -172,7 +172,7 @@ type CustomizationConfig interface {
 	isCustomizationConfig()
 }
 
-// The distillation configuration for the custom model.
+// The Distillation configuration for the custom model.
 type CustomizationConfigMemberDistillationConfig struct {
 	Value DistillationConfig
 
@@ -304,6 +304,22 @@ type CustomModelUnits struct {
 	// The version of the custom model unit. Use to determine the billing rate for the
 	// custom model unit.
 	CustomModelUnitsVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// For a Distillation job, the status details for the data processing sub-task of
+// the job.
+type DataProcessingDetails struct {
+
+	// The start time of the data processing sub-task of the job.
+	CreationTime *time.Time
+
+	// The latest update to the data processing sub-task of the job.
+	LastModifiedTime *time.Time
+
+	// The status of the data processing sub-task of the job.
+	Status JobStatusDetails
 
 	noSmithyDocumentSerde
 }
@@ -2577,6 +2593,9 @@ type ModelCustomizationJobSummary struct {
 	// Time that the customization job was last modified.
 	LastModifiedTime *time.Time
 
+	// Details about the status of the data processing sub-task of the job.
+	StatusDetails *StatusDetails
+
 	noSmithyDocumentSerde
 }
 
@@ -3493,6 +3512,34 @@ type SageMakerEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+// For a Distillation job, the status details for sub-tasks of the job. Possible
+// statuses for each sub-task include the following:
+//
+//   - NotStarted
+//
+//   - InProgress
+//
+//   - Completed
+//
+//   - Stopping
+//
+//   - Stopped
+//
+//   - Failed
+type StatusDetails struct {
+
+	// The status details for the data processing sub-task of the job.
+	DataProcessingDetails *DataProcessingDetails
+
+	// The status details for the training sub-task of the job.
+	TrainingDetails *TrainingDetails
+
+	// The status details for the validation sub-task of the job.
+	ValidationDetails *ValidationDetails
+
+	noSmithyDocumentSerde
+}
+
 // Definition of the key/value pair for a tag.
 type Tag struct {
 
@@ -3567,6 +3614,21 @@ type TrainingDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+// For a Distillation job, the status details for the training sub-task of the job.
+type TrainingDetails struct {
+
+	// The start time of the training sub-task of the job.
+	CreationTime *time.Time
+
+	// The latest update to the training sub-task of the job.
+	LastModifiedTime *time.Time
+
+	// The status of the training sub-task of the job.
+	Status JobStatusDetails
+
+	noSmithyDocumentSerde
+}
+
 // Metrics associated with the custom job.
 type TrainingMetrics struct {
 
@@ -3583,6 +3645,22 @@ type ValidationDataConfig struct {
 	//
 	// This member is required.
 	Validators []Validator
+
+	noSmithyDocumentSerde
+}
+
+// For a Distillation job, the status details for the validation sub-task of the
+// job.
+type ValidationDetails struct {
+
+	// The start time of the validation sub-task of the job.
+	CreationTime *time.Time
+
+	// The latest update to the validation sub-task of the job.
+	LastModifiedTime *time.Time
+
+	// The status of the validation sub-task of the job.
+	Status JobStatusDetails
 
 	noSmithyDocumentSerde
 }

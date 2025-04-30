@@ -1,0 +1,8 @@
+{
+    "id": "e4df35ab-7819-4918-82a6-dd49075931f8",
+    "type": "feature",
+    "description": "Adds support for tag management on workers and tag inheritance from fleets to their associated workers.",
+    "modules": [
+        "service/deadline"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "6d1c9a9a-cb40-45a0-83e3-edfc1d60d679",
+    "type": "feature",
+    "description": "Features:    Add inline code node to prompt flow",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

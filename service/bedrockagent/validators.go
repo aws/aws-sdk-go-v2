@@ -2445,6 +2445,11 @@ func validateFlowNodeConfiguration(v types.FlowNodeConfiguration) error {
 			invalidParams.AddNested("[condition]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.FlowNodeConfigurationMemberInlineCode:
+		if err := validateInlineCodeFlowNodeConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[inlineCode]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.FlowNodeConfigurationMemberKnowledgeBase:
 		if err := validateKnowledgeBaseFlowNodeConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[knowledgeBase]", err.(smithy.InvalidParamsError))
@@ -2731,6 +2736,24 @@ func validateIngestionJobSortBy(v *types.IngestionJobSortBy) error {
 	}
 	if len(v.Order) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Order"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInlineCodeFlowNodeConfiguration(v *types.InlineCodeFlowNodeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InlineCodeFlowNodeConfiguration"}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if len(v.Language) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

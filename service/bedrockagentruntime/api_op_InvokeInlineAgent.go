@@ -80,6 +80,9 @@ type InvokeInlineAgentInput struct {
 	// agent can also be the supervisor.
 	AgentCollaboration types.AgentCollaboration
 
+	// The name for the agent.
+	AgentName *string
+
 	// Model settings for the request.
 	BedrockModelConfigurations *types.InlineBedrockModelConfigurations
 
@@ -90,6 +93,9 @@ type InvokeInlineAgentInput struct {
 
 	//  List of collaborator inline agents.
 	Collaborators []types.Collaborator
+
+	// Contains details of the custom orchestration configured for the agent.
+	CustomOrchestration *types.CustomOrchestration
 
 	//  The Amazon Resource Name (ARN) of the Amazon Web Services KMS key to use to
 	// encrypt your inline agent.
@@ -137,6 +143,10 @@ type InvokeInlineAgentInput struct {
 
 	//  Contains information of the knowledge bases to associate with.
 	KnowledgeBases []types.KnowledgeBase
+
+	// Specifies the type of orchestration strategy for the agent. This is set to
+	// DEFAULT orchestration type, by default.
+	OrchestrationType types.OrchestrationType
 
 	//  Configurations for advanced prompts used to override the default prompts to
 	// enhance the accuracy of the inline agent.

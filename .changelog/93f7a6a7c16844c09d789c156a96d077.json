@@ -1,0 +1,8 @@
+{
+    "id": "93f7a6a7-c168-44c0-9d78-9c156a96d077",
+    "type": "feature",
+    "description": "CloudWatch Logs supports \"DELIVERY\" log class. This log class is used only for delivering AWS Lambda logs to Amazon S3 or Amazon Data Firehose.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

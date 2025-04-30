@@ -1,0 +1,8 @@
+{
+    "id": "ee2c1b17-22f0-49dd-a416-3cb2be6b8034",
+    "type": "feature",
+    "description": "You can now specify a cross region inference profile as a teacher model for the CreateModelCustomizationJob API. Additionally, the GetModelCustomizationJob API has been enhanced to return the sub-task statuses of a customization job within the StatusDetails response field.",
+    "modules": [
+        "service/bedrock"
+    ]
+}

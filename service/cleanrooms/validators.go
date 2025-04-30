@@ -2918,6 +2918,66 @@ func validateProtectedJobS3OutputConfigurationInput(v *types.ProtectedJobS3Outpu
 	}
 }
 
+func validateProtectedQueryDistributeOutputConfiguration(v *types.ProtectedQueryDistributeOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectedQueryDistributeOutputConfiguration"}
+	if v.Locations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Locations"))
+	} else if v.Locations != nil {
+		if err := validateProtectedQueryDistributeOutputConfigurationLocations(v.Locations); err != nil {
+			invalidParams.AddNested("Locations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProtectedQueryDistributeOutputConfigurationLocation(v types.ProtectedQueryDistributeOutputConfigurationLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectedQueryDistributeOutputConfigurationLocation"}
+	switch uv := v.(type) {
+	case *types.ProtectedQueryDistributeOutputConfigurationLocationMemberMember:
+		if err := validateProtectedQueryMemberOutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[member]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProtectedQueryDistributeOutputConfigurationLocationMemberS3:
+		if err := validateProtectedQueryS3OutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProtectedQueryDistributeOutputConfigurationLocations(v []types.ProtectedQueryDistributeOutputConfigurationLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectedQueryDistributeOutputConfigurationLocations"}
+	for i := range v {
+		if err := validateProtectedQueryDistributeOutputConfigurationLocation(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProtectedQueryMemberOutputConfiguration(v *types.ProtectedQueryMemberOutputConfiguration) error {
 	if v == nil {
 		return nil
@@ -2939,6 +2999,11 @@ func validateProtectedQueryOutputConfiguration(v types.ProtectedQueryOutputConfi
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProtectedQueryOutputConfiguration"}
 	switch uv := v.(type) {
+	case *types.ProtectedQueryOutputConfigurationMemberDistribute:
+		if err := validateProtectedQueryDistributeOutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[distribute]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ProtectedQueryOutputConfigurationMemberMember:
 		if err := validateProtectedQueryMemberOutputConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[member]", err.(smithy.InvalidParamsError))

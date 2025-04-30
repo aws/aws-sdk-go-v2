@@ -318,6 +318,9 @@ func ExampleRuleAction_outputUsage() {
 	case *types.RuleActionMemberDrop:
 		_ = v.Value // Value is types.DropAction
 
+	case *types.RuleActionMemberPublishToSns:
+		_ = v.Value // Value is types.SnsAction
+
 	case *types.RuleActionMemberRelay:
 		_ = v.Value // Value is types.RelayAction
 
@@ -348,6 +351,7 @@ var _ *types.RelayAction
 var _ *types.DeliverToQBusinessAction
 var _ *types.ReplaceRecipientAction
 var _ *types.S3Action
+var _ *types.SnsAction
 
 func ExampleRuleBooleanToEvaluate_outputUsage() {
 	var union types.RuleBooleanToEvaluate

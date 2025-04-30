@@ -121,7 +121,7 @@ type CreateAgentActionGroupInput struct {
 	//
 	//   - ANTHROPIC.Bash - Gives the agent permission to run commands in a bash shell.
 	//
-	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
 	ParentActionGroupSignature types.ActionGroupSignature
 
 	// The configuration settings for a computer use action.
@@ -130,7 +130,7 @@ type CreateAgentActionGroupInput struct {
 	// with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more
 	// information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools].
 	//
-	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
 	ParentActionGroupSignatureParams map[string]string
 
 	noSmithyDocumentSerde
