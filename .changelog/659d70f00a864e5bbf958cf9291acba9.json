@@ -1,8 +1,0 @@
-{
-    "id": "659d70f0-0a86-4e5b-bf95-8cf9291acba9",
-    "type": "feature",
-    "description": "Introducing new RuleSet rule PublishToSns action, which allows customers to publish email notifications to an Amazon SNS topic. New PublishToSns action enables customers to easily integrate their email workflows via Amazon SNS, allowing them to notify other systems about important email events.",
-    "modules": [
-        "service/mailmanager"
-    ]
-}

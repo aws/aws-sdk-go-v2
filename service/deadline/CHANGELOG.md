@@ -1,3 +1,7 @@
+# v1.11.0 (2025-04-30)
+
+* **Feature**: Adds support for tag management on workers and tag inheritance from fleets to their associated workers.
+
 # v1.10.1 (2025-04-03)
 
 * No change notes available for this release.

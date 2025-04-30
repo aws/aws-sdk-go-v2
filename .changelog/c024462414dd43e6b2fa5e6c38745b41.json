@@ -1,8 +1,0 @@
-{
-    "id": "c0244624-14dd-43e6-b2fa-5e6c38745b41",
-    "type": "feature",
-    "description": "Adds dualstack support for Amazon Elastic Container Registry (Amazon ECR).",
-    "modules": [
-        "service/ecr"
-    ]
-}

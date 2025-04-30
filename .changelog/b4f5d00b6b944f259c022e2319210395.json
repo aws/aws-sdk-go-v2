@@ -1,8 +1,0 @@
-{
-    "id": "b4f5d00b-6b94-4f25-9c02-2e2319210395",
-    "type": "feature",
-    "description": "Launch of cost distribution feature for IPAM owners to distribute costs to internal teams.",
-    "modules": [
-        "service/ec2"
-    ]
-}

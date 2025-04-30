@@ -1,3 +1,7 @@
+# v1.25.0 (2025-04-30)
+
+* **Feature**: This release adds support for ProtectedQuery results to be delivered to more than one collaboration member via the new distribute output configuration in StartProtectedQuery.
+
 # v1.24.1 (2025-04-03)
 
 * No change notes available for this release.

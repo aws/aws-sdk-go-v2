@@ -1,3 +1,7 @@
+# v1.42.0 (2025-04-30)
+
+* **Feature**: Features:    Add inline code node to prompt flow
+
 # v1.41.0 (2025-04-03)
 
 * **Feature**: Added optional "customMetadataField" for Amazon Aurora knowledge bases, allowing single-column metadata. Also added optional "textIndexName" for MongoDB Atlas knowledge bases, enabling hybrid search support.

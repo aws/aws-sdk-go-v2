@@ -1,3 +1,34 @@
+# Release (2025-04-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.19.0](feature/dynamodb/attributevalue/CHANGELOG.md#v1190-2025-04-30)
+  * **Feature**: added support for json to/from types.AttributeValue for DynamoDB and DynamoDB Streams
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.18.0](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v1180-2025-04-30)
+  * **Feature**: added support for json to/from types.AttributeValue for DynamoDB and DynamoDB Streams
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.33.0](service/bedrock/CHANGELOG.md#v1330-2025-04-30)
+  * **Feature**: You can now specify a cross region inference profile as a teacher model for the CreateModelCustomizationJob API. Additionally, the GetModelCustomizationJob API has been enhanced to return the sub-task statuses of a customization job within the StatusDetails response field.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.42.0](service/bedrockagent/CHANGELOG.md#v1420-2025-04-30)
+  * **Feature**: Features:    Add inline code node to prompt flow
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.42.0](service/bedrockagentruntime/CHANGELOG.md#v1420-2025-04-30)
+  * **Feature**: Support for Custom Orchestration within InlineAgents
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.25.0](service/cleanrooms/CHANGELOG.md#v1250-2025-04-30)
+  * **Feature**: This release adds support for ProtectedQuery results to be delivered to more than one collaboration member via the new distribute output configuration in StartProtectedQuery.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.48.0](service/cloudwatchlogs/CHANGELOG.md#v1480-2025-04-30)
+  * **Feature**: CloudWatch Logs supports "DELIVERY" log class. This log class is used only for delivering AWS Lambda logs to Amazon S3 or Amazon Data Firehose.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.11.0](service/deadline/CHANGELOG.md#v1110-2025-04-30)
+  * **Feature**: Adds support for tag management on workers and tag inheritance from fleets to their associated workers.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.213.0](service/ec2/CHANGELOG.md#v12130-2025-04-30)
+  * **Feature**: Launch of cost distribution feature for IPAM owners to distribute costs to internal teams.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.44.0](service/ecr/CHANGELOG.md#v1440-2025-04-30)
+  * **Feature**: Adds dualstack support for Amazon Elastic Container Registry (Amazon ECR).
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.33.0](service/ecrpublic/CHANGELOG.md#v1330-2025-04-30)
+  * **Feature**: Adds dualstack support for Amazon Elastic Container Registry Public (Amazon ECR Public).
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.13.0](service/mailmanager/CHANGELOG.md#v1130-2025-04-30)
+  * **Feature**: Introducing new RuleSet rule PublishToSns action, which allows customers to publish email notifications to an Amazon SNS topic. New PublishToSns action enables customers to easily integrate their email workflows via Amazon SNS, allowing them to notify other systems about important email events.
+
 # Release (2025-04-29)
 
 ## Module Highlights
