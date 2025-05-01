@@ -113,6 +113,23 @@ type AgentHierarchyGroups struct {
 // Information about the agent who accepted the contact.
 type AgentInfo struct {
 
+	// The difference in time, in whole seconds, between AfterContactWorkStartTimestamp
+	// and AfterContactWorkEndTimestamp .
+	AfterContactWorkDuration *int32
+
+	// The date and time when the agent ended After Contact Work for the contact, in
+	// UTC time. In cases when agent finishes doing AfterContactWork for chat contacts
+	// and switches their activity status to offline or equivalent without clearing the
+	// contact in CCP, discrepancies may be noticed for AfterContactWorkEndTimestamp .
+	AfterContactWorkEndTimestamp *time.Time
+
+	// The date and time when the agent started doing After Contact Work for the
+	// contact, in UTC time.
+	AfterContactWorkStartTimestamp *time.Time
+
+	// The total hold duration in seconds initiated by the agent.
+	AgentInitiatedHoldDuration *int32
+
 	// Agent pause duration for a contact in seconds.
 	AgentPauseDurationInSeconds *int32
 
@@ -134,6 +151,9 @@ type AgentInfo struct {
 
 	// The identifier of the agent who accepted the contact.
 	Id *string
+
+	// List of StateTransition for a supervisor.
+	StateTransitions []StateTransition
 
 	noSmithyDocumentSerde
 }
@@ -960,6 +980,9 @@ type Contact struct {
 	// The Amazon Resource Name (ARN) for the contact.
 	Arn *string
 
+	// The attributes of the contact.
+	Attributes map[string]string
+
 	// Information associated with a campaign.
 	Campaign *Campaign
 
@@ -972,6 +995,14 @@ type Contact struct {
 	// This is the root contactId which is used as a unique identifier for all
 	// subsequent contacts in a contact tree.
 	ContactAssociationId *string
+
+	// A map of string key/value pairs that contain user-defined attributes which are
+	// lightly typed within the contact. This object is used only for task contacts.
+	ContactDetails *ContactDetails
+
+	// Information about the contact evaluations where the key is the FormId, which is
+	// a unique identifier for the form.
+	ContactEvaluations map[string]ContactEvaluation
 
 	// Information about the Customer on the contact.
 	Customer *Customer
@@ -994,6 +1025,9 @@ type Contact struct {
 
 	// Information about the call disconnect experience.
 	DisconnectDetails *DisconnectDetails
+
+	// The disconnect reason for the contact.
+	DisconnectReason *string
 
 	// The date and time that the customer endpoint disconnected from the current
 	// contact, in UTC time. In transfer scenarios, the DisconnectTimestamp of the
@@ -1052,6 +1086,9 @@ type Contact struct {
 	// specified if the QueuePriority is specified. Must be statically defined and a
 	// valid integer value.
 	QueueTimeAdjustmentSeconds *int32
+
+	// If recording was enabled, this is information about the recordings.
+	Recordings []RecordingInfo
 
 	// The contactId that is [related] to this contact.
 	//
@@ -1148,6 +1185,47 @@ type ContactDataRequest struct {
 	// Endpoint associated with the Amazon Connect instance from which outbound
 	// contact will be initiated for the campaign.
 	SystemEndpoint *Endpoint
+
+	noSmithyDocumentSerde
+}
+
+// A map of string key/value pairs that contain user-defined attributes which are
+// lightly typed within the contact. This object is used only for task contacts.
+type ContactDetails struct {
+
+	// Teh description of the contact details.
+	Description *string
+
+	// The name of the contact details.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the contact evaluations where the key is the FormId, which is
+// a unique identifier for the form.
+type ContactEvaluation struct {
+
+	// The date and time when the evaluation was deleted, in UTC time.
+	DeleteTimestamp *time.Time
+
+	// The date and time when the evaluation was submitted, in UTC time.
+	EndTimestamp *time.Time
+
+	// The Amazon Resource Name for the evaluation form. It is always present.
+	EvaluationArn *string
+
+	// The path where evaluation was exported.
+	ExportLocation *string
+
+	// The FormId of the contact evaluation.
+	FormId *string
+
+	// The date and time when the evaluation was started, in UTC time.
+	StartTimestamp *time.Time
+
+	// The status of the evaluation.
+	Status Status
 
 	noSmithyDocumentSerde
 }
@@ -1631,9 +1709,9 @@ type CrossChannelBehavior struct {
 }
 
 // Contains information about a real-time metric. For a description of each
-// metric, see [Real-time Metrics Definitions]in the Amazon Connect Administrator Guide.
+// metric, see [Metrics definitions]in the Amazon Connect Administrator Guide.
 //
-// [Real-time Metrics Definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
+// [Metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
 type CurrentMetric struct {
 
 	// The name of the metric.
@@ -3149,9 +3227,9 @@ type HierarchyStructureUpdate struct {
 }
 
 // Contains information about a historical metric. For a description of each
-// metric, see [Historical Metrics Definitions]in the Amazon Connect Administrator Guide.
+// metric, see [Metrics definitions]in the Amazon Connect Administrator Guide.
 //
-// [Historical Metrics Definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
+// [Metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
 type HistoricalMetric struct {
 
 	// The name of the metric.
@@ -3930,7 +4008,7 @@ type MetricFilterV2 struct {
 	//
 	// [Bot intents completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed-metric
 	// [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
-	// [Flow outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-historical
+	// [Flow outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome
 	// [Bot conversations completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed-metric
 	MetricFilterValues []string
 
@@ -5269,6 +5347,58 @@ type RealTimeContactAnalysisTranscriptItemWithContent struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a voice recording, chat transcript, or screen recording.
+type RecordingInfo struct {
+
+	// If the recording/transcript was deleted, this is the reason entered for the
+	// deletion.
+	DeletionReason *string
+
+	// The number that identifies the Kinesis Video Streams fragment where the
+	// customer audio stream started.
+	FragmentStartNumber *string
+
+	// The number that identifies the Kinesis Video Streams fragment where the
+	// customer audio stream stopped.
+	FragmentStopNumber *string
+
+	// The location, in Amazon S3, for the recording/transcript.
+	Location *string
+
+	// Information about the media stream used during the conversation.
+	MediaStreamType MediaStreamType
+
+	// Information about the conversation participant, whether they are an agent or
+	// contact. The participant types are as follows:
+	//
+	//   - All
+	//
+	//   - Manager
+	//
+	//   - Agent
+	//
+	//   - Customer
+	//
+	//   - Thirdparty
+	//
+	//   - Supervisor
+	ParticipantType ParticipantType
+
+	// When the conversation of the last leg of the recording started in UTC time.
+	StartTimestamp *time.Time
+
+	// The status of the recording/transcript.
+	Status RecordingStatus
+
+	// When the conversation of the last leg of recording stopped in UTC time.
+	StopTimestamp *time.Time
+
+	// Where the recording/transcript is stored.
+	StorageType StorageType
+
+	noSmithyDocumentSerde
+}
+
 // Well-formed data on a contact, used by agents to complete a contact request.
 // You can have up to 4,096 UTF-8 bytes across all references for a contact.
 type Reference struct {
@@ -6337,6 +6467,21 @@ type SourceCampaign struct {
 
 	// A unique identifier for a each request part of same campaign.
 	OutboundRequestId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the state transition of a supervisor.
+type StateTransition struct {
+
+	// The state of the transition.
+	State ParticipantState
+
+	// The date and time when the state ended in UTC time.
+	StateEndTimestamp *time.Time
+
+	// The date and time when the state started in UTC time.
+	StateStartTimestamp *time.Time
 
 	noSmithyDocumentSerde
 }

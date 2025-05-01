@@ -55,6 +55,10 @@ type UpdateConfigurationProfileInput struct {
 
 	// The ARN of an IAM role with permission to access the configuration at the
 	// specified LocationUri .
+	//
+	// A retrieval role ARN is not required for configurations stored in CodePipeline
+	// or the AppConfig hosted configuration store. It is required for all other
+	// sources that store your configuration.
 	RetrievalRoleArn *string
 
 	// A list of methods for validating the configuration.

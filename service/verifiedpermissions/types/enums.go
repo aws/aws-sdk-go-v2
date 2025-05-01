@@ -21,6 +21,25 @@ func (BatchGetPolicyErrorCode) Values() []BatchGetPolicyErrorCode {
 	}
 }
 
+type CedarVersion string
+
+// Enum values for CedarVersion
+const (
+	CedarVersionCedar2 CedarVersion = "CEDAR_2"
+	CedarVersionCedar4 CedarVersion = "CEDAR_4"
+)
+
+// Values returns all known values for CedarVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CedarVersion) Values() []CedarVersion {
+	return []CedarVersion{
+		"CEDAR_2",
+		"CEDAR_4",
+	}
+}
+
 type Decision string
 
 // Enum values for Decision

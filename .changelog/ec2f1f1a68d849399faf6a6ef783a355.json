@@ -1,0 +1,8 @@
+{
+    "id": "ec2f1f1a-68d8-4939-9faf-6a6ef783a355",
+    "type": "feature",
+    "description": "Adding waiter support for deployments and environments; documentation updates",
+    "modules": [
+        "service/appconfig"
+    ]
+}

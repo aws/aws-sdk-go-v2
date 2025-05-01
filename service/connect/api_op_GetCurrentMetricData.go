@@ -14,10 +14,10 @@ import (
 
 // Gets the real-time metric data from the specified Amazon Connect instance.
 //
-// For a description of each metric, see [Real-time Metrics Definitions] in the Amazon Connect Administrator
+// For a description of each metric, see [Metrics definitions] in the Amazon Connect Administrator
 // Guide.
 //
-// [Real-time Metrics Definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
+// [Metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
 func (c *Client) GetCurrentMetricData(ctx context.Context, params *GetCurrentMetricDataInput, optFns ...func(*Options)) (*GetCurrentMetricDataOutput, error) {
 	if params == nil {
 		params = &GetCurrentMetricDataInput{}
@@ -36,7 +36,7 @@ func (c *Client) GetCurrentMetricData(ctx context.Context, params *GetCurrentMet
 type GetCurrentMetricDataInput struct {
 
 	// The metrics to retrieve. Specify the name and unit for each metric. The
-	// following metrics are available. For a description of all the metrics, see [Real-time Metrics Definitions]in
+	// following metrics are available. For a description of all the metrics, see [Metrics definitions]in
 	// the Amazon Connect Administrator Guide.
 	//
 	// AGENTS_AFTER_CONTACT_WORK Unit: COUNT
@@ -106,19 +106,19 @@ type GetCurrentMetricDataInput struct {
 	//
 	// Name in real-time metrics report: [Availability]
 	//
-	// [Availability]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time
-	// [Staffed]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time
-	// [NPT (Non-Productive Time)]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time
-	// [Real-time Metrics Definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
-	// [Error]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time
-	// [Scheduled]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time
-	// [Oldest]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time
-	// [On contact]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time
-	// [Active]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time
-	// [ACW]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time
-	// [Available]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time
-	// [In queue]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time
-	// [Online]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time
+	// [Availability]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#availability-real-time
+	// [Staffed]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#staffed-real-time
+	// [NPT (Non-Productive Time)]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#non-productive-time-real-time
+	// [Error]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#error-real-time
+	// [Metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
+	// [Scheduled]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#scheduled-real-time
+	// [Oldest]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#oldest-real-time
+	// [On contact]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#on-call-real-time
+	// [Active]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#active-real-time
+	// [ACW]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#aftercallwork-real-time
+	// [Available]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#available-real-time
+	// [In queue]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#in-queue-real-time
+	// [Online]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#online-real-time
 	//
 	// This member is required.
 	CurrentMetrics []types.CurrentMetric

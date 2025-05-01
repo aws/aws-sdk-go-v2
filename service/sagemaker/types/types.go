@@ -158,6 +158,17 @@ type Alarm struct {
 	noSmithyDocumentSerde
 }
 
+// The details of the alarm to monitor during the AMI update.
+type AlarmDetails struct {
+
+	// The name of the alarm.
+	//
+	// This member is required.
+	AlarmName *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the training algorithm to use in a [CreateTrainingJob] request.
 //
 // SageMaker uses its own SageMaker account credentials to pull and access
@@ -2787,6 +2798,25 @@ type CapacitySize struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of the size measurements of the AMI update. Using this
+// configuration, you can specify whether SageMaker should update your instance
+// group by an amount or percentage of instances.
+type CapacitySizeConfig struct {
+
+	// Specifies whether SageMaker should process the update by amount or percentage
+	// of instances.
+	//
+	// This member is required.
+	Type NodeUnavailabilityType
+
+	// Specifies the amount or percentage of instances SageMaker updates at a time.
+	//
+	// This member is required.
+	Value *int32
+
+	noSmithyDocumentSerde
+}
+
 // Configuration specifying how to treat different headers. If no headers are
 // specified Amazon SageMaker AI will by default base64 encode when capturing the
 // data.
@@ -3294,6 +3324,10 @@ type ClusterInstanceGroupDetails struct {
 	// cluster.
 	OverrideVpcConfig *VpcConfig
 
+	// The configuration object of the schedule that SageMaker follows when updating
+	// the AMI.
+	ScheduledUpdateConfig *ScheduledUpdateConfig
+
 	// The current status of the cluster instance group.
 	//
 	//   - InService : The instance group is active and healthy.
@@ -3407,6 +3441,9 @@ type ClusterInstanceGroupSpecification struct {
 	// [Amazon VPC Creation Guide]: https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html
 	// [Custom Amazon VPC Setup for SageMaker HyperPod]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-optional-vpc
 	OverrideVpcConfig *VpcConfig
+
+	// The configuration object of the schedule that SageMaker uses to update the AMI.
+	ScheduledUpdateConfig *ScheduledUpdateConfig
 
 	// Specifies the value for Threads per core. For instance types that support
 	// multithreading, you can specify 1 for disabling multithreading and 2 for
@@ -3527,6 +3564,9 @@ type ClusterNodeDetails struct {
 	// The type of the instance.
 	InstanceType ClusterInstanceType
 
+	// The time of when the cluster was last updated.
+	LastSoftwareUpdateTime *time.Time
+
 	// The time when the instance is launched.
 	LaunchTime *time.Time
 
@@ -3587,6 +3627,10 @@ type ClusterNodeSummary struct {
 	//
 	// This member is required.
 	LaunchTime *time.Time
+
+	// The time of when SageMaker last updated the software of the instances in the
+	// cluster.
+	LastSoftwareUpdateTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -4834,6 +4878,23 @@ type DeploymentConfig struct {
 
 	// Specifies a rolling deployment strategy for updating a SageMaker endpoint.
 	RollingUpdatePolicy *RollingUpdatePolicy
+
+	noSmithyDocumentSerde
+}
+
+// The configuration to use when updating the AMI versions.
+type DeploymentConfiguration struct {
+
+	// An array that contains the alarms that SageMaker monitors to know whether to
+	// roll back the AMI update.
+	AutoRollbackConfiguration []AlarmDetails
+
+	// The policy that SageMaker uses when updating the AMI versions of the cluster.
+	RollingUpdatePolicy *RollingDeploymentPolicy
+
+	// The duration in seconds that SageMaker waits before updating more instances in
+	// the cluster.
+	WaitIntervalInSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -16454,6 +16515,22 @@ type RetryStrategy struct {
 	noSmithyDocumentSerde
 }
 
+// The configurations that SageMaker uses when updating the AMI versions.
+type RollingDeploymentPolicy struct {
+
+	// The maximum amount of instances in the cluster that SageMaker can update at a
+	// time.
+	//
+	// This member is required.
+	MaximumBatchSize *CapacitySizeConfig
+
+	// The maximum amount of instances in the cluster that SageMaker can roll back at
+	// a time.
+	RollbackMaximumBatchSize *CapacitySizeConfig
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a rolling deployment strategy for updating a SageMaker endpoint.
 type RollingUpdatePolicy struct {
 
@@ -16957,6 +17034,22 @@ type ScheduleConfig struct {
 	//
 	// If you set ScheduleExpression to NOW , this parameter is required.
 	DataAnalysisStartTime *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration object of the schedule that SageMaker follows when updating
+// the AMI.
+type ScheduledUpdateConfig struct {
+
+	// A cron expression that specifies the schedule that SageMaker follows when
+	// updating the AMI.
+	//
+	// This member is required.
+	ScheduleExpression *string
+
+	// The configuration to use when updating the AMI versions.
+	DeploymentConfig *DeploymentConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -20141,6 +20234,18 @@ type UiTemplateInfo struct {
 
 	// The URL for the user interface template.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that describes specifications of the instance groups to
+// update.
+type UpdateClusterSoftwareInstanceGroupSpecification struct {
+
+	// The name of the instance group to update.
+	//
+	// This member is required.
+	InstanceGroupName *string
 
 	noSmithyDocumentSerde
 }

@@ -48,8 +48,10 @@ type IsAuthorizedInput struct {
 	// authorization decisions.
 	Context types.ContextDefinition
 
-	// Specifies the list of resources and principals and their associated attributes
-	// that Verified Permissions can examine when evaluating the policies.
+	// (Optional) Specifies the list of resources and principals and their associated
+	// attributes that Verified Permissions can examine when evaluating the policies.
+	// These additional entities and their attributes can be referenced and checked by
+	// conditional elements in the policies in the specified policy store.
 	//
 	// You can include only principal and resource entities in this parameter; you
 	// can't include actions. You must specify actions in the schema.

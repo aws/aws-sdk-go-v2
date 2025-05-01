@@ -204,6 +204,35 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// No more tags be added because the limit (50) has been reached. To add new tags,
+// use UntagResource to remove existing tags.
+type TooManyTagsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ResourceName *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyTagsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyTagsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TooManyTagsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request failed because one or more input parameters don't satisfy their
 // constraint requirements. The output is provided as a list of fields and a reason
 // for each field that isn't valid.

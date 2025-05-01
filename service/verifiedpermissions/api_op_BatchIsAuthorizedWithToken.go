@@ -68,8 +68,10 @@ type BatchIsAuthorizedWithTokenInput struct {
 	// claim in the submitted token isn't access .
 	AccessToken *string
 
-	// Specifies the list of resources and their associated attributes that Verified
-	// Permissions can examine when evaluating the policies.
+	// (Optional) Specifies the list of resources and their associated attributes that
+	// Verified Permissions can examine when evaluating the policies. These additional
+	// entities and their attributes can be referenced and checked by conditional
+	// elements in the policies in the specified policy store.
 	//
 	// You can't include principals in this parameter, only resource and action
 	// entities. This parameter can't include any entities of a type that matches the

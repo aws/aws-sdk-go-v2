@@ -43571,6 +43571,64 @@ func awsRestjson1_deserializeDocumentAgentInfo(v **types.AgentInfo, value interf
 
 	for key, value := range shape {
 		switch key {
+		case "AfterContactWorkDuration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Duration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AfterContactWorkDuration = ptr.Int32(int32(i64))
+			}
+
+		case "AfterContactWorkEndTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AfterContactWorkEndTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "AfterContactWorkStartTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AfterContactWorkStartTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "AgentInitiatedHoldDuration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Duration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AgentInitiatedHoldDuration = ptr.Int32(int32(i64))
+			}
+
 		case "AgentPauseDurationInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -43622,6 +43680,11 @@ func awsRestjson1_deserializeDocumentAgentInfo(v **types.AgentInfo, value interf
 					return fmt.Errorf("expected AgentResourceId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "StateTransitions":
+			if err := awsRestjson1_deserializeDocumentStateTransitions(&sv.StateTransitions, value); err != nil {
+				return err
 			}
 
 		default:
@@ -46184,6 +46247,11 @@ func awsRestjson1_deserializeDocumentContact(v **types.Contact, value interface{
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "Attributes":
+			if err := awsRestjson1_deserializeDocumentAttributes(&sv.Attributes, value); err != nil {
+				return err
+			}
+
 		case "Campaign":
 			if err := awsRestjson1_deserializeDocumentCampaign(&sv.Campaign, value); err != nil {
 				return err
@@ -46223,6 +46291,16 @@ func awsRestjson1_deserializeDocumentContact(v **types.Contact, value interface{
 				sv.ContactAssociationId = ptr.String(jtv)
 			}
 
+		case "ContactDetails":
+			if err := awsRestjson1_deserializeDocumentContactDetails(&sv.ContactDetails, value); err != nil {
+				return err
+			}
+
+		case "ContactEvaluations":
+			if err := awsRestjson1_deserializeDocumentContactEvaluations(&sv.ContactEvaluations, value); err != nil {
+				return err
+			}
+
 		case "Customer":
 			if err := awsRestjson1_deserializeDocumentCustomer(&sv.Customer, value); err != nil {
 				return err
@@ -46259,6 +46337,15 @@ func awsRestjson1_deserializeDocumentContact(v **types.Contact, value interface{
 		case "DisconnectDetails":
 			if err := awsRestjson1_deserializeDocumentDisconnectDetails(&sv.DisconnectDetails, value); err != nil {
 				return err
+			}
+
+		case "DisconnectReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DisconnectReason = ptr.String(jtv)
 			}
 
 		case "DisconnectTimestamp":
@@ -46422,6 +46509,11 @@ func awsRestjson1_deserializeDocumentContact(v **types.Contact, value interface{
 				sv.QueueTimeAdjustmentSeconds = ptr.Int32(int32(i64))
 			}
 
+		case "Recordings":
+			if err := awsRestjson1_deserializeDocumentRecordings(&sv.Recordings, value); err != nil {
+				return err
+			}
+
 		case "RelatedContactId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -46504,6 +46596,205 @@ func awsRestjson1_deserializeDocumentContact(v **types.Contact, value interface{
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentContactDetails(v **types.ContactDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContactDetails
+	if *v == nil {
+		sv = &types.ContactDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContactDetailDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContactDetailName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentContactEvaluation(v **types.ContactEvaluation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContactEvaluation
+	if *v == nil {
+		sv = &types.ContactEvaluation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeleteTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DeleteTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "EndTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "EvaluationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EvaluationArn to be of type string, got %T instead", value)
+				}
+				sv.EvaluationArn = ptr.String(jtv)
+			}
+
+		case "ExportLocation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExportLocation to be of type string, got %T instead", value)
+				}
+				sv.ExportLocation = ptr.String(jtv)
+			}
+
+		case "FormId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FormId to be of type string, got %T instead", value)
+				}
+				sv.FormId = ptr.String(jtv)
+			}
+
+		case "StartTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
+				}
+				sv.Status = types.Status(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentContactEvaluations(v *map[string]types.ContactEvaluation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.ContactEvaluation
+	if *v == nil {
+		mv = map[string]types.ContactEvaluation{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.ContactEvaluation
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentContactEvaluation(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -59695,6 +59986,175 @@ func awsRestjson1_deserializeDocumentRealTimeContactAnalysisTranscriptItemWithCo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRecordingInfo(v **types.RecordingInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecordingInfo
+	if *v == nil {
+		sv = &types.RecordingInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeletionReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecordingDeletionReason to be of type string, got %T instead", value)
+				}
+				sv.DeletionReason = ptr.String(jtv)
+			}
+
+		case "FragmentStartNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FragmentNumber to be of type string, got %T instead", value)
+				}
+				sv.FragmentStartNumber = ptr.String(jtv)
+			}
+
+		case "FragmentStopNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FragmentNumber to be of type string, got %T instead", value)
+				}
+				sv.FragmentStopNumber = ptr.String(jtv)
+			}
+
+		case "Location":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecordingLocation to be of type string, got %T instead", value)
+				}
+				sv.Location = ptr.String(jtv)
+			}
+
+		case "MediaStreamType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MediaStreamType to be of type string, got %T instead", value)
+				}
+				sv.MediaStreamType = types.MediaStreamType(jtv)
+			}
+
+		case "ParticipantType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantType to be of type string, got %T instead", value)
+				}
+				sv.ParticipantType = types.ParticipantType(jtv)
+			}
+
+		case "StartTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecordingStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.RecordingStatus(jtv)
+			}
+
+		case "StopTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StopTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "StorageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageType to be of type string, got %T instead", value)
+				}
+				sv.StorageType = types.StorageType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRecordings(v *[]types.RecordingInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RecordingInfo
+	if *v == nil {
+		cv = []types.RecordingInfo{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RecordingInfo
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRecordingInfo(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentReference(v **types.Reference, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -62380,6 +62840,112 @@ func awsRestjson1_deserializeDocumentSlaFieldValueUnionList(v *[]types.FieldValu
 		var col types.FieldValueUnion
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentFieldValueUnion(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStateTransition(v **types.StateTransition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StateTransition
+	if *v == nil {
+		sv = &types.StateTransition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ParticipantState(jtv)
+			}
+
+		case "StateEndTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StateEndTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "StateStartTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StateStartTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStateTransitions(v *[]types.StateTransition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.StateTransition
+	if *v == nil {
+		cv = []types.StateTransition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.StateTransition
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentStateTransition(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

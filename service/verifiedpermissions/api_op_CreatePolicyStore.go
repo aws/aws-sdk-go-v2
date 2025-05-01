@@ -84,6 +84,9 @@ type CreatePolicyStoreInput struct {
 	// current policy store.
 	Description *string
 
+	// The list of key-value pairs to associate with the policy store.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

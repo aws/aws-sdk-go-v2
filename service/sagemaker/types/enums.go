@@ -4862,6 +4862,25 @@ func (MonitoringType) Values() []MonitoringType {
 	}
 }
 
+type NodeUnavailabilityType string
+
+// Enum values for NodeUnavailabilityType
+const (
+	NodeUnavailabilityTypeInstanceCount      NodeUnavailabilityType = "INSTANCE_COUNT"
+	NodeUnavailabilityTypeCapacityPercentage NodeUnavailabilityType = "CAPACITY_PERCENTAGE"
+)
+
+// Values returns all known values for NodeUnavailabilityType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NodeUnavailabilityType) Values() []NodeUnavailabilityType {
+	return []NodeUnavailabilityType{
+		"INSTANCE_COUNT",
+		"CAPACITY_PERCENTAGE",
+	}
+}
+
 type NotebookInstanceAcceleratorType string
 
 // Enum values for NotebookInstanceAcceleratorType
