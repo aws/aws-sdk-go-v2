@@ -1,3 +1,15 @@
+# Release (2025-05-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.38.0](service/appconfig/CHANGELOG.md#v1380-2025-05-01)
+  * **Feature**: Adding waiter support for deployments and environments; documentation updates
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.129.0](service/connect/CHANGELOG.md#v11290-2025-05-01)
+  * **Feature**: This release adds the following fields to DescribeContact: DisconnectReason, AgentInitiatedHoldDuration, AfterContactWorkStartTimestamp, AfterContactWorkEndTimestamp, AfterContactWorkDuration, StateTransitions, Recordings, ContactDetails, ContactEvaluations, Attributes
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.190.0](service/sagemaker/CHANGELOG.md#v11900-2025-05-01)
+  * **Feature**: Feature - Adding support for Scheduled and Rolling Update Software in Sagemaker Hyperpod.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.24.0](service/verifiedpermissions/CHANGELOG.md#v1240-2025-05-01)
+  * **Feature**: Amazon Verified Permissions / Features : Adds support for tagging policy stores.
+
 # Release (2025-04-30)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "92332df6-2cf7-4d3d-a826-1436c8cfaa4b",
-    "type": "feature",
-    "description": "This release adds the following fields to DescribeContact: DisconnectReason, AgentInitiatedHoldDuration, AfterContactWorkStartTimestamp, AfterContactWorkEndTimestamp, AfterContactWorkDuration, StateTransitions, Recordings, ContactDetails, ContactEvaluations, Attributes",
-    "modules": [
-        "service/connect"
-    ]
-}

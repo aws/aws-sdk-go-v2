@@ -1,3 +1,7 @@
+# v1.190.0 (2025-05-01)
+
+* **Feature**: Feature - Adding support for Scheduled and Rolling Update Software in Sagemaker Hyperpod.
+
 # v1.189.0 (2025-04-29)
 
 * **Feature**: Introduced support for P5en instance types on SageMaker Studio for JupyterLab and CodeEditor applications.

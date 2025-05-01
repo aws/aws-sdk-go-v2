@@ -1,8 +1,0 @@
-{
-    "id": "b9f10f65-417d-422b-be0f-97efdb9750db",
-    "type": "feature",
-    "description": "Amazon Verified Permissions / Features : Adds support for tagging policy stores.",
-    "modules": [
-        "service/verifiedpermissions"
-    ]
-}

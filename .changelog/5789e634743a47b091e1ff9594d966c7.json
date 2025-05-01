@@ -1,8 +1,0 @@
-{
-    "id": "5789e634-743a-47b0-91e1-ff9594d966c7",
-    "type": "feature",
-    "description": "Feature - Adding support for Scheduled and Rolling Update Software in Sagemaker Hyperpod.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
