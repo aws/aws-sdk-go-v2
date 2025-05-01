@@ -594,6 +594,22 @@
                 "smithy.api#documentation": "<p>An Amazon CloudWatch alarm configured to monitor metrics on an endpoint.</p>"
             }
         },
+        "com.amazonaws.sagemaker#AlarmDetails": {
+            "type": "structure",
+            "members": {
+                "AlarmName": {
+                    "target": "com.amazonaws.sagemaker#AlarmName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the alarm to monitor during the AMI update.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#AlarmList": {
             "type": "list",
             "member": {
@@ -4625,6 +4641,18 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#AutoRollbackAlarms": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#AlarmDetails"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.sagemaker#AutoRollbackConfig": {
             "type": "structure",
             "members": {
@@ -5571,6 +5599,30 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the type and size of the endpoint capacity to activate for a blue/green\n            deployment, a rolling deployment, or a rollback strategy. You can specify your batches\n            as either instance count or the overall percentage or your fleet.</p>\n         <p>For a rollback strategy, if you don't specify the fields in this object, or if you set\n            the <code>Value</code> to 100%, then SageMaker uses a blue/green rollback strategy and rolls\n            all traffic back to the blue fleet.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacitySizeConfig": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.sagemaker#NodeUnavailabilityType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies whether SageMaker should process the update by amount or percentage of instances.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#NodeUnavailabilityValue",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the amount or percentage of instances SageMaker updates at a time.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the size measurements of the AMI update. Using this\n         configuration, you can specify whether SageMaker should update your instance group\n         by an amount or percentage of instances.</p>"
             }
         },
         "com.amazonaws.sagemaker#CapacitySizeType": {
@@ -6970,6 +7022,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The customized Amazon VPC configuration at the instance group level that\n         overrides the default Amazon VPC configuration of the SageMaker HyperPod cluster.</p>"
                     }
+                },
+                "ScheduledUpdateConfig": {
+                    "target": "com.amazonaws.sagemaker#ScheduledUpdateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration object of the schedule that SageMaker follows when updating the AMI.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7063,6 +7121,12 @@
                     "target": "com.amazonaws.sagemaker#VpcConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>To configure multi-AZ deployments, customize the Amazon VPC configuration at the\n         instance group level. You can specify different subnets and security groups across\n         different AZs in the instance group specification to override a SageMaker HyperPod cluster's default\n            Amazon VPC configuration. For more information about deploying a cluster in\n         multiple AZs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-multiple-availability-zones\">Setting up SageMaker HyperPod clusters across multiple AZs</a>.</p>\n         <note>\n            <p>When your Amazon VPC and subnets support IPv6, network communications differ\n            based on the cluster orchestration platform:</p>\n            <ul>\n               <li>\n                  <p>Slurm-orchestrated clusters automatically configure nodes with dual IPv6 and\n                  IPv4 addresses, allowing immediate IPv6 network communications.</p>\n               </li>\n               <li>\n                  <p>In Amazon EKS-orchestrated clusters, nodes receive dual-stack\n                  addressing, but pods can only use IPv6 when the Amazon EKS cluster is\n                  explicitly IPv6-enabled. For information about deploying an IPv6 Amazon EKS cluster, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/deploy-ipv6-cluster.html#_deploy_an_ipv6_cluster_with_eksctl\">Amazon EKS IPv6 Cluster Deployment</a>.</p>\n               </li>\n            </ul>\n            <p>Additional resources for IPv6 configuration:</p>\n            <ul>\n               <li>\n                  <p>For information about adding IPv6 support to your VPC, see to <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html\">IPv6\n                     Support for VPC</a>.</p>\n               </li>\n               <li>\n                  <p>For information about creating a new IPv6-compatible VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html\">Amazon VPC Creation Guide</a>.</p>\n               </li>\n               <li>\n                  <p>To configure SageMaker HyperPod with a custom Amazon VPC, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-optional-vpc\">Custom Amazon VPC Setup for SageMaker HyperPod</a>.</p>\n               </li>\n            </ul>\n         </note>"
+                    }
+                },
+                "ScheduledUpdateConfig": {
+                    "target": "com.amazonaws.sagemaker#ScheduledUpdateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration object of the schedule that SageMaker uses to update the AMI.</p>"
                     }
                 }
             },
@@ -7961,6 +8025,12 @@
                         "smithy.api#documentation": "<p>The time when the instance is launched.</p>"
                     }
                 },
+                "LastSoftwareUpdateTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of when the cluster was last updated.</p>"
+                    }
+                },
                 "LifeCycleConfig": {
                     "target": "com.amazonaws.sagemaker#ClusterLifeCycleConfig",
                     "traits": {
@@ -8092,6 +8162,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The time when the instance is launched.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "LastSoftwareUpdateTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of when SageMaker last updated the software of the instances in the cluster.</p>"
                     }
                 },
                 "InstanceStatus": {
@@ -12068,7 +12144,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a hyperparameter tuning job. A hyperparameter tuning job finds the best version\n            of a model by running many training jobs on your dataset using the algorithm you choose\n            and values for hyperparameters within ranges that you specify. It then chooses the\n            hyperparameter values that result in a model that performs the best, as measured by an\n            objective metric that you choose.</p>\n         <p>A hyperparameter tuning job automatically creates Amazon SageMaker experiments, trials, and\n            trial components for each training job that it runs. You can view these entities in\n            Amazon SageMaker Studio. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/experiments-view-compare.html#experiments-view\">View\n                Experiments, Trials, and Trial Components</a>.</p>\n         <important>\n            <p>Do not include any security-sensitive information including account access IDs,\n                secrets or tokens in any hyperparameter field. If the use of security-sensitive\n                credentials are detected, SageMaker will reject your training job request and return an\n                exception error.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Starts a hyperparameter tuning job. A hyperparameter tuning job finds the best version\n            of a model by running many training jobs on your dataset using the algorithm you choose\n            and values for hyperparameters within ranges that you specify. It then chooses the\n            hyperparameter values that result in a model that performs the best, as measured by an\n            objective metric that you choose.</p>\n         <p>A hyperparameter tuning job automatically creates Amazon SageMaker experiments, trials, and\n            trial components for each training job that it runs. You can view these entities in\n            Amazon SageMaker Studio. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/experiments-view-compare.html#experiments-view\">View\n                Experiments, Trials, and Trial Components</a>.</p>\n         <important>\n            <p>Do not include any security-sensitive information including account access IDs, secrets, \n                or tokens in any hyperparameter fields. As part of the shared responsibility model, \n                you are responsible for any potential exposure, unauthorized access, or \n                compromise of your sensitive data if caused by any security-sensitive information included \n                in the request hyperparameter variable or plain text fields..</p>\n         </important>"
             }
         },
         "com.amazonaws.sagemaker#CreateHyperParameterTuningJobRequest": {
@@ -14601,7 +14677,7 @@
                 "Environment": {
                     "target": "com.amazonaws.sagemaker#ProcessingEnvironmentMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container. Up to 100 key and values\n            entries in the map are supported.</p>"
+                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container. Up to 100 key and values\n            entries in the map are supported.</p>\n         <important>\n            <p>Do not include any security-sensitive information including account access IDs, secrets, \n                or tokens in any environment fields. As part of the shared responsibility \n                model, you are responsible for any potential exposure, unauthorized access, or compromise of \n                your sensitive data if caused by security-sensitive information included in the \n                request environment variable or plain text fields.</p>\n         </important>"
                     }
                 },
                 "NetworkConfig": {
@@ -14621,7 +14697,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and\n                Cost Management User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and\n                Cost Management User Guide</i>.</p>\n         <important>\n            <p>Do not include any security-sensitive information including account access IDs, secrets, \n                or tokens in any tags. As part of the shared responsibility \n                model, you are responsible for any potential exposure, unauthorized access, or compromise of \n                your sensitive data if caused by security-sensitive information included in the \n                request tag variable or plain text fields.</p>\n         </important>"
                     }
                 },
                 "ExperimentConfig": {
@@ -14900,7 +14976,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a model training job. After training completes, SageMaker saves the resulting\n            model artifacts to an Amazon S3 location that you specify. </p>\n         <p>If you choose to host your model using SageMaker hosting services, you can use the\n            resulting model artifacts as part of the model. You can also use the artifacts in a\n            machine learning service other than SageMaker, provided that you know how to use them for\n            inference. \n        </p>\n         <p>In the request body, you provide the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>AlgorithmSpecification</code> - Identifies the training algorithm to\n                    use.\n                    </p>\n            </li>\n            <li>\n               <p>\n                  <code>HyperParameters</code> - Specify these algorithm-specific parameters to\n                    enable the estimation of model parameters during training. Hyperparameters can\n                    be tuned to optimize this learning process. For a list of hyperparameters for\n                    each training algorithm provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>\n               <important>\n                  <p>Do not include any security-sensitive information including account access\n                        IDs, secrets or tokens in any hyperparameter field. If the use of\n                        security-sensitive credentials are detected, SageMaker will reject your training\n                        job request and return an exception error.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <code>InputDataConfig</code> - Describes the input required by the training\n                    job and the Amazon S3, EFS, or FSx location where it is stored.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OutputDataConfig</code> - Identifies the Amazon S3 bucket where you want\n                    SageMaker to save the results of model training. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceConfig</code> - Identifies the resources, ML compute\n                    instances, and ML storage volumes to deploy for model training. In distributed\n                    training, you specify more than one instance. </p>\n            </li>\n            <li>\n               <p>\n                  <code>EnableManagedSpotTraining</code> - Optimize the cost of training machine\n                    learning models by up to 80% by using Amazon EC2 Spot instances. For more\n                    information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html\">Managed Spot\n                        Training</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>RoleArn</code> - The Amazon Resource Name (ARN) that SageMaker assumes to perform tasks on\n                    your behalf during model training.\n                    \n                    You must grant this role the necessary permissions so that SageMaker can successfully\n                    complete model training. </p>\n            </li>\n            <li>\n               <p>\n                  <code>StoppingCondition</code> - To help cap training costs, use\n                        <code>MaxRuntimeInSeconds</code> to set a time limit for training. Use\n                        <code>MaxWaitTimeInSeconds</code> to specify how long a managed spot\n                    training job has to complete. </p>\n            </li>\n            <li>\n               <p>\n                  <code>Environment</code> - The environment variables to set in the Docker\n                    container.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RetryStrategy</code> - The number of times to retry the job when the job\n                    fails due to an <code>InternalServerError</code>.</p>\n            </li>\n         </ul>\n         <p> For more information about SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
+                "smithy.api#documentation": "<p>Starts a model training job. After training completes, SageMaker saves the resulting\n            model artifacts to an Amazon S3 location that you specify. </p>\n         <p>If you choose to host your model using SageMaker hosting services, you can use the\n            resulting model artifacts as part of the model. You can also use the artifacts in a\n            machine learning service other than SageMaker, provided that you know how to use them for\n            inference. \n        </p>\n         <p>In the request body, you provide the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>AlgorithmSpecification</code> - Identifies the training algorithm to\n                    use.\n                    </p>\n            </li>\n            <li>\n               <p>\n                  <code>HyperParameters</code> - Specify these algorithm-specific parameters to\n                    enable the estimation of model parameters during training. Hyperparameters can\n                    be tuned to optimize this learning process. For a list of hyperparameters for\n                    each training algorithm provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>\n               <important>\n                  <p>Do not include any security-sensitive information including account access IDs, secrets, \n                        or tokens in any hyperparameter fields. As part of the shared responsibility \n                        model, you are responsible for any potential exposure, unauthorized access, or compromise of \n                        your sensitive data if caused by security-sensitive information included in the \n                        request hyperparameter variable or plain text fields.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <code>InputDataConfig</code> - Describes the input required by the training\n                    job and the Amazon S3, EFS, or FSx location where it is stored.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OutputDataConfig</code> - Identifies the Amazon S3 bucket where you want\n                    SageMaker to save the results of model training. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceConfig</code> - Identifies the resources, ML compute\n                    instances, and ML storage volumes to deploy for model training. In distributed\n                    training, you specify more than one instance. </p>\n            </li>\n            <li>\n               <p>\n                  <code>EnableManagedSpotTraining</code> - Optimize the cost of training machine\n                    learning models by up to 80% by using Amazon EC2 Spot instances. For more\n                    information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html\">Managed Spot\n                        Training</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>RoleArn</code> - The Amazon Resource Name (ARN) that SageMaker assumes to perform tasks on\n                    your behalf during model training.\n                    \n                    You must grant this role the necessary permissions so that SageMaker can successfully\n                    complete model training. </p>\n            </li>\n            <li>\n               <p>\n                  <code>StoppingCondition</code> - To help cap training costs, use\n                        <code>MaxRuntimeInSeconds</code> to set a time limit for training. Use\n                        <code>MaxWaitTimeInSeconds</code> to specify how long a managed spot\n                    training job has to complete. </p>\n            </li>\n            <li>\n               <p>\n                  <code>Environment</code> - The environment variables to set in the Docker\n                    container.</p>\n               <important>\n                  <p>Do not include any security-sensitive information including account access IDs, secrets, \n                        or tokens in any environment fields. As part of the shared responsibility model, you are \n                        responsible for any potential exposure, unauthorized access, or compromise of your sensitive\n                        data if caused by security-sensitive information included in the request environment variable \n                        or plain text fields.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <code>RetryStrategy</code> - The number of times to retry the job when the job\n                    fails due to an <code>InternalServerError</code>.</p>\n            </li>\n         </ul>\n         <p> For more information about SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
             }
         },
         "com.amazonaws.sagemaker#CreateTrainingJobRequest": {
@@ -14917,7 +14993,7 @@
                 "HyperParameters": {
                     "target": "com.amazonaws.sagemaker#HyperParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Algorithm-specific parameters that influence the quality of the model. You set\n            hyperparameters before you start the learning process. For a list of hyperparameters for\n            each training algorithm provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>\n         <p>You can specify a maximum of 100 hyperparameters. Each hyperparameter is a\n            key-value pair. Each key and value is limited to 256 characters, as specified by the\n                <code>Length Constraint</code>. </p>\n         <important>\n            <p>Do not include any security-sensitive information including account access IDs,\n                secrets or tokens in any hyperparameter field. If the use of security-sensitive\n                credentials are detected, SageMaker will reject your training job request and return an\n                exception error.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>Algorithm-specific parameters that influence the quality of the model. You set\n            hyperparameters before you start the learning process. For a list of hyperparameters for\n            each training algorithm provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>\n         <p>You can specify a maximum of 100 hyperparameters. Each hyperparameter is a\n            key-value pair. Each key and value is limited to 256 characters, as specified by the\n                <code>Length Constraint</code>. </p>\n         <important>\n            <p>Do not include any security-sensitive information including account access IDs, secrets, \n                or tokens in any hyperparameter fields. As part of the shared responsibility \n                model, you are responsible for any potential exposure, unauthorized access, or compromise \n                of your sensitive data if caused by any security-sensitive information included in the \n                request hyperparameter variable or plain text fields.</p>\n         </important>"
                     }
                 },
                 "AlgorithmSpecification": {
@@ -14975,7 +15051,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>\n         <important>\n            <p>Do not include any security-sensitive information including account access IDs, secrets, \n                or tokens in any tags. As part of the shared responsibility model, you are \n                responsible for any potential exposure, unauthorized access, or compromise \n                of your sensitive data if caused by any security-sensitive information included in the \n                request tag variable or plain text fields.</p>\n         </important>"
                     }
                 },
                 "EnableNetworkIsolation": {
@@ -15029,7 +15105,7 @@
                 "Environment": {
                     "target": "com.amazonaws.sagemaker#TrainingEnvironmentMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container.</p>"
+                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container.</p>\n         <important>\n            <p>Do not include any security-sensitive information including account access IDs, \n                secrets, or tokens in any environment fields. As part of the shared responsibility model, \n                you are responsible for any potential exposure, unauthorized access, or compromise of your \n                sensitive data if caused by security-sensitive information included in the request environment variable\n                or plain text fields.</p>\n         </important>"
                     }
                 },
                 "RetryStrategy": {
@@ -15700,6 +15776,15 @@
         },
         "com.amazonaws.sagemaker#CreationTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.sagemaker#CronScheduleExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
         },
         "com.amazonaws.sagemaker#CrossAccountFilterOption": {
             "type": "enum",
@@ -18859,6 +18944,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The deployment configuration for an endpoint, which contains the desired deployment\n            strategy and rollback configurations.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DeploymentConfiguration": {
+            "type": "structure",
+            "members": {
+                "RollingUpdatePolicy": {
+                    "target": "com.amazonaws.sagemaker#RollingDeploymentPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy that SageMaker uses when updating the AMI versions of the cluster. </p>"
+                    }
+                },
+                "WaitIntervalInSeconds": {
+                    "target": "com.amazonaws.sagemaker#WaitTimeIntervalInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration in seconds that SageMaker waits before updating more instances in the cluster.</p>"
+                    }
+                },
+                "AutoRollbackConfiguration": {
+                    "target": "com.amazonaws.sagemaker#AutoRollbackAlarms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains the alarms that SageMaker monitors to know whether to roll back the AMI update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration to use when updating the AMI versions.</p>"
             }
         },
         "com.amazonaws.sagemaker#DeploymentRecommendation": {
@@ -26949,7 +27060,7 @@
                 "Environment": {
                     "target": "com.amazonaws.sagemaker#TrainingEnvironmentMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container.</p>"
+                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container.</p>\n         <important>\n            <p>Do not include any security-sensitive information including account access IDs, secrets, \n                or tokens in any environment fields. As part of the shared responsibility \n                model, you are responsible for any potential exposure, unauthorized access, or compromise of \n                your sensitive data if caused by security-sensitive information included in the \n                request environment variable or plain text fields.</p>\n         </important>"
                     }
                 },
                 "RetryStrategy": {
@@ -51808,6 +51919,31 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.sagemaker#NodeUnavailabilityType": {
+            "type": "enum",
+            "members": {
+                "INSTANCE_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_COUNT"
+                    }
+                },
+                "CAPACITY_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAPACITY_PERCENTAGE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#NodeUnavailabilityValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.sagemaker#NonEmptyString256": {
             "type": "string",
             "traits": {
@@ -61188,6 +61324,28 @@
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
+        "com.amazonaws.sagemaker#RollingDeploymentPolicy": {
+            "type": "structure",
+            "members": {
+                "MaximumBatchSize": {
+                    "target": "com.amazonaws.sagemaker#CapacitySizeConfig",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The maximum amount of instances in the cluster that SageMaker can update at a time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RollbackMaximumBatchSize": {
+                    "target": "com.amazonaws.sagemaker#CapacitySizeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum amount of instances in the cluster that SageMaker can roll back at a time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configurations that SageMaker uses when updating the AMI versions.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#RollingUpdatePolicy": {
             "type": "structure",
             "members": {
@@ -63905,6 +64063,28 @@
                         "smithy.api#enumValue": "Stopped"
                     }
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#ScheduledUpdateConfig": {
+            "type": "structure",
+            "members": {
+                "ScheduleExpression": {
+                    "target": "com.amazonaws.sagemaker#CronScheduleExpression",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A cron expression that specifies the schedule that SageMaker follows when updating the AMI.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.sagemaker#DeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration to use when updating the AMI versions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration object of the schedule that SageMaker follows when updating the AMI.</p>"
             }
         },
         "com.amazonaws.sagemaker#SchedulerConfig": {
@@ -73019,6 +73199,34 @@
                 "smithy.api#documentation": "<p>Updates the platform software of a SageMaker HyperPod cluster for security patching. To learn how to\n         use this API, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-operate.html#sagemaker-hyperpod-operate-cli-command-update-cluster-software\">Update the SageMaker HyperPod platform software of a cluster</a>.</p>\n         <important>\n            <p>The <code>UpgradeClusterSoftware</code> API call may impact your SageMaker HyperPod cluster\n            uptime and availability. Plan accordingly to mitigate potential disruptions to your\n            workloads.</p>\n         </important>"
             }
         },
+        "com.amazonaws.sagemaker#UpdateClusterSoftwareInstanceGroupSpecification": {
+            "type": "structure",
+            "members": {
+                "InstanceGroupName": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceGroupName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the instance group to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that describes specifications of the instance groups to update.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateClusterSoftwareInstanceGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#UpdateClusterSoftwareInstanceGroupSpecification"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.sagemaker#UpdateClusterSoftwareRequest": {
             "type": "structure",
             "members": {
@@ -73028,6 +73236,18 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specify the name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster you want to update for security\n         patching.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "InstanceGroups": {
+                    "target": "com.amazonaws.sagemaker#UpdateClusterSoftwareInstanceGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array of instance groups for which to update AMI versions.</p>"
+                    }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.sagemaker#DeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration to use when updating the AMI versions.</p>"
                     }
                 }
             },
@@ -76501,6 +76721,15 @@
             }
         },
         "com.amazonaws.sagemaker#WaitIntervalInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 3600
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#WaitTimeIntervalInSeconds": {
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
