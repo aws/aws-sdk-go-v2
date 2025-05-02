@@ -26,7 +26,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.51.3
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.32.2
-	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.4
+	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.1
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.213.0
@@ -48,7 +48,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iam v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.2
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.34.0
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/kms v1.38.3
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.71.2
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.43.2

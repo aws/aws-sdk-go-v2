@@ -1,3 +1,13 @@
+# Release (2025-05-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.4.0](service/bedrockdataautomation/CHANGELOG.md#v140-2025-05-02)
+  * **Feature**: Added support for Custom output and blueprints for AUDIO data types.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.31.5](service/directoryservice/CHANGELOG.md#v1315-2025-05-02)
+  * **Documentation**: Doc only update - fixed typos.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.35.0](service/kinesis/CHANGELOG.md#v1350-2025-05-02)
+  * **Feature**: Marking ResourceARN as required for Amazon Kinesis Data Streams APIs TagResource, UntagResource, and ListTagsForResource.
+
 # Release (2025-05-01)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "60b1b731-ad67-4965-8066-6ab830ca08a4",
-    "type": "documentation",
-    "description": "Doc only update - fixed typos.",
-    "modules": [
-        "service/directoryservice"
-    ]
-}

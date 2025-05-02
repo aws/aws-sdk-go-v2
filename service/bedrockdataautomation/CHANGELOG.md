@@ -1,3 +1,7 @@
+# v1.4.0 (2025-05-02)
+
+* **Feature**: Added support for Custom output and blueprints for AUDIO data types.
+
 # v1.3.0 (2025-04-24)
 
 * **Feature**: Added support for modality routing and modality enablement on CreateDataAutomationProject and UpdateDataAutomationProject APIs

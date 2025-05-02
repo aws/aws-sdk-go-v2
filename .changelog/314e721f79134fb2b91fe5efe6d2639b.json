@@ -1,8 +1,0 @@
-{
-    "id": "314e721f-7913-4fb2-b91f-e5efe6d2639b",
-    "type": "feature",
-    "description": "Marking ResourceARN as required for Amazon Kinesis Data Streams APIs TagResource, UntagResource, and ListTagsForResource.",
-    "modules": [
-        "service/kinesis"
-    ]
-}
