@@ -11,7 +11,9 @@ import (
 )
 
 // Deactivates access to directory data via the Directory Service Data API for the
-// specified directory.
+// specified directory. For more information, see [Directory Service Data API Reference].
+//
+// [Directory Service Data API Reference]: https://docs.aws.amazon.com/directoryservicedata/latest/DirectoryServiceDataAPIReference/Welcome.html
 func (c *Client) DisableDirectoryDataAccess(ctx context.Context, params *DisableDirectoryDataAccessInput, optFns ...func(*Options)) (*DisableDirectoryDataAccessOutput, error) {
 	if params == nil {
 		params = &DisableDirectoryDataAccessInput{}

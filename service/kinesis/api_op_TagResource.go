@@ -32,6 +32,11 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
+	// The Amazon Resource Name (ARN) of the Kinesis resource to which to add tags.
+	//
+	// This member is required.
+	ResourceARN *string
+
 	// An array of tags to be added to the Kinesis resource. A tag consists of a
 	// required key and an optional value. You can add up to 50 tags per resource.
 	//
@@ -40,9 +45,6 @@ type TagResourceInput struct {
 	//
 	// This member is required.
 	Tags map[string]string
-
-	// The Amazon Resource Name (ARN) of the Kinesis resource to which to add tags.
-	ResourceARN *string
 
 	noSmithyDocumentSerde
 }

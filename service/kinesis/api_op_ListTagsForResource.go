@@ -37,6 +37,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the Kinesis resource for which to list tags.
+	//
+	// This member is required.
 	ResourceARN *string
 
 	noSmithyDocumentSerde
@@ -124,6 +126,9 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
+	if err = addOpListTagsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForResource(options.Region), middleware.Before); err != nil {

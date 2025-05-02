@@ -63,7 +63,7 @@ type DescribeDirectoriesInput struct {
 // Contains the results of the DescribeDirectories operation.
 type DescribeDirectoriesOutput struct {
 
-	// The list of DirectoryDescription objects that were retrieved.
+	// The list of available DirectoryDescription objects that were retrieved.
 	//
 	// It is possible that this list contains less than the number of items specified
 	// in the Limit member of the request. This occurs if there are less than the

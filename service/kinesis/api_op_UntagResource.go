@@ -30,15 +30,17 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
+	// The Amazon Resource Name (ARN) of the Kinesis resource from which to remove
+	// tags.
+	//
+	// This member is required.
+	ResourceARN *string
+
 	// A list of tag key-value pairs. Existing tags of the resource whose keys are
 	// members of this list will be removed from the Kinesis resource.
 	//
 	// This member is required.
 	TagKeys []string
-
-	// The Amazon Resource Name (ARN) of the Kinesis resource from which to remove
-	// tags.
-	ResourceARN *string
 
 	noSmithyDocumentSerde
 }

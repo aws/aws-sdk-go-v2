@@ -1,0 +1,8 @@
+{
+    "id": "99501616-ab4a-4581-9800-000d6fe2799b",
+    "type": "feature",
+    "description": "Added support for Custom output and blueprints for AUDIO data types.",
+    "modules": [
+        "service/bedrockdataautomation"
+    ]
+}

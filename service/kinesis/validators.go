@@ -250,6 +250,26 @@ func (m *validateOpListStreamConsumers) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpMergeShards struct {
 }
 
@@ -578,6 +598,10 @@ func addOpListStreamConsumersValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListStreamConsumers{}, middleware.After)
 }
 
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
 func addOpMergeShardsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpMergeShards{}, middleware.After)
 }
@@ -904,6 +928,21 @@ func validateOpListStreamConsumersInput(v *ListStreamConsumersInput) error {
 	}
 }
 
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpMergeShardsInput(v *MergeShardsInput) error {
 	if v == nil {
 		return nil
@@ -1097,6 +1136,9 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1111,6 +1153,9 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
