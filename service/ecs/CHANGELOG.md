@@ -1,3 +1,7 @@
+# v1.56.3 (2025-05-05)
+
+* **Documentation**: Add support to roll back an In_Progress ECS Service Deployment
+
 # v1.56.2 (2025-04-25)
 
 * **Documentation**: Documentation only release for Amazon ECS.

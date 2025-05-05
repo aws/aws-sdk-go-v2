@@ -1,3 +1,7 @@
+# v1.17.75 (2025-05-05)
+
+* **Bug Fix**: Enable user to call GetBucketRegion without credential config
+
 # v1.17.74 (2025-04-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

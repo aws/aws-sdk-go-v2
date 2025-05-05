@@ -1,8 +1,0 @@
-{
-    "id": "193b227e-82e9-4009-85a3-2acc37ee8d1f",
-    "type": "feature",
-    "description": "Add an optional parameter to the GetDevicePoolCompatibility API to pass in project information to check device pool compatibility.",
-    "modules": [
-        "service/devicefarm"
-    ]
-}
