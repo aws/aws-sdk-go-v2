@@ -1178,6 +1178,30 @@ func TestCheckSnapshot_CreateLocalGatewayRouteTableVpcAssociation(t *testing.T) 
 	}
 }
 
+func TestCheckSnapshot_CreateLocalGatewayVirtualInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLocalGatewayVirtualInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateLocalGatewayVirtualInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateLocalGatewayVirtualInterfaceGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLocalGatewayVirtualInterfaceGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateLocalGatewayVirtualInterfaceGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateManagedPrefixList(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateManagedPrefixList(context.Background(), nil, func(o *Options) {
@@ -2143,6 +2167,30 @@ func TestCheckSnapshot_DeleteLocalGatewayRouteTableVpcAssociation(t *testing.T) 
 	_, err := svc.DeleteLocalGatewayRouteTableVpcAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteLocalGatewayRouteTableVpcAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteLocalGatewayVirtualInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLocalGatewayVirtualInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteLocalGatewayVirtualInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteLocalGatewayVirtualInterfaceGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLocalGatewayVirtualInterfaceGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteLocalGatewayVirtualInterfaceGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3974,6 +4022,18 @@ func TestCheckSnapshot_DescribeNetworkInterfaces(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeOutpostLags(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeOutpostLags(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeOutpostLags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribePlacementGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribePlacementGroups(context.Background(), nil, func(o *Options) {
@@ -4207,6 +4267,18 @@ func TestCheckSnapshot_DescribeSecurityGroupVpcAssociations(t *testing.T) {
 	_, err := svc.DescribeSecurityGroupVpcAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeSecurityGroupVpcAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeServiceLinkVirtualInterfaces(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeServiceLinkVirtualInterfaces(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeServiceLinkVirtualInterfaces")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9277,6 +9349,30 @@ func TestUpdateSnapshot_CreateLocalGatewayRouteTableVpcAssociation(t *testing.T)
 	}
 }
 
+func TestUpdateSnapshot_CreateLocalGatewayVirtualInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLocalGatewayVirtualInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateLocalGatewayVirtualInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateLocalGatewayVirtualInterfaceGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLocalGatewayVirtualInterfaceGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateLocalGatewayVirtualInterfaceGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateManagedPrefixList(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateManagedPrefixList(context.Background(), nil, func(o *Options) {
@@ -10242,6 +10338,30 @@ func TestUpdateSnapshot_DeleteLocalGatewayRouteTableVpcAssociation(t *testing.T)
 	_, err := svc.DeleteLocalGatewayRouteTableVpcAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteLocalGatewayRouteTableVpcAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteLocalGatewayVirtualInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLocalGatewayVirtualInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteLocalGatewayVirtualInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteLocalGatewayVirtualInterfaceGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLocalGatewayVirtualInterfaceGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteLocalGatewayVirtualInterfaceGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12073,6 +12193,18 @@ func TestUpdateSnapshot_DescribeNetworkInterfaces(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeOutpostLags(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeOutpostLags(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeOutpostLags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribePlacementGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribePlacementGroups(context.Background(), nil, func(o *Options) {
@@ -12306,6 +12438,18 @@ func TestUpdateSnapshot_DescribeSecurityGroupVpcAssociations(t *testing.T) {
 	_, err := svc.DescribeSecurityGroupVpcAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeSecurityGroupVpcAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeServiceLinkVirtualInterfaces(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeServiceLinkVirtualInterfaces(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeServiceLinkVirtualInterfaces")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

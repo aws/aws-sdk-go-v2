@@ -781,6 +781,7 @@ const (
 	AudioSelectorTypeTrack             AudioSelectorType = "TRACK"
 	AudioSelectorTypeLanguageCode      AudioSelectorType = "LANGUAGE_CODE"
 	AudioSelectorTypeHlsRenditionGroup AudioSelectorType = "HLS_RENDITION_GROUP"
+	AudioSelectorTypeAllPcm            AudioSelectorType = "ALL_PCM"
 )
 
 // Values returns all known values for AudioSelectorType. Note that this can be
@@ -793,6 +794,7 @@ func (AudioSelectorType) Values() []AudioSelectorType {
 		"TRACK",
 		"LANGUAGE_CODE",
 		"HLS_RENDITION_GROUP",
+		"ALL_PCM",
 	}
 }
 
@@ -3824,6 +3826,33 @@ func (Format) Values() []Format {
 		"quicktime",
 		"matroska",
 		"webm",
+	}
+}
+
+type FrameMetricType string
+
+// Enum values for FrameMetricType
+const (
+	FrameMetricTypePsnr    FrameMetricType = "PSNR"
+	FrameMetricTypeSsim    FrameMetricType = "SSIM"
+	FrameMetricTypeMsSsim  FrameMetricType = "MS_SSIM"
+	FrameMetricTypePsnrHvs FrameMetricType = "PSNR_HVS"
+	FrameMetricTypeVmaf    FrameMetricType = "VMAF"
+	FrameMetricTypeQvbr    FrameMetricType = "QVBR"
+)
+
+// Values returns all known values for FrameMetricType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FrameMetricType) Values() []FrameMetricType {
+	return []FrameMetricType{
+		"PSNR",
+		"SSIM",
+		"MS_SSIM",
+		"PSNR_HVS",
+		"VMAF",
+		"QVBR",
 	}
 }
 

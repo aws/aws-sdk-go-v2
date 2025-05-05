@@ -1,0 +1,8 @@
+{
+    "id": "4ff38066-ea2b-4ab6-ab15-b45bbc23f603",
+    "type": "feature",
+    "description": "This release adds an optional sidecar per-frame video quality metrics report and an ALL_PCM option for audio selectors. It also changes the data type for Probe API response fields related to video and audio bitrate from integer to double.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

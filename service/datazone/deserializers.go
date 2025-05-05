@@ -45947,6 +45947,16 @@ loop:
 			uv = &types.PolicyGrantDetailMemberOverrideProjectOwners{Value: mv}
 			break loop
 
+		case "useAssetType":
+			var mv types.UseAssetTypePolicyGrantDetail
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentUseAssetTypePolicyGrantDetail(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PolicyGrantDetailMemberUseAssetType{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -51730,6 +51740,46 @@ func awsRestjson1_deserializeDocumentUnit(v **types.Unit, value interface{}) err
 
 	for key, value := range shape {
 		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUseAssetTypePolicyGrantDetail(v **types.UseAssetTypePolicyGrantDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UseAssetTypePolicyGrantDetail
+	if *v == nil {
+		sv = &types.UseAssetTypePolicyGrantDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domainUnitId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DomainUnitId to be of type string, got %T instead", value)
+				}
+				sv.DomainUnitId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

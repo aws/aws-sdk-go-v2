@@ -3871,6 +3871,7 @@ type PhysicalEndpoint struct {
 //	PolicyGrantDetailMemberDelegateCreateEnvironmentProfile
 //	PolicyGrantDetailMemberOverrideDomainUnitOwners
 //	PolicyGrantDetailMemberOverrideProjectOwners
+//	PolicyGrantDetailMemberUseAssetType
 type PolicyGrantDetail interface {
 	isPolicyGrantDetail()
 }
@@ -3991,6 +3992,17 @@ type PolicyGrantDetailMemberOverrideProjectOwners struct {
 }
 
 func (*PolicyGrantDetailMemberOverrideProjectOwners) isPolicyGrantDetail() {}
+
+//	Specifies the domain unit(s) whose projects can use this asset type while
+//
+// creating asset or asset revisions.
+type PolicyGrantDetailMemberUseAssetType struct {
+	Value UseAssetTypePolicyGrantDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantDetailMemberUseAssetType) isPolicyGrantDetail() {}
 
 // A member of the policy grant list.
 type PolicyGrantMember struct {
@@ -6004,6 +6016,16 @@ type Topic struct {
 
 // The details of the policy of creating an environment.
 type Unit struct {
+	noSmithyDocumentSerde
+}
+
+// Specifies the domain unit(s) whose projects can use this asset type while
+// creating asset or asset revisions.
+type UseAssetTypePolicyGrantDetail struct {
+
+	// The ID of the domain unit.
+	DomainUnitId *string
+
 	noSmithyDocumentSerde
 }
 

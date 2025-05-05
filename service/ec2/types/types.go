@@ -2342,7 +2342,7 @@ type ClientVpnEndpoint struct {
 	// Indicates whether the client VPN session is disconnected after the maximum
 	// sessionTimeoutHours is reached. If true , users are prompted to reconnect client
 	// VPN. If false , client VPN attempts to reconnect automatically. The default
-	// value is true .
+	// value is false .
 	DisconnectOnSessionTimeout *bool
 
 	// The DNS name to be used by clients when connecting to the Client VPN endpoint.
@@ -12192,6 +12192,9 @@ type LocalGatewayRouteTableVpcAssociation struct {
 // Describes a local gateway virtual interface.
 type LocalGatewayVirtualInterface struct {
 
+	// The current state of the local gateway virtual interface.
+	ConfigurationState LocalGatewayVirtualInterfaceConfigurationState
+
 	// The local address.
 	LocalAddress *string
 
@@ -12202,8 +12205,17 @@ type LocalGatewayVirtualInterface struct {
 	// The ID of the local gateway.
 	LocalGatewayId *string
 
+	// The Amazon Resource Number (ARN) of the local gateway virtual interface.
+	LocalGatewayVirtualInterfaceArn *string
+
+	// The ID of the local gateway virtual interface group.
+	LocalGatewayVirtualInterfaceGroupId *string
+
 	// The ID of the virtual interface.
 	LocalGatewayVirtualInterfaceId *string
+
+	// The Outpost LAG ID.
+	OutpostLagId *string
 
 	// The ID of the Amazon Web Services account that owns the local gateway virtual
 	// interface.
@@ -12214,6 +12226,9 @@ type LocalGatewayVirtualInterface struct {
 
 	// The peer BGP ASN.
 	PeerBgpAsn *int32
+
+	// The extended 32-bit ASN of the BGP peer for use with larger ASN values.
+	PeerBgpAsnExtended *int64
 
 	// The tags assigned to the virtual interface.
 	Tags []Tag
@@ -12227,8 +12242,20 @@ type LocalGatewayVirtualInterface struct {
 // Describes a local gateway virtual interface group.
 type LocalGatewayVirtualInterfaceGroup struct {
 
+	// The current state of the local gateway virtual interface group.
+	ConfigurationState LocalGatewayVirtualInterfaceGroupConfigurationState
+
+	// The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP).
+	LocalBgpAsn *int32
+
+	// The extended 32-bit ASN for the local BGP configuration.
+	LocalBgpAsnExtended *int64
+
 	// The ID of the local gateway.
 	LocalGatewayId *string
+
+	// The Amazon Resource Number (ARN) of the local gateway virtual interface group.
+	LocalGatewayVirtualInterfaceGroupArn *string
 
 	// The ID of the virtual interface group.
 	LocalGatewayVirtualInterfaceGroupId *string
@@ -13944,6 +13971,33 @@ type OperatorResponse struct {
 	// If managed is true , then the principal is returned. The principal is the
 	// service provider that manages the resource.
 	Principal *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an Outpost link aggregation group (LAG).
+type OutpostLag struct {
+
+	// The IDs of the local gateway virtual interfaces associated with the Outpost LAG.
+	LocalGatewayVirtualInterfaceIds []string
+
+	// The Amazon Resource Number (ARN) of the Outpost LAG.
+	OutpostArn *string
+
+	// The ID of the Outpost LAG.
+	OutpostLagId *string
+
+	// The ID of the Outpost LAG owner.
+	OwnerId *string
+
+	// The service link virtual interface IDs associated with the Outpost LAG.
+	ServiceLinkVirtualInterfaceIds []string
+
+	// The current state of the Outpost LAG.
+	State *string
+
+	// The tags associated with the Outpost LAG.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -17434,6 +17488,52 @@ type ServiceDetail struct {
 
 	// Indicates whether the service supports endpoint policies.
 	VpcEndpointPolicySupported *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes the service link virtual interfaces that establish connectivity
+// between Amazon Web Services Outpost and on-premises networks.
+type ServiceLinkVirtualInterface struct {
+
+	// The current state of the service link virtual interface.
+	ConfigurationState ServiceLinkVirtualInterfaceConfigurationState
+
+	// The IPv4 address assigned to the local gateway virtual interface on the Outpost
+	// side.
+	LocalAddress *string
+
+	// The Outpost Amazon Resource Number (ARN) for the service link virtual interface.
+	OutpostArn *string
+
+	// The Outpost ID for the service link virtual interface.
+	OutpostId *string
+
+	// The link aggregation group (LAG) ID for the service link virtual interface.
+	OutpostLagId *string
+
+	// The ID of the Amazon Web Services account that owns the service link virtual
+	// interface..
+	OwnerId *string
+
+	// The IPv4 peer address for the service link virtual interface.
+	PeerAddress *string
+
+	// The ASN for the Border Gateway Protocol (BGP) associated with the service link
+	// virtual interface.
+	PeerBgpAsn *int64
+
+	// The Amazon Resource Number (ARN) for the service link virtual interface.
+	ServiceLinkVirtualInterfaceArn *string
+
+	// The ID of the service link virtual interface.
+	ServiceLinkVirtualInterfaceId *string
+
+	// The tags associated with the service link virtual interface.
+	Tags []Tag
+
+	// The virtual local area network for the service link virtual interface.
+	Vlan *int32
 
 	noSmithyDocumentSerde
 }

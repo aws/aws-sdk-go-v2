@@ -1006,6 +1006,7 @@ const (
 	ManagedPolicyTypeCreateEnvironment                ManagedPolicyType = "CREATE_ENVIRONMENT"
 	ManagedPolicyTypeCreateEnvironmentFromBlueprint   ManagedPolicyType = "CREATE_ENVIRONMENT_FROM_BLUEPRINT"
 	ManagedPolicyTypeCreateProjectFromProjectProfile  ManagedPolicyType = "CREATE_PROJECT_FROM_PROJECT_PROFILE"
+	ManagedPolicyTypeUseAssetType                     ManagedPolicyType = "USE_ASSET_TYPE"
 )
 
 // Values returns all known values for ManagedPolicyType. Note that this can be
@@ -1027,6 +1028,7 @@ func (ManagedPolicyType) Values() []ManagedPolicyType {
 		"CREATE_ENVIRONMENT",
 		"CREATE_ENVIRONMENT_FROM_BLUEPRINT",
 		"CREATE_PROJECT_FROM_PROJECT_PROFILE",
+		"USE_ASSET_TYPE",
 	}
 }
 
@@ -1640,6 +1642,7 @@ const (
 	TargetEntityTypeDomainUnit                        TargetEntityType = "DOMAIN_UNIT"
 	TargetEntityTypeEnvironmentBlueprintConfiguration TargetEntityType = "ENVIRONMENT_BLUEPRINT_CONFIGURATION"
 	TargetEntityTypeEnvironmentProfile                TargetEntityType = "ENVIRONMENT_PROFILE"
+	TargetEntityTypeAssetType                         TargetEntityType = "ASSET_TYPE"
 )
 
 // Values returns all known values for TargetEntityType. Note that this can be
@@ -1651,6 +1654,7 @@ func (TargetEntityType) Values() []TargetEntityType {
 		"DOMAIN_UNIT",
 		"ENVIRONMENT_BLUEPRINT_CONFIGURATION",
 		"ENVIRONMENT_PROFILE",
+		"ASSET_TYPE",
 	}
 }
 

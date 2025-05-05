@@ -1,0 +1,8 @@
+{
+    "id": "9b125ce4-3d91-49da-865b-17a585428e5d",
+    "type": "feature",
+    "description": "This update introduces API operations to manage and create local gateway VIF and VIF groups. It also includes API operations to describe Outpost LAGs and service link VIFs.",
+    "modules": [
+        "service/ec2"
+    ]
+}

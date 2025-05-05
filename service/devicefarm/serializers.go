@@ -5789,6 +5789,11 @@ func awsAwsjson11_serializeOpDocumentGetDevicePoolCompatibilityInput(v *GetDevic
 		ok.String(*v.DevicePoolArn)
 	}
 
+	if v.ProjectArn != nil {
+		ok := object.Key("projectArn")
+		ok.String(*v.ProjectArn)
+	}
+
 	if v.Test != nil {
 		ok := object.Key("test")
 		if err := awsAwsjson11_serializeDocumentScheduleRunTest(v.Test, ok); err != nil {
