@@ -3901,6 +3901,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains information about the settings for a run.</p>"
                     }
+                },
+                "projectArn": {
+                    "target": "com.amazonaws.devicefarm#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the project for which you want to check\n            device pool compatibility.</p>"
+                    }
                 }
             },
             "traits": {

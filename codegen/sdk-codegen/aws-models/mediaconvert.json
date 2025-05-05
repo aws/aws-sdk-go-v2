@@ -1700,7 +1700,7 @@
                     }
                 },
                 "BitRate": {
-                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "target": "com.amazonaws.mediaconvert#__long",
                     "traits": {
                         "smithy.api#documentation": "The bit rate of the audio track, in bits per second.",
                         "smithy.api#jsonName": "bitRate"
@@ -1872,6 +1872,12 @@
                     "traits": {
                         "smithy.api#enumValue": "HLS_RENDITION_GROUP"
                     }
+                },
+                "ALL_PCM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_PCM"
+                    }
                 }
             },
             "traits": {
@@ -1954,7 +1960,7 @@
                 "MaxQualityLevel": {
                     "target": "com.amazonaws.mediaconvert#__doubleMin1Max10",
                     "traits": {
-                        "smithy.api#documentation": "Optional. Specify the QVBR quality level to use for all renditions in your automated ABR stack. To have MediaConvert automatically determine the quality level: Leave blank. To manually specify a quality level: Enter an integer from 1 to 10. MediaConvert will use a quality level up to the value that you specify, depending on your source. For more information about QVBR quality levels, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/qvbr-guidelines.html",
+                        "smithy.api#documentation": "Optional. Specify the QVBR quality level to use for all renditions in your automated ABR stack. To have MediaConvert automatically determine the quality level: Leave blank. To manually specify a quality level: Enter a value from 1 to 10. MediaConvert will use a quality level up to the value that you specify, depending on your source. For more information about QVBR quality levels, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/qvbr-guidelines.html",
                         "smithy.api#jsonName": "maxQualityLevel"
                     }
                 },
@@ -2244,6 +2250,13 @@
                         "smithy.api#jsonName": "numberBFramesBetweenReferenceFrames"
                     }
                 },
+                "PerFrameMetrics": {
+                    "target": "com.amazonaws.mediaconvert#__listOfFrameMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "Optionally choose one or more per frame metric reports to generate along with your output. You can use these metrics to analyze your video output according to one or more commonly used image quality metrics. You can specify per frame metrics for output groups or for individual outputs. When you do, MediaConvert writes a CSV (Comma-Separated Values) file to your S3 output destination, named after the video, video codec, and metric type. For example: video_h264_PSNR.csv Jobs that generate per frame metrics will take longer to complete, depending on the resolution and complexity of your output. For example, some 4K jobs might take up to twice as long to complete. Note that when analyzing the video quality of your output, or when comparing the video quality of multiple different outputs, we generally also recommend a detailed visual review in a controlled environment. You can choose from the following per frame metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM: Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio, Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR: Quality-Defined Variable Bitrate. This option is only available when your output uses the QVBR rate control mode.",
+                        "smithy.api#jsonName": "perFrameMetrics"
+                    }
+                },
                 "QvbrSettings": {
                     "target": "com.amazonaws.mediaconvert#Av1QvbrSettings",
                     "traits": {
@@ -2504,6 +2517,13 @@
                     "traits": {
                         "smithy.api#documentation": "Choose the scan line type for the output. Keep the default value, Progressive to create a progressive output, regardless of the scan type of your input. Use Top field first or Bottom field first to create an output that's interlaced with the same field polarity throughout. Use Follow, default top or Follow, default bottom to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.",
                         "smithy.api#jsonName": "interlaceMode"
+                    }
+                },
+                "PerFrameMetrics": {
+                    "target": "com.amazonaws.mediaconvert#__listOfFrameMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "Optionally choose one or more per frame metric reports to generate along with your output. You can use these metrics to analyze your video output according to one or more commonly used image quality metrics. You can specify per frame metrics for output groups or for individual outputs. When you do, MediaConvert writes a CSV (Comma-Separated Values) file to your S3 output destination, named after the video, video codec, and metric type. For example: video_h264_PSNR.csv Jobs that generate per frame metrics will take longer to complete, depending on the resolution and complexity of your output. For example, some 4K jobs might take up to twice as long to complete. Note that when analyzing the video quality of your output, or when comparing the video quality of multiple different outputs, we generally also recommend a detailed visual review in a controlled environment. You can choose from the following per frame metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM: Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio, Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR: Quality-Defined Variable Bitrate. This option is only available when your output uses the QVBR rate control mode.",
+                        "smithy.api#jsonName": "perFrameMetrics"
                     }
                 },
                 "ScanTypeConversionMode": {
@@ -5733,7 +5753,7 @@
                 "BillingTagsSource": {
                     "target": "com.amazonaws.mediaconvert#BillingTagsSource",
                     "traits": {
-                        "smithy.api#documentation": "Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don't have an associated tag will appear in your billing report unsorted. If you don't choose a valid value for this field, your job outputs will appear on the billing report unsorted.",
+                        "smithy.api#documentation": "Optionally choose a Billing tags source that AWS Billing and Cost Management will use to display tags for individual output costs on any billing report that you set up. Leave blank to use the default value, Job.",
                         "smithy.api#jsonName": "billingTagsSource"
                     }
                 },
@@ -8166,7 +8186,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Use Dynamic audio selectors when you do not know the track layout of your source when you submit your job, but want to select multiple audio tracks. When you include an audio track in your output and specify this Dynamic audio selector as the Audio source, MediaConvert creates an output audio track for each dynamically selected track. Note that when you include a Dynamic audio selector for two or more inputs, each input must have the same number of audio tracks and audio channels."
+                "smithy.api#documentation": "Use Dynamic audio selectors when you do not know the track layout of your source when you submit your job, but want to select multiple audio tracks. When you include an audio track in your output and specify this Dynamic audio selector as the Audio source, MediaConvert creates an audio track within that output for each dynamically selected track. Note that when you include a Dynamic audio selector for two or more inputs, each input must have the same number of audio tracks and audio channels."
             }
         },
         "com.amazonaws.mediaconvert#DynamicAudioSelectorType": {
@@ -9685,6 +9705,50 @@
                 "smithy.api#documentation": "Required when you set Codec to the value FRAME_CAPTURE."
             }
         },
+        "com.amazonaws.mediaconvert#FrameMetricType": {
+            "type": "enum",
+            "members": {
+                "PSNR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PSNR"
+                    }
+                },
+                "SSIM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSIM"
+                    }
+                },
+                "MS_SSIM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MS_SSIM"
+                    }
+                },
+                "PSNR_HVS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PSNR_HVS"
+                    }
+                },
+                "VMAF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VMAF"
+                    }
+                },
+                "QVBR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QVBR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "* PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM: Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio, Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR: Quality-Defined Variable Bitrate. This option is only available when your output uses the QVBR rate control mode."
+            }
+        },
         "com.amazonaws.mediaconvert#FrameRate": {
             "type": "structure",
             "members": {
@@ -10953,6 +11017,13 @@
                         "smithy.api#jsonName": "parNumerator"
                     }
                 },
+                "PerFrameMetrics": {
+                    "target": "com.amazonaws.mediaconvert#__listOfFrameMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "Optionally choose one or more per frame metric reports to generate along with your output. You can use these metrics to analyze your video output according to one or more commonly used image quality metrics. You can specify per frame metrics for output groups or for individual outputs. When you do, MediaConvert writes a CSV (Comma-Separated Values) file to your S3 output destination, named after the video, video codec, and metric type. For example: video_h264_PSNR.csv Jobs that generate per frame metrics will take longer to complete, depending on the resolution and complexity of your output. For example, some 4K jobs might take up to twice as long to complete. Note that when analyzing the video quality of your output, or when comparing the video quality of multiple different outputs, we generally also recommend a detailed visual review in a controlled environment. You can choose from the following per frame metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM: Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio, Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR: Quality-Defined Variable Bitrate. This option is only available when your output uses the QVBR rate control mode.",
+                        "smithy.api#jsonName": "perFrameMetrics"
+                    }
+                },
                 "QualityTuningLevel": {
                     "target": "com.amazonaws.mediaconvert#H264QualityTuningLevel",
                     "traits": {
@@ -12027,6 +12098,13 @@
                     "traits": {
                         "smithy.api#documentation": "Required when you set Pixel aspect ratio to SPECIFIED. On the console, this corresponds to any value other than Follow source. When you specify an output pixel aspect ratio (PAR) that is different from your input video PAR, provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would specify the ratio 40:33. In this example, the value for parNumerator is 40.",
                         "smithy.api#jsonName": "parNumerator"
+                    }
+                },
+                "PerFrameMetrics": {
+                    "target": "com.amazonaws.mediaconvert#__listOfFrameMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "Optionally choose one or more per frame metric reports to generate along with your output. You can use these metrics to analyze your video output according to one or more commonly used image quality metrics. You can specify per frame metrics for output groups or for individual outputs. When you do, MediaConvert writes a CSV (Comma-Separated Values) file to your S3 output destination, named after the video, video codec, and metric type. For example: video_h264_PSNR.csv Jobs that generate per frame metrics will take longer to complete, depending on the resolution and complexity of your output. For example, some 4K jobs might take up to twice as long to complete. Note that when analyzing the video quality of your output, or when comparing the video quality of multiple different outputs, we generally also recommend a detailed visual review in a controlled environment. You can choose from the following per frame metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM: Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio, Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR: Quality-Defined Variable Bitrate. This option is only available when your output uses the QVBR rate control mode.",
+                        "smithy.api#jsonName": "perFrameMetrics"
                     }
                 },
                 "QualityTuningLevel": {
@@ -14735,7 +14813,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -15008,7 +15086,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -20393,6 +20471,13 @@
                         "smithy.api#jsonName": "parNumerator"
                     }
                 },
+                "PerFrameMetrics": {
+                    "target": "com.amazonaws.mediaconvert#__listOfFrameMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "Optionally choose one or more per frame metric reports to generate along with your output. You can use these metrics to analyze your video output according to one or more commonly used image quality metrics. You can specify per frame metrics for output groups or for individual outputs. When you do, MediaConvert writes a CSV (Comma-Separated Values) file to your S3 output destination, named after the video, video codec, and metric type. For example: video_h264_PSNR.csv Jobs that generate per frame metrics will take longer to complete, depending on the resolution and complexity of your output. For example, some 4K jobs might take up to twice as long to complete. Note that when analyzing the video quality of your output, or when comparing the video quality of multiple different outputs, we generally also recommend a detailed visual review in a controlled environment. You can choose from the following per frame metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM: Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio, Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR: Quality-Defined Variable Bitrate. This option is only available when your output uses the QVBR rate control mode.",
+                        "smithy.api#jsonName": "perFrameMetrics"
+                    }
+                },
                 "QualityTuningLevel": {
                     "target": "com.amazonaws.mediaconvert#Mpeg2QualityTuningLevel",
                     "traits": {
@@ -21573,6 +21658,13 @@
                         "smithy.api#jsonName": "msSmoothGroupSettings"
                     }
                 },
+                "PerFrameMetrics": {
+                    "target": "com.amazonaws.mediaconvert#__listOfFrameMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "Optionally choose one or more per frame metric reports to generate along with your output. You can use these metrics to analyze your video output according to one or more commonly used image quality metrics. You can specify per frame metrics for output groups or for individual outputs. When you do, MediaConvert writes a CSV (Comma-Separated Values) file to your S3 output destination, named after the video, video codec, and metric type. For example: video_h264_PSNR.csv Jobs that generate per frame metrics will take longer to complete, depending on the resolution and complexity of your output. For example, some 4K jobs might take up to twice as long to complete. Note that when analyzing the video quality of your output, or when comparing the video quality of multiple different outputs, we generally also recommend a detailed visual review in a controlled environment. You can choose from the following per frame metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM: Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio, Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR: Quality-Defined Variable Bitrate. This option is only available when your output uses the QVBR rate control mode.",
+                        "smithy.api#jsonName": "perFrameMetrics"
+                    }
+                },
                 "Type": {
                     "target": "com.amazonaws.mediaconvert#OutputGroupType",
                     "traits": {
@@ -22366,6 +22458,13 @@
                     "traits": {
                         "smithy.api#documentation": "Required when you set Pixel aspect ratio to SPECIFIED. On the console, this corresponds to any value other than Follow source. When you specify an output pixel aspect ratio (PAR) that is different from your input video PAR, provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would specify the ratio 40:33. In this example, the value for parNumerator is 40.",
                         "smithy.api#jsonName": "parNumerator"
+                    }
+                },
+                "PerFrameMetrics": {
+                    "target": "com.amazonaws.mediaconvert#__listOfFrameMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "Optionally choose one or more per frame metric reports to generate along with your output. You can use these metrics to analyze your video output according to one or more commonly used image quality metrics. You can specify per frame metrics for output groups or for individual outputs. When you do, MediaConvert writes a CSV (Comma-Separated Values) file to your S3 output destination, named after the video, video codec, and metric type. For example: video_h264_PSNR.csv Jobs that generate per frame metrics will take longer to complete, depending on the resolution and complexity of your output. For example, some 4K jobs might take up to twice as long to complete. Note that when analyzing the video quality of your output, or when comparing the video quality of multiple different outputs, we generally also recommend a detailed visual review in a controlled environment. You can choose from the following per frame metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM: Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio, Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR: Quality-Defined Variable Bitrate. This option is only available when your output uses the QVBR rate control mode.",
+                        "smithy.api#jsonName": "perFrameMetrics"
                     }
                 },
                 "ScanTypeConversionMode": {
@@ -25940,7 +26039,7 @@
                     }
                 },
                 "BitRate": {
-                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "target": "com.amazonaws.mediaconvert#__long",
                     "traits": {
                         "smithy.api#documentation": "The bit rate of the video track, in bits per second.",
                         "smithy.api#jsonName": "bitRate"
@@ -27457,6 +27556,13 @@
                         "smithy.api#jsonName": "framerateNumerator"
                     }
                 },
+                "PerFrameMetrics": {
+                    "target": "com.amazonaws.mediaconvert#__listOfFrameMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "Optionally choose one or more per frame metric reports to generate along with your output. You can use these metrics to analyze your video output according to one or more commonly used image quality metrics. You can specify per frame metrics for output groups or for individual outputs. When you do, MediaConvert writes a CSV (Comma-Separated Values) file to your S3 output destination, named after the video, video codec, and metric type. For example: video_h264_PSNR.csv Jobs that generate per frame metrics will take longer to complete, depending on the resolution and complexity of your output. For example, some 4K jobs might take up to twice as long to complete. Note that when analyzing the video quality of your output, or when comparing the video quality of multiple different outputs, we generally also recommend a detailed visual review in a controlled environment. You can choose from the following per frame metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM: Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio, Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR: Quality-Defined Variable Bitrate. This option is only available when your output uses the QVBR rate control mode.",
+                        "smithy.api#jsonName": "perFrameMetrics"
+                    }
+                },
                 "Profile": {
                     "target": "com.amazonaws.mediaconvert#XavcProfile",
                     "traits": {
@@ -28610,6 +28716,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconvert#ForceIncludeRenditionSize"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfFrameMetricType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#FrameMetricType"
             }
         },
         "com.amazonaws.mediaconvert#__listOfHlsAdMarkers": {
