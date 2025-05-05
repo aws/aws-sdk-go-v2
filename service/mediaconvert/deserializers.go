@@ -5713,6 +5713,42 @@ func awsRestjson1_deserializeDocument__listOfForceIncludeRenditionSize(v *[]type
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfFrameMetricType(v *[]types.FrameMetricType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FrameMetricType
+	if *v == nil {
+		cv = []types.FrameMetricType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FrameMetricType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected FrameMetricType to be of type string, got %T instead", value)
+			}
+			col = types.FrameMetricType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfHlsAdditionalManifest(v *[]types.HlsAdditionalManifest, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7898,13 +7934,13 @@ func awsRestjson1_deserializeDocumentAudioProperties(v **types.AudioProperties, 
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
 					return err
 				}
-				sv.BitRate = ptr.Int32(int32(i64))
+				sv.BitRate = ptr.Int64(i64)
 			}
 
 		case "channels":
@@ -8559,6 +8595,11 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				sv.NumberBFramesBetweenReferenceFrames = ptr.Int32(int32(i64))
 			}
 
+		case "perFrameMetrics":
+			if err := awsRestjson1_deserializeDocument__listOfFrameMetricType(&sv.PerFrameMetrics, value); err != nil {
+				return err
+			}
+
 		case "qvbrSettings":
 			if err := awsRestjson1_deserializeDocumentAv1QvbrSettings(&sv.QvbrSettings, value); err != nil {
 				return err
@@ -8731,6 +8772,11 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 					return fmt.Errorf("expected AvcIntraInterlaceMode to be of type string, got %T instead", value)
 				}
 				sv.InterlaceMode = types.AvcIntraInterlaceMode(jtv)
+			}
+
+		case "perFrameMetrics":
+			if err := awsRestjson1_deserializeDocument__listOfFrameMetricType(&sv.PerFrameMetrics, value); err != nil {
+				return err
 			}
 
 		case "scanTypeConversionMode":
@@ -14297,6 +14343,11 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				sv.ParNumerator = ptr.Int32(int32(i64))
 			}
 
+		case "perFrameMetrics":
+			if err := awsRestjson1_deserializeDocument__listOfFrameMetricType(&sv.PerFrameMetrics, value); err != nil {
+				return err
+			}
+
 		case "qualityTuningLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14899,6 +14950,11 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 					return err
 				}
 				sv.ParNumerator = ptr.Int32(int32(i64))
+			}
+
+		case "perFrameMetrics":
+			if err := awsRestjson1_deserializeDocument__listOfFrameMetricType(&sv.PerFrameMetrics, value); err != nil {
+				return err
 			}
 
 		case "qualityTuningLevel":
@@ -20099,6 +20155,11 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				sv.ParNumerator = ptr.Int32(int32(i64))
 			}
 
+		case "perFrameMetrics":
+			if err := awsRestjson1_deserializeDocument__listOfFrameMetricType(&sv.PerFrameMetrics, value); err != nil {
+				return err
+			}
+
 		case "qualityTuningLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21430,6 +21491,11 @@ func awsRestjson1_deserializeDocumentOutputGroupSettings(v **types.OutputGroupSe
 				return err
 			}
 
+		case "perFrameMetrics":
+			if err := awsRestjson1_deserializeDocument__listOfFrameMetricType(&sv.PerFrameMetrics, value); err != nil {
+				return err
+			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21914,6 +21980,11 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 					return err
 				}
 				sv.ParNumerator = ptr.Int32(int32(i64))
+			}
+
+		case "perFrameMetrics":
+			if err := awsRestjson1_deserializeDocument__listOfFrameMetricType(&sv.PerFrameMetrics, value); err != nil {
+				return err
 			}
 
 		case "scanTypeConversionMode":
@@ -24642,13 +24713,13 @@ func awsRestjson1_deserializeDocumentVideoProperties(v **types.VideoProperties, 
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
 					return err
 				}
-				sv.BitRate = ptr.Int32(int32(i64))
+				sv.BitRate = ptr.Int64(i64)
 			}
 
 		case "colorPrimaries":
@@ -26012,6 +26083,11 @@ func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value 
 					return err
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
+			}
+
+		case "perFrameMetrics":
+			if err := awsRestjson1_deserializeDocument__listOfFrameMetricType(&sv.PerFrameMetrics, value); err != nil {
+				return err
 			}
 
 		case "profile":

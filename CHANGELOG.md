@@ -1,3 +1,19 @@
+# Release (2025-05-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.17.75](feature/s3/manager/CHANGELOG.md#v11775-2025-05-05)
+  * **Bug Fix**: Enable user to call GetBucketRegion without credential config
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.30.0](service/datazone/CHANGELOG.md#v1300-2025-05-05)
+  * **Feature**: This release adds a new authorization policy to control the usage of custom AssetType when creating an Asset. Customer can now add new grant(s) of policyType USE_ASSET_TYPE for custom AssetTypes to apply authorization policy to projects members and domain unit owners.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.31.0](service/devicefarm/CHANGELOG.md#v1310-2025-05-05)
+  * **Feature**: Add an optional parameter to the GetDevicePoolCompatibility API to pass in project information to check device pool compatibility.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.214.0](service/ec2/CHANGELOG.md#v12140-2025-05-05)
+  * **Feature**: This update introduces API operations to manage and create local gateway VIF and VIF groups. It also includes API operations to describe Outpost LAGs and service link VIFs.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.56.3](service/ecs/CHANGELOG.md#v1563-2025-05-05)
+  * **Documentation**: Add support to roll back an In_Progress ECS Service Deployment
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.72.0](service/mediaconvert/CHANGELOG.md#v1720-2025-05-05)
+  * **Feature**: This release adds an optional sidecar per-frame video quality metrics report and an ALL_PCM option for audio selectors. It also changes the data type for Probe API response fields related to video and audio bitrate from integer to double.
+
 # Release (2025-05-02)
 
 ## Module Highlights

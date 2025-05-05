@@ -1,3 +1,7 @@
+# v1.31.0 (2025-05-05)
+
+* **Feature**: Add an optional parameter to the GetDevicePoolCompatibility API to pass in project information to check device pool compatibility.
+
 # v1.30.2 (2025-04-03)
 
 * No change notes available for this release.

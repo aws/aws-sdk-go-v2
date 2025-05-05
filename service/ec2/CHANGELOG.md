@@ -1,3 +1,7 @@
+# v1.214.0 (2025-05-05)
+
+* **Feature**: This update introduces API operations to manage and create local gateway VIF and VIF groups. It also includes API operations to describe Outpost LAGs and service link VIFs.
+
 # v1.213.0 (2025-04-30)
 
 * **Feature**: Launch of cost distribution feature for IPAM owners to distribute costs to internal teams.

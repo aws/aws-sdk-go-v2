@@ -564,6 +564,9 @@ func ExamplePolicyGrantDetail_outputUsage() {
 	case *types.PolicyGrantDetailMemberOverrideProjectOwners:
 		_ = v.Value // Value is types.OverrideProjectOwnersPolicyGrantDetail
 
+	case *types.PolicyGrantDetailMemberUseAssetType:
+		_ = v.Value // Value is types.UseAssetTypePolicyGrantDetail
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -574,6 +577,7 @@ func ExamplePolicyGrantDetail_outputUsage() {
 }
 
 var _ *types.CreateProjectFromProjectProfilePolicyGrantDetail
+var _ *types.UseAssetTypePolicyGrantDetail
 var _ *types.CreateDomainUnitPolicyGrantDetail
 var _ *types.OverrideProjectOwnersPolicyGrantDetail
 var _ *types.CreateEnvironmentProfilePolicyGrantDetail

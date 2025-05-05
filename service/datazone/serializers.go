@@ -18102,6 +18102,12 @@ func awsRestjson1_serializeDocumentPolicyGrantDetail(v types.PolicyGrantDetail, 
 			return err
 		}
 
+	case *types.PolicyGrantDetailMemberUseAssetType:
+		av := object.Key("useAssetType")
+		if err := awsRestjson1_serializeDocumentUseAssetTypePolicyGrantDetail(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -19445,6 +19451,18 @@ func awsRestjson1_serializeDocumentTrackingAssets(v map[string][]string, value s
 func awsRestjson1_serializeDocumentUnit(v *types.Unit, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUseAssetTypePolicyGrantDetail(v *types.UseAssetTypePolicyGrantDetail, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainUnitId != nil {
+		ok := object.Key("domainUnitId")
+		ok.String(*v.DomainUnitId)
+	}
 
 	return nil
 }

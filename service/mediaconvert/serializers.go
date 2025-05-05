@@ -2946,6 +2946,17 @@ func awsRestjson1_serializeDocument__listOfForceIncludeRenditionSize(v []types.F
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfFrameMetricType(v []types.FrameMetricType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfHlsAdditionalManifest(v []types.HlsAdditionalManifest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3980,6 +3991,13 @@ func awsRestjson1_serializeDocumentAv1Settings(v *types.Av1Settings, value smith
 		ok.Integer(*v.NumberBFramesBetweenReferenceFrames)
 	}
 
+	if v.PerFrameMetrics != nil {
+		ok := object.Key("perFrameMetrics")
+		if err := awsRestjson1_serializeDocument__listOfFrameMetricType(v.PerFrameMetrics, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QvbrSettings != nil {
 		ok := object.Key("qvbrSettings")
 		if err := awsRestjson1_serializeDocumentAv1QvbrSettings(v.QvbrSettings, ok); err != nil {
@@ -4056,6 +4074,13 @@ func awsRestjson1_serializeDocumentAvcIntraSettings(v *types.AvcIntraSettings, v
 	if len(v.InterlaceMode) > 0 {
 		ok := object.Key("interlaceMode")
 		ok.String(string(v.InterlaceMode))
+	}
+
+	if v.PerFrameMetrics != nil {
+		ok := object.Key("perFrameMetrics")
+		if err := awsRestjson1_serializeDocument__listOfFrameMetricType(v.PerFrameMetrics, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ScanTypeConversionMode) > 0 {
@@ -6422,6 +6447,13 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 		ok.Integer(*v.ParNumerator)
 	}
 
+	if v.PerFrameMetrics != nil {
+		ok := object.Key("perFrameMetrics")
+		if err := awsRestjson1_serializeDocument__listOfFrameMetricType(v.PerFrameMetrics, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.QualityTuningLevel) > 0 {
 		ok := object.Key("qualityTuningLevel")
 		ok.String(string(v.QualityTuningLevel))
@@ -6704,6 +6736,13 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 	if v.ParNumerator != nil {
 		ok := object.Key("parNumerator")
 		ok.Integer(*v.ParNumerator)
+	}
+
+	if v.PerFrameMetrics != nil {
+		ok := object.Key("perFrameMetrics")
+		if err := awsRestjson1_serializeDocument__listOfFrameMetricType(v.PerFrameMetrics, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.QualityTuningLevel) > 0 {
@@ -8902,6 +8941,13 @@ func awsRestjson1_serializeDocumentMpeg2Settings(v *types.Mpeg2Settings, value s
 		ok.Integer(*v.ParNumerator)
 	}
 
+	if v.PerFrameMetrics != nil {
+		ok := object.Key("perFrameMetrics")
+		if err := awsRestjson1_serializeDocument__listOfFrameMetricType(v.PerFrameMetrics, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.QualityTuningLevel) > 0 {
 		ok := object.Key("qualityTuningLevel")
 		ok.String(string(v.QualityTuningLevel))
@@ -9464,6 +9510,13 @@ func awsRestjson1_serializeDocumentOutputGroupSettings(v *types.OutputGroupSetti
 		}
 	}
 
+	if v.PerFrameMetrics != nil {
+		ok := object.Key("perFrameMetrics")
+		if err := awsRestjson1_serializeDocument__listOfFrameMetricType(v.PerFrameMetrics, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
@@ -9621,6 +9674,13 @@ func awsRestjson1_serializeDocumentProresSettings(v *types.ProresSettings, value
 	if v.ParNumerator != nil {
 		ok := object.Key("parNumerator")
 		ok.Integer(*v.ParNumerator)
+	}
+
+	if v.PerFrameMetrics != nil {
+		ok := object.Key("perFrameMetrics")
+		if err := awsRestjson1_serializeDocument__listOfFrameMetricType(v.PerFrameMetrics, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ScanTypeConversionMode) > 0 {
@@ -11036,6 +11096,13 @@ func awsRestjson1_serializeDocumentXavcSettings(v *types.XavcSettings, value smi
 	if v.FramerateNumerator != nil {
 		ok := object.Key("framerateNumerator")
 		ok.Integer(*v.FramerateNumerator)
+	}
+
+	if v.PerFrameMetrics != nil {
+		ok := object.Key("perFrameMetrics")
+		if err := awsRestjson1_serializeDocument__listOfFrameMetricType(v.PerFrameMetrics, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.Profile) > 0 {

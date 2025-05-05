@@ -1,8 +1,0 @@
-{
-    "id": "096161d8-acea-4d53-afe3-32ec60aac3db",
-    "type": "bugfix",
-    "description": "Enable user to call GetBucketRegion without credential config",
-    "modules": [
-        "feature/s3/manager"
-    ]
-}

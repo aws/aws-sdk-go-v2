@@ -80,7 +80,7 @@ type UpdateSubscriptionTargetOutput struct {
 	ApplicableAssetTypes []string
 
 	// The authorized principals to be updated as part of the UpdateSubscriptionTarget
-	// action.
+	// action. Updates are supported in batches of 5 at a time.
 	//
 	// This member is required.
 	AuthorizedPrincipals []string

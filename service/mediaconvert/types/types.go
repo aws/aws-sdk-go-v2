@@ -464,7 +464,7 @@ type AudioProperties struct {
 	BitDepth *int32
 
 	// The bit rate of the audio track, in bits per second.
-	BitRate *int32
+	BitRate *int64
 
 	// The number of audio channels in the audio track.
 	Channels *int32
@@ -664,8 +664,8 @@ type AutomatedAbrSettings struct {
 
 	// Optional. Specify the QVBR quality level to use for all renditions in your
 	// automated ABR stack. To have MediaConvert automatically determine the quality
-	// level: Leave blank. To manually specify a quality level: Enter an integer from 1
-	// to 10. MediaConvert will use a quality level up to the value that you specify,
+	// level: Leave blank. To manually specify a quality level: Enter a value from 1 to
+	// 10. MediaConvert will use a quality level up to the value that you specify,
 	// depending on your source. For more information about QVBR quality levels, see:
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/qvbr-guidelines.html
 	MaxQualityLevel *float64
@@ -810,6 +810,25 @@ type Av1Settings struct {
 	// file size; choose a smaller number for better video quality.
 	NumberBFramesBetweenReferenceFrames *int32
 
+	// Optionally choose one or more per frame metric reports to generate along with
+	// your output. You can use these metrics to analyze your video output according to
+	// one or more commonly used image quality metrics. You can specify per frame
+	// metrics for output groups or for individual outputs. When you do, MediaConvert
+	// writes a CSV (Comma-Separated Values) file to your S3 output destination, named
+	// after the video, video codec, and metric type. For example: video_h264_PSNR.csv
+	// Jobs that generate per frame metrics will take longer to complete, depending on
+	// the resolution and complexity of your output. For example, some 4K jobs might
+	// take up to twice as long to complete. Note that when analyzing the video quality
+	// of your output, or when comparing the video quality of multiple different
+	// outputs, we generally also recommend a detailed visual review in a controlled
+	// environment. You can choose from the following per frame metrics: * PSNR: Peak
+	// Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM:
+	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
+	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+	// Quality-Defined Variable Bitrate. This option is only available when your output
+	// uses the QVBR rate control mode.
+	PerFrameMetrics []FrameMetricType
+
 	// Settings for quality-defined variable bitrate encoding with the H.265 codec.
 	// Use these settings only when you set QVBR for Rate control mode.
 	QvbrSettings *Av1QvbrSettings
@@ -928,6 +947,25 @@ type AvcIntraSettings struct {
 	// the source. If the source is progressive, the output will be interlaced with top
 	// field bottom field first, depending on which of the Follow options you choose.
 	InterlaceMode AvcIntraInterlaceMode
+
+	// Optionally choose one or more per frame metric reports to generate along with
+	// your output. You can use these metrics to analyze your video output according to
+	// one or more commonly used image quality metrics. You can specify per frame
+	// metrics for output groups or for individual outputs. When you do, MediaConvert
+	// writes a CSV (Comma-Separated Values) file to your S3 output destination, named
+	// after the video, video codec, and metric type. For example: video_h264_PSNR.csv
+	// Jobs that generate per frame metrics will take longer to complete, depending on
+	// the resolution and complexity of your output. For example, some 4K jobs might
+	// take up to twice as long to complete. Note that when analyzing the video quality
+	// of your output, or when comparing the video quality of multiple different
+	// outputs, we generally also recommend a detailed visual review in a controlled
+	// environment. You can choose from the following per frame metrics: * PSNR: Peak
+	// Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM:
+	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
+	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+	// Quality-Defined Variable Bitrate. This option is only available when your output
+	// uses the QVBR rate control mode.
+	PerFrameMetrics []FrameMetricType
 
 	// Use this setting for interlaced outputs, when your output frame rate is half of
 	// your input frame rate. In this situation, choose Optimized interlacing to create
@@ -2750,10 +2788,10 @@ type DvbTdtSettings struct {
 // Use Dynamic audio selectors when you do not know the track layout of your
 // source when you submit your job, but want to select multiple audio tracks. When
 // you include an audio track in your output and specify this Dynamic audio
-// selector as the Audio source, MediaConvert creates an output audio track for
-// each dynamically selected track. Note that when you include a Dynamic audio
-// selector for two or more inputs, each input must have the same number of audio
-// tracks and audio channels.
+// selector as the Audio source, MediaConvert creates an audio track within that
+// output for each dynamically selected track. Note that when you include a Dynamic
+// audio selector for two or more inputs, each input must have the same number of
+// audio tracks and audio channels.
 type DynamicAudioSelector struct {
 
 	// Apply audio timing corrections to help synchronize audio and video in your
@@ -3697,6 +3735,25 @@ type H264Settings struct {
 	// specify the ratio 40:33. In this example, the value for parNumerator is 40.
 	ParNumerator *int32
 
+	// Optionally choose one or more per frame metric reports to generate along with
+	// your output. You can use these metrics to analyze your video output according to
+	// one or more commonly used image quality metrics. You can specify per frame
+	// metrics for output groups or for individual outputs. When you do, MediaConvert
+	// writes a CSV (Comma-Separated Values) file to your S3 output destination, named
+	// after the video, video codec, and metric type. For example: video_h264_PSNR.csv
+	// Jobs that generate per frame metrics will take longer to complete, depending on
+	// the resolution and complexity of your output. For example, some 4K jobs might
+	// take up to twice as long to complete. Note that when analyzing the video quality
+	// of your output, or when comparing the video quality of multiple different
+	// outputs, we generally also recommend a detailed visual review in a controlled
+	// environment. You can choose from the following per frame metrics: * PSNR: Peak
+	// Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM:
+	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
+	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+	// Quality-Defined Variable Bitrate. This option is only available when your output
+	// uses the QVBR rate control mode.
+	PerFrameMetrics []FrameMetricType
+
 	// The Quality tuning level you choose represents a trade-off between the encoding
 	// speed of your job and the output video quality. For the fastest encoding speed
 	// at the cost of video quality: Choose Single pass. For a good balance between
@@ -4112,6 +4169,25 @@ type H265Settings struct {
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parNumerator is 40.
 	ParNumerator *int32
+
+	// Optionally choose one or more per frame metric reports to generate along with
+	// your output. You can use these metrics to analyze your video output according to
+	// one or more commonly used image quality metrics. You can specify per frame
+	// metrics for output groups or for individual outputs. When you do, MediaConvert
+	// writes a CSV (Comma-Separated Values) file to your S3 output destination, named
+	// after the video, video codec, and metric type. For example: video_h264_PSNR.csv
+	// Jobs that generate per frame metrics will take longer to complete, depending on
+	// the resolution and complexity of your output. For example, some 4K jobs might
+	// take up to twice as long to complete. Note that when analyzing the video quality
+	// of your output, or when comparing the video quality of multiple different
+	// outputs, we generally also recommend a detailed visual review in a controlled
+	// environment. You can choose from the following per frame metrics: * PSNR: Peak
+	// Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM:
+	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
+	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+	// Quality-Defined Variable Bitrate. This option is only available when your output
+	// uses the QVBR rate control mode.
+	PerFrameMetrics []FrameMetricType
 
 	// Optional. Use Quality tuning level to choose how you want to trade off encoding
 	// speed for output video quality. The default behavior is faster, lower quality,
@@ -6693,6 +6769,25 @@ type Mpeg2Settings struct {
 	// specify the ratio 40:33. In this example, the value for parNumerator is 40.
 	ParNumerator *int32
 
+	// Optionally choose one or more per frame metric reports to generate along with
+	// your output. You can use these metrics to analyze your video output according to
+	// one or more commonly used image quality metrics. You can specify per frame
+	// metrics for output groups or for individual outputs. When you do, MediaConvert
+	// writes a CSV (Comma-Separated Values) file to your S3 output destination, named
+	// after the video, video codec, and metric type. For example: video_h264_PSNR.csv
+	// Jobs that generate per frame metrics will take longer to complete, depending on
+	// the resolution and complexity of your output. For example, some 4K jobs might
+	// take up to twice as long to complete. Note that when analyzing the video quality
+	// of your output, or when comparing the video quality of multiple different
+	// outputs, we generally also recommend a detailed visual review in a controlled
+	// environment. You can choose from the following per frame metrics: * PSNR: Peak
+	// Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM:
+	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
+	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+	// Quality-Defined Variable Bitrate. This option is only available when your output
+	// uses the QVBR rate control mode.
+	PerFrameMetrics []FrameMetricType
+
 	// Optional. Use Quality tuning level to choose how you want to trade off encoding
 	// speed for output video quality. The default behavior is faster, lower quality,
 	// single-pass encoding.
@@ -7292,6 +7387,25 @@ type OutputGroupSettings struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html.
 	MsSmoothGroupSettings *MsSmoothGroupSettings
 
+	// Optionally choose one or more per frame metric reports to generate along with
+	// your output. You can use these metrics to analyze your video output according to
+	// one or more commonly used image quality metrics. You can specify per frame
+	// metrics for output groups or for individual outputs. When you do, MediaConvert
+	// writes a CSV (Comma-Separated Values) file to your S3 output destination, named
+	// after the video, video codec, and metric type. For example: video_h264_PSNR.csv
+	// Jobs that generate per frame metrics will take longer to complete, depending on
+	// the resolution and complexity of your output. For example, some 4K jobs might
+	// take up to twice as long to complete. Note that when analyzing the video quality
+	// of your output, or when comparing the video quality of multiple different
+	// outputs, we generally also recommend a detailed visual review in a controlled
+	// environment. You can choose from the following per frame metrics: * PSNR: Peak
+	// Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM:
+	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
+	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+	// Quality-Defined Variable Bitrate. This option is only available when your output
+	// uses the QVBR rate control mode.
+	PerFrameMetrics []FrameMetricType
+
 	// Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth
 	// Streaming, CMAF)
 	Type OutputGroupType
@@ -7513,6 +7627,25 @@ type ProresSettings struct {
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parNumerator is 40.
 	ParNumerator *int32
+
+	// Optionally choose one or more per frame metric reports to generate along with
+	// your output. You can use these metrics to analyze your video output according to
+	// one or more commonly used image quality metrics. You can specify per frame
+	// metrics for output groups or for individual outputs. When you do, MediaConvert
+	// writes a CSV (Comma-Separated Values) file to your S3 output destination, named
+	// after the video, video codec, and metric type. For example: video_h264_PSNR.csv
+	// Jobs that generate per frame metrics will take longer to complete, depending on
+	// the resolution and complexity of your output. For example, some 4K jobs might
+	// take up to twice as long to complete. Note that when analyzing the video quality
+	// of your output, or when comparing the video quality of multiple different
+	// outputs, we generally also recommend a detailed visual review in a controlled
+	// environment. You can choose from the following per frame metrics: * PSNR: Peak
+	// Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM:
+	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
+	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+	// Quality-Defined Variable Bitrate. This option is only available when your output
+	// uses the QVBR rate control mode.
+	PerFrameMetrics []FrameMetricType
 
 	// Use this setting for interlaced outputs, when your output frame rate is half of
 	// your input frame rate. In this situation, choose Optimized interlacing to create
@@ -8788,7 +8921,7 @@ type VideoProperties struct {
 	BitDepth *int32
 
 	// The bit rate of the video track, in bits per second.
-	BitRate *int32
+	BitRate *int64
 
 	// The color space color primaries of the video track.
 	ColorPrimaries ColorPrimaries
@@ -9453,6 +9586,25 @@ type XavcSettings struct {
 	// transcode jobs that use frame rate conversion, provide the value as a decimal
 	// number for Framerate. In this example, specify 23.976.
 	FramerateNumerator *int32
+
+	// Optionally choose one or more per frame metric reports to generate along with
+	// your output. You can use these metrics to analyze your video output according to
+	// one or more commonly used image quality metrics. You can specify per frame
+	// metrics for output groups or for individual outputs. When you do, MediaConvert
+	// writes a CSV (Comma-Separated Values) file to your S3 output destination, named
+	// after the video, video codec, and metric type. For example: video_h264_PSNR.csv
+	// Jobs that generate per frame metrics will take longer to complete, depending on
+	// the resolution and complexity of your output. For example, some 4K jobs might
+	// take up to twice as long to complete. Note that when analyzing the video quality
+	// of your output, or when comparing the video quality of multiple different
+	// outputs, we generally also recommend a detailed visual review in a controlled
+	// environment. You can choose from the following per frame metrics: * PSNR: Peak
+	// Signal-to-Noise Ratio * SSIM: Structural Similarity Index Measure * MS_SSIM:
+	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
+	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+	// Quality-Defined Variable Bitrate. This option is only available when your output
+	// uses the QVBR rate control mode.
+	PerFrameMetrics []FrameMetricType
 
 	// Specify the XAVC profile for this output. For more information, see the Sony
 	// documentation at https://www.xavc-info.org/. Note that MediaConvert doesn't

@@ -63,8 +63,14 @@ import (
 //
 //   - Run RunTask with the clientToken and the original set of parameters
 //
+// If you get a ClientException error, the RunTask could not be processed because
+// you use managed scaling and there is a capacity error because the quota of tasks
+// in the PROVISIONING per cluster has been reached. For information about the
+// service quotas, see [Amazon ECS service quotas].
+//
 // [Scheduling Tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
 // [Amazon EBS volumes]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
+// [Amazon ECS service quotas]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html
 func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...func(*Options)) (*RunTaskOutput, error) {
 	if params == nil {
 		params = &RunTaskInput{}

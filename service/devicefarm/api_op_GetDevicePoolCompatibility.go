@@ -41,6 +41,9 @@ type GetDevicePoolCompatibilityInput struct {
 	// An object that contains information about the settings for a run.
 	Configuration *types.ScheduleRunConfiguration
 
+	// The ARN of the project for which you want to check device pool compatibility.
+	ProjectArn *string
+
 	// Information about the uploaded test to be run against the device pool.
 	Test *types.ScheduleRunTest
 

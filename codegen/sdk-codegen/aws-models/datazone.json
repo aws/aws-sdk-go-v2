@@ -24751,6 +24751,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CREATE_PROJECT_FROM_PROJECT_PROFILE"
                     }
+                },
+                "USE_ASSET_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USE_ASSET_TYPE"
+                    }
                 }
             }
         },
@@ -25975,6 +25981,12 @@
                     "target": "com.amazonaws.datazone#CreateProjectFromProjectProfilePolicyGrantDetail",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to create a project from project profile.</p>"
+                    }
+                },
+                "useAssetType": {
+                    "target": "com.amazonaws.datazone#UseAssetTypePolicyGrantDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the domain unit(s) whose projects can use this asset type while creating asset or asset revisions.</p>"
                     }
                 }
             },
@@ -31649,6 +31661,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ENVIRONMENT_PROFILE"
                     }
+                },
+                "ASSET_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSET_TYPE"
+                    }
                 }
             }
         },
@@ -35385,7 +35403,7 @@
                 "authorizedPrincipals": {
                     "target": "com.amazonaws.datazone#AuthorizedPrincipalIdentifiers",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authorized principals to be updated as part of the\n            <code>UpdateSubscriptionTarget</code> action.</p>",
+                        "smithy.api#documentation": "<p>The authorized principals to be updated as part of the\n            <code>UpdateSubscriptionTarget</code> action. Updates are supported in batches of 5 at a\n         time.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -35593,6 +35611,20 @@
         },
         "com.amazonaws.datazone#UpdatedBy": {
             "type": "string"
+        },
+        "com.amazonaws.datazone#UseAssetTypePolicyGrantDetail": {
+            "type": "structure",
+            "members": {
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the domain unit(s) whose projects can use this asset type while creating asset or asset revisions.</p>"
+            }
         },
         "com.amazonaws.datazone#UserAssignment": {
             "type": "enum",
