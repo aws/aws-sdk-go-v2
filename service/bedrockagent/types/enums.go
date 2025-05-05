@@ -533,6 +533,7 @@ const (
 	FlowNodeTypeRetrieval      FlowNodeType = "Retrieval"
 	FlowNodeTypeIterator       FlowNodeType = "Iterator"
 	FlowNodeTypeCollector      FlowNodeType = "Collector"
+	FlowNodeTypeInlineCode     FlowNodeType = "InlineCode"
 )
 
 // Values returns all known values for FlowNodeType. Note that this can be
@@ -553,6 +554,7 @@ func (FlowNodeType) Values() []FlowNodeType {
 		"Retrieval",
 		"Iterator",
 		"Collector",
+		"InlineCode",
 	}
 }
 
@@ -1296,6 +1298,23 @@ const (
 func (SupplementalDataStorageLocationType) Values() []SupplementalDataStorageLocationType {
 	return []SupplementalDataStorageLocationType{
 		"S3",
+	}
+}
+
+type SupportedLanguages string
+
+// Enum values for SupportedLanguages
+const (
+	SupportedLanguagesPython3 SupportedLanguages = "Python_3"
+)
+
+// Values returns all known values for SupportedLanguages. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SupportedLanguages) Values() []SupportedLanguages {
+	return []SupportedLanguages{
+		"Python_3",
 	}
 }
 

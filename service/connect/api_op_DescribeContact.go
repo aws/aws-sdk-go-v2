@@ -15,7 +15,8 @@ import (
 //
 // Describes the specified contact.
 //
-//   - CustomerEndpoint and SystemEndpoint are only populated for EMAIL contacts.
+//   - SystemEndpoint is not populated for contacts with initiation method of
+//     MONITOR, QUEUE_TRANSFER, or CALLBACK
 //
 //   - Contact information remains available in Amazon Connect for 24 months from
 //     the InitiationTimestamp , and then it is deleted. Only contact information

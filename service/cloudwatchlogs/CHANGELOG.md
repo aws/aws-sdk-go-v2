@@ -1,3 +1,7 @@
+# v1.48.0 (2025-04-30)
+
+* **Feature**: CloudWatch Logs supports "DELIVERY" log class. This log class is used only for delivering AWS Lambda logs to Amazon S3 or Amazon Data Firehose.
+
 # v1.47.3 (2025-04-10)
 
 * No change notes available for this release.

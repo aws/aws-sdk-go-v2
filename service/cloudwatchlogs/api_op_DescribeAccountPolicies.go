@@ -20,7 +20,7 @@ import (
 //     logs:GetDataProtectionPolicy and logs:DescribeAccountPolicies permissions.
 //
 //   - To see subscription filter policies, you must have the
-//     logs:DescrubeSubscriptionFilters and logs:DescribeAccountPolicies permissions.
+//     logs:DescribeSubscriptionFilters and logs:DescribeAccountPolicies permissions.
 //
 //   - To see transformer policies, you must have the logs:GetTransformer and
 //     logs:DescribeAccountPolicies permissions.

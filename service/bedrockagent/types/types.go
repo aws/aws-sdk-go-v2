@@ -268,7 +268,7 @@ type AgentActionGroup struct {
 	// with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]
 	// .
 	//
-	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
 	ParentActionGroupSignatureParams map[string]string
 
 	// If this field is set as AMAZON.UserInput , the agent can request the user for
@@ -1800,6 +1800,7 @@ type FlowNode struct {
 //	FlowNodeConfigurationMemberAgent
 //	FlowNodeConfigurationMemberCollector
 //	FlowNodeConfigurationMemberCondition
+//	FlowNodeConfigurationMemberInlineCode
 //	FlowNodeConfigurationMemberInput
 //	FlowNodeConfigurationMemberIterator
 //	FlowNodeConfigurationMemberKnowledgeBase
@@ -1835,7 +1836,7 @@ type FlowNodeConfigurationMemberCollector struct {
 
 func (*FlowNodeConfigurationMemberCollector) isFlowNodeConfiguration() {}
 
-// Contains configurations for a Condition node in your flow. Defines conditions
+// Contains configurations for a condition node in your flow. Defines conditions
 // that lead to different branches of the flow.
 type FlowNodeConfigurationMemberCondition struct {
 	Value ConditionFlowNodeConfiguration
@@ -1844,6 +1845,18 @@ type FlowNodeConfigurationMemberCondition struct {
 }
 
 func (*FlowNodeConfigurationMemberCondition) isFlowNodeConfiguration() {}
+
+// Contains configurations for an inline code node in your flow. Inline code nodes
+// let you write and execute code directly within your flow, enabling data
+// transformations, custom logic, and integrations without needing an external
+// Lambda function.
+type FlowNodeConfigurationMemberInlineCode struct {
+	Value InlineCodeFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberInlineCode) isFlowNodeConfiguration() {}
 
 // Contains configurations for an input flow node in your flow. The first node in
 // the flow. inputs can't be specified for this node.
@@ -1921,7 +1934,7 @@ type FlowNodeConfigurationMemberPrompt struct {
 
 func (*FlowNodeConfigurationMemberPrompt) isFlowNodeConfiguration() {}
 
-// Contains configurations for a Retrieval node in your flow. Retrieves data from
+// Contains configurations for a retrieval node in your flow. Retrieves data from
 // an Amazon S3 location and returns it as the output.
 type FlowNodeConfigurationMemberRetrieval struct {
 	Value RetrievalFlowNodeConfiguration
@@ -1931,7 +1944,7 @@ type FlowNodeConfigurationMemberRetrieval struct {
 
 func (*FlowNodeConfigurationMemberRetrieval) isFlowNodeConfiguration() {}
 
-// Contains configurations for a Storage node in your flow. Stores an input in an
+// Contains configurations for a storage node in your flow. Stores an input in an
 // Amazon S3 location.
 type FlowNodeConfigurationMemberStorage struct {
 	Value StorageFlowNodeConfiguration
@@ -2554,7 +2567,7 @@ type InferenceConfiguration struct {
 	// While generating a response, the model determines the probability of the
 	// following token at each point of generation. The value that you set for Top P
 	// determines the number of most-likely candidates from which the model chooses the
-	// next token in the sequence. For example, if you set topP to 80, the model only
+	// next token in the sequence. For example, if you set topP to 0.8, the model only
 	// selects the next token from the top 80% of the probability distribution of next
 	// tokens.
 	TopP *float32
@@ -2732,6 +2745,32 @@ type IngestionJobSummary struct {
 
 	// Contains statistics for the data ingestion job.
 	Statistics *IngestionJobStatistics
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for an inline code node in your flow. Inline code nodes
+// let you write and execute code directly within your flow, enabling data
+// transformations, custom logic, and integrations without needing an external
+// Lambda function.
+type InlineCodeFlowNodeConfiguration struct {
+
+	// The code that's executed in your inline code node. The code can access input
+	// data from previous nodes in the flow, perform operations on that data, and
+	// produce output that can be used by other nodes in your flow.
+	//
+	// The code must be valid in the programming language that you specify.
+	//
+	// This member is required.
+	Code *string
+
+	// The programming language used by your inline code node.
+	//
+	// The code must be valid in the programming language that you specify. Currently,
+	// only Python 3 ( Python_3 ) is supported.
+	//
+	// This member is required.
+	Language SupportedLanguages
 
 	noSmithyDocumentSerde
 }
@@ -3775,7 +3814,7 @@ type PromptConfiguration struct {
 	// promptType . If you set this value to DISABLED , the agent skips that step. The
 	// default state for each promptType is as follows.
 	//
-	//   - PRE_PROCESSING – ENABLED
+	//   - PRE_PROCESSING – DISABLED
 	//
 	//   - ORCHESTRATION – ENABLED
 	//

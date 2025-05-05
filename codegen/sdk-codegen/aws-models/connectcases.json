@@ -2472,6 +2472,17 @@
                 "smithy.api#timestampFormat": "date-time"
             }
         },
+        "com.amazonaws.connectcases#CustomEntity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\.@:/ ]*[a-zA-Z0-9_\\-\\.@:/]$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.connectcases#DeleteCaseRule": {
             "type": "operation",
             "input": {
@@ -5580,7 +5591,7 @@
                         "smithy.api#documentation": "<p>The maximum number of cases to return. The current maximum supported value is 25. This is\n      also the default value when no other value is provided.</p>",
                         "smithy.api#range": {
                             "min": 1,
-                            "max": 25
+                            "max": 100
                         }
                     }
                 },
@@ -5642,7 +5653,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of case documents where each case contains the properties <code>CaseId</code> and\n        <code>Fields</code> where each field is a complex union structure. </p>",
                         "smithy.api#length": {
-                            "max": 25
+                            "max": 100
                         },
                         "smithy.api#required": {}
                     }
@@ -6907,10 +6918,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the Amazon Connect ARN of the user.</p>"
                     }
+                },
+                "customEntity": {
+                    "target": "com.amazonaws.connectcases#CustomEntity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any provided entity.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the identity of the person who performed the action.</p>"
+                "smithy.api#documentation": "<p>Represents the entity that performed the action.</p>"
             }
         },
         "com.amazonaws.connectcases#ValidationException": {

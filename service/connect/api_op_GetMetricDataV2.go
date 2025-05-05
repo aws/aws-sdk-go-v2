@@ -21,11 +21,11 @@ import (
 // at varying intervals. It does not support agent queues.
 //
 // For a description of the historical metrics that are supported by
-// GetMetricDataV2 and GetMetricData , see [Historical metrics definitions] in the Amazon Connect Administrator
+// GetMetricDataV2 and GetMetricData , see [Metrics definitions] in the Amazon Connect Administrator
 // Guide.
 //
-// [Historical metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
 // [GetMetricData]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html
+// [Metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
 func (c *Client) GetMetricDataV2(ctx context.Context, params *GetMetricDataV2Input, optFns ...func(*Options)) (*GetMetricDataV2Output, error) {
 	if params == nil {
 		params = &GetMetricDataV2Input{}
@@ -134,7 +134,7 @@ type GetMetricDataV2Input struct {
 
 	// The metrics to retrieve. Specify the name, groupings, and filters for each
 	// metric. The following historical metrics are available. For a description of
-	// each metric, see [Historical metrics definitions]in the Amazon Connect Administrator Guide.
+	// each metric, see [Metrics definition]in the Amazon Connect Administrator Guide.
 	//
 	// ABANDONMENT_RATE Unit: Percent
 	//
@@ -320,7 +320,7 @@ type GetMetricDataV2Input struct {
 	// ID, Evaluation Section ID, Evaluation Question ID, Evaluation Source, Form
 	// Version, Queue, Routing Profile
 	//
-	// UI name: [Average agent evaluation score]
+	// UI name: [Average evaluation score]
 	//
 	// AVG_FLOW_TIME Unit: Seconds
 	//
@@ -486,7 +486,7 @@ type GetMetricDataV2Input struct {
 	// Id, Evaluation Section ID, Evaluation Question ID, Evaluation Source, Form
 	// Version, Queue, Routing Profile
 	//
-	// UI name: [Average weighted agent evaluation score]
+	// UI name: [Average weighted evaluation score]
 	//
 	// BOT_CONVERSATIONS_COMPLETED Unit: Count
 	//
@@ -496,7 +496,7 @@ type GetMetricDataV2Input struct {
 	// Invoking resource published timestamp, Initiation method, Invoking resource
 	// type, Parent flows resource ID
 	//
-	// UI name: [Bot conversations]
+	// UI name: [Bot conversations completed]
 	//
 	// BOT_INTENTS_COMPLETED Unit: Count
 	//
@@ -1056,7 +1056,7 @@ type GetMetricDataV2Input struct {
 	//
 	// Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
 	//
-	// UI name: [Non-Productive Time]
+	// UI name: [Agent non-productive time]
 	//
 	// SUM_ONLINE_TIME_AGENT Unit: Seconds
 	//
@@ -1071,109 +1071,109 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Callback attempts]
 	//
-	// [Historical metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
-	// [Contacts transferred out external]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-external-historical
-	// [Average agent greeting time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-greeting-time-agent-historical
-	// [Non-talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ntt-historical
-	// [Contacts created]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-created-historical
-	// [Adherence]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#adherence-historical
-	// [Customer talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttcustomer-historical
-	// [Average conversation duration]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-conversation-duration-historical
-	// [Flows outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-historical
-	// [Contacts queued]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-historical
-	// [Occupancy]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#occupancy-historical
-	// [Percent bot conversations outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-conversations-outcome-metric
-	// [Minimum flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#minimum-flow-time-historical
-	// [Percent bot intents outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-intents-outcome-metric
-	// [Contacts answered in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-answered-x-historical
-	// [Average case resolution time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-case-resolution-time-historical
-	// [Agent API connecting time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-agent-api-connecting-time
-	// [Talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#tt-historical
-	// [Average agent talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-agent-historical
-	// [Average agent interruption time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-time-agent-historical
-	// [Contacts transferred out]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-historical
-	// [Campaign send attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#campaign-send-attempts-historical
-	// [Average bot conversation time]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#average-bot-conversation-time-metric
-	// [Average flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-flow-time-historical
-	// [Contacts hold disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical
-	// [Average holds]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-holds-historical
-	// [API contacts handled]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#api-contacts-handled-historical
-	// [Agent non-response without customer abandons]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-nonresponse-no-abandon-historical
-	// [Service level X]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#service-level-historical
-	// [Contact handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-handle-time-historical
-	// [Bot conversations]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed-metric
-	// [Agent idle time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-idle-time-historica
-	// [Adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#adherent-time-historical
-	// [Average talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-historical
-	// [Average after contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-acw-time-historical
-	// [Cases created]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-created-historical
-	// [Average handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-handle-time-historical
-	// [Average customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-customer-hold-time-historical
-	// [Average bot conversation turns]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#average-bot-conversation-turns-metric
-	// [Contacts hold customer disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical
-	// [Human answered]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#human-answered-historical
-	// [Contacts removed from queue in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-removed-historical
-	// [Contacts hold agent disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-agent-disconnect-historical
-	// [Contacts transferred out internal]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-internal-historical
-	// [Agent non-response]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-non-response
-	// [Agent answer rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-answer-rate-historical
-	// [Evaluations performed]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#evaluations-performed-historical
-	// [Average agent pause time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-pause-time-historical
-	// [Campaign contacts abandoned after X rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#campaign-contacts-abandoned-rate-historical
-	// [Average queue abandon time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-abandon-time-historical
-	// [Contacts transferred out by agent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical
-	// [Average agent API connecting time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-avg-agent-api-connecting-time
-	// [Maximum flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-flow-time-historical
-	// [Average contact duration]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-contact-duration-historical
-	// [Non-adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#non-adherent-time
-	// [Average agent interaction and customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-interaction-customer-hold-time-historical
-	// [After contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#acw-historical
-	// [Average customer talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-customer-historical
-	// [Campaign contacts abandoned after X]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#campaign-contacts-abandoned-historical
-	// [Error status time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#error-status-time-historical
-	// [Maximum queued time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-queued-time-historical
-	// [Average active time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-active-time-historical
-	// [Contacts transferred out queue]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical
-	// [Cases reopened]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-reopened-historical
-	// [Contact flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-flow-time-historical
-	// [Average customer hold time all contacts]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#avg-customer-hold-time-all-contacts-historical
-	// [Average agent interaction time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-interaction-time-historical
-	// [Agent on contact time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-on-contact-time-historical
-	// [Average non-talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##average-non-talk-time-historical
-	// [Average agent evaluation score]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-evaluation-score-historical
-	// [Flows started]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-started-historical
-	// [Average contacts per case]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-contacts-case-historical
-	// [Agent talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical
-	// [Average resolution time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-resolution-time-historical
-	// [Flows outcome percentage]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-percentage-historical
-	// [Cases resolved]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-historical
-	// [Contacts queued (enqueue timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-by-enqueue-historical
-	// [Online time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#online-time-historical
-	// [Agent interaction time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-time-historical
-	// [Average agent interruptions]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-agent-historical
-	// [Average dials per minute]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-dials-historical
-	// [Delivery attempt disposition rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#delivery-attempt-disposition-rate-historical
-	// [Contact disconnected]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-disconnected-historical
-	// [Contacts handled (connected to agent timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical
-	// [Average weighted agent evaluation score]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-weighted-agent-evaluation-score-historical
-	// [Contacts resolved in X]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical
-	// [Cases resolved on first contact]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-first-contact-historical
-	// [Contact abandoned]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical
-	// [Campaign interactions]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#campaign-interactions-historical
-	// [Bot intents completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed-metric
-	// [Abandonment rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#abandonment-rate-historical
-	// [Scheduled time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#scheduled-time-historical
-	// [Contacts abandoned in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-x-historical
-	// [Non-Productive Time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#npt-historical
-	// [Average wait time after customer connection]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-wait-time-historical
-	// [Current cases]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#current-cases-historical
-	// [Average queue answer time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-answer-time-historical
-	// [Customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#customer-hold-time-historical
-	// [Agent interaction and hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-hold-time-historical
-	// [Delivery attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#delivery-attempts-historical
-	// [Contacts put on hold]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical
-	// [Automatic fails percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#percent-evaluation-automatic-failures-historical
-	// [Callback attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#callback-attempts-historical
+	// [Contacts transferred out external]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-external
+	// [Average agent greeting time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-greeting-time
+	// [Non-talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#non-talk-time-percent
+	// [Agent non-productive time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-productive-time
+	// [Contacts created]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-created
+	// [Adherence]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#adherence
+	// [Customer talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-talk-time-percent
+	// [Average conversation duration]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-conversation-duration
+	// [Flows outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome
+	// [Contacts queued]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued
+	// [Occupancy]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#occupancy
+	// [Percent bot conversations outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-conversations-outcome
+	// [Minimum flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#minimum-flow-time
+	// [Percent bot intents outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-intents-outcome
+	// [Contacts answered in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-answered-in-x-seconds
+	// [Average case resolution time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-case-resolution-time
+	// [Agent API connecting time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-api-connecting-time
+	// [Talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#talk-time-percent
+	// [Average agent talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-talk-time
+	// [Average agent interruption time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruption-time
+	// [Contacts transferred out]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out
+	// [Campaign send attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-attempts
+	// [Average bot conversation time]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#average-bot-conversation-time
+	// [Average flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-flow-time
+	// [Contacts hold disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-disconnect
+	// [Average holds]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-holds
+	// [Bot conversations completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed
+	// [API contacts handled]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#api-contacts-handled
+	// [Agent non-response without customer abandons]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-response-without-customer-abandons
+	// [Service level X]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#service-level
+	// [Contact handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-handle-time
+	// [Agent idle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-idle-time
+	// [Adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#adherent-time
+	// [Average talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-talk-time
+	// [Average after contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#after-contact-work-time
+	// [Cases created]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-created
+	// [Average handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-handle-time
+	// [Average customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time
+	// [Average weighted evaluation score]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-weighted-evaluation-score
+	// [Average bot conversation turns]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#average-bot-conversation-turns
+	// [Contacts hold customer disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-customer-disconnect
+	// [Human answered]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#human-answered
+	// [Contacts removed from queue in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-removed-from-queue
+	// [Contacts hold agent disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-agent-disconnect
+	// [Contacts transferred out internal]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-internal
+	// [Agent non-response]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-response
+	// [Agent answer rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-answer-rate
+	// [Evaluations performed]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluations-performed
+	// [Average agent pause time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-pause-time
+	// [Campaign contacts abandoned after X rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x-rate
+	// [Average queue abandon time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-abandon-time
+	// [Contacts transferred out by agent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-by-agent
+	// [Average agent API connecting time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-api-connecting-time
+	// [Maximum flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#maximum-flow-time
+	// [Average contact duration]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-contact-duration
+	// [Non-adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#non-adherent-time
+	// [Average agent interaction and customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-and-customer-hold-time
+	// [After contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#after-contact-work-time
+	// [Average customer talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-talk-time
+	// [Campaign contacts abandoned after X]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x
+	// [Error status time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#error-status-time
+	// [Maximum queued time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#maximum-queued-time
+	// [Average active time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-active-time
+	// [Contacts transferred out queue]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-queue
+	// [Cases reopened]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-reopened
+	// [Contact flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-flow-time
+	// [Average customer hold time all contacts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time-all-contacts
+	// [Average agent interaction time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-time
+	// [Agent on contact time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-on-contact-time
+	// [Average non-talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-non-talk-time
+	// [Flows started]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-started
+	// [Average contacts per case]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-contacts-per-case
+	// [Agent talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-talk-time-percent
+	// [Metrics definition]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
+	// [Average resolution time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-resolution-time
+	// [Flows outcome percentage]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome-percentage
+	// [Cases resolved]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-resolved
+	// [Contacts queued (enqueue timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued-by-enqueue
+	// [Online time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#online-time
+	// [Agent interaction time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-time
+	// [Average agent interruptions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruptions
+	// [Average dials per minute]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-dials-per-minute
+	// [Delivery attempt disposition rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempt-disposition-rate
+	// [Contact disconnected]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-disconnected
+	// [Contacts handled (connected to agent timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled-by-connected-to-agent-timestamp
+	// [Average evaluation score]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-evaluation-score
+	// [Contacts resolved in X]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-resolved
+	// [Cases resolved on first contact]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-resolved-on-first-contact
+	// [Contact abandoned]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned
+	// [Campaign interactions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-interactions
+	// [Bot intents completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed
+	// [Abandonment rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#abandonment-rate
+	// [Scheduled time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#scheduled-time
+	// [Contacts abandoned in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned-in-x-seconds
+	// [Average wait time after customer connection]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection
+	// [Current cases]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#current-cases
+	// [Average queue answer time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time
+	// [Customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-hold-time
+	// [Agent interaction and hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-and-hold-time
+	// [Delivery attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempts
+	// [Contacts put on hold]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-put-on-hold
+	// [Automatic fails percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#automatic-fails-percent
+	// [Callback attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#callback-attempts
 	// [Forecasting, capacity planning, and scheduling]: https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region
 	//
 	// This member is required.

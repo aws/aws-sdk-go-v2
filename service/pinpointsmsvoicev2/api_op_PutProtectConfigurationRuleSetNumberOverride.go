@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Create or update a RuleSetNumberOverride and associate it with a protect
+// Create or update a phone number rule override and associate it with a protect
 // configuration.
 func (c *Client) PutProtectConfigurationRuleSetNumberOverride(ctx context.Context, params *PutProtectConfigurationRuleSetNumberOverrideInput, optFns ...func(*Options)) (*PutProtectConfigurationRuleSetNumberOverrideOutput, error) {
 	if params == nil {

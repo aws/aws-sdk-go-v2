@@ -30,9 +30,11 @@ import (
 //
 // Do not include any security-sensitive information including account access IDs,
 //
-//	secrets or tokens in any hyperparameter field. If the use of security-sensitive
-//	credentials are detected, SageMaker will reject your training job request and
-//	return an exception error.
+//	secrets, or tokens in any hyperparameter fields. As part of the shared
+//	responsibility model, you are responsible for any potential exposure,
+//	unauthorized access, or compromise of your sensitive data if caused by
+//	security-sensitive information included in the request hyperparameter variable
+//	or plain text fields.
 //
 //	- InputDataConfig - Describes the input required by the training job and the
 //	Amazon S3, EFS, or FSx location where it is stored.
@@ -60,6 +62,14 @@ import (
 //	managed spot training job has to complete.
 //
 //	- Environment - The environment variables to set in the Docker container.
+//
+// Do not include any security-sensitive information including account access IDs,
+//
+//	secrets, or tokens in any environment fields. As part of the shared
+//	responsibility model, you are responsible for any potential exposure,
+//	unauthorized access, or compromise of your sensitive data if caused by
+//	security-sensitive information included in the request environment variable or
+//	plain text fields.
 //
 //	- RetryStrategy - The number of times to retry the job when the job fails due
 //	to an InternalServerError .
@@ -196,6 +206,13 @@ type CreateTrainingJobInput struct {
 	EnableNetworkIsolation *bool
 
 	// The environment variables to set in the Docker container.
+	//
+	// Do not include any security-sensitive information including account access IDs,
+	// secrets, or tokens in any environment fields. As part of the shared
+	// responsibility model, you are responsible for any potential exposure,
+	// unauthorized access, or compromise of your sensitive data if caused by
+	// security-sensitive information included in the request environment variable or
+	// plain text fields.
 	Environment map[string]string
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
@@ -221,9 +238,11 @@ type CreateTrainingJobInput struct {
 	// the Length Constraint .
 	//
 	// Do not include any security-sensitive information including account access IDs,
-	// secrets or tokens in any hyperparameter field. If the use of security-sensitive
-	// credentials are detected, SageMaker will reject your training job request and
-	// return an exception error.
+	// secrets, or tokens in any hyperparameter fields. As part of the shared
+	// responsibility model, you are responsible for any potential exposure,
+	// unauthorized access, or compromise of your sensitive data if caused by any
+	// security-sensitive information included in the request hyperparameter variable
+	// or plain text fields.
 	//
 	// [Algorithms]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
 	HyperParameters map[string]string
@@ -276,6 +295,12 @@ type CreateTrainingJobInput struct {
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
 	// environment. For more information, see [Tagging Amazon Web Services Resources].
+	//
+	// Do not include any security-sensitive information including account access IDs,
+	// secrets, or tokens in any tags. As part of the shared responsibility model, you
+	// are responsible for any potential exposure, unauthorized access, or compromise
+	// of your sensitive data if caused by any security-sensitive information included
+	// in the request tag variable or plain text fields.
 	//
 	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag

@@ -17931,6 +17931,16 @@ loop:
 			uv = &types.FlowNodeConfigurationMemberCondition{Value: mv}
 			break loop
 
+		case "inlineCode":
+			var mv types.InlineCodeFlowNodeConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentInlineCodeFlowNodeConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FlowNodeConfigurationMemberInlineCode{Value: mv}
+			break loop
+
 		case "input":
 			var mv types.InputFlowNodeConfiguration
 			destAddr := &mv
@@ -19741,6 +19751,55 @@ func awsRestjson1_deserializeDocumentIngestionJobSummary(v **types.IngestionJobS
 					return err
 				}
 				sv.UpdatedAt = ptr.Time(t)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInlineCodeFlowNodeConfiguration(v **types.InlineCodeFlowNodeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InlineCodeFlowNodeConfiguration
+	if *v == nil {
+		sv = &types.InlineCodeFlowNodeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InlineCode to be of type string, got %T instead", value)
+				}
+				sv.Code = ptr.String(jtv)
+			}
+
+		case "language":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SupportedLanguages to be of type string, got %T instead", value)
+				}
+				sv.Language = types.SupportedLanguages(jtv)
 			}
 
 		default:

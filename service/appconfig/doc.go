@@ -14,7 +14,7 @@
 // and perform other operational tuning to quickly respond to issues in production
 // environments.
 //
-// AppConfig is a capability of Amazon Web Services Systems Manager.
+// AppConfig is a tool in Amazon Web Services Systems Manager.
 //
 // Despite the fact that application configuration content can vary greatly from
 // application to application, AppConfig supports the following use cases, which

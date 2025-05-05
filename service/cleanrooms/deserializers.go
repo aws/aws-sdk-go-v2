@@ -24543,6 +24543,165 @@ func awsRestjson1_deserializeDocumentProtectedQuery(v **types.ProtectedQuery, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentProtectedQueryDistributeOutput(v **types.ProtectedQueryDistributeOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProtectedQueryDistributeOutput
+	if *v == nil {
+		sv = &types.ProtectedQueryDistributeOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "memberList":
+			if err := awsRestjson1_deserializeDocumentProtectedQueryMemberOutputList(&sv.MemberList, value); err != nil {
+				return err
+			}
+
+		case "s3":
+			if err := awsRestjson1_deserializeDocumentProtectedQueryS3Output(&sv.S3, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProtectedQueryDistributeOutputConfiguration(v **types.ProtectedQueryDistributeOutputConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProtectedQueryDistributeOutputConfiguration
+	if *v == nil {
+		sv = &types.ProtectedQueryDistributeOutputConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "locations":
+			if err := awsRestjson1_deserializeDocumentProtectedQueryDistributeOutputConfigurationLocations(&sv.Locations, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProtectedQueryDistributeOutputConfigurationLocation(v *types.ProtectedQueryDistributeOutputConfigurationLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ProtectedQueryDistributeOutputConfigurationLocation
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "member":
+			var mv types.ProtectedQueryMemberOutputConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentProtectedQueryMemberOutputConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ProtectedQueryDistributeOutputConfigurationLocationMemberMember{Value: mv}
+			break loop
+
+		case "s3":
+			var mv types.ProtectedQueryS3OutputConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentProtectedQueryS3OutputConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ProtectedQueryDistributeOutputConfigurationLocationMemberS3{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProtectedQueryDistributeOutputConfigurationLocations(v *[]types.ProtectedQueryDistributeOutputConfigurationLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ProtectedQueryDistributeOutputConfigurationLocation
+	if *v == nil {
+		cv = []types.ProtectedQueryDistributeOutputConfigurationLocation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ProtectedQueryDistributeOutputConfigurationLocation
+		if err := awsRestjson1_deserializeDocumentProtectedQueryDistributeOutputConfigurationLocation(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentProtectedQueryError(v **types.ProtectedQueryError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -24686,6 +24845,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "distribute":
+			var mv types.ProtectedQueryDistributeOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentProtectedQueryDistributeOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ProtectedQueryOutputMemberDistribute{Value: mv}
+			break loop
+
 		case "memberList":
 			var mv []types.ProtectedQuerySingleMemberOutput
 			if err := awsRestjson1_deserializeDocumentProtectedQueryMemberOutputList(&mv, value); err != nil {
@@ -24734,6 +24903,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "distribute":
+			var mv types.ProtectedQueryDistributeOutputConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentProtectedQueryDistributeOutputConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ProtectedQueryOutputConfigurationMemberDistribute{Value: mv}
+			break loop
+
 		case "member":
 			var mv types.ProtectedQueryMemberOutputConfiguration
 			destAddr := &mv

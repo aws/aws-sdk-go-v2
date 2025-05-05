@@ -109,6 +109,9 @@ func ExampleFlowNodeConfiguration_outputUsage() {
 	case *types.FlowNodeConfigurationMemberCondition:
 		_ = v.Value // Value is types.ConditionFlowNodeConfiguration
 
+	case *types.FlowNodeConfigurationMemberInlineCode:
+		_ = v.Value // Value is types.InlineCodeFlowNodeConfiguration
+
 	case *types.FlowNodeConfigurationMemberInput:
 		_ = v.Value // Value is types.InputFlowNodeConfiguration
 
@@ -146,17 +149,18 @@ func ExampleFlowNodeConfiguration_outputUsage() {
 }
 
 var _ *types.IteratorFlowNodeConfiguration
+var _ *types.AgentFlowNodeConfiguration
+var _ *types.KnowledgeBaseFlowNodeConfiguration
+var _ *types.PromptFlowNodeConfiguration
+var _ *types.InputFlowNodeConfiguration
+var _ *types.InlineCodeFlowNodeConfiguration
 var _ *types.LambdaFunctionFlowNodeConfiguration
 var _ *types.ConditionFlowNodeConfiguration
 var _ *types.CollectorFlowNodeConfiguration
 var _ *types.OutputFlowNodeConfiguration
-var _ *types.AgentFlowNodeConfiguration
 var _ *types.RetrievalFlowNodeConfiguration
 var _ *types.StorageFlowNodeConfiguration
-var _ *types.KnowledgeBaseFlowNodeConfiguration
 var _ *types.LexFlowNodeConfiguration
-var _ *types.PromptFlowNodeConfiguration
-var _ *types.InputFlowNodeConfiguration
 
 func ExampleFlowValidationDetails_outputUsage() {
 	var union types.FlowValidationDetails

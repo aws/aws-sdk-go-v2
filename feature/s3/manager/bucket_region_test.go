@@ -39,9 +39,8 @@ func testSetupGetBucketRegionServer(region string, statusCode int, incHeader boo
 }
 
 var testGetBucketRegionCases = []struct {
-	RespRegion      string
-	StatusCode      int
-	ExpectReqRegion string
+	RespRegion string
+	StatusCode int
 }{
 	{
 		RespRegion: "bucket-region",
@@ -56,9 +55,8 @@ var testGetBucketRegionCases = []struct {
 		StatusCode: 200,
 	},
 	{
-		RespRegion:      "bucket-region",
-		StatusCode:      200,
-		ExpectReqRegion: "default-region",
+		RespRegion: "bucket-region",
+		StatusCode: 200,
 	},
 }
 

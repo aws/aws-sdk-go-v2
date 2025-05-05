@@ -1032,6 +1032,25 @@ func (StorageProfileOperatingSystemFamily) Values() []StorageProfileOperatingSys
 	}
 }
 
+type TagPropagationMode string
+
+// Enum values for TagPropagationMode
+const (
+	TagPropagationModeNoPropagation                  TagPropagationMode = "NO_PROPAGATION"
+	TagPropagationModePropagateTagsToWorkersAtLaunch TagPropagationMode = "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH"
+)
+
+// Values returns all known values for TagPropagationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TagPropagationMode) Values() []TagPropagationMode {
+	return []TagPropagationMode{
+		"NO_PROPAGATION",
+		"PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH",
+	}
+}
+
 type TaskRunStatus string
 
 // Enum values for TaskRunStatus

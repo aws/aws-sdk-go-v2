@@ -26,11 +26,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.51.3
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.32.2
-	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.4
+	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.212.0
-	github.com/aws/aws-sdk-go-v2/service/ecr v1.43.3
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.213.0
+	github.com/aws/aws-sdk-go-v2/service/ecr v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.56.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.35.3
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.46.0
@@ -48,7 +48,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iam v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.2
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.33.3
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/kms v1.38.3
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.71.2
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.43.2
@@ -72,7 +72,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.31.3
 	github.com/aws/aws-sdk-go-v2/service/sns v1.34.4
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.38.5
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.58.2
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.59.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.33.19
 	github.com/aws/aws-sdk-go-v2/service/support v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.30.2

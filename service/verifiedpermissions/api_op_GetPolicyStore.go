@@ -35,6 +35,14 @@ type GetPolicyStoreInput struct {
 	// This member is required.
 	PolicyStoreId *string
 
+	// Specifies whether to return the tags that are attached to the policy store. If
+	// this parameter is included in the API call, the tags are returned, otherwise
+	// they are not returned.
+	//
+	// If this parameter is included in the API call but there are no tags attached to
+	// the policy store, the tags response parameter is omitted from the response.
+	Tags bool
+
 	noSmithyDocumentSerde
 }
 
@@ -65,6 +73,12 @@ type GetPolicyStoreOutput struct {
 	// This member is required.
 	ValidationSettings *types.ValidationSettings
 
+	// The version of the Cedar language used with policies, policy templates, and
+	// schemas in this policy store. For more information, see [Amazon Verified Permissions upgrade to Cedar v4 FAQ].
+	//
+	// [Amazon Verified Permissions upgrade to Cedar v4 FAQ]: https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/cedar4-faq.html
+	CedarVersion types.CedarVersion
+
 	// Specifies whether the policy store can be deleted. If enabled, the policy store
 	// can't be deleted.
 	//
@@ -74,6 +88,9 @@ type GetPolicyStoreOutput struct {
 	// Descriptive text that you can provide to help with identification of the
 	// current policy store.
 	Description *string
+
+	// The list of tags associated with the policy store.
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

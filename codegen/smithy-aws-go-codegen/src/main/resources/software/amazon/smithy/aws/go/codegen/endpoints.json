@@ -3015,6 +3015,7 @@
               "tags" : [ "dualstack" ]
             } ]
           },
+          "ca-central-1" : { },
           "eu-central-1" : {
             "variants" : [ {
               "tags" : [ "dualstack" ]
@@ -20040,6 +20041,7 @@
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
           "ap-south-1" : { },
+          "ap-south-2" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "ap-southeast-3" : { },
@@ -21417,6 +21419,7 @@
           "ap-southeast-2" : { },
           "ap-southeast-3" : { },
           "ap-southeast-4" : { },
+          "ap-southeast-5" : { },
           "ap-southeast-7" : { },
           "ca-central-1" : { },
           "ca-west-1" : { },
@@ -30308,6 +30311,12 @@
         "isRegionalized" : false,
         "partitionEndpoint" : "aws-cn-global"
       },
+      "route53profiles" : {
+        "endpoints" : {
+          "cn-north-1" : { },
+          "cn-northwest-1" : { }
+        }
+      },
       "route53resolver" : {
         "defaults" : {
           "protocols" : [ "https" ]
@@ -37429,6 +37438,12 @@
           }
         }
       },
+      "securityhub" : {
+        "endpoints" : {
+          "us-iso-east-1" : { },
+          "us-iso-west-1" : { }
+        }
+      },
       "servicediscovery" : {
         "endpoints" : {
           "us-iso-east-1" : { },
@@ -37514,6 +37529,12 @@
               "tags" : [ "fips" ]
             } ]
           }
+        }
+      },
+      "storagegateway" : {
+        "endpoints" : {
+          "us-iso-east-1" : { },
+          "us-iso-west-1" : { }
         }
       },
       "streams.dynamodb" : {
@@ -37844,6 +37865,11 @@
           }
         }
       },
+      "datasync" : {
+        "endpoints" : {
+          "us-isob-east-1" : { }
+        }
+      },
       "directconnect" : {
         "endpoints" : {
           "us-isob-east-1" : { }
@@ -38033,6 +38059,11 @@
           "us-isob-east-1" : { }
         }
       },
+      "guardduty" : {
+        "endpoints" : {
+          "us-isob-east-1" : { }
+        }
+      },
       "health" : {
         "endpoints" : {
           "us-isob-east-1" : { }
@@ -38154,6 +38185,11 @@
         "partitionEndpoint" : "aws-iso-b-global"
       },
       "outposts" : {
+        "endpoints" : {
+          "us-isob-east-1" : { }
+        }
+      },
+      "pi" : {
         "endpoints" : {
           "us-isob-east-1" : { }
         }

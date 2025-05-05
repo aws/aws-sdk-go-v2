@@ -2645,6 +2645,86 @@
                 "smithy.api#documentation": "<p>The source reference for an existing attachment.</p>"
             }
         },
+        "com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a unique URL for anonymous Amazon Q Business web experience. This URL can only be used once and must be used within 5 minutes after it's generated.</p>",
+                "smithy.api#http": {
+                    "uri": "/applications/{applicationId}/experiences/{webExperienceId}/anonymous-url",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrlRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business application environment attached to the web experience.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "webExperienceId": {
+                    "target": "com.amazonaws.qbusiness#WebExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the web experience.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionDurationInMinutes": {
+                    "target": "com.amazonaws.qbusiness#SessionDurationInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of the session associated with the unique URL for the web experience.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrlResponse": {
+            "type": "structure",
+            "members": {
+                "anonymousUrl": {
+                    "target": "com.amazonaws.qbusiness#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique URL for accessing the web experience.</p> <important> <p>This URL can only be used once and must be used within 5 minutes after it's generated.</p> </important>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qbusiness#CreateApplication": {
             "type": "operation",
             "input": {
@@ -6257,6 +6337,9 @@
                     "target": "com.amazonaws.qbusiness#CheckDocumentAccess"
                 },
                 {
+                    "target": "com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrl"
+                },
+                {
                     "target": "com.amazonaws.qbusiness#CreateSubscription"
                 },
                 {
@@ -8518,7 +8601,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information required to setup hallucination reduction. For more information, see <a href=\"amazonq/latest/qbusiness-ug/hallucination-reduction.html\">hallucination reduction</a>.</p> <note> <p>The hallucination reduction feature won't work if chat orchestration controls are enabled for your application.</p> </note>"
+                "smithy.api#documentation": "<p>Configuration information required to setup hallucination reduction. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/hallucination-reduction.html\"> hallucination reduction</a>.</p> <note> <p>The hallucination reduction feature won't work if chat orchestration controls are enabled for your application.</p> </note>"
             }
         },
         "com.amazonaws.qbusiness#HallucinationReductionControl": {
@@ -8651,6 +8734,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AWS_QUICKSIGHT_IDP"
+                    }
+                },
+                "ANONYMOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANONYMOUS"
                     }
                 }
             }
@@ -13078,6 +13167,15 @@
                 "smithy.api#documentation": "<p>You have exceeded the set limits for your Amazon Q Business service. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.qbusiness#SessionDurationInMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 15,
+                    "max": 60
+                }
             }
         },
         "com.amazonaws.qbusiness#SnippetExcerpt": {

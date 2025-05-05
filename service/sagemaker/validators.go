@@ -7105,6 +7105,21 @@ func validateAdditionalS3DataSource(v *types.AdditionalS3DataSource) error {
 	}
 }
 
+func validateAlarmDetails(v *types.AlarmDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AlarmDetails"}
+	if v.AlarmName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAlgorithmSpecification(v *types.AlgorithmSpecification) error {
 	if v == nil {
 		return nil
@@ -7635,6 +7650,23 @@ func validateAutoParameters(v []types.AutoParameter) error {
 	}
 }
 
+func validateAutoRollbackAlarms(v []types.AlarmDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoRollbackAlarms"}
+	for i := range v {
+		if err := validateAlarmDetails(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAutotune(v *types.Autotune) error {
 	if v == nil {
 		return nil
@@ -7754,6 +7786,24 @@ func validateCapacitySize(v *types.CapacitySize) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CapacitySize"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCapacitySizeConfig(v *types.CapacitySizeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CapacitySizeConfig"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
@@ -8068,6 +8118,11 @@ func validateClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpec
 	if v.OverrideVpcConfig != nil {
 		if err := validateVpcConfig(v.OverrideVpcConfig); err != nil {
 			invalidParams.AddNested("OverrideVpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScheduledUpdateConfig != nil {
+		if err := validateScheduledUpdateConfig(v.ScheduledUpdateConfig); err != nil {
+			invalidParams.AddNested("ScheduledUpdateConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8878,6 +8933,28 @@ func validateDeploymentConfig(v *types.DeploymentConfig) error {
 	if v.RollingUpdatePolicy != nil {
 		if err := validateRollingUpdatePolicy(v.RollingUpdatePolicy); err != nil {
 			invalidParams.AddNested("RollingUpdatePolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeploymentConfiguration(v *types.DeploymentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentConfiguration"}
+	if v.RollingUpdatePolicy != nil {
+		if err := validateRollingDeploymentPolicy(v.RollingUpdatePolicy); err != nil {
+			invalidParams.AddNested("RollingUpdatePolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutoRollbackConfiguration != nil {
+		if err := validateAutoRollbackAlarms(v.AutoRollbackConfiguration); err != nil {
+			invalidParams.AddNested("AutoRollbackConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -12471,6 +12548,30 @@ func validateRetryStrategy(v *types.RetryStrategy) error {
 	}
 }
 
+func validateRollingDeploymentPolicy(v *types.RollingDeploymentPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RollingDeploymentPolicy"}
+	if v.MaximumBatchSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaximumBatchSize"))
+	} else if v.MaximumBatchSize != nil {
+		if err := validateCapacitySizeConfig(v.MaximumBatchSize); err != nil {
+			invalidParams.AddNested("MaximumBatchSize", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RollbackMaximumBatchSize != nil {
+		if err := validateCapacitySizeConfig(v.RollbackMaximumBatchSize); err != nil {
+			invalidParams.AddNested("RollbackMaximumBatchSize", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRollingUpdatePolicy(v *types.RollingUpdatePolicy) error {
 	if v == nil {
 		return nil
@@ -12626,6 +12727,26 @@ func validateScheduleConfig(v *types.ScheduleConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleConfig"}
 	if v.ScheduleExpression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduledUpdateConfig(v *types.ScheduledUpdateConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduledUpdateConfig"}
+	if v.ScheduleExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
+	}
+	if v.DeploymentConfig != nil {
+		if err := validateDeploymentConfiguration(v.DeploymentConfig); err != nil {
+			invalidParams.AddNested("DeploymentConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13540,6 +13661,38 @@ func validateUiTemplate(v *types.UiTemplate) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UiTemplate"}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateClusterSoftwareInstanceGroups(v []types.UpdateClusterSoftwareInstanceGroupSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterSoftwareInstanceGroups"}
+	for i := range v {
+		if err := validateUpdateClusterSoftwareInstanceGroupSpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateClusterSoftwareInstanceGroupSpecification(v *types.UpdateClusterSoftwareInstanceGroupSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterSoftwareInstanceGroupSpecification"}
+	if v.InstanceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -15663,9 +15816,7 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 	if v.ProjectName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
-	if v.ServiceCatalogProvisioningDetails == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceCatalogProvisioningDetails"))
-	} else if v.ServiceCatalogProvisioningDetails != nil {
+	if v.ServiceCatalogProvisioningDetails != nil {
 		if err := validateServiceCatalogProvisioningDetails(v.ServiceCatalogProvisioningDetails); err != nil {
 			invalidParams.AddNested("ServiceCatalogProvisioningDetails", err.(smithy.InvalidParamsError))
 		}
@@ -19024,6 +19175,16 @@ func validateOpUpdateClusterSoftwareInput(v *UpdateClusterSoftwareInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterSoftwareInput"}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.InstanceGroups != nil {
+		if err := validateUpdateClusterSoftwareInstanceGroups(v.InstanceGroups); err != nil {
+			invalidParams.AddNested("InstanceGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeploymentConfig != nil {
+		if err := validateDeploymentConfiguration(v.DeploymentConfig); err != nil {
+			invalidParams.AddNested("DeploymentConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

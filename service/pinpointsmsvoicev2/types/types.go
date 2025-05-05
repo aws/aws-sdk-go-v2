@@ -607,7 +607,7 @@ type ProtectConfigurationInformation struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details on a RuleSetNumberOverride.
+// Provides details on phone number rule overrides for a protect configuration.
 type ProtectConfigurationRuleSetNumberOverride struct {
 
 	// The action for the rule to perform of either blocking or allowing messages to
@@ -1362,8 +1362,8 @@ type SupportedAssociation struct {
 	//   - ASSOCIATE_BEFORE_SUBMIT The origination identity has to be supplied when
 	//   creating a registration.
 	//
-	//   - ASSOCIATE_ON_APPROVAL This applies to all short code registrations. The
-	//   short code will be automatically provisioned once the registration is approved.
+	//   - ASSOCIATE_ON_APPROVAL This applies to all sender ID registrations. The
+	//   sender ID will be automatically provisioned once the registration is approved.
 	//
 	//   - ASSOCIATE_AFTER_COMPLETE This applies to phone number registrations when you
 	//   must complete a registration first, then associate one or more phone numbers

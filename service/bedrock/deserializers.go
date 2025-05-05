@@ -5308,6 +5308,11 @@ func awsRestjson1_deserializeOpDocumentGetModelCustomizationJobOutput(v **GetMod
 				sv.Status = types.ModelCustomizationJobStatus(jtv)
 			}
 
+		case "statusDetails":
+			if err := awsRestjson1_deserializeDocumentStatusDetails(&sv.StatusDetails, value); err != nil {
+				return err
+			}
+
 		case "trainingDataConfig":
 			if err := awsRestjson1_deserializeDocumentTrainingDataConfig(&sv.TrainingDataConfig, value); err != nil {
 				return err
@@ -11607,6 +11612,72 @@ func awsRestjson1_deserializeDocumentCustomModelUnits(v **types.CustomModelUnits
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDataProcessingDetails(v **types.DataProcessingDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataProcessingDetails
+	if *v == nil {
+		sv = &types.DataProcessingDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "creationTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CreationTime = ptr.Time(t)
+			}
+
+		case "lastModifiedTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastModifiedTime = ptr.Time(t)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobStatusDetails to be of type string, got %T instead", value)
+				}
+				sv.Status = types.JobStatusDetails(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDistillationConfig(v **types.DistillationConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16479,6 +16550,11 @@ func awsRestjson1_deserializeDocumentModelCustomizationJobSummary(v **types.Mode
 				sv.Status = types.ModelCustomizationJobStatus(jtv)
 			}
 
+		case "statusDetails":
+			if err := awsRestjson1_deserializeDocumentStatusDetails(&sv.StatusDetails, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -18921,6 +18997,52 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentStatusDetails(v **types.StatusDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StatusDetails
+	if *v == nil {
+		sv = &types.StatusDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dataProcessingDetails":
+			if err := awsRestjson1_deserializeDocumentDataProcessingDetails(&sv.DataProcessingDetails, value); err != nil {
+				return err
+			}
+
+		case "trainingDetails":
+			if err := awsRestjson1_deserializeDocumentTrainingDetails(&sv.TrainingDetails, value); err != nil {
+				return err
+			}
+
+		case "validationDetails":
+			if err := awsRestjson1_deserializeDocumentValidationDetails(&sv.ValidationDetails, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSubnetIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19344,6 +19466,72 @@ func awsRestjson1_deserializeDocumentTrainingDataConfig(v **types.TrainingDataCo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentTrainingDetails(v **types.TrainingDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TrainingDetails
+	if *v == nil {
+		sv = &types.TrainingDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "creationTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CreationTime = ptr.Time(t)
+			}
+
+		case "lastModifiedTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastModifiedTime = ptr.Time(t)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobStatusDetails to be of type string, got %T instead", value)
+				}
+				sv.Status = types.JobStatusDetails(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTrainingMetrics(v **types.TrainingMetrics, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19434,6 +19622,72 @@ func awsRestjson1_deserializeDocumentValidationDataConfig(v **types.ValidationDa
 		case "validators":
 			if err := awsRestjson1_deserializeDocumentValidators(&sv.Validators, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentValidationDetails(v **types.ValidationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ValidationDetails
+	if *v == nil {
+		sv = &types.ValidationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "creationTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CreationTime = ptr.Time(t)
+			}
+
+		case "lastModifiedTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastModifiedTime = ptr.Time(t)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobStatusDetails to be of type string, got %T instead", value)
+				}
+				sv.Status = types.JobStatusDetails(jtv)
 			}
 
 		default:

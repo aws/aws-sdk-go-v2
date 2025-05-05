@@ -55,6 +55,9 @@ type RequestPhoneNumberInput struct {
 
 	// The type of phone number to request.
 	//
+	// When you request a SIMULATOR phone number, you must set MessageType as
+	// TRANSACTIONAL .
+	//
 	// This member is required.
 	NumberType types.RequestableNumberType
 

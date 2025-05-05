@@ -370,6 +370,9 @@ func ExampleUserUnion_outputUsage() {
 	var union types.UserUnion
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.UserUnionMemberCustomEntity:
+		_ = v.Value // Value is string
+
 	case *types.UserUnionMemberUserArn:
 		_ = v.Value // Value is string
 
@@ -382,4 +385,5 @@ func ExampleUserUnion_outputUsage() {
 	}
 }
 
+var _ *string
 var _ *string

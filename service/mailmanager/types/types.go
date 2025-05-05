@@ -1235,6 +1235,7 @@ type Rule struct {
 //	RuleActionMemberDeliverToMailbox
 //	RuleActionMemberDeliverToQBusiness
 //	RuleActionMemberDrop
+//	RuleActionMemberPublishToSns
 //	RuleActionMemberRelay
 //	RuleActionMemberReplaceRecipient
 //	RuleActionMemberSend
@@ -1289,6 +1290,15 @@ type RuleActionMemberDrop struct {
 }
 
 func (*RuleActionMemberDrop) isRuleAction() {}
+
+// This action publishes the email content to an Amazon SNS topic.
+type RuleActionMemberPublishToSns struct {
+	Value SnsAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleActionMemberPublishToSns) isRuleAction() {}
 
 // This action relays the email to another SMTP server.
 type RuleActionMemberRelay struct {
@@ -1809,6 +1819,42 @@ type SendAction struct {
 	// there are configuration errors. For example, the caller does not have the
 	// permissions to call the sendRawEmail API.
 	ActionFailurePolicy ActionFailurePolicy
+
+	noSmithyDocumentSerde
+}
+
+// The action to publish the email content to an Amazon SNS topic. When executed,
+// this action will send the email as a notification to the specified SNS topic.
+type SnsAction struct {
+
+	// The Amazon Resource Name (ARN) of the IAM Role to use while writing to Amazon
+	// SNS. This role must have access to the sns:Publish API for the given topic.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The Amazon Resource Name (ARN) of the Amazon SNS Topic to which notification
+	// for the email received will be published.
+	//
+	// This member is required.
+	TopicArn *string
+
+	// A policy that states what to do in the case of failure. The action will fail if
+	// there are configuration errors. For example, specified SNS topic has been
+	// deleted or the role lacks necessary permissions to call the sns:Publish API.
+	ActionFailurePolicy ActionFailurePolicy
+
+	// The encoding to use for the email within the Amazon SNS notification. The
+	// default value is UTF-8 . Use BASE64 if you need to preserve all special
+	// characters, especially when the original message uses a different encoding
+	// format.
+	Encoding SnsNotificationEncoding
+
+	// The expected payload type within the Amazon SNS notification. CONTENT attempts
+	// to publish the full email content with 20KB of headers content. HEADERS
+	// extracts up to 100KB of header content to include in the notification, email
+	// content will not be included to the notification. The default value is CONTENT .
+	PayloadType SnsNotificationPayloadType
 
 	noSmithyDocumentSerde
 }

@@ -1,3 +1,79 @@
+# Release (2025-05-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.4.0](service/bedrockdataautomation/CHANGELOG.md#v140-2025-05-02)
+  * **Feature**: Added support for Custom output and blueprints for AUDIO data types.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.31.5](service/directoryservice/CHANGELOG.md#v1315-2025-05-02)
+  * **Documentation**: Doc only update - fixed typos.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.35.0](service/kinesis/CHANGELOG.md#v1350-2025-05-02)
+  * **Feature**: Marking ResourceARN as required for Amazon Kinesis Data Streams APIs TagResource, UntagResource, and ListTagsForResource.
+
+# Release (2025-05-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.38.0](service/appconfig/CHANGELOG.md#v1380-2025-05-01)
+  * **Feature**: Adding waiter support for deployments and environments; documentation updates
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.129.0](service/connect/CHANGELOG.md#v11290-2025-05-01)
+  * **Feature**: This release adds the following fields to DescribeContact: DisconnectReason, AgentInitiatedHoldDuration, AfterContactWorkStartTimestamp, AfterContactWorkEndTimestamp, AfterContactWorkDuration, StateTransitions, Recordings, ContactDetails, ContactEvaluations, Attributes
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.190.0](service/sagemaker/CHANGELOG.md#v11900-2025-05-01)
+  * **Feature**: Feature - Adding support for Scheduled and Rolling Update Software in Sagemaker Hyperpod.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.24.0](service/verifiedpermissions/CHANGELOG.md#v1240-2025-05-01)
+  * **Feature**: Amazon Verified Permissions / Features : Adds support for tagging policy stores.
+
+# Release (2025-04-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.19.0](feature/dynamodb/attributevalue/CHANGELOG.md#v1190-2025-04-30)
+  * **Feature**: added support for json to/from types.AttributeValue for DynamoDB and DynamoDB Streams
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.18.0](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v1180-2025-04-30)
+  * **Feature**: added support for json to/from types.AttributeValue for DynamoDB and DynamoDB Streams
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.33.0](service/bedrock/CHANGELOG.md#v1330-2025-04-30)
+  * **Feature**: You can now specify a cross region inference profile as a teacher model for the CreateModelCustomizationJob API. Additionally, the GetModelCustomizationJob API has been enhanced to return the sub-task statuses of a customization job within the StatusDetails response field.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.42.0](service/bedrockagent/CHANGELOG.md#v1420-2025-04-30)
+  * **Feature**: Features:    Add inline code node to prompt flow
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.42.0](service/bedrockagentruntime/CHANGELOG.md#v1420-2025-04-30)
+  * **Feature**: Support for Custom Orchestration within InlineAgents
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.25.0](service/cleanrooms/CHANGELOG.md#v1250-2025-04-30)
+  * **Feature**: This release adds support for ProtectedQuery results to be delivered to more than one collaboration member via the new distribute output configuration in StartProtectedQuery.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.48.0](service/cloudwatchlogs/CHANGELOG.md#v1480-2025-04-30)
+  * **Feature**: CloudWatch Logs supports "DELIVERY" log class. This log class is used only for delivering AWS Lambda logs to Amazon S3 or Amazon Data Firehose.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.11.0](service/deadline/CHANGELOG.md#v1110-2025-04-30)
+  * **Feature**: Adds support for tag management on workers and tag inheritance from fleets to their associated workers.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.213.0](service/ec2/CHANGELOG.md#v12130-2025-04-30)
+  * **Feature**: Launch of cost distribution feature for IPAM owners to distribute costs to internal teams.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.44.0](service/ecr/CHANGELOG.md#v1440-2025-04-30)
+  * **Feature**: Adds dualstack support for Amazon Elastic Container Registry (Amazon ECR).
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.33.0](service/ecrpublic/CHANGELOG.md#v1330-2025-04-30)
+  * **Feature**: Adds dualstack support for Amazon Elastic Container Registry Public (Amazon ECR Public).
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.13.0](service/mailmanager/CHANGELOG.md#v1130-2025-04-30)
+  * **Feature**: Introducing new RuleSet rule PublishToSns action, which allows customers to publish email notifications to an Amazon SNS topic. New PublishToSns action enables customers to easily integrate their email workflows via Amazon SNS, allowing them to notify other systems about important email events.
+
+# Release (2025-04-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.25.0](service/connectcases/CHANGELOG.md#v1250-2025-04-29)
+  * **Feature**: Introduces CustomEntity as part of the UserUnion data type. This field is used to indicate the entity who is performing the API action.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.34.3](service/dataexchange/CHANGELOG.md#v1343-2025-04-29)
+  * **Bug Fix**: **BREAKING CHANGE**: The type of Dataexchange#UpdateRevision$Finalized has been changed from `bool` to `*bool`. efore this change, the field was incorrectly marked as having a default value of false by the service, which made it functionally impossible for users to set this value to false
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.34.0](service/kinesis/CHANGELOG.md#v1340-2025-04-29)
+  * **Feature**: Amazon KDS now supports tagging and attribute-based access control (ABAC) for enhanced fan-out consumers.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.20.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1200-2025-04-29)
+  * **Feature**: AWS End User Messaging has added MONITOR and FILTER functionality to SMS Protect.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.26.0](service/qbusiness/CHANGELOG.md#v1260-2025-04-29)
+  * **Feature**: Add support for anonymous user access for Q Business applications
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.189.0](service/sagemaker/CHANGELOG.md#v11890-2025-04-29)
+  * **Feature**: Introduced support for P5en instance types on SageMaker Studio for JupyterLab and CodeEditor applications.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.14.0](service/sagemakermetrics/CHANGELOG.md#v1140-2025-04-29)
+  * **Feature**: SageMaker Metrics Service now supports FIPS endpoint in all US and Canada Commercial regions.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.59.0](service/ssm/CHANGELOG.md#v1590-2025-04-29)
+  * **Feature**: This release adds support for just-In-time node access in AWS Systems Manager. Just-in-time node access enables customers to move towards zero standing privileges by requiring operators to request access and obtain approval before remotely connecting to nodes managed by the SSM Agent.
+* `github.com/aws/aws-sdk-go-v2/service/ssmguiconnect`: [v1.0.0](service/ssmguiconnect/CHANGELOG.md#v100-2025-04-29)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds API support for the connection recording GUI Connect feature of AWS Systems Manager
+
 # Release (2025-04-28)
 
 ## General Highlights

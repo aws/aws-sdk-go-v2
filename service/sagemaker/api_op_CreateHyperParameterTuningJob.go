@@ -22,9 +22,11 @@ import (
 // these entities in Amazon SageMaker Studio. For more information, see [View Experiments, Trials, and Trial Components].
 //
 // Do not include any security-sensitive information including account access IDs,
-// secrets or tokens in any hyperparameter field. If the use of security-sensitive
-// credentials are detected, SageMaker will reject your training job request and
-// return an exception error.
+// secrets, or tokens in any hyperparameter fields. As part of the shared
+// responsibility model, you are responsible for any potential exposure,
+// unauthorized access, or compromise of your sensitive data if caused by any
+// security-sensitive information included in the request hyperparameter variable
+// or plain text fields..
 //
 // [View Experiments, Trials, and Trial Components]: https://docs.aws.amazon.com/sagemaker/latest/dg/experiments-view-compare.html#experiments-view
 func (c *Client) CreateHyperParameterTuningJob(ctx context.Context, params *CreateHyperParameterTuningJobInput, optFns ...func(*Options)) (*CreateHyperParameterTuningJobOutput, error) {

@@ -52,7 +52,7 @@ import (
 // results, then all the associated stored log events or query results that were
 // encrypted with that key will be unencryptable and unusable.
 //
-// CloudWatch Logs supports only symmetric KMS keys. Do not use an associate an
+// CloudWatch Logs supports only symmetric KMS keys. Do not associate an
 // asymmetric KMS key with your log group or query results. For more information,
 // see [Using Symmetric and Asymmetric Keys].
 //

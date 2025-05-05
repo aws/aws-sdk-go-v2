@@ -1,3 +1,7 @@
+# v1.25.0 (2025-04-29)
+
+* **Feature**: Introduces CustomEntity as part of the UserUnion data type. This field is used to indicate the entity who is performing the API action.
+
 # v1.24.0 (2025-04-16)
 
 * **Feature**: This feature provides capabilities to help track and meet service level agreements (SLAs) on cases programmatically. It allows configuring a new related item of type `Sla` on a case using CreateRelatedItem API and provides the ability to search for this new related item using SearchRelatedItems API.

@@ -8905,6 +8905,60 @@ func awsRestjson1_serializeDocumentProtectedJobS3OutputConfigurationInput(v *typ
 	return nil
 }
 
+func awsRestjson1_serializeDocumentProtectedQueryDistributeOutputConfiguration(v *types.ProtectedQueryDistributeOutputConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Locations != nil {
+		ok := object.Key("locations")
+		if err := awsRestjson1_serializeDocumentProtectedQueryDistributeOutputConfigurationLocations(v.Locations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProtectedQueryDistributeOutputConfigurationLocation(v types.ProtectedQueryDistributeOutputConfigurationLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ProtectedQueryDistributeOutputConfigurationLocationMemberMember:
+		av := object.Key("member")
+		if err := awsRestjson1_serializeDocumentProtectedQueryMemberOutputConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ProtectedQueryDistributeOutputConfigurationLocationMemberS3:
+		av := object.Key("s3")
+		if err := awsRestjson1_serializeDocumentProtectedQueryS3OutputConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProtectedQueryDistributeOutputConfigurationLocations(v []types.ProtectedQueryDistributeOutputConfigurationLocation, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentProtectedQueryDistributeOutputConfigurationLocation(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentProtectedQueryMemberOutputConfiguration(v *types.ProtectedQueryMemberOutputConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8922,6 +8976,12 @@ func awsRestjson1_serializeDocumentProtectedQueryOutputConfiguration(v types.Pro
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ProtectedQueryOutputConfigurationMemberDistribute:
+		av := object.Key("distribute")
+		if err := awsRestjson1_serializeDocumentProtectedQueryDistributeOutputConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ProtectedQueryOutputConfigurationMemberMember:
 		av := object.Key("member")
 		if err := awsRestjson1_serializeDocumentProtectedQueryMemberOutputConfiguration(&uv.Value, av); err != nil {

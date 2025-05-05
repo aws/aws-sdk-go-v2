@@ -1,3 +1,7 @@
+# v1.26.0 (2025-04-29)
+
+* **Feature**: Add support for anonymous user access for Q Business applications
+
 # v1.25.0 (2025-04-21)
 
 * **Feature**: The CheckDocumentAccess API for Amazon Q Business is a self-service debugging API that allows administrators to verify document access permissions and review Access Control List (ACL) configurations.

@@ -130,7 +130,7 @@ type AuditEventPerformedBy struct {
 	// This member is required.
 	IamPrincipalArn *string
 
-	// Represents the identity of the person who performed the action.
+	// Represents the entity that performed the action.
 	User UserUnion
 
 	noSmithyDocumentSerde
@@ -1458,14 +1458,24 @@ type TemplateSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the identity of the person who performed the action.
+// Represents the entity that performed the action.
 //
 // The following types satisfy this interface:
 //
+//	UserUnionMemberCustomEntity
 //	UserUnionMemberUserArn
 type UserUnion interface {
 	isUserUnion()
 }
+
+// Any provided entity.
+type UserUnionMemberCustomEntity struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*UserUnionMemberCustomEntity) isUserUnion() {}
 
 // Represents the Amazon Connect ARN of the user.
 type UserUnionMemberUserArn struct {

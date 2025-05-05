@@ -11150,6 +11150,16 @@ loop:
 			uv = &types.RuleActionMemberDrop{Value: mv}
 			break loop
 
+		case "PublishToSns":
+			var mv types.SnsAction
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentSnsAction(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RuleActionMemberPublishToSns{Value: mv}
+			break loop
+
 		case "Relay":
 			var mv types.RelayAction
 			destAddr := &mv
@@ -12737,6 +12747,82 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentSnsAction(v **types.SnsAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SnsAction
+	if *v == nil {
+		sv = &types.SnsAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActionFailurePolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionFailurePolicy to be of type string, got %T instead", value)
+				}
+				sv.ActionFailurePolicy = types.ActionFailurePolicy(jtv)
+			}
+
+		case "Encoding":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnsNotificationEncoding to be of type string, got %T instead", value)
+				}
+				sv.Encoding = types.SnsNotificationEncoding(jtv)
+			}
+
+		case "PayloadType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnsNotificationPayloadType to be of type string, got %T instead", value)
+				}
+				sv.PayloadType = types.SnsNotificationPayloadType(jtv)
+			}
+
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamRoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "TopicArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnsTopicArn to be of type string, got %T instead", value)
+				}
+				sv.TopicArn = ptr.String(jtv)
 			}
 
 		default:

@@ -48,6 +48,10 @@ type CreateWorkerInput struct {
 	// The IP address and host name of the worker.
 	HostProperties *types.HostPropertiesRequest
 
+	// Each tag consists of a tag key and a tag value. Tag keys and values are both
+	// required, but tag values can be empty strings.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

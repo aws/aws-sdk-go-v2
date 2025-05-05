@@ -11,7 +11,9 @@ import (
 )
 
 // Enables access to directory data via the Directory Service Data API for the
-// specified directory.
+// specified directory. For more information, see [Directory Service Data API Reference].
+//
+// [Directory Service Data API Reference]: https://docs.aws.amazon.com/directoryservicedata/latest/DirectoryServiceDataAPIReference/Welcome.html
 func (c *Client) EnableDirectoryDataAccess(ctx context.Context, params *EnableDirectoryDataAccessInput, optFns ...func(*Options)) (*EnableDirectoryDataAccessOutput, error) {
 	if params == nil {
 		params = &EnableDirectoryDataAccessInput{}

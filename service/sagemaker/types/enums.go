@@ -243,6 +243,7 @@ const (
 	AppInstanceTypeMlTrn132xlarge          AppInstanceType = "ml.trn1.32xlarge"
 	AppInstanceTypeMlTrn1n32xlarge         AppInstanceType = "ml.trn1n.32xlarge"
 	AppInstanceTypeMlP548xlarge            AppInstanceType = "ml.p5.48xlarge"
+	AppInstanceTypeMlP5en48xlarge          AppInstanceType = "ml.p5en.48xlarge"
 	AppInstanceTypeMlM6iLarge              AppInstanceType = "ml.m6i.large"
 	AppInstanceTypeMlM6iXlarge             AppInstanceType = "ml.m6i.xlarge"
 	AppInstanceTypeMlM6i2xlarge            AppInstanceType = "ml.m6i.2xlarge"
@@ -412,6 +413,7 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.trn1.32xlarge",
 		"ml.trn1n.32xlarge",
 		"ml.p5.48xlarge",
+		"ml.p5en.48xlarge",
 		"ml.m6i.large",
 		"ml.m6i.xlarge",
 		"ml.m6i.2xlarge",
@@ -4857,6 +4859,25 @@ func (MonitoringType) Values() []MonitoringType {
 		"ModelQuality",
 		"ModelBias",
 		"ModelExplainability",
+	}
+}
+
+type NodeUnavailabilityType string
+
+// Enum values for NodeUnavailabilityType
+const (
+	NodeUnavailabilityTypeInstanceCount      NodeUnavailabilityType = "INSTANCE_COUNT"
+	NodeUnavailabilityTypeCapacityPercentage NodeUnavailabilityType = "CAPACITY_PERCENTAGE"
+)
+
+// Values returns all known values for NodeUnavailabilityType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NodeUnavailabilityType) Values() []NodeUnavailabilityType {
+	return []NodeUnavailabilityType{
+		"INSTANCE_COUNT",
+		"CAPACITY_PERCENTAGE",
 	}
 }
 

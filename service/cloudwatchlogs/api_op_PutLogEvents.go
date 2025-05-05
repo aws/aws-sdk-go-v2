@@ -39,7 +39,7 @@ import (
 //   - A batch of log events in a single request cannot span more than 24 hours.
 //     Otherwise, the operation fails.
 //
-//   - Each log event can be no larger than 256 KB.
+//   - Each log event can be no larger than 1 MB.
 //
 //   - The maximum number of log events in a batch is 10,000.
 //

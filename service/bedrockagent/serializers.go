@@ -8125,6 +8125,12 @@ func awsRestjson1_serializeDocumentFlowNodeConfiguration(v types.FlowNodeConfigu
 			return err
 		}
 
+	case *types.FlowNodeConfigurationMemberInlineCode:
+		av := object.Key("inlineCode")
+		if err := awsRestjson1_serializeDocumentInlineCodeFlowNodeConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.FlowNodeConfigurationMemberInput:
 		av := object.Key("input")
 		if err := awsRestjson1_serializeDocumentInputFlowNodeConfiguration(&uv.Value, av); err != nil {
@@ -8505,6 +8511,23 @@ func awsRestjson1_serializeDocumentIngestionJobSortBy(v *types.IngestionJobSortB
 	if len(v.Order) > 0 {
 		ok := object.Key("order")
 		ok.String(string(v.Order))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInlineCodeFlowNodeConfiguration(v *types.InlineCodeFlowNodeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Code != nil {
+		ok := object.Key("code")
+		ok.String(*v.Code)
+	}
+
+	if len(v.Language) > 0 {
+		ok := object.Key("language")
+		ok.String(string(v.Language))
 	}
 
 	return nil

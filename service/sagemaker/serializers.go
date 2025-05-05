@@ -22035,6 +22035,18 @@ func awsAwsjson11_serializeDocumentAlarm(v *types.Alarm, value smithyjson.Value)
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAlarmDetails(v *types.AlarmDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AlarmName != nil {
+		ok := object.Key("AlarmName")
+		ok.String(*v.AlarmName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAlarmList(v []types.Alarm, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -22875,6 +22887,19 @@ func awsAwsjson11_serializeDocumentAutoParameters(v []types.AutoParameter, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAutoRollbackAlarms(v []types.AlarmDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAlarmDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAutoRollbackConfig(v *types.AutoRollbackConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -23147,6 +23172,23 @@ func awsAwsjson11_serializeDocumentCanvasAppSettings(v *types.CanvasAppSettings,
 }
 
 func awsAwsjson11_serializeDocumentCapacitySize(v *types.CapacitySize, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.Integer(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCapacitySizeConfig(v *types.CapacitySizeConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -23690,6 +23732,13 @@ func awsAwsjson11_serializeDocumentClusterInstanceGroupSpecification(v *types.Cl
 	if v.OverrideVpcConfig != nil {
 		ok := object.Key("OverrideVpcConfig")
 		if err := awsAwsjson11_serializeDocumentVpcConfig(v.OverrideVpcConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ScheduledUpdateConfig != nil {
+		ok := object.Key("ScheduledUpdateConfig")
+		if err := awsAwsjson11_serializeDocumentScheduledUpdateConfig(v.ScheduledUpdateConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -24970,6 +25019,32 @@ func awsAwsjson11_serializeDocumentDeploymentConfig(v *types.DeploymentConfig, v
 		if err := awsAwsjson11_serializeDocumentRollingUpdatePolicy(v.RollingUpdatePolicy, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeploymentConfiguration(v *types.DeploymentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoRollbackConfiguration != nil {
+		ok := object.Key("AutoRollbackConfiguration")
+		if err := awsAwsjson11_serializeDocumentAutoRollbackAlarms(v.AutoRollbackConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RollingUpdatePolicy != nil {
+		ok := object.Key("RollingUpdatePolicy")
+		if err := awsAwsjson11_serializeDocumentRollingDeploymentPolicy(v.RollingUpdatePolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WaitIntervalInSeconds != nil {
+		ok := object.Key("WaitIntervalInSeconds")
+		ok.Integer(*v.WaitIntervalInSeconds)
 	}
 
 	return nil
@@ -31534,6 +31609,27 @@ func awsAwsjson11_serializeDocumentRetryStrategy(v *types.RetryStrategy, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRollingDeploymentPolicy(v *types.RollingDeploymentPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaximumBatchSize != nil {
+		ok := object.Key("MaximumBatchSize")
+		if err := awsAwsjson11_serializeDocumentCapacitySizeConfig(v.MaximumBatchSize, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RollbackMaximumBatchSize != nil {
+		ok := object.Key("RollbackMaximumBatchSize")
+		if err := awsAwsjson11_serializeDocumentCapacitySizeConfig(v.RollbackMaximumBatchSize, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRollingUpdatePolicy(v *types.RollingUpdatePolicy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -31860,6 +31956,25 @@ func awsAwsjson11_serializeDocumentScheduleConfig(v *types.ScheduleConfig, value
 	if v.DataAnalysisStartTime != nil {
 		ok := object.Key("DataAnalysisStartTime")
 		ok.String(*v.DataAnalysisStartTime)
+	}
+
+	if v.ScheduleExpression != nil {
+		ok := object.Key("ScheduleExpression")
+		ok.String(*v.ScheduleExpression)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentScheduledUpdateConfig(v *types.ScheduledUpdateConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeploymentConfig != nil {
+		ok := object.Key("DeploymentConfig")
+		if err := awsAwsjson11_serializeDocumentDeploymentConfiguration(v.DeploymentConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ScheduleExpression != nil {
@@ -33497,6 +33612,31 @@ func awsAwsjson11_serializeDocumentUiTemplate(v *types.UiTemplate, value smithyj
 	if v.Content != nil {
 		ok := object.Key("Content")
 		ok.String(*v.Content)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateClusterSoftwareInstanceGroups(v []types.UpdateClusterSoftwareInstanceGroupSpecification, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentUpdateClusterSoftwareInstanceGroupSpecification(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateClusterSoftwareInstanceGroupSpecification(v *types.UpdateClusterSoftwareInstanceGroupSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceGroupName != nil {
+		ok := object.Key("InstanceGroupName")
+		ok.String(*v.InstanceGroupName)
 	}
 
 	return nil
@@ -43837,6 +43977,20 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterSoftwareInput(v *UpdateCluster
 	if v.ClusterName != nil {
 		ok := object.Key("ClusterName")
 		ok.String(*v.ClusterName)
+	}
+
+	if v.DeploymentConfig != nil {
+		ok := object.Key("DeploymentConfig")
+		if err := awsAwsjson11_serializeDocumentDeploymentConfiguration(v.DeploymentConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceGroups != nil {
+		ok := object.Key("InstanceGroups")
+		if err := awsAwsjson11_serializeDocumentUpdateClusterSoftwareInstanceGroups(v.InstanceGroups, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

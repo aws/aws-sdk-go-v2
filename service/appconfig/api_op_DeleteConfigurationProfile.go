@@ -44,9 +44,9 @@ type DeleteConfigurationProfileInput struct {
 	// This member is required.
 	ConfigurationProfileId *string
 
-	// A parameter to configure deletion protection. If enabled, deletion protection
-	// prevents a user from deleting a configuration profile if your application has
-	// called either [GetLatestConfiguration]or for the configuration profile during the specified interval.
+	// A parameter to configure deletion protection. Deletion protection prevents a
+	// user from deleting a configuration profile if your application has called either
+	// [GetLatestConfiguration]or for the configuration profile during the specified interval.
 	//
 	// This parameter supports the following values:
 	//

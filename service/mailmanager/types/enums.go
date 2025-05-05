@@ -877,3 +877,41 @@ func (SearchState) Values() []SearchState {
 		"CANCELLED",
 	}
 }
+
+type SnsNotificationEncoding string
+
+// Enum values for SnsNotificationEncoding
+const (
+	SnsNotificationEncodingUtf8   SnsNotificationEncoding = "UTF-8"
+	SnsNotificationEncodingBase64 SnsNotificationEncoding = "BASE64"
+)
+
+// Values returns all known values for SnsNotificationEncoding. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnsNotificationEncoding) Values() []SnsNotificationEncoding {
+	return []SnsNotificationEncoding{
+		"UTF-8",
+		"BASE64",
+	}
+}
+
+type SnsNotificationPayloadType string
+
+// Enum values for SnsNotificationPayloadType
+const (
+	SnsNotificationPayloadTypeHeaders SnsNotificationPayloadType = "HEADERS"
+	SnsNotificationPayloadTypeContent SnsNotificationPayloadType = "CONTENT"
+)
+
+// Values returns all known values for SnsNotificationPayloadType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnsNotificationPayloadType) Values() []SnsNotificationPayloadType {
+	return []SnsNotificationPayloadType{
+		"HEADERS",
+		"CONTENT",
+	}
+}

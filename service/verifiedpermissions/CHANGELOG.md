@@ -1,3 +1,7 @@
+# v1.24.0 (2025-05-01)
+
+* **Feature**: Amazon Verified Permissions / Features : Adds support for tagging policy stores.
+
 # v1.23.0 (2025-04-11)
 
 * **Feature**: Adds deletion protection support to policy stores. Deletion protection is disabled by default, can be enabled via the CreatePolicyStore or UpdatePolicyStore APIs, and is visible in GetPolicyStore.

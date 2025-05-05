@@ -1348,6 +1348,25 @@ func (ListFlowAssociationResourceType) Values() []ListFlowAssociationResourceTyp
 	}
 }
 
+type MediaStreamType string
+
+// Enum values for MediaStreamType
+const (
+	MediaStreamTypeAudio MediaStreamType = "AUDIO"
+	MediaStreamTypeVideo MediaStreamType = "VIDEO"
+)
+
+// Values returns all known values for MediaStreamType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MediaStreamType) Values() []MediaStreamType {
+	return []MediaStreamType{
+		"AUDIO",
+		"VIDEO",
+	}
+}
+
 type MeetingFeatureStatus string
 
 // Enum values for MeetingFeatureStatus
@@ -1554,6 +1573,29 @@ func (ParticipantRole) Values() []ParticipantRole {
 	}
 }
 
+type ParticipantState string
+
+// Enum values for ParticipantState
+const (
+	ParticipantStateInitial      ParticipantState = "INITIAL"
+	ParticipantStateConnected    ParticipantState = "CONNECTED"
+	ParticipantStateDisconnected ParticipantState = "DISCONNECTED"
+	ParticipantStateMissed       ParticipantState = "MISSED"
+)
+
+// Values returns all known values for ParticipantState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantState) Values() []ParticipantState {
+	return []ParticipantState{
+		"INITIAL",
+		"CONNECTED",
+		"DISCONNECTED",
+		"MISSED",
+	}
+}
+
 type ParticipantTimerAction string
 
 // Enum values for ParticipantTimerAction
@@ -1587,6 +1629,31 @@ func (ParticipantTimerType) Values() []ParticipantTimerType {
 	return []ParticipantTimerType{
 		"IDLE",
 		"DISCONNECT_NONCUSTOMER",
+	}
+}
+
+type ParticipantType string
+
+// Enum values for ParticipantType
+const (
+	ParticipantTypeAll        ParticipantType = "ALL"
+	ParticipantTypeManager    ParticipantType = "MANAGER"
+	ParticipantTypeAgent      ParticipantType = "AGENT"
+	ParticipantTypeCustomer   ParticipantType = "CUSTOMER"
+	ParticipantTypeThirdparty ParticipantType = "THIRDPARTY"
+)
+
+// Values returns all known values for ParticipantType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantType) Values() []ParticipantType {
+	return []ParticipantType{
+		"ALL",
+		"MANAGER",
+		"AGENT",
+		"CUSTOMER",
+		"THIRDPARTY",
 	}
 }
 
@@ -2393,6 +2460,25 @@ func (RealTimeContactAnalysisSupportedChannel) Values() []RealTimeContactAnalysi
 	}
 }
 
+type RecordingStatus string
+
+// Enum values for RecordingStatus
+const (
+	RecordingStatusAvailable RecordingStatus = "AVAILABLE"
+	RecordingStatusDeleted   RecordingStatus = "DELETED"
+)
+
+// Values returns all known values for RecordingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecordingStatus) Values() []RecordingStatus {
+	return []RecordingStatus{
+		"AVAILABLE",
+		"DELETED",
+	}
+}
+
 type ReferenceStatus string
 
 // Enum values for ReferenceStatus
@@ -2758,6 +2844,27 @@ func (Statistic) Values() []Statistic {
 		"SUM",
 		"MAX",
 		"AVG",
+	}
+}
+
+type Status string
+
+// Enum values for Status
+const (
+	StatusComplete   Status = "COMPLETE"
+	StatusInProgress Status = "IN_PROGRESS"
+	StatusDeleted    Status = "DELETED"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"COMPLETE",
+		"IN_PROGRESS",
+		"DELETED",
 	}
 }
 

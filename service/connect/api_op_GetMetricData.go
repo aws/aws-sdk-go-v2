@@ -14,7 +14,7 @@ import (
 
 // Gets historical metric data from the specified Amazon Connect instance.
 //
-// For a description of each historical metric, see [Historical Metrics Definitions] in the Amazon Connect
+// For a description of each historical metric, see [Metrics definitions] in the Amazon Connect
 // Administrator Guide.
 //
 // We recommend using the [GetMetricDataV2] API. It provides more flexibility, features, and the
@@ -26,7 +26,7 @@ import (
 // changed per day of the week.
 //
 // [GetMetricDataV2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricDataV2.html
-// [Historical Metrics Definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
+// [Metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
 func (c *Client) GetMetricData(ctx context.Context, params *GetMetricDataInput, optFns ...func(*Options)) (*GetMetricDataOutput, error) {
 	if params == nil {
 		params = &GetMetricDataInput{}
@@ -69,7 +69,7 @@ type GetMetricDataInput struct {
 
 	// The metrics to retrieve. Specify the name, unit, and statistic for each metric.
 	// The following historical metrics are available. For a description of each
-	// metric, see [Historical Metrics Definitions]in the Amazon Connect Administrator Guide.
+	// metric, see [Metrics definition]in the Amazon Connect Administrator Guide.
 	//
 	// This API does not support a contacts incoming metric (there's no
 	// CONTACTS_INCOMING metric missing from the documented list).
@@ -179,7 +179,7 @@ type GetMetricDataInput struct {
 	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
 	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
 	//
-	// [Historical Metrics Definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
+	// [Metrics definition]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
 	//
 	// This member is required.
 	HistoricalMetrics []types.HistoricalMetric

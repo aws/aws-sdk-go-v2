@@ -150,6 +150,26 @@ func (m *validateOpCheckDocumentAccess) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAnonymousWebExperienceUrl struct {
+}
+
+func (*validateOpCreateAnonymousWebExperienceUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAnonymousWebExperienceUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAnonymousWebExperienceUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAnonymousWebExperienceUrlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateApplication struct {
 }
 
@@ -1516,6 +1536,10 @@ func addOpChatSyncValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCheckDocumentAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCheckDocumentAccess{}, middleware.After)
+}
+
+func addOpCreateAnonymousWebExperienceUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAnonymousWebExperienceUrl{}, middleware.After)
 }
 
 func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -3683,6 +3707,24 @@ func validateOpCheckDocumentAccessInput(v *CheckDocumentAccessInput) error {
 	}
 	if v.DocumentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAnonymousWebExperienceUrlInput(v *CreateAnonymousWebExperienceUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAnonymousWebExperienceUrlInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.WebExperienceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WebExperienceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

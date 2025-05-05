@@ -124,6 +124,10 @@ type GetModelCustomizationJobOutput struct {
 	// message contains information about why the job failed.
 	Status types.ModelCustomizationJobStatus
 
+	// For a Distillation job, the details about the statuses of the sub-tasks of the
+	// customization job.
+	StatusDetails *types.StatusDetails
+
 	// Contains training metrics from the job creation.
 	TrainingMetrics *types.TrainingMetrics
 

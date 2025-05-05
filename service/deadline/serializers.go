@@ -2713,6 +2713,13 @@ func awsRestjson1_serializeOpDocumentCreateWorkerInput(v *CreateWorkerInput, val
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -11454,6 +11461,11 @@ func awsRestjson1_serializeDocumentCustomerManagedFleetConfiguration(v *types.Cu
 	if v.StorageProfileId != nil {
 		ok := object.Key("storageProfileId")
 		ok.String(*v.StorageProfileId)
+	}
+
+	if len(v.TagPropagationMode) > 0 {
+		ok := object.Key("tagPropagationMode")
+		ok.String(string(v.TagPropagationMode))
 	}
 
 	if v.WorkerCapabilities != nil {

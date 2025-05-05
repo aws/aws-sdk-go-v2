@@ -386,6 +386,25 @@ func (r *resolver) ResolveEndpoint(
 			}
 			if _UseFIPS == true {
 				if _PartitionResult.SupportsFIPS == true {
+					if _PartitionResult.Name == "aws" {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://metrics-fips.sagemaker.")
+							out.WriteString(_Region)
+							out.WriteString(".amazonaws.com")
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+						}, nil
+					}
 					uriString := func() string {
 						var out strings.Builder
 						out.WriteString("https://metrics.sagemaker-fips.")

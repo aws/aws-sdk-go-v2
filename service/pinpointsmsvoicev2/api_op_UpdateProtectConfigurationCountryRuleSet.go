@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a country rule set to ALLOW or BLOCK messages to be sent to the
-// specified destination counties. You can update one or multiple countries at a
-// time. The updates are only applied to the specified NumberCapability type.
+// Update a country rule set to ALLOW , BLOCK , MONITOR , or FILTER messages to be
+// sent to the specified destination counties. You can update one or multiple
+// countries at a time. The updates are only applied to the specified
+// NumberCapability type.
 func (c *Client) UpdateProtectConfigurationCountryRuleSet(ctx context.Context, params *UpdateProtectConfigurationCountryRuleSetInput, optFns ...func(*Options)) (*UpdateProtectConfigurationCountryRuleSetOutput, error) {
 	if params == nil {
 		params = &UpdateProtectConfigurationCountryRuleSetInput{}
@@ -35,6 +36,10 @@ type UpdateProtectConfigurationCountryRuleSetInput struct {
 	// details for the requested NumberCapability. The Key is the two-letter ISO
 	// country code. For a list of supported ISO country codes, see [Supported countries and regions (SMS channel)]in the AWS End
 	// User Messaging SMS User Guide.
+	//
+	// For example, to set the United States as allowed and Canada as blocked, the
+	// CountryRuleSetUpdates would be formatted as: "CountryRuleSetUpdates": { "US" :
+	// { "ProtectStatus": "ALLOW" } "CA" : { "ProtectStatus": "BLOCK" } }
 	//
 	// [Supported countries and regions (SMS channel)]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html
 	//

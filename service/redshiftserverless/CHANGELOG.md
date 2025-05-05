@@ -1,3 +1,7 @@
+# v1.27.1 (2025-04-30)
+
+* No change notes available for this release.
+
 # v1.27.0 (2025-04-22)
 
 * **Feature**: Provides new and updated API members to support the Redshift Serverless reservations feature.

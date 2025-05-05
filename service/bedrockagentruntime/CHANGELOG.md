@@ -1,3 +1,7 @@
+# v1.42.0 (2025-04-30)
+
+* **Feature**: Support for Custom Orchestration within InlineAgents
+
 # v1.41.1 (2025-04-03)
 
 * No change notes available for this release.

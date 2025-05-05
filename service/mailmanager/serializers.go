@@ -4566,6 +4566,12 @@ func awsAwsjson10_serializeDocumentRuleAction(v types.RuleAction, value smithyjs
 			return err
 		}
 
+	case *types.RuleActionMemberPublishToSns:
+		av := object.Key("PublishToSns")
+		if err := awsAwsjson10_serializeDocumentSnsAction(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.RuleActionMemberRelay:
 		av := object.Key("Relay")
 		if err := awsAwsjson10_serializeDocumentRelayAction(&uv.Value, av); err != nil {
@@ -5081,6 +5087,38 @@ func awsAwsjson10_serializeDocumentSendAction(v *types.SendAction, value smithyj
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentSnsAction(v *types.SnsAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ActionFailurePolicy) > 0 {
+		ok := object.Key("ActionFailurePolicy")
+		ok.String(string(v.ActionFailurePolicy))
+	}
+
+	if len(v.Encoding) > 0 {
+		ok := object.Key("Encoding")
+		ok.String(string(v.Encoding))
+	}
+
+	if len(v.PayloadType) > 0 {
+		ok := object.Key("PayloadType")
+		ok.String(string(v.PayloadType))
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.TopicArn != nil {
+		ok := object.Key("TopicArn")
+		ok.String(*v.TopicArn)
 	}
 
 	return nil

@@ -29,6 +29,74 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.ssm#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requester doesn't have permissions to perform the requested operation.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ssm#AccessKeyIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\w{16,128}$"
+            }
+        },
+        "com.amazonaws.ssm#AccessKeySecretType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.ssm#AccessRequestId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(oi)-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.ssm#AccessRequestStatus": {
+            "type": "enum",
+            "members": {
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Approved"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Rejected"
+                    }
+                },
+                "REVOKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Revoked"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Expired"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssm#Account": {
             "type": "string"
         },
@@ -603,6 +671,9 @@
                     "target": "com.amazonaws.ssm#DisassociateOpsItemRelatedItem"
                 },
                 {
+                    "target": "com.amazonaws.ssm#GetAccessToken"
+                },
+                {
                     "target": "com.amazonaws.ssm#GetAutomationExecution"
                 },
                 {
@@ -778,6 +849,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#SendCommand"
+                },
+                {
+                    "target": "com.amazonaws.ssm#StartAccessRequest"
                 },
                 {
                     "target": "com.amazonaws.ssm#StartAssociationsOnce"
@@ -4219,6 +4293,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ChangeRequest"
                     }
+                },
+                "AccessRequest": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessRequest"
+                    }
                 }
             }
         },
@@ -6930,6 +7010,42 @@
         },
         "com.amazonaws.ssm#CreatedDate": {
             "type": "timestamp"
+        },
+        "com.amazonaws.ssm#Credentials": {
+            "type": "structure",
+            "members": {
+                "AccessKeyId": {
+                    "target": "com.amazonaws.ssm#AccessKeyIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access key ID that identifies the temporary security credentials.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecretAccessKey": {
+                    "target": "com.amazonaws.ssm#AccessKeySecretType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secret access key that can be used to sign requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionToken": {
+                    "target": "com.amazonaws.ssm#SessionTokenType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that users must pass to the service API to use the temporary credentials.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpirationTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The datetime on which the current credentials expire.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The temporary security credentials, which include an access key ID, a secret access key, and a security (or session) token.</p>"
+            }
         },
         "com.amazonaws.ssm#CustomSchemaCountLimitExceededException": {
             "type": "structure",
@@ -11698,6 +11814,18 @@
                     "traits": {
                         "smithy.api#enumValue": "QuickSetup"
                     }
+                },
+                "ManualApprovalPolicy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ManualApprovalPolicy"
+                    }
+                },
+                "AutoApprovalPolicy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoApprovalPolicy"
+                    }
                 }
             }
         },
@@ -12165,6 +12293,70 @@
                 },
                 "smithy.api#documentation": "<p>You attempted to register a <code>LAMBDA</code> or <code>STEP_FUNCTIONS</code> task in a\n   region where the corresponding service isn't available. </p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ssm#GetAccessToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#GetAccessTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#GetAccessTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a credentials set to be used with just-in-time node access.</p>"
+            }
+        },
+        "com.amazonaws.ssm#GetAccessTokenRequest": {
+            "type": "structure",
+            "members": {
+                "AccessRequestId": {
+                    "target": "com.amazonaws.ssm#AccessRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a just-in-time node access request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssm#GetAccessTokenResponse": {
+            "type": "structure",
+            "members": {
+                "Credentials": {
+                    "target": "com.amazonaws.ssm#Credentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The temporary security credentials which can be used to start just-in-time node access sessions.</p>"
+                    }
+                },
+                "AccessRequestStatus": {
+                    "target": "com.amazonaws.ssm#AccessRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the access request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetAutomationExecution": {
@@ -22412,6 +22604,60 @@
                         "smithy.api#enumValue": "OpsItemType"
                     }
                 },
+                "ACCESS_REQUEST_REQUESTER_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessRequestByRequesterArn"
+                    }
+                },
+                "ACCESS_REQUEST_REQUESTER_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessRequestByRequesterId"
+                    }
+                },
+                "ACCESS_REQUEST_APPROVER_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessRequestByApproverArn"
+                    }
+                },
+                "ACCESS_REQUEST_APPROVER_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessRequestByApproverId"
+                    }
+                },
+                "ACCESS_REQUEST_SOURCE_ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessRequestBySourceAccountId"
+                    }
+                },
+                "ACCESS_REQUEST_SOURCE_OPS_ITEM_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessRequestBySourceOpsItemId"
+                    }
+                },
+                "ACCESS_REQUEST_SOURCE_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessRequestBySourceRegion"
+                    }
+                },
+                "ACCESS_REQUEST_IS_REPLICA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessRequestByIsReplica"
+                    }
+                },
+                "ACCESS_REQUEST_TARGET_RESOURCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessRequestByTargetResourceId"
+                    }
+                },
                 "CHANGE_REQUEST_REQUESTER_ARN": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -22970,6 +23216,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Approved"
+                    }
+                },
+                "REVOKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Revoked"
                     }
                 },
                 "REJECTED": {
@@ -27981,6 +28233,47 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ssm#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the resource referenced in the failed request.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the resource referenced in the failed request.</p>"
+                    }
+                },
+                "QuotaCode": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota code recognized by the Amazon Web Services Service Quotas service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceCode": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the Amazon Web Services service that owns the quota.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request exceeds the service quota. Service quotas, also referred to as limits, are the maximum number of service resources or operations for your Amazon Web Services account.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.ssm#ServiceRole": {
             "type": "string"
         },
@@ -28410,6 +28703,12 @@
                 }
             }
         },
+        "com.amazonaws.ssm#SessionTokenType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.ssm#SeveritySummary": {
             "type": "structure",
             "members": {
@@ -28503,6 +28802,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Resume"
                     }
+                },
+                "REVOKE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Revoke"
+                    }
                 }
             }
         },
@@ -28568,6 +28873,80 @@
                     "min": 0,
                     "max": 24000
                 }
+            }
+        },
+        "com.amazonaws.ssm#StartAccessRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#StartAccessRequestRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#StartAccessRequestResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts the workflow for just-in-time node access sessions.</p>"
+            }
+        },
+        "com.amazonaws.ssm#StartAccessRequestRequest": {
+            "type": "structure",
+            "members": {
+                "Reason": {
+                    "target": "com.amazonaws.ssm#String1to256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description explaining why you are requesting access to the node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Targets": {
+                    "target": "com.amazonaws.ssm#Targets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node you are requesting access to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssm#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs of metadata you want to assign to the access request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssm#StartAccessRequestResponse": {
+            "type": "structure",
+            "members": {
+                "AccessRequestId": {
+                    "target": "com.amazonaws.ssm#AccessRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the access request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#StartAssociationsOnce": {
@@ -29436,6 +29815,15 @@
         "com.amazonaws.ssm#String": {
             "type": "string"
         },
+        "com.amazonaws.ssm#String1to256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.ssm#StringDateTime": {
             "type": "string",
             "traits": {
@@ -29853,6 +30241,33 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssm#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuotaCode": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota code recognized by the Amazon Web Services Service Quotas service.</p>"
+                    }
+                },
+                "ServiceCode": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the Amazon Web Services service that owns the quota.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request or operation couldn't be performed because the service is throttling requests.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.ssm#TimeoutSeconds": {

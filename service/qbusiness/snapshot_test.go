@@ -146,6 +146,18 @@ func TestCheckSnapshot_CheckDocumentAccess(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAnonymousWebExperienceUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAnonymousWebExperienceUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAnonymousWebExperienceUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateApplication(context.Background(), nil, func(o *Options) {
@@ -1050,6 +1062,18 @@ func TestUpdateSnapshot_CheckDocumentAccess(t *testing.T) {
 	_, err := svc.CheckDocumentAccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CheckDocumentAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAnonymousWebExperienceUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAnonymousWebExperienceUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAnonymousWebExperienceUrl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

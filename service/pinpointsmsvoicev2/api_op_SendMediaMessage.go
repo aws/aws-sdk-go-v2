@@ -60,12 +60,14 @@ type SendMediaMessageInput struct {
 
 	// An array of URLs to each media file to send.
 	//
-	// The media files have to be stored in a publicly available S3 bucket. Supported
-	// media file formats are listed in [MMS file types, size and character limits]. For more information on creating an S3
-	// bucket and managing objects, see [Creating a bucket]and [Uploading objects] in the S3 user guide.
+	// The media files have to be stored in an S3 bucket. Supported media file formats
+	// are listed in [MMS file types, size and character limits]. For more information on creating an S3 bucket and managing
+	// objects, see [Creating a bucket], [Uploading objects] in the Amazon S3 User Guide, and [Setting up an Amazon S3 bucket for MMS files] in the Amazon Web Services
+	// End User Messaging SMS User Guide.
 	//
 	// [Creating a bucket]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html
 	// [MMS file types, size and character limits]: https://docs.aws.amazon.com/sms-voice/latest/userguide/mms-limitations-character.html
+	// [Setting up an Amazon S3 bucket for MMS files]: https://docs.aws.amazon.com/sms-voice/latest/userguide/send-mms-message.html#send-mms-message-bucket
 	// [Uploading objects]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
 	MediaUrls []string
 

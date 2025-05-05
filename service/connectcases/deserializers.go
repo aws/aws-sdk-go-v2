@@ -10263,6 +10263,18 @@ loop:
 			continue
 		}
 		switch key {
+		case "customEntity":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomEntity to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.UserUnionMemberCustomEntity{Value: mv}
+			break loop
+
 		case "userArn":
 			var mv string
 			if value != nil {

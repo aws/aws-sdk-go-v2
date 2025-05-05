@@ -44,9 +44,9 @@ type DeleteEnvironmentInput struct {
 	// This member is required.
 	EnvironmentId *string
 
-	// A parameter to configure deletion protection. If enabled, deletion protection
-	// prevents a user from deleting an environment if your application called either [GetLatestConfiguration]
-	// or in the environment during the specified interval.
+	// A parameter to configure deletion protection. Deletion protection prevents a
+	// user from deleting an environment if your application called either [GetLatestConfiguration]or in the
+	// environment during the specified interval.
 	//
 	// This parameter supports the following values:
 	//

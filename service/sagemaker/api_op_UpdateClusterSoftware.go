@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +41,12 @@ type UpdateClusterSoftwareInput struct {
 	//
 	// This member is required.
 	ClusterName *string
+
+	// The configuration to use when updating the AMI versions.
+	DeploymentConfig *types.DeploymentConfiguration
+
+	// The array of instance groups for which to update AMI versions.
+	InstanceGroups []types.UpdateClusterSoftwareInstanceGroupSpecification
 
 	noSmithyDocumentSerde
 }

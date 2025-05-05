@@ -734,6 +734,15 @@ type ConversationHistory struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details of the custom orchestration configured for the agent.
+type CustomOrchestration struct {
+
+	// The structure of the executor invoking the actions in custom orchestration.
+	Executor OrchestrationExecutor
+
+	noSmithyDocumentSerde
+}
+
 // The trace behavior for the custom orchestration.
 type CustomOrchestrationTrace struct {
 
@@ -2036,6 +2045,15 @@ type InlineAgentReturnControlPayload struct {
 // [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
 type InlineAgentTracePart struct {
 
+	// The caller chain for the trace part.
+	CallerChain []Caller
+
+	// The collaborator name for the trace part.
+	CollaboratorName *string
+
+	// The time that trace occurred.
+	EventTime *time.Time
+
 	// The unique identifier of the session with the agent.
 	SessionId *string
 
@@ -2866,6 +2884,25 @@ type OrchestrationConfiguration struct {
 
 	noSmithyDocumentSerde
 }
+
+// The structure of the executor invoking the actions in custom orchestration.
+//
+// The following types satisfy this interface:
+//
+//	OrchestrationExecutorMemberLambda
+type OrchestrationExecutor interface {
+	isOrchestrationExecutor()
+}
+
+// The Amazon Resource Name (ARN) of the Lambda function containing the business
+// logic that is carried out upon invoking the action.
+type OrchestrationExecutorMemberLambda struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*OrchestrationExecutorMemberLambda) isOrchestrationExecutor() {}
 
 // The foundation model output from the orchestration step.
 type OrchestrationModelInvocationOutput struct {
@@ -4834,6 +4871,7 @@ func (*UnknownUnionMember) isInvocationStepPayload()                       {}
 func (*UnknownUnionMember) isMemory()                                      {}
 func (*UnknownUnionMember) isOptimizedPrompt()                             {}
 func (*UnknownUnionMember) isOptimizedPromptStream()                       {}
+func (*UnknownUnionMember) isOrchestrationExecutor()                       {}
 func (*UnknownUnionMember) isOrchestrationTrace()                          {}
 func (*UnknownUnionMember) isPostProcessingTrace()                         {}
 func (*UnknownUnionMember) isPreProcessingTrace()                          {}

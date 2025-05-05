@@ -487,10 +487,35 @@ func ExampleProtectedJobOutputConfigurationOutput_outputUsage() {
 var _ *types.ProtectedJobMemberOutputConfigurationOutput
 var _ *types.ProtectedJobS3OutputConfigurationOutput
 
+func ExampleProtectedQueryDistributeOutputConfigurationLocation_outputUsage() {
+	var union types.ProtectedQueryDistributeOutputConfigurationLocation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProtectedQueryDistributeOutputConfigurationLocationMemberMember:
+		_ = v.Value // Value is types.ProtectedQueryMemberOutputConfiguration
+
+	case *types.ProtectedQueryDistributeOutputConfigurationLocationMemberS3:
+		_ = v.Value // Value is types.ProtectedQueryS3OutputConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ProtectedQueryMemberOutputConfiguration
+var _ *types.ProtectedQueryS3OutputConfiguration
+
 func ExampleProtectedQueryOutput_outputUsage() {
 	var union types.ProtectedQueryOutput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProtectedQueryOutputMemberDistribute:
+		_ = v.Value // Value is types.ProtectedQueryDistributeOutput
+
 	case *types.ProtectedQueryOutputMemberMemberList:
 		_ = v.Value // Value is []types.ProtectedQuerySingleMemberOutput
 
@@ -508,11 +533,15 @@ func ExampleProtectedQueryOutput_outputUsage() {
 
 var _ []types.ProtectedQuerySingleMemberOutput
 var _ *types.ProtectedQueryS3Output
+var _ *types.ProtectedQueryDistributeOutput
 
 func ExampleProtectedQueryOutputConfiguration_outputUsage() {
 	var union types.ProtectedQueryOutputConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProtectedQueryOutputConfigurationMemberDistribute:
+		_ = v.Value // Value is types.ProtectedQueryDistributeOutputConfiguration
+
 	case *types.ProtectedQueryOutputConfigurationMemberMember:
 		_ = v.Value // Value is types.ProtectedQueryMemberOutputConfiguration
 
@@ -529,6 +558,7 @@ func ExampleProtectedQueryOutputConfiguration_outputUsage() {
 }
 
 var _ *types.ProtectedQueryMemberOutputConfiguration
+var _ *types.ProtectedQueryDistributeOutputConfiguration
 var _ *types.ProtectedQueryS3OutputConfiguration
 
 func ExampleQueryConstraint_outputUsage() {

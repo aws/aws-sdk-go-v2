@@ -11474,6 +11474,33 @@ func awsRestjson1_deserializeDocumentInlineAgentTracePart(v **types.InlineAgentT
 
 	for key, value := range shape {
 		switch key {
+		case "callerChain":
+			if err := awsRestjson1_deserializeDocumentCallerChain(&sv.CallerChain, value); err != nil {
+				return err
+			}
+
+		case "collaboratorName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.CollaboratorName = ptr.String(jtv)
+			}
+
+		case "eventTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateTimestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.EventTime = ptr.Time(t)
+			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)

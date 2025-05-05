@@ -1,3 +1,7 @@
+# v1.33.1 (2025-05-01)
+
+* No change notes available for this release.
+
 # v1.33.0 (2025-04-17)
 
 * **Feature**: Add Workspace Configuration APIs for Amazon Prometheus
