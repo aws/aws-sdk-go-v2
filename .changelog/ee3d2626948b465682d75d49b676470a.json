@@ -1,8 +1,0 @@
-{
-    "id": "ee3d2626-948b-4656-82d7-5d49b676470a",
-    "type": "feature",
-    "description": "Add dualstack endpoints support and correct us-gov-west-1 FIPS endpoint.",
-    "modules": [
-        "service/timestreamquery"
-    ]
-}

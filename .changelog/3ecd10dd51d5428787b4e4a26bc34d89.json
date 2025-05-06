@@ -1,8 +1,0 @@
-{
-    "id": "3ecd10dd-51d5-4287-87b4-e4a26bc34d89",
-    "type": "feature",
-    "description": "Add dualstack endpoints support.",
-    "modules": [
-        "service/timestreamwrite"
-    ]
-}

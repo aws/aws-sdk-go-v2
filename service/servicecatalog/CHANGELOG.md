@@ -1,3 +1,7 @@
+# v1.34.0 (2025-05-06)
+
+* **Feature**: ServiceCatalog's APIs (DeleteServiceAction, DisassociateServiceActionFromProvisioningArtifact, AssociateServiceActionWithProvisioningArtifact) now throw InvalidParametersException when IdempotencyToken is invalid.
+
 # v1.33.4 (2025-04-16)
 
 * **Documentation**: Updated default value for the access-level-filter in SearchProvisionedProducts API to Account. For access to userLevel or roleLevel, the user must provide access-level-filter parameter.

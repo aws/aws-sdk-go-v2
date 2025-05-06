@@ -1,3 +1,7 @@
+# v1.31.0 (2025-05-06)
+
+* **Feature**: Add dualstack endpoints support.
+
 # v1.30.2 (2025-04-03)
 
 * No change notes available for this release.

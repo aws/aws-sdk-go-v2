@@ -29,7 +29,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.214.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.215.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.56.3
 	github.com/aws/aws-sdk-go-v2/service/efs v1.35.3
@@ -65,7 +65,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.79.3
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.57.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.4
-	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.33.4
+	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.35.4
 	github.com/aws/aws-sdk-go-v2/service/shield v1.30.2
@@ -75,7 +75,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.59.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.33.19
 	github.com/aws/aws-sdk-go-v2/service/support v1.27.2
-	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.30.2
+	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.25.3
 	github.com/aws/aws-sdk-go-v2/service/waf v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.26.2

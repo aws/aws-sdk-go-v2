@@ -1,3 +1,15 @@
+# Release (2025-05-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.215.0](service/ec2/CHANGELOG.md#v12150-2025-05-06)
+  * **Feature**: This release adds support for Amazon EBS Provisioned Rate for Volume Initialization, which lets you specify a volume initialization rate to ensure that your EBS volumes are initialized in a predictable amount of time.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.34.0](service/servicecatalog/CHANGELOG.md#v1340-2025-05-06)
+  * **Feature**: ServiceCatalog's APIs (DeleteServiceAction, DisassociateServiceActionFromProvisioningArtifact, AssociateServiceActionWithProvisioningArtifact) now throw InvalidParametersException when IdempotencyToken is invalid.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.31.0](service/timestreamquery/CHANGELOG.md#v1310-2025-05-06)
+  * **Feature**: Add dualstack endpoints support and correct us-gov-west-1 FIPS endpoint.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.31.0](service/timestreamwrite/CHANGELOG.md#v1310-2025-05-06)
+  * **Feature**: Add dualstack endpoints support.
+
 # Release (2025-05-05)
 
 ## Module Highlights

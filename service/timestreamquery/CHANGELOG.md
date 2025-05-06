@@ -1,3 +1,7 @@
+# v1.31.0 (2025-05-06)
+
+* **Feature**: Add dualstack endpoints support and correct us-gov-west-1 FIPS endpoint.
+
 # v1.30.3 (2025-04-16)
 
 * No change notes available for this release.
