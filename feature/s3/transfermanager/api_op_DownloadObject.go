@@ -553,6 +553,8 @@ type downloader struct {
 	etag       string
 
 	err error
+
+	emitter *singleObjectProgressEmitter
 }
 
 func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error) {
@@ -577,8 +579,10 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 		if d.in.Range != "" {
 			return d.singleDownload(ctx, clientOptions...)
 		}
+
 		output = d.getChunk(ctx, 1, "", clientOptions...)
-		if d.getErr() != nil {
+		if d.err != nil {
+			d.emitter.Failed(ctx, d.err)
 			return output, d.err
 		}
 
@@ -634,8 +638,11 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	}
 
 	if d.err != nil {
+		d.emitter.Failed(ctx, d.err)
 		return nil, d.err
 	}
+
+	d.emitter.Complete(ctx, d.out)
 
 	d.out.ContentLength = d.written
 	d.out.ContentRange = fmt.Sprintf("bytes=%d-%d", d.offset, d.totalBytes-1)
@@ -652,17 +659,24 @@ func (d *downloader) init() error {
 	}
 
 	d.totalBytes = -1
+	d.emitter = &singleObjectProgressEmitter{
+		Listeners: d.options.ProgressListeners,
+	}
 
 	return nil
 }
 
 func (d *downloader) singleDownload(ctx context.Context, clientOptions ...func(*s3.Options)) (*DownloadObjectOutput, error) {
 	chunk := dlChunk{w: d.in.WriterAt}
+
+	// progress start is called idempotently on first response received
 	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
 	if err != nil {
+		d.emitter.Failed(ctx, err)
 		return nil, err
 	}
 
+	d.emitter.Complete(ctx, output)
 	return output, nil
 }
 
@@ -715,10 +729,9 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 	}
 
 	var out *s3.GetObjectOutput
-	var n int64
 	var err error
 	for retry := 0; retry < d.options.PartBodyMaxRetries; retry++ {
-		out, n, err = d.tryDownloadChunk(ctx, params, &chunk, clientOptions...)
+		out, err = d.tryDownloadChunk(ctx, params, &chunk, clientOptions...)
 		if err == nil {
 			break
 		}
@@ -736,8 +749,6 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 		chunk.cur = 0
 	}
 
-	d.incrWritten(n)
-
 	var output *DownloadObjectOutput
 	if out != nil {
 		output = &DownloadObjectOutput{}
@@ -749,24 +760,27 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 	return output, err
 }
 
-func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectInput, chunk *dlChunk, clientOptions ...func(*s3.Options)) (*s3.GetObjectOutput, int64, error) {
+func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectInput, chunk *dlChunk, clientOptions ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
 	out, err := d.options.S3.GetObject(ctx, params, clientOptions...)
 	if err != nil {
-		return nil, 0, err
+		return nil, err
 	}
 
 	d.totalBytesOnce.Do(func() {
 		d.setTotalBytes(out)
+		d.emitter.Start(ctx, d.in, d.totalBytes)
 	}) // Set total in first GET
 
 	var n int64
 	defer out.Body.Close()
 	n, err = io.Copy(chunk, out.Body)
 	if err != nil {
-		return nil, 0, &errReadingBody{err: err}
+		return nil, &errReadingBody{err: err}
 	}
 
-	return out, n, nil
+	d.incrWritten(n)
+	d.emitter.BytesTransferred(ctx, n)
+	return out, nil
 }
 
 func (d *downloader) incrWritten(n int64) {
@@ -774,14 +788,6 @@ func (d *downloader) incrWritten(n int64) {
 	defer d.m.Unlock()
 
 	d.written += n
-}
-
-// getTotalBytes is a thread-safe getter for retrieving the total byte status.
-func (d *downloader) getTotalBytes() int64 {
-	d.m.Lock()
-	defer d.m.Unlock()
-
-	return d.totalBytes
 }
 
 // setTotalBytes is a thread-safe setter for setting the total byte status.

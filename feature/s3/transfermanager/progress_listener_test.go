@@ -107,6 +107,33 @@ func (m *mockListener) expectComplete(t *testing.T, in, out any) {
 	}
 }
 
+func (m *mockListener) expectFailed(t *testing.T, in any, err error) {
+	t.Helper()
+
+	if len(m.start) != 1 {
+		t.Fatalf("transfer start was called %d times instead of once", len(m.start))
+	}
+	if len(m.complete) != 0 {
+		t.Fatalf("transfer complete was called on expected failure: %v", m.complete[0])
+	}
+	if len(m.failed) != 1 {
+		t.Fatalf("transfer failed was %d times instead of once", len(m.failed))
+	}
+
+	start := m.start[0]
+	failed := m.failed[0]
+
+	if in != start.Input {
+		t.Errorf("transfer start: input %v != %v", in, start.Input)
+	}
+	if in != failed.Input {
+		t.Errorf("transfer failed: input %v != %v", in, failed.Input)
+	}
+	if err != failed.Error {
+		t.Errorf("transfer complete: output %v != %v", err, failed.Error)
+	}
+}
+
 func (m *mockListener) expectStartTotalBytes(t *testing.T, expect int64) {
 	t.Helper()
 
@@ -140,7 +167,7 @@ func (m *mockListener) expectByteTransfers(t *testing.T, expect ...int64) {
 		t.Fatalf("transfer start was called %d times instead of once", len(m.start))
 	}
 	if len(m.transfer) != len(expect) {
-		t.Fatalf("transfer start was called %d times instead of expected %d times", len(m.start), len(expect))
+		t.Fatalf("bytes transferred was called %d times instead of expected %d times", len(m.transfer), len(expect))
 	}
 
 	for i, ex := range expect {
