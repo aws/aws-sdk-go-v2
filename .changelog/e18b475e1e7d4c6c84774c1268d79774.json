@@ -1,0 +1,8 @@
+{
+    "id": "e18b475e-1e7d-4c6c-8477-4c1268d79774",
+    "type": "feature",
+    "description": "ServiceCatalog's APIs (DeleteServiceAction, DisassociateServiceActionFromProvisioningArtifact, AssociateServiceActionWithProvisioningArtifact) now throw InvalidParametersException when IdempotencyToken is invalid.",
+    "modules": [
+        "service/servicecatalog"
+    ]
+}

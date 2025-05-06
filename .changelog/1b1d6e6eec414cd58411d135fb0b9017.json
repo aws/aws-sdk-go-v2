@@ -1,0 +1,8 @@
+{
+    "id": "1b1d6e6e-ec41-4cd5-8411-d135fb0b9017",
+    "type": "feature",
+    "description": "This release adds support for Amazon EBS Provisioned Rate for Volume Initialization, which lets you specify a volume initialization rate to ensure that your EBS volumes are initialized in a predictable amount of time.",
+    "modules": [
+        "service/ec2"
+    ]
+}
