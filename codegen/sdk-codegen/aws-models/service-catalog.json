@@ -3411,6 +3411,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.servicecatalog#InvalidParametersException"
+                },
+                {
                     "target": "com.amazonaws.servicecatalog#ResourceInUseException"
                 },
                 {
@@ -4949,6 +4952,9 @@
                 "target": "com.amazonaws.servicecatalog#DisassociateServiceActionFromProvisioningArtifactOutput"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.servicecatalog#InvalidParametersException"
+                },
                 {
                     "target": "com.amazonaws.servicecatalog#ResourceNotFoundException"
                 }
