@@ -16,6 +16,10 @@ import (
 // You can't use this operation to update the tags of an existing canary. To
 // change the tags of an existing canary, use [TagResource].
 //
+// When you use the dryRunId field when updating a canary, the only other field
+// you can provide is the Schedule . Adding any other field will thrown an
+// exception.
+//
 // [TagResource]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_TagResource.html
 func (c *Client) UpdateCanary(ctx context.Context, params *UpdateCanaryInput, optFns ...func(*Options)) (*UpdateCanaryOutput, error) {
 	if params == nil {
@@ -58,6 +62,14 @@ type UpdateCanaryInput struct {
 	// key, and version are also included.
 	Code *types.CanaryCodeInput
 
+	// Update the existing canary using the updated configurations from the DryRun
+	// associated with the DryRunId.
+	//
+	// When you use the dryRunId field when updating a canary, the only other field
+	// you can provide is the Schedule . Adding any other field will thrown an
+	// exception.
+	DryRunId *string
+
 	// The ARN of the IAM role to be used to run the canary. This role must already
 	// exist, and must include lambda.amazonaws.com as a principal in the trust
 	// policy. The role must also have the following permissions:
@@ -78,6 +90,11 @@ type UpdateCanaryInput struct {
 	ExecutionRoleArn *string
 
 	// The number of days to retain data about failed runs of this canary.
+	//
+	// This setting affects the range of information returned by [GetCanaryRuns], as well as the
+	// range of information displayed in the Synthetics console.
+	//
+	// [GetCanaryRuns]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html
 	FailureRetentionPeriodInDays *int32
 
 	// Specifies whether to also delete the Lambda functions and layers used by this
@@ -93,8 +110,9 @@ type UpdateCanaryInput struct {
 	// A structure that contains the timeout value that is used for each individual
 	// run of the canary.
 	//
-	// The environment variables keys and values are not encrypted. Do not store
-	// sensitive information in this field.
+	// Environment variable keys and values are encrypted at rest using Amazon Web
+	// Services owned KMS keys. However, the environment variables are not encrypted on
+	// the client side. Do not store sensitive information in them.
 	RunConfig *types.CanaryRunConfigInput
 
 	// Specifies the runtime version to use for the canary. For a list of valid
@@ -108,6 +126,11 @@ type UpdateCanaryInput struct {
 	Schedule *types.CanaryScheduleInput
 
 	// The number of days to retain data about successful runs of this canary.
+	//
+	// This setting affects the range of information returned by [GetCanaryRuns], as well as the
+	// range of information displayed in the Synthetics console.
+	//
+	// [GetCanaryRuns]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html
 	SuccessRetentionPeriodInDays *int32
 
 	// Defines the screenshots to use as the baseline for comparisons during visual

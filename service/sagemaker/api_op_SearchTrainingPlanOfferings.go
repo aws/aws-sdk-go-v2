@@ -47,24 +47,6 @@ type SearchTrainingPlanOfferingsInput struct {
 	// This member is required.
 	DurationHours *int64
 
-	// The number of instances you want to reserve in the training plan offerings.
-	// This allows you to specify the quantity of compute resources needed for your
-	// SageMaker training jobs or SageMaker HyperPod clusters, helping you find
-	// reserved capacity offerings that match your requirements.
-	//
-	// This member is required.
-	InstanceCount *int32
-
-	// The type of instance you want to search for in the available training plan
-	// offerings. This field allows you to filter the search results based on the
-	// specific compute resources you require for your SageMaker training jobs or
-	// SageMaker HyperPod clusters. When searching for training plan offerings,
-	// specifying the instance type helps you find Reserved Instances that match your
-	// computational needs.
-	//
-	// This member is required.
-	InstanceType types.ReservedCapacityInstanceType
-
 	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod) to
 	// search for in the offerings.
 	//
@@ -82,6 +64,20 @@ type SearchTrainingPlanOfferingsInput struct {
 	// A filter to search for reserved capacity offerings with an end time before a
 	// specified date.
 	EndTimeBefore *time.Time
+
+	// The number of instances you want to reserve in the training plan offerings.
+	// This allows you to specify the quantity of compute resources needed for your
+	// SageMaker training jobs or SageMaker HyperPod clusters, helping you find
+	// reserved capacity offerings that match your requirements.
+	InstanceCount *int32
+
+	// The type of instance you want to search for in the available training plan
+	// offerings. This field allows you to filter the search results based on the
+	// specific compute resources you require for your SageMaker training jobs or
+	// SageMaker HyperPod clusters. When searching for training plan offerings,
+	// specifying the instance type helps you find Reserved Instances that match your
+	// computational needs.
+	InstanceType types.ReservedCapacityInstanceType
 
 	// A filter to search for training plan offerings with a start time after a
 	// specified date.

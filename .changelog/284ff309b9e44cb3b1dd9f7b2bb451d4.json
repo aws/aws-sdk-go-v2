@@ -1,0 +1,8 @@
+{
+    "id": "284ff309-b9e4-4cb3-b1dd-9f7b2bb451d4",
+    "type": "feature",
+    "description": "Add support to test a canary update by invoking a dry run of a canary. This behavior can be used via the new StartCanaryDryRun API along with new fields in UpdateCanary to apply dry run changes. Also includes changes in GetCanary and GetCanaryRuns to support retrieving dry run configurations.",
+    "modules": [
+        "service/synthetics"
+    ]
+}

@@ -69,6 +69,9 @@ type Canary struct {
 	// its code is stored by CloudWatch Synthetics.
 	Code *CanaryCodeOutput
 
+	// Returns the dry run configurations for a canary.
+	DryRunConfig *DryRunConfigOutput
+
 	// The ARN of the Lambda function that is used as your canary's engine. For more
 	// information about Lambda ARN format, see [Resources and Conditions for Lambda Actions].
 	//
@@ -80,6 +83,11 @@ type Canary struct {
 	ExecutionRoleArn *string
 
 	// The number of days to retain data about failed runs of this canary.
+	//
+	// This setting affects the range of information returned by [GetCanaryRuns], as well as the
+	// range of information displayed in the Synthetics console.
+	//
+	// [GetCanaryRuns]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html
 	FailureRetentionPeriodInDays *int32
 
 	// The unique ID of this canary.
@@ -116,6 +124,11 @@ type Canary struct {
 	Status *CanaryStatus
 
 	// The number of days to retain data about successful runs of this canary.
+	//
+	// This setting affects the range of information returned by [GetCanaryRuns], as well as the
+	// range of information displayed in the Synthetics console.
+	//
+	// [GetCanaryRuns]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html
 	SuccessRetentionPeriodInDays *int32
 
 	// The list of key-value pairs that are associated with the canary.
@@ -153,8 +166,9 @@ type Canary struct {
 //   - For Node.js canaries, the folder structure must be
 //     nodejs/node_modules/myCanaryFilename.js For more information, see [Packaging your Node.js canary files]
 //
-//   - For Python canaries, the folder structure must be python/myCanaryFilename.p
-//     or python/myFolder/myCanaryFilename.py For more information, see [Packaging your Python canary files]
+//   - For Python canaries, the folder structure must be
+//     python/myCanaryFilename.py or python/myFolder/myCanaryFilename.py For more
+//     information, see [Packaging your Python canary files]
 //
 // [Packaging your Node.js canary files]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_WritingCanary_Nodejs.html#CloudWatch_Synthetics_Canaries_package
 // [Packaging your Python canary files]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_WritingCanary_Python.html#CloudWatch_Synthetics_Canaries_WritingCanary_Python_package
@@ -207,6 +221,16 @@ type CanaryCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+// Returns the dry run configurations set for a canary.
+type CanaryDryRunConfigOutput struct {
+
+	// The DryRunId associated with an existing canary’s dry run. You can use this
+	// DryRunId to retrieve information about the dry run.
+	DryRunId *string
+
+	noSmithyDocumentSerde
+}
+
 // This structure contains information about the most recent run of a single
 // canary.
 type CanaryLastRun struct {
@@ -226,6 +250,9 @@ type CanaryRun struct {
 	// The location where the canary stored artifacts from the run. Artifacts include
 	// the log file, screenshots, and HAR files.
 	ArtifactS3Location *string
+
+	// Returns the dry run configurations for a canary.
+	DryRunConfig *CanaryDryRunConfigOutput
 
 	// A unique ID that identifies this canary run.
 	Id *string
@@ -266,8 +293,9 @@ type CanaryRunConfigInput struct {
 	// reserved environment variables as the keys for your environment variables. For
 	// more information about reserved keys, see [Runtime environment variables].
 	//
-	// The environment variables keys and values are not encrypted. Do not store
-	// sensitive information in this field.
+	// Environment variable keys and values are encrypted at rest using Amazon Web
+	// Services owned KMS keys. However, the environment variables are not encrypted on
+	// the client side. Do not store sensitive information in them.
 	//
 	// [Runtime environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime
 	EnvironmentVariables map[string]string
@@ -426,6 +454,19 @@ type CanaryTimeline struct {
 
 	// The date and time that the canary's most recent run ended.
 	LastStopped *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Returns the dry run configurations set for a canary.
+type DryRunConfigOutput struct {
+
+	// The DryRunId associated with an existing canary’s dry run. You can use this
+	// DryRunId to retrieve information about the dry run.
+	DryRunId *string
+
+	// Returns the last execution status for a canary's dry run.
+	LastDryRunExecutionStatus *string
 
 	noSmithyDocumentSerde
 }

@@ -928,6 +928,10 @@ func awsRestjson1_serializeOpHttpBindingsGetCanaryInput(v *GetCanaryInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DryRunId != nil {
+		encoder.SetQuery("dryRunId").String(*v.DryRunId)
+	}
+
 	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
@@ -1026,6 +1030,11 @@ func awsRestjson1_serializeOpDocumentGetCanaryRunsInput(v *GetCanaryRunsInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.DryRunId != nil {
+		ok := object.Key("DryRunId")
+		ok.String(*v.DryRunId)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
@@ -1034,6 +1043,11 @@ func awsRestjson1_serializeOpDocumentGetCanaryRunsInput(v *GetCanaryRunsInput, v
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if len(v.RunType) > 0 {
+		ok := object.Key("RunType")
+		ok.String(string(v.RunType))
 	}
 
 	return nil
@@ -1536,6 +1550,160 @@ func awsRestjson1_serializeOpHttpBindingsStartCanaryInput(v *StartCanaryInput, e
 	return nil
 }
 
+type awsRestjson1_serializeOpStartCanaryDryRun struct {
+}
+
+func (*awsRestjson1_serializeOpStartCanaryDryRun) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartCanaryDryRun) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartCanaryDryRunInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/canary/{Name}/dry-run/start")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartCanaryDryRunInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartCanaryDryRunInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartCanaryDryRunInput(v *StartCanaryDryRunInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Name == nil || len(*v.Name) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
+	if v.Name != nil {
+		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartCanaryDryRunInput(v *StartCanaryDryRunInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ArtifactConfig != nil {
+		ok := object.Key("ArtifactConfig")
+		if err := awsRestjson1_serializeDocumentArtifactConfigInput(v.ArtifactConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ArtifactS3Location != nil {
+		ok := object.Key("ArtifactS3Location")
+		ok.String(*v.ArtifactS3Location)
+	}
+
+	if v.Code != nil {
+		ok := object.Key("Code")
+		if err := awsRestjson1_serializeDocumentCanaryCodeInput(v.Code, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExecutionRoleArn != nil {
+		ok := object.Key("ExecutionRoleArn")
+		ok.String(*v.ExecutionRoleArn)
+	}
+
+	if v.FailureRetentionPeriodInDays != nil {
+		ok := object.Key("FailureRetentionPeriodInDays")
+		ok.Integer(*v.FailureRetentionPeriodInDays)
+	}
+
+	if len(v.ProvisionedResourceCleanup) > 0 {
+		ok := object.Key("ProvisionedResourceCleanup")
+		ok.String(string(v.ProvisionedResourceCleanup))
+	}
+
+	if v.RunConfig != nil {
+		ok := object.Key("RunConfig")
+		if err := awsRestjson1_serializeDocumentCanaryRunConfigInput(v.RunConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RuntimeVersion != nil {
+		ok := object.Key("RuntimeVersion")
+		ok.String(*v.RuntimeVersion)
+	}
+
+	if v.SuccessRetentionPeriodInDays != nil {
+		ok := object.Key("SuccessRetentionPeriodInDays")
+		ok.Integer(*v.SuccessRetentionPeriodInDays)
+	}
+
+	if v.VisualReference != nil {
+		ok := object.Key("VisualReference")
+		if err := awsRestjson1_serializeDocumentVisualReferenceInput(v.VisualReference, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcConfig != nil {
+		ok := object.Key("VpcConfig")
+		if err := awsRestjson1_serializeDocumentVpcConfigInput(v.VpcConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStopCanary struct {
 }
 
@@ -1883,6 +2051,11 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 		if err := awsRestjson1_serializeDocumentCanaryCodeInput(v.Code, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.DryRunId != nil {
+		ok := object.Key("DryRunId")
+		ok.String(*v.DryRunId)
 	}
 
 	if v.ExecutionRoleArn != nil {

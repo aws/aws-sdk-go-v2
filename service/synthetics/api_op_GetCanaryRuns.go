@@ -34,6 +34,10 @@ type GetCanaryRunsInput struct {
 	// This member is required.
 	Name *string
 
+	// The DryRunId associated with an existing canary’s dry run. You can use this
+	// DryRunId to retrieve information about the dry run.
+	DryRunId *string
+
 	// Specify this parameter to limit how many runs are returned each time you use
 	// the GetCanaryRuns operation. If you omit this parameter, the default of 100 is
 	// used.
@@ -43,6 +47,15 @@ type GetCanaryRunsInput struct {
 	// token in a subsequent GetCanaryRuns operation to retrieve the next set of
 	// results.
 	NextToken *string
+
+	//   - When you provide RunType=CANARY_RUN and dryRunId , you will get an exception
+	//
+	//   - When a value is not provided for RunType , the default value is CANARY_RUN
+	//
+	//   - When CANARY_RUN is provided, all canary runs excluding dry runs are returned
+	//
+	//   - When DRY_RUN is provided, all dry runs excluding canary runs are returned
+	RunType types.RunType
 
 	noSmithyDocumentSerde
 }

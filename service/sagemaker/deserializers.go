@@ -51198,6 +51198,11 @@ func awsAwsjson11_deserializeDocumentDomainSettings(v **types.DomainSettings, va
 				return err
 			}
 
+		case "UnifiedStudioSettings":
+			if err := awsAwsjson11_deserializeDocumentUnifiedStudioSettings(&sv.UnifiedStudioSettings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -81701,6 +81706,15 @@ func awsAwsjson11_deserializeDocumentSpaceSettings(v **types.SpaceSettings, valu
 				return err
 			}
 
+		case "SpaceManagedResources":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeatureStatus to be of type string, got %T instead", value)
+				}
+				sv.SpaceManagedResources = types.FeatureStatus(jtv)
+			}
+
 		case "SpaceStorageSettings":
 			if err := awsAwsjson11_deserializeDocumentSpaceStorageSettings(&sv.SpaceStorageSettings, value); err != nil {
 				return err
@@ -87608,6 +87622,100 @@ func awsAwsjson11_deserializeDocumentUiTemplateInfo(v **types.UiTemplateInfo, va
 					return fmt.Errorf("expected TemplateUrl to be of type string, got %T instead", value)
 				}
 				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUnifiedStudioSettings(v **types.UnifiedStudioSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnifiedStudioSettings
+	if *v == nil {
+		sv = &types.UnifiedStudioSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DomainAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.DomainAccountId = ptr.String(jtv)
+			}
+
+		case "DomainId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UnifiedStudioDomainId to be of type string, got %T instead", value)
+				}
+				sv.DomainId = ptr.String(jtv)
+			}
+
+		case "DomainRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegionName to be of type string, got %T instead", value)
+				}
+				sv.DomainRegion = ptr.String(jtv)
+			}
+
+		case "EnvironmentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UnifiedStudioEnvironmentId to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentId = ptr.String(jtv)
+			}
+
+		case "ProjectId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UnifiedStudioProjectId to be of type string, got %T instead", value)
+				}
+				sv.ProjectId = ptr.String(jtv)
+			}
+
+		case "ProjectS3Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.ProjectS3Path = ptr.String(jtv)
+			}
+
+		case "StudioWebPortalAccess":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeatureStatus to be of type string, got %T instead", value)
+				}
+				sv.StudioWebPortalAccess = types.FeatureStatus(jtv)
 			}
 
 		default:

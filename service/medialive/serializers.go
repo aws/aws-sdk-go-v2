@@ -8693,6 +8693,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.AnywhereSettings != nil {
+		ok := object.Key("anywhereSettings")
+		if err := awsRestjson1_serializeDocumentAnywhereSettings(v.AnywhereSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CdiInputSpecification != nil {
 		ok := object.Key("cdiInputSpecification")
 		if err := awsRestjson1_serializeDocumentCdiInputSpecification(v.CdiInputSpecification, ok); err != nil {

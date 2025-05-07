@@ -169,3 +169,22 @@ func (ResourceToTag) Values() []ResourceToTag {
 		"lambda-function",
 	}
 }
+
+type RunType string
+
+// Enum values for RunType
+const (
+	RunTypeCanaryRun RunType = "CANARY_RUN"
+	RunTypeDryRun    RunType = "DRY_RUN"
+)
+
+// Values returns all known values for RunType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RunType) Values() []RunType {
+	return []RunType{
+		"CANARY_RUN",
+		"DRY_RUN",
+	}
+}

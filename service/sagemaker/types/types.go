@@ -3564,7 +3564,7 @@ type ClusterNodeDetails struct {
 	// The type of the instance.
 	InstanceType ClusterInstanceType
 
-	// The time of when the cluster was last updated.
+	// The time when the cluster was last updated.
 	LastSoftwareUpdateTime *time.Time
 
 	// The time when the instance is launched.
@@ -3628,7 +3628,7 @@ type ClusterNodeSummary struct {
 	// This member is required.
 	LaunchTime *time.Time
 
-	// The time of when SageMaker last updated the software of the instances in the
+	// The time when SageMaker last updated the software of the instances in the
 	// cluster.
 	LastSoftwareUpdateTime *time.Time
 
@@ -5240,6 +5240,10 @@ type DomainSettings struct {
 	// for communication between Domain-level apps and user apps.
 	SecurityGroupIds []string
 
+	// The settings that apply to an SageMaker AI domain when you use it in Amazon
+	// SageMaker Unified Studio.
+	UnifiedStudioSettings *UnifiedStudioSettings
+
 	noSmithyDocumentSerde
 }
 
@@ -5267,6 +5271,10 @@ type DomainSettingsForUpdate struct {
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses
 	// for communication between Domain-level apps and user apps.
 	SecurityGroupIds []string
+
+	// The settings that apply to an SageMaker AI domain when you use it in Amazon
+	// SageMaker Unified Studio.
+	UnifiedStudioSettings *UnifiedStudioSettings
 
 	noSmithyDocumentSerde
 }
@@ -17691,6 +17699,14 @@ type SpaceSettings struct {
 	// The KernelGateway app settings.
 	KernelGatewayAppSettings *KernelGatewayAppSettings
 
+	// If you enable this option, SageMaker AI creates the following resources on your
+	// behalf when you create the space:
+	//
+	//   - The user profile that possesses the space.
+	//
+	//   - The app that the space contains.
+	SpaceManagedResources FeatureStatus
+
 	// The storage settings for a space.
 	SpaceStorageSettings *SpaceStorageSettings
 
@@ -20234,6 +20250,53 @@ type UiTemplateInfo struct {
 
 	// The URL for the user interface template.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// The settings that apply to an Amazon SageMaker AI domain when you use it in
+// Amazon SageMaker Unified Studio.
+type UnifiedStudioSettings struct {
+
+	// The ID of the Amazon Web Services account that has the Amazon SageMaker Unified
+	// Studio domain. The default value, if you don't specify an ID, is the ID of the
+	// account that has the Amazon SageMaker AI domain.
+	DomainAccountId *string
+
+	// The ID of the Amazon SageMaker Unified Studio domain associated with this
+	// domain.
+	DomainId *string
+
+	// The Amazon Web Services Region where the domain is located in Amazon SageMaker
+	// Unified Studio. The default value, if you don't specify a Region, is the Region
+	// where the Amazon SageMaker AI domain is located.
+	DomainRegion *string
+
+	// The ID of the environment that Amazon SageMaker Unified Studio associates with
+	// the domain.
+	EnvironmentId *string
+
+	// The ID of the Amazon SageMaker Unified Studio project that corresponds to the
+	// domain.
+	ProjectId *string
+
+	// The location where Amazon S3 stores temporary execution data and other
+	// artifacts for the project that corresponds to the domain.
+	ProjectS3Path *string
+
+	// Sets whether you can access the domain in Amazon SageMaker Studio:
+	//
+	// ENABLED You can access the domain in Amazon SageMaker Studio. If you migrate
+	// the domain to Amazon SageMaker Unified Studio, you can access it in both studio
+	// interfaces.
+	//
+	// DISABLED You can't access the domain in Amazon SageMaker Studio. If you migrate
+	// the domain to Amazon SageMaker Unified Studio, you can access it only in that
+	// studio interface.
+	//
+	// To migrate a domain to Amazon SageMaker Unified Studio, you specify the
+	// UnifiedStudioSettings data type when you use the UpdateDomain action.
+	StudioWebPortalAccess FeatureStatus
 
 	noSmithyDocumentSerde
 }

@@ -250,6 +250,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCanaryDryRun struct {
+}
+
+func (*validateOpStartCanaryDryRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCanaryDryRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCanaryDryRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCanaryDryRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartCanary struct {
 }
 
@@ -396,6 +416,10 @@ func addOpListGroupResourcesValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpStartCanaryDryRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCanaryDryRun{}, middleware.After)
 }
 
 func addOpStartCanaryValidationMiddleware(stack *middleware.Stack) error {
@@ -701,6 +725,31 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartCanaryDryRunInput(v *StartCanaryDryRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCanaryDryRunInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Code != nil {
+		if err := validateCanaryCodeInput(v.Code); err != nil {
+			invalidParams.AddNested("Code", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VisualReference != nil {
+		if err := validateVisualReferenceInput(v.VisualReference); err != nil {
+			invalidParams.AddNested("VisualReference", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

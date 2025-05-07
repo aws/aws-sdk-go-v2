@@ -1,0 +1,8 @@
+{
+    "id": "26bdea1b-c2e0-4fc5-9d02-7ef5dda0a703",
+    "type": "feature",
+    "description": "This release adds API support for Path Component Exclusion (Filter Out ARN) for Reachability Analyzer",
+    "modules": [
+        "service/ec2"
+    ]
+}

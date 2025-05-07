@@ -116,6 +116,11 @@ type CreateCanaryInput struct {
 
 	// The number of days to retain data about failed runs of this canary. If you omit
 	// this field, the default of 31 days is used. The valid range is 1 to 455 days.
+	//
+	// This setting affects the range of information returned by [GetCanaryRuns], as well as the
+	// range of information displayed in the Synthetics console.
+	//
+	// [GetCanaryRuns]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html
 	FailureRetentionPeriodInDays *int32
 
 	// Specifies whether to also delete the Lambda functions and layers used by this
@@ -141,13 +146,19 @@ type CreateCanaryInput struct {
 	// A structure that contains the configuration for individual canary runs, such as
 	// timeout value and environment variables.
 	//
-	// The environment variables keys and values are not encrypted. Do not store
-	// sensitive information in this field.
+	// Environment variable keys and values are encrypted at rest using Amazon Web
+	// Services owned KMS keys. However, the environment variables are not encrypted on
+	// the client side. Do not store sensitive information in them.
 	RunConfig *types.CanaryRunConfigInput
 
 	// The number of days to retain data about successful runs of this canary. If you
 	// omit this field, the default of 31 days is used. The valid range is 1 to 455
 	// days.
+	//
+	// This setting affects the range of information returned by [GetCanaryRuns], as well as the
+	// range of information displayed in the Synthetics console.
+	//
+	// [GetCanaryRuns]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html
 	SuccessRetentionPeriodInDays *int32
 
 	// A list of key-value pairs to associate with the canary. You can associate as

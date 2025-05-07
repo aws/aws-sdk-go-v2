@@ -35,6 +35,9 @@ type UpdateChannelInput struct {
 	// This member is required.
 	ChannelId *string
 
+	// The Elemental Anywhere settings for this channel.
+	AnywhereSettings *types.AnywhereSettings
+
 	// Specification of CDI inputs for this channel
 	CdiInputSpecification *types.CdiInputSpecification
 

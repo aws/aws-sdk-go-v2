@@ -266,6 +266,18 @@ func TestCheckSnapshot_StartCanary(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartCanaryDryRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCanaryDryRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartCanaryDryRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopCanary(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopCanary(context.Background(), nil, func(o *Options) {
@@ -510,6 +522,18 @@ func TestUpdateSnapshot_StartCanary(t *testing.T) {
 	_, err := svc.StartCanary(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartCanary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartCanaryDryRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCanaryDryRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartCanaryDryRun")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

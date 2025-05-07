@@ -18654,12 +18654,6 @@ func validateOpSearchTrainingPlanOfferingsInput(v *SearchTrainingPlanOfferingsIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchTrainingPlanOfferingsInput"}
-	if len(v.InstanceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
-	}
-	if v.InstanceCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
-	}
 	if v.DurationHours == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DurationHours"))
 	}

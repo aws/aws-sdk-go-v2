@@ -37,6 +37,10 @@ type GetCanaryInput struct {
 	// This member is required.
 	Name *string
 
+	// The DryRunId associated with an existing canary’s dry run. You can use this
+	// DryRunId to retrieve information about the dry run.
+	DryRunId *string
+
 	noSmithyDocumentSerde
 }
 

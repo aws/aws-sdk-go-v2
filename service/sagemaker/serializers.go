@@ -25298,6 +25298,13 @@ func awsAwsjson11_serializeDocumentDomainSettings(v *types.DomainSettings, value
 		}
 	}
 
+	if v.UnifiedStudioSettings != nil {
+		ok := object.Key("UnifiedStudioSettings")
+		if err := awsAwsjson11_serializeDocumentUnifiedStudioSettings(v.UnifiedStudioSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -25334,6 +25341,13 @@ func awsAwsjson11_serializeDocumentDomainSettingsForUpdate(v *types.DomainSettin
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("SecurityGroupIds")
 		if err := awsAwsjson11_serializeDocumentDomainSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UnifiedStudioSettings != nil {
+		ok := object.Key("UnifiedStudioSettings")
+		if err := awsAwsjson11_serializeDocumentUnifiedStudioSettings(v.UnifiedStudioSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -32437,6 +32451,11 @@ func awsAwsjson11_serializeDocumentSpaceSettings(v *types.SpaceSettings, value s
 		}
 	}
 
+	if len(v.SpaceManagedResources) > 0 {
+		ok := object.Key("SpaceManagedResources")
+		ok.String(string(v.SpaceManagedResources))
+	}
+
 	if v.SpaceStorageSettings != nil {
 		ok := object.Key("SpaceStorageSettings")
 		if err := awsAwsjson11_serializeDocumentSpaceStorageSettings(v.SpaceStorageSettings, ok); err != nil {
@@ -33612,6 +33631,48 @@ func awsAwsjson11_serializeDocumentUiTemplate(v *types.UiTemplate, value smithyj
 	if v.Content != nil {
 		ok := object.Key("Content")
 		ok.String(*v.Content)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUnifiedStudioSettings(v *types.UnifiedStudioSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainAccountId != nil {
+		ok := object.Key("DomainAccountId")
+		ok.String(*v.DomainAccountId)
+	}
+
+	if v.DomainId != nil {
+		ok := object.Key("DomainId")
+		ok.String(*v.DomainId)
+	}
+
+	if v.DomainRegion != nil {
+		ok := object.Key("DomainRegion")
+		ok.String(*v.DomainRegion)
+	}
+
+	if v.EnvironmentId != nil {
+		ok := object.Key("EnvironmentId")
+		ok.String(*v.EnvironmentId)
+	}
+
+	if v.ProjectId != nil {
+		ok := object.Key("ProjectId")
+		ok.String(*v.ProjectId)
+	}
+
+	if v.ProjectS3Path != nil {
+		ok := object.Key("ProjectS3Path")
+		ok.String(*v.ProjectS3Path)
+	}
+
+	if len(v.StudioWebPortalAccess) > 0 {
+		ok := object.Key("StudioWebPortalAccess")
+		ok.String(string(v.StudioWebPortalAccess))
 	}
 
 	return nil

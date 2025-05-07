@@ -79831,6 +79831,13 @@ func awsEc2query_serializeOpDocumentStartNetworkInsightsAnalysisInput(v *StartNe
 		}
 	}
 
+	if v.FilterOutArns != nil {
+		objectKey := object.FlatKey("FilterOutArn")
+		if err := awsEc2query_serializeDocumentArnList(v.FilterOutArns, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.NetworkInsightsPathId != nil {
 		objectKey := object.Key("NetworkInsightsPathId")
 		objectKey.String(*v.NetworkInsightsPathId)

@@ -25,6 +25,7 @@
         "api_op_ListGroups.go",
         "api_op_ListTagsForResource.go",
         "api_op_StartCanary.go",
+        "api_op_StartCanaryDryRun.go",
         "api_op_StopCanary.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
