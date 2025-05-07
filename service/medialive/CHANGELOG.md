@@ -1,3 +1,7 @@
+# v1.75.0 (2025-05-07)
+
+* **Feature**: Enables Updating Anywhere Settings on a MediaLive Anywhere Channel.
+
 # v1.74.0 (2025-04-10)
 
 * **Feature**: AWS Elemental MediaLive / Features : Add support for CMAF Ingest CaptionLanguageMappings, TimedMetadataId3 settings, and Link InputResolution.

@@ -1,8 +1,0 @@
-{
-    "id": "43b02b52-1019-423a-95de-0c9809d2db26",
-    "type": "feature",
-    "description": "Enables Updating Anywhere Settings on a MediaLive Anywhere Channel.",
-    "modules": [
-        "service/medialive"
-    ]
-}

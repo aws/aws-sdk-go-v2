@@ -1,8 +1,0 @@
-{
-    "id": "ace90841-f1c7-4b36-96ac-76c66b18314e",
-    "type": "feature",
-    "description": "SageMaker AI Studio users can now migrate to SageMaker Unified Studio, which offers a unified web-based development experience that integrates AWS data, analytics, artificial intelligence (AI), and machine learning (ML) services, as well as additional tools and resource",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

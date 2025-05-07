@@ -1,3 +1,17 @@
+# Release (2025-05-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.216.0](service/ec2/CHANGELOG.md#v12160-2025-05-07)
+  * **Feature**: This release adds API support for Path Component Exclusion (Filter Out ARN) for Reachability Analyzer
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.42.1](service/imagebuilder/CHANGELOG.md#v1421-2025-05-07)
+  * **Documentation**: Updated the CreateImageRecipeRequest ParentImage description to include all valid values as updated with the SSM Parameters project.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.75.0](service/medialive/CHANGELOG.md#v1750-2025-05-07)
+  * **Feature**: Enables Updating Anywhere Settings on a MediaLive Anywhere Channel.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.191.0](service/sagemaker/CHANGELOG.md#v11910-2025-05-07)
+  * **Feature**: SageMaker AI Studio users can now migrate to SageMaker Unified Studio, which offers a unified web-based development experience that integrates AWS data, analytics, artificial intelligence (AI), and machine learning (ML) services, as well as additional tools and resource
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.33.0](service/synthetics/CHANGELOG.md#v1330-2025-05-07)
+  * **Feature**: Add support to test a canary update by invoking a dry run of a canary. This behavior can be used via the new StartCanaryDryRun API along with new fields in UpdateCanary to apply dry run changes. Also includes changes in GetCanary and GetCanaryRuns to support retrieving dry run configurations.
+
 # Release (2025-05-06)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.191.0 (2025-05-07)
+
+* **Feature**: SageMaker AI Studio users can now migrate to SageMaker Unified Studio, which offers a unified web-based development experience that integrates AWS data, analytics, artificial intelligence (AI), and machine learning (ML) services, as well as additional tools and resource
+
 # v1.190.0 (2025-05-01)
 
 * **Feature**: Feature - Adding support for Scheduled and Rolling Update Software in Sagemaker Hyperpod.

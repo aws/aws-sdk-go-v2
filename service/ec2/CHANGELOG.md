@@ -1,3 +1,7 @@
+# v1.216.0 (2025-05-07)
+
+* **Feature**: This release adds API support for Path Component Exclusion (Filter Out ARN) for Reachability Analyzer
+
 # v1.215.0 (2025-05-06)
 
 * **Feature**: This release adds support for Amazon EBS Provisioned Rate for Volume Initialization, which lets you specify a volume initialization rate to ensure that your EBS volumes are initialized in a predictable amount of time.

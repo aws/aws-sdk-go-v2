@@ -1,3 +1,7 @@
+# v1.42.1 (2025-05-07)
+
+* **Documentation**: Updated the CreateImageRecipeRequest ParentImage description to include all valid values as updated with the SSM Parameters project.
+
 # v1.42.0 (2025-04-28)
 
 * **Feature**: Add integration with SSM Parameter Store to Image Builder.

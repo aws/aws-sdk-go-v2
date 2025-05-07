@@ -1,8 +1,0 @@
-{
-    "id": "8247d5fb-3870-43a5-bf61-1c7a6aab3a88",
-    "type": "documentation",
-    "description": "Updated the CreateImageRecipeRequest ParentImage description to include all valid values as updated with the SSM Parameters project.",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}
