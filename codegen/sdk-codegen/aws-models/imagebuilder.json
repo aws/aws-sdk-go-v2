@@ -2005,7 +2005,7 @@
                 "parentImage": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The base image of the image recipe. The value of the string can be the ARN of the base\n\t\t\timage or an AMI ID. The format for the ARN follows this example:\n\t\t\t\t<code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/x.x.x</code>.\n\t\t\tYou can provide the specific version that you want to use, or you can use a wildcard in\n\t\t\tall of the fields. If you enter an AMI ID for the string value, you must have access to\n\t\t\tthe AMI, and the AMI must be in the same Region in which you are using Image Builder.</p>",
+                        "smithy.api#documentation": "<p>The base image for customizations specified in the image recipe. You can specify the \n\t\t\tparent image using one of the following options:</p>\n         <ul>\n            <li>\n               <p>AMI ID</p>\n            </li>\n            <li>\n               <p>Image Builder image Amazon Resource Name (ARN)</p>\n            </li>\n            <li>\n               <p>Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>, \n\t\t\t\t\tfollowed by the parameter name or ARN.</p>\n            </li>\n            <li>\n               <p>Amazon Web Services Marketplace product ID</p>\n            </li>\n         </ul>\n         <p>If you enter an AMI ID or an SSM parameter that contains the AMI ID, you must have access \n\t\t\tto the AMI, and the AMI must be in the source Region.</p>",
                         "smithy.api#required": {}
                     }
                 },

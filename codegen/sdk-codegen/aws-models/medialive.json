@@ -35179,6 +35179,13 @@
                     "traits": {
                         "smithy.api#jsonName": "dryRun"
                     }
+                },
+                "AnywhereSettings": {
+                    "target": "com.amazonaws.medialive#AnywhereSettings",
+                    "traits": {
+                        "smithy.api#documentation": "The Elemental Anywhere settings for this channel.",
+                        "smithy.api#jsonName": "anywhereSettings"
+                    }
                 }
             },
             "traits": {

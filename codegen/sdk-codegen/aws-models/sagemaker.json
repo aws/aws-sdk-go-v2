@@ -8028,7 +8028,7 @@
                 "LastSoftwareUpdateTime": {
                     "target": "com.amazonaws.sagemaker#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time of when the cluster was last updated.</p>"
+                        "smithy.api#documentation": "<p>The time when the cluster was last updated.</p>"
                     }
                 },
                 "LifeCycleConfig": {
@@ -8167,7 +8167,7 @@
                 "LastSoftwareUpdateTime": {
                     "target": "com.amazonaws.sagemaker#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time of when SageMaker last updated the software of the instances in the cluster.</p>"
+                        "smithy.api#documentation": "<p>The time when SageMaker last updated the software of the instances in the cluster.</p>"
                     }
                 },
                 "InstanceStatus": {
@@ -10082,7 +10082,7 @@
                 "RecoveryMode": {
                     "target": "com.amazonaws.sagemaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Indicates whether the application is launched in recovery mode.\n    </p>"
+                        "smithy.api#documentation": "<p> Indicates whether the application is launched in recovery mode. </p>"
                     }
                 }
             },
@@ -19550,7 +19550,7 @@
                 "RecoveryMode": {
                     "target": "com.amazonaws.sagemaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Indicates whether the application is launched in recovery mode.\n    </p>"
+                        "smithy.api#documentation": "<p> Indicates whether the application is launched in recovery mode. </p>"
                     }
                 },
                 "LastHealthCheckTimestamp": {
@@ -28772,6 +28772,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of settings that configure the Amazon Q experience within the domain. The\n        <code>AuthMode</code> that you use to create the domain must be <code>SSO</code>.</p>"
                     }
+                },
+                "UnifiedStudioSettings": {
+                    "target": "com.amazonaws.sagemaker#UnifiedStudioSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings that apply to an SageMaker AI domain when you use it in Amazon SageMaker\n      Unified Studio.</p>"
+                    }
                 }
             },
             "traits": {
@@ -28809,6 +28815,12 @@
                     "target": "com.amazonaws.sagemaker#AmazonQSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of settings that configure the Amazon Q experience within the domain.</p>"
+                    }
+                },
+                "UnifiedStudioSettings": {
+                    "target": "com.amazonaws.sagemaker#UnifiedStudioSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings that apply to an SageMaker AI domain when you use it in Amazon SageMaker\n      Unified Studio.</p>"
                     }
                 }
             },
@@ -60138,6 +60150,15 @@
                 "smithy.api#pattern": "^\\d{1,4}.\\d{1,4}.\\d{1,4}$"
             }
         },
+        "com.amazonaws.sagemaker#RegionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 24
+                }
+            }
+        },
         "com.amazonaws.sagemaker#RegisterDevices": {
             "type": "operation",
             "input": {
@@ -64463,17 +64484,13 @@
                 "InstanceType": {
                     "target": "com.amazonaws.sagemaker#ReservedCapacityInstanceType",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The type of instance you want to search for in the available training plan offerings.\n         This field allows you to filter the search results based on the specific compute resources\n         you require for your SageMaker training jobs or SageMaker HyperPod clusters. When searching for training\n         plan offerings, specifying the instance type helps you find Reserved Instances that match\n         your computational needs.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The type of instance you want to search for in the available training plan offerings.\n         This field allows you to filter the search results based on the specific compute resources\n         you require for your SageMaker training jobs or SageMaker HyperPod clusters. When searching for training\n         plan offerings, specifying the instance type helps you find Reserved Instances that match\n         your computational needs.</p>"
                     }
                 },
                 "InstanceCount": {
                     "target": "com.amazonaws.sagemaker#ReservedCapacityInstanceCount",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The number of instances you want to reserve in the training plan offerings. This allows\n         you to specify the quantity of compute resources needed for your SageMaker training jobs or\n         SageMaker HyperPod clusters, helping you find reserved capacity offerings that match your\n         requirements.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The number of instances you want to reserve in the training plan offerings. This allows\n         you to specify the quantity of compute resources needed for your SageMaker training jobs or\n         SageMaker HyperPod clusters, helping you find reserved capacity offerings that match your\n         requirements.</p>"
                     }
                 },
                 "StartTimeAfter": {
@@ -65810,6 +65827,12 @@
                     "target": "com.amazonaws.sagemaker#SpaceStorageSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The storage settings for a space.</p>"
+                    }
+                },
+                "SpaceManagedResources": {
+                    "target": "com.amazonaws.sagemaker#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you enable this option, SageMaker AI creates the following resources on your\n      behalf when you create the space:</p>\n         <ul>\n            <li>\n               <p>The user profile that possesses the space.</p>\n            </li>\n            <li>\n               <p>The app that the space contains.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CustomFileSystems": {
@@ -72812,6 +72835,74 @@
                     "min": 10000,
                     "max": 4000000
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#UnifiedStudioDomainId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$"
+            }
+        },
+        "com.amazonaws.sagemaker#UnifiedStudioEnvironmentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
+        },
+        "com.amazonaws.sagemaker#UnifiedStudioProjectId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
+        },
+        "com.amazonaws.sagemaker#UnifiedStudioSettings": {
+            "type": "structure",
+            "members": {
+                "StudioWebPortalAccess": {
+                    "target": "com.amazonaws.sagemaker#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets whether you can access the domain in Amazon SageMaker Studio:</p>\n         <dl>\n            <dt>ENABLED</dt>\n            <dd>\n               <p>You can access the domain in Amazon SageMaker Studio. If you migrate the domain to\n            Amazon SageMaker Unified Studio, you can access it in both studio interfaces.</p>\n            </dd>\n            <dt>DISABLED</dt>\n            <dd>\n               <p>You can't access the domain in Amazon SageMaker Studio. If you migrate the domain to\n            Amazon SageMaker Unified Studio, you can access it only in that studio interface.</p>\n            </dd>\n         </dl>\n         <p>To migrate a domain to Amazon SageMaker Unified Studio, you specify the\n      UnifiedStudioSettings data type when you use the UpdateDomain action.</p>"
+                    }
+                },
+                "DomainAccountId": {
+                    "target": "com.amazonaws.sagemaker#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that has the Amazon SageMaker Unified Studio\n      domain. The default value, if you don't specify an ID, is the ID of the account that has the\n        Amazon SageMaker AI domain.</p>"
+                    }
+                },
+                "DomainRegion": {
+                    "target": "com.amazonaws.sagemaker#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the domain is located in Amazon SageMaker Unified\n      Studio. The default value, if you don't specify a Region, is the Region where the Amazon SageMaker AI domain is located.</p>"
+                    }
+                },
+                "DomainId": {
+                    "target": "com.amazonaws.sagemaker#UnifiedStudioDomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon SageMaker Unified Studio domain associated with this domain.</p>"
+                    }
+                },
+                "ProjectId": {
+                    "target": "com.amazonaws.sagemaker#UnifiedStudioProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon SageMaker Unified Studio project that corresponds to the\n      domain.</p>"
+                    }
+                },
+                "EnvironmentId": {
+                    "target": "com.amazonaws.sagemaker#UnifiedStudioEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment that Amazon SageMaker Unified Studio associates with the\n      domain.</p>"
+                    }
+                },
+                "ProjectS3Path": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location where Amazon S3 stores temporary execution data and other artifacts\n      for the project that corresponds to the domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings that apply to an Amazon SageMaker AI domain when you use it in Amazon\n      SageMaker Unified Studio.</p>"
             }
         },
         "com.amazonaws.sagemaker#UpdateAction": {
