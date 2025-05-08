@@ -10376,6 +10376,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata assigned to the resource consisting of a list of key-value pairs.</p>"
                     }
+                },
+                "IntegrationConfig": {
+                    "target": "com.amazonaws.glue#IntegrationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10554,6 +10560,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Selects source tables for the integration using Maxwell filter syntax.</p>"
                     }
+                },
+                "IntegrationConfig": {
+                    "target": "com.amazonaws.glue#IntegrationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10615,7 +10627,7 @@
                 "SourceTableConfig": {
                     "target": "com.amazonaws.glue#SourceTableConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure for the source table configuration.</p>"
+                        "smithy.api#documentation": "<p>A structure for the source table configuration. See the <code>SourceTableConfig</code> structure to see list of supported source properties.</p>"
                     }
                 },
                 "TargetTableConfig": {
@@ -26056,6 +26068,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "IntegrationConfig": {
+                    "target": "com.amazonaws.glue#IntegrationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Properties associated with the integration.</p>"
+                    }
+                },
                 "Errors": {
                     "target": "com.amazonaws.glue#IntegrationErrorList",
                     "traits": {
@@ -26187,6 +26205,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "IntegrationConfig": {
+                    "target": "com.amazonaws.glue#IntegrationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Properties associated with the integration.</p>"
+                    }
+                },
                 "Errors": {
                     "target": "com.amazonaws.glue#IntegrationErrorList",
                     "traits": {
@@ -26211,6 +26235,20 @@
             },
             "value": {
                 "target": "com.amazonaws.glue#IntegrationString"
+            }
+        },
+        "com.amazonaws.glue#IntegrationConfig": {
+            "type": "structure",
+            "members": {
+                "RefreshInterval": {
+                    "target": "com.amazonaws.glue#String128",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the frequency at which CDC (Change Data Capture) pulls or incremental loads should occur. This parameter provides flexibility to align \n      the refresh rate with your specific data update patterns, system load considerations, and performance optimization goals. Time increment can be set from  \n    15 minutes to 8640 minutes (six days). Currently supports creation of <code>RefreshInterval</code> only.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties associated with the integration.</p>"
             }
         },
         "com.amazonaws.glue#IntegrationConflictOperationFault": {
@@ -26325,13 +26363,13 @@
                 "FieldName": {
                     "target": "com.amazonaws.glue#String128",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field name used to partition data on the target.</p>"
+                        "smithy.api#documentation": "<p>The field name used to partition data on the target. Avoid using columns that have unique values for each row (for example, `LastModifiedTimestamp`, \n      `SystemModTimeStamp`) as the partition column. These columns are not suitable for partitioning because they create a large number of small partitions, \n      which can lead to performance issues.</p>"
                     }
                 },
                 "FunctionSpec": {
                     "target": "com.amazonaws.glue#String128",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a function used to partition data on the target.</p>"
+                        "smithy.api#documentation": "<p>Specifies the function used to partition data on the target. The only accepted value for this parameter is `'identity'` (string). \n      The `'identity'` function ensures that the data partitioning on the target follows the same scheme as the source. In other words, the partitioning \n      structure of the source data is preserved in the target destination.</p>"
                     }
                 }
             },
@@ -37587,25 +37625,25 @@
                 "Fields": {
                     "target": "com.amazonaws.glue#SourceTableFieldsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of fields used for column-level filtering.</p>"
+                        "smithy.api#documentation": "<p>A list of fields used for column-level filtering. Currently unsupported.</p>"
                     }
                 },
                 "FilterPredicate": {
                     "target": "com.amazonaws.glue#String128",
                     "traits": {
-                        "smithy.api#documentation": "<p>A condition clause used for row-level filtering.</p>"
+                        "smithy.api#documentation": "<p>A condition clause used for row-level filtering. Currently unsupported.</p>"
                     }
                 },
                 "PrimaryKey": {
                     "target": "com.amazonaws.glue#PrimaryKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier of a record.</p>"
+                        "smithy.api#documentation": "<p>Provide the primary key set for this table. Currently supported specifically for SAP <code>EntityOf</code> entities upon request. Contact \n      Amazon Web Services Support to make this feature available.</p>"
                     }
                 },
                 "RecordUpdateField": {
                     "target": "com.amazonaws.glue#String128",
                     "traits": {
-                        "smithy.api#documentation": "<p>Incremental pull timestamp-based field.</p>"
+                        "smithy.api#documentation": "<p>Incremental pull timestamp-based field. Currently unsupported.</p>"
                     }
                 }
             },

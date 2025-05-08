@@ -507,6 +507,16 @@
                 }
             }
         },
+        "com.amazonaws.ssoadmin#ApplicationNameType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
         "com.amazonaws.ssoadmin#ApplicationProvider": {
             "type": "structure",
             "members": {
@@ -537,7 +547,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that describes a provider that can be used to connect an Amazon Web Services managed application or customer managed application to IAM Identity Center.</p>"
+                "smithy.api#documentation": "<p>A structure that describes a provider that can be used to connect an Amazon Web Services managed\n            application or customer managed application to IAM Identity Center.</p>"
             }
         },
         "com.amazonaws.ssoadmin#ApplicationProviderArn": {
@@ -768,7 +778,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that stores the details of the Amazon Web Services managed policy.</p>"
+                "smithy.api#documentation": "<p>A structure that stores a list of managed policy ARNs that describe the associated Amazon Web Services managed policy.</p>"
             }
         },
         "com.amazonaws.ssoadmin#AttachedManagedPolicyList": {
@@ -834,12 +844,12 @@
                 "RedirectUris": {
                     "target": "com.amazonaws.ssoadmin#RedirectUris",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of URIs that are valid locations to redirect a user's browser after the user is authorized.</p>"
+                        "smithy.api#documentation": "<p>A list of URIs that are valid locations to redirect a user's browser after the user is\n            authorized.</p>\n         <note>\n            <p>RedirectUris is required when the grant type is\n                <code>authorization_code</code>.</p>\n         </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Authorization Code Grant.</p>"
+                "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the\n            OAuth 2.0 Authorization Code Grant.</p>"
             }
         },
         "com.amazonaws.ssoadmin#AuthorizedTokenIssuer": {
@@ -1041,7 +1051,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an application in IAM Identity Center for the given application provider.</p>"
+                "smithy.api#documentation": "<p>Creates an OAuth 2.0 customer managed application in IAM Identity Center for the given\n            application provider.</p>\n         <note>\n            <p>This API does not support creating SAML 2.0 customer managed applications or Amazon Web Services\n                managed applications. To learn how to create an Amazon Web Services managed application, see the\n                application user guide. You can create a SAML 2.0 customer managed application in\n                the Amazon Web Services Management Console only. See <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/customermanagedapps-saml2-setup.html\">Setting\n                    up customer managed SAML 2.0 applications</a>. For more information on these\n                application types, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/awsapps.html\">Amazon Web Services managed\n                    applications</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#CreateApplicationAssignment": {
@@ -1085,14 +1095,14 @@
                 "ApplicationArn": {
                     "target": "com.amazonaws.ssoadmin#ApplicationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the application provider under which the operation will run.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the application for which the assignment is created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PrincipalId": {
                     "target": "com.amazonaws.ssoadmin#PrincipalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>",
+                        "smithy.api#documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1121,7 +1131,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the instance of IAM Identity Center under which the operation will run.\n            For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the instance of IAM Identity Center under which the operation will run. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1133,7 +1143,7 @@
                     }
                 },
                 "Name": {
-                    "target": "com.amazonaws.ssoadmin#NameType",
+                    "target": "com.amazonaws.ssoadmin#ApplicationNameType",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the .</p>",
                         "smithy.api#required": {}
@@ -1218,7 +1228,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an instance of IAM Identity Center for a standalone Amazon Web Services account that is not\n            managed by Organizations or a member Amazon Web Services account in an organization. You can\n            create only one instance per account and across all Amazon Web Services Regions.</p>\n         <p>The CreateInstance request is rejected if the following apply: </p>\n         <ul>\n            <li>\n               <p>The instance is created within the organization management account.</p>\n            </li>\n            <li>\n               <p>An instance already exists in the same account.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates an instance of IAM Identity Center for a standalone Amazon Web Services account that is not\n            managed by Organizations or a member Amazon Web Services account in an organization. You can create only\n            one instance per account and across all Amazon Web Services Regions.</p>\n         <p>The CreateInstance request is rejected if the following apply: </p>\n         <ul>\n            <li>\n               <p>The instance is created within the organization management account.</p>\n            </li>\n            <li>\n               <p>An instance already exists in the same account.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.ssoadmin#CreateInstanceAccessControlAttributeConfiguration": {
@@ -1447,7 +1457,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a connection to a trusted token issuer in an instance of IAM Identity Center. A trusted token issuer enables trusted identity propagation to be used with applications that authenticate outside of Amazon Web Services.</p>\n         <p>This trusted token issuer describes an external identity\n            provider (IdP) that can generate claims or assertions in the form of access tokens for a\n            user. Applications enabled for IAM Identity Center can use these tokens for authentication. </p>"
+                "smithy.api#documentation": "<p>Creates a connection to a trusted token issuer in an instance of IAM Identity Center. A trusted token issuer enables trusted\n            identity propagation to be used with applications that authenticate outside of\n            Amazon Web Services.</p>\n         <p>This trusted token issuer describes an external identity provider (IdP) that can generate claims or\n            assertions in the form of access tokens for a user. Applications enabled for IAM Identity Center\n            can use these tokens for authentication. </p>"
             }
         },
         "com.amazonaws.ssoadmin#CreateTrustedTokenIssuerRequest": {
@@ -1772,7 +1782,7 @@
                 "PrincipalId": {
                     "target": "com.amazonaws.ssoadmin#PrincipalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>",
+                        "smithy.api#documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2244,7 +2254,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a trusted token issuer configuration from an instance of IAM Identity Center.</p>\n         <note>\n            <p>Deleting this trusted token issuer configuration will cause users to lose access to any applications that are configured to use the trusted token issuer.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes a trusted token issuer configuration from an instance of IAM Identity Center.</p>\n         <note>\n            <p>Deleting this trusted token issuer configuration will cause users to lose access to any\n                applications that are configured to use the trusted token issuer.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#DeleteTrustedTokenIssuerRequest": {
@@ -2454,7 +2464,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a direct assignment of a user or group to an application. If the user doesn’t have a direct assignment to the application, \n            the user may still have access to the application through a group. Therefore, don’t use this API to test access to an application for a user. \n            Instead use <a>ListApplicationAssignmentsForPrincipal</a>.</p>"
+                "smithy.api#documentation": "<p>Retrieves a direct assignment of a user or group to an application. If the user\n            doesn’t have a direct assignment to the application, the user may still have access to\n            the application through a group. Therefore, don’t use this API to test access to an\n            application for a user. Instead use <a>ListApplicationAssignmentsForPrincipal</a>.</p>"
             }
         },
         "com.amazonaws.ssoadmin#DescribeApplicationAssignmentRequest": {
@@ -2463,14 +2473,14 @@
                 "ApplicationArn": {
                     "target": "com.amazonaws.ssoadmin#ApplicationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN of the application.\n            For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ARN of the application. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PrincipalId": {
                     "target": "com.amazonaws.ssoadmin#PrincipalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>",
+                        "smithy.api#documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2498,7 +2508,7 @@
                 "PrincipalId": {
                     "target": "com.amazonaws.ssoadmin#PrincipalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>"
+                        "smithy.api#documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>"
                     }
                 },
                 "ApplicationArn": {
@@ -2538,7 +2548,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves details about a provider that can be used to connect an Amazon Web Services managed application or customer managed application to IAM Identity Center.</p>"
+                "smithy.api#documentation": "<p>Retrieves details about a provider that can be used to connect an Amazon Web Services managed\n            application or customer managed application to IAM Identity Center.</p>"
             }
         },
         "com.amazonaws.ssoadmin#DescribeApplicationProviderRequest": {
@@ -2689,7 +2699,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details of an instance of IAM Identity Center. The status can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The instance is in the process of being created. When the\n                instance is ready for use, DescribeInstance returns the status of\n                <code>ACTIVE</code>. While the instance is in the\n                <code>CREATE_IN_PROGRESS</code> state, you can call only DescribeInstance\n                and DeleteInstance operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_IN_PROGRESS</code> - The instance is being deleted. Returns <code>AccessDeniedException</code> after the delete operation completes. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - The instance is active.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Returns the details of an instance of IAM Identity Center. The status can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The instance is in the process of being\n                    created. When the instance is ready for use, DescribeInstance returns the status\n                    of <code>ACTIVE</code>. While the instance is in the\n                        <code>CREATE_IN_PROGRESS</code> state, you can call only DescribeInstance\n                    and DeleteInstance operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_IN_PROGRESS</code> - The instance is being deleted. Returns\n                        <code>AccessDeniedException</code> after the delete operation completes.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - The instance is active.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.ssoadmin#DescribeInstanceAccessControlAttributeConfiguration": {
@@ -2977,7 +2987,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves details about a trusted token issuer configuration stored in an instance of IAM Identity Center. Details include the  name of the trusted token issuer, the issuer URL, and the path of the source attribute and the destination attribute for a trusted token issuer configuration.\n        </p>"
+                "smithy.api#documentation": "<p>Retrieves details about a trusted token issuer configuration stored in an instance of IAM Identity Center. Details\n            include the name of the trusted token issuer, the issuer URL, and the path of the source attribute and\n            the destination attribute for a trusted token issuer configuration. </p>"
             }
         },
         "com.amazonaws.ssoadmin#DescribeTrustedTokenIssuerRequest": {
@@ -3350,7 +3360,7 @@
                     "target": "com.amazonaws.ssoadmin#AssignmentRequired",
                     "traits": {
                         "smithy.api#default": true,
-                        "smithy.api#documentation": "<p>If <code>AssignmentsRequired</code> is <code>true</code> (default value), users don’t have access to the application unless an assignment is created using the \n            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html\">CreateApplicationAssignment API</a>. If <code>false</code>, all users have access to the application. </p>",
+                        "smithy.api#documentation": "<p>If <code>AssignmentsRequired</code> is <code>true</code> (default value), users don’t\n            have access to the application unless an assignment is created using the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html\">CreateApplicationAssignment API</a>. If <code>false</code>, all users have\n            access to the application. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3634,7 +3644,7 @@
                 "JwtBearer": {
                     "target": "com.amazonaws.ssoadmin#JwtBearerGrant",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration options for the <code>urn:ietf:params:oauth:grant-type:jwt-bearer</code> grant type.</p>"
+                        "smithy.api#documentation": "<p>Configuration options for the <code>urn:ietf:params:oauth:grant-type:jwt-bearer</code>\n            grant type.</p>"
                     }
                 },
                 "RefreshToken": {
@@ -3646,12 +3656,12 @@
                 "TokenExchange": {
                     "target": "com.amazonaws.ssoadmin#TokenExchangeGrant",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration options for the <code>urn:ietf:params:oauth:grant-type:token-exchange</code> grant type.</p>"
+                        "smithy.api#documentation": "<p>Configuration options for the\n                <code>urn:ietf:params:oauth:grant-type:token-exchange</code> grant type.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Grant union represents the set of possible configuration options for the selected grant type. Exactly one member of the union must be specified, and must match the grant type selected.</p>"
+                "smithy.api#documentation": "<p>The Grant union represents the set of possible configuration options for the selected\n            grant type. Exactly one member of the union must be specified, and must match the grant\n            type selected.</p>"
             }
         },
         "com.amazonaws.ssoadmin#GrantItem": {
@@ -3919,12 +3929,12 @@
                 "AuthorizedTokenIssuers": {
                     "target": "com.amazonaws.ssoadmin#AuthorizedTokenIssuers",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of allowed token issuers trusted by the Identity Center instances for this application.</p>"
+                        "smithy.api#documentation": "<p>A list of allowed token issuers trusted by the Identity Center instances for this\n            application.</p>\n         <note>\n            <p>\n               <code>AuthorizedTokenIssuers</code> is required when the grant type is\n                    <code>JwtBearerGrant</code>.</p>\n         </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the JWT Bearer Token Authorization Grant.</p>"
+                "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the\n            JWT Bearer Token Authorization Grant. The <code>AuthorizedAudience</code> field is the\n            aud claim. For more information, see <a href=\"https://datatracker.ietf.org/doc/html/rfc7523\">RFC 7523</a>.</p>"
             }
         },
         "com.amazonaws.ssoadmin#ListAccountAssignmentCreationStatus": {
@@ -4178,7 +4188,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of the IAM Identity Center associated Amazon Web Services accounts that the principal has access\n            to.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of the IAM Identity Center associated Amazon Web Services accounts that the principal has access\n            to. This action must be called from the management account containing your organization\n            instance of IAM Identity Center. This action is not valid for account instances of IAM Identity Center.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4576,7 +4586,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the applications to which a specified principal is assigned.</p>",
+                "smithy.api#documentation": "<p>Lists the applications to which a specified principal is assigned. You must provide a\n            filter when calling this action from a member account against your organization instance\n            of IAM Identity Center. A filter is not required when called from the management account against an\n            organization instance of IAM Identity Center, or from a member account against an account instance of\n            IAM Identity Center in the same account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4949,7 +4959,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all applications associated with the instance of IAM Identity Center. When listing applications for an instance\n            in the management account, member accounts must use the <code>applicationAccount</code>\n            parameter to filter the list to only applications created from that account.</p>",
+                "smithy.api#documentation": "<p>Lists all applications associated with the instance of IAM Identity Center. When listing\n            applications for an organization instance in the management account, member accounts\n            must use the <code>applicationAccount</code> parameter to filter the list to only\n            applications created from that account. When listing applications for an account\n            instance in the same member account, a filter is not required.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4984,7 +4994,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center application under which the operation will run.\n            For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center application under which the operation will run. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5713,7 +5723,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::aws:policy/[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]+$"
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::aws:policy((/[A-Za-z0-9\\.,\\+@=_-]+)*)/([A-Za-z0-9\\.,\\+=@_-]+)$"
             }
         },
         "com.amazonaws.ssoadmin#ManagedPolicyName": {
@@ -5770,21 +5780,21 @@
                 "IssuerUrl": {
                     "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL that IAM Identity Center uses for OpenID Discovery. OpenID Discovery is used to obtain the information required to verify the tokens that the trusted token issuer generates.</p>",
+                        "smithy.api#documentation": "<p>The URL that IAM Identity Center uses for OpenID Discovery. OpenID Discovery is used to obtain\n            the information required to verify the tokens that the trusted token issuer generates.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ClaimAttributePath": {
                     "target": "com.amazonaws.ssoadmin#ClaimAttributePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path of the source attribute in the JWT from the trusted token issuer. The attribute mapped by this JMESPath expression is compared against the attribute mapped by <code>IdentityStoreAttributePath</code> when a trusted token issuer token is exchanged for\n            an IAM Identity Center token.</p>",
+                        "smithy.api#documentation": "<p>The path of the source attribute in the JWT from the trusted token issuer. The attribute mapped by\n            this JMESPath expression is compared against the attribute mapped by\n                <code>IdentityStoreAttributePath</code> when a trusted token issuer token is exchanged for an\n            IAM Identity Center token.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IdentityStoreAttributePath": {
                     "target": "com.amazonaws.ssoadmin#JMESPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path of the destination attribute in a JWT from IAM Identity Center. The attribute mapped by this JMESPath expression is compared against the attribute mapped by <code>ClaimAttributePath</code> when a trusted token issuer token is exchanged for\n            an IAM Identity Center token. </p>",
+                        "smithy.api#documentation": "<p>The path of the destination attribute in a JWT from IAM Identity Center. The attribute mapped by\n            this JMESPath expression is compared against the attribute mapped by\n                <code>ClaimAttributePath</code> when a trusted token issuer token is exchanged for an IAM Identity Center\n            token. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5806,13 +5816,13 @@
                 "ClaimAttributePath": {
                     "target": "com.amazonaws.ssoadmin#ClaimAttributePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path of the source attribute in the JWT from the trusted token issuer. The attribute mapped by this JMESPath expression is compared against the attribute mapped by <code>IdentityStoreAttributePath</code> when a trusted token issuer token is exchanged for\n            an IAM Identity Center token.</p>"
+                        "smithy.api#documentation": "<p>The path of the source attribute in the JWT from the trusted token issuer. The attribute mapped by\n            this JMESPath expression is compared against the attribute mapped by\n                <code>IdentityStoreAttributePath</code> when a trusted token issuer token is exchanged for an\n            IAM Identity Center token.</p>"
                     }
                 },
                 "IdentityStoreAttributePath": {
                     "target": "com.amazonaws.ssoadmin#JMESPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path of the destination attribute in a JWT from IAM Identity Center. The attribute mapped by this JMESPath expression is compared against the attribute mapped by <code>ClaimAttributePath</code> when a trusted token issuer token is exchanged for\n            an IAM Identity Center token.</p>"
+                        "smithy.api#documentation": "<p>The path of the destination attribute in a JWT from IAM Identity Center. The attribute mapped by\n            this JMESPath expression is compared against the attribute mapped by\n                <code>ClaimAttributePath</code> when a trusted token issuer token is exchanged for an IAM Identity Center\n            token.</p>"
                     }
                 },
                 "JwksRetrievalOption": {
@@ -6279,7 +6289,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configure how users gain access to an application. If <code>AssignmentsRequired</code> is <code>true</code> (default value), users don’t have access to the application unless an assignment is created using the \n            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html\">CreateApplicationAssignment API</a>. If <code>false</code>, all users have access to the application. \n            If an assignment is created using <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html\">CreateApplicationAssignment</a>., the user retains access if <code>AssignmentsRequired</code> is set to <code>true</code>. </p>",
+                "smithy.api#documentation": "<p>Configure how users gain access to an application. If <code>AssignmentsRequired</code>\n            is <code>true</code> (default value), users don’t have access to the application unless\n            an assignment is created using the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html\">CreateApplicationAssignment API</a>. If <code>false</code>, all users have\n            access to the application. If an assignment is created using <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html\">CreateApplicationAssignment</a>., the user retains access if\n                <code>AssignmentsRequired</code> is set to <code>true</code>. </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -6297,7 +6307,7 @@
                     "target": "com.amazonaws.ssoadmin#AssignmentRequired",
                     "traits": {
                         "smithy.api#default": true,
-                        "smithy.api#documentation": "<p>If <code>AssignmentsRequired</code> is <code>true</code> (default value), users don’t have access to the application unless an assignment is created using the \n            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html\">CreateApplicationAssignment API</a>. If <code>false</code>, all users have access to the application. </p>",
+                        "smithy.api#documentation": "<p>If <code>AssignmentsRequired</code> is <code>true</code> (default value), users don’t\n            have access to the application unless an assignment is created using the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html\">CreateApplicationAssignment API</a>. If <code>false</code>, all users have\n            access to the application. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6404,7 +6414,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a grant to an application.</p>",
+                "smithy.api#documentation": "<p>Creates a configuration for an application to use grants. Conceptually grants are\n            authorization to request actions related to tokens. This configuration will be used when\n            parties are requesting and receiving tokens during the trusted identity propagation\n            process. For more information on the IAM Identity Center supported grant workflows, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/customermanagedapps-saml2-oauth2.html\">SAML 2.0\n                and OAuth 2.0</a>.</p>\n         <p>A grant is created between your applications and Identity Center instance which\n            enables an application to use specified mechanisms to obtain tokens. These tokens are\n            used by your applications to gain access to Amazon Web Services resources on behalf of users. The\n            following elements are within these exchanges:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Requester</b> - The application requesting access\n                    to Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Subject</b> - Typically the user that is\n                    requesting access to Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Grant</b> - Conceptually, a grant is\n                    authorization to access Amazon Web Services resources. These grants authorize token generation\n                    for authenticating access to the requester and for the request to make requests\n                    on behalf of the subjects. There are four types of grants:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>AuthorizationCode</b> - Allows an\n                            application to request authorization through a series of user-agent\n                            redirects.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>JWT bearer </b> - Authorizes an\n                            application to exchange a JSON Web Token that came from an external\n                            identity provider. To learn more, see <a href=\"https://datatracker.ietf.org/doc/html/rfc6749\">RFC\n                            6479</a>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Refresh token</b> - Enables application\n                            to request new access tokens to replace expiring or expired access\n                            tokens.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Exchange token</b> - A grant that\n                            requests tokens from the authorization server by providing a ‘subject’\n                            token with access scope authorizing trusted identity propagation to this\n                            application. To learn more, see <a href=\"https://datatracker.ietf.org/doc/html/rfc8693\">RFC\n                            8693</a>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Authorization server</b> - IAM Identity Center requests\n                    tokens.</p>\n            </li>\n         </ul>\n         <p>User credentials are never shared directly within these exchanges. Instead,\n            applications use grants to request access tokens from IAM Identity Center. For more\n            information, see <a href=\"https://datatracker.ietf.org/doc/html/rfc6749\">RFC\n                6479</a>.</p>\n         <p class=\"title\">\n            <b>Use cases</b>\n         </p>\n         <ul>\n            <li>\n               <p>Connecting to custom applications.</p>\n            </li>\n            <li>\n               <p>Configuring an Amazon Web Services service to make calls to another Amazon Web Services services using JWT\n                    tokens.</p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -6598,7 +6608,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Refresh Token Grant.</p>"
+                "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the\n            OAuth 2.0 Refresh Token Grant. For more, see <a href=\"https://datatracker.ietf.org/doc/html/rfc6749#section-1.5\">RFC\n            6749</a>.</p>"
             }
         },
         "com.amazonaws.ssoadmin#RelayState": {
@@ -6891,7 +6901,7 @@
                     "name": "sso"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>IAM Identity Center (successor to Single Sign-On) helps you securely create, or connect, your workforce identities and manage\n            their access centrally across Amazon Web Services accounts and applications. IAM Identity Center is the recommended\n            approach for workforce authentication and authorization in Amazon Web Services, for organizations of\n            any size and type.</p>\n         <note>\n            <p>IAM Identity Center uses the <code>sso</code> and <code>identitystore</code> API\n                namespaces.</p>\n         </note>\n         <p>This reference guide provides information on single sign-on operations which could be\n            used for access management of Amazon Web Services accounts. For information about IAM Identity Center features, see\n            the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">IAM Identity Center\n                User Guide</a>.</p>\n         <p>Many operations in the IAM Identity Center APIs rely on identifiers for users and groups, known as\n            principals. For more information about how to work with principals and principal IDs in\n            IAM Identity Center, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Identity Store API\n                Reference</a>.</p>\n         <note>\n            <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various\n                programming languages and platforms (Java, Ruby, .Net, iOS, Android, and more). The\n                SDKs provide a convenient way to create programmatic access to IAM Identity Center and other Amazon Web Services\n                services. For more information about the Amazon Web Services SDKs, including how to download and\n                install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web\n                    Services</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>IAM Identity Center is the Amazon Web Services solution for connecting your workforce users to Amazon Web Services managed\n            applications and other Amazon Web Services resources. You can connect your existing identity provider\n            and synchronize users and groups from your directory, or create and manage your users\n            directly in IAM Identity Center. You can then use IAM Identity Center for either or both of the following:</p>\n         <ul>\n            <li>\n               <p>User access to applications</p>\n            </li>\n            <li>\n               <p>User access to Amazon Web Services accounts</p>\n            </li>\n         </ul>\n         <p>This guide provides information about single sign-on operations that you can use for access to applications and \n            Amazon Web Services accounts. For information about IAM Identity Center features, see the\n            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">IAM Identity Center\n                User Guide</a>.</p>\n         <note>\n            <p>IAM Identity Center uses the <code>sso</code> and <code>identitystore</code> API\n                namespaces.</p>\n         </note>\n         <p>Many API operations for IAM Identity Center rely on identifiers for users and groups, known as\n            principals. For more information about how to work with principals and principal IDs in\n            IAM Identity Center, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Identity Store API\n                Reference</a>.</p>\n         <note>\n            <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various\n                programming languages and platforms (Java, Ruby, .Net, iOS, Android, and more). The\n                SDKs provide a convenient way to create programmatic access to IAM Identity Center and other Amazon Web Services\n                services. For more information about the Amazon Web Services SDKs, including how to download and\n                install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web\n                    Services</a>.</p>\n         </note>",
                 "smithy.api#suppress": [
                     "DeprecatedShape"
                 ],
@@ -8146,7 +8156,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Token Exchange Grant.</p>"
+                "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the\n            OAuth 2.0 Token Exchange Grant. For more information, see <a href=\"https://datatracker.ietf.org/doc/html/rfc8693\">RFC 8693</a>.</p>"
             }
         },
         "com.amazonaws.ssoadmin#TokenIssuerAudience": {
@@ -8391,7 +8401,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that describes the options for the access portal associated with an application that can be updated.</p>"
+                "smithy.api#documentation": "<p>A structure that describes the options for the access portal associated with an\n            application that can be updated.</p>"
             }
         },
         "com.amazonaws.ssoadmin#UpdateApplicationRequest": {
@@ -8405,7 +8415,7 @@
                     }
                 },
                 "Name": {
-                    "target": "com.amazonaws.ssoadmin#NameType",
+                    "target": "com.amazonaws.ssoadmin#ApplicationNameType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the updated name for the application.</p>"
                     }
@@ -8667,7 +8677,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the name of the trusted token issuer, or the path of a source attribute or destination attribute for a trusted token issuer configuration.</p>\n         <note>\n            <p>Updating this trusted token issuer configuration might cause users to lose access to any applications that are configured to use the trusted token issuer.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Updates the name of the trusted token issuer, or the path of a source attribute or destination\n            attribute for a trusted token issuer configuration.</p>\n         <note>\n            <p>Updating this trusted token issuer configuration might cause users to lose access to any\n                applications that are configured to use the trusted token issuer.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#UpdateTrustedTokenIssuerRequest": {

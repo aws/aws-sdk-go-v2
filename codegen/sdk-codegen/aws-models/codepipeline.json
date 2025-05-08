@@ -1727,7 +1727,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The conditions for making checks for entry to a stage. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a> and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do stage conditions work?</a>. </p>"
+                "smithy.api#documentation": "<p>The conditions for making checks for entry to a stage. For more information about\n            conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage conditions</a>\n            and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do\n                stage conditions work?</a>. </p>"
             }
         },
         "com.amazonaws.codepipeline#BlockerDeclaration": {
@@ -2961,7 +2961,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The condition for the stage. A condition is made up of the rules and the result for\n            the condition. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a> and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do stage conditions work?</a>..\n            For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule\n                reference</a>.</p>"
+                "smithy.api#documentation": "<p>The condition for the stage. A condition is made up of the rules and the result for\n            the condition. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage conditions</a>\n            and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do\n                stage conditions work?</a>.. For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule reference</a>.</p>"
             }
         },
         "com.amazonaws.codepipeline#ConditionExecution": {
@@ -3737,6 +3737,12 @@
                         "smithy.api#documentation": "<p>The environment variable value in the key-value pair.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "type": {
+                    "target": "com.amazonaws.codepipeline#EnvironmentVariableType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of use for the environment variable value. The value can be either\n            <code>PLAINTEXT</code> or <code>SECRETS_MANAGER</code>. If the value is <code>SECRETS_MANAGER</code>, provide the Secrets\n            reference in the EnvironmentVariable value.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3763,6 +3769,23 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9_]+$"
+            }
+        },
+        "com.amazonaws.codepipeline#EnvironmentVariableType": {
+            "type": "enum",
+            "members": {
+                "PLAINTEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLAINTEXT"
+                    }
+                },
+                "SECRETS_MANAGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECRETS_MANAGER"
+                    }
+                }
             }
         },
         "com.amazonaws.codepipeline#EnvironmentVariableValue": {
@@ -3960,12 +3983,12 @@
                 "conditions": {
                     "target": "com.amazonaws.codepipeline#ConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The conditions that are configured as failure conditions. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a> and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do stage conditions work?</a>.</p>"
+                        "smithy.api#documentation": "<p>The conditions that are configured as failure conditions. For more information about\n            conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage conditions</a>\n            and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do\n                stage conditions work?</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration that specifies the result, such as rollback, to occur upon stage\n            failure. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a> and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do stage conditions work?</a>. </p>"
+                "smithy.api#documentation": "<p>The configuration that specifies the result, such as rollback, to occur upon stage\n            failure. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage conditions</a>\n            and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do\n                stage conditions work?</a>. </p>"
             }
         },
         "com.amazonaws.codepipeline#FailureDetails": {
@@ -5671,7 +5694,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the rules for the condition. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a> and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do stage conditions work?</a>.For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule reference</a>.</p>"
+                "smithy.api#documentation": "<p>Lists the rules for the condition. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a> and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do\n                stage conditions work?</a>.For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule reference</a>.</p>"
             }
         },
         "com.amazonaws.codepipeline#ListRuleTypesInput": {
@@ -6142,7 +6165,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used to override a stage condition. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a> and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do stage conditions work?</a>.</p>"
+                "smithy.api#documentation": "<p>Used to override a stage condition. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a> and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do\n                stage conditions work?</a>.</p>"
             }
         },
         "com.amazonaws.codepipeline#OverrideStageConditionInput": {
@@ -6595,7 +6618,7 @@
                 "pollingDisabledAt": {
                     "target": "com.amazonaws.codepipeline#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that polling for source changes (periodic checks) was stopped for\n            the pipeline, in timestamp format. You can migrate (update) a polling pipeline to use\n            event-based change detection. For example, for a pipeline with a CodeCommit\n            source, we recommend you migrate (update) your pipeline to use CloudWatch Events. To\n            learn more, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/update-change-detection.html\">Migrate polling\n                pipelines to use event-based change detection</a> in the CodePipeline\n            User Guide.</p>"
+                        "smithy.api#documentation": "<p>The date and time that polling for source changes (periodic checks) was stopped for\n            the pipeline, in timestamp format. </p>\n         <important>\n            <p>Pipelines that are inactive for longer than 30 days will have polling disabled for\n                the pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#metadata.pollingDisabledAt\">pollingDisabledAt</a> in the pipeline structure reference. For the steps to\n                migrate your pipeline from polling to event-based change detection, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/update-change-detection.html\">Migrate polling\n                    pipelines to use event-based change detection</a>.</p>\n         </important>\n         <p>You can migrate (update) a polling pipeline to use event-based change detection. For\n            example, for a pipeline with a CodeCommit source, we recommend you migrate\n            (update) your pipeline to use CloudWatch Events. To learn more, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/update-change-detection.html\">Migrate polling\n                pipelines to use event-based change detection</a> in the <i>CodePipeline User Guide</i>.</p>"
                     }
                 }
             },
@@ -8166,7 +8189,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents information about the rule to be created for an associated condition. An\n            example would be creating a new rule for an entry condition, such as a rule that checks\n            for a test result before allowing the run to enter the deployment stage. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a> and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do stage conditions work?</a>.\n            For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule\n                reference</a>.</p>"
+                "smithy.api#documentation": "<p>Represents information about the rule to be created for an associated condition. An\n            example would be creating a new rule for an entry condition, such as a rule that checks\n            for a test result before allowing the run to enter the deployment stage. For more\n            information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage conditions</a>\n            and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do\n                stage conditions work?</a>. For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule reference</a>.</p>"
             }
         },
         "com.amazonaws.codepipeline#RuleDeclarationList": {
@@ -8352,7 +8375,7 @@
                 "ruleTypeId": {
                     "target": "com.amazonaws.codepipeline#RuleTypeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the rule type, which is made up of the combined values for category, owner,\n            provider, and version. For more\n            information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage conditions</a>.\n            For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule\n                reference</a>.</p>"
+                        "smithy.api#documentation": "<p>The ID for the rule type, which is made up of the combined values for category, owner,\n            provider, and version. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a>. For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule reference</a>.</p>"
                     }
                 },
                 "configuration": {
@@ -8637,7 +8660,7 @@
                 "provider": {
                     "target": "com.amazonaws.codepipeline#RuleProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The rule provider, such as the <code>DeploymentWindow</code> rule. For a list of rule provider names, see the rules listed in the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule\n                reference</a>.</p>",
+                        "smithy.api#documentation": "<p>The rule provider, such as the <code>DeploymentWindow</code> rule. For a list of rule\n            provider names, see the rules listed in the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule\n                reference</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8649,7 +8672,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ID for the rule type, which is made up of the combined values for category, owner,\n            provider, and version. For more\n            information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage conditions</a>.\n            For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule\n                reference</a>.</p>"
+                "smithy.api#documentation": "<p>The ID for the rule type, which is made up of the combined values for category, owner,\n            provider, and version. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a>. For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule reference</a>.</p>"
             }
         },
         "com.amazonaws.codepipeline#RuleTypeList": {
@@ -9447,7 +9470,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The conditions for making checks that, if met, succeed a stage. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a> and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do stage conditions work?</a>.</p>"
+                "smithy.api#documentation": "<p>The conditions for making checks that, if met, succeed a stage. For more information\n            about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage conditions</a>\n            and <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html\">How do\n                stage conditions work?</a>.</p>"
             }
         },
         "com.amazonaws.codepipeline#Tag": {
