@@ -1,0 +1,8 @@
+{
+    "id": "dee7600a-d58f-4b98-af63-5b715b277404",
+    "type": "documentation",
+    "description": "Updated description of a data structure.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

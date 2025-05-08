@@ -57,6 +57,9 @@ type CreateIntegrationInput struct {
 	// A description of the integration.
 	Description *string
 
+	// The configuration settings.
+	IntegrationConfig *types.IntegrationConfig
+
 	// The ARN of a KMS key used for encrypting the channel.
 	KmsKeyId *string
 
@@ -126,6 +129,9 @@ type CreateIntegrationOutput struct {
 
 	// A list of errors associated with the integration creation.
 	Errors []types.IntegrationError
+
+	// The configuration settings.
+	IntegrationConfig *types.IntegrationConfig
 
 	// The ARN of a KMS key used for encrypting the channel.
 	KmsKeyId *string

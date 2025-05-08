@@ -51090,6 +51090,11 @@ func awsEc2query_serializeDocumentInstanceNetworkInterfaceSpecification(v *types
 		objectKey.Integer(*v.DeviceIndex)
 	}
 
+	if v.EnaQueueCount != nil {
+		objectKey := object.Key("EnaQueueCount")
+		objectKey.Integer(*v.EnaQueueCount)
+	}
+
 	if v.EnaSrdSpecification != nil {
 		objectKey := object.Key("EnaSrdSpecification")
 		if err := awsEc2query_serializeDocumentEnaSrdSpecificationRequest(v.EnaSrdSpecification, objectKey); err != nil {
@@ -52431,6 +52436,11 @@ func awsEc2query_serializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecific
 	if v.DeviceIndex != nil {
 		objectKey := object.Key("DeviceIndex")
 		objectKey.Integer(*v.DeviceIndex)
+	}
+
+	if v.EnaQueueCount != nil {
+		objectKey := object.Key("EnaQueueCount")
+		objectKey.Integer(*v.EnaQueueCount)
 	}
 
 	if v.EnaSrdSpecification != nil {
@@ -53794,9 +53804,19 @@ func awsEc2query_serializeDocumentNetworkInterfaceAttachmentChanges(v *types.Net
 		objectKey.String(*v.AttachmentId)
 	}
 
+	if v.DefaultEnaQueueCount != nil {
+		objectKey := object.Key("DefaultEnaQueueCount")
+		objectKey.Boolean(*v.DefaultEnaQueueCount)
+	}
+
 	if v.DeleteOnTermination != nil {
 		objectKey := object.Key("DeleteOnTermination")
 		objectKey.Boolean(*v.DeleteOnTermination)
+	}
+
+	if v.EnaQueueCount != nil {
+		objectKey := object.Key("EnaQueueCount")
+		objectKey.Integer(*v.EnaQueueCount)
 	}
 
 	return nil
@@ -59440,6 +59460,11 @@ func awsEc2query_serializeOpDocumentAttachNetworkInterfaceInput(v *AttachNetwork
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.EnaQueueCount != nil {
+		objectKey := object.Key("EnaQueueCount")
+		objectKey.Integer(*v.EnaQueueCount)
 	}
 
 	if v.EnaSrdSpecification != nil {

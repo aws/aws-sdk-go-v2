@@ -20011,6 +20011,18 @@ func awsAwsjson11_serializeDocumentIntegrationAdditionalEncryptionContextMap(v m
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIntegrationConfig(v *types.IntegrationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RefreshInterval != nil {
+		ok := object.Key("RefreshInterval")
+		ok.String(*v.RefreshInterval)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIntegrationFilter(v *types.IntegrationFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -26223,6 +26235,13 @@ func awsAwsjson11_serializeOpDocumentCreateIntegrationInput(v *CreateIntegration
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.IntegrationConfig != nil {
+		ok := object.Key("IntegrationConfig")
+		if err := awsAwsjson11_serializeDocumentIntegrationConfig(v.IntegrationConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.IntegrationName != nil {

@@ -9430,6 +9430,15 @@ func awsAwsjson11_deserializeDocumentEnvironmentVariable(v **types.EnvironmentVa
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentVariableType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.EnvironmentVariableType(jtv)
+			}
+
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)

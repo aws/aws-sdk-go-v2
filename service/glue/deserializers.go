@@ -48923,6 +48923,11 @@ func awsAwsjson11_deserializeDocumentInboundIntegration(v **types.InboundIntegra
 				sv.IntegrationArn = ptr.String(jtv)
 			}
 
+		case "IntegrationConfig":
+			if err := awsAwsjson11_deserializeDocumentIntegrationConfig(&sv.IntegrationConfig, value); err != nil {
+				return err
+			}
+
 		case "SourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -49068,6 +49073,11 @@ func awsAwsjson11_deserializeDocumentIntegration(v **types.Integration, value in
 				sv.IntegrationArn = ptr.String(jtv)
 			}
 
+		case "IntegrationConfig":
+			if err := awsAwsjson11_deserializeDocumentIntegrationConfig(&sv.IntegrationConfig, value); err != nil {
+				return err
+			}
+
 		case "IntegrationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -49160,6 +49170,46 @@ func awsAwsjson11_deserializeDocumentIntegrationAdditionalEncryptionContextMap(v
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIntegrationConfig(v **types.IntegrationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IntegrationConfig
+	if *v == nil {
+		sv = &types.IntegrationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RefreshInterval":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+				}
+				sv.RefreshInterval = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -68163,6 +68213,11 @@ func awsAwsjson11_deserializeOpDocumentCreateIntegrationOutput(v **CreateIntegra
 					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
 				}
 				sv.IntegrationArn = ptr.String(jtv)
+			}
+
+		case "IntegrationConfig":
+			if err := awsAwsjson11_deserializeDocumentIntegrationConfig(&sv.IntegrationConfig, value); err != nil {
+				return err
 			}
 
 		case "IntegrationName":

@@ -1,0 +1,8 @@
+{
+    "id": "d40f71d6-d59c-416f-9e45-f0072c623db3",
+    "type": "feature",
+    "description": "Launching the feature to support ENA queues offering flexibility to support multiple queues per Enhanced Network Interface (ENI)",
+    "modules": [
+        "service/ec2"
+    ]
+}

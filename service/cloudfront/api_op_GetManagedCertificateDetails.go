@@ -29,7 +29,8 @@ func (c *Client) GetManagedCertificateDetails(ctx context.Context, params *GetMa
 
 type GetManagedCertificateDetailsInput struct {
 
-	// The identifier of the multi-tenant distribution.
+	// The identifier of the distribution tenant. You can specify the ARN, ID, or name
+	// of the distribution tenant.
 	//
 	// This member is required.
 	Identifier *string

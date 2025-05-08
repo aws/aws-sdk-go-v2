@@ -4984,6 +4984,9 @@ type InboundIntegration struct {
 	// A list of errors associated with the integration.
 	Errors []IntegrationError
 
+	// Properties associated with the integration.
+	IntegrationConfig *IntegrationConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -5048,11 +5051,27 @@ type Integration struct {
 	// A list of errors associated with the integration.
 	Errors []IntegrationError
 
+	// Properties associated with the integration.
+	IntegrationConfig *IntegrationConfig
+
 	// The ARN of a KMS key used for encrypting the channel.
 	KmsKeyId *string
 
 	// Metadata assigned to the resource consisting of a list of key-value pairs.
 	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Properties associated with the integration.
+type IntegrationConfig struct {
+
+	// Specifies the frequency at which CDC (Change Data Capture) pulls or incremental
+	// loads should occur. This parameter provides flexibility to align the refresh
+	// rate with your specific data update patterns, system load considerations, and
+	// performance optimization goals. Time increment can be set from 15 minutes to
+	// 8640 minutes (six days). Currently supports creation of RefreshInterval only.
+	RefreshInterval *string
 
 	noSmithyDocumentSerde
 }
@@ -5084,10 +5103,18 @@ type IntegrationFilter struct {
 // A structure that describes how data is partitioned on the target.
 type IntegrationPartition struct {
 
-	// The field name used to partition data on the target.
+	// The field name used to partition data on the target. Avoid using columns that
+	// have unique values for each row (for example, `LastModifiedTimestamp`,
+	// `SystemModTimeStamp`) as the partition column. These columns are not suitable
+	// for partitioning because they create a large number of small partitions, which
+	// can lead to performance issues.
 	FieldName *string
 
-	// Specifies a function used to partition data on the target.
+	// Specifies the function used to partition data on the target. The only accepted
+	// value for this parameter is `'identity'` (string). The `'identity'` function
+	// ensures that the data partitioning on the target follows the same scheme as the
+	// source. In other words, the partitioning structure of the source data is
+	// preserved in the target destination.
 	FunctionSpec *string
 
 	noSmithyDocumentSerde
@@ -9016,16 +9043,18 @@ type SourceProcessingProperties struct {
 // Properties used by the source leg to process data from the source.
 type SourceTableConfig struct {
 
-	// A list of fields used for column-level filtering.
+	// A list of fields used for column-level filtering. Currently unsupported.
 	Fields []string
 
-	// A condition clause used for row-level filtering.
+	// A condition clause used for row-level filtering. Currently unsupported.
 	FilterPredicate *string
 
-	// Unique identifier of a record.
+	// Provide the primary key set for this table. Currently supported specifically
+	// for SAP EntityOf entities upon request. Contact Amazon Web Services Support to
+	// make this feature available.
 	PrimaryKey []string
 
-	// Incremental pull timestamp-based field.
+	// Incremental pull timestamp-based field. Currently unsupported.
 	RecordUpdateField *string
 
 	noSmithyDocumentSerde

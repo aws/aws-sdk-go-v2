@@ -994,6 +994,11 @@ type EnvironmentVariable struct {
 	// This member is required.
 	Value *string
 
+	// Specifies the type of use for the environment variable value. The value can be
+	// either PLAINTEXT or SECRETS_MANAGER . If the value is SECRETS_MANAGER , provide
+	// the Secrets reference in the EnvironmentVariable value.
+	Type EnvironmentVariableType
+
 	noSmithyDocumentSerde
 }
 
@@ -1677,12 +1682,20 @@ type PipelineMetadata struct {
 	PipelineArn *string
 
 	// The date and time that polling for source changes (periodic checks) was stopped
-	// for the pipeline, in timestamp format. You can migrate (update) a polling
-	// pipeline to use event-based change detection. For example, for a pipeline with a
-	// CodeCommit source, we recommend you migrate (update) your pipeline to use
-	// CloudWatch Events. To learn more, see [Migrate polling pipelines to use event-based change detection]in the CodePipeline User Guide.
+	// for the pipeline, in timestamp format.
+	//
+	// Pipelines that are inactive for longer than 30 days will have polling disabled
+	// for the pipeline. For more information, see [pollingDisabledAt]in the pipeline structure
+	// reference. For the steps to migrate your pipeline from polling to event-based
+	// change detection, see [Migrate polling pipelines to use event-based change detection].
+	//
+	// You can migrate (update) a polling pipeline to use event-based change
+	// detection. For example, for a pipeline with a CodeCommit source, we recommend
+	// you migrate (update) your pipeline to use CloudWatch Events. To learn more, see [Migrate polling pipelines to use event-based change detection]
+	// in the CodePipeline User Guide.
 	//
 	// [Migrate polling pipelines to use event-based change detection]: https://docs.aws.amazon.com/codepipeline/latest/userguide/update-change-detection.html
+	// [pollingDisabledAt]: https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#metadata.pollingDisabledAt
 	PollingDisabledAt *time.Time
 
 	// The date and time the pipeline was last updated, in timestamp format.

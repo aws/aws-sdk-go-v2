@@ -241,7 +241,8 @@ type ApplicationProvider struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that stores the details of the Amazon Web Services managed policy.
+// A structure that stores a list of managed policy ARNs that describe the
+// associated Amazon Web Services managed policy.
 type AttachedManagedPolicy struct {
 
 	// The ARN of the Amazon Web Services managed policy. For more information about
@@ -292,6 +293,8 @@ type AuthorizationCodeGrant struct {
 
 	// A list of URIs that are valid locations to redirect a user's browser after the
 	// user is authorized.
+	//
+	// RedirectUris is required when the grant type is authorization_code .
 	RedirectUris []string
 
 	noSmithyDocumentSerde
@@ -468,11 +471,16 @@ type InstanceMetadata struct {
 }
 
 // A structure that defines configuration settings for an application that
-// supports the JWT Bearer Token Authorization Grant.
+// supports the JWT Bearer Token Authorization Grant. The AuthorizedAudience field
+// is the aud claim. For more information, see [RFC 7523].
+//
+// [RFC 7523]: https://datatracker.ietf.org/doc/html/rfc7523
 type JwtBearerGrant struct {
 
 	// A list of allowed token issuers trusted by the Identity Center instances for
 	// this application.
+	//
+	// AuthorizedTokenIssuers is required when the grant type is JwtBearerGrant .
 	AuthorizedTokenIssuers []AuthorizedTokenIssuer
 
 	noSmithyDocumentSerde
@@ -690,7 +698,9 @@ type PortalOptions struct {
 }
 
 // A structure that defines configuration settings for an application that
-// supports the OAuth 2.0 Refresh Token Grant.
+// supports the OAuth 2.0 Refresh Token Grant. For more, see [RFC 6749].
+//
+// [RFC 6749]: https://datatracker.ietf.org/doc/html/rfc6749#section-1.5
 type RefreshTokenGrant struct {
 	noSmithyDocumentSerde
 }
@@ -774,7 +784,9 @@ type Tag struct {
 }
 
 // A structure that defines configuration settings for an application that
-// supports the OAuth 2.0 Token Exchange Grant.
+// supports the OAuth 2.0 Token Exchange Grant. For more information, see [RFC 8693].
+//
+// [RFC 8693]: https://datatracker.ietf.org/doc/html/rfc8693
 type TokenExchangeGrant struct {
 	noSmithyDocumentSerde
 }

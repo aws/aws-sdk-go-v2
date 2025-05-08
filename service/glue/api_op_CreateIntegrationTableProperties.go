@@ -44,7 +44,8 @@ type CreateIntegrationTablePropertiesInput struct {
 	// This member is required.
 	TableName *string
 
-	// A structure for the source table configuration.
+	// A structure for the source table configuration. See the SourceTableConfig
+	// structure to see list of supported source properties.
 	SourceTableConfig *types.SourceTableConfig
 
 	// A structure for the target table configuration.

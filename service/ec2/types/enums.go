@@ -2551,6 +2551,25 @@ func (FleetType) Values() []FleetType {
 	}
 }
 
+type FlexibleEnaQueuesSupport string
+
+// Enum values for FlexibleEnaQueuesSupport
+const (
+	FlexibleEnaQueuesSupportUnsupported FlexibleEnaQueuesSupport = "unsupported"
+	FlexibleEnaQueuesSupportSupported   FlexibleEnaQueuesSupport = "supported"
+)
+
+// Values returns all known values for FlexibleEnaQueuesSupport. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlexibleEnaQueuesSupport) Values() []FlexibleEnaQueuesSupport {
+	return []FlexibleEnaQueuesSupport{
+		"unsupported",
+		"supported",
+	}
+}
+
 type FlowLogsResourceType string
 
 // Enum values for FlowLogsResourceType

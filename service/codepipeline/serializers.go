@@ -3321,6 +3321,11 @@ func awsAwsjson11_serializeDocumentEnvironmentVariable(v *types.EnvironmentVaria
 		ok.String(*v.Name)
 	}
 
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	if v.Value != nil {
 		ok := object.Key("value")
 		ok.String(*v.Value)

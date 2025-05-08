@@ -1,0 +1,8 @@
+{
+    "id": "4eda3689-985a-442a-bdbd-2343125c7e4f",
+    "type": "documentation",
+    "description": "Doc-only update for CloudFront. These changes include customer-reported issues.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

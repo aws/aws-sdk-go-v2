@@ -181,6 +181,9 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-west-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "eu-west-3",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "fips",
 			}: endpoints.Endpoint{
 				Hostname: "appstream2-fips.us-west-2.amazonaws.com",

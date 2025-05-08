@@ -8049,6 +8049,9 @@ type InstanceNetworkInterfaceAttachment struct {
 	// The index of the device on the instance for the network interface attachment.
 	DeviceIndex *int32
 
+	// The number of ENA queues created with the instance.
+	EnaQueueCount *int32
+
 	// Contains the ENA Express settings for the network interface that's attached to
 	// the instance.
 	EnaSrdSpecification *InstanceAttachmentEnaSrdSpecification
@@ -8109,6 +8112,9 @@ type InstanceNetworkInterfaceSpecification struct {
 	// If you specify a network interface when launching an instance, you must specify
 	// the device index.
 	DeviceIndex *int32
+
+	// The number of ENA queues to be created with the instance.
+	EnaQueueCount *int32
 
 	// Specifies the ENA Express settings for the network interface that's attached to
 	// the instance.
@@ -11435,6 +11441,9 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	// The device index for the network interface attachment.
 	DeviceIndex *int32
 
+	// The number of ENA queues created with the instance.
+	EnaQueueCount *int32
+
 	// Contains the ENA Express settings for instances launched from your launch
 	// template.
 	EnaSrdSpecification *LaunchTemplateEnaSrdSpecification
@@ -11536,6 +11545,9 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	// add a primary network interface as a launch parameter when you launch an
 	// instance from the template.
 	DeviceIndex *int32
+
+	// The number of ENA queues to be created with the instance.
+	EnaQueueCount *int32
 
 	// Configure ENA Express settings for your launch template.
 	EnaSrdSpecification *EnaSrdSpecificationRequest
@@ -13267,6 +13279,15 @@ type NetworkCardInfo struct {
 	// The baseline network performance of the network card, in Gbps.
 	BaselineBandwidthInGbps *float64
 
+	// The default number of the ENA queues for each interface.
+	DefaultEnaQueueCountPerInterface *int32
+
+	// The maximum number of the ENA queues.
+	MaximumEnaQueueCount *int32
+
+	// The maximum number of the ENA queues for each interface.
+	MaximumEnaQueueCountPerInterface *int32
+
 	// The maximum number of network interfaces for the network card.
 	MaximumNetworkInterfaces *int32
 
@@ -13310,6 +13331,9 @@ type NetworkInfo struct {
 	// Indicates whether the instance type automatically encrypts in-transit traffic
 	// between instances.
 	EncryptionInTransitSupported *bool
+
+	// Indicates whether changing the number of ENA queues is supported.
+	FlexibleEnaQueuesSupport FlexibleEnaQueuesSupport
 
 	// The maximum number of IPv4 addresses per network interface.
 	Ipv4AddressesPerInterface *int32
@@ -13667,6 +13691,9 @@ type NetworkInterfaceAttachment struct {
 	// The device index of the network interface attachment on the instance.
 	DeviceIndex *int32
 
+	// The number of ENA queues created with the instance.
+	EnaQueueCount *int32
+
 	// Configures ENA Express for the network interface that this action attaches to
 	// the instance.
 	EnaSrdSpecification *AttachmentEnaSrdSpecification
@@ -13692,9 +13719,15 @@ type NetworkInterfaceAttachmentChanges struct {
 	// The ID of the network interface attachment.
 	AttachmentId *string
 
+	// The default number of the ENA queues.
+	DefaultEnaQueueCount *bool
+
 	// Indicates whether the network interface is deleted when the instance is
 	// terminated.
 	DeleteOnTermination *bool
+
+	// The number of ENA queues to be created with the instance.
+	EnaQueueCount *int32
 
 	noSmithyDocumentSerde
 }

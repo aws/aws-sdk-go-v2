@@ -1,0 +1,8 @@
+{
+    "id": "a00c5835-4972-4ebf-a83b-3a29610288d4",
+    "type": "feature",
+    "description": "Update PutPermissionBoundaryToPermissionSet API's managedPolicyArn pattern to allow valid ARN only. Update ApplicationName to allow white spaces.",
+    "modules": [
+        "service/ssoadmin"
+    ]
+}

@@ -40,7 +40,9 @@ type DescribeApplicationAssignmentInput struct {
 
 	// An identifier for an object in IAM Identity Center, such as a user or group.
 	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
+	// more information about PrincipalIds in IAM Identity Center, see the [IAM Identity Center Identity Store API Reference].
+	//
+	// [IAM Identity Center Identity Store API Reference]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html
 	//
 	// This member is required.
 	PrincipalId *string
@@ -61,7 +63,9 @@ type DescribeApplicationAssignmentOutput struct {
 
 	// An identifier for an object in IAM Identity Center, such as a user or group.
 	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
+	// more information about PrincipalIds in IAM Identity Center, see the [IAM Identity Center Identity Store API Reference].
+	//
+	// [IAM Identity Center Identity Store API Reference]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html
 	PrincipalId *string
 
 	// The entity type for which the assignment will be created.

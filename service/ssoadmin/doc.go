@@ -3,20 +3,25 @@
 // Package ssoadmin provides the API client, operations, and parameter types for
 // AWS Single Sign-On Admin.
 //
-// IAM Identity Center (successor to Single Sign-On) helps you securely create, or
-// connect, your workforce identities and manage their access centrally across
-// Amazon Web Services accounts and applications. IAM Identity Center is the
-// recommended approach for workforce authentication and authorization in Amazon
-// Web Services, for organizations of any size and type.
+// IAM Identity Center is the Amazon Web Services solution for connecting your
+// workforce users to Amazon Web Services managed applications and other Amazon Web
+// Services resources. You can connect your existing identity provider and
+// synchronize users and groups from your directory, or create and manage your
+// users directly in IAM Identity Center. You can then use IAM Identity Center for
+// either or both of the following:
+//
+//   - User access to applications
+//
+//   - User access to Amazon Web Services accounts
+//
+// This guide provides information about single sign-on operations that you can
+// use for access to applications and Amazon Web Services accounts. For information
+// about IAM Identity Center features, see the [IAM Identity Center User Guide].
 //
 // IAM Identity Center uses the sso and identitystore API namespaces.
 //
-// This reference guide provides information on single sign-on operations which
-// could be used for access management of Amazon Web Services accounts. For
-// information about IAM Identity Center features, see the [IAM Identity Center User Guide].
-//
-// Many operations in the IAM Identity Center APIs rely on identifiers for users
-// and groups, known as principals. For more information about how to work with
+// Many API operations for IAM Identity Center rely on identifiers for users and
+// groups, known as principals. For more information about how to work with
 // principals and principal IDs in IAM Identity Center, see the [Identity Store API Reference].
 //
 // Amazon Web Services provides SDKs that consist of libraries and sample code for

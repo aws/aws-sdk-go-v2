@@ -32,7 +32,8 @@ func (c *Client) VerifyDnsConfiguration(ctx context.Context, params *VerifyDnsCo
 
 type VerifyDnsConfigurationInput struct {
 
-	// The ID of the distribution tenant.
+	// The identifier of the distribution tenant. You can specify the ARN, ID, or name
+	// of the distribution tenant.
 	//
 	// This member is required.
 	Identifier *string
