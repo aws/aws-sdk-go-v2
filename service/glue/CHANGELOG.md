@@ -1,3 +1,7 @@
+# v1.110.0 (2025-05-08)
+
+* **Feature**: This new release supports customizable RefreshInterval for all Saas ZETL integrations from 15 minutes to 6 days.
+
 # v1.109.2 (2025-04-23)
 
 * No change notes available for this release.

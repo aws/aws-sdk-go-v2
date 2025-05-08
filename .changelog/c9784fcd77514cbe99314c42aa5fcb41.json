@@ -1,8 +1,0 @@
-{
-    "id": "c9784fcd-7751-4cbe-9931-4c42aa5fcb41",
-    "type": "feature",
-    "description": "This new release supports customizable RefreshInterval for all Saas ZETL integrations from 15 minutes to 6 days.",
-    "modules": [
-        "service/glue"
-    ]
-}

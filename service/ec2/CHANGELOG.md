@@ -1,3 +1,7 @@
+# v1.217.0 (2025-05-08)
+
+* **Feature**: Launching the feature to support ENA queues offering flexibility to support multiple queues per Enhanced Network Interface (ENI)
+
 # v1.216.0 (2025-05-07)
 
 * **Feature**: This release adds API support for Path Component Exclusion (Filter Out ARN) for Reachability Analyzer

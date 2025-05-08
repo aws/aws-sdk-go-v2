@@ -1,3 +1,7 @@
+# v1.54.5 (2025-05-08)
+
+* **Documentation**: Updated description of a data structure.
+
 # v1.54.4 (2025-05-01)
 
 * No change notes available for this release.

@@ -1,8 +1,0 @@
-{
-    "id": "e67d1270-8ab5-4e63-b1e8-fd0a14e7f2b6",
-    "type": "feature",
-    "description": "Add support for Secrets Manager and Plaintext environment variable types in Commands action",
-    "modules": [
-        "service/codepipeline"
-    ]
-}

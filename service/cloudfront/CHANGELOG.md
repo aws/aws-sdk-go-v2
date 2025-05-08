@@ -1,3 +1,7 @@
+# v1.46.1 (2025-05-08)
+
+* **Documentation**: Doc-only update for CloudFront. These changes include customer-reported issues.
+
 # v1.46.0 (2025-04-28)
 
 * **Feature**: Add distribution tenant, connection group, and multi-tenant distribution APIs to the CloudFront SDK.

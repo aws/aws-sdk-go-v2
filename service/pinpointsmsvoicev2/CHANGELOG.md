@@ -1,3 +1,7 @@
+# v1.20.1 (2025-05-08)
+
+* No change notes available for this release.
+
 # v1.20.0 (2025-04-29)
 
 * **Feature**: AWS End User Messaging has added MONITOR and FILTER functionality to SMS Protect.

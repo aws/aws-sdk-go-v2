@@ -1,3 +1,19 @@
+# Release (2025-05-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.46.1](service/cloudfront/CHANGELOG.md#v1461-2025-05-08)
+  * **Documentation**: Doc-only update for CloudFront. These changes include customer-reported issues.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.41.0](service/codepipeline/CHANGELOG.md#v1410-2025-05-08)
+  * **Feature**: Add support for Secrets Manager and Plaintext environment variable types in Commands action
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.217.0](service/ec2/CHANGELOG.md#v12170-2025-05-08)
+  * **Feature**: Launching the feature to support ENA queues offering flexibility to support multiple queues per Enhanced Network Interface (ENI)
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.110.0](service/glue/CHANGELOG.md#v11100-2025-05-08)
+  * **Feature**: This new release supports customizable RefreshInterval for all Saas ZETL integrations from 15 minutes to 6 days.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.54.5](service/guardduty/CHANGELOG.md#v1545-2025-05-08)
+  * **Documentation**: Updated description of a data structure.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.31.0](service/ssoadmin/CHANGELOG.md#v1310-2025-05-08)
+  * **Feature**: Update PutPermissionBoundaryToPermissionSet API's managedPolicyArn pattern to allow valid ARN only. Update ApplicationName to allow white spaces.
+
 # Release (2025-05-07)
 
 ## Module Highlights

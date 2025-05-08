@@ -8,18 +8,18 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.30.2
-	github.com/aws/aws-sdk-go-v2/service/appstream v1.45.2
+	github.com/aws/aws-sdk-go-v2/service/appstream v1.45.3
 	github.com/aws/aws-sdk-go-v2/service/athena v1.50.4
 	github.com/aws/aws-sdk-go-v2/service/batch v1.52.3
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.59.2
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.46.0
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.46.1
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.48.4
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.44.3
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.60.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.28.2
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.30.3
-	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.40.3
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.52.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.52.3
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.29.2
@@ -29,7 +29,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.216.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.217.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.56.3
 	github.com/aws/aws-sdk-go-v2/service/efs v1.35.3
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.4
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.3
-	github.com/aws/aws-sdk-go-v2/service/glue v1.109.2
+	github.com/aws/aws-sdk-go-v2/service/glue v1.110.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/iam v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.26.2
@@ -79,7 +79,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.25.3
 	github.com/aws/aws-sdk-go-v2/service/waf v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.26.2
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.55.2
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.55.3
 	github.com/aws/smithy-go v1.22.2
 )
 

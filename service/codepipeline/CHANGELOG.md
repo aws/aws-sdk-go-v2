@@ -1,3 +1,7 @@
+# v1.41.0 (2025-05-08)
+
+* **Feature**: Add support for Secrets Manager and Plaintext environment variable types in Commands action
+
 # v1.40.3 (2025-04-03)
 
 * No change notes available for this release.
