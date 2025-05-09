@@ -1,8 +1,0 @@
-{
-    "id": "0775307a-5791-4513-a6d7-12e8d29a2c24",
-    "type": "feature",
-    "description": "Remove parameter EnableWorkDocs from WorkSpacesServiceModel due to end of support of Amazon WorkDocs service.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

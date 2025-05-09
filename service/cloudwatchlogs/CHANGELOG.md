@@ -1,3 +1,7 @@
+# v1.49.0 (2025-05-09)
+
+* **Feature**: We are pleased to announce limit increases to our grok processor logs transformation feature. Now you can define 20 Grok patterns in their configurations, with an expanded total pattern matching limit of 512 characters.
+
 # v1.48.0 (2025-04-30)
 
 * **Feature**: CloudWatch Logs supports "DELIVERY" log class. This log class is used only for delivering AWS Lambda logs to Amazon S3 or Amazon Data Firehose.

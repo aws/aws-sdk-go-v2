@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.45.3
-	github.com/aws/aws-sdk-go-v2/service/athena v1.50.4
+	github.com/aws/aws-sdk-go-v2/service/athena v1.50.5
 	github.com/aws/aws-sdk-go-v2/service/batch v1.52.3
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.59.2
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.46.1
@@ -79,7 +79,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.25.3
 	github.com/aws/aws-sdk-go-v2/service/waf v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.26.2
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.55.3
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.56.0
 	github.com/aws/smithy-go v1.22.2
 )
 

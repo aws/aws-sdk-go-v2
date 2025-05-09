@@ -1,3 +1,7 @@
+# v1.56.0 (2025-05-09)
+
+* **Feature**: Remove parameter EnableWorkDocs from WorkSpacesServiceModel due to end of support of Amazon WorkDocs service.
+
 # v1.55.3 (2025-05-08)
 
 * No change notes available for this release.

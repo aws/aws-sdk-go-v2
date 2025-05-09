@@ -1,3 +1,7 @@
+# v1.50.5 (2025-05-09)
+
+* **Documentation**: Minor API documentation updates
+
 # v1.50.4 (2025-04-16)
 
 * No change notes available for this release.

@@ -1,3 +1,15 @@
+# Release (2025-05-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.50.5](service/athena/CHANGELOG.md#v1505-2025-05-09)
+  * **Documentation**: Minor API documentation updates
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.49.0](service/cloudwatchlogs/CHANGELOG.md#v1490-2025-05-09)
+  * **Feature**: We are pleased to announce limit increases to our grok processor logs transformation feature. Now you can define 20 Grok patterns in their configurations, with an expanded total pattern matching limit of 512 characters.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.34.0](service/synthetics/CHANGELOG.md#v1340-2025-05-09)
+  * **Feature**: Add support to retry a canary automatically after schedule run failures. Users can enable this feature by configuring the RetryConfig field when calling the CreateCanary or UpdateCanary API. Also includes changes in GetCanary and GetCanaryRuns to support retrieving retry configurations.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.56.0](service/workspaces/CHANGELOG.md#v1560-2025-05-09)
+  * **Feature**: Remove parameter EnableWorkDocs from WorkSpacesServiceModel due to end of support of Amazon WorkDocs service.
+
 # Release (2025-05-08)
 
 ## Module Highlights
