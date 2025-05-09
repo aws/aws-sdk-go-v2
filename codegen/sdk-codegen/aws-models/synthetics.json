@@ -448,6 +448,18 @@
                         "smithy.api#documentation": "<p>A unique ID that identifies this canary run.</p>"
                     }
                 },
+                "ScheduledRunId": {
+                    "target": "com.amazonaws.synthetics#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the scheduled canary run.</p>"
+                    }
+                },
+                "RetryAttempt": {
+                    "target": "com.amazonaws.synthetics#RetryAttempt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The count in number of the retry attempt.</p>"
+                    }
+                },
                 "Name": {
                     "target": "com.amazonaws.synthetics#CanaryName",
                     "traits": {
@@ -621,6 +633,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The end time of the run.</p>"
                     }
+                },
+                "MetricTimestampForRunAndRetries": {
+                    "target": "com.amazonaws.synthetics#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the metrics will be generated for this run or retries.</p>"
+                    }
                 }
             },
             "traits": {
@@ -648,6 +666,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>How long, in seconds, for the canary to continue making regular runs according to\n         the schedule in the <code>Expression</code> value. If you specify 0, the canary continues\n         making runs until you stop it. If you omit this field, the default of 0 is used.</p>"
                     }
+                },
+                "RetryConfig": {
+                    "target": "com.amazonaws.synthetics#RetryConfigInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the retry configuration for a canary</p>"
+                    }
                 }
             },
             "traits": {
@@ -667,6 +691,12 @@
                     "target": "com.amazonaws.synthetics#MaxOneYearInSeconds",
                     "traits": {
                         "smithy.api#documentation": "<p>How long, in seconds, for the canary to continue making regular runs after it \n         was created. The runs are performed according to the schedule in the \n         <code>Expression</code> value.</p>"
+                    }
+                },
+                "RetryConfig": {
+                    "target": "com.amazonaws.synthetics#RetryConfigOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the retry configuration for a canary</p>"
                     }
                 }
             },
@@ -822,13 +852,13 @@
                 "StateReason": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the canary has insufficient permissions to run, this field provides more details.</p>"
+                        "smithy.api#documentation": "<p>If the canary creation or update failed, this field provides details on the failure.</p>"
                     }
                 },
                 "StateReasonCode": {
                     "target": "com.amazonaws.synthetics#CanaryStateReasonCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the canary cannot run or has failed, this field displays the reason.</p>"
+                        "smithy.api#documentation": "<p>If the canary creation or update failed, this field displays the reason code.</p>"
                     }
                 }
             },
@@ -1697,7 +1727,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.synthetics#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that indicates that there is more data\n         available. You can use this token in a subsequent <code>GetCanaryRuns</code> operation to retrieve the next \n         set of results.</p>"
+                        "smithy.api#documentation": "<p>A token that indicates that there is more data\n         available. You can use this token in a subsequent <code>GetCanaryRuns</code> operation to retrieve the next \n         set of results.</p>\n         <note>\n            <p>When auto retry is enabled for the canary, the first subsequent retry is suffixed with *1 indicating its the first retry and the next subsequent try is suffixed with *2.</p>\n         </note>"
                     }
                 },
                 "MaxResults": {
@@ -2279,6 +2309,15 @@
                 }
             }
         },
+        "com.amazonaws.synthetics#MaxRetries": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.synthetics#MaxSize100": {
             "type": "integer",
             "traits": {
@@ -2406,6 +2445,44 @@
                         "smithy.api#enumValue": "lambda-function"
                     }
                 }
+            }
+        },
+        "com.amazonaws.synthetics#RetryAttempt": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.synthetics#RetryConfigInput": {
+            "type": "structure",
+            "members": {
+                "MaxRetries": {
+                    "target": "com.amazonaws.synthetics#MaxRetries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of retries. The value must be less than or equal to 2.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about the canary's retry configuration.</p>\n         <note>\n            <p>The default account level concurrent execution limit from Lambda is 1000. When you have more than 1000 canaries, it's possible there are more than 1000 Lambda invocations due to retries and the console might hang. For more information on the Lambda execution limit, \n            see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html#:~:text=As%20your%20functions%20receive%20more,functions%20in%20an%20AWS%20Region\">Understanding Lambda function scaling</a>.</p>\n         </note>\n         <note>\n            <p>For canary with <code>MaxRetries = 2</code>, you need to set the <code>CanaryRunConfigInput.TimeoutInSeconds</code> to less than 600 seconds to avoid validation errors.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.synthetics#RetryConfigOutput": {
+            "type": "structure",
+            "members": {
+                "MaxRetries": {
+                    "target": "com.amazonaws.synthetics#MaxRetries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of retries. The value must be less than or equal to 2.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about the canary's retry configuration.</p>"
             }
         },
         "com.amazonaws.synthetics#RoleArn": {

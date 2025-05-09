@@ -2379,7 +2379,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates (registers) a data catalog with the specified name and properties. Catalogs\n            created are visible to all users of the same Amazon Web Services account.</p>\n         <p>This API operation creates the following resources.</p>\n         <ul>\n            <li>\n               <p>CFN Stack Name with a maximum length of 128 characters and prefix\n                        <code>athenafederatedcatalog-CATALOG_NAME_SANITIZED</code> with length 23\n                    characters.</p>\n            </li>\n            <li>\n               <p>Lambda Function Name with a maximum length of 64 characters and prefix\n                        <code>athenafederatedcatalog_CATALOG_NAME_SANITIZED</code> with length 23\n                    characters.</p>\n            </li>\n            <li>\n               <p>Glue Connection Name with a maximum length of 255 characters and a prefix\n                        <code>athenafederatedcatalog_CATALOG_NAME_SANITIZED</code> with length 23\n                    characters.  </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates (registers) a data catalog with the specified name and properties. Catalogs\n            created are visible to all users of the same Amazon Web Services account.</p>\n         <p>For a <code>FEDERATED</code> catalog, this API operation creates the following\n            resources.</p>\n         <ul>\n            <li>\n               <p>CFN Stack Name with a maximum length of 128 characters and prefix\n                        <code>athenafederatedcatalog-CATALOG_NAME_SANITIZED</code> with length 23\n                    characters.</p>\n            </li>\n            <li>\n               <p>Lambda Function Name with a maximum length of 64 characters and prefix\n                        <code>athenafederatedcatalog_CATALOG_NAME_SANITIZED</code> with length 23\n                    characters.</p>\n            </li>\n            <li>\n               <p>Glue Connection Name with a maximum length of 255 characters and a prefix\n                        <code>athenafederatedcatalog_CATALOG_NAME_SANITIZED</code> with length 23\n                    characters.  </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.athena#CreateDataCatalogInput": {
@@ -2395,7 +2395,7 @@
                 "Type": {
                     "target": "com.amazonaws.athena#DataCatalogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog,\n                <code>GLUE</code> for an Glue Data Catalog, and <code>HIVE</code> for an\n            external Apache Hive metastore. <code>FEDERATED</code> is a federated catalog for which\n                Athena creates the connection and the Lambda function for\n            you based on the parameters that you pass.</p>",
+                        "smithy.api#documentation": "<p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog,\n                <code>GLUE</code> for an Glue Data Catalog, and <code>HIVE</code> for an\n            external Apache Hive metastore. <code>FEDERATED</code> is a federated catalog for which\n                Athena creates the connection and the Lambda function for\n            you based on the parameters that you pass.</p>\n         <p>For <code>FEDERATED</code> type, we do not support IAM identity center.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6690,7 +6690,7 @@
                 "StatementType": {
                     "target": "com.amazonaws.athena#StatementType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of query statement that was run. <code>DDL</code> indicates DDL query\n            statements. <code>DML</code> indicates DML (Data Manipulation Language) query\n            statements, such as <code>CREATE TABLE AS SELECT</code>. <code>UTILITY</code> indicates\n            query statements other than DDL and DML, such as <code>SHOW CREATE TABLE</code>, or\n                <code>DESCRIBE TABLE</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of query statement that was run. <code>DDL</code> indicates DDL query\n            statements. <code>DML</code> indicates DML (Data Manipulation Language) query\n            statements, such as <code>CREATE TABLE AS SELECT</code>. <code>UTILITY</code> indicates\n            query statements other than DDL and DML, such as <code>SHOW CREATE TABLE</code>,\n                <code>EXPLAIN</code>, <code>DESCRIBE</code>, or <code>SHOW TABLES</code>.</p>"
                     }
                 },
                 "ResultConfiguration": {
@@ -7698,7 +7698,7 @@
                     "target": "com.amazonaws.athena#CalculationConfiguration",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "message": "Kepler Post GA Tasks : https://sim.amazon.com/issues/ATHENA-39828"
+                            "message": "Structure is deprecated."
                         },
                         "smithy.api#documentation": "<p>Contains configuration information for the calculation.</p>"
                     }

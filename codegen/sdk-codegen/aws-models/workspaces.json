@@ -2923,12 +2923,6 @@
         "com.amazonaws.workspaces#DefaultWorkspaceCreationProperties": {
             "type": "structure",
             "members": {
-                "EnableWorkDocs": {
-                    "target": "com.amazonaws.workspaces#BooleanObject",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the directory is enabled for Amazon WorkDocs.</p>"
-                    }
-                },
                 "EnableInternetAccess": {
                     "target": "com.amazonaws.workspaces#BooleanObject",
                     "traits": {
@@ -7933,12 +7927,6 @@
                         "smithy.api#documentation": "<p>The identifiers of the subnets for your virtual private cloud (VPC). Make sure that the\n         subnets are in supported Availability Zones. The subnets must also be in separate\n         Availability Zones. If these conditions are not met, you will receive an\n         OperationNotSupportedException error.</p>"
                     }
                 },
-                "EnableWorkDocs": {
-                    "target": "com.amazonaws.workspaces#BooleanObject",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled this\n         parameter and WorkDocs is not available in the Region, you will receive an\n         OperationNotSupportedException error. Set <code>EnableWorkDocs</code> to disabled, and try\n         again.</p>"
-                    }
-                },
                 "EnableSelfService": {
                     "target": "com.amazonaws.workspaces#BooleanObject",
                     "traits": {
@@ -10471,12 +10459,6 @@
         "com.amazonaws.workspaces#WorkspaceCreationProperties": {
             "type": "structure",
             "members": {
-                "EnableWorkDocs": {
-                    "target": "com.amazonaws.workspaces#BooleanObject",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.</p>\n         <note>\n            <p>If WorkDocs is already enabled for a WorkSpaces directory and you disable it, new\n            WorkSpaces launched in the directory will not have WorkDocs enabled. However, WorkDocs\n            remains enabled for any existing WorkSpaces, unless you either disable users' access to\n            WorkDocs or you delete the WorkDocs site. To disable users' access to WorkDocs, see\n               <a href=\"https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html\">Disabling Users</a> in the <i>Amazon WorkDocs Administration\n               Guide</i>. To delete a WorkDocs site, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/adminguide/manage-sites.html\">Deleting a Site</a> in the\n               <i>Amazon WorkDocs Administration Guide</i>.</p>\n            <p>If you enable WorkDocs on a directory that already has existing WorkSpaces, the\n            existing WorkSpaces and any new WorkSpaces that are launched in the directory will have\n            WorkDocs enabled.</p>\n         </note>"
-                    }
-                },
                 "EnableInternetAccess": {
                     "target": "com.amazonaws.workspaces#BooleanObject",
                     "traits": {
