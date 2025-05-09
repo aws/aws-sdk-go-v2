@@ -260,6 +260,12 @@ type CanaryRun struct {
 	// The name of the canary.
 	Name *string
 
+	// The count in number of the retry attempt.
+	RetryAttempt *int32
+
+	// The ID of the scheduled canary run.
+	ScheduledRunId *string
+
 	// The status of this run.
 	Status *CanaryRunStatus
 
@@ -352,6 +358,9 @@ type CanaryRunTimeline struct {
 	// The end time of the run.
 	Completed *time.Time
 
+	// The time at which the metrics will be generated for this run or retries.
+	MetricTimestampForRunAndRetries *time.Time
+
 	// The start time of the run.
 	Started *time.Time
 
@@ -389,6 +398,9 @@ type CanaryScheduleInput struct {
 	// making runs until you stop it. If you omit this field, the default of 0 is used.
 	DurationInSeconds *int64
 
+	// A structure that contains the retry configuration for a canary
+	RetryConfig *RetryConfigInput
+
 	noSmithyDocumentSerde
 }
 
@@ -420,6 +432,9 @@ type CanaryScheduleOutput struct {
 	// [Scheduling canary runs using cron]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html
 	Expression *string
 
+	// A structure that contains the retry configuration for a canary
+	RetryConfig *RetryConfigOutput
+
 	noSmithyDocumentSerde
 }
 
@@ -429,11 +444,11 @@ type CanaryStatus struct {
 	// The current state of the canary.
 	State CanaryState
 
-	// If the canary has insufficient permissions to run, this field provides more
-	// details.
+	// If the canary creation or update failed, this field provides details on the
+	// failure.
 	StateReason *string
 
-	// If the canary cannot run or has failed, this field displays the reason.
+	// If the canary creation or update failed, this field displays the reason code.
 	StateReasonCode CanaryStateReasonCode
 
 	noSmithyDocumentSerde
@@ -506,6 +521,37 @@ type GroupSummary struct {
 
 	// The name of the group.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about the canary's retry configuration.
+//
+// The default account level concurrent execution limit from Lambda is 1000. When
+// you have more than 1000 canaries, it's possible there are more than 1000 Lambda
+// invocations due to retries and the console might hang. For more information on
+// the Lambda execution limit, see [Understanding Lambda function scaling].
+//
+// For canary with MaxRetries = 2 , you need to set the
+// CanaryRunConfigInput.TimeoutInSeconds to less than 600 seconds to avoid
+// validation errors.
+//
+// [Understanding Lambda function scaling]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html#:~:text=As%20your%20functions%20receive%20more,functions%20in%20an%20AWS%20Region
+type RetryConfigInput struct {
+
+	// The maximum number of retries. The value must be less than or equal to 2.
+	//
+	// This member is required.
+	MaxRetries *int32
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about the canary's retry configuration.
+type RetryConfigOutput struct {
+
+	// The maximum number of retries. The value must be less than or equal to 2.
+	MaxRetries *int32
 
 	noSmithyDocumentSerde
 }

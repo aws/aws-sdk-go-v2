@@ -48,12 +48,6 @@ type RegisterWorkspaceDirectoryInput struct {
 	// Indicates whether self-service capabilities are enabled or disabled.
 	EnableSelfService *bool
 
-	// Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled
-	// this parameter and WorkDocs is not available in the Region, you will receive an
-	// OperationNotSupportedException error. Set EnableWorkDocs to disabled, and try
-	// again.
-	EnableWorkDocs *bool
-
 	// The Amazon Resource Name (ARN) of the identity center instance.
 	IdcInstanceArn *string
 

@@ -46,6 +46,10 @@ type GetCanaryRunsInput struct {
 	// A token that indicates that there is more data available. You can use this
 	// token in a subsequent GetCanaryRuns operation to retrieve the next set of
 	// results.
+	//
+	// When auto retry is enabled for the canary, the first subsequent retry is
+	// suffixed with *1 indicating its the first retry and the next subsequent try is
+	// suffixed with *2.
 	NextToken *string
 
 	//   - When you provide RunType=CANARY_RUN and dryRunId , you will get an exception

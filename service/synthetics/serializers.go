@@ -2246,6 +2246,13 @@ func awsRestjson1_serializeDocumentCanaryScheduleInput(v *types.CanaryScheduleIn
 		ok.String(*v.Expression)
 	}
 
+	if v.RetryConfig != nil {
+		ok := object.Key("RetryConfig")
+		if err := awsRestjson1_serializeDocumentRetryConfigInput(v.RetryConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2290,6 +2297,18 @@ func awsRestjson1_serializeDocumentResourceList(v []types.ResourceToTag, value s
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRetryConfigInput(v *types.RetryConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxRetries != nil {
+		ok := object.Key("MaxRetries")
+		ok.Integer(*v.MaxRetries)
+	}
+
 	return nil
 }
 

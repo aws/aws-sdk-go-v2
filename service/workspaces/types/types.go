@@ -497,9 +497,6 @@ type DefaultWorkspaceCreationProperties struct {
 	// [WorkSpace Maintenance]: https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html
 	EnableMaintenanceMode *bool
 
-	// Specifies whether the directory is enabled for Amazon WorkDocs.
-	EnableWorkDocs *bool
-
 	// Indicates the IAM role ARN of the instance.
 	InstanceIamRoleArn *string
 
@@ -1511,23 +1508,6 @@ type WorkspaceCreationProperties struct {
 	//
 	// [WorkSpace Maintenance]: https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html
 	EnableMaintenanceMode *bool
-
-	// Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.
-	//
-	// If WorkDocs is already enabled for a WorkSpaces directory and you disable it,
-	// new WorkSpaces launched in the directory will not have WorkDocs enabled.
-	// However, WorkDocs remains enabled for any existing WorkSpaces, unless you either
-	// disable users' access to WorkDocs or you delete the WorkDocs site. To disable
-	// users' access to WorkDocs, see [Disabling Users]in the Amazon WorkDocs Administration Guide. To
-	// delete a WorkDocs site, see [Deleting a Site]in the Amazon WorkDocs Administration Guide.
-	//
-	// If you enable WorkDocs on a directory that already has existing WorkSpaces, the
-	// existing WorkSpaces and any new WorkSpaces that are launched in the directory
-	// will have WorkDocs enabled.
-	//
-	// [Deleting a Site]: https://docs.aws.amazon.com/workdocs/latest/adminguide/manage-sites.html
-	// [Disabling Users]: https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html
-	EnableWorkDocs *bool
 
 	// Indicates the IAM role ARN of the instance.
 	InstanceIamRoleArn *string

@@ -497,6 +497,26 @@ func validateCanaryScheduleInput(v *types.CanaryScheduleInput) error {
 	if v.Expression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
 	}
+	if v.RetryConfig != nil {
+		if err := validateRetryConfigInput(v.RetryConfig); err != nil {
+			invalidParams.AddNested("RetryConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRetryConfigInput(v *types.RetryConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetryConfigInput"}
+	if v.MaxRetries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxRetries"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

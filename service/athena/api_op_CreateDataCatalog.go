@@ -15,7 +15,7 @@ import (
 // Catalogs created are visible to all users of the same Amazon Web Services
 // account.
 //
-// This API operation creates the following resources.
+// For a FEDERATED catalog, this API operation creates the following resources.
 //
 //   - CFN Stack Name with a maximum length of 128 characters and prefix
 //     athenafederatedcatalog-CATALOG_NAME_SANITIZED with length 23 characters.
@@ -66,6 +66,8 @@ type CreateDataCatalogInput struct {
 	// Glue Data Catalog, and HIVE for an external Apache Hive metastore. FEDERATED is
 	// a federated catalog for which Athena creates the connection and the Lambda
 	// function for you based on the parameters that you pass.
+	//
+	// For FEDERATED type, we do not support IAM identity center.
 	//
 	// This member is required.
 	Type types.DataCatalogType

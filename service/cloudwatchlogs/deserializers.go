@@ -18665,7 +18665,7 @@ func awsAwsjson11_deserializeDocumentSplitStringEntry(v **types.SplitStringEntry
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Delimiter to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SplitStringDelimiter to be of type string, got %T instead", value)
 				}
 				sv.Delimiter = ptr.String(jtv)
 			}

@@ -13269,15 +13269,6 @@ func awsAwsjson11_deserializeDocumentDefaultWorkspaceCreationProperties(v **type
 				sv.EnableMaintenanceMode = ptr.Bool(jtv)
 			}
 
-		case "EnableWorkDocs":
-			if value != nil {
-				jtv, ok := value.(bool)
-				if !ok {
-					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
-				}
-				sv.EnableWorkDocs = ptr.Bool(jtv)
-			}
-
 		case "InstanceIamRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)

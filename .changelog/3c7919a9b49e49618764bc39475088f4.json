@@ -1,0 +1,8 @@
+{
+    "id": "3c7919a9-b49e-4961-8764-bc39475088f4",
+    "type": "documentation",
+    "description": "Minor API documentation updates",
+    "modules": [
+        "service/athena"
+    ]
+}

@@ -805,7 +805,7 @@ type Grok struct {
 	// The grok pattern to match against the log event. For a list of supported grok
 	// patterns, see [Supported grok patterns].
 	//
-	// [Supported grok patterns]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#Grok-Patterns
+	// [Supported grok patterns]: https://docs.aws.amazon.com/mazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#Grok-Patterns
 	//
 	// This member is required.
 	Match *string
@@ -909,7 +909,7 @@ type IntegrationSummary struct {
 // For more information about this processor including examples, see [listToMap] in the
 // CloudWatch Logs User Guide.
 //
-// [listToMap]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-listToMap
+// [listToMap]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#CloudWatch-Logs-Transformation-listToMap
 type ListToMap struct {
 
 	// The key of the field to be extracted as keys in the generated map

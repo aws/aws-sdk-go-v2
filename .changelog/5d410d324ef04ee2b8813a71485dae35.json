@@ -1,0 +1,8 @@
+{
+    "id": "5d410d32-4ef0-4ee2-b881-3a71485dae35",
+    "type": "feature",
+    "description": "We are pleased to announce limit increases to our grok processor logs transformation feature. Now you can define 20 Grok patterns in their configurations, with an expanded total pattern matching limit of 512 characters.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

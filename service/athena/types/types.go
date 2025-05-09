@@ -800,7 +800,7 @@ type QueryExecution struct {
 	// The type of query statement that was run. DDL indicates DDL query statements.
 	// DML indicates DML (Data Manipulation Language) query statements, such as CREATE
 	// TABLE AS SELECT . UTILITY indicates query statements other than DDL and DML,
-	// such as SHOW CREATE TABLE , or DESCRIBE TABLE .
+	// such as SHOW CREATE TABLE , EXPLAIN , DESCRIBE , or SHOW TABLES .
 	StatementType StatementType
 
 	// Query execution statistics, such as the amount of data scanned, the amount of

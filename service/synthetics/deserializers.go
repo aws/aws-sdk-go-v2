@@ -4093,6 +4093,28 @@ func awsRestjson1_deserializeDocumentCanaryRun(v **types.CanaryRun, value interf
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "RetryAttempt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RetryAttempt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RetryAttempt = ptr.Int32(int32(i64))
+			}
+
+		case "ScheduledRunId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
+				}
+				sv.ScheduledRunId = ptr.String(jtv)
+			}
+
 		case "Status":
 			if err := awsRestjson1_deserializeDocumentCanaryRunStatus(&sv.Status, value); err != nil {
 				return err
@@ -4308,6 +4330,22 @@ func awsRestjson1_deserializeDocumentCanaryRunTimeline(v **types.CanaryRunTimeli
 				}
 			}
 
+		case "MetricTimestampForRunAndRetries":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MetricTimestampForRunAndRetries = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "Started":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4375,6 +4413,11 @@ func awsRestjson1_deserializeDocumentCanaryScheduleOutput(v **types.CanarySchedu
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Expression = ptr.String(jtv)
+			}
+
+		case "RetryConfig":
+			if err := awsRestjson1_deserializeDocumentRetryConfigOutput(&sv.RetryConfig, value); err != nil {
+				return err
 			}
 
 		default:
@@ -5004,6 +5047,50 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRetryConfigOutput(v **types.RetryConfigOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetryConfigOutput
+	if *v == nil {
+		sv = &types.RetryConfigOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxRetries":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxRetries to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxRetries = ptr.Int32(int32(i64))
 			}
 
 		default:

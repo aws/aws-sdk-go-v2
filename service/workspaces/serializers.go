@@ -6521,11 +6521,6 @@ func awsAwsjson11_serializeDocumentWorkspaceCreationProperties(v *types.Workspac
 		ok.Boolean(*v.EnableMaintenanceMode)
 	}
 
-	if v.EnableWorkDocs != nil {
-		ok := object.Key("EnableWorkDocs")
-		ok.Boolean(*v.EnableWorkDocs)
-	}
-
 	if v.InstanceIamRoleArn != nil {
 		ok := object.Key("InstanceIamRoleArn")
 		ok.String(*v.InstanceIamRoleArn)
@@ -8305,11 +8300,6 @@ func awsAwsjson11_serializeOpDocumentRegisterWorkspaceDirectoryInput(v *Register
 	if v.EnableSelfService != nil {
 		ok := object.Key("EnableSelfService")
 		ok.Boolean(*v.EnableSelfService)
-	}
-
-	if v.EnableWorkDocs != nil {
-		ok := object.Key("EnableWorkDocs")
-		ok.Boolean(*v.EnableWorkDocs)
 	}
 
 	if v.IdcInstanceArn != nil {

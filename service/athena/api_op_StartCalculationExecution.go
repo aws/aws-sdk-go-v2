@@ -40,7 +40,7 @@ type StartCalculationExecutionInput struct {
 
 	// Contains configuration information for the calculation.
 	//
-	// Deprecated: Kepler Post GA Tasks : https://sim.amazon.com/issues/ATHENA-39828
+	// Deprecated: Structure is deprecated.
 	CalculationConfiguration *types.CalculationConfiguration
 
 	// A unique case-sensitive string used to ensure the request to create the
