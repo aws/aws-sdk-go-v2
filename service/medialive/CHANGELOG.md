@@ -1,3 +1,7 @@
+# v1.76.0 (2025-05-12)
+
+* **Feature**: Add support to the AV1 rate control mode
+
 # v1.75.0 (2025-05-07)
 
 * **Feature**: Enables Updating Anywhere Settings on a MediaLive Anywhere Channel.

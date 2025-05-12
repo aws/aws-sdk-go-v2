@@ -1,8 +1,0 @@
-{
-    "id": "8bae8f10-69a1-4bc6-82bc-9f49dd06618b",
-    "type": "feature",
-    "description": "Add support to the AV1 rate control mode",
-    "modules": [
-        "service/medialive"
-    ]
-}

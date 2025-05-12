@@ -1,3 +1,23 @@
+# Release (2025-05-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.12.0](service/deadline/CHANGELOG.md#v1120-2025-05-12)
+  * **Feature**: AWS Deadline Cloud service-managed fleets now support configuration scripts. Configuration scripts make it easy to install additional software, like plugins and packages, onto a worker.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.218.0](service/ec2/CHANGELOG.md#v12180-2025-05-12)
+  * **Feature**: EC2 - Adding support for AvailabilityZoneId
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.42.0](service/iam/CHANGELOG.md#v1420-2025-05-12)
+  * **Feature**: Updating the endpoint list for the Identity and access management (IAM) service
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.76.0](service/medialive/CHANGELOG.md#v1760-2025-05-12)
+  * **Feature**: Add support to the AV1 rate control mode
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.48.0](service/mediatailor/CHANGELOG.md#v1480-2025-05-12)
+  * **Feature**: Documenting that EnabledLoggingStrategies is always present in responses of PlaybackConfiguration read operations.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.58.0](service/s3control/CHANGELOG.md#v1580-2025-05-12)
+  * **Feature**: Updates to support S3 Express zonal endpoints for directory buckets in AWS CLI
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.192.0](service/sagemaker/CHANGELOG.md#v11920-2025-05-12)
+  * **Feature**: No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.13.0](service/supplychain/CHANGELOG.md#v1130-2025-05-12)
+  * **Feature**: Launch new AWS Supply Chain public APIs for DataIntegrationEvent, DataIntegrationFlowExecution and DatasetNamespace. Also add more capabilities to existing public APIs to support direct dataset event publish, data deduplication in DataIntegrationFlow, partition specification of custom datasets.
+
 # Release (2025-05-09)
 
 ## Module Highlights

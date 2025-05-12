@@ -1,8 +1,0 @@
-{
-    "id": "d2ad0a14-bf4e-423a-8d8b-7e5aa7b6e7fb",
-    "type": "feature",
-    "description": "Updating the endpoint list for the Identity and access management (IAM) service",
-    "modules": [
-        "service/iam"
-    ]
-}

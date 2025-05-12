@@ -1,8 +1,0 @@
-{
-    "id": "bf148790-901b-4920-9b2f-c6a53aeec9d0",
-    "type": "feature",
-    "description": "EC2 - Adding support for AvailabilityZoneId",
-    "modules": [
-        "service/ec2"
-    ]
-}

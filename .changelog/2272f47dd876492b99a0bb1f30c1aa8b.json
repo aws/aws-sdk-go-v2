@@ -1,8 +1,0 @@
-{
-    "id": "2272f47d-d876-492b-99a0-bb1f30c1aa8b",
-    "type": "feature",
-    "description": "Documenting that EnabledLoggingStrategies is always present in responses of PlaybackConfiguration read operations.",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

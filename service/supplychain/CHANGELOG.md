@@ -1,3 +1,7 @@
+# v1.13.0 (2025-05-12)
+
+* **Feature**: Launch new AWS Supply Chain public APIs for DataIntegrationEvent, DataIntegrationFlowExecution and DatasetNamespace. Also add more capabilities to existing public APIs to support direct dataset event publish, data deduplication in DataIntegrationFlow, partition specification of custom datasets.
+
 # v1.12.2 (2025-04-03)
 
 * No change notes available for this release.

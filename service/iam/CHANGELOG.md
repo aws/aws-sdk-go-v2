@@ -1,3 +1,7 @@
+# v1.42.0 (2025-05-12)
+
+* **Feature**: Updating the endpoint list for the Identity and access management (IAM) service
+
 # v1.41.1 (2025-04-03)
 
 * No change notes available for this release.

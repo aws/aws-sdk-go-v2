@@ -1,3 +1,7 @@
+# v1.218.0 (2025-05-12)
+
+* **Feature**: EC2 - Adding support for AvailabilityZoneId
+
 # v1.217.0 (2025-05-08)
 
 * **Feature**: Launching the feature to support ENA queues offering flexibility to support multiple queues per Enhanced Network Interface (ENI)

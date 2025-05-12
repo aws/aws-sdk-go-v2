@@ -1,3 +1,7 @@
+# v1.12.0 (2025-05-12)
+
+* **Feature**: AWS Deadline Cloud service-managed fleets now support configuration scripts. Configuration scripts make it easy to install additional software, like plugins and packages, onto a worker.
+
 # v1.11.0 (2025-04-30)
 
 * **Feature**: Adds support for tag management on workers and tag inheritance from fleets to their associated workers.

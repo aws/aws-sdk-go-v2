@@ -1,3 +1,7 @@
+# v1.48.0 (2025-05-12)
+
+* **Feature**: Documenting that EnabledLoggingStrategies is always present in responses of PlaybackConfiguration read operations.
+
 # v1.47.0 (2025-04-21)
 
 * **Feature**: Added support for Recurring Prefetch and Traffic Shaping on both Single and Recurring Prefetch. ListPrefetchSchedules now return single prefetchs by default and can be provided scheduleType of SINGLE, RECURRING, AND ALL.
