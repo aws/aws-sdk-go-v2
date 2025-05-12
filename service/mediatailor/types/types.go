@@ -679,6 +679,16 @@ type LiveSource struct {
 // configuration.
 type LogConfiguration struct {
 
+	// The method used for collecting logs from AWS Elemental MediaTailor.
+	// LEGACY_CLOUDWATCH indicates that MediaTailor is sending logs directly to Amazon
+	// CloudWatch Logs. VENDED_LOGS indicates that MediaTailor is sending logs to
+	// CloudWatch, which then vends the logs to your destination of choice. Supported
+	// destinations are CloudWatch Logs log group, Amazon S3 bucket, and Amazon Data
+	// Firehose stream.
+	//
+	// This member is required.
+	EnabledLoggingStrategies []LoggingStrategy
+
 	// The percentage of session logs that MediaTailor sends to your configured log
 	// destination. For example, if your playback configuration has 1000 sessions and
 	// percentEnabled is set to 60 , MediaTailor sends logs for 600 of the sessions to
@@ -696,14 +706,6 @@ type LogConfiguration struct {
 	// Settings for customizing what events are included in logs for interactions with
 	// the ad decision server (ADS).
 	AdsInteractionLog *AdsInteractionLog
-
-	// The method used for collecting logs from AWS Elemental MediaTailor.
-	// LEGACY_CLOUDWATCH indicates that MediaTailor is sending logs directly to Amazon
-	// CloudWatch Logs. VENDED_LOGS indicates that MediaTailor is sending logs to
-	// CloudWatch, which then vends the logs to your destination of choice. Supported
-	// destinations are CloudWatch Logs log group, Amazon S3 bucket, and Amazon Data
-	// Firehose stream.
-	EnabledLoggingStrategies []LoggingStrategy
 
 	// Settings for customizing what events are included in logs for interactions with
 	// the origin server.

@@ -262,7 +262,7 @@ type ProcessingJobCompletedOrStoppedWaiterOptions struct {
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
 	// set to zero, ProcessingJobCompletedOrStoppedWaiter will use default max delay of
-	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// 3600 seconds. Note that MaxDelay must resolve to value greater than or equal to
 	// the MinDelay.
 	MaxDelay time.Duration
 
@@ -294,7 +294,7 @@ type ProcessingJobCompletedOrStoppedWaiter struct {
 func NewProcessingJobCompletedOrStoppedWaiter(client DescribeProcessingJobAPIClient, optFns ...func(*ProcessingJobCompletedOrStoppedWaiterOptions)) *ProcessingJobCompletedOrStoppedWaiter {
 	options := ProcessingJobCompletedOrStoppedWaiterOptions{}
 	options.MinDelay = 60 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 3600 * time.Second
 	options.Retryable = processingJobCompletedOrStoppedStateRetryable
 
 	for _, fn := range optFns {
@@ -329,7 +329,7 @@ func (w *ProcessingJobCompletedOrStoppedWaiter) WaitForOutput(ctx context.Contex
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 3600 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

@@ -1,0 +1,8 @@
+{
+    "id": "ac4f5d51-bea9-43c9-9105-4abd1c6bb7c2",
+    "type": "feature",
+    "description": "Launch new AWS Supply Chain public APIs for DataIntegrationEvent, DataIntegrationFlowExecution and DatasetNamespace. Also add more capabilities to existing public APIs to support direct dataset event publish, data deduplication in DataIntegrationFlow, partition specification of custom datasets.",
+    "modules": [
+        "service/supplychain"
+    ]
+}

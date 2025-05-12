@@ -6582,9 +6582,9 @@ type FileSystemDataSource struct {
 //
 // In search, there are several property types:
 //
-// Metrics To define a metric filter, enter a value using the form "Metrics." ,
-// where is a metric name. For example, the following filter searches for training
-// jobs with an "accuracy" metric greater than "0.9" :
+// Metrics To define a metric filter, enter a value using the form "Metrics.<name>"
+// , where <name> is a metric name. For example, the following filter searches for
+// training jobs with an "accuracy" metric greater than "0.9" :
 //
 //	{
 //
@@ -6597,10 +6597,10 @@ type FileSystemDataSource struct {
 // }
 //
 // HyperParameters To define a hyperparameter filter, enter a value with the form
-// "HyperParameters." . Decimal hyperparameter values are treated as a decimal in a
-// comparison if the specified Value is also a decimal value. If the specified
-// Value is an integer, the decimal hyperparameter values are treated as integers.
-// For example, the following filter is satisfied by training jobs with a
+// "HyperParameters.<name>" . Decimal hyperparameter values are treated as a
+// decimal in a comparison if the specified Value is also a decimal value. If the
+// specified Value is an integer, the decimal hyperparameter values are treated as
+// integers. For example, the following filter is satisfied by training jobs with a
 // "learning_rate" hyperparameter that is less than "0.5" :
 //
 //	{
@@ -6613,7 +6613,7 @@ type FileSystemDataSource struct {
 //
 // }
 //
-// Tags To define a tag filter, enter a value with the form Tags. .
+// Tags To define a tag filter, enter a value with the form Tags.<key> .
 //
 // [Search]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
 type Filter struct {
@@ -13753,12 +13753,10 @@ type OutputDataConfig struct {
 	// If you use a KMS key ID or an alias of your KMS key, the SageMaker execution
 	// role must include permissions to call kms:Encrypt . If you don't provide a KMS
 	// key ID, SageMaker uses the default KMS key for Amazon S3 for your role's
-	// account.
-	//
-	// For more information, see [KMS-Managed Encryption Keys] in the Amazon Simple Storage Service Developer
-	// Guide. If the output data is stored in Amazon S3 Express One Zone, it is
-	// encrypted with server-side encryption with Amazon S3 managed keys (SSE-S3). KMS
-	// key is not supported for Amazon S3 Express One Zone
+	// account. For more information, see [KMS-Managed Encryption Keys]in the Amazon Simple Storage Service
+	// Developer Guide. If the output data is stored in Amazon S3 Express One Zone, it
+	// is encrypted with server-side encryption with Amazon S3 managed keys (SSE-S3).
+	// KMS key is not supported for Amazon S3 Express One Zone
 	//
 	// The KMS key policy must grant permission to the IAM role that you specify in
 	// your CreateTrainingJob , CreateTransformJob , or CreateHyperParameterTuningJob
@@ -15868,7 +15866,7 @@ type RecommendationJobInputConfig struct {
 	//
 	//   - // Amazon Resource Name (ARN) of a KMS Key
 	//
-	// "arn:aws:kms:::key/"
+	// "arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>"
 	//
 	//   - // KMS Key Alias
 	//
@@ -15876,7 +15874,7 @@ type RecommendationJobInputConfig struct {
 	//
 	//   - // Amazon Resource Name (ARN) of a KMS Key Alias
 	//
-	// "arn:aws:kms:::alias/"
+	// "arn:aws:kms:<region>:<account>:alias/<ExampleAlias>"
 	//
 	// For more information about key identifiers, see [Key identifiers (KeyID)] in the Amazon Web Services Key
 	// Management Service (Amazon Web Services KMS) documentation.
@@ -15910,7 +15908,7 @@ type RecommendationJobOutputConfig struct {
 	//
 	//   - // Amazon Resource Name (ARN) of a KMS Key
 	//
-	// "arn:aws:kms:::key/"
+	// "arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>"
 	//
 	//   - // KMS Key Alias
 	//
@@ -15918,7 +15916,7 @@ type RecommendationJobOutputConfig struct {
 	//
 	//   - // Amazon Resource Name (ARN) of a KMS Key Alias
 	//
-	// "arn:aws:kms:::alias/"
+	// "arn:aws:kms:<region>:<account>:alias/<ExampleAlias>"
 	//
 	// For more information about key identifiers, see [Key identifiers (KeyID)] in the Amazon Web Services Key
 	// Management Service (Amazon Web Services KMS) documentation.
@@ -20549,7 +20547,7 @@ type Vertex struct {
 type VisibilityConditions struct {
 
 	// The key that specifies the tag that you're using to filter the search results.
-	// It must be in the following format: Tags. .
+	// It must be in the following format: Tags.<key> .
 	Key *string
 
 	// The value for the tag that you're using to filter the search results.

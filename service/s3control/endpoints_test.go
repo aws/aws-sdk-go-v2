@@ -5688,3 +5688,217 @@ func TestEndpointCase119(t *testing.T) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
+
+// Access Point APIs on express bucket routed to custom endpoint if provided
+func TestEndpointCase120(t *testing.T) {
+	var params = EndpointParameters{
+		AccountId:         ptr.String("871317572157"),
+		AccessPointName:   ptr.String("myaccesspoint--abcd-ab1--xa-s3"),
+		Endpoint:          ptr.String("https://my-endpoint.express-control.s3.aws.dev"),
+		Region:            ptr.String("us-east-1"),
+		RequiresAccountId: ptr.Bool(true),
+		UseDualStack:      ptr.Bool(false),
+		UseFIPS:           ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://my-endpoint.express-control.s3.aws.dev")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3express")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Access Point APIs on express bucket routed to custom endpoint if provided for
+// List
+func TestEndpointCase121(t *testing.T) {
+	var params = EndpointParameters{
+		AccountId:                   ptr.String("871317572157"),
+		Region:                      ptr.String("us-east-1"),
+		UseS3ExpressControlEndpoint: ptr.Bool(true),
+		Endpoint:                    ptr.String("https://my-endpoint.express-control.s3.aws.dev"),
+		RequiresAccountId:           ptr.Bool(true),
+		UseDualStack:                ptr.Bool(false),
+		UseFIPS:                     ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://my-endpoint.express-control.s3.aws.dev")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3express")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Error on Access Point APIs on express bucket for dual stack
+func TestEndpointCase122(t *testing.T) {
+	var params = EndpointParameters{
+		AccountId:         ptr.String("871317572157"),
+		AccessPointName:   ptr.String("myaccesspoint--abcd-ab1--xa-s3"),
+		Region:            ptr.String("us-east-1"),
+		RequiresAccountId: ptr.Bool(true),
+		UseDualStack:      ptr.Bool(true),
+		UseFIPS:           ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "S3Express does not support Dual-stack.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Error Access Point APIs on express bucket for dual stack for List
+func TestEndpointCase123(t *testing.T) {
+	var params = EndpointParameters{
+		AccountId:                   ptr.String("871317572157"),
+		Region:                      ptr.String("us-east-1"),
+		UseS3ExpressControlEndpoint: ptr.Bool(true),
+		RequiresAccountId:           ptr.Bool(true),
+		UseDualStack:                ptr.Bool(true),
+		UseFIPS:                     ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "S3Express does not support Dual-stack.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Error on Access Point APIs on express bucket for custom endpoint and dual stack
+func TestEndpointCase124(t *testing.T) {
+	var params = EndpointParameters{
+		AccountId:         ptr.String("871317572157"),
+		AccessPointName:   ptr.String("myaccesspoint--abcd-ab1--xa-s3"),
+		Endpoint:          ptr.String("https://my-endpoint.express-control.s3.aws.dev"),
+		Region:            ptr.String("us-east-1"),
+		RequiresAccountId: ptr.Bool(true),
+		UseDualStack:      ptr.Bool(true),
+		UseFIPS:           ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: DualStack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Error Access Point APIs on express bucket for custom endpoint and dual stack for
+// List
+func TestEndpointCase125(t *testing.T) {
+	var params = EndpointParameters{
+		AccountId:                   ptr.String("871317572157"),
+		Region:                      ptr.String("us-east-1"),
+		UseS3ExpressControlEndpoint: ptr.Bool(true),
+		Endpoint:                    ptr.String("https://my-endpoint.express-control.s3.aws.dev"),
+		RequiresAccountId:           ptr.Bool(true),
+		UseDualStack:                ptr.Bool(true),
+		UseFIPS:                     ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: DualStack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}

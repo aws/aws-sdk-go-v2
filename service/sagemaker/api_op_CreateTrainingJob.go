@@ -51,11 +51,9 @@ import (
 //	see [Managed Spot Training].
 //
 //	- RoleArn - The Amazon Resource Name (ARN) that SageMaker assumes to perform
-//	tasks on your behalf during model training.
-//
-// You must grant this role the necessary permissions so that SageMaker can
-//
-//	successfully complete model training.
+//	tasks on your behalf during model training. You must grant this role the
+//	necessary permissions so that SageMaker can successfully complete model
+//	training.
 //
 //	- StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds to
 //	set a time limit for training. Use MaxWaitTimeInSeconds to specify how long a

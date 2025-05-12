@@ -1,0 +1,8 @@
+{
+    "id": "e805b442-f7ee-4754-a55e-e226352a1666",
+    "type": "feature",
+    "description": "Updates to support S3 Express zonal endpoints for directory buckets in AWS CLI",
+    "modules": [
+        "service/s3control"
+    ]
+}

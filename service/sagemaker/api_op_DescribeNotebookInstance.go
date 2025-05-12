@@ -281,7 +281,7 @@ type NotebookInstanceDeletedWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, NotebookInstanceDeletedWaiter will use default max delay of 120
+	// set to zero, NotebookInstanceDeletedWaiter will use default max delay of 1800
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -312,7 +312,7 @@ type NotebookInstanceDeletedWaiter struct {
 func NewNotebookInstanceDeletedWaiter(client DescribeNotebookInstanceAPIClient, optFns ...func(*NotebookInstanceDeletedWaiterOptions)) *NotebookInstanceDeletedWaiter {
 	options := NotebookInstanceDeletedWaiterOptions{}
 	options.MinDelay = 30 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 1800 * time.Second
 	options.Retryable = notebookInstanceDeletedStateRetryable
 
 	for _, fn := range optFns {
@@ -347,7 +347,7 @@ func (w *NotebookInstanceDeletedWaiter) WaitForOutput(ctx context.Context, param
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 1800 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {
@@ -470,7 +470,7 @@ type NotebookInstanceInServiceWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, NotebookInstanceInServiceWaiter will use default max delay of 120
+	// set to zero, NotebookInstanceInServiceWaiter will use default max delay of 1800
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -502,7 +502,7 @@ type NotebookInstanceInServiceWaiter struct {
 func NewNotebookInstanceInServiceWaiter(client DescribeNotebookInstanceAPIClient, optFns ...func(*NotebookInstanceInServiceWaiterOptions)) *NotebookInstanceInServiceWaiter {
 	options := NotebookInstanceInServiceWaiterOptions{}
 	options.MinDelay = 30 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 1800 * time.Second
 	options.Retryable = notebookInstanceInServiceStateRetryable
 
 	for _, fn := range optFns {
@@ -537,7 +537,7 @@ func (w *NotebookInstanceInServiceWaiter) WaitForOutput(ctx context.Context, par
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 1800 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {
@@ -658,7 +658,7 @@ type NotebookInstanceStoppedWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, NotebookInstanceStoppedWaiter will use default max delay of 120
+	// set to zero, NotebookInstanceStoppedWaiter will use default max delay of 1800
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -689,7 +689,7 @@ type NotebookInstanceStoppedWaiter struct {
 func NewNotebookInstanceStoppedWaiter(client DescribeNotebookInstanceAPIClient, optFns ...func(*NotebookInstanceStoppedWaiterOptions)) *NotebookInstanceStoppedWaiter {
 	options := NotebookInstanceStoppedWaiterOptions{}
 	options.MinDelay = 30 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 1800 * time.Second
 	options.Retryable = notebookInstanceStoppedStateRetryable
 
 	for _, fn := range optFns {
@@ -724,7 +724,7 @@ func (w *NotebookInstanceStoppedWaiter) WaitForOutput(ctx context.Context, param
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 1800 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

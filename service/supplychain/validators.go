@@ -70,6 +70,26 @@ func (m *validateOpCreateDataLakeDataset) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDataLakeNamespace struct {
+}
+
+func (*validateOpCreateDataLakeNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataLakeNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataLakeNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataLakeNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDataIntegrationFlow struct {
 }
 
@@ -105,6 +125,26 @@ func (m *validateOpDeleteDataLakeDataset) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDataLakeDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDataLakeNamespace struct {
+}
+
+func (*validateOpDeleteDataLakeNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataLakeNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataLakeNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataLakeNamespaceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +190,46 @@ func (m *validateOpGetBillOfMaterialsImportJob) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataIntegrationEvent struct {
+}
+
+func (*validateOpGetDataIntegrationEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataIntegrationEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataIntegrationEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataIntegrationEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDataIntegrationFlowExecution struct {
+}
+
+func (*validateOpGetDataIntegrationFlowExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataIntegrationFlowExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataIntegrationFlowExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataIntegrationFlowExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDataIntegrationFlow struct {
 }
 
@@ -190,6 +270,26 @@ func (m *validateOpGetDataLakeDataset) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataLakeNamespace struct {
+}
+
+func (*validateOpGetDataLakeNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataLakeNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataLakeNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataLakeNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInstance struct {
 }
 
@@ -205,6 +305,46 @@ func (m *validateOpGetInstance) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataIntegrationEvents struct {
+}
+
+func (*validateOpListDataIntegrationEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataIntegrationEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataIntegrationEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataIntegrationEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataIntegrationFlowExecutions struct {
+}
+
+func (*validateOpListDataIntegrationFlowExecutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataIntegrationFlowExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataIntegrationFlowExecutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataIntegrationFlowExecutionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -245,6 +385,26 @@ func (m *validateOpListDataLakeDatasets) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDataLakeDatasetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataLakeNamespaces struct {
+}
+
+func (*validateOpListDataLakeNamespaces) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataLakeNamespaces) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataLakeNamespacesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataLakeNamespacesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +530,26 @@ func (m *validateOpUpdateDataLakeDataset) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDataLakeNamespace struct {
+}
+
+func (*validateOpUpdateDataLakeNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDataLakeNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDataLakeNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDataLakeNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateInstance struct {
 }
 
@@ -402,12 +582,20 @@ func addOpCreateDataLakeDatasetValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateDataLakeDataset{}, middleware.After)
 }
 
+func addOpCreateDataLakeNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataLakeNamespace{}, middleware.After)
+}
+
 func addOpDeleteDataIntegrationFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataIntegrationFlow{}, middleware.After)
 }
 
 func addOpDeleteDataLakeDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataLakeDataset{}, middleware.After)
+}
+
+func addOpDeleteDataLakeNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataLakeNamespace{}, middleware.After)
 }
 
 func addOpDeleteInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -418,6 +606,14 @@ func addOpGetBillOfMaterialsImportJobValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpGetBillOfMaterialsImportJob{}, middleware.After)
 }
 
+func addOpGetDataIntegrationEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataIntegrationEvent{}, middleware.After)
+}
+
+func addOpGetDataIntegrationFlowExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataIntegrationFlowExecution{}, middleware.After)
+}
+
 func addOpGetDataIntegrationFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataIntegrationFlow{}, middleware.After)
 }
@@ -426,8 +622,20 @@ func addOpGetDataLakeDatasetValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpGetDataLakeDataset{}, middleware.After)
 }
 
+func addOpGetDataLakeNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataLakeNamespace{}, middleware.After)
+}
+
 func addOpGetInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInstance{}, middleware.After)
+}
+
+func addOpListDataIntegrationEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataIntegrationEvents{}, middleware.After)
+}
+
+func addOpListDataIntegrationFlowExecutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataIntegrationFlowExecutions{}, middleware.After)
 }
 
 func addOpListDataIntegrationFlowsValidationMiddleware(stack *middleware.Stack) error {
@@ -436,6 +644,10 @@ func addOpListDataIntegrationFlowsValidationMiddleware(stack *middleware.Stack) 
 
 func addOpListDataLakeDatasetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataLakeDatasets{}, middleware.After)
+}
+
+func addOpListDataLakeNamespacesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataLakeNamespaces{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -462,8 +674,47 @@ func addOpUpdateDataLakeDatasetValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpUpdateDataLakeDataset{}, middleware.After)
 }
 
+func addOpUpdateDataLakeNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataLakeNamespace{}, middleware.After)
+}
+
 func addOpUpdateInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInstance{}, middleware.After)
+}
+
+func validateDataIntegrationEventDatasetTargetConfiguration(v *types.DataIntegrationEventDatasetTargetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataIntegrationEventDatasetTargetConfiguration"}
+	if v.DatasetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetIdentifier"))
+	}
+	if len(v.OperationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataIntegrationFlowDatasetOptions(v *types.DataIntegrationFlowDatasetOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataIntegrationFlowDatasetOptions"}
+	if v.DedupeStrategy != nil {
+		if err := validateDataIntegrationFlowDedupeStrategy(v.DedupeStrategy); err != nil {
+			invalidParams.AddNested("DedupeStrategy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateDataIntegrationFlowDatasetSourceConfiguration(v *types.DataIntegrationFlowDatasetSourceConfiguration) error {
@@ -473,6 +724,11 @@ func validateDataIntegrationFlowDatasetSourceConfiguration(v *types.DataIntegrat
 	invalidParams := smithy.InvalidParamsError{Context: "DataIntegrationFlowDatasetSourceConfiguration"}
 	if v.DatasetIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetIdentifier"))
+	}
+	if v.Options != nil {
+		if err := validateDataIntegrationFlowDatasetOptions(v.Options); err != nil {
+			invalidParams.AddNested("Options", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -488,6 +744,85 @@ func validateDataIntegrationFlowDatasetTargetConfiguration(v *types.DataIntegrat
 	invalidParams := smithy.InvalidParamsError{Context: "DataIntegrationFlowDatasetTargetConfiguration"}
 	if v.DatasetIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetIdentifier"))
+	}
+	if v.Options != nil {
+		if err := validateDataIntegrationFlowDatasetOptions(v.Options); err != nil {
+			invalidParams.AddNested("Options", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataIntegrationFlowDedupeStrategy(v *types.DataIntegrationFlowDedupeStrategy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataIntegrationFlowDedupeStrategy"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.FieldPriority != nil {
+		if err := validateDataIntegrationFlowFieldPriorityDedupeStrategyConfiguration(v.FieldPriority); err != nil {
+			invalidParams.AddNested("FieldPriority", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataIntegrationFlowFieldPriorityDedupeField(v *types.DataIntegrationFlowFieldPriorityDedupeField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataIntegrationFlowFieldPriorityDedupeField"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.SortOrder) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataIntegrationFlowFieldPriorityDedupeFieldList(v []types.DataIntegrationFlowFieldPriorityDedupeField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataIntegrationFlowFieldPriorityDedupeFieldList"}
+	for i := range v {
+		if err := validateDataIntegrationFlowFieldPriorityDedupeField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataIntegrationFlowFieldPriorityDedupeStrategyConfiguration(v *types.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateDataIntegrationFlowFieldPriorityDedupeFieldList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -637,6 +972,111 @@ func validateDataIntegrationFlowTransformation(v *types.DataIntegrationFlowTrans
 	}
 }
 
+func validateDataLakeDatasetPartitionField(v *types.DataLakeDatasetPartitionField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataLakeDatasetPartitionField"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Transform == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Transform"))
+	} else if v.Transform != nil {
+		if err := validateDataLakeDatasetPartitionFieldTransform(v.Transform); err != nil {
+			invalidParams.AddNested("Transform", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataLakeDatasetPartitionFieldList(v []types.DataLakeDatasetPartitionField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataLakeDatasetPartitionFieldList"}
+	for i := range v {
+		if err := validateDataLakeDatasetPartitionField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataLakeDatasetPartitionFieldTransform(v *types.DataLakeDatasetPartitionFieldTransform) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataLakeDatasetPartitionFieldTransform"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataLakeDatasetPartitionSpec(v *types.DataLakeDatasetPartitionSpec) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataLakeDatasetPartitionSpec"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateDataLakeDatasetPartitionFieldList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataLakeDatasetPrimaryKeyField(v *types.DataLakeDatasetPrimaryKeyField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataLakeDatasetPrimaryKeyField"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataLakeDatasetPrimaryKeyFieldList(v []types.DataLakeDatasetPrimaryKeyField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataLakeDatasetPrimaryKeyFieldList"}
+	for i := range v {
+		if err := validateDataLakeDatasetPrimaryKeyField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataLakeDatasetSchema(v *types.DataLakeDatasetSchema) error {
 	if v == nil {
 		return nil
@@ -650,6 +1090,11 @@ func validateDataLakeDatasetSchema(v *types.DataLakeDatasetSchema) error {
 	} else if v.Fields != nil {
 		if err := validateDataLakeDatasetSchemaFieldList(v.Fields); err != nil {
 			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PrimaryKeys != nil {
+		if err := validateDataLakeDatasetPrimaryKeyFieldList(v.PrimaryKeys); err != nil {
+			invalidParams.AddNested("PrimaryKeys", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -773,6 +1218,29 @@ func validateOpCreateDataLakeDatasetInput(v *CreateDataLakeDatasetInput) error {
 			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.PartitionSpec != nil {
+		if err := validateDataLakeDatasetPartitionSpec(v.PartitionSpec); err != nil {
+			invalidParams.AddNested("PartitionSpec", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDataLakeNamespaceInput(v *CreateDataLakeNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataLakeNamespaceInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -819,6 +1287,24 @@ func validateOpDeleteDataLakeDatasetInput(v *DeleteDataLakeDatasetInput) error {
 	}
 }
 
+func validateOpDeleteDataLakeNamespaceInput(v *DeleteDataLakeNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataLakeNamespaceInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteInstanceInput(v *DeleteInstanceInput) error {
 	if v == nil {
 		return nil
@@ -844,6 +1330,45 @@ func validateOpGetBillOfMaterialsImportJobInput(v *GetBillOfMaterialsImportJobIn
 	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDataIntegrationEventInput(v *GetDataIntegrationEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataIntegrationEventInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.EventId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDataIntegrationFlowExecutionInput(v *GetDataIntegrationFlowExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataIntegrationFlowExecutionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.FlowName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowName"))
+	}
+	if v.ExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -891,6 +1416,24 @@ func validateOpGetDataLakeDatasetInput(v *GetDataLakeDatasetInput) error {
 	}
 }
 
+func validateOpGetDataLakeNamespaceInput(v *GetDataLakeNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataLakeNamespaceInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetInstanceInput(v *GetInstanceInput) error {
 	if v == nil {
 		return nil
@@ -898,6 +1441,39 @@ func validateOpGetInstanceInput(v *GetInstanceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetInstanceInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataIntegrationEventsInput(v *ListDataIntegrationEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataIntegrationEventsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataIntegrationFlowExecutionsInput(v *ListDataIntegrationFlowExecutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataIntegrationFlowExecutionsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.FlowName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -939,6 +1515,21 @@ func validateOpListDataLakeDatasetsInput(v *ListDataLakeDatasetsInput) error {
 	}
 }
 
+func validateOpListDataLakeNamespacesInput(v *ListDataLakeNamespacesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataLakeNamespacesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -970,6 +1561,11 @@ func validateOpSendDataIntegrationEventInput(v *SendDataIntegrationEventInput) e
 	}
 	if v.EventGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventGroupId"))
+	}
+	if v.DatasetTarget != nil {
+		if err := validateDataIntegrationEventDatasetTargetConfiguration(v.DatasetTarget); err != nil {
+			invalidParams.AddNested("DatasetTarget", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1057,6 +1653,24 @@ func validateOpUpdateDataLakeDatasetInput(v *UpdateDataLakeDatasetInput) error {
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDataLakeNamespaceInput(v *UpdateDataLakeNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataLakeNamespaceInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))

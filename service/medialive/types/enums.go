@@ -621,6 +621,25 @@ func (Av1LookAheadRateControl) Values() []Av1LookAheadRateControl {
 	}
 }
 
+type Av1RateControlMode string
+
+// Enum values for Av1RateControlMode
+const (
+	Av1RateControlModeCbr  Av1RateControlMode = "CBR"
+	Av1RateControlModeQvbr Av1RateControlMode = "QVBR"
+)
+
+// Values returns all known values for Av1RateControlMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1RateControlMode) Values() []Av1RateControlMode {
+	return []Av1RateControlMode{
+		"CBR",
+		"QVBR",
+	}
+}
+
 type Av1SceneChangeDetect string
 
 // Enum values for Av1SceneChangeDetect

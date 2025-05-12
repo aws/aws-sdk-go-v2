@@ -12,11 +12,9 @@ import (
 	"time"
 )
 
-// Send the transactional data payload for the event with real-time data for
-// analysis or monitoring. The real-time data events are stored in an Amazon Web
-// Services service before being processed and stored in data lake. New data events
-// are synced with data lake at 5 PM GMT everyday. The updated transactional data
-// is available in data lake after ingestion.
+// Send the data payload for the event with real-time data for analysis or
+// monitoring. The real-time data events are stored in an Amazon Web Services
+// service before being processed and stored in data lake.
 func (c *Client) SendDataIntegrationEvent(ctx context.Context, params *SendDataIntegrationEventInput, optFns ...func(*Options)) (*SendDataIntegrationEventOutput, error) {
 	if params == nil {
 		params = &SendDataIntegrationEventInput{}
@@ -35,21 +33,75 @@ func (c *Client) SendDataIntegrationEvent(ctx context.Context, params *SendDataI
 // The request parameters for SendDataIntegrationEvent.
 type SendDataIntegrationEventInput struct {
 
-	// The data payload of the event. For more information on the data schema to use,
-	// see [Data entities supported in AWS Supply Chain].
+	// The data payload of the event, should follow the data schema of the target
+	// dataset, or see [Data entities supported in AWS Supply Chain]. To send single data record, use JsonObject format; to send
+	// multiple data records, use JsonArray format.
+	//
+	// Note that for AWS Supply Chain dataset under asc namespace, it has a
+	// connection_id internal field that is not allowed to be provided by client
+	// directly, they will be auto populated.
 	//
 	// [Data entities supported in AWS Supply Chain]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
 	//
 	// This member is required.
 	Data *string
 
-	// Event identifier (for example, orderId for InboundOrder) used for data sharing
-	// or partitioning.
+	// Event identifier (for example, orderId for InboundOrder) used for data sharding
+	// or partitioning. Noted under one eventGroupId of same eventType and instanceId,
+	// events are processed sequentially in the order they are received by the server.
 	//
 	// This member is required.
 	EventGroupId *string
 
 	// The data event type.
+	//
+	//   - scn.data.dataset - Send data directly to any specified dataset.
+	//
+	//   - scn.data.supplyplan - Send data to [supply_plan]dataset.
+	//
+	//   - scn.data.shipmentstoporder - Send data to [shipment_stop_order]dataset.
+	//
+	//   - scn.data.shipmentstop - Send data to [shipment_stop]dataset.
+	//
+	//   - scn.data.shipment - Send data to [shipment]dataset.
+	//
+	//   - scn.data.reservation - Send data to [reservation]dataset.
+	//
+	//   - scn.data.processproduct - Send data to [process_product]dataset.
+	//
+	//   - scn.data.processoperation - Send data to [process_operation]dataset.
+	//
+	//   - scn.data.processheader - Send data to [process_header]dataset.
+	//
+	//   - scn.data.forecast - Send data to [forecast]dataset.
+	//
+	//   - scn.data.inventorylevel - Send data to [inv_level]dataset.
+	//
+	//   - scn.data.inboundorder - Send data to [inbound_order]dataset.
+	//
+	//   - scn.data.inboundorderline - Send data to [inbound_order_line]dataset.
+	//
+	//   - scn.data.inboundorderlineschedule - Send data to [inbound_order_line_schedule]dataset.
+	//
+	//   - scn.data.outboundorderline - Send data to [outbound_order_line]dataset.
+	//
+	//   - scn.data.outboundshipment - Send data to [outbound_shipment]dataset.
+	//
+	// [process_header]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/operation-process-header-entity.html
+	// [inbound_order_line_schedule]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-inbound-order-line-schedule-entity.html
+	// [shipment]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-shipment-entity.html
+	// [inv_level]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/inventory_mgmnt-inv-level-entity.html
+	// [shipment_stop]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-shipment-stop-entity.html
+	// [process_product]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/operation-process-product-entity.html
+	// [inbound_order_line]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-inbound-order-line-entity.html
+	// [forecast]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/forecast-forecast-entity.html
+	// [outbound_order_line]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/outbound-fulfillment-order-line-entity.html
+	// [outbound_shipment]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/outbound-fulfillment-shipment-entity.html
+	// [supply_plan]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/supply-plan-entity.html
+	// [process_operation]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/operation-process-operation-entity.html
+	// [inbound_order]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-inbound-order-entity.html
+	// [reservation]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/planning-reservation-entity.html
+	// [shipment_stop_order]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-shipment-stop-order-entity.html
 	//
 	// This member is required.
 	EventType types.DataIntegrationEventType
@@ -59,10 +111,17 @@ type SendDataIntegrationEventInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The idempotent client token.
+	// The idempotent client token. The token is active for 8 hours, and within its
+	// lifetime, it ensures the request completes only once upon retry with same client
+	// token. If omitted, the AWS SDK generates a unique value so that AWS SDK can
+	// safely retry the request upon network errors.
 	ClientToken *string
 
-	// The event timestamp (in epoch seconds).
+	// The target dataset configuration for scn.data.dataset event type.
+	DatasetTarget *types.DataIntegrationEventDatasetTargetConfiguration
+
+	// The timestamp (in epoch seconds) associated with the event. If not provided, it
+	// will be assigned with current timestamp.
 	EventTimestamp *time.Time
 
 	noSmithyDocumentSerde

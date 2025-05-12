@@ -800,6 +800,7 @@ type ServiceQuotaExceededExceptionReason string
 const (
 	ServiceQuotaExceededExceptionReasonServiceQuotaExceededException ServiceQuotaExceededExceptionReason = "SERVICE_QUOTA_EXCEEDED_EXCEPTION"
 	ServiceQuotaExceededExceptionReasonKmsKeyLimitExceeded           ServiceQuotaExceededExceptionReason = "KMS_KEY_LIMIT_EXCEEDED"
+	ServiceQuotaExceededExceptionReasonDependencyLimitExceeded       ServiceQuotaExceededExceptionReason = "DEPENDENCY_LIMIT_EXCEEDED"
 )
 
 // Values returns all known values for ServiceQuotaExceededExceptionReason. Note
@@ -811,6 +812,7 @@ func (ServiceQuotaExceededExceptionReason) Values() []ServiceQuotaExceededExcept
 	return []ServiceQuotaExceededExceptionReason{
 		"SERVICE_QUOTA_EXCEEDED_EXCEPTION",
 		"KMS_KEY_LIMIT_EXCEEDED",
+		"DEPENDENCY_LIMIT_EXCEEDED",
 	}
 }
 

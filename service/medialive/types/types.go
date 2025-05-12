@@ -587,6 +587,10 @@ type Av1Settings struct {
 	// fixedAfd parameter. NONE: MediaLive won't write AFD into the video
 	AfdSignaling AfdSignaling
 
+	// Average bitrate in bits/second. Required when the rate control mode is CBR. Not
+	// used for QVBR.
+	Bitrate *int32
+
 	// The size of the buffer (HRD buffer model) in bits.
 	BufSize *int32
 
@@ -648,6 +652,16 @@ type Av1Settings struct {
 	// tablet: qvbrQualityLevel: Leave empty. maxBitrate: 1,500,000 to 3,000,000
 	// Smartphone: qvbrQualityLevel: Leave empty. maxBitrate: 1,000,000 to 1,500,000
 	QvbrQualityLevel *int32
+
+	// Rate control mode.
+	//
+	// QVBR: Quality will match the specified quality level except when it is
+	// constrained by the maximum bitrate. Recommended if you or your viewers pay for
+	// bandwidth.
+	//
+	// CBR: Quality varies, depending on the video complexity. Recommended only if you
+	// distribute your assets to devices that cannot handle variable bitrates.
+	RateControlMode Av1RateControlMode
 
 	// Controls whether MediaLive inserts I-frames when it detects a scene change.
 	// ENABLED or DISABLED.
@@ -6087,6 +6101,10 @@ type OutputDestination struct {
 
 	// User-specified id. This is used in an output group or an output.
 	Id *string
+
+	// Optional assignment of an output to a logical interface on the Node. Only
+	// applies to on premises channels.
+	LogicalInterfaceNames []string
 
 	// Destination settings for a MediaPackage output; one destination for both
 	// encoders.

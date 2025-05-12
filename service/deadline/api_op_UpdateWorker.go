@@ -58,6 +58,10 @@ type UpdateWorkerInput struct {
 
 type UpdateWorkerOutput struct {
 
+	// The script that runs as a worker is starting up that you can use to provide
+	// additional configuration for workers in your fleet.
+	HostConfiguration *types.HostConfiguration
+
 	// The worker log to update.
 	Log *types.LogConfiguration
 

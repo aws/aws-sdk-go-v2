@@ -28878,6 +28878,19 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				sv.AfdSignaling = types.AfdSignaling(jtv)
 			}
 
+		case "bitrate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin50000Max8000000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Bitrate = ptr.Int32(int32(i64))
+			}
+
 		case "bufSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -29055,6 +29068,15 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 					return err
 				}
 				sv.QvbrQualityLevel = ptr.Int32(int32(i64))
+			}
+
+		case "rateControlMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Av1RateControlMode to be of type string, got %T instead", value)
+				}
+				sv.RateControlMode = types.Av1RateControlMode(jtv)
 			}
 
 		case "sceneChangeDetect":
@@ -43446,6 +43468,11 @@ func awsRestjson1_deserializeDocumentOutputDestination(v **types.OutputDestinati
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "logicalInterfaceNames":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.LogicalInterfaceNames, value); err != nil {
+				return err
 			}
 
 		case "mediaPackageSettings":

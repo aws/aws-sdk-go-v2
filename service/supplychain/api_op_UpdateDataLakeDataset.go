@@ -37,7 +37,7 @@ type UpdateDataLakeDatasetInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The name of the dataset. For asc name space, the name must be one of the
+	// The name of the dataset. For asc namespace, the name must be one of the
 	// supported data entities under [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html].
 	//
 	// [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
@@ -45,7 +45,8 @@ type UpdateDataLakeDatasetInput struct {
 	// This member is required.
 	Name *string
 
-	// The name space of the dataset. The available values are:
+	// The namespace of the dataset, besides the custom defined namespace, every
+	// instance comes with below pre-defined namespaces:
 	//
 	//   - asc - For information on the Amazon Web Services Supply Chain supported
 	//   datasets see [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html].

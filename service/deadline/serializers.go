@@ -1513,6 +1513,13 @@ func awsRestjson1_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 		ok.String(*v.DisplayName)
 	}
 
+	if v.HostConfiguration != nil {
+		ok := object.Key("hostConfiguration")
+		if err := awsRestjson1_serializeDocumentHostConfiguration(v.HostConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxWorkerCount != nil {
 		ok := object.Key("maxWorkerCount")
 		ok.Integer(*v.MaxWorkerCount)
@@ -9556,6 +9563,13 @@ func awsRestjson1_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 		ok.String(*v.DisplayName)
 	}
 
+	if v.HostConfiguration != nil {
+		ok := object.Key("hostConfiguration")
+		if err := awsRestjson1_serializeDocumentHostConfiguration(v.HostConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxWorkerCount != nil {
 		ok := object.Key("maxWorkerCount")
 		ok.Integer(*v.MaxWorkerCount)
@@ -11799,6 +11813,23 @@ func awsRestjson1_serializeDocumentFleetIds(v []string, value smithyjson.Value) 
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHostConfiguration(v *types.HostConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ScriptBody != nil {
+		ok := object.Key("scriptBody")
+		ok.String(*v.ScriptBody)
+	}
+
+	if v.ScriptTimeoutSeconds != nil {
+		ok := object.Key("scriptTimeoutSeconds")
+		ok.Integer(*v.ScriptTimeoutSeconds)
+	}
+
 	return nil
 }
 

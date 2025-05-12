@@ -27,6 +27,50 @@ func (ConfigurationJobStatus) Values() []ConfigurationJobStatus {
 	}
 }
 
+type DataIntegrationEventDatasetLoadStatus string
+
+// Enum values for DataIntegrationEventDatasetLoadStatus
+const (
+	DataIntegrationEventDatasetLoadStatusSucceeded  DataIntegrationEventDatasetLoadStatus = "SUCCEEDED"
+	DataIntegrationEventDatasetLoadStatusInProgress DataIntegrationEventDatasetLoadStatus = "IN_PROGRESS"
+	DataIntegrationEventDatasetLoadStatusFailed     DataIntegrationEventDatasetLoadStatus = "FAILED"
+)
+
+// Values returns all known values for DataIntegrationEventDatasetLoadStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataIntegrationEventDatasetLoadStatus) Values() []DataIntegrationEventDatasetLoadStatus {
+	return []DataIntegrationEventDatasetLoadStatus{
+		"SUCCEEDED",
+		"IN_PROGRESS",
+		"FAILED",
+	}
+}
+
+type DataIntegrationEventDatasetOperationType string
+
+// Enum values for DataIntegrationEventDatasetOperationType
+const (
+	DataIntegrationEventDatasetOperationTypeAppend DataIntegrationEventDatasetOperationType = "APPEND"
+	DataIntegrationEventDatasetOperationTypeUpsert DataIntegrationEventDatasetOperationType = "UPSERT"
+	DataIntegrationEventDatasetOperationTypeDelete DataIntegrationEventDatasetOperationType = "DELETE"
+)
+
+// Values returns all known values for DataIntegrationEventDatasetOperationType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataIntegrationEventDatasetOperationType) Values() []DataIntegrationEventDatasetOperationType {
+	return []DataIntegrationEventDatasetOperationType{
+		"APPEND",
+		"UPSERT",
+		"DELETE",
+	}
+}
+
 type DataIntegrationEventType string
 
 // Enum values for DataIntegrationEventType
@@ -46,6 +90,7 @@ const (
 	DataIntegrationEventTypeShipmentStop             DataIntegrationEventType = "scn.data.shipmentstop"
 	DataIntegrationEventTypeShipmentStopOrder        DataIntegrationEventType = "scn.data.shipmentstoporder"
 	DataIntegrationEventTypeSupplyPlan               DataIntegrationEventType = "scn.data.supplyplan"
+	DataIntegrationEventTypeDataset                  DataIntegrationEventType = "scn.data.dataset"
 )
 
 // Values returns all known values for DataIntegrationEventType. Note that this
@@ -69,6 +114,67 @@ func (DataIntegrationEventType) Values() []DataIntegrationEventType {
 		"scn.data.shipmentstop",
 		"scn.data.shipmentstoporder",
 		"scn.data.supplyplan",
+		"scn.data.dataset",
+	}
+}
+
+type DataIntegrationFlowDedupeStrategyType string
+
+// Enum values for DataIntegrationFlowDedupeStrategyType
+const (
+	DataIntegrationFlowDedupeStrategyTypeFieldPriority DataIntegrationFlowDedupeStrategyType = "FIELD_PRIORITY"
+)
+
+// Values returns all known values for DataIntegrationFlowDedupeStrategyType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataIntegrationFlowDedupeStrategyType) Values() []DataIntegrationFlowDedupeStrategyType {
+	return []DataIntegrationFlowDedupeStrategyType{
+		"FIELD_PRIORITY",
+	}
+}
+
+type DataIntegrationFlowExecutionStatus string
+
+// Enum values for DataIntegrationFlowExecutionStatus
+const (
+	DataIntegrationFlowExecutionStatusSucceeded  DataIntegrationFlowExecutionStatus = "SUCCEEDED"
+	DataIntegrationFlowExecutionStatusInProgress DataIntegrationFlowExecutionStatus = "IN_PROGRESS"
+	DataIntegrationFlowExecutionStatusFailed     DataIntegrationFlowExecutionStatus = "FAILED"
+)
+
+// Values returns all known values for DataIntegrationFlowExecutionStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataIntegrationFlowExecutionStatus) Values() []DataIntegrationFlowExecutionStatus {
+	return []DataIntegrationFlowExecutionStatus{
+		"SUCCEEDED",
+		"IN_PROGRESS",
+		"FAILED",
+	}
+}
+
+type DataIntegrationFlowFieldPriorityDedupeSortOrder string
+
+// Enum values for DataIntegrationFlowFieldPriorityDedupeSortOrder
+const (
+	DataIntegrationFlowFieldPriorityDedupeSortOrderAsc  DataIntegrationFlowFieldPriorityDedupeSortOrder = "ASC"
+	DataIntegrationFlowFieldPriorityDedupeSortOrderDesc DataIntegrationFlowFieldPriorityDedupeSortOrder = "DESC"
+)
+
+// Values returns all known values for
+// DataIntegrationFlowFieldPriorityDedupeSortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataIntegrationFlowFieldPriorityDedupeSortOrder) Values() []DataIntegrationFlowFieldPriorityDedupeSortOrder {
+	return []DataIntegrationFlowFieldPriorityDedupeSortOrder{
+		"ASC",
+		"DESC",
 	}
 }
 
@@ -172,6 +278,32 @@ func (DataIntegrationFlowTransformationType) Values() []DataIntegrationFlowTrans
 	}
 }
 
+type DataLakeDatasetPartitionTransformType string
+
+// Enum values for DataLakeDatasetPartitionTransformType
+const (
+	DataLakeDatasetPartitionTransformTypeYear     DataLakeDatasetPartitionTransformType = "YEAR"
+	DataLakeDatasetPartitionTransformTypeMonth    DataLakeDatasetPartitionTransformType = "MONTH"
+	DataLakeDatasetPartitionTransformTypeDay      DataLakeDatasetPartitionTransformType = "DAY"
+	DataLakeDatasetPartitionTransformTypeHour     DataLakeDatasetPartitionTransformType = "HOUR"
+	DataLakeDatasetPartitionTransformTypeIdentity DataLakeDatasetPartitionTransformType = "IDENTITY"
+)
+
+// Values returns all known values for DataLakeDatasetPartitionTransformType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataLakeDatasetPartitionTransformType) Values() []DataLakeDatasetPartitionTransformType {
+	return []DataLakeDatasetPartitionTransformType{
+		"YEAR",
+		"MONTH",
+		"DAY",
+		"HOUR",
+		"IDENTITY",
+	}
+}
+
 type DataLakeDatasetSchemaFieldType string
 
 // Enum values for DataLakeDatasetSchemaFieldType
@@ -180,6 +312,7 @@ const (
 	DataLakeDatasetSchemaFieldTypeDouble    DataLakeDatasetSchemaFieldType = "DOUBLE"
 	DataLakeDatasetSchemaFieldTypeString    DataLakeDatasetSchemaFieldType = "STRING"
 	DataLakeDatasetSchemaFieldTypeTimestamp DataLakeDatasetSchemaFieldType = "TIMESTAMP"
+	DataLakeDatasetSchemaFieldTypeLong      DataLakeDatasetSchemaFieldType = "LONG"
 )
 
 // Values returns all known values for DataLakeDatasetSchemaFieldType. Note that
@@ -193,6 +326,7 @@ func (DataLakeDatasetSchemaFieldType) Values() []DataLakeDatasetSchemaFieldType 
 		"DOUBLE",
 		"STRING",
 		"TIMESTAMP",
+		"LONG",
 	}
 }
 

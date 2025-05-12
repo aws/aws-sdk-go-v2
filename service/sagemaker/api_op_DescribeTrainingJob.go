@@ -480,7 +480,7 @@ type TrainingJobCompletedOrStoppedWaiterOptions struct {
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
 	// set to zero, TrainingJobCompletedOrStoppedWaiter will use default max delay of
-	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// 21600 seconds. Note that MaxDelay must resolve to value greater than or equal to
 	// the MinDelay.
 	MaxDelay time.Duration
 
@@ -512,7 +512,7 @@ type TrainingJobCompletedOrStoppedWaiter struct {
 func NewTrainingJobCompletedOrStoppedWaiter(client DescribeTrainingJobAPIClient, optFns ...func(*TrainingJobCompletedOrStoppedWaiterOptions)) *TrainingJobCompletedOrStoppedWaiter {
 	options := TrainingJobCompletedOrStoppedWaiterOptions{}
 	options.MinDelay = 120 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 21600 * time.Second
 	options.Retryable = trainingJobCompletedOrStoppedStateRetryable
 
 	for _, fn := range optFns {
@@ -547,7 +547,7 @@ func (w *TrainingJobCompletedOrStoppedWaiter) WaitForOutput(ctx context.Context,
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 21600 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

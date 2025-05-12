@@ -476,6 +476,9 @@ type AnalysisLoadBalancerTarget struct {
 	// The Availability Zone.
 	AvailabilityZone *string
 
+	// The ID of the Availability Zone.
+	AvailabilityZoneId *string
+
 	// Information about the instance.
 	Instance *AnalysisComponent
 
@@ -1754,6 +1757,9 @@ type CapacityReservationInfo struct {
 
 	// The Availability Zone for the Capacity Reservation.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone.
+	AvailabilityZoneId *string
 
 	// The instance type for the Capacity Reservation.
 	InstanceType *string
@@ -4699,6 +4705,9 @@ type Explanation struct {
 
 	// The resource to which the component is attached.
 	AttachedTo *AnalysisComponent
+
+	// The IDs of the Availability Zones.
+	AvailabilityZoneIds []string
 
 	// The Availability Zones.
 	AvailabilityZones []string
@@ -15800,6 +15809,9 @@ type ReservedInstances struct {
 	// The Availability Zone in which the Reserved Instance can be used.
 	AvailabilityZone *string
 
+	// The ID of the Availability Zone.
+	AvailabilityZoneId *string
+
 	// The currency of the Reserved Instance. It's specified using ISO 4217 standard
 	// currency codes. At this time, the only supported currency is USD .
 	CurrencyCode CurrencyCodeValues
@@ -15860,6 +15872,9 @@ type ReservedInstancesConfiguration struct {
 
 	// The Availability Zone for the modified Reserved Instances.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone.
+	AvailabilityZoneId *string
 
 	// The number of modified Reserved Instances.
 	//
@@ -15984,6 +15999,9 @@ type ReservedInstancesOffering struct {
 
 	// The Availability Zone in which the Reserved Instance can be used.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone.
+	AvailabilityZoneId *string
 
 	// The currency of the Reserved Instance offering you are purchasing. It's
 	// specified using ISO 4217 standard currency codes. At this time, the only
@@ -21986,6 +22004,9 @@ type VolumeStatusItem struct {
 
 	// The Availability Zone of the volume.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone.
+	AvailabilityZoneId *string
 
 	// A list of events associated with the volume.
 	Events []VolumeStatusEvent

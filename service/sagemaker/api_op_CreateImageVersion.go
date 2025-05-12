@@ -33,7 +33,7 @@ type CreateImageVersionInput struct {
 	// The registry path of the container image to use as the starting point for this
 	// version. The path is an Amazon ECR URI in the following format:
 	//
-	//     .dkr.ecr..amazonaws.com/
+	//     <acct-id>.dkr.ecr.<region>.amazonaws.com/<repo-name[:tag] or [@digest]>
 	//
 	// This member is required.
 	BaseImage *string

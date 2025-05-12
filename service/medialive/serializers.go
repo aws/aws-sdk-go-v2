@@ -12092,6 +12092,11 @@ func awsRestjson1_serializeDocumentAv1Settings(v *types.Av1Settings, value smith
 		ok.String(string(v.AfdSignaling))
 	}
 
+	if v.Bitrate != nil {
+		ok := object.Key("bitrate")
+		ok.Integer(*v.Bitrate)
+	}
+
 	if v.BufSize != nil {
 		ok := object.Key("bufSize")
 		ok.Integer(*v.BufSize)
@@ -12175,6 +12180,11 @@ func awsRestjson1_serializeDocumentAv1Settings(v *types.Av1Settings, value smith
 	if v.QvbrQualityLevel != nil {
 		ok := object.Key("qvbrQualityLevel")
 		ok.Integer(*v.QvbrQualityLevel)
+	}
+
+	if len(v.RateControlMode) > 0 {
+		ok := object.Key("rateControlMode")
+		ok.String(string(v.RateControlMode))
 	}
 
 	if len(v.SceneChangeDetect) > 0 {
@@ -17236,6 +17246,13 @@ func awsRestjson1_serializeDocumentOutputDestination(v *types.OutputDestination,
 	if v.Id != nil {
 		ok := object.Key("id")
 		ok.String(*v.Id)
+	}
+
+	if v.LogicalInterfaceNames != nil {
+		ok := object.Key("logicalInterfaceNames")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.LogicalInterfaceNames, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MediaPackageSettings != nil {

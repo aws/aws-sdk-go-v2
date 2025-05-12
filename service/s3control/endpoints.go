@@ -648,8 +648,59 @@ func (r *resolver) ResolveEndpoint(
 					if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
 						_partitionResult := *exprVal
 						_ = _partitionResult
+						if exprVal := params.Endpoint; exprVal != nil {
+							_Endpoint := *exprVal
+							_ = _Endpoint
+							if _UseDualStack == true {
+								return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: DualStack and custom endpoint are not supported")
+							}
+						}
 						if _UseDualStack == true {
 							return endpoint, fmt.Errorf("endpoint rule error, %s", "S3Express does not support Dual-stack.")
+						}
+						if exprVal := params.Endpoint; exprVal != nil {
+							_Endpoint := *exprVal
+							_ = _Endpoint
+							if exprVal := rulesfn.ParseURL(_Endpoint); exprVal != nil {
+								_url := *exprVal
+								_ = _url
+								uriString := func() string {
+									var out strings.Builder
+									out.WriteString(_url.Scheme)
+									out.WriteString("://")
+									out.WriteString(_url.Authority)
+									return out.String()
+								}()
+
+								uri, err := url.Parse(uriString)
+								if err != nil {
+									return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+								}
+
+								return smithyendpoints.Endpoint{
+									URI:     *uri,
+									Headers: http.Header{},
+									Properties: func() smithy.Properties {
+										var out smithy.Properties
+										smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+											{
+												SchemeID: "aws.auth#sigv4",
+												SignerProperties: func() smithy.Properties {
+													var sp smithy.Properties
+													smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+													smithyhttp.SetSigV4SigningName(&sp, "s3express")
+													smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+													smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+													return sp
+												}(),
+											},
+										})
+										return out
+									}(),
+								}, nil
+							}
 						}
 						if exprVal := rulesfn.SubString(_AccessPointName, 7, 15, true); exprVal != nil {
 							_s3expressAvailabilityZoneId := *exprVal
@@ -1094,6 +1145,60 @@ func (r *resolver) ResolveEndpoint(
 				if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
 					_partitionResult := *exprVal
 					_ = _partitionResult
+					if exprVal := params.Endpoint; exprVal != nil {
+						_Endpoint := *exprVal
+						_ = _Endpoint
+						if _UseDualStack == true {
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: DualStack and custom endpoint are not supported")
+						}
+					}
+					if _UseDualStack == true {
+						return endpoint, fmt.Errorf("endpoint rule error, %s", "S3Express does not support Dual-stack.")
+					}
+					if exprVal := params.Endpoint; exprVal != nil {
+						_Endpoint := *exprVal
+						_ = _Endpoint
+						if exprVal := rulesfn.ParseURL(_Endpoint); exprVal != nil {
+							_url := *exprVal
+							_ = _url
+							uriString := func() string {
+								var out strings.Builder
+								out.WriteString(_url.Scheme)
+								out.WriteString("://")
+								out.WriteString(_url.Authority)
+								return out.String()
+							}()
+
+							uri, err := url.Parse(uriString)
+							if err != nil {
+								return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+							}
+
+							return smithyendpoints.Endpoint{
+								URI:     *uri,
+								Headers: http.Header{},
+								Properties: func() smithy.Properties {
+									var out smithy.Properties
+									smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+										{
+											SchemeID: "aws.auth#sigv4",
+											SignerProperties: func() smithy.Properties {
+												var sp smithy.Properties
+												smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+												smithyhttp.SetSigV4SigningName(&sp, "s3express")
+												smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+												smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+												return sp
+											}(),
+										},
+									})
+									return out
+								}(),
+							}, nil
+						}
+					}
 					if _UseFIPS == true {
 						uriString := func() string {
 							var out strings.Builder

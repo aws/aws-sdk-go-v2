@@ -1,0 +1,8 @@
+{
+    "id": "95ae1473-4b8f-42da-999c-63eb52cc06f5",
+    "type": "feature",
+    "description": "No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

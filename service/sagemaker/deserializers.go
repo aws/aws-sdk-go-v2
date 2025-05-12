@@ -57086,7 +57086,7 @@ func awsAwsjson11_deserializeDocumentHumanLoopActivationConditionsConfig(v **typ
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SynthesizedJsonHumanLoopActivationConditions to be of type string, got %T instead", value)
+					return fmt.Errorf("expected HumanLoopActivationConditions to be of type string, got %T instead", value)
 				}
 				sv.HumanLoopActivationConditions = ptr.String(jtv)
 			}

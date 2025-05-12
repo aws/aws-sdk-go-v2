@@ -120,6 +120,10 @@ type GetFleetOutput struct {
 	// of this field.
 	Description *string
 
+	// The script that runs as a worker is starting up that you can use to provide
+	// additional configuration for workers in your fleet.
+	HostConfiguration *types.HostConfiguration
+
 	// The number of target workers in the fleet.
 	TargetWorkerCount *int32
 

@@ -59,7 +59,19 @@ type UpdateFleetInput struct {
 	// of this field.
 	DisplayName *string
 
+	// Provides a script that runs as a worker is starting up that you can use to
+	// provide additional configuration for workers in your fleet.
+	HostConfiguration *types.HostConfiguration
+
 	// The maximum number of workers in the fleet.
+	//
+	// Deadline Cloud limits the number of workers to less than or equal to the
+	// fleet's maximum worker count. The service maintains eventual consistency for the
+	// worker count. If you make multiple rapid calls to CreateWorker before the field
+	// updates, you might exceed your fleet's maximum worker count. For example, if
+	// your maxWorkerCount is 10 and you currently have 9 workers, making two quick
+	// CreateWorker calls might successfully create 2 workers instead of 1, resulting
+	// in 11 total workers.
 	MaxWorkerCount *int32
 
 	// The minimum number of workers in the fleet.

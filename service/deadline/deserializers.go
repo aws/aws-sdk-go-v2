@@ -6182,6 +6182,11 @@ func awsRestjson1_deserializeOpDocumentGetFleetOutput(v **GetFleetOutput, value 
 				sv.FleetId = ptr.String(jtv)
 			}
 
+		case "hostConfiguration":
+			if err := awsRestjson1_deserializeDocumentHostConfiguration(&sv.HostConfiguration, value); err != nil {
+				return err
+			}
+
 		case "maxWorkerCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18229,6 +18234,11 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkerOutput(v **UpdateWorkerOutput
 
 	for key, value := range shape {
 		switch key {
+		case "hostConfiguration":
+			if err := awsRestjson1_deserializeDocumentHostConfiguration(&sv.HostConfiguration, value); err != nil {
+				return err
+			}
+
 		case "log":
 			if err := awsRestjson1_deserializeDocumentLogConfiguration(&sv.Log, value); err != nil {
 				return err
@@ -22046,6 +22056,59 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHostConfiguration(v **types.HostConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HostConfiguration
+	if *v == nil {
+		sv = &types.HostConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "scriptBody":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HostConfigurationScript to be of type string, got %T instead", value)
+				}
+				sv.ScriptBody = ptr.String(jtv)
+			}
+
+		case "scriptTimeoutSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected HostConfigurationScriptTimeoutSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScriptTimeoutSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

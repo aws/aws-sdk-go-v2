@@ -170,15 +170,9 @@ type CreateLabelingJobInput struct {
 	//
 	// For named entity recognition jobs, in addition to "labels" , you must provide
 	// worker instructions in the label category configuration file using the
-	// "instructions" parameter: "instructions": {"shortInstruction":"
-	//
-	// Add header
-	//
-	//     Add Instructions
-	//
-	// ", "fullInstruction":" Add additional instructions.
-	//
-	// "} . For details and an example, see [Create a Named Entity Recognition Labeling Job (API)].
+	// "instructions" parameter: "instructions": {"shortInstruction":"<h1>Add
+	// header</h1><p>Add Instructions</p>", "fullInstruction":"<p>Add additional
+	// instructions.</p>"} . For details and an example, see [Create a Named Entity Recognition Labeling Job (API)].
 	//
 	// For all other [built-in task types] and [custom tasks], your label category configuration file must be a JSON file
 	// in the following format. Identify the labels you want to use by replacing

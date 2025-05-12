@@ -45,7 +45,8 @@ type CreateDataLakeDatasetInput struct {
 	// This member is required.
 	Name *string
 
-	// The name space of the dataset.
+	// The namespace of the dataset, besides the custom defined namespace, every
+	// instance comes with below pre-defined namespaces:
 	//
 	//   - asc - For information on the Amazon Web Services Supply Chain supported
 	//   datasets see [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html].
@@ -60,8 +61,16 @@ type CreateDataLakeDatasetInput struct {
 	// The description of the dataset.
 	Description *string
 
-	// The custom schema of the data lake dataset and is only required when the name
-	// space is default.
+	// The partition specification of the dataset. Partitioning can effectively
+	// improve the dataset query performance by reducing the amount of data scanned
+	// during query execution. But partitioning or not will affect how data get
+	// ingested by data ingestion methods, such as SendDataIntegrationEvent's dataset
+	// UPSERT will upsert records within partition (instead of within whole dataset).
+	// For more details, refer to those data ingestion documentations.
+	PartitionSpec *types.DataLakeDatasetPartitionSpec
+
+	// The custom schema of the data lake dataset and required for dataset in default
+	// and custom namespaces.
 	Schema *types.DataLakeDatasetSchema
 
 	// The tags of the dataset.
