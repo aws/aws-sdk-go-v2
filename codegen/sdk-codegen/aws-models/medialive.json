@@ -1718,6 +1718,26 @@
                 "smithy.api#documentation": "Av1 Look Ahead Rate Control"
             }
         },
+        "com.amazonaws.medialive#Av1RateControlMode": {
+            "type": "enum",
+            "members": {
+                "CBR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CBR"
+                    }
+                },
+                "QVBR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QVBR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Av1 Rate Control Mode"
+            }
+        },
         "com.amazonaws.medialive#Av1SceneChangeDetect": {
             "type": "enum",
             "members": {
@@ -1862,6 +1882,20 @@
                     "traits": {
                         "smithy.api#documentation": "Configures the timecode burn-in feature. If you enable this feature, the timecode will become part of the video.",
                         "smithy.api#jsonName": "timecodeBurninSettings"
+                    }
+                },
+                "Bitrate": {
+                    "target": "com.amazonaws.medialive#__integerMin50000Max8000000",
+                    "traits": {
+                        "smithy.api#documentation": "Average bitrate in bits/second. Required when the rate control mode is CBR. Not used for QVBR.",
+                        "smithy.api#jsonName": "bitrate"
+                    }
+                },
+                "RateControlMode": {
+                    "target": "com.amazonaws.medialive#Av1RateControlMode",
+                    "traits": {
+                        "smithy.api#documentation": "Rate control mode.\n\nQVBR: Quality will match the specified quality level except when it is constrained by the\nmaximum bitrate.  Recommended if you or your viewers pay for bandwidth.\n\nCBR: Quality varies, depending on the video complexity. Recommended only if you distribute\nyour assets to devices that cannot handle variable bitrates.",
+                        "smithy.api#jsonName": "rateControlMode"
                     }
                 }
             },
@@ -28521,6 +28555,13 @@
                     "traits": {
                         "smithy.api#documentation": "SRT settings for an SRT output; one destination for each redundant encoder.",
                         "smithy.api#jsonName": "srtSettings"
+                    }
+                },
+                "LogicalInterfaceNames": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "Optional assignment of an output to a logical interface on the Node. Only applies to on premises channels.",
+                        "smithy.api#jsonName": "logicalInterfaceNames"
                     }
                 }
             },

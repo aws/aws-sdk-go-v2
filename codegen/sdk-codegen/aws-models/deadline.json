@@ -22,7 +22,7 @@
                 "selections": {
                     "target": "com.amazonaws.deadline#AcceleratorSelections",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of accelerator capabilities requested for this fleet. Only Amazon Elastic Compute Cloud instances\n         that provide these capabilities will be used. For example, if you specify both L4 and T4\n         chips, Deadline Cloud will use Amazon EC2 instances that have either the L4 or the T4 chip\n         installed.</p>",
+                        "smithy.api#documentation": "<p>A list of accelerator capabilities requested for this fleet. Only Amazon Elastic Compute Cloud instances that provide these capabilities will be used. For example, if you specify both L4 and T4 chips, Deadline Cloud will use Amazon EC2 instances that have either the L4 or the T4 chip installed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -34,7 +34,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the GPU accelerators used for jobs processed by a\n         fleet.</p>"
+                "smithy.api#documentation": "<p>Provides information about the GPU accelerators used for jobs processed by a fleet.</p>"
             }
         },
         "com.amazonaws.deadline#AcceleratorCountRange": {
@@ -55,7 +55,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the maximum and minimum number of GPU accelerators required for a worker\n         instance..</p>"
+                "smithy.api#documentation": "<p>Defines the maximum and minimum number of GPU accelerators required for a worker instance..</p>"
             }
         },
         "com.amazonaws.deadline#AcceleratorName": {
@@ -102,7 +102,7 @@
                 "name": {
                     "target": "com.amazonaws.deadline#AcceleratorName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the chip used by the GPU accelerator.</p>\n         <p>If you specify <code>l4</code> as the name of the accelerator, you must specify\n            <code>latest</code> or <code>grid:r550</code> as the runtime.</p>\n         <p>The available GPU accelerators are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>t4</code> - NVIDIA T4 Tensor Core GPU</p>\n            </li>\n            <li>\n               <p>\n                  <code>a10g</code> - NVIDIA A10G Tensor Core GPU</p>\n            </li>\n            <li>\n               <p>\n                  <code>l4</code> - NVIDIA L4 Tensor Core GPU</p>\n            </li>\n            <li>\n               <p>\n                  <code>l40s</code> - NVIDIA L40S Tensor Core GPU</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the chip used by the GPU accelerator.</p> <p>If you specify <code>l4</code> as the name of the accelerator, you must specify <code>latest</code> or <code>grid:r550</code> as the runtime.</p> <p>The available GPU accelerators are:</p> <ul> <li> <p> <code>t4</code> - NVIDIA T4 Tensor Core GPU</p> </li> <li> <p> <code>a10g</code> - NVIDIA A10G Tensor Core GPU</p> </li> <li> <p> <code>l4</code> - NVIDIA L4 Tensor Core GPU</p> </li> <li> <p> <code>l40s</code> - NVIDIA L40S Tensor Core GPU</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -110,7 +110,7 @@
                     "target": "com.amazonaws.deadline#AcceleratorRuntime",
                     "traits": {
                         "smithy.api#default": "latest",
-                        "smithy.api#documentation": "<p>Specifies the runtime driver to use for the GPU accelerator. You must use the same\n         runtime for all GPUs. </p>\n         <p>You can choose from the following runtimes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>latest</code> - Use the latest runtime available for the chip. If you\n               specify <code>latest</code> and a new version of the runtime is released, the new\n               version of the runtime is used.</p>\n            </li>\n            <li>\n               <p>\n                  <code>grid:r550</code> - <a href=\"https://docs.nvidia.com/vgpu/17.0/index.html\">NVIDIA vGPU software 17</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>grid:r535</code> - <a href=\"https://docs.nvidia.com/vgpu/16.0/index.html\">NVIDIA vGPU software 16</a>\n               </p>\n            </li>\n         </ul>\n         <p>If you don't specify a runtime, Deadline Cloud uses <code>latest</code> as the default. However,\n         if you have multiple accelerators and specify <code>latest</code> for some and leave others\n         blank, Deadline Cloud raises an exception.</p>"
+                        "smithy.api#documentation": "<p>Specifies the runtime driver to use for the GPU accelerator. You must use the same runtime for all GPUs. </p> <p>You can choose from the following runtimes:</p> <ul> <li> <p> <code>latest</code> - Use the latest runtime available for the chip. If you specify <code>latest</code> and a new version of the runtime is released, the new version of the runtime is used.</p> </li> <li> <p> <code>grid:r550</code> - <a href=\"https://docs.nvidia.com/vgpu/17.0/index.html\">NVIDIA vGPU software 17</a> </p> </li> <li> <p> <code>grid:r535</code> - <a href=\"https://docs.nvidia.com/vgpu/16.0/index.html\">NVIDIA vGPU software 16</a> </p> </li> </ul> <p>If you don't specify a runtime, Deadline Cloud uses <code>latest</code> as the default. However, if you have multiple accelerators and specify <code>latest</code> for some and leave others blank, Deadline Cloud raises an exception.</p>"
                     }
                 }
             },
@@ -142,7 +142,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the maximum and minimum amount of memory, in MiB, to use for the\n         accelerator.</p>"
+                "smithy.api#documentation": "<p>Defines the maximum and minimum amount of memory, in MiB, to use for the accelerator.</p>"
             }
         },
         "com.amazonaws.deadline#AcceleratorType": {
@@ -929,7 +929,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Get Amazon Web Services credentials from the fleet role. The IAM permissions of the credentials are\n         scoped down to have read-only access.</p>",
+                "smithy.api#documentation": "<p>Get Amazon Web Services credentials from the fleet role. The IAM permissions of the credentials are scoped down to have read-only access.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -1105,7 +1105,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Gets Amazon Web Services credentials from the queue role. The IAM permissions of the credentials are\n         scoped down to have read-only access.</p>",
+                "smithy.api#documentation": "<p>Gets Amazon Web Services credentials from the queue role. The IAM permissions of the credentials are scoped down to have read-only access.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -1545,7 +1545,7 @@
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The farm ID of the worker that's fetching job details. The worker must have an\n         assignment on a job to fetch job details.</p>",
+                        "smithy.api#documentation": "<p>The farm ID of the worker that's fetching job details. The worker must have an assignment on a job to fetch job details.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1553,7 +1553,7 @@
                 "fleetId": {
                     "target": "com.amazonaws.deadline#FleetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fleet ID of the worker that's fetching job details. The worker must have an\n         assignment on a job to fetch job details.</p>",
+                        "smithy.api#documentation": "<p>The fleet ID of the worker that's fetching job details. The worker must have an assignment on a job to fetch job details.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1629,7 +1629,7 @@
                 "description": {
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description for the budget action to add.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>A description for the budget action to add.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 }
             },
@@ -1803,14 +1803,14 @@
                 "status": {
                     "target": "com.amazonaws.deadline#BudgetStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the budget.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>–The budget is being evaluated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code>–The budget is inactive. This can include Expired,\n               Canceled, or deleted Deleted statuses.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the budget.</p> <ul> <li> <p> <code>ACTIVE</code>–The budget is being evaluated.</p> </li> <li> <p> <code>INACTIVE</code>–The budget is inactive. This can include Expired, Canceled, or deleted Deleted statuses.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the budget summary to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the budget summary to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1820,7 +1820,7 @@
                         "smithy.api#deprecated": {
                             "message": "ListBudgets no longer supports description. Use GetBudget if description is needed."
                         },
-                        "smithy.api#documentation": "<p>The description of the budget summary.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the budget summary.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "approximateDollarLimit": {
@@ -2009,7 +2009,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Your request has conflicting operations. This can occur if you're trying to perform more\n         than one operation on the same resource at the same time.</p>",
+                "smithy.api#documentation": "<p>Your request has conflicting operations. This can occur if you're trying to perform more than one operation on the same resource at the same time.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -2147,7 +2147,7 @@
                 "targetS3Location": {
                     "target": "com.amazonaws.deadline#S3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket name and key where you would like to add a copy of the job\n         template.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket name and key where you would like to add a copy of the job template.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2265,7 +2265,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the budget.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the budget.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2273,7 +2273,7 @@
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
                         "smithy.api#default": "",
-                        "smithy.api#documentation": "<p>The description of the budget.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the budget.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "approximateDollarLimit": {
@@ -2357,7 +2357,7 @@
                         "deadline:TagResource"
                     ]
                 },
-                "smithy.api#documentation": "<p>Creates a farm to allow space for queues and fleets. Farms are the space where the\n         components of your renders gather and are pieced together in the cloud. Farms contain\n         budgets and allow you to enforce permissions. Deadline Cloud farms are a useful container for\n         large projects.</p>",
+                "smithy.api#documentation": "<p>Creates a farm to allow space for queues and fleets. Farms are the space where the components of your renders gather and are pieced together in the cloud. Farms contain budgets and allow you to enforce permissions. Deadline Cloud farms are a useful container for large projects.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -2383,7 +2383,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the farm.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the farm.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2391,7 +2391,7 @@
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
                         "smithy.api#default": "",
-                        "smithy.api#documentation": "<p>The description of the farm.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the farm.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "kmsKeyArn": {
@@ -2469,7 +2469,7 @@
                         "logs:CreateLogGroup"
                     ]
                 },
-                "smithy.api#documentation": "<p>Creates a fleet. Fleets gather information relating to compute, or capacity, for renders\n         within your farms. You can choose to manage your own capacity or opt to have fleets fully\n         managed by Deadline Cloud.</p>",
+                "smithy.api#documentation": "<p>Creates a fleet. Fleets gather information relating to compute, or capacity, for renders within your farms. You can choose to manage your own capacity or opt to have fleets fully managed by Deadline Cloud.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -2503,7 +2503,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the fleet.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the fleet.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2511,7 +2511,7 @@
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
                         "smithy.api#default": "",
-                        "smithy.api#documentation": "<p>The description of the fleet.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the fleet.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "roleArn": {
@@ -2531,14 +2531,14 @@
                 "maxWorkerCount": {
                     "target": "com.amazonaws.deadline#MinZeroMaxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of workers for the fleet.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of workers for the fleet.</p> <p>Deadline Cloud limits the number of workers to less than or equal to the fleet's maximum worker count. The service maintains eventual consistency for the worker count. If you make multiple rapid calls to <code>CreateWorker</code> before the field updates, you might exceed your fleet's maximum worker count. For example, if your <code>maxWorkerCount</code> is 10 and you currently have 9 workers, making two quick <code>CreateWorker</code> calls might successfully create 2 workers instead of 1, resulting in 11 total workers.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "configuration": {
                     "target": "com.amazonaws.deadline#FleetConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for the fleet. Customer managed fleets are self-managed.\n         Service managed Amazon EC2 fleets are managed by Deadline Cloud.</p>",
+                        "smithy.api#documentation": "<p>The configuration settings for the fleet. Customer managed fleets are self-managed. Service managed Amazon EC2 fleets are managed by Deadline Cloud.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2546,6 +2546,12 @@
                     "target": "com.amazonaws.deadline#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>"
+                    }
+                },
+                "hostConfiguration": {
+                    "target": "com.amazonaws.deadline#HostConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet.</p>"
                     }
                 }
             },
@@ -2605,7 +2611,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Creates a job. A job is a set of instructions that Deadline Cloud uses to schedule\n         and run work on available workers. For more information, see <a href=\"https://docs.aws.amazon.com/deadline-cloud/latest/userguide/deadline-cloud-jobs.html\">Deadline Cloud\n            jobs</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a job. A job is a set of instructions that Deadline Cloud uses to schedule and run work on available workers. For more information, see <a href=\"https://docs.aws.amazon.com/deadline-cloud/latest/userguide/deadline-cloud-jobs.html\">Deadline Cloud jobs</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -2659,7 +2665,7 @@
                 "priority": {
                     "target": "com.amazonaws.deadline#JobPriority",
                     "traits": {
-                        "smithy.api#documentation": "<p>The priority of the job. The highest priority (first scheduled) is 100. When two jobs\n         have the same priority, the oldest job is scheduled first.</p>",
+                        "smithy.api#documentation": "<p>The priority of the job. The highest priority (first scheduled) is 100. When two jobs have the same priority, the oldest job is scheduled first.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2672,7 +2678,7 @@
                 "attachments": {
                     "target": "com.amazonaws.deadline#Attachments",
                     "traits": {
-                        "smithy.api#documentation": "<p>The attachments for the job. Attach files required for the job to run to a render\n         job.</p>"
+                        "smithy.api#documentation": "<p>The attachments for the job. Attach files required for the job to run to a render job.</p>"
                     }
                 },
                 "storageProfileId": {
@@ -2685,7 +2691,7 @@
                     "target": "com.amazonaws.deadline#CreateJobTargetTaskRunStatus",
                     "traits": {
                         "smithy.api#default": "READY",
-                        "smithy.api#documentation": "<p>The initial job status when it is created. Jobs that are created with a\n            <code>SUSPENDED</code> status will not run until manually requeued.</p>"
+                        "smithy.api#documentation": "<p>The initial job status when it is created. Jobs that are created with a <code>SUSPENDED</code> status will not run until manually requeued.</p>"
                     }
                 },
                 "maxFailedTasksCount": {
@@ -2705,7 +2711,7 @@
                 "maxWorkerCount": {
                     "target": "com.amazonaws.deadline#MaxWorkerCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of worker hosts that can concurrently process a job. When the\n            <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the\n         job, even if the fleets assigned to the job's queue has available workers.</p>\n         <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no\n         maximum number of workers.</p>\n         <p>If you don't specify the <code>maxWorkerCount</code>, Deadline Cloud won't throttle\n         the number of workers used to process the job.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of worker hosts that can concurrently process a job. When the <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the job, even if the fleets assigned to the job's queue has available workers.</p> <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no maximum number of workers.</p> <p>If you don't specify the <code>maxWorkerCount</code>, Deadline Cloud won't throttle the number of workers used to process the job.</p>"
                     }
                 },
                 "sourceJobId": {
@@ -2794,7 +2800,7 @@
                         "ec2:DescribeVpcEndpoints"
                     ]
                 },
-                "smithy.api#documentation": "<p>Creates a license endpoint to integrate your various licensed software used for\n         rendering on Deadline Cloud.</p>",
+                "smithy.api#documentation": "<p>Creates a license endpoint to integrate your various licensed software used for rendering on Deadline Cloud.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -2908,7 +2914,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Creates a limit that manages the distribution of shared resources, such as floating\n         licenses. A limit can throttle work assignments, help manage workloads, and track current\n         usage. Before you use a limit, you must associate the limit with one or more queues. </p>\n         <p>You must add the <code>amountRequirementName</code> to a step in a job template to\n         declare the limit requirement.</p>",
+                "smithy.api#documentation": "<p>Creates a limit that manages the distribution of shared resources, such as floating licenses. A limit can throttle work assignments, help manage workloads, and track current usage. Before you use a limit, you must associate the limit with one or more queues. </p> <p>You must add the <code>amountRequirementName</code> to a step in a job template to declare the limit requirement.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -2934,21 +2940,21 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the limit.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "amountRequirementName": {
                     "target": "com.amazonaws.deadline#AmountRequirementName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that you specify as the <code>name</code> in the <code>amounts</code> field of\n         the <code>hostRequirements</code> in a step of a job template to declare the limit\n         requirement.</p>",
+                        "smithy.api#documentation": "<p>The value that you specify as the <code>name</code> in the <code>amounts</code> field of the <code>hostRequirements</code> in a step of a job template to declare the limit requirement.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "maxCount": {
                     "target": "com.amazonaws.deadline#MaxCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are\n         in use, steps that require the limit won't be scheduled until the resource is\n         available.</p>\n         <p>The <code>maxCount</code> must not be 0. If the value is -1, there is no restriction on\n         the number of resources that can be acquired for this limit.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are in use, steps that require the limit won't be scheduled until the resource is available.</p> <p>The <code>maxCount</code> must not be 0. If the value is -1, there is no restriction on the number of resources that can be acquired for this limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2964,7 +2970,7 @@
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
                         "smithy.api#default": "",
-                        "smithy.api#documentation": "<p>A description of the limit. A description helps you identify the purpose of the\n         limit.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>A description of the limit. A description helps you identify the purpose of the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 }
             },
@@ -2978,7 +2984,7 @@
                 "limitId": {
                     "target": "com.amazonaws.deadline#LimitId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the limit. Use this identifier in other operations, such as\n            <code>CreateQueueLimitAssociation</code> and <code>DeleteLimit</code>.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the limit. Use this identifier in other operations, such as <code>CreateQueueLimitAssociation</code> and <code>DeleteLimit</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3026,7 +3032,7 @@
                         "iam:PassRole"
                     ]
                 },
-                "smithy.api#documentation": "<p>Creates an Amazon Web Services Deadline Cloud monitor that you can use to view your farms, queues, and\n         fleets. After you submit a job, you can track the progress of the tasks and steps that make\n         up the job, and then download the job's results. </p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Web Services Deadline Cloud monitor that you can use to view your farms, queues, and fleets. After you submit a job, you can track the progress of the tasks and steps that make up the job, and then download the job's results. </p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -3052,7 +3058,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name that you give the monitor that is displayed in the Deadline Cloud console.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The name that you give the monitor that is displayed in the Deadline Cloud console.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3066,14 +3072,14 @@
                 "subdomain": {
                     "target": "com.amazonaws.deadline#Subdomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subdomain to use when creating the monitor URL. The full URL of the monitor is\n         subdomain.Region.deadlinecloud.amazonaws.com.</p>",
+                        "smithy.api#documentation": "<p>The subdomain to use when creating the monitor URL. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.deadline#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the monitor uses to connect to Deadline Cloud. Every user\n         that signs in to the monitor using IAM Identity Center uses this role to access Deadline Cloud\n         resources.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the monitor uses to connect to Deadline Cloud. Every user that signs in to the monitor using IAM Identity Center uses this role to access Deadline Cloud resources.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3148,7 +3154,7 @@
                         "s3:ListBucket"
                     ]
                 },
-                "smithy.api#documentation": "<p>Creates a queue to coordinate the order in which jobs run on a farm. A queue can also\n         specify where to pull resources and indicate where to output completed jobs.</p>",
+                "smithy.api#documentation": "<p>Creates a queue to coordinate the order in which jobs run on a farm. A queue can also specify where to pull resources and indicate where to output completed jobs.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -3238,7 +3244,7 @@
                 "priority": {
                     "target": "com.amazonaws.deadline#Priority",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the priority of the environments in the queue from 0 to 10,000, where 0 is the\n         highest priority (activated first and deactivated last). If two environments share the same\n         priority value, the environment created first takes higher priority.</p>",
+                        "smithy.api#documentation": "<p>Sets the priority of the environments in the queue from 0 to 10,000, where 0 is the highest priority (activated first and deactivated last). If two environments share the same priority value, the environment created first takes higher priority.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3399,7 +3405,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Associates a limit with a particular queue. After the limit is associated, all workers\n         for jobs that specify the limit associated with the queue are subject to the limit. You\n         can't associate two limits with the same <code>amountRequirementName</code> to the same\n         queue.</p>",
+                "smithy.api#documentation": "<p>Associates a limit with a particular queue. After the limit is associated, all workers for jobs that specify the limit associated with the queue are subject to the limit. You can't associate two limits with the same <code>amountRequirementName</code> to the same queue.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -3478,7 +3484,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the queue.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the queue.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3486,7 +3492,7 @@
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
                         "smithy.api#default": "",
-                        "smithy.api#documentation": "<p>The description of the queue.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the queue.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "defaultBudgetAction": {
@@ -3499,7 +3505,7 @@
                 "jobAttachmentSettings": {
                     "target": "com.amazonaws.deadline#JobAttachmentSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job attachment settings for the queue. These are the Amazon S3 bucket name and the Amazon S3\n         prefix.</p>"
+                        "smithy.api#documentation": "<p>The job attachment settings for the queue. These are the Amazon S3 bucket name and the Amazon S3 prefix.</p>"
                     }
                 },
                 "roleArn": {
@@ -3588,7 +3594,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Creates a storage profile that specifies the operating system, file type, and file\n         location of resources used on a farm.</p>",
+                "smithy.api#documentation": "<p>Creates a storage profile that specifies the operating system, file type, and file location of resources used on a farm.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -3622,7 +3628,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the storage profile.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the storage profile.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3700,7 +3706,7 @@
                         "deadline:ListTagsForResource"
                     ]
                 },
-                "smithy.api#documentation": "<p>Creates a worker. A worker tells your instance how much processing power (vCPU), and\n         memory (GiB) you’ll need to assemble the digital assets held within a particular instance.\n         You can specify certain instance types to use, or let the worker know which instances types\n         to exclude.</p>",
+                "smithy.api#documentation": "<p>Creates a worker. A worker tells your instance how much processing power (vCPU), and memory (GiB) you’ll need to assemble the digital assets held within a particular instance. You can specify certain instance types to use, or let the worker know which instances types to exclude.</p> <p>Deadline Cloud limits the number of workers to less than or equal to the fleet's maximum worker count. The service maintains eventual consistency for the worker count. If you make multiple rapid calls to <code>CreateWorker</code> before the field updates, you might exceed your fleet's maximum worker count. For example, if your <code>maxWorkerCount</code> is 10 and you currently have 9 workers, making two quick <code>CreateWorker</code> calls might successfully create 2 workers instead of 1, resulting in 11 total workers.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "scheduling."
                 },
@@ -3830,7 +3836,7 @@
                 "tagPropagationMode": {
                     "target": "com.amazonaws.deadline#TagPropagationMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether tags associated with a fleet are attached to workers when the worker\n         is launched. </p>\n         <p>When the <code>tagPropagationMode</code> is set to\n            <code>PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH</code> any tag associated with a fleet is\n         attached to workers when they launch. If the tags for a fleet change, the tags associated\n         with running workers <b>do not</b> change.</p>\n         <p>If you don't specify <code>tagPropagationMode</code>, the default is\n            <code>NO_PROPAGATION</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether tags associated with a fleet are attached to workers when the worker is launched. </p> <p>When the <code>tagPropagationMode</code> is set to <code>PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH</code> any tag associated with a fleet is attached to workers when they launch. If the tags for a fleet change, the tags associated with running workers <b>do not</b> change.</p> <p>If you don't specify <code>tagPropagationMode</code>, the default is <code>NO_PROPAGATION</code>.</p>"
                     }
                 }
             },
@@ -4124,7 +4130,7 @@
                         "x-amz-apigw-id"
                     ]
                 },
-                "smithy.api#documentation": "<p>The Amazon Web Services Deadline Cloud API provides infrastructure and centralized management for your\n         projects. Use the Deadline Cloud API to onboard users, assign projects, and attach permissions\n         specific to their job function.</p>\n         <p>With Deadline Cloud, content production teams can deploy resources for their workforce\n         securely in the cloud, reducing the costs of added physical infrastructure. Keep your\n         content production operations secure, while allowing your contributors to access the tools\n         they need, such as scalable high-speed storage, licenses, and cost management\n         services.</p>",
+                "smithy.api#documentation": "<p>The Amazon Web Services Deadline Cloud API provides infrastructure and centralized management for your projects. Use the Deadline Cloud API to onboard users, assign projects, and attach permissions specific to their job function.</p> <p>With Deadline Cloud, content production teams can deploy resources for their workforce securely in the cloud, reducing the costs of added physical infrastructure. Keep your content production operations secure, while allowing your contributors to access the tools they need, such as scalable high-speed storage, licenses, and cost management services.</p>",
                 "smithy.api#title": "AWSDeadlineCloud",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -5166,7 +5172,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Removes a limit from the specified farm. Before you delete a limit you must use the\n            <code>DeleteQueueLimitAssociation</code> operation to remove the association with any\n         queues. </p>",
+                "smithy.api#documentation": "<p>Removes a limit from the specified farm. Before you delete a limit you must use the <code>DeleteQueueLimitAssociation</code> operation to remove the association with any queues. </p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -5317,7 +5323,7 @@
                         "sso:DeleteApplication"
                     ]
                 },
-                "smithy.api#documentation": "<p>Removes a Deadline Cloud monitor. After you delete a monitor, you can create a new one and\n         attach farms to the monitor.</p>",
+                "smithy.api#documentation": "<p>Removes a Deadline Cloud monitor. After you delete a monitor, you can create a new one and attach farms to the monitor.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -5335,7 +5341,7 @@
                 "monitorId": {
                     "target": "com.amazonaws.deadline#MonitorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the monitor to delete. This ID is returned by the\n            <code>CreateMonitor</code> operation, and is included in the response to the\n            <code>GetMonitor</code> operation.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the monitor to delete. This ID is returned by the <code>CreateMonitor</code> operation, and is included in the response to the <code>GetMonitor</code> operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5388,7 +5394,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Deletes a queue.</p>\n         <important>\n            <p>You can't recover the jobs in a queue if you delete the queue. Deleting the queue\n            also deletes the jobs in that queue.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Deletes a queue.</p> <important> <p>You can't recover the jobs in a queue if you delete the queue. Deleting the queue also deletes the jobs in that queue.</p> </important>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -5612,7 +5618,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Removes the association between a queue and a limit. You must use the\n            <code>UpdateQueueLimitAssociation</code> operation to set the status to\n            <code>STOP_LIMIT_USAGE_AND_COMPLETE_TASKS</code> or\n            <code>STOP_LIMIT_USAGE_AND_CANCEL_TASKS</code>. The status does not change immediately.\n         Use the <code>GetQueueLimitAssociation</code> operation to see if the status changed to\n            <code>STOPPED</code> before deleting the association.</p>",
+                "smithy.api#documentation": "<p>Removes the association between a queue and a limit. You must use the <code>UpdateQueueLimitAssociation</code> operation to set the status to <code>STOP_LIMIT_USAGE_AND_COMPLETE_TASKS</code> or <code>STOP_LIMIT_USAGE_AND_CANCEL_TASKS</code>. The status does not change immediately. Use the <code>GetQueueLimitAssociation</code> operation to see if the status changed to <code>STOPPED</code> before deleting the association.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -5630,7 +5636,7 @@
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the farm that contains the queue and limit to\n         disassociate.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the farm that contains the queue and limit to disassociate.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6751,7 +6757,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the farm.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the farm.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7214,7 +7220,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the fleet summary to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the fleet summary to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7395,21 +7401,21 @@
                 "status": {
                     "target": "com.amazonaws.deadline#BudgetStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the budget.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>–Get a budget being evaluated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code>–Get an inactive budget. This can include expired,\n               canceled, or deleted statuses.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the budget.</p> <ul> <li> <p> <code>ACTIVE</code>–Get a budget being evaluated.</p> </li> <li> <p> <code>INACTIVE</code>–Get an inactive budget. This can include expired, canceled, or deleted statuses.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the budget.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the budget.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the budget.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the budget.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "approximateDollarLimit": {
@@ -7551,14 +7557,14 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the farm.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the farm.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the farm.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the farm.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "kmsKeyArn": {
@@ -7727,14 +7733,14 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the fleet.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the fleet.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the fleet.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the fleet.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "status": {
@@ -7747,7 +7753,7 @@
                 "autoScalingStatus": {
                     "target": "com.amazonaws.deadline#AutoScalingStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Auto Scaling status of the fleet. Either <code>GROWING</code>, <code>STEADY</code>, or\n            <code>SHRINKING</code>.</p>"
+                        "smithy.api#documentation": "<p>The Auto Scaling status of the fleet. Either <code>GROWING</code>, <code>STEADY</code>, or <code>SHRINKING</code>.</p>"
                     }
                 },
                 "targetWorkerCount": {
@@ -7784,10 +7790,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "hostConfiguration": {
+                    "target": "com.amazonaws.deadline#HostConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet.</p>"
+                    }
+                },
                 "capabilities": {
                     "target": "com.amazonaws.deadline#FleetCapabilities",
                     "traits": {
-                        "smithy.api#documentation": "<p>Outlines what the fleet is capable of for minimums, maximums, and naming, in addition to\n         attribute names and values.</p>"
+                        "smithy.api#documentation": "<p>Outlines what the fleet is capable of for minimums, maximums, and naming, in addition to attribute names and values.</p>"
                     }
                 },
                 "roleArn": {
@@ -8132,13 +8144,13 @@
                 "description": {
                     "target": "com.amazonaws.deadline#JobDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the job.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the job.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "maxWorkerCount": {
                     "target": "com.amazonaws.deadline#MaxWorkerCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of worker hosts that can concurrently process a job. When the\n            <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the\n         job, even if the fleets assigned to the job's queue has available workers.</p>\n         <p>If you don't set the <code>maxWorkerCount</code> when you create a job, this value is\n         not returned in the response.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of worker hosts that can concurrently process a job. When the <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the job, even if the fleets assigned to the job's queue has available workers.</p> <p>If you don't set the <code>maxWorkerCount</code> when you create a job, this value is not returned in the response.</p>"
                     }
                 },
                 "sourceJobId": {
@@ -8399,21 +8411,21 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the limit.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "amountRequirementName": {
                     "target": "com.amazonaws.deadline#AmountRequirementName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that you specify as the <code>name</code> in the <code>amounts</code> field of\n         the <code>hostRequirements</code> in a step of a job template to declare the limit\n         requirement.</p>",
+                        "smithy.api#documentation": "<p>The value that you specify as the <code>name</code> in the <code>amounts</code> field of the <code>hostRequirements</code> in a step of a job template to declare the limit requirement.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "maxCount": {
                     "target": "com.amazonaws.deadline#MaxCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are\n         in use, steps that require the limit won't be scheduled until the resource is\n         available.</p>\n         <p>The <code>maxValue</code> must not be 0. If the value is -1, there is no restriction on\n         the number of resources that can be acquired for this limit.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are in use, steps that require the limit won't be scheduled until the resource is available.</p> <p>The <code>maxValue</code> must not be 0. If the value is -1, there is no restriction on the number of resources that can be acquired for this limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8460,14 +8472,14 @@
                 "currentCount": {
                     "target": "com.amazonaws.deadline#MinZeroMaxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of resources from the limit that are being used by jobs. The result is\n         delayed and may not be the count at the time that you called the operation.</p>",
+                        "smithy.api#documentation": "<p>The number of resources from the limit that are being used by jobs. The result is delayed and may not be the count at the time that you called the operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the limit that helps identify what the limit is used for.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the limit that helps identify what the limit is used for.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 }
             },
@@ -8524,7 +8536,7 @@
                 "monitorId": {
                     "target": "com.amazonaws.deadline#MonitorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the monitor. This ID is returned by the\n            <code>CreateMonitor</code> operation.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the monitor. This ID is returned by the <code>CreateMonitor</code> operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8547,28 +8559,28 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name used to identify the monitor on the Deadline Cloud console.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The name used to identify the monitor on the Deadline Cloud console.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "subdomain": {
                     "target": "com.amazonaws.deadline#Subdomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subdomain used for the monitor URL. The full URL of the monitor is\n         subdomain.Region.deadlinecloud.amazonaws.com.</p>",
+                        "smithy.api#documentation": "<p>The subdomain used for the monitor URL. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "url": {
                     "target": "com.amazonaws.deadline#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The complete URL of the monitor. The full URL of the monitor is\n         subdomain.Region.deadlinecloud.amazonaws.com.</p>",
+                        "smithy.api#documentation": "<p>The complete URL of the monitor. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.deadline#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for the monitor. Users of the monitor use this role to\n         access Deadline Cloud resources.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for the monitor. Users of the monitor use this role to access Deadline Cloud resources.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9197,14 +9209,14 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the queue.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the queue.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the queue.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the queue.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "farmId": {
@@ -9217,7 +9229,7 @@
                 "status": {
                     "target": "com.amazonaws.deadline#QueueStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the queue.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>–The queue is active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SCHEDULING</code>–The queue is scheduling.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SCHEDULING_BLOCKED</code>–The queue scheduling is blocked. See the\n               provided reason.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the queue.</p> <ul> <li> <p> <code>ACTIVE</code>–The queue is active.</p> </li> <li> <p> <code>SCHEDULING</code>–The queue is scheduling.</p> </li> <li> <p> <code>SCHEDULING_BLOCKED</code>–The queue scheduling is blocked. See the provided reason.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9476,7 +9488,7 @@
                 "processExitCode": {
                     "target": "com.amazonaws.deadline#ProcessExitCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process exit code. The default Deadline Cloud worker agent converts unsigned\n         32-bit exit codes to signed 32-bit exit codes.</p>"
+                        "smithy.api#documentation": "<p>The process exit code. The default Deadline Cloud worker agent converts unsigned 32-bit exit codes to signed 32-bit exit codes.</p>"
                     }
                 },
                 "progressMessage": {
@@ -9495,7 +9507,7 @@
                 "acquiredLimits": {
                     "target": "com.amazonaws.deadline#AcquiredLimits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The limits and their amounts acquired during a session action. If no limits were\n         acquired during the session, this field isn't returned.</p>"
+                        "smithy.api#documentation": "<p>The limits and their amounts acquired during a session action. If no limits were acquired during the session, this field isn't returned.</p>"
                     }
                 }
             },
@@ -9662,7 +9674,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Gets a set of statistics for queues or farms. Before you can call the\n            <code>GetSessionStatisticsAggregation</code> operation, you must first call the\n            <code>StartSessionsStatisticsAggregation</code> operation. Statistics are available for\n         1 hour after you call the <code>StartSessionsStatisticsAggregation</code> operation.</p>",
+                "smithy.api#documentation": "<p>Gets a set of statistics for queues or farms. Before you can call the <code>GetSessionStatisticsAggregation</code> operation, you must first call the <code>StartSessionsStatisticsAggregation</code> operation. Statistics are available for 1 hour after you call the <code>StartSessionsStatisticsAggregation</code> operation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -9686,7 +9698,7 @@
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the farm to include in the statistics. This should be the same as the\n         farm ID used in the call to the <code>StartSessionsStatisticsAggregation</code>\n         operation.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the farm to include in the statistics. This should be the same as the farm ID used in the call to the <code>StartSessionsStatisticsAggregation</code> operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9694,7 +9706,7 @@
                 "aggregationId": {
                     "target": "com.amazonaws.deadline#AggregationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier returned by the <code>StartSessionsStatisticsAggregation</code> operation\n         that identifies the aggregated statistics.</p>",
+                        "smithy.api#documentation": "<p>The identifier returned by the <code>StartSessionsStatisticsAggregation</code> operation that identifies the aggregated statistics.</p>",
                         "smithy.api#httpQuery": "aggregationId",
                         "smithy.api#required": {}
                     }
@@ -9737,7 +9749,7 @@
                 "status": {
                     "target": "com.amazonaws.deadline#SessionsStatisticsAggregationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the aggregated results. An aggregation may fail or time out if the results\n         are too large. If this happens, you can call the\n            <code>StartSessionsStatisticsAggregation</code> operation after you reduce the\n         aggregation time frame, reduce the number of queues or fleets in the aggregation, or\n         increase the period length.</p>\n         <p>If you call the <code>StartSessionsStatisticsAggregation </code> operation when the\n         status is <code>IN_PROGRESS</code>, you will receive a\n         <code>ThrottlingException</code>.</p>",
+                        "smithy.api#documentation": "<p>The status of the aggregated results. An aggregation may fail or time out if the results are too large. If this happens, you can call the <code>StartSessionsStatisticsAggregation</code> operation after you reduce the aggregation time frame, reduce the number of queues or fleets in the aggregation, or increase the period length.</p> <p>If you call the <code>StartSessionsStatisticsAggregation </code> operation when the status is <code>IN_PROGRESS</code>, you will receive a <code>ThrottlingException</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9946,7 +9958,7 @@
                 "description": {
                     "target": "com.amazonaws.deadline#StepDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the step.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the step.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 }
             },
@@ -10089,7 +10101,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the storage profile connected to a queue.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the storage profile connected to a queue.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10148,7 +10160,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the storage profile.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the storage profile.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10522,6 +10534,47 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.deadline#HostConfiguration": {
+            "type": "structure",
+            "members": {
+                "scriptBody": {
+                    "target": "com.amazonaws.deadline#HostConfigurationScript",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet. The script runs after a worker enters the <code>STARTING</code> state and before the worker processes tasks.</p> <p>For more information about using the script, see <a href=\"https://docs.aws.amazon.com/deadline-cloud/latest/developerguide/smf-admin.html\">Run scripts as an administrator to configure workers</a> in the <i>Deadline Cloud Developer Guide</i>. </p> <important> <p>The script runs as an administrative user (<code>sudo root</code> on Linux, as an Administrator on Windows). </p> </important>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scriptTimeoutSeconds": {
+                    "target": "com.amazonaws.deadline#HostConfigurationScriptTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#default": 300,
+                        "smithy.api#documentation": "<p>The maximum time that the host configuration can run. If the timeout expires, the worker enters the <code>NOT RESPONDING</code> state and shuts down. You are charged for the time that the worker is running the host configuration script.</p> <note> <p>You should configure your fleet for a maximum of one worker while testing your host configuration script to avoid starting additional workers.</p> </note> <p>The default is 300 seconds (5 minutes).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet. </p> <p>To remove a script from a fleet, use the <a href=\"https://docs.aws.amazon.com/deadline-cloud/latest/APIReference/API_UpdateFleet.html\">UpdateFleet</a> operation with the <code>hostConfiguration</code> <code>scriptBody</code> parameter set to an empty string (\"\").</p>"
+            }
+        },
+        "com.amazonaws.deadline#HostConfigurationScript": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 15000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.deadline#HostConfigurationScriptTimeoutSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 300,
+                    "max": 3600
+                }
             }
         },
         "com.amazonaws.deadline#HostName": {
@@ -11372,7 +11425,7 @@
                 "runAs": {
                     "target": "com.amazonaws.deadline#RunAs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the job should run using the queue's system user or if the job should\n         run using the worker agent system user.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the job should run using the queue's system user or if the job should run using the worker agent system user.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11423,7 +11476,7 @@
                 "taskRunStatus": {
                     "target": "com.amazonaws.deadline#TaskRunStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The task run status for the job.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>–pending and waiting for resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code>–ready to be processed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ASSIGNED</code>–assigned and will run next on a worker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SCHEDULED</code>–scheduled to be run on a worker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERRUPTING</code>–being interrupted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>–running on a worker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code>–the task is suspended.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELED</code>–the task has been canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>–the task has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>–the task has succeeded.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The task run status for the job.</p> <ul> <li> <p> <code>PENDING</code>–pending and waiting for resources.</p> </li> <li> <p> <code>READY</code>–ready to be processed.</p> </li> <li> <p> <code>ASSIGNED</code>–assigned and will run next on a worker.</p> </li> <li> <p> <code>SCHEDULED</code>–scheduled to be run on a worker.</p> </li> <li> <p> <code>INTERRUPTING</code>–being interrupted.</p> </li> <li> <p> <code>RUNNING</code>–running on a worker.</p> </li> <li> <p> <code>SUSPENDED</code>–the task is suspended.</p> </li> <li> <p> <code>CANCELED</code>–the task has been canceled.</p> </li> <li> <p> <code>FAILED</code>–the task has failed.</p> </li> <li> <p> <code>SUCCEEDED</code>–the task has succeeded.</p> </li> </ul>"
                     }
                 },
                 "targetTaskRunStatus": {
@@ -11489,7 +11542,7 @@
                 "maxWorkerCount": {
                     "target": "com.amazonaws.deadline#MaxWorkerCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of worker hosts that can concurrently process a job. When the\n            <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the\n         job, even if the fleets assigned to the job's queue has available workers.</p>\n         <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no\n         maximum number of workers.</p>\n         <p>If you don't specify the <code>maxWorkerCount</code>, the default is -1.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of worker hosts that can concurrently process a job. When the <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the job, even if the fleets assigned to the job's queue has available workers.</p> <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no maximum number of workers.</p> <p>If you don't specify the <code>maxWorkerCount</code>, the default is -1.</p>"
                     }
                 },
                 "sourceJobId": {
@@ -11588,7 +11641,7 @@
                 "taskRunStatus": {
                     "target": "com.amazonaws.deadline#TaskRunStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The task run status for the job.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>–pending and waiting for resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code>–ready to be processed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ASSIGNED</code>–assigned and will run next on a worker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SCHEDULED</code>–scheduled to be run on a worker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERRUPTING</code>–being interrupted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>–running on a worker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code>–the task is suspended.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELED</code>–the task has been canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>–the task has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>–the task has succeeded.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The task run status for the job.</p> <ul> <li> <p> <code>PENDING</code>–pending and waiting for resources.</p> </li> <li> <p> <code>READY</code>–ready to be processed.</p> </li> <li> <p> <code>ASSIGNED</code>–assigned and will run next on a worker.</p> </li> <li> <p> <code>SCHEDULED</code>–scheduled to be run on a worker.</p> </li> <li> <p> <code>INTERRUPTING</code>–being interrupted.</p> </li> <li> <p> <code>RUNNING</code>–running on a worker.</p> </li> <li> <p> <code>SUSPENDED</code>–the task is suspended.</p> </li> <li> <p> <code>CANCELED</code>–the task has been canceled.</p> </li> <li> <p> <code>FAILED</code>–the task has failed.</p> </li> <li> <p> <code>SUCCEEDED</code>–the task has succeeded.</p> </li> </ul>"
                     }
                 },
                 "targetTaskRunStatus": {
@@ -11618,7 +11671,7 @@
                 "maxWorkerCount": {
                     "target": "com.amazonaws.deadline#MaxWorkerCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of worker hosts that can concurrently process a job. When the\n            <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the\n         job, even if the fleets assigned to the job's queue has available workers.</p>\n         <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no\n         maximum number of workers.</p>\n         <p>If you don't specify the <code>maxWorkerCount</code>, the default is -1.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of worker hosts that can concurrently process a job. When the <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the job, even if the fleets assigned to the job's queue has available workers.</p> <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no maximum number of workers.</p> <p>If you don't specify the <code>maxWorkerCount</code>, the default is -1.</p>"
                     }
                 },
                 "sourceJobId": {
@@ -11838,21 +11891,21 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the limit used in lists to identify the limit.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The name of the limit used in lists to identify the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "amountRequirementName": {
                     "target": "com.amazonaws.deadline#AmountRequirementName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that you specify as the <code>name</code> in the <code>amounts</code> field of\n         the <code>hostRequirements</code> in a step of a job template to declare the limit\n         requirement.</p>",
+                        "smithy.api#documentation": "<p>The value that you specify as the <code>name</code> in the <code>amounts</code> field of the <code>hostRequirements</code> in a step of a job template to declare the limit requirement.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "maxCount": {
                     "target": "com.amazonaws.deadline#MaxCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are\n         in use, steps that require the limit won't be scheduled until the resource is\n         available.</p>\n         <p>The <code>maxValue</code> must not be 0. If the value is -1, there is no restriction on\n         the number of resources that can be acquired for this limit.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are in use, steps that require the limit won't be scheduled until the resource is available.</p> <p>The <code>maxValue</code> must not be 0. If the value is -1, there is no restriction on the number of resources that can be acquired for this limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11899,7 +11952,7 @@
                 "currentCount": {
                     "target": "com.amazonaws.deadline#MinZeroMaxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of resources from the limit that are being used by jobs. The result is\n         delayed and may not be the count at the time that you called the operation.</p>",
+                        "smithy.api#documentation": "<p>The number of resources from the limit that are being used by jobs. The result is delayed and may not be the count at the time that you called the operation.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12508,7 +12561,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display names of a list of fleets.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display names of a list of fleets.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#httpQuery": "displayName"
                     }
                 },
@@ -13299,7 +13352,7 @@
                 "monitors": {
                     "target": "com.amazonaws.deadline#MonitorSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>MonitorSummary</code> objects that describe your monitors in the\n         Deadline Cloud.</p>",
+                        "smithy.api#documentation": "<p>A list of <code>MonitorSummary</code> objects that describe your monitors in the Deadline Cloud.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -13606,14 +13659,14 @@
                 "queueId": {
                     "target": "com.amazonaws.deadline#QueueId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that the operation should return only the queue limit associations for the\n         specified queue. If you specify both the <code>queueId</code> and the <code>limitId</code>,\n         only the specified limit is returned if it exists.</p>",
+                        "smithy.api#documentation": "<p>Specifies that the operation should return only the queue limit associations for the specified queue. If you specify both the <code>queueId</code> and the <code>limitId</code>, only the specified limit is returned if it exists.</p>",
                         "smithy.api#httpQuery": "queueId"
                     }
                 },
                 "limitId": {
                     "target": "com.amazonaws.deadline#LimitId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that the operation should return only the queue limit associations for the\n         specified limit. If you specify both the <code>queueId</code> and the <code>limitId</code>,\n         only the specified limit is returned if it exists.</p>",
+                        "smithy.api#documentation": "<p>Specifies that the operation should return only the queue limit associations for the specified limit. If you specify both the <code>queueId</code> and the <code>limitId</code>, only the specified limit is returned if it exists.</p>",
                         "smithy.api#httpQuery": "limitId"
                     }
                 },
@@ -13651,7 +13704,7 @@
                 "queueLimitAssociations": {
                     "target": "com.amazonaws.deadline#QueueLimitAssociationSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of associations between limits and queues in the farm specified in the\n         request.</p>",
+                        "smithy.api#documentation": "<p>A list of associations between limits and queues in the farm specified in the request.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13855,7 +13908,7 @@
                 "status": {
                     "target": "com.amazonaws.deadline#QueueStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the queues listed.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>–The queues are active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SCHEDULING</code>–The queues are scheduling.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SCHEDULING_BLOCKED</code>–The queue scheduling is blocked for these\n               queues.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the queues listed.</p> <ul> <li> <p> <code>ACTIVE</code>–The queues are active.</p> </li> <li> <p> <code>SCHEDULING</code>–The queues are scheduling.</p> </li> <li> <p> <code>SCHEDULING_BLOCKED</code>–The queue scheduling is blocked for these queues.</p> </li> </ul>",
                         "smithy.api#httpQuery": "status"
                     }
                 },
@@ -15647,28 +15700,28 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the monitor that displays on the Deadline Cloud console.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The name of the monitor that displays on the Deadline Cloud console.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "subdomain": {
                     "target": "com.amazonaws.deadline#Subdomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subdomain used for the monitor URL. The full URL of the monitor is\n         subdomain.Region.deadlinecloud.amazonaws.com.</p>",
+                        "smithy.api#documentation": "<p>The subdomain used for the monitor URL. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "url": {
                     "target": "com.amazonaws.deadline#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The complete URL of the monitor. The full URL of the monitor is\n         subdomain.Region.deadlinecloud.amazonaws.com.</p>",
+                        "smithy.api#documentation": "<p>The complete URL of the monitor. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.deadline#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for the monitor. Users of the monitor use this role to\n         access Deadline Cloud resources.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for the monitor. Users of the monitor use this role to access Deadline Cloud resources.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16172,7 +16225,7 @@
                 "status": {
                     "target": "com.amazonaws.deadline#QueueFleetAssociationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of task scheduling in the queue-fleet association.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>–Association is active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOP_SCHEDULING_AND_COMPLETE_TASKS</code>–Association has stopped\n               scheduling new tasks and is completing current tasks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOP_SCHEDULING_AND_CANCEL_TASKS</code>–Association has stopped\n               scheduling new tasks and is canceling current tasks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code>–Association has been stopped.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of task scheduling in the queue-fleet association.</p> <ul> <li> <p> <code>ACTIVE</code>–Association is active.</p> </li> <li> <p> <code>STOP_SCHEDULING_AND_COMPLETE_TASKS</code>–Association has stopped scheduling new tasks and is completing current tasks.</p> </li> <li> <p> <code>STOP_SCHEDULING_AND_CANCEL_TASKS</code>–Association has stopped scheduling new tasks and is canceling current tasks.</p> </li> <li> <p> <code>STOPPED</code>–Association has been stopped.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16305,7 +16358,7 @@
                 "status": {
                     "target": "com.amazonaws.deadline#QueueLimitAssociationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of task scheduling in the queue-limit association.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - Association is active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOP_LIMIT_USAGE_AND_COMPLETE_TASKS</code> - Association has stopped\n               scheduling new tasks and is completing current tasks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOP_LIMIT_USAGE_AND_CANCEL_TASKS</code> - Association has stopped\n               scheduling new tasks and is canceling current tasks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code> - Association has been stopped.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of task scheduling in the queue-limit association.</p> <ul> <li> <p> <code>ACTIVE</code> - Association is active.</p> </li> <li> <p> <code>STOP_LIMIT_USAGE_AND_COMPLETE_TASKS</code> - Association has stopped scheduling new tasks and is completing current tasks.</p> </li> <li> <p> <code>STOP_LIMIT_USAGE_AND_CANCEL_TASKS</code> - Association has stopped scheduling new tasks and is canceling current tasks.</p> </li> <li> <p> <code>STOPPED</code> - Association has been stopped.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -16506,7 +16559,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the queue summary to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the queue summary to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16639,7 +16692,7 @@
                 "description": {
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The budget action description.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The budget action description.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 }
             },
@@ -16795,7 +16848,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The filter expression, <code>AND</code> or <code>OR</code>, to use\nwhen searching among a group of search strings in a resource.\n\nYou can use two groupings per search each within parenthesis <code>()</code>.</p>"
+                "smithy.api#documentation": "<p>The filter expression, <code>AND</code> or <code>OR</code>, to use when searching among a group of search strings in a resource. You can use two groupings per search each within parenthesis <code>()</code>.</p>"
             }
         },
         "com.amazonaws.deadline#SearchJobs": {
@@ -16871,7 +16924,7 @@
                 "filterExpressions": {
                     "target": "com.amazonaws.deadline#SearchGroupedFilterExpressions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter expression, <code>AND</code> or <code>OR</code>, to use\nwhen searching among a group of search strings in a resource.\n\nYou can use two groupings per search each within parenthesis <code>()</code>.</p>"
+                        "smithy.api#documentation": "<p>The filter expression, <code>AND</code> or <code>OR</code>, to use when searching among a group of search strings in a resource. You can use two groupings per search each within parenthesis <code>()</code>.</p>"
                     }
                 },
                 "sortExpressions": {
@@ -17052,7 +17105,7 @@
                 "filterExpressions": {
                     "target": "com.amazonaws.deadline#SearchGroupedFilterExpressions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter expression, <code>AND</code> or <code>OR</code>, to use\nwhen searching among a group of search strings in a resource.\n\nYou can use two groupings per search each within parenthesis <code>()</code>.</p>"
+                        "smithy.api#documentation": "<p>The filter expression, <code>AND</code> or <code>OR</code>, to use when searching among a group of search strings in a resource. You can use two groupings per search each within parenthesis <code>()</code>.</p>"
                     }
                 },
                 "sortExpressions": {
@@ -17195,7 +17248,7 @@
                 "filterExpressions": {
                     "target": "com.amazonaws.deadline#SearchGroupedFilterExpressions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter expression, <code>AND</code> or <code>OR</code>, to use\nwhen searching among a group of search strings in a resource.\n\nYou can use two groupings per search each within parenthesis <code>()</code>.</p>"
+                        "smithy.api#documentation": "<p>The filter expression, <code>AND</code> or <code>OR</code>, to use when searching among a group of search strings in a resource. You can use two groupings per search each within parenthesis <code>()</code>.</p>"
                     }
                 },
                 "sortExpressions": {
@@ -17282,7 +17335,7 @@
                     "target": "com.amazonaws.deadline#SearchTermMatchingType",
                     "traits": {
                         "smithy.api#default": "FUZZY_MATCH",
-                        "smithy.api#documentation": "<p>Specifies how Deadline Cloud matches your search term in the results. If you don't\n         specify a <code>matchType</code> the default is <code>FUZZY_MATCH</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FUZZY_MATCH</code> - Matches if a portion of the search term is found in the\n               result.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONTAINS</code> - Matches if the exact search term is contained in the\n               result.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies how Deadline Cloud matches your search term in the results. If you don't specify a <code>matchType</code> the default is <code>FUZZY_MATCH</code>.</p> <ul> <li> <p> <code>FUZZY_MATCH</code> - Matches if a portion of the search term is found in the result.</p> </li> <li> <p> <code>CONTAINS</code> - Matches if the exact search term is contained in the result.</p> </li> </ul>"
                     }
                 }
             },
@@ -17380,7 +17433,7 @@
                 "filterExpressions": {
                     "target": "com.amazonaws.deadline#SearchGroupedFilterExpressions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter expression, <code>AND</code> or <code>OR</code>, to use\nwhen searching among a group of search strings in a resource.\n\nYou can use two groupings per search each within parenthesis <code>()</code>.</p>"
+                        "smithy.api#documentation": "<p>The filter expression, <code>AND</code> or <code>OR</code>, to use when searching among a group of search strings in a resource. You can use two groupings per search each within parenthesis <code>()</code>.</p>"
                     }
                 },
                 "sortExpressions": {
@@ -17530,7 +17583,7 @@
                 "acceleratorCapabilities": {
                     "target": "com.amazonaws.deadline#AcceleratorCapabilities",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the GPU accelerator capabilities required for worker host instances in this\n         fleet.</p>"
+                        "smithy.api#documentation": "<p>Describes the GPU accelerator capabilities required for worker host instances in this fleet.</p>"
                     }
                 },
                 "allowedInstanceTypes": {
@@ -17645,7 +17698,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You exceeded your service quota. Service quotas, also referred to as limits, are the\n         maximum number of service resources or operations for your Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>You exceeded your service quota. Service quotas, also referred to as limits, are the maximum number of service resources or operations for your Amazon Web Services account.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -17663,6 +17716,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "KMS_KEY_LIMIT_EXCEEDED"
+                    }
+                },
+                "DEPENDENCY_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPENDENCY_LIMIT_EXCEEDED"
                     }
                 }
             }
@@ -17877,7 +17936,7 @@
                 "workerUpdatedAt": {
                     "target": "com.amazonaws.deadline#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Linux timestamp of the last date and time that the session action was\n         updated.</p>"
+                        "smithy.api#documentation": "<p>The Linux timestamp of the last date and time that the session action was updated.</p>"
                     }
                 },
                 "progressPercent": {
@@ -18064,7 +18123,7 @@
                 "queueIds": {
                     "target": "com.amazonaws.deadline#QueueIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>One to 10 queue IDs that specify the queues to return statistics for. If you specify the\n            <code>queueIds</code> field, you can't specify the <code>fleetIds</code> field.</p>",
+                        "smithy.api#documentation": "<p>One to 10 queue IDs that specify the queues to return statistics for. If you specify the <code>queueIds</code> field, you can't specify the <code>fleetIds</code> field.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 10
@@ -18074,7 +18133,7 @@
                 "fleetIds": {
                     "target": "com.amazonaws.deadline#FleetIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>One to 10 fleet IDs that specify the fleets to return statistics for. If you specify the\n            <code>fleetIds</code> field, you can't specify the <code>queueIds</code> field.</p>",
+                        "smithy.api#documentation": "<p>One to 10 fleet IDs that specify the fleets to return statistics for. If you specify the <code>fleetIds</code> field, you can't specify the <code>queueIds</code> field.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 10
@@ -18083,7 +18142,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the fleet IDs or queue IDs to return statistics. You can specify only fleet\n         IDs or queue IDS, not both.</p>"
+                "smithy.api#documentation": "<p>Specifies the fleet IDs or queue IDs to return statistics. You can specify only fleet IDs or queue IDS, not both.</p>"
             }
         },
         "com.amazonaws.deadline#SortOrder": {
@@ -18136,7 +18195,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Starts an asynchronous request for getting aggregated statistics about queues and farms.\n         Get the statistics using the <code>GetSessionsStatisticsAggregation</code> operation. You\n         can only have one running aggregation for your Deadline Cloud farm. Call the\n            <code>GetSessionsStatisticsAggregation</code> operation and check the\n            <code>status</code> field to see if an aggregation is running. Statistics are available\n         for 1 hour after you call the <code>StartSessionsStatisticsAggregation</code>\n         operation.</p>",
+                "smithy.api#documentation": "<p>Starts an asynchronous request for getting aggregated statistics about queues and farms. Get the statistics using the <code>GetSessionsStatisticsAggregation</code> operation. You can only have one running aggregation for your Deadline Cloud farm. Call the <code>GetSessionsStatisticsAggregation</code> operation and check the <code>status</code> field to see if an aggregation is running. Statistics are available for 1 hour after you call the <code>StartSessionsStatisticsAggregation</code> operation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -18154,7 +18213,7 @@
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the farm that contains queues or fleets to return statistics\n         for.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the farm that contains queues or fleets to return statistics for.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18219,7 +18278,7 @@
                 "aggregationId": {
                     "target": "com.amazonaws.deadline#AggregationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the aggregated statistics. Use this identifier with the\n            <code>GetAggregatedStatisticsForSessions</code> operation to return the\n         statistics.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the aggregated statistics. Use this identifier with the <code>GetAggregatedStatisticsForSessions</code> operation to return the statistics.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -18301,7 +18360,7 @@
                 "costInUsd": {
                     "target": "com.amazonaws.deadline#Stats",
                     "traits": {
-                        "smithy.api#documentation": "<p>How the statistics should appear in USD. Options include: minimum, maximum, average or\n         sum.</p>",
+                        "smithy.api#documentation": "<p>How the statistics should appear in USD. Options include: minimum, maximum, average or sum.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18809,7 +18868,7 @@
                 "taskRunStatus": {
                     "target": "com.amazonaws.deadline#TaskRunStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The task run status for the job.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>–pending and waiting for resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code>–ready to be processed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ASSIGNED</code>–assigned and will run next on a worker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SCHEDULED</code>–scheduled to be run on a worker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERRUPTING</code>–being interrupted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>–running on a worker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code>–the task is suspended.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELED</code>–the task has been canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>–the task has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>–the task has succeeded.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The task run status for the job.</p> <ul> <li> <p> <code>PENDING</code>–pending and waiting for resources.</p> </li> <li> <p> <code>READY</code>–ready to be processed.</p> </li> <li> <p> <code>ASSIGNED</code>–assigned and will run next on a worker.</p> </li> <li> <p> <code>SCHEDULED</code>–scheduled to be run on a worker.</p> </li> <li> <p> <code>INTERRUPTING</code>–being interrupted.</p> </li> <li> <p> <code>RUNNING</code>–running on a worker.</p> </li> <li> <p> <code>SUSPENDED</code>–the task is suspended.</p> </li> <li> <p> <code>CANCELED</code>–the task has been canceled.</p> </li> <li> <p> <code>FAILED</code>–the task has failed.</p> </li> <li> <p> <code>SUCCEEDED</code>–the task has succeeded.</p> </li> </ul>"
                     }
                 },
                 "targetTaskRunStatus": {
@@ -18892,7 +18951,7 @@
                 "taskRunStatus": {
                     "target": "com.amazonaws.deadline#TaskRunStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The task run status for the job.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>–pending and waiting for resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code>–ready to process.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ASSIGNED</code>–assigned and will run next on a worker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SCHEDULED</code>–scheduled to run on a worker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERRUPTING</code>–being interrupted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>–running on a worker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code>–the task is suspended.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELED</code>–the task has been canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>–the task has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>–the task has succeeded.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The task run status for the job.</p> <ul> <li> <p> <code>PENDING</code>–pending and waiting for resources.</p> </li> <li> <p> <code>READY</code>–ready to process.</p> </li> <li> <p> <code>ASSIGNED</code>–assigned and will run next on a worker.</p> </li> <li> <p> <code>SCHEDULED</code>–scheduled to run on a worker.</p> </li> <li> <p> <code>INTERRUPTING</code>–being interrupted.</p> </li> <li> <p> <code>RUNNING</code>–running on a worker.</p> </li> <li> <p> <code>SUSPENDED</code>–the task is suspended.</p> </li> <li> <p> <code>CANCELED</code>–the task has been canceled.</p> </li> <li> <p> <code>FAILED</code>–the task has failed.</p> </li> <li> <p> <code>SUCCEEDED</code>–the task has succeeded.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -19047,7 +19106,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the storage profile summary to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The display name of the storage profile summary to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -19976,19 +20035,19 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the budget to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The display name of the budget to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the budget to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the budget to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.deadline#BudgetStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates the status of the budget.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>–The budget is being evaluated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code>–The budget is inactive. This can include Expired,\n               Canceled, or deleted Deleted statuses.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Updates the status of the budget.</p> <ul> <li> <p> <code>ACTIVE</code>–The budget is being evaluated.</p> </li> <li> <p> <code>INACTIVE</code>–The budget is inactive. This can include Expired, Canceled, or deleted Deleted statuses.</p> </li> </ul>"
                     }
                 },
                 "approximateDollarLimit": {
@@ -20000,7 +20059,7 @@
                 "actionsToAdd": {
                     "target": "com.amazonaws.deadline#BudgetActionsToAdd",
                     "traits": {
-                        "smithy.api#documentation": "<p>The budget actions to add. Budget actions specify what happens when the budget runs\n         out.</p>"
+                        "smithy.api#documentation": "<p>The budget actions to add. Budget actions specify what happens when the budget runs out.</p>"
                     }
                 },
                 "actionsToRemove": {
@@ -20086,13 +20145,13 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the farm to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The display name of the farm to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the farm to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the farm to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 }
             },
@@ -20186,13 +20245,13 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the fleet to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The display name of the fleet to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the fleet to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the fleet to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "roleArn": {
@@ -20210,13 +20269,19 @@
                 "maxWorkerCount": {
                     "target": "com.amazonaws.deadline#MinZeroMaxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of workers in the fleet.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of workers in the fleet.</p> <p>Deadline Cloud limits the number of workers to less than or equal to the fleet's maximum worker count. The service maintains eventual consistency for the worker count. If you make multiple rapid calls to <code>CreateWorker</code> before the field updates, you might exceed your fleet's maximum worker count. For example, if your <code>maxWorkerCount</code> is 10 and you currently have 9 workers, making two quick <code>CreateWorker</code> calls might successfully create 2 workers instead of 1, resulting in 11 total workers.</p>"
                     }
                 },
                 "configuration": {
                     "target": "com.amazonaws.deadline#FleetConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The fleet configuration to update.</p>"
+                    }
+                },
+                "hostConfiguration": {
+                    "target": "com.amazonaws.deadline#HostConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet.</p>"
                     }
                 }
             },
@@ -20267,7 +20332,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Updates a job. </p>\n         <p>When you change the status of the job to <code>ARCHIVED</code>, the job can't be\n         scheduled or archived.</p>\n         <important>\n            <p>An archived jobs and its steps and tasks are deleted after 120 days. The job can't be\n            recovered.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Updates a job. </p> <p>When you change the status of the job to <code>ARCHIVED</code>, the job can't be scheduled or archived.</p> <important> <p>An archived jobs and its steps and tasks are deleted after 120 days. The job can't be recovered.</p> </important>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -20328,13 +20393,13 @@
                 "lifecycleStatus": {
                     "target": "com.amazonaws.deadline#UpdateJobLifecycleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of a job in its lifecycle. When you change the status of the job to\n            <code>ARCHIVED</code>, the job can't be scheduled or archived.</p>\n         <important>\n            <p>An archived jobs and its steps and tasks are deleted after 120 days. The job can't be\n            recovered.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The status of a job in its lifecycle. When you change the status of the job to <code>ARCHIVED</code>, the job can't be scheduled or archived.</p> <important> <p>An archived jobs and its steps and tasks are deleted after 120 days. The job can't be recovered.</p> </important>"
                     }
                 },
                 "maxWorkerCount": {
                     "target": "com.amazonaws.deadline#MaxWorkerCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of worker hosts that can concurrently process a job. When the\n            <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the\n         job, even if the fleets assigned to the job's queue has available workers.</p>\n         <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no\n         maximum number of workers.</p>\n         <p>If you don't specify the <code>maxWorkerCount</code>, the default is -1.</p>\n         <p>The maximum number of workers that can process tasks in the job.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of worker hosts that can concurrently process a job. When the <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the job, even if the fleets assigned to the job's queue has available workers.</p> <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no maximum number of workers.</p> <p>If you don't specify the <code>maxWorkerCount</code>, the default is -1.</p> <p>The maximum number of workers that can process tasks in the job.</p>"
                     }
                 },
                 "farmId": {
@@ -20440,19 +20505,19 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new display name of the limit.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The new display name of the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new description of the limit.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The new description of the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "maxCount": {
                     "target": "com.amazonaws.deadline#MaxCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are\n         in use, steps that require the limit won't be scheduled until the resource is\n         available.</p>\n         <p>If more than the new maximum number is currently in use, running jobs finish but no new\n         jobs are started until the number of resources in use is below the new maximum\n         number.</p>\n         <p>The <code>maxCount</code> must not be 0. If the value is -1, there is no restriction on\n         the number of resources that can be acquired for this limit.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are in use, steps that require the limit won't be scheduled until the resource is available.</p> <p>If more than the new maximum number is currently in use, running jobs finish but no new jobs are started until the number of resources in use is below the new maximum number.</p> <p>The <code>maxCount</code> must not be 0. If the value is -1, there is no restriction on the number of resources that can be acquired for this limit.</p>"
                     }
                 }
             },
@@ -20503,7 +20568,7 @@
                         "iam:PassRole"
                     ]
                 },
-                "smithy.api#documentation": "<p>Modifies the settings for a Deadline Cloud monitor. You can modify one or all of the settings\n         when you call <code>UpdateMonitor</code>.</p>",
+                "smithy.api#documentation": "<p>Modifies the settings for a Deadline Cloud monitor. You can modify one or all of the settings when you call <code>UpdateMonitor</code>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -20535,7 +20600,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new value to use for the monitor's display name.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The new value to use for the monitor's display name.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "roleArn": {
@@ -20866,7 +20931,7 @@
                         "identitystore:ListGroupMembershipsForMember"
                     ]
                 },
-                "smithy.api#documentation": "<p>Updates the status of the queue. If you set the status to one of the\n            <code>STOP_LIMIT_USAGE*</code> values, there will be a delay before the status\n         transitions to the <code>STOPPED</code> state. </p>",
+                "smithy.api#documentation": "<p>Updates the status of the queue. If you set the status to one of the <code>STOP_LIMIT_USAGE*</code> values, there will be a delay before the status transitions to the <code>STOPPED</code> state. </p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "management."
                 },
@@ -20908,7 +20973,7 @@
                 "status": {
                     "target": "com.amazonaws.deadline#UpdateQueueLimitAssociationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the status of the limit. You can mark the limit active, or you can stop usage of\n         the limit and either complete existing tasks or cancel any existing tasks immediately.\n      </p>",
+                        "smithy.api#documentation": "<p>Sets the status of the limit. You can mark the limit active, or you can stop usage of the limit and either complete existing tasks or cancel any existing tasks immediately. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -20985,13 +21050,13 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the queue to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The display name of the queue to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the queue to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The description of the queue to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "defaultBudgetAction": {
@@ -21003,7 +21068,7 @@
                 "jobAttachmentSettings": {
                     "target": "com.amazonaws.deadline#JobAttachmentSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job attachment settings to update for the\n         queue.</p>"
+                        "smithy.api#documentation": "<p>The job attachment settings to update for the queue.</p>"
                     }
                 },
                 "roleArn": {
@@ -21348,7 +21413,7 @@
                 "displayName": {
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the storage profile to update.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The display name of the storage profile to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "osFamily": {
@@ -21605,6 +21670,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The worker log to update.</p>"
                     }
+                },
+                "hostConfiguration": {
+                    "target": "com.amazonaws.deadline#HostConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet.</p>"
+                    }
                 }
             },
             "traits": {
@@ -21761,7 +21832,7 @@
                 "processExitCode": {
                     "target": "com.amazonaws.deadline#ProcessExitCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process exit code. The default Deadline Cloud worker agent converts unsigned\n         32-bit exit codes to signed 32-bit exit codes.</p>"
+                        "smithy.api#documentation": "<p>The process exit code. The default Deadline Cloud worker agent converts unsigned 32-bit exit codes to signed 32-bit exit codes.</p>"
                     }
                 },
                 "progressMessage": {
@@ -21799,7 +21870,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The updated session action information as it relates to completion and progress of the\n         session.</p>"
+                "smithy.api#documentation": "<p>The updated session action information as it relates to completion and progress of the session.</p>"
             }
         },
         "com.amazonaws.deadline#UpdatedSessionActions": {
@@ -22039,7 +22110,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request isn't valid. This can occur if your request contains malformed JSON or\n         unsupported characters.</p>",
+                "smithy.api#documentation": "<p>The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

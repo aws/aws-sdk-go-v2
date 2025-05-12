@@ -372,7 +372,22 @@
                             "target": {
                                 "targetType": "DATASET",
                                 "datasetTarget": {
-                                    "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner"
+                                    "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner",
+                                    "options": {
+                                        "loadType": "REPLACE",
+                                        "dedupeRecords": true,
+                                        "dedupeStrategy": {
+                                            "type": "FIELD_PRIORITY",
+                                            "fieldPriority": {
+                                                "fields": [
+                                                    {
+                                                        "name": "eff_start_date",
+                                                        "sortOrder": "DESC"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
                                 }
                             },
                             "tags": {
@@ -486,6 +501,9 @@
                 },
                 {
                     "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.supplychain#ServiceQuotaExceededException"
@@ -708,6 +726,32 @@
                                         "name": "creation_time",
                                         "type": "TIMESTAMP",
                                         "isRequired": false
+                                    },
+                                    {
+                                        "name": "quantity",
+                                        "type": "LONG",
+                                        "isRequired": false
+                                    }
+                                ],
+                                "primaryKeys": [
+                                    {
+                                        "name": "id"
+                                    }
+                                ]
+                            },
+                            "partitionSpec": {
+                                "fields": [
+                                    {
+                                        "name": "creation_time",
+                                        "transform": {
+                                            "type": "DAY"
+                                        }
+                                    },
+                                    {
+                                        "name": "description",
+                                        "transform": {
+                                            "type": "IDENTITY"
+                                        }
                                     }
                                 ]
                             },
@@ -747,6 +791,32 @@
                                             "name": "creation_time",
                                             "type": "TIMESTAMP",
                                             "isRequired": false
+                                        },
+                                        {
+                                            "name": "quantity",
+                                            "type": "LONG",
+                                            "isRequired": false
+                                        }
+                                    ],
+                                    "primaryKeys": [
+                                        {
+                                            "name": "id"
+                                        }
+                                    ]
+                                },
+                                "partitionSpec": {
+                                    "fields": [
+                                        {
+                                            "name": "creation_time",
+                                            "transform": {
+                                                "type": "DAY"
+                                            }
+                                        },
+                                        {
+                                            "name": "description",
+                                            "transform": {
+                                                "type": "IDENTITY"
+                                            }
                                         }
                                     ]
                                 }
@@ -774,9 +844,9 @@
                     }
                 },
                 "namespace": {
-                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name space of the dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the dataset, besides the custom defined namespace, every instance comes with below pre-defined namespaces:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -792,13 +862,19 @@
                 "schema": {
                     "target": "com.amazonaws.supplychain#DataLakeDatasetSchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>The custom schema of the data lake dataset and is only required when the name space is <b>default</b>.</p>"
+                        "smithy.api#documentation": "<p>The custom schema of the data lake dataset and required for dataset in <b>default</b> and custom namespaces.</p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.supplychain#DataLakeDatasetDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the dataset.</p>"
+                    }
+                },
+                "partitionSpec": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetPartitionSpec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partition specification of the dataset. Partitioning can effectively improve the dataset query performance by reducing the amount of data scanned during query execution. But partitioning or not will affect how data get ingested by data ingestion methods, such as SendDataIntegrationEvent's dataset UPSERT will upsert records within partition (instead of within whole dataset). For more details, refer to those data ingestion documentations.</p>"
                     }
                 },
                 "tags": {
@@ -828,6 +904,123 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The response parameters of CreateDataLakeDataset.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#CreateDataLakeNamespace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#CreateDataLakeNamespaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#CreateDataLakeNamespaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables you to programmatically create an Amazon Web Services Supply Chain data lake namespace. Developers can create the namespaces for a given instance ID.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Create a data lake namespace",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "name": "my_namespace",
+                            "description": "This is my AWS Supply Chain namespace",
+                            "tags": {
+                                "tagKey1": "tagValue1",
+                                "tagKey2": "tagValue2"
+                            }
+                        },
+                        "output": {
+                            "namespace": {
+                                "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/my_namespace",
+                                "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                "name": "my_namespace",
+                                "description": "This is my AWS Supply Chain namespace",
+                                "createdTime": 1.736892560751E9,
+                                "lastModifiedTime": 1.736892560751E9
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/api/datalake/instance/{instanceId}/namespaces/{name}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.supplychain#CreateDataLakeNamespaceRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace. Noted you cannot create namespace with name starting with <b>asc</b>, <b>default</b>, <b>scn</b>, <b>aws</b>, <b>amazon</b>, <b>amzn</b>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the namespace.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.supplychain#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags of the namespace.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for CreateDataLakeNamespace.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#CreateDataLakeNamespaceResponse": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detail of created namespace.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters of CreateDataLakeNamespace.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -974,6 +1167,65 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.supplychain#DataIntegrationDatasetArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws:scn:([a-z0-9-]+):([0-9]+):instance/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/namespaces/[^/]+/datasets/[^/]+$"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationEvent": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique event identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventType": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data event type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventGroupId": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event identifier (for example, orderId for InboundOrder) used for data sharding or partitioning.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event timestamp (in epoch seconds).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetTargetDetails": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventDatasetTargetDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target dataset details for a DATASET event type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data integration event details.</p>"
+            }
+        },
         "com.amazonaws.supplychain#DataIntegrationEventData": {
             "type": "string",
             "traits": {
@@ -982,6 +1234,124 @@
                     "max": 1048576
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationEventDatasetLoadExecutionDetails": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventDatasetLoadStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event load execution status to target dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure message (if any) of failed event load execution to dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target dataset load execution details.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationEventDatasetLoadStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationEventDatasetOperationType": {
+            "type": "enum",
+            "members": {
+                "APPEND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPEND"
+                    }
+                },
+                "UPSERT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPSERT"
+                    }
+                },
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationEventDatasetTargetConfiguration": {
+            "type": "structure",
+            "members": {
+                "datasetIdentifier": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationDatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The datalake dataset ARN identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operationType": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventDatasetOperationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target dataset load operation type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target dataset configuration for a DATASET event type.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationEventDatasetTargetDetails": {
+            "type": "structure",
+            "members": {
+                "datasetIdentifier": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationDatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The datalake dataset ARN identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operationType": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventDatasetOperationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target dataset load operation type. The available options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>APPEND</b> - Add new records to the dataset. Noted that this operation type will just try to append records as-is without any primary key or partition constraints.</p>\n            </li>\n            <li>\n               <p>\n                  <b>UPSERT</b> - Modify existing records in the dataset with primary key configured, events for datasets without primary keys are not allowed. If event data contains primary keys that match records in the dataset within same partition, then those existing records (in that partition) will be updated. If primary keys do not match, new records will be added. Note that if dataset contain records with duplicate primary key values in the same partition, those duplicate records will be deduped into one updated record.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DELETE</b> - Remove existing records in the dataset with primary key configured, events for datasets without primary keys are not allowed. If event data contains primary keys that match records in the dataset within same partition, then those existing records (in that partition) will be deleted. If primary keys do not match, no actions will be done. Note that if dataset contain records with duplicate primary key values in the same partition, all those duplicates will be removed.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetLoadExecution": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventDatasetLoadExecutionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target dataset load execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target dataset details for a DATASET event type.</p>"
             }
         },
         "com.amazonaws.supplychain#DataIntegrationEventGroupId": {
@@ -993,36 +1363,28 @@
                 }
             }
         },
-        "com.amazonaws.supplychain#DataIntegrationEventResource": {
-            "type": "resource",
-            "identifiers": {
-                "instanceId": {
-                    "target": "com.amazonaws.supplychain#UUID"
-                },
-                "eventId": {
-                    "target": "com.amazonaws.supplychain#UUID"
-                }
-            },
-            "properties": {
-                "eventType": {
-                    "target": "com.amazonaws.supplychain#DataIntegrationEventType"
-                },
-                "data": {
-                    "target": "com.amazonaws.supplychain#DataIntegrationEventData"
-                },
-                "eventGroupId": {
-                    "target": "com.amazonaws.supplychain#DataIntegrationEventGroupId"
-                },
-                "eventTimestamp": {
-                    "target": "smithy.api#Timestamp"
-                }
-            },
-            "create": {
-                "target": "com.amazonaws.supplychain#SendDataIntegrationEvent"
-            },
+        "com.amazonaws.supplychain#DataIntegrationEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#DataIntegrationEvent"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationEventMaxResults": {
+            "type": "integer",
             "traits": {
-                "aws.api#arn": {
-                    "template": "instance/{instanceId}/data-integration-events/{eventId}"
+                "smithy.api#default": 10,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationEventNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65535
                 }
             }
         },
@@ -1118,6 +1480,12 @@
                     "traits": {
                         "smithy.api#enumValue": "scn.data.supplyplan"
                     }
+                },
+                "DATASET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.dataset"
+                    }
                 }
             }
         },
@@ -1186,18 +1554,39 @@
                 "loadType": {
                     "target": "com.amazonaws.supplychain#DataIntegrationFlowLoadType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dataset data load type in dataset options.</p>"
+                        "smithy.api#documentation": "<p>The target dataset's data load type. This only affects how source S3 files are selected in the S3-to-dataset flow.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>REPLACE</b> - Target dataset will get replaced with the new file added under the source s3 prefix.</p>\n            </li>\n            <li>\n               <p>\n                  <b>INCREMENTAL</b> - Target dataset will get updated with the up-to-date content under S3 prefix incorporating any file additions or removals there.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "dedupeRecords": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dataset load option to remove duplicates.</p>"
+                        "smithy.api#documentation": "<p>The option to perform deduplication on data records sharing same primary key values. If disabled, transformed data with duplicate primary key values will ingest into dataset, for datasets within <b>asc</b> namespace, such duplicates will cause ingestion fail. If enabled without dedupeStrategy, deduplication is done by retaining a random data record among those sharing the same primary key values. If enabled with dedupeStragtegy, the deduplication is done following the strategy.</p>\n         <p>Note that target dataset may have partition configured, when dedupe is enabled, it only dedupe against primary keys and retain only one record out of those duplicates regardless of its partition status.</p>"
+                    }
+                },
+                "dedupeStrategy": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowDedupeStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deduplication strategy to dedupe the data records sharing same primary key values of the target dataset. This strategy only applies to target dataset with primary keys and with dedupeRecords option enabled. If transformed data still got duplicates after the dedupeStrategy evaluation, a random data record is chosen to be retained.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The dataset options used in dataset source and target configurations.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowDatasetSource": {
+            "type": "structure",
+            "members": {
+                "datasetIdentifier": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationDatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the dataset source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a flow execution with dataset source.</p>"
             }
         },
         "com.amazonaws.supplychain#DataIntegrationFlowDatasetSourceConfiguration": {
@@ -1240,6 +1629,277 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The dataset DataIntegrationFlow target configuration parameters.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowDedupeStrategy": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowDedupeStrategyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the deduplication strategy.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>FIELD_PRIORITY</b> - Field priority configuration for the deduplication strategy specifies an ordered list of fields used to tie-break the data records sharing the same primary key values. Fields earlier in the list have higher priority for evaluation. For each field, the sort order determines whether to retain data record with larger or smaller field value.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldPriority": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field priority deduplication strategy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The deduplication strategy details.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowDedupeStrategyType": {
+            "type": "enum",
+            "members": {
+                "FIELD_PRIORITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIELD_PRIORITY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowExecution": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flow execution's instanceId.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "instanceId"
+                    }
+                },
+                "flowName": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flow execution's flowName.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "flowName"
+                    }
+                },
+                "executionId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flow executionId.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "executionId"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of flow execution.</p>"
+                    }
+                },
+                "sourceInfo": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowExecutionSourceInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source information for a flow execution.</p>"
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure message (if any) of failed flow execution.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flow execution start timestamp.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flow execution end timestamp.</p>"
+                    }
+                },
+                "outputMetadata": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowExecutionOutputMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flow execution output metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The flow execution details.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowExecutionDiagnosticReportsRootS3URI": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.{1,1024}$"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowExecutionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#DataIntegrationFlowExecution"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowExecutionMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 10,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowExecutionNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowExecutionOutputMetadata": {
+            "type": "structure",
+            "members": {
+                "diagnosticReportsRootS3URI": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowExecutionDiagnosticReportsRootS3URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI under which all diagnostic files (such as deduped records if any) are stored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output metadata of the flow execution.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowExecutionSourceInfo": {
+            "type": "structure",
+            "members": {
+                "sourceType": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data integration flow execution source type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Source": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowS3Source",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source details of a flow execution with S3 source.</p>"
+                    }
+                },
+                "datasetSource": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowDatasetSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source details of a flow execution with dataset source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source information of a flow execution.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowExecutionStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowFieldPriorityDedupeField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowFieldPriorityDedupeFieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deduplication field. Must exist in the dataset and not be a primary key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowFieldPriorityDedupeSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order for the deduplication field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The field used in the field priority deduplication strategy.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowFieldPriorityDedupeFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#DataIntegrationFlowFieldPriorityDedupeField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowFieldPriorityDedupeFieldName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-z0-9_]+$"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowFieldPriorityDedupeSortOrder": {
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
+                    }
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowFieldPriorityDedupeFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of field names and their sort order for deduplication, arranged in descending priority from highest to lowest.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The field priority deduplication strategy details.</p>"
             }
         },
         "com.amazonaws.supplychain#DataIntegrationFlowFileType": {
@@ -1392,6 +2052,28 @@
                 "smithy.api#pattern": "^[/A-Za-z0-9._-]+$"
             }
         },
+        "com.amazonaws.supplychain#DataIntegrationFlowS3Source": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "com.amazonaws.supplychain#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket name of the S3 source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationS3ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 object key of the S3 source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a flow execution with S3 source.</p>"
+            }
+        },
         "com.amazonaws.supplychain#DataIntegrationFlowS3SourceConfiguration": {
             "type": "structure",
             "members": {
@@ -1405,7 +2087,7 @@
                 "prefix": {
                     "target": "com.amazonaws.supplychain#DataIntegrationFlowS3Prefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The prefix of the S3 source objects.</p>",
+                        "smithy.api#documentation": "<p>The prefix of the S3 source objects. To trigger data ingestion, S3 files need to be put under <code>s3://<i>bucketName</i>/<i>prefix</i>/</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1454,7 +2136,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 65535
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.supplychain#DataIntegrationFlowSQLTransformationConfiguration": {
@@ -1564,7 +2247,7 @@
                 "datasetTarget": {
                     "target": "com.amazonaws.supplychain#DataIntegrationFlowDatasetTargetConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dataset DataIntegrationFlow target.</p>"
+                        "smithy.api#documentation": "<p>The dataset DataIntegrationFlow target. Note that for AWS Supply Chain dataset under <b>asc</b> namespace, it has a connection_id internal field that is not allowed to be provided by client directly, they will be auto populated.</p>"
                     }
                 }
             },
@@ -1627,6 +2310,16 @@
                 }
             }
         },
+        "com.amazonaws.supplychain#DataIntegrationS3ObjectKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[/A-Za-z0-9._:*()'!=?&+;@-]+$"
+            }
+        },
         "com.amazonaws.supplychain#DataLakeDataset": {
             "type": "structure",
             "members": {
@@ -1639,9 +2332,9 @@
                     }
                 },
                 "namespace": {
-                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name space of the dataset. The available values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the dataset, besides the custom defined namespace, every instance comes with below pre-defined namespaces:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "namespace"
                     }
@@ -1649,7 +2342,7 @@
                 "name": {
                     "target": "com.amazonaws.supplychain#DataLakeDatasetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the dataset. For <b>asc</b> name space, the name must be one of the supported data entities under <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The name of the dataset. For <b>asc</b> namespace, the name must be one of the supported data entities under <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "name"
                     }
@@ -1673,6 +2366,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the dataset.</p>"
                     }
+                },
+                "partitionSpec": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetPartitionSpec"
                 },
                 "createdTime": {
                     "target": "smithy.api#Timestamp",
@@ -1709,7 +2405,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 20
                 }
             }
@@ -1734,22 +2430,138 @@
                 "smithy.api#pattern": "^[a-z0-9_]+$"
             }
         },
-        "com.amazonaws.supplychain#DataLakeDatasetNamespace": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 50
-                },
-                "smithy.api#pattern": "^[a-z]+$"
-            }
-        },
         "com.amazonaws.supplychain#DataLakeDatasetNextToken": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 65535
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetPartitionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetSchemaFieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the partition field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "transform": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetPartitionFieldTransform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transformation of the partition field. A transformation specifies how to partition on a given field. For example, with timestamp you can specify that you'd like to partition fields by day, e.g. data record with value 2025-01-03T00:00:00Z in partition field is in 2025-01-03 partition. Also noted that data record without any value in optional partition field is in NULL partition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detail of the partition field.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetPartitionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#DataLakeDatasetPartitionField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetPartitionFieldTransform": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetPartitionTransformType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of partitioning transformation for this field. The available options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>IDENTITY</b> - Partitions data on a given field by its exact values.</p>\n            </li>\n            <li>\n               <p>\n                  <b>YEAR</b> - Partitions data on a timestamp field using year granularity.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MONTH</b> - Partitions data on a timestamp field using month granularity.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DAY</b> - Partitions data on a timestamp field using day granularity.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HOUR</b> - Partitions data on a timestamp field using hour granularity.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detail of the partition field transformation.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetPartitionSpec": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetPartitionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fields on which to partition a dataset. The partitions will be applied hierarchically based on the order of this list.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The partition specification for a dataset.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetPartitionTransformType": {
+            "type": "enum",
+            "members": {
+                "YEAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YEAR"
+                    }
+                },
+                "MONTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTH"
+                    }
+                },
+                "DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAY"
+                    }
+                },
+                "HOUR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOUR"
+                    }
+                },
+                "IDENTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDENTITY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetPrimaryKeyField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetSchemaFieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the primary key field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detail of the primary key field.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetPrimaryKeyFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#DataLakeDatasetPrimaryKeyField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
                 }
             }
         },
@@ -1760,7 +2572,7 @@
                     "target": "com.amazonaws.supplychain#UUID"
                 },
                 "namespace": {
-                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace"
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName"
                 },
                 "name": {
                     "target": "com.amazonaws.supplychain#DataLakeDatasetName"
@@ -1781,6 +2593,9 @@
                 },
                 "lastModifiedTime": {
                     "target": "smithy.api#Timestamp"
+                },
+                "partitionSpec": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetPartitionSpec"
                 }
             },
             "put": {
@@ -1824,10 +2639,16 @@
                         "smithy.api#documentation": "<p>The list of field details of the dataset schema.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "primaryKeys": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetPrimaryKeyFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of primary key fields for the dataset. Primary keys defined can help data ingestion methods to ensure data uniqueness: CreateDataIntegrationFlow's dedupe strategy will leverage primary keys to perform records deduplication before write to dataset; SendDataIntegrationEvent's UPSERT and DELETE can only work with dataset with primary keys. For more details, refer to those data ingestion documentations.</p>\n         <p>Note that defining primary keys does not necessarily mean the dataset cannot have duplicate records, duplicate records can still be ingested if CreateDataIntegrationFlow's dedupe disabled or through SendDataIntegrationEvent's APPEND operation.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The schema details of the dataset.</p>"
+                "smithy.api#documentation": "<p>The schema details of the dataset. Note that for AWS Supply Chain dataset under <b>asc</b> namespace, it may have internal fields like connection_id that will be auto populated by data ingestion methods.</p>"
             }
         },
         "com.amazonaws.supplychain#DataLakeDatasetSchemaField": {
@@ -1907,6 +2728,12 @@
                     "traits": {
                         "smithy.api#enumValue": "TIMESTAMP"
                     }
+                },
+                "LONG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LONG"
+                    }
                 }
             }
         },
@@ -1918,6 +2745,153 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeNamespace": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "instanceId"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "name"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.supplychain#AscResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the namespace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the namespace.</p>"
+                    }
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the namespace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified time of the namespace.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data lake namespace details.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeNamespaceDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeNamespaceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#DataLakeNamespace"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeNamespaceMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 10,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeNamespaceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[a-z0-9_]+$"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeNamespaceNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeNamespaceResource": {
+            "type": "resource",
+            "identifiers": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID"
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName"
+                }
+            },
+            "properties": {
+                "arn": {
+                    "target": "com.amazonaws.supplychain#AscResourceArn"
+                },
+                "description": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceDescription"
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp"
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.supplychain#CreateDataLakeNamespace"
+            },
+            "read": {
+                "target": "com.amazonaws.supplychain#GetDataLakeNamespace"
+            },
+            "update": {
+                "target": "com.amazonaws.supplychain#UpdateDataLakeNamespace"
+            },
+            "delete": {
+                "target": "com.amazonaws.supplychain#DeleteDataLakeNamespace"
+            },
+            "list": {
+                "target": "com.amazonaws.supplychain#ListDataLakeNamespaces"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "instance/{instanceId}/namespaces/{name}"
+                },
+                "smithy.api#noReplace": {}
             }
         },
         "com.amazonaws.supplychain#DatasetIdentifier": {
@@ -2098,9 +3072,9 @@
                     }
                 },
                 "namespace": {
-                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name space of the dataset. The available values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the dataset, besides the custom defined namespace, every instance comes with below pre-defined namespaces:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2108,7 +3082,7 @@
                 "name": {
                     "target": "com.amazonaws.supplychain#DataLakeDatasetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the dataset. For <b>asc</b> name space, the name must be one of the supported data entities under <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The name of the dataset. For <b>asc</b> namespace, the name must be one of the supported data entities under <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2130,9 +3104,9 @@
                     }
                 },
                 "namespace": {
-                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name space of deleted dataset.</p>",
+                        "smithy.api#documentation": "<p>The namespace of deleted dataset.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2146,6 +3120,102 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The response parameters of DeleteDataLakeDataset.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#DeleteDataLakeNamespace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#DeleteDataLakeNamespaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#DeleteDataLakeNamespaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables you to programmatically delete an Amazon Web Services Supply Chain data lake namespace and its underling datasets. Developers can delete the existing namespaces for a given instance ID and namespace name.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete an AWS Supply Chain namespace",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "name": "my_namespace"
+                        },
+                        "output": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "name": "my_namespace"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/api/datalake/instance/{instanceId}/namespaces/{name}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.supplychain#DeleteDataLakeNamespaceRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace. Noted you cannot delete pre-defined namespace like <b>asc</b>, <b>default</b> which are only deleted through instance deletion.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters of DeleteDataLakeNamespace.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#DeleteDataLakeNamespaceResponse": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of deleted namespace.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters of DeleteDataLakeNamespace.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -2244,7 +3314,22 @@
             "version": "2024-01-01",
             "operations": [
                 {
+                    "target": "com.amazonaws.supplychain#GetDataIntegrationEvent"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#GetDataIntegrationFlowExecution"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ListDataIntegrationEvents"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ListDataIntegrationFlowExecutions"
+                },
+                {
                     "target": "com.amazonaws.supplychain#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#SendDataIntegrationEvent"
                 },
                 {
                     "target": "com.amazonaws.supplychain#TagResource"
@@ -2258,13 +3343,13 @@
                     "target": "com.amazonaws.supplychain#BillOfMaterialsImportJobResource"
                 },
                 {
-                    "target": "com.amazonaws.supplychain#DataIntegrationEventResource"
-                },
-                {
                     "target": "com.amazonaws.supplychain#DataIntegrationFlowResource"
                 },
                 {
                     "target": "com.amazonaws.supplychain#DataLakeDatasetResource"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceResource"
                 },
                 {
                     "target": "com.amazonaws.supplychain#InstanceResource"
@@ -3097,6 +4182,108 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.supplychain#GetDataIntegrationEvent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#GetDataIntegrationEventRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#GetDataIntegrationEventResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables you to programmatically view an Amazon Web Services Supply Chain Data Integration Event. Developers can view the eventType, eventGroupId, eventTimestamp, datasetTarget, datasetLoadExecution.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful GetDataIntegrationEvent",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventId": "19739c8e-cd2e-4cbc-a2f7-0dc43239f042"
+                        },
+                        "output": {
+                            "event": {
+                                "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                                "eventId": "19739c8e-cd2e-4cbc-a2f7-0dc43239f042",
+                                "eventType": "scn.data.dataset",
+                                "eventGroupId": "datasetId",
+                                "eventTimestamp": 1.515531081123E9,
+                                "datasetTargetDetails": {
+                                    "datasetIdentifier": "arn:aws:scn:us-west-2:135808960812:instance/8928ae12-15e5-4441-825d-ec2184f0a43a/namespaces/asc/datasets/product",
+                                    "operationType": "APPEND",
+                                    "datasetLoadExecution": {
+                                        "status": "SUCCEEDED"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api-data/data-integration/instance/{instanceId}/data-integration-events/{eventId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataIntegrationEventRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique event identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for GetDataIntegrationEvent.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataIntegrationEventResponse": {
+            "type": "structure",
+            "members": {
+                "event": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the DataIntegrationEvent returned.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for GetDataIntegrationEvent.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.supplychain#GetDataIntegrationFlow": {
             "type": "operation",
             "input": {
@@ -3169,6 +4356,142 @@
                     "uri": "/api/data-integration/instance/{instanceId}/data-integration-flows/{name}"
                 },
                 "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataIntegrationFlowExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#GetDataIntegrationFlowExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#GetDataIntegrationFlowExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the flow execution.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful GetDataIntegrationFlowExecution for S3 source",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "flowName": "source-product",
+                            "executionId": "edbbdd3f-c0f9-49d9-ab01-f64542f803b7"
+                        },
+                        "output": {
+                            "flowExecution": {
+                                "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                                "flowName": "source-product",
+                                "executionId": "edbbdd3f-c0f9-49d9-ab01-f64542f803b7",
+                                "status": "SUCCEEDED",
+                                "sourceInfo": {
+                                    "sourceType": "S3",
+                                    "s3Source": {
+                                        "bucketName": "galaxy-raw-input-test-data-prod-pdx-1",
+                                        "key": "sources/product-sources.csv"
+                                    }
+                                },
+                                "startTime": 1.515531081123E9,
+                                "endTime": 1.515531090123E9
+                            }
+                        }
+                    },
+                    {
+                        "title": "Successful GetDataIntegrationFlowExecution for DATASET source",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "flowName": "target-product",
+                            "executionId": "9daf6071-d12c-4eef-864c-73cea2557825"
+                        },
+                        "output": {
+                            "flowExecution": {
+                                "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                                "flowName": "target-product",
+                                "executionId": "9daf6071-d12c-4eef-864c-73cea2557825",
+                                "status": "SUCCEEDED",
+                                "sourceInfo": {
+                                    "sourceType": "DATASET",
+                                    "datasetSource": {
+                                        "datasetIdentifier": "arn:aws:scn:us-west-2:135808960812:instance/8928ae12-15e5-4441-825d-ec2184f0a43a/namespaces/default/datasets/product"
+                                    }
+                                },
+                                "startTime": 1.515531081123E9,
+                                "endTime": 1.515531090123E9
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api-data/data-integration/instance/{instanceId}/data-integration-flows/{flowName}/executions/{executionId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataIntegrationFlowExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "flowName": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flow name.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flow execution identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters of GetFlowExecution.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataIntegrationFlowExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "flowExecution": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flow execution details.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters of GetFlowExecution.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.supplychain#GetDataIntegrationFlowRequest": {
@@ -3453,6 +4776,32 @@
                                             "name": "creation_time",
                                             "type": "TIMESTAMP",
                                             "isRequired": false
+                                        },
+                                        {
+                                            "name": "quantity",
+                                            "type": "LONG",
+                                            "isRequired": false
+                                        }
+                                    ],
+                                    "primaryKeys": [
+                                        {
+                                            "name": "id"
+                                        }
+                                    ]
+                                },
+                                "partitionSpec": {
+                                    "fields": [
+                                        {
+                                            "name": "creation_time",
+                                            "transform": {
+                                                "type": "DAY"
+                                            }
+                                        },
+                                        {
+                                            "name": "description",
+                                            "transform": {
+                                                "type": "IDENTITY"
+                                            }
                                         }
                                     ]
                                 }
@@ -3480,9 +4829,9 @@
                     }
                 },
                 "namespace": {
-                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name space of the dataset. The available values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the dataset, besides the custom defined namespace, every instance comes with below pre-defined namespaces:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3490,7 +4839,7 @@
                 "name": {
                     "target": "com.amazonaws.supplychain#DataLakeDatasetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the dataset. For <b>asc</b> name space, the name must be one of the supported data entities under <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The name of the dataset. For <b>asc</b> namespace, the name must be one of the supported data entities under <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3514,7 +4863,119 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The response parameters for UpdateDataLakeDataset.</p>",
+                "smithy.api#documentation": "<p>The response parameters for GetDataLakeDataset.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataLakeNamespace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#GetDataLakeNamespaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#GetDataLakeNamespaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables you to programmatically view an Amazon Web Services Supply Chain data lake namespace. Developers can view the data lake namespace information such as description for a given instance ID and namespace name.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get properties of an existing AWS Supply Chain namespace",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "name": "my_namespace"
+                        },
+                        "output": {
+                            "namespace": {
+                                "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/my_namespace",
+                                "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                "name": "my_namespace",
+                                "description": "This is my AWS Supply Chain namespace",
+                                "createdTime": 1.736892560751E9,
+                                "lastModifiedTime": 1.736892560751E9
+                            }
+                        }
+                    },
+                    {
+                        "title": "Get proporties of an existing pre-defined AWS Supply Chain namespace",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "name": "asc"
+                        },
+                        "output": {
+                            "namespace": {
+                                "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/asc",
+                                "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                "name": "asc",
+                                "createdTime": 1.736892430234E9,
+                                "lastModifiedTime": 1.736892430234E9
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api/datalake/instance/{instanceId}/namespaces/{name}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataLakeNamespaceRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace. Besides the namespaces user created, you can also specify the pre-defined namespaces:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - Pre-defined namespace containing Amazon Web Services Supply Chain supported datasets, see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - Pre-defined namespace containing datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for GetDataLakeNamespace.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataLakeNamespaceResponse": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fetched namespace details.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for GetDataLakeNamespace.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3908,6 +5369,262 @@
                 "smithy.api#pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:kms:([a-z0-9][-.a-z0-9]{0,62})?:([a-z0-9][-.a-z0-9]{0,62})?:key/.{0,1019}$"
             }
         },
+        "com.amazonaws.supplychain#ListDataIntegrationEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#ListDataIntegrationEventsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#ListDataIntegrationEventsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables you to programmatically list all data integration events for the provided Amazon Web Services Supply Chain instance.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful ListDataIntegrationEvents",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a"
+                        },
+                        "output": {
+                            "events": [
+                                {
+                                    "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                                    "eventId": "19739c8e-cd2e-4cbc-a2f7-0dc43239f042",
+                                    "eventType": "scn.data.dataset",
+                                    "eventGroupId": "datasetId",
+                                    "eventTimestamp": 1.515531081123E9,
+                                    "datasetTargetDetails": {
+                                        "datasetIdentifier": "arn:aws:scn:us-west-2:135808960812:instance/8928ae12-15e5-4441-825d-ec2184f0a43a/namespaces/asc/datasets/product",
+                                        "operationType": "APPEND",
+                                        "datasetLoadExecution": {
+                                            "status": "SUCCEEDED"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api-data/data-integration/instance/{instanceId}/data-integration-events"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "events"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataIntegrationEventsRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventType": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List data integration events for the specified eventType.</p>",
+                        "smithy.api#httpQuery": "eventType"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to fetch the next page of the data integration events.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventMaxResults",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>Specify the maximum number of data integration events to fetch in one paginated request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for ListDataIntegrationEvents.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataIntegrationEventsResponse": {
+            "type": "structure",
+            "members": {
+                "events": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of data integration events.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to fetch the next page of the ListDataIntegrationEvents.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for ListDataIntegrationEvents.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataIntegrationFlowExecutions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#ListDataIntegrationFlowExecutionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#ListDataIntegrationFlowExecutionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List flow executions.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful ListDataIntegrationFlowExecutions",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "flowName": "source-product"
+                        },
+                        "output": {
+                            "flowExecutions": [
+                                {
+                                    "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                                    "flowName": "source-product",
+                                    "executionId": "edbbdd3f-c0f9-49d9-ab01-f64542f803b7",
+                                    "status": "SUCCEEDED",
+                                    "sourceInfo": {
+                                        "sourceType": "S3",
+                                        "s3Source": {
+                                            "bucketName": "galaxy-raw-input-test-data-prod-pdx-1",
+                                            "key": "sources/product-sources.csv"
+                                        }
+                                    },
+                                    "startTime": 1.515531081123E9,
+                                    "endTime": 1.515531090123E9
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api-data/data-integration/instance/{instanceId}/data-integration-flows/{flowName}/executions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "flowExecutions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataIntegrationFlowExecutionsRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "flowName": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flow name.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowExecutionNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to fetch next page of flow executions.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowExecutionMaxResults",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>The number to specify the max number of flow executions to fetch in this paginated request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters of ListFlowExecutions.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataIntegrationFlowExecutionsResponse": {
+            "type": "structure",
+            "members": {
+                "flowExecutions": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowExecutionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of flow executions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowExecutionNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to fetch next page of flow executions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters of ListFlowExecutions.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.supplychain#ListDataIntegrationFlows": {
             "type": "operation",
             "input": {
@@ -3996,7 +5713,22 @@
                                     "target": {
                                         "targetType": "DATASET",
                                         "datasetTarget": {
-                                            "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner"
+                                            "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner",
+                                            "options": {
+                                                "loadType": "REPLACE",
+                                                "dedupeRecords": true,
+                                                "dedupeStrategy": {
+                                                    "type": "FIELD_PRIORITY",
+                                                    "fieldPriority": {
+                                                        "fields": [
+                                                            {
+                                                                "name": "eff_start_date",
+                                                                "sortOrder": "DESC"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
                                         }
                                     },
                                     "createdTime": 1.723576350688E10,
@@ -4317,6 +6049,32 @@
                                                 "name": "creation_time",
                                                 "type": "TIMESTAMP",
                                                 "isRequired": false
+                                            },
+                                            {
+                                                "name": "quantity",
+                                                "type": "LONG",
+                                                "isRequired": false
+                                            }
+                                        ],
+                                        "primaryKeys": [
+                                            {
+                                                "name": "id"
+                                            }
+                                        ]
+                                    },
+                                    "partitionSpec": {
+                                        "fields": [
+                                            {
+                                                "name": "creation_time",
+                                                "transform": {
+                                                    "type": "DAY"
+                                                }
+                                            },
+                                            {
+                                                "name": "description",
+                                                "transform": {
+                                                    "type": "IDENTITY"
+                                                }
                                             }
                                         ]
                                     }
@@ -4376,9 +6134,9 @@
                     }
                 },
                 "namespace": {
-                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name space of the dataset. The available values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the dataset, besides the custom defined namespace, every instance comes with below pre-defined namespaces:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4423,6 +6181,144 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The response parameters of ListDataLakeDatasets.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataLakeNamespaces": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#ListDataLakeNamespacesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#ListDataLakeNamespacesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables you to programmatically view the list of Amazon Web Services Supply Chain data lake namespaces. Developers can view the namespaces and the corresponding information such as description for a given instance ID. Note that this API only return custom namespaces, instance pre-defined namespaces are not included.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List AWS Supply Chain namespaces",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5"
+                        },
+                        "output": {
+                            "namespaces": [
+                                {
+                                    "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/custom_namespace",
+                                    "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                    "name": "custom_namespace",
+                                    "createdTime": 1.736892060751E9,
+                                    "lastModifiedTime": 1.736892060751E9
+                                },
+                                {
+                                    "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/my_namespace",
+                                    "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                    "name": "my_namespace",
+                                    "createdTime": 1.736892560751E9,
+                                    "lastModifiedTime": 1.736892586156E9
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "List AWS Supply Chain namespaces using pagination",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "maxResults": 1,
+                            "nextToken": "next_token_returned_from_previous_list_request"
+                        },
+                        "output": {
+                            "namespaces": [
+                                {
+                                    "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/my_namespace",
+                                    "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                    "name": "my_namespace",
+                                    "createdTime": 1.736892560751E9,
+                                    "lastModifiedTime": 1.736892586156E9
+                                }
+                            ],
+                            "nextToken": "next_token_for_next_list_request"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api/datalake/instance/{instanceId}/namespaces"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "namespaces"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataLakeNamespacesRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to fetch next page of namespaces.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceMaxResults",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>The max number of namespaces to fetch in this paginated request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters of ListDataLakeNamespaces.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataLakeNamespacesResponse": {
+            "type": "structure",
+            "members": {
+                "namespaces": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of fetched namespace details. Noted it only contains custom namespaces, pre-defined namespaces are not included.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to fetch next page of namespaces.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters of ListDataLakeNamespaces.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -4759,7 +6655,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Send the transactional data payload for the event with real-time data for analysis or monitoring. The real-time data events are stored in an Amazon Web Services service before being processed and stored in data lake. New data events are synced with data lake at 5 PM GMT everyday. The updated transactional data is available in data lake after ingestion.</p>",
+                "smithy.api#documentation": "<p>Send the data payload for the event with real-time data for analysis or monitoring. The real-time data events are stored in an Amazon Web Services service before being processed and stored in data lake.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Successful SendDataIntegrationEvent for inboundorder event type",
@@ -4955,6 +6851,23 @@
                         "output": {
                             "eventId": "9abaee56-5dc4-4c31-8250-3206a651d8a1"
                         }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for dataset event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.dataset",
+                            "data": "{\"dataset_id\": \"datset-id-test-123\" }",
+                            "eventGroupId": "datasetId",
+                            "eventTimestamp": 1.515531081123E9,
+                            "datasetTarget": {
+                                "datasetIdentifier": "arn:aws:scn:us-west-2:135808960812:instance/8928ae12-15e5-4441-825d-ec2184f0a43a/namespaces/asc/datasets/product",
+                                "operationType": "APPEND"
+                            }
+                        },
+                        "output": {
+                            "eventId": "19739c8e-cd2e-4cbc-a2f7-0dc43239f042"
+                        }
                     }
                 ],
                 "smithy.api#http": {
@@ -4979,36 +6892,42 @@
                 "eventType": {
                     "target": "com.amazonaws.supplychain#DataIntegrationEventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data event type.</p>",
+                        "smithy.api#documentation": "<p>The data event type.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>scn.data.dataset</b> - Send data directly to any specified dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.supplyplan</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/supply-plan-entity.html\">supply_plan</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.shipmentstoporder</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-shipment-stop-order-entity.html\">shipment_stop_order</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.shipmentstop</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-shipment-stop-entity.html\">shipment_stop</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.shipment</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-shipment-entity.html\">shipment</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.reservation</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/planning-reservation-entity.html\">reservation</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.processproduct</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/operation-process-product-entity.html\">process_product</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.processoperation</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/operation-process-operation-entity.html\">process_operation</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.processheader</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/operation-process-header-entity.html\">process_header</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.forecast</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/forecast-forecast-entity.html\">forecast</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.inventorylevel</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/inventory_mgmnt-inv-level-entity.html\">inv_level</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.inboundorder</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-inbound-order-entity.html\">inbound_order</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.inboundorderline</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-inbound-order-line-entity.html\">inbound_order_line</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.inboundorderlineschedule</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-inbound-order-line-schedule-entity.html\">inbound_order_line_schedule</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.outboundorderline</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/outbound-fulfillment-order-line-entity.html\">outbound_order_line</a> dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <b>scn.data.outboundshipment</b> - Send data to <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/outbound-fulfillment-shipment-entity.html\">outbound_shipment</a> dataset.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "data": {
                     "target": "com.amazonaws.supplychain#DataIntegrationEventData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data payload of the event. For more information on the data schema to use, see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">Data entities supported in AWS Supply Chain</a>.</p>",
+                        "smithy.api#documentation": "<p>The data payload of the event, should follow the data schema of the target dataset, or see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">Data entities supported in AWS Supply Chain</a>. To send single data record, use JsonObject format; to send multiple data records, use JsonArray format.</p>\n         <p>Note that for AWS Supply Chain dataset under <b>asc</b> namespace, it has a connection_id internal field that is not allowed to be provided by client directly, they will be auto populated.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventGroupId": {
                     "target": "com.amazonaws.supplychain#DataIntegrationEventGroupId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Event identifier (for example, orderId for InboundOrder) used for data sharing or partitioning.</p>",
+                        "smithy.api#documentation": "<p>Event identifier (for example, orderId for InboundOrder) used for data sharding or partitioning. Noted under one eventGroupId of same eventType and instanceId, events are processed sequentially in the order they are received by the server.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventTimestamp": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The event timestamp (in epoch seconds).</p>",
+                        "smithy.api#documentation": "<p>The timestamp (in epoch seconds) associated with the event. If not provided, it will be assigned with current timestamp.</p>",
                         "smithy.api#timestampFormat": "epoch-seconds"
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.supplychain#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotent client token.</p>",
+                        "smithy.api#documentation": "<p>The idempotent client token. The token is active for 8 hours, and within its lifetime, it ensures the request completes only once upon retry with same client token. If omitted, the AWS SDK generates a unique value so that AWS SDK can safely retry the request upon network errors.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "datasetTarget": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventDatasetTargetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target dataset configuration for <b>scn.data.dataset</b> event type.</p>"
                     }
                 }
             },
@@ -5392,7 +7311,22 @@
                             "target": {
                                 "targetType": "DATASET",
                                 "datasetTarget": {
-                                    "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner"
+                                    "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner",
+                                    "options": {
+                                        "loadType": "REPLACE",
+                                        "dedupeRecords": true,
+                                        "dedupeStrategy": {
+                                            "type": "FIELD_PRIORITY",
+                                            "fieldPriority": {
+                                                "fields": [
+                                                    {
+                                                        "name": "eff_start_date",
+                                                        "sortOrder": "ASC"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -5425,7 +7359,22 @@
                                 "target": {
                                     "targetType": "DATASET",
                                     "datasetTarget": {
-                                        "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner"
+                                        "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner",
+                                        "options": {
+                                            "loadType": "REPLACE",
+                                            "dedupeRecords": true,
+                                            "dedupeStrategy": {
+                                                "type": "FIELD_PRIORITY",
+                                                "fieldPriority": {
+                                                    "fields": [
+                                                        {
+                                                            "name": "eff_start_date",
+                                                            "sortOrder": "ASC"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
                                     }
                                 },
                                 "createdTime": 1.72495640044E9,
@@ -5743,6 +7692,32 @@
                                             "name": "creation_time",
                                             "type": "TIMESTAMP",
                                             "isRequired": false
+                                        },
+                                        {
+                                            "name": "quantity",
+                                            "type": "LONG",
+                                            "isRequired": false
+                                        }
+                                    ],
+                                    "primaryKeys": [
+                                        {
+                                            "name": "id"
+                                        }
+                                    ]
+                                },
+                                "partitionSpec": {
+                                    "fields": [
+                                        {
+                                            "name": "creation_time",
+                                            "transform": {
+                                                "type": "DAY"
+                                            }
+                                        },
+                                        {
+                                            "name": "description",
+                                            "transform": {
+                                                "type": "IDENTITY"
+                                            }
                                         }
                                     ]
                                 }
@@ -5769,9 +7744,9 @@
                     }
                 },
                 "namespace": {
-                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name space of the dataset. The available values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the dataset, besides the custom defined namespace, every instance comes with below pre-defined namespaces:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5779,7 +7754,7 @@
                 "name": {
                     "target": "com.amazonaws.supplychain#DataLakeDatasetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the dataset. For <b>asc</b> name space, the name must be one of the supported data entities under <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The name of the dataset. For <b>asc</b> namespace, the name must be one of the supported data entities under <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5810,6 +7785,108 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The response parameters of UpdateDataLakeDataset.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#UpdateDataLakeNamespace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#UpdateDataLakeNamespaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#UpdateDataLakeNamespaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables you to programmatically update an Amazon Web Services Supply Chain data lake namespace. Developers can update the description of a data lake namespace for a given instance ID and namespace name.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Update description of an existing AWS Supply Chain namespace",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "name": "my_namespace",
+                            "description": "This is an updated AWS Supply Chain namespace"
+                        },
+                        "output": {
+                            "namespace": {
+                                "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/my_namespace",
+                                "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                "name": "my_namespace",
+                                "description": "This is an updated AWS Supply Chain namespace",
+                                "createdTime": 1.736892560751E9,
+                                "lastModifiedTime": 1.736892586156E9
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/api/datalake/instance/{instanceId}/namespaces/{name}"
+                }
+            }
+        },
+        "com.amazonaws.supplychain#UpdateDataLakeNamespaceRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace. Noted you cannot update namespace with name starting with <b>asc</b>, <b>default</b>, <b>scn</b>, <b>aws</b>, <b>amazon</b>, <b>amzn</b>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespaceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated description of the data lake namespace.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters of UpdateDataLakeNamespace.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#UpdateDataLakeNamespaceResponse": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.supplychain#DataLakeNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated namespace details.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters of UpdateDataLakeNamespace.</p>",
                 "smithy.api#output": {}
             }
         },
