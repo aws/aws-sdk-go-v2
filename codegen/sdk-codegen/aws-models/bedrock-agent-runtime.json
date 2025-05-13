@@ -127,6 +127,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The JSON-formatted string returned by the API invoked by the action group.</p>"
                     }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.bedrockagentruntime#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the action group output.</p>"
+                    }
                 }
             },
             "traits": {
@@ -412,6 +418,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#AgentCollaboratorOutputPayload",
                     "traits": {
                         "smithy.api#documentation": "<p>The output's output.</p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.bedrockagentruntime#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the output from the agent collaborator.</p>"
                     }
                 }
             },
@@ -1750,6 +1762,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates if the execution of the code timed out.</p>"
                     }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.bedrockagentruntime#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the output from the code interpreter.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2702,6 +2720,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The reason the interaction failed.</p>"
                     }
+                },
+                "failureCode": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure code for the trace.</p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.bedrockagentruntime#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the failure that occurred.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2872,6 +2902,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#FinalResponseString",
                     "traits": {
                         "smithy.api#documentation": "<p>The text in the response to the user.</p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.bedrockagentruntime#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the invoke agent operation.</p>"
                     }
                 }
             },
@@ -4953,6 +4989,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The details of the output assessments used in the Guardrail Trace.</p>"
                     }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.bedrockagentruntime#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the Guardrail output.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6535,6 +6577,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains metadata about the sources cited for the generated response.</p>"
                     }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.bedrockagentruntime#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the knowledge base output.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7207,15 +7255,47 @@
         "com.amazonaws.bedrockagentruntime#Metadata": {
             "type": "structure",
             "members": {
+                "startTime": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>In the final response, <code>startTime</code> is the start time of the agent invocation operation.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>In the final response, <code>endTime</code> is the end time time of the agent invocation operation.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "totalTimeMs": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The total execution time for the specific invocation being processed (model, knowledge base, guardrail, agent collaborator, or code interpreter). It represents how long the individual invocation took.</p>"
+                    }
+                },
+                "operationTotalTimeMs": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total time it took for the agent to complete execution. This field is only set for the final response.</p>"
+                    }
+                },
+                "clientRequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier associated with the downstream invocation. This ID can be used for tracing, debugging, and identifying specific invocations in customer logs or systems.</p>"
+                    }
+                },
                 "usage": {
                     "target": "com.amazonaws.bedrockagentruntime#Usage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details of the foundation model usage.</p>"
+                        "smithy.api#documentation": "<p>Specific to model invocation and contains details about the usage of a foundation model.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides details of the foundation model.</p>",
+                "smithy.api#documentation": "<p>Provides information about the execution process for different types of invocations, such as model invocation, knowledge base invocation, agent collaborator invocation, guardrail invocation, and code interpreter Invocation.</p>",
                 "smithy.api#sensitive": {}
             }
         },

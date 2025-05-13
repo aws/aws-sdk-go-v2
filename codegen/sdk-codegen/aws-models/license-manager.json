@@ -189,7 +189,7 @@
                     "sdkId": "License Manager",
                     "arnNamespace": "license-manager",
                     "cloudFormationName": "LicenseManager",
-                    "cloudTrailEventSource": "licensemanager.amazonaws.com",
+                    "cloudTrailEventSource": "license-manager.amazonaws.com",
                     "endpointPrefix": "license-manager"
                 },
                 "aws.auth#sigv4": {
@@ -243,7 +243,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -286,7 +285,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -299,7 +299,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -313,7 +312,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -336,7 +334,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -371,7 +368,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -382,14 +378,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -403,14 +401,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -419,11 +415,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -434,14 +430,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -455,7 +453,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -475,7 +472,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -486,14 +482,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -504,9 +502,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1347,7 +1347,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 7
+                    "max": 8
                 }
             }
         },
@@ -1991,6 +1991,12 @@
                         "smithy.api#documentation": "<p>Allowed operations for the grant.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.licensemanager#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to add to the grant. For more information about tagging support in\n         License Manager, see the <a href=\"https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html\">TagResource</a> operation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2247,7 +2253,7 @@
                 "LicenseRules": {
                     "target": "com.amazonaws.licensemanager#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules \n         vary by dimension, as follows.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Cores</code> dimension: <code>allowedTenancy</code> |\n               <code>licenseAffinityToHost</code> |\n               <code>maximumCores</code> | <code>minimumCores</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Instances</code> dimension: <code>allowedTenancy</code> | \n               <code>maximumCores</code> | <code>minimumCores</code> |\n               <code>maximumSockets</code> | <code>minimumSockets</code> |\n               <code>maximumVcpus</code> | <code>minimumVcpus</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Sockets</code> dimension: <code>allowedTenancy</code> | \n               <code>licenseAffinityToHost</code> |\n               <code>maximumSockets</code> | <code>minimumSockets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>vCPUs</code> dimension: <code>allowedTenancy</code> | \n               <code>honorVcpuOptimization</code> | \n               <code>maximumVcpus</code> | <code>minimumVcpus</code>\n               </p>\n            </li>\n         </ul>\n         <p>The unit for <code>licenseAffinityToHost</code> is days and the range is 1 to 180. The possible \n         values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and \n         <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are \n         <code>True</code> and <code>False</code>.</p>"
+                        "smithy.api#documentation": "<p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules \n         vary by dimension, as follows.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Cores</code> dimension: <code>allowedTenancy</code> |\n               <code>licenseAffinityToHost</code> |\n               <code>maximumCores</code> | <code>minimumCores</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Instances</code> dimension: <code>allowedTenancy</code> | \n               <code>maximumVcpus</code> | <code>minimumVcpus</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Sockets</code> dimension: <code>allowedTenancy</code> | \n               <code>licenseAffinityToHost</code> |\n               <code>maximumSockets</code> | <code>minimumSockets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>vCPUs</code> dimension: <code>allowedTenancy</code> | \n               <code>honorVcpuOptimization</code> | \n               <code>maximumVcpus</code> | <code>minimumVcpus</code>\n               </p>\n            </li>\n         </ul>\n         <p>The unit for <code>licenseAffinityToHost</code> is days and the range is 1 to 180. The possible \n         values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and \n         <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are \n         <code>True</code> and <code>False</code>.</p>"
                     }
                 },
                 "Tags": {
@@ -2546,6 +2552,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.licensemanager#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to add to the license. For more information about tagging support in\n         License Manager, see the <a href=\"https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html\">TagResource</a> operation.</p>"
                     }
                 }
             },
@@ -5861,7 +5873,7 @@
                 "Filters": {
                     "target": "com.amazonaws.licensemanager#Filters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters and logical operators\n        are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>licenseCountingType</code> - The dimension for which licenses are counted.\n               Possible values are <code>vCPU</code> | <code>Instance</code> | <code>Core</code> | <code>Socket</code>.\n               Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>enforceLicenseCount</code> - A Boolean value that indicates whether hard license enforcement is used. \n               Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>usagelimitExceeded</code> - A Boolean value that indicates whether the available licenses have been exceeded. \n               Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters and logical operators\n        are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>licenseCountingType</code> - The dimension for which licenses are counted.\n               Possible values are <code>vCPU</code> | <code>Instance</code> | <code>Core</code> | <code>Socket</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>enforceLicenseCount</code> - A Boolean value that indicates whether hard license enforcement is used.</p>\n            </li>\n            <li>\n               <p>\n                  <code>usagelimitExceeded</code> - A Boolean value that indicates whether the available licenses have been exceeded.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -6734,7 +6746,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags for the specified license configuration.</p>"
+                "smithy.api#documentation": "<p>Lists the tags for the specified resource. For more information about tagging support in\n         License Manager, see the <a href=\"https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html\">TagResource</a> operation.</p>"
             }
         },
         "com.amazonaws.licensemanager#ListTagsForResourceRequest": {
@@ -6743,7 +6755,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.licensemanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>",
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6904,7 +6916,7 @@
                 "Filters": {
                     "target": "com.amazonaws.licensemanager#Filters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters and logical operators\n        are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resourceArn</code> - The ARN of the license configuration resource.\n               Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> | <code>EC2_HOST</code> | <code>EC2_AMI</code> | <code>SYSTEMS_MANAGER_MANAGED_INSTANCE</code>). \n               Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resourceAccount</code> - The ID of the account that owns the resource. \n               Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters and logical operators\n        are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resourceArn</code> - The ARN of the license configuration resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> | \n            \t<code>EC2_HOST</code> | <code>EC2_AMI</code> | <code>SYSTEMS_MANAGER_MANAGED_INSTANCE</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>resourceAccount</code> - The ID of the account that owns the resource.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -7082,7 +7094,7 @@
                 "ProductInformationFilterList": {
                     "target": "com.amazonaws.licensemanager#ProductInformationFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Product information filter consists of a <code>ProductInformationFilterComparator</code> which is a logical operator, a <code>ProductInformationFilterName</code> which specifies the type of filter being declared, and a <code>ProductInformationFilterValue</code> that specifies the value to filter on. </p>\n         <p>Accepted values for <code>ProductInformationFilterName</code> are listed here along with descriptions and valid options for <code>ProductInformationFilterComparator</code>. </p>\n         <p>The following filters and are supported when the resource type \n         is <code>SSM_MANAGED</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Application Name</code> - The name of the application.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Application Publisher</code> - The publisher of the application.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Application Version</code> - The version of the application.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Platform Name</code> - The name of the platform.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Platform Type</code> - The platform type.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Tag:key</code> - The key of a tag attached to an Amazon Web Services resource you wish to exclude from automated discovery. Logical operator is <code>NOT_EQUALS</code>.  The key for your tag must be appended to <code>Tag:</code> following the example: <code>Tag:name-of-your-key</code>. <code>ProductInformationFilterValue</code> is optional if you are not using values for the key.\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AccountId</code> - The 12-digit ID of an Amazon Web Services account you wish to exclude from automated discovery.\n               Logical operator is <code>NOT_EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>License Included</code> - The type of license included.\n               Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.\n               Possible values are: <code>sql-server-enterprise</code> | \n               <code>sql-server-standard</code> | \n               <code>sql-server-web</code> |  \n               <code>windows-server-datacenter</code>.</p>\n            </li>\n         </ul>\n         <p>The following filters and logical operators are supported when the resource type\n         is <code>RDS</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Engine Edition</code> - The edition of the database engine.\n               Logical operator is <code>EQUALS</code>.\n               Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>License Pack</code> - The license pack.\n               Logical operator is <code>EQUALS</code>.\n               Possible values are: <code>data guard</code> | \n               <code>diagnostic pack sqlt</code> | \n               <code>tuning pack sqlt</code> | \n               <code>ols</code> | \n               <code>olap</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A Product information filter consists of a <code>ProductInformationFilterComparator</code> which is a logical operator, a <code>ProductInformationFilterName</code> which specifies the type of filter being declared, and a <code>ProductInformationFilterValue</code> that specifies the value to filter on. </p>\n         <p>Accepted values for <code>ProductInformationFilterName</code> are listed here along with descriptions and valid options for <code>ProductInformationFilterComparator</code>. </p>\n         <p>The following filters and are supported when the resource type \n         is <code>SSM_MANAGED</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Application Name</code> - The name of the application.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Application Publisher</code> - The publisher of the application.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Application Version</code> - The version of the application.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Platform Name</code> - The name of the platform.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Platform Type</code> - The platform type.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Tag:key</code> - The key of a tag attached to an Amazon Web Services resource you wish to exclude from automated discovery. Logical operator is <code>NOT_EQUALS</code>.  The key for your tag must be appended to <code>Tag:</code> following the example: <code>Tag:name-of-your-key</code>. <code>ProductInformationFilterValue</code> is optional if you are not using values for the key.\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AccountId</code> - The 12-digit ID of an Amazon Web Services account you wish to exclude from automated discovery.\n               Logical operator is <code>NOT_EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>License Included</code> - The type of license included.\n               Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.\n               Possible values are: <code>sql-server-enterprise</code> | \n               <code>sql-server-standard</code> | \n               <code>sql-server-web</code> |  \n               <code>windows-server-datacenter</code>.</p>\n            </li>\n         </ul>\n         <p>The following filters and logical operators are supported when the resource type\n         is <code>RDS</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Engine Edition</code> - The edition of the database engine.\n               Logical operator is <code>EQUALS</code>.\n               Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code> \n            \t| <code>db2-se</code> | <code>db2-ae</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>License Pack</code> - The license pack.\n               Logical operator is <code>EQUALS</code>.\n               Possible values are: <code>data guard</code> | \n               <code>diagnostic pack sqlt</code> | \n               <code>tuning pack sqlt</code> | \n               <code>ols</code> | \n               <code>olap</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7731,18 +7743,18 @@
                 "Key": {
                     "target": "com.amazonaws.licensemanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tag key.</p>"
+                        "smithy.api#documentation": "<p>The tag key.</p>"
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.licensemanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tag value.</p>"
+                        "smithy.api#documentation": "<p>The tag value.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about a tag for a license configuration.</p>"
+                "smithy.api#documentation": "<p>Details about the tags for a resource. For more information about tagging support in\n         License Manager, see the <a href=\"https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html\">TagResource</a> operation.</p>"
             }
         },
         "com.amazonaws.licensemanager#TagKeyList": {
@@ -7783,7 +7795,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified tags to the specified license configuration.</p>"
+                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource. The following resources support\n         tagging in License Manager:</p>\n         <ul>\n            <li>\n               <p>Licenses</p>\n            </li>\n            <li>\n               <p>Grants</p>\n            </li>\n            <li>\n               <p>License configurations</p>\n            </li>\n            <li>\n               <p>Report generators</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.licensemanager#TagResourceRequest": {
@@ -7792,7 +7804,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.licensemanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>",
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the resource. The following examples provide an example\n         ARN for each supported resource in License Manager:</p>\n         <ul>\n            <li>\n               <p>Licenses -\n                  <code>arn:aws:license-manager::111122223333:license:l-EXAMPLE2da7646d6861033667f20e895</code>\n               </p>\n            </li>\n            <li>\n               <p>Grants -\n                  <code>arn:aws:license-manager::111122223333:grant:g-EXAMPLE7b19f4a0ab73679b0beb52707</code>\n               </p>\n            </li>\n            <li>\n               <p>License configurations -\n                  <code>arn:aws:license-manager:us-east-1:111122223333:license-configuration:lic-EXAMPLE6a788d4c8acd4264ff0ecf2ed2d</code>\n               </p>\n            </li>\n            <li>\n               <p>Report generators -\n                  <code>arn:aws:license-manager:us-east-1:111122223333:report-generator:r-EXAMPLE825b4a4f8fe5a3e0c88824e5fc6</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7931,7 +7943,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified tags from the specified license configuration.</p>"
+                "smithy.api#documentation": "<p>Removes the specified tags from the specified resource.</p>"
             }
         },
         "com.amazonaws.licensemanager#UntagResourceRequest": {
@@ -7940,7 +7952,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.licensemanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>",
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7977,6 +7989,9 @@
                 },
                 {
                     "target": "com.amazonaws.licensemanager#AuthorizationException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.licensemanager#InvalidParameterValueException"
@@ -8180,6 +8195,9 @@
                 },
                 {
                     "target": "com.amazonaws.licensemanager#AuthorizationException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.licensemanager#InvalidParameterValueException"

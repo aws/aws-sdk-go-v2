@@ -1463,6 +1463,12 @@
                         "smithy.api#documentation": "<p>The contextual grounding policy configuration used to create a guardrail.</p>"
                     }
                 },
+                "crossRegionConfig": {
+                    "target": "com.amazonaws.bedrock#GuardrailCrossRegionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-defined guardrail profile that you're using with your guardrail. Guardrail profiles define the destination Amazon Web Services Regions where guardrail inference requests can be automatically routed.</p>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html\">Amazon Bedrock User Guide</a>.</p>"
+                    }
+                },
                 "blockedInputMessaging": {
                     "target": "com.amazonaws.bedrock#GuardrailBlockedMessaging",
                     "traits": {
@@ -5088,6 +5094,12 @@
                         "smithy.api#documentation": "<p>The contextual grounding policy used in the guardrail.</p>"
                     }
                 },
+                "crossRegionDetails": {
+                    "target": "com.amazonaws.bedrock#GuardrailCrossRegionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the system-defined guardrail profile that you're using with your guardrail, including the guardrail profile ID and Amazon Resource Name (ARN).</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrock#Timestamp",
                     "traits": {
@@ -6851,6 +6863,71 @@
                 "smithy.api#documentation": "<p>The policy configuration details for the guardrails contextual grounding policy.</p>"
             }
         },
+        "com.amazonaws.bedrock#GuardrailCrossRegionConfig": {
+            "type": "structure",
+            "members": {
+                "guardrailProfileIdentifier": {
+                    "target": "com.amazonaws.bedrock#GuardrailCrossRegionGuardrailProfileIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or Amazon Resource Name (ARN) of the guardrail profile that your guardrail is using. Guardrail profile availability depends on your current Amazon Web Services Region. For more information, see the <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region-support.html\">Amazon Bedrock User Guide</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The system-defined guardrail profile that you're using with your guardrail. Guardrail profiles define the destination Amazon Web Services Regions where guardrail inference requests can be automatically routed. Using guardrail profiles helps maintain guardrail performance and reliability when demand increases.</p>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html\">Amazon Bedrock User Guide</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailCrossRegionDetails": {
+            "type": "structure",
+            "members": {
+                "guardrailProfileId": {
+                    "target": "com.amazonaws.bedrock#GuardrailCrossRegionGuardrailProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the guardrail profile that your guardrail is using. Profile availability\n         depends on your current Amazon Web Services Region. For more information, see the <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region-support.html\">Amazon Bedrock User Guide</a>.</p>"
+                    }
+                },
+                "guardrailProfileArn": {
+                    "target": "com.amazonaws.bedrock#GuardrailCrossRegionGuardrailProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the guardrail profile that you're using with your guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the system-defined guardrail profile that you're using with your guardrail for cross-Region inference.</p>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html\">Amazon Bedrock User Guide</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailCrossRegionGuardrailProfileArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail-profile/[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+$"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailCrossRegionGuardrailProfileId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 15,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+$"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailCrossRegionGuardrailProfileIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 15,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+|arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail-profile/[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+$"
+            }
+        },
         "com.amazonaws.bedrock#GuardrailDescription": {
             "type": "string",
             "traits": {
@@ -7748,6 +7825,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time at which the guardrail was last updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "crossRegionDetails": {
+                    "target": "com.amazonaws.bedrock#GuardrailCrossRegionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the system-defined guardrail profile that you're using with your guardrail, including the guardrail profile ID and Amazon Resource Name (ARN).</p>"
                     }
                 }
             },
@@ -13597,6 +13680,12 @@
                     "target": "com.amazonaws.bedrock#GuardrailContextualGroundingPolicyConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The contextual grounding policy configuration used to update a guardrail.</p>"
+                    }
+                },
+                "crossRegionConfig": {
+                    "target": "com.amazonaws.bedrock#GuardrailCrossRegionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-defined guardrail profile that you're using with your guardrail. Guardrail profiles define the destination Amazon Web Services Regions where guardrail inference requests can be automatically routed.</p>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html\">Amazon Bedrock User Guide</a>.</p>"
                     }
                 },
                 "blockedInputMessaging": {
