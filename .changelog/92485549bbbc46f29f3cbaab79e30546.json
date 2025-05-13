@@ -1,8 +1,0 @@
-{
-    "id": "92485549-bbbc-46f2-9f3c-baab79e30546",
-    "type": "feature",
-    "description": "Changes for enhanced metadata in trace",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

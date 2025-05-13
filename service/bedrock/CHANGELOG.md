@@ -1,3 +1,7 @@
+# v1.34.0 (2025-05-13)
+
+* **Feature**: Enable cross-Region inference for Amazon Bedrock Guardrails by using the crossRegionConfig parameter when calling the CreateGuardrail or UpdateGuardrail operation.
+
 # v1.33.0 (2025-04-30)
 
 * **Feature**: You can now specify a cross region inference profile as a teacher model for the CreateModelCustomizationJob API. Additionally, the GetModelCustomizationJob API has been enhanced to return the sub-task statuses of a customization job within the StatusDetails response field.

@@ -1,3 +1,7 @@
+# v1.31.0 (2025-05-13)
+
+* **Feature**: Add Tagging feature to resources in the Managed Entitlements service. License and Grant resources can now be tagged.
+
 # v1.30.3 (2025-04-08)
 
 * No change notes available for this release.

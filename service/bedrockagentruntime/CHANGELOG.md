@@ -1,3 +1,7 @@
+# v1.43.0 (2025-05-13)
+
+* **Feature**: Changes for enhanced metadata in trace
+
 # v1.42.0 (2025-04-30)
 
 * **Feature**: Support for Custom Orchestration within InlineAgents

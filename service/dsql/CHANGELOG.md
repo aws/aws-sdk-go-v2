@@ -1,3 +1,7 @@
+# v1.3.0 (2025-05-13)
+
+* **Feature**: CreateMultiRegionClusters and DeleteMultiRegionClusters APIs marked as deprecated. Introduced new multi-Region clusters creation experience through multiRegionProperties parameter in CreateCluster API.
+
 # v1.2.0 (2025-04-16)
 
 * **Feature**: Added GetClusterEndpointService API. The new API allows retrieving endpoint service name specific to a cluster.

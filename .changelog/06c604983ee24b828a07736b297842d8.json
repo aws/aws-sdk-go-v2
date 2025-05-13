@@ -1,8 +1,0 @@
-{
-    "id": "06c60498-3ee2-4b82-8a07-736b297842d8",
-    "type": "feature",
-    "description": "CreateMultiRegionClusters and DeleteMultiRegionClusters APIs marked as deprecated. Introduced new multi-Region clusters creation experience through multiRegionProperties parameter in CreateCluster API.",
-    "modules": [
-        "service/dsql"
-    ]
-}

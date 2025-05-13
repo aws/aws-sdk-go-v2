@@ -1,3 +1,19 @@
+# Release (2025-05-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.34.0](service/bedrock/CHANGELOG.md#v1340-2025-05-13)
+  * **Feature**: Enable cross-Region inference for Amazon Bedrock Guardrails by using the crossRegionConfig parameter when calling the CreateGuardrail or UpdateGuardrail operation.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.43.0](service/bedrockagentruntime/CHANGELOG.md#v1430-2025-05-13)
+  * **Feature**: Changes for enhanced metadata in trace
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.22.0](service/controltower/CHANGELOG.md#v1220-2025-05-13)
+  * **Feature**: AWS Control Tower now reports the inheritance drift status for EnabledBaselines through the GetEnabledBaseline and ListEnabledBaselines APIs. You can now filter EnabledBaselines by their enablement and drift status using the ListEnabledBaselines API to view accounts and OUs that require attention.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.3.0](service/dsql/CHANGELOG.md#v130-2025-05-13)
+  * **Feature**: CreateMultiRegionClusters and DeleteMultiRegionClusters APIs marked as deprecated. Introduced new multi-Region clusters creation experience through multiRegionProperties parameter in CreateCluster API.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.57.0](service/ecs/CHANGELOG.md#v1570-2025-05-13)
+  * **Feature**: This release extends functionality for Amazon EBS volumes attached to Amazon ECS tasks by adding support for the new EBS volumeInitializationRate parameter in ECS RunTask/StartTask/CreateService/UpdateService APIs.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.31.0](service/licensemanager/CHANGELOG.md#v1310-2025-05-13)
+  * **Feature**: Add Tagging feature to resources in the Managed Entitlements service. License and Grant resources can now be tagged.
+
 # Release (2025-05-12)
 
 ## Module Highlights

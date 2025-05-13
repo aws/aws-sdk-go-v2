@@ -1,8 +1,0 @@
-{
-    "id": "1640bcc2-9c9c-4aa2-b98b-81c813b84074",
-    "type": "feature",
-    "description": "Enable cross-Region inference for Amazon Bedrock Guardrails by using the crossRegionConfig parameter when calling the CreateGuardrail or UpdateGuardrail operation.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

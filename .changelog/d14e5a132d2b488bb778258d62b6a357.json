@@ -1,8 +1,0 @@
-{
-    "id": "d14e5a13-2d2b-488b-b778-258d62b6a357",
-    "type": "feature",
-    "description": "AWS Control Tower now reports the inheritance drift status for EnabledBaselines through the GetEnabledBaseline and ListEnabledBaselines APIs. You can now filter EnabledBaselines by their enablement and drift status using the ListEnabledBaselines API to view accounts and OUs that require attention.",
-    "modules": [
-        "service/controltower"
-    ]
-}

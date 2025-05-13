@@ -1,3 +1,7 @@
+# v1.22.0 (2025-05-13)
+
+* **Feature**: AWS Control Tower now reports the inheritance drift status for EnabledBaselines through the GetEnabledBaseline and ListEnabledBaselines APIs. You can now filter EnabledBaselines by their enablement and drift status using the ListEnabledBaselines API to view accounts and OUs that require attention.
+
 # v1.21.3 (2025-05-06)
 
 * No change notes available for this release.
