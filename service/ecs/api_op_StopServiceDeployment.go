@@ -13,19 +13,7 @@ import (
 
 // Stops an ongoing service deployment.
 //
-// The following stop types are avaiable:
-//
-//   - ROLLBACK - This option rolls back the service deployment to the previous
-//     service revision.
-//
-// You can use this option even if you didn't configure the service deployment for
-//
-//	the rollback option.
-//
-// For more information, see [Stopping Amazon ECS service deployments] in the Amazon Elastic Container Service Developer
-// Guide.
-//
-// [Stopping Amazon ECS service deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/stop-service-deployment.html
+// StopServiceDeployment isn't currently supported.
 func (c *Client) StopServiceDeployment(ctx context.Context, params *StopServiceDeploymentInput, optFns ...func(*Options)) (*StopServiceDeploymentOutput, error) {
 	if params == nil {
 		params = &StopServiceDeploymentInput{}
@@ -50,7 +38,7 @@ type StopServiceDeploymentInput struct {
 
 	// How you want Amazon ECS to stop the service.
 	//
-	// The valid values are ROLLBACK .
+	// The ROLLBACK and ABORT stopType aren't supported.
 	StopType types.StopServiceDeploymentStopType
 
 	noSmithyDocumentSerde

@@ -1,0 +1,8 @@
+{
+    "id": "a839678a-f51a-4f18-8127-722c5124a176",
+    "type": "feature",
+    "description": "This release extends functionality for Amazon EBS volumes attached to Amazon ECS tasks by adding support for the new EBS volumeInitializationRate parameter in ECS RunTask/StartTask/CreateService/UpdateService APIs.",
+    "modules": [
+        "service/ecs"
+    ]
+}

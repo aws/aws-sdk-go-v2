@@ -98,6 +98,13 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.Boolean(*v.DeletionProtectionEnabled)
 	}
 
+	if v.MultiRegionProperties != nil {
+		ok := object.Key("multiRegionProperties")
+		if err := awsRestjson1_serializeDocumentMultiRegionProperties(v.MultiRegionProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -907,6 +914,24 @@ func awsRestjson1_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 		ok.Boolean(*v.DeletionProtectionEnabled)
 	}
 
+	if v.MultiRegionProperties != nil {
+		ok := object.Key("multiRegionProperties")
+		if err := awsRestjson1_serializeDocumentMultiRegionProperties(v.MultiRegionProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentClusterArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -938,6 +963,25 @@ func awsRestjson1_serializeDocumentLinkedClusterProperties(v *types.LinkedCluste
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiRegionProperties(v *types.MultiRegionProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Clusters != nil {
+		ok := object.Key("clusters")
+		if err := awsRestjson1_serializeDocumentClusterArnList(v.Clusters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WitnessRegion != nil {
+		ok := object.Key("witnessRegion")
+		ok.String(*v.WitnessRegion)
 	}
 
 	return nil

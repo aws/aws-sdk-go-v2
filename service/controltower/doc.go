@@ -15,9 +15,13 @@
 //
 // [GetEnabledControl]
 //
+// [GetControlOperation]
+//
 // [ListControlOperations]
 //
 // [ListEnabledControls]
+//
+// [ResetEnabledControl]
 //
 // [UpdateEnabledControl]
 //
@@ -245,6 +249,7 @@
 // [Controls reference guide]: https://docs.aws.amazon.com/controltower/latest/controlreference/controls.html
 // [Baselines]: https://docs.aws.amazon.com/controltower/latest/userguide/types-of-baselines.html
 // [ListEnabledControls]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListEnabledControls.html
+// [ResetEnabledControl]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ResetEnabledControl.html
 // [GetEnabledControl]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetEnabledControl.html
 // [List of identifiers for legacy controls]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-identifiers.html
 // [Controls]: https://docs.aws.amazon.com/controltower/latest/userguide/controls.html
@@ -253,6 +258,7 @@
 // [API reference manual]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_Operations.html
 // [Tables of control metadata]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-metadata-tables.html
 // [Control availability by Region tables (large page)]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-region-tables.html
+// [GetControlOperation]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetControlOperation.html
 // [Tagging]: https://docs.aws.amazon.com/controltower/latest/controlreference/tagging.html
 // [Landing zones]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch.html
 // [ListLandingZones]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListLandingZones.html

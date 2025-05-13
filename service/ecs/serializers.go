@@ -5978,6 +5978,11 @@ func awsAwsjson11_serializeDocumentServiceManagedEBSVolumeConfiguration(v *types
 		ok.Integer(*v.Throughput)
 	}
 
+	if v.VolumeInitializationRate != nil {
+		ok := object.Key("volumeInitializationRate")
+		ok.Integer(*v.VolumeInitializationRate)
+	}
+
 	if v.VolumeType != nil {
 		ok := object.Key("volumeType")
 		ok.String(*v.VolumeType)
@@ -6259,6 +6264,11 @@ func awsAwsjson11_serializeDocumentTaskManagedEBSVolumeConfiguration(v *types.Ta
 	if v.Throughput != nil {
 		ok := object.Key("throughput")
 		ok.Integer(*v.Throughput)
+	}
+
+	if v.VolumeInitializationRate != nil {
+		ok := object.Key("volumeInitializationRate")
+		ok.Integer(*v.VolumeInitializationRate)
 	}
 
 	if v.VolumeType != nil {

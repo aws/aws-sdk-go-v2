@@ -11,6 +11,9 @@ import (
 )
 
 // Deletes a multi-Region cluster in Amazon Aurora DSQL.
+//
+// Deprecated: The DeleteMultiRegionClusters API is deprecated. To delete a
+// multi-Region cluster, use the DeleteCluster API instead.
 func (c *Client) DeleteMultiRegionClusters(ctx context.Context, params *DeleteMultiRegionClustersInput, optFns ...func(*Options)) (*DeleteMultiRegionClustersOutput, error) {
 	if params == nil {
 		params = &DeleteMultiRegionClustersInput{}

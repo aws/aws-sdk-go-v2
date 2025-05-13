@@ -111,7 +111,7 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request would cause a service quota to be exceeded. The limit is 10
+// The request would cause a service quota to be exceeded. The limit is 100
 // concurrent operations.
 type ServiceQuotaExceededException struct {
 	Message *string

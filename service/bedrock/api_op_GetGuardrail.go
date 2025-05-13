@@ -97,6 +97,10 @@ type GetGuardrailOutput struct {
 	// The contextual grounding policy used in the guardrail.
 	ContextualGroundingPolicy *types.GuardrailContextualGroundingPolicy
 
+	// Details about the system-defined guardrail profile that you're using with your
+	// guardrail, including the guardrail profile ID and Amazon Resource Name (ARN).
+	CrossRegionDetails *types.GuardrailCrossRegionDetails
+
 	// The description of the guardrail.
 	Description *string
 

@@ -1284,6 +1284,51 @@ type GuardrailContextualGroundingPolicyConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The system-defined guardrail profile that you're using with your guardrail.
+// Guardrail profiles define the destination Amazon Web Services Regions where
+// guardrail inference requests can be automatically routed. Using guardrail
+// profiles helps maintain guardrail performance and reliability when demand
+// increases.
+//
+// For more information, see the [Amazon Bedrock User Guide].
+//
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+type GuardrailCrossRegionConfig struct {
+
+	// The ID or Amazon Resource Name (ARN) of the guardrail profile that your
+	// guardrail is using. Guardrail profile availability depends on your current
+	// Amazon Web Services Region. For more information, see the [Amazon Bedrock User Guide].
+	//
+	// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region-support.html
+	//
+	// This member is required.
+	GuardrailProfileIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the system-defined guardrail profile that you're using
+// with your guardrail for cross-Region inference.
+//
+// For more information, see the [Amazon Bedrock User Guide].
+//
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+type GuardrailCrossRegionDetails struct {
+
+	// The Amazon Resource Name (ARN) of the guardrail profile that you're using with
+	// your guardrail.
+	GuardrailProfileArn *string
+
+	// The ID of the guardrail profile that your guardrail is using. Profile
+	// availability depends on your current Amazon Web Services Region. For more
+	// information, see the [Amazon Bedrock User Guide].
+	//
+	// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region-support.html
+	GuardrailProfileId *string
+
+	noSmithyDocumentSerde
+}
+
 // The managed word list that was configured for the guardrail. (This is a list of
 // words that are pre-defined and managed by guardrails only.)
 type GuardrailManagedWords struct {
@@ -1820,6 +1865,10 @@ type GuardrailSummary struct {
 	//
 	// This member is required.
 	Version *string
+
+	// Details about the system-defined guardrail profile that you're using with your
+	// guardrail, including the guardrail profile ID and Amazon Resource Name (ARN).
+	CrossRegionDetails *GuardrailCrossRegionDetails
 
 	// A description of the guardrail.
 	Description *string

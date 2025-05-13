@@ -4860,6 +4860,11 @@ func awsRestjson1_deserializeDocumentActionGroupInvocationOutput(v **types.Actio
 
 	for key, value := range shape {
 		switch key {
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
+				return err
+			}
+
 		case "text":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5024,6 +5029,11 @@ func awsRestjson1_deserializeDocumentAgentCollaboratorInvocationOutput(v **types
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.AgentCollaboratorName = ptr.String(jtv)
+			}
+
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
+				return err
 			}
 
 		case "output":
@@ -5788,6 +5798,11 @@ func awsRestjson1_deserializeDocumentCodeInterpreterInvocationOutput(v **types.C
 				return err
 			}
 
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6072,6 +6087,19 @@ func awsRestjson1_deserializeDocumentFailureTrace(v **types.FailureTrace, value 
 
 	for key, value := range shape {
 		switch key {
+		case "failureCode":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FailureCode = ptr.Int32(int32(i64))
+			}
+
 		case "failureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6079,6 +6107,11 @@ func awsRestjson1_deserializeDocumentFailureTrace(v **types.FailureTrace, value 
 					return fmt.Errorf("expected FailureReasonString to be of type string, got %T instead", value)
 				}
 				sv.FailureReason = ptr.String(jtv)
+			}
+
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
+				return err
 			}
 
 		case "traceId":
@@ -6193,6 +6226,11 @@ func awsRestjson1_deserializeDocumentFinalResponse(v **types.FinalResponse, valu
 
 	for key, value := range shape {
 		switch key {
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
+				return err
+			}
+
 		case "text":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7287,6 +7325,11 @@ func awsRestjson1_deserializeDocumentGuardrailTrace(v **types.GuardrailTrace, va
 				return err
 			}
 
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
+				return err
+			}
+
 		case "outputAssessments":
 			if err := awsRestjson1_deserializeDocumentGuardrailAssessmentList(&sv.OutputAssessments, value); err != nil {
 				return err
@@ -7927,6 +7970,11 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseLookupOutput(v **types.Knowled
 
 	for key, value := range shape {
 		switch key {
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
+				return err
+			}
+
 		case "retrievedReferences":
 			if err := awsRestjson1_deserializeDocumentRetrievedReferences(&sv.RetrievedReferences, value); err != nil {
 				return err
@@ -7963,6 +8011,67 @@ func awsRestjson1_deserializeDocumentMetadata(v **types.Metadata, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "clientRequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ClientRequestId = ptr.String(jtv)
+			}
+
+		case "endTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateTimestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.EndTime = ptr.Time(t)
+			}
+
+		case "operationTotalTimeMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OperationTotalTimeMs = ptr.Int64(i64)
+			}
+
+		case "startTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateTimestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.StartTime = ptr.Time(t)
+			}
+
+		case "totalTimeMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalTimeMs = ptr.Int64(i64)
+			}
+
 		case "usage":
 			if err := awsRestjson1_deserializeDocumentUsage(&sv.Usage, value); err != nil {
 				return err

@@ -66,8 +66,7 @@ type CreateLicenseConfigurationInput struct {
 	//   - Cores dimension: allowedTenancy | licenseAffinityToHost | maximumCores |
 	//   minimumCores
 	//
-	//   - Instances dimension: allowedTenancy | maximumCores | minimumCores |
-	//   maximumSockets | minimumSockets | maximumVcpus | minimumVcpus
+	//   - Instances dimension: allowedTenancy | maximumVcpus | minimumVcpus
 	//
 	//   - Sockets dimension: allowedTenancy | licenseAffinityToHost | maximumSockets |
 	//   minimumSockets

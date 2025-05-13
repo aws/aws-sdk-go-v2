@@ -88,6 +88,15 @@ type UpdateGuardrailInput struct {
 	// The contextual grounding policy configuration used to update a guardrail.
 	ContextualGroundingPolicyConfig *types.GuardrailContextualGroundingPolicyConfig
 
+	// The system-defined guardrail profile that you're using with your guardrail.
+	// Guardrail profiles define the destination Amazon Web Services Regions where
+	// guardrail inference requests can be automatically routed.
+	//
+	// For more information, see the [Amazon Bedrock User Guide].
+	//
+	// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+	CrossRegionConfig *types.GuardrailCrossRegionConfig
+
 	// A description of the guardrail.
 	Description *string
 

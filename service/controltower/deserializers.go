@@ -5571,6 +5571,11 @@ func awsRestjson1_deserializeDocumentEnabledBaselineDetails(v **types.EnabledBas
 				sv.BaselineVersion = ptr.String(jtv)
 			}
 
+		case "driftStatusSummary":
+			if err := awsRestjson1_deserializeDocumentEnabledBaselineDriftStatusSummary(&sv.DriftStatusSummary, value); err != nil {
+				return err
+			}
+
 		case "parameters":
 			if err := awsRestjson1_deserializeDocumentEnabledBaselineParameterSummaries(&sv.Parameters, value); err != nil {
 				return err
@@ -5597,6 +5602,118 @@ func awsRestjson1_deserializeDocumentEnabledBaselineDetails(v **types.EnabledBas
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.TargetIdentifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEnabledBaselineDriftStatusSummary(v **types.EnabledBaselineDriftStatusSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EnabledBaselineDriftStatusSummary
+	if *v == nil {
+		sv = &types.EnabledBaselineDriftStatusSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "types":
+			if err := awsRestjson1_deserializeDocumentEnabledBaselineDriftTypes(&sv.Types, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEnabledBaselineDriftTypes(v **types.EnabledBaselineDriftTypes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EnabledBaselineDriftTypes
+	if *v == nil {
+		sv = &types.EnabledBaselineDriftTypes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inheritance":
+			if err := awsRestjson1_deserializeDocumentEnabledBaselineInheritanceDrift(&sv.Inheritance, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEnabledBaselineInheritanceDrift(v **types.EnabledBaselineInheritanceDrift, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EnabledBaselineInheritanceDrift
+	if *v == nil {
+		sv = &types.EnabledBaselineInheritanceDrift{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnabledBaselineDriftStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.EnabledBaselineDriftStatus(jtv)
 			}
 
 		default:
@@ -5776,6 +5893,11 @@ func awsRestjson1_deserializeDocumentEnabledBaselineSummary(v **types.EnabledBas
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.BaselineVersion = ptr.String(jtv)
+			}
+
+		case "driftStatusSummary":
+			if err := awsRestjson1_deserializeDocumentEnabledBaselineDriftStatusSummary(&sv.DriftStatusSummary, value); err != nil {
+				return err
 			}
 
 		case "parentIdentifier":

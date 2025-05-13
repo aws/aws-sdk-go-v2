@@ -227,6 +227,11 @@ func awsRestjson1_deserializeOpDocumentCreateClusterOutput(v **CreateClusterOutp
 				sv.Identifier = ptr.String(jtv)
 			}
 
+		case "multiRegionProperties":
+			if err := awsRestjson1_deserializeDocumentMultiRegionProperties(&sv.MultiRegionProperties, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -933,6 +938,11 @@ func awsRestjson1_deserializeOpDocumentGetClusterOutput(v **GetClusterOutput, va
 				return err
 			}
 
+		case "multiRegionProperties":
+			if err := awsRestjson1_deserializeDocumentMultiRegionProperties(&sv.MultiRegionProperties, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -940,6 +950,11 @@ func awsRestjson1_deserializeOpDocumentGetClusterOutput(v **GetClusterOutput, va
 					return fmt.Errorf("expected ClusterStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.ClusterStatus(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "witnessRegion":
@@ -2459,6 +2474,51 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 					return err
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultiRegionProperties(v **types.MultiRegionProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultiRegionProperties
+	if *v == nil {
+		sv = &types.MultiRegionProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clusters":
+			if err := awsRestjson1_deserializeDocumentClusterArnList(&sv.Clusters, value); err != nil {
+				return err
+			}
+
+		case "witnessRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
+				}
+				sv.WitnessRegion = ptr.String(jtv)
 			}
 
 		default:

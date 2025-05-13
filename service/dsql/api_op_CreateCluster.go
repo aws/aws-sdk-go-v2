@@ -12,7 +12,49 @@ import (
 	"time"
 )
 
-// Creates a cluster in Amazon Aurora DSQL.
+// This operation creates a cluster in Amazon Aurora DSQL. You need the following
+// permissions to use this operation.
+//
+// Permission to create a cluster.
+//
+// dsql:CreateCluster Resources: arn:aws:dsql:region:account-id:cluster/*
+//
+// Permission to add tags to a resource.
+//
+// dsql:TagResource Resources: arn:aws:dsql:region:account-id:cluster/*
+//
+// Permission to configure multi-region properties for a cluster.
+//
+// dsql:PutMultiRegionProperties Resources:
+// arn:aws:dsql:region:account-id:cluster/*
+//
+// When specifying multiRegionProperties.clusters.
+//
+// dsql:AddPeerCluster Permission to add peer clusters.
+//
+// Resources:
+//
+//   - Local cluster: arn:aws:dsql:region:account-id:cluster/*
+//
+//   - Each peer cluster: exact ARN of each specified peer cluster
+//
+// When specifying multiRegionProperties.witnessRegion.
+//
+// dsql:PutWitnessRegion Permission to set a witness region.
+//
+// Resources: arn:aws:dsql:region:account-id:cluster/*
+//
+// Condition Keys: dsql:WitnessRegion (matching the specified witness region)
+//
+// This permission is checked both in the cluster Region and in the witness Region.
+//
+// Important Notes for Multi-Region Operations
+//
+//   - The witness region specified in multiRegionProperties.witnessRegion cannot
+//     be the same as the cluster's Region.
+//
+//   - When updating clusters with peer relationships, permissions are checked for
+//     both adding and removing peers.
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
 		params = &CreateClusterInput{}
@@ -44,13 +86,17 @@ type CreateClusterInput struct {
 	// before you can delete your cluster.
 	DeletionProtectionEnabled *bool
 
+	// The configuration settings when creating a multi-Region cluster, including the
+	// witness region and linked cluster properties.
+	MultiRegionProperties *types.MultiRegionProperties
+
 	// A map of key and value pairs to use to tag your cluster.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Output Mixin
+// The output of a created cluster.
 type CreateClusterOutput struct {
 
 	// The ARN of the created cluster.
@@ -77,6 +123,10 @@ type CreateClusterOutput struct {
 	//
 	// This member is required.
 	Status types.ClusterStatus
+
+	// The multi-Region cluster configuration details that were set during cluster
+	// creation
+	MultiRegionProperties *types.MultiRegionProperties
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

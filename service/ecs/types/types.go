@@ -361,7 +361,7 @@ type Cluster struct {
 	// A user-generated string that you use to identify your cluster.
 	ClusterName *string
 
-	// The execute command configuration for the cluster.
+	// The execute command and managed storage configuration for the cluster.
 	Configuration *ClusterConfiguration
 
 	// The default capacity provider strategy for the cluster. When services or tasks
@@ -3205,14 +3205,29 @@ type ManagedScaling struct {
 // The managed storage configuration for the cluster.
 type ManagedStorageConfiguration struct {
 
-	// Specify the Key Management Service key ID for the Fargate ephemeral storage.
+	// Specify the Key Management Service key ID for Fargate ephemeral storage.
+	//
+	// When you specify a fargateEphemeralStorageKmsKeyId , Amazon Web Services Fargate
+	// uses the key to encrypt data at rest in ephemeral storage. For more information
+	// about Fargate ephemeral storage encryption, see [Customer managed keys for Amazon Web Services Fargate ephemeral storage for Amazon ECS]in the Amazon Elastic Container
+	// Service Developer Guide.
 	//
 	// The key must be a single Region key.
+	//
+	// [Customer managed keys for Amazon Web Services Fargate ephemeral storage for Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-storage-encryption.html
 	FargateEphemeralStorageKmsKeyId *string
 
-	// Specify a Key Management Service key ID to encrypt the managed storage.
+	// Specify a Key Management Service key ID to encrypt Amazon ECS managed storage.
+	//
+	// When you specify a kmsKeyId , Amazon ECS uses the key to encrypt data volumes
+	// managed by Amazon ECS that are attached to tasks in the cluster. The following
+	// data volumes are managed by Amazon ECS: Amazon EBS. For more information about
+	// encryption of Amazon EBS volumes attached to Amazon ECS tasks, see [Encrypt data stored in Amazon EBS volumes for Amazon ECS]in the
+	// Amazon Elastic Container Service Developer Guide.
 	//
 	// The key must be a single Region key.
+	//
+	// [Encrypt data stored in Amazon EBS volumes for Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -4476,17 +4491,19 @@ type ServiceManagedEBSVolumeConfiguration struct {
 	// This member is required.
 	RoleArn *string
 
-	// Indicates whether the volume should be encrypted. If no value is specified,
-	// encryption is turned on by default. This parameter maps 1:1 with the Encrypted
-	// parameter of the [CreateVolume API]in the Amazon EC2 API Reference.
+	// Indicates whether the volume should be encrypted. If you turn on Region-level
+	// Amazon EBS encryption by default but set this value as false , the setting is
+	// overridden and the volume is encrypted with the KMS key specified for Amazon EBS
+	// encryption by default. This parameter maps 1:1 with the Encrypted parameter of
+	// the [CreateVolume API]in the Amazon EC2 API Reference.
 	//
 	// [CreateVolume API]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
 	Encrypted *bool
 
 	// The filesystem type for the volume. For volumes created from a snapshot, you
 	// must specify the same filesystem type that the volume was using when the
-	// snapshot was created. If there is a filesystem type mismatch, the task will fail
-	// to start.
+	// snapshot was created. If there is a filesystem type mismatch, the tasks will
+	// fail to start.
 	//
 	// The available Linux filesystem types are  ext3 , ext4 , and xfs . If no value is
 	// specified, the xfs filesystem type is used by default.
@@ -4518,17 +4535,19 @@ type ServiceManagedEBSVolumeConfiguration struct {
 	Iops *int32
 
 	// The Amazon Resource Name (ARN) identifier of the Amazon Web Services Key
-	// Management Service key to use for Amazon EBS encryption. When encryption is
-	// turned on and no Amazon Web Services Key Management Service key is specified,
-	// the default Amazon Web Services managed key for Amazon EBS volumes is used. This
-	// parameter maps 1:1 with the KmsKeyId parameter of the [CreateVolume API] in the Amazon EC2 API
-	// Reference.
+	// Management Service key to use for Amazon EBS encryption. When a key is specified
+	// using this parameter, it overrides Amazon EBS default encryption or any KMS key
+	// that you specified for cluster-level managed storage encryption. This parameter
+	// maps 1:1 with the KmsKeyId parameter of the [CreateVolume API] in the Amazon EC2 API Reference.
+	// For more information about encrypting Amazon EBS volumes attached to tasks, see [Encrypt data stored in Amazon EBS volumes attached to Amazon ECS tasks]
+	// .
 	//
 	// Amazon Web Services authenticates the Amazon Web Services Key Management
 	// Service key asynchronously. Therefore, if you specify an ID, alias, or ARN that
 	// is invalid, the action can appear to complete, but eventually fails.
 	//
 	// [CreateVolume API]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
+	// [Encrypt data stored in Amazon EBS volumes attached to Amazon ECS tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html
 	KmsKeyId *string
 
 	// The size of the volume in GiB. You must specify either a volume size or a
@@ -4550,8 +4569,9 @@ type ServiceManagedEBSVolumeConfiguration struct {
 	// [CreateVolume API]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
 	SizeInGiB *int32
 
-	// The snapshot that Amazon ECS uses to create the volume. You must specify either
-	// a snapshot ID or a volume size. This parameter maps 1:1 with the SnapshotId
+	// The snapshot that Amazon ECS uses to create volumes for attachment to tasks
+	// maintained by the service. You must specify either snapshotId or sizeInGiB in
+	// your volume configuration. This parameter maps 1:1 with the SnapshotId
 	// parameter of the [CreateVolume API]in the Amazon EC2 API Reference.
 	//
 	// [CreateVolume API]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
@@ -4572,6 +4592,14 @@ type ServiceManagedEBSVolumeConfiguration struct {
 	//
 	// [CreateVolume API]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
 	Throughput *int32
+
+	// The rate, in MiB/s, at which data is fetched from a snapshot of an existing EBS
+	// volume to create new volumes for attachment to the tasks maintained by the
+	// service. This property can be specified only if you specify a snapshotId . For
+	// more information, see [Initialize Amazon EBS volumes]in the Amazon EBS User Guide.
+	//
+	// [Initialize Amazon EBS volumes]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
+	VolumeInitializationRate *int32
 
 	// The volume type. This parameter maps 1:1 with the VolumeType parameter of the [CreateVolume API]
 	// in the Amazon EC2 API Reference. For more information, see [Amazon EBS volume types]in the Amazon EC2
@@ -4845,7 +4873,9 @@ type SystemControl struct {
 	// | "kernel.sem" | "kernel.shmall" | "kernel.shmmax" | "kernel.shmmni" |
 	// "kernel.shm_rmid_forced" , and Sysctls that start with "fs.mqueue.*"
 	//
-	// Valid network namespace values: Sysctls that start with "net.*"
+	// Valid network namespace values: Sysctls that start with "net.*" . Only
+	// namespaced Sysctls that exist within the container starting with "net.* are
+	// accepted.
 	//
 	// All of these values are supported by Fargate.
 	Value *string
@@ -4932,10 +4962,35 @@ type Task struct {
 	// optional. Supported values are between 128 CPU units ( 0.125 vCPUs) and 196608
 	// CPU units ( 192 vCPUs). If you do not specify a value, the parameter is ignored.
 	//
-	// This field is required for Fargate. For information about the valid values, see [Task size]
-	// in the Amazon Elastic Container Service Developer Guide.
+	// If you're using the Fargate launch type, this field is required. You must use
+	// one of the following values. These values determine the range of supported
+	// values for the memory parameter:
 	//
-	// [Task size]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size
+	// The CPU units cannot be less than 1 vCPU when you use Windows containers on
+	// Fargate.
+	//
+	//   - 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB), 2048 (2
+	//   GB)
+	//
+	//   - 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048 (2 GB), 3072 (3
+	//   GB), 4096 (4 GB)
+	//
+	//   - 1024 (1 vCPU) - Available memory values: 2048 (2 GB), 3072 (3 GB), 4096 (4
+	//   GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
+	//
+	//   - 2048 (2 vCPU) - Available memory values: 4096 (4 GB) and 16384 (16 GB) in
+	//   increments of 1024 (1 GB)
+	//
+	//   - 4096 (4 vCPU) - Available memory values: 8192 (8 GB) and 30720 (30 GB) in
+	//   increments of 1024 (1 GB)
+	//
+	//   - 8192 (8 vCPU) - Available memory values: 16 GB and 60 GB in 4 GB increments
+	//
+	// This option requires Linux platform 1.4.0 or later.
+	//
+	//   - 16384 (16vCPU) - Available memory values: 32GB and 120 GB in 8 GB increments
+	//
+	// This option requires Linux platform 1.4.0 or later.
 	Cpu *string
 
 	// The Unix timestamp for the time when the task was created. More specifically,
@@ -5153,12 +5208,31 @@ type TaskDefinition struct {
 	//
 	// If you're using the EC2 launch type or the external launch type, this field is
 	// optional. Supported values are between 128 CPU units ( 0.125 vCPUs) and 196608
-	// CPU units ( 192 vCPUs).
+	// CPU units ( 192 vCPUs). The CPU units cannot be less than 1 vCPU when you use
+	// Windows containers on Fargate.
 	//
-	// This field is required for Fargate. For information about the valid values, see [Task size]
-	// in the Amazon Elastic Container Service Developer Guide.
+	//   - 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB), 2048 (2
+	//   GB)
 	//
-	// [Task size]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size
+	//   - 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048 (2 GB), 3072 (3
+	//   GB), 4096 (4 GB)
+	//
+	//   - 1024 (1 vCPU) - Available memory values: 2048 (2 GB), 3072 (3 GB), 4096 (4
+	//   GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
+	//
+	//   - 2048 (2 vCPU) - Available memory values: 4096 (4 GB) and 16384 (16 GB) in
+	//   increments of 1024 (1 GB)
+	//
+	//   - 4096 (4 vCPU) - Available memory values: 8192 (8 GB) and 30720 (30 GB) in
+	//   increments of 1024 (1 GB)
+	//
+	//   - 8192 (8 vCPU) - Available memory values: 16 GB and 60 GB in 4 GB increments
+	//
+	// This option requires Linux platform 1.4.0 or later.
+	//
+	//   - 16384 (16vCPU) - Available memory values: 32GB and 120 GB in 8 GB increments
+	//
+	// This option requires Linux platform 1.4.0 or later.
 	Cpu *string
 
 	// The Unix timestamp for the time when the task definition was deregistered.
@@ -5451,9 +5525,11 @@ type TaskManagedEBSVolumeConfiguration struct {
 	// This member is required.
 	RoleArn *string
 
-	// Indicates whether the volume should be encrypted. If no value is specified,
-	// encryption is turned on by default. This parameter maps 1:1 with the Encrypted
-	// parameter of the [CreateVolume API]in the Amazon EC2 API Reference.
+	// Indicates whether the volume should be encrypted. If you turn on Region-level
+	// Amazon EBS encryption by default but set this value as false , the setting is
+	// overridden and the volume is encrypted with the KMS key specified for Amazon EBS
+	// encryption by default. This parameter maps 1:1 with the Encrypted parameter of
+	// the [CreateVolume API]in the Amazon EC2 API Reference.
 	//
 	// [CreateVolume API]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
 	Encrypted *bool
@@ -5491,17 +5567,19 @@ type TaskManagedEBSVolumeConfiguration struct {
 	Iops *int32
 
 	// The Amazon Resource Name (ARN) identifier of the Amazon Web Services Key
-	// Management Service key to use for Amazon EBS encryption. When encryption is
-	// turned on and no Amazon Web Services Key Management Service key is specified,
-	// the default Amazon Web Services managed key for Amazon EBS volumes is used. This
-	// parameter maps 1:1 with the KmsKeyId parameter of the [CreateVolume API] in the Amazon EC2 API
-	// Reference.
+	// Management Service key to use for Amazon EBS encryption. When a key is specified
+	// using this parameter, it overrides Amazon EBS default encryption or any KMS key
+	// that you specified for cluster-level managed storage encryption. This parameter
+	// maps 1:1 with the KmsKeyId parameter of the [CreateVolume API] in the Amazon EC2 API Reference.
+	// For more information about encrypting Amazon EBS volumes attached to a task, see
+	// [Encrypt data stored in Amazon EBS volumes attached to Amazon ECS tasks].
 	//
 	// Amazon Web Services authenticates the Amazon Web Services Key Management
 	// Service key asynchronously. Therefore, if you specify an ID, alias, or ARN that
 	// is invalid, the action can appear to complete, but eventually fails.
 	//
 	// [CreateVolume API]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
+	// [Encrypt data stored in Amazon EBS volumes attached to Amazon ECS tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html
 	KmsKeyId *string
 
 	// The size of the volume in GiB. You must specify either a volume size or a
@@ -5550,6 +5628,14 @@ type TaskManagedEBSVolumeConfiguration struct {
 	//
 	// [CreateVolume API]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
 	Throughput *int32
+
+	// The rate, in MiB/s, at which data is fetched from a snapshot of an existing
+	// Amazon EBS volume to create a new volume for attachment to the task. This
+	// property can be specified only if you specify a snapshotId . For more
+	// information, see [Initialize Amazon EBS volumes]in the Amazon EBS User Guide.
+	//
+	// [Initialize Amazon EBS volumes]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
+	VolumeInitializationRate *int32
 
 	// The volume type. This parameter maps 1:1 with the VolumeType parameter of the [CreateVolume API]
 	// in the Amazon EC2 API Reference. For more information, see [Amazon EBS volume types]in the Amazon EC2

@@ -48,7 +48,7 @@ type DeleteClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-// Output Mixin
+// The output from a deleted cluster.
 type DeleteClusterOutput struct {
 
 	// The ARN of the deleted cluster.
@@ -64,6 +64,10 @@ type DeleteClusterOutput struct {
 	// Specifies whether deletion protection was enabled on the cluster.
 	//
 	// This member is required.
+	//
+	// Deprecated: The deletionProtectionEnabled field is deprecated in the
+	// DeleteCluster API. To check deletion protection status, use the GetCluster API
+	// instead.
 	DeletionProtectionEnabled *bool
 
 	// The ID of the deleted cluster.

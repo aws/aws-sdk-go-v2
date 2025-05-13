@@ -113,6 +113,25 @@ func (DriftStatus) Values() []DriftStatus {
 	}
 }
 
+type EnabledBaselineDriftStatus string
+
+// Enum values for EnabledBaselineDriftStatus
+const (
+	EnabledBaselineDriftStatusInSync  EnabledBaselineDriftStatus = "IN_SYNC"
+	EnabledBaselineDriftStatusDrifted EnabledBaselineDriftStatus = "DRIFTED"
+)
+
+// Values returns all known values for EnabledBaselineDriftStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnabledBaselineDriftStatus) Values() []EnabledBaselineDriftStatus {
+	return []EnabledBaselineDriftStatus{
+		"IN_SYNC",
+		"DRIFTED",
+	}
+}
+
 type EnablementStatus string
 
 // Enum values for EnablementStatus

@@ -197,6 +197,9 @@ type EnabledBaselineDetails struct {
 	// The enabled version of the Baseline .
 	BaselineVersion *string
 
+	// The drift status of the enabled baseline.
+	DriftStatusSummary *EnabledBaselineDriftStatusSummary
+
 	// Shows the parameters that are applied when enabling this Baseline .
 	Parameters []EnabledBaselineParameterSummary
 
@@ -204,6 +207,60 @@ type EnabledBaselineDetails struct {
 	// (OU) level, from which the child EnabledBaseline inherits its configuration.
 	// The value is returned by GetEnabledBaseline .
 	ParentIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The drift summary of the enabled baseline. Amazon Web Services Control Tower
+// reports inheritance drift when an enabled baseline configuration of a member
+// account is different than the configuration that applies to the OU. Amazon Web
+// Services Control Tower reports this type of drift for a parent or child enabled
+// baseline. One way to repair this drift by resetting the parent enabled baseline,
+// on the OU.
+//
+// For example, if an account is moved between OUs that share the same baseline
+// but different versions or parameters, the entity from the previous OU is
+// unlinked; that (previous) OU reports inheritance drift. Also, the parent enabled
+// baseline on the destination OU reports inheritance drift; it is missing the
+// newly moved account. The configurations do not match for either OU, so both are
+// in a state of inheritance drift.
+type EnabledBaselineDriftStatusSummary struct {
+
+	// The types of drift that can be detected for an enabled baseline. Amazon Web
+	// Services Control Tower detects inheritance drift on enabled baselines that apply
+	// at the OU level.
+	Types *EnabledBaselineDriftTypes
+
+	noSmithyDocumentSerde
+}
+
+// The types of drift that can be detected for an enabled baseline.
+//
+//   - Amazon Web Services Control Tower detects inheritance drift on the enabled
+//     baselines that target OUs: AWSControlTowerBaseline and BackupBaseline .
+//
+//   - Amazon Web Services Control Tower does not detect drift on the baselines
+//     that apply to your landing zone: IdentityCenterBaseline , AuditBaseline ,
+//     LogArchiveBaseline , BackupCentralVaultBaseline , or BackupAdminBaseline . For
+//     more information, see [Types of baselines].
+//
+// Baselines enabled on an OU are inherited by its member accounts as child
+// EnabledBaseline resources. The baseline on the OU serves as the parent
+// EnabledBaseline , which governs the configuration of each child EnabledBaseline .
+//
+// If the baseline configuration of a member account in an OU does not match the
+// configuration of the parent OU, the parent and child baseline is in a state of
+// inheritance drift. This drift could occur in the AWSControlTowerBaseline or the
+// BackupBaseline related to that account.
+//
+// [Types of baselines]: https://docs.aws.amazon.com/controltower/latest/userguide/types-of-baselines.html
+type EnabledBaselineDriftTypes struct {
+
+	// One or more accounts within the target OU does not match the baseline
+	// configuration defined on that OU. An account is in inheritance drift when it
+	// does not match the configuration of a parent OU, possibly a new parent OU if the
+	// account is moved.
+	Inheritance *EnabledBaselineInheritanceDrift
 
 	noSmithyDocumentSerde
 }
@@ -216,12 +273,29 @@ type EnabledBaselineFilter struct {
 	// Identifiers for the Baseline objects returned as part of the filter operation.
 	BaselineIdentifiers []string
 
+	// A list of EnabledBaselineDriftStatus items for enabled baselines.
+	InheritanceDriftStatuses []EnabledBaselineDriftStatus
+
 	// An optional filter that sets up a list of parentIdentifiers to filter the
 	// results of the ListEnabledBaseline output.
 	ParentIdentifiers []string
 
+	// A list of EnablementStatus items.
+	Statuses []EnablementStatus
+
 	// Identifiers for the targets of the Baseline filter operation.
 	TargetIdentifiers []string
+
+	noSmithyDocumentSerde
+}
+
+// The inheritance drift summary for the enabled baseline. Inheritance drift
+// occurs when any accounts in the target OU do not match the baseline
+// configuration defined on that OU.
+type EnabledBaselineInheritanceDrift struct {
+
+	// The inheritance drift status for enabled baselines.
+	Status EnabledBaselineDriftStatus
 
 	noSmithyDocumentSerde
 }
@@ -283,6 +357,9 @@ type EnabledBaselineSummary struct {
 
 	// The enabled version of the baseline.
 	BaselineVersion *string
+
+	// The drift status of the enabled baseline.
+	DriftStatusSummary *EnabledBaselineDriftStatusSummary
 
 	// An ARN that represents an object returned by ListEnabledBaseline , to describe
 	// an enabled baseline.

@@ -2544,6 +2544,28 @@ func awsRestjson1_serializeDocumentEnabledBaselineBaselineIdentifiers(v []string
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEnabledBaselineDriftStatuses(v []types.EnabledBaselineDriftStatus, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEnabledBaselineEnablementStatuses(v []types.EnablementStatus, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEnabledBaselineFilter(v *types.EnabledBaselineFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2555,9 +2577,23 @@ func awsRestjson1_serializeDocumentEnabledBaselineFilter(v *types.EnabledBaselin
 		}
 	}
 
+	if v.InheritanceDriftStatuses != nil {
+		ok := object.Key("inheritanceDriftStatuses")
+		if err := awsRestjson1_serializeDocumentEnabledBaselineDriftStatuses(v.InheritanceDriftStatuses, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ParentIdentifiers != nil {
 		ok := object.Key("parentIdentifiers")
 		if err := awsRestjson1_serializeDocumentEnabledBaselineParentIdentifiers(v.ParentIdentifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Statuses != nil {
+		ok := object.Key("statuses")
+		if err := awsRestjson1_serializeDocumentEnabledBaselineEnablementStatuses(v.Statuses, ok); err != nil {
 			return err
 		}
 	}

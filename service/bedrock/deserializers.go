@@ -3984,6 +3984,11 @@ func awsRestjson1_deserializeOpDocumentGetGuardrailOutput(v **GetGuardrailOutput
 				sv.CreatedAt = ptr.Time(t)
 			}
 
+		case "crossRegionDetails":
+			if err := awsRestjson1_deserializeDocumentGuardrailCrossRegionDetails(&sv.CrossRegionDetails, value); err != nil {
+				return err
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13919,6 +13924,55 @@ func awsRestjson1_deserializeDocumentGuardrailContextualGroundingPolicy(v **type
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGuardrailCrossRegionDetails(v **types.GuardrailCrossRegionDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GuardrailCrossRegionDetails
+	if *v == nil {
+		sv = &types.GuardrailCrossRegionDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "guardrailProfileArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailCrossRegionGuardrailProfileArn to be of type string, got %T instead", value)
+				}
+				sv.GuardrailProfileArn = ptr.String(jtv)
+			}
+
+		case "guardrailProfileId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailCrossRegionGuardrailProfileId to be of type string, got %T instead", value)
+				}
+				sv.GuardrailProfileId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGuardrailFailureRecommendations(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14510,6 +14564,11 @@ func awsRestjson1_deserializeDocumentGuardrailSummary(v **types.GuardrailSummary
 					return err
 				}
 				sv.CreatedAt = ptr.Time(t)
+			}
+
+		case "crossRegionDetails":
+			if err := awsRestjson1_deserializeDocumentGuardrailCrossRegionDetails(&sv.CrossRegionDetails, value); err != nil {
+				return err
 			}
 
 		case "description":

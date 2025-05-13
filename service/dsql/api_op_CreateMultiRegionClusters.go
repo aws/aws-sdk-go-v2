@@ -15,6 +15,9 @@ import (
 // require a linked Region list, which is an array of the Regions in which you want
 // to create linked clusters. Multi-Region clusters require a witness Region, which
 // participates in quorum in failure scenarios.
+//
+// Deprecated: The CreateMultiRegionClusters API is deprecated. Use the
+// CreateCluster API with multi-Region properties to create a multi-Region cluster.
 func (c *Client) CreateMultiRegionClusters(ctx context.Context, params *CreateMultiRegionClustersInput, optFns ...func(*Options)) (*CreateMultiRegionClustersOutput, error) {
 	if params == nil {
 		params = &CreateMultiRegionClustersInput{}
@@ -35,6 +38,9 @@ type CreateMultiRegionClustersInput struct {
 	// An array of the Regions in which you want to create additional clusters.
 	//
 	// This member is required.
+	//
+	// Deprecated: The CreateMultiRegionClusters API is deprecated. Use the
+	// CreateCluster API with multi-Region properties to create a multi-Region cluster.
 	LinkedRegionList []string
 
 	// The witness Region of multi-Region clusters.
@@ -53,6 +59,10 @@ type CreateMultiRegionClustersInput struct {
 	ClientToken *string
 
 	// A mapping of properties to use when creating linked clusters.
+	//
+	// Deprecated: The CreateMultiRegionClusters API is deprecated. To create a
+	// multi-Region cluster, use the CreateCluster API with multi-Region properties
+	// instead.
 	ClusterProperties map[string]types.LinkedClusterProperties
 
 	noSmithyDocumentSerde

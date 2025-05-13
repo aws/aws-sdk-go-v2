@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags for the specified license configuration.
+// Lists the tags for the specified resource. For more information about tagging
+// support in License Manager, see the [TagResource]operation.
+//
+// [TagResource]: https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -29,7 +32,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// Amazon Resource Name (ARN) of the license configuration.
+	// Amazon Resource Name (ARN) of the resource.
 	//
 	// This member is required.
 	ResourceArn *string

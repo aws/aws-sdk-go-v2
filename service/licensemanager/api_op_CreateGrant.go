@@ -72,6 +72,12 @@ type CreateGrantInput struct {
 	// This member is required.
 	Principals []string
 
+	// Tags to add to the grant. For more information about tagging support in License
+	// Manager, see the [TagResource]operation.
+	//
+	// [TagResource]: https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

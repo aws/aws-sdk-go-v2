@@ -338,6 +338,13 @@ func awsRestjson1_serializeOpDocumentCreateGuardrailInput(v *CreateGuardrailInpu
 		}
 	}
 
+	if v.CrossRegionConfig != nil {
+		ok := object.Key("crossRegionConfig")
+		if err := awsRestjson1_serializeDocumentGuardrailCrossRegionConfig(v.CrossRegionConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -4971,6 +4978,13 @@ func awsRestjson1_serializeOpDocumentUpdateGuardrailInput(v *UpdateGuardrailInpu
 		}
 	}
 
+	if v.CrossRegionConfig != nil {
+		ok := object.Key("crossRegionConfig")
+		if err := awsRestjson1_serializeDocumentGuardrailCrossRegionConfig(v.CrossRegionConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -6137,6 +6151,18 @@ func awsRestjson1_serializeDocumentGuardrailContextualGroundingPolicyConfig(v *t
 		if err := awsRestjson1_serializeDocumentGuardrailContextualGroundingFiltersConfig(v.FiltersConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailCrossRegionConfig(v *types.GuardrailCrossRegionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GuardrailProfileIdentifier != nil {
+		ok := object.Key("guardrailProfileIdentifier")
+		ok.String(*v.GuardrailProfileIdentifier)
 	}
 
 	return nil

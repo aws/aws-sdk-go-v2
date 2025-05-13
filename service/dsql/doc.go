@@ -8,9 +8,9 @@
 // to manage Amazon Aurora DSQL.
 //
 // Amazon Aurora DSQL is a serverless, distributed SQL database suitable for
-// workloads of any size. Aurora DSQL is available in both single-Region and
-// multi-Region configurations, so your clusters and databases are always available
-// even if an Availability Zone or an Amazon Web Services Region are unavailable.
-// Aurora DSQL lets you focus on using your data to acquire new insights for your
-// business and customers.
+// workloads of any size. is available in both single-Region and multi-Region
+// configurations, so your clusters and databases are always available even if an
+// Availability Zone or an Amazon Web Services Region are unavailable. lets you
+// focus on using your data to acquire new insights for your business and
+// customers.
 package dsql

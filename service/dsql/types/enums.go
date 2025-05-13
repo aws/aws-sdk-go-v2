@@ -6,12 +6,16 @@ type ClusterStatus string
 
 // Enum values for ClusterStatus
 const (
-	ClusterStatusCreating ClusterStatus = "CREATING"
-	ClusterStatusActive   ClusterStatus = "ACTIVE"
-	ClusterStatusUpdating ClusterStatus = "UPDATING"
-	ClusterStatusDeleting ClusterStatus = "DELETING"
-	ClusterStatusDeleted  ClusterStatus = "DELETED"
-	ClusterStatusFailed   ClusterStatus = "FAILED"
+	ClusterStatusCreating      ClusterStatus = "CREATING"
+	ClusterStatusActive        ClusterStatus = "ACTIVE"
+	ClusterStatusIdle          ClusterStatus = "IDLE"
+	ClusterStatusInactive      ClusterStatus = "INACTIVE"
+	ClusterStatusUpdating      ClusterStatus = "UPDATING"
+	ClusterStatusDeleting      ClusterStatus = "DELETING"
+	ClusterStatusDeleted       ClusterStatus = "DELETED"
+	ClusterStatusFailed        ClusterStatus = "FAILED"
+	ClusterStatusPendingSetup  ClusterStatus = "PENDING_SETUP"
+	ClusterStatusPendingDelete ClusterStatus = "PENDING_DELETE"
 )
 
 // Values returns all known values for ClusterStatus. Note that this can be
@@ -22,10 +26,14 @@ func (ClusterStatus) Values() []ClusterStatus {
 	return []ClusterStatus{
 		"CREATING",
 		"ACTIVE",
+		"IDLE",
+		"INACTIVE",
 		"UPDATING",
 		"DELETING",
 		"DELETED",
 		"FAILED",
+		"PENDING_SETUP",
+		"PENDING_DELETE",
 	}
 }
 

@@ -85,6 +85,12 @@ type CreateLicenseInput struct {
 	// Information about the license.
 	LicenseMetadata []types.Metadata
 
+	// Tags to add to the license. For more information about tagging support in
+	// License Manager, see the [TagResource]operation.
+	//
+	// [TagResource]: https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

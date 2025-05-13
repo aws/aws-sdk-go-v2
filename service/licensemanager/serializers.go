@@ -3785,6 +3785,13 @@ func awsAwsjson11_serializeOpDocumentCreateGrantInput(v *CreateGrantInput, value
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3983,6 +3990,13 @@ func awsAwsjson11_serializeOpDocumentCreateLicenseInput(v *CreateLicenseInput, v
 	if v.ProductSKU != nil {
 		ok := object.Key("ProductSKU")
 		ok.String(*v.ProductSKU)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Validity != nil {

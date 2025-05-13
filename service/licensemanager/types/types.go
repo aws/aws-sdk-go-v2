@@ -680,7 +680,8 @@ type ProductInformation struct {
 	// type is RDS :
 	//
 	//   - Engine Edition - The edition of the database engine. Logical operator is
-	//   EQUALS . Possible values are: oracle-ee | oracle-se | oracle-se1 | oracle-se2 .
+	//   EQUALS . Possible values are: oracle-ee | oracle-se | oracle-se1 | oracle-se2
+	//   | db2-se | db2-ae .
 	//
 	//   - License Pack - The license pack. Logical operator is EQUALS . Possible
 	//   values are: data guard | diagnostic pack sqlt | tuning pack sqlt | ols | olap .
@@ -847,13 +848,16 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a tag for a license configuration.
+// Details about the tags for a resource. For more information about tagging
+// support in License Manager, see the [TagResource]operation.
+//
+// [TagResource]: https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html
 type Tag struct {
 
-	// Tag key.
+	// The tag key.
 	Key *string
 
-	// Tag value.
+	// The tag value.
 	Value *string
 
 	noSmithyDocumentSerde

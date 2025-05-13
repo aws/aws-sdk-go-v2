@@ -34,6 +34,21 @@ type LinkedClusterProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the structure for multi-Region cluster configurations, containing the
+// witness region and linked cluster settings.
+type MultiRegionProperties struct {
+
+	// The set of linked clusters that form the multi-Region cluster configuration.
+	// Each linked cluster represents a database instance in a different Region.
+	Clusters []string
+
+	// The that serves as the witness region for a multi-Region cluster. The witness
+	// region helps maintain cluster consistency and quorum.
+	WitnessRegion *string
+
+	noSmithyDocumentSerde
+}
+
 // Stores information about a field passed inside a request that resulted in an
 // validation error.
 type ValidationExceptionField struct {

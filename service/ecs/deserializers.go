@@ -16896,6 +16896,19 @@ func awsAwsjson11_deserializeDocumentServiceManagedEBSVolumeConfiguration(v **ty
 				sv.Throughput = ptr.Int32(int32(i64))
 			}
 
+		case "volumeInitializationRate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.VolumeInitializationRate = ptr.Int32(int32(i64))
+			}
+
 		case "volumeType":
 			if value != nil {
 				jtv, ok := value.(string)

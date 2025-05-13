@@ -13,6 +13,24 @@ import (
 )
 
 // Updates a cluster.
+//
+// # Example IAM Policy for Multi-Region Operations
+//
+// The following IAM policy grants permissions for multi-Region operations.
+//
+// The dsql:RemovePeerCluster permission uses a wildcard ARN pattern to simplify
+// permission management during updates.
+//
+// Important Notes for Multi-Region Operations
+//
+//   - The witness region specified in multiRegionProperties.witnessRegion cannot
+//     be the same as the cluster's Region.
+//
+//   - When updating clusters with peer relationships, permissions are checked for
+//     both adding and removing peers.
+//
+//   - The dsql:RemovePeerCluster permission uses a wildcard ARN pattern to
+//     simplify permission management during updates.
 func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, optFns ...func(*Options)) (*UpdateClusterOutput, error) {
 	if params == nil {
 		params = &UpdateClusterInput{}
@@ -48,10 +66,14 @@ type UpdateClusterInput struct {
 	// Specifies whether to enable deletion protection in your cluster.
 	DeletionProtectionEnabled *bool
 
+	// The new multi-Region cluster configuration settings to be applied during an
+	// update operation.
+	MultiRegionProperties *types.MultiRegionProperties
+
 	noSmithyDocumentSerde
 }
 
-// Output Mixin
+// The details of the cluster after it has been updated.
 type UpdateClusterOutput struct {
 
 	// The ARN of the updated cluster.
@@ -67,6 +89,10 @@ type UpdateClusterOutput struct {
 	// Whether deletion protection is enabled for the updated cluster.
 	//
 	// This member is required.
+	//
+	// Deprecated: The deletionProtectionEnabled field is deprecated in the
+	// UpdateCluster API. To check deletion protection status, use the GetCluster API
+	// instead.
 	DeletionProtectionEnabled *bool
 
 	// The ID of the cluster to update.
@@ -81,9 +107,15 @@ type UpdateClusterOutput struct {
 
 	// The ARNs of the clusters linked to the updated cluster. Applicable only for
 	// multi-Region clusters.
+	//
+	// Deprecated: The linkedClusterArns field is deprecated in the UpdateCluster API.
+	// To check peer cluster, use the GetCluster API instead.
 	LinkedClusterArns []string
 
 	// The Region that receives all data you write to linked clusters.
+	//
+	// Deprecated: The witnessRegion field is deprecated in the UpdateCluster API. To
+	// check witnessRegion, use the GetCluster API instead.
 	WitnessRegion *string
 
 	// Metadata pertaining to the operation's result.
