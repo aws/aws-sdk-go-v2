@@ -13505,6 +13505,15 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 				sv.TimeDeltaUnits = types.FileSourceTimeDeltaUnits(jtv)
 			}
 
+		case "upconvertSTLToTeletext":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CaptionSourceUpconvertSTLToTeletext to be of type string, got %T instead", value)
+				}
+				sv.UpconvertSTLToTeletext = types.CaptionSourceUpconvertSTLToTeletext(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -24294,6 +24303,11 @@ func awsRestjson1_deserializeDocumentVideoOverlay(v **types.VideoOverlay, value 
 
 	for key, value := range shape {
 		switch key {
+		case "crop":
+			if err := awsRestjson1_deserializeDocumentVideoOverlayCrop(&sv.Crop, value); err != nil {
+				return err
+			}
+
 		case "endTimecode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24334,6 +24348,98 @@ func awsRestjson1_deserializeDocumentVideoOverlay(v **types.VideoOverlay, value 
 		case "transitions":
 			if err := awsRestjson1_deserializeDocument__listOfVideoOverlayTransition(&sv.Transitions, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoOverlayCrop(v **types.VideoOverlayCrop, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoOverlayCrop
+	if *v == nil {
+		sv = &types.VideoOverlayCrop{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "height":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Height = ptr.Int32(int32(i64))
+			}
+
+		case "unit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VideoOverlayUnit to be of type string, got %T instead", value)
+				}
+				sv.Unit = types.VideoOverlayUnit(jtv)
+			}
+
+		case "width":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Width = ptr.Int32(int32(i64))
+			}
+
+		case "x":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.X = ptr.Int32(int32(i64))
+			}
+
+		case "y":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Y = ptr.Int32(int32(i64))
 			}
 
 		default:

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the specified log groups. You can list all your log groups or filter the
-// results by prefix. The results are ASCII-sorted by log group name.
+// Returns information about log groups. You can return all your log groups or
+// filter the results by prefix. The results are ASCII-sorted by log group name.
 //
 // CloudWatch Logs doesn't support IAM policies that control access to the
 // DescribeLogGroups action by using the aws:ResourceTag/key-name  condition key.
@@ -43,12 +43,12 @@ func (c *Client) DescribeLogGroups(ctx context.Context, params *DescribeLogGroup
 
 type DescribeLogGroupsInput struct {
 
-	// When includeLinkedAccounts is set to True , use this parameter to specify the
+	// When includeLinkedAccounts is set to true , use this parameter to specify the
 	// list of accounts to search. You can specify as many as 20 account IDs in the
 	// array.
 	AccountIdentifiers []string
 
-	// If you are using a monitoring account, set this to True to have the operation
+	// If you are using a monitoring account, set this to true to have the operation
 	// return log groups in the accounts listed in accountIdentifiers .
 	//
 	// If this parameter is set to true and accountIdentifiers
@@ -56,12 +56,18 @@ type DescribeLogGroupsInput struct {
 	// contains a null value, the operation returns all log groups in the monitoring
 	// account and all log groups in all source accounts that are linked to the
 	// monitoring account.
+	//
+	// The default for this parameter is false .
 	IncludeLinkedAccounts *bool
 
 	// The maximum number of items returned. If you don't specify a value, the default
 	// is up to 50 items.
 	Limit *int32
 
+	// Use this parameter to limit the results to only those log groups in the
+	// specified log group class. If you omit this parameter, log groups of all classes
+	// can be returned.
+	//
 	// Specifies the log group class for this log group. There are three classes:
 	//
 	//   - The Standard log class supports all CloudWatch Logs features.
@@ -78,6 +84,17 @@ type DescribeLogGroupsInput struct {
 	//
 	// [Log classes]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
 	LogGroupClass types.LogGroupClass
+
+	// Use this array to filter the list of log groups returned. If you specify this
+	// parameter, the only other filter that you can choose to specify is
+	// includeLinkedAccounts .
+	//
+	// If you are using this operation in a monitoring account, you can specify the
+	// ARNs of log groups in source accounts and in the monitoring account itself. If
+	// you are using this operation in an account that is not a cross-account
+	// monitoring account, you can specify only log group names in the same account as
+	// the operation.
+	LogGroupIdentifiers []string
 
 	// If you specify a string for this parameter, the operation returns only log
 	// groups that have names that match the string based on a case-sensitive substring
@@ -106,10 +123,8 @@ type DescribeLogGroupsInput struct {
 
 type DescribeLogGroupsOutput struct {
 
-	// The log groups.
-	//
-	// If the retentionInDays value is not included for a log group, then that log
-	// group's events do not expire.
+	// An array of structures, where each structure contains the information about one
+	// log group.
 	LogGroups []types.LogGroup
 
 	// The token for the next set of items to return. The token expires after 24 hours.

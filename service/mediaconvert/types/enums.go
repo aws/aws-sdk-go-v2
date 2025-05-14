@@ -1540,6 +1540,26 @@ func (CaptionSourceType) Values() []CaptionSourceType {
 	}
 }
 
+type CaptionSourceUpconvertSTLToTeletext string
+
+// Enum values for CaptionSourceUpconvertSTLToTeletext
+const (
+	CaptionSourceUpconvertSTLToTeletextUpconvert CaptionSourceUpconvertSTLToTeletext = "UPCONVERT"
+	CaptionSourceUpconvertSTLToTeletextDisabled  CaptionSourceUpconvertSTLToTeletext = "DISABLED"
+)
+
+// Values returns all known values for CaptionSourceUpconvertSTLToTeletext. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CaptionSourceUpconvertSTLToTeletext) Values() []CaptionSourceUpconvertSTLToTeletext {
+	return []CaptionSourceUpconvertSTLToTeletext{
+		"UPCONVERT",
+		"DISABLED",
+	}
+}
+
 type ChromaPositionMode string
 
 // Enum values for ChromaPositionMode

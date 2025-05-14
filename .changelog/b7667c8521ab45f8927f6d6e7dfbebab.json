@@ -1,0 +1,8 @@
+{
+    "id": "b7667c85-21ab-45f8-927f-6d6e7dfbebab",
+    "type": "feature",
+    "description": "Add exceptions to WebAuthn operations.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

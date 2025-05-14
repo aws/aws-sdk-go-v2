@@ -6152,6 +6152,11 @@ func awsRestjson1_serializeDocumentFileSourceSettings(v *types.FileSourceSetting
 		ok.String(string(v.TimeDeltaUnits))
 	}
 
+	if len(v.UpconvertSTLToTeletext) > 0 {
+		ok := object.Key("upconvertSTLToTeletext")
+		ok.String(string(v.UpconvertSTLToTeletext))
+	}
+
 	return nil
 }
 
@@ -10403,6 +10408,13 @@ func awsRestjson1_serializeDocumentVideoOverlay(v *types.VideoOverlay, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.Crop != nil {
+		ok := object.Key("crop")
+		if err := awsRestjson1_serializeDocumentVideoOverlayCrop(v.Crop, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EndTimecode != nil {
 		ok := object.Key("endTimecode")
 		ok.String(*v.EndTimecode)
@@ -10437,6 +10449,38 @@ func awsRestjson1_serializeDocumentVideoOverlay(v *types.VideoOverlay, value smi
 		if err := awsRestjson1_serializeDocument__listOfVideoOverlayTransition(v.Transitions, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoOverlayCrop(v *types.VideoOverlayCrop, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Height != nil {
+		ok := object.Key("height")
+		ok.Integer(*v.Height)
+	}
+
+	if len(v.Unit) > 0 {
+		ok := object.Key("unit")
+		ok.String(string(v.Unit))
+	}
+
+	if v.Width != nil {
+		ok := object.Key("width")
+		ok.Integer(*v.Width)
+	}
+
+	if v.X != nil {
+		ok := object.Key("x")
+		ok.Integer(*v.X)
+	}
+
+	if v.Y != nil {
+		ok := object.Key("y")
+		ok.Integer(*v.Y)
 	}
 
 	return nil

@@ -1,0 +1,8 @@
+{
+    "id": "10a06c6f-764a-4570-b02a-6f14850c0692",
+    "type": "feature",
+    "description": "This release adds catalogARN support for s3 tables multi-catalog catalogARNs.",
+    "modules": [
+        "service/firehose"
+    ]
+}

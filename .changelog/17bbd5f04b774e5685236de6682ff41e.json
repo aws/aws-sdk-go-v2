@@ -1,0 +1,8 @@
+{
+    "id": "17bbd5f0-4b77-4e56-8523-6de6682ff41e",
+    "type": "feature",
+    "description": "This update enables cropping for video overlays and adds a new STL to Teletext upconversion toggle to preserve styling.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

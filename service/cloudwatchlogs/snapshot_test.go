@@ -758,6 +758,18 @@ func TestCheckSnapshot_ListLogAnomalyDetectors(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListLogGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLogGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListLogGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListLogGroupsForQuery(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListLogGroupsForQuery(context.Background(), nil, func(o *Options) {
@@ -1818,6 +1830,18 @@ func TestUpdateSnapshot_ListLogAnomalyDetectors(t *testing.T) {
 	_, err := svc.ListLogAnomalyDetectors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListLogAnomalyDetectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListLogGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLogGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListLogGroups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

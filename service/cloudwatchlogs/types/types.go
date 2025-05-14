@@ -1152,6 +1152,24 @@ type LogGroupField struct {
 	noSmithyDocumentSerde
 }
 
+// This structure contains information about one log group in your account.
+type LogGroupSummary struct {
+
+	// The Amazon Resource Name (ARN) of the log group.
+	LogGroupArn *string
+
+	// The log group class for this log group. For details about the features
+	// supported by each log group class, see [Log classes]
+	//
+	// [Log classes]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
+	LogGroupClass LogGroupClass
+
+	// The name of the log group.
+	LogGroupName *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a log stream, which is a sequence of log events from a single
 // emitter of logs.
 type LogStream struct {

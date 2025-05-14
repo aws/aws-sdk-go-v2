@@ -6570,11 +6570,17 @@ func awsAwsjson11_deserializeOpErrorDeleteWebAuthnCredential(response *smithyhtt
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -11168,8 +11174,14 @@ func awsAwsjson11_deserializeOpErrorListWebAuthnCredentials(response *smithyhttp
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{

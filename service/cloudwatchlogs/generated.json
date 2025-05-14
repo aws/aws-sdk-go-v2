@@ -67,6 +67,7 @@
         "api_op_ListAnomalies.go",
         "api_op_ListIntegrations.go",
         "api_op_ListLogAnomalyDetectors.go",
+        "api_op_ListLogGroups.go",
         "api_op_ListLogGroupsForQuery.go",
         "api_op_ListTagsForResource.go",
         "api_op_ListTagsLogGroup.go",
