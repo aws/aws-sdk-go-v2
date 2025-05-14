@@ -1,3 +1,13 @@
+# Release (2025-05-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.50.0](service/cloudwatchlogs/CHANGELOG.md#v1500-2025-05-14)
+  * **Feature**: This release adds a new API "ListLogGroups" and an improvement in API "DescribeLogGroups"
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.53.0](service/cognitoidentityprovider/CHANGELOG.md#v1530-2025-05-14)
+  * **Feature**: Add exceptions to WebAuthn operations.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.73.0](service/mediaconvert/CHANGELOG.md#v1730-2025-05-14)
+  * **Feature**: This update enables cropping for video overlays and adds a new STL to Teletext upconversion toggle to preserve styling.
+
 # Release (2025-05-13)
 
 ## Module Highlights

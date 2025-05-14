@@ -1,3 +1,7 @@
+# v1.50.0 (2025-05-14)
+
+* **Feature**: This release adds a new API "ListLogGroups" and an improvement in API "DescribeLogGroups"
+
 # v1.49.0 (2025-05-09)
 
 * **Feature**: We are pleased to announce limit increases to our grok processor logs transformation feature. Now you can define 20 Grok patterns in their configurations, with an expanded total pattern matching limit of 512 characters.

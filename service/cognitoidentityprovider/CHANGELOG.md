@@ -1,3 +1,7 @@
+# v1.53.0 (2025-05-14)
+
+* **Feature**: Add exceptions to WebAuthn operations.
+
 # v1.52.0 (2025-04-22)
 
 * **Feature**: This release adds refresh token rotation.
