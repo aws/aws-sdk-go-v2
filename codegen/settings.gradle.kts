@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,3 +18,6 @@ include(":sdk-codegen")
 include(":smithy-aws-go-codegen")
 include(":protocol-test-codegen")
 include(":kitchensink-test-codegen")
+
+// uncomment this to generate echo service
+// include(":echo-service")
