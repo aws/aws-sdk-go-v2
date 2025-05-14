@@ -4138,7 +4138,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^arn:.*:glue:.*:\\d{12}:catalog$"
+                "smithy.api#pattern": "^arn:.*:glue:.*:\\d{12}:catalog(?:(/[a-z0-9_-]+){1,2})?$"
             }
         },
         "com.amazonaws.firehose#HECAcknowledgmentTimeoutInSeconds": {
@@ -6686,7 +6686,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+$"
+                "smithy.api#pattern": "^arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@!]+$"
             }
         },
         "com.amazonaws.firehose#SecretsManagerConfiguration": {
