@@ -7108,6 +7108,11 @@ func awsAwsjson11_serializeOpDocumentCreateWorkspacesPoolInput(v *CreateWorkspac
 		ok.String(*v.PoolName)
 	}
 
+	if len(v.RunningMode) > 0 {
+		ok := object.Key("RunningMode")
+		ok.String(string(v.RunningMode))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -8634,6 +8639,11 @@ func awsAwsjson11_serializeOpDocumentUpdateWorkspacesPoolInput(v *UpdateWorkspac
 	if v.PoolId != nil {
 		ok := object.Key("PoolId")
 		ok.String(*v.PoolId)
+	}
+
+	if len(v.RunningMode) > 0 {
+		ok := object.Key("RunningMode")
+		ok.String(string(v.RunningMode))
 	}
 
 	if v.TimeoutSettings != nil {

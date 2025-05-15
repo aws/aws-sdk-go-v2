@@ -7,6 +7,58 @@ import (
 	"time"
 )
 
+// The accounting configuration includes configurable settings for Slurm
+// accounting. It's a property of the ClusterSlurmConfiguration object.
+type Accounting struct {
+
+	// The default value for mode is STANDARD . A value of STANDARD means Slurm
+	// accounting is enabled.
+	//
+	// This member is required.
+	Mode AccountingMode
+
+	// The default value for all purge settings for slurmdbd.conf . For more
+	// information, see the [slurmdbd.conf documentation at SchedMD].
+	//
+	// The default value for defaultPurgeTimeInDays is -1 .
+	//
+	// A value of -1 means there is no purge time and records persist as long as the
+	// cluster exists.
+	//
+	// 0 isn't a valid value.
+	//
+	// [slurmdbd.conf documentation at SchedMD]: https://slurm.schedmd.com/slurmdbd.conf.html
+	DefaultPurgeTimeInDays *int32
+
+	noSmithyDocumentSerde
+}
+
+// The accounting configuration includes configurable settings for Slurm
+// accounting. It's a property of the ClusterSlurmConfiguration object.
+type AccountingRequest struct {
+
+	// The default value for mode is STANDARD . A value of STANDARD means Slurm
+	// accounting is enabled.
+	//
+	// This member is required.
+	Mode AccountingMode
+
+	// The default value for all purge settings for slurmdbd.conf . For more
+	// information, see the [slurmdbd.conf documentation at SchedMD].
+	//
+	// The default value for defaultPurgeTimeInDays is -1 .
+	//
+	// A value of -1 means there is no purge time and records persist as long as the
+	// cluster exists.
+	//
+	// 0 isn't a valid value.
+	//
+	// [slurmdbd.conf documentation at SchedMD]: https://slurm.schedmd.com/slurmdbd.conf.html
+	DefaultPurgeTimeInDays *int32
+
+	noSmithyDocumentSerde
+}
+
 // The cluster resource and configuration.
 type Cluster struct {
 
@@ -78,6 +130,10 @@ type Cluster struct {
 // Additional options related to the Slurm scheduler.
 type ClusterSlurmConfiguration struct {
 
+	// The accounting configuration includes configurable settings for Slurm
+	// accounting.
+	Accounting *Accounting
+
 	// The shared Slurm key for authentication, also known as the cluster secret.
 	AuthKey *SlurmAuthKey
 
@@ -94,6 +150,10 @@ type ClusterSlurmConfiguration struct {
 
 // Additional options related to the Slurm scheduler.
 type ClusterSlurmConfigurationRequest struct {
+
+	// The accounting configuration includes configurable settings for Slurm
+	// accounting.
+	Accounting *AccountingRequest
 
 	// The time (in seconds) before an idle node is scaled down.
 	//
@@ -597,7 +657,7 @@ type Scheduler struct {
 	// uses to manage cluster scaling and job scheduling. For more information, see [Slurm versions in Amazon Web Services PCS]in
 	// the Amazon Web Services PCS User Guide.
 	//
-	// Valid Values: 23.11 | 24.05
+	// Valid Values: 23.11 | 24.05 | 24.11
 	//
 	// [Slurm versions in Amazon Web Services PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	//
@@ -620,7 +680,7 @@ type SchedulerRequest struct {
 	// uses to manage cluster scaling and job scheduling. For more information, see [Slurm versions in Amazon Web Services PCS]in
 	// the Amazon Web Services PCS User Guide.
 	//
-	// Valid Values: 23.11 | 24.05
+	// Valid Values: 23.11 | 24.05 | 24.11
 	//
 	// [Slurm versions in Amazon Web Services PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	//

@@ -105,7 +105,7 @@ type UpdateAgentActionGroupInput struct {
 	// request, it will invoke this action group instead and return an [Observation]reprompting the
 	// user for more information.
 	//
-	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
+	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
 	// [Observation]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
 	ParentActionGroupSignature types.ActionGroupSignature
 
@@ -115,7 +115,7 @@ type UpdateAgentActionGroupInput struct {
 	// with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]
 	// .
 	//
-	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
+	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
 	ParentActionGroupSignatureParams map[string]string
 
 	noSmithyDocumentSerde

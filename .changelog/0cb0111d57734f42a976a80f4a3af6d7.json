@@ -1,0 +1,8 @@
+{
+    "id": "0cb0111d-5773-4f42-a976-a80f4a3af6d7",
+    "type": "feature",
+    "description": "Introduces Data Resync feature to describe-table-statistics and IAM database authentication for MariaDB, MySQL, and PostgreSQL.",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

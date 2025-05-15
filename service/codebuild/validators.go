@@ -1081,6 +1081,21 @@ func validateCloudWatchLogsConfig(v *types.CloudWatchLogsConfig) error {
 	}
 }
 
+func validateDockerServer(v *types.DockerServer) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DockerServer"}
+	if len(v.ComputeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEnvironmentVariable(v *types.EnvironmentVariable) error {
 	if v == nil {
 		return nil
@@ -1294,6 +1309,11 @@ func validateProjectEnvironment(v *types.ProjectEnvironment) error {
 	if v.RegistryCredential != nil {
 		if err := validateRegistryCredential(v.RegistryCredential); err != nil {
 			invalidParams.AddNested("RegistryCredential", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DockerServer != nil {
+		if err := validateDockerServer(v.DockerServer); err != nil {
+			invalidParams.AddNested("DockerServer", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

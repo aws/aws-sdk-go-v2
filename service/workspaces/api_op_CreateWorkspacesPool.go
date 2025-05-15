@@ -57,6 +57,9 @@ type CreateWorkspacesPoolInput struct {
 	// Indicates the application settings of the pool.
 	ApplicationSettings *types.ApplicationSettingsRequest
 
+	// The running mode for the pool.
+	RunningMode types.PoolsRunningMode
+
 	// The tags for the pool.
 	Tags []types.Tag
 

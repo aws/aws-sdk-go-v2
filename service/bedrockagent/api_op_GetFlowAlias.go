@@ -83,6 +83,9 @@ type GetFlowAliasOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The configuration that specifies how nodes in the flow are executed in parallel.
+	ConcurrencyConfiguration *types.FlowAliasConcurrencyConfiguration
+
 	// The description of the flow.
 	Description *string
 

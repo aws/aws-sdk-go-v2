@@ -20880,6 +20880,15 @@ func awsAwsjson11_deserializeDocumentMySQLSettings(v **types.MySQLSettings, valu
 				sv.AfterConnectScript = ptr.String(jtv)
 			}
 
+		case "AuthenticationMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MySQLAuthenticationMethod to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationMethod = types.MySQLAuthenticationMethod(jtv)
+			}
+
 		case "CleanSourceMetadataOnMismatch":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -21006,6 +21015,15 @@ func awsAwsjson11_deserializeDocumentMySQLSettings(v **types.MySQLSettings, valu
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ServerTimezone = ptr.String(jtv)
+			}
+
+		case "ServiceAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServiceAccessRoleArn = ptr.String(jtv)
 			}
 
 		case "TargetDbType":
@@ -22168,6 +22186,15 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 				sv.AfterConnectScript = ptr.String(jtv)
 			}
 
+		case "AuthenticationMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PostgreSQLAuthenticationMethod to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationMethod = types.PostgreSQLAuthenticationMethod(jtv)
+			}
+
 		case "BabelfishDatabaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22371,6 +22398,15 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ServerName = ptr.String(jtv)
+			}
+
+		case "ServiceAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServiceAccessRoleArn = ptr.String(jtv)
 			}
 
 		case "SlotName":
@@ -28264,6 +28300,88 @@ func awsAwsjson11_deserializeDocumentTableStatistics(v **types.TableStatistics, 
 					return fmt.Errorf("expected TStamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "ResyncProgress":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ResyncProgress = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ResyncProgress = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected DoubleOptional to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "ResyncRowsAttempted":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ResyncRowsAttempted = ptr.Int64(i64)
+			}
+
+		case "ResyncRowsFailed":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ResyncRowsFailed = ptr.Int64(i64)
+			}
+
+		case "ResyncRowsSucceeded":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ResyncRowsSucceeded = ptr.Int64(i64)
+			}
+
+		case "ResyncState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ResyncState = ptr.String(jtv)
 			}
 
 		case "SchemaName":

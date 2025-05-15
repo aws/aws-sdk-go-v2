@@ -446,6 +446,25 @@ func (MigrationTypeValue) Values() []MigrationTypeValue {
 	}
 }
 
+type MySQLAuthenticationMethod string
+
+// Enum values for MySQLAuthenticationMethod
+const (
+	MySQLAuthenticationMethodPassword MySQLAuthenticationMethod = "password"
+	MySQLAuthenticationMethodIam      MySQLAuthenticationMethod = "iam"
+)
+
+// Values returns all known values for MySQLAuthenticationMethod. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MySQLAuthenticationMethod) Values() []MySQLAuthenticationMethod {
+	return []MySQLAuthenticationMethod{
+		"password",
+		"iam",
+	}
+}
+
 type NestingLevelValue string
 
 // Enum values for NestingLevelValue
@@ -540,6 +559,26 @@ func (PluginNameValue) Values() []PluginNameValue {
 		"no-preference",
 		"test-decoding",
 		"pglogical",
+	}
+}
+
+type PostgreSQLAuthenticationMethod string
+
+// Enum values for PostgreSQLAuthenticationMethod
+const (
+	PostgreSQLAuthenticationMethodPassword PostgreSQLAuthenticationMethod = "password"
+	PostgreSQLAuthenticationMethodIam      PostgreSQLAuthenticationMethod = "iam"
+)
+
+// Values returns all known values for PostgreSQLAuthenticationMethod. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PostgreSQLAuthenticationMethod) Values() []PostgreSQLAuthenticationMethod {
+	return []PostgreSQLAuthenticationMethod{
+		"password",
+		"iam",
 	}
 }
 

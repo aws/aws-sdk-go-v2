@@ -55,6 +55,9 @@ type CreateFlowAliasInput struct {
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
+	// The configuration that specifies how nodes in the flow are executed in parallel.
+	ConcurrencyConfiguration *types.FlowAliasConcurrencyConfiguration
+
 	// A description for the alias.
 	Description *string
 
@@ -103,6 +106,9 @@ type CreateFlowAliasOutput struct {
 	//
 	// This member is required.
 	UpdatedAt *time.Time
+
+	// The configuration that specifies how nodes in the flow are executed in parallel.
+	ConcurrencyConfiguration *types.FlowAliasConcurrencyConfiguration
 
 	// The description of the alias.
 	Description *string

@@ -1,0 +1,8 @@
+{
+    "id": "96a88329-ccbc-4f25-8412-5567d3c1c5fc",
+    "type": "feature",
+    "description": "Amazon Bedrock Flows introduces DoWhile loops nodes, parallel node executions, and enhancements to knowledge base nodes.",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

@@ -1113,9 +1113,33 @@ func (m *awsAwsjson10_serializeOpUpdateQueue) HandleSerialize(ctx context.Contex
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentAccountingRequest(v *types.AccountingRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultPurgeTimeInDays != nil {
+		ok := object.Key("defaultPurgeTimeInDays")
+		ok.Integer(*v.DefaultPurgeTimeInDays)
+	}
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("mode")
+		ok.String(string(v.Mode))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentClusterSlurmConfigurationRequest(v *types.ClusterSlurmConfigurationRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Accounting != nil {
+		ok := object.Key("accounting")
+		if err := awsAwsjson10_serializeDocumentAccountingRequest(v.Accounting, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		ok := object.Key("scaleDownIdleTimeInSeconds")

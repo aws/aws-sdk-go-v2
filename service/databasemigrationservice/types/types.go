@@ -2123,6 +2123,9 @@ type MySQLSettings struct {
 	// file containing the script.
 	AfterConnectScript *string
 
+	// This attribute allows you to specify the authentication method as "iam auth".
+	AuthenticationMethod MySQLAuthenticationMethod
+
 	// Cleans and recreates table metadata information on the replication instance
 	// when a mismatch occurs. For example, in a situation where running an alter DDL
 	// on the table could result in different information about the table cached in the
@@ -2206,6 +2209,10 @@ type MySQLSettings struct {
 	//
 	// Note: Do not enclose time zones in single quotes.
 	ServerTimezone *string
+
+	// The IAM role you can use to authenticate when connecting to your endpoint.
+	// Ensure to include iam:PassRole and rds-db:connect actions in permission policy.
+	ServiceAccessRoleArn *string
 
 	// Specifies where to migrate source tables on the target, either to a single
 	// database or multiple databases. If you specify SPECIFIC_DATABASE , specify the
@@ -2752,6 +2759,9 @@ type PostgreSQLSettings struct {
 	// Example: afterConnectScript=SET session_replication_role='replica'
 	AfterConnectScript *string
 
+	// This attribute allows you to specify the authentication method as "iam auth".
+	AuthenticationMethod PostgreSQLAuthenticationMethod
+
 	// The Babelfish for Aurora PostgreSQL database name for the endpoint.
 	BabelfishDatabaseName *string
 
@@ -2889,6 +2899,10 @@ type PostgreSQLSettings struct {
 	// [DescribeDBInstances]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html
 	// [DescribeDBClusters]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html
 	ServerName *string
+
+	// The IAM role arn you can use to authenticate the connection to your endpoint.
+	// Ensure to include iam:PassRole and rds-db:connect actions in permission policy.
+	ServiceAccessRoleArn *string
 
 	// Sets the name of a previously created logical replication slot for a change
 	// data capture (CDC) load of the PostgreSQL source instance.
@@ -5071,6 +5085,39 @@ type TableStatistics struct {
 
 	// The last time a table was updated.
 	LastUpdateTime *time.Time
+
+	// Calculates the percentage of failed validations that were successfully resynced
+	// to the system.
+	ResyncProgress *float64
+
+	// Records the total number of mismatched data rows where the system attempted to
+	// apply fixes in the target database.
+	ResyncRowsAttempted *int64
+
+	// Records the total number of mismatched data rows where fix attempts failed in
+	// the target database.
+	ResyncRowsFailed *int64
+
+	// Records the total number of mismatched data rows where fixes were successfully
+	// applied in the target database.
+	ResyncRowsSucceeded *int64
+
+	// Records the current state of table resynchronization in the migration task.
+	//
+	// This parameter can have the following values:
+	//
+	//   - Not enabled – Resync is not enabled for the table in the migration task.
+	//
+	//   - Pending – The tables are waiting for resync.
+	//
+	//   - In progress – Resync in progress for some records in the table.
+	//
+	//   - No primary key – The table could not be resynced because it has no primary
+	//   key.
+	//
+	//   - Last resync at: date/time – Resync session is finished at time. Time
+	//   provided in UTC format.
+	ResyncState *string
 
 	// The schema name.
 	SchemaName *string

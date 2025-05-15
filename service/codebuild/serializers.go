@@ -3768,6 +3768,49 @@ func awsAwsjson11_serializeDocumentComputeTypesAllowed(v []string, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDockerServer(v *types.DockerServer, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComputeType) > 0 {
+		ok := object.Key("computeType")
+		ok.String(string(v.ComputeType))
+	}
+
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("securityGroupIds")
+		if err := awsAwsjson11_serializeDocumentSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Status != nil {
+		ok := object.Key("status")
+		if err := awsAwsjson11_serializeDocumentDockerServerStatus(v.Status, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDockerServerStatus(v *types.DockerServerStatus, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Message != nil {
+		ok := object.Key("message")
+		ok.String(*v.Message)
+	}
+
+	if v.Status != nil {
+		ok := object.Key("status")
+		ok.String(*v.Status)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEnvironmentVariable(v *types.EnvironmentVariable, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4098,6 +4141,13 @@ func awsAwsjson11_serializeDocumentProjectEnvironment(v *types.ProjectEnvironmen
 	if len(v.ComputeType) > 0 {
 		ok := object.Key("computeType")
 		ok.String(string(v.ComputeType))
+	}
+
+	if v.DockerServer != nil {
+		ok := object.Key("dockerServer")
+		if err := awsAwsjson11_serializeDocumentDockerServer(v.DockerServer, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.EnvironmentVariables != nil {

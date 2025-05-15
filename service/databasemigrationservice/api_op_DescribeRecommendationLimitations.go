@@ -31,6 +31,8 @@ func (c *Client) DescribeRecommendationLimitations(ctx context.Context, params *
 type DescribeRecommendationLimitationsInput struct {
 
 	// Filters applied to the limitations described in the form of key-value pairs.
+	//
+	// Valid filter names: database-id | engine-name
 	Filters []types.Filter
 
 	// The maximum number of records to include in the response. If more records exist

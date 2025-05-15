@@ -46,6 +46,9 @@ type CreateFleetInput struct {
 	//   satisfies your specified attributes. For more information, see [Reserved capacity environment types]in the
 	//   CodeBuild User Guide.
 	//
+	//   - CUSTOM_INSTANCE_TYPE : Specify the instance type for your compute fleet. For
+	//   a list of supported instance types, see [Supported instance families]in the CodeBuild User Guide.
+	//
 	//   - BUILD_GENERAL1_SMALL : Use up to 4 GiB memory and 2 vCPUs for builds.
 	//
 	//   - BUILD_GENERAL1_MEDIUM : Use up to 8 GiB memory and 4 vCPUs for builds.
@@ -99,6 +102,7 @@ type CreateFleetInput struct {
 	//
 	// For more information, see [On-demand environment types] in the CodeBuild User Guide.
 	//
+	// [Supported instance families]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.instance-types
 	// [Reserved capacity environment types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
 	// [On-demand environment types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
 	//
@@ -166,7 +170,7 @@ type CreateFleetInput struct {
 	Name *string
 
 	// The compute configuration of the compute fleet. This is only required if
-	// computeType is set to ATTRIBUTE_BASED_COMPUTE .
+	// computeType is set to ATTRIBUTE_BASED_COMPUTE or CUSTOM_INSTANCE_TYPE .
 	ComputeConfiguration *types.ComputeConfiguration
 
 	// The service role associated with the compute fleet. For more information, see [Allow a user to add a permission policy for a fleet service role]

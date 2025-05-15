@@ -418,6 +418,21 @@ func addOpUpdateQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateQueue{}, middleware.After)
 }
 
+func validateAccountingRequest(v *types.AccountingRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountingRequest"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateClusterSlurmConfigurationRequest(v *types.ClusterSlurmConfigurationRequest) error {
 	if v == nil {
 		return nil
@@ -426,6 +441,11 @@ func validateClusterSlurmConfigurationRequest(v *types.ClusterSlurmConfiguration
 	if v.SlurmCustomSettings != nil {
 		if err := validateSlurmCustomSettings(v.SlurmCustomSettings); err != nil {
 			invalidParams.AddNested("SlurmCustomSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Accounting != nil {
+		if err := validateAccountingRequest(v.Accounting); err != nil {
+			invalidParams.AddNested("Accounting", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

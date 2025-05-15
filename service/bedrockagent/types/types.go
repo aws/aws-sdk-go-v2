@@ -268,7 +268,7 @@ type AgentActionGroup struct {
 	// with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]
 	// .
 	//
-	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
+	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
 	ParentActionGroupSignatureParams map[string]string
 
 	// If this field is set as AMAZON.UserInput , the agent can request the user for
@@ -543,9 +543,9 @@ type AgentDescriptor struct {
 }
 
 // Defines an agent node in your flow. You specify the agent to invoke at this
-// point in the flow. For more information, see [Node types in Amazon Bedrock works]in the Amazon Bedrock User Guide.
+// point in the flow. For more information, see [Node types in a flow]in the Amazon Bedrock User Guide.
 //
-// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+// [Node types in a flow]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
 type AgentFlowNodeConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the alias of the agent to invoke.
@@ -1059,19 +1059,19 @@ type ChunkingConfiguration struct {
 }
 
 // Defines a collector node in your flow. This node takes an iteration of inputs
-// and consolidates them into an array in the output. For more information, see [Node types in Amazon Bedrock works]in
+// and consolidates them into an array in the output. For more information, see [Node types in a flow]in
 // the Amazon Bedrock User Guide.
 //
-// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+// [Node types in a flow]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
 type CollectorFlowNodeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
 // Defines a condition node in your flow. You can specify conditions that
-// determine which node comes next in the flow. For more information, see [Node types in Amazon Bedrock works]in the
+// determine which node comes next in the flow. For more information, see [Node types in a flow]in the
 // Amazon Bedrock User Guide.
 //
-// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+// [Node types in a flow]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
 type ConditionFlowNodeConfiguration struct {
 
 	// An array of conditions. Each member contains the name of a condition and an
@@ -1567,6 +1567,17 @@ type EnrichmentStrategyConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a metadata field to include or exclude during the reranking process.
+type FieldForReranking struct {
+
+	// The name of the metadata field to include or exclude during reranking.
+	//
+	// This member is required.
+	FieldName *string
+
+	noSmithyDocumentSerde
+}
+
 // Configurations for when you choose fixed-size chunking. If you set the
 // chunkingStrategy as NONE , exclude this field.
 type FixedSizeChunkingConfiguration struct {
@@ -1580,6 +1591,27 @@ type FixedSizeChunkingConfiguration struct {
 	//
 	// This member is required.
 	OverlapPercentage *int32
+
+	noSmithyDocumentSerde
+}
+
+// Determines how multiple nodes in a flow can run in parallel. Running nodes
+// concurrently can improve your flow's performance.
+type FlowAliasConcurrencyConfiguration struct {
+
+	// The type of concurrency to use for parallel node execution. Specify one of the
+	// following options:
+	//
+	//   - Automatic - Amazon Bedrock determines which nodes can be executed in
+	//   parallel based on the flow definition and its dependencies.
+	//
+	//   - Manual - You specify which nodes can be executed in parallel.
+	//
+	// This member is required.
+	Type ConcurrencyType
+
+	// The maximum number of nodes that can be executed concurrently in the flow.
+	MaxConcurrency *int32
 
 	noSmithyDocumentSerde
 }
@@ -1637,6 +1669,10 @@ type FlowAliasSummary struct {
 	//
 	// This member is required.
 	UpdatedAt *time.Time
+
+	// The configuration that specifies how nodes in the flow are executed
+	// concurrently.
+	ConcurrencyConfiguration *FlowAliasConcurrencyConfiguration
 
 	// A description of the alias.
 	Description *string
@@ -1792,7 +1828,7 @@ type FlowNode struct {
 	noSmithyDocumentSerde
 }
 
-// Contains configurations for a node in your flow. For more information, see [Node types in Amazon Bedrock works] in
+// Contains configurations for a node in your flow. For more information, see [Node types in a flow] in
 // the Amazon Bedrock User Guide.
 //
 // The following types satisfy this interface:
@@ -1806,12 +1842,15 @@ type FlowNode struct {
 //	FlowNodeConfigurationMemberKnowledgeBase
 //	FlowNodeConfigurationMemberLambdaFunction
 //	FlowNodeConfigurationMemberLex
+//	FlowNodeConfigurationMemberLoop
+//	FlowNodeConfigurationMemberLoopController
+//	FlowNodeConfigurationMemberLoopInput
 //	FlowNodeConfigurationMemberOutput
 //	FlowNodeConfigurationMemberPrompt
 //	FlowNodeConfigurationMemberRetrieval
 //	FlowNodeConfigurationMemberStorage
 //
-// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+// [Node types in a flow]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
 type FlowNodeConfiguration interface {
 	isFlowNodeConfiguration()
 }
@@ -1913,6 +1952,33 @@ type FlowNodeConfigurationMemberLex struct {
 
 func (*FlowNodeConfigurationMemberLex) isFlowNodeConfiguration() {}
 
+// Contains configurations for a DoWhile loop in your flow.
+type FlowNodeConfigurationMemberLoop struct {
+	Value LoopFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberLoop) isFlowNodeConfiguration() {}
+
+// Contains controller node configurations for a DoWhile loop in your flow.
+type FlowNodeConfigurationMemberLoopController struct {
+	Value LoopControllerFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberLoopController) isFlowNodeConfiguration() {}
+
+// Contains input node configurations for a DoWhile loop in your flow.
+type FlowNodeConfigurationMemberLoopInput struct {
+	Value LoopInputFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberLoopInput) isFlowNodeConfiguration() {}
+
 // Contains configurations for an output flow node in your flow. The last node in
 // the flow. outputs can't be specified for this node.
 type FlowNodeConfigurationMemberOutput struct {
@@ -1954,7 +2020,7 @@ type FlowNodeConfigurationMemberStorage struct {
 
 func (*FlowNodeConfigurationMemberStorage) isFlowNodeConfiguration() {}
 
-// Contains configurations for an input to a node.
+// Contains configurations for an input in an Amazon Bedrock Flows node.
 type FlowNodeInput struct {
 
 	// An expression that formats the input for the node. For an explanation of how to
@@ -1965,16 +2031,30 @@ type FlowNodeInput struct {
 	// This member is required.
 	Expression *string
 
-	// A name for the input that you can reference.
+	// Specifies a name for the input that you can reference.
 	//
 	// This member is required.
 	Name *string
 
-	// The data type of the input. If the input doesn't match this type at runtime, a
-	// validation error will be thrown.
+	// Specifies the data type of the input. If the input doesn't match this type at
+	// runtime, a validation error will be thrown.
 	//
 	// This member is required.
 	Type FlowNodeIODataType
+
+	// Specifies how input data flows between iterations in a DoWhile loop.
+	//
+	//   - LoopCondition - Controls whether the loop continues by evaluating condition
+	//   expressions against the input data. Use this category to define the condition
+	//   that determines if the loop should continue.
+	//
+	//   - ReturnValueToLoopStart - Defines data to pass back to the start of the
+	//   loop's next iteration. Use this category for variables that you want to update
+	//   for each loop iteration.
+	//
+	//   - ExitLoop - Defines the value that's available once the loop ends. Use this
+	//   category to expose loop results to nodes outside the loop.
+	Category FlowNodeInputCategory
 
 	noSmithyDocumentSerde
 }
@@ -2096,6 +2176,8 @@ type FlowValidation struct {
 //	FlowValidationDetailsMemberDuplicateConditionExpression
 //	FlowValidationDetailsMemberDuplicateConnections
 //	FlowValidationDetailsMemberIncompatibleConnectionDataType
+//	FlowValidationDetailsMemberInvalidLoopBoundary
+//	FlowValidationDetailsMemberLoopIncompatibleNodeType
 //	FlowValidationDetailsMemberMalformedConditionExpression
 //	FlowValidationDetailsMemberMalformedNodeInputExpression
 //	FlowValidationDetailsMemberMismatchedNodeInputType
@@ -2103,10 +2185,14 @@ type FlowValidation struct {
 //	FlowValidationDetailsMemberMissingConnectionConfiguration
 //	FlowValidationDetailsMemberMissingDefaultCondition
 //	FlowValidationDetailsMemberMissingEndingNodes
+//	FlowValidationDetailsMemberMissingLoopControllerNode
+//	FlowValidationDetailsMemberMissingLoopInputNode
 //	FlowValidationDetailsMemberMissingNodeConfiguration
 //	FlowValidationDetailsMemberMissingNodeInput
 //	FlowValidationDetailsMemberMissingNodeOutput
 //	FlowValidationDetailsMemberMissingStartingNodes
+//	FlowValidationDetailsMemberMultipleLoopControllerNodes
+//	FlowValidationDetailsMemberMultipleLoopInputNodes
 //	FlowValidationDetailsMemberMultipleNodeInputConnections
 //	FlowValidationDetailsMemberUnfulfilledNodeInput
 //	FlowValidationDetailsMemberUnknownConnectionCondition
@@ -2158,6 +2244,24 @@ type FlowValidationDetailsMemberIncompatibleConnectionDataType struct {
 }
 
 func (*FlowValidationDetailsMemberIncompatibleConnectionDataType) isFlowValidationDetails() {}
+
+// Details about a flow that includes connections that violate loop boundary rules.
+type FlowValidationDetailsMemberInvalidLoopBoundary struct {
+	Value InvalidLoopBoundaryFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberInvalidLoopBoundary) isFlowValidationDetails() {}
+
+// Details about a flow that includes incompatible node types in a DoWhile loop.
+type FlowValidationDetailsMemberLoopIncompatibleNodeType struct {
+	Value LoopIncompatibleNodeTypeFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberLoopIncompatibleNodeType) isFlowValidationDetails() {}
 
 // Details about a malformed condition expression in a node.
 type FlowValidationDetailsMemberMalformedConditionExpression struct {
@@ -2222,6 +2326,25 @@ type FlowValidationDetailsMemberMissingEndingNodes struct {
 
 func (*FlowValidationDetailsMemberMissingEndingNodes) isFlowValidationDetails() {}
 
+// Details about a flow that's missing a required LoopController node in a DoWhile
+// loop.
+type FlowValidationDetailsMemberMissingLoopControllerNode struct {
+	Value MissingLoopControllerNodeFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMissingLoopControllerNode) isFlowValidationDetails() {}
+
+// Details about a flow that's missing a required LoopInput node in a DoWhile loop.
+type FlowValidationDetailsMemberMissingLoopInputNode struct {
+	Value MissingLoopInputNodeFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMissingLoopInputNode) isFlowValidationDetails() {}
+
 // Details about missing configuration for a node.
 type FlowValidationDetailsMemberMissingNodeConfiguration struct {
 	Value MissingNodeConfigurationFlowValidationDetails
@@ -2257,6 +2380,25 @@ type FlowValidationDetailsMemberMissingStartingNodes struct {
 }
 
 func (*FlowValidationDetailsMemberMissingStartingNodes) isFlowValidationDetails() {}
+
+// Details about a flow that contains multiple LoopController nodes in a DoWhile
+// loop.
+type FlowValidationDetailsMemberMultipleLoopControllerNodes struct {
+	Value MultipleLoopControllerNodesFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMultipleLoopControllerNodes) isFlowValidationDetails() {}
+
+// Details about a flow that contains multiple LoopInput nodes in a DoWhile loop.
+type FlowValidationDetailsMemberMultipleLoopInputNodes struct {
+	Value MultipleLoopInputNodesFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMultipleLoopInputNodes) isFlowValidationDetails() {}
 
 // Details about multiple connections to a single node input.
 type FlowValidationDetailsMemberMultipleNodeInputConnections struct {
@@ -2812,6 +2954,27 @@ type IntermediateStorage struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a flow that contains connections that violate loop boundary rules.
+type InvalidLoopBoundaryFlowValidationDetails struct {
+
+	// The name of the connection that violates loop boundary rules.
+	//
+	// This member is required.
+	Connection *string
+
+	// The source node of the connection that violates DoWhile loop boundary rules.
+	//
+	// This member is required.
+	Source *string
+
+	// The target node of the connection that violates DoWhile loop boundary rules.
+	//
+	// This member is required.
+	Target *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains configurations for an iterator node in a flow. Takes an input that is
 // an array and iteratively sends each item of the array as an output to the
 // following node. The size of the array is also returned in the output.
@@ -3000,9 +3163,9 @@ type KnowledgeBaseDocumentDetail struct {
 // Contains configurations for a knowledge base node in a flow. This node takes a
 // query as the input and returns, as the output, the retrieved responses directly
 // (as an array) or a response generated based on the retrieved responses. For more
-// information, see [Node types in Amazon Bedrock works]in the Amazon Bedrock User Guide.
+// information, see [Node types in a flow]in the Amazon Bedrock User Guide.
 //
-// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+// [Node types in a flow]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
 type KnowledgeBaseFlowNodeConfiguration struct {
 
 	// The unique identifier of the knowledge base to query.
@@ -3014,12 +3177,62 @@ type KnowledgeBaseFlowNodeConfiguration struct {
 	// generation for the knowledge base in this configuration.
 	GuardrailConfiguration *GuardrailConfiguration
 
+	// Contains inference configurations for the prompt.
+	InferenceConfiguration PromptInferenceConfiguration
+
 	// The unique identifier of the model or [inference profile] to use to generate a response from the
 	// query results. Omit this field if you want to return the retrieved results as an
 	// array.
 	//
 	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 	ModelId *string
+
+	// The number of results to retrieve from the knowledge base.
+	NumberOfResults *int32
+
+	// The configuration for orchestrating the retrieval and generation process in the
+	// knowledge base node.
+	OrchestrationConfiguration *KnowledgeBaseOrchestrationConfiguration
+
+	// A custom prompt template to use with the knowledge base for generating
+	// responses.
+	PromptTemplate *KnowledgeBasePromptTemplate
+
+	// The configuration for reranking the retrieved results from the knowledge base
+	// to improve relevance.
+	RerankingConfiguration *VectorSearchRerankingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configures how the knowledge base orchestrates the retrieval and generation
+// process, allowing for customization of prompts, inference parameters, and
+// performance settings.
+type KnowledgeBaseOrchestrationConfiguration struct {
+
+	// The additional model-specific request parameters as key-value pairs to be
+	// included in the request to the foundation model.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	// Contains inference configurations for the prompt.
+	InferenceConfig PromptInferenceConfiguration
+
+	// The performance configuration options for the knowledge base retrieval and
+	// generation process.
+	PerformanceConfig *PerformanceConfiguration
+
+	// A custom prompt template for orchestrating the retrieval and generation process.
+	PromptTemplate *KnowledgeBasePromptTemplate
+
+	noSmithyDocumentSerde
+}
+
+// Defines a custom prompt template for orchestrating the retrieval and generation
+// process.
+type KnowledgeBasePromptTemplate struct {
+
+	// The text of the prompt template.
+	TextPromptTemplate *string
 
 	noSmithyDocumentSerde
 }
@@ -3055,10 +3268,10 @@ type KnowledgeBaseSummary struct {
 
 // Contains configurations for a Lambda function node in the flow. You specify the
 // Lambda function to invoke and the inputs into the function. The output is the
-// response that is defined in the Lambda function. For more information, see [Node types in Amazon Bedrock works]in
+// response that is defined in the Lambda function. For more information, see [Node types in a flow]in
 // the Amazon Bedrock User Guide.
 //
-// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+// [Node types in a flow]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
 type LambdaFunctionFlowNodeConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the Lambda function to invoke.
@@ -3071,10 +3284,10 @@ type LambdaFunctionFlowNodeConfiguration struct {
 
 // Contains configurations for a Lex node in the flow. You specify a Amazon Lex
 // bot to invoke. This node takes an utterance as the input and returns as the
-// output the intent identified by the Amazon Lex bot. For more information, see [Node types in Amazon Bedrock works]
+// output the intent identified by the Amazon Lex bot. For more information, see [Node types in a flow]
 // in the Amazon Bedrock User Guide.
 //
-// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+// [Node types in a flow]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
 type LexFlowNodeConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Lex bot alias to invoke.
@@ -3087,6 +3300,78 @@ type LexFlowNodeConfiguration struct {
 	// This member is required.
 	LocaleId *string
 
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for the controller node of a DoWhile loop in the flow.
+type LoopControllerFlowNodeConfiguration struct {
+
+	// Specifies the condition that determines when the flow exits the DoWhile loop.
+	// The loop executes until this condition evaluates to true.
+	//
+	// This member is required.
+	ContinueCondition *FlowCondition
+
+	// Specifies the maximum number of times the DoWhile loop can iterate before the
+	// flow exits the loop.
+	MaxIterations *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for the nodes of a DoWhile loop in your flow.
+//
+// A DoWhile loop is made up of the following nodes:
+//
+//   - Loop - The container node that holds the loop's flow definition. This node
+//     encompasses the entire loop structure.
+//
+//   - LoopInput - The entry point node for the loop. This node receives inputs
+//     from nodes outside the loop and from previous loop iterations.
+//
+//   - Body nodes - These can be
+//
+//   - LoopController - The node that evaluates whether the loop should continue or
+//     exit based on a condition.
+//
+// These nodes work together to create a loop that runs at least once and
+// continues until a specified condition is met or a maximum number of iterations
+// is reached.
+type LoopFlowNodeConfiguration struct {
+
+	// The definition of the DoWhile loop nodes and connections between nodes in the
+	// flow.
+	//
+	// This member is required.
+	Definition *FlowDefinition
+
+	noSmithyDocumentSerde
+}
+
+// Details about a flow that contains an incompatible node in a DoWhile loop.
+type LoopIncompatibleNodeTypeFlowValidationDetails struct {
+
+	// The node that's incompatible in the DoWhile loop.
+	//
+	// This member is required.
+	IncompatibleNodeName *string
+
+	// The node type of the incompatible node in the DoWhile loop. Some node types,
+	// like a condition node, aren't allowed in a DoWhile loop.
+	//
+	// This member is required.
+	IncompatibleNodeType IncompatibleLoopNodeType
+
+	// The Loop container node that contains an incompatible node.
+	//
+	// This member is required.
+	Node *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for the input node of a DoWhile loop in the flow.
+type LoopInputFlowNodeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
@@ -3208,6 +3493,21 @@ type MetadataAttributeValue struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies how metadata fields should be handled during the reranking process.
+type MetadataConfigurationForReranking struct {
+
+	// The mode for selecting metadata fields for reranking.
+	//
+	// This member is required.
+	SelectionMode RerankingMetadataSelectionMode
+
+	// The configuration for selective metadata field inclusion or exclusion during
+	// reranking.
+	SelectiveModeConfiguration RerankingMetadataSelectiveModeConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Details about mismatched input data types in a node.
 type MismatchedNodeInputTypeFlowValidationDetails struct {
 
@@ -3277,10 +3577,33 @@ type MissingEndingNodesFlowValidationDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a node missing required configuration.
+// Details about a flow that's missing a required LoopController node in a DoWhile
+// loop.
+type MissingLoopControllerNodeFlowValidationDetails struct {
+
+	// The DoWhile loop in a flow that's missing a required LoopController node.
+	//
+	// This member is required.
+	LoopNode *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a flow that's missing a required LoopInput node in a DoWhile loop.
+type MissingLoopInputNodeFlowValidationDetails struct {
+
+	// The DoWhile loop in a flow that's missing a required LoopInput node.
+	//
+	// This member is required.
+	LoopNode *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a node missing a required configuration.
 type MissingNodeConfigurationFlowValidationDetails struct {
 
-	// The name of the node missing configuration.
+	// The name of the node missing a required configuration.
 	//
 	// This member is required.
 	Node *string
@@ -3393,6 +3716,29 @@ type MongoDbAtlasFieldMapping struct {
 	//
 	// This member is required.
 	VectorField *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a flow that contains multiple LoopController nodes in a DoWhile
+// loop.
+type MultipleLoopControllerNodesFlowValidationDetails struct {
+
+	// The DoWhile loop in a flow that contains multiple LoopController nodes.
+	//
+	// This member is required.
+	LoopNode *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a flow that contains multiple LoopInput nodes in a DoWhile loop.
+type MultipleLoopInputNodesFlowValidationDetails struct {
+
+	// The DoWhile loop in a flow that contains multiple LoopInput nodes.
+	//
+	// This member is required.
+	LoopNode *string
 
 	noSmithyDocumentSerde
 }
@@ -3701,6 +4047,16 @@ type PatternObjectFilterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The performance-related configuration options for the knowledge base retrieval
+// and generation process.
+type PerformanceConfiguration struct {
+
+	// The latency optimization setting.
+	Latency PerformanceConfigLatency
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the storage configuration of the knowledge base in
 // Pinecone. For more information, see [Create a vector index in Pinecone].
 //
@@ -3814,7 +4170,7 @@ type PromptConfiguration struct {
 	// promptType . If you set this value to DISABLED , the agent skips that step. The
 	// default state for each promptType is as follows.
 	//
-	//   - PRE_PROCESSING – DISABLED
+	//   - PRE_PROCESSING – ENABLED
 	//
 	//   - ORCHESTRATION – ENABLED
 	//
@@ -3833,9 +4189,9 @@ type PromptConfiguration struct {
 // from Prompt management or you can define one in this node. If the prompt
 // contains variables, the inputs into this node will fill in the variables. The
 // output from this node is the response generated by the model. For more
-// information, see [Node types in Amazon Bedrock works]in the Amazon Bedrock User Guide.
+// information, see [Node types in a flow]in the Amazon Bedrock User Guide.
 //
-// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+// [Node types in a flow]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
 type PromptFlowNodeConfiguration struct {
 
 	// Specifies whether the prompt is from Prompt management or defined inline.
@@ -4508,6 +4864,37 @@ type RedshiftServerlessConfiguration struct {
 	WorkgroupArn *string
 
 	noSmithyDocumentSerde
+}
+
+// Configures the metadata fields to include or exclude during the reranking
+// process when using selective mode.
+//
+// The following types satisfy this interface:
+//
+//	RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude
+//	RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude
+type RerankingMetadataSelectiveModeConfiguration interface {
+	isRerankingMetadataSelectiveModeConfiguration()
+}
+
+// Specifies the metadata fields to exclude from the reranking process.
+type RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude struct {
+	Value []FieldForReranking
+
+	noSmithyDocumentSerde
+}
+
+func (*RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude) isRerankingMetadataSelectiveModeConfiguration() {
+}
+
+// Specifies the metadata fields to include in the reranking process.
+type RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude struct {
+	Value []FieldForReranking
+
+	noSmithyDocumentSerde
+}
+
+func (*RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude) isRerankingMetadataSelectiveModeConfiguration() {
 }
 
 // Contains configurations for a Retrieval node in a flow. This node retrieves
@@ -5387,6 +5774,56 @@ type VectorKnowledgeBaseConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configures the Amazon Bedrock reranker model to improve the relevance of
+// retrieved results.
+type VectorSearchBedrockRerankingConfiguration struct {
+
+	// Specifies the configuration for the Amazon Bedrock reranker model.
+	//
+	// This member is required.
+	ModelConfiguration *VectorSearchBedrockRerankingModelConfiguration
+
+	// Specifies how metadata fields should be handled during the reranking process.
+	MetadataConfiguration *MetadataConfigurationForReranking
+
+	// Specifies the number of results to return after reranking.
+	NumberOfRerankedResults *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configures the Amazon Bedrock model used for reranking retrieved results.
+type VectorSearchBedrockRerankingModelConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Bedrock reranker model.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// Specifies additional model-specific request parameters as key-value pairs that
+	// are included in the request to the Amazon Bedrock reranker model.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Specifies how retrieved results from a knowledge base are reranked to improve
+// relevance.
+type VectorSearchRerankingConfiguration struct {
+
+	// Specifies the type of reranking model to use. Currently, the only supported
+	// value is BEDROCK_RERANKING_MODEL .
+	//
+	// This member is required.
+	Type VectorSearchRerankingConfigurationType
+
+	// Specifies the configuration for using an Amazon Bedrock reranker model to
+	// rerank retrieved results.
+	BedrockRerankingConfiguration *VectorSearchBedrockRerankingConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of web URLs that you want to crawl. You should be authorized
 // to crawl the URLs.
 type WebCrawlerConfiguration struct {
@@ -5481,21 +5918,22 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isActionGroupExecutor()                   {}
-func (*UnknownUnionMember) isAPISchema()                             {}
-func (*UnknownUnionMember) isContentBlock()                          {}
-func (*UnknownUnionMember) isFlowConnectionConfiguration()           {}
-func (*UnknownUnionMember) isFlowNodeConfiguration()                 {}
-func (*UnknownUnionMember) isFlowValidationDetails()                 {}
-func (*UnknownUnionMember) isFunctionSchema()                        {}
-func (*UnknownUnionMember) isOrchestrationExecutor()                 {}
-func (*UnknownUnionMember) isPromptFlowNodeSourceConfiguration()     {}
-func (*UnknownUnionMember) isPromptGenAiResource()                   {}
-func (*UnknownUnionMember) isPromptInferenceConfiguration()          {}
-func (*UnknownUnionMember) isPromptTemplateConfiguration()           {}
-func (*UnknownUnionMember) isRetrievalFlowNodeServiceConfiguration() {}
-func (*UnknownUnionMember) isStorageFlowNodeServiceConfiguration()   {}
-func (*UnknownUnionMember) isSystemContentBlock()                    {}
-func (*UnknownUnionMember) isTool()                                  {}
-func (*UnknownUnionMember) isToolChoice()                            {}
-func (*UnknownUnionMember) isToolInputSchema()                       {}
+func (*UnknownUnionMember) isActionGroupExecutor()                         {}
+func (*UnknownUnionMember) isAPISchema()                                   {}
+func (*UnknownUnionMember) isContentBlock()                                {}
+func (*UnknownUnionMember) isFlowConnectionConfiguration()                 {}
+func (*UnknownUnionMember) isFlowNodeConfiguration()                       {}
+func (*UnknownUnionMember) isFlowValidationDetails()                       {}
+func (*UnknownUnionMember) isFunctionSchema()                              {}
+func (*UnknownUnionMember) isOrchestrationExecutor()                       {}
+func (*UnknownUnionMember) isPromptFlowNodeSourceConfiguration()           {}
+func (*UnknownUnionMember) isPromptGenAiResource()                         {}
+func (*UnknownUnionMember) isPromptInferenceConfiguration()                {}
+func (*UnknownUnionMember) isPromptTemplateConfiguration()                 {}
+func (*UnknownUnionMember) isRerankingMetadataSelectiveModeConfiguration() {}
+func (*UnknownUnionMember) isRetrievalFlowNodeServiceConfiguration()       {}
+func (*UnknownUnionMember) isStorageFlowNodeServiceConfiguration()         {}
+func (*UnknownUnionMember) isSystemContentBlock()                          {}
+func (*UnknownUnionMember) isTool()                                        {}
+func (*UnknownUnionMember) isToolChoice()                                  {}
+func (*UnknownUnionMember) isToolInputSchema()                             {}

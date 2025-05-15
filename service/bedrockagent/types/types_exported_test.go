@@ -127,6 +127,15 @@ func ExampleFlowNodeConfiguration_outputUsage() {
 	case *types.FlowNodeConfigurationMemberLex:
 		_ = v.Value // Value is types.LexFlowNodeConfiguration
 
+	case *types.FlowNodeConfigurationMemberLoop:
+		_ = v.Value // Value is types.LoopFlowNodeConfiguration
+
+	case *types.FlowNodeConfigurationMemberLoopController:
+		_ = v.Value // Value is types.LoopControllerFlowNodeConfiguration
+
+	case *types.FlowNodeConfigurationMemberLoopInput:
+		_ = v.Value // Value is types.LoopInputFlowNodeConfiguration
+
 	case *types.FlowNodeConfigurationMemberOutput:
 		_ = v.Value // Value is types.OutputFlowNodeConfiguration
 
@@ -153,11 +162,14 @@ var _ *types.AgentFlowNodeConfiguration
 var _ *types.KnowledgeBaseFlowNodeConfiguration
 var _ *types.PromptFlowNodeConfiguration
 var _ *types.InputFlowNodeConfiguration
+var _ *types.LoopFlowNodeConfiguration
 var _ *types.InlineCodeFlowNodeConfiguration
 var _ *types.LambdaFunctionFlowNodeConfiguration
 var _ *types.ConditionFlowNodeConfiguration
+var _ *types.LoopInputFlowNodeConfiguration
 var _ *types.CollectorFlowNodeConfiguration
 var _ *types.OutputFlowNodeConfiguration
+var _ *types.LoopControllerFlowNodeConfiguration
 var _ *types.RetrievalFlowNodeConfiguration
 var _ *types.StorageFlowNodeConfiguration
 var _ *types.LexFlowNodeConfiguration
@@ -177,6 +189,12 @@ func ExampleFlowValidationDetails_outputUsage() {
 
 	case *types.FlowValidationDetailsMemberIncompatibleConnectionDataType:
 		_ = v.Value // Value is types.IncompatibleConnectionDataTypeFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberInvalidLoopBoundary:
+		_ = v.Value // Value is types.InvalidLoopBoundaryFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberLoopIncompatibleNodeType:
+		_ = v.Value // Value is types.LoopIncompatibleNodeTypeFlowValidationDetails
 
 	case *types.FlowValidationDetailsMemberMalformedConditionExpression:
 		_ = v.Value // Value is types.MalformedConditionExpressionFlowValidationDetails
@@ -199,6 +217,12 @@ func ExampleFlowValidationDetails_outputUsage() {
 	case *types.FlowValidationDetailsMemberMissingEndingNodes:
 		_ = v.Value // Value is types.MissingEndingNodesFlowValidationDetails
 
+	case *types.FlowValidationDetailsMemberMissingLoopControllerNode:
+		_ = v.Value // Value is types.MissingLoopControllerNodeFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMissingLoopInputNode:
+		_ = v.Value // Value is types.MissingLoopInputNodeFlowValidationDetails
+
 	case *types.FlowValidationDetailsMemberMissingNodeConfiguration:
 		_ = v.Value // Value is types.MissingNodeConfigurationFlowValidationDetails
 
@@ -210,6 +234,12 @@ func ExampleFlowValidationDetails_outputUsage() {
 
 	case *types.FlowValidationDetailsMemberMissingStartingNodes:
 		_ = v.Value // Value is types.MissingStartingNodesFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMultipleLoopControllerNodes:
+		_ = v.Value // Value is types.MultipleLoopControllerNodesFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMultipleLoopInputNodes:
+		_ = v.Value // Value is types.MultipleLoopInputNodesFlowValidationDetails
 
 	case *types.FlowValidationDetailsMemberMultipleNodeInputConnections:
 		_ = v.Value // Value is types.MultipleNodeInputConnectionsFlowValidationDetails
@@ -256,6 +286,7 @@ func ExampleFlowValidationDetails_outputUsage() {
 	}
 }
 
+var _ *types.MissingLoopInputNodeFlowValidationDetails
 var _ *types.MalformedConditionExpressionFlowValidationDetails
 var _ *types.UnfulfilledNodeInputFlowValidationDetails
 var _ *types.MalformedNodeInputExpressionFlowValidationDetails
@@ -265,12 +296,14 @@ var _ *types.DuplicateConditionExpressionFlowValidationDetails
 var _ *types.MissingNodeInputFlowValidationDetails
 var _ *types.UnknownConnectionTargetFlowValidationDetails
 var _ *types.MultipleNodeInputConnectionsFlowValidationDetails
+var _ *types.MultipleLoopInputNodesFlowValidationDetails
 var _ *types.MismatchedNodeInputTypeFlowValidationDetails
 var _ *types.UnsatisfiedConnectionConditionsFlowValidationDetails
 var _ *types.MissingDefaultConditionFlowValidationDetails
 var _ *types.DuplicateConnectionsFlowValidationDetails
 var _ *types.UnreachableNodeFlowValidationDetails
 var _ *types.MissingEndingNodesFlowValidationDetails
+var _ *types.MissingLoopControllerNodeFlowValidationDetails
 var _ *types.MissingStartingNodesFlowValidationDetails
 var _ *types.UnknownConnectionSourceFlowValidationDetails
 var _ *types.UnknownNodeInputFlowValidationDetails
@@ -280,7 +313,10 @@ var _ *types.MissingNodeOutputFlowValidationDetails
 var _ *types.UnknownConnectionSourceOutputFlowValidationDetails
 var _ *types.UnspecifiedFlowValidationDetails
 var _ *types.IncompatibleConnectionDataTypeFlowValidationDetails
+var _ *types.LoopIncompatibleNodeTypeFlowValidationDetails
 var _ *types.UnknownNodeOutputFlowValidationDetails
+var _ *types.MultipleLoopControllerNodesFlowValidationDetails
+var _ *types.InvalidLoopBoundaryFlowValidationDetails
 var _ *types.CyclicConnectionFlowValidationDetails
 var _ *types.MissingConnectionConfigurationFlowValidationDetails
 
@@ -399,6 +435,27 @@ func ExamplePromptTemplateConfiguration_outputUsage() {
 
 var _ *types.TextPromptTemplateConfiguration
 var _ *types.ChatPromptTemplateConfiguration
+
+func ExampleRerankingMetadataSelectiveModeConfiguration_outputUsage() {
+	var union types.RerankingMetadataSelectiveModeConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude:
+		_ = v.Value // Value is []types.FieldForReranking
+
+	case *types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude:
+		_ = v.Value // Value is []types.FieldForReranking
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.FieldForReranking
 
 func ExampleRetrievalFlowNodeServiceConfiguration_outputUsage() {
 	var union types.RetrievalFlowNodeServiceConfiguration

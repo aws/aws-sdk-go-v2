@@ -165,6 +165,25 @@ func (ChunkingStrategy) Values() []ChunkingStrategy {
 	}
 }
 
+type ConcurrencyType string
+
+// Enum values for ConcurrencyType
+const (
+	ConcurrencyTypeAutomatic ConcurrencyType = "Automatic"
+	ConcurrencyTypeManual    ConcurrencyType = "Manual"
+)
+
+// Values returns all known values for ConcurrencyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConcurrencyType) Values() []ConcurrencyType {
+	return []ConcurrencyType{
+		"Automatic",
+		"Manual",
+	}
+}
+
 type ConfluenceAuthType string
 
 // Enum values for ConfluenceAuthType
@@ -492,6 +511,27 @@ func (FlowConnectionType) Values() []FlowConnectionType {
 	}
 }
 
+type FlowNodeInputCategory string
+
+// Enum values for FlowNodeInputCategory
+const (
+	FlowNodeInputCategoryLoopCondition          FlowNodeInputCategory = "LoopCondition"
+	FlowNodeInputCategoryReturnValueToLoopStart FlowNodeInputCategory = "ReturnValueToLoopStart"
+	FlowNodeInputCategoryExitLoop               FlowNodeInputCategory = "ExitLoop"
+)
+
+// Values returns all known values for FlowNodeInputCategory. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowNodeInputCategory) Values() []FlowNodeInputCategory {
+	return []FlowNodeInputCategory{
+		"LoopCondition",
+		"ReturnValueToLoopStart",
+		"ExitLoop",
+	}
+}
+
 type FlowNodeIODataType string
 
 // Enum values for FlowNodeIODataType
@@ -534,6 +574,9 @@ const (
 	FlowNodeTypeIterator       FlowNodeType = "Iterator"
 	FlowNodeTypeCollector      FlowNodeType = "Collector"
 	FlowNodeTypeInlineCode     FlowNodeType = "InlineCode"
+	FlowNodeTypeLoop           FlowNodeType = "Loop"
+	FlowNodeTypeLoopInput      FlowNodeType = "LoopInput"
+	FlowNodeTypeLoopController FlowNodeType = "LoopController"
 )
 
 // Values returns all known values for FlowNodeType. Note that this can be
@@ -555,6 +598,9 @@ func (FlowNodeType) Values() []FlowNodeType {
 		"Iterator",
 		"Collector",
 		"InlineCode",
+		"Loop",
+		"LoopInput",
+		"LoopController",
 	}
 }
 
@@ -631,6 +677,12 @@ const (
 	FlowValidationTypeUnspecified                     FlowValidationType = "Unspecified"
 	FlowValidationTypeUnknownNodeInput                FlowValidationType = "UnknownNodeInput"
 	FlowValidationTypeUnknownNodeOutput               FlowValidationType = "UnknownNodeOutput"
+	FlowValidationTypeMissingLoopInputNode            FlowValidationType = "MissingLoopInputNode"
+	FlowValidationTypeMissingLoopControllerNode       FlowValidationType = "MissingLoopControllerNode"
+	FlowValidationTypeMultipleLoopInputNodes          FlowValidationType = "MultipleLoopInputNodes"
+	FlowValidationTypeMultipleLoopControllerNodes     FlowValidationType = "MultipleLoopControllerNodes"
+	FlowValidationTypeLoopIncompatibleNodeType        FlowValidationType = "LoopIncompatibleNodeType"
+	FlowValidationTypeInvalidLoopBoundary             FlowValidationType = "InvalidLoopBoundary"
 )
 
 // Values returns all known values for FlowValidationType. Note that this can be
@@ -666,6 +718,12 @@ func (FlowValidationType) Values() []FlowValidationType {
 		"Unspecified",
 		"UnknownNodeInput",
 		"UnknownNodeOutput",
+		"MissingLoopInputNode",
+		"MissingLoopControllerNode",
+		"MultipleLoopInputNodes",
+		"MultipleLoopControllerNodes",
+		"LoopIncompatibleNodeType",
+		"InvalidLoopBoundary",
 	}
 }
 
@@ -685,6 +743,29 @@ func (IncludeExclude) Values() []IncludeExclude {
 	return []IncludeExclude{
 		"INCLUDE",
 		"EXCLUDE",
+	}
+}
+
+type IncompatibleLoopNodeType string
+
+// Enum values for IncompatibleLoopNodeType
+const (
+	IncompatibleLoopNodeTypeInput     IncompatibleLoopNodeType = "Input"
+	IncompatibleLoopNodeTypeCondition IncompatibleLoopNodeType = "Condition"
+	IncompatibleLoopNodeTypeIterator  IncompatibleLoopNodeType = "Iterator"
+	IncompatibleLoopNodeTypeCollector IncompatibleLoopNodeType = "Collector"
+)
+
+// Values returns all known values for IncompatibleLoopNodeType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncompatibleLoopNodeType) Values() []IncompatibleLoopNodeType {
+	return []IncompatibleLoopNodeType{
+		"Input",
+		"Condition",
+		"Iterator",
+		"Collector",
 	}
 }
 
@@ -997,6 +1078,25 @@ func (ParsingStrategy) Values() []ParsingStrategy {
 	}
 }
 
+type PerformanceConfigLatency string
+
+// Enum values for PerformanceConfigLatency
+const (
+	PerformanceConfigLatencyStandard  PerformanceConfigLatency = "standard"
+	PerformanceConfigLatencyOptimized PerformanceConfigLatency = "optimized"
+)
+
+// Values returns all known values for PerformanceConfigLatency. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PerformanceConfigLatency) Values() []PerformanceConfigLatency {
+	return []PerformanceConfigLatency{
+		"standard",
+		"optimized",
+	}
+}
+
 type PromptState string
 
 // Enum values for PromptState
@@ -1194,6 +1294,26 @@ func (RequireConfirmation) Values() []RequireConfirmation {
 	}
 }
 
+type RerankingMetadataSelectionMode string
+
+// Enum values for RerankingMetadataSelectionMode
+const (
+	RerankingMetadataSelectionModeSelective RerankingMetadataSelectionMode = "SELECTIVE"
+	RerankingMetadataSelectionModeAll       RerankingMetadataSelectionMode = "ALL"
+)
+
+// Values returns all known values for RerankingMetadataSelectionMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RerankingMetadataSelectionMode) Values() []RerankingMetadataSelectionMode {
+	return []RerankingMetadataSelectionMode{
+		"SELECTIVE",
+		"ALL",
+	}
+}
+
 type SalesforceAuthType string
 
 // Enum values for SalesforceAuthType
@@ -1340,6 +1460,24 @@ func (Type) Values() []Type {
 		"integer",
 		"boolean",
 		"array",
+	}
+}
+
+type VectorSearchRerankingConfigurationType string
+
+// Enum values for VectorSearchRerankingConfigurationType
+const (
+	VectorSearchRerankingConfigurationTypeBedrockRerankingModel VectorSearchRerankingConfigurationType = "BEDROCK_RERANKING_MODEL"
+)
+
+// Values returns all known values for VectorSearchRerankingConfigurationType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VectorSearchRerankingConfigurationType) Values() []VectorSearchRerankingConfigurationType {
+	return []VectorSearchRerankingConfigurationType{
+		"BEDROCK_RERANKING_MODEL",
 	}
 }
 

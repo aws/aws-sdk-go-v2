@@ -218,12 +218,8 @@ type EnabledBaselineDetails struct {
 // baseline. One way to repair this drift by resetting the parent enabled baseline,
 // on the OU.
 //
-// For example, if an account is moved between OUs that share the same baseline
-// but different versions or parameters, the entity from the previous OU is
-// unlinked; that (previous) OU reports inheritance drift. Also, the parent enabled
-// baseline on the destination OU reports inheritance drift; it is missing the
-// newly moved account. The configurations do not match for either OU, so both are
-// in a state of inheritance drift.
+// For example, you may see this type of drift if you move accounts between OUs,
+// but the accounts are not yet (re-)enrolled.
 type EnabledBaselineDriftStatusSummary struct {
 
 	// The types of drift that can be detected for an enabled baseline. Amazon Web
@@ -256,10 +252,10 @@ type EnabledBaselineDriftStatusSummary struct {
 // [Types of baselines]: https://docs.aws.amazon.com/controltower/latest/userguide/types-of-baselines.html
 type EnabledBaselineDriftTypes struct {
 
-	// One or more accounts within the target OU does not match the baseline
+	// At least one account within the target OU does not match the baseline
 	// configuration defined on that OU. An account is in inheritance drift when it
-	// does not match the configuration of a parent OU, possibly a new parent OU if the
-	// account is moved.
+	// does not match the configuration of a parent OU, possibly a new parent OU, if
+	// the account is moved.
 	Inheritance *EnabledBaselineInheritanceDrift
 
 	noSmithyDocumentSerde

@@ -1,0 +1,8 @@
+{
+    "id": "03fadee9-4153-443f-8ab3-eaf490e3840e",
+    "type": "feature",
+    "description": "AWS CodeBuild now supports Docker Server capability",
+    "modules": [
+        "service/codebuild"
+    ]
+}

@@ -18349,6 +18349,15 @@ func awsAwsjson11_deserializeDocumentWorkspacesPool(v **types.WorkspacesPool, va
 				sv.PoolName = ptr.String(jtv)
 			}
 
+		case "RunningMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PoolsRunningMode to be of type string, got %T instead", value)
+				}
+				sv.RunningMode = types.PoolsRunningMode(jtv)
+			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)

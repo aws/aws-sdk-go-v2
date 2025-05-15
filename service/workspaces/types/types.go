@@ -1865,10 +1865,15 @@ type WorkspacesPool struct {
 	// This member is required.
 	PoolId *string
 
-	// The name of the pool,
+	// The name of the pool.
 	//
 	// This member is required.
 	PoolName *string
+
+	// The running mode of the pool.
+	//
+	// This member is required.
+	RunningMode PoolsRunningMode
 
 	// The current state of the pool.
 	//

@@ -2497,6 +2497,59 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAccounting(v **types.Accounting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Accounting
+	if *v == nil {
+		sv = &types.Accounting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultPurgeTimeInDays":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DefaultPurgeTimeInDays = ptr.Int32(int32(i64))
+			}
+
+		case "mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountingMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.AccountingMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentCluster(v **types.Cluster, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2680,6 +2733,11 @@ func awsAwsjson10_deserializeDocumentClusterSlurmConfiguration(v **types.Cluster
 
 	for key, value := range shape {
 		switch key {
+		case "accounting":
+			if err := awsAwsjson10_deserializeDocumentAccounting(&sv.Accounting, value); err != nil {
+				return err
+			}
+
 		case "authKey":
 			if err := awsAwsjson10_deserializeDocumentSlurmAuthKey(&sv.AuthKey, value); err != nil {
 				return err

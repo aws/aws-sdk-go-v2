@@ -2,6 +2,25 @@
 
 package types
 
+type AccountingMode string
+
+// Enum values for AccountingMode
+const (
+	AccountingModeStandard AccountingMode = "STANDARD"
+	AccountingModeNone     AccountingMode = "NONE"
+)
+
+// Values returns all known values for AccountingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountingMode) Values() []AccountingMode {
+	return []AccountingMode{
+		"STANDARD",
+		"NONE",
+	}
+}
+
 type ClusterStatus string
 
 // Enum values for ClusterStatus

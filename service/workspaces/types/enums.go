@@ -822,6 +822,25 @@ func (OperatingSystemType) Values() []OperatingSystemType {
 	}
 }
 
+type PoolsRunningMode string
+
+// Enum values for PoolsRunningMode
+const (
+	PoolsRunningModeAutoStop PoolsRunningMode = "AUTO_STOP"
+	PoolsRunningModeAlwaysOn PoolsRunningMode = "ALWAYS_ON"
+)
+
+// Values returns all known values for PoolsRunningMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PoolsRunningMode) Values() []PoolsRunningMode {
+	return []PoolsRunningMode{
+		"AUTO_STOP",
+		"ALWAYS_ON",
+	}
+}
+
 type Protocol string
 
 // Enum values for Protocol
@@ -1277,6 +1296,9 @@ const (
 	WorkspaceImageErrorDetailCodeStagedAppxPackage                      WorkspaceImageErrorDetailCode = "StagedAppxPackage"
 	WorkspaceImageErrorDetailCodeUnsupportedOsUpgrade                   WorkspaceImageErrorDetailCode = "UnsupportedOsUpgrade"
 	WorkspaceImageErrorDetailCodeInsufficientRearmCount                 WorkspaceImageErrorDetailCode = "InsufficientRearmCount"
+	WorkspaceImageErrorDetailCodeIncompatibleProtocol                   WorkspaceImageErrorDetailCode = "ProtocolOSIncompatibility"
+	WorkspaceImageErrorDetailCodeIncompatibleMemoryIntegrity            WorkspaceImageErrorDetailCode = "MemoryIntegrityIncompatibility"
+	WorkspaceImageErrorDetailCodeRestrictedDriveLetter                  WorkspaceImageErrorDetailCode = "RestrictedDriveLetterInUse"
 )
 
 // Values returns all known values for WorkspaceImageErrorDetailCode. Note that
@@ -1331,6 +1353,9 @@ func (WorkspaceImageErrorDetailCode) Values() []WorkspaceImageErrorDetailCode {
 		"StagedAppxPackage",
 		"UnsupportedOsUpgrade",
 		"InsufficientRearmCount",
+		"ProtocolOSIncompatibility",
+		"MemoryIntegrityIncompatibility",
+		"RestrictedDriveLetterInUse",
 	}
 }
 

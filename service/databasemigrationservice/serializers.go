@@ -8030,6 +8030,11 @@ func awsAwsjson11_serializeDocumentMySQLSettings(v *types.MySQLSettings, value s
 		ok.String(*v.AfterConnectScript)
 	}
 
+	if len(v.AuthenticationMethod) > 0 {
+		ok := object.Key("AuthenticationMethod")
+		ok.String(string(v.AuthenticationMethod))
+	}
+
 	if v.CleanSourceMetadataOnMismatch != nil {
 		ok := object.Key("CleanSourceMetadataOnMismatch")
 		ok.Boolean(*v.CleanSourceMetadataOnMismatch)
@@ -8088,6 +8093,11 @@ func awsAwsjson11_serializeDocumentMySQLSettings(v *types.MySQLSettings, value s
 	if v.ServerTimezone != nil {
 		ok := object.Key("ServerTimezone")
 		ok.String(*v.ServerTimezone)
+	}
+
+	if v.ServiceAccessRoleArn != nil {
+		ok := object.Key("ServiceAccessRoleArn")
+		ok.String(*v.ServiceAccessRoleArn)
 	}
 
 	if len(v.TargetDbType) > 0 {
@@ -8472,6 +8482,11 @@ func awsAwsjson11_serializeDocumentPostgreSQLSettings(v *types.PostgreSQLSetting
 		ok.String(*v.AfterConnectScript)
 	}
 
+	if len(v.AuthenticationMethod) > 0 {
+		ok := object.Key("AuthenticationMethod")
+		ok.String(string(v.AuthenticationMethod))
+	}
+
 	if v.BabelfishDatabaseName != nil {
 		ok := object.Key("BabelfishDatabaseName")
 		ok.String(*v.BabelfishDatabaseName)
@@ -8575,6 +8590,11 @@ func awsAwsjson11_serializeDocumentPostgreSQLSettings(v *types.PostgreSQLSetting
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
+	}
+
+	if v.ServiceAccessRoleArn != nil {
+		ok := object.Key("ServiceAccessRoleArn")
+		ok.String(*v.ServiceAccessRoleArn)
 	}
 
 	if v.SlotName != nil {
