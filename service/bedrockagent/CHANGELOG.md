@@ -1,3 +1,7 @@
+# v1.43.0 (2025-05-15)
+
+* **Feature**: Amazon Bedrock Flows introduces DoWhile loops nodes, parallel node executions, and enhancements to knowledge base nodes.
+
 # v1.42.0 (2025-04-30)
 
 * **Feature**: Features:    Add inline code node to prompt flow

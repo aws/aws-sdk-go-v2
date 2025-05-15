@@ -1,8 +1,0 @@
-{
-    "id": "7a4a8b4b-271b-46a8-aefe-a87fa0993659",
-    "type": "documentation",
-    "description": "Updated the descriptions for the AWS Control Tower Baseline APIs to make them more intuitive.",
-    "modules": [
-        "service/controltower"
-    ]
-}

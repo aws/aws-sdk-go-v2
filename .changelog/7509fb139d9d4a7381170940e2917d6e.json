@@ -1,8 +1,0 @@
-{
-    "id": "7509fb13-9d9d-4a73-8117-0940e2917d6e",
-    "type": "feature",
-    "description": "Added the new AlwaysOn running mode for WorkSpaces Pools. Customers can now choose between AlwaysOn (for instant access, with hourly usage billing regardless of connection status), or AutoStop (to optimize cost, with a brief startup delay) for their pools.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

@@ -16,14 +16,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.48.4
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.44.3
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.60.0
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.61.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.28.2
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.30.3
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.52.3
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.29.2
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.51.3
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.52.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.32.2
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.5
@@ -79,7 +79,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.25.3
 	github.com/aws/aws-sdk-go-v2/service/waf v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.26.2
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.56.0
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.57.0
 	github.com/aws/smithy-go v1.22.2
 )
 

@@ -1,3 +1,7 @@
+# v1.61.0 (2025-05-15)
+
+* **Feature**: AWS CodeBuild now supports Docker Server capability
+
 # v1.60.0 (2025-04-23)
 
 * **Feature**: Add support for custom instance type for reserved capacity fleets

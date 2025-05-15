@@ -1,3 +1,7 @@
+# v1.52.0 (2025-05-15)
+
+* **Feature**: Introduces Data Resync feature to describe-table-statistics and IAM database authentication for MariaDB, MySQL, and PostgreSQL.
+
 # v1.51.3 (2025-04-16)
 
 * No change notes available for this release.
