@@ -2660,6 +2660,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the timeout settings of the pool.</p>"
                     }
+                },
+                "RunningMode": {
+                    "target": "com.amazonaws.workspaces#PoolsRunningMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The running mode for the pool.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7675,6 +7681,23 @@
                 "target": "com.amazonaws.workspaces#PendingCreateStandbyWorkspacesRequest"
             }
         },
+        "com.amazonaws.workspaces#PoolsRunningMode": {
+            "type": "enum",
+            "members": {
+                "AUTO_STOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO_STOP"
+                    }
+                },
+                "ALWAYS_ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALWAYS_ON"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workspaces#Protocol": {
             "type": "enum",
             "members": {
@@ -9772,6 +9795,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the timeout settings of the specified pool.</p>"
                     }
+                },
+                "RunningMode": {
+                    "target": "com.amazonaws.workspaces#PoolsRunningMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired running mode for the pool. The running mode can only be updated when the pool is in a stopped state.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11150,6 +11179,24 @@
                     "traits": {
                         "smithy.api#enumValue": "InsufficientRearmCount"
                     }
+                },
+                "INCOMPATIBLE_PROTOCOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProtocolOSIncompatibility"
+                    }
+                },
+                "INCOMPATIBLE_MEMORY_INTEGRITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MemoryIntegrityIncompatibility"
+                    }
+                },
+                "RESTRICTED_DRIVE_LETTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RestrictedDriveLetterInUse"
+                    }
                 }
             }
         },
@@ -11682,7 +11729,7 @@
                 "PoolName": {
                     "target": "com.amazonaws.workspaces#WorkspacesPoolName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the pool,</p>",
+                        "smithy.api#documentation": "<p>The name of the pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11736,6 +11783,14 @@
                     "target": "com.amazonaws.workspaces#TimeoutSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of time that a pool session remains active after users disconnect. \n         If they try to reconnect to the pool session after a disconnection or network interruption \n         within this time interval, they are connected to their previous session. \n         Otherwise, they are connected to a new session with a new pool instance.</p>"
+                    }
+                },
+                "RunningMode": {
+                    "target": "com.amazonaws.workspaces#PoolsRunningMode",
+                    "traits": {
+                        "smithy.api#default": "AUTO_STOP",
+                        "smithy.api#documentation": "<p>The running mode of the pool.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },

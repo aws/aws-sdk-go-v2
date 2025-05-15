@@ -6168,7 +6168,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) for the schema conversion project to describe.</p>",
                         "smithy.api#required": {}
@@ -6828,7 +6828,7 @@
                 "Filters": {
                     "target": "com.amazonaws.databasemigrationservice#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters applied to event subscriptions.</p>\n         <p>Valid filter names: event-subscription-arn | event-subscription-id </p>"
+                        "smithy.api#documentation": "<p>Filters applied to event subscriptions.</p>\n         <p>Valid filter names: <code>event-subscription-arn</code> | <code>event-subscription-id</code>\n         </p>"
                     }
                 },
                 "MaxRecords": {
@@ -7021,7 +7021,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) for the migration project.</p>",
                         "smithy.api#required": {}
@@ -7565,7 +7565,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the migration project.</p>",
                         "smithy.api#required": {}
@@ -7669,7 +7669,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
@@ -7773,7 +7773,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
@@ -7877,7 +7877,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
@@ -7981,7 +7981,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
@@ -8334,7 +8334,7 @@
                 "Filters": {
                     "target": "com.amazonaws.databasemigrationservice#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters applied to the limitations described in the form of key-value pairs.</p>"
+                        "smithy.api#documentation": "<p>Filters applied to the limitations described in the form of key-value pairs.</p>\n         <p>Valid filter names: <code>database-id</code> | <code>engine-name</code>\n         </p>"
                     }
                 },
                 "MaxRecords": {
@@ -8405,7 +8405,7 @@
                 "Filters": {
                     "target": "com.amazonaws.databasemigrationservice#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters applied to the target engine recommendations described in the form of\n            key-value pairs.</p>"
+                        "smithy.api#documentation": "<p>Filters applied to the target engine recommendations described in the form of\n            key-value pairs.</p>\n         <p>Valid filter names: <code>database-id</code> | <code>engine-name</code>\n         </p>"
                     }
                 },
                 "MaxRecords": {
@@ -9693,7 +9693,7 @@
                 "Filters": {
                     "target": "com.amazonaws.databasemigrationservice#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters applied to the replications.</p>"
+                        "smithy.api#documentation": "<p>Filters applied to the replications.</p>\n         <p> Valid filter names: <code>replication-config-arn</code> | <code>replication-config-id</code>\n         </p>"
                     }
                 },
                 "MaxRecords": {
@@ -10823,7 +10823,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
@@ -12403,6 +12403,15 @@
                 "smithy.api#documentation": "<p>Provides information that defines a migration project.</p>"
             }
         },
+        "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.databasemigrationservice#MigrationProjectList": {
             "type": "list",
             "member": {
@@ -12472,7 +12481,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
@@ -14149,6 +14158,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#MySQLAuthenticationMethod": {
+            "type": "enum",
+            "members": {
+                "Password": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "password"
+                    }
+                },
+                "IAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iam"
+                    }
+                }
+            }
+        },
         "com.amazonaws.databasemigrationservice#MySQLSettings": {
             "type": "structure",
             "members": {
@@ -14240,6 +14266,18 @@
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Sets the client statement timeout (in seconds) for a MySQL source endpoint.</p>"
+                    }
+                },
+                "ServiceAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role you can use to authenticate when connecting to your endpoint. Ensure to include <code>iam:PassRole</code> and <code>rds-db:connect</code> actions in permission policy.</p>"
+                    }
+                },
+                "AuthenticationMethod": {
+                    "target": "com.amazonaws.databasemigrationservice#MySQLAuthenticationMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This attribute allows you to specify the authentication method as \"iam auth\".</p>"
                     }
                 }
             },
@@ -14899,6 +14937,23 @@
                 }
             }
         },
+        "com.amazonaws.databasemigrationservice#PostgreSQLAuthenticationMethod": {
+            "type": "enum",
+            "members": {
+                "Password": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "password"
+                    }
+                },
+                "IAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iam"
+                    }
+                }
+            }
+        },
         "com.amazonaws.databasemigrationservice#PostgreSQLSettings": {
             "type": "structure",
             "members": {
@@ -15050,6 +15105,18 @@
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Disables the Unicode source filter with PostgreSQL, for values passed into the Selection\n         rule filter on Source Endpoint column values. By default DMS performs source filter\n         comparisons using a Unicode string which can cause look ups to ignore the indexes in the\n         text columns and slow down migrations.</p>\n         <p>Unicode support should only be disabled when using a selection rule filter is on a text\n         column in the Source database that is indexed.</p>"
+                    }
+                },
+                "ServiceAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role arn you can use to authenticate the connection to your endpoint. Ensure to include <code>iam:PassRole</code> and <code>rds-db:connect</code> actions in permission policy.</p>"
+                    }
+                },
+                "AuthenticationMethod": {
+                    "target": "com.amazonaws.databasemigrationservice#PostgreSQLAuthenticationMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This attribute allows you to specify the authentication method as \"iam auth\".</p>"
                     }
                 }
             },
@@ -18168,7 +18235,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
@@ -18248,7 +18315,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
@@ -18335,7 +18402,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
@@ -18424,7 +18491,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
@@ -18525,7 +18592,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
@@ -18620,7 +18687,7 @@
             "type": "structure",
             "members": {
                 "MigrationProjectIdentifier": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
@@ -19704,6 +19771,36 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional details about the state of validation.</p>"
+                    }
+                },
+                "ResyncState": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Records the current state of table resynchronization in the migration task.</p>\n         <p>This parameter can have the following values:</p>\n         <ul>\n            <li>\n               <p>Not enabled – Resync is not enabled for the table in the migration task.</p>\n            </li>\n            <li>\n               <p>Pending – The tables are waiting for resync.</p>\n            </li>\n            <li>\n               <p>In progress – Resync in progress for some records in the table.</p>\n            </li>\n            <li>\n               <p>No primary key – The table could not be resynced because it has no primary key.</p>\n            </li>\n            <li>\n               <p>Last resync at: <code>date/time</code> – Resync session is finished at time. Time provided in UTC format.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ResyncRowsAttempted": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Records the total number of mismatched data rows where the system attempted to apply\n         fixes in the target database.</p>"
+                    }
+                },
+                "ResyncRowsSucceeded": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Records the total number of mismatched data rows where fixes were successfully applied in the target database.</p>"
+                    }
+                },
+                "ResyncRowsFailed": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Records the total number of mismatched data rows where fix attempts failed in the target\n         database.</p>"
+                    }
+                },
+                "ResyncProgress": {
+                    "target": "com.amazonaws.databasemigrationservice#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Calculates the percentage of failed validations that were successfully resynced to the system.</p>"
                     }
                 }
             },

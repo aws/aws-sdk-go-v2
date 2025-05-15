@@ -198,6 +198,27 @@
                 "smithy.api#documentation": "<p>Contains details about an action group.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#AdditionalModelRequestFields": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrockagent#AdditionalModelRequestFieldsKey"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagent#AdditionalModelRequestFieldsValue"
+            }
+        },
+        "com.amazonaws.bedrockagent#AdditionalModelRequestFieldsKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#AdditionalModelRequestFieldsValue": {
+            "type": "document"
+        },
         "com.amazonaws.bedrockagent#Agent": {
             "type": "structure",
             "members": {
@@ -419,7 +440,7 @@
                 "parentActionGroupSignatureParams": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupSignatureParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for a computer use action.</p>\n         <important>\n            <p>\n        Computer use is a new Anthropic Claude model capability (in beta) available with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n      </p>\n         </important>"
+                        "smithy.api#documentation": "<p>The configuration settings for a computer use action.</p>\n         <important>\n            <p>\n        Computer use is a new Anthropic Claude model capability (in beta) available with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n      </p>\n         </important>"
                     }
                 },
                 "actionGroupExecutor": {
@@ -970,7 +991,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines an agent node in your flow. You specify the agent to invoke at this point in the flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in Amazon Bedrock works</a> in the Amazon Bedrock User Guide.</p>"
+                "smithy.api#documentation": "<p>Defines an agent node in your flow. You specify the agent to invoke at this point in the flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
         "com.amazonaws.bedrockagent#AgentKnowledgeBase": {
@@ -2553,6 +2574,16 @@
                 "smithy.api#pattern": "^(arn:aws(-[^:]{1,12})?:(bedrock):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
             }
         },
+        "com.amazonaws.bedrockagent#BedrockRerankingModelArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/(.*))?$"
+            }
+        },
         "com.amazonaws.bedrockagent#BucketOwnerAccountId": {
             "type": "string",
             "traits": {
@@ -2742,7 +2773,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Defines a collector node in your flow. This node takes an iteration of inputs and consolidates them into an array in the output. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in Amazon Bedrock works</a> in the Amazon Bedrock User Guide.</p>"
+                "smithy.api#documentation": "<p>Defines a collector node in your flow. This node takes an iteration of inputs and consolidates them into an array in the output. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
         "com.amazonaws.bedrockagent#ColumnName": {
@@ -2752,6 +2783,23 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_\\-]+$"
+            }
+        },
+        "com.amazonaws.bedrockagent#ConcurrencyType": {
+            "type": "enum",
+            "members": {
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Automatic"
+                    }
+                },
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Manual"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagent#ConditionFlowNodeConfiguration": {
@@ -2766,7 +2814,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines a condition node in your flow. You can specify conditions that determine which node comes next in the flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in Amazon Bedrock works</a> in the Amazon Bedrock User Guide.</p>"
+                "smithy.api#documentation": "<p>Defines a condition node in your flow. You can specify conditions that determine which node comes next in the flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
         "com.amazonaws.bedrockagent#ConflictException": {
@@ -3133,13 +3181,13 @@
                 "parentActionGroupSignature": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupSignature",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify a built-in or computer use action for this action group. If you specify a value, you must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields empty for this action group. </p>\n         <ul>\n            <li>\n               <p>To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. </p>\n            </li>\n            <li>\n               <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to <code>AMAZON.CodeInterpreter</code>.</p>\n            </li>\n            <li>\n               <p>To allow your agent to use an Anthropic computer use tool, specify one of the following values. </p>\n               <important>\n                  <p>\n            Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only.          \n            When operating computer use functionality, we recommend taking additional security precautions,\n            such as executing computer actions in virtual environments with restricted data access and limited internet connectivity. \n             For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n          </p>\n               </important>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Computer</code> - Gives the agent permission to use the mouse and keyboard and\n              take screenshots.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.TextEditor</code> - Gives the agent permission to view, create and edit files.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Bash</code> - Gives the agent permission to run commands in a bash shell.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specify a built-in or computer use action for this action group. If you specify a value, you must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields empty for this action group. </p>\n         <ul>\n            <li>\n               <p>To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. </p>\n            </li>\n            <li>\n               <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to <code>AMAZON.CodeInterpreter</code>.</p>\n            </li>\n            <li>\n               <p>To allow your agent to use an Anthropic computer use tool, specify one of the following values. </p>\n               <important>\n                  <p>\n            Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only.          \n            When operating computer use functionality, we recommend taking additional security precautions,\n            such as executing computer actions in virtual environments with restricted data access and limited internet connectivity. \n             For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n          </p>\n               </important>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Computer</code> - Gives the agent permission to use the mouse and keyboard and\n              take screenshots.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.TextEditor</code> - Gives the agent permission to view, create and edit files.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Bash</code> - Gives the agent permission to run commands in a bash shell.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "parentActionGroupSignatureParams": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupSignatureParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for a computer use action.</p>\n         <important>\n            <p>\n        Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n      </p>\n         </important>"
+                        "smithy.api#documentation": "<p>The configuration settings for a computer use action.</p>\n         <important>\n            <p>\n        Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n      </p>\n         </important>"
                     }
                 },
                 "actionGroupExecutor": {
@@ -3636,6 +3684,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "concurrencyConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#FlowAliasConcurrencyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies how nodes in the flow are executed in parallel.</p>"
+                    }
+                },
                 "flowIdentifier": {
                     "target": "com.amazonaws.bedrockagent#FlowIdentifier",
                     "traits": {
@@ -3684,6 +3738,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the version that the alias is mapped to.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "concurrencyConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#FlowAliasConcurrencyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies how nodes in the flow are executed in parallel.</p>"
                     }
                 },
                 "flowId": {
@@ -6450,6 +6510,25 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#FieldForReranking": {
+            "type": "structure",
+            "members": {
+                "fieldName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metadata field to include or exclude during reranking.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a metadata field to include or exclude during the reranking process.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#FieldName": {
             "type": "string",
             "traits": {
@@ -6457,6 +6536,19 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.bedrockagent#FieldsForReranking": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#FieldForReranking"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagent#FilterList": {
@@ -6525,6 +6617,31 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:aws:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:flow/[0-9a-zA-Z]{10}/alias/(TSTALIASID|[0-9a-zA-Z]{10})$"
+            }
+        },
+        "com.amazonaws.bedrockagent#FlowAliasConcurrencyConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#ConcurrencyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of concurrency to use for parallel node execution. Specify one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Automatic</code> - Amazon Bedrock determines which nodes can be executed in parallel based on the flow definition and its dependencies.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Manual</code> - You specify which nodes can be executed in parallel.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxConcurrency": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of nodes that can be executed concurrently in the flow.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Determines how multiple nodes in a flow can run in parallel. Running nodes concurrently can improve your flow's performance.</p>"
             }
         },
         "com.amazonaws.bedrockagent#FlowAliasId": {
@@ -6631,6 +6748,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of configurations about the versions that the alias maps to. Currently, you can only specify one.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "concurrencyConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#FlowAliasConcurrencyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies how nodes in the flow are executed concurrently.</p>"
                     }
                 },
                 "flowId": {
@@ -7038,10 +7161,28 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains configurations for an inline code node in your flow. Inline code nodes let you write and execute code directly within your flow, enabling data transformations, custom logic, and integrations without needing an external Lambda function.</p>"
                     }
+                },
+                "loop": {
+                    "target": "com.amazonaws.bedrockagent#LoopFlowNodeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for a DoWhile loop in your flow.</p>"
+                    }
+                },
+                "loopInput": {
+                    "target": "com.amazonaws.bedrockagent#LoopInputFlowNodeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains input node configurations for a DoWhile loop in your flow.</p>"
+                    }
+                },
+                "loopController": {
+                    "target": "com.amazonaws.bedrockagent#LoopControllerFlowNodeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains controller node configurations for a DoWhile loop in your flow.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains configurations for a node in your flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in Amazon Bedrock works</a> in the Amazon Bedrock User Guide.</p>"
+                "smithy.api#documentation": "<p>Contains configurations for a node in your flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
         "com.amazonaws.bedrockagent#FlowNodeIODataType": {
@@ -7085,14 +7226,14 @@
                 "name": {
                     "target": "com.amazonaws.bedrockagent#FlowNodeInputName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the input that you can reference.</p>",
+                        "smithy.api#documentation": "<p>Specifies a name for the input that you can reference.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "type": {
                     "target": "com.amazonaws.bedrockagent#FlowNodeIODataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type of the input. If the input doesn't match this type at runtime, a validation error will be thrown.</p>",
+                        "smithy.api#documentation": "<p>Specifies the data type of the input. If the input doesn't match this type at runtime,\n            a validation error will be thrown.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7102,10 +7243,39 @@
                         "smithy.api#documentation": "<p>An expression that formats the input for the node. For an explanation of how to create expressions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-expressions.html\">Expressions in Prompt flows in Amazon Bedrock</a>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "category": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeInputCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how input data flows between iterations in a DoWhile\n                loop.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LoopCondition</code> - Controls whether the loop continues by evaluating condition expressions against the input data. Use this category to define\n                    the condition that determines if the loop should continue. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReturnValueToLoopStart</code> - Defines data to pass back to the start\n                    of the loop's next iteration. Use this category for variables that you\n                    want to update for each loop iteration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ExitLoop</code> - Defines the value that's available once the loop ends.\n                    Use this category to expose loop results to nodes outside the loop.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains configurations for an input to a node.</p>"
+                "smithy.api#documentation": "<p>Contains configurations for an input in an Amazon Bedrock Flows node.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#FlowNodeInputCategory": {
+            "type": "enum",
+            "members": {
+                "LOOP_CONDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LoopCondition"
+                    }
+                },
+                "RETURN_VALUE_TO_LOOP_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReturnValueToLoopStart"
+                    }
+                },
+                "EXIT_LOOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExitLoop"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagent#FlowNodeInputExpression": {
@@ -7259,6 +7429,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "InlineCode"
+                    }
+                },
+                "LOOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Loop"
+                    }
+                },
+                "LOOP_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LoopInput"
+                    }
+                },
+                "LOOP_CONTROLLER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LoopController"
                     }
                 }
             }
@@ -7616,6 +7804,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details about an unknown output for a node.</p>"
                     }
+                },
+                "missingLoopInputNode": {
+                    "target": "com.amazonaws.bedrockagent#MissingLoopInputNodeFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a flow that's missing a required <code>LoopInput</code> node in a DoWhile loop.</p>"
+                    }
+                },
+                "missingLoopControllerNode": {
+                    "target": "com.amazonaws.bedrockagent#MissingLoopControllerNodeFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a flow that's missing a required <code>LoopController</code> node in a DoWhile loop.</p>"
+                    }
+                },
+                "multipleLoopInputNodes": {
+                    "target": "com.amazonaws.bedrockagent#MultipleLoopInputNodesFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a flow that contains multiple <code>LoopInput</code> nodes in a DoWhile loop.</p>"
+                    }
+                },
+                "multipleLoopControllerNodes": {
+                    "target": "com.amazonaws.bedrockagent#MultipleLoopControllerNodesFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a flow that contains multiple <code>LoopController</code> nodes in a DoWhile loop.</p>"
+                    }
+                },
+                "loopIncompatibleNodeType": {
+                    "target": "com.amazonaws.bedrockagent#LoopIncompatibleNodeTypeFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a flow that includes incompatible node types in a DoWhile loop.</p>"
+                    }
+                },
+                "invalidLoopBoundary": {
+                    "target": "com.amazonaws.bedrockagent#InvalidLoopBoundaryFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a flow that includes connections that violate loop boundary rules.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7802,6 +8026,42 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UnknownNodeOutput"
+                    }
+                },
+                "MISSING_LOOP_INPUT_NODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingLoopInputNode"
+                    }
+                },
+                "MISSING_LOOP_CONTROLLER_NODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingLoopControllerNode"
+                    }
+                },
+                "MULTIPLE_LOOP_INPUT_NODES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MultipleLoopInputNodes"
+                    }
+                },
+                "MULTIPLE_LOOP_CONTROLLER_NODES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MultipleLoopControllerNodes"
+                    }
+                },
+                "LOOP_INCOMPATIBLE_NODE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LoopIncompatibleNodeType"
+                    }
+                },
+                "INVALID_LOOP_BOUNDARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidLoopBoundary"
                     }
                 }
             }
@@ -8640,6 +8900,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "concurrencyConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#FlowAliasConcurrencyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies how nodes in the flow are executed in parallel.</p>"
+                    }
+                },
                 "flowId": {
                     "target": "com.amazonaws.bedrockagent#FlowId",
                     "traits": {
@@ -9443,6 +9709,35 @@
                 "smithy.api#documentation": "<p>Details about incompatible data types in a connection between nodes.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#IncompatibleLoopNodeType": {
+            "type": "enum",
+            "members": {
+                "INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Input"
+                    }
+                },
+                "CONDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Condition"
+                    }
+                },
+                "ITERATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Iterator"
+                    }
+                },
+                "COLLECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Collector"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#InferenceConfiguration": {
             "type": "structure",
             "members": {
@@ -10070,6 +10365,35 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.bedrockagent#InvalidLoopBoundaryFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "connection": {
+                    "target": "com.amazonaws.bedrockagent#FlowConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection that violates loop boundary rules.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source node of the connection that violates DoWhile loop boundary rules.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target node of the connection that violates DoWhile loop boundary rules.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a flow that contains connections that violate loop boundary rules.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#IteratorFlowNodeConfiguration": {
             "type": "structure",
             "members": {},
@@ -10367,10 +10691,44 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains configurations for a guardrail to apply during query and response generation for the knowledge base in this configuration.</p>"
                     }
+                },
+                "numberOfResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results to retrieve from the knowledge base.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "promptTemplate": {
+                    "target": "com.amazonaws.bedrockagent#KnowledgeBasePromptTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom prompt template to use with the knowledge base for generating responses.</p>"
+                    }
+                },
+                "inferenceConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#PromptInferenceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains inference configurations for the prompt.</p>"
+                    }
+                },
+                "rerankingConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#VectorSearchRerankingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for reranking the retrieved results from the knowledge base to improve relevance.</p>"
+                    }
+                },
+                "orchestrationConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#KnowledgeBaseOrchestrationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for orchestrating the retrieval and generation process in the knowledge base node.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains configurations for a knowledge base node in a flow. This node takes a query as the input and returns, as the output, the retrieved responses directly (as an array) or a response generated based on the retrieved responses. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in Amazon Bedrock works</a> in the Amazon Bedrock User Guide.</p>"
+                "smithy.api#documentation": "<p>Contains configurations for a knowledge base node in a flow. This node takes a query as the input and returns, as the output, the retrieved responses directly (as an array) or a response generated based on the retrieved responses. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
         "com.amazonaws.bedrockagent#KnowledgeBaseId": {
@@ -10390,6 +10748,52 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^(arn:aws(-[^:]{1,12})?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
+            }
+        },
+        "com.amazonaws.bedrockagent#KnowledgeBaseOrchestrationConfiguration": {
+            "type": "structure",
+            "members": {
+                "promptTemplate": {
+                    "target": "com.amazonaws.bedrockagent#KnowledgeBasePromptTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom prompt template for orchestrating the retrieval and generation process.</p>"
+                    }
+                },
+                "inferenceConfig": {
+                    "target": "com.amazonaws.bedrockagent#PromptInferenceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains inference configurations for the prompt.</p>"
+                    }
+                },
+                "additionalModelRequestFields": {
+                    "target": "com.amazonaws.bedrockagent#AdditionalModelRequestFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional model-specific request parameters as key-value pairs to be included in the request to the foundation model.</p>"
+                    }
+                },
+                "performanceConfig": {
+                    "target": "com.amazonaws.bedrockagent#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The performance configuration options for the knowledge base retrieval and generation process.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures how the knowledge base orchestrates the retrieval and generation process, allowing for customization of prompts, inference parameters, and performance settings.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#KnowledgeBasePromptTemplate": {
+            "type": "structure",
+            "members": {
+                "textPromptTemplate": {
+                    "target": "com.amazonaws.bedrockagent#KnowledgeBaseTextPrompt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the prompt template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a custom prompt template for orchestrating the retrieval and generation process.</p>"
             }
         },
         "com.amazonaws.bedrockagent#KnowledgeBaseResource": {
@@ -10589,6 +10993,16 @@
                 "smithy.api#documentation": "<p>Contains details about a knowledge base.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#KnowledgeBaseTextPrompt": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagent#KnowledgeBaseType": {
             "type": "enum",
             "members": {
@@ -10633,7 +11047,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains configurations for a Lambda function node in the flow. You specify the Lambda function to invoke and the inputs into the function. The output is the response that is defined in the Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in Amazon Bedrock works</a> in the Amazon Bedrock User Guide.</p>"
+                "smithy.api#documentation": "<p>Contains configurations for a Lambda function node in the flow. You specify the Lambda function to invoke and the inputs into the function. The output is the response that is defined in the Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
         "com.amazonaws.bedrockagent#LexBotAliasArn": {
@@ -10673,7 +11087,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains configurations for a Lex node in the flow. You specify a Amazon Lex bot to invoke. This node takes an utterance as the input and returns as the output the intent identified by the Amazon Lex bot. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in Amazon Bedrock works</a> in the Amazon Bedrock User Guide.</p>"
+                "smithy.api#documentation": "<p>Contains configurations for a Lex node in the flow. You specify a Amazon Lex bot to invoke. This node takes an utterance as the input and returns as the output the intent identified by the Amazon Lex bot. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
         "com.amazonaws.bedrockagent#ListAgentActionGroups": {
@@ -12072,6 +12486,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagent#LoopControllerFlowNodeConfiguration": {
+            "type": "structure",
+            "members": {
+                "continueCondition": {
+                    "target": "com.amazonaws.bedrockagent#FlowCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the condition that determines when the flow exits the DoWhile loop. The loop\n            executes until this condition evaluates to true.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxIterations": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>Specifies the maximum number of times the DoWhile loop can iterate before the flow\n            exits the loop.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for the controller node of a DoWhile loop in the flow.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#LoopFlowNodeConfiguration": {
+            "type": "structure",
+            "members": {
+                "definition": {
+                    "target": "com.amazonaws.bedrockagent#FlowDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the DoWhile loop nodes and connections between nodes in the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for the nodes of a DoWhile loop in your flow.</p>\n         <p>A DoWhile loop is made up of the following nodes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Loop</code> - The container node that holds the loop's flow definition. This node encompasses the entire loop structure.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LoopInput</code> - The entry point node for the loop. This node receives inputs from nodes outside the loop and from previous loop iterations.</p>\n            </li>\n            <li>\n               <p>Body nodes - These can be </p>\n            </li>\n            <li>\n               <p>\n                  <code>LoopController</code> - The node that evaluates whether the loop should continue or exit based on a condition.</p>\n            </li>\n         </ul>\n         <p>These nodes work together to create a loop that runs at least once and continues until a specified condition is met or a maximum number of iterations is reached.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#LoopIncompatibleNodeTypeFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>Loop</code> container node that contains an incompatible node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "incompatibleNodeType": {
+                    "target": "com.amazonaws.bedrockagent#IncompatibleLoopNodeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node type of the incompatible node in the DoWhile loop. Some node types, like a condition node, aren't allowed in a DoWhile loop.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "incompatibleNodeName": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node that's incompatible in the DoWhile loop.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a flow that contains an incompatible node in a DoWhile loop.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#LoopInputFlowNodeConfiguration": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for the input node of a DoWhile loop in the flow.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#MalformedConditionExpressionFlowValidationDetails": {
             "type": "structure",
             "members": {
@@ -12293,6 +12784,27 @@
                 "target": "com.amazonaws.bedrockagent#MetadataAttribute"
             }
         },
+        "com.amazonaws.bedrockagent#MetadataConfigurationForReranking": {
+            "type": "structure",
+            "members": {
+                "selectionMode": {
+                    "target": "com.amazonaws.bedrockagent#RerankingMetadataSelectionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode for selecting metadata fields for reranking.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "selectiveModeConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#RerankingMetadataSelectiveModeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for selective metadata field inclusion or exclusion during reranking.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how metadata fields should be handled during the reranking process.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#MetadataSourceType": {
             "type": "enum",
             "members": {
@@ -12444,19 +12956,49 @@
                 "smithy.api#documentation": "<p>Details about missing ending nodes (such as FlowOutputNode) in the flow.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#MissingLoopControllerNodeFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "loopNode": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DoWhile loop in a flow that's missing a required <code>LoopController</code> node.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a flow that's missing a required <code>LoopController</code> node in a DoWhile loop.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MissingLoopInputNodeFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "loopNode": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DoWhile loop in a flow that's missing a required <code>LoopInput</code> node.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a flow that's missing a required <code>LoopInput</code> node in a DoWhile loop.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#MissingNodeConfigurationFlowValidationDetails": {
             "type": "structure",
             "members": {
                 "node": {
                     "target": "com.amazonaws.bedrockagent#FlowNodeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the node missing configuration.</p>",
+                        "smithy.api#documentation": "<p>The name of the node missing a required configuration.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about a node missing required configuration.</p>"
+                "smithy.api#documentation": "<p>Details about a node missing a required configuration.</p>"
             }
         },
         "com.amazonaws.bedrockagent#MissingNodeInputFlowValidationDetails": {
@@ -12655,6 +13197,36 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.bedrockagent#MultipleLoopControllerNodesFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "loopNode": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DoWhile loop in a flow that contains multiple <code>LoopController</code> nodes.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a flow that contains multiple <code>LoopController</code> nodes in a DoWhile loop.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MultipleLoopInputNodesFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "loopNode": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DoWhile loop in a flow that contains multiple <code>LoopInput</code> nodes.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a flow that contains multiple <code>LoopInput</code> nodes in a DoWhile loop.</p>"
             }
         },
         "com.amazonaws.bedrockagent#MultipleNodeInputConnectionsFlowValidationDetails": {
@@ -13167,6 +13739,38 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagent#PerformanceConfigLatency": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard"
+                    }
+                },
+                "OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "optimized"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#PerformanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "latency": {
+                    "target": "com.amazonaws.bedrockagent#PerformanceConfigLatency",
+                    "traits": {
+                        "smithy.api#default": "standard",
+                        "smithy.api#documentation": "<p>The latency optimization setting.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The performance-related configuration options for the knowledge base retrieval and generation process.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#PineconeConfiguration": {
             "type": "structure",
             "members": {
@@ -13458,7 +14062,7 @@
                 "promptState": {
                     "target": "com.amazonaws.bedrockagent#PromptState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to allow the agent to carry out the step specified in the <code>promptType</code>. If you set this value to <code>DISABLED</code>, the agent skips that step. The default state for each <code>promptType</code> is as follows.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRE_PROCESSING</code> – <code>DISABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ORCHESTRATION</code> – <code>ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KNOWLEDGE_BASE_RESPONSE_GENERATION</code> – <code>ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>POST_PROCESSING</code> – <code>DISABLED</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether to allow the agent to carry out the step specified in the <code>promptType</code>. If you set this value to <code>DISABLED</code>, the agent skips that step. The default state for each <code>promptType</code> is as follows.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRE_PROCESSING</code> – <code>ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ORCHESTRATION</code> – <code>ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KNOWLEDGE_BASE_RESPONSE_GENERATION</code> – <code>ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>POST_PROCESSING</code> – <code>DISABLED</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "basePromptTemplate": {
@@ -13534,7 +14138,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains configurations for a prompt node in the flow. You can use a prompt from Prompt management or you can define one in this node. If the prompt contains variables, the inputs into this node will fill in the variables. The output from this node is the response generated by the model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in Amazon Bedrock works</a> in the Amazon Bedrock User Guide.</p>"
+                "smithy.api#documentation": "<p>Contains configurations for a prompt node in the flow. You can use a prompt from Prompt management or you can define one in this node. If the prompt contains variables, the inputs into this node will fill in the variables. The output from this node is the response generated by the model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
         "com.amazonaws.bedrockagent#PromptFlowNodeInlineConfiguration": {
@@ -14796,6 +15400,43 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Whether the action requires user confirmation.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#RerankingMetadataSelectionMode": {
+            "type": "enum",
+            "members": {
+                "SELECTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELECTIVE"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#RerankingMetadataSelectiveModeConfiguration": {
+            "type": "union",
+            "members": {
+                "fieldsToInclude": {
+                    "target": "com.amazonaws.bedrockagent#FieldsForReranking",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the metadata fields to include in the reranking process.</p>"
+                    }
+                },
+                "fieldsToExclude": {
+                    "target": "com.amazonaws.bedrockagent#FieldsForReranking",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the metadata fields to exclude from the reranking process.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures the metadata fields to include or exclude during the reranking process when using selective mode.</p>"
             }
         },
         "com.amazonaws.bedrockagent#ResourceNotFoundException": {
@@ -16658,13 +17299,13 @@
                 "parentActionGroupSignature": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupSignature",
                     "traits": {
-                        "smithy.api#documentation": "<p>Update the built-in or computer use action for this action group. If you specify a value, you must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields empty for this action group. </p>\n         <ul>\n            <li>\n               <p>To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. </p>\n            </li>\n            <li>\n               <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to <code>AMAZON.CodeInterpreter</code>.</p>\n            </li>\n            <li>\n               <p>To allow your agent to use an Anthropic computer use tool, specify one of the following values. </p>\n               <important>\n                  <p>\n            Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only.          \n            When operating computer use functionality, we recommend taking additional security precautions,\n            such as executing computer actions in virtual environments with restricted data access and limited internet connectivity. \n             For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n          </p>\n               </important>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Computer</code> - Gives the agent permission to use the mouse and keyboard and\n              take screenshots.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.TextEditor</code> - Gives the agent permission to view, create and edit files.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Bash</code> - Gives the agent permission to run commands in a bash shell.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html\">Observation</a> reprompting the user for more information.</p>"
+                        "smithy.api#documentation": "<p>Update the built-in or computer use action for this action group. If you specify a value, you must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields empty for this action group. </p>\n         <ul>\n            <li>\n               <p>To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. </p>\n            </li>\n            <li>\n               <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to <code>AMAZON.CodeInterpreter</code>.</p>\n            </li>\n            <li>\n               <p>To allow your agent to use an Anthropic computer use tool, specify one of the following values. </p>\n               <important>\n                  <p>\n            Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only.          \n            When operating computer use functionality, we recommend taking additional security precautions,\n            such as executing computer actions in virtual environments with restricted data access and limited internet connectivity. \n             For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n          </p>\n               </important>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Computer</code> - Gives the agent permission to use the mouse and keyboard and\n              take screenshots.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.TextEditor</code> - Gives the agent permission to view, create and edit files.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Bash</code> - Gives the agent permission to run commands in a bash shell.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html\">Observation</a> reprompting the user for more information.</p>"
                     }
                 },
                 "parentActionGroupSignatureParams": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupSignatureParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for a computer use action.</p>\n         <important>\n            <p>\n        Computer use is a new Anthropic Claude model capability (in beta) available with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n      </p>\n         </important>"
+                        "smithy.api#documentation": "<p>The configuration settings for a computer use action.</p>\n         <important>\n            <p>\n        Computer use is a new Anthropic Claude model capability (in beta) available with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n      </p>\n         </important>"
                     }
                 },
                 "actionGroupExecutor": {
@@ -17373,6 +18014,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "concurrencyConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#FlowAliasConcurrencyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies how nodes in the flow are executed in parallel.</p>"
+                    }
+                },
                 "flowIdentifier": {
                     "target": "com.amazonaws.bedrockagent#FlowIdentifier",
                     "traits": {
@@ -17415,6 +18062,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the version that the alias is mapped to.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "concurrencyConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#FlowAliasConcurrencyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies how nodes in the flow are executed in parallel.</p>"
                     }
                 },
                 "flowId": {
@@ -18066,6 +18719,90 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains details about the model used to create vector embeddings for the knowledge base.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#VectorSearchBedrockRerankingConfiguration": {
+            "type": "structure",
+            "members": {
+                "modelConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#VectorSearchBedrockRerankingModelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the configuration for the Amazon Bedrock reranker model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "numberOfRerankedResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of results to return after reranking.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "metadataConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#MetadataConfigurationForReranking",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how metadata fields should be handled during the reranking process.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures the Amazon Bedrock reranker model to improve the relevance of retrieved results.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#VectorSearchBedrockRerankingModelConfiguration": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.bedrockagent#BedrockRerankingModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Bedrock reranker model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalModelRequestFields": {
+                    "target": "com.amazonaws.bedrockagent#AdditionalModelRequestFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional model-specific request parameters as key-value pairs that are included in the request to the Amazon Bedrock reranker model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures the Amazon Bedrock model used for reranking retrieved results.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#VectorSearchRerankingConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#VectorSearchRerankingConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of reranking model to use. Currently, the only supported value is <code>BEDROCK_RERANKING_MODEL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "bedrockRerankingConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#VectorSearchBedrockRerankingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the configuration for using an Amazon Bedrock reranker model to rerank retrieved results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how retrieved results from a knowledge base are reranked to improve relevance.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#VectorSearchRerankingConfigurationType": {
+            "type": "enum",
+            "members": {
+                "BEDROCK_RERANKING_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEDROCK_RERANKING_MODEL"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagent#Version": {
