@@ -1,0 +1,12 @@
+{
+  "version": "1.0",
+  "plugins": {
+    "go-codegen": {
+      "service": "smithy.sdk.example#EchoService",
+      "module": "github.com/aws/aws-sdk-go-v2/service/echo",
+      "moduleVersion": "0.0.1",
+      "generateGoMod": true,
+      "goDirective": "1.22"
+    }
+  }
+}
