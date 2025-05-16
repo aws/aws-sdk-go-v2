@@ -806,6 +806,15 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 			Err: fmt.Errorf("invalid value for shared config profile field, response_checksum_validation=blabla, must be when_supported/when_required"),
 		},
+
+		"profile with ec2 instance profile name": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "ec2_instance_profile_name",
+			Expected: SharedConfig{
+				Profile:                "ec2_instance_profile_name",
+				EC2InstanceProfileName: "ProfileName",
+			},
+		},
 	}
 
 	for name, c := range cases {
