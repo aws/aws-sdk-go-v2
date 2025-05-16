@@ -36606,6 +36606,11 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 				return err
 			}
 
+		case "S3ExcelSource":
+			if err := awsAwsjson11_deserializeDocumentS3ExcelSource(&sv.S3ExcelSource, value); err != nil {
+				return err
+			}
+
 		case "S3GlueParquetTarget":
 			if err := awsAwsjson11_deserializeDocumentS3GlueParquetTarget(&sv.S3GlueParquetTarget, value); err != nil {
 				return err
@@ -36623,6 +36628,16 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 
 		case "S3HudiSource":
 			if err := awsAwsjson11_deserializeDocumentS3HudiSource(&sv.S3HudiSource, value); err != nil {
+				return err
+			}
+
+		case "S3HyperDirectTarget":
+			if err := awsAwsjson11_deserializeDocumentS3HyperDirectTarget(&sv.S3HyperDirectTarget, value); err != nil {
+				return err
+			}
+
+		case "S3IcebergDirectTarget":
+			if err := awsAwsjson11_deserializeDocumentS3IcebergDirectTarget(&sv.S3IcebergDirectTarget, value); err != nil {
 				return err
 			}
 
@@ -58197,6 +58212,15 @@ func awsAwsjson11_deserializeDocumentS3DeltaDirectTarget(v **types.S3DeltaDirect
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "NumberTargetPartitions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NumberTargetPartitionsString to be of type string, got %T instead", value)
+				}
+				sv.NumberTargetPartitions = ptr.String(jtv)
+			}
+
 		case "PartitionKeys":
 			if err := awsAwsjson11_deserializeDocumentGlueStudioPathList(&sv.PartitionKeys, value); err != nil {
 				return err
@@ -58414,6 +58438,15 @@ func awsAwsjson11_deserializeDocumentS3DirectTarget(v **types.S3DirectTarget, va
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "NumberTargetPartitions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NumberTargetPartitionsString to be of type string, got %T instead", value)
+				}
+				sv.NumberTargetPartitions = ptr.String(jtv)
+			}
+
 		case "PartitionKeys":
 			if err := awsAwsjson11_deserializeDocumentGlueStudioPathList(&sv.PartitionKeys, value); err != nil {
 				return err
@@ -58525,6 +58558,154 @@ func awsAwsjson11_deserializeDocumentS3EncryptionList(v *[]types.S3Encryption, v
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentS3ExcelSource(v **types.S3ExcelSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3ExcelSource
+	if *v == nil {
+		sv = &types.S3ExcelSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalOptions":
+			if err := awsAwsjson11_deserializeDocumentS3DirectSourceAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "CompressionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParquetCompressionType to be of type string, got %T instead", value)
+				}
+				sv.CompressionType = types.ParquetCompressionType(jtv)
+			}
+
+		case "Exclusions":
+			if err := awsAwsjson11_deserializeDocumentEnclosedInStringProperties(&sv.Exclusions, value); err != nil {
+				return err
+			}
+
+		case "GroupFiles":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.GroupFiles = ptr.String(jtv)
+			}
+
+		case "GroupSize":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.GroupSize = ptr.String(jtv)
+			}
+
+		case "MaxBand":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedNonNegativeInt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxBand = ptr.Int32(int32(i64))
+			}
+
+		case "MaxFilesInBand":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedNonNegativeInt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxFilesInBand = ptr.Int32(int32(i64))
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "NumberRows":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberRows = ptr.Int64(i64)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
+			}
+
+		case "Paths":
+			if err := awsAwsjson11_deserializeDocumentEnclosedInStringProperties(&sv.Paths, value); err != nil {
+				return err
+			}
+
+		case "Recurse":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Recurse = ptr.Bool(jtv)
+			}
+
+		case "SkipFooter":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedNonNegativeInt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SkipFooter = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentS3GlueParquetTarget(v **types.S3GlueParquetTarget, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -58568,6 +58749,15 @@ func awsAwsjson11_deserializeDocumentS3GlueParquetTarget(v **types.S3GlueParquet
 					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "NumberTargetPartitions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NumberTargetPartitionsString to be of type string, got %T instead", value)
+				}
+				sv.NumberTargetPartitions = ptr.String(jtv)
 			}
 
 		case "PartitionKeys":
@@ -58735,6 +58925,15 @@ func awsAwsjson11_deserializeDocumentS3HudiDirectTarget(v **types.S3HudiDirectTa
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "NumberTargetPartitions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NumberTargetPartitionsString to be of type string, got %T instead", value)
+				}
+				sv.NumberTargetPartitions = ptr.String(jtv)
+			}
+
 		case "PartitionKeys":
 			if err := awsAwsjson11_deserializeDocumentGlueStudioPathList(&sv.PartitionKeys, value); err != nil {
 				return err
@@ -58811,6 +59010,175 @@ func awsAwsjson11_deserializeDocumentS3HudiSource(v **types.S3HudiSource, value 
 
 		case "Paths":
 			if err := awsAwsjson11_deserializeDocumentEnclosedInStringProperties(&sv.Paths, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3HyperDirectTarget(v **types.S3HyperDirectTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3HyperDirectTarget
+	if *v == nil {
+		sv = &types.S3HyperDirectTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Compression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HyperTargetCompressionType to be of type string, got %T instead", value)
+				}
+				sv.Compression = types.HyperTargetCompressionType(jtv)
+			}
+
+		case "Inputs":
+			if err := awsAwsjson11_deserializeDocumentOneInput(&sv.Inputs, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "PartitionKeys":
+			if err := awsAwsjson11_deserializeDocumentGlueStudioPathList(&sv.PartitionKeys, value); err != nil {
+				return err
+			}
+
+		case "Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Path = ptr.String(jtv)
+			}
+
+		case "SchemaChangePolicy":
+			if err := awsAwsjson11_deserializeDocumentDirectSchemaChangePolicy(&sv.SchemaChangePolicy, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3IcebergDirectTarget(v **types.S3IcebergDirectTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3IcebergDirectTarget
+	if *v == nil {
+		sv = &types.S3IcebergDirectTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "Compression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IcebergTargetCompressionType to be of type string, got %T instead", value)
+				}
+				sv.Compression = types.IcebergTargetCompressionType(jtv)
+			}
+
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.TargetFormat(jtv)
+			}
+
+		case "Inputs":
+			if err := awsAwsjson11_deserializeDocumentOneInput(&sv.Inputs, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "NumberTargetPartitions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NumberTargetPartitionsString to be of type string, got %T instead", value)
+				}
+				sv.NumberTargetPartitions = ptr.String(jtv)
+			}
+
+		case "PartitionKeys":
+			if err := awsAwsjson11_deserializeDocumentGlueStudioPathList(&sv.PartitionKeys, value); err != nil {
+				return err
+			}
+
+		case "Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Path = ptr.String(jtv)
+			}
+
+		case "SchemaChangePolicy":
+			if err := awsAwsjson11_deserializeDocumentDirectSchemaChangePolicy(&sv.SchemaChangePolicy, value); err != nil {
 				return err
 			}
 

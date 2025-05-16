@@ -7,6 +7,32 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// The action execution was not found.
+type ActionExecutionNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ActionExecutionNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ActionExecutionNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ActionExecutionNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ActionExecutionNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ActionExecutionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified action cannot be found.
 type ActionNotFoundException struct {
 	Message *string

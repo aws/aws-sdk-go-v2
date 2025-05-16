@@ -320,6 +320,20 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAssetProcessingConfiguration(v *types.AssetProcessingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Video != nil {
+		ok := object.Key("video")
+		if err := awsAwsjson11_serializeDocumentVideoAssetProcessingConfiguration(v.Video, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBlueprint(v *types.Blueprint, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -418,6 +432,13 @@ func awsAwsjson11_serializeDocumentInputConfiguration(v *types.InputConfiguratio
 	object := value.Object()
 	defer object.Close()
 
+	if v.AssetProcessingConfiguration != nil {
+		ok := object.Key("assetProcessingConfiguration")
+		if err := awsAwsjson11_serializeDocumentAssetProcessingConfiguration(v.AssetProcessingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.S3Uri != nil {
 		ok := object.Key("s3Uri")
 		ok.String(*v.S3Uri)
@@ -489,6 +510,55 @@ func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTimestampSegment(v *types.TimestampSegment, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTimeMillis != nil {
+		ok := object.Key("endTimeMillis")
+		ok.Long(*v.EndTimeMillis)
+	}
+
+	if v.StartTimeMillis != nil {
+		ok := object.Key("startTimeMillis")
+		ok.Long(*v.StartTimeMillis)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVideoAssetProcessingConfiguration(v *types.VideoAssetProcessingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SegmentConfiguration != nil {
+		ok := object.Key("segmentConfiguration")
+		if err := awsAwsjson11_serializeDocumentVideoSegmentConfiguration(v.SegmentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVideoSegmentConfiguration(v types.VideoSegmentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.VideoSegmentConfigurationMemberTimestampSegment:
+		av := object.Key("timestampSegment")
+		if err := awsAwsjson11_serializeDocumentTimestampSegment(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

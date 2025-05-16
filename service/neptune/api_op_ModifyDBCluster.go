@@ -192,11 +192,17 @@ type ModifyDBClusterInput struct {
 	//
 	// Valid Values:
 	//
-	//   - standard | iopt1
+	//   - standard – ( the default ) Configures cost-effective database storage for
+	//   applications with moderate to small I/O usage.
 	//
-	// Default:
+	//   - iopt1 – Enables [I/O-Optimized storage]that's designed to meet the needs of I/O-intensive graph
+	//   workloads that require predictable pricing with low I/O latency and consistent
+	//   I/O throughput.
 	//
-	//   - standard
+	// Neptune I/O-Optimized storage is only available starting with engine release
+	//   1.3.0.0.
+	//
+	// [I/O-Optimized storage]: https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage
 	StorageType *string
 
 	// A list of VPC security groups that the DB cluster will belong to.

@@ -5601,6 +5601,11 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 			invalidParams.AddNested("S3CsvSource", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.S3ExcelSource != nil {
+		if err := validateS3ExcelSource(v.S3ExcelSource); err != nil {
+			invalidParams.AddNested("S3ExcelSource", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.S3JsonSource != nil {
 		if err := validateS3JsonSource(v.S3JsonSource); err != nil {
 			invalidParams.AddNested("S3JsonSource", err.(smithy.InvalidParamsError))
@@ -5651,9 +5656,19 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 			invalidParams.AddNested("S3GlueParquetTarget", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.S3HyperDirectTarget != nil {
+		if err := validateS3HyperDirectTarget(v.S3HyperDirectTarget); err != nil {
+			invalidParams.AddNested("S3HyperDirectTarget", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.S3DirectTarget != nil {
 		if err := validateS3DirectTarget(v.S3DirectTarget); err != nil {
 			invalidParams.AddNested("S3DirectTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3IcebergDirectTarget != nil {
+		if err := validateS3IcebergDirectTarget(v.S3IcebergDirectTarget); err != nil {
+			invalidParams.AddNested("S3IcebergDirectTarget", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ApplyMapping != nil {
@@ -8181,6 +8196,29 @@ func validateS3DirectTarget(v *types.S3DirectTarget) error {
 	}
 }
 
+func validateS3ExcelSource(v *types.S3ExcelSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ExcelSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Paths == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Paths"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3GlueParquetTarget(v *types.S3GlueParquetTarget) error {
 	if v == nil {
 		return nil
@@ -8274,6 +8312,54 @@ func validateS3HudiSource(v *types.S3HudiSource) error {
 		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
 			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3HyperDirectTarget(v *types.S3HyperDirectTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3HyperDirectTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3IcebergDirectTarget(v *types.S3IcebergDirectTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3IcebergDirectTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if len(v.Compression) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Compression"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

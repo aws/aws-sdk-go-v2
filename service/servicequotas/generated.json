@@ -9,6 +9,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_AssociateServiceQuotaTemplate.go",
+        "api_op_CreateSupportCase.go",
         "api_op_DeleteServiceQuotaIncreaseRequestFromTemplate.go",
         "api_op_DisassociateServiceQuotaTemplate.go",
         "api_op_GetAWSDefaultServiceQuota.go",

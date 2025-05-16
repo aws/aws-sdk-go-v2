@@ -74,6 +74,18 @@ func TestCheckSnapshot_AssociateServiceQuotaTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateSupportCase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSupportCase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSupportCase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteServiceQuotaIncreaseRequestFromTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteServiceQuotaIncreaseRequestFromTemplate(context.Background(), nil, func(o *Options) {
@@ -294,6 +306,18 @@ func TestUpdateSnapshot_AssociateServiceQuotaTemplate(t *testing.T) {
 	_, err := svc.AssociateServiceQuotaTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateServiceQuotaTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateSupportCase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSupportCase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSupportCase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -110,6 +110,26 @@ func (m *validateOpCancelSteps) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePersistentAppUI struct {
+}
+
+func (*validateOpCreatePersistentAppUI) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePersistentAppUI) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePersistentAppUIInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePersistentAppUIInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateSecurityConfiguration struct {
 }
 
@@ -270,6 +290,26 @@ func (m *validateOpDescribeNotebookExecution) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribePersistentAppUI struct {
+}
+
+func (*validateOpDescribePersistentAppUI) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePersistentAppUI) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePersistentAppUIInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePersistentAppUIInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeSecurityConfiguration struct {
 }
 
@@ -385,6 +425,46 @@ func (m *validateOpGetManagedScalingPolicy) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetManagedScalingPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetOnClusterAppUIPresignedURL struct {
+}
+
+func (*validateOpGetOnClusterAppUIPresignedURL) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetOnClusterAppUIPresignedURL) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetOnClusterAppUIPresignedURLInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetOnClusterAppUIPresignedURLInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPersistentAppUIPresignedURL struct {
+}
+
+func (*validateOpGetPersistentAppUIPresignedURL) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPersistentAppUIPresignedURL) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPersistentAppUIPresignedURLInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPersistentAppUIPresignedURLInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -970,6 +1050,10 @@ func addOpCancelStepsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelSteps{}, middleware.After)
 }
 
+func addOpCreatePersistentAppUIValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePersistentAppUI{}, middleware.After)
+}
+
 func addOpCreateSecurityConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSecurityConfiguration{}, middleware.After)
 }
@@ -1002,6 +1086,10 @@ func addOpDescribeNotebookExecutionValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpDescribeNotebookExecution{}, middleware.After)
 }
 
+func addOpDescribePersistentAppUIValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePersistentAppUI{}, middleware.After)
+}
+
 func addOpDescribeSecurityConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSecurityConfiguration{}, middleware.After)
 }
@@ -1024,6 +1112,14 @@ func addOpGetClusterSessionCredentialsValidationMiddleware(stack *middleware.Sta
 
 func addOpGetManagedScalingPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetManagedScalingPolicy{}, middleware.After)
+}
+
+func addOpGetOnClusterAppUIPresignedURLValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetOnClusterAppUIPresignedURL{}, middleware.After)
+}
+
+func addOpGetPersistentAppUIPresignedURLValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPersistentAppUIPresignedURL{}, middleware.After)
 }
 
 func addOpGetStudioSessionMappingValidationMiddleware(stack *middleware.Stack) error {
@@ -1997,6 +2093,21 @@ func validateOpCancelStepsInput(v *CancelStepsInput) error {
 	}
 }
 
+func validateOpCreatePersistentAppUIInput(v *CreatePersistentAppUIInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePersistentAppUIInput"}
+	if v.TargetResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateSecurityConfigurationInput(v *CreateSecurityConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -2150,6 +2261,21 @@ func validateOpDescribeNotebookExecutionInput(v *DescribeNotebookExecutionInput)
 	}
 }
 
+func validateOpDescribePersistentAppUIInput(v *DescribePersistentAppUIInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePersistentAppUIInput"}
+	if v.PersistentAppUIId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PersistentAppUIId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeSecurityConfigurationInput(v *DescribeSecurityConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -2235,6 +2361,36 @@ func validateOpGetManagedScalingPolicyInput(v *GetManagedScalingPolicyInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "GetManagedScalingPolicyInput"}
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetOnClusterAppUIPresignedURLInput(v *GetOnClusterAppUIPresignedURLInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetOnClusterAppUIPresignedURLInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPersistentAppUIPresignedURLInput(v *GetPersistentAppUIPresignedURLInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPersistentAppUIPresignedURLInput"}
+	if v.PersistentAppUIId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PersistentAppUIId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

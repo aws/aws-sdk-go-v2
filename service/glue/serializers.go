@@ -17061,6 +17061,13 @@ func awsAwsjson11_serializeDocumentCodeGenConfigurationNode(v *types.CodeGenConf
 		}
 	}
 
+	if v.S3ExcelSource != nil {
+		ok := object.Key("S3ExcelSource")
+		if err := awsAwsjson11_serializeDocumentS3ExcelSource(v.S3ExcelSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.S3GlueParquetTarget != nil {
 		ok := object.Key("S3GlueParquetTarget")
 		if err := awsAwsjson11_serializeDocumentS3GlueParquetTarget(v.S3GlueParquetTarget, ok); err != nil {
@@ -17085,6 +17092,20 @@ func awsAwsjson11_serializeDocumentCodeGenConfigurationNode(v *types.CodeGenConf
 	if v.S3HudiSource != nil {
 		ok := object.Key("S3HudiSource")
 		if err := awsAwsjson11_serializeDocumentS3HudiSource(v.S3HudiSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3HyperDirectTarget != nil {
+		ok := object.Key("S3HyperDirectTarget")
+		if err := awsAwsjson11_serializeDocumentS3HyperDirectTarget(v.S3HyperDirectTarget, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3IcebergDirectTarget != nil {
+		ok := object.Key("S3IcebergDirectTarget")
+		if err := awsAwsjson11_serializeDocumentS3IcebergDirectTarget(v.S3IcebergDirectTarget, ok); err != nil {
 			return err
 		}
 	}
@@ -22770,6 +22791,11 @@ func awsAwsjson11_serializeDocumentS3DeltaDirectTarget(v *types.S3DeltaDirectTar
 		ok.String(*v.Name)
 	}
 
+	if v.NumberTargetPartitions != nil {
+		ok := object.Key("NumberTargetPartitions")
+		ok.String(*v.NumberTargetPartitions)
+	}
+
 	if v.PartitionKeys != nil {
 		ok := object.Key("PartitionKeys")
 		if err := awsAwsjson11_serializeDocumentGlueStudioPathList(v.PartitionKeys, ok); err != nil {
@@ -22885,6 +22911,11 @@ func awsAwsjson11_serializeDocumentS3DirectTarget(v *types.S3DirectTarget, value
 		ok.String(*v.Name)
 	}
 
+	if v.NumberTargetPartitions != nil {
+		ok := object.Key("NumberTargetPartitions")
+		ok.String(*v.NumberTargetPartitions)
+	}
+
 	if v.PartitionKeys != nil {
 		ok := object.Key("PartitionKeys")
 		if err := awsAwsjson11_serializeDocumentGlueStudioPathList(v.PartitionKeys, ok); err != nil {
@@ -22937,6 +22968,86 @@ func awsAwsjson11_serializeDocumentS3EncryptionList(v []types.S3Encryption, valu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentS3ExcelSource(v *types.S3ExcelSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalOptions != nil {
+		ok := object.Key("AdditionalOptions")
+		if err := awsAwsjson11_serializeDocumentS3DirectSourceAdditionalOptions(v.AdditionalOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.CompressionType) > 0 {
+		ok := object.Key("CompressionType")
+		ok.String(string(v.CompressionType))
+	}
+
+	if v.Exclusions != nil {
+		ok := object.Key("Exclusions")
+		if err := awsAwsjson11_serializeDocumentEnclosedInStringProperties(v.Exclusions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GroupFiles != nil {
+		ok := object.Key("GroupFiles")
+		ok.String(*v.GroupFiles)
+	}
+
+	if v.GroupSize != nil {
+		ok := object.Key("GroupSize")
+		ok.String(*v.GroupSize)
+	}
+
+	if v.MaxBand != nil {
+		ok := object.Key("MaxBand")
+		ok.Integer(*v.MaxBand)
+	}
+
+	if v.MaxFilesInBand != nil {
+		ok := object.Key("MaxFilesInBand")
+		ok.Integer(*v.MaxFilesInBand)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.NumberRows != nil {
+		ok := object.Key("NumberRows")
+		ok.Long(*v.NumberRows)
+	}
+
+	if v.OutputSchemas != nil {
+		ok := object.Key("OutputSchemas")
+		if err := awsAwsjson11_serializeDocumentGlueSchemas(v.OutputSchemas, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Paths != nil {
+		ok := object.Key("Paths")
+		if err := awsAwsjson11_serializeDocumentEnclosedInStringProperties(v.Paths, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Recurse != nil {
+		ok := object.Key("Recurse")
+		ok.Boolean(*v.Recurse)
+	}
+
+	if v.SkipFooter != nil {
+		ok := object.Key("SkipFooter")
+		ok.Integer(*v.SkipFooter)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentS3GlueParquetTarget(v *types.S3GlueParquetTarget, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22956,6 +23067,11 @@ func awsAwsjson11_serializeDocumentS3GlueParquetTarget(v *types.S3GlueParquetTar
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.NumberTargetPartitions != nil {
+		ok := object.Key("NumberTargetPartitions")
+		ok.String(*v.NumberTargetPartitions)
 	}
 
 	if v.PartitionKeys != nil {
@@ -23063,6 +23179,11 @@ func awsAwsjson11_serializeDocumentS3HudiDirectTarget(v *types.S3HudiDirectTarge
 		ok.String(*v.Name)
 	}
 
+	if v.NumberTargetPartitions != nil {
+		ok := object.Key("NumberTargetPartitions")
+		ok.String(*v.NumberTargetPartitions)
+	}
+
 	if v.PartitionKeys != nil {
 		ok := object.Key("PartitionKeys")
 		if err := awsAwsjson11_serializeDocumentGlueStudioPathList(v.PartitionKeys, ok); err != nil {
@@ -23118,6 +23239,109 @@ func awsAwsjson11_serializeDocumentS3HudiSource(v *types.S3HudiSource, value smi
 	if v.Paths != nil {
 		ok := object.Key("Paths")
 		if err := awsAwsjson11_serializeDocumentEnclosedInStringProperties(v.Paths, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3HyperDirectTarget(v *types.S3HyperDirectTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Compression) > 0 {
+		ok := object.Key("Compression")
+		ok.String(string(v.Compression))
+	}
+
+	if v.Inputs != nil {
+		ok := object.Key("Inputs")
+		if err := awsAwsjson11_serializeDocumentOneInput(v.Inputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.PartitionKeys != nil {
+		ok := object.Key("PartitionKeys")
+		if err := awsAwsjson11_serializeDocumentGlueStudioPathList(v.PartitionKeys, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Path != nil {
+		ok := object.Key("Path")
+		ok.String(*v.Path)
+	}
+
+	if v.SchemaChangePolicy != nil {
+		ok := object.Key("SchemaChangePolicy")
+		if err := awsAwsjson11_serializeDocumentDirectSchemaChangePolicy(v.SchemaChangePolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3IcebergDirectTarget(v *types.S3IcebergDirectTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalOptions != nil {
+		ok := object.Key("AdditionalOptions")
+		if err := awsAwsjson11_serializeDocumentAdditionalOptions(v.AdditionalOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Compression) > 0 {
+		ok := object.Key("Compression")
+		ok.String(string(v.Compression))
+	}
+
+	if len(v.Format) > 0 {
+		ok := object.Key("Format")
+		ok.String(string(v.Format))
+	}
+
+	if v.Inputs != nil {
+		ok := object.Key("Inputs")
+		if err := awsAwsjson11_serializeDocumentOneInput(v.Inputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.NumberTargetPartitions != nil {
+		ok := object.Key("NumberTargetPartitions")
+		ok.String(*v.NumberTargetPartitions)
+	}
+
+	if v.PartitionKeys != nil {
+		ok := object.Key("PartitionKeys")
+		if err := awsAwsjson11_serializeDocumentGlueStudioPathList(v.PartitionKeys, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Path != nil {
+		ok := object.Key("Path")
+		ok.String(*v.Path)
+	}
+
+	if v.SchemaChangePolicy != nil {
+		ok := object.Key("SchemaChangePolicy")
+		if err := awsAwsjson11_serializeDocumentDirectSchemaChangePolicy(v.SchemaChangePolicy, ok); err != nil {
 			return err
 		}
 	}

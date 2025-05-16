@@ -955,6 +955,63 @@ type CurrentRevision struct {
 	noSmithyDocumentSerde
 }
 
+// The target for the deploy action.
+type DeployActionExecutionTarget struct {
+
+	// The end time for the deploy action.
+	EndTime *time.Time
+
+	// The lifecycle events for the deploy action.
+	Events []DeployTargetEvent
+
+	// The start time for the deploy action.
+	StartTime *time.Time
+
+	// The status of the deploy action.
+	Status *string
+
+	// The ID of the target for the deploy action.
+	TargetId *string
+
+	// The type of target for the deploy action.
+	TargetType *string
+
+	noSmithyDocumentSerde
+}
+
+// A lifecycle event for the deploy action.
+type DeployTargetEvent struct {
+
+	// The context for the event for the deploy action.
+	Context *DeployTargetEventContext
+
+	// The end time for the event for the deploy action.
+	EndTime *time.Time
+
+	// The name of the event for the deploy action.
+	Name *string
+
+	// The start time for the event for the deploy action.
+	StartTime *time.Time
+
+	// The status of the event for the deploy action.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// The context for the event for the deploy action.
+type DeployTargetEventContext struct {
+
+	// The context message for the event for the deploy action.
+	Message *string
+
+	// The command ID for the event for the deploy action.
+	SsmCommandId *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents information about the key used to encrypt data in the artifact
 // store, such as an Amazon Web Services Key Management Service (Key Management
 // Service) key.
@@ -2493,6 +2550,18 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Filters the list of targets.
+type TargetFilter struct {
+
+	// The name on which to filter.
+	Name TargetFilterName
+
+	// The values on which to filter.
+	Values []string
 
 	noSmithyDocumentSerde
 }

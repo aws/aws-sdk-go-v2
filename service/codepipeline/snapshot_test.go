@@ -278,6 +278,18 @@ func TestCheckSnapshot_ListActionTypes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListDeployActionExecutionTargets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDeployActionExecutionTargets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDeployActionExecutionTargets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListPipelineExecutions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPipelineExecutions(context.Background(), nil, func(o *Options) {
@@ -786,6 +798,18 @@ func TestUpdateSnapshot_ListActionTypes(t *testing.T) {
 	_, err := svc.ListActionTypes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListActionTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDeployActionExecutionTargets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDeployActionExecutionTargets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDeployActionExecutionTargets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

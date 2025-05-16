@@ -1314,6 +1314,47 @@ func (HudiTargetCompressionType) Values() []HudiTargetCompressionType {
 	}
 }
 
+type HyperTargetCompressionType string
+
+// Enum values for HyperTargetCompressionType
+const (
+	HyperTargetCompressionTypeUncompressed HyperTargetCompressionType = "uncompressed"
+)
+
+// Values returns all known values for HyperTargetCompressionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HyperTargetCompressionType) Values() []HyperTargetCompressionType {
+	return []HyperTargetCompressionType{
+		"uncompressed",
+	}
+}
+
+type IcebergTargetCompressionType string
+
+// Enum values for IcebergTargetCompressionType
+const (
+	IcebergTargetCompressionTypeGzip         IcebergTargetCompressionType = "gzip"
+	IcebergTargetCompressionTypeLzo          IcebergTargetCompressionType = "lzo"
+	IcebergTargetCompressionTypeUncompressed IcebergTargetCompressionType = "uncompressed"
+	IcebergTargetCompressionTypeSnappy       IcebergTargetCompressionType = "snappy"
+)
+
+// Values returns all known values for IcebergTargetCompressionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IcebergTargetCompressionType) Values() []IcebergTargetCompressionType {
+	return []IcebergTargetCompressionType{
+		"gzip",
+		"lzo",
+		"uncompressed",
+		"snappy",
+	}
+}
+
 type InclusionAnnotationValue string
 
 // Enum values for InclusionAnnotationValue
@@ -1792,6 +1833,8 @@ const (
 	ParquetCompressionTypeSnappy       ParquetCompressionType = "snappy"
 	ParquetCompressionTypeLzo          ParquetCompressionType = "lzo"
 	ParquetCompressionTypeGzip         ParquetCompressionType = "gzip"
+	ParquetCompressionTypeBrotli       ParquetCompressionType = "brotli"
+	ParquetCompressionTypeLz4          ParquetCompressionType = "lz4"
 	ParquetCompressionTypeUncompressed ParquetCompressionType = "uncompressed"
 	ParquetCompressionTypeNone         ParquetCompressionType = "none"
 )
@@ -1805,6 +1848,8 @@ func (ParquetCompressionType) Values() []ParquetCompressionType {
 		"snappy",
 		"lzo",
 		"gzip",
+		"brotli",
+		"lz4",
 		"uncompressed",
 		"none",
 	}
@@ -2525,6 +2570,9 @@ const (
 	TargetFormatParquet TargetFormat = "parquet"
 	TargetFormatHudi    TargetFormat = "hudi"
 	TargetFormatDelta   TargetFormat = "delta"
+	TargetFormatIceberg TargetFormat = "iceberg"
+	TargetFormatHyper   TargetFormat = "hyper"
+	TargetFormatXml     TargetFormat = "xml"
 )
 
 // Values returns all known values for TargetFormat. Note that this can be
@@ -2540,6 +2588,9 @@ func (TargetFormat) Values() []TargetFormat {
 		"parquet",
 		"hudi",
 		"delta",
+		"iceberg",
+		"hyper",
+		"xml",
 	}
 }
 

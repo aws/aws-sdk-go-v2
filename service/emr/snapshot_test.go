@@ -122,6 +122,18 @@ func TestCheckSnapshot_CancelSteps(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreatePersistentAppUI(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePersistentAppUI(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePersistentAppUI")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateSecurityConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSecurityConfiguration(context.Background(), nil, func(o *Options) {
@@ -230,6 +242,18 @@ func TestCheckSnapshot_DescribeNotebookExecution(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribePersistentAppUI(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribePersistentAppUI(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribePersistentAppUI")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeReleaseLabel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeReleaseLabel(context.Background(), nil, func(o *Options) {
@@ -319,6 +343,30 @@ func TestCheckSnapshot_GetManagedScalingPolicy(t *testing.T) {
 	_, err := svc.GetManagedScalingPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetManagedScalingPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetOnClusterAppUIPresignedURL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOnClusterAppUIPresignedURL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetOnClusterAppUIPresignedURL")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPersistentAppUIPresignedURL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPersistentAppUIPresignedURL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPersistentAppUIPresignedURL")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -793,6 +841,18 @@ func TestUpdateSnapshot_CancelSteps(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreatePersistentAppUI(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePersistentAppUI(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePersistentAppUI")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateSecurityConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSecurityConfiguration(context.Background(), nil, func(o *Options) {
@@ -901,6 +961,18 @@ func TestUpdateSnapshot_DescribeNotebookExecution(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribePersistentAppUI(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribePersistentAppUI(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribePersistentAppUI")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeReleaseLabel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeReleaseLabel(context.Background(), nil, func(o *Options) {
@@ -990,6 +1062,30 @@ func TestUpdateSnapshot_GetManagedScalingPolicy(t *testing.T) {
 	_, err := svc.GetManagedScalingPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetManagedScalingPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetOnClusterAppUIPresignedURL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOnClusterAppUIPresignedURL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetOnClusterAppUIPresignedURL")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPersistentAppUIPresignedURL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPersistentAppUIPresignedURL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPersistentAppUIPresignedURL")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

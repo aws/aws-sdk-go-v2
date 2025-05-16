@@ -330,6 +330,26 @@ func (m *validateOpListActionExecutions) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDeployActionExecutionTargets struct {
+}
+
+func (*validateOpListDeployActionExecutionTargets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDeployActionExecutionTargets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDeployActionExecutionTargetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDeployActionExecutionTargetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPipelineExecutions struct {
 }
 
@@ -812,6 +832,10 @@ func addOpGetThirdPartyJobDetailsValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListActionExecutionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListActionExecutions{}, middleware.After)
+}
+
+func addOpListDeployActionExecutionTargetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDeployActionExecutionTargets{}, middleware.After)
 }
 
 func addOpListPipelineExecutionsValidationMiddleware(stack *middleware.Stack) error {
@@ -2363,6 +2387,21 @@ func validateOpListActionExecutionsInput(v *ListActionExecutionsInput) error {
 		if err := validateActionExecutionFilter(v.Filter); err != nil {
 			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDeployActionExecutionTargetsInput(v *ListDeployActionExecutionTargetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDeployActionExecutionTargetsInput"}
+	if v.ActionExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionExecutionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

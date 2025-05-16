@@ -1,0 +1,8 @@
+{
+    "id": "026d82fa-9146-4ba9-8aa5-ee6d7465b104",
+    "type": "feature",
+    "description": "Add support for VIDEO modality to BlueprintType enum.",
+    "modules": [
+        "service/bedrockdataautomation"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "f3ff4831-05d5-4dd7-b8b0-f1a6c50ce78a",
+    "type": "feature",
+    "description": "This release adds Global Cluster Switchover capability which enables you to change your global cluster's primary AWS Region, the region that serves writes, while preserving the replication between all regions in the global cluster.",
+    "modules": [
+        "service/neptune"
+    ]
+}

@@ -306,6 +306,7 @@ const (
 	TypeDocument Type = "DOCUMENT"
 	TypeImage    Type = "IMAGE"
 	TypeAudio    Type = "AUDIO"
+	TypeVideo    Type = "VIDEO"
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
@@ -317,6 +318,7 @@ func (Type) Values() []Type {
 		"DOCUMENT",
 		"IMAGE",
 		"AUDIO",
+		"VIDEO",
 	}
 }
 

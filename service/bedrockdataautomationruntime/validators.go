@@ -130,6 +130,23 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func validateAssetProcessingConfiguration(v *types.AssetProcessingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetProcessingConfiguration"}
+	if v.Video != nil {
+		if err := validateVideoAssetProcessingConfiguration(v.Video); err != nil {
+			invalidParams.AddNested("Video", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBlueprint(v *types.Blueprint) error {
 	if v == nil {
 		return nil
@@ -215,6 +232,11 @@ func validateInputConfiguration(v *types.InputConfiguration) error {
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
 	}
+	if v.AssetProcessingConfiguration != nil {
+		if err := validateAssetProcessingConfiguration(v.AssetProcessingConfiguration); err != nil {
+			invalidParams.AddNested("AssetProcessingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -283,6 +305,60 @@ func validateTagList(v []types.Tag) error {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimestampSegment(v *types.TimestampSegment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimestampSegment"}
+	if v.StartTimeMillis == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimeMillis"))
+	}
+	if v.EndTimeMillis == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTimeMillis"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVideoAssetProcessingConfiguration(v *types.VideoAssetProcessingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VideoAssetProcessingConfiguration"}
+	if v.SegmentConfiguration != nil {
+		if err := validateVideoSegmentConfiguration(v.SegmentConfiguration); err != nil {
+			invalidParams.AddNested("SegmentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVideoSegmentConfiguration(v types.VideoSegmentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VideoSegmentConfiguration"}
+	switch uv := v.(type) {
+	case *types.VideoSegmentConfigurationMemberTimestampSegment:
+		if err := validateTimestampSegment(&uv.Value); err != nil {
+			invalidParams.AddNested("[timestampSegment]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

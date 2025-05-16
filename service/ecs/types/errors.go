@@ -96,14 +96,6 @@ func (e *BlockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // using an action or resource on behalf of a user that doesn't have permissions to
 // use the action or resource. Or, it might be specifying an identifier that isn't
 // valid.
-//
-// The following list includes additional causes for the error:
-//
-//   - The RunTask could not be processed because you use managed scaling and there
-//     is a capacity error because the quota of tasks in the PROVISIONING per cluster
-//     has been reached. For information about the service quotas, see [Amazon ECS service quotas].
-//
-// [Amazon ECS service quotas]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html
 type ClientException struct {
 	Message *string
 

@@ -26,6 +26,7 @@
         "api_op_GetThirdPartyJobDetails.go",
         "api_op_ListActionExecutions.go",
         "api_op_ListActionTypes.go",
+        "api_op_ListDeployActionExecutionTargets.go",
         "api_op_ListPipelineExecutions.go",
         "api_op_ListPipelines.go",
         "api_op_ListRuleExecutions.go",

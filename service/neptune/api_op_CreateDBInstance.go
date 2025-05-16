@@ -273,9 +273,7 @@ type CreateDBInstanceInput struct {
 	// Default: false
 	StorageEncrypted *bool
 
-	// Specifies the storage type to be associated with the DB instance.
-	//
-	// Not applicable. Storage is managed by the DB Cluster.
+	// Not applicable. In Neptune the storage type is managed at the DB Cluster level.
 	StorageType *string
 
 	// The tags to assign to the new instance.

@@ -282,7 +282,7 @@ type ModifyDBInstanceInput struct {
 	// Deprecated: This member has been deprecated.
 	PubliclyAccessible *bool
 
-	// Not supported.
+	// Not applicable. In Neptune the storage type is managed at the DB Cluster level.
 	StorageType *string
 
 	// The ARN from the key store with which to associate the instance for TDE

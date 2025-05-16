@@ -1371,6 +1371,9 @@ type CodeGenConfigurationNode struct {
 	// Specifies a data target that writes to Amazon S3.
 	S3DirectTarget *S3DirectTarget
 
+	// Defines configuration parameters for reading Excel files from Amazon S3.
+	S3ExcelSource *S3ExcelSource
+
 	// Specifies a data target that writes to Amazon S3 in Apache Parquet columnar
 	// storage.
 	S3GlueParquetTarget *S3GlueParquetTarget
@@ -1383,6 +1386,14 @@ type CodeGenConfigurationNode struct {
 
 	// Specifies a Hudi data source stored in Amazon S3.
 	S3HudiSource *S3HudiSource
+
+	// Defines configuration parameters for writing data to Amazon S3 using
+	// HyperDirect optimization.
+	S3HyperDirectTarget *S3HyperDirectTarget
+
+	// Defines configuration parameters for writing data to Amazon S3 as an Apache
+	// Iceberg table.
+	S3IcebergDirectTarget *S3IcebergDirectTarget
 
 	// Specifies a JSON data store stored in Amazon S3.
 	S3JsonSource *S3JsonSource
@@ -8118,6 +8129,10 @@ type S3DeltaDirectTarget struct {
 	// Specifies additional connection options for the connector.
 	AdditionalOptions map[string]string
 
+	// Specifies the number of target partitions for distributing Delta Lake dataset
+	// files across Amazon S3.
+	NumberTargetPartitions *string
+
 	// Specifies native partitioning using a sequence of keys.
 	PartitionKeys [][]string
 
@@ -8198,6 +8213,10 @@ type S3DirectTarget struct {
 	// data has a standard file extension. Possible values are "gzip" and "bzip" ).
 	Compression *string
 
+	// Specifies the number of target partitions when writing data directly to Amazon
+	// S3.
+	NumberTargetPartitions *string
+
 	// Specifies native partitioning using a sequence of keys.
 	PartitionKeys [][]string
 
@@ -8216,6 +8235,55 @@ type S3Encryption struct {
 
 	// The encryption mode to use for Amazon S3 data.
 	S3EncryptionMode S3EncryptionMode
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an S3 Excel data source.
+type S3ExcelSource struct {
+
+	// The name of the S3 Excel data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The S3 paths where the Excel files are located.
+	//
+	// This member is required.
+	Paths []string
+
+	// Additional configuration options for S3 direct source processing.
+	AdditionalOptions *S3DirectSourceAdditionalOptions
+
+	// The compression format used for the Excel files.
+	CompressionType ParquetCompressionType
+
+	// Patterns to exclude specific files or paths from processing.
+	Exclusions []string
+
+	// Specifies how files should be grouped for processing.
+	GroupFiles *string
+
+	// Defines the size of file groups for batch processing.
+	GroupSize *string
+
+	// The maximum number of processing bands to use.
+	MaxBand *int32
+
+	// The maximum number of files to process in each band.
+	MaxFilesInBand *int32
+
+	// The number of rows to process from each Excel file.
+	NumberRows *int64
+
+	// The AWS Glue schemas to apply to the processed data.
+	OutputSchemas []GlueSchema
+
+	// Indicates whether to recursively process subdirectories.
+	Recurse *bool
+
+	// The number of rows to skip at the end of each Excel file.
+	SkipFooter *int32
 
 	noSmithyDocumentSerde
 }
@@ -8242,6 +8310,10 @@ type S3GlueParquetTarget struct {
 	// Specifies how the data is compressed. This is generally not necessary if the
 	// data has a standard file extension. Possible values are "gzip" and "bzip" ).
 	Compression ParquetCompressionType
+
+	// Specifies the number of target partitions for Parquet files when writing to
+	// Amazon S3 using AWS Glue.
+	NumberTargetPartitions *string
 
 	// Specifies native partitioning using a sequence of keys.
 	PartitionKeys [][]string
@@ -8323,6 +8395,10 @@ type S3HudiDirectTarget struct {
 	// This member is required.
 	Path *string
 
+	// Specifies the number of target partitions for distributing Hudi dataset files
+	// across Amazon S3.
+	NumberTargetPartitions *string
+
 	// Specifies native partitioning using a sequence of keys.
 	PartitionKeys [][]string
 
@@ -8353,6 +8429,83 @@ type S3HudiSource struct {
 
 	// Specifies the data schema for the Hudi source.
 	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a HyperDirect data target that writes to Amazon S3.
+type S3HyperDirectTarget struct {
+
+	// Specifies the input source for the HyperDirect target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The unique identifier for the HyperDirect target node.
+	//
+	// This member is required.
+	Name *string
+
+	// The S3 location where the output data will be written.
+	//
+	// This member is required.
+	Path *string
+
+	// The compression type to apply to the output data.
+	Compression HyperTargetCompressionType
+
+	// Defines the partitioning strategy for the output data.
+	PartitionKeys [][]string
+
+	// Defines how schema changes are handled during write operations.
+	SchemaChangePolicy *DirectSchemaChangePolicy
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a target that writes to an Iceberg data source in Amazon S3.
+type S3IcebergDirectTarget struct {
+
+	// Specifies the compression codec used for Iceberg table files in S3.
+	//
+	// This member is required.
+	Compression IcebergTargetCompressionType
+
+	// Specifies the file format used for storing Iceberg table data (e.g., Parquet,
+	// ORC).
+	//
+	// This member is required.
+	Format TargetFormat
+
+	// Defines the single input source that provides data to this Iceberg target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// Specifies the unique identifier for the Iceberg target node in your data
+	// pipeline.
+	//
+	// This member is required.
+	Name *string
+
+	// Defines the S3 location where the Iceberg table data will be stored.
+	//
+	// This member is required.
+	Path *string
+
+	// Provides additional configuration options for customizing the Iceberg table
+	// behavior.
+	AdditionalOptions map[string]string
+
+	// Sets the number of target partitions for distributing Iceberg table files
+	// across S3.
+	NumberTargetPartitions *string
+
+	// Specifies the columns used to partition the Iceberg table data in S3.
+	PartitionKeys [][]string
+
+	// Defines how schema changes are handled when writing data to the Iceberg table.
+	SchemaChangePolicy *DirectSchemaChangePolicy
 
 	noSmithyDocumentSerde
 }

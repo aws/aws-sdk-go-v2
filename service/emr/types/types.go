@@ -749,6 +749,15 @@ type Ec2InstanceAttributes struct {
 	noSmithyDocumentSerde
 }
 
+// The EMR container configuration.
+type EMRContainersConfig struct {
+
+	// The Job run ID for the container configuration.
+	JobRunId *string
+
+	noSmithyDocumentSerde
+}
+
 // A tuple that provides information about an error that caused a cluster to
 // terminate.
 type ErrorDetail struct {
@@ -2293,6 +2302,40 @@ type OutputNotebookS3LocationFromInput struct {
 
 	// The key to the Amazon S3 location that stores the notebook execution output.
 	Key *string
+
+	noSmithyDocumentSerde
+}
+
+// Holds persistent application user interface information. Applications installed
+// on the Amazon EMR cluster publish user interfaces as web sites to monitor
+// cluster activity.
+type PersistentAppUI struct {
+
+	// The author ID for the persistent application user interface object.
+	AuthorId *string
+
+	// The creation date and time for the persistent application user interface object.
+	CreationTime *time.Time
+
+	// The date and time the persistent application user interface object was last
+	// changed.
+	LastModifiedTime *time.Time
+
+	// The reason the persistent application user interface object was last changed.
+	LastStateChangeReason *string
+
+	// The identifier for the persistent application user interface object.
+	PersistentAppUIId *string
+
+	// The status for the persistent application user interface object.
+	PersistentAppUIStatus *string
+
+	// The type list for the persistent application user interface object. Valid
+	// values include SHS, YTS, or TEZ.
+	PersistentAppUITypeList []PersistentAppUIType
+
+	// A collection of tags for the persistent application user interface object.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }

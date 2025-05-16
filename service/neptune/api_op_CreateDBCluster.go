@@ -124,7 +124,7 @@ type CreateDBClusterInput struct {
 
 	// The version number of the database engine to use for the new DB cluster.
 	//
-	// Example: 1.0.2.1
+	// Example: 1.2.1.0
 	EngineVersion *string
 
 	// The ID of the Neptune global database to which this new DB cluster should be
@@ -227,19 +227,22 @@ type CreateDBClusterInput struct {
 	// Specifies whether the DB cluster is encrypted.
 	StorageEncrypted *bool
 
-	// The storage type to associate with the DB cluster.
+	// The storage type for the new DB cluster.
 	//
 	// Valid Values:
 	//
-	//   - standard | iopt1
+	//   - standard – ( the default ) Configures cost-effective database storage for
+	//   applications with moderate to small I/O usage. When set to standard , the
+	//   storage type is not returned in the response.
 	//
-	// Default:
+	//   - iopt1 – Enables [I/O-Optimized storage]that's designed to meet the needs of I/O-intensive graph
+	//   workloads that require predictable pricing with low I/O latency and consistent
+	//   I/O throughput.
 	//
-	//   - standard
+	// Neptune I/O-Optimized storage is only available starting with engine release
+	//   1.3.0.0.
 	//
-	// When you create a Neptune cluster with the storage type set to iopt1 , the
-	// storage type is returned in the response. The storage type isn't returned when
-	// you set it to standard .
+	// [I/O-Optimized storage]: https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage
 	StorageType *string
 
 	// The tags to assign to the new DB cluster.

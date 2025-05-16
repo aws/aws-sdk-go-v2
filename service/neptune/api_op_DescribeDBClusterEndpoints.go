@@ -51,7 +51,7 @@ type DescribeDBClusterEndpointsInput struct {
 	// more of: available , creating , deleting , inactive , modifying .
 	Filters []types.Filter
 
-	//  An optional pagination token provided by a previous DescribeDBClusterEndpoints
+	// An optional pagination token provided by a previous DescribeDBClusterEndpoints
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
@@ -74,7 +74,7 @@ type DescribeDBClusterEndpointsOutput struct {
 	// any filter conditions.
 	DBClusterEndpoints []types.DBClusterEndpoint
 
-	//  An optional pagination token provided by a previous DescribeDBClusterEndpoints
+	//  n optional pagination token provided by a previous DescribeDBClusterEndpoints
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string

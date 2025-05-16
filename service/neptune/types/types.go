@@ -72,14 +72,26 @@ type ClusterPendingModifiedValues struct {
 	IAMDatabaseAuthenticationEnabled *bool
 
 	// The Provisioned IOPS (I/O operations per second) value. This setting is only
-	// for non-Aurora Multi-AZ DB clusters.
+	// for Multi-AZ DB clusters.
 	Iops *int32
 
 	// This PendingCloudwatchLogsExports structure specifies pending changes to which
 	// CloudWatch logs are enabled and which are disabled.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
 
-	// The storage type for the DB cluster.
+	// The pending change in storage type for the DB cluster. Valid Values:
+	//
+	//   - standard – ( the default ) Configures cost-effective database storage for
+	//   applications with moderate to small I/O usage.
+	//
+	//   - iopt1 – Enables [I/O-Optimized storage]that's designed to meet the needs of I/O-intensive graph
+	//   workloads that require predictable pricing with low I/O latency and consistent
+	//   I/O throughput.
+	//
+	// Neptune I/O-Optimized storage is only available starting with engine release
+	//   1.3.0.0.
+	//
+	// [I/O-Optimized storage]: https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage
 	StorageType *string
 
 	noSmithyDocumentSerde
@@ -260,7 +272,21 @@ type DBCluster struct {
 	// Specifies whether the DB cluster is encrypted.
 	StorageEncrypted *bool
 
-	// The storage type associated with the DB cluster.
+	// The storage type used by the DB cluster.
+	//
+	// Valid Values:
+	//
+	//   - standard – ( the default ) Provides cost-effective database storage for
+	//   applications with moderate to small I/O usage.
+	//
+	//   - iopt1 – Enables [I/O-Optimized storage]that's designed to meet the needs of I/O-intensive graph
+	//   workloads that require predictable pricing with low I/O latency and consistent
+	//   I/O throughput.
+	//
+	// Neptune I/O-Optimized storage is only available starting with engine release
+	//   1.3.0.0.
+	//
+	// [I/O-Optimized storage]: https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage
 	StorageType *string
 
 	// Provides a list of VPC security groups that the DB cluster belongs to.
@@ -772,7 +798,7 @@ type DBInstance struct {
 	// Not supported: The encryption for DB instances is managed by the DB cluster.
 	StorageEncrypted *bool
 
-	// Specifies the storage type associated with DB instance.
+	// Specifies the storage type associated with the DB instance.
 	StorageType *string
 
 	// The ARN from the key store with which the instance is associated for TDE
@@ -1040,6 +1066,47 @@ type EventSubscription struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the state of scheduled or in-process operations on a global cluster
+// (Neptune global database). This data type is empty unless a switchover or
+// failover operation is scheduled or is in progress on the Neptune global
+// database.
+type FailoverState struct {
+
+	// The Amazon Resource Name (ARN) of the Neptune DB cluster that is currently
+	// being demoted, and which is associated with this state.
+	FromDbClusterArn *string
+
+	// Indicates whether the operation is a global switchover or a global failover. If
+	// data loss is allowed, then the operation is a global failover. Otherwise, it's a
+	// switchover.
+	IsDataLossAllowed *bool
+
+	// The current status of the global cluster. Possible values are as follows:
+	//
+	//   - pending  The service received a request to switch over or fail over the
+	//   global cluster. The global cluster's primary DB cluster and the specified
+	//   secondary DB cluster are being verified before the operation starts.
+	//
+	//   - failing-over  Neptune is promoting the chosen secondary Neptune DB cluster
+	//   to become the new primary DB cluster to fail over the global cluster.
+	//
+	//   - cancelling  The request to switch over or fail over the global cluster was
+	//   cancelled and the primary Neptune DB cluster and the selected secondary Neptune
+	//   DB cluster are returning to their previous states.
+	//
+	//   - switching-over  This status covers the range of Neptune internal
+	//   operations that take place during the switchover process, such as demoting the
+	//   primary Neptune DB cluster, promoting the secondary Neptune DB cluster, and
+	//   synchronizing replicas.
+	Status FailoverStatus
+
+	// The Amazon Resource Name (ARN) of the Neptune DB cluster that is currently
+	// being promoted, and which is associated with this state.
+	ToDbClusterArn *string
+
+	noSmithyDocumentSerde
+}
+
 // This type is not currently supported.
 type Filter struct {
 
@@ -1069,6 +1136,12 @@ type GlobalCluster struct {
 
 	// The Neptune engine version used by the global database.
 	EngineVersion *string
+
+	// A data object containing all properties for the current state of an in-process
+	// or pending switchover or failover process for this global cluster (Neptune
+	// global database). This object is empty unless the SwitchoverGlobalCluster or
+	// FailoverGlobalCluster operation was called on this global cluster.
+	FailoverState *FailoverState
 
 	// The Amazon Resource Name (ARN) for the global database.
 	GlobalClusterArn *string
@@ -1171,7 +1244,7 @@ type OrderableDBInstanceOption struct {
 	// Indicates whether a DB instance can have a Read Replica.
 	ReadReplicaCapable *bool
 
-	// Indicates the storage type for a DB instance.
+	// Not applicable. In Neptune the storage type is managed at the DB Cluster level.
 	StorageType *string
 
 	// Indicates whether a DB instance supports Enhanced Monitoring at intervals from
@@ -1339,7 +1412,7 @@ type PendingModifiedValues struct {
 	// Specifies the pending port for the DB instance.
 	Port *int32
 
-	// Specifies the storage type to be associated with the DB instance.
+	// Not applicable. In Neptune the storage type is managed at the DB Cluster level.
 	StorageType *string
 
 	noSmithyDocumentSerde
@@ -1497,23 +1570,19 @@ type ValidDBInstanceModificationsMessage struct {
 	noSmithyDocumentSerde
 }
 
-// Information about valid modifications that you can make to your DB instance.
-//
-// Contains the result of a successful call to the DescribeValidDBInstanceModifications action.
+// Not applicable. In Neptune the storage type is managed at the DB Cluster level.
 type ValidStorageOptions struct {
 
-	// The valid range of Provisioned IOPS to gibibytes of storage multiplier. For
-	// example, 3-10, which means that provisioned IOPS can be between 3 and 10 times
-	// storage.
+	// Not applicable. In Neptune the storage type is managed at the DB Cluster level.
 	IopsToStorageRatio []DoubleRange
 
-	// The valid range of provisioned IOPS. For example, 1000-20000.
+	// Not applicable. In Neptune the storage type is managed at the DB Cluster level.
 	ProvisionedIops []Range
 
-	// The valid range of storage in gibibytes. For example, 100 to 16384.
+	// Not applicable. In Neptune the storage type is managed at the DB Cluster level.
 	StorageSize []Range
 
-	// The valid storage types for your DB instance. For example, gp2, io1.
+	// Not applicable. In Neptune the storage type is managed at the DB Cluster level.
 	StorageType *string
 
 	noSmithyDocumentSerde

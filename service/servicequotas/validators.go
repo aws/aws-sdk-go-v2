@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateSupportCase struct {
+}
+
+func (*validateOpCreateSupportCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSupportCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSupportCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSupportCaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteServiceQuotaIncreaseRequestFromTemplate struct {
 }
 
@@ -270,6 +290,10 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateSupportCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSupportCase{}, middleware.After)
+}
+
 func addOpDeleteServiceQuotaIncreaseRequestFromTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteServiceQuotaIncreaseRequestFromTemplate{}, middleware.After)
 }
@@ -349,6 +373,21 @@ func validateTag(v *types.Tag) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSupportCaseInput(v *CreateSupportCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSupportCaseInput"}
+	if v.RequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -155,6 +155,8 @@ type PutAccountSettingInput struct {
 	// settings. If this field is omitted, the setting is changed only for the
 	// authenticated user.
 	//
+	// In order to use this parameter, you must be the root user, or the principal.
+	//
 	// You must use the root user when you set the Fargate wait time (
 	// fargateTaskRetirementWaitPeriod ).
 	//

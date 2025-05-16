@@ -61,6 +61,8 @@ type ListAccountSettingsInput struct {
 	// field is omitted, the account settings are listed only for the authenticated
 	// user.
 	//
+	// In order to use this parameter, you must be the root user, or the principal.
+	//
 	// Federated users assume the account setting of the root user and can't have
 	// explicit account settings set for them.
 	PrincipalArn *string

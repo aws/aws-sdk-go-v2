@@ -6,6 +6,15 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Config containing asset processing related knobs for all modalities
+type AssetProcessingConfiguration struct {
+
+	// Video asset processing configuration
+	Video *VideoAssetProcessingConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Structure for single blueprint entity.
 type Blueprint struct {
 
@@ -70,6 +79,9 @@ type InputConfiguration struct {
 	// This member is required.
 	S3Uri *string
 
+	// Asset processing configuration
+	AssetProcessingConfiguration *AssetProcessingConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -111,4 +123,58 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// Timestamp segment
+type TimestampSegment struct {
+
+	// End timestamp in milliseconds
+	//
+	// This member is required.
+	EndTimeMillis *int64
+
+	// Start timestamp in milliseconds
+	//
+	// This member is required.
+	StartTimeMillis *int64
+
+	noSmithyDocumentSerde
+}
+
+// Video asset processing configuration
+type VideoAssetProcessingConfiguration struct {
+
+	// Delimits the segment of the input that will be processed
+	SegmentConfiguration VideoSegmentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Delimits the segment of the input that will be processed
+//
+// The following types satisfy this interface:
+//
+//	VideoSegmentConfigurationMemberTimestampSegment
+type VideoSegmentConfiguration interface {
+	isVideoSegmentConfiguration()
+}
+
+// Timestamp segment
+type VideoSegmentConfigurationMemberTimestampSegment struct {
+	Value TimestampSegment
+
+	noSmithyDocumentSerde
+}
+
+func (*VideoSegmentConfigurationMemberTimestampSegment) isVideoSegmentConfiguration() {}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isVideoSegmentConfiguration() {}

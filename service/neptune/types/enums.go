@@ -21,6 +21,27 @@ func (ApplyMethod) Values() []ApplyMethod {
 	}
 }
 
+type FailoverStatus string
+
+// Enum values for FailoverStatus
+const (
+	FailoverStatusPending     FailoverStatus = "pending"
+	FailoverStatusFailingOver FailoverStatus = "failing-over"
+	FailoverStatusCancelling  FailoverStatus = "cancelling"
+)
+
+// Values returns all known values for FailoverStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FailoverStatus) Values() []FailoverStatus {
+	return []FailoverStatus{
+		"pending",
+		"failing-over",
+		"cancelling",
+	}
+}
+
 type SourceType string
 
 // Enum values for SourceType
