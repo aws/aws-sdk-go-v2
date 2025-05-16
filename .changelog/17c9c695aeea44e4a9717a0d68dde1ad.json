@@ -1,8 +1,0 @@
-{
-    "id": "17c9c695-aeea-44e4-a971-7a0d68dde1ad",
-    "type": "feature",
-    "description": "This release introduces CreateSupportCase operation to SDK.",
-    "modules": [
-        "service/servicequotas"
-    ]
-}

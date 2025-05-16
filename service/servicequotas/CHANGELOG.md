@@ -1,3 +1,7 @@
+# v1.28.0 (2025-05-16)
+
+* **Feature**: This release introduces CreateSupportCase operation to SDK.
+
 # v1.27.0 (2025-04-18)
 
 * **Feature**: Add new optional SupportCaseAllowed query parameter to the RequestServiceQuotaIncrease API

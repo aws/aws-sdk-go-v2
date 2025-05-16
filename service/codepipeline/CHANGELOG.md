@@ -1,3 +1,7 @@
+# v1.42.0 (2025-05-16)
+
+* **Feature**: CodePipeline now supports new API ListDeployActionExecutionTargets that lists the deployment target details for deploy action executions.
+
 # v1.41.0 (2025-05-08)
 
 * **Feature**: Add support for Secrets Manager and Plaintext environment variable types in Commands action

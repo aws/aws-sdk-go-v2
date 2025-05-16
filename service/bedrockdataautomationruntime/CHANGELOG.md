@@ -1,3 +1,7 @@
+# v1.3.0 (2025-05-16)
+
+* **Feature**: Add AssetProcessingConfiguration for video segment to InputConfiguration
+
 # v1.2.2 (2025-04-03)
 
 * No change notes available for this release.

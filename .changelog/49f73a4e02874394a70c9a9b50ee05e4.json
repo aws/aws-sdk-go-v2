@@ -1,8 +1,0 @@
-{
-    "id": "49f73a4e-0287-4394-a70c-9a9b50ee05e4",
-    "type": "feature",
-    "description": "Add AssetProcessingConfiguration for video segment to InputConfiguration",
-    "modules": [
-        "service/bedrockdataautomationruntime"
-    ]
-}

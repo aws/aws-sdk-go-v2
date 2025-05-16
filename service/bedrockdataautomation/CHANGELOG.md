@@ -1,3 +1,7 @@
+# v1.5.0 (2025-05-16)
+
+* **Feature**: Add support for VIDEO modality to BlueprintType enum.
+
 # v1.4.0 (2025-05-02)
 
 * **Feature**: Added support for Custom output and blueprints for AUDIO data types.

@@ -1,8 +1,0 @@
-{
-    "id": "0cf14b16-17e1-427f-8b98-da0bf0de5f0c",
-    "type": "feature",
-    "description": "CodePipeline now supports new API ListDeployActionExecutionTargets that lists the deployment target details for deploy action executions.",
-    "modules": [
-        "service/codepipeline"
-    ]
-}

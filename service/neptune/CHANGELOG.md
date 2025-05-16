@@ -1,3 +1,7 @@
+# v1.37.0 (2025-05-16)
+
+* **Feature**: This release adds Global Cluster Switchover capability which enables you to change your global cluster's primary AWS Region, the region that serves writes, while preserving the replication between all regions in the global cluster.
+
 # v1.36.3 (2025-04-10)
 
 * No change notes available for this release.

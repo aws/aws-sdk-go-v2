@@ -1,8 +1,0 @@
-{
-    "id": "17b898b8-d2cb-4c96-a45b-872efafb375a",
-    "type": "documentation",
-    "description": "This is an Amazon ECs documentation only release to support the change of the container exit \"reason\" field from 255 characters to 1024 characters.",
-    "modules": [
-        "service/ecs"
-    ]
-}

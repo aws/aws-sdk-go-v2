@@ -1,8 +1,0 @@
-{
-    "id": "5023e404-4b61-456a-aca1-028f14d6e00d",
-    "type": "feature",
-    "description": "Added APIs for managing Application UIs: Access Persistent (serverless) UIs via CreatePersistentAppUI DescribePersistentAppUI \u0026 GetPersistentAppUIPresignedURL, and Cluster-based UIs through GetOnClusterAppUIPresignedURL. Supports Yarn, Spark History, and TEZ interfaces.",
-    "modules": [
-        "service/emr"
-    ]
-}

@@ -1,3 +1,23 @@
+# Release (2025-05-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.5.0](service/bedrockdataautomation/CHANGELOG.md#v150-2025-05-16)
+  * **Feature**: Add support for VIDEO modality to BlueprintType enum.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime`: [v1.3.0](service/bedrockdataautomationruntime/CHANGELOG.md#v130-2025-05-16)
+  * **Feature**: Add AssetProcessingConfiguration for video segment to InputConfiguration
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.42.0](service/codepipeline/CHANGELOG.md#v1420-2025-05-16)
+  * **Feature**: CodePipeline now supports new API ListDeployActionExecutionTargets that lists the deployment target details for deploy action executions.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.57.1](service/ecs/CHANGELOG.md#v1571-2025-05-16)
+  * **Documentation**: This is an Amazon ECs documentation only release to support the change of the container exit "reason" field from 255 characters to 1024 characters.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.49.0](service/emr/CHANGELOG.md#v1490-2025-05-16)
+  * **Feature**: Added APIs for managing Application UIs: Access Persistent (serverless) UIs via CreatePersistentAppUI DescribePersistentAppUI & GetPersistentAppUIPresignedURL, and Cluster-based UIs through GetOnClusterAppUIPresignedURL. Supports Yarn, Spark History, and TEZ interfaces.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.111.0](service/glue/CHANGELOG.md#v11110-2025-05-16)
+  * **Feature**: Changes include (1) Excel as S3 Source type and XML and Tableau's Hyper as S3 Sink types, (2) targeted number of partitions parameter in S3 sinks and (3) new compression types in CSV/JSON and Parquet S3 sinks.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.37.0](service/neptune/CHANGELOG.md#v1370-2025-05-16)
+  * **Feature**: This release adds Global Cluster Switchover capability which enables you to change your global cluster's primary AWS Region, the region that serves writes, while preserving the replication between all regions in the global cluster.
+* `github.com/aws/aws-sdk-go-v2/service/servicequotas`: [v1.28.0](service/servicequotas/CHANGELOG.md#v1280-2025-05-16)
+  * **Feature**: This release introduces CreateSupportCase operation to SDK.
+
 # Release (2025-05-15)
 
 ## Module Highlights
