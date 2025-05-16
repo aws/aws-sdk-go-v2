@@ -1,0 +1,8 @@
+{
+    "id": "0e919f9c-00d1-4acd-87fc-f6c0f1de614f",
+    "type": "bugfix",
+    "description": "Handle checksum for unseekable body with 0 content length",
+    "modules": [
+        "service/internal/checksum"
+    ]
+}

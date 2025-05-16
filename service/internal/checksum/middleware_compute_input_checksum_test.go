@@ -4,6 +4,7 @@
 package checksum
 
 import (
+	"bufio"
 	"bytes"
 	"context"
 	"fmt"
@@ -239,7 +240,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 						r.URL, _ = url.Parse("https://example.aws")
 						r.ContentLength = 0
-						r = requestMust(r.SetStream(&bytes.Buffer{}))
+						r = requestMust(r.SetStream(bufio.NewReader(bytes.NewBuffer([]byte{}))))
 						return r
 					}(),
 				},
@@ -247,8 +248,8 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 					"X-Amz-Checksum-Crc32": []string{"AAAAAA=="},
 				},
 				expectContentLength: 0,
-				expectPayload:       nil,
-				expectPayloadHash:   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+				expectPayload:       []byte{},
+				// payload hash is set via a different middleware, so not checking it here
 				expectChecksumMetadata: map[string]string{
 					"CRC32": "AAAAAA==",
 				},
