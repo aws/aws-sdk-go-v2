@@ -5895,6 +5895,12 @@
                         "smithy.api#documentation": "<p>Specifies a command-separated value (CSV) data store stored in Amazon S3.</p>"
                     }
                 },
+                "S3ExcelSource": {
+                    "target": "com.amazonaws.glue#S3ExcelSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines configuration parameters for reading Excel files from Amazon S3.</p>"
+                    }
+                },
                 "S3JsonSource": {
                     "target": "com.amazonaws.glue#S3JsonSource",
                     "traits": {
@@ -5955,10 +5961,22 @@
                         "smithy.api#documentation": "<p>Specifies a data target that writes to Amazon S3 in Apache Parquet columnar storage.</p>"
                     }
                 },
+                "S3HyperDirectTarget": {
+                    "target": "com.amazonaws.glue#S3HyperDirectTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines configuration parameters for writing data to Amazon S3 using HyperDirect optimization.</p>"
+                    }
+                },
                 "S3DirectTarget": {
                     "target": "com.amazonaws.glue#S3DirectTarget",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a data target that writes to Amazon S3.</p>"
+                    }
+                },
+                "S3IcebergDirectTarget": {
+                    "target": "com.amazonaws.glue#S3IcebergDirectTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines configuration parameters for writing data to Amazon S3 as an Apache Iceberg table.</p>"
                     }
                 },
                 "ApplyMapping": {
@@ -25655,6 +25673,17 @@
                 "target": "com.amazonaws.glue#HudiTarget"
             }
         },
+        "com.amazonaws.glue#HyperTargetCompressionType": {
+            "type": "enum",
+            "members": {
+                "UNCOMPRESSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "uncompressed"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#IAMRoleArn": {
             "type": "string",
             "traits": {
@@ -25887,6 +25916,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies an Apache Iceberg data source where Iceberg tables are stored in Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergTargetCompressionType": {
+            "type": "enum",
+            "members": {
+                "GZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gzip"
+                    }
+                },
+                "LZO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lzo"
+                    }
+                },
+                "UNCOMPRESSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "uncompressed"
+                    }
+                },
+                "SNAPPY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "snappy"
+                    }
+                }
             }
         },
         "com.amazonaws.glue#IcebergTargetList": {
@@ -31822,6 +31880,9 @@
         "com.amazonaws.glue#NullableString": {
             "type": "string"
         },
+        "com.amazonaws.glue#NumberTargetPartitionsString": {
+            "type": "string"
+        },
         "com.amazonaws.glue#OAuth2ClientApplication": {
             "type": "structure",
             "members": {
@@ -32539,6 +32600,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "gzip"
+                    }
+                },
+                "BROTLI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "brotli"
+                    }
+                },
+                "LZ4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lz4"
                     }
                 },
                 "UNCOMPRESSED": {
@@ -35555,6 +35628,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "NumberTargetPartitions": {
+                    "target": "com.amazonaws.glue#NumberTargetPartitionsString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of target partitions for distributing Delta Lake dataset files across Amazon S3.</p>"
+                    }
+                },
                 "Format": {
                     "target": "com.amazonaws.glue#TargetFormat",
                     "traits": {
@@ -35687,6 +35766,12 @@
                         "smithy.api#documentation": "<p>Specifies how the data is compressed. This is generally not necessary if the data has a standard file extension. Possible values are <code>\"gzip\"</code> and <code>\"bzip\"</code>).</p>"
                     }
                 },
+                "NumberTargetPartitions": {
+                    "target": "com.amazonaws.glue#NumberTargetPartitionsString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of target partitions when writing data directly to Amazon S3.</p>"
+                    }
+                },
                 "Format": {
                     "target": "com.amazonaws.glue#TargetFormat",
                     "traits": {
@@ -35754,6 +35839,94 @@
                 }
             }
         },
+        "com.amazonaws.glue#S3ExcelSource": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 Excel data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Paths": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 paths where the Excel files are located.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompressionType": {
+                    "target": "com.amazonaws.glue#ParquetCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compression format used for the Excel files.</p>"
+                    }
+                },
+                "Exclusions": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Patterns to exclude specific files or paths from processing.</p>"
+                    }
+                },
+                "GroupSize": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the size of file groups for batch processing.</p>"
+                    }
+                },
+                "GroupFiles": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how files should be grouped for processing.</p>"
+                    }
+                },
+                "Recurse": {
+                    "target": "com.amazonaws.glue#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to recursively process subdirectories.</p>"
+                    }
+                },
+                "MaxBand": {
+                    "target": "com.amazonaws.glue#BoxedNonNegativeInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of processing bands to use.</p>"
+                    }
+                },
+                "MaxFilesInBand": {
+                    "target": "com.amazonaws.glue#BoxedNonNegativeInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of files to process in each band.</p>"
+                    }
+                },
+                "AdditionalOptions": {
+                    "target": "com.amazonaws.glue#S3DirectSourceAdditionalOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional configuration options for S3 direct source processing.</p>"
+                    }
+                },
+                "NumberRows": {
+                    "target": "com.amazonaws.glue#BoxedLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rows to process from each Excel file.</p>"
+                    }
+                },
+                "SkipFooter": {
+                    "target": "com.amazonaws.glue#BoxedNonNegativeInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rows to skip at the end of each Excel file.</p>"
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Glue schemas to apply to the processed data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an S3 Excel data source.</p>"
+            }
+        },
         "com.amazonaws.glue#S3GlueParquetTarget": {
             "type": "structure",
             "members": {
@@ -35788,6 +35961,12 @@
                     "target": "com.amazonaws.glue#ParquetCompressionType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies how the data is compressed. This is generally not necessary if the data has a standard file extension. Possible values are <code>\"gzip\"</code> and <code>\"bzip\"</code>).</p>"
+                    }
+                },
+                "NumberTargetPartitions": {
+                    "target": "com.amazonaws.glue#NumberTargetPartitionsString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of target partitions for Parquet files when writing to Amazon S3 using AWS Glue.</p>"
                     }
                 },
                 "SchemaChangePolicy": {
@@ -35887,6 +36066,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "NumberTargetPartitions": {
+                    "target": "com.amazonaws.glue#NumberTargetPartitionsString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of target partitions for distributing Hudi dataset files across Amazon S3.</p>"
+                    }
+                },
                 "PartitionKeys": {
                     "target": "com.amazonaws.glue#GlueStudioPathList",
                     "traits": {
@@ -35956,6 +36141,120 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies a Hudi data source stored in Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.glue#S3HyperDirectTarget": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the HyperDirect target node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Inputs": {
+                    "target": "com.amazonaws.glue#OneInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the input source for the HyperDirect target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartitionKeys": {
+                    "target": "com.amazonaws.glue#GlueStudioPathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the partitioning strategy for the output data.</p>"
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location where the output data will be written.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Compression": {
+                    "target": "com.amazonaws.glue#HyperTargetCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compression type to apply to the output data.</p>"
+                    }
+                },
+                "SchemaChangePolicy": {
+                    "target": "com.amazonaws.glue#DirectSchemaChangePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines how schema changes are handled during write operations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a HyperDirect data target that writes to Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.glue#S3IcebergDirectTarget": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the unique identifier for the Iceberg target node in your data pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Inputs": {
+                    "target": "com.amazonaws.glue#OneInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the single input source that provides data to this Iceberg target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartitionKeys": {
+                    "target": "com.amazonaws.glue#GlueStudioPathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the columns used to partition the Iceberg table data in S3.</p>"
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the S3 location where the Iceberg table data will be stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.glue#TargetFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the file format used for storing Iceberg table data (e.g., Parquet, ORC).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdditionalOptions": {
+                    "target": "com.amazonaws.glue#AdditionalOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional configuration options for customizing the Iceberg table behavior.</p>"
+                    }
+                },
+                "SchemaChangePolicy": {
+                    "target": "com.amazonaws.glue#DirectSchemaChangePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines how schema changes are handled when writing data to the Iceberg table.</p>"
+                    }
+                },
+                "Compression": {
+                    "target": "com.amazonaws.glue#IcebergTargetCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the compression codec used for Iceberg table files in S3.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NumberTargetPartitions": {
+                    "target": "com.amazonaws.glue#NumberTargetPartitionsString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the number of target partitions for distributing Iceberg table files across S3.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a target that writes to an Iceberg data source in Amazon S3.</p>"
             }
         },
         "com.amazonaws.glue#S3JsonSource": {
@@ -40803,6 +41102,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "delta"
+                    }
+                },
+                "ICEBERG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iceberg"
+                    }
+                },
+                "HYPER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hyper"
+                    }
+                },
+                "XML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "xml"
                     }
                 }
             }

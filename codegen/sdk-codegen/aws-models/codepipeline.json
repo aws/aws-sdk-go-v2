@@ -735,6 +735,18 @@
                 "smithy.api#documentation": "<p>Input information used for an action execution.</p>"
             }
         },
+        "com.amazonaws.codepipeline#ActionExecutionNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.codepipeline#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action execution was not found.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.codepipeline#ActionExecutionOutput": {
             "type": "structure",
             "members": {
@@ -1863,6 +1875,9 @@
                 },
                 {
                     "target": "com.amazonaws.codepipeline#ListActionTypes"
+                },
+                {
+                    "target": "com.amazonaws.codepipeline#ListDeployActionExecutionTargets"
                 },
                 {
                     "target": "com.amazonaws.codepipeline#ListPipelineExecutions"
@@ -3486,6 +3501,120 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codepipeline#DeployActionExecutionTarget": {
+            "type": "structure",
+            "members": {
+                "targetId": {
+                    "target": "com.amazonaws.codepipeline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the target for the deploy action.</p>"
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.codepipeline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of target for the deploy action.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.codepipeline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the deploy action.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.codepipeline#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time for the deploy action.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.codepipeline#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time for the deploy action.</p>"
+                    }
+                },
+                "events": {
+                    "target": "com.amazonaws.codepipeline#DeployTargetEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle events for the deploy action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target for the deploy action.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#DeployActionExecutionTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#DeployActionExecutionTarget"
+            }
+        },
+        "com.amazonaws.codepipeline#DeployTargetEvent": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.codepipeline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event for the deploy action.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.codepipeline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the event for the deploy action.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.codepipeline#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time for the event for the deploy action.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.codepipeline#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time for the event for the deploy action.</p>"
+                    }
+                },
+                "context": {
+                    "target": "com.amazonaws.codepipeline#DeployTargetEventContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context for the event for the deploy action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A lifecycle event for the deploy action.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#DeployTargetEventContext": {
+            "type": "structure",
+            "members": {
+                "ssmCommandId": {
+                    "target": "com.amazonaws.codepipeline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command ID for the event for the deploy action.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.codepipeline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context message for the event for the deploy action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The context for the event for the deploy action.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#DeployTargetEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#DeployTargetEvent"
             }
         },
         "com.amazonaws.codepipeline#DeregisterWebhookWithThirdParty": {
@@ -5424,6 +5553,97 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the output of a <code>ListActionTypes</code> action.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codepipeline#ListDeployActionExecutionTargets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codepipeline#ListDeployActionExecutionTargetsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.codepipeline#ListDeployActionExecutionTargetsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codepipeline#ActionExecutionNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codepipeline#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.codepipeline#PipelineNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codepipeline#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the targets for the deploy action.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "targets",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#ListDeployActionExecutionTargetsInput": {
+            "type": "structure",
+            "members": {
+                "pipelineName": {
+                    "target": "com.amazonaws.codepipeline#PipelineName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pipeline with the deploy action.</p>"
+                    }
+                },
+                "actionExecutionId": {
+                    "target": "com.amazonaws.codepipeline#ActionExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution ID for the deploy action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.codepipeline#TargetFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the targets for a specified deploy action.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.codepipeline#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining\n            results, make another call with the returned nextToken value.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codepipeline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that was returned from the previous list action types call, which can be\n            used to return the next set of action types in the list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codepipeline#ListDeployActionExecutionTargetsOutput": {
+            "type": "structure",
+            "members": {
+                "targets": {
+                    "target": "com.amazonaws.codepipeline#DeployActionExecutionTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The targets for the deploy action.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codepipeline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that was returned from the previous list action types call, which can be\n            used to return the next set of action types in the list.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -9584,6 +9804,57 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.codepipeline#TargetFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.codepipeline#TargetFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name on which to filter.</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.codepipeline#TargetFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values on which to filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters the list of targets.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#TargetFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#TargetFilter"
+            }
+        },
+        "com.amazonaws.codepipeline#TargetFilterName": {
+            "type": "enum",
+            "members": {
+                "TARGET_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGET_STATUS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#TargetFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#TargetFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#TargetFilterValue"
             }
         },
         "com.amazonaws.codepipeline#ThirdPartyJob": {

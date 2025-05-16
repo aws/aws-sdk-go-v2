@@ -712,6 +712,20 @@
                 }
             }
         },
+        "com.amazonaws.bedrockdataautomationruntime#AssetProcessingConfiguration": {
+            "type": "structure",
+            "members": {
+                "video": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#VideoAssetProcessingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Video asset processing configuration"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Config containing asset processing related knobs for all modalities"
+            }
+        },
         "com.amazonaws.bedrockdataautomationruntime#AutomationJobResource": {
             "type": "resource",
             "identifiers": {
@@ -1088,6 +1102,12 @@
                     "traits": {
                         "smithy.api#documentation": "S3 uri.",
                         "smithy.api#required": {}
+                    }
+                },
+                "assetProcessingConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#AssetProcessingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Asset processing configuration"
                     }
                 }
             },
@@ -1525,6 +1545,34 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.bedrockdataautomationruntime#TimestampSegment": {
+            "type": "structure",
+            "members": {
+                "startTimeMillis": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "Start timestamp in milliseconds",
+                        "smithy.api#range": {
+                            "min": 0
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "endTimeMillis": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "End timestamp in milliseconds",
+                        "smithy.api#range": {
+                            "min": 300000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Timestamp segment"
+            }
+        },
         "com.amazonaws.bedrockdataautomationruntime#UntagResource": {
             "type": "operation",
             "input": {
@@ -1592,6 +1640,34 @@
                 "smithy.api#documentation": "This exception will be thrown when customer provided invalid parameters.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#VideoAssetProcessingConfiguration": {
+            "type": "structure",
+            "members": {
+                "segmentConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#VideoSegmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Delimits the segment of the input that will be processed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Video asset processing configuration"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#VideoSegmentConfiguration": {
+            "type": "union",
+            "members": {
+                "timestampSegment": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#TimestampSegment",
+                    "traits": {
+                        "smithy.api#documentation": "Timestamp segment"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Delimits the segment of the input that will be processed"
             }
         }
     }

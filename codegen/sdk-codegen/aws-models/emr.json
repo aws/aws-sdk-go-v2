@@ -1482,6 +1482,86 @@
                 "target": "com.amazonaws.emr#Configuration"
             }
         },
+        "com.amazonaws.emr#CreatePersistentAppUI": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#CreatePersistentAppUIInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#CreatePersistentAppUIOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a persistent application user interface.</p>"
+            }
+        },
+        "com.amazonaws.emr#CreatePersistentAppUIInput": {
+            "type": "structure",
+            "members": {
+                "TargetResourceArn": {
+                    "target": "com.amazonaws.emr#ArnType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) of the target resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EMRContainersConfig": {
+                    "target": "com.amazonaws.emr#EMRContainersConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EMR containers configuration.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.emr#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags for the persistent application user interface.</p>"
+                    }
+                },
+                "XReferer": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross reference for the persistent application user interface.</p>"
+                    }
+                },
+                "ProfilerType": {
+                    "target": "com.amazonaws.emr#ProfilerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profiler type for the persistent application user interface. Valid values are SHS, TEZUI, or YTS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emr#CreatePersistentAppUIOutput": {
+            "type": "structure",
+            "members": {
+                "PersistentAppUIId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The persistent application user interface identifier.</p>"
+                    }
+                },
+                "RuntimeRoleEnabledCluster": {
+                    "target": "com.amazonaws.emr#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents if the EMR on EC2 cluster that the persisent application user interface is created for is a runtime role \n         enabled cluster or not.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.emr#CreateSecurityConfiguration": {
             "type": "operation",
             "input": {
@@ -2197,6 +2277,56 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.emr#DescribePersistentAppUI": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#DescribePersistentAppUIInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#DescribePersistentAppUIOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a persistent application user interface.</p>"
+            }
+        },
+        "com.amazonaws.emr#DescribePersistentAppUIInput": {
+            "type": "structure",
+            "members": {
+                "PersistentAppUIId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The identifier for the persistent application user interface.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emr#DescribePersistentAppUIOutput": {
+            "type": "structure",
+            "members": {
+                "PersistentAppUI": {
+                    "target": "com.amazonaws.emr#PersistentAppUI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The persistent application user interface.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.emr#DescribeReleaseLabel": {
             "type": "operation",
             "input": {
@@ -2496,6 +2626,20 @@
                 "target": "com.amazonaws.emr#InstanceId"
             }
         },
+        "com.amazonaws.emr#EMRContainersConfig": {
+            "type": "structure",
+            "members": {
+                "JobRunId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Job run ID for the container configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The EMR container configuration.</p>"
+            }
+        },
         "com.amazonaws.emr#EbsBlockDevice": {
             "type": "structure",
             "members": {
@@ -2690,6 +2834,9 @@
                     "target": "com.amazonaws.emr#CancelSteps"
                 },
                 {
+                    "target": "com.amazonaws.emr#CreatePersistentAppUI"
+                },
+                {
                     "target": "com.amazonaws.emr#CreateSecurityConfiguration"
                 },
                 {
@@ -2717,6 +2864,9 @@
                     "target": "com.amazonaws.emr#DescribeNotebookExecution"
                 },
                 {
+                    "target": "com.amazonaws.emr#DescribePersistentAppUI"
+                },
+                {
                     "target": "com.amazonaws.emr#DescribeReleaseLabel"
                 },
                 {
@@ -2739,6 +2889,12 @@
                 },
                 {
                     "target": "com.amazonaws.emr#GetManagedScalingPolicy"
+                },
+                {
+                    "target": "com.amazonaws.emr#GetOnClusterAppUIPresignedURL"
+                },
+                {
+                    "target": "com.amazonaws.emr#GetPersistentAppUIPresignedURL"
                 },
                 {
                     "target": "com.amazonaws.emr#GetStudioSessionMapping"
@@ -4216,6 +4372,166 @@
                     "target": "com.amazonaws.emr#ManagedScalingPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the managed scaling policy that is attached to an Amazon EMR cluster.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.emr#GetOnClusterAppUIPresignedURL": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#GetOnClusterAppUIPresignedURLInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#GetOnClusterAppUIPresignedURLOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The presigned URL properties for the cluster's application user interface.</p>"
+            }
+        },
+        "com.amazonaws.emr#GetOnClusterAppUIPresignedURLInput": {
+            "type": "structure",
+            "members": {
+                "ClusterId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The cluster ID associated with the cluster's application user interface presigned URL.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OnClusterAppUIType": {
+                    "target": "com.amazonaws.emr#OnClusterAppUIType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application UI type associated with the cluster's application user interface presigned URL.</p>"
+                    }
+                },
+                "ApplicationId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application ID associated with the cluster's application user interface presigned URL.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.emr#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines if the user interface presigned URL is for a dry run.</p>"
+                    }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.emr#ArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role ARN associated with the cluster's application user interface \n         presigned URL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emr#GetOnClusterAppUIPresignedURLOutput": {
+            "type": "structure",
+            "members": {
+                "PresignedURLReady": {
+                    "target": "com.amazonaws.emr#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to determine if the presigned URL is ready.</p>"
+                    }
+                },
+                "PresignedURL": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster's generated presigned URL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.emr#GetPersistentAppUIPresignedURL": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#GetPersistentAppUIPresignedURLInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#GetPersistentAppUIPresignedURLOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The presigned URL properties for the cluster's application user interface.</p>"
+            }
+        },
+        "com.amazonaws.emr#GetPersistentAppUIPresignedURLInput": {
+            "type": "structure",
+            "members": {
+                "PersistentAppUIId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The persistent application user interface ID associated with the presigned URL.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PersistentAppUIType": {
+                    "target": "com.amazonaws.emr#PersistentAppUIType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The persistent application user interface type associated with the presigned URL.</p>"
+                    }
+                },
+                "ApplicationId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application ID associated with the presigned URL.</p>"
+                    }
+                },
+                "AuthProxyCall": {
+                    "target": "com.amazonaws.emr#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean that represents if the caller is an authentication proxy call.</p>"
+                    }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.emr#ArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role ARN associated with the presigned URL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emr#GetPersistentAppUIPresignedURLOutput": {
+            "type": "structure",
+            "members": {
+                "PresignedURLReady": {
+                    "target": "com.amazonaws.emr#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to determine if the presigned URL is ready.</p>"
+                    }
+                },
+                "PresignedURL": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned presigned URL.</p>"
                     }
                 }
             },
@@ -7821,6 +8137,47 @@
                 "target": "com.amazonaws.emr#OSRelease"
             }
         },
+        "com.amazonaws.emr#OnClusterAppUIType": {
+            "type": "enum",
+            "members": {
+                "SparkHistoryServer": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SparkHistoryServer"
+                    }
+                },
+                "YarnTimelineService": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YarnTimelineService"
+                    }
+                },
+                "TezUI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TezUI"
+                    }
+                },
+                "ApplicationMaster": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ApplicationMaster"
+                    }
+                },
+                "JobHistoryServer": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JobHistoryServer"
+                    }
+                },
+                "ResourceManager": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceManager"
+                    }
+                }
+            }
+        },
         "com.amazonaws.emr#OnDemandCapacityReservationOptions": {
             "type": "structure",
             "members": {
@@ -7997,6 +8354,91 @@
                 "smithy.api#documentation": "<p>The Amazon S3 location that stores the notebook execution output.</p>"
             }
         },
+        "com.amazonaws.emr#PersistentAppUI": {
+            "type": "structure",
+            "members": {
+                "PersistentAppUIId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the persistent application user interface object.</p>"
+                    }
+                },
+                "PersistentAppUITypeList": {
+                    "target": "com.amazonaws.emr#PersistentAppUITypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type list for the persistent application user interface object. Valid values \n         include SHS, YTS, or TEZ.</p>"
+                    }
+                },
+                "PersistentAppUIStatus": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status for the persistent application user interface object.</p>"
+                    }
+                },
+                "AuthorId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The author ID for the persistent application user interface object.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date and time for the persistent application user interface object.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the persistent application user interface object was last changed.</p>"
+                    }
+                },
+                "LastStateChangeReason": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the persistent application user interface object was last changed.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.emr#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of tags for the persistent application user interface object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Holds persistent application user interface information. Applications installed on the Amazon EMR cluster publish user interfaces as \n         web sites to monitor cluster activity.</p>"
+            }
+        },
+        "com.amazonaws.emr#PersistentAppUIType": {
+            "type": "enum",
+            "members": {
+                "SHS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHS"
+                    }
+                },
+                "TEZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEZ"
+                    }
+                },
+                "YTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YTS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emr#PersistentAppUITypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emr#PersistentAppUIType"
+            }
+        },
         "com.amazonaws.emr#PlacementGroupConfig": {
             "type": "structure",
             "members": {
@@ -8109,6 +8551,29 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.emr#PortRange"
+            }
+        },
+        "com.amazonaws.emr#ProfilerType": {
+            "type": "enum",
+            "members": {
+                "SHS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHS"
+                    }
+                },
+                "TEZUI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEZUI"
+                    }
+                },
+                "YTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YTS"
+                    }
+                }
             }
         },
         "com.amazonaws.emr#PutAutoScalingPolicy": {

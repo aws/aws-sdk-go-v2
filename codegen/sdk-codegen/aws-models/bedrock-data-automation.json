@@ -3022,6 +3022,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AUDIO"
                     }
+                },
+                "VIDEO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO"
+                    }
                 }
             },
             "traits": {

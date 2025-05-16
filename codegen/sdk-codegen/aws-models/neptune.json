@@ -397,6 +397,9 @@
                 },
                 {
                     "target": "com.amazonaws.neptune#StopDBCluster"
+                },
+                {
+                    "target": "com.amazonaws.neptune#SwitchoverGlobalCluster"
                 }
             ],
             "traits": {
@@ -1688,7 +1691,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage type for the DB cluster.</p>"
+                        "smithy.api#documentation": "<p>The pending change in storage type for the DB cluster.   Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>standard</code>\n                  </b>   –  \n        ( <i>the default</i> ) Configures cost-effective database storage for applications\n        with moderate to small I/O usage.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>iopt1</code>\n                  </b>   –  \n          Enables <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage\">I/O-Optimized storage</a>\n          that's designed to meet the needs of I/O-intensive graph workloads that\n          require predictable pricing with low I/O latency and consistent I/O throughput.</p>\n               <p>Neptune I/O-Optimized storage is only available starting with engine release 1.3.0.0.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AllocatedStorage": {
@@ -1700,7 +1703,7 @@
                 "Iops": {
                     "target": "com.amazonaws.neptune#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Provisioned IOPS (I/O operations per second) value. This setting is only for non-Aurora Multi-AZ DB clusters.</p>"
+                        "smithy.api#documentation": "<p>The Provisioned IOPS (I/O operations per second) value. This setting is only for Multi-AZ DB clusters.</p>"
                     }
                 }
             },
@@ -2229,7 +2232,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the database engine to use for the new DB cluster.</p>\n         <p>Example: <code>1.0.2.1</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The version number of the database engine to use for the new DB cluster.</p>\n         <p>Example: <code>1.2.1.0</code>\n         </p>"
                     }
                 },
                 "Port": {
@@ -2331,7 +2334,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>standard | iopt1</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>standard</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>When you create a Neptune cluster with the storage type set to <code>iopt1</code>, the storage type is returned\n        in the response. The storage type isn't returned when you set it to <code>standard</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The storage type for the new DB cluster.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>standard</code>\n                  </b>   –  \n        ( <i>the default</i> ) Configures cost-effective database storage for applications\n        with moderate to small I/O usage. When set to <code>standard</code>, the storage type\n        is not returned in the response.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>iopt1</code>\n                  </b>   –  \n          Enables <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage\">I/O-Optimized storage</a>\n          that's designed to meet the needs of I/O-intensive graph workloads that\n          require predictable pricing with low I/O latency and consistent I/O throughput.</p>\n               <p>Neptune I/O-Optimized storage is only available starting with engine release 1.3.0.0.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2728,7 +2731,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the storage type to be associated with the DB instance.</p>\n         <p>Not applicable. Storage is managed by the DB Cluster.</p>"
+                        "smithy.api#documentation": "<p>Not applicable. In Neptune the storage type is managed at the DB Cluster level.</p>"
                     }
                 },
                 "TdeCredentialArn": {
@@ -3443,7 +3446,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage type associated with the DB cluster.</p>"
+                        "smithy.api#documentation": "<p>The storage type used by the DB cluster.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>standard</code>\n                  </b>   –  \n        ( <i>the default</i> ) Provides cost-effective database storage for applications\n        with moderate to small I/O usage.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>iopt1</code>\n                  </b>   –  \n          Enables <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage\">I/O-Optimized storage</a>\n          that's designed to meet the needs of I/O-intensive graph workloads that\n          require predictable pricing with low I/O latency and consistent I/O throughput.</p>\n               <p>Neptune I/O-Optimized storage is only available starting with engine release 1.3.0.0.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3574,7 +3577,7 @@
                 "Marker": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> An optional pagination token provided by a previous\n      <code>DescribeDBClusterEndpoints</code> request.\n      If this parameter is specified, the response includes\n      only records beyond the marker,\n      up to the value specified by <code>MaxRecords</code>.\n    </p>"
+                        "smithy.api#documentation": "<p> n optional pagination token provided by a previous\n      <code>DescribeDBClusterEndpoints</code> request.\n      If this parameter is specified, the response includes\n      only records beyond the marker,\n      up to the value specified by <code>MaxRecords</code>.</p>"
                     }
                 },
                 "DBClusterEndpoints": {
@@ -4537,7 +4540,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the storage type associated with DB instance.</p>"
+                        "smithy.api#documentation": "<p>Specifies the storage type associated with the DB instance.</p>"
                     }
                 },
                 "TdeCredentialArn": {
@@ -5787,13 +5790,13 @@
                 "MaxRecords": {
                     "target": "com.amazonaws.neptune#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of records to include in the response.\n      If more records exist than the specified <code>MaxRecords</code> value,\n      a pagination token called a marker is included in the response so you can retrieve the remaining results.\n    </p>\n         <p>Default: 100</p>\n         <p>Constraints: Minimum 20, maximum 100.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response.\n      If more records exist than the specified <code>MaxRecords</code> value,\n      a pagination token called a marker is included in the response\n      so you can retrieve the remaining results.</p>\n         <p>Default: 100</p>\n         <p>Constraints: Minimum 20, maximum 100.</p>"
                     }
                 },
                 "Marker": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> An optional pagination token provided by a previous\n      <code>DescribeDBClusterEndpoints</code> request.\n      If this parameter is specified, the response includes\n      only records beyond the marker,\n      up to the value specified by <code>MaxRecords</code>.\n    </p>"
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n      <code>DescribeDBClusterEndpoints</code> request.\n      If this parameter is specified, the response includes\n      only records beyond the marker,\n      up to the value specified by <code>MaxRecords</code>.</p>"
                     }
                 }
             },
@@ -7569,6 +7572,18 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secondary Neptune DB cluster\n      that you want to promote to primary for the global database.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AllowDataLoss": {
+                    "target": "com.amazonaws.neptune#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to allow data loss for this global database cluster operation.\n      Allowing data loss triggers a global failover operation.</p>\n         <p>If you don't specify <code>AllowDataLoss</code>, the global database cluster operation\n      defaults to a switchover.</p>\n         <p>Constraints:Can't be specified together with the <code>Switchover</code> parameter.</p>"
+                    }
+                },
+                "Switchover": {
+                    "target": "com.amazonaws.neptune#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to switch over this global database cluster.</p>\n         <p>Constraints:Can't be specified together with the <code>AllowDataLoss</code> parameter.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7584,6 +7599,61 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.neptune#FailoverState": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.neptune#FailoverStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the global cluster. Possible values are as follows:</p>\n         <ul>\n            <li>\n               <p>pending  The service received a request to switch over or fail over the global cluster. The\n          global cluster's primary DB cluster and the specified secondary DB cluster are being verified before the operation\n          starts.</p>\n            </li>\n            <li>\n               <p>failing-over  Neptune is promoting the chosen secondary Neptune DB cluster to become the new primary DB cluster to fail over the global cluster.</p>\n            </li>\n            <li>\n               <p>cancelling  The request to switch over or fail over the global cluster was cancelled and the primary\n          Neptune DB cluster and the selected secondary Neptune DB cluster are returning to their previous states.</p>\n            </li>\n            <li>\n               <p>switching-over  This status covers the range of Neptune internal operations that take place during the switchover process, such\n          as demoting the primary Neptune DB cluster, promoting the secondary Neptune DB cluster, and synchronizing replicas.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FromDbClusterArn": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Neptune DB cluster that is currently being demoted, and which is associated with this\n      state.</p>"
+                    }
+                },
+                "ToDbClusterArn": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Neptune DB cluster that is currently being promoted, and which is associated\n      with this state.</p>"
+                    }
+                },
+                "IsDataLossAllowed": {
+                    "target": "com.amazonaws.neptune#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the operation is a global switchover or a global failover. If data loss is allowed, then the operation is a global failover.\n      Otherwise, it's a switchover.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the state of scheduled or in-process operations on a\n      global cluster (Neptune global database). This data type is empty unless a switchover\n      or failover operation is scheduled or is in progress on the Neptune global database.</p>"
+            }
+        },
+        "com.amazonaws.neptune#FailoverStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "FAILING_OVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failing-over"
+                    }
+                },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cancelling"
+                    }
+                }
             }
         },
         "com.amazonaws.neptune#Filter": {
@@ -7683,6 +7753,12 @@
                     "target": "com.amazonaws.neptune#GlobalClusterMemberList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of cluster ARNs and instance ARNs for all the DB clusters\n        that are part of the global database.</p>"
+                    }
+                },
+                "FailoverState": {
+                    "target": "com.amazonaws.neptune#FailoverState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A data object containing all properties for the current state of an in-process or pending switchover or failover process for this global cluster (Neptune global database).\n      This object is empty unless the <code>SwitchoverGlobalCluster</code> or <code>FailoverGlobalCluster</code> operation was called on this global cluster.</p>"
                     }
                 }
             },
@@ -8571,7 +8647,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>standard | iopt1</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>standard</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>standard</code>\n                  </b>   –  \n        ( <i>the default</i> ) Configures cost-effective database storage for applications\n        with moderate to small I/O usage.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>iopt1</code>\n                  </b>   –  \n          Enables <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage\">I/O-Optimized storage</a>\n          that's designed to meet the needs of I/O-intensive graph workloads that\n          require predictable pricing with low I/O latency and consistent I/O throughput.</p>\n               <p>Neptune I/O-Optimized storage is only available starting with engine release 1.3.0.0.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -8894,7 +8970,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Not supported.</p>"
+                        "smithy.api#documentation": "<p>Not applicable. In Neptune the storage type is managed at the DB Cluster level.</p>"
                     }
                 },
                 "TdeCredentialArn": {
@@ -9387,7 +9463,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the storage type for a DB instance.</p>"
+                        "smithy.api#documentation": "<p>Not applicable. In Neptune the storage type is managed at the DB Cluster level.</p>"
                     }
                 },
                 "SupportsIops": {
@@ -9735,7 +9811,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the storage type to be associated with the DB instance.</p>"
+                        "smithy.api#documentation": "<p>Not applicable. In Neptune the storage type is managed at the DB Cluster level.</p>"
                     }
                 },
                 "CACertificateIdentifier": {
@@ -11196,6 +11272,67 @@
                 }
             }
         },
+        "com.amazonaws.neptune#SwitchoverGlobalCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptune#SwitchoverGlobalClusterMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.neptune#SwitchoverGlobalClusterResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptune#DBClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#GlobalClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#InvalidDBClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#InvalidGlobalClusterStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Switches over the specified secondary DB cluster to be the new primary DB cluster in the global\n      database cluster. Switchover operations were previously called \"managed planned failovers.\"</p>\n         <p>Promotes the specified secondary cluster to assume full read/write capabilities and demotes the current\n      primary cluster to a secondary (read-only) cluster, maintaining the original replication topology. All secondary\n      clusters are synchronized with the primary at the beginning of the process so the new primary continues operations\n      for the global database without losing any data. Your database is unavailable for a short time while the primary\n      and selected secondary clusters are assuming their new roles.</p>\n         <note>\n            <p>This operation is intended for controlled environments, for operations such as \"regional rotation\" or\n      to fall back to the original primary after a global database failover.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.neptune#SwitchoverGlobalClusterMessage": {
+            "type": "structure",
+            "members": {
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The identifier of the global database cluster to switch over. This parameter isn't case-sensitive.</p>\n         <p>Constraints: Must match the identifier of an existing global database cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetDbClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secondary Neptune DB cluster that you want to promote to primary for\n      the global database.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptune#SwitchoverGlobalClusterResult": {
+            "type": "structure",
+            "members": {
+                "GlobalCluster": {
+                    "target": "com.amazonaws.neptune#GlobalCluster"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.neptune#TStamp": {
             "type": "timestamp"
         },
@@ -11320,30 +11457,30 @@
                 "StorageType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The valid storage types for your DB instance. For example, gp2, io1.</p>"
+                        "smithy.api#documentation": "<p>Not applicable. In Neptune the storage type is managed at the DB Cluster level.</p>"
                     }
                 },
                 "StorageSize": {
                     "target": "com.amazonaws.neptune#RangeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The valid range of storage in gibibytes. For example, 100 to 16384.</p>"
+                        "smithy.api#documentation": "<p>Not applicable. In Neptune the storage type is managed at the DB Cluster level.</p>"
                     }
                 },
                 "ProvisionedIops": {
                     "target": "com.amazonaws.neptune#RangeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The valid range of provisioned IOPS. For example, 1000-20000.</p>"
+                        "smithy.api#documentation": "<p>Not applicable. In Neptune the storage type is managed at the DB Cluster level.</p>"
                     }
                 },
                 "IopsToStorageRatio": {
                     "target": "com.amazonaws.neptune#DoubleRangeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The valid range of Provisioned IOPS to gibibytes of storage multiplier. For example, 3-10,\n      which means that provisioned IOPS can be between 3 and 10 times storage.</p>"
+                        "smithy.api#documentation": "<p>Not applicable. In Neptune the storage type is managed at the DB Cluster level.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about valid modifications that you can make to your DB\n      instance.</p>\n         <p>Contains the result of a successful call to the <a>DescribeValidDBInstanceModifications</a> action.</p>"
+                "smithy.api#documentation": "<p>Not applicable. In Neptune the storage type is managed at the DB Cluster level.</p>"
             }
         },
         "com.amazonaws.neptune#ValidStorageOptionsList": {

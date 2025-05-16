@@ -150,6 +150,66 @@
                 "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,128}$"
             }
         },
+        "com.amazonaws.servicequotas#CreateSupportCase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicequotas#CreateSupportCaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.servicequotas#CreateSupportCaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicequotas#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#DependencyAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#InvalidResourceStateException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#NoSuchResourceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Support case for an existing quota increase request. This call only creates \n            a Support case if the request has a <code>Pending</code> status. </p>"
+            }
+        },
+        "com.amazonaws.servicequotas#CreateSupportCaseRequest": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.servicequotas#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the pending quota increase request for which you want to open a Support case. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicequotas#CreateSupportCaseResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.servicequotas#CustomerServiceEngagementId": {
             "type": "string"
         },
@@ -2299,6 +2359,9 @@
             "operations": [
                 {
                     "target": "com.amazonaws.servicequotas#AssociateServiceQuotaTemplate"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#CreateSupportCase"
                 },
                 {
                     "target": "com.amazonaws.servicequotas#DeleteServiceQuotaIncreaseRequestFromTemplate"
