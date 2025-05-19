@@ -69,24 +69,12 @@ type GetClusterOutput struct {
 	// This member is required.
 	Status types.ClusterStatus
 
-	// The ARNs of the clusters linked to the retrieved cluster.
-	//
-	// Deprecated: The linkedClusterArns field is deprecated. To see the peered
-	// cluster Arns, use multiRegionProperties.cluster instead.
-	LinkedClusterArns []string
-
 	// Returns the current multi-Region cluster configuration, including witness
 	// region and linked cluster information.
 	MultiRegionProperties *types.MultiRegionProperties
 
 	// Map of tags.
 	Tags map[string]string
-
-	// The witness Region of the cluster. Applicable only for multi-Region clusters.
-	//
-	// Deprecated: The witnessRegion field is deprecated. To see the witnessRegion,
-	// use multiRegionProperties.witnessRegion instead.
-	WitnessRegion *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

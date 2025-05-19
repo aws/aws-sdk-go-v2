@@ -12,25 +12,32 @@ import (
 	"time"
 )
 
-// This operation creates a cluster in Amazon Aurora DSQL. You need the following
-// permissions to use this operation.
+// The CreateCluster API allows you to create both single-region clusters and
+// multi-Region clusters. With the addition of the multiRegionProperties parameter,
+// you can create a cluster with witness Region support and establish peer
+// relationships with clusters in other Regions during creation.
 //
-// Permission to create a cluster.
+// Creating multi-Region clusters requires additional IAM permissions beyond those
+// needed for single-Region clusters, as detailed in the Required permissions
+// section below.
 //
-// dsql:CreateCluster Resources: arn:aws:dsql:region:account-id:cluster/*
+// # Required permissions
 //
-// Permission to add tags to a resource.
+// dsql:CreateCluster Required to create a cluster.
 //
-// dsql:TagResource Resources: arn:aws:dsql:region:account-id:cluster/*
+// Resources: arn:aws:dsql:region:account-id:cluster/*
 //
-// Permission to configure multi-region properties for a cluster.
+// dsql:TagResource Permission to add tags to a resource.
 //
-// dsql:PutMultiRegionProperties Resources:
-// arn:aws:dsql:region:account-id:cluster/*
+// Resources: arn:aws:dsql:region:account-id:cluster/*
 //
-// When specifying multiRegionProperties.clusters.
+// dsql:PutMultiRegionProperties Permission to configure multi-region properties
+// for a cluster.
 //
-// dsql:AddPeerCluster Permission to add peer clusters.
+// Resources: arn:aws:dsql:region:account-id:cluster/*
+//
+// dsql:AddPeerCluster When specifying multiRegionProperties.clusters , permission
+// to add peer clusters.
 //
 // Resources:
 //
@@ -38,23 +45,16 @@ import (
 //
 //   - Each peer cluster: exact ARN of each specified peer cluster
 //
-// When specifying multiRegionProperties.witnessRegion.
-//
-// dsql:PutWitnessRegion Permission to set a witness region.
+// dsql:PutWitnessRegion When specifying multiRegionProperties.witnessRegion ,
+// permission to set a witness Region. This permission is checked both in the
+// cluster Region and in the witness Region.
 //
 // Resources: arn:aws:dsql:region:account-id:cluster/*
 //
 // Condition Keys: dsql:WitnessRegion (matching the specified witness region)
 //
-// This permission is checked both in the cluster Region and in the witness Region.
-//
-// Important Notes for Multi-Region Operations
-//
-//   - The witness region specified in multiRegionProperties.witnessRegion cannot
+//   - The witness Region specified in multiRegionProperties.witnessRegion cannot
 //     be the same as the cluster's Region.
-//
-//   - When updating clusters with peer relationships, permissions are checked for
-//     both adding and removing peers.
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
 		params = &CreateClusterInput{}

@@ -74,35 +74,11 @@ func TestCheckSnapshot_CreateCluster(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_CreateMultiRegionClusters(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.CreateMultiRegionClusters(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "CreateMultiRegionClusters")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_DeleteCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteCluster")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckSnapshot_DeleteMultiRegionClusters(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DeleteMultiRegionClusters(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "DeleteMultiRegionClusters")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -205,35 +181,11 @@ func TestUpdateSnapshot_CreateCluster(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_CreateMultiRegionClusters(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.CreateMultiRegionClusters(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "CreateMultiRegionClusters")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_DeleteCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCluster")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_DeleteMultiRegionClusters(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DeleteMultiRegionClusters(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "DeleteMultiRegionClusters")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

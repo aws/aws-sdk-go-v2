@@ -61,15 +61,6 @@ type DeleteClusterOutput struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// Specifies whether deletion protection was enabled on the cluster.
-	//
-	// This member is required.
-	//
-	// Deprecated: The deletionProtectionEnabled field is deprecated in the
-	// DeleteCluster API. To check deletion protection status, use the GetCluster API
-	// instead.
-	DeletionProtectionEnabled *bool
-
 	// The ID of the deleted cluster.
 	//
 	// This member is required.

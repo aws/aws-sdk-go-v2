@@ -115,106 +115,6 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 	return nil
 }
 
-type awsRestjson1_serializeOpCreateMultiRegionClusters struct {
-}
-
-func (*awsRestjson1_serializeOpCreateMultiRegionClusters) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpCreateMultiRegionClusters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	_, span := tracing.StartSpan(ctx, "OperationSerializer")
-	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
-	defer endTimer()
-	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*CreateMultiRegionClustersInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/multi-region-clusters")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "POST"
-	var restEncoder *httpbinding.Encoder
-	if request.URL.RawPath == "" {
-		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	} else {
-		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
-		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
-	}
-
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentCreateMultiRegionClustersInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	endTimer()
-	span.End()
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsCreateMultiRegionClustersInput(v *CreateMultiRegionClustersInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentCreateMultiRegionClustersInput(v *CreateMultiRegionClustersInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.ClientToken != nil {
-		ok := object.Key("clientToken")
-		ok.String(*v.ClientToken)
-	}
-
-	if v.ClusterProperties != nil {
-		ok := object.Key("clusterProperties")
-		if err := awsRestjson1_serializeDocumentClusterPropertyMap(v.ClusterProperties, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.LinkedRegionList != nil {
-		ok := object.Key("linkedRegionList")
-		if err := awsRestjson1_serializeDocumentRegionList(v.LinkedRegionList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.WitnessRegion != nil {
-		ok := object.Key("witnessRegion")
-		ok.String(*v.WitnessRegion)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpDeleteCluster struct {
 }
 
@@ -284,78 +184,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteClusterInput(v *DeleteClusterInpu
 	if v.Identifier != nil {
 		if err := encoder.SetURI("identifier").String(*v.Identifier); err != nil {
 			return err
-		}
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpDeleteMultiRegionClusters struct {
-}
-
-func (*awsRestjson1_serializeOpDeleteMultiRegionClusters) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpDeleteMultiRegionClusters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	_, span := tracing.StartSpan(ctx, "OperationSerializer")
-	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
-	defer endTimer()
-	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*DeleteMultiRegionClustersInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/multi-region-clusters")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "DELETE"
-	var restEncoder *httpbinding.Encoder
-	if request.URL.RawPath == "" {
-		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	} else {
-		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
-		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
-	}
-
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeOpHttpBindingsDeleteMultiRegionClustersInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	endTimer()
-	span.End()
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsDeleteMultiRegionClustersInput(v *DeleteMultiRegionClustersInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.ClientToken != nil {
-		encoder.SetQuery("client-token").String(*v.ClientToken)
-	}
-
-	if v.LinkedClusterArns != nil {
-		for i := range v.LinkedClusterArns {
-			encoder.AddQuery("linked-cluster-arns").String(v.LinkedClusterArns[i])
 		}
 	}
 
@@ -935,39 +763,6 @@ func awsRestjson1_serializeDocumentClusterArnList(v []string, value smithyjson.V
 	return nil
 }
 
-func awsRestjson1_serializeDocumentClusterPropertyMap(v map[string]types.LinkedClusterProperties, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	for key := range v {
-		om := object.Key(key)
-		mapVar := v[key]
-		if err := awsRestjson1_serializeDocumentLinkedClusterProperties(&mapVar, om); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func awsRestjson1_serializeDocumentLinkedClusterProperties(v *types.LinkedClusterProperties, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.DeletionProtectionEnabled != nil {
-		ok := object.Key("deletionProtectionEnabled")
-		ok.Boolean(*v.DeletionProtectionEnabled)
-	}
-
-	if v.Tags != nil {
-		ok := object.Key("tags")
-		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
 func awsRestjson1_serializeDocumentMultiRegionProperties(v *types.MultiRegionProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -984,17 +779,6 @@ func awsRestjson1_serializeDocumentMultiRegionProperties(v *types.MultiRegionPro
 		ok.String(*v.WitnessRegion)
 	}
 
-	return nil
-}
-
-func awsRestjson1_serializeDocumentRegionList(v []string, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		av.String(v[i])
-	}
 	return nil
 }
 

@@ -22,18 +22,6 @@ type ClusterSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Properties of linked clusters.
-type LinkedClusterProperties struct {
-
-	// Whether deletion protection is enabled.
-	DeletionProtectionEnabled *bool
-
-	// A map of key and value pairs the linked cluster is tagged with.
-	Tags map[string]string
-
-	noSmithyDocumentSerde
-}
-
 // Defines the structure for multi-Region cluster configurations, containing the
 // witness region and linked cluster settings.
 type MultiRegionProperties struct {

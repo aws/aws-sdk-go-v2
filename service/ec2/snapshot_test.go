@@ -914,6 +914,18 @@ func TestCheckSnapshot_CreateDefaultVpc(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDelegateMacVolumeOwnershipTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDelegateMacVolumeOwnershipTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDelegateMacVolumeOwnershipTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDhcpOptions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDhcpOptions(context.Background(), nil, func(o *Options) {
@@ -1195,6 +1207,18 @@ func TestCheckSnapshot_CreateLocalGatewayVirtualInterfaceGroup(t *testing.T) {
 	_, err := svc.CreateLocalGatewayVirtualInterfaceGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateLocalGatewayVirtualInterfaceGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateMacSystemIntegrityProtectionModificationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMacSystemIntegrityProtectionModificationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateMacSystemIntegrityProtectionModificationTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3883,6 +3907,18 @@ func TestCheckSnapshot_DescribeMacHosts(t *testing.T) {
 	_, err := svc.DescribeMacHosts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeMacHosts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeMacModificationTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMacModificationTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeMacModificationTasks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9085,6 +9121,18 @@ func TestUpdateSnapshot_CreateDefaultVpc(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateDelegateMacVolumeOwnershipTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDelegateMacVolumeOwnershipTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDelegateMacVolumeOwnershipTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDhcpOptions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDhcpOptions(context.Background(), nil, func(o *Options) {
@@ -9366,6 +9414,18 @@ func TestUpdateSnapshot_CreateLocalGatewayVirtualInterfaceGroup(t *testing.T) {
 	_, err := svc.CreateLocalGatewayVirtualInterfaceGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateLocalGatewayVirtualInterfaceGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateMacSystemIntegrityProtectionModificationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMacSystemIntegrityProtectionModificationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateMacSystemIntegrityProtectionModificationTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12054,6 +12114,18 @@ func TestUpdateSnapshot_DescribeMacHosts(t *testing.T) {
 	_, err := svc.DescribeMacHosts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeMacHosts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeMacModificationTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMacModificationTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeMacModificationTasks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

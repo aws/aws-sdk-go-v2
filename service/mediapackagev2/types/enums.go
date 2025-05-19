@@ -99,6 +99,25 @@ func (ContainerType) Values() []ContainerType {
 	}
 }
 
+type DashCompactness string
+
+// Enum values for DashCompactness
+const (
+	DashCompactnessStandard DashCompactness = "STANDARD"
+	DashCompactnessNone     DashCompactness = "NONE"
+)
+
+// Values returns all known values for DashCompactness. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashCompactness) Values() []DashCompactness {
+	return []DashCompactness{
+		"STANDARD",
+		"NONE",
+	}
+}
+
 type DashDrmSignaling string
 
 // Enum values for DashDrmSignaling
@@ -143,6 +162,23 @@ func (DashPeriodTrigger) Values() []DashPeriodTrigger {
 	}
 }
 
+type DashProfile string
+
+// Enum values for DashProfile
+const (
+	DashProfileDvbDash DashProfile = "DVB_DASH"
+)
+
+// Values returns all known values for DashProfile. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashProfile) Values() []DashProfile {
+	return []DashProfile{
+		"DVB_DASH",
+	}
+}
+
 type DashSegmentTemplateFormat string
 
 // Enum values for DashSegmentTemplateFormat
@@ -157,6 +193,25 @@ const (
 func (DashSegmentTemplateFormat) Values() []DashSegmentTemplateFormat {
 	return []DashSegmentTemplateFormat{
 		"NUMBER_WITH_TIMELINE",
+	}
+}
+
+type DashTtmlProfile string
+
+// Enum values for DashTtmlProfile
+const (
+	DashTtmlProfileImsc1     DashTtmlProfile = "IMSC_1"
+	DashTtmlProfileEbuTtD101 DashTtmlProfile = "EBU_TT_D_101"
+)
+
+// Values returns all known values for DashTtmlProfile. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashTtmlProfile) Values() []DashTtmlProfile {
+	return []DashTtmlProfile{
+		"IMSC_1",
+		"EBU_TT_D_101",
 	}
 }
 
@@ -473,6 +528,10 @@ const (
 	ValidationExceptionTypeStartTagTimeOffsetInvalid                             ValidationExceptionType = "START_TAG_TIME_OFFSET_INVALID"
 	ValidationExceptionTypeOnlyCmafInputTypeAllowMqcsInputSwitching              ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING"
 	ValidationExceptionTypeOnlyCmafInputTypeAllowMqcsOutputConfiguration         ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION"
+	ValidationExceptionTypeIncompatibleDashProfileDvbDashConfiguration           ValidationExceptionType = "INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION"
+	ValidationExceptionTypeDashDvbAttributesWithoutDvbDashProfile                ValidationExceptionType = "DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE"
+	ValidationExceptionTypeIncompatibleDashCompactnessConfiguration              ValidationExceptionType = "INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION"
+	ValidationExceptionTypeIncompatibleXmlEncoding                               ValidationExceptionType = "INCOMPATIBLE_XML_ENCODING"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -540,5 +599,9 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"START_TAG_TIME_OFFSET_INVALID",
 		"ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING",
 		"ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION",
+		"INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION",
+		"DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE",
+		"INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION",
+		"INCOMPATIBLE_XML_ENCODING",
 	}
 }

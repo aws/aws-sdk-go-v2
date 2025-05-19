@@ -714,6 +714,21 @@ func validateCreateDashManifestConfiguration(v *types.CreateDashManifestConfigur
 	if v.ManifestName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManifestName"))
 	}
+	if v.BaseUrls != nil {
+		if err := validateDashBaseUrls(v.BaseUrls); err != nil {
+			invalidParams.AddNested("BaseUrls", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DvbSettings != nil {
+		if err := validateDashDvbSettings(v.DvbSettings); err != nil {
+			invalidParams.AddNested("DvbSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SubtitleConfiguration != nil {
+		if err := validateDashSubtitleConfiguration(v.SubtitleConfiguration); err != nil {
+			invalidParams.AddNested("SubtitleConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -804,6 +819,119 @@ func validateCreateLowLatencyHlsManifests(v []types.CreateLowLatencyHlsManifestC
 		if err := validateCreateLowLatencyHlsManifestConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDashBaseUrl(v *types.DashBaseUrl) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DashBaseUrl"}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDashBaseUrls(v []types.DashBaseUrl) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DashBaseUrls"}
+	for i := range v {
+		if err := validateDashBaseUrl(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDashDvbErrorMetrics(v []types.DashDvbMetricsReporting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DashDvbErrorMetrics"}
+	for i := range v {
+		if err := validateDashDvbMetricsReporting(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDashDvbMetricsReporting(v *types.DashDvbMetricsReporting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DashDvbMetricsReporting"}
+	if v.ReportingUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportingUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDashDvbSettings(v *types.DashDvbSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DashDvbSettings"}
+	if v.ErrorMetrics != nil {
+		if err := validateDashDvbErrorMetrics(v.ErrorMetrics); err != nil {
+			invalidParams.AddNested("ErrorMetrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDashSubtitleConfiguration(v *types.DashSubtitleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DashSubtitleConfiguration"}
+	if v.TtmlConfiguration != nil {
+		if err := validateDashTtmlConfiguration(v.TtmlConfiguration); err != nil {
+			invalidParams.AddNested("TtmlConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDashTtmlConfiguration(v *types.DashTtmlConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DashTtmlConfiguration"}
+	if len(v.TtmlProfile) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TtmlProfile"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

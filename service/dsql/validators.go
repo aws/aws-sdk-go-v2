@@ -9,26 +9,6 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-type validateOpCreateMultiRegionClusters struct {
-}
-
-func (*validateOpCreateMultiRegionClusters) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCreateMultiRegionClusters) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CreateMultiRegionClustersInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCreateMultiRegionClustersInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDeleteCluster struct {
 }
 
@@ -44,26 +24,6 @@ func (m *validateOpDeleteCluster) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteClusterInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDeleteMultiRegionClusters struct {
-}
-
-func (*validateOpDeleteMultiRegionClusters) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDeleteMultiRegionClusters) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DeleteMultiRegionClustersInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDeleteMultiRegionClustersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -189,16 +149,8 @@ func (m *validateOpUpdateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
-func addOpCreateMultiRegionClustersValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateMultiRegionClusters{}, middleware.After)
-}
-
 func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCluster{}, middleware.After)
-}
-
-func addOpDeleteMultiRegionClustersValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteMultiRegionClusters{}, middleware.After)
 }
 
 func addOpGetClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -225,24 +177,6 @@ func addOpUpdateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCluster{}, middleware.After)
 }
 
-func validateOpCreateMultiRegionClustersInput(v *CreateMultiRegionClustersInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateMultiRegionClustersInput"}
-	if v.LinkedRegionList == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LinkedRegionList"))
-	}
-	if v.WitnessRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WitnessRegion"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpDeleteClusterInput(v *DeleteClusterInput) error {
 	if v == nil {
 		return nil
@@ -250,21 +184,6 @@ func validateOpDeleteClusterInput(v *DeleteClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteClusterInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDeleteMultiRegionClustersInput(v *DeleteMultiRegionClustersInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteMultiRegionClustersInput"}
-	if v.LinkedClusterArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LinkedClusterArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

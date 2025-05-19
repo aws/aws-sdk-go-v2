@@ -98,8 +98,25 @@ type CreateDashManifestConfiguration struct {
 	// This member is required.
 	ManifestName *string
 
+	// The base URLs to use for retrieving segments.
+	BaseUrls []DashBaseUrl
+
+	// The layout of the DASH manifest that MediaPackage produces. STANDARD indicates
+	// a default manifest, which is compacted. NONE indicates a full manifest.
+	//
+	// For information about compactness, see [DASH manifest compactness] in the Elemental MediaPackage v2 User
+	// Guide.
+	//
+	// [DASH manifest compactness]: https://docs.aws.amazon.com/mediapackage/latest/userguide/compacted.html
+	Compactness DashCompactness
+
 	// Determines how the DASH manifest signals the DRM content.
 	DrmSignaling DashDrmSignaling
+
+	// For endpoints that use the DVB-DASH profile only. The font download and error
+	// reporting information that you want MediaPackage to pass through to the
+	// manifest.
+	DvbSettings *DashDvbSettings
 
 	// Filter configuration includes settings for manifest filtering, start and end
 	// times, and time delay that apply to all of your egress requests for this
@@ -127,6 +144,13 @@ type CreateDashManifestConfiguration struct {
 	// [Multi-period DASH in AWS Elemental MediaPackage]: https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html
 	PeriodTriggers []DashPeriodTrigger
 
+	// The profile that the output is compliant with.
+	Profiles []DashProfile
+
+	// Details about the content that you want MediaPackage to pass through in the
+	// manifest to the playback device.
+	ProgramInformation *DashProgramInformation
+
 	// The SCTE configuration.
 	ScteDash *ScteDash
 
@@ -140,6 +164,9 @@ type CreateDashManifestConfiguration struct {
 	//   value of this variable is the sequential number of the segment. A full
 	//   SegmentTimeline object is presented in each SegmentTemplate .
 	SegmentTemplateFormat DashSegmentTemplateFormat
+
+	// The configuration for DASH subtitles.
+	SubtitleConfiguration *DashSubtitleConfiguration
 
 	// The amount of time (in seconds) that the player should be from the end of the
 	// manifest.
@@ -260,6 +287,131 @@ type CreateLowLatencyHlsManifestConfiguration struct {
 	//
 	// [Amazon Web Services Signature Version 4 for API requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html
 	UrlEncodeChildManifest *bool
+
+	noSmithyDocumentSerde
+}
+
+// The base URLs to use for retrieving segments. You can specify multiple
+// locations and indicate the priority and weight for when each should be used, for
+// use in mutli-CDN workflows.
+type DashBaseUrl struct {
+
+	// A source location for segments.
+	//
+	// This member is required.
+	Url *string
+
+	// For use with DVB-DASH profiles only. The priority of this location for servings
+	// segments. The lower the number, the higher the priority.
+	DvbPriority *int32
+
+	// For use with DVB-DASH profiles only. The weighting for source locations that
+	// have the same priority.
+	DvbWeight *int32
+
+	// The name of the source location.
+	ServiceLocation *string
+
+	noSmithyDocumentSerde
+}
+
+// For use with DVB-DASH profiles only. The settings for font downloads that you
+// want Elemental MediaPackage to pass through to the manifest.
+type DashDvbFontDownload struct {
+
+	// The fontFamily name for subtitles, as described in [EBU-TT-D Subtitling Distribution Format].
+	//
+	// [EBU-TT-D Subtitling Distribution Format]: https://tech.ebu.ch/publications/tech3380
+	FontFamily *string
+
+	// The mimeType of the resource that's at the font download URL.
+	//
+	// For information about font MIME types, see the [MPEG-DASH Profile for Transport of ISO BMFF Based DVB Services over IP Based Networks] document.
+	//
+	// [MPEG-DASH Profile for Transport of ISO BMFF Based DVB Services over IP Based Networks]: https://dvb.org/wp-content/uploads/2021/06/A168r4_MPEG-DASH-Profile-for-Transport-of-ISO-BMFF-Based-DVB-Services_Draft-ts_103-285-v140_November_2021.pdf
+	MimeType *string
+
+	// The URL for downloading fonts for subtitles.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// For use with DVB-DASH profiles only. The settings for error reporting from the
+// playback device that you want Elemental MediaPackage to pass through to the
+// manifest.
+type DashDvbMetricsReporting struct {
+
+	// The URL where playback devices send error reports.
+	//
+	// This member is required.
+	ReportingUrl *string
+
+	// The number of playback devices per 1000 that will send error reports to the
+	// reporting URL. This represents the probability that a playback device will be a
+	// reporting player for this session.
+	Probability *int32
+
+	noSmithyDocumentSerde
+}
+
+// For endpoints that use the DVB-DASH profile only. The font download and error
+// reporting information that you want MediaPackage to pass through to the
+// manifest.
+type DashDvbSettings struct {
+
+	// Playback device error reporting settings.
+	ErrorMetrics []DashDvbMetricsReporting
+
+	// Subtitle font settings.
+	FontDownload *DashDvbFontDownload
+
+	noSmithyDocumentSerde
+}
+
+// Details about the content that you want MediaPackage to pass through in the
+// manifest to the playback device.
+type DashProgramInformation struct {
+
+	// A copyright statement about the content.
+	Copyright *string
+
+	// The language code for this manifest.
+	LanguageCode *string
+
+	// An absolute URL that contains more information about this content.
+	MoreInformationUrl *string
+
+	// Information about the content provider.
+	Source *string
+
+	// The title for the manifest.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for DASH subtitles.
+type DashSubtitleConfiguration struct {
+
+	// Settings for TTML subtitles.
+	TtmlConfiguration *DashTtmlConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The settings for TTML subtitles.
+type DashTtmlConfiguration struct {
+
+	// The profile that MediaPackage uses when signaling subtitles in the manifest.
+	// IMSC is the default profile. EBU-TT-D produces subtitles that are compliant
+	// with the EBU-TT-D TTML profile. MediaPackage passes through subtitle styles to
+	// the manifest. For more information about EBU-TT-D subtitles, see [EBU-TT-D Subtitling Distribution Format].
+	//
+	// [EBU-TT-D Subtitling Distribution Format]: https://tech.ebu.ch/publications/tech3380
+	//
+	// This member is required.
+	TtmlProfile DashTtmlProfile
 
 	noSmithyDocumentSerde
 }
@@ -478,8 +630,20 @@ type GetDashManifestConfiguration struct {
 	// This member is required.
 	Url *string
 
+	// The base URL to use for retrieving segments.
+	BaseUrls []DashBaseUrl
+
+	// The layout of the DASH manifest that MediaPackage produces. STANDARD indicates
+	// a default manifest, which is compacted. NONE indicates a full manifest.
+	Compactness DashCompactness
+
 	// Determines how the DASH manifest signals the DRM content.
 	DrmSignaling DashDrmSignaling
+
+	// For endpoints that use the DVB-DASH profile only. The font download and error
+	// reporting information that you want MediaPackage to pass through to the
+	// manifest.
+	DvbSettings *DashDvbSettings
 
 	// Filter configuration includes settings for manifest filtering, start and end
 	// times, and time delay that apply to all of your egress requests for this
@@ -505,6 +669,13 @@ type GetDashManifestConfiguration struct {
 	// [Multi-period DASH in AWS Elemental MediaPackage]: https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html
 	PeriodTriggers []DashPeriodTrigger
 
+	// The profile that the output is compliant with.
+	Profiles []DashProfile
+
+	// Details about the content that you want MediaPackage to pass through in the
+	// manifest to the playback device.
+	ProgramInformation *DashProgramInformation
+
 	// The SCTE configuration.
 	ScteDash *ScteDash
 
@@ -518,6 +689,9 @@ type GetDashManifestConfiguration struct {
 	//   value of this variable is the sequential number of the segment. A full
 	//   SegmentTimeline object is presented in each SegmentTemplate .
 	SegmentTemplateFormat DashSegmentTemplateFormat
+
+	// The configuration for DASH subtitles.
+	SubtitleConfiguration *DashSubtitleConfiguration
 
 	// The amount of time (in seconds) that the player should be from the end of the
 	// manifest.
