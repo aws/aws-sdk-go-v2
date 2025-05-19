@@ -13,6 +13,8 @@ import (
 
 // Lists networks. Add filters to your request to return a more specific list of
 // results. Use filters to match the status of the network.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListNetworks(ctx context.Context, params *ListNetworksInput, optFns ...func(*Options)) (*ListNetworksOutput, error) {
 	if params == nil {
 		params = &ListNetworksInput{}
@@ -38,12 +40,16 @@ type ListNetworksInput struct {
 	// Filter values are case sensitive. If you specify multiple values for a filter,
 	// the values are joined with an OR , and the request returns all results that
 	// match any of the specified values.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters map[string][]string
 
 	// The maximum number of results to return.
 	MaxResults *int32
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartToken *string
 
 	noSmithyDocumentSerde
@@ -52,9 +58,13 @@ type ListNetworksInput struct {
 type ListNetworksOutput struct {
 
 	// The networks.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Networks []types.Network
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

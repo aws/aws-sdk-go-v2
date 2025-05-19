@@ -12,6 +12,8 @@ import (
 )
 
 // Gets the specified device identifier.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetDeviceIdentifier(ctx context.Context, params *GetDeviceIdentifierInput, optFns ...func(*Options)) (*GetDeviceIdentifierOutput, error) {
 	if params == nil {
 		params = &GetDeviceIdentifierInput{}
@@ -32,6 +34,8 @@ type GetDeviceIdentifierInput struct {
 	// The Amazon Resource Name (ARN) of the device identifier.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceIdentifierArn *string
 
 	noSmithyDocumentSerde
@@ -40,9 +44,13 @@ type GetDeviceIdentifierInput struct {
 type GetDeviceIdentifierOutput struct {
 
 	// Information about the device identifier.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceIdentifier *types.DeviceIdentifier
 
 	//  The device identifier tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

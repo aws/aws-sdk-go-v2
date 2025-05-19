@@ -12,6 +12,8 @@ import (
 )
 
 // Gets the specified network resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetNetworkResource(ctx context.Context, params *GetNetworkResourceInput, optFns ...func(*Options)) (*GetNetworkResourceOutput, error) {
 	if params == nil {
 		params = &GetNetworkResourceInput{}
@@ -32,6 +34,8 @@ type GetNetworkResourceInput struct {
 	// The Amazon Resource Name (ARN) of the network resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkResourceArn *string
 
 	noSmithyDocumentSerde
@@ -42,9 +46,13 @@ type GetNetworkResourceOutput struct {
 	// Information about the network resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkResource *types.NetworkResource
 
 	//  The network resource tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

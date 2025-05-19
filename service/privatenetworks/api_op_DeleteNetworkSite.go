@@ -15,6 +15,8 @@ import (
 // network site. You are responsible for minimum charges. For more information, see
 // [Hardware returns]in the Amazon Web Services Private 5G User Guide.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Hardware returns]: https://docs.aws.amazon.com/private-networks/latest/userguide/hardware-maintenance.html
 func (c *Client) DeleteNetworkSite(ctx context.Context, params *DeleteNetworkSiteInput, optFns ...func(*Options)) (*DeleteNetworkSiteOutput, error) {
 	if params == nil {
@@ -36,12 +38,16 @@ type DeleteNetworkSiteInput struct {
 	// The Amazon Resource Name (ARN) of the network site.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSiteArn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see [How to ensure idempotency].
 	//
 	// [How to ensure idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -50,6 +56,8 @@ type DeleteNetworkSiteInput struct {
 type DeleteNetworkSiteOutput struct {
 
 	// Information about the network site.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSite *types.NetworkSite
 
 	// Metadata pertaining to the operation's result.

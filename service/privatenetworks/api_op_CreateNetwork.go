@@ -12,6 +12,8 @@ import (
 )
 
 // Creates a network.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateNetwork(ctx context.Context, params *CreateNetworkInput, optFns ...func(*Options)) (*CreateNetworkOutput, error) {
 	if params == nil {
 		params = &CreateNetworkInput{}
@@ -32,18 +34,26 @@ type CreateNetworkInput struct {
 	// The name of the network. You can't change the name after you create the network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkName *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see [How to ensure idempotency].
 	//
 	// [How to ensure idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The description of the network.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	//  The tags to apply to the network.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -54,9 +64,13 @@ type CreateNetworkOutput struct {
 	// Information about the network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Network *types.Network
 
 	//  The network tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

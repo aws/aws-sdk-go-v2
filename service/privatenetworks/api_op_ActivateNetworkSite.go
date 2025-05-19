@@ -12,6 +12,8 @@ import (
 )
 
 // Activates the specified network site.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ActivateNetworkSite(ctx context.Context, params *ActivateNetworkSiteInput, optFns ...func(*Options)) (*ActivateNetworkSiteOutput, error) {
 	if params == nil {
 		params = &ActivateNetworkSiteInput{}
@@ -32,17 +34,23 @@ type ActivateNetworkSiteInput struct {
 	// The Amazon Resource Name (ARN) of the network site.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSiteArn *string
 
 	// The shipping address of the network site.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ShippingAddress *types.Address
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see [How to ensure idempotency].
 	//
 	// [How to ensure idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// Determines the duration and renewal status of the commitment period for all
@@ -63,6 +71,8 @@ type ActivateNetworkSiteInput struct {
 	// action, the commitment period is set to 60-days.
 	//
 	// [Amazon Web Services Private 5G Pricing]: http://aws.amazon.com/private5g/pricing
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommitmentConfiguration *types.CommitmentConfiguration
 
 	noSmithyDocumentSerde
@@ -71,6 +81,8 @@ type ActivateNetworkSiteInput struct {
 type ActivateNetworkSiteOutput struct {
 
 	// Information about the network site.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSite *types.NetworkSite
 
 	// Metadata pertaining to the operation's result.

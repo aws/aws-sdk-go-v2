@@ -12,6 +12,8 @@ import (
 )
 
 // Deactivates the specified device identifier.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeactivateDeviceIdentifier(ctx context.Context, params *DeactivateDeviceIdentifierInput, optFns ...func(*Options)) (*DeactivateDeviceIdentifierOutput, error) {
 	if params == nil {
 		params = &DeactivateDeviceIdentifierInput{}
@@ -32,12 +34,16 @@ type DeactivateDeviceIdentifierInput struct {
 	// The Amazon Resource Name (ARN) of the device identifier.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceIdentifierArn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see [How to ensure idempotency].
 	//
 	// [How to ensure idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -48,6 +54,8 @@ type DeactivateDeviceIdentifierOutput struct {
 	// Information about the device identifier.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceIdentifier *types.DeviceIdentifier
 
 	// Metadata pertaining to the operation's result.

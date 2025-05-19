@@ -8,4 +8,6 @@
 // location. Private 5G provides the pre-configured hardware and software for
 // mobile networks, helps automate setup, and scales capacity on demand to support
 // additional devices as needed.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package privatenetworks

@@ -17,6 +17,8 @@ import (
 //
 // If you specify multiple filters, filters are joined with an OR, and the request
 // returns results that match all of the specified filters.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListOrders(ctx context.Context, params *ListOrdersInput, optFns ...func(*Options)) (*ListOrdersOutput, error) {
 	if params == nil {
 		params = &ListOrdersInput{}
@@ -37,6 +39,8 @@ type ListOrdersInput struct {
 	// The Amazon Resource Name (ARN) of the network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkArn *string
 
 	// The filters.
@@ -48,12 +52,16 @@ type ListOrdersInput struct {
 	// Filter values are case sensitive. If you specify multiple values for a filter,
 	// the values are joined with an OR , and the request returns all results that
 	// match any of the specified values.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters map[string][]string
 
 	// The maximum number of results to return.
 	MaxResults *int32
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartToken *string
 
 	noSmithyDocumentSerde
@@ -62,9 +70,13 @@ type ListOrdersInput struct {
 type ListOrdersOutput struct {
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Information about the orders.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Orders []types.Order
 
 	// Metadata pertaining to the operation's result.

@@ -18,6 +18,8 @@ import (
 // that we can obtain spectrum grants. For more information, see [Radio units]in the Amazon Web
 // Services Private 5G User Guide.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Radio units]: https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html
 func (c *Client) ConfigureAccessPoint(ctx context.Context, params *ConfigureAccessPointInput, optFns ...func(*Options)) (*ConfigureAccessPointOutput, error) {
 	if params == nil {
@@ -39,24 +41,36 @@ type ConfigureAccessPointInput struct {
 	// The Amazon Resource Name (ARN) of the network resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AccessPointArn *string
 
 	// A Base64 encoded string of the CPI certificate associated with the CPI user who
 	// is certifying the coordinates of the network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CpiSecretKey *string
 
 	// The CPI user ID of the CPI user who is certifying the coordinates of the
 	// network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CpiUserId *string
 
 	// The CPI password associated with the CPI certificate in cpiSecretKey .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CpiUserPassword *string
 
 	// The CPI user name of the CPI user who is certifying the coordinates of the
 	// radio unit.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CpiUsername *string
 
 	// The position of the network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Position *types.Position
 
 	noSmithyDocumentSerde
@@ -67,6 +81,8 @@ type ConfigureAccessPointOutput struct {
 	// Information about the network resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AccessPoint *types.NetworkResource
 
 	// Metadata pertaining to the operation's result.

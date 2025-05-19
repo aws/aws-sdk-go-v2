@@ -12,6 +12,8 @@ import (
 )
 
 // Gets the specified order.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetOrder(ctx context.Context, params *GetOrderInput, optFns ...func(*Options)) (*GetOrderOutput, error) {
 	if params == nil {
 		params = &GetOrderInput{}
@@ -32,6 +34,8 @@ type GetOrderInput struct {
 	// The Amazon Resource Name (ARN) of the order.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OrderArn *string
 
 	noSmithyDocumentSerde
@@ -42,9 +46,13 @@ type GetOrderOutput struct {
 	// Information about the order.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Order *types.Order
 
 	//  The order tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

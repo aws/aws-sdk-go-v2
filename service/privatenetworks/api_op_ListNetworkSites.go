@@ -13,6 +13,8 @@ import (
 
 // Lists network sites. Add filters to your request to return a more specific list
 // of results. Use filters to match the status of the network site.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListNetworkSites(ctx context.Context, params *ListNetworkSitesInput, optFns ...func(*Options)) (*ListNetworkSitesOutput, error) {
 	if params == nil {
 		params = &ListNetworkSitesInput{}
@@ -33,6 +35,8 @@ type ListNetworkSitesInput struct {
 	// The Amazon Resource Name (ARN) of the network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkArn *string
 
 	// The filters. Add filters to your request to return a more specific list of
@@ -44,12 +48,16 @@ type ListNetworkSitesInput struct {
 	// Filter values are case sensitive. If you specify multiple values for a filter,
 	// the values are joined with an OR , and the request returns all results that
 	// match any of the specified values.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters map[string][]string
 
 	// The maximum number of results to return.
 	MaxResults *int32
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartToken *string
 
 	noSmithyDocumentSerde
@@ -58,9 +66,13 @@ type ListNetworkSitesInput struct {
 type ListNetworkSitesOutput struct {
 
 	// Information about the network sites.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSites []types.NetworkSite
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
