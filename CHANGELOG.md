@@ -1,3 +1,9 @@
+# Release (2025-05-19.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/privatenetworks`: [v1.15.0](service/privatenetworks/CHANGELOG.md#v1150-2025-05-192)
+  * **Feature**: Mark service/privatenetworks as deprecated. This service is no longer available for use.
+
 # Release (2025-05-19)
 
 ## Module Highlights

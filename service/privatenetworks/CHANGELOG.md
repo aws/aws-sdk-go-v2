@@ -1,3 +1,7 @@
+# v1.15.0 (2025-05-19.2)
+
+* **Feature**: Mark service/privatenetworks as deprecated. This service is no longer available for use.
+
 # v1.14.2 (2025-04-03)
 
 * No change notes available for this release.

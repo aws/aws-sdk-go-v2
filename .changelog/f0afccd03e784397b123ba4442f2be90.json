@@ -1,8 +1,0 @@
-{
-    "id": "f0afccd0-3e78-4397-b123-ba4442f2be90",
-    "type": "feature",
-    "description": "Mark service/privatenetworks as deprecated. This service is no longer available for use.",
-    "modules": [
-        "service/privatenetworks"
-    ]
-}
