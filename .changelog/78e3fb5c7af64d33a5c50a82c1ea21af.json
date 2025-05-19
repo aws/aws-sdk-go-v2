@@ -1,8 +1,0 @@
-{
-    "id": "78e3fb5c-7af6-4d33-a5c5-0a82c1ea21af",
-    "type": "feature",
-    "description": "CreateMultiRegionCluster and DeleteMultiRegionCluster APIs removed",
-    "modules": [
-        "service/dsql"
-    ]
-}

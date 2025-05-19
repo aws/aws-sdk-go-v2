@@ -1,3 +1,13 @@
+# Release (2025-05-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.4.0](service/dsql/CHANGELOG.md#v140-2025-05-19)
+  * **Feature**: CreateMultiRegionCluster and DeleteMultiRegionCluster APIs removed
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.219.0](service/ec2/CHANGELOG.md#v12190-2025-05-19)
+  * **Feature**: This release includes new APIs for System Integrity Protection (SIP) configuration and automated root volume ownership delegation for EC2 Mac instances.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.23.0](service/mediapackagev2/CHANGELOG.md#v1230-2025-05-19)
+  * **Feature**: This release adds support for DVB-DASH, EBU-TT-D subtitle format, and non-compacted manifests for DASH in MediaPackage v2 Origin Endpoints.
+
 # Release (2025-05-16)
 
 ## Module Highlights

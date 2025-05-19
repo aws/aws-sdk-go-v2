@@ -1,3 +1,7 @@
+# v1.23.0 (2025-05-19)
+
+* **Feature**: This release adds support for DVB-DASH, EBU-TT-D subtitle format, and non-compacted manifests for DASH in MediaPackage v2 Origin Endpoints.
+
 # v1.22.2 (2025-04-03)
 
 * No change notes available for this release.

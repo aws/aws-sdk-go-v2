@@ -1,8 +1,0 @@
-{
-    "id": "f5392d59-b2b5-4158-bb9a-ba5b73308530",
-    "type": "feature",
-    "description": "This release adds support for DVB-DASH, EBU-TT-D subtitle format, and non-compacted manifests for DASH in MediaPackage v2 Origin Endpoints.",
-    "modules": [
-        "service/mediapackagev2"
-    ]
-}

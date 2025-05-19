@@ -1,3 +1,7 @@
+# v1.4.0 (2025-05-19)
+
+* **Feature**: CreateMultiRegionCluster and DeleteMultiRegionCluster APIs removed
+
 # v1.3.0 (2025-05-13)
 
 * **Feature**: CreateMultiRegionClusters and DeleteMultiRegionClusters APIs marked as deprecated. Introduced new multi-Region clusters creation experience through multiRegionProperties parameter in CreateCluster API.
