@@ -81,6 +81,7 @@ type directoryUploader struct {
 
 	filesUploaded int
 	filesFailed   int
+	traversed     map[string]interface{}
 
 	err error
 
@@ -100,22 +101,45 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 	if u.in.Recursive {
 		u.traverse(u.in.Source, u.in.KeyPrefix, ch)
 	} else {
-		files, _, err := u.traverseFolder(u.in.Source)
+		files, err := u.traverseFolder(u.in.Source)
 		if err != nil {
 			return nil, err
 		}
 
 		for _, f := range files {
-			filePath := filepath.Join(u.in.Source, f)
-			if u.in.Filter != nil && !u.in.Filter.FilterFile(filePath) {
+			path := filepath.Join(u.in.Source, f)
+			if u.in.Filter != nil && !u.in.Filter.FilterFile(path) {
 				continue
 			}
-			key, err := u.mapKeyFromPath(f, u.in.KeyPrefix)
-			if err != nil {
-				u.setErr(err)
-				break
+			if u.in.S3Delimiter != "/" && strings.Contains(f, u.in.S3Delimiter) {
+				return nil, fmt.Errorf("file %s contains delimiter %s", f, u.in.S3Delimiter)
 			}
-			ch <- fileChunk{key: key, path: filePath}
+			fileInfo, err := os.Lstat(path)
+			if err != nil {
+				return nil, err
+			}
+			if fileInfo.Mode()&os.ModeSymlink == os.ModeSymlink {
+				if !u.in.FollowSymbolicLinks {
+					continue
+				}
+				path, err = u.traverseSymlink(path)
+				if err != nil {
+					return nil, err
+				}
+				fileInfo, err = os.Lstat(path)
+				if err != nil {
+					return nil, err
+				}
+			}
+
+			if fileInfo.IsDir() {
+				continue
+			}
+			if u.traversed[path] != nil {
+				return nil, fmt.Errorf("traversed duplicate path %s", path)
+			}
+			u.traversed[path] = struct{}{}
+			ch <- fileChunk{u.in.KeyPrefix + u.in.S3Delimiter + f, path}
 		}
 	}
 	close(ch)
@@ -134,9 +158,6 @@ func (u *directoryUploader) init() {
 	if u.in.S3Delimiter == "" {
 		u.in.S3Delimiter = "/"
 	}
-	if u.in.KeyPrefix != "" && !strings.HasSuffix(u.in.KeyPrefix, u.in.S3Delimiter) {
-		u.in.KeyPrefix = u.in.KeyPrefix + u.in.S3Delimiter
-	}
 }
 
 type fileChunk struct {
@@ -144,63 +165,109 @@ type fileChunk struct {
 	path string
 }
 
-source b/
-a/b/c -> d/e/ folder
-	 d/e/f	file key a/c/f
-	 d/e/g/ folder 
-	 d/e/g/h file key a/b/c/g/h
-	
-	
-
-func (u *directoryUploader) traverse(folderPath, keyPrefix string, ch chan fileChunk) {
+func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileChunk) {
 	if u.getErr() != nil {
 		return
 	}
-	files, directories, err := u.traverseFolder(folderPath)
+
+	fileInfo, err := os.Lstat(path)
+	if err != nil {
+		u.setErr(err)
+		return
+	}
+	absPath := path
+	if fileInfo.Mode()&os.ModeSymlink == os.ModeSymlink {
+		if !u.in.FollowSymbolicLinks {
+			return
+		}
+		absPath, err = u.traverseSymlink(absPath)
+		if err != nil {
+			u.setErr(err)
+			return
+		}
+	}
+
+	if u.traversed[absPath] != nil {
+		u.setErr(fmt.Errorf("traversed duplicate path: %s", absPath))
+		return
+	}
+	u.traversed[absPath] = struct{}{}
+
+	fileInfo, err = os.Lstat(absPath)
 	if err != nil {
 		u.setErr(err)
 		return
 	}
 
-	for _, f := range files {
-		filePath := filepath.Join(folderPath, f)
-		if u.in.Filter != nil && !u.in.Filter.FilterFile(filePath) {
-			continue
-		}
-		key, err := u.mapKeyFromPath(f, keyPrefix)
+	if path == u.in.Source {
+		key := keyPrefix
+	} else {
+		key := keyPrefix + u.in.S3Delimiter + filepath.Base(path)
+	}
+	if fileInfo.IsDir() {
+		subFiles, err := u.traverseFolder(absPath)
 		if err != nil {
 			u.setErr(err)
-			break
+			return
 		}
-		ch <- fileChunk{key: key, path: filePath}
-	}
-
-	for _, d := range directories {
-		u.traverse(filepath.Join(folderPath, d), keyPrefix+d+u.in.S3Delimiter, ch)
+		for _, f := range subFiles {
+			u.traverse(path+f, key, ch)
+		}
+	} else {
+		if u.in.Filter != nil && !u.in.Filter.FilterFile(absPath) {
+			return
+		}
+		if u.in.S3Delimiter != "/" {
+			if n, d := fileInfo.Name(), u.in.S3Delimiter; strings.Contains(n, d) {
+				u.setErr(fmt.Errorf("file %s contains delimiter %s", n, d))
+				return
+			}
+		}
+		ch <- fileChunk{key, absPath}
 	}
 }
 
-func (u *directoryUploader) traverseFolder(path string) (files, directories []string, err error) {
-	f, e := os.Open(path)
-	if e != nil {
-		err = e
-		return
+func (u *directoryUploader) traverseFolder(path string) ([]string, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		return []string{}, err
 	}
-	subFiles, e := f.Readdir(0)
-	if e != nil {
-		err = e
-		return
+	subFiles, err := f.Readdir(0)
+	if err != nil {
+		return []string{}, err
 	}
 
+	files := []string{}
 	for _, v := range subFiles {
-		if v.IsDir() {
-			directories = append(directories, v.Name())
-		} else {
-			files = append(files, v.Name())
-		}
+		files = append(files, v.Name())
 	}
 
-	return
+	return files, nil
+}
+
+func (u *directoryUploader) traverseSymlink(path string) (string, error) {
+	for {
+		dst, err := os.Readlink(path)
+		if err != nil {
+			return "", err
+		}
+		if filepath.IsAbs(dst) {
+			path = dst
+		} else {
+			path = filepath.Join(filepath.Dir(path), dst)
+		}
+		if u.traversed[path] != nil {
+			return "", fmt.Errorf("traversed duplicate path: %s", path)
+		}
+		fileInfo, err := os.Lstat(path)
+		if err != nil {
+			return "", err
+		}
+		if fileInfo.Mode()&os.ModeSymlink != os.ModeSymlink {
+			return path, nil
+		}
+		u.traversed[path] = struct{}{}
+	}
 }
 
 func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileChunk) {
