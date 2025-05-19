@@ -12,6 +12,8 @@ import (
 )
 
 // Gets the specified network.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetNetwork(ctx context.Context, params *GetNetworkInput, optFns ...func(*Options)) (*GetNetworkOutput, error) {
 	if params == nil {
 		params = &GetNetworkInput{}
@@ -32,6 +34,8 @@ type GetNetworkInput struct {
 	// The Amazon Resource Name (ARN) of the network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkArn *string
 
 	noSmithyDocumentSerde
@@ -42,9 +46,13 @@ type GetNetworkOutput struct {
 	// Information about the network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Network *types.Network
 
 	//  The network tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

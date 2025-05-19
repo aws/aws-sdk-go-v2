@@ -20,7 +20,8 @@ public class DeprecateService implements GoIntegration {
             "com.amazonaws.nimble#nimble",
             "com.amazonaws.iot1clickdevicesservice#IoT1ClickDevicesService",
             "com.amazonaws.iot1clickprojects#AWSIoT1ClickProjects",
-            "com.amazonaws.elasticinference#EC2MatterhornCfSoothsayerApiGatewayLambda"
+            "com.amazonaws.elasticinference#EC2MatterhornCfSoothsayerApiGatewayLambda",
+	    "com.amazonaws.privatenetworks#E5GNetworkControllerLambda"
     );
 
     @Override

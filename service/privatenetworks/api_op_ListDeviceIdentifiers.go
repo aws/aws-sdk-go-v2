@@ -17,6 +17,8 @@ import (
 //
 // If you specify multiple filters, filters are joined with an OR, and the request
 // returns results that match all of the specified filters.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListDeviceIdentifiers(ctx context.Context, params *ListDeviceIdentifiersInput, optFns ...func(*Options)) (*ListDeviceIdentifiersOutput, error) {
 	if params == nil {
 		params = &ListDeviceIdentifiersInput{}
@@ -37,6 +39,8 @@ type ListDeviceIdentifiersInput struct {
 	// The Amazon Resource Name (ARN) of the network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkArn *string
 
 	// The filters.
@@ -50,12 +54,16 @@ type ListDeviceIdentifiersInput struct {
 	// Filter values are case sensitive. If you specify multiple values for a filter,
 	// the values are joined with an OR , and the request returns all results that
 	// match any of the specified values.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters map[string][]string
 
 	// The maximum number of results to return.
 	MaxResults *int32
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartToken *string
 
 	noSmithyDocumentSerde
@@ -64,9 +72,13 @@ type ListDeviceIdentifiersInput struct {
 type ListDeviceIdentifiersOutput struct {
 
 	// Information about the device identifiers.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceIdentifiers []types.DeviceIdentifier
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

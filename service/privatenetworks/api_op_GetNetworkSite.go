@@ -12,6 +12,8 @@ import (
 )
 
 // Gets the specified network site.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetNetworkSite(ctx context.Context, params *GetNetworkSiteInput, optFns ...func(*Options)) (*GetNetworkSiteOutput, error) {
 	if params == nil {
 		params = &GetNetworkSiteInput{}
@@ -32,6 +34,8 @@ type GetNetworkSiteInput struct {
 	// The Amazon Resource Name (ARN) of the network site.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSiteArn *string
 
 	noSmithyDocumentSerde
@@ -40,9 +44,13 @@ type GetNetworkSiteInput struct {
 type GetNetworkSiteOutput struct {
 
 	// Information about the network site.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSite *types.NetworkSite
 
 	//  The network site tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

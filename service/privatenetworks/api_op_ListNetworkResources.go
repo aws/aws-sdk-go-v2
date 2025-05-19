@@ -17,6 +17,8 @@ import (
 //
 // If you specify multiple filters, filters are joined with an OR, and the request
 // returns results that match all of the specified filters.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListNetworkResources(ctx context.Context, params *ListNetworkResourcesInput, optFns ...func(*Options)) (*ListNetworkResourcesOutput, error) {
 	if params == nil {
 		params = &ListNetworkResourcesInput{}
@@ -37,6 +39,8 @@ type ListNetworkResourcesInput struct {
 	// The Amazon Resource Name (ARN) of the network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkArn *string
 
 	// The filters.
@@ -49,12 +53,16 @@ type ListNetworkResourcesInput struct {
 	// Filter values are case sensitive. If you specify multiple values for a filter,
 	// the values are joined with an OR , and the request returns all results that
 	// match any of the specified values.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters map[string][]string
 
 	// The maximum number of results to return.
 	MaxResults *int32
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartToken *string
 
 	noSmithyDocumentSerde
@@ -63,9 +71,13 @@ type ListNetworkResourcesInput struct {
 type ListNetworkResourcesOutput struct {
 
 	// Information about network resources.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkResources []types.NetworkResource
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -12,6 +12,8 @@ import (
 )
 
 // Acknowledges that the specified network order was received.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) AcknowledgeOrderReceipt(ctx context.Context, params *AcknowledgeOrderReceiptInput, optFns ...func(*Options)) (*AcknowledgeOrderReceiptOutput, error) {
 	if params == nil {
 		params = &AcknowledgeOrderReceiptInput{}
@@ -32,6 +34,8 @@ type AcknowledgeOrderReceiptInput struct {
 	// The Amazon Resource Name (ARN) of the order.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OrderArn *string
 
 	noSmithyDocumentSerde
@@ -42,6 +46,8 @@ type AcknowledgeOrderReceiptOutput struct {
 	// Information about the order.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Order *types.Order
 
 	// Metadata pertaining to the operation's result.

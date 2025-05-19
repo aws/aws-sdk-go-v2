@@ -26,6 +26,8 @@ import (
 // the network resource is successfully returned, its status changes to DELETED .
 // For more information, see [Return a radio unit].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Return a radio unit]: https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit
 func (c *Client) StartNetworkResourceUpdate(ctx context.Context, params *StartNetworkResourceUpdateInput, optFns ...func(*Options)) (*StartNetworkResourceUpdateOutput, error) {
 	if params == nil {
@@ -47,6 +49,8 @@ type StartNetworkResourceUpdateInput struct {
 	// The Amazon Resource Name (ARN) of the network resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkResourceArn *string
 
 	// The update type.
@@ -64,6 +68,8 @@ type StartNetworkResourceUpdateInput struct {
 	// [commitmentConfiguration]: https://docs.aws.amazon.com/private-networks/latest/APIReference/API_StartNetworkResourceUpdate.html#privatenetworks-StartNetworkResourceUpdate-request-commitmentConfiguration
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdateType types.UpdateType
 
 	// Use this action to extend and automatically renew the commitment period for the
@@ -90,6 +96,8 @@ type StartNetworkResourceUpdateInput struct {
 	// For pricing, see [Amazon Web Services Private 5G Pricing].
 	//
 	// [Amazon Web Services Private 5G Pricing]: http://aws.amazon.com/private5g/pricing
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommitmentConfiguration *types.CommitmentConfiguration
 
 	// The reason for the return. Providing a reason for a return is optional.
@@ -98,6 +106,8 @@ type StartNetworkResourceUpdateInput struct {
 	// The shipping address. If you don't provide a shipping address when replacing or
 	// returning a network resource, we use the address from the original order for the
 	// network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ShippingAddress *types.Address
 
 	noSmithyDocumentSerde
@@ -106,6 +116,8 @@ type StartNetworkResourceUpdateInput struct {
 type StartNetworkResourceUpdateOutput struct {
 
 	// The network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkResource *types.NetworkResource
 
 	// Metadata pertaining to the operation's result.

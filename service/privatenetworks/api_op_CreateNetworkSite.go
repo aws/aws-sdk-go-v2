@@ -12,6 +12,8 @@ import (
 )
 
 // Creates a network site.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateNetworkSite(ctx context.Context, params *CreateNetworkSiteInput, optFns ...func(*Options)) (*CreateNetworkSiteOutput, error) {
 	if params == nil {
 		params = &CreateNetworkSiteInput{}
@@ -32,11 +34,15 @@ type CreateNetworkSiteInput struct {
 	// The Amazon Resource Name (ARN) of the network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkArn *string
 
 	// The name of the site. You can't change the name after you create the site.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSiteName *string
 
 	// The Availability Zone that is the parent of this site. You can't change the
@@ -51,15 +57,23 @@ type CreateNetworkSiteInput struct {
 	// the request. For more information, see [How to ensure idempotency].
 	//
 	// [How to ensure idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The description of the site.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Information about the pending plan for this site.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PendingPlan *types.SitePlan
 
 	//  The tags to apply to the network site.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -68,9 +82,13 @@ type CreateNetworkSiteInput struct {
 type CreateNetworkSiteOutput struct {
 
 	// Information about the network site.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSite *types.NetworkSite
 
 	//  The network site tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

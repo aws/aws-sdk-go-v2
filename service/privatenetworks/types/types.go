@@ -13,46 +13,68 @@ type Address struct {
 	// The city for this address.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	City *string
 
 	// The country for this address.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Country *string
 
 	// The recipient's name for this address.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The postal code for this address.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PostalCode *string
 
 	// The state or province for this address.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StateOrProvince *string
 
 	// The first line of the street address.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Street1 *string
 
 	// The company name for this address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Company *string
 
 	// The recipient's email address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EmailAddress *string
 
 	// The recipient's phone number.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PhoneNumber *string
 
 	// The second line of the street address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Street2 *string
 
 	// The third line of the street address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Street3 *string
 
 	noSmithyDocumentSerde
@@ -95,6 +117,8 @@ type CommitmentConfiguration struct {
 	// 60-day, 1-year, or 3-year period.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommitmentLength CommitmentLength
 
 	noSmithyDocumentSerde
@@ -107,14 +131,20 @@ type CommitmentInformation struct {
 	// The duration and renewal status of the commitment period for the radio unit.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommitmentConfiguration *CommitmentConfiguration
 
 	// The date and time that the commitment period ends. If you do not cancel or
 	// renew the commitment before the expiration date, you will be billed at the
 	// 60-day-commitment rate.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExpiresOn *time.Time
 
 	// The date and time that the commitment period started.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartAt *time.Time
 
 	noSmithyDocumentSerde
@@ -124,19 +154,27 @@ type CommitmentInformation struct {
 type DeviceIdentifier struct {
 
 	// The creation time of this device identifier.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The Amazon Resource Name (ARN) of the device identifier.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceIdentifierArn *string
 
 	// The Integrated Circuit Card Identifier of the device identifier.
 	Iccid *string
 
 	// The International Mobile Subscriber Identity of the device identifier.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Imsi *string
 
 	// The Amazon Resource Name (ARN) of the network on which the device identifier
 	// appears.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkArn *string
 
 	// The Amazon Resource Name (ARN) of the order used to purchase the device
@@ -144,10 +182,14 @@ type DeviceIdentifier struct {
 	OrderArn *string
 
 	// The status of the device identifier.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status DeviceIdentifierStatus
 
 	// The Amazon Resource Name (ARN) of the traffic group to which the device
 	// identifier belongs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TrafficGroupArn *string
 
 	// The vendor of the device identifier.
@@ -176,22 +218,32 @@ type Network struct {
 	// The Amazon Resource Name (ARN) of the network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkArn *string
 
 	// The name of the network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkName *string
 
 	// The status of the network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status NetworkStatus
 
 	// The creation time of the network.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The description of the network.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The status reason of the network.
@@ -204,20 +256,30 @@ type Network struct {
 type NetworkResource struct {
 
 	// The attributes of the network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes []NameValuePair
 
 	// Information about the commitment period for the radio unit. Shows the duration,
 	// the date and time that the contract started and ends, and the renewal status of
 	// the commitment period.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommitmentInformation *CommitmentInformation
 
 	// The creation time of the network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The description of the network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The health of the network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Health HealthStatus
 
 	// The model of the network resource.
@@ -225,35 +287,51 @@ type NetworkResource struct {
 
 	// The Amazon Resource Name (ARN) of the network on which this network resource
 	// appears.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkArn *string
 
 	// The Amazon Resource Name (ARN) of the network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkResourceArn *string
 
 	// The Amazon Resource Name (ARN) of the network site on which this network
 	// resource appears.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSiteArn *string
 
 	// The Amazon Resource Name (ARN) of the order used to purchase this network
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OrderArn *string
 
 	// The position of the network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Position *Position
 
 	// Information about a request to return the network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReturnInformation *ReturnInformation
 
 	// The serial number of the network resource.
 	SerialNumber *string
 
 	// The status of the network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status NetworkResourceStatus
 
 	// The status reason of the network resource.
 	StatusReason *string
 
 	// The type of the network resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type NetworkResourceType
 
 	// The vendor of the network resource.
@@ -273,9 +351,13 @@ type NetworkResourceDefinition struct {
 	// The type in the network resource definition.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type NetworkResourceDefinitionType
 
 	// The options in the network resource definition.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Options []NameValuePair
 
 	noSmithyDocumentSerde
@@ -287,21 +369,29 @@ type NetworkSite struct {
 	// The Amazon Resource Name (ARN) of the network to which the network site belongs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkArn *string
 
 	// The Amazon Resource Name (ARN) of the network site.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSiteArn *string
 
 	// The name of the network site.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSiteName *string
 
 	// The status of the network site.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status NetworkSiteStatus
 
 	//  The parent Availability Zone for the network site.
@@ -311,15 +401,23 @@ type NetworkSite struct {
 	AvailabilityZoneId *string
 
 	// The creation time of the network site.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The current plan of the network site.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CurrentPlan *SitePlan
 
 	// The description of the network site.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The pending plan of the network site.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PendingPlan *SitePlan
 
 	// The status reason of the network site.
@@ -332,27 +430,43 @@ type NetworkSite struct {
 type Order struct {
 
 	// The acknowledgement status of the order.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcknowledgmentStatus AcknowledgmentStatus
 
 	// The creation time of the order.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The Amazon Resource Name (ARN) of the network associated with this order.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkArn *string
 
 	// The Amazon Resource Name (ARN) of the network site associated with this order.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSiteArn *string
 
 	// The Amazon Resource Name (ARN) of the order.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OrderArn *string
 
 	// A list of the network resources placed in the order.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OrderedResources []OrderedResourceDefinition
 
 	// The shipping address of the order.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ShippingAddress *Address
 
 	// The tracking information of the order.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TrackingInformation []TrackingInformation
 
 	noSmithyDocumentSerde
@@ -369,10 +483,14 @@ type OrderedResourceDefinition struct {
 	// The type of network resource in the order.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type NetworkResourceDefinitionType
 
 	// The duration and renewal status of the commitment period for each radio unit in
 	// the order. Does not show details if the resource type is DEVICE_IDENTIFIER.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommitmentConfiguration *CommitmentConfiguration
 
 	noSmithyDocumentSerde
@@ -385,9 +503,13 @@ type Position struct {
 	Elevation *float64
 
 	// The reference point from which elevation is reported.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ElevationReference ElevationReference
 
 	// The units used to measure the elevation of the position.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ElevationUnit ElevationUnit
 
 	// The latitude of the position.
@@ -403,6 +525,8 @@ type Position struct {
 type ReturnInformation struct {
 
 	// The Amazon Resource Name (ARN) of the replacement order.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplacementOrderArn *string
 
 	// The reason for the return. If the return request did not include a reason for
@@ -410,6 +534,8 @@ type ReturnInformation struct {
 	ReturnReason *string
 
 	// The shipping address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ShippingAddress *Address
 
 	// The URL of the shipping label. The shipping label is available for download
@@ -426,9 +552,13 @@ type ReturnInformation struct {
 type SitePlan struct {
 
 	// The options of the plan.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Options []NameValuePair
 
 	// The resource definitions of the plan.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceDefinitions []NetworkResourceDefinition
 
 	noSmithyDocumentSerde

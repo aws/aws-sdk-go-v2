@@ -11,6 +11,8 @@ import (
 )
 
 // Checks the health of the service.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) Ping(ctx context.Context, params *PingInput, optFns ...func(*Options)) (*PingOutput, error) {
 	if params == nil {
 		params = &PingInput{}

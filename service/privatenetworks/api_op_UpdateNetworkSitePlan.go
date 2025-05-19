@@ -12,6 +12,8 @@ import (
 )
 
 // Updates the specified network site plan.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateNetworkSitePlan(ctx context.Context, params *UpdateNetworkSitePlanInput, optFns ...func(*Options)) (*UpdateNetworkSitePlanOutput, error) {
 	if params == nil {
 		params = &UpdateNetworkSitePlanInput{}
@@ -32,17 +34,23 @@ type UpdateNetworkSitePlanInput struct {
 	// The Amazon Resource Name (ARN) of the network site.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSiteArn *string
 
 	// The pending plan.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PendingPlan *types.SitePlan
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see [How to ensure idempotency].
 	//
 	// [How to ensure idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -51,9 +59,13 @@ type UpdateNetworkSitePlanInput struct {
 type UpdateNetworkSitePlanOutput struct {
 
 	// Information about the network site.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkSite *types.NetworkSite
 
 	//  The network site tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
