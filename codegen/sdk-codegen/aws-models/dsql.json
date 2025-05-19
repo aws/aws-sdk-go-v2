@@ -80,14 +80,6 @@
                     "target": "com.amazonaws.dsql#GetVpcEndpointServiceName"
                 }
             ],
-            "collectionOperations": [
-                {
-                    "target": "com.amazonaws.dsql#CreateMultiRegionClusters"
-                },
-                {
-                    "target": "com.amazonaws.dsql#DeleteMultiRegionClusters"
-                }
-            ],
             "traits": {
                 "aws.api#arn": {
                     "template": "cluster/{identifier}"
@@ -136,22 +128,6 @@
             "traits": {
                 "smithy.api#documentation": "<p>The list of clusters.</p>",
                 "smithy.api#uniqueItems": {}
-            }
-        },
-        "com.amazonaws.dsql#ClusterPropertyMap": {
-            "type": "map",
-            "key": {
-                "target": "com.amazonaws.dsql#Region"
-            },
-            "value": {
-                "target": "com.amazonaws.dsql#LinkedClusterProperties"
-            },
-            "traits": {
-                "smithy.api#deprecated": {
-                    "message": "The CreateMultiRegionClusters API is deprecated. To create a multi-Region cluster, use the CreateCluster API with multi-Region properties instead.",
-                    "since": "5/13/2025"
-                },
-                "smithy.api#documentation": "<p>A map of properties for a cluster.</p>"
             }
         },
         "com.amazonaws.dsql#ClusterStatus": {
@@ -295,7 +271,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create new clusters."
                 },
-                "smithy.api#documentation": "<p>This operation creates a cluster in Amazon Aurora DSQL. You need the following permissions to\n         use this operation.</p>\n         <p>Permission to create a  cluster.</p>\n         <dl>\n            <dt>dsql:CreateCluster</dt>\n            <dd>\n               <p>Resources: arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/*</p>\n            </dd>\n         </dl>\n         <p> Permission to add tags to a  resource.</p>\n         <dl>\n            <dt>dsql:TagResource</dt>\n            <dd>\n               <p>Resources:\n                     arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/*</p>\n            </dd>\n         </dl>\n         <p>Permission to configure multi-region properties for\n         a cluster.</p>\n         <dl>\n            <dt>dsql:PutMultiRegionProperties</dt>\n            <dd>\n               <p>Resources:\n                     arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/*</p>\n            </dd>\n         </dl>\n         <p>When specifying multiRegionProperties.clusters.</p>\n         <dl>\n            <dt>dsql:AddPeerCluster</dt>\n            <dd>\n               <p>Permission to add peer clusters.</p>\n               <p>Resources:</p>\n               <ul>\n                  <li>\n                     <p>Local cluster: arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/*</p>\n                  </li>\n                  <li>\n                     <p>Each peer cluster: exact ARN of each specified peer cluster</p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>\n         <p>When specifying multiRegionProperties.witnessRegion.</p>\n         <dl>\n            <dt>dsql:PutWitnessRegion</dt>\n            <dd>\n               <p>Permission to set a witness region.</p>\n               <p>Resources: arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/*</p>\n               <p>Condition Keys: <code>dsql:WitnessRegion</code> (matching the specified\n                     witness region)</p>\n               <note>\n                  <p>This permission is checked both in the cluster Region and in the witness\n                        Region.</p>\n               </note>\n            </dd>\n         </dl>\n         <important>\n            <p>\n               <b>Important Notes for Multi-Region Operations</b>\n            </p>\n            <ul>\n               <li>\n                  <p>The witness region specified in\n                  <code>multiRegionProperties.witnessRegion</code> cannot be the same as the\n                  cluster's Region.</p>\n               </li>\n               <li>\n                  <p>When updating clusters with peer relationships, permissions are checked for both adding and removing peers.</p>\n               </li>\n            </ul>\n         </important>",
+                "smithy.api#documentation": "<p>The CreateCluster API allows you to create both single-region clusters and multi-Region\n         clusters. With the addition of the <i>multiRegionProperties</i> parameter,\n         you can create a cluster with witness Region support and establish peer relationships with\n         clusters in other Regions during creation.</p>\n         <note>\n            <p>Creating multi-Region clusters requires additional IAM permissions beyond those\n               needed for single-Region clusters, as detailed in the <b>Required permissions</b> section\n            below.</p>\n         </note>\n         <p>\n            <b>Required permissions</b>\n         </p>\n         <dl>\n            <dt>dsql:CreateCluster</dt>\n            <dd>\n               <p>Required to create a cluster.</p>\n               <p>Resources: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n               </p>\n            </dd>\n            <dt>dsql:TagResource</dt>\n            <dd>\n               <p>Permission to add tags to a resource.</p>\n               <p>Resources: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n               </p>\n            </dd>\n            <dt>dsql:PutMultiRegionProperties</dt>\n            <dd>\n               <p>Permission to configure multi-region properties for a cluster.</p>\n               <p>Resources: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n               </p>\n            </dd>\n            <dt>dsql:AddPeerCluster</dt>\n            <dd>\n               <p>When specifying <code>multiRegionProperties.clusters</code>, permission to\n                  add peer clusters.</p>\n               <p>Resources:</p>\n               <ul>\n                  <li>\n                     <p>Local cluster: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Each peer cluster: exact ARN of each specified peer cluster</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>dsql:PutWitnessRegion</dt>\n            <dd>\n               <p>When specifying <code>multiRegionProperties.witnessRegion</code>, permission\n                  to set a witness Region. This permission is checked both in the cluster Region and\n                  in the witness Region.</p>\n               <p>Resources: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n               </p>\n               <p>Condition Keys: <code>dsql:WitnessRegion</code> (matching the specified witness region)</p>\n            </dd>\n         </dl>\n         <important>\n            <ul>\n               <li>\n                  <p>The witness Region specified in\n                     <code>multiRegionProperties.witnessRegion</code> cannot be the same as the\n                  cluster's Region.</p>\n               </li>\n            </ul>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "Create Cluster",
@@ -398,111 +374,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The output of a created cluster.</p>",
-                "smithy.api#output": {}
-            }
-        },
-        "com.amazonaws.dsql#CreateMultiRegionClusters": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.dsql#CreateMultiRegionClustersInput"
-            },
-            "output": {
-                "target": "com.amazonaws.dsql#CreateMultiRegionClustersOutput"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.dsql#ConflictException"
-                },
-                {
-                    "target": "com.amazonaws.dsql#ServiceQuotaExceededException"
-                }
-            ],
-            "traits": {
-                "aws.iam#iamAction": {
-                    "documentation": "Grants permission to create multi-Region clusters. This action requires the CreateMultiRegionClusters and CreateCluster permissions in each specified linked Region.",
-                    "requiredActions": [
-                        "dsql:CreateCluster"
-                    ]
-                },
-                "smithy.api#deprecated": {
-                    "message": "The CreateMultiRegionClusters API is deprecated. Use the CreateCluster API with multi-Region properties to create a multi-Region cluster.",
-                    "since": "5/13/2025"
-                },
-                "smithy.api#documentation": "<p>Creates multi-Region clusters in Amazon Aurora DSQL. Multi-Region clusters require a linked\n         Region list, which is an array of the Regions in which you want to create linked clusters.\n         Multi-Region clusters require a witness Region, which participates in quorum in failure\n         scenarios.</p>",
-                "smithy.api#examples": [
-                    {
-                        "title": "Create Multi Region Clusters",
-                        "input": {
-                            "linkedRegionList": [
-                                "us-east-1",
-                                "us-east-2"
-                            ],
-                            "witnessRegion": "us-west-2"
-                        },
-                        "output": {
-                            "linkedClusterArns": [
-                                "arn:aws:dsql:us-east-1:111122223333:cluster/abcdefghijklmnopqrstu12345",
-                                "arn:aws:dsql:us-east-2:111122223333:cluster/klmnopqrstuvwxyzabcde54321"
-                            ]
-                        }
-                    }
-                ],
-                "smithy.api#http": {
-                    "code": 200,
-                    "method": "POST",
-                    "uri": "/multi-region-clusters"
-                }
-            }
-        },
-        "com.amazonaws.dsql#CreateMultiRegionClustersInput": {
-            "type": "structure",
-            "members": {
-                "linkedRegionList": {
-                    "target": "com.amazonaws.dsql#RegionList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>An array of the Regions in which you want to create additional clusters.</p>",
-                        "smithy.api#notProperty": {},
-                        "smithy.api#required": {}
-                    }
-                },
-                "clusterProperties": {
-                    "target": "com.amazonaws.dsql#ClusterPropertyMap",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A mapping of properties to use when creating linked clusters.</p>",
-                        "smithy.api#notProperty": {}
-                    }
-                },
-                "witnessRegion": {
-                    "target": "com.amazonaws.dsql#Region",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The witness Region of multi-Region clusters.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "clientToken": {
-                    "target": "com.amazonaws.dsql#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully. The subsequent retries with the\n         same client token return the result from the original successful request and they have no\n         additional effect.</p>\n         <p>If you don't specify a client token, the Amazon Web Services SDK automatically generates\n         one.</p>",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#input": {}
-            }
-        },
-        "com.amazonaws.dsql#CreateMultiRegionClustersOutput": {
-            "type": "structure",
-            "members": {
-                "linkedClusterArns": {
-                    "target": "com.amazonaws.dsql#ClusterArnList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>An array that contains the ARNs of all linked clusters.</p>",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -986,93 +857,11 @@
                         "smithy.api#documentation": "<p>The time of when the cluster was created.</p>",
                         "smithy.api#required": {}
                     }
-                },
-                "deletionProtectionEnabled": {
-                    "target": "com.amazonaws.dsql#DeletionProtectionEnabled",
-                    "traits": {
-                        "smithy.api#deprecated": {
-                            "message": "The deletionProtectionEnabled field is deprecated in the DeleteCluster API. To check deletion protection status, use the GetCluster API instead.",
-                            "since": "5/13/2025"
-                        },
-                        "smithy.api#documentation": "<p>Specifies whether deletion protection was enabled on the cluster.</p>",
-                        "smithy.api#required": {}
-                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The output from a deleted cluster.</p>",
                 "smithy.api#output": {}
-            }
-        },
-        "com.amazonaws.dsql#DeleteMultiRegionClusters": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.dsql#DeleteMultiRegionClustersInput"
-            },
-            "output": {
-                "target": "smithy.api#Unit"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.dsql#ConflictException"
-                },
-                {
-                    "target": "com.amazonaws.dsql#ResourceNotFoundException"
-                }
-            ],
-            "traits": {
-                "aws.iam#iamAction": {
-                    "documentation": "Grants permission to delete multi-Region clusters. This action requires the DeleteMultiRegionClusters and DeleteCluster permissions in each specified linked Region.",
-                    "requiredActions": [
-                        "dsql:DeleteCluster"
-                    ]
-                },
-                "smithy.api#deprecated": {
-                    "message": "The DeleteMultiRegionClusters API is deprecated. To delete a multi-Region cluster, use the DeleteCluster API instead.",
-                    "since": "5/13/2025"
-                },
-                "smithy.api#documentation": "<p>Deletes a multi-Region cluster in Amazon Aurora DSQL.</p>",
-                "smithy.api#examples": [
-                    {
-                        "title": "Delete Multi Region Clusters",
-                        "input": {
-                            "linkedClusterArns": [
-                                "arn:aws:dsql:us-east-1:111122223333:cluster/abcdefghijklmnopqrstu12345",
-                                "arn:aws:dsql:us-east-2:111122223333:cluster/klmnopqrstuvwxyzabcde54321"
-                            ]
-                        }
-                    }
-                ],
-                "smithy.api#http": {
-                    "code": 200,
-                    "method": "DELETE",
-                    "uri": "/multi-region-clusters"
-                },
-                "smithy.api#idempotent": {}
-            }
-        },
-        "com.amazonaws.dsql#DeleteMultiRegionClustersInput": {
-            "type": "structure",
-            "members": {
-                "linkedClusterArns": {
-                    "target": "com.amazonaws.dsql#ClusterArnList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The ARNs of the clusters linked to the cluster you want to delete.  also deletes\n         these clusters as part of the operation.</p>",
-                        "smithy.api#httpQuery": "linked-cluster-arns",
-                        "smithy.api#required": {}
-                    }
-                },
-                "clientToken": {
-                    "target": "com.amazonaws.dsql#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully. The subsequent retries with the\n         same client token return the result from the original successful request and they have no\n         additional effect.</p>\n         <p>If you don't specify a client token, the Amazon Web Services SDK automatically generates\n         one.</p>",
-                        "smithy.api#httpQuery": "client-token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dsql#DeletionProtectionEnabled": {
@@ -1205,28 +994,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time of when the cluster was created.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "witnessRegion": {
-                    "target": "com.amazonaws.dsql#Region",
-                    "traits": {
-                        "smithy.api#deprecated": {
-                            "message": "The witnessRegion field is deprecated. To see the witnessRegion, use multiRegionProperties.witnessRegion instead.",
-                            "since": "5/13/2025"
-                        },
-                        "smithy.api#documentation": "<p>The witness Region of the cluster. Applicable only for multi-Region clusters.</p>",
-                        "smithy.api#notProperty": {}
-                    }
-                },
-                "linkedClusterArns": {
-                    "target": "com.amazonaws.dsql#ClusterArnList",
-                    "traits": {
-                        "smithy.api#deprecated": {
-                            "message": "The linkedClusterArns field is deprecated. To see the peered cluster Arns, use multiRegionProperties.cluster instead.",
-                            "since": "5/13/2025"
-                        },
-                        "smithy.api#documentation": "<p>The ARNs of the clusters linked to the retrieved cluster.</p>",
-                        "smithy.api#notProperty": {}
                     }
                 },
                 "deletionProtectionEnabled": {
@@ -1369,31 +1136,6 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
-            }
-        },
-        "com.amazonaws.dsql#LinkedClusterProperties": {
-            "type": "structure",
-            "members": {
-                "deletionProtectionEnabled": {
-                    "target": "com.amazonaws.dsql#DeletionProtectionEnabled",
-                    "traits": {
-                        "smithy.api#default": true,
-                        "smithy.api#documentation": "<p>Whether deletion protection is enabled.</p>"
-                    }
-                },
-                "tags": {
-                    "target": "com.amazonaws.dsql#TagMap",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A map of key and value pairs the linked cluster is tagged with.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#deprecated": {
-                    "message": "The CreateMultiRegionClusters API is deprecated. To create a multi-Region cluster, use the CreateCluster API with multi-Region properties instead.",
-                    "since": "5/13/2025"
-                },
-                "smithy.api#documentation": "<p>Properties of linked clusters.</p>"
             }
         },
         "com.amazonaws.dsql#ListClusters": {
@@ -1599,20 +1341,6 @@
                 "smithy.api#length": {
                     "max": 50
                 }
-            }
-        },
-        "com.amazonaws.dsql#RegionList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.dsql#Region"
-            },
-            "traits": {
-                "smithy.api#deprecated": {
-                    "message": "The CreateMultiRegionClusters API is deprecated. Use the CreateCluster API with multi-Region properties to create a multi-Region cluster.",
-                    "since": "5/13/2025"
-                },
-                "smithy.api#documentation": "<p>List of Regions.</p>",
-                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.dsql#ResourceNotFoundException": {
@@ -1937,7 +1665,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to modify the deletion protection status of a given cluster."
                 },
-                "smithy.api#documentation": "<p>Updates a cluster.</p>\n         <p>\n            <b>Example IAM Policy for Multi-Region Operations</b>\n         </p>\n         <p>The following IAM policy grants permissions for multi-Region operations.</p>\n         <p>The <code>dsql:RemovePeerCluster</code> permission uses a wildcard ARN pattern to simplify permission management during updates.</p>\n         <important>\n            <p>\n               <b>Important Notes for Multi-Region Operations</b>\n            </p>\n            <ul>\n               <li>\n                  <p>The witness region specified in\n                     <code>multiRegionProperties.witnessRegion</code> cannot be the same as the\n                  cluster's Region.</p>\n               </li>\n               <li>\n                  <p>When updating clusters with peer relationships, permissions are checked for both adding and removing peers.</p>\n               </li>\n               <li>\n                  <p>The <code>dsql:RemovePeerCluster</code> permission uses a wildcard ARN pattern to simplify permission management during updates.</p>\n               </li>\n            </ul>\n         </important>",
+                "smithy.api#documentation": "<p>The <i>UpdateCluster</i> API allows you to modify both single-Region and multi-Region cluster configurations. With the <i>multiRegionProperties</i> parameter, you can add or modify witness Region support and manage peer relationships with clusters in other Regions.</p>\n         <note>\n            <p>Note that updating multi-region clusters requires additional IAM permissions beyond those needed for standard cluster updates, as detailed in the Permissions section.</p>\n         </note>\n         <p>\n            <b>Required permissions</b>\n         </p>\n         <dl>\n            <dt>dsql:UpdateCluster</dt>\n            <dd>\n               <p>Permission to update a DSQL cluster.</p>\n               <p>Resources: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                  </code>\n               </p>\n            </dd>\n         </dl>\n         <dl>\n            <dt>dsql:PutMultiRegionProperties</dt>\n            <dd>\n               <p>Permission to configure multi-Region properties for a cluster.</p>\n               <p>Resources: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                  </code>\n               </p>\n            </dd>\n         </dl>\n         <dl>\n            <dt>dsql:GetCluster</dt>\n            <dd>\n               <p>Permission to retrieve cluster information.</p>\n               <p>Resources: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                  </code>\n               </p>\n            </dd>\n            <dt>dsql:AddPeerCluster</dt>\n            <dd>\n               <p>Permission to add peer clusters.</p>\n               <p>Resources:</p>\n               <ul>\n                  <li>\n                     <p>Local cluster: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                        </code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Each peer cluster: exact ARN of each specified peer cluster</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>dsql:RemovePeerCluster</dt>\n            <dd>\n               <p>Permission to remove peer clusters. The <i>dsql:RemovePeerCluster</i> permission\n                  uses a wildcard ARN pattern to simplify permission management during updates.</p>\n               <p>Resources:\n                     <code>arn:aws:dsql:*:<i>account-id</i>:cluster/*</code>\n               </p>\n            </dd>\n         </dl>\n         <dl>\n            <dt>dsql:PutWitnessRegion</dt>\n            <dd>\n               <p>Permission to set a witness Region.</p>\n               <p>Resources: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                  </code>\n               </p>\n               <p>Condition Keys: dsql:WitnessRegion (matching the specified witness\n                  Region)</p>\n               <p>\n                  <b>This permission is checked both in the cluster Region and in the witness\n                        Region.</b>\n               </p>\n            </dd>\n         </dl>\n         <important>\n            <ul>\n               <li>\n                  <p>The witness region specified in\n                     <code>multiRegionProperties.witnessRegion</code> cannot be the same as the\n                  cluster's Region.</p>\n               </li>\n               <li>\n                  <p>When updating clusters with peer relationships, permissions are checked for both adding and removing peers.</p>\n               </li>\n               <li>\n                  <p>The <code>dsql:RemovePeerCluster</code> permission uses a wildcard ARN pattern to simplify permission management during updates.</p>\n               </li>\n            </ul>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "Update Cluster",
@@ -2018,39 +1746,6 @@
                     "target": "com.amazonaws.dsql#ClusterCreationTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The time of when the cluster was created.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "witnessRegion": {
-                    "target": "com.amazonaws.dsql#Region",
-                    "traits": {
-                        "smithy.api#deprecated": {
-                            "message": "The witnessRegion field is deprecated in the UpdateCluster API. To check witnessRegion, use the GetCluster API instead.",
-                            "since": "5/13/2025"
-                        },
-                        "smithy.api#documentation": "<p>The Region that receives all data you write to linked clusters.</p>",
-                        "smithy.api#notProperty": {}
-                    }
-                },
-                "linkedClusterArns": {
-                    "target": "com.amazonaws.dsql#ClusterArnList",
-                    "traits": {
-                        "smithy.api#deprecated": {
-                            "message": "The linkedClusterArns field is deprecated in the UpdateCluster API. To check peer cluster, use the GetCluster API instead.",
-                            "since": "5/13/2025"
-                        },
-                        "smithy.api#documentation": "<p>The ARNs of the clusters linked to the updated cluster. Applicable only for multi-Region\n         clusters.</p>",
-                        "smithy.api#notProperty": {}
-                    }
-                },
-                "deletionProtectionEnabled": {
-                    "target": "com.amazonaws.dsql#DeletionProtectionEnabled",
-                    "traits": {
-                        "smithy.api#deprecated": {
-                            "message": "The deletionProtectionEnabled field is deprecated in the UpdateCluster API. To check deletion protection status, use the GetCluster API instead.",
-                            "since": "5/13/2025"
-                        },
-                        "smithy.api#documentation": "<p>Whether deletion protection is enabled for the updated cluster.</p>",
                         "smithy.api#required": {}
                     }
                 }
