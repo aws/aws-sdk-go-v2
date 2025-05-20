@@ -1,8 +1,0 @@
-{
-    "id": "34b26dfa-f3b4-486b-a10d-c761a9d6f214",
-    "type": "feature",
-    "description": "Enhanced AWS Glue ListConnectionTypes API Model with additional metadata fields.",
-    "modules": [
-        "service/glue"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.220.0 (2025-05-20)
+
+* **Feature**: This release expands the ModifyInstanceMaintenanceOptions API to enable or disable instance migration during customer-initiated reboots for EC2 Scheduled Reboot Events.
+
 # v1.219.0 (2025-05-19)
 
 * **Feature**: This release includes new APIs for System Integrity Protection (SIP) configuration and automated root volume ownership delegation for EC2 Mac instances.

@@ -1,3 +1,7 @@
+# v1.96.0 (2025-05-20)
+
+* **Feature**: This release introduces the new DescribeDBMajorEngineVersions API for describing the properties of specific major versions of database engines.
+
 # v1.95.0 (2025-04-24)
 
 * **Feature**: This Amazon RDS release adds support for managed master user passwords for Oracle CDBs.

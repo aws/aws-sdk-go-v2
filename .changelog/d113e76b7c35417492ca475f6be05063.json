@@ -1,8 +1,0 @@
-{
-    "id": "d113e76b-7c35-4174-92ca-475f6be05063",
-    "type": "feature",
-    "description": "Remove Discovery APIs from the DataSync service",
-    "modules": [
-        "service/datasync"
-    ]
-}

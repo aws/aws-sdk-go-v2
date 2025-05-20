@@ -1,3 +1,7 @@
+# v1.37.0 (2025-05-20)
+
+* **Feature**: This release adds GetClustersForImage API and filter updates as part of the mapping of container images to running containers feature.
+
 # v1.36.1 (2025-04-03)
 
 * No change notes available for this release.

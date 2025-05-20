@@ -1,3 +1,7 @@
+# v1.48.0 (2025-05-20)
+
+* **Feature**: Remove Discovery APIs from the DataSync service
+
 # v1.47.2 (2025-04-29)
 
 * No change notes available for this release.

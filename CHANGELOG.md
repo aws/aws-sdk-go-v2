@@ -1,3 +1,19 @@
+# Release (2025-05-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.48.0](service/datasync/CHANGELOG.md#v1480-2025-05-20)
+  * **Feature**: Remove Discovery APIs from the DataSync service
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.220.0](service/ec2/CHANGELOG.md#v12200-2025-05-20)
+  * **Feature**: This release expands the ModifyInstanceMaintenanceOptions API to enable or disable instance migration during customer-initiated reboots for EC2 Scheduled Reboot Events.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.112.0](service/glue/CHANGELOG.md#v11120-2025-05-20)
+  * **Feature**: Enhanced AWS Glue ListConnectionTypes API Model with additional metadata fields.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.37.0](service/inspector2/CHANGELOG.md#v1370-2025-05-20)
+  * **Feature**: This release adds GetClustersForImage API and filter updates as part of the mapping of container images to running containers feature.
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.18.0](service/oam/CHANGELOG.md#v1180-2025-05-20)
+  * **Feature**: Add IncludeTags field to GetLink, GetSink and UpdateLink API
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.96.0](service/rds/CHANGELOG.md#v1960-2025-05-20)
+  * **Feature**: This release introduces the new DescribeDBMajorEngineVersions API for describing the properties of specific major versions of database engines.
+
 # Release (2025-05-19.2)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "a919aefb-dac9-4f7e-96c2-8d7768f90d40",
-    "type": "feature",
-    "description": "Add IncludeTags field to GetLink, GetSink and UpdateLink API",
-    "modules": [
-        "service/oam"
-    ]
-}

@@ -29,7 +29,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.219.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.220.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.57.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.35.3
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.4
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.3
-	github.com/aws/aws-sdk-go-v2/service/glue v1.111.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.112.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/iam v1.42.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.26.2
@@ -56,7 +56,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.24.2
 	github.com/aws/aws-sdk-go-v2/service/polly v1.48.2
-	github.com/aws/aws-sdk-go-v2/service/rds v1.95.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.96.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.54.3
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.46.3
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.51.1
