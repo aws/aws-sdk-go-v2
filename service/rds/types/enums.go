@@ -435,6 +435,25 @@ func (IntegrationStatus) Values() []IntegrationStatus {
 	}
 }
 
+type LifecycleSupportName string
+
+// Enum values for LifecycleSupportName
+const (
+	LifecycleSupportNameOpenSourceRdsStandardSupport LifecycleSupportName = "open-source-rds-standard-support"
+	LifecycleSupportNameOpenSourceRdsExtendedSupport LifecycleSupportName = "open-source-rds-extended-support"
+)
+
+// Values returns all known values for LifecycleSupportName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LifecycleSupportName) Values() []LifecycleSupportName {
+	return []LifecycleSupportName{
+		"open-source-rds-standard-support",
+		"open-source-rds-extended-support",
+	}
+}
+
 type LimitlessDatabaseStatus string
 
 // Enum values for LimitlessDatabaseStatus

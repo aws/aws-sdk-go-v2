@@ -85,23 +85,9 @@ type StartExportTaskInput struct {
 	// authorized to run the following operations. These can be set in the Amazon Web
 	// Services KMS key policy:
 	//
-	//   - kms:Encrypt
-	//
-	//   - kms:Decrypt
-	//
-	//   - kms:GenerateDataKey
-	//
-	//   - kms:GenerateDataKeyWithoutPlaintext
-	//
-	//   - kms:ReEncryptFrom
-	//
-	//   - kms:ReEncryptTo
-	//
 	//   - kms:CreateGrant
 	//
 	//   - kms:DescribeKey
-	//
-	//   - kms:RetireGrant
 	//
 	// This member is required.
 	KmsKeyId *string

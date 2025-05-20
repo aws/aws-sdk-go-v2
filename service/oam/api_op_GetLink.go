@@ -39,6 +39,15 @@ type GetLinkInput struct {
 	// This member is required.
 	Identifier *string
 
+	// Specifies whether to include the tags associated with the link in the response.
+	// When IncludeTags is set to true and the caller has the required permission,
+	// oam:ListTagsForResource , the API will return the tags for the specified
+	// resource. If the caller doesn't have the required permission,
+	// oam:ListTagsForResource , the API will raise an exception.
+	//
+	// The default value is false .
+	IncludeTags *bool
+
 	noSmithyDocumentSerde
 }
 

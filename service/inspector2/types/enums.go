@@ -856,6 +856,25 @@ func (EcrPullDateRescanDuration) Values() []EcrPullDateRescanDuration {
 	}
 }
 
+type EcrPullDateRescanMode string
+
+// Enum values for EcrPullDateRescanMode
+const (
+	EcrPullDateRescanModeLastPullDate EcrPullDateRescanMode = "LAST_PULL_DATE"
+	EcrPullDateRescanModeLastInUseAt  EcrPullDateRescanMode = "LAST_IN_USE_AT"
+)
+
+// Values returns all known values for EcrPullDateRescanMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EcrPullDateRescanMode) Values() []EcrPullDateRescanMode {
+	return []EcrPullDateRescanMode{
+		"LAST_PULL_DATE",
+		"LAST_IN_USE_AT",
+	}
+}
+
 type EcrRescanDuration string
 
 // Enum values for EcrRescanDuration
@@ -1815,6 +1834,7 @@ const (
 	ScanStatusReasonDeepInspectionNoInventory                    ScanStatusReason = "DEEP_INSPECTION_NO_INVENTORY"
 	ScanStatusReasonAgentlessInstanceStorageLimitExceeded        ScanStatusReason = "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED"
 	ScanStatusReasonAgentlessInstanceCollectionTimeLimitExceeded ScanStatusReason = "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED"
+	ScanStatusReasonPendingRevivalScan                           ScanStatusReason = "PENDING_REVIVAL_SCAN"
 )
 
 // Values returns all known values for ScanStatusReason. Note that this can be
@@ -1849,6 +1869,7 @@ func (ScanStatusReason) Values() []ScanStatusReason {
 		"DEEP_INSPECTION_NO_INVENTORY",
 		"AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED",
 		"AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED",
+		"PENDING_REVIVAL_SCAN",
 	}
 }
 

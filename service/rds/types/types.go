@@ -752,7 +752,7 @@ type DBCluster struct {
 	// The database engine used for this DB cluster.
 	Engine *string
 
-	// The life cycle type for the DB cluster.
+	// The lifecycle type for the DB cluster.
 	//
 	// For more information, see CreateDBCluster.
 	EngineLifecycleSupport *string
@@ -1850,7 +1850,7 @@ type DBInstance struct {
 	// The database engine used for this DB instance.
 	Engine *string
 
-	// The life cycle type for the DB instance.
+	// The lifecycle type for the DB instance.
 	//
 	// For more information, see CreateDBInstance.
 	EngineLifecycleSupport *string
@@ -2285,6 +2285,23 @@ type DBInstanceStatusInfo struct {
 
 	// This value is currently "read replication."
 	StatusType *string
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used as a response element in the operation
+// DescribeDBMajorEngineVersions .
+type DBMajorEngineVersion struct {
+
+	// The name of the database engine.
+	Engine *string
+
+	// The major version number of the database engine.
+	MajorEngineVersion *string
+
+	// A list of the lifecycles supported by this engine for the
+	// DescribeDBMajorEngineVersions operation.
+	SupportedEngineLifecycles []SupportedEngineLifecycle
 
 	noSmithyDocumentSerde
 }
@@ -3500,7 +3517,7 @@ type GlobalCluster struct {
 	// The Aurora database engine used by the global database cluster.
 	Engine *string
 
-	// The life cycle type for the global cluster.
+	// The lifecycle type for the global cluster.
 	//
 	// For more information, see CreateGlobalCluster.
 	EngineLifecycleSupport *string
@@ -5057,6 +5074,54 @@ type Subnet struct {
 
 	// The status of the subnet.
 	SubnetStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used as a response element in the operation
+// DescribeDBMajorEngineVersions .
+//
+// You can use the information that this data type returns to plan for upgrades.
+//
+// This data type only returns information for the open source engines Amazon RDS
+// for MariaDB, Amazon RDS for MySQL, Amazon RDS for PostgreSQL, Aurora MySQL, and
+// Aurora PostgreSQL.
+type SupportedEngineLifecycle struct {
+
+	// The end date for the type of support returned by LifecycleSupportName .
+	//
+	// This member is required.
+	LifecycleSupportEndDate *time.Time
+
+	// The type of lifecycle support that the engine version is in.
+	//
+	// This parameter returns the following values:
+	//
+	//   - open-source-rds-standard-support - Indicates RDS standard support or Aurora
+	//   standard support.
+	//
+	//   - open-source-rds-extended-support - Indicates Amazon RDS Extended Support.
+	//
+	// For Amazon RDS for MySQL, Amazon RDS for PostgreSQL, Aurora MySQL, and Aurora
+	// PostgreSQL, this parameter returns both open-source-rds-standard-support and
+	// open-source-rds-extended-support .
+	//
+	// For Amazon RDS for MariaDB, this parameter only returns the value
+	// open-source-rds-standard-support .
+	//
+	// For information about Amazon RDS Extended Support, see [Amazon RDS Extended Support with Amazon RDS] in the Amazon RDS User
+	// Guide and [Amazon RDS Extended Support with Amazon Aurora]in the Amazon Aurora User Guide.
+	//
+	// [Amazon RDS Extended Support with Amazon RDS]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	// [Amazon RDS Extended Support with Amazon Aurora]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+	//
+	// This member is required.
+	LifecycleSupportName LifecycleSupportName
+
+	// The start date for the type of support returned by LifecycleSupportName .
+	//
+	// This member is required.
+	LifecycleSupportStartDate *time.Time
 
 	noSmithyDocumentSerde
 }

@@ -39450,6 +39450,11 @@ func awsAwsjson11_deserializeDocumentConnectionTypeBrief(v **types.ConnectionTyp
 				return err
 			}
 
+		case "Categories":
+			if err := awsAwsjson11_deserializeDocumentListOfString(&sv.Categories, value); err != nil {
+				return err
+			}
+
 		case "ConnectionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -39459,6 +39464,11 @@ func awsAwsjson11_deserializeDocumentConnectionTypeBrief(v **types.ConnectionTyp
 				sv.ConnectionType = types.ConnectionType(jtv)
 			}
 
+		case "ConnectionTypeVariants":
+			if err := awsAwsjson11_deserializeDocumentConnectionTypeVariantList(&sv.ConnectionTypeVariants, value); err != nil {
+				return err
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -39466,6 +39476,33 @@ func awsAwsjson11_deserializeDocumentConnectionTypeBrief(v **types.ConnectionTyp
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "DisplayName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DisplayName to be of type string, got %T instead", value)
+				}
+				sv.DisplayName = ptr.String(jtv)
+			}
+
+		case "LogoUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UrlString to be of type string, got %T instead", value)
+				}
+				sv.LogoUrl = ptr.String(jtv)
+			}
+
+		case "Vendor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Vendor to be of type string, got %T instead", value)
+				}
+				sv.Vendor = ptr.String(jtv)
 			}
 
 		default:
@@ -39501,6 +39538,107 @@ func awsAwsjson11_deserializeDocumentConnectionTypeList(v *[]types.ConnectionTyp
 		var col types.ConnectionTypeBrief
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentConnectionTypeBrief(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConnectionTypeVariant(v **types.ConnectionTypeVariant, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConnectionTypeVariant
+	if *v == nil {
+		sv = &types.ConnectionTypeVariant{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConnectionTypeVariantName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DisplayName to be of type string, got %T instead", value)
+				}
+				sv.ConnectionTypeVariantName = ptr.String(jtv)
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "DisplayName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DisplayName to be of type string, got %T instead", value)
+				}
+				sv.DisplayName = ptr.String(jtv)
+			}
+
+		case "LogoUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UrlString to be of type string, got %T instead", value)
+				}
+				sv.LogoUrl = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConnectionTypeVariantList(v *[]types.ConnectionTypeVariant, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ConnectionTypeVariant
+	if *v == nil {
+		cv = []types.ConnectionTypeVariant{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ConnectionTypeVariant
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentConnectionTypeVariant(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

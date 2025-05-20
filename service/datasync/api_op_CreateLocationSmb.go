@@ -93,9 +93,6 @@ type CreateLocationSmbInput struct {
 	// Specifies your Kerberos key table (keytab) file, which includes mappings
 	// between your Kerberos principal and encryption keys.
 	//
-	// The file must be base64 encoded. If you're using the CLI, the encoding is done
-	// for you.
-	//
 	// To avoid task execution errors, make sure that the Kerberos principal that you
 	// use to create the keytab file matches exactly what you specify for
 	// KerberosPrincipal .

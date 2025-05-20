@@ -84,6 +84,7 @@
         "api_op_DescribeDBInstanceAutomatedBackups.go",
         "api_op_DescribeDBInstances.go",
         "api_op_DescribeDBLogFiles.go",
+        "api_op_DescribeDBMajorEngineVersions.go",
         "api_op_DescribeDBParameterGroups.go",
         "api_op_DescribeDBParameters.go",
         "api_op_DescribeDBProxies.go",

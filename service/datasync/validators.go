@@ -10,26 +10,6 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-type validateOpAddStorageSystem struct {
-}
-
-func (*validateOpAddStorageSystem) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpAddStorageSystem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*AddStorageSystemInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpAddStorageSystemInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpCancelTaskExecution struct {
 }
 
@@ -390,26 +370,6 @@ func (m *validateOpDescribeAgent) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDescribeDiscoveryJob struct {
-}
-
-func (*validateOpDescribeDiscoveryJob) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeDiscoveryJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeDiscoveryJobInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeDiscoveryJobInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDescribeLocationAzureBlob struct {
 }
 
@@ -630,66 +590,6 @@ func (m *validateOpDescribeLocationSmb) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDescribeStorageSystem struct {
-}
-
-func (*validateOpDescribeStorageSystem) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeStorageSystem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeStorageSystemInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeStorageSystemInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDescribeStorageSystemResourceMetrics struct {
-}
-
-func (*validateOpDescribeStorageSystemResourceMetrics) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeStorageSystemResourceMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeStorageSystemResourceMetricsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeStorageSystemResourceMetricsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDescribeStorageSystemResources struct {
-}
-
-func (*validateOpDescribeStorageSystemResources) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeStorageSystemResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeStorageSystemResourcesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeStorageSystemResourcesInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDescribeTaskExecution struct {
 }
 
@@ -725,26 +625,6 @@ func (m *validateOpDescribeTask) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeTaskInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpGenerateRecommendations struct {
-}
-
-func (*validateOpGenerateRecommendations) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGenerateRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GenerateRecommendationsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGenerateRecommendationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -810,46 +690,6 @@ func (m *validateOpListTasks) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpRemoveStorageSystem struct {
-}
-
-func (*validateOpRemoveStorageSystem) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpRemoveStorageSystem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*RemoveStorageSystemInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpRemoveStorageSystemInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpStartDiscoveryJob struct {
-}
-
-func (*validateOpStartDiscoveryJob) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpStartDiscoveryJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*StartDiscoveryJobInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpStartDiscoveryJobInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpStartTaskExecution struct {
 }
 
@@ -865,26 +705,6 @@ func (m *validateOpStartTaskExecution) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartTaskExecutionInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpStopDiscoveryJob struct {
-}
-
-func (*validateOpStopDiscoveryJob) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpStopDiscoveryJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*StopDiscoveryJobInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpStopDiscoveryJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -945,26 +765,6 @@ func (m *validateOpUpdateAgent) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateAgentInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpUpdateDiscoveryJob struct {
-}
-
-func (*validateOpUpdateDiscoveryJob) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpUpdateDiscoveryJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*UpdateDiscoveryJobInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpUpdateDiscoveryJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1190,26 +990,6 @@ func (m *validateOpUpdateLocationSmb) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpUpdateStorageSystem struct {
-}
-
-func (*validateOpUpdateStorageSystem) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpUpdateStorageSystem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*UpdateStorageSystemInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpUpdateStorageSystemInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpUpdateTaskExecution struct {
 }
 
@@ -1248,10 +1028,6 @@ func (m *validateOpUpdateTask) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
-}
-
-func addOpAddStorageSystemValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpAddStorageSystem{}, middleware.After)
 }
 
 func addOpCancelTaskExecutionValidationMiddleware(stack *middleware.Stack) error {
@@ -1326,10 +1102,6 @@ func addOpDescribeAgentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAgent{}, middleware.After)
 }
 
-func addOpDescribeDiscoveryJobValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeDiscoveryJob{}, middleware.After)
-}
-
 func addOpDescribeLocationAzureBlobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeLocationAzureBlob{}, middleware.After)
 }
@@ -1374,28 +1146,12 @@ func addOpDescribeLocationSmbValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeLocationSmb{}, middleware.After)
 }
 
-func addOpDescribeStorageSystemValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeStorageSystem{}, middleware.After)
-}
-
-func addOpDescribeStorageSystemResourceMetricsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeStorageSystemResourceMetrics{}, middleware.After)
-}
-
-func addOpDescribeStorageSystemResourcesValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeStorageSystemResources{}, middleware.After)
-}
-
 func addOpDescribeTaskExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTaskExecution{}, middleware.After)
 }
 
 func addOpDescribeTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTask{}, middleware.After)
-}
-
-func addOpGenerateRecommendationsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGenerateRecommendations{}, middleware.After)
 }
 
 func addOpListLocationsValidationMiddleware(stack *middleware.Stack) error {
@@ -1410,20 +1166,8 @@ func addOpListTasksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTasks{}, middleware.After)
 }
 
-func addOpRemoveStorageSystemValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpRemoveStorageSystem{}, middleware.After)
-}
-
-func addOpStartDiscoveryJobValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpStartDiscoveryJob{}, middleware.After)
-}
-
 func addOpStartTaskExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartTaskExecution{}, middleware.After)
-}
-
-func addOpStopDiscoveryJobValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpStopDiscoveryJob{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1436,10 +1180,6 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAgentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAgent{}, middleware.After)
-}
-
-func addOpUpdateDiscoveryJobValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUpdateDiscoveryJob{}, middleware.After)
 }
 
 func addOpUpdateLocationAzureBlobValidationMiddleware(stack *middleware.Stack) error {
@@ -1486,10 +1226,6 @@ func addOpUpdateLocationSmbValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLocationSmb{}, middleware.After)
 }
 
-func addOpUpdateStorageSystemValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUpdateStorageSystem{}, middleware.After)
-}
-
 func addOpUpdateTaskExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTaskExecution{}, middleware.After)
 }
@@ -1505,39 +1241,6 @@ func validateAzureBlobSasConfiguration(v *types.AzureBlobSasConfiguration) error
 	invalidParams := smithy.InvalidParamsError{Context: "AzureBlobSasConfiguration"}
 	if v.Token == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Token"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateCredentials(v *types.Credentials) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "Credentials"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateDiscoveryServerConfiguration(v *types.DiscoveryServerConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DiscoveryServerConfiguration"}
-	if v.ServerHostname == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerHostname"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1888,46 +1591,6 @@ func validateTaskSchedule(v *types.TaskSchedule) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TaskSchedule"}
 	if v.ScheduleExpression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpAddStorageSystemInput(v *AddStorageSystemInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AddStorageSystemInput"}
-	if v.ServerConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerConfiguration"))
-	} else if v.ServerConfiguration != nil {
-		if err := validateDiscoveryServerConfiguration(v.ServerConfiguration); err != nil {
-			invalidParams.AddNested("ServerConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
-	if len(v.SystemType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SystemType"))
-	}
-	if v.AgentArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentArns"))
-	}
-	if v.Tags != nil {
-		if err := validateInputTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
-	if v.Credentials == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Credentials"))
-	} else if v.Credentials != nil {
-		if err := validateCredentials(v.Credentials); err != nil {
-			invalidParams.AddNested("Credentials", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2378,21 +2041,6 @@ func validateOpDescribeAgentInput(v *DescribeAgentInput) error {
 	}
 }
 
-func validateOpDescribeDiscoveryJobInput(v *DescribeDiscoveryJobInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeDiscoveryJobInput"}
-	if v.DiscoveryJobArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DiscoveryJobArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpDescribeLocationAzureBlobInput(v *DescribeLocationAzureBlobInput) error {
 	if v == nil {
 		return nil
@@ -2558,60 +2206,6 @@ func validateOpDescribeLocationSmbInput(v *DescribeLocationSmbInput) error {
 	}
 }
 
-func validateOpDescribeStorageSystemInput(v *DescribeStorageSystemInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeStorageSystemInput"}
-	if v.StorageSystemArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StorageSystemArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDescribeStorageSystemResourceMetricsInput(v *DescribeStorageSystemResourceMetricsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeStorageSystemResourceMetricsInput"}
-	if v.DiscoveryJobArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DiscoveryJobArn"))
-	}
-	if len(v.ResourceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
-	}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDescribeStorageSystemResourcesInput(v *DescribeStorageSystemResourcesInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeStorageSystemResourcesInput"}
-	if v.DiscoveryJobArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DiscoveryJobArn"))
-	}
-	if len(v.ResourceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpDescribeTaskExecutionInput(v *DescribeTaskExecutionInput) error {
 	if v == nil {
 		return nil
@@ -2634,27 +2228,6 @@ func validateOpDescribeTaskInput(v *DescribeTaskInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeTaskInput"}
 	if v.TaskArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpGenerateRecommendationsInput(v *GenerateRecommendationsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GenerateRecommendationsInput"}
-	if v.DiscoveryJobArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DiscoveryJobArn"))
-	}
-	if v.ResourceIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceIds"))
-	}
-	if len(v.ResourceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2712,47 +2285,6 @@ func validateOpListTasksInput(v *ListTasksInput) error {
 	}
 }
 
-func validateOpRemoveStorageSystemInput(v *RemoveStorageSystemInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RemoveStorageSystemInput"}
-	if v.StorageSystemArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StorageSystemArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpStartDiscoveryJobInput(v *StartDiscoveryJobInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "StartDiscoveryJobInput"}
-	if v.StorageSystemArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StorageSystemArn"))
-	}
-	if v.CollectionDurationMinutes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CollectionDurationMinutes"))
-	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
-	if v.Tags != nil {
-		if err := validateInputTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpStartTaskExecutionInput(v *StartTaskExecutionInput) error {
 	if v == nil {
 		return nil
@@ -2775,21 +2307,6 @@ func validateOpStartTaskExecutionInput(v *StartTaskExecutionInput) error {
 		if err := validateInputTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpStopDiscoveryJobInput(v *StopDiscoveryJobInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "StopDiscoveryJobInput"}
-	if v.DiscoveryJobArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DiscoveryJobArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2845,24 +2362,6 @@ func validateOpUpdateAgentInput(v *UpdateAgentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentInput"}
 	if v.AgentArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpUpdateDiscoveryJobInput(v *UpdateDiscoveryJobInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "UpdateDiscoveryJobInput"}
-	if v.DiscoveryJobArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DiscoveryJobArn"))
-	}
-	if v.CollectionDurationMinutes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CollectionDurationMinutes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3053,31 +2552,6 @@ func validateOpUpdateLocationSmbInput(v *UpdateLocationSmbInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationSmbInput"}
 	if v.LocationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpUpdateStorageSystemInput(v *UpdateStorageSystemInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "UpdateStorageSystemInput"}
-	if v.StorageSystemArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StorageSystemArn"))
-	}
-	if v.ServerConfiguration != nil {
-		if err := validateDiscoveryServerConfiguration(v.ServerConfiguration); err != nil {
-			invalidParams.AddNested("ServerConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Credentials != nil {
-		if err := validateCredentials(v.Credentials); err != nil {
-			invalidParams.AddNested("Credentials", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

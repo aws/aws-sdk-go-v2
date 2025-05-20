@@ -62,18 +62,6 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
-func TestCheckSnapshot_AddStorageSystem(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.AddStorageSystem(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "AddStorageSystem")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_CancelTaskExecution(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelTaskExecution(context.Background(), nil, func(o *Options) {
@@ -290,18 +278,6 @@ func TestCheckSnapshot_DescribeAgent(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_DescribeDiscoveryJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DescribeDiscoveryJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "DescribeDiscoveryJob")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_DescribeLocationAzureBlob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeLocationAzureBlob(context.Background(), nil, func(o *Options) {
@@ -434,42 +410,6 @@ func TestCheckSnapshot_DescribeLocationSmb(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_DescribeStorageSystem(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DescribeStorageSystem(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "DescribeStorageSystem")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckSnapshot_DescribeStorageSystemResourceMetrics(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DescribeStorageSystemResourceMetrics(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "DescribeStorageSystemResourceMetrics")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckSnapshot_DescribeStorageSystemResources(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DescribeStorageSystemResources(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "DescribeStorageSystemResources")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_DescribeTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTask(context.Background(), nil, func(o *Options) {
@@ -494,18 +434,6 @@ func TestCheckSnapshot_DescribeTaskExecution(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_GenerateRecommendations(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.GenerateRecommendations(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "GenerateRecommendations")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_ListAgents(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAgents(context.Background(), nil, func(o *Options) {
@@ -518,35 +446,11 @@ func TestCheckSnapshot_ListAgents(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_ListDiscoveryJobs(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.ListDiscoveryJobs(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "ListDiscoveryJobs")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_ListLocations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListLocations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListLocations")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckSnapshot_ListStorageSystems(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.ListStorageSystems(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "ListStorageSystems")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -590,47 +494,11 @@ func TestCheckSnapshot_ListTasks(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_RemoveStorageSystem(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.RemoveStorageSystem(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "RemoveStorageSystem")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckSnapshot_StartDiscoveryJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.StartDiscoveryJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "StartDiscoveryJob")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_StartTaskExecution(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartTaskExecution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartTaskExecution")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckSnapshot_StopDiscoveryJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.StopDiscoveryJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "StopDiscoveryJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -667,18 +535,6 @@ func TestCheckSnapshot_UpdateAgent(t *testing.T) {
 	_, err := svc.UpdateAgent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateAgent")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckSnapshot_UpdateDiscoveryJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.UpdateDiscoveryJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "UpdateDiscoveryJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -818,18 +674,6 @@ func TestCheckSnapshot_UpdateLocationSmb(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_UpdateStorageSystem(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.UpdateStorageSystem(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "UpdateStorageSystem")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_UpdateTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTask(context.Background(), nil, func(o *Options) {
@@ -853,18 +697,6 @@ func TestCheckSnapshot_UpdateTaskExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 }
-func TestUpdateSnapshot_AddStorageSystem(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.AddStorageSystem(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "AddStorageSystem")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_CancelTaskExecution(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelTaskExecution(context.Background(), nil, func(o *Options) {
@@ -1081,18 +913,6 @@ func TestUpdateSnapshot_DescribeAgent(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_DescribeDiscoveryJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DescribeDiscoveryJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "DescribeDiscoveryJob")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_DescribeLocationAzureBlob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeLocationAzureBlob(context.Background(), nil, func(o *Options) {
@@ -1225,42 +1045,6 @@ func TestUpdateSnapshot_DescribeLocationSmb(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_DescribeStorageSystem(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DescribeStorageSystem(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "DescribeStorageSystem")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_DescribeStorageSystemResourceMetrics(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DescribeStorageSystemResourceMetrics(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "DescribeStorageSystemResourceMetrics")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_DescribeStorageSystemResources(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DescribeStorageSystemResources(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "DescribeStorageSystemResources")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_DescribeTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTask(context.Background(), nil, func(o *Options) {
@@ -1285,18 +1069,6 @@ func TestUpdateSnapshot_DescribeTaskExecution(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_GenerateRecommendations(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.GenerateRecommendations(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "GenerateRecommendations")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_ListAgents(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAgents(context.Background(), nil, func(o *Options) {
@@ -1309,35 +1081,11 @@ func TestUpdateSnapshot_ListAgents(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_ListDiscoveryJobs(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.ListDiscoveryJobs(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "ListDiscoveryJobs")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_ListLocations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListLocations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListLocations")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_ListStorageSystems(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.ListStorageSystems(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "ListStorageSystems")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1381,47 +1129,11 @@ func TestUpdateSnapshot_ListTasks(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_RemoveStorageSystem(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.RemoveStorageSystem(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "RemoveStorageSystem")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_StartDiscoveryJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.StartDiscoveryJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "StartDiscoveryJob")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_StartTaskExecution(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartTaskExecution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartTaskExecution")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_StopDiscoveryJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.StopDiscoveryJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "StopDiscoveryJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1458,18 +1170,6 @@ func TestUpdateSnapshot_UpdateAgent(t *testing.T) {
 	_, err := svc.UpdateAgent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAgent")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_UpdateDiscoveryJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.UpdateDiscoveryJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "UpdateDiscoveryJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1602,18 +1302,6 @@ func TestUpdateSnapshot_UpdateLocationSmb(t *testing.T) {
 	_, err := svc.UpdateLocationSmb(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLocationSmb")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_UpdateStorageSystem(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.UpdateStorageSystem(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "UpdateStorageSystem")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -230,7 +230,7 @@ type RestoreDBInstanceFromS3Input struct {
 	// You can use this setting to enroll your DB instance into Amazon RDS Extended
 	// Support. With RDS Extended Support, you can run the selected major engine
 	// version on your DB instance past the end of standard support for that engine
-	// version. For more information, see [Using Amazon RDS Extended Support]in the Amazon RDS User Guide.
+	// version. For more information, see [Amazon RDS Extended Support Amazon RDS]in the Amazon RDS User Guide.
 	//
 	// This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon
 	// Aurora DB instances, the life cycle type is managed by the DB cluster.
@@ -240,7 +240,7 @@ type RestoreDBInstanceFromS3Input struct {
 	//
 	// Default: open-source-rds-extended-support
 	//
-	// [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	// [Amazon RDS Extended Support Amazon RDS]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
 	EngineLifecycleSupport *string
 
 	// The version number of the database engine to use. Choose the latest minor

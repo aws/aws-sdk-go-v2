@@ -450,6 +450,11 @@ func awsRestjson1_serializeOpDocumentGetLinkInput(v *GetLinkInput, value smithyj
 		ok.String(*v.Identifier)
 	}
 
+	if v.IncludeTags != nil {
+		ok := object.Key("IncludeTags")
+		ok.Boolean(*v.IncludeTags)
+	}
+
 	return nil
 }
 
@@ -529,6 +534,11 @@ func awsRestjson1_serializeOpDocumentGetSinkInput(v *GetSinkInput, value smithyj
 	if v.Identifier != nil {
 		ok := object.Key("Identifier")
 		ok.String(*v.Identifier)
+	}
+
+	if v.IncludeTags != nil {
+		ok := object.Key("IncludeTags")
+		ok.Boolean(*v.IncludeTags)
 	}
 
 	return nil
@@ -1284,6 +1294,11 @@ func awsRestjson1_serializeOpDocumentUpdateLinkInput(v *UpdateLinkInput, value s
 	if v.Identifier != nil {
 		ok := object.Key("Identifier")
 		ok.String(*v.Identifier)
+	}
+
+	if v.IncludeTags != nil {
+		ok := object.Key("IncludeTags")
+		ok.Boolean(*v.IncludeTags)
 	}
 
 	if v.LinkConfiguration != nil {

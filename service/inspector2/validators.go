@@ -390,6 +390,26 @@ func (m *validateOpGetCisScanResultDetails) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetClustersForImage struct {
+}
+
+func (*validateOpGetClustersForImage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetClustersForImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetClustersForImageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetClustersForImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEncryptionKey struct {
 }
 
@@ -984,6 +1004,10 @@ func addOpGetCisScanReportValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetCisScanResultDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCisScanResultDetails{}, middleware.After)
+}
+
+func addOpGetClustersForImageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetClustersForImage{}, middleware.After)
 }
 
 func addOpGetEncryptionKeyValidationMiddleware(stack *middleware.Stack) error {
@@ -1690,6 +1714,21 @@ func validateCisTargetStatusReasonFilter(v *types.CisTargetStatusReasonFilter) e
 	}
 	if len(v.Value) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterForImageFilterCriteria(v *types.ClusterForImageFilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterForImageFilterCriteria"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3295,6 +3334,25 @@ func validateOpGetCisScanResultDetailsInput(v *GetCisScanResultDetailsInput) err
 	if v.FilterCriteria != nil {
 		if err := validateCisScanResultDetailsFilterCriteria(v.FilterCriteria); err != nil {
 			invalidParams.AddNested("FilterCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetClustersForImageInput(v *GetClustersForImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetClustersForImageInput"}
+	if v.Filter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
+	} else if v.Filter != nil {
+		if err := validateClusterForImageFilterCriteria(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

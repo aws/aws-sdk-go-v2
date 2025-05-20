@@ -1,0 +1,8 @@
+{
+    "id": "aabdfce5-54b4-4df5-b41d-c5f173019d31",
+    "type": "feature",
+    "description": "This release introduces the new DescribeDBMajorEngineVersions API for describing the properties of specific major versions of database engines.",
+    "modules": [
+        "service/rds"
+    ]
+}

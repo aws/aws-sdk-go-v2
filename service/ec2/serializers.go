@@ -76105,6 +76105,11 @@ func awsEc2query_serializeOpDocumentModifyInstanceMaintenanceOptionsInput(v *Mod
 		objectKey.String(*v.InstanceId)
 	}
 
+	if len(v.RebootMigration) > 0 {
+		objectKey := object.Key("RebootMigration")
+		objectKey.String(string(v.RebootMigration))
+	}
+
 	return nil
 }
 

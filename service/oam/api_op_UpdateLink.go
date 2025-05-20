@@ -52,6 +52,15 @@ type UpdateLinkInput struct {
 	// This member is required.
 	ResourceTypes []types.ResourceType
 
+	// Specifies whether to include the tags associated with the link in the response
+	// after the update operation. When IncludeTags is set to true and the caller has
+	// the required permission, oam:ListTagsForResource , the API will return the tags
+	// for the specified resource. If the caller doesn't have the required permission,
+	// oam:ListTagsForResource , the API will raise an exception.
+	//
+	// The default value is false .
+	IncludeTags *bool
+
 	// Use this structure to filter which metric namespaces and which log groups are
 	// to be shared from the source account to the monitoring account.
 	LinkConfiguration *types.LinkConfiguration

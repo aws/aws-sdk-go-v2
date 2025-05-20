@@ -3313,6 +3313,26 @@ func (InstanceMetadataTagsState) Values() []InstanceMetadataTagsState {
 	}
 }
 
+type InstanceRebootMigrationState string
+
+// Enum values for InstanceRebootMigrationState
+const (
+	InstanceRebootMigrationStateDisabled InstanceRebootMigrationState = "disabled"
+	InstanceRebootMigrationStateDefault  InstanceRebootMigrationState = "default"
+)
+
+// Values returns all known values for InstanceRebootMigrationState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceRebootMigrationState) Values() []InstanceRebootMigrationState {
+	return []InstanceRebootMigrationState{
+		"disabled",
+		"default",
+	}
+}
+
 type InstanceStateName string
 
 // Enum values for InstanceStateName
@@ -7375,6 +7395,25 @@ const (
 func (ProtocolValue) Values() []ProtocolValue {
 	return []ProtocolValue{
 		"gre",
+	}
+}
+
+type RebootMigrationSupport string
+
+// Enum values for RebootMigrationSupport
+const (
+	RebootMigrationSupportUnsupported RebootMigrationSupport = "unsupported"
+	RebootMigrationSupportSupported   RebootMigrationSupport = "supported"
+)
+
+// Values returns all known values for RebootMigrationSupport. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RebootMigrationSupport) Values() []RebootMigrationSupport {
+	return []RebootMigrationSupport{
+		"unsupported",
+		"supported",
 	}
 }
 

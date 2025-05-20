@@ -7767,6 +7767,22 @@ type InstanceMaintenanceOptions struct {
 	// instance.
 	AutoRecovery InstanceAutoRecoveryState
 
+	// Specifies whether to attempt reboot migration during a user-initiated reboot of
+	// an instance that has a scheduled system-reboot event:
+	//
+	//   - default - Amazon EC2 attempts to migrate the instance to new hardware
+	//   (reboot migration). If successful, the system-reboot event is cleared. If
+	//   unsuccessful, an in-place reboot occurs and the event remains scheduled.
+	//
+	//   - disabled - Amazon EC2 keeps the instance on the same hardware (in-place
+	//   reboot). The system-reboot event remains scheduled.
+	//
+	// This setting only applies to supported instances that have a scheduled reboot
+	// event. For more information, see [Enable or disable reboot migration]in the Amazon EC2 User Guide.
+	//
+	// [Enable or disable reboot migration]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/schedevents_actions_reboot.html#reboot-migration
+	RebootMigration InstanceRebootMigrationState
+
 	noSmithyDocumentSerde
 }
 
@@ -9332,6 +9348,13 @@ type InstanceTypeInfo struct {
 
 	// Describes the processor.
 	ProcessorInfo *ProcessorInfo
+
+	// Indicates whether reboot migration during a user-initiated reboot is supported
+	// for instances that have a scheduled system-reboot event. For more information,
+	// see [Enable or disable reboot migration]in the Amazon EC2 User Guide.
+	//
+	// [Enable or disable reboot migration]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/schedevents_actions_reboot.html#reboot-migration
+	RebootMigrationSupport RebootMigrationSupport
 
 	// The supported boot modes. For more information, see [Boot modes] in the Amazon EC2 User
 	// Guide.

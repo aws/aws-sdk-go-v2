@@ -338,6 +338,18 @@ func TestCheckSnapshot_GetCisScanResultDetails(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetClustersForImage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetClustersForImage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetClustersForImage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetConfiguration(context.Background(), nil, func(o *Options) {
@@ -1038,6 +1050,18 @@ func TestUpdateSnapshot_GetCisScanResultDetails(t *testing.T) {
 	_, err := svc.GetCisScanResultDetails(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetCisScanResultDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetClustersForImage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetClustersForImage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetClustersForImage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

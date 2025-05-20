@@ -475,6 +475,14 @@ type AwsEcrContainerAggregation struct {
 	// The image tags.
 	ImageTags []StringFilter
 
+	// The number of Amazon ECS tasks or Amazon EKS pods where the Amazon ECR
+	// container image is in use.
+	InUseCount []NumberFilter
+
+	// The last time an Amazon ECR image was used in an Amazon ECS task or Amazon EKS
+	// pod.
+	LastInUseAt []DateFilter
+
 	// The container repositories.
 	Repositories []StringFilter
 
@@ -509,6 +517,14 @@ type AwsEcrContainerAggregationResponse struct {
 
 	// The container image stags.
 	ImageTags []string
+
+	// The number of Amazon ECS tasks or Amazon EKS pods where the Amazon ECR
+	// container image is in use.
+	InUseCount *int64
+
+	// The last time an Amazon ECR image was used in an Amazon ECS task or Amazon EKS
+	// pod.
+	LastInUseAt *time.Time
 
 	// The container repository.
 	Repository *string
@@ -546,11 +562,63 @@ type AwsEcrContainerImageDetails struct {
 	// The image tags attached to the Amazon ECR container image.
 	ImageTags []string
 
+	// The number of Amazon ECS tasks or Amazon EKS pods where the Amazon ECR
+	// container image is in use.
+	InUseCount *int64
+
+	// The last time an Amazon ECR image was used in an Amazon ECS task or Amazon EKS
+	// pod.
+	LastInUseAt *time.Time
+
 	// The platform of the Amazon ECR container image.
 	Platform *string
 
 	// The date and time the Amazon ECR container image was pushed.
 	PushedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Metadata about tasks where an image was in use.
+type AwsEcsMetadataDetails struct {
+
+	// The details group information for a task in a cluster.
+	//
+	// This member is required.
+	DetailsGroup *string
+
+	// The task definition ARN.
+	//
+	// This member is required.
+	TaskDefinitionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The metadata for an Amazon EKS pod where an Amazon ECR image is in use.
+type AwsEksMetadataDetails struct {
+
+	// The namespace for an Amazon EKS cluster.
+	Namespace *string
+
+	// The list of workloads.
+	WorkloadInfoList []AwsEksWorkloadInfo
+
+	noSmithyDocumentSerde
+}
+
+// Information about the workload.
+type AwsEksWorkloadInfo struct {
+
+	// The name of the workload.
+	//
+	// This member is required.
+	Name *string
+
+	// The workload type.
+	//
+	// This member is required.
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -1053,6 +1121,83 @@ type CisTargetStatusReasonFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the task or pod in the cluster.
+type ClusterDetails struct {
+
+	// The metadata for a cluster.
+	//
+	// This member is required.
+	ClusterMetadata ClusterMetadata
+
+	// The last timestamp when Amazon Inspector recorded the image in use in the task
+	// or pod in the cluster.
+	//
+	// This member is required.
+	LastInUse *time.Time
+
+	// The number of tasks or pods where an image was running on the cluster.
+	RunningUnitCount *int64
+
+	// The number of tasks or pods where an image was stopped on the cluster in the
+	// last 24 hours.
+	StoppedUnitCount *int64
+
+	noSmithyDocumentSerde
+}
+
+// The filter criteria to be used.
+type ClusterForImageFilterCriteria struct {
+
+	// The resource Id to be used in the filter criteria.
+	//
+	// This member is required.
+	ResourceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the cluster.
+type ClusterInformation struct {
+
+	// The cluster ARN.
+	//
+	// This member is required.
+	ClusterArn *string
+
+	// Details about the cluster.
+	ClusterDetails []ClusterDetails
+
+	noSmithyDocumentSerde
+}
+
+// The metadata for a cluster.
+//
+// The following types satisfy this interface:
+//
+//	ClusterMetadataMemberAwsEcsMetadataDetails
+//	ClusterMetadataMemberAwsEksMetadataDetails
+type ClusterMetadata interface {
+	isClusterMetadata()
+}
+
+// The details for an Amazon ECS cluster in the cluster metadata.
+type ClusterMetadataMemberAwsEcsMetadataDetails struct {
+	Value AwsEcsMetadataDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ClusterMetadataMemberAwsEcsMetadataDetails) isClusterMetadata() {}
+
+// The details for an Amazon EKS cluster in the cluster metadata.
+type ClusterMetadataMemberAwsEksMetadataDetails struct {
+	Value AwsEksMetadataDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ClusterMetadataMemberAwsEksMetadataDetails) isClusterMetadata() {}
+
 // Contains information on where a code vulnerability is located in your Lambda
 // function.
 type CodeFilePath struct {
@@ -1241,6 +1386,12 @@ type CoverageFilterCriteria struct {
 	// The Amazon EC2 instance tags to filter on.
 	Ec2InstanceTags []CoverageMapFilter
 
+	// The number of Amazon ECR images in use.
+	EcrImageInUseCount []CoverageNumberFilter
+
+	// The Amazon ECR image that was last in use.
+	EcrImageLastInUseAt []CoverageDateFilter
+
 	// The Amazon ECR image tags to filter on.
 	EcrImageTags []CoverageStringFilter
 
@@ -1307,6 +1458,18 @@ type CoverageMapFilter struct {
 
 	// The tag value associated with the coverage map filter.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The coverage number to be used in the filter.
+type CoverageNumberFilter struct {
+
+	// The lower inclusive for the coverage number.
+	LowerInclusive *int64
+
+	// The upper inclusive for the coverage number.>
+	UpperInclusive *int64
 
 	noSmithyDocumentSerde
 }
@@ -1664,6 +1827,9 @@ type EcrConfiguration struct {
 	// The rescan duration configured for image pull date.
 	PullDateRescanDuration EcrPullDateRescanDuration
 
+	// The pull date for the re-scan mode.
+	PullDateRescanMode EcrPullDateRescanMode
+
 	noSmithyDocumentSerde
 }
 
@@ -1681,6 +1847,14 @@ type EcrContainerImageMetadata struct {
 
 	// The date an image was last pulled at.
 	ImagePulledAt *time.Time
+
+	// The number of Amazon ECS tasks or Amazon EKS pods where the Amazon ECR
+	// container image is in use.
+	InUseCount *int64
+
+	// The last time an Amazon ECR image was used in an Amazon ECS task or Amazon EKS
+	// pod.
+	LastInUseAt *time.Time
 
 	// Tags associated with the Amazon ECR image metadata.
 	Tags []string
@@ -1710,6 +1884,9 @@ type EcrRescanDurationState struct {
 
 	// The rescan duration configured for image pull date.
 	PullDateRescanDuration EcrPullDateRescanDuration
+
+	// The pull date for the re-scan mode.
+	PullDateRescanMode EcrPullDateRescanMode
 
 	// The rescan duration configured for image push date.
 	RescanDuration EcrRescanDuration
@@ -1921,6 +2098,14 @@ type FilterCriteria struct {
 
 	// Details of the Amazon ECR image hashes used to filter findings.
 	EcrImageHash []StringFilter
+
+	// Filter criteria indicating when details for an Amazon ECR image include when an
+	// Amazon ECR image is in use.
+	EcrImageInUseCount []NumberFilter
+
+	// Filter criteria indicating when an Amazon ECR image was last used in an Amazon
+	// ECS cluster task or Amazon EKS cluster pod.
+	EcrImageLastInUseAt []DateFilter
 
 	// Details on the Amazon ECR image push date and time used to filter findings.
 	EcrImagePushedAt []DateFilter
@@ -3722,4 +3907,5 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAggregationRequest()  {}
 func (*UnknownUnionMember) isAggregationResponse() {}
+func (*UnknownUnionMember) isClusterMetadata()     {}
 func (*UnknownUnionMember) isSchedule()            {}

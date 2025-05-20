@@ -58,78 +58,6 @@ type AzureBlobSasConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The storage capacity of an on-premises storage system resource (for example, a
-// volume).
-type Capacity struct {
-
-	// The amount of space in the cluster that's in cloud storage (for example, if
-	// you're using data tiering).
-	ClusterCloudStorageUsed *int64
-
-	// The amount of space that's being used in a storage system resource without
-	// accounting for compression or deduplication.
-	LogicalUsed *int64
-
-	// The total amount of space available in a storage system resource.
-	Provisioned *int64
-
-	// The amount of space that's being used in a storage system resource.
-	Used *int64
-
-	noSmithyDocumentSerde
-}
-
-// The credentials that provide DataSync Discovery read access to your on-premises
-// storage system's management interface.
-//
-// DataSync Discovery stores these credentials in [Secrets Manager]. For more information, see [Accessing your on-premises storage system].
-//
-// [Accessing your on-premises storage system]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-configure-storage.html
-// [Secrets Manager]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-type Credentials struct {
-
-	// Specifies the password for your storage system's management interface.
-	//
-	// This member is required.
-	Password *string
-
-	// Specifies the user name for your storage system's management interface.
-	//
-	// This member is required.
-	Username *string
-
-	noSmithyDocumentSerde
-}
-
-// The details about a specific DataSync discovery job.
-type DiscoveryJobListEntry struct {
-
-	// The Amazon Resource Name (ARN) of a discovery job.
-	DiscoveryJobArn *string
-
-	// The status of a discovery job. For more information, see [Discovery job statuses].
-	//
-	// [Discovery job statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table
-	Status DiscoveryJobStatus
-
-	noSmithyDocumentSerde
-}
-
-// The network settings that DataSync Discovery uses to connect with your
-// on-premises storage system's management interface.
-type DiscoveryServerConfiguration struct {
-
-	// The domain name or IP address of your storage system's management interface.
-	//
-	// This member is required.
-	ServerHostname *string
-
-	// The network port for accessing the storage system's management interface.
-	ServerPort *int32
-
-	noSmithyDocumentSerde
-}
-
 // The subnet and security groups that DataSync uses to connect to one of your
 // Amazon EFS file system's [mount targets].
 //
@@ -318,41 +246,6 @@ type HdfsNameNode struct {
 	noSmithyDocumentSerde
 }
 
-// The IOPS peaks for an on-premises storage system resource. Each data point
-// represents the 95th percentile peak value during a 1-hour interval.
-type IOPS struct {
-
-	// Peak IOPS unrelated to read and write operations.
-	Other *float64
-
-	// Peak IOPS related to read operations.
-	Read *float64
-
-	// Peak total IOPS on your on-premises storage system resource.
-	Total *float64
-
-	// Peak IOPS related to write operations.
-	Write *float64
-
-	noSmithyDocumentSerde
-}
-
-// The latency peaks for an on-premises storage system resource. Each data point
-// represents the 95th percentile peak value during a 1-hour interval.
-type Latency struct {
-
-	// Peak latency for operations unrelated to read and write operations.
-	Other *float64
-
-	// Peak latency for read operations.
-	Read *float64
-
-	// Peak latency for write operations.
-	Write *float64
-
-	noSmithyDocumentSerde
-}
-
 // Narrow down the list of resources returned by ListLocations . For example, to
 // see all your Amazon S3 locations, create a filter using "Name": "LocationType" ,
 // "Operator": "Equals" , and "Values": "S3" .
@@ -442,218 +335,6 @@ type ManifestConfig struct {
 	//
 	// [Providing DataSync access to your manifest]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html#transferring-with-manifest-access
 	Source *SourceManifestConfig
-
-	noSmithyDocumentSerde
-}
-
-// The performance data that DataSync Discovery collects about an on-premises
-// storage system resource.
-type MaxP95Performance struct {
-
-	// Peak IOPS unrelated to read and write operations.
-	IopsOther *float64
-
-	// Peak IOPS related to read operations.
-	IopsRead *float64
-
-	// Peak total IOPS on your on-premises storage system resource.
-	IopsTotal *float64
-
-	// Peak IOPS related to write operations.
-	IopsWrite *float64
-
-	// Peak latency for operations unrelated to read and write operations.
-	LatencyOther *float64
-
-	// Peak latency for read operations.
-	LatencyRead *float64
-
-	// Peak latency for write operations.
-	LatencyWrite *float64
-
-	// Peak throughput unrelated to read and write operations.
-	ThroughputOther *float64
-
-	// Peak throughput related to read operations.
-	ThroughputRead *float64
-
-	// Peak total throughput on your on-premises storage system resource.
-	ThroughputTotal *float64
-
-	// Peak throughput related to write operations.
-	ThroughputWrite *float64
-
-	noSmithyDocumentSerde
-}
-
-// The information that DataSync Discovery collects about an on-premises storage
-// system cluster.
-type NetAppONTAPCluster struct {
-
-	// The number of CIFS shares in the cluster.
-	CifsShareCount *int64
-
-	// The storage space that's being used in the cluster without accounting for
-	// compression or deduplication.
-	ClusterBlockStorageLogicalUsed *int64
-
-	// The total storage space that's available in the cluster.
-	ClusterBlockStorageSize *int64
-
-	// The storage space that's being used in a cluster.
-	ClusterBlockStorageUsed *int64
-
-	// The amount of space in the cluster that's in cloud storage (for example, if
-	// you're using data tiering).
-	ClusterCloudStorageUsed *int64
-
-	// The name of the cluster.
-	ClusterName *string
-
-	// The number of LUNs (logical unit numbers) in the cluster.
-	LunCount *int64
-
-	// The performance data that DataSync Discovery collects about the cluster.
-	MaxP95Performance *MaxP95Performance
-
-	// The number of NFS volumes in the cluster.
-	NfsExportedVolumes *int64
-
-	// Indicates whether DataSync Discovery recommendations for the cluster are ready
-	// to view, incomplete, or can't be determined.
-	//
-	// For more information, see [Recommendation statuses].
-	//
-	// [Recommendation statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table
-	RecommendationStatus RecommendationStatus
-
-	// The Amazon Web Services storage services that DataSync Discovery recommends for
-	// the cluster. For more information, see [Recommendations provided by DataSync Discovery].
-	//
-	// [Recommendations provided by DataSync Discovery]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
-	Recommendations []Recommendation
-
-	// The universally unique identifier (UUID) of the cluster.
-	ResourceId *string
-
-	noSmithyDocumentSerde
-}
-
-// The information that DataSync Discovery collects about a storage virtual
-// machine (SVM) in your on-premises storage system.
-type NetAppONTAPSVM struct {
-
-	// The number of CIFS shares in the SVM.
-	CifsShareCount *int64
-
-	// The universally unique identifier (UUID) of the cluster associated with the SVM.
-	ClusterUuid *string
-
-	// The data transfer protocols (such as NFS) configured for the SVM.
-	EnabledProtocols []string
-
-	// The number of LUNs (logical unit numbers) in the SVM.
-	LunCount *int64
-
-	// The performance data that DataSync Discovery collects about the SVM.
-	MaxP95Performance *MaxP95Performance
-
-	// The number of NFS volumes in the SVM.
-	NfsExportedVolumes *int64
-
-	// Indicates whether DataSync Discovery recommendations for the SVM are ready to
-	// view, incomplete, or can't be determined.
-	//
-	// For more information, see [Recommendation statuses].
-	//
-	// [Recommendation statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table
-	RecommendationStatus RecommendationStatus
-
-	// The Amazon Web Services storage services that DataSync Discovery recommends for
-	// the SVM. For more information, see [Recommendations provided by DataSync Discovery].
-	//
-	// [Recommendations provided by DataSync Discovery]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
-	Recommendations []Recommendation
-
-	// The UUID of the SVM.
-	ResourceId *string
-
-	// The name of the SVM
-	SvmName *string
-
-	// The total storage space that's available in the SVM.
-	TotalCapacityProvisioned *int64
-
-	// The storage space that's being used in the SVM.
-	TotalCapacityUsed *int64
-
-	// The storage space that's being used in the SVM without accounting for
-	// compression or deduplication.
-	TotalLogicalCapacityUsed *int64
-
-	// The amount of storage in the SVM that's being used for snapshots.
-	TotalSnapshotCapacityUsed *int64
-
-	noSmithyDocumentSerde
-}
-
-// The information that DataSync Discovery collects about a volume in your
-// on-premises storage system.
-type NetAppONTAPVolume struct {
-
-	// The total storage space that's available in the volume.
-	CapacityProvisioned *int64
-
-	// The storage space that's being used in the volume.
-	CapacityUsed *int64
-
-	// The number of CIFS shares in the volume.
-	CifsShareCount *int64
-
-	// The storage space that's being used in the volume without accounting for
-	// compression or deduplication.
-	LogicalCapacityUsed *int64
-
-	// The number of LUNs (logical unit numbers) in the volume.
-	LunCount *int64
-
-	// The performance data that DataSync Discovery collects about the volume.
-	MaxP95Performance *MaxP95Performance
-
-	// The number of NFS volumes in the volume.
-	NfsExported bool
-
-	// Indicates whether DataSync Discovery recommendations for the volume are ready
-	// to view, incomplete, or can't be determined.
-	//
-	// For more information, see [Recommendation statuses].
-	//
-	// [Recommendation statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table
-	RecommendationStatus RecommendationStatus
-
-	// The Amazon Web Services storage services that DataSync Discovery recommends for
-	// the volume. For more information, see [Recommendations provided by DataSync Discovery].
-	//
-	// [Recommendations provided by DataSync Discovery]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
-	Recommendations []Recommendation
-
-	// The universally unique identifier (UUID) of the volume.
-	ResourceId *string
-
-	// The volume's security style (such as Unix or NTFS).
-	SecurityStyle *string
-
-	// The amount of storage in the volume that's being used for snapshots.
-	SnapshotCapacityUsed *int64
-
-	// The name of the SVM associated with the volume.
-	SvmName *string
-
-	// The UUID of the storage virtual machine (SVM) associated with the volume.
-	SvmUuid *string
-
-	// The name of the volume.
-	VolumeName *string
 
 	noSmithyDocumentSerde
 }
@@ -957,25 +638,6 @@ type Options struct {
 	noSmithyDocumentSerde
 }
 
-// The types of performance data that DataSync Discovery collects about an
-// on-premises storage system resource.
-type P95Metrics struct {
-
-	// The IOPS peaks for an on-premises storage system resource. Each data point
-	// represents the 95th percentile peak value during a 1-hour interval.
-	IOPS *IOPS
-
-	// The latency peaks for an on-premises storage system resource. Each data point
-	// represents the 95th percentile peak value during a 1-hour interval.
-	Latency *Latency
-
-	// The throughput peaks for an on-premises storage system resource. Each data
-	// point represents the 95th percentile peak value during a 1-hour interval.
-	Throughput *Throughput
-
-	noSmithyDocumentSerde
-}
-
 // The platform-related details about the DataSync agent, such as the version
 // number.
 type Platform struct {
@@ -1025,30 +687,6 @@ type QopConfiguration struct {
 	// corresponds to your hadoop.rpc.protection setting in your core-site.xml file on
 	// your Hadoop cluster.
 	RpcProtection HdfsRpcProtection
-
-	noSmithyDocumentSerde
-}
-
-// The details about an Amazon Web Services storage service that DataSync
-// Discovery recommends for a resource in your on-premises storage system.
-//
-// For more information, see [Recommendations provided by DataSync Discovery].
-//
-// [Recommendations provided by DataSync Discovery]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
-type Recommendation struct {
-
-	// The estimated monthly cost of the recommended Amazon Web Services storage
-	// service.
-	EstimatedMonthlyStorageCost *string
-
-	// Information about how you can set up a recommended Amazon Web Services storage
-	// service.
-	StorageConfiguration map[string]string
-
-	// A recommended Amazon Web Services storage service that you can migrate data to
-	// based on information that DataSync Discovery collects about your on-premises
-	// storage system.
-	StorageType *string
 
 	noSmithyDocumentSerde
 }
@@ -1153,49 +791,6 @@ type ReportResult struct {
 	noSmithyDocumentSerde
 }
 
-// Information provided by DataSync Discovery about the resources in your
-// on-premises storage system.
-type ResourceDetails struct {
-
-	// The information that DataSync Discovery collects about the cluster in your
-	// on-premises storage system.
-	NetAppONTAPClusters []NetAppONTAPCluster
-
-	// The information that DataSync Discovery collects about storage virtual machines
-	// (SVMs) in your on-premises storage system.
-	NetAppONTAPSVMs []NetAppONTAPSVM
-
-	// The information that DataSync Discovery collects about volumes in your
-	// on-premises storage system.
-	NetAppONTAPVolumes []NetAppONTAPVolume
-
-	noSmithyDocumentSerde
-}
-
-// Information, including performance data and capacity usage, provided by
-// DataSync Discovery about a resource in your on-premises storage system.
-type ResourceMetrics struct {
-
-	// The storage capacity of the on-premises storage system resource.
-	Capacity *Capacity
-
-	// The types of performance data that DataSync Discovery collects about the
-	// on-premises storage system resource.
-	P95Metrics *P95Metrics
-
-	// The universally unique identifier (UUID) of the on-premises storage system
-	// resource.
-	ResourceId *string
-
-	// The type of on-premises storage system resource.
-	ResourceType DiscoveryResourceType
-
-	// The time when DataSync Discovery collected this information from the resource.
-	Timestamp *time.Time
-
-	noSmithyDocumentSerde
-}
-
 // Specifies the Amazon Resource Name (ARN) of the Identity and Access Management
 // (IAM) role that DataSync uses to access your S3 bucket.
 //
@@ -1288,20 +883,6 @@ type SourceManifestConfig struct {
 	//
 	// This member is required.
 	S3 *S3ManifestConfig
-
-	noSmithyDocumentSerde
-}
-
-// Information that identifies an on-premises storage system that you're using
-// with DataSync Discovery.
-type StorageSystemListEntry struct {
-
-	// The name of an on-premises storage system that you added to DataSync Discovery.
-	Name *string
-
-	// The Amazon Resource Names (ARN) of an on-premises storage system that you added
-	// to DataSync Discovery.
-	StorageSystemArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1643,25 +1224,6 @@ type TaskScheduleDetails struct {
 	// if DataSync automatically disables your schedule because of a repeated error,
 	// you can see when the schedule was disabled.
 	StatusUpdateTime *time.Time
-
-	noSmithyDocumentSerde
-}
-
-// The throughput peaks for an on-premises storage system volume. Each data point
-// represents the 95th percentile peak value during a 1-hour interval.
-type Throughput struct {
-
-	// Peak throughput unrelated to read and write operations.
-	Other *float64
-
-	// Peak throughput related to read operations.
-	Read *float64
-
-	// Peak total throughput on your on-premises storage system resource.
-	Total *float64
-
-	// Peak throughput related to write operations.
-	Write *float64
 
 	noSmithyDocumentSerde
 }

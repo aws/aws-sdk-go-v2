@@ -2345,11 +2345,54 @@ type ConnectionTypeBrief struct {
 	// environments), and data operations of the connector.
 	Capabilities *Capabilities
 
+	// A list of categories that this connection type belongs to. Categories help
+	// users filter and find appropriate connection types based on their use cases.
+	Categories []string
+
 	// The name of the connection type.
 	ConnectionType ConnectionType
 
+	// A list of variants available for this connection type. Different variants may
+	// provide specialized configurations for specific use cases or implementations of
+	// the same general connection type.
+	ConnectionTypeVariants []ConnectionTypeVariant
+
 	// A description of the connection type.
 	Description *string
+
+	// The human-readable name for the connection type that is displayed in the Glue
+	// console.
+	DisplayName *string
+
+	// The URL of the logo associated with a connection type.
+	LogoUrl *string
+
+	// The name of the vendor or provider that created or maintains this connection
+	// type.
+	Vendor *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a variant of a connection type in Glue Data Catalog. Connection type
+// variants provide specific configurations and behaviors for different
+// implementations of the same general connection type.
+type ConnectionTypeVariant struct {
+
+	// The unique identifier for the connection type variant. This name is used
+	// internally to identify the specific variant of a connection type.
+	ConnectionTypeVariantName *string
+
+	// A detailed description of the connection type variant, including its purpose,
+	// use cases, and any specific configuration requirements.
+	Description *string
+
+	// The human-readable name for the connection type variant that is displayed in
+	// the Glue console.
+	DisplayName *string
+
+	// The URL of the logo associated with a connection type variant.
+	LogoUrl *string
 
 	noSmithyDocumentSerde
 }

@@ -2029,6 +2029,99 @@ func awsRestjson1_serializeOpDocumentGetCisScanResultDetailsInput(v *GetCisScanR
 	return nil
 }
 
+type awsRestjson1_serializeOpGetClustersForImage struct {
+}
+
+func (*awsRestjson1_serializeOpGetClustersForImage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetClustersForImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetClustersForImageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/cluster/get")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetClustersForImageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetClustersForImageInput(v *GetClustersForImageInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetClustersForImageInput(v *GetClustersForImageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("filter")
+		if err := awsRestjson1_serializeDocumentClusterForImageFilterCriteria(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetConfiguration struct {
 }
 
@@ -5424,6 +5517,20 @@ func awsRestjson1_serializeDocumentAwsEcrContainerAggregation(v *types.AwsEcrCon
 		}
 	}
 
+	if v.InUseCount != nil {
+		ok := object.Key("inUseCount")
+		if err := awsRestjson1_serializeDocumentNumberFilterList(v.InUseCount, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LastInUseAt != nil {
+		ok := object.Key("lastInUseAt")
+		if err := awsRestjson1_serializeDocumentDateFilterList(v.LastInUseAt, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Repositories != nil {
 		ok := object.Key("repositories")
 		if err := awsRestjson1_serializeDocumentStringFilterList(v.Repositories, ok); err != nil {
@@ -5967,6 +6074,18 @@ func awsRestjson1_serializeDocumentCisTargetStatusReasonFilter(v *types.CisTarge
 	return nil
 }
 
+func awsRestjson1_serializeDocumentClusterForImageFilterCriteria(v *types.ClusterForImageFilterCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ResourceId != nil {
+		ok := object.Key("resourceId")
+		ok.String(*v.ResourceId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentComputePlatform(v *types.ComputePlatform, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6033,6 +6152,20 @@ func awsRestjson1_serializeDocumentCoverageFilterCriteria(v *types.CoverageFilte
 	if v.Ec2InstanceTags != nil {
 		ok := object.Key("ec2InstanceTags")
 		if err := awsRestjson1_serializeDocumentCoverageMapFilterList(v.Ec2InstanceTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EcrImageInUseCount != nil {
+		ok := object.Key("ecrImageInUseCount")
+		if err := awsRestjson1_serializeDocumentCoverageNumberFilterList(v.EcrImageInUseCount, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EcrImageLastInUseAt != nil {
+		ok := object.Key("ecrImageLastInUseAt")
+		if err := awsRestjson1_serializeDocumentCoverageDateFilterList(v.EcrImageLastInUseAt, ok); err != nil {
 			return err
 		}
 	}
@@ -6160,6 +6293,36 @@ func awsRestjson1_serializeDocumentCoverageMapFilterList(v []types.CoverageMapFi
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentCoverageMapFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCoverageNumberFilter(v *types.CoverageNumberFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LowerInclusive != nil {
+		ok := object.Key("lowerInclusive")
+		ok.Long(*v.LowerInclusive)
+	}
+
+	if v.UpperInclusive != nil {
+		ok := object.Key("upperInclusive")
+		ok.Long(*v.UpperInclusive)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCoverageNumberFilterList(v []types.CoverageNumberFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCoverageNumberFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -6371,6 +6534,11 @@ func awsRestjson1_serializeDocumentEcrConfiguration(v *types.EcrConfiguration, v
 		ok.String(string(v.PullDateRescanDuration))
 	}
 
+	if len(v.PullDateRescanMode) > 0 {
+		ok := object.Key("pullDateRescanMode")
+		ok.String(string(v.PullDateRescanMode))
+	}
+
 	if len(v.RescanDuration) > 0 {
 		ok := object.Key("rescanDuration")
 		ok.String(string(v.RescanDuration))
@@ -6478,6 +6646,20 @@ func awsRestjson1_serializeDocumentFilterCriteria(v *types.FilterCriteria, value
 	if v.EcrImageHash != nil {
 		ok := object.Key("ecrImageHash")
 		if err := awsRestjson1_serializeDocumentStringFilterList(v.EcrImageHash, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EcrImageInUseCount != nil {
+		ok := object.Key("ecrImageInUseCount")
+		if err := awsRestjson1_serializeDocumentNumberFilterList(v.EcrImageInUseCount, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EcrImageLastInUseAt != nil {
+		ok := object.Key("ecrImageLastInUseAt")
+		if err := awsRestjson1_serializeDocumentDateFilterList(v.EcrImageLastInUseAt, ok); err != nil {
 			return err
 		}
 	}

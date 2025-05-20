@@ -123,6 +123,28 @@ var _ *types.LambdaFunctionAggregationResponse
 var _ *types.AwsEcrContainerAggregationResponse
 var _ *types.Ec2InstanceAggregationResponse
 
+func ExampleClusterMetadata_outputUsage() {
+	var union types.ClusterMetadata
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ClusterMetadataMemberAwsEcsMetadataDetails:
+		_ = v.Value // Value is types.AwsEcsMetadataDetails
+
+	case *types.ClusterMetadataMemberAwsEksMetadataDetails:
+		_ = v.Value // Value is types.AwsEksMetadataDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AwsEksMetadataDetails
+var _ *types.AwsEcsMetadataDetails
+
 func ExampleSchedule_outputUsage() {
 	var union types.Schedule
 	// type switches can be used to check the union value

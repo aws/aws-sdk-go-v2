@@ -19,41 +19,6 @@ func captureMiddlewareStack(stack *middleware.Stack) func(*middleware.Stack) err
 		return errTestReturnEarly
 	}
 }
-func TestOpAddStorageSystemSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.AddStorageSystem(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
 func TestOpCancelTaskExecutionSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -684,41 +649,6 @@ func TestOpDescribeAgentSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
-func TestOpDescribeDiscoveryJobSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.DescribeDiscoveryJob(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
 func TestOpDescribeLocationAzureBlobSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -1104,111 +1034,6 @@ func TestOpDescribeLocationSmbSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
-func TestOpDescribeStorageSystemSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.DescribeStorageSystem(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
-func TestOpDescribeStorageSystemResourceMetricsSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.DescribeStorageSystemResourceMetrics(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
-func TestOpDescribeStorageSystemResourcesSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.DescribeStorageSystemResources(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
 func TestOpDescribeTaskSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -1279,41 +1104,6 @@ func TestOpDescribeTaskExecutionSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
-func TestOpGenerateRecommendationsSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.GenerateRecommendations(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
 func TestOpListAgentsSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -1349,41 +1139,6 @@ func TestOpListAgentsSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
-func TestOpListDiscoveryJobsSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.ListDiscoveryJobs(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
 func TestOpListLocationsSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -1402,41 +1157,6 @@ func TestOpListLocationsSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.ListLocations(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
-func TestOpListStorageSystemsSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.ListStorageSystems(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -1559,76 +1279,6 @@ func TestOpListTasksSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
-func TestOpRemoveStorageSystemSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.RemoveStorageSystem(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
-func TestOpStartDiscoveryJobSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.StartDiscoveryJob(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
 func TestOpStartTaskExecutionSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -1647,41 +1297,6 @@ func TestOpStartTaskExecutionSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.StartTaskExecution(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
-func TestOpStopDiscoveryJobSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.StopDiscoveryJob(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -1787,41 +1402,6 @@ func TestOpUpdateAgentSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.UpdateAgent(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
-func TestOpUpdateDiscoveryJobSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.UpdateDiscoveryJob(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -2207,41 +1787,6 @@ func TestOpUpdateLocationSmbSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.UpdateLocationSmb(context.Background(), nil)
-	if err != nil && !errors.Is(err, errTestReturnEarly) {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	var actual, all []string
-	for _, step := range strings.Split(captured.String(), "\n") {
-		trimmed := strings.TrimSpace(step)
-		all = append(all, trimmed)
-		if slices.Contains(expect, trimmed) {
-			actual = append(actual, trimmed)
-		}
-	}
-
-	if !slices.Equal(expect, actual) {
-		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
-	}
-}
-func TestOpUpdateStorageSystemSRAOperationOrder(t *testing.T) {
-	expect := []string{
-		"OperationSerializer",
-		"Retry",
-		"ResolveAuthScheme",
-		"GetIdentity",
-		"ResolveEndpointV2",
-		"Signing",
-		"OperationDeserializer",
-	}
-
-	var captured middleware.Stack
-	svc := New(Options{
-		APIOptions: []func(*middleware.Stack) error{
-			captureMiddlewareStack(&captured),
-		},
-	})
-	_, err := svc.UpdateStorageSystem(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}

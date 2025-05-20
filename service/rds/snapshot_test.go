@@ -902,6 +902,18 @@ func TestCheckSnapshot_DescribeDBLogFiles(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeDBMajorEngineVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDBMajorEngineVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDBMajorEngineVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeDBParameterGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDBParameterGroups(context.Background(), nil, func(o *Options) {
@@ -2838,6 +2850,18 @@ func TestUpdateSnapshot_DescribeDBLogFiles(t *testing.T) {
 	_, err := svc.DescribeDBLogFiles(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeDBLogFiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeDBMajorEngineVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDBMajorEngineVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDBMajorEngineVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

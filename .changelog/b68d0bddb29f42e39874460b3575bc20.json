@@ -1,0 +1,8 @@
+{
+    "id": "b68d0bdd-b29f-42e3-9874-460b3575bc20",
+    "type": "feature",
+    "description": "This release adds GetClustersForImage API and filter updates as part of the mapping of container images to running containers feature.",
+    "modules": [
+        "service/inspector2"
+    ]
+}

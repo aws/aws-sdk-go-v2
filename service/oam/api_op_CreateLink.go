@@ -59,6 +59,11 @@ type CreateLinkInput struct {
 	//   - $AccountEmailNoDomain is the email address of the account without the domain
 	//   name
 	//
+	// In the Amazon Web Services GovCloud (US-East) and Amazon Web Services GovCloud
+	// (US-West) Regions, the only supported option is to use custom labels, and the
+	// $AccountName , $AccountEmail , and $AccountEmailNoDomain variables all resolve
+	// as account-id instead of the specified variable.
+	//
 	// This member is required.
 	LabelTemplate *string
 

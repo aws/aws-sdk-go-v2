@@ -95,90 +95,6 @@ func (AzureBlobType) Values() []AzureBlobType {
 	}
 }
 
-type DiscoveryJobStatus string
-
-// Enum values for DiscoveryJobStatus
-const (
-	DiscoveryJobStatusRunning             DiscoveryJobStatus = "RUNNING"
-	DiscoveryJobStatusWarning             DiscoveryJobStatus = "WARNING"
-	DiscoveryJobStatusTerminated          DiscoveryJobStatus = "TERMINATED"
-	DiscoveryJobStatusFailed              DiscoveryJobStatus = "FAILED"
-	DiscoveryJobStatusStopped             DiscoveryJobStatus = "STOPPED"
-	DiscoveryJobStatusCompleted           DiscoveryJobStatus = "COMPLETED"
-	DiscoveryJobStatusCompletedWithIssues DiscoveryJobStatus = "COMPLETED_WITH_ISSUES"
-)
-
-// Values returns all known values for DiscoveryJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (DiscoveryJobStatus) Values() []DiscoveryJobStatus {
-	return []DiscoveryJobStatus{
-		"RUNNING",
-		"WARNING",
-		"TERMINATED",
-		"FAILED",
-		"STOPPED",
-		"COMPLETED",
-		"COMPLETED_WITH_ISSUES",
-	}
-}
-
-type DiscoveryResourceFilter string
-
-// Enum values for DiscoveryResourceFilter
-const (
-	DiscoveryResourceFilterSvm DiscoveryResourceFilter = "SVM"
-)
-
-// Values returns all known values for DiscoveryResourceFilter. Note that this can
-// be expanded in the future, and so it is only as up to date as the client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (DiscoveryResourceFilter) Values() []DiscoveryResourceFilter {
-	return []DiscoveryResourceFilter{
-		"SVM",
-	}
-}
-
-type DiscoveryResourceType string
-
-// Enum values for DiscoveryResourceType
-const (
-	DiscoveryResourceTypeSvm     DiscoveryResourceType = "SVM"
-	DiscoveryResourceTypeVolume  DiscoveryResourceType = "VOLUME"
-	DiscoveryResourceTypeCluster DiscoveryResourceType = "CLUSTER"
-)
-
-// Values returns all known values for DiscoveryResourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (DiscoveryResourceType) Values() []DiscoveryResourceType {
-	return []DiscoveryResourceType{
-		"SVM",
-		"VOLUME",
-		"CLUSTER",
-	}
-}
-
-type DiscoverySystemType string
-
-// Enum values for DiscoverySystemType
-const (
-	DiscoverySystemTypeNetAppONTAP DiscoverySystemType = "NetAppONTAP"
-)
-
-// Values returns all known values for DiscoverySystemType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (DiscoverySystemType) Values() []DiscoverySystemType {
-	return []DiscoverySystemType{
-		"NetAppONTAP",
-	}
-}
-
 type EfsInTransitEncryption string
 
 // Enum values for EfsInTransitEncryption
@@ -631,29 +547,6 @@ func (PreserveDevices) Values() []PreserveDevices {
 	}
 }
 
-type RecommendationStatus string
-
-// Enum values for RecommendationStatus
-const (
-	RecommendationStatusNone       RecommendationStatus = "NONE"
-	RecommendationStatusInProgress RecommendationStatus = "IN_PROGRESS"
-	RecommendationStatusCompleted  RecommendationStatus = "COMPLETED"
-	RecommendationStatusFailed     RecommendationStatus = "FAILED"
-)
-
-// Values returns all known values for RecommendationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (RecommendationStatus) Values() []RecommendationStatus {
-	return []RecommendationStatus{
-		"NONE",
-		"IN_PROGRESS",
-		"COMPLETED",
-		"FAILED",
-	}
-}
-
 type ReportLevel string
 
 // Enum values for ReportLevel
@@ -824,28 +717,6 @@ func (SmbVersion) Values() []SmbVersion {
 		"SMB3",
 		"SMB1",
 		"SMB2_0",
-	}
-}
-
-type StorageSystemConnectivityStatus string
-
-// Enum values for StorageSystemConnectivityStatus
-const (
-	StorageSystemConnectivityStatusPass    StorageSystemConnectivityStatus = "PASS"
-	StorageSystemConnectivityStatusFail    StorageSystemConnectivityStatus = "FAIL"
-	StorageSystemConnectivityStatusUnknown StorageSystemConnectivityStatus = "UNKNOWN"
-)
-
-// Values returns all known values for StorageSystemConnectivityStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
-// client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (StorageSystemConnectivityStatus) Values() []StorageSystemConnectivityStatus {
-	return []StorageSystemConnectivityStatus{
-		"PASS",
-		"FAIL",
-		"UNKNOWN",
 	}
 }
 
