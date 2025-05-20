@@ -820,6 +820,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value to sort by.</p>"
                     }
+                },
+                "lastInUseAt": {
+                    "target": "com.amazonaws.inspector2#DateFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time an Amazon ECR image was used in an Amazon ECS task or Amazon EKS pod.</p>"
+                    }
+                },
+                "inUseCount": {
+                    "target": "com.amazonaws.inspector2#NumberFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of Amazon ECS tasks or Amazon EKS pods where the Amazon ECR container image is in use.</p>"
+                    }
                 }
             },
             "traits": {
@@ -870,6 +882,18 @@
                     "target": "com.amazonaws.inspector2#SeverityCounts",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of finding by severity.</p>"
+                    }
+                },
+                "lastInUseAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time an Amazon ECR image was used in an Amazon ECS task or Amazon EKS pod.</p>"
+                    }
+                },
+                "inUseCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of Amazon ECS tasks or Amazon EKS pods where the Amazon ECR container image is in use.</p>"
                     }
                 }
             },
@@ -930,6 +954,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The platform of the Amazon ECR container image.</p>"
                     }
+                },
+                "lastInUseAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time an Amazon ECR image was used in an Amazon ECS task or Amazon EKS pod.</p>"
+                    }
+                },
+                "inUseCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of Amazon ECS tasks or Amazon EKS pods where the Amazon ECR container image is in use.</p>"
+                    }
                 }
             },
             "traits": {
@@ -953,6 +989,101 @@
                         "name": "ALL"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#AwsEcsMetadataDetails": {
+            "type": "structure",
+            "members": {
+                "detailsGroup": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details group information for a task in a cluster.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "taskDefinitionArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task definition ARN.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata about tasks where an image was in use.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#AwsEksMetadataDetails": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace for an Amazon EKS cluster.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        }
+                    }
+                },
+                "workloadInfoList": {
+                    "target": "com.amazonaws.inspector2#AwsEksWorkloadInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of workloads.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata for an Amazon EKS pod where an Amazon ECR image is in use.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#AwsEksWorkloadInfo": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workload type.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the workload.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#AwsEksWorkloadInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#AwsEksWorkloadInfo"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.inspector2#AwsLambdaFunctionDetails": {
@@ -3116,6 +3247,123 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#ClusterDetails": {
+            "type": "structure",
+            "members": {
+                "lastInUse": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last timestamp when Amazon Inspector recorded the image in use in the task or pod in the cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "runningUnitCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tasks or pods where an image was running on the cluster.</p>"
+                    }
+                },
+                "stoppedUnitCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tasks or pods where an image was stopped on the cluster in the last 24 hours.</p>"
+                    }
+                },
+                "clusterMetadata": {
+                    "target": "com.amazonaws.inspector2#ClusterMetadata",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the task or pod in the cluster.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ClusterDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#ClusterDetails"
+            }
+        },
+        "com.amazonaws.inspector2#ClusterForImageFilterCriteria": {
+            "type": "structure",
+            "members": {
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource Id to be used in the filter criteria.</p>",
+                        "smithy.api#pattern": "^arn:.*:ecr:.*:\\d{12}:repository\\/(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*(\\/sha256:[a-z0-9]{64})?$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter criteria to be used.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ClusterInformation": {
+            "type": "structure",
+            "members": {
+                "clusterArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster ARN.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        },
+                        "smithy.api#pattern": "^arn:aws(?:-[a-z0-9-]+)?:(?:ecs|eks):[a-z0-9-]+:[0-9]{12}:cluster/[a-zA-Z0-9_-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterDetails": {
+                    "target": "com.amazonaws.inspector2#ClusterDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the cluster.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the cluster.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ClusterInformationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#ClusterInformation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ClusterMetadata": {
+            "type": "union",
+            "members": {
+                "awsEcsMetadataDetails": {
+                    "target": "com.amazonaws.inspector2#AwsEcsMetadataDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for an Amazon ECS cluster in the cluster metadata.</p>"
+                    }
+                },
+                "awsEksMetadataDetails": {
+                    "target": "com.amazonaws.inspector2#AwsEksMetadataDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for an Amazon EKS cluster in the cluster metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata for a cluster.</p>"
+            }
+        },
         "com.amazonaws.inspector2#CodeFilePath": {
             "type": "structure",
             "members": {
@@ -3576,6 +3824,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date an image was last pulled at.</p>"
                     }
+                },
+                "ecrImageLastInUseAt": {
+                    "target": "com.amazonaws.inspector2#CoverageDateFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon ECR image that was last in use.</p>"
+                    }
+                },
+                "ecrImageInUseCount": {
+                    "target": "com.amazonaws.inspector2#CoverageNumberFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of Amazon ECR images in use.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3625,6 +3885,38 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.inspector2#CoverageMapFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CoverageNumberFilter": {
+            "type": "structure",
+            "members": {
+                "upperInclusive": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upper inclusive for the coverage number.&gt;</p>"
+                    }
+                },
+                "lowerInclusive": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lower inclusive for the coverage number.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The coverage number to be used in the filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CoverageNumberFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CoverageNumberFilter"
             },
             "traits": {
                 "smithy.api#length": {
@@ -5284,6 +5576,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The rescan duration configured for image pull date.</p>"
                     }
+                },
+                "pullDateRescanMode": {
+                    "target": "com.amazonaws.inspector2#EcrPullDateRescanMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pull date for the re-scan mode.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5318,6 +5616,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date an image was last pulled at.</p>"
                     }
+                },
+                "lastInUseAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time an Amazon ECR image was used in an Amazon ECS task or Amazon EKS pod.</p>"
+                    }
+                },
+                "inUseCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of Amazon ECS tasks or Amazon EKS pods where the Amazon ECR container image is in use.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5347,6 +5657,21 @@
                     {
                         "value": "DAYS_180",
                         "name": "DAYS_180"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#EcrPullDateRescanMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LAST_PULL_DATE",
+                        "name": "LAST_PULL_DATE"
+                    },
+                    {
+                        "value": "LAST_IN_USE_AT",
+                        "name": "LAST_IN_USE_AT"
                     }
                 ]
             }
@@ -5427,6 +5752,12 @@
                     "target": "com.amazonaws.inspector2#EcrPullDateRescanDuration",
                     "traits": {
                         "smithy.api#documentation": "<p>The rescan duration configured for image pull date.</p>"
+                    }
+                },
+                "pullDateRescanMode": {
+                    "target": "com.amazonaws.inspector2#EcrPullDateRescanMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pull date for the re-scan mode.</p>"
                     }
                 }
             },
@@ -6222,6 +6553,18 @@
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
                         "smithy.api#documentation": "<p>Details of the Amazon ECR image hashes used to filter findings.</p>"
+                    }
+                },
+                "ecrImageLastInUseAt": {
+                    "target": "com.amazonaws.inspector2#DateFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria indicating when an Amazon ECR image was last used in an Amazon ECS cluster task or Amazon EKS cluster pod.</p>"
+                    }
+                },
+                "ecrImageInUseCount": {
+                    "target": "com.amazonaws.inspector2#NumberFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria indicating when details for an Amazon ECR image include when an Amazon ECR image is in use.</p>"
                     }
                 },
                 "portRange": {
@@ -7275,6 +7618,104 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.inspector2#GetClustersForImage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#GetClustersForImageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#GetClustersForImageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of clusters and metadata associated with an image.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cluster/get"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "cluster"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#GetClustersForImageNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3000
+                }
+            }
+        },
+        "com.amazonaws.inspector2#GetClustersForImageRequest": {
+            "type": "structure",
+            "members": {
+                "filter": {
+                    "target": "com.amazonaws.inspector2#ClusterForImageFilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource Id for the Amazon ECR image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned in a single page of results.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#GetClustersForImageNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request used to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#GetClustersForImageResponse": {
+            "type": "structure",
+            "members": {
+                "cluster": {
+                    "target": "com.amazonaws.inspector2#ClusterInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unit of work inside of a cluster, which can include metadata about the cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#GetClustersForImageNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request used to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#GetConfiguration": {
             "type": "operation",
             "input": {
@@ -7974,6 +8415,9 @@
                 },
                 {
                     "target": "com.amazonaws.inspector2#GetCisScanResultDetails"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#GetClustersForImage"
                 },
                 {
                     "target": "com.amazonaws.inspector2#GetConfiguration"
@@ -12835,6 +13279,10 @@
                     {
                         "value": "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED",
                         "name": "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "value": "PENDING_REVIVAL_SCAN",
+                        "name": "PENDING_REVIVAL_SCAN"
                     }
                 ]
             }

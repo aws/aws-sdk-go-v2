@@ -8374,16 +8374,46 @@
                         "smithy.api#documentation": "<p>The name of the connection type.</p>"
                     }
                 },
+                "DisplayName": {
+                    "target": "com.amazonaws.glue#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable name for the connection type that is displayed in the Glue console.</p>"
+                    }
+                },
+                "Vendor": {
+                    "target": "com.amazonaws.glue#Vendor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vendor or provider that created or maintains this connection type.</p>"
+                    }
+                },
                 "Description": {
                     "target": "com.amazonaws.glue#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the connection type.</p>"
                     }
                 },
+                "Categories": {
+                    "target": "com.amazonaws.glue#ListOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of categories that this connection type belongs to. Categories help users filter and find appropriate connection types based on their \n      use cases.</p>"
+                    }
+                },
                 "Capabilities": {
                     "target": "com.amazonaws.glue#Capabilities",
                     "traits": {
                         "smithy.api#documentation": "<p>The supported authentication types, data interface types (compute environments), and data operations of the connector.</p>"
+                    }
+                },
+                "LogoUrl": {
+                    "target": "com.amazonaws.glue#UrlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the logo associated with a connection type.</p>"
+                    }
+                },
+                "ConnectionTypeVariants": {
+                    "target": "com.amazonaws.glue#ConnectionTypeVariantList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of variants available for this connection type. Different variants may provide specialized configurations for specific use cases or \n      implementations of the same general connection type.</p>"
                     }
                 }
             },
@@ -8395,6 +8425,44 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#ConnectionTypeBrief"
+            }
+        },
+        "com.amazonaws.glue#ConnectionTypeVariant": {
+            "type": "structure",
+            "members": {
+                "ConnectionTypeVariantName": {
+                    "target": "com.amazonaws.glue#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the connection type variant. This name is used internally to identify the specific variant of a connection type.\n    </p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.glue#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable name for the connection type variant that is displayed in the Glue console.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed description of the connection type variant, including its purpose, use cases, and any specific configuration requirements.</p>"
+                    }
+                },
+                "LogoUrl": {
+                    "target": "com.amazonaws.glue#UrlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the logo associated with a connection type variant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a variant of a connection type in Glue Data Catalog. Connection type variants provide specific configurations and behaviors \n      for different implementations of the same general connection type.</p>"
+            }
+        },
+        "com.amazonaws.glue#ConnectionTypeVariantList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#ConnectionTypeVariant"
             }
         },
         "com.amazonaws.glue#ConnectionsList": {
@@ -16890,6 +16958,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A policy that specifies update behavior for the crawler.</p>"
+            }
+        },
+        "com.amazonaws.glue#DisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
             }
         },
         "com.amazonaws.glue#Double": {
@@ -44896,6 +44973,9 @@
         "com.amazonaws.glue#UriString": {
             "type": "string"
         },
+        "com.amazonaws.glue#UrlString": {
+            "type": "string"
+        },
         "com.amazonaws.glue#UsageProfileDefinition": {
             "type": "structure",
             "members": {
@@ -45093,6 +45173,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#ValueString"
+            }
+        },
+        "com.amazonaws.glue#Vendor": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
             }
         },
         "com.amazonaws.glue#VersionId": {
