@@ -34,7 +34,7 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// A map of the key-value pairs of the tag or tags to assign to the resource.
+	// A map of the key-value pairs of the tag or tags to assign.
 	//
 	// This member is required.
 	Tags []types.Tag

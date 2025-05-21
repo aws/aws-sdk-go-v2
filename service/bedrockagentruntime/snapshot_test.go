@@ -146,6 +146,30 @@ func TestCheckSnapshot_GetAgentMemory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetExecutionFlowSnapshot(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExecutionFlowSnapshot(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetExecutionFlowSnapshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetFlowExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFlowExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFlowExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetInvocationStep(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInvocationStep(context.Background(), nil, func(o *Options) {
@@ -199,6 +223,30 @@ func TestCheckSnapshot_InvokeInlineAgent(t *testing.T) {
 	_, err := svc.InvokeInlineAgent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "InvokeInlineAgent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListFlowExecutionEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlowExecutionEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFlowExecutionEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListFlowExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlowExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFlowExecutions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -326,6 +374,30 @@ func TestCheckSnapshot_RetrieveAndGenerateStream(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartFlowExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartFlowExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartFlowExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopFlowExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopFlowExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopFlowExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -445,6 +517,30 @@ func TestUpdateSnapshot_GetAgentMemory(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetExecutionFlowSnapshot(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExecutionFlowSnapshot(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetExecutionFlowSnapshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetFlowExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFlowExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFlowExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetInvocationStep(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInvocationStep(context.Background(), nil, func(o *Options) {
@@ -498,6 +594,30 @@ func TestUpdateSnapshot_InvokeInlineAgent(t *testing.T) {
 	_, err := svc.InvokeInlineAgent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "InvokeInlineAgent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFlowExecutionEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlowExecutionEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFlowExecutionEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFlowExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlowExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFlowExecutions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -618,6 +738,30 @@ func TestUpdateSnapshot_RetrieveAndGenerateStream(t *testing.T) {
 	_, err := svc.RetrieveAndGenerateStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RetrieveAndGenerateStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartFlowExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartFlowExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartFlowExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopFlowExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopFlowExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopFlowExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -130,6 +130,46 @@ func (m *validateOpGetAgentMemory) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetExecutionFlowSnapshot struct {
+}
+
+func (*validateOpGetExecutionFlowSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExecutionFlowSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExecutionFlowSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExecutionFlowSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFlowExecution struct {
+}
+
+func (*validateOpGetFlowExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFlowExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFlowExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFlowExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInvocationStep struct {
 }
 
@@ -225,6 +265,46 @@ func (m *validateOpInvokeInlineAgent) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpInvokeInlineAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListFlowExecutionEvents struct {
+}
+
+func (*validateOpListFlowExecutionEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFlowExecutionEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFlowExecutionEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFlowExecutionEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListFlowExecutions struct {
+}
+
+func (*validateOpListFlowExecutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFlowExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFlowExecutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFlowExecutionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +490,46 @@ func (m *validateOpRetrieve) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartFlowExecution struct {
+}
+
+func (*validateOpStartFlowExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartFlowExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartFlowExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartFlowExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopFlowExecution struct {
+}
+
+func (*validateOpStopFlowExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopFlowExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopFlowExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopFlowExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -494,6 +614,14 @@ func addOpGetAgentMemoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAgentMemory{}, middleware.After)
 }
 
+func addOpGetExecutionFlowSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExecutionFlowSnapshot{}, middleware.After)
+}
+
+func addOpGetFlowExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFlowExecution{}, middleware.After)
+}
+
 func addOpGetInvocationStepValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInvocationStep{}, middleware.After)
 }
@@ -512,6 +640,14 @@ func addOpInvokeFlowValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpInvokeInlineAgentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeInlineAgent{}, middleware.After)
+}
+
+func addOpListFlowExecutionEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFlowExecutionEvents{}, middleware.After)
+}
+
+func addOpListFlowExecutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFlowExecutions{}, middleware.After)
 }
 
 func addOpListInvocationsValidationMiddleware(stack *middleware.Stack) error {
@@ -548,6 +684,14 @@ func addOpRetrieveAndGenerateStreamValidationMiddleware(stack *middleware.Stack)
 
 func addOpRetrieveValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRetrieve{}, middleware.After)
+}
+
+func addOpStartFlowExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartFlowExecution{}, middleware.After)
+}
+
+func addOpStopFlowExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopFlowExecution{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2415,6 +2559,48 @@ func validateOpGetAgentMemoryInput(v *GetAgentMemoryInput) error {
 	}
 }
 
+func validateOpGetExecutionFlowSnapshotInput(v *GetExecutionFlowSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExecutionFlowSnapshotInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if v.FlowAliasIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowAliasIdentifier"))
+	}
+	if v.ExecutionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFlowExecutionInput(v *GetFlowExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFlowExecutionInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if v.FlowAliasIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowAliasIdentifier"))
+	}
+	if v.ExecutionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetInvocationStepInput(v *GetInvocationStepInput) error {
 	if v == nil {
 		return nil
@@ -2550,6 +2736,45 @@ func validateOpInvokeInlineAgentInput(v *InvokeInlineAgentInput) error {
 		if err := validateCollaborators(v.Collaborators); err != nil {
 			invalidParams.AddNested("Collaborators", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFlowExecutionEventsInput(v *ListFlowExecutionEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFlowExecutionEventsInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if v.FlowAliasIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowAliasIdentifier"))
+	}
+	if v.ExecutionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionIdentifier"))
+	}
+	if len(v.EventType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EventType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFlowExecutionsInput(v *ListFlowExecutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFlowExecutionsInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2768,6 +2993,52 @@ func validateOpRetrieveInput(v *RetrieveInput) error {
 		if err := validateGuardrailConfiguration(v.GuardrailConfiguration); err != nil {
 			invalidParams.AddNested("GuardrailConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartFlowExecutionInput(v *StartFlowExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartFlowExecutionInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if v.FlowAliasIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowAliasIdentifier"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	} else if v.Inputs != nil {
+		if err := validateFlowInputs(v.Inputs); err != nil {
+			invalidParams.AddNested("Inputs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopFlowExecutionInput(v *StopFlowExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopFlowExecutionInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if v.FlowAliasIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowAliasIdentifier"))
+	}
+	if v.ExecutionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

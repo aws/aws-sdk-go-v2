@@ -55,7 +55,7 @@ type ListEngagementsInput struct {
 	// call.
 	NextToken *string
 
-	//  An object that specifies the sort order of the results.
+	// Specifies the sorting parameters for listing Engagements.
 	Sort *types.EngagementSort
 
 	noSmithyDocumentSerde

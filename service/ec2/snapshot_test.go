@@ -6938,6 +6938,18 @@ func TestCheckSnapshot_ModifyPrivateDnsNameOptions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyPublicIpDnsNameOptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyPublicIpDnsNameOptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyPublicIpDnsNameOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyReservedInstances(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyReservedInstances(context.Background(), nil, func(o *Options) {
@@ -15138,6 +15150,18 @@ func TestUpdateSnapshot_ModifyPrivateDnsNameOptions(t *testing.T) {
 	_, err := svc.ModifyPrivateDnsNameOptions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyPrivateDnsNameOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyPublicIpDnsNameOptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyPublicIpDnsNameOptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyPublicIpDnsNameOptions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

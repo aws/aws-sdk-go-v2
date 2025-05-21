@@ -261,6 +261,88 @@ func (FlowCompletionReason) Values() []FlowCompletionReason {
 	}
 }
 
+type FlowErrorCode string
+
+// Enum values for FlowErrorCode
+const (
+	FlowErrorCodeValidation          FlowErrorCode = "VALIDATION"
+	FlowErrorCodeInternalServer      FlowErrorCode = "INTERNAL_SERVER"
+	FlowErrorCodeNodeExecutionFailed FlowErrorCode = "NODE_EXECUTION_FAILED"
+)
+
+// Values returns all known values for FlowErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowErrorCode) Values() []FlowErrorCode {
+	return []FlowErrorCode{
+		"VALIDATION",
+		"INTERNAL_SERVER",
+		"NODE_EXECUTION_FAILED",
+	}
+}
+
+type FlowExecutionErrorType string
+
+// Enum values for FlowExecutionErrorType
+const (
+	FlowExecutionErrorTypeTimedOut FlowExecutionErrorType = "ExecutionTimedOut"
+)
+
+// Values returns all known values for FlowExecutionErrorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowExecutionErrorType) Values() []FlowExecutionErrorType {
+	return []FlowExecutionErrorType{
+		"ExecutionTimedOut",
+	}
+}
+
+type FlowExecutionEventType string
+
+// Enum values for FlowExecutionEventType
+const (
+	FlowExecutionEventTypeNode FlowExecutionEventType = "Node"
+	FlowExecutionEventTypeFlow FlowExecutionEventType = "Flow"
+)
+
+// Values returns all known values for FlowExecutionEventType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowExecutionEventType) Values() []FlowExecutionEventType {
+	return []FlowExecutionEventType{
+		"Node",
+		"Flow",
+	}
+}
+
+type FlowExecutionStatus string
+
+// Enum values for FlowExecutionStatus
+const (
+	FlowExecutionStatusRunning   FlowExecutionStatus = "Running"
+	FlowExecutionStatusSucceeded FlowExecutionStatus = "Succeeded"
+	FlowExecutionStatusFailed    FlowExecutionStatus = "Failed"
+	FlowExecutionStatusTimedOut  FlowExecutionStatus = "TimedOut"
+	FlowExecutionStatusAborted   FlowExecutionStatus = "Aborted"
+)
+
+// Values returns all known values for FlowExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowExecutionStatus) Values() []FlowExecutionStatus {
+	return []FlowExecutionStatus{
+		"Running",
+		"Succeeded",
+		"Failed",
+		"TimedOut",
+		"Aborted",
+	}
+}
+
 type GeneratedQueryType string
 
 // Enum values for GeneratedQueryType
@@ -652,6 +734,29 @@ const (
 func (MemoryType) Values() []MemoryType {
 	return []MemoryType{
 		"SESSION_SUMMARY",
+	}
+}
+
+type NodeErrorCode string
+
+// Enum values for NodeErrorCode
+const (
+	NodeErrorCodeValidation       NodeErrorCode = "VALIDATION"
+	NodeErrorCodeDependencyFailed NodeErrorCode = "DEPENDENCY_FAILED"
+	NodeErrorCodeBadGateway       NodeErrorCode = "BAD_GATEWAY"
+	NodeErrorCodeInternalServer   NodeErrorCode = "INTERNAL_SERVER"
+)
+
+// Values returns all known values for NodeErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NodeErrorCode) Values() []NodeErrorCode {
+	return []NodeErrorCode{
+		"VALIDATION",
+		"DEPENDENCY_FAILED",
+		"BAD_GATEWAY",
+		"INTERNAL_SERVER",
 	}
 }
 

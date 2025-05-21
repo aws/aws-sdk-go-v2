@@ -110,6 +110,66 @@ func ExampleContentBlock_outputUsage() {
 
 var _ *string
 
+func ExampleFlowExecutionContent_outputUsage() {
+	var union types.FlowExecutionContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FlowExecutionContentMemberDocument:
+		_ = v.Value // Value is document.Interface
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ document.Interface
+
+func ExampleFlowExecutionEvent_outputUsage() {
+	var union types.FlowExecutionEvent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FlowExecutionEventMemberConditionResultEvent:
+		_ = v.Value // Value is types.ConditionResultEvent
+
+	case *types.FlowExecutionEventMemberFlowFailureEvent:
+		_ = v.Value // Value is types.FlowFailureEvent
+
+	case *types.FlowExecutionEventMemberFlowInputEvent:
+		_ = v.Value // Value is types.FlowExecutionInputEvent
+
+	case *types.FlowExecutionEventMemberFlowOutputEvent:
+		_ = v.Value // Value is types.FlowExecutionOutputEvent
+
+	case *types.FlowExecutionEventMemberNodeFailureEvent:
+		_ = v.Value // Value is types.NodeFailureEvent
+
+	case *types.FlowExecutionEventMemberNodeInputEvent:
+		_ = v.Value // Value is types.NodeInputEvent
+
+	case *types.FlowExecutionEventMemberNodeOutputEvent:
+		_ = v.Value // Value is types.NodeOutputEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.NodeFailureEvent
+var _ *types.FlowFailureEvent
+var _ *types.FlowExecutionOutputEvent
+var _ *types.NodeOutputEvent
+var _ *types.FlowExecutionInputEvent
+var _ *types.ConditionResultEvent
+var _ *types.NodeInputEvent
+
 func ExampleFlowInputContent_outputUsage() {
 	var union types.FlowInputContent
 	// type switches can be used to check the union value
@@ -445,6 +505,24 @@ func ExampleMemory_outputUsage() {
 }
 
 var _ *types.MemorySessionSummary
+
+func ExampleNodeExecutionContent_outputUsage() {
+	var union types.NodeExecutionContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.NodeExecutionContentMemberDocument:
+		_ = v.Value // Value is document.Interface
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ document.Interface
 
 func ExampleOptimizedPrompt_outputUsage() {
 	var union types.OptimizedPrompt

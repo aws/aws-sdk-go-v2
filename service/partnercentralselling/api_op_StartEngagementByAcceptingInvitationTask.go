@@ -55,7 +55,7 @@ type StartEngagementByAcceptingInvitationTaskInput struct {
 	// This member is required.
 	Identifier *string
 
-	// A list of objects specifying each tag name and value.
+	// A map of the key-value pairs of the tag or tags to assign.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

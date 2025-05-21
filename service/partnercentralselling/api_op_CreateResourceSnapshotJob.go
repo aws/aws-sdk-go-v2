@@ -68,7 +68,7 @@ type CreateResourceSnapshotJobInput struct {
 	// This member is required.
 	ResourceType types.ResourceType
 
-	// A list of objects specifying each tag name and value.
+	// A map of the key-value pairs of the tag or tags to assign.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

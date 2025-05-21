@@ -1,0 +1,8 @@
+{
+    "id": "a8f3bbaf-7820-4961-8333-a3d83d6c8730",
+    "type": "documentation",
+    "description": "Doc only update that addresses a customer reported issue.",
+    "modules": [
+        "service/applicationautoscaling"
+    ]
+}

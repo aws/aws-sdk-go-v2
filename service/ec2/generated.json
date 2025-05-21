@@ -584,6 +584,7 @@
         "api_op_ModifyManagedPrefixList.go",
         "api_op_ModifyNetworkInterfaceAttribute.go",
         "api_op_ModifyPrivateDnsNameOptions.go",
+        "api_op_ModifyPublicIpDnsNameOptions.go",
         "api_op_ModifyReservedInstances.go",
         "api_op_ModifyRouteServer.go",
         "api_op_ModifySecurityGroupRules.go",

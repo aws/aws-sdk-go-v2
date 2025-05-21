@@ -13729,7 +13729,9 @@ type NetworkInterface struct {
 	// The Amazon Web Services account ID of the owner of the network interface.
 	OwnerId *string
 
-	// The private DNS name.
+	// The private hostname. For more information, see [EC2 instance hostnames, DNS names, and domains] in the Amazon EC2 User Guide.
+	//
+	// [EC2 instance hostnames, DNS names, and domains]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
 	PrivateDnsName *string
 
 	// The IPv4 address of the network interface within the subnet.
@@ -13737,6 +13739,17 @@ type NetworkInterface struct {
 
 	// The private IPv4 addresses associated with the network interface.
 	PrivateIpAddresses []NetworkInterfacePrivateIpAddress
+
+	// A public hostname. For more information, see [EC2 instance hostnames, DNS names, and domains] in the Amazon EC2 User Guide.
+	//
+	// [EC2 instance hostnames, DNS names, and domains]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+	PublicDnsName *string
+
+	// Public hostname type options. For more information, see [EC2 instance hostnames, DNS names, and domains] in the Amazon EC2 User
+	// Guide.
+	//
+	// [EC2 instance hostnames, DNS names, and domains]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+	PublicIpDnsNameOptions *PublicIpDnsNameOptions
 
 	// The alias or Amazon Web Services account ID of the principal or service that
 	// created the network interface.
@@ -13893,6 +13906,13 @@ type NetworkInterfaceIpv6Address struct {
 	//
 	// [ModifyNetworkInterfaceAttribute]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyNetworkInterfaceAttribute.html
 	IsPrimaryIpv6 *bool
+
+	// An IPv6-enabled public hostname for a network interface. Requests from within
+	// the VPC or from the internet resolve to the IPv6 GUA of the network interface.
+	// For more information, see [EC2 instance hostnames, DNS names, and domains]in the Amazon EC2 User Guide.
+	//
+	// [EC2 instance hostnames, DNS names, and domains]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+	PublicIpv6DnsName *string
 
 	noSmithyDocumentSerde
 }
@@ -15145,6 +15165,37 @@ type PtrUpdateStatus struct {
 
 	// The value for the PTR record update.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Public hostname type options. For more information, see [EC2 instance hostnames, DNS names, and domains] in the Amazon EC2 User
+// Guide.
+//
+// [EC2 instance hostnames, DNS names, and domains]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+type PublicIpDnsNameOptions struct {
+
+	// The public hostname type. For more information, see [EC2 instance hostnames, DNS names, and domains] in the Amazon EC2 User
+	// Guide.
+	//
+	// [EC2 instance hostnames, DNS names, and domains]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+	DnsHostnameType *string
+
+	// A dual-stack public hostname for a network interface. Requests from within the
+	// VPC resolve to both the private IPv4 address and the IPv6 Global Unicast Address
+	// of the network interface. Requests from the internet resolve to both the public
+	// IPv4 and the IPv6 GUA address of the network interface.
+	PublicDualStackDnsName *string
+
+	// An IPv4-enabled public hostname for a network interface. Requests from within
+	// the VPC resolve to the private primary IPv4 address of the network interface.
+	// Requests from the internet resolve to the public IPv4 address of the network
+	// interface.
+	PublicIpv4DnsName *string
+
+	// An IPv6-enabled public hostname for a network interface. Requests from within
+	// the VPC or from the internet resolve to the IPv6 GUA of the network interface.
+	PublicIpv6DnsName *string
 
 	noSmithyDocumentSerde
 }

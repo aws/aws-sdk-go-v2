@@ -693,6 +693,32 @@ type CollaboratorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a condition evaluation result during an async
+// execution. This event is generated when a condition node in the flow evaluates
+// its conditions.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type ConditionResultEvent struct {
+
+	// The name of the condition node that evaluated the conditions.
+	//
+	// This member is required.
+	NodeName *string
+
+	// A list of conditions that were satisfied during the evaluation.
+	//
+	// This member is required.
+	SatisfiedConditions []SatisfiedCondition
+
+	// The timestamp when the condition evaluation occurred.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A content block.
 //
 // The following types satisfy this interface:
@@ -945,6 +971,258 @@ type FlowCompletionEvent struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the content of an async execution input or output field.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+//
+// The following types satisfy this interface:
+//
+//	FlowExecutionContentMemberDocument
+type FlowExecutionContent interface {
+	isFlowExecutionContent()
+}
+
+// The document content of the field, which can contain text or structured data.
+type FlowExecutionContentMemberDocument struct {
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowExecutionContentMemberDocument) isFlowExecutionContent() {}
+
+// Contains information about an error that occurred during an async execution.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type FlowExecutionError struct {
+
+	// The error code for the type of error that occurred.
+	Error FlowExecutionErrorType
+
+	// A descriptive message that provides details about the error.
+	Message *string
+
+	// The name of the node in the flow where the error occurred (if applicable).
+	NodeName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents an event that occurred during an async execution. This is a union
+// type that can contain one of several event types, such as node input and output
+// events; flow input and output events; condition node result events, or failure
+// events.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+//
+// The following types satisfy this interface:
+//
+//	FlowExecutionEventMemberConditionResultEvent
+//	FlowExecutionEventMemberFlowFailureEvent
+//	FlowExecutionEventMemberFlowInputEvent
+//	FlowExecutionEventMemberFlowOutputEvent
+//	FlowExecutionEventMemberNodeFailureEvent
+//	FlowExecutionEventMemberNodeInputEvent
+//	FlowExecutionEventMemberNodeOutputEvent
+type FlowExecutionEvent interface {
+	isFlowExecutionEvent()
+}
+
+// Contains information about a condition evaluation result during the async
+// execution. This event is generated when a condition node in the flow evaluates
+// its conditions.
+type FlowExecutionEventMemberConditionResultEvent struct {
+	Value ConditionResultEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowExecutionEventMemberConditionResultEvent) isFlowExecutionEvent() {}
+
+// Contains information about a failure that occurred at the flow level during
+// execution.
+type FlowExecutionEventMemberFlowFailureEvent struct {
+	Value FlowFailureEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowExecutionEventMemberFlowFailureEvent) isFlowExecutionEvent() {}
+
+// Contains information about the inputs provided to the flow at the start of
+// execution.
+type FlowExecutionEventMemberFlowInputEvent struct {
+	Value FlowExecutionInputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowExecutionEventMemberFlowInputEvent) isFlowExecutionEvent() {}
+
+// Contains information about the outputs produced by the flow at the end of
+// execution.
+type FlowExecutionEventMemberFlowOutputEvent struct {
+	Value FlowExecutionOutputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowExecutionEventMemberFlowOutputEvent) isFlowExecutionEvent() {}
+
+// Contains information about a failure that occurred at a specific node during
+// execution.
+type FlowExecutionEventMemberNodeFailureEvent struct {
+	Value NodeFailureEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowExecutionEventMemberNodeFailureEvent) isFlowExecutionEvent() {}
+
+// Contains information about the inputs provided to a specific node during
+// execution.
+type FlowExecutionEventMemberNodeInputEvent struct {
+	Value NodeInputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowExecutionEventMemberNodeInputEvent) isFlowExecutionEvent() {}
+
+// Contains information about the outputs produced by a specific node during
+// execution.
+type FlowExecutionEventMemberNodeOutputEvent struct {
+	Value NodeOutputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowExecutionEventMemberNodeOutputEvent) isFlowExecutionEvent() {}
+
+// Contains information about the inputs provided to the flow at the start of
+// async execution.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type FlowExecutionInputEvent struct {
+
+	// A list of input fields provided to the flow.
+	//
+	// This member is required.
+	Fields []FlowInputField
+
+	// The name of the node that receives the inputs.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The timestamp when the inputs are provided.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the outputs produced by the flow during an async
+// execution.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type FlowExecutionOutputEvent struct {
+
+	// A list of output fields produced by the flow.
+	//
+	// This member is required.
+	Fields []FlowOutputField
+
+	// The name of the node that produces the outputs.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The timestamp when the outputs are produced.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a flow's async execution, including its
+// status, timestamps, and identifiers.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type FlowExecutionSummary struct {
+
+	// The timestamp when the async execution was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the async execution.
+	//
+	// This member is required.
+	ExecutionArn *string
+
+	// The unique identifier of the flow alias used for the execution.
+	//
+	// This member is required.
+	FlowAliasIdentifier *string
+
+	// The unique identifier of the flow.
+	//
+	// This member is required.
+	FlowIdentifier *string
+
+	// The version of the flow used for the execution.
+	//
+	// This member is required.
+	FlowVersion *string
+
+	// The current status of the async execution.
+	//
+	// Async executions time out after 24 hours.
+	//
+	// This member is required.
+	Status FlowExecutionStatus
+
+	// The timestamp when the async execution ended. This field is only populated when
+	// the execution has completed, failed, timed out, or been aborted.
+	EndedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a failure that occurred at the flow level during an
+// async execution.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type FlowFailureEvent struct {
+
+	// The error code that identifies the type of failure that occurred.
+	//
+	// This member is required.
+	ErrorCode FlowErrorCode
+
+	// A descriptive message that provides details about the failure.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The timestamp when the failure occurred.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an input into the prompt flow and where to send it.
 type FlowInput struct {
 
@@ -984,6 +1262,25 @@ type FlowInputContentMemberDocument struct {
 }
 
 func (*FlowInputContentMemberDocument) isFlowInputContent() {}
+
+// Represents an input field provided to a flow during an async execution.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type FlowInputField struct {
+
+	// The content of the input field, which can contain text or structured data.
+	//
+	// This member is required.
+	Content FlowExecutionContent
+
+	// The name of the input field as defined in the flow's input schema.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
 
 // The content structure containing input information for multi-turn flow
 // interactions.
@@ -1061,6 +1358,25 @@ type FlowOutputEvent struct {
 	//
 	// This member is required.
 	NodeType NodeType
+
+	noSmithyDocumentSerde
+}
+
+// Represents an output field produced by a flow during an async execution.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type FlowOutputField struct {
+
+	// The content of the output field, which can contain text or structured data.
+	//
+	// This member is required.
+	Content FlowExecutionContent
+
+	// The name of the output field as defined in the flow's output schema.
+	//
+	// This member is required.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -2682,7 +2998,7 @@ type Metadata struct {
 	// logs or systems.
 	ClientRequestId *string
 
-	// In the final response, endTime is the end time time of the agent invocation
+	// In the final response, endTime is the end time of the agent invocation
 	// operation.
 	EndTime *time.Time
 
@@ -2800,6 +3116,143 @@ type ModelPerformanceConfiguration struct {
 
 	// The latency configuration for the model.
 	PerformanceConfig *PerformanceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains the content of a flow node's input or output field for an async
+// execution.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+//
+// The following types satisfy this interface:
+//
+//	NodeExecutionContentMemberDocument
+type NodeExecutionContent interface {
+	isNodeExecutionContent()
+}
+
+// The document content of the field, which can contain text or structured data.
+type NodeExecutionContentMemberDocument struct {
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*NodeExecutionContentMemberDocument) isNodeExecutionContent() {}
+
+// Contains information about a failure that occurred at a specific node during a
+// flow's async execution.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type NodeFailureEvent struct {
+
+	// The error code that identifies the type of failure that occurred at the node.
+	//
+	// This member is required.
+	ErrorCode NodeErrorCode
+
+	// A descriptive message that provides details about the node failure.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The name of the node where the failure occurred.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The timestamp when the node failure occurred.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the inputs provided to a specific node during a
+// flow's async execution.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type NodeInputEvent struct {
+
+	// A list of input fields provided to the node.
+	//
+	// This member is required.
+	Fields []NodeInputField
+
+	// The name of the node that received the inputs.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The timestamp when the inputs were provided to the node.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents an input field provided to a node during a flow's async execution.
+type NodeInputField struct {
+
+	// The content of the input field, which can contain text or structured data.
+	//
+	// This member is required.
+	Content NodeExecutionContent
+
+	// The name of the input field as defined in the node's input schema.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the outputs produced by a specific node during a
+// flow's async execution.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type NodeOutputEvent struct {
+
+	// A list of output fields produced by the node.
+	//
+	// This member is required.
+	Fields []NodeOutputField
+
+	// The name of the node that produced the outputs.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The timestamp when the outputs were produced by the node.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents an output field produced by a node during a flow's async execution.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type NodeOutputField struct {
+
+	// The content of the output field, which can contain text or structured data.
+	//
+	// This member is required.
+	Content NodeExecutionContent
+
+	// The name of the output field as defined in the node's output schema.
+	//
+	// This member is required.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -4441,6 +4894,21 @@ type S3ObjectFile struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a condition that was satisfied during a condition node evaluation in
+// a flow's async execution.
+//
+// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// change.
+type SatisfiedCondition struct {
+
+	// The name of the condition that was satisfied.
+	//
+	// This member is required.
+	ConditionName *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains parameters that specify various attributes that persist across a
 // session or prompt. You can define session state attributes as key-value pairs
 // when writing a [Lambda function]for an action group or pass them when making an [InvokeAgent] request. Use
@@ -4902,6 +5370,8 @@ func (*UnknownUnionMember) isAPISchema()                                   {}
 func (*UnknownUnionMember) isBedrockSessionContentBlock()                  {}
 func (*UnknownUnionMember) isCaller()                                      {}
 func (*UnknownUnionMember) isContentBlock()                                {}
+func (*UnknownUnionMember) isFlowExecutionContent()                        {}
+func (*UnknownUnionMember) isFlowExecutionEvent()                          {}
 func (*UnknownUnionMember) isFlowInputContent()                            {}
 func (*UnknownUnionMember) isFlowMultiTurnInputContent()                   {}
 func (*UnknownUnionMember) isFlowOutputContent()                           {}
@@ -4918,6 +5388,7 @@ func (*UnknownUnionMember) isInvocationInputMember()                       {}
 func (*UnknownUnionMember) isInvocationResultMember()                      {}
 func (*UnknownUnionMember) isInvocationStepPayload()                       {}
 func (*UnknownUnionMember) isMemory()                                      {}
+func (*UnknownUnionMember) isNodeExecutionContent()                        {}
 func (*UnknownUnionMember) isOptimizedPrompt()                             {}
 func (*UnknownUnionMember) isOptimizedPromptStream()                       {}
 func (*UnknownUnionMember) isOrchestrationExecutor()                       {}

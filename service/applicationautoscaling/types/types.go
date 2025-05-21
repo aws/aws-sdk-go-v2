@@ -432,6 +432,26 @@ type PredictiveScalingPolicyConfiguration struct {
 // When returned in the output of DescribePolicies , it indicates that a predictive
 // scaling policy uses individually specified load and scaling metrics instead of a
 // metric pair.
+//
+// The following predefined metrics are available for predictive scaling:
+//
+//   - ECSServiceAverageCPUUtilization
+//
+//   - ECSServiceAverageMemoryUtilization
+//
+//   - ECSServiceCPUUtilization
+//
+//   - ECSServiceMemoryUtilization
+//
+//   - ECSServiceTotalCPUUtilization
+//
+//   - ECSServiceTotalMemoryUtilization
+//
+//   - ALBRequestCount
+//
+//   - ALBRequestCountPerTarget
+//
+//   - TotalALBRequestCount
 type PredictiveScalingPredefinedLoadMetricSpecification struct {
 
 	//  The metric type.
@@ -445,7 +465,27 @@ type PredictiveScalingPredefinedLoadMetricSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a metric pair for a predictive scaling policy.
+//	Represents a metric pair for a predictive scaling policy.
+//
+// The following predefined metrics are available for predictive scaling:
+//
+//   - ECSServiceAverageCPUUtilization
+//
+//   - ECSServiceAverageMemoryUtilization
+//
+//   - ECSServiceCPUUtilization
+//
+//   - ECSServiceMemoryUtilization
+//
+//   - ECSServiceTotalCPUUtilization
+//
+//   - ECSServiceTotalMemoryUtilization
+//
+//   - ALBRequestCount
+//
+//   - ALBRequestCountPerTarget
+//
+//   - TotalALBRequestCount
 type PredictiveScalingPredefinedMetricPairSpecification struct {
 
 	//  Indicates which metrics to use. There are two different types of metrics for
@@ -466,6 +506,26 @@ type PredictiveScalingPredefinedMetricPairSpecification struct {
 // When returned in the output of DescribePolicies , it indicates that a predictive
 // scaling policy uses individually specified load and scaling metrics instead of a
 // metric pair.
+//
+// The following predefined metrics are available for predictive scaling:
+//
+//   - ECSServiceAverageCPUUtilization
+//
+//   - ECSServiceAverageMemoryUtilization
+//
+//   - ECSServiceCPUUtilization
+//
+//   - ECSServiceMemoryUtilization
+//
+//   - ECSServiceTotalCPUUtilization
+//
+//   - ECSServiceTotalMemoryUtilization
+//
+//   - ALBRequestCount
+//
+//   - ALBRequestCountPerTarget
+//
+//   - TotalALBRequestCount
 type PredictiveScalingPredefinedScalingMetricSpecification struct {
 
 	//  The metric type.
