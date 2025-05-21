@@ -1,8 +1,0 @@
-{
-    "id": "31e7d98b-dacc-47aa-a678-4afc137b8c75",
-    "type": "feature",
-    "description": "Adds support for setting up Contributor Insight rules on logs transformed via Logs Transformation feature.",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}

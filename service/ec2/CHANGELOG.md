@@ -1,3 +1,7 @@
+# v1.221.0 (2025-05-21)
+
+* **Feature**: Release of Dualstack and Ipv6-only EC2 Public DNS hostnames
+
 # v1.220.0 (2025-05-20)
 
 * **Feature**: This release expands the ModifyInstanceMaintenanceOptions API to enable or disable instance migration during customer-initiated reboots for EC2 Scheduled Reboot Events.

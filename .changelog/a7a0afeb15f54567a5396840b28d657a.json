@@ -1,8 +1,0 @@
-{
-    "id": "a7a0afeb-15f5-4567-a539-6840b28d657a",
-    "type": "feature",
-    "description": "Amazon Bedrock introduces asynchronous flows (in preview), which let you run flows for longer durations and yield control so that your application can perform other tasks and you don't have to actively monitor the flow's progress.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

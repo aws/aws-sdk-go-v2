@@ -1,8 +1,0 @@
-{
-    "id": "35c3a1e4-8440-4a74-8ec6-3b3f9744a14e",
-    "type": "feature",
-    "description": "Release of Dualstack and Ipv6-only EC2 Public DNS hostnames",
-    "modules": [
-        "service/ec2"
-    ]
-}

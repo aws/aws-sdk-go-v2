@@ -1,3 +1,17 @@
+# Release (2025-05-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.36.1](service/applicationautoscaling/CHANGELOG.md#v1361-2025-05-21)
+  * **Documentation**: Doc only update that addresses a customer reported issue.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.44.0](service/bedrockagentruntime/CHANGELOG.md#v1440-2025-05-21)
+  * **Feature**: Amazon Bedrock introduces asynchronous flows (in preview), which let you run flows for longer durations and yield control so that your application can perform other tasks and you don't have to actively monitor the flow's progress.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.45.0](service/cloudwatch/CHANGELOG.md#v1450-2025-05-21)
+  * **Feature**: Adds support for setting up Contributor Insight rules on logs transformed via Logs Transformation feature.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.221.0](service/ec2/CHANGELOG.md#v12210-2025-05-21)
+  * **Feature**: Release of Dualstack and Ipv6-only EC2 Public DNS hostnames
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.5.0](service/partnercentralselling/CHANGELOG.md#v150-2025-05-21)
+  * **Feature**: Modified validation to allow expectedCustomerSpend array with zero elements in Partner Opportunity operations.
+
 # Release (2025-05-20)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "c7292c0d-b583-4768-a106-76f0a064e7ff",
-    "type": "feature",
-    "description": "Modified validation to allow expectedCustomerSpend array with zero elements in Partner Opportunity operations.",
-    "modules": [
-        "service/partnercentralselling"
-    ]
-}

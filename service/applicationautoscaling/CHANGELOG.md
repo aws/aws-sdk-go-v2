@@ -1,3 +1,7 @@
+# v1.36.1 (2025-05-21)
+
+* **Documentation**: Doc only update that addresses a customer reported issue.
+
 # v1.36.0 (2025-04-10)
 
 * **Feature**: Application Auto Scaling now supports horizontal scaling for Elasticache Memcached self-designed clusters using target tracking scaling policies and scheduled scaling.
