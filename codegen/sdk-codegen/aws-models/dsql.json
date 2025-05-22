@@ -58,6 +58,9 @@
                 },
                 "deletionProtectionEnabled": {
                     "target": "com.amazonaws.dsql#DeletionProtectionEnabled"
+                },
+                "encryptionDetails": {
+                    "target": "com.amazonaws.dsql#EncryptionDetails"
                 }
             },
             "create": {
@@ -300,6 +303,13 @@
                         "smithy.api#documentation": "<p>If enabled, you can't delete your cluster. You must first disable this property before\n         you can delete your cluster.</p>"
                     }
                 },
+                "kmsEncryptionKey": {
+                    "target": "com.amazonaws.dsql#KmsEncryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key that encrypts and protects the data on your cluster. You can specify the ARN, ID, or alias of an existing key or have Amazon Web Services create a default key for you.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.dsql#TagMap",
                     "traits": {
@@ -361,6 +371,13 @@
                     "target": "com.amazonaws.dsql#MultiRegionProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>The multi-Region cluster configuration details that were set during cluster creation</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "encryptionDetails": {
+                    "target": "com.amazonaws.dsql#EncryptionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for the cluster that was specified during the creation process, including the KMS key identifier and encryption state.</p>",
                         "smithy.api#notProperty": {}
                     }
                 },
@@ -870,6 +887,80 @@
                 "smithy.api#documentation": "<p>Indicates whether deletion protection is enabled for a cluster.</p>"
             }
         },
+        "com.amazonaws.dsql#EncryptionDetails": {
+            "type": "structure",
+            "members": {
+                "encryptionType": {
+                    "target": "com.amazonaws.dsql#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption that protects the data on your cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.dsql#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key that encrypts data in the cluster.</p>"
+                    }
+                },
+                "encryptionStatus": {
+                    "target": "com.amazonaws.dsql#EncryptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of encryption for the cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration details about encryption for the cluster including the KMS key ARN, encryption type, and encryption status.</p>"
+            }
+        },
+        "com.amazonaws.dsql#EncryptionStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "KMS_KEY_INACCESSIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KMS_KEY_INACCESSIBLE"
+                    }
+                },
+                "ENABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dsql#EncryptionType": {
+            "type": "enum",
+            "members": {
+                "AWS_OWNED_KMS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_OWNED_KMS_KEY"
+                    }
+                },
+                "CUSTOMER_MANAGED_KMS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED_KMS_KEY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.dsql#GetCluster": {
             "type": "operation",
             "input": {
@@ -1015,6 +1106,13 @@
                     "traits": {
                         "smithy.api#notProperty": {}
                     }
+                },
+                "encryptionDetails": {
+                    "target": "com.amazonaws.dsql#EncryptionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current encryption configuration details for the cluster.</p>",
+                        "smithy.api#notProperty": {}
+                    }
                 }
             },
             "traits": {
@@ -1136,6 +1234,24 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.dsql#KmsEncryptionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:/_-]+$"
+            }
+        },
+        "com.amazonaws.dsql#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::KMS::Key"
+                }
             }
         },
         "com.amazonaws.dsql#ListClusters": {
@@ -1697,6 +1813,13 @@
                     "target": "com.amazonaws.dsql#DeletionProtectionEnabled",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to enable deletion protection in your cluster.</p>"
+                    }
+                },
+                "kmsEncryptionKey": {
+                    "target": "com.amazonaws.dsql#KmsEncryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key that encrypts and protects the data on your cluster. You can specify the ARN, ID, or alias of an existing key or have Amazon Web Services create a default key for you.</p>",
+                        "smithy.api#notProperty": {}
                     }
                 },
                 "clientToken": {

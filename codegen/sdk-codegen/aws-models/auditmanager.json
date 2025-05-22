@@ -74,12 +74,12 @@
                 "serviceName": {
                     "target": "com.amazonaws.auditmanager#AWSServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the Amazon Web Service. </p>"
+                        "smithy.api#documentation": "<p> The name of the Amazon Web Services service. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> An Amazon Web Service such as Amazon S3 or CloudTrail.\n      </p>\n         <p>For an example of how to find an Amazon Web Service name and how to define it in\n         your assessment scope, see the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_2\">Finding an Amazon Web Service name to use in your assessment scope</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_3\">Defining an Amazon Web Service name in your assessment scope</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p> An Amazon Web Services service such as Amazon S3 or CloudTrail.\n      </p>\n         <p>For an example of how to find an Amazon Web Services service name and how to define it in\n         your assessment scope, see the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_2\">Finding an Amazon Web Services service name to use in your assessment scope</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_3\">Defining an Amazon Web Services service name in your assessment scope</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.auditmanager#AWSServiceName": {
@@ -288,6 +288,10 @@
                 "description": {
                     "target": "com.amazonaws.auditmanager#ControlDescription",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "since": "2025-05-19",
+                            "message": "This data type will be deprecated on May 19, 2025. To view the assessment control description, use GetControl."
+                        },
                         "smithy.api#documentation": "<p> The description of the control. </p>"
                     }
                 },
@@ -457,7 +461,7 @@
                 "dataSource": {
                     "target": "com.amazonaws.auditmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Service that the evidence was collected from. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Web Services service that the evidence was collected from. </p>"
                     }
                 },
                 "author": {
@@ -497,7 +501,7 @@
                     "target": "com.amazonaws.auditmanager#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> The number of evidence that falls under the configuration data category. This evidence\n         is collected from configuration snapshots of other Amazon Web Services such as\n            Amazon EC2, Amazon S3, or IAM. </p>"
+                        "smithy.api#documentation": "<p> The number of evidence that falls under the configuration data category. This evidence\n         is collected from configuration snapshots of other Amazon Web Services services such as\n            Amazon EC2, Amazon S3, or IAM. </p>"
                     }
                 },
                 "evidenceByTypeManualCount": {
@@ -4743,7 +4747,7 @@
                 "eventSource": {
                     "target": "com.amazonaws.auditmanager#AWSServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Service that the evidence is collected from. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Web Services service that the evidence is collected from. </p>"
                     }
                 },
                 "eventName": {
@@ -6350,7 +6354,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of the Amazon Web Services from which Audit Manager can collect\n         evidence. </p>\n         <p>Audit Manager defines which Amazon Web Services are in scope for an\n         assessment. Audit Manager infers this scope by examining the assessment’s controls and\n         their data sources, and then mapping this information to one or more of the corresponding\n            Amazon Web Services that are in this list.</p>\n         <note>\n            <p>For information about why it's no longer possible to specify services in scope manually, see\n               <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-collection-issues.html#unable-to-edit-services\">I can't edit the services in scope for my assessment</a> in\n            the <i>Troubleshooting</i> section of the Audit Manager user\n            guide.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Gets a list of the Amazon Web Services services from which Audit Manager can collect\n         evidence. </p>\n         <p>Audit Manager defines which Amazon Web Services services are in scope for an\n         assessment. Audit Manager infers this scope by examining the assessment’s controls and\n         their data sources, and then mapping this information to one or more of the corresponding\n            Amazon Web Services services that are in this list.</p>\n         <note>\n            <p>For information about why it's no longer possible to specify services in scope manually, see\n               <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-collection-issues.html#unable-to-edit-services\">I can't edit the services in scope for my assessment</a> in\n            the <i>Troubleshooting</i> section of the Audit Manager user\n            guide.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/services",
@@ -6371,7 +6375,7 @@
                 "serviceMetadata": {
                     "target": "com.amazonaws.auditmanager#ServiceMetadataList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The metadata that's associated with the Amazon Web Service. </p>"
+                        "smithy.api#documentation": "<p> The metadata that's associated with the Amazon Web Services service. </p>"
                     }
                 }
             },
@@ -8085,12 +8089,12 @@
                         "smithy.api#deprecated": {
                             "message": "You can't specify services in scope when creating/updating an assessment. If you use the parameter to specify one or more AWS services, Audit Manager ignores the input. Instead the value of the parameter will show as empty indicating that the services are defined and managed by Audit Manager."
                         },
-                        "smithy.api#documentation": "<p> The Amazon Web Services services that are included in the scope of the assessment.\n      </p>\n         <important>\n            <p>This API parameter is no longer supported. If you use this parameter to specify one\n            or more Amazon Web Services, Audit Manager ignores this input. Instead, the\n            value for <code>awsServices</code> will show as empty.</p>\n         </important>"
+                        "smithy.api#documentation": "<p> The Amazon Web Services services that are included in the scope of the assessment.\n      </p>\n         <important>\n            <p>This API parameter is no longer supported. If you use this parameter to specify one\n            or more Amazon Web Services services, Audit Manager ignores this input. Instead, the\n            value for <code>awsServices</code> will show as empty.</p>\n         </important>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The wrapper that contains the Amazon Web Services accounts that are in\n         scope for the assessment. </p>\n         <note>\n            <p>You no longer need to specify which Amazon Web Services are in scope when you\n            create or update an assessment. Audit Manager infers the services in scope by\n            examining your assessment controls and their data sources, and then mapping this\n            information to the relevant Amazon Web Services. </p>\n            <p>If an underlying data source changes for your assessment, we automatically update the\n            services scope as needed to reflect the correct Amazon Web Services. This\n            ensures that your assessment collects accurate and comprehensive evidence about all of\n            the relevant services in your AWS environment.</p>\n         </note>",
+                "smithy.api#documentation": "<p> The wrapper that contains the Amazon Web Services accounts that are in\n         scope for the assessment. </p>\n         <note>\n            <p>You no longer need to specify which Amazon Web Services services are in scope when you\n            create or update an assessment. Audit Manager infers the services in scope by\n            examining your assessment controls and their data sources, and then mapping this\n            information to the relevant Amazon Web Services services. </p>\n            <p>If an underlying data source changes for your assessment, we automatically update the\n            services scope as needed to reflect the correct Amazon Web Services services. This\n            ensures that your assessment collects accurate and comprehensive evidence about all of\n            the relevant services in your AWS environment.</p>\n         </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -8100,30 +8104,30 @@
                 "name": {
                     "target": "com.amazonaws.auditmanager#AWSServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the Amazon Web Service. </p>"
+                        "smithy.api#documentation": "<p> The name of the Amazon Web Services service. </p>"
                     }
                 },
                 "displayName": {
                     "target": "com.amazonaws.auditmanager#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p> The display name of the Amazon Web Service. </p>"
+                        "smithy.api#documentation": "<p> The display name of the Amazon Web Services service. </p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.auditmanager#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p> The description of the Amazon Web Service. </p>"
+                        "smithy.api#documentation": "<p> The description of the Amazon Web Services service. </p>"
                     }
                 },
                 "category": {
                     "target": "com.amazonaws.auditmanager#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p> The category that the Amazon Web Service belongs to, such as compute, storage,\n         or database. </p>"
+                        "smithy.api#documentation": "<p> The category that the Amazon Web Services service belongs to, such as compute, storage,\n         or database. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The metadata that's associated with the Amazon Web Service. </p>"
+                "smithy.api#documentation": "<p> The metadata that's associated with the Amazon Web Services service. </p>"
             }
         },
         "com.amazonaws.auditmanager#ServiceMetadataList": {
@@ -8415,7 +8419,7 @@
                 "keywordValue": {
                     "target": "com.amazonaws.auditmanager#KeywordValue",
                     "traits": {
-                        "smithy.api#documentation": "<p> The value of the keyword that's used when mapping a control data source. For example,\n         this can be a CloudTrail event name, a rule name for Config, a\n            Security Hub control, or the name of an Amazon Web Services API call. </p>\n         <p>If you’re mapping a data source to a rule in Config, the\n            <code>keywordValue</code> that you specify depends on the type of rule:</p>\n         <ul>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html\">managed rules</a>, you can use the rule identifier as the\n                  <code>keywordValue</code>. You can find the rule identifier from the <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html\">list of Config managed rules</a>. For some\n               rules, the rule identifier is different from the rule name. For example, the rule\n               name <code>restricted-ssh</code> has the following rule identifier:\n                  <code>INCOMING_SSH_DISABLED</code>. Make sure to use the rule identifier, not the\n               rule name. </p>\n               <p>Keyword example for managed rules:</p>\n               <ul>\n                  <li>\n                     <p>Managed rule name: <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html\">s3-bucket-acl-prohibited</a>\n                     </p>\n                     <p>\n                        <code>keywordValue</code>: <code>S3_BUCKET_ACL_PROHIBITED</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html\">custom rules</a>, you form the <code>keywordValue</code>\n               by adding the <code>Custom_</code> prefix to the rule name. This prefix distinguishes\n               the custom rule from a managed rule. </p>\n               <p>Keyword example for custom rules:</p>\n               <ul>\n                  <li>\n                     <p>Custom rule name: my-custom-config-rule</p>\n                     <p>\n                        <code>keywordValue</code>: <code>Custom_my-custom-config-rule</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/service-linked-awsconfig-rules.html\">service-linked rules</a>, you form the\n                  <code>keywordValue</code> by adding the <code>Custom_</code> prefix to the rule\n               name. In addition, you remove the suffix ID that appears at the end of the rule name. </p>\n               <p>Keyword examples for service-linked rules:</p>\n               <ul>\n                  <li>\n                     <p>Service-linked rule name:\n                     CustomRuleForAccount-conformance-pack-szsm1uv0w</p>\n                     <p>\n                        <code>keywordValue</code>:\n                        <code>Custom_CustomRuleForAccount-conformance-pack</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Service-linked rule name:\n                     OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba</p>\n                     <p>\n                        <code>keywordValue</code>:\n                        <code>Custom_OrgConfigRule-s3-bucket-versioning-enabled</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <important>\n            <p>The <code>keywordValue</code> is case sensitive. If you enter a value incorrectly, Audit Manager might not recognize the data source mapping. As a result, you might not\n         successfully collect evidence from that data source as intended. </p>\n            <p>Keep in mind the following requirements, depending on the data source type that\n            you're using. </p>\n            <ol>\n               <li>\n                  <p>For Config: </p>\n                  <ul>\n                     <li>\n                        <p>For managed rules, make sure that the <code>keywordValue</code> is the rule identifier in\n                     <code>ALL_CAPS_WITH_UNDERSCORES</code>. For example,\n                     <code>CLOUDWATCH_LOG_GROUP_ENCRYPTED</code>. For accuracy, we recommend\n                     that you reference the list of <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html\">supported Config managed rules</a>.</p>\n                     </li>\n                     <li>\n                        <p>For custom rules, make sure that the <code>keywordValue</code> has the <code>Custom_</code>\n                     prefix followed by the custom rule name. The format of the custom rule name\n                     itself may vary. For accuracy, we recommend that you visit the <a href=\"https://console.aws.amazon.com/config/\">Config console</a> to\n                     verify your custom rule name.</p>\n                     </li>\n                  </ul>\n               </li>\n               <li>\n                  <p>For Security Hub: The format varies for Security Hub control names.\n                  For accuracy, we recommend that you reference the list of <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html\">supported\n                     Security Hub controls</a>.</p>\n               </li>\n               <li>\n                  <p>For Amazon Web Services API calls: Make sure that the <code>keywordValue</code>\n                  is written as <code>serviceprefix_ActionName</code>. For example,\n                  <code>iam_ListGroups</code>. For accuracy, we recommend that you reference the\n                  list of <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html\">supported\n                     API calls</a>.</p>\n               </li>\n               <li>\n                  <p>For CloudTrail: Make sure that the <code>keywordValue</code> is written\n                  as <code>serviceprefix_ActionName</code>. For example,\n                  <code>cloudtrail_StartLogging</code>. For accuracy, we recommend that you\n                  review the Amazon Web Service prefix and action names in the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html\">Service Authorization Reference</a>.</p>\n               </li>\n            </ol>\n         </important>"
+                        "smithy.api#documentation": "<p> The value of the keyword that's used when mapping a control data source. For example,\n         this can be a CloudTrail event name, a rule name for Config, a\n            Security Hub control, or the name of an Amazon Web Services API call. </p>\n         <p>If you’re mapping a data source to a rule in Config, the\n            <code>keywordValue</code> that you specify depends on the type of rule:</p>\n         <ul>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html\">managed rules</a>, you can use the rule identifier as the\n                  <code>keywordValue</code>. You can find the rule identifier from the <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html\">list of Config managed rules</a>. For some\n               rules, the rule identifier is different from the rule name. For example, the rule\n               name <code>restricted-ssh</code> has the following rule identifier:\n                  <code>INCOMING_SSH_DISABLED</code>. Make sure to use the rule identifier, not the\n               rule name. </p>\n               <p>Keyword example for managed rules:</p>\n               <ul>\n                  <li>\n                     <p>Managed rule name: <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html\">s3-bucket-acl-prohibited</a>\n                     </p>\n                     <p>\n                        <code>keywordValue</code>: <code>S3_BUCKET_ACL_PROHIBITED</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html\">custom rules</a>, you form the <code>keywordValue</code>\n               by adding the <code>Custom_</code> prefix to the rule name. This prefix distinguishes\n               the custom rule from a managed rule. </p>\n               <p>Keyword example for custom rules:</p>\n               <ul>\n                  <li>\n                     <p>Custom rule name: my-custom-config-rule</p>\n                     <p>\n                        <code>keywordValue</code>: <code>Custom_my-custom-config-rule</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/service-linked-awsconfig-rules.html\">service-linked rules</a>, you form the\n                  <code>keywordValue</code> by adding the <code>Custom_</code> prefix to the rule\n               name. In addition, you remove the suffix ID that appears at the end of the rule name. </p>\n               <p>Keyword examples for service-linked rules:</p>\n               <ul>\n                  <li>\n                     <p>Service-linked rule name:\n                     CustomRuleForAccount-conformance-pack-szsm1uv0w</p>\n                     <p>\n                        <code>keywordValue</code>:\n                        <code>Custom_CustomRuleForAccount-conformance-pack</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Service-linked rule name:\n                     OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba</p>\n                     <p>\n                        <code>keywordValue</code>:\n                        <code>Custom_OrgConfigRule-s3-bucket-versioning-enabled</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <important>\n            <p>The <code>keywordValue</code> is case sensitive. If you enter a value incorrectly, Audit Manager might not recognize the data source mapping. As a result, you might not\n         successfully collect evidence from that data source as intended. </p>\n            <p>Keep in mind the following requirements, depending on the data source type that\n            you're using. </p>\n            <ol>\n               <li>\n                  <p>For Config: </p>\n                  <ul>\n                     <li>\n                        <p>For managed rules, make sure that the <code>keywordValue</code> is the rule identifier in\n                     <code>ALL_CAPS_WITH_UNDERSCORES</code>. For example,\n                     <code>CLOUDWATCH_LOG_GROUP_ENCRYPTED</code>. For accuracy, we recommend\n                     that you reference the list of <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html\">supported Config managed rules</a>.</p>\n                     </li>\n                     <li>\n                        <p>For custom rules, make sure that the <code>keywordValue</code> has the <code>Custom_</code>\n                     prefix followed by the custom rule name. The format of the custom rule name\n                     itself may vary. For accuracy, we recommend that you visit the <a href=\"https://console.aws.amazon.com/config/\">Config console</a> to\n                     verify your custom rule name.</p>\n                     </li>\n                  </ul>\n               </li>\n               <li>\n                  <p>For Security Hub: The format varies for Security Hub control names.\n                  For accuracy, we recommend that you reference the list of <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html\">supported\n                     Security Hub controls</a>.</p>\n               </li>\n               <li>\n                  <p>For Amazon Web Services API calls: Make sure that the <code>keywordValue</code>\n                  is written as <code>serviceprefix_ActionName</code>. For example,\n                  <code>iam_ListGroups</code>. For accuracy, we recommend that you reference the\n                  list of <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html\">supported\n                     API calls</a>.</p>\n               </li>\n               <li>\n                  <p>For CloudTrail: Make sure that the <code>keywordValue</code> is written\n                  as <code>serviceprefix_ActionName</code>. For example,\n                  <code>cloudtrail_StartLogging</code>. For accuracy, we recommend that you\n                  review the Amazon Web Services service prefix and action names in the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html\">Service Authorization Reference</a>.</p>\n               </li>\n            </ol>\n         </important>"
                     }
                 }
             },
@@ -8859,6 +8863,9 @@
                 },
                 {
                     "target": "com.amazonaws.auditmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.auditmanager#ThrottlingException"

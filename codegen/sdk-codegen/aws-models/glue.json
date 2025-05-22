@@ -10699,7 +10699,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.glue#String128",
                     "traits": {
-                        "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target table for which to create integration table properties. Currently, this API only supports creating \n      integration table properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for \n      creating integration table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -21400,7 +21400,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.glue#String128",
                     "traits": {
-                        "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving \n      properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration \n      table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -21422,7 +21422,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.glue#String128",
                     "traits": {
-                        "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving \n      properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration \n      table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.\n    </p>"
                     }
                 },
                 "TableName": {
@@ -26505,6 +26505,12 @@
                     "target": "com.amazonaws.glue#String128",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the function used to partition data on the target. The only accepted value for this parameter is `'identity'` (string). \n      The `'identity'` function ensures that the data partitioning on the target follows the same scheme as the source. In other words, the partitioning \n      structure of the source data is preserved in the target destination.</p>"
+                    }
+                },
+                "ConversionSpec": {
+                    "target": "com.amazonaws.glue#String128",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the timestamp format of the source data. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>epoch_sec</code> - Unix epoch timestamp in seconds</p>\n            </li>\n            <li>\n               <p>\n                  <code>epoch_milli</code> - Unix epoch timestamp in milliseconds</p>\n            </li>\n            <li>\n               <p>\n                  <code>iso</code> - ISO 8601 formatted timestamp</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n        Only specify <code>ConversionSpec</code> when using timestamp-based partition functions (year, month, day, or hour). \n        Glue Zero-ETL uses this parameter to correctly transform source data into timestamp format before partitioning.\n      </p>\n            <p>\n        Do not use high-cardinality columns with the <code>identity</code> partition function. High-cardinality columns include:\n      </p>\n            <ul>\n               <li>\n                  <p>Primary keys</p>\n               </li>\n               <li>\n                  <p>Timestamp fields (such as <code>LastModifiedTimestamp</code>, <code>CreatedDate</code>)</p>\n               </li>\n               <li>\n                  <p>System-generated timestamps</p>\n               </li>\n            </ul>\n            <p>\n        Using high-cardinality columns with identity partitioning creates many small partitions, which can significantly degrade ingestion performance.\n      </p>\n         </note>"
                     }
                 }
             },
