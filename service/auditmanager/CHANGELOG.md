@@ -1,3 +1,7 @@
+# v1.39.0 (2025-05-22)
+
+* **Feature**: With this release, the AssessmentControl description field has been deprecated, as of May 19, 2025. Additionally, the UpdateAssessment API can now return a ServiceQuotaExceededException when applicable service quotas are exceeded.
+
 # v1.38.2 (2025-04-03)
 
 * No change notes available for this release.

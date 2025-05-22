@@ -1,3 +1,7 @@
+# v1.34.0 (2025-05-22)
+
+* **Feature**: Add QueryLoggingConfiguration APIs for Amazon Managed Prometheus
+
 # v1.33.1 (2025-05-01)
 
 * No change notes available for this release.

@@ -1,8 +1,0 @@
-{
-    "id": "6b3862bb-c072-4286-8378-f9ab040925c9",
-    "type": "feature",
-    "description": "Features: support for customer managed encryption keys",
-    "modules": [
-        "service/dsql"
-    ]
-}

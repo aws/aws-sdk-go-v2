@@ -1,3 +1,7 @@
+# v1.113.0 (2025-05-22)
+
+* **Feature**: This release supports additional ConversionSpec parameter as part of IntegrationPartition Structure in CreateIntegrationTableProperty API. This parameter is referred to apply appropriate column transformation for columns that are used for timestamp based partitioning
+
 # v1.112.0 (2025-05-20)
 
 * **Feature**: Enhanced AWS Glue ListConnectionTypes API Model with additional metadata fields.

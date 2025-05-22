@@ -1,3 +1,7 @@
+# v1.5.0 (2025-05-22)
+
+* **Feature**: Features: support for customer managed encryption keys
+
 # v1.4.0 (2025-05-19)
 
 * **Feature**: CreateMultiRegionCluster and DeleteMultiRegionCluster APIs removed

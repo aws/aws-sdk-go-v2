@@ -1,3 +1,20 @@
+# Release (2025-05-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.34.0](service/amp/CHANGELOG.md#v1340-2025-05-22)
+  * **Feature**: Add QueryLoggingConfiguration APIs for Amazon Managed Prometheus
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.39.0](service/auditmanager/CHANGELOG.md#v1390-2025-05-22)
+  * **Feature**: With this release, the AssessmentControl description field has been deprecated, as of May 19, 2025. Additionally, the UpdateAssessment API can now return a ServiceQuotaExceededException when applicable service quotas are exceeded.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.5.0](service/dsql/CHANGELOG.md#v150-2025-05-22)
+  * **Feature**: Features: support for customer managed encryption keys
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.113.0](service/glue/CHANGELOG.md#v11130-2025-05-22)
+  * **Feature**: This release supports additional ConversionSpec parameter as part of IntegrationPartition Structure in CreateIntegrationTableProperty API. This parameter is referred to apply appropriate column transformation for columns that are used for timestamp based partitioning
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.7.2](service/internal/checksum/CHANGELOG.md#v172-2025-05-22)
+  * **Bug Fix**: Handle checksum for unseekable body with 0 content length
+
 # Release (2025-05-21)
 
 ## Module Highlights
