@@ -22,6 +22,26 @@ type ClusterSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration details about encryption for the cluster including the KMS key
+// ARN, encryption type, and encryption status.
+type EncryptionDetails struct {
+
+	// The status of encryption for the cluster.
+	//
+	// This member is required.
+	EncryptionStatus EncryptionStatus
+
+	// The type of encryption that protects the data on your cluster.
+	//
+	// This member is required.
+	EncryptionType EncryptionType
+
+	// The ARN of the KMS key that encrypts data in the cluster.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines the structure for multi-Region cluster configurations, containing the
 // witness region and linked cluster settings.
 type MultiRegionProperties struct {

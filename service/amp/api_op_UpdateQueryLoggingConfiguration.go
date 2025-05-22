@@ -11,54 +11,48 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The CreateLoggingConfiguration operation creates rules and alerting logging
-// configuration for the workspace. Use this operation to set the CloudWatch log
-// group to which the logs will be published to.
-//
-// These logging configurations are only for rules and alerting logs.
-func (c *Client) CreateLoggingConfiguration(ctx context.Context, params *CreateLoggingConfigurationInput, optFns ...func(*Options)) (*CreateLoggingConfigurationOutput, error) {
+// Updates the query logging configuration for the specified workspace.
+func (c *Client) UpdateQueryLoggingConfiguration(ctx context.Context, params *UpdateQueryLoggingConfigurationInput, optFns ...func(*Options)) (*UpdateQueryLoggingConfigurationOutput, error) {
 	if params == nil {
-		params = &CreateLoggingConfigurationInput{}
+		params = &UpdateQueryLoggingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLoggingConfiguration", params, optFns, c.addOperationCreateLoggingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateQueryLoggingConfiguration", params, optFns, c.addOperationUpdateQueryLoggingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateLoggingConfigurationOutput)
+	out := result.(*UpdateQueryLoggingConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-// Represents the input of a CreateLoggingConfiguration operation.
-type CreateLoggingConfigurationInput struct {
+type UpdateQueryLoggingConfigurationInput struct {
 
-	// The ARN of the CloudWatch log group to which the vended log data will be
-	// published. This log group must exist prior to calling this operation.
+	// The destinations where query logs will be sent. Only CloudWatch Logs
+	// destination is supported. The list must contain exactly one element.
 	//
 	// This member is required.
-	LogGroupArn *string
+	Destinations []types.LoggingDestination
 
-	// The ID of the workspace to create the logging configuration for.
+	// The ID of the workspace for which to update the query logging configuration.
 	//
 	// This member is required.
 	WorkspaceId *string
 
-	// A unique identifier that you can provide to ensure the idempotency of the
-	// request. Case-sensitive.
+	// (Optional) A unique, case-sensitive identifier that you can provide to ensure
+	// the idempotency of the request.
 	ClientToken *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a CreateLoggingConfiguration operation.
-type CreateLoggingConfigurationOutput struct {
+type UpdateQueryLoggingConfigurationOutput struct {
 
-	// A structure that displays the current status of the logging configuration.
+	// The current status of the query logging configuration.
 	//
 	// This member is required.
-	Status *types.LoggingConfigurationStatus
+	Status *types.QueryLoggingConfigurationStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,19 +60,19 @@ type CreateLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateQueryLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLoggingConfiguration{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQueryLoggingConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLoggingConfiguration{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQueryLoggingConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLoggingConfiguration"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateQueryLoggingConfiguration"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -133,13 +127,13 @@ func (c *Client) addOperationCreateLoggingConfigurationMiddlewares(stack *middle
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateLoggingConfigurationMiddleware(stack, options); err != nil {
+	if err = addIdempotencyToken_opUpdateQueryLoggingConfigurationMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateLoggingConfigurationValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateQueryLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLoggingConfiguration(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateQueryLoggingConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -172,24 +166,24 @@ func (c *Client) addOperationCreateLoggingConfigurationMiddlewares(stack *middle
 	return nil
 }
 
-type idempotencyToken_initializeOpCreateLoggingConfiguration struct {
+type idempotencyToken_initializeOpUpdateQueryLoggingConfiguration struct {
 	tokenProvider IdempotencyTokenProvider
 }
 
-func (*idempotencyToken_initializeOpCreateLoggingConfiguration) ID() string {
+func (*idempotencyToken_initializeOpUpdateQueryLoggingConfiguration) ID() string {
 	return "OperationIdempotencyTokenAutoFill"
 }
 
-func (m *idempotencyToken_initializeOpCreateLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *idempotencyToken_initializeOpUpdateQueryLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if m.tokenProvider == nil {
 		return next.HandleInitialize(ctx, in)
 	}
 
-	input, ok := in.Parameters.(*CreateLoggingConfigurationInput)
+	input, ok := in.Parameters.(*UpdateQueryLoggingConfigurationInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateLoggingConfigurationInput ")
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateQueryLoggingConfigurationInput ")
 	}
 
 	if input.ClientToken == nil {
@@ -201,14 +195,14 @@ func (m *idempotencyToken_initializeOpCreateLoggingConfiguration) HandleInitiali
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opCreateLoggingConfigurationMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateLoggingConfiguration{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opUpdateQueryLoggingConfigurationMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateQueryLoggingConfiguration{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opCreateLoggingConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateQueryLoggingConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateLoggingConfiguration",
+		OperationName: "UpdateQueryLoggingConfiguration",
 	}
 }

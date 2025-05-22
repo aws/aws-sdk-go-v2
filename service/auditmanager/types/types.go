@@ -42,6 +42,9 @@ type AssessmentControl struct {
 	Comments []ControlComment
 
 	//  The description of the control.
+	//
+	// Deprecated: This data type will be deprecated on May 19, 2025. To view the
+	// assessment control description, use GetControl.
 	Description *string
 
 	//  The amount of evidence that's collected for the control.
@@ -119,7 +122,7 @@ type AssessmentEvidenceFolder struct {
 	//  The identifier for the control set.
 	ControlSetId *string
 
-	//  The Amazon Web Service that the evidence was collected from.
+	//  The Amazon Web Services service that the evidence was collected from.
 	DataSource *string
 
 	//  The date when the first evidence was added to the evidence folder.
@@ -139,7 +142,7 @@ type AssessmentEvidenceFolder struct {
 
 	//  The number of evidence that falls under the configuration data category. This
 	// evidence is collected from configuration snapshots of other Amazon Web Services
-	// such as Amazon EC2, Amazon S3, or IAM.
+	// services such as Amazon EC2, Amazon S3, or IAM.
 	EvidenceByTypeConfigurationDataCount int32
 
 	//  The number of evidence that falls under the manual category. This evidence is
@@ -466,20 +469,20 @@ type AWSAccount struct {
 	noSmithyDocumentSerde
 }
 
-//	An Amazon Web Service such as Amazon S3 or CloudTrail.
+//	An Amazon Web Services service such as Amazon S3 or CloudTrail.
 //
-// For an example of how to find an Amazon Web Service name and how to define it
-// in your assessment scope, see the following:
+// For an example of how to find an Amazon Web Services service name and how to
+// define it in your assessment scope, see the following:
 //
-// [Finding an Amazon Web Service name to use in your assessment scope]
+// [Finding an Amazon Web Services service name to use in your assessment scope]
 //
-// [Defining an Amazon Web Service name in your assessment scope]
+// [Defining an Amazon Web Services service name in your assessment scope]
 //
-// [Defining an Amazon Web Service name in your assessment scope]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_3
-// [Finding an Amazon Web Service name to use in your assessment scope]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_2
+// [Finding an Amazon Web Services service name to use in your assessment scope]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_2
+// [Defining an Amazon Web Services service name in your assessment scope]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_3
 type AWSService struct {
 
-	//  The name of the Amazon Web Service.
+	//  The name of the Amazon Web Services service.
 	ServiceName *string
 
 	noSmithyDocumentSerde
@@ -1105,7 +1108,7 @@ type Evidence struct {
 	//  The name of the evidence event.
 	EventName *string
 
-	//  The Amazon Web Service that the evidence is collected from.
+	//  The Amazon Web Services service that the evidence is collected from.
 	EventSource *string
 
 	//  The identifier for the Amazon Web Services account.
@@ -1509,15 +1512,15 @@ type Role struct {
 //
 // for the assessment.
 //
-// You no longer need to specify which Amazon Web Services are in scope when you
-// create or update an assessment. Audit Manager infers the services in scope by
-// examining your assessment controls and their data sources, and then mapping this
-// information to the relevant Amazon Web Services.
+// You no longer need to specify which Amazon Web Services services are in scope
+// when you create or update an assessment. Audit Manager infers the services in
+// scope by examining your assessment controls and their data sources, and then
+// mapping this information to the relevant Amazon Web Services services.
 //
 // If an underlying data source changes for your assessment, we automatically
-// update the services scope as needed to reflect the correct Amazon Web Services.
-// This ensures that your assessment collects accurate and comprehensive evidence
-// about all of the relevant services in your AWS environment.
+// update the services scope as needed to reflect the correct Amazon Web Services
+// services. This ensures that your assessment collects accurate and comprehensive
+// evidence about all of the relevant services in your AWS environment.
 type Scope struct {
 
 	//  The Amazon Web Services accounts that are included in the scope of the
@@ -1528,8 +1531,8 @@ type Scope struct {
 	// assessment.
 	//
 	// This API parameter is no longer supported. If you use this parameter to specify
-	// one or more Amazon Web Services, Audit Manager ignores this input. Instead, the
-	// value for awsServices will show as empty.
+	// one or more Amazon Web Services services, Audit Manager ignores this input.
+	// Instead, the value for awsServices will show as empty.
 	//
 	// Deprecated: You can't specify services in scope when creating/updating an
 	// assessment. If you use the parameter to specify one or more AWS services, Audit
@@ -1540,20 +1543,20 @@ type Scope struct {
 	noSmithyDocumentSerde
 }
 
-// The metadata that's associated with the Amazon Web Service.
+// The metadata that's associated with the Amazon Web Services service.
 type ServiceMetadata struct {
 
-	//  The category that the Amazon Web Service belongs to, such as compute, storage,
-	// or database.
+	//  The category that the Amazon Web Services service belongs to, such as compute,
+	// storage, or database.
 	Category *string
 
-	//  The description of the Amazon Web Service.
+	//  The description of the Amazon Web Services service.
 	Description *string
 
-	//  The display name of the Amazon Web Service.
+	//  The display name of the Amazon Web Services service.
 	DisplayName *string
 
-	//  The name of the Amazon Web Service.
+	//  The name of the Amazon Web Services service.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -1705,8 +1708,8 @@ type SourceKeyword struct {
 	//
 	//   - For CloudTrail: Make sure that the keywordValue is written as
 	//   serviceprefix_ActionName . For example, cloudtrail_StartLogging . For
-	//   accuracy, we recommend that you review the Amazon Web Service prefix and action
-	//   names in the [Service Authorization Reference].
+	//   accuracy, we recommend that you review the Amazon Web Services service prefix
+	//   and action names in the [Service Authorization Reference].
 	//
 	// [custom rules]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html
 	// [service-linked rules]: https://docs.aws.amazon.com/config/latest/developerguide/service-linked-awsconfig-rules.html

@@ -69,6 +69,9 @@ type GetClusterOutput struct {
 	// This member is required.
 	Status types.ClusterStatus
 
+	// The current encryption configuration details for the cluster.
+	EncryptionDetails *types.EncryptionDetails
+
 	// Returns the current multi-Region cluster configuration, including witness
 	// region and linked cluster information.
 	MultiRegionProperties *types.MultiRegionProperties

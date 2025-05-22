@@ -86,6 +86,11 @@ type CreateClusterInput struct {
 	// before you can delete your cluster.
 	DeletionProtectionEnabled *bool
 
+	// The KMS key that encrypts and protects the data on your cluster. You can
+	// specify the ARN, ID, or alias of an existing key or have Amazon Web Services
+	// create a default key for you.
+	KmsEncryptionKey *string
+
 	// The configuration settings when creating a multi-Region cluster, including the
 	// witness region and linked cluster properties.
 	MultiRegionProperties *types.MultiRegionProperties
@@ -123,6 +128,10 @@ type CreateClusterOutput struct {
 	//
 	// This member is required.
 	Status types.ClusterStatus
+
+	// The encryption configuration for the cluster that was specified during the
+	// creation process, including the KMS key identifier and encryption state.
+	EncryptionDetails *types.EncryptionDetails
 
 	// The multi-Region cluster configuration details that were set during cluster
 	// creation

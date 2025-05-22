@@ -218,6 +218,11 @@ func awsRestjson1_deserializeOpDocumentCreateClusterOutput(v **CreateClusterOutp
 				sv.DeletionProtectionEnabled = ptr.Bool(jtv)
 			}
 
+		case "encryptionDetails":
+			if err := awsRestjson1_deserializeDocumentEncryptionDetails(&sv.EncryptionDetails, value); err != nil {
+				return err
+			}
+
 		case "identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -637,6 +642,11 @@ func awsRestjson1_deserializeOpDocumentGetClusterOutput(v **GetClusterOutput, va
 					return fmt.Errorf("expected DeletionProtectionEnabled to be of type *bool, got %T instead", value)
 				}
 				sv.DeletionProtectionEnabled = ptr.Bool(jtv)
+			}
+
+		case "encryptionDetails":
+			if err := awsRestjson1_deserializeDocumentEncryptionDetails(&sv.EncryptionDetails, value); err != nil {
+				return err
 			}
 
 		case "identifier":
@@ -2099,6 +2109,64 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ResourceType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEncryptionDetails(v **types.EncryptionDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EncryptionDetails
+	if *v == nil {
+		sv = &types.EncryptionDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "encryptionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionStatus to be of type string, got %T instead", value)
+				}
+				sv.EncryptionStatus = types.EncryptionStatus(jtv)
+			}
+
+		case "encryptionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionType to be of type string, got %T instead", value)
+				}
+				sv.EncryptionType = types.EncryptionType(jtv)
+			}
+
+		case "kmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
 			}
 
 		default:

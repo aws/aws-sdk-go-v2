@@ -102,6 +102,11 @@ type UpdateClusterInput struct {
 	// Specifies whether to enable deletion protection in your cluster.
 	DeletionProtectionEnabled *bool
 
+	// The KMS key that encrypts and protects the data on your cluster. You can
+	// specify the ARN, ID, or alias of an existing key or have Amazon Web Services
+	// create a default key for you.
+	KmsEncryptionKey *string
+
 	// The new multi-Region cluster configuration settings to be applied during an
 	// update operation.
 	MultiRegionProperties *types.MultiRegionProperties

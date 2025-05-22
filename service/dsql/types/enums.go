@@ -37,6 +37,48 @@ func (ClusterStatus) Values() []ClusterStatus {
 	}
 }
 
+type EncryptionStatus string
+
+// Enum values for EncryptionStatus
+const (
+	EncryptionStatusEnabled            EncryptionStatus = "ENABLED"
+	EncryptionStatusUpdating           EncryptionStatus = "UPDATING"
+	EncryptionStatusKmsKeyInaccessible EncryptionStatus = "KMS_KEY_INACCESSIBLE"
+	EncryptionStatusEnabling           EncryptionStatus = "ENABLING"
+)
+
+// Values returns all known values for EncryptionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionStatus) Values() []EncryptionStatus {
+	return []EncryptionStatus{
+		"ENABLED",
+		"UPDATING",
+		"KMS_KEY_INACCESSIBLE",
+		"ENABLING",
+	}
+}
+
+type EncryptionType string
+
+// Enum values for EncryptionType
+const (
+	EncryptionTypeAwsOwnedKmsKey        EncryptionType = "AWS_OWNED_KMS_KEY"
+	EncryptionTypeCustomerManagedKmsKey EncryptionType = "CUSTOMER_MANAGED_KMS_KEY"
+)
+
+// Values returns all known values for EncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionType) Values() []EncryptionType {
+	return []EncryptionType{
+		"AWS_OWNED_KMS_KEY",
+		"CUSTOMER_MANAGED_KMS_KEY",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

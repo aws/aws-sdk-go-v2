@@ -1,0 +1,8 @@
+{
+    "id": "ed47b4b7-c659-4601-a240-5e787087ac2e",
+    "type": "feature",
+    "description": "Add QueryLoggingConfiguration APIs for Amazon Managed Prometheus",
+    "modules": [
+        "service/amp"
+    ]
+}

@@ -34,7 +34,12 @@ func (c *Client) CreateIntegrationTableProperties(ctx context.Context, params *C
 
 type CreateIntegrationTablePropertiesInput struct {
 
-	// The connection ARN of the source, or the database ARN of the target.
+	// The Amazon Resource Name (ARN) of the target table for which to create
+	// integration table properties. Currently, this API only supports creating
+	// integration table properties for target tables, and the provided ARN should be
+	// the ARN of the target table in the Glue Data Catalog. Support for creating
+	// integration table properties for source connections (using the connection ARN)
+	// is not yet implemented and will be added in a future release.
 	//
 	// This member is required.
 	ResourceArn *string

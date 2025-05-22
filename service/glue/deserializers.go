@@ -49551,6 +49551,15 @@ func awsAwsjson11_deserializeDocumentIntegrationPartition(v **types.IntegrationP
 
 	for key, value := range shape {
 		switch key {
+		case "ConversionSpec":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+				}
+				sv.ConversionSpec = ptr.String(jtv)
+			}
+
 		case "FieldName":
 			if value != nil {
 				jtv, ok := value.(string)

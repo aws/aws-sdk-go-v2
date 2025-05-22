@@ -20091,6 +20091,11 @@ func awsAwsjson11_serializeDocumentIntegrationPartition(v *types.IntegrationPart
 	object := value.Object()
 	defer object.Close()
 
+	if v.ConversionSpec != nil {
+		ok := object.Key("ConversionSpec")
+		ok.String(*v.ConversionSpec)
+	}
+
 	if v.FieldName != nil {
 		ok := object.Key("FieldName")
 		ok.String(*v.FieldName)

@@ -26,6 +26,11 @@ import (
 // The scrapeConfiguration parameter contains the base-64 encoded YAML
 // configuration for the scraper.
 //
+// When creating a scraper, the service creates a Network Interface in each
+// Availability Zone that are passed into CreateScraper through subnets. These
+// network interfaces are used to connect to the Amazon EKS cluster within the VPC
+// for scraping metrics.
+//
 // For more information about collectors, including what metrics are collected,
 // and how to configure the scraper, see [Using an Amazon Web Services managed collector]in the Amazon Managed Service for
 // Prometheus User Guide.

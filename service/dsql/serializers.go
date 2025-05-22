@@ -98,6 +98,11 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.Boolean(*v.DeletionProtectionEnabled)
 	}
 
+	if v.KmsEncryptionKey != nil {
+		ok := object.Key("kmsEncryptionKey")
+		ok.String(*v.KmsEncryptionKey)
+	}
+
 	if v.MultiRegionProperties != nil {
 		ok := object.Key("multiRegionProperties")
 		if err := awsRestjson1_serializeDocumentMultiRegionProperties(v.MultiRegionProperties, ok); err != nil {
@@ -740,6 +745,11 @@ func awsRestjson1_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 	if v.DeletionProtectionEnabled != nil {
 		ok := object.Key("deletionProtectionEnabled")
 		ok.Boolean(*v.DeletionProtectionEnabled)
+	}
+
+	if v.KmsEncryptionKey != nil {
+		ok := object.Key("kmsEncryptionKey")
+		ok.String(*v.KmsEncryptionKey)
 	}
 
 	if v.MultiRegionProperties != nil {

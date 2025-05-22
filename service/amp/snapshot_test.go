@@ -86,6 +86,18 @@ func TestCheckSnapshot_CreateLoggingConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateQueryLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQueryLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateQueryLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateRuleGroupsNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRuleGroupsNamespace(context.Background(), nil, func(o *Options) {
@@ -146,6 +158,18 @@ func TestCheckSnapshot_DeleteLoggingConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteQueryLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQueryLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteQueryLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteRuleGroupsNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteRuleGroupsNamespace(context.Background(), nil, func(o *Options) {
@@ -199,6 +223,18 @@ func TestCheckSnapshot_DescribeLoggingConfiguration(t *testing.T) {
 	_, err := svc.DescribeLoggingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeQueryLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeQueryLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeQueryLoggingConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -374,6 +410,18 @@ func TestCheckSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateQueryLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQueryLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateQueryLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateScraper(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateScraper(context.Background(), nil, func(o *Options) {
@@ -426,6 +474,18 @@ func TestUpdateSnapshot_CreateLoggingConfiguration(t *testing.T) {
 	_, err := svc.CreateLoggingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateQueryLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQueryLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateQueryLoggingConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -493,6 +553,18 @@ func TestUpdateSnapshot_DeleteLoggingConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteQueryLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQueryLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteQueryLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteRuleGroupsNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteRuleGroupsNamespace(context.Background(), nil, func(o *Options) {
@@ -546,6 +618,18 @@ func TestUpdateSnapshot_DescribeLoggingConfiguration(t *testing.T) {
 	_, err := svc.DescribeLoggingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeQueryLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeQueryLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeQueryLoggingConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -714,6 +798,18 @@ func TestUpdateSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 	_, err := svc.UpdateLoggingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateQueryLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQueryLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateQueryLoggingConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

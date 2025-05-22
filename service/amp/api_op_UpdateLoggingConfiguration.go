@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the log group ARN or the workspace ID of the current logging
-// configuration.
+// Updates the log group ARN or the workspace ID of the current rules and alerting
+// logging configuration.
+//
+// These logging configurations are only for rules and alerting logs.
 func (c *Client) UpdateLoggingConfiguration(ctx context.Context, params *UpdateLoggingConfigurationInput, optFns ...func(*Options)) (*UpdateLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateLoggingConfigurationInput{}

@@ -64,6 +64,18 @@ type AmpConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration details for logging to CloudWatch Logs.
+type CloudWatchLogDestination struct {
+
+	// The ARN of the CloudWatch log group to which the vended log data will be
+	// published. This log group must exist prior to calling this operation.
+	//
+	// This member is required.
+	LogGroupArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Where to send the metrics from a scraper.
 //
 // The following types satisfy this interface:
@@ -102,15 +114,15 @@ type EksConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// This structure defines one label set used to enforce ingestion limits for the
-// workspace, and defines the limit for that label set.
+// This structure defines one label set used to enforce active time series limits
+// for the workspace, and defines the limit for that label set.
 //
 // A label set is a unique combination of label-value pairs. Use them to control
-// time series ingestion limits and to monitor usage by specific label groups.
-// Example label sets might be team:finance or env:prod
+// time series limits and to monitor usage by specific label groups. Example label
+// sets might be team:finance or env:prod
 type LimitsPerLabelSet struct {
 
-	// This defines one label set that will have an enforced ingestion limit.
+	// This defines one label set that will have an enforced active time series limit.
 	//
 	// Label values accept ASCII characters and must contain at least one character
 	// that isn't whitespace. ASCII control characters are not accepted. If the label
@@ -143,7 +155,10 @@ type LimitsPerLabelSetEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the logging configuration for the workspace.
+// Contains information about the current rules and alerting logging configuration
+// for the workspace.
+//
+// These logging configurations are only for rules and alerting logs.
 type LoggingConfigurationMetadata struct {
 
 	// The date and time that the logging configuration was created.
@@ -178,12 +193,87 @@ type LoggingConfigurationMetadata struct {
 // The status of the logging configuration.
 type LoggingConfigurationStatus struct {
 
-	// The current status of the logging configuration.
+	// The current status of the current rules and alerting logging configuration.
+	//
+	// These logging configurations are only for rules and alerting logs.
 	//
 	// This member is required.
 	StatusCode LoggingConfigurationStatusCode
 
 	// If failed, the reason for the failure.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines a destination and its associated filtering criteria for query logging.
+type LoggingDestination struct {
+
+	// Configuration details for logging to CloudWatch Logs.
+	//
+	// This member is required.
+	CloudWatchLogs *CloudWatchLogDestination
+
+	// Filtering criteria that determine which queries are logged.
+	//
+	// This member is required.
+	Filters *LoggingFilter
+
+	noSmithyDocumentSerde
+}
+
+// Filtering criteria that determine which queries are logged.
+type LoggingFilter struct {
+
+	// The Query Samples Processed (QSP) threshold above which queries will be logged.
+	// Queries processing more samples than this threshold will be captured in logs.
+	//
+	// This member is required.
+	QspThreshold *int64
+
+	noSmithyDocumentSerde
+}
+
+// The metadata for a query logging configuration.
+type QueryLoggingConfigurationMetadata struct {
+
+	// The date and time when the query logging configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The configured destinations for the query logging configuration.
+	//
+	// This member is required.
+	Destinations []LoggingDestination
+
+	// The date and time when the query logging configuration was last modified.
+	//
+	// This member is required.
+	ModifiedAt *time.Time
+
+	// The current status of the query logging configuration.
+	//
+	// This member is required.
+	Status *QueryLoggingConfigurationStatus
+
+	// The ID of the workspace associated with this query logging configuration.
+	//
+	// This member is required.
+	Workspace *string
+
+	noSmithyDocumentSerde
+}
+
+// The status information for a query logging configuration.
+type QueryLoggingConfigurationStatus struct {
+
+	// The current status of the query logging configuration.
+	//
+	// This member is required.
+	StatusCode QueryLoggingConfigurationStatusCode
+
+	// If there is a failure, the reason for the failure.
 	StatusReason *string
 
 	noSmithyDocumentSerde

@@ -50,6 +50,26 @@ func (m *validateOpCreateLoggingConfiguration) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateQueryLoggingConfiguration struct {
+}
+
+func (*validateOpCreateQueryLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateQueryLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateQueryLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateQueryLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRuleGroupsNamespace struct {
 }
 
@@ -125,6 +145,26 @@ func (m *validateOpDeleteLoggingConfiguration) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteQueryLoggingConfiguration struct {
+}
+
+func (*validateOpDeleteQueryLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQueryLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQueryLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQueryLoggingConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -225,6 +265,26 @@ func (m *validateOpDescribeLoggingConfiguration) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeQueryLoggingConfiguration struct {
+}
+
+func (*validateOpDescribeQueryLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeQueryLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeQueryLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeQueryLoggingConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -450,6 +510,26 @@ func (m *validateOpUpdateLoggingConfiguration) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateQueryLoggingConfiguration struct {
+}
+
+func (*validateOpUpdateQueryLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQueryLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQueryLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQueryLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateScraper struct {
 }
 
@@ -518,6 +598,10 @@ func addOpCreateLoggingConfigurationValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpCreateLoggingConfiguration{}, middleware.After)
 }
 
+func addOpCreateQueryLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateQueryLoggingConfiguration{}, middleware.After)
+}
+
 func addOpCreateRuleGroupsNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRuleGroupsNamespace{}, middleware.After)
 }
@@ -532,6 +616,10 @@ func addOpDeleteAlertManagerDefinitionValidationMiddleware(stack *middleware.Sta
 
 func addOpDeleteLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLoggingConfiguration{}, middleware.After)
+}
+
+func addOpDeleteQueryLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQueryLoggingConfiguration{}, middleware.After)
 }
 
 func addOpDeleteRuleGroupsNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -552,6 +640,10 @@ func addOpDescribeAlertManagerDefinitionValidationMiddleware(stack *middleware.S
 
 func addOpDescribeLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeLoggingConfiguration{}, middleware.After)
+}
+
+func addOpDescribeQueryLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeQueryLoggingConfiguration{}, middleware.After)
 }
 
 func addOpDescribeRuleGroupsNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -598,6 +690,10 @@ func addOpUpdateLoggingConfigurationValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpUpdateLoggingConfiguration{}, middleware.After)
 }
 
+func addOpUpdateQueryLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQueryLoggingConfiguration{}, middleware.After)
+}
+
 func addOpUpdateScraperValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateScraper{}, middleware.After)
 }
@@ -617,6 +713,21 @@ func validateAmpConfiguration(v *types.AmpConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AmpConfiguration"}
 	if v.WorkspaceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCloudWatchLogDestination(v *types.CloudWatchLogDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogDestination"}
+	if v.LogGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -697,6 +808,64 @@ func validateLimitsPerLabelSetList(v []types.LimitsPerLabelSet) error {
 	}
 }
 
+func validateLoggingDestination(v *types.LoggingDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LoggingDestination"}
+	if v.CloudWatchLogs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchLogs"))
+	} else if v.CloudWatchLogs != nil {
+		if err := validateCloudWatchLogDestination(v.CloudWatchLogs); err != nil {
+			invalidParams.AddNested("CloudWatchLogs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateLoggingFilter(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLoggingDestinations(v []types.LoggingDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LoggingDestinations"}
+	for i := range v {
+		if err := validateLoggingDestination(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLoggingFilter(v *types.LoggingFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LoggingFilter"}
+	if v.QspThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QspThreshold"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSource(v types.Source) error {
 	if v == nil {
 		return nil
@@ -744,6 +913,28 @@ func validateOpCreateLoggingConfigurationInput(v *CreateLoggingConfigurationInpu
 	}
 	if v.LogGroupArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateQueryLoggingConfigurationInput(v *CreateQueryLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateQueryLoggingConfigurationInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.Destinations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destinations"))
+	} else if v.Destinations != nil {
+		if err := validateLoggingDestinations(v.Destinations); err != nil {
+			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -832,6 +1023,21 @@ func validateOpDeleteLoggingConfigurationInput(v *DeleteLoggingConfigurationInpu
 	}
 }
 
+func validateOpDeleteQueryLoggingConfigurationInput(v *DeleteQueryLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQueryLoggingConfigurationInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteRuleGroupsNamespaceInput(v *DeleteRuleGroupsNamespaceInput) error {
 	if v == nil {
 		return nil
@@ -900,6 +1106,21 @@ func validateOpDescribeLoggingConfigurationInput(v *DescribeLoggingConfiguration
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeLoggingConfigurationInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeQueryLoggingConfigurationInput(v *DescribeQueryLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeQueryLoggingConfigurationInput"}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
 	}
@@ -1088,6 +1309,28 @@ func validateOpUpdateLoggingConfigurationInput(v *UpdateLoggingConfigurationInpu
 	}
 	if v.LogGroupArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQueryLoggingConfigurationInput(v *UpdateQueryLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueryLoggingConfigurationInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.Destinations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destinations"))
+	} else if v.Destinations != nil {
+		if err := validateLoggingDestinations(v.Destinations); err != nil {
+			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

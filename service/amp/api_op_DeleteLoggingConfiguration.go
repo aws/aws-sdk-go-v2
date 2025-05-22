@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the logging configuration for a workspace.
+// Deletes the rules and alerting logging configuration for a workspace.
+//
+// These logging configurations are only for rules and alerting logs.
 func (c *Client) DeleteLoggingConfiguration(ctx context.Context, params *DeleteLoggingConfigurationInput, optFns ...func(*Options)) (*DeleteLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteLoggingConfigurationInput{}

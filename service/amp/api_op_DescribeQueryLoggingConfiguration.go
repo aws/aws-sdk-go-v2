@@ -11,29 +11,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns complete information about the current rules and alerting logging
-// configuration of the workspace.
-//
-// These logging configurations are only for rules and alerting logs.
-func (c *Client) DescribeLoggingConfiguration(ctx context.Context, params *DescribeLoggingConfigurationInput, optFns ...func(*Options)) (*DescribeLoggingConfigurationOutput, error) {
+// Retrieves the details of the query logging configuration for the specified
+// workspace.
+func (c *Client) DescribeQueryLoggingConfiguration(ctx context.Context, params *DescribeQueryLoggingConfigurationInput, optFns ...func(*Options)) (*DescribeQueryLoggingConfigurationOutput, error) {
 	if params == nil {
-		params = &DescribeLoggingConfigurationInput{}
+		params = &DescribeQueryLoggingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLoggingConfiguration", params, optFns, c.addOperationDescribeLoggingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeQueryLoggingConfiguration", params, optFns, c.addOperationDescribeQueryLoggingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeLoggingConfigurationOutput)
+	out := result.(*DescribeQueryLoggingConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-// Represents the input of a DescribeLoggingConfiguration operation.
-type DescribeLoggingConfigurationInput struct {
+type DescribeQueryLoggingConfigurationInput struct {
 
-	// The ID of the workspace to describe the logging configuration for.
+	// The ID of the workspace for which to retrieve the query logging configuration.
 	//
 	// This member is required.
 	WorkspaceId *string
@@ -41,13 +38,13 @@ type DescribeLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DescribeLoggingConfiguration operation.
-type DescribeLoggingConfigurationOutput struct {
+type DescribeQueryLoggingConfigurationOutput struct {
 
-	// A structure that displays the information about the logging configuration.
+	// The detailed information about the query logging configuration for the
+	// specified workspace.
 	//
 	// This member is required.
-	LoggingConfiguration *types.LoggingConfigurationMetadata
+	QueryLoggingConfiguration *types.QueryLoggingConfigurationMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,19 +52,19 @@ type DescribeLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeQueryLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeLoggingConfiguration{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeQueryLoggingConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeLoggingConfiguration{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeQueryLoggingConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLoggingConfiguration"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeQueryLoggingConfiguration"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -122,10 +119,10 @@ func (c *Client) addOperationDescribeLoggingConfigurationMiddlewares(stack *midd
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDescribeLoggingConfigurationValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeQueryLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLoggingConfiguration(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeQueryLoggingConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -158,10 +155,10 @@ func (c *Client) addOperationDescribeLoggingConfigurationMiddlewares(stack *midd
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeLoggingConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeQueryLoggingConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DescribeLoggingConfiguration",
+		OperationName: "DescribeQueryLoggingConfiguration",
 	}
 }

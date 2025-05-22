@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of the Amazon Web Services from which Audit Manager can collect
-// evidence.
+// Gets a list of the Amazon Web Services services from which Audit Manager can
+// collect evidence.
 //
-// Audit Manager defines which Amazon Web Services are in scope for an assessment.
-// Audit Manager infers this scope by examining the assessment’s controls and their
-// data sources, and then mapping this information to one or more of the
-// corresponding Amazon Web Services that are in this list.
+// Audit Manager defines which Amazon Web Services services are in scope for an
+// assessment. Audit Manager infers this scope by examining the assessment’s
+// controls and their data sources, and then mapping this information to one or
+// more of the corresponding Amazon Web Services services that are in this list.
 //
 // For information about why it's no longer possible to specify services in scope
 // manually, see [I can't edit the services in scope for my assessment]in the Troubleshooting section of the Audit Manager user guide.
@@ -44,7 +44,7 @@ type GetServicesInScopeInput struct {
 
 type GetServicesInScopeOutput struct {
 
-	//  The metadata that's associated with the Amazon Web Service.
+	//  The metadata that's associated with the Amazon Web Services service.
 	ServiceMetadata []types.ServiceMetadata
 
 	// Metadata pertaining to the operation's result.
