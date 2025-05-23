@@ -1,3 +1,7 @@
+# v1.3.0 (2025-05-23)
+
+* **Feature**: Update PrincipalId pattern documentation to reflect what user should receive back from the API call
+
 # v1.2.2 (2025-04-03)
 
 * No change notes available for this release.

@@ -1,3 +1,11 @@
+# Release (2025-05-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.222.0](service/ec2/CHANGELOG.md#v12220-2025-05-23)
+  * **Feature**: This release adds support for the C7i-flex, M7i-flex, I7i, I7ie, I8g, P6-b200, Trn2, C8gd, M8gd and R8gd instances
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.3.0](service/securityir/CHANGELOG.md#v130-2025-05-23)
+  * **Feature**: Update PrincipalId pattern documentation to reflect what user should receive back from the API call
+
 # Release (2025-05-22)
 
 ## General Highlights
