@@ -18,6 +18,7 @@ const (
 	AwsRegionApSoutheast3 AwsRegion = "ap-southeast-3"
 	AwsRegionApSoutheast4 AwsRegion = "ap-southeast-4"
 	AwsRegionApSoutheast5 AwsRegion = "ap-southeast-5"
+	AwsRegionApSoutheast7 AwsRegion = "ap-southeast-7"
 	AwsRegionCaCentral1   AwsRegion = "ca-central-1"
 	AwsRegionCaWest1      AwsRegion = "ca-west-1"
 	AwsRegionCnNorth1     AwsRegion = "cn-north-1"
@@ -33,6 +34,7 @@ const (
 	AwsRegionIlCentral1   AwsRegion = "il-central-1"
 	AwsRegionMeCentral1   AwsRegion = "me-central-1"
 	AwsRegionMeSouth1     AwsRegion = "me-south-1"
+	AwsRegionMxCentral1   AwsRegion = "mx-central-1"
 	AwsRegionSaEast1      AwsRegion = "sa-east-1"
 	AwsRegionUsEast1      AwsRegion = "us-east-1"
 	AwsRegionUsEast2      AwsRegion = "us-east-2"
@@ -58,6 +60,7 @@ func (AwsRegion) Values() []AwsRegion {
 		"ap-southeast-3",
 		"ap-southeast-4",
 		"ap-southeast-5",
+		"ap-southeast-7",
 		"ca-central-1",
 		"ca-west-1",
 		"cn-north-1",
@@ -73,6 +76,7 @@ func (AwsRegion) Values() []AwsRegion {
 		"il-central-1",
 		"me-central-1",
 		"me-south-1",
+		"mx-central-1",
 		"sa-east-1",
 		"us-east-1",
 		"us-east-2",
