@@ -347,3 +347,5 @@ response_checksum_validation = when_required
 [profile response_checksum_validation_error]
 response_checksum_validation = blabla
 
+[profile ec2_instance_profile_name]
+ec2_instance_profile_name = ProfileName

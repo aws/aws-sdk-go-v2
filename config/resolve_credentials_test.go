@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/service/sso"
@@ -82,9 +83,15 @@ func setupCredentialsEndpoints() (aws.EndpointResolverWithOptions, func()) {
 
 	ec2MetadataServer := httptest.NewServer(http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
-			if r.URL.Path == "/latest/meta-data/iam/security-credentials/RoleName" {
+			if r.URL.Path == "/latest/meta-data/iam/security-credentials-extended/RoleName" {
 				w.Write([]byte(ec2MetadataResponse))
-			} else if r.URL.Path == "/latest/meta-data/iam/security-credentials/" {
+			} else if r.URL.Path == "/latest/meta-data/iam/security-credentials-extended/LoadOptions" {
+				w.Write([]byte(ec2MetadataResponseLoadOptions))
+			} else if r.URL.Path == "/latest/meta-data/iam/security-credentials-extended/EnvCfg" {
+				w.Write([]byte(ec2MetadataResponseEnvCfg))
+			} else if r.URL.Path == "/latest/meta-data/iam/security-credentials-extended/SharedCfg" {
+				w.Write([]byte(ec2MetadataResponseSharedCfg))
+			} else if r.URL.Path == "/latest/meta-data/iam/security-credentials-extended/" {
 				w.Write([]byte("RoleName"))
 			} else if r.URL.Path == "/latest/api/token" {
 				header := w.Header()
@@ -731,6 +738,103 @@ func TestResolveCredentialsEcsContainer(t *testing.T) {
 				}
 				os.Setenv(k, v)
 			}
+			cfg, err := LoadDefaultConfig(context.TODO(), opts...)
+			if err != nil {
+				t.Fatalf("could not load config: %s", err)
+			}
+			actual, err := cfg.Credentials.Retrieve(context.TODO())
+			if err != nil {
+				t.Fatalf("could not retrieve credentials: %s", err)
+			}
+			if actual.AccessKeyID != tc.expectedAccessKey {
+				t.Errorf("expected access key to be %s, got %s", tc.expectedAccessKey, actual.AccessKeyID)
+			}
+			if actual.SecretAccessKey != tc.expectedSecretKey {
+				t.Errorf("expected secret key to be %s, got %s", tc.expectedSecretKey, actual.SecretAccessKey)
+			}
+		})
+	}
+
+}
+
+func TestResolveCredentialsEC2RoleCreds(t *testing.T) {
+	testCases := map[string]struct {
+		expectedAccessKey string
+		expectedSecretKey string
+		envVar            map[string]string
+		configFile        string
+		configProfile     string
+		loadOptions       func(*LoadOptions) error
+	}{
+		"no config whatsoever": {
+			expectedAccessKey: "ec2-access-key",
+			expectedSecretKey: "ec2-secret-key",
+			envVar:            map[string]string{},
+			configFile:        "",
+		},
+		"env cfg": {
+			expectedAccessKey: "ec2-access-key-envcfg",
+			expectedSecretKey: "ec2-secret-key-envcfg",
+			envVar: map[string]string{
+				"AWS_EC2_INSTANCE_PROFILE_NAME": "EnvCfg",
+			},
+			configFile: "",
+		},
+		"shared cfg": {
+			expectedAccessKey: "ec2-access-key-sharedcfg",
+			expectedSecretKey: "ec2-secret-key-sharedcfg",
+			envVar:            map[string]string{},
+			configFile:        filepath.Join("testdata", "config_source_shared"),
+			configProfile:     "ec2metadata-profilename",
+		},
+		"loadopts + env cfg + shared cfg": {
+			expectedAccessKey: "ec2-access-key-loadopts",
+			expectedSecretKey: "ec2-secret-key-loadopts",
+			envVar: map[string]string{
+				"AWS_EC2_INSTANCE_PROFILE_NAME": "EnvCfg",
+			},
+			configFile:    filepath.Join("testdata", "config_source_shared"),
+			configProfile: "ec2metadata-profilename",
+			loadOptions: WithEC2RoleCredentialOptions(func(o *ec2rolecreds.Options) {
+				o.ProfileName = "LoadOptions"
+			}),
+		},
+	}
+
+	for name, tc := range testCases {
+		t.Run(name, func(t *testing.T) {
+			endpointResolver, cleanupFn := setupCredentialsEndpoints()
+			defer cleanupFn()
+
+			// setupCredentialsEndpoints sets this above and then we hold onto
+			// it for this test
+			ec2MetadataURL := os.Getenv("AWS_EC2_METADATA_SERVICE_ENDPOINT")
+
+			restoreEnv := awstesting.StashEnv()
+			defer awstesting.PopEnv(restoreEnv)
+
+			os.Setenv("AWS_EC2_METADATA_SERVICE_ENDPOINT", ec2MetadataURL)
+			for k, v := range tc.envVar {
+				os.Setenv(k, v)
+			}
+			var sharedConfigFiles []string
+			if tc.configFile != "" {
+				sharedConfigFiles = append(sharedConfigFiles, tc.configFile)
+			}
+			opts := []func(*LoadOptions) error{
+				WithEndpointResolverWithOptions(endpointResolver),
+				WithRetryer(func() aws.Retryer { return aws.NopRetryer{} }),
+				WithSharedConfigFiles(sharedConfigFiles),
+				WithSharedCredentialsFiles([]string{}),
+			}
+			if len(tc.configProfile) != 0 {
+				opts = append(opts, WithSharedConfigProfile(tc.configProfile))
+			}
+
+			if tc.loadOptions != nil {
+				opts = append(opts, tc.loadOptions)
+			}
+
 			cfg, err := LoadDefaultConfig(context.TODO(), opts...)
 			if err != nil {
 				t.Fatalf("could not load config: %s", err)

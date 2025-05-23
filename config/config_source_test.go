@@ -128,10 +128,10 @@ func (f imdsForwarder) Do(r *http.Request) (*http.Response, error) {
 		header.Set(ttlHeader, r.Header.Get(ttlHeader))
 		return &http.Response{StatusCode: 200, Header: header, Body: io.NopCloser(strings.NewReader("validToken"))}, nil
 	}
-	if r.URL.Path == "/latest/meta-data/iam/security-credentials/" {
+	if r.URL.Path == "/latest/meta-data/iam/security-credentials-extended/" {
 		return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader("RoleName"))}, nil
 	}
-	if r.URL.Path == "/latest/meta-data/iam/security-credentials/RoleName" {
+	if r.URL.Path == "/latest/meta-data/iam/security-credentials-extended/RoleName" {
 		return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(ecsResponse))}, nil
 	}
 	return f.innerClient.Do(r)
