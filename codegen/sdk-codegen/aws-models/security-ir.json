@@ -130,6 +130,12 @@
                         "smithy.api#enumValue": "ap-southeast-5"
                     }
                 },
+                "AP_SOUTHEAST_7": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-7"
+                    }
+                },
                 "CA_CENTRAL_1": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -218,6 +224,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "me-south-1"
+                    }
+                },
+                "MX_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mx-central-1"
                     }
                 },
                 "SA_EAST_1": {
@@ -313,7 +325,7 @@
                 "membershipId": {
                     "target": "com.amazonaws.securityir#MembershipId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element used in combination with BatchGetMemberAccountDetails to identify the membership ID to\n            query.\n        </p>",
+                        "smithy.api#documentation": "<p>Required element used in combination with BatchGetMemberAccountDetails to identify the membership ID to query. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_BatchGetMemberAccountDetails.html#securityir-BatchGetMemberAccountDetails-request-uri-membershipId"
                         },
@@ -413,7 +425,7 @@
                 "membershipId": {
                     "target": "com.amazonaws.securityir#MembershipId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element used in combination with CancelMembershipRequest to identify the membership ID to\n            cancel.\n        </p>",
+                        "smithy.api#documentation": "<p>Required element used in combination with CancelMembershipRequest to identify the membership ID to cancel. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CancelMembership.html#securityir-CancelMembership-request-uri-membershipId"
                         },
@@ -827,7 +839,7 @@
                 "caseStatus": {
                     "target": "com.amazonaws.securityir#CaseStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A response element providing responses for requests to CloseCase. This element responds with the case\n            status following the action.\n        </p>",
+                        "smithy.api#documentation": "<p>A response element providing responses for requests to CloseCase. This element responds with the case status following the action. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CloseCase.html#securityir-CloseCase-response-caseStatus"
                         }
@@ -836,7 +848,7 @@
                 "closedDate": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A response element providing responses for requests to CloseCase. This element responds with the case\n            closure date following the action.\n        </p>",
+                        "smithy.api#documentation": "<p>A response element providing responses for requests to CloseCase. This element responds with the case closure date following the action. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CloseCase.html#securityir-CloseCase-response-closedDate"
                         }
@@ -1127,7 +1139,7 @@
                 "resolverType": {
                     "target": "com.amazonaws.securityir#ResolverType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to identify the resolver type. Available resolvers\n            include self-supported | aws-supported.\n        </p>",
+                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to identify the resolver type. Available resolvers include self-supported | aws-supported. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#securityir-CreateCase-request-resolverType"
                         },
@@ -1157,7 +1169,7 @@
                 "engagementType": {
                     "target": "com.amazonaws.securityir#EngagementType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to provide an engagement type for the new cases.\n            Available engagement types include Security Incident | Investigation\n        </p>",
+                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to provide an engagement type for the new cases. Available engagement types include Security Incident | Investigation </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#securityir-CreateCase-request-engagementType"
                         },
@@ -1167,7 +1179,7 @@
                 "reportedIncidentStartDate": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to provide an initial start date for the unauthorized\n            activity.\n        </p>",
+                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to provide an initial start date for the unauthorized activity. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#securityir-CreateCase-request-reportedIncidentStartDate"
                         },
@@ -1187,7 +1199,7 @@
                 "watchers": {
                     "target": "com.amazonaws.securityir#Watchers",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to provide a list of entities to receive\n            notifications for case updates.\n        </p>",
+                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to provide a list of entities to receive notifications for case updates. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#securityir-CreateCase-request-watchers"
                         },
@@ -1199,7 +1211,7 @@
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#default": [],
-                        "smithy.api#documentation": "<p>An optional element used in combination with CreateCase to provide a list of suspicious internet protocol\n            addresses associated with unauthorized activity.\n        </p>",
+                        "smithy.api#documentation": "<p>An optional element used in combination with CreateCase to provide a list of suspicious internet protocol addresses associated with unauthorized activity. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#securityir-CreateCase-request-threatActorIpAddresses"
                         }
@@ -1247,7 +1259,7 @@
                 "caseId": {
                     "target": "com.amazonaws.securityir#CaseId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A response element providing responses for requests to CreateCase. This element responds with the case\n            ID.\n        </p>",
+                        "smithy.api#documentation": "<p>A response element providing responses for requests to CreateCase. This element responds with the case ID. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#securityir-CreateCase-response-caseId"
                         },
@@ -1356,7 +1368,7 @@
                 "incidentResponseTeam": {
                     "target": "com.amazonaws.securityir#IncidentResponseTeam",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element use in combination with CreateMembership to add customer incident response team members\n            and trusted partners to the membership.\n        </p>",
+                        "smithy.api#documentation": "<p>Required element use in combination with CreateMembership to add customer incident response team members and trusted partners to the membership. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateMembership.html#securityir-CreateMembership-request-incidentResponseTeam"
                         },
@@ -1580,7 +1592,7 @@
                 "caseId": {
                     "target": "com.amazonaws.securityir#CaseId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element for GetCaseAttachmentDownloadUrl to identify the case ID for downloading an attachment\n            from.\n        </p>",
+                        "smithy.api#documentation": "<p>Required element for GetCaseAttachmentDownloadUrl to identify the case ID for downloading an attachment from. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCaseAttachmentDownloadUrl.html#securityir-GetCaseAttachmentDownloadUrl-request-uri-caseId"
                         },
@@ -1591,7 +1603,7 @@
                 "attachmentId": {
                     "target": "com.amazonaws.securityir#AttachmentId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element for GetCaseAttachmentDownloadUrl to identify the attachment ID for downloading an\n            attachment.\n        </p>",
+                        "smithy.api#documentation": "<p>Required element for GetCaseAttachmentDownloadUrl to identify the attachment ID for downloading an attachment. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCaseAttachmentDownloadUrl.html#securityir-GetCaseAttachmentDownloadUrl-request-uri-attachmentId"
                         },
@@ -1666,7 +1678,7 @@
                 "caseId": {
                     "target": "com.amazonaws.securityir#CaseId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element for GetCaseAttachmentUploadUrl to identify the case ID for uploading an attachment to.\n        </p>",
+                        "smithy.api#documentation": "<p>Required element for GetCaseAttachmentUploadUrl to identify the case ID for uploading an attachment to. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCaseAttachmentUploadUrl.html#securityir-GetCaseAttachmentUploadUrl-request-uri-caseId"
                         },
@@ -1677,7 +1689,7 @@
                 "fileName": {
                     "target": "com.amazonaws.securityir#FileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element for GetCaseAttachmentUploadUrl to identify the file name of the attachment to upload.\n        </p>",
+                        "smithy.api#documentation": "<p>Required element for GetCaseAttachmentUploadUrl to identify the file name of the attachment to upload. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCaseAttachmentUploadUrl.html#securityir-GetCaseAttachmentUploadUrl-request-contentLength"
                         },
@@ -1784,7 +1796,7 @@
                 "caseStatus": {
                     "target": "com.amazonaws.securityir#CaseStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetCase that provides the case status. Options for statuses include\n            <code>Submitted | Detection and Analysis | Eradication, Containment and Recovery | Post-Incident Activities\n                | Closed\n            </code>\n         </p>",
+                        "smithy.api#documentation": "<p>Response element for GetCase that provides the case status. Options for statuses include <code>Submitted | Detection and Analysis | Eradication, Containment and Recovery | Post-Incident Activities | Closed </code> </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-caseStatus"
                         }
@@ -1793,7 +1805,7 @@
                 "engagementType": {
                     "target": "com.amazonaws.securityir#EngagementType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetCase that provides the engagement type. Options for engagement type include\n            <code>Active Security Event | Investigations</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Response element for GetCase that provides the engagement type. Options for engagement type include <code>Active Security Event | Investigations</code> </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-engagementType"
                         }
@@ -1811,7 +1823,7 @@
                 "actualIncidentStartDate": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetCase that provides the actual incident start date as identified by data analysis\n            during the investigation.\n        </p>",
+                        "smithy.api#documentation": "<p>Response element for GetCase that provides the actual incident start date as identified by data analysis during the investigation. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-actualIncidentStartDate"
                         }
@@ -1829,7 +1841,7 @@
                 "threatActorIpAddresses": {
                     "target": "com.amazonaws.securityir#ThreatActorIpList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetCase that provides a list of suspicious IP addresses associated with unauthorized\n            activity.\n        </p>",
+                        "smithy.api#documentation": "<p>Response element for GetCase that provides a list of suspicious IP addresses associated with unauthorized activity. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-threatActorIpAddresses"
                         }
@@ -1892,7 +1904,7 @@
                 "resolverType": {
                     "target": "com.amazonaws.securityir#ResolverType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetCase that provides the current resolver types. Options include <code>\n            self-supported | AWS-supported</code>.\n        </p>",
+                        "smithy.api#documentation": "<p>Response element for GetCase that provides the current resolver types. Options include <code> self-supported | AWS-supported</code>. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-resolverType"
                         }
@@ -2145,7 +2157,7 @@
                 "accountId": {
                     "target": "com.amazonaws.securityir#AWSAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetMembership that provides the configured account for managing the membership.\n        </p>",
+                        "smithy.api#documentation": "<p>Response element for GetMembership that provides the configured account for managing the membership. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-response-accountId"
                         }
@@ -2199,7 +2211,7 @@
                 "membershipDeactivationTimestamp": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetMembership that provides the configured membership name deactivation timestamp.\n        </p>",
+                        "smithy.api#documentation": "<p>Response element for GetMembership that provides the configured membership name deactivation timestamp. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-response-membershipDeactivationTimestamp"
                         }
@@ -2208,7 +2220,7 @@
                 "customerType": {
                     "target": "com.amazonaws.securityir#CustomerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetMembership that provides the configured membership type. Options include <code>\n            Standalone | Organizations</code>.\n        </p>",
+                        "smithy.api#documentation": "<p>Response element for GetMembership that provides the configured membership type. Options include <code> Standalone | Organizations</code>. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-response-customerType"
                         }
@@ -2226,7 +2238,7 @@
                 "incidentResponseTeam": {
                     "target": "com.amazonaws.securityir#IncidentResponseTeam",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetMembership that provides the configured membership incident response team\n            members.\n        </p>",
+                        "smithy.api#documentation": "<p>Response element for GetMembership that provides the configured membership incident response team members. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-response-incidentResponseTeam"
                         }
@@ -2522,7 +2534,7 @@
                 "items": {
                     "target": "com.amazonaws.securityir#CaseEditItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for ListCaseEdits that includes the action, eventtimestamp, message, and principal for\n            the response.\n        </p>",
+                        "smithy.api#documentation": "<p>Response element for ListCaseEdits that includes the action, eventtimestamp, message, and principal for the response. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCaseEdits.html#securityir-ListCaseEdits-response-items"
                         }
@@ -2750,7 +2762,7 @@
                 "items": {
                     "target": "com.amazonaws.securityir#ListCasesItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for ListCases that includes caseARN, caseID, caseStatus, closedDate,\n            createdDate, engagementType, lastUpdatedDate, pendingAction, resolverType, and title for each response.\n        </p>",
+                        "smithy.api#documentation": "<p>Response element for ListCases that includes caseARN, caseID, caseStatus, closedDate, createdDate, engagementType, lastUpdatedDate, pendingAction, resolverType, and title for each response. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Response": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCases.html#securityir-ListCases-response-items"
                         }
@@ -2940,7 +2952,7 @@
                 "items": {
                     "target": "com.amazonaws.securityir#ListCommentsItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for ListComments providing the body, commentID, createDate, creator, lastUpdatedBy and\n            lastUpdatedDate for each response.\n        </p>",
+                        "smithy.api#documentation": "<p>Response element for ListComments providing the body, commentID, createDate, creator, lastUpdatedBy and lastUpdatedDate for each response. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListComments.html#securityir-ListComments-response-items"
                         }
@@ -3124,7 +3136,7 @@
                 "items": {
                     "target": "com.amazonaws.securityir#ListMembershipItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>Request element for ListMemberships including the accountID, membershipARN, membershipID,\n            membershipStatus, and region for each response.\n        </p>",
+                        "smithy.api#documentation": "<p>Request element for ListMemberships including the accountID, membershipARN, membershipID, membershipStatus, and region for each response. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListMemberships.html#securityir-ListMemberships-response-items"
                         }
@@ -3439,7 +3451,7 @@
         "com.amazonaws.securityir#PrincipalId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^internal:midway:([a-z]{3,8}|svc-mw-[0-9]{12}[a-zA-Z0-9-]{5,20})$)|(^external:aws:\\d{12}$)"
+                "smithy.api#pattern": "((^AWS Responder)|(^\\d{12}$)|(^security-ir.amazonaws.com))"
             }
         },
         "com.amazonaws.securityir#ResolverType": {
@@ -4456,7 +4468,7 @@
                 "caseId": {
                     "target": "com.amazonaws.securityir#CaseId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element for UpdateCaseComment to identify the case ID containing the comment to be updated.\n        </p>",
+                        "smithy.api#documentation": "<p>Required element for UpdateCaseComment to identify the case ID containing the comment to be updated. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCaseComment.html#securityir-UpdateCaseComment-request-uri-caseId"
                         },
@@ -4552,7 +4564,7 @@
                 "reportedIncidentStartDate": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional element for UpdateCase to provide content for the customer reported incident start date field.\n        </p>",
+                        "smithy.api#documentation": "<p>Optional element for UpdateCase to provide content for the customer reported incident start date field. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCase.html#securityir-UpdateCase-request-reportedIncidentStartDate"
                         }
@@ -4570,7 +4582,7 @@
                 "engagementType": {
                     "target": "com.amazonaws.securityir#EngagementType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional element for UpdateCase to provide content for the engagement type field. <code>Available\n            engagement types include Security Incident | Investigation</code>.\n        </p>",
+                        "smithy.api#documentation": "<p>Optional element for UpdateCase to provide content for the engagement type field. <code>Available engagement types include Security Incident | Investigation</code>. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCase.html#securityir-UpdateCase-request-engagementType"
                         }
@@ -4597,7 +4609,7 @@
                 "threatActorIpAddressesToAdd": {
                     "target": "com.amazonaws.securityir#ThreatActorIpList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional element for UpdateCase to provide content to add additional suspicious IP addresses related to a\n            case.\n        </p>",
+                        "smithy.api#documentation": "<p>Optional element for UpdateCase to provide content to add additional suspicious IP addresses related to a case. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCase.html#securityir-UpdateCase-request-threatActorIpAddressesToAdd"
                         }
@@ -4691,7 +4703,7 @@
                     "name": "UpdateCaseStatus",
                     "documentation": "Grants permission to update a case status"
                 },
-                "smithy.api#documentation": "<p>Grants permission to update the status for a designated cases. Options include <code>Submitted |\n            Detection and Analysis | Eradication, Containment and Recovery | Post-Incident Activities | Closed</code>.\n        </p>",
+                "smithy.api#documentation": "<p>Grants permission to update the status for a designated cases. Options include <code>Submitted | Detection and Analysis | Eradication, Containment and Recovery | Post-Incident Activities | Closed</code>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke UpdateCaseStatus",
@@ -4731,7 +4743,7 @@
                 "caseStatus": {
                     "target": "com.amazonaws.securityir#SelfManagedCaseStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element for UpdateCaseStatus to identify the status for a case. Options include <code>Submitted |\n            Detection and Analysis | Containment, Eradication and Recovery | Post-incident Activities</code>.\n        </p>",
+                        "smithy.api#documentation": "<p>Required element for UpdateCaseStatus to identify the status for a case. Options include <code>Submitted | Detection and Analysis | Containment, Eradication and Recovery | Post-incident Activities</code>. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCaseStatus.html#securityir-UpdateCaseStatus-request-caseStatus"
                         },
@@ -4882,7 +4894,7 @@
                     "name": "UpdateResolverType",
                     "documentation": "Grants permission to update case resolver type"
                 },
-                "smithy.api#documentation": "<p>Grants permission to update the resolver type for a case.</p>\n         <important>\n            <p>This is a one-way action and cannot be reversed.</p>\n         </important>\n         <p>Options include self-supported &gt; AWS-supported.</p>",
+                "smithy.api#documentation": "<p>Grants permission to update the resolver type for a case.</p> <important> <p>This is a one-way action and cannot be reversed.</p> </important> <p>Options include self-supported &gt; AWS-supported.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke UpdateResolverType",
