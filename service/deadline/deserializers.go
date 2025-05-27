@@ -25654,6 +25654,15 @@ func awsRestjson1_deserializeDocumentServiceManagedEc2FleetConfiguration(v **typ
 				return err
 			}
 
+		case "storageProfileId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageProfileId to be of type string, got %T instead", value)
+				}
+				sv.StorageProfileId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

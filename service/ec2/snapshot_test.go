@@ -5762,6 +5762,18 @@ func TestCheckSnapshot_ExportVerifiedAccessInstanceClientConfiguration(t *testin
 	}
 }
 
+func TestCheckSnapshot_GetActiveVpnTunnelStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetActiveVpnTunnelStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetActiveVpnTunnelStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAllowedImagesSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAllowedImagesSettings(context.Background(), nil, func(o *Options) {
@@ -13974,6 +13986,18 @@ func TestUpdateSnapshot_ExportVerifiedAccessInstanceClientConfiguration(t *testi
 	_, err := svc.ExportVerifiedAccessInstanceClientConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ExportVerifiedAccessInstanceClientConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetActiveVpnTunnelStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetActiveVpnTunnelStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetActiveVpnTunnelStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

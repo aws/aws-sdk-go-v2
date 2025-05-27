@@ -218,6 +218,18 @@ func TestCheckSnapshot_GetCostAndUsage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCostAndUsageComparisons(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCostAndUsageComparisons(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCostAndUsageComparisons")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCostAndUsageWithResources(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCostAndUsageWithResources(context.Background(), nil, func(o *Options) {
@@ -235,6 +247,18 @@ func TestCheckSnapshot_GetCostCategories(t *testing.T) {
 	_, err := svc.GetCostCategories(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetCostCategories")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCostComparisonDrivers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCostComparisonDrivers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCostComparisonDrivers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -745,6 +769,18 @@ func TestUpdateSnapshot_GetCostAndUsage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCostAndUsageComparisons(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCostAndUsageComparisons(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCostAndUsageComparisons")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCostAndUsageWithResources(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCostAndUsageWithResources(context.Background(), nil, func(o *Options) {
@@ -762,6 +798,18 @@ func TestUpdateSnapshot_GetCostCategories(t *testing.T) {
 	_, err := svc.GetCostCategories(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetCostCategories")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCostComparisonDrivers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCostComparisonDrivers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCostComparisonDrivers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

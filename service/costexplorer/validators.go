@@ -210,6 +210,26 @@ func (m *validateOpGetCommitmentPurchaseAnalysis) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCostAndUsageComparisons struct {
+}
+
+func (*validateOpGetCostAndUsageComparisons) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCostAndUsageComparisons) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCostAndUsageComparisonsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCostAndUsageComparisonsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCostAndUsage struct {
 }
 
@@ -265,6 +285,26 @@ func (m *validateOpGetCostCategories) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetCostCategoriesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCostComparisonDrivers struct {
+}
+
+func (*validateOpGetCostComparisonDrivers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCostComparisonDrivers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCostComparisonDriversInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCostComparisonDriversInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -770,6 +810,10 @@ func addOpGetCommitmentPurchaseAnalysisValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpGetCommitmentPurchaseAnalysis{}, middleware.After)
 }
 
+func addOpGetCostAndUsageComparisonsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCostAndUsageComparisons{}, middleware.After)
+}
+
 func addOpGetCostAndUsageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCostAndUsage{}, middleware.After)
 }
@@ -780,6 +824,10 @@ func addOpGetCostAndUsageWithResourcesValidationMiddleware(stack *middleware.Sta
 
 func addOpGetCostCategoriesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCostCategories{}, middleware.After)
+}
+
+func addOpGetCostComparisonDriversValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCostComparisonDrivers{}, middleware.After)
 }
 
 func addOpGetCostForecastValidationMiddleware(stack *middleware.Stack) error {
@@ -1397,6 +1445,35 @@ func validateOpGetCommitmentPurchaseAnalysisInput(v *GetCommitmentPurchaseAnalys
 	}
 }
 
+func validateOpGetCostAndUsageComparisonsInput(v *GetCostAndUsageComparisonsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCostAndUsageComparisonsInput"}
+	if v.BaselineTimePeriod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaselineTimePeriod"))
+	} else if v.BaselineTimePeriod != nil {
+		if err := validateDateInterval(v.BaselineTimePeriod); err != nil {
+			invalidParams.AddNested("BaselineTimePeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComparisonTimePeriod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonTimePeriod"))
+	} else if v.ComparisonTimePeriod != nil {
+		if err := validateDateInterval(v.ComparisonTimePeriod); err != nil {
+			invalidParams.AddNested("ComparisonTimePeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricForComparison == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricForComparison"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetCostAndUsageInput(v *GetCostAndUsageInput) error {
 	if v == nil {
 		return nil
@@ -1463,6 +1540,35 @@ func validateOpGetCostCategoriesInput(v *GetCostCategoriesInput) error {
 		if err := validateSortDefinitions(v.SortBy); err != nil {
 			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCostComparisonDriversInput(v *GetCostComparisonDriversInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCostComparisonDriversInput"}
+	if v.BaselineTimePeriod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaselineTimePeriod"))
+	} else if v.BaselineTimePeriod != nil {
+		if err := validateDateInterval(v.BaselineTimePeriod); err != nil {
+			invalidParams.AddNested("BaselineTimePeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComparisonTimePeriod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonTimePeriod"))
+	} else if v.ComparisonTimePeriod != nil {
+		if err := validateDateInterval(v.ComparisonTimePeriod); err != nil {
+			invalidParams.AddNested("ComparisonTimePeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricForComparison == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricForComparison"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -155,6 +155,40 @@ type ActiveInstance struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the current security configuration of an active VPN
+// tunnel.
+type ActiveVpnTunnelStatus struct {
+
+	// The version of the Internet Key Exchange (IKE) protocol being used.
+	IkeVersion *string
+
+	// The Diffie-Hellman group number being used in Phase 1 IKE negotiations.
+	Phase1DHGroup *int32
+
+	// The encryption algorithm negotiated in Phase 1 IKE negotiations.
+	Phase1EncryptionAlgorithm *string
+
+	// The integrity algorithm negotiated in Phase 1 IKE negotiations.
+	Phase1IntegrityAlgorithm *string
+
+	// The Diffie-Hellman group number being used in Phase 2 IKE negotiations.
+	Phase2DHGroup *int32
+
+	// The encryption algorithm negotiated in Phase 2 IKE negotiations.
+	Phase2EncryptionAlgorithm *string
+
+	// The integrity algorithm negotiated in Phase 2 IKE negotiations.
+	Phase2IntegrityAlgorithm *string
+
+	// The current provisioning status of the VPN tunnel.
+	ProvisioningStatus VpnTunnelProvisioningStatus
+
+	// The reason for the current provisioning status.
+	ProvisioningStatusReason *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a principal.
 type AddedPrincipal struct {
 
@@ -22740,6 +22774,10 @@ type VpnConnection struct {
 
 	// The VPN connection options.
 	Options *VpnConnectionOptions
+
+	// The Amazon Resource Name (ARN) of the Secrets Manager secret storing the
+	// pre-shared key(s) for the VPN connection.
+	PreSharedKeyArn *string
 
 	// The static routes associated with the VPN connection.
 	Routes []VpnStaticRoute

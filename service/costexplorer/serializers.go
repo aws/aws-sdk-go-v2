@@ -810,6 +810,67 @@ func (m *awsAwsjson11_serializeOpGetCostAndUsage) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetCostAndUsageComparisons struct {
+}
+
+func (*awsAwsjson11_serializeOpGetCostAndUsageComparisons) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetCostAndUsageComparisons) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCostAndUsageComparisonsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetCostAndUsageComparisons")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetCostAndUsageComparisonsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetCostAndUsageWithResources struct {
 }
 
@@ -915,6 +976,67 @@ func (m *awsAwsjson11_serializeOpGetCostCategories) HandleSerialize(ctx context.
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetCostCategoriesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetCostComparisonDrivers struct {
+}
+
+func (*awsAwsjson11_serializeOpGetCostComparisonDrivers) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetCostComparisonDrivers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCostComparisonDriversInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetCostComparisonDrivers")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetCostComparisonDriversInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3918,6 +4040,61 @@ func awsAwsjson11_serializeOpDocumentGetCommitmentPurchaseAnalysisInput(v *GetCo
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetCostAndUsageComparisonsInput(v *GetCostAndUsageComparisonsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BaselineTimePeriod != nil {
+		ok := object.Key("BaselineTimePeriod")
+		if err := awsAwsjson11_serializeDocumentDateInterval(v.BaselineTimePeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BillingViewArn != nil {
+		ok := object.Key("BillingViewArn")
+		ok.String(*v.BillingViewArn)
+	}
+
+	if v.ComparisonTimePeriod != nil {
+		ok := object.Key("ComparisonTimePeriod")
+		if err := awsAwsjson11_serializeDocumentDateInterval(v.ComparisonTimePeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		if err := awsAwsjson11_serializeDocumentExpression(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GroupBy != nil {
+		ok := object.Key("GroupBy")
+		if err := awsAwsjson11_serializeDocumentGroupDefinitions(v.GroupBy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.MetricForComparison != nil {
+		ok := object.Key("MetricForComparison")
+		ok.String(*v.MetricForComparison)
+	}
+
+	if v.NextPageToken != nil {
+		ok := object.Key("NextPageToken")
+		ok.String(*v.NextPageToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetCostAndUsageInput(v *GetCostAndUsageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4066,6 +4243,61 @@ func awsAwsjson11_serializeOpDocumentGetCostCategoriesInput(v *GetCostCategories
 		if err := awsAwsjson11_serializeDocumentDateInterval(v.TimePeriod, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetCostComparisonDriversInput(v *GetCostComparisonDriversInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BaselineTimePeriod != nil {
+		ok := object.Key("BaselineTimePeriod")
+		if err := awsAwsjson11_serializeDocumentDateInterval(v.BaselineTimePeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BillingViewArn != nil {
+		ok := object.Key("BillingViewArn")
+		ok.String(*v.BillingViewArn)
+	}
+
+	if v.ComparisonTimePeriod != nil {
+		ok := object.Key("ComparisonTimePeriod")
+		if err := awsAwsjson11_serializeDocumentDateInterval(v.ComparisonTimePeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		if err := awsAwsjson11_serializeDocumentExpression(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GroupBy != nil {
+		ok := object.Key("GroupBy")
+		if err := awsAwsjson11_serializeDocumentGroupDefinitions(v.GroupBy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.MetricForComparison != nil {
+		ok := object.Key("MetricForComparison")
+		ok.String(*v.MetricForComparison)
+	}
+
+	if v.NextPageToken != nil {
+		ok := object.Key("NextPageToken")
+		ok.String(*v.NextPageToken)
 	}
 
 	return nil

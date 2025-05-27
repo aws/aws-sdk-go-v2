@@ -2354,6 +2354,9 @@ type ServiceManagedEc2FleetConfiguration struct {
 	// This member is required.
 	InstanceMarketOptions *ServiceManagedEc2InstanceMarketOptions
 
+	// The storage profile ID.
+	StorageProfileId *string
+
 	noSmithyDocumentSerde
 }
 

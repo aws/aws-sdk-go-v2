@@ -1,0 +1,8 @@
+{
+    "id": "edb1de45-c940-4c5c-9e64-3532799b6033",
+    "type": "feature",
+    "description": "AWS Deadline Cloud service-managed fleets now support storage profiles. With storage profiles, you can map file paths between a workstation and the worker hosts running the job.",
+    "modules": [
+        "service/deadline"
+    ]
+}

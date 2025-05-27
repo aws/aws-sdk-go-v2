@@ -1,0 +1,8 @@
+{
+    "id": "62c496fb-d186-40e9-8d21-62309ec05f62",
+    "type": "feature",
+    "description": "This release introduces Cost Comparison feature (GetCostAndUsageComparisons, GetCostComparisonDrivers) allowing you find cost variations across multiple dimensions and identify key drivers of spending changes.",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

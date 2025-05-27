@@ -12413,6 +12413,11 @@ func awsRestjson1_serializeDocumentServiceManagedEc2FleetConfiguration(v *types.
 		}
 	}
 
+	if v.StorageProfileId != nil {
+		ok := object.Key("storageProfileId")
+		ok.String(*v.StorageProfileId)
+	}
+
 	return nil
 }
 
