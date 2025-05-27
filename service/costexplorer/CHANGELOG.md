@@ -1,3 +1,7 @@
+# v1.50.0 (2025-05-27)
+
+* **Feature**: This release introduces Cost Comparison feature (GetCostAndUsageComparisons, GetCostComparisonDrivers) allowing you find cost variations across multiple dimensions and identify key drivers of spending changes.
+
 # v1.49.0 (2025-04-08)
 
 * **Feature**: This release supports Pagination traits on Cost Anomaly Detection APIs.

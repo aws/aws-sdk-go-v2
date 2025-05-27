@@ -1,3 +1,7 @@
+# v1.13.0 (2025-05-27)
+
+* **Feature**: AWS Deadline Cloud service-managed fleets now support storage profiles. With storage profiles, you can map file paths between a workstation and the worker hosts running the job.
+
 # v1.12.0 (2025-05-12)
 
 * **Feature**: AWS Deadline Cloud service-managed fleets now support configuration scripts. Configuration scripts make it easy to install additional software, like plugins and packages, onto a worker.

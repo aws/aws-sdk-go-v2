@@ -1,3 +1,13 @@
+# Release (2025-05-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.50.0](service/costexplorer/CHANGELOG.md#v1500-2025-05-27)
+  * **Feature**: This release introduces Cost Comparison feature (GetCostAndUsageComparisons, GetCostComparisonDrivers) allowing you find cost variations across multiple dimensions and identify key drivers of spending changes.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.13.0](service/deadline/CHANGELOG.md#v1130-2025-05-27)
+  * **Feature**: AWS Deadline Cloud service-managed fleets now support storage profiles. With storage profiles, you can map file paths between a workstation and the worker hosts running the job.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.223.0](service/ec2/CHANGELOG.md#v12230-2025-05-27)
+  * **Feature**: This release adds three features - option to store AWS Site-to-Site VPN pre-shared keys in AWS Secrets Manager, GetActiveVpnTunnelStatus API to check the in-use VPN algorithms, and SampleType option in GetVpnConnectionDeviceSampleConfiguration API to get recommended sample configs for VPN devices.
+
 # Release (2025-05-23)
 
 ## Module Highlights
