@@ -17537,6 +17537,12 @@
                         "smithy.api#documentation": "<p>The Amazon EC2 market type.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "storageProfileId": {
+                    "target": "com.amazonaws.deadline#StorageProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage profile ID.</p>"
+                    }
                 }
             },
             "traits": {

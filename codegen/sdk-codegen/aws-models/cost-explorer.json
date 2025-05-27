@@ -73,10 +73,16 @@
                     "target": "com.amazonaws.costexplorer#GetCostAndUsage"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#GetCostAndUsageComparisons"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#GetCostAndUsageWithResources"
                 },
                 {
                     "target": "com.amazonaws.costexplorer#GetCostCategories"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#GetCostComparisonDrivers"
                 },
                 {
                     "target": "com.amazonaws.costexplorer#GetCostForecast"
@@ -1863,6 +1869,47 @@
                 "smithy.api#documentation": "<p>The configuration for the commitment purchase analysis.</p>"
             }
         },
+        "com.amazonaws.costexplorer#ComparisonMetricValue": {
+            "type": "structure",
+            "members": {
+                "BaselineTimePeriodAmount": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric value for the baseline time period measurement.</p>"
+                    }
+                },
+                "ComparisonTimePeriodAmount": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric value for the comparison time period measurement.</p>"
+                    }
+                },
+                "Difference": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calculated difference between <code>ComparisonTimePeriodAmount</code> and\n                <code>BaselineTimePeriodAmount</code>.</p>"
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measurement applicable to all numeric values in this comparison.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains cost or usage metric values for comparing two time periods. Each value\n            includes amounts for the baseline and comparison time periods, their difference, and the\n            unit of measurement.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#ComparisonMetrics": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.costexplorer#MetricName"
+            },
+            "value": {
+                "target": "com.amazonaws.costexplorer#ComparisonMetricValue"
+            }
+        },
         "com.amazonaws.costexplorer#Context": {
             "type": "enum",
             "members": {
@@ -2098,6 +2145,38 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#CostAndUsageComparison": {
+            "type": "structure",
+            "members": {
+                "CostAndUsageSelector": {
+                    "target": "com.amazonaws.costexplorer#Expression"
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.costexplorer#ComparisonMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping of metric names to their comparison values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a comparison of cost and usage metrics between two time periods.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#CostAndUsageComparisons": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#CostAndUsageComparison"
+            }
+        },
+        "com.amazonaws.costexplorer#CostAndUsageComparisonsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 2000
                 }
             }
         },
@@ -2586,6 +2665,76 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.costexplorer#CostCategoryValue"
+            }
+        },
+        "com.amazonaws.costexplorer#CostComparisonDriver": {
+            "type": "structure",
+            "members": {
+                "CostSelector": {
+                    "target": "com.amazonaws.costexplorer#Expression"
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.costexplorer#ComparisonMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping of metric names to their comparison values.</p>"
+                    }
+                },
+                "CostDrivers": {
+                    "target": "com.amazonaws.costexplorer#CostDrivers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of cost drivers, each representing a cost difference between the baseline and\n            comparison time periods. Each entry also includes a metric delta (for example, usage\n            change) that contributed to the cost variance, along with the identifier and type of\n            change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a collection of cost drivers and their associated metrics for cost\n            comparison analysis.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#CostComparisonDrivers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#CostComparisonDriver"
+            }
+        },
+        "com.amazonaws.costexplorer#CostComparisonDriversMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#CostDriver": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category or classification of the cost driver.</p>\n         <p>Values include: BUNDLED_DISCOUNT, CREDIT, OUT_OF_CYCLE_CHARGE, REFUND,\n            RECURRING_RESERVATION_FEE, RESERVATION_USAGE, RI_VOLUME_DISCOUNT, SAVINGS_PLAN_USAGE,\n            SAVINGS_PLAN_NEGATION, SAVINGS_PLAN_RECURRING_FEE, SUPPORT_FEE, TAX,\n            UPFRONT_RESERVATION_FEE, USAGE_CHANGE, COMMITMENT</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific identifier of the cost driver.</p>"
+                    }
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.costexplorer#ComparisonMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping of metric names to their comparison values, measuring the impact of this\n            cost driver.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents factors that contribute to cost variations between the baseline and\n            comparison time periods, including the type of driver, an identifier of the driver, and\n            associated metrics.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#CostDrivers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#CostDriver"
             }
         },
         "com.amazonaws.costexplorer#Coverage": {
@@ -4635,6 +4784,120 @@
                 "smithy.api#documentation": "<p>Retrieves cost and usage metrics for your account. You can specify which cost and\n      usage-related metric that you want the request to return. For example, you can specify\n        <code>BlendedCosts</code> or <code>UsageQuantity</code>. You can also filter and group your\n      data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a specific\n      time range. For a complete list of valid dimensions, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html\">GetDimensionValues</a> operation. Management account in an organization in Organizations have access to all member accounts.</p>\n         <p>For information about filter limitations, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-limits.html\">Quotas and restrictions</a>\n      in the <i>Billing and Cost Management User Guide</i>.</p>"
             }
         },
+        "com.amazonaws.costexplorer#GetCostAndUsageComparisons": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#GetCostAndUsageComparisonsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#GetCostAndUsageComparisonsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#DataUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves cost and usage comparisons for your account between two periods within the last\n      13 months. If you have enabled multi-year data at monthly granularity, you can go back up to\n      38 months.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextPageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "CostAndUsageComparisons",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#GetCostAndUsageComparisonsRequest": {
+            "type": "structure",
+            "members": {
+                "BillingViewArn": {
+                    "target": "com.amazonaws.costexplorer#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN\n      is used to specify which particular billing view you want to interact with or retrieve\n      information from when making API calls related to Amazon Web Services Billing and Cost\n      Management features. The BillingViewArn can be retrieved by calling the ListBillingViews\n      API.</p>"
+                    }
+                },
+                "BaselineTimePeriod": {
+                    "target": "com.amazonaws.costexplorer#DateInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference time period for comparison. This time period serves as the baseline against\n      which other cost and usage data will be compared. The interval must start and end on the first\n      day of a month, with a duration of exactly one month.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ComparisonTimePeriod": {
+                    "target": "com.amazonaws.costexplorer#DateInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison time period for analysis. This time period's cost and usage data will be\n      compared against the baseline time period. The interval must start and end on the first day of\n      a month, with a duration of exactly one month.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricForComparison": {
+                    "target": "com.amazonaws.costexplorer#MetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cost and usage metric to compare. Valid values are <code>AmortizedCost</code>,\n        <code>BlendedCost</code>, <code>NetAmortizedCost</code>, <code>NetUnblendedCost</code>,\n        <code>NormalizedUsageAmount</code>, <code>UnblendedCost</code>, and\n        <code>UsageQuantity</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.costexplorer#Expression"
+                },
+                "GroupBy": {
+                    "target": "com.amazonaws.costexplorer#GroupDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can group results using the attributes <code>DIMENSION</code>, <code>TAG</code>, and\n        <code>COST_CATEGORY</code>. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.costexplorer#CostAndUsageComparisonsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned for the request.</p>"
+                    }
+                },
+                "NextPageToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of paginated results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#GetCostAndUsageComparisonsResponse": {
+            "type": "structure",
+            "members": {
+                "CostAndUsageComparisons": {
+                    "target": "com.amazonaws.costexplorer#CostAndUsageComparisons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of comparison results showing cost and usage metrics between\n        <code>BaselineTimePeriod</code> and <code>ComparisonTimePeriod</code>.</p>"
+                    }
+                },
+                "TotalCostAndUsage": {
+                    "target": "com.amazonaws.costexplorer#ComparisonMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the total cost and usage, comparing amounts between\n        <code>BaselineTimePeriod</code> and <code>ComparisonTimePeriod</code> and their differences.\n      This total represents the aggregate total across all paginated results, if the response spans\n      multiple pages.</p>"
+                    }
+                },
+                "NextPageToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of paginated results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.costexplorer#GetCostAndUsageRequest": {
             "type": "structure",
             "members": {
@@ -4952,6 +5215,114 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The total number of objects.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.costexplorer#GetCostComparisonDrivers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#GetCostComparisonDriversRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#GetCostComparisonDriversResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#DataUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves key factors driving cost changes between two time periods within the last 13\n      months, such as usage changes, discount changes, and commitment-based savings. If you have\n      enabled multi-year data at monthly granularity, you can go back up to 38 months.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextPageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "CostComparisonDrivers",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#GetCostComparisonDriversRequest": {
+            "type": "structure",
+            "members": {
+                "BillingViewArn": {
+                    "target": "com.amazonaws.costexplorer#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN\n      is used to specify which particular billing view you want to interact with or retrieve\n      information from when making API calls related to Amazon Web Services Billing and Cost\n      Management features. The BillingViewArn can be retrieved by calling the ListBillingViews\n      API.</p>"
+                    }
+                },
+                "BaselineTimePeriod": {
+                    "target": "com.amazonaws.costexplorer#DateInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference time period for comparison. This time period serves as the baseline against\n      which other cost and usage data will be compared. The interval must start and end on the first\n      day of a month, with a duration of exactly one month.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ComparisonTimePeriod": {
+                    "target": "com.amazonaws.costexplorer#DateInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison time period for analysis. This time period's cost and usage data will be\n      compared against the baseline time period. The interval must start and end on the first day of\n      a month, with a duration of exactly one month.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricForComparison": {
+                    "target": "com.amazonaws.costexplorer#MetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cost and usage metric to compare. Valid values are <code>AmortizedCost</code>,\n        <code>BlendedCost</code>, <code>NetAmortizedCost</code>, <code>NetUnblendedCost</code>,\n        <code>NormalizedUsageAmount</code>, <code>UnblendedCost</code>, and\n        <code>UsageQuantity</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.costexplorer#Expression"
+                },
+                "GroupBy": {
+                    "target": "com.amazonaws.costexplorer#GroupDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can group results using the attributes <code>DIMENSION</code>, <code>TAG</code>, and\n        <code>COST_CATEGORY</code>. Note that <code>SERVICE</code> and <code>USAGE_TYPE</code>\n      dimensions are automatically included in the cost comparison drivers analysis.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.costexplorer#CostComparisonDriversMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned for the request.</p>"
+                    }
+                },
+                "NextPageToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of paginated results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#GetCostComparisonDriversResponse": {
+            "type": "structure",
+            "members": {
+                "CostComparisonDrivers": {
+                    "target": "com.amazonaws.costexplorer#CostComparisonDrivers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of comparison results showing factors that drive significant cost differences\n      between <code>BaselineTimePeriod</code> and <code>ComparisonTimePeriod</code>.</p>"
+                    }
+                },
+                "NextPageToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of paginated results.</p>"
                     }
                 }
             },
