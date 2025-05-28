@@ -1,0 +1,8 @@
+{
+    "id": "b3b2f536-2f30-4dbc-a6b2-8807ad6446da",
+    "type": "feature",
+    "description": "Allow for more than 2 characters for location codes in EventBridge ARNs",
+    "modules": [
+        "service/eventbridge"
+    ]
+}

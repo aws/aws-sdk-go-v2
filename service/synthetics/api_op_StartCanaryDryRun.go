@@ -41,15 +41,17 @@ type StartCanaryDryRunInput struct {
 	ArtifactConfig *types.ArtifactConfigInput
 
 	// The location in Amazon S3 where Synthetics stores artifacts from the test runs
-	// of this canary. Artifacts include the log file, screenshots, and HAR files. The
-	// name of the Amazon S3 bucket can't include a period (.).
+	// of this
+	//
+	// canary. Artifacts include the log file, screenshots, and HAR files. The name of
+	// the Amazon S3 bucket can't include a period (.).
 	ArtifactS3Location *string
 
 	// Use this structure to input your script code for the canary. This structure
 	// contains the Lambda handler with the location where the canary should start
-	// running the script. If the script is stored in an S3 bucket, the bucket name,
-	// key, and version are also included. If the script was passed into the canary
-	// directly, the script code is contained in the value of Zipfile .
+	// running the script. If the script is stored in an Amazon S3 bucket, the bucket
+	// name, key, and version are also included. If the script was passed into the
+	// canary directly, the script code is contained in the value of Zipfile .
 	//
 	// If you are uploading your canary scripts with an Amazon S3 bucket, your zip
 	// file should include your script in a certain folder structure.
@@ -70,8 +72,8 @@ type StartCanaryDryRunInput struct {
 	// policy. The role must also have the following permissions:
 	ExecutionRoleArn *string
 
-	// The number of days to retain data on the failed runs for this canary. The valid
-	// range is 1 to 455 days.
+	// The number of days to retain data about failed runs of this canary. If you omit
+	// this field, the default of 31 days is used. The valid range is 1 to 455 days.
 	//
 	// This setting affects the range of information returned by [GetCanaryRuns], as well as the
 	// range of information displayed in the Synthetics console.
@@ -80,9 +82,10 @@ type StartCanaryDryRunInput struct {
 	FailureRetentionPeriodInDays *int32
 
 	// Specifies whether to also delete the Lambda functions and layers used by this
-	// canary when the canary is deleted. If the value of this parameter is AUTOMATIC ,
-	// it means that the Lambda functions and layers will be deleted when the canary is
-	// deleted.
+	// canary when the canary is deleted. If you omit this parameter, the default of
+	// AUTOMATIC is used, which means
+	//
+	// that the Lambda functions and layers will be deleted when the canary is deleted.
 	//
 	// If the value of this parameter is OFF , then the value of the DeleteLambda
 	// parameter of the [DeleteCanary]operation determines whether the Lambda functions and layers
@@ -100,8 +103,9 @@ type StartCanaryDryRunInput struct {
 	// [Canary Runtime Versions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html
 	RuntimeVersion *string
 
-	// The number of days to retain data on the failed runs for this canary. The valid
-	// range is 1 to 455 days.
+	// The number of days to retain data about successful runs of this canary. If you
+	// omit this field, the default of 31 days is used. The valid range is 1 to 455
+	// days.
 	//
 	// This setting affects the range of information returned by [GetCanaryRuns], as well as the
 	// range of information displayed in the Synthetics console.

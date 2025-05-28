@@ -65,6 +65,12 @@ type StartFlowCaptureInput struct {
 	// chance of capturing flows that are not yet established.
 	MinimumFlowAgeInSeconds *int32
 
+	// The Amazon Resource Name (ARN) of a VPC endpoint association.
+	VpcEndpointAssociationArn *string
+
+	// A unique identifier for the primary endpoint associated with a firewall.
+	VpcEndpointId *string
+
 	noSmithyDocumentSerde
 }
 

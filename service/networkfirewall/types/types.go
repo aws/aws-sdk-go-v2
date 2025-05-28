@@ -162,8 +162,19 @@ type AnalysisTypeReportResult struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration and status for a single subnet that you've specified for use
-// by the Network Firewall firewall. This is part of the FirewallStatus.
+// The definition and status of the firewall endpoint for a single subnet. In each
+// configured subnet, Network Firewall instantiates a firewall endpoint to handle
+// network traffic.
+//
+// This data type is used for any firewall endpoint type:
+//
+//   - For Firewall.SubnetMappings , this Attachment is part of the FirewallStatus
+//     sync states information. You define firewall subnets using CreateFirewall and
+//     AssociateSubnets .
+//
+//   - For VpcEndpointAssociation , this Attachment is part of the
+//     VpcEndpointAssociationStatus sync states information. You define these subnets
+//     using CreateVpcEndpointAssociation .
 type Attachment struct {
 
 	// The identifier of the firewall endpoint that Network Firewall has instantiated
@@ -171,12 +182,10 @@ type Attachment struct {
 	// tables, when you redirect the VPC traffic through the endpoint.
 	EndpointId *string
 
-	// The current status of the firewall endpoint in the subnet. This value reflects
-	// both the instantiation of the endpoint in the VPC subnet and the sync states
-	// that are reported in the Config settings. When this value is READY , the
-	// endpoint is available and configured properly to handle network traffic. When
-	// the endpoint isn't available for traffic, this value will reflect its state, for
-	// example CREATING or DELETING .
+	// The current status of the firewall endpoint instantiation in the subnet.
+	//
+	// When this value is READY , the endpoint is available to handle network traffic.
+	// Otherwise, this value reflects its state, for example CREATING or DELETING .
 	Status AttachmentStatus
 
 	// If Network Firewall fails to create or delete the firewall endpoint in the
@@ -193,6 +202,38 @@ type Attachment struct {
 	// The unique identifier of the subnet that you've specified to be used for a
 	// firewall endpoint.
 	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
+// High-level information about an Availability Zone where the firewall has an
+// endpoint defined.
+type AvailabilityZoneMetadata struct {
+
+	// The IP address type of the Firewall subnet in the Availability Zone. You can't
+	// change the IP address type after you create the subnet.
+	IPAddressType IPAddressType
+
+	noSmithyDocumentSerde
+}
+
+// The status of the firewall endpoint defined by a VpcEndpointAssociation .
+type AZSyncState struct {
+
+	// The definition and status of the firewall endpoint for a single subnet. In each
+	// configured subnet, Network Firewall instantiates a firewall endpoint to handle
+	// network traffic.
+	//
+	// This data type is used for any firewall endpoint type:
+	//
+	//   - For Firewall.SubnetMappings , this Attachment is part of the FirewallStatus
+	//   sync states information. You define firewall subnets using CreateFirewall and
+	//   AssociateSubnets .
+	//
+	//   - For VpcEndpointAssociation , this Attachment is part of the
+	//   VpcEndpointAssociationStatus sync states information. You define these subnets
+	//   using CreateVpcEndpointAssociation .
+	Attachment *Attachment
 
 	noSmithyDocumentSerde
 }
@@ -347,14 +388,19 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The firewall defines the configuration settings for an Network Firewall
-// firewall. These settings include the firewall policy, the subnets in your VPC to
-// use for the firewall endpoints, and any tags that are attached to the firewall
-// Amazon Web Services resource.
+// A firewall defines the behavior of a firewall, the main VPC where the firewall
+// is used, the Availability Zones where the firewall can be used, and one subnet
+// to use for a firewall endpoint within each of the Availability Zones. The
+// Availability Zones are defined implicitly in the subnet specifications.
+//
+// In addition to the firewall endpoints that you define in this Firewall
+// specification, you can create firewall endpoints in VpcEndpointAssociation
+// resources for any VPC, in any Availability Zone where the firewall is already in
+// use.
 //
 // The status of the firewall, for example whether it's ready to filter network
-// traffic, is provided in the corresponding FirewallStatus. You can retrieve both objects by
-// calling DescribeFirewall.
+// traffic, is provided in the corresponding FirewallStatus. You can retrieve both the firewall
+// and firewall status by calling DescribeFirewall.
 type Firewall struct {
 
 	// The unique identifier for the firewall.
@@ -371,8 +417,20 @@ type Firewall struct {
 	// This member is required.
 	FirewallPolicyArn *string
 
-	// The public subnets that Network Firewall is using for the firewall. Each subnet
-	// must belong to a different Availability Zone.
+	// The primary public subnets that Network Firewall is using for the firewall.
+	// Network Firewall creates a firewall endpoint in each subnet. Create a subnet
+	// mapping for each Availability Zone where you want to use the firewall.
+	//
+	// These subnets are all defined for a single, primary VPC, and each must belong
+	// to a different Availability Zone. Each of these subnets establishes the
+	// availability of the firewall in its Availability Zone.
+	//
+	// In addition to these subnets, you can define other endpoints for the firewall
+	// in VpcEndpointAssociation resources. You can define these additional endpoints
+	// for any VPC, and for any of the Availability Zones where the firewall resource
+	// already has a subnet mapping. VPC endpoint associations give you the ability to
+	// protect multiple VPCs using a single firewall, and to define multiple firewall
+	// endpoints for a VPC in a single Availability Zone.
 	//
 	// This member is required.
 	SubnetMappings []SubnetMapping
@@ -411,6 +469,9 @@ type Firewall struct {
 	// modifying the firewall policy for a firewall that is in use. When you create a
 	// firewall, the operation initializes this setting to TRUE .
 	FirewallPolicyChangeProtection bool
+
+	// The number of VpcEndpointAssociation resources that use this firewall.
+	NumberOfAssociations *int32
 
 	// A setting indicating whether the firewall is protected against changes to the
 	// subnet associations. Use this setting to protect against accidentally modifying
@@ -596,26 +657,32 @@ type FirewallPolicyResponse struct {
 
 // Detailed information about the current status of a Firewall. You can retrieve this for
 // a firewall by calling DescribeFirewalland providing the firewall name and ARN.
+//
+// The firewall status indicates a combined status. It indicates whether all
+// subnets are up-to-date with the latest firewall configurations, which is based
+// on the sync states config values, and also whether all subnets have their
+// endpoints fully enabled, based on their sync states attachment values.
 type FirewallStatus struct {
 
-	// The configuration sync state for the firewall. This summarizes the sync states
-	// reported in the Config settings for all of the Availability Zones where you
-	// have configured the firewall.
+	// The configuration sync state for the firewall. This summarizes the Config
+	// settings in the SyncStates for this firewall status object.
 	//
 	// When you create a firewall or update its configuration, for example by adding a
 	// rule group to its firewall policy, Network Firewall distributes the
-	// configuration changes to all zones where the firewall is in use. This summary
-	// indicates whether the configuration changes have been applied everywhere.
+	// configuration changes to all Availability Zones that have subnets defined for
+	// the firewall. This summary indicates whether the configuration changes have been
+	// applied everywhere.
 	//
 	// This status must be IN_SYNC for the firewall to be ready for use, but it
 	// doesn't indicate that the firewall is ready. The Status setting indicates
-	// firewall readiness.
+	// firewall readiness. It's based on this setting and the readiness of the firewall
+	// endpoints to take traffic.
 	//
 	// This member is required.
 	ConfigurationSyncStateSummary ConfigurationSyncState
 
 	// The readiness of the configured firewall to handle network traffic across all
-	// of the Availability Zones where you've configured it. This setting is READY
+	// of the Availability Zones where you have it configured. This setting is READY
 	// only when the ConfigurationSyncStateSummary value is IN_SYNC and the Attachment
 	// Status values for all of the configured subnets are READY .
 	//
@@ -623,16 +690,17 @@ type FirewallStatus struct {
 	Status FirewallStatusValue
 
 	// Describes the capacity usage of the resources contained in a firewall's
-	// reference sets. Network Firewall calclulates the capacity usage by taking an
+	// reference sets. Network Firewall calculates the capacity usage by taking an
 	// aggregated count of all of the resources used by all of the reference sets in a
 	// firewall.
 	CapacityUsageSummary *CapacityUsageSummary
 
-	// The subnets that you've configured for use by the Network Firewall firewall.
-	// This contains one array element per Availability Zone where you've configured a
-	// subnet. These objects provide details of the information that is summarized in
-	// the ConfigurationSyncStateSummary and Status , broken down by zone and
-	// configuration object.
+	// Status for the subnets that you've configured in the firewall. This contains
+	// one array element per Availability Zone where you've configured a subnet in the
+	// firewall.
+	//
+	// These objects provide detailed information for the settings
+	// ConfigurationSyncStateSummary and Status .
 	SyncStates map[string]SyncState
 
 	noSmithyDocumentSerde
@@ -1767,8 +1835,8 @@ type StatelessRulesAndCustomActions struct {
 	noSmithyDocumentSerde
 }
 
-// The ID for a subnet that you want to associate with the firewall. This is used
-// with CreateFirewalland AssociateSubnets. Network Firewall creates an instance of the associated firewall in
+// The ID for a subnet that's used in an association with a firewall. This is used
+// in CreateFirewall, AssociateSubnets, and CreateVpcEndpointAssociation. Network Firewall creates an instance of the associated firewall in
 // each subnet that you specify, to filter traffic in the subnet's Availability
 // Zone.
 type SubnetMapping struct {
@@ -1786,7 +1854,7 @@ type SubnetMapping struct {
 }
 
 // The status of the firewall endpoint and firewall policy configuration for a
-// single VPC subnet.
+// single VPC subnet. This is part of the FirewallStatus.
 //
 // For each VPC subnet that you associate with a firewall, Network Firewall does
 // the following:
@@ -1801,17 +1869,16 @@ type SubnetMapping struct {
 // or not ready status until the changes are complete.
 type SyncState struct {
 
-	// The attachment status of the firewall's association with a single VPC subnet.
-	// For each configured subnet, Network Firewall creates the attachment by
-	// instantiating the firewall endpoint in the subnet so that it's ready to take
-	// traffic. This is part of the FirewallStatus.
+	// The configuration and status for a single firewall subnet. For each configured
+	// subnet, Network Firewall creates the attachment by instantiating the firewall
+	// endpoint in the subnet so that it's ready to take traffic.
 	Attachment *Attachment
 
 	// The configuration status of the firewall endpoint in a single VPC subnet.
 	// Network Firewall provides each endpoint with the rules that are configured in
 	// the firewall policy. Each time you add a subnet or modify the associated
 	// firewall policy, Network Firewall synchronizes the rules in the endpoint, so it
-	// can properly filter network traffic. This is part of the FirewallStatus.
+	// can properly filter network traffic.
 	Config map[string]PerObjectStatus
 
 	noSmithyDocumentSerde
@@ -1984,6 +2051,108 @@ type UniqueSources struct {
 
 	// The number of unique source IP addresses that connected to a domain.
 	Count int32
+
+	noSmithyDocumentSerde
+}
+
+// A VPC endpoint association defines a single subnet to use for a firewall
+// endpoint for a Firewall . You can define VPC endpoint associations only in the
+// Availability Zones that already have a subnet mapping defined in the Firewall
+// resource.
+//
+// You can retrieve the list of Availability Zones that are available for use by
+// calling DescribeFirewallMetadata .
+//
+// To manage firewall endpoints, first, in the Firewall specification, you specify
+// a single VPC and one subnet for each of the Availability Zones where you want to
+// use the firewall. Then you can define additional endpoints as VPC endpoint
+// associations.
+//
+// You can use VPC endpoint associations to expand the protections of the firewall
+// as follows:
+//
+//   - Protect multiple VPCs with a single firewall - You can use the firewall to
+//     protect other VPCs, either in your account or in accounts where the firewall is
+//     shared. You can only specify Availability Zones that already have a firewall
+//     endpoint defined in the Firewall subnet mappings.
+//
+//   - Define multiple firewall endpoints for a VPC in an Availability Zone - You
+//     can create additional firewall endpoints for the VPC that you have defined in
+//     the firewall, in any Availability Zone that already has an endpoint defined in
+//     the Firewall subnet mappings. You can create multiple VPC endpoint
+//     associations for any other VPC where you use the firewall.
+//
+// You can use Resource Access Manager to share a Firewall that you own with other
+// accounts, which gives them the ability to use the firewall to create VPC
+// endpoint associations. For information about sharing a firewall, see
+// PutResourcePolicy in this guide and see [Sharing Network Firewall resources] in the Network Firewall Developer
+// Guide.
+//
+// The status of the VPC endpoint association, which indicates whether it's ready
+// to filter network traffic, is provided in the corresponding VpcEndpointAssociationStatus. You can retrieve
+// both the association and its status by calling DescribeVpcEndpointAssociation.
+//
+// [Sharing Network Firewall resources]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/sharing.html
+type VpcEndpointAssociation struct {
+
+	// The Amazon Resource Name (ARN) of the firewall.
+	//
+	// This member is required.
+	FirewallArn *string
+
+	// The ID for a subnet that's used in an association with a firewall. This is used
+	// in CreateFirewall, AssociateSubnets, and CreateVpcEndpointAssociation. Network Firewall creates an instance of the associated firewall in
+	// each subnet that you specify, to filter traffic in the subnet's Availability
+	// Zone.
+	//
+	// This member is required.
+	SubnetMapping *SubnetMapping
+
+	// The Amazon Resource Name (ARN) of a VPC endpoint association.
+	//
+	// This member is required.
+	VpcEndpointAssociationArn *string
+
+	// The unique identifier of the VPC for the endpoint association.
+	//
+	// This member is required.
+	VpcId *string
+
+	// A description of the VPC endpoint association.
+	Description *string
+
+	// The key:value pairs to associate with the resource.
+	Tags []Tag
+
+	// The unique identifier of the VPC endpoint association.
+	VpcEndpointAssociationId *string
+
+	noSmithyDocumentSerde
+}
+
+// High-level information about a VPC endpoint association, returned by
+// ListVpcEndpointAssociations . You can use the information provided in the
+// metadata to retrieve and manage a VPC endpoint association.
+type VpcEndpointAssociationMetadata struct {
+
+	// The Amazon Resource Name (ARN) of a VPC endpoint association.
+	VpcEndpointAssociationArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information about the current status of a VpcEndpointAssociation. You can retrieve this by
+// calling DescribeVpcEndpointAssociationand providing the VPC endpoint association ARN.
+type VpcEndpointAssociationStatus struct {
+
+	// The readiness of the configured firewall endpoint to handle network traffic.
+	//
+	// This member is required.
+	Status FirewallStatusValue
+
+	// The list of the Availability Zone sync states for all subnets that are defined
+	// by the firewall.
+	AssociationSyncState map[string]AZSyncState
 
 	noSmithyDocumentSerde
 }

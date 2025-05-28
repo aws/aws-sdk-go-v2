@@ -2219,6 +2219,11 @@ func awsRestjson1_serializeDocumentCanaryRunConfigInput(v *types.CanaryRunConfig
 		}
 	}
 
+	if v.EphemeralStorage != nil {
+		ok := object.Key("EphemeralStorage")
+		ok.Integer(*v.EphemeralStorage)
+	}
+
 	if v.MemoryInMB != nil {
 		ok := object.Key("MemoryInMB")
 		ok.Integer(*v.MemoryInMB)

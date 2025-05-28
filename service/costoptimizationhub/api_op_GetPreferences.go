@@ -39,6 +39,11 @@ type GetPreferencesOutput struct {
 	// Retrieves the status of the "member account discount visibility" preference.
 	MemberAccountDiscountVisibility types.MemberAccountDiscountVisibility
 
+	// Retrieves the current preferences for how Reserved Instances and Savings Plans
+	// cost-saving opportunities are prioritized in terms of payment option and term
+	// length.
+	PreferredCommitment *types.PreferredCommitment
+
 	// Retrieves the status of the "savings estimation mode" preference.
 	SavingsEstimationMode types.SavingsEstimationMode
 

@@ -42,6 +42,27 @@ func (CanaryRunStateReasonCode) Values() []CanaryRunStateReasonCode {
 	}
 }
 
+type CanaryRunTestResult string
+
+// Enum values for CanaryRunTestResult
+const (
+	CanaryRunTestResultPassed  CanaryRunTestResult = "PASSED"
+	CanaryRunTestResultFailed  CanaryRunTestResult = "FAILED"
+	CanaryRunTestResultUnknown CanaryRunTestResult = "UNKNOWN"
+)
+
+// Values returns all known values for CanaryRunTestResult. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CanaryRunTestResult) Values() []CanaryRunTestResult {
+	return []CanaryRunTestResult{
+		"PASSED",
+		"FAILED",
+		"UNKNOWN",
+	}
+}
+
 type CanaryState string
 
 // Enum values for CanaryState

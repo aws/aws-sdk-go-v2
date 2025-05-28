@@ -34,6 +34,10 @@ type UpdatePreferencesInput struct {
 	// Sets the "member account discount visibility" preference.
 	MemberAccountDiscountVisibility types.MemberAccountDiscountVisibility
 
+	// Sets the preferences for how Reserved Instances and Savings Plans cost-saving
+	// opportunities are prioritized in terms of payment option and term length.
+	PreferredCommitment *types.PreferredCommitment
+
 	// Sets the "savings estimation mode" preference.
 	SavingsEstimationMode types.SavingsEstimationMode
 
@@ -44,6 +48,11 @@ type UpdatePreferencesOutput struct {
 
 	// Shows the status of the "member account discount visibility" preference.
 	MemberAccountDiscountVisibility types.MemberAccountDiscountVisibility
+
+	// Shows the updated preferences for how Reserved Instances and Savings Plans
+	// cost-saving opportunities are prioritized in terms of payment option and term
+	// length.
+	PreferredCommitment *types.PreferredCommitment
 
 	// Shows the status of the "savings estimation mode" preference.
 	SavingsEstimationMode types.SavingsEstimationMode

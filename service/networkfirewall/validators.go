@@ -130,6 +130,26 @@ func (m *validateOpCreateTLSInspectionConfiguration) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateVpcEndpointAssociation struct {
+}
+
+func (*validateOpCreateVpcEndpointAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVpcEndpointAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVpcEndpointAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVpcEndpointAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteResourcePolicy struct {
 }
 
@@ -145,6 +165,26 @@ func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVpcEndpointAssociation struct {
+}
+
+func (*validateOpDeleteVpcEndpointAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVpcEndpointAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVpcEndpointAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVpcEndpointAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -185,6 +225,26 @@ func (m *validateOpDescribeResourcePolicy) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeVpcEndpointAssociation struct {
+}
+
+func (*validateOpDescribeVpcEndpointAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeVpcEndpointAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeVpcEndpointAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeVpcEndpointAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -594,8 +654,16 @@ func addOpCreateTLSInspectionConfigurationValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpCreateTLSInspectionConfiguration{}, middleware.After)
 }
 
+func addOpCreateVpcEndpointAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVpcEndpointAssociation{}, middleware.After)
+}
+
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
+}
+
+func addOpDeleteVpcEndpointAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVpcEndpointAssociation{}, middleware.After)
 }
 
 func addOpDescribeFlowOperationValidationMiddleware(stack *middleware.Stack) error {
@@ -604,6 +672,10 @@ func addOpDescribeFlowOperationValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeResourcePolicy{}, middleware.After)
+}
+
+func addOpDescribeVpcEndpointAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeVpcEndpointAssociation{}, middleware.After)
 }
 
 func addOpDisassociateSubnetsValidationMiddleware(stack *middleware.Stack) error {
@@ -1801,6 +1873,36 @@ func validateOpCreateTLSInspectionConfigurationInput(v *CreateTLSInspectionConfi
 	}
 }
 
+func validateOpCreateVpcEndpointAssociationInput(v *CreateVpcEndpointAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVpcEndpointAssociationInput"}
+	if v.FirewallArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallArn"))
+	}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.SubnetMapping == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetMapping"))
+	} else if v.SubnetMapping != nil {
+		if err := validateSubnetMapping(v.SubnetMapping); err != nil {
+			invalidParams.AddNested("SubnetMapping", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	if v == nil {
 		return nil
@@ -1808,6 +1910,21 @@ func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVpcEndpointAssociationInput(v *DeleteVpcEndpointAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpcEndpointAssociationInput"}
+	if v.VpcEndpointAssociationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcEndpointAssociationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1841,6 +1958,21 @@ func validateOpDescribeResourcePolicyInput(v *DescribeResourcePolicyInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeResourcePolicyInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeVpcEndpointAssociationInput(v *DescribeVpcEndpointAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeVpcEndpointAssociationInput"}
+	if v.VpcEndpointAssociationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcEndpointAssociationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -154,6 +154,27 @@ func (Order) Values() []Order {
 	}
 }
 
+type PaymentOption string
+
+// Enum values for PaymentOption
+const (
+	PaymentOptionAllUpfront     PaymentOption = "AllUpfront"
+	PaymentOptionPartialUpfront PaymentOption = "PartialUpfront"
+	PaymentOptionNoUpfront      PaymentOption = "NoUpfront"
+)
+
+// Values returns all known values for PaymentOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentOption) Values() []PaymentOption {
+	return []PaymentOption{
+		"AllUpfront",
+		"PartialUpfront",
+		"NoUpfront",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -255,6 +276,25 @@ const (
 func (SummaryMetrics) Values() []SummaryMetrics {
 	return []SummaryMetrics{
 		"SavingsPercentage",
+	}
+}
+
+type Term string
+
+// Enum values for Term
+const (
+	TermOneYear    Term = "OneYear"
+	TermThreeYears Term = "ThreeYears"
+)
+
+// Values returns all known values for Term. Note that this can be expanded in the
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Term) Values() []Term {
+	return []Term{
+		"OneYear",
+		"ThreeYears",
 	}
 }
 

@@ -4165,6 +4165,19 @@ func awsRestjson1_deserializeDocumentCanaryRunConfigOutput(v **types.CanaryRunCo
 				sv.ActiveTracing = ptr.Bool(jtv)
 			}
 
+		case "EphemeralStorage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected EphemeralStorageSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EphemeralStorage = ptr.Int32(int32(i64))
+			}
+
 		case "MemoryInMB":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4281,6 +4294,15 @@ func awsRestjson1_deserializeDocumentCanaryRunStatus(v **types.CanaryRunStatus, 
 					return fmt.Errorf("expected CanaryRunStateReasonCode to be of type string, got %T instead", value)
 				}
 				sv.StateReasonCode = types.CanaryRunStateReasonCode(jtv)
+			}
+
+		case "TestResult":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CanaryRunTestResult to be of type string, got %T instead", value)
+				}
+				sv.TestResult = types.CanaryRunTestResult(jtv)
 			}
 
 		default:

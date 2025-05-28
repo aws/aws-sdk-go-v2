@@ -1,0 +1,8 @@
+{
+    "id": "afce3b69-88a2-436d-8187-8d6dfc49d7fc",
+    "type": "feature",
+    "description": "This release allows customers to modify their preferred commitment term and payment options.",
+    "modules": [
+        "service/costoptimizationhub"
+    ]
+}

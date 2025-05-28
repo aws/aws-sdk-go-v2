@@ -504,8 +504,9 @@ type LambdaFunctionConfiguration struct {
 
 // The MemoryDB reserved instances recommendation details.
 //
-// MemoryDB reserved instances are referred to as "MemoryDB reserved nodes" in
-// customer-facing documentation.
+// While the API reference uses "MemoryDB reserved instances", the user guide and
+// other documentation refer to them as "MemoryDB reserved nodes", as the terms are
+// used interchangeably.
 type MemoryDbReservedInstances struct {
 
 	// The MemoryDB reserved instances configuration used for recommendations.
@@ -519,8 +520,9 @@ type MemoryDbReservedInstances struct {
 
 // The MemoryDB reserved instances configuration used for recommendations.
 //
-// MemoryDB reserved instances are referred to as "MemoryDB reserved nodes" in
-// customer-facing documentation.
+// While the API reference uses "MemoryDB reserved instances", the user guide and
+// other documentation refer to them as "MemoryDB reserved nodes", as the terms are
+// used interchangeably.
 type MemoryDbReservedInstancesConfiguration struct {
 
 	// The account scope for which you want recommendations.
@@ -638,6 +640,22 @@ type OrderBy struct {
 
 	// The order that's used to sort the data.
 	Order Order
+
+	noSmithyDocumentSerde
+}
+
+// The preferred configuration for Reserved Instances and Savings Plans
+// commitment-based discounts, consisting of a payment option and a commitment
+// duration.
+type PreferredCommitment struct {
+
+	// The preferred upfront payment structure for commitments. If the value is null,
+	// it will default to AllUpfront (highest savings) where applicable.
+	PaymentOption PaymentOption
+
+	// The preferred length of the commitment period. If the value is null, it will
+	// default to ThreeYears (highest savings) where applicable.
+	Term Term
 
 	noSmithyDocumentSerde
 }

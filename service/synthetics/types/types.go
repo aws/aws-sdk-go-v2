@@ -156,9 +156,9 @@ type Canary struct {
 
 // Use this structure to input your script code for the canary. This structure
 // contains the Lambda handler with the location where the canary should start
-// running the script. If the script is stored in an S3 bucket, the bucket name,
-// key, and version are also included. If the script was passed into the canary
-// directly, the script code is contained in the value of Zipfile .
+// running the script. If the script is stored in an Amazon S3 bucket, the bucket
+// name, key, and version are also included. If the script was passed into the
+// canary directly, the script code is contained in the value of Zipfile .
 //
 // If you are uploading your canary scripts with an Amazon S3 bucket, your zip
 // file should include your script in a certain folder structure.
@@ -185,24 +185,25 @@ type CanaryCodeInput struct {
 	// This member is required.
 	Handler *string
 
-	// If your canary script is located in S3, specify the bucket name here. Do not
-	// include s3:// as the start of the bucket name.
+	// If your canary script is located in Amazon S3, specify the bucket name here. Do
+	// not include s3:// as the start of the bucket name.
 	S3Bucket *string
 
-	// The S3 key of your script. For more information, see [Working with Amazon S3 Objects].
+	// The Amazon S3 key of your script. For more information, see [Working with Amazon S3 Objects].
 	//
 	// [Working with Amazon S3 Objects]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html
 	S3Key *string
 
-	// The S3 version ID of your script.
+	// The Amazon S3 version ID of your script.
 	S3Version *string
 
 	// If you input your canary script directly into the canary instead of referring
-	// to an S3 location, the value of this parameter is the base64-encoded contents of
-	// the .zip file that contains the script. It must be smaller than 225 Kb.
+	// to an Amazon S3 location, the value of this parameter is the base64-encoded
+	// contents of the .zip file that contains the script. It must be smaller than 225
+	// Kb.
 	//
-	// For large canary scripts, we recommend that you use an S3 location instead of
-	// inputting it directly with this parameter.
+	// For large canary scripts, we recommend that you use an Amazon S3 location
+	// instead of inputting it directly with this parameter.
 	ZipFile []byte
 
 	noSmithyDocumentSerde
@@ -306,6 +307,13 @@ type CanaryRunConfigInput struct {
 	// [Runtime environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime
 	EnvironmentVariables map[string]string
 
+	// Specifies the amount of ephemeral storage (in MB) to allocate for the canary
+	// run during execution. This temporary storage is used for storing canary run
+	// artifacts (which are uploaded to an Amazon S3 bucket at the end of the run), and
+	// any canary browser operations. This temporary storage is cleared after the run
+	// is completed. Default storage value is 1024 MB.
+	EphemeralStorage *int32
+
 	// The maximum amount of memory available to the canary while it is running, in
 	// MB. This value must be a multiple of 64.
 	MemoryInMB *int32
@@ -326,6 +334,13 @@ type CanaryRunConfigOutput struct {
 	// Displays whether this canary run used active X-Ray tracing.
 	ActiveTracing *bool
 
+	// Specifies the amount of ephemeral storage (in MB) to allocate for the canary
+	// run during execution. This temporary storage is used for storing canary run
+	// artifacts (which are uploaded to an Amazon S3 bucket at the end of the run), and
+	// any canary browser operations. This temporary storage is cleared after the run
+	// is completed. Default storage value is 1024 MB.
+	EphemeralStorage *int32
+
 	// The maximum amount of memory available to the canary while it is running, in
 	// MB. This value must be a multiple of 64.
 	MemoryInMB *int32
@@ -345,9 +360,27 @@ type CanaryRunStatus struct {
 	// If run of the canary failed, this field contains the reason for the error.
 	StateReason *string
 
-	// If this value is CANARY_FAILURE , an exception occurred in the canary code. If
-	// this value is EXECUTION_FAILURE , an exception occurred in CloudWatch Synthetics.
+	// If this value is CANARY_FAILURE , either the canary script failed or Synthetics
+	// ran into a fatal error when running the canary. For example, a canary timeout
+	// misconfiguration setting can cause the canary to timeout before Synthetics can
+	// evaluate its status.
+	//
+	// If this value is EXECUTION_FAILURE , a non-critical failure occurred such as
+	// failing to save generated debug artifacts (for example, screenshots or har
+	// files).
+	//
+	// If both types of failures occurred, the CANARY_FAILURE takes precedence. To
+	// understand the exact error, use the [StateReason]API.
+	//
+	// [StateReason]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRunStatus.html
 	StateReasonCode CanaryRunStateReasonCode
+
+	// Specifies the status of canary script for this run. When Synthetics tries to
+	// determine the status but fails, the result is marked as UNKNOWN . For the
+	// overall status of canary run, see [State].
+	//
+	// [State]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRunStatus.html
+	TestResult CanaryRunTestResult
 
 	noSmithyDocumentSerde
 }

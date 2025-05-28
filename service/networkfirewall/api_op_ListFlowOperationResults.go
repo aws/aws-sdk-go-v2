@@ -68,6 +68,12 @@ type ListFlowOperationResultsInput struct {
 	// request in your next request.
 	NextToken *string
 
+	// The Amazon Resource Name (ARN) of a VPC endpoint association.
+	VpcEndpointAssociationArn *string
+
+	// A unique identifier for the primary endpoint associated with a firewall.
+	VpcEndpointId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -115,6 +121,12 @@ type ListFlowOperationResultsOutput struct {
 	// reason for the error or failure. Options include Flow operation error and Flow
 	// timeout .
 	StatusMessage *string
+
+	//
+	VpcEndpointAssociationArn *string
+
+	//
+	VpcEndpointId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

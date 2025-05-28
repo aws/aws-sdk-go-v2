@@ -61,12 +61,13 @@
 //   - In Amazon VPC, in each Availability Zone where you want to have a firewall
 //     endpoint, create a subnet for the sole use of Network Firewall.
 //
-//   - In Network Firewall, create stateless and stateful rule groups, to define
-//     the components of the network traffic filtering behavior that you want your
-//     firewall to have.
+//   - In Network Firewall, define the firewall behavior as follows:
 //
-//   - In Network Firewall, create a firewall policy that uses your rule groups
-//     and specifies additional default traffic filtering behavior.
+//   - Create stateless and stateful rule groups, to define the components of the
+//     network traffic filtering behavior that you want your firewall to have.
+//
+//   - Create a firewall policy that uses your rule groups and specifies
+//     additional default traffic filtering behavior.
 //
 //   - In Network Firewall, create a firewall and specify your new firewall policy
 //     and VPC subnets. Network Firewall creates a firewall endpoint in each subnet
@@ -74,6 +75,13 @@
 //
 //   - In Amazon VPC, use ingress routing enhancements to route traffic through
 //     the new firewall endpoints.
+//
+// After your firewall is established, you can add firewall endpoints for new
+// Availability Zones by following the prior steps for the Amazon VPC setup and
+// firewall subnet definitions. You can also add endpoints to Availability Zones
+// that you're using in the firewall, either for the same VPC or for another VPC,
+// by following the prior steps for the Amazon VPC setup, and defining the new VPC
+// subnets as VPC endpoint associations.
 //
 // [Suricata User Guide]: https://suricata.readthedocs.io/en/suricata-7.0.3/
 // [Network Firewall Developer Guide]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/

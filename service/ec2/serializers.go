@@ -66375,6 +66375,11 @@ func awsEc2query_serializeOpDocumentDeregisterImageInput(v *DeregisterImageInput
 	object := value.Object()
 	_ = object
 
+	if v.DeleteAssociatedSnapshots != nil {
+		objectKey := object.Key("DeleteAssociatedSnapshots")
+		objectKey.Boolean(*v.DeleteAssociatedSnapshots)
+	}
+
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)

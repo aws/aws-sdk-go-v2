@@ -56,18 +56,28 @@ type DeleteFirewallInput struct {
 
 type DeleteFirewallOutput struct {
 
-	// The firewall defines the configuration settings for an Network Firewall
-	// firewall. These settings include the firewall policy, the subnets in your VPC to
-	// use for the firewall endpoints, and any tags that are attached to the firewall
-	// Amazon Web Services resource.
+	// A firewall defines the behavior of a firewall, the main VPC where the firewall
+	// is used, the Availability Zones where the firewall can be used, and one subnet
+	// to use for a firewall endpoint within each of the Availability Zones. The
+	// Availability Zones are defined implicitly in the subnet specifications.
+	//
+	// In addition to the firewall endpoints that you define in this Firewall
+	// specification, you can create firewall endpoints in VpcEndpointAssociation
+	// resources for any VPC, in any Availability Zone where the firewall is already in
+	// use.
 	//
 	// The status of the firewall, for example whether it's ready to filter network
-	// traffic, is provided in the corresponding FirewallStatus. You can retrieve both objects by
-	// calling DescribeFirewall.
+	// traffic, is provided in the corresponding FirewallStatus. You can retrieve both the firewall
+	// and firewall status by calling DescribeFirewall.
 	Firewall *types.Firewall
 
 	// Detailed information about the current status of a Firewall. You can retrieve this for
 	// a firewall by calling DescribeFirewalland providing the firewall name and ARN.
+	//
+	// The firewall status indicates a combined status. It indicates whether all
+	// subnets are up-to-date with the latest firewall configurations, which is based
+	// on the sync states config values, and also whether all subnets have their
+	// endpoints fully enabled, based on their sync states attachment values.
 	FirewallStatus *types.FirewallStatus
 
 	// Metadata pertaining to the operation's result.

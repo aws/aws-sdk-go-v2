@@ -572,6 +572,23 @@ func awsAwsjson10_serializeDocumentOrderBy(v *types.OrderBy, value smithyjson.Va
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentPreferredCommitment(v *types.PreferredCommitment, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.PaymentOption) > 0 {
+		ok := object.Key("paymentOption")
+		ok.String(string(v.PaymentOption))
+	}
+
+	if len(v.Term) > 0 {
+		ok := object.Key("term")
+		ok.String(string(v.Term))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentRecommendationIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -810,6 +827,13 @@ func awsAwsjson10_serializeOpDocumentUpdatePreferencesInput(v *UpdatePreferences
 	if len(v.MemberAccountDiscountVisibility) > 0 {
 		ok := object.Key("memberAccountDiscountVisibility")
 		ok.String(string(v.MemberAccountDiscountVisibility))
+	}
+
+	if v.PreferredCommitment != nil {
+		ok := object.Key("preferredCommitment")
+		if err := awsAwsjson10_serializeDocumentPreferredCommitment(v.PreferredCommitment, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.SavingsEstimationMode) > 0 {

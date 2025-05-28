@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateVpcEndpointAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVpcEndpointAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateVpcEndpointAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteFirewall(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteFirewall(context.Background(), nil, func(o *Options) {
@@ -194,11 +206,35 @@ func TestCheckSnapshot_DeleteTLSInspectionConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteVpcEndpointAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVpcEndpointAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteVpcEndpointAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeFirewall(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeFirewall(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeFirewall")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeFirewallMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeFirewallMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeFirewallMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -283,6 +319,18 @@ func TestCheckSnapshot_DescribeTLSInspectionConfiguration(t *testing.T) {
 	_, err := svc.DescribeTLSInspectionConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeTLSInspectionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeVpcEndpointAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcEndpointAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeVpcEndpointAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -403,6 +451,18 @@ func TestCheckSnapshot_ListTLSInspectionConfigurations(t *testing.T) {
 	_, err := svc.ListTLSInspectionConfigurations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTLSInspectionConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListVpcEndpointAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListVpcEndpointAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListVpcEndpointAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -673,6 +733,18 @@ func TestUpdateSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateVpcEndpointAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVpcEndpointAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateVpcEndpointAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteFirewall(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteFirewall(context.Background(), nil, func(o *Options) {
@@ -733,11 +805,35 @@ func TestUpdateSnapshot_DeleteTLSInspectionConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteVpcEndpointAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVpcEndpointAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteVpcEndpointAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeFirewall(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeFirewall(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeFirewall")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeFirewallMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeFirewallMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeFirewallMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -822,6 +918,18 @@ func TestUpdateSnapshot_DescribeTLSInspectionConfiguration(t *testing.T) {
 	_, err := svc.DescribeTLSInspectionConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeTLSInspectionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeVpcEndpointAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcEndpointAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeVpcEndpointAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -942,6 +1050,18 @@ func TestUpdateSnapshot_ListTLSInspectionConfigurations(t *testing.T) {
 	_, err := svc.ListTLSInspectionConfigurations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTLSInspectionConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListVpcEndpointAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListVpcEndpointAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListVpcEndpointAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

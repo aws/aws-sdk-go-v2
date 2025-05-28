@@ -10,19 +10,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates an IAM policy for your rule group or firewall policy. Use
-// this to share rule groups and firewall policies between accounts. This operation
+// Creates or updates an IAM policy for your rule group, firewall policy, or
+// firewall. Use this to share these resources between accounts. This operation
 // works in conjunction with the Amazon Web Services Resource Access Manager (RAM)
 // service to manage resource sharing for Network Firewall.
 //
-// Use this operation to create or update a resource policy for your rule group or
-// firewall policy. In the policy, you specify the accounts that you want to share
-// the resource with and the operations that you want the accounts to be able to
-// perform.
+// For information about using sharing with Network Firewall resources, see [Sharing Network Firewall resources] in
+// the Network Firewall Developer Guide.
+//
+// Use this operation to create or update a resource policy for your Network
+// Firewall rule group, firewall policy, or firewall. In the resource policy, you
+// specify the accounts that you want to share the Network Firewall resource with
+// and the operations that you want the accounts to be able to perform.
 //
 // When you add an account in the resource policy, you then run the following
-// Resource Access Manager (RAM) operations to access and accept the shared rule
-// group or firewall policy.
+// Resource Access Manager (RAM) operations to access and accept the shared
+// resource.
 //
 // [GetResourceShareInvitations]
 //   - - Returns the Amazon Resource Names (ARNs) of the resource share
@@ -35,6 +38,7 @@ import (
 //
 // [AcceptResourceShareInvitation]: https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html
 // [GetResourceShareInvitations]: https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html
+// [Sharing Network Firewall resources]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/sharing.html
 // [Resource Access Manager User Guide]: https://docs.aws.amazon.com/ram/latest/userguide/what-is.html
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
@@ -54,8 +58,8 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 type PutResourcePolicyInput struct {
 
 	// The IAM policy statement that lists the accounts that you want to share your
-	// rule group or firewall policy with and the operations that you want the accounts
-	// to be able to perform.
+	// Network Firewall resources with and the operations that you want the accounts to
+	// be able to perform.
 	//
 	// For a rule group resource, you can specify the following operations in the
 	// Actions section of the statement:
@@ -73,15 +77,24 @@ type PutResourcePolicyInput struct {
 	//
 	//   - network-firewall:ListFirewallPolicies
 	//
-	// In the Resource section of the statement, you specify the ARNs for the rule
-	// groups and firewall policies that you want to share with the account that you
-	// specified in Arn .
+	// For a firewall resource, you can specify the following operations in the
+	// Actions section of the statement:
+	//
+	//   - network-firewall:CreateVpcEndpointAssociation
+	//
+	//   - network-firewall:DescribeFirewallMetadata
+	//
+	//   - network-firewall:ListFirewalls
+	//
+	// In the Resource section of the statement, you specify the ARNs for the Network
+	// Firewall resources that you want to share with the account that you specified in
+	// Arn .
 	//
 	// This member is required.
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the account that you want to share rule
-	// groups and firewall policies with.
+	// The Amazon Resource Name (ARN) of the account that you want to share your
+	// Network Firewall resources with.
 	//
 	// This member is required.
 	ResourceArn *string

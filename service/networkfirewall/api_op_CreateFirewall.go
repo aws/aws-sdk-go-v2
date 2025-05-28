@@ -112,6 +112,11 @@ type CreateFirewallOutput struct {
 
 	// Detailed information about the current status of a Firewall. You can retrieve this for
 	// a firewall by calling DescribeFirewalland providing the firewall name and ARN.
+	//
+	// The firewall status indicates a combined status. It indicates whether all
+	// subnets are up-to-date with the latest firewall configurations, which is based
+	// on the sync states config values, and also whether all subnets have their
+	// endpoints fully enabled, based on their sync states attachment values.
 	FirewallStatus *types.FirewallStatus
 
 	// Metadata pertaining to the operation's result.
