@@ -46,7 +46,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the enrollment status of an organization's member accounts in Cost Optimization\n      Hub.</p>"
+                "smithy.api#documentation": "<p>Describes the enrollment status of an organization's member accounts in Cost Optimization Hub.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#AccountEnrollmentStatuses": {
@@ -172,7 +172,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the Amazon Elastic Block Store performance configuration of the current and\n      recommended resource configuration for a recommendation.</p>"
+                "smithy.api#documentation": "<p>Describes the Amazon Elastic Block Store performance configuration of the current and recommended resource configuration for a recommendation.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#ComputeConfiguration": {
@@ -199,12 +199,12 @@
                 "platform": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform of the resource. The platform is the specific combination of operating\n      system, license model, and software on an instance.</p>"
+                        "smithy.api#documentation": "<p>The platform of the resource. The platform is the specific combination of operating system, license model, and software on an instance.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the performance configuration for compute services such as Amazon EC2, Lambda,\n      and ECS.</p>"
+                "smithy.api#documentation": "<p>Describes the performance configuration for compute services such as Amazon EC2, Lambda, and ECS.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#ComputeSavingsPlans": {
@@ -233,7 +233,7 @@
                 "accountScope": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account scope for which you want recommendations. Amazon Web Services calculates\n      recommendations including the management account and member accounts if the value is set to\n        <code>PAYER</code>. If the value is <code>LINKED</code>, recommendations are calculated for\n      individual member accounts only.</p>"
+                        "smithy.api#documentation": "<p>The account scope for which you want recommendations. Amazon Web Services calculates recommendations including the management account and member accounts if the value is set to <code>PAYER</code>. If the value is <code>LINKED</code>, recommendations are calculated for individual member accounts only.</p>"
                     }
                 },
                 "term": {
@@ -294,7 +294,7 @@
                     "name": "cost-optimization-hub"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>You can use the Cost Optimization Hub API to programmatically identify, filter, aggregate,\n      and quantify savings for your cost optimization recommendations across multiple Amazon Web Services Regions and Amazon Web Services accounts in your organization.</p>\n         <p>The Cost Optimization Hub API provides the following endpoint:</p>\n         <ul>\n            <li>\n               <p> https://cost-optimization-hub.us-east-1.amazonaws.com </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>You can use the Cost Optimization Hub API to programmatically identify, filter, aggregate, and quantify savings for your cost optimization recommendations across multiple Amazon Web Services Regions and Amazon Web Services accounts in your organization.</p> <p>The Cost Optimization Hub API provides the following endpoint:</p> <ul> <li> <p> https://cost-optimization-hub.us-east-1.amazonaws.com </p> </li> </ul>",
                 "smithy.api#title": "Cost Optimization Hub",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -993,10 +993,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The DynamoDB reserved capacity recommendation details.</p>",
-                "smithy.api#tags": [
-                    "db_recs"
-                ]
+                "smithy.api#documentation": "<p>The DynamoDB reserved capacity recommendation details.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#DynamoDbReservedCapacityConfiguration": {
@@ -1047,7 +1044,7 @@
                 "numberOfCapacityUnitsToPurchase": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of reserved capacity units that Amazon Web Services recommends that you\n      purchase.</p>"
+                        "smithy.api#documentation": "<p>The number of reserved capacity units that Amazon Web Services recommends that you purchase.</p>"
                     }
                 },
                 "capacityUnits": {
@@ -1058,10 +1055,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The DynamoDB reserved capacity configuration used for recommendations.</p>",
-                "smithy.api#tags": [
-                    "db_recs"
-                ]
+                "smithy.api#documentation": "<p>The DynamoDB reserved capacity configuration used for recommendations.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#EbsVolume": {
@@ -1081,7 +1075,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the Amazon Elastic Block Store volume configuration of the current and recommended\n      resource configuration for a recommendation.</p>"
+                "smithy.api#documentation": "<p>Describes the Amazon Elastic Block Store volume configuration of the current and recommended resource configuration for a recommendation.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#EbsVolumeConfiguration": {
@@ -1136,7 +1130,7 @@
                 "instance": {
                     "target": "com.amazonaws.costoptimizationhub#InstanceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the instance for the EC2 Auto Scaling group with a single instance\n      type.</p>"
+                        "smithy.api#documentation": "<p>Details about the instance for the EC2 Auto Scaling group with a single instance type.</p>"
                     }
                 },
                 "mixedInstances": {
@@ -1148,13 +1142,13 @@
                 "type": {
                     "target": "com.amazonaws.costoptimizationhub#Ec2AutoScalingGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of EC2 Auto Scaling group, showing whether it consists of a single instance type\n      or mixed instance types.</p>"
+                        "smithy.api#documentation": "<p>The type of EC2 Auto Scaling group, showing whether it consists of a single instance type or mixed instance types.</p>"
                     }
                 },
                 "allocationStrategy": {
                     "target": "com.amazonaws.costoptimizationhub#AllocationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The strategy used for allocating instances, based on a predefined priority order or based\n      on the lowest available price.</p>"
+                        "smithy.api#documentation": "<p>The strategy used for allocating instances, based on a predefined priority order or based on the lowest available price.</p>"
                     }
                 }
             },
@@ -1196,7 +1190,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the EC2 instance configuration of the current and recommended resource\n      configuration for a recommendation.</p>"
+                "smithy.api#documentation": "<p>Describes the EC2 instance configuration of the current and recommended resource configuration for a recommendation.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#Ec2InstanceConfiguration": {
@@ -1345,7 +1339,7 @@
                 "normalizedUnitsToPurchase": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of normalized units that Amazon Web Services recommends that you\n      purchase.</p>"
+                        "smithy.api#documentation": "<p>The number of normalized units that Amazon Web Services recommends that you purchase.</p>"
                     }
                 },
                 "numberOfInstancesToPurchase": {
@@ -1381,7 +1375,7 @@
                 "platform": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform of the recommended reservation. The platform is the specific combination of\n      operating system, license model, and software on an instance.</p>"
+                        "smithy.api#documentation": "<p>The platform of the recommended reservation. The platform is the specific combination of operating system, license model, and software on an instance.</p>"
                     }
                 },
                 "tenancy": {
@@ -1503,7 +1497,7 @@
                 "normalizedUnitsToPurchase": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of normalized units that Amazon Web Services recommends that you\n      purchase.</p>"
+                        "smithy.api#documentation": "<p>The number of normalized units that Amazon Web Services recommends that you purchase.</p>"
                     }
                 },
                 "numberOfInstancesToPurchase": {
@@ -1576,12 +1570,12 @@
                 "otherDiscount": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>Estimated other discounts include all discounts that are not itemized. Itemized discounts\n      include <code>reservedInstanceDiscount</code> and <code>savingsPlansDiscount</code>.</p>"
+                        "smithy.api#documentation": "<p>Estimated other discounts include all discounts that are not itemized. Itemized discounts include <code>reservedInstanceDiscount</code> and <code>savingsPlansDiscount</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Estimated discount details of the current and recommended resource configuration for a\n      recommendation.</p>"
+                "smithy.api#documentation": "<p>Estimated discount details of the current and recommended resource configuration for a recommendation.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#Filter": {
@@ -1655,7 +1649,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of recommendations. Filters\n      recommendations by different dimensions.</p>"
+                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of recommendations. Filters recommendations by different dimensions.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#GetPreferences": {
@@ -1681,7 +1675,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a set of preferences for an account in order to add account-specific preferences\n      into the service. These preferences impact how the savings associated with recommendations are\n      presented—estimated savings after discounts or estimated savings before discounts, for\n      example.</p>",
+                "smithy.api#documentation": "<p>Returns a set of preferences for an account in order to add account-specific preferences into the service. These preferences impact how the savings associated with recommendations are presented—estimated savings after discounts or estimated savings before discounts, for example.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -1705,6 +1699,15 @@
                     "target": "com.amazonaws.costoptimizationhub#MemberAccountDiscountVisibility",
                     "traits": {
                         "smithy.api#documentation": "<p>Retrieves the status of the \"member account discount visibility\" preference.</p>"
+                    }
+                },
+                "preferredCommitment": {
+                    "target": "com.amazonaws.costoptimizationhub#PreferredCommitment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves the current preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>",
+                        "smithy.api#tags": [
+                            "commitmentPreferences"
+                        ]
                     }
                 }
             },
@@ -1738,7 +1741,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns both the current and recommended resource configuration and the estimated cost\n      impact for a recommendation.</p>\n         <p>The <code>recommendationId</code> is only valid for up to a maximum of 24 hours as\n      recommendations are refreshed daily. To retrieve the <code>recommendationId</code>, use the\n        <code>ListRecommendations</code> API.</p>",
+                "smithy.api#documentation": "<p>Returns both the current and recommended resource configuration and the estimated cost impact for a recommendation.</p> <p>The <code>recommendationId</code> is only valid for up to a maximum of 24 hours as recommendations are refreshed daily. To retrieve the <code>recommendationId</code>, use the <code>ListRecommendations</code> API.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -1769,7 +1772,7 @@
                 "resourceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the resource. This is the same as the Amazon Resource Name\n      (ARN), if available.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the resource. This is the same as the Amazon Resource Name (ARN), if available.</p>"
                     }
                 },
                 "resourceArn": {
@@ -1805,13 +1808,13 @@
                 "estimatedSavingsPercentage": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated savings percentage relative to the total cost over the cost calculation\n      lookback period.</p>"
+                        "smithy.api#documentation": "<p>The estimated savings percentage relative to the total cost over the cost calculation lookback period.</p>"
                     }
                 },
                 "estimatedSavingsOverCostCalculationLookbackPeriod": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated savings amount over the lookback period used to calculate cost impact for a\n      recommendation.</p>"
+                        "smithy.api#documentation": "<p>The estimated savings amount over the lookback period used to calculate cost impact for a recommendation.</p>"
                     }
                 },
                 "currentResourceType": {
@@ -1975,7 +1978,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An error on the server occurred during the processing of your request. Try again\n      later.</p>",
+                "smithy.api#documentation": "<p>An error on the server occurred during the processing of your request. Try again later.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -2037,7 +2040,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the enrollment status for an account. It can also return the list of accounts\n      that are enrolled under the organization.</p>",
+                "smithy.api#documentation": "<p>Retrieves the enrollment status for an account. It can also return the list of accounts that are enrolled under the organization.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2086,13 +2089,13 @@
                 "items": {
                     "target": "com.amazonaws.costoptimizationhub#AccountEnrollmentStatuses",
                     "traits": {
-                        "smithy.api#documentation": "<p>The enrollment status of a specific account ID, including creation and last updated\n      timestamps.</p>"
+                        "smithy.api#documentation": "<p>The enrollment status of a specific account ID, including creation and last updated timestamps.</p>"
                     }
                 },
                 "includeMemberAccounts": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The enrollment status of all member accounts in the organization if the account is the\n      management account or delegated administrator.</p>"
+                        "smithy.api#documentation": "<p>The enrollment status of all member accounts in the organization if the account is the management account or delegated administrator.</p>"
                     }
                 },
                 "nextToken": {
@@ -2129,7 +2132,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a concise representation of savings estimates for resources. Also returns de-duped\n      savings across different types of recommendations.</p>\n         <note>\n            <p>The following filters are not supported for this API: <code>recommendationIds</code>,\n          <code>resourceArns</code>, and <code>resourceIds</code>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns a concise representation of savings estimates for resources. Also returns de-duped savings across different types of recommendations.</p> <note> <p>The following filters are not supported for this API: <code>recommendationIds</code>, <code>resourceArns</code>, and <code>resourceIds</code>.</p> </note>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2165,10 +2168,7 @@
                 "metrics": {
                     "target": "com.amazonaws.costoptimizationhub#SummaryMetricsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional metrics to be returned for the request. The only valid value is\n        <code>savingsPercentage</code>.</p>",
-                        "smithy.api#tags": [
-                            "delegatedAdmin"
-                        ]
+                        "smithy.api#documentation": "<p>Additional metrics to be returned for the request. The only valid value is <code>savingsPercentage</code>.</p>"
                     }
                 },
                 "nextToken": {
@@ -2212,10 +2212,7 @@
                 "metrics": {
                     "target": "com.amazonaws.costoptimizationhub#SummaryMetricsResult",
                     "traits": {
-                        "smithy.api#documentation": "<p>The results or descriptions for the additional metrics, based on whether the metrics were\n      or were not requested.</p>",
-                        "smithy.api#tags": [
-                            "delegatedAdmin"
-                        ]
+                        "smithy.api#documentation": "<p>The results or descriptions for the additional metrics, based on whether the metrics were or were not requested.</p>"
                     }
                 },
                 "nextToken": {
@@ -2281,7 +2278,7 @@
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>List of all recommendations for a resource, or a single recommendation if de-duped by\n        <code>resourceId</code>.</p>"
+                        "smithy.api#documentation": "<p>List of all recommendations for a resource, or a single recommendation if de-duped by <code>resourceId</code>.</p>"
                     }
                 },
                 "maxResults": {
@@ -2365,10 +2362,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The MemoryDB reserved instances recommendation details.</p>\n         <note>\n            <p>MemoryDB reserved instances are referred to as \"MemoryDB reserved nodes\" in\n        customer-facing documentation.</p>\n         </note>",
-                "smithy.api#tags": [
-                    "db_recs"
-                ]
+                "smithy.api#documentation": "<p>The MemoryDB reserved instances recommendation details.</p> <note> <p>While the API reference uses \"MemoryDB reserved instances\", the user guide and other documentation refer to them as \"MemoryDB reserved nodes\", as the terms are used interchangeably.</p> </note>"
             }
         },
         "com.amazonaws.costoptimizationhub#MemoryDbReservedInstancesConfiguration": {
@@ -2419,7 +2413,7 @@
                 "normalizedUnitsToPurchase": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of normalized units that Amazon Web Services recommends that you\n      purchase.</p>"
+                        "smithy.api#documentation": "<p>The number of normalized units that Amazon Web Services recommends that you purchase.</p>"
                     }
                 },
                 "numberOfInstancesToPurchase": {
@@ -2454,10 +2448,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The MemoryDB reserved instances configuration used for recommendations.</p>\n         <note>\n            <p>MemoryDB reserved instances are referred to as \"MemoryDB reserved nodes\" in\n        customer-facing documentation.</p>\n         </note>",
-                "smithy.api#tags": [
-                    "db_recs"
-                ]
+                "smithy.api#documentation": "<p>The MemoryDB reserved instances configuration used for recommendations.</p> <note> <p>While the API reference uses \"MemoryDB reserved instances\", the user guide and other documentation refer to them as \"MemoryDB reserved nodes\", as the terms are used interchangeably.</p> </note>"
             }
         },
         "com.amazonaws.costoptimizationhub#MixedInstanceConfiguration": {
@@ -2548,7 +2539,7 @@
                 "normalizedUnitsToPurchase": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of normalized units that Amazon Web Services recommends that you\n      purchase.</p>"
+                        "smithy.api#documentation": "<p>The number of normalized units that Amazon Web Services recommends that you purchase.</p>"
                     }
                 },
                 "numberOfInstancesToPurchase": {
@@ -2617,6 +2608,52 @@
                 "smithy.api#documentation": "<p>Defines how rows will be sorted in the response.</p>"
             }
         },
+        "com.amazonaws.costoptimizationhub#PaymentOption": {
+            "type": "enum",
+            "members": {
+                "ALL_UPFRONT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AllUpfront"
+                    }
+                },
+                "PARTIAL_UPFRONT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PartialUpfront"
+                    }
+                },
+                "NO_UPFRONT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NoUpfront"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.costoptimizationhub#PreferredCommitment": {
+            "type": "structure",
+            "members": {
+                "term": {
+                    "target": "com.amazonaws.costoptimizationhub#Term",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preferred length of the commitment period. If the value is null, it will default to <code>ThreeYears</code> (highest savings) where applicable.</p>"
+                    }
+                },
+                "paymentOption": {
+                    "target": "com.amazonaws.costoptimizationhub#PaymentOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preferred upfront payment structure for commitments. If the value is null, it will default to <code>AllUpfront</code> (highest savings) where applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The preferred configuration for Reserved Instances and Savings Plans commitment-based discounts, consisting of a payment option and a commitment duration.</p>",
+                "smithy.api#tags": [
+                    "commitmentPreferences"
+                ]
+            }
+        },
         "com.amazonaws.costoptimizationhub#RdsDbInstance": {
             "type": "structure",
             "members": {
@@ -2683,7 +2720,7 @@
                 "iops": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of Provisioned IOPS (input/output operations per second) to be initially\n      allocated for the DB instance.</p>"
+                        "smithy.api#documentation": "<p>The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance.</p>"
                     }
                 },
                 "storageThroughput": {
@@ -2765,7 +2802,7 @@
                 "normalizedUnitsToPurchase": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of normalized units that Amazon Web Services recommends that you\n      purchase.</p>"
+                        "smithy.api#documentation": "<p>The number of normalized units that Amazon Web Services recommends that you purchase.</p>"
                     }
                 },
                 "numberOfInstancesToPurchase": {
@@ -2819,7 +2856,7 @@
                 "deploymentOption": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether the recommendation is for a reservation in a single Availability Zone\n      or a reservation with a backup in a second Availability Zone.</p>"
+                        "smithy.api#documentation": "<p>Determines whether the recommendation is for a reservation in a single Availability Zone or a reservation with a backup in a second Availability Zone.</p>"
                     }
                 }
             },
@@ -2881,7 +2918,7 @@
                 "estimatedSavingsPercentage": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated savings percentage relative to the total cost over the cost calculation\n      lookback period.</p>"
+                        "smithy.api#documentation": "<p>The estimated savings percentage relative to the total cost over the cost calculation lookback period.</p>"
                     }
                 },
                 "estimatedMonthlyCost": {
@@ -3008,7 +3045,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The summary of rightsizing recommendations, including de-duped savings from all types of\n      recommendations.</p>"
+                "smithy.api#documentation": "<p>The summary of rightsizing recommendations, including de-duped savings from all types of recommendations.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#RedshiftReservedInstances": {
@@ -3079,7 +3116,7 @@
                 "normalizedUnitsToPurchase": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of normalized units that Amazon Web Services recommends that you\n      purchase.</p>"
+                        "smithy.api#documentation": "<p>The number of normalized units that Amazon Web Services recommends that you purchase.</p>"
                     }
                 },
                 "numberOfInstancesToPurchase": {
@@ -3149,7 +3186,7 @@
                 "estimatedOnDemandCost": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The remaining On-Demand cost estimated to not be covered by the recommended reserved\n      instance, over the length of the lookback period.</p>"
+                        "smithy.api#documentation": "<p>The remaining On-Demand cost estimated to not be covered by the recommended reserved instance, over the length of the lookback period.</p>"
                     }
                 },
                 "monthlyReservationEligibleCost": {
@@ -3161,13 +3198,13 @@
                 "savingsPercentage": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The savings percentage relative to the total On-Demand costs that are associated with this\n      instance.</p>"
+                        "smithy.api#documentation": "<p>The savings percentage relative to the total On-Demand costs that are associated with this instance.</p>"
                     }
                 },
                 "estimatedMonthlyAmortizedReservationCost": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated cost of your recurring monthly fees for the recommended reserved instance\n      across the month.</p>"
+                        "smithy.api#documentation": "<p>The estimated cost of your recurring monthly fees for the recommended reserved instance across the month.</p>"
                     }
                 }
             },
@@ -3285,7 +3322,7 @@
                 "sageMakerSavingsPlans": {
                     "target": "com.amazonaws.costoptimizationhub#SageMakerSavingsPlans",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SageMaker AI\n      Savings Plans recommendation details.</p>"
+                        "smithy.api#documentation": "<p>The SageMaker AI Savings Plans recommendation details.</p>"
                     }
                 },
                 "rdsDbInstance": {
@@ -3303,19 +3340,13 @@
                 "dynamoDbReservedCapacity": {
                     "target": "com.amazonaws.costoptimizationhub#DynamoDbReservedCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DynamoDB reserved capacity recommendation\n      details.</p>",
-                        "smithy.api#tags": [
-                            "db_recs"
-                        ]
+                        "smithy.api#documentation": "<p>The DynamoDB reserved capacity recommendation details.</p>"
                     }
                 },
                 "memoryDbReservedInstances": {
                     "target": "com.amazonaws.costoptimizationhub#MemoryDbReservedInstances",
                     "traits": {
-                        "smithy.api#documentation": "<p>The MemoryDB reserved instances recommendation\n      details.</p>",
-                        "smithy.api#tags": [
-                            "db_recs"
-                        ]
+                        "smithy.api#documentation": "<p>The MemoryDB reserved instances recommendation details.</p>"
                     }
                 }
             },
@@ -3364,7 +3395,7 @@
                 "estimatedCostBeforeDiscounts": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The savings estimate using Amazon Web Services public pricing without incorporating any\n      discounts.</p>"
+                        "smithy.api#documentation": "<p>The savings estimate using Amazon Web Services public pricing without incorporating any discounts.</p>"
                     }
                 },
                 "estimatedNetUnusedAmortizedCommitments": {
@@ -3382,7 +3413,7 @@
                 "estimatedCostAfterDiscounts": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The savings estimate incorporating all discounts with Amazon Web Services, such as Reserved\n      Instances and Savings Plans.</p>"
+                        "smithy.api#documentation": "<p>The savings estimate incorporating all discounts with Amazon Web Services, such as Reserved Instances and Savings Plans.</p>"
                     }
                 }
             },
@@ -3486,19 +3517,13 @@
                 "DYNAMO_DB_RESERVED_CAPACITY": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "DynamoDbReservedCapacity",
-                        "smithy.api#tags": [
-                            "db_recs"
-                        ]
+                        "smithy.api#enumValue": "DynamoDbReservedCapacity"
                     }
                 },
                 "MEMORY_DB_RESERVED_INSTANCES": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "MemoryDbReservedInstances",
-                        "smithy.api#tags": [
-                            "db_recs"
-                        ]
+                        "smithy.api#enumValue": "MemoryDbReservedInstances"
                     }
                 }
             }
@@ -3696,12 +3721,12 @@
                 "savingsPercentage": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The savings percentage based on your Amazon Web Services spend over the past 30\n      days.</p>\n         <note>\n            <p>Savings percentage is only supported when filtering by Region, account ID, or\n        tags.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The savings percentage based on your Amazon Web Services spend over the past 30 days.</p> <note> <p>Savings percentage is only supported when filtering by Region, account ID, or tags.</p> </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The results or descriptions for the additional metrics, based on whether the metrics were\n      or were not requested.</p>"
+                "smithy.api#documentation": "<p>The results or descriptions for the additional metrics, based on whether the metrics were or were not requested.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#Tag": {
@@ -3733,6 +3758,23 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.costoptimizationhub#Term": {
+            "type": "enum",
+            "members": {
+                "ONE_YEAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OneYear"
+                    }
+                },
+                "THREE_YEARS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ThreeYears"
+                    }
                 }
             }
         },
@@ -3772,7 +3814,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the enrollment (opt in and opt out) status of an account to the Cost Optimization\n      Hub service.</p>\n         <p>If the account is a management account or delegated administrator of an organization, this\n      action can also be used to enroll member accounts of the organization.</p>\n         <p>You must have the appropriate permissions to opt in to Cost Optimization Hub and to view\n      its recommendations. When you opt in, Cost Optimization Hub automatically creates a\n      service-linked role in your account to access its data.</p>"
+                "smithy.api#documentation": "<p>Updates the enrollment (opt in and opt out) status of an account to the Cost Optimization Hub service.</p> <p>If the account is a management account or delegated administrator of an organization, this action can also be used to enroll member accounts of the organization.</p> <p>You must have the appropriate permissions to opt in to Cost Optimization Hub and to view its recommendations. When you opt in, Cost Optimization Hub automatically creates a service-linked role in your account to access its data.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#UpdateEnrollmentStatusRequest": {
@@ -3788,7 +3830,7 @@
                 "includeMemberAccounts": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to enroll member accounts of the organization if the account is the\n      management account or delegated administrator.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to enroll member accounts of the organization if the account is the management account or delegated administrator.</p>"
                     }
                 }
             },
@@ -3833,7 +3875,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a set of preferences for an account in order to add account-specific preferences\n      into the service. These preferences impact how the savings associated with recommendations are\n      presented.</p>"
+                "smithy.api#documentation": "<p>Updates a set of preferences for an account in order to add account-specific preferences into the service. These preferences impact how the savings associated with recommendations are presented.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#UpdatePreferencesRequest": {
@@ -3849,6 +3891,15 @@
                     "target": "com.amazonaws.costoptimizationhub#MemberAccountDiscountVisibility",
                     "traits": {
                         "smithy.api#documentation": "<p>Sets the \"member account discount visibility\" preference.</p>"
+                    }
+                },
+                "preferredCommitment": {
+                    "target": "com.amazonaws.costoptimizationhub#PreferredCommitment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>",
+                        "smithy.api#tags": [
+                            "commitmentPreferences"
+                        ]
                     }
                 }
             },
@@ -3869,6 +3920,15 @@
                     "target": "com.amazonaws.costoptimizationhub#MemberAccountDiscountVisibility",
                     "traits": {
                         "smithy.api#documentation": "<p>Shows the status of the \"member account discount visibility\" preference.</p>"
+                    }
+                },
+                "preferredCommitment": {
+                    "target": "com.amazonaws.costoptimizationhub#PreferredCommitment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the updated preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>",
+                        "smithy.api#tags": [
+                            "commitmentPreferences"
+                        ]
                     }
                 }
             },
@@ -3943,7 +4003,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services\n      service.</p>",
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3967,7 +4027,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input failed to meet the constraints specified by the Amazon Web Services service in a\n      specified field.</p>"
+                "smithy.api#documentation": "<p>The input failed to meet the constraints specified by the Amazon Web Services service in a specified field.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#ValidationExceptionDetails": {

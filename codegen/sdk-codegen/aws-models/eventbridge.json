@@ -5563,7 +5563,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^(arn:aws[\\w-]*:events:[a-z]{2}-[a-z]+-[\\w-]+:[0-9]{12}:event-bus\\/)?[/\\.\\-_A-Za-z0-9]+$"
+                "smithy.api#pattern": "^(arn:aws[\\w-]*:events:[a-z]+-[a-z]+-[\\w-]+:[0-9]{12}:event-bus\\/)?[/\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.eventbridge#EventId": {
@@ -6985,7 +6985,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^arn:aws[a-z-]*:events:[a-z]{2}-[a-z-]+-\\d+:\\d{12}:event-bus/[\\w.-]+$"
+                "smithy.api#pattern": "^arn:aws[a-z-]*:events:[a-z]+-[a-z-]+-\\d+:\\d{12}:event-bus/[\\w.-]+$"
             }
         },
         "com.amazonaws.eventbridge#NonPartnerEventBusName": {
@@ -7005,7 +7005,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^(arn:aws[\\w-]*:events:[a-z]{2}-[a-z]+-[\\w-]+:[0-9]{12}:event-bus\\/)?[\\.\\-_A-Za-z0-9]+$"
+                "smithy.api#pattern": "^(arn:aws[\\w-]*:events:[a-z]+-[a-z]+-[\\w-]+:[0-9]{12}:event-bus\\/)?[\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.eventbridge#OperationDisabledException": {

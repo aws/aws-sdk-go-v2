@@ -342,25 +342,25 @@
                 "S3Bucket": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your canary script is located in S3, specify the bucket name here. Do not include <code>s3://</code> as the \n         start of the bucket name.</p>"
+                        "smithy.api#documentation": "<p>If your canary script is located in Amazon S3, specify the bucket name here. Do not include <code>s3://</code> as the \n         start of the bucket name.</p>"
                     }
                 },
                 "S3Key": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 key of your script. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html\">Working with Amazon S3 Objects</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 key of your script. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html\">Working with Amazon S3 Objects</a>.</p>"
                     }
                 },
                 "S3Version": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 version ID of your script.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 version ID of your script.</p>"
                     }
                 },
                 "ZipFile": {
                     "target": "com.amazonaws.synthetics#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you input your canary script directly into the canary instead of referring to an S3\n         location, the value of this parameter is the base64-encoded contents of the .zip file that \n         contains the script. It must be smaller than 225 Kb.</p>\n         <p>For large canary scripts, we recommend that you use an S3 location instead of inputting it \n      directly with this parameter.</p>"
+                        "smithy.api#documentation": "<p>If you input your canary script directly into the canary instead of referring to an Amazon S3\n         location, the value of this parameter is the base64-encoded contents of the .zip file that \n         contains the script. It must be smaller than 225 Kb.</p>\n         <p>For large canary scripts, we recommend that you use an Amazon S3 location instead of inputting it \n      directly with this parameter.</p>"
                     }
                 },
                 "Handler": {
@@ -372,7 +372,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use this structure to input your script code for the canary. This structure contains the\n         Lambda handler with the location where the canary should start running the script. If the\n         script is stored in an S3 bucket, the bucket name, key, and version are also included. If\n         the script was passed into the canary directly, the script code is contained in the value\n         of <code>Zipfile</code>. </p>\n         <p>If you are uploading your canary scripts with an Amazon S3 bucket, your zip file should include your \n      script in a certain folder structure.</p>\n         <ul>\n            <li>\n               <p>For Node.js canaries, the folder structure must be <code>nodejs/node_modules/<i>myCanaryFilename.js</i>\n                  </code>\n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_WritingCanary_Nodejs.html#CloudWatch_Synthetics_Canaries_package\">Packaging your Node.js canary files</a>\n               </p>\n            </li>\n            <li>\n               <p>For Python canaries, the folder structure must be <code>python/<i>myCanaryFilename.py</i>\n                  </code> or <code>python/<i>myFolder/myCanaryFilename.py</i>\n                  </code>\n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_WritingCanary_Python.html#CloudWatch_Synthetics_Canaries_WritingCanary_Python_package\">Packaging your Python canary files</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Use this structure to input your script code for the canary. This structure contains the\n         Lambda handler with the location where the canary should start running the script. If the\n         script is stored in an Amazon S3 bucket, the bucket name, key, and version are also included. If\n         the script was passed into the canary directly, the script code is contained in the value\n         of <code>Zipfile</code>. </p>\n         <p>If you are uploading your canary scripts with an Amazon S3 bucket, your zip file should include your \n      script in a certain folder structure.</p>\n         <ul>\n            <li>\n               <p>For Node.js canaries, the folder structure must be <code>nodejs/node_modules/<i>myCanaryFilename.js</i>\n                  </code>\n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_WritingCanary_Nodejs.html#CloudWatch_Synthetics_Canaries_package\">Packaging your Node.js canary files</a>\n               </p>\n            </li>\n            <li>\n               <p>For Python canaries, the folder structure must be <code>python/<i>myCanaryFilename.py</i>\n                  </code> or <code>python/<i>myFolder/myCanaryFilename.py</i>\n                  </code>\n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_WritingCanary_Python.html#CloudWatch_Synthetics_Canaries_WritingCanary_Python_package\">Packaging your Python canary files</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.synthetics#CanaryCodeOutput": {
@@ -521,6 +521,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the keys and values to use for any environment variables\n      used in the canary script. Use the following format:</p>\n         <p>{ \"key1\" : \"value1\", \"key2\" : \"value2\", ...}</p>\n         <p>Keys must start with a letter and be at least two characters. The total size\n         of your environment variables cannot exceed 4 KB. You can't specify any Lambda\n         reserved environment variables as the keys for your environment variables. For \n         more information about reserved keys, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime\">\n            Runtime environment variables</a>.</p>\n         <important>\n            <p>Environment variable keys and values are encrypted at rest using Amazon Web Services owned KMS keys. However, the environment variables \n         are not encrypted on the client side. Do not store sensitive information\n         in them.</p>\n         </important>"
                     }
+                },
+                "EphemeralStorage": {
+                    "target": "com.amazonaws.synthetics#EphemeralStorageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the amount of ephemeral storage (in MB) to allocate for the canary run during execution. This temporary storage is used for storing canary run artifacts (which are uploaded to an Amazon S3 bucket at the end of the run), and any canary browser operations. This temporary storage is cleared after the run is completed. Default storage value is 1024 MB.</p>"
+                    }
                 }
             },
             "traits": {
@@ -546,6 +552,12 @@
                     "target": "com.amazonaws.synthetics#NullableBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Displays whether this canary run used active X-Ray tracing. </p>"
+                    }
+                },
+                "EphemeralStorage": {
+                    "target": "com.amazonaws.synthetics#EphemeralStorageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the amount of ephemeral storage (in MB) to allocate for the canary run during execution. This temporary storage is used for storing canary run artifacts (which are uploaded to an Amazon S3 bucket at the end of the run), and any canary browser operations. This temporary storage is cleared after the run is completed. Default storage value is 1024 MB.</p>"
                     }
                 }
             },
@@ -611,12 +623,41 @@
                 "StateReasonCode": {
                     "target": "com.amazonaws.synthetics#CanaryRunStateReasonCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this value is <code>CANARY_FAILURE</code>, an exception occurred in the \n         canary code. If this value is <code>EXECUTION_FAILURE</code>, an exception occurred in \n         CloudWatch Synthetics.</p>"
+                        "smithy.api#documentation": "<p>If this value is <code>CANARY_FAILURE</code>, either the canary script failed or Synthetics ran into a fatal error when running the canary. For example,  a canary timeout misconfiguration setting can cause the canary to timeout before Synthetics can evaluate its status.\n        </p>\n         <p> If this value is <code>EXECUTION_FAILURE</code>, a non-critical failure occurred such as failing to save generated debug artifacts (for example, screenshots or har files).</p>\n         <p>If both types of failures occurred, the <code>CANARY_FAILURE</code> takes precedence. To understand the exact error, use the <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRunStatus.html\">StateReason</a> API.</p>"
+                    }
+                },
+                "TestResult": {
+                    "target": "com.amazonaws.synthetics#CanaryRunTestResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the status of canary script for this run. When Synthetics tries to determine the status but fails, the result is marked as <code>UNKNOWN</code>.\n         For the overall status of canary run, see <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRunStatus.html\">State</a>.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>This structure contains the status information about a canary run.</p>"
+            }
+        },
+        "com.amazonaws.synthetics#CanaryRunTestResult": {
+            "type": "enum",
+            "members": {
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.synthetics#CanaryRunTimeline": {
@@ -962,14 +1003,14 @@
                 "Code": {
                     "target": "com.amazonaws.synthetics#CanaryCodeInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that includes the entry point from which the canary should start\n         running your script. If the script is stored in \n         an S3 bucket, the bucket name, key, and version are also included.\n      </p>",
+                        "smithy.api#documentation": "<p>A structure that includes the entry point from which the canary should start\n         running your script. If the script is stored in \n         an Amazon S3 bucket, the bucket name, key, and version are also included.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ArtifactS3Location": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this\n         canary. Artifacts include the log file, screenshots, and HAR files.  The name of the \n         S3 bucket can't include a period (.).</p>",
+                        "smithy.api#documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this\n         canary. Artifacts include the log file, screenshots, and HAR files.  The name of the \n         Amazon S3 bucket can't include a period (.).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1603,6 +1644,15 @@
             },
             "value": {
                 "target": "com.amazonaws.synthetics#EnvironmentVariableValue"
+            }
+        },
+        "com.amazonaws.synthetics#EphemeralStorageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1024,
+                    "max": 5120
+                }
             }
         },
         "com.amazonaws.synthetics#ErrorMessage": {
@@ -2698,13 +2748,13 @@
                 "SuccessRetentionPeriodInDays": {
                     "target": "com.amazonaws.synthetics#MaxSize1024",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days to retain data on the failed runs for this canary. The valid range is 1 to 455 days.</p>\n         <p>This setting affects the range of information returned by <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html\">GetCanaryRuns</a>, as well as \n         the range of information displayed in the Synthetics console.\n      </p>"
+                        "smithy.api#documentation": "<p>The number of days to retain data about successful runs of this canary. If you omit \n         this field, the default of 31 days is used. The valid range is 1 to 455 days.</p>\n         <p>This setting affects the range of information returned by <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html\">GetCanaryRuns</a>, as well as \n         the range of information displayed in the Synthetics console.\n      </p>"
                     }
                 },
                 "FailureRetentionPeriodInDays": {
                     "target": "com.amazonaws.synthetics#MaxSize1024",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days to retain data on the failed runs for this canary. The valid range is 1 to 455 days.</p>\n         <p>This setting affects the range of information returned by <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html\">GetCanaryRuns</a>, as well as \n         the range of information displayed in the Synthetics console.\n      </p>"
+                        "smithy.api#documentation": "<p>The number of days to retain data about failed runs of this canary. If you omit \n         this field, the default of 31 days is used. The valid range is 1 to 455 days.</p>\n         <p>This setting affects the range of information returned by <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html\">GetCanaryRuns</a>, as well as \n         the range of information displayed in the Synthetics console.\n      </p>"
                     }
                 },
                 "VisualReference": {
@@ -2713,7 +2763,7 @@
                 "ArtifactS3Location": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this\n         canary. Artifacts include the log file, screenshots, and HAR files.  The name of the \n         Amazon S3 bucket can't include a period (.).</p>"
+                        "smithy.api#documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this\n\n         canary. Artifacts include the log file, screenshots, and HAR files.  The name of the \n         Amazon S3 bucket can't include a period (.).</p>"
                     }
                 },
                 "ArtifactConfig": {
@@ -2722,7 +2772,7 @@
                 "ProvisionedResourceCleanup": {
                     "target": "com.amazonaws.synthetics#ProvisionedResourceCleanupSetting",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to also delete the Lambda functions and layers used by this canary\n         when the canary is deleted. If the value of this parameter is <code>AUTOMATIC</code>, it means\n         that the Lambda functions and layers will be deleted when the canary is deleted.</p>\n         <p>If the value of this parameter is <code>OFF</code>, then the value of the <code>DeleteLambda</code> parameter\n         of the <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html\">DeleteCanary</a> operation\n         determines whether the Lambda functions and layers will be deleted.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to also delete the Lambda functions and layers used by this canary\n         when the canary is deleted. If you omit this parameter, the default of <code>AUTOMATIC</code> is used, which means\n\n         that the Lambda functions and layers will be deleted when the canary is deleted.</p>\n         <p>If the value of this parameter is <code>OFF</code>, then the value of the <code>DeleteLambda</code> parameter\n         of the <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html\">DeleteCanary</a> operation\n         determines whether the Lambda functions and layers will be deleted.</p>"
                     }
                 }
             },
@@ -4174,7 +4224,7 @@
                 "Code": {
                     "target": "com.amazonaws.synthetics#CanaryCodeInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that includes the entry point from which the canary should start\n         running your script. If the script is stored in \n         an S3 bucket, the bucket name, key, and version are also included.\n      </p>"
+                        "smithy.api#documentation": "<p>A structure that includes the entry point from which the canary should start\n         running your script. If the script is stored in \n         an Amazon S3 bucket, the bucket name, key, and version are also included.\n      </p>"
                     }
                 },
                 "ExecutionRoleArn": {
@@ -4228,7 +4278,7 @@
                 "ArtifactS3Location": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. \n         Artifacts include the log file, screenshots, and HAR files. The name of the\n         S3 bucket can't include a period (.).</p>"
+                        "smithy.api#documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. \n         Artifacts include the log file, screenshots, and HAR files. The name of the\n         Amazon S3 bucket can't include a period (.).</p>"
                     }
                 },
                 "ArtifactConfig": {
