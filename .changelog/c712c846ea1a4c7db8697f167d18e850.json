@@ -1,8 +1,0 @@
-{
-    "id": "c712c846-ea1a-4c7d-b869-7f167d18e850",
-    "type": "feature",
-    "description": "Enable the option to automatically delete underlying Amazon EBS snapshots when deregistering Amazon Machine Images (AMIs)",
-    "modules": [
-        "service/ec2"
-    ]
-}

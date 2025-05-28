@@ -1,3 +1,15 @@
+# Release (2025-05-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.15.0](service/costoptimizationhub/CHANGELOG.md#v1150-2025-05-28)
+  * **Feature**: This release allows customers to modify their preferred commitment term and payment options.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.224.0](service/ec2/CHANGELOG.md#v12240-2025-05-28)
+  * **Feature**: Enable the option to automatically delete underlying Amazon EBS snapshots when deregistering Amazon Machine Images (AMIs)
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.48.0](service/networkfirewall/CHANGELOG.md#v1480-2025-05-28)
+  * **Feature**: You can now use VPC endpoint associations to create multiple firewall endpoints for a single firewall.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.35.0](service/synthetics/CHANGELOG.md#v1350-2025-05-28)
+  * **Feature**: Add support to change ephemeral storage. Add a new field "TestResult" under CanaryRunStatus.
+
 # Release (2025-05-27)
 
 ## Module Highlights

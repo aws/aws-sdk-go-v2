@@ -1,3 +1,7 @@
+# v1.35.0 (2025-05-28)
+
+* **Feature**: Add support to change ephemeral storage. Add a new field "TestResult" under CanaryRunStatus.
+
 # v1.34.0 (2025-05-09)
 
 * **Feature**: Add support to retry a canary automatically after schedule run failures. Users can enable this feature by configuring the RetryConfig field when calling the CreateCanary or UpdateCanary API. Also includes changes in GetCanary and GetCanaryRuns to support retrieving retry configurations.

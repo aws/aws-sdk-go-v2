@@ -1,8 +1,0 @@
-{
-    "id": "433d66af-9a9c-4275-96b8-a08783f7d469",
-    "type": "feature",
-    "description": "Add support to change ephemeral storage. Add a new field \"TestResult\" under CanaryRunStatus.",
-    "modules": [
-        "service/synthetics"
-    ]
-}

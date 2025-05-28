@@ -1,3 +1,7 @@
+# v1.15.0 (2025-05-28)
+
+* **Feature**: This release allows customers to modify their preferred commitment term and payment options.
+
 # v1.14.1 (2025-04-10)
 
 * No change notes available for this release.
