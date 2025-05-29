@@ -1024,6 +1024,12 @@
                         "smithy.api#documentation": "<p>What occurs to start an action.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.dataexchange#MapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs that you can associate with the event action.</p>"
+                    }
                 }
             }
         },
@@ -1058,6 +1064,12 @@
                     "target": "com.amazonaws.dataexchange#Id",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for the event action.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.dataexchange#MapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the event action.</p>"
                     }
                 },
                 "UpdatedAt": {
@@ -3621,6 +3633,12 @@
                     "target": "com.amazonaws.dataexchange#Id",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for the event action.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.dataexchange#MapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the event action.</p>"
                     }
                 },
                 "UpdatedAt": {

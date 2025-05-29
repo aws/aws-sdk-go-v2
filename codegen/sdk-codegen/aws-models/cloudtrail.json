@@ -736,6 +736,9 @@
                     "target": "com.amazonaws.cloudtrail#GetDashboard"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#GetEventConfiguration"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#GetEventDataStore"
                 },
                 {
@@ -791,6 +794,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#LookupEvents"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#PutEventConfiguration"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#PutEventSelectors"
@@ -1957,6 +1963,40 @@
                 "smithy.api#documentation": "<p>This exception is thrown when the specified resource is not ready for an operation. This\n         can occur when you try to run an operation on a resource before CloudTrail has time\n         to fully load the resource, or because another operation is modifying the resource. If this exception occurs, wait a few minutes, and then try the\n         operation again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.cloudtrail#ContextKeySelector": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.cloudtrail#Type",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of the event record field in ContextKeySelector. Valid values include RequestContext, TagContext.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Equals": {
+                    "target": "com.amazonaws.cloudtrail#OperatorTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of keys defined by Type to be included in CloudTrail enriched events. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information types to be included in CloudTrail enriched events.</p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#ContextKeySelectors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#ContextKeySelector"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.cloudtrail#CreateChannel": {
@@ -4582,6 +4622,91 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudtrail#GetEventConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#GetEventConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#GetEventConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailARNInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidEventDataStoreCategoryException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidEventDataStoreStatusException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current event configuration settings for the specified event data store, including details \n         about maximum event size and context key selectors configured for the event data store.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#GetEventConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "EventDataStore": {
+                    "target": "com.amazonaws.cloudtrail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which you want to retrieve event configuration settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#GetEventConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "EventDataStoreArn": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which the event configuration settings are returned.</p>"
+                    }
+                },
+                "MaxEventSize": {
+                    "target": "com.amazonaws.cloudtrail#MaxEventSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum allowed size for events stored in the specified event data store.</p>"
+                    }
+                },
+                "ContextKeySelectors": {
+                    "target": "com.amazonaws.cloudtrail#ContextKeySelectors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of context key selectors that are configured for the event data store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudtrail#GetEventDataStore": {
             "type": "operation",
             "input": {
@@ -5872,6 +5997,26 @@
                     "httpResponseCode": 400
                 },
                 "smithy.api#documentation": "<p>For the <code>CreateTrail</code>\n            <code>PutInsightSelectors</code>, <code>UpdateTrail</code>, <code>StartQuery</code>, and <code>StartImport</code> operations, this exception is thrown \n         when the policy on the S3 bucket or KMS key does\n         not have sufficient permissions for the operation.</p>\n         <p>For all other operations, this exception is thrown when the policy for the KMS key does\n         not have sufficient permissions for the operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudtrail#InsufficientIAMAccessPermissionException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientIAMAccessPermission",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The task can't be completed because you are signed in with an account that lacks permissions to view or create a service-linked role. Sign in with an account that has the required permissions and then try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -7450,7 +7595,7 @@
                     "min": 3,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9._/\\-:]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9._/\\-:*]+$"
             }
         },
         "com.amazonaws.cloudtrail#Long": {
@@ -7674,6 +7819,23 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.cloudtrail#MaxEventSize": {
+            "type": "enum",
+            "members": {
+                "Standard": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Standard"
+                    }
+                },
+                "Large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Large"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudtrail#MaxQueryResults": {
             "type": "integer",
             "traits": {
@@ -7803,6 +7965,27 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#OperatorTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#OperatorTargetListMember"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#OperatorTargetListMember": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
                 }
             }
         },
@@ -7966,6 +8149,123 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudtrail#PublicKey"
+            }
+        },
+        "com.amazonaws.cloudtrail#PutEventConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#PutEventConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#PutEventConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailARNInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InactiveEventDataStoreException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InsufficientIAMAccessPermissionException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidEventDataStoreCategoryException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidEventDataStoreStatusException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the event configuration settings for the specified event data store. You can update the maximum event size and context key selectors.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#PutEventConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "EventDataStore": {
+                    "target": "com.amazonaws.cloudtrail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which you want to update event configuration settings.</p>"
+                    }
+                },
+                "MaxEventSize": {
+                    "target": "com.amazonaws.cloudtrail#MaxEventSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum allowed size for events to be stored in the specified event data store. If you are using context key selectors, MaxEventSize must be set to Large.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContextKeySelectors": {
+                    "target": "com.amazonaws.cloudtrail#ContextKeySelectors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of context key selectors that will be included to provide enriched event data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#PutEventConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "EventDataStoreArn": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which the event configuration settings were updated.</p>"
+                    }
+                },
+                "MaxEventSize": {
+                    "target": "com.amazonaws.cloudtrail#MaxEventSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum allowed size for events stored in the specified event data store.</p>"
+                    }
+                },
+                "ContextKeySelectors": {
+                    "target": "com.amazonaws.cloudtrail#ContextKeySelectors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of context key selectors that are configured for the event data store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudtrail#PutEventSelectors": {
@@ -8684,6 +8984,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InsufficientIAMAccessPermissionException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidParameterException"
@@ -9533,6 +9836,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cloudtrail#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException"
                 },
                 {
@@ -9929,6 +10235,9 @@
                 "target": "com.amazonaws.cloudtrail#StopEventDataStoreIngestionResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#ConflictException"
+                },
                 {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException"
                 },
@@ -10478,6 +10787,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudtrail#TrailInfo"
+            }
+        },
+        "com.amazonaws.cloudtrail#Type": {
+            "type": "enum",
+            "members": {
+                "TagContext": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TagContext"
+                    }
+                },
+                "RequestContext": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RequestContext"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudtrail#UUID": {

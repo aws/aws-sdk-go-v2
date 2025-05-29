@@ -24091,6 +24091,12 @@
                         "smithy.api#documentation": "<p>The current creation status of the described MLflow Tracking Server.</p>"
                     }
                 },
+                "TrackingServerMaintenanceStatus": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerMaintenanceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current maintenance status of the described MLflow Tracking Server. </p>"
+                    }
+                },
                 "IsActive": {
                     "target": "com.amazonaws.sagemaker#IsTrackingServerActive",
                     "traits": {
@@ -60478,7 +60484,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
+                    "min": 0,
                     "max": 256
                 }
             }
@@ -68645,6 +68651,29 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:mlflow-tracking-server/"
+            }
+        },
+        "com.amazonaws.sagemaker#TrackingServerMaintenanceStatus": {
+            "type": "enum",
+            "members": {
+                "MAINTENANCE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaintenanceInProgress"
+                    }
+                },
+                "MAINTENANCE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaintenanceComplete"
+                    }
+                },
+                "MAINTENANCE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaintenanceFailed"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#TrackingServerName": {

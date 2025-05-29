@@ -150,6 +150,9 @@
                     "target": "com.amazonaws.ivsrealtime#ListParticipantEvents"
                 },
                 {
+                    "target": "com.amazonaws.ivsrealtime#ListParticipantReplicas"
+                },
+                {
                     "target": "com.amazonaws.ivsrealtime#ListParticipants"
                 },
                 {
@@ -171,7 +174,13 @@
                     "target": "com.amazonaws.ivsrealtime#StartComposition"
                 },
                 {
+                    "target": "com.amazonaws.ivsrealtime#StartParticipantReplication"
+                },
+                {
                     "target": "com.amazonaws.ivsrealtime#StopComposition"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#StopParticipantReplication"
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#TagResource"
@@ -217,7 +226,7 @@
                         "date"
                     ]
                 },
-                "smithy.api#documentation": "<p>The Amazon Interactive Video Service (IVS) real-time API is REST compatible, using a standard HTTP \n\t  API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, \n\t  including errors.\n    </p>\n         <p>\n            <b>Key Concepts</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Stage</b> — A virtual space where participants can exchange video in real time.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Participant token</b> — A token that authenticates a participant when they join a stage.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Participant object</b> — Represents participants (people) in the stage and\n            contains information about them. When a token is created, it includes a participant ID;\n            when a participant uses that token to join a stage, the participant is associated with\n            that participant ID. There is a 1:1 mapping between participant tokens and\n            participants.</p>\n            </li>\n         </ul>\n         <p>For server-side composition:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Composition process</b> — Composites participants\n            of a stage into a single video and forwards it to a set of outputs (e.g., IVS channels).\n            Composition operations support this process.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Composition</b> — Controls the look of the outputs,\n            including how participants are positioned in the video.</p>\n            </li>\n         </ul>\n         <p>For more information about your IVS live stream, also see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started.html\">Getting Started with Amazon IVS Real-Time Streaming</a>.</p>\n         <p>\n            <b>Tagging</b>\n         </p>\n         <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag\n      comprises a <i>key</i> and a <i>value</i>, both set by you. For\n      example, you might set a tag as <code>topic:nature</code> to label a particular video\n      category. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n      in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n      limits and requirements\"; Amazon IVS stages has no service-specific constraints beyond what is documented there.</p>\n         <p>Tags can help you identify and organize your AWS resources. For example, you can use the\n      same tag for different resources to indicate that they are related. You can also use tags to\n      manage access (see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Access Tags</a>).</p>\n         <p>The Amazon IVS real-time API has these tag-related operations: <a>TagResource</a>, <a>UntagResource</a>, and\n      <a>ListTagsForResource</a>. The following resource supports tagging: Stage.</p>\n         <p>At most 50 tags can be applied to a resource.</p>",
+                "smithy.api#documentation": "<p>The Amazon Interactive Video Service (IVS) real-time API is REST compatible, using a standard HTTP \n\t  API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, \n\t  including errors.\n    </p>\n         <p>\n            <b>Key Concepts</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Stage</b> — A virtual space where participants can exchange video in real time.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Participant token</b> — A token that authenticates a participant when they join a stage.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Participant object</b> — Represents participants (people) in the stage and\n            contains information about them. When a token is created, it includes a participant ID;\n            when a participant uses that token to join a stage, the participant is associated with\n            that participant ID. There is a 1:1 mapping between participant tokens and\n            participants.</p>\n            </li>\n         </ul>\n         <p>For server-side composition:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Composition process</b> — Composites participants\n            of a stage into a single video and forwards it to a set of outputs (e.g., IVS channels).\n            Composition operations support this process.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Composition</b> — Controls the look of the outputs,\n            including how participants are positioned in the video.</p>\n            </li>\n         </ul>\n         <p>For participant replication:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Source stage</b> — The stage where the participant originally joined, which is used as the source for \n\t\t\treplication.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Destination stage</b> — The stage to which the participant is replicated.\n\t\t\t\t</p>\n            </li>\n            <li>\n               <p>\n                  <b>Replicated participant</b> — A participant in a stage that is replicated to one or more destination stages.\n\t\t\t\t</p>\n            </li>\n            <li>\n               <p>\n                  <b>Replica participant</b> — A participant in a destination stage that is replicated from another stage \n\t\t\t(the source stage).</p>\n            </li>\n         </ul>\n         <p>For more information about your IVS live stream, also see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started.html\">Getting Started with Amazon IVS Real-Time Streaming</a>.</p>\n         <p>\n            <b>Tagging</b>\n         </p>\n         <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag\n      comprises a <i>key</i> and a <i>value</i>, both set by you. For\n      example, you might set a tag as <code>topic:nature</code> to label a particular video\n      category. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n      in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n      limits and requirements\"; Amazon IVS stages has no service-specific constraints beyond what is documented there.</p>\n         <p>Tags can help you identify and organize your AWS resources. For example, you can use the\n      same tag for different resources to indicate that they are related. You can also use tags to\n      manage access (see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Access Tags</a>).</p>\n         <p>The Amazon IVS real-time API has these tag-related operations: <a>TagResource</a>, <a>UntagResource</a>, and\n      <a>ListTagsForResource</a>. The following resource supports tagging: Stage.</p>\n         <p>At most 50 tags can be applied to a resource.</p>",
                 "smithy.api#title": "Amazon Interactive Video Service RealTime",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -929,6 +938,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>HLS configuration object for individual participant recording.</p>"
                     }
+                },
+                "recordParticipantReplicas": {
+                    "target": "com.amazonaws.ivsrealtime#RecordParticipantReplicas",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Optional field to disable replica participant recording. If this is set to <code>false</code> when a \n\t  participant is a replica, replica participants are not recorded. Default: <code>true</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1079,7 +1095,7 @@
                     "target": "com.amazonaws.ivsrealtime#CompositionRecordingTargetSegmentDurationSeconds",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>Defines the target duration for recorded segments generated when using composite recording. \n\t  Segments may have durations shorter than the specified value when needed to ensure each segment \n\t  begins with a keyframe. Default: 2.</p>"
+                        "smithy.api#documentation": "<p>Defines the target duration for recorded segments generated when using composite recording. Default: 2.</p>"
                     }
                 }
             },
@@ -2380,6 +2396,25 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If the event is an error event, the error code is provided to give insight into the\n         specific error that occurred. If the event is not an error event, this field is\n         null.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>B_FRAME_PRESENT</code> — The participant's stream includes B-frames.\n               For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html\"> IVS RTMP\n                  Publishing</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BITRATE_EXCEEDED</code> — The participant exceeded the maximum\n               supported bitrate. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\"> Service\n               Quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CAPABILITIES</code> — The participant tried to take an\n               action that the participant’s token is not allowed to do. For details on participant\n               capabilities, see the <code>capabilities</code> field in <a>CreateParticipantToken</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_SERVER_EXCEPTION</code> — The participant failed to publish\n               to the stage due to an internal server error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_AUDIO_CODEC</code> — The participant is using an invalid audio\n               codec. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html\"> Stream\n               Ingest</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_INPUT</code> — The participant is using an invalid input\n               stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_PROTOCOL</code> — The participant's IngestConfiguration\n               resource is configured for RTMPS but they tried streaming with RTMP. For details, see\n                  <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html\"> IVS RTMP\n                  Publishing</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_STREAM_KEY</code> — The participant is using an invalid stream\n               key. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html\"> IVS RTMP\n                  Publishing</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_VIDEO_CODEC</code> — The participant is using an invalid video\n               codec. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html\"> Stream\n               Ingest</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLISHER_NOT_FOUND</code> — The participant tried to subscribe to a\n               publisher that doesn’t exist.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUOTA_EXCEEDED</code> — The number of participants who want to\n               publish/subscribe to a stage exceeds the quota. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">\n                  Service Quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLUTION_EXCEEDED</code> — The participant exceeded the maximum\n               supported resolution. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\"> Service\n               Quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REUSE_OF_STREAM_KEY</code> — The participant tried to use a stream key\n               that is associated with another active stage session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STREAM_DURATION_EXCEEDED</code> — The participant exceeded the maximum\n               allowed stream duration. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\"> Service\n               Quotas</a>.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "destinationStageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage where the participant is replicated. Applicable only if the event name is \n\t  <code>REPLICATION_STARTED</code> or <code>REPLICATION_STOPPED</code>.</p>"
+                    }
+                },
+                "destinationSessionId": {
+                    "target": "com.amazonaws.ivsrealtime#StageSessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the session within the destination stage. Applicable only if the event name is \n\t  <code>REPLICATION_STARTED</code> or <code>REPLICATION_STOPPED</code>.</p>"
+                    }
+                },
+                "replica": {
+                    "target": "com.amazonaws.ivsrealtime#Replica",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If true, this indicates the <code>participantId</code> is a replicated participant. \n\t  If this is a subscribe event, then this flag refers to <code>remoteParticipantId</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2520,6 +2555,14 @@
                     {
                         "value": "JOIN_ERROR",
                         "name": "JOIN_ERROR"
+                    },
+                    {
+                        "value": "REPLICATION_STARTED",
+                        "name": "REPLICATION_STARTED"
+                    },
+                    {
+                        "value": "REPLICATION_STOPPED",
+                        "name": "REPLICATION_STOPPED"
                     }
                 ]
             }
@@ -3807,6 +3850,92 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ivsrealtime#ListParticipantReplicas": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#ListParticipantReplicasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#ListParticipantReplicasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the replicas for a participant from a source stage.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListParticipantReplicas"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "replicas"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListParticipantReplicasRequest": {
+            "type": "structure",
+            "members": {
+                "sourceStageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage where the participant is publishing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "participantId": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Participant ID of the publisher that has been replicated. This is assigned by IVS and returned by \n\t\t<a>CreateParticipantToken</a> \n\t\tor the <code>jti</code> (JWT ID) used to <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed\">create a self signed token</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ivsrealtime#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first participant to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ivsrealtime#MaxParticipantReplicaResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return. Default: 50.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListParticipantReplicasResponse": {
+            "type": "structure",
+            "members": {
+                "replicas": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantReplicaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of all participant replicas.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ivsrealtime#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are more participants than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ivsrealtime#ListParticipants": {
             "type": "operation",
             "input": {
@@ -4304,6 +4433,15 @@
                 }
             }
         },
+        "com.amazonaws.ivsrealtime#MaxParticipantReplicaResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.ivsrealtime#MaxParticipantResults": {
             "type": "integer",
             "traits": {
@@ -4450,7 +4588,7 @@
                 "recordingS3Prefix": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantRecordingS3Prefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>S3 prefix of the S3 bucket where the participant is being recorded, if individual\n         participant recording is enabled, or <code>\"\"</code> (empty string), if recording is not\n         enabled.</p>"
+                        "smithy.api#documentation": "<p>S3 prefix of the S3 bucket where the participant is being recorded, if individual\n         participant recording is enabled, or <code>\"\"</code> (empty string), if recording is not\n         enabled. If individual participant recording merge is enabled, and if a stage publisher \n\t\t disconnects from a stage and then reconnects, IVS tries to record to the same S3 prefix as \n\t\t the previous session. See \n\t\t <a href=\"/ivs/latest/RealTimeUserGuide/rt-individual-participant-recording.html#ind-part-rec-merge-frag\">\n\t\t Merge Fragmented Individual Participant Recordings</a>.</p>"
                     }
                 },
                 "recordingState": {
@@ -4463,6 +4601,30 @@
                     "target": "com.amazonaws.ivsrealtime#ParticipantProtocol",
                     "traits": {
                         "smithy.api#documentation": "<p>Type of ingest protocol that the participant employs for broadcasting.</p>"
+                    }
+                },
+                "replicationType": {
+                    "target": "com.amazonaws.ivsrealtime#ReplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the participant has been replicated to another stage or is a replica from another stage. Default: <code>NONE</code>. </p>"
+                    }
+                },
+                "replicationState": {
+                    "target": "com.amazonaws.ivsrealtime#ReplicationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The participant's replication state.</p>"
+                    }
+                },
+                "sourceStageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source stage ARN from which this participant is replicated, if <code>replicationType</code> is <code>REPLICA</code>.\n</p>"
+                    }
+                },
+                "sourceSessionId": {
+                    "target": "com.amazonaws.ivsrealtime#StageSessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the session within the source stage, if <code>replicationType</code> is <code>REPLICA</code>.</p>"
                     }
                 }
             },
@@ -4682,6 +4844,62 @@
                 }
             }
         },
+        "com.amazonaws.ivsrealtime#ParticipantReplica": {
+            "type": "structure",
+            "members": {
+                "sourceStageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage from which this participant is replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "participantId": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Participant ID of the publisher that will be replicated. This is assigned by IVS and returned by \n\t\t<a>CreateParticipantToken</a> \n\t\tor the <code>jti</code> (JWT ID) used to <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed\">\n\t\t\t\t  create a self signed token</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceSessionId": {
+                    "target": "com.amazonaws.ivsrealtime#StageSessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the session within the source stage.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationStageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage where the participant is replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationSessionId": {
+                    "target": "com.amazonaws.ivsrealtime#StageSessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the session within the destination stage.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "replicationState": {
+                    "target": "com.amazonaws.ivsrealtime#ReplicationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replica’s current replication state.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the replicated destination stage for a participant.</p>"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantReplicaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivsrealtime#ParticipantReplica"
+            }
+        },
         "com.amazonaws.ivsrealtime#ParticipantState": {
             "type": "string",
             "traits": {
@@ -4735,6 +4953,30 @@
                     "target": "com.amazonaws.ivsrealtime#ParticipantRecordingState",
                     "traits": {
                         "smithy.api#documentation": "<p>The participant’s recording state.</p>"
+                    }
+                },
+                "replicationType": {
+                    "target": "com.amazonaws.ivsrealtime#ReplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the participant has been replicated to another stage or is a replica from another stage. Default: <code>NONE</code>. </p>"
+                    }
+                },
+                "replicationState": {
+                    "target": "com.amazonaws.ivsrealtime#ReplicationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The participant's replication state.</p>"
+                    }
+                },
+                "sourceStageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage from which this participant is replicated.</p>"
+                    }
+                },
+                "sourceSessionId": {
+                    "target": "com.amazonaws.ivsrealtime#StageSessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the session within the source stage, if <code>replicationType</code> is <code>REPLICA</code>.</p>"
                     }
                 }
             },
@@ -4914,7 +5156,14 @@
             }
         },
         "com.amazonaws.ivsrealtime#ParticipantTokenId": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]*$"
+            }
         },
         "com.amazonaws.ivsrealtime#ParticipantTokenList": {
             "type": "list",
@@ -5256,6 +5505,21 @@
                 "smithy.api#default": false
             }
         },
+        "com.amazonaws.ivsrealtime#ReconnectWindowSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 60
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#RecordParticipantReplicas": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
         "com.amazonaws.ivsrealtime#RecordingConfiguration": {
             "type": "structure",
             "members": {
@@ -5283,6 +5547,46 @@
                     {
                         "value": "HLS",
                         "name": "HLS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ivsrealtime#Replica": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.ivsrealtime#ReplicationState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ivsrealtime#ReplicationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SOURCE",
+                        "name": "SOURCE"
+                    },
+                    {
+                        "value": "REPLICA",
+                        "name": "REPLICA"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
                     }
                 ]
             }
@@ -5822,6 +6126,143 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ivsrealtime#StartParticipantReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#StartParticipantReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#StartParticipantReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts replicating a publishing participant from a source stage to a destination stage.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StartParticipantReplication"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#StartParticipantReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "sourceStageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage where the participant is publishing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationStageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage to which the participant will be replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "participantId": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Participant ID of the publisher that will be replicated. This is assigned by IVS and returned by \n\t\t<a>CreateParticipantToken</a> \n\t\tor the <code>jti</code> (JWT ID) used to <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed\">create a self signed token</a>.\n\t  </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reconnectWindowSeconds": {
+                    "target": "com.amazonaws.ivsrealtime#ReconnectWindowSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the participant disconnects and then reconnects within the specified interval, replication will continue to be <code>ACTIVE</code>. \n\t  Default: 0.</p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Application-provided attributes to set on the replicated participant in the destination stage. \n\t  Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. \n\t  <i>This field is exposed to all stage participants and should not be used for personally identifying, \n\t  confidential, or sensitive information.</i>\n         </p>\n         <p>These attributes are merged with any attributes set for this participant when creating the token. \n\t  If there is overlap in keys, the values in these attributes are replaced.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#StartParticipantReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "accessControlAllowOrigin": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Allow-Origin"
+                    }
+                },
+                "accessControlExposeHeaders": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Expose-Headers"
+                    }
+                },
+                "cacheControl": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "contentSecurityPolicy": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Content-Security-Policy"
+                    }
+                },
+                "strictTransportSecurity": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Strict-Transport-Security"
+                    }
+                },
+                "xContentTypeOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Content-Type-Options"
+                    }
+                },
+                "xFrameOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Frame-Options"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ivsrealtime#StopComposition": {
             "type": "operation",
             "input": {
@@ -5876,6 +6317,122 @@
         "com.amazonaws.ivsrealtime#StopCompositionResponse": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#StopParticipantReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#StopParticipantReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#StopParticipantReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a replicated participant session.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StopParticipantReplication"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#StopParticipantReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "sourceStageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage where the participant is publishing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationStageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage where the participant has been replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "participantId": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Participant ID of the publisher that has been replicated. This is assigned by IVS and returned by \n\t\t<a>CreateParticipantToken</a> \n\t\tor the <code>jti</code> (JWT ID) used to <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed\">\n\t\t\t\t  create a self signed token</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#StopParticipantReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "accessControlAllowOrigin": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Allow-Origin"
+                    }
+                },
+                "accessControlExposeHeaders": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Expose-Headers"
+                    }
+                },
+                "cacheControl": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "contentSecurityPolicy": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Content-Security-Policy"
+                    }
+                },
+                "strictTransportSecurity": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Strict-Transport-Security"
+                    }
+                },
+                "xContentTypeOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Content-Type-Options"
+                    }
+                },
+                "xFrameOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Frame-Options"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }

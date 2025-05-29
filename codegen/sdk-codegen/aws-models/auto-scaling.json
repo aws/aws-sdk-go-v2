@@ -2592,7 +2592,7 @@
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The device name assigned to the volume (for example, <code>/dev/sdh</code> or\n                <code>xvdh</code>). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html\">Device naming on Linux\n                instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <note>\n            <p>To define a block device mapping, set the device name and exactly one of the\n                following properties: <code>Ebs</code>, <code>NoDevice</code>, or\n                    <code>VirtualName</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The device name assigned to the volume (for example, <code>/dev/sdh</code> or\n                <code>xvdh</code>). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html\">Device naming on Linux\n                instances</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <note>\n            <p>To define a block device mapping, set the device name and exactly one of the\n                following properties: <code>Ebs</code>, <code>NoDevice</code>, or\n                    <code>VirtualName</code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2947,6 +2947,12 @@
                     "traits": {
                         "smithy.api#enumValue": "amazon-web-services"
                     }
+                },
+                "APPLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "apple"
+                    }
                 }
             }
         },
@@ -3209,7 +3215,7 @@
                 "PlacementGroup": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the placement group into which to launch your instances. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement groups</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <note>\n            <p>A <i>cluster</i> placement group is a logical grouping of instances\n                within a single Availability Zone. You cannot specify multiple Availability Zones\n                and a cluster placement group. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the placement group into which to launch your instances. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement groups</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>\n         <note>\n            <p>A <i>cluster</i> placement group is a logical grouping of instances\n                within a single Availability Zone. You cannot specify multiple Availability Zones\n                and a cluster placement group. </p>\n         </note>"
                     }
                 },
                 "VPCZoneIdentifier": {
@@ -3368,13 +3374,13 @@
                 "ImageId": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) that was assigned during registration. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Find a Linux AMI</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <p>If you specify <code>InstanceId</code>, an <code>ImageId</code> is not\n            required.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) that was assigned during registration. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Find a Linux AMI</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>\n         <p>If you specify <code>InstanceId</code>, an <code>ImageId</code> is not\n            required.</p>"
                     }
                 },
                 "KeyName": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the key pair. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key pairs and Amazon EC2\n                instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of the key pair. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key pairs and Amazon EC2\n                instances</a> in the <i>Amazon EC2 User Guide</i>.</p>"
                     }
                 },
                 "SecurityGroups": {
@@ -3410,25 +3416,25 @@
                 "InstanceType": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the instance type of the EC2 instance. For information about available\n            instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available\n                instance types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <p>If you specify <code>InstanceId</code>, an <code>InstanceType</code> is not\n            required.</p>"
+                        "smithy.api#documentation": "<p>Specifies the instance type of the EC2 instance. For information about available\n            instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available\n                instance types</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>If you specify <code>InstanceId</code>, an <code>InstanceType</code> is not\n            required.</p>"
                     }
                 },
                 "KernelId": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the kernel associated with the AMI.</p>\n         <note>\n            <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html\">User provided\n                    kernels</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The ID of the kernel associated with the AMI.</p>\n         <note>\n            <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html\">User provided\n                    kernels</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "RamdiskId": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the RAM disk to select.</p>\n         <note>\n            <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html\">User provided\n                    kernels</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The ID of the RAM disk to select.</p>\n         <note>\n            <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html\">User provided\n                    kernels</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "BlockDeviceMappings": {
                     "target": "com.amazonaws.autoscaling#BlockDeviceMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block device mapping entries that define the block devices to attach to the\n            instances at launch. By default, the block devices specified in the block device mapping\n            for the AMI are used. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html\">Block device\n                mappings</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+                        "smithy.api#documentation": "<p>The block device mapping entries that define the block devices to attach to the\n            instances at launch. By default, the block devices specified in the block device mapping\n            for the AMI are used. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html\">Block device\n                mappings</a> in the <i>Amazon EC2 User Guide</i>.</p>"
                     }
                 },
                 "InstanceMonitoring": {
@@ -3452,7 +3458,7 @@
                 "EbsOptimized": {
                     "target": "com.amazonaws.autoscaling#EbsOptimized",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the launch configuration is optimized for EBS I/O\n            (<code>true</code>) or not (<code>false</code>). The optimization provides dedicated\n            throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O\n            performance. This optimization is not available with all instance types. Additional fees\n            are incurred when you enable EBS optimization for an instance type that is not\n            EBS-optimized by default. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html\">Amazon EBS-optimized instances</a>\n            in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <p>The default value is <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the launch configuration is optimized for EBS I/O\n            (<code>true</code>) or not (<code>false</code>). The optimization provides dedicated\n            throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O\n            performance. This optimization is not available with all instance types. Additional fees\n            are incurred when you enable EBS optimization for an instance type that is not\n            EBS-optimized by default. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html\">Amazon EBS-optimized instances</a>\n            in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>The default value is <code>false</code>.</p>"
                     }
                 },
                 "AssociatePublicIpAddress": {
@@ -6927,7 +6933,7 @@
                 "CpuManufacturers": {
                     "target": "com.amazonaws.autoscaling#CpuManufacturers",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists which specific CPU manufacturers to include.</p>\n         <ul>\n            <li>\n               <p>For instance types with Intel CPUs, specify <code>intel</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with AMD CPUs, specify <code>amd</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with Amazon Web Services CPUs, specify\n                    <code>amazon-web-services</code>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Don't confuse the CPU hardware manufacturer with the CPU hardware architecture.\n                Instances will be launched with a compatible CPU architecture based on the Amazon\n                Machine Image (AMI) that you specify in your launch template. </p>\n         </note>\n         <p>Default: Any manufacturer</p>"
+                        "smithy.api#documentation": "<p>Lists which specific CPU manufacturers to include.</p>\n         <ul>\n            <li>\n               <p>For instance types with Intel CPUs, specify <code>intel</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with AMD CPUs, specify <code>amd</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with Amazon Web Services CPUs, specify\n                    <code>amazon-web-services</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with Apple CPUs, specify\n                    <code>apple</code>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Don't confuse the CPU hardware manufacturer with the CPU hardware architecture.\n                Instances will be launched with a compatible CPU architecture based on the Amazon\n                Machine Image (AMI) that you specify in your launch template. </p>\n         </note>\n         <p>Default: Any manufacturer</p>"
                     }
                 },
                 "MemoryGiBPerVCpu": {
@@ -6945,7 +6951,7 @@
                 "InstanceGenerations": {
                     "target": "com.amazonaws.autoscaling#InstanceGenerations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether current or previous generation instance types are included.</p>\n         <ul>\n            <li>\n               <p>For current generation instance types, specify <code>current</code>. The\n                    current generation includes EC2 instance types currently recommended for use.\n                    This typically includes the latest two to three generations in each instance\n                    family. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance types</a> in\n                    the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n            </li>\n            <li>\n               <p>For previous generation instance types, specify <code>previous</code>.</p>\n            </li>\n         </ul>\n         <p>Default: Any current or previous generation</p>"
+                        "smithy.api#documentation": "<p>Indicates whether current or previous generation instance types are included.</p>\n         <ul>\n            <li>\n               <p>For current generation instance types, specify <code>current</code>. The\n                    current generation includes EC2 instance types currently recommended for use.\n                    This typically includes the latest two to three generations in each instance\n                    family. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance types</a> in\n                    the <i>Amazon EC2 User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For previous generation instance types, specify <code>previous</code>.</p>\n            </li>\n         </ul>\n         <p>Default: Any current or previous generation</p>"
                     }
                 },
                 "SpotMaxPricePercentageOverLowestPrice": {
@@ -6975,7 +6981,7 @@
                 "BurstablePerformance": {
                     "target": "com.amazonaws.autoscaling#BurstablePerformance",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether burstable performance instance types are included, excluded, or\n            required. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable\n                performance instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <p>Default: <code>excluded</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Indicates whether burstable performance instance types are included, excluded, or\n            required. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable\n                performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>Default: <code>excluded</code>\n         </p>"
                     }
                 },
                 "RequireHibernateSupport": {
@@ -6993,7 +6999,7 @@
                 "LocalStorage": {
                     "target": "com.amazonaws.autoscaling#LocalStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether instance types with instance store volumes are included, excluded,\n            or required. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html\">Amazon EC2 instance store</a> in\n            the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <p>Default: <code>included</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Indicates whether instance types with instance store volumes are included, excluded,\n            or required. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html\">Amazon EC2 instance store</a> in\n            the <i>Amazon EC2 User Guide</i>.</p>\n         <p>Default: <code>included</code>\n         </p>"
                     }
                 },
                 "LocalStorageTypes": {
@@ -7011,7 +7017,7 @@
                 "BaselineEbsBandwidthMbps": {
                     "target": "com.amazonaws.autoscaling#BaselineEbsBandwidthMbpsRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum and maximum baseline bandwidth performance for an instance type, in Mbps.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html\">Amazon EBS–optimized instances</a>\n            in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <p>Default: No minimum or maximum limits</p>"
+                        "smithy.api#documentation": "<p>The minimum and maximum baseline bandwidth performance for an instance type, in Mbps.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html\">Amazon EBS–optimized instances</a>\n            in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>Default: No minimum or maximum limits</p>"
                     }
                 },
                 "AcceleratorTypes": {
@@ -7064,7 +7070,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The attributes for the instance types for a mixed instances policy. Amazon EC2 Auto Scaling uses your\n            specified requirements to identify instance types. Then, it uses your On-Demand and Spot\n            allocation strategies to launch instances from these instance types.</p>\n         <p>When you specify multiple attributes, you get instance types that satisfy all of the\n            specified attributes. If you specify multiple values for an attribute, you get instance\n            types that satisfy any of the specified values.</p>\n         <p>To limit the list of instance types from which Amazon EC2 Auto Scaling can identify matching instance\n            types, you can use one of the following parameters, but not both in the same\n            request:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AllowedInstanceTypes</code> - The instance types to include in the list.\n                    All other instance types are ignored, even if they match your specified\n                    attributes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ExcludedInstanceTypes</code> - The instance types to exclude from the\n                    list, even if they match your specified attributes.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You must specify <code>VCpuCount</code> and <code>MemoryMiB</code>. All other\n                attributes are optional. Any unspecified optional attribute is set to its\n                default.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html\">Create a mixed instances group using attribute-based instance type\n                selection</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For help determining\n            which instance types match your attributes before you apply them to your Auto Scaling group, see\n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-get-instance-types-from-instance-requirements\">Preview instance types with specified attributes</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+                "smithy.api#documentation": "<p>The attributes for the instance types for a mixed instances policy. Amazon EC2 Auto Scaling uses your\n            specified requirements to identify instance types. Then, it uses your On-Demand and Spot\n            allocation strategies to launch instances from these instance types.</p>\n         <p>When you specify multiple attributes, you get instance types that satisfy all of the\n            specified attributes. If you specify multiple values for an attribute, you get instance\n            types that satisfy any of the specified values.</p>\n         <p>To limit the list of instance types from which Amazon EC2 Auto Scaling can identify matching instance\n            types, you can use one of the following parameters, but not both in the same\n            request:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AllowedInstanceTypes</code> - The instance types to include in the list.\n                    All other instance types are ignored, even if they match your specified\n                    attributes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ExcludedInstanceTypes</code> - The instance types to exclude from the\n                    list, even if they match your specified attributes.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You must specify <code>VCpuCount</code> and <code>MemoryMiB</code>. All other\n                attributes are optional. Any unspecified optional attribute is set to its\n                default.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html\">Create a mixed instances group using attribute-based instance type\n                selection</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For help determining\n            which instance types match your attributes before you apply them to your Auto Scaling group, see\n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-get-instance-types-from-instance-requirements\">Preview instance types with specified attributes</a> in the\n            <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#InstanceReusePolicy": {
@@ -7233,14 +7239,14 @@
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Find a Linux AMI</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Find a Linux AMI</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "KeyName": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the key pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key pairs and Amazon EC2\n                instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of the key pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key pairs and Amazon EC2\n                instances</a> in the <i>Amazon EC2 User Guide</i>.</p>"
                     }
                 },
                 "SecurityGroups": {
@@ -7264,14 +7270,14 @@
                 "UserData": {
                     "target": "com.amazonaws.autoscaling#XmlStringUserData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user data to make available to the launched EC2 instances. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> (Linux) and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html\">Instance metadata and\n                user data</a> (Windows). If you are using a command line tool, base64-encoding\n            is performed for you, and you can load the text from a file. Otherwise, you must provide\n            base64-encoded text. User data is limited to 16 KB.</p>"
+                        "smithy.api#documentation": "<p>The user data to make available to the launched EC2 instances. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> in the <i>Amazon EC2 User Guide</i>.\n            If you are using a command line tool, base64-encoding\n            is performed for you, and you can load the text from a file. Otherwise, you must provide\n            base64-encoded text. User data is limited to 16 KB.</p>"
                     }
                 },
                 "InstanceType": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The instance type for the instances. For information about available instance types,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available\n                instance types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>",
+                        "smithy.api#documentation": "<p>The instance type for the instances. For information about available instance types,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available\n                instance types</a> in the <i>Amazon EC2 User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7290,7 +7296,7 @@
                 "BlockDeviceMappings": {
                     "target": "com.amazonaws.autoscaling#BlockDeviceMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block device mapping entries that define the block devices to attach to the\n            instances at launch. By default, the block devices specified in the block device mapping\n            for the AMI are used. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html\">Block device\n                mappings</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+                        "smithy.api#documentation": "<p>The block device mapping entries that define the block devices to attach to the\n            instances at launch. By default, the block devices specified in the block device mapping\n            for the AMI are used. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html\">Block device\n                mappings</a> in the <i>Amazon EC2 User Guide</i>.</p>"
                     }
                 },
                 "InstanceMonitoring": {
@@ -7322,7 +7328,7 @@
                 "EbsOptimized": {
                     "target": "com.amazonaws.autoscaling#EbsOptimized",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the launch configuration is optimized for EBS I/O\n            (<code>true</code>) or not (<code>false</code>). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html\">Amazon EBS-optimized instances</a> in the\n            <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the launch configuration is optimized for EBS I/O\n            (<code>true</code>) or not (<code>false</code>). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html\">Amazon EBS-optimized instances</a> in the\n            <i>Amazon EC2 User Guide</i>.</p>"
                     }
                 },
                 "AssociatePublicIpAddress": {
@@ -7451,7 +7457,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type, such as <code>m3.xlarge</code>. You must specify an instance type\n            that is supported in your requested Region and Availability Zones. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <p>You can specify up to 40 instance types per Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>The instance type, such as <code>m3.xlarge</code>. You must specify an instance type\n            that is supported in your requested Region and Availability Zones. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance types</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>You can specify up to 40 instance types per Auto Scaling group.</p>"
                     }
                 },
                 "WeightedCapacity": {
@@ -8355,7 +8361,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the minimum and maximum for the <code>NetworkBandwidthGbps</code> object\n            when you specify <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html\">InstanceRequirements</a> for an Auto Scaling group.</p>\n         <note>\n            <p>Setting the minimum bandwidth does not guarantee that your instance will achieve\n                the minimum bandwidth. Amazon EC2 will identify instance types that support the specified\n                minimum bandwidth, but the actual bandwidth of your instance might go below the\n                specified minimum at times. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html#available-instance-bandwidth\">Available instance bandwidth</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Specifies the minimum and maximum for the <code>NetworkBandwidthGbps</code> object\n            when you specify <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html\">InstanceRequirements</a> for an Auto Scaling group.</p>\n         <note>\n            <p>Setting the minimum bandwidth does not guarantee that your instance will achieve\n                the minimum bandwidth. Amazon EC2 will identify instance types that support the specified\n                minimum bandwidth, but the actual bandwidth of your instance might go below the\n                specified minimum at times. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html#available-instance-bandwidth\">Available instance bandwidth</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.autoscaling#NetworkInterfaceCountRequest": {
@@ -11188,7 +11194,7 @@
                 "PlacementGroup": {
                     "target": "com.amazonaws.autoscaling#UpdatePlacementGroupParam",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an existing placement group into which to launch your instances. To remove the placement group setting, pass an empty string for <code>placement-group</code>. For more\n            information about placement groups, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement groups</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <note>\n            <p>A <i>cluster</i> placement group is a logical grouping of instances\n                within a single Availability Zone. You cannot specify multiple Availability Zones\n                and a cluster placement group. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of an existing placement group into which to launch your instances. To remove the placement group setting, pass an empty string for <code>placement-group</code>. For more\n            information about placement groups, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement groups</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>\n         <note>\n            <p>A <i>cluster</i> placement group is a logical grouping of instances\n                within a single Availability Zone. You cannot specify multiple Availability Zones\n                and a cluster placement group. </p>\n         </note>"
                     }
                 },
                 "VPCZoneIdentifier": {
