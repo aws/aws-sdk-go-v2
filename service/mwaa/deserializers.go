@@ -2515,6 +2515,15 @@ func awsRestjson1_deserializeDocumentLastUpdate(v **types.LastUpdate, value inte
 				sv.Status = types.UpdateStatus(jtv)
 			}
 
+		case "WorkerReplacementStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkerReplacementStrategy to be of type string, got %T instead", value)
+				}
+				sv.WorkerReplacementStrategy = types.WorkerReplacementStrategy(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

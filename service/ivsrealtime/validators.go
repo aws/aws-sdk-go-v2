@@ -410,6 +410,26 @@ func (m *validateOpListParticipantEvents) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListParticipantReplicas struct {
+}
+
+func (*validateOpListParticipantReplicas) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListParticipantReplicas) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListParticipantReplicasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListParticipantReplicasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListParticipants struct {
 }
 
@@ -490,6 +510,26 @@ func (m *validateOpStartComposition) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartParticipantReplication struct {
+}
+
+func (*validateOpStartParticipantReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartParticipantReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartParticipantReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartParticipantReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopComposition struct {
 }
 
@@ -505,6 +545,26 @@ func (m *validateOpStopComposition) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopCompositionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopParticipantReplication struct {
+}
+
+func (*validateOpStopParticipantReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopParticipantReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopParticipantReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopParticipantReplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -670,6 +730,10 @@ func addOpListParticipantEventsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpListParticipantEvents{}, middleware.After)
 }
 
+func addOpListParticipantReplicasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListParticipantReplicas{}, middleware.After)
+}
+
 func addOpListParticipantsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListParticipants{}, middleware.After)
 }
@@ -686,8 +750,16 @@ func addOpStartCompositionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartComposition{}, middleware.After)
 }
 
+func addOpStartParticipantReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartParticipantReplication{}, middleware.After)
+}
+
 func addOpStopCompositionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopComposition{}, middleware.After)
+}
+
+func addOpStopParticipantReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopParticipantReplication{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1132,6 +1204,24 @@ func validateOpListParticipantEventsInput(v *ListParticipantEventsInput) error {
 	}
 }
 
+func validateOpListParticipantReplicasInput(v *ListParticipantReplicasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListParticipantReplicasInput"}
+	if v.SourceStageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceStageArn"))
+	}
+	if v.ParticipantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListParticipantsInput(v *ListParticipantsInput) error {
 	if v == nil {
 		return nil
@@ -1202,6 +1292,27 @@ func validateOpStartCompositionInput(v *StartCompositionInput) error {
 	}
 }
 
+func validateOpStartParticipantReplicationInput(v *StartParticipantReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartParticipantReplicationInput"}
+	if v.SourceStageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceStageArn"))
+	}
+	if v.DestinationStageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationStageArn"))
+	}
+	if v.ParticipantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopCompositionInput(v *StopCompositionInput) error {
 	if v == nil {
 		return nil
@@ -1209,6 +1320,27 @@ func validateOpStopCompositionInput(v *StopCompositionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopCompositionInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopParticipantReplicationInput(v *StopParticipantReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopParticipantReplicationInput"}
+	if v.SourceStageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceStageArn"))
+	}
+	if v.DestinationStageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationStageArn"))
+	}
+	if v.ParticipantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

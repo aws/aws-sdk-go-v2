@@ -1240,6 +1240,11 @@ func awsRestjson1_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironment
 		ok.String(*v.WeeklyMaintenanceWindowStart)
 	}
 
+	if len(v.WorkerReplacementStrategy) > 0 {
+		ok := object.Key("WorkerReplacementStrategy")
+		ok.String(string(v.WorkerReplacementStrategy))
+	}
+
 	return nil
 }
 

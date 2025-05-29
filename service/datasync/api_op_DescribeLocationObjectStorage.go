@@ -51,14 +51,30 @@ type DescribeLocationObjectStorageOutput struct {
 	// system.
 	AgentArns []string
 
+	// Describes configuration information for a DataSync-managed secret, such as an
+	// authentication token or set of credentials that DataSync uses to access a
+	// specific transfer location, and a customer-managed KMS key.
+	CmkSecretConfig *types.CmkSecretConfig
+
 	// The time that the location was created.
 	CreationTime *time.Time
+
+	// Describes configuration information for a customer-managed secret, such as an
+	// authentication token or set of credentials that DataSync uses to access a
+	// specific transfer location, and a customer-managed KMS key.
+	CustomSecretConfig *types.CustomSecretConfig
 
 	// The ARN of the object storage system location.
 	LocationArn *string
 
 	// The URI of the object storage system location.
 	LocationUri *string
+
+	// Describes configuration information for a DataSync-managed secret, such as an
+	// authentication token or set of credentials that DataSync uses to access a
+	// specific transfer location. DataSync uses the default Amazon Web
+	// Services-managed KMS key to encrypt this secret in Secrets Manager.
+	ManagedSecretConfig *types.ManagedSecretConfig
 
 	// The certificate chain for DataSync to authenticate with your object storage
 	// system if the system uses a private or self-signed certificate authority (CA).

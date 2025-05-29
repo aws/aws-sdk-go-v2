@@ -920,6 +920,36 @@ func (e *InsufficientEncryptionPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// The task can't be completed because you are signed in with an account that
+// lacks permissions to view or create a service-linked role. Sign in with an
+// account that has the required permissions and then try again.
+type InsufficientIAMAccessPermissionException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InsufficientIAMAccessPermissionException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InsufficientIAMAccessPermissionException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InsufficientIAMAccessPermissionException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InsufficientIAMAccessPermissionException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InsufficientIAMAccessPermissionException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // This exception is thrown when the policy on the S3 bucket is not sufficient.
 type InsufficientS3BucketPolicyException struct {
 	Message *string

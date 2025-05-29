@@ -23,6 +23,8 @@ import (
 //
 //   - DailyAutomaticBackupStartTime
 //
+//   - DiskIopsConfiguration
+//
 //   - SelfManagedActiveDirectoryConfiguration
 //
 //   - StorageCapacity
@@ -30,8 +32,6 @@ import (
 //   - StorageType
 //
 //   - ThroughputCapacity
-//
-//   - DiskIopsConfiguration
 //
 //   - WeeklyMaintenanceStartTime
 //
@@ -49,6 +49,8 @@ import (
 //
 //   - LogConfiguration
 //
+//   - LustreReadCacheConfiguration
+//
 //   - LustreRootSquashConfiguration
 //
 //   - MetadataConfiguration
@@ -56,6 +58,8 @@ import (
 //   - PerUnitStorageThroughput
 //
 //   - StorageCapacity
+//
+//   - ThroughputCapacity
 //
 //   - WeeklyMaintenanceStartTime
 //

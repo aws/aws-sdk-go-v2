@@ -75,6 +75,9 @@ type DescribeMlflowTrackingServerOutput struct {
 	// The ARN of the described tracking server.
 	TrackingServerArn *string
 
+	//  The current maintenance status of the described MLflow Tracking Server.
+	TrackingServerMaintenanceStatus types.TrackingServerMaintenanceStatus
+
 	// The name of the described tracking server.
 	TrackingServerName *string
 

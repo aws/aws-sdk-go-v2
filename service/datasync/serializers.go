@@ -3271,6 +3271,40 @@ func awsAwsjson11_serializeDocumentAzureBlobSasConfiguration(v *types.AzureBlobS
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCmkSecretConfig(v *types.CmkSecretConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomSecretConfig(v *types.CustomSecretConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecretAccessRoleArn != nil {
+		ok := object.Key("SecretAccessRoleArn")
+		ok.String(*v.SecretAccessRoleArn)
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDnsIpList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4065,9 +4099,23 @@ func awsAwsjson11_serializeOpDocumentCreateLocationAzureBlobInput(v *CreateLocat
 		ok.String(string(v.BlobType))
 	}
 
+	if v.CmkSecretConfig != nil {
+		ok := object.Key("CmkSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCmkSecretConfig(v.CmkSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ContainerUrl != nil {
 		ok := object.Key("ContainerUrl")
 		ok.String(*v.ContainerUrl)
+	}
+
+	if v.CustomSecretConfig != nil {
+		ok := object.Key("CustomSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCustomSecretConfig(v.CustomSecretConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SasConfiguration != nil {
@@ -4428,6 +4476,20 @@ func awsAwsjson11_serializeOpDocumentCreateLocationObjectStorageInput(v *CreateL
 	if v.BucketName != nil {
 		ok := object.Key("BucketName")
 		ok.String(*v.BucketName)
+	}
+
+	if v.CmkSecretConfig != nil {
+		ok := object.Key("CmkSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCmkSecretConfig(v.CmkSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomSecretConfig != nil {
+		ok := object.Key("CustomSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCustomSecretConfig(v.CustomSecretConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SecretKey != nil {
@@ -5122,6 +5184,20 @@ func awsAwsjson11_serializeOpDocumentUpdateLocationAzureBlobInput(v *UpdateLocat
 		ok.String(string(v.BlobType))
 	}
 
+	if v.CmkSecretConfig != nil {
+		ok := object.Key("CmkSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCmkSecretConfig(v.CmkSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomSecretConfig != nil {
+		ok := object.Key("CustomSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCustomSecretConfig(v.CustomSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LocationArn != nil {
 		ok := object.Key("LocationArn")
 		ok.String(*v.LocationArn)
@@ -5397,6 +5473,20 @@ func awsAwsjson11_serializeOpDocumentUpdateLocationObjectStorageInput(v *UpdateL
 	if v.AgentArns != nil {
 		ok := object.Key("AgentArns")
 		if err := awsAwsjson11_serializeDocumentAgentArnList(v.AgentArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CmkSecretConfig != nil {
+		ok := object.Key("CmkSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCmkSecretConfig(v.CmkSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomSecretConfig != nil {
+		ok := object.Key("CustomSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCustomSecretConfig(v.CustomSecretConfig, ok); err != nil {
 			return err
 		}
 	}

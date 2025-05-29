@@ -65,7 +65,8 @@ type AzureBlobAuthenticationType string
 
 // Enum values for AzureBlobAuthenticationType
 const (
-	AzureBlobAuthenticationTypeSas AzureBlobAuthenticationType = "SAS"
+	AzureBlobAuthenticationTypeSas  AzureBlobAuthenticationType = "SAS"
+	AzureBlobAuthenticationTypeNone AzureBlobAuthenticationType = "NONE"
 )
 
 // Values returns all known values for AzureBlobAuthenticationType. Note that this
@@ -75,6 +76,7 @@ const (
 func (AzureBlobAuthenticationType) Values() []AzureBlobAuthenticationType {
 	return []AzureBlobAuthenticationType{
 		"SAS",
+		"NONE",
 	}
 }
 

@@ -392,8 +392,9 @@ type RateType string
 
 // Enum values for RateType
 const (
-	RateTypeBeforeDiscounts RateType = "BEFORE_DISCOUNTS"
-	RateTypeAfterDiscounts  RateType = "AFTER_DISCOUNTS"
+	RateTypeBeforeDiscounts              RateType = "BEFORE_DISCOUNTS"
+	RateTypeAfterDiscounts               RateType = "AFTER_DISCOUNTS"
+	RateTypeAfterDiscountsAndCommitments RateType = "AFTER_DISCOUNTS_AND_COMMITMENTS"
 )
 
 // Values returns all known values for RateType. Note that this can be expanded in
@@ -404,6 +405,7 @@ func (RateType) Values() []RateType {
 	return []RateType{
 		"BEFORE_DISCOUNTS",
 		"AFTER_DISCOUNTS",
+		"AFTER_DISCOUNTS_AND_COMMITMENTS",
 	}
 }
 
@@ -459,8 +461,9 @@ type WorkloadEstimateRateType string
 
 // Enum values for WorkloadEstimateRateType
 const (
-	WorkloadEstimateRateTypeBeforeDiscounts WorkloadEstimateRateType = "BEFORE_DISCOUNTS"
-	WorkloadEstimateRateTypeAfterDiscounts  WorkloadEstimateRateType = "AFTER_DISCOUNTS"
+	WorkloadEstimateRateTypeBeforeDiscounts              WorkloadEstimateRateType = "BEFORE_DISCOUNTS"
+	WorkloadEstimateRateTypeAfterDiscounts               WorkloadEstimateRateType = "AFTER_DISCOUNTS"
+	WorkloadEstimateRateTypeAfterDiscountsAndCommitments WorkloadEstimateRateType = "AFTER_DISCOUNTS_AND_COMMITMENTS"
 )
 
 // Values returns all known values for WorkloadEstimateRateType. Note that this
@@ -471,6 +474,7 @@ func (WorkloadEstimateRateType) Values() []WorkloadEstimateRateType {
 	return []WorkloadEstimateRateType{
 		"BEFORE_DISCOUNTS",
 		"AFTER_DISCOUNTS",
+		"AFTER_DISCOUNTS_AND_COMMITMENTS",
 	}
 }
 

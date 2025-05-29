@@ -2,6 +2,27 @@
 
 package types
 
+type BuildComputeType string
+
+// Enum values for BuildComputeType
+const (
+	BuildComputeTypeStandard8gb BuildComputeType = "STANDARD_8GB"
+	BuildComputeTypeLarge16gb   BuildComputeType = "LARGE_16GB"
+	BuildComputeTypeXlarge72gb  BuildComputeType = "XLARGE_72GB"
+)
+
+// Values returns all known values for BuildComputeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BuildComputeType) Values() []BuildComputeType {
+	return []BuildComputeType{
+		"STANDARD_8GB",
+		"LARGE_16GB",
+		"XLARGE_72GB",
+	}
+}
+
 type CacheConfigType string
 
 // Enum values for CacheConfigType

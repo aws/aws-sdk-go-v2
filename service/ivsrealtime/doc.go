@@ -29,6 +29,19 @@
 //   - Composition — Controls the look of the outputs, including how participants
 //     are positioned in the video.
 //
+// For participant replication:
+//
+//   - Source stage — The stage where the participant originally joined, which is
+//     used as the source for replication.
+//
+//   - Destination stage — The stage to which the participant is replicated.
+//
+//   - Replicated participant — A participant in a stage that is replicated to one
+//     or more destination stages.
+//
+//   - Replica participant — A participant in a destination stage that is
+//     replicated from another stage (the source stage).
+//
 // For more information about your IVS live stream, also see [Getting Started with Amazon IVS Real-Time Streaming].
 //
 // # Tagging

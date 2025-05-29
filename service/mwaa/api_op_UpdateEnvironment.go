@@ -196,6 +196,17 @@ type UpdateEnvironmentInput struct {
 	// time in 30 minute increments only.
 	WeeklyMaintenanceWindowStart *string
 
+	// The worker replacement strategy to use when updating the environment.
+	//
+	// You can select one of the following strategies:
+	//
+	//   - Forced - Stops and replaces Apache Airflow workers without waiting for
+	//   tasks to complete before an update.
+	//
+	//   - Graceful - Allows Apache Airflow workers to complete running tasks for up
+	//   to 12 hours during an update before they're stopped and replaced.
+	WorkerReplacementStrategy types.WorkerReplacementStrategy
+
 	noSmithyDocumentSerde
 }
 

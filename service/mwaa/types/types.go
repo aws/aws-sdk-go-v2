@@ -313,6 +313,9 @@ type LastUpdate struct {
 	// The status of the last update on the environment.
 	Status UpdateStatus
 
+	// The worker replacement strategy used in the last update of the environment.
+	WorkerReplacementStrategy WorkerReplacementStrategy
+
 	noSmithyDocumentSerde
 }
 

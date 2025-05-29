@@ -350,6 +350,18 @@ func TestCheckSnapshot_ListParticipantEvents(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListParticipantReplicas(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListParticipantReplicas(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListParticipantReplicas")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListParticipants(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListParticipants(context.Background(), nil, func(o *Options) {
@@ -434,11 +446,35 @@ func TestCheckSnapshot_StartComposition(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartParticipantReplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartParticipantReplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartParticipantReplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopComposition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopComposition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopComposition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopParticipantReplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopParticipantReplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopParticipantReplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -781,6 +817,18 @@ func TestUpdateSnapshot_ListParticipantEvents(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListParticipantReplicas(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListParticipantReplicas(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListParticipantReplicas")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListParticipants(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListParticipants(context.Background(), nil, func(o *Options) {
@@ -865,11 +913,35 @@ func TestUpdateSnapshot_StartComposition(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartParticipantReplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartParticipantReplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartParticipantReplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopComposition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopComposition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopComposition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopParticipantReplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopParticipantReplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopParticipantReplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

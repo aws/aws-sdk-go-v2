@@ -103,6 +103,9 @@ type UpdateAppInput struct {
 	// The Amazon Resource Name (ARN) of the IAM service role for the Amplify app.
 	IamServiceRoleArn *string
 
+	// Describes the configuration details that apply to the jobs for an Amplify app.
+	JobConfig *types.JobConfig
+
 	// The name for an Amplify app.
 	Name *string
 

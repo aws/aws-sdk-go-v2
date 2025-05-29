@@ -10860,6 +10860,11 @@ func awsAwsjson11_deserializeDocumentLustreFileSystemConfiguration(v **types.Lus
 				sv.DataCompressionType = types.DataCompressionType(jtv)
 			}
 
+		case "DataReadCacheConfiguration":
+			if err := awsAwsjson11_deserializeDocumentLustreReadCacheConfiguration(&sv.DataReadCacheConfiguration, value); err != nil {
+				return err
+			}
+
 		case "DataRepositoryConfiguration":
 			if err := awsAwsjson11_deserializeDocumentDataRepositoryConfiguration(&sv.DataRepositoryConfiguration, value); err != nil {
 				return err
@@ -10927,6 +10932,19 @@ func awsAwsjson11_deserializeDocumentLustreFileSystemConfiguration(v **types.Lus
 		case "RootSquashConfiguration":
 			if err := awsAwsjson11_deserializeDocumentLustreRootSquashConfiguration(&sv.RootSquashConfiguration, value); err != nil {
 				return err
+			}
+
+		case "ThroughputCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ThroughputCapacityMbps to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThroughputCapacity = ptr.Int32(int32(i64))
 			}
 
 		case "WeeklyMaintenanceStartTime":
@@ -11029,6 +11047,59 @@ func awsAwsjson11_deserializeDocumentLustreNoSquashNids(v *[]string, value inter
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLustreReadCacheConfiguration(v **types.LustreReadCacheConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LustreReadCacheConfiguration
+	if *v == nil {
+		sv = &types.LustreReadCacheConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SizeGiB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StorageCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SizeGiB = ptr.Int32(int32(i64))
+			}
+
+		case "SizingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LustreReadCacheSizingMode to be of type string, got %T instead", value)
+				}
+				sv.SizingMode = types.LustreReadCacheSizingMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

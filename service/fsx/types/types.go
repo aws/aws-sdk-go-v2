@@ -531,17 +531,11 @@ type CreateFileCacheLustreConfiguration struct {
 	// This member is required.
 	PerUnitStorageThroughput *int32
 
-	// A recurring weekly time, in the format D:HH:MM .
-	//
-	// D is the day of the week, for which 1 represents Monday and 7 represents
-	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
-	//
-	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
-	// of the hour.
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
+	// the UTC time zone, where d is the weekday number, from 1 through 7, beginning
+	// with Monday and ending with Sunday.
 	//
 	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
-	//
-	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -632,6 +626,11 @@ type CreateFileSystemLustreConfiguration struct {
 	// [Lustre data compression]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html
 	DataCompressionType DataCompressionType
 
+	// Specifies the optional provisioned SSD read cache on FSx for Lustre file
+	// systems that use the Intelligent-Tiering storage class. Required when
+	// StorageType is set to INTELLIGENT_TIERING .
+	DataReadCacheConfiguration *LustreReadCacheConfiguration
+
 	// (Optional) Choose SCRATCH_1 and SCRATCH_2 deployment types when you need
 	// temporary storage and shorter-term processing of data. The SCRATCH_2 deployment
 	// type provides in-transit encryption of data and higher burst throughput capacity
@@ -643,13 +642,13 @@ type CreateFileSystemLustreConfiguration struct {
 	// FSx for Lustre is available.
 	//
 	// Choose PERSISTENT_2 for longer-term storage and for latency-sensitive workloads
-	// that require the highest levels of IOPS/throughput. PERSISTENT_2 supports SSD
-	// storage, and offers higher PerUnitStorageThroughput (up to 1000 MB/s/TiB). You
-	// can optionally specify a metadata configuration mode for PERSISTENT_2 which
-	// supports increasing metadata performance. PERSISTENT_2 is available in a
-	// limited number of Amazon Web Services Regions. For more information, and an
-	// up-to-date list of Amazon Web Services Regions in which PERSISTENT_2 is
-	// available, see [File system deployment options for FSx for Lustre]in the Amazon FSx for Lustre User Guide.
+	// that require the highest levels of IOPS/throughput. PERSISTENT_2 supports the
+	// SSD and Intelligent-Tiering storage classes. You can optionally specify a
+	// metadata configuration mode for PERSISTENT_2 which supports increasing metadata
+	// performance. PERSISTENT_2 is available in a limited number of Amazon Web
+	// Services Regions. For more information, and an up-to-date list of Amazon Web
+	// Services Regions in which PERSISTENT_2 is available, see [Deployment and storage class options for FSx for Lustre file systems] in the Amazon FSx for
+	// Lustre User Guide.
 	//
 	// If you choose PERSISTENT_2 , and you set FileSystemTypeVersion to 2.10 , the
 	// CreateFileSystem operation fails.
@@ -662,7 +661,7 @@ type CreateFileSystemLustreConfiguration struct {
 	//
 	// (Default = SCRATCH_1 )
 	//
-	// [File system deployment options for FSx for Lustre]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html#lustre-deployment-types
+	// [Deployment and storage class options for FSx for Lustre file systems]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html
 	// [Encrypting data in transit]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html
 	DeploymentType LustreDeploymentType
 
@@ -732,13 +731,13 @@ type CreateFileSystemLustreConfiguration struct {
 	// Lustre file system using a PERSISTENT_2 deployment type.
 	MetadataConfiguration *CreateFileSystemLustreMetadataConfiguration
 
-	// Required with PERSISTENT_1 and PERSISTENT_2 deployment types, provisions the
-	// amount of read and write throughput for each 1 tebibyte (TiB) of file system
-	// storage capacity, in MB/s/TiB. File system throughput capacity is calculated by
-	// multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput
-	// (MB/s/TiB). For a 2.4-TiB ﬁle system, provisioning 50 MB/s/TiB of
-	// PerUnitStorageThroughput yields 120 MB/s of ﬁle system throughput. You pay for
-	// the amount of throughput that you provision.
+	// Required with PERSISTENT_1 and PERSISTENT_2 deployment types using an SSD or
+	// HDD storage class, provisions the amount of read and write throughput for each 1
+	// tebibyte (TiB) of file system storage capacity, in MB/s/TiB. File system
+	// throughput capacity is calculated by multiplying ﬁle system storage capacity
+	// (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4-TiB ﬁle system,
+	// provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 120 MB/s of ﬁle
+	// system throughput. You pay for the amount of throughput that you provision.
 	//
 	// Valid values:
 	//
@@ -753,6 +752,12 @@ type CreateFileSystemLustreConfiguration struct {
 	// Lustre file system. When enabled, root squash restricts root-level access from
 	// clients that try to access your file system as a root user.
 	RootSquashConfiguration *LustreRootSquashConfiguration
+
+	// Specifies the throughput of an FSx for Lustre file system using the
+	// Intelligent-Tiering storage class, measured in megabytes per second (MBps).
+	// Valid values are 4000 MBps or multiples of 4000 MBps. You pay for the amount of
+	// throughput that you provision.
+	ThroughputCapacity *int32
 
 	// (Optional) The preferred start time to perform weekly maintenance, formatted
 	// d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7,
@@ -776,9 +781,9 @@ type CreateFileSystemLustreMetadataConfiguration struct {
 	// The metadata configuration mode for provisioning Metadata IOPS for an FSx for
 	// Lustre file system using a PERSISTENT_2 deployment type.
 	//
-	//   - In AUTOMATIC mode, FSx for Lustre automatically provisions and scales the
-	//   number of Metadata IOPS for your file system based on your file system storage
-	//   capacity.
+	//   - In AUTOMATIC mode (supported only on SSD file systems), FSx for Lustre
+	//   automatically provisions and scales the number of Metadata IOPS for your file
+	//   system based on your file system storage capacity.
 	//
 	//   - In USER_PROVISIONED mode, you specify the number of Metadata IOPS to
 	//   provision for your file system.
@@ -788,8 +793,12 @@ type CreateFileSystemLustreMetadataConfiguration struct {
 
 	// (USER_PROVISIONED mode only) Specifies the number of Metadata IOPS to provision
 	// for the file system. This parameter sets the maximum rate of metadata disk IOPS
-	// supported by the file system. Valid values are 1500 , 3000 , 6000 , 12000 , and
-	// multiples of 12000 up to a maximum of 192000 .
+	// supported by the file system.
+	//
+	//   - For SSD file systems, valid values are 1500 , 3000 , 6000 , 12000 , and
+	//   multiples of 12000 up to a maximum of 192000 .
+	//
+	//   - For Intelligent-Tiering file systems, valid values are 6000 and 12000 .
 	//
 	// Iops doesn’t have a default value. If you're using USER_PROVISIONED mode, you
 	// can choose to specify a valid value. If you're using AUTOMATIC mode, you cannot
@@ -938,17 +947,11 @@ type CreateFileSystemOntapConfiguration struct {
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
 
-	// A recurring weekly time, in the format D:HH:MM .
-	//
-	// D is the day of the week, for which 1 represents Monday and 7 represents
-	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
-	//
-	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
-	// of the hour.
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
+	// the UTC time zone, where d is the weekday number, from 1 through 7, beginning
+	// with Monday and ending with Sunday.
 	//
 	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
-	//
-	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -990,7 +993,7 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	DeploymentType OpenZFSDeploymentType
 
 	// Specifies the throughput of an Amazon FSx for OpenZFS file system, measured in
-	// megabytes per second (MBps). Valid values depend on the DeploymentType you
+	// megabytes per second (MBps). Valid values depend on the DeploymentType that you
 	// choose, as follows:
 	//
 	//   - For MULTI_AZ_1 and SINGLE_AZ_2 , valid values are 160, 320, 640, 1280, 2560,
@@ -1043,7 +1046,8 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// your file system will be created. By default in the Amazon FSx API and Amazon
 	// FSx console, Amazon FSx selects an available /28 IP address range for you from
 	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
-	// file systems deployed in the same VPC/route tables.
+	// file systems deployed in the same VPC/route tables, as long as they don't
+	// overlap with any subnet.
 	EndpointIpAddressRange *string
 
 	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
@@ -1065,17 +1069,11 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// route table.
 	RouteTableIds []string
 
-	// A recurring weekly time, in the format D:HH:MM .
-	//
-	// D is the day of the week, for which 1 represents Monday and 7 represents
-	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
-	//
-	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
-	// of the hour.
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
+	// the UTC time zone, where d is the weekday number, from 1 through 7, beginning
+	// with Monday and ending with Sunday.
 	//
 	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
-	//
-	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -1380,11 +1378,12 @@ type CreateOpenZFSVolumeConfiguration struct {
 	ParentVolumeId *string
 
 	// A Boolean value indicating whether tags for the volume should be copied to
-	// snapshots. This value defaults to false . If it's set to true , all tags for the
-	// volume are copied to snapshots where the user doesn't specify tags. If this
-	// value is true , and you specify one or more tags, only the specified tags are
-	// copied to snapshots. If you specify one or more tags when creating the snapshot,
-	// no tags are copied from the volume, regardless of this value.
+	// snapshots. This value defaults to false . If this value is set to true , and you
+	// do not specify any tags, all tags for the original volume are copied over to
+	// snapshots. If this value is set to true , and you do specify one or more tags,
+	// only the specified tags for the original volume are copied over to snapshots. If
+	// you specify one or more tags when creating a new snapshot, no tags are copied
+	// over from the original volume, regardless of this value.
 	CopyTagsToSnapshots *bool
 
 	// Specifies the method used to compress the data on the volume. The compression
@@ -1559,8 +1558,8 @@ type CreateSvmActiveDirectoryConfiguration struct {
 //   - DescribeDataRepositoryAssociations
 //
 // Data repository associations are supported on Amazon File Cache resources and
-// all FSx for Lustre 2.12 and 2.15 file systems, excluding scratch_1 deployment
-// type.
+// all FSx for Lustre 2.12 and 2.15 file systems, excluding Intelligent-Tiering and
+// scratch_1 file systems.
 type DataRepositoryAssociation struct {
 
 	// The system-generated, unique ID of the data repository association.
@@ -2459,17 +2458,11 @@ type FileCacheLustreConfiguration struct {
 	// (MB/s/TiB). The only supported value is 1000 .
 	PerUnitStorageThroughput *int32
 
-	// A recurring weekly time, in the format D:HH:MM .
-	//
-	// D is the day of the week, for which 1 represents Monday and 7 represents
-	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
-	//
-	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
-	// of the hour.
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
+	// the UTC time zone, where d is the weekday number, from 1 through 7, beginning
+	// with Monday and ending with Sunday.
 	//
 	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
-	//
-	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -2611,9 +2604,14 @@ type FileSystem struct {
 	// StorageCapacity is outside of the minimum or maximum values.
 	StorageCapacity *int32
 
-	// The type of storage the file system is using. If set to SSD , the file system
-	// uses solid state drive storage. If set to HDD , the file system uses hard disk
-	// drive storage.
+	// The type of storage the file system is using.
+	//
+	//   - If set to SSD , the file system uses solid state drive storage.
+	//
+	//   - If set to HDD , the file system uses hard disk drive storage.
+	//
+	//   - If set to INTELLIGENT_TIERING , the file system uses fully elastic,
+	//   intelligently-tiered storage.
 	StorageType StorageType
 
 	// Specifies the IDs of the subnets that the file system is accessible from. For
@@ -2690,9 +2688,9 @@ type FileSystemLustreMetadataConfiguration struct {
 	// The metadata configuration mode for provisioning Metadata IOPS for the file
 	// system.
 	//
-	//   - In AUTOMATIC mode, FSx for Lustre automatically provisions and scales the
-	//   number of Metadata IOPS on your file system based on your file system storage
-	//   capacity.
+	//   - In AUTOMATIC mode (supported only on SSD file systems), FSx for Lustre
+	//   automatically provisions and scales the number of Metadata IOPS on your file
+	//   system based on your file system storage capacity.
 	//
 	//   - In USER_PROVISIONED mode, you can choose to specify the number of Metadata
 	//   IOPS to provision for your file system.
@@ -2700,8 +2698,12 @@ type FileSystemLustreMetadataConfiguration struct {
 	// This member is required.
 	Mode MetadataConfigurationMode
 
-	// The number of Metadata IOPS provisioned for the file system. Valid values are
-	// 1500 , 3000 , 6000 , 12000 , and multiples of 12000 up to a maximum of 192000 .
+	// The number of Metadata IOPS provisioned for the file system.
+	//
+	//   - For SSD file systems, valid values are 1500 , 3000 , 6000 , 12000 , and
+	//   multiples of 12000 up to a maximum of 192000 .
+	//
+	//   - For Intelligent-Tiering file systems, valid values are 6000 and 12000 .
 	Iops *int32
 
 	noSmithyDocumentSerde
@@ -2764,6 +2766,10 @@ type LustreFileSystemConfiguration struct {
 	// [Lustre data compression]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html
 	DataCompressionType DataCompressionType
 
+	// Required when StorageType is set to INTELLIGENT_TIERING . Specifies the optional
+	// provisioned SSD read cache.
+	DataReadCacheConfiguration *LustreReadCacheConfiguration
+
 	// The data repository configuration object for Lustre file systems returned in
 	// the response of the CreateFileSystem operation.
 	//
@@ -2783,11 +2789,11 @@ type LustreFileSystemConfiguration struct {
 	// storage and workloads and encryption of data in transit. PERSISTENT_2 offers
 	// higher PerUnitStorageThroughput (up to 1000 MB/s/TiB) along with a lower
 	// minimum storage capacity requirement (600 GiB). To learn more about FSx for
-	// Lustre deployment types, see [FSx for Lustre deployment options].
+	// Lustre deployment types, see [Deployment and storage class options for FSx for Lustre file systems].
 	//
 	// The default is SCRATCH_1 .
 	//
-	// [FSx for Lustre deployment options]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html
+	// [Deployment and storage class options for FSx for Lustre file systems]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html
 	DeploymentType LustreDeploymentType
 
 	// The type of drive cache used by PERSISTENT_1 file systems that are provisioned
@@ -2837,6 +2843,10 @@ type LustreFileSystemConfiguration struct {
 	// When enabled, root squash restricts root-level access from clients that try to
 	// access your file system as a root user.
 	RootSquashConfiguration *LustreRootSquashConfiguration
+
+	// The throughput of an Amazon FSx for Lustre file system using the
+	// Intelligent-Tiering storage class, measured in megabytes per second (MBps).
+	ThroughputCapacity *int32
 
 	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
 	// the UTC time zone. Here, d is the weekday number, from 1 through 7, beginning
@@ -2920,6 +2930,34 @@ type LustreLogCreateConfiguration struct {
 	//   - If Level is set to DISABLED , you cannot specify a destination in
 	//   Destination .
 	Destination *string
+
+	noSmithyDocumentSerde
+}
+
+//	The configuration for the optional provisioned SSD read cache on Amazon FSx
+//
+// for Lustre file systems that use the Intelligent-Tiering storage class.
+type LustreReadCacheConfiguration struct {
+
+	//  Required if SizingMode is set to USER_PROVISIONED . Specifies the size of the
+	// file system's SSD read cache, in gibibytes (GiB).
+	//
+	// The SSD read cache size is distributed across provisioned file servers in your
+	// file system. Intelligent-Tiering file systems support a minimum of 32 GiB and
+	// maximum of 131072 GiB for SSD read cache size for every 4,000 MB/s of throughput
+	// capacity provisioned.
+	SizeGiB *int32
+
+	//  Specifies how the provisioned SSD read cache is sized, as follows:
+	//
+	//   - Set to NO_CACHE if you do not want to use an SSD read cache with your
+	//   Intelligent-Tiering file system.
+	//
+	//   - Set to USER_PROVISIONED to specify the exact size of your SSD read cache.
+	//
+	//   - Set to PROPORTIONAL_TO_THROUGHPUT_CAPACITY to have your SSD read cache
+	//   automatically sized based on your throughput capacity.
+	SizingMode LustreReadCacheSizingMode
 
 	noSmithyDocumentSerde
 }
@@ -3107,17 +3145,11 @@ type OntapFileSystemConfiguration struct {
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
 
-	// A recurring weekly time, in the format D:HH:MM .
-	//
-	// D is the day of the week, for which 1 represents Monday and 7 represents
-	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
-	//
-	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
-	// of the hour.
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
+	// the UTC time zone, where d is the weekday number, from 1 through 7, beginning
+	// with Monday and ending with Sunday.
 	//
 	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
-	//
-	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -3390,17 +3422,11 @@ type OpenZFSFileSystemConfiguration struct {
 	// (MBps).
 	ThroughputCapacity *int32
 
-	// A recurring weekly time, in the format D:HH:MM .
-	//
-	// D is the day of the week, for which 1 represents Monday and 7 represents
-	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
-	//
-	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
-	// of the hour.
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
+	// the UTC time zone, where d is the weekday number, from 1 through 7, beginning
+	// with Monday and ending with Sunday.
 	//
 	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
-	//
-	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -3449,9 +3475,9 @@ type OpenZFSOriginSnapshotConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-//	The configuration for the optional provisioned SSD read cache on file systems
+//	The configuration for the optional provisioned SSD read cache on Amazon FSx
 //
-// that use the Intelligent-Tiering storage class.
+// for OpenZFS file systems that use the Intelligent-Tiering storage class.
 type OpenZFSReadCacheConfiguration struct {
 
 	//  Required if SizingMode is set to USER_PROVISIONED . Specifies the size of the
@@ -4177,17 +4203,11 @@ type TieringPolicy struct {
 // The configuration update for an Amazon File Cache resource.
 type UpdateFileCacheLustreConfiguration struct {
 
-	// A recurring weekly time, in the format D:HH:MM .
-	//
-	// D is the day of the week, for which 1 represents Monday and 7 represents
-	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
-	//
-	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
-	// of the hour.
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
+	// the UTC time zone, where d is the weekday number, from 1 through 7, beginning
+	// with Monday and ending with Sunday.
 	//
 	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
-	//
-	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -4249,6 +4269,10 @@ type UpdateFileSystemLustreConfiguration struct {
 	// [Lustre data compression]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html
 	DataCompressionType DataCompressionType
 
+	// Specifies the optional provisioned SSD read cache on Amazon FSx for Lustre file
+	// systems that use the Intelligent-Tiering storage class.
+	DataReadCacheConfiguration *LustreReadCacheConfiguration
+
 	// The Lustre logging configuration used when updating an Amazon FSx for Lustre
 	// file system. When logging is enabled, Lustre logs error and warning events for
 	// data repositories associated with your file system to Amazon CloudWatch Logs.
@@ -4280,6 +4304,12 @@ type UpdateFileSystemLustreConfiguration struct {
 	// clients that try to access your file system as a root user.
 	RootSquashConfiguration *LustreRootSquashConfiguration
 
+	// The throughput of an Amazon FSx for Lustre file system using an
+	// Intelligent-Tiering storage class, measured in megabytes per second (MBps). You
+	// can only increase your file system's throughput. Valid values are 4000 MBps or
+	// multiples of 4000 MBps.
+	ThroughputCapacity *int32
+
 	// (Optional) The preferred start time to perform weekly maintenance, formatted
 	// d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7,
 	// beginning with Monday and ending with Sunday.
@@ -4298,8 +4328,12 @@ type UpdateFileSystemLustreConfiguration struct {
 type UpdateFileSystemLustreMetadataConfiguration struct {
 
 	// (USER_PROVISIONED mode only) Specifies the number of Metadata IOPS to provision
-	// for your file system. Valid values are 1500 , 3000 , 6000 , 12000 , and
-	// multiples of 12000 up to a maximum of 192000 .
+	// for your file system.
+	//
+	//   - For SSD file systems, valid values are 1500 , 3000 , 6000 , 12000 , and
+	//   multiples of 12000 up to a maximum of 192000 .
+	//
+	//   - For Intelligent-Tiering file systems, valid values are 6000 and 12000 .
 	//
 	// The value you provide must be greater than or equal to the current number of
 	// Metadata IOPS provisioned for the file system.
@@ -4308,17 +4342,20 @@ type UpdateFileSystemLustreMetadataConfiguration struct {
 	// The metadata configuration mode for provisioning Metadata IOPS for an FSx for
 	// Lustre file system using a PERSISTENT_2 deployment type.
 	//
-	//   - To increase the Metadata IOPS or to switch from AUTOMATIC mode, specify
-	//   USER_PROVISIONED as the value for this parameter. Then use the Iops parameter
-	//   to provide a Metadata IOPS value that is greater than or equal to the current
-	//   number of Metadata IOPS provisioned for the file system.
+	//   - To increase the Metadata IOPS or to switch an SSD file system from
+	//   AUTOMATIC, specify USER_PROVISIONED as the value for this parameter. Then use
+	//   the Iops parameter to provide a Metadata IOPS value that is greater than or
+	//   equal to the current number of Metadata IOPS provisioned for the file system.
 	//
-	//   - To switch from USER_PROVISIONED mode, specify AUTOMATIC as the value for
-	//   this parameter, but do not input a value for Iops.
+	//   - To switch from USER_PROVISIONED mode on an SSD file system, specify
+	//   AUTOMATIC as the value for this parameter, but do not input a value for Iops.
 	//
-	// If you request to switch from USER_PROVISIONED to AUTOMATIC mode and the
+	//   - If you request to switch from USER_PROVISIONED to AUTOMATIC mode and the
 	//   current Metadata IOPS value is greater than the automated default, FSx for
 	//   Lustre rejects the request because downscaling Metadata IOPS is not supported.
+	//
+	//   - AUTOMATIC mode is not supported on Intelligent-Tiering file systems. For
+	//   Intelligent-Tiering file systems, use USER_PROVISIONED mode.
 	Mode MetadataConfigurationMode
 
 	noSmithyDocumentSerde
@@ -4420,17 +4457,11 @@ type UpdateFileSystemOntapConfiguration struct {
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
 
-	// A recurring weekly time, in the format D:HH:MM .
-	//
-	// D is the day of the week, for which 1 represents Monday and 7 represents
-	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
-	//
-	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
-	// of the hour.
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
+	// the UTC time zone, where d is the weekday number, from 1 through 7, beginning
+	// with Monday and ending with Sunday.
 	//
 	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
-	//
-	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -4499,17 +4530,11 @@ type UpdateFileSystemOpenZFSConfiguration struct {
 	//   4096 MB/s.
 	ThroughputCapacity *int32
 
-	// A recurring weekly time, in the format D:HH:MM .
-	//
-	// D is the day of the week, for which 1 represents Monday and 7 represents
-	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
-	//
-	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
-	// of the hour.
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
+	// the UTC time zone, where d is the weekday number, from 1 through 7, beginning
+	// with Monday and ending with Sunday.
 	//
 	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
-	//
-	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde

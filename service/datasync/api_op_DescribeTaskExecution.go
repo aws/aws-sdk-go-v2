@@ -69,6 +69,9 @@ type DescribeTaskExecutionOutput struct {
 	// location.
 	BytesWritten int64
 
+	// The time that the transfer task ends.
+	EndTime *time.Time
+
 	// The number of logical bytes that DataSync expects to write to the destination
 	// location.
 	EstimatedBytesToTransfer int64
@@ -177,6 +180,12 @@ type DescribeTaskExecutionOutput struct {
 	// [Filtering data transferred by DataSync]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
 	Includes []types.FilterRule
 
+	// The time that the task execution actually begins. For non-queued tasks,
+	// LaunchTime and StartTime are typically the same. For queued tasks, LaunchTime
+	// is typically later than StartTime because previously queued tasks must finish
+	// running before newer tasks can begin.
+	LaunchTime *time.Time
+
 	// The configuration of the manifest that lists the files or objects to transfer.
 	// For more information, see [Specifying what DataSync transfers by using a manifest].
 	//
@@ -205,7 +214,10 @@ type DescribeTaskExecutionOutput struct {
 	// The result of the task execution.
 	Result *types.TaskExecutionResultDetail
 
-	// The time when the task execution started.
+	// The time that DataSync sends the request to start the task execution. For
+	// non-queued tasks, LaunchTime and StartTime are typically the same. For queued
+	// tasks, LaunchTime is typically later than StartTime because previously queued
+	// tasks must finish running before newer tasks can begin.
 	StartTime *time.Time
 
 	// The status of the task execution.

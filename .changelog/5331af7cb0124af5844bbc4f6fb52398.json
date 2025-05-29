@@ -1,0 +1,8 @@
+{
+    "id": "5331af7c-b012-4af5-844b-bc4f6fb52398",
+    "type": "feature",
+    "description": "Adding checksum support for S3 PutBucketOwnershipControls API.",
+    "modules": [
+        "service/s3"
+    ]
+}

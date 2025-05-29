@@ -26,6 +26,11 @@ type AutoParticipantRecordingConfiguration struct {
 	// Types of media to be recorded. Default: AUDIO_VIDEO .
 	MediaTypes []ParticipantRecordingMediaType
 
+	// Optional field to disable replica participant recording. If this is set to false
+	// when a participant is a replica, replica participants are not recorded. Default:
+	// true .
+	RecordParticipantReplicas bool
+
 	// If a stage publisher disconnects and then reconnects within the specified
 	// interval, the multiple recordings will be considered a single recording and
 	// merged together.
@@ -112,8 +117,7 @@ type Composition struct {
 type CompositionRecordingHlsConfiguration struct {
 
 	// Defines the target duration for recorded segments generated when using
-	// composite recording. Segments may have durations shorter than the specified
-	// value when needed to ensure each segment begins with a keyframe. Default: 2.
+	// composite recording. Default: 2.
 	TargetSegmentDurationSeconds *int32
 
 	noSmithyDocumentSerde
@@ -315,6 +319,14 @@ type EncoderConfigurationSummary struct {
 // An occurrence during a stage session.
 type Event struct {
 
+	// ID of the session within the destination stage. Applicable only if the event
+	// name is REPLICATION_STARTED or REPLICATION_STOPPED .
+	DestinationSessionId *string
+
+	// ARN of the stage where the participant is replicated. Applicable only if the
+	// event name is REPLICATION_STARTED or REPLICATION_STOPPED .
+	DestinationStageArn *string
+
 	// If the event is an error event, the error code is provided to give insight into
 	// the specific error that occurred. If the event is not an error event, this field
 	// is null.
@@ -380,6 +392,10 @@ type Event struct {
 	// the publisher. For a publish or join event, this is null. This is assigned by
 	// IVS.
 	RemoteParticipantId *string
+
+	// If true, this indicates the participantId is a replicated participant. If this
+	// is a subscribe event, then this flag refers to remoteParticipantId .
+	Replica bool
 
 	noSmithyDocumentSerde
 }
@@ -576,14 +592,30 @@ type Participant struct {
 
 	// S3 prefix of the S3 bucket where the participant is being recorded, if
 	// individual participant recording is enabled, or "" (empty string), if recording
-	// is not enabled.
+	// is not enabled. If individual participant recording merge is enabled, and if a
+	// stage publisher disconnects from a stage and then reconnects, IVS tries to
+	// record to the same S3 prefix as the previous session. See Merge Fragmented Individual Participant Recordings.
 	RecordingS3Prefix *string
 
 	// The participant’s recording state.
 	RecordingState ParticipantRecordingState
 
+	// The participant's replication state.
+	ReplicationState ReplicationState
+
+	// Indicates if the participant has been replicated to another stage or is a
+	// replica from another stage. Default: NONE .
+	ReplicationType ReplicationType
+
 	// The participant’s SDK version.
 	SdkVersion *string
+
+	// ID of the session within the source stage, if replicationType is REPLICA .
+	SourceSessionId *string
+
+	// Source stage ARN from which this participant is replicated, if replicationType
+	// is REPLICA .
+	SourceStageArn *string
 
 	// Whether the participant is connected to or disconnected from the stage.
 	State ParticipantState
@@ -609,6 +641,45 @@ type ParticipantRecordingHlsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the replicated destination stage for a participant.
+type ParticipantReplica struct {
+
+	// ID of the session within the destination stage.
+	//
+	// This member is required.
+	DestinationSessionId *string
+
+	// ARN of the stage where the participant is replicated.
+	//
+	// This member is required.
+	DestinationStageArn *string
+
+	// Participant ID of the publisher that will be replicated. This is assigned by
+	// IVS and returned by CreateParticipantTokenor the jti (JWT ID) used to [create a self signed token].
+	//
+	// [create a self signed token]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed
+	//
+	// This member is required.
+	ParticipantId *string
+
+	// Replica’s current replication state.
+	//
+	// This member is required.
+	ReplicationState ReplicationState
+
+	// ID of the session within the source stage.
+	//
+	// This member is required.
+	SourceSessionId *string
+
+	// ARN of the stage from which this participant is replicated.
+	//
+	// This member is required.
+	SourceStageArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Summary object describing a participant that has joined a stage.
 type ParticipantSummary struct {
 
@@ -624,6 +695,19 @@ type ParticipantSummary struct {
 
 	// The participant’s recording state.
 	RecordingState ParticipantRecordingState
+
+	// The participant's replication state.
+	ReplicationState ReplicationState
+
+	// Indicates if the participant has been replicated to another stage or is a
+	// replica from another stage. Default: NONE .
+	ReplicationType ReplicationType
+
+	// ID of the session within the source stage, if replicationType is REPLICA .
+	SourceSessionId *string
+
+	// ARN of the stage from which this participant is replicated.
+	SourceStageArn *string
 
 	// Whether the participant is connected to or disconnected from the stage.
 	State ParticipantState

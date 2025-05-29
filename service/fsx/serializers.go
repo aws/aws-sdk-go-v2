@@ -2955,6 +2955,13 @@ func awsAwsjson11_serializeDocumentCreateFileSystemLustreConfiguration(v *types.
 		ok.String(string(v.DataCompressionType))
 	}
 
+	if v.DataReadCacheConfiguration != nil {
+		ok := object.Key("DataReadCacheConfiguration")
+		if err := awsAwsjson11_serializeDocumentLustreReadCacheConfiguration(v.DataReadCacheConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.DeploymentType) > 0 {
 		ok := object.Key("DeploymentType")
 		ok.String(string(v.DeploymentType))
@@ -3009,6 +3016,11 @@ func awsAwsjson11_serializeDocumentCreateFileSystemLustreConfiguration(v *types.
 		if err := awsAwsjson11_serializeDocumentLustreRootSquashConfiguration(v.RootSquashConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.ThroughputCapacity != nil {
+		ok := object.Key("ThroughputCapacity")
+		ok.Integer(*v.ThroughputCapacity)
 	}
 
 	if v.WeeklyMaintenanceStartTime != nil {
@@ -3880,6 +3892,23 @@ func awsAwsjson11_serializeDocumentLustreNoSquashNids(v []string, value smithyjs
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLustreReadCacheConfiguration(v *types.LustreReadCacheConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SizeGiB != nil {
+		ok := object.Key("SizeGiB")
+		ok.Integer(*v.SizeGiB)
+	}
+
+	if len(v.SizingMode) > 0 {
+		ok := object.Key("SizingMode")
+		ok.String(string(v.SizingMode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentLustreRootSquashConfiguration(v *types.LustreRootSquashConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4499,6 +4528,13 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemLustreConfiguration(v *types.
 		ok.String(string(v.DataCompressionType))
 	}
 
+	if v.DataReadCacheConfiguration != nil {
+		ok := object.Key("DataReadCacheConfiguration")
+		if err := awsAwsjson11_serializeDocumentLustreReadCacheConfiguration(v.DataReadCacheConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LogConfiguration != nil {
 		ok := object.Key("LogConfiguration")
 		if err := awsAwsjson11_serializeDocumentLustreLogCreateConfiguration(v.LogConfiguration, ok); err != nil {
@@ -4523,6 +4559,11 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemLustreConfiguration(v *types.
 		if err := awsAwsjson11_serializeDocumentLustreRootSquashConfiguration(v.RootSquashConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.ThroughputCapacity != nil {
+		ok := object.Key("ThroughputCapacity")
+		ok.Integer(*v.ThroughputCapacity)
 	}
 
 	if v.WeeklyMaintenanceStartTime != nil {

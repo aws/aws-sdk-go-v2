@@ -6275,6 +6275,104 @@ func awsAwsjson11_deserializeDocumentAgentListEntry(v **types.AgentListEntry, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCmkSecretConfig(v **types.CmkSecretConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CmkSecretConfig
+	if *v == nil {
+		sv = &types.CmkSecretConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomSecretConfig(v **types.CustomSecretConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomSecretConfig
+	if *v == nil {
+		sv = &types.CustomSecretConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SecretAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamRoleArnOrEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SecretAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDestinationNetworkInterfaceArns(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6917,6 +7015,46 @@ func awsAwsjson11_deserializeDocumentLocationListEntry(v **types.LocationListEnt
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
 				sv.LocationUri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentManagedSecretConfig(v **types.ManagedSecretConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedSecretConfig
+	if *v == nil {
+		sv = &types.ManagedSecretConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
 			}
 
 		default:
@@ -9443,6 +9581,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationAzureBlobOutput(v **Descr
 				sv.BlobType = types.AzureBlobType(jtv)
 			}
 
+		case "CmkSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentCmkSecretConfig(&sv.CmkSecretConfig, value); err != nil {
+				return err
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9457,6 +9600,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationAzureBlobOutput(v **Descr
 					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "CustomSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentCustomSecretConfig(&sv.CustomSecretConfig, value); err != nil {
+				return err
 			}
 
 		case "LocationArn":
@@ -9475,6 +9623,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationAzureBlobOutput(v **Descr
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
 				sv.LocationUri = ptr.String(jtv)
+			}
+
+		case "ManagedSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentManagedSecretConfig(&sv.ManagedSecretConfig, value); err != nil {
+				return err
 			}
 
 		default:
@@ -10162,6 +10315,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationObjectStorageOutput(v **D
 				return err
 			}
 
+		case "CmkSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentCmkSecretConfig(&sv.CmkSecretConfig, value); err != nil {
+				return err
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10176,6 +10334,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationObjectStorageOutput(v **D
 					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "CustomSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentCustomSecretConfig(&sv.CustomSecretConfig, value); err != nil {
+				return err
 			}
 
 		case "LocationArn":
@@ -10194,6 +10357,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationObjectStorageOutput(v **D
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
 				sv.LocationUri = ptr.String(jtv)
+			}
+
+		case "ManagedSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentManagedSecretConfig(&sv.ManagedSecretConfig, value); err != nil {
+				return err
 			}
 
 		case "ServerCertificate":
@@ -10501,6 +10669,22 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 				sv.BytesWritten = i64
 			}
 
+		case "EndTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "EstimatedBytesToTransfer":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10623,6 +10807,22 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 		case "Includes":
 			if err := awsAwsjson11_deserializeDocumentFilterList(&sv.Includes, value); err != nil {
 				return err
+			}
+
+		case "LaunchTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LaunchTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "ManifestConfig":

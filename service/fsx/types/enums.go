@@ -656,6 +656,27 @@ func (LustreDeploymentType) Values() []LustreDeploymentType {
 	}
 }
 
+type LustreReadCacheSizingMode string
+
+// Enum values for LustreReadCacheSizingMode
+const (
+	LustreReadCacheSizingModeNoCache                          LustreReadCacheSizingMode = "NO_CACHE"
+	LustreReadCacheSizingModeUserProvisioned                  LustreReadCacheSizingMode = "USER_PROVISIONED"
+	LustreReadCacheSizingModeProportionalToThroughputCapacity LustreReadCacheSizingMode = "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+)
+
+// Values returns all known values for LustreReadCacheSizingMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LustreReadCacheSizingMode) Values() []LustreReadCacheSizingMode {
+	return []LustreReadCacheSizingMode{
+		"NO_CACHE",
+		"USER_PROVISIONED",
+		"PROPORTIONAL_TO_THROUGHPUT_CAPACITY",
+	}
+}
+
 type MetadataConfigurationMode string
 
 // Enum values for MetadataConfigurationMode

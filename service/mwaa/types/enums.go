@@ -218,3 +218,22 @@ func (WebserverAccessMode) Values() []WebserverAccessMode {
 		"PUBLIC_ONLY",
 	}
 }
+
+type WorkerReplacementStrategy string
+
+// Enum values for WorkerReplacementStrategy
+const (
+	WorkerReplacementStrategyForced   WorkerReplacementStrategy = "FORCED"
+	WorkerReplacementStrategyGraceful WorkerReplacementStrategy = "GRACEFUL"
+)
+
+// Values returns all known values for WorkerReplacementStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkerReplacementStrategy) Values() []WorkerReplacementStrategy {
+	return []WorkerReplacementStrategy{
+		"FORCED",
+		"GRACEFUL",
+	}
+}

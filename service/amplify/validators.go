@@ -939,6 +939,21 @@ func validateCustomRules(v []types.CustomRule) error {
 	}
 }
 
+func validateJobConfig(v *types.JobConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobConfig"}
+	if len(v.BuildComputeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BuildComputeType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSubDomainSetting(v *types.SubDomainSetting) error {
 	if v == nil {
 		return nil
@@ -985,6 +1000,11 @@ func validateOpCreateAppInput(v *CreateAppInput) error {
 	if v.CustomRules != nil {
 		if err := validateCustomRules(v.CustomRules); err != nil {
 			invalidParams.AddNested("CustomRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobConfig != nil {
+		if err := validateJobConfig(v.JobConfig); err != nil {
+			invalidParams.AddNested("JobConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CacheConfig != nil {
@@ -1565,6 +1585,11 @@ func validateOpUpdateAppInput(v *UpdateAppInput) error {
 	if v.CustomRules != nil {
 		if err := validateCustomRules(v.CustomRules); err != nil {
 			invalidParams.AddNested("CustomRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobConfig != nil {
+		if err := validateJobConfig(v.JobConfig); err != nil {
+			invalidParams.AddNested("JobConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CacheConfig != nil {

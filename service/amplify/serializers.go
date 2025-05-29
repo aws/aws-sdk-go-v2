@@ -179,6 +179,13 @@ func awsRestjson1_serializeOpDocumentCreateAppInput(v *CreateAppInput, value smi
 		ok.String(*v.IamServiceRoleArn)
 	}
 
+	if v.JobConfig != nil {
+		ok := object.Key("jobConfig")
+		if err := awsRestjson1_serializeDocumentJobConfig(v.JobConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -3279,6 +3286,13 @@ func awsRestjson1_serializeOpDocumentUpdateAppInput(v *UpdateAppInput, value smi
 		ok.String(*v.IamServiceRoleArn)
 	}
 
+	if v.JobConfig != nil {
+		ok := object.Key("jobConfig")
+		if err := awsRestjson1_serializeDocumentJobConfig(v.JobConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -3903,6 +3917,18 @@ func awsRestjson1_serializeDocumentFileMap(v map[string]string, value smithyjson
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJobConfig(v *types.JobConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BuildComputeType) > 0 {
+		ok := object.Key("buildComputeType")
+		ok.String(string(v.BuildComputeType))
+	}
+
 	return nil
 }
 

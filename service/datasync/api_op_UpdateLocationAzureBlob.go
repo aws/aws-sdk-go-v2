@@ -47,10 +47,15 @@ type UpdateLocationAzureBlobInput struct {
 	// [Access tiers]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers
 	AccessTier types.AzureAccessTier
 
-	// Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect
-	// with your Azure Blob Storage container.
+	// (Optional) Specifies the Amazon Resource Name (ARN) of the DataSync agent that
+	// can connect with your Azure Blob Storage container. If you are setting up an
+	// agentless cross-cloud transfer, you do not need to specify a value for this
+	// parameter.
 	//
 	// You can specify more than one agent. For more information, see [Using multiple agents for your transfer].
+	//
+	// You cannot add or remove agents from a storage location after you initially
+	// create it.
 	//
 	// [Using multiple agents for your transfer]: https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html
 	AgentArns []string
@@ -66,6 +71,16 @@ type UpdateLocationAzureBlobInput struct {
 	//
 	// [Azure Blob Storage documentation]: https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs
 	BlobType types.AzureBlobType
+
+	// Specifies configuration information for a DataSync-managed secret, such as an
+	// authentication token or set of credentials that DataSync uses to access a
+	// specific transfer location, and a customer-managed KMS key.
+	CmkSecretConfig *types.CmkSecretConfig
+
+	// Specifies configuration information for a customer-managed secret, such as an
+	// authentication token or set of credentials that DataSync uses to access a
+	// specific transfer location, and a customer-managed KMS key.
+	CustomSecretConfig *types.CustomSecretConfig
 
 	// Specifies the SAS configuration that allows DataSync to access your Azure Blob
 	// Storage.

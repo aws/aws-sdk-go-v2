@@ -1,0 +1,8 @@
+{
+    "id": "b27f4a5e-dd18-4adc-83c7-03b4841dd096",
+    "type": "feature",
+    "description": "Add support for customizable build instance sizes. CreateApp and UpdateApp operations now accept a new JobConfig parameter composed of BuildComputeType.",
+    "modules": [
+        "service/amplify"
+    ]
+}

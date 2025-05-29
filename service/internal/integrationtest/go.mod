@@ -207,8 +207,6 @@ replace github.com/aws/aws-sdk-go-v2/service/health => ../../../service/health/
 
 replace github.com/aws/aws-sdk-go-v2/service/iam => ../../../service/iam/
 
-replace github.com/aws/aws-sdk-go-v2/service/inspector => ../../../service/inspector/
-
 replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../../service/internal/accept-encoding/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/checksum => ../../../service/internal/checksum/

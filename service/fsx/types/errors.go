@@ -790,7 +790,7 @@ func (e *ResourceNotFound) ErrorCode() string {
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error indicating that a particular service limit was exceeded. You can
-// increase some service limits by contacting Amazon Web Services Support.
+// increase some service limits by contacting Amazon Web ServicesSupport.
 type ServiceLimitExceeded struct {
 	Message *string
 

@@ -1190,6 +1190,11 @@ func awsRestjson1_deserializeOpDocumentCreateEventActionOutput(v **CreateEventAc
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentMapOf__string(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		case "UpdatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3254,6 +3259,11 @@ func awsRestjson1_deserializeOpDocumentGetEventActionOutput(v **GetEventActionOu
 					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentMapOf__string(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "UpdatedAt":

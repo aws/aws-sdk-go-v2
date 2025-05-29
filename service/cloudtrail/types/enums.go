@@ -299,6 +299,25 @@ func (LookupAttributeKey) Values() []LookupAttributeKey {
 	}
 }
 
+type MaxEventSize string
+
+// Enum values for MaxEventSize
+const (
+	MaxEventSizeStandard MaxEventSize = "Standard"
+	MaxEventSizeLarge    MaxEventSize = "Large"
+)
+
+// Values returns all known values for MaxEventSize. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaxEventSize) Values() []MaxEventSize {
+	return []MaxEventSize{
+		"Standard",
+		"Large",
+	}
+}
+
 type QueryStatus string
 
 // Enum values for QueryStatus
@@ -383,5 +402,24 @@ func (RefreshScheduleStatus) Values() []RefreshScheduleStatus {
 	return []RefreshScheduleStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type Type string
+
+// Enum values for Type
+const (
+	TypeTagContext     Type = "TagContext"
+	TypeRequestContext Type = "RequestContext"
+)
+
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Type) Values() []Type {
+	return []Type{
+		"TagContext",
+		"RequestContext",
 	}
 }

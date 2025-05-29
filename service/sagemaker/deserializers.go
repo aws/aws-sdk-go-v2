@@ -97916,6 +97916,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeMlflowTrackingServerOutput(v **De
 				sv.TrackingServerArn = ptr.String(jtv)
 			}
 
+		case "TrackingServerMaintenanceStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrackingServerMaintenanceStatus to be of type string, got %T instead", value)
+				}
+				sv.TrackingServerMaintenanceStatus = types.TrackingServerMaintenanceStatus(jtv)
+			}
+
 		case "TrackingServerName":
 			if value != nil {
 				jtv, ok := value.(string)

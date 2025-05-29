@@ -1,0 +1,8 @@
+{
+    "id": "65d2fe7e-249b-4a63-9c4a-ae557b6b4db6",
+    "type": "feature",
+    "description": "Add support for \"apple\" CpuManufacturer in ABIS",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

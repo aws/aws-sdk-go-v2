@@ -98,6 +98,24 @@ type Channel struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains information types to be included in CloudTrail enriched
+// events.
+type ContextKeySelector struct {
+
+	// A list of keys defined by Type to be included in CloudTrail enriched events.
+	//
+	// This member is required.
+	Equals []string
+
+	// Specifies the type of the event record field in ContextKeySelector. Valid
+	// values include RequestContext, TagContext.
+	//
+	// This member is required.
+	Type Type
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about a CloudTrail Lake dashboard.
 type DashboardDetail struct {
 

@@ -6436,6 +6436,11 @@ func awsRestjson1_deserializeDocumentApp(v **types.App, value interface{}) error
 				sv.IamServiceRoleArn = ptr.String(jtv)
 			}
 
+		case "jobConfig":
+			if err := awsRestjson1_deserializeDocumentJobConfig(&sv.JobConfig, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7981,6 +7986,46 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 		case "summary":
 			if err := awsRestjson1_deserializeDocumentJobSummary(&sv.Summary, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJobConfig(v **types.JobConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JobConfig
+	if *v == nil {
+		sv = &types.JobConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "buildComputeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BuildComputeType to be of type string, got %T instead", value)
+				}
+				sv.BuildComputeType = types.BuildComputeType(jtv)
 			}
 
 		default:

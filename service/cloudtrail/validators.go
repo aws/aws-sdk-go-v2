@@ -590,6 +590,26 @@ func (m *validateOpLookupEvents) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutEventConfiguration struct {
+}
+
+func (*validateOpPutEventConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutEventConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutEventConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutEventConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutEventSelectors struct {
 }
 
@@ -1066,6 +1086,10 @@ func addOpLookupEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpLookupEvents{}, middleware.After)
 }
 
+func addOpPutEventConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutEventConfiguration{}, middleware.After)
+}
+
 func addOpPutEventSelectorsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutEventSelectors{}, middleware.After)
 }
@@ -1196,6 +1220,41 @@ func validateAdvancedFieldSelectors(v []types.AdvancedFieldSelector) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AdvancedFieldSelectors"}
 	for i := range v {
 		if err := validateAdvancedFieldSelector(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContextKeySelector(v *types.ContextKeySelector) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextKeySelector"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Equals == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Equals"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContextKeySelectors(v []types.ContextKeySelector) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextKeySelectors"}
+	for i := range v {
+		if err := validateContextKeySelector(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1873,6 +1932,28 @@ func validateOpLookupEventsInput(v *LookupEventsInput) error {
 	if v.LookupAttributes != nil {
 		if err := validateLookupAttributesList(v.LookupAttributes); err != nil {
 			invalidParams.AddNested("LookupAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutEventConfigurationInput(v *PutEventConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutEventConfigurationInput"}
+	if len(v.MaxEventSize) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxEventSize"))
+	}
+	if v.ContextKeySelectors == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextKeySelectors"))
+	} else if v.ContextKeySelectors != nil {
+		if err := validateContextKeySelectors(v.ContextKeySelectors); err != nil {
+			invalidParams.AddNested("ContextKeySelectors", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

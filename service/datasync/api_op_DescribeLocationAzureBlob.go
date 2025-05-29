@@ -64,14 +64,30 @@ type DescribeLocationAzureBlobOutput struct {
 	// [Azure Blob Storage documentation]: https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs
 	BlobType types.AzureBlobType
 
+	// Describes configuration information for a DataSync-managed secret, such as an
+	// authentication token that DataSync uses to access a specific storage location,
+	// with a customer-managed KMS key.
+	CmkSecretConfig *types.CmkSecretConfig
+
 	// The time that your Azure Blob Storage transfer location was created.
 	CreationTime *time.Time
+
+	// Describes configuration information for a customer-managed secret, such as an
+	// authentication token that DataSync uses to access a specific storage location,
+	// with a customer-managed KMS key.
+	CustomSecretConfig *types.CustomSecretConfig
 
 	// The ARN of your Azure Blob Storage transfer location.
 	LocationArn *string
 
 	// The URL of the Azure Blob Storage container involved in your transfer.
 	LocationUri *string
+
+	// Describes configuration information for a DataSync-managed secret, such as an
+	// authentication token that DataSync uses to access a specific storage location.
+	// DataSync uses the default Amazon Web Services-managed KMS key to encrypt this
+	// secret in Secrets Manager.
+	ManagedSecretConfig *types.ManagedSecretConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

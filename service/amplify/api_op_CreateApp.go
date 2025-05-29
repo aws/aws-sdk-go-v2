@@ -110,6 +110,9 @@ type CreateAppInput struct {
 	// The Amazon Resource Name (ARN) of the IAM service role for the Amplify app.
 	IamServiceRoleArn *string
 
+	// Describes the configuration details that apply to the jobs for an Amplify app.
+	JobConfig *types.JobConfig
+
 	// The OAuth token for a third-party source control system for an Amplify app. The
 	// OAuth token is used to create a webhook and a read-only deploy key using SSH
 	// cloning. The OAuth token is not stored.

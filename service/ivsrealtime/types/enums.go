@@ -101,15 +101,17 @@ type EventName string
 
 // Enum values for EventName
 const (
-	EventNameJoined           EventName = "JOINED"
-	EventNameLeft             EventName = "LEFT"
-	EventNamePublishStarted   EventName = "PUBLISH_STARTED"
-	EventNamePublishStopped   EventName = "PUBLISH_STOPPED"
-	EventNameSubscribeStarted EventName = "SUBSCRIBE_STARTED"
-	EventNameSubscribeStopped EventName = "SUBSCRIBE_STOPPED"
-	EventNamePublishError     EventName = "PUBLISH_ERROR"
-	EventNameSubscribeError   EventName = "SUBSCRIBE_ERROR"
-	EventNameJoinError        EventName = "JOIN_ERROR"
+	EventNameJoined             EventName = "JOINED"
+	EventNameLeft               EventName = "LEFT"
+	EventNamePublishStarted     EventName = "PUBLISH_STARTED"
+	EventNamePublishStopped     EventName = "PUBLISH_STOPPED"
+	EventNameSubscribeStarted   EventName = "SUBSCRIBE_STARTED"
+	EventNameSubscribeStopped   EventName = "SUBSCRIBE_STOPPED"
+	EventNamePublishError       EventName = "PUBLISH_ERROR"
+	EventNameSubscribeError     EventName = "SUBSCRIBE_ERROR"
+	EventNameJoinError          EventName = "JOIN_ERROR"
+	EventNameReplicationStarted EventName = "REPLICATION_STARTED"
+	EventNameReplicationStopped EventName = "REPLICATION_STOPPED"
 )
 
 // Values returns all known values for EventName. Note that this can be expanded
@@ -127,6 +129,8 @@ func (EventName) Values() []EventName {
 		"PUBLISH_ERROR",
 		"SUBSCRIBE_ERROR",
 		"JOIN_ERROR",
+		"REPLICATION_STARTED",
+		"REPLICATION_STOPPED",
 	}
 }
 
@@ -361,6 +365,46 @@ const (
 func (RecordingConfigurationFormat) Values() []RecordingConfigurationFormat {
 	return []RecordingConfigurationFormat{
 		"HLS",
+	}
+}
+
+type ReplicationState string
+
+// Enum values for ReplicationState
+const (
+	ReplicationStateActive  ReplicationState = "ACTIVE"
+	ReplicationStateStopped ReplicationState = "STOPPED"
+)
+
+// Values returns all known values for ReplicationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationState) Values() []ReplicationState {
+	return []ReplicationState{
+		"ACTIVE",
+		"STOPPED",
+	}
+}
+
+type ReplicationType string
+
+// Enum values for ReplicationType
+const (
+	ReplicationTypeSource  ReplicationType = "SOURCE"
+	ReplicationTypeReplica ReplicationType = "REPLICA"
+	ReplicationTypeNone    ReplicationType = "NONE"
+)
+
+// Values returns all known values for ReplicationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationType) Values() []ReplicationType {
+	return []ReplicationType{
+		"SOURCE",
+		"REPLICA",
+		"NONE",
 	}
 }
 

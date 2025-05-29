@@ -224,8 +224,7 @@ type UpdateAutoScalingGroupInput struct {
 
 	// The name of an existing placement group into which to launch your instances. To
 	// remove the placement group setting, pass an empty string for placement-group .
-	// For more information about placement groups, see [Placement groups]in the Amazon EC2 User Guide
-	// for Linux Instances.
+	// For more information about placement groups, see [Placement groups]in the Amazon EC2 User Guide.
 	//
 	// A cluster placement group is a logical grouping of instances within a single
 	// Availability Zone. You cannot specify multiple Availability Zones and a cluster

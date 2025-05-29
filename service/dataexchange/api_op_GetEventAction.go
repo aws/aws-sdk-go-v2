@@ -55,6 +55,9 @@ type GetEventActionOutput struct {
 	// The unique identifier for the event action.
 	Id *string
 
+	// The tags for the event action.
+	Tags map[string]string
+
 	// The date and time that the event action was last updated, in ISO 8601 format.
 	UpdatedAt *time.Time
 

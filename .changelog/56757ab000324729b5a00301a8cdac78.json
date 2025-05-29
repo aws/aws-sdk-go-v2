@@ -1,0 +1,8 @@
+{
+    "id": "56757ab0-0032-4729-b5a0-0301a8cdac78",
+    "type": "feature",
+    "description": "This release adds Tag support for Event Action resource, through which customers can create event actions with Tags and retrieve event actions with Tags.",
+    "modules": [
+        "service/dataexchange"
+    ]
+}

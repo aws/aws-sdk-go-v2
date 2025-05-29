@@ -458,6 +458,13 @@ func awsRestjson1_serializeOpDocumentCreateEventActionInput(v *CreateEventAction
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentMapOf__string(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

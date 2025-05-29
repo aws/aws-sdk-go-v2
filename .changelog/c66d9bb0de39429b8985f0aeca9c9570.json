@@ -1,0 +1,8 @@
+{
+    "id": "c66d9bb0-de39-429b-8985-f0aeca9c9570",
+    "type": "feature",
+    "description": "Add maintenance status field to DescribeMlflowTrackingServer API response",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

@@ -1650,9 +1650,6 @@ func validateOpCreateLocationAzureBlobInput(v *CreateLocationAzureBlobInput) err
 			invalidParams.AddNested("SasConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.AgentArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentArns"))
-	}
 	if v.Tags != nil {
 		if err := validateInputTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -1874,9 +1871,6 @@ func validateOpCreateLocationObjectStorageInput(v *CreateLocationObjectStorageIn
 	}
 	if v.BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
-	}
-	if v.AgentArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentArns"))
 	}
 	if v.Tags != nil {
 		if err := validateInputTagList(v.Tags); err != nil {

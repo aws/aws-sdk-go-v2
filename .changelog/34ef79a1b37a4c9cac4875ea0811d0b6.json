@@ -1,0 +1,8 @@
+{
+    "id": "34ef79a1-b37a-4c9c-ac48-75ea0811d0b6",
+    "type": "feature",
+    "description": "CloudTrail Feature Release: Support for Enriched Events with Configurable Context for Event Data Store",
+    "modules": [
+        "service/cloudtrail"
+    ]
+}

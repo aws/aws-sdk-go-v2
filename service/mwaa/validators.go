@@ -613,14 +613,14 @@ func validateOpUpdateEnvironmentInput(v *UpdateEnvironmentInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.NetworkConfiguration != nil {
-		if err := validateUpdateNetworkConfigurationInput(v.NetworkConfiguration); err != nil {
-			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.LoggingConfiguration != nil {
 		if err := validateLoggingConfigurationInput(v.LoggingConfiguration); err != nil {
 			invalidParams.AddNested("LoggingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NetworkConfiguration != nil {
+		if err := validateUpdateNetworkConfigurationInput(v.NetworkConfiguration); err != nil {
+			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
