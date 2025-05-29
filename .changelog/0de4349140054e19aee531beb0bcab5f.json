@@ -1,8 +1,0 @@
-{
-    "id": "0de43491-4005-4e19-aee5-31beb0bcab5f",
-    "type": "feature",
-    "description": "AgentArns field is made optional for Object Storage and Azure Blob location create requests. Location credentials are now managed via Secrets Manager, and may be encrypted with service managed or customer managed keys. Authentication is now optional for Azure Blob locations.",
-    "modules": [
-        "service/datasync"
-    ]
-}

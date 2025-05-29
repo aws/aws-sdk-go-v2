@@ -1,8 +1,0 @@
-{
-    "id": "9e4e61c6-95b9-400d-bf76-f400b7fcef75",
-    "type": "feature",
-    "description": "Add AFTER_DISCOUNTS_AND_COMMITMENTS to Workload Estimate Rate Type. Set ListWorkLoadEstimateUsage maxResults range to minimum of 0 and maximum of 300.",
-    "modules": [
-        "service/bcmpricingcalculator"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.35.0 (2025-05-29)
+
+* **Feature**: This release adds Tag support for Event Action resource, through which customers can create event actions with Tags and retrieve event actions with Tags.
+
 # v1.34.3 (2025-04-29)
 
 * **Bug Fix**: **BREAKING CHANGE**: The type of Dataexchange#UpdateRevision$Finalized has been changed from `bool` to `*bool`. efore this change, the field was incorrectly marked as having a default value of false by the service, which made it functionally impossible for users to set this value to false

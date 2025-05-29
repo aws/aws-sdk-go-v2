@@ -1,3 +1,7 @@
+# v1.193.0 (2025-05-29)
+
+* **Feature**: Add maintenance status field to DescribeMlflowTrackingServer API response
+
 # v1.192.0 (2025-05-12)
 
 * **Feature**: No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.

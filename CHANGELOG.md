@@ -1,3 +1,32 @@
+# Release (2025-05-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.33.0](service/amplify/CHANGELOG.md#v1330-2025-05-29)
+  * **Feature**: Add support for customizable build instance sizes. CreateApp and UpdateApp operations now accept a new JobConfig parameter composed of BuildComputeType.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.53.0](service/autoscaling/CHANGELOG.md#v1530-2025-05-29)
+  * **Feature**: Add support for "apple" CpuManufacturer in ABIS
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.5.0](service/bcmpricingcalculator/CHANGELOG.md#v150-2025-05-29)
+  * **Feature**: Add AFTER_DISCOUNTS_AND_COMMITMENTS to Workload Estimate Rate Type. Set ListWorkLoadEstimateUsage maxResults range to minimum of 0 and maximum of 300.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.49.0](service/cloudtrail/CHANGELOG.md#v1490-2025-05-29)
+  * **Feature**: CloudTrail Feature Release: Support for Enriched Events with Configurable Context for Event Data Store
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.35.0](service/dataexchange/CHANGELOG.md#v1350-2025-05-29)
+  * **Feature**: This release adds Tag support for Event Action resource, through which customers can create event actions with Tags and retrieve event actions with Tags.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.49.0](service/datasync/CHANGELOG.md#v1490-2025-05-29)
+  * **Feature**: AgentArns field is made optional for Object Storage and Azure Blob location create requests. Location credentials are now managed via Secrets Manager, and may be encrypted with service managed or customer managed keys. Authentication is now optional for Azure Blob locations.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.54.0](service/fsx/CHANGELOG.md#v1540-2025-05-29)
+  * **Feature**: FSx API changes to support the public launch of new Intelligent Tiering storage class on Amazon FSx for Lustre
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.25.0](service/ivsrealtime/CHANGELOG.md#v1250-2025-05-29)
+  * **Feature**: IVS Real-Time now offers customers the participant replication that allow customers to copy a participant from one stage to another.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.35.0](service/mwaa/CHANGELOG.md#v1350-2025-05-29)
+  * **Feature**: Amazon MWAA now lets you choose a worker replacement strategy when updating an environment. This release adds two worker replacement strategies: FORCED (default), which stops workers immediately, and GRACEFUL, which allows workers to finish current tasks before shutting down.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.80.0](service/s3/CHANGELOG.md#v1800-2025-05-29)
+  * **Feature**: Adding checksum support for S3 PutBucketOwnershipControls API.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.193.0](service/sagemaker/CHANGELOG.md#v11930-2025-05-29)
+  * **Feature**: Add maintenance status field to DescribeMlflowTrackingServer API response
+
 # Release (2025-05-28)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "379afac2-cf32-4a9f-b1ba-439a413135de",
-    "type": "feature",
-    "description": "Amazon Connect Service Feature: Email Recipient Limit Increase",
-    "modules": [
-        "service/connect"
-    ]
-}

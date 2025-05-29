@@ -1,8 +1,0 @@
-{
-    "id": "627cc566-164e-4de4-ab0f-b0124273f642",
-    "type": "feature",
-    "description": "IVS Real-Time now offers customers the participant replication that allow customers to copy a participant from one stage to another.",
-    "modules": [
-        "service/ivsrealtime"
-    ]
-}

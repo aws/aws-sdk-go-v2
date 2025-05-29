@@ -1,3 +1,7 @@
+# v1.53.0 (2025-05-29)
+
+* **Feature**: Add support for "apple" CpuManufacturer in ABIS
+
 # v1.52.4 (2025-04-17)
 
 * **Documentation**: Doc only update for EC2 Auto Scaling.

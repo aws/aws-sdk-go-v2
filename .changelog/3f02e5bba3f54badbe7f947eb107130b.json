@@ -1,8 +1,0 @@
-{
-    "id": "3f02e5bb-a3f5-4bad-be7f-947eb107130b",
-    "type": "feature",
-    "description": "FSx API changes to support the public launch of new Intelligent Tiering storage class on Amazon FSx for Lustre",
-    "modules": [
-        "service/fsx"
-    ]
-}
