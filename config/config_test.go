@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -145,6 +146,17 @@ func TestLoadDefaultConfig(t *testing.T) {
 	_, err := LoadDefaultConfig(context.TODO(), optWithErr)
 	if err == nil {
 		t.Fatal("expect error when optFn returns error, got nil")
+	}
+}
+
+func TestLoadDefaultConfig_EmptyEC2InstanceProfileName(t *testing.T) {
+	t.Setenv(awsEc2InstanceProfileNameEnv, "")
+	_, err := LoadDefaultConfig(context.TODO())
+	if err == nil {
+		t.Fatal("expect error, got none")
+	}
+	if expect, actual := "env AWS_EC2_INSTANCE_PROFILE_NAME cannot be empty", err.Error(); !strings.Contains(actual, expect) {
+		t.Fatalf("expect error %s, got %s", expect, actual)
 	}
 }
 
