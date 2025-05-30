@@ -1,3 +1,7 @@
+# v1.29.0 (2025-05-30)
+
+* **Feature**: This release adds the capability for users to specify an optional Execution IAM policy in the StartJobRun action. The resulting permissions assumed by the job run is the intersection of the permissions in the Execution Role and the specified Execution IAM Policy.
+
 # v1.28.4 (2025-04-10)
 
 * No change notes available for this release.

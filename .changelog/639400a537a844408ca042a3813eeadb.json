@@ -1,8 +1,0 @@
-{
-    "id": "639400a5-37a8-4440-8ca0-42a3813eeadb",
-    "type": "feature",
-    "description": "Release new parameter CapacityReservationConfig in ProductionVariant",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.194.0 (2025-05-30)
+
+* **Feature**: Release new parameter CapacityReservationConfig in ProductionVariant
+
 # v1.193.0 (2025-05-29)
 
 * **Feature**: Add maintenance status field to DescribeMlflowTrackingServer API response

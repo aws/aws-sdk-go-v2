@@ -1,3 +1,11 @@
+# Release (2025-05-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.29.0](service/emrserverless/CHANGELOG.md#v1290-2025-05-30)
+  * **Feature**: This release adds the capability for users to specify an optional Execution IAM policy in the StartJobRun action. The resulting permissions assumed by the job run is the intersection of the permissions in the Execution Role and the specified Execution IAM Policy.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.194.0](service/sagemaker/CHANGELOG.md#v11940-2025-05-30)
+  * **Feature**: Release new parameter CapacityReservationConfig in ProductionVariant
+
 # Release (2025-05-29)
 
 ## General Highlights
