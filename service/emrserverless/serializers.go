@@ -1096,6 +1096,13 @@ func awsRestjson1_serializeOpDocumentStartJobRunInput(v *StartJobRunInput, value
 		}
 	}
 
+	if v.ExecutionIamPolicy != nil {
+		ok := object.Key("executionIamPolicy")
+		if err := awsRestjson1_serializeDocumentJobRunExecutionIamPolicy(v.ExecutionIamPolicy, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ExecutionRoleArn != nil {
 		ok := object.Key("executionRoleArn")
 		ok.String(*v.ExecutionRoleArn)
@@ -1807,6 +1814,25 @@ func awsRestjson1_serializeDocumentJobDriver(v types.JobDriver, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentJobRunExecutionIamPolicy(v *types.JobRunExecutionIamPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Policy != nil {
+		ok := object.Key("policy")
+		ok.String(*v.Policy)
+	}
+
+	if v.PolicyArns != nil {
+		ok := object.Key("policyArns")
+		if err := awsRestjson1_serializeDocumentPolicyArnList(v.PolicyArns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLogTypeList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1926,6 +1952,17 @@ func awsRestjson1_serializeDocumentNetworkConfiguration(v *types.NetworkConfigur
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPolicyArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

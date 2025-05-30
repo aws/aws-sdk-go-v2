@@ -48,6 +48,11 @@ type StartJobRunInput struct {
 	// The configuration overrides for the job run.
 	ConfigurationOverrides *types.ConfigurationOverrides
 
+	// You can pass an optional IAM policy. The resulting job IAM role permissions
+	// will be an intersection of this policy and the policy associated with your job
+	// execution role.
+	ExecutionIamPolicy *types.JobRunExecutionIamPolicy
+
 	// The maximum duration for the job run to run. If the job run runs beyond this
 	// duration, it will be automatically cancelled.
 	ExecutionTimeoutMinutes *int64

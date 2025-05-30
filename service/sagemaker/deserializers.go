@@ -51564,6 +51564,119 @@ func awsAwsjson11_deserializeDocumentEbsStorageSettings(v **types.EbsStorageSett
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEc2CapacityReservation(v **types.Ec2CapacityReservation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Ec2CapacityReservation
+	if *v == nil {
+		sv = &types.Ec2CapacityReservation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailableInstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AvailableInstanceCount = ptr.Int32(int32(i64))
+			}
+
+		case "Ec2CapacityReservationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ec2CapacityReservationId to be of type string, got %T instead", value)
+				}
+				sv.Ec2CapacityReservationId = ptr.String(jtv)
+			}
+
+		case "TotalInstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalInstanceCount = ptr.Int32(int32(i64))
+			}
+
+		case "UsedByCurrentEndpoint":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UsedByCurrentEndpoint = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEc2CapacityReservationsList(v *[]types.Ec2CapacityReservation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Ec2CapacityReservation
+	if *v == nil {
+		cv = []types.Ec2CapacityReservation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Ec2CapacityReservation
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentEc2CapacityReservation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEdge(v **types.Edge, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -75361,6 +75474,11 @@ func awsAwsjson11_deserializeDocumentProductionVariant(v **types.ProductionVaria
 				sv.AcceleratorType = types.ProductionVariantAcceleratorType(jtv)
 			}
 
+		case "CapacityReservationConfig":
+			if err := awsAwsjson11_deserializeDocumentProductionVariantCapacityReservationConfig(&sv.CapacityReservationConfig, value); err != nil {
+				return err
+			}
+
 		case "ContainerStartupHealthCheckTimeoutInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -75510,6 +75628,148 @@ func awsAwsjson11_deserializeDocumentProductionVariant(v **types.ProductionVaria
 					return err
 				}
 				sv.VolumeSizeInGB = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentProductionVariantCapacityReservationConfig(v **types.ProductionVariantCapacityReservationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProductionVariantCapacityReservationConfig
+	if *v == nil {
+		sv = &types.ProductionVariantCapacityReservationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CapacityReservationPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapacityReservationPreference to be of type string, got %T instead", value)
+				}
+				sv.CapacityReservationPreference = types.CapacityReservationPreference(jtv)
+			}
+
+		case "MlReservationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MlReservationArn to be of type string, got %T instead", value)
+				}
+				sv.MlReservationArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentProductionVariantCapacityReservationSummary(v **types.ProductionVariantCapacityReservationSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProductionVariantCapacityReservationSummary
+	if *v == nil {
+		sv = &types.ProductionVariantCapacityReservationSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailableInstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AvailableInstanceCount = ptr.Int32(int32(i64))
+			}
+
+		case "CapacityReservationPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapacityReservationPreference to be of type string, got %T instead", value)
+				}
+				sv.CapacityReservationPreference = types.CapacityReservationPreference(jtv)
+			}
+
+		case "Ec2CapacityReservations":
+			if err := awsAwsjson11_deserializeDocumentEc2CapacityReservationsList(&sv.Ec2CapacityReservations, value); err != nil {
+				return err
+			}
+
+		case "MlReservationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MlReservationArn to be of type string, got %T instead", value)
+				}
+				sv.MlReservationArn = ptr.String(jtv)
+			}
+
+		case "TotalInstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalInstanceCount = ptr.Int32(int32(i64))
+			}
+
+		case "UsedByCurrentEndpoint":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UsedByCurrentEndpoint = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -75901,6 +76161,11 @@ func awsAwsjson11_deserializeDocumentProductionVariantSummary(v **types.Producti
 
 	for key, value := range shape {
 		switch key {
+		case "CapacityReservationConfig":
+			if err := awsAwsjson11_deserializeDocumentProductionVariantCapacityReservationSummary(&sv.CapacityReservationConfig, value); err != nil {
+				return err
+			}
+
 		case "CurrentInstanceCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -87707,6 +87972,15 @@ func awsAwsjson11_deserializeDocumentUnifiedStudioSettings(v **types.UnifiedStud
 					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
 				}
 				sv.ProjectS3Path = ptr.String(jtv)
+			}
+
+		case "SingleSignOnApplicationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SingleSignOnApplicationArn to be of type string, got %T instead", value)
+				}
+				sv.SingleSignOnApplicationArn = ptr.String(jtv)
 			}
 
 		case "StudioWebPortalAccess":

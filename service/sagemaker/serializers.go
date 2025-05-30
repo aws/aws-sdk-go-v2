@@ -30563,6 +30563,13 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 		ok.String(string(v.AcceleratorType))
 	}
 
+	if v.CapacityReservationConfig != nil {
+		ok := object.Key("CapacityReservationConfig")
+		if err := awsAwsjson11_serializeDocumentProductionVariantCapacityReservationConfig(v.CapacityReservationConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ContainerStartupHealthCheckTimeoutInSeconds != nil {
 		ok := object.Key("ContainerStartupHealthCheckTimeoutInSeconds")
 		ok.Integer(*v.ContainerStartupHealthCheckTimeoutInSeconds)
@@ -30652,6 +30659,23 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 	if v.VolumeSizeInGB != nil {
 		ok := object.Key("VolumeSizeInGB")
 		ok.Integer(*v.VolumeSizeInGB)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProductionVariantCapacityReservationConfig(v *types.ProductionVariantCapacityReservationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CapacityReservationPreference) > 0 {
+		ok := object.Key("CapacityReservationPreference")
+		ok.String(string(v.CapacityReservationPreference))
+	}
+
+	if v.MlReservationArn != nil {
+		ok := object.Key("MlReservationArn")
+		ok.String(*v.MlReservationArn)
 	}
 
 	return nil
@@ -33668,6 +33692,11 @@ func awsAwsjson11_serializeDocumentUnifiedStudioSettings(v *types.UnifiedStudioS
 	if v.ProjectS3Path != nil {
 		ok := object.Key("ProjectS3Path")
 		ok.String(*v.ProjectS3Path)
+	}
+
+	if v.SingleSignOnApplicationArn != nil {
+		ok := object.Key("SingleSignOnApplicationArn")
+		ok.String(*v.SingleSignOnApplicationArn)
 	}
 
 	if len(v.StudioWebPortalAccess) > 0 {

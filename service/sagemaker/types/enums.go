@@ -1350,6 +1350,24 @@ func (CandidateStepType) Values() []CandidateStepType {
 	}
 }
 
+type CapacityReservationPreference string
+
+// Enum values for CapacityReservationPreference
+const (
+	CapacityReservationPreferenceCapacityReservationsOnly CapacityReservationPreference = "capacity-reservations-only"
+)
+
+// Values returns all known values for CapacityReservationPreference. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationPreference) Values() []CapacityReservationPreference {
+	return []CapacityReservationPreference{
+		"capacity-reservations-only",
+	}
+}
+
 type CapacitySizeType string
 
 // Enum values for CapacitySizeType

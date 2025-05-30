@@ -540,6 +540,20 @@ type JobRunAttemptSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Optional IAM policy. The resulting job IAM role permissions will be an
+// intersection of the policies passed and the policy associated with your job
+// execution role.
+type JobRunExecutionIamPolicy struct {
+
+	// An IAM inline policy to use as an execution IAM policy.
+	Policy *string
+
+	// A list of Amazon Resource Names (ARNs) to use as an execution IAM policy.
+	PolicyArns []string
+
+	noSmithyDocumentSerde
+}
+
 // The summary of attributes associated with a job run.
 type JobRunSummary struct {
 

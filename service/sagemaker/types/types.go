@@ -5391,6 +5391,27 @@ type EbsStorageSettings struct {
 	noSmithyDocumentSerde
 }
 
+// The EC2 capacity reservations that are shared to an ML capacity reservation.
+type Ec2CapacityReservation struct {
+
+	// The number of instances that are currently available in the EC2 capacity
+	// reservation.
+	AvailableInstanceCount *int32
+
+	// The unique identifier for an EC2 capacity reservation that's part of the ML
+	// capacity reservation.
+	Ec2CapacityReservationId *string
+
+	// The number of instances that you allocated to the EC2 capacity reservation.
+	TotalInstanceCount *int32
+
+	// The number of instances from the EC2 capacity reservation that are being used
+	// by the endpoint.
+	UsedByCurrentEndpoint *int32
+
+	noSmithyDocumentSerde
+}
+
 // A directed edge connecting two lineage entities.
 type Edge struct {
 
@@ -14840,6 +14861,10 @@ type ProductionVariant struct {
 	// production variant.
 	AcceleratorType ProductionVariantAcceleratorType
 
+	// Settings for the capacity reservation for the compute instances that SageMaker
+	// AI reserves for an endpoint.
+	CapacityReservationConfig *ProductionVariantCapacityReservationConfig
+
 	// The timeout value, in seconds, for your inference container to pass health
 	// check by SageMaker Hosting. For more information about health check, see [How Your Container Should Respond to Health Check (Ping) Requests].
 	//
@@ -14936,6 +14961,56 @@ type ProductionVariant struct {
 	// instance associated with the production variant. Currently only Amazon EBS gp2
 	// storage volumes are supported.
 	VolumeSizeInGB *int32
+
+	noSmithyDocumentSerde
+}
+
+// Settings for the capacity reservation for the compute instances that SageMaker
+// AI reserves for an endpoint.
+type ProductionVariantCapacityReservationConfig struct {
+
+	// Options that you can choose for the capacity reservation. SageMaker AI supports
+	// the following options:
+	//
+	// capacity-reservations-only SageMaker AI launches instances only into an ML
+	// capacity reservation. If no capacity is available, the instances fail to launch.
+	CapacityReservationPreference CapacityReservationPreference
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity
+	// reservation that SageMaker AI applies when it deploys the endpoint.
+	MlReservationArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an ML capacity reservation.
+type ProductionVariantCapacityReservationSummary struct {
+
+	// The number of instances that are currently available in the ML capacity
+	// reservation.
+	AvailableInstanceCount *int32
+
+	// The option that you chose for the capacity reservation. SageMaker AI supports
+	// the following options:
+	//
+	// capacity-reservations-only SageMaker AI launches instances only into an ML
+	// capacity reservation. If no capacity is available, the instances fail to launch.
+	CapacityReservationPreference CapacityReservationPreference
+
+	// The EC2 capacity reservations that are shared to this ML capacity reservation,
+	// if any.
+	Ec2CapacityReservations []Ec2CapacityReservation
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity
+	// reservation that SageMaker AI applies when it deploys the endpoint.
+	MlReservationArn *string
+
+	// The number of instances that you allocated to the ML capacity reservation.
+	TotalInstanceCount *int32
+
+	// The number of instances from the ML capacity reservation that are being used by
+	// the endpoint.
+	UsedByCurrentEndpoint *int32
 
 	noSmithyDocumentSerde
 }
@@ -15106,6 +15181,10 @@ type ProductionVariantSummary struct {
 	//
 	// This member is required.
 	VariantName *string
+
+	// Settings for the capacity reservation for the compute instances that SageMaker
+	// AI reserves for an endpoint.
+	CapacityReservationConfig *ProductionVariantCapacityReservationSummary
 
 	// The number of instances associated with the variant.
 	CurrentInstanceCount *int32
@@ -20281,6 +20360,10 @@ type UnifiedStudioSettings struct {
 	// The location where Amazon S3 stores temporary execution data and other
 	// artifacts for the project that corresponds to the domain.
 	ProjectS3Path *string
+
+	// The ARN of the application managed by SageMaker AI and SageMaker Unified Studio
+	// in the Amazon Web Services IAM Identity Center.
+	SingleSignOnApplicationArn *string
 
 	// Sets whether you can access the domain in Amazon SageMaker Studio:
 	//
