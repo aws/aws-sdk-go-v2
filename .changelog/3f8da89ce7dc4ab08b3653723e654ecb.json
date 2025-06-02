@@ -1,8 +1,0 @@
-{
-    "id": "3f8da89c-e7dc-4ab0-8b36-53723e654ecb",
-    "type": "feature",
-    "description": "Support recommendations for Aurora instance and Aurora cluster storage.",
-    "modules": [
-        "service/costoptimizationhub"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.51.0 (2025-06-02)
+
+* **Feature**: Add support for the managed query result in the workgroup APIs. The managed query result configuration enables users to store query results to Athena owned storage.
+
 # v1.50.5 (2025-05-09)
 
 * **Documentation**: Minor API documentation updates

@@ -1,3 +1,7 @@
+# v1.19.0 (2025-06-02)
+
+* **Feature**: Add support for generating match IDs in near real-time.
+
 # v1.18.0 (2025-04-22)
 
 * **Feature**: To expand support for matching records using digital identifiers with TransUnion

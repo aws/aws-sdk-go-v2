@@ -1,8 +1,0 @@
-{
-    "id": "0e521e52-af0a-4f04-94c1-e15b5c8daaf0",
-    "type": "feature",
-    "description": "Add support for filtering ListInsights API calls on MISCONFIGURATION insight category",
-    "modules": [
-        "service/eks"
-    ]
-}

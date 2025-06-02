@@ -1,3 +1,7 @@
+# v1.44.0 (2025-06-02)
+
+* **Feature**: This release adds the Agent Lifecycle Paused State feature to Amazon Bedrock agents. By using an agent's alias, you can temporarily suspend agent operations during maintenance, updates, or other situations.
+
 # v1.43.0 (2025-05-15)
 
 * **Feature**: Amazon Bedrock Flows introduces DoWhile loops nodes, parallel node executions, and enhancements to knowledge base nodes.

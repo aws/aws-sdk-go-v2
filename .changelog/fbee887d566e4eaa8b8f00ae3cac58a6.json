@@ -1,8 +1,0 @@
-{
-    "id": "fbee887d-566e-4eaa-8b8f-00ae3cac58a6",
-    "type": "feature",
-    "description": "This release adds the Agent Lifecycle Paused State feature to Amazon Bedrock agents. By using an agent's alias, you can temporarily suspend agent operations during maintenance, updates, or other situations.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

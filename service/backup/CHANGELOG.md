@@ -1,3 +1,7 @@
+# v1.42.0 (2025-06-02)
+
+* **Feature**: You can now subscribe to Amazon SNS notifications and Amazon EventBridge events for backup indexing. You can now receive notifications when a backup index is created, deleted, or fails to create, enhancing your ability to monitor and track your backup operations.
+
 # v1.41.2 (2025-04-03)
 
 * No change notes available for this release.

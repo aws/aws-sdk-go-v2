@@ -1,3 +1,7 @@
+# v1.65.0 (2025-06-02)
+
+* **Feature**: Add support for filtering ListInsights API calls on MISCONFIGURATION insight category
+
 # v1.64.0 (2025-04-16)
 
 * **Feature**: Added support for new AL2023 ARM64 NVIDIA AMIs to the supported AMITypes.

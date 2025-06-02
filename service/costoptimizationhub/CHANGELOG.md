@@ -1,3 +1,7 @@
+# v1.16.0 (2025-06-02)
+
+* **Feature**: Support recommendations for Aurora instance and Aurora cluster storage.
+
 # v1.15.0 (2025-05-28)
 
 * **Feature**: This release allows customers to modify their preferred commitment term and payment options.

@@ -1,3 +1,25 @@
+# Release (2025-06-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.51.0](service/athena/CHANGELOG.md#v1510-2025-06-02)
+  * **Feature**: Add support for the managed query result in the workgroup APIs. The managed query result configuration enables users to store query results to Athena owned storage.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.42.0](service/backup/CHANGELOG.md#v1420-2025-06-02)
+  * **Feature**: You can now subscribe to Amazon SNS notifications and Amazon EventBridge events for backup indexing. You can now receive notifications when a backup index is created, deleted, or fails to create, enhancing your ability to monitor and track your backup operations.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.44.0](service/bedrockagent/CHANGELOG.md#v1440-2025-06-02)
+  * **Feature**: This release adds the Agent Lifecycle Paused State feature to Amazon Bedrock agents. By using an agent's alias, you can temporarily suspend agent operations during maintenance, updates, or other situations.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.43.0](service/computeoptimizer/CHANGELOG.md#v1430-2025-06-02)
+  * **Feature**: This release enables AWS Compute Optimizer to analyze Amazon Aurora database clusters and generate Aurora I/O-Optimized recommendations.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.16.0](service/costoptimizationhub/CHANGELOG.md#v1160-2025-06-02)
+  * **Feature**: Support recommendations for Aurora instance and Aurora cluster storage.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.57.2](service/ecs/CHANGELOG.md#v1572-2025-06-02)
+  * **Documentation**: Updates Amazon ECS documentation to include note for upcoming default log driver mode change.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.65.0](service/eks/CHANGELOG.md#v1650-2025-06-02)
+  * **Feature**: Add support for filtering ListInsights API calls on MISCONFIGURATION insight category
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.19.0](service/entityresolution/CHANGELOG.md#v1190-2025-06-02)
+  * **Feature**: Add support for generating match IDs in near real-time.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.6.0](service/pcs/CHANGELOG.md#v160-2025-06-02)
+  * **Feature**: Introduces SUSPENDING and SUSPENDED states for clusters, compute node groups, and queues.
+
 # Release (2025-05-30)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.43.0 (2025-06-02)
+
+* **Feature**: This release enables AWS Compute Optimizer to analyze Amazon Aurora database clusters and generate Aurora I/O-Optimized recommendations.
+
 # v1.42.3 (2025-04-10)
 
 * No change notes available for this release.
