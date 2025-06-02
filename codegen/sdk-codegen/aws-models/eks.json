@@ -2414,6 +2414,12 @@
                     "traits": {
                         "smithy.api#enumValue": "UPGRADE_READINESS"
                     }
+                },
+                "MISCONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISCONFIGURATION"
+                    }
                 }
             }
         },
@@ -7087,7 +7093,7 @@
                 "categories": {
                     "target": "com.amazonaws.eks#CategoryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The categories to use to filter insights.</p>"
+                        "smithy.api#documentation": "<p>The categories to use to filter insights. The following lists the available categories:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>UPGRADE_READINESS</code>: Amazon EKS identifies issues that could impact your\n                    ability to upgrade to new versions of Kubernetes. These are called upgrade insights.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURATION</code>: Amazon EKS identifies misconfiguration in your EKS\n                    Hybrid Nodes setup that could impair functionality of your cluster or\n                    workloads. These are called configuration insights.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "kubernetesVersions": {
@@ -8182,7 +8188,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of all insights checked for against the specified cluster. You can\n            filter which insights are returned by category, associated Kubernetes version, and\n            status.</p>",
+                "smithy.api#documentation": "<p>Returns a list of all insights checked for against the specified cluster. You can\n            filter which insights are returned by category, associated Kubernetes version, and\n            status. The default filter lists all categories and every status.</p>\n         <p>The following lists the available categories:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>UPGRADE_READINESS</code>: Amazon EKS identifies issues that could impact your\n                    ability to upgrade to new versions of Kubernetes. These are called upgrade insights.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURATION</code>: Amazon EKS identifies misconfiguration in your EKS\n                    Hybrid Nodes setup that could impair functionality of your cluster or\n                    workloads. These are called configuration insights.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/insights",

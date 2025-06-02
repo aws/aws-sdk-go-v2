@@ -4380,6 +4380,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results (rows) to return in this request.</p>"
                     }
+                },
+                "QueryResultType": {
+                    "target": "com.amazonaws.athena#QueryResultType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> When you set this to <code>DATA_ROWS</code> or empty, <code>GetQueryResults</code>\n            returns the query results in rows. If set to <code>DATA_MANIFEST</code>, it returns the\n            manifest file in rows. Only the query types <code>CREATE TABLE AS SELECT</code>,\n                <code>UNLOAD</code>, and <code>INSERT</code> can generate a manifest file. If you\n            use <code>DATA_MANIFEST</code> for other query types, the query will fail. </p>"
+                    }
                 }
             },
             "traits": {
@@ -6142,6 +6148,69 @@
         "com.amazonaws.athena#Long": {
             "type": "long"
         },
+        "com.amazonaws.athena#ManagedQueryResultsConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.athena#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If set to true, allows you to store query results in Athena owned storage. If set to\n            false, workgroup member stores query results in location specified under\n                <code>ResultConfiguration$OutputLocation</code>. The default is false. A workgroup\n            cannot have the <code>ResultConfiguration$OutputLocation</code> parameter when you set\n            this field to true. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.athena#ManagedQueryResultsEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you encrypt query and calculation results in Athena owned storage, this field\n            indicates the encryption option (for example, SSE_KMS or CSE_KMS) and key\n            information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The configuration for storing results in Athena owned storage, which includes whether this feature is enabled; whether encryption configuration, if any, is used for encrypting query results. \n        </p>"
+            }
+        },
+        "com.amazonaws.athena#ManagedQueryResultsConfigurationUpdates": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.athena#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If set to true, specifies that Athena manages query results in Athena owned\n            storage.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.athena#ManagedQueryResultsEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you encrypt query and calculation results in Athena owned storage, this field\n            indicates the encryption option (for example, SSE_KMS or CSE_KMS) and key\n            information.</p>"
+                    }
+                },
+                "RemoveEncryptionConfiguration": {
+                    "target": "com.amazonaws.athena#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If set to true, it removes workgroup from Athena owned storage. The existing query\n            results are cleaned up after 24hrs. You must provide query results in location specified\n            under <code>ResultConfiguration$OutputLocation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration for managed query results.</p>"
+            }
+        },
+        "com.amazonaws.athena#ManagedQueryResultsEncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "KmsKey": {
+                    "target": "com.amazonaws.athena#KmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of an KMS key for encrypting managed query results.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>If you encrypt query and calculation results in Athena owned storage, this field\n            indicates the encryption option (for example, SSE_KMS or CSE_KMS) and key\n            information.</p>"
+            }
+        },
         "com.amazonaws.athena#MaxApplicationDPUSizesCount": {
             "type": "integer",
             "traits": {
@@ -6690,7 +6759,13 @@
                 "StatementType": {
                     "target": "com.amazonaws.athena#StatementType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of query statement that was run. <code>DDL</code> indicates DDL query\n            statements. <code>DML</code> indicates DML (Data Manipulation Language) query\n            statements, such as <code>CREATE TABLE AS SELECT</code>. <code>UTILITY</code> indicates\n            query statements other than DDL and DML, such as <code>SHOW CREATE TABLE</code>,\n                <code>EXPLAIN</code>, <code>DESCRIBE</code>, or <code>SHOW TABLES</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of query statement that was run. <code>DDL</code> indicates DDL query\n            statements. <code>DML</code> indicates DML (Data Manipulation Language) query\n            statements, such as <code>CREATE TABLE AS SELECT</code>. <code>UTILITY</code> indicates\n            query statements other than DDL and DML, such as <code>SHOW CREATE TABLE</code>, or\n                <code>DESCRIBE TABLE</code>.</p>"
+                    }
+                },
+                "ManagedQueryResultsConfiguration": {
+                    "target": "com.amazonaws.athena#ManagedQueryResultsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The configuration for storing results in Athena owned storage, which includes whether\n            this feature is enabled; whether encryption configuration, if any, is used for\n            encrypting query results. </p>"
                     }
                 },
                 "ResultConfiguration": {
@@ -6939,6 +7014,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The completion date, current state, submission time, and state change reason (if\n            applicable) for the query execution.</p>"
+            }
+        },
+        "com.amazonaws.athena#QueryResultType": {
+            "type": "enum",
+            "members": {
+                "DATA_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_MANIFEST"
+                    }
+                },
+                "DATA_ROWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_ROWS"
+                    }
+                }
             }
         },
         "com.amazonaws.athena#QueryResultsS3AccessGrantsConfiguration": {
@@ -8977,6 +9069,12 @@
                         "smithy.api#documentation": "<p>The configuration for the workgroup, which includes the location in Amazon S3\n            where query and calculation results are stored and the encryption option, if any, used\n            for query and calculation results. To run the query, you must specify the query results\n            location using one of the ways: either in the workgroup using this setting, or for\n            individual queries (client-side), using <a>ResultConfiguration$OutputLocation</a>. If none of them is set, Athena issues an error that no output location is provided.</p>"
                     }
                 },
+                "ManagedQueryResultsConfiguration": {
+                    "target": "com.amazonaws.athena#ManagedQueryResultsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The configuration for storing results in Athena owned storage, which includes whether\n            this feature is enabled; whether encryption configuration, if any, is used for\n            encrypting query results. </p>"
+                    }
+                },
                 "EnforceWorkGroupConfiguration": {
                     "target": "com.amazonaws.athena#BoxedBoolean",
                     "traits": {
@@ -9061,6 +9159,12 @@
                     "target": "com.amazonaws.athena#ResultConfigurationUpdates",
                     "traits": {
                         "smithy.api#documentation": "<p>The result configuration information about the queries in this workgroup that will be\n            updated. Includes the updated results location and an updated option for encrypting\n            query results.</p>"
+                    }
+                },
+                "ManagedQueryResultsConfigurationUpdates": {
+                    "target": "com.amazonaws.athena#ManagedQueryResultsConfigurationUpdates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates configuration information for managed query results in the workgroup.</p>"
                     }
                 },
                 "PublishCloudWatchMetricsEnabled": {

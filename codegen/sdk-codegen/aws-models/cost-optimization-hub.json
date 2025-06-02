@@ -155,6 +155,43 @@
                 }
             }
         },
+        "com.amazonaws.costoptimizationhub#AuroraDbClusterStorage": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "com.amazonaws.costoptimizationhub#AuroraDbClusterStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Aurora DB cluster storage configuration used for recommendations.</p>"
+                    }
+                },
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details of an Aurora DB cluster storage.</p>",
+                "smithy.api#tags": [
+                    "aurora"
+                ]
+            }
+        },
+        "com.amazonaws.costoptimizationhub#AuroraDbClusterStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "storageType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type to associate with the Aurora DB cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Aurora DB cluster storage configuration used for recommendations.</p>",
+                "smithy.api#tags": [
+                    "aurora"
+                ]
+            }
+        },
         "com.amazonaws.costoptimizationhub#BlockStoragePerformanceConfiguration": {
             "type": "structure",
             "members": {
@@ -3337,6 +3374,15 @@
                         "smithy.api#documentation": "<p>The DB instance storage recommendation details.</p>"
                     }
                 },
+                "auroraDbClusterStorage": {
+                    "target": "com.amazonaws.costoptimizationhub#AuroraDbClusterStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Aurora DB cluster storage recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "aurora"
+                        ]
+                    }
+                },
                 "dynamoDbReservedCapacity": {
                     "target": "com.amazonaws.costoptimizationhub#DynamoDbReservedCapacity",
                     "traits": {
@@ -3512,6 +3558,15 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RdsDbInstance"
+                    }
+                },
+                "AURORA_DB_CLUSTER_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AuroraDbClusterStorage",
+                        "smithy.api#tags": [
+                            "aurora"
+                        ]
                     }
                 },
                 "DYNAMO_DB_RESERVED_CAPACITY": {

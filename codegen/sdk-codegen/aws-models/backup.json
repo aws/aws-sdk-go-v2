@@ -198,7 +198,7 @@
                 "BackupSizeInBytes": {
                     "target": "com.amazonaws.backup#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size, in bytes, of a backup.</p>"
+                        "smithy.api#documentation": "<p>The size, in bytes, of a backup (recovery point).</p>\n         <p>This value can render differently depending on the resource type as Backup pulls in data information from other Amazon Web Services services. For example, the \n         value returned may show a value of <code>0</code>, which may differ from the \n         anticipated value.</p>\n         <p>The expected behavior for values by resource type are described as follows:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora, Amazon DocumentDB, and Amazon Neptune do\n               not have this value populate from the operation\n               <code>GetBackupJobStatus</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon DynamoDB with advanced features, this value refers to the size\n               of the recovery point (backup).</p>\n            </li>\n            <li>\n               <p>Amazon EC2 and Amazon EBS show volume size (provisioned storage)\n               returned as part of this value. Amazon EBS does not return backup size\n               information; snapshot size will have the same value as the original resource that was\n               backed up.</p>\n            </li>\n            <li>\n               <p>For Amazon EFS, this value refers to the delta bytes transferred during a\n               backup.</p>\n            </li>\n            <li>\n               <p>Amazon FSx does not populate this value from the operation\n               <code>GetBackupJobStatus</code> for FSx file systems.</p>\n            </li>\n            <li>\n               <p>An Amazon RDS instance will show as <code>0</code>.</p>\n            </li>\n            <li>\n               <p>For virtual machines running VMware, this value is passed to Backup\n               through an asynchronous workflow, which can mean this displayed value can\n               under-represent the actual backup size.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "IamRoleArn": {
@@ -693,7 +693,7 @@
                 "ScheduleExpression": {
                     "target": "com.amazonaws.backup#CronExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A cron expression in UTC specifying when Backup initiates a backup job. For\n         more information about Amazon Web Services cron expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">Schedule Expressions for Rules</a> in the <i>Amazon CloudWatch Events User\n            Guide.</i>. Two examples of Amazon Web Services cron expressions are <code> 15 * ?\n            * * *</code> (take a backup every hour at 15 minutes past the hour) and <code>0 12 * * ?\n            *</code> (take a backup every day at 12 noon UTC). For a table of examples, click the\n         preceding link and scroll down the page.</p>"
+                        "smithy.api#documentation": "<p>A cron expression in UTC specifying when Backup initiates a backup job. \n         When no CRON expression is provided, Backup will use the default \n         expression <code>cron(0 5 ? * * *)</code>.</p>\n         <p>For more information about Amazon Web Services cron expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">Schedule Expressions for Rules</a> in the <i>Amazon CloudWatch Events User\n            Guide</i>.</p>\n         <p>Two examples of Amazon Web Services cron expressions are <code> 15 * ? * * *</code> (take\n         a backup every hour at 15 minutes past the hour) and <code>0 12 * * ? *</code> (take a\n         backup every day at 12 noon UTC).</p>\n         <p>For a table of examples, click the preceding link and scroll down the page.</p>"
                     }
                 },
                 "StartWindowMinutes": {
@@ -775,7 +775,7 @@
                 "ScheduleExpression": {
                     "target": "com.amazonaws.backup#CronExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A CRON expression in UTC specifying when Backup initiates a backup\n         job.</p>"
+                        "smithy.api#documentation": "<p>A CRON expression in UTC specifying when Backup initiates a backup\n         job. When no CRON expression is provided, Backup will use the default \n         expression <code>cron(0 5 ? * * *)</code>.</p>"
                     }
                 },
                 "StartWindowMinutes": {
@@ -1054,6 +1054,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "S3_RESTORE_OBJECT_FAILED"
+                    }
+                },
+                "RECOVERY_POINT_INDEX_COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECOVERY_POINT_INDEX_COMPLETED"
+                    }
+                },
+                "RECOVERY_POINT_INDEX_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECOVERY_POINT_INDEX_DELETED"
+                    }
+                },
+                "RECOVERY_POINT_INDEXING_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECOVERY_POINT_INDEXING_FAILED"
                     }
                 }
             }
@@ -4723,7 +4741,7 @@
                 "BackupSizeInBytes": {
                     "target": "com.amazonaws.backup#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size, in bytes, of a backup.</p>"
+                        "smithy.api#documentation": "<p>The size, in bytes, of a backup (recovery point).</p>\n         <p>This value can render differently depending on the resource type as Backup pulls in data information from other Amazon Web Services services. For example, the \n         value returned may show a value of <code>0</code>, which may differ from the \n         anticipated value.</p>\n         <p>The expected behavior for values by resource type are described as follows:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora, Amazon DocumentDB, and Amazon Neptune do\n               not have this value populate from the operation\n               <code>GetBackupJobStatus</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon DynamoDB with advanced features, this value refers to the size\n               of the recovery point (backup).</p>\n            </li>\n            <li>\n               <p>Amazon EC2 and Amazon EBS show volume size (provisioned storage)\n               returned as part of this value. Amazon EBS does not return backup size\n               information; snapshot size will have the same value as the original resource that was\n               backed up.</p>\n            </li>\n            <li>\n               <p>For Amazon EFS, this value refers to the delta bytes transferred during a\n               backup.</p>\n            </li>\n            <li>\n               <p>Amazon FSx does not populate this value from the operation\n               <code>GetBackupJobStatus</code> for FSx file systems.</p>\n            </li>\n            <li>\n               <p>An Amazon RDS instance will show as <code>0</code>.</p>\n            </li>\n            <li>\n               <p>For virtual machines running VMware, this value is passed to Backup\n               through an asynchronous workflow, which can mean this displayed value can\n               under-represent the actual backup size.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "IamRoleArn": {
@@ -4926,7 +4944,7 @@
                     "target": "com.amazonaws.backup#Long2",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of recovery points that are stored in a backup vault.</p>"
+                        "smithy.api#documentation": "<p>The number of recovery points that are stored in a backup vault.</p>\n         <p>Recovery point count value displayed in the console can be an approximation. Use <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListRecoveryPointsByBackupVault.html\">\n               <code>ListRecoveryPointsByBackupVault</code>\n            </a> API to obtain the exact\n         count.</p>"
                     }
                 },
                 "Locked": {
@@ -5402,7 +5420,7 @@
                 "Status": {
                     "target": "com.amazonaws.backup#RecoveryPointStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A status code specifying the state of the recovery point.</p>\n         <p>\n            <code>PARTIAL</code> status indicates Backup could not create the recovery\n         point before the backup window closed. To increase your backup plan window using the API,\n         see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html\">UpdateBackupPlan</a>. You can also increase your backup plan window using the\n         Console by choosing and editing your backup plan.</p>\n         <p>\n            <code>EXPIRED</code> status indicates that the recovery point has exceeded its retention\n         period, but Backup lacks permission or is otherwise unable to delete it. To\n         manually delete these recovery points, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups\"> Step 3:\n            Delete the recovery points</a> in the <i>Clean up resources</i>\n         section of <i>Getting started</i>.</p>\n         <p>\n            <code>STOPPED</code> status occurs on a continuous backup where a user has taken some \n         action that causes the continuous backup to be disabled. This can be caused by the removal\n         of permissions, turning off versioning, turning off events being sent to EventBridge, \n         or disabling the EventBridge rules that are put in place by Backup. For \n         recovery points of Amazon S3, Amazon RDS, and Amazon Aurora resources, this status \n         occurs when the retention period of a continuous backup rule is changed.</p>\n         <p>To resolve <code>STOPPED</code> status, ensure that all requested permissions are in place and\n         that versioning is enabled on the S3 bucket. Once these conditions are met, the next instance\n         of a backup rule running will result in a new continuous recovery point being created. \n         The recovery points with STOPPED status do not need to be deleted.</p>\n         <p>For SAP HANA on Amazon EC2 <code>STOPPED</code> status occurs due to user action, application\n         misconfiguration, or backup failure. To ensure that future continuous backups succeed,\n         refer to the recovery point status and check SAP HANA for details.</p>"
+                        "smithy.api#documentation": "<p>A status code specifying the state of the recovery point. For more information, see \n         <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/applicationstackbackups.html#cfnrecoverypointstatus\">\n            Recovery point status</a> in the <i>Backup Developer \n               Guide</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> status indicates that an Backup job has been \n               initiated for a resource. The backup process has started and is actively processing \n               a backup job for the associated recovery point.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> status indicates that the backup was successfully created \n               for the recovery point. The backup process has completed without any issues, and the \n               recovery point is now ready for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PARTIAL</code> status indicates a composite recovery point has one or more \n               nested recovery points that were not in the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXPIRED</code> status indicates that the recovery point has exceeded its retention\n               period, but Backup lacks permission or is otherwise unable to delete it. To\n               manually delete these recovery points, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups\"> Step 3:\n                  Delete the recovery points</a> in the <i>Clean up resources</i>\n               section of <i>Getting started</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code> status occurs on a continuous backup where a user has taken some\n               action that causes the continuous backup to be disabled. This can be caused by the removal\n               of permissions, turning off versioning, turning off events being sent to EventBridge,\n               or disabling the EventBridge rules that are put in place by Backup. For\n               recovery points of Amazon S3, Amazon RDS, and Amazon Aurora\n               resources, this status occurs when the retention period of a continuous backup rule is\n               changed.</p>\n               <p>To resolve <code>STOPPED</code> status, ensure that all requested permissions are in\n               place and that versioning is enabled on the S3 bucket. Once these conditions are met, the\n               next instance of a backup rule running will result in a new continuous recovery point being\n               created. The recovery points with STOPPED status do not need to be deleted.</p>\n               <p>For SAP HANA on Amazon EC2\n               <code>STOPPED</code> status occurs due to user action, application misconfiguration, or\n               backup failure. To ensure that future continuous backups succeed, refer to the recovery\n               point status and check SAP HANA for details.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "StatusMessage": {
@@ -10107,7 +10125,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the tags assigned to the resource, such as a target recovery point, backup plan, or\n         backup vault.</p>",
+                "smithy.api#documentation": "<p>Returns the tags assigned to the resource, such as a target recovery point, backup plan,\n         or backup vault.</p>\n         <p>This operation returns results depending on the resource type used in the value for\n            <code>resourceArn</code>. For example, recovery points of Amazon DynamoDB with\n         Advanced Settings have an ARN (Amazon Resource Name) that begins with\n            <code>arn:aws:backup</code>. Recovery points (backups) of DynamoDB without\n         Advanced Settings enabled have an ARN that begins with\n         <code>arn:aws:dynamodb</code>.</p>\n         <p>When this operation is called and when you include values of <code>resourceArn</code>\n         that have an ARN other than <code>arn:aws:backup</code>, it may return one of the\n         exceptions listed below. To prevent this exception, include only values representing\n         resource types that are fully managed by Backup. These have an ARN that begins\n            <code>arn:aws:backup</code> and they are noted in the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource\">Feature availability by resource</a> table.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{ResourceArn}",
@@ -10498,7 +10516,7 @@
                 "BackupVaultEvents": {
                     "target": "com.amazonaws.backup#BackupVaultEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of events that indicate the status of jobs to back up resources to the backup\n         vault.</p>\n         <p>For common use cases and code samples, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html\">Using Amazon SNS to\n            track Backup events</a>.</p>\n         <p>The following events are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BACKUP_JOB_STARTED</code> | <code>BACKUP_JOB_COMPLETED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>COPY_JOB_STARTED</code> | <code>COPY_JOB_SUCCESSFUL</code> |\n                  <code>COPY_JOB_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTORE_JOB_STARTED</code> | <code>RESTORE_JOB_COMPLETED</code> |\n                  <code>RECOVERY_POINT_MODIFIED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>S3_BACKUP_OBJECT_FAILED</code> | <code>S3_RESTORE_OBJECT_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The list below includes both supported events and deprecated events that are no longer\n            in use (for reference). Deprecated events do not return statuses or notifications. \n            Refer to the list above for the supported events.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>An array of events that indicate the status of jobs to back up resources to the backup\n         vault.</p>\n         <p>For common use cases and code samples, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html\">Using Amazon SNS to\n            track Backup events</a>.</p>\n         <p>The following events are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BACKUP_JOB_STARTED</code> | <code>BACKUP_JOB_COMPLETED</code> | <code>BACKUP_JOB_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>COPY_JOB_STARTED</code> | <code>COPY_JOB_SUCCESSFUL</code> |\n                  <code>COPY_JOB_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTORE_JOB_STARTED</code> | <code>RESTORE_JOB_COMPLETED</code> |\n                  <code>RECOVERY_POINT_MODIFIED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>S3_BACKUP_OBJECT_FAILED</code> | <code>S3_RESTORE_OBJECT_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RECOVERY_POINT_INDEX_COMPLETED</code> | <code>RECOVERY_POINT_INDEX_DELETED</code> | \n               <code>RECOVERY_POINT_INDEXING_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The list below includes both supported events and deprecated events that are no longer\n            in use (for reference). Deprecated events do not return statuses or notifications. \n            Refer to the list above for the supported events.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10942,6 +10960,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EXPIRED"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
                 }
             }
@@ -11609,7 +11645,7 @@
                 "ScheduleExpression": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A CRON expression in specified timezone when a restore \n         testing plan is executed.</p>",
+                        "smithy.api#documentation": "<p>A CRON expression in specified timezone when a restore \n         testing plan is executed. When no CRON expression is provided, Backup will use the default \n         expression <code>cron(0 5 ? * * *)</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11683,7 +11719,7 @@
                 "ScheduleExpression": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A CRON expression in specified timezone when a restore \n         testing plan is executed.</p>",
+                        "smithy.api#documentation": "<p>A CRON expression in specified timezone when a restore \n         testing plan is executed. When no CRON expression is provided, Backup will use the default \n         expression <code>cron(0 5 ? * * *)</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11744,7 +11780,7 @@
                 "ScheduleExpression": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A CRON expression in specified timezone when a restore \n         testing plan is executed.</p>",
+                        "smithy.api#documentation": "<p>A CRON expression in specified timezone when a restore testing plan is executed. When no\n         CRON expression is provided, Backup will use the default expression\n            <code>cron(0 5 ? * * *)</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11778,7 +11814,7 @@
                 "ScheduleExpression": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A CRON expression in specified timezone when a restore \n         testing plan is executed.</p>"
+                        "smithy.api#documentation": "<p>A CRON expression in specified timezone when a restore testing plan is executed. When no\n         CRON expression is provided, Backup will use the default expression\n            <code>cron(0 5 ? * * *)</code>.</p>"
                     }
                 },
                 "ScheduleExpressionTimezone": {
@@ -11930,7 +11966,7 @@
                     "target": "com.amazonaws.backup#integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>This is amount of hours (1 to 168) available to run a validation script on the data. The\n         data will be deleted upon the completion of the validation script or the end of the\n         specified retention period, whichever comes first.</p>"
+                        "smithy.api#documentation": "<p>This is amount of hours (0 to 168) available to run a validation script on the data. The\n         data will be deleted upon the completion of the validation script or the end of the\n         specified retention period, whichever comes first.</p>"
                     }
                 }
             },
@@ -12618,7 +12654,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attempts to cancel a job to create a one-time backup of a resource.</p>\n         <p>This action is not supported for the following services:\n         Amazon FSx for Windows File Server, Amazon FSx for Lustre, Amazon FSx for NetApp ONTAP,\n         Amazon FSx for OpenZFS, Amazon DocumentDB (with MongoDB compatibility), Amazon RDS, Amazon Aurora, \n         and Amazon Neptune.</p>",
+                "smithy.api#documentation": "<p>Attempts to cancel a job to create a one-time backup of a resource.</p>\n         <p>This action is not supported for the following services:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora</p>\n            </li>\n            <li>\n               <p>Amazon DocumentDB (with MongoDB compatibility)</p>\n            </li>\n            <li>\n               <p>Amazon FSx for Lustre</p>\n            </li>\n            <li>\n               <p>Amazon FSx for NetApp ONTAP</p>\n            </li>\n            <li>\n               <p>Amazon FSx for OpenZFS</p>\n            </li>\n            <li>\n               <p>Amazon FSx for Windows File Server</p>\n            </li>\n            <li>\n               <p>Amazon Neptune</p>\n            </li>\n            <li>\n               <p>SAP HANA databases on Amazon EC2 instances</p>\n            </li>\n            <li>\n               <p>Amazon RDS</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/backup-jobs/{BackupJobId}",
@@ -12703,7 +12739,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns a set of key-value pairs to a recovery point, backup plan, or backup vault\n         identified by an Amazon Resource Name (ARN).</p>\n         <p>This API is supported for recovery points for resource types \n         including Aurora, Amazon DocumentDB. Amazon EBS, \n         Amazon FSx, Neptune, and Amazon RDS.</p>",
+                "smithy.api#documentation": "<p>Assigns a set of key-value pairs to a resource.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{ResourceArn}",
@@ -12718,7 +12754,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.backup#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ARN that uniquely identifies a resource. The format of the ARN depends on the type of\n         the tagged resource.</p>\n         <p>ARNs that do not include <code>backup</code> are incompatible with tagging. \n      <code>TagResource</code> and <code>UntagResource</code> with invalid ARNs will \n      result in an error. Acceptable ARN content can include \n         <code>arn:aws:backup:us-east</code>. Invalid ARN content may look like \n      <code>arn:aws:ec2:us-east</code>.</p>",
+                        "smithy.api#documentation": "<p>The ARN that uniquely identifies the resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

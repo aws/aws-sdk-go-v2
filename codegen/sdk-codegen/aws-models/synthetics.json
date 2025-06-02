@@ -946,7 +946,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^([0-9a-zA-Z_-]+\\/)*[0-9A-Za-z_\\\\-]+\\.[A-Za-z_][A-Za-z0-9_]*$"
+                "smithy.api#pattern": "^([0-9a-zA-Z_-]+(\\/|\\.))*[0-9A-Za-z_\\\\-]+(\\.|::)[A-Za-z_][A-Za-z0-9_]*$"
             }
         },
         "com.amazonaws.synthetics#ConflictException": {

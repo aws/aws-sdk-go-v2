@@ -1648,32 +1648,32 @@
                 "storageType": {
                     "target": "com.amazonaws.computeoptimizer#StorageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The type of RDS storage.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The type of DB storage.\n        </p>"
                     }
                 },
                 "allocatedStorage": {
                     "target": "com.amazonaws.computeoptimizer#AllocatedStorage",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The size of the RDS storage in gigabytes (GB).\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The size of the DB storage in gigabytes (GB).\n        </p>"
                     }
                 },
                 "iops": {
                     "target": "com.amazonaws.computeoptimizer#NullableIOPS",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The provisioned IOPs of the RDS storage.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The provisioned IOPs of the DB storage.\n        </p>"
                     }
                 },
                 "maxAllocatedStorage": {
                     "target": "com.amazonaws.computeoptimizer#NullableMaxAllocatedStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The maximum limit in gibibytes (GiB) to which Amazon RDS can automatically scale the storage of the RDS instance.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The maximum limit in gibibytes (GiB) to which Amazon RDS can automatically scale the storage of the DB instance.\n        </p>"
                     }
                 },
                 "storageThroughput": {
                     "target": "com.amazonaws.computeoptimizer#NullableStorageThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The storage throughput of the RDS storage.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The storage throughput of the DB storage.\n        </p>"
                     }
                 }
             },
@@ -3568,7 +3568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            Export optimization recommendations for your Amazon Relational Database Service (Amazon RDS).\n        </p>\n         <p>Recommendations are exported in a comma-separated values (CSV) file, and its metadata\n            in a JavaScript Object Notation (JSON) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html\">Exporting\n                Recommendations</a> in the <i>Compute Optimizer User\n                    Guide</i>.</p>\n         <p>You can have only one Amazon RDS export job in progress per Amazon Web Services Region.</p>"
+                "smithy.api#documentation": "<p>\n            Export optimization recommendations for your Amazon Aurora and Amazon Relational Database Service (Amazon RDS) databases.\n        </p>\n         <p>Recommendations are exported in a comma-separated values (CSV) file, and its metadata\n            in a JavaScript Object Notation (JSON) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html\">Exporting\n                Recommendations</a> in the <i>Compute Optimizer User\n                    Guide</i>.</p>\n         <p>You can have only one Amazon Aurora or RDS export job in progress per Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#ExportRDSDatabaseRecommendationsRequest": {
@@ -3577,13 +3577,13 @@
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizer#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account IDs for the export Amazon RDS recommendations.\n        </p>\n         <p>If your account is the management account or the delegated administrator \n            of an organization, use this parameter to specify the member account you want to \n            export recommendations to.</p>\n         <p>This parameter can't be specified together with the include member accounts \n            parameter. The parameters are mutually exclusive.</p>\n         <p>If this parameter or the include member accounts parameter is omitted,\n            the recommendations for member accounts aren't included in the export.</p>\n         <p>You can specify multiple account IDs per request.</p>"
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account IDs for the export Amazon Aurora and RDS database recommendations.\n        </p>\n         <p>If your account is the management account or the delegated administrator \n            of an organization, use this parameter to specify the member account you want to \n            export recommendations to.</p>\n         <p>This parameter can't be specified together with the include member accounts \n            parameter. The parameters are mutually exclusive.</p>\n         <p>If this parameter or the include member accounts parameter is omitted,\n            the recommendations for member accounts aren't included in the export.</p>\n         <p>You can specify multiple account IDs per request.</p>"
                     }
                 },
                 "filters": {
                     "target": "com.amazonaws.computeoptimizer#RDSDBRecommendationFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects to specify a filter that exports a more specific set of \n            Amazon RDS recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects to specify a filter that exports a more specific set of \n            Amazon Aurora and RDS recommendations.\n        </p>"
                     }
                 },
                 "fieldsToExport": {
@@ -5205,6 +5205,12 @@
                         "smithy.api#enumValue": "MultiAZDBInstance"
                     }
                 },
+                "CLUSTER_WRITER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClusterWriter"
+                    }
+                },
                 "CURRENT_DB_INSTANCE_CLASS": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -5241,6 +5247,12 @@
                         "smithy.api#enumValue": "CurrentStorageConfigurationStorageThroughput"
                     }
                 },
+                "CURRENT_STORAGE_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentStorageEstimatedMonthlyVolumeIOPsCostVariation"
+                    }
+                },
                 "CURRENT_INSTANCE_ON_DEMAND_HOURLY_PRICE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -5257,6 +5269,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "LookbackPeriodInDays"
+                    }
+                },
+                "CURRENT_STORAGE_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentStorageEstimatedClusterInstanceOnDemandMonthlyCost"
+                    }
+                },
+                "CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentStorageEstimatedClusterStorageOnDemandMonthlyCost"
+                    }
+                },
+                "CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentStorageEstimatedClusterStorageIOOnDemandMonthlyCost"
                     }
                 },
                 "CURRENT_INSTANCE_PERFORMANCE_RISK": {
@@ -5373,6 +5403,24 @@
                         "smithy.api#enumValue": "UtilizationMetricsWriteIOPSEphemeralStorageMaximum"
                     }
                 },
+                "UTILIZATION_METRICS_VOLUME_BYTES_USED_AVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsVolumeBytesUsedAverage"
+                    }
+                },
+                "UTILIZATION_METRICS_VOLUME_READ_IOPS_AVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsVolumeReadIOPsAverage"
+                    }
+                },
+                "UTILIZATION_METRICS_VOLUME_WRITE_IOPS_AVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsVolumeWriteIOPsAverage"
+                    }
+                },
                 "INSTANCE_FINDING": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -5457,6 +5505,12 @@
                         "smithy.api#enumValue": "StorageRecommendationOptionsRank"
                     }
                 },
+                "STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsEstimatedMonthlyVolumeIOPsCostVariation"
+                    }
+                },
                 "INSTANCE_RECOMMENDATION_OPTIONS_INSTANCE_ON_DEMAND_HOURLY_PRICE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -5503,6 +5557,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "StorageRecommendationOptionsOnDemandMonthlyPrice"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsEstimatedClusterInstanceOnDemandMonthlyCost"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsEstimatedClusterStorageOnDemandMonthlyCost"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsEstimatedClusterStorageIOOnDemandMonthlyCost"
                     }
                 },
                 "STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE": {
@@ -7303,7 +7375,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            Returns the projected metrics of Amazon RDS recommendations.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Returns the projected metrics of Aurora and RDS database recommendations.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendationProjectedMetricsRequest": {
@@ -7312,7 +7384,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.computeoptimizer#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The ARN that identifies the Amazon RDS.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:rds:{region}:{accountId}:db:{resourceName}</code>\n         </p>",
+                        "smithy.api#documentation": "<p>\n            The ARN that identifies the Amazon Aurora or RDS database.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:rds:{region}:{accountId}:db:{resourceName}</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7402,7 +7474,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            Returns Amazon RDS recommendations.\n        </p>\n         <p>Compute Optimizer generates recommendations for Amazon RDS that \n            meet a specific set of requirements. For more\n            information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and\n                requirements</a> in the <i>Compute Optimizer User\n                    Guide</i>.</p>"
+                "smithy.api#documentation": "<p>\n            Returns Amazon Aurora and RDS database recommendations.\n        </p>\n         <p>Compute Optimizer generates recommendations for Amazon Aurora and RDS databases that \n            meet a specific set of requirements. For more\n            information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and\n                requirements</a> in the <i>Compute Optimizer User\n                    Guide</i>.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendationsRequest": {
@@ -7411,31 +7483,31 @@
                 "resourceArns": {
                     "target": "com.amazonaws.computeoptimizer#ResourceArns",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The ARN that identifies the Amazon RDS.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:rds:{region}:{accountId}:db:{resourceName}</code>\n         </p>\n         <p> The following is the format of a DB Cluster ARN: </p>\n         <p>\n            <code>arn:aws:rds:{region}:{accountId}:cluster:{resourceName}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>\n            The ARN that identifies the Amazon Aurora or RDS database.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:rds:{region}:{accountId}:db:{resourceName}</code>\n         </p>\n         <p> The following is the format of a DB Cluster ARN: </p>\n         <p>\n            <code>arn:aws:rds:{region}:{accountId}:cluster:{resourceName}</code>\n         </p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.computeoptimizer#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The token to advance to the next page of Amazon RDS recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The token to advance to the next page of Amazon Aurora and RDS database recommendations.\n        </p>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.computeoptimizer#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of Amazon RDS recommendations to return with a single\n            request.</p>\n         <p>To retrieve the remaining results, make another request with the returned\n            <code>nextToken</code> value.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of Amazon Aurora and RDS database recommendations to return with a single\n            request.</p>\n         <p>To retrieve the remaining results, make another request with the returned\n            <code>nextToken</code> value.</p>"
                     }
                 },
                 "filters": {
                     "target": "com.amazonaws.computeoptimizer#RDSDBRecommendationFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects to specify a filter that returns a more specific list of Amazon RDS recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects to specify a filter that returns a more specific list of Amazon Aurora and RDS database recommendations.\n        </p>"
                     }
                 },
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizer#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Return the Amazon RDS recommendations to the specified Amazon Web Services account IDs.\n        </p>\n         <p>If your account is the management account or the delegated administrator \n            of an organization, use this parameter to return the Amazon RDS recommendations to specific\n            member accounts.</p>\n         <p>You can only specify one account ID per request.</p>"
+                        "smithy.api#documentation": "<p>\n            Return the Amazon Aurora and RDS database recommendations to the specified Amazon Web Services account IDs.\n        </p>\n         <p>If your account is the management account or the delegated administrator \n            of an organization, use this parameter to return the Amazon Aurora and RDS database recommendations to specific\n            member accounts.</p>\n         <p>You can only specify one account ID per request.</p>"
                     }
                 },
                 "recommendationPreferences": {
@@ -7452,13 +7524,13 @@
                 "nextToken": {
                     "target": "com.amazonaws.computeoptimizer#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The token to advance to the next page of Amazon RDS recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The token to advance to the next page of Amazon Aurora and RDS database recommendations.\n        </p>"
                     }
                 },
                 "rdsDBRecommendations": {
                     "target": "com.amazonaws.computeoptimizer#RDSDBRecommendations",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects that describe the Amazon RDS recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the Amazon Aurora and RDS database recommendations.\n        </p>"
                     }
                 },
                 "errors": {
@@ -7633,7 +7705,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the optimization findings for an account.</p>\n         <p>It returns the number of:</p>\n         <ul>\n            <li>\n               <p>Amazon EC2 instances in an account that are\n                        <code>Underprovisioned</code>, <code>Overprovisioned</code>, or\n                        <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Auto Scaling groups in an account that are <code>NotOptimized</code>, or\n                        <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Amazon EBS volumes in an account that are <code>NotOptimized</code>,\n                    or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Lambda functions in an account that are <code>NotOptimized</code>,\n                    or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Amazon ECS services in an account that are <code>Underprovisioned</code>, \n                    <code>Overprovisioned</code>, or <code>Optimized</code>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns the optimization findings for an account.</p>\n         <p>It returns the number of:</p>\n         <ul>\n            <li>\n               <p>Amazon EC2 instances in an account that are\n                        <code>Underprovisioned</code>, <code>Overprovisioned</code>, or\n                        <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>EC2Auto Scaling groups in an account that are <code>NotOptimized</code>, or\n                        <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Amazon EBS volumes in an account that are <code>NotOptimized</code>,\n                    or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Lambda functions in an account that are <code>NotOptimized</code>,\n                    or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Amazon ECS services in an account that are <code>Underprovisioned</code>, \n                    <code>Overprovisioned</code>, or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Commercial software licenses in an account that are <code>InsufficientMetrics</code>, \n                    <code>NotOptimized</code> or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Amazon Aurora and Amazon RDS databases in an account that are <code>Underprovisioned</code>, \n                    <code>Overprovisioned</code>, <code>Optimized</code>, or <code>NotOptimized</code>.</p>\n            </li>\n         </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -10429,27 +10501,27 @@
                 "dbInstanceClass": {
                     "target": "com.amazonaws.computeoptimizer#DBInstanceClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the DB instance class recommendation option for your Amazon RDS instance.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Describes the DB instance class recommendation option for your Amazon Aurora or RDS database.\n        </p>"
                     }
                 },
                 "projectedUtilizationMetrics": {
                     "target": "com.amazonaws.computeoptimizer#RDSDBProjectedUtilizationMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects that describe the projected utilization metrics of the RDS instance recommendation option.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the projected utilization metrics of the DB instance recommendation option.\n        </p>"
                     }
                 },
                 "performanceRisk": {
                     "target": "com.amazonaws.computeoptimizer#PerformanceRisk",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The performance risk of the RDS instance recommendation option.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The performance risk of the DB instance recommendation option.\n        </p>"
                     }
                 },
                 "rank": {
                     "target": "com.amazonaws.computeoptimizer#Rank",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The rank identifier of the RDS instance recommendation option.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The rank identifier of the DB instance recommendation option.\n        </p>"
                     }
                 },
                 "savingsOpportunity": {
@@ -10458,12 +10530,12 @@
                 "savingsOpportunityAfterDiscounts": {
                     "target": "com.amazonaws.computeoptimizer#RDSInstanceSavingsOpportunityAfterDiscounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the savings opportunity for Amazon RDS recommendations or for the recommendation option.\n        </p>\n         <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. \n            You can achieve this by implementing a given Compute Optimizer recommendation.</p>"
+                        "smithy.api#documentation": "<p>\n            Describes the savings opportunity for Amazon Aurora and RDS database recommendations or for the recommendation option.\n        </p>\n         <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. \n            You can achieve this by implementing a given Compute Optimizer recommendation.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the recommendation options for an Amazon RDS instance.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Describes the recommendation options for a DB instance.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#RDSDBInstanceRecommendationOptions": {
@@ -10582,6 +10654,24 @@
                     "traits": {
                         "smithy.api#enumValue": "WriteIOPSEphemeralStorage"
                     }
+                },
+                "VOLUME_READ_IOPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VolumeReadIOPs"
+                    }
+                },
+                "VOLUME_BYTES_USED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VolumeBytesUsed"
+                    }
+                },
+                "VOLUME_WRITE_IOPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VolumeWriteIOPs"
+                    }
                 }
             }
         },
@@ -10620,19 +10710,19 @@
                 "resourceArn": {
                     "target": "com.amazonaws.computeoptimizer#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The ARN of the current Amazon RDS.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:rds:{region}:{accountId}:db:{resourceName}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>\n            The ARN of the current Amazon Aurora or RDS database.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:rds:{region}:{accountId}:db:{resourceName}</code>\n         </p>"
                     }
                 },
                 "accountId": {
                     "target": "com.amazonaws.computeoptimizer#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account ID of the Amazon RDS.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account ID of the Amazon Aurora or RDS database.\n        </p>"
                     }
                 },
                 "engine": {
                     "target": "com.amazonaws.computeoptimizer#Engine",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The engine of the RDS instance.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The engine of the DB instance.\n        </p>"
                     }
                 },
                 "engineVersion": {
@@ -10650,13 +10740,13 @@
                 "currentDBInstanceClass": {
                     "target": "com.amazonaws.computeoptimizer#CurrentDBInstanceClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The DB instance class of the current RDS instance.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The DB instance class of the current Aurora or RDS DB instance.\n        </p>"
                     }
                 },
                 "currentStorageConfiguration": {
                     "target": "com.amazonaws.computeoptimizer#DBStorageConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The configuration of the current RDS storage.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The configuration of the current DB storage.\n        </p>"
                     }
                 },
                 "dbClusterIdentifier": {
@@ -10668,25 +10758,25 @@
                 "idle": {
                     "target": "com.amazonaws.computeoptimizer#Idle",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            This indicates if the RDS instance is idle or not.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            This indicates if the DB instance is idle or not.\n        </p>"
                     }
                 },
                 "instanceFinding": {
                     "target": "com.amazonaws.computeoptimizer#RDSInstanceFinding",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The finding classification of an Amazon RDS instance.\n        </p>\n         <p>Findings for Amazon RDS instance include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Underprovisioned</code>\n                  </b> — \n                    When Compute Optimizer detects that there’s not enough resource specifications, an Amazon RDS \n                    is considered under-provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Overprovisioned</code>\n                  </b> — \n                    When Compute Optimizer detects that there’s excessive resource specifications, an Amazon RDS \n                    is considered over-provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b> — \n                    When the specifications of your Amazon RDS instance meet the performance requirements \n                    of your workload, the service is considered optimized.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            The finding classification of an Amazon Aurora and RDS DB instance.\n        </p>\n         <p>For more information about finding classifications, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-rds-recommendations.html#rds-recommendations-findings\">\n            Finding classifications for Aurora and RDS databases</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>"
                     }
                 },
                 "storageFinding": {
                     "target": "com.amazonaws.computeoptimizer#RDSStorageFinding",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The finding classification of Amazon RDS storage.\n        </p>\n         <p>Findings for Amazon RDS instance include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Underprovisioned</code>\n                  </b> — \n                    When Compute Optimizer detects that there’s not enough storage, an Amazon RDS \n                    is considered under-provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Overprovisioned</code>\n                  </b> — \n                    When Compute Optimizer detects that there’s excessive storage, an Amazon RDS \n                    is considered over-provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b> — \n                    When the storage of your Amazon RDS meet the performance requirements \n                    of your workload, the service is considered optimized.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            The finding classification of Amazon RDS DB instance storage.\n        </p>\n         <p>For more information about finding classifications, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-rds-recommendations.html#rds-recommendations-findings\">\n            Finding classifications for Aurora and RDS databases</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>"
                     }
                 },
                 "instanceFindingReasonCodes": {
                     "target": "com.amazonaws.computeoptimizer#RDSInstanceFindingReasonCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The reason for the finding classification of an Amazon RDS instance.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The reason for the finding classification of a DB instance.\n        </p>"
                     }
                 },
                 "currentInstancePerformanceRisk": {
@@ -10695,58 +10785,64 @@
                         "smithy.api#documentation": "<p>The performance risk for the current DB instance.</p>"
                     }
                 },
+                "currentStorageEstimatedMonthlyVolumeIOPsCostVariation": {
+                    "target": "com.amazonaws.computeoptimizer#RDSEstimatedMonthlyVolumeIOPsCostVariation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The level of variation in monthly I/O costs for the current DB storage configuration.\n        </p>"
+                    }
+                },
                 "storageFindingReasonCodes": {
                     "target": "com.amazonaws.computeoptimizer#RDSStorageFindingReasonCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The reason for the finding classification of Amazon RDS storage.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The reason for the finding classification of RDS DB instance storage.\n        </p>"
                     }
                 },
                 "instanceRecommendationOptions": {
                     "target": "com.amazonaws.computeoptimizer#RDSDBInstanceRecommendationOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects that describe the recommendation options for the Amazon RDS instance.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the recommendation options for the RDS DB instance.\n        </p>"
                     }
                 },
                 "storageRecommendationOptions": {
                     "target": "com.amazonaws.computeoptimizer#RDSDBStorageRecommendationOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects that describe the recommendation options for Amazon RDS storage.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the recommendation options for DB instance storage.\n        </p>"
                     }
                 },
                 "utilizationMetrics": {
                     "target": "com.amazonaws.computeoptimizer#RDSDBUtilizationMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects that describe the utilization metrics of the Amazon RDS.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the utilization metrics of the DB instance.\n        </p>"
                     }
                 },
                 "effectiveRecommendationPreferences": {
                     "target": "com.amazonaws.computeoptimizer#RDSEffectiveRecommendationPreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the effective recommendation preferences for Amazon RDS.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Describes the effective recommendation preferences for DB instances.\n        </p>"
                     }
                 },
                 "lookbackPeriodInDays": {
                     "target": "com.amazonaws.computeoptimizer#LookBackPeriodInDays",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The number of days the Amazon RDS utilization metrics were analyzed.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The number of days the DB instance utilization metrics were analyzed.\n        </p>"
                     }
                 },
                 "lastRefreshTimestamp": {
                     "target": "com.amazonaws.computeoptimizer#LastRefreshTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The timestamp of when the Amazon RDS recommendation was last generated.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The timestamp of when the DB instance recommendation was last generated.\n        </p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.computeoptimizer#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your Amazon RDS recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your DB instance recommendations.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes an Amazon RDS recommendation.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Describes an Amazon Aurora and RDS database recommendation.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#RDSDBRecommendationFilter": {
@@ -10755,7 +10851,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#RDSDBRecommendationFilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The name of the filter.\n        </p>\n         <p>\n            Specify <code>Finding</code> to return recommendations with a specific finding classification.\n        </p>\n         <p>You can filter your Amazon RDS recommendations by <code>tag:key</code> \n            and <code>tag-key</code> tags.</p>\n         <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your \n            Amazon RDS recommendations. Use the tag key in the filter name and the tag value \n            as the filter value. For example, to find all Amazon RDS service recommendations that have \n            a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, \n            specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n         <p>A <code>tag-key</code> is the key of a tag assigned to your Amazon RDS recommendations. Use \n            this filter to find all of your Amazon RDS recommendations that have a tag with a \n            specific key. This doesn’t consider the tag value. For example, you can find \n            your Amazon RDS service recommendations with a tag key value of <code>Owner</code> or without any tag \n            keys assigned.</p>"
+                        "smithy.api#documentation": "<p>\n            The name of the filter.\n        </p>\n         <p>\n            Specify <code>Finding</code> to return recommendations with a specific finding classification.\n        </p>\n         <p>You can filter your DB instance recommendations by <code>tag:key</code> \n            and <code>tag-key</code> tags.</p>\n         <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your \n            DB instance recommendations. Use the tag key in the filter name and the tag value \n            as the filter value. For example, to find all DB instance recommendations that have \n            a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, \n            specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n         <p>A <code>tag-key</code> is the key of a tag assigned to your DB instance recommendations. Use \n            this filter to find all of your DB instance recommendations that have a tag with a \n            specific key. This doesn’t consider the tag value. For example, you can find \n            your DB instance recommendations with a tag key value of <code>Owner</code> or without any tag \n            keys assigned.</p>"
                     }
                 },
                 "values": {
@@ -10766,7 +10862,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes a filter that returns a more specific list of Amazon RDS \n            recommendations. Use this filter with the <a>GetECSServiceRecommendations</a> action.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Describes a filter that returns a more specific list of DB instance \n            recommendations. Use this filter with the <a>GetECSServiceRecommendations</a> action.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#RDSDBRecommendationFilterName": {
@@ -10829,7 +10925,7 @@
                     "target": "com.amazonaws.computeoptimizer#Rank",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The rank identifier of the RDS storage recommendation option.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The rank identifier of the DB storage recommendation option.\n        </p>"
                     }
                 },
                 "savingsOpportunity": {
@@ -10838,12 +10934,18 @@
                 "savingsOpportunityAfterDiscounts": {
                     "target": "com.amazonaws.computeoptimizer#RDSStorageSavingsOpportunityAfterDiscounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the savings opportunity for Amazon RDS storage recommendations or for the recommendation option.\n        </p>\n         <p>\n            Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. You can achieve\n            this by implementing a given Compute Optimizer recommendation.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Describes the savings opportunity for DB storage recommendations or for the recommendation option.\n        </p>\n         <p>\n            Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. You can achieve\n            this by implementing a given Compute Optimizer recommendation.\n        </p>"
+                    }
+                },
+                "estimatedMonthlyVolumeIOPsCostVariation": {
+                    "target": "com.amazonaws.computeoptimizer#RDSEstimatedMonthlyVolumeIOPsCostVariation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The projected level of variation in monthly I/O costs for the DB storage recommendation option.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the recommendation options for Amazon RDS storage.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Describes the recommendation options for DB storage.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#RDSDBStorageRecommendationOptions": {
@@ -10876,7 +10978,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the utilization metric of an Amazon RDS.\n        </p>\n         <p>\n            To determine the performance difference between your current Amazon RDS and the recommended option, \n            compare the utilization metric data of your service against its projected utilization metric data.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Describes the utilization metric of an Amazon Aurora and RDS database.\n        </p>\n         <p>\n            To determine the performance difference between your current DB instance and the recommended option, \n            compare the utilization metric data of your service against its projected utilization metric data.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#RDSDBUtilizationMetrics": {
@@ -10908,7 +11010,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the projected metrics of an Amazon RDS recommendation option.\n        </p>\n         <p>\n            To determine the performance difference between your current Amazon RDS \n            and the recommended option, compare the metric data of your service against \n            its projected metric data.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Describes the projected metrics of an Amazon Aurora and RDS database recommendation option.\n        </p>\n         <p>\n            To determine the performance difference between your current Amazon Aurora and RDS database \n            and the recommended option, compare the metric data of your service against \n            its projected metric data.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#RDSDatabaseProjectedMetrics": {
@@ -10923,14 +11025,14 @@
                 "recommendedDBInstanceClass": {
                     "target": "com.amazonaws.computeoptimizer#RecommendedDBInstanceClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The recommended DB instance class for the Amazon RDS.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The recommended DB instance class for the Amazon Aurora or RDS database.\n        </p>"
                     }
                 },
                 "rank": {
                     "target": "com.amazonaws.computeoptimizer#Rank",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The rank identifier of the RDS instance recommendation option.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The rank identifier of the Amazon Aurora or RDS DB instance recommendation option.\n        </p>"
                     }
                 },
                 "projectedMetrics": {
@@ -10941,7 +11043,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the projected metrics of an Amazon RDS recommendation option.\n        </p>\n         <p>\n            To determine the performance difference between your current Amazon RDS and the recommended option, compare \n            the metric data of your service against its projected metric data.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Describes the projected metrics of an Amazon Aurora and RDS database recommendation option.\n        </p>\n         <p>\n            To determine the performance difference between your current Amazon Aurora and RDS database and the recommended option, compare \n            the metric data of your service against its projected metric data.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#RDSDatabaseRecommendedOptionProjectedMetrics": {
@@ -10956,7 +11058,7 @@
                 "cpuVendorArchitectures": {
                     "target": "com.amazonaws.computeoptimizer#CpuVendorArchitectures",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the CPU vendor and architecture for Amazon RDS recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Describes the CPU vendor and architecture for DB instance recommendations.\n        </p>"
                     }
                 },
                 "enhancedInfrastructureMetrics": {
@@ -10968,18 +11070,47 @@
                 "lookBackPeriod": {
                     "target": "com.amazonaws.computeoptimizer#LookBackPeriodPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The number of days the utilization metrics of the Amazon RDS are analyzed.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The number of days the utilization metrics of the DB instance are analyzed.\n        </p>"
                     }
                 },
                 "savingsEstimationMode": {
                     "target": "com.amazonaws.computeoptimizer#RDSSavingsEstimationMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the savings estimation mode preference applied for calculating savings opportunity for Amazon RDS.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Describes the savings estimation mode preference applied for calculating savings opportunity for DB instances.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the effective recommendation preferences for Amazon RDS.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Describes the effective recommendation preferences for Amazon Aurora and RDS databases.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSEstimatedMonthlyVolumeIOPsCostVariation": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Low"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
+                    }
+                }
             }
         },
         "com.amazonaws.computeoptimizer#RDSInstanceEstimatedMonthlySavings": {
@@ -10995,12 +11126,12 @@
                     "target": "com.amazonaws.computeoptimizer#Value",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The value of the estimated monthly savings for Amazon RDS instances.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The value of the estimated monthly savings for DB instances.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the estimated monthly savings possible for Amazon RDS instances by adopting \n            Compute Optimizer recommendations. This is based on Amazon RDS pricing after applying \n            Savings Plans discounts.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Describes the estimated monthly savings possible for DB instances by adopting \n            Compute Optimizer recommendations. This is based on DB instance pricing after applying \n            Savings Plans discounts.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#RDSInstanceFinding": {
@@ -11128,18 +11259,18 @@
                     "target": "com.amazonaws.computeoptimizer#SavingsOpportunityPercentage",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s \n            Amazon RDS instance recommendations. This includes any applicable Savings Plans discounts.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s \n            DB instance recommendations. This includes any applicable Savings Plans discounts.\n        </p>"
                     }
                 },
                 "estimatedMonthlySavings": {
                     "target": "com.amazonaws.computeoptimizer#RDSInstanceEstimatedMonthlySavings",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible by adopting Compute Optimizer’s Amazon RDS instance recommendations. \n            This includes any applicable Savings Plans discounts.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible by adopting Compute Optimizer’s DB instance recommendations. \n            This includes any applicable Savings Plans discounts.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the savings opportunity for Amazon RDS instance recommendations after applying Savings Plans discounts.\n        </p>\n         <p>\n            Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. \n            You can achieve this by implementing a given Compute Optimizer recommendation.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Describes the savings opportunity for DB instance recommendations after applying Savings Plans discounts.\n        </p>\n         <p>\n            Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. \n            You can achieve this by implementing a given Compute Optimizer recommendation.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#RDSSavingsEstimationMode": {
@@ -11148,12 +11279,12 @@
                 "source": {
                     "target": "com.amazonaws.computeoptimizer#RDSSavingsEstimationModeSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the source for calculating the savings opportunity for Amazon RDS.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Describes the source for calculating the savings opportunity for DB instances.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the savings estimation mode used for calculating savings opportunity for Amazon RDS.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Describes the savings estimation mode used for calculating savings opportunity for DB instances.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#RDSSavingsEstimationModeSource": {
@@ -11192,12 +11323,12 @@
                     "target": "com.amazonaws.computeoptimizer#Value",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The value of the estimated monthly savings for Amazon RDS storage.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The value of the estimated monthly savings for DB instance storage.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the estimated monthly savings possible for Amazon RDS storage by adopting Compute Optimizer \n            recommendations. This is based on Amazon RDS pricing after applying Savings Plans discounts.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Describes the estimated monthly savings possible for DB instance storage by adopting Compute Optimizer \n            recommendations. This is based on DB instance pricing after applying Savings Plans discounts.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#RDSStorageFinding": {
@@ -11219,6 +11350,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Overprovisioned"
+                    }
+                },
+                "NOT_OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotOptimized"
                     }
                 }
             }
@@ -11255,6 +11392,18 @@
                     "traits": {
                         "smithy.api#enumValue": "NewGenerationStorageTypeAvailable"
                     }
+                },
+                "DB_CLUSTER_STORAGE_OPTION_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DBClusterStorageOptionAvailable"
+                    }
+                },
+                "DB_CLUSTER_STORAGE_SAVINGS_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DBClusterStorageSavingsAvailable"
+                    }
                 }
             }
         },
@@ -11271,13 +11420,13 @@
                     "target": "com.amazonaws.computeoptimizer#SavingsOpportunityPercentage",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s \n            Amazon RDS storage recommendations. This includes any applicable Savings Plans discounts.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s \n            DB instance storage recommendations. This includes any applicable Savings Plans discounts.\n        </p>"
                     }
                 },
                 "estimatedMonthlySavings": {
                     "target": "com.amazonaws.computeoptimizer#RDSStorageEstimatedMonthlySavings",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible by adopting Compute Optimizer’s Amazon RDS storage recommendations. This includes any applicable Savings Plans discounts.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible by adopting Compute Optimizer’s DB instance storage recommendations. This includes any applicable Savings Plans discounts.\n        </p>"
                     }
                 }
             },
@@ -11582,6 +11731,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RdsDBInstanceStorage"
                     }
+                },
+                "AURORA_DB_CLUSTER_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AuroraDBClusterStorage"
+                    }
                 }
             }
         },
@@ -11766,6 +11921,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RdsDBInstance"
+                    }
+                },
+                "AURORA_DB_CLUSTER_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AuroraDBClusterStorage"
                     }
                 },
                 "IDLE": {
