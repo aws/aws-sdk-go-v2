@@ -341,6 +341,25 @@ func (QueryExecutionState) Values() []QueryExecutionState {
 	}
 }
 
+type QueryResultType string
+
+// Enum values for QueryResultType
+const (
+	QueryResultTypeDataManifest QueryResultType = "DATA_MANIFEST"
+	QueryResultTypeDataRows     QueryResultType = "DATA_ROWS"
+)
+
+// Values returns all known values for QueryResultType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryResultType) Values() []QueryResultType {
+	return []QueryResultType{
+		"DATA_MANIFEST",
+		"DATA_ROWS",
+	}
+}
+
 type S3AclOption string
 
 // Enum values for S3AclOption

@@ -44,6 +44,27 @@ type ErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The record that didn't generate a Match ID.
+type FailedRecord struct {
+
+	//  The error message for the record that didn't generate a Match ID.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	//  The input source ARN of the record that didn't generate a Match ID.
+	//
+	// This member is required.
+	InputSourceARN *string
+
+	//  The unique ID of the record that didn't generate a Match ID.
+	//
+	// This member is required.
+	UniqueId *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains metrics about an ID mapping job, including counts of
 // input records, processed records, and mapped records between source and target
 // identifiers.
@@ -432,6 +453,43 @@ type JobSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The matched record.
+type MatchedRecord struct {
+
+	//  The input source ARN of the matched record.
+	//
+	// This member is required.
+	InputSourceARN *string
+
+	//  The record ID of the matched record.
+	//
+	// This member is required.
+	RecordId *string
+
+	noSmithyDocumentSerde
+}
+
+// The match group.
+type MatchGroup struct {
+
+	//  The match ID.
+	//
+	// This member is required.
+	MatchId *string
+
+	//  The match rule of the match group.
+	//
+	// This member is required.
+	MatchRule *string
+
+	//  The matched records.
+	//
+	// This member is required.
+	Records []MatchedRecord
+
+	noSmithyDocumentSerde
+}
+
 // A list of MatchingWorkflowSummary objects, each of which contain the fields
 // WorkflowName , WorkflowArn , CreatedAt , UpdatedAt .
 type MatchingWorkflowSummary struct {
@@ -734,6 +792,27 @@ type ProviderServiceSummary struct {
 	//
 	// This member is required.
 	ProviderServiceType ServiceType
+
+	noSmithyDocumentSerde
+}
+
+// The record.
+type Record struct {
+
+	//  The input source ARN of the record.
+	//
+	// This member is required.
+	InputSourceARN *string
+
+	//  The record's attribute map.
+	//
+	// This member is required.
+	RecordAttributeMap map[string]string
+
+	//  The unique ID of the record.
+	//
+	// This member is required.
+	UniqueId *string
 
 	noSmithyDocumentSerde
 }

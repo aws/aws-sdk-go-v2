@@ -187,6 +187,7 @@ type Category string
 // Enum values for Category
 const (
 	CategoryUpgradeReadiness Category = "UPGRADE_READINESS"
+	CategoryMisconfiguration Category = "MISCONFIGURATION"
 )
 
 // Values returns all known values for Category. Note that this can be expanded in
@@ -196,6 +197,7 @@ const (
 func (Category) Values() []Category {
 	return []Category{
 		"UPGRADE_READINESS",
+		"MISCONFIGURATION",
 	}
 }
 

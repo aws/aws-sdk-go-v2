@@ -44,6 +44,12 @@ type UpdateAgentAliasInput struct {
 	// This member is required.
 	AgentId *string
 
+	// The invocation state for the agent alias. To pause the agent alias, set the
+	// value to REJECT_INVOCATIONS . To start the agent alias running again, set the
+	// value to ACCEPT_INVOCATIONS . Use the GetAgentAlias , or ListAgentAliases ,
+	// operation to get the invocation state of an agent alias.
+	AliasInvocationState types.AliasInvocationState
+
 	// Specifies a new description for the alias.
 	Description *string
 

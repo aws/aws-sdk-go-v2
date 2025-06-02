@@ -194,6 +194,7 @@ const (
 	ResourceTypeElastiCacheReservedInstances ResourceType = "ElastiCacheReservedInstances"
 	ResourceTypeRdsDbInstanceStorage         ResourceType = "RdsDbInstanceStorage"
 	ResourceTypeRdsDbInstance                ResourceType = "RdsDbInstance"
+	ResourceTypeAuroraDbClusterStorage       ResourceType = "AuroraDbClusterStorage"
 	ResourceTypeDynamoDbReservedCapacity     ResourceType = "DynamoDbReservedCapacity"
 	ResourceTypeMemoryDbReservedInstances    ResourceType = "MemoryDbReservedInstances"
 )
@@ -219,6 +220,7 @@ func (ResourceType) Values() []ResourceType {
 		"ElastiCacheReservedInstances",
 		"RdsDbInstanceStorage",
 		"RdsDbInstance",
+		"AuroraDbClusterStorage",
 		"DynamoDbReservedCapacity",
 		"MemoryDbReservedInstances",
 	}

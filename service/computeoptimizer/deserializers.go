@@ -10823,6 +10823,15 @@ func awsAwsjson10_deserializeDocumentRDSDBRecommendation(v **types.RDSDBRecommen
 				return err
 			}
 
+		case "currentStorageEstimatedMonthlyVolumeIOPsCostVariation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RDSEstimatedMonthlyVolumeIOPsCostVariation to be of type string, got %T instead", value)
+				}
+				sv.CurrentStorageEstimatedMonthlyVolumeIOPsCostVariation = types.RDSEstimatedMonthlyVolumeIOPsCostVariation(jtv)
+			}
+
 		case "dbClusterIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11049,6 +11058,15 @@ func awsAwsjson10_deserializeDocumentRDSDBStorageRecommendationOption(v **types.
 
 	for key, value := range shape {
 		switch key {
+		case "estimatedMonthlyVolumeIOPsCostVariation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RDSEstimatedMonthlyVolumeIOPsCostVariation to be of type string, got %T instead", value)
+				}
+				sv.EstimatedMonthlyVolumeIOPsCostVariation = types.RDSEstimatedMonthlyVolumeIOPsCostVariation(jtv)
+			}
+
 		case "rank":
 			if value != nil {
 				jtv, ok := value.(json.Number)

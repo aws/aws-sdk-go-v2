@@ -1,0 +1,8 @@
+{
+    "id": "e782516e-ed81-4365-95fb-699f44f90107",
+    "type": "feature",
+    "description": "Introduces SUSPENDING and SUSPENDED states for clusters, compute node groups, and queues.",
+    "modules": [
+        "service/pcs"
+    ]
+}

@@ -59,7 +59,37 @@ type BackupJob struct {
 	// InvalidParameterValueException exception.
 	BackupOptions map[string]string
 
-	// The size, in bytes, of a backup.
+	// The size, in bytes, of a backup (recovery point).
+	//
+	// This value can render differently depending on the resource type as Backup
+	// pulls in data information from other Amazon Web Services services. For example,
+	// the value returned may show a value of 0 , which may differ from the anticipated
+	// value.
+	//
+	// The expected behavior for values by resource type are described as follows:
+	//
+	//   - Amazon Aurora, Amazon DocumentDB, and Amazon Neptune do not have this value
+	//   populate from the operation GetBackupJobStatus .
+	//
+	//   - For Amazon DynamoDB with advanced features, this value refers to the size
+	//   of the recovery point (backup).
+	//
+	//   - Amazon EC2 and Amazon EBS show volume size (provisioned storage) returned
+	//   as part of this value. Amazon EBS does not return backup size information;
+	//   snapshot size will have the same value as the original resource that was backed
+	//   up.
+	//
+	//   - For Amazon EFS, this value refers to the delta bytes transferred during a
+	//   backup.
+	//
+	//   - Amazon FSx does not populate this value from the operation
+	//   GetBackupJobStatus for FSx file systems.
+	//
+	//   - An Amazon RDS instance will show as 0 .
+	//
+	//   - For virtual machines running VMware, this value is passed to Backup through
+	//   an asynchronous workflow, which can mean this displayed value can
+	//   under-represent the actual backup size.
 	BackupSizeInBytes *int64
 
 	// Represents the type of backup for a backup job.
@@ -394,12 +424,18 @@ type BackupRule struct {
 	// of resources.
 	RuleId *string
 
-	// A cron expression in UTC specifying when Backup initiates a backup job. For
-	// more information about Amazon Web Services cron expressions, see [Schedule Expressions for Rules]in the Amazon
-	// CloudWatch Events User Guide.. Two examples of Amazon Web Services cron
-	// expressions are 15 * ? * * * (take a backup every hour at 15 minutes past the
-	// hour) and 0 12 * * ? * (take a backup every day at 12 noon UTC). For a table of
-	// examples, click the preceding link and scroll down the page.
+	// A cron expression in UTC specifying when Backup initiates a backup job. When no
+	// CRON expression is provided, Backup will use the default expression cron(0 5 ?
+	// * * *) .
+	//
+	// For more information about Amazon Web Services cron expressions, see [Schedule Expressions for Rules] in the
+	// Amazon CloudWatch Events User Guide.
+	//
+	// Two examples of Amazon Web Services cron expressions are  15 * ? * * * (take a
+	// backup every hour at 15 minutes past the hour) and 0 12 * * ? * (take a backup
+	// every day at 12 noon UTC).
+	//
+	// For a table of examples, click the preceding link and scroll down the page.
 	//
 	// [Schedule Expressions for Rules]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
 	ScheduleExpression *string
@@ -485,7 +521,9 @@ type BackupRuleInput struct {
 	// The tags to assign to the resources.
 	RecoveryPointTags map[string]string
 
-	// A CRON expression in UTC specifying when Backup initiates a backup job.
+	// A CRON expression in UTC specifying when Backup initiates a backup job. When no
+	// CRON expression is provided, Backup will use the default expression cron(0 5 ?
+	// * * *) .
 	ScheduleExpression *string
 
 	// The timezone in which the schedule expression is set. By default,
@@ -1948,7 +1986,9 @@ type RestoreTestingPlanForCreate struct {
 	// This member is required.
 	RestoreTestingPlanName *string
 
-	// A CRON expression in specified timezone when a restore testing plan is executed.
+	// A CRON expression in specified timezone when a restore testing plan is
+	// executed. When no CRON expression is provided, Backup will use the default
+	// expression cron(0 5 ? * * *) .
 	//
 	// This member is required.
 	ScheduleExpression *string
@@ -1995,7 +2035,9 @@ type RestoreTestingPlanForGet struct {
 	// This member is required.
 	RestoreTestingPlanName *string
 
-	// A CRON expression in specified timezone when a restore testing plan is executed.
+	// A CRON expression in specified timezone when a restore testing plan is
+	// executed. When no CRON expression is provided, Backup will use the default
+	// expression cron(0 5 ? * * *) .
 	//
 	// This member is required.
 	ScheduleExpression *string
@@ -2056,7 +2098,9 @@ type RestoreTestingPlanForList struct {
 	// This member is required.
 	RestoreTestingPlanName *string
 
-	// A CRON expression in specified timezone when a restore testing plan is executed.
+	// A CRON expression in specified timezone when a restore testing plan is
+	// executed. When no CRON expression is provided, Backup will use the default
+	// expression cron(0 5 ? * * *) .
 	//
 	// This member is required.
 	ScheduleExpression *string
@@ -2097,7 +2141,9 @@ type RestoreTestingPlanForUpdate struct {
 	// to empty list if not listed).
 	RecoveryPointSelection *RestoreTestingRecoveryPointSelection
 
-	// A CRON expression in specified timezone when a restore testing plan is executed.
+	// A CRON expression in specified timezone when a restore testing plan is
+	// executed. When no CRON expression is provided, Backup will use the default
+	// expression cron(0 5 ? * * *) .
 	ScheduleExpression *string
 
 	// Optional. This is the timezone in which the schedule expression is set. By
@@ -2250,7 +2296,7 @@ type RestoreTestingSelectionForCreate struct {
 	// [restore testing inferred metadata]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html
 	RestoreMetadataOverrides map[string]string
 
-	// This is amount of hours (1 to 168) available to run a validation script on the
+	// This is amount of hours (0 to 168) available to run a validation script on the
 	// data. The data will be deleted upon the completion of the validation script or
 	// the end of the specified retention period, whichever comes first.
 	ValidationWindowHours int32

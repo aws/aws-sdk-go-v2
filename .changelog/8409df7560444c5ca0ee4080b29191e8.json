@@ -1,0 +1,8 @@
+{
+    "id": "8409df75-6044-4c5c-a0ee-4080b29191e8",
+    "type": "feature",
+    "description": "Add support for the managed query result in the workgroup APIs. The managed query result configuration enables users to store query results to Athena owned storage.",
+    "modules": [
+        "service/athena"
+    ]
+}

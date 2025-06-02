@@ -19,6 +19,7 @@
         "api_op_DeleteMatchingWorkflow.go",
         "api_op_DeletePolicyStatement.go",
         "api_op_DeleteSchemaMapping.go",
+        "api_op_GenerateMatchId.go",
         "api_op_GetIdMappingJob.go",
         "api_op_GetIdMappingWorkflow.go",
         "api_op_GetIdNamespace.go",

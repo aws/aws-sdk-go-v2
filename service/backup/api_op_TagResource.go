@@ -10,11 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns a set of key-value pairs to a recovery point, backup plan, or backup
-// vault identified by an Amazon Resource Name (ARN).
-//
-// This API is supported for recovery points for resource types including Aurora,
-// Amazon DocumentDB. Amazon EBS, Amazon FSx, Neptune, and Amazon RDS.
+// Assigns a set of key-value pairs to a resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -32,13 +28,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// An ARN that uniquely identifies a resource. The format of the ARN depends on
-	// the type of the tagged resource.
-	//
-	// ARNs that do not include backup are incompatible with tagging. TagResource and
-	// UntagResource with invalid ARNs will result in an error. Acceptable ARN content
-	// can include arn:aws:backup:us-east . Invalid ARN content may look like
-	// arn:aws:ec2:us-east .
+	// The ARN that uniquely identifies the resource.
 	//
 	// This member is required.
 	ResourceArn *string

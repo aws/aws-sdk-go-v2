@@ -1203,6 +1203,87 @@ func awsAwsjson10_deserializeDocumentAccountEnrollmentStatuses(v *[]types.Accoun
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAuroraDbClusterStorage(v **types.AuroraDbClusterStorage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AuroraDbClusterStorage
+	if *v == nil {
+		sv = &types.AuroraDbClusterStorage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "configuration":
+			if err := awsAwsjson10_deserializeDocumentAuroraDbClusterStorageConfiguration(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "costCalculation":
+			if err := awsAwsjson10_deserializeDocumentResourceCostCalculation(&sv.CostCalculation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAuroraDbClusterStorageConfiguration(v **types.AuroraDbClusterStorageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AuroraDbClusterStorageConfiguration
+	if *v == nil {
+		sv = &types.AuroraDbClusterStorageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "storageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StorageType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentBlockStoragePerformanceConfiguration(v **types.BlockStoragePerformanceConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4752,6 +4833,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "auroraDbClusterStorage":
+			var mv types.AuroraDbClusterStorage
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentAuroraDbClusterStorage(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceDetailsMemberAuroraDbClusterStorage{Value: mv}
+			break loop
+
 		case "computeSavingsPlans":
 			var mv types.ComputeSavingsPlans
 			destAddr := &mv

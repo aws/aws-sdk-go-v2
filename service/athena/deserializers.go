@@ -10101,6 +10101,91 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentManagedQueryResultsConfiguration(v **types.ManagedQueryResultsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedQueryResultsConfiguration
+	if *v == nil {
+		sv = &types.ManagedQueryResultsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = jtv
+			}
+
+		case "EncryptionConfiguration":
+			if err := awsAwsjson11_deserializeDocumentManagedQueryResultsEncryptionConfiguration(&sv.EncryptionConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentManagedQueryResultsEncryptionConfiguration(v **types.ManagedQueryResultsEncryptionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedQueryResultsEncryptionConfiguration
+	if *v == nil {
+		sv = &types.ManagedQueryResultsEncryptionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KmsKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKey to be of type string, got %T instead", value)
+				}
+				sv.KmsKey = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentMetadataException(v **types.MetadataException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10791,6 +10876,11 @@ func awsAwsjson11_deserializeDocumentQueryExecution(v **types.QueryExecution, va
 
 		case "ExecutionParameters":
 			if err := awsAwsjson11_deserializeDocumentExecutionParameters(&sv.ExecutionParameters, value); err != nil {
+				return err
+			}
+
+		case "ManagedQueryResultsConfiguration":
+			if err := awsAwsjson11_deserializeDocumentManagedQueryResultsConfiguration(&sv.ManagedQueryResultsConfiguration, value); err != nil {
 				return err
 			}
 
@@ -13305,6 +13395,11 @@ func awsAwsjson11_deserializeDocumentWorkGroupConfiguration(v **types.WorkGroupC
 
 		case "IdentityCenterConfiguration":
 			if err := awsAwsjson11_deserializeDocumentIdentityCenterConfiguration(&sv.IdentityCenterConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ManagedQueryResultsConfiguration":
+			if err := awsAwsjson11_deserializeDocumentManagedQueryResultsConfiguration(&sv.ManagedQueryResultsConfiguration, value); err != nil {
 				return err
 			}
 

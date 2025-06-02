@@ -1534,6 +1534,55 @@ func validateEngineConfiguration(v *types.EngineConfiguration) error {
 	}
 }
 
+func validateManagedQueryResultsConfiguration(v *types.ManagedQueryResultsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedQueryResultsConfiguration"}
+	if v.EncryptionConfiguration != nil {
+		if err := validateManagedQueryResultsEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedQueryResultsConfigurationUpdates(v *types.ManagedQueryResultsConfigurationUpdates) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedQueryResultsConfigurationUpdates"}
+	if v.EncryptionConfiguration != nil {
+		if err := validateManagedQueryResultsEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedQueryResultsEncryptionConfiguration(v *types.ManagedQueryResultsEncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedQueryResultsEncryptionConfiguration"}
+	if v.KmsKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateQueryResultsS3AccessGrantsConfiguration(v *types.QueryResultsS3AccessGrantsConfiguration) error {
 	if v == nil {
 		return nil
@@ -1635,6 +1684,11 @@ func validateWorkGroupConfiguration(v *types.WorkGroupConfiguration) error {
 			invalidParams.AddNested("ResultConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ManagedQueryResultsConfiguration != nil {
+		if err := validateManagedQueryResultsConfiguration(v.ManagedQueryResultsConfiguration); err != nil {
+			invalidParams.AddNested("ManagedQueryResultsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.CustomerContentEncryptionConfiguration != nil {
 		if err := validateCustomerContentEncryptionConfiguration(v.CustomerContentEncryptionConfiguration); err != nil {
 			invalidParams.AddNested("CustomerContentEncryptionConfiguration", err.(smithy.InvalidParamsError))
@@ -1660,6 +1714,11 @@ func validateWorkGroupConfigurationUpdates(v *types.WorkGroupConfigurationUpdate
 	if v.ResultConfigurationUpdates != nil {
 		if err := validateResultConfigurationUpdates(v.ResultConfigurationUpdates); err != nil {
 			invalidParams.AddNested("ResultConfigurationUpdates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ManagedQueryResultsConfigurationUpdates != nil {
+		if err := validateManagedQueryResultsConfigurationUpdates(v.ManagedQueryResultsConfigurationUpdates); err != nil {
+			invalidParams.AddNested("ManagedQueryResultsConfigurationUpdates", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CustomerContentEncryptionConfiguration != nil {

@@ -176,6 +176,27 @@ func (MatchPurpose) Values() []MatchPurpose {
 	}
 }
 
+type ProcessingType string
+
+// Enum values for ProcessingType
+const (
+	ProcessingTypeConsistent       ProcessingType = "CONSISTENT"
+	ProcessingTypeEventual         ProcessingType = "EVENTUAL"
+	ProcessingTypeEventualNoLookup ProcessingType = "EVENTUAL_NO_LOOKUP"
+)
+
+// Values returns all known values for ProcessingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProcessingType) Values() []ProcessingType {
+	return []ProcessingType{
+		"CONSISTENT",
+		"EVENTUAL",
+		"EVENTUAL_NO_LOOKUP",
+	}
+}
+
 type RecordMatchingModel string
 
 // Enum values for RecordMatchingModel

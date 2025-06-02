@@ -1,0 +1,8 @@
+{
+    "id": "1b0cd758-08cc-417f-9734-dc69250414f6",
+    "type": "feature",
+    "description": "Add support for generating match IDs in near real-time.",
+    "modules": [
+        "service/entityresolution"
+    ]
+}

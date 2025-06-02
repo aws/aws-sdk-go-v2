@@ -125,6 +125,27 @@ func (AgentStatus) Values() []AgentStatus {
 	}
 }
 
+type AliasInvocationState string
+
+// Enum values for AliasInvocationState
+const (
+	// Agent is actively processing requests
+	AliasInvocationStateAcceptInvocations AliasInvocationState = "ACCEPT_INVOCATIONS"
+	// Agent is paused and will not accept new requests
+	AliasInvocationStateRejectInvocations AliasInvocationState = "REJECT_INVOCATIONS"
+)
+
+// Values returns all known values for AliasInvocationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AliasInvocationState) Values() []AliasInvocationState {
+	return []AliasInvocationState{
+		"ACCEPT_INVOCATIONS",
+		"REJECT_INVOCATIONS",
+	}
+}
+
 type CachePointType string
 
 // Enum values for CachePointType

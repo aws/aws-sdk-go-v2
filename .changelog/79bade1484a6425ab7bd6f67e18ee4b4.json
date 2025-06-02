@@ -1,0 +1,8 @@
+{
+    "id": "79bade14-84a6-425a-b7bd-6f67e18ee4b4",
+    "type": "feature",
+    "description": "Support for Java runtime handler pattern.",
+    "modules": [
+        "service/synthetics"
+    ]
+}

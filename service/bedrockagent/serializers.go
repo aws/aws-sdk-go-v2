@@ -6162,6 +6162,11 @@ func awsRestjson1_serializeOpDocumentUpdateAgentAliasInput(v *UpdateAgentAliasIn
 		ok.String(*v.AgentAliasName)
 	}
 
+	if len(v.AliasInvocationState) > 0 {
+		ok := object.Key("aliasInvocationState")
+		ok.String(string(v.AliasInvocationState))
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)

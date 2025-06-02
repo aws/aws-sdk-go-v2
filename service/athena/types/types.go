@@ -664,6 +664,62 @@ type IdentityCenterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+//	The configuration for storing results in Athena owned storage, which includes
+//
+// whether this feature is enabled; whether encryption configuration, if any, is
+// used for encrypting query results.
+type ManagedQueryResultsConfiguration struct {
+
+	// If set to true, allows you to store query results in Athena owned storage. If
+	// set to false, workgroup member stores query results in location specified under
+	// ResultConfiguration$OutputLocation . The default is false. A workgroup cannot
+	// have the ResultConfiguration$OutputLocation parameter when you set this field
+	// to true.
+	//
+	// This member is required.
+	Enabled bool
+
+	// If you encrypt query and calculation results in Athena owned storage, this
+	// field indicates the encryption option (for example, SSE_KMS or CSE_KMS) and key
+	// information.
+	EncryptionConfiguration *ManagedQueryResultsEncryptionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Updates the configuration for managed query results.
+type ManagedQueryResultsConfigurationUpdates struct {
+
+	// If set to true, specifies that Athena manages query results in Athena owned
+	// storage.
+	Enabled *bool
+
+	// If you encrypt query and calculation results in Athena owned storage, this
+	// field indicates the encryption option (for example, SSE_KMS or CSE_KMS) and key
+	// information.
+	EncryptionConfiguration *ManagedQueryResultsEncryptionConfiguration
+
+	// If set to true, it removes workgroup from Athena owned storage. The existing
+	// query results are cleaned up after 24hrs. You must provide query results in
+	// location specified under ResultConfiguration$OutputLocation .
+	RemoveEncryptionConfiguration *bool
+
+	noSmithyDocumentSerde
+}
+
+// If you encrypt query and calculation results in Athena owned storage, this
+// field indicates the encryption option (for example, SSE_KMS or CSE_KMS) and key
+// information.
+type ManagedQueryResultsEncryptionConfiguration struct {
+
+	// The ARN of an KMS key for encrypting managed query results.
+	//
+	// This member is required.
+	KmsKey *string
+
+	noSmithyDocumentSerde
+}
+
 // A query, where QueryString contains the SQL statements that make up the query.
 type NamedQuery struct {
 
@@ -775,6 +831,11 @@ type QueryExecution struct {
 	// occur. The list of parameters is not returned in the response.
 	ExecutionParameters []string
 
+	//  The configuration for storing results in Athena owned storage, which includes
+	// whether this feature is enabled; whether encryption configuration, if any, is
+	// used for encrypting query results.
+	ManagedQueryResultsConfiguration *ManagedQueryResultsConfiguration
+
 	// The SQL query statements which the query execution ran.
 	Query *string
 
@@ -800,7 +861,7 @@ type QueryExecution struct {
 	// The type of query statement that was run. DDL indicates DDL query statements.
 	// DML indicates DML (Data Manipulation Language) query statements, such as CREATE
 	// TABLE AS SELECT . UTILITY indicates query statements other than DDL and DML,
-	// such as SHOW CREATE TABLE , EXPLAIN , DESCRIBE , or SHOW TABLES .
+	// such as SHOW CREATE TABLE , or DESCRIBE TABLE .
 	StatementType StatementType
 
 	// Query execution statistics, such as the amount of data scanned, the amount of
@@ -1560,6 +1621,11 @@ type WorkGroupConfiguration struct {
 	// Specifies whether the workgroup is IAM Identity Center supported.
 	IdentityCenterConfiguration *IdentityCenterConfiguration
 
+	//  The configuration for storing results in Athena owned storage, which includes
+	// whether this feature is enabled; whether encryption configuration, if any, is
+	// used for encrypting query results.
+	ManagedQueryResultsConfiguration *ManagedQueryResultsConfiguration
+
 	// Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
 	PublishCloudWatchMetricsEnabled *bool
 
@@ -1636,6 +1702,9 @@ type WorkGroupConfigurationUpdates struct {
 	// and Identity Center enabled workgroups. This property applies only to Spark
 	// enabled workgroups and Identity Center enabled workgroups.
 	ExecutionRole *string
+
+	// Updates configuration information for managed query results in the workgroup.
+	ManagedQueryResultsConfigurationUpdates *ManagedQueryResultsConfigurationUpdates
 
 	// Indicates whether this workgroup enables publishing metrics to Amazon
 	// CloudWatch.

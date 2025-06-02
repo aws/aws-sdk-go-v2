@@ -1,0 +1,8 @@
+{
+    "id": "606a6b4b-bb1f-4148-ab00-566f6d1d49b2",
+    "type": "documentation",
+    "description": "Updates Amazon ECS documentation to include note for upcoming default log driver mode change.",
+    "modules": [
+        "service/ecs"
+    ]
+}

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets the status, metrics, and errors (if there are any) that are associated
+// Returns the status, metrics, and errors (if there are any) that are associated
 // with a job.
 func (c *Client) GetIdMappingJob(ctx context.Context, params *GetIdMappingJobInput, optFns ...func(*Options)) (*GetIdMappingJobOutput, error) {
 	if params == nil {

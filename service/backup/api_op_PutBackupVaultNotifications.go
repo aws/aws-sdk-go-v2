@@ -36,13 +36,16 @@ type PutBackupVaultNotificationsInput struct {
 	//
 	// The following events are supported:
 	//
-	//   - BACKUP_JOB_STARTED | BACKUP_JOB_COMPLETED
+	//   - BACKUP_JOB_STARTED | BACKUP_JOB_COMPLETED | BACKUP_JOB_FAILED
 	//
 	//   - COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL | COPY_JOB_FAILED
 	//
 	//   - RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED | RECOVERY_POINT_MODIFIED
 	//
 	//   - S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED
+	//
+	//   - RECOVERY_POINT_INDEX_COMPLETED | RECOVERY_POINT_INDEX_DELETED |
+	//   RECOVERY_POINT_INDEXING_FAILED
 	//
 	// The list below includes both supported events and deprecated events that are no
 	// longer in use (for reference). Deprecated events do not return statuses or

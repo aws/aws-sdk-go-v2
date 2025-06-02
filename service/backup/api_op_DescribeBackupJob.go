@@ -49,7 +49,37 @@ type DescribeBackupJobOutput struct {
 	// Represents the options specified as part of backup plan or on-demand backup job.
 	BackupOptions map[string]string
 
-	// The size, in bytes, of a backup.
+	// The size, in bytes, of a backup (recovery point).
+	//
+	// This value can render differently depending on the resource type as Backup
+	// pulls in data information from other Amazon Web Services services. For example,
+	// the value returned may show a value of 0 , which may differ from the anticipated
+	// value.
+	//
+	// The expected behavior for values by resource type are described as follows:
+	//
+	//   - Amazon Aurora, Amazon DocumentDB, and Amazon Neptune do not have this value
+	//   populate from the operation GetBackupJobStatus .
+	//
+	//   - For Amazon DynamoDB with advanced features, this value refers to the size
+	//   of the recovery point (backup).
+	//
+	//   - Amazon EC2 and Amazon EBS show volume size (provisioned storage) returned
+	//   as part of this value. Amazon EBS does not return backup size information;
+	//   snapshot size will have the same value as the original resource that was backed
+	//   up.
+	//
+	//   - For Amazon EFS, this value refers to the delta bytes transferred during a
+	//   backup.
+	//
+	//   - Amazon FSx does not populate this value from the operation
+	//   GetBackupJobStatus for FSx file systems.
+	//
+	//   - An Amazon RDS instance will show as 0 .
+	//
+	//   - For virtual machines running VMware, this value is passed to Backup through
+	//   an asynchronous workflow, which can mean this displayed value can
+	//   under-represent the actual backup size.
 	BackupSizeInBytes *int64
 
 	// Represents the actual backup type selected for a backup job. For example, if a

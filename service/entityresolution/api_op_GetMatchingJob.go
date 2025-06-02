@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets the status, metrics, and errors (if there are any) that are associated
+// Returns the status, metrics, and errors (if there are any) that are associated
 // with a job.
 func (c *Client) GetMatchingJob(ctx context.Context, params *GetMatchingJobInput, optFns ...func(*Options)) (*GetMatchingJobOutput, error) {
 	if params == nil {
@@ -46,7 +46,7 @@ type GetMatchingJobInput struct {
 
 type GetMatchingJobOutput struct {
 
-	// The ID of the job.
+	// The unique identifier of the matching job.
 	//
 	// This member is required.
 	JobId *string

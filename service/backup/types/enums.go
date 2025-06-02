@@ -97,23 +97,26 @@ type BackupVaultEvent string
 
 // Enum values for BackupVaultEvent
 const (
-	BackupVaultEventBackupJobStarted      BackupVaultEvent = "BACKUP_JOB_STARTED"
-	BackupVaultEventBackupJobCompleted    BackupVaultEvent = "BACKUP_JOB_COMPLETED"
-	BackupVaultEventBackupJobSuccessful   BackupVaultEvent = "BACKUP_JOB_SUCCESSFUL"
-	BackupVaultEventBackupJobFailed       BackupVaultEvent = "BACKUP_JOB_FAILED"
-	BackupVaultEventBackupJobExpired      BackupVaultEvent = "BACKUP_JOB_EXPIRED"
-	BackupVaultEventRestoreJobStarted     BackupVaultEvent = "RESTORE_JOB_STARTED"
-	BackupVaultEventRestoreJobCompleted   BackupVaultEvent = "RESTORE_JOB_COMPLETED"
-	BackupVaultEventRestoreJobSuccessful  BackupVaultEvent = "RESTORE_JOB_SUCCESSFUL"
-	BackupVaultEventRestoreJobFailed      BackupVaultEvent = "RESTORE_JOB_FAILED"
-	BackupVaultEventCopyJobStarted        BackupVaultEvent = "COPY_JOB_STARTED"
-	BackupVaultEventCopyJobSuccessful     BackupVaultEvent = "COPY_JOB_SUCCESSFUL"
-	BackupVaultEventCopyJobFailed         BackupVaultEvent = "COPY_JOB_FAILED"
-	BackupVaultEventRecoveryPointModified BackupVaultEvent = "RECOVERY_POINT_MODIFIED"
-	BackupVaultEventBackupPlanCreated     BackupVaultEvent = "BACKUP_PLAN_CREATED"
-	BackupVaultEventBackupPlanModified    BackupVaultEvent = "BACKUP_PLAN_MODIFIED"
-	BackupVaultEventS3BackupObjectFailed  BackupVaultEvent = "S3_BACKUP_OBJECT_FAILED"
-	BackupVaultEventS3RestoreObjectFailed BackupVaultEvent = "S3_RESTORE_OBJECT_FAILED"
+	BackupVaultEventBackupJobStarted            BackupVaultEvent = "BACKUP_JOB_STARTED"
+	BackupVaultEventBackupJobCompleted          BackupVaultEvent = "BACKUP_JOB_COMPLETED"
+	BackupVaultEventBackupJobSuccessful         BackupVaultEvent = "BACKUP_JOB_SUCCESSFUL"
+	BackupVaultEventBackupJobFailed             BackupVaultEvent = "BACKUP_JOB_FAILED"
+	BackupVaultEventBackupJobExpired            BackupVaultEvent = "BACKUP_JOB_EXPIRED"
+	BackupVaultEventRestoreJobStarted           BackupVaultEvent = "RESTORE_JOB_STARTED"
+	BackupVaultEventRestoreJobCompleted         BackupVaultEvent = "RESTORE_JOB_COMPLETED"
+	BackupVaultEventRestoreJobSuccessful        BackupVaultEvent = "RESTORE_JOB_SUCCESSFUL"
+	BackupVaultEventRestoreJobFailed            BackupVaultEvent = "RESTORE_JOB_FAILED"
+	BackupVaultEventCopyJobStarted              BackupVaultEvent = "COPY_JOB_STARTED"
+	BackupVaultEventCopyJobSuccessful           BackupVaultEvent = "COPY_JOB_SUCCESSFUL"
+	BackupVaultEventCopyJobFailed               BackupVaultEvent = "COPY_JOB_FAILED"
+	BackupVaultEventRecoveryPointModified       BackupVaultEvent = "RECOVERY_POINT_MODIFIED"
+	BackupVaultEventBackupPlanCreated           BackupVaultEvent = "BACKUP_PLAN_CREATED"
+	BackupVaultEventBackupPlanModified          BackupVaultEvent = "BACKUP_PLAN_MODIFIED"
+	BackupVaultEventS3BackupObjectFailed        BackupVaultEvent = "S3_BACKUP_OBJECT_FAILED"
+	BackupVaultEventS3RestoreObjectFailed       BackupVaultEvent = "S3_RESTORE_OBJECT_FAILED"
+	BackupVaultEventRecoveryPointIndexCompleted BackupVaultEvent = "RECOVERY_POINT_INDEX_COMPLETED"
+	BackupVaultEventRecoveryPointIndexDeleted   BackupVaultEvent = "RECOVERY_POINT_INDEX_DELETED"
+	BackupVaultEventRecoveryPointIndexingFailed BackupVaultEvent = "RECOVERY_POINT_INDEXING_FAILED"
 )
 
 // Values returns all known values for BackupVaultEvent. Note that this can be
@@ -139,6 +142,9 @@ func (BackupVaultEvent) Values() []BackupVaultEvent {
 		"BACKUP_PLAN_MODIFIED",
 		"S3_BACKUP_OBJECT_FAILED",
 		"S3_RESTORE_OBJECT_FAILED",
+		"RECOVERY_POINT_INDEX_COMPLETED",
+		"RECOVERY_POINT_INDEX_DELETED",
+		"RECOVERY_POINT_INDEXING_FAILED",
 	}
 }
 
@@ -294,6 +300,9 @@ const (
 	RecoveryPointStatusPartial   RecoveryPointStatus = "PARTIAL"
 	RecoveryPointStatusDeleting  RecoveryPointStatus = "DELETING"
 	RecoveryPointStatusExpired   RecoveryPointStatus = "EXPIRED"
+	RecoveryPointStatusAvailable RecoveryPointStatus = "AVAILABLE"
+	RecoveryPointStatusStopped   RecoveryPointStatus = "STOPPED"
+	RecoveryPointStatusCreating  RecoveryPointStatus = "CREATING"
 )
 
 // Values returns all known values for RecoveryPointStatus. Note that this can be
@@ -306,6 +315,9 @@ func (RecoveryPointStatus) Values() []RecoveryPointStatus {
 		"PARTIAL",
 		"DELETING",
 		"EXPIRED",
+		"AVAILABLE",
+		"STOPPED",
+		"CREATING",
 	}
 }
 

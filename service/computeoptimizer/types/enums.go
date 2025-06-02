@@ -1055,15 +1055,20 @@ const (
 	ExportableRDSDBFieldEngineVersion                                                              ExportableRDSDBField = "EngineVersion"
 	ExportableRDSDBFieldIdle                                                                       ExportableRDSDBField = "Idle"
 	ExportableRDSDBFieldMultiAzDbInstance                                                          ExportableRDSDBField = "MultiAZDBInstance"
+	ExportableRDSDBFieldClusterWriter                                                              ExportableRDSDBField = "ClusterWriter"
 	ExportableRDSDBFieldCurrentDbInstanceClass                                                     ExportableRDSDBField = "CurrentDBInstanceClass"
 	ExportableRDSDBFieldCurrentStorageConfigurationStorageType                                     ExportableRDSDBField = "CurrentStorageConfigurationStorageType"
 	ExportableRDSDBFieldCurrentStorageConfigurationAllocatedStorage                                ExportableRDSDBField = "CurrentStorageConfigurationAllocatedStorage"
 	ExportableRDSDBFieldCurrentStorageConfigurationMaxAllocatedStorage                             ExportableRDSDBField = "CurrentStorageConfigurationMaxAllocatedStorage"
 	ExportableRDSDBFieldCurrentStorageConfigurationIops                                            ExportableRDSDBField = "CurrentStorageConfigurationIOPS"
 	ExportableRDSDBFieldCurrentStorageConfigurationStorageThroughput                               ExportableRDSDBField = "CurrentStorageConfigurationStorageThroughput"
+	ExportableRDSDBFieldCurrentStorageEstimatedMonthlyVolumeIopsCostVariation                      ExportableRDSDBField = "CurrentStorageEstimatedMonthlyVolumeIOPsCostVariation"
 	ExportableRDSDBFieldCurrentInstanceOnDemandHourlyPrice                                         ExportableRDSDBField = "CurrentInstanceOnDemandHourlyPrice"
 	ExportableRDSDBFieldCurrentStorageOnDemandMonthlyPrice                                         ExportableRDSDBField = "CurrentStorageOnDemandMonthlyPrice"
 	ExportableRDSDBFieldLookbackPeriodInDays                                                       ExportableRDSDBField = "LookbackPeriodInDays"
+	ExportableRDSDBFieldCurrentStorageEstimatedClusterInstanceOnDemandMonthlyCost                  ExportableRDSDBField = "CurrentStorageEstimatedClusterInstanceOnDemandMonthlyCost"
+	ExportableRDSDBFieldCurrentStorageEstimatedClusterStorageOnDemandMonthlyCost                   ExportableRDSDBField = "CurrentStorageEstimatedClusterStorageOnDemandMonthlyCost"
+	ExportableRDSDBFieldCurrentStorageEstimatedClusterStorageIoOnDemandMonthlyCost                 ExportableRDSDBField = "CurrentStorageEstimatedClusterStorageIOOnDemandMonthlyCost"
 	ExportableRDSDBFieldCurrentInstancePerformanceRisk                                             ExportableRDSDBField = "CurrentInstancePerformanceRisk"
 	ExportableRDSDBFieldUtilizationMetricsCpuMaximum                                               ExportableRDSDBField = "UtilizationMetricsCpuMaximum"
 	ExportableRDSDBFieldUtilizationMetricsMemoryMaximum                                            ExportableRDSDBField = "UtilizationMetricsMemoryMaximum"
@@ -1083,6 +1088,9 @@ const (
 	ExportableRDSDBFieldUtilizationMetricsAuroraMemoryNumKillQueryTotalMaximum                     ExportableRDSDBField = "UtilizationMetricsAuroraMemoryNumKillQueryTotalMaximum"
 	ExportableRDSDBFieldUtilizationMetricsReadIopsEphemeralStorageMaximum                          ExportableRDSDBField = "UtilizationMetricsReadIOPSEphemeralStorageMaximum"
 	ExportableRDSDBFieldUtilizationMetricsWriteIopsEphemeralStorageMaximum                         ExportableRDSDBField = "UtilizationMetricsWriteIOPSEphemeralStorageMaximum"
+	ExportableRDSDBFieldUtilizationMetricsVolumeBytesUsedAverage                                   ExportableRDSDBField = "UtilizationMetricsVolumeBytesUsedAverage"
+	ExportableRDSDBFieldUtilizationMetricsVolumeReadIopsAverage                                    ExportableRDSDBField = "UtilizationMetricsVolumeReadIOPsAverage"
+	ExportableRDSDBFieldUtilizationMetricsVolumeWriteIopsAverage                                   ExportableRDSDBField = "UtilizationMetricsVolumeWriteIOPsAverage"
 	ExportableRDSDBFieldInstanceFinding                                                            ExportableRDSDBField = "InstanceFinding"
 	ExportableRDSDBFieldInstanceFindingReasonCodes                                                 ExportableRDSDBField = "InstanceFindingReasonCodes"
 	ExportableRDSDBFieldStorageFinding                                                             ExportableRDSDBField = "StorageFinding"
@@ -1097,6 +1105,7 @@ const (
 	ExportableRDSDBFieldStorageRecommendationOptionsIops                                           ExportableRDSDBField = "StorageRecommendationOptionsIOPS"
 	ExportableRDSDBFieldStorageRecommendationOptionsStorageThroughput                              ExportableRDSDBField = "StorageRecommendationOptionsStorageThroughput"
 	ExportableRDSDBFieldStorageRecommendationOptionsRank                                           ExportableRDSDBField = "StorageRecommendationOptionsRank"
+	ExportableRDSDBFieldStorageRecommendationOptionsEstimatedMonthlyVolumeIopsCostVariation        ExportableRDSDBField = "StorageRecommendationOptionsEstimatedMonthlyVolumeIOPsCostVariation"
 	ExportableRDSDBFieldInstanceRecommendationOptionsInstanceOnDemandHourlyPrice                   ExportableRDSDBField = "InstanceRecommendationOptionsInstanceOnDemandHourlyPrice"
 	ExportableRDSDBFieldInstanceRecommendationOptionsSavingsOpportunityPercentage                  ExportableRDSDBField = "InstanceRecommendationOptionsSavingsOpportunityPercentage"
 	ExportableRDSDBFieldInstanceRecommendationOptionsEstimatedMonthlySavingsCurrency               ExportableRDSDBField = "InstanceRecommendationOptionsEstimatedMonthlySavingsCurrency"
@@ -1105,6 +1114,9 @@ const (
 	ExportableRDSDBFieldInstanceRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts ExportableRDSDBField = "InstanceRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"
 	ExportableRDSDBFieldInstanceRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts    ExportableRDSDBField = "InstanceRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
 	ExportableRDSDBFieldStorageRecommendationOptionsOnDemandMonthlyPrice                           ExportableRDSDBField = "StorageRecommendationOptionsOnDemandMonthlyPrice"
+	ExportableRDSDBFieldStorageRecommendationOptionsEstimatedClusterInstanceOnDemandMonthlyCost    ExportableRDSDBField = "StorageRecommendationOptionsEstimatedClusterInstanceOnDemandMonthlyCost"
+	ExportableRDSDBFieldStorageRecommendationOptionsEstimatedClusterStorageOnDemandMonthlyCost     ExportableRDSDBField = "StorageRecommendationOptionsEstimatedClusterStorageOnDemandMonthlyCost"
+	ExportableRDSDBFieldStorageRecommendationOptionsEstimatedClusterStorageIoOnDemandMonthlyCost   ExportableRDSDBField = "StorageRecommendationOptionsEstimatedClusterStorageIOOnDemandMonthlyCost"
 	ExportableRDSDBFieldStorageRecommendationOptionsSavingsOpportunityPercentage                   ExportableRDSDBField = "StorageRecommendationOptionsSavingsOpportunityPercentage"
 	ExportableRDSDBFieldStorageRecommendationOptionsEstimatedMonthlySavingsCurrency                ExportableRDSDBField = "StorageRecommendationOptionsEstimatedMonthlySavingsCurrency"
 	ExportableRDSDBFieldStorageRecommendationOptionsEstimatedMonthlySavingsValue                   ExportableRDSDBField = "StorageRecommendationOptionsEstimatedMonthlySavingsValue"
@@ -1133,15 +1145,20 @@ func (ExportableRDSDBField) Values() []ExportableRDSDBField {
 		"EngineVersion",
 		"Idle",
 		"MultiAZDBInstance",
+		"ClusterWriter",
 		"CurrentDBInstanceClass",
 		"CurrentStorageConfigurationStorageType",
 		"CurrentStorageConfigurationAllocatedStorage",
 		"CurrentStorageConfigurationMaxAllocatedStorage",
 		"CurrentStorageConfigurationIOPS",
 		"CurrentStorageConfigurationStorageThroughput",
+		"CurrentStorageEstimatedMonthlyVolumeIOPsCostVariation",
 		"CurrentInstanceOnDemandHourlyPrice",
 		"CurrentStorageOnDemandMonthlyPrice",
 		"LookbackPeriodInDays",
+		"CurrentStorageEstimatedClusterInstanceOnDemandMonthlyCost",
+		"CurrentStorageEstimatedClusterStorageOnDemandMonthlyCost",
+		"CurrentStorageEstimatedClusterStorageIOOnDemandMonthlyCost",
 		"CurrentInstancePerformanceRisk",
 		"UtilizationMetricsCpuMaximum",
 		"UtilizationMetricsMemoryMaximum",
@@ -1161,6 +1178,9 @@ func (ExportableRDSDBField) Values() []ExportableRDSDBField {
 		"UtilizationMetricsAuroraMemoryNumKillQueryTotalMaximum",
 		"UtilizationMetricsReadIOPSEphemeralStorageMaximum",
 		"UtilizationMetricsWriteIOPSEphemeralStorageMaximum",
+		"UtilizationMetricsVolumeBytesUsedAverage",
+		"UtilizationMetricsVolumeReadIOPsAverage",
+		"UtilizationMetricsVolumeWriteIOPsAverage",
 		"InstanceFinding",
 		"InstanceFindingReasonCodes",
 		"StorageFinding",
@@ -1175,6 +1195,7 @@ func (ExportableRDSDBField) Values() []ExportableRDSDBField {
 		"StorageRecommendationOptionsIOPS",
 		"StorageRecommendationOptionsStorageThroughput",
 		"StorageRecommendationOptionsRank",
+		"StorageRecommendationOptionsEstimatedMonthlyVolumeIOPsCostVariation",
 		"InstanceRecommendationOptionsInstanceOnDemandHourlyPrice",
 		"InstanceRecommendationOptionsSavingsOpportunityPercentage",
 		"InstanceRecommendationOptionsEstimatedMonthlySavingsCurrency",
@@ -1183,6 +1204,9 @@ func (ExportableRDSDBField) Values() []ExportableRDSDBField {
 		"InstanceRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
 		"InstanceRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
 		"StorageRecommendationOptionsOnDemandMonthlyPrice",
+		"StorageRecommendationOptionsEstimatedClusterInstanceOnDemandMonthlyCost",
+		"StorageRecommendationOptionsEstimatedClusterStorageOnDemandMonthlyCost",
+		"StorageRecommendationOptionsEstimatedClusterStorageIOOnDemandMonthlyCost",
 		"StorageRecommendationOptionsSavingsOpportunityPercentage",
 		"StorageRecommendationOptionsEstimatedMonthlySavingsCurrency",
 		"StorageRecommendationOptionsEstimatedMonthlySavingsValue",
@@ -2289,6 +2313,9 @@ const (
 	RDSDBMetricNameAuroraMemoryNumKillQueryTotal    RDSDBMetricName = "AuroraMemoryNumKillQueryTotal"
 	RDSDBMetricNameReadIopsEphemeralStorage         RDSDBMetricName = "ReadIOPSEphemeralStorage"
 	RDSDBMetricNameWriteIopsEphemeralStorage        RDSDBMetricName = "WriteIOPSEphemeralStorage"
+	RDSDBMetricNameVolumeReadIops                   RDSDBMetricName = "VolumeReadIOPs"
+	RDSDBMetricNameVolumeBytesUsed                  RDSDBMetricName = "VolumeBytesUsed"
+	RDSDBMetricNameVolumeWriteIops                  RDSDBMetricName = "VolumeWriteIOPs"
 )
 
 // Values returns all known values for RDSDBMetricName. Note that this can be
@@ -2315,6 +2342,9 @@ func (RDSDBMetricName) Values() []RDSDBMetricName {
 		"AuroraMemoryNumKillQueryTotal",
 		"ReadIOPSEphemeralStorage",
 		"WriteIOPSEphemeralStorage",
+		"VolumeReadIOPs",
+		"VolumeBytesUsed",
+		"VolumeWriteIOPs",
 	}
 }
 
@@ -2362,6 +2392,30 @@ func (RDSDBRecommendationFilterName) Values() []RDSDBRecommendationFilterName {
 		"StorageFinding",
 		"StorageFindingReasonCode",
 		"Idle",
+	}
+}
+
+type RDSEstimatedMonthlyVolumeIOPsCostVariation string
+
+// Enum values for RDSEstimatedMonthlyVolumeIOPsCostVariation
+const (
+	RDSEstimatedMonthlyVolumeIOPsCostVariationNone   RDSEstimatedMonthlyVolumeIOPsCostVariation = "None"
+	RDSEstimatedMonthlyVolumeIOPsCostVariationLow    RDSEstimatedMonthlyVolumeIOPsCostVariation = "Low"
+	RDSEstimatedMonthlyVolumeIOPsCostVariationMedium RDSEstimatedMonthlyVolumeIOPsCostVariation = "Medium"
+	RDSEstimatedMonthlyVolumeIOPsCostVariationHigh   RDSEstimatedMonthlyVolumeIOPsCostVariation = "High"
+)
+
+// Values returns all known values for RDSEstimatedMonthlyVolumeIOPsCostVariation.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RDSEstimatedMonthlyVolumeIOPsCostVariation) Values() []RDSEstimatedMonthlyVolumeIOPsCostVariation {
+	return []RDSEstimatedMonthlyVolumeIOPsCostVariation{
+		"None",
+		"Low",
+		"Medium",
+		"High",
 	}
 }
 
@@ -2459,6 +2513,7 @@ const (
 	RDSStorageFindingOptimized        RDSStorageFinding = "Optimized"
 	RDSStorageFindingUnderProvisioned RDSStorageFinding = "Underprovisioned"
 	RDSStorageFindingOverProvisioned  RDSStorageFinding = "Overprovisioned"
+	RDSStorageFindingNotOptimized     RDSStorageFinding = "NotOptimized"
 )
 
 // Values returns all known values for RDSStorageFinding. Note that this can be
@@ -2470,6 +2525,7 @@ func (RDSStorageFinding) Values() []RDSStorageFinding {
 		"Optimized",
 		"Underprovisioned",
 		"Overprovisioned",
+		"NotOptimized",
 	}
 }
 
@@ -2482,6 +2538,8 @@ const (
 	RDSStorageFindingReasonCodeEbsVolumeIopsOverProvisioned              RDSStorageFindingReasonCode = "EBSVolumeIOPSOverprovisioned"
 	RDSStorageFindingReasonCodeEbsVolumeThroughputOverProvisioned        RDSStorageFindingReasonCode = "EBSVolumeThroughputOverprovisioned"
 	RDSStorageFindingReasonCodeNewGenerationStorageTypeAvailable         RDSStorageFindingReasonCode = "NewGenerationStorageTypeAvailable"
+	RDSStorageFindingReasonCodeDbClusterStorageOptionAvailable           RDSStorageFindingReasonCode = "DBClusterStorageOptionAvailable"
+	RDSStorageFindingReasonCodeDbClusterStorageSavingsAvailable          RDSStorageFindingReasonCode = "DBClusterStorageSavingsAvailable"
 )
 
 // Values returns all known values for RDSStorageFindingReasonCode. Note that this
@@ -2495,6 +2553,8 @@ func (RDSStorageFindingReasonCode) Values() []RDSStorageFindingReasonCode {
 		"EBSVolumeIOPSOverprovisioned",
 		"EBSVolumeThroughputOverprovisioned",
 		"NewGenerationStorageTypeAvailable",
+		"DBClusterStorageOptionAvailable",
+		"DBClusterStorageSavingsAvailable",
 	}
 }
 
@@ -2530,14 +2590,15 @@ type RecommendationSourceType string
 
 // Enum values for RecommendationSourceType
 const (
-	RecommendationSourceTypeEc2Instance          RecommendationSourceType = "Ec2Instance"
-	RecommendationSourceTypeAutoScalingGroup     RecommendationSourceType = "AutoScalingGroup"
-	RecommendationSourceTypeEbsVolume            RecommendationSourceType = "EbsVolume"
-	RecommendationSourceTypeLambdaFunction       RecommendationSourceType = "LambdaFunction"
-	RecommendationSourceTypeEcsService           RecommendationSourceType = "EcsService"
-	RecommendationSourceTypeLicense              RecommendationSourceType = "License"
-	RecommendationSourceTypeRdsDbInstance        RecommendationSourceType = "RdsDBInstance"
-	RecommendationSourceTypeRdsDbInstanceStorage RecommendationSourceType = "RdsDBInstanceStorage"
+	RecommendationSourceTypeEc2Instance            RecommendationSourceType = "Ec2Instance"
+	RecommendationSourceTypeAutoScalingGroup       RecommendationSourceType = "AutoScalingGroup"
+	RecommendationSourceTypeEbsVolume              RecommendationSourceType = "EbsVolume"
+	RecommendationSourceTypeLambdaFunction         RecommendationSourceType = "LambdaFunction"
+	RecommendationSourceTypeEcsService             RecommendationSourceType = "EcsService"
+	RecommendationSourceTypeLicense                RecommendationSourceType = "License"
+	RecommendationSourceTypeRdsDbInstance          RecommendationSourceType = "RdsDBInstance"
+	RecommendationSourceTypeRdsDbInstanceStorage   RecommendationSourceType = "RdsDBInstanceStorage"
+	RecommendationSourceTypeAuroraDbClusterStorage RecommendationSourceType = "AuroraDBClusterStorage"
 )
 
 // Values returns all known values for RecommendationSourceType. Note that this
@@ -2554,6 +2615,7 @@ func (RecommendationSourceType) Values() []RecommendationSourceType {
 		"License",
 		"RdsDBInstance",
 		"RdsDBInstanceStorage",
+		"AuroraDBClusterStorage",
 	}
 }
 
@@ -2561,15 +2623,16 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeEc2Instance      ResourceType = "Ec2Instance"
-	ResourceTypeAutoScalingGroup ResourceType = "AutoScalingGroup"
-	ResourceTypeEbsVolume        ResourceType = "EbsVolume"
-	ResourceTypeLambdaFunction   ResourceType = "LambdaFunction"
-	ResourceTypeNotApplicable    ResourceType = "NotApplicable"
-	ResourceTypeEcsService       ResourceType = "EcsService"
-	ResourceTypeLicense          ResourceType = "License"
-	ResourceTypeRdsDbInstance    ResourceType = "RdsDBInstance"
-	ResourceTypeIdle             ResourceType = "Idle"
+	ResourceTypeEc2Instance            ResourceType = "Ec2Instance"
+	ResourceTypeAutoScalingGroup       ResourceType = "AutoScalingGroup"
+	ResourceTypeEbsVolume              ResourceType = "EbsVolume"
+	ResourceTypeLambdaFunction         ResourceType = "LambdaFunction"
+	ResourceTypeNotApplicable          ResourceType = "NotApplicable"
+	ResourceTypeEcsService             ResourceType = "EcsService"
+	ResourceTypeLicense                ResourceType = "License"
+	ResourceTypeRdsDbInstance          ResourceType = "RdsDBInstance"
+	ResourceTypeAuroraDbClusterStorage ResourceType = "AuroraDBClusterStorage"
+	ResourceTypeIdle                   ResourceType = "Idle"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -2586,6 +2649,7 @@ func (ResourceType) Values() []ResourceType {
 		"EcsService",
 		"License",
 		"RdsDBInstance",
+		"AuroraDBClusterStorage",
 		"Idle",
 	}
 }

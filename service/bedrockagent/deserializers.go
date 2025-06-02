@@ -14039,6 +14039,15 @@ func awsRestjson1_deserializeDocumentAgentAlias(v **types.AgentAlias, value inte
 				sv.AgentId = ptr.String(jtv)
 			}
 
+		case "aliasInvocationState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AliasInvocationState to be of type string, got %T instead", value)
+				}
+				sv.AliasInvocationState = types.AliasInvocationState(jtv)
+			}
+
 		case "clientToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14362,6 +14371,15 @@ func awsRestjson1_deserializeDocumentAgentAliasSummary(v **types.AgentAliasSumma
 					return fmt.Errorf("expected AgentAliasStatus to be of type string, got %T instead", value)
 				}
 				sv.AgentAliasStatus = types.AgentAliasStatus(jtv)
+			}
+
+		case "aliasInvocationState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AliasInvocationState to be of type string, got %T instead", value)
+				}
+				sv.AliasInvocationState = types.AliasInvocationState(jtv)
 			}
 
 		case "createdAt":

@@ -114,6 +114,11 @@ type DescribeBackupVaultOutput struct {
 	MinRetentionDays *int64
 
 	// The number of recovery points that are stored in a backup vault.
+	//
+	// Recovery point count value displayed in the console can be an approximation.
+	// Use [ListRecoveryPointsByBackupVault]ListRecoveryPointsByBackupVault API to obtain the exact count.
+	//
+	// [ListRecoveryPointsByBackupVault]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListRecoveryPointsByBackupVault.html
 	NumberOfRecoveryPoints int64
 
 	// The current state of the vault.->

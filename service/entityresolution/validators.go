@@ -230,6 +230,26 @@ func (m *validateOpDeleteSchemaMapping) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGenerateMatchId struct {
+}
+
+func (*validateOpGenerateMatchId) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGenerateMatchId) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GenerateMatchIdInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGenerateMatchIdInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetIdMappingJob struct {
 }
 
@@ -692,6 +712,10 @@ func addOpDeletePolicyStatementValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDeleteSchemaMappingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSchemaMapping{}, middleware.After)
+}
+
+func addOpGenerateMatchIdValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGenerateMatchId{}, middleware.After)
 }
 
 func addOpGetIdMappingJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1175,6 +1199,44 @@ func validateProviderProperties(v *types.ProviderProperties) error {
 	}
 }
 
+func validateRecord(v *types.Record) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Record"}
+	if v.InputSourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputSourceARN"))
+	}
+	if v.UniqueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UniqueId"))
+	}
+	if v.RecordAttributeMap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordAttributeMap"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecordList(v []types.Record) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecordList"}
+	for i := range v {
+		if err := validateRecord(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResolutionTechniques(v *types.ResolutionTechniques) error {
 	if v == nil {
 		return nil
@@ -1530,6 +1592,28 @@ func validateOpDeleteSchemaMappingInput(v *DeleteSchemaMappingInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSchemaMappingInput"}
 	if v.SchemaName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGenerateMatchIdInput(v *GenerateMatchIdInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerateMatchIdInput"}
+	if v.WorkflowName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowName"))
+	}
+	if v.Records == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Records"))
+	} else if v.Records != nil {
+		if err := validateRecordList(v.Records); err != nil {
+			invalidParams.AddNested("Records", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

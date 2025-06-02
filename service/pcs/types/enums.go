@@ -32,6 +32,8 @@ const (
 	ClusterStatusCreateFailed ClusterStatus = "CREATE_FAILED"
 	ClusterStatusDeleteFailed ClusterStatus = "DELETE_FAILED"
 	ClusterStatusUpdateFailed ClusterStatus = "UPDATE_FAILED"
+	ClusterStatusSuspending   ClusterStatus = "SUSPENDING"
+	ClusterStatusSuspended    ClusterStatus = "SUSPENDED"
 )
 
 // Values returns all known values for ClusterStatus. Note that this can be
@@ -47,6 +49,8 @@ func (ClusterStatus) Values() []ClusterStatus {
 		"CREATE_FAILED",
 		"DELETE_FAILED",
 		"UPDATE_FAILED",
+		"SUSPENDING",
+		"SUSPENDED",
 	}
 }
 
@@ -62,6 +66,8 @@ const (
 	ComputeNodeGroupStatusDeleteFailed ComputeNodeGroupStatus = "DELETE_FAILED"
 	ComputeNodeGroupStatusUpdateFailed ComputeNodeGroupStatus = "UPDATE_FAILED"
 	ComputeNodeGroupStatusDeleted      ComputeNodeGroupStatus = "DELETED"
+	ComputeNodeGroupStatusSuspending   ComputeNodeGroupStatus = "SUSPENDING"
+	ComputeNodeGroupStatusSuspended    ComputeNodeGroupStatus = "SUSPENDED"
 )
 
 // Values returns all known values for ComputeNodeGroupStatus. Note that this can
@@ -78,6 +84,8 @@ func (ComputeNodeGroupStatus) Values() []ComputeNodeGroupStatus {
 		"DELETE_FAILED",
 		"UPDATE_FAILED",
 		"DELETED",
+		"SUSPENDING",
+		"SUSPENDED",
 	}
 }
 
@@ -130,6 +138,8 @@ const (
 	QueueStatusCreateFailed QueueStatus = "CREATE_FAILED"
 	QueueStatusDeleteFailed QueueStatus = "DELETE_FAILED"
 	QueueStatusUpdateFailed QueueStatus = "UPDATE_FAILED"
+	QueueStatusSuspending   QueueStatus = "SUSPENDING"
+	QueueStatusSuspended    QueueStatus = "SUSPENDED"
 )
 
 // Values returns all known values for QueueStatus. Note that this can be expanded
@@ -145,6 +155,8 @@ func (QueueStatus) Values() []QueueStatus {
 		"CREATE_FAILED",
 		"DELETE_FAILED",
 		"UPDATE_FAILED",
+		"SUSPENDING",
+		"SUSPENDED",
 	}
 }
 

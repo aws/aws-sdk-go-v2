@@ -18,7 +18,7 @@ import (
 //   - Amazon EC2 instances in an account that are Underprovisioned ,
 //     Overprovisioned , or Optimized .
 //
-//   - Auto Scaling groups in an account that are NotOptimized , or Optimized .
+//   - EC2Auto Scaling groups in an account that are NotOptimized , or Optimized .
 //
 //   - Amazon EBS volumes in an account that are NotOptimized , or Optimized .
 //
@@ -26,6 +26,12 @@ import (
 //
 //   - Amazon ECS services in an account that are Underprovisioned ,
 //     Overprovisioned , or Optimized .
+//
+//   - Commercial software licenses in an account that are InsufficientMetrics ,
+//     NotOptimized or Optimized .
+//
+//   - Amazon Aurora and Amazon RDS databases in an account that are
+//     Underprovisioned , Overprovisioned , Optimized , or NotOptimized .
 func (c *Client) GetRecommendationSummaries(ctx context.Context, params *GetRecommendationSummariesInput, optFns ...func(*Options)) (*GetRecommendationSummariesOutput, error) {
 	if params == nil {
 		params = &GetRecommendationSummariesInput{}

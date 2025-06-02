@@ -11,17 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Export optimization recommendations for your Amazon Relational Database
+//	Export optimization recommendations for your Amazon Aurora and Amazon
 //
-// Service (Amazon RDS).
+// Relational Database Service (Amazon RDS) databases.
 //
 // Recommendations are exported in a comma-separated values (CSV) file, and its
 // metadata in a JavaScript Object Notation (JSON) file, to an existing Amazon
 // Simple Storage Service (Amazon S3) bucket that you specify. For more
 // information, see [Exporting Recommendations]in the Compute Optimizer User Guide.
 //
-// You can have only one Amazon RDS export job in progress per Amazon Web Services
-// Region.
+// You can have only one Amazon Aurora or RDS export job in progress per Amazon
+// Web Services Region.
 //
 // [Exporting Recommendations]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
 func (c *Client) ExportRDSDatabaseRecommendations(ctx context.Context, params *ExportRDSDatabaseRecommendationsInput, optFns ...func(*Options)) (*ExportRDSDatabaseRecommendationsOutput, error) {
@@ -57,7 +57,8 @@ type ExportRDSDatabaseRecommendationsInput struct {
 	// This member is required.
 	S3DestinationConfig *types.S3DestinationConfig
 
-	//  The Amazon Web Services account IDs for the export Amazon RDS recommendations.
+	//  The Amazon Web Services account IDs for the export Amazon Aurora and RDS
+	// database recommendations.
 	//
 	// If your account is the management account or the delegated administrator of an
 	// organization, use this parameter to specify the member account you want to
@@ -84,7 +85,7 @@ type ExportRDSDatabaseRecommendationsInput struct {
 	FileFormat types.FileFormat
 
 	//  An array of objects to specify a filter that exports a more specific set of
-	// Amazon RDS recommendations.
+	// Amazon Aurora and RDS recommendations.
 	Filters []types.RDSDBRecommendationFilter
 
 	// If your account is the management account or the delegated administrator of an

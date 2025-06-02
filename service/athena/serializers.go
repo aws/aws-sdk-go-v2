@@ -4336,6 +4336,61 @@ func awsAwsjson11_serializeDocumentIdentityCenterConfiguration(v *types.Identity
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentManagedQueryResultsConfiguration(v *types.ManagedQueryResultsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsAwsjson11_serializeDocumentManagedQueryResultsEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentManagedQueryResultsConfigurationUpdates(v *types.ManagedQueryResultsConfigurationUpdates, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsAwsjson11_serializeDocumentManagedQueryResultsEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RemoveEncryptionConfiguration != nil {
+		ok := object.Key("RemoveEncryptionConfiguration")
+		ok.Boolean(*v.RemoveEncryptionConfiguration)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentManagedQueryResultsEncryptionConfiguration(v *types.ManagedQueryResultsEncryptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKey != nil {
+		ok := object.Key("KmsKey")
+		ok.String(*v.KmsKey)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentNamedQueryIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4623,6 +4678,13 @@ func awsAwsjson11_serializeDocumentWorkGroupConfiguration(v *types.WorkGroupConf
 		}
 	}
 
+	if v.ManagedQueryResultsConfiguration != nil {
+		ok := object.Key("ManagedQueryResultsConfiguration")
+		if err := awsAwsjson11_serializeDocumentManagedQueryResultsConfiguration(v.ManagedQueryResultsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PublishCloudWatchMetricsEnabled != nil {
 		ok := object.Key("PublishCloudWatchMetricsEnabled")
 		ok.Boolean(*v.PublishCloudWatchMetricsEnabled)
@@ -4691,6 +4753,13 @@ func awsAwsjson11_serializeDocumentWorkGroupConfigurationUpdates(v *types.WorkGr
 	if v.ExecutionRole != nil {
 		ok := object.Key("ExecutionRole")
 		ok.String(*v.ExecutionRole)
+	}
+
+	if v.ManagedQueryResultsConfigurationUpdates != nil {
+		ok := object.Key("ManagedQueryResultsConfigurationUpdates")
+		if err := awsAwsjson11_serializeDocumentManagedQueryResultsConfigurationUpdates(v.ManagedQueryResultsConfigurationUpdates, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PublishCloudWatchMetricsEnabled != nil {
@@ -5257,6 +5326,11 @@ func awsAwsjson11_serializeOpDocumentGetQueryResultsInput(v *GetQueryResultsInpu
 	if v.QueryExecutionId != nil {
 		ok := object.Key("QueryExecutionId")
 		ok.String(*v.QueryExecutionId)
+	}
+
+	if len(v.QueryResultType) > 0 {
+		ok := object.Key("QueryResultType")
+		ok.String(string(v.QueryResultType))
 	}
 
 	return nil

@@ -12,10 +12,25 @@ import (
 
 // Attempts to cancel a job to create a one-time backup of a resource.
 //
-// This action is not supported for the following services: Amazon FSx for Windows
-// File Server, Amazon FSx for Lustre, Amazon FSx for NetApp ONTAP, Amazon FSx for
-// OpenZFS, Amazon DocumentDB (with MongoDB compatibility), Amazon RDS, Amazon
-// Aurora, and Amazon Neptune.
+// This action is not supported for the following services:
+//
+//   - Amazon Aurora
+//
+//   - Amazon DocumentDB (with MongoDB compatibility)
+//
+//   - Amazon FSx for Lustre
+//
+//   - Amazon FSx for NetApp ONTAP
+//
+//   - Amazon FSx for OpenZFS
+//
+//   - Amazon FSx for Windows File Server
+//
+//   - Amazon Neptune
+//
+//   - SAP HANA databases on Amazon EC2 instances
+//
+//   - Amazon RDS
 func (c *Client) StopBackupJob(ctx context.Context, params *StopBackupJobInput, optFns ...func(*Options)) (*StopBackupJobOutput, error) {
 	if params == nil {
 		params = &StopBackupJobInput{}

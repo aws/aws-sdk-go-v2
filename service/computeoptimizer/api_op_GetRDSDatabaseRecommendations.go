@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Returns Amazon RDS recommendations.
+//	Returns Amazon Aurora and RDS database recommendations.
 //
-// Compute Optimizer generates recommendations for Amazon RDS that meet a specific
-// set of requirements. For more information, see the [Supported resources and requirements]in the Compute Optimizer
-// User Guide.
+// Compute Optimizer generates recommendations for Amazon Aurora and RDS databases
+// that meet a specific set of requirements. For more information, see the [Supported resources and requirements]in the
+// Compute Optimizer User Guide.
 //
 // [Supported resources and requirements]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
 func (c *Client) GetRDSDatabaseRecommendations(ctx context.Context, params *GetRDSDatabaseRecommendationsInput, optFns ...func(*Options)) (*GetRDSDatabaseRecommendationsOutput, error) {
@@ -35,35 +35,36 @@ func (c *Client) GetRDSDatabaseRecommendations(ctx context.Context, params *GetR
 
 type GetRDSDatabaseRecommendationsInput struct {
 
-	//  Return the Amazon RDS recommendations to the specified Amazon Web Services
-	// account IDs.
+	//  Return the Amazon Aurora and RDS database recommendations to the specified
+	// Amazon Web Services account IDs.
 	//
 	// If your account is the management account or the delegated administrator of an
-	// organization, use this parameter to return the Amazon RDS recommendations to
-	// specific member accounts.
+	// organization, use this parameter to return the Amazon Aurora and RDS database
+	// recommendations to specific member accounts.
 	//
 	// You can only specify one account ID per request.
 	AccountIds []string
 
 	//  An array of objects to specify a filter that returns a more specific list of
-	// Amazon RDS recommendations.
+	// Amazon Aurora and RDS database recommendations.
 	Filters []types.RDSDBRecommendationFilter
 
-	// The maximum number of Amazon RDS recommendations to return with a single
-	// request.
+	// The maximum number of Amazon Aurora and RDS database recommendations to return
+	// with a single request.
 	//
 	// To retrieve the remaining results, make another request with the returned
 	// nextToken value.
 	MaxResults *int32
 
-	//  The token to advance to the next page of Amazon RDS recommendations.
+	//  The token to advance to the next page of Amazon Aurora and RDS database
+	// recommendations.
 	NextToken *string
 
 	// Describes the recommendation preferences to return in the response of a GetAutoScalingGroupRecommendations, GetEC2InstanceRecommendations, GetEC2RecommendationProjectedMetrics, GetRDSDatabaseRecommendations,
 	// and GetRDSDatabaseRecommendationProjectedMetricsrequest.
 	RecommendationPreferences *types.RecommendationPreferences
 
-	//  The ARN that identifies the Amazon RDS.
+	//  The ARN that identifies the Amazon Aurora or RDS database.
 	//
 	// The following is the format of the ARN:
 	//
@@ -82,10 +83,12 @@ type GetRDSDatabaseRecommendationsOutput struct {
 	//  An array of objects that describe errors of the request.
 	Errors []types.GetRecommendationError
 
-	//  The token to advance to the next page of Amazon RDS recommendations.
+	//  The token to advance to the next page of Amazon Aurora and RDS database
+	// recommendations.
 	NextToken *string
 
-	//  An array of objects that describe the Amazon RDS recommendations.
+	//  An array of objects that describe the Amazon Aurora and RDS database
+	// recommendations.
 	RdsDBRecommendations []types.RDSDBRecommendation
 
 	// Metadata pertaining to the operation's result.

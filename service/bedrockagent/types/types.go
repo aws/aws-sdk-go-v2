@@ -268,7 +268,7 @@ type AgentActionGroup struct {
 	// with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]
 	// .
 	//
-	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+	// [Configure an Amazon Bedrock Agent to complete tasks with computer use tools]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
 	ParentActionGroupSignatureParams map[string]string
 
 	// If this field is set as AMAZON.UserInput , the agent can request the user for
@@ -346,6 +346,12 @@ type AgentAlias struct {
 	// Contains details about the history of the alias.
 	AgentAliasHistoryEvents []AgentAliasHistoryEvent
 
+	// The invocation state for the agent alias. If the agent alias is running, the
+	// value is ACCEPT_INVOCATIONS . If the agent alias is paused, the value is
+	// REJECT_INVOCATIONS . Use the UpdateAgentAlias operation to change the
+	// invocation state.
+	AliasInvocationState AliasInvocationState
+
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
 	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
@@ -419,6 +425,12 @@ type AgentAliasSummary struct {
 	//
 	// This member is required.
 	UpdatedAt *time.Time
+
+	// The invocation state for the agent alias. If the agent alias is running, the
+	// value is ACCEPT_INVOCATIONS . If the agent alias is paused, the value is
+	// REJECT_INVOCATIONS . Use the UpdateAgentAlias operation to change the
+	// invocation state.
+	AliasInvocationState AliasInvocationState
 
 	// The description of the alias.
 	Description *string
@@ -3329,7 +3341,10 @@ type LoopControllerFlowNodeConfiguration struct {
 //   - LoopInput - The entry point node for the loop. This node receives inputs
 //     from nodes outside the loop and from previous loop iterations.
 //
-//   - Body nodes - These can be
+//   - Body nodes - The processing nodes that execute within each loop iteration.
+//     These can be nodes for handling data in your flow, such as a prompt or Lambda
+//     function nodes. Some node types aren't supported inside a DoWhile loop body. For
+//     more information, see [LoopIncompatibleNodeTypeFlowValidationDetails].
 //
 //   - LoopController - The node that evaluates whether the loop should continue or
 //     exit based on a condition.
@@ -3337,6 +3352,8 @@ type LoopControllerFlowNodeConfiguration struct {
 // These nodes work together to create a loop that runs at least once and
 // continues until a specified condition is met or a maximum number of iterations
 // is reached.
+//
+// [LoopIncompatibleNodeTypeFlowValidationDetails]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_LoopIncompatibleNodeTypeFlowValidationDetails.html
 type LoopFlowNodeConfiguration struct {
 
 	// The definition of the DoWhile loop nodes and connections between nodes in the
@@ -4170,7 +4187,7 @@ type PromptConfiguration struct {
 	// promptType . If you set this value to DISABLED , the agent skips that step. The
 	// default state for each promptType is as follows.
 	//
-	//   - PRE_PROCESSING – ENABLED
+	//   - PRE_PROCESSING – DISABLED
 	//
 	//   - ORCHESTRATION – ENABLED
 	//

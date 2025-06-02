@@ -175,38 +175,45 @@ type DescribeRecoveryPointOutput struct {
 	// value will be null .
 	SourceBackupVaultArn *string
 
-	// A status code specifying the state of the recovery point.
+	// A status code specifying the state of the recovery point. For more information,
+	// see [Recovery point status]in the Backup Developer Guide.
 	//
-	// PARTIAL status indicates Backup could not create the recovery point before the
-	// backup window closed. To increase your backup plan window using the API, see [UpdateBackupPlan].
-	// You can also increase your backup plan window using the Console by choosing and
-	// editing your backup plan.
+	//   - CREATING status indicates that an Backup job has been initiated for a
+	//   resource. The backup process has started and is actively processing a backup job
+	//   for the associated recovery point.
 	//
-	// EXPIRED status indicates that the recovery point has exceeded its retention
-	// period, but Backup lacks permission or is otherwise unable to delete it. To
-	// manually delete these recovery points, see [Step 3: Delete the recovery points]in the Clean up resources section of
-	// Getting started.
+	//   - AVAILABLE status indicates that the backup was successfully created for the
+	//   recovery point. The backup process has completed without any issues, and the
+	//   recovery point is now ready for use.
 	//
-	// STOPPED status occurs on a continuous backup where a user has taken some action
-	// that causes the continuous backup to be disabled. This can be caused by the
-	// removal of permissions, turning off versioning, turning off events being sent to
-	// EventBridge, or disabling the EventBridge rules that are put in place by Backup.
-	// For recovery points of Amazon S3, Amazon RDS, and Amazon Aurora resources, this
-	// status occurs when the retention period of a continuous backup rule is changed.
+	//   - PARTIAL status indicates a composite recovery point has one or more nested
+	//   recovery points that were not in the backup.
+	//
+	//   - EXPIRED status indicates that the recovery point has exceeded its retention
+	//   period, but Backup lacks permission or is otherwise unable to delete it. To
+	//   manually delete these recovery points, see [Step 3: Delete the recovery points]in the Clean up resources section
+	//   of Getting started.
+	//
+	//   - STOPPED status occurs on a continuous backup where a user has taken some
+	//   action that causes the continuous backup to be disabled. This can be caused by
+	//   the removal of permissions, turning off versioning, turning off events being
+	//   sent to EventBridge, or disabling the EventBridge rules that are put in place by
+	//   Backup. For recovery points of Amazon S3, Amazon RDS, and Amazon Aurora
+	//   resources, this status occurs when the retention period of a continuous backup
+	//   rule is changed.
 	//
 	// To resolve STOPPED status, ensure that all requested permissions are in place
-	// and that versioning is enabled on the S3 bucket. Once these conditions are met,
-	// the next instance of a backup rule running will result in a new continuous
-	// recovery point being created. The recovery points with STOPPED status do not
-	// need to be deleted.
+	//   and that versioning is enabled on the S3 bucket. Once these conditions are met,
+	//   the next instance of a backup rule running will result in a new continuous
+	//   recovery point being created. The recovery points with STOPPED status do not
+	//   need to be deleted.
 	//
-	// For SAP HANA on Amazon EC2 STOPPED status occurs due to user action,
-	// application misconfiguration, or backup failure. To ensure that future
-	// continuous backups succeed, refer to the recovery point status and check SAP
-	// HANA for details.
+	// For SAP HANA on Amazon EC2 STOPPED status occurs due to user action, application
+	//   misconfiguration, or backup failure. To ensure that future continuous backups
+	//   succeed, refer to the recovery point status and check SAP HANA for details.
 	//
 	// [Step 3: Delete the recovery points]: https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups
-	// [UpdateBackupPlan]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html
+	// [Recovery point status]: https://docs.aws.amazon.com/aws-backup/latest/devguide/applicationstackbackups.html#cfnrecoverypointstatus
 	Status types.RecoveryPointStatus
 
 	// A status message explaining the status of the recovery point.

@@ -51,8 +51,8 @@ type GetSchemaMappingOutput struct {
 	HasWorkflows *bool
 
 	// A list of MappedInputFields . Each MappedInputField corresponds to a column the
-	// source data table, and contains column name plus additional information Venice
-	// uses for matching.
+	// source data table, and contains column name plus additional information Entity
+	// Resolution uses for matching.
 	//
 	// This member is required.
 	MappedInputFields []types.SchemaInputAttribute

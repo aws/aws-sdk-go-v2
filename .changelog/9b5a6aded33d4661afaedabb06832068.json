@@ -1,0 +1,8 @@
+{
+    "id": "9b5a6ade-d33d-4661-afae-dabb06832068",
+    "type": "feature",
+    "description": "This release enables AWS Compute Optimizer to analyze Amazon Aurora database clusters and generate Aurora I/O-Optimized recommendations.",
+    "modules": [
+        "service/computeoptimizer"
+    ]
+}

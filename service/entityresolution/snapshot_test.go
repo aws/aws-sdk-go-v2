@@ -194,6 +194,18 @@ func TestCheckSnapshot_DeleteSchemaMapping(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GenerateMatchId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateMatchId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GenerateMatchId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetIdMappingJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetIdMappingJob(context.Background(), nil, func(o *Options) {
@@ -630,6 +642,18 @@ func TestUpdateSnapshot_DeleteSchemaMapping(t *testing.T) {
 	_, err := svc.DeleteSchemaMapping(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteSchemaMapping")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GenerateMatchId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateMatchId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GenerateMatchId")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

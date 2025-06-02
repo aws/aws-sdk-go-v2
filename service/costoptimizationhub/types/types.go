@@ -26,6 +26,27 @@ type AccountEnrollmentStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the details of an Aurora DB cluster storage.
+type AuroraDbClusterStorage struct {
+
+	// The Aurora DB cluster storage configuration used for recommendations.
+	Configuration *AuroraDbClusterStorageConfiguration
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
+
+	noSmithyDocumentSerde
+}
+
+// The Aurora DB cluster storage configuration used for recommendations.
+type AuroraDbClusterStorageConfiguration struct {
+
+	// The storage type to associate with the Aurora DB cluster.
+	StorageType *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the Amazon Elastic Block Store performance configuration of the
 // current and recommended resource configuration for a recommendation.
 type BlockStoragePerformanceConfiguration struct {
@@ -974,6 +995,7 @@ type ResourceCostCalculation struct {
 //
 // The following types satisfy this interface:
 //
+//	ResourceDetailsMemberAuroraDbClusterStorage
 //	ResourceDetailsMemberComputeSavingsPlans
 //	ResourceDetailsMemberDynamoDbReservedCapacity
 //	ResourceDetailsMemberEbsVolume
@@ -994,6 +1016,15 @@ type ResourceCostCalculation struct {
 type ResourceDetails interface {
 	isResourceDetails()
 }
+
+// The Aurora DB cluster storage recommendation details.
+type ResourceDetailsMemberAuroraDbClusterStorage struct {
+	Value AuroraDbClusterStorage
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberAuroraDbClusterStorage) isResourceDetails() {}
 
 // The Compute Savings Plans recommendation details.
 type ResourceDetailsMemberComputeSavingsPlans struct {

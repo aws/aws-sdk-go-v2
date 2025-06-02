@@ -112,6 +112,15 @@ type Cluster struct {
 	//
 	// The provisioning status doesn't indicate the overall health of the cluster.
 	//
+	// The resource enters the SUSPENDING and SUSPENDED states when the scheduler is
+	// beyond end of life and we have suspended the cluster. When in these states, you
+	// can't use the cluster. The cluster controller is down and all compute instances
+	// are terminated. The resources still count toward your service quotas. You can
+	// delete a resource if its status is SUSPENDED . For more information, see [Frequently asked questions about Slurm versions in PCS] in
+	// the PCS User Guide.
+	//
+	// [Frequently asked questions about Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
+	//
 	// This member is required.
 	Status ClusterStatus
 
@@ -198,6 +207,15 @@ type ClusterSummary struct {
 	//
 	// The provisioning status doesn't indicate the overall health of the cluster.
 	//
+	// The resource enters the SUSPENDING and SUSPENDED states when the scheduler is
+	// beyond end of life and we have suspended the cluster. When in these states, you
+	// can't use the cluster. The cluster controller is down and all compute instances
+	// are terminated. The resources still count toward your service quotas. You can
+	// delete a resource if its status is SUSPENDED . For more information, see [Frequently asked questions about Slurm versions in PCS] in
+	// the PCS User Guide.
+	//
+	// [Frequently asked questions about Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
+	//
 	// This member is required.
 	Status ClusterStatus
 
@@ -273,6 +291,15 @@ type ComputeNodeGroup struct {
 	//
 	// The provisioning status doesn't indicate the overall health of the compute node
 	// group.
+	//
+	// The resource enters the SUSPENDING and SUSPENDED states when the scheduler is
+	// beyond end of life and we have suspended the cluster. When in these states, you
+	// can't use the cluster. The cluster controller is down and all compute instances
+	// are terminated. The resources still count toward your service quotas. You can
+	// delete a resource if its status is SUSPENDED . For more information, see [Frequently asked questions about Slurm versions in PCS] in
+	// the PCS User Guide.
+	//
+	// [Frequently asked questions about Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
 	//
 	// This member is required.
 	Status ComputeNodeGroupStatus
@@ -373,6 +400,15 @@ type ComputeNodeGroupSummary struct {
 	//
 	// The provisioning status doesn't indicate the overall health of the compute node
 	// group.
+	//
+	// The resource enters the SUSPENDING and SUSPENDED states when the scheduler is
+	// beyond end of life and we have suspended the cluster. When in these states, you
+	// can't use the cluster. The cluster controller is down and all compute instances
+	// are terminated. The resources still count toward your service quotas. You can
+	// delete a resource if its status is SUSPENDED . For more information, see [Frequently asked questions about Slurm versions in PCS] in
+	// the PCS User Guide.
+	//
+	// [Frequently asked questions about Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
 	//
 	// This member is required.
 	Status ComputeNodeGroupStatus
@@ -560,6 +596,15 @@ type Queue struct {
 	//
 	// The provisioning status doesn't indicate the overall health of the queue.
 	//
+	// The resource enters the SUSPENDING and SUSPENDED states when the scheduler is
+	// beyond end of life and we have suspended the cluster. When in these states, you
+	// can't use the cluster. The cluster controller is down and all compute instances
+	// are terminated. The resources still count toward your service quotas. You can
+	// delete a resource if its status is SUSPENDED . For more information, see [Frequently asked questions about Slurm versions in PCS] in
+	// the PCS User Guide.
+	//
+	// [Frequently asked questions about Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
+	//
 	// This member is required.
 	Status QueueStatus
 
@@ -605,6 +650,15 @@ type QueueSummary struct {
 	// The provisioning status of the queue.
 	//
 	// The provisioning status doesn't indicate the overall health of the queue.
+	//
+	// The resource enters the SUSPENDING and SUSPENDED states when the scheduler is
+	// beyond end of life and we have suspended the cluster. When in these states, you
+	// can't use the cluster. The cluster controller is down and all compute instances
+	// are terminated. The resources still count toward your service quotas. You can
+	// delete a resource if its status is SUSPENDED . For more information, see [Frequently asked questions about Slurm versions in PCS] in
+	// the PCS User Guide.
+	//
+	// [Frequently asked questions about Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
 	//
 	// This member is required.
 	Status QueueStatus
