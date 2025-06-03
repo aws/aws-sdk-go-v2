@@ -60,6 +60,9 @@ func (m *smithyRpcv2cbor_serializeOpEmptyInputOutput) HandleSerialize(ctx contex
 
 	in.Request = req
 
+	endTimer()
+	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
@@ -93,6 +96,9 @@ func (m *smithyRpcv2cbor_serializeOpFloat16) HandleSerialize(ctx context.Context
 	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
 
 	req.Header.Set("Accept", "application/cbor")
+
+	endTimer()
+	span.End()
 
 	return next.HandleSerialize(ctx, in)
 }
@@ -128,6 +134,9 @@ func (m *smithyRpcv2cbor_serializeOpFractionalSeconds) HandleSerialize(ctx conte
 
 	req.Header.Set("Accept", "application/cbor")
 
+	endTimer()
+	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
@@ -162,6 +171,9 @@ func (m *smithyRpcv2cbor_serializeOpGreetingWithErrors) HandleSerialize(ctx cont
 
 	req.Header.Set("Accept", "application/cbor")
 
+	endTimer()
+	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
@@ -195,6 +207,9 @@ func (m *smithyRpcv2cbor_serializeOpNoInputOutput) HandleSerialize(ctx context.C
 	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
 
 	req.Header.Set("Accept", "application/cbor")
+
+	endTimer()
+	span.End()
 
 	return next.HandleSerialize(ctx, in)
 }
@@ -243,6 +258,9 @@ func (m *smithyRpcv2cbor_serializeOpOperationWithDefaults) HandleSerialize(ctx c
 
 	in.Request = req
 
+	endTimer()
+	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
@@ -289,6 +307,9 @@ func (m *smithyRpcv2cbor_serializeOpOptionalInputOutput) HandleSerialize(ctx con
 	}
 
 	in.Request = req
+
+	endTimer()
+	span.End()
 
 	return next.HandleSerialize(ctx, in)
 }
@@ -337,6 +358,9 @@ func (m *smithyRpcv2cbor_serializeOpRecursiveShapes) HandleSerialize(ctx context
 
 	in.Request = req
 
+	endTimer()
+	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
@@ -383,6 +407,9 @@ func (m *smithyRpcv2cbor_serializeOpRpcV2CborDenseMaps) HandleSerialize(ctx cont
 	}
 
 	in.Request = req
+
+	endTimer()
+	span.End()
 
 	return next.HandleSerialize(ctx, in)
 }
@@ -431,6 +458,9 @@ func (m *smithyRpcv2cbor_serializeOpRpcV2CborLists) HandleSerialize(ctx context.
 
 	in.Request = req
 
+	endTimer()
+	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
@@ -477,6 +507,9 @@ func (m *smithyRpcv2cbor_serializeOpRpcV2CborSparseMaps) HandleSerialize(ctx con
 	}
 
 	in.Request = req
+
+	endTimer()
+	span.End()
 
 	return next.HandleSerialize(ctx, in)
 }
@@ -525,6 +558,9 @@ func (m *smithyRpcv2cbor_serializeOpSimpleScalarProperties) HandleSerialize(ctx 
 
 	in.Request = req
 
+	endTimer()
+	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
@@ -571,6 +607,9 @@ func (m *smithyRpcv2cbor_serializeOpSparseNullsOperation) HandleSerialize(ctx co
 	}
 
 	in.Request = req
+
+	endTimer()
+	span.End()
 
 	return next.HandleSerialize(ctx, in)
 }
