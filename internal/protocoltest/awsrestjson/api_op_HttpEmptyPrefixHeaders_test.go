@@ -20,9 +20,9 @@ import (
 	"testing"
 )
 
-func TestClient_HttpPrefixHeaders_awsRestjson1Serialize(t *testing.T) {
+func TestClient_HttpEmptyPrefixHeaders_awsRestjson1Serialize(t *testing.T) {
 	cases := map[string]struct {
-		Params        *HttpPrefixHeadersInput
+		Params        *HttpEmptyPrefixHeadersInput
 		ExpectMethod  string
 		ExpectURIPath string
 		ExpectQuery   []smithytesting.QueryItem
@@ -35,55 +35,21 @@ func TestClient_HttpPrefixHeaders_awsRestjson1Serialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Adds headers by prefix
-		"RestJsonHttpPrefixHeadersArePresent": {
-			Params: &HttpPrefixHeadersInput{
-				Foo: ptr.String("Foo"),
-				FooMap: map[string]string{
-					"abc": "Abc value",
-					"def": "Def value",
+		// Serializes all request headers, using specific when present
+		"RestJsonHttpEmptyPrefixHeadersRequestClient": {
+			Params: &HttpEmptyPrefixHeadersInput{
+				PrefixHeaders: map[string]string{
+					"x-foo": "Foo",
+					"hello": "Hello",
 				},
+				SpecificHeader: ptr.String("There"),
 			},
 			ExpectMethod:  "GET",
-			ExpectURIPath: "/HttpPrefixHeaders",
+			ExpectURIPath: "/HttpEmptyPrefixHeaders",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
-				"x-foo":     []string{"Foo"},
-				"x-foo-abc": []string{"Abc value"},
-				"x-foo-def": []string{"Def value"},
-			},
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareReaderEmpty(actual)
-			},
-		},
-		// No prefix headers are serialized because the value is not present
-		"RestJsonHttpPrefixHeadersAreNotPresent": {
-			Params: &HttpPrefixHeadersInput{
-				Foo:    ptr.String("Foo"),
-				FooMap: map[string]string{},
-			},
-			ExpectMethod:  "GET",
-			ExpectURIPath: "/HttpPrefixHeaders",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
+				"hello": []string{"There"},
 				"x-foo": []string{"Foo"},
-			},
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareReaderEmpty(actual)
-			},
-		},
-		// Serialize prefix headers were the value is present but empty
-		"RestJsonHttpPrefixEmptyHeaders": {
-			Params: &HttpPrefixHeadersInput{
-				FooMap: map[string]string{
-					"abc": "",
-				},
-			},
-			ExpectMethod:  "GET",
-			ExpectURIPath: "/HttpPrefixHeaders",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"x-foo-abc": []string{""},
 			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)
@@ -121,7 +87,7 @@ func TestClient_HttpPrefixHeaders_awsRestjson1Serialize(t *testing.T) {
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})
-			result, err := client.HttpPrefixHeaders(context.Background(), c.Params, func(options *Options) {
+			result, err := client.HttpEmptyPrefixHeaders(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
 					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
 				})
@@ -154,28 +120,27 @@ func TestClient_HttpPrefixHeaders_awsRestjson1Serialize(t *testing.T) {
 	}
 }
 
-func TestClient_HttpPrefixHeaders_awsRestjson1Deserialize(t *testing.T) {
+func TestClient_HttpEmptyPrefixHeaders_awsRestjson1Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
 		BodyMediaType string
 		Body          []byte
-		ExpectResult  *HttpPrefixHeadersOutput
+		ExpectResult  *HttpEmptyPrefixHeadersOutput
 	}{
-		// Adds headers by prefix
-		"RestJsonHttpPrefixHeadersArePresent": {
+		// Deserializes all response headers with the same for prefix and specific
+		"RestJsonHttpEmptyPrefixHeadersResponseClient": {
 			StatusCode: 200,
 			Header: http.Header{
-				"x-foo":     []string{"Foo"},
-				"x-foo-abc": []string{"Abc value"},
-				"x-foo-def": []string{"Def value"},
+				"hello": []string{"There"},
+				"x-foo": []string{"Foo"},
 			},
-			ExpectResult: &HttpPrefixHeadersOutput{
-				Foo: ptr.String("Foo"),
-				FooMap: map[string]string{
-					"abc": "Abc value",
-					"def": "Def value",
+			ExpectResult: &HttpEmptyPrefixHeadersOutput{
+				PrefixHeaders: map[string]string{
+					"x-foo": "Foo",
+					"hello": "There",
 				},
+				SpecificHeader: ptr.String("There"),
 			},
 		},
 	}
@@ -222,8 +187,8 @@ func TestClient_HttpPrefixHeaders_awsRestjson1Deserialize(t *testing.T) {
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})
-			var params HttpPrefixHeadersInput
-			result, err := client.HttpPrefixHeaders(context.Background(), &params)
+			var params HttpEmptyPrefixHeadersInput
+			result, err := client.HttpEmptyPrefixHeaders(context.Background(), &params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}

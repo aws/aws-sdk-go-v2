@@ -38,6 +38,8 @@
         "api_op_HostWithPathOperation_test.go",
         "api_op_HttpChecksumRequired.go",
         "api_op_HttpChecksumRequired_test.go",
+        "api_op_HttpEmptyPrefixHeaders.go",
+        "api_op_HttpEmptyPrefixHeaders_test.go",
         "api_op_HttpEnumPayload.go",
         "api_op_HttpEnumPayload_test.go",
         "api_op_HttpPayloadTraits.go",

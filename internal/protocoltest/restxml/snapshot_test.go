@@ -242,6 +242,18 @@ func TestCheckSnapshot_GreetingWithErrors(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_HttpEmptyPrefixHeaders(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.HttpEmptyPrefixHeaders(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "HttpEmptyPrefixHeaders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_HttpEnumPayload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.HttpEnumPayload(context.Background(), nil, func(o *Options) {
@@ -990,6 +1002,18 @@ func TestUpdateSnapshot_GreetingWithErrors(t *testing.T) {
 	_, err := svc.GreetingWithErrors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GreetingWithErrors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_HttpEmptyPrefixHeaders(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.HttpEmptyPrefixHeaders(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "HttpEmptyPrefixHeaders")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

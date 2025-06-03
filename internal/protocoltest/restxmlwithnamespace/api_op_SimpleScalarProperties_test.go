@@ -61,7 +61,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput xmlns="https://example.com">
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest xmlns="https://example.com">
 			    <stringValue>string</stringValue>
 			    <trueBooleanValue>true</trueBooleanValue>
 			    <falseBooleanValue>false</falseBooleanValue>
@@ -72,7 +72,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			    <floatValue>5.5</floatValue>
 			    <DoubleDribble>6.5</DoubleDribble>
 			    <Nested xmlns:xsi="https://example.com" xsi:someName="nestedAttrValue"></Nested>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesRequest>
 			`))
 			},
 		},
@@ -156,7 +156,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 				"X-Foo":        []string{"Foo"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<SimpleScalarPropertiesInputOutput xmlns="https://example.com">
+			Body: []byte(`<SimpleScalarPropertiesResponse xmlns="https://example.com">
 			    <stringValue>string</stringValue>
 			    <trueBooleanValue>true</trueBooleanValue>
 			    <falseBooleanValue>false</falseBooleanValue>
@@ -167,7 +167,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 			    <floatValue>5.5</floatValue>
 			    <DoubleDribble>6.5</DoubleDribble>
 			    <Nested xmlns:xsi="https://example.com" xsi:someName="nestedAttrValue"></Nested>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesResponse>
 			`),
 			ExpectResult: &SimpleScalarPropertiesOutput{
 				Foo:               ptr.String("Foo"),

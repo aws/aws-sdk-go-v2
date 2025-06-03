@@ -242,6 +242,18 @@ func TestCheckSnapshot_HttpChecksumRequired(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_HttpEmptyPrefixHeaders(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.HttpEmptyPrefixHeaders(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "HttpEmptyPrefixHeaders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_HttpEnumPayload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.HttpEnumPayload(context.Background(), nil, func(o *Options) {
@@ -1482,6 +1494,18 @@ func TestUpdateSnapshot_HttpChecksumRequired(t *testing.T) {
 	_, err := svc.HttpChecksumRequired(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "HttpChecksumRequired")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_HttpEmptyPrefixHeaders(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.HttpEmptyPrefixHeaders(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "HttpEmptyPrefixHeaders")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

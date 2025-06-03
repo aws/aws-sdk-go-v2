@@ -67,7 +67,7 @@ func (m *awsRestxml_serializeOpSimpleScalarProperties) HandleSerialize(ctx conte
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "SimpleScalarPropertiesInputOutput",
+			Local: "SimpleScalarPropertiesRequest",
 		},
 		Attr: rootAttr,
 	}
