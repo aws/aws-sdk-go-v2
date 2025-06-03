@@ -2717,6 +2717,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A stringified JSON policy document that applies to the <code>execute-api</code> service for this DomainName regardless of the caller and Method\n      configuration. Supported only for private custom\n      domain names.</p>"
                     }
+                },
+                "routingMode": {
+                    "target": "com.amazonaws.apigateway#RoutingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe routing mode for this domain name. The routing mode determines how API Gateway sends traffic from your custom domain name to your private APIs.\n</p>"
+                    }
                 }
             },
             "traits": {
@@ -5149,6 +5155,12 @@
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A stringified JSON policy document that applies to the <code>execute-api</code> service for this DomainName regardless of the caller and Method\n      configuration. Supported only for private custom\n      domain names.</p>"
+                    }
+                },
+                "routingMode": {
+                    "target": "com.amazonaws.apigateway#RoutingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing mode for this domain name. The routing mode determines how API Gateway sends traffic from your custom domain name to your private APIs.</p>"
                     }
                 }
             },
@@ -10813,6 +10825,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains references to your APIs and links that guide you in how to interact with your collection. A collection offers a paginated view of your APIs.</p>"
+            }
+        },
+        "com.amazonaws.apigateway#RoutingMode": {
+            "type": "enum",
+            "members": {
+                "BASE_PATH_MAPPING_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASE_PATH_MAPPING_ONLY"
+                    }
+                },
+                "ROUTING_RULE_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTING_RULE_ONLY"
+                    }
+                },
+                "ROUTING_RULE_THEN_BASE_PATH_MAPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTING_RULE_THEN_BASE_PATH_MAPPING"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#SdkConfigurationProperty": {
