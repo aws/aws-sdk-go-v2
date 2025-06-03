@@ -276,11 +276,17 @@ type DomainName struct {
 	// The API mapping selection expression.
 	ApiMappingSelectionExpression *string
 
+	// Represents an Amazon Resource Name (ARN).
+	DomainNameArn *string
+
 	// The domain name configurations.
 	DomainNameConfigurations []DomainNameConfiguration
 
 	// The mutual TLS authentication configuration for a custom domain name.
 	MutualTlsAuthentication *MutualTlsAuthentication
+
+	// The routing mode.
+	RoutingMode RoutingMode
 
 	// The collection of tags associated with a domain name.
 	Tags map[string]string
@@ -781,6 +787,114 @@ type RouteSettings struct {
 
 	// Specifies the throttling rate limit.
 	ThrottlingRateLimit *float64
+
+	noSmithyDocumentSerde
+}
+
+// Represents a routing rule.
+type RoutingRule struct {
+
+	// The routing rule action.
+	Actions []RoutingRuleAction
+
+	// The routing rule condition.
+	Conditions []RoutingRuleCondition
+
+	// The routing rule priority.
+	Priority *int32
+
+	// The routing rule ARN.
+	RoutingRuleArn *string
+
+	// The routing rule ID.
+	RoutingRuleId *string
+
+	noSmithyDocumentSerde
+}
+
+// The routing rule action.
+type RoutingRuleAction struct {
+
+	// Represents an InvokeApi action.
+	//
+	// This member is required.
+	InvokeApi *RoutingRuleActionInvokeApi
+
+	noSmithyDocumentSerde
+}
+
+// Represents an InvokeApi action.
+type RoutingRuleActionInvokeApi struct {
+
+	// The identifier.
+	//
+	// This member is required.
+	ApiId *string
+
+	// A string with a length between [1-128].
+	//
+	// This member is required.
+	Stage *string
+
+	// The strip base path setting.
+	StripBasePath *bool
+
+	noSmithyDocumentSerde
+}
+
+// Represents a routing rule condition.
+type RoutingRuleCondition struct {
+
+	// The base path to be matched.
+	MatchBasePaths *RoutingRuleMatchBasePaths
+
+	// The headers to be matched.
+	MatchHeaders *RoutingRuleMatchHeaders
+
+	noSmithyDocumentSerde
+}
+
+// Represents a MatchBasePaths condition.
+type RoutingRuleMatchBasePaths struct {
+
+	// The string of the case sensitive base path to be matched.
+	//
+	// This member is required.
+	AnyOf []string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a MatchHeaders condition.
+type RoutingRuleMatchHeaders struct {
+
+	// The header name and header value glob to be matched. The matchHeaders condition
+	// is matched if any of the header name and header value globs are matched.
+	//
+	// This member is required.
+	AnyOf []RoutingRuleMatchHeaderValue
+
+	noSmithyDocumentSerde
+}
+
+// Represents a MatchHeaderValue.
+type RoutingRuleMatchHeaderValue struct {
+
+	// After evaluating a selection expression, the result is compared against one or
+	// more selection keys to find a matching key. See [Selection Expressions]for a list of expressions and
+	// each expression's associated selection key type.
+	//
+	// [Selection Expressions]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+	//
+	// This member is required.
+	Header *string
+
+	// An expression used to extract information at runtime. See [Selection Expressions] for more information.
+	//
+	// [Selection Expressions]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+	//
+	// This member is required.
+	ValueGlob *string
 
 	noSmithyDocumentSerde
 }

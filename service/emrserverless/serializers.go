@@ -93,6 +93,10 @@ func awsRestjson1_serializeOpHttpBindingsCancelJobRunInput(v *CancelJobRunInput,
 		}
 	}
 
+	if v.ShutdownGracePeriodInSeconds != nil {
+		encoder.SetQuery("shutdownGracePeriodInSeconds").Integer(*v.ShutdownGracePeriodInSeconds)
+	}
+
 	return nil
 }
 

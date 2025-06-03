@@ -5,6 +5,7 @@ package apigatewayv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -204,6 +205,26 @@ func (m *validateOpCreateRouteResponse) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateRouteResponseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRoutingRule struct {
+}
+
+func (*validateOpCreateRoutingRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRoutingRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRoutingRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRoutingRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -524,6 +545,26 @@ func (m *validateOpDeleteRouteSettings) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRouteSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRoutingRule struct {
+}
+
+func (*validateOpDeleteRoutingRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRoutingRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRoutingRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRoutingRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -969,6 +1010,26 @@ func (m *validateOpGetRoutes) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRoutingRule struct {
+}
+
+func (*validateOpGetRoutingRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRoutingRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRoutingRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRoutingRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetStage struct {
 }
 
@@ -1064,6 +1125,46 @@ func (m *validateOpImportApi) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpImportApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRoutingRules struct {
+}
+
+func (*validateOpListRoutingRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRoutingRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRoutingRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRoutingRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutRoutingRule struct {
+}
+
+func (*validateOpPutRoutingRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutRoutingRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutRoutingRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutRoutingRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1429,6 +1530,10 @@ func addOpCreateRouteResponseValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateRouteResponse{}, middleware.After)
 }
 
+func addOpCreateRoutingRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRoutingRule{}, middleware.After)
+}
+
 func addOpCreateStageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStage{}, middleware.After)
 }
@@ -1491,6 +1596,10 @@ func addOpDeleteRouteResponseValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteRouteSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRouteSettings{}, middleware.After)
+}
+
+func addOpDeleteRoutingRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRoutingRule{}, middleware.After)
 }
 
 func addOpDeleteStageValidationMiddleware(stack *middleware.Stack) error {
@@ -1581,6 +1690,10 @@ func addOpGetRoutesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRoutes{}, middleware.After)
 }
 
+func addOpGetRoutingRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRoutingRule{}, middleware.After)
+}
+
 func addOpGetStageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStage{}, middleware.After)
 }
@@ -1599,6 +1712,14 @@ func addOpGetVpcLinkValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpImportApiValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportApi{}, middleware.After)
+}
+
+func addOpListRoutingRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRoutingRules{}, middleware.After)
+}
+
+func addOpPutRoutingRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutRoutingRule{}, middleware.After)
 }
 
 func addOpReimportApiValidationMiddleware(stack *middleware.Stack) error {
@@ -1663,6 +1784,168 @@ func addOpUpdateStageValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateVpcLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVpcLink{}, middleware.After)
+}
+
+func validate__listOfRoutingRuleAction(v []types.RoutingRuleAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfRoutingRuleAction"}
+	for i := range v {
+		if err := validateRoutingRuleAction(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validate__listOfRoutingRuleCondition(v []types.RoutingRuleCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfRoutingRuleCondition"}
+	for i := range v {
+		if err := validateRoutingRuleCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validate__listOfRoutingRuleMatchHeaderValue(v []types.RoutingRuleMatchHeaderValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfRoutingRuleMatchHeaderValue"}
+	for i := range v {
+		if err := validateRoutingRuleMatchHeaderValue(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingRuleAction(v *types.RoutingRuleAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingRuleAction"}
+	if v.InvokeApi == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvokeApi"))
+	} else if v.InvokeApi != nil {
+		if err := validateRoutingRuleActionInvokeApi(v.InvokeApi); err != nil {
+			invalidParams.AddNested("InvokeApi", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingRuleActionInvokeApi(v *types.RoutingRuleActionInvokeApi) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingRuleActionInvokeApi"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.Stage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingRuleCondition(v *types.RoutingRuleCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingRuleCondition"}
+	if v.MatchBasePaths != nil {
+		if err := validateRoutingRuleMatchBasePaths(v.MatchBasePaths); err != nil {
+			invalidParams.AddNested("MatchBasePaths", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MatchHeaders != nil {
+		if err := validateRoutingRuleMatchHeaders(v.MatchHeaders); err != nil {
+			invalidParams.AddNested("MatchHeaders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingRuleMatchBasePaths(v *types.RoutingRuleMatchBasePaths) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingRuleMatchBasePaths"}
+	if v.AnyOf == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnyOf"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingRuleMatchHeaders(v *types.RoutingRuleMatchHeaders) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingRuleMatchHeaders"}
+	if v.AnyOf == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnyOf"))
+	} else if v.AnyOf != nil {
+		if err := validate__listOfRoutingRuleMatchHeaderValue(v.AnyOf); err != nil {
+			invalidParams.AddNested("AnyOf", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingRuleMatchHeaderValue(v *types.RoutingRuleMatchHeaderValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingRuleMatchHeaderValue"}
+	if v.Header == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Header"))
+	}
+	if v.ValueGlob == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValueGlob"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpCreateApiInput(v *CreateApiInput) error {
@@ -1849,6 +2132,38 @@ func validateOpCreateRouteResponseInput(v *CreateRouteResponseInput) error {
 	}
 	if v.RouteResponseKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RouteResponseKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRoutingRuleInput(v *CreateRoutingRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRoutingRuleInput"}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	} else if v.Actions != nil {
+		if err := validate__listOfRoutingRuleAction(v.Actions); err != nil {
+			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Conditions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Conditions"))
+	} else if v.Conditions != nil {
+		if err := validate__listOfRoutingRuleCondition(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2140,6 +2455,24 @@ func validateOpDeleteRouteSettingsInput(v *DeleteRouteSettingsInput) error {
 	}
 	if v.StageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRoutingRuleInput(v *DeleteRoutingRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRoutingRuleInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.RoutingRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingRuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2526,6 +2859,24 @@ func validateOpGetRoutesInput(v *GetRoutesInput) error {
 	}
 }
 
+func validateOpGetRoutingRuleInput(v *GetRoutingRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRoutingRuleInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.RoutingRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingRuleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetStageInput(v *GetStageInput) error {
 	if v == nil {
 		return nil
@@ -2596,6 +2947,56 @@ func validateOpImportApiInput(v *ImportApiInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ImportApiInput"}
 	if v.Body == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRoutingRulesInput(v *ListRoutingRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRoutingRulesInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutRoutingRuleInput(v *PutRoutingRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutRoutingRuleInput"}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	} else if v.Actions != nil {
+		if err := validate__listOfRoutingRuleAction(v.Actions); err != nil {
+			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Conditions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Conditions"))
+	} else if v.Conditions != nil {
+		if err := validate__listOfRoutingRuleCondition(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
+	if v.RoutingRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingRuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -6,79 +6,64 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a domain name.
-func (c *Client) GetDomainName(ctx context.Context, params *GetDomainNameInput, optFns ...func(*Options)) (*GetDomainNameOutput, error) {
+// Deletes a routing rule.
+func (c *Client) DeleteRoutingRule(ctx context.Context, params *DeleteRoutingRuleInput, optFns ...func(*Options)) (*DeleteRoutingRuleOutput, error) {
 	if params == nil {
-		params = &GetDomainNameInput{}
+		params = &DeleteRoutingRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDomainName", params, optFns, c.addOperationGetDomainNameMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRoutingRule", params, optFns, c.addOperationDeleteRoutingRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetDomainNameOutput)
+	out := result.(*DeleteRoutingRuleOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetDomainNameInput struct {
+type DeleteRoutingRuleInput struct {
 
 	// The domain name.
 	//
 	// This member is required.
 	DomainName *string
 
+	// The routing rule ID.
+	//
+	// This member is required.
+	RoutingRuleId *string
+
+	// The domain name ID.
+	DomainNameId *string
+
 	noSmithyDocumentSerde
 }
 
-type GetDomainNameOutput struct {
-
-	// The API mapping selection expression.
-	ApiMappingSelectionExpression *string
-
-	// The name of the DomainName resource.
-	DomainName *string
-
-	// Represents an Amazon Resource Name (ARN).
-	DomainNameArn *string
-
-	// The domain name configurations.
-	DomainNameConfigurations []types.DomainNameConfiguration
-
-	// The mutual TLS authentication configuration for a custom domain name.
-	MutualTlsAuthentication *types.MutualTlsAuthentication
-
-	// The routing mode.
-	RoutingMode types.RoutingMode
-
-	// The collection of tags associated with a domain name.
-	Tags map[string]string
-
+type DeleteRoutingRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRoutingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainName{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRoutingRule{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomainName{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRoutingRule{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDomainName"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRoutingRule"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -133,10 +118,10 @@ func (c *Client) addOperationGetDomainNameMiddlewares(stack *middleware.Stack, o
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetDomainNameValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteRoutingRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDomainName(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRoutingRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -169,10 +154,10 @@ func (c *Client) addOperationGetDomainNameMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetDomainName(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteRoutingRule(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetDomainName",
+		OperationName: "DeleteRoutingRule",
 	}
 }

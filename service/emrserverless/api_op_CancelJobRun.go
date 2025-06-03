@@ -38,6 +38,10 @@ type CancelJobRunInput struct {
 	// This member is required.
 	JobRunId *string
 
+	// The duration (in seconds) to wait before forcefully terminating the job after
+	// cancellation is requested.
+	ShutdownGracePeriodInSeconds *int32
+
 	noSmithyDocumentSerde
 }
 

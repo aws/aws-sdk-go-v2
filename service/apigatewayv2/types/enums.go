@@ -250,6 +250,27 @@ func (ProtocolType) Values() []ProtocolType {
 	}
 }
 
+type RoutingMode string
+
+// Enum values for RoutingMode
+const (
+	RoutingModeApiMappingOnly            RoutingMode = "API_MAPPING_ONLY"
+	RoutingModeRoutingRuleOnly           RoutingMode = "ROUTING_RULE_ONLY"
+	RoutingModeRoutingRuleThenApiMapping RoutingMode = "ROUTING_RULE_THEN_API_MAPPING"
+)
+
+// Values returns all known values for RoutingMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RoutingMode) Values() []RoutingMode {
+	return []RoutingMode{
+		"API_MAPPING_ONLY",
+		"ROUTING_RULE_ONLY",
+		"ROUTING_RULE_THEN_API_MAPPING",
+	}
+}
+
 type SecurityPolicy string
 
 // Enum values for SecurityPolicy

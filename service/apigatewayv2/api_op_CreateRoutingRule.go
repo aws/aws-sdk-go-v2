@@ -11,54 +11,72 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a domain name.
-func (c *Client) GetDomainName(ctx context.Context, params *GetDomainNameInput, optFns ...func(*Options)) (*GetDomainNameOutput, error) {
+// Creates a RoutingRule
+func (c *Client) CreateRoutingRule(ctx context.Context, params *CreateRoutingRuleInput, optFns ...func(*Options)) (*CreateRoutingRuleOutput, error) {
 	if params == nil {
-		params = &GetDomainNameInput{}
+		params = &CreateRoutingRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDomainName", params, optFns, c.addOperationGetDomainNameMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRoutingRule", params, optFns, c.addOperationCreateRoutingRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetDomainNameOutput)
+	out := result.(*CreateRoutingRuleOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetDomainNameInput struct {
+type CreateRoutingRuleInput struct {
+
+	// Represents a routing rule action. The only supported action is invokeApi.
+	//
+	// This member is required.
+	Actions []types.RoutingRuleAction
+
+	// Represents a condition. Conditions can contain up to two matchHeaders
+	// conditions and one matchBasePaths conditions. API Gateway evaluates header
+	// conditions and base path conditions together. You can only use AND between
+	// header and base path conditions.
+	//
+	// This member is required.
+	Conditions []types.RoutingRuleCondition
 
 	// The domain name.
 	//
 	// This member is required.
 	DomainName *string
 
+	// Represents the priority of the routing rule.
+	//
+	// This member is required.
+	Priority *int32
+
+	// The domain name ID.
+	DomainNameId *string
+
 	noSmithyDocumentSerde
 }
 
-type GetDomainNameOutput struct {
+type CreateRoutingRuleOutput struct {
 
-	// The API mapping selection expression.
-	ApiMappingSelectionExpression *string
+	// Represents a routing rule action. The only supported action is invokeApi.
+	Actions []types.RoutingRuleAction
 
-	// The name of the DomainName resource.
-	DomainName *string
+	// Represents a condition. Conditions can contain up to two matchHeaders
+	// conditions and one matchBasePaths conditions. API Gateway evaluates header
+	// conditions and base path conditions together. You can only use AND between
+	// header and base path conditions.
+	Conditions []types.RoutingRuleCondition
 
-	// Represents an Amazon Resource Name (ARN).
-	DomainNameArn *string
+	// Represents the priority of the routing rule.
+	Priority *int32
 
-	// The domain name configurations.
-	DomainNameConfigurations []types.DomainNameConfiguration
+	// The ARN of the domain name.
+	RoutingRuleArn *string
 
-	// The mutual TLS authentication configuration for a custom domain name.
-	MutualTlsAuthentication *types.MutualTlsAuthentication
-
-	// The routing mode.
-	RoutingMode types.RoutingMode
-
-	// The collection of tags associated with a domain name.
-	Tags map[string]string
+	// The routing rule ID.
+	RoutingRuleId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,19 +84,19 @@ type GetDomainNameOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRoutingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainName{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoutingRule{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomainName{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoutingRule{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDomainName"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRoutingRule"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -133,10 +151,10 @@ func (c *Client) addOperationGetDomainNameMiddlewares(stack *middleware.Stack, o
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetDomainNameValidationMiddleware(stack); err != nil {
+	if err = addOpCreateRoutingRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDomainName(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRoutingRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -169,10 +187,10 @@ func (c *Client) addOperationGetDomainNameMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetDomainName(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateRoutingRule(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetDomainName",
+		OperationName: "CreateRoutingRule",
 	}
 }

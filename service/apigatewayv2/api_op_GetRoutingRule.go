@@ -11,54 +11,58 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a domain name.
-func (c *Client) GetDomainName(ctx context.Context, params *GetDomainNameInput, optFns ...func(*Options)) (*GetDomainNameOutput, error) {
+// Gets a routing rule.
+func (c *Client) GetRoutingRule(ctx context.Context, params *GetRoutingRuleInput, optFns ...func(*Options)) (*GetRoutingRuleOutput, error) {
 	if params == nil {
-		params = &GetDomainNameInput{}
+		params = &GetRoutingRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDomainName", params, optFns, c.addOperationGetDomainNameMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRoutingRule", params, optFns, c.addOperationGetRoutingRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetDomainNameOutput)
+	out := result.(*GetRoutingRuleOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetDomainNameInput struct {
+type GetRoutingRuleInput struct {
 
 	// The domain name.
 	//
 	// This member is required.
 	DomainName *string
 
+	// The routing rule ID.
+	//
+	// This member is required.
+	RoutingRuleId *string
+
+	// The domain name ID.
+	DomainNameId *string
+
 	noSmithyDocumentSerde
 }
 
-type GetDomainNameOutput struct {
+type GetRoutingRuleOutput struct {
 
-	// The API mapping selection expression.
-	ApiMappingSelectionExpression *string
+	// The resulting action based on matching a routing rules condition. Only
+	// InvokeApi is supported.
+	Actions []types.RoutingRuleAction
 
-	// The name of the DomainName resource.
-	DomainName *string
+	// The conditions of the routing rule.
+	Conditions []types.RoutingRuleCondition
 
-	// Represents an Amazon Resource Name (ARN).
-	DomainNameArn *string
+	// The order in which API Gateway evaluates a rule. Priority is evaluated from the
+	// lowest value to the highest value.
+	Priority *int32
 
-	// The domain name configurations.
-	DomainNameConfigurations []types.DomainNameConfiguration
+	// The routing rule ARN.
+	RoutingRuleArn *string
 
-	// The mutual TLS authentication configuration for a custom domain name.
-	MutualTlsAuthentication *types.MutualTlsAuthentication
-
-	// The routing mode.
-	RoutingMode types.RoutingMode
-
-	// The collection of tags associated with a domain name.
-	Tags map[string]string
+	// The routing rule ID.
+	RoutingRuleId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,19 +70,19 @@ type GetDomainNameOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRoutingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainName{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRoutingRule{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomainName{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRoutingRule{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDomainName"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRoutingRule"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -133,10 +137,10 @@ func (c *Client) addOperationGetDomainNameMiddlewares(stack *middleware.Stack, o
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetDomainNameValidationMiddleware(stack); err != nil {
+	if err = addOpGetRoutingRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDomainName(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRoutingRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -169,10 +173,10 @@ func (c *Client) addOperationGetDomainNameMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetDomainName(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetRoutingRule(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetDomainName",
+		OperationName: "GetRoutingRule",
 	}
 }

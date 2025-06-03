@@ -41,6 +41,9 @@ type UpdateDomainNameInput struct {
 	// The mutual TLS authentication configuration for a custom domain name.
 	MutualTlsAuthentication *types.MutualTlsAuthenticationInput
 
+	// The routing mode.
+	RoutingMode types.RoutingMode
+
 	noSmithyDocumentSerde
 }
 
@@ -52,11 +55,17 @@ type UpdateDomainNameOutput struct {
 	// The name of the DomainName resource.
 	DomainName *string
 
+	// Represents an Amazon Resource Name (ARN).
+	DomainNameArn *string
+
 	// The domain name configurations.
 	DomainNameConfigurations []types.DomainNameConfiguration
 
 	// The mutual TLS authentication configuration for a custom domain name.
 	MutualTlsAuthentication *types.MutualTlsAuthentication
+
+	// The routing mode.
+	RoutingMode types.RoutingMode
 
 	// The collection of tags associated with a domain name.
 	Tags map[string]string

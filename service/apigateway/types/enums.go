@@ -461,6 +461,27 @@ func (ResourceOwner) Values() []ResourceOwner {
 	}
 }
 
+type RoutingMode string
+
+// Enum values for RoutingMode
+const (
+	RoutingModeBasePathMappingOnly            RoutingMode = "BASE_PATH_MAPPING_ONLY"
+	RoutingModeRoutingRuleOnly                RoutingMode = "ROUTING_RULE_ONLY"
+	RoutingModeRoutingRuleThenBasePathMapping RoutingMode = "ROUTING_RULE_THEN_BASE_PATH_MAPPING"
+)
+
+// Values returns all known values for RoutingMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RoutingMode) Values() []RoutingMode {
+	return []RoutingMode{
+		"BASE_PATH_MAPPING_ONLY",
+		"ROUTING_RULE_ONLY",
+		"ROUTING_RULE_THEN_BASE_PATH_MAPPING",
+	}
+}
+
 type SecurityPolicy string
 
 // Enum values for SecurityPolicy

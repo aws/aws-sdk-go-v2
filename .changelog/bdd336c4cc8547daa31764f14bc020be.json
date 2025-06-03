@@ -1,0 +1,8 @@
+{
+    "id": "bdd336c4-cc85-47da-a317-64f14bc020be",
+    "type": "feature",
+    "description": "Adds support to set the routing mode for a custom domain name.",
+    "modules": [
+        "service/apigateway"
+    ]
+}

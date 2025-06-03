@@ -447,6 +447,10 @@ type DomainName struct {
 	// and Endpoints for API Gateway.
 	RegionalHostedZoneId *string
 
+	// The routing mode for this domain name. The routing mode determines how API
+	// Gateway sends traffic from your custom domain name to your private APIs.
+	RoutingMode RoutingMode
+
 	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
 	// The valid values are TLS_1_0 and TLS_1_2 .
 	SecurityPolicy SecurityPolicy

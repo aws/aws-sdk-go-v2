@@ -182,6 +182,18 @@ func TestCheckSnapshot_CreateRouteResponse(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRoutingRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateStage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateStage(context.Background(), nil, func(o *Options) {
@@ -367,6 +379,18 @@ func TestCheckSnapshot_DeleteRouteSettings(t *testing.T) {
 	_, err := svc.DeleteRouteSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteRouteSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRoutingRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -662,6 +686,18 @@ func TestCheckSnapshot_GetRoutes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRoutingRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetStage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetStage(context.Background(), nil, func(o *Options) {
@@ -727,6 +763,30 @@ func TestCheckSnapshot_ImportApi(t *testing.T) {
 	_, err := svc.ImportApi(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ImportApi")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRoutingRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRoutingRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRoutingRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutRoutingRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1045,6 +1105,18 @@ func TestUpdateSnapshot_CreateRouteResponse(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRoutingRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateStage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateStage(context.Background(), nil, func(o *Options) {
@@ -1230,6 +1302,18 @@ func TestUpdateSnapshot_DeleteRouteSettings(t *testing.T) {
 	_, err := svc.DeleteRouteSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteRouteSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRoutingRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1525,6 +1609,18 @@ func TestUpdateSnapshot_GetRoutes(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRoutingRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetStage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetStage(context.Background(), nil, func(o *Options) {
@@ -1590,6 +1686,30 @@ func TestUpdateSnapshot_ImportApi(t *testing.T) {
 	_, err := svc.ImportApi(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ImportApi")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRoutingRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRoutingRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRoutingRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutRoutingRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

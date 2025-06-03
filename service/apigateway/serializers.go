@@ -855,6 +855,11 @@ func awsRestjson1_serializeOpDocumentCreateDomainNameInput(v *CreateDomainNameIn
 		ok.String(*v.RegionalCertificateName)
 	}
 
+	if len(v.RoutingMode) > 0 {
+		ok := object.Key("routingMode")
+		ok.String(string(v.RoutingMode))
+	}
+
 	if len(v.SecurityPolicy) > 0 {
 		ok := object.Key("securityPolicy")
 		ok.String(string(v.SecurityPolicy))

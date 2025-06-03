@@ -1,0 +1,8 @@
+{
+    "id": "81462cd3-c1b4-480f-a0ad-8ed72037459f",
+    "type": "feature",
+    "description": "AWS EMR Serverless: Adds a new option in the CancelJobRun API in EMR 7.9.0+, to cancel a job with grace period. This feature is enabled by default with a 120-second grace period for streaming jobs and is not enabled by default for batch jobs.",
+    "modules": [
+        "service/emrserverless"
+    ]
+}
