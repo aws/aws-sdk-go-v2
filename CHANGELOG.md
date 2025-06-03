@@ -1,3 +1,13 @@
+# Release (2025-06-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.31.0](service/apigateway/CHANGELOG.md#v1310-2025-06-03)
+  * **Feature**: Adds support to set the routing mode for a custom domain name.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.28.0](service/apigatewayv2/CHANGELOG.md#v1280-2025-06-03)
+  * **Feature**: Adds support to create routing rules and set the routing mode for a custom domain name.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.30.0](service/emrserverless/CHANGELOG.md#v1300-2025-06-03)
+  * **Feature**: AWS EMR Serverless: Adds a new option in the CancelJobRun API in EMR 7.9.0+, to cancel a job with grace period. This feature is enabled by default with a 120-second grace period for streaming jobs and is not enabled by default for batch jobs.
+
 # Release (2025-06-02)
 
 ## Module Highlights

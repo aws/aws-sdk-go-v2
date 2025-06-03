@@ -5,7 +5,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.29.14
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.77
 	github.com/aws/aws-sdk-go-v2/service/acm v1.32.0
-	github.com/aws/aws-sdk-go-v2/service/apigateway v1.30.1
+	github.com/aws/aws-sdk-go-v2/service/apigateway v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.45.3

@@ -1,3 +1,7 @@
+# v1.28.0 (2025-06-03)
+
+* **Feature**: Adds support to create routing rules and set the routing mode for a custom domain name.
+
 # v1.27.1 (2025-04-03)
 
 * No change notes available for this release.
