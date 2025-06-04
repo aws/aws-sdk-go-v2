@@ -1,5 +1,6 @@
 {
   "version": "1.0",
+  "sources": ["models"],
   "projections": {
     "aws-ec2": {
       "transforms": [
@@ -142,6 +143,42 @@
         "go-codegen": {
           "service": "smithy.protocoltests.rpcv2Cbor#RpcV2Protocol",
           "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor"
+        }
+      }
+    },
+    "aws-json-10-querycompatible": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.json#Json10QueryCompatible"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.json#Json10QueryCompatible",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10querycompatible"
+        }
+      }
+    },
+    "smithy-rpcv2-cbor-querycompatible": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["smithy.protocoltests.rpcv2Cbor#RpcV2CborQueryCompatible"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "smithy.protocoltests.rpcv2Cbor#RpcV2CborQueryCompatible",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cborquerycompatible"
         }
       }
     }
