@@ -585,7 +585,7 @@
                 "NoteTemplate": {
                     "target": "com.amazonaws.transcribe#MedicalScribeNoteTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify one of the following templates to use for the clinical note summary. The default is <code>HISTORY_AND_PHYSICAL</code>.</p>\n         <ul>\n            <li>\n               <p>HISTORY_AND_PHYSICAL: Provides summaries for key sections of the clinical documentation. Examples of sections include Chief Complaint, History of Present Illness, Review of Systems, Past Medical History, Assessment, and Plan.\n                </p>\n            </li>\n            <li>\n               <p>GIRPP: Provides summaries based on the patients progress toward goals. Examples of sections include Goal, Intervention,\n                    Response, Progress, and Plan.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specify one of the following templates to use for the clinical note summary. The default is <code>HISTORY_AND_PHYSICAL</code>.</p>\n         <ul>\n            <li>\n               <p>HISTORY_AND_PHYSICAL: Provides summaries for key sections of the clinical documentation. Examples of sections include Chief Complaint, History of Present Illness, Review of Systems, Past Medical History, Assessment, and Plan.\n                </p>\n            </li>\n            <li>\n               <p>GIRPP: Provides summaries based on the patients progress toward goals. Examples of sections include Goal, Intervention,\n                    Response, Progress, and Plan.</p>\n            </li>\n            <li>\n               <p>BIRP: Focuses on the patient's behavioral patterns and responses. Examples of sections include Behavior, Intervention, Response, and Plan.</p>\n            </li>\n            <li>\n               <p>SIRP: Emphasizes the situational context of therapy. Examples of sections include Situation, Intervention, Response, and Plan.</p>\n            </li>\n            <li>\n               <p>DAP: Provides a simplified format for clinical documentation. Examples of sections include Data, Assessment, and Plan.</p>\n            </li>\n            <li>\n               <p>BEHAVIORAL_SOAP: Behavioral health focused documentation format. Examples of sections include Subjective, Objective, Assessment, and Plan.</p>\n            </li>\n            <li>\n               <p>PHYSICAL_SOAP: Physical health focused documentation format. Examples of sections include Subjective, Objective, Assessment, and Plan.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4394,6 +4394,36 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GIRPP"
+                    }
+                },
+                "BIRP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BIRP"
+                    }
+                },
+                "SIRP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIRP"
+                    }
+                },
+                "DAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAP"
+                    }
+                },
+                "BEHAVIORAL_SOAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEHAVIORAL_SOAP"
+                    }
+                },
+                "PHYSICAL_SOAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHYSICAL_SOAP"
                     }
                 }
             }

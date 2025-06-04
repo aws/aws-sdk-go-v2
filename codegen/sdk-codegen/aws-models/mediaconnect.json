@@ -17,7 +17,7 @@
                 "FlowVpcInterfaceAttachment": {
                     "target": "com.amazonaws.mediaconnect#VpcInterfaceAttachment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the VPC interface attachment to use for this source.\n</p>",
+                        "smithy.api#documentation": "<p>The name of the VPC interface attachment to use for this source. </p>",
                         "smithy.api#jsonName": "flowVpcInterfaceAttachment"
                     }
                 },
@@ -25,14 +25,14 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n   The name of the flow source. This name is used to reference the source and must be unique among sources in this bridge.\n</p>",
+                        "smithy.api#documentation": "<p> The name of the flow source. This name is used to reference the source and must be unique among sources in this bridge. </p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   Add a flow source to an existing bridge.\n</p>"
+                "smithy.api#documentation": "<p> Add a flow source to an existing bridge. </p>"
             }
         },
         "com.amazonaws.mediaconnect#AddBridgeNetworkOutputRequest": {
@@ -42,7 +42,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n   The network output IP Address.\n</p>",
+                        "smithy.api#documentation": "<p> The network output IP Address. </p>",
                         "smithy.api#jsonName": "ipAddress",
                         "smithy.api#required": {}
                     }
@@ -51,7 +51,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n   The network output name. This name is used to reference the output and must be unique among outputs in this bridge.\n</p>",
+                        "smithy.api#documentation": "<p> The network output name. This name is used to reference the output and must be unique among outputs in this bridge. </p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
                     }
@@ -60,7 +60,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n   The network output's gateway network name.\n</p>",
+                        "smithy.api#documentation": "<p> The network output's gateway network name. </p>",
                         "smithy.api#jsonName": "networkName",
                         "smithy.api#required": {}
                     }
@@ -69,7 +69,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n   The network output port.\n</p>",
+                        "smithy.api#documentation": "<p> The network output port. </p>",
                         "smithy.api#jsonName": "port",
                         "smithy.api#required": {}
                     }
@@ -78,7 +78,7 @@
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n   The network output protocol.\n</p>\n         <note>\n            <p>Elemental MediaConnect no longer supports the Fujitsu QoS\n         protocol. This reference is maintained for legacy purposes only.</p>\n         </note>",
+                        "smithy.api#documentation": "<p> The network output protocol. </p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>",
                         "smithy.api#jsonName": "protocol",
                         "smithy.api#required": {}
                     }
@@ -87,14 +87,14 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n   The network output TTL.\n</p>",
+                        "smithy.api#documentation": "<p> The network output TTL. </p>",
                         "smithy.api#jsonName": "ttl",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Add a network output to an existing bridge.\n</p>"
+                "smithy.api#documentation": "<p>Add a network output to an existing bridge. </p>"
             }
         },
         "com.amazonaws.mediaconnect#AddBridgeNetworkSourceRequest": {
@@ -112,7 +112,7 @@
                 "MulticastSourceSettings": {
                     "target": "com.amazonaws.mediaconnect#MulticastSourceSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The settings related to the multicast source.\n</p>",
+                        "smithy.api#documentation": "<p> The settings related to the multicast source. </p>",
                         "smithy.api#jsonName": "multicastSourceSettings"
                     }
                 },
@@ -147,14 +147,14 @@
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> The network source protocol.</p>\n         <note>\n            <p>Elemental MediaConnect no longer supports the Fujitsu QoS\n         protocol. This reference is maintained for legacy purposes only.</p>\n         </note>",
+                        "smithy.api#documentation": "<p> The network source protocol.</p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>",
                         "smithy.api#jsonName": "protocol",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   Add a network source to an existing bridge.\n</p>"
+                "smithy.api#documentation": "<p> Add a network source to an existing bridge. </p>"
             }
         },
         "com.amazonaws.mediaconnect#AddBridgeOutputRequest": {
@@ -163,7 +163,7 @@
                 "NetworkOutput": {
                     "target": "com.amazonaws.mediaconnect#AddBridgeNetworkOutputRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The network output of the bridge. A network output is delivered to your premises.\n</p>",
+                        "smithy.api#documentation": "<p> The network output of the bridge. A network output is delivered to your premises. </p>",
                         "smithy.api#jsonName": "networkOutput"
                     }
                 }
@@ -266,20 +266,20 @@
                 "FlowSource": {
                     "target": "com.amazonaws.mediaconnect#AddBridgeFlowSourceRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe source of the flow.\n</p>",
+                        "smithy.api#documentation": "<p> The source of the flow. </p>",
                         "smithy.api#jsonName": "flowSource"
                     }
                 },
                 "NetworkSource": {
                     "target": "com.amazonaws.mediaconnect#AddBridgeNetworkSourceRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe source of the network.\n</p>",
+                        "smithy.api#documentation": "<p> The source of the network. </p>",
                         "smithy.api#jsonName": "networkSource"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   Add an output to a bridge.\n</p>"
+                "smithy.api#documentation": "<p> Add an output to a bridge. </p>"
             }
         },
         "com.amazonaws.mediaconnect#AddBridgeSources": {
@@ -383,7 +383,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   Create a bridge with the egress bridge type. An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises.\n</p>"
+                "smithy.api#documentation": "<p> Create a bridge with the egress bridge type. An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises. </p>"
             }
         },
         "com.amazonaws.mediaconnect#AddFlowMediaStreams": {
@@ -524,7 +524,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Exception raised by Elemental MediaConnect when adding the flow output. See the error message for the operation for more information on the cause of this exception.\n   </p>",
+                "smithy.api#documentation": "<p>Exception raised by Elemental MediaConnect when adding the flow output. See the error message for the operation for more information on the cause of this exception. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 420
             }
@@ -770,7 +770,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Create a bridge with the ingress bridge type. An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud.\n</p>"
+                "smithy.api#documentation": "<p>Create a bridge with the ingress bridge type. An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud. </p>"
             }
         },
         "com.amazonaws.mediaconnect#AddMaintenance": {
@@ -789,7 +789,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> UTC time when the maintenance will happen. </p>\n         <p>Use 24-hour HH:MM format. </p>\n         <p>Minutes must be 00. </p>\n         <p>Example: 13:00. </p>\n         <p>The default value is 02:00.</p>",
+                        "smithy.api#documentation": "<p> UTC time when the maintenance will happen. </p> <p>Use 24-hour HH:MM format. </p> <p>Minutes must be 00. </p> <p>Example: 13:00. </p> <p>The default value is 02:00.</p>",
                         "smithy.api#jsonName": "maintenanceStartHour",
                         "smithy.api#required": {}
                     }
@@ -827,7 +827,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> A unique identifier for the media stream.\n</p>",
+                        "smithy.api#documentation": "<p> A unique identifier for the media stream. </p>",
                         "smithy.api#jsonName": "mediaStreamId",
                         "smithy.api#required": {}
                     }
@@ -859,7 +859,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The media stream that you want to add to the flow.\n</p>"
+                "smithy.api#documentation": "<p> The media stream that you want to add to the flow. </p>"
             }
         },
         "com.amazonaws.mediaconnect#AddOutputRequest": {
@@ -932,7 +932,7 @@
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> The protocol to use for the output.</p>\n         <note>\n            <p>Elemental MediaConnect no longer supports the Fujitsu QoS\n         protocol. This reference is maintained for legacy purposes only.</p>\n         </note>",
+                        "smithy.api#documentation": "<p> The protocol to use for the output.</p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>",
                         "smithy.api#jsonName": "protocol",
                         "smithy.api#required": {}
                     }
@@ -982,14 +982,14 @@
                 "NdiSpeedHqQuality": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A quality setting for the NDI Speed HQ encoder.\n</p>",
+                        "smithy.api#documentation": "<p>A quality setting for the NDI Speed HQ encoder. </p>",
                         "smithy.api#jsonName": "ndiSpeedHqQuality"
                     }
                 },
                 "NdiProgramName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name.\n</p>",
+                        "smithy.api#documentation": "<p> A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>",
                         "smithy.api#jsonName": "ndiProgramName"
                     }
                 }
@@ -1004,19 +1004,28 @@
                 "aes128": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "aes128"
+                        "smithy.api#enumValue": "aes128",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "aes192": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "aes192"
+                        "smithy.api#enumValue": "aes192",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "aes256": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "aes256"
+                        "smithy.api#enumValue": "aes256",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 }
             }
@@ -1027,7 +1036,7 @@
                 "SilentAudio": {
                     "target": "com.amazonaws.mediaconnect#SilentAudio",
                     "traits": {
-                        "smithy.api#documentation": "<p> Detects periods of silence.\n      \n   </p>",
+                        "smithy.api#documentation": "<p> Detects periods of silence. </p>",
                         "smithy.api#jsonName": "silentAudio"
                     }
                 }
@@ -1049,7 +1058,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message.\n</p>",
+                "smithy.api#documentation": "<p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1060,14 +1069,14 @@
                 "State": {
                     "target": "com.amazonaws.mediaconnect#State",
                     "traits": {
-                        "smithy.api#documentation": "<p> \t\n      Indicates whether the <code>BlackFrames</code> metric is enabled or disabled..</p>",
+                        "smithy.api#documentation": "<p> Indicates whether the <code>BlackFrames</code> metric is enabled or disabled..</p>",
                         "smithy.api#jsonName": "state"
                     }
                 },
                 "ThresholdSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\t\n      Specifies the number of consecutive seconds of black frames that triggers an event or alert.</p>",
+                        "smithy.api#documentation": "<p> Specifies the number of consecutive seconds of black frames that triggers an event or alert.</p>",
                         "smithy.api#jsonName": "thresholdSeconds"
                     }
                 }
@@ -1091,7 +1100,7 @@
                 "BridgeMessages": {
                     "target": "com.amazonaws.mediaconnect#__listOfMessageDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nMessages with details about the bridge.\n</p>",
+                        "smithy.api#documentation": "<p> Messages with details about the bridge. </p>",
                         "smithy.api#jsonName": "bridgeMessages"
                     }
                 },
@@ -1099,7 +1108,7 @@
                     "target": "com.amazonaws.mediaconnect#BridgeState",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The state of the bridge.\n</p>",
+                        "smithy.api#documentation": "<p>The state of the bridge. </p>",
                         "smithy.api#jsonName": "bridgeState",
                         "smithy.api#required": {}
                     }
@@ -1107,14 +1116,14 @@
                 "EgressGatewayBridge": {
                     "target": "com.amazonaws.mediaconnect#EgressGatewayBridge",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises.\n</p>",
+                        "smithy.api#documentation": "<p> An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises. </p>",
                         "smithy.api#jsonName": "egressGatewayBridge"
                     }
                 },
                 "IngressGatewayBridge": {
                     "target": "com.amazonaws.mediaconnect#IngressGatewayBridge",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud.\n</p>",
+                        "smithy.api#documentation": "<p> An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud. </p>",
                         "smithy.api#jsonName": "ingressGatewayBridge"
                     }
                 },
@@ -1146,7 +1155,7 @@
                 "SourceFailoverConfig": {
                     "target": "com.amazonaws.mediaconnect#FailoverConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe settings for source failover.\n</p>",
+                        "smithy.api#documentation": "<p> The settings for source failover. </p>",
                         "smithy.api#jsonName": "sourceFailoverConfig"
                     }
                 },
@@ -1290,7 +1299,7 @@
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> The network output protocol.</p>\n         <note>\n            <p>Elemental MediaConnect no longer supports the Fujitsu QoS\n         protocol. This reference is maintained for legacy purposes only.</p>\n         </note>",
+                        "smithy.api#documentation": "<p> The network output protocol.</p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>",
                         "smithy.api#jsonName": "protocol",
                         "smithy.api#required": {}
                     }
@@ -1324,7 +1333,7 @@
                 "MulticastSourceSettings": {
                     "target": "com.amazonaws.mediaconnect#MulticastSourceSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings related to the multicast source.\n</p>",
+                        "smithy.api#documentation": "<p>The settings related to the multicast source. </p>",
                         "smithy.api#jsonName": "multicastSourceSettings"
                     }
                 },
@@ -1359,7 +1368,7 @@
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> The network source protocol.</p>\n         <note>\n            <p>Elemental MediaConnect no longer supports the Fujitsu QoS\n         protocol. This reference is maintained for legacy purposes only.</p>\n         </note>",
+                        "smithy.api#documentation": "<p> The network source protocol.</p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>",
                         "smithy.api#jsonName": "protocol",
                         "smithy.api#required": {}
                     }
@@ -1375,14 +1384,14 @@
                 "FlowOutput": {
                     "target": "com.amazonaws.mediaconnect#BridgeFlowOutput",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe output of the associated flow.\n</p>",
+                        "smithy.api#documentation": "<p> The output of the associated flow. </p>",
                         "smithy.api#jsonName": "flowOutput"
                     }
                 },
                 "NetworkOutput": {
                     "target": "com.amazonaws.mediaconnect#BridgeNetworkOutput",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe network output for the bridge.\n</p>",
+                        "smithy.api#documentation": "<p> The network output for the bridge. </p>",
                         "smithy.api#jsonName": "networkOutput"
                     }
                 }
@@ -1456,11 +1465,8 @@
             "traits": {
                 "aws.api#arn": {
                     "template": "{BridgeArn}",
-                    "absolute": true,
-                    "noAccount": false,
-                    "noRegion": false,
                     "resourceDelimiter": ":",
-                    "reusable": false
+                    "absolute": true
                 },
                 "aws.iam#iamResource": {
                     "name": "bridge"
@@ -1473,14 +1479,14 @@
                 "FlowSource": {
                     "target": "com.amazonaws.mediaconnect#BridgeFlowSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The source of the associated flow.\n</p>",
+                        "smithy.api#documentation": "<p> The source of the associated flow. </p>",
                         "smithy.api#jsonName": "flowSource"
                     }
                 },
                 "NetworkSource": {
                     "target": "com.amazonaws.mediaconnect#BridgeNetworkSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe network source for the bridge.\n</p>",
+                        "smithy.api#documentation": "<p> The network source for the bridge. </p>",
                         "smithy.api#jsonName": "networkSource"
                     }
                 }
@@ -1626,7 +1632,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request.\n</p>",
+                "smithy.api#documentation": "<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409,
                 "smithy.api#retryable": {}
@@ -1719,7 +1725,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Exception raised by Elemental MediaConnect when creating the bridge. See the error message for the operation for more information on the cause of this exception.\n   </p>",
+                "smithy.api#documentation": "<p>Exception raised by Elemental MediaConnect when creating the bridge. See the error message for the operation for more information on the cause of this exception. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 420
             }
@@ -1737,7 +1743,7 @@
                 "IngressGatewayBridge": {
                     "target": "com.amazonaws.mediaconnect#AddIngressGatewayBridgeRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and\n         is delivered to the cloud. </p>",
+                        "smithy.api#documentation": "<p>An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud. </p>",
                         "smithy.api#jsonName": "ingressGatewayBridge"
                     }
                 },
@@ -1852,7 +1858,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Exception raised by Elemental MediaConnect when creating the flow. See the error message for the operation for more information on the cause of this exception.\n   </p>",
+                "smithy.api#documentation": "<p>Exception raised by Elemental MediaConnect when creating the flow. See the error message for the operation for more information on the cause of this exception. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 420
             }
@@ -1900,21 +1906,21 @@
                 "Source": {
                     "target": "com.amazonaws.mediaconnect#SetSourceRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The settings for the source that you want to use for the new flow.\n</p>",
+                        "smithy.api#documentation": "<p> The settings for the source that you want to use for the new flow. </p>",
                         "smithy.api#jsonName": "source"
                     }
                 },
                 "SourceFailoverConfig": {
                     "target": "com.amazonaws.mediaconnect#FailoverConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The settings for source failover.\n</p>",
+                        "smithy.api#documentation": "<p> The settings for source failover. </p>",
                         "smithy.api#jsonName": "sourceFailoverConfig"
                     }
                 },
                 "Sources": {
                     "target": "com.amazonaws.mediaconnect#__listOfSetSourceRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sources that are assigned to the flow.\n</p>",
+                        "smithy.api#documentation": "<p>The sources that are assigned to the flow. </p>",
                         "smithy.api#jsonName": "sources"
                     }
                 },
@@ -1928,28 +1934,28 @@
                 "Maintenance": {
                     "target": "com.amazonaws.mediaconnect#AddMaintenance",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The maintenance settings you want to use for the flow.\n</p>",
+                        "smithy.api#documentation": "<p> The maintenance settings you want to use for the flow. </p>",
                         "smithy.api#jsonName": "maintenance"
                     }
                 },
                 "SourceMonitoringConfig": {
                     "target": "com.amazonaws.mediaconnect#MonitoringConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe settings for source monitoring.\n</p>",
+                        "smithy.api#documentation": "<p> The settings for source monitoring. </p>",
                         "smithy.api#jsonName": "sourceMonitoringConfig"
                     }
                 },
                 "FlowSize": {
                     "target": "com.amazonaws.mediaconnect#FlowSize",
                     "traits": {
-                        "smithy.api#documentation": "<p> Determines the processing capacity and feature set of the flow. Set this optional parameter\n         to <code>LARGE</code> if you want to enable NDI outputs on the flow. </p>",
+                        "smithy.api#documentation": "<p> Determines the processing capacity and feature set of the flow. Set this optional parameter to <code>LARGE</code> if you want to enable NDI outputs on the flow. </p>",
                         "smithy.api#jsonName": "flowSize"
                     }
                 },
                 "NdiConfig": {
                     "target": "com.amazonaws.mediaconnect#NdiConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs.\n</p>",
+                        "smithy.api#documentation": "<p> Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>",
                         "smithy.api#jsonName": "ndiConfig"
                     }
                 }
@@ -1964,7 +1970,7 @@
                 "Flow": {
                     "target": "com.amazonaws.mediaconnect#Flow",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The flow that you created.\n</p>",
+                        "smithy.api#documentation": "<p> The flow that you created. </p>",
                         "smithy.api#jsonName": "flow"
                     }
                 }
@@ -2026,7 +2032,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Exception raised by Elemental MediaConnect when creating the gateway. See the error message for the operation for more information on the cause of this exception.\n   </p>",
+                "smithy.api#documentation": "<p>Exception raised by Elemental MediaConnect when creating the gateway. See the error message for the operation for more information on the cause of this exception. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 420
             }
@@ -2072,7 +2078,7 @@
                 "Gateway": {
                     "target": "com.amazonaws.mediaconnect#Gateway",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe gateway that you created.\n</p>",
+                        "smithy.api#documentation": "<p> The gateway that you created. </p>",
                         "smithy.api#jsonName": "gateway"
                     }
                 }
@@ -2493,7 +2499,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Displays the details of a flow. The response includes the flow Amazon Resource Name (ARN),\n         name, and Availability Zone, as well as details about the source, outputs, and\n         entitlements.</p>",
+                "smithy.api#documentation": "<p> Displays the details of a flow. The response includes the flow Amazon Resource Name (ARN), name, and Availability Zone, as well as details about the source, outputs, and entitlements.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/flows/{FlowArn}",
@@ -2687,14 +2693,14 @@
                 "Flow": {
                     "target": "com.amazonaws.mediaconnect#Flow",
                     "traits": {
-                        "smithy.api#documentation": "<p>The flow that you requested a description of.\n</p>",
+                        "smithy.api#documentation": "<p>The flow that you requested a description of. </p>",
                         "smithy.api#jsonName": "flow"
                     }
                 },
                 "Messages": {
                     "target": "com.amazonaws.mediaconnect#Messages",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Any errors that apply currently to the flow. If there are no errors, MediaConnect will not include this field in the response.\n</p>",
+                        "smithy.api#documentation": "<p> Any errors that apply currently to the flow. If there are no errors, MediaConnect will not include this field in the response. </p>",
                         "smithy.api#jsonName": "messages"
                     }
                 }
@@ -2732,7 +2738,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   The <code>DescribeFlowSourceMetadata</code> API is used to view information about the flow's source transport stream and programs. This API displays status messages about the flow's source as well as details about the program's video, audio, and other data.\n</p>",
+                "smithy.api#documentation": "<p> The <code>DescribeFlowSourceMetadata</code> API is used to view information about the flow's source transport stream and programs. This API displays status messages about the flow's source as well as details about the program's video, audio, and other data. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/flows/{FlowArn}/source-metadata",
@@ -2785,7 +2791,7 @@
                 "TransportMediaInfo": {
                     "target": "com.amazonaws.mediaconnect#TransportMediaInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nInformation about the flow's transport media.\n</p>",
+                        "smithy.api#documentation": "<p> Information about the flow's transport media. </p>",
                         "smithy.api#jsonName": "transportMediaInfo"
                     }
                 }
@@ -2823,7 +2829,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nDescribes the thumbnail for the flow source.\n</p>",
+                "smithy.api#documentation": "<p> Describes the thumbnail for the flow source. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/flows/{FlowArn}/source-thumbnail",
@@ -2854,7 +2860,7 @@
                 "ThumbnailDetails": {
                     "target": "com.amazonaws.mediaconnect#ThumbnailDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the thumbnail, including thumbnail base64 string, timecode and the time when thumbnail was generated.\n</p>",
+                        "smithy.api#documentation": "<p>The details of the thumbnail, including thumbnail base64 string, timecode and the time when thumbnail was generated. </p>",
                         "smithy.api#jsonName": "thumbnailDetails"
                     }
                 }
@@ -2895,7 +2901,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Displays the details of a gateway. The response includes the gateway Amazon Resource Name\n         (ARN), name, and CIDR blocks, as well as details about the networks.</p>",
+                "smithy.api#documentation": "<p> Displays the details of a gateway. The response includes the gateway Amazon Resource Name (ARN), name, and CIDR blocks, as well as details about the networks.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/gateways/{GatewayArn}",
@@ -2936,7 +2942,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Displays the details of an instance.\n</p>",
+                "smithy.api#documentation": "<p> Displays the details of an instance. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/gateway-instances/{GatewayInstanceArn}",
@@ -2968,7 +2974,7 @@
                 "GatewayInstance": {
                     "target": "com.amazonaws.mediaconnect#GatewayInstance",
                     "traits": {
-                        "smithy.api#documentation": "<p>The gateway instance that you requested a description of.\n</p>",
+                        "smithy.api#documentation": "<p>The gateway instance that you requested a description of. </p>",
                         "smithy.api#jsonName": "gatewayInstance"
                     }
                 }
@@ -3000,7 +3006,7 @@
                 "Gateway": {
                     "target": "com.amazonaws.mediaconnect#Gateway",
                     "traits": {
-                        "smithy.api#documentation": "<p>The gateway that you wanted to describe.\n</p>",
+                        "smithy.api#documentation": "<p>The gateway that you wanted to describe. </p>",
                         "smithy.api#jsonName": "gateway"
                     }
                 }
@@ -3066,7 +3072,7 @@
                 "Offering": {
                     "target": "com.amazonaws.mediaconnect#Offering",
                     "traits": {
-                        "smithy.api#documentation": "<p>The offering that you requested a description of.     \n</p>",
+                        "smithy.api#documentation": "<p>The offering that you requested a description of. </p>",
                         "smithy.api#jsonName": "offering"
                     }
                 }
@@ -3132,7 +3138,7 @@
                 "Reservation": {
                     "target": "com.amazonaws.mediaconnect#Reservation",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A pricing agreement for a discounted rate for a specific outbound bandwidth that your MediaConnect account will use each month over a specific time period. The discounted rate in the reservation applies to outbound bandwidth for all flows from your account until your account reaches the amount of bandwidth in your reservation. If you use more outbound bandwidth than the agreed upon amount in a single month, the overage is charged at the on-demand rate.\n</p>",
+                        "smithy.api#documentation": "<p> A pricing agreement for a discounted rate for a specific outbound bandwidth that your MediaConnect account will use each month over a specific time period. The discounted rate in the reservation applies to outbound bandwidth for all flows from your account until your account reaches the amount of bandwidth in your reservation. If you use more outbound bandwidth than the agreed upon amount in a single month, the overage is charged at the on-demand rate. </p>",
                         "smithy.api#jsonName": "reservation"
                     }
                 }
@@ -3198,7 +3204,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The IP address that the receiver requires in order to establish a connection with the flow. This value is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the CDI or ST 2110 JPEG XS or protocol.\n</p>",
+                        "smithy.api#documentation": "<p>The IP address that the receiver requires in order to establish a connection with the flow. This value is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the CDI or ST 2110 JPEG XS or protocol. </p>",
                         "smithy.api#jsonName": "outboundIp",
                         "smithy.api#required": {}
                     }
@@ -3240,7 +3246,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The definition of a media stream that you want to associate with the output.\n</p>"
+                "smithy.api#documentation": "<p>The definition of a media stream that you want to associate with the output. </p>"
             }
         },
         "com.amazonaws.mediaconnect#DurationUnits": {
@@ -3275,7 +3281,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   Create a bridge with the egress bridge type. An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises.\n</p>"
+                "smithy.api#documentation": "<p> Create a bridge with the egress bridge type. An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises. </p>"
             }
         },
         "com.amazonaws.mediaconnect#EncoderProfile": {
@@ -3284,13 +3290,19 @@
                 "main": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "main"
+                        "smithy.api#enumValue": "main",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "high": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "high"
+                        "smithy.api#enumValue": "high",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 }
             }
@@ -3301,25 +3313,37 @@
                 "jxsv": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "jxsv"
+                        "smithy.api#enumValue": "jxsv",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "raw": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "raw"
+                        "smithy.api#enumValue": "raw",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "smpte291": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "smpte291"
+                        "smithy.api#enumValue": "smpte291",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "pcm": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "pcm"
+                        "smithy.api#enumValue": "pcm",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 }
             }
@@ -3477,7 +3501,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> The ARN of the entitlement.\n</p>",
+                        "smithy.api#documentation": "<p> The ARN of the entitlement. </p>",
                         "smithy.api#jsonName": "entitlementArn",
                         "smithy.api#required": {}
                     }
@@ -3485,7 +3509,7 @@
                 "EntitlementStatus": {
                     "target": "com.amazonaws.mediaconnect#EntitlementStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p> An indication of whether the entitlement is enabled.\n</p>",
+                        "smithy.api#documentation": "<p> An indication of whether the entitlement is enabled. </p>",
                         "smithy.api#jsonName": "entitlementStatus"
                     }
                 },
@@ -3493,7 +3517,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> The name of the entitlement.\n</p>",
+                        "smithy.api#documentation": "<p> The name of the entitlement. </p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
                     }
@@ -3502,7 +3526,7 @@
                     "target": "com.amazonaws.mediaconnect#__listOfString",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> The Amazon Web Services account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.\n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Web Services account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source. </p>",
                         "smithy.api#jsonName": "subscribers",
                         "smithy.api#required": {}
                     }
@@ -3556,7 +3580,7 @@
                 "State": {
                     "target": "com.amazonaws.mediaconnect#State",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of source failover on the flow. If the state is inactive, the flow can have only one source. If the state is active, the flow can have one or two sources.\n</p>",
+                        "smithy.api#documentation": "<p>The state of source failover on the flow. If the state is inactive, the flow can have only one source. If the state is active, the flow can have one or two sources. </p>",
                         "smithy.api#jsonName": "state"
                     }
                 }
@@ -3655,7 +3679,7 @@
                     "target": "com.amazonaws.mediaconnect#Source",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n   The source for the flow.\n</p>",
+                        "smithy.api#documentation": "<p> The source for the flow. </p>",
                         "smithy.api#jsonName": "source",
                         "smithy.api#required": {}
                     }
@@ -3663,14 +3687,14 @@
                 "SourceFailoverConfig": {
                     "target": "com.amazonaws.mediaconnect#FailoverConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe settings for the source failover.\n</p>",
+                        "smithy.api#documentation": "<p> The settings for the source failover. </p>",
                         "smithy.api#jsonName": "sourceFailoverConfig"
                     }
                 },
                 "Sources": {
                     "target": "com.amazonaws.mediaconnect#__listOfSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings for the sources that are assigned to the flow.\n</p>",
+                        "smithy.api#documentation": "<p>The settings for the sources that are assigned to the flow. </p>",
                         "smithy.api#jsonName": "sources"
                     }
                 },
@@ -3693,28 +3717,28 @@
                 "Maintenance": {
                     "target": "com.amazonaws.mediaconnect#Maintenance",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The maintenance settings for the flow.\n</p>",
+                        "smithy.api#documentation": "<p> The maintenance settings for the flow. </p>",
                         "smithy.api#jsonName": "maintenance"
                     }
                 },
                 "SourceMonitoringConfig": {
                     "target": "com.amazonaws.mediaconnect#MonitoringConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe settings for source monitoring.\n</p>",
+                        "smithy.api#documentation": "<p> The settings for source monitoring. </p>",
                         "smithy.api#jsonName": "sourceMonitoringConfig"
                     }
                 },
                 "FlowSize": {
                     "target": "com.amazonaws.mediaconnect#FlowSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Determines the processing capacity and feature set of the flow. Set this optional parameter to LARGE if you want to enable NDI outputs on the flow.\n</p>",
+                        "smithy.api#documentation": "<p> Determines the processing capacity and feature set of the flow. Set this optional parameter to LARGE if you want to enable NDI outputs on the flow. </p>",
                         "smithy.api#jsonName": "flowSize"
                     }
                 },
                 "NdiConfig": {
                     "target": "com.amazonaws.mediaconnect#NdiConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs.\n</p>",
+                        "smithy.api#documentation": "<p>Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>",
                         "smithy.api#jsonName": "ndiConfig"
                     }
                 }
@@ -3814,11 +3838,8 @@
             "traits": {
                 "aws.api#arn": {
                     "template": "{FlowArn}",
-                    "absolute": true,
-                    "noAccount": false,
-                    "noRegion": false,
                     "resourceDelimiter": ":",
-                    "reusable": false
+                    "absolute": true
                 },
                 "aws.iam#iamResource": {
                     "name": "flow"
@@ -3848,55 +3869,55 @@
                 "ChannelOrder": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   \n   The format of the audio channel.\n</p>",
+                        "smithy.api#documentation": "<p> The format of the audio channel. </p>",
                         "smithy.api#jsonName": "channelOrder"
                     }
                 },
                 "Colorimetry": {
                     "target": "com.amazonaws.mediaconnect#Colorimetry",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format used for the representation of color.\n</p>",
+                        "smithy.api#documentation": "<p>The format used for the representation of color. </p>",
                         "smithy.api#jsonName": "colorimetry"
                     }
                 },
                 "ExactFramerate": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The frame rate for the video stream, in frames/second. For example: 60000/1001.\n</p>",
+                        "smithy.api#documentation": "<p>The frame rate for the video stream, in frames/second. For example: 60000/1001. </p>",
                         "smithy.api#jsonName": "exactFramerate"
                     }
                 },
                 "Par": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pixel aspect ratio (PAR) of the video.\n</p>",
+                        "smithy.api#documentation": "<p>The pixel aspect ratio (PAR) of the video. </p>",
                         "smithy.api#jsonName": "par"
                     }
                 },
                 "Range": {
                     "target": "com.amazonaws.mediaconnect#Range",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encoding range of the video.\n</p>",
+                        "smithy.api#documentation": "<p>The encoding range of the video. </p>",
                         "smithy.api#jsonName": "range"
                     }
                 },
                 "ScanMode": {
                     "target": "com.amazonaws.mediaconnect#ScanMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of compression that was used to smooth the video’s appearance.\n</p>",
+                        "smithy.api#documentation": "<p>The type of compression that was used to smooth the video’s appearance. </p>",
                         "smithy.api#jsonName": "scanMode"
                     }
                 },
                 "Tcs": {
                     "target": "com.amazonaws.mediaconnect#Tcs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The transfer characteristic system (TCS) that is used in the video.\n</p>",
+                        "smithy.api#documentation": "<p>The transfer characteristic system (TCS) that is used in the video. </p>",
                         "smithy.api#jsonName": "tcs"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   A set of parameters that define the media stream.\n</p>"
+                "smithy.api#documentation": "<p> A set of parameters that define the media stream. </p>"
             }
         },
         "com.amazonaws.mediaconnect#FmtpRequest": {
@@ -3969,7 +3990,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.\n</p>",
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -4046,7 +4067,7 @@
                 "GatewayMessages": {
                     "target": "com.amazonaws.mediaconnect#__listOfMessageDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>Messages with information about the gateway.\n</p>",
+                        "smithy.api#documentation": "<p>Messages with information about the gateway. </p>",
                         "smithy.api#jsonName": "gatewayMessages"
                     }
                 },
@@ -4077,7 +4098,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The settings for a gateway, including its networks.\n      \n      \n</p>"
+                "smithy.api#documentation": "<p>The settings for a gateway, including its networks. </p>"
             }
         },
         "com.amazonaws.mediaconnect#GatewayArn": {
@@ -4121,7 +4142,7 @@
                     "target": "com.amazonaws.mediaconnect#BridgePlacement",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The availability of the instance to host new bridges. The bridgePlacement property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be deployed to this instance. If it is AVAILABLE, new bridges can be deployed to this instance.\n</p>",
+                        "smithy.api#documentation": "<p>The availability of the instance to host new bridges. The bridgePlacement property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be deployed to this instance. If it is AVAILABLE, new bridges can be deployed to this instance. </p>",
                         "smithy.api#jsonName": "bridgePlacement",
                         "smithy.api#required": {}
                     }
@@ -4130,7 +4151,7 @@
                     "target": "com.amazonaws.mediaconnect#ConnectionStatus",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The connection state of the instance.\n</p>",
+                        "smithy.api#documentation": "<p>The connection state of the instance. </p>",
                         "smithy.api#jsonName": "connectionStatus",
                         "smithy.api#required": {}
                     }
@@ -4139,7 +4160,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instance.\n</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instance. </p>",
                         "smithy.api#jsonName": "gatewayArn",
                         "smithy.api#required": {}
                     }
@@ -4148,7 +4169,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ARN of the gateway.\n</p>",
+                        "smithy.api#documentation": "<p>The ARN of the gateway. </p>",
                         "smithy.api#jsonName": "gatewayInstanceArn",
                         "smithy.api#required": {}
                     }
@@ -4157,7 +4178,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The instance ID generated by the SSM install. This will begin with \"mi-\".\n</p>",
+                        "smithy.api#documentation": "<p>The instance ID generated by the SSM install. This will begin with \"mi-\". </p>",
                         "smithy.api#jsonName": "instanceId",
                         "smithy.api#required": {}
                     }
@@ -4165,7 +4186,7 @@
                 "InstanceMessages": {
                     "target": "com.amazonaws.mediaconnect#__listOfMessageDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nMessages with information about the gateway.\n</p>",
+                        "smithy.api#documentation": "<p> Messages with information about the gateway. </p>",
                         "smithy.api#jsonName": "instanceMessages"
                     }
                 },
@@ -4173,7 +4194,7 @@
                     "target": "com.amazonaws.mediaconnect#InstanceState",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The status of the instance.\n</p>",
+                        "smithy.api#documentation": "<p>The status of the instance. </p>",
                         "smithy.api#jsonName": "instanceState",
                         "smithy.api#required": {}
                     }
@@ -4182,7 +4203,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\t\n      The running bridge count.\n</p>",
+                        "smithy.api#documentation": "<p> The running bridge count. </p>",
                         "smithy.api#jsonName": "runningBridgeCount",
                         "smithy.api#required": {}
                     }
@@ -4224,11 +4245,8 @@
             "traits": {
                 "aws.api#arn": {
                     "template": "{GatewayInstanceArn}",
-                    "absolute": true,
-                    "noAccount": false,
-                    "noRegion": false,
                     "resourceDelimiter": ":",
-                    "reusable": false
+                    "absolute": true
                 },
                 "aws.iam#iamResource": {
                     "name": "gatewayInstance"
@@ -4242,7 +4260,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A unique IP address range to use for this network. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.\n</p>",
+                        "smithy.api#documentation": "<p>A unique IP address range to use for this network. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. </p>",
                         "smithy.api#jsonName": "cidrBlock",
                         "smithy.api#required": {}
                     }
@@ -4251,14 +4269,14 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the network. This name is used to reference the network and must be unique among networks in this gateway.\n</p>",
+                        "smithy.api#documentation": "<p>The name of the network. This name is used to reference the network and must be unique among networks in this gateway. </p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The network settings for a gateway.\n</p>"
+                "smithy.api#documentation": "<p>The network settings for a gateway. </p>"
             }
         },
         "com.amazonaws.mediaconnect#GatewayResource": {
@@ -4283,11 +4301,8 @@
             "traits": {
                 "aws.api#arn": {
                     "template": "{GatewayArn}",
-                    "absolute": true,
-                    "noAccount": false,
-                    "noRegion": false,
                     "resourceDelimiter": ":",
-                    "reusable": false
+                    "absolute": true
                 },
                 "aws.iam#iamResource": {
                     "name": "gateway"
@@ -4440,7 +4455,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Exception raised by Elemental MediaConnect when granting the entitlement. See the error message for the operation for more information on the cause of this exception.\n</p>",
+                "smithy.api#documentation": "<p>Exception raised by Elemental MediaConnect when granting the entitlement. See the error message for the operation for more information on the cause of this exception. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 420
             }
@@ -4499,7 +4514,7 @@
                 "InstanceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the instance running this bridge.\n</p>",
+                        "smithy.api#documentation": "<p>The ID of the instance running this bridge. </p>",
                         "smithy.api#jsonName": "instanceId"
                     }
                 },
@@ -4507,7 +4522,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The maximum expected bitrate (in bps) of the ingress bridge.\n</p>",
+                        "smithy.api#documentation": "<p>The maximum expected bitrate (in bps) of the ingress bridge. </p>",
                         "smithy.api#jsonName": "maxBitrate",
                         "smithy.api#required": {}
                     }
@@ -4516,14 +4531,14 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The maximum number of outputs on the ingress bridge.\n</p>",
+                        "smithy.api#documentation": "<p>The maximum number of outputs on the ingress bridge. </p>",
                         "smithy.api#jsonName": "maxOutputs",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Create a bridge with the ingress bridge type. An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud.\n</p>"
+                "smithy.api#documentation": "<p>Create a bridge with the ingress bridge type. An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud. </p>"
             }
         },
         "com.amazonaws.mediaconnect#InputConfiguration": {
@@ -4675,7 +4690,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The server encountered an internal error and is unable to complete the request.\n</p>",
+                "smithy.api#documentation": "<p>The server encountered an internal error and is unable to complete the request. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
@@ -4687,19 +4702,28 @@
                 "speke": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "speke"
+                        "smithy.api#enumValue": "speke",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "static_key": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "static-key"
+                        "smithy.api#enumValue": "static-key",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "srt_password": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "srt-password"
+                        "smithy.api#enumValue": "srt-password",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 }
             }
@@ -4730,7 +4754,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Displays a list of bridges that are associated with this account and an optionally\n         specified Amazon Resource Name (ARN). This request returns a paginated result.</p>",
+                "smithy.api#documentation": "<p> Displays a list of bridges that are associated with this account and an optionally specified Amazon Resource Name (ARN). This request returns a paginated result.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/bridges",
@@ -4751,21 +4775,21 @@
                 "FilterArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> Filter the list results to display only the bridges associated with the selected\n         ARN.</p>",
+                        "smithy.api#documentation": "<p> Filter the list results to display only the bridges associated with the selected ARN.</p>",
                         "smithy.api#httpQuery": "filterArn"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.mediaconnect#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p>\n         <p>For example, you submit a <code>ListBridges</code> request with <code>MaxResults</code>\n         set at 5. Although 20 items match your request, the service returns no more than the first\n         5 items. (The service also returns a <code>NextToken</code> value that you can use to fetch\n         the next batch of results.) </p>\n         <p>The service might return fewer results than the <code>MaxResults</code> value. If\n            <code>MaxResults</code> is not included in the request, the service defaults to\n         pagination with a maximum of 10 results per page.</p>",
+                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p> <p>For example, you submit a <code>ListBridges</code> request with <code>MaxResults</code> set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a <code>NextToken</code> value that you can use to fetch the next batch of results.) </p> <p>The service might return fewer results than the <code>MaxResults</code> value. If <code>MaxResults</code> is not included in the request, the service defaults to pagination with a maximum of 10 results per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListBridges</code> request with <code>MaxResults</code>\n         set at 5. The service returns the first batch of results (up to 5) and a\n            <code>NextToken</code> value. To see the next batch of results, you can submit the\n            <code>ListBridges</code> request a second time and specify the <code>NextToken</code>\n         value.</p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListBridges</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListBridges</code> request a second time and specify the <code>NextToken</code> value.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -4787,7 +4811,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListBridges</code> request with <code>MaxResults</code>\n         set at 5. The service returns the first batch of results (up to 5) and a\n            <code>NextToken</code> value. To see the next batch of results, you can submit the\n            <code>ListBridges</code> request a second time and specify the <code>NextToken</code>\n         value.</p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListBridges</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListBridges</code> request a second time and specify the <code>NextToken</code> value.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
@@ -4840,14 +4864,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediaconnect#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p>\n         <p>For example, you submit a <code>ListEntitlements</code> request with set at 5. Although\n         20 items match your request, the service returns no more than the first 5 items. (The\n         service also returns a NextToken value that you can use to fetch the next batch of\n         results.) </p>\n         <p>The service might return fewer results than the <code>MaxResults</code> value. If\n            <code>MaxResults</code> is not included in the request, the service defaults to\n         pagination with a maximum of 20 results per page.</p>",
+                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p> <p>For example, you submit a <code>ListEntitlements</code> request with set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) </p> <p>The service might return fewer results than the <code>MaxResults</code> value. If <code>MaxResults</code> is not included in the request, the service defaults to pagination with a maximum of 20 results per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListEntitlements</code> request with\n            <code>MaxResults</code> set at 5. The service returns the first batch of results (up to\n         5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the\n            <code>ListEntitlements</code> request a second time and specify the\n            <code>NextToken</code> value.</p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListEntitlements</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListEntitlements</code> request a second time and specify the <code>NextToken</code> value.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -4862,14 +4886,14 @@
                 "Entitlements": {
                     "target": "com.amazonaws.mediaconnect#__listOfListedEntitlement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of entitlements that have been granted to you from other Amazon Web Services accounts.\n</p>",
+                        "smithy.api#documentation": "<p>A list of entitlements that have been granted to you from other Amazon Web Services accounts. </p>",
                         "smithy.api#jsonName": "entitlements"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a ListEntitlements request with <code>MaxResults</code> set at\n         5. The service returns the first batch of results (up to 5) and a NextToken value. To see\n         the next batch of results, you can submit the <code>ListEntitlements</code> request a\n         second time and specify the <code>NextToken</code> value. </p>",
+                        "smithy.api#documentation": "<p>The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a ListEntitlements request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the <code>ListEntitlements</code> request a second time and specify the <code>NextToken</code> value. </p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
@@ -4922,14 +4946,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediaconnect#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p>\n         <p>For example, you submit a <code>ListFlows</code> request with MaxResults set at 5.\n         Although 20 items match your request, the service returns no more than the first 5 items.\n         (The service also returns a <code>NextToken</code> value that you can use to fetch the next\n         batch of results.) </p>\n         <p>The service might return fewer results than the <code>MaxResults</code> value. If\n            <code>MaxResults</code> is not included in the request, the service defaults to\n         pagination with a maximum of 10 results per page.</p>",
+                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p> <p>For example, you submit a <code>ListFlows</code> request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a <code>NextToken</code> value that you can use to fetch the next batch of results.) </p> <p>The service might return fewer results than the <code>MaxResults</code> value. If <code>MaxResults</code> is not included in the request, the service defaults to pagination with a maximum of 10 results per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListFlows</code> request with MaxResults set at 5. The\n         service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To\n         see the next batch of results, you can submit the <code>ListFlows</code> request a second\n         time and specify the <code>NextToken</code> value.</p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListFlows</code> request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListFlows</code> request a second time and specify the <code>NextToken</code> value.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -4951,7 +4975,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListFlows</code> request with MaxResults set at 5. The\n         service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To\n         see the next batch of results, you can submit the <code>ListFlows</code> request a second\n         time and specify the <code>NextToken</code> value.</p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListFlows</code> request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListFlows</code> request a second time and specify the <code>NextToken</code> value.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
@@ -5007,21 +5031,21 @@
                 "FilterArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> Filter the list results to display only the instances associated with the selected Gateway\n         ARN.</p>",
+                        "smithy.api#documentation": "<p> Filter the list results to display only the instances associated with the selected Gateway ARN.</p>",
                         "smithy.api#httpQuery": "filterArn"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.mediaconnect#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p>\n         <p>For example, you submit a ListInstances request with <code>MaxResults</code> set at 5.\n         Although 20 items match your request, the service returns no more than the first 5 items.\n         (The service also returns a <code>NextToken</code> value that you can use to fetch the next\n         batch of results.) </p>\n         <p>The service might return fewer results than the <code>MaxResults</code> value. If\n            <code>MaxResults</code> is not included in the request, the service defaults to\n         pagination with a maximum of 10 results per page.</p>",
+                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p> <p>For example, you submit a ListInstances request with <code>MaxResults</code> set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a <code>NextToken</code> value that you can use to fetch the next batch of results.) </p> <p>The service might return fewer results than the <code>MaxResults</code> value. If <code>MaxResults</code> is not included in the request, the service defaults to pagination with a maximum of 10 results per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListInstances</code> request with\n            <code>MaxResults</code> set at 5. The service returns the first batch of results (up to\n         5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the\n            <code>ListInstances</code> request a second time and specify the <code>NextToken</code>\n         value.</p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListInstances</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListInstances</code> request a second time and specify the <code>NextToken</code> value.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -5043,7 +5067,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListInstances</code> request with MaxResults set at 5.\n         The service returns the first batch of results (up to 5) and a <code>NextToken</code>\n         value. To see the next batch of results, you can submit the <code>ListInstances</code>\n         request a second time and specify the <code>NextToken</code> value.</p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListInstances</code> request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListInstances</code> request a second time and specify the <code>NextToken</code> value.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
@@ -5099,14 +5123,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediaconnect#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p>\n         <p>For example, you submit a <code>ListGateways</code> request with <code>MaxResults</code>\n         set at 5. Although 20 items match your request, the service returns no more than the first\n         5 items. (The service also returns a <code>NextToken</code> value that you can use to fetch\n         the next batch of results.) </p>\n         <p>The service might return fewer results than the <code>MaxResults</code> value. If\n            <code>MaxResults</code> is not included in the request, the service defaults to\n         pagination with a maximum of 10 results per page.</p>",
+                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p> <p>For example, you submit a <code>ListGateways</code> request with <code>MaxResults</code> set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a <code>NextToken</code> value that you can use to fetch the next batch of results.) </p> <p>The service might return fewer results than the <code>MaxResults</code> value. If <code>MaxResults</code> is not included in the request, the service defaults to pagination with a maximum of 10 results per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListGateways</code> request with <code>MaxResults</code>\n         set at 5. The service returns the first batch of results (up to 5) and a\n            <code>NextToken</code> value. To see the next batch of results, you can submit the\n            <code>ListGateways</code> request a second time and specify the <code>NextToken</code>\n         value.</p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListGateways</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListGateways</code> request a second time and specify the <code>NextToken</code> value.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -5128,7 +5152,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListGateways</code> request with <code>MaxResults</code>\n         set at 5. The service returns the first batch of results (up to 5) and a\n            <code>NextToken</code> value. To see the next batch of results, you can submit the\n            <code>ListGateways</code> request a second time and specify the <code>NextToken</code>\n         value.</p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListGateways</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListGateways</code> request a second time and specify the <code>NextToken</code> value.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
@@ -5181,14 +5205,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediaconnect#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p>\n         <p>For example, you submit a <code>ListOfferings</code> request with\n            <code>MaxResults</code> set at 5. Although 20 items match your request, the service\n         returns no more than the first 5 items. (The service also returns a <code>NextToken</code>\n         value that you can use to fetch the next batch of results.) </p>\n         <p>The service might return fewer results than the <code>MaxResults</code> value. If\n            <code>MaxResults</code> is not included in the request, the service defaults to\n         pagination with a maximum of 10 results per page.</p>",
+                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p> <p>For example, you submit a <code>ListOfferings</code> request with <code>MaxResults</code> set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a <code>NextToken</code> value that you can use to fetch the next batch of results.) </p> <p>The service might return fewer results than the <code>MaxResults</code> value. If <code>MaxResults</code> is not included in the request, the service defaults to pagination with a maximum of 10 results per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListOfferings</code> request with\n            <code>MaxResults</code> set at 5. The service returns the first batch of results (up to\n         5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the\n            <code>ListOfferings</code> request a second time and specify the <code>NextToken</code>\n         value.</p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListOfferings</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListOfferings</code> request a second time and specify the <code>NextToken</code> value.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -5203,7 +5227,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListOfferings</code> request with\n            <code>MaxResults</code> set at 5. The service returns the first batch of results (up to\n         5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the\n            <code>ListOfferings</code> request a second time and specify the <code>NextToken</code>\n         value.</p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListOfferings</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListOfferings</code> request a second time and specify the <code>NextToken</code> value.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 },
@@ -5263,14 +5287,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediaconnect#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p>\n         <p>For example, you submit a <code>ListReservations</code> request with\n            <code>MaxResults</code> set at 5. Although 20 items match your request, the service\n         returns no more than the first 5 items. (The service also returns a NextToken value that\n         you can use to fetch the next batch of results.) </p>\n         <p>The service might return fewer results than the <code>MaxResults</code> value. If\n            <code>MaxResults</code> is not included in the request, the service defaults to\n         pagination with a maximum of 10 results per page.</p>",
+                        "smithy.api#documentation": "<p> The maximum number of results to return per API request. </p> <p>For example, you submit a <code>ListReservations</code> request with <code>MaxResults</code> set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) </p> <p>The service might return fewer results than the <code>MaxResults</code> value. If <code>MaxResults</code> is not included in the request, the service defaults to pagination with a maximum of 10 results per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListReservations</code> request with\n            <code>MaxResults</code> set at 5. The service returns the first batch of results (up to\n         5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the\n            <code>ListOfferings</code> request a second time and specify the <code>NextToken</code>\n         value. </p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListReservations</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListOfferings</code> request a second time and specify the <code>NextToken</code> value. </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -5285,14 +5309,14 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p>\n         <p>For example, you submit a <code>ListReservations</code> request with\n            <code>MaxResults</code> set at 5. The service returns the first batch of results (up to\n         5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the\n            <code>ListReservations</code> request a second time and specify the\n            <code>NextToken</code> value.</p>",
+                        "smithy.api#documentation": "<p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListReservations</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListReservations</code> request a second time and specify the <code>NextToken</code> value.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 },
                 "Reservations": {
                     "target": "com.amazonaws.mediaconnect#__listOfReservation",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of all reservations that have been purchased by this account in the current Amazon Web Services Region.\n</p>",
+                        "smithy.api#documentation": "<p> A list of all reservations that have been purchased by this account in the current Amazon Web Services Region. </p>",
                         "smithy.api#jsonName": "reservations"
                     }
                 }
@@ -5377,7 +5401,7 @@
                     "target": "com.amazonaws.mediaconnect#BridgeState",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The state of the bridge.\n</p>",
+                        "smithy.api#documentation": "<p>The state of the bridge. </p>",
                         "smithy.api#jsonName": "bridgeState",
                         "smithy.api#required": {}
                     }
@@ -5507,7 +5531,7 @@
                 "Maintenance": {
                     "target": "com.amazonaws.mediaconnect#Maintenance",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe maintenance settings for the flow.\n</p>",
+                        "smithy.api#documentation": "<p> The maintenance settings for the flow. </p>",
                         "smithy.api#jsonName": "maintenance"
                     }
                 }
@@ -5635,43 +5659,64 @@
                 "Monday": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "Monday"
+                        "smithy.api#enumValue": "Monday",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "Tuesday": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "Tuesday"
+                        "smithy.api#enumValue": "Tuesday",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "Wednesday": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "Wednesday"
+                        "smithy.api#enumValue": "Wednesday",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "Thursday": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "Thursday"
+                        "smithy.api#enumValue": "Thursday",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "Friday": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "Friday"
+                        "smithy.api#enumValue": "Friday",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "Saturday": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "Saturday"
+                        "smithy.api#enumValue": "Saturday",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "Sunday": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "Sunday"
+                        "smithy.api#enumValue": "Sunday",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 }
             }
@@ -5734,7 +5779,7 @@
                 "smithy.api#cors": {
                     "maxAge": 86400
                 },
-                "smithy.api#documentation": "<p>Welcome to the Elemental MediaConnect API reference. </p>\n         <p>MediaConnect is a service that lets you ingest live video content into the cloud\n         and distribute it to destinations all over the world, both inside and outside the Amazon Web Services cloud. This API reference provides descriptions, syntax, and usage examples\n         for each of the actions and data types that are supported by MediaConnect. </p>\n         <p>Use the following links to get started with the MediaConnect API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/mediaconnect/latest/api/API_Operations.html\">Actions</a>: An\n                alphabetical list of all MediaConnect API operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/mediaconnect/latest/api/API_Types.html\">Data types</a>: An\n                alphabetical list of all MediaConnect data types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/mediaconnect/latest/api/CommonParameters.html\">Common\n                parameters</a>: Parameters that all operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/mediaconnect/latest/api/CommonErrors.html\">Common errors</a>: Client and server errors that all operations can return.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Welcome to the Elemental MediaConnect API reference. </p> <p>MediaConnect is a service that lets you ingest live video content into the cloud and distribute it to destinations all over the world, both inside and outside the Amazon Web Services cloud. This API reference provides descriptions, syntax, and usage examples for each of the actions and data types that are supported by MediaConnect. </p> <p>Use the following links to get started with the MediaConnect API:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/mediaconnect/latest/api/API_Operations.html\">Actions</a>: An alphabetical list of all MediaConnect API operations.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/mediaconnect/latest/api/API_Types.html\">Data types</a>: An alphabetical list of all MediaConnect data types.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/mediaconnect/latest/api/CommonParameters.html\">Common parameters</a>: Parameters that all operations can use.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/mediaconnect/latest/api/CommonErrors.html\">Common errors</a>: Client and server errors that all operations can return.</p> </li> </ul>",
                 "smithy.api#title": "AWS MediaConnect",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -6630,7 +6675,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   A media stream represents one component of your content, such as video, audio, or ancillary data. After you add a media stream to your flow, you can associate it with sources and outputs that use the ST 2110 JPEG XS or CDI protocol.\n</p>"
+                "smithy.api#documentation": "<p> A media stream represents one component of your content, such as video, audio, or ancillary data. After you add a media stream to your flow, you can associate it with sources and outputs that use the ST 2110 JPEG XS or CDI protocol. </p>"
             }
         },
         "com.amazonaws.mediaconnect#MediaStreamAttributes": {
@@ -6640,7 +6685,7 @@
                     "target": "com.amazonaws.mediaconnect#Fmtp",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The settings that you want to use to define the media stream.\n</p>",
+                        "smithy.api#documentation": "<p>The settings that you want to use to define the media stream. </p>",
                         "smithy.api#jsonName": "fmtp",
                         "smithy.api#required": {}
                     }
@@ -6648,13 +6693,13 @@
                 "Lang": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The audio language, in a format that is recognized by the receiver.\n</p>",
+                        "smithy.api#documentation": "<p>The audio language, in a format that is recognized by the receiver. </p>",
                         "smithy.api#jsonName": "lang"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Attributes that are related to the media stream.\n</p>"
+                "smithy.api#documentation": "<p>Attributes that are related to the media stream. </p>"
             }
         },
         "com.amazonaws.mediaconnect#MediaStreamAttributesRequest": {
@@ -6663,20 +6708,20 @@
                 "Fmtp": {
                     "target": "com.amazonaws.mediaconnect#FmtpRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings that you want to use to define the media stream.\n</p>",
+                        "smithy.api#documentation": "<p>The settings that you want to use to define the media stream. </p>",
                         "smithy.api#jsonName": "fmtp"
                     }
                 },
                 "Lang": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The audio language, in a format that is recognized by the receiver.\n      \n      \n</p>",
+                        "smithy.api#documentation": "<p>The audio language, in a format that is recognized by the receiver. </p>",
                         "smithy.api#jsonName": "lang"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Attributes that are related to the media stream.\n</p>"
+                "smithy.api#documentation": "<p>Attributes that are related to the media stream. </p>"
             }
         },
         "com.amazonaws.mediaconnect#MediaStreamOutputConfiguration": {
@@ -6701,7 +6746,7 @@
                 "EncodingParameters": {
                     "target": "com.amazonaws.mediaconnect#EncodingParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.\n</p>",
+                        "smithy.api#documentation": "<p>A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source. </p>",
                         "smithy.api#jsonName": "encodingParameters"
                     }
                 },
@@ -6725,7 +6770,7 @@
                 "DestinationConfigurations": {
                     "target": "com.amazonaws.mediaconnect#__listOfDestinationConfigurationRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The media streams that you want to associate with the output.\n</p>",
+                        "smithy.api#documentation": "<p> The media streams that you want to associate with the output. </p>",
                         "smithy.api#jsonName": "destinationConfigurations"
                     }
                 },
@@ -6741,7 +6786,7 @@
                 "EncodingParameters": {
                     "target": "com.amazonaws.mediaconnect#EncodingParametersRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.\n</p>",
+                        "smithy.api#documentation": "<p> A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source. </p>",
                         "smithy.api#jsonName": "encodingParameters"
                     }
                 },
@@ -6766,7 +6811,7 @@
                     "target": "com.amazonaws.mediaconnect#EncodingName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n   The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.\n</p>",
+                        "smithy.api#documentation": "<p> The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv. </p>",
                         "smithy.api#jsonName": "encodingName",
                         "smithy.api#required": {}
                     }
@@ -6774,7 +6819,7 @@
                 "InputConfigurations": {
                     "target": "com.amazonaws.mediaconnect#__listOfInputConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The media streams that you want to associate with the source.\n</p>",
+                        "smithy.api#documentation": "<p>The media streams that you want to associate with the source. </p>",
                         "smithy.api#jsonName": "inputConfigurations"
                     }
                 },
@@ -6782,14 +6827,14 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A name that helps you distinguish one media stream from another.\n</p>",
+                        "smithy.api#documentation": "<p>A name that helps you distinguish one media stream from another. </p>",
                         "smithy.api#jsonName": "mediaStreamName",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The media stream that is associated with the source, and the parameters for that association.\n</p>"
+                "smithy.api#documentation": "<p>The media stream that is associated with the source, and the parameters for that association. </p>"
             }
         },
         "com.amazonaws.mediaconnect#MediaStreamSourceConfigurationRequest": {
@@ -6799,7 +6844,7 @@
                     "target": "com.amazonaws.mediaconnect#EncodingName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.\n</p>",
+                        "smithy.api#documentation": "<p>The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv. </p>",
                         "smithy.api#jsonName": "encodingName",
                         "smithy.api#required": {}
                     }
@@ -6807,7 +6852,7 @@
                 "InputConfigurations": {
                     "target": "com.amazonaws.mediaconnect#__listOfInputConfigurationRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The media streams that you want to associate with the source.\n</p>",
+                        "smithy.api#documentation": "<p>The media streams that you want to associate with the source. </p>",
                         "smithy.api#jsonName": "inputConfigurations"
                     }
                 },
@@ -6815,14 +6860,14 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the media stream.\n</p>",
+                        "smithy.api#documentation": "<p>The name of the media stream. </p>",
                         "smithy.api#jsonName": "mediaStreamName",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The media stream that you want to associate with the source, and the parameters for that association.\n</p>"
+                "smithy.api#documentation": "<p>The media stream that you want to associate with the source, and the parameters for that association. </p>"
             }
         },
         "com.amazonaws.mediaconnect#MediaStreamType": {
@@ -6831,19 +6876,28 @@
                 "video": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "video"
+                        "smithy.api#enumValue": "video",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "audio": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "audio"
+                        "smithy.api#enumValue": "audio",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "ancillary_data": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "ancillary-data"
+                        "smithy.api#enumValue": "ancillary-data",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 }
             }
@@ -6878,7 +6932,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details of an error message.\n</p>"
+                "smithy.api#documentation": "<p>The details of an error message. </p>"
             }
         },
         "com.amazonaws.mediaconnect#Messages": {
@@ -6946,7 +7000,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The settings related to the multicast source.\n</p>"
+                "smithy.api#documentation": "<p> The settings related to the multicast source. </p>"
             }
         },
         "com.amazonaws.mediaconnect#NdiConfig": {
@@ -6955,27 +7009,27 @@
                 "NdiState": {
                     "target": "com.amazonaws.mediaconnect#NdiState",
                     "traits": {
-                        "smithy.api#documentation": "<p>A setting that controls whether NDI outputs can be used in the flow. Must be ENABLED to add NDI outputs. Default is DISABLED.\n</p>",
+                        "smithy.api#documentation": "<p>A setting that controls whether NDI outputs can be used in the flow. Must be ENABLED to add NDI outputs. Default is DISABLED. </p>",
                         "smithy.api#jsonName": "ndiState"
                     }
                 },
                 "MachineName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A prefix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect generates a unique 12-character ID as the prefix.\n</p>",
+                        "smithy.api#documentation": "<p>A prefix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect generates a unique 12-character ID as the prefix. </p>",
                         "smithy.api#jsonName": "machineName"
                     }
                 },
                 "NdiDiscoveryServers": {
                     "target": "com.amazonaws.mediaconnect#__listOfNdiDiscoveryServerConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of up to three NDI discovery server configurations. While not required by the API, this configuration is necessary for NDI functionality to work properly.\n</p>",
+                        "smithy.api#documentation": "<p>A list of up to three NDI discovery server configurations. While not required by the API, this configuration is necessary for NDI functionality to work properly. </p>",
                         "smithy.api#jsonName": "ndiDiscoveryServers"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. \n</p>"
+                "smithy.api#documentation": "<p>Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>"
             }
         },
         "com.amazonaws.mediaconnect#NdiDiscoveryServerConfig": {
@@ -6985,7 +7039,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The unique network address of the NDI discovery server.\n</p>",
+                        "smithy.api#documentation": "<p>The unique network address of the NDI discovery server. </p>",
                         "smithy.api#jsonName": "discoveryServerAddress",
                         "smithy.api#required": {}
                     }
@@ -6993,7 +7047,7 @@
                 "DiscoveryServerPort": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port for the NDI discovery server. Defaults to 5959 if a custom port isn't specified.\n</p>",
+                        "smithy.api#documentation": "<p>The port for the NDI discovery server. Defaults to 5959 if a custom port isn't specified. </p>",
                         "smithy.api#jsonName": "discoveryServerPort"
                     }
                 },
@@ -7001,14 +7055,14 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The identifier for the Virtual Private Cloud (VPC) network interface used by the flow.\n</p>",
+                        "smithy.api#documentation": "<p>The identifier for the Virtual Private Cloud (VPC) network interface used by the flow. </p>",
                         "smithy.api#jsonName": "vpcInterfaceAdapter",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration settings for individual NDI discovery servers. A maximum of 3 servers is allowed.\n</p>"
+                "smithy.api#documentation": "<p>Specifies the configuration settings for individual NDI discovery servers. A maximum of 3 servers is allowed. </p>"
             }
         },
         "com.amazonaws.mediaconnect#NdiState": {
@@ -7034,13 +7088,19 @@
                 "ena": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "ena"
+                        "smithy.api#enumValue": "ena",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "efa": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "efa"
+                        "smithy.api#enumValue": "efa",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 }
             }
@@ -7058,7 +7118,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>One or more of the resources in the request does not exist in the system.\n</p>",
+                "smithy.api#documentation": "<p>One or more of the resources in the request does not exist in the system. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -7169,11 +7229,8 @@
             "traits": {
                 "aws.api#arn": {
                     "template": "{OfferingArn}",
-                    "absolute": true,
-                    "noAccount": false,
-                    "noRegion": false,
                     "resourceDelimiter": ":",
-                    "reusable": false
+                    "absolute": true
                 },
                 "aws.iam#iamResource": {
                     "name": "offering"
@@ -7298,10 +7355,17 @@
                         "smithy.api#documentation": "<p> An indication of whether the output is transmitting data or not.</p>",
                         "smithy.api#jsonName": "outputStatus"
                     }
+                },
+                "PeerIpAddress": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the device that is currently receiving content from this output.</p> <note> <ul> <li> <p>For outputs that use protocols where you specify the destination (such as SRT Caller or Zixi Push), this value matches the configured destination address.</p> </li> <li> <p>For outputs that use listener protocols (such as SRT Listener), this value shows the address of the connected receiver. </p> </li> <li> <p>Peer IP addresses aren't available for entitlements, managed MediaLive outputs, NDI outputs, and CDI/ST2110 outputs. </p> </li> <li> <p>The peer IP address might not be visible for flows that haven't been started yet, or flows that were started before May 2025. In these cases, restart your flow to see the peer IP address.</p> </li> </ul> </note>",
+                        "smithy.api#jsonName": "peerIpAddress"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The settings for an output.\n</p>"
+                "smithy.api#documentation": "<p>The settings for an output. </p>"
             }
         },
         "com.amazonaws.mediaconnect#OutputStatus": {
@@ -7338,73 +7402,109 @@
                 "zixi_push": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "zixi-push"
+                        "smithy.api#enumValue": "zixi-push",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "rtp_fec": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "rtp-fec"
+                        "smithy.api#enumValue": "rtp-fec",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "rtp": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "rtp"
+                        "smithy.api#enumValue": "rtp",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "zixi_pull": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "zixi-pull"
+                        "smithy.api#enumValue": "zixi-pull",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "rist": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "rist"
+                        "smithy.api#enumValue": "rist",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "st2110_jpegxs": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "st2110-jpegxs"
+                        "smithy.api#enumValue": "st2110-jpegxs",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "cdi": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "cdi"
+                        "smithy.api#enumValue": "cdi",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "srt_listener": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "srt-listener"
+                        "smithy.api#enumValue": "srt-listener",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "srt_caller": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "srt-caller"
+                        "smithy.api#enumValue": "srt-caller",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "fujitsu_qos": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "fujitsu-qos"
+                        "smithy.api#enumValue": "fujitsu-qos",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "udp": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "udp"
+                        "smithy.api#enumValue": "udp",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "ndi_speed_hq": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "ndi-speed-hq"
+                        "smithy.api#enumValue": "ndi-speed-hq",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 }
             }
@@ -7470,7 +7570,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> The date and time that you want the reservation to begin, in Coordinated Universal Time\n         (UTC). </p>\n         <p>You can specify any date and time between 12:00am on the first day of the current month\n         to the current time on today's date, inclusive. Specify the start in a 24-hour notation.\n         Use the following format: <code>YYYY-MM-DDTHH:mm:SSZ</code>, where <code>T</code> and\n            <code>Z</code> are literal characters. For example, to specify 11:30pm on March 5, 2020,\n         enter <code>2020-03-05T23:30:00Z</code>.</p>",
+                        "smithy.api#documentation": "<p> The date and time that you want the reservation to begin, in Coordinated Universal Time (UTC). </p> <p>You can specify any date and time between 12:00am on the first day of the current month to the current time on today's date, inclusive. Specify the start in a 24-hour notation. Use the following format: <code>YYYY-MM-DDTHH:mm:SSZ</code>, where <code>T</code> and <code>Z</code> are literal characters. For example, to specify 11:30pm on March 5, 2020, enter <code>2020-03-05T23:30:00Z</code>.</p>",
                         "smithy.api#jsonName": "start",
                         "smithy.api#required": {}
                     }
@@ -7486,7 +7586,7 @@
                 "Reservation": {
                     "target": "com.amazonaws.mediaconnect#Reservation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the reservation that you just created when you purchased the offering.\n</p>",
+                        "smithy.api#documentation": "<p>The details of the reservation that you just created when you purchased the offering. </p>",
                         "smithy.api#jsonName": "reservation"
                     }
                 }
@@ -7597,7 +7697,7 @@
                 "OutputName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The name of the bridge output that was removed.\n</p>",
+                        "smithy.api#documentation": "<p> The name of the bridge output that was removed. </p>",
                         "smithy.api#jsonName": "outputName"
                     }
                 }
@@ -7685,7 +7785,7 @@
                 "SourceName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The name of the bridge source that was removed.\n   </p>",
+                        "smithy.api#documentation": "<p> The name of the bridge source that was removed. </p>",
                         "smithy.api#jsonName": "sourceName"
                     }
                 }
@@ -7832,7 +7932,7 @@
                 "OutputArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN of the output that you want to remove.\n</p>",
+                        "smithy.api#documentation": "<p> The ARN of the output that you want to remove. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#pattern": "^arn:.+:mediaconnect.+:output:.+$",
                         "smithy.api#required": {}
@@ -7849,14 +7949,14 @@
                 "FlowArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN of the flow that the output was removed from.\n   </p>",
+                        "smithy.api#documentation": "<p> The ARN of the flow that the output was removed from. </p>",
                         "smithy.api#jsonName": "flowArn"
                     }
                 },
                 "OutputArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN of the output that was removed.\n   </p>",
+                        "smithy.api#documentation": "<p> The ARN of the output that was removed. </p>",
                         "smithy.api#jsonName": "outputArn"
                     }
                 }
@@ -7894,7 +7994,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Removes a source from an existing flow. This request can be made only if there is more than one source on the flow.\n</p>",
+                "smithy.api#documentation": "<p> Removes a source from an existing flow. This request can be made only if there is more than one source on the flow. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/v1/flows/{FlowArn}/source/{SourceArn}",
@@ -7935,14 +8035,14 @@
                 "FlowArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN of the flow that the source was removed from.\n</p>",
+                        "smithy.api#documentation": "<p> The ARN of the flow that the source was removed from. </p>",
                         "smithy.api#jsonName": "flowArn"
                     }
                 },
                 "SourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN of the source that was removed.\n</p>",
+                        "smithy.api#documentation": "<p> The ARN of the source that was removed. </p>",
                         "smithy.api#jsonName": "sourceArn"
                     }
                 }
@@ -7995,7 +8095,7 @@
                 "FlowArn": {
                     "target": "com.amazonaws.mediaconnect#FlowArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the flow that you want to remove a VPC interface\n         from.</p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the flow that you want to remove a VPC interface from.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#pattern": "^arn:.+:mediaconnect.+:flow:.+$",
                         "smithy.api#required": {}
@@ -8197,11 +8297,8 @@
             "traits": {
                 "aws.api#arn": {
                     "template": "{ReservationArn}",
-                    "absolute": true,
-                    "noAccount": false,
-                    "noRegion": false,
                     "resourceDelimiter": ":",
-                    "reusable": false
+                    "absolute": true
                 },
                 "aws.iam#iamResource": {
                     "name": "reservation"
@@ -8267,7 +8364,10 @@
                 "Mbps_Outbound_Bandwidth": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "Mbps_Outbound_Bandwidth"
+                        "smithy.api#enumValue": "Mbps_Outbound_Bandwidth",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 }
             }
@@ -8364,19 +8464,28 @@
                 "progressive": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "progressive"
+                        "smithy.api#enumValue": "progressive",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "interlace": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "interlace"
+                        "smithy.api#enumValue": "interlace",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 },
                 "progressive_segmented_frame": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "progressive-segmented-frame"
+                        "smithy.api#enumValue": "progressive-segmented-frame",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
                     }
                 }
             }
@@ -8394,7 +8503,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The service is currently unavailable or busy. \n</p>",
+                "smithy.api#documentation": "<p>The service is currently unavailable or busy. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503,
                 "smithy.api#retryable": {}
@@ -8502,7 +8611,7 @@
                 "Protocol": {
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p> The protocol that is used by the source.</p>\n         <note>\n            <p>Elemental MediaConnect no longer supports the Fujitsu QoS\n         protocol. This reference is maintained for legacy purposes only.</p>\n         </note>",
+                        "smithy.api#documentation": "<p> The protocol that is used by the source.</p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>",
                         "smithy.api#jsonName": "protocol"
                     }
                 },
@@ -8573,20 +8682,20 @@
                 "State": {
                     "target": "com.amazonaws.mediaconnect#State",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the <code>SilentAudio</code> metric is enabled or disabled.\n</p>",
+                        "smithy.api#documentation": "<p>Indicates whether the <code>SilentAudio</code> metric is enabled or disabled. </p>",
                         "smithy.api#jsonName": "state"
                     }
                 },
                 "ThresholdSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the number of consecutive seconds of silence that triggers an event or alert.\n</p>",
+                        "smithy.api#documentation": "<p>Specifies the number of consecutive seconds of silence that triggers an event or alert. </p>",
                         "smithy.api#jsonName": "thresholdSeconds"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures settings for the <code>SilentAudio</code> metric.\n</p>"
+                "smithy.api#documentation": "<p>Configures settings for the <code>SilentAudio</code> metric. </p>"
             }
         },
         "com.amazonaws.mediaconnect#Source": {
@@ -8699,6 +8808,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The source configuration for cloud flows receiving a stream from a bridge.</p>",
                         "smithy.api#jsonName": "gatewayBridgeSource"
+                    }
+                },
+                "PeerIpAddress": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the device that is currently sending content to this source. </p> <note> <ul> <li> <p>For sources that use protocols where you specify the origin (such as SRT Caller), this value matches the configured origin address. </p> </li> <li> <p>For sources that use listener protocols (such as SRT Listener or RTP), this value shows the address of the connected sender. </p> </li> <li> <p>Peer IP addresses aren't available for entitlements and CDI/ST2110 sources.</p> </li> <li> <p>The peer IP address might not be visible for flows that haven't been started yet, or flows that were started before May 2025. In these cases, restart your flow to see the peer IP address.</p> </li> </ul> </note>",
+                        "smithy.api#jsonName": "peerIpAddress"
                     }
                 }
             },
@@ -8974,7 +9090,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Associates the specified tags to a resource with the specified <code>resourceArn</code>.\n         If existing tags on a resource are not specified in the request parameters, they are not\n         changed. When a resource is deleted, the tags associated with that resource are deleted as\n         well.</p>",
+                "smithy.api#documentation": "<p> Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{ResourceArn}",
@@ -9081,7 +9197,7 @@
                 "Thumbnail": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Thumbnail Base64 string.\n</p>",
+                        "smithy.api#documentation": "<p>Thumbnail Base64 string. </p>",
                         "smithy.api#jsonName": "thumbnail"
                     }
                 },
@@ -9144,7 +9260,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request was denied due to request throttling.\n</p>",
+                "smithy.api#documentation": "<p>The request was denied due to request throttling. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {}
@@ -9192,7 +9308,7 @@
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> The protocol that is used by the source or output.</p>\n         <note>\n            <p>Elemental MediaConnect no longer supports the Fujitsu QoS\n         protocol. This reference is maintained for legacy purposes only.</p>\n         </note>",
+                        "smithy.api#documentation": "<p> The protocol that is used by the source or output.</p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>",
                         "smithy.api#jsonName": "protocol",
                         "smithy.api#required": {}
                     }
@@ -9249,14 +9365,14 @@
                 "NdiSpeedHqQuality": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A quality setting for the NDI Speed HQ encoder.\n</p>",
+                        "smithy.api#documentation": "<p>A quality setting for the NDI Speed HQ encoder. </p>",
                         "smithy.api#jsonName": "ndiSpeedHqQuality"
                     }
                 },
                 "NdiProgramName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name.\n</p>",
+                        "smithy.api#documentation": "<p>A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>",
                         "smithy.api#jsonName": "ndiProgramName"
                     }
                 }
@@ -9309,7 +9425,7 @@
                 "FrameResolution": {
                     "target": "com.amazonaws.mediaconnect#FrameResolution",
                     "traits": {
-                        "smithy.api#documentation": "<p>The frame resolution used by the video stream.\n</p>",
+                        "smithy.api#documentation": "<p>The frame resolution used by the video stream. </p>",
                         "smithy.api#jsonName": "frameResolution"
                     }
                 },
@@ -9445,7 +9561,7 @@
                     "target": "com.amazonaws.mediaconnect#__listOfString",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The keys of the tags to be removed.\n</p>",
+                        "smithy.api#documentation": "<p>The keys of the tags to be removed. </p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -9510,13 +9626,13 @@
                 "FlowVpcInterfaceAttachment": {
                     "target": "com.amazonaws.mediaconnect#VpcInterfaceAttachment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the VPC interface attachment to use for this source.\n</p>",
+                        "smithy.api#documentation": "<p>The name of the VPC interface attachment to use for this source. </p>",
                         "smithy.api#jsonName": "flowVpcInterfaceAttachment"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   Update the flow source of the bridge.\n</p>"
+                "smithy.api#documentation": "<p> Update the flow source of the bridge. </p>"
             }
         },
         "com.amazonaws.mediaconnect#UpdateBridgeNetworkOutputRequest": {
@@ -9525,41 +9641,41 @@
                 "IpAddress": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network output IP Address.\n</p>",
+                        "smithy.api#documentation": "<p>The network output IP Address. </p>",
                         "smithy.api#jsonName": "ipAddress"
                     }
                 },
                 "NetworkName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network output's gateway network name.\n</p>",
+                        "smithy.api#documentation": "<p>The network output's gateway network name. </p>",
                         "smithy.api#jsonName": "networkName"
                     }
                 },
                 "Port": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network output port.\n</p>",
+                        "smithy.api#documentation": "<p>The network output port. </p>",
                         "smithy.api#jsonName": "port"
                     }
                 },
                 "Protocol": {
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network output protocol.\n</p>\n         <note>\n            <p>Elemental MediaConnect no longer supports the Fujitsu QoS\n         protocol. This reference is maintained for legacy purposes only.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The network output protocol. </p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>",
                         "smithy.api#jsonName": "protocol"
                     }
                 },
                 "Ttl": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network output TTL.\n</p>",
+                        "smithy.api#documentation": "<p>The network output TTL. </p>",
                         "smithy.api#jsonName": "ttl"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Update an existing network output.\n</p>"
+                "smithy.api#documentation": "<p>Update an existing network output. </p>"
             }
         },
         "com.amazonaws.mediaconnect#UpdateBridgeNetworkSourceRequest": {
@@ -9575,28 +9691,28 @@
                 "MulticastSourceSettings": {
                     "target": "com.amazonaws.mediaconnect#MulticastSourceSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings related to the multicast source.\n</p>",
+                        "smithy.api#documentation": "<p>The settings related to the multicast source. </p>",
                         "smithy.api#jsonName": "multicastSourceSettings"
                     }
                 },
                 "NetworkName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network source's gateway network name.\n</p>",
+                        "smithy.api#documentation": "<p>The network source's gateway network name. </p>",
                         "smithy.api#jsonName": "networkName"
                     }
                 },
                 "Port": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network source port.\n</p>",
+                        "smithy.api#documentation": "<p>The network source port. </p>",
                         "smithy.api#jsonName": "port"
                     }
                 },
                 "Protocol": {
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network source protocol.\n</p>\n         <note>\n            <p>Elemental MediaConnect no longer supports the Fujitsu QoS\n         protocol. This reference is maintained for legacy purposes only.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The network source protocol. </p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>",
                         "smithy.api#jsonName": "protocol"
                     }
                 }
@@ -9643,7 +9759,10 @@
                     "uri": "/v1/bridges/{BridgeArn}/outputs/{OutputName}",
                     "code": 202
                 },
-                "smithy.api#idempotent": {}
+                "smithy.api#idempotent": {},
+                "smithy.api#suppress": [
+                    "OperationNameAmbiguity"
+                ]
             }
         },
         "com.amazonaws.mediaconnect#UpdateBridgeOutputRequest": {
@@ -9661,14 +9780,14 @@
                 "NetworkOutput": {
                     "target": "com.amazonaws.mediaconnect#UpdateBridgeNetworkOutputRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe network of the bridge output.\n</p>",
+                        "smithy.api#documentation": "<p> The network of the bridge output. </p>",
                         "smithy.api#jsonName": "networkOutput"
                     }
                 },
                 "OutputName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nTname of the output that you want to update.\n</p>",
+                        "smithy.api#documentation": "<p> Tname of the output that you want to update. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9684,14 +9803,14 @@
                 "BridgeArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe ARN of the bridge that was updated.\n</p>",
+                        "smithy.api#documentation": "<p> The ARN of the bridge that was updated. </p>",
                         "smithy.api#jsonName": "bridgeArn"
                     }
                 },
                 "Output": {
                     "target": "com.amazonaws.mediaconnect#BridgeOutput",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe bridge output that was updated.\n</p>",
+                        "smithy.api#documentation": "<p> The bridge output that was updated. </p>",
                         "smithy.api#jsonName": "output"
                     }
                 }
@@ -9715,21 +9834,21 @@
                 "EgressGatewayBridge": {
                     "target": "com.amazonaws.mediaconnect#UpdateEgressGatewayBridgeRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises.\n</p>",
+                        "smithy.api#documentation": "<p> A cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises. </p>",
                         "smithy.api#jsonName": "egressGatewayBridge"
                     }
                 },
                 "IngressGatewayBridge": {
                     "target": "com.amazonaws.mediaconnect#UpdateIngressGatewayBridgeRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud.\n</p>",
+                        "smithy.api#documentation": "<p> A ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud. </p>",
                         "smithy.api#jsonName": "ingressGatewayBridge"
                     }
                 },
                 "SourceFailoverConfig": {
                     "target": "com.amazonaws.mediaconnect#UpdateFailoverConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe settings for source failover.\n</p>",
+                        "smithy.api#documentation": "<p> The settings for source failover. </p>",
                         "smithy.api#jsonName": "sourceFailoverConfig"
                     }
                 }
@@ -9744,7 +9863,7 @@
                 "Bridge": {
                     "target": "com.amazonaws.mediaconnect#Bridge",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe bridge that was updated.\n</p>",
+                        "smithy.api#documentation": "<p> The bridge that was updated. </p>",
                         "smithy.api#jsonName": "bridge"
                     }
                 }
@@ -9816,14 +9935,14 @@
                 "NetworkSource": {
                     "target": "com.amazonaws.mediaconnect#UpdateBridgeNetworkSourceRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe network for the bridge source.\n</p>",
+                        "smithy.api#documentation": "<p> The network for the bridge source. </p>",
                         "smithy.api#jsonName": "networkSource"
                     }
                 },
                 "SourceName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the source that you want to update.\n</p>",
+                        "smithy.api#documentation": "<p> The name of the source that you want to update. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9846,7 +9965,7 @@
                 "Source": {
                     "target": "com.amazonaws.mediaconnect#BridgeSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe updated bridge source.\n</p>",
+                        "smithy.api#documentation": "<p> The updated bridge source. </p>",
                         "smithy.api#jsonName": "source"
                     }
                 }
@@ -9912,7 +10031,7 @@
                     "target": "com.amazonaws.mediaconnect#DesiredState",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\nThe desired state for the bridge.\n</p>",
+                        "smithy.api#documentation": "<p> The desired state for the bridge. </p>",
                         "smithy.api#jsonName": "desiredState",
                         "smithy.api#required": {}
                     }
@@ -9935,7 +10054,7 @@
                 "DesiredState": {
                     "target": "com.amazonaws.mediaconnect#DesiredState",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe new state of the bridge.\n</p>",
+                        "smithy.api#documentation": "<p> The new state of the bridge. </p>",
                         "smithy.api#jsonName": "desiredState"
                     }
                 }
@@ -9950,7 +10069,7 @@
                 "MaxBitrate": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum expected bitrate (in bps).\n</p>",
+                        "smithy.api#documentation": "<p>The maximum expected bitrate (in bps). </p>",
                         "smithy.api#jsonName": "maxBitrate"
                     }
                 }
@@ -10000,7 +10119,7 @@
                 "ResourceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.\n</p>",
+                        "smithy.api#documentation": "<p> An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption. </p>",
                         "smithy.api#jsonName": "resourceId"
                     }
                 },
@@ -10057,7 +10176,7 @@
                 "State": {
                     "target": "com.amazonaws.mediaconnect#State",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of source failover on the flow. If the state is inactive, the flow can have only one source. If the state is active, the flow can have one or two sources.\n</p>",
+                        "smithy.api#documentation": "<p>The state of source failover on the flow. If the state is inactive, the flow can have only one source. If the state is active, the flow can have one or two sources. </p>",
                         "smithy.api#jsonName": "state"
                     }
                 }
@@ -10171,14 +10290,14 @@
                 "EntitlementStatus": {
                     "target": "com.amazonaws.mediaconnect#EntitlementStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p> An indication of whether you want to enable the entitlement to allow access, or disable it\n         to stop streaming content to the subscriber’s flow temporarily. If you don’t specify the\n            <code>entitlementStatus</code> field in your request, MediaConnect leaves the\n         value unchanged.</p>",
+                        "smithy.api#documentation": "<p> An indication of whether you want to enable the entitlement to allow access, or disable it to stop streaming content to the subscriber’s flow temporarily. If you don’t specify the <code>entitlementStatus</code> field in your request, MediaConnect leaves the value unchanged.</p>",
                         "smithy.api#jsonName": "entitlementStatus"
                     }
                 },
                 "FlowArn": {
                     "target": "com.amazonaws.mediaconnect#FlowArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN of the flow that is associated with the entitlement that you want to\n         update.</p>",
+                        "smithy.api#documentation": "<p> The ARN of the flow that is associated with the entitlement that you want to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#pattern": "^arn:.+:mediaconnect.+:flow:.+$",
                         "smithy.api#required": {}
@@ -10269,21 +10388,21 @@
                 "ClockRate": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sample rate for the stream. This value in measured in kHz.\n</p>",
+                        "smithy.api#documentation": "<p>The sample rate for the stream. This value in measured in kHz. </p>",
                         "smithy.api#jsonName": "clockRate"
                     }
                 },
                 "Description": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description that can help you quickly identify what your media stream is used for.\n</p>",
+                        "smithy.api#documentation": "<p>A description that can help you quickly identify what your media stream is used for. </p>",
                         "smithy.api#jsonName": "description"
                     }
                 },
                 "FlowArn": {
                     "target": "com.amazonaws.mediaconnect#FlowArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the flow that is associated with the media stream that\n         you updated.</p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the flow that is associated with the media stream that you updated.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#pattern": "^arn:.+:mediaconnect.+:flow:.+$",
                         "smithy.api#required": {}
@@ -10300,14 +10419,14 @@
                 "MediaStreamType": {
                     "target": "com.amazonaws.mediaconnect#MediaStreamType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of media stream.\n</p>",
+                        "smithy.api#documentation": "<p>The type of media stream. </p>",
                         "smithy.api#jsonName": "mediaStreamType"
                     }
                 },
                 "VideoFormat": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resolution of the video.\n</p>",
+                        "smithy.api#documentation": "<p>The resolution of the video. </p>",
                         "smithy.api#jsonName": "videoFormat"
                     }
                 }
@@ -10322,14 +10441,14 @@
                 "FlowArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the flow that is associated with the media stream that you updated.\n</p>",
+                        "smithy.api#documentation": "<p>The ARN of the flow that is associated with the media stream that you updated. </p>",
                         "smithy.api#jsonName": "flowArn"
                     }
                 },
                 "MediaStream": {
                     "target": "com.amazonaws.mediaconnect#MediaStream",
                     "traits": {
-                        "smithy.api#documentation": "<p>The media stream that you updated.\n</p>",
+                        "smithy.api#documentation": "<p>The media stream that you updated. </p>",
                         "smithy.api#jsonName": "mediaStream"
                     }
                 }
@@ -10373,7 +10492,10 @@
                     "uri": "/v1/flows/{FlowArn}/outputs/{OutputArn}",
                     "code": 202
                 },
-                "smithy.api#idempotent": {}
+                "smithy.api#idempotent": {},
+                "smithy.api#suppress": [
+                    "OperationNameAmbiguity"
+                ]
             }
         },
         "com.amazonaws.mediaconnect#UpdateFlowOutputRequest": {
@@ -10403,14 +10525,14 @@
                 "Encryption": {
                     "target": "com.amazonaws.mediaconnect#UpdateEncryption",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of key used for the encryption. If no <code>keyType</code> is provided, the\n         service will use the default setting (static-key). Allowable encryption types:\n         static-key.</p>",
+                        "smithy.api#documentation": "<p> The type of key used for the encryption. If no <code>keyType</code> is provided, the service will use the default setting (static-key). Allowable encryption types: static-key.</p>",
                         "smithy.api#jsonName": "encryption"
                     }
                 },
                 "FlowArn": {
                     "target": "com.amazonaws.mediaconnect#FlowArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the flow that is associated with the output that you\n         want to update.</p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the flow that is associated with the output that you want to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#pattern": "^arn:.+:mediaconnect.+:flow:.+$",
                         "smithy.api#required": {}
@@ -10456,7 +10578,7 @@
                 "Protocol": {
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p> The protocol to use for the output.</p>\n         <note>\n            <p>Elemental MediaConnect no longer supports the Fujitsu QoS\n         protocol. This reference is maintained for legacy purposes only.</p>\n         </note>",
+                        "smithy.api#documentation": "<p> The protocol to use for the output.</p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>",
                         "smithy.api#jsonName": "protocol"
                     }
                 },
@@ -10505,21 +10627,21 @@
                 "OutputStatus": {
                     "target": "com.amazonaws.mediaconnect#OutputStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p> An indication of whether the output should transmit data or not. If you don't specify the\n            <code>outputStatus</code> field in your request, MediaConnect leaves the value\n         unchanged.</p>",
+                        "smithy.api#documentation": "<p> An indication of whether the output should transmit data or not. If you don't specify the <code>outputStatus</code> field in your request, MediaConnect leaves the value unchanged.</p>",
                         "smithy.api#jsonName": "outputStatus"
                     }
                 },
                 "NdiProgramName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name.\n</p>",
+                        "smithy.api#documentation": "<p> A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>",
                         "smithy.api#jsonName": "ndiProgramName"
                     }
                 },
                 "NdiSpeedHqQuality": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A quality setting for the NDI Speed HQ encoder.\n</p>",
+                        "smithy.api#documentation": "<p>A quality setting for the NDI Speed HQ encoder. </p>",
                         "smithy.api#jsonName": "ndiSpeedHqQuality"
                     }
                 }
@@ -10565,28 +10687,28 @@
                 "SourceFailoverConfig": {
                     "target": "com.amazonaws.mediaconnect#UpdateFailoverConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The settings for source failover.\n</p>",
+                        "smithy.api#documentation": "<p> The settings for source failover. </p>",
                         "smithy.api#jsonName": "sourceFailoverConfig"
                     }
                 },
                 "Maintenance": {
                     "target": "com.amazonaws.mediaconnect#UpdateMaintenance",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The maintenance setting of the flow.\n</p>",
+                        "smithy.api#documentation": "<p> The maintenance setting of the flow. </p>",
                         "smithy.api#jsonName": "maintenance"
                     }
                 },
                 "SourceMonitoringConfig": {
                     "target": "com.amazonaws.mediaconnect#MonitoringConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe settings for source monitoring.\n</p>",
+                        "smithy.api#documentation": "<p> The settings for source monitoring. </p>",
                         "smithy.api#jsonName": "sourceMonitoringConfig"
                     }
                 },
                 "NdiConfig": {
                     "target": "com.amazonaws.mediaconnect#NdiConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs.\n</p>",
+                        "smithy.api#documentation": "<p> Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>",
                         "smithy.api#jsonName": "ndiConfig"
                     }
                 }
@@ -10601,7 +10723,7 @@
                 "Flow": {
                     "target": "com.amazonaws.mediaconnect#Flow",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe updated flow.\n</p>",
+                        "smithy.api#documentation": "<p> The updated flow. </p>",
                         "smithy.api#jsonName": "flow"
                     }
                 }
@@ -10654,21 +10776,21 @@
                 "Decryption": {
                     "target": "com.amazonaws.mediaconnect#UpdateEncryption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of encryption that is used on the content ingested from the source.\n</p>",
+                        "smithy.api#documentation": "<p>The type of encryption that is used on the content ingested from the source. </p>",
                         "smithy.api#jsonName": "decryption"
                     }
                 },
                 "Description": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the source. This description is not visible outside of the current Amazon Web Services account.\n</p>",
+                        "smithy.api#documentation": "<p>A description of the source. This description is not visible outside of the current Amazon Web Services account. </p>",
                         "smithy.api#jsonName": "description"
                     }
                 },
                 "EntitlementArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the entitlement that allows you to subscribe to the flow.\n         The entitlement is set by the content originator, and the ARN is generated as part of the\n         originator's flow. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the entitlement that allows you to subscribe to the flow. The entitlement is set by the content originator, and the ARN is generated as part of the originator's flow. </p>",
                         "smithy.api#jsonName": "entitlementArn",
                         "smithy.api#pattern": "^arn:.+:mediaconnect.+:entitlement:.+$"
                     }
@@ -10676,7 +10798,7 @@
                 "FlowArn": {
                     "target": "com.amazonaws.mediaconnect#FlowArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe ARN of the flow that you want to update.\n</p>",
+                        "smithy.api#documentation": "<p> The ARN of the flow that you want to update. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#pattern": "^arn:.+:mediaconnect.+:flow:.+$",
                         "smithy.api#required": {}
@@ -10685,70 +10807,70 @@
                 "IngestPort": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port that the flow listens on for incoming content. If the protocol of the source is Zixi, the port must be set to 2088.\n</p>",
+                        "smithy.api#documentation": "<p>The port that the flow listens on for incoming content. If the protocol of the source is Zixi, the port must be set to 2088. </p>",
                         "smithy.api#jsonName": "ingestPort"
                     }
                 },
                 "MaxBitrate": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum bitrate for RIST, RTP, and RTP-FEC streams.\n</p>",
+                        "smithy.api#documentation": "<p>The maximum bitrate for RIST, RTP, and RTP-FEC streams. </p>",
                         "smithy.api#jsonName": "maxBitrate"
                     }
                 },
                 "MaxLatency": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.\n</p>",
+                        "smithy.api#documentation": "<p>The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams. </p>",
                         "smithy.api#jsonName": "maxLatency"
                     }
                 },
                 "MaxSyncBuffer": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the buffer (in milliseconds) to use to sync incoming source data.\n</p>",
+                        "smithy.api#documentation": "<p>The size of the buffer (in milliseconds) to use to sync incoming source data. </p>",
                         "smithy.api#jsonName": "maxSyncBuffer"
                     }
                 },
                 "MediaStreamSourceConfigurations": {
                     "target": "com.amazonaws.mediaconnect#__listOfMediaStreamSourceConfigurationRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The media stream that is associated with the source, and the parameters for that association.\n</p>",
+                        "smithy.api#documentation": "<p>The media stream that is associated with the source, and the parameters for that association. </p>",
                         "smithy.api#jsonName": "mediaStreamSourceConfigurations"
                     }
                 },
                 "MinLatency": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.\n</p>",
+                        "smithy.api#documentation": "<p>The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency. </p>",
                         "smithy.api#jsonName": "minLatency"
                     }
                 },
                 "Protocol": {
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol that the source uses to deliver the content to MediaConnect.\n</p>\n         <note>\n            <p>Elemental MediaConnect no longer supports the Fujitsu QoS\n         protocol. This reference is maintained for legacy purposes only.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The protocol that the source uses to deliver the content to MediaConnect. </p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>",
                         "smithy.api#jsonName": "protocol"
                     }
                 },
                 "SenderControlPort": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port that the flow uses to send outbound requests to initiate connection with the sender.\n</p>",
+                        "smithy.api#documentation": "<p>The port that the flow uses to send outbound requests to initiate connection with the sender. </p>",
                         "smithy.api#jsonName": "senderControlPort"
                     }
                 },
                 "SenderIpAddress": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address that the flow communicates with to initiate connection with the sender.\n</p>",
+                        "smithy.api#documentation": "<p>The IP address that the flow communicates with to initiate connection with the sender. </p>",
                         "smithy.api#jsonName": "senderIpAddress"
                     }
                 },
                 "SourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the source that you want to update.\n</p>",
+                        "smithy.api#documentation": "<p>The ARN of the source that you want to update. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#pattern": "^arn:.+:mediaconnect.+:source:.+$",
                         "smithy.api#required": {}
@@ -10757,21 +10879,21 @@
                 "SourceListenerAddress": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source IP or domain name for SRT-caller protocol.\n</p>",
+                        "smithy.api#documentation": "<p>The source IP or domain name for SRT-caller protocol. </p>",
                         "smithy.api#jsonName": "sourceListenerAddress"
                     }
                 },
                 "SourceListenerPort": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Source port for SRT-caller protocol.\n</p>",
+                        "smithy.api#documentation": "<p>Source port for SRT-caller protocol. </p>",
                         "smithy.api#jsonName": "sourceListenerPort"
                     }
                 },
                 "StreamId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.\n</p>",
+                        "smithy.api#documentation": "<p>The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams. </p>",
                         "smithy.api#jsonName": "streamId"
                     }
                 },
@@ -10785,14 +10907,14 @@
                 "WhitelistCidr": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The range of IP addresses that are allowed to contribute content to your source. Format the IP addresses as a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.\n</p>",
+                        "smithy.api#documentation": "<p>The range of IP addresses that are allowed to contribute content to your source. Format the IP addresses as a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. </p>",
                         "smithy.api#jsonName": "whitelistCidr"
                     }
                 },
                 "GatewayBridgeSource": {
                     "target": "com.amazonaws.mediaconnect#UpdateGatewayBridgeSourceRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source configuration for cloud flows receiving a stream from a bridge.\n</p>",
+                        "smithy.api#documentation": "<p>The source configuration for cloud flows receiving a stream from a bridge. </p>",
                         "smithy.api#jsonName": "gatewayBridgeSource"
                     }
                 }
@@ -10807,14 +10929,14 @@
                 "FlowArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the flow that you was updated.\n</p>",
+                        "smithy.api#documentation": "<p>The ARN of the flow that you was updated. </p>",
                         "smithy.api#jsonName": "flowArn"
                     }
                 },
                 "Source": {
                     "target": "com.amazonaws.mediaconnect#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the sources that are assigned to the flow.\n</p>",
+                        "smithy.api#documentation": "<p>The details of the sources that are assigned to the flow. </p>",
                         "smithy.api#jsonName": "source"
                     }
                 }
@@ -10878,7 +11000,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing gateway instance.\n</p>",
+                "smithy.api#documentation": "<p>Updates an existing gateway instance. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v1/gateway-instances/{GatewayInstanceArn}",
@@ -10952,7 +11074,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   Update an existing ingress-type bridge.\n</p>"
+                "smithy.api#documentation": "<p> Update an existing ingress-type bridge. </p>"
             }
         },
         "com.amazonaws.mediaconnect#UpdateMaintenance": {
@@ -10990,14 +11112,14 @@
                 "BlackFrames": {
                     "target": "com.amazonaws.mediaconnect#BlackFrames",
                     "traits": {
-                        "smithy.api#documentation": "<p>Detects video frames that are black.\n</p>",
+                        "smithy.api#documentation": "<p>Detects video frames that are black. </p>",
                         "smithy.api#jsonName": "blackFrames"
                     }
                 },
                 "FrozenFrames": {
                     "target": "com.amazonaws.mediaconnect#FrozenFrames",
                     "traits": {
-                        "smithy.api#documentation": "<p>Detects video frames that have not changed.\n</p>",
+                        "smithy.api#documentation": "<p>Detects video frames that have not changed. </p>",
                         "smithy.api#jsonName": "frozenFrames"
                     }
                 }
@@ -11080,7 +11202,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The settings for attaching a VPC interface to an resource.\n</p>"
+                "smithy.api#documentation": "<p> The settings for attaching a VPC interface to an resource. </p>"
             }
         },
         "com.amazonaws.mediaconnect#VpcInterfaceRequest": {
@@ -11090,7 +11212,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name for the VPC interface. This name must be unique within the flow.\n</p>",
+                        "smithy.api#documentation": "<p>The name for the VPC interface. This name must be unique within the flow. </p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
                     }
@@ -11098,7 +11220,7 @@
                 "NetworkInterfaceType": {
                     "target": "com.amazonaws.mediaconnect#NetworkInterfaceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of network interface.\n</p>",
+                        "smithy.api#documentation": "<p>The type of network interface. </p>",
                         "smithy.api#jsonName": "networkInterfaceType"
                     }
                 },
@@ -11106,7 +11228,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that you created when you set up MediaConnect as a trusted service.\n</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that you created when you set up MediaConnect as a trusted service. </p>",
                         "smithy.api#jsonName": "roleArn",
                         "smithy.api#required": {}
                     }
@@ -11115,7 +11237,7 @@
                     "target": "com.amazonaws.mediaconnect#__listOfString",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A virtual firewall to control inbound and outbound traffic.\n</p>",
+                        "smithy.api#documentation": "<p>A virtual firewall to control inbound and outbound traffic. </p>",
                         "smithy.api#jsonName": "securityGroupIds",
                         "smithy.api#required": {}
                     }
@@ -11124,14 +11246,14 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n   The subnet IDs that you want to use for your VPC interface. A range of IP addresses in your VPC. When you create your VPC, you specify a range of IPv4 addresses for the VPC in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. This is the primary CIDR block for your VPC. When you create a subnet for your VPC, you specify the CIDR block for the subnet, which is a subset of the VPC CIDR block. The subnets that you use across all VPC interfaces on the flow must be in the same Availability Zone as the flow.\n</p>",
+                        "smithy.api#documentation": "<p> The subnet IDs that you want to use for your VPC interface. A range of IP addresses in your VPC. When you create your VPC, you specify a range of IPv4 addresses for the VPC in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. This is the primary CIDR block for your VPC. When you create a subnet for your VPC, you specify the CIDR block for the subnet, which is a subset of the VPC CIDR block. The subnets that you use across all VPC interfaces on the flow must be in the same Availability Zone as the flow. </p>",
                         "smithy.api#jsonName": "subnetId",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details of the VPC interfaces that you want to add to the flow.\n</p>"
+                "smithy.api#documentation": "<p>The details of the VPC interfaces that you want to add to the flow. </p>"
             }
         },
         "com.amazonaws.mediaconnect#__listOfAddBridgeOutputRequest": {

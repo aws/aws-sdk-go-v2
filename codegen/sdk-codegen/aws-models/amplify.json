@@ -1832,7 +1832,7 @@
                 "type": {
                     "target": "com.amazonaws.amplify#CacheConfigType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of cache configuration to use for an Amplify app.</p>\n         <p>The <code>AMPLIFY_MANAGED</code> cache configuration automatically applies an\n            optimized cache configuration for your app based on its platform, routing rules, and\n            rewrite rules. This is the default setting.</p>\n         <p>The <code>AMPLIFY_MANAGED_NO_COOKIES</code> cache configuration type is the same as\n                <code>AMPLIFY_MANAGED</code>, except that it excludes all cookies from the cache\n            key.</p>",
+                        "smithy.api#documentation": "<p>The type of cache configuration to use for an Amplify app.</p>\n         <p>The <code>AMPLIFY_MANAGED</code> cache configuration automatically applies an\n            optimized cache configuration for your app based on its platform, routing rules, and\n            rewrite rules.</p>\n         <p>The <code>AMPLIFY_MANAGED_NO_COOKIES</code> cache configuration type is the same as\n                <code>AMPLIFY_MANAGED</code>, except that it excludes all cookies from the cache\n            key. This is the default setting.</p>",
                         "smithy.api#required": {}
                     }
                 }

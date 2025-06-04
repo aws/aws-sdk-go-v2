@@ -1815,7 +1815,7 @@
                 "SelectorType": {
                     "target": "com.amazonaws.mediaconvert#AudioSelectorType",
                     "traits": {
-                        "smithy.api#documentation": "Specifies the type of the audio selector.",
+                        "smithy.api#documentation": "Specify how MediaConvert selects audio content within your input. The default is Track. PID: Select audio by specifying the Packet Identifier (PID) values for MPEG Transport Stream inputs. Use this when you know the exact PID values of your audio streams. Track: Default. Select audio by track number. This is the most common option and works with most input container formats. Language code: Select audio by language using ISO 639-2 or ISO 639-3 three-letter language codes. Use this when your source has embedded language metadata and you want to select tracks based on their language. HLS rendition group: Select audio from an HLS rendition group. Use this when your input is an HLS package with multiple audio renditions and you want to select specific rendition groups. All PCM: Select all uncompressed PCM audio tracks from your input automatically. This is useful when you want to include all PCM audio tracks without specifying individual track numbers.",
                         "smithy.api#jsonName": "selectorType"
                     }
                 },
@@ -1881,7 +1881,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specifies the type of the audio selector."
+                "smithy.api#documentation": "Specify how MediaConvert selects audio content within your input. The default is Track. PID: Select audio by specifying the Packet Identifier (PID) values for MPEG Transport Stream inputs. Use this when you know the exact PID values of your audio streams. Track: Default. Select audio by track number. This is the most common option and works with most input container formats. Language code: Select audio by language using ISO 639-2 or ISO 639-3 three-letter language codes. Use this when your source has embedded language metadata and you want to select tracks based on their language. HLS rendition group: Select audio from an HLS rendition group. Use this when your input is an HLS package with multiple audio renditions and you want to select specific rendition groups. All PCM: Select all uncompressed PCM audio tracks from your input automatically. This is useful when you want to include all PCM audio tracks without specifying individual track numbers."
             }
         },
         "com.amazonaws.mediaconvert#AudioTypeControl": {
@@ -14840,7 +14840,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -15113,7 +15113,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -19601,6 +19601,26 @@
                 "smithy.api#documentation": "Required when you set Codec, under AudioDescriptions>CodecSettings, to the value MP3."
             }
         },
+        "com.amazonaws.mediaconvert#Mp4C2paManifest": {
+            "type": "enum",
+            "members": {
+                "INCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUDE"
+                    }
+                },
+                "EXCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "When enabled, a C2PA compliant manifest will be generated, signed and embeded in the output. For more information on C2PA, see https://c2pa.org/specifications/specifications/2.1/index.html"
+            }
+        },
         "com.amazonaws.mediaconvert#Mp4CslgAtom": {
             "type": "enum",
             "members": {
@@ -19671,6 +19691,20 @@
                         "smithy.api#jsonName": "audioDuration"
                     }
                 },
+                "C2paManifest": {
+                    "target": "com.amazonaws.mediaconvert#Mp4C2paManifest",
+                    "traits": {
+                        "smithy.api#documentation": "When enabled, a C2PA compliant manifest will be generated, signed and embeded in the output. For more information on C2PA, see https://c2pa.org/specifications/specifications/2.1/index.html",
+                        "smithy.api#jsonName": "c2paManifest"
+                    }
+                },
+                "CertificateSecret": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the name or ARN of the AWS Secrets Manager secret that contains your C2PA public certificate chain in PEM format. Provide a valid secret name or ARN. Note that your MediaConvert service role must allow access to this secret. The public certificate chain is added to the COSE header (x5chain) for signature validation. Include the signer's certificate and all intermediate certificates. Do not include the root certificate. For details on COSE, see: https://opensource.contentauthenticity.org/docs/manifest/signing-manifests",
+                        "smithy.api#jsonName": "certificateSecret"
+                    }
+                },
                 "CslgAtom": {
                     "target": "com.amazonaws.mediaconvert#Mp4CslgAtom",
                     "traits": {
@@ -19704,6 +19738,13 @@
                     "traits": {
                         "smithy.api#documentation": "Overrides the \"Major Brand\" field in the output file. Usually not necessary to specify.",
                         "smithy.api#jsonName": "mp4MajorBrand"
+                    }
+                },
+                "SigningKmsKey": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the ID or ARN of the AWS KMS key used to sign the C2PA manifest in your MP4 output. Provide a valid KMS key ARN. Note that your MediaConvert service role must allow access to this key.",
+                        "smithy.api#jsonName": "signingKmsKey"
                     }
                 }
             },
@@ -29279,6 +29320,15 @@
                     "max": 50
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_\\/_+=.@-]*$"
+            }
+        },
+        "com.amazonaws.mediaconvert#__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": "^(arn:aws(-us-gov|-cn)?:kms:[a-z-]{2,6}-(east|west|central|((north|south)(east|west)?))-[1-9]{1,2}:\\d{12}:key/)?[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|mrk-[a-fA-F0-9]{32}$"
             }
         },
         "com.amazonaws.mediaconvert#__stringMin24Max512PatternAZaZ0902": {

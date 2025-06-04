@@ -10,7 +10,7 @@
                 "resourceName": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>You don't have sufficient access to perform this action.\n        </p>"
+                        "smithy.api#documentation": "<p>You don't have sufficient access to perform this action. </p>"
                     }
                 }
             },
@@ -42,10 +42,52 @@
                 "smithy.api#pattern": "^\\d{12}$"
             }
         },
+        "com.amazonaws.invoicing#AmountBreakdown": {
+            "type": "structure",
+            "members": {
+                "SubTotalAmount": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The total of a set of the breakdown. </p>"
+                    }
+                },
+                "Discounts": {
+                    "target": "com.amazonaws.invoicing#DiscountsBreakdown",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The discounted amount. </p>"
+                    }
+                },
+                "Taxes": {
+                    "target": "com.amazonaws.invoicing#TaxesBreakdown",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The tax amount. </p>"
+                    }
+                },
+                "Fees": {
+                    "target": "com.amazonaws.invoicing#FeesBreakdown",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The fee amount. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about how the total amount was calculated and categorized. </p>"
+            }
+        },
         "com.amazonaws.invoicing#AsOfTimestamp": {
             "type": "timestamp"
         },
         "com.amazonaws.invoicing#BasicString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.invoicing#BasicStringWithoutSpace": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -118,7 +160,7 @@
                 "AccountIds": {
                     "target": "com.amazonaws.invoicing#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Retrieves the corresponding invoice profile data for these account IDs.\n    </p>",
+                        "smithy.api#documentation": "<p>Retrieves the corresponding invoice profile data for these account IDs. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -133,12 +175,34 @@
                 "Profiles": {
                     "target": "com.amazonaws.invoicing#ProfileList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A list of invoice profiles corresponding to the requested accounts.\n    </p>"
+                        "smithy.api#documentation": "<p> A list of invoice profiles corresponding to the requested accounts. </p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#BillingPeriod": {
+            "type": "structure",
+            "members": {
+                "Month": {
+                    "target": "com.amazonaws.invoicing#Month",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The billing period month. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Year": {
+                    "target": "com.amazonaws.invoicing#Year",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The billing period year. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The billing period for which you want to retrieve invoice-related documents. </p>"
             }
         },
         "com.amazonaws.invoicing#CreateInvoiceUnit": {
@@ -198,41 +262,41 @@
                 "Name": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The unique name of the invoice unit that is shown on the generated invoice. This can't be changed once it is set. To change this name, you must delete the invoice unit recreate.\n    </p>",
+                        "smithy.api#documentation": "<p> The unique name of the invoice unit that is shown on the generated invoice. This can't be changed once it is set. To change this name, you must delete the invoice unit recreate. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "InvoiceReceiver": {
                     "target": "com.amazonaws.invoicing#AccountIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Web Services account ID chosen to be the receiver of an invoice unit. All invoices generated for that invoice unit will be sent to this account ID.\n    </p>",
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID chosen to be the receiver of an invoice unit. All invoices generated for that invoice unit will be sent to this account ID. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.invoicing#DescriptionString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The invoice unit's description. This can be changed at a later time.\n    </p>"
+                        "smithy.api#documentation": "<p> The invoice unit's description. This can be changed at a later time. </p>"
                     }
                 },
                 "TaxInheritanceDisabled": {
                     "target": "com.amazonaws.invoicing#TaxInheritanceDisabledFlag",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Whether the invoice unit based tax inheritance is/ should be enabled or disabled.\n    </p>"
+                        "smithy.api#documentation": "<p>Whether the invoice unit based tax inheritance is/ should be enabled or disabled. </p>"
                     }
                 },
                 "Rule": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitRule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>InvoiceUnitRule</code> object used to create invoice units.\n    </p>",
+                        "smithy.api#documentation": "<p>The <code>InvoiceUnitRule</code> object used to create invoice units. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceTags": {
                     "target": "com.amazonaws.invoicing#ResourceTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The tag structure that contains a tag key and value.\n    </p>"
+                        "smithy.api#documentation": "<p> The tag structure that contains a tag key and value. </p>"
                     }
                 }
             },
@@ -246,12 +310,69 @@
                 "InvoiceUnitArn": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>"
+                        "smithy.api#documentation": "<p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#CurrencyCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.invoicing#CurrencyExchangeDetails": {
+            "type": "structure",
+            "members": {
+                "SourceCurrencyCode": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exchange source currency. </p>"
+                    }
+                },
+                "TargetCurrencyCode": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exchange target currency. </p>"
+                    }
+                },
+                "Rate": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency exchange rate. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of currency exchange. </p>"
+            }
+        },
+        "com.amazonaws.invoicing#DateInterval": {
+            "type": "structure",
+            "members": {
+                "StartDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The beginning of the time period that you want invoice-related documents for. The start date is inclusive. For example, if <code>start</code> is <code>2019-01-01</code>, AWS retrieves invoices starting at <code>2019-01-01</code> up to the end date. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The end of the time period that you want invoice-related documents for. The end date is exclusive. For example, if <code>end</code> is <code>2019-01-10</code>, Amazon Web Services retrieves invoice-related documents from the start date up to, but not including, <code>2018-01-10</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The time period that you want invoice-related documents for. </p>"
             }
         },
         "com.amazonaws.invoicing#DeleteInvoiceUnit": {
@@ -280,7 +401,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This deletes an invoice unit with the provided invoice unit ARN.\n    </p>",
+                "smithy.api#documentation": "<p>This deletes an invoice unit with the provided invoice unit ARN. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "DeleteInvoiceUnit",
@@ -300,7 +421,7 @@
                 "InvoiceUnitArn": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>",
+                        "smithy.api#documentation": "<p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -315,7 +436,7 @@
                 "InvoiceUnitArn": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>"
+                        "smithy.api#documentation": "<p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>"
                     }
                 }
             },
@@ -333,30 +454,148 @@
                 "smithy.api#pattern": "^[\\S\\s]*$"
             }
         },
+        "com.amazonaws.invoicing#DiscountsBreakdown": {
+            "type": "structure",
+            "members": {
+                "Breakdown": {
+                    "target": "com.amazonaws.invoicing#DiscountsBreakdownAmountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of discounts information. </p>"
+                    }
+                },
+                "TotalAmount": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The discount's total amount. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The discounts details. </p>"
+            }
+        },
+        "com.amazonaws.invoicing#DiscountsBreakdownAmount": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The list of discounts information. </p>"
+                    }
+                },
+                "Amount": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The discounted amount. </p>"
+                    }
+                },
+                "Rate": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The details for the discount rate.. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The discounted amount. </p>"
+            }
+        },
+        "com.amazonaws.invoicing#DiscountsBreakdownAmountList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#DiscountsBreakdownAmount"
+            }
+        },
+        "com.amazonaws.invoicing#Entity": {
+            "type": "structure",
+            "members": {
+                "InvoicingEntity": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the entity that issues the Amazon Web Services invoice.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The organization name providing Amazon Web Services services.</p>"
+            }
+        },
+        "com.amazonaws.invoicing#FeesBreakdown": {
+            "type": "structure",
+            "members": {
+                "Breakdown": {
+                    "target": "com.amazonaws.invoicing#FeesBreakdownAmountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of fees information. </p>"
+                    }
+                },
+                "TotalAmount": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The total amount of fees. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The details of fees. </p>"
+            }
+        },
+        "com.amazonaws.invoicing#FeesBreakdownAmount": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The list of fees information. </p>"
+                    }
+                },
+                "Amount": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The fee amount. </p>"
+                    }
+                },
+                "Rate": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Details about the rate amount. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The fee amount. </p>"
+            }
+        },
+        "com.amazonaws.invoicing#FeesBreakdownAmountList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#FeesBreakdownAmount"
+            }
+        },
         "com.amazonaws.invoicing#Filters": {
             "type": "structure",
             "members": {
                 "Names": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n    An optional input to the list API. You can specify a list of invoice unit names inside filters to return invoice units that match only the specified invoice unit names. If multiple names are provided, the result is an <code>OR</code> condition (match any) of the specified invoice unit names.\n</p>"
+                        "smithy.api#documentation": "<p> An optional input to the list API. You can specify a list of invoice unit names inside filters to return invoice units that match only the specified invoice unit names. If multiple names are provided, the result is an <code>OR</code> condition (match any) of the specified invoice unit names. </p>"
                     }
                 },
                 "InvoiceReceivers": {
                     "target": "com.amazonaws.invoicing#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nYou can specify a list of Amazon Web Services account IDs inside filters to return invoice units that match only the specified accounts. If multiple accounts are provided, the result is an <code>OR</code> condition (match any) of the specified accounts. This filter only matches the specified accounts on the invoice receivers of the invoice units.\n</p>"
+                        "smithy.api#documentation": "<p> You can specify a list of Amazon Web Services account IDs inside filters to return invoice units that match only the specified accounts. If multiple accounts are provided, the result is an <code>OR</code> condition (match any) of the specified accounts. This filter only matches the specified accounts on the invoice receivers of the invoice units. </p>"
                     }
                 },
                 "Accounts": {
                     "target": "com.amazonaws.invoicing#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nYou can specify a list of Amazon Web Services account IDs inside filters to return invoice units that match only the specified accounts. If multiple accounts are provided, the result is an <code>OR</code> condition (match any) of the specified accounts. The specified account IDs are matched with either the receiver or the linked accounts in the rules.\n</p>"
+                        "smithy.api#documentation": "<p> You can specify a list of Amazon Web Services account IDs inside filters to return invoice units that match only the specified accounts. If multiple accounts are provided, the result is an <code>OR</code> condition (match any) of the specified accounts. The specified account IDs are matched with either the receiver or the linked accounts in the rules. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An optional input to the list API. If multiple filters are specified, the returned list will be a configuration that match all of the provided filters. Supported filter types are <code>InvoiceReceivers</code>, <code>Names</code>, and <code>Accounts</code>. \n</p>"
+                "smithy.api#documentation": "<p>An optional input to the list API. If multiple filters are specified, the returned list will be a configuration that match all of the provided filters. Supported filter types are <code>InvoiceReceivers</code>, <code>Names</code>, and <code>Accounts</code>. </p>"
             }
         },
         "com.amazonaws.invoicing#GetInvoiceUnit": {
@@ -436,14 +675,14 @@
                 "InvoiceUnitArn": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>",
+                        "smithy.api#documentation": "<p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AsOf": {
                     "target": "com.amazonaws.invoicing#AsOfTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The state of an invoice unit at a specified time. You can see legacy invoice units that are currently deleted if the <code>AsOf</code> time is set to before it was deleted. If an <code>AsOf</code> is not provided, the default value is the current time.\n    </p>"
+                        "smithy.api#documentation": "<p> The state of an invoice unit at a specified time. You can see legacy invoice units that are currently deleted if the <code>AsOf</code> time is set to before it was deleted. If an <code>AsOf</code> is not provided, the default value is the current time. </p>"
                     }
                 }
             },
@@ -457,32 +696,32 @@
                 "InvoiceUnitArn": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>"
+                        "smithy.api#documentation": "<p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>"
                     }
                 },
                 "InvoiceReceiver": {
                     "target": "com.amazonaws.invoicing#AccountIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Web Services account ID chosen to be the receiver of an invoice unit. All invoices generated for that invoice unit will be sent to this account ID.\n    </p>"
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID chosen to be the receiver of an invoice unit. All invoices generated for that invoice unit will be sent to this account ID. </p>"
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The unique name of the invoice unit that is shown on the generated invoice.\n    </p>"
+                        "smithy.api#documentation": "<p> The unique name of the invoice unit that is shown on the generated invoice. </p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.invoicing#DescriptionString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The assigned description for an invoice unit.\n    </p>"
+                        "smithy.api#documentation": "<p> The assigned description for an invoice unit. </p>"
                     }
                 },
                 "TaxInheritanceDisabled": {
                     "target": "com.amazonaws.invoicing#TaxInheritanceDisabledFlag",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>\n      Whether the invoice unit based tax inheritance is/ should be enabled or disabled.\n    </p>"
+                        "smithy.api#documentation": "<p> Whether the invoice unit based tax inheritance is/ should be enabled or disabled. </p>"
                     }
                 },
                 "Rule": {
@@ -491,7 +730,7 @@
                 "LastModified": {
                     "target": "com.amazonaws.invoicing#LastModifiedTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The most recent date the invoice unit response was updated.\n    </p>"
+                        "smithy.api#documentation": "<p> The most recent date the invoice unit response was updated. </p>"
                     }
                 }
             },
@@ -518,9 +757,47 @@
                     "code": "InvoicingInternalServer",
                     "httpResponseCode": 500
                 },
-                "smithy.api#documentation": "<p>The processing request failed because of an unknown error, exception, or failure.\n</p>",
+                "smithy.api#documentation": "<p>The processing request failed because of an unknown error, exception, or failure. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceCurrencyAmount": {
+            "type": "structure",
+            "members": {
+                "TotalAmount": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The invoice currency amount. </p>"
+                    }
+                },
+                "TotalAmountBeforeTax": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Details about the invoice total amount before tax. </p>"
+                    }
+                },
+                "CurrencyCode": {
+                    "target": "com.amazonaws.invoicing#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency dominion of the invoice document.</p>"
+                    }
+                },
+                "AmountBreakdown": {
+                    "target": "com.amazonaws.invoicing#AmountBreakdown",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Details about the invoice currency amount. </p>"
+                    }
+                },
+                "CurrencyExchangeDetails": {
+                    "target": "com.amazonaws.invoicing#CurrencyExchangeDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The details of currency exchange. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The amount charged after taxes, in the preferred currency. </p>"
             }
         },
         "com.amazonaws.invoicing#InvoiceProfile": {
@@ -529,42 +806,202 @@
                 "AccountId": {
                     "target": "com.amazonaws.invoicing#AccountIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe account ID the invoice profile is generated for.\n</p>"
+                        "smithy.api#documentation": "<p> The account ID the invoice profile is generated for. </p>"
                     }
                 },
                 "ReceiverName": {
-                    "target": "com.amazonaws.invoicing#BasicString",
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the person receiving the invoice profile.\n</p>"
+                        "smithy.api#documentation": "<p> The name of the person receiving the invoice profile. </p>"
                     }
                 },
                 "ReceiverAddress": {
                     "target": "com.amazonaws.invoicing#ReceiverAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The address of the receiver that will be printed on the invoice.\n</p>"
+                        "smithy.api#documentation": "<p>The address of the receiver that will be printed on the invoice. </p>"
                     }
                 },
                 "ReceiverEmail": {
-                    "target": "com.amazonaws.invoicing#SensitiveBasicString",
+                    "target": "com.amazonaws.invoicing#SensitiveBasicStringWithoutSpace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email address for the invoice profile receiver.\n</p>"
+                        "smithy.api#documentation": "<p>The email address for the invoice profile receiver. </p>"
                     }
                 },
                 "Issuer": {
-                    "target": "com.amazonaws.invoicing#BasicString",
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThis specifies the issuing entity of the invoice.\n</p>"
+                        "smithy.api#documentation": "<p> This specifies the issuing entity of the invoice. </p>"
                     }
                 },
                 "TaxRegistrationNumber": {
-                    "target": "com.amazonaws.invoicing#SensitiveBasicString",
+                    "target": "com.amazonaws.invoicing#SensitiveBasicStringWithoutSpace",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nYour Tax Registration Number (TRN) information.\n</p>"
+                        "smithy.api#documentation": "<p> Your Tax Registration Number (TRN) information. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nContains high-level information about the invoice receiver.\n</p>"
+                "smithy.api#documentation": "<p> Contains high-level information about the invoice receiver. </p>"
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#InvoiceSummary"
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceSummariesFilter": {
+            "type": "structure",
+            "members": {
+                "TimeInterval": {
+                    "target": "com.amazonaws.invoicing#DateInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date range for invoice summary retrieval. </p>"
+                    }
+                },
+                "BillingPeriod": {
+                    "target": "com.amazonaws.invoicing#BillingPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing period associated with the invoice documents. </p>"
+                    }
+                },
+                "InvoicingEntity": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the entity that issues the Amazon Web Services invoice.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Filters for your invoice summaries. </p>"
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceSummariesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceSummariesSelector": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.invoicing#ListInvoiceSummariesResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query identifier type (<code>INVOICE_ID</code> or <code>ACCOUNT_ID</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.invoicing#StringWithoutNewLine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the query identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the invoice summary.</p>"
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceSummary": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.invoicing#AccountIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID. </p>"
+                    }
+                },
+                "InvoiceId": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The invoice ID. </p>"
+                    }
+                },
+                "IssuedDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The issued date of the invoice. </p>"
+                    }
+                },
+                "DueDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The invoice due date. </p>"
+                    }
+                },
+                "Entity": {
+                    "target": "com.amazonaws.invoicing#Entity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The organization name providing Amazon Web Services services.</p>"
+                    }
+                },
+                "BillingPeriod": {
+                    "target": "com.amazonaws.invoicing#BillingPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The billing period of the invoice-related document. </p>"
+                    }
+                },
+                "InvoiceType": {
+                    "target": "com.amazonaws.invoicing#InvoiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of invoice. </p>"
+                    }
+                },
+                "OriginalInvoiceId": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The initial or original invoice ID. </p>"
+                    }
+                },
+                "PurchaseOrderNumber": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The purchase order number associated to the invoice.</p>"
+                    }
+                },
+                "BaseCurrencyAmount": {
+                    "target": "com.amazonaws.invoicing#InvoiceCurrencyAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The summary with the product and service currency. </p>"
+                    }
+                },
+                "TaxCurrencyAmount": {
+                    "target": "com.amazonaws.invoicing#InvoiceCurrencyAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The summary with the tax currency. </p>"
+                    }
+                },
+                "PaymentCurrencyAmount": {
+                    "target": "com.amazonaws.invoicing#InvoiceCurrencyAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The summary with the customer configured currency. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The invoice that the API retrieved. </p>"
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceType": {
+            "type": "enum",
+            "members": {
+                "INVOICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVOICE"
+                    }
+                },
+                "CREDIT_MEMO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_MEMO"
+                    }
+                }
             }
         },
         "com.amazonaws.invoicing#InvoiceUnit": {
@@ -573,49 +1010,49 @@
                 "InvoiceUnitArn": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>ARN to identify an invoice unit. This information can't be modified or deleted.\n</p>"
+                        "smithy.api#documentation": "<p>ARN to identify an invoice unit. This information can't be modified or deleted. </p>"
                     }
                 },
                 "InvoiceReceiver": {
                     "target": "com.amazonaws.invoicing#AccountIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account that receives invoices related to the invoice unit.\n</p>"
+                        "smithy.api#documentation": "<p>The account that receives invoices related to the invoice unit. </p>"
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n    A unique name that is distinctive within your Amazon Web Services.\n</p>"
+                        "smithy.api#documentation": "<p> A unique name that is distinctive within your Amazon Web Services. </p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.invoicing#DescriptionString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The assigned description for an invoice unit. This information can't be modified or deleted.\n</p>"
+                        "smithy.api#documentation": "<p>The assigned description for an invoice unit. This information can't be modified or deleted. </p>"
                     }
                 },
                 "TaxInheritanceDisabled": {
                     "target": "com.amazonaws.invoicing#TaxInheritanceDisabledFlag",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>Whether the invoice unit based tax inheritance is/ should be enabled or disabled.\n</p>"
+                        "smithy.api#documentation": "<p>Whether the invoice unit based tax inheritance is/ should be enabled or disabled. </p>"
                     }
                 },
                 "Rule": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitRule",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nAn <code>InvoiceUnitRule</code> object used the categorize invoice units. \n</p>"
+                        "smithy.api#documentation": "<p> An <code>InvoiceUnitRule</code> object used the categorize invoice units. </p>"
                     }
                 },
                 "LastModified": {
                     "target": "com.amazonaws.invoicing#LastModifiedTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe last time the invoice unit was updated. This is important to determine the version of invoice unit configuration used to create the invoices. Any invoice created after this modified time will use this invoice unit configuration.\n</p>"
+                        "smithy.api#documentation": "<p> The last time the invoice unit was updated. This is important to determine the version of invoice unit configuration used to create the invoices. Any invoice created after this modified time will use this invoice unit configuration. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An invoice unit is a set of mutually exclusive accounts that correspond to your business entity. Invoice units allow you separate Amazon Web Services account costs and configures your invoice for each business entity going forward.\n</p>"
+                "smithy.api#documentation": "<p>An invoice unit is a set of mutually exclusive accounts that correspond to your business entity. Invoice units allow you separate Amazon Web Services account costs and configures your invoice for each business entity going forward. </p>"
             }
         },
         "com.amazonaws.invoicing#InvoiceUnitArnString": {
@@ -650,12 +1087,12 @@
                 "LinkedAccounts": {
                     "target": "com.amazonaws.invoicing#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of <code>LINKED_ACCOUNT</code> IDs where charges are included within the invoice unit.\n</p>"
+                        "smithy.api#documentation": "<p>The list of <code>LINKED_ACCOUNT</code> IDs where charges are included within the invoice unit. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nThis is used to categorize the invoice unit. Values are Amazon Web Services account IDs. Currently, the only supported rule is <code>LINKED_ACCOUNT</code>.\n</p>"
+                "smithy.api#documentation": "<p> This is used to categorize the invoice unit. Values are Amazon Web Services account IDs. Currently, the only supported rule is <code>LINKED_ACCOUNT</code>. </p>"
             }
         },
         "com.amazonaws.invoicing#InvoiceUnits": {
@@ -679,6 +1116,9 @@
                 },
                 {
                     "target": "com.amazonaws.invoicing#GetInvoiceUnit"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ListInvoiceSummaries"
                 },
                 {
                     "target": "com.amazonaws.invoicing#ListInvoiceUnits"
@@ -712,7 +1152,7 @@
                     "endpointPatternType": "service_region_dnsSuffix"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>\n            <b>Amazon Web Services Invoice Configuration</b>\n         </p>\n         <p>You can use Amazon Web Services Invoice Configuration APIs to programmatically create,\n      update, delete, get, and list invoice units. You can also programmatically fetch the\n      information of the invoice receiver. For example, business legal name, address, and invoicing\n      contacts. </p>\n         <p>You can use Amazon Web Services Invoice Configuration to receive separate Amazon Web Services invoices based your organizational needs. By using Amazon Web Services Invoice Configuration, you can configure invoice units that are groups of Amazon Web Services accounts that represent your business entities, and receive separate invoices for each business entity. You can also assign a unique member or payer account as the invoice receiver for each invoice unit. As you create new accounts within your Organizations using Amazon Web Services Invoice Configuration APIs, you can automate the creation of new invoice units and subsequently automate the addition of new accounts to your invoice units.</p>\n         <p>Service endpoint</p>\n         <p>You can use the following endpoints for Amazon Web Services Invoice Configuration:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>https://invoicing.us-east-1.api.aws</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p> <b>Amazon Web Services Invoice Configuration</b> </p> <p>You can use Amazon Web Services Invoice Configuration APIs to programmatically create, update, delete, get, and list invoice units. You can also programmatically fetch the information of the invoice receiver. For example, business legal name, address, and invoicing contacts. </p> <p>You can use Amazon Web Services Invoice Configuration to receive separate Amazon Web Services invoices based your organizational needs. By using Amazon Web Services Invoice Configuration, you can configure invoice units that are groups of Amazon Web Services accounts that represent your business entities, and receive separate invoices for each business entity. You can also assign a unique member or payer account as the invoice receiver for each invoice unit. As you create new accounts within your Organizations using Amazon Web Services Invoice Configuration APIs, you can automate the creation of new invoice units and subsequently automate the addition of new accounts to your invoice units.</p> <p>Service endpoint</p> <p>You can use the following endpoints for Amazon Web Services Invoice Configuration:</p> <ul> <li> <p> <code>https://invoicing.us-east-1.api.aws</code> </p> </li> </ul>",
                 "smithy.api#title": "AWS Invoicing",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1183,6 +1623,606 @@
         "com.amazonaws.invoicing#LastModifiedTimestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.invoicing#ListInvoiceSummaries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#ListInvoiceSummariesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#ListInvoiceSummariesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves your invoice details programmatically, without line item details.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListInvoiceSummaries with InvoiceId as selector",
+                        "input": {
+                            "Selector": {
+                                "ResourceType": "INVOICE_ID",
+                                "Value": "1111111111"
+                            }
+                        },
+                        "output": {
+                            "InvoiceSummaries": [
+                                {
+                                    "AccountId": "111111111111",
+                                    "InvoiceId": "1111111111",
+                                    "InvoiceType": "INVOICE",
+                                    "IssuedDate": "2025-04-01T01:00:00.000Z",
+                                    "DueDate": "2025-04-01T01:00:00.000Z",
+                                    "BillingPeriod": {
+                                        "Month": 1,
+                                        "Year": 2025
+                                    },
+                                    "Entity": {
+                                        "InvoicingEntity": "Amazon Web Services, Inc."
+                                    },
+                                    "BaseCurrencyAmount": {
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00"
+                                            }
+                                        },
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD"
+                                    },
+                                    "PaymentCurrencyAmount": {
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD",
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00",
+                                                "Breakdown": [
+                                                    {
+                                                        "Amount": "1",
+                                                        "Description": "VAT",
+                                                        "Rate": "1.0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "CurrencyExchangeDetails": {
+                                            "SourceCurrencyCode": "USD",
+                                            "TargetCurrencyCode": "USD",
+                                            "Rate": "1.0"
+                                        }
+                                    },
+                                    "TaxCurrencyAmount": {
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD",
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00",
+                                                "Breakdown": [
+                                                    {
+                                                        "Amount": "1",
+                                                        "Description": "VAT",
+                                                        "Rate": "1.0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "CurrencyExchangeDetails": {
+                                            "SourceCurrencyCode": "USD",
+                                            "TargetCurrencyCode": "USD",
+                                            "Rate": "1.0"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "ListInvoiceSummaries with AccountId as selector and billing period",
+                        "input": {
+                            "Selector": {
+                                "ResourceType": "ACCOUNT_ID",
+                                "Value": "111111111111"
+                            },
+                            "Filter": {
+                                "BillingPeriod": {
+                                    "Month": 1,
+                                    "Year": 2025
+                                }
+                            }
+                        },
+                        "output": {
+                            "InvoiceSummaries": [
+                                {
+                                    "AccountId": "111111111111",
+                                    "InvoiceId": "1111111111",
+                                    "InvoiceType": "INVOICE",
+                                    "IssuedDate": "2025-04-01T01:00:00.000Z",
+                                    "DueDate": "2025-04-01T01:00:00.000Z",
+                                    "BillingPeriod": {
+                                        "Month": 1,
+                                        "Year": 2025
+                                    },
+                                    "Entity": {
+                                        "InvoicingEntity": "Amazon Web Services, Inc."
+                                    },
+                                    "BaseCurrencyAmount": {
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00"
+                                            }
+                                        },
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD"
+                                    },
+                                    "PaymentCurrencyAmount": {
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD",
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00",
+                                                "Breakdown": [
+                                                    {
+                                                        "Amount": "1",
+                                                        "Description": "VAT",
+                                                        "Rate": "1.0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "CurrencyExchangeDetails": {
+                                            "SourceCurrencyCode": "USD",
+                                            "TargetCurrencyCode": "USD",
+                                            "Rate": "1.0"
+                                        }
+                                    },
+                                    "TaxCurrencyAmount": {
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD",
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00",
+                                                "Breakdown": [
+                                                    {
+                                                        "Amount": "1",
+                                                        "Description": "VAT",
+                                                        "Rate": "1.0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "CurrencyExchangeDetails": {
+                                            "SourceCurrencyCode": "USD",
+                                            "TargetCurrencyCode": "USD",
+                                            "Rate": "1.0"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "ListInvoiceSummaries with AccountId as selector and time interval",
+                        "input": {
+                            "Selector": {
+                                "ResourceType": "ACCOUNT_ID",
+                                "Value": "111111111111"
+                            },
+                            "Filter": {
+                                "TimeInterval": {
+                                    "StartDate": 1590997407,
+                                    "EndDate": 1592639007
+                                }
+                            }
+                        },
+                        "output": {
+                            "InvoiceSummaries": [
+                                {
+                                    "AccountId": "111111111111",
+                                    "InvoiceId": "1111111111",
+                                    "InvoiceType": "INVOICE",
+                                    "IssuedDate": "2025-04-01T01:00:00.000Z",
+                                    "DueDate": "2025-04-01T01:00:00.000Z",
+                                    "BillingPeriod": {
+                                        "Month": 1,
+                                        "Year": 2025
+                                    },
+                                    "Entity": {
+                                        "InvoicingEntity": "Amazon Web Services, Inc."
+                                    },
+                                    "BaseCurrencyAmount": {
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00"
+                                            }
+                                        },
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD"
+                                    },
+                                    "PaymentCurrencyAmount": {
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD",
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00",
+                                                "Breakdown": [
+                                                    {
+                                                        "Amount": "1",
+                                                        "Description": "VAT",
+                                                        "Rate": "1.0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "CurrencyExchangeDetails": {
+                                            "SourceCurrencyCode": "USD",
+                                            "TargetCurrencyCode": "USD",
+                                            "Rate": "1.0"
+                                        }
+                                    },
+                                    "TaxCurrencyAmount": {
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD",
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00",
+                                                "Breakdown": [
+                                                    {
+                                                        "Amount": "1",
+                                                        "Description": "VAT",
+                                                        "Rate": "1.0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "CurrencyExchangeDetails": {
+                                            "SourceCurrencyCode": "USD",
+                                            "TargetCurrencyCode": "USD",
+                                            "Rate": "1.0"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "ListInvoiceSummaries with AccountId as selector and a billing period and max results",
+                        "input": {
+                            "Selector": {
+                                "ResourceType": "ACCOUNT_ID",
+                                "Value": "111111111111"
+                            },
+                            "Filter": {
+                                "BillingPeriod": {
+                                    "Month": 1,
+                                    "Year": 2025
+                                }
+                            },
+                            "MaxResults": 1
+                        },
+                        "output": {
+                            "InvoiceSummaries": [
+                                {
+                                    "AccountId": "111111111111",
+                                    "InvoiceId": "1111111111",
+                                    "InvoiceType": "INVOICE",
+                                    "IssuedDate": "2025-04-01T01:00:00.000Z",
+                                    "DueDate": "2025-04-01T01:00:00.000Z",
+                                    "BillingPeriod": {
+                                        "Month": 1,
+                                        "Year": 2025
+                                    },
+                                    "Entity": {
+                                        "InvoicingEntity": "Amazon Web Services, Inc."
+                                    },
+                                    "BaseCurrencyAmount": {
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00"
+                                            }
+                                        },
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD"
+                                    },
+                                    "PaymentCurrencyAmount": {
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD",
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00",
+                                                "Breakdown": [
+                                                    {
+                                                        "Amount": "1",
+                                                        "Description": "VAT",
+                                                        "Rate": "1.0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "CurrencyExchangeDetails": {
+                                            "SourceCurrencyCode": "USD",
+                                            "TargetCurrencyCode": "USD",
+                                            "Rate": "1.0"
+                                        }
+                                    },
+                                    "TaxCurrencyAmount": {
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD",
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00",
+                                                "Breakdown": [
+                                                    {
+                                                        "Amount": "1",
+                                                        "Description": "VAT",
+                                                        "Rate": "1.0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "CurrencyExchangeDetails": {
+                                            "SourceCurrencyCode": "USD",
+                                            "TargetCurrencyCode": "USD",
+                                            "Rate": "1.0"
+                                        }
+                                    }
+                                }
+                            ],
+                            "NextToken": "abcde12345"
+                        }
+                    },
+                    {
+                        "title": "ListInvoiceSummaries with AccountId as selector and a billing period and next token",
+                        "input": {
+                            "Selector": {
+                                "ResourceType": "ACCOUNT_ID",
+                                "Value": "111111111111"
+                            },
+                            "Filter": {
+                                "BillingPeriod": {
+                                    "Month": 1,
+                                    "Year": 2025
+                                }
+                            },
+                            "NextToken": "abcde12345"
+                        },
+                        "output": {
+                            "InvoiceSummaries": [
+                                {
+                                    "AccountId": "111111111111",
+                                    "InvoiceId": "1111111111",
+                                    "InvoiceType": "INVOICE",
+                                    "IssuedDate": "2025-04-01T01:00:00.000Z",
+                                    "DueDate": "2025-04-01T01:00:00.000Z",
+                                    "BillingPeriod": {
+                                        "Month": 1,
+                                        "Year": 2025
+                                    },
+                                    "Entity": {
+                                        "InvoicingEntity": "Amazon Web Services, Inc."
+                                    },
+                                    "BaseCurrencyAmount": {
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00"
+                                            }
+                                        },
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD"
+                                    },
+                                    "PaymentCurrencyAmount": {
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD",
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00",
+                                                "Breakdown": [
+                                                    {
+                                                        "Amount": "1",
+                                                        "Description": "VAT",
+                                                        "Rate": "1.0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "CurrencyExchangeDetails": {
+                                            "SourceCurrencyCode": "USD",
+                                            "TargetCurrencyCode": "USD",
+                                            "Rate": "1.0"
+                                        }
+                                    },
+                                    "TaxCurrencyAmount": {
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD",
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00",
+                                                "Breakdown": [
+                                                    {
+                                                        "Amount": "1",
+                                                        "Description": "VAT",
+                                                        "Rate": "1.0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "CurrencyExchangeDetails": {
+                                            "SourceCurrencyCode": "USD",
+                                            "TargetCurrencyCode": "USD",
+                                            "Rate": "1.0"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "InvoiceSummaries"
+                }
+            }
+        },
+        "com.amazonaws.invoicing#ListInvoiceSummariesRequest": {
+            "type": "structure",
+            "members": {
+                "Selector": {
+                    "target": "com.amazonaws.invoicing#InvoiceSummariesSelector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to retrieve details for a specific invoice by providing its unique ID. Alternatively, access information for all invoices linked to the account by providing an account ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.invoicing#InvoiceSummariesFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters you can use to customize your invoice summary.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.invoicing#NextTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.invoicing#InvoiceSummariesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of invoice summaries a paginated response can contain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#ListInvoiceSummariesResourceType": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_ID"
+                    }
+                },
+                "INVOICE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVOICE_ID"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.invoicing#ListInvoiceSummariesResponse": {
+            "type": "structure",
+            "members": {
+                "InvoiceSummaries": {
+                    "target": "com.amazonaws.invoicing#InvoiceSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of key (summary level) invoice details without line item details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.invoicing#NextTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.invoicing#ListInvoiceUnits": {
             "type": "operation",
             "input": {
@@ -1347,26 +2387,26 @@
                 "Filters": {
                     "target": "com.amazonaws.invoicing#Filters",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      An optional input to the list API. If multiple filters are specified, the returned list will be a configuration that match all of the provided filters. Supported filter types are <code>InvoiceReceivers</code>, <code>Names</code>, and <code>Accounts</code>. \n    </p>"
+                        "smithy.api#documentation": "<p> An optional input to the list API. If multiple filters are specified, the returned list will be a configuration that match all of the provided filters. Supported filter types are <code>InvoiceReceivers</code>, <code>Names</code>, and <code>Accounts</code>. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.invoicing#NextTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used to indicate where the returned list should start from.\n    </p>"
+                        "smithy.api#documentation": "<p>The next token used to indicate where the returned list should start from. </p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.invoicing#MaxResultsInteger",
                     "traits": {
                         "smithy.api#default": 500,
-                        "smithy.api#documentation": "<p>The maximum number of invoice units that can be returned.\n    </p>"
+                        "smithy.api#documentation": "<p>The maximum number of invoice units that can be returned. </p>"
                     }
                 },
                 "AsOf": {
                     "target": "com.amazonaws.invoicing#AsOfTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The state of an invoice unit at a specified time. You can see legacy invoice units that are currently deleted if the <code>AsOf</code> time is set to before it was deleted. If an <code>AsOf</code> is not provided, the default value is the current time.\n    </p>"
+                        "smithy.api#documentation": "<p> The state of an invoice unit at a specified time. You can see legacy invoice units that are currently deleted if the <code>AsOf</code> time is set to before it was deleted. If an <code>AsOf</code> is not provided, the default value is the current time. </p>"
                     }
                 }
             },
@@ -1380,13 +2420,13 @@
                 "InvoiceUnits": {
                     "target": "com.amazonaws.invoicing#InvoiceUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      An invoice unit is a set of mutually exclusive accounts that correspond to your business entity.\n    </p>"
+                        "smithy.api#documentation": "<p> An invoice unit is a set of mutually exclusive accounts that correspond to your business entity. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.invoicing#NextTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used to indicate where the returned list should start from.\n    </p>"
+                        "smithy.api#documentation": "<p>The next token used to indicate where the returned list should start from. </p>"
                     }
                 }
             },
@@ -1420,7 +2460,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags for a resource.\n    </p>",
+                "smithy.api#documentation": "<p>Lists the tags for a resource. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "ListTagsForResource",
@@ -1446,7 +2486,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.invoicing#TagrisArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of tags to list.\n    </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of tags to list. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1461,7 +2501,7 @@
                 "ResourceTags": {
                     "target": "com.amazonaws.invoicing#ResourceTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Adds a tag to a resource.\n    </p>"
+                        "smithy.api#documentation": "<p> Adds a tag to a resource. </p>"
                     }
                 }
             },
@@ -1479,12 +2519,20 @@
                 }
             }
         },
+        "com.amazonaws.invoicing#Month": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 12
+                }
+            }
+        },
         "com.amazonaws.invoicing#NextTokenString": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 2048
+                    "min": 1
                 },
                 "smithy.api#pattern": "^[\\S\\s]*$"
             }
@@ -1501,60 +2549,60 @@
                 "AddressLine1": {
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe first line of the address.\n</p>"
+                        "smithy.api#documentation": "<p> The first line of the address. </p>"
                     }
                 },
                 "AddressLine2": {
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe second line of the address, if applicable.\n</p>"
+                        "smithy.api#documentation": "<p> The second line of the address, if applicable. </p>"
                     }
                 },
                 "AddressLine3": {
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe third line of the address, if applicable.\n</p>"
+                        "smithy.api#documentation": "<p> The third line of the address, if applicable. </p>"
                     }
                 },
                 "DistrictOrCounty": {
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe district or country the address is located in.\n</p>"
+                        "smithy.api#documentation": "<p> The district or country the address is located in. </p>"
                     }
                 },
                 "City": {
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe city that the address is in.\n</p>"
+                        "smithy.api#documentation": "<p> The city that the address is in. </p>"
                     }
                 },
                 "StateOrRegion": {
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe state, region, or province the address is located.\n</p>"
+                        "smithy.api#documentation": "<p> The state, region, or province the address is located. </p>"
                     }
                 },
                 "CountryCode": {
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe country code for the country the address is in.\n</p>"
+                        "smithy.api#documentation": "<p> The country code for the country the address is in. </p>"
                     }
                 },
                 "CompanyName": {
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nA unique company name.\n</p>"
+                        "smithy.api#documentation": "<p> A unique company name. </p>"
                     }
                 },
                 "PostalCode": {
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe postal code associated with the address.\n</p>"
+                        "smithy.api#documentation": "<p> The postal code associated with the address. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nThe details of the address associated with the receiver.\n</p>",
+                "smithy.api#documentation": "<p> The details of the address associated with the receiver. </p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1576,7 +2624,7 @@
                     "code": "InvoicingResourceNotFound",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p>The resource could not be found.\n</p>",
+                "smithy.api#documentation": "<p>The resource could not be found. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -1587,20 +2635,20 @@
                 "Key": {
                     "target": "com.amazonaws.invoicing#ResourceTagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object key of your of your resource tag.\n</p>",
+                        "smithy.api#documentation": "<p>The object key of your of your resource tag. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.invoicing#ResourceTagValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe specific value of the resource tag.\n</p>",
+                        "smithy.api#documentation": "<p> The specific value of the resource tag. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The tag structure that contains a tag key and value.\n</p>"
+                "smithy.api#documentation": "<p>The tag structure that contains a tag key and value. </p>"
             }
         },
         "com.amazonaws.invoicing#ResourceTagKey": {
@@ -1645,7 +2693,7 @@
                 }
             }
         },
-        "com.amazonaws.invoicing#SensitiveBasicString": {
+        "com.amazonaws.invoicing#SensitiveBasicStringWithoutSpace": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -1671,9 +2719,19 @@
                     "code": "InvoicingServiceQuotaExceeded",
                     "httpResponseCode": 402
                 },
-                "smithy.api#documentation": "<p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services account limits. The error message describes the limit exceeded.\n        </p>",
+                "smithy.api#documentation": "<p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services account limits. The error message describes the limit exceeded. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.invoicing#StringWithoutNewLine": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^.*$"
             }
         },
         "com.amazonaws.invoicing#TagResource": {
@@ -1705,7 +2763,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a tag to a resource.\n    </p>",
+                "smithy.api#documentation": "<p>Adds a tag to a resource. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "TagResource",
@@ -1729,14 +2787,14 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.invoicing#TagrisArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the tags.\n    </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the tags. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceTags": {
                     "target": "com.amazonaws.invoicing#ResourceTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Adds a tag to a resource.\n    </p>",
+                        "smithy.api#documentation": "<p> Adds a tag to a resource. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1759,13 +2817,65 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
+                "smithy.api#pattern": "^arn:aws[-a-z0-9]*:(invoicing)::[0-9]{12}:[-a-zA-Z0-9/:_]+$"
             }
         },
         "com.amazonaws.invoicing#TaxInheritanceDisabledFlag": {
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.invoicing#TaxesBreakdown": {
+            "type": "structure",
+            "members": {
+                "Breakdown": {
+                    "target": "com.amazonaws.invoicing#TaxesBreakdownAmountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of tax information. </p>"
+                    }
+                },
+                "TotalAmount": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The total amount for your taxes. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The details of the taxes. </p>"
+            }
+        },
+        "com.amazonaws.invoicing#TaxesBreakdownAmount": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The details of the taxes. </p>"
+                    }
+                },
+                "Amount": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The tax amount. </p>"
+                    }
+                },
+                "Rate": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The details of the tax rate. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The tax amount. </p>"
+            }
+        },
+        "com.amazonaws.invoicing#TaxesBreakdownAmountList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#TaxesBreakdownAmount"
             }
         },
         "com.amazonaws.invoicing#ThrottlingException": {
@@ -1811,7 +2921,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Removes a tag from a resource.\n    </p>",
+                "smithy.api#documentation": "<p> Removes a tag from a resource. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "UntagResource",
@@ -1832,14 +2942,14 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.invoicing#TagrisArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) to untag.\n    </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) to untag. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceTagKeys": {
                     "target": "com.amazonaws.invoicing#ResourceTagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Keys for the tags to be removed.\n    </p>",
+                        "smithy.api#documentation": "<p> Keys for the tags to be removed. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1919,27 +3029,27 @@
                 "InvoiceUnitArn": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>",
+                        "smithy.api#documentation": "<p>The ARN to identify an invoice unit. This information can't be modified or deleted. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.invoicing#DescriptionString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The assigned description for an invoice unit. This information can't be modified or deleted.\n    </p>"
+                        "smithy.api#documentation": "<p>The assigned description for an invoice unit. This information can't be modified or deleted. </p>"
                     }
                 },
                 "TaxInheritanceDisabled": {
                     "target": "com.amazonaws.invoicing#TaxInheritanceDisabledFlag",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>Whether the invoice unit based tax inheritance is/ should be enabled or disabled.\n    </p>"
+                        "smithy.api#documentation": "<p>Whether the invoice unit based tax inheritance is/ should be enabled or disabled. </p>"
                     }
                 },
                 "Rule": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitRule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>InvoiceUnitRule</code> object used to update invoice units.\n    </p>"
+                        "smithy.api#documentation": "<p>The <code>InvoiceUnitRule</code> object used to update invoice units. </p>"
                     }
                 }
             },
@@ -1953,7 +3063,7 @@
                 "InvoiceUnitArn": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>"
+                        "smithy.api#documentation": "<p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>"
                     }
                 }
             },
@@ -1970,19 +3080,19 @@
                 "resourceName": {
                     "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>You don't have sufficient access to perform this action.\n        </p>"
+                        "smithy.api#documentation": "<p>You don't have sufficient access to perform this action. </p>"
                     }
                 },
                 "reason": {
                     "target": "com.amazonaws.invoicing#ValidationExceptionReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>You don't have sufficient access to perform this action.\n        </p>"
+                        "smithy.api#documentation": "<p>You don't have sufficient access to perform this action. </p>"
                     }
                 },
                 "fieldList": {
                     "target": "com.amazonaws.invoicing#ValidationExceptionFieldList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The input fails to satisfy the constraints specified by an Amazon Web Services service.\n        </p>"
+                        "smithy.api#documentation": "<p> The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>"
                     }
                 }
             },
@@ -1991,7 +3101,7 @@
                     "code": "InvoicingValidation",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>\n    The input fails to satisfy the constraints specified by an Amazon Web Services service.\n</p>",
+                "smithy.api#documentation": "<p> The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2002,20 +3112,20 @@
                 "name": {
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The input fails to satisfy the constraints specified by an Amazon Web Services service.\n        </p>",
+                        "smithy.api#documentation": "<p> The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "message": {
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The input fails to satisfy the constraints specified by an Amazon Web Services service.\n        </p>",
+                        "smithy.api#documentation": "<p> The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The input fails to satisfy the constraints specified by an Amazon Web Services service.\n        </p>"
+                "smithy.api#documentation": "<p> The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>"
             }
         },
         "com.amazonaws.invoicing#ValidationExceptionFieldList": {
@@ -2110,6 +3220,15 @@
                     "traits": {
                         "smithy.api#enumValue": "other"
                     }
+                }
+            }
+        },
+        "com.amazonaws.invoicing#Year": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 2005,
+                    "max": 2050
                 }
             }
         }

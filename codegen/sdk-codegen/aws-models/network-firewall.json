@@ -2038,6 +2038,12 @@
                 },
                 "LoggingConfiguration": {
                     "target": "com.amazonaws.networkfirewall#LoggingConfiguration"
+                },
+                "EnableMonitoringDashboard": {
+                    "target": "com.amazonaws.networkfirewall#EnableMonitoringDashboard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean that reflects whether or not the firewall monitoring dashboard is enabled on a firewall.</p>\n         <p>\n         Returns <code>TRUE</code> when the firewall monitoring dashboard is enabled on the firewall. \n         Returns <code>FALSE</code> when the firewall monitoring dashboard is not enabled on the firewall.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -2578,6 +2584,9 @@
         },
         "com.amazonaws.networkfirewall#Domain": {
             "type": "string"
+        },
+        "com.amazonaws.networkfirewall#EnableMonitoringDashboard": {
+            "type": "boolean"
         },
         "com.amazonaws.networkfirewall#EnabledAnalysisType": {
             "type": "enum",
@@ -8593,6 +8602,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Defines how Network Firewall performs logging for a firewall. If you omit this setting,\n         Network Firewall disables logging for the firewall.</p>"
                     }
+                },
+                "EnableMonitoringDashboard": {
+                    "target": "com.amazonaws.networkfirewall#EnableMonitoringDashboard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean that lets you enable or disable the detailed firewall monitoring dashboard on the firewall. </p>\n         <p>The monitoring dashboard provides comprehensive visibility into your firewall's flow logs and alert logs. \n         After you enable detailed monitoring, you can access these dashboards directly from the <b>Monitoring</b> page of the Network Firewall console.</p>\n         <p>\n         Specify <code>TRUE</code> to enable the the detailed monitoring dashboard on the firewall. \n         Specify <code>FALSE</code> to disable the the detailed monitoring dashboard on the firewall. \n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -8616,6 +8631,12 @@
                 },
                 "LoggingConfiguration": {
                     "target": "com.amazonaws.networkfirewall#LoggingConfiguration"
+                },
+                "EnableMonitoringDashboard": {
+                    "target": "com.amazonaws.networkfirewall#EnableMonitoringDashboard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean that reflects whether or not the firewall monitoring dashboard is enabled on a firewall.</p>\n         <p>\n         Returns <code>TRUE</code> when the firewall monitoring dashboard is enabled on the firewall. \n         Returns <code>FALSE</code> when the firewall monitoring dashboard is not enabled on the firewall.\n      </p>"
+                    }
                 }
             },
             "traits": {
