@@ -115,6 +115,122 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsjson10Deserialize(t *te
 	}
 }
 
+func TestClient_GreetingWithErrors_ComplexError_awsAwsjson10Deserialize(t *testing.T) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectError   *types.ComplexError
+	}{
+		// Parses a complex error with no message member
+		"AwsJson10ComplexError": {
+			StatusCode: 400,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "__type": "aws.protocoltests.json10#ComplexError",
+			    "TopLevel": "Top level",
+			    "Nested": {
+			        "Foo": "bar"
+			    }
+			}`),
+			ExpectError: &types.ComplexError{
+				TopLevel: ptr.String("Top level"),
+				Nested: &types.ComplexNestedErrorData{
+					Foo: ptr.String("bar"),
+				},
+			},
+		},
+		// Parses a complex error with an empty body
+		"AwsJson10EmptyComplexError": {
+			StatusCode: 400,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "__type": "aws.protocoltests.json10#ComplexError"
+			}`),
+			ExpectError: &types.ComplexError{},
+		},
+	}
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
+					e.URL = serverURL
+					e.SigningRegion = "us-west-2"
+					return e, err
+				}),
+				Region: "us-west-2",
+			})
+			var params GreetingWithErrorsInput
+			result, err := client.GreetingWithErrors(context.Background(), &params)
+			if err == nil {
+				t.Fatalf("expect not nil err")
+			}
+			if result != nil {
+				t.Fatalf("expect nil result, got %v", result)
+			}
+			var opErr interface {
+				Service() string
+				Operation() string
+			}
+			if !errors.As(err, &opErr) {
+				t.Fatalf("expect *types.ComplexError operation error, got %T", err)
+			}
+			if e, a := ServiceID, opErr.Service(); e != a {
+				t.Errorf("expect %v operation service name, got %v", e, a)
+			}
+			if e, a := "GreetingWithErrors", opErr.Operation(); e != a {
+				t.Errorf("expect %v operation service name, got %v", e, a)
+			}
+			var actualErr *types.ComplexError
+			if !errors.As(err, &actualErr) {
+				t.Fatalf("expect *types.ComplexError result error, got %T", err)
+			}
+			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
+				t.Errorf("expect c.ExpectError value match:\n%v", err)
+			}
+		})
+	}
+}
+
 func TestClient_GreetingWithErrors_FooError_awsAwsjson10Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -306,122 +422,6 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson10Deserialize(t *testing.T
 			var actualErr *types.FooError
 			if !errors.As(err, &actualErr) {
 				t.Fatalf("expect *types.FooError result error, got %T", err)
-			}
-			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
-				t.Errorf("expect c.ExpectError value match:\n%v", err)
-			}
-		})
-	}
-}
-
-func TestClient_GreetingWithErrors_ComplexError_awsAwsjson10Deserialize(t *testing.T) {
-	cases := map[string]struct {
-		StatusCode    int
-		Header        http.Header
-		BodyMediaType string
-		Body          []byte
-		ExpectError   *types.ComplexError
-	}{
-		// Parses a complex error with no message member
-		"AwsJson10ComplexError": {
-			StatusCode: 400,
-			Header: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.0"},
-			},
-			BodyMediaType: "application/json",
-			Body: []byte(`{
-			    "__type": "aws.protocoltests.json10#ComplexError",
-			    "TopLevel": "Top level",
-			    "Nested": {
-			        "Foo": "bar"
-			    }
-			}`),
-			ExpectError: &types.ComplexError{
-				TopLevel: ptr.String("Top level"),
-				Nested: &types.ComplexNestedErrorData{
-					Foo: ptr.String("bar"),
-				},
-			},
-		},
-		// Parses a complex error with an empty body
-		"AwsJson10EmptyComplexError": {
-			StatusCode: 400,
-			Header: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.0"},
-			},
-			BodyMediaType: "application/json",
-			Body: []byte(`{
-			    "__type": "aws.protocoltests.json10#ComplexError"
-			}`),
-			ExpectError: &types.ComplexError{},
-		},
-	}
-	for name, c := range cases {
-		t.Run(name, func(t *testing.T) {
-			serverURL := "http://localhost:8888/"
-			client := New(Options{
-				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
-					headers := http.Header{}
-					for k, vs := range c.Header {
-						for _, v := range vs {
-							headers.Add(k, v)
-						}
-					}
-					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
-						headers.Set("Content-Type", c.BodyMediaType)
-					}
-					response := &http.Response{
-						StatusCode: c.StatusCode,
-						Header:     headers,
-						Request:    r,
-					}
-					if len(c.Body) != 0 {
-						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
-					} else {
-
-						response.Body = http.NoBody
-					}
-					return response, nil
-				}),
-				APIOptions: []func(*middleware.Stack) error{
-					func(s *middleware.Stack) error {
-						s.Finalize.Clear()
-						s.Initialize.Remove(`OperationInputValidation`)
-						return nil
-					},
-				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				Region: "us-west-2",
-			})
-			var params GreetingWithErrorsInput
-			result, err := client.GreetingWithErrors(context.Background(), &params)
-			if err == nil {
-				t.Fatalf("expect not nil err")
-			}
-			if result != nil {
-				t.Fatalf("expect nil result, got %v", result)
-			}
-			var opErr interface {
-				Service() string
-				Operation() string
-			}
-			if !errors.As(err, &opErr) {
-				t.Fatalf("expect *types.ComplexError operation error, got %T", err)
-			}
-			if e, a := ServiceID, opErr.Service(); e != a {
-				t.Errorf("expect %v operation service name, got %v", e, a)
-			}
-			if e, a := "GreetingWithErrors", opErr.Operation(); e != a {
-				t.Errorf("expect %v operation service name, got %v", e, a)
-			}
-			var actualErr *types.ComplexError
-			if !errors.As(err, &actualErr) {
-				t.Fatalf("expect *types.ComplexError result error, got %T", err)
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)

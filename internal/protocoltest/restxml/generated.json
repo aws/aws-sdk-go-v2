@@ -38,6 +38,8 @@
         "api_op_FractionalSeconds_test.go",
         "api_op_GreetingWithErrors.go",
         "api_op_GreetingWithErrors_test.go",
+        "api_op_HttpEmptyPrefixHeaders.go",
+        "api_op_HttpEmptyPrefixHeaders_test.go",
         "api_op_HttpEnumPayload.go",
         "api_op_HttpEnumPayload_test.go",
         "api_op_HttpPayloadTraits.go",

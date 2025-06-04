@@ -56,7 +56,7 @@ func TestClient_NestedXmlMapWithXmlName_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`    <NestedXmlMapWithXmlNameInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`    <NestedXmlMapWithXmlNameRequest>
 			        <nestedXmlMapWithXmlNameMap>
 			            <entry>
 			                <OuterKey>foo</OuterKey>
@@ -85,7 +85,7 @@ func TestClient_NestedXmlMapWithXmlName_awsRestxmlSerialize(t *testing.T) {
 			                </value>
 			            </entry>
 			        </nestedXmlMapWithXmlNameMap>
-			    </NestedXmlMapWithXmlNameInputOutput>
+			    </NestedXmlMapWithXmlNameRequest>
 			`))
 			},
 		},
@@ -169,7 +169,7 @@ func TestClient_NestedXmlMapWithXmlName_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`    <NestedXmlMapWithXmlNameInputOutput>
+			Body: []byte(`    <NestedXmlMapWithXmlNameResponse>
 			        <nestedXmlMapWithXmlNameMap>
 			            <entry>
 			                <OuterKey>foo</OuterKey>
@@ -198,7 +198,7 @@ func TestClient_NestedXmlMapWithXmlName_awsRestxmlDeserialize(t *testing.T) {
 			                </value>
 			            </entry>
 			        </nestedXmlMapWithXmlNameMap>
-			    </NestedXmlMapWithXmlNameInputOutput>
+			    </NestedXmlMapWithXmlNameResponse>
 			`),
 			ExpectResult: &NestedXmlMapWithXmlNameOutput{
 				NestedXmlMapWithXmlNameMap: map[string]map[string]string{

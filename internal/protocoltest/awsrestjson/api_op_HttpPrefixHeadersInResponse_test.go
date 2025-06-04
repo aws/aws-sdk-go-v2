@@ -27,8 +27,8 @@ func TestClient_HttpPrefixHeadersInResponse_awsRestjson1Deserialize(t *testing.T
 		"HttpPrefixHeadersResponse": {
 			StatusCode: 200,
 			Header: http.Header{
-				"Hello": []string{"Hello"},
-				"X-Foo": []string{"Foo"},
+				"hello": []string{"Hello"},
+				"x-foo": []string{"Foo"},
 			},
 			ExpectResult: &HttpPrefixHeadersInResponseOutput{
 				PrefixHeaders: map[string]string{

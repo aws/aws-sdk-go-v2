@@ -39,7 +39,7 @@ func TestClient_OperationWithRequiredMembersWithDefaults_awsAwsjson10Deserialize
 				RequiredBoolean:   ptr.Bool(true),
 				RequiredList:      []string{},
 				RequiredTimestamp: ptr.Time(smithytime.ParseEpochSeconds(1)),
-				RequiredBlob:      []byte("{}"),
+				RequiredBlob:      []byte("blob"),
 				RequiredByte:      ptr.Int8(1),
 				RequiredShort:     ptr.Int16(1),
 				RequiredInteger:   ptr.Int32(10),

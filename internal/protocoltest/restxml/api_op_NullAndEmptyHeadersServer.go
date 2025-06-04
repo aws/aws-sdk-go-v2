@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Null and empty headers are not sent over the wire.
+// Null headers are not sent over the wire, empty headers are serialized to ""
 func (c *Client) NullAndEmptyHeadersServer(ctx context.Context, params *NullAndEmptyHeadersServerInput, optFns ...func(*Options)) (*NullAndEmptyHeadersServerOutput, error) {
 	if params == nil {
 		params = &NullAndEmptyHeadersServerInput{}
