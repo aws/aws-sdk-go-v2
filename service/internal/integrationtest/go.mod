@@ -75,7 +75,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.33.19
 	github.com/aws/aws-sdk-go-v2/service/support v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.31.0
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.25.3
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/waf v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.57.0

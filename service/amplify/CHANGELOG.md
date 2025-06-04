@@ -1,3 +1,7 @@
+# v1.33.1 (2025-06-04)
+
+* **Documentation**: Update documentation for cacheConfig in CreateApp API
+
 # v1.33.0 (2025-05-29)
 
 * **Feature**: Add support for customizable build instance sizes. CreateApp and UpdateApp operations now accept a new JobConfig parameter composed of BuildComputeType.

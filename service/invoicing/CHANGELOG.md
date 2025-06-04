@@ -1,3 +1,7 @@
+# v1.2.0 (2025-06-04)
+
+* **Feature**: Added new Invoicing ListInvoiceSummaries API Operation
+
 # v1.1.2 (2025-04-03)
 
 * No change notes available for this release.

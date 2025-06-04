@@ -1,8 +1,0 @@
-{
-    "id": "32ff05ae-7228-4786-8205-c547a7559993",
-    "type": "feature",
-    "description": "Added new Invoicing ListInvoiceSummaries API Operation",
-    "modules": [
-        "service/invoicing"
-    ]
-}

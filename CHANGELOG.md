@@ -1,3 +1,26 @@
+# Release (2025-06-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.33.1](service/amplify/CHANGELOG.md#v1331-2025-06-04)
+  * **Documentation**: Update documentation for cacheConfig in CreateApp API
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.0.0](service/evs/CHANGELOG.md#v100-2025-06-04)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Elastic VMware Service (Amazon EVS) allows you to run VMware Cloud Foundation (VCF) directly within your Amazon VPC including simplified self-managed migration experience with guided workflow in AWS console or via AWS CLI, get full access to their VCF deployment and VCF license portability.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.2.0](service/invoicing/CHANGELOG.md#v120-2025-06-04)
+  * **Feature**: Added new Invoicing ListInvoiceSummaries API Operation
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.40.0](service/mediaconnect/CHANGELOG.md#v1400-2025-06-04)
+  * **Feature**: This release updates the DescribeFlow API to show peer IP addresses. You can now identify the peer IP addresses of devices connected to your sources and outputs. This helps you to verify and troubleshoot your flow's active connections.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.74.0](service/mediaconvert/CHANGELOG.md#v1740-2025-06-04)
+  * **Feature**: This release includes support for embedding and signing C2PA content credentials in MP4 outputs.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.49.0](service/networkfirewall/CHANGELOG.md#v1490-2025-06-04)
+  * **Feature**: You can now monitor flow and alert log metrics from the Network Firewall console.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.195.0](service/sagemaker/CHANGELOG.md#v11950-2025-06-04)
+  * **Feature**: Added support for p6-b200 instance type in SageMaker Training Jobs and Training Plans.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.46.0](service/transcribe/CHANGELOG.md#v1460-2025-06-04)
+  * **Feature**: AWS Healthscribe now supports new templates for the clinical note summary: BIRP, SIRP, DAP, BEHAVIORAL_SOAP, and PHYSICAL_SOAP
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.26.0](service/transcribestreaming/CHANGELOG.md#v1260-2025-06-04)
+  * **Feature**: AWS Healthscribe now supports new templates for the clinical note summary: BIRP, SIRP, DAP, BEHAVIORAL_SOAP, and PHYSICAL_SOAP
+
 # Release (2025-06-03)
 
 ## Module Highlights

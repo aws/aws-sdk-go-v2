@@ -1,3 +1,7 @@
+# v1.49.0 (2025-06-04)
+
+* **Feature**: You can now monitor flow and alert log metrics from the Network Firewall console.
+
 # v1.48.0 (2025-05-28)
 
 * **Feature**: You can now use VPC endpoint associations to create multiple firewall endpoints for a single firewall.

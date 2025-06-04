@@ -1,8 +1,0 @@
-{
-    "id": "8f53cf81-2f62-408a-92ee-d72c7b84c0c6",
-    "type": "feature",
-    "description": "AWS Healthscribe now supports new templates for the clinical note summary: BIRP, SIRP, DAP, BEHAVIORAL_SOAP, and PHYSICAL_SOAP",
-    "modules": [
-        "service/transcribestreaming"
-    ]
-}

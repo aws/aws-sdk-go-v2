@@ -1,3 +1,7 @@
+# v1.46.0 (2025-06-04)
+
+* **Feature**: AWS Healthscribe now supports new templates for the clinical note summary: BIRP, SIRP, DAP, BEHAVIORAL_SOAP, and PHYSICAL_SOAP
+
 # v1.45.0 (2025-04-03)
 
 * **Feature**: This Feature Adds Support for the "zh-HK" Locale for Batch Operations

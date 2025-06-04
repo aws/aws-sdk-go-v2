@@ -1,3 +1,7 @@
+# v1.195.0 (2025-06-04)
+
+* **Feature**: Added support for p6-b200 instance type in SageMaker Training Jobs and Training Plans.
+
 # v1.194.0 (2025-05-30)
 
 * **Feature**: Release new parameter CapacityReservationConfig in ProductionVariant
