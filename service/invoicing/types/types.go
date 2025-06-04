@@ -7,6 +7,139 @@ import (
 	"time"
 )
 
+// Details about how the total amount was calculated and categorized.
+type AmountBreakdown struct {
+
+	//  The discounted amount.
+	Discounts *DiscountsBreakdown
+
+	//  The fee amount.
+	Fees *FeesBreakdown
+
+	//  The total of a set of the breakdown.
+	SubTotalAmount *string
+
+	//  The tax amount.
+	Taxes *TaxesBreakdown
+
+	noSmithyDocumentSerde
+}
+
+// The billing period for which you want to retrieve invoice-related documents.
+type BillingPeriod struct {
+
+	//  The billing period month.
+	//
+	// This member is required.
+	Month *int32
+
+	//  The billing period year.
+	//
+	// This member is required.
+	Year *int32
+
+	noSmithyDocumentSerde
+}
+
+// The details of currency exchange.
+type CurrencyExchangeDetails struct {
+
+	// The currency exchange rate.
+	Rate *string
+
+	// The exchange source currency.
+	SourceCurrencyCode *string
+
+	// The exchange target currency.
+	TargetCurrencyCode *string
+
+	noSmithyDocumentSerde
+}
+
+// The time period that you want invoice-related documents for.
+type DateInterval struct {
+
+	//  The end of the time period that you want invoice-related documents for. The
+	// end date is exclusive. For example, if end is 2019-01-10 , Amazon Web Services
+	// retrieves invoice-related documents from the start date up to, but not
+	// including, 2018-01-10 .
+	//
+	// This member is required.
+	EndDate *time.Time
+
+	//  The beginning of the time period that you want invoice-related documents for.
+	// The start date is inclusive. For example, if start is 2019-01-01 , AWS retrieves
+	// invoices starting at 2019-01-01 up to the end date.
+	//
+	// This member is required.
+	StartDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The discounts details.
+type DiscountsBreakdown struct {
+
+	// The list of discounts information.
+	Breakdown []DiscountsBreakdownAmount
+
+	//  The discount's total amount.
+	TotalAmount *string
+
+	noSmithyDocumentSerde
+}
+
+// The discounted amount.
+type DiscountsBreakdownAmount struct {
+
+	// The discounted amount.
+	Amount *string
+
+	//  The list of discounts information.
+	Description *string
+
+	//  The details for the discount rate..
+	Rate *string
+
+	noSmithyDocumentSerde
+}
+
+// The organization name providing Amazon Web Services services.
+type Entity struct {
+
+	// The name of the entity that issues the Amazon Web Services invoice.
+	InvoicingEntity *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of fees.
+type FeesBreakdown struct {
+
+	// The list of fees information.
+	Breakdown []FeesBreakdownAmount
+
+	//  The total amount of fees.
+	TotalAmount *string
+
+	noSmithyDocumentSerde
+}
+
+// The fee amount.
+type FeesBreakdownAmount struct {
+
+	//  The fee amount.
+	Amount *string
+
+	//  The list of fees information.
+	Description *string
+
+	//  Details about the rate amount.
+	Rate *string
+
+	noSmithyDocumentSerde
+}
+
 // An optional input to the list API. If multiple filters are specified, the
 // returned list will be a configuration that match all of the provided filters.
 // Supported filter types are InvoiceReceivers , Names , and Accounts .
@@ -35,6 +168,27 @@ type Filters struct {
 	noSmithyDocumentSerde
 }
 
+// The amount charged after taxes, in the preferred currency.
+type InvoiceCurrencyAmount struct {
+
+	//  Details about the invoice currency amount.
+	AmountBreakdown *AmountBreakdown
+
+	// The currency dominion of the invoice document.
+	CurrencyCode *string
+
+	//  The details of currency exchange.
+	CurrencyExchangeDetails *CurrencyExchangeDetails
+
+	//  The invoice currency amount.
+	TotalAmount *string
+
+	//  Details about the invoice total amount before tax.
+	TotalAmountBeforeTax *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains high-level information about the invoice receiver.
 type InvoiceProfile struct {
 
@@ -55,6 +209,79 @@ type InvoiceProfile struct {
 
 	//  Your Tax Registration Number (TRN) information.
 	TaxRegistrationNumber *string
+
+	noSmithyDocumentSerde
+}
+
+// Filters for your invoice summaries.
+type InvoiceSummariesFilter struct {
+
+	// The billing period associated with the invoice documents.
+	BillingPeriod *BillingPeriod
+
+	// The name of the entity that issues the Amazon Web Services invoice.
+	InvoicingEntity *string
+
+	// The date range for invoice summary retrieval.
+	TimeInterval *DateInterval
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the invoice summary.
+type InvoiceSummariesSelector struct {
+
+	// The query identifier type ( INVOICE_ID or ACCOUNT_ID ).
+	//
+	// This member is required.
+	ResourceType ListInvoiceSummariesResourceType
+
+	// The value of the query identifier.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The invoice that the API retrieved.
+type InvoiceSummary struct {
+
+	//  The Amazon Web Services account ID.
+	AccountId *string
+
+	//  The summary with the product and service currency.
+	BaseCurrencyAmount *InvoiceCurrencyAmount
+
+	//  The billing period of the invoice-related document.
+	BillingPeriod *BillingPeriod
+
+	//  The invoice due date.
+	DueDate *time.Time
+
+	// The organization name providing Amazon Web Services services.
+	Entity *Entity
+
+	//  The invoice ID.
+	InvoiceId *string
+
+	//  The type of invoice.
+	InvoiceType InvoiceType
+
+	//  The issued date of the invoice.
+	IssuedDate *time.Time
+
+	// The initial or original invoice ID.
+	OriginalInvoiceId *string
+
+	//  The summary with the customer configured currency.
+	PaymentCurrencyAmount *InvoiceCurrencyAmount
+
+	//  The purchase order number associated to the invoice.
+	PurchaseOrderNumber *string
+
+	//  The summary with the tax currency.
+	TaxCurrencyAmount *InvoiceCurrencyAmount
 
 	noSmithyDocumentSerde
 }
@@ -149,6 +376,33 @@ type ResourceTag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the taxes.
+type TaxesBreakdown struct {
+
+	//  A list of tax information.
+	Breakdown []TaxesBreakdownAmount
+
+	//  The total amount for your taxes.
+	TotalAmount *string
+
+	noSmithyDocumentSerde
+}
+
+// The tax amount.
+type TaxesBreakdownAmount struct {
+
+	//  The tax amount.
+	Amount *string
+
+	//  The details of the taxes.
+	Description *string
+
+	//  The details of the tax rate.
+	Rate *string
 
 	noSmithyDocumentSerde
 }

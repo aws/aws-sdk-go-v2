@@ -6937,6 +6937,25 @@ func (Mp3RateControlMode) Values() []Mp3RateControlMode {
 	}
 }
 
+type Mp4C2paManifest string
+
+// Enum values for Mp4C2paManifest
+const (
+	Mp4C2paManifestInclude Mp4C2paManifest = "INCLUDE"
+	Mp4C2paManifestExclude Mp4C2paManifest = "EXCLUDE"
+)
+
+// Values returns all known values for Mp4C2paManifest. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Mp4C2paManifest) Values() []Mp4C2paManifest {
+	return []Mp4C2paManifest{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
 type Mp4CslgAtom string
 
 // Enum values for Mp4CslgAtom

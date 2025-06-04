@@ -1,0 +1,8 @@
+{
+    "id": "4ca3bd54-3fc0-4445-b1e0-5fde0e55a4f0",
+    "type": "feature",
+    "description": "You can now monitor flow and alert log metrics from the Network Firewall console.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

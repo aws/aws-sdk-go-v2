@@ -1,0 +1,8 @@
+{
+    "id": "bfe65909-5ae3-4fbb-aa6b-07274ab3b159",
+    "type": "documentation",
+    "description": "Update documentation for cacheConfig in CreateApp API",
+    "modules": [
+        "service/amplify"
+    ]
+}

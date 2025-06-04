@@ -19674,6 +19674,24 @@ func awsRestjson1_deserializeDocumentMp4Settings(v **types.Mp4Settings, value in
 				sv.AudioDuration = types.CmfcAudioDuration(jtv)
 			}
 
+		case "c2paManifest":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Mp4C2paManifest to be of type string, got %T instead", value)
+				}
+				sv.C2paManifest = types.Mp4C2paManifest(jtv)
+			}
+
+		case "certificateSecret":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09 to be of type string, got %T instead", value)
+				}
+				sv.CertificateSecret = ptr.String(jtv)
+			}
+
 		case "cslgAtom":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19721,6 +19739,15 @@ func awsRestjson1_deserializeDocumentMp4Settings(v **types.Mp4Settings, value in
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Mp4MajorBrand = ptr.String(jtv)
+			}
+
+		case "signingKmsKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 to be of type string, got %T instead", value)
+				}
+				sv.SigningKmsKey = ptr.String(jtv)
 			}
 
 		default:

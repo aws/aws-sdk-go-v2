@@ -90,6 +90,26 @@ func (m *validateOpGetInvoiceUnit) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListInvoiceSummaries struct {
+}
+
+func (*validateOpListInvoiceSummaries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInvoiceSummaries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInvoiceSummariesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInvoiceSummariesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -186,6 +206,10 @@ func addOpGetInvoiceUnitValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInvoiceUnit{}, middleware.After)
 }
 
+func addOpListInvoiceSummariesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInvoiceSummaries{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -200,6 +224,82 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateInvoiceUnitValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInvoiceUnit{}, middleware.After)
+}
+
+func validateBillingPeriod(v *types.BillingPeriod) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BillingPeriod"}
+	if v.Month == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Month"))
+	}
+	if v.Year == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Year"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDateInterval(v *types.DateInterval) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DateInterval"}
+	if v.StartDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDate"))
+	}
+	if v.EndDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInvoiceSummariesFilter(v *types.InvoiceSummariesFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvoiceSummariesFilter"}
+	if v.TimeInterval != nil {
+		if err := validateDateInterval(v.TimeInterval); err != nil {
+			invalidParams.AddNested("TimeInterval", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BillingPeriod != nil {
+		if err := validateBillingPeriod(v.BillingPeriod); err != nil {
+			invalidParams.AddNested("BillingPeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInvoiceSummariesSelector(v *types.InvoiceSummariesSelector) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvoiceSummariesSelector"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateResourceTag(v *types.ResourceTag) error {
@@ -300,6 +400,30 @@ func validateOpGetInvoiceUnitInput(v *GetInvoiceUnitInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetInvoiceUnitInput"}
 	if v.InvoiceUnitArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InvoiceUnitArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInvoiceSummariesInput(v *ListInvoiceSummariesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInvoiceSummariesInput"}
+	if v.Selector == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Selector"))
+	} else if v.Selector != nil {
+		if err := validateInvoiceSummariesSelector(v.Selector); err != nil {
+			invalidParams.AddNested("Selector", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filter != nil {
+		if err := validateInvoiceSummariesFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

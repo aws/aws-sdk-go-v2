@@ -49,6 +49,18 @@ func (c *Client) UpdateLoggingConfiguration(ctx context.Context, params *UpdateL
 
 type UpdateLoggingConfigurationInput struct {
 
+	// A boolean that lets you enable or disable the detailed firewall monitoring
+	// dashboard on the firewall.
+	//
+	// The monitoring dashboard provides comprehensive visibility into your firewall's
+	// flow logs and alert logs. After you enable detailed monitoring, you can access
+	// these dashboards directly from the Monitoring page of the Network Firewall
+	// console.
+	//
+	// Specify TRUE to enable the the detailed monitoring dashboard on the firewall.
+	// Specify FALSE to disable the the detailed monitoring dashboard on the firewall.
+	EnableMonitoringDashboard *bool
+
 	// The Amazon Resource Name (ARN) of the firewall.
 	//
 	// You must specify the ARN or the name, and you can specify both.
@@ -68,6 +80,14 @@ type UpdateLoggingConfigurationInput struct {
 }
 
 type UpdateLoggingConfigurationOutput struct {
+
+	// A boolean that reflects whether or not the firewall monitoring dashboard is
+	// enabled on a firewall.
+	//
+	// Returns TRUE when the firewall monitoring dashboard is enabled on the firewall.
+	// Returns FALSE when the firewall monitoring dashboard is not enabled on the
+	// firewall.
+	EnableMonitoringDashboard *bool
 
 	// The Amazon Resource Name (ARN) of the firewall.
 	FirewallArn *string

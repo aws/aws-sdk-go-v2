@@ -2,6 +2,45 @@
 
 package types
 
+type InvoiceType string
+
+// Enum values for InvoiceType
+const (
+	InvoiceTypeInvoice    InvoiceType = "INVOICE"
+	InvoiceTypeCreditMemo InvoiceType = "CREDIT_MEMO"
+)
+
+// Values returns all known values for InvoiceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvoiceType) Values() []InvoiceType {
+	return []InvoiceType{
+		"INVOICE",
+		"CREDIT_MEMO",
+	}
+}
+
+type ListInvoiceSummariesResourceType string
+
+// Enum values for ListInvoiceSummariesResourceType
+const (
+	ListInvoiceSummariesResourceTypeAccountId ListInvoiceSummariesResourceType = "ACCOUNT_ID"
+	ListInvoiceSummariesResourceTypeInvoiceId ListInvoiceSummariesResourceType = "INVOICE_ID"
+)
+
+// Values returns all known values for ListInvoiceSummariesResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListInvoiceSummariesResourceType) Values() []ListInvoiceSummariesResourceType {
+	return []ListInvoiceSummariesResourceType{
+		"ACCOUNT_ID",
+		"INVOICE_ID",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

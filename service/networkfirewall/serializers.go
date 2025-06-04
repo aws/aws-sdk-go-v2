@@ -5642,6 +5642,11 @@ func awsAwsjson10_serializeOpDocumentUpdateLoggingConfigurationInput(v *UpdateLo
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnableMonitoringDashboard != nil {
+		ok := object.Key("EnableMonitoringDashboard")
+		ok.Boolean(*v.EnableMonitoringDashboard)
+	}
+
 	if v.FirewallArn != nil {
 		ok := object.Key("FirewallArn")
 		ok.String(*v.FirewallArn)

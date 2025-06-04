@@ -1,0 +1,8 @@
+{
+    "id": "044e2c03-d706-4288-9627-c1eb347916df",
+    "type": "feature",
+    "description": "Added support for p6-b200 instance type in SageMaker Training Jobs and Training Plans.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

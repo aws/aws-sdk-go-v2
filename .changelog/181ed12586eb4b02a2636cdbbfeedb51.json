@@ -1,0 +1,8 @@
+{
+    "id": "181ed125-86eb-4b02-a263-6cdbbfeedb51",
+    "type": "feature",
+    "description": "This release includes support for embedding and signing C2PA content credentials in MP4 outputs.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

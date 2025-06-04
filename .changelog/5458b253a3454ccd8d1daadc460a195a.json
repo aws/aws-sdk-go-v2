@@ -1,0 +1,8 @@
+{
+    "id": "5458b253-a345-4ccd-8d1d-aadc460a195a",
+    "type": "feature",
+    "description": "Amazon Elastic VMware Service (Amazon EVS) allows you to run VMware Cloud Foundation (VCF) directly within your Amazon VPC including simplified self-managed migration experience with guided workflow in AWS console or via AWS CLI, get full access to their VCF deployment and VCF license portability.",
+    "modules": [
+        "service/evs"
+    ]
+}

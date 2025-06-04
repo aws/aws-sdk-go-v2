@@ -518,6 +518,129 @@ func awsAwsjson10_deserializeOpErrorGetInvoiceUnit(response *smithyhttp.Response
 	}
 }
 
+type awsAwsjson10_deserializeOpListInvoiceSummaries struct {
+}
+
+func (*awsAwsjson10_deserializeOpListInvoiceSummaries) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpListInvoiceSummaries) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorListInvoiceSummaries(response, &metadata)
+	}
+	output := &ListInvoiceSummariesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentListInvoiceSummariesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorListInvoiceSummaries(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson10_deserializeOpListInvoiceUnits struct {
 }
 
@@ -1428,6 +1551,490 @@ func awsAwsjson10_deserializeDocumentAccountIdList(v *[]string, value interface{
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAmountBreakdown(v **types.AmountBreakdown, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AmountBreakdown
+	if *v == nil {
+		sv = &types.AmountBreakdown{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Discounts":
+			if err := awsAwsjson10_deserializeDocumentDiscountsBreakdown(&sv.Discounts, value); err != nil {
+				return err
+			}
+
+		case "Fees":
+			if err := awsAwsjson10_deserializeDocumentFeesBreakdown(&sv.Fees, value); err != nil {
+				return err
+			}
+
+		case "SubTotalAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.SubTotalAmount = ptr.String(jtv)
+			}
+
+		case "Taxes":
+			if err := awsAwsjson10_deserializeDocumentTaxesBreakdown(&sv.Taxes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentBillingPeriod(v **types.BillingPeriod, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BillingPeriod
+	if *v == nil {
+		sv = &types.BillingPeriod{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Month":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Month to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Month = ptr.Int32(int32(i64))
+			}
+
+		case "Year":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Year to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Year = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCurrencyExchangeDetails(v **types.CurrencyExchangeDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CurrencyExchangeDetails
+	if *v == nil {
+		sv = &types.CurrencyExchangeDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Rate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.Rate = ptr.String(jtv)
+			}
+
+		case "SourceCurrencyCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.SourceCurrencyCode = ptr.String(jtv)
+			}
+
+		case "TargetCurrencyCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.TargetCurrencyCode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentDiscountsBreakdown(v **types.DiscountsBreakdown, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DiscountsBreakdown
+	if *v == nil {
+		sv = &types.DiscountsBreakdown{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Breakdown":
+			if err := awsAwsjson10_deserializeDocumentDiscountsBreakdownAmountList(&sv.Breakdown, value); err != nil {
+				return err
+			}
+
+		case "TotalAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.TotalAmount = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentDiscountsBreakdownAmount(v **types.DiscountsBreakdownAmount, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DiscountsBreakdownAmount
+	if *v == nil {
+		sv = &types.DiscountsBreakdownAmount{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Amount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.Amount = ptr.String(jtv)
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "Rate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.Rate = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentDiscountsBreakdownAmountList(v *[]types.DiscountsBreakdownAmount, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DiscountsBreakdownAmount
+	if *v == nil {
+		cv = []types.DiscountsBreakdownAmount{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DiscountsBreakdownAmount
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentDiscountsBreakdownAmount(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentEntity(v **types.Entity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Entity
+	if *v == nil {
+		sv = &types.Entity{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InvoicingEntity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.InvoicingEntity = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentFeesBreakdown(v **types.FeesBreakdown, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FeesBreakdown
+	if *v == nil {
+		sv = &types.FeesBreakdown{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Breakdown":
+			if err := awsAwsjson10_deserializeDocumentFeesBreakdownAmountList(&sv.Breakdown, value); err != nil {
+				return err
+			}
+
+		case "TotalAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.TotalAmount = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentFeesBreakdownAmount(v **types.FeesBreakdownAmount, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FeesBreakdownAmount
+	if *v == nil {
+		sv = &types.FeesBreakdownAmount{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Amount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.Amount = ptr.String(jtv)
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "Rate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.Rate = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentFeesBreakdownAmountList(v *[]types.FeesBreakdownAmount, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FeesBreakdownAmount
+	if *v == nil {
+		cv = []types.FeesBreakdownAmount{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FeesBreakdownAmount
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentFeesBreakdownAmount(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1481,6 +2088,74 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentInvoiceCurrencyAmount(v **types.InvoiceCurrencyAmount, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvoiceCurrencyAmount
+	if *v == nil {
+		sv = &types.InvoiceCurrencyAmount{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AmountBreakdown":
+			if err := awsAwsjson10_deserializeDocumentAmountBreakdown(&sv.AmountBreakdown, value); err != nil {
+				return err
+			}
+
+		case "CurrencyCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CurrencyCode to be of type string, got %T instead", value)
+				}
+				sv.CurrencyCode = ptr.String(jtv)
+			}
+
+		case "CurrencyExchangeDetails":
+			if err := awsAwsjson10_deserializeDocumentCurrencyExchangeDetails(&sv.CurrencyExchangeDetails, value); err != nil {
+				return err
+			}
+
+		case "TotalAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.TotalAmount = ptr.String(jtv)
+			}
+
+		case "TotalAmountBeforeTax":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.TotalAmountBeforeTax = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentInvoiceProfile(v **types.InvoiceProfile, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1516,7 +2191,7 @@ func awsAwsjson10_deserializeDocumentInvoiceProfile(v **types.InvoiceProfile, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected BasicStringWithoutSpace to be of type string, got %T instead", value)
 				}
 				sv.Issuer = ptr.String(jtv)
 			}
@@ -1530,7 +2205,7 @@ func awsAwsjson10_deserializeDocumentInvoiceProfile(v **types.InvoiceProfile, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SensitiveBasicString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBasicStringWithoutSpace to be of type string, got %T instead", value)
 				}
 				sv.ReceiverEmail = ptr.String(jtv)
 			}
@@ -1539,7 +2214,7 @@ func awsAwsjson10_deserializeDocumentInvoiceProfile(v **types.InvoiceProfile, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected BasicStringWithoutSpace to be of type string, got %T instead", value)
 				}
 				sv.ReceiverName = ptr.String(jtv)
 			}
@@ -1548,9 +2223,176 @@ func awsAwsjson10_deserializeDocumentInvoiceProfile(v **types.InvoiceProfile, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SensitiveBasicString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBasicStringWithoutSpace to be of type string, got %T instead", value)
 				}
 				sv.TaxRegistrationNumber = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentInvoiceSummaries(v *[]types.InvoiceSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InvoiceSummary
+	if *v == nil {
+		cv = []types.InvoiceSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InvoiceSummary
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentInvoiceSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentInvoiceSummary(v **types.InvoiceSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvoiceSummary
+	if *v == nil {
+		sv = &types.InvoiceSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountIdString to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
+		case "BaseCurrencyAmount":
+			if err := awsAwsjson10_deserializeDocumentInvoiceCurrencyAmount(&sv.BaseCurrencyAmount, value); err != nil {
+				return err
+			}
+
+		case "BillingPeriod":
+			if err := awsAwsjson10_deserializeDocumentBillingPeriod(&sv.BillingPeriod, value); err != nil {
+				return err
+			}
+
+		case "DueDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DueDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Entity":
+			if err := awsAwsjson10_deserializeDocumentEntity(&sv.Entity, value); err != nil {
+				return err
+			}
+
+		case "InvoiceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.InvoiceId = ptr.String(jtv)
+			}
+
+		case "InvoiceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InvoiceType to be of type string, got %T instead", value)
+				}
+				sv.InvoiceType = types.InvoiceType(jtv)
+			}
+
+		case "IssuedDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.IssuedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "OriginalInvoiceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.OriginalInvoiceId = ptr.String(jtv)
+			}
+
+		case "PaymentCurrencyAmount":
+			if err := awsAwsjson10_deserializeDocumentInvoiceCurrencyAmount(&sv.PaymentCurrencyAmount, value); err != nil {
+				return err
+			}
+
+		case "PurchaseOrderNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.PurchaseOrderNumber = ptr.String(jtv)
+			}
+
+		case "TaxCurrencyAmount":
+			if err := awsAwsjson10_deserializeDocumentInvoiceCurrencyAmount(&sv.TaxCurrencyAmount, value); err != nil {
+				return err
 			}
 
 		default:
@@ -2047,6 +2889,143 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentTaxesBreakdown(v **types.TaxesBreakdown, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TaxesBreakdown
+	if *v == nil {
+		sv = &types.TaxesBreakdown{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Breakdown":
+			if err := awsAwsjson10_deserializeDocumentTaxesBreakdownAmountList(&sv.Breakdown, value); err != nil {
+				return err
+			}
+
+		case "TotalAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.TotalAmount = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentTaxesBreakdownAmount(v **types.TaxesBreakdownAmount, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TaxesBreakdownAmount
+	if *v == nil {
+		sv = &types.TaxesBreakdownAmount{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Amount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.Amount = ptr.String(jtv)
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "Rate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.Rate = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentTaxesBreakdownAmountList(v *[]types.TaxesBreakdownAmount, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TaxesBreakdownAmount
+	if *v == nil {
+		cv = []types.TaxesBreakdownAmount{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TaxesBreakdownAmount
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentTaxesBreakdownAmount(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2435,6 +3414,51 @@ func awsAwsjson10_deserializeOpDocumentGetInvoiceUnitOutput(v **GetInvoiceUnitOu
 					return fmt.Errorf("expected TaxInheritanceDisabledFlag to be of type *bool, got %T instead", value)
 				}
 				sv.TaxInheritanceDisabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentListInvoiceSummariesOutput(v **ListInvoiceSummariesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListInvoiceSummariesOutput
+	if *v == nil {
+		sv = &ListInvoiceSummariesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InvoiceSummaries":
+			if err := awsAwsjson10_deserializeDocumentInvoiceSummaries(&sv.InvoiceSummaries, value); err != nil {
+				return err
+			}
+
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextTokenString to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:

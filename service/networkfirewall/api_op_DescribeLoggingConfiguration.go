@@ -45,6 +45,14 @@ type DescribeLoggingConfigurationInput struct {
 
 type DescribeLoggingConfigurationOutput struct {
 
+	// A boolean that reflects whether or not the firewall monitoring dashboard is
+	// enabled on a firewall.
+	//
+	// Returns TRUE when the firewall monitoring dashboard is enabled on the firewall.
+	// Returns FALSE when the firewall monitoring dashboard is not enabled on the
+	// firewall.
+	EnableMonitoringDashboard *bool
+
 	// The Amazon Resource Name (ARN) of the firewall.
 	FirewallArn *string
 

@@ -311,11 +311,26 @@ type ClinicalNoteGenerationSettings struct {
 	// The default is HISTORY_AND_PHYSICAL .
 	//
 	//   - HISTORY_AND_PHYSICAL: Provides summaries for key sections of the clinical
-	//   documentation. Sections include Chief Complaint, History of Present Illness,
-	//   Review of Systems, Past Medical History, Assessment, and Plan.
+	//   documentation. Examples of sections include Chief Complaint, History of Present
+	//   Illness, Review of Systems, Past Medical History, Assessment, and Plan.
 	//
 	//   - GIRPP: Provides summaries based on the patients progress toward goals.
-	//   Sections include Goal, Intervention, Response, Progress, and Plan.
+	//   Examples of sections include Goal, Intervention, Response, Progress, and Plan.
+	//
+	//   - BIRP: Focuses on the patient's behavioral patterns and responses. Examples
+	//   of sections include Behavior, Intervention, Response, and Plan.
+	//
+	//   - SIRP: Emphasizes the situational context of therapy. Examples of sections
+	//   include Situation, Intervention, Response, and Plan.
+	//
+	//   - DAP: Provides a simplified format for clinical documentation. Examples of
+	//   sections include Data, Assessment, and Plan.
+	//
+	//   - BEHAVIORAL_SOAP: Behavioral health focused documentation format. Examples
+	//   of sections include Subjective, Objective, Assessment, and Plan.
+	//
+	//   - PHYSICAL_SOAP: Physical health focused documentation format. Examples of
+	//   sections include Subjective, Objective, Assessment, and Plan.
 	NoteTemplate MedicalScribeNoteTemplate
 
 	noSmithyDocumentSerde
@@ -359,10 +374,12 @@ type Entity struct {
 	// The word or words identified as PII.
 	Content *string
 
-	// The end time, in milliseconds, of the utterance that was identified as PII.
+	// The end time of the utterance that was identified as PII in seconds, with
+	// millisecond precision (e.g., 1.056)
 	EndTime float64
 
-	// The start time, in milliseconds, of the utterance that was identified as PII.
+	// The start time of the utterance that was identified as PII in seconds, with
+	// millisecond precision (e.g., 1.056)
 	StartTime float64
 
 	// The type of PII identified. For example, NAME or CREDIT_DEBIT_NUMBER .
@@ -396,7 +413,8 @@ type Item struct {
 	// The word or punctuation that was transcribed.
 	Content *string
 
-	// The end time, in milliseconds, of the transcribed item.
+	// The end time of the transcribed item in seconds, with millisecond precision
+	// (e.g., 1.056)
 	EndTime float64
 
 	// If speaker partitioning is enabled, Speaker labels the speaker of the specified
@@ -408,7 +426,8 @@ type Item struct {
 	// complete ( false ).
 	Stable *bool
 
-	// The start time, in milliseconds, of the transcribed item.
+	// The start time of the transcribed item in seconds, with millisecond precision
+	// (e.g., 1.056)
 	StartTime float64
 
 	// The type of item identified. Options are: PRONUNCIATION (spoken words) and
@@ -474,10 +493,10 @@ type MedicalEntity struct {
 	// The word or words identified as PHI.
 	Content *string
 
-	// The end time, in milliseconds, of the utterance that was identified as PHI.
+	// The end time, in seconds, of the utterance that was identified as PHI.
 	EndTime float64
 
-	// The start time, in milliseconds, of the utterance that was identified as PHI.
+	// The start time, in seconds, of the utterance that was identified as PHI.
 	StartTime float64
 
 	noSmithyDocumentSerde
@@ -498,14 +517,14 @@ type MedicalItem struct {
 	// The word or punctuation that was transcribed.
 	Content *string
 
-	// The end time, in milliseconds, of the transcribed item.
+	// The end time, in seconds, of the transcribed item.
 	EndTime float64
 
 	// If speaker partitioning is enabled, Speaker labels the speaker of the specified
 	// item.
 	Speaker *string
 
-	// The start time, in milliseconds, of the transcribed item.
+	// The start time, in seconds, of the transcribed item.
 	StartTime float64
 
 	// The type of item identified. Options are: PRONUNCIATION (spoken words) and
@@ -531,7 +550,7 @@ type MedicalResult struct {
 	// Indicates the channel identified for the Result .
 	ChannelId *string
 
-	// The end time, in milliseconds, of the Result .
+	// The end time, in seconds, of the Result .
 	EndTime float64
 
 	// Indicates if the segment is complete.
@@ -543,7 +562,7 @@ type MedicalResult struct {
 	// Provides a unique identifier for the Result .
 	ResultId *string
 
-	// The start time, in milliseconds, of the Result .
+	// The start time, in seconds, of the Result .
 	StartTime float64
 
 	noSmithyDocumentSerde
@@ -1148,7 +1167,7 @@ type Result struct {
 	// Indicates which audio channel is associated with the Result .
 	ChannelId *string
 
-	// The end time, in milliseconds, of the Result .
+	// The end time of the Result in seconds, with millisecond precision (e.g., 1.056).
 	EndTime float64
 
 	// Indicates if the segment is complete.
@@ -1169,7 +1188,8 @@ type Result struct {
 	// Provides a unique identifier for the Result .
 	ResultId *string
 
-	// The start time, in milliseconds, of the Result .
+	// The start time of the Result in seconds, with millisecond precision (e.g.,
+	// 1.056).
 	StartTime float64
 
 	noSmithyDocumentSerde

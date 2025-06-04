@@ -13822,6 +13822,15 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 				sv.OutputStatus = types.OutputStatus(jtv)
 			}
 
+		case "peerIpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PeerIpAddress = ptr.String(jtv)
+			}
+
 		case "port":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14245,6 +14254,15 @@ func awsRestjson1_deserializeDocumentSource(v **types.Source, value interface{})
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "peerIpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PeerIpAddress = ptr.String(jtv)
 			}
 
 		case "senderControlPort":

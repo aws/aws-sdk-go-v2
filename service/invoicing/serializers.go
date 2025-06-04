@@ -261,6 +261,67 @@ func (m *awsAwsjson10_serializeOpGetInvoiceUnit) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpListInvoiceSummaries struct {
+}
+
+func (*awsAwsjson10_serializeOpListInvoiceSummaries) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListInvoiceSummaries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListInvoiceSummariesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Invoicing.ListInvoiceSummaries")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListInvoiceSummariesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListInvoiceUnits struct {
 }
 
@@ -576,6 +637,40 @@ func awsAwsjson10_serializeDocumentAccountIdList(v []string, value smithyjson.Va
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentBillingPeriod(v *types.BillingPeriod, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Month != nil {
+		ok := object.Key("Month")
+		ok.Integer(*v.Month)
+	}
+
+	if v.Year != nil {
+		ok := object.Key("Year")
+		ok.Integer(*v.Year)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentDateInterval(v *types.DateInterval, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndDate != nil {
+		ok := object.Key("EndDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndDate))
+	}
+
+	if v.StartDate != nil {
+		ok := object.Key("StartDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartDate))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentFilters(v *types.Filters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -599,6 +694,49 @@ func awsAwsjson10_serializeDocumentFilters(v *types.Filters, value smithyjson.Va
 		if err := awsAwsjson10_serializeDocumentInvoiceUnitNames(v.Names, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentInvoiceSummariesFilter(v *types.InvoiceSummariesFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BillingPeriod != nil {
+		ok := object.Key("BillingPeriod")
+		if err := awsAwsjson10_serializeDocumentBillingPeriod(v.BillingPeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InvoicingEntity != nil {
+		ok := object.Key("InvoicingEntity")
+		ok.String(*v.InvoicingEntity)
+	}
+
+	if v.TimeInterval != nil {
+		ok := object.Key("TimeInterval")
+		if err := awsAwsjson10_serializeDocumentDateInterval(v.TimeInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentInvoiceSummariesSelector(v *types.InvoiceSummariesSelector, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ResourceType) > 0 {
+		ok := object.Key("ResourceType")
+		ok.String(string(v.ResourceType))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
 	}
 
 	return nil
@@ -749,6 +887,37 @@ func awsAwsjson10_serializeOpDocumentGetInvoiceUnitInput(v *GetInvoiceUnitInput,
 	if v.InvoiceUnitArn != nil {
 		ok := object.Key("InvoiceUnitArn")
 		ok.String(*v.InvoiceUnitArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentListInvoiceSummariesInput(v *ListInvoiceSummariesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		if err := awsAwsjson10_serializeDocumentInvoiceSummariesFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.Selector != nil {
+		ok := object.Key("Selector")
+		if err := awsAwsjson10_serializeDocumentInvoiceSummariesSelector(v.Selector, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

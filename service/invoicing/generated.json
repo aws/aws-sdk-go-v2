@@ -12,6 +12,7 @@
         "api_op_CreateInvoiceUnit.go",
         "api_op_DeleteInvoiceUnit.go",
         "api_op_GetInvoiceUnit.go",
+        "api_op_ListInvoiceSummaries.go",
         "api_op_ListInvoiceUnits.go",
         "api_op_ListTagsForResource.go",
         "api_op_TagResource.go",

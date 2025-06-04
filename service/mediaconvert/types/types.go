@@ -554,7 +554,19 @@ type AudioSelector struct {
 	// one after the other.
 	RemixSettings *RemixSettings
 
-	// Specifies the type of the audio selector.
+	// Specify how MediaConvert selects audio content within your input. The default
+	// is Track. PID: Select audio by specifying the Packet Identifier (PID) values for
+	// MPEG Transport Stream inputs. Use this when you know the exact PID values of
+	// your audio streams. Track: Default. Select audio by track number. This is the
+	// most common option and works with most input container formats. Language code:
+	// Select audio by language using ISO 639-2 or ISO 639-3 three-letter language
+	// codes. Use this when your source has embedded language metadata and you want to
+	// select tracks based on their language. HLS rendition group: Select audio from an
+	// HLS rendition group. Use this when your input is an HLS package with multiple
+	// audio renditions and you want to select specific rendition groups. All PCM:
+	// Select all uncompressed PCM audio tracks from your input automatically. This is
+	// useful when you want to include all PCM audio tracks without specifying
+	// individual track numbers.
 	SelectorType AudioSelectorType
 
 	// Identify a track from the input audio to include in this selector by entering
@@ -6496,6 +6508,20 @@ type Mp4Settings struct {
 	// between audio and video duration will depend on your output audio codec.
 	AudioDuration CmfcAudioDuration
 
+	// When enabled, a C2PA compliant manifest will be generated, signed and embeded
+	// in the output. For more information on C2PA, see
+	// https://c2pa.org/specifications/specifications/2.1/index.html
+	C2paManifest Mp4C2paManifest
+
+	// Specify the name or ARN of the AWS Secrets Manager secret that contains your
+	// C2PA public certificate chain in PEM format. Provide a valid secret name or ARN.
+	// Note that your MediaConvert service role must allow access to this secret. The
+	// public certificate chain is added to the COSE header (x5chain) for signature
+	// validation. Include the signer's certificate and all intermediate certificates.
+	// Do not include the root certificate. For details on COSE, see:
+	// https://opensource.contentauthenticity.org/docs/manifest/signing-manifests
+	CertificateSecret *string
+
 	// When enabled, file composition times will start at zero, composition times in
 	// the 'ctts' (composition time to sample) box for B-frames will be negative, and a
 	// 'cslg' (composition shift least greatest) box will be included per 14496-1
@@ -6521,6 +6547,11 @@ type Mp4Settings struct {
 	// Overrides the "Major Brand" field in the output file. Usually not necessary to
 	// specify.
 	Mp4MajorBrand *string
+
+	// Specify the ID or ARN of the AWS KMS key used to sign the C2PA manifest in your
+	// MP4 output. Provide a valid KMS key ARN. Note that your MediaConvert service
+	// role must allow access to this key.
+	SigningKmsKey *string
 
 	noSmithyDocumentSerde
 }

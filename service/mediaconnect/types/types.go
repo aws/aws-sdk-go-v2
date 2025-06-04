@@ -830,7 +830,7 @@ type Flow struct {
 // A set of parameters that define the media stream.
 type Fmtp struct {
 
-	// The format of the audio channel.
+	//  The format of the audio channel.
 	ChannelOrder *string
 
 	// The format used for the representation of color.
@@ -1686,6 +1686,23 @@ type Output struct {
 	//  An indication of whether the output is transmitting data or not.
 	OutputStatus OutputStatus
 
+	// The IP address of the device that is currently receiving content from this
+	// output.
+	//
+	//   - For outputs that use protocols where you specify the destination (such as
+	//   SRT Caller or Zixi Push), this value matches the configured destination address.
+	//
+	//   - For outputs that use listener protocols (such as SRT Listener), this value
+	//   shows the address of the connected receiver.
+	//
+	//   - Peer IP addresses aren't available for entitlements, managed MediaLive
+	//   outputs, NDI outputs, and CDI/ST2110 outputs.
+	//
+	//   - The peer IP address might not be visible for flows that haven't been
+	//   started yet, or flows that were started before May 2025. In these cases, restart
+	//   your flow to see the peer IP address.
+	PeerIpAddress *string
+
 	//  The port to use when content is distributed to this output.
 	Port *int32
 
@@ -1948,6 +1965,21 @@ type Source struct {
 	//  The media streams that are associated with the source, and the parameters for
 	// those associations.
 	MediaStreamSourceConfigurations []MediaStreamSourceConfiguration
+
+	// The IP address of the device that is currently sending content to this source.
+	//
+	//   - For sources that use protocols where you specify the origin (such as SRT
+	//   Caller), this value matches the configured origin address.
+	//
+	//   - For sources that use listener protocols (such as SRT Listener or RTP), this
+	//   value shows the address of the connected sender.
+	//
+	//   - Peer IP addresses aren't available for entitlements and CDI/ST2110 sources.
+	//
+	//   - The peer IP address might not be visible for flows that haven't been
+	//   started yet, or flows that were started before May 2025. In these cases, restart
+	//   your flow to see the peer IP address.
+	PeerIpAddress *string
 
 	//  The IP address that the flow communicates with to initiate connection with the
 	// sender.

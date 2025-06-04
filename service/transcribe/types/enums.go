@@ -447,6 +447,11 @@ type MedicalScribeNoteTemplate string
 const (
 	MedicalScribeNoteTemplateHistoryAndPhysical MedicalScribeNoteTemplate = "HISTORY_AND_PHYSICAL"
 	MedicalScribeNoteTemplateGirpp              MedicalScribeNoteTemplate = "GIRPP"
+	MedicalScribeNoteTemplateBirp               MedicalScribeNoteTemplate = "BIRP"
+	MedicalScribeNoteTemplateSirp               MedicalScribeNoteTemplate = "SIRP"
+	MedicalScribeNoteTemplateDap                MedicalScribeNoteTemplate = "DAP"
+	MedicalScribeNoteTemplateBehavioralSoap     MedicalScribeNoteTemplate = "BEHAVIORAL_SOAP"
+	MedicalScribeNoteTemplatePhysicalSoap       MedicalScribeNoteTemplate = "PHYSICAL_SOAP"
 )
 
 // Values returns all known values for MedicalScribeNoteTemplate. Note that this
@@ -457,6 +462,11 @@ func (MedicalScribeNoteTemplate) Values() []MedicalScribeNoteTemplate {
 	return []MedicalScribeNoteTemplate{
 		"HISTORY_AND_PHYSICAL",
 		"GIRPP",
+		"BIRP",
+		"SIRP",
+		"DAP",
+		"BEHAVIORAL_SOAP",
+		"PHYSICAL_SOAP",
 	}
 }
 

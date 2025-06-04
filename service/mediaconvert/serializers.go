@@ -8724,6 +8724,16 @@ func awsRestjson1_serializeDocumentMp4Settings(v *types.Mp4Settings, value smith
 		ok.String(string(v.AudioDuration))
 	}
 
+	if len(v.C2paManifest) > 0 {
+		ok := object.Key("c2paManifest")
+		ok.String(string(v.C2paManifest))
+	}
+
+	if v.CertificateSecret != nil {
+		ok := object.Key("certificateSecret")
+		ok.String(*v.CertificateSecret)
+	}
+
 	if len(v.CslgAtom) > 0 {
 		ok := object.Key("cslgAtom")
 		ok.String(string(v.CslgAtom))
@@ -8747,6 +8757,11 @@ func awsRestjson1_serializeDocumentMp4Settings(v *types.Mp4Settings, value smith
 	if v.Mp4MajorBrand != nil {
 		ok := object.Key("mp4MajorBrand")
 		ok.String(*v.Mp4MajorBrand)
+	}
+
+	if v.SigningKmsKey != nil {
+		ok := object.Key("signingKmsKey")
+		ok.String(*v.SigningKmsKey)
 	}
 
 	return nil

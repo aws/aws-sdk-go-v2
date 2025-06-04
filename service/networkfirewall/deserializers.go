@@ -13573,6 +13573,15 @@ func awsAwsjson10_deserializeOpDocumentDescribeLoggingConfigurationOutput(v **De
 
 	for key, value := range shape {
 		switch key {
+		case "EnableMonitoringDashboard":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableMonitoringDashboard to be of type *bool, got %T instead", value)
+				}
+				sv.EnableMonitoringDashboard = ptr.Bool(jtv)
+			}
+
 		case "FirewallArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15179,6 +15188,15 @@ func awsAwsjson10_deserializeOpDocumentUpdateLoggingConfigurationOutput(v **Upda
 
 	for key, value := range shape {
 		switch key {
+		case "EnableMonitoringDashboard":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableMonitoringDashboard to be of type *bool, got %T instead", value)
+				}
+				sv.EnableMonitoringDashboard = ptr.Bool(jtv)
+			}
+
 		case "FirewallArn":
 			if value != nil {
 				jtv, ok := value.(string)
