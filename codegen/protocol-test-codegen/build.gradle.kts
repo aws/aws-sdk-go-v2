@@ -60,3 +60,7 @@ tasks.create<Exec>("copyGoCodegen") {
     commandLine("$rootDir/copy_go_codegen.sh", "$rootDir/..", (tasks["buildSdk"] as SmithyBuild).outputDirectory.absolutePath)
 }
 tasks["buildSdk"].finalizedBy(tasks["copyGoCodegen"])
+
+java.sourceSets["main"].java {
+    srcDirs("models")
+}
