@@ -59,9 +59,9 @@ import (
 //
 // [Key states of KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
 // [Asymmetric KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-// [Offline verification with SM2 key pairs]: https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification
+// [Offline verification with SM2 key pairs]: https://docs.aws.amazon.com/kms/latest/developerguide/offline-operations.html#key-spec-sm-offline-verification
 // [kms:Verify]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-// [KMS eventual consistency]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+// [KMS eventual consistency]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
 func (c *Client) Verify(ctx context.Context, params *VerifyInput, optFns ...func(*Options)) (*VerifyOutput, error) {
 	if params == nil {
 		params = &VerifyInput{}
@@ -128,10 +128,10 @@ type VerifyInput struct {
 
 	// Checks if your request will succeed. DryRun is an optional parameter.
 	//
-	// To learn more about how to use this parameter, see [Testing your KMS API calls] in the Key Management
+	// To learn more about how to use this parameter, see [Testing your permissions] in the Key Management
 	// Service Developer Guide.
 	//
-	// [Testing your KMS API calls]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+	// [Testing your permissions]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
 	DryRun *bool
 
 	// A list of grant tokens.
@@ -141,7 +141,7 @@ type VerifyInput struct {
 	// and [Using a grant token]in the Key Management Service Developer Guide.
 	//
 	// [Grant token]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-	// [Using a grant token]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+	// [Using a grant token]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
 	GrantTokens []string
 
 	// Tells KMS whether the value of the Message parameter should be hashed as part
@@ -175,7 +175,7 @@ type VerifyInput struct {
 	//
 	//   - SM2DSA uses the SM3 hashing algorithm. For details, see [Offline verification with SM2 key pairs].
 	//
-	// [Offline verification with SM2 key pairs]: https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification
+	// [Offline verification with SM2 key pairs]: https://docs.aws.amazon.com/kms/latest/developerguide/offline-operations.html#key-spec-sm-offline-verification
 	MessageType types.MessageType
 
 	noSmithyDocumentSerde

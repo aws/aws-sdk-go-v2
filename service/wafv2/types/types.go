@@ -134,6 +134,31 @@ type APIKeySummary struct {
 	noSmithyDocumentSerde
 }
 
+// A rule statement that inspects web traffic based on the Autonomous System
+// Number (ASN) associated with the request's IP address.
+//
+// For additional details, see [ASN match rule statement] in the [WAF Developer Guide].
+//
+// [ASN match rule statement]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-asn-match.html
+// [WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+type AsnMatchStatement struct {
+
+	// Contains one or more Autonomous System Numbers (ASNs). ASNs are unique
+	// identifiers assigned to large internet networks managed by organizations such as
+	// internet service providers, enterprises, universities, or government agencies.
+	//
+	// This member is required.
+	AsnList []int64
+
+	// The configuration for inspecting IP addresses to match against an ASN in an
+	// HTTP header that you specify, instead of using the IP address that's reported by
+	// the web request origin. Commonly, this is the X-Forwarded-For (XFF) header, but
+	// you can specify any header name.
+	ForwardedIPConfig *ForwardedIPConfig
+
+	noSmithyDocumentSerde
+}
+
 // Specifies custom configurations for the associations between the web ACL and
 // protected resources.
 //
@@ -1303,7 +1328,7 @@ type FirewallManagerStatement struct {
 // If the specified header isn't present in the request, WAF doesn't apply the
 // rule to the web request at all.
 //
-// This configuration is used for GeoMatchStatement and RateBasedStatement. For IPSetReferenceStatement, use IPSetForwardedIPConfig instead.
+// This configuration is used for GeoMatchStatement, AsnMatchStatement, and RateBasedStatement. For IPSetReferenceStatement, use IPSetForwardedIPConfig instead.
 //
 // WAF only evaluates the first IP address found in the specified HTTP header.
 type ForwardedIPConfig struct {
@@ -1421,11 +1446,11 @@ type HeaderMatchPattern struct {
 // for example host:user-agent:accept:authorization:referer .
 type HeaderOrder struct {
 
-	// What WAF should do if the headers of the request are more numerous or larger
-	// than WAF can inspect. WAF does not support inspecting the entire contents of
-	// request headers when they exceed 8 KB (8192 bytes) or 200 total headers. The
-	// underlying host service forwards a maximum of 200 headers and at most 8 KB of
-	// header contents to WAF.
+	// What WAF should do if the headers determined by your match scope are more
+	// numerous or larger than WAF can inspect. WAF does not support inspecting the
+	// entire contents of request headers when they exceed 8 KB (8192 bytes) or 200
+	// total headers. The underlying host service forwards a maximum of 200 headers and
+	// at most 8 KB of header contents to WAF.
 	//
 	// The options for oversize handling are the following:
 	//
@@ -1481,11 +1506,11 @@ type Headers struct {
 	// This member is required.
 	MatchScope MapMatchScope
 
-	// What WAF should do if the headers of the request are more numerous or larger
-	// than WAF can inspect. WAF does not support inspecting the entire contents of
-	// request headers when they exceed 8 KB (8192 bytes) or 200 total headers. The
-	// underlying host service forwards a maximum of 200 headers and at most 8 KB of
-	// header contents to WAF.
+	// What WAF should do if the headers determined by your match scope are more
+	// numerous or larger than WAF can inspect. WAF does not support inspecting the
+	// entire contents of request headers when they exceed 8 KB (8192 bytes) or 200
+	// total headers. The underlying host service forwards a maximum of 200 headers and
+	// at most 8 KB of header contents to WAF.
 	//
 	// The options for oversize handling are the following:
 	//
@@ -2993,6 +3018,11 @@ type RateBasedStatement struct {
 // aggregation keys are omitted from the rate-based rule evaluation and handling.
 type RateBasedStatementCustomKey struct {
 
+	// Use an Autonomous System Number (ASN) derived from the request's originating or
+	// forwarded IP address as an aggregate key. Each distinct ASN contributes to the
+	// aggregation instance.
+	ASN *RateLimitAsn
+
 	// Use the value of a cookie in the request as an aggregate key. Each distinct
 	// value in the cookie contributes to the aggregation instance. If you use a single
 	// cookie as your custom key, then each value fully defines an aggregation
@@ -3095,6 +3125,14 @@ type RateBasedStatementManagedKeysIPSet struct {
 	// The version of the IP addresses, either IPV4 or IPV6 .
 	IPAddressVersion IPAddressVersion
 
+	noSmithyDocumentSerde
+}
+
+// Specifies an Autonomous System Number (ASN) derived from the request's
+// originating or forwarded IP address as an aggregate key for a rate-based rule.
+// Each distinct ASN contributes to the aggregation instance. If you use a single
+// ASN as your custom key, then each ASN fully defines an aggregation instance.
+type RateLimitAsn struct {
 	noSmithyDocumentSerde
 }
 
@@ -4430,6 +4468,15 @@ type Statement struct {
 	// A logical rule statement used to combine other rule statements with AND logic.
 	// You provide more than one Statementwithin the AndStatement .
 	AndStatement *AndStatement
+
+	// A rule statement that inspects web traffic based on the Autonomous System
+	// Number (ASN) associated with the request's IP address.
+	//
+	// For additional details, see [ASN match rule statement] in the [WAF Developer Guide].
+	//
+	// [ASN match rule statement]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-asn-match.html
+	// [WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+	AsnMatchStatement *AsnMatchStatement
 
 	// A rule statement that defines a string match search for WAF to apply to web
 	// requests. The byte match statement provides the bytes to search for, the

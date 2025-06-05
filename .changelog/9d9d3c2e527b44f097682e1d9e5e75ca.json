@@ -1,0 +1,8 @@
+{
+    "id": "9d9d3c2e-527b-44f0-9768-2e1d9e5e75ca",
+    "type": "feature",
+    "description": "Updating the minimum for List APIs to be 1 (instead of 0)",
+    "modules": [
+        "service/bcmpricingcalculator"
+    ]
+}

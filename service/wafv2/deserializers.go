@@ -7756,6 +7756,87 @@ func awsAwsjson11_deserializeDocumentAPIKeySummary(v **types.APIKeySummary, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAsnList(v *[]int64, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []int64
+	if *v == nil {
+		cv = []int64{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col int64
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected ASN to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			col = i64
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAsnMatchStatement(v **types.AsnMatchStatement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AsnMatchStatement
+	if *v == nil {
+		sv = &types.AsnMatchStatement{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AsnList":
+			if err := awsAwsjson11_deserializeDocumentAsnList(&sv.AsnList, value); err != nil {
+				return err
+			}
+
+		case "ForwardedIPConfig":
+			if err := awsAwsjson11_deserializeDocumentForwardedIPConfig(&sv.ForwardedIPConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAssociationConfig(v **types.AssociationConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12460,6 +12541,11 @@ func awsAwsjson11_deserializeDocumentRateBasedStatementCustomKey(v **types.RateB
 
 	for key, value := range shape {
 		switch key {
+		case "ASN":
+			if err := awsAwsjson11_deserializeDocumentRateLimitAsn(&sv.ASN, value); err != nil {
+				return err
+			}
+
 		case "Cookie":
 			if err := awsAwsjson11_deserializeDocumentRateLimitCookie(&sv.Cookie, value); err != nil {
 				return err
@@ -12594,6 +12680,37 @@ func awsAwsjson11_deserializeDocumentRateBasedStatementManagedKeysIPSet(v **type
 				sv.IPAddressVersion = types.IPAddressVersion(jtv)
 			}
 
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimitAsn(v **types.RateLimitAsn, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimitAsn
+	if *v == nil {
+		sv = &types.RateLimitAsn{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		default:
 			_, _ = key, value
 
@@ -15244,6 +15361,11 @@ func awsAwsjson11_deserializeDocumentStatement(v **types.Statement, value interf
 		switch key {
 		case "AndStatement":
 			if err := awsAwsjson11_deserializeDocumentAndStatement(&sv.AndStatement, value); err != nil {
+				return err
+			}
+
+		case "AsnMatchStatement":
+			if err := awsAwsjson11_deserializeDocumentAsnMatchStatement(&sv.AsnMatchStatement, value); err != nil {
 				return err
 			}
 

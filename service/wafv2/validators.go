@@ -1341,6 +1341,26 @@ func validateAndStatement(v *types.AndStatement) error {
 	}
 }
 
+func validateAsnMatchStatement(v *types.AsnMatchStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AsnMatchStatement"}
+	if v.AsnList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AsnList"))
+	}
+	if v.ForwardedIPConfig != nil {
+		if err := validateForwardedIPConfig(v.ForwardedIPConfig); err != nil {
+			invalidParams.AddNested("ForwardedIPConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssociationConfig(v *types.AssociationConfig) error {
 	if v == nil {
 		return nil
@@ -3325,6 +3345,11 @@ func validateStatement(v *types.Statement) error {
 	if v.RegexMatchStatement != nil {
 		if err := validateRegexMatchStatement(v.RegexMatchStatement); err != nil {
 			invalidParams.AddNested("RegexMatchStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AsnMatchStatement != nil {
+		if err := validateAsnMatchStatement(v.AsnMatchStatement); err != nil {
+			invalidParams.AddNested("AsnMatchStatement", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -1,0 +1,8 @@
+{
+    "id": "5df42d41-b363-417e-b0d7-e3adf68ed11e",
+    "type": "feature",
+    "description": "Add new warning type 'EXCLUDED_PROPERTIES'",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

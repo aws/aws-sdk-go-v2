@@ -1109,7 +1109,7 @@ type ScanFilter struct {
 	// User Guide.
 	//
 	// To scan all resource types within a service, you can use a wildcard,
-	// represented by an asterisk ( * ). You can place a asterisk at only the end of
+	// represented by an asterisk ( * ). You can place an asterisk at only the end of
 	// the string, for example, AWS::S3::* .
 	//
 	// [Resource type support]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html

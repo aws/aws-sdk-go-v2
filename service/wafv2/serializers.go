@@ -3400,6 +3400,38 @@ func awsAwsjson11_serializeDocumentAPIKeyTokenDomains(v []string, value smithyjs
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAsnList(v []int64, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Long(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAsnMatchStatement(v *types.AsnMatchStatement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AsnList != nil {
+		ok := object.Key("AsnList")
+		if err := awsAwsjson11_serializeDocumentAsnList(v.AsnList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ForwardedIPConfig != nil {
+		ok := object.Key("ForwardedIPConfig")
+		if err := awsAwsjson11_serializeDocumentForwardedIPConfig(v.ForwardedIPConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAssociationConfig(v *types.AssociationConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4781,6 +4813,13 @@ func awsAwsjson11_serializeDocumentRateBasedStatementCustomKey(v *types.RateBase
 	object := value.Object()
 	defer object.Close()
 
+	if v.ASN != nil {
+		ok := object.Key("ASN")
+		if err := awsAwsjson11_serializeDocumentRateLimitAsn(v.ASN, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Cookie != nil {
 		ok := object.Key("Cookie")
 		if err := awsAwsjson11_serializeDocumentRateLimitCookie(v.Cookie, ok); err != nil {
@@ -4871,6 +4910,13 @@ func awsAwsjson11_serializeDocumentRateBasedStatementCustomKeys(v []types.RateBa
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateLimitAsn(v *types.RateLimitAsn, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	return nil
 }
 
@@ -5689,6 +5735,13 @@ func awsAwsjson11_serializeDocumentStatement(v *types.Statement, value smithyjso
 	if v.AndStatement != nil {
 		ok := object.Key("AndStatement")
 		if err := awsAwsjson11_serializeDocumentAndStatement(v.AndStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AsnMatchStatement != nil {
+		ok := object.Key("AsnMatchStatement")
+		if err := awsAwsjson11_serializeDocumentAsnMatchStatement(v.AsnMatchStatement, ok); err != nil {
 			return err
 		}
 	}
