@@ -1,3 +1,7 @@
+# v1.61.0 (2025-06-05)
+
+* **Feature**: AWS WAF adds support for ASN-based traffic filtering and support for ASN-based rate limiting.
+
 # v1.60.1 (2025-04-03)
 
 * No change notes available for this release.

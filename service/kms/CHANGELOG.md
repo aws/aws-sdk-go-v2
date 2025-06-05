@@ -1,3 +1,7 @@
+# v1.39.0 (2025-06-05)
+
+* **Feature**: AWS KMS announces the support for on-demand rotation of symmetric-encryption KMS keys with imported key material (EXTERNAL origin).
+
 # v1.38.3 (2025-04-10)
 
 * No change notes available for this release.

@@ -1,8 +1,0 @@
-{
-    "id": "965c7cbb-b97e-4ed8-b098-c6ebf3ca4e5d",
-    "type": "feature",
-    "description": "AWS KMS announces the support for on-demand rotation of symmetric-encryption KMS keys with imported key material (EXTERNAL origin).",
-    "modules": [
-        "service/kms"
-    ]
-}

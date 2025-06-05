@@ -1,3 +1,13 @@
+# Release (2025-06-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.60.0](service/cloudformation/CHANGELOG.md#v1600-2025-06-05)
+  * **Feature**: Add new warning type 'EXCLUDED_PROPERTIES'
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.39.0](service/kms/CHANGELOG.md#v1390-2025-06-05)
+  * **Feature**: AWS KMS announces the support for on-demand rotation of symmetric-encryption KMS keys with imported key material (EXTERNAL origin).
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.61.0](service/wafv2/CHANGELOG.md#v1610-2025-06-05)
+  * **Feature**: AWS WAF adds support for ASN-based traffic filtering and support for ASN-based rate limiting.
+
 # Release (2025-06-04)
 
 ## Module Highlights

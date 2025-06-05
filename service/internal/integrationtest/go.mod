@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.45.3
 	github.com/aws/aws-sdk-go-v2/service/athena v1.51.0
 	github.com/aws/aws-sdk-go-v2/service/batch v1.52.3
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.59.2
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.60.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.46.1
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.49.0
@@ -48,7 +48,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iam v1.42.0
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.2
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.35.0
-	github.com/aws/aws-sdk-go-v2/service/kms v1.38.3
+	github.com/aws/aws-sdk-go-v2/service/kms v1.39.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.71.2
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.43.2
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.25.2
