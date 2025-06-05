@@ -11853,7 +11853,7 @@
                 "Types": {
                     "target": "com.amazonaws.cloudformation#ResourceTypeFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings where each string represents an Amazon Web Services resource type you want to scan.\n   Each string defines the resource type using the format\n    <code>AWS::ServiceName::ResourceType</code>, for example, <code>AWS::DynamoDB::Table</code>. For\n   the full list of supported resource types, see the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html\">Resource type\n    support</a> table in the <i>CloudFormation User Guide</i>.</p>\n         <p>To scan all resource types within a service, you can use a wildcard, represented by an\n   asterisk (<code>*</code>). You can place a asterisk at only the end of the string, for example,\n    <code>AWS::S3::*</code>.</p>"
+                        "smithy.api#documentation": "<p>An array of strings where each string represents an Amazon Web Services resource type you want to scan.\n   Each string defines the resource type using the format\n    <code>AWS::ServiceName::ResourceType</code>, for example, <code>AWS::DynamoDB::Table</code>. For\n   the full list of supported resource types, see the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html\">Resource type\n    support</a> table in the <i>CloudFormation User Guide</i>.</p>\n         <p>To scan all resource types within a service, you can use a wildcard, represented by an\n   asterisk (<code>*</code>). You can place an asterisk at only the end of the string, for example,\n    <code>AWS::S3::*</code>.</p>"
                     }
                 }
             },
@@ -16730,6 +16730,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MUTUALLY_EXCLUSIVE_TYPES"
+                    }
+                },
+                "EXCLUDED_PROPERTIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDED_PROPERTIES"
                     }
                 }
             }
