@@ -1,3 +1,7 @@
+# v1.28.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.28.0 (2025-05-16)
 
 * **Feature**: This release introduces CreateSupportCase operation to SDK.

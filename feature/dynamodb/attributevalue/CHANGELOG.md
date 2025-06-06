@@ -1,3 +1,7 @@
+# v1.19.1 (2025-06-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2025-04-30)
 
 * **Feature**: added support for json to/from types.AttributeValue for DynamoDB and DynamoDB Streams

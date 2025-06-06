@@ -1,8 +1,0 @@
-{
-    "id": "76ad2227-b146-49c6-9bb4-1801e03db30d",
-    "type": "feature",
-    "description": "Adds support for defining an ordered preference list of different Rekognition Face Liveness challenge types when calling CreateFaceLivenessSession.",
-    "modules": [
-        "service/rekognition"
-    ]
-}

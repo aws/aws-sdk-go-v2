@@ -1,3 +1,7 @@
+# v1.47.0 (2025-06-06)
+
+* **Feature**: Adds support for defining an ordered preference list of different Rekognition Face Liveness challenge types when calling CreateFaceLivenessSession.
+
 # v1.46.3 (2025-04-11)
 
 * No change notes available for this release.

@@ -1,8 +1,0 @@
-{
-    "id": "50f711ec-d89a-4903-b760-3e90c2113f2b",
-    "type": "feature",
-    "description": "Amazon Route 53 now supports the Asia Pacific (Taipei) Region (ap-east-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.",
-    "modules": [
-        "service/route53"
-    ]
-}

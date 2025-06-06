@@ -1,3 +1,7 @@
+# v1.30.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.30.0 (2025-05-05)
 
 * **Feature**: This release adds a new authorization policy to control the usage of custom AssetType when creating an Asset. Customer can now add new grant(s) of policyType USE_ASSET_TYPE for custom AssetTypes to apply authorization policy to projects members and domain unit owners.

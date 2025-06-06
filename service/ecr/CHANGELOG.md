@@ -1,3 +1,7 @@
+# v1.44.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.44.0 (2025-04-30)
 
 * **Feature**: Adds dualstack support for Amazon Elastic Container Registry (Amazon ECR).

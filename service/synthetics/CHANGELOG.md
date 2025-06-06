@@ -1,3 +1,7 @@
+# v1.35.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.35.0 (2025-05-28)
 
 * **Feature**: Add support to change ephemeral storage. Add a new field "TestResult" under CanaryRunStatus.

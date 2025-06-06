@@ -1,3 +1,7 @@
+# v1.40.0 (2025-06-06)
+
+* **Feature**: Remove unpopulated KeyMaterialId from Encrypt Response
+
 # v1.39.0 (2025-06-05)
 
 * **Feature**: AWS KMS announces the support for on-demand rotation of symmetric-encryption KMS keys with imported key material (EXTERNAL origin).

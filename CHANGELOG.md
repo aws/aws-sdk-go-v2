@@ -1,3 +1,22 @@
+# Release (2025-06-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.45.0](service/bedrockagentruntime/CHANGELOG.md#v1450-2025-06-06)
+  * **Feature**: This release introduces the `PromptCreationConfigurations` input parameter, which includes fields to control prompt population for `InvokeAgent` or `InvokeInlineAgent` requests.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.40.0](service/kms/CHANGELOG.md#v1400-2025-06-06)
+  * **Feature**: Remove unpopulated KeyMaterialId from Encrypt Response
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.97.0](service/rds/CHANGELOG.md#v1970-2025-06-06)
+  * **Feature**: Include Global Cluster Identifier in DBCluster if the DBCluster is a Global Cluster Member.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.47.0](service/rekognition/CHANGELOG.md#v1470-2025-06-06)
+  * **Feature**: Adds support for defining an ordered preference list of different Rekognition Face Liveness challenge types when calling CreateFaceLivenessSession.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.52.0](service/route53/CHANGELOG.md#v1520-2025-06-06)
+  * **Feature**: Amazon Route 53 now supports the Asia Pacific (Taipei) Region (ap-east-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.4.0](service/s3tables/CHANGELOG.md#v140-2025-06-06)
+  * **Feature**: S3 Tables now supports getting details about a table via its table ARN.
+
 # Release (2025-06-05)
 
 ## Module Highlights

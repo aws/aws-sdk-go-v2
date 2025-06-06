@@ -1,3 +1,7 @@
+# v1.32.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.32.0 (2025-04-28)
 
 * **Feature**: Add support for file-based HTTP domain control validation, available through Amazon CloudFront.

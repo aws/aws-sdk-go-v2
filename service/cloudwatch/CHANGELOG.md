@@ -1,3 +1,7 @@
+# v1.45.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.45.0 (2025-05-21)
 
 * **Feature**: Adds support for setting up Contributor Insight rules on logs transformed via Logs Transformation feature.

@@ -1,3 +1,7 @@
+# v1.97.0 (2025-06-06)
+
+* **Feature**: Include Global Cluster Identifier in DBCluster if the DBCluster is a Global Cluster Member.
+
 # v1.96.0 (2025-05-20)
 
 * **Feature**: This release introduces the new DescribeDBMajorEngineVersions API for describing the properties of specific major versions of database engines.

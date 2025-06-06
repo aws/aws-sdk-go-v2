@@ -1,3 +1,7 @@
+# v1.38.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.38.0 (2025-05-01)
 
 * **Feature**: Adding waiter support for deployments and environments; documentation updates

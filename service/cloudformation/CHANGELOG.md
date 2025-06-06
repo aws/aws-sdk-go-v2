@@ -1,3 +1,7 @@
+# v1.60.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.60.0 (2025-06-05)
 
 * **Feature**: Add new warning type 'EXCLUDED_PROPERTIES'

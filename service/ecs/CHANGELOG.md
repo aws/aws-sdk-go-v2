@@ -1,3 +1,7 @@
+# v1.57.3 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.57.2 (2025-06-02)
 
 * **Documentation**: Updates Amazon ECS documentation to include note for upcoming default log driver mode change.

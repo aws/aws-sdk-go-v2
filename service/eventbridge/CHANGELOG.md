@@ -1,3 +1,7 @@
+# v1.39.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.39.0 (2025-04-16)
 
 * **Feature**: Adding support for KmsKeyIdentifer in CreateConnection, UpdateConnection and DescribeConnection APIs

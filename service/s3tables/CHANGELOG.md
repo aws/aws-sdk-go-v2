@@ -1,3 +1,7 @@
+# v1.4.0 (2025-06-06)
+
+* **Feature**: S3 Tables now supports getting details about a table via its table ARN.
+
 # v1.3.0 (2025-04-16)
 
 * **Feature**: S3 Tables now supports setting encryption configurations on table buckets and tables. Encryption configurations can use server side encryption using AES256 or KMS customer-managed keys.

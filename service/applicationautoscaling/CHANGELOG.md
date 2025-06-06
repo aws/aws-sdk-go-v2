@@ -1,3 +1,7 @@
+# v1.36.2 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.36.1 (2025-05-21)
 
 * **Documentation**: Doc only update that addresses a customer reported issue.

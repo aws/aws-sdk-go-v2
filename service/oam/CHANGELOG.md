@@ -1,3 +1,7 @@
+# v1.18.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.18.0 (2025-05-20)
 
 * **Feature**: Add IncludeTags field to GetLink, GetSink and UpdateLink API

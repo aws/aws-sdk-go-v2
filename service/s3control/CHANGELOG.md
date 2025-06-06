@@ -1,3 +1,7 @@
+# v1.58.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.58.0 (2025-05-12)
 
 * **Feature**: Updates to support S3 Express zonal endpoints for directory buckets in AWS CLI

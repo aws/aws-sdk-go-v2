@@ -1,8 +1,0 @@
-{
-    "id": "77b66dc0-e724-48fa-848a-dc86a8c9c674",
-    "type": "feature",
-    "description": "Remove unpopulated KeyMaterialId from Encrypt Response",
-    "modules": [
-        "service/kms"
-    ]
-}

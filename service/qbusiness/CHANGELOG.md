@@ -1,3 +1,7 @@
+# v1.26.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.26.0 (2025-04-29)
 
 * **Feature**: Add support for anonymous user access for Q Business applications

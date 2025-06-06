@@ -1,3 +1,7 @@
+# v1.31.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.31.0 (2025-06-03)
 
 * **Feature**: Adds support to set the routing mode for a custom domain name.

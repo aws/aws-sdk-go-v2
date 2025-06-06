@@ -1,3 +1,7 @@
+# v1.52.0 (2025-06-06)
+
+* **Feature**: Amazon Route 53 now supports the Asia Pacific (Taipei) Region (ap-east-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 # v1.51.1 (2025-04-10)
 
 * No change notes available for this release.

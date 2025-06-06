@@ -1,3 +1,7 @@
+# v1.50.1 (2025-06-06)
+
+* No change notes available for this release.
+
 # v1.50.0 (2025-05-14)
 
 * **Feature**: This release adds a new API "ListLogGroups" and an improvement in API "DescribeLogGroups"
