@@ -1714,6 +1714,38 @@ func addOpUpdateStreamProcessorValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpUpdateStreamProcessor{}, middleware.After)
 }
 
+func validateChallengePreference(v *types.ChallengePreference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChallengePreference"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChallengePreferences(v []types.ChallengePreference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChallengePreferences"}
+	for i := range v {
+		if err := validateChallengePreference(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConnectedHomeSettings(v *types.ConnectedHomeSettings) error {
 	if v == nil {
 		return nil
@@ -1737,6 +1769,11 @@ func validateCreateFaceLivenessSessionRequestSettings(v *types.CreateFaceLivenes
 	if v.OutputConfig != nil {
 		if err := validateLivenessOutputConfig(v.OutputConfig); err != nil {
 			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ChallengePreferences != nil {
+		if err := validateChallengePreferences(v.ChallengePreferences); err != nil {
+			invalidParams.AddNested("ChallengePreferences", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

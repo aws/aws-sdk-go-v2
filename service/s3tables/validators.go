@@ -310,26 +310,6 @@ func (m *validateOpGetTableEncryption) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpGetTable struct {
-}
-
-func (*validateOpGetTable) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetTableInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetTableInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpGetTableMaintenanceConfiguration struct {
 }
 
@@ -648,10 +628,6 @@ func addOpGetTableBucketPolicyValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpGetTableEncryptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTableEncryption{}, middleware.After)
-}
-
-func addOpGetTableValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetTable{}, middleware.After)
 }
 
 func addOpGetTableMaintenanceConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1073,27 +1049,6 @@ func validateOpGetTableEncryptionInput(v *GetTableEncryptionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTableEncryptionInput"}
-	if v.TableBucketARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
-	}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpGetTableInput(v *GetTableInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetTableInput"}
 	if v.TableBucketARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
 	}

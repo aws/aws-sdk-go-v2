@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all asynchronous executions for a flow. Results can be paginated and
-// include summary information about each execution, such as status, start and end
-// times, and the execution's Amazon Resource Name (ARN).
+// Lists all executions of a flow. Results can be paginated and include summary
+// information about each execution, such as status, start and end times, and the
+// execution's Amazon Resource Name (ARN).
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 func (c *Client) ListFlowExecutions(ctx context.Context, params *ListFlowExecutionsInput, optFns ...func(*Options)) (*ListFlowExecutionsOutput, error) {
 	if params == nil {
@@ -42,9 +42,9 @@ type ListFlowExecutionsInput struct {
 	// The unique identifier of the flow alias to list executions for.
 	FlowAliasIdentifier *string
 
-	// The maximum number of async executions to return in a single response. If more
-	// executions exist than the specified maxResults value, a token is included in the
-	// response so that the remaining results can be retrieved.
+	// The maximum number of flow executions to return in a single response. If more
+	// executions exist than the specified maxResults value, a token is included in
+	// the response so that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// A token to retrieve the next set of results. This value is returned in the
@@ -56,7 +56,7 @@ type ListFlowExecutionsInput struct {
 
 type ListFlowExecutionsOutput struct {
 
-	// A list of async execution summaries. Each summary includes the execution ARN,
+	// A list of flow execution summaries. Each summary includes the execution ARN,
 	// flow identifier, flow alias identifier, flow version, status, and timestamps.
 	//
 	// This member is required.
@@ -178,9 +178,9 @@ func (c *Client) addOperationListFlowExecutionsMiddlewares(stack *middleware.Sta
 // ListFlowExecutionsPaginatorOptions is the paginator options for
 // ListFlowExecutions
 type ListFlowExecutionsPaginatorOptions struct {
-	// The maximum number of async executions to return in a single response. If more
-	// executions exist than the specified maxResults value, a token is included in the
-	// response so that the remaining results can be retrieved.
+	// The maximum number of flow executions to return in a single response. If more
+	// executions exist than the specified maxResults value, a token is included in
+	// the response so that the remaining results can be retrieved.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -28,9 +28,7 @@ import (
 // CustomLabel ) object in an array ( CustomLabels ). Each CustomLabel object
 // provides the label name ( Name ), the level of confidence that the image
 // contains the object ( Confidence ), and object location information, if it
-// exists, for the label on the image ( Geometry ). Note that for the
-// DetectCustomLabelsLabels operation, Polygons are not returned in the Geometry
-// section of the response.
+// exists, for the label on the image ( Geometry ).
 //
 // To filter labels that are returned, specify a value for MinConfidence .
 // DetectCustomLabelsLabels only returns labels with a confidence that's higher

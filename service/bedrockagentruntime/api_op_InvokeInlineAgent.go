@@ -148,6 +148,13 @@ type InvokeInlineAgentInput struct {
 	// DEFAULT orchestration type, by default.
 	OrchestrationType types.OrchestrationType
 
+	// Specifies parameters that control how the service populates the agent prompt
+	// for an InvokeInlineAgent request. You can control which aspects of previous
+	// invocations in the same agent session the service uses to populate the agent
+	// prompt. This gives you more granular control over the contextual history that is
+	// used to process the current request.
+	PromptCreationConfigurations *types.PromptCreationConfigurations
+
 	//  Configurations for advanced prompts used to override the default prompts to
 	// enhance the accuracy of the inline agent.
 	PromptOverrideConfiguration *types.PromptOverrideConfiguration

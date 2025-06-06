@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops an Amazon Bedrock flow's asynchronous execution. This operation prevents
-// further processing of the flow and changes the execution status to Aborted .
+// Stops an Amazon Bedrock flow's execution. This operation prevents further
+// processing of the flow and changes the execution status to Aborted .
 func (c *Client) StopFlowExecution(ctx context.Context, params *StopFlowExecutionInput, optFns ...func(*Options)) (*StopFlowExecutionOutput, error) {
 	if params == nil {
 		params = &StopFlowExecutionInput{}
@@ -30,7 +30,7 @@ func (c *Client) StopFlowExecution(ctx context.Context, params *StopFlowExecutio
 
 type StopFlowExecutionInput struct {
 
-	// The unique identifier of the async execution to stop.
+	// The unique identifier of the flow execution to stop.
 	//
 	// This member is required.
 	ExecutionIdentifier *string
@@ -50,14 +50,14 @@ type StopFlowExecutionInput struct {
 
 type StopFlowExecutionOutput struct {
 
-	// The updated status of the async execution after the stop request. This will
+	// The updated status of the flow execution after the stop request. This will
 	// typically be ABORTED if the execution was successfully stopped.
 	//
 	// This member is required.
 	Status types.FlowExecutionStatus
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the async execution
-	// that was stopped.
+	// The Amazon Resource Name (ARN) that uniquely identifies the flow execution that
+	// was stopped.
 	ExecutionArn *string
 
 	// Metadata pertaining to the operation's result.

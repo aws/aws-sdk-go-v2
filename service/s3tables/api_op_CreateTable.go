@@ -24,9 +24,11 @@ import (
 //   - If you use this operation with the optional encryptionConfiguration request
 //     parameter you must have the s3tables:PutTableEncryption permission.
 //
-// Additionally,
+// Additionally, If you choose SSE-KMS encryption you must grant the S3 Tables
+// maintenance principal access to your KMS key. For more information, see [Permissions requirements for S3 Tables SSE-KMS encryption].
 //
 // [Creating an Amazon S3 table]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html
+// [Permissions requirements for S3 Tables SSE-KMS encryption]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
 func (c *Client) CreateTable(ctx context.Context, params *CreateTableInput, optFns ...func(*Options)) (*CreateTableOutput, error) {
 	if params == nil {
 		params = &CreateTableInput{}

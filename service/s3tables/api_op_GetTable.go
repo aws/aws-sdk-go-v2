@@ -37,18 +37,15 @@ func (c *Client) GetTable(ctx context.Context, params *GetTableInput, optFns ...
 type GetTableInput struct {
 
 	// The name of the table.
-	//
-	// This member is required.
 	Name *string
 
 	// The name of the namespace the table is associated with.
-	//
-	// This member is required.
 	Namespace *string
 
+	// The Amazon Resource Name (ARN) of the table.
+	TableArn *string
+
 	// The Amazon Resource Name (ARN) of the table bucket associated with the table.
-	//
-	// This member is required.
 	TableBucketARN *string
 
 	noSmithyDocumentSerde
@@ -199,9 +196,6 @@ func (c *Client) addOperationGetTableMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpGetTableValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTable(options.Region), middleware.Before); err != nil {

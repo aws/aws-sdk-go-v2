@@ -17,7 +17,10 @@ import (
 // use this operation.
 //
 // If you choose SSE-KMS encryption you must grant the S3 Tables maintenance
-// principal access to your KMS key. For more information, see Permissions requirements for S3 Tables SSE-KMS encryption
+// principal access to your KMS key. For more information, see [Permissions requirements for S3 Tables SSE-KMS encryption]in the Amazon
+// Simple Storage Service User Guide.
+//
+// [Permissions requirements for S3 Tables SSE-KMS encryption]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
 func (c *Client) PutTableBucketEncryption(ctx context.Context, params *PutTableBucketEncryptionInput, optFns ...func(*Options)) (*PutTableBucketEncryptionOutput, error) {
 	if params == nil {
 		params = &PutTableBucketEncryptionInput{}

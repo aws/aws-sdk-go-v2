@@ -417,19 +417,17 @@ type ConnectionPoolConfiguration struct {
 	//
 	// Constraints:
 	//
-	//   - Must be between 0 and 3600.
+	//   - Must be between 0 and 300.
 	ConnectionBorrowTimeout *int32
 
 	// Add an initialization query, or modify the current one. You can specify one or
 	// more SQL statements for the proxy to run when opening each new database
 	// connection. The setting is typically used with SET statements to make sure that
-	// each connection has identical settings. Make sure that the query you add is
-	// valid. To include multiple variables in a single SET statement, use comma
-	// separators.
+	// each connection has identical settings. Make sure the query added here is valid.
+	// This is an optional field, so you can choose to leave it empty. For including
+	// multiple variables in a single SET statement, use a comma separator.
 	//
 	// For example: SET variable1=value1, variable2=value2
-	//
-	// For multiple statements, use semicolons as the separator.
 	//
 	// Default: no initialization query
 	InitQuery *string
@@ -490,11 +488,12 @@ type ConnectionPoolConfigurationInfo struct {
 	ConnectionBorrowTimeout *int32
 
 	// One or more SQL statements for the proxy to run when opening each new database
-	// connection. Typically used with SET statements to make sure that each
-	// connection has identical settings such as time zone and character set. This
-	// setting is empty by default. For multiple statements, use semicolons as the
-	// separator. You can also include multiple variables in a single SET statement,
-	// such as SET x=1, y=2 .
+	// connection. The setting is typically used with SET statements to make sure that
+	// each connection has identical settings. The query added here must be valid. For
+	// including multiple variables in a single SET statement, use a comma separator.
+	// This is an optional field.
+	//
+	// For example: SET variable1=value1, variable2=value2
 	InitQuery *string
 
 	// The maximum size of the connection pool for each target in a target group. The
@@ -766,6 +765,10 @@ type DBCluster struct {
 
 	// The version of the database engine.
 	EngineVersion *string
+
+	// Contains a user-supplied global database cluster identifier. This identifier is
+	// the unique key that identifies a global database cluster.
+	GlobalClusterIdentifier *string
 
 	// Indicates whether write forwarding is enabled for a secondary cluster in an
 	// Aurora global database. Because write forwarding takes time to enable, check the
@@ -3082,7 +3085,9 @@ type DBSubnetGroup struct {
 	// Provides the status of the DB subnet group.
 	SubnetGroupStatus *string
 
-	// Contains a list of Subnet elements.
+	// Contains a list of Subnet elements. The list of subnets shown here might not
+	// reflect the current state of your VPC. For the most up-to-date information, we
+	// recommend checking your VPC configuration directly.
 	Subnets []Subnet
 
 	// The network type of the DB subnet group.

@@ -1,0 +1,8 @@
+{
+    "id": "35a104bf-f6eb-4cb6-b730-7983c088cbbf",
+    "type": "feature",
+    "description": "This release introduces the `PromptCreationConfigurations` input parameter, which includes fields to control prompt population for `InvokeAgent` or `InvokeInlineAgent` requests.",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

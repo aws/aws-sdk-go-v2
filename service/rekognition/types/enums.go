@@ -87,6 +87,25 @@ func (CelebrityRecognitionSortBy) Values() []CelebrityRecognitionSortBy {
 	}
 }
 
+type ChallengeType string
+
+// Enum values for ChallengeType
+const (
+	ChallengeTypeFaceMovementAndLightChallenge ChallengeType = "FaceMovementAndLightChallenge"
+	ChallengeTypeFaceMovementChallenge         ChallengeType = "FaceMovementChallenge"
+)
+
+// Values returns all known values for ChallengeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChallengeType) Values() []ChallengeType {
+	return []ChallengeType{
+		"FaceMovementAndLightChallenge",
+		"FaceMovementChallenge",
+	}
+}
+
 type ContentClassifier string
 
 // Enum values for ContentClassifier

@@ -4751,6 +4751,38 @@ func awsAwsjson11_serializeDocumentBoundingBox(v *types.BoundingBox, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentChallengePreference(v *types.ChallengePreference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.Versions != nil {
+		ok := object.Key("Versions")
+		if err := awsAwsjson11_serializeDocumentVersions(v.Versions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentChallengePreferences(v []types.ChallengePreference, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentChallengePreference(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentConnectedHomeLabels(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4844,6 +4876,13 @@ func awsAwsjson11_serializeDocumentCreateFaceLivenessSessionRequestSettings(v *t
 	if v.AuditImagesLimit != nil {
 		ok := object.Key("AuditImagesLimit")
 		ok.Integer(*v.AuditImagesLimit)
+	}
+
+	if v.ChallengePreferences != nil {
+		ok := object.Key("ChallengePreferences")
+		if err := awsAwsjson11_serializeDocumentChallengePreferences(v.ChallengePreferences, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.OutputConfig != nil {
@@ -5947,6 +5986,23 @@ func awsAwsjson11_serializeDocumentVersionNames(v []string, value smithyjson.Val
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVersions(v *types.Versions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Maximum != nil {
+		ok := object.Key("Maximum")
+		ok.String(*v.Maximum)
+	}
+
+	if v.Minimum != nil {
+		ok := object.Key("Minimum")
+		ok.String(*v.Minimum)
+	}
+
 	return nil
 }
 

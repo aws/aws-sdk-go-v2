@@ -207,10 +207,6 @@ type EncryptOutput struct {
 	// [key ARN]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KeyId *string
 
-	// The identifier of the key material used to encrypt the ciphertext. This field
-	// is present only when the operation uses a symmetric encryption KMS key.
-	KeyMaterialId *string
-
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

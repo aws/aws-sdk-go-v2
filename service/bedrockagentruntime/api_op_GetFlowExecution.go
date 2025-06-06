@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves details about a specific asynchronous execution of a flow, including
-// its status, start and end times, and any errors that occurred during execution.
+// Retrieves details about a specific flow execution, including its status, start
+// and end times, and any errors that occurred during execution.
 func (c *Client) GetFlowExecution(ctx context.Context, params *GetFlowExecutionInput, optFns ...func(*Options)) (*GetFlowExecutionOutput, error) {
 	if params == nil {
 		params = &GetFlowExecutionInput{}
@@ -31,7 +31,7 @@ func (c *Client) GetFlowExecution(ctx context.Context, params *GetFlowExecutionI
 
 type GetFlowExecutionInput struct {
 
-	// The unique identifier of the async execution to retrieve.
+	// The unique identifier of the flow execution to retrieve.
 	//
 	// This member is required.
 	ExecutionIdentifier *string
@@ -51,7 +51,7 @@ type GetFlowExecutionInput struct {
 
 type GetFlowExecutionOutput struct {
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the async execution.
+	// The Amazon Resource Name (ARN) that uniquely identifies the flow execution.
 	//
 	// This member is required.
 	ExecutionArn *string
@@ -71,23 +71,23 @@ type GetFlowExecutionOutput struct {
 	// This member is required.
 	FlowVersion *string
 
-	// The timestamp when the async execution started.
+	// The timestamp when the flow execution started.
 	//
 	// This member is required.
 	StartedAt *time.Time
 
-	// The current status of the async execution.
+	// The current status of the flow execution.
 	//
-	// Async executions time out after 24 hours.
+	// Flow executions time out after 24 hours.
 	//
 	// This member is required.
 	Status types.FlowExecutionStatus
 
-	// The timestamp when the async execution ended. This field is only populated when
+	// The timestamp when the flow execution ended. This field is only populated when
 	// the execution has completed, failed, timed out, or been aborted.
 	EndedAt *time.Time
 
-	// A list of errors that occurred during the async execution. Each error includes
+	// A list of errors that occurred during the flow execution. Each error includes
 	// an error code, message, and the node where the error occurred, if applicable.
 	Errors []types.FlowExecutionError
 

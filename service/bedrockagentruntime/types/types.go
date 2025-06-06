@@ -693,11 +693,11 @@ type CollaboratorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a condition evaluation result during an async
+// Contains information about a condition evaluation result during a flow
 // execution. This event is generated when a condition node in the flow evaluates
 // its conditions.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type ConditionResultEvent struct {
 
@@ -971,9 +971,9 @@ type FlowCompletionEvent struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the content of an async execution input or output field.
+// Contains the content of an flow execution input or output field.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 //
 // The following types satisfy this interface:
@@ -992,9 +992,9 @@ type FlowExecutionContentMemberDocument struct {
 
 func (*FlowExecutionContentMemberDocument) isFlowExecutionContent() {}
 
-// Contains information about an error that occurred during an async execution.
+// Contains information about an error that occurred during an flow execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type FlowExecutionError struct {
 
@@ -1010,12 +1010,12 @@ type FlowExecutionError struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an event that occurred during an async execution. This is a union
+// Represents an event that occurred during an flow execution. This is a union
 // type that can contain one of several event types, such as node input and output
 // events; flow input and output events; condition node result events, or failure
 // events.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 //
 // The following types satisfy this interface:
@@ -1031,7 +1031,7 @@ type FlowExecutionEvent interface {
 	isFlowExecutionEvent()
 }
 
-// Contains information about a condition evaluation result during the async
+// Contains information about a condition evaluation result during the flow
 // execution. This event is generated when a condition node in the flow evaluates
 // its conditions.
 type FlowExecutionEventMemberConditionResultEvent struct {
@@ -1102,10 +1102,10 @@ type FlowExecutionEventMemberNodeOutputEvent struct {
 
 func (*FlowExecutionEventMemberNodeOutputEvent) isFlowExecutionEvent() {}
 
-// Contains information about the inputs provided to the flow at the start of
-// async execution.
+// Contains information about the inputs provided to the flow at the start of a
+// flow execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type FlowExecutionInputEvent struct {
 
@@ -1127,10 +1127,10 @@ type FlowExecutionInputEvent struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the outputs produced by the flow during an async
+// Contains information about the outputs produced by the flow during a flow
 // execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type FlowExecutionOutputEvent struct {
 
@@ -1152,19 +1152,19 @@ type FlowExecutionOutputEvent struct {
 	noSmithyDocumentSerde
 }
 
-// Contains summary information about a flow's async execution, including its
-// status, timestamps, and identifiers.
+// Contains summary information about a flow execution, including its status,
+// timestamps, and identifiers.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type FlowExecutionSummary struct {
 
-	// The timestamp when the async execution was created.
+	// The timestamp when the flow execution was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the async execution.
+	// The Amazon Resource Name (ARN) that uniquely identifies the flow execution.
 	//
 	// This member is required.
 	ExecutionArn *string
@@ -1184,24 +1184,24 @@ type FlowExecutionSummary struct {
 	// This member is required.
 	FlowVersion *string
 
-	// The current status of the async execution.
+	// The current status of the flow execution.
 	//
-	// Async executions time out after 24 hours.
+	// Flow executions time out after 24 hours.
 	//
 	// This member is required.
 	Status FlowExecutionStatus
 
-	// The timestamp when the async execution ended. This field is only populated when
+	// The timestamp when the flow execution ended. This field is only populated when
 	// the execution has completed, failed, timed out, or been aborted.
 	EndedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Contains information about a failure that occurred at the flow level during an
-// async execution.
+// Contains information about a failure that occurred at the flow level during a
+// flow execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type FlowFailureEvent struct {
 
@@ -1263,9 +1263,9 @@ type FlowInputContentMemberDocument struct {
 
 func (*FlowInputContentMemberDocument) isFlowInputContent() {}
 
-// Represents an input field provided to a flow during an async execution.
+// Represents an input field provided to a flow during a flow execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type FlowInputField struct {
 
@@ -1362,9 +1362,9 @@ type FlowOutputEvent struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an output field produced by a flow during an async execution.
+// Represents an output field produced by a flow during a flow execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type FlowOutputField struct {
 
@@ -3120,10 +3120,10 @@ type ModelPerformanceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the content of a flow node's input or output field for an async
+// Contains the content of a flow node's input or output field for a flow
 // execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 //
 // The following types satisfy this interface:
@@ -3143,9 +3143,9 @@ type NodeExecutionContentMemberDocument struct {
 func (*NodeExecutionContentMemberDocument) isNodeExecutionContent() {}
 
 // Contains information about a failure that occurred at a specific node during a
-// flow's async execution.
+// flow execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type NodeFailureEvent struct {
 
@@ -3172,10 +3172,10 @@ type NodeFailureEvent struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the inputs provided to a specific node during a
-// flow's async execution.
+// Contains information about the inputs provided to a specific node during a flow
+// execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type NodeInputEvent struct {
 
@@ -3197,7 +3197,7 @@ type NodeInputEvent struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an input field provided to a node during a flow's async execution.
+// Represents an input field provided to a node during a flow execution.
 type NodeInputField struct {
 
 	// The content of the input field, which can contain text or structured data.
@@ -3214,9 +3214,9 @@ type NodeInputField struct {
 }
 
 // Contains information about the outputs produced by a specific node during a
-// flow's async execution.
+// flow execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type NodeOutputEvent struct {
 
@@ -3238,9 +3238,9 @@ type NodeOutputEvent struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an output field produced by a node during a flow's async execution.
+// Represents an output field produced by a node during a flow execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type NodeOutputField struct {
 
@@ -3778,6 +3778,30 @@ type PromptConfiguration struct {
 
 	//  The step in the agent sequence that this prompt configuration applies to.
 	PromptType PromptType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies parameters that control how the service populates the agent prompt
+// for an InvokeAgent or InvokeInlineAgent request. You can control which aspects
+// of previous invocations in the same agent session the service uses to populate
+// the agent prompt. This gives you more granular control over the contextual
+// history that is used to process the current request.
+type PromptCreationConfigurations struct {
+
+	// If true , the service removes any content between <thinking> tags from previous
+	// conversations in an agent session. The service will only remove content from
+	// already processed turns. This helps you remove content which might not be useful
+	// for current and subsequent invocations. This can reduce the input token count
+	// and potentially save costs. The default value is false .
+	ExcludePreviousThinkingSteps bool
+
+	// The number of previous conversations from the ongoing agent session to include
+	// in the conversation history of the agent prompt, during the current invocation.
+	// This gives you more granular control over the context that the model is made
+	// aware of, and helps the model remove older context which is no longer useful
+	// during the ongoing agent session.
+	PreviousConversationTurnsToInclude *int32
 
 	noSmithyDocumentSerde
 }
@@ -4895,9 +4919,9 @@ type S3ObjectFile struct {
 }
 
 // Represents a condition that was satisfied during a condition node evaluation in
-// a flow's async execution.
+// a flow execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 type SatisfiedCondition struct {
 

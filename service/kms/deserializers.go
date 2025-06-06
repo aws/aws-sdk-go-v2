@@ -12378,15 +12378,6 @@ func awsAwsjson11_deserializeOpDocumentEncryptOutput(v **EncryptOutput, value in
 				sv.KeyId = ptr.String(jtv)
 			}
 
-		case "KeyMaterialId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected BackingKeyIdType to be of type string, got %T instead", value)
-				}
-				sv.KeyMaterialId = ptr.String(jtv)
-			}
-
 		default:
 			_, _ = key, value
 

@@ -67,6 +67,10 @@ type GetFaceLivenessSessionResultsOutput struct {
 	// instead.
 	AuditImages []types.AuditImage
 
+	// Contains information regarding the challenge type used for the Face Liveness
+	// check.
+	Challenge *types.Challenge
+
 	// Probabalistic confidence score for if the person in the given video was live,
 	// represented as a float value between 0 to 100.
 	Confidence *float32

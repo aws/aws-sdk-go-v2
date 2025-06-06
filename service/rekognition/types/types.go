@@ -261,6 +261,38 @@ type CelebrityRecognition struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the type and version of the challenge being used for the Face
+// Liveness session.
+type Challenge struct {
+
+	// The type of the challenge being used for the Face Liveness session.
+	//
+	// This member is required.
+	Type ChallengeType
+
+	// The version of the challenge being used for the Face Liveness session.
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// An ordered list of preferred challenge type and versions.
+type ChallengePreference struct {
+
+	// The types of challenges that have been selected for the Face Liveness session.
+	//
+	// This member is required.
+	Type ChallengeType
+
+	// The version of the challenges that have been selected for the Face Liveness
+	// session.
+	Versions *Versions
+
+	noSmithyDocumentSerde
+}
+
 // Provides face metadata for target image faces that are analyzed by CompareFaces
 // and RecognizeCelebrities .
 type ComparedFace struct {
@@ -431,6 +463,10 @@ type CreateFaceLivenessSessionRequestSettings struct {
 	// the response. By default, it is set to 0. The limit is best effort and is based
 	// on the actual duration of the selfie-video.
 	AuditImagesLimit *int32
+
+	// Indicates preferred challenge types and versions for the Face Liveness session
+	// to be created.
+	ChallengePreferences []ChallengePreference
 
 	// Can specify the location of an Amazon S3 bucket, where reference and audit
 	// images will be stored. Note that the Amazon S3 bucket must be located in the
@@ -815,11 +851,13 @@ type DominantColor struct {
 	noSmithyDocumentSerde
 }
 
-// The emotions that appear to be expressed on the face, and the confidence level
-// in the determination. The API is only making a determination of the physical
-// appearance of a person's face. It is not a determination of the person’s
-// internal emotional state and should not be used in such a way. For example, a
-// person pretending to have a sad face might not be sad emotionally.
+// The API returns a prediction of an emotion based on a person's facial
+// expressions, along with the confidence level for the predicted emotion. It is
+// not a determination of the person’s internal emotional state and should not be
+// used in such a way. For example, a person pretending to have a sad face might
+// not be sad emotionally. The API is not intended to be used, and you may not use
+// it, in a manner that violates the EU Artificial Intelligence Act or any other
+// applicable law.
 type Emotion struct {
 
 	// Level of confidence in the determination.
@@ -2849,6 +2887,18 @@ type ValidationData struct {
 
 	// The assets that comprise the validation data.
 	Assets []Asset
+
+	noSmithyDocumentSerde
+}
+
+// Object specifying the acceptable range of challenge versions.
+type Versions struct {
+
+	// The desired maximum version for the challenge.
+	Maximum *string
+
+	// The desired minimum version for the challenge.
+	Minimum *string
 
 	noSmithyDocumentSerde
 }

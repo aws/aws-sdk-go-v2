@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists events that occurred during an asynchronous execution of a flow. Events
-// provide detailed information about the execution progress, including node inputs
-// and outputs, flow inputs and outputs, condition results, and failure events.
+// Lists events that occurred during a flow execution. Events provide detailed
+// information about the execution progress, including node inputs and outputs,
+// flow inputs and outputs, condition results, and failure events.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 func (c *Client) ListFlowExecutionEvents(ctx context.Context, params *ListFlowExecutionEventsInput, optFns ...func(*Options)) (*ListFlowExecutionEventsOutput, error) {
 	if params == nil {
@@ -40,7 +40,7 @@ type ListFlowExecutionEventsInput struct {
 	// This member is required.
 	EventType types.FlowExecutionEventType
 
-	// The unique identifier of the async execution.
+	// The unique identifier of the flow execution.
 	//
 	// This member is required.
 	ExecutionIdentifier *string
@@ -69,7 +69,7 @@ type ListFlowExecutionEventsInput struct {
 
 type ListFlowExecutionEventsOutput struct {
 
-	// A list of events that occurred during the async execution. Events can include
+	// A list of events that occurred during the flow execution. Events can include
 	// node inputs and outputs, flow inputs and outputs, condition results, and failure
 	// events.
 	//

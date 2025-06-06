@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an asynchronous execution of an Amazon Bedrock flow. Unlike synchronous
-// flows that run until completion or time out after five minutes, you can run
-// asynchronous flows for longer durations. Asynchronous flows also yield control
-// so that your application can perform other tasks.
+// Starts an execution of an Amazon Bedrock flow. Unlike flows that run until
+// completion or time out after five minutes, flow executions let you run flows
+// asynchronously for longer durations. Flow executions also yield control so that
+// your application can perform other tasks.
 //
 // This operation returns an Amazon Resource Name (ARN) that you can use to track
-// and manage your flow's async execution.
+// and manage your flow execution.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 func (c *Client) StartFlowExecution(ctx context.Context, params *StartFlowExecutionInput, optFns ...func(*Options)) (*StartFlowExecutionOutput, error) {
 	if params == nil {
@@ -38,7 +38,7 @@ func (c *Client) StartFlowExecution(ctx context.Context, params *StartFlowExecut
 
 type StartFlowExecutionInput struct {
 
-	// The unique identifier of the flow alias to use for the async execution.
+	// The unique identifier of the flow alias to use for the flow execution.
 	//
 	// This member is required.
 	FlowAliasIdentifier *string
@@ -48,17 +48,17 @@ type StartFlowExecutionInput struct {
 	// This member is required.
 	FlowIdentifier *string
 
-	// The input data required for the async execution. This must match the input
+	// The input data required for the flow execution. This must match the input
 	// schema defined in the flow.
 	//
 	// This member is required.
 	Inputs []types.FlowInput
 
-	// The unique name for the async execution. If you don't provide one, a
+	// The unique name for the flow execution. If you don't provide one, a
 	// system-generated name is used.
 	FlowExecutionName *string
 
-	// The performance settings for the foundation model used in the async execution.
+	// The performance settings for the foundation model used in the flow execution.
 	ModelPerformanceConfiguration *types.ModelPerformanceConfiguration
 
 	noSmithyDocumentSerde
@@ -66,7 +66,7 @@ type StartFlowExecutionInput struct {
 
 type StartFlowExecutionOutput struct {
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the async execution.
+	// The Amazon Resource Name (ARN) that uniquely identifies the flow execution.
 	ExecutionArn *string
 
 	// Metadata pertaining to the operation's result.

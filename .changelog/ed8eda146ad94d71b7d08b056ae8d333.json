@@ -1,0 +1,8 @@
+{
+    "id": "ed8eda14-6ad9-4d71-b7d0-8b056ae8d333",
+    "type": "feature",
+    "description": "Include Global Cluster Identifier in DBCluster if the DBCluster is a Global Cluster Member.",
+    "modules": [
+        "service/rds"
+    ]
+}

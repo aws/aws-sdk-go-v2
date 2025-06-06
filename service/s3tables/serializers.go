@@ -901,7 +901,7 @@ func (m *awsRestjson1_serializeOpGetTable) HandleSerialize(ctx context.Context, 
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/tables/{tableBucketARN}/{namespace}/{name}")
+	opPath, opQuery := httpbinding.SplitURI("/get-table")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
@@ -935,31 +935,20 @@ func awsRestjson1_serializeOpHttpBindingsGetTableInput(v *GetTableInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Name == nil || len(*v.Name) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
-	}
 	if v.Name != nil {
-		if err := encoder.SetURI("name").String(*v.Name); err != nil {
-			return err
-		}
+		encoder.SetQuery("name").String(*v.Name)
 	}
 
-	if v.Namespace == nil || len(*v.Namespace) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member namespace must not be empty")}
-	}
 	if v.Namespace != nil {
-		if err := encoder.SetURI("namespace").String(*v.Namespace); err != nil {
-			return err
-		}
+		encoder.SetQuery("namespace").String(*v.Namespace)
 	}
 
-	if v.TableBucketARN == nil || len(*v.TableBucketARN) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member tableBucketARN must not be empty")}
+	if v.TableArn != nil {
+		encoder.SetQuery("tableArn").String(*v.TableArn)
 	}
+
 	if v.TableBucketARN != nil {
-		if err := encoder.SetURI("tableBucketARN").String(*v.TableBucketARN); err != nil {
-			return err
-		}
+		encoder.SetQuery("tableBucketARN").String(*v.TableBucketARN)
 	}
 
 	return nil

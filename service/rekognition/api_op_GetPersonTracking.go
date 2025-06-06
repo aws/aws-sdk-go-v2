@@ -11,6 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	End of support notice: On October 31, 2025, AWS will discontinue support for
+//
+// Amazon Rekognition People Pathing. After October 31, 2025, you will no longer be
+// able to use the Rekognition People Pathing capability. For more information,
+// visit this [blog post].
+//
 // Gets the path tracking results of a Amazon Rekognition Video analysis started
 // by StartPersonTracking.
 //
@@ -43,6 +49,8 @@ import (
 // results. To get the next page of results, call GetPersonTracking and populate
 // the NextToken request parameter with the token value returned from the previous
 // call to GetPersonTracking .
+//
+// [blog post]: https://aws.amazon.com/blogs/machine-learning/transitioning-from-amazon-rekognition-people-pathing-exploring-other-alternatives/
 func (c *Client) GetPersonTracking(ctx context.Context, params *GetPersonTrackingInput, optFns ...func(*Options)) (*GetPersonTrackingOutput, error) {
 	if params == nil {
 		params = &GetPersonTrackingInput{}

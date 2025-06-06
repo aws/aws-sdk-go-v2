@@ -1117,6 +1117,13 @@ func awsRestjson1_serializeOpDocumentInvokeAgentInput(v *InvokeAgentInput, value
 		ok.String(*v.MemoryId)
 	}
 
+	if v.PromptCreationConfigurations != nil {
+		ok := object.Key("promptCreationConfigurations")
+		if err := awsRestjson1_serializeDocumentPromptCreationConfigurations(v.PromptCreationConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SessionState != nil {
 		ok := object.Key("sessionState")
 		if err := awsRestjson1_serializeDocumentSessionState(v.SessionState, ok); err != nil {
@@ -1446,6 +1453,13 @@ func awsRestjson1_serializeOpDocumentInvokeInlineAgentInput(v *InvokeInlineAgent
 	if len(v.OrchestrationType) > 0 {
 		ok := object.Key("orchestrationType")
 		ok.String(string(v.OrchestrationType))
+	}
+
+	if v.PromptCreationConfigurations != nil {
+		ok := object.Key("promptCreationConfigurations")
+		if err := awsRestjson1_serializeDocumentPromptCreationConfigurations(v.PromptCreationConfigurations, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PromptOverrideConfiguration != nil {
@@ -4800,6 +4814,23 @@ func awsRestjson1_serializeDocumentPromptConfigurations(v []types.PromptConfigur
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPromptCreationConfigurations(v *types.PromptCreationConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExcludePreviousThinkingSteps {
+		ok := object.Key("excludePreviousThinkingSteps")
+		ok.Boolean(v.ExcludePreviousThinkingSteps)
+	}
+
+	if v.PreviousConversationTurnsToInclude != nil {
+		ok := object.Key("previousConversationTurnsToInclude")
+		ok.Integer(*v.PreviousConversationTurnsToInclude)
+	}
+
 	return nil
 }
 

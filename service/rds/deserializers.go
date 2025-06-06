@@ -28847,6 +28847,19 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				sv.EngineVersion = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("GlobalClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.GlobalClusterIdentifier = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("GlobalWriteForwardingRequested", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

@@ -11711,6 +11711,55 @@ func awsAwsjson11_deserializeDocumentCelebrityRecognitions(v *[]types.CelebrityR
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentChallenge(v **types.Challenge, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Challenge
+	if *v == nil {
+		sv = &types.Challenge{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChallengeType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ChallengeType(jtv)
+			}
+
+		case "Version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Version to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCollectionIdList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -24392,6 +24441,11 @@ func awsAwsjson11_deserializeOpDocumentGetFaceLivenessSessionResultsOutput(v **G
 		switch key {
 		case "AuditImages":
 			if err := awsAwsjson11_deserializeDocumentAuditImages(&sv.AuditImages, value); err != nil {
+				return err
+			}
+
+		case "Challenge":
+			if err := awsAwsjson11_deserializeDocumentChallenge(&sv.Challenge, value); err != nil {
 				return err
 			}
 

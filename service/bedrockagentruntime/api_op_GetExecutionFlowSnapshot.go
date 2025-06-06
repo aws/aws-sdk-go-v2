@@ -10,13 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the flow definition snapshot used for an asynchronous execution. The
-// snapshot represents the flow metadata and definition as it existed at the time
-// the asynchronous execution was started. Note that even if the flow is edited
-// after an execution starts, the snapshot connected to the execution remains
-// unchanged.
+// Retrieves the flow definition snapshot used for a flow execution. The snapshot
+// represents the flow metadata and definition as it existed at the time the
+// execution was started. Note that even if the flow is edited after an execution
+// starts, the snapshot connected to the execution remains unchanged.
 //
-// Asynchronous flows is in preview release for Amazon Bedrock and is subject to
+// Flow executions is in preview release for Amazon Bedrock and is subject to
 // change.
 func (c *Client) GetExecutionFlowSnapshot(ctx context.Context, params *GetExecutionFlowSnapshotInput, optFns ...func(*Options)) (*GetExecutionFlowSnapshotOutput, error) {
 	if params == nil {
@@ -35,12 +34,12 @@ func (c *Client) GetExecutionFlowSnapshot(ctx context.Context, params *GetExecut
 
 type GetExecutionFlowSnapshotInput struct {
 
-	// The unique identifier of the async execution.
+	// The unique identifier of the flow execution.
 	//
 	// This member is required.
 	ExecutionIdentifier *string
 
-	// The unique identifier of the flow alias used for the async execution.
+	// The unique identifier of the flow alias used for the flow execution.
 	//
 	// This member is required.
 	FlowAliasIdentifier *string
@@ -55,7 +54,7 @@ type GetExecutionFlowSnapshotInput struct {
 
 type GetExecutionFlowSnapshotOutput struct {
 
-	// The flow definition used for the async execution, including the nodes,
+	// The flow definition used for the flow execution, including the nodes,
 	// connections, and configuration at the time when the execution started.
 	//
 	// The definition returns as a string that follows the structure of a [FlowDefinition] object.
@@ -65,13 +64,13 @@ type GetExecutionFlowSnapshotOutput struct {
 	// This member is required.
 	Definition *string
 
-	// The Amazon Resource Name (ARN) of the IAM service role that's used by the async
+	// The Amazon Resource Name (ARN) of the IAM service role that's used by the flow
 	// execution.
 	//
 	// This member is required.
 	ExecutionRoleArn *string
 
-	// The unique identifier of the flow alias used for the async execution.
+	// The unique identifier of the flow alias used for the flow execution.
 	//
 	// This member is required.
 	FlowAliasIdentifier *string
@@ -81,7 +80,7 @@ type GetExecutionFlowSnapshotOutput struct {
 	// This member is required.
 	FlowIdentifier *string
 
-	// The version of the flow used for the async execution.
+	// The version of the flow used for the flow execution.
 	//
 	// This member is required.
 	FlowVersion *string

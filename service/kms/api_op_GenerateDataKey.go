@@ -253,7 +253,8 @@ type GenerateDataKeyOutput struct {
 	// [key ARN]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KeyId *string
 
-	// The identifier of the key material used to encrypt the data key.
+	// The identifier of the key material used to encrypt the data key. This field is
+	// omitted if the request includes the Recipient parameter.
 	KeyMaterialId *string
 
 	// The plaintext data key. When you use the HTTP API or the Amazon Web Services

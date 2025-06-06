@@ -240,7 +240,8 @@ type GenerateDataKeyPairOutput struct {
 	// [key ARN]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KeyId *string
 
-	// The identifier of the key material used to encrypt the private key.
+	// The identifier of the key material used to encrypt the private key. This field
+	// is omitted if the request includes the Recipient parameter.
 	KeyMaterialId *string
 
 	// The type of data key pair that was generated.
