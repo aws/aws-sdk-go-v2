@@ -1590,7 +1590,7 @@
                 "KeyMaterialId": {
                     "target": "com.amazonaws.kms#BackingKeyIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the key material used to decrypt the ciphertext. This field is present only when\n      the operation uses a symmetric encryption KMS key.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the key material used to decrypt the ciphertext. This field is present only when\n      the operation uses a symmetric encryption KMS key. This field is omitted if the request includes\n      the <code>Recipient</code> parameter.</p>"
                     }
                 }
             },
@@ -2741,12 +2741,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption algorithm that was used to encrypt the plaintext.</p>"
                     }
-                },
-                "KeyMaterialId": {
-                    "target": "com.amazonaws.kms#BackingKeyIdType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the key material used to encrypt the ciphertext. This field is present only when\n      the operation uses a symmetric encryption KMS key.</p>"
-                    }
                 }
             },
             "traits": {
@@ -3045,7 +3039,7 @@
                 "KeyMaterialId": {
                     "target": "com.amazonaws.kms#BackingKeyIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the key material used to encrypt the private key.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the key material used to encrypt the private key. This field is omitted if the request\n      includes the <code>Recipient</code> parameter.</p>"
                     }
                 }
             },
@@ -3272,7 +3266,7 @@
                 "KeyMaterialId": {
                     "target": "com.amazonaws.kms#BackingKeyIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the key material used to encrypt the data key.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the key material used to encrypt the data key. This field is omitted if the request\n      includes the <code>Recipient</code> parameter.</p>"
                     }
                 }
             },

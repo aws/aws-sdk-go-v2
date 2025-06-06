@@ -1935,7 +1935,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a condition evaluation result during an async execution. This event is generated when a condition node in the flow evaluates its conditions.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Contains information about a condition evaluation result during a flow execution. This event is generated when a condition node in the flow evaluates its conditions.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3030,7 +3030,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the content of an async execution input or output field.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Contains the content of an flow execution input or output field.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3057,7 +3057,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about an error that occurred during an async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>"
+                "smithy.api#documentation": "<p>Contains information about an error that occurred during an flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>"
             }
         },
         "com.amazonaws.bedrockagentruntime#FlowExecutionErrorType": {
@@ -3107,7 +3107,7 @@
                 "conditionResultEvent": {
                     "target": "com.amazonaws.bedrockagentruntime#ConditionResultEvent",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about a condition evaluation result during the async execution. This event is generated when a condition node in the flow evaluates its conditions.</p>"
+                        "smithy.api#documentation": "<p>Contains information about a condition evaluation result during the flow execution. This event is generated when a condition node in the flow evaluates its conditions.</p>"
                     }
                 },
                 "nodeFailureEvent": {
@@ -3124,7 +3124,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an event that occurred during an async execution. This is a union type that can contain one of several event types, such as node input and output events; flow input and output events; condition node result events, or failure events.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>"
+                "smithy.api#documentation": "<p>Represents an event that occurred during an flow execution. This is a union type that can contain one of several event types, such as node input and output events; flow input and output events; condition node result events, or failure events.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>"
             }
         },
         "com.amazonaws.bedrockagentruntime#FlowExecutionEventType": {
@@ -3200,7 +3200,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the inputs provided to the flow at the start of async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Contains information about the inputs provided to the flow at the start of a flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3239,7 +3239,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the outputs produced by the flow during an async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Contains information about the outputs produced by the flow during a flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3327,7 +3327,7 @@
                 "executionArn": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the async execution.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the flow execution.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3355,26 +3355,26 @@
                 "status": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the async execution.</p> <p>Async executions time out after 24 hours.</p>",
+                        "smithy.api#documentation": "<p>The current status of the flow execution.</p> <p>Flow executions time out after 24 hours.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the async execution was created.</p>",
+                        "smithy.api#documentation": "<p>The timestamp when the flow execution was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "endedAt": {
                     "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the async execution ended. This field is only populated when the execution has completed, failed, timed out, or been aborted.</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the flow execution ended. This field is only populated when the execution has completed, failed, timed out, or been aborted.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains summary information about a flow's async execution, including its status, timestamps, and identifiers.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>"
+                "smithy.api#documentation": "<p>Contains summary information about a flow execution, including its status, timestamps, and identifiers.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>"
             }
         },
         "com.amazonaws.bedrockagentruntime#FlowFailureEvent": {
@@ -3403,7 +3403,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a failure that occurred at the flow level during an async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Contains information about a failure that occurred at the flow level during a flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3484,7 +3484,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an input field provided to a flow during an async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Represents an input field provided to a flow during a flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3619,7 +3619,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an output field produced by a flow during an async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Represents an output field produced by a flow during a flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -4568,7 +4568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the flow definition snapshot used for an asynchronous execution. The snapshot represents the flow metadata and definition as it existed at the time the asynchronous execution was started. Note that even if the flow is edited after an execution starts, the snapshot connected to the execution remains unchanged.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Retrieves the flow definition snapshot used for a flow execution. The snapshot represents the flow metadata and definition as it existed at the time the execution was started. Note that even if the flow is edited after an execution starts, the snapshot connected to the execution remains unchanged.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -4591,7 +4591,7 @@
                 "flowAliasIdentifier": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowAliasIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the flow alias used for the async execution.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the flow alias used for the flow execution.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4599,7 +4599,7 @@
                 "executionIdentifier": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the async execution.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the flow execution.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4622,28 +4622,28 @@
                 "flowAliasIdentifier": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowAliasIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the flow alias used for the async execution.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the flow alias used for the flow execution.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "flowVersion": {
                     "target": "com.amazonaws.bedrockagentruntime#Version",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the flow used for the async execution.</p>",
+                        "smithy.api#documentation": "<p>The version of the flow used for the flow execution.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "executionRoleArn": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that's used by the async execution.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that's used by the flow execution.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "definition": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The flow definition used for the async execution, including the nodes, connections, and configuration at the time when the execution started.</p> <p>The definition returns as a string that follows the structure of a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_FlowDefinition.html\">FlowDefinition</a> object.</p>",
+                        "smithy.api#documentation": "<p>The flow definition used for the flow execution, including the nodes, connections, and configuration at the time when the execution started.</p> <p>The definition returns as a string that follows the structure of a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_FlowDefinition.html\">FlowDefinition</a> object.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4684,7 +4684,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves details about a specific asynchronous execution of a flow, including its status, start and end times, and any errors that occurred during execution.</p>",
+                "smithy.api#documentation": "<p>Retrieves details about a specific flow execution, including its status, start and end times, and any errors that occurred during execution.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -4715,7 +4715,7 @@
                 "executionIdentifier": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the async execution to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the flow execution to retrieve.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4731,34 +4731,34 @@
                 "executionArn": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the async execution.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the flow execution.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the async execution.</p> <p>Async executions time out after 24 hours.</p>",
+                        "smithy.api#documentation": "<p>The current status of the flow execution.</p> <p>Flow executions time out after 24 hours.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "startedAt": {
                     "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the async execution started.</p>",
+                        "smithy.api#documentation": "<p>The timestamp when the flow execution started.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "endedAt": {
                     "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the async execution ended. This field is only populated when the execution has completed, failed, timed out, or been aborted.</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the flow execution ended. This field is only populated when the execution has completed, failed, timed out, or been aborted.</p>"
                     }
                 },
                 "errors": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of errors that occurred during the async execution. Each error includes an error code, message, and the node where the error occurred, if applicable.</p>"
+                        "smithy.api#documentation": "<p>A list of errors that occurred during the flow execution. Each error includes an error code, message, and the node where the error occurred, if applicable.</p>"
                     }
                 },
                 "flowAliasIdentifier": {
@@ -6818,6 +6818,12 @@
                         "smithy.api#documentation": "<p> Specifies the configurations for streaming. </p> <note> <p>To use agent streaming, you need permissions to perform the <code>bedrock:InvokeModelWithResponseStream</code> action.</p> </note>"
                     }
                 },
+                "promptCreationConfigurations": {
+                    "target": "com.amazonaws.bedrockagentruntime#PromptCreationConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies parameters that control how the service populates the agent prompt for an <code>InvokeAgent</code> request. You can control which aspects of previous invocations in the same agent session the service uses to populate the agent prompt. This gives you more granular control over the contextual history that is used to process the current request.</p>"
+                    }
+                },
                 "sourceArn": {
                     "target": "com.amazonaws.bedrockagentruntime#AWSResourceARN",
                     "traits": {
@@ -7134,6 +7140,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#StreamingConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p> Specifies the configurations for streaming. </p> <note> <p>To use agent streaming, you need permissions to perform the <code>bedrock:InvokeModelWithResponseStream</code> action.</p> </note>"
+                    }
+                },
+                "promptCreationConfigurations": {
+                    "target": "com.amazonaws.bedrockagentruntime#PromptCreationConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies parameters that control how the service populates the agent prompt for an <code>InvokeInlineAgent</code> request. You can control which aspects of previous invocations in the same agent session the service uses to populate the agent prompt. This gives you more granular control over the contextual history that is used to process the current request.</p>"
                     }
                 },
                 "inlineSessionState": {
@@ -7542,7 +7554,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists events that occurred during an asynchronous execution of a flow. Events provide detailed information about the execution progress, including node inputs and outputs, flow inputs and outputs, condition results, and failure events.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Lists events that occurred during a flow execution. Events provide detailed information about the execution progress, including node inputs and outputs, flow inputs and outputs, condition results, and failure events.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -7579,7 +7591,7 @@
                 "executionIdentifier": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the async execution.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the flow execution.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7617,7 +7629,7 @@
                 "flowExecutionEvents": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of events that occurred during the async execution. Events can include node inputs and outputs, flow inputs and outputs, condition results, and failure events.</p>",
+                        "smithy.api#documentation": "<p>A list of events that occurred during the flow execution. Events can include node inputs and outputs, flow inputs and outputs, condition results, and failure events.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7658,7 +7670,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all asynchronous executions for a flow. Results can be paginated and include summary information about each execution, such as status, start and end times, and the execution's Amazon Resource Name (ARN).</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Lists all executions of a flow. Results can be paginated and include summary information about each execution, such as status, start and end times, and the execution's Amazon Resource Name (ARN).</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -7694,7 +7706,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.bedrockagentruntime#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of async executions to return in a single response. If more executions exist than the specified maxResults value, a token is included in the response so that the remaining results can be retrieved.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of flow executions to return in a single response. If more executions exist than the specified <code>maxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -7716,7 +7728,7 @@
                 "flowExecutionSummaries": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of async execution summaries. Each summary includes the execution ARN, flow identifier, flow alias identifier, flow version, status, and timestamps.</p>",
+                        "smithy.api#documentation": "<p>A list of flow execution summaries. Each summary includes the execution ARN, flow identifier, flow alias identifier, flow version, status, and timestamps.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8490,7 +8502,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the content of a flow node's input or output field for an async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Contains the content of a flow node's input or output field for a flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -8527,7 +8539,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a failure that occurred at a specific node during a flow's async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Contains information about a failure that occurred at a specific node during a flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -8557,7 +8569,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the inputs provided to a specific node during a flow's async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Contains information about the inputs provided to a specific node during a flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -8580,7 +8592,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an input field provided to a node during a flow's async execution.</p>",
+                "smithy.api#documentation": "<p>Represents an input field provided to a node during a flow execution.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -8634,7 +8646,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the outputs produced by a specific node during a flow's async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Contains information about the outputs produced by a specific node during a flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -8657,7 +8669,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an output field produced by a node during a flow's async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Represents an output field produced by a node during a flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -9579,6 +9591,30 @@
                 "smithy.api#length": {
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PromptCreationConfigurations": {
+            "type": "structure",
+            "members": {
+                "previousConversationTurnsToInclude": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of previous conversations from the ongoing agent session to include in the conversation history of the agent prompt, during the current invocation. This gives you more granular control over the context that the model is made aware of, and helps the model remove older context which is no longer useful during the ongoing agent session.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "excludePreviousThinkingSteps": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If <code>true</code>, the service removes any content between <code>&lt;thinking&gt;</code> tags from previous conversations in an agent session. The service will only remove content from already processed turns. This helps you remove content which might not be useful for current and subsequent invocations. This can reduce the input token count and potentially save costs. The default value is <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies parameters that control how the service populates the agent prompt for an <code>InvokeAgent</code> or <code>InvokeInlineAgent</code> request. You can control which aspects of previous invocations in the same agent session the service uses to populate the agent prompt. This gives you more granular control over the contextual history that is used to process the current request.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#PromptOverrideConfiguration": {
@@ -11856,7 +11892,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a condition that was satisfied during a condition node evaluation in a flow's async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Represents a condition that was satisfied during a condition node evaluation in a flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -12223,7 +12259,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous execution of an Amazon Bedrock flow. Unlike synchronous flows that run until completion or time out after five minutes, you can run asynchronous flows for longer durations. Asynchronous flows also yield control so that your application can perform other tasks.</p> <p>This operation returns an Amazon Resource Name (ARN) that you can use to track and manage your flow's async execution.</p> <note> <p>Asynchronous flows is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
+                "smithy.api#documentation": "<p>Starts an execution of an Amazon Bedrock flow. Unlike flows that run until completion or time out after five minutes, flow executions let you run flows asynchronously for longer durations. Flow executions also yield control so that your application can perform other tasks.</p> <p>This operation returns an Amazon Resource Name (ARN) that you can use to track and manage your flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -12245,7 +12281,7 @@
                 "flowAliasIdentifier": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowAliasIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the flow alias to use for the async execution.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the flow alias to use for the flow execution.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -12253,20 +12289,20 @@
                 "flowExecutionName": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name for the async execution. If you don't provide one, a system-generated name is used.</p>"
+                        "smithy.api#documentation": "<p>The unique name for the flow execution. If you don't provide one, a system-generated name is used.</p>"
                     }
                 },
                 "inputs": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowInputs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input data required for the async execution. This must match the input schema defined in the flow.</p>",
+                        "smithy.api#documentation": "<p>The input data required for the flow execution. This must match the input schema defined in the flow.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "modelPerformanceConfiguration": {
                     "target": "com.amazonaws.bedrockagentruntime#ModelPerformanceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The performance settings for the foundation model used in the async execution.</p>"
+                        "smithy.api#documentation": "<p>The performance settings for the foundation model used in the flow execution.</p>"
                     }
                 }
             },
@@ -12280,7 +12316,7 @@
                 "executionArn": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the async execution.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the flow execution.</p>"
                     }
                 }
             },
@@ -12323,7 +12359,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops an Amazon Bedrock flow's asynchronous execution. This operation prevents further processing of the flow and changes the execution status to <code>Aborted</code>.</p>",
+                "smithy.api#documentation": "<p>Stops an Amazon Bedrock flow's execution. This operation prevents further processing of the flow and changes the execution status to <code>Aborted</code>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -12353,7 +12389,7 @@
                 "executionIdentifier": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the async execution to stop.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the flow execution to stop.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -12369,13 +12405,13 @@
                 "executionArn": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the async execution that was stopped.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the flow execution that was stopped.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowExecutionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated status of the async execution after the stop request. This will typically be ABORTED if the execution was successfully stopped.</p>",
+                        "smithy.api#documentation": "<p>The updated status of the flow execution after the stop request. This will typically be ABORTED if the execution was successfully stopped.</p>",
                         "smithy.api#required": {}
                     }
                 }

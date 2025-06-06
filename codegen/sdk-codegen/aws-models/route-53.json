@@ -3473,6 +3473,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ap-southeast-7"
                     }
+                },
+                "ap_east_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-east-2"
+                    }
                 }
             },
             "traits": {
@@ -10932,6 +10938,12 @@
                     "traits": {
                         "smithy.api#enumValue": "us-gov-west-1"
                     }
+                },
+                "ap_east_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-east-2"
+                    }
                 }
             },
             "traits": {
@@ -12589,6 +12601,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ap-southeast-7"
+                    }
+                },
+                "ap_east_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-east-2"
                     }
                 }
             },

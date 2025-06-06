@@ -125,7 +125,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates one or more faces with an existing UserID. Takes an array of\n        <code>FaceIds</code>. Each <code>FaceId</code> that are present in the <code>FaceIds</code>\n      list is associated with the provided UserID. The maximum number of total <code>FaceIds</code>\n      per UserID is 100. </p>\n         <p>The <code>UserMatchThreshold</code> parameter specifies the minimum user match confidence\n      required for the face to be associated with a UserID that has at least one <code>FaceID</code>\n      already associated. This ensures that the <code>FaceIds</code> are associated with the right\n      UserID. The value ranges from 0-100 and default value is 75. </p>\n         <p>If successful, an array of <code>AssociatedFace</code> objects containing the associated\n        <code>FaceIds</code> is returned. If a given face is already associated with the given\n        <code>UserID</code>, it will be ignored and will not be returned in the response. If a given\n      face is already associated to a different <code>UserID</code>, isn't found in the collection,\n      doesn’t meet the <code>UserMatchThreshold</code>, or there are already 100 faces associated\n      with the <code>UserID</code>, it will be returned as part of an array of\n        <code>UnsuccessfulFaceAssociations.</code>\n         </p>\n         <p>The <code>UserStatus</code> reflects the status of an operation which updates a UserID\n      representation with a list of given faces. The <code>UserStatus</code> can be: </p>\n         <ul>\n            <li>\n               <p>ACTIVE - All associations or disassociations of FaceID(s) for a UserID are\n          complete.</p>\n            </li>\n            <li>\n               <p>CREATED - A UserID has been created, but has no FaceID(s) associated with it.</p>\n            </li>\n            <li>\n               <p>UPDATING - A UserID is being updated and there are current associations or\n          disassociations of FaceID(s) taking place.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Associates one or more faces with an existing UserID. Takes an array of\n        <code>FaceIds</code>. Each <code>FaceId</code> that are present in the <code>FaceIds</code>\n      list is associated with the provided UserID. The number of FaceIds that can be used as input\n      in a single request is limited to 100.</p>\n         <p>Note that the total number of faces that can be associated with a single\n      <code>UserID</code> is also limited to 100. Once a <code>UserID</code> has 100 faces\n      associated with it, no additional faces can be added. If more API calls are made after the\n      limit is reached, a <code>ServiceQuotaExceededException</code> will result.</p>\n         <p>The <code>UserMatchThreshold</code> parameter specifies the minimum user match confidence\n      required for the face to be associated with a UserID that has at least one <code>FaceID</code>\n      already associated. This ensures that the <code>FaceIds</code> are associated with the right\n      UserID. The value ranges from 0-100 and default value is 75. </p>\n         <p>If successful, an array of <code>AssociatedFace</code> objects containing the associated\n        <code>FaceIds</code> is returned. If a given face is already associated with the given\n        <code>UserID</code>, it will be ignored and will not be returned in the response. If a given\n      face is already associated to a different <code>UserID</code>, isn't found in the collection,\n      doesn’t meet the <code>UserMatchThreshold</code>, or there are already 100 faces associated\n      with the <code>UserID</code>, it will be returned as part of an array of\n        <code>UnsuccessfulFaceAssociations.</code>\n         </p>\n         <p>The <code>UserStatus</code> reflects the status of an operation which updates a UserID\n      representation with a list of given faces. The <code>UserStatus</code> can be: </p>\n         <ul>\n            <li>\n               <p>ACTIVE - All associations or disassociations of FaceID(s) for a UserID are\n          complete.</p>\n            </li>\n            <li>\n               <p>CREATED - A UserID has been created, but has no FaceID(s) associated with it.</p>\n            </li>\n            <li>\n               <p>UPDATING - A UserID is being updated and there are current associations or\n          disassociations of FaceID(s) taking place.</p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
                         "title": "AssociateFaces",
@@ -702,6 +702,72 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.rekognition#CelebrityRecognition"
+            }
+        },
+        "com.amazonaws.rekognition#Challenge": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.rekognition#ChallengeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the challenge being used for the Face Liveness session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.rekognition#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the challenge being used for the Face Liveness session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the type and version of the challenge being used for the Face Liveness session.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#ChallengePreference": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.rekognition#ChallengeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of challenges that have been selected for the Face Liveness session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Versions": {
+                    "target": "com.amazonaws.rekognition#Versions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the challenges that have been selected for the Face Liveness session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An ordered list of preferred challenge type and versions.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#ChallengePreferences": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#ChallengePreference"
+            }
+        },
+        "com.amazonaws.rekognition#ChallengeType": {
+            "type": "enum",
+            "members": {
+                "FACE_MOVEMENT_AND_LIGHT_CHALLENGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FaceMovementAndLightChallenge"
+                    }
+                },
+                "FACE_MOVEMENT_CHALLENGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FaceMovementChallenge"
+                    }
+                }
             }
         },
         "com.amazonaws.rekognition#ClientRequestToken": {
@@ -1645,6 +1711,12 @@
                     "target": "com.amazonaws.rekognition#AuditImagesLimit",
                     "traits": {
                         "smithy.api#documentation": "<p>Number of audit images to be returned back. Takes an integer between 0-4. Any integer less\n      than 0 will return 0, any integer above 4 will return 4 images in the response. By default, it\n      is set to 0. The limit is best effort and is based on the actual duration of the\n      selfie-video.</p>"
+                    }
+                },
+                "ChallengePreferences": {
+                    "target": "com.amazonaws.rekognition#ChallengePreferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates preferred challenge types and versions for the Face Liveness session to be created.</p>"
                     }
                 }
             },
@@ -3721,7 +3793,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model. </p>\n         <p>You specify which version of a model version to use by using the <code>ProjectVersionArn</code> input\n      parameter. </p>\n         <p>You pass the input image as base64-encoded image bytes or as a reference to an image in\n         an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing\n         image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p>\n         <p> For each object that the model version detects on an image, the API returns a\n            (<code>CustomLabel</code>) object in an array (<code>CustomLabels</code>). Each\n            <code>CustomLabel</code> object provides the label name (<code>Name</code>), the level\n         of confidence that the image contains the object (<code>Confidence</code>), and object\n         location information, if it exists, for the label on the image (<code>Geometry</code>).\n         Note that for the <code>DetectCustomLabelsLabels</code> operation, <code>Polygons</code>\n         are not returned in the <code>Geometry</code> section of the response.</p>\n         <p>To filter labels that are returned, specify a value for <code>MinConfidence</code>.\n         <code>DetectCustomLabelsLabels</code> only returns labels with a confidence that's higher than\n         the specified value.\n\n         The value of <code>MinConfidence</code> maps to the assumed threshold values\n         created during training. For more information, see <i>Assumed threshold</i>\n         in the Amazon Rekognition Custom Labels Developer Guide. \n         Amazon Rekognition Custom Labels metrics expresses an assumed threshold as a floating point value between 0-1. The range of\n         <code>MinConfidence</code> normalizes the threshold value to a percentage value (0-100). Confidence\n         responses from <code>DetectCustomLabels</code> are also returned as a percentage. \n         You can use <code>MinConfidence</code> to change the precision and recall or your model. \n         For more information, see \n         <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p>\n         <p>If you don't specify a value for <code>MinConfidence</code>,  <code>DetectCustomLabels</code>\n      returns labels based on the assumed threshold of each label.</p>\n         <p>This is a stateless API operation. That is, the operation does not persist any\n         data.</p>\n         <p>This operation requires permissions to perform the\n         <code>rekognition:DetectCustomLabels</code> action. </p>\n         <p>For more information, see \n      <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model. </p>\n         <p>You specify which version of a model version to use by using the <code>ProjectVersionArn</code> input\n      parameter. </p>\n         <p>You pass the input image as base64-encoded image bytes or as a reference to an image in\n         an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing\n         image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p>\n         <p> For each object that the model version detects on an image, the API returns a \n         (<code>CustomLabel</code>) object in an array (<code>CustomLabels</code>).\n         Each <code>CustomLabel</code> object provides the label name (<code>Name</code>), the level\n         of confidence that the image contains the object (<code>Confidence</code>), and \n         object location information, if it exists,  for the label on the image (<code>Geometry</code>). </p>\n         <p>To filter labels that are returned, specify a value for <code>MinConfidence</code>.\n         <code>DetectCustomLabelsLabels</code> only returns labels with a confidence that's higher than\n         the specified value.\n\n         The value of <code>MinConfidence</code> maps to the assumed threshold values\n         created during training. For more information, see <i>Assumed threshold</i>\n         in the Amazon Rekognition Custom Labels Developer Guide. \n         Amazon Rekognition Custom Labels metrics expresses an assumed threshold as a floating point value between 0-1. The range of\n         <code>MinConfidence</code> normalizes the threshold value to a percentage value (0-100). Confidence\n         responses from <code>DetectCustomLabels</code> are also returned as a percentage. \n         You can use <code>MinConfidence</code> to change the precision and recall or your model. \n         For more information, see \n         <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p>\n         <p>If you don't specify a value for <code>MinConfidence</code>,  <code>DetectCustomLabels</code>\n      returns labels based on the assumed threshold of each label.</p>\n         <p>This is a stateless API operation. That is, the operation does not persist any\n         data.</p>\n         <p>This operation requires permissions to perform the\n         <code>rekognition:DetectCustomLabels</code> action. </p>\n         <p>For more information, see \n      <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To detect custom labels in an image with an Amazon Rekognition Custom Labels model",
@@ -4909,7 +4981,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The emotions that appear to be expressed on the face, and the confidence level in the\n      determination. The API is only making a determination of the physical appearance of a person's\n      face. It is not a determination of the person’s internal emotional state and should not be\n      used in such a way. For example, a person pretending to have a sad face might not be sad\n      emotionally.</p>"
+                "smithy.api#documentation": "<p>The API returns a prediction of an emotion based on a person's facial expressions, along with \n      the confidence level for the predicted emotion. It is not a determination of the person’s internal emotional \n      state and should not be used in such a way. For example, a person pretending to have a sad face might not \n      be sad emotionally. The API is not intended to be used, and you may not use it, in a manner that violates \n      the EU Artificial Intelligence Act or any other applicable law.</p>"
             }
         },
         "com.amazonaws.rekognition#EmotionName": {
@@ -6159,6 +6231,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A set of images from the Face Liveness video that can be used for audit purposes. It\n      includes a bounding box of the face and the Base64-encoded bytes that return an image. If the\n      CreateFaceLivenessSession request included an OutputConfig argument, the image will be\n      uploaded to an S3Object specified in the output configuration. If no Amazon S3 bucket is defined,\n      raw bytes are sent instead.</p>"
                     }
+                },
+                "Challenge": {
+                    "target": "com.amazonaws.rekognition#Challenge",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information regarding the challenge type used for the Face Liveness check.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6620,7 +6698,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the path tracking results of a Amazon Rekognition Video analysis started by <a>StartPersonTracking</a>.</p>\n         <p>The person path tracking operation is started by a call to <code>StartPersonTracking</code>\n     which returns a job identifier (<code>JobId</code>). When the operation finishes, Amazon Rekognition Video publishes a completion status to\n     the Amazon Simple Notification Service topic registered in the initial call to <code>StartPersonTracking</code>.</p>\n         <p>To get the results of the person path tracking operation, first check \n       that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>.\n     If so, call  <a>GetPersonTracking</a> and pass the job identifier\n     (<code>JobId</code>) from the initial call to <code>StartPersonTracking</code>.</p>\n         <p>\n            <code>GetPersonTracking</code> returns an array, <code>Persons</code>, of tracked persons and the time(s) their \n       paths were tracked in the video. </p>\n         <note>\n            <p>\n               <code>GetPersonTracking</code> only returns the default  \n       facial attributes (<code>BoundingBox</code>, <code>Confidence</code>, \n       <code>Landmarks</code>, <code>Pose</code>, and <code>Quality</code>). The other facial attributes listed\n       in the <code>Face</code> object of the following response syntax are not returned. </p>\n            <p>For more information, see FaceDetail in the Amazon Rekognition Developer Guide.</p>\n         </note>\n         <p>By default, the array is sorted by the time(s) a person's path is tracked in the video.\n      You can sort by tracked persons by specifying <code>INDEX</code> for the <code>SortBy</code> input parameter.</p>\n         <p>Use the <code>MaxResults</code> parameter to limit the number of items returned. If there are more results than\n   specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set\n   of results. To get the next page of results, call <code>GetPersonTracking</code> and populate the <code>NextToken</code> request parameter with the token\n    value returned from the previous call to <code>GetPersonTracking</code>.</p>",
+                "smithy.api#documentation": "<note>\n            <p>\n               <i>End of support notice:</i> On October 31, 2025, AWS will discontinue\n         support for Amazon Rekognition People Pathing. After October 31, 2025, you will no\n         longer be able to use the Rekognition People Pathing capability. For more information,\n         visit this <a href=\"https://aws.amazon.com/blogs/machine-learning/transitioning-from-amazon-rekognition-people-pathing-exploring-other-alternatives/\">blog post</a>.</p>\n         </note>\n         <p>Gets the path tracking results of a Amazon Rekognition Video analysis started by <a>StartPersonTracking</a>.</p>\n         <p>The person path tracking operation is started by a call to <code>StartPersonTracking</code>\n     which returns a job identifier (<code>JobId</code>). When the operation finishes, Amazon Rekognition Video publishes a completion status to\n     the Amazon Simple Notification Service topic registered in the initial call to <code>StartPersonTracking</code>.</p>\n         <p>To get the results of the person path tracking operation, first check \n       that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>.\n     If so, call  <a>GetPersonTracking</a> and pass the job identifier\n     (<code>JobId</code>) from the initial call to <code>StartPersonTracking</code>.</p>\n         <p>\n            <code>GetPersonTracking</code> returns an array, <code>Persons</code>, of tracked persons and the time(s) their \n       paths were tracked in the video. </p>\n         <note>\n            <p>\n               <code>GetPersonTracking</code> only returns the default  \n       facial attributes (<code>BoundingBox</code>, <code>Confidence</code>, \n       <code>Landmarks</code>, <code>Pose</code>, and <code>Quality</code>). The other facial attributes listed\n       in the <code>Face</code> object of the following response syntax are not returned. </p>\n            <p>For more information, see FaceDetail in the Amazon Rekognition Developer Guide.</p>\n         </note>\n         <p>By default, the array is sorted by the time(s) a person's path is tracked in the video.\n      You can sort by tracked persons by specifying <code>INDEX</code> for the <code>SortBy</code> input parameter.</p>\n         <p>Use the <code>MaxResults</code> parameter to limit the number of items returned. If there are more results than\n   specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set\n   of results. To get the next page of results, call <code>GetPersonTracking</code> and populate the <code>NextToken</code> request parameter with the token\n    value returned from the previous call to <code>GetPersonTracking</code>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -13959,7 +14037,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the asynchronous tracking of a person's path in a stored video.</p>\n         <p>Amazon Rekognition Video can track the path of people in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name\n       and the filename of the video. <code>StartPersonTracking</code>\n       returns a job identifier (<code>JobId</code>) which you use to get the results of the operation.\n       When label detection is finished, Amazon Rekognition publishes a completion status\n       to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>. </p>\n         <p>To get the results of the person detection operation, first check that the status value published to the Amazon SNS\n       topic is <code>SUCCEEDED</code>. If so, call  <a>GetPersonTracking</a> and pass the job identifier\n      (<code>JobId</code>) from the initial call to <code>StartPersonTracking</code>.</p>",
+                "smithy.api#documentation": "<note>\n            <p>\n               <i>End of support notice:</i> On October 31, 2025, AWS will discontinue\n         support for Amazon Rekognition People Pathing. After October 31, 2025, you will no\n         longer be able to use the Rekognition People Pathing capability. For more information,\n         visit this <a href=\"https://aws.amazon.com/blogs/machine-learning/transitioning-from-amazon-rekognition-people-pathing-exploring-other-alternatives/\">blog post</a>.</p>\n         </note>\n         <p>Starts the asynchronous tracking of a person's path in a stored video.</p>\n         <p>Amazon Rekognition Video can track the path of people in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name\n       and the filename of the video. <code>StartPersonTracking</code>\n       returns a job identifier (<code>JobId</code>) which you use to get the results of the operation.\n       When label detection is finished, Amazon Rekognition publishes a completion status\n       to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>. </p>\n         <p>To get the results of the person detection operation, first check that the status value published to the Amazon SNS\n       topic is <code>SUCCEEDED</code>. If so, call  <a>GetPersonTracking</a> and pass the job identifier\n      (<code>JobId</code>) from the initial call to <code>StartPersonTracking</code>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -15934,6 +16012,16 @@
                 "smithy.api#documentation": "<p>Contains the Amazon S3 bucket location of the validation data for a model training job. </p>\n         <p>The validation data includes error information for individual JSON Lines in the dataset.\n         For more information, see <i>Debugging a Failed Model Training</i> in the\n         Amazon Rekognition Custom Labels Developer Guide. </p>\n         <p>You get the <code>ValidationData</code> object for the training dataset (<a>TrainingDataResult</a>)\n         and the test dataset (<a>TestingDataResult</a>) by calling <a>DescribeProjectVersions</a>. </p>\n         <p>The assets array contains a single <a>Asset</a> object. \n         The <a>GroundTruthManifest</a> field of the Asset object contains the S3 bucket location of\n         the validation data. \n</p>"
             }
         },
+        "com.amazonaws.rekognition#Version": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 11
+                },
+                "smithy.api#pattern": "^(0|[1-9]\\d{0,2})\\.(0|[1-9]\\d{0,2})\\.(0|[1-9]\\d{0,2})$"
+            }
+        },
         "com.amazonaws.rekognition#VersionDescription": {
             "type": "string",
             "traits": {
@@ -15964,6 +16052,26 @@
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.rekognition#Versions": {
+            "type": "structure",
+            "members": {
+                "Minimum": {
+                    "target": "com.amazonaws.rekognition#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired minimum version for the challenge.</p>"
+                    }
+                },
+                "Maximum": {
+                    "target": "com.amazonaws.rekognition#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired maximum version for the challenge.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object specifying the acceptable range of challenge versions.</p>"
             }
         },
         "com.amazonaws.rekognition#Video": {

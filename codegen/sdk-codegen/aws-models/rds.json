@@ -3026,7 +3026,7 @@
                 "ConnectionBorrowTimeout": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds for a proxy to wait for a connection to become available in the connection pool. This setting only applies when the\n        proxy has opened its maximum number of connections and all connections are busy with client sessions.</p>\n         <p>Default: <code>120</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be between 0 and 3600.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of seconds for a proxy to wait for a connection to become available in the connection pool. This setting only applies when the\n        proxy has opened its maximum number of connections and all connections are busy with client sessions.</p>\n         <p>Default: <code>120</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be between 0 and 300.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "SessionPinningFilters": {
@@ -3038,7 +3038,7 @@
                 "InitQuery": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Add an initialization query, or modify the current one. You can specify one or more SQL statements for\n            the proxy to run when opening each new database connection. The setting is\n            typically used with <code>SET</code> statements to make sure that each\n            connection has identical settings. Make sure that the query you add is valid. To\n            include multiple variables in a single <code>SET</code> statement, use comma\n            separators.</p>\n         <p>For example: <code>SET variable1=value1, variable2=value2</code>\n         </p>\n         <p>For multiple statements, use semicolons as the separator.</p>\n         <p>Default: no initialization query</p>"
+                        "smithy.api#documentation": "<p>Add an initialization query, or modify the current one. You can specify one or more SQL statements for the proxy to run when opening each new database connection. \n            The setting is typically used with <code>SET</code> statements to make sure that each connection has identical settings. \n            Make sure the query added here is valid. This is an optional field, so you can choose to leave it empty.\n            For including multiple variables in a single SET statement, use a comma separator.</p>\n         <p>For example: <code>SET variable1=value1, variable2=value2</code>\n         </p>\n         <p>Default: no initialization query</p>"
                     }
                 }
             },
@@ -3076,7 +3076,7 @@
                 "InitQuery": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more SQL statements for the proxy to run when opening each new database connection.\n        Typically used with <code>SET</code> statements to make sure that each connection has identical\n        settings such as time zone and character set. This setting is empty by default.\n        For multiple statements, use semicolons as the separator.\n        You can also include multiple variables in a single <code>SET</code> statement, such as\n        <code>SET x=1, y=2</code>.</p>"
+                        "smithy.api#documentation": "<p>One or more SQL statements for the proxy to run when opening each new database connection. \n        The setting is typically used with <code>SET</code> statements to make sure that each connection has identical settings. \n        The query added here must be valid. For including multiple variables in a single SET statement, use a comma separator. \n        This is an optional field.</p>\n         <p>For example: <code>SET variable1=value1, variable2=value2</code>\n         </p>"
                     }
                 }
             },
@@ -6197,7 +6197,7 @@
                 "ComputeRedundancy": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to create standby DB shard groups for the DB shard group. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>0 - Creates a DB shard group without a standby DB shard group. This is the default value.</p>\n            </li>\n            <li>\n               <p>1 - Creates a DB shard group with a standby DB shard group in a different Availability Zone (AZ).</p>\n            </li>\n            <li>\n               <p>2 - Creates a DB shard group with two standby DB shard groups in two different AZs.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether to create standby standby DB data access shard for the DB shard group. \n            Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>0 - Creates a DB shard group without a standby DB data access shard. This is the default value.</p>\n            </li>\n            <li>\n               <p>1 - Creates a DB shard group with a standby DB data access shard in a different Availability Zone (AZ).</p>\n            </li>\n            <li>\n               <p>2 - Creates a DB shard group with two standby DB data access shard in two different AZs.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxACU": {
@@ -7498,6 +7498,12 @@
                 },
                 "TagList": {
                     "target": "com.amazonaws.rds#TagList"
+                },
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.rds#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a user-supplied global database cluster identifier. This identifier is the unique key that\n        identifies a global database cluster.</p>"
+                    }
                 },
                 "GlobalWriteForwardingStatus": {
                     "target": "com.amazonaws.rds#WriteForwardingStatus",
@@ -11864,7 +11870,7 @@
                 "Subnets": {
                     "target": "com.amazonaws.rds#SubnetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains a list of <code>Subnet</code> elements.</p>"
+                        "smithy.api#documentation": "<p>Contains a list of <code>Subnet</code> elements. The list of subnets shown \n            here might not reflect the current state of your VPC. For the most up-to-date information, \n            we recommend checking your VPC configuration directly.</p>"
                     }
                 },
                 "DBSubnetGroupArn": {
@@ -18727,7 +18733,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Downloads all or a portion of the specified log file, up to 1 MB in size.</p>\n         <p>This command doesn't apply to RDS Custom.</p>",
+                "smithy.api#documentation": "<p>Downloads all or a portion of the specified log file, up to 1 MB in size.</p>\n         <p>This command doesn't apply to RDS Custom.</p>\n         <note>\n            <p>This operation uses resources on database instances. Because of this, we recommend publishing database logs to CloudWatch and then \n                using the GetLogEvents operation. For more information, \n                see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html\">GetLogEvents</a> in the <i>Amazon CloudWatch Logs API Reference</i>.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "To download a DB log file",
