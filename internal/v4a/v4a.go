@@ -8,6 +8,7 @@ import (
 	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/sha256"
+	"crypto/subtle"
 	"encoding/hex"
 	"fmt"
 	"hash"
@@ -127,10 +128,7 @@ func deriveKeyFromAccessKeyPair(accessKey, secretKey string) (*ecdsa.PrivateKey,
 
 		// Check key first before calling SetBytes if key key is in fact a valid candidate.
 		// This ensures the byte slice is the correct length (32-bytes) to compare in constant-time
-		cmp, err := signerCrypto.ConstantTimeByteCompare(key, nMinusTwoP256.Bytes())
-		if err != nil {
-			return nil, err
-		}
+		cmp := subtle.ConstantTimeCompare(key, nMinusTwoP256.Bytes())
 		if cmp == -1 {
 			d.SetBytes(key)
 			break
@@ -290,7 +288,7 @@ func (s *httpSigner) Build() (signedRequest, error) {
 
 	unsignedHeaders := headers
 	if s.IsPreSign && !s.DisableHeaderHoisting {
-		urlValues := url.Values{}
+		var urlValues url.Values
 		urlValues, unsignedHeaders = buildQuery(v4Internal.AllowedQueryHoisting, unsignedHeaders)
 		for k := range urlValues {
 			query[k] = urlValues[k]
