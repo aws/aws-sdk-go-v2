@@ -160,11 +160,11 @@ make sandbox-go18
 When submitting a pull request please include a changelog file on a folder named `.changelog`.
 These are used to generate the content `CHANGELOG.md` and Release Notes. The format of the file is as follows:
 
-```
+```json
 {
-    "id": "12345678-1234-1234-1234-123456789012"
-    "type": "bugfix"
-    "collapse": true
+    "id": "12345678-1234-1234-1234-123456789012",
+    "type": "bugfix",
+    "collapse": true,
     "description": "Fix improper use of printf-style functions.",
     "modules": [
         ".",
@@ -178,7 +178,7 @@ These are used to generate the content `CHANGELOG.md` and Release Notes. The for
 }
 ```
 
-* id: a UUID. This should also be used for the name of the file, so if your id is `12345678-1234-1234-1234-123456789012` the file should be named `12345678-1234-1234-1234-123456789012.json/`
+* id: a UUID. This should also be used for the name of the file, so if your id is `12345678-1234-1234-1234-123456789012` the file should be named `12345678-1234-1234-1234-123456789012.json`
 * type: one of the following:
  * bugfix: Fixing an existing bug
  * Feature: Adding a new feature to an existing service
