@@ -1,0 +1,9 @@
+{
+    "id": "959b056d-4ae3-4f91-8c86-d0b82e0aac39",
+    "type": "bugfix",
+    "collapse": true,
+    "description": "Use built-in function for constant-time byte buffer comparison.",
+    "modules": [
+        "internal/v4a"
+    ]
+}
