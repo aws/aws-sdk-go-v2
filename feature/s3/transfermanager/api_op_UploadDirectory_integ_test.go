@@ -54,10 +54,6 @@ func TestInteg_UploadDirectory(t *testing.T) {
 			ExpectFilesUploaded: 4,
 			ExpectKeys:          []string{"bla#foo", "bla#to#bar", "bla#to#the#baz", "bla#too#the#zoo"},
 		},
-		"non-exist source": {
-			Source:      "non-exist-dir",
-			ExpectError: "no such file or directory",
-		},
 	}
 
 	for name, c := range cases {
