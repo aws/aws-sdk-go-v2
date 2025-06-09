@@ -9,6 +9,7 @@ import (
 	"sync"
 )
 
+// UploadDirectoryInput represents a request to the UploadDirectory() call
 type UploadDirectoryInput struct {
 	// Bucket where objects are uploaded to
 	Bucket string
@@ -41,14 +42,22 @@ type UploadDirectoryInput struct {
 	S3Delimiter string
 }
 
+// FileFilter is the callback to allow users to filter out unwanted files.
+// It is invoked for each file.
 type FileFilter interface {
+	// FilterFile take the file path and decides if the file
+	// should be uploaded
 	FilterFile(filePath string) bool
 }
 
+// PutRequestCallback is the callback mechanism to allow customers to update
+// individual PutObjectInput that the S3 Transfer Manager generates
 type PutRequestCallback interface {
+	// UpdateRequest preprocesses each PutObjectInput as customized
 	UpdateRequest(*PutObjectInput)
 }
 
+// UploadDirectoryOutput represents a response from the UploadDirectory() call
 type UploadDirectoryOutput struct {
 	// Total number of objects successfully uploaded
 	ObjectsUploaded int
@@ -57,6 +66,13 @@ type UploadDirectoryOutput struct {
 	ObjectsFailed int
 }
 
+// UploadDirectory traverses a local directory recursively/non-recursively and intelligently
+// uploads all valid files to S3 in parallel across multiple goroutines. You can configure
+// the concurrency, valid file filtering and object key naming through the Options and input parameters.
+//
+// Additional functional options can be provided to configure the individual directory
+// upload. These options are copies of the original Options instance, the client of which UploadDirectory is called from.
+// Modifying the options will not impact the original Client and Options instance.
 func (c *Client) UploadDirectory(ctx context.Context, input *UploadDirectoryInput, opts ...func(*Options)) (*UploadDirectoryOutput, error) {
 	fileInfo, err := os.Stat(input.Source)
 	if err != nil {
@@ -93,7 +109,7 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 	u.init()
 	ch := make(chan fileChunk)
 
-	for i := 0; i < u.options.Concurrency; i++ {
+	for i := 0; i < u.options.DirectoryConcurrency; i++ {
 		u.wg.Add(1)
 		go u.uploadFile(ctx, ch)
 	}
@@ -107,39 +123,36 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 		}
 
 		for _, f := range files {
+			if u.getErr() != nil {
+				break
+			}
+
 			path := filepath.Join(u.in.Source, f)
+			absPath, err := u.getAbsPath(path)
+			if err != nil {
+				u.setErr(fmt.Errorf("error when getting abs path of file %s", path))
+				break
+			} else if absPath == "" {
+				continue
+			}
+
+			fileInfo, err := os.Lstat(absPath)
+			if fileInfo.IsDir() {
+				continue
+			}
+
 			if u.in.Filter != nil && !u.in.Filter.FilterFile(path) {
 				continue
 			}
 			if u.in.S3Delimiter != "/" && strings.Contains(f, u.in.S3Delimiter) {
-				return nil, fmt.Errorf("file %s contains delimiter %s", f, u.in.S3Delimiter)
+				u.setErr(fmt.Errorf("file %s contains delimiter %s", f, u.in.S3Delimiter))
+				break
 			}
-			fileInfo, err := os.Lstat(path)
-			if err != nil {
-				return nil, err
+			if u.in.KeyPrefix == "" {
+				ch <- fileChunk{f, absPath}
+			} else {
+				ch <- fileChunk{u.in.KeyPrefix + u.in.S3Delimiter + f, absPath}
 			}
-			if fileInfo.Mode()&os.ModeSymlink == os.ModeSymlink {
-				if !u.in.FollowSymbolicLinks {
-					continue
-				}
-				path, err = u.traverseSymlink(path)
-				if err != nil {
-					return nil, err
-				}
-				fileInfo, err = os.Lstat(path)
-				if err != nil {
-					return nil, err
-				}
-			}
-
-			if fileInfo.IsDir() {
-				continue
-			}
-			if u.traversed[path] != nil {
-				return nil, fmt.Errorf("traversed duplicate path %s", path)
-			}
-			u.traversed[path] = struct{}{}
-			ch <- fileChunk{u.in.KeyPrefix + u.in.S3Delimiter + f, path}
 		}
 	}
 	close(ch)
@@ -158,6 +171,8 @@ func (u *directoryUploader) init() {
 	if u.in.S3Delimiter == "" {
 		u.in.S3Delimiter = "/"
 	}
+
+	u.traversed = make(map[string]interface{})
 }
 
 type fileChunk struct {
@@ -165,45 +180,30 @@ type fileChunk struct {
 	path string
 }
 
+// traverse recursively visits each folder and sends each
+// valid file's request to worker goroutines
 func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileChunk) {
 	if u.getErr() != nil {
 		return
 	}
 
-	fileInfo, err := os.Lstat(path)
+	absPath, err := u.getAbsPath(path)
 	if err != nil {
 		u.setErr(err)
 		return
-	}
-	absPath := path
-	if fileInfo.Mode()&os.ModeSymlink == os.ModeSymlink {
-		if !u.in.FollowSymbolicLinks {
-			return
-		}
-		absPath, err = u.traverseSymlink(absPath)
-		if err != nil {
-			u.setErr(err)
-			return
-		}
-	}
-
-	if u.traversed[absPath] != nil {
-		u.setErr(fmt.Errorf("traversed duplicate path: %s", absPath))
-		return
-	}
-	u.traversed[absPath] = struct{}{}
-
-	fileInfo, err = os.Lstat(absPath)
-	if err != nil {
-		u.setErr(err)
+	} else if absPath == "" {
 		return
 	}
 
+	var key string
 	if path == u.in.Source {
-		key := keyPrefix
+		key = keyPrefix
+	} else if keyPrefix == "" {
+		key = filepath.Base(path)
 	} else {
-		key := keyPrefix + u.in.S3Delimiter + filepath.Base(path)
+		key = keyPrefix + u.in.S3Delimiter + filepath.Base(path)
 	}
+	fileInfo, err := os.Lstat(absPath)
 	if fileInfo.IsDir() {
 		subFiles, err := u.traverseFolder(absPath)
 		if err != nil {
@@ -211,14 +211,14 @@ func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileChunk) 
 			return
 		}
 		for _, f := range subFiles {
-			u.traverse(path+f, key, ch)
+			u.traverse(filepath.Join(path, f), key, ch)
 		}
 	} else {
-		if u.in.Filter != nil && !u.in.Filter.FilterFile(absPath) {
+		if u.in.Filter != nil && !u.in.Filter.FilterFile(path) {
 			return
 		}
 		if u.in.S3Delimiter != "/" {
-			if n, d := fileInfo.Name(), u.in.S3Delimiter; strings.Contains(n, d) {
+			if n, d := filepath.Base(path), u.in.S3Delimiter; strings.Contains(n, d) {
 				u.setErr(fmt.Errorf("file %s contains delimiter %s", n, d))
 				return
 			}
@@ -227,6 +227,32 @@ func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileChunk) 
 	}
 }
 
+// getAbsPath resolves a path's desination absolute path with deduplication
+// in case any symlink causes traverse loop or repeated upload
+func (u *directoryUploader) getAbsPath(path string) (string, error) {
+	fileInfo, err := os.Lstat(path)
+	if err != nil {
+		return "", fmt.Errorf("error when retrieving info of file %s: %v", path, err)
+	}
+
+	if fileInfo.Mode()&os.ModeSymlink == os.ModeSymlink {
+		if !u.in.FollowSymbolicLinks {
+			return "", nil
+		}
+		path, err = u.traverseSymlink(path)
+		if err != nil {
+			return "", err
+		}
+	}
+	if u.traversed[path] != nil {
+		return "", fmt.Errorf("traversed duplicate path %s", path)
+	}
+	u.traversed[path] = struct{}{}
+
+	return path, nil
+}
+
+// traverseFolder returns subfiles at this level
 func (u *directoryUploader) traverseFolder(path string) ([]string, error) {
 	f, err := os.Open(path)
 	if err != nil {

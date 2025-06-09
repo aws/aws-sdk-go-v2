@@ -46,6 +46,7 @@ func New(s3Client S3APIClient, opts Options, optFns ...func(*Options)) *Client {
 	resolveGetObjectType(&opts)
 	resolvePartBodyMaxRetries(&opts)
 	resolveGetBufferSize(&opts)
+	resolveDirectoryConcurrency(&opts)
 
 	return &Client{
 		options: opts,

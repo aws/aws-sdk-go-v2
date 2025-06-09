@@ -96,6 +96,12 @@ func resolveGetBufferSize(o *Options) {
 	}
 }
 
+func resolveDirectoryConcurrency(o *Options) {
+	if o.DirectoryConcurrency == 0 {
+		o.DirectoryConcurrency = defaultTransferConcurrency
+	}
+}
+
 // Copy returns new copy of the Options
 func (o Options) Copy() Options {
 	to := o
