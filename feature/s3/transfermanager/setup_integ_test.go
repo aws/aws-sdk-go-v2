@@ -404,8 +404,16 @@ func testUploadDirectory(t *testing.T, bucket string, testData uploadDirectoryTe
 		delimiter = testData.Delimiter
 	}
 	expectObjects := map[string][]byte{}
+	source := filepath.Join(root, testData.Source)
+	if err := os.MkdirAll(source, os.ModePerm); err != nil {
+		t.Fatalf("error when creating test folder %v", err)
+	}
+	defer os.RemoveAll(source)
 	for f, size := range testData.FilesSize {
-		path := filepath.Join(root, testData.Source, strings.Replace(f, "/", string(os.PathSeparator), -1))
+		path := filepath.Join(source, strings.Replace(f, "/", string(os.PathSeparator), -1))
+		if err := os.MkdirAll(filepath.Dir(path), os.ModePerm); err != nil {
+			t.Fatalf("error when creating directory for file %s", path)
+		}
 		objectBuf := make([]byte, size)
 		_, err := rand.Read(objectBuf)
 		if err != nil {
@@ -419,7 +427,7 @@ func testUploadDirectory(t *testing.T, bucket string, testData uploadDirectoryTe
 		if err != nil {
 			t.Fatalf("error when writing test file %s: %v", path, err)
 		}
-		defer os.Remove(path)
+		// defer os.Remove(path)
 		key := strings.Replace(f, "/", delimiter, -1)
 		if testData.KeyPrefix != "" {
 			key = testData.KeyPrefix + delimiter + key
@@ -429,7 +437,7 @@ func testUploadDirectory(t *testing.T, bucket string, testData uploadDirectoryTe
 
 	out, err := s3TransferManagerClient.UploadDirectory(context.Background(), &UploadDirectoryInput{
 		Bucket:      bucket,
-		Source:      filepath.Join(root, testData.Source),
+		Source:      source,
 		Recursive:   testData.Recursive,
 		S3Delimiter: testData.Delimiter,
 		KeyPrefix:   testData.KeyPrefix,

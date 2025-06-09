@@ -85,12 +85,12 @@ func TestUploadDirectory(t *testing.T) {
 			expectKeys:          []string{"foo", "zoo/baz", "zoo/oii/yee"},
 			expectFilesUploaded: 3,
 		},
-		"single symlink recursively": {
-			source:         filepath.Join(root, "single-symlink"),
+		"folder with single file and symlink recursively": {
+			source:         filepath.Join(root, "single-file-dir"),
 			followSymLinks: true,
 			recursive:      true,
 			preprocessFunc: func(root string) (func() error, error) {
-				symlinkPath := filepath.Join(root, "single-symlink", "symFoo")
+				symlinkPath := filepath.Join(root, "single-file-dir", "symFoo")
 				postprocessFunc := func() error {
 					os.Remove(symlinkPath)
 					return nil
@@ -100,8 +100,8 @@ func TestUploadDirectory(t *testing.T) {
 				}
 				return postprocessFunc, nil
 			},
-			expectKeys:          []string{"symFoo"},
-			expectFilesUploaded: 1,
+			expectKeys:          []string{"symFoo", "foo"},
+			expectFilesUploaded: 2,
 		},
 		"folder containing both file and symlink": {
 			source:         filepath.Join(root, "multi-file-contain-symlink"),
@@ -118,8 +118,8 @@ func TestUploadDirectory(t *testing.T) {
 				}
 				return postprocessFunc, nil
 			},
-			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/symFoo"},
-			expectFilesUploaded: 4,
+			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/symFoo", "to/the/yee"},
+			expectFilesUploaded: 5,
 		},
 		"folder containing multi symlinks": {
 			source:         filepath.Join(root, "multi-file-contain-symlink"),
@@ -144,8 +144,8 @@ func TestUploadDirectory(t *testing.T) {
 
 				return postprocessFunc, nil
 			},
-			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/symFoo", "to/the/symBar"},
-			expectFilesUploaded: 5,
+			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/symFoo", "to/the/symBar", "to/the/yee"},
+			expectFilesUploaded: 6,
 		},
 		"folder containing multi symlinks but not follow": {
 			source:    filepath.Join(root, "multi-file-contain-symlink"),
@@ -169,8 +169,8 @@ func TestUploadDirectory(t *testing.T) {
 
 				return postprocessFunc, nil
 			},
-			expectKeys:          []string{"foo", "bar", "to/baz"},
-			expectFilesUploaded: 3,
+			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/yee"},
+			expectFilesUploaded: 4,
 		},
 		"folder containing files and symlink referring to folder": {
 			source:         filepath.Join(root, "multi-file-contain-symlink"),
@@ -187,15 +187,26 @@ func TestUploadDirectory(t *testing.T) {
 				}
 				return postprocessFunc, nil
 			},
-			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/symFoo/foo"},
-			expectFilesUploaded: 4,
+			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/symFoo/foo", "to/the/yee"},
+			expectFilesUploaded: 5,
 		},
 		"folder containing files and empty folder": {
-			source:              filepath.Join(root, "multi-file-contain-symlink"),
-			followSymLinks:      true,
-			recursive:           true,
-			expectKeys:          []string{"foo", "bar", "to/baz"},
-			expectFilesUploaded: 3,
+			source:         filepath.Join(root, "multi-file-contain-symlink"),
+			followSymLinks: true,
+			recursive:      true,
+			preprocessFunc: func(root string) (func() error, error) {
+				path := filepath.Join(root, "multi-file-contain-symlink", "to", "too")
+				postprocessFunc := func() error {
+					os.Remove(path)
+					return nil
+				}
+				if err := os.MkdirAll(path, os.ModePerm); err != nil {
+					return postprocessFunc, err
+				}
+				return postprocessFunc, nil
+			},
+			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/yee"},
+			expectFilesUploaded: 4,
 		},
 		"error when a file upload fails": {
 			source:    filepath.Join(root, "multi-file-with-subdir"),
@@ -282,8 +293,8 @@ func TestUploadDirectory(t *testing.T) {
 				}
 				return postprocessFunc, nil
 			},
-			expectKeys:          []string{"bla/foo", "bla/bar", "bla/to/baz", "bla/to/the/symFoo", "bla/to/symBar/foo"},
-			expectFilesUploaded: 5,
+			expectKeys:          []string{"bla/foo", "bla/bar", "bla/to/baz", "bla/to/the/symFoo", "bla/to/symBar/foo", "bla/to/the/yee"},
+			expectFilesUploaded: 6,
 		},
 		"folder containing symlink folder with prefix but non-recursive": {
 			source:         filepath.Join(root, "multi-file-contain-symlink"),
@@ -325,8 +336,8 @@ func TestUploadDirectory(t *testing.T) {
 				}
 				return postprocessFunc, nil
 			},
-			expectKeys:          []string{"bla#foo", "bla#bar", "bla#to#baz", "bla#to#the#symFoo", "bla#to#symBar#foo"},
-			expectFilesUploaded: 5,
+			expectKeys:          []string{"bla#foo", "bla#bar", "bla#to#baz", "bla#to#the#symFoo", "bla#to#symBar#foo", "bla#to#the#yee"},
+			expectFilesUploaded: 6,
 		},
 		"folder containing both file and symlink with keyprefix, custome delimiter and request callback": {
 			source:         filepath.Join(root, "multi-file-contain-symlink"),
@@ -351,8 +362,8 @@ func TestUploadDirectory(t *testing.T) {
 				}
 				return postprocessFunc, nil
 			},
-			expectKeys:          []string{"bla#foo", "bla#bar", "bla#to#baz/gotyou", "bla#to#the#symFoo", "bla#to#symBar#foo"},
-			expectFilesUploaded: 5,
+			expectKeys:          []string{"bla#foo", "bla#bar", "bla#to#baz/gotyou", "bla#to#the#symFoo", "bla#to#symBar#foo", "bla#to#the#yee"},
+			expectFilesUploaded: 6,
 		},
 	}
 
