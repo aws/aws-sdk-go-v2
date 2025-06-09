@@ -85,7 +85,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested operation would cause a conflict with the current state of a service\n            resource associated with the request. Resolve the conflict before retrying this\n            request.</p>",
+                "smithy.api#documentation": "<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -145,7 +145,7 @@
                 "desktopArn": {
                     "target": "com.amazonaws.workspacesthinclient#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n            WorkSpaces Secure Browser, or AppStream 2.0.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces, WorkSpaces Secure Browser, or AppStream 2.0.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -158,7 +158,7 @@
                 "softwareSetUpdateSchedule": {
                     "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance window.</p>"
                     }
                 },
                 "maintenanceWindow": {
@@ -182,13 +182,13 @@
                 "kmsKeyArn": {
                     "target": "com.amazonaws.workspacesthinclient#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key to use to encrypt the\n            environment.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key to use to encrypt the environment.</p>"
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.workspacesthinclient#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency\n         of the request. This lets you safely retry the request without accidentally performing the\n         same operation a second time. Passing the same value to a later call to an operation\n         requires that you also pass the same value for all other parameters. We recommend that you\n         use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of\n            value</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n         you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with different\n         parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of value</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -338,7 +338,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesthinclient#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency\n         of the request. This lets you safely retry the request without accidentally performing the\n         same operation a second time. Passing the same value to a later call to an operation\n         requires that you also pass the same value for all other parameters. We recommend that you\n         use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of\n            value</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n         you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with different\n         parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of value</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
                         "smithy.api#httpQuery": "clientToken",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -410,7 +410,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesthinclient#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency\n         of the request. This lets you safely retry the request without accidentally performing the\n         same operation a second time. Passing the same value to a later call to an operation\n         requires that you also pass the same value for all other parameters. We recommend that you\n         use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of\n            value</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n         you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with different\n         parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of value</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
                         "smithy.api#httpQuery": "clientToken",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -488,7 +488,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesthinclient#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency\n         of the request. This lets you safely retry the request without accidentally performing the\n         same operation a second time. Passing the same value to a later call to an operation\n         requires that you also pass the same value for all other parameters. We recommend that you\n         use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of\n            value</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n         you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with different\n         parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of value</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -610,13 +610,13 @@
                 "softwareSetUpdateSchedule": {
                     "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance window.</p>"
                     }
                 },
                 "softwareSetComplianceStatus": {
                     "target": "com.amazonaws.workspacesthinclient#DeviceSoftwareSetComplianceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes if the software currently installed on the device is a supported\n            version.</p>"
+                        "smithy.api#documentation": "<p>Describes if the software currently installed on the device is a supported version.</p>"
                     }
                 },
                 "softwareSetUpdateStatus": {
@@ -658,7 +658,7 @@
                 "kmsKeyArn": {
                     "target": "com.amazonaws.workspacesthinclient#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the\n            device.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the device.</p>"
                     }
                 },
                 "tags": {
@@ -846,7 +846,7 @@
                 "softwareSetUpdateSchedule": {
                     "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance window.</p>"
                     }
                 },
                 "lastConnectedAt": {
@@ -902,7 +902,7 @@
                 "desktopArn": {
                     "target": "com.amazonaws.workspacesthinclient#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n            WorkSpaces Secure Browser, or AppStream 2.0.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces, WorkSpaces Secure Browser, or AppStream 2.0.</p>"
                     }
                 },
                 "desktopEndpoint": {
@@ -932,7 +932,7 @@
                 "softwareSetUpdateSchedule": {
                     "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance window.</p>"
                     }
                 },
                 "maintenanceWindow": {
@@ -968,7 +968,7 @@
                 "softwareSetComplianceStatus": {
                     "target": "com.amazonaws.workspacesthinclient#EnvironmentSoftwareSetComplianceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes if the software currently installed on all devices in the environment is a\n            supported version.</p>"
+                        "smithy.api#documentation": "<p>Describes if the software currently installed on all devices in the environment is a supported version.</p>"
                     }
                 },
                 "createdAt": {
@@ -992,7 +992,7 @@
                 "kmsKeyArn": {
                     "target": "com.amazonaws.workspacesthinclient#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the\n            environment.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the environment.</p>"
                     }
                 },
                 "tags": {
@@ -1079,7 +1079,7 @@
                 "desktopArn": {
                     "target": "com.amazonaws.workspacesthinclient#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n            WorkSpaces Secure Browser, or AppStream 2.0.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces, WorkSpaces Secure Browser, or AppStream 2.0.</p>"
                     }
                 },
                 "desktopEndpoint": {
@@ -1103,7 +1103,7 @@
                 "softwareSetUpdateSchedule": {
                     "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance window.</p>"
                     }
                 },
                 "maintenanceWindow": {
@@ -1450,14 +1450,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.workspacesthinclient#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments unchanged.\n         Each pagination token expires after 24 hours. Using an expired pagination token will return\n         an <i>HTTP 400 InvalidToken error</i>.</p>",
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.workspacesthinclient#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n                <code>nextToken</code> to obtain further pages of results.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be\n            fewer than the specified maximum.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -1478,7 +1478,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.workspacesthinclient#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments unchanged.\n         Each pagination token expires after 24 hours. Using an expired pagination token will return\n         an <i>HTTP 400 InvalidToken error</i>.</p>"
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>"
                     }
                 }
             },
@@ -1533,14 +1533,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.workspacesthinclient#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments unchanged.\n         Each pagination token expires after 24 hours. Using an expired pagination token will return\n         an <i>HTTP 400 InvalidToken error</i>.</p>",
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.workspacesthinclient#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n                <code>nextToken</code> to obtain further pages of results.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be\n            fewer than the specified maximum.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -1561,7 +1561,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.workspacesthinclient#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments unchanged.\n         Each pagination token expires after 24 hours. Using an expired pagination token will return\n         an <i>HTTP 400 InvalidToken error</i>.</p>"
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>"
                     }
                 }
             },
@@ -1616,14 +1616,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.workspacesthinclient#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments unchanged.\n         Each pagination token expires after 24 hours. Using an expired pagination token will return\n         an <i>HTTP 400 InvalidToken error</i>.</p>",
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.workspacesthinclient#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n                <code>nextToken</code> to obtain further pages of results.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be\n            fewer than the specified maximum.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -1644,7 +1644,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.workspacesthinclient#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments unchanged.\n         Each pagination token expires after 24 hours. Using an expired pagination token will return\n         an <i>HTTP 400 InvalidToken error</i>.</p>"
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>"
                     }
                 }
             },
@@ -1695,7 +1695,7 @@
                 "resourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which you want to retrieve\n            tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1738,7 +1738,7 @@
                 "startTimeMinute": {
                     "target": "com.amazonaws.workspacesthinclient#Minute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minutes past the hour for the maintenance window start\n                (<code>00</code>-<code>59</code>).</p>"
+                        "smithy.api#documentation": "<p>The minutes past the hour for the maintenance window start (<code>00</code>-<code>59</code>).</p>"
                     }
                 },
                 "endTimeHour": {
@@ -1762,7 +1762,7 @@
                 "applyTimeOf": {
                     "target": "com.amazonaws.workspacesthinclient#ApplyTimeOf",
                     "traits": {
-                        "smithy.api#documentation": "<p>The option to set the maintenance window during the device local time or Universal\n            Coordinated Time (UTC).</p>"
+                        "smithy.api#documentation": "<p>The option to set the maintenance window during the device local time or Universal Coordinated Time (UTC).</p>"
                     }
                 }
             },
@@ -2285,7 +2285,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>Amazon WorkSpaces Thin Client is an affordable device built to work with Amazon Web Services End User\n            Computing (EUC) virtual desktops to provide users with a complete cloud desktop\n            solution. WorkSpaces Thin Client is a compact device designed to connect up to two monitors and USB\n            devices like a keyboard, mouse, headset, and webcam. To maximize endpoint security, WorkSpaces Thin Client\n            devices do not allow local data storage or installation of unapproved applications. The\n            WorkSpaces Thin Client device ships preloaded with device management software.</p>\n         <p>You can use these APIs to complete WorkSpaces Thin Client tasks, such as creating environments or\n            viewing devices. For more information about WorkSpaces Thin Client, including the required permissions to\n            use the service, see the <a href=\"https://docs.aws.amazon.com/workspaces-thin-client/latest/ag/\">Amazon WorkSpaces Thin Client Administrator Guide</a>. For\n            more information about using the Command Line Interface (CLI) to manage\n            your WorkSpaces Thin Client resources, see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/workspaces-thin-client/index.html\">WorkSpaces Thin Client section of the\n                    CLI Reference</a>.</p>",
+                "smithy.api#documentation": "<p>Amazon WorkSpaces Thin Client is an affordable device built to work with Amazon Web Services End User Computing (EUC) virtual desktops to provide users with a complete cloud desktop solution. WorkSpaces Thin Client is a compact device designed to connect up to two monitors and USB devices like a keyboard, mouse, headset, and webcam. To maximize endpoint security, WorkSpaces Thin Client devices do not allow local data storage or installation of unapproved applications. The WorkSpaces Thin Client device ships preloaded with device management software.</p> <p>You can use these APIs to complete WorkSpaces Thin Client tasks, such as creating environments or viewing devices. For more information about WorkSpaces Thin Client, including the required permissions to use the service, see the <a href=\"https://docs.aws.amazon.com/workspaces-thin-client/latest/ag/\">Amazon WorkSpaces Thin Client Administrator Guide</a>. For more information about using the Command Line Interface (CLI) to manage your WorkSpaces Thin Client resources, see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/workspaces-thin-client/index.html\">WorkSpaces Thin Client section of the CLI Reference</a>.</p>",
                 "smithy.api#title": "Amazon WorkSpaces Thin Client",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3042,7 +3042,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.workspacesthinclient#TagKeys",
                     "traits": {
-                        "smithy.api#documentation": "<p>The keys of the key-value pairs for the tag or tags you want to remove from the\n            specified resource.</p>",
+                        "smithy.api#documentation": "<p>The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -3123,7 +3123,7 @@
                 "softwareSetUpdateSchedule": {
                     "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance window.</p>"
                     }
                 }
             },
@@ -3156,6 +3156,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.workspacesthinclient#InternalServerException"
@@ -3203,7 +3206,7 @@
                 "desktopArn": {
                     "target": "com.amazonaws.workspacesthinclient#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n            WorkSpaces Secure Browser, or AppStream 2.0.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces, WorkSpaces Secure Browser, or AppStream 2.0.</p>"
                     }
                 },
                 "desktopEndpoint": {
@@ -3215,7 +3218,7 @@
                 "softwareSetUpdateSchedule": {
                     "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance window.</p>"
                     }
                 },
                 "maintenanceWindow": {

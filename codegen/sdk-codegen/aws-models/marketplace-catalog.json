@@ -95,7 +95,7 @@
                     "name": "aws-marketplace"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Catalog API actions allow you to manage your entities through list, describe, and\n            update capabilities. An entity can be a product or an offer on AWS Marketplace. </p>\n         <p>You can automate your entity update process by integrating the AWS Marketplace Catalog\n            API with your AWS Marketplace product build or deployment pipelines. You can also create\n            your own applications on top of the Catalog API to manage your products on AWS\n            Marketplace.</p>",
+                "smithy.api#documentation": "<p>Catalog API actions allow you to manage your entities through list, describe, and\n            update capabilities. An <i>entity</i> can be a product or an offer on AWS Marketplace. </p>\n         <p>You can automate your entity update process by integrating the AWS Marketplace Catalog\n            API with your AWS Marketplace product build or deployment pipelines. You can also create\n            your own applications on top of the Catalog API to manage your products on AWS\n            Marketplace.</p>",
                 "smithy.api#title": "AWS Marketplace Catalog Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1237,7 +1237,7 @@
                 "DetailsDocument": {
                     "target": "com.amazonaws.marketplacecatalog#JsonDocumentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Alternative field that accepts a JSON value instead of a string for\n                <code>ChangeType</code> details. You can use either <code>Details</code> or\n                <code>DetailsDocument</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>Alternative field that accepts a JSON value instead of a string for\n                <code>ChangeType</code> details. You can use either <code>Details</code> or\n                <code>DetailsDocument</code>, but not both.</p>\n         <p>To download the \"DetailsDocument\" shapes, see the <a href=\"https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python\">Python</a> \n            and <a href=\"https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main\">Java</a> shapes on GitHub.</p>"
                     }
                 },
                 "ChangeName": {
@@ -1398,7 +1398,7 @@
                 "DetailsDocument": {
                     "target": "com.amazonaws.marketplacecatalog#JsonDocumentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON value of the details specific to the change type of the requested change.</p>"
+                        "smithy.api#documentation": "<p>The JSON value of the details specific to the change type of the requested change.</p>\n         <p>To download the \"DetailsDocument\" shapes, see the <a href=\"https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python\">Python</a> \n            and <a href=\"https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main\">Java</a> shapes on GitHub.</p>"
                     }
                 },
                 "ErrorDetailList": {
@@ -2270,7 +2270,7 @@
                 "DetailsDocument": {
                     "target": "com.amazonaws.marketplacecatalog#JsonDocumentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON value of the details specific to the entity.</p>"
+                        "smithy.api#documentation": "<p>The JSON value of the details specific to the entity.</p>\n         <p>To download \"DetailsDocument\" shapes, see the <a href=\"https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python\">Python</a> \n            and <a href=\"https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main\">Java</a> shapes on GitHub.</p>"
                     }
                 }
             },
@@ -2474,6 +2474,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains summary information about the Resale Authorization.</p>"
                     }
+                },
+                "MachineLearningProductSummary": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductSummary"
                 }
             },
             "traits": {
@@ -2534,6 +2537,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A filter for Resale Authorizations.</p>"
                     }
+                },
+                "MachineLearningProductFilters": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductFilters"
                 }
             },
             "traits": {
@@ -2578,6 +2584,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A sort for Resale Authorizations.</p>"
                     }
+                },
+                "MachineLearningProductSort": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductSort"
                 }
             },
             "traits": {
@@ -3130,6 +3139,285 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductEntityIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductEntityIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of entity IDs to filter by. The operation returns machine learning products with entity IDs that match the values in this list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for machine learning product entity IDs.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductEntityIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#MachineLearningProductEntityIdString"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of entity ID values to filter by. You can include up to 10 entity IDs in this list.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductEntityIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The entity ID of a machine learning product. This string uniquely identifies the product.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductFilters": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductEntityIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter machine learning products by their entity IDs.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductLastModifiedDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter machine learning products by their last modified date.</p>"
+                    }
+                },
+                "ProductTitle": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductTitleFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter machine learning products by their product titles.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductVisibilityFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter machine learning products by their visibility status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filters that you can use with the ListEntities operation to filter machine learning products. You can filter by EntityId, LastModifiedDate, ProductTitle, and Visibility.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductLastModifiedDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductLastModifiedDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A date range to filter by. The operation returns machine learning products with last modified dates that fall within this range.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for machine learning product last modified date.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductLastModifiedDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date (inclusive) of the date range. The operation returns machine learning products with last modified dates on or after this date.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date (inclusive) of the date range. The operation returns machine learning products with last modified dates on or before this date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A date range for filtering machine learning products by their last modified date.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductSort": {
+            "type": "structure",
+            "members": {
+                "SortBy": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to sort by. Valid values: <code>EntityId</code>, <code>LastModifiedDate</code>, <code>ProductTitle</code>, and <code>Visibility</code>.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.marketplacecatalog#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order. Valid values are <code>ASC</code> (ascending) and <code>DESC</code> (descending).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sort options for machine learning products.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductSortBy": {
+            "type": "enum",
+            "members": {
+                "EntityId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EntityId"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastModifiedDate"
+                    }
+                },
+                "ProductTitle": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProductTitle"
+                    }
+                },
+                "Visibility": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Visibility"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The fields that you can sort machine learning products by.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductSummary": {
+            "type": "structure",
+            "members": {
+                "ProductTitle": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductTitleString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the machine learning product.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductVisibilityString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility status of the machine learning product. Valid values are <code>Limited</code>, <code>Public</code>, <code>Restricted</code>, and <code>Draft</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a machine learning product.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductTitleFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductTitleFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of product titles to filter by. The operation returns machine learning products with titles that exactly match the values in this list.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductTitleString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A wildcard value to filter product titles. The operation returns machine learning products with titles that match this wildcard pattern.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for machine learning product titles.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductTitleFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#MachineLearningProductTitleString"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of product title values to filter by. You can include up to 10 product titles in this list.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductTitleString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The title of a machine learning product.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductVisibilityFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#MachineLearningProductVisibilityFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of visibility values to filter by. The operation returns machine learning products with visibility status that match the values in this list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for machine learning product visibility status.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductVisibilityFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#MachineLearningProductVisibilityString"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of visibility status values to filter by. You can include up to 10 visibility status values in this list.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#MachineLearningProductVisibilityString": {
+            "type": "enum",
+            "members": {
+                "Limited": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Limited"
+                    }
+                },
+                "Public": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Public"
+                    }
+                },
+                "Restricted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Restricted"
+                    }
+                },
+                "Draft": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Draft"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The visibility status of a machine learning product. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Limited</code> - The product is available to a limited set of buyers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Public</code> - The product is publicly available to all buyers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Restricted</code> - The product has restricted availability.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Draft</code> - The product is in draft state and not yet available to buyers.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.marketplacecatalog#NextToken": {
@@ -5172,7 +5460,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to request changes for your entities. Within a single\n                <code>ChangeSet</code>, you can't start the same change type against the same entity\n            multiple times. Additionally, when a <code>ChangeSet</code> is running, all the entities\n            targeted by the different changes are locked until the change set has completed (either\n            succeeded, cancelled, or failed). If you try to start a change set containing a change\n            against an entity that is already locked, you will receive a\n                <code>ResourceInUseException</code> error.</p>\n         <p>For example, you can't start the <code>ChangeSet</code> described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> later in this topic because it contains two changes to run the same\n            change type (<code>AddRevisions</code>) against the same entity\n                (<code>entity-id@1</code>).</p>\n         <p>For more information about working with change sets, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\"> Working with change sets</a>. For information about change types for\n            single-AMI products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Also, for more information about change\n            types available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>",
+                "smithy.api#documentation": "<p>Allows you to request changes for your entities. Within a single\n                <code>ChangeSet</code>, you can't start the same change type against the same entity\n            multiple times. Additionally, when a <code>ChangeSet</code> is running, all the entities\n            targeted by the different changes are locked until the change set has completed (either\n            succeeded, cancelled, or failed). If you try to start a change set containing a change\n            against an entity that is already locked, you will receive a\n                <code>ResourceInUseException</code> error.</p>\n         <p>For example, you can't start the <code>ChangeSet</code> described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> later in this topic because it contains two changes to run the same\n            change type (<code>AddRevisions</code>) against the same entity\n                (<code>entity-id@1</code>).</p>\n         <p>For more information about working with change sets, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\"> Working with change sets</a>. For information about change types for\n            single-AMI products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Also, for more information about change\n            types available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>\n         <p>To download \"DetailsDocument\" shapes, see <a href=\"https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python\">Python</a> \n            and <a href=\"https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main\">Java</a> shapes on GitHub.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/StartChangeSet",

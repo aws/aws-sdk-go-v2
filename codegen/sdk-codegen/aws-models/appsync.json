@@ -2541,6 +2541,10 @@
                     "target": "com.amazonaws.appsync#Boolean",
                     "traits": {
                         "smithy.api#default": false,
+                        "smithy.api#deprecated": {
+                            "since": "5/15/2025",
+                            "message": "transitEncryptionEnabled attribute is deprecated. Encryption in transit is always enabled."
+                        },
                         "smithy.api#documentation": "<p>Transit encryption flag when connecting to cache. You cannot update this setting after\n         creation.</p>"
                     }
                 },
@@ -2548,6 +2552,10 @@
                     "target": "com.amazonaws.appsync#Boolean",
                     "traits": {
                         "smithy.api#default": false,
+                        "smithy.api#deprecated": {
+                            "since": "5/15/2025",
+                            "message": "atRestEncryptionEnabled attribute is deprecated. Encryption at rest is always enabled."
+                        },
                         "smithy.api#documentation": "<p>At-rest encryption flag for cache. You cannot update this setting after creation.</p>"
                     }
                 },
