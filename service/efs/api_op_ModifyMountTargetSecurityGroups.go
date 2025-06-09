@@ -48,7 +48,7 @@ type ModifyMountTargetSecurityGroupsInput struct {
 	// This member is required.
 	MountTargetId *string
 
-	// An array of up to five VPC security group IDs.
+	// An array of VPC security group IDs.
 	SecurityGroups []string
 
 	noSmithyDocumentSerde

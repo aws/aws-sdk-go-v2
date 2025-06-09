@@ -21,6 +21,27 @@ func (DeletionMode) Values() []DeletionMode {
 	}
 }
 
+type IpAddressType string
+
+// Enum values for IpAddressType
+const (
+	IpAddressTypeIpv4Only  IpAddressType = "IPV4_ONLY"
+	IpAddressTypeIpv6Only  IpAddressType = "IPV6_ONLY"
+	IpAddressTypeDualStack IpAddressType = "DUAL_STACK"
+)
+
+// Values returns all known values for IpAddressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IpAddressType) Values() []IpAddressType {
+	return []IpAddressType{
+		"IPV4_ONLY",
+		"IPV6_ONLY",
+		"DUAL_STACK",
+	}
+}
+
 type LifeCycleState string
 
 // Enum values for LifeCycleState

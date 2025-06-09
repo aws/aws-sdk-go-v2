@@ -1731,6 +1731,12 @@ func awsRestjson1_serializeDocumentEntityTypeFilters(v types.EntityTypeFilters, 
 			return err
 		}
 
+	case *types.EntityTypeFiltersMemberMachineLearningProductFilters:
+		av := object.Key("MachineLearningProductFilters")
+		if err := awsRestjson1_serializeDocumentMachineLearningProductFilters(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.EntityTypeFiltersMemberOfferFilters:
 		av := object.Key("OfferFilters")
 		if err := awsRestjson1_serializeDocumentOfferFilters(&uv.Value, av); err != nil {
@@ -1776,6 +1782,12 @@ func awsRestjson1_serializeDocumentEntityTypeSort(v types.EntityTypeSort, value 
 	case *types.EntityTypeSortMemberDataProductSort:
 		av := object.Key("DataProductSort")
 		if err := awsRestjson1_serializeDocumentDataProductSort(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.EntityTypeSortMemberMachineLearningProductSort:
+		av := object.Key("MachineLearningProductSort")
+		if err := awsRestjson1_serializeDocumentMachineLearningProductSort(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -1848,6 +1860,169 @@ func awsRestjson1_serializeDocumentJsonDocumentType(v document.Interface, value 
 		return err
 	}
 	value.Write(db)
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMachineLearningProductEntityIdFilter(v *types.MachineLearningProductEntityIdFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ValueList != nil {
+		ok := object.Key("ValueList")
+		if err := awsRestjson1_serializeDocumentMachineLearningProductEntityIdFilterValueList(v.ValueList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMachineLearningProductEntityIdFilterValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMachineLearningProductFilters(v *types.MachineLearningProductFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EntityId != nil {
+		ok := object.Key("EntityId")
+		if err := awsRestjson1_serializeDocumentMachineLearningProductEntityIdFilter(v.EntityId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LastModifiedDate != nil {
+		ok := object.Key("LastModifiedDate")
+		if err := awsRestjson1_serializeDocumentMachineLearningProductLastModifiedDateFilter(v.LastModifiedDate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ProductTitle != nil {
+		ok := object.Key("ProductTitle")
+		if err := awsRestjson1_serializeDocumentMachineLearningProductTitleFilter(v.ProductTitle, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Visibility != nil {
+		ok := object.Key("Visibility")
+		if err := awsRestjson1_serializeDocumentMachineLearningProductVisibilityFilter(v.Visibility, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMachineLearningProductLastModifiedDateFilter(v *types.MachineLearningProductLastModifiedDateFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DateRange != nil {
+		ok := object.Key("DateRange")
+		if err := awsRestjson1_serializeDocumentMachineLearningProductLastModifiedDateFilterDateRange(v.DateRange, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMachineLearningProductLastModifiedDateFilterDateRange(v *types.MachineLearningProductLastModifiedDateFilterDateRange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AfterValue != nil {
+		ok := object.Key("AfterValue")
+		ok.String(*v.AfterValue)
+	}
+
+	if v.BeforeValue != nil {
+		ok := object.Key("BeforeValue")
+		ok.String(*v.BeforeValue)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMachineLearningProductSort(v *types.MachineLearningProductSort, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SortBy) > 0 {
+		ok := object.Key("SortBy")
+		ok.String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		ok := object.Key("SortOrder")
+		ok.String(string(v.SortOrder))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMachineLearningProductTitleFilter(v *types.MachineLearningProductTitleFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ValueList != nil {
+		ok := object.Key("ValueList")
+		if err := awsRestjson1_serializeDocumentMachineLearningProductTitleFilterValueList(v.ValueList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WildCardValue != nil {
+		ok := object.Key("WildCardValue")
+		ok.String(*v.WildCardValue)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMachineLearningProductTitleFilterValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMachineLearningProductVisibilityFilter(v *types.MachineLearningProductVisibilityFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ValueList != nil {
+		ok := object.Key("ValueList")
+		if err := awsRestjson1_serializeDocumentMachineLearningProductVisibilityFilterValueList(v.ValueList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMachineLearningProductVisibilityFilterValueList(v []types.MachineLearningProductVisibilityString, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

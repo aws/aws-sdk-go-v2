@@ -48,6 +48,11 @@ type DescribeEntityOutput struct {
 	Details *string
 
 	// The JSON value of the details specific to the entity.
+	//
+	// To download "DetailsDocument" shapes, see the [Python] and [Java] shapes on GitHub.
+	//
+	// [Java]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main
+	// [Python]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python
 	DetailsDocument document.Interface
 
 	// The ARN associated to the unique identifier for the entity referenced in this

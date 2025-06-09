@@ -1,0 +1,8 @@
+{
+    "id": "bbf58e90-254e-44d3-8fe4-1ad47f4dbd6c",
+    "type": "feature",
+    "description": "Add ConflictException to UpdateEnvironment API",
+    "modules": [
+        "service/workspacesthinclient"
+    ]
+}

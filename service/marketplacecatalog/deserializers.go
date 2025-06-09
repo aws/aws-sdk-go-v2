@@ -3094,6 +3094,11 @@ func awsRestjson1_deserializeDocumentEntitySummary(v **types.EntitySummary, valu
 				sv.LastModifiedDate = ptr.String(jtv)
 			}
 
+		case "MachineLearningProductSummary":
+			if err := awsRestjson1_deserializeDocumentMachineLearningProductSummary(&sv.MachineLearningProductSummary, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3333,6 +3338,55 @@ func awsRestjson1_deserializeDocumentJsonDocumentType(v *document.Interface, val
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
 	*v = internaldocument.NewDocumentUnmarshaler(value)
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMachineLearningProductSummary(v **types.MachineLearningProductSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MachineLearningProductSummary
+	if *v == nil {
+		sv = &types.MachineLearningProductSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ProductTitle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MachineLearningProductTitleString to be of type string, got %T instead", value)
+				}
+				sv.ProductTitle = ptr.String(jtv)
+			}
+
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MachineLearningProductVisibilityString to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.MachineLearningProductVisibilityString(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

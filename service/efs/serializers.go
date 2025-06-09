@@ -342,6 +342,16 @@ func awsRestjson1_serializeOpDocumentCreateMountTargetInput(v *CreateMountTarget
 		ok.String(*v.IpAddress)
 	}
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
+	if v.Ipv6Address != nil {
+		ok := object.Key("Ipv6Address")
+		ok.String(*v.Ipv6Address)
+	}
+
 	if v.SecurityGroups != nil {
 		ok := object.Key("SecurityGroups")
 		if err := awsRestjson1_serializeDocumentSecurityGroups(v.SecurityGroups, ok); err != nil {

@@ -835,6 +835,15 @@ func awsRestjson1_deserializeOpDocumentCreateMountTargetOutput(v **CreateMountTa
 				sv.IpAddress = ptr.String(jtv)
 			}
 
+		case "Ipv6Address":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ipv6Address to be of type string, got %T instead", value)
+				}
+				sv.Ipv6Address = ptr.String(jtv)
+			}
+
 		case "LifeCycleState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8192,6 +8201,15 @@ func awsRestjson1_deserializeDocumentMountTargetDescription(v **types.MountTarge
 					return fmt.Errorf("expected IpAddress to be of type string, got %T instead", value)
 				}
 				sv.IpAddress = ptr.String(jtv)
+			}
+
+		case "Ipv6Address":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ipv6Address to be of type string, got %T instead", value)
+				}
+				sv.Ipv6Address = ptr.String(jtv)
 			}
 
 		case "LifeCycleState":

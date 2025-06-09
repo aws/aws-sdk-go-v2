@@ -37,7 +37,7 @@ type CreateProfileInput struct {
 	// This member is required.
 	DomainName *string
 
-	// An account number that you have given to the customer.
+	// An account number that you have assigned to the customer.
 	AccountNumber *string
 
 	// Any additional information relevant to the customer’s profile.

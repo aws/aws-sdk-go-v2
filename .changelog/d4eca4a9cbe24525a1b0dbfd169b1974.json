@@ -1,0 +1,8 @@
+{
+    "id": "d4eca4a9-cbe2-4525-a1b0-dbfd169b1974",
+    "type": "feature",
+    "description": "Deprecate `atRestEncryptionEnabled` and `transitEncryptionEnabled` attributes in `CreateApiCache` action. Encryption is always enabled for new caches.",
+    "modules": [
+        "service/appsync"
+    ]
+}

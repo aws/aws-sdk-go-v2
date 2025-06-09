@@ -122,6 +122,18 @@ func TestCheckSnapshot_CreateDomain(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDomainLayout(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDomainLayout(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDomainLayout")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEventStream(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEventStream(context.Background(), nil, func(o *Options) {
@@ -223,6 +235,18 @@ func TestCheckSnapshot_DeleteDomain(t *testing.T) {
 	_, err := svc.DeleteDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDomainLayout(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDomainLayout(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDomainLayout")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -391,6 +415,18 @@ func TestCheckSnapshot_GetDomain(t *testing.T) {
 	_, err := svc.GetDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDomainLayout(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDomainLayout(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDomainLayout")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -595,6 +631,18 @@ func TestCheckSnapshot_ListCalculatedAttributesForProfile(t *testing.T) {
 	_, err := svc.ListCalculatedAttributesForProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCalculatedAttributesForProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDomainLayouts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDomainLayouts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDomainLayouts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -878,6 +926,18 @@ func TestCheckSnapshot_UpdateDomain(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDomainLayout(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDomainLayout(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDomainLayout")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateEventTrigger(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateEventTrigger(context.Background(), nil, func(o *Options) {
@@ -954,6 +1014,18 @@ func TestUpdateSnapshot_CreateDomain(t *testing.T) {
 	_, err := svc.CreateDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDomainLayout(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDomainLayout(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDomainLayout")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1062,6 +1134,18 @@ func TestUpdateSnapshot_DeleteDomain(t *testing.T) {
 	_, err := svc.DeleteDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDomainLayout(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDomainLayout(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDomainLayout")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1230,6 +1314,18 @@ func TestUpdateSnapshot_GetDomain(t *testing.T) {
 	_, err := svc.GetDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDomainLayout(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDomainLayout(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDomainLayout")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1434,6 +1530,18 @@ func TestUpdateSnapshot_ListCalculatedAttributesForProfile(t *testing.T) {
 	_, err := svc.ListCalculatedAttributesForProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCalculatedAttributesForProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDomainLayouts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDomainLayouts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDomainLayouts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1710,6 +1818,18 @@ func TestUpdateSnapshot_UpdateDomain(t *testing.T) {
 	_, err := svc.UpdateDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDomainLayout(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDomainLayout(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDomainLayout")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

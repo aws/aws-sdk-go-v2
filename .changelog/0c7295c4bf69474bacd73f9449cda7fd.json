@@ -1,0 +1,8 @@
+{
+    "id": "0c7295c4-bf69-474b-acd7-3f9449cda7fd",
+    "type": "feature",
+    "description": "This release introduces capability of Profile Explorer, using correct ingestion timestamp \u0026 using historical data for computing calculated attributes, and new standard objects for T\u0026H as part of Amazon Connect Customer Profiles service.",
+    "modules": [
+        "service/customerprofiles"
+    ]
+}

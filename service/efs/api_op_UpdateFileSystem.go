@@ -40,7 +40,7 @@ type UpdateFileSystemInput struct {
 	// want to provision for a file system that you're creating. Required if
 	// ThroughputMode is set to provisioned . Valid values are 1-3414 MiBps, with the
 	// upper limit depending on Region. To increase this limit, contact Amazon Web
-	// Services Support. For more information, see [Amazon EFS quotas that you can increase]in the Amazon EFS User Guide.
+	// ServicesSupport. For more information, see [Amazon EFS quotas that you can increase]in the Amazon EFS User Guide.
 	//
 	// [Amazon EFS quotas that you can increase]: https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits
 	ProvisionedThroughputInMibps *float64

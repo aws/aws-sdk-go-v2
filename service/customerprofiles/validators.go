@@ -110,6 +110,26 @@ func (m *validateOpCreateDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDomainLayout struct {
+}
+
+func (*validateOpCreateDomainLayout) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDomainLayout) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDomainLayoutInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDomainLayoutInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEventStream struct {
 }
 
@@ -285,6 +305,26 @@ func (m *validateOpDeleteDomain) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDomainLayout struct {
+}
+
+func (*validateOpDeleteDomainLayout) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDomainLayout) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDomainLayoutInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDomainLayoutInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -565,6 +605,26 @@ func (m *validateOpGetDomain) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDomainLayout struct {
+}
+
+func (*validateOpGetDomainLayout) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDomainLayout) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDomainLayoutInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDomainLayoutInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -905,6 +965,26 @@ func (m *validateOpListCalculatedAttributesForProfile) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListCalculatedAttributesForProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDomainLayouts struct {
+}
+
+func (*validateOpListDomainLayouts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDomainLayouts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDomainLayoutsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDomainLayoutsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1330,6 +1410,26 @@ func (m *validateOpUpdateDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDomainLayout struct {
+}
+
+func (*validateOpUpdateDomainLayout) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDomainLayout) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDomainLayoutInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDomainLayoutInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEventTrigger struct {
 }
 
@@ -1390,6 +1490,10 @@ func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
 }
 
+func addOpCreateDomainLayoutValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDomainLayout{}, middleware.After)
+}
+
 func addOpCreateEventStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEventStream{}, middleware.After)
 }
@@ -1424,6 +1528,10 @@ func addOpDeleteCalculatedAttributeDefinitionValidationMiddleware(stack *middlew
 
 func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDomain{}, middleware.After)
+}
+
+func addOpDeleteDomainLayoutValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDomainLayout{}, middleware.After)
 }
 
 func addOpDeleteEventStreamValidationMiddleware(stack *middleware.Stack) error {
@@ -1480,6 +1588,10 @@ func addOpGetCalculatedAttributeForProfileValidationMiddleware(stack *middleware
 
 func addOpGetDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDomain{}, middleware.After)
+}
+
+func addOpGetDomainLayoutValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDomainLayout{}, middleware.After)
 }
 
 func addOpGetEventStreamValidationMiddleware(stack *middleware.Stack) error {
@@ -1548,6 +1660,10 @@ func addOpListCalculatedAttributeDefinitionsValidationMiddleware(stack *middlewa
 
 func addOpListCalculatedAttributesForProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCalculatedAttributesForProfile{}, middleware.After)
+}
+
+func addOpListDomainLayoutsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDomainLayouts{}, middleware.After)
 }
 
 func addOpListEventStreamsValidationMiddleware(stack *middleware.Stack) error {
@@ -1632,6 +1748,10 @@ func addOpUpdateCalculatedAttributeDefinitionValidationMiddleware(stack *middlew
 
 func addOpUpdateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDomain{}, middleware.After)
+}
+
+func addOpUpdateDomainLayoutValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDomainLayout{}, middleware.After)
 }
 
 func addOpUpdateEventTriggerValidationMiddleware(stack *middleware.Stack) error {
@@ -2733,11 +2853,10 @@ func validateRange(v *types.Range) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Range"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
-	if len(v.Unit) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	if v.ValueRange != nil {
+		if err := validateValueRange(v.ValueRange); err != nil {
+			invalidParams.AddNested("ValueRange", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3074,6 +3193,24 @@ func validateTriggerProperties(v *types.TriggerProperties) error {
 	}
 }
 
+func validateValueRange(v *types.ValueRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValueRange"}
+	if v.Start == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Start"))
+	}
+	if v.End == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("End"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateZendeskSourceProperties(v *types.ZendeskSourceProperties) error {
 	if v == nil {
 		return nil
@@ -3215,6 +3352,36 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 		if err := validateRuleBasedMatchingRequest(v.RuleBasedMatching); err != nil {
 			invalidParams.AddNested("RuleBasedMatching", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDomainLayoutInput(v *CreateDomainLayoutInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDomainLayoutInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.LayoutDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayoutDefinitionName"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.DisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if len(v.LayoutType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LayoutType"))
+	}
+	if v.Layout == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Layout"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3419,6 +3586,24 @@ func validateOpDeleteDomainInput(v *DeleteDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDomainLayoutInput(v *DeleteDomainLayoutInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainLayoutInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.LayoutDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayoutDefinitionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3694,6 +3879,24 @@ func validateOpGetDomainInput(v *GetDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetDomainInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDomainLayoutInput(v *GetDomainLayoutInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDomainLayoutInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.LayoutDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayoutDefinitionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4000,6 +4203,21 @@ func validateOpListCalculatedAttributesForProfileInput(v *ListCalculatedAttribut
 	}
 	if v.ProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDomainLayoutsInput(v *ListDomainLayoutsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDomainLayoutsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4390,6 +4608,24 @@ func validateOpUpdateDomainInput(v *UpdateDomainInput) error {
 		if err := validateRuleBasedMatchingRequest(v.RuleBasedMatching); err != nil {
 			invalidParams.AddNested("RuleBasedMatching", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDomainLayoutInput(v *UpdateDomainLayoutInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDomainLayoutInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.LayoutDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayoutDefinitionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

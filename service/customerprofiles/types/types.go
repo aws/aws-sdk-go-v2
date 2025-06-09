@@ -437,6 +437,10 @@ type CalculatedAttributeValue struct {
 	// the data is partial, it is set to true.
 	IsDataPartial *string
 
+	// The timestamp of the newest object included in the calculated attribute
+	// calculation.
+	LastObjectTimestamp *time.Time
+
 	// The profile id belonging to this calculated attribute value.
 	ProfileId *string
 
@@ -1102,6 +1106,51 @@ type JobStats struct {
 	noSmithyDocumentSerde
 }
 
+// The layout object that contains LayoutDefinitionName, Description, DisplayName,
+// IsDefault, LayoutType, Tags, CreatedAt, LastUpdatedAt
+type LayoutItem struct {
+
+	// The timestamp of when the layout was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The description of the layout
+	//
+	// This member is required.
+	Description *string
+
+	// The display name of the layout
+	//
+	// This member is required.
+	DisplayName *string
+
+	// The timestamp of when the layout was most recently updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// The unique name of the layout.
+	//
+	// This member is required.
+	LayoutDefinitionName *string
+
+	// The type of layout that can be used to view data under customer profiles domain.
+	//
+	// This member is required.
+	LayoutType LayoutType
+
+	// If set to true for a layout, this layout will be used by default to view data.
+	// If set to false, then layout will not be used by default but it can be used to
+	// view data by explicit selection on UI.
+	IsDefault bool
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The details of a single calculated attribute definition.
 type ListCalculatedAttributeDefinitionItem struct {
 
@@ -1121,8 +1170,16 @@ type ListCalculatedAttributeDefinitionItem struct {
 	// edited.
 	LastUpdatedAt *time.Time
 
+	// Status of the Calculated Attribute creation (whether all historical data has
+	// been indexed.)
+	Status ReadinessStatus
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
+
+	// Whether historical data ingested before the Calculated Attribute was created
+	// should be included in calculations.
+	UseHistoricalData *bool
 
 	noSmithyDocumentSerde
 }
@@ -1139,6 +1196,10 @@ type ListCalculatedAttributeForProfileItem struct {
 	// Indicates whether the calculated attribute’s value is based on partial data. If
 	// data is partial, it is set to true.
 	IsDataPartial *string
+
+	// The timestamp of the newest object included in the calculated attribute
+	// calculation.
+	LastObjectTimestamp *time.Time
 
 	// The value of the calculated attribute.
 	Value *string
@@ -1570,7 +1631,7 @@ type Period struct {
 // The standard profile of a customer.
 type Profile struct {
 
-	// An account number that you have given to the customer.
+	// An account number that you have assigned to the customer.
 	AccountNumber *string
 
 	// Any additional information relevant to the customer’s profile.
@@ -1800,15 +1861,33 @@ type ProfileQueryResult struct {
 // The relative time period over which data is included in the aggregation.
 type Range struct {
 
+	// The format the timestamp field in your JSON object is specified. This value
+	// should be one of EPOCHMILLI (for Unix epoch timestamps with second/millisecond
+	// level precision) or ISO_8601 (following ISO_8601 format with second/millisecond
+	// level precision, with an optional offset of Z or in the format HH:MM or HHMM.).
+	// E.g. if your object type is MyType and source JSON is {"generatedAt":
+	// {"timestamp": "2001-07-04T12:08:56.235-0700"}}, then TimestampFormat should be
+	// "ISO_8601".
+	TimestampFormat *string
+
+	// An expression specifying the field in your JSON object from which the date
+	// should be parsed. The expression should follow the structure of
+	// \"{ObjectTypeName.}\". E.g. if your object type is MyType and source JSON is
+	// {"generatedAt": {"timestamp": "1737587945945"}}, then TimestampSource should be
+	// "{MyType.generatedAt.timestamp}".
+	TimestampSource *string
+
 	// The unit of time.
-	//
-	// This member is required.
 	Unit Unit
 
 	// The amount of time of the specified unit.
-	//
-	// This member is required.
 	Value *int32
+
+	// A structure letting customers specify a relative time window over which over
+	// which data is included in the Calculated Attribute. Use positive numbers to
+	// indicate that the endpoint is in the past, and negative numbers to indicate it
+	// is in the future. ValueRange overrides Value.
+	ValueRange *ValueRange
 
 	noSmithyDocumentSerde
 }
@@ -1828,6 +1907,19 @@ type RangeOverride struct {
 
 	// The end time of when to include objects.
 	End int32
+
+	noSmithyDocumentSerde
+}
+
+// Information indicating if the Calculated Attribute is ready for use by
+// confirming all historical data has been processed and reflected.
+type Readiness struct {
+
+	// Any customer messaging.
+	Message *string
+
+	// Approximately how far the Calculated Attribute creation is from completion.
+	ProgressPercentage *int32
 
 	noSmithyDocumentSerde
 }
@@ -2250,6 +2342,29 @@ type UpdateAddress struct {
 
 	// The state in which a customer lives.
 	State *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure letting customers specify a relative time window over which over
+// which data is included in the Calculated Attribute. Use positive numbers to
+// indicate that the endpoint is in the past, and negative numbers to indicate it
+// is in the future. ValueRange overrides Value.
+type ValueRange struct {
+
+	// The end time of when to include objects. Use positive numbers to indicate that
+	// the starting point is in the past, and negative numbers to indicate it is in the
+	// future.
+	//
+	// This member is required.
+	End *int32
+
+	// The start time of when to include objects. Use positive numbers to indicate
+	// that the starting point is in the past, and negative numbers to indicate it is
+	// in the future.
+	//
+	// This member is required.
+	Start *int32
 
 	noSmithyDocumentSerde
 }

@@ -98,6 +98,9 @@ type CreateApiCacheInput struct {
 
 	// At-rest encryption flag for cache. You cannot update this setting after
 	// creation.
+	//
+	// Deprecated: atRestEncryptionEnabled attribute is deprecated. Encryption at rest
+	// is always enabled.
 	AtRestEncryptionEnabled bool
 
 	// Controls how cache health metrics will be emitted to CloudWatch. Cache health
@@ -117,6 +120,9 @@ type CreateApiCacheInput struct {
 
 	// Transit encryption flag when connecting to cache. You cannot update this
 	// setting after creation.
+	//
+	// Deprecated: transitEncryptionEnabled attribute is deprecated. Encryption in
+	// transit is always enabled.
 	TransitEncryptionEnabled bool
 
 	noSmithyDocumentSerde

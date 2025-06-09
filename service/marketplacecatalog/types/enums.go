@@ -206,6 +206,54 @@ func (Intent) Values() []Intent {
 	}
 }
 
+type MachineLearningProductSortBy string
+
+// Enum values for MachineLearningProductSortBy
+const (
+	MachineLearningProductSortByEntityId         MachineLearningProductSortBy = "EntityId"
+	MachineLearningProductSortByLastModifiedDate MachineLearningProductSortBy = "LastModifiedDate"
+	MachineLearningProductSortByProductTitle     MachineLearningProductSortBy = "ProductTitle"
+	MachineLearningProductSortByVisibility       MachineLearningProductSortBy = "Visibility"
+)
+
+// Values returns all known values for MachineLearningProductSortBy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MachineLearningProductSortBy) Values() []MachineLearningProductSortBy {
+	return []MachineLearningProductSortBy{
+		"EntityId",
+		"LastModifiedDate",
+		"ProductTitle",
+		"Visibility",
+	}
+}
+
+type MachineLearningProductVisibilityString string
+
+// Enum values for MachineLearningProductVisibilityString
+const (
+	MachineLearningProductVisibilityStringLimited    MachineLearningProductVisibilityString = "Limited"
+	MachineLearningProductVisibilityStringPublic     MachineLearningProductVisibilityString = "Public"
+	MachineLearningProductVisibilityStringRestricted MachineLearningProductVisibilityString = "Restricted"
+	MachineLearningProductVisibilityStringDraft      MachineLearningProductVisibilityString = "Draft"
+)
+
+// Values returns all known values for MachineLearningProductVisibilityString.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MachineLearningProductVisibilityString) Values() []MachineLearningProductVisibilityString {
+	return []MachineLearningProductVisibilityString{
+		"Limited",
+		"Public",
+		"Restricted",
+		"Draft",
+	}
+}
+
 type OfferSortBy string
 
 // Enum values for OfferSortBy

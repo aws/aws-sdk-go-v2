@@ -20,6 +20,9 @@ func ExampleEntityTypeFilters_outputUsage() {
 	case *types.EntityTypeFiltersMemberDataProductFilters:
 		_ = v.Value // Value is types.DataProductFilters
 
+	case *types.EntityTypeFiltersMemberMachineLearningProductFilters:
+		_ = v.Value // Value is types.MachineLearningProductFilters
+
 	case *types.EntityTypeFiltersMemberOfferFilters:
 		_ = v.Value // Value is types.OfferFilters
 
@@ -42,6 +45,7 @@ var _ *types.AmiProductFilters
 var _ *types.ContainerProductFilters
 var _ *types.SaaSProductFilters
 var _ *types.OfferFilters
+var _ *types.MachineLearningProductFilters
 var _ *types.ResaleAuthorizationFilters
 var _ *types.DataProductFilters
 
@@ -57,6 +61,9 @@ func ExampleEntityTypeSort_outputUsage() {
 
 	case *types.EntityTypeSortMemberDataProductSort:
 		_ = v.Value // Value is types.DataProductSort
+
+	case *types.EntityTypeSortMemberMachineLearningProductSort:
+		_ = v.Value // Value is types.MachineLearningProductSort
 
 	case *types.EntityTypeSortMemberOfferSort:
 		_ = v.Value // Value is types.OfferSort
@@ -76,6 +83,7 @@ func ExampleEntityTypeSort_outputUsage() {
 	}
 }
 
+var _ *types.MachineLearningProductSort
 var _ *types.SaaSProductSort
 var _ *types.AmiProductSort
 var _ *types.OfferSort

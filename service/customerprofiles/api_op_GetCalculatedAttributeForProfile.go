@@ -8,6 +8,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Retrieve a calculated attribute for a customer profile.
@@ -57,6 +58,10 @@ type GetCalculatedAttributeForProfileOutput struct {
 	// Indicates whether the calculated attribute’s value is based on partial data. If
 	// data is partial, it is set to true.
 	IsDataPartial *string
+
+	// The timestamp of the newest object included in the calculated attribute
+	// calculation.
+	LastObjectTimestamp *time.Time
 
 	// The value of the calculated attribute.
 	Value *string

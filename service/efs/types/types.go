@@ -192,6 +192,14 @@ type DestinationToCreate struct {
 	// replication, this must be an ARN. The file system's replication overwrite
 	// replication must be disabled. If no ID or ARN is specified, then a new file
 	// system is created.
+	//
+	// When you initially configure replication to an existing file system, Amazon EFS
+	// writes data to or removes existing data from the destination file system to
+	// match data in the source file system. If you don't want to change data in the
+	// destination file system, then you should replicate to a new file system instead.
+	// For more information, see [https://docs.aws.amazon.com/efs/latest/ug/create-replication.html].
+	//
+	// [https://docs.aws.amazon.com/efs/latest/ug/create-replication.html]: https://docs.aws.amazon.com/efs/latest/ug/create-replication.html
 	FileSystemId *string
 
 	// Specify the Key Management Service (KMS) key that you want to use to encrypt
@@ -347,8 +355,8 @@ type FileSystemProtectionDescription struct {
 	//   by EFS replication.
 	//
 	//   - REPLICATING – The file system is being used as the destination file system
-	//   in a replication configuration. The file system is read-only and is only
-	//   modified only by EFS replication.
+	//   in a replication configuration. The file system is read-only and is modified
+	//   only by EFS replication.
 	//
 	// If the replication configuration is deleted, the file system's replication
 	// overwrite protection is re-enabled, the file system becomes writeable.
@@ -461,6 +469,9 @@ type MountTargetDescription struct {
 
 	// Address at which the file system can be mounted by using the mount target.
 	IpAddress *string
+
+	// The IPv6 address for the mount target.
+	Ipv6Address *string
 
 	// The ID of the network interface that Amazon EFS created when it created the
 	// mount target.

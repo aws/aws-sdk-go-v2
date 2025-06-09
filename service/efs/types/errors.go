@@ -571,7 +571,7 @@ func (e *MountTargetNotFound) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Amazon VPC User Guide (see the Network interfaces per Region entry in the
 // Network interfaces table).
 //
-// [Amazon VPC Quotas]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html
+// [Amazon VPC Quotas]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
 type NetworkInterfaceLimitExceeded struct {
 	Message *string
 
@@ -628,8 +628,7 @@ func (e *NoFreeAddressesInSubnet) ErrorCode() string {
 }
 func (e *NoFreeAddressesInSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the default file system policy is in effect for the EFS file system
-// specified.
+// Returned if no backup is specified for a One Zone EFS file system.
 type PolicyNotFound struct {
 	Message *string
 
@@ -713,8 +712,12 @@ func (e *ReplicationNotFound) ErrorCode() string {
 }
 func (e *ReplicationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the size of SecurityGroups specified in the request is greater than
-// five.
+// Returned if the number of SecurityGroups specified in the request is greater
+// than the limit, which is based on account quota. Either delete some security
+// groups or request that the account quota be raised. For more information, see [Amazon VPC Quotas]
+// in the Amazon VPC User Guide (see the Security Groups table).
+//
+// [Amazon VPC Quotas]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
 type SecurityGroupLimitExceeded struct {
 	Message *string
 

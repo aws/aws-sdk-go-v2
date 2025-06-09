@@ -27,10 +27,14 @@ import (
 // about change types for single-AMI products, see [Working with single-AMI products]. Also, for more information
 // about change types available for container-based products, see [Working with container products].
 //
+// To download "DetailsDocument" shapes, see [Python] and [Java] shapes on GitHub.
+//
+// [Java]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main
 // [Working with single-AMI products]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products
 // [Working with change sets]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets
 // [Working with container products]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products
 // [example]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples
+// [Python]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python
 func (c *Client) StartChangeSet(ctx context.Context, params *StartChangeSetInput, optFns ...func(*Options)) (*StartChangeSetOutput, error) {
 	if params == nil {
 		params = &StartChangeSetInput{}

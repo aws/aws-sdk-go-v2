@@ -152,6 +152,11 @@ type Change struct {
 
 	// Alternative field that accepts a JSON value instead of a string for ChangeType
 	// details. You can use either Details or DetailsDocument , but not both.
+	//
+	// To download the "DetailsDocument" shapes, see the [Python] and [Java] shapes on GitHub.
+	//
+	// [Java]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main
+	// [Python]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python
 	DetailsDocument document.Interface
 
 	// The tags associated with the change.
@@ -215,6 +220,11 @@ type ChangeSummary struct {
 
 	// The JSON value of the details specific to the change type of the requested
 	// change.
+	//
+	// To download the "DetailsDocument" shapes, see the [Python] and [Java] shapes on GitHub.
+	//
+	// [Java]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main
+	// [Python]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python
 	DetailsDocument document.Interface
 
 	// The entity to be changed.
@@ -507,6 +517,9 @@ type EntitySummary struct {
 	// (2018-02-27T13:45:22Z).
 	LastModifiedDate *string
 
+	// A summary of a machine learning product.
+	MachineLearningProductSummary *MachineLearningProductSummary
+
 	// The name for the entity. This value is not unique. It is defined by the seller.
 	Name *string
 
@@ -535,6 +548,7 @@ type EntitySummary struct {
 //	EntityTypeFiltersMemberAmiProductFilters
 //	EntityTypeFiltersMemberContainerProductFilters
 //	EntityTypeFiltersMemberDataProductFilters
+//	EntityTypeFiltersMemberMachineLearningProductFilters
 //	EntityTypeFiltersMemberOfferFilters
 //	EntityTypeFiltersMemberResaleAuthorizationFilters
 //	EntityTypeFiltersMemberSaaSProductFilters
@@ -568,6 +582,17 @@ type EntityTypeFiltersMemberDataProductFilters struct {
 }
 
 func (*EntityTypeFiltersMemberDataProductFilters) isEntityTypeFilters() {}
+
+// The filters that you can use with the ListEntities operation to filter machine
+// learning products. You can filter by EntityId, LastModifiedDate, ProductTitle,
+// and Visibility.
+type EntityTypeFiltersMemberMachineLearningProductFilters struct {
+	Value MachineLearningProductFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeFiltersMemberMachineLearningProductFilters) isEntityTypeFilters() {}
 
 // A filter for offers.
 type EntityTypeFiltersMemberOfferFilters struct {
@@ -603,6 +628,7 @@ func (*EntityTypeFiltersMemberSaaSProductFilters) isEntityTypeFilters() {}
 //	EntityTypeSortMemberAmiProductSort
 //	EntityTypeSortMemberContainerProductSort
 //	EntityTypeSortMemberDataProductSort
+//	EntityTypeSortMemberMachineLearningProductSort
 //	EntityTypeSortMemberOfferSort
 //	EntityTypeSortMemberResaleAuthorizationSort
 //	EntityTypeSortMemberSaaSProductSort
@@ -636,6 +662,15 @@ type EntityTypeSortMemberDataProductSort struct {
 }
 
 func (*EntityTypeSortMemberDataProductSort) isEntityTypeSort() {}
+
+// The sort options for machine learning products.
+type EntityTypeSortMemberMachineLearningProductSort struct {
+	Value MachineLearningProductSort
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeSortMemberMachineLearningProductSort) isEntityTypeSort() {}
 
 // A sort for offers.
 type EntityTypeSortMemberOfferSort struct {
@@ -710,6 +745,111 @@ type Filter struct {
 	//   - AfterEndTime - The supported ValueList is a list of all change sets that
 	//   ended after the filter value.
 	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// The filter for machine learning product entity IDs.
+type MachineLearningProductEntityIdFilter struct {
+
+	// A list of entity IDs to filter by. The operation returns machine learning
+	// products with entity IDs that match the values in this list.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// The filters that you can use with the ListEntities operation to filter machine
+// learning products. You can filter by EntityId, LastModifiedDate, ProductTitle,
+// and Visibility.
+type MachineLearningProductFilters struct {
+
+	// Filter machine learning products by their entity IDs.
+	EntityId *MachineLearningProductEntityIdFilter
+
+	// Filter machine learning products by their last modified date.
+	LastModifiedDate *MachineLearningProductLastModifiedDateFilter
+
+	// Filter machine learning products by their product titles.
+	ProductTitle *MachineLearningProductTitleFilter
+
+	// Filter machine learning products by their visibility status.
+	Visibility *MachineLearningProductVisibilityFilter
+
+	noSmithyDocumentSerde
+}
+
+// The filter for machine learning product last modified date.
+type MachineLearningProductLastModifiedDateFilter struct {
+
+	// A date range to filter by. The operation returns machine learning products with
+	// last modified dates that fall within this range.
+	DateRange *MachineLearningProductLastModifiedDateFilterDateRange
+
+	noSmithyDocumentSerde
+}
+
+// A date range for filtering machine learning products by their last modified
+// date.
+type MachineLearningProductLastModifiedDateFilterDateRange struct {
+
+	// The start date (inclusive) of the date range. The operation returns machine
+	// learning products with last modified dates on or after this date.
+	AfterValue *string
+
+	// The end date (inclusive) of the date range. The operation returns machine
+	// learning products with last modified dates on or before this date.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The sort options for machine learning products.
+type MachineLearningProductSort struct {
+
+	// The field to sort by. Valid values: EntityId , LastModifiedDate , ProductTitle ,
+	// and Visibility .
+	SortBy MachineLearningProductSortBy
+
+	// The sort order. Valid values are ASC (ascending) and DESC (descending).
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a machine learning product.
+type MachineLearningProductSummary struct {
+
+	// The title of the machine learning product.
+	ProductTitle *string
+
+	// The visibility status of the machine learning product. Valid values are Limited
+	// , Public , Restricted , and Draft .
+	Visibility MachineLearningProductVisibilityString
+
+	noSmithyDocumentSerde
+}
+
+// The filter for machine learning product titles.
+type MachineLearningProductTitleFilter struct {
+
+	// A list of product titles to filter by. The operation returns machine learning
+	// products with titles that exactly match the values in this list.
+	ValueList []string
+
+	// A wildcard value to filter product titles. The operation returns machine
+	// learning products with titles that match this wildcard pattern.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The filter for machine learning product visibility status.
+type MachineLearningProductVisibilityFilter struct {
+
+	// A list of visibility values to filter by. The operation returns machine
+	// learning products with visibility status that match the values in this list.
+	ValueList []MachineLearningProductVisibilityString
 
 	noSmithyDocumentSerde
 }

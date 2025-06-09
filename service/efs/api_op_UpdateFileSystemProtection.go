@@ -72,8 +72,8 @@ type UpdateFileSystemProtectionOutput struct {
 	//   by EFS replication.
 	//
 	//   - REPLICATING – The file system is being used as the destination file system
-	//   in a replication configuration. The file system is read-only and is only
-	//   modified only by EFS replication.
+	//   in a replication configuration. The file system is read-only and is modified
+	//   only by EFS replication.
 	//
 	// If the replication configuration is deleted, the file system's replication
 	// overwrite protection is re-enabled, the file system becomes writeable.

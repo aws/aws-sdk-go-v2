@@ -1,0 +1,8 @@
+{
+    "id": "26977c73-fe50-4f00-9d86-8a4ea22fc09e",
+    "type": "feature",
+    "description": "Added support for Internet Protocol Version 6 (IPv6) on EFS Service APIs and mount targets.",
+    "modules": [
+        "service/efs"
+    ]
+}

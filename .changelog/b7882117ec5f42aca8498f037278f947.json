@@ -1,0 +1,8 @@
+{
+    "id": "b7882117-ec5f-42ac-a849-8f037278f947",
+    "type": "feature",
+    "description": "Support dual-stack endpoints for ce api",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

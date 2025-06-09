@@ -467,6 +467,23 @@ func (JobScheduleDayOfTheWeek) Values() []JobScheduleDayOfTheWeek {
 	}
 }
 
+type LayoutType string
+
+// Enum values for LayoutType
+const (
+	LayoutTypeProfileExplorer LayoutType = "PROFILE_EXPLORER"
+)
+
+// Values returns all known values for LayoutType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LayoutType) Values() []LayoutType {
+	return []LayoutType{
+		"PROFILE_EXPLORER",
+	}
+}
+
 type LogicalOperator string
 
 // Enum values for LogicalOperator
@@ -695,6 +712,29 @@ const (
 func (RangeUnit) Values() []RangeUnit {
 	return []RangeUnit{
 		"DAYS",
+	}
+}
+
+type ReadinessStatus string
+
+// Enum values for ReadinessStatus
+const (
+	ReadinessStatusPreparing  ReadinessStatus = "PREPARING"
+	ReadinessStatusInProgress ReadinessStatus = "IN_PROGRESS"
+	ReadinessStatusCompleted  ReadinessStatus = "COMPLETED"
+	ReadinessStatusFailed     ReadinessStatus = "FAILED"
+)
+
+// Values returns all known values for ReadinessStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReadinessStatus) Values() []ReadinessStatus {
+	return []ReadinessStatus{
+		"PREPARING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
 	}
 }
 
@@ -943,6 +983,15 @@ const (
 	StandardIdentifierCase                StandardIdentifier = "CASE"
 	StandardIdentifierOrder               StandardIdentifier = "ORDER"
 	StandardIdentifierCommunicationRecord StandardIdentifier = "COMMUNICATION_RECORD"
+	StandardIdentifierAirPreference       StandardIdentifier = "AIR_PREFERENCE"
+	StandardIdentifierHotelPreference     StandardIdentifier = "HOTEL_PREFERENCE"
+	StandardIdentifierAirBooking          StandardIdentifier = "AIR_BOOKING"
+	StandardIdentifierAirSegment          StandardIdentifier = "AIR_SEGMENT"
+	StandardIdentifierHotelReservation    StandardIdentifier = "HOTEL_RESERVATION"
+	StandardIdentifierHotelStayRevenue    StandardIdentifier = "HOTEL_STAY_REVENUE"
+	StandardIdentifierLoyalty             StandardIdentifier = "LOYALTY"
+	StandardIdentifierLoyaltyTransaction  StandardIdentifier = "LOYALTY_TRANSACTION"
+	StandardIdentifierLoyaltyPromotion    StandardIdentifier = "LOYALTY_PROMOTION"
 	StandardIdentifierUnique              StandardIdentifier = "UNIQUE"
 	StandardIdentifierSecondary           StandardIdentifier = "SECONDARY"
 	StandardIdentifierLookupOnly          StandardIdentifier = "LOOKUP_ONLY"
@@ -960,6 +1009,15 @@ func (StandardIdentifier) Values() []StandardIdentifier {
 		"CASE",
 		"ORDER",
 		"COMMUNICATION_RECORD",
+		"AIR_PREFERENCE",
+		"HOTEL_PREFERENCE",
+		"AIR_BOOKING",
+		"AIR_SEGMENT",
+		"HOTEL_RESERVATION",
+		"HOTEL_STAY_REVENUE",
+		"LOYALTY",
+		"LOYALTY_TRANSACTION",
+		"LOYALTY_PROMOTION",
 		"UNIQUE",
 		"SECONDARY",
 		"LOOKUP_ONLY",
