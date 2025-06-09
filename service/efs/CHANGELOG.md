@@ -1,3 +1,7 @@
+# v1.36.0 (2025-06-09)
+
+* **Feature**: Added support for Internet Protocol Version 6 (IPv6) on EFS Service APIs and mount targets.
+
 # v1.35.4 (2025-06-06)
 
 * No change notes available for this release.

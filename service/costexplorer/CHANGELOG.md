@@ -1,3 +1,7 @@
+# v1.51.0 (2025-06-09)
+
+* **Feature**: Support dual-stack endpoints for ce api
+
 # v1.50.0 (2025-05-27)
 
 * **Feature**: This release introduces Cost Comparison feature (GetCostAndUsageComparisons, GetCostComparisonDrivers) allowing you find cost variations across multiple dimensions and identify key drivers of spending changes.

@@ -1,3 +1,21 @@
+# Release (2025-06-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.47.0](service/appsync/CHANGELOG.md#v1470-2025-06-09)
+  * **Feature**: Deprecate `atRestEncryptionEnabled` and `transitEncryptionEnabled` attributes in `CreateApiCache` action. Encryption is always enabled for new caches.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.51.0](service/costexplorer/CHANGELOG.md#v1510-2025-06-09)
+  * **Feature**: Support dual-stack endpoints for ce api
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.46.0](service/customerprofiles/CHANGELOG.md#v1460-2025-06-09)
+  * **Feature**: This release introduces capability of Profile Explorer, using correct ingestion timestamp & using historical data for computing calculated attributes, and new standard objects for T&H as part of Amazon Connect Customer Profiles service.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.225.0](service/ec2/CHANGELOG.md#v12250-2025-06-09)
+  * **Feature**: Release to support Elastic VMware Service (Amazon EVS) Subnet and Amazon EVS Network Interface Types.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.36.0](service/efs/CHANGELOG.md#v1360-2025-06-09)
+  * **Feature**: Added support for Internet Protocol Version 6 (IPv6) on EFS Service APIs and mount targets.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.32.0](service/marketplacecatalog/CHANGELOG.md#v1320-2025-06-09)
+  * **Feature**: The ListEntities API now supports the EntityID, LastModifiedDate, ProductTitle, and Visibility filters for machine learning products. You can also sort using all of those filters.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.14.0](service/workspacesthinclient/CHANGELOG.md#v1140-2025-06-09)
+  * **Feature**: Add ConflictException to UpdateEnvironment API
+
 # Release (2025-06-06)
 
 ## General Highlights

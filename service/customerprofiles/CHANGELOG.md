@@ -1,3 +1,7 @@
+# v1.46.0 (2025-06-09)
+
+* **Feature**: This release introduces capability of Profile Explorer, using correct ingestion timestamp & using historical data for computing calculated attributes, and new standard objects for T&H as part of Amazon Connect Customer Profiles service.
+
 # v1.45.2 (2025-04-03)
 
 * No change notes available for this release.

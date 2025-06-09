@@ -29,10 +29,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.4
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.2
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.224.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.225.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.44.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.57.3
-	github.com/aws/aws-sdk-go-v2/service/efs v1.35.4
+	github.com/aws/aws-sdk-go-v2/service/efs v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.46.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.29.2
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.29.4

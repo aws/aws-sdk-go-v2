@@ -1,3 +1,7 @@
+# v1.47.0 (2025-06-09)
+
+* **Feature**: Deprecate `atRestEncryptionEnabled` and `transitEncryptionEnabled` attributes in `CreateApiCache` action. Encryption is always enabled for new caches.
+
 # v1.46.0 (2025-04-24)
 
 * **Feature**: Add data source support to Event APIs

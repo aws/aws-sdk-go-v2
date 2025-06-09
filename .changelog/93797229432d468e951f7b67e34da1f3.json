@@ -1,8 +1,0 @@
-{
-    "id": "93797229-432d-468e-951f-7b67e34da1f3",
-    "type": "feature",
-    "description": "The ListEntities API now supports the EntityID, LastModifiedDate, ProductTitle, and Visibility filters for machine learning products. You can also sort using all of those filters.",
-    "modules": [
-        "service/marketplacecatalog"
-    ]
-}

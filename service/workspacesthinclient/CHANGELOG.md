@@ -1,3 +1,7 @@
+# v1.14.0 (2025-06-09)
+
+* **Feature**: Add ConflictException to UpdateEnvironment API
+
 # v1.13.1 (2025-04-03)
 
 * No change notes available for this release.

@@ -1,8 +1,0 @@
-{
-    "id": "84894336-7714-4e2f-bca0-cccfa1f339ae",
-    "type": "feature",
-    "description": "Release to support Elastic VMware Service (Amazon EVS) Subnet and Amazon EVS Network Interface Types.",
-    "modules": [
-        "service/ec2"
-    ]
-}
