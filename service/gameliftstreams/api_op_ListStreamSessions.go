@@ -36,8 +36,9 @@ func (c *Client) ListStreamSessions(ctx context.Context, params *ListStreamSessi
 type ListStreamSessionsInput struct {
 
 	// The unique identifier of a Amazon GameLift Streams stream group to retrieve the
-	// stream session for. You can use either the stream group ID or the Amazon
-	// Resource Name (ARN).
+	// stream session for. You can use either the stream group ID or the [Amazon Resource Name (ARN)].
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
 	// This member is required.
 	Identifier *string

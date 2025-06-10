@@ -38,10 +38,10 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ([Amazon Resource Name (ARN)] that you want to retrieve tags for. To get a Amazon GameLift Streams
+	// The [Amazon Resource Name (ARN)] that you want to retrieve tags for. To get an Amazon GameLift Streams
 	// resource ARN, call a List or Get operation for the resource.
 	//
-	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
 	// This member is required.
 	ResourceArn *string

@@ -37,9 +37,9 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 
 type UpdateApplicationInput struct {
 
-	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or
-	// ID- a-9ZY8X7Wv6 .
+	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 . Example
+	// ID: a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -50,8 +50,10 @@ type UpdateApplicationInput struct {
 	// save application logs. Required if you specify one or more ApplicationLogPaths .
 	//
 	// The log bucket must have permissions that give Amazon GameLift Streams access
-	// to write the log files. For more information, see Getting Started in the Amazon
-	// GameLift Streams Developer Guide.
+	// to write the log files. For more information, see [Application log bucket permission policy]in the Amazon GameLift
+	// Streams Developer Guide.
+	//
+	// [Application log bucket permission policy]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/applications.html#application-bucket-permission-template
 	ApplicationLogOutputUri *string
 
 	// Locations of log files that your content generates during a stream session.
@@ -72,9 +74,11 @@ type UpdateApplicationInput struct {
 
 type UpdateApplicationOutput struct {
 
-	// An Amazon Resource Name (ARN) that's assigned to an application resource and
-	// uniquely identifies it across all Amazon Web Services Regions. Format is
-	// arn:aws:gameliftstreams:[AWS Region]:[AWS account]:application/[resource ID] .
+	// The [Amazon Resource Name (ARN)] that's assigned to an application resource and uniquely identifies it
+	// across all Amazon Web Services Regions. Format is arn:aws:gameliftstreams:[AWS
+	// Region]:[AWS account]:application/[resource ID] .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
 	// This member is required.
 	Arn *string
@@ -97,9 +101,8 @@ type UpdateApplicationOutput struct {
 	//  A set of stream groups that this application is associated with. You can use
 	// any of these stream groups to stream your application.
 	//
-	// This value is a set of [Amazon Resource Names (ARNs)] that uniquely identify stream group resources. Format
-	// example: arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4
-	// .
+	// This value is a set of [Amazon Resource Names (ARNs)] that uniquely identify stream group resources. Example
+	// ARN: arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	AssociatedStreamGroups []string
@@ -115,11 +118,8 @@ type UpdateApplicationOutput struct {
 	// streaming.
 	ExecutablePath *string
 
-	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or
-	// ID- a-9ZY8X7Wv6 .
-	//
-	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	// A unique ID value that is assigned to the resource when it's created. Format
+	// example: a-9ZY8X7Wv6 .
 	Id *string
 
 	// A timestamp that indicates when this resource was last updated. Timestamps are

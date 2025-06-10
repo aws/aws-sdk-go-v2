@@ -42,8 +42,12 @@ type AddStreamGroupLocationsInput struct {
 
 	//  A stream group to add the specified locations to.
 	//
-	// This value is a Amazon Resource Name (ARN) that uniquely identifies the stream
-	// group resource. Format example: sg-1AB2C3De4 .
+	// This value is an [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource.
+	// Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
+	// Example ID: sg-1AB2C3De4 .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
 	// This member is required.
 	Identifier *string
@@ -58,8 +62,12 @@ type AddStreamGroupLocationsInput struct {
 
 type AddStreamGroupLocationsOutput struct {
 
-	// This value is the Amazon Resource Name (ARN) that uniquely identifies the
-	// stream group resource. Format example: sg-1AB2C3De4 .
+	// This value is an [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource.
+	// Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
+	// Example ID: sg-1AB2C3De4 .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
 	// This member is required.
 	Identifier *string

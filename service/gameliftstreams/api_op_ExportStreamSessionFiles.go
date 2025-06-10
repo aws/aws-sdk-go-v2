@@ -56,9 +56,9 @@ func (c *Client) ExportStreamSessionFiles(ctx context.Context, params *ExportStr
 
 type ExportStreamSessionFilesInput struct {
 
-	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or
-	// ID- sg-1AB2C3De4 .
+	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
+	// Example ID: sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -70,20 +70,22 @@ type ExportStreamSessionFilesInput struct {
 	// file name based on the stream session metadata. Alternatively, you can provide a
 	// custom file name with a .zip file extension.
 	//
-	// Example 1: If you provide an S3 URI called s3://MyBucket/MyGame_Session1.zip ,
-	// then Amazon GameLift Streams will save the files at that location.
+	// Example 1: If you provide an S3 URI called
+	// s3://amzn-s3-demo-destination-bucket/MyGame_Session1.zip , then Amazon GameLift
+	// Streams will save the files at that location.
 	//
 	// Example 2: If you provide an S3 URI called
-	// s3://MyBucket/MyGameSessions_ExportedFiles/ , then Amazon GameLift Streams will
-	// save the files at
-	// s3://MyBucket/MyGameSessions_ExportedFiles/YYYYMMDD-HHMMSS-appId-sg-Id-sessionId.zip
+	// s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/ , then Amazon
+	// GameLift Streams will save the files at
+	// s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/YYYYMMDD-HHMMSS-appId-sg-Id-sessionId.zip
 	// or another similar name.
 	//
 	// This member is required.
 	OutputUri *string
 
-	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream session resource. Format example:
-	// 1AB2C3De4 .
+	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream session resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567
+	// . Example ID: ABC123def4567 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//

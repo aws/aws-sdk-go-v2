@@ -20,7 +20,7 @@ import (
 //
 // Stream capacity represents the number of concurrent streams that can be active
 // at a time. You set stream capacity per location, per stream group. There are two
-// types of capacity: always-on and on-demand:
+// types of capacity, always-on and on-demand:
 //
 //   - Always-on: The streaming capacity that is allocated and ready to handle
 //     stream requests without delay. You pay for this capacity whether it's in use or
@@ -51,9 +51,9 @@ func (c *Client) UpdateStreamGroup(ctx context.Context, params *UpdateStreamGrou
 
 type UpdateStreamGroupInput struct {
 
-	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or
-	// ID- sg-1AB2C3De4 .
+	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
+	// Example ID: sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -71,10 +71,11 @@ type UpdateStreamGroupInput struct {
 
 type UpdateStreamGroupOutput struct {
 
-	// An Amazon Resource Name (ARN) that is assigned to the stream group resource and
-	// that uniquely identifies the group across all Amazon Web Services Regions.
-	// Format is arn:aws:gameliftstreams:[AWS Region]:[AWS
-	// account]:streamgroup/[resource ID] .
+	// The [Amazon Resource Name (ARN)] that is assigned to the stream group resource and that uniquely identifies
+	// the group across all Amazon Web Services Regions. Format is
+	// arn:aws:gameliftstreams:[AWS Region]:[AWS account]:streamgroup/[resource ID] .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
 	// This member is required.
 	Arn *string
@@ -82,9 +83,8 @@ type UpdateStreamGroupOutput struct {
 	//  A set of applications that this stream group is associated with. You can
 	// stream any of these applications with the stream group.
 	//
-	// This value is a set of [Amazon Resource Names (ARNs)] that uniquely identify application resources. Format
-	// example: arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6
-	// .
+	// This value is a set of [Amazon Resource Names (ARNs)] that uniquely identify application resources. Example
+	// ARN: arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	AssociatedApplications []string

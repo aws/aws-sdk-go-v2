@@ -29,11 +29,8 @@ type ApplicationSummary struct {
 	// A human-readable label for the application. You can edit this value.
 	Description *string
 
-	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or
-	// ID- a-9ZY8X7Wv6 .
-	//
-	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	// An ID that uniquely identifies the application resource. Example ID: a-9ZY8X7Wv6
+	// .
 	Id *string
 
 	// A timestamp that indicates when this resource was last updated. Timestamps are
@@ -84,14 +81,14 @@ type ApplicationSummary struct {
 // hosts.
 type DefaultApplication struct {
 
-	// An [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Format example:
-	// arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 .
+	// An [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Arn *string
 
-	// An ID that uniquely identifies the application resource. For example:
-	// a-9ZY8X7Wv6 .
+	// An ID that uniquely identifies the application resource. Example ID: a-9ZY8X7Wv6
+	// .
 	Id *string
 
 	noSmithyDocumentSerde
@@ -105,13 +102,14 @@ type ExportFilesMetadata struct {
 	// file name based on the stream session metadata. Alternatively, you can provide a
 	// custom file name with a .zip file extension.
 	//
-	// Example 1: If you provide an S3 URI called s3://MyBucket/MyGame_Session1.zip ,
-	// then Amazon GameLift Streams will save the files at that location.
+	// Example 1: If you provide an S3 URI called
+	// s3://amzn-s3-demo-destination-bucket/MyGame_Session1.zip , then Amazon GameLift
+	// Streams will save the files at that location.
 	//
 	// Example 2: If you provide an S3 URI called
-	// s3://MyBucket/MyGameSessions_ExportedFiles/ , then Amazon GameLift Streams will
-	// save the files at
-	// s3://MyBucket/MyGameSessions_ExportedFiles/YYYYMMDD-HHMMSS-appId-sg-Id-sessionId.zip
+	// s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/ , then Amazon
+	// GameLift Streams will save the files at
+	// s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/YYYYMMDD-HHMMSS-appId-sg-Id-sessionId.zip
 	// or another similar name.
 	OutputUri *string
 
@@ -137,21 +135,21 @@ type ExportFilesMetadata struct {
 type LocationConfiguration struct {
 
 	//  A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon GameLift Streams
+	// that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams
 	// Developer Guide.
 	//
-	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
+	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	//
 	// This member is required.
 	LocationName *string
 
-	//  The streaming capacity that is allocated and ready to handle stream requests
+	// The streaming capacity that is allocated and ready to handle stream requests
 	// without delay. You pay for this capacity whether it's in use or not. Best for
 	// quickest time from streaming request to streaming session.
 	AlwaysOnCapacity *int32
 
-	//  The streaming capacity that Amazon GameLift Streams can allocate in response
-	// to stream requests, and then de-allocate when the session has terminated. This
+	// The streaming capacity that Amazon GameLift Streams can allocate in response to
+	// stream requests, and then de-allocate when the session has terminated. This
 	// offers a cost control measure at the expense of a greater startup time
 	// (typically under 5 minutes).
 	OnDemandCapacity *int32
@@ -167,7 +165,7 @@ type LocationState struct {
 	// streaming and resources that are idle and ready to respond to stream requests.
 	AllocatedCapacity *int32
 
-	//  The streaming capacity that is allocated and ready to handle stream requests
+	// The streaming capacity that is allocated and ready to handle stream requests
 	// without delay. You pay for this capacity whether it's in use or not. Best for
 	// quickest time from streaming request to streaming session.
 	AlwaysOnCapacity *int32
@@ -178,14 +176,14 @@ type LocationState struct {
 	IdleCapacity *int32
 
 	//  A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon GameLift Streams
+	// that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams
 	// Developer Guide.
 	//
-	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
+	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	LocationName *string
 
-	//  The streaming capacity that Amazon GameLift Streams can allocate in response
-	// to stream requests, and then de-allocate when the session has terminated. This
+	// The streaming capacity that Amazon GameLift Streams can allocate in response to
+	// stream requests, and then de-allocate when the session has terminated. This
 	// offers a cost control measure at the expense of a greater startup time
 	// (typically under 5 minutes).
 	OnDemandCapacity *int32
@@ -224,10 +222,10 @@ type LocationState struct {
 type ReplicationStatus struct {
 
 	//  A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon GameLift Streams
+	// that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams
 	// Developer Guide.
 	//
-	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
+	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Location *string
 
 	// The current status of the replication process.
@@ -274,9 +272,8 @@ type RuntimeEnvironment struct {
 // [GetStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamGroup.html
 type StreamGroupSummary struct {
 
-	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or
-	// ID- sg-1AB2C3De4 .
+	// An [Amazon Resource Name (ARN)] that uniquely identifies the stream group resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -294,11 +291,8 @@ type StreamGroupSummary struct {
 	// A descriptive label for the stream group.
 	Description *string
 
-	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or
-	// ID- sg-1AB2C3De4 .
-	//
-	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	// An ID that uniquely identifies the stream group resource. Example ID:
+	// sg-1AB2C3De4 .
 	Id *string
 
 	// A timestamp that indicates when this resource was last updated. Timestamps are
@@ -410,15 +404,15 @@ type StreamGroupSummary struct {
 // [GetStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
 type StreamSessionSummary struct {
 
-	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or
-	// ID- a-9ZY8X7Wv6 .
+	// An [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	ApplicationArn *string
 
-	// An [Amazon Resource Name (ARN)] that uniquely identifies the stream session resource. Format example:
-	// 1AB2C3De4 . .
+	// An [Amazon Resource Name (ARN)] that uniquely identifies the stream session resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567
+	// .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Arn *string
@@ -437,10 +431,10 @@ type StreamSessionSummary struct {
 	// The location where Amazon GameLift Streams is hosting the stream session.
 	//
 	// A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon GameLift Streams
+	// that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams
 	// Developer Guide.
 	//
-	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
+	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Location *string
 
 	// The data transfer protocol in use with the stream session.

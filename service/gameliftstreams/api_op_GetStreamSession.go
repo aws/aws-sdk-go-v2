@@ -38,17 +38,18 @@ type GetStreamSessionInput struct {
 	// The stream group that runs this stream session.
 	//
 	// This value is an [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource.
-	// Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or ID-
-	// sg-1AB2C3De4 .
+	// Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
+	// Example ID: sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
 	// This member is required.
 	Identifier *string
 
-	// An [Amazon Resource Name (ARN)] that uniquely identifies the stream session resource. Format example:
-	// 1AB2C3De4 .
+	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream session resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567
+	// . Example ID: ABC123def4567 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -87,17 +88,19 @@ type GetStreamSessionOutput struct {
 
 	// The application streaming in this session.
 	//
-	// This value is an [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Format
-	// example: arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6
-	// .
+	// This value is an [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Example
+	// ARN: arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	ApplicationArn *string
 
-	// The Amazon Resource Name (ARN) assigned to the stream session resource. When
-	// combined with the stream group ARN, this value uniquely identifies it across all
-	// Amazon Web Services Regions. Format is arn:aws:gameliftstreams:[AWS
-	// Region]:[AWS account]:streamsession/[resource ID] .
+	// The [Amazon Resource Name (ARN)] that's assigned to a stream session resource. When combined with the
+	// stream group resource ID, this value uniquely identifies the stream session
+	// across all Amazon Web Services Regions. Format is arn:aws:gameliftstreams:[AWS
+	// Region]:[AWS account]:streamsession/[stream group resource ID]/[stream session
+	// resource ID] .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Arn *string
 
 	// The maximum length of time (in seconds) that Amazon GameLift Streams keeps the
@@ -123,10 +126,10 @@ type GetStreamSessionOutput struct {
 	// The location where Amazon GameLift Streams is hosting the stream session.
 	//
 	// A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon GameLift Streams
+	// that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams
 	// Developer Guide.
 	//
-	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
+	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Location *string
 
 	// Access location for log files that your content generates during a stream
@@ -157,7 +160,7 @@ type GetStreamSessionOutput struct {
 	StatusReason types.StreamSessionStatusReason
 
 	// The unique identifier for the Amazon GameLift Streams stream group that is
-	// hosting the stream session.
+	// hosting the stream session. Format example: sg-1AB2C3De4 .
 	StreamGroupId *string
 
 	//  An opaque, unique identifier for an end-user, defined by the developer.

@@ -16,8 +16,8 @@ import (
 //
 // that clients can use to access the stream. A stream session refers to an
 // instance of a stream that Amazon GameLift Streams transmits from the server to
-// the end-user. A stream session runs on a compute resource, or stream capacity,
-// that a stream group has allocated.
+// the end-user. A stream session runs on a compute resource that a stream group
+// has allocated.
 //
 // To start a new stream session, specify a stream group and application ID, along
 // with the transport protocol and signal request settings to use with the stream.
@@ -25,17 +25,17 @@ import (
 // starting a stream session, either when creating the stream group, or by using [AssociateApplications].
 //
 // For stream groups that have multiple locations, provide a set of locations
-// ordered by priority by setting Locations . Amazon GameLift Streams will start a
-// single stream session in the next available location. An application must be
-// finished replicating in a remote location before the remote location can host a
-// stream.
+// ordered by priority using a Locations parameter. Amazon GameLift Streams will
+// start a single stream session in the next available location. An application
+// must be finished replicating in a remote location before the remote location can
+// host a stream.
 //
 // If the request is successful, Amazon GameLift Streams begins to prepare the
 // stream. Amazon GameLift Streams assigns an Amazon Resource Name (ARN) value to
 // the stream session resource and sets the status to ACTIVATING . During the
 // stream preparation process, Amazon GameLift Streams queues the request and
-// searches for available stream capacity to run the stream. This can result to one
-// of the following:
+// searches for available stream capacity to run the stream. This results in one of
+// the following:
 //
 //   - Amazon GameLift Streams identifies an available compute resource to run the
 //     application content and start the stream. When the stream is ready, the stream
@@ -66,9 +66,9 @@ func (c *Client) StartStreamSession(ctx context.Context, params *StartStreamSess
 
 type StartStreamSessionInput struct {
 
-	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or
-	// ID- a-9ZY8X7Wv6 .
+	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 . Example
+	// ID: a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -78,9 +78,9 @@ type StartStreamSessionInput struct {
 	// The stream group to run this stream session with.
 	//
 	// This value is an [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource.
-	// Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or ID-
-	// sg-1AB2C3De4 .
+	// Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
+	// Example ID: sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -92,8 +92,16 @@ type StartStreamSessionInput struct {
 	// This member is required.
 	Protocol types.Protocol
 
-	// A WebRTC ICE offer string to use when initializing a WebRTC connection. The
-	// offer is a very long JSON string. Provide the string as a text value in quotes.
+	// A WebRTC ICE offer string to use when initializing a WebRTC connection.
+	// Typically, the offer is a very long JSON string. Provide the string as a text
+	// value in quotes.
+	//
+	// Amazon GameLift Streams also supports setting the field to
+	// "NO_CLIENT_CONNECTION". This will create a session without needing any browser
+	// request or Web SDK integration. The session starts up as usual and waits for a
+	// reconnection from a browser, which is accomplished using [CreateStreamSessionConnection].
+	//
+	// [CreateStreamSessionConnection]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_CreateStreamSessionConnection.html
 	//
 	// This member is required.
 	SignalRequest *string
@@ -145,10 +153,10 @@ type StartStreamSessionInput struct {
 	// the primary location.
 	//
 	// This value is A set of location names. For example, us-east-1 . For a complete
-	// list of locations that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon
+	// list of locations that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon
 	// GameLift Streams Developer Guide.
 	//
-	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
+	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Locations []string
 
 	// The maximum length of time (in seconds) that Amazon GameLift Streams keeps the
@@ -189,16 +197,19 @@ type StartStreamSessionOutput struct {
 	// AdditionalLaunchArgs passes data using command-line arguments.
 	AdditionalLaunchArgs []string
 
-	// An [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Format example:
-	// arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 .
+	// An [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	ApplicationArn *string
 
-	// The Amazon Resource Name (ARN) assigned to the stream session resource. When
-	// combined with the stream group ARN, this value uniquely identifies it across all
-	// Amazon Web Services Regions. Format is arn:aws:gameliftstreams:[AWS
-	// Region]:[AWS account]:streamsession/[resource ID] .
+	// The [Amazon Resource Name (ARN)] that's assigned to a stream session resource. When combined with the
+	// stream group resource ID, this value uniquely identifies the stream session
+	// across all Amazon Web Services Regions. Format is arn:aws:gameliftstreams:[AWS
+	// Region]:[AWS account]:streamsession/[stream group resource ID]/[stream session
+	// resource ID] .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Arn *string
 
 	// The maximum length of time (in seconds) that Amazon GameLift Streams keeps the
@@ -224,10 +235,10 @@ type StartStreamSessionOutput struct {
 	//  The location where Amazon GameLift Streams is streaming your application from.
 	//
 	// A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, refer to [Regions and quotas]in the Amazon GameLift Streams
+	// that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams
 	// Developer Guide.
 	//
-	// [Regions and quotas]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
+	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Location *string
 
 	// Access location for log files that your content generates during a stream
@@ -258,7 +269,7 @@ type StartStreamSessionOutput struct {
 	StatusReason types.StreamSessionStatusReason
 
 	// The unique identifier for the Amazon GameLift Streams stream group that is
-	// hosting the stream session.
+	// hosting the stream session. Format example: sg-1AB2C3De4 .
 	StreamGroupId *string
 
 	//  An opaque, unique identifier for an end-user, defined by the developer.

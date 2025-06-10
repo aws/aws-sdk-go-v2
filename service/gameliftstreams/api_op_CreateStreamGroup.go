@@ -24,7 +24,7 @@ import (
 //
 // Stream capacity represents the number of concurrent streams that can be active
 // at a time. You set stream capacity per location, per stream group. There are two
-// types of capacity: always-on and on-demand:
+// types of capacity, always-on and on-demand:
 //
 //   - Always-on: The streaming capacity that is allocated and ready to handle
 //     stream requests without delay. You pay for this capacity whether it's in use or
@@ -162,6 +162,13 @@ type CreateStreamGroupInput struct {
 	// applications that are associated using AssociateApplications. If not set when
 	// creating a stream group, you will need to call AssociateApplications later,
 	// before you can start streaming.
+	//
+	// This value is an [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource.
+	// Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 . Example
+	// ID: a-9ZY8X7Wv6 .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	DefaultApplicationIdentifier *string
 
 	//  A set of one or more locations and the streaming capacity for each location.
@@ -184,10 +191,11 @@ type CreateStreamGroupInput struct {
 
 type CreateStreamGroupOutput struct {
 
-	// An Amazon Resource Name (ARN) that is assigned to the stream group resource and
-	// that uniquely identifies the group across all Amazon Web Services Regions.
-	// Format is arn:aws:gameliftstreams:[AWS Region]:[AWS
-	// account]:streamgroup/[resource ID] .
+	// The [Amazon Resource Name (ARN)] that is assigned to the stream group resource and that uniquely identifies
+	// the group across all Amazon Web Services Regions. Format is
+	// arn:aws:gameliftstreams:[AWS Region]:[AWS account]:streamgroup/[resource ID] .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
 	// This member is required.
 	Arn *string
@@ -195,9 +203,8 @@ type CreateStreamGroupOutput struct {
 	//  A set of applications that this stream group is associated to. You can stream
 	// any of these applications by using this stream group.
 	//
-	// This value is a set of [Amazon Resource Names (ARNs)] that uniquely identify application resources. Format
-	// example: arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6
-	// .
+	// This value is a set of [Amazon Resource Names (ARNs)] that uniquely identify application resources. Example
+	// ARN: arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	AssociatedApplications []string

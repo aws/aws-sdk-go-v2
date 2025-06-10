@@ -11,8 +11,8 @@
 // stream session placement to meet customer demand.
 //
 // This Reference Guide describes the Amazon GameLift Streams service API. You can
-// use the API through the Amazon Web Services SDK, the Command Line Interface (AWS
-// CLI), or by making direct REST calls through HTTPS.
+// use the API through the Amazon Web Services SDK, the Command Line Interface
+// (CLI), or by making direct REST calls through HTTPS.
 //
 // See the Amazon GameLift Streams Developer Guide for more information on how
 // Amazon GameLift Streams works and how to work with it.

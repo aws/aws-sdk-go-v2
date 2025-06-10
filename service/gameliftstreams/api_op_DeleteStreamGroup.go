@@ -37,8 +37,11 @@ func (c *Client) DeleteStreamGroup(ctx context.Context, params *DeleteStreamGrou
 
 type DeleteStreamGroupInput struct {
 
-	// The unique ID value of the stream group resource to delete. Format example:
-	// sg-1AB2C3De4 .
+	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
+	// Example ID: sg-1AB2C3De4 .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
 	// This member is required.
 	Identifier *string

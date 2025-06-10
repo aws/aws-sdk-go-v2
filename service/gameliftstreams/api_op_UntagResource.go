@@ -32,7 +32,7 @@ type UntagResourceInput struct {
 
 	// The [Amazon Resource Name (ARN)] of the Amazon GameLift Streams resource that you want to remove tags from.
 	//
-	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
 	// This member is required.
 	ResourceArn *string

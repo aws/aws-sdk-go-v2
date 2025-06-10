@@ -42,9 +42,9 @@ type DisassociateApplicationsInput struct {
 	// A set of applications that you want to disassociate from the stream group.
 	//
 	// This value is a set of either [Amazon Resource Names (ARN)] or IDs that uniquely identify application
-	// resources. Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or ID-
-	// a-9ZY8X7Wv6 .
+	// resources. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 . Example
+	// ID: a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Names (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -54,9 +54,9 @@ type DisassociateApplicationsInput struct {
 	// A stream group to disassociate these applications from.
 	//
 	// This value is an [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource.
-	// Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or ID-
-	// sg-1AB2C3De4 .
+	// Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
+	// Example ID: sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	//
@@ -70,17 +70,14 @@ type DisassociateApplicationsOutput struct {
 
 	// A set of applications that are disassociated from this stream group.
 	//
-	// This value is a set of either [Amazon Resource Names (ARN)] or IDs that uniquely identify application
-	// resources. Format example: ARN-
-	// arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6 or ID-
-	// a-9ZY8X7Wv6 .
+	// This value is a set of [Amazon Resource Names (ARNs)] that uniquely identify application resources. Example
+	// ARN: arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
 	//
-	// [Amazon Resource Names (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	ApplicationArns []string
 
-	// An [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource. Format example:
-	// ARN- arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4 or
-	// ID- sg-1AB2C3De4 .
+	// An [Amazon Resource Name (ARN)] that uniquely identifies the stream group resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Arn *string
