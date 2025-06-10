@@ -1,0 +1,9 @@
+{
+    "id": "9f2244ae-e04a-4aeb-b2c5-3783a9ba261c",
+    "type": "bugfix",
+    "description": "StreamSigner uses signingTime.UTC()",
+    "collapse": false,
+    "modules": [
+        "aws/signer/v4"
+    ]
+}
