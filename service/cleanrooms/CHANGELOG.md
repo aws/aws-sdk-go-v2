@@ -1,3 +1,7 @@
+# v1.25.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2025-04-30)
 
 * **Feature**: This release adds support for ProtectedQuery results to be delivered to more than one collaboration member via the new distribute output configuration in StartProtectedQuery.

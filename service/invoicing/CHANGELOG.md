@@ -1,3 +1,7 @@
+# v1.2.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.0 (2025-06-04)
 
 * **Feature**: Added new Invoicing ListInvoiceSummaries API Operation

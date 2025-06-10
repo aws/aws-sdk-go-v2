@@ -1,3 +1,7 @@
+# v1.42.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.0 (2025-05-12)
 
 * **Feature**: Updating the endpoint list for the Identity and access management (IAM) service

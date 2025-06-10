@@ -1,3 +1,7 @@
+# v1.31.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2025-05-06)
 
 * **Feature**: Add dualstack endpoints support.

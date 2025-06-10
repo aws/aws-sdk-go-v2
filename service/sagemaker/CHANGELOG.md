@@ -1,3 +1,7 @@
+# v1.195.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.195.0 (2025-06-04)
 
 * **Feature**: Added support for p6-b200 instance type in SageMaker Training Jobs and Training Plans.

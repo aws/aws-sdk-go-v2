@@ -1,3 +1,7 @@
+# v1.12.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2025-04-14)
 
 * **Feature**: Indonesia SOR Tax Registration Launch

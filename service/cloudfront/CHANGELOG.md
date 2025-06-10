@@ -1,3 +1,7 @@
+# v1.46.2 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.1 (2025-05-08)
 
 * **Documentation**: Doc-only update for CloudFront. These changes include customer-reported issues.

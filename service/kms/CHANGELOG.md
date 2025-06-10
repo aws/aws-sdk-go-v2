@@ -1,3 +1,7 @@
+# v1.40.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2025-06-06)
 
 * **Feature**: Remove unpopulated KeyMaterialId from Encrypt Response

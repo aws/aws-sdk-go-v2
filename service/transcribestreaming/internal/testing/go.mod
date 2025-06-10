@@ -3,17 +3,17 @@ module github.com/aws/aws-sdk-go-v2/service/transcribestreaming/internal/testing
 go 1.22
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.36.3
+	github.com/aws/aws-sdk-go-v2 v1.36.4
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.10
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.5.30
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.26.0
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.5.31
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.26.1
 	github.com/aws/smithy-go v1.22.2
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.68 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.34 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.34 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.69 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.35 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.35 // indirect
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../

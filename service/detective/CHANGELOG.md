@@ -1,3 +1,7 @@
+# v1.33.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2025-04-11)
 
 * **Feature**: Add support for Detective DualStack endpoints

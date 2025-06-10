@@ -1,3 +1,7 @@
+# v1.25.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2025-05-29)
 
 * **Feature**: IVS Real-Time now offers customers the participant replication that allow customers to copy a participant from one stage to another.

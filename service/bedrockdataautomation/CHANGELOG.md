@@ -1,3 +1,7 @@
+# v1.5.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.0 (2025-05-16)
 
 * **Feature**: Add support for VIDEO modality to BlueprintType enum.

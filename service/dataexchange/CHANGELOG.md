@@ -1,3 +1,7 @@
+# v1.35.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2025-05-29)
 
 * **Feature**: This release adds Tag support for Event Action resource, through which customers can create event actions with Tags and retrieve event actions with Tags.

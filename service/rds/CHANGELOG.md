@@ -1,3 +1,7 @@
+# v1.97.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.97.0 (2025-06-06)
 
 * **Feature**: Include Global Cluster Identifier in DBCluster if the DBCluster is a Global Cluster Member.

@@ -1,8 +1,0 @@
-{
-    "id": "326ce4e3-81b2-4115-a50d-dfbf76576f6d",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon GameLift Streams to address formatting errors, correct resource ID examples, and update links to other guides",
-    "modules": [
-        "service/gameliftstreams"
-    ]
-}

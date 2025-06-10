@@ -1,3 +1,7 @@
+# v1.42.2 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.1 (2025-05-07)
 
 * **Documentation**: Updated the CreateImageRecipeRequest ParentImage description to include all valid values as updated with the SSM Parameters project.

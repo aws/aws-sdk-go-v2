@@ -1,3 +1,7 @@
+# v1.24.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2025-04-22)
 
 * **Feature**: AWS Account Management now supports account name update via IAM principals.

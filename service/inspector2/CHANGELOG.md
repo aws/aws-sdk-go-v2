@@ -1,3 +1,7 @@
+# v1.37.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2025-05-20)
 
 * **Feature**: This release adds GetClustersForImage API and filter updates as part of the mapping of container images to running containers feature.

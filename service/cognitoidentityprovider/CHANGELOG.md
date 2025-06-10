@@ -1,3 +1,7 @@
+# v1.53.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.0 (2025-05-14)
 
 * **Feature**: Add exceptions to WebAuthn operations.

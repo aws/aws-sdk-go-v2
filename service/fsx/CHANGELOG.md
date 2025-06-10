@@ -1,3 +1,7 @@
+# v1.54.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2025-05-29)
 
 * **Feature**: FSx API changes to support the public launch of new Intelligent Tiering storage class on Amazon FSx for Lustre

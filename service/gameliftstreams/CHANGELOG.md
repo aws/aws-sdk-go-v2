@@ -1,3 +1,8 @@
+# v1.1.3 (2025-06-10)
+
+* **Documentation**: Documentation updates for Amazon GameLift Streams to address formatting errors, correct resource ID examples, and update links to other guides
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.2 (2025-06-06)
 
 * No change notes available for this release.

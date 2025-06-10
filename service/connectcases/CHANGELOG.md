@@ -1,3 +1,7 @@
+# v1.25.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2025-04-29)
 
 * **Feature**: Introduces CustomEntity as part of the UserUnion data type. This field is used to indicate the entity who is performing the API action.

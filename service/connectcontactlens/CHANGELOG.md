@@ -1,3 +1,7 @@
+# v1.28.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2025-04-11)
 
 * **Feature**: Making sentiment optional for ListRealtimeContactAnalysisSegments Response depending on conversational analytics configuration

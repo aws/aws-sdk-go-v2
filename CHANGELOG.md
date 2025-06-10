@@ -1,3 +1,14 @@
+# Release (2025-06-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.36.4
+  * **Bug Fix**: Use UTC() in v4 event stream signer to prevent date mismatch on direct use.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.1.3](service/gameliftstreams/CHANGELOG.md#v113-2025-06-10)
+  * **Documentation**: Documentation updates for Amazon GameLift Streams to address formatting errors, correct resource ID examples, and update links to other guides
+
 # Release (2025-06-09)
 
 ## Module Highlights

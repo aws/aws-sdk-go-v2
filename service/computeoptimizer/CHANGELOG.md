@@ -1,3 +1,7 @@
+# v1.43.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2025-06-02)
 
 * **Feature**: This release enables AWS Compute Optimizer to analyze Amazon Aurora database clusters and generate Aurora I/O-Optimized recommendations.

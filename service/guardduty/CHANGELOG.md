@@ -1,3 +1,7 @@
+# v1.54.6 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.5 (2025-05-08)
 
 * **Documentation**: Updated description of a data structure.

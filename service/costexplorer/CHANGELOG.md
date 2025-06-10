@@ -1,3 +1,7 @@
+# v1.51.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.0 (2025-06-09)
 
 * **Feature**: Support dual-stack endpoints for ce api

@@ -1,3 +1,7 @@
+# v1.5.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.0 (2025-05-21)
 
 * **Feature**: Modified validation to allow expectedCustomerSpend array with zero elements in Partner Opportunity operations.

@@ -1,3 +1,7 @@
+# v1.34.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2025-04-24)
 
 * **Feature**: AWS App Runner adds Node.js 22 runtime.

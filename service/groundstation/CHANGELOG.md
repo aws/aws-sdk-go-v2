@@ -1,3 +1,7 @@
+# v1.33.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2025-04-09)
 
 * **Feature**: Support tagging Agents and adjust input field validations

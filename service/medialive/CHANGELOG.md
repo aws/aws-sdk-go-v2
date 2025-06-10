@@ -1,3 +1,7 @@
+# v1.76.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.76.0 (2025-05-12)
 
 * **Feature**: Add support to the AV1 rate control mode

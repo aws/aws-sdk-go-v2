@@ -1,3 +1,7 @@
+# v1.19.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2025-06-02)
 
 * **Feature**: Add support for generating match IDs in near real-time.

@@ -1,3 +1,7 @@
+# v1.24.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2025-05-01)
 
 * **Feature**: Amazon Verified Permissions / Features : Adds support for tagging policy stores.

@@ -1,8 +1,0 @@
-{
-    "id": "6015cce7-8338-47be-aefc-27eb6f3ef294",
-    "type": "bugfix",
-    "description": "Use UTC() in v4 event stream signer to prevent date mismatch on direct use.",
-    "modules": [
-        "."
-    ]
-}

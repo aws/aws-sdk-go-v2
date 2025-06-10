@@ -1,3 +1,7 @@
+# v1.61.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.0 (2025-06-05)
 
 * **Feature**: AWS WAF adds support for ASN-based traffic filtering and support for ASN-based rate limiting.

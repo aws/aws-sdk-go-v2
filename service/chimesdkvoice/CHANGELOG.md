@@ -1,3 +1,7 @@
+# v1.22.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2025-04-03)
 
 * **Feature**: Added FOC date as an attribute of PhoneNumberOrder, added AccessDeniedException as a possible return type of ValidateE911Address

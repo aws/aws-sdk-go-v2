@@ -1,3 +1,7 @@
+# v1.36.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2025-06-09)
 
 * **Feature**: Added support for Internet Protocol Version 6 (IPv6) on EFS Service APIs and mount targets.

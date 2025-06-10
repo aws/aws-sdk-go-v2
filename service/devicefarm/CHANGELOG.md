@@ -1,3 +1,7 @@
+# v1.31.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2025-05-05)
 
 * **Feature**: Add an optional parameter to the GetDevicePoolCompatibility API to pass in project information to check device pool compatibility.

@@ -1,3 +1,7 @@
+# v1.29.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2025-04-22)
 
 * **Feature**: You can now delete Amazon MQ broker configurations using the DeleteConfiguration API. For more information, see Configurations in the Amazon MQ API Reference.

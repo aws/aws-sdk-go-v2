@@ -1,3 +1,7 @@
+# v1.16.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2025-06-02)
 
 * **Feature**: Support recommendations for Aurora instance and Aurora cluster storage.

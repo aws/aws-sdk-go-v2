@@ -1,3 +1,7 @@
+# v1.17.5 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.4 (2025-04-23)
 
 * **Documentation**: Documentation-only update for CreateView option correction

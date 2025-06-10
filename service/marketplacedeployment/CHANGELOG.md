@@ -1,3 +1,7 @@
+# v1.7.4 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.3 (2025-04-25)
 
 * **Documentation**: Doc only update for the AWS Marketplace Deployment Service that fixes several customer-reported issues.

@@ -1,3 +1,7 @@
+# v1.42.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.0 (2025-05-16)
 
 * **Feature**: CodePipeline now supports new API ListDeployActionExecutionTargets that lists the deployment target details for deploy action executions.

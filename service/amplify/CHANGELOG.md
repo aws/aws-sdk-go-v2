@@ -1,3 +1,7 @@
+# v1.33.2 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.1 (2025-06-04)
 
 * **Documentation**: Update documentation for cacheConfig in CreateApp API

@@ -1,3 +1,7 @@
+# v1.6.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2025-06-02)
 
 * **Feature**: Introduces SUSPENDING and SUSPENDED states for clusters, compute node groups, and queues.

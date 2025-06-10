@@ -1,3 +1,7 @@
+# v1.61.1 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.0 (2025-05-15)
 
 * **Feature**: AWS CodeBuild now supports Docker Server capability

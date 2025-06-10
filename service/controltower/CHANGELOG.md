@@ -1,3 +1,7 @@
+# v1.22.2 (2025-06-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.1 (2025-05-15)
 
 * **Documentation**: Updated the descriptions for the AWS Control Tower Baseline APIs to make them more intuitive.
