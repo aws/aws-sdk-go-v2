@@ -1,8 +1,0 @@
-{
-    "id": "43914194-16ea-4a5c-9524-b50e236afada",
-    "type": "feature",
-    "description": "Add support for the Assisted NLU feature to improve bot performance",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

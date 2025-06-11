@@ -1,3 +1,19 @@
+# Release (2025-06-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.9.0](service/controlcatalog/CHANGELOG.md#v190-2025-06-11)
+  * **Feature**: Introduced ListControlMappings API that retrieves control mappings. Added control aliases and governed resources fields in GetControl and ListControls APIs. New filtering capability in ListControls API, with implementation identifiers and implementation types.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.66.0](service/eks/CHANGELOG.md#v1660-2025-06-11)
+  * **Feature**: Release for EKS Pod Identity Cross Account feature and disableSessionTags flag.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.52.0](service/lexmodelsv2/CHANGELOG.md#v1520-2025-06-11)
+  * **Feature**: Add support for the Assisted NLU feature to improve bot performance
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.35.0](service/networkmanager/CHANGELOG.md#v1350-2025-06-11)
+  * **Feature**: Add support for public DNS hostname resolution to private IP addresses across Cloud WAN-managed VPCs. Add support for security group referencing across Cloud WAN-managed VPCs.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.97.2](service/rds/CHANGELOG.md#v1972-2025-06-11)
+  * **Documentation**: Updates Amazon RDS documentation for Amazon RDS for Db2 cross-Region replicas in standby mode.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.62.0](service/wafv2/CHANGELOG.md#v1620-2025-06-11)
+  * **Feature**: WAF now provides two DDoS protection options: resource-level monitoring for Application Load Balancers and the AWSManagedRulesAntiDDoSRuleSet managed rule group for CloudFront distributions.
+
 # Release (2025-06-10)
 
 ## General Highlights

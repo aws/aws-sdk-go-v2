@@ -1,3 +1,7 @@
+# v1.52.0 (2025-06-11)
+
+* **Feature**: Add support for the Assisted NLU feature to improve bot performance
+
 # v1.51.2 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

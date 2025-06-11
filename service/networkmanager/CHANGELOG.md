@@ -1,3 +1,7 @@
+# v1.35.0 (2025-06-11)
+
+* **Feature**: Add support for public DNS hostname resolution to private IP addresses across Cloud WAN-managed VPCs. Add support for security group referencing across Cloud WAN-managed VPCs.
+
 # v1.34.2 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.66.0 (2025-06-11)
+
+* **Feature**: Release for EKS Pod Identity Cross Account feature and disableSessionTags flag.
+
 # v1.65.2 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.9.0 (2025-06-11)
+
+* **Feature**: Introduced ListControlMappings API that retrieves control mappings. Added control aliases and governed resources fields in GetControl and ListControls APIs. New filtering capability in ListControls API, with implementation identifiers and implementation types.
+
 # v1.8.1 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

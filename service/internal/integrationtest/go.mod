@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.6
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.41.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.4
-	github.com/aws/aws-sdk-go-v2/service/glue v1.113.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.113.2
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.3
 	github.com/aws/aws-sdk-go-v2/service/iam v1.42.1
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.3
@@ -55,7 +55,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.37.2
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.24.3
 	github.com/aws/aws-sdk-go-v2/service/polly v1.48.3
-	github.com/aws/aws-sdk-go-v2/service/rds v1.97.1
+	github.com/aws/aws-sdk-go-v2/service/rds v1.97.2
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.54.5
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.47.1
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.52.1

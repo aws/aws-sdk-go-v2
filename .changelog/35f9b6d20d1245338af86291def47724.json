@@ -1,8 +1,0 @@
-{
-    "id": "35f9b6d2-0d12-4533-8af8-6291def47724",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for Amazon RDS for Db2 cross-Region replicas in standby mode.",
-    "modules": [
-        "service/rds"
-    ]
-}

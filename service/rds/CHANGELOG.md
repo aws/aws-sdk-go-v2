@@ -1,3 +1,7 @@
+# v1.97.2 (2025-06-11)
+
+* **Documentation**: Updates Amazon RDS documentation for Amazon RDS for Db2 cross-Region replicas in standby mode.
+
 # v1.97.1 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions
