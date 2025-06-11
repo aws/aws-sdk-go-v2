@@ -80,6 +80,7 @@ const (
 
 	ec2MetadataServiceEndpointKey = "ec2_metadata_service_endpoint"
 
+	ec2MetadataDisabledKey   = "disable_ec2_metadata"
 	ec2MetadataV1DisabledKey = "ec2_metadata_v1_disabled"
 
 	ec2InstanceProfileNameKey = "ec2_instance_profile_name"
@@ -265,6 +266,11 @@ type SharedConfig struct {
 	//
 	// ec2_metadata_service_endpoint=http://fd00:ec2::254
 	EC2IMDSEndpoint string
+
+	// Specifies if the EC2 IMDS service client is enabled.
+	//
+	// disable_ec2_metadata=true
+	EC2IMDSClientEnableState imds.ClientEnableState
 
 	// Specifies that IMDS clients should not fallback to IMDSv1 if token
 	// requests fail.
@@ -881,6 +887,7 @@ func mergeSections(dst *ini.Sections, src ini.Sections) error {
 			s3DisableMultiRegionAccessPointsKey,
 			ec2MetadataServiceEndpointModeKey,
 			ec2MetadataServiceEndpointKey,
+			ec2MetadataDisabledKey,
 			ec2MetadataV1DisabledKey,
 			ec2InstanceProfileNameKey,
 			useDualStackEndpoint,
@@ -1159,6 +1166,8 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 		return fmt.Errorf("failed to load %s from shared config, %w", responseChecksumValidationKey, err)
 	}
 
+	updateEC2IMDSClientEnableState(&c.EC2IMDSClientEnableState, section, ec2MetadataDisabledKey)
+
 	// Shared Credentials
 	creds := aws.Credentials{
 		AccessKeyID:     section.String(accessKeyIDKey),
@@ -1175,6 +1184,21 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	updateString(&c.ServicesSectionName, section, servicesSectionKey)
 
 	return nil
+}
+
+func updateEC2IMDSClientEnableState(state *imds.ClientEnableState, sec ini.Section, key string) {
+	if !sec.Has(key) {
+		return
+	}
+
+	v := sec.String(key)
+	if strings.EqualFold(v, "true") {
+		*state = imds.ClientDisabled
+	} else if strings.EqualFold(v, "false") {
+		*state = imds.ClientEnabled
+	}
+
+	return
 }
 
 func updateRequestMinCompressSizeBytes(bytes **int64, sec ini.Section, key string) error {
@@ -1693,4 +1717,14 @@ func (c SharedConfig) getEC2InstanceProfileName() (string, bool, error) {
 	}
 
 	return c.EC2InstanceProfileName, true, nil
+}
+
+// GetEC2IMDSClientEnableState implements a EC2IMDSClientEnableState options
+// resolver interface.
+func (c SharedConfig) GetEC2IMDSClientEnableState() (imds.ClientEnableState, bool, error) {
+	if c.EC2IMDSClientEnableState == imds.ClientDefaultEnableState {
+		return imds.ClientDefaultEnableState, false, nil
+	}
+
+	return c.EC2IMDSClientEnableState, true, nil
 }

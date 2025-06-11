@@ -349,3 +349,12 @@ response_checksum_validation = blabla
 
 [profile ec2_instance_profile_name]
 ec2_instance_profile_name = ProfileName
+
+[profile ec2-metadata-disabled-false]
+disable_ec2_metadata=FALSE
+
+[profile ec2-metadata-disabled-true]
+disable_ec2_metadata=TRUE
+
+[profile ec2-metadata-disabled-invalid]
+disable_ec2_metadata=invalid
