@@ -13603,6 +13603,18 @@ func awsRestjson1_serializeDocumentNewCustomVocabularyItem(v *types.NewCustomVoc
 	return nil
 }
 
+func awsRestjson1_serializeDocumentNluImprovementSpecification(v *types.NluImprovementSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentObfuscationSetting(v *types.ObfuscationSetting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14111,6 +14123,13 @@ func awsRestjson1_serializeDocumentResponseSpecification(v *types.ResponseSpecif
 func awsRestjson1_serializeDocumentRuntimeSettings(v *types.RuntimeSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.NluImprovement != nil {
+		ok := object.Key("nluImprovement")
+		if err := awsRestjson1_serializeDocumentNluImprovementSpecification(v.NluImprovement, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.SlotResolutionImprovement != nil {
 		ok := object.Key("slotResolutionImprovement")

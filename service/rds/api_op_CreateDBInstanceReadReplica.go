@@ -15,16 +15,20 @@ import (
 
 // Creates a new DB instance that acts as a read replica for an existing source DB
 // instance or Multi-AZ DB cluster. You can create a read replica for a DB instance
-// running Db2, MariaDB, MySQL, Oracle, PostgreSQL, or SQL Server. You can create a
-// read replica for a Multi-AZ DB cluster running MySQL or PostgreSQL. For more
+// running MariaDB, MySQL, Oracle, PostgreSQL, or SQL Server. You can create a read
+// replica for a Multi-AZ DB cluster running MySQL or PostgreSQL. For more
 // information, see [Working with read replicas]and [Migrating from a Multi-AZ DB cluster to a DB instance using a read replica] in the Amazon RDS User Guide.
+//
+// Amazon RDS for Db2 supports this operation for standby replicas. To create a
+// standby replica for a DB instance running Db2, you must set ReplicaMode to
+// mounted .
 //
 // Amazon Aurora doesn't support this operation. To create a DB instance for an
 // Aurora DB cluster, use the CreateDBInstance operation.
 //
-// All read replica DB instances are created with backups disabled. All other
-// attributes (including DB security groups and DB parameter groups) are inherited
-// from the source DB instance or cluster, except as specified.
+// RDS creates read replicas with backups disabled. All other attributes
+// (including DB security groups and DB parameter groups) are inherited from the
+// source DB instance or cluster, except as specified.
 //
 // Your source DB instance or cluster must have backup retention enabled.
 //
@@ -131,6 +135,14 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The name of the DB parameter group to associate with this read replica DB
 	// instance.
 	//
+	// For the Db2 DB engine, if your source DB instance uses the Bring Your Own
+	// License model, then a custom parameter group must be associated with the
+	// replica. For a same Amazon Web Services Region replica, if you don't specify a
+	// custom parameter group, Amazon RDS associates the custom parameter group
+	// associated with the source DB instance. For a cross-Region replica, you must
+	// specify a custom parameter group. This custom parameter group must include your
+	// IBM Site ID and IBM Customer ID. For more information, see [IBM IDs for Bring Your Own License for Db2].
+	//
 	// For Single-AZ or Multi-AZ DB instance read replica instances, if you don't
 	// specify a value for DBParameterGroupName , then Amazon RDS uses the
 	// DBParameterGroup of the source DB instance for a same Region read replica, or
@@ -143,8 +155,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	//
 	// Specifying a parameter group for this operation is only supported for MySQL DB
 	// instances for cross-Region read replicas, for Multi-AZ DB cluster read replica
-	// instances, and for Oracle DB instances. It isn't supported for MySQL DB
-	// instances for same Region read replicas or for RDS Custom.
+	// instances, for Db2 DB instances, and for Oracle DB instances. It isn't supported
+	// for MySQL DB instances for same Region read replicas or for RDS Custom.
 	//
 	// Constraints:
 	//
@@ -153,6 +165,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	//   - First character must be a letter.
 	//
 	//   - Can't end with a hyphen or contain two consecutive hyphens.
+	//
+	// [IBM IDs for Bring Your Own License for Db2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html#db2-prereqs-ibm-info
 	DBParameterGroupName *string
 
 	// A DB subnet group for the DB instance. The new DB instance is created in the
@@ -518,24 +532,35 @@ type CreateDBInstanceReadReplicaInput struct {
 	// For more information, see CreateDBInstance.
 	PubliclyAccessible *bool
 
-	// The open mode of the replica database: mounted or read-only.
+	// The open mode of the replica database.
 	//
-	// This parameter is only supported for Oracle DB instances.
+	// This parameter is only supported for Db2 DB instances and Oracle DB instances.
 	//
-	// Mounted DB replicas are included in Oracle Database Enterprise Edition. The
-	// main use case for mounted replicas is cross-Region disaster recovery. The
+	// Db2 Standby DB replicas are included in Db2 Advanced Edition (AE) and Db2
+	// Standard Edition (SE). The main use case for standby replicas is cross-Region
+	// disaster recovery. Because it doesn't accept user connections, a standby replica
+	// can't serve a read-only workload.
+	//
+	// You can create a combination of standby and read-only DB replicas for the same
+	// primary DB instance. For more information, see [Working with read replicas for Amazon RDS for Db2]in the Amazon RDS User Guide.
+	//
+	// To create standby DB replicas for RDS for Db2, set this parameter to mounted .
+	//
+	// Oracle Mounted DB replicas are included in Oracle Database Enterprise Edition.
+	// The main use case for mounted replicas is cross-Region disaster recovery. The
 	// primary database doesn't use Active Data Guard to transmit information to the
 	// mounted replica. Because it doesn't accept user connections, a mounted replica
 	// can't serve a read-only workload.
 	//
 	// You can create a combination of mounted and read-only DB replicas for the same
-	// primary DB instance. For more information, see [Working with Oracle Read Replicas for Amazon RDS]in the Amazon RDS User Guide.
+	// primary DB instance. For more information, see [Working with read replicas for Amazon RDS for Oracle]in the Amazon RDS User Guide.
 	//
 	// For RDS Custom, you must specify this parameter and set it to mounted . The
 	// value won't be set by default. After replica creation, you can manage the open
 	// mode manually.
 	//
-	// [Working with Oracle Read Replicas for Amazon RDS]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+	// [Working with read replicas for Amazon RDS for Db2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+	// [Working with read replicas for Amazon RDS for Oracle]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
 	ReplicaMode types.ReplicaMode
 
 	// The identifier of the Multi-AZ DB cluster that will act as the source for the
@@ -556,8 +581,14 @@ type CreateDBInstanceReadReplicaInput struct {
 	SourceDBClusterIdentifier *string
 
 	// The identifier of the DB instance that will act as the source for the read
-	// replica. Each DB instance can have up to 15 read replicas, with the exception of
-	// Oracle and SQL Server, which can have up to five.
+	// replica. Each DB instance can have up to 15 read replicas, except for the
+	// following engines:
+	//
+	//   - Db2 - Can have up to three replicas.
+	//
+	//   - Oracle - Can have up to five read replicas.
+	//
+	//   - SQL Server - Can have up to five read replicas.
 	//
 	// Constraints:
 	//

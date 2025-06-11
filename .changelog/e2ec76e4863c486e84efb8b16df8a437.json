@@ -1,0 +1,8 @@
+{
+    "id": "e2ec76e4-863c-486e-84ef-b8b16df8a437",
+    "type": "feature",
+    "description": "Add support for public DNS hostname resolution to private IP addresses across Cloud WAN-managed VPCs. Add support for security group referencing across Cloud WAN-managed VPCs.",
+    "modules": [
+        "service/networkmanager"
+    ]
+}

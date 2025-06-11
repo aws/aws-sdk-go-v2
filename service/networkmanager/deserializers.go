@@ -16974,6 +16974,15 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeValues(v **types.CoreNetwo
 				sv.DestinationIdentifier = ptr.String(jtv)
 			}
 
+		case "DnsSupport":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DnsSupport = jtv
+			}
+
 		case "EdgeLocations":
 			if err := awsRestjson1_deserializeDocumentExternalRegionCodeList(&sv.EdgeLocations, value); err != nil {
 				return err
@@ -16993,6 +17002,15 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeValues(v **types.CoreNetwo
 				sv.NetworkFunctionGroupName = ptr.String(jtv)
 			}
 
+		case "SecurityGroupReferencingSupport":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.SecurityGroupReferencingSupport = jtv
+			}
+
 		case "SegmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17010,6 +17028,15 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeValues(v **types.CoreNetwo
 		case "SharedSegments":
 			if err := awsRestjson1_deserializeDocumentConstrainedStringList(&sv.SharedSegments, value); err != nil {
 				return err
+			}
+
+		case "VpnEcmpSupport":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.VpnEcmpSupport = jtv
 			}
 
 		default:
@@ -21893,6 +21920,15 @@ func awsRestjson1_deserializeDocumentVpcOptions(v **types.VpcOptions, value inte
 				sv.ApplianceModeSupport = jtv
 			}
 
+		case "DnsSupport":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DnsSupport = jtv
+			}
+
 		case "Ipv6Support":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -21900,6 +21936,15 @@ func awsRestjson1_deserializeDocumentVpcOptions(v **types.VpcOptions, value inte
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.Ipv6Support = jtv
+			}
+
+		case "SecurityGroupReferencingSupport":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.SecurityGroupReferencingSupport = jtv
 			}
 
 		default:

@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated list of all available controls in the Amazon Web Services
-// Control Catalog library. Allows you to discover available controls. The list of
-// controls is given as structures of type controlSummary. The ARN is returned in
-// the global controlcatalog format, as shown in the examples.
+// Returns a paginated list of all available controls in the Control Catalog
+// library. Allows you to discover available controls. The list of controls is
+// given as structures of type controlSummary. The ARN is returned in the global
+// controlcatalog format, as shown in the examples.
 func (c *Client) ListControls(ctx context.Context, params *ListControlsInput, optFns ...func(*Options)) (*ListControlsOutput, error) {
 	if params == nil {
 		params = &ListControlsInput{}
@@ -31,6 +31,11 @@ func (c *Client) ListControls(ctx context.Context, params *ListControlsInput, op
 }
 
 type ListControlsInput struct {
+
+	// An optional filter that narrows the results to controls with specific
+	// implementation types or identifiers. If you don't provide a filter, the
+	// operation returns all available controls.
+	Filter *types.ControlFilter
 
 	// The maximum number of results on a page or for an API request call.
 	MaxResults *int32

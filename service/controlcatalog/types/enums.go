@@ -64,3 +64,22 @@ func (ControlSeverity) Values() []ControlSeverity {
 		"CRITICAL",
 	}
 }
+
+type MappingType string
+
+// Enum values for MappingType
+const (
+	MappingTypeFramework     MappingType = "FRAMEWORK"
+	MappingTypeCommonControl MappingType = "COMMON_CONTROL"
+)
+
+// Values returns all known values for MappingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MappingType) Values() []MappingType {
+	return []MappingType{
+		"FRAMEWORK",
+		"COMMON_CONTROL",
+	}
+}

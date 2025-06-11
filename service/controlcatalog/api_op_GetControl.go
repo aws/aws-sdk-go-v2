@@ -84,8 +84,8 @@ type GetControlOutput struct {
 	Name *string
 
 	// Returns information about the control, including the scope of the control, if
-	// enabled, and the Regions in which the control currently is available for
-	// deployment. For more information about scope, see [Global services].
+	// enabled, and the Regions in which the control is available for deployment. For
+	// more information about scope, see [Global services].
 	//
 	// If you are applying controls through an Amazon Web Services Control Tower
 	// landing zone environment, remember that the values returned in the
@@ -101,9 +101,22 @@ type GetControlOutput struct {
 	// This member is required.
 	RegionConfiguration *types.RegionConfiguration
 
+	// A list of alternative identifiers for the control. These are human-readable
+	// designators, such as SH.S3.1 . Several aliases can refer to the same control
+	// across different Amazon Web Services services or compliance frameworks.
+	Aliases []string
+
 	// A timestamp that notes the time when the control was released (start of its
 	// life) as a governance capability in Amazon Web Services.
 	CreateTime *time.Time
+
+	// A list of Amazon Web Services resource types that are governed by this control.
+	// This information helps you understand which controls can govern certain types of
+	// resources, and conversely, which resources are affected when the control is
+	// implemented. The resources are represented as Amazon Web Services CloudFormation
+	// resource types. If GovernedResources cannot be represented by available
+	// CloudFormation resource types, it’s returned as an empty list.
+	GovernedResources []string
 
 	// Returns information about the control, as an ImplementationDetails object that
 	// shows the underlying implementation type for a control.

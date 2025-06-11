@@ -37,7 +37,7 @@ type ListCommonControlsInput struct {
 	// An optional filter that narrows the results to a specific objective.
 	//
 	// This filter allows you to specify one objective ARN at a time. Passing multiple
-	// ARNs in the CommonControlFilter isn’t currently supported.
+	// ARNs in the CommonControlFilter isn’t supported.
 	CommonControlFilter *types.CommonControlFilter
 
 	// The maximum number of results on a page or for an API request call.

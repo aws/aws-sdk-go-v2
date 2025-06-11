@@ -3605,6 +3605,17 @@ type NewCustomVocabularyItem struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies whether the assisted nlu feature is turned on or off.
+type NluImprovementSpecification struct {
+
+	// Specifies whether the assisted nlu feature is enabled.
+	//
+	// This member is required.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
 // Determines whether Amazon Lex obscures slot values in conversation logs.
 type ObfuscationSetting struct {
 
@@ -4091,6 +4102,9 @@ type RuntimeHintValue struct {
 // Contains specifications about the Amazon Lex runtime generative AI capabilities
 // from Amazon Bedrock that you can turn on for your bot.
 type RuntimeSettings struct {
+
+	// An object containing specifications for the assisted nlu feature.
+	NluImprovement *NluImprovementSpecification
 
 	// An object containing specifications for the assisted slot resolution feature.
 	SlotResolutionImprovement *SlotResolutionImprovementSpecification

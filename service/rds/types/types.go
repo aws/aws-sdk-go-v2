@@ -430,6 +430,12 @@ type ConnectionPoolConfiguration struct {
 	// For example: SET variable1=value1, variable2=value2
 	//
 	// Default: no initialization query
+	//
+	// Since you can access initialization query as part of target group
+	// configuration, it is not protected by authentication or cryptographic methods.
+	// Anyone with access to view or manage your proxy target group configuration can
+	// view the initialization query. You should not add sensitive data, such as
+	// passwords or long-lived encryption keys, to this option.
 	InitQuery *string
 
 	// The maximum size of the connection pool for each target in a target group. The
@@ -494,6 +500,12 @@ type ConnectionPoolConfigurationInfo struct {
 	// This is an optional field.
 	//
 	// For example: SET variable1=value1, variable2=value2
+	//
+	// Since you can access initialization query as part of target group
+	// configuration, it is not protected by authentication or cryptographic methods.
+	// Anyone with access to view or manage your proxy target group configuration can
+	// view the initialization query. You should not add sensitive data, such as
+	// passwords or long-lived encryption keys, to this option.
 	InitQuery *string
 
 	// The maximum size of the connection pool for each target in a target group. The
@@ -2045,12 +2057,14 @@ type DBInstance struct {
 	// The identifier of the source DB instance if this DB instance is a read replica.
 	ReadReplicaSourceDBInstanceIdentifier *string
 
-	// The open mode of an Oracle read replica. The default is open-read-only . For
-	// more information, see [Working with Oracle Read Replicas for Amazon RDS]in the Amazon RDS User Guide.
+	// The open mode of a Db2 or an Oracle read replica. The default is open-read-only
+	// . For more information, see [Working with read replicas for Amazon RDS for Db2]and [Working with read replicas for Amazon RDS for Oracle] in the Amazon RDS User Guide.
 	//
-	// This attribute is only supported in RDS for Oracle.
+	// This attribute is only supported in RDS for Db2, RDS for Oracle, and RDS Custom
+	// for Oracle.
 	//
-	// [Working with Oracle Read Replicas for Amazon RDS]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+	// [Working with read replicas for Amazon RDS for Db2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+	// [Working with read replicas for Amazon RDS for Oracle]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
 	ReplicaMode ReplicaMode
 
 	// The number of minutes to pause the automation. When the time period ends, RDS

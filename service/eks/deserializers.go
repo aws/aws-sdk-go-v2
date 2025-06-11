@@ -15149,6 +15149,24 @@ func awsRestjson1_deserializeDocumentPodIdentityAssociation(v **types.PodIdentit
 				}
 			}
 
+		case "disableSessionTags":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableSessionTags = ptr.Bool(jtv)
+			}
+
+		case "externalId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ExternalId = ptr.String(jtv)
+			}
+
 		case "modifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15204,6 +15222,15 @@ func awsRestjson1_deserializeDocumentPodIdentityAssociation(v **types.PodIdentit
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		case "targetRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TargetRoleArn = ptr.String(jtv)
 			}
 
 		default:

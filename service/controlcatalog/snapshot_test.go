@@ -86,6 +86,18 @@ func TestCheckSnapshot_ListCommonControls(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListControlMappings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListControlMappings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListControlMappings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListControls(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListControls(context.Background(), nil, func(o *Options) {
@@ -138,6 +150,18 @@ func TestUpdateSnapshot_ListCommonControls(t *testing.T) {
 	_, err := svc.ListCommonControls(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCommonControls")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListControlMappings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListControlMappings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListControlMappings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

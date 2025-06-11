@@ -5024,6 +5024,18 @@ func validateNewCustomVocabularyItem(v *types.NewCustomVocabularyItem) error {
 	}
 }
 
+func validateNluImprovementSpecification(v *types.NluImprovementSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NluImprovementSpecification"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateObfuscationSetting(v *types.ObfuscationSetting) error {
 	if v == nil {
 		return nil
@@ -5417,6 +5429,11 @@ func validateRuntimeSettings(v *types.RuntimeSettings) error {
 	if v.SlotResolutionImprovement != nil {
 		if err := validateSlotResolutionImprovementSpecification(v.SlotResolutionImprovement); err != nil {
 			invalidParams.AddNested("SlotResolutionImprovement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NluImprovement != nil {
+		if err := validateNluImprovementSpecification(v.NluImprovement); err != nil {
+			invalidParams.AddNested("NluImprovement", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -11,27 +11,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated list of objectives from the Control Catalog.
-//
-// You can apply an optional filter to see the objectives that belong to a
-// specific domain. If you don’t provide a filter, the operation returns all
-// objectives.
-func (c *Client) ListObjectives(ctx context.Context, params *ListObjectivesInput, optFns ...func(*Options)) (*ListObjectivesOutput, error) {
+// Returns a paginated list of control mappings from the Control Catalog. Control
+// mappings show relationships between controls and other entities, such as common
+// controls or compliance frameworks.
+func (c *Client) ListControlMappings(ctx context.Context, params *ListControlMappingsInput, optFns ...func(*Options)) (*ListControlMappingsOutput, error) {
 	if params == nil {
-		params = &ListObjectivesInput{}
+		params = &ListControlMappingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListObjectives", params, optFns, c.addOperationListObjectivesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListControlMappings", params, optFns, c.addOperationListControlMappingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListObjectivesOutput)
+	out := result.(*ListControlMappingsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListObjectivesInput struct {
+type ListControlMappingsInput struct {
+
+	// An optional filter that narrows the results to specific control mappings based
+	// on control ARNs, common control ARNs, or mapping types.
+	Filter *types.ControlMappingFilter
 
 	// The maximum number of results on a page or for an API request call.
 	MaxResults *int32
@@ -39,21 +41,15 @@ type ListObjectivesInput struct {
 	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
-	// An optional filter that narrows the results to a specific domain.
-	//
-	// This filter allows you to specify one domain ARN at a time. Passing multiple
-	// ARNs in the ObjectiveFilter isn’t supported.
-	ObjectiveFilter *types.ObjectiveFilter
-
 	noSmithyDocumentSerde
 }
 
-type ListObjectivesOutput struct {
+type ListControlMappingsOutput struct {
 
-	// The list of objectives that the ListObjectives API returns.
+	// The list of control mappings that the ListControlMappings API returns.
 	//
 	// This member is required.
-	Objectives []types.ObjectiveSummary
+	ControlMappings []types.ControlMapping
 
 	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
@@ -64,19 +60,19 @@ type ListObjectivesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListObjectivesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListControlMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListObjectives{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListControlMappings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListObjectives{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListControlMappings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListObjectives"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListControlMappings"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -131,7 +127,7 @@ func (c *Client) addOperationListObjectivesMiddlewares(stack *middleware.Stack, 
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListObjectives(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListControlMappings(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -164,8 +160,9 @@ func (c *Client) addOperationListObjectivesMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-// ListObjectivesPaginatorOptions is the paginator options for ListObjectives
-type ListObjectivesPaginatorOptions struct {
+// ListControlMappingsPaginatorOptions is the paginator options for
+// ListControlMappings
+type ListControlMappingsPaginatorOptions struct {
 	// The maximum number of results on a page or for an API request call.
 	Limit int32
 
@@ -174,22 +171,22 @@ type ListObjectivesPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListObjectivesPaginator is a paginator for ListObjectives
-type ListObjectivesPaginator struct {
-	options   ListObjectivesPaginatorOptions
-	client    ListObjectivesAPIClient
-	params    *ListObjectivesInput
+// ListControlMappingsPaginator is a paginator for ListControlMappings
+type ListControlMappingsPaginator struct {
+	options   ListControlMappingsPaginatorOptions
+	client    ListControlMappingsAPIClient
+	params    *ListControlMappingsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListObjectivesPaginator returns a new ListObjectivesPaginator
-func NewListObjectivesPaginator(client ListObjectivesAPIClient, params *ListObjectivesInput, optFns ...func(*ListObjectivesPaginatorOptions)) *ListObjectivesPaginator {
+// NewListControlMappingsPaginator returns a new ListControlMappingsPaginator
+func NewListControlMappingsPaginator(client ListControlMappingsAPIClient, params *ListControlMappingsInput, optFns ...func(*ListControlMappingsPaginatorOptions)) *ListControlMappingsPaginator {
 	if params == nil {
-		params = &ListObjectivesInput{}
+		params = &ListControlMappingsInput{}
 	}
 
-	options := ListObjectivesPaginatorOptions{}
+	options := ListControlMappingsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -198,7 +195,7 @@ func NewListObjectivesPaginator(client ListObjectivesAPIClient, params *ListObje
 		fn(&options)
 	}
 
-	return &ListObjectivesPaginator{
+	return &ListControlMappingsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -208,12 +205,12 @@ func NewListObjectivesPaginator(client ListObjectivesAPIClient, params *ListObje
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListObjectivesPaginator) HasMorePages() bool {
+func (p *ListControlMappingsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListObjectives page.
-func (p *ListObjectivesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListObjectivesOutput, error) {
+// NextPage retrieves the next ListControlMappings page.
+func (p *ListControlMappingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListControlMappingsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -230,7 +227,7 @@ func (p *ListObjectivesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,
 	}, optFns...)
-	result, err := p.client.ListObjectives(ctx, &params, optFns...)
+	result, err := p.client.ListControlMappings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -249,18 +246,18 @@ func (p *ListObjectivesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	return result, nil
 }
 
-// ListObjectivesAPIClient is a client that implements the ListObjectives
-// operation.
-type ListObjectivesAPIClient interface {
-	ListObjectives(context.Context, *ListObjectivesInput, ...func(*Options)) (*ListObjectivesOutput, error)
+// ListControlMappingsAPIClient is a client that implements the
+// ListControlMappings operation.
+type ListControlMappingsAPIClient interface {
+	ListControlMappings(context.Context, *ListControlMappingsInput, ...func(*Options)) (*ListControlMappingsOutput, error)
 }
 
-var _ ListObjectivesAPIClient = (*Client)(nil)
+var _ ListControlMappingsAPIClient = (*Client)(nil)
 
-func newServiceMetadataMiddleware_opListObjectives(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListControlMappings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ListObjectives",
+		OperationName: "ListControlMappings",
 	}
 }

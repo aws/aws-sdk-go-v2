@@ -876,6 +876,25 @@ func (LogType) Values() []LogType {
 	}
 }
 
+type LowReputationMode string
+
+// Enum values for LowReputationMode
+const (
+	LowReputationModeActiveUnderDdos LowReputationMode = "ACTIVE_UNDER_DDOS"
+	LowReputationModeAlwaysOn        LowReputationMode = "ALWAYS_ON"
+)
+
+// Values returns all known values for LowReputationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LowReputationMode) Values() []LowReputationMode {
+	return []LowReputationMode{
+		"ACTIVE_UNDER_DDOS",
+		"ALWAYS_ON",
+	}
+}
+
 type MapMatchScope string
 
 // Enum values for MapMatchScope
@@ -993,6 +1012,7 @@ const (
 	ParameterExceptionFieldCustomKeys                     ParameterExceptionField = "CUSTOM_KEYS"
 	ParameterExceptionFieldAcpRuleSetResponseInspection   ParameterExceptionField = "ACP_RULE_SET_RESPONSE_INSPECTION"
 	ParameterExceptionFieldDataProtectionConfig           ParameterExceptionField = "DATA_PROTECTION_CONFIG"
+	ParameterExceptionFieldLowReputationMode              ParameterExceptionField = "LOW_REPUTATION_MODE"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -1072,6 +1092,7 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"CUSTOM_KEYS",
 		"ACP_RULE_SET_RESPONSE_INSPECTION",
 		"DATA_PROTECTION_CONFIG",
+		"LOW_REPUTATION_MODE",
 	}
 }
 
@@ -1250,6 +1271,27 @@ func (SensitivityLevel) Values() []SensitivityLevel {
 	}
 }
 
+type SensitivityToAct string
+
+// Enum values for SensitivityToAct
+const (
+	SensitivityToActLow    SensitivityToAct = "LOW"
+	SensitivityToActMedium SensitivityToAct = "MEDIUM"
+	SensitivityToActHigh   SensitivityToAct = "HIGH"
+)
+
+// Values returns all known values for SensitivityToAct. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SensitivityToAct) Values() []SensitivityToAct {
+	return []SensitivityToAct{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+	}
+}
+
 type SizeInspectionLimit string
 
 // Enum values for SizeInspectionLimit
@@ -1327,5 +1369,24 @@ func (TextTransformationType) Values() []TextTransformationType {
 		"BASE64_DECODE_EXT",
 		"URL_DECODE_UNI",
 		"UTF8_TO_UNICODE",
+	}
+}
+
+type UsageOfAction string
+
+// Enum values for UsageOfAction
+const (
+	UsageOfActionEnabled  UsageOfAction = "ENABLED"
+	UsageOfActionDisabled UsageOfAction = "DISABLED"
+)
+
+// Values returns all known values for UsageOfAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UsageOfAction) Values() []UsageOfAction {
+	return []UsageOfAction{
+		"ENABLED",
+		"DISABLED",
 	}
 }

@@ -30560,6 +30560,46 @@ func awsRestjson1_deserializeDocumentMultipleValuesSetting(v **types.MultipleVal
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNluImprovementSpecification(v **types.NluImprovementSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NluImprovementSpecification
+	if *v == nil {
+		sv = &types.NluImprovementSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentObfuscationSetting(v **types.ObfuscationSetting, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -32113,6 +32153,11 @@ func awsRestjson1_deserializeDocumentRuntimeSettings(v **types.RuntimeSettings, 
 
 	for key, value := range shape {
 		switch key {
+		case "nluImprovement":
+			if err := awsRestjson1_deserializeDocumentNluImprovementSpecification(&sv.NluImprovement, value); err != nil {
+				return err
+			}
+
 		case "slotResolutionImprovement":
 			if err := awsRestjson1_deserializeDocumentSlotResolutionImprovementSpecification(&sv.SlotResolutionImprovement, value); err != nil {
 				return err

@@ -61,8 +61,8 @@ type DescribeAddonConfigurationOutput struct {
 	// an add-on is created or updated.
 	ConfigurationSchema *string
 
-	// The Kubernetes service account name used by the addon, and any suggested IAM
-	// policies. Use this information to create an IAM Role for the Addon.
+	// The Kubernetes service account name used by the add-on, and any suggested IAM
+	// policies. Use this information to create an IAM Role for the add-on.
 	PodIdentityConfiguration []types.AddonPodIdentityConfiguration
 
 	// Metadata pertaining to the operation's result.

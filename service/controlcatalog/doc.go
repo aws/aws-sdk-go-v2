@@ -3,15 +3,13 @@
 // Package controlcatalog provides the API client, operations, and parameter types
 // for AWS Control Catalog.
 //
-// Welcome to the Amazon Web Services Control Catalog API reference. This guide is
-// for developers who need detailed information about how to programmatically
-// identify and filter the common controls and related metadata that are available
-// to Amazon Web Services customers. This API reference provides descriptions,
-// syntax, and usage examples for each of the actions and data types that are
-// supported by Amazon Web Services Control Catalog.
+// Welcome to the Control Catalog API reference. This guide is for developers who
+// need detailed information about how to programmatically identify and filter the
+// common controls and related metadata that are available to Amazon Web Services
+// customers. This API reference provides descriptions, syntax, and usage examples
+// for each of the actions and data types that are supported by Control Catalog.
 //
-// Use the following links to get started with the Amazon Web Services Control
-// Catalog API:
+// Use the following links to get started with the Control Catalog API:
 //
 // [Actions]
 //   - : An alphabetical list of all Control Catalog API operations.

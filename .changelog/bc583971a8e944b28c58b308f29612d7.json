@@ -1,0 +1,8 @@
+{
+    "id": "bc583971-a8e9-44b2-8c58-b308f29612d7",
+    "type": "feature",
+    "description": "Release for EKS Pod Identity Cross Account feature and disableSessionTags flag.",
+    "modules": [
+        "service/eks"
+    ]
+}

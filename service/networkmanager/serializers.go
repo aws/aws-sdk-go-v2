@@ -8247,9 +8247,19 @@ func awsRestjson1_serializeDocumentVpcOptions(v *types.VpcOptions, value smithyj
 		ok.Boolean(v.ApplianceModeSupport)
 	}
 
+	if v.DnsSupport {
+		ok := object.Key("DnsSupport")
+		ok.Boolean(v.DnsSupport)
+	}
+
 	if v.Ipv6Support {
 		ok := object.Key("Ipv6Support")
 		ok.Boolean(v.Ipv6Support)
+	}
+
+	if v.SecurityGroupReferencingSupport {
+		ok := object.Key("SecurityGroupReferencingSupport")
+		ok.Boolean(v.SecurityGroupReferencingSupport)
 	}
 
 	return nil

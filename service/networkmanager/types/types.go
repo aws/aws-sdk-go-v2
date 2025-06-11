@@ -481,6 +481,9 @@ type CoreNetworkChangeValues struct {
 	// The ID of the destination.
 	DestinationIdentifier *string
 
+	// Indicates whether public DNS support is supported. The default is true .
+	DnsSupport bool
+
 	// The Regions where edges are located in a core network.
 	EdgeLocations []string
 
@@ -491,6 +494,9 @@ type CoreNetworkChangeValues struct {
 	// network function group.
 	NetworkFunctionGroupName *string
 
+	// Indicates whether security group referencing is enabled for the core network.
+	SecurityGroupReferencingSupport bool
+
 	// The names of the segments in a core network.
 	SegmentName *string
 
@@ -499,6 +505,9 @@ type CoreNetworkChangeValues struct {
 
 	// The shared segments for a core network change value.
 	SharedSegments []string
+
+	// Indicates whether Equal Cost Multipath (ECMP) is enabled for the core network.
+	VpnEcmpSupport bool
 
 	noSmithyDocumentSerde
 }
@@ -1605,8 +1614,16 @@ type VpcOptions struct {
 	// for the lifetime of that flow. The default value is false .
 	ApplianceModeSupport bool
 
+	// Indicates whether DNS is supported.
+	DnsSupport bool
+
 	// Indicates whether IPv6 is supported.
 	Ipv6Support bool
+
+	// Indicates whether security group referencing is enabled for this VPC
+	// attachment. The default is true . However, at the core network policy-level the
+	// default is set to false .
+	SecurityGroupReferencingSupport bool
 
 	noSmithyDocumentSerde
 }

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated list of domains from the Amazon Web Services Control
-// Catalog.
+// Returns a paginated list of domains from the Control Catalog.
 func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optFns ...func(*Options)) (*ListDomainsOutput, error) {
 	if params == nil {
 		params = &ListDomainsInput{}

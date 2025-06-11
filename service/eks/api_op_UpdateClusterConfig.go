@@ -28,7 +28,7 @@ import (
 //
 //	- You can also use this API operation to enable or disable public and private
 //	access to your cluster's Kubernetes API server endpoint. By default, public
-//	access is enabled, and private access is disabled. For more information, see [Amazon EKS cluster endpoint access control]
+//	access is enabled, and private access is disabled. For more information, see [Cluster API server endpoint]
 //	in the Amazon EKS User Guide .
 //
 //	- You can also use this API operation to choose different subnets and
@@ -55,9 +55,9 @@ import (
 //
 // [Amazon EKS Cluster control plane logs]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
 //
+// [Cluster API server endpoint]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
 // [CloudWatch Pricing]: http://aws.amazon.com/cloudwatch/pricing/
 // [https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html]: https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
-// [Amazon EKS cluster endpoint access control]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
 func (c *Client) UpdateClusterConfig(ctx context.Context, params *UpdateClusterConfigInput, optFns ...func(*Options)) (*UpdateClusterConfigOutput, error) {
 	if params == nil {
 		params = &UpdateClusterConfigInput{}

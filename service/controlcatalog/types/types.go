@@ -37,8 +37,21 @@ type CommonControlFilter struct {
 	// The objective that's used as filter criteria.
 	//
 	// You can use this parameter to specify one objective ARN at a time. Passing
-	// multiple ARNs in the CommonControlFilter isn’t currently supported.
+	// multiple ARNs in the CommonControlFilter isn’t supported.
 	Objectives []ObjectiveResourceFilter
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains details about a common control mapping. In
+// particular, it returns the Amazon Resource Name (ARN) of the common control.
+type CommonControlMappingDetails struct {
+
+	// The Amazon Resource Name (ARN) that identifies the common control in the
+	// mapping.
+	//
+	// This member is required.
+	CommonControlArn *string
 
 	noSmithyDocumentSerde
 }
@@ -80,6 +93,64 @@ type CommonControlSummary struct {
 	//
 	// This member is required.
 	Objective *AssociatedObjectiveSummary
+
+	noSmithyDocumentSerde
+}
+
+// A structure that defines filtering criteria for the ListControls operation. You
+// can use this filter to narrow down the list of controls based on their
+// implementation details.
+type ControlFilter struct {
+
+	// A filter that narrows the results to controls with specific implementation
+	// types or identifiers. This field allows you to find controls that are
+	// implemented by specific Amazon Web Services services or with specific service
+	// identifiers.
+	Implementations *ImplementationFilter
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about a control mapping, including the
+// control ARN, mapping type, and mapping details.
+type ControlMapping struct {
+
+	// The Amazon Resource Name (ARN) that identifies the control in the mapping.
+	//
+	// This member is required.
+	ControlArn *string
+
+	// The details of the mapping relationship, containing either framework or common
+	// control information.
+	//
+	// This member is required.
+	Mapping Mapping
+
+	// The type of mapping relationship between the control and other entities.
+	// Indicates whether the mapping is to a framework or common control.
+	//
+	// This member is required.
+	MappingType MappingType
+
+	noSmithyDocumentSerde
+}
+
+// A structure that defines filtering criteria for the ListControlMappings
+// operation. You can use this filter to narrow down the list of control mappings
+// based on control ARNs, common control ARNs, or mapping types.
+type ControlMappingFilter struct {
+
+	// A list of common control ARNs to filter the mappings. When specified, only
+	// mappings associated with these common controls are returned.
+	CommonControlArns []string
+
+	// A list of control ARNs to filter the mappings. When specified, only mappings
+	// associated with these controls are returned.
+	ControlArns []string
+
+	// A list of mapping types to filter the mappings. When specified, only mappings
+	// of these types are returned.
+	MappingTypes []MappingType
 
 	noSmithyDocumentSerde
 }
@@ -159,12 +230,25 @@ type ControlSummary struct {
 	// This member is required.
 	Name *string
 
+	// A list of alternative identifiers for the control. These are human-readable
+	// designators, such as SH.S3.1 . Several aliases can refer to the same control
+	// across different Amazon Web Services services or compliance frameworks.
+	Aliases []string
+
 	// An enumerated type, with the following possible values:
 	Behavior ControlBehavior
 
 	// A timestamp that notes the time when the control was released (start of its
 	// life) as a governance capability in Amazon Web Services.
 	CreateTime *time.Time
+
+	// A list of Amazon Web Services resource types that are governed by this control.
+	// This information helps you understand which controls can govern certain types of
+	// resources, and conversely, which resources are affected when the control is
+	// implemented. The resources are represented as Amazon Web Services CloudFormation
+	// resource types. If GovernedResources cannot be represented by available
+	// CloudFormation resource types, it’s returned as an empty list.
+	GovernedResources []string
 
 	// An object of type ImplementationSummary that describes how the control is
 	// implemented.
@@ -216,6 +300,23 @@ type DomainSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains details about a framework mapping, including the
+// framework name and specific item within the framework that the control maps to.
+type FrameworkMappingDetails struct {
+
+	// The specific item or requirement within the framework that the control maps to.
+	//
+	// This member is required.
+	Item *string
+
+	// The name of the compliance framework that the control maps to.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that describes the implementation type for a control.
 //
 // Our ImplementationDetails Type format has three required segments:
@@ -250,6 +351,24 @@ type ImplementationDetails struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that defines filtering criteria for control implementations. You
+// can use this filter to find controls that are implemented by specific Amazon Web
+// Services services or with specific service identifiers.
+type ImplementationFilter struct {
+
+	// A list of service-specific identifiers that can serve as filters. For example,
+	// you can filter for controls with specific Amazon Web Services Config Rule IDs or
+	// Security Hub Control IDs.
+	Identifiers []string
+
+	// A list of implementation types that can serve as filters. For example, you can
+	// filter for controls implemented as Amazon Web Services Config Rules by
+	// specifying AWS::Config::ConfigRule as a type.
+	Types []string
+
+	noSmithyDocumentSerde
+}
+
 // A summary of how the control is implemented, including the Amazon Web Services
 // service that enforces the control and its service-specific identifier. For
 // example, the value of this field could indicate that the control is implemented
@@ -273,13 +392,44 @@ type ImplementationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains the details of a mapping relationship, which can be
+// either to a framework or to a common control.
+//
+// The following types satisfy this interface:
+//
+//	MappingMemberCommonControl
+//	MappingMemberFramework
+type Mapping interface {
+	isMapping()
+}
+
+// The common control mapping details when the mapping type relates to a common
+// control.
+type MappingMemberCommonControl struct {
+	Value CommonControlMappingDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*MappingMemberCommonControl) isMapping() {}
+
+// The framework mapping details when the mapping type relates to a compliance
+// framework.
+type MappingMemberFramework struct {
+	Value FrameworkMappingDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*MappingMemberFramework) isMapping() {}
+
 // An optional filter that narrows the list of objectives to a specific domain.
 type ObjectiveFilter struct {
 
 	// The domain that's used as filter criteria.
 	//
 	// You can use this parameter to specify one domain ARN at a time. Passing
-	// multiple ARNs in the ObjectiveFilter isn’t currently supported.
+	// multiple ARNs in the ObjectiveFilter isn’t supported.
 	Domains []DomainResourceFilter
 
 	noSmithyDocumentSerde
@@ -331,8 +481,8 @@ type ObjectiveSummary struct {
 }
 
 // Returns information about the control, including the scope of the control, if
-// enabled, and the Regions in which the control currently is available for
-// deployment. For more information about scope, see [Global services].
+// enabled, and the Regions in which the control is available for deployment. For
+// more information about scope, see [Global services].
 //
 // If you are applying controls through an Amazon Web Services Control Tower
 // landing zone environment, remember that the values returned in the
@@ -365,3 +515,14 @@ type RegionConfiguration struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isMapping() {}

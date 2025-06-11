@@ -177,6 +177,13 @@ type UpdateWebACLInput struct {
 	// A description of the web ACL that helps with identification.
 	Description *string
 
+	// Specifies the type of DDoS protection to apply to web request data for a web
+	// ACL. For most scenarios, it is recommended to use the default protection level,
+	// ACTIVE_UNDER_DDOS . If a web ACL is associated with multiple Application Load
+	// Balancers, the changes you make to DDoS protection in that web ACL will apply to
+	// all associated Application Load Balancers.
+	OnSourceDDoSProtectionConfig *types.OnSourceDDoSProtectionConfig
+
 	// The Rule statements used to identify the web requests that you want to manage. Each
 	// rule includes one top-level statement that WAF uses to identify matching web
 	// requests, and parameters that govern how WAF handles them.

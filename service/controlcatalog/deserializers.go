@@ -179,6 +179,11 @@ func awsRestjson1_deserializeOpDocumentGetControlOutput(v **GetControlOutput, va
 
 	for key, value := range shape {
 		switch key {
+		case "Aliases":
+			if err := awsRestjson1_deserializeDocumentControlAliases(&sv.Aliases, value); err != nil {
+				return err
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -220,6 +225,11 @@ func awsRestjson1_deserializeOpDocumentGetControlOutput(v **GetControlOutput, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "GovernedResources":
+			if err := awsRestjson1_deserializeDocumentGovernedResources(&sv.GovernedResources, value); err != nil {
+				return err
 			}
 
 		case "Implementation":
@@ -413,6 +423,176 @@ func awsRestjson1_deserializeOpDocumentListCommonControlsOutput(v **ListCommonCo
 		switch key {
 		case "CommonControls":
 			if err := awsRestjson1_deserializeDocumentCommonControlSummaryList(&sv.CommonControls, value); err != nil {
+				return err
+			}
+
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListControlMappings struct {
+}
+
+func (*awsRestjson1_deserializeOpListControlMappings) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListControlMappings) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListControlMappings(response, &metadata)
+	}
+	output := &ListControlMappingsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListControlMappingsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListControlMappings(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListControlMappingsOutput(v **ListControlMappingsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListControlMappingsOutput
+	if *v == nil {
+		sv = &ListControlMappingsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ControlMappings":
+			if err := awsRestjson1_deserializeDocumentControlMappings(&sv.ControlMappings, value); err != nil {
 				return err
 			}
 
@@ -1262,6 +1442,46 @@ func awsRestjson1_deserializeDocumentAssociatedObjectiveSummary(v **types.Associ
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCommonControlMappingDetails(v **types.CommonControlMappingDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CommonControlMappingDetails
+	if *v == nil {
+		sv = &types.CommonControlMappingDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CommonControlArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CommonControlArn to be of type string, got %T instead", value)
+				}
+				sv.CommonControlArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCommonControlSummary(v **types.CommonControlSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1386,6 +1606,130 @@ func awsRestjson1_deserializeDocumentCommonControlSummaryList(v *[]types.CommonC
 		var col types.CommonControlSummary
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentCommonControlSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentControlAliases(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ControlAlias to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentControlMapping(v **types.ControlMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ControlMapping
+	if *v == nil {
+		sv = &types.ControlMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ControlArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlArn to be of type string, got %T instead", value)
+				}
+				sv.ControlArn = ptr.String(jtv)
+			}
+
+		case "Mapping":
+			if err := awsRestjson1_deserializeDocumentMapping(&sv.Mapping, value); err != nil {
+				return err
+			}
+
+		case "MappingType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MappingType to be of type string, got %T instead", value)
+				}
+				sv.MappingType = types.MappingType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentControlMappings(v *[]types.ControlMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ControlMapping
+	if *v == nil {
+		cv = []types.ControlMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ControlMapping
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentControlMapping(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -1526,6 +1870,11 @@ func awsRestjson1_deserializeDocumentControlSummary(v **types.ControlSummary, va
 
 	for key, value := range shape {
 		switch key {
+		case "Aliases":
+			if err := awsRestjson1_deserializeDocumentControlAliases(&sv.Aliases, value); err != nil {
+				return err
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1567,6 +1916,11 @@ func awsRestjson1_deserializeDocumentControlSummary(v **types.ControlSummary, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "GovernedResources":
+			if err := awsRestjson1_deserializeDocumentGovernedResources(&sv.GovernedResources, value); err != nil {
+				return err
 			}
 
 		case "Implementation":
@@ -1761,6 +2115,91 @@ func awsRestjson1_deserializeDocumentDomainSummaryList(v *[]types.DomainSummary,
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFrameworkMappingDetails(v **types.FrameworkMappingDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FrameworkMappingDetails
+	if *v == nil {
+		sv = &types.FrameworkMappingDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Item":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FrameworkItem to be of type string, got %T instead", value)
+				}
+				sv.Item = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FrameworkName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGovernedResources(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GovernedResource to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentImplementationDetails(v **types.ImplementationDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1896,6 +2335,56 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMapping(v *types.Mapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.Mapping
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "CommonControl":
+			var mv types.CommonControlMappingDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCommonControlMappingDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.MappingMemberCommonControl{Value: mv}
+			break loop
+
+		case "Framework":
+			var mv types.FrameworkMappingDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentFrameworkMappingDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.MappingMemberFramework{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
