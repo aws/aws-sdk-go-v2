@@ -2051,6 +2051,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the service insertion action. </p>"
                     }
+                },
+                "VpnEcmpSupport": {
+                    "target": "com.amazonaws.networkmanager#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether Equal Cost Multipath (ECMP) is enabled for the core network.</p>"
+                    }
+                },
+                "DnsSupport": {
+                    "target": "com.amazonaws.networkmanager#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether public DNS support is supported. The default is <code>true</code>. </p>"
+                    }
+                },
+                "SecurityGroupReferencingSupport": {
+                    "target": "com.amazonaws.networkmanager#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether security group referencing is enabled for the core network.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13925,6 +13946,20 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether appliance mode is supported.  If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow. The default value is <code>false</code>.</p>"
+                    }
+                },
+                "DnsSupport": {
+                    "target": "com.amazonaws.networkmanager#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether DNS is supported.</p>"
+                    }
+                },
+                "SecurityGroupReferencingSupport": {
+                    "target": "com.amazonaws.networkmanager#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether security group referencing is enabled for this VPC attachment. The default is <code>true</code>. However, at the core network policy-level the default is set to <code>false</code>.</p>"
                     }
                 }
             },

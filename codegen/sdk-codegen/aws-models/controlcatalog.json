@@ -64,18 +64,45 @@
                 "smithy.api#pattern": "^arn:(aws(?:[-a-z]*)?):controlcatalog:::common-control/[0-9a-z]+$"
             }
         },
+        "com.amazonaws.controlcatalog#CommonControlArnFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#CommonControlArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.controlcatalog#CommonControlFilter": {
             "type": "structure",
             "members": {
                 "Objectives": {
                     "target": "com.amazonaws.controlcatalog#ObjectiveResourceFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The objective that's used as filter criteria.</p>\n         <p>You can use this parameter to specify one objective ARN at a time. Passing multiple ARNs\n      in the <code>CommonControlFilter</code> isn’t currently supported.</p>"
+                        "smithy.api#documentation": "<p>The objective that's used as filter criteria.</p> <p>You can use this parameter to specify one objective ARN at a time. Passing multiple ARNs in the <code>CommonControlFilter</code> isn’t supported.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An optional filter that narrows the results to a specific objective.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#CommonControlMappingDetails": {
+            "type": "structure",
+            "members": {
+                "CommonControlArn": {
+                    "target": "com.amazonaws.controlcatalog#CommonControlArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the common control in the mapping.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains details about a common control mapping. In particular, it returns the Amazon Resource Name (ARN) of the common control.</p>"
             }
         },
         "com.amazonaws.controlcatalog#CommonControlResource": {
@@ -163,6 +190,18 @@
                 "target": "com.amazonaws.controlcatalog#CommonControlSummary"
             }
         },
+        "com.amazonaws.controlcatalog#ControlAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9_.-]{0,254}[a-zA-Z0-9])$"
+            }
+        },
+        "com.amazonaws.controlcatalog#ControlAliases": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#ControlAlias"
+            }
+        },
         "com.amazonaws.controlcatalog#ControlArn": {
             "type": "string",
             "traits": {
@@ -171,6 +210,18 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:(aws(?:[-a-z]*)?):(controlcatalog|controltower):[a-zA-Z0-9-]*::control/[0-9a-zA-Z_\\-]+$"
+            }
+        },
+        "com.amazonaws.controlcatalog#ControlArnFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#ControlArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.controlcatalog#ControlBehavior": {
@@ -199,6 +250,11 @@
         "com.amazonaws.controlcatalog#ControlCatalog": {
             "type": "service",
             "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.controlcatalog#ListControlMappings"
+                }
+            ],
             "resources": [
                 {
                     "target": "com.amazonaws.controlcatalog#CommonControlResource"
@@ -249,7 +305,7 @@
                         "X-Amzn-Trace-Id"
                     ]
                 },
-                "smithy.api#documentation": "<p>Welcome to the Amazon Web Services Control Catalog API reference. This guide is for \n      developers who need detailed information about how to programmatically identify and filter \n      the common controls and related metadata that are available to Amazon Web Services customers. This API reference provides \n      descriptions, syntax, and usage examples for each of the actions and data types that are \n      supported by Amazon Web Services Control Catalog. </p>\n         <p>Use the following links to get started with the Amazon Web Services Control Catalog API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_Operations.html\">Actions</a>: An\n          alphabetical list of all Control Catalog API operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_Types.html\">Data types</a>: An\n          alphabetical list of all Control Catalog data types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/CommonParameters.html\">Common\n          parameters</a>: Parameters that all operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/CommonErrors.html\">Common errors</a>:\n          Client and server errors that all operations can return.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Welcome to the Control Catalog API reference. This guide is for developers who need detailed information about how to programmatically identify and filter the common controls and related metadata that are available to Amazon Web Services customers. This API reference provides descriptions, syntax, and usage examples for each of the actions and data types that are supported by Control Catalog. </p> <p>Use the following links to get started with the Control Catalog API:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Control Catalog API operations.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_Types.html\">Data types</a>: An alphabetical list of all Control Catalog data types.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all operations can use.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/CommonErrors.html\">Common errors</a>: Client and server errors that all operations can return.</p> </li> </ul>",
                 "smithy.api#title": "AWS Control Catalog",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -917,19 +973,94 @@
                 }
             }
         },
+        "com.amazonaws.controlcatalog#ControlFilter": {
+            "type": "structure",
+            "members": {
+                "Implementations": {
+                    "target": "com.amazonaws.controlcatalog#ImplementationFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that narrows the results to controls with specific implementation types or identifiers. This field allows you to find controls that are implemented by specific Amazon Web Services services or with specific service identifiers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that defines filtering criteria for the ListControls operation. You can use this filter to narrow down the list of controls based on their implementation details.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#ControlMapping": {
+            "type": "structure",
+            "members": {
+                "ControlArn": {
+                    "target": "com.amazonaws.controlcatalog#ControlArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the control in the mapping.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MappingType": {
+                    "target": "com.amazonaws.controlcatalog#MappingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of mapping relationship between the control and other entities. Indicates whether the mapping is to a framework or common control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mapping": {
+                    "target": "com.amazonaws.controlcatalog#Mapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the mapping relationship, containing either framework or common control information.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about a control mapping, including the control ARN, mapping type, and mapping details.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#ControlMappingFilter": {
+            "type": "structure",
+            "members": {
+                "ControlArns": {
+                    "target": "com.amazonaws.controlcatalog#ControlArnFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of control ARNs to filter the mappings. When specified, only mappings associated with these controls are returned.</p>"
+                    }
+                },
+                "CommonControlArns": {
+                    "target": "com.amazonaws.controlcatalog#CommonControlArnFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of common control ARNs to filter the mappings. When specified, only mappings associated with these common controls are returned.</p>"
+                    }
+                },
+                "MappingTypes": {
+                    "target": "com.amazonaws.controlcatalog#MappingTypeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of mapping types to filter the mappings. When specified, only mappings of these types are returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that defines filtering criteria for the ListControlMappings operation. You can use this filter to narrow down the list of control mappings based on control ARNs, common control ARNs, or mapping types.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#ControlMappings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#ControlMapping"
+            }
+        },
         "com.amazonaws.controlcatalog#ControlParameter": {
             "type": "structure",
             "members": {
                 "Name": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter name. This name is the parameter <code>key</code> when you call <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableControl.html\">\n               <code>EnableControl</code>\n            </a> or <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledControl.html\">\n               <code>UpdateEnabledControl</code>\n            </a>.</p>",
+                        "smithy.api#documentation": "<p>The parameter name. This name is the parameter <code>key</code> when you call <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableControl.html\"> <code>EnableControl</code> </a> or <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledControl.html\"> <code>UpdateEnabledControl</code> </a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Five types of control parameters are supported.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AllowedRegions</b>: List of Amazon Web Services Regions exempted from the\n          control. Each string is expected to be an Amazon Web Services Region code. This parameter is mandatory for the <b>OU Region deny</b> control, <b>CT.MULTISERVICE.PV.1</b>.</p>\n               <p>Example: <code>[\"us-east-1\",\"us-west-2\"]</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>ExemptedActions</b>: List of Amazon Web Services IAM actions exempted\n          from the control. Each string is expected to be an IAM action.</p>\n               <p>Example:\n          <code>[\"logs:DescribeLogGroups\",\"logs:StartQuery\",\"logs:GetQueryResults\"]</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>ExemptedPrincipalArns</b>: List of Amazon Web Services IAM principal ARNs\n          exempted from the control. Each string is expected to be an IAM principal that follows\n          the pattern <code>^arn:(aws|aws-us-gov):(iam|sts)::.+:.+$</code>\n               </p>\n               <p>Example:\n          <code>[\"arn:aws:iam::*:role/ReadOnly\",\"arn:aws:sts::*:assumed-role/ReadOnly/*\"]</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>ExemptedResourceArns</b>: List of resource ARNs exempted\n          from the control. Each string is expected to be a resource ARN.</p>\n               <p>Example: <code>[\"arn:aws:s3:::my-bucket-name\"]</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>ExemptAssumeRoot</b>: A parameter that lets you choose\n          whether to exempt requests made with <code>AssumeRoot</code> from this control, for this\n          OU. For member accounts, the <code>AssumeRoot</code> property is included in requests\n          initiated by IAM centralized root access. This parameter applies only to the\n            <code>AWS-GR_RESTRICT_ROOT_USER</code> control. If you add the parameter when enabling\n          the control, the <code>AssumeRoot</code> exemption is allowed. If you omit the parameter,\n          the <code>AssumeRoot</code> exception is not permitted. The parameter does not accept\n            <code>False</code> as a value.</p>\n               <p>\n                  <i>Example: Enabling the control and allowing <code>AssumeRoot</code>\n                  </i>\n               </p>\n               <p>\n                  <code>{\n          \"controlIdentifier\": \"arn:aws:controlcatalog:::control/5kvme4m5d2b4d7if2fs5yg2ui\",\n          \"parameters\": [\n            {\n              \"key\": \"ExemptAssumeRoot\",\n              \"value\": true\n            }\n          ],\n          \"targetIdentifier\": \"arn:aws:organizations::8633900XXXXX:ou/o-6jmn81636m/ou-qsah-jtiihcla\"\n          }</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Five types of control parameters are supported.</p> <ul> <li> <p> <b>AllowedRegions</b>: List of Amazon Web Services Regions exempted from the control. Each string is expected to be an Amazon Web Services Region code. This parameter is mandatory for the <b>OU Region deny</b> control, <b>CT.MULTISERVICE.PV.1</b>.</p> <p>Example: <code>[\"us-east-1\",\"us-west-2\"]</code> </p> </li> <li> <p> <b>ExemptedActions</b>: List of Amazon Web Services IAM actions exempted from the control. Each string is expected to be an IAM action.</p> <p>Example: <code>[\"logs:DescribeLogGroups\",\"logs:StartQuery\",\"logs:GetQueryResults\"]</code> </p> </li> <li> <p> <b>ExemptedPrincipalArns</b>: List of Amazon Web Services IAM principal ARNs exempted from the control. Each string is expected to be an IAM principal that follows the pattern <code>^arn:(aws|aws-us-gov):(iam|sts)::.+:.+$</code> </p> <p>Example: <code>[\"arn:aws:iam::*:role/ReadOnly\",\"arn:aws:sts::*:assumed-role/ReadOnly/*\"]</code> </p> </li> <li> <p> <b>ExemptedResourceArns</b>: List of resource ARNs exempted from the control. Each string is expected to be a resource ARN.</p> <p>Example: <code>[\"arn:aws:s3:::my-bucket-name\"]</code> </p> </li> <li> <p> <b>ExemptAssumeRoot</b>: A parameter that lets you choose whether to exempt requests made with <code>AssumeRoot</code> from this control, for this OU. For member accounts, the <code>AssumeRoot</code> property is included in requests initiated by IAM centralized root access. This parameter applies only to the <code>AWS-GR_RESTRICT_ROOT_USER</code> control. If you add the parameter when enabling the control, the <code>AssumeRoot</code> exemption is allowed. If you omit the parameter, the <code>AssumeRoot</code> exception is not permitted. The parameter does not accept <code>False</code> as a value.</p> <p> <i>Example: Enabling the control and allowing <code>AssumeRoot</code> </i> </p> <p> <code>{ \"controlIdentifier\": \"arn:aws:controlcatalog:::control/5kvme4m5d2b4d7if2fs5yg2ui\", \"parameters\": [ { \"key\": \"ExemptAssumeRoot\", \"value\": true } ], \"targetIdentifier\": \"arn:aws:organizations::8633900XXXXX:ou/o-6jmn81636m/ou-qsah-jtiihcla\" }</code> </p> </li> </ul>"
             }
         },
         "com.amazonaws.controlcatalog#ControlParameters": {
@@ -1018,6 +1149,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Aliases": {
+                    "target": "com.amazonaws.controlcatalog#ControlAliases",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of alternative identifiers for the control. These are human-readable designators, such as <code>SH.S3.1</code>. Several aliases can refer to the same control across different Amazon Web Services services or compliance frameworks.</p>"
+                    }
+                },
                 "Name": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -1054,6 +1191,12 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp that notes the time when the control was released (start of its life) as a governance capability in Amazon Web Services.</p>"
+                    }
+                },
+                "GovernedResources": {
+                    "target": "com.amazonaws.controlcatalog#GovernedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services resource types that are governed by this control. This information helps you understand which controls can govern certain types of resources, and conversely, which resources are affected when the control is implemented. The resources are represented as Amazon Web Services CloudFormation resource types. If <code>GovernedResources</code> cannot be represented by available CloudFormation resource types, it’s returned as an empty list.</p>"
                     }
                 }
             },
@@ -1174,6 +1317,46 @@
                 "target": "com.amazonaws.controlcatalog#DomainSummary"
             }
         },
+        "com.amazonaws.controlcatalog#FrameworkItem": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#FrameworkMappingDetails": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.controlcatalog#FrameworkName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the compliance framework that the control maps to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Item": {
+                    "target": "com.amazonaws.controlcatalog#FrameworkItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific item or requirement within the framework that the control maps to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains details about a framework mapping, including the framework name and specific item within the framework that the control maps to.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#FrameworkName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 250
+                }
+            }
+        },
         "com.amazonaws.controlcatalog#GetControl": {
             "type": "operation",
             "input": {
@@ -1200,7 +1383,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns details about a specific control, most notably a list of Amazon Web Services Regions where this control is supported. Input a value for the <i>ControlArn</i> parameter, in ARN form. <code>GetControl</code> accepts <i>controltower</i> or <i>controlcatalog</i> control ARNs as input. Returns a <i>controlcatalog</i> ARN format.</p>\n         <p>In the API response, controls that have the value <code>GLOBAL</code> in the <code>Scope</code> field do not show the <code>DeployableRegions</code> field, because it does not apply. Controls that have the value <code>REGIONAL</code> in the <code>Scope</code> field return a value for the <code>DeployableRegions</code> field, as shown in the example.</p>",
+                "smithy.api#documentation": "<p>Returns details about a specific control, most notably a list of Amazon Web Services Regions where this control is supported. Input a value for the <i>ControlArn</i> parameter, in ARN form. <code>GetControl</code> accepts <i>controltower</i> or <i>controlcatalog</i> control ARNs as input. Returns a <i>controlcatalog</i> ARN format.</p> <p>In the API response, controls that have the value <code>GLOBAL</code> in the <code>Scope</code> field do not show the <code>DeployableRegions</code> field, because it does not apply. Controls that have the value <code>REGIONAL</code> in the <code>Scope</code> field return a value for the <code>DeployableRegions</code> field, as shown in the example.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1215,7 +1398,7 @@
                 "ControlArn": {
                     "target": "com.amazonaws.controlcatalog#ControlArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control. It has one of the following formats:</p>\n         <p>\n            <i>Global format</i>\n         </p>\n         <p>\n            <code>arn:{PARTITION}:controlcatalog:::control/{CONTROL_CATALOG_OPAQUE_ID}</code>\n         </p>\n         <p>\n            <i>Or Regional format</i>\n         </p>\n         <p>\n            <code>arn:{PARTITION}:controltower:{REGION}::control/{CONTROL_TOWER_OPAQUE_ID}</code>\n         </p>\n         <p>Here is a more general pattern that covers Amazon Web Services Control Tower and Control Catalog ARNs:</p>\n         <p>\n            <code>^arn:(aws(?:[-a-z]*)?):(controlcatalog|controltower):[a-zA-Z0-9-]*::control/[0-9a-zA-Z_\\\\-]+$</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control. It has one of the following formats:</p> <p> <i>Global format</i> </p> <p> <code>arn:{PARTITION}:controlcatalog:::control/{CONTROL_CATALOG_OPAQUE_ID}</code> </p> <p> <i>Or Regional format</i> </p> <p> <code>arn:{PARTITION}:controltower:{REGION}::control/{CONTROL_TOWER_OPAQUE_ID}</code> </p> <p>Here is a more general pattern that covers Amazon Web Services Control Tower and Control Catalog ARNs:</p> <p> <code>^arn:(aws(?:[-a-z]*)?):(controlcatalog|controltower):[a-zA-Z0-9-]*::control/[0-9a-zA-Z_\\\\-]+$</code> </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1232,6 +1415,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Aliases": {
+                    "target": "com.amazonaws.controlcatalog#ControlAliases",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of alternative identifiers for the control. These are human-readable designators, such as <code>SH.S3.1</code>. Several aliases can refer to the same control across different Amazon Web Services services or compliance frameworks.</p>"
                     }
                 },
                 "Name": {
@@ -1251,7 +1440,7 @@
                 "Behavior": {
                     "target": "com.amazonaws.controlcatalog#ControlBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>A term that identifies the control's functional behavior. One of <code>Preventive</code>, <code>Detective</code>, <code>Proactive</code>\n         </p>",
+                        "smithy.api#documentation": "<p>A term that identifies the control's functional behavior. One of <code>Preventive</code>, <code>Detective</code>, <code>Proactive</code> </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1276,7 +1465,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.controlcatalog#ControlParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns an array of <code>ControlParameter</code> objects that specify the parameters a control supports. An empty list is returned for controls that don’t support parameters.\n    </p>"
+                        "smithy.api#documentation": "<p>Returns an array of <code>ControlParameter</code> objects that specify the parameters a control supports. An empty list is returned for controls that don’t support parameters. </p>"
                     }
                 },
                 "CreateTime": {
@@ -1284,10 +1473,28 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp that notes the time when the control was released (start of its life) as a governance capability in Amazon Web Services.</p>"
                     }
+                },
+                "GovernedResources": {
+                    "target": "com.amazonaws.controlcatalog#GovernedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services resource types that are governed by this control. This information helps you understand which controls can govern certain types of resources, and conversely, which resources are affected when the control is implemented. The resources are represented as Amazon Web Services CloudFormation resource types. If <code>GovernedResources</code> cannot be represented by available CloudFormation resource types, it’s returned as an empty list.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#GovernedResource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$"
+            }
+        },
+        "com.amazonaws.controlcatalog#GovernedResources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#GovernedResource"
             }
         },
         "com.amazonaws.controlcatalog#ImplementationDetails": {
@@ -1308,7 +1515,27 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that describes the implementation type for a control.</p>\n         <p>Our <code>ImplementationDetails</code>\n            <code>Type</code> format has three required segments:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SERVICE-PROVIDER::SERVICE-NAME::RESOURCE-NAME</code>\n               </p>\n            </li>\n         </ul>\n         <p>For example, <code>AWS::Config::ConfigRule</code>\n            <b>or</b>\n            <code>AWS::SecurityHub::SecurityControl</code> resources have the format with three required segments.</p>\n         <p>Our <code>ImplementationDetails</code>\n            <code>Type</code> format has an optional fourth segment, which is present for applicable \n      implementation types. The format is as follows: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SERVICE-PROVIDER::SERVICE-NAME::RESOURCE-NAME::RESOURCE-TYPE-DESCRIPTION</code>\n               </p>\n            </li>\n         </ul>\n         <p>For example, <code>AWS::Organizations::Policy::SERVICE_CONTROL_POLICY</code>\n            <b>or</b>\n            <code>AWS::CloudFormation::Type::HOOK</code> have the format with four segments.</p>\n         <p>Although the format is similar, the values for the <code>Type</code> field do not match any Amazon Web Services CloudFormation values.</p>"
+                "smithy.api#documentation": "<p>An object that describes the implementation type for a control.</p> <p>Our <code>ImplementationDetails</code> <code>Type</code> format has three required segments:</p> <ul> <li> <p> <code>SERVICE-PROVIDER::SERVICE-NAME::RESOURCE-NAME</code> </p> </li> </ul> <p>For example, <code>AWS::Config::ConfigRule</code> <b>or</b> <code>AWS::SecurityHub::SecurityControl</code> resources have the format with three required segments.</p> <p>Our <code>ImplementationDetails</code> <code>Type</code> format has an optional fourth segment, which is present for applicable implementation types. The format is as follows: </p> <ul> <li> <p> <code>SERVICE-PROVIDER::SERVICE-NAME::RESOURCE-NAME::RESOURCE-TYPE-DESCRIPTION</code> </p> </li> </ul> <p>For example, <code>AWS::Organizations::Policy::SERVICE_CONTROL_POLICY</code> <b>or</b> <code>AWS::CloudFormation::Type::HOOK</code> have the format with four segments.</p> <p>Although the format is similar, the values for the <code>Type</code> field do not match any Amazon Web Services CloudFormation values.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#ImplementationFilter": {
+            "type": "structure",
+            "members": {
+                "Types": {
+                    "target": "com.amazonaws.controlcatalog#ImplementationTypeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of implementation types that can serve as filters. For example, you can filter for controls implemented as Amazon Web Services Config Rules by specifying AWS::Config::ConfigRule as a type.</p>"
+                    }
+                },
+                "Identifiers": {
+                    "target": "com.amazonaws.controlcatalog#ImplementationIdentifierFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of service-specific identifiers that can serve as filters. For example, you can filter for controls with specific Amazon Web Services Config Rule IDs or Security Hub Control IDs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that defines filtering criteria for control implementations. You can use this filter to find controls that are implemented by specific Amazon Web Services services or with specific service identifiers.</p>"
             }
         },
         "com.amazonaws.controlcatalog#ImplementationIdentifier": {
@@ -1318,7 +1545,19 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-z0-9-]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\.-]+$"
+            }
+        },
+        "com.amazonaws.controlcatalog#ImplementationIdentifierFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#ImplementationIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.controlcatalog#ImplementationSummary": {
@@ -1350,6 +1589,18 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9]+(::[A-Za-z0-9_]+){2,3}$"
+            }
+        },
+        "com.amazonaws.controlcatalog#ImplementationTypeFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#ImplementationType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.controlcatalog#InternalServerException": {
@@ -1389,7 +1640,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a paginated list of common controls from the Amazon Web Services Control\n      Catalog.</p>\n         <p>You can apply an optional filter to see common controls that have a specific objective. If\n      you don’t provide a filter, the operation returns all common controls. </p>",
+                "smithy.api#documentation": "<p>Returns a paginated list of common controls from the Amazon Web Services Control Catalog.</p> <p>You can apply an optional filter to see common controls that have a specific objective. If you don’t provide a filter, the operation returns all common controls. </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1424,7 +1675,7 @@
                 "CommonControlFilter": {
                     "target": "com.amazonaws.controlcatalog#CommonControlFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional filter that narrows the results to a specific objective.</p>\n         <p>This filter allows you to specify one objective ARN at a time. Passing multiple ARNs in\n      the <code>CommonControlFilter</code> isn’t currently supported.</p>"
+                        "smithy.api#documentation": "<p>An optional filter that narrows the results to a specific objective.</p> <p>This filter allows you to specify one objective ARN at a time. Passing multiple ARNs in the <code>CommonControlFilter</code> isn’t supported.</p>"
                     }
                 }
             },
@@ -1439,6 +1690,93 @@
                     "target": "com.amazonaws.controlcatalog#CommonControlSummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of common controls that the <code>ListCommonControls</code> API returns.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.controlcatalog#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListControlMappings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controlcatalog#ListControlMappingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.controlcatalog#ListControlMappingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controlcatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of control mappings from the Control Catalog. Control mappings show relationships between controls and other entities, such as common controls or compliance frameworks.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-control-mappings"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "ControlMappings"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListControlMappingsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.controlcatalog#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.controlcatalog#MaxListControlMappingsResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results on a page or for an API request call.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.controlcatalog#ControlMappingFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional filter that narrows the results to specific control mappings based on control ARNs, common control ARNs, or mapping types.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListControlMappingsResponse": {
+            "type": "structure",
+            "members": {
+                "ControlMappings": {
+                    "target": "com.amazonaws.controlcatalog#ControlMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of control mappings that the ListControlMappings API returns.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1476,7 +1814,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a paginated list of all available controls in the Amazon Web Services Control Catalog library. Allows you to discover available controls. The list of controls is given as structures of type <i>controlSummary</i>. The ARN is returned in the global <i>controlcatalog</i> format, as shown in the examples.</p>",
+                "smithy.api#documentation": "<p>Returns a paginated list of all available controls in the Control Catalog library. Allows you to discover available controls. The list of controls is given as structures of type <i>controlSummary</i>. The ARN is returned in the global <i>controlcatalog</i> format, as shown in the examples.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1506,6 +1844,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results on a page or for an API request call.</p>",
                         "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.controlcatalog#ControlFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional filter that narrows the results to controls with specific implementation types or identifiers. If you don't provide a filter, the operation returns all available controls.</p>"
                     }
                 }
             },
@@ -1557,7 +1901,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a paginated list of domains from the Amazon Web Services Control Catalog.</p>",
+                "smithy.api#documentation": "<p>Returns a paginated list of domains from the Control Catalog.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1638,7 +1982,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a paginated list of objectives from the Amazon Web Services Control Catalog.</p>\n         <p>You can apply an optional filter to see the objectives that belong to a specific domain.\n      If you don’t provide a filter, the operation returns all objectives. </p>",
+                "smithy.api#documentation": "<p>Returns a paginated list of objectives from the Control Catalog.</p> <p>You can apply an optional filter to see the objectives that belong to a specific domain. If you don’t provide a filter, the operation returns all objectives. </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1673,7 +2017,7 @@
                 "ObjectiveFilter": {
                     "target": "com.amazonaws.controlcatalog#ObjectiveFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional filter that narrows the results to a specific domain.</p>\n         <p>This filter allows you to specify one domain ARN at a time. \n      Passing multiple ARNs in the <code>ObjectiveFilter</code> isn’t currently supported.</p>"
+                        "smithy.api#documentation": "<p>An optional filter that narrows the results to a specific domain.</p> <p>This filter allows you to specify one domain ARN at a time. Passing multiple ARNs in the <code>ObjectiveFilter</code> isn’t supported.</p>"
                     }
                 }
             },
@@ -1702,12 +2046,70 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.controlcatalog#Mapping": {
+            "type": "union",
+            "members": {
+                "Framework": {
+                    "target": "com.amazonaws.controlcatalog#FrameworkMappingDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The framework mapping details when the mapping type relates to a compliance framework.</p>"
+                    }
+                },
+                "CommonControl": {
+                    "target": "com.amazonaws.controlcatalog#CommonControlMappingDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The common control mapping details when the mapping type relates to a common control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the details of a mapping relationship, which can be either to a framework or to a common control.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#MappingType": {
+            "type": "enum",
+            "members": {
+                "FRAMEWORK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRAMEWORK"
+                    }
+                },
+                "COMMON_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMMON_CONTROL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#MappingTypeFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#MappingType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.controlcatalog#MaxListCommonControlsResults": {
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#MaxListControlMappingsResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
                 }
             }
         },
@@ -1754,7 +2156,7 @@
                 "Domains": {
                     "target": "com.amazonaws.controlcatalog#DomainResourceFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain that's used as filter criteria.</p>\n         <p>You can use this parameter to specify one domain ARN at a time. Passing multiple ARNs in\n      the <code>ObjectiveFilter</code> isn’t currently supported.</p>"
+                        "smithy.api#documentation": "<p>The domain that's used as filter criteria.</p> <p>You can use this parameter to specify one domain ARN at a time. Passing multiple ARNs in the <code>ObjectiveFilter</code> isn’t supported.</p>"
                     }
                 }
             },
@@ -1880,7 +2282,7 @@
                 "Scope": {
                     "target": "com.amazonaws.controlcatalog#ControlScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>The coverage of the control, if deployed. Scope is an enumerated type, with value <code>Regional</code>, or <code>Global</code>. A control with Global scope is effective in all Amazon Web Services Regions, regardless of the Region from which it is enabled, or to which it is deployed. A control implemented by an SCP is usually Global in scope. A control with Regional scope has operations that are restricted specifically to the Region from which it is enabled and to which it is deployed. Controls implemented by Config rules and CloudFormation hooks usually are Regional in scope.  Security Hub controls usually are Regional in scope.</p>",
+                        "smithy.api#documentation": "<p>The coverage of the control, if deployed. Scope is an enumerated type, with value <code>Regional</code>, or <code>Global</code>. A control with Global scope is effective in all Amazon Web Services Regions, regardless of the Region from which it is enabled, or to which it is deployed. A control implemented by an SCP is usually Global in scope. A control with Regional scope has operations that are restricted specifically to the Region from which it is enabled and to which it is deployed. Controls implemented by Config rules and CloudFormation hooks usually are Regional in scope. Security Hub controls usually are Regional in scope.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1892,7 +2294,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the control, including the scope of the control, if enabled, and the Regions in which the control currently is available for deployment. For more information about scope, see <a href=\"https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html\">Global services</a>.</p>\n         <p>If you are applying controls through an Amazon Web Services Control Tower landing zone environment, remember that the values returned in the <code>RegionConfiguration</code> API operation are not related to the governed Regions in your landing zone. For example, if you are governing Regions <code>A</code>,<code>B</code>,and <code>C</code> while the control is available in Regions <code>A</code>, <code>B</code>, C<code>,</code> and <code>D</code>, you'd see a response with <code>DeployableRegions</code> of <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code> for a control with <code>REGIONAL</code> scope, even though you may not intend to deploy the control in Region <code>D</code>, because you do not govern it through your landing zone.</p>"
+                "smithy.api#documentation": "<p>Returns information about the control, including the scope of the control, if enabled, and the Regions in which the control is available for deployment. For more information about scope, see <a href=\"https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html\">Global services</a>.</p> <p>If you are applying controls through an Amazon Web Services Control Tower landing zone environment, remember that the values returned in the <code>RegionConfiguration</code> API operation are not related to the governed Regions in your landing zone. For example, if you are governing Regions <code>A</code>,<code>B</code>,and <code>C</code> while the control is available in Regions <code>A</code>, <code>B</code>, C<code>,</code> and <code>D</code>, you'd see a response with <code>DeployableRegions</code> of <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code> for a control with <code>REGIONAL</code> scope, even though you may not intend to deploy the control in Region <code>D</code>, because you do not govern it through your landing zone.</p>"
             }
         },
         "com.amazonaws.controlcatalog#ResourceNotFoundException": {

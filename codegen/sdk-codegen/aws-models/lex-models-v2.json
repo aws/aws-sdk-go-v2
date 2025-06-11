@@ -11222,7 +11222,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 200
+                    "max": 2000
                 }
             }
         },
@@ -18191,6 +18191,22 @@
         "com.amazonaws.lexmodelsv2#NextToken": {
             "type": "string"
         },
+        "com.amazonaws.lexmodelsv2#NluImprovementSpecification": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lexmodelsv2#Enabled",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the assisted nlu feature is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether the assisted nlu feature is turned on or off.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#NonEmptyString": {
             "type": "string",
             "traits": {
@@ -19166,6 +19182,12 @@
                     "target": "com.amazonaws.lexmodelsv2#SlotResolutionImprovementSpecification",
                     "traits": {
                         "smithy.api#documentation": "<p>An object containing specifications for the assisted slot resolution feature.</p>"
+                    }
+                },
+                "nluImprovement": {
+                    "target": "com.amazonaws.lexmodelsv2#NluImprovementSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing specifications for the assisted nlu feature.</p>"
                     }
                 }
             },
