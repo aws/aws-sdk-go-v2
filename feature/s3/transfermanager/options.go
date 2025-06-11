@@ -24,7 +24,7 @@ type Options struct {
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
 	// The number of goroutines to spin up in parallel per call to Upload when
-	// sending parts. If this is set to zero, the DefaultUploadConcurrency value
+	// transfering parts. If this is set to zero, the DefaultUploadConcurrency value
 	// will be used.
 	//
 	// The concurrency pool is not shared between calls to Upload.
@@ -44,6 +44,11 @@ type Options struct {
 	// It is safe to modify the registry in per-operation functional options,
 	// the original client-level registry will not be affected.
 	ProgressListeners ProgressListeners
+
+	// The number of goroutines to spin up in parallel per call to UploadDirectory when
+	// transfering files. If this is set to zero, the DefaultUploadConcurrency value
+	// will be used.
+	DirectoryConcurrency int
 }
 
 func (o *Options) init() {
@@ -88,6 +93,12 @@ func resolvePartBodyMaxRetries(o *Options) {
 func resolveGetBufferSize(o *Options) {
 	if o.GetBufferSize == 0 {
 		o.GetBufferSize = defaultGetBufferSize
+	}
+}
+
+func resolveDirectoryConcurrency(o *Options) {
+	if o.DirectoryConcurrency == 0 {
+		o.DirectoryConcurrency = defaultTransferConcurrency
 	}
 }
 
