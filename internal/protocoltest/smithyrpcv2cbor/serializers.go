@@ -1100,11 +1100,13 @@ func serializeCBOR_Defaults(v *types.Defaults) (smithycbor.Value, error) {
 		}
 		vm["defaultMap"] = ser
 	}
-	serdefaultEnum, err := serializeCBOR_TestEnum(v.DefaultEnum)
-	if err != nil {
-		return nil, err
+	if len(v.DefaultEnum) > 0 {
+		ser, err := serializeCBOR_TestEnum(v.DefaultEnum)
+		if err != nil {
+			return nil, err
+		}
+		vm["defaultEnum"] = ser
 	}
-	vm["defaultEnum"] = serdefaultEnum
 	serdefaultIntEnum, err := serializeCBOR_TestIntEnum(v.DefaultIntEnum)
 	if err != nil {
 		return nil, err
