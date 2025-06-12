@@ -1,0 +1,8 @@
+{
+    "id": "bfa7e37c-91c5-4d09-be23-d2f839bbaef7",
+    "type": "feature",
+    "description": "AWS KMS announces the support of ML-DSA key pairs that creates post-quantum safe digital signatures.",
+    "modules": [
+        "service/kms"
+    ]
+}

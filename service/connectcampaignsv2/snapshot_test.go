@@ -206,6 +206,18 @@ func TestCheckSnapshot_GetConnectInstanceConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetInstanceCommunicationLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInstanceCommunicationLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetInstanceCommunicationLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetInstanceOnboardingJobStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInstanceOnboardingJobStatus(context.Background(), nil, func(o *Options) {
@@ -271,6 +283,18 @@ func TestCheckSnapshot_PutConnectInstanceIntegration(t *testing.T) {
 	_, err := svc.PutConnectInstanceIntegration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutConnectInstanceIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutInstanceCommunicationLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutInstanceCommunicationLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutInstanceCommunicationLimits")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -601,6 +625,18 @@ func TestUpdateSnapshot_GetConnectInstanceConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetInstanceCommunicationLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInstanceCommunicationLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetInstanceCommunicationLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetInstanceOnboardingJobStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInstanceOnboardingJobStatus(context.Background(), nil, func(o *Options) {
@@ -666,6 +702,18 @@ func TestUpdateSnapshot_PutConnectInstanceIntegration(t *testing.T) {
 	_, err := svc.PutConnectInstanceIntegration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutConnectInstanceIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutInstanceCommunicationLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutInstanceCommunicationLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutInstanceCommunicationLimits")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

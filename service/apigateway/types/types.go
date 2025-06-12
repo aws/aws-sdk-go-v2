@@ -385,7 +385,7 @@ type DomainName struct {
 	// The custom domain name as an API host name, for example, my-api.example.com .
 	DomainName *string
 
-	// The ARN of the domain name. Supported only for private custom domain names.
+	// The ARN of the domain name.
 	DomainNameArn *string
 
 	// The identifier for the domain name resource. Supported only for private custom
@@ -619,7 +619,8 @@ type Integration struct {
 	RequestTemplates map[string]string
 
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
-	// milliseconds or 29 seconds.
+	// milliseconds or 29 seconds. You can increase the default value to longer than 29
+	// seconds for Regional or private APIs only.
 	TimeoutInMillis int32
 
 	// Specifies the TLS configuration for an integration.

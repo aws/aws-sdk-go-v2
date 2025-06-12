@@ -984,6 +984,77 @@ func awsRestjson1_serializeOpHttpBindingsGetConnectInstanceConfigInput(v *GetCon
 	return nil
 }
 
+type awsRestjson1_serializeOpGetInstanceCommunicationLimits struct {
+}
+
+func (*awsRestjson1_serializeOpGetInstanceCommunicationLimits) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetInstanceCommunicationLimits) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetInstanceCommunicationLimitsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/connect-instance/{connectInstanceId}/communication-limits")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetInstanceCommunicationLimitsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetInstanceCommunicationLimitsInput(v *GetInstanceCommunicationLimitsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ConnectInstanceId == nil || len(*v.ConnectInstanceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member connectInstanceId must not be empty")}
+	}
+	if v.ConnectInstanceId != nil {
+		if err := encoder.SetURI("connectInstanceId").String(*v.ConnectInstanceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetInstanceOnboardingJobStatus struct {
 }
 
@@ -1458,6 +1529,102 @@ func awsRestjson1_serializeOpDocumentPutConnectInstanceIntegrationInput(v *PutCo
 	if v.IntegrationConfig != nil {
 		ok := object.Key("integrationConfig")
 		if err := awsRestjson1_serializeDocumentIntegrationConfig(v.IntegrationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutInstanceCommunicationLimits struct {
+}
+
+func (*awsRestjson1_serializeOpPutInstanceCommunicationLimits) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutInstanceCommunicationLimits) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutInstanceCommunicationLimitsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/connect-instance/{connectInstanceId}/communication-limits")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutInstanceCommunicationLimitsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutInstanceCommunicationLimitsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutInstanceCommunicationLimitsInput(v *PutInstanceCommunicationLimitsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ConnectInstanceId == nil || len(*v.ConnectInstanceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member connectInstanceId must not be empty")}
+	}
+	if v.ConnectInstanceId != nil {
+		if err := encoder.SetURI("connectInstanceId").String(*v.ConnectInstanceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutInstanceCommunicationLimitsInput(v *PutInstanceCommunicationLimitsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CommunicationLimitsConfig != nil {
+		ok := object.Key("communicationLimitsConfig")
+		if err := awsRestjson1_serializeDocumentInstanceCommunicationLimitsConfig(v.CommunicationLimitsConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -2989,6 +3156,11 @@ func awsRestjson1_serializeDocumentCommunicationLimitsConfig(v *types.Communicat
 		}
 	}
 
+	if len(v.InstanceLimitsHandling) > 0 {
+		ok := object.Key("instanceLimitsHandling")
+		ok.String(string(v.InstanceLimitsHandling))
+	}
+
 	return nil
 }
 
@@ -3211,6 +3383,20 @@ func awsRestjson1_serializeDocumentEventTrigger(v *types.EventTrigger, value smi
 	if v.CustomerProfilesDomainArn != nil {
 		ok := object.Key("customerProfilesDomainArn")
 		ok.String(*v.CustomerProfilesDomainArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInstanceCommunicationLimitsConfig(v *types.InstanceCommunicationLimitsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllChannelSubtypes != nil {
+		ok := object.Key("allChannelSubtypes")
+		if err := awsRestjson1_serializeDocumentCommunicationLimits(v.AllChannelSubtypes, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

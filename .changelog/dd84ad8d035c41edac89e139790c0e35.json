@@ -1,0 +1,8 @@
+{
+    "id": "dd84ad8d-035c-41ed-ac89-e139790c0e35",
+    "type": "documentation",
+    "description": "This Amazon ECS  release supports updating the capacityProviderStrategy parameter in update-service.",
+    "modules": [
+        "service/ecs"
+    ]
+}

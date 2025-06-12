@@ -1,0 +1,8 @@
+{
+    "id": "c2af0547-0eb4-493b-8914-02938425bda9",
+    "type": "feature",
+    "description": "Fixed regex patterns for ARN fields.",
+    "modules": [
+        "service/pcs"
+    ]
+}

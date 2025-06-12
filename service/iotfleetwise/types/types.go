@@ -1962,17 +1962,19 @@ type VehicleStatus struct {
 
 	// The status of a campaign, which can be one of the following:
 	//
-	//   - CREATED - The campaign has been created successfully but has not been
-	//   approved.
+	//   - CREATED - The campaign exists but is not yet approved.
 	//
-	//   - READY - The campaign has been approved but has not been deployed to the
-	//   vehicle.
+	//   - READY - The campaign is approved but has not been deployed to the vehicle.
+	//   Data has not arrived at the vehicle yet.
 	//
-	//   - HEALTHY - The campaign has been deployed to the vehicle.
+	//   - HEALTHY - The campaign is deployed to the vehicle.
 	//
-	//   - SUSPENDED - The campaign has been suspended and data collection is paused.
+	//   - SUSPENDED - The campaign is suspended and data collection is paused.
 	//
 	//   - DELETING - The campaign is being removed from the vehicle.
+	//
+	//   - READY_FOR_CHECKIN - The campaign is approved and waiting for vehicle
+	//   check-in before deployment.
 	Status VehicleState
 
 	// The unique ID of the vehicle.

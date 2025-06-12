@@ -77,7 +77,7 @@ type GetDomainNameOutput struct {
 	// The custom domain name as an API host name, for example, my-api.example.com .
 	DomainName *string
 
-	// The ARN of the domain name. Supported only for private custom domain names.
+	// The ARN of the domain name.
 	DomainNameArn *string
 
 	// The identifier for the domain name resource. Supported only for private custom

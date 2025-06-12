@@ -777,11 +777,12 @@ type VehicleState string
 
 // Enum values for VehicleState
 const (
-	VehicleStateCreated   VehicleState = "CREATED"
-	VehicleStateReady     VehicleState = "READY"
-	VehicleStateHealthy   VehicleState = "HEALTHY"
-	VehicleStateSuspended VehicleState = "SUSPENDED"
-	VehicleStateDeleting  VehicleState = "DELETING"
+	VehicleStateCreated         VehicleState = "CREATED"
+	VehicleStateReady           VehicleState = "READY"
+	VehicleStateHealthy         VehicleState = "HEALTHY"
+	VehicleStateSuspended       VehicleState = "SUSPENDED"
+	VehicleStateDeleting        VehicleState = "DELETING"
+	VehicleStateReadyForCheckin VehicleState = "READY_FOR_CHECKIN"
 )
 
 // Values returns all known values for VehicleState. Note that this can be
@@ -795,5 +796,6 @@ func (VehicleState) Values() []VehicleState {
 		"HEALTHY",
 		"SUSPENDED",
 		"DELETING",
+		"READY_FOR_CHECKIN",
 	}
 }

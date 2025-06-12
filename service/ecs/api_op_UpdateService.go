@@ -123,17 +123,6 @@ import (
 //     (based on the previous steps), favoring container instances with the largest
 //     number of running tasks for this service.
 //
-// You must have a service-linked role when you update any of the following
-// service properties:
-//
-//   - loadBalancers ,
-//
-//   - serviceRegistries
-//
-// For more information about the role see the CreateService request parameter [role]role
-// .
-//
-// [role]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
 // [CreateTaskSet]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
 // [UpdateService]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
 // [Amazon EBS volumes]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
@@ -168,38 +157,40 @@ type UpdateServiceInput struct {
 	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
 	AvailabilityZoneRebalancing types.AvailabilityZoneRebalancing
 
-	// The capacity provider strategy to update the service to use.
+	// The details of a capacity provider strategy. You can set a capacity provider
+	// when you create a cluster, run a task, or update a service.
 	//
-	// if the service uses the default capacity provider strategy for the cluster, the
-	// service can be updated to use one or more capacity providers as opposed to the
-	// default capacity provider strategy. However, when a service is using a capacity
-	// provider strategy that's not the default capacity provider strategy, the service
-	// can't be updated to use the cluster's default capacity provider strategy.
+	// When you use Fargate, the capacity providers are FARGATE or FARGATE_SPOT .
 	//
-	// A capacity provider strategy consists of one or more capacity providers along
-	// with the base and weight to assign to them. A capacity provider must be
-	// associated with the cluster to be used in a capacity provider strategy. The [PutClusterCapacityProviders]API
-	// is used to associate a capacity provider with a cluster. Only capacity providers
-	// with an ACTIVE or UPDATING status can be used.
+	// When you use Amazon EC2, the capacity providers are Auto Scaling groups.
 	//
-	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
-	// provider must already be created. New capacity providers can be created with the
-	// [CreateClusterCapacityProvider]API operation.
+	// You can change capacity providers for rolling deployments and blue/green
+	// deployments.
 	//
-	// To use a Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT
-	// capacity providers. The Fargate capacity providers are available to all accounts
-	// and only need to be associated with a cluster to be used.
+	// The following list provides the valid transitions:
 	//
-	// The [PutClusterCapacityProviders]API operation is used to update the list of available capacity providers
-	// for a cluster after the cluster is created.
+	//   - Update the Fargate launch type to an EC2 capacity provider.
 	//
-	// [PutClusterCapacityProviders]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
-	// [CreateClusterCapacityProvider]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateClusterCapacityProvider.html
+	//   - Update the Amazon EC2 launch type to a Fargate capacity provider.
+	//
+	//   - Update the Fargate capacity provider to an EC2 capacity provider.
+	//
+	//   - Update the Amazon EC2 capacity provider to a Fargate capacity provider.
+	//
+	//   - Update the EC2 or Fargate capacity provider back to the launch type.
+	//
+	// Pass an empty list in the capacityProvider parameter.
+	//
+	// For information about Amazon Web Services CDK considerations, see [Amazon Web Services CDK considerations].
+	//
+	// [Amazon Web Services CDK considerations]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service-parameters.html
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that your
 	// service runs on. If you do not specify a cluster, the default cluster is
 	// assumed.
+	//
+	// You can't change the cluster name.
 	Cluster *string
 
 	// Optional deployment parameters that control how many tasks run during the
@@ -247,6 +238,8 @@ type UpdateServiceInput struct {
 	// as unhealthy and stopping them before they have time to come up.
 	HealthCheckGracePeriodSeconds *int32
 
+	// You must have a service-linked role when you update this property
+	//
 	// A list of Elastic Load Balancing load balancer objects. It contains the load
 	// balancer name, the container name, and the container port to access from the
 	// load balancer. The container name is as it appears in a container definition.
@@ -327,6 +320,11 @@ type UpdateServiceInput struct {
 	// [Service Connect]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
 	ServiceConnectConfiguration *types.ServiceConnectConfiguration
 
+	// You must have a service-linked role when you update this property.
+	//
+	// For more information about the role see the CreateService request parameter [role]role
+	// .
+	//
 	// The details for the service discovery registries to assign to this service. For
 	// more information, see [Service Discovery].
 	//
@@ -336,6 +334,7 @@ type UpdateServiceInput struct {
 	//
 	// You can remove existing serviceRegistries by passing an empty list.
 	//
+	// [role]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
 	// [Service Discovery]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
 	ServiceRegistries []types.ServiceRegistry
 

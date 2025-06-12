@@ -250,6 +250,26 @@ func (m *validateOpGetConnectInstanceConfig) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetInstanceCommunicationLimits struct {
+}
+
+func (*validateOpGetInstanceCommunicationLimits) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInstanceCommunicationLimits) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInstanceCommunicationLimitsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInstanceCommunicationLimitsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInstanceOnboardingJobStatus struct {
 }
 
@@ -365,6 +385,26 @@ func (m *validateOpPutConnectInstanceIntegration) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutConnectInstanceIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutInstanceCommunicationLimits struct {
+}
+
+func (*validateOpPutInstanceCommunicationLimits) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutInstanceCommunicationLimits) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutInstanceCommunicationLimitsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutInstanceCommunicationLimitsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -718,6 +758,10 @@ func addOpGetConnectInstanceConfigValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetConnectInstanceConfig{}, middleware.After)
 }
 
+func addOpGetInstanceCommunicationLimitsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInstanceCommunicationLimits{}, middleware.After)
+}
+
 func addOpGetInstanceOnboardingJobStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInstanceOnboardingJobStatus{}, middleware.After)
 }
@@ -740,6 +784,10 @@ func addOpPauseCampaignValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutConnectInstanceIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutConnectInstanceIntegration{}, middleware.After)
+}
+
+func addOpPutInstanceCommunicationLimitsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutInstanceCommunicationLimits{}, middleware.After)
 }
 
 func addOpPutOutboundRequestBatchValidationMiddleware(stack *middleware.Stack) error {
@@ -1107,6 +1155,23 @@ func validateEncryptionConfig(v *types.EncryptionConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfig"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstanceCommunicationLimitsConfig(v *types.InstanceCommunicationLimitsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceCommunicationLimitsConfig"}
+	if v.AllChannelSubtypes != nil {
+		if err := validateCommunicationLimits(v.AllChannelSubtypes); err != nil {
+			invalidParams.AddNested("AllChannelSubtypes", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1839,6 +1904,21 @@ func validateOpGetConnectInstanceConfigInput(v *GetConnectInstanceConfigInput) e
 	}
 }
 
+func validateOpGetInstanceCommunicationLimitsInput(v *GetInstanceCommunicationLimitsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInstanceCommunicationLimitsInput"}
+	if v.ConnectInstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectInstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetInstanceOnboardingJobStatusInput(v *GetInstanceOnboardingJobStatusInput) error {
 	if v == nil {
 		return nil
@@ -1929,6 +2009,28 @@ func validateOpPutConnectInstanceIntegrationInput(v *PutConnectInstanceIntegrati
 	} else if v.IntegrationConfig != nil {
 		if err := validateIntegrationConfig(v.IntegrationConfig); err != nil {
 			invalidParams.AddNested("IntegrationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutInstanceCommunicationLimitsInput(v *PutInstanceCommunicationLimitsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutInstanceCommunicationLimitsInput"}
+	if v.ConnectInstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectInstanceId"))
+	}
+	if v.CommunicationLimitsConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommunicationLimitsConfig"))
+	} else if v.CommunicationLimitsConfig != nil {
+		if err := validateInstanceCommunicationLimitsConfig(v.CommunicationLimitsConfig); err != nil {
+			invalidParams.AddNested("CommunicationLimitsConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -17,10 +17,11 @@ import (
 // about asymmetric KMS keys, see [Asymmetric KMS keys]in the Key Management Service Developer Guide.
 //
 // Digital signatures are generated and verified by using asymmetric key pair,
-// such as an RSA or ECC pair that is represented by an asymmetric KMS key. The key
-// owner (or an authorized user) uses their private key to sign a message. Anyone
-// with the public key can verify that the message was signed with that particular
-// private key and that the message hasn't changed since it was signed.
+// such as an RSA, ECC, or ML-DSA pair that is represented by an asymmetric KMS
+// key. The key owner (or an authorized user) uses their private key to sign a
+// message. Anyone with the public key can verify that the message was signed with
+// that particular private key and that the message hasn't changed since it was
+// signed.
 //
 // To use the Sign operation, provide the following information:
 //
@@ -31,8 +32,8 @@ import (
 //   - Use the Message parameter to specify the message or message digest to sign.
 //     You can submit messages of up to 4096 bytes. To sign a larger message, generate
 //     a hash digest of the message, and then provide the hash digest in the Message
-//     parameter. To indicate whether the message is a full message or a digest, use
-//     the MessageType parameter.
+//     parameter. To indicate whether the message is a full message, a digest, or an
+//     ML-DSA EXTERNAL_MU, use the MessageType parameter.
 //
 //   - Choose a signing algorithm that is compatible with the KMS key.
 //
@@ -149,30 +150,39 @@ type SignInput struct {
 
 	// Tells KMS whether the value of the Message parameter should be hashed as part
 	// of the signing algorithm. Use RAW for unhashed messages; use DIGEST for message
-	// digests, which are already hashed.
+	// digests, which are already hashed; use EXTERNAL_MU for 64-byte representative μ
+	// used in ML-DSA signing as defined in NIST FIPS 204 Section 6.2.
 	//
 	// When the value of MessageType is RAW , KMS uses the standard signing algorithm,
 	// which begins with a hash function. When the value is DIGEST , KMS skips the
-	// hashing step in the signing algorithm.
+	// hashing step in the signing algorithm. When the value is EXTERNAL_MU KMS skips
+	// the concatenated hashing of the public key hash and the message done in the
+	// ML-DSA signing algorithm.
 	//
-	// Use the DIGEST value only when the value of the Message parameter is a message
-	// digest. If you use the DIGEST value with an unhashed message, the security of
-	// the signing operation can be compromised.
+	// Use the DIGEST or EXTERNAL_MU value only when the value of the Message
+	// parameter is a message digest. If you use the DIGEST value with an unhashed
+	// message, the security of the signing operation can be compromised.
 	//
 	// When the value of MessageType is DIGEST , the length of the Message value must
 	// match the length of hashed messages for the specified signing algorithm.
+	//
+	// When the value of MessageType is EXTERNAL_MU the length of the Message value
+	// must be 64 bytes.
 	//
 	// You can submit a message digest and omit the MessageType or specify RAW so the
 	// digest is hashed again while signing. However, this can cause verification
 	// failures when verifying with a system that assumes a single hash.
 	//
-	// The hashing algorithm in that Sign uses is based on the SigningAlgorithm value.
+	// The hashing algorithm that Sign uses is based on the SigningAlgorithm value.
 	//
 	//   - Signing algorithms that end in SHA_256 use the SHA_256 hashing algorithm.
 	//
 	//   - Signing algorithms that end in SHA_384 use the SHA_384 hashing algorithm.
 	//
 	//   - Signing algorithms that end in SHA_512 use the SHA_512 hashing algorithm.
+	//
+	//   - Signing algorithms that end in SHAKE_256 use the SHAKE_256 hashing
+	//   algorithm.
 	//
 	//   - SM2DSA uses the SM3 hashing algorithm. For details, see [Offline verification with SM2 key pairs].
 	//

@@ -220,6 +220,9 @@ type CommunicationLimitsConfig struct {
 	// Communication limits
 	AllChannelSubtypes CommunicationLimits
 
+	// Instance limits handling
+	InstanceLimitsHandling InstanceLimitsHandling
+
 	noSmithyDocumentSerde
 }
 
@@ -437,6 +440,15 @@ type FailedRequest struct {
 
 	// Identifier representing a Dial request
 	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Instance Communication limits config
+type InstanceCommunicationLimitsConfig struct {
+
+	// Communication limits
+	AllChannelSubtypes CommunicationLimits
 
 	noSmithyDocumentSerde
 }

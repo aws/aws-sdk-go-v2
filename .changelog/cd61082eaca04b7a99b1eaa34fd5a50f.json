@@ -1,0 +1,8 @@
+{
+    "id": "cd61082e-aca0-4b7a-99b1-eaa34fd5a50f",
+    "type": "feature",
+    "description": "Added PutInstanceCommunicationLimits and GetInstanceCommunicationLimits APIs",
+    "modules": [
+        "service/connectcampaignsv2"
+    ]
+}

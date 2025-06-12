@@ -267,6 +267,25 @@ func (InstanceIdFilterOperator) Values() []InstanceIdFilterOperator {
 	}
 }
 
+type InstanceLimitsHandling string
+
+// Enum values for InstanceLimitsHandling
+const (
+	InstanceLimitsHandlingOptIn  InstanceLimitsHandling = "OPT_IN"
+	InstanceLimitsHandlingOptOut InstanceLimitsHandling = "OPT_OUT"
+)
+
+// Values returns all known values for InstanceLimitsHandling. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceLimitsHandling) Values() []InstanceLimitsHandling {
+	return []InstanceLimitsHandling{
+		"OPT_IN",
+		"OPT_OUT",
+	}
+}
+
 type InstanceOnboardingJobFailureCode string
 
 // Enum values for InstanceOnboardingJobFailureCode

@@ -454,6 +454,9 @@ const (
 	KeySpecHmac384          KeySpec = "HMAC_384"
 	KeySpecHmac512          KeySpec = "HMAC_512"
 	KeySpecSm2              KeySpec = "SM2"
+	KeySpecMlDsa44          KeySpec = "ML_DSA_44"
+	KeySpecMlDsa65          KeySpec = "ML_DSA_65"
+	KeySpecMlDsa87          KeySpec = "ML_DSA_87"
 )
 
 // Values returns all known values for KeySpec. Note that this can be expanded in
@@ -475,6 +478,9 @@ func (KeySpec) Values() []KeySpec {
 		"HMAC_384",
 		"HMAC_512",
 		"SM2",
+		"ML_DSA_44",
+		"ML_DSA_65",
+		"ML_DSA_87",
 	}
 }
 
@@ -559,8 +565,9 @@ type MessageType string
 
 // Enum values for MessageType
 const (
-	MessageTypeRaw    MessageType = "RAW"
-	MessageTypeDigest MessageType = "DIGEST"
+	MessageTypeRaw        MessageType = "RAW"
+	MessageTypeDigest     MessageType = "DIGEST"
+	MessageTypeExternalMu MessageType = "EXTERNAL_MU"
 )
 
 // Values returns all known values for MessageType. Note that this can be expanded
@@ -571,6 +578,7 @@ func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"RAW",
 		"DIGEST",
+		"EXTERNAL_MU",
 	}
 }
 
@@ -649,6 +657,7 @@ const (
 	SigningAlgorithmSpecEcdsaSha384          SigningAlgorithmSpec = "ECDSA_SHA_384"
 	SigningAlgorithmSpecEcdsaSha512          SigningAlgorithmSpec = "ECDSA_SHA_512"
 	SigningAlgorithmSpecSm2dsa               SigningAlgorithmSpec = "SM2DSA"
+	SigningAlgorithmSpecMlDsaShake256        SigningAlgorithmSpec = "ML_DSA_SHAKE_256"
 )
 
 // Values returns all known values for SigningAlgorithmSpec. Note that this can be
@@ -667,6 +676,7 @@ func (SigningAlgorithmSpec) Values() []SigningAlgorithmSpec {
 		"ECDSA_SHA_384",
 		"ECDSA_SHA_512",
 		"SM2DSA",
+		"ML_DSA_SHAKE_256",
 	}
 }
 

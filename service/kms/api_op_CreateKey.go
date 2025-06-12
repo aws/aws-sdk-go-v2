@@ -51,18 +51,19 @@ import (
 // or sign and verify. You can't change these properties after the KMS key is
 // created.
 //
-// Asymmetric KMS keys contain an RSA key pair, Elliptic Curve (ECC) key pair, or
-// an SM2 key pair (China Regions only). The private key in an asymmetric KMS key
-// never leaves KMS unencrypted. However, you can use the GetPublicKeyoperation to download
-// the public key so it can be used outside of KMS. Each KMS key can have only one
-// key usage. KMS keys with RSA key pairs can be used to encrypt and decrypt data
-// or sign and verify messages (but not both). KMS keys with NIST-recommended ECC
-// key pairs can be used to sign and verify messages or derive shared secrets (but
-// not both). KMS keys with ECC_SECG_P256K1 can be used only to sign and verify
-// messages. KMS keys with SM2 key pairs (China Regions only) can be used to either
-// encrypt and decrypt data, sign and verify messages, or derive shared secrets
-// (you must choose one key usage type). For information about asymmetric KMS keys,
-// see [Asymmetric KMS keys]in the Key Management Service Developer Guide.
+// Asymmetric KMS keys contain an RSA key pair, Elliptic Curve (ECC) key pair,
+// ML-DSA key pair or an SM2 key pair (China Regions only). The private key in an
+// asymmetric KMS key never leaves KMS unencrypted. However, you can use the GetPublicKey
+// operation to download the public key so it can be used outside of KMS. Each KMS
+// key can have only one key usage. KMS keys with RSA key pairs can be used to
+// encrypt and decrypt data or sign and verify messages (but not both). KMS keys
+// with NIST-recommended ECC key pairs can be used to sign and verify messages or
+// derive shared secrets (but not both). KMS keys with ECC_SECG_P256K1 can be used
+// only to sign and verify messages. KMS keys with ML-DSA key pairs can be used to
+// sign and verify messages. KMS keys with SM2 key pairs (China Regions only) can
+// be used to either encrypt and decrypt data, sign and verify messages, or derive
+// shared secrets (you must choose one key usage type). For information about
+// asymmetric KMS keys, see [Asymmetric KMS keys]in the Key Management Service Developer Guide.
 //
 // HMAC KMS key To create an HMAC KMS key, set the KeySpec parameter to a key spec
 // value for HMAC KMS keys. Then set the KeyUsage parameter to GENERATE_VERIFY_MAC
@@ -302,6 +303,14 @@ type CreateKeyInput struct {
 	//
 	//   - ECC_SECG_P256K1 (secp256k1), commonly used for cryptocurrencies.
 	//
+	//   - Asymmetric ML-DSA key pairs (signing and verification)
+	//
+	//   - ML_DSA_44
+	//
+	//   - ML_DSA_65
+	//
+	//   - ML_DSA_87
+	//
 	//   - SM2 key pairs (encryption and decryption -or- signing and verification -or-
 	//   deriving shared secrets)
 	//
@@ -333,7 +342,9 @@ type CreateKeyInput struct {
 	//   - For asymmetric KMS keys with NIST-recommended elliptic curve key pairs,
 	//   specify SIGN_VERIFY or KEY_AGREEMENT .
 	//
-	//   - For asymmetric KMS keys with ECC_SECG_P256K1 key pairs specify SIGN_VERIFY .
+	//   - For asymmetric KMS keys with ECC_SECG_P256K1 key pairs, specify SIGN_VERIFY .
+	//
+	//   - For asymmetric KMS keys with ML-DSA key pairs, specify SIGN_VERIFY .
 	//
 	//   - For asymmetric KMS keys with SM2 key pairs (China Regions only), specify
 	//   ENCRYPT_DECRYPT , SIGN_VERIFY , or KEY_AGREEMENT .

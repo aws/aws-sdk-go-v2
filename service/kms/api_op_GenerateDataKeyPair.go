@@ -146,10 +146,11 @@ type GenerateDataKeyPairInput struct {
 	// Determines the type of data key pair that is generated.
 	//
 	// The KMS rule that restricts the use of asymmetric RSA and SM2 KMS keys to
-	// encrypt and decrypt or to sign and verify (but not both), and the rule that
-	// permits you to use ECC KMS keys only to sign and verify, are not effective on
-	// data key pairs, which are used outside of KMS. The SM2 key spec is only
-	// available in China Regions.
+	// encrypt and decrypt or to sign and verify (but not both), the rule that permits
+	// you to use ECC KMS keys only to sign and verify, and the rule that permits you
+	// to use ML-DSA key pairs to sign and verify only are not effective on data key
+	// pairs, which are used outside of KMS. The SM2 key spec is only available in
+	// China Regions.
 	//
 	// This member is required.
 	KeyPairSpec types.DataKeyPairSpec
@@ -240,8 +241,7 @@ type GenerateDataKeyPairOutput struct {
 	// [key ARN]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KeyId *string
 
-	// The identifier of the key material used to encrypt the private key. This field
-	// is omitted if the request includes the Recipient parameter.
+	// The identifier of the key material used to encrypt the private key.
 	KeyMaterialId *string
 
 	// The type of data key pair that was generated.

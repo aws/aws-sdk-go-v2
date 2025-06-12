@@ -430,6 +430,11 @@ type JobRun struct {
 	// The date and time when the job was terminated.
 	EndedAt *time.Time
 
+	// Optional IAM policy. The resulting job IAM role permissions will be an
+	// intersection of the policies passed and the policy associated with your job
+	// execution role.
+	ExecutionIamPolicy *JobRunExecutionIamPolicy
+
 	// Returns the job run timeout value from the StartJobRun call. If no timeout was
 	// specified, then it returns the default timeout of 720 minutes.
 	ExecutionTimeoutMinutes *int64

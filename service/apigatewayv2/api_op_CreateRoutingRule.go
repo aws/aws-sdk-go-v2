@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a RoutingRule
+// Creates a RoutingRule.
 func (c *Client) CreateRoutingRule(ctx context.Context, params *CreateRoutingRuleInput, optFns ...func(*Options)) (*CreateRoutingRuleOutput, error) {
 	if params == nil {
 		params = &CreateRoutingRuleInput{}

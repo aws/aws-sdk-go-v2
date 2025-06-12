@@ -131,7 +131,8 @@ type GetIntegrationOutput struct {
 	RequestTemplates map[string]string
 
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
-	// milliseconds or 29 seconds.
+	// milliseconds or 29 seconds. You can increase the default value to longer than 29
+	// seconds for Regional or private APIs only.
 	TimeoutInMillis int32
 
 	// Specifies the TLS configuration for an integration.
