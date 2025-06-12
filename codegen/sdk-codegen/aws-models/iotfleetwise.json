@@ -9335,7 +9335,7 @@
                 "status": {
                     "target": "com.amazonaws.iotfleetwise#CampaignStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of a campaign. The status can be one of:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - Amazon Web Services IoT FleetWise is processing your request to create the\n                    campaign. </p>\n            </li>\n            <li>\n               <p>\n                  <code>WAITING_FOR_APPROVAL</code> - After a campaign is created, it enters the\n                        <code>WAITING_FOR_APPROVAL</code> state. To allow Amazon Web Services IoT FleetWise to deploy the\n                    campaign to the target vehicle or fleet, use the  API operation to approve the campaign.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> - The campaign is active. </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code> - The campaign is suspended. To resume the campaign, use\n                    the  API operation. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of a campaign. The status can be one of:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - Amazon Web Services IoT FleetWise is processing your request to create the\n                    campaign. </p>\n            </li>\n            <li>\n               <p>\n                  <code>WAITING_FOR_APPROVAL</code> - After you create a campaign, it enters this state. Use the  API operation to approve the campaign for deployment to the target vehicle or fleet.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> - The campaign is active. </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code> - The campaign is suspended. To resume the campaign, use\n                    the  API operation. </p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -10318,6 +10318,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DELETING"
                     }
+                },
+                "READY_FOR_CHECKIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY_FOR_CHECKIN"
+                    }
                 }
             }
         },
@@ -10339,7 +10345,7 @@
                 "status": {
                     "target": "com.amazonaws.iotfleetwise#VehicleState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of a campaign, which can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATED</code> - The campaign has been created successfully but has not been\n                    approved. </p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> - The campaign has been approved but has not been deployed to\n                    the vehicle.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HEALTHY</code> - The campaign has been deployed to the vehicle.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code> - The campaign has been suspended and data collection is \n                    paused. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The campaign is being removed from the vehicle.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of a campaign, which can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATED</code> - The campaign exists but is not yet approved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> - The campaign is approved but has not been deployed to the vehicle. Data has not arrived at the vehicle yet.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HEALTHY</code> - The campaign is deployed to the vehicle.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code> - The campaign is suspended and data collection is paused.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The campaign is being removed from the vehicle.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY_FOR_CHECKIN</code> - The campaign is approved and waiting for vehicle check-in before deployment.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

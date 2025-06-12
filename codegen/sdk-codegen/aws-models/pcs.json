@@ -820,7 +820,7 @@
                     "min": 1,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:aws*:pcs:.*:[0-9]{12}:.*/[a-z0-9_\\-]+$"
+                "smithy.api#pattern": "^arn:aws.*:pcs:.*:[0-9]{12}:.*/[a-z0-9_\\-]+$"
             }
         },
         "com.amazonaws.pcs#BootstrapId": {
@@ -2491,7 +2491,7 @@
         "com.amazonaws.pcs#InstanceProfileArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws([a-zA-Z-]{0,10})?:iam::[0-9]{12}:instance-profile/.{1,128}$"
+                "smithy.api#pattern": "^arn:aws([a-zA-Z-]{0,10})?:iam::[0-9]{12}:instance-profile/[\\w+=,.@-]{1,128}$"
             }
         },
         "com.amazonaws.pcs#InternalServerException": {

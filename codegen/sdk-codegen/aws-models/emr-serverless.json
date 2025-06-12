@@ -1204,7 +1204,7 @@
                     "target": "com.amazonaws.emrserverless#ShutdownGracePeriodInSeconds",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "The duration (in seconds) to wait before forcefully terminating the job after cancellation is requested.",
+                        "smithy.api#documentation": "<p>The duration in seconds to wait before forcefully terminating the job after cancellation is requested.</p>",
                         "smithy.api#httpQuery": "shutdownGracePeriodInSeconds"
                     }
                 }
@@ -2156,6 +2156,9 @@
                         "smithy.api#documentation": "<p>The execution role ARN of the job run.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "executionIamPolicy": {
+                    "target": "com.amazonaws.emrserverless#JobRunExecutionIamPolicy"
                 },
                 "state": {
                     "target": "com.amazonaws.emrserverless#JobRunState",

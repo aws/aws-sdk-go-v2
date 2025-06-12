@@ -3509,7 +3509,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a RoutingRule</p>",
+                "smithy.api#documentation": "<p>Creates a RoutingRule.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/domainnames/{DomainName}/routingrules",

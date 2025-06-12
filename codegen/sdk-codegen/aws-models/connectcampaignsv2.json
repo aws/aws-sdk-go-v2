@@ -71,6 +71,9 @@
                     "target": "com.amazonaws.connectcampaignsv2#GetConnectInstanceConfig"
                 },
                 {
+                    "target": "com.amazonaws.connectcampaignsv2#GetInstanceCommunicationLimits"
+                },
+                {
                     "target": "com.amazonaws.connectcampaignsv2#GetInstanceOnboardingJobStatus"
                 },
                 {
@@ -87,6 +90,9 @@
                 },
                 {
                     "target": "com.amazonaws.connectcampaignsv2#PutConnectInstanceIntegration"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#PutInstanceCommunicationLimits"
                 },
                 {
                     "target": "com.amazonaws.connectcampaignsv2#PutOutboundRequestBatch"
@@ -1289,6 +1295,9 @@
             "members": {
                 "allChannelSubtypes": {
                     "target": "com.amazonaws.connectcampaignsv2#CommunicationLimits"
+                },
+                "instanceLimitsHandling": {
+                    "target": "com.amazonaws.connectcampaignsv2#InstanceLimitsHandling"
                 }
             },
             "traits": {
@@ -2563,6 +2572,65 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connectcampaignsv2#GetInstanceCommunicationLimits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaignsv2#GetInstanceCommunicationLimitsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcampaignsv2#GetInstanceCommunicationLimitsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Get the instance communication limits.",
+                "smithy.api#http": {
+                    "uri": "/v2/connect-instance/{connectInstanceId}/communication-limits",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#GetInstanceCommunicationLimitsRequest": {
+            "type": "structure",
+            "members": {
+                "connectInstanceId": {
+                    "target": "com.amazonaws.connectcampaignsv2#InstanceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for GetInstanceCommunicationLimits API.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#GetInstanceCommunicationLimitsResponse": {
+            "type": "structure",
+            "members": {
+                "communicationLimitsConfig": {
+                    "target": "com.amazonaws.connectcampaignsv2#InstanceCommunicationLimitsConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The response for GetInstanceCommunicationLimits API.",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connectcampaignsv2#GetInstanceOnboardingJobStatus": {
             "type": "operation",
             "input": {
@@ -2620,6 +2688,17 @@
             "traits": {
                 "smithy.api#documentation": "The response for GetInstanceOnboardingJobStatus API.",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#InstanceCommunicationLimitsConfig": {
+            "type": "structure",
+            "members": {
+                "allChannelSubtypes": {
+                    "target": "com.amazonaws.connectcampaignsv2#CommunicationLimits"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Instance Communication limits config"
             }
         },
         "com.amazonaws.connectcampaignsv2#InstanceConfig": {
@@ -2688,6 +2767,22 @@
                         "name": "EQ",
                         "value": "Eq",
                         "documentation": "Equals operator"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#InstanceLimitsHandling": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Instance limits handling",
+                "smithy.api#enum": [
+                    {
+                        "value": "OPT_IN",
+                        "name": "OPT_IN"
+                    },
+                    {
+                        "value": "OPT_OUT",
+                        "name": "OPT_OUT"
                     }
                 ]
             }
@@ -3096,8 +3191,7 @@
                 "smithy.api#http": {
                     "uri": "/v2/tags/{arn}",
                     "method": "GET"
-                },
-                "smithy.api#readonly": {}
+                }
             }
         },
         "com.amazonaws.connectcampaignsv2#ListTagsForResourceRequest": {
@@ -3485,6 +3579,62 @@
             },
             "traits": {
                 "smithy.api#documentation": "The request for PutConnectInstanceIntegration API.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#PutInstanceCommunicationLimits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaignsv2#PutInstanceCommunicationLimitsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Put the instance communication limits. This API is idempotent.",
+                "smithy.api#http": {
+                    "uri": "/v2/connect-instance/{connectInstanceId}/communication-limits",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#PutInstanceCommunicationLimitsRequest": {
+            "type": "structure",
+            "members": {
+                "connectInstanceId": {
+                    "target": "com.amazonaws.connectcampaignsv2#InstanceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "communicationLimitsConfig": {
+                    "target": "com.amazonaws.connectcampaignsv2#InstanceCommunicationLimitsConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for PutInstanceCommunicationLimits API.",
                 "smithy.api#input": {}
             }
         },
