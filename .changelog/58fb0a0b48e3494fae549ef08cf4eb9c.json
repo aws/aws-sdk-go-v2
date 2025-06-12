@@ -1,8 +1,0 @@
-{
-    "id": "58fb0a0b-48e3-494f-ae54-9ef08cf4eb9c",
-    "type": "feature",
-    "description": "This release adds support for retrieval of the optional executionIamPolicy field in the GetJobRun API response.",
-    "modules": [
-        "service/emrserverless"
-    ]
-}

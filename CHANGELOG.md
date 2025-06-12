@@ -1,3 +1,21 @@
+# Release (2025-06-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.31.3](service/apigateway/CHANGELOG.md#v1313-2025-06-12)
+  * **Documentation**: Documentation updates for Amazon API Gateway
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.28.3](service/apigatewayv2/CHANGELOG.md#v1283-2025-06-12)
+  * **Documentation**: Documentation updates for Amazon API Gateway
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.3.0](service/connectcampaignsv2/CHANGELOG.md#v130-2025-06-12)
+  * **Feature**: Added PutInstanceCommunicationLimits and GetInstanceCommunicationLimits APIs
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.57.5](service/ecs/CHANGELOG.md#v1575-2025-06-12)
+  * **Documentation**: This Amazon ECS  release supports updating the capacityProviderStrategy parameter in update-service.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.31.0](service/emrserverless/CHANGELOG.md#v1310-2025-06-12)
+  * **Feature**: This release adds support for retrieval of the optional executionIamPolicy field in the GetJobRun API response.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.27.0](service/iotfleetwise/CHANGELOG.md#v1270-2025-06-12)
+  * **Feature**: Add new status READY_FOR_CHECKIN used for vehicle synchronisation
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.41.0](service/kms/CHANGELOG.md#v1410-2025-06-12)
+  * **Feature**: AWS KMS announces the support of ML-DSA key pairs that creates post-quantum safe digital signatures.
+
 # Release (2025-06-11)
 
 ## Module Highlights

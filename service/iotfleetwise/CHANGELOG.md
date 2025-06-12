@@ -1,3 +1,7 @@
+# v1.27.0 (2025-06-12)
+
+* **Feature**: Add new status READY_FOR_CHECKIN used for vehicle synchronisation
+
 # v1.26.1 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

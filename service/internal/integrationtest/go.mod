@@ -5,7 +5,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.29.16
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.79
 	github.com/aws/aws-sdk-go-v2/service/acm v1.32.2
-	github.com/aws/aws-sdk-go-v2/service/apigateway v1.31.2
+	github.com/aws/aws-sdk-go-v2/service/apigateway v1.31.3
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.36.3
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.30.3
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.45.4
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.3
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.225.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.44.2
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.57.4
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.57.5
 	github.com/aws/aws-sdk-go-v2/service/efs v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.46.2
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.29.3
@@ -48,7 +48,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iam v1.42.1
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.3
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.35.2
-	github.com/aws/aws-sdk-go-v2/service/kms v1.40.1
+	github.com/aws/aws-sdk-go-v2/service/kms v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.71.4
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.43.3
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.25.3

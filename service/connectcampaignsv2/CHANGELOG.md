@@ -1,3 +1,7 @@
+# v1.3.0 (2025-06-12)
+
+* **Feature**: Added PutInstanceCommunicationLimits and GetInstanceCommunicationLimits APIs
+
 # v1.2.3 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

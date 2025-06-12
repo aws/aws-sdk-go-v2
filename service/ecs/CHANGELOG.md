@@ -1,3 +1,7 @@
+# v1.57.5 (2025-06-12)
+
+* **Documentation**: This Amazon ECS  release supports updating the capacityProviderStrategy parameter in update-service.
+
 # v1.57.4 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

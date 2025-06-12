@@ -1,8 +1,0 @@
-{
-    "id": "a6a41449-7d87-4b1c-8bcb-9e2960d3e361",
-    "type": "feature",
-    "description": "Add new status READY_FOR_CHECKIN used for vehicle synchronisation",
-    "modules": [
-        "service/iotfleetwise"
-    ]
-}

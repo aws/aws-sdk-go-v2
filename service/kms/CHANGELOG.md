@@ -1,3 +1,7 @@
+# v1.41.0 (2025-06-12)
+
+* **Feature**: AWS KMS announces the support of ML-DSA key pairs that creates post-quantum safe digital signatures.
+
 # v1.40.1 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

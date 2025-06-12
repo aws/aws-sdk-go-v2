@@ -1,3 +1,7 @@
+# v1.31.0 (2025-06-12)
+
+* **Feature**: This release adds support for retrieval of the optional executionIamPolicy field in the GetJobRun API response.
+
 # v1.30.1 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions
