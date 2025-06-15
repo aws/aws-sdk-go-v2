@@ -391,3 +391,12 @@ func (r *TestErrReader) Read(p []byte) (int, error) {
 
 	return n, nil
 }
+
+// NewUploadDirectoryClient returns a new TransferManagerLoggingClient for upload directory testing
+func NewUploadDirectoryClient(ignoredOps []string) (*TransferManagerLoggingClient, *[]interface{}) {
+	c := &TransferManagerLoggingClient{
+		ignoredOperations: ignoredOps,
+	}
+
+	return c, &c.Params
+}
