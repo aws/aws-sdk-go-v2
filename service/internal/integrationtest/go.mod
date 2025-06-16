@@ -79,7 +79,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.57.1
-	github.com/aws/smithy-go v1.22.2
+	github.com/aws/smithy-go v1.22.4
 )
 
 require (
