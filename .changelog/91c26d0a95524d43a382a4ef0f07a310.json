@@ -1,8 +1,0 @@
-{
-    "id": "91c26d0a-9552-4d43-a382-a4ef0f07a310",
-    "type": "feature",
-    "description": "You can now create firewalls using a Transit Gateway instead of a VPC, resulting in a TGW attachment.",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

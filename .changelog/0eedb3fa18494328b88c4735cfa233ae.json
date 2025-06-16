@@ -1,8 +1,0 @@
-{
-    "id": "0eedb3fa-1849-4328-b88c-4735cfa233ae",
-    "type": "feature",
-    "description": "This release of the SDK has the API and documentation for the createcustommodel API. This feature lets you copy a Amazon SageMaker trained Amazon Nova model into Amazon Bedrock for inference.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

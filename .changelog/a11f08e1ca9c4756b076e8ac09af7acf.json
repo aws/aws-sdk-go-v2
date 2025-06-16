@@ -1,8 +1,0 @@
-{
-    "id": "a11f08e1-ca9c-4756-b076-e8ac09af7acf",
-    "type": "feature",
-    "description": "The `DescribeImageScanning` API now includes `lastInUseAt` and `InUseCount` fields that can be used to prioritize vulnerability remediation for images that are actively being used.",
-    "modules": [
-        "service/ecr"
-    ]
-}

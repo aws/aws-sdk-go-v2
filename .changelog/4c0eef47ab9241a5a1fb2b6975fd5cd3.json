@@ -1,8 +1,0 @@
-{
-    "id": "4c0eef47-ab92-41a5-a1fb-2b6975fd5cd3",
-    "type": "bugfix",
-    "description": "Add missed empty check of string and enum field for cbor serd",
-    "modules": [
-        "internal/protocoltest/smithyrpcv2cbor"
-    ]
-}

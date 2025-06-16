@@ -1,3 +1,7 @@
+# v1.45.0 (2025-06-16)
+
+* **Feature**: The `DescribeImageScanning` API now includes `lastInUseAt` and `InUseCount` fields that can be used to prioritize vulnerability remediation for images that are actively being used.
+
 # v1.44.2 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions
