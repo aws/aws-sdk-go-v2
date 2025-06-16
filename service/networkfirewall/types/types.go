@@ -206,6 +206,23 @@ type Attachment struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the mapping between an Availability Zone and a firewall endpoint for a
+// transit gateway-attached firewall. Each mapping represents where the firewall
+// can process traffic. You use these mappings when calling CreateFirewall, AssociateAvailabilityZones, and DisassociateAvailabilityZones.
+//
+// To retrieve the current Availability Zone mappings for a firewall, use DescribeFirewall.
+type AvailabilityZoneMapping struct {
+
+	// The ID of the Availability Zone where the firewall endpoint is located. For
+	// example, us-east-2a . The Availability Zone must be in the same Region as the
+	// transit gateway.
+	//
+	// This member is required.
+	AvailabilityZone *string
+
+	noSmithyDocumentSerde
+}
+
 // High-level information about an Availability Zone where the firewall has an
 // endpoint defined.
 type AvailabilityZoneMetadata struct {
@@ -440,6 +457,16 @@ type Firewall struct {
 	// This member is required.
 	VpcId *string
 
+	// A setting indicating whether the firewall is protected against changes to its
+	// Availability Zone configuration. When set to TRUE , you must first disable this
+	// protection before adding or removing Availability Zones.
+	AvailabilityZoneChangeProtection bool
+
+	// The Availability Zones where the firewall endpoints are created for a transit
+	// gateway-attached firewall. Each mapping specifies an Availability Zone where the
+	// firewall processes traffic.
+	AvailabilityZoneMappings []AvailabilityZoneMapping
+
 	// A flag indicating whether it is possible to delete the firewall. A setting of
 	// TRUE indicates that the firewall is protected against deletion. Use this setting
 	// to protect against accidentally deleting a firewall that is in use. When you
@@ -482,6 +509,15 @@ type Firewall struct {
 	//
 	Tags []Tag
 
+	// The unique identifier of the transit gateway associated with this firewall.
+	// This field is only present for transit gateway-attached firewalls.
+	TransitGatewayId *string
+
+	// The Amazon Web Services account ID that owns the transit gateway. This may be
+	// different from the firewall owner's account ID when using a shared transit
+	// gateway.
+	TransitGatewayOwnerAccountId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -496,6 +532,10 @@ type FirewallMetadata struct {
 	// The descriptive name of the firewall. You can't change the name of a firewall
 	// after you create it.
 	FirewallName *string
+
+	// The unique identifier of the transit gateway attachment associated with this
+	// firewall. This field is only present for transit gateway-attached firewalls.
+	TransitGatewayAttachmentId *string
 
 	noSmithyDocumentSerde
 }
@@ -702,6 +742,12 @@ type FirewallStatus struct {
 	// These objects provide detailed information for the settings
 	// ConfigurationSyncStateSummary and Status .
 	SyncStates map[string]SyncState
+
+	// The synchronization state of the transit gateway attachment. This indicates
+	// whether the firewall's transit gateway configuration is properly synchronized
+	// and operational. Use this to verify that your transit gateway configuration
+	// changes have been applied.
+	TransitGatewayAttachmentSyncState *TransitGatewayAttachmentSyncState
 
 	noSmithyDocumentSerde
 }
@@ -1352,7 +1398,7 @@ type RuleGroupResponse struct {
 	// Detailed information about the current status of a rule group.
 	RuleGroupStatus ResourceStatus
 
-	// The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS
+	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service SNS
 	// topic that's used to record changes to the managed rule group. You can subscribe
 	// to the SNS topic to receive notifications when the managed rule group is
 	// modified, such as for new versions and for version expiration. For more
@@ -1477,6 +1523,7 @@ type RulesSourceList struct {
 }
 
 // Settings that are available for use in the rules in the RuleGroup where this is defined.
+// See CreateRuleGroupor UpdateRuleGroup for usage.
 type RuleVariables struct {
 
 	// A list of IP addresses and address ranges, in CIDR notation.
@@ -1532,13 +1579,13 @@ type ServerCertificateConfiguration struct {
 	//   - You can't use certificates issued by Private Certificate Authority.
 	//
 	// For more information about configuring certificates for outbound inspection,
-	// see [Using SSL/TLS certificates with certificates with TLS inspection configurations]in the Network Firewall Developer Guide.
+	// see [Using SSL/TLS certificates with TLS inspection configurations]in the Network Firewall Developer Guide.
 	//
 	// For information about working with certificates in ACM, see [Importing certificates] in the Certificate
 	// Manager User Guide.
 	//
+	// [Using SSL/TLS certificates with TLS inspection configurations]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html
 	// [Importing certificates]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
-	// [Using SSL/TLS certificates with certificates with TLS inspection configurations]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html
 	CertificateAuthorityArn *string
 
 	// When enabled, Network Firewall checks if the server certificate presented by
@@ -1625,14 +1672,15 @@ type StatefulEngineOptions struct {
 	FlowTimeouts *FlowTimeouts
 
 	// Indicates how to manage the order of stateful rule evaluation for the policy.
-	// STRICT_ORDER is the default and recommended option. With STRICT_ORDER , provide
-	// your rules in the order that you want them to be evaluated. You can then choose
-	// one or more default actions for packets that don't match any rules. Choose
-	// STRICT_ORDER to have the stateful rules engine determine the evaluation order of
-	// your rules. The default action for this rule order is PASS , followed by DROP ,
-	// REJECT , and ALERT actions. Stateful rules are provided to the rule engine as
-	// Suricata compatible strings, and Suricata evaluates them based on your settings.
-	// For more information, see [Evaluation order for stateful rules]in the Network Firewall Developer Guide.
+	// STRICT_ORDER is the recommended option, but DEFAULT_ACTION_ORDER is the default
+	// option. With STRICT_ORDER , provide your rules in the order that you want them
+	// to be evaluated. You can then choose one or more default actions for packets
+	// that don't match any rules. Choose STRICT_ORDER to have the stateful rules
+	// engine determine the evaluation order of your rules. The default action for this
+	// rule order is PASS , followed by DROP , REJECT , and ALERT actions. Stateful
+	// rules are provided to the rule engine as Suricata compatible strings, and
+	// Suricata evaluates them based on your settings. For more information, see [Evaluation order for stateful rules]in
+	// the Network Firewall Developer Guide.
 	//
 	// [Evaluation order for stateful rules]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html
 	RuleOrder RuleOrder
@@ -2042,6 +2090,71 @@ type TLSInspectionConfigurationResponse struct {
 
 	// The key:value pairs to associate with the resource.
 	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the synchronization state of a transit gateway
+// attachment, including its current status and any error messages. Network
+// Firewall uses this to track the state of your transit gateway configuration
+// changes.
+type TransitGatewayAttachmentSyncState struct {
+
+	// The unique identifier of the transit gateway attachment.
+	AttachmentId *string
+
+	// A message providing additional information about the current status,
+	// particularly useful when the transit gateway attachment is in a non- READY
+	// state.
+	//
+	// Valid values are:
+	//
+	//   - CREATING - The attachment is being created
+	//
+	//   - DELETING - The attachment is being deleted
+	//
+	//   - DELETED - The attachment has been deleted
+	//
+	//   - FAILED - The attachment creation has failed and cannot be recovered
+	//
+	//   - ERROR - The attachment is in an error state that might be recoverable
+	//
+	//   - READY - The attachment is active and processing traffic
+	//
+	//   - PENDING_ACCEPTANCE - The attachment is waiting to be accepted
+	//
+	//   - REJECTING - The attachment is in the process of being rejected
+	//
+	//   - REJECTED - The attachment has been rejected
+	//
+	// For information about troubleshooting endpoint failures, see [Troubleshooting firewall endpoint failures] in the Network
+	// Firewall Developer Guide.
+	//
+	// [Troubleshooting firewall endpoint failures]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html
+	StatusMessage *string
+
+	// The current status of the transit gateway attachment.
+	//
+	// Valid values are:
+	//
+	//   - CREATING - The attachment is being created
+	//
+	//   - DELETING - The attachment is being deleted
+	//
+	//   - DELETED - The attachment has been deleted
+	//
+	//   - FAILED - The attachment creation has failed and cannot be recovered
+	//
+	//   - ERROR - The attachment is in an error state that might be recoverable
+	//
+	//   - READY - The attachment is active and processing traffic
+	//
+	//   - PENDING_ACCEPTANCE - The attachment is waiting to be accepted
+	//
+	//   - REJECTING - The attachment is in the process of being rejected
+	//
+	//   - REJECTED - The attachment has been rejected
+	TransitGatewayAttachmentStatus TransitGatewayAttachmentStatus
 
 	noSmithyDocumentSerde
 }

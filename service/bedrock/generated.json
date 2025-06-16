@@ -9,6 +9,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_BatchDeleteEvaluationJob.go",
+        "api_op_CreateCustomModel.go",
         "api_op_CreateEvaluationJob.go",
         "api_op_CreateGuardrail.go",
         "api_op_CreateGuardrailVersion.go",

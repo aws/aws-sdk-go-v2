@@ -30,6 +30,26 @@ func (m *validateOpBatchDeleteEvaluationJob) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCustomModel struct {
+}
+
+func (*validateOpCreateCustomModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEvaluationJob struct {
 }
 
@@ -892,6 +912,10 @@ func (m *validateOpUpdateProvisionedModelThroughput) HandleInitialize(ctx contex
 
 func addOpBatchDeleteEvaluationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeleteEvaluationJob{}, middleware.After)
+}
+
+func addOpCreateCustomModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomModel{}, middleware.After)
 }
 
 func addOpCreateEvaluationJobValidationMiddleware(stack *middleware.Stack) error {
@@ -2956,6 +2980,33 @@ func validateOpBatchDeleteEvaluationJobInput(v *BatchDeleteEvaluationJobInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteEvaluationJobInput"}
 	if v.JobIdentifiers == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobIdentifiers"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCustomModelInput(v *CreateCustomModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomModelInput"}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
+	}
+	if v.ModelSourceConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelSourceConfig"))
+	} else if v.ModelSourceConfig != nil {
+		if err := validateModelDataSource(v.ModelSourceConfig); err != nil {
+			invalidParams.AddNested("ModelSourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelTags != nil {
+		if err := validateTagList(v.ModelTags); err != nil {
+			invalidParams.AddNested("ModelTags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

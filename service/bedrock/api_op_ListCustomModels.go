@@ -60,6 +60,19 @@ type ListCustomModelsInput struct {
 	// results.
 	MaxResults *int32
 
+	// The status of them model to filter results by. Possible values include:
+	//
+	//   - Creating - Include only models that are currently being created and
+	//   validated.
+	//
+	//   - Active - Include only models that have been successfully created and are
+	//   ready for use.
+	//
+	//   - Failed - Include only models where the creation process failed.
+	//
+	// If you don't specify a status, the API returns models in all states.
+	ModelStatus types.ModelStatus
+
 	// Return custom models only if the job name contains these characters.
 	NameContains *string
 

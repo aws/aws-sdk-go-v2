@@ -57,6 +57,10 @@ type DescribeFirewallMetadataOutput struct {
 	// Availability Zones for which the firewall has a subnet defined.
 	SupportedAvailabilityZones map[string]types.AvailabilityZoneMetadata
 
+	// The unique identifier of the transit gateway attachment associated with this
+	// firewall. This field is only present for transit gateway-attached firewalls.
+	TransitGatewayAttachmentId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

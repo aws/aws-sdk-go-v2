@@ -473,6 +473,8 @@ const (
 	StatefulRuleProtocolTftp   StatefulRuleProtocol = "TFTP"
 	StatefulRuleProtocolNtp    StatefulRuleProtocol = "NTP"
 	StatefulRuleProtocolDhcp   StatefulRuleProtocol = "DHCP"
+	StatefulRuleProtocolHttp2  StatefulRuleProtocol = "HTTP2"
+	StatefulRuleProtocolQuic   StatefulRuleProtocol = "QUIC"
 )
 
 // Values returns all known values for StatefulRuleProtocol. Note that this can be
@@ -500,6 +502,8 @@ func (StatefulRuleProtocol) Values() []StatefulRuleProtocol {
 		"TFTP",
 		"NTP",
 		"DHCP",
+		"HTTP2",
+		"QUIC",
 	}
 }
 
@@ -571,5 +575,39 @@ func (TCPFlag) Values() []TCPFlag {
 		"URG",
 		"ECE",
 		"CWR",
+	}
+}
+
+type TransitGatewayAttachmentStatus string
+
+// Enum values for TransitGatewayAttachmentStatus
+const (
+	TransitGatewayAttachmentStatusCreating          TransitGatewayAttachmentStatus = "CREATING"
+	TransitGatewayAttachmentStatusDeleting          TransitGatewayAttachmentStatus = "DELETING"
+	TransitGatewayAttachmentStatusDeleted           TransitGatewayAttachmentStatus = "DELETED"
+	TransitGatewayAttachmentStatusFailed            TransitGatewayAttachmentStatus = "FAILED"
+	TransitGatewayAttachmentStatusError             TransitGatewayAttachmentStatus = "ERROR"
+	TransitGatewayAttachmentStatusReady             TransitGatewayAttachmentStatus = "READY"
+	TransitGatewayAttachmentStatusPendingAcceptance TransitGatewayAttachmentStatus = "PENDING_ACCEPTANCE"
+	TransitGatewayAttachmentStatusRejecting         TransitGatewayAttachmentStatus = "REJECTING"
+	TransitGatewayAttachmentStatusRejected          TransitGatewayAttachmentStatus = "REJECTED"
+)
+
+// Values returns all known values for TransitGatewayAttachmentStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransitGatewayAttachmentStatus) Values() []TransitGatewayAttachmentStatus {
+	return []TransitGatewayAttachmentStatus{
+		"CREATING",
+		"DELETING",
+		"DELETED",
+		"FAILED",
+		"ERROR",
+		"READY",
+		"PENDING_ACCEPTANCE",
+		"REJECTING",
+		"REJECTED",
 	}
 }

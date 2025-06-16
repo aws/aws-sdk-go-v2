@@ -85,7 +85,7 @@ type DescribeRuleGroupMetadataOutput struct {
 	// Returns the metadata objects for the specified rule group.
 	Description *string
 
-	// The last time that the rule group was changed.
+	// A timestamp indicating when the rule group was last modified.
 	LastModifiedTime *time.Time
 
 	// Additional options governing how Network Firewall handles the rule group. You

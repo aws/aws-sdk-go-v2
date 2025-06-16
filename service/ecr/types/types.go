@@ -57,6 +57,12 @@ type AwsEcrContainerImageDetails struct {
 	// The image tags attached to the Amazon ECR container image.
 	ImageTags []string
 
+	// The number of Amazon ECS or Amazon EKS clusters currently running the image.
+	InUseCount *int64
+
+	// The most recent date and time a cluster was running the image.
+	LastInUseAt *time.Time
+
 	// The platform of the Amazon ECR container image.
 	Platform *string
 
@@ -329,7 +335,7 @@ type ImageDetail struct {
 	// Starting with Docker version 1.9, the Docker client compresses image layers
 	// before pushing them to a V2 Docker registry. The output of the docker images
 	// command shows the uncompressed image size. Therefore, Docker might return a
-	// larger image than the image sizes returned by DescribeImages.
+	// larger image than the image shown in the Amazon Web Services Management Console.
 	ImageSizeInBytes *int64
 
 	// The list of tags associated with this image.

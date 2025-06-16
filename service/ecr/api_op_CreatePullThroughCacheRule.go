@@ -47,7 +47,7 @@ type CreatePullThroughCacheRuleInput struct {
 	// pull through cache rule. The following is the syntax to use for each supported
 	// upstream registry.
 	//
-	//   - Amazon ECR ( ecr ) – dkr.ecr..amazonaws.com
+	//   - Amazon ECR ( ecr ) – .dkr.ecr..amazonaws.com
 	//
 	//   - Amazon ECR Public ( ecr-public ) – public.ecr.aws
 	//

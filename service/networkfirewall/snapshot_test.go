@@ -62,6 +62,30 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AcceptNetworkFirewallTransitGatewayAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptNetworkFirewallTransitGatewayAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcceptNetworkFirewallTransitGatewayAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_AssociateAvailabilityZones(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateAvailabilityZones(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateAvailabilityZones")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateFirewallPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateFirewallPolicy(context.Background(), nil, func(o *Options) {
@@ -163,6 +187,18 @@ func TestCheckSnapshot_DeleteFirewallPolicy(t *testing.T) {
 	_, err := svc.DeleteFirewallPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteFirewallPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteNetworkFirewallTransitGatewayAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNetworkFirewallTransitGatewayAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteNetworkFirewallTransitGatewayAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -338,6 +374,18 @@ func TestCheckSnapshot_DescribeVpcEndpointAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateAvailabilityZones(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateAvailabilityZones(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateAvailabilityZones")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateSubnets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateSubnets(context.Background(), nil, func(o *Options) {
@@ -482,6 +530,18 @@ func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RejectNetworkFirewallTransitGatewayAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectNetworkFirewallTransitGatewayAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RejectNetworkFirewallTransitGatewayAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartAnalysisReport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartAnalysisReport(context.Background(), nil, func(o *Options) {
@@ -535,6 +595,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAvailabilityZoneChangeProtection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAvailabilityZoneChangeProtection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAvailabilityZoneChangeProtection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -661,6 +733,30 @@ func TestCheckSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AcceptNetworkFirewallTransitGatewayAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptNetworkFirewallTransitGatewayAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcceptNetworkFirewallTransitGatewayAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateAvailabilityZones(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateAvailabilityZones(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateAvailabilityZones")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateFirewallPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateFirewallPolicy(context.Background(), nil, func(o *Options) {
@@ -762,6 +858,18 @@ func TestUpdateSnapshot_DeleteFirewallPolicy(t *testing.T) {
 	_, err := svc.DeleteFirewallPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteFirewallPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteNetworkFirewallTransitGatewayAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNetworkFirewallTransitGatewayAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteNetworkFirewallTransitGatewayAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -937,6 +1045,18 @@ func TestUpdateSnapshot_DescribeVpcEndpointAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateAvailabilityZones(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateAvailabilityZones(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateAvailabilityZones")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateSubnets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateSubnets(context.Background(), nil, func(o *Options) {
@@ -1081,6 +1201,18 @@ func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_RejectNetworkFirewallTransitGatewayAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectNetworkFirewallTransitGatewayAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RejectNetworkFirewallTransitGatewayAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartAnalysisReport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartAnalysisReport(context.Background(), nil, func(o *Options) {
@@ -1134,6 +1266,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAvailabilityZoneChangeProtection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAvailabilityZoneChangeProtection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAvailabilityZoneChangeProtection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

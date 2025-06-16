@@ -74,6 +74,18 @@ func TestCheckSnapshot_BatchDeleteEvaluationJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCustomModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCustomModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEvaluationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvaluationJob(context.Background(), nil, func(o *Options) {
@@ -774,6 +786,18 @@ func TestUpdateSnapshot_BatchDeleteEvaluationJob(t *testing.T) {
 	_, err := svc.BatchDeleteEvaluationJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchDeleteEvaluationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCustomModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCustomModel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

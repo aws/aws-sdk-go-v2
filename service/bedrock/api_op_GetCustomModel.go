@@ -13,7 +13,7 @@ import (
 )
 
 // Get the properties associated with a Amazon Bedrock custom model that you have
-// created.For more information, see [Custom models]in the [Amazon Bedrock User Guide].
+// created. For more information, see [Custom models]in the [Amazon Bedrock User Guide].
 //
 // [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 // [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
@@ -44,20 +44,10 @@ type GetCustomModelInput struct {
 
 type GetCustomModelOutput struct {
 
-	// Amazon Resource Name (ARN) of the base model.
-	//
-	// This member is required.
-	BaseModelArn *string
-
 	// Creation time of the model.
 	//
 	// This member is required.
 	CreationTime *time.Time
-
-	// Job Amazon Resource Name (ARN) associated with this model.
-	//
-	// This member is required.
-	JobArn *string
 
 	// Amazon Resource Name (ARN) associated with this model.
 	//
@@ -69,15 +59,8 @@ type GetCustomModelOutput struct {
 	// This member is required.
 	ModelName *string
 
-	// Output data configuration associated with this custom model.
-	//
-	// This member is required.
-	OutputDataConfig *types.OutputDataConfig
-
-	// Contains information about the training dataset.
-	//
-	// This member is required.
-	TrainingDataConfig *types.TrainingDataConfig
+	// Amazon Resource Name (ARN) of the base model.
+	BaseModelArn *string
 
 	// The customization configuration for the custom model.
 	CustomizationConfig types.CustomizationConfig
@@ -85,17 +68,43 @@ type GetCustomModelOutput struct {
 	// The type of model customization.
 	CustomizationType types.CustomizationType
 
+	// A failure message for any issues that occurred when creating the custom model.
+	// This is included for only a failed CreateCustomModel operation.
+	FailureMessage *string
+
 	// Hyperparameter values associated with this model. For details on the format for
 	// different models, see [Custom model hyperparameters].
 	//
 	// [Custom model hyperparameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html
 	HyperParameters map[string]string
 
+	// Job Amazon Resource Name (ARN) associated with this model. For models that you
+	// create with the [CreateCustomModel]API operation, this is NULL .
+	//
+	// [CreateCustomModel]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModel.html
+	JobArn *string
+
 	// Job name associated with this model.
 	JobName *string
 
 	// The custom model is encrypted at rest using this key.
 	ModelKmsKeyArn *string
+
+	// The current status of the custom model. Possible values include:
+	//
+	//   - Creating - The model is being created and validated.
+	//
+	//   - Active - The model has been successfully created and is ready for use.
+	//
+	//   - Failed - The model creation process failed. Check the failureMessage field
+	//   for details.
+	ModelStatus types.ModelStatus
+
+	// Output data configuration associated with this custom model.
+	OutputDataConfig *types.OutputDataConfig
+
+	// Contains information about the training dataset.
+	TrainingDataConfig *types.TrainingDataConfig
 
 	// Contains training metrics from the job creation.
 	TrainingMetrics *types.TrainingMetrics

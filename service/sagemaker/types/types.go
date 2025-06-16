@@ -16753,6 +16753,11 @@ type S3DataSource struct {
 	// want to use for model training. AugmentedManifestFile can only be used if the
 	// Channel's input mode is Pipe .
 	//
+	// If you choose Converse , S3Uri identifies an Amazon S3 location that contains
+	// data formatted according to Converse format. This format structures
+	// conversational messages with specific roles and content types used for training
+	// and fine-tuning foundational models.
+	//
 	// This member is required.
 	S3DataType S3DataType
 

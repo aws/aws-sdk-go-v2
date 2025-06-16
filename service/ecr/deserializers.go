@@ -7627,6 +7627,35 @@ func awsAwsjson11_deserializeDocumentAwsEcrContainerImageDetails(v **types.AwsEc
 				return err
 			}
 
+		case "inUseCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InUseCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InUseCount = ptr.Int64(i64)
+			}
+
+		case "lastInUseAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastInUseAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "platform":
 			if value != nil {
 				jtv, ok := value.(string)

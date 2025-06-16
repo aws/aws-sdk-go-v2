@@ -1,0 +1,8 @@
+{
+    "id": "902356ef-de4d-404a-92f5-28fa7c8cbe85",
+    "type": "feature",
+    "description": "This release 1) adds a new S3DataType Converse for SageMaker training 2)adds C8g R7gd M8g C6in P6 P6e instance type for SageMaker endpoint 3) adds m7i, r7i, c7i instance type for SageMaker Training and Processing.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

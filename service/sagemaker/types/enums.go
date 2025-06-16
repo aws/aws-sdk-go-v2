@@ -5556,6 +5556,33 @@ const (
 	ProcessingInstanceTypeMlC6i16xlarge  ProcessingInstanceType = "ml.c6i.16xlarge"
 	ProcessingInstanceTypeMlC6i24xlarge  ProcessingInstanceType = "ml.c6i.24xlarge"
 	ProcessingInstanceTypeMlC6i32xlarge  ProcessingInstanceType = "ml.c6i.32xlarge"
+	ProcessingInstanceTypeMlM7iLarge     ProcessingInstanceType = "ml.m7i.large"
+	ProcessingInstanceTypeMlM7iXlarge    ProcessingInstanceType = "ml.m7i.xlarge"
+	ProcessingInstanceTypeMlM7i2xlarge   ProcessingInstanceType = "ml.m7i.2xlarge"
+	ProcessingInstanceTypeMlM7i4xlarge   ProcessingInstanceType = "ml.m7i.4xlarge"
+	ProcessingInstanceTypeMlM7i8xlarge   ProcessingInstanceType = "ml.m7i.8xlarge"
+	ProcessingInstanceTypeMlM7i12xlarge  ProcessingInstanceType = "ml.m7i.12xlarge"
+	ProcessingInstanceTypeMlM7i16xlarge  ProcessingInstanceType = "ml.m7i.16xlarge"
+	ProcessingInstanceTypeMlM7i24xlarge  ProcessingInstanceType = "ml.m7i.24xlarge"
+	ProcessingInstanceTypeMlM7i48xlarge  ProcessingInstanceType = "ml.m7i.48xlarge"
+	ProcessingInstanceTypeMlC7iLarge     ProcessingInstanceType = "ml.c7i.large"
+	ProcessingInstanceTypeMlC7iXlarge    ProcessingInstanceType = "ml.c7i.xlarge"
+	ProcessingInstanceTypeMlC7i2xlarge   ProcessingInstanceType = "ml.c7i.2xlarge"
+	ProcessingInstanceTypeMlC7i4xlarge   ProcessingInstanceType = "ml.c7i.4xlarge"
+	ProcessingInstanceTypeMlC7i8xlarge   ProcessingInstanceType = "ml.c7i.8xlarge"
+	ProcessingInstanceTypeMlC7i12xlarge  ProcessingInstanceType = "ml.c7i.12xlarge"
+	ProcessingInstanceTypeMlC7i16xlarge  ProcessingInstanceType = "ml.c7i.16xlarge"
+	ProcessingInstanceTypeMlC7i24xlarge  ProcessingInstanceType = "ml.c7i.24xlarge"
+	ProcessingInstanceTypeMlC7i48xlarge  ProcessingInstanceType = "ml.c7i.48xlarge"
+	ProcessingInstanceTypeMlR7iLarge     ProcessingInstanceType = "ml.r7i.large"
+	ProcessingInstanceTypeMlR7iXlarge    ProcessingInstanceType = "ml.r7i.xlarge"
+	ProcessingInstanceTypeMlR7i2xlarge   ProcessingInstanceType = "ml.r7i.2xlarge"
+	ProcessingInstanceTypeMlR7i4xlarge   ProcessingInstanceType = "ml.r7i.4xlarge"
+	ProcessingInstanceTypeMlR7i8xlarge   ProcessingInstanceType = "ml.r7i.8xlarge"
+	ProcessingInstanceTypeMlR7i12xlarge  ProcessingInstanceType = "ml.r7i.12xlarge"
+	ProcessingInstanceTypeMlR7i16xlarge  ProcessingInstanceType = "ml.r7i.16xlarge"
+	ProcessingInstanceTypeMlR7i24xlarge  ProcessingInstanceType = "ml.r7i.24xlarge"
+	ProcessingInstanceTypeMlR7i48xlarge  ProcessingInstanceType = "ml.r7i.48xlarge"
 )
 
 // Values returns all known values for ProcessingInstanceType. Note that this can
@@ -5657,6 +5684,33 @@ func (ProcessingInstanceType) Values() []ProcessingInstanceType {
 		"ml.c6i.16xlarge",
 		"ml.c6i.24xlarge",
 		"ml.c6i.32xlarge",
+		"ml.m7i.large",
+		"ml.m7i.xlarge",
+		"ml.m7i.2xlarge",
+		"ml.m7i.4xlarge",
+		"ml.m7i.8xlarge",
+		"ml.m7i.12xlarge",
+		"ml.m7i.16xlarge",
+		"ml.m7i.24xlarge",
+		"ml.m7i.48xlarge",
+		"ml.c7i.large",
+		"ml.c7i.xlarge",
+		"ml.c7i.2xlarge",
+		"ml.c7i.4xlarge",
+		"ml.c7i.8xlarge",
+		"ml.c7i.12xlarge",
+		"ml.c7i.16xlarge",
+		"ml.c7i.24xlarge",
+		"ml.c7i.48xlarge",
+		"ml.r7i.large",
+		"ml.r7i.xlarge",
+		"ml.r7i.2xlarge",
+		"ml.r7i.4xlarge",
+		"ml.r7i.8xlarge",
+		"ml.r7i.12xlarge",
+		"ml.r7i.16xlarge",
+		"ml.r7i.24xlarge",
+		"ml.r7i.48xlarge",
 	}
 }
 
@@ -5856,230 +5910,269 @@ type ProductionVariantInstanceType string
 
 // Enum values for ProductionVariantInstanceType
 const (
-	ProductionVariantInstanceTypeMlT2Medium      ProductionVariantInstanceType = "ml.t2.medium"
-	ProductionVariantInstanceTypeMlT2Large       ProductionVariantInstanceType = "ml.t2.large"
-	ProductionVariantInstanceTypeMlT2Xlarge      ProductionVariantInstanceType = "ml.t2.xlarge"
-	ProductionVariantInstanceTypeMlT22xlarge     ProductionVariantInstanceType = "ml.t2.2xlarge"
-	ProductionVariantInstanceTypeMlM4Xlarge      ProductionVariantInstanceType = "ml.m4.xlarge"
-	ProductionVariantInstanceTypeMlM42xlarge     ProductionVariantInstanceType = "ml.m4.2xlarge"
-	ProductionVariantInstanceTypeMlM44xlarge     ProductionVariantInstanceType = "ml.m4.4xlarge"
-	ProductionVariantInstanceTypeMlM410xlarge    ProductionVariantInstanceType = "ml.m4.10xlarge"
-	ProductionVariantInstanceTypeMlM416xlarge    ProductionVariantInstanceType = "ml.m4.16xlarge"
-	ProductionVariantInstanceTypeMlM5Large       ProductionVariantInstanceType = "ml.m5.large"
-	ProductionVariantInstanceTypeMlM5Xlarge      ProductionVariantInstanceType = "ml.m5.xlarge"
-	ProductionVariantInstanceTypeMlM52xlarge     ProductionVariantInstanceType = "ml.m5.2xlarge"
-	ProductionVariantInstanceTypeMlM54xlarge     ProductionVariantInstanceType = "ml.m5.4xlarge"
-	ProductionVariantInstanceTypeMlM512xlarge    ProductionVariantInstanceType = "ml.m5.12xlarge"
-	ProductionVariantInstanceTypeMlM524xlarge    ProductionVariantInstanceType = "ml.m5.24xlarge"
-	ProductionVariantInstanceTypeMlM5dLarge      ProductionVariantInstanceType = "ml.m5d.large"
-	ProductionVariantInstanceTypeMlM5dXlarge     ProductionVariantInstanceType = "ml.m5d.xlarge"
-	ProductionVariantInstanceTypeMlM5d2xlarge    ProductionVariantInstanceType = "ml.m5d.2xlarge"
-	ProductionVariantInstanceTypeMlM5d4xlarge    ProductionVariantInstanceType = "ml.m5d.4xlarge"
-	ProductionVariantInstanceTypeMlM5d12xlarge   ProductionVariantInstanceType = "ml.m5d.12xlarge"
-	ProductionVariantInstanceTypeMlM5d24xlarge   ProductionVariantInstanceType = "ml.m5d.24xlarge"
-	ProductionVariantInstanceTypeMlC4Large       ProductionVariantInstanceType = "ml.c4.large"
-	ProductionVariantInstanceTypeMlC4Xlarge      ProductionVariantInstanceType = "ml.c4.xlarge"
-	ProductionVariantInstanceTypeMlC42xlarge     ProductionVariantInstanceType = "ml.c4.2xlarge"
-	ProductionVariantInstanceTypeMlC44xlarge     ProductionVariantInstanceType = "ml.c4.4xlarge"
-	ProductionVariantInstanceTypeMlC48xlarge     ProductionVariantInstanceType = "ml.c4.8xlarge"
-	ProductionVariantInstanceTypeMlP2Xlarge      ProductionVariantInstanceType = "ml.p2.xlarge"
-	ProductionVariantInstanceTypeMlP28xlarge     ProductionVariantInstanceType = "ml.p2.8xlarge"
-	ProductionVariantInstanceTypeMlP216xlarge    ProductionVariantInstanceType = "ml.p2.16xlarge"
-	ProductionVariantInstanceTypeMlP32xlarge     ProductionVariantInstanceType = "ml.p3.2xlarge"
-	ProductionVariantInstanceTypeMlP38xlarge     ProductionVariantInstanceType = "ml.p3.8xlarge"
-	ProductionVariantInstanceTypeMlP316xlarge    ProductionVariantInstanceType = "ml.p3.16xlarge"
-	ProductionVariantInstanceTypeMlC5Large       ProductionVariantInstanceType = "ml.c5.large"
-	ProductionVariantInstanceTypeMlC5Xlarge      ProductionVariantInstanceType = "ml.c5.xlarge"
-	ProductionVariantInstanceTypeMlC52xlarge     ProductionVariantInstanceType = "ml.c5.2xlarge"
-	ProductionVariantInstanceTypeMlC54xlarge     ProductionVariantInstanceType = "ml.c5.4xlarge"
-	ProductionVariantInstanceTypeMlC59xlarge     ProductionVariantInstanceType = "ml.c5.9xlarge"
-	ProductionVariantInstanceTypeMlC518xlarge    ProductionVariantInstanceType = "ml.c5.18xlarge"
-	ProductionVariantInstanceTypeMlC5dLarge      ProductionVariantInstanceType = "ml.c5d.large"
-	ProductionVariantInstanceTypeMlC5dXlarge     ProductionVariantInstanceType = "ml.c5d.xlarge"
-	ProductionVariantInstanceTypeMlC5d2xlarge    ProductionVariantInstanceType = "ml.c5d.2xlarge"
-	ProductionVariantInstanceTypeMlC5d4xlarge    ProductionVariantInstanceType = "ml.c5d.4xlarge"
-	ProductionVariantInstanceTypeMlC5d9xlarge    ProductionVariantInstanceType = "ml.c5d.9xlarge"
-	ProductionVariantInstanceTypeMlC5d18xlarge   ProductionVariantInstanceType = "ml.c5d.18xlarge"
-	ProductionVariantInstanceTypeMlG4dnXlarge    ProductionVariantInstanceType = "ml.g4dn.xlarge"
-	ProductionVariantInstanceTypeMlG4dn2xlarge   ProductionVariantInstanceType = "ml.g4dn.2xlarge"
-	ProductionVariantInstanceTypeMlG4dn4xlarge   ProductionVariantInstanceType = "ml.g4dn.4xlarge"
-	ProductionVariantInstanceTypeMlG4dn8xlarge   ProductionVariantInstanceType = "ml.g4dn.8xlarge"
-	ProductionVariantInstanceTypeMlG4dn12xlarge  ProductionVariantInstanceType = "ml.g4dn.12xlarge"
-	ProductionVariantInstanceTypeMlG4dn16xlarge  ProductionVariantInstanceType = "ml.g4dn.16xlarge"
-	ProductionVariantInstanceTypeMlR5Large       ProductionVariantInstanceType = "ml.r5.large"
-	ProductionVariantInstanceTypeMlR5Xlarge      ProductionVariantInstanceType = "ml.r5.xlarge"
-	ProductionVariantInstanceTypeMlR52xlarge     ProductionVariantInstanceType = "ml.r5.2xlarge"
-	ProductionVariantInstanceTypeMlR54xlarge     ProductionVariantInstanceType = "ml.r5.4xlarge"
-	ProductionVariantInstanceTypeMlR512xlarge    ProductionVariantInstanceType = "ml.r5.12xlarge"
-	ProductionVariantInstanceTypeMlR524xlarge    ProductionVariantInstanceType = "ml.r5.24xlarge"
-	ProductionVariantInstanceTypeMlR5dLarge      ProductionVariantInstanceType = "ml.r5d.large"
-	ProductionVariantInstanceTypeMlR5dXlarge     ProductionVariantInstanceType = "ml.r5d.xlarge"
-	ProductionVariantInstanceTypeMlR5d2xlarge    ProductionVariantInstanceType = "ml.r5d.2xlarge"
-	ProductionVariantInstanceTypeMlR5d4xlarge    ProductionVariantInstanceType = "ml.r5d.4xlarge"
-	ProductionVariantInstanceTypeMlR5d12xlarge   ProductionVariantInstanceType = "ml.r5d.12xlarge"
-	ProductionVariantInstanceTypeMlR5d24xlarge   ProductionVariantInstanceType = "ml.r5d.24xlarge"
-	ProductionVariantInstanceTypeMlInf1Xlarge    ProductionVariantInstanceType = "ml.inf1.xlarge"
-	ProductionVariantInstanceTypeMlInf12xlarge   ProductionVariantInstanceType = "ml.inf1.2xlarge"
-	ProductionVariantInstanceTypeMlInf16xlarge   ProductionVariantInstanceType = "ml.inf1.6xlarge"
-	ProductionVariantInstanceTypeMlInf124xlarge  ProductionVariantInstanceType = "ml.inf1.24xlarge"
-	ProductionVariantInstanceTypeMlDl124xlarge   ProductionVariantInstanceType = "ml.dl1.24xlarge"
-	ProductionVariantInstanceTypeMlC6iLarge      ProductionVariantInstanceType = "ml.c6i.large"
-	ProductionVariantInstanceTypeMlC6iXlarge     ProductionVariantInstanceType = "ml.c6i.xlarge"
-	ProductionVariantInstanceTypeMlC6i2xlarge    ProductionVariantInstanceType = "ml.c6i.2xlarge"
-	ProductionVariantInstanceTypeMlC6i4xlarge    ProductionVariantInstanceType = "ml.c6i.4xlarge"
-	ProductionVariantInstanceTypeMlC6i8xlarge    ProductionVariantInstanceType = "ml.c6i.8xlarge"
-	ProductionVariantInstanceTypeMlC6i12xlarge   ProductionVariantInstanceType = "ml.c6i.12xlarge"
-	ProductionVariantInstanceTypeMlC6i16xlarge   ProductionVariantInstanceType = "ml.c6i.16xlarge"
-	ProductionVariantInstanceTypeMlC6i24xlarge   ProductionVariantInstanceType = "ml.c6i.24xlarge"
-	ProductionVariantInstanceTypeMlC6i32xlarge   ProductionVariantInstanceType = "ml.c6i.32xlarge"
-	ProductionVariantInstanceTypeMlM6iLarge      ProductionVariantInstanceType = "ml.m6i.large"
-	ProductionVariantInstanceTypeMlM6iXlarge     ProductionVariantInstanceType = "ml.m6i.xlarge"
-	ProductionVariantInstanceTypeMlM6i2xlarge    ProductionVariantInstanceType = "ml.m6i.2xlarge"
-	ProductionVariantInstanceTypeMlM6i4xlarge    ProductionVariantInstanceType = "ml.m6i.4xlarge"
-	ProductionVariantInstanceTypeMlM6i8xlarge    ProductionVariantInstanceType = "ml.m6i.8xlarge"
-	ProductionVariantInstanceTypeMlM6i12xlarge   ProductionVariantInstanceType = "ml.m6i.12xlarge"
-	ProductionVariantInstanceTypeMlM6i16xlarge   ProductionVariantInstanceType = "ml.m6i.16xlarge"
-	ProductionVariantInstanceTypeMlM6i24xlarge   ProductionVariantInstanceType = "ml.m6i.24xlarge"
-	ProductionVariantInstanceTypeMlM6i32xlarge   ProductionVariantInstanceType = "ml.m6i.32xlarge"
-	ProductionVariantInstanceTypeMlR6iLarge      ProductionVariantInstanceType = "ml.r6i.large"
-	ProductionVariantInstanceTypeMlR6iXlarge     ProductionVariantInstanceType = "ml.r6i.xlarge"
-	ProductionVariantInstanceTypeMlR6i2xlarge    ProductionVariantInstanceType = "ml.r6i.2xlarge"
-	ProductionVariantInstanceTypeMlR6i4xlarge    ProductionVariantInstanceType = "ml.r6i.4xlarge"
-	ProductionVariantInstanceTypeMlR6i8xlarge    ProductionVariantInstanceType = "ml.r6i.8xlarge"
-	ProductionVariantInstanceTypeMlR6i12xlarge   ProductionVariantInstanceType = "ml.r6i.12xlarge"
-	ProductionVariantInstanceTypeMlR6i16xlarge   ProductionVariantInstanceType = "ml.r6i.16xlarge"
-	ProductionVariantInstanceTypeMlR6i24xlarge   ProductionVariantInstanceType = "ml.r6i.24xlarge"
-	ProductionVariantInstanceTypeMlR6i32xlarge   ProductionVariantInstanceType = "ml.r6i.32xlarge"
-	ProductionVariantInstanceTypeMlG5Xlarge      ProductionVariantInstanceType = "ml.g5.xlarge"
-	ProductionVariantInstanceTypeMlG52xlarge     ProductionVariantInstanceType = "ml.g5.2xlarge"
-	ProductionVariantInstanceTypeMlG54xlarge     ProductionVariantInstanceType = "ml.g5.4xlarge"
-	ProductionVariantInstanceTypeMlG58xlarge     ProductionVariantInstanceType = "ml.g5.8xlarge"
-	ProductionVariantInstanceTypeMlG512xlarge    ProductionVariantInstanceType = "ml.g5.12xlarge"
-	ProductionVariantInstanceTypeMlG516xlarge    ProductionVariantInstanceType = "ml.g5.16xlarge"
-	ProductionVariantInstanceTypeMlG524xlarge    ProductionVariantInstanceType = "ml.g5.24xlarge"
-	ProductionVariantInstanceTypeMlG548xlarge    ProductionVariantInstanceType = "ml.g5.48xlarge"
-	ProductionVariantInstanceTypeMlG6Xlarge      ProductionVariantInstanceType = "ml.g6.xlarge"
-	ProductionVariantInstanceTypeMlG62xlarge     ProductionVariantInstanceType = "ml.g6.2xlarge"
-	ProductionVariantInstanceTypeMlG64xlarge     ProductionVariantInstanceType = "ml.g6.4xlarge"
-	ProductionVariantInstanceTypeMlG68xlarge     ProductionVariantInstanceType = "ml.g6.8xlarge"
-	ProductionVariantInstanceTypeMlG612xlarge    ProductionVariantInstanceType = "ml.g6.12xlarge"
-	ProductionVariantInstanceTypeMlG616xlarge    ProductionVariantInstanceType = "ml.g6.16xlarge"
-	ProductionVariantInstanceTypeMlG624xlarge    ProductionVariantInstanceType = "ml.g6.24xlarge"
-	ProductionVariantInstanceTypeMlG648xlarge    ProductionVariantInstanceType = "ml.g6.48xlarge"
-	ProductionVariantInstanceTypeMlR8gMedium     ProductionVariantInstanceType = "ml.r8g.medium"
-	ProductionVariantInstanceTypeMlR8gLarge      ProductionVariantInstanceType = "ml.r8g.large"
-	ProductionVariantInstanceTypeMlR8gXlarge     ProductionVariantInstanceType = "ml.r8g.xlarge"
-	ProductionVariantInstanceTypeMlR8g2xlarge    ProductionVariantInstanceType = "ml.r8g.2xlarge"
-	ProductionVariantInstanceTypeMlR8g4xlarge    ProductionVariantInstanceType = "ml.r8g.4xlarge"
-	ProductionVariantInstanceTypeMlR8g8xlarge    ProductionVariantInstanceType = "ml.r8g.8xlarge"
-	ProductionVariantInstanceTypeMlR8g12xlarge   ProductionVariantInstanceType = "ml.r8g.12xlarge"
-	ProductionVariantInstanceTypeMlR8g16xlarge   ProductionVariantInstanceType = "ml.r8g.16xlarge"
-	ProductionVariantInstanceTypeMlR8g24xlarge   ProductionVariantInstanceType = "ml.r8g.24xlarge"
-	ProductionVariantInstanceTypeMlR8g48xlarge   ProductionVariantInstanceType = "ml.r8g.48xlarge"
-	ProductionVariantInstanceTypeMlG6eXlarge     ProductionVariantInstanceType = "ml.g6e.xlarge"
-	ProductionVariantInstanceTypeMlG6e2xlarge    ProductionVariantInstanceType = "ml.g6e.2xlarge"
-	ProductionVariantInstanceTypeMlG6e4xlarge    ProductionVariantInstanceType = "ml.g6e.4xlarge"
-	ProductionVariantInstanceTypeMlG6e8xlarge    ProductionVariantInstanceType = "ml.g6e.8xlarge"
-	ProductionVariantInstanceTypeMlG6e12xlarge   ProductionVariantInstanceType = "ml.g6e.12xlarge"
-	ProductionVariantInstanceTypeMlG6e16xlarge   ProductionVariantInstanceType = "ml.g6e.16xlarge"
-	ProductionVariantInstanceTypeMlG6e24xlarge   ProductionVariantInstanceType = "ml.g6e.24xlarge"
-	ProductionVariantInstanceTypeMlG6e48xlarge   ProductionVariantInstanceType = "ml.g6e.48xlarge"
-	ProductionVariantInstanceTypeMlP4d24xlarge   ProductionVariantInstanceType = "ml.p4d.24xlarge"
-	ProductionVariantInstanceTypeMlC7gLarge      ProductionVariantInstanceType = "ml.c7g.large"
-	ProductionVariantInstanceTypeMlC7gXlarge     ProductionVariantInstanceType = "ml.c7g.xlarge"
-	ProductionVariantInstanceTypeMlC7g2xlarge    ProductionVariantInstanceType = "ml.c7g.2xlarge"
-	ProductionVariantInstanceTypeMlC7g4xlarge    ProductionVariantInstanceType = "ml.c7g.4xlarge"
-	ProductionVariantInstanceTypeMlC7g8xlarge    ProductionVariantInstanceType = "ml.c7g.8xlarge"
-	ProductionVariantInstanceTypeMlC7g12xlarge   ProductionVariantInstanceType = "ml.c7g.12xlarge"
-	ProductionVariantInstanceTypeMlC7g16xlarge   ProductionVariantInstanceType = "ml.c7g.16xlarge"
-	ProductionVariantInstanceTypeMlM6gLarge      ProductionVariantInstanceType = "ml.m6g.large"
-	ProductionVariantInstanceTypeMlM6gXlarge     ProductionVariantInstanceType = "ml.m6g.xlarge"
-	ProductionVariantInstanceTypeMlM6g2xlarge    ProductionVariantInstanceType = "ml.m6g.2xlarge"
-	ProductionVariantInstanceTypeMlM6g4xlarge    ProductionVariantInstanceType = "ml.m6g.4xlarge"
-	ProductionVariantInstanceTypeMlM6g8xlarge    ProductionVariantInstanceType = "ml.m6g.8xlarge"
-	ProductionVariantInstanceTypeMlM6g12xlarge   ProductionVariantInstanceType = "ml.m6g.12xlarge"
-	ProductionVariantInstanceTypeMlM6g16xlarge   ProductionVariantInstanceType = "ml.m6g.16xlarge"
-	ProductionVariantInstanceTypeMlM6gdLarge     ProductionVariantInstanceType = "ml.m6gd.large"
-	ProductionVariantInstanceTypeMlM6gdXlarge    ProductionVariantInstanceType = "ml.m6gd.xlarge"
-	ProductionVariantInstanceTypeMlM6gd2xlarge   ProductionVariantInstanceType = "ml.m6gd.2xlarge"
-	ProductionVariantInstanceTypeMlM6gd4xlarge   ProductionVariantInstanceType = "ml.m6gd.4xlarge"
-	ProductionVariantInstanceTypeMlM6gd8xlarge   ProductionVariantInstanceType = "ml.m6gd.8xlarge"
-	ProductionVariantInstanceTypeMlM6gd12xlarge  ProductionVariantInstanceType = "ml.m6gd.12xlarge"
-	ProductionVariantInstanceTypeMlM6gd16xlarge  ProductionVariantInstanceType = "ml.m6gd.16xlarge"
-	ProductionVariantInstanceTypeMlC6gLarge      ProductionVariantInstanceType = "ml.c6g.large"
-	ProductionVariantInstanceTypeMlC6gXlarge     ProductionVariantInstanceType = "ml.c6g.xlarge"
-	ProductionVariantInstanceTypeMlC6g2xlarge    ProductionVariantInstanceType = "ml.c6g.2xlarge"
-	ProductionVariantInstanceTypeMlC6g4xlarge    ProductionVariantInstanceType = "ml.c6g.4xlarge"
-	ProductionVariantInstanceTypeMlC6g8xlarge    ProductionVariantInstanceType = "ml.c6g.8xlarge"
-	ProductionVariantInstanceTypeMlC6g12xlarge   ProductionVariantInstanceType = "ml.c6g.12xlarge"
-	ProductionVariantInstanceTypeMlC6g16xlarge   ProductionVariantInstanceType = "ml.c6g.16xlarge"
-	ProductionVariantInstanceTypeMlC6gdLarge     ProductionVariantInstanceType = "ml.c6gd.large"
-	ProductionVariantInstanceTypeMlC6gdXlarge    ProductionVariantInstanceType = "ml.c6gd.xlarge"
-	ProductionVariantInstanceTypeMlC6gd2xlarge   ProductionVariantInstanceType = "ml.c6gd.2xlarge"
-	ProductionVariantInstanceTypeMlC6gd4xlarge   ProductionVariantInstanceType = "ml.c6gd.4xlarge"
-	ProductionVariantInstanceTypeMlC6gd8xlarge   ProductionVariantInstanceType = "ml.c6gd.8xlarge"
-	ProductionVariantInstanceTypeMlC6gd12xlarge  ProductionVariantInstanceType = "ml.c6gd.12xlarge"
-	ProductionVariantInstanceTypeMlC6gd16xlarge  ProductionVariantInstanceType = "ml.c6gd.16xlarge"
-	ProductionVariantInstanceTypeMlC6gnLarge     ProductionVariantInstanceType = "ml.c6gn.large"
-	ProductionVariantInstanceTypeMlC6gnXlarge    ProductionVariantInstanceType = "ml.c6gn.xlarge"
-	ProductionVariantInstanceTypeMlC6gn2xlarge   ProductionVariantInstanceType = "ml.c6gn.2xlarge"
-	ProductionVariantInstanceTypeMlC6gn4xlarge   ProductionVariantInstanceType = "ml.c6gn.4xlarge"
-	ProductionVariantInstanceTypeMlC6gn8xlarge   ProductionVariantInstanceType = "ml.c6gn.8xlarge"
-	ProductionVariantInstanceTypeMlC6gn12xlarge  ProductionVariantInstanceType = "ml.c6gn.12xlarge"
-	ProductionVariantInstanceTypeMlC6gn16xlarge  ProductionVariantInstanceType = "ml.c6gn.16xlarge"
-	ProductionVariantInstanceTypeMlR6gLarge      ProductionVariantInstanceType = "ml.r6g.large"
-	ProductionVariantInstanceTypeMlR6gXlarge     ProductionVariantInstanceType = "ml.r6g.xlarge"
-	ProductionVariantInstanceTypeMlR6g2xlarge    ProductionVariantInstanceType = "ml.r6g.2xlarge"
-	ProductionVariantInstanceTypeMlR6g4xlarge    ProductionVariantInstanceType = "ml.r6g.4xlarge"
-	ProductionVariantInstanceTypeMlR6g8xlarge    ProductionVariantInstanceType = "ml.r6g.8xlarge"
-	ProductionVariantInstanceTypeMlR6g12xlarge   ProductionVariantInstanceType = "ml.r6g.12xlarge"
-	ProductionVariantInstanceTypeMlR6g16xlarge   ProductionVariantInstanceType = "ml.r6g.16xlarge"
-	ProductionVariantInstanceTypeMlR6gdLarge     ProductionVariantInstanceType = "ml.r6gd.large"
-	ProductionVariantInstanceTypeMlR6gdXlarge    ProductionVariantInstanceType = "ml.r6gd.xlarge"
-	ProductionVariantInstanceTypeMlR6gd2xlarge   ProductionVariantInstanceType = "ml.r6gd.2xlarge"
-	ProductionVariantInstanceTypeMlR6gd4xlarge   ProductionVariantInstanceType = "ml.r6gd.4xlarge"
-	ProductionVariantInstanceTypeMlR6gd8xlarge   ProductionVariantInstanceType = "ml.r6gd.8xlarge"
-	ProductionVariantInstanceTypeMlR6gd12xlarge  ProductionVariantInstanceType = "ml.r6gd.12xlarge"
-	ProductionVariantInstanceTypeMlR6gd16xlarge  ProductionVariantInstanceType = "ml.r6gd.16xlarge"
-	ProductionVariantInstanceTypeMlP4de24xlarge  ProductionVariantInstanceType = "ml.p4de.24xlarge"
-	ProductionVariantInstanceTypeMlTrn12xlarge   ProductionVariantInstanceType = "ml.trn1.2xlarge"
-	ProductionVariantInstanceTypeMlTrn132xlarge  ProductionVariantInstanceType = "ml.trn1.32xlarge"
-	ProductionVariantInstanceTypeMlTrn1n32xlarge ProductionVariantInstanceType = "ml.trn1n.32xlarge"
-	ProductionVariantInstanceTypeMlTrn248xlarge  ProductionVariantInstanceType = "ml.trn2.48xlarge"
-	ProductionVariantInstanceTypeMlInf2Xlarge    ProductionVariantInstanceType = "ml.inf2.xlarge"
-	ProductionVariantInstanceTypeMlInf28xlarge   ProductionVariantInstanceType = "ml.inf2.8xlarge"
-	ProductionVariantInstanceTypeMlInf224xlarge  ProductionVariantInstanceType = "ml.inf2.24xlarge"
-	ProductionVariantInstanceTypeMlInf248xlarge  ProductionVariantInstanceType = "ml.inf2.48xlarge"
-	ProductionVariantInstanceTypeMlP548xlarge    ProductionVariantInstanceType = "ml.p5.48xlarge"
-	ProductionVariantInstanceTypeMlP5e48xlarge   ProductionVariantInstanceType = "ml.p5e.48xlarge"
-	ProductionVariantInstanceTypeMlP5en48xlarge  ProductionVariantInstanceType = "ml.p5en.48xlarge"
-	ProductionVariantInstanceTypeMlM7iLarge      ProductionVariantInstanceType = "ml.m7i.large"
-	ProductionVariantInstanceTypeMlM7iXlarge     ProductionVariantInstanceType = "ml.m7i.xlarge"
-	ProductionVariantInstanceTypeMlM7i2xlarge    ProductionVariantInstanceType = "ml.m7i.2xlarge"
-	ProductionVariantInstanceTypeMlM7i4xlarge    ProductionVariantInstanceType = "ml.m7i.4xlarge"
-	ProductionVariantInstanceTypeMlM7i8xlarge    ProductionVariantInstanceType = "ml.m7i.8xlarge"
-	ProductionVariantInstanceTypeMlM7i12xlarge   ProductionVariantInstanceType = "ml.m7i.12xlarge"
-	ProductionVariantInstanceTypeMlM7i16xlarge   ProductionVariantInstanceType = "ml.m7i.16xlarge"
-	ProductionVariantInstanceTypeMlM7i24xlarge   ProductionVariantInstanceType = "ml.m7i.24xlarge"
-	ProductionVariantInstanceTypeMlM7i48xlarge   ProductionVariantInstanceType = "ml.m7i.48xlarge"
-	ProductionVariantInstanceTypeMlC7iLarge      ProductionVariantInstanceType = "ml.c7i.large"
-	ProductionVariantInstanceTypeMlC7iXlarge     ProductionVariantInstanceType = "ml.c7i.xlarge"
-	ProductionVariantInstanceTypeMlC7i2xlarge    ProductionVariantInstanceType = "ml.c7i.2xlarge"
-	ProductionVariantInstanceTypeMlC7i4xlarge    ProductionVariantInstanceType = "ml.c7i.4xlarge"
-	ProductionVariantInstanceTypeMlC7i8xlarge    ProductionVariantInstanceType = "ml.c7i.8xlarge"
-	ProductionVariantInstanceTypeMlC7i12xlarge   ProductionVariantInstanceType = "ml.c7i.12xlarge"
-	ProductionVariantInstanceTypeMlC7i16xlarge   ProductionVariantInstanceType = "ml.c7i.16xlarge"
-	ProductionVariantInstanceTypeMlC7i24xlarge   ProductionVariantInstanceType = "ml.c7i.24xlarge"
-	ProductionVariantInstanceTypeMlC7i48xlarge   ProductionVariantInstanceType = "ml.c7i.48xlarge"
-	ProductionVariantInstanceTypeMlR7iLarge      ProductionVariantInstanceType = "ml.r7i.large"
-	ProductionVariantInstanceTypeMlR7iXlarge     ProductionVariantInstanceType = "ml.r7i.xlarge"
-	ProductionVariantInstanceTypeMlR7i2xlarge    ProductionVariantInstanceType = "ml.r7i.2xlarge"
-	ProductionVariantInstanceTypeMlR7i4xlarge    ProductionVariantInstanceType = "ml.r7i.4xlarge"
-	ProductionVariantInstanceTypeMlR7i8xlarge    ProductionVariantInstanceType = "ml.r7i.8xlarge"
-	ProductionVariantInstanceTypeMlR7i12xlarge   ProductionVariantInstanceType = "ml.r7i.12xlarge"
-	ProductionVariantInstanceTypeMlR7i16xlarge   ProductionVariantInstanceType = "ml.r7i.16xlarge"
-	ProductionVariantInstanceTypeMlR7i24xlarge   ProductionVariantInstanceType = "ml.r7i.24xlarge"
-	ProductionVariantInstanceTypeMlR7i48xlarge   ProductionVariantInstanceType = "ml.r7i.48xlarge"
+	ProductionVariantInstanceTypeMlT2Medium         ProductionVariantInstanceType = "ml.t2.medium"
+	ProductionVariantInstanceTypeMlT2Large          ProductionVariantInstanceType = "ml.t2.large"
+	ProductionVariantInstanceTypeMlT2Xlarge         ProductionVariantInstanceType = "ml.t2.xlarge"
+	ProductionVariantInstanceTypeMlT22xlarge        ProductionVariantInstanceType = "ml.t2.2xlarge"
+	ProductionVariantInstanceTypeMlM4Xlarge         ProductionVariantInstanceType = "ml.m4.xlarge"
+	ProductionVariantInstanceTypeMlM42xlarge        ProductionVariantInstanceType = "ml.m4.2xlarge"
+	ProductionVariantInstanceTypeMlM44xlarge        ProductionVariantInstanceType = "ml.m4.4xlarge"
+	ProductionVariantInstanceTypeMlM410xlarge       ProductionVariantInstanceType = "ml.m4.10xlarge"
+	ProductionVariantInstanceTypeMlM416xlarge       ProductionVariantInstanceType = "ml.m4.16xlarge"
+	ProductionVariantInstanceTypeMlM5Large          ProductionVariantInstanceType = "ml.m5.large"
+	ProductionVariantInstanceTypeMlM5Xlarge         ProductionVariantInstanceType = "ml.m5.xlarge"
+	ProductionVariantInstanceTypeMlM52xlarge        ProductionVariantInstanceType = "ml.m5.2xlarge"
+	ProductionVariantInstanceTypeMlM54xlarge        ProductionVariantInstanceType = "ml.m5.4xlarge"
+	ProductionVariantInstanceTypeMlM512xlarge       ProductionVariantInstanceType = "ml.m5.12xlarge"
+	ProductionVariantInstanceTypeMlM524xlarge       ProductionVariantInstanceType = "ml.m5.24xlarge"
+	ProductionVariantInstanceTypeMlM5dLarge         ProductionVariantInstanceType = "ml.m5d.large"
+	ProductionVariantInstanceTypeMlM5dXlarge        ProductionVariantInstanceType = "ml.m5d.xlarge"
+	ProductionVariantInstanceTypeMlM5d2xlarge       ProductionVariantInstanceType = "ml.m5d.2xlarge"
+	ProductionVariantInstanceTypeMlM5d4xlarge       ProductionVariantInstanceType = "ml.m5d.4xlarge"
+	ProductionVariantInstanceTypeMlM5d12xlarge      ProductionVariantInstanceType = "ml.m5d.12xlarge"
+	ProductionVariantInstanceTypeMlM5d24xlarge      ProductionVariantInstanceType = "ml.m5d.24xlarge"
+	ProductionVariantInstanceTypeMlC4Large          ProductionVariantInstanceType = "ml.c4.large"
+	ProductionVariantInstanceTypeMlC4Xlarge         ProductionVariantInstanceType = "ml.c4.xlarge"
+	ProductionVariantInstanceTypeMlC42xlarge        ProductionVariantInstanceType = "ml.c4.2xlarge"
+	ProductionVariantInstanceTypeMlC44xlarge        ProductionVariantInstanceType = "ml.c4.4xlarge"
+	ProductionVariantInstanceTypeMlC48xlarge        ProductionVariantInstanceType = "ml.c4.8xlarge"
+	ProductionVariantInstanceTypeMlP2Xlarge         ProductionVariantInstanceType = "ml.p2.xlarge"
+	ProductionVariantInstanceTypeMlP28xlarge        ProductionVariantInstanceType = "ml.p2.8xlarge"
+	ProductionVariantInstanceTypeMlP216xlarge       ProductionVariantInstanceType = "ml.p2.16xlarge"
+	ProductionVariantInstanceTypeMlP32xlarge        ProductionVariantInstanceType = "ml.p3.2xlarge"
+	ProductionVariantInstanceTypeMlP38xlarge        ProductionVariantInstanceType = "ml.p3.8xlarge"
+	ProductionVariantInstanceTypeMlP316xlarge       ProductionVariantInstanceType = "ml.p3.16xlarge"
+	ProductionVariantInstanceTypeMlC5Large          ProductionVariantInstanceType = "ml.c5.large"
+	ProductionVariantInstanceTypeMlC5Xlarge         ProductionVariantInstanceType = "ml.c5.xlarge"
+	ProductionVariantInstanceTypeMlC52xlarge        ProductionVariantInstanceType = "ml.c5.2xlarge"
+	ProductionVariantInstanceTypeMlC54xlarge        ProductionVariantInstanceType = "ml.c5.4xlarge"
+	ProductionVariantInstanceTypeMlC59xlarge        ProductionVariantInstanceType = "ml.c5.9xlarge"
+	ProductionVariantInstanceTypeMlC518xlarge       ProductionVariantInstanceType = "ml.c5.18xlarge"
+	ProductionVariantInstanceTypeMlC5dLarge         ProductionVariantInstanceType = "ml.c5d.large"
+	ProductionVariantInstanceTypeMlC5dXlarge        ProductionVariantInstanceType = "ml.c5d.xlarge"
+	ProductionVariantInstanceTypeMlC5d2xlarge       ProductionVariantInstanceType = "ml.c5d.2xlarge"
+	ProductionVariantInstanceTypeMlC5d4xlarge       ProductionVariantInstanceType = "ml.c5d.4xlarge"
+	ProductionVariantInstanceTypeMlC5d9xlarge       ProductionVariantInstanceType = "ml.c5d.9xlarge"
+	ProductionVariantInstanceTypeMlC5d18xlarge      ProductionVariantInstanceType = "ml.c5d.18xlarge"
+	ProductionVariantInstanceTypeMlG4dnXlarge       ProductionVariantInstanceType = "ml.g4dn.xlarge"
+	ProductionVariantInstanceTypeMlG4dn2xlarge      ProductionVariantInstanceType = "ml.g4dn.2xlarge"
+	ProductionVariantInstanceTypeMlG4dn4xlarge      ProductionVariantInstanceType = "ml.g4dn.4xlarge"
+	ProductionVariantInstanceTypeMlG4dn8xlarge      ProductionVariantInstanceType = "ml.g4dn.8xlarge"
+	ProductionVariantInstanceTypeMlG4dn12xlarge     ProductionVariantInstanceType = "ml.g4dn.12xlarge"
+	ProductionVariantInstanceTypeMlG4dn16xlarge     ProductionVariantInstanceType = "ml.g4dn.16xlarge"
+	ProductionVariantInstanceTypeMlR5Large          ProductionVariantInstanceType = "ml.r5.large"
+	ProductionVariantInstanceTypeMlR5Xlarge         ProductionVariantInstanceType = "ml.r5.xlarge"
+	ProductionVariantInstanceTypeMlR52xlarge        ProductionVariantInstanceType = "ml.r5.2xlarge"
+	ProductionVariantInstanceTypeMlR54xlarge        ProductionVariantInstanceType = "ml.r5.4xlarge"
+	ProductionVariantInstanceTypeMlR512xlarge       ProductionVariantInstanceType = "ml.r5.12xlarge"
+	ProductionVariantInstanceTypeMlR524xlarge       ProductionVariantInstanceType = "ml.r5.24xlarge"
+	ProductionVariantInstanceTypeMlR5dLarge         ProductionVariantInstanceType = "ml.r5d.large"
+	ProductionVariantInstanceTypeMlR5dXlarge        ProductionVariantInstanceType = "ml.r5d.xlarge"
+	ProductionVariantInstanceTypeMlR5d2xlarge       ProductionVariantInstanceType = "ml.r5d.2xlarge"
+	ProductionVariantInstanceTypeMlR5d4xlarge       ProductionVariantInstanceType = "ml.r5d.4xlarge"
+	ProductionVariantInstanceTypeMlR5d12xlarge      ProductionVariantInstanceType = "ml.r5d.12xlarge"
+	ProductionVariantInstanceTypeMlR5d24xlarge      ProductionVariantInstanceType = "ml.r5d.24xlarge"
+	ProductionVariantInstanceTypeMlInf1Xlarge       ProductionVariantInstanceType = "ml.inf1.xlarge"
+	ProductionVariantInstanceTypeMlInf12xlarge      ProductionVariantInstanceType = "ml.inf1.2xlarge"
+	ProductionVariantInstanceTypeMlInf16xlarge      ProductionVariantInstanceType = "ml.inf1.6xlarge"
+	ProductionVariantInstanceTypeMlInf124xlarge     ProductionVariantInstanceType = "ml.inf1.24xlarge"
+	ProductionVariantInstanceTypeMlDl124xlarge      ProductionVariantInstanceType = "ml.dl1.24xlarge"
+	ProductionVariantInstanceTypeMlC6iLarge         ProductionVariantInstanceType = "ml.c6i.large"
+	ProductionVariantInstanceTypeMlC6iXlarge        ProductionVariantInstanceType = "ml.c6i.xlarge"
+	ProductionVariantInstanceTypeMlC6i2xlarge       ProductionVariantInstanceType = "ml.c6i.2xlarge"
+	ProductionVariantInstanceTypeMlC6i4xlarge       ProductionVariantInstanceType = "ml.c6i.4xlarge"
+	ProductionVariantInstanceTypeMlC6i8xlarge       ProductionVariantInstanceType = "ml.c6i.8xlarge"
+	ProductionVariantInstanceTypeMlC6i12xlarge      ProductionVariantInstanceType = "ml.c6i.12xlarge"
+	ProductionVariantInstanceTypeMlC6i16xlarge      ProductionVariantInstanceType = "ml.c6i.16xlarge"
+	ProductionVariantInstanceTypeMlC6i24xlarge      ProductionVariantInstanceType = "ml.c6i.24xlarge"
+	ProductionVariantInstanceTypeMlC6i32xlarge      ProductionVariantInstanceType = "ml.c6i.32xlarge"
+	ProductionVariantInstanceTypeMlM6iLarge         ProductionVariantInstanceType = "ml.m6i.large"
+	ProductionVariantInstanceTypeMlM6iXlarge        ProductionVariantInstanceType = "ml.m6i.xlarge"
+	ProductionVariantInstanceTypeMlM6i2xlarge       ProductionVariantInstanceType = "ml.m6i.2xlarge"
+	ProductionVariantInstanceTypeMlM6i4xlarge       ProductionVariantInstanceType = "ml.m6i.4xlarge"
+	ProductionVariantInstanceTypeMlM6i8xlarge       ProductionVariantInstanceType = "ml.m6i.8xlarge"
+	ProductionVariantInstanceTypeMlM6i12xlarge      ProductionVariantInstanceType = "ml.m6i.12xlarge"
+	ProductionVariantInstanceTypeMlM6i16xlarge      ProductionVariantInstanceType = "ml.m6i.16xlarge"
+	ProductionVariantInstanceTypeMlM6i24xlarge      ProductionVariantInstanceType = "ml.m6i.24xlarge"
+	ProductionVariantInstanceTypeMlM6i32xlarge      ProductionVariantInstanceType = "ml.m6i.32xlarge"
+	ProductionVariantInstanceTypeMlR6iLarge         ProductionVariantInstanceType = "ml.r6i.large"
+	ProductionVariantInstanceTypeMlR6iXlarge        ProductionVariantInstanceType = "ml.r6i.xlarge"
+	ProductionVariantInstanceTypeMlR6i2xlarge       ProductionVariantInstanceType = "ml.r6i.2xlarge"
+	ProductionVariantInstanceTypeMlR6i4xlarge       ProductionVariantInstanceType = "ml.r6i.4xlarge"
+	ProductionVariantInstanceTypeMlR6i8xlarge       ProductionVariantInstanceType = "ml.r6i.8xlarge"
+	ProductionVariantInstanceTypeMlR6i12xlarge      ProductionVariantInstanceType = "ml.r6i.12xlarge"
+	ProductionVariantInstanceTypeMlR6i16xlarge      ProductionVariantInstanceType = "ml.r6i.16xlarge"
+	ProductionVariantInstanceTypeMlR6i24xlarge      ProductionVariantInstanceType = "ml.r6i.24xlarge"
+	ProductionVariantInstanceTypeMlR6i32xlarge      ProductionVariantInstanceType = "ml.r6i.32xlarge"
+	ProductionVariantInstanceTypeMlG5Xlarge         ProductionVariantInstanceType = "ml.g5.xlarge"
+	ProductionVariantInstanceTypeMlG52xlarge        ProductionVariantInstanceType = "ml.g5.2xlarge"
+	ProductionVariantInstanceTypeMlG54xlarge        ProductionVariantInstanceType = "ml.g5.4xlarge"
+	ProductionVariantInstanceTypeMlG58xlarge        ProductionVariantInstanceType = "ml.g5.8xlarge"
+	ProductionVariantInstanceTypeMlG512xlarge       ProductionVariantInstanceType = "ml.g5.12xlarge"
+	ProductionVariantInstanceTypeMlG516xlarge       ProductionVariantInstanceType = "ml.g5.16xlarge"
+	ProductionVariantInstanceTypeMlG524xlarge       ProductionVariantInstanceType = "ml.g5.24xlarge"
+	ProductionVariantInstanceTypeMlG548xlarge       ProductionVariantInstanceType = "ml.g5.48xlarge"
+	ProductionVariantInstanceTypeMlG6Xlarge         ProductionVariantInstanceType = "ml.g6.xlarge"
+	ProductionVariantInstanceTypeMlG62xlarge        ProductionVariantInstanceType = "ml.g6.2xlarge"
+	ProductionVariantInstanceTypeMlG64xlarge        ProductionVariantInstanceType = "ml.g6.4xlarge"
+	ProductionVariantInstanceTypeMlG68xlarge        ProductionVariantInstanceType = "ml.g6.8xlarge"
+	ProductionVariantInstanceTypeMlG612xlarge       ProductionVariantInstanceType = "ml.g6.12xlarge"
+	ProductionVariantInstanceTypeMlG616xlarge       ProductionVariantInstanceType = "ml.g6.16xlarge"
+	ProductionVariantInstanceTypeMlG624xlarge       ProductionVariantInstanceType = "ml.g6.24xlarge"
+	ProductionVariantInstanceTypeMlG648xlarge       ProductionVariantInstanceType = "ml.g6.48xlarge"
+	ProductionVariantInstanceTypeMlR8gMedium        ProductionVariantInstanceType = "ml.r8g.medium"
+	ProductionVariantInstanceTypeMlR8gLarge         ProductionVariantInstanceType = "ml.r8g.large"
+	ProductionVariantInstanceTypeMlR8gXlarge        ProductionVariantInstanceType = "ml.r8g.xlarge"
+	ProductionVariantInstanceTypeMlR8g2xlarge       ProductionVariantInstanceType = "ml.r8g.2xlarge"
+	ProductionVariantInstanceTypeMlR8g4xlarge       ProductionVariantInstanceType = "ml.r8g.4xlarge"
+	ProductionVariantInstanceTypeMlR8g8xlarge       ProductionVariantInstanceType = "ml.r8g.8xlarge"
+	ProductionVariantInstanceTypeMlR8g12xlarge      ProductionVariantInstanceType = "ml.r8g.12xlarge"
+	ProductionVariantInstanceTypeMlR8g16xlarge      ProductionVariantInstanceType = "ml.r8g.16xlarge"
+	ProductionVariantInstanceTypeMlR8g24xlarge      ProductionVariantInstanceType = "ml.r8g.24xlarge"
+	ProductionVariantInstanceTypeMlR8g48xlarge      ProductionVariantInstanceType = "ml.r8g.48xlarge"
+	ProductionVariantInstanceTypeMlG6eXlarge        ProductionVariantInstanceType = "ml.g6e.xlarge"
+	ProductionVariantInstanceTypeMlG6e2xlarge       ProductionVariantInstanceType = "ml.g6e.2xlarge"
+	ProductionVariantInstanceTypeMlG6e4xlarge       ProductionVariantInstanceType = "ml.g6e.4xlarge"
+	ProductionVariantInstanceTypeMlG6e8xlarge       ProductionVariantInstanceType = "ml.g6e.8xlarge"
+	ProductionVariantInstanceTypeMlG6e12xlarge      ProductionVariantInstanceType = "ml.g6e.12xlarge"
+	ProductionVariantInstanceTypeMlG6e16xlarge      ProductionVariantInstanceType = "ml.g6e.16xlarge"
+	ProductionVariantInstanceTypeMlG6e24xlarge      ProductionVariantInstanceType = "ml.g6e.24xlarge"
+	ProductionVariantInstanceTypeMlG6e48xlarge      ProductionVariantInstanceType = "ml.g6e.48xlarge"
+	ProductionVariantInstanceTypeMlP4d24xlarge      ProductionVariantInstanceType = "ml.p4d.24xlarge"
+	ProductionVariantInstanceTypeMlC7gLarge         ProductionVariantInstanceType = "ml.c7g.large"
+	ProductionVariantInstanceTypeMlC7gXlarge        ProductionVariantInstanceType = "ml.c7g.xlarge"
+	ProductionVariantInstanceTypeMlC7g2xlarge       ProductionVariantInstanceType = "ml.c7g.2xlarge"
+	ProductionVariantInstanceTypeMlC7g4xlarge       ProductionVariantInstanceType = "ml.c7g.4xlarge"
+	ProductionVariantInstanceTypeMlC7g8xlarge       ProductionVariantInstanceType = "ml.c7g.8xlarge"
+	ProductionVariantInstanceTypeMlC7g12xlarge      ProductionVariantInstanceType = "ml.c7g.12xlarge"
+	ProductionVariantInstanceTypeMlC7g16xlarge      ProductionVariantInstanceType = "ml.c7g.16xlarge"
+	ProductionVariantInstanceTypeMlM6gLarge         ProductionVariantInstanceType = "ml.m6g.large"
+	ProductionVariantInstanceTypeMlM6gXlarge        ProductionVariantInstanceType = "ml.m6g.xlarge"
+	ProductionVariantInstanceTypeMlM6g2xlarge       ProductionVariantInstanceType = "ml.m6g.2xlarge"
+	ProductionVariantInstanceTypeMlM6g4xlarge       ProductionVariantInstanceType = "ml.m6g.4xlarge"
+	ProductionVariantInstanceTypeMlM6g8xlarge       ProductionVariantInstanceType = "ml.m6g.8xlarge"
+	ProductionVariantInstanceTypeMlM6g12xlarge      ProductionVariantInstanceType = "ml.m6g.12xlarge"
+	ProductionVariantInstanceTypeMlM6g16xlarge      ProductionVariantInstanceType = "ml.m6g.16xlarge"
+	ProductionVariantInstanceTypeMlM6gdLarge        ProductionVariantInstanceType = "ml.m6gd.large"
+	ProductionVariantInstanceTypeMlM6gdXlarge       ProductionVariantInstanceType = "ml.m6gd.xlarge"
+	ProductionVariantInstanceTypeMlM6gd2xlarge      ProductionVariantInstanceType = "ml.m6gd.2xlarge"
+	ProductionVariantInstanceTypeMlM6gd4xlarge      ProductionVariantInstanceType = "ml.m6gd.4xlarge"
+	ProductionVariantInstanceTypeMlM6gd8xlarge      ProductionVariantInstanceType = "ml.m6gd.8xlarge"
+	ProductionVariantInstanceTypeMlM6gd12xlarge     ProductionVariantInstanceType = "ml.m6gd.12xlarge"
+	ProductionVariantInstanceTypeMlM6gd16xlarge     ProductionVariantInstanceType = "ml.m6gd.16xlarge"
+	ProductionVariantInstanceTypeMlC6gLarge         ProductionVariantInstanceType = "ml.c6g.large"
+	ProductionVariantInstanceTypeMlC6gXlarge        ProductionVariantInstanceType = "ml.c6g.xlarge"
+	ProductionVariantInstanceTypeMlC6g2xlarge       ProductionVariantInstanceType = "ml.c6g.2xlarge"
+	ProductionVariantInstanceTypeMlC6g4xlarge       ProductionVariantInstanceType = "ml.c6g.4xlarge"
+	ProductionVariantInstanceTypeMlC6g8xlarge       ProductionVariantInstanceType = "ml.c6g.8xlarge"
+	ProductionVariantInstanceTypeMlC6g12xlarge      ProductionVariantInstanceType = "ml.c6g.12xlarge"
+	ProductionVariantInstanceTypeMlC6g16xlarge      ProductionVariantInstanceType = "ml.c6g.16xlarge"
+	ProductionVariantInstanceTypeMlC6gdLarge        ProductionVariantInstanceType = "ml.c6gd.large"
+	ProductionVariantInstanceTypeMlC6gdXlarge       ProductionVariantInstanceType = "ml.c6gd.xlarge"
+	ProductionVariantInstanceTypeMlC6gd2xlarge      ProductionVariantInstanceType = "ml.c6gd.2xlarge"
+	ProductionVariantInstanceTypeMlC6gd4xlarge      ProductionVariantInstanceType = "ml.c6gd.4xlarge"
+	ProductionVariantInstanceTypeMlC6gd8xlarge      ProductionVariantInstanceType = "ml.c6gd.8xlarge"
+	ProductionVariantInstanceTypeMlC6gd12xlarge     ProductionVariantInstanceType = "ml.c6gd.12xlarge"
+	ProductionVariantInstanceTypeMlC6gd16xlarge     ProductionVariantInstanceType = "ml.c6gd.16xlarge"
+	ProductionVariantInstanceTypeMlC6gnLarge        ProductionVariantInstanceType = "ml.c6gn.large"
+	ProductionVariantInstanceTypeMlC6gnXlarge       ProductionVariantInstanceType = "ml.c6gn.xlarge"
+	ProductionVariantInstanceTypeMlC6gn2xlarge      ProductionVariantInstanceType = "ml.c6gn.2xlarge"
+	ProductionVariantInstanceTypeMlC6gn4xlarge      ProductionVariantInstanceType = "ml.c6gn.4xlarge"
+	ProductionVariantInstanceTypeMlC6gn8xlarge      ProductionVariantInstanceType = "ml.c6gn.8xlarge"
+	ProductionVariantInstanceTypeMlC6gn12xlarge     ProductionVariantInstanceType = "ml.c6gn.12xlarge"
+	ProductionVariantInstanceTypeMlC6gn16xlarge     ProductionVariantInstanceType = "ml.c6gn.16xlarge"
+	ProductionVariantInstanceTypeMlR6gLarge         ProductionVariantInstanceType = "ml.r6g.large"
+	ProductionVariantInstanceTypeMlR6gXlarge        ProductionVariantInstanceType = "ml.r6g.xlarge"
+	ProductionVariantInstanceTypeMlR6g2xlarge       ProductionVariantInstanceType = "ml.r6g.2xlarge"
+	ProductionVariantInstanceTypeMlR6g4xlarge       ProductionVariantInstanceType = "ml.r6g.4xlarge"
+	ProductionVariantInstanceTypeMlR6g8xlarge       ProductionVariantInstanceType = "ml.r6g.8xlarge"
+	ProductionVariantInstanceTypeMlR6g12xlarge      ProductionVariantInstanceType = "ml.r6g.12xlarge"
+	ProductionVariantInstanceTypeMlR6g16xlarge      ProductionVariantInstanceType = "ml.r6g.16xlarge"
+	ProductionVariantInstanceTypeMlR6gdLarge        ProductionVariantInstanceType = "ml.r6gd.large"
+	ProductionVariantInstanceTypeMlR6gdXlarge       ProductionVariantInstanceType = "ml.r6gd.xlarge"
+	ProductionVariantInstanceTypeMlR6gd2xlarge      ProductionVariantInstanceType = "ml.r6gd.2xlarge"
+	ProductionVariantInstanceTypeMlR6gd4xlarge      ProductionVariantInstanceType = "ml.r6gd.4xlarge"
+	ProductionVariantInstanceTypeMlR6gd8xlarge      ProductionVariantInstanceType = "ml.r6gd.8xlarge"
+	ProductionVariantInstanceTypeMlR6gd12xlarge     ProductionVariantInstanceType = "ml.r6gd.12xlarge"
+	ProductionVariantInstanceTypeMlR6gd16xlarge     ProductionVariantInstanceType = "ml.r6gd.16xlarge"
+	ProductionVariantInstanceTypeMlP4de24xlarge     ProductionVariantInstanceType = "ml.p4de.24xlarge"
+	ProductionVariantInstanceTypeMlTrn12xlarge      ProductionVariantInstanceType = "ml.trn1.2xlarge"
+	ProductionVariantInstanceTypeMlTrn132xlarge     ProductionVariantInstanceType = "ml.trn1.32xlarge"
+	ProductionVariantInstanceTypeMlTrn1n32xlarge    ProductionVariantInstanceType = "ml.trn1n.32xlarge"
+	ProductionVariantInstanceTypeMlTrn248xlarge     ProductionVariantInstanceType = "ml.trn2.48xlarge"
+	ProductionVariantInstanceTypeMlInf2Xlarge       ProductionVariantInstanceType = "ml.inf2.xlarge"
+	ProductionVariantInstanceTypeMlInf28xlarge      ProductionVariantInstanceType = "ml.inf2.8xlarge"
+	ProductionVariantInstanceTypeMlInf224xlarge     ProductionVariantInstanceType = "ml.inf2.24xlarge"
+	ProductionVariantInstanceTypeMlInf248xlarge     ProductionVariantInstanceType = "ml.inf2.48xlarge"
+	ProductionVariantInstanceTypeMlP548xlarge       ProductionVariantInstanceType = "ml.p5.48xlarge"
+	ProductionVariantInstanceTypeMlP5e48xlarge      ProductionVariantInstanceType = "ml.p5e.48xlarge"
+	ProductionVariantInstanceTypeMlP5en48xlarge     ProductionVariantInstanceType = "ml.p5en.48xlarge"
+	ProductionVariantInstanceTypeMlM7iLarge         ProductionVariantInstanceType = "ml.m7i.large"
+	ProductionVariantInstanceTypeMlM7iXlarge        ProductionVariantInstanceType = "ml.m7i.xlarge"
+	ProductionVariantInstanceTypeMlM7i2xlarge       ProductionVariantInstanceType = "ml.m7i.2xlarge"
+	ProductionVariantInstanceTypeMlM7i4xlarge       ProductionVariantInstanceType = "ml.m7i.4xlarge"
+	ProductionVariantInstanceTypeMlM7i8xlarge       ProductionVariantInstanceType = "ml.m7i.8xlarge"
+	ProductionVariantInstanceTypeMlM7i12xlarge      ProductionVariantInstanceType = "ml.m7i.12xlarge"
+	ProductionVariantInstanceTypeMlM7i16xlarge      ProductionVariantInstanceType = "ml.m7i.16xlarge"
+	ProductionVariantInstanceTypeMlM7i24xlarge      ProductionVariantInstanceType = "ml.m7i.24xlarge"
+	ProductionVariantInstanceTypeMlM7i48xlarge      ProductionVariantInstanceType = "ml.m7i.48xlarge"
+	ProductionVariantInstanceTypeMlC7iLarge         ProductionVariantInstanceType = "ml.c7i.large"
+	ProductionVariantInstanceTypeMlC7iXlarge        ProductionVariantInstanceType = "ml.c7i.xlarge"
+	ProductionVariantInstanceTypeMlC7i2xlarge       ProductionVariantInstanceType = "ml.c7i.2xlarge"
+	ProductionVariantInstanceTypeMlC7i4xlarge       ProductionVariantInstanceType = "ml.c7i.4xlarge"
+	ProductionVariantInstanceTypeMlC7i8xlarge       ProductionVariantInstanceType = "ml.c7i.8xlarge"
+	ProductionVariantInstanceTypeMlC7i12xlarge      ProductionVariantInstanceType = "ml.c7i.12xlarge"
+	ProductionVariantInstanceTypeMlC7i16xlarge      ProductionVariantInstanceType = "ml.c7i.16xlarge"
+	ProductionVariantInstanceTypeMlC7i24xlarge      ProductionVariantInstanceType = "ml.c7i.24xlarge"
+	ProductionVariantInstanceTypeMlC7i48xlarge      ProductionVariantInstanceType = "ml.c7i.48xlarge"
+	ProductionVariantInstanceTypeMlR7iLarge         ProductionVariantInstanceType = "ml.r7i.large"
+	ProductionVariantInstanceTypeMlR7iXlarge        ProductionVariantInstanceType = "ml.r7i.xlarge"
+	ProductionVariantInstanceTypeMlR7i2xlarge       ProductionVariantInstanceType = "ml.r7i.2xlarge"
+	ProductionVariantInstanceTypeMlR7i4xlarge       ProductionVariantInstanceType = "ml.r7i.4xlarge"
+	ProductionVariantInstanceTypeMlR7i8xlarge       ProductionVariantInstanceType = "ml.r7i.8xlarge"
+	ProductionVariantInstanceTypeMlR7i12xlarge      ProductionVariantInstanceType = "ml.r7i.12xlarge"
+	ProductionVariantInstanceTypeMlR7i16xlarge      ProductionVariantInstanceType = "ml.r7i.16xlarge"
+	ProductionVariantInstanceTypeMlR7i24xlarge      ProductionVariantInstanceType = "ml.r7i.24xlarge"
+	ProductionVariantInstanceTypeMlR7i48xlarge      ProductionVariantInstanceType = "ml.r7i.48xlarge"
+	ProductionVariantInstanceTypeMlC8gMedium        ProductionVariantInstanceType = "ml.c8g.medium"
+	ProductionVariantInstanceTypeMlC8gLarge         ProductionVariantInstanceType = "ml.c8g.large"
+	ProductionVariantInstanceTypeMlC8gXlarge        ProductionVariantInstanceType = "ml.c8g.xlarge"
+	ProductionVariantInstanceTypeMlC8g2xlarge       ProductionVariantInstanceType = "ml.c8g.2xlarge"
+	ProductionVariantInstanceTypeMlC8g4xlarge       ProductionVariantInstanceType = "ml.c8g.4xlarge"
+	ProductionVariantInstanceTypeMlC8g8xlarge       ProductionVariantInstanceType = "ml.c8g.8xlarge"
+	ProductionVariantInstanceTypeMlC8g12xlarge      ProductionVariantInstanceType = "ml.c8g.12xlarge"
+	ProductionVariantInstanceTypeMlC8g16xlarge      ProductionVariantInstanceType = "ml.c8g.16xlarge"
+	ProductionVariantInstanceTypeMlC8g24xlarge      ProductionVariantInstanceType = "ml.c8g.24xlarge"
+	ProductionVariantInstanceTypeMlC8g48xlarge      ProductionVariantInstanceType = "ml.c8g.48xlarge"
+	ProductionVariantInstanceTypeMlR7gdMedium       ProductionVariantInstanceType = "ml.r7gd.medium"
+	ProductionVariantInstanceTypeMlR7gdLarge        ProductionVariantInstanceType = "ml.r7gd.large"
+	ProductionVariantInstanceTypeMlR7gdXlarge       ProductionVariantInstanceType = "ml.r7gd.xlarge"
+	ProductionVariantInstanceTypeMlR7gd2xlarge      ProductionVariantInstanceType = "ml.r7gd.2xlarge"
+	ProductionVariantInstanceTypeMlR7gd4xlarge      ProductionVariantInstanceType = "ml.r7gd.4xlarge"
+	ProductionVariantInstanceTypeMlR7gd8xlarge      ProductionVariantInstanceType = "ml.r7gd.8xlarge"
+	ProductionVariantInstanceTypeMlR7gd12xlarge     ProductionVariantInstanceType = "ml.r7gd.12xlarge"
+	ProductionVariantInstanceTypeMlR7gd16xlarge     ProductionVariantInstanceType = "ml.r7gd.16xlarge"
+	ProductionVariantInstanceTypeMlM8gMedium        ProductionVariantInstanceType = "ml.m8g.medium"
+	ProductionVariantInstanceTypeMlM8gLarge         ProductionVariantInstanceType = "ml.m8g.large"
+	ProductionVariantInstanceTypeMlM8gXlarge        ProductionVariantInstanceType = "ml.m8g.xlarge"
+	ProductionVariantInstanceTypeMlM8g2xlarge       ProductionVariantInstanceType = "ml.m8g.2xlarge"
+	ProductionVariantInstanceTypeMlM8g4xlarge       ProductionVariantInstanceType = "ml.m8g.4xlarge"
+	ProductionVariantInstanceTypeMlM8g8xlarge       ProductionVariantInstanceType = "ml.m8g.8xlarge"
+	ProductionVariantInstanceTypeMlM8g12xlarge      ProductionVariantInstanceType = "ml.m8g.12xlarge"
+	ProductionVariantInstanceTypeMlM8g16xlarge      ProductionVariantInstanceType = "ml.m8g.16xlarge"
+	ProductionVariantInstanceTypeMlM8g24xlarge      ProductionVariantInstanceType = "ml.m8g.24xlarge"
+	ProductionVariantInstanceTypeMlM8g48xlarge      ProductionVariantInstanceType = "ml.m8g.48xlarge"
+	ProductionVariantInstanceTypeMlC6inLarge        ProductionVariantInstanceType = "ml.c6in.large"
+	ProductionVariantInstanceTypeMlC6inXlarge       ProductionVariantInstanceType = "ml.c6in.xlarge"
+	ProductionVariantInstanceTypeMlC6in2xlarge      ProductionVariantInstanceType = "ml.c6in.2xlarge"
+	ProductionVariantInstanceTypeMlC6in4xlarge      ProductionVariantInstanceType = "ml.c6in.4xlarge"
+	ProductionVariantInstanceTypeMlC6in8xlarge      ProductionVariantInstanceType = "ml.c6in.8xlarge"
+	ProductionVariantInstanceTypeMlC6in12xlarge     ProductionVariantInstanceType = "ml.c6in.12xlarge"
+	ProductionVariantInstanceTypeMlC6in16xlarge     ProductionVariantInstanceType = "ml.c6in.16xlarge"
+	ProductionVariantInstanceTypeMlC6in24xlarge     ProductionVariantInstanceType = "ml.c6in.24xlarge"
+	ProductionVariantInstanceTypeMlC6in32xlarge     ProductionVariantInstanceType = "ml.c6in.32xlarge"
+	ProductionVariantInstanceTypeMlP6B20048xlarge   ProductionVariantInstanceType = "ml.p6-b200.48xlarge"
+	ProductionVariantInstanceTypeMlP6eGb20036xlarge ProductionVariantInstanceType = "ml.p6e-gb200.36xlarge"
 )
 
 // Values returns all known values for ProductionVariantInstanceType. Note that
@@ -6313,6 +6406,45 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 		"ml.r7i.16xlarge",
 		"ml.r7i.24xlarge",
 		"ml.r7i.48xlarge",
+		"ml.c8g.medium",
+		"ml.c8g.large",
+		"ml.c8g.xlarge",
+		"ml.c8g.2xlarge",
+		"ml.c8g.4xlarge",
+		"ml.c8g.8xlarge",
+		"ml.c8g.12xlarge",
+		"ml.c8g.16xlarge",
+		"ml.c8g.24xlarge",
+		"ml.c8g.48xlarge",
+		"ml.r7gd.medium",
+		"ml.r7gd.large",
+		"ml.r7gd.xlarge",
+		"ml.r7gd.2xlarge",
+		"ml.r7gd.4xlarge",
+		"ml.r7gd.8xlarge",
+		"ml.r7gd.12xlarge",
+		"ml.r7gd.16xlarge",
+		"ml.m8g.medium",
+		"ml.m8g.large",
+		"ml.m8g.xlarge",
+		"ml.m8g.2xlarge",
+		"ml.m8g.4xlarge",
+		"ml.m8g.8xlarge",
+		"ml.m8g.12xlarge",
+		"ml.m8g.16xlarge",
+		"ml.m8g.24xlarge",
+		"ml.m8g.48xlarge",
+		"ml.c6in.large",
+		"ml.c6in.xlarge",
+		"ml.c6in.2xlarge",
+		"ml.c6in.4xlarge",
+		"ml.c6in.8xlarge",
+		"ml.c6in.12xlarge",
+		"ml.c6in.16xlarge",
+		"ml.c6in.24xlarge",
+		"ml.c6in.32xlarge",
+		"ml.p6-b200.48xlarge",
+		"ml.p6e-gb200.36xlarge",
 	}
 }
 
@@ -6930,6 +7062,7 @@ const (
 	S3DataTypeManifestFile          S3DataType = "ManifestFile"
 	S3DataTypeS3Prefix              S3DataType = "S3Prefix"
 	S3DataTypeAugmentedManifestFile S3DataType = "AugmentedManifestFile"
+	S3DataTypeConverse              S3DataType = "Converse"
 )
 
 // Values returns all known values for S3DataType. Note that this can be expanded
@@ -6941,6 +7074,7 @@ func (S3DataType) Values() []S3DataType {
 		"ManifestFile",
 		"S3Prefix",
 		"AugmentedManifestFile",
+		"Converse",
 	}
 }
 
@@ -8227,6 +8361,33 @@ const (
 	TrainingInstanceTypeMlR516xlarge     TrainingInstanceType = "ml.r5.16xlarge"
 	TrainingInstanceTypeMlR524xlarge     TrainingInstanceType = "ml.r5.24xlarge"
 	TrainingInstanceTypeMlP6B20048xlarge TrainingInstanceType = "ml.p6-b200.48xlarge"
+	TrainingInstanceTypeMlM7iLarge       TrainingInstanceType = "ml.m7i.large"
+	TrainingInstanceTypeMlM7iXlarge      TrainingInstanceType = "ml.m7i.xlarge"
+	TrainingInstanceTypeMlM7i2xlarge     TrainingInstanceType = "ml.m7i.2xlarge"
+	TrainingInstanceTypeMlM7i4xlarge     TrainingInstanceType = "ml.m7i.4xlarge"
+	TrainingInstanceTypeMlM7i8xlarge     TrainingInstanceType = "ml.m7i.8xlarge"
+	TrainingInstanceTypeMlM7i12xlarge    TrainingInstanceType = "ml.m7i.12xlarge"
+	TrainingInstanceTypeMlM7i16xlarge    TrainingInstanceType = "ml.m7i.16xlarge"
+	TrainingInstanceTypeMlM7i24xlarge    TrainingInstanceType = "ml.m7i.24xlarge"
+	TrainingInstanceTypeMlM7i48xlarge    TrainingInstanceType = "ml.m7i.48xlarge"
+	TrainingInstanceTypeMlC7iLarge       TrainingInstanceType = "ml.c7i.large"
+	TrainingInstanceTypeMlC7iXlarge      TrainingInstanceType = "ml.c7i.xlarge"
+	TrainingInstanceTypeMlC7i2xlarge     TrainingInstanceType = "ml.c7i.2xlarge"
+	TrainingInstanceTypeMlC7i4xlarge     TrainingInstanceType = "ml.c7i.4xlarge"
+	TrainingInstanceTypeMlC7i8xlarge     TrainingInstanceType = "ml.c7i.8xlarge"
+	TrainingInstanceTypeMlC7i12xlarge    TrainingInstanceType = "ml.c7i.12xlarge"
+	TrainingInstanceTypeMlC7i16xlarge    TrainingInstanceType = "ml.c7i.16xlarge"
+	TrainingInstanceTypeMlC7i24xlarge    TrainingInstanceType = "ml.c7i.24xlarge"
+	TrainingInstanceTypeMlC7i48xlarge    TrainingInstanceType = "ml.c7i.48xlarge"
+	TrainingInstanceTypeMlR7iLarge       TrainingInstanceType = "ml.r7i.large"
+	TrainingInstanceTypeMlR7iXlarge      TrainingInstanceType = "ml.r7i.xlarge"
+	TrainingInstanceTypeMlR7i2xlarge     TrainingInstanceType = "ml.r7i.2xlarge"
+	TrainingInstanceTypeMlR7i4xlarge     TrainingInstanceType = "ml.r7i.4xlarge"
+	TrainingInstanceTypeMlR7i8xlarge     TrainingInstanceType = "ml.r7i.8xlarge"
+	TrainingInstanceTypeMlR7i12xlarge    TrainingInstanceType = "ml.r7i.12xlarge"
+	TrainingInstanceTypeMlR7i16xlarge    TrainingInstanceType = "ml.r7i.16xlarge"
+	TrainingInstanceTypeMlR7i24xlarge    TrainingInstanceType = "ml.r7i.24xlarge"
+	TrainingInstanceTypeMlR7i48xlarge    TrainingInstanceType = "ml.r7i.48xlarge"
 )
 
 // Values returns all known values for TrainingInstanceType. Note that this can be
@@ -8344,6 +8505,33 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.r5.16xlarge",
 		"ml.r5.24xlarge",
 		"ml.p6-b200.48xlarge",
+		"ml.m7i.large",
+		"ml.m7i.xlarge",
+		"ml.m7i.2xlarge",
+		"ml.m7i.4xlarge",
+		"ml.m7i.8xlarge",
+		"ml.m7i.12xlarge",
+		"ml.m7i.16xlarge",
+		"ml.m7i.24xlarge",
+		"ml.m7i.48xlarge",
+		"ml.c7i.large",
+		"ml.c7i.xlarge",
+		"ml.c7i.2xlarge",
+		"ml.c7i.4xlarge",
+		"ml.c7i.8xlarge",
+		"ml.c7i.12xlarge",
+		"ml.c7i.16xlarge",
+		"ml.c7i.24xlarge",
+		"ml.c7i.48xlarge",
+		"ml.r7i.large",
+		"ml.r7i.xlarge",
+		"ml.r7i.2xlarge",
+		"ml.r7i.4xlarge",
+		"ml.r7i.8xlarge",
+		"ml.r7i.12xlarge",
+		"ml.r7i.16xlarge",
+		"ml.r7i.24xlarge",
+		"ml.r7i.48xlarge",
 	}
 }
 

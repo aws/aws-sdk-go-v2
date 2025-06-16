@@ -59,6 +59,23 @@ type CreateFirewallInput struct {
 	// This member is required.
 	FirewallPolicyArn *string
 
+	// Optional. A setting indicating whether the firewall is protected against
+	// changes to its Availability Zone configuration. When set to TRUE , you cannot
+	// add or remove Availability Zones without first disabling this protection using UpdateAvailabilityZoneChangeProtection.
+	//
+	// Default value: FALSE
+	AvailabilityZoneChangeProtection bool
+
+	// Required. The Availability Zones where you want to create firewall endpoints
+	// for a transit gateway-attached firewall. You must specify at least one
+	// Availability Zone. Consider enabling the firewall in every Availability Zone
+	// where you have workloads to maintain Availability Zone independence.
+	//
+	// You can modify Availability Zones later using AssociateAvailabilityZones or DisassociateAvailabilityZones, but this may briefly
+	// disrupt traffic. The AvailabilityZoneChangeProtection setting controls whether
+	// you can make these modifications.
+	AvailabilityZoneMappings []types.AvailabilityZoneMapping
+
 	// A flag indicating whether it is possible to delete the firewall. A setting of
 	// TRUE indicates that the firewall is protected against deletion. Use this setting
 	// to protect against accidentally deleting a firewall that is in use. When you
@@ -94,6 +111,20 @@ type CreateFirewallInput struct {
 
 	// The key:value pairs to associate with the resource.
 	Tags []types.Tag
+
+	// Required when creating a transit gateway-attached firewall. The unique
+	// identifier of the transit gateway to attach to this firewall. You can provide
+	// either a transit gateway from your account or one that has been shared with you
+	// through Resource Access Manager.
+	//
+	// After creating the firewall, you cannot change the transit gateway association.
+	// To use a different transit gateway, you must create a new firewall.
+	//
+	// For information about creating firewalls, see CreateFirewall. For specific guidance about
+	// transit gateway-attached firewalls, see [Considerations for transit gateway-attached firewalls]in the Network Firewall Developer Guide.
+	//
+	// [Considerations for transit gateway-attached firewalls]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tgw-firewall-considerations.html
+	TransitGatewayId *string
 
 	// The unique identifier of the VPC where Network Firewall should create the
 	// firewall.

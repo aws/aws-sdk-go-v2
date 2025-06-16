@@ -47,6 +47,7 @@ const (
 	CustomizationTypeFineTuning           CustomizationType = "FINE_TUNING"
 	CustomizationTypeContinuedPreTraining CustomizationType = "CONTINUED_PRE_TRAINING"
 	CustomizationTypeDistillation         CustomizationType = "DISTILLATION"
+	CustomizationTypeImported             CustomizationType = "IMPORTED"
 )
 
 // Values returns all known values for CustomizationType. Note that this can be
@@ -58,6 +59,7 @@ func (CustomizationType) Values() []CustomizationType {
 		"FINE_TUNING",
 		"CONTINUED_PRE_TRAINING",
 		"DISTILLATION",
+		"IMPORTED",
 	}
 }
 
@@ -746,6 +748,27 @@ func (ModelModality) Values() []ModelModality {
 		"TEXT",
 		"IMAGE",
 		"EMBEDDING",
+	}
+}
+
+type ModelStatus string
+
+// Enum values for ModelStatus
+const (
+	ModelStatusActive   ModelStatus = "Active"
+	ModelStatusCreating ModelStatus = "Creating"
+	ModelStatusFailed   ModelStatus = "Failed"
+)
+
+// Values returns all known values for ModelStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModelStatus) Values() []ModelStatus {
+	return []ModelStatus{
+		"Active",
+		"Creating",
+		"Failed",
 	}
 }
 

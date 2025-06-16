@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAcceptNetworkFirewallTransitGatewayAttachment struct {
+}
+
+func (*validateOpAcceptNetworkFirewallTransitGatewayAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptNetworkFirewallTransitGatewayAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptNetworkFirewallTransitGatewayAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptNetworkFirewallTransitGatewayAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateAvailabilityZones struct {
+}
+
+func (*validateOpAssociateAvailabilityZones) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateAvailabilityZones) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateAvailabilityZonesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateAvailabilityZonesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateFirewallPolicy struct {
 }
 
@@ -150,6 +190,26 @@ func (m *validateOpCreateVpcEndpointAssociation) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteNetworkFirewallTransitGatewayAttachment struct {
+}
+
+func (*validateOpDeleteNetworkFirewallTransitGatewayAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteNetworkFirewallTransitGatewayAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteNetworkFirewallTransitGatewayAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteNetworkFirewallTransitGatewayAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteResourcePolicy struct {
 }
 
@@ -245,6 +305,26 @@ func (m *validateOpDescribeVpcEndpointAssociation) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeVpcEndpointAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateAvailabilityZones struct {
+}
+
+func (*validateOpDisassociateAvailabilityZones) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateAvailabilityZones) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateAvailabilityZonesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateAvailabilityZonesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +450,26 @@ func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRejectNetworkFirewallTransitGatewayAttachment struct {
+}
+
+func (*validateOpRejectNetworkFirewallTransitGatewayAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRejectNetworkFirewallTransitGatewayAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RejectNetworkFirewallTransitGatewayAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRejectNetworkFirewallTransitGatewayAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartAnalysisReport struct {
 }
 
@@ -465,6 +565,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAvailabilityZoneChangeProtection struct {
+}
+
+func (*validateOpUpdateAvailabilityZoneChangeProtection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAvailabilityZoneChangeProtection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAvailabilityZoneChangeProtectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAvailabilityZoneChangeProtectionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -630,6 +750,14 @@ func (m *validateOpUpdateTLSInspectionConfiguration) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAcceptNetworkFirewallTransitGatewayAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptNetworkFirewallTransitGatewayAttachment{}, middleware.After)
+}
+
+func addOpAssociateAvailabilityZonesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateAvailabilityZones{}, middleware.After)
+}
+
 func addOpAssociateFirewallPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateFirewallPolicy{}, middleware.After)
 }
@@ -658,6 +786,10 @@ func addOpCreateVpcEndpointAssociationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpCreateVpcEndpointAssociation{}, middleware.After)
 }
 
+func addOpDeleteNetworkFirewallTransitGatewayAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteNetworkFirewallTransitGatewayAttachment{}, middleware.After)
+}
+
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
 }
@@ -676,6 +808,10 @@ func addOpDescribeResourcePolicyValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDescribeVpcEndpointAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeVpcEndpointAssociation{}, middleware.After)
+}
+
+func addOpDisassociateAvailabilityZonesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateAvailabilityZones{}, middleware.After)
 }
 
 func addOpDisassociateSubnetsValidationMiddleware(stack *middleware.Stack) error {
@@ -702,6 +838,10 @@ func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
 }
 
+func addOpRejectNetworkFirewallTransitGatewayAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRejectNetworkFirewallTransitGatewayAttachment{}, middleware.After)
+}
+
 func addOpStartAnalysisReportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAnalysisReport{}, middleware.After)
 }
@@ -720,6 +860,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAvailabilityZoneChangeProtectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAvailabilityZoneChangeProtection{}, middleware.After)
 }
 
 func addOpUpdateFirewallDeleteProtectionValidationMiddleware(stack *middleware.Stack) error {
@@ -793,6 +937,38 @@ func validateAddresses(v []types.Address) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Addresses"}
 	for i := range v {
 		if err := validateAddress(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAvailabilityZoneMapping(v *types.AvailabilityZoneMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AvailabilityZoneMapping"}
+	if v.AvailabilityZone == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAvailabilityZoneMappings(v []types.AvailabilityZoneMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AvailabilityZoneMappings"}
+	for i := range v {
+		if err := validateAvailabilityZoneMapping(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1706,6 +1882,40 @@ func validateTLSInspectionConfiguration(v *types.TLSInspectionConfiguration) err
 	}
 }
 
+func validateOpAcceptNetworkFirewallTransitGatewayAttachmentInput(v *AcceptNetworkFirewallTransitGatewayAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptNetworkFirewallTransitGatewayAttachmentInput"}
+	if v.TransitGatewayAttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayAttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateAvailabilityZonesInput(v *AssociateAvailabilityZonesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateAvailabilityZonesInput"}
+	if v.AvailabilityZoneMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZoneMappings"))
+	} else if v.AvailabilityZoneMappings != nil {
+		if err := validateAvailabilityZoneMappings(v.AvailabilityZoneMappings); err != nil {
+			invalidParams.AddNested("AvailabilityZoneMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateFirewallPolicyInput(v *AssociateFirewallPolicyInput) error {
 	if v == nil {
 		return nil
@@ -1764,6 +1974,11 @@ func validateOpCreateFirewallInput(v *CreateFirewallInput) error {
 	if v.EncryptionConfiguration != nil {
 		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
 			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AvailabilityZoneMappings != nil {
+		if err := validateAvailabilityZoneMappings(v.AvailabilityZoneMappings); err != nil {
+			invalidParams.AddNested("AvailabilityZoneMappings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1903,6 +2118,21 @@ func validateOpCreateVpcEndpointAssociationInput(v *CreateVpcEndpointAssociation
 	}
 }
 
+func validateOpDeleteNetworkFirewallTransitGatewayAttachmentInput(v *DeleteNetworkFirewallTransitGatewayAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteNetworkFirewallTransitGatewayAttachmentInput"}
+	if v.TransitGatewayAttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayAttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	if v == nil {
 		return nil
@@ -1973,6 +2203,25 @@ func validateOpDescribeVpcEndpointAssociationInput(v *DescribeVpcEndpointAssocia
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeVpcEndpointAssociationInput"}
 	if v.VpcEndpointAssociationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcEndpointAssociationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateAvailabilityZonesInput(v *DisassociateAvailabilityZonesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateAvailabilityZonesInput"}
+	if v.AvailabilityZoneMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZoneMappings"))
+	} else if v.AvailabilityZoneMappings != nil {
+		if err := validateAvailabilityZoneMappings(v.AvailabilityZoneMappings); err != nil {
+			invalidParams.AddNested("AvailabilityZoneMappings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2077,6 +2326,21 @@ func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 	}
 }
 
+func validateOpRejectNetworkFirewallTransitGatewayAttachmentInput(v *RejectNetworkFirewallTransitGatewayAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectNetworkFirewallTransitGatewayAttachmentInput"}
+	if v.TransitGatewayAttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayAttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartAnalysisReportInput(v *StartAnalysisReportInput) error {
 	if v == nil {
 		return nil
@@ -2169,6 +2433,18 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAvailabilityZoneChangeProtectionInput(v *UpdateAvailabilityZoneChangeProtectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAvailabilityZoneChangeProtectionInput"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

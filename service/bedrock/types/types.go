@@ -281,6 +281,15 @@ type CustomModelSummary struct {
 	// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 	CustomizationType CustomizationType
 
+	// The current status of the custom model. Possible values include:
+	//
+	//   - Creating - The model is being created and validated.
+	//
+	//   - Active - The model has been successfully created and is ready for use.
+	//
+	//   - Failed - The model creation process failed.
+	ModelStatus ModelStatus
+
 	// The unique identifier of the account that owns the model.
 	OwnerAccountId *string
 
@@ -2648,7 +2657,7 @@ type ModelCustomizationJobSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Data source for the imported model.
+// The data source of the model to import.
 //
 // The following types satisfy this interface:
 //
@@ -2657,7 +2666,7 @@ type ModelDataSource interface {
 	isModelDataSource()
 }
 
-// The Amazon S3 data source of the imported model.
+// The Amazon S3 data source of the model to import.
 type ModelDataSourceMemberS3DataSource struct {
 	Value S3DataSource
 
@@ -3507,7 +3516,12 @@ type S3Config struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon S3 data source of the imported job.
+// The Amazon S3 data source of the model to import. For the [CreateCustomModel] API operation, you
+// must specify the Amazon S3 URI for the Amazon-managed Amazon S3 bucket
+// containing your model artifacts. SageMaker AI creates this bucket when you run
+// your first SageMaker AI training job.
+//
+// [CreateCustomModel]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModel.html
 type S3DataSource struct {
 
 	// The URI of the Amazon S3 data source.
