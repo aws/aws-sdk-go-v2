@@ -2095,6 +2095,18 @@
                         "smithy.api#documentation": "<p>The date and time the Amazon ECR container image was pushed.</p>"
                     }
                 },
+                "lastInUseAt": {
+                    "target": "com.amazonaws.ecr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The most recent date and time a cluster was running the image.</p>"
+                    }
+                },
+                "inUseCount": {
+                    "target": "com.amazonaws.ecr#InUseCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of Amazon ECS or Amazon EKS clusters currently running the\n            image.</p>"
+                    }
+                },
                 "registry": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
@@ -2645,7 +2657,7 @@
                 "upstreamRegistryUrl": {
                     "target": "com.amazonaws.ecr#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry URL of the upstream public registry to use as the source for the pull\n            through cache rule. The following is the syntax to use for each supported upstream\n            registry.</p>\n         <ul>\n            <li>\n               <p>Amazon ECR (<code>ecr</code>) –\n                    <code>dkr.ecr.<region>.amazonaws.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon ECR Public (<code>ecr-public</code>) – <code>public.ecr.aws</code>\n               </p>\n            </li>\n            <li>\n               <p>Docker Hub (<code>docker-hub</code>) –\n                    <code>registry-1.docker.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitHub Container Registry (<code>github-container-registry</code>) –\n                        <code>ghcr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitLab Container Registry (<code>gitlab-container-registry</code>) –\n                        <code>registry.gitlab.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Kubernetes (<code>k8s</code>) – <code>registry.k8s.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Microsoft Azure Container Registry (<code>azure-container-registry</code>) –\n                        <code><custom>.azurecr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Quay (<code>quay</code>) – <code>quay.io</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The registry URL of the upstream public registry to use as the source for the pull\n            through cache rule. The following is the syntax to use for each supported upstream\n            registry.</p>\n         <ul>\n            <li>\n               <p>Amazon ECR (<code>ecr</code>) –\n                    <code><accountId>.dkr.ecr.<region>.amazonaws.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon ECR Public (<code>ecr-public</code>) – <code>public.ecr.aws</code>\n               </p>\n            </li>\n            <li>\n               <p>Docker Hub (<code>docker-hub</code>) –\n                    <code>registry-1.docker.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitHub Container Registry (<code>github-container-registry</code>) –\n                        <code>ghcr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitLab Container Registry (<code>gitlab-container-registry</code>) –\n                        <code>registry.gitlab.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Kubernetes (<code>k8s</code>) – <code>registry.k8s.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Microsoft Azure Container Registry (<code>azure-container-registry</code>) –\n                        <code><custom>.azurecr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Quay (<code>quay</code>) – <code>quay.io</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3807,7 +3819,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata about the images in a repository.</p>\n         <note>\n            <p>Beginning with Docker version 1.9, the Docker client compresses image layers\n                before pushing them to a V2 Docker registry. The output of the <code>docker\n                    images</code> command shows the uncompressed image size, so it may return a\n                larger image size than the image sizes returned by <a>DescribeImages</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns metadata about the images in a repository.</p>\n         <note>\n            <p>Starting with Docker version 1.9, the Docker client compresses image layers before\n                pushing them to a V2 Docker registry. The output of the <code>docker images</code>\n                command shows the uncompressed image size. Therefore, Docker might return a larger\n                image than the image shown in the Amazon Web Services Management Console.</p>\n         </note>\n         <important>\n            <p>The new version of Amazon ECR <i>Basic Scanning</i> doesn't use the\n                <a>ImageDetail$imageScanFindingsSummary</a> and\n                <a>ImageDetail$imageScanStatus</a>\n                attributes from the API response to return scan results.\n                Use the <a>DescribeImageScanFindings</a> API instead. For more\n                information about Amazon Web Services native basic scanning, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html\"> Scan images for software\n                    vulnerabilities in Amazon ECR</a>.</p>\n         </important>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4623,7 +4635,7 @@
                 "authorizationData": {
                     "target": "com.amazonaws.ecr#AuthorizationDataList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of authorization token data objects that correspond to the\n                <code>registryIds</code> values in the request.</p>"
+                        "smithy.api#documentation": "<p>A list of authorization token data objects that correspond to the\n                <code>registryIds</code> values in the request.</p>\n         <note>\n            <p>The size of the authorization token returned by Amazon ECR is not fixed. We recommend\n                that you don't make assumptions about the maximum size.</p>\n         </note>"
                     }
                 }
             },
@@ -4834,7 +4846,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.ecr#LifecyclePreviewMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of repository results returned by\n                <code>GetLifecyclePolicyPreviewRequest</code> in\u2028 paginated output. When this\n            parameter is used, <code>GetLifecyclePolicyPreviewRequest</code> only returns\u2028\n                <code>maxResults</code> results in a single page along with a\n            <code>nextToken</code>\u2028 response element. The remaining results of the initial request\n            can be seen by sending\u2028 another <code>GetLifecyclePolicyPreviewRequest</code> request\n            with the returned <code>nextToken</code>\u2028 value. This value can be between\n            1 and 1000. If this\u2028 parameter is not used, then\n                <code>GetLifecyclePolicyPreviewRequest</code> returns up to\u2028 100\n            results and a <code>nextToken</code> value, if\u2028 applicable. This option cannot be used\n            when you specify images with <code>imageIds</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of repository results returned by\n                <code>GetLifecyclePolicyPreviewRequest</code> in\u2028 paginated output. When this\n            parameter is used, <code>GetLifecyclePolicyPreviewRequest</code> only returns\u2028\n                <code>maxResults</code> results in a single page along with a\n            <code>nextToken</code>\u2028 response element. The remaining results of the initial request\n            can be seen by sending\u2028 another <code>GetLifecyclePolicyPreviewRequest</code> request\n            with the returned <code>nextToken</code>\u2028 value. This value can be between\n            1 and 100. If this\u2028 parameter is not used, then\n                <code>GetLifecyclePolicyPreviewRequest</code> returns up to\u2028100\n            results and a <code>nextToken</code> value, if\u2028 applicable. This option cannot be used\n            when you specify images with <code>imageIds</code>.</p>"
                     }
                 },
                 "filter": {
@@ -5243,7 +5255,7 @@
                 "imageSizeInBytes": {
                     "target": "com.amazonaws.ecr#ImageSizeInBytes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size, in bytes, of the image in the repository.</p>\n         <p>If the image is a manifest list, this will be the max size of all manifests in the\n            list.</p>\n         <note>\n            <p>Starting with Docker version 1.9, the Docker client compresses image layers before\n                pushing them to a V2 Docker registry. The output of the <code>docker images</code>\n                command shows the uncompressed image size. Therefore, Docker might return a larger\n                image than the image sizes returned by <a>DescribeImages</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The size, in bytes, of the image in the repository.</p>\n         <p>If the image is a manifest list, this will be the max size of all manifests in the\n            list.</p>\n         <note>\n            <p>Starting with Docker version 1.9, the Docker client compresses image layers before\n                pushing them to a V2 Docker registry. The output of the <code>docker images</code>\n                command shows the uncompressed image size. Therefore, Docker might return a larger\n                image than the image shown in the Amazon Web Services Management Console.</p>\n         </note>"
                     }
                 },
                 "imagePushedAt": {
@@ -5699,6 +5711,14 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecr#ImageTag"
+            }
+        },
+        "com.amazonaws.ecr#InUseCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.ecr#InitiateLayerUpload": {
@@ -7699,7 +7719,7 @@
                 "imageTagMutability": {
                     "target": "com.amazonaws.ecr#ImageTagMutability",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag mutability setting for the repository. If this parameter is omitted, the\n            default setting of MUTABLE will be used which will allow image tags to be overwritten.\n            If IMMUTABLE is specified, all image tags within the repository will be immutable which\n            will prevent them from being overwritten.</p>"
+                        "smithy.api#documentation": "<p>The tag mutability setting for the repository. If this parameter is omitted, the\n            default setting of <code>MUTABLE</code> will be used which will allow image tags to be overwritten.\n            If <code>IMMUTABLE</code> is specified, all image tags within the repository will be immutable which\n            will prevent them from being overwritten.</p>"
                     }
                 },
                 "repositoryPolicy": {

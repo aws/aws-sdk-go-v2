@@ -29,6 +29,16 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.networkfirewall#AWSAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
         "com.amazonaws.networkfirewall#AZSyncState": {
             "type": "structure",
             "members": {
@@ -38,6 +48,69 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The status of the firewall endpoint defined by a <code>VpcEndpointAssociation</code>. </p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#AcceptNetworkFirewallTransitGatewayAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#AcceptNetworkFirewallTransitGatewayAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#AcceptNetworkFirewallTransitGatewayAttachmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Accepts a transit gateway attachment request for Network Firewall. When you accept the attachment request, Network Firewall creates the necessary routing components to enable traffic flow between the transit gateway and firewall endpoints.</p>\n         <p>You must accept a transit gateway attachment to complete the creation of a transit gateway-attached firewall, unless auto-accept is enabled on the transit gateway. After acceptance, use <a>DescribeFirewall</a> to verify the firewall status.</p>\n         <p>To reject an attachment instead of accepting it, use <a>RejectNetworkFirewallTransitGatewayAttachment</a>.</p>\n         <note>\n            <p>It can take several minutes for the attachment acceptance to complete and the firewall to become available.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.networkfirewall#AcceptNetworkFirewallTransitGatewayAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The unique identifier of the transit gateway attachment to accept. This ID is returned in the response when creating a transit gateway-attached firewall.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#AcceptNetworkFirewallTransitGatewayAttachmentResponse": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the transit gateway attachment that was accepted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransitGatewayAttachmentStatus": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the transit gateway attachment. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The attachment is being created</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The attachment is being deleted</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - The attachment has been deleted</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The attachment creation has failed and cannot be recovered</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - The attachment is in an error state that might be recoverable</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> - The attachment is active and processing traffic</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING_ACCEPTANCE</code> - The attachment is waiting to be accepted</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECTING</code> - The attachment is in the process of being rejected</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECTED</code> - The attachment has been rejected</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.networkfirewall#ActionDefinition": {
@@ -76,7 +149,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A single IP address specification. This is used in the <a>MatchAttributes</a>\n         source and destination specifications.</p>"
+                "smithy.api#documentation": "<p>A single IP address specification. This is used in the <a>MatchAttributes</a> source and destination specifications.</p>"
             }
         },
         "com.amazonaws.networkfirewall#AddressDefinition": {
@@ -235,6 +308,106 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The results of a <code>COMPLETED</code> analysis report generated with <a>StartAnalysisReport</a>.</p>\n         <p>For an example of traffic analysis report results, see the response syntax of <a>GetAnalysisReportResults</a>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#AssociateAvailabilityZones": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#AssociateAvailabilityZonesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#AssociateAvailabilityZonesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InsufficientCapacityException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidTokenException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates the specified Availability Zones with a transit gateway-attached firewall. For each Availability Zone, Network Firewall creates a firewall endpoint to process traffic. You can specify one or more Availability Zones where you want to deploy the firewall.</p>\n         <p>After adding Availability Zones, you must update your transit gateway route tables to direct traffic through the new firewall endpoints. Use <a>DescribeFirewall</a> to monitor the status of the new endpoints.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#AssociateAvailabilityZonesRequest": {
+            "type": "structure",
+            "members": {
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>\n         <p>To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it.</p>\n         <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>"
+                    }
+                },
+                "FirewallArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the firewall.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "FirewallName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "AvailabilityZoneMappings": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The Availability Zones where you want to create firewall endpoints. You must specify at least one Availability Zone.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#AssociateAvailabilityZonesResponse": {
+            "type": "structure",
+            "members": {
+                "FirewallArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the firewall.</p>"
+                    }
+                },
+                "FirewallName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>"
+                    }
+                },
+                "AvailabilityZoneMappings": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zones where Network Firewall created firewall endpoints. Each mapping specifies an Availability Zone where the firewall processes traffic.</p>"
+                    }
+                },
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>\n         <p>To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it.</p>\n         <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.networkfirewall#AssociateFirewallPolicy": {
@@ -467,13 +640,16 @@
                 "StatusMessage": {
                     "target": "com.amazonaws.networkfirewall#StatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>If Network Firewall fails to create or delete the firewall endpoint in the subnet, it populates this with the reason for the error or failure and how to resolve it. A <code>FAILED</code> status indicates a non-recoverable state, and a <code>ERROR</code> status indicates an issue that you can fix. Depending on the error, it can take as many as 15 minutes to populate this field. For more information about the causes for failiure or errors and solutions available for this field, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html\">Troubleshooting firewall endpoint failures</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>If Network Firewall fails to create or delete the firewall endpoint in the subnet, it populates this with the reason for the error or failure and how to resolve it. \n         A <code>FAILED</code> status indicates a non-recoverable state, and a <code>ERROR</code> status indicates an issue that you can fix. \n         Depending on the error, it can take as many as 15 minutes to populate this field. For more information about the causes for failiure or errors and solutions available for this field, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html\">Troubleshooting firewall endpoint failures</a> in the <i>Network Firewall Developer Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The definition and status of the firewall endpoint for a single subnet. In each configured subnet, Network Firewall instantiates a firewall\n         endpoint to handle network traffic. </p>\n         <p>This data type is used for any firewall endpoint type: </p>\n         <ul>\n            <li>\n               <p>For <code>Firewall.SubnetMappings</code>, this <code>Attachment</code> is part of the <code>FirewallStatus</code> sync states information. You define firewall subnets using <code>CreateFirewall</code> and <code>AssociateSubnets</code>. </p>\n            </li>\n            <li>\n               <p>For <code>VpcEndpointAssociation</code>, this <code>Attachment</code> is part of the <code>VpcEndpointAssociationStatus</code> sync states information. You define these subnets using <code>CreateVpcEndpointAssociation</code>. </p>\n            </li>\n         </ul>"
             }
+        },
+        "com.amazonaws.networkfirewall#AttachmentId": {
+            "type": "string"
         },
         "com.amazonaws.networkfirewall#AttachmentStatus": {
             "type": "enum",
@@ -518,6 +694,37 @@
         },
         "com.amazonaws.networkfirewall#AvailabilityZone": {
             "type": "string"
+        },
+        "com.amazonaws.networkfirewall#AvailabilityZoneMapping": {
+            "type": "structure",
+            "members": {
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneMappingString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall endpoint is located. For example, <code>us-east-2a</code>. The Availability Zone must be in the same Region as the transit gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the mapping between an Availability Zone and a firewall endpoint for a transit gateway-attached firewall. Each mapping represents where the firewall can process traffic. You use these mappings when calling <a>CreateFirewall</a>, <a>AssociateAvailabilityZones</a>, and <a>DisassociateAvailabilityZones</a>.</p>\n         <p>To retrieve the current Availability Zone mappings for a firewall, use <a>DescribeFirewall</a>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#AvailabilityZoneMappingString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^\\S+$"
+            }
+        },
+        "com.amazonaws.networkfirewall#AvailabilityZoneMappings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#AvailabilityZoneMapping"
+            }
         },
         "com.amazonaws.networkfirewall#AvailabilityZoneMetadata": {
             "type": "structure",
@@ -870,6 +1077,25 @@
                     "target": "com.amazonaws.networkfirewall#EnabledAnalysisTypes",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional setting indicating the specific traffic analysis types to enable on the firewall. </p>"
+                    }
+                },
+                "TransitGatewayId": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required when creating a transit gateway-attached firewall. The unique identifier of the transit gateway to attach to this firewall. You can provide either a transit gateway from your account or one that has been shared with you through Resource Access Manager.</p>\n         <important>\n            <p>After creating the firewall, you cannot change the transit gateway association. To use a different transit gateway, you must create a new firewall.</p>\n         </important>\n         <p>For information about creating firewalls, see <a>CreateFirewall</a>. For specific guidance about transit gateway-attached firewalls, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tgw-firewall-considerations.html\">Considerations for transit gateway-attached firewalls</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                    }
+                },
+                "AvailabilityZoneMappings": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The Availability Zones where you want to create firewall endpoints for a transit gateway-attached firewall. You must specify at least one Availability Zone. Consider enabling the firewall in every Availability Zone where you have workloads to maintain Availability Zone independence.</p>\n         <p>You can modify Availability Zones later using <a>AssociateAvailabilityZones</a> or <a>DisassociateAvailabilityZones</a>, but this may briefly disrupt traffic. The <code>AvailabilityZoneChangeProtection</code> setting controls whether you can make these modifications.</p>"
+                    }
+                },
+                "AvailabilityZoneChangeProtection": {
+                    "target": "com.amazonaws.networkfirewall#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Optional. A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to <code>TRUE</code>, you cannot add or remove Availability Zones without first disabling this protection using <a>UpdateAvailabilityZoneChangeProtection</a>.</p>\n         <p>Default value: <code>FALSE</code>\n         </p>"
                     }
                 }
             },
@@ -1371,6 +1597,69 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.networkfirewall#DeleteNetworkFirewallTransitGatewayAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#DeleteNetworkFirewallTransitGatewayAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#DeleteNetworkFirewallTransitGatewayAttachmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a transit gateway attachment from a Network Firewall. Either the firewall owner or the transit gateway owner can delete the attachment.</p>\n         <important>\n            <p>After you delete a transit gateway attachment, traffic will no longer flow through the firewall endpoints.</p>\n         </important>\n         <p>After you initiate the delete operation, use <a>DescribeFirewall</a> to monitor the deletion status.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#DeleteNetworkFirewallTransitGatewayAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The unique identifier of the transit gateway attachment to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#DeleteNetworkFirewallTransitGatewayAttachmentResponse": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment that was deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransitGatewayAttachmentStatus": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the transit gateway attachment deletion process.</p>\n         <p>Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The attachment is being created</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The attachment is being deleted</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - The attachment has been deleted</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The attachment creation has failed and cannot be recovered</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - The attachment is in an error state that might be recoverable</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> - The attachment is active and processing traffic</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING_ACCEPTANCE</code> - The attachment is waiting to be accepted</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECTING</code> - The attachment is in the process of being rejected</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECTED</code> - The attachment has been rejected</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.networkfirewall#DeleteResourcePolicy": {
             "type": "operation",
             "input": {
@@ -1720,6 +2009,12 @@
                     "target": "com.amazonaws.networkfirewall#SupportedAvailabilityZones",
                     "traits": {
                         "smithy.api#documentation": "<p>The Availability Zones that the firewall currently supports. This includes all Availability Zones for which \n       the firewall has a subnet defined. </p>"
+                    }
+                },
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the transit gateway attachment associated with this firewall. This field is only present for transit gateway-attached firewalls.</p>"
                     }
                 }
             },
@@ -2224,7 +2519,7 @@
                 "LastModifiedTime": {
                     "target": "com.amazonaws.networkfirewall#LastUpdateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time that the rule group was changed.</p>"
+                        "smithy.api#documentation": "<p>A timestamp indicating when the rule group was last modified.</p>"
                     }
                 }
             },
@@ -2483,6 +2778,103 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.networkfirewall#DisassociateAvailabilityZones": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#DisassociateAvailabilityZonesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#DisassociateAvailabilityZonesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidTokenException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified Availability Zone associations from a transit gateway-attached firewall. This removes the firewall endpoints from these Availability Zones and stops traffic filtering in those zones. Before removing an Availability Zone, ensure you've updated your transit gateway route tables to redirect traffic appropriately.</p>\n         <note>\n            <p>If <code>AvailabilityZoneChangeProtection</code> is enabled, you must first disable it using <a>UpdateAvailabilityZoneChangeProtection</a>.</p>\n         </note>\n         <p>To verify the status of your Availability Zone changes, use <a>DescribeFirewall</a>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#DisassociateAvailabilityZonesRequest": {
+            "type": "structure",
+            "members": {
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>\n         <p>To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it.</p>\n         <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>"
+                    }
+                },
+                "FirewallArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the firewall.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "FirewallName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "AvailabilityZoneMappings": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The Availability Zones to remove from the firewall's configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#DisassociateAvailabilityZonesResponse": {
+            "type": "structure",
+            "members": {
+                "FirewallArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the firewall.</p>"
+                    }
+                },
+                "FirewallName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>"
+                    }
+                },
+                "AvailabilityZoneMappings": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The remaining Availability Zones where the firewall has endpoints after the disassociation.</p>"
+                    }
+                },
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>\n         <p>To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it.</p>\n         <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.networkfirewall#DisassociateSubnets": {
@@ -2751,6 +3143,31 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An optional setting indicating the specific traffic analysis types to enable on the firewall. </p>"
                     }
+                },
+                "TransitGatewayId": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the transit gateway associated with this firewall. This field is only present for transit gateway-attached firewalls.</p>"
+                    }
+                },
+                "TransitGatewayOwnerAccountId": {
+                    "target": "com.amazonaws.networkfirewall#AWSAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the transit gateway. This may be different from the firewall owner's account ID when using a shared transit gateway.</p>"
+                    }
+                },
+                "AvailabilityZoneMappings": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zones where the firewall endpoints are created for a transit gateway-attached firewall. Each mapping specifies an Availability Zone where the firewall processes traffic.</p>"
+                    }
+                },
+                "AvailabilityZoneChangeProtection": {
+                    "target": "com.amazonaws.networkfirewall#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to <code>TRUE</code>, you must first disable this protection before adding or removing Availability Zones.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2770,6 +3187,12 @@
                     "target": "com.amazonaws.networkfirewall#ResourceArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the firewall.</p>"
+                    }
+                },
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the transit gateway attachment associated with this firewall. This field is only present for transit gateway-attached firewalls.</p>"
                     }
                 }
             },
@@ -2971,6 +3394,12 @@
                     "target": "com.amazonaws.networkfirewall#CapacityUsageSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the capacity usage of the resources contained in a firewall's reference sets. Network Firewall calculates the capacity usage by taking an aggregated count of all of the resources used by all of the reference sets in a firewall.</p>"
+                    }
+                },
+                "TransitGatewayAttachmentSyncState": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentSyncState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The synchronization state of the transit gateway attachment. This indicates whether the firewall's transit gateway configuration is properly synchronized and operational. Use this to verify that your transit gateway configuration changes have been applied.</p>"
                     }
                 }
             },
@@ -4664,6 +5093,12 @@
             "version": "2020-11-12",
             "operations": [
                 {
+                    "target": "com.amazonaws.networkfirewall#AcceptNetworkFirewallTransitGatewayAttachment"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#AssociateAvailabilityZones"
+                },
+                {
                     "target": "com.amazonaws.networkfirewall#AssociateFirewallPolicy"
                 },
                 {
@@ -4689,6 +5124,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#DeleteFirewallPolicy"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#DeleteNetworkFirewallTransitGatewayAttachment"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#DeleteResourcePolicy"
@@ -4733,6 +5171,9 @@
                     "target": "com.amazonaws.networkfirewall#DescribeVpcEndpointAssociation"
                 },
                 {
+                    "target": "com.amazonaws.networkfirewall#DisassociateAvailabilityZones"
+                },
+                {
                     "target": "com.amazonaws.networkfirewall#DisassociateSubnets"
                 },
                 {
@@ -4769,6 +5210,9 @@
                     "target": "com.amazonaws.networkfirewall#PutResourcePolicy"
                 },
                 {
+                    "target": "com.amazonaws.networkfirewall#RejectNetworkFirewallTransitGatewayAttachment"
+                },
+                {
                     "target": "com.amazonaws.networkfirewall#StartAnalysisReport"
                 },
                 {
@@ -4782,6 +5226,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#UpdateAvailabilityZoneChangeProtection"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#UpdateFirewallAnalysisSettings"
@@ -6100,6 +6547,69 @@
                 "smithy.api#documentation": "<p>Contains a set of IP set references.</p>"
             }
         },
+        "com.amazonaws.networkfirewall#RejectNetworkFirewallTransitGatewayAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#RejectNetworkFirewallTransitGatewayAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#RejectNetworkFirewallTransitGatewayAttachmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Rejects a transit gateway attachment request for Network Firewall. When you reject the attachment request, Network Firewall cancels the creation of routing components between the transit gateway and firewall endpoints.</p>\n         <p>Only the transit gateway owner can reject the attachment. After rejection, no traffic will flow through the firewall endpoints for this attachment.</p>\n         <p>Use <a>DescribeFirewall</a> to monitor the rejection status. To accept the attachment instead of rejecting it, use <a>AcceptNetworkFirewallTransitGatewayAttachment</a>.</p>\n         <note>\n            <p>Once rejected, you cannot reverse this action. To establish connectivity, you must create a new transit gateway-attached firewall.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.networkfirewall#RejectNetworkFirewallTransitGatewayAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The unique identifier of the transit gateway attachment to reject. This ID is returned in the response when creating a transit gateway-attached firewall.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#RejectNetworkFirewallTransitGatewayAttachmentResponse": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the transit gateway attachment that was rejected.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransitGatewayAttachmentStatus": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the transit gateway attachment. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The attachment is being created</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The attachment is being deleted</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - The attachment has been deleted</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The attachment creation has failed and cannot be recovered</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - The attachment is in an error state that might be recoverable</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> - The attachment is active and processing traffic</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING_ACCEPTANCE</code> - The attachment is waiting to be accepted</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECTING</code> - The attachment is in the process of being rejected</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECTED</code> - The attachment has been rejected</p>\n            </li>\n         </ul>\n         <p>For information about troubleshooting endpoint failures, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html\">Troubleshooting firewall endpoint failures</a> in the <i>Network Firewall Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.networkfirewall#ReportTime": {
             "type": "timestamp"
         },
@@ -6396,7 +6906,7 @@
                 "SnsTopic": {
                     "target": "com.amazonaws.networkfirewall#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS topic that's\nused to record changes to the managed rule group. You can subscribe to the SNS topic to receive\nnotifications when the managed rule group is modified, such as for new versions and for version\nexpiration. For more information, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/welcome.html\">Amazon Simple Notification Service Developer Guide.</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service SNS topic that's\nused to record changes to the managed rule group. You can subscribe to the SNS topic to receive\nnotifications when the managed rule group is modified, such as for new versions and for version\nexpiration. For more information, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/welcome.html\">Amazon Simple Notification Service Developer Guide.</a>.</p>"
                     }
                 },
                 "LastModifiedTime": {
@@ -6522,7 +7032,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings that are available for use in the rules in the <a>RuleGroup</a>\n         where this is defined. </p>"
+                "smithy.api#documentation": "<p>Settings that are available for use in the rules in the <a>RuleGroup</a>\n         where this is defined. See <a>CreateRuleGroup</a> or <a>UpdateRuleGroup</a> for usage.</p>"
             }
         },
         "com.amazonaws.networkfirewall#RulesSource": {
@@ -6627,7 +7137,7 @@
                 "CertificateAuthorityArn": {
                     "target": "com.amazonaws.networkfirewall#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the imported certificate authority (CA) certificate within Certificate Manager (ACM) to use for outbound SSL/TLS inspection.</p>\n         <p>The following limitations apply:</p>\n         <ul>\n            <li>\n               <p>You can use CA certificates that you imported into ACM, but you can't generate CA certificates with ACM.</p>\n            </li>\n            <li>\n               <p>You can't use certificates issued by Private Certificate Authority.</p>\n            </li>\n         </ul>\n         <p>For more information about configuring certificates for outbound inspection, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html\">Using SSL/TLS certificates with certificates with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>. </p>\n         <p>For information about working with certificates in ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates</a> in the <i>Certificate Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the imported certificate authority (CA) certificate within Certificate Manager (ACM) to use for outbound SSL/TLS inspection.</p>\n         <p>The following limitations apply:</p>\n         <ul>\n            <li>\n               <p>You can use CA certificates that you imported into ACM, but you can't generate CA certificates with ACM.</p>\n            </li>\n            <li>\n               <p>You can't use certificates issued by Private Certificate Authority.</p>\n            </li>\n         </ul>\n         <p>For more information about configuring certificates for outbound inspection, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html\">Using SSL/TLS certificates with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>. </p>\n         <p>For information about working with certificates in ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates</a> in the <i>Certificate Manager User Guide</i>.</p>"
                     }
                 },
                 "CheckCertificateRevocationStatus": {
@@ -7051,7 +7561,7 @@
                 "RuleOrder": {
                     "target": "com.amazonaws.networkfirewall#RuleOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how to manage the order of stateful rule evaluation for the policy. <code>STRICT_ORDER</code> is\n         the default and recommended option. With <code>STRICT_ORDER</code>, provide your rules in the order that you want them to be evaluated. You can then choose one or more default actions for packets that don't match any rules. Choose <code>STRICT_ORDER</code> to have the stateful rules engine determine the evaluation order of your rules. The default action for this rule order is <code>PASS</code>, followed by <code>DROP</code>, <code>REJECT</code>, and <code>ALERT</code> actions. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them\n         based on your settings. For more information, see\n         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html\">Evaluation order for stateful rules</a> in the <i>Network Firewall Developer Guide</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>Indicates how to manage the order of stateful rule evaluation for the policy. <code>STRICT_ORDER</code> is the\n         recommended option, but <code>DEFAULT_ACTION_ORDER</code> is the default option. \n         With <code>STRICT_ORDER</code>, provide your rules in the order that you want them to be evaluated. \n         You can then choose one or more default actions for packets that don't match any rules. \n         Choose <code>STRICT_ORDER</code> to have the stateful rules engine determine the evaluation order of your rules. \n         The default action for this rule order is \n         <code>PASS</code>, followed by <code>DROP</code>, <code>REJECT</code>, and <code>ALERT</code> actions. \n         Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on your settings. \n         For more information, see\n         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html\">Evaluation order for stateful rules</a> in the <i>Network Firewall Developer Guide</i>.\n      </p>"
                     }
                 },
                 "StreamExceptionPolicy": {
@@ -7293,6 +7803,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DHCP"
+                    }
+                },
+                "HTTP2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2"
+                    }
+                },
+                "QUIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUIC"
                     }
                 }
             }
@@ -7893,6 +8415,114 @@
                 "smithy.api#documentation": "<p>Contains metadata about an Certificate Manager certificate.</p>"
             }
         },
+        "com.amazonaws.networkfirewall#TransitGatewayAttachmentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^tgw-attach-[0-9a-z]+$"
+            }
+        },
+        "com.amazonaws.networkfirewall#TransitGatewayAttachmentStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "PENDING_ACCEPTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_ACCEPTANCE"
+                    }
+                },
+                "REJECTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTING"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#TransitGatewayAttachmentSyncState": {
+            "type": "structure",
+            "members": {
+                "AttachmentId": {
+                    "target": "com.amazonaws.networkfirewall#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the transit gateway attachment.</p>"
+                    }
+                },
+                "TransitGatewayAttachmentStatus": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the transit gateway attachment.</p>\n         <p>Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The attachment is being created</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The attachment is being deleted</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - The attachment has been deleted</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The attachment creation has failed and cannot be recovered</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - The attachment is in an error state that might be recoverable</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> - The attachment is active and processing traffic</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING_ACCEPTANCE</code> - The attachment is waiting to be accepted</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECTING</code> - The attachment is in the process of being rejected</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECTED</code> - The attachment has been rejected</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.networkfirewall#TransitGatewayAttachmentSyncStateMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message providing additional information about the current status, particularly useful when the transit gateway attachment is in a non-<code>READY</code> state.</p>\n         <p>Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The attachment is being created</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The attachment is being deleted</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - The attachment has been deleted</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The attachment creation has failed and cannot be recovered</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - The attachment is in an error state that might be recoverable</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> - The attachment is active and processing traffic</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING_ACCEPTANCE</code> - The attachment is waiting to be accepted</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECTING</code> - The attachment is in the process of being rejected</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECTED</code> - The attachment has been rejected</p>\n            </li>\n         </ul>\n         <p>For information about troubleshooting endpoint failures, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html\">Troubleshooting firewall endpoint failures</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the synchronization state of a transit gateway attachment, including its current status and any error messages. Network Firewall uses this to track the state of your transit gateway configuration changes.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#TransitGatewayAttachmentSyncStateMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.networkfirewall#TransitGatewayId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^tgw-[0-9a-z]+$"
+            }
+        },
         "com.amazonaws.networkfirewall#UniqueSources": {
             "type": "structure",
             "members": {
@@ -7971,6 +8601,105 @@
         "com.amazonaws.networkfirewall#UntagResourceResponse": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#UpdateAvailabilityZoneChangeProtection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#UpdateAvailabilityZoneChangeProtectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#UpdateAvailabilityZoneChangeProtectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidTokenException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceOwnerCheckException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the <code>AvailabilityZoneChangeProtection</code> setting for a transit gateway-attached firewall. When enabled, this setting prevents accidental changes to the firewall's Availability Zone configuration. This helps protect against disrupting traffic flow in production environments.</p>\n         <p>When enabled, you must disable this protection before using <a>AssociateAvailabilityZones</a> or <a>DisassociateAvailabilityZones</a> to modify the firewall's Availability Zone configuration.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#UpdateAvailabilityZoneChangeProtectionRequest": {
+            "type": "structure",
+            "members": {
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>\n         <p>To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it.</p>\n         <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>"
+                    }
+                },
+                "FirewallArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the firewall.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "FirewallName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "AvailabilityZoneChangeProtection": {
+                    "target": "com.amazonaws.networkfirewall#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to the subnet associations.\n         Use this setting to protect against\n         accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#UpdateAvailabilityZoneChangeProtectionResponse": {
+            "type": "structure",
+            "members": {
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>\n         <p>To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it.</p>\n         <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>"
+                    }
+                },
+                "FirewallArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the firewall.</p>"
+                    }
+                },
+                "FirewallName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>"
+                    }
+                },
+                "AvailabilityZoneChangeProtection": {
+                    "target": "com.amazonaws.networkfirewall#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to the subnet associations.\n         Use this setting to protect against\n         accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
