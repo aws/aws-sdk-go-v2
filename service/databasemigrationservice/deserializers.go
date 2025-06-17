@@ -16014,6 +16014,15 @@ func awsAwsjson11_deserializeDocumentDataProvider(v **types.DataProvider, value 
 				return err
 			}
 
+		case "Virtual":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.Virtual = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -18410,6 +18419,24 @@ func awsAwsjson11_deserializeDocumentIbmDb2LuwDataProviderSettings(v **types.Ibm
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case "S3AccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3AccessRoleArn = ptr.String(jtv)
+			}
+
+		case "S3Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3Path = ptr.String(jtv)
+			}
+
 		case "ServerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18665,6 +18692,24 @@ func awsAwsjson11_deserializeDocumentIbmDb2zOsDataProviderSettings(v **types.Ibm
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "S3AccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3AccessRoleArn = ptr.String(jtv)
+			}
+
+		case "S3Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3Path = ptr.String(jtv)
 			}
 
 		case "ServerName":
@@ -20037,6 +20082,24 @@ func awsAwsjson11_deserializeDocumentMariaDbDataProviderSettings(v **types.Maria
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case "S3AccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3AccessRoleArn = ptr.String(jtv)
+			}
+
+		case "S3Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3Path = ptr.String(jtv)
+			}
+
 		case "ServerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20115,6 +20178,24 @@ func awsAwsjson11_deserializeDocumentMicrosoftSqlServerDataProviderSettings(v **
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "S3AccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3AccessRoleArn = ptr.String(jtv)
+			}
+
+		case "S3Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3Path = ptr.String(jtv)
 			}
 
 		case "ServerName":
@@ -20822,6 +20903,24 @@ func awsAwsjson11_deserializeDocumentMySqlDataProviderSettings(v **types.MySqlDa
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case "S3AccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3AccessRoleArn = ptr.String(jtv)
+			}
+
+		case "S3Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3Path = ptr.String(jtv)
+			}
+
 		case "ServerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21219,6 +21318,24 @@ func awsAwsjson11_deserializeDocumentOracleDataProviderSettings(v **types.Oracle
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "S3AccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3AccessRoleArn = ptr.String(jtv)
+			}
+
+		case "S3Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3Path = ptr.String(jtv)
 			}
 
 		case "SecretsManagerOracleAsmAccessRoleArn":
@@ -22126,6 +22243,24 @@ func awsAwsjson11_deserializeDocumentPostgreSqlDataProviderSettings(v **types.Po
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "S3AccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3AccessRoleArn = ptr.String(jtv)
+			}
+
+		case "S3Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3Path = ptr.String(jtv)
 			}
 
 		case "ServerName":
@@ -23455,6 +23590,24 @@ func awsAwsjson11_deserializeDocumentRedshiftDataProviderSettings(v **types.Reds
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "S3AccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3AccessRoleArn = ptr.String(jtv)
+			}
+
+		case "S3Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.S3Path = ptr.String(jtv)
 			}
 
 		case "ServerName":

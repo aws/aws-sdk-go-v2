@@ -20,8 +20,7 @@ import (
 // of policy types for a specified root, and then use this operation.
 //
 // This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator for an Amazon Web Services
-// service.
+// by a member account that is a delegated administrator.
 //
 // You can enable a policy type in a root only if that policy type is available in
 // the organization. To view the status of available policy types in the
@@ -60,7 +59,10 @@ type EnablePolicyTypeInput struct {
 	//
 	// [AISERVICES_OPT_OUT_POLICY]
 	//
+	// [SECURITYHUB_POLICY]
+	//
 	// [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+	// [SECURITYHUB_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
 	// [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
 	// [SERVICE_CONTROL_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
 	// [CHATBOT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html

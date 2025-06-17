@@ -174,6 +174,9 @@ func (c *Client) addOperationStartCopyJobMiddlewares(stack *middleware.Stack, op
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opStartCopyJobMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartCopyJobValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -208,6 +211,39 @@ func (c *Client) addOperationStartCopyJobMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpStartCopyJob struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpStartCopyJob) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpStartCopyJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*StartCopyJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *StartCopyJobInput ")
+	}
+
+	if input.IdempotencyToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.IdempotencyToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opStartCopyJobMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpStartCopyJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opStartCopyJob(region string) *awsmiddleware.RegisterServiceMetadata {

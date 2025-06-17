@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a certificate. Currently, you can use this function to specify whether
-// to opt in to or out of recording your certificate in a certificate transparency
-// log. For more information, see [Opting Out of Certificate Transparency Logging].
+// Updates a certificate. You can use this function to specify whether to opt in
+// to or out of recording your certificate in a certificate transparency log and
+// exporting. For more information, see [Opting Out of Certificate Transparency Logging]and [Certificate Manager Exportable Managed Certificates].
 //
 // [Opting Out of Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+// [Certificate Manager Exportable Managed Certificates]: https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html
 func (c *Client) UpdateCertificateOptions(ctx context.Context, params *UpdateCertificateOptionsInput, optFns ...func(*Options)) (*UpdateCertificateOptionsOutput, error) {
 	if params == nil {
 		params = &UpdateCertificateOptionsInput{}
@@ -41,10 +42,10 @@ type UpdateCertificateOptionsInput struct {
 	CertificateArn *string
 
 	// Use to update the options for your certificate. Currently, you can specify
-	// whether to add your certificate to a transparency log. Certificate transparency
-	// makes it possible to detect SSL/TLS certificates that have been mistakenly or
-	// maliciously issued. Certificates that have not been logged typically produce an
-	// error message in a browser.
+	// whether to add your certificate to a transparency log or export your
+	// certificate. Certificate transparency makes it possible to detect SSL/TLS
+	// certificates that have been mistakenly or maliciously issued. Certificates that
+	// have not been logged typically produce an error message in a browser.
 	//
 	// This member is required.
 	Options *types.CertificateOptions

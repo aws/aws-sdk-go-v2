@@ -1480,6 +1480,67 @@ func (m *awsAwsjson10_serializeOpDescribeRuleGroupMetadata) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpDescribeRuleGroupSummary struct {
+}
+
+func (*awsAwsjson10_serializeOpDescribeRuleGroupSummary) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDescribeRuleGroupSummary) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeRuleGroupSummaryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.DescribeRuleGroupSummary")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeRuleGroupSummaryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDescribeTLSInspectionConfiguration struct {
 }
 
@@ -4484,6 +4545,11 @@ func awsAwsjson10_serializeDocumentStatefulRuleGroupReference(v *types.StatefulR
 	object := value.Object()
 	defer object.Close()
 
+	if v.DeepThreatInspection != nil {
+		ok := object.Key("DeepThreatInspection")
+		ok.Boolean(*v.DeepThreatInspection)
+	}
+
 	if v.Override != nil {
 		ok := object.Key("Override")
 		if err := awsAwsjson10_serializeDocumentStatefulRuleGroupOverride(v.Override, ok); err != nil {
@@ -4662,6 +4728,31 @@ func awsAwsjson10_serializeDocumentSubnetMappings(v []types.SubnetMapping, value
 		if err := awsAwsjson10_serializeDocumentSubnetMapping(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentSummaryConfiguration(v *types.SummaryConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RuleOptions != nil {
+		ok := object.Key("RuleOptions")
+		if err := awsAwsjson10_serializeDocumentSummaryRuleOptions(v.RuleOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentSummaryRuleOptions(v []types.SummaryRuleOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -5070,6 +5161,13 @@ func awsAwsjson10_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 		}
 	}
 
+	if v.SummaryConfiguration != nil {
+		ok := object.Key("SummaryConfiguration")
+		if err := awsAwsjson10_serializeDocumentSummaryConfiguration(v.SummaryConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -5403,6 +5501,28 @@ func awsAwsjson10_serializeOpDocumentDescribeRuleGroupInput(v *DescribeRuleGroup
 }
 
 func awsAwsjson10_serializeOpDocumentDescribeRuleGroupMetadataInput(v *DescribeRuleGroupMetadataInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RuleGroupArn != nil {
+		ok := object.Key("RuleGroupArn")
+		ok.String(*v.RuleGroupArn)
+	}
+
+	if v.RuleGroupName != nil {
+		ok := object.Key("RuleGroupName")
+		ok.String(*v.RuleGroupName)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDescribeRuleGroupSummaryInput(v *DescribeRuleGroupSummaryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6247,6 +6367,13 @@ func awsAwsjson10_serializeOpDocumentUpdateRuleGroupInput(v *UpdateRuleGroupInpu
 	if v.SourceMetadata != nil {
 		ok := object.Key("SourceMetadata")
 		if err := awsAwsjson10_serializeDocumentSourceMetadata(v.SourceMetadata, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SummaryConfiguration != nil {
+		ok := object.Key("SummaryConfiguration")
+		if err := awsAwsjson10_serializeDocumentSummaryConfiguration(v.SummaryConfiguration, ok); err != nil {
 			return err
 		}
 	}

@@ -42,20 +42,28 @@ type StartReplicationTaskInput struct {
 
 	// The type of replication task to start.
 	//
-	// When the migration type is full-load or full-load-and-cdc , the only valid value
-	// for the first run of the task is start-replication . This option will start the
-	// migration.
+	// start-replication is the only valid action that can be used for the first time
+	// a task with the migration type of full-load full-load, full-load-and-cdc or cdc
+	// is run. Any other action used for the first time on a given task, such as
+	// resume-processing and reload-target will result in data errors.
 	//
 	// You can also use ReloadTables to reload specific tables that failed during migration
 	// instead of restarting the task.
 	//
-	// The resume-processing option isn't applicable for a full-load task, because you
-	// can't resume partially loaded tables during the full load phase.
+	// For a full-load task, the resume-processing option will reload any tables that
+	// were partially loaded or not yet loaded during the full load phase.
 	//
 	// For a full-load-and-cdc task, DMS migrates table data, and then applies data
 	// changes that occur on the source. To load all the tables again, and start
 	// capturing source changes, use reload-target . Otherwise use resume-processing ,
 	// to replicate the changes from the last stop position.
+	//
+	// For a cdc only task, to start from a specific position, you must use
+	// start-replication and also specify the start position. Check the source endpoint
+	// DMS documentation for any limitations. For example, not all sources support
+	// starting from a time.
+	//
+	// resume-processing is only available for previously executed tasks.
 	//
 	// This member is required.
 	StartReplicationTaskType types.StartReplicationTaskTypeValue

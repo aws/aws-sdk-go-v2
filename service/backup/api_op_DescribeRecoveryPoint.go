@@ -115,6 +115,10 @@ type DescribeRecoveryPointOutput struct {
 	// index associated with the recovery point.
 	IndexStatusMessage *string
 
+	// The date and time when the backup job that created this recovery point was
+	// initiated, in Unix format and Coordinated Universal Time (UTC).
+	InitiationDate *time.Time
+
 	// A Boolean value that is returned as TRUE if the specified recovery point is
 	// encrypted, or FALSE if the recovery point is not encrypted.
 	IsEncrypted bool

@@ -52,6 +52,9 @@ type CreateDataProviderInput struct {
 	// One or more tags to be assigned to the data provider.
 	Tags []types.Tag
 
+	// Indicates whether the data provider is virtual.
+	Virtual *bool
+
 	noSmithyDocumentSerde
 }
 

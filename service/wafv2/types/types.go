@@ -134,6 +134,28 @@ type APIKeySummary struct {
 	noSmithyDocumentSerde
 }
 
+// Application details defined during the web ACL creation process. Application
+// attributes help WAF give recommendations for protection packs.
+type ApplicationAttribute struct {
+
+	// Specifies the attribute name.
+	Name *string
+
+	// Specifies the attribute value.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// A list of ApplicationAttribute s that contains information about the application.
+type ApplicationConfig struct {
+
+	// Contains the attribute name and a list of values for that attribute.
+	Attributes []ApplicationAttribute
+
+	noSmithyDocumentSerde
+}
+
 // A rule statement that inspects web traffic based on the Autonomous System
 // Number (ASN) associated with the request's IP address.
 //
@@ -5236,6 +5258,9 @@ type WebACL struct {
 	//
 	// This member is required.
 	VisibilityConfig *VisibilityConfig
+
+	// Returns a list of ApplicationAttribute s.
+	ApplicationConfig *ApplicationConfig
 
 	// Specifies custom configurations for the associations between the web ACL and
 	// protected resources.

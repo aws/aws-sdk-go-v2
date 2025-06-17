@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +35,10 @@ type DisableOrganizationAdminAccountInput struct {
 	//
 	// This member is required.
 	AdminAccountId *string
+
+	// The feature for which the delegated admin account is disabled. Defaults to
+	// Security Hub if not specified.
+	Feature types.SecurityHubFeature
 
 	noSmithyDocumentSerde
 }

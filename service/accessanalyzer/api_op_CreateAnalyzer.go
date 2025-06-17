@@ -35,10 +35,8 @@ type CreateAnalyzerInput struct {
 	// This member is required.
 	AnalyzerName *string
 
-	// The type of analyzer to create. Only ACCOUNT , ORGANIZATION ,
-	// ACCOUNT_UNUSED_ACCESS , and ORGANIZATION_UNUSED_ACCESS analyzers are supported.
-	// You can create only one analyzer per account per Region. You can create up to 5
-	// analyzers per organization per Region.
+	// The type of analyzer to create. You can create only one analyzer per account
+	// per Region. You can create up to 5 analyzers per organization per Region.
 	//
 	// This member is required.
 	Type types.Type
@@ -52,7 +50,8 @@ type CreateAnalyzerInput struct {
 
 	// Specifies the configuration of the analyzer. If the analyzer is an unused
 	// access analyzer, the specified scope of unused access is used for the
-	// configuration.
+	// configuration. If the analyzer is an internal access analyzer, the specified
+	// internal access analysis rules are used for the configuration.
 	Configuration types.AnalyzerConfiguration
 
 	// An array of key-value pairs to apply to the analyzer. You can use the set of

@@ -20,8 +20,7 @@ import (
 // parameter value is null only when there are no more results to display.
 //
 // This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator for an Amazon Web Services
-// service.
+// by a member account that is a delegated administrator.
 func (c *Client) ListCreateAccountStatus(ctx context.Context, params *ListCreateAccountStatusInput, optFns ...func(*Options)) (*ListCreateAccountStatusOutput, error) {
 	if params == nil {
 		params = &ListCreateAccountStatusInput{}

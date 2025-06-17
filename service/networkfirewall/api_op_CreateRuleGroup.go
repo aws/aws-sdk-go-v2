@@ -140,6 +140,17 @@ type CreateRuleGroupInput struct {
 	// the originating rule group.
 	SourceMetadata *types.SourceMetadata
 
+	// An object that contains a RuleOptions array of strings. You use RuleOptions to
+	// determine which of the following RuleSummaryvalues are returned in response to
+	// DescribeRuleGroupSummary .
+	//
+	//   - Metadata - returns
+	//
+	//   - Msg
+	//
+	//   - SID
+	SummaryConfiguration *types.SummaryConfiguration
+
 	// The key:value pairs to associate with the resource.
 	Tags []types.Tag
 

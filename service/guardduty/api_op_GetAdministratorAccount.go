@@ -14,8 +14,18 @@ import (
 // Provides the details of the GuardDuty administrator account associated with the
 // current GuardDuty member account.
 //
-// If the organization's management account or a delegated administrator runs this
-// API, it will return success ( HTTP 200 ) but no content.
+// Based on the type of account that runs this API, the following list shows how
+// the API behavior varies:
+//
+//   - When the GuardDuty administrator account runs this API, it will return
+//     success ( HTTP 200 ) but no content.
+//
+//   - When a member account runs this API, it will return the details of the
+//     GuardDuty administrator account that is associated with this calling member
+//     account.
+//
+//   - When an individual account (not associated with an organization) runs this
+//     API, it will return success ( HTTP 200 ) but no content.
 func (c *Client) GetAdministratorAccount(ctx context.Context, params *GetAdministratorAccountInput, optFns ...func(*Options)) (*GetAdministratorAccountOutput, error) {
 	if params == nil {
 		params = &GetAdministratorAccountInput{}

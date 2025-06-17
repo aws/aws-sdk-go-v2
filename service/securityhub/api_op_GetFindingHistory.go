@@ -12,10 +12,19 @@ import (
 	"time"
 )
 
-//	Returns history for a Security Hub finding in the last 90 days. The history
+//	Returns the history of a Security Hub finding for the past 90 days. The
 //
-// includes changes made to any fields in the Amazon Web Services Security Finding
-// Format (ASFF).
+// history includes changes made to any fields in the Amazon Web Services Security
+// Finding Format (ASFF) except top-level timestamp fields, such as the CreatedAt
+// and UpdatedAt fields.
+//
+// This operation might return fewer results than the maximum number of results (
+// MaxResults ) specified in a request, even when more results are available. If
+// this occurs, the response includes a NextToken value, which you should use to
+// retrieve the next set of results in the response. The presence of a NextToken
+// value in a response doesn't necessarily indicate that the results are
+// incomplete. However, you should continue to specify a NextToken value until you
+// receive a response that doesn't include this value.
 func (c *Client) GetFindingHistory(ctx context.Context, params *GetFindingHistoryInput, optFns ...func(*Options)) (*GetFindingHistoryOutput, error) {
 	if params == nil {
 		params = &GetFindingHistoryInput{}

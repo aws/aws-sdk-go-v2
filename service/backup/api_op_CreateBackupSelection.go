@@ -141,6 +141,9 @@ func (c *Client) addOperationCreateBackupSelectionMiddlewares(stack *middleware.
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateBackupSelectionMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateBackupSelectionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -175,6 +178,39 @@ func (c *Client) addOperationCreateBackupSelectionMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateBackupSelection struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateBackupSelection) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateBackupSelection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateBackupSelectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateBackupSelectionInput ")
+	}
+
+	if input.CreatorRequestId == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.CreatorRequestId = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateBackupSelectionMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateBackupSelection{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateBackupSelection(region string) *awsmiddleware.RegisterServiceMetadata {

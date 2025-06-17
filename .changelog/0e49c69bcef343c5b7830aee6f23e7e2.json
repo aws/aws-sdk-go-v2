@@ -1,0 +1,8 @@
+{
+    "id": "0e49c69b-cef3-43c5-b783-0aee6f23e7e2",
+    "type": "feature",
+    "description": "Add support for policy operations on the SECURITYHUB_POLICY policy type.",
+    "modules": [
+        "service/organizations"
+    ]
+}

@@ -72,6 +72,11 @@ type CreateWebACLInput struct {
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
 
+	// Configures the ability for the WAF console to store and retrieve application
+	// attributes during the web ACL creation process. Application attributes help WAF
+	// give recommendations for protection packs.
+	ApplicationConfig *types.ApplicationConfig
+
 	// Specifies custom configurations for the associations between the web ACL and
 	// protected resources.
 	//

@@ -22,6 +22,7 @@
         "api_op_RenewCertificate.go",
         "api_op_RequestCertificate.go",
         "api_op_ResendValidationEmail.go",
+        "api_op_RevokeCertificate.go",
         "api_op_UpdateCertificateOptions.go",
         "auth.go",
         "deserializers.go",

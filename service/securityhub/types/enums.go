@@ -40,6 +40,25 @@ func (AdminStatus) Values() []AdminStatus {
 	}
 }
 
+type AllowedOperators string
+
+// Enum values for AllowedOperators
+const (
+	AllowedOperatorsAnd AllowedOperators = "AND"
+	AllowedOperatorsOr  AllowedOperators = "OR"
+)
+
+// Values returns all known values for AllowedOperators. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AllowedOperators) Values() []AllowedOperators {
+	return []AllowedOperators{
+		"AND",
+		"OR",
+	}
+}
+
 type AssociationStatus string
 
 // Enum values for AssociationStatus
@@ -114,6 +133,25 @@ func (AutomationRulesActionType) Values() []AutomationRulesActionType {
 	}
 }
 
+type AutomationRulesActionTypeV2 string
+
+// Enum values for AutomationRulesActionTypeV2
+const (
+	AutomationRulesActionTypeV2FindingFieldsUpdate AutomationRulesActionTypeV2 = "FINDING_FIELDS_UPDATE"
+	AutomationRulesActionTypeV2ExternalIntegration AutomationRulesActionTypeV2 = "EXTERNAL_INTEGRATION"
+)
+
+// Values returns all known values for AutomationRulesActionTypeV2. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomationRulesActionTypeV2) Values() []AutomationRulesActionTypeV2 {
+	return []AutomationRulesActionTypeV2{
+		"FINDING_FIELDS_UPDATE",
+		"EXTERNAL_INTEGRATION",
+	}
+}
+
 type AwsIamAccessKeyStatus string
 
 // Enum values for AwsIamAccessKeyStatus
@@ -150,6 +188,30 @@ func (AwsS3BucketNotificationConfigurationS3KeyFilterRuleName) Values() []AwsS3B
 	return []AwsS3BucketNotificationConfigurationS3KeyFilterRuleName{
 		"Prefix",
 		"Suffix",
+	}
+}
+
+type BatchUpdateFindingsV2UnprocessedFindingErrorCode string
+
+// Enum values for BatchUpdateFindingsV2UnprocessedFindingErrorCode
+const (
+	BatchUpdateFindingsV2UnprocessedFindingErrorCodeResourceNotFoundException BatchUpdateFindingsV2UnprocessedFindingErrorCode = "ResourceNotFoundException"
+	BatchUpdateFindingsV2UnprocessedFindingErrorCodeValidationException       BatchUpdateFindingsV2UnprocessedFindingErrorCode = "ValidationException"
+	BatchUpdateFindingsV2UnprocessedFindingErrorCodeInternalServerException   BatchUpdateFindingsV2UnprocessedFindingErrorCode = "InternalServerException"
+	BatchUpdateFindingsV2UnprocessedFindingErrorCodeConflictException         BatchUpdateFindingsV2UnprocessedFindingErrorCode = "ConflictException"
+)
+
+// Values returns all known values for
+// BatchUpdateFindingsV2UnprocessedFindingErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchUpdateFindingsV2UnprocessedFindingErrorCode) Values() []BatchUpdateFindingsV2UnprocessedFindingErrorCode {
+	return []BatchUpdateFindingsV2UnprocessedFindingErrorCode{
+		"ResourceNotFoundException",
+		"ValidationException",
+		"InternalServerException",
+		"ConflictException",
 	}
 }
 
@@ -214,6 +276,67 @@ func (ConnectionDirection) Values() []ConnectionDirection {
 	return []ConnectionDirection{
 		"INBOUND",
 		"OUTBOUND",
+	}
+}
+
+type ConnectorAuthStatus string
+
+// Enum values for ConnectorAuthStatus
+const (
+	ConnectorAuthStatusActive ConnectorAuthStatus = "ACTIVE"
+	ConnectorAuthStatusFailed ConnectorAuthStatus = "FAILED"
+)
+
+// Values returns all known values for ConnectorAuthStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorAuthStatus) Values() []ConnectorAuthStatus {
+	return []ConnectorAuthStatus{
+		"ACTIVE",
+		"FAILED",
+	}
+}
+
+type ConnectorProviderName string
+
+// Enum values for ConnectorProviderName
+const (
+	ConnectorProviderNameJiraCloud  ConnectorProviderName = "JIRA_CLOUD"
+	ConnectorProviderNameServicenow ConnectorProviderName = "SERVICENOW"
+)
+
+// Values returns all known values for ConnectorProviderName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorProviderName) Values() []ConnectorProviderName {
+	return []ConnectorProviderName{
+		"JIRA_CLOUD",
+		"SERVICENOW",
+	}
+}
+
+type ConnectorStatus string
+
+// Enum values for ConnectorStatus
+const (
+	ConnectorStatusConnected            ConnectorStatus = "CONNECTED"
+	ConnectorStatusFailedToConnect      ConnectorStatus = "FAILED_TO_CONNECT"
+	ConnectorStatusPendingConfiguration ConnectorStatus = "PENDING_CONFIGURATION"
+	ConnectorStatusPendingAuthorization ConnectorStatus = "PENDING_AUTHORIZATION"
+)
+
+// Values returns all known values for ConnectorStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorStatus) Values() []ConnectorStatus {
+	return []ConnectorStatus{
+		"CONNECTED",
+		"FAILED_TO_CONNECT",
+		"PENDING_CONFIGURATION",
+		"PENDING_AUTHORIZATION",
 	}
 }
 
@@ -292,6 +415,55 @@ func (FindingHistoryUpdateSourceType) Values() []FindingHistoryUpdateSourceType 
 	}
 }
 
+type GroupByField string
+
+// Enum values for GroupByField
+const (
+	GroupByFieldActivityName               GroupByField = "activity_name"
+	GroupByFieldCloudAccountUid            GroupByField = "cloud.account.uid"
+	GroupByFieldCloudProvider              GroupByField = "cloud.provider"
+	GroupByFieldCloudRegion                GroupByField = "cloud.region"
+	GroupByFieldComplianceAssessmentsName  GroupByField = "compliance.assessments.name"
+	GroupByFieldComplianceStatus           GroupByField = "compliance.status"
+	GroupByFieldComplianceControl          GroupByField = "compliance.control"
+	GroupByFieldFindingInfoTitle           GroupByField = "finding_info.title"
+	GroupByFieldFindingInfoTypes           GroupByField = "finding_info.types"
+	GroupByFieldMetadataProductName        GroupByField = "metadata.product.name"
+	GroupByFieldMetadataProductUid         GroupByField = "metadata.product.uid"
+	GroupByFieldResourcesType              GroupByField = "resources.type"
+	GroupByFieldResourcesUid               GroupByField = "resources.uid"
+	GroupByFieldSeverity                   GroupByField = "severity"
+	GroupByFieldStatus                     GroupByField = "status"
+	GroupByFieldVulnerabilitiesFixCoverage GroupByField = "vulnerabilities.fix_coverage"
+	GroupByFieldClassName                  GroupByField = "class_name"
+)
+
+// Values returns all known values for GroupByField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GroupByField) Values() []GroupByField {
+	return []GroupByField{
+		"activity_name",
+		"cloud.account.uid",
+		"cloud.provider",
+		"cloud.region",
+		"compliance.assessments.name",
+		"compliance.status",
+		"compliance.control",
+		"finding_info.title",
+		"finding_info.types",
+		"metadata.product.name",
+		"metadata.product.uid",
+		"resources.type",
+		"resources.uid",
+		"severity",
+		"status",
+		"vulnerabilities.fix_coverage",
+		"class_name",
+	}
+}
+
 type IntegrationType string
 
 // Enum values for IntegrationType
@@ -307,6 +479,27 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (IntegrationType) Values() []IntegrationType {
 	return []IntegrationType{
+		"SEND_FINDINGS_TO_SECURITY_HUB",
+		"RECEIVE_FINDINGS_FROM_SECURITY_HUB",
+		"UPDATE_FINDINGS_IN_SECURITY_HUB",
+	}
+}
+
+type IntegrationV2Type string
+
+// Enum values for IntegrationV2Type
+const (
+	IntegrationV2TypeSendFindingsToSecurityHub      IntegrationV2Type = "SEND_FINDINGS_TO_SECURITY_HUB"
+	IntegrationV2TypeReceiveFindingsFromSecurityHub IntegrationV2Type = "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
+	IntegrationV2TypeUpdateFindingsInSecurityHub    IntegrationV2Type = "UPDATE_FINDINGS_IN_SECURITY_HUB"
+)
+
+// Values returns all known values for IntegrationV2Type. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationV2Type) Values() []IntegrationV2Type {
+	return []IntegrationV2Type{
 		"SEND_FINDINGS_TO_SECURITY_HUB",
 		"RECEIVE_FINDINGS_FROM_SECURITY_HUB",
 		"UPDATE_FINDINGS_IN_SECURITY_HUB",
@@ -418,6 +611,173 @@ func (NetworkDirection) Values() []NetworkDirection {
 	return []NetworkDirection{
 		"IN",
 		"OUT",
+	}
+}
+
+type OcsfBooleanField string
+
+// Enum values for OcsfBooleanField
+const (
+	OcsfBooleanFieldComplianceAssessmentsMeetsCriteria OcsfBooleanField = "compliance.assessments.meets_criteria"
+	OcsfBooleanFieldVulnerabilitiesIsExploitAvailable  OcsfBooleanField = "vulnerabilities.is_exploit_available"
+	OcsfBooleanFieldVulnerabilitiesIsFixAvailable      OcsfBooleanField = "vulnerabilities.is_fix_available"
+)
+
+// Values returns all known values for OcsfBooleanField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OcsfBooleanField) Values() []OcsfBooleanField {
+	return []OcsfBooleanField{
+		"compliance.assessments.meets_criteria",
+		"vulnerabilities.is_exploit_available",
+		"vulnerabilities.is_fix_available",
+	}
+}
+
+type OcsfDateField string
+
+// Enum values for OcsfDateField
+const (
+	OcsfDateFieldFindingInfoCreatedTimeDt   OcsfDateField = "finding_info.created_time_dt"
+	OcsfDateFieldFindingInfoFirstSeenTimeDt OcsfDateField = "finding_info.first_seen_time_dt"
+	OcsfDateFieldFindingInfoLastSeenTimeDt  OcsfDateField = "finding_info.last_seen_time_dt"
+	OcsfDateFieldFindingInfoModifiedTimeDt  OcsfDateField = "finding_info.modified_time_dt"
+)
+
+// Values returns all known values for OcsfDateField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OcsfDateField) Values() []OcsfDateField {
+	return []OcsfDateField{
+		"finding_info.created_time_dt",
+		"finding_info.first_seen_time_dt",
+		"finding_info.last_seen_time_dt",
+		"finding_info.modified_time_dt",
+	}
+}
+
+type OcsfMapField string
+
+// Enum values for OcsfMapField
+const (
+	OcsfMapFieldResourcesTags OcsfMapField = "resources.tags"
+)
+
+// Values returns all known values for OcsfMapField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OcsfMapField) Values() []OcsfMapField {
+	return []OcsfMapField{
+		"resources.tags",
+	}
+}
+
+type OcsfNumberField string
+
+// Enum values for OcsfNumberField
+const (
+	OcsfNumberFieldActivityId                    OcsfNumberField = "activity_id"
+	OcsfNumberFieldComplianceStatusId            OcsfNumberField = "compliance.status_id"
+	OcsfNumberFieldConfidenceScore               OcsfNumberField = "confidence_score"
+	OcsfNumberFieldSeverityId                    OcsfNumberField = "severity_id"
+	OcsfNumberFieldStatusId                      OcsfNumberField = "status_id"
+	OcsfNumberFieldFindingInfoRelatedEventsCount OcsfNumberField = "finding_info.related_events_count"
+)
+
+// Values returns all known values for OcsfNumberField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OcsfNumberField) Values() []OcsfNumberField {
+	return []OcsfNumberField{
+		"activity_id",
+		"compliance.status_id",
+		"confidence_score",
+		"severity_id",
+		"status_id",
+		"finding_info.related_events_count",
+	}
+}
+
+type OcsfStringField string
+
+// Enum values for OcsfStringField
+const (
+	OcsfStringFieldMetadataUid                        OcsfStringField = "metadata.uid"
+	OcsfStringFieldActivityName                       OcsfStringField = "activity_name"
+	OcsfStringFieldCloudAccountUid                    OcsfStringField = "cloud.account.uid"
+	OcsfStringFieldCloudProvider                      OcsfStringField = "cloud.provider"
+	OcsfStringFieldCloudRegion                        OcsfStringField = "cloud.region"
+	OcsfStringFieldComplianceAssessmentsCategory      OcsfStringField = "compliance.assessments.category"
+	OcsfStringFieldComplianceAssessmentsName          OcsfStringField = "compliance.assessments.name"
+	OcsfStringFieldComplianceControl                  OcsfStringField = "compliance.control"
+	OcsfStringFieldComplianceStatus                   OcsfStringField = "compliance.status"
+	OcsfStringFieldComplianceStandards                OcsfStringField = "compliance.standards"
+	OcsfStringFieldFindingInfoDesc                    OcsfStringField = "finding_info.desc"
+	OcsfStringFieldFindingInfoSrcUrl                  OcsfStringField = "finding_info.src_url"
+	OcsfStringFieldFindingInfoTitle                   OcsfStringField = "finding_info.title"
+	OcsfStringFieldFindingInfoTypes                   OcsfStringField = "finding_info.types"
+	OcsfStringFieldFindingInfoUid                     OcsfStringField = "finding_info.uid"
+	OcsfStringFieldFindingInfoRelatedEventsUid        OcsfStringField = "finding_info.related_events.uid"
+	OcsfStringFieldFindingInfoRelatedEventsProductUid OcsfStringField = "finding_info.related_events.product.uid"
+	OcsfStringFieldFindingInfoRelatedEventsTitle      OcsfStringField = "finding_info.related_events.title"
+	OcsfStringFieldMetadataProductName                OcsfStringField = "metadata.product.name"
+	OcsfStringFieldMetadataProductUid                 OcsfStringField = "metadata.product.uid"
+	OcsfStringFieldMetadataProductVendorName          OcsfStringField = "metadata.product.vendor_name"
+	OcsfStringFieldRemediationDesc                    OcsfStringField = "remediation.desc"
+	OcsfStringFieldRemediationReferences              OcsfStringField = "remediation.references"
+	OcsfStringFieldResourcesCloudPartition            OcsfStringField = "resources.cloud_partition"
+	OcsfStringFieldResourcesRegion                    OcsfStringField = "resources.region"
+	OcsfStringFieldResourcesType                      OcsfStringField = "resources.type"
+	OcsfStringFieldResourcesUid                       OcsfStringField = "resources.uid"
+	OcsfStringFieldSeverity                           OcsfStringField = "severity"
+	OcsfStringFieldStatus                             OcsfStringField = "status"
+	OcsfStringFieldComment                            OcsfStringField = "comment"
+	OcsfStringFieldVulnerabilitiesFixCoverage         OcsfStringField = "vulnerabilities.fix_coverage"
+	OcsfStringFieldClassName                          OcsfStringField = "class_name"
+)
+
+// Values returns all known values for OcsfStringField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OcsfStringField) Values() []OcsfStringField {
+	return []OcsfStringField{
+		"metadata.uid",
+		"activity_name",
+		"cloud.account.uid",
+		"cloud.provider",
+		"cloud.region",
+		"compliance.assessments.category",
+		"compliance.assessments.name",
+		"compliance.control",
+		"compliance.status",
+		"compliance.standards",
+		"finding_info.desc",
+		"finding_info.src_url",
+		"finding_info.title",
+		"finding_info.types",
+		"finding_info.uid",
+		"finding_info.related_events.uid",
+		"finding_info.related_events.product.uid",
+		"finding_info.related_events.title",
+		"metadata.product.name",
+		"metadata.product.uid",
+		"metadata.product.vendor_name",
+		"remediation.desc",
+		"remediation.references",
+		"resources.cloud_partition",
+		"resources.region",
+		"resources.type",
+		"resources.uid",
+		"severity",
+		"status",
+		"comment",
+		"vulnerabilities.fix_coverage",
+		"class_name",
 	}
 }
 
@@ -541,6 +901,166 @@ func (RegionAvailabilityStatus) Values() []RegionAvailabilityStatus {
 	}
 }
 
+type ResourceCategory string
+
+// Enum values for ResourceCategory
+const (
+	ResourceCategoryCompute  ResourceCategory = "Compute"
+	ResourceCategoryDatabase ResourceCategory = "Database"
+	ResourceCategoryStorage  ResourceCategory = "Storage"
+	ResourceCategoryCode     ResourceCategory = "Code"
+	ResourceCategoryAiMl     ResourceCategory = "AI/ML"
+	ResourceCategoryIdentity ResourceCategory = "Identity"
+	ResourceCategoryNetwork  ResourceCategory = "Network"
+	ResourceCategoryOther    ResourceCategory = "Other"
+)
+
+// Values returns all known values for ResourceCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceCategory) Values() []ResourceCategory {
+	return []ResourceCategory{
+		"Compute",
+		"Database",
+		"Storage",
+		"Code",
+		"AI/ML",
+		"Identity",
+		"Network",
+		"Other",
+	}
+}
+
+type ResourceGroupByField string
+
+// Enum values for ResourceGroupByField
+const (
+	ResourceGroupByFieldAccountId        ResourceGroupByField = "account_id"
+	ResourceGroupByFieldRegion           ResourceGroupByField = "region"
+	ResourceGroupByFieldResourceCategory ResourceGroupByField = "resource_category"
+	ResourceGroupByFieldResourceType     ResourceGroupByField = "resource_type"
+	ResourceGroupByFieldResourceName     ResourceGroupByField = "resource_name"
+	ResourceGroupByFieldFindingType      ResourceGroupByField = "findings_summary.finding_type"
+)
+
+// Values returns all known values for ResourceGroupByField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceGroupByField) Values() []ResourceGroupByField {
+	return []ResourceGroupByField{
+		"account_id",
+		"region",
+		"resource_category",
+		"resource_type",
+		"resource_name",
+		"findings_summary.finding_type",
+	}
+}
+
+type ResourcesDateField string
+
+// Enum values for ResourcesDateField
+const (
+	ResourcesDateFieldResourceDetailCaptureTimeDt ResourcesDateField = "resource_detail_capture_time_dt"
+	ResourcesDateFieldResourceCreationTimeDt      ResourcesDateField = "resource_creation_time_dt"
+)
+
+// Values returns all known values for ResourcesDateField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourcesDateField) Values() []ResourcesDateField {
+	return []ResourcesDateField{
+		"resource_detail_capture_time_dt",
+		"resource_creation_time_dt",
+	}
+}
+
+type ResourcesMapField string
+
+// Enum values for ResourcesMapField
+const (
+	ResourcesMapFieldTag ResourcesMapField = "tags"
+)
+
+// Values returns all known values for ResourcesMapField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourcesMapField) Values() []ResourcesMapField {
+	return []ResourcesMapField{
+		"tags",
+	}
+}
+
+type ResourcesNumberField string
+
+// Enum values for ResourcesNumberField
+const (
+	ResourcesNumberFieldTotalFindings         ResourcesNumberField = "findings_summary.total_findings"
+	ResourcesNumberFieldSeverityOther         ResourcesNumberField = "findings_summary.severities.other"
+	ResourcesNumberFieldSeverityFatal         ResourcesNumberField = "findings_summary.severities.fatal"
+	ResourcesNumberFieldSeverityCritical      ResourcesNumberField = "findings_summary.severities.critical"
+	ResourcesNumberFieldSeverityHigh          ResourcesNumberField = "findings_summary.severities.high"
+	ResourcesNumberFieldSeverityMedium        ResourcesNumberField = "findings_summary.severities.medium"
+	ResourcesNumberFieldSeverityLow           ResourcesNumberField = "findings_summary.severities.low"
+	ResourcesNumberFieldSeverityInformational ResourcesNumberField = "findings_summary.severities.informational"
+	ResourcesNumberFieldSeverityUnknown       ResourcesNumberField = "findings_summary.severities.unknown"
+)
+
+// Values returns all known values for ResourcesNumberField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourcesNumberField) Values() []ResourcesNumberField {
+	return []ResourcesNumberField{
+		"findings_summary.total_findings",
+		"findings_summary.severities.other",
+		"findings_summary.severities.fatal",
+		"findings_summary.severities.critical",
+		"findings_summary.severities.high",
+		"findings_summary.severities.medium",
+		"findings_summary.severities.low",
+		"findings_summary.severities.informational",
+		"findings_summary.severities.unknown",
+	}
+}
+
+type ResourcesStringField string
+
+// Enum values for ResourcesStringField
+const (
+	ResourcesStringFieldResourceArn      ResourcesStringField = "resource_arn"
+	ResourcesStringFieldResourceId       ResourcesStringField = "resource_id"
+	ResourcesStringFieldAccountId        ResourcesStringField = "account_id"
+	ResourcesStringFieldRegion           ResourcesStringField = "region"
+	ResourcesStringFieldResourceCategory ResourcesStringField = "resource_category"
+	ResourcesStringFieldResourceType     ResourcesStringField = "resource_type"
+	ResourcesStringFieldResourceName     ResourcesStringField = "resource_name"
+	ResourcesStringFieldFindingType      ResourcesStringField = "findings_summary.finding_type"
+	ResourcesStringFieldProductName      ResourcesStringField = "findings_summary.product_name"
+)
+
+// Values returns all known values for ResourcesStringField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourcesStringField) Values() []ResourcesStringField {
+	return []ResourcesStringField{
+		"resource_arn",
+		"resource_id",
+		"account_id",
+		"region",
+		"resource_category",
+		"resource_type",
+		"resource_name",
+		"findings_summary.finding_type",
+		"findings_summary.product_name",
+	}
+}
+
 type RuleStatus string
 
 // Enum values for RuleStatus
@@ -560,6 +1080,25 @@ func (RuleStatus) Values() []RuleStatus {
 	}
 }
 
+type RuleStatusV2 string
+
+// Enum values for RuleStatusV2
+const (
+	RuleStatusV2Enabled  RuleStatusV2 = "ENABLED"
+	RuleStatusV2Disabled RuleStatusV2 = "DISABLED"
+)
+
+// Values returns all known values for RuleStatusV2. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleStatusV2) Values() []RuleStatusV2 {
+	return []RuleStatusV2{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type SecurityControlProperty string
 
 // Enum values for SecurityControlProperty
@@ -574,6 +1113,25 @@ const (
 func (SecurityControlProperty) Values() []SecurityControlProperty {
 	return []SecurityControlProperty{
 		"Parameters",
+	}
+}
+
+type SecurityHubFeature string
+
+// Enum values for SecurityHubFeature
+const (
+	SecurityHubFeatureSecurityHub   SecurityHubFeature = "SecurityHub"
+	SecurityHubFeatureSecurityHubV2 SecurityHubFeature = "SecurityHubV2"
+)
+
+// Values returns all known values for SecurityHubFeature. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityHubFeature) Values() []SecurityHubFeature {
+	return []SecurityHubFeature{
+		"SecurityHub",
+		"SecurityHubV2",
 	}
 }
 
@@ -719,6 +1277,7 @@ const (
 	StringFilterComparisonPrefixNotEquals StringFilterComparison = "PREFIX_NOT_EQUALS"
 	StringFilterComparisonContains        StringFilterComparison = "CONTAINS"
 	StringFilterComparisonNotContains     StringFilterComparison = "NOT_CONTAINS"
+	StringFilterComparisonContainsWord    StringFilterComparison = "CONTAINS_WORD"
 )
 
 // Values returns all known values for StringFilterComparison. Note that this can
@@ -733,6 +1292,7 @@ func (StringFilterComparison) Values() []StringFilterComparison {
 		"PREFIX_NOT_EQUALS",
 		"CONTAINS",
 		"NOT_CONTAINS",
+		"CONTAINS_WORD",
 	}
 }
 

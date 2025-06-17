@@ -1412,6 +1412,14 @@ type RuleGroupResponse struct {
 	// to the originating rule group.
 	SourceMetadata *SourceMetadata
 
+	// A complex type containing the currently selected rule option fields that will
+	// be displayed for rule summarization returned by DescribeRuleGroupSummary.
+	//
+	//   - The RuleOptions specified in SummaryConfiguration
+	//
+	//   - Rule metadata organization preferences
+	SummaryConfiguration *SummaryConfiguration
+
 	// The key:value pairs to associate with the resource.
 	Tags []Tag
 
@@ -1518,6 +1526,30 @@ type RulesSourceList struct {
 	//
 	// This member is required.
 	Targets []string
+
+	noSmithyDocumentSerde
+}
+
+// A complex type containing details about a Suricata rule. Contains:
+//
+//   - SID
+//
+//   - Msg
+//
+//   - Metadata
+//
+// Summaries are available for rule groups you manage and for active threat
+// defense Amazon Web Services managed rule groups.
+type RuleSummary struct {
+
+	// The contents of the rule's metadata.
+	Metadata *string
+
+	// The contents taken from the rule's msg field.
+	Msg *string
+
+	// The unique identifier (Signature ID) of the Suricata rule.
+	SID *string
 
 	noSmithyDocumentSerde
 }
@@ -1779,6 +1811,20 @@ type StatefulRuleGroupReference struct {
 	// This member is required.
 	ResourceArn *string
 
+	// Network Firewall plans to augment the active threat defense managed rule group
+	// with an additional deep threat inspection capability. When this capability is
+	// released, Amazon Web Services will analyze service logs of network traffic
+	// processed by these rule groups to identify threat indicators across customers.
+	// Amazon Web Services will use these threat indicators to improve the active
+	// threat defense managed rule groups and protect the security of Amazon Web
+	// Services customers and services.
+	//
+	// Customers can opt-out of deep threat inspection at any time through the Network
+	// Firewall console or API. When customers opt out, Network Firewall will not use
+	// the network traffic processed by those customers' active threat defense rule
+	// groups for rule group improvement.
+	DeepThreatInspection *bool
+
 	// The action that allows the policy owner to override the behavior of the rule
 	// group within a policy.
 	Override *StatefulRuleGroupOverride
@@ -1897,6 +1943,36 @@ type SubnetMapping struct {
 	// The subnet's IP address type. You can't change the IP address type after you
 	// create the subnet.
 	IPAddressType IPAddressType
+
+	noSmithyDocumentSerde
+}
+
+// A complex type containing summaries of security protections provided by a rule
+// group.
+//
+// Network Firewall extracts this information from selected fields in the rule
+// group's Suricata rules, based on your SummaryConfigurationsettings.
+type Summary struct {
+
+	// An array of RuleSummary objects containing individual rule details that had been
+	// configured by the rulegroup's SummaryConfiguration.
+	RuleSummaries []RuleSummary
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that specifies which Suricata rule metadata fields to use when
+// displaying threat information. Contains:
+//
+//   - RuleOptions - The Suricata rule options fields to extract and display
+//
+// These settings affect how threat information appears in both the console and
+// API responses. Summaries are available for rule groups you manage and for active
+// threat defense Amazon Web Services managed rule groups.
+type SummaryConfiguration struct {
+
+	// Specifies the selected rule options returned by DescribeRuleGroupSummary.
+	RuleOptions []SummaryRuleOption
 
 	noSmithyDocumentSerde
 }

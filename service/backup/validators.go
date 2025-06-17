@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateBackupVaultMpaApprovalTeam struct {
+}
+
+func (*validateOpAssociateBackupVaultMpaApprovalTeam) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateBackupVaultMpaApprovalTeam) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateBackupVaultMpaApprovalTeamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateBackupVaultMpaApprovalTeamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelLegalHold struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpCreateReportPlan) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateReportPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRestoreAccessBackupVault struct {
+}
+
+func (*validateOpCreateRestoreAccessBackupVault) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRestoreAccessBackupVault) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRestoreAccessBackupVaultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRestoreAccessBackupVaultInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +650,26 @@ func (m *validateOpDescribeRestoreJob) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateBackupVaultMpaApprovalTeam struct {
+}
+
+func (*validateOpDisassociateBackupVaultMpaApprovalTeam) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateBackupVaultMpaApprovalTeam) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateBackupVaultMpaApprovalTeamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateBackupVaultMpaApprovalTeamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateRecoveryPointFromParent struct {
 }
 
@@ -1050,6 +1110,26 @@ func (m *validateOpListRecoveryPointsByResource) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRestoreAccessBackupVaults struct {
+}
+
+func (*validateOpListRestoreAccessBackupVaults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRestoreAccessBackupVaults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRestoreAccessBackupVaultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRestoreAccessBackupVaultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListRestoreJobsByProtectedResource struct {
 }
 
@@ -1185,6 +1265,26 @@ func (m *validateOpPutRestoreValidationResult) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutRestoreValidationResultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRevokeRestoreAccessBackupVault struct {
+}
+
+func (*validateOpRevokeRestoreAccessBackupVault) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRevokeRestoreAccessBackupVault) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RevokeRestoreAccessBackupVaultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRevokeRestoreAccessBackupVaultInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1470,6 +1570,10 @@ func (m *validateOpUpdateRestoreTestingSelection) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateBackupVaultMpaApprovalTeamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateBackupVaultMpaApprovalTeam{}, middleware.After)
+}
+
 func addOpCancelLegalHoldValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelLegalHold{}, middleware.After)
 }
@@ -1500,6 +1604,10 @@ func addOpCreateLogicallyAirGappedBackupVaultValidationMiddleware(stack *middlew
 
 func addOpCreateReportPlanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReportPlan{}, middleware.After)
+}
+
+func addOpCreateRestoreAccessBackupVaultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRestoreAccessBackupVault{}, middleware.After)
 }
 
 func addOpCreateRestoreTestingPlanValidationMiddleware(stack *middleware.Stack) error {
@@ -1590,6 +1698,10 @@ func addOpDescribeRestoreJobValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDescribeRestoreJob{}, middleware.After)
 }
 
+func addOpDisassociateBackupVaultMpaApprovalTeamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateBackupVaultMpaApprovalTeam{}, middleware.After)
+}
+
 func addOpDisassociateRecoveryPointFromParentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateRecoveryPointFromParent{}, middleware.After)
 }
@@ -1678,6 +1790,10 @@ func addOpListRecoveryPointsByResourceValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpListRecoveryPointsByResource{}, middleware.After)
 }
 
+func addOpListRestoreAccessBackupVaultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRestoreAccessBackupVaults{}, middleware.After)
+}
+
 func addOpListRestoreJobsByProtectedResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRestoreJobsByProtectedResource{}, middleware.After)
 }
@@ -1704,6 +1820,10 @@ func addOpPutBackupVaultNotificationsValidationMiddleware(stack *middleware.Stac
 
 func addOpPutRestoreValidationResultValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRestoreValidationResult{}, middleware.After)
+}
+
+func addOpRevokeRestoreAccessBackupVaultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRevokeRestoreAccessBackupVault{}, middleware.After)
 }
 
 func addOpStartBackupJobValidationMiddleware(stack *middleware.Stack) error {
@@ -2135,6 +2255,24 @@ func validateRestoreTestingSelectionForUpdate(v *types.RestoreTestingSelectionFo
 	}
 }
 
+func validateOpAssociateBackupVaultMpaApprovalTeamInput(v *AssociateBackupVaultMpaApprovalTeamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateBackupVaultMpaApprovalTeamInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.MpaApprovalTeamArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MpaApprovalTeamArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelLegalHoldInput(v *CancelLegalHoldInput) error {
 	if v == nil {
 		return nil
@@ -2296,6 +2434,21 @@ func validateOpCreateReportPlanInput(v *CreateReportPlanInput) error {
 		if err := validateReportSetting(v.ReportSetting); err != nil {
 			invalidParams.AddNested("ReportSetting", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRestoreAccessBackupVaultInput(v *CreateRestoreAccessBackupVaultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRestoreAccessBackupVaultInput"}
+	if v.SourceBackupVaultArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceBackupVaultArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2657,6 +2810,21 @@ func validateOpDescribeRestoreJobInput(v *DescribeRestoreJobInput) error {
 	}
 }
 
+func validateOpDisassociateBackupVaultMpaApprovalTeamInput(v *DisassociateBackupVaultMpaApprovalTeamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateBackupVaultMpaApprovalTeamInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateRecoveryPointFromParentInput(v *DisassociateRecoveryPointFromParentInput) error {
 	if v == nil {
 		return nil
@@ -3008,6 +3176,21 @@ func validateOpListRecoveryPointsByResourceInput(v *ListRecoveryPointsByResource
 	}
 }
 
+func validateOpListRestoreAccessBackupVaultsInput(v *ListRestoreAccessBackupVaultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRestoreAccessBackupVaultsInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListRestoreJobsByProtectedResourceInput(v *ListRestoreJobsByProtectedResourceInput) error {
 	if v == nil {
 		return nil
@@ -3114,6 +3297,24 @@ func validateOpPutRestoreValidationResultInput(v *PutRestoreValidationResultInpu
 	}
 	if len(v.ValidationStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ValidationStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRevokeRestoreAccessBackupVaultInput(v *RevokeRestoreAccessBackupVaultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevokeRestoreAccessBackupVaultInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.RestoreAccessBackupVaultArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestoreAccessBackupVaultArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

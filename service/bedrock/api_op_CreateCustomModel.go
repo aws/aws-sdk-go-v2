@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new custom model in Amazon Bedrock from an existing SageMaker
-// AI-trained Amazon Nova model stored in an Amazon-managed Amazon S3 bucket. After
-// the model is active, you can use it for inference.
+// Creates a new custom model in Amazon Bedrock. After the model is active, you
+// can use it for inference.
 //
 // To use the model for inference, you must purchase Provisioned Throughput for
 // it. You can't use On-demand inference with these custom models. For more
@@ -29,12 +28,6 @@ import (
 //
 //   - Failed - Creation process encountered an error
 //
-// For more information about creating custom models, including specific model
-// requirements, see [Import a SageMaker AI-trained Amazon Nova model]in the Amazon Bedrock User Guide.
-//
-// You use the CreateCustomModel API to import only SageMaker AI-trained Amazon
-// Nova models. To import open-source models, you use the [CreateModelImportJob].
-//
 // # Related APIs
 //
 // [GetCustomModel]
@@ -46,9 +39,7 @@ import (
 // [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
 // [ListCustomModels]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModels.html
 // [DeleteCustomModel]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModel.html
-// [CreateModelImportJob]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html
 // [GetCustomModel]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModel.html
-// [Import a SageMaker AI-trained Amazon Nova model]: https://docs.aws.amazon.com/bedrock/latest/userguide/create-custom-model-from-existing.html
 func (c *Client) CreateCustomModel(ctx context.Context, params *CreateCustomModelInput, optFns ...func(*Options)) (*CreateCustomModelOutput, error) {
 	if params == nil {
 		params = &CreateCustomModelInput{}
@@ -73,8 +64,6 @@ type CreateCustomModelInput struct {
 
 	// The data source for the model. The Amazon S3 URI in the model source must be
 	// for the Amazon-managed Amazon S3 bucket containing your model artifacts.
-	// SageMaker AI creates this bucket when you run your first SageMaker AI training
-	// job.
 	//
 	// This member is required.
 	ModelSourceConfig types.ModelDataSource

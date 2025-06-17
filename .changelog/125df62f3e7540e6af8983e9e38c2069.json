@@ -1,0 +1,8 @@
+{
+    "id": "125df62f-3e75-40e6-af89-83e9e38c2069",
+    "type": "feature",
+    "description": "Add Code Repository Scanning as part of AWS InspectorV2",
+    "modules": [
+        "service/inspector2"
+    ]
+}

@@ -206,11 +206,35 @@ func TestCheckSnapshot_BatchUpdateFindings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchUpdateFindingsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateFindingsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchUpdateFindingsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchUpdateStandardsControlAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchUpdateStandardsControlAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "BatchUpdateStandardsControlAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ConnectorRegistrationsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ConnectorRegistrationsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ConnectorRegistrationsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -230,6 +254,18 @@ func TestCheckSnapshot_CreateActionTarget(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAggregatorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAggregatorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAggregatorV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAutomationRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAutomationRule(context.Background(), nil, func(o *Options) {
@@ -242,11 +278,35 @@ func TestCheckSnapshot_CreateAutomationRule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAutomationRuleV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAutomationRuleV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAutomationRuleV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateConfigurationPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateConfigurationPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateConfigurationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateConnectorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConnectorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConnectorV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -290,6 +350,18 @@ func TestCheckSnapshot_CreateMembers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateTicketV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTicketV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTicketV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeclineInvitations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeclineInvitations(context.Background(), nil, func(o *Options) {
@@ -314,11 +386,47 @@ func TestCheckSnapshot_DeleteActionTarget(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAggregatorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAggregatorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAggregatorV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAutomationRuleV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAutomationRuleV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAutomationRuleV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteConfigurationPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteConfigurationPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteConfigurationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteConnectorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnectorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConnectorV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -422,6 +530,30 @@ func TestCheckSnapshot_DescribeProducts(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeProductsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeProductsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeProductsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeSecurityHubV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecurityHubV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSecurityHubV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeStandards(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeStandards(context.Background(), nil, func(o *Options) {
@@ -475,6 +607,18 @@ func TestCheckSnapshot_DisableSecurityHub(t *testing.T) {
 	_, err := svc.DisableSecurityHub(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisableSecurityHub")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisableSecurityHubV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableSecurityHubV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableSecurityHubV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -554,11 +698,47 @@ func TestCheckSnapshot_EnableSecurityHub(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_EnableSecurityHubV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableSecurityHubV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableSecurityHubV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAdministratorAccount(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAdministratorAccount(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAdministratorAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAggregatorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAggregatorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAggregatorV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAutomationRuleV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAutomationRuleV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAutomationRuleV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -583,6 +763,18 @@ func TestCheckSnapshot_GetConfigurationPolicyAssociation(t *testing.T) {
 	_, err := svc.GetConfigurationPolicyAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetConfigurationPolicyAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConnectorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnectorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConnectorV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -631,6 +823,30 @@ func TestCheckSnapshot_GetFindings(t *testing.T) {
 	_, err := svc.GetFindings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetFindingStatisticsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFindingStatisticsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFindingStatisticsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetFindingsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFindingsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFindingsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -698,6 +914,30 @@ func TestCheckSnapshot_GetMembers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetResourcesStatisticsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcesStatisticsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcesStatisticsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetResourcesV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcesV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcesV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSecurityControlDefinition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSecurityControlDefinition(context.Background(), nil, func(o *Options) {
@@ -722,11 +962,35 @@ func TestCheckSnapshot_InviteMembers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAggregatorsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAggregatorsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAggregatorsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAutomationRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAutomationRules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAutomationRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAutomationRulesV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAutomationRulesV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAutomationRulesV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -751,6 +1015,18 @@ func TestCheckSnapshot_ListConfigurationPolicyAssociations(t *testing.T) {
 	_, err := svc.ListConfigurationPolicyAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListConfigurationPolicyAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListConnectorsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectorsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConnectorsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -914,11 +1190,47 @@ func TestCheckSnapshot_UpdateActionTarget(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateAggregatorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAggregatorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAggregatorV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAutomationRuleV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAutomationRuleV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAutomationRuleV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateConfigurationPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateConfigurationPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateConfigurationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateConnectorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnectorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConnectorV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1153,11 +1465,35 @@ func TestUpdateSnapshot_BatchUpdateFindings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchUpdateFindingsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateFindingsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchUpdateFindingsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchUpdateStandardsControlAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchUpdateStandardsControlAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchUpdateStandardsControlAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ConnectorRegistrationsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ConnectorRegistrationsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ConnectorRegistrationsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1177,6 +1513,18 @@ func TestUpdateSnapshot_CreateActionTarget(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateAggregatorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAggregatorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAggregatorV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAutomationRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAutomationRule(context.Background(), nil, func(o *Options) {
@@ -1189,11 +1537,35 @@ func TestUpdateSnapshot_CreateAutomationRule(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateAutomationRuleV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAutomationRuleV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAutomationRuleV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateConfigurationPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateConfigurationPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateConfigurationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateConnectorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConnectorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConnectorV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1237,6 +1609,18 @@ func TestUpdateSnapshot_CreateMembers(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateTicketV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTicketV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTicketV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeclineInvitations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeclineInvitations(context.Background(), nil, func(o *Options) {
@@ -1261,11 +1645,47 @@ func TestUpdateSnapshot_DeleteActionTarget(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteAggregatorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAggregatorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAggregatorV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAutomationRuleV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAutomationRuleV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAutomationRuleV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteConfigurationPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteConfigurationPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteConfigurationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConnectorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnectorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConnectorV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1369,6 +1789,30 @@ func TestUpdateSnapshot_DescribeProducts(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeProductsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeProductsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeProductsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeSecurityHubV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecurityHubV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSecurityHubV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeStandards(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeStandards(context.Background(), nil, func(o *Options) {
@@ -1422,6 +1866,18 @@ func TestUpdateSnapshot_DisableSecurityHub(t *testing.T) {
 	_, err := svc.DisableSecurityHub(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisableSecurityHub")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisableSecurityHubV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableSecurityHubV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableSecurityHubV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1501,11 +1957,47 @@ func TestUpdateSnapshot_EnableSecurityHub(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_EnableSecurityHubV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableSecurityHubV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableSecurityHubV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAdministratorAccount(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAdministratorAccount(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAdministratorAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAggregatorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAggregatorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAggregatorV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAutomationRuleV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAutomationRuleV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAutomationRuleV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1530,6 +2022,18 @@ func TestUpdateSnapshot_GetConfigurationPolicyAssociation(t *testing.T) {
 	_, err := svc.GetConfigurationPolicyAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetConfigurationPolicyAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConnectorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnectorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConnectorV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1578,6 +2082,30 @@ func TestUpdateSnapshot_GetFindings(t *testing.T) {
 	_, err := svc.GetFindings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetFindingStatisticsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFindingStatisticsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFindingStatisticsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetFindingsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFindingsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFindingsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1645,6 +2173,30 @@ func TestUpdateSnapshot_GetMembers(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetResourcesStatisticsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcesStatisticsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcesStatisticsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetResourcesV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcesV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcesV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetSecurityControlDefinition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSecurityControlDefinition(context.Background(), nil, func(o *Options) {
@@ -1669,11 +2221,35 @@ func TestUpdateSnapshot_InviteMembers(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAggregatorsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAggregatorsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAggregatorsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAutomationRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAutomationRules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAutomationRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAutomationRulesV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAutomationRulesV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAutomationRulesV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1698,6 +2274,18 @@ func TestUpdateSnapshot_ListConfigurationPolicyAssociations(t *testing.T) {
 	_, err := svc.ListConfigurationPolicyAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListConfigurationPolicyAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListConnectorsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectorsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConnectorsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1861,11 +2449,47 @@ func TestUpdateSnapshot_UpdateActionTarget(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateAggregatorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAggregatorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAggregatorV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAutomationRuleV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAutomationRuleV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAutomationRuleV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateConfigurationPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateConfigurationPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateConfigurationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateConnectorV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnectorV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConnectorV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

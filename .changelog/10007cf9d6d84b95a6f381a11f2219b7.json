@@ -1,0 +1,8 @@
+{
+    "id": "10007cf9-d6d8-4b95-a6f3-81a11f2219b7",
+    "type": "feature",
+    "description": "AWS WAF can now suggest protection packs for you based on the application information you provide when you create a webACL.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

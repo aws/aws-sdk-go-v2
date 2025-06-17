@@ -33,6 +33,9 @@ func ExampleAnalyzerConfiguration_outputUsage() {
 	var union types.AnalyzerConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.AnalyzerConfigurationMemberInternalAccess:
+		_ = v.Value // Value is types.InternalAccessConfiguration
+
 	case *types.AnalyzerConfigurationMemberUnusedAccess:
 		_ = v.Value // Value is types.UnusedAccessConfiguration
 
@@ -46,6 +49,7 @@ func ExampleAnalyzerConfiguration_outputUsage() {
 }
 
 var _ *types.UnusedAccessConfiguration
+var _ *types.InternalAccessConfiguration
 
 func ExampleConfiguration_outputUsage() {
 	var union types.Configuration
@@ -124,6 +128,9 @@ func ExampleFindingDetails_outputUsage() {
 	case *types.FindingDetailsMemberExternalAccessDetails:
 		_ = v.Value // Value is types.ExternalAccessDetails
 
+	case *types.FindingDetailsMemberInternalAccessDetails:
+		_ = v.Value // Value is types.InternalAccessDetails
+
 	case *types.FindingDetailsMemberUnusedIamRoleDetails:
 		_ = v.Value // Value is types.UnusedIamRoleDetails
 
@@ -145,6 +152,7 @@ func ExampleFindingDetails_outputUsage() {
 	}
 }
 
+var _ *types.InternalAccessDetails
 var _ *types.ExternalAccessDetails
 var _ *types.UnusedIamRoleDetails
 var _ *types.UnusedPermissionDetails
@@ -157,6 +165,9 @@ func ExampleFindingsStatistics_outputUsage() {
 	switch v := union.(type) {
 	case *types.FindingsStatisticsMemberExternalAccessFindingsStatistics:
 		_ = v.Value // Value is types.ExternalAccessFindingsStatistics
+
+	case *types.FindingsStatisticsMemberInternalAccessFindingsStatistics:
+		_ = v.Value // Value is types.InternalAccessFindingsStatistics
 
 	case *types.FindingsStatisticsMemberUnusedAccessFindingsStatistics:
 		_ = v.Value // Value is types.UnusedAccessFindingsStatistics
@@ -172,6 +183,7 @@ func ExampleFindingsStatistics_outputUsage() {
 
 var _ *types.ExternalAccessFindingsStatistics
 var _ *types.UnusedAccessFindingsStatistics
+var _ *types.InternalAccessFindingsStatistics
 
 func ExampleNetworkOriginConfiguration_outputUsage() {
 	var union types.NetworkOriginConfiguration

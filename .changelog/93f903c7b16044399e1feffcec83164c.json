@@ -1,0 +1,8 @@
+{
+    "id": "93f903c7-b160-4439-9e1f-effcec83164c",
+    "type": "feature",
+    "description": "This release enables customers to create Multi-party approval teams and approval requests to protect supported operations.",
+    "modules": [
+        "service/mpa"
+    ]
+}

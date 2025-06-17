@@ -250,6 +250,26 @@ func (m *validateOpResendValidationEmail) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRevokeCertificate struct {
+}
+
+func (*validateOpRevokeCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRevokeCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RevokeCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRevokeCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCertificateOptions struct {
 }
 
@@ -316,6 +336,10 @@ func addOpRequestCertificateValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpResendValidationEmailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpResendValidationEmail{}, middleware.After)
+}
+
+func addOpRevokeCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRevokeCertificate{}, middleware.After)
 }
 
 func addOpUpdateCertificateOptionsValidationMiddleware(stack *middleware.Stack) error {
@@ -602,6 +626,24 @@ func validateOpResendValidationEmailInput(v *ResendValidationEmailInput) error {
 	}
 	if v.ValidationDomain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ValidationDomain"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRevokeCertificateInput(v *RevokeCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevokeCertificateInput"}
+	if v.CertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
+	}
+	if len(v.RevocationReason) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RevocationReason"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

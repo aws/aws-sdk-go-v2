@@ -21,8 +21,7 @@ import (
 // parameter value is null only when there are no more results to display.
 //
 // This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator for an Amazon Web Services
-// service.
+// by a member account that is a delegated administrator.
 //
 // In the current release, a child can have only a single parent.
 func (c *Client) ListParents(ctx context.Context, params *ListParentsInput, optFns ...func(*Options)) (*ListParentsOutput, error) {

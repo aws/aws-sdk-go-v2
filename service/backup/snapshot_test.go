@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociateBackupVaultMpaApprovalTeam(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateBackupVaultMpaApprovalTeam(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateBackupVaultMpaApprovalTeam")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelLegalHold(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelLegalHold(context.Background(), nil, func(o *Options) {
@@ -151,6 +163,18 @@ func TestCheckSnapshot_CreateReportPlan(t *testing.T) {
 	_, err := svc.CreateReportPlan(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateReportPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateRestoreAccessBackupVault(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRestoreAccessBackupVault(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRestoreAccessBackupVault")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -439,6 +463,18 @@ func TestCheckSnapshot_DescribeRestoreJob(t *testing.T) {
 	_, err := svc.DescribeRestoreJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeRestoreJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateBackupVaultMpaApprovalTeam(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateBackupVaultMpaApprovalTeam(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateBackupVaultMpaApprovalTeam")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -878,6 +914,18 @@ func TestCheckSnapshot_ListReportPlans(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListRestoreAccessBackupVaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRestoreAccessBackupVaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRestoreAccessBackupVaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListRestoreJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRestoreJobs(context.Background(), nil, func(o *Options) {
@@ -991,6 +1039,18 @@ func TestCheckSnapshot_PutRestoreValidationResult(t *testing.T) {
 	_, err := svc.PutRestoreValidationResult(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutRestoreValidationResult")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RevokeRestoreAccessBackupVault(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeRestoreAccessBackupVault(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RevokeRestoreAccessBackupVault")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1189,6 +1249,18 @@ func TestCheckSnapshot_UpdateRestoreTestingSelection(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AssociateBackupVaultMpaApprovalTeam(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateBackupVaultMpaApprovalTeam(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateBackupVaultMpaApprovalTeam")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CancelLegalHold(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelLegalHold(context.Background(), nil, func(o *Options) {
@@ -1278,6 +1350,18 @@ func TestUpdateSnapshot_CreateReportPlan(t *testing.T) {
 	_, err := svc.CreateReportPlan(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateReportPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRestoreAccessBackupVault(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRestoreAccessBackupVault(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRestoreAccessBackupVault")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1566,6 +1650,18 @@ func TestUpdateSnapshot_DescribeRestoreJob(t *testing.T) {
 	_, err := svc.DescribeRestoreJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeRestoreJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateBackupVaultMpaApprovalTeam(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateBackupVaultMpaApprovalTeam(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateBackupVaultMpaApprovalTeam")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2005,6 +2101,18 @@ func TestUpdateSnapshot_ListReportPlans(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListRestoreAccessBackupVaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRestoreAccessBackupVaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRestoreAccessBackupVaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListRestoreJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRestoreJobs(context.Background(), nil, func(o *Options) {
@@ -2118,6 +2226,18 @@ func TestUpdateSnapshot_PutRestoreValidationResult(t *testing.T) {
 	_, err := svc.PutRestoreValidationResult(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutRestoreValidationResult")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RevokeRestoreAccessBackupVault(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeRestoreAccessBackupVault(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RevokeRestoreAccessBackupVault")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

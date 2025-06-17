@@ -74,6 +74,30 @@ func TestCheckSnapshot_AssociateMember(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchAssociateCodeSecurityScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchAssociateCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchAssociateCodeSecurityScanConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchDisassociateCodeSecurityScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDisassociateCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDisassociateCodeSecurityScanConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetAccountStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetAccountStatus(context.Background(), nil, func(o *Options) {
@@ -182,6 +206,30 @@ func TestCheckSnapshot_CreateCisScanConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCodeSecurityIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCodeSecurityIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCodeSecurityIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateCodeSecurityScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCodeSecurityScanConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateFilter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFilter(context.Background(), nil, func(o *Options) {
@@ -223,6 +271,30 @@ func TestCheckSnapshot_DeleteCisScanConfiguration(t *testing.T) {
 	_, err := svc.DeleteCisScanConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteCisScanConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCodeSecurityIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCodeSecurityIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCodeSecurityIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCodeSecurityScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCodeSecurityScanConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -343,6 +415,42 @@ func TestCheckSnapshot_GetClustersForImage(t *testing.T) {
 	_, err := svc.GetClustersForImage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetClustersForImage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCodeSecurityIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCodeSecurityIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCodeSecurityIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCodeSecurityScan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCodeSecurityScan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCodeSecurityScan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCodeSecurityScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCodeSecurityScanConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -487,6 +595,42 @@ func TestCheckSnapshot_ListCisScans(t *testing.T) {
 	_, err := svc.ListCisScans(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCisScans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCodeSecurityIntegrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCodeSecurityIntegrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCodeSecurityIntegrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCodeSecurityScanConfigurationAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCodeSecurityScanConfigurationAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCodeSecurityScanConfigurationAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCodeSecurityScanConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCodeSecurityScanConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCodeSecurityScanConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -662,6 +806,18 @@ func TestCheckSnapshot_StartCisSession(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartCodeSecurityScan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCodeSecurityScan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartCodeSecurityScan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopCisSession(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopCisSession(context.Background(), nil, func(o *Options) {
@@ -703,6 +859,30 @@ func TestCheckSnapshot_UpdateCisScanConfiguration(t *testing.T) {
 	_, err := svc.UpdateCisScanConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateCisScanConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateCodeSecurityIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCodeSecurityIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCodeSecurityIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateCodeSecurityScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCodeSecurityScanConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -786,6 +966,30 @@ func TestUpdateSnapshot_AssociateMember(t *testing.T) {
 	_, err := svc.AssociateMember(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateMember")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchAssociateCodeSecurityScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchAssociateCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchAssociateCodeSecurityScanConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchDisassociateCodeSecurityScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDisassociateCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDisassociateCodeSecurityScanConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -901,6 +1105,30 @@ func TestUpdateSnapshot_CreateCisScanConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateCodeSecurityIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCodeSecurityIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCodeSecurityIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCodeSecurityScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCodeSecurityScanConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateFilter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFilter(context.Background(), nil, func(o *Options) {
@@ -942,6 +1170,30 @@ func TestUpdateSnapshot_DeleteCisScanConfiguration(t *testing.T) {
 	_, err := svc.DeleteCisScanConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCisScanConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCodeSecurityIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCodeSecurityIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCodeSecurityIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCodeSecurityScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCodeSecurityScanConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1062,6 +1314,42 @@ func TestUpdateSnapshot_GetClustersForImage(t *testing.T) {
 	_, err := svc.GetClustersForImage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetClustersForImage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCodeSecurityIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCodeSecurityIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCodeSecurityIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCodeSecurityScan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCodeSecurityScan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCodeSecurityScan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCodeSecurityScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCodeSecurityScanConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1206,6 +1494,42 @@ func TestUpdateSnapshot_ListCisScans(t *testing.T) {
 	_, err := svc.ListCisScans(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCisScans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCodeSecurityIntegrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCodeSecurityIntegrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCodeSecurityIntegrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCodeSecurityScanConfigurationAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCodeSecurityScanConfigurationAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCodeSecurityScanConfigurationAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCodeSecurityScanConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCodeSecurityScanConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCodeSecurityScanConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1381,6 +1705,18 @@ func TestUpdateSnapshot_StartCisSession(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartCodeSecurityScan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCodeSecurityScan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartCodeSecurityScan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopCisSession(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopCisSession(context.Background(), nil, func(o *Options) {
@@ -1422,6 +1758,30 @@ func TestUpdateSnapshot_UpdateCisScanConfiguration(t *testing.T) {
 	_, err := svc.UpdateCisScanConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateCisScanConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCodeSecurityIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCodeSecurityIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCodeSecurityIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCodeSecurityScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCodeSecurityScanConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

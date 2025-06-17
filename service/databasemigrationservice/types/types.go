@@ -507,6 +507,9 @@ type DataProvider struct {
 	// The settings in JSON format for a data provider.
 	Settings DataProviderSettings
 
+	// Indicates whether the data provider is virtual.
+	Virtual *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1362,6 +1365,13 @@ type IbmDb2LuwDataProviderSettings struct {
 	// The port value for the DB2 LUW data provider.
 	Port *int32
 
+	// The ARN for the role the application uses to access its Amazon S3 bucket.
+	S3AccessRoleArn *string
+
+	// The path for the Amazon S3 bucket that the application uses for accessing the
+	// user-defined schema.
+	S3Path *string
+
 	// The name of the DB2 LUW server.
 	ServerName *string
 
@@ -1453,6 +1463,13 @@ type IbmDb2zOsDataProviderSettings struct {
 
 	// The port value for the DB2 for z/OS data provider.
 	Port *int32
+
+	// The ARN for the role the application uses to access its Amazon S3 bucket.
+	S3AccessRoleArn *string
+
+	// The path for the Amazon S3 bucket that the application uses for accessing the
+	// user-defined schema.
+	S3Path *string
 
 	// The name of the DB2 for z/OS server.
 	ServerName *string
@@ -1772,6 +1789,13 @@ type MariaDbDataProviderSettings struct {
 	// The port value for the MariaDB data provider
 	Port *int32
 
+	// The ARN for the role the application uses to access its Amazon S3 bucket.
+	S3AccessRoleArn *string
+
+	// The path for the Amazon S3 bucket that the application uses for accessing the
+	// user-defined schema.
+	S3Path *string
+
 	// The name of the MariaDB server.
 	ServerName *string
 
@@ -1793,6 +1817,13 @@ type MicrosoftSqlServerDataProviderSettings struct {
 
 	// The port value for the Microsoft SQL Server data provider.
 	Port *int32
+
+	// The ARN for the role the application uses to access its Amazon S3 bucket.
+	S3AccessRoleArn *string
+
+	// The path for the Amazon S3 bucket that the application uses for accessing the
+	// user-defined schema.
+	S3Path *string
 
 	// The name of the Microsoft SQL Server server.
 	ServerName *string
@@ -2102,6 +2133,13 @@ type MySqlDataProviderSettings struct {
 	// The port value for the MySQL data provider.
 	Port *int32
 
+	// The ARN for the role the application uses to access its Amazon S3 bucket.
+	S3AccessRoleArn *string
+
+	// The path for the Amazon S3 bucket that the application uses for accessing the
+	// user-defined schema.
+	S3Path *string
+
 	// The name of the MySQL server.
 	ServerName *string
 
@@ -2293,6 +2331,13 @@ type OracleDataProviderSettings struct {
 
 	// The port value for the Oracle data provider.
 	Port *int32
+
+	// The ARN for the role the application uses to access its Amazon S3 bucket.
+	S3AccessRoleArn *string
+
+	// The path for the Amazon S3 bucket that the application uses for accessing the
+	// user-defined schema.
+	S3Path *string
 
 	// The ARN of the IAM role that provides access to the secret in Secrets Manager
 	// that contains the Oracle ASM connection details.
@@ -2739,6 +2784,13 @@ type PostgreSqlDataProviderSettings struct {
 
 	// The port value for the PostgreSQL data provider.
 	Port *int32
+
+	// The ARN for the role the application uses to access its Amazon S3 bucket.
+	S3AccessRoleArn *string
+
+	// The path for the Amazon S3 bucket that the application uses for accessing the
+	// user-defined schema.
+	S3Path *string
 
 	// The name of the PostgreSQL server.
 	ServerName *string
@@ -3255,6 +3307,13 @@ type RedshiftDataProviderSettings struct {
 
 	// The port value for the Amazon Redshift data provider.
 	Port *int32
+
+	// The ARN for the role the application uses to access its Amazon S3 bucket.
+	S3AccessRoleArn *string
+
+	// The path for the Amazon S3 bucket that the application uses for accessing the
+	// user-defined schema.
+	S3Path *string
 
 	// The name of the Amazon Redshift server.
 	ServerName *string
@@ -4565,7 +4624,7 @@ type S3Settings struct {
 	// current UTC time into a specified time zone. The conversion occurs when a date
 	// partition folder is created and a CDC filename is generated. The time zone
 	// format is Area/Location. Use this parameter when DatePartitionedEnabled is set
-	// to true , as shown in the following example.
+	// to true, as shown in the following example:
 	//
 	//     s3-settings='{"DatePartitionEnabled": true, "DatePartitionSequence":
 	//     "YYYYMMDDHH", "DatePartitionDelimiter": "SLASH",

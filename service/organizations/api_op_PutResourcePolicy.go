@@ -13,7 +13,7 @@ import (
 
 // Creates or updates a resource policy.
 //
-// You can only call this operation from the organization's management account.
+// This operation can be called only from the organization's management account..
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}

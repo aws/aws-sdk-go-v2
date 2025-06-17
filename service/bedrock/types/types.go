@@ -3516,12 +3516,7 @@ type S3Config struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon S3 data source of the model to import. For the [CreateCustomModel] API operation, you
-// must specify the Amazon S3 URI for the Amazon-managed Amazon S3 bucket
-// containing your model artifacts. SageMaker AI creates this bucket when you run
-// your first SageMaker AI training job.
-//
-// [CreateCustomModel]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModel.html
+// The Amazon S3 data source of the model to import.
 type S3DataSource struct {
 
 	// The URI of the Amazon S3 data source.

@@ -327,6 +327,7 @@ const (
 	FindingTypeUnusedIamUserAccessKey FindingType = "UnusedIAMUserAccessKey"
 	FindingTypeUnusedIamUserPassword  FindingType = "UnusedIAMUserPassword"
 	FindingTypeUnusedPermission       FindingType = "UnusedPermission"
+	FindingTypeInternalAccess         FindingType = "InternalAccess"
 )
 
 // Values returns all known values for FindingType. Note that this can be expanded
@@ -340,6 +341,26 @@ func (FindingType) Values() []FindingType {
 		"UnusedIAMUserAccessKey",
 		"UnusedIAMUserPassword",
 		"UnusedPermission",
+		"InternalAccess",
+	}
+}
+
+type InternalAccessType string
+
+// Enum values for InternalAccessType
+const (
+	InternalAccessTypeIntraAccount InternalAccessType = "INTRA_ACCOUNT"
+	InternalAccessTypeIntraOrg     InternalAccessType = "INTRA_ORG"
+)
+
+// Values returns all known values for InternalAccessType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InternalAccessType) Values() []InternalAccessType {
+	return []InternalAccessType{
+		"INTRA_ACCOUNT",
+		"INTRA_ORG",
 	}
 }
 
@@ -509,6 +530,25 @@ func (PolicyType) Values() []PolicyType {
 	}
 }
 
+type PrincipalType string
+
+// Enum values for PrincipalType
+const (
+	PrincipalTypeIamRole PrincipalType = "IAM_ROLE"
+	PrincipalTypeIamUser PrincipalType = "IAM_USER"
+)
+
+// Values returns all known values for PrincipalType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrincipalType) Values() []PrincipalType {
+	return []PrincipalType{
+		"IAM_ROLE",
+		"IAM_USER",
+	}
+}
+
 type ReasonCode string
 
 // Enum values for ReasonCode
@@ -576,6 +616,7 @@ const (
 	ResourceControlPolicyRestrictionApplicable          ResourceControlPolicyRestriction = "APPLICABLE"
 	ResourceControlPolicyRestrictionFailedToEvaluateRcp ResourceControlPolicyRestriction = "FAILED_TO_EVALUATE_RCP"
 	ResourceControlPolicyRestrictionNotApplicable       ResourceControlPolicyRestriction = "NOT_APPLICABLE"
+	ResourceControlPolicyRestrictionApplied             ResourceControlPolicyRestriction = "APPLIED"
 )
 
 // Values returns all known values for ResourceControlPolicyRestriction. Note that
@@ -588,6 +629,7 @@ func (ResourceControlPolicyRestriction) Values() []ResourceControlPolicyRestrict
 		"APPLICABLE",
 		"FAILED_TO_EVALUATE_RCP",
 		"NOT_APPLICABLE",
+		"APPLIED",
 	}
 }
 
@@ -640,6 +682,30 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type ServiceControlPolicyRestriction string
+
+// Enum values for ServiceControlPolicyRestriction
+const (
+	ServiceControlPolicyRestrictionApplicable          ServiceControlPolicyRestriction = "APPLICABLE"
+	ServiceControlPolicyRestrictionFailedToEvaluateScp ServiceControlPolicyRestriction = "FAILED_TO_EVALUATE_SCP"
+	ServiceControlPolicyRestrictionNotApplicable       ServiceControlPolicyRestriction = "NOT_APPLICABLE"
+	ServiceControlPolicyRestrictionApplied             ServiceControlPolicyRestriction = "APPLIED"
+)
+
+// Values returns all known values for ServiceControlPolicyRestriction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceControlPolicyRestriction) Values() []ServiceControlPolicyRestriction {
+	return []ServiceControlPolicyRestriction{
+		"APPLICABLE",
+		"FAILED_TO_EVALUATE_SCP",
+		"NOT_APPLICABLE",
+		"APPLIED",
+	}
+}
+
 type Status string
 
 // Enum values for Status
@@ -665,10 +731,12 @@ type Type string
 
 // Enum values for Type
 const (
-	TypeAccount                  Type = "ACCOUNT"
-	TypeOrganization             Type = "ORGANIZATION"
-	TypeAccountUnusedAccess      Type = "ACCOUNT_UNUSED_ACCESS"
-	TypeOrganizationUnusedAccess Type = "ORGANIZATION_UNUSED_ACCESS"
+	TypeAccount                    Type = "ACCOUNT"
+	TypeOrganization               Type = "ORGANIZATION"
+	TypeAccountUnusedAccess        Type = "ACCOUNT_UNUSED_ACCESS"
+	TypeOrganizationUnusedAccess   Type = "ORGANIZATION_UNUSED_ACCESS"
+	TypeAccountInternalAccess      Type = "ACCOUNT_INTERNAL_ACCESS"
+	TypeOrganizationInternalAccess Type = "ORGANIZATION_INTERNAL_ACCESS"
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
@@ -681,6 +749,8 @@ func (Type) Values() []Type {
 		"ORGANIZATION",
 		"ACCOUNT_UNUSED_ACCESS",
 		"ORGANIZATION_UNUSED_ACCESS",
+		"ACCOUNT_INTERNAL_ACCESS",
+		"ORGANIZATION_INTERNAL_ACCESS",
 	}
 }
 

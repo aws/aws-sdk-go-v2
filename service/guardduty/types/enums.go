@@ -42,6 +42,33 @@ func (AutoEnableMembers) Values() []AutoEnableMembers {
 	}
 }
 
+type ClusterStatus string
+
+// Enum values for ClusterStatus
+const (
+	ClusterStatusCreating ClusterStatus = "CREATING"
+	ClusterStatusActive   ClusterStatus = "ACTIVE"
+	ClusterStatusDeleting ClusterStatus = "DELETING"
+	ClusterStatusFailed   ClusterStatus = "FAILED"
+	ClusterStatusUpdating ClusterStatus = "UPDATING"
+	ClusterStatusPending  ClusterStatus = "PENDING"
+)
+
+// Values returns all known values for ClusterStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterStatus) Values() []ClusterStatus {
+	return []ClusterStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+		"FAILED",
+		"UPDATING",
+		"PENDING",
+	}
+}
+
 type CoverageFilterCriterionKey string
 
 // Enum values for CoverageFilterCriterionKey
@@ -453,6 +480,9 @@ const (
 	FindingResourceTypeS3Bucket            FindingResourceType = "S3_BUCKET"
 	FindingResourceTypeS3Object            FindingResourceType = "S3_OBJECT"
 	FindingResourceTypeAccessKey           FindingResourceType = "ACCESS_KEY"
+	FindingResourceTypeEksCluster          FindingResourceType = "EKS_CLUSTER"
+	FindingResourceTypeKubernetesWorkload  FindingResourceType = "KUBERNETES_WORKLOAD"
+	FindingResourceTypeContainer           FindingResourceType = "CONTAINER"
 )
 
 // Values returns all known values for FindingResourceType. Note that this can be
@@ -466,6 +496,9 @@ func (FindingResourceType) Values() []FindingResourceType {
 		"S3_BUCKET",
 		"S3_OBJECT",
 		"ACCESS_KEY",
+		"EKS_CLUSTER",
+		"KUBERNETES_WORKLOAD",
+		"CONTAINER",
 	}
 }
 
@@ -562,6 +595,12 @@ const (
 	IndicatorTypeUnusualApiForAccount IndicatorType = "UNUSUAL_API_FOR_ACCOUNT"
 	IndicatorTypeUnusualAsnForAccount IndicatorType = "UNUSUAL_ASN_FOR_ACCOUNT"
 	IndicatorTypeUnusualAsnForUser    IndicatorType = "UNUSUAL_ASN_FOR_USER"
+	IndicatorTypeSuspiciousProcess    IndicatorType = "SUSPICIOUS_PROCESS"
+	IndicatorTypeMaliciousDomain      IndicatorType = "MALICIOUS_DOMAIN"
+	IndicatorTypeMaliciousProcess     IndicatorType = "MALICIOUS_PROCESS"
+	IndicatorTypeCryptominingIp       IndicatorType = "CRYPTOMINING_IP"
+	IndicatorTypeCryptominingDomain   IndicatorType = "CRYPTOMINING_DOMAIN"
+	IndicatorTypeCryptominingProcess  IndicatorType = "CRYPTOMINING_PROCESS"
 )
 
 // Values returns all known values for IndicatorType. Note that this can be
@@ -580,6 +619,12 @@ func (IndicatorType) Values() []IndicatorType {
 		"UNUSUAL_API_FOR_ACCOUNT",
 		"UNUSUAL_ASN_FOR_ACCOUNT",
 		"UNUSUAL_ASN_FOR_USER",
+		"SUSPICIOUS_PROCESS",
+		"MALICIOUS_DOMAIN",
+		"MALICIOUS_PROCESS",
+		"CRYPTOMINING_IP",
+		"CRYPTOMINING_DOMAIN",
+		"CRYPTOMINING_PROCESS",
 	}
 }
 
@@ -636,6 +681,37 @@ func (IpSetStatus) Values() []IpSetStatus {
 		"ERROR",
 		"DELETE_PENDING",
 		"DELETED",
+	}
+}
+
+type KubernetesResourcesTypes string
+
+// Enum values for KubernetesResourcesTypes
+const (
+	KubernetesResourcesTypesPods                   KubernetesResourcesTypes = "PODS"
+	KubernetesResourcesTypesJobs                   KubernetesResourcesTypes = "JOBS"
+	KubernetesResourcesTypesCronjobs               KubernetesResourcesTypes = "CRONJOBS"
+	KubernetesResourcesTypesDeployments            KubernetesResourcesTypes = "DEPLOYMENTS"
+	KubernetesResourcesTypesDaemonsets             KubernetesResourcesTypes = "DAEMONSETS"
+	KubernetesResourcesTypesStatefulsets           KubernetesResourcesTypes = "STATEFULSETS"
+	KubernetesResourcesTypesReplicasets            KubernetesResourcesTypes = "REPLICASETS"
+	KubernetesResourcesTypesReplicationcontrollers KubernetesResourcesTypes = "REPLICATIONCONTROLLERS"
+)
+
+// Values returns all known values for KubernetesResourcesTypes. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KubernetesResourcesTypes) Values() []KubernetesResourcesTypes {
+	return []KubernetesResourcesTypes{
+		"PODS",
+		"JOBS",
+		"CRONJOBS",
+		"DEPLOYMENTS",
+		"DAEMONSETS",
+		"STATEFULSETS",
+		"REPLICASETS",
+		"REPLICATIONCONTROLLERS",
 	}
 }
 
@@ -1054,9 +1130,13 @@ type SignalType string
 
 // Enum values for SignalType
 const (
-	SignalTypeFinding      SignalType = "FINDING"
-	SignalTypeCloudTrail   SignalType = "CLOUD_TRAIL"
-	SignalTypeS3DataEvents SignalType = "S3_DATA_EVENTS"
+	SignalTypeFinding           SignalType = "FINDING"
+	SignalTypeCloudTrail        SignalType = "CLOUD_TRAIL"
+	SignalTypeS3DataEvents      SignalType = "S3_DATA_EVENTS"
+	SignalTypeEksAuditLogs      SignalType = "EKS_AUDIT_LOGS"
+	SignalTypeFlowLogs          SignalType = "FLOW_LOGS"
+	SignalTypeDnsLogs           SignalType = "DNS_LOGS"
+	SignalTypeRuntimeMonitoring SignalType = "RUNTIME_MONITORING"
 )
 
 // Values returns all known values for SignalType. Note that this can be expanded
@@ -1068,6 +1148,10 @@ func (SignalType) Values() []SignalType {
 		"FINDING",
 		"CLOUD_TRAIL",
 		"S3_DATA_EVENTS",
+		"EKS_AUDIT_LOGS",
+		"FLOW_LOGS",
+		"DNS_LOGS",
+		"RUNTIME_MONITORING",
 	}
 }
 

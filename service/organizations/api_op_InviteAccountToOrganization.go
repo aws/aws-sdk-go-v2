@@ -16,17 +16,10 @@ import (
 // associated with the other account's owner. The invitation is implemented as a Handshake
 // whose details are in the response.
 //
-//   - You can invite Amazon Web Services accounts only from the same seller as
-//     the management account. For example, if your organization's management account
-//     was created by Amazon Internet Services Pvt. Ltd (AISPL), an Amazon Web Services
-//     seller in India, you can invite only other AISPL accounts to your organization.
-//     You can't combine accounts from AISPL and Amazon Web Services or from any other
-//     Amazon Web Services seller. For more information, see [Consolidated billing in India].
-//
-//   - If you receive an exception that indicates that you exceeded your account
-//     limits for the organization or that the operation failed because your
-//     organization is still initializing, wait one hour and then try again. If the
-//     error persists after an hour, contact [Amazon Web Services Support].
+// If you receive an exception that indicates that you exceeded your account
+// limits for the organization or that the operation failed because your
+// organization is still initializing, wait one hour and then try again. If the
+// error persists after an hour, contact [Amazon Web Services Support].
 //
 // If the request includes tags, then the requester must have the
 // organizations:TagResource permission.
@@ -34,7 +27,6 @@ import (
 // This operation can be called only from the organization's management account.
 //
 // [Amazon Web Services Support]: https://console.aws.amazon.com/support/home#/
-// [Consolidated billing in India]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilling-India.html
 func (c *Client) InviteAccountToOrganization(ctx context.Context, params *InviteAccountToOrganizationInput, optFns ...func(*Options)) (*InviteAccountToOrganizationOutput, error) {
 	if params == nil {
 		params = &InviteAccountToOrganizationInput{}

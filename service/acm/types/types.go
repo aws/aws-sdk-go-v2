@@ -151,20 +151,29 @@ type CertificateDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Structure that contains options for your certificate. Currently, you can use
-// this only to specify whether to opt in to or out of certificate transparency
-// logging. Some browsers require that public certificates issued for your domain
-// be recorded in a log. Certificates that are not logged typically generate a
-// browser error. Transparency makes it possible for you to detect SSL/TLS
-// certificates that have been mistakenly or maliciously issued for your domain.
-// For general information, see [Certificate Transparency Logging].
+// Structure that contains options for your certificate. You can use this
+// structure to specify whether to opt in to or out of certificate transparency
+// logging and export your certificate.
 //
+// Some browsers require that public certificates issued for your domain be
+// recorded in a log. Certificates that are not logged typically generate a browser
+// error. Transparency makes it possible for you to detect SSL/TLS certificates
+// that have been mistakenly or maliciously issued for your domain. For general
+// information, see [Certificate Transparency Logging].
+//
+// You can export public ACM certificates to use with Amazon Web Services services
+// as well as outside Amazon Web Services Cloud. For more information, see [Certificate Manager exportable public certificate].
+//
+// [Certificate Manager exportable public certificate]: https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html
 // [Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
 type CertificateOptions struct {
 
 	// You can opt out of certificate transparency logging by specifying the DISABLED
 	// option. Opt in by specifying ENABLED .
 	CertificateTransparencyLoggingPreference CertificateTransparencyLoggingPreference
+
+	// You can opt in to allow the export of your certificates by specifying ENABLED .
+	Export CertificateExport
 
 	noSmithyDocumentSerde
 }
@@ -187,6 +196,9 @@ type CertificateSummary struct {
 	// Fully qualified domain name (FQDN), such as www.example.com or example.com, for
 	// the certificate.
 	DomainName *string
+
+	// Indicates if export is enabled for the certificate.
+	ExportOption CertificateExport
 
 	// Indicates whether the certificate has been exported. This value exists only
 	// when the certificate type is PRIVATE .
@@ -298,18 +310,18 @@ type DomainValidation struct {
 	DomainName *string
 
 	// Contains information for HTTP-based domain validation of certificates requested
-	// through CloudFront and issued by ACM. This field exists only when the
+	// through Amazon CloudFront and issued by ACM. This field exists only when the
 	// certificate type is AMAZON_ISSUED and the validation method is HTTP .
 	HttpRedirect *HttpRedirect
 
 	// Contains the CNAME record that you add to your DNS database for domain
 	// validation. For more information, see [Use DNS to Validate Domain Ownership].
 	//
-	// Note: The CNAME information that you need does not include the name of your
-	// domain. If you include your domain name in the DNS database CNAME record,
-	// validation fails. For example, if the name is
-	// "_a79865eb4cd1a6ab990a45779b4e0b96.yourdomain.com", only
-	// "_a79865eb4cd1a6ab990a45779b4e0b96" must be used.
+	// The CNAME information that you need does not include the name of your domain.
+	// If you include your domain name in the DNS database CNAME record, validation
+	// fails. For example, if the name is
+	// _a79865eb4cd1a6ab990a45779b4e0b96.yourdomain.com , only
+	// _a79865eb4cd1a6ab990a45779b4e0b96 must be used.
 	//
 	// [Use DNS to Validate Domain Ownership]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
 	ResourceRecord *ResourceRecord
@@ -418,6 +430,9 @@ type ExtendedKeyUsage struct {
 // certificate list.
 type Filters struct {
 
+	// Specify ENABLED or DISABLED to identify certificates that can be exported.
+	ExportOption CertificateExport
+
 	// Specify one or more ExtendedKeyUsage extension values.
 	ExtendedKeyUsage []ExtendedKeyUsageName
 
@@ -440,7 +455,7 @@ type Filters struct {
 }
 
 // Contains information for HTTP-based domain validation of certificates requested
-// through CloudFront and issued by ACM. This field exists only when the
+// through Amazon CloudFront and issued by ACM. This field exists only when the
 // certificate type is AMAZON_ISSUED and the validation method is HTTP .
 type HttpRedirect struct {
 

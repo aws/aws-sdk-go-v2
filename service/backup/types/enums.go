@@ -114,6 +114,7 @@ const (
 	BackupVaultEventBackupPlanModified          BackupVaultEvent = "BACKUP_PLAN_MODIFIED"
 	BackupVaultEventS3BackupObjectFailed        BackupVaultEvent = "S3_BACKUP_OBJECT_FAILED"
 	BackupVaultEventS3RestoreObjectFailed       BackupVaultEvent = "S3_RESTORE_OBJECT_FAILED"
+	BackupVaultEventContinuousBackupInterrupted BackupVaultEvent = "CONTINUOUS_BACKUP_INTERRUPTED"
 	BackupVaultEventRecoveryPointIndexCompleted BackupVaultEvent = "RECOVERY_POINT_INDEX_COMPLETED"
 	BackupVaultEventRecoveryPointIndexDeleted   BackupVaultEvent = "RECOVERY_POINT_INDEX_DELETED"
 	BackupVaultEventRecoveryPointIndexingFailed BackupVaultEvent = "RECOVERY_POINT_INDEXING_FAILED"
@@ -142,6 +143,7 @@ func (BackupVaultEvent) Values() []BackupVaultEvent {
 		"BACKUP_PLAN_MODIFIED",
 		"S3_BACKUP_OBJECT_FAILED",
 		"S3_RESTORE_OBJECT_FAILED",
+		"CONTINUOUS_BACKUP_INTERRUPTED",
 		"RECOVERY_POINT_INDEX_COMPLETED",
 		"RECOVERY_POINT_INDEX_DELETED",
 		"RECOVERY_POINT_INDEXING_FAILED",
@@ -289,6 +291,46 @@ func (LegalHoldStatus) Values() []LegalHoldStatus {
 		"ACTIVE",
 		"CANCELING",
 		"CANCELED",
+	}
+}
+
+type MpaRevokeSessionStatus string
+
+// Enum values for MpaRevokeSessionStatus
+const (
+	MpaRevokeSessionStatusPending MpaRevokeSessionStatus = "PENDING"
+	MpaRevokeSessionStatusFailed  MpaRevokeSessionStatus = "FAILED"
+)
+
+// Values returns all known values for MpaRevokeSessionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MpaRevokeSessionStatus) Values() []MpaRevokeSessionStatus {
+	return []MpaRevokeSessionStatus{
+		"PENDING",
+		"FAILED",
+	}
+}
+
+type MpaSessionStatus string
+
+// Enum values for MpaSessionStatus
+const (
+	MpaSessionStatusPending  MpaSessionStatus = "PENDING"
+	MpaSessionStatusApproved MpaSessionStatus = "APPROVED"
+	MpaSessionStatusFailed   MpaSessionStatus = "FAILED"
+)
+
+// Values returns all known values for MpaSessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MpaSessionStatus) Values() []MpaSessionStatus {
+	return []MpaSessionStatus{
+		"PENDING",
+		"APPROVED",
+		"FAILED",
 	}
 }
 
@@ -509,6 +551,7 @@ type VaultType string
 const (
 	VaultTypeBackupVault                   VaultType = "BACKUP_VAULT"
 	VaultTypeLogicallyAirGappedBackupVault VaultType = "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
+	VaultTypeRestoreAccessBackupVault      VaultType = "RESTORE_ACCESS_BACKUP_VAULT"
 )
 
 // Values returns all known values for VaultType. Note that this can be expanded
@@ -519,5 +562,6 @@ func (VaultType) Values() []VaultType {
 	return []VaultType{
 		"BACKUP_VAULT",
 		"LOGICALLY_AIR_GAPPED_BACKUP_VAULT",
+		"RESTORE_ACCESS_BACKUP_VAULT",
 	}
 }

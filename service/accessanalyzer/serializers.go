@@ -3384,6 +3384,12 @@ func awsRestjson1_serializeDocumentAnalyzerConfiguration(v types.AnalyzerConfigu
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.AnalyzerConfigurationMemberInternalAccess:
+		av := object.Key("internalAccess")
+		if err := awsRestjson1_serializeDocumentInternalAccessConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.AnalyzerConfigurationMemberUnusedAccess:
 		av := object.Key("unusedAccess")
 		if err := awsRestjson1_serializeDocumentUnusedAccessConfiguration(&uv.Value, av); err != nil {
@@ -3736,6 +3742,75 @@ func awsRestjson1_serializeDocumentInlineArchiveRulesList(v []types.InlineArchiv
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInternalAccessAnalysisRule(v *types.InternalAccessAnalysisRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Inclusions != nil {
+		ok := object.Key("inclusions")
+		if err := awsRestjson1_serializeDocumentInternalAccessAnalysisRuleCriteriaList(v.Inclusions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInternalAccessAnalysisRuleCriteria(v *types.InternalAccessAnalysisRuleCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountIds != nil {
+		ok := object.Key("accountIds")
+		if err := awsRestjson1_serializeDocumentAccountIdsList(v.AccountIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceArns != nil {
+		ok := object.Key("resourceArns")
+		if err := awsRestjson1_serializeDocumentResourceArnsList(v.ResourceArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceTypes != nil {
+		ok := object.Key("resourceTypes")
+		if err := awsRestjson1_serializeDocumentResourceTypeList(v.ResourceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInternalAccessAnalysisRuleCriteriaList(v []types.InternalAccessAnalysisRuleCriteria, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentInternalAccessAnalysisRuleCriteria(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInternalAccessConfiguration(v *types.InternalAccessConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisRule != nil {
+		ok := object.Key("analysisRule")
+		if err := awsRestjson1_serializeDocumentInternalAccessAnalysisRule(v.AnalysisRule, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInternetConfiguration(v *types.InternetConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4042,6 +4117,17 @@ func awsRestjson1_serializeDocumentRegionList(v []string, value smithyjson.Value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentResourceArnsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentResourcesList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4049,6 +4135,17 @@ func awsRestjson1_serializeDocumentResourcesList(v []string, value smithyjson.Va
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourceTypeList(v []types.ResourceType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

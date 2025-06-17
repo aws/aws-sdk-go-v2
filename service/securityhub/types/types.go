@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -261,6 +262,16 @@ type AdminAccount struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a cross-Region data aggregation configuration, including the
+// aggregation Region and any linked Regions.
+type AggregatorV2 struct {
+
+	// The ARN of the aggregatorV2.
+	AggregatorV2Arn *string
+
+	noSmithyDocumentSerde
+}
+
 //	Information about an enabled security standard in which a security control is
 //
 // enabled.
@@ -346,6 +357,34 @@ type AutomationRulesAction struct {
 	//  Specifies the type of action that Security Hub takes when a finding matches
 	// the defined criteria of a rule.
 	Type AutomationRulesActionType
+
+	noSmithyDocumentSerde
+}
+
+// Allows you to customize security response workflows.
+type AutomationRulesActionTypeObjectV2 struct {
+
+	// The category of action to be executed by the automation rule.
+	Type AutomationRulesActionTypeV2
+
+	noSmithyDocumentSerde
+}
+
+// Allows you to configure automated responses.
+type AutomationRulesActionV2 struct {
+
+	// The category of action to be executed by the automation rule.
+	//
+	// This member is required.
+	Type AutomationRulesActionTypeV2
+
+	// The settings for integrating automation rule actions with external systems or
+	// service.
+	ExternalIntegrationConfiguration *ExternalIntegrationConfiguration
+
+	// The changes to be applied to fields in a security finding when an automation
+	// rule is triggered.
+	FindingFieldsUpdate *AutomationRulesFindingFieldsUpdateV2
 
 	noSmithyDocumentSerde
 }
@@ -445,6 +484,24 @@ type AutomationRulesFindingFieldsUpdate struct {
 
 	// Used to update information about the investigation into the finding.
 	Workflow *WorkflowUpdate
+
+	noSmithyDocumentSerde
+}
+
+// Allows you to define the structure for modifying specific fields in security
+// findings.
+type AutomationRulesFindingFieldsUpdateV2 struct {
+
+	// Notes or contextual information for findings that are modified by the
+	// automation rule.
+	Comment *string
+
+	// The severity level to be assigned to findings that match the automation rule
+	// criteria.
+	SeverityId *int32
+
+	// The status to be applied to findings that match automation rule criteria.
+	StatusId *int32
 
 	noSmithyDocumentSerde
 }
@@ -762,6 +819,39 @@ type AutomationRulesMetadata struct {
 	// Security Hub, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Includes essential metadata information about automation rules.
+type AutomationRulesMetadataV2 struct {
+
+	// The list of action to be performed when the rule criteria is met.
+	Actions []AutomationRulesActionTypeObjectV2
+
+	// The timestamp for when the automation rule was created.
+	CreatedAt *time.Time
+
+	// An explanation for the purpose and funcitonality of the automation rule.
+	Description *string
+
+	// The ARN of the automation rule.
+	RuleArn *string
+
+	// The ID of the automation rule.
+	RuleId *string
+
+	// The name of the automation rule.
+	RuleName *string
+
+	// The value for the rule priority.
+	RuleOrder *float32
+
+	// The status of the automation rule.
+	RuleStatus RuleStatusV2
+
+	// The timestamp for the most recent modification to the automation rule.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -14090,6 +14180,38 @@ type BatchUpdateFindingsUnprocessedFinding struct {
 	noSmithyDocumentSerde
 }
 
+// The list of findings that were updated.
+type BatchUpdateFindingsV2ProcessedFinding struct {
+
+	// The finding identifier of a processed finding.
+	FindingIdentifier *OcsfFindingIdentifier
+
+	// The metadata.uid of a processed finding.
+	MetadataUid *string
+
+	noSmithyDocumentSerde
+}
+
+// The list of findings that were not updated.
+type BatchUpdateFindingsV2UnprocessedFinding struct {
+
+	// Indicates the specific type of error preventing successful processing of a
+	// finding during a batch update operation.
+	ErrorCode BatchUpdateFindingsV2UnprocessedFindingErrorCode
+
+	// A detailed description of why a finding could not be processed during a batch
+	// update operation.
+	ErrorMessage *string
+
+	// The finding identifier of an unprocessed finding.
+	FindingIdentifier *OcsfFindingIdentifier
+
+	// The metadata.uid of an unprocessed finding.
+	MetadataUid *string
+
+	noSmithyDocumentSerde
+}
+
 //	The options for customizing a security control parameter with a boolean. For a
 //
 // boolean parameter, the options are true and false .
@@ -14285,6 +14407,30 @@ type Compliance struct {
 	noSmithyDocumentSerde
 }
 
+// Enables the creation of filtering criteria for security findings.
+type CompositeFilter struct {
+
+	// Enables filtering based on boolean field values.
+	BooleanFilters []OcsfBooleanFilter
+
+	// Enables filtering based on date and timestamp fields.
+	DateFilters []OcsfDateFilter
+
+	// Enables filtering based on map field values.
+	MapFilters []OcsfMapFilter
+
+	// Enables filtering based on numerical field values.
+	NumberFilters []OcsfNumberFilter
+
+	// The logical operator used to combine multiple filter conditions.
+	Operator AllowedOperators
+
+	// Enables filtering based on string field values.
+	StringFilters []OcsfStringFilter
+
+	noSmithyDocumentSerde
+}
+
 //	The options for customizing a security control parameter.
 //
 // The following types satisfy this interface:
@@ -14459,6 +14605,40 @@ type ConfigurationPolicySummary struct {
 	noSmithyDocumentSerde
 }
 
+// A condensed overview of the connectorV2..
+type ConnectorSummary struct {
+
+	// The UUID of the connectorV2 to identify connectorV2 resource.
+	//
+	// This member is required.
+	ConnectorId *string
+
+	// ISO 8601 UTC timestamp for the time create the connectorV2.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Name field contains the user-defined name assigned to the integration
+	// connector. This helps identify and manage multiple connectors within Security
+	// Hub.
+	//
+	// This member is required.
+	Name *string
+
+	// The connectorV2 third party provider configuration summary.
+	//
+	// This member is required.
+	ProviderSummary *ProviderSummary
+
+	// The Amazon Resource Name (ARN) of the connectorV2.
+	ConnectorArn *string
+
+	// The description of the connectorV2.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // Container details related to a finding.
 type ContainerDetails struct {
 
@@ -14503,6 +14683,25 @@ type Country struct {
 
 	noSmithyDocumentSerde
 }
+
+// Defines the parameters and conditions used to evaluate and filter security
+// findings.
+//
+// The following types satisfy this interface:
+//
+//	CriteriaMemberOcsfFindingCriteria
+type Criteria interface {
+	isCriteria()
+}
+
+// The filtering conditions that align with OCSF standards.
+type CriteriaMemberOcsfFindingCriteria struct {
+	Value OcsfFindingFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*CriteriaMemberOcsfFindingCriteria) isCriteria() {}
 
 // The list of detected instances of sensitive data.
 type CustomDataIdentifiersDetections struct {
@@ -14684,6 +14883,16 @@ type EnumListConfigurationOptions struct {
 	//  The maximum number of list items that an enum list control parameter can
 	// accept.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
+}
+
+// Defines the settings and parameters required for integrating external security
+// tools and services.
+type ExternalIntegrationConfiguration struct {
+
+	// The ARN of the connector that establishes the integration.
+	ConnectorArn *string
 
 	noSmithyDocumentSerde
 }
@@ -15017,6 +15226,65 @@ type GeoLocation struct {
 	noSmithyDocumentSerde
 }
 
+// Represents finding statistics grouped by GroupedByField .
+type GroupByResult struct {
+
+	// The attribute by which filtered security findings should be grouped.
+	GroupByField *string
+
+	// An array of grouped values and their respective counts for each GroupByField .
+	GroupByValues []GroupByValue
+
+	noSmithyDocumentSerde
+}
+
+// Defines the how the finding attribute should be grouped.
+type GroupByRule struct {
+
+	// The attribute by which filtered findings should be grouped.
+	//
+	// This member is required.
+	GroupByField GroupByField
+
+	// The criteria used to select which security findings should be included in the
+	// grouping operation.
+	Filters *OcsfFindingFilters
+
+	noSmithyDocumentSerde
+}
+
+// Represents individual aggregated results when grouping security findings for
+// each GroupByField .
+type GroupByValue struct {
+
+	// The number of findings for a specific FieldValue and GroupByField .
+	Count *int32
+
+	// The value of the field by which findings are grouped.
+	FieldValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the operational status and health of a connectorV2.
+type HealthCheck struct {
+
+	// The status of the connectorV2.
+	//
+	// This member is required.
+	ConnectorStatus ConnectorStatus
+
+	// ISO 8601 UTC timestamp for the time check the health status of the connectorV2.
+	//
+	// This member is required.
+	LastCheckedAt *time.Time
+
+	// The message for the reason of connectorStatus change.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // An Internet Control Message Protocol (ICMP) type and code.
 type IcmpTypeCode struct {
 
@@ -15262,6 +15530,48 @@ type Ipv6CidrBlockAssociation struct {
 
 	// The IPv6 CIDR block.
 	Ipv6CidrBlock *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the configuration and status of a Jira Cloud integration.
+type JiraCloudDetail struct {
+
+	// The status of the authorization between Jira Cloud and the service.
+	AuthStatus ConnectorAuthStatus
+
+	// The URL to provide to customers for OAuth auth code flow.
+	AuthUrl *string
+
+	// The cloud id of the Jira Cloud.
+	CloudId *string
+
+	// The URL domain of your Jira Cloud instance.
+	Domain *string
+
+	// The projectKey of Jira Cloud.
+	ProjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// The initial configuration settings required to establish an integration between
+// Security Hub and Jira Cloud.
+type JiraCloudProviderConfiguration struct {
+
+	// The project key for a JiraCloud instance.
+	ProjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// The parameters used to modify an existing Jira Cloud integration.
+type JiraCloudUpdateConfiguration struct {
+
+	// The project key for a JiraCloud instance.
+	//
+	// This member is required.
+	ProjectKey *string
 
 	noSmithyDocumentSerde
 }
@@ -15770,6 +16080,105 @@ type Occurrences struct {
 	noSmithyDocumentSerde
 }
 
+// Enables filtering of security findings based on boolean field values in OCSF.
+type OcsfBooleanFilter struct {
+
+	// The name of the field.
+	FieldName OcsfBooleanField
+
+	// Boolean filter for querying findings.
+	Filter *BooleanFilter
+
+	noSmithyDocumentSerde
+}
+
+// Enables filtering of security findings based on date and timestamp fields in
+// OCSF.
+type OcsfDateFilter struct {
+
+	// The name of the field.
+	FieldName OcsfDateField
+
+	// A date filter for querying findings.
+	Filter *DateFilter
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the filtering criteria for security findings using OCSF.
+type OcsfFindingFilters struct {
+
+	// Enables the creation of complex filtering conditions by combining filter
+	// criteria.
+	CompositeFilters []CompositeFilter
+
+	// The logical operators used to combine the filtering on multiple CompositeFilters
+	// .
+	CompositeOperator AllowedOperators
+
+	noSmithyDocumentSerde
+}
+
+// Provides a standard to identify security findings using OCSF.
+type OcsfFindingIdentifier struct {
+
+	// Finding cloud.account.uid, which is a unique identifier in the Amazon Web
+	// Services account..
+	//
+	// This member is required.
+	CloudAccountUid *string
+
+	// Finding finding_info.uid, which is a unique identifier for the finding from the
+	// finding provider.
+	//
+	// This member is required.
+	FindingInfoUid *string
+
+	// Finding metadata.product.uid, which is a unique identifier for the product.
+	//
+	// This member is required.
+	MetadataProductUid *string
+
+	noSmithyDocumentSerde
+}
+
+// Enables filtering of security findings based on map field values in OCSF.
+type OcsfMapFilter struct {
+
+	// The name of the field.
+	FieldName OcsfMapField
+
+	// A map filter for filtering Security Hub findings. Each map filter provides the
+	// field to check for, the value to check for, and the comparison operator.
+	Filter *MapFilter
+
+	noSmithyDocumentSerde
+}
+
+// Enables filtering of security findings based on numerical field values in OCSF.
+type OcsfNumberFilter struct {
+
+	// The name of the field.
+	FieldName OcsfNumberField
+
+	// A number filter for querying findings.
+	Filter *NumberFilter
+
+	noSmithyDocumentSerde
+}
+
+// Enables filtering of security findings based on string field values in OCSF.
+type OcsfStringFilter struct {
+
+	// The name of the field.
+	FieldName OcsfStringField
+
+	// A string filter for filtering Security Hub findings.
+	Filter *StringFilter
+
+	noSmithyDocumentSerde
+}
+
 //	Provides information about the way an organization is configured in Security
 //
 // Hub.
@@ -16200,6 +16609,34 @@ type Product struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the structure for the productV2.
+type ProductV2 struct {
+
+	// The URL to the serviceV@ or productV2 documentation about the integration,
+	// which includes how to activate the integration.
+	ActivationUrl *string
+
+	// The domains or functional areas the productV2 addresses.
+	Categories []string
+
+	// The name of the organization or vendor that provides the productV2.
+	CompanyName *string
+
+	// Detailed information about the productV2.
+	Description *string
+
+	// The type of integration.
+	IntegrationV2Types []IntegrationV2Type
+
+	// The console URL where you can purchase or subscribe to products.
+	MarketplaceUrl *string
+
+	// The name of the productV2.
+	ProductV2Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a virtual private gateway propagating route.
 type PropagatingVgwSetDetails struct {
 
@@ -16208,6 +16645,95 @@ type PropagatingVgwSetDetails struct {
 
 	noSmithyDocumentSerde
 }
+
+// The initial configuration settings required to establish an integration between
+// Security Hub and third-party provider.
+//
+// The following types satisfy this interface:
+//
+//	ProviderConfigurationMemberJiraCloud
+//	ProviderConfigurationMemberServiceNow
+type ProviderConfiguration interface {
+	isProviderConfiguration()
+}
+
+// The configuration settings required to establish an integration with Jira Cloud.
+type ProviderConfigurationMemberJiraCloud struct {
+	Value JiraCloudProviderConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderConfigurationMemberJiraCloud) isProviderConfiguration() {}
+
+// The configuration settings required to establish an integration with ServiceNow
+// ITSM.
+type ProviderConfigurationMemberServiceNow struct {
+	Value ServiceNowProviderConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderConfigurationMemberServiceNow) isProviderConfiguration() {}
+
+// The third-party provider detail for a service configuration.
+//
+// The following types satisfy this interface:
+//
+//	ProviderDetailMemberJiraCloud
+//	ProviderDetailMemberServiceNow
+type ProviderDetail interface {
+	isProviderDetail()
+}
+
+// Details about a Jira Cloud integration.
+type ProviderDetailMemberJiraCloud struct {
+	Value JiraCloudDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderDetailMemberJiraCloud) isProviderDetail() {}
+
+// Details about a ServiceNow ITSM integration.
+type ProviderDetailMemberServiceNow struct {
+	Value ServiceNowDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderDetailMemberServiceNow) isProviderDetail() {}
+
+// The connectorV2 third-party provider configuration summary.
+type ProviderSummary struct {
+
+	// The status for the connectorV2.
+	ConnectorStatus ConnectorStatus
+
+	// The name of the provider.
+	ProviderName ConnectorProviderName
+
+	noSmithyDocumentSerde
+}
+
+// The parameters required to update the configuration of an integration provider.
+//
+// The following types satisfy this interface:
+//
+//	ProviderUpdateConfigurationMemberJiraCloud
+type ProviderUpdateConfiguration interface {
+	isProviderUpdateConfiguration()
+}
+
+// The parameters required to update the configuration for a Jira Cloud
+// integration.
+type ProviderUpdateConfigurationMemberJiraCloud struct {
+	Value JiraCloudUpdateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderUpdateConfigurationMemberJiraCloud) isProviderUpdateConfiguration() {}
 
 // Identifies where the sensitive data begins and ends.
 type Range struct {
@@ -16696,6 +17222,232 @@ type ResourceDetails struct {
 	//   - The resource type does not have a corresponding object. This includes
 	//   resources for which the type is Other .
 	Other map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A list of summaries for all finding types on a resource.
+type ResourceFindingsSummary struct {
+
+	// The category or classification of the security finding.
+	//
+	// This member is required.
+	FindingType *string
+
+	// The name of the product associated with the security finding.
+	//
+	// This member is required.
+	ProductName *string
+
+	// The total count of security findings.
+	//
+	// This member is required.
+	TotalFindings *int32
+
+	// A breakdown of security findings by their severity levels.
+	Severities *ResourceSeverityBreakdown
+
+	noSmithyDocumentSerde
+}
+
+// Defines the configuration for organizing and categorizing Amazon Web Services
+// resources based on associated security findings.
+type ResourceGroupByRule struct {
+
+	// Specifies the attribute that resources should be grouped by.
+	//
+	// This member is required.
+	GroupByField ResourceGroupByField
+
+	// The criteria used to select resources and associated security findings.
+	Filters *ResourcesFilters
+
+	noSmithyDocumentSerde
+}
+
+// Provides comprehensive details about an Amazon Web Services resource and its
+// associated security findings.
+type ResourceResult struct {
+
+	// The Amazon Web Services account that owns the resource.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The Amazon Web Services Region where the resource is located.
+	//
+	// This member is required.
+	Region *string
+
+	// The configuration details of a resource.
+	//
+	// This member is required.
+	ResourceConfig document.Interface
+
+	// The timestamp when information about the resource was captured.
+	//
+	// This member is required.
+	ResourceDetailCaptureTimeDt *string
+
+	// The unique identifier for a resource.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// An aggregated view of security findings associated with a resource.
+	FindingsSummary []ResourceFindingsSummary
+
+	// Specifies the ARN that uniquely identifies a resource.
+	ResourceArn *string
+
+	// The grouping where the resource belongs.
+	ResourceCategory ResourceCategory
+
+	// The time when the resource was created.
+	ResourceCreationTimeDt *string
+
+	// The name of the resource.
+	ResourceName *string
+
+	// The key-value pairs associated with a resource.
+	ResourceTags []ResourceTag
+
+	// The type of resource.
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+// Enables the creation of criteria for Amazon Web Services resources in Security
+// Hub.
+type ResourcesCompositeFilter struct {
+
+	// Enables filtering based on date and timestamp field values.
+	DateFilters []ResourcesDateFilter
+
+	// Enables filtering based on map-based field values.
+	MapFilters []ResourcesMapFilter
+
+	// Enables filtering based on numerical field values.
+	NumberFilters []ResourcesNumberFilter
+
+	// The logical operator used to combine multiple filter conditions.
+	Operator AllowedOperators
+
+	// Enables filtering based on string field values.
+	StringFilters []ResourcesStringFilter
+
+	noSmithyDocumentSerde
+}
+
+// Enables the filtering of Amazon Web Services resources based on date and
+// timestamp attributes.
+type ResourcesDateFilter struct {
+
+	// The name of the field.
+	FieldName ResourcesDateField
+
+	// A date filter for querying findings.
+	Filter *DateFilter
+
+	noSmithyDocumentSerde
+}
+
+// A comprehensive distribution of security findings by severity level for Amazon
+// Web Services resources.
+type ResourceSeverityBreakdown struct {
+
+	// The number of findings with a severity level of critical.
+	Critical *int32
+
+	// The number of findings with a severity level of fatal.
+	Fatal *int32
+
+	// The number of findings with a severity level of high.
+	High *int32
+
+	// The number of findings that provide security-related information.
+	Informational *int32
+
+	// The number of findings with a severity level of low.
+	Low *int32
+
+	// The number of findings with a severity level of medium.
+	Medium *int32
+
+	// The number of findings not in any of the severity categories.
+	Other *int32
+
+	// The number of findings with a severity level cannot be determined.
+	Unknown *int32
+
+	noSmithyDocumentSerde
+}
+
+// Enables filtering of Amazon Web Services resources based on data.
+type ResourcesFilters struct {
+
+	// A collection of complex filtering conditions that can be applied to Amazon Web
+	// Services resources.
+	CompositeFilters []ResourcesCompositeFilter
+
+	// The logical operator used to combine multiple filter conditions in the
+	// structure.
+	CompositeOperator AllowedOperators
+
+	noSmithyDocumentSerde
+}
+
+// Enables filtering of Amazon Web Services resources based on key-value map
+// attributes.
+type ResourcesMapFilter struct {
+
+	// The name of the field.
+	FieldName ResourcesMapField
+
+	// A map filter for filtering Security Hub findings. Each map filter provides the
+	// field to check for, the value to check for, and the comparison operator.
+	Filter *MapFilter
+
+	noSmithyDocumentSerde
+}
+
+// Enables filtering of Amazon Web Services resources based on numerical values.
+type ResourcesNumberFilter struct {
+
+	// The name of the field.
+	FieldName ResourcesNumberField
+
+	// A number filter for querying findings.
+	Filter *NumberFilter
+
+	noSmithyDocumentSerde
+}
+
+// Enables filtering of Amazon Web Services resources based on string field values.
+type ResourcesStringFilter struct {
+
+	// The name of the field.
+	FieldName ResourcesStringField
+
+	// A string filter for filtering Security Hub findings.
+	Filter *StringFilter
+
+	noSmithyDocumentSerde
+}
+
+// Represents tag information associated with Amazon Web Services resources.
+type ResourceTag struct {
+
+	// The identifier or name of the tag.
+	//
+	// This member is required.
+	Key *string
+
+	// The data associated with the tag key.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -17322,6 +18074,45 @@ type Sequence struct {
 
 	//  Unique identifier of the attack sequence.
 	Uid *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a ServiceNow ITSM integration.
+type ServiceNowDetail struct {
+
+	// The status of the authorization between Jira Cloud and the service.
+	//
+	// This member is required.
+	AuthStatus ConnectorAuthStatus
+
+	// The clientId of ServiceNow ITSM.
+	ClientId *string
+
+	// The instanceName of ServiceNow ITSM.
+	InstanceName *string
+
+	noSmithyDocumentSerde
+}
+
+// The initial configuration settings required to establish an integration between
+// Security Hub and ServiceNow ITSM.
+type ServiceNowProviderConfiguration struct {
+
+	// The client ID of ServiceNow ITSM.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The client secret of ServiceNow ITSM.
+	//
+	// This member is required.
+	ClientSecret *string
+
+	// The instance name of ServiceNow ITSM.
+	//
+	// This member is required.
+	InstanceName *string
 
 	noSmithyDocumentSerde
 }
@@ -18035,7 +18826,9 @@ type StringFilter struct {
 	//
 	//   - ResourceType NOT_EQUALS AwsEc2NetworkInterface
 	//
-	// CONTAINS and NOT_CONTAINS operators can be used only with automation rules. For
+	// CONTAINS and NOT_CONTAINS operators can be used only with automation rules V1.
+	// CONTAINS_WORD operator is only supported in GetFindingsV2 ,
+	// GetFindingStatisticsV2 , GetResourcesV2 , and GetResourceStatisticsV2 APIs. For
 	// more information, see [Automation rules]in the Security Hub User Guide.
 	//
 	// [Automation rules]: https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html
@@ -18636,7 +19429,11 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isConfigurationOptions() {}
-func (*UnknownUnionMember) isParameterValue()       {}
-func (*UnknownUnionMember) isPolicy()               {}
-func (*UnknownUnionMember) isTarget()               {}
+func (*UnknownUnionMember) isConfigurationOptions()        {}
+func (*UnknownUnionMember) isCriteria()                    {}
+func (*UnknownUnionMember) isParameterValue()              {}
+func (*UnknownUnionMember) isPolicy()                      {}
+func (*UnknownUnionMember) isProviderConfiguration()       {}
+func (*UnknownUnionMember) isProviderDetail()              {}
+func (*UnknownUnionMember) isProviderUpdateConfiguration() {}
+func (*UnknownUnionMember) isTarget()                      {}

@@ -11,7 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	End of support notice: On May 20, 2026, Amazon Web Services will end support
+//
+// for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no
+// longer be able to access the Amazon Web Services DMS Fleet Advisor; console or
+// Amazon Web Services DMS Fleet Advisor; resources. For more information, see [Amazon Web Services DMS Fleet Advisor end of support].
+//
 // Returns a list of Fleet Advisor databases in your account.
+//
+// [Amazon Web Services DMS Fleet Advisor end of support]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
 func (c *Client) DescribeFleetAdvisorDatabases(ctx context.Context, params *DescribeFleetAdvisorDatabasesInput, optFns ...func(*Options)) (*DescribeFleetAdvisorDatabasesOutput, error) {
 	if params == nil {
 		params = &DescribeFleetAdvisorDatabasesInput{}

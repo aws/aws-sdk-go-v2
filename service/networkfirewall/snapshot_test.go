@@ -350,6 +350,18 @@ func TestCheckSnapshot_DescribeRuleGroupMetadata(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeRuleGroupSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRuleGroupSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeRuleGroupSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeTLSInspectionConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTLSInspectionConfiguration(context.Background(), nil, func(o *Options) {
@@ -1014,6 +1026,18 @@ func TestUpdateSnapshot_DescribeRuleGroupMetadata(t *testing.T) {
 	_, err := svc.DescribeRuleGroupMetadata(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeRuleGroupMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeRuleGroupSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRuleGroupSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeRuleGroupSummary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

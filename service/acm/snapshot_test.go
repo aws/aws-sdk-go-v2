@@ -230,6 +230,18 @@ func TestCheckSnapshot_ResendValidationEmail(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RevokeCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RevokeCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateCertificateOptions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateCertificateOptions(context.Background(), nil, func(o *Options) {
@@ -402,6 +414,18 @@ func TestUpdateSnapshot_ResendValidationEmail(t *testing.T) {
 	_, err := svc.ResendValidationEmail(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ResendValidationEmail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RevokeCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RevokeCertificate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

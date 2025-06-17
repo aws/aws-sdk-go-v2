@@ -53,6 +53,24 @@ var _ *types.BooleanConfigurationOptions
 var _ *types.EnumConfigurationOptions
 var _ *types.EnumListConfigurationOptions
 
+func ExampleCriteria_outputUsage() {
+	var union types.Criteria
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CriteriaMemberOcsfFindingCriteria:
+		_ = v.Value // Value is types.OcsfFindingFilters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OcsfFindingFilters
+
 func ExampleParameterValue_outputUsage() {
 	var union types.ParameterValue
 	// type switches can be used to check the union value
@@ -114,6 +132,68 @@ func ExamplePolicy_outputUsage() {
 }
 
 var _ *types.SecurityHubPolicy
+
+func ExampleProviderConfiguration_outputUsage() {
+	var union types.ProviderConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProviderConfigurationMemberJiraCloud:
+		_ = v.Value // Value is types.JiraCloudProviderConfiguration
+
+	case *types.ProviderConfigurationMemberServiceNow:
+		_ = v.Value // Value is types.ServiceNowProviderConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.JiraCloudProviderConfiguration
+var _ *types.ServiceNowProviderConfiguration
+
+func ExampleProviderDetail_outputUsage() {
+	var union types.ProviderDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProviderDetailMemberJiraCloud:
+		_ = v.Value // Value is types.JiraCloudDetail
+
+	case *types.ProviderDetailMemberServiceNow:
+		_ = v.Value // Value is types.ServiceNowDetail
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.JiraCloudDetail
+var _ *types.ServiceNowDetail
+
+func ExampleProviderUpdateConfiguration_outputUsage() {
+	var union types.ProviderUpdateConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProviderUpdateConfigurationMemberJiraCloud:
+		_ = v.Value // Value is types.JiraCloudUpdateConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.JiraCloudUpdateConfiguration
 
 func ExampleTarget_outputUsage() {
 	var union types.Target

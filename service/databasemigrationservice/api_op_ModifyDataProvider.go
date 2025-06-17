@@ -66,6 +66,9 @@ type ModifyDataProviderInput struct {
 	// The settings in JSON format for a data provider.
 	Settings types.DataProviderSettings
 
+	// Indicates whether the data provider is virtual.
+	Virtual *bool
+
 	noSmithyDocumentSerde
 }
 

@@ -7147,6 +7147,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "internalAccess":
+			var mv types.InternalAccessConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentInternalAccessConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AnalyzerConfigurationMemberInternalAccess{Value: mv}
+			break loop
+
 		case "unusedAccess":
 			var mv types.UnusedAccessConfiguration
 			destAddr := &mv
@@ -8589,6 +8599,16 @@ loop:
 			uv = &types.FindingDetailsMemberExternalAccessDetails{Value: mv}
 			break loop
 
+		case "internalAccessDetails":
+			var mv types.InternalAccessDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentInternalAccessDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FindingDetailsMemberInternalAccessDetails{Value: mv}
+			break loop
+
 		case "unusedIamRoleDetails":
 			var mv types.UnusedIamRoleDetails
 			destAddr := &mv
@@ -8895,6 +8915,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.FindingsStatisticsMemberExternalAccessFindingsStatistics{Value: mv}
+			break loop
+
+		case "internalAccessFindingsStatistics":
+			var mv types.InternalAccessFindingsStatistics
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentInternalAccessFindingsStatistics(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FindingsStatisticsMemberInternalAccessFindingsStatistics{Value: mv}
 			break loop
 
 		case "unusedAccessFindingsStatistics":
@@ -9450,6 +9480,434 @@ func awsRestjson1_deserializeDocumentIamRoleConfiguration(v **types.IamRoleConfi
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInternalAccessAnalysisRule(v **types.InternalAccessAnalysisRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InternalAccessAnalysisRule
+	if *v == nil {
+		sv = &types.InternalAccessAnalysisRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inclusions":
+			if err := awsRestjson1_deserializeDocumentInternalAccessAnalysisRuleCriteriaList(&sv.Inclusions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInternalAccessAnalysisRuleCriteria(v **types.InternalAccessAnalysisRuleCriteria, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InternalAccessAnalysisRuleCriteria
+	if *v == nil {
+		sv = &types.InternalAccessAnalysisRuleCriteria{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accountIds":
+			if err := awsRestjson1_deserializeDocumentAccountIdsList(&sv.AccountIds, value); err != nil {
+				return err
+			}
+
+		case "resourceArns":
+			if err := awsRestjson1_deserializeDocumentResourceArnsList(&sv.ResourceArns, value); err != nil {
+				return err
+			}
+
+		case "resourceTypes":
+			if err := awsRestjson1_deserializeDocumentResourceTypeList(&sv.ResourceTypes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInternalAccessAnalysisRuleCriteriaList(v *[]types.InternalAccessAnalysisRuleCriteria, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InternalAccessAnalysisRuleCriteria
+	if *v == nil {
+		cv = []types.InternalAccessAnalysisRuleCriteria{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InternalAccessAnalysisRuleCriteria
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentInternalAccessAnalysisRuleCriteria(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInternalAccessConfiguration(v **types.InternalAccessConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InternalAccessConfiguration
+	if *v == nil {
+		sv = &types.InternalAccessConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "analysisRule":
+			if err := awsRestjson1_deserializeDocumentInternalAccessAnalysisRule(&sv.AnalysisRule, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInternalAccessDetails(v **types.InternalAccessDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InternalAccessDetails
+	if *v == nil {
+		sv = &types.InternalAccessDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accessType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InternalAccessType to be of type string, got %T instead", value)
+				}
+				sv.AccessType = types.InternalAccessType(jtv)
+			}
+
+		case "action":
+			if err := awsRestjson1_deserializeDocumentActionList(&sv.Action, value); err != nil {
+				return err
+			}
+
+		case "condition":
+			if err := awsRestjson1_deserializeDocumentConditionKeyMap(&sv.Condition, value); err != nil {
+				return err
+			}
+
+		case "principal":
+			if err := awsRestjson1_deserializeDocumentPrincipalMap(&sv.Principal, value); err != nil {
+				return err
+			}
+
+		case "principalOwnerAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PrincipalOwnerAccount = ptr.String(jtv)
+			}
+
+		case "principalType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrincipalType to be of type string, got %T instead", value)
+				}
+				sv.PrincipalType = types.PrincipalType(jtv)
+			}
+
+		case "resourceControlPolicyRestriction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceControlPolicyRestriction to be of type string, got %T instead", value)
+				}
+				sv.ResourceControlPolicyRestriction = types.ResourceControlPolicyRestriction(jtv)
+			}
+
+		case "serviceControlPolicyRestriction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceControlPolicyRestriction to be of type string, got %T instead", value)
+				}
+				sv.ServiceControlPolicyRestriction = types.ServiceControlPolicyRestriction(jtv)
+			}
+
+		case "sources":
+			if err := awsRestjson1_deserializeDocumentFindingSourceList(&sv.Sources, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInternalAccessFindingsStatistics(v **types.InternalAccessFindingsStatistics, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InternalAccessFindingsStatistics
+	if *v == nil {
+		sv = &types.InternalAccessFindingsStatistics{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resourceTypeStatistics":
+			if err := awsRestjson1_deserializeDocumentInternalAccessResourceTypeStatisticsMap(&sv.ResourceTypeStatistics, value); err != nil {
+				return err
+			}
+
+		case "totalActiveFindings":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalActiveFindings = ptr.Int32(int32(i64))
+			}
+
+		case "totalArchivedFindings":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalArchivedFindings = ptr.Int32(int32(i64))
+			}
+
+		case "totalResolvedFindings":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalResolvedFindings = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInternalAccessResourceTypeDetails(v **types.InternalAccessResourceTypeDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InternalAccessResourceTypeDetails
+	if *v == nil {
+		sv = &types.InternalAccessResourceTypeDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "totalActiveFindings":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalActiveFindings = ptr.Int32(int32(i64))
+			}
+
+		case "totalArchivedFindings":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalArchivedFindings = ptr.Int32(int32(i64))
+			}
+
+		case "totalResolvedFindings":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalResolvedFindings = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInternalAccessResourceTypeStatisticsMap(v *map[string]types.InternalAccessResourceTypeDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.InternalAccessResourceTypeDetails
+	if *v == nil {
+		mv = map[string]types.InternalAccessResourceTypeDetails{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.InternalAccessResourceTypeDetails
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentInternalAccessResourceTypeDetails(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -11018,6 +11476,42 @@ func awsRestjson1_deserializeDocumentRegionList(v *[]string, value interface{}) 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentResourceArnsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11130,6 +11624,42 @@ func awsRestjson1_deserializeDocumentResourceTypeDetails(v **types.ResourceTypeD
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceTypeList(v *[]types.ResourceType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResourceType
+	if *v == nil {
+		cv = []types.ResourceType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResourceType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ResourceType to be of type string, got %T instead", value)
+			}
+			col = types.ResourceType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

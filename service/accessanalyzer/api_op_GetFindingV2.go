@@ -103,7 +103,8 @@ type GetFindingV2Output struct {
 
 	// The type of the finding. For external access analyzers, the type is
 	// ExternalAccess . For unused access analyzers, the type can be UnusedIAMRole ,
-	// UnusedIAMUserAccessKey , UnusedIAMUserPassword , or UnusedPermission .
+	// UnusedIAMUserAccessKey , UnusedIAMUserPassword , or UnusedPermission . For
+	// internal access analyzers, the type is InternalAccess .
 	FindingType types.FindingType
 
 	// A token used for pagination of results returned.

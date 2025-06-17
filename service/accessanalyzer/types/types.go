@@ -363,10 +363,22 @@ type AnalyzedResourceSummary struct {
 //
 // The following types satisfy this interface:
 //
+//	AnalyzerConfigurationMemberInternalAccess
 //	AnalyzerConfigurationMemberUnusedAccess
 type AnalyzerConfiguration interface {
 	isAnalyzerConfiguration()
 }
+
+// Specifies the configuration of an internal access analyzer for an Amazon Web
+// Services organization or account. This configuration determines how the analyzer
+// evaluates access within your Amazon Web Services environment.
+type AnalyzerConfigurationMemberInternalAccess struct {
+	Value InternalAccessConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AnalyzerConfigurationMemberInternalAccess) isAnalyzerConfiguration() {}
 
 // Specifies the configuration of an unused access analyzer for an Amazon Web
 // Services organization or account.
@@ -412,7 +424,8 @@ type AnalyzerSummary struct {
 	// This member is required.
 	Type Type
 
-	// Specifies whether the analyzer is an external access or unused access analyzer.
+	// Specifies if the analyzer is an external access, unused access, or internal
+	// access analyzer.
 	Configuration AnalyzerConfiguration
 
 	// The resource that was most recently analyzed by the analyzer.
@@ -865,6 +878,22 @@ type ExternalAccessDetails struct {
 
 	// The type of restriction applied to the finding by the resource owner with an
 	// Organizations resource control policy (RCP).
+	//
+	//   - APPLICABLE : There is an RCP present in the organization but IAM Access
+	//   Analyzer does not include it in the evaluation of effective permissions. For
+	//   example, if s3:DeleteObject is blocked by the RCP and the restriction is
+	//   APPLICABLE , then s3:DeleteObject would still be included in the list of
+	//   actions for the finding.
+	//
+	//   - FAILED_TO_EVALUATE_RCP : There was an error evaluating the RCP.
+	//
+	//   - NOT_APPLICABLE : There was no RCP present in the organization, or there was
+	//   no RCP applicable to the resource. For example, the resource being analyzed is
+	//   an Amazon RDS snapshot and there is an RCP in the organization, but the RCP only
+	//   impacts Amazon S3 buckets.
+	//
+	//   - APPLIED : This restriction is not currently available for external access
+	//   findings.
 	ResourceControlPolicyRestriction ResourceControlPolicyRestriction
 
 	// The sources of the external access finding. This indicates how the access that
@@ -990,6 +1019,7 @@ type FindingAggregationAccountDetails struct {
 // The following types satisfy this interface:
 //
 //	FindingDetailsMemberExternalAccessDetails
+//	FindingDetailsMemberInternalAccessDetails
 //	FindingDetailsMemberUnusedIamRoleDetails
 //	FindingDetailsMemberUnusedIamUserAccessKeyDetails
 //	FindingDetailsMemberUnusedIamUserPasswordDetails
@@ -1006,6 +1036,17 @@ type FindingDetailsMemberExternalAccessDetails struct {
 }
 
 func (*FindingDetailsMemberExternalAccessDetails) isFindingDetails() {}
+
+// The details for an internal access analyzer finding. This contains information
+// about access patterns identified within your Amazon Web Services organization or
+// account.
+type FindingDetailsMemberInternalAccessDetails struct {
+	Value InternalAccessDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FindingDetailsMemberInternalAccessDetails) isFindingDetails() {}
 
 // The details for an unused access analyzer finding with an unused IAM role
 // finding type.
@@ -1083,6 +1124,7 @@ type FindingSourceDetail struct {
 // The following types satisfy this interface:
 //
 //	FindingsStatisticsMemberExternalAccessFindingsStatistics
+//	FindingsStatisticsMemberInternalAccessFindingsStatistics
 //	FindingsStatisticsMemberUnusedAccessFindingsStatistics
 type FindingsStatistics interface {
 	isFindingsStatistics()
@@ -1096,6 +1138,17 @@ type FindingsStatisticsMemberExternalAccessFindingsStatistics struct {
 }
 
 func (*FindingsStatisticsMemberExternalAccessFindingsStatistics) isFindingsStatistics() {}
+
+// The aggregate statistics for an internal access analyzer. This includes
+// information about active, archived, and resolved findings related to internal
+// access within your Amazon Web Services organization or account.
+type FindingsStatisticsMemberInternalAccessFindingsStatistics struct {
+	Value InternalAccessFindingsStatistics
+
+	noSmithyDocumentSerde
+}
+
+func (*FindingsStatisticsMemberInternalAccessFindingsStatistics) isFindingsStatistics() {}
 
 // The aggregate statistics for an unused access analyzer.
 type FindingsStatisticsMemberUnusedAccessFindingsStatistics struct {
@@ -1220,7 +1273,10 @@ type FindingSummaryV2 struct {
 	// The error that resulted in an Error finding.
 	Error *string
 
-	// The type of the external access or unused access finding.
+	// The type of the access finding. For external access analyzers, the type is
+	// ExternalAccess . For unused access analyzers, the type can be UnusedIAMRole ,
+	// UnusedIAMUserAccessKey , UnusedIAMUserPassword , or UnusedPermission . For
+	// internal access analyzers, the type is InternalAccess .
 	FindingType FindingType
 
 	// The resource that the external principal has access to.
@@ -1310,6 +1366,179 @@ type InlineArchiveRule struct {
 	//
 	// This member is required.
 	RuleName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about analysis rules for the internal access analyzer.
+// Analysis rules determine which entities will generate findings based on the
+// criteria you define when you create the rule.
+type InternalAccessAnalysisRule struct {
+
+	// A list of rules for the internal access analyzer containing criteria to include
+	// in analysis. Only resources that meet the rule criteria will generate findings.
+	Inclusions []InternalAccessAnalysisRuleCriteria
+
+	noSmithyDocumentSerde
+}
+
+// The criteria for an analysis rule for an internal access analyzer.
+type InternalAccessAnalysisRuleCriteria struct {
+
+	// A list of Amazon Web Services account IDs to apply to the internal access
+	// analysis rule criteria. Account IDs can only be applied to the analysis rule
+	// criteria for organization-level analyzers.
+	AccountIds []string
+
+	// A list of resource ARNs to apply to the internal access analysis rule criteria.
+	// The analyzer will only generate findings for resources that match these ARNs.
+	ResourceArns []string
+
+	// A list of resource types to apply to the internal access analysis rule
+	// criteria. The analyzer will only generate findings for resources of these types.
+	// These resource types are currently supported for internal access analyzers:
+	//
+	//   - AWS::S3::Bucket
+	//
+	//   - AWS::RDS::DBSnapshot
+	//
+	//   - AWS::RDS::DBClusterSnapshot
+	//
+	//   - AWS::S3Express::DirectoryBucket
+	//
+	//   - AWS::DynamoDB::Table
+	//
+	//   - AWS::DynamoDB::Stream
+	ResourceTypes []ResourceType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration of an internal access analyzer for an Amazon Web
+// Services organization or account. This configuration determines how the analyzer
+// evaluates internal access within your Amazon Web Services environment.
+type InternalAccessConfiguration struct {
+
+	// Contains information about analysis rules for the internal access analyzer.
+	// These rules determine which resources and access patterns will be analyzed.
+	AnalysisRule *InternalAccessAnalysisRule
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an internal access finding. This includes details
+// about the access that was identified within your Amazon Web Services
+// organization or account.
+type InternalAccessDetails struct {
+
+	// The type of internal access identified in the finding. This indicates how the
+	// access is granted within your Amazon Web Services environment.
+	AccessType InternalAccessType
+
+	// The action in the analyzed policy statement that has internal access permission
+	// to use.
+	Action []string
+
+	// The condition in the analyzed policy statement that resulted in an internal
+	// access finding.
+	Condition map[string]string
+
+	// The principal that has access to a resource within the internal environment.
+	Principal map[string]string
+
+	// The Amazon Web Services account ID that owns the principal identified in the
+	// internal access finding.
+	PrincipalOwnerAccount *string
+
+	// The type of principal identified in the internal access finding, such as IAM
+	// role or IAM user.
+	PrincipalType PrincipalType
+
+	// The type of restriction applied to the finding by the resource owner with an
+	// Organizations resource control policy (RCP).
+	//
+	//   - APPLICABLE : There is an RCP present in the organization but IAM Access
+	//   Analyzer does not include it in the evaluation of effective permissions. For
+	//   example, if s3:DeleteObject is blocked by the RCP and the restriction is
+	//   APPLICABLE , then s3:DeleteObject would still be included in the list of
+	//   actions for the finding. Only applicable to internal access findings with the
+	//   account as the zone of trust.
+	//
+	//   - FAILED_TO_EVALUATE_RCP : There was an error evaluating the RCP.
+	//
+	//   - NOT_APPLICABLE : There was no RCP present in the organization. For internal
+	//   access findings with the account as the zone of trust, NOT_APPLICABLE could
+	//   also indicate that there was no RCP applicable to the resource.
+	//
+	//   - APPLIED : An RCP is present in the organization and IAM Access Analyzer
+	//   included it in the evaluation of effective permissions. For example, if
+	//   s3:DeleteObject is blocked by the RCP and the restriction is APPLIED , then
+	//   s3:DeleteObject would not be included in the list of actions for the finding.
+	//   Only applicable to internal access findings with the organization as the zone of
+	//   trust.
+	ResourceControlPolicyRestriction ResourceControlPolicyRestriction
+
+	// The type of restriction applied to the finding by an Organizations service
+	// control policy (SCP).
+	//
+	//   - APPLICABLE : There is an SCP present in the organization but IAM Access
+	//   Analyzer does not include it in the evaluation of effective permissions. Only
+	//   applicable to internal access findings with the account as the zone of trust.
+	//
+	//   - FAILED_TO_EVALUATE_SCP : There was an error evaluating the SCP.
+	//
+	//   - NOT_APPLICABLE : There was no SCP present in the organization. For internal
+	//   access findings with the account as the zone of trust, NOT_APPLICABLE could
+	//   also indicate that there was no SCP applicable to the principal.
+	//
+	//   - APPLIED : An SCP is present in the organization and IAM Access Analyzer
+	//   included it in the evaluation of effective permissions. Only applicable to
+	//   internal access findings with the organization as the zone of trust.
+	ServiceControlPolicyRestriction ServiceControlPolicyRestriction
+
+	// The sources of the internal access finding. This indicates how the access that
+	// generated the finding is granted within your Amazon Web Services environment.
+	Sources []FindingSource
+
+	noSmithyDocumentSerde
+}
+
+// Provides aggregate statistics about the findings for the specified internal
+// access analyzer. This includes counts of active, archived, and resolved
+// findings.
+type InternalAccessFindingsStatistics struct {
+
+	// The total number of active findings for each resource type of the specified
+	// internal access analyzer.
+	ResourceTypeStatistics map[string]InternalAccessResourceTypeDetails
+
+	// The number of active findings for the specified internal access analyzer.
+	TotalActiveFindings *int32
+
+	// The number of archived findings for the specified internal access analyzer.
+	TotalArchivedFindings *int32
+
+	// The number of resolved findings for the specified internal access analyzer.
+	TotalResolvedFindings *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the total number of active, archived, and resolved
+// findings for a resource type of an internal access analyzer.
+type InternalAccessResourceTypeDetails struct {
+
+	// The total number of active findings for the resource type in the internal
+	// access analyzer.
+	TotalActiveFindings *int32
+
+	// The total number of archived findings for the resource type in the internal
+	// access analyzer.
+	TotalArchivedFindings *int32
+
+	// The total number of resolved findings for the resource type in the internal
+	// access analyzer.
+	TotalResolvedFindings *int32
 
 	noSmithyDocumentSerde
 }

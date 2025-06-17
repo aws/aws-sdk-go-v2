@@ -21,8 +21,7 @@ import (
 // parameter value is null only when there are no more results to display.
 //
 // This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator for an Amazon Web Services
-// service.
+// by a member account that is a delegated administrator.
 func (c *Client) ListPoliciesForTarget(ctx context.Context, params *ListPoliciesForTargetInput, optFns ...func(*Options)) (*ListPoliciesForTargetOutput, error) {
 	if params == nil {
 		params = &ListPoliciesForTargetInput{}
@@ -57,7 +56,10 @@ type ListPoliciesForTargetInput struct {
 	//
 	// [AISERVICES_OPT_OUT_POLICY]
 	//
+	// [SECURITYHUB_POLICY]
+	//
 	// [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+	// [SECURITYHUB_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
 	// [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
 	// [SERVICE_CONTROL_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
 	// [CHATBOT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html

@@ -30,6 +30,46 @@ func (m *validateOpAssociateMember) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchAssociateCodeSecurityScanConfiguration struct {
+}
+
+func (*validateOpBatchAssociateCodeSecurityScanConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchAssociateCodeSecurityScanConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchAssociateCodeSecurityScanConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchAssociateCodeSecurityScanConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchDisassociateCodeSecurityScanConfiguration struct {
+}
+
+func (*validateOpBatchDisassociateCodeSecurityScanConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDisassociateCodeSecurityScanConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDisassociateCodeSecurityScanConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDisassociateCodeSecurityScanConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetCodeSnippet struct {
 }
 
@@ -170,6 +210,46 @@ func (m *validateOpCreateCisScanConfiguration) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCodeSecurityIntegration struct {
+}
+
+func (*validateOpCreateCodeSecurityIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCodeSecurityIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCodeSecurityIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCodeSecurityIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCodeSecurityScanConfiguration struct {
+}
+
+func (*validateOpCreateCodeSecurityScanConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCodeSecurityScanConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCodeSecurityScanConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCodeSecurityScanConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFilter struct {
 }
 
@@ -245,6 +325,46 @@ func (m *validateOpDeleteCisScanConfiguration) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCisScanConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCodeSecurityIntegration struct {
+}
+
+func (*validateOpDeleteCodeSecurityIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCodeSecurityIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCodeSecurityIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCodeSecurityIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCodeSecurityScanConfiguration struct {
+}
+
+func (*validateOpDeleteCodeSecurityScanConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCodeSecurityScanConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCodeSecurityScanConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCodeSecurityScanConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +530,66 @@ func (m *validateOpGetClustersForImage) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCodeSecurityIntegration struct {
+}
+
+func (*validateOpGetCodeSecurityIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCodeSecurityIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCodeSecurityIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCodeSecurityIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCodeSecurityScanConfiguration struct {
+}
+
+func (*validateOpGetCodeSecurityScanConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCodeSecurityScanConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCodeSecurityScanConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCodeSecurityScanConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCodeSecurityScan struct {
+}
+
+func (*validateOpGetCodeSecurityScan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCodeSecurityScan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCodeSecurityScanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCodeSecurityScanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEncryptionKey struct {
 }
 
@@ -545,6 +725,26 @@ func (m *validateOpListCisScans) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListCisScansInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCodeSecurityScanConfigurationAssociations struct {
+}
+
+func (*validateOpListCodeSecurityScanConfigurationAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCodeSecurityScanConfigurationAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCodeSecurityScanConfigurationAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCodeSecurityScanConfigurationAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +950,26 @@ func (m *validateOpStartCisSession) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCodeSecurityScan struct {
+}
+
+func (*validateOpStartCodeSecurityScan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCodeSecurityScan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCodeSecurityScanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCodeSecurityScanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopCisSession struct {
 }
 
@@ -825,6 +1045,46 @@ func (m *validateOpUpdateCisScanConfiguration) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateCisScanConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCodeSecurityIntegration struct {
+}
+
+func (*validateOpUpdateCodeSecurityIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCodeSecurityIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCodeSecurityIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCodeSecurityIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCodeSecurityScanConfiguration struct {
+}
+
+func (*validateOpUpdateCodeSecurityScanConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCodeSecurityScanConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCodeSecurityScanConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCodeSecurityScanConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -934,6 +1194,14 @@ func addOpAssociateMemberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateMember{}, middleware.After)
 }
 
+func addOpBatchAssociateCodeSecurityScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchAssociateCodeSecurityScanConfiguration{}, middleware.After)
+}
+
+func addOpBatchDisassociateCodeSecurityScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDisassociateCodeSecurityScanConfiguration{}, middleware.After)
+}
+
 func addOpBatchGetCodeSnippetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetCodeSnippet{}, middleware.After)
 }
@@ -962,6 +1230,14 @@ func addOpCreateCisScanConfigurationValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpCreateCisScanConfiguration{}, middleware.After)
 }
 
+func addOpCreateCodeSecurityIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCodeSecurityIntegration{}, middleware.After)
+}
+
+func addOpCreateCodeSecurityScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCodeSecurityScanConfiguration{}, middleware.After)
+}
+
 func addOpCreateFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFilter{}, middleware.After)
 }
@@ -976,6 +1252,14 @@ func addOpCreateSbomExportValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteCisScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCisScanConfiguration{}, middleware.After)
+}
+
+func addOpDeleteCodeSecurityIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCodeSecurityIntegration{}, middleware.After)
+}
+
+func addOpDeleteCodeSecurityScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCodeSecurityScanConfiguration{}, middleware.After)
 }
 
 func addOpDeleteFilterValidationMiddleware(stack *middleware.Stack) error {
@@ -1010,6 +1294,18 @@ func addOpGetClustersForImageValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetClustersForImage{}, middleware.After)
 }
 
+func addOpGetCodeSecurityIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCodeSecurityIntegration{}, middleware.After)
+}
+
+func addOpGetCodeSecurityScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCodeSecurityScanConfiguration{}, middleware.After)
+}
+
+func addOpGetCodeSecurityScanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCodeSecurityScan{}, middleware.After)
+}
+
 func addOpGetEncryptionKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEncryptionKey{}, middleware.After)
 }
@@ -1036,6 +1332,10 @@ func addOpListCisScanResultsAggregatedByTargetResourceValidationMiddleware(stack
 
 func addOpListCisScansValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCisScans{}, middleware.After)
+}
+
+func addOpListCodeSecurityScanConfigurationAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCodeSecurityScanConfigurationAssociations{}, middleware.After)
 }
 
 func addOpListCoverageValidationMiddleware(stack *middleware.Stack) error {
@@ -1078,6 +1378,10 @@ func addOpStartCisSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartCisSession{}, middleware.After)
 }
 
+func addOpStartCodeSecurityScanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCodeSecurityScan{}, middleware.After)
+}
+
 func addOpStopCisSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopCisSession{}, middleware.After)
 }
@@ -1092,6 +1396,14 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateCisScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCisScanConfiguration{}, middleware.After)
+}
+
+func addOpUpdateCodeSecurityIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCodeSecurityIntegration{}, middleware.After)
+}
+
+func addOpUpdateCodeSecurityScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCodeSecurityScanConfiguration{}, middleware.After)
 }
 
 func addOpUpdateConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1147,6 +1459,11 @@ func validateAggregationRequest(v types.AggregationRequest) error {
 			invalidParams.AddNested("[awsEcrContainerAggregation]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.AggregationRequestMemberCodeRepositoryAggregation:
+		if err := validateCodeRepositoryAggregation(&uv.Value); err != nil {
+			invalidParams.AddNested("[codeRepositoryAggregation]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.AggregationRequestMemberEc2InstanceAggregation:
 		if err := validateEc2InstanceAggregation(&uv.Value); err != nil {
 			invalidParams.AddNested("[ec2InstanceAggregation]", err.(smithy.InvalidParamsError))
@@ -1198,6 +1515,41 @@ func validateAmiAggregation(v *types.AmiAggregation) error {
 	if v.Amis != nil {
 		if err := validateStringFilterList(v.Amis); err != nil {
 			invalidParams.AddNested("Amis", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssociateConfigurationRequest(v *types.AssociateConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateConfigurationRequest"}
+	if v.ScanConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanConfigurationArn"))
+	}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssociateConfigurationRequestList(v []types.AssociateConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateConfigurationRequestList"}
+	for i := range v {
+		if err := validateAssociateConfigurationRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1737,6 +2089,68 @@ func validateClusterForImageFilterCriteria(v *types.ClusterForImageFilterCriteri
 	}
 }
 
+func validateCodeRepositoryAggregation(v *types.CodeRepositoryAggregation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeRepositoryAggregation"}
+	if v.ProjectNames != nil {
+		if err := validateStringFilterList(v.ProjectNames); err != nil {
+			invalidParams.AddNested("ProjectNames", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProviderTypes != nil {
+		if err := validateStringFilterList(v.ProviderTypes); err != nil {
+			invalidParams.AddNested("ProviderTypes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceIds != nil {
+		if err := validateStringFilterList(v.ResourceIds); err != nil {
+			invalidParams.AddNested("ResourceIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodeSecurityScanConfiguration(v *types.CodeSecurityScanConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeSecurityScanConfiguration"}
+	if v.ContinuousIntegrationScanConfiguration != nil {
+		if err := validateContinuousIntegrationScanConfiguration(v.ContinuousIntegrationScanConfiguration); err != nil {
+			invalidParams.AddNested("ContinuousIntegrationScanConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuleSetCategories == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleSetCategories"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContinuousIntegrationScanConfiguration(v *types.ContinuousIntegrationScanConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContinuousIntegrationScanConfiguration"}
+	if v.SupportedEvents == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SupportedEvents"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCoverageFilterCriteria(v *types.CoverageFilterCriteria) error {
 	if v == nil {
 		return nil
@@ -1805,6 +2219,26 @@ func validateCoverageFilterCriteria(v *types.CoverageFilterCriteria) error {
 	if v.ScanMode != nil {
 		if err := validateCoverageStringFilterList(v.ScanMode); err != nil {
 			invalidParams.AddNested("ScanMode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeRepositoryProjectName != nil {
+		if err := validateCoverageStringFilterList(v.CodeRepositoryProjectName); err != nil {
+			invalidParams.AddNested("CodeRepositoryProjectName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeRepositoryProviderType != nil {
+		if err := validateCoverageStringFilterList(v.CodeRepositoryProviderType); err != nil {
+			invalidParams.AddNested("CodeRepositoryProviderType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeRepositoryProviderTypeVisibility != nil {
+		if err := validateCoverageStringFilterList(v.CodeRepositoryProviderTypeVisibility); err != nil {
+			invalidParams.AddNested("CodeRepositoryProviderTypeVisibility", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LastScannedCommitId != nil {
+		if err := validateCoverageStringFilterList(v.LastScannedCommitId); err != nil {
+			invalidParams.AddNested("LastScannedCommitId", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1902,6 +2336,43 @@ func validateCreateCisTargets(v *types.CreateCisTargets) error {
 	}
 }
 
+func validateCreateGitLabSelfManagedIntegrationDetail(v *types.CreateGitLabSelfManagedIntegrationDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGitLabSelfManagedIntegrationDetail"}
+	if v.InstanceUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceUrl"))
+	}
+	if v.AccessToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateIntegrationDetail(v types.CreateIntegrationDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIntegrationDetail"}
+	switch uv := v.(type) {
+	case *types.CreateIntegrationDetailMemberGitlabSelfManaged:
+		if err := validateCreateGitLabSelfManagedIntegrationDetail(&uv.Value); err != nil {
+			invalidParams.AddNested("[gitlabSelfManaged]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDailySchedule(v *types.DailySchedule) error {
 	if v == nil {
 		return nil
@@ -1931,6 +2402,41 @@ func validateDestination(v *types.Destination) error {
 	}
 	if v.KmsKeyArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDisassociateConfigurationRequest(v *types.DisassociateConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateConfigurationRequest"}
+	if v.ScanConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanConfigurationArn"))
+	}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDisassociateConfigurationRequestList(v []types.DisassociateConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateConfigurationRequestList"}
+	for i := range v {
+		if err := validateDisassociateConfigurationRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2174,6 +2680,16 @@ func validateFilterCriteria(v *types.FilterCriteria) error {
 	if v.CodeVulnerabilityFilePath != nil {
 		if err := validateStringFilterList(v.CodeVulnerabilityFilePath); err != nil {
 			invalidParams.AddNested("CodeVulnerabilityFilePath", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeRepositoryProjectName != nil {
+		if err := validateStringFilterList(v.CodeRepositoryProjectName); err != nil {
+			invalidParams.AddNested("CodeRepositoryProjectName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeRepositoryProviderType != nil {
+		if err := validateStringFilterList(v.CodeRepositoryProviderType); err != nil {
+			invalidParams.AddNested("CodeRepositoryProviderType", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2970,6 +3486,63 @@ func validateTitleFilterList(v []types.CisStringFilter) error {
 	}
 }
 
+func validateUpdateGitHubIntegrationDetail(v *types.UpdateGitHubIntegrationDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGitHubIntegrationDetail"}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.InstallationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstallationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateGitLabSelfManagedIntegrationDetail(v *types.UpdateGitLabSelfManagedIntegrationDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGitLabSelfManagedIntegrationDetail"}
+	if v.AuthCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateIntegrationDetails(v types.UpdateIntegrationDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIntegrationDetails"}
+	switch uv := v.(type) {
+	case *types.UpdateIntegrationDetailsMemberGithub:
+		if err := validateUpdateGitHubIntegrationDetail(&uv.Value); err != nil {
+			invalidParams.AddNested("[github]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.UpdateIntegrationDetailsMemberGitlabSelfManaged:
+		if err := validateUpdateGitLabSelfManagedIntegrationDetail(&uv.Value); err != nil {
+			invalidParams.AddNested("[gitlabSelfManaged]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWeeklySchedule(v *types.WeeklySchedule) error {
 	if v == nil {
 		return nil
@@ -2999,6 +3572,44 @@ func validateOpAssociateMemberInput(v *AssociateMemberInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateMemberInput"}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchAssociateCodeSecurityScanConfigurationInput(v *BatchAssociateCodeSecurityScanConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchAssociateCodeSecurityScanConfigurationInput"}
+	if v.AssociateConfigurationRequests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociateConfigurationRequests"))
+	} else if v.AssociateConfigurationRequests != nil {
+		if err := validateAssociateConfigurationRequestList(v.AssociateConfigurationRequests); err != nil {
+			invalidParams.AddNested("AssociateConfigurationRequests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDisassociateCodeSecurityScanConfigurationInput(v *BatchDisassociateCodeSecurityScanConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDisassociateCodeSecurityScanConfigurationInput"}
+	if v.DisassociateConfigurationRequests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisassociateConfigurationRequests"))
+	} else if v.DisassociateConfigurationRequests != nil {
+		if err := validateDisassociateConfigurationRequestList(v.DisassociateConfigurationRequests); err != nil {
+			invalidParams.AddNested("DisassociateConfigurationRequests", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3133,6 +3744,54 @@ func validateOpCreateCisScanConfigurationInput(v *CreateCisScanConfigurationInpu
 	}
 }
 
+func validateOpCreateCodeSecurityIntegrationInput(v *CreateCodeSecurityIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCodeSecurityIntegrationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Details != nil {
+		if err := validateCreateIntegrationDetail(v.Details); err != nil {
+			invalidParams.AddNested("Details", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCodeSecurityScanConfigurationInput(v *CreateCodeSecurityScanConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCodeSecurityScanConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Level) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Level"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateCodeSecurityScanConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFilterInput(v *CreateFilterInput) error {
 	if v == nil {
 		return nil
@@ -3217,6 +3876,36 @@ func validateOpDeleteCisScanConfigurationInput(v *DeleteCisScanConfigurationInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCisScanConfigurationInput"}
+	if v.ScanConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCodeSecurityIntegrationInput(v *DeleteCodeSecurityIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCodeSecurityIntegrationInput"}
+	if v.IntegrationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCodeSecurityScanConfigurationInput(v *DeleteCodeSecurityScanConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCodeSecurityScanConfigurationInput"}
 	if v.ScanConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScanConfigurationArn"))
 	}
@@ -3362,6 +4051,54 @@ func validateOpGetClustersForImageInput(v *GetClustersForImageInput) error {
 	}
 }
 
+func validateOpGetCodeSecurityIntegrationInput(v *GetCodeSecurityIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCodeSecurityIntegrationInput"}
+	if v.IntegrationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCodeSecurityScanConfigurationInput(v *GetCodeSecurityScanConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCodeSecurityScanConfigurationInput"}
+	if v.ScanConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCodeSecurityScanInput(v *GetCodeSecurityScanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCodeSecurityScanInput"}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	}
+	if v.ScanId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEncryptionKeyInput(v *GetEncryptionKeyInput) error {
 	if v == nil {
 		return nil
@@ -3476,6 +4213,21 @@ func validateOpListCisScansInput(v *ListCisScansInput) error {
 		if err := validateListCisScansFilterCriteria(v.FilterCriteria); err != nil {
 			invalidParams.AddNested("FilterCriteria", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCodeSecurityScanConfigurationAssociationsInput(v *ListCodeSecurityScanConfigurationAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCodeSecurityScanConfigurationAssociationsInput"}
+	if v.ScanConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanConfigurationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3682,6 +4434,21 @@ func validateOpStartCisSessionInput(v *StartCisSessionInput) error {
 	}
 }
 
+func validateOpStartCodeSecurityScanInput(v *StartCodeSecurityScanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCodeSecurityScanInput"}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopCisSessionInput(v *StopCisSessionInput) error {
 	if v == nil {
 		return nil
@@ -3754,6 +4521,50 @@ func validateOpUpdateCisScanConfigurationInput(v *UpdateCisScanConfigurationInpu
 	if v.Schedule != nil {
 		if err := validateSchedule(v.Schedule); err != nil {
 			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCodeSecurityIntegrationInput(v *UpdateCodeSecurityIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCodeSecurityIntegrationInput"}
+	if v.IntegrationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationArn"))
+	}
+	if v.Details == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Details"))
+	} else if v.Details != nil {
+		if err := validateUpdateIntegrationDetails(v.Details); err != nil {
+			invalidParams.AddNested("Details", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCodeSecurityScanConfigurationInput(v *UpdateCodeSecurityScanConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCodeSecurityScanConfigurationInput"}
+	if v.ScanConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanConfigurationArn"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateCodeSecurityScanConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

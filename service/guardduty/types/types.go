@@ -78,6 +78,29 @@ type AccountDetail struct {
 
 	// The email address of the member account.
 	//
+	// The rules for a valid email address:
+	//
+	//   - The email address must be a minimum of 6 and a maximum of 64 characters
+	//   long.
+	//
+	//   - All characters must be 7-bit ASCII characters.
+	//
+	//   - There must be one and only one @ symbol, which separates the local name
+	//   from the domain name.
+	//
+	//   - The local name can't contain any of the following characters:
+	//
+	// whitespace, " ' ( ) < > [ ] : ' , \ | % &
+	//
+	//   - The local name can't begin with a dot (.).
+	//
+	//   - The domain name can consist of only the characters [a-z], [A-Z], [0-9],
+	//   hyphen (-), or dot (.).
+	//
+	//   - The domain name can't begin or end with a dot (.) or hyphen (-).
+	//
+	//   - The domain name must contain at least one dot.
+	//
 	// This member is required.
 	Email *string
 
@@ -172,11 +195,37 @@ type Actor struct {
 	// This member is required.
 	Id *string
 
+	// Contains information about the process associated with the threat actor. This
+	// includes details such as process name, path, execution time, and unique
+	// identifiers that help track the actor's activities within the system.
+	Process *ActorProcess
+
 	// Contains information about the user session where the activity initiated.
 	Session *Session
 
 	// Contains information about the user credentials used by the threat actor.
 	User *User
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a process involved in a GuardDuty finding, including
+// process identification, execution details, and file information.
+type ActorProcess struct {
+
+	// The name of the process as it appears in the system.
+	//
+	// This member is required.
+	Name *string
+
+	// The full file path to the process executable on the system.
+	//
+	// This member is required.
+	Path *string
+
+	// The SHA256 hash of the process executable file, which can be used for
+	// identification and verification purposes.
+	Sha256 *string
 
 	noSmithyDocumentSerde
 }
@@ -488,6 +537,23 @@ type Container struct {
 
 	// Container volume mounts.
 	VolumeMounts []VolumeMount
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about container resources involved in a GuardDuty finding.
+// This structure provides details about containers that were identified as part of
+// suspicious or malicious activity.
+type ContainerFindingResource struct {
+
+	// The container image information, including the image name and tag used to run
+	// the container that was involved in the finding.
+	//
+	// This member is required.
+	Image *string
+
+	// The unique ID associated with the container image.
+	ImageUid *string
 
 	noSmithyDocumentSerde
 }
@@ -1211,6 +1277,31 @@ type EcsTaskDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the Amazon EKS cluster involved in a GuardDuty
+// finding, including cluster identification, status, and network configuration.
+type EksCluster struct {
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the Amazon EKS cluster
+	// involved in the finding.
+	Arn *string
+
+	// The timestamp indicating when the Amazon EKS cluster was created, in UTC format.
+	CreatedAt *time.Time
+
+	// A list of unique identifiers for the Amazon EC2 instances that serve as worker
+	// nodes in the Amazon EKS cluster.
+	Ec2InstanceUids []string
+
+	// The current status of the Amazon EKS cluster.
+	Status ClusterStatus
+
+	// The ID of the Amazon Virtual Private Cloud (Amazon VPC) associated with the
+	// Amazon EKS cluster.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about the EKS cluster involved in a Kubernetes finding.
 type EksClusterDetails struct {
 
@@ -1303,9 +1394,6 @@ type FilterCriterion struct {
 
 	// An enum value representing possible scan properties to match with given scan
 	// entries.
-	//
-	// Replace the enum value CLUSTER_NAME with EKS_CLUSTER_NAME . CLUSTER_NAME has
-	// been deprecated.
 	CriterionKey CriterionKey
 
 	// Contains information about the condition.
@@ -1338,7 +1426,13 @@ type Finding struct {
 	// This member is required.
 	Id *string
 
-	// The Region where the finding was generated.
+	// The Region where the finding was generated. For findings generated from [Global Service Events], the
+	// Region value in the finding might differ from the Region where GuardDuty
+	// identifies the potential threat. For more information, see [How GuardDuty handles Amazon Web Services CloudTrail global events]in the Amazon
+	// GuardDuty User Guide.
+	//
+	// [Global Service Events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-global-service-events
+	// [How GuardDuty handles Amazon Web Services CloudTrail global events]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html#cloudtrail_global
 	//
 	// This member is required.
 	Region *string
@@ -1825,6 +1919,24 @@ type KubernetesUserDetails struct {
 
 	// The username of the user who called the Kubernetes API.
 	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about Kubernetes workloads involved in a GuardDuty
+// finding, including pods, deployments, and other Kubernetes resources.
+type KubernetesWorkload struct {
+
+	// A list of unique identifiers for the containers that are part of the Kubernetes
+	// workload.
+	ContainerUids []string
+
+	// The types of Kubernetes resources involved in the workload.
+	KubernetesResourcesTypes KubernetesResourcesTypes
+
+	// The Kubernetes namespace in which the workload is running, providing logical
+	// isolation within the cluster.
+	Namespace *string
 
 	noSmithyDocumentSerde
 }
@@ -3108,12 +3220,24 @@ type ResourceData struct {
 	// in the GuardDuty finding.
 	AccessKey *AccessKey
 
+	// Contains detailed information about the container associated with the activity
+	// that prompted GuardDuty to generate a finding.
+	Container *ContainerFindingResource
+
 	// Contains information about the Amazon EC2 instance.
 	Ec2Instance *Ec2Instance
 
 	// Contains information about the elastic network interface of the Amazon EC2
 	// instance.
 	Ec2NetworkInterface *Ec2NetworkInterface
+
+	// Contains detailed information about the Amazon EKS cluster associated with the
+	// activity that prompted GuardDuty to generate a finding.
+	EksCluster *EksCluster
+
+	// Contains detailed information about the Kubernetes workload associated with the
+	// activity that prompted GuardDuty to generate a finding.
+	KubernetesWorkload *KubernetesWorkload
 
 	// Contains information about the Amazon S3 bucket.
 	S3Bucket *S3Bucket
@@ -3711,6 +3835,10 @@ type Sequence struct {
 
 	// Contains information about the actors involved in the attack sequence.
 	Actors []Actor
+
+	// Additional types of sequences that may be associated with the attack sequence
+	// finding, providing further context about the nature of the detected threat.
+	AdditionalSequenceTypes []string
 
 	// Contains information about the network endpoints that were used in the attack
 	// sequence.

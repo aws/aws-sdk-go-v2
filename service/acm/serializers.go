@@ -866,6 +866,67 @@ func (m *awsAwsjson11_serializeOpResendValidationEmail) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpRevokeCertificate struct {
+}
+
+func (*awsAwsjson11_serializeOpRevokeCertificate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpRevokeCertificate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RevokeCertificateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.RevokeCertificate")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentRevokeCertificateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateCertificateOptions struct {
 }
 
@@ -933,6 +994,11 @@ func awsAwsjson11_serializeDocumentCertificateOptions(v *types.CertificateOption
 	if len(v.CertificateTransparencyLoggingPreference) > 0 {
 		ok := object.Key("CertificateTransparencyLoggingPreference")
 		ok.String(string(v.CertificateTransparencyLoggingPreference))
+	}
+
+	if len(v.Export) > 0 {
+		ok := object.Key("Export")
+		ok.String(string(v.Export))
 	}
 
 	return nil
@@ -1016,6 +1082,11 @@ func awsAwsjson11_serializeDocumentExtendedKeyUsageFilterList(v []types.Extended
 func awsAwsjson11_serializeDocumentFilters(v *types.Filters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.ExportOption) > 0 {
+		ok := object.Key("exportOption")
+		ok.String(string(v.ExportOption))
+	}
 
 	if v.ExtendedKeyUsage != nil {
 		ok := object.Key("extendedKeyUsage")
@@ -1389,6 +1460,23 @@ func awsAwsjson11_serializeOpDocumentResendValidationEmailInput(v *ResendValidat
 	if v.ValidationDomain != nil {
 		ok := object.Key("ValidationDomain")
 		ok.String(*v.ValidationDomain)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentRevokeCertificateInput(v *RevokeCertificateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateArn != nil {
+		ok := object.Key("CertificateArn")
+		ok.String(*v.CertificateArn)
+	}
+
+	if len(v.RevocationReason) > 0 {
+		ok := object.Key("RevocationReason")
+		ok.String(string(v.RevocationReason))
 	}
 
 	return nil

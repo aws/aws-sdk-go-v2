@@ -3400,6 +3400,52 @@ func awsAwsjson11_serializeDocumentAPIKeyTokenDomains(v []string, value smithyjs
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentApplicationAttribute(v *types.ApplicationAttribute, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson11_serializeDocumentAttributeValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentApplicationAttributes(v []types.ApplicationAttribute, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentApplicationAttribute(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentApplicationConfig(v *types.ApplicationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("Attributes")
+		if err := awsAwsjson11_serializeDocumentApplicationAttributes(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAsnList(v []int64, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3443,6 +3489,17 @@ func awsAwsjson11_serializeDocumentAssociationConfig(v *types.AssociationConfig,
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAttributeValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -6330,6 +6387,13 @@ func awsAwsjson11_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 func awsAwsjson11_serializeOpDocumentCreateWebACLInput(v *CreateWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ApplicationConfig != nil {
+		ok := object.Key("ApplicationConfig")
+		if err := awsAwsjson11_serializeDocumentApplicationConfig(v.ApplicationConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.AssociationConfig != nil {
 		ok := object.Key("AssociationConfig")

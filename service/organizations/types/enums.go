@@ -133,6 +133,7 @@ const (
 	ConstraintViolationExceptionReasonCannotRegisterMasterAsDelegatedAdministrator           ConstraintViolationExceptionReason = "CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR"
 	ConstraintViolationExceptionReasonCannotRemoveDelegatedAdministratorFromOrg              ConstraintViolationExceptionReason = "CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG"
 	ConstraintViolationExceptionReasonDelegatedAdministratorExistsForThisService             ConstraintViolationExceptionReason = "DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE"
+	ConstraintViolationExceptionReasonPolicyTypeEnabledForThisService                        ConstraintViolationExceptionReason = "POLICY_TYPE_ENABLED_FOR_THIS_SERVICE"
 	ConstraintViolationExceptionReasonMasterAccountMissingBusinessLicense                    ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE"
 	ConstraintViolationExceptionReasonCannotCloseManagementAccount                           ConstraintViolationExceptionReason = "CANNOT_CLOSE_MANAGEMENT_ACCOUNT"
 	ConstraintViolationExceptionReasonCloseAccountQuotaExceeded                              ConstraintViolationExceptionReason = "CLOSE_ACCOUNT_QUOTA_EXCEEDED"
@@ -178,6 +179,7 @@ func (ConstraintViolationExceptionReason) Values() []ConstraintViolationExceptio
 		"CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR",
 		"CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG",
 		"DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE",
+		"POLICY_TYPE_ENABLED_FOR_THIS_SERVICE",
 		"MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE",
 		"CANNOT_CLOSE_MANAGEMENT_ACCOUNT",
 		"CLOSE_ACCOUNT_QUOTA_EXCEEDED",
@@ -265,6 +267,7 @@ const (
 	EffectivePolicyTypeAiservicesOptOutPolicy EffectivePolicyType = "AISERVICES_OPT_OUT_POLICY"
 	EffectivePolicyTypeChatbotPolicy          EffectivePolicyType = "CHATBOT_POLICY"
 	EffectivePolicyTypeDeclarativePolicyEc2   EffectivePolicyType = "DECLARATIVE_POLICY_EC2"
+	EffectivePolicyTypeSecurityhubPolicy      EffectivePolicyType = "SECURITYHUB_POLICY"
 )
 
 // Values returns all known values for EffectivePolicyType. Note that this can be
@@ -278,6 +281,7 @@ func (EffectivePolicyType) Values() []EffectivePolicyType {
 		"AISERVICES_OPT_OUT_POLICY",
 		"CHATBOT_POLICY",
 		"DECLARATIVE_POLICY_EC2",
+		"SECURITYHUB_POLICY",
 	}
 }
 
@@ -539,6 +543,7 @@ const (
 	PolicyTypeAiservicesOptOutPolicy PolicyType = "AISERVICES_OPT_OUT_POLICY"
 	PolicyTypeChatbotPolicy          PolicyType = "CHATBOT_POLICY"
 	PolicyTypeDeclarativePolicyEc2   PolicyType = "DECLARATIVE_POLICY_EC2"
+	PolicyTypeSecurityhubPolicy      PolicyType = "SECURITYHUB_POLICY"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -554,6 +559,7 @@ func (PolicyType) Values() []PolicyType {
 		"AISERVICES_OPT_OUT_POLICY",
 		"CHATBOT_POLICY",
 		"DECLARATIVE_POLICY_EC2",
+		"SECURITYHUB_POLICY",
 	}
 }
 

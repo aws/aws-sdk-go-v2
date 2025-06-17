@@ -46,10 +46,6 @@ import (
 //	the account is a delegated administrator, you must first change the delegated
 //	administrator account to another account that is remaining in the organization.
 //
-//	- You can leave an organization only after you enable IAM user access to
-//	billing in your account. For more information, see [About IAM access to the Billing and Cost Management console]in the Amazon Web Services
-//	Billing and Cost Management User Guide.
-//
 //	- After the account leaves the organization, all tags that were attached to
 //	the account object in the organization are deleted. Amazon Web Services accounts
 //	outside of an organization do not support tags.
@@ -62,7 +58,6 @@ import (
 //	multiple accounts, you can only do this up to 5 accounts per second in a single
 //	organization.
 //
-// [About IAM access to the Billing and Cost Management console]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
 // [Considerations before removing an account from an organization]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html
 func (c *Client) LeaveOrganization(ctx context.Context, params *LeaveOrganizationInput, optFns ...func(*Options)) (*LeaveOrganizationOutput, error) {
 	if params == nil {

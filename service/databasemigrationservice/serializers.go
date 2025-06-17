@@ -7353,6 +7353,16 @@ func awsAwsjson11_serializeDocumentIbmDb2LuwDataProviderSettings(v *types.IbmDb2
 		ok.Integer(*v.Port)
 	}
 
+	if v.S3AccessRoleArn != nil {
+		ok := object.Key("S3AccessRoleArn")
+		ok.String(*v.S3AccessRoleArn)
+	}
+
+	if v.S3Path != nil {
+		ok := object.Key("S3Path")
+		ok.String(*v.S3Path)
+	}
+
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
@@ -7460,6 +7470,16 @@ func awsAwsjson11_serializeDocumentIbmDb2zOsDataProviderSettings(v *types.IbmDb2
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.Integer(*v.Port)
+	}
+
+	if v.S3AccessRoleArn != nil {
+		ok := object.Key("S3AccessRoleArn")
+		ok.String(*v.S3AccessRoleArn)
+	}
+
+	if v.S3Path != nil {
+		ok := object.Key("S3Path")
+		ok.String(*v.S3Path)
 	}
 
 	if v.ServerName != nil {
@@ -7718,6 +7738,16 @@ func awsAwsjson11_serializeDocumentMariaDbDataProviderSettings(v *types.MariaDbD
 		ok.Integer(*v.Port)
 	}
 
+	if v.S3AccessRoleArn != nil {
+		ok := object.Key("S3AccessRoleArn")
+		ok.String(*v.S3AccessRoleArn)
+	}
+
+	if v.S3Path != nil {
+		ok := object.Key("S3Path")
+		ok.String(*v.S3Path)
+	}
+
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
@@ -7748,6 +7778,16 @@ func awsAwsjson11_serializeDocumentMicrosoftSqlServerDataProviderSettings(v *typ
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.Integer(*v.Port)
+	}
+
+	if v.S3AccessRoleArn != nil {
+		ok := object.Key("S3AccessRoleArn")
+		ok.String(*v.S3AccessRoleArn)
+	}
+
+	if v.S3Path != nil {
+		ok := object.Key("S3Path")
+		ok.String(*v.S3Path)
 	}
 
 	if v.ServerName != nil {
@@ -8008,6 +8048,16 @@ func awsAwsjson11_serializeDocumentMySqlDataProviderSettings(v *types.MySqlDataP
 		ok.Integer(*v.Port)
 	}
 
+	if v.S3AccessRoleArn != nil {
+		ok := object.Key("S3AccessRoleArn")
+		ok.String(*v.S3AccessRoleArn)
+	}
+
+	if v.S3Path != nil {
+		ok := object.Key("S3Path")
+		ok.String(*v.S3Path)
+	}
+
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
@@ -8177,6 +8227,16 @@ func awsAwsjson11_serializeDocumentOracleDataProviderSettings(v *types.OracleDat
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.Integer(*v.Port)
+	}
+
+	if v.S3AccessRoleArn != nil {
+		ok := object.Key("S3AccessRoleArn")
+		ok.String(*v.S3AccessRoleArn)
+	}
+
+	if v.S3Path != nil {
+		ok := object.Key("S3Path")
+		ok.String(*v.S3Path)
 	}
 
 	if v.SecretsManagerOracleAsmAccessRoleArn != nil {
@@ -8460,6 +8520,16 @@ func awsAwsjson11_serializeDocumentPostgreSqlDataProviderSettings(v *types.Postg
 		ok.Integer(*v.Port)
 	}
 
+	if v.S3AccessRoleArn != nil {
+		ok := object.Key("S3AccessRoleArn")
+		ok.String(*v.S3AccessRoleArn)
+	}
+
+	if v.S3Path != nil {
+		ok := object.Key("S3Path")
+		ok.String(*v.S3Path)
+	}
+
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
@@ -8686,6 +8756,16 @@ func awsAwsjson11_serializeDocumentRedshiftDataProviderSettings(v *types.Redshif
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.Integer(*v.Port)
+	}
+
+	if v.S3AccessRoleArn != nil {
+		ok := object.Key("S3AccessRoleArn")
+		ok.String(*v.S3AccessRoleArn)
+	}
+
+	if v.S3Path != nil {
+		ok := object.Key("S3Path")
+		ok.String(*v.S3Path)
 	}
 
 	if v.ServerName != nil {
@@ -9528,6 +9608,11 @@ func awsAwsjson11_serializeOpDocumentCreateDataProviderInput(v *CreateDataProvid
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Virtual != nil {
+		ok := object.Key("Virtual")
+		ok.Boolean(*v.Virtual)
 	}
 
 	return nil
@@ -11677,6 +11762,11 @@ func awsAwsjson11_serializeOpDocumentModifyDataProviderInput(v *ModifyDataProvid
 		if err := awsAwsjson11_serializeDocumentDataProviderSettings(v.Settings, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Virtual != nil {
+		ok := object.Key("Virtual")
+		ok.Boolean(*v.Virtual)
 	}
 
 	return nil

@@ -110,6 +110,11 @@ type UpdateRuleGroupInput struct {
 	// the originating rule group.
 	SourceMetadata *types.SourceMetadata
 
+	// Updates the selected summary configuration for a rule group.
+	//
+	// Changes affect subsequent responses from DescribeRuleGroupSummary.
+	SummaryConfiguration *types.SummaryConfiguration
+
 	// Indicates whether the rule group is stateless or stateful. If the rule group is
 	// stateless, it contains stateless rules. If it is stateful, it contains stateful
 	// rules.

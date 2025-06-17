@@ -32,6 +32,7 @@
         "api_op_DescribeResourcePolicy.go",
         "api_op_DescribeRuleGroup.go",
         "api_op_DescribeRuleGroupMetadata.go",
+        "api_op_DescribeRuleGroupSummary.go",
         "api_op_DescribeTLSInspectionConfiguration.go",
         "api_op_DescribeVpcEndpointAssociation.go",
         "api_op_DisassociateAvailabilityZones.go",

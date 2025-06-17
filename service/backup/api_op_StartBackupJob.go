@@ -223,6 +223,9 @@ func (c *Client) addOperationStartBackupJobMiddlewares(stack *middleware.Stack, 
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opStartBackupJobMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartBackupJobValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -257,6 +260,39 @@ func (c *Client) addOperationStartBackupJobMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpStartBackupJob struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpStartBackupJob) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpStartBackupJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*StartBackupJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *StartBackupJobInput ")
+	}
+
+	if input.IdempotencyToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.IdempotencyToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opStartBackupJobMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpStartBackupJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opStartBackupJob(region string) *awsmiddleware.RegisterServiceMetadata {

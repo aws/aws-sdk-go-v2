@@ -20,6 +20,9 @@ func ExampleAggregationRequest_outputUsage() {
 	case *types.AggregationRequestMemberAwsEcrContainerAggregation:
 		_ = v.Value // Value is types.AwsEcrContainerAggregation
 
+	case *types.AggregationRequestMemberCodeRepositoryAggregation:
+		_ = v.Value // Value is types.CodeRepositoryAggregation
+
 	case *types.AggregationRequestMemberEc2InstanceAggregation:
 		_ = v.Value // Value is types.Ec2InstanceAggregation
 
@@ -59,6 +62,7 @@ var _ *types.AwsEcrContainerAggregation
 var _ *types.TitleAggregation
 var _ *types.ImageLayerAggregation
 var _ *types.AmiAggregation
+var _ *types.CodeRepositoryAggregation
 var _ *types.FindingTypeAggregation
 var _ *types.AccountAggregation
 var _ *types.Ec2InstanceAggregation
@@ -77,6 +81,9 @@ func ExampleAggregationResponse_outputUsage() {
 
 	case *types.AggregationResponseMemberAwsEcrContainerAggregation:
 		_ = v.Value // Value is types.AwsEcrContainerAggregationResponse
+
+	case *types.AggregationResponseMemberCodeRepositoryAggregation:
+		_ = v.Value // Value is types.CodeRepositoryAggregationResponse
 
 	case *types.AggregationResponseMemberEc2InstanceAggregation:
 		_ = v.Value // Value is types.Ec2InstanceAggregationResponse
@@ -120,6 +127,7 @@ var _ *types.LambdaLayerAggregationResponse
 var _ *types.TitleAggregationResponse
 var _ *types.FindingTypeAggregationResponse
 var _ *types.LambdaFunctionAggregationResponse
+var _ *types.CodeRepositoryAggregationResponse
 var _ *types.AwsEcrContainerAggregationResponse
 var _ *types.Ec2InstanceAggregationResponse
 
@@ -144,6 +152,42 @@ func ExampleClusterMetadata_outputUsage() {
 
 var _ *types.AwsEksMetadataDetails
 var _ *types.AwsEcsMetadataDetails
+
+func ExampleCodeSecurityResource_outputUsage() {
+	var union types.CodeSecurityResource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CodeSecurityResourceMemberProjectId:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleCreateIntegrationDetail_outputUsage() {
+	var union types.CreateIntegrationDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CreateIntegrationDetailMemberGitlabSelfManaged:
+		_ = v.Value // Value is types.CreateGitLabSelfManagedIntegrationDetail
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CreateGitLabSelfManagedIntegrationDetail
 
 func ExampleSchedule_outputUsage() {
 	var union types.Schedule
@@ -174,3 +218,25 @@ var _ *types.DailySchedule
 var _ *types.WeeklySchedule
 var _ *types.OneTimeSchedule
 var _ *types.MonthlySchedule
+
+func ExampleUpdateIntegrationDetails_outputUsage() {
+	var union types.UpdateIntegrationDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UpdateIntegrationDetailsMemberGithub:
+		_ = v.Value // Value is types.UpdateGitHubIntegrationDetail
+
+	case *types.UpdateIntegrationDetailsMemberGitlabSelfManaged:
+		_ = v.Value // Value is types.UpdateGitLabSelfManagedIntegrationDetail
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UpdateGitLabSelfManagedIntegrationDetail
+var _ *types.UpdateGitHubIntegrationDetail

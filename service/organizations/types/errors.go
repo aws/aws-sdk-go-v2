@@ -496,9 +496,17 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //	- POLICY_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of
 //	policies that you can have in an organization.
 //
-//	- SERVICE_ACCESS_NOT_ENABLED: You attempted to register a delegated
-//	administrator before you enabled service access. Call the
-//	EnableAWSServiceAccess API first.
+//	- POLICY_TYPE_ENABLED_FOR_THIS_SERVICE: You attempted to disable service
+//	access before you disabled the policy type (for example, SECURITYHUB_POLICY). To
+//	complete this operation, you must first disable the policy type.
+//
+//	- SERVICE_ACCESS_NOT_ENABLED:
+//
+//	- You attempted to register a delegated administrator before you enabled
+//	service access. Call the EnableAWSServiceAccess API first.
+//
+//	- You attempted to enable a policy type before you enabled service access.
+//	Call the EnableAWSServiceAccess API first.
 //
 //	- TAG_POLICY_VIOLATION: You attempted to create or update a resource with
 //	tags that are not compliant with the tag policy requirements for this account.
@@ -857,9 +865,7 @@ func (e *HandshakeAlreadyInStateException) ErrorFault() smithy.ErrorFault { retu
 //
 //	- ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: The request failed because
 //	the account is from a different marketplace than the accounts in the
-//	organization. For example, accounts with India addresses must be associated with
-//	the AISPL marketplace. All accounts in an organization must be from the same
-//	marketplace.
+//	organization.
 //
 //	- ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: You attempted to change
 //	the membership of an account too quickly after its previous change.

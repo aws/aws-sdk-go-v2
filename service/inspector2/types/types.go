@@ -96,6 +96,7 @@ type AccountState struct {
 //	AggregationRequestMemberAccountAggregation
 //	AggregationRequestMemberAmiAggregation
 //	AggregationRequestMemberAwsEcrContainerAggregation
+//	AggregationRequestMemberCodeRepositoryAggregation
 //	AggregationRequestMemberEc2InstanceAggregation
 //	AggregationRequestMemberFindingTypeAggregation
 //	AggregationRequestMemberImageLayerAggregation
@@ -137,6 +138,16 @@ type AggregationRequestMemberAwsEcrContainerAggregation struct {
 }
 
 func (*AggregationRequestMemberAwsEcrContainerAggregation) isAggregationRequest() {}
+
+// An object that contains details about an aggregation request based on code
+// repositories.
+type AggregationRequestMemberCodeRepositoryAggregation struct {
+	Value CodeRepositoryAggregation
+
+	noSmithyDocumentSerde
+}
+
+func (*AggregationRequestMemberCodeRepositoryAggregation) isAggregationRequest() {}
 
 // An object that contains details about an aggregation request based on Amazon
 // EC2 instances.
@@ -224,6 +235,7 @@ func (*AggregationRequestMemberTitleAggregation) isAggregationRequest() {}
 //	AggregationResponseMemberAccountAggregation
 //	AggregationResponseMemberAmiAggregation
 //	AggregationResponseMemberAwsEcrContainerAggregation
+//	AggregationResponseMemberCodeRepositoryAggregation
 //	AggregationResponseMemberEc2InstanceAggregation
 //	AggregationResponseMemberFindingTypeAggregation
 //	AggregationResponseMemberImageLayerAggregation
@@ -265,6 +277,16 @@ type AggregationResponseMemberAwsEcrContainerAggregation struct {
 }
 
 func (*AggregationResponseMemberAwsEcrContainerAggregation) isAggregationResponse() {}
+
+// An object that contains details about an aggregation response based on code
+// repositories.
+type AggregationResponseMemberCodeRepositoryAggregation struct {
+	Value CodeRepositoryAggregationResponse
+
+	noSmithyDocumentSerde
+}
+
+func (*AggregationResponseMemberCodeRepositoryAggregation) isAggregationResponse() {}
 
 // An object that contains details about an aggregation response based on Amazon
 // EC2 instances.
@@ -379,6 +401,23 @@ type AmiAggregationResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about a request to associate a code repository with a scan
+// configuration.
+type AssociateConfigurationRequest struct {
+
+	// Identifies a specific resource in a code repository that will be scanned.
+	//
+	// This member is required.
+	Resource CodeSecurityResource
+
+	// The Amazon Resource Name (ARN) of the scan configuration.
+	//
+	// This member is required.
+	ScanConfigurationArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon Web Services Threat Intel Group (ATIG) details for a specific
 // vulnerability.
 type AtigData struct {
@@ -415,6 +454,10 @@ type AutoEnable struct {
 	//
 	// This member is required.
 	Ecr *bool
+
+	// Represents whether code repository scans are automatically enabled for new
+	// members of your Amazon Inspector organization.
+	CodeRepository *bool
 
 	// Represents whether Amazon Web Services Lambda standard scans are automatically
 	// enabled for new members of your Amazon Inspector organization.
@@ -1241,6 +1284,257 @@ type CodeLine struct {
 	noSmithyDocumentSerde
 }
 
+// The details that define an aggregation based on code repositories.
+type CodeRepositoryAggregation struct {
+
+	// The project names to include in the aggregation results.
+	ProjectNames []StringFilter
+
+	// The repository provider types to include in the aggregation results.
+	ProviderTypes []StringFilter
+
+	// The resource IDs to include in the aggregation results.
+	ResourceIds []StringFilter
+
+	// The value to sort results by in the code repository aggregation.
+	SortBy CodeRepositorySortBy
+
+	// The order to sort results by (ascending or descending) in the code repository
+	// aggregation.
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// A response that contains the results of a finding aggregation by code
+// repository.
+type CodeRepositoryAggregationResponse struct {
+
+	// The names of the projects associated with the code repository.
+	//
+	// This member is required.
+	ProjectNames *string
+
+	// The Amazon Web Services account ID associated with the code repository.
+	AccountId *string
+
+	// The number of active findings that have an exploit available for the code
+	// repository.
+	ExploitAvailableActiveFindingsCount *int64
+
+	// The number of active findings that have a fix available for the code repository.
+	FixAvailableActiveFindingsCount *int64
+
+	// The type of repository provider for the code repository.
+	ProviderType *string
+
+	// The resource ID of the code repository.
+	ResourceId *string
+
+	// An object that contains the counts of aggregated finding per severity.
+	SeverityCounts *SeverityCounts
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a code repository associated with a finding.
+type CodeRepositoryDetails struct {
+
+	// The Amazon Resource Name (ARN) of the code security integration associated with
+	// the repository.
+	IntegrationArn *string
+
+	// The name of the project in the code repository.
+	ProjectName *string
+
+	// The type of repository provider (such as GitHub, GitLab, etc.).
+	ProviderType CodeRepositoryProviderType
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata information about a code repository that is being scanned by
+// Amazon Inspector.
+type CodeRepositoryMetadata struct {
+
+	// The name of the project in the code repository.
+	//
+	// This member is required.
+	ProjectName *string
+
+	// The type of repository provider (such as GitHub, GitLab, etc.).
+	//
+	// This member is required.
+	ProviderType *string
+
+	// The visibility setting of the repository (public or private).
+	//
+	// This member is required.
+	ProviderTypeVisibility *string
+
+	// The Amazon Resource Name (ARN) of the code security integration associated with
+	// the repository.
+	IntegrationArn *string
+
+	// The ID of the last commit that was scanned in the repository.
+	LastScannedCommitId *string
+
+	// Information about on-demand scans performed on the repository.
+	OnDemandScan *CodeRepositoryOnDemandScan
+
+	// The scan configuration settings applied to the code repository.
+	ScanConfiguration *ProjectCodeSecurityScanConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about on-demand scans performed on a code repository.
+type CodeRepositoryOnDemandScan struct {
+
+	// The timestamp when the last on-demand scan was performed.
+	LastScanAt *time.Time
+
+	// The ID of the last commit that was scanned during an on-demand scan.
+	LastScannedCommitId *string
+
+	// The status of the scan.
+	ScanStatus *ScanStatus
+
+	noSmithyDocumentSerde
+}
+
+// A summary of information about a code security integration.
+type CodeSecurityIntegrationSummary struct {
+
+	// The timestamp when the code security integration was created.
+	//
+	// This member is required.
+	CreatedOn *time.Time
+
+	// The Amazon Resource Name (ARN) of the code security integration.
+	//
+	// This member is required.
+	IntegrationArn *string
+
+	// The timestamp when the code security integration was last updated.
+	//
+	// This member is required.
+	LastUpdateOn *time.Time
+
+	// The name of the code security integration.
+	//
+	// This member is required.
+	Name *string
+
+	// The current status of the code security integration.
+	//
+	// This member is required.
+	Status IntegrationStatus
+
+	// The reason for the current status of the code security integration.
+	//
+	// This member is required.
+	StatusReason *string
+
+	// The type of repository provider for the integration.
+	//
+	// This member is required.
+	Type IntegrationType
+
+	// The tags associated with the code security integration.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Identifies a specific resource in a code repository that will be scanned.
+//
+// The following types satisfy this interface:
+//
+//	CodeSecurityResourceMemberProjectId
+type CodeSecurityResource interface {
+	isCodeSecurityResource()
+}
+
+// The unique identifier of the project in the code repository.
+type CodeSecurityResourceMemberProjectId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CodeSecurityResourceMemberProjectId) isCodeSecurityResource() {}
+
+// Contains the configuration settings for code security scans.
+type CodeSecurityScanConfiguration struct {
+
+	// The categories of security rules to be applied during the scan.
+	//
+	// This member is required.
+	RuleSetCategories []RuleSetCategory
+
+	// Configuration settings for continuous integration scans that run automatically
+	// when code changes are made.
+	ContinuousIntegrationScanConfiguration *ContinuousIntegrationScanConfiguration
+
+	// Configuration settings for periodic scans that run on a scheduled basis.
+	PeriodicScanConfiguration *PeriodicScanConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an association between a code repository and a scan configuration.
+type CodeSecurityScanConfigurationAssociationSummary struct {
+
+	// Identifies a specific resource in a code repository that will be scanned.
+	Resource CodeSecurityResource
+
+	noSmithyDocumentSerde
+}
+
+// A summary of information about a code security scan configuration.
+type CodeSecurityScanConfigurationSummary struct {
+
+	// The name of the scan configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Web Services account ID that owns the scan configuration.
+	//
+	// This member is required.
+	OwnerAccountId *string
+
+	// The categories of security rules applied during the scan.
+	//
+	// This member is required.
+	RuleSetCategories []RuleSetCategory
+
+	// The Amazon Resource Name (ARN) of the scan configuration.
+	//
+	// This member is required.
+	ScanConfigurationArn *string
+
+	// The repository events that trigger continuous integration scans.
+	ContinuousIntegrationScanSupportedEvents []ContinuousIntegrationScanEvent
+
+	// The schedule expression for periodic scans, in cron format.
+	FrequencyExpression *string
+
+	// The frequency at which periodic scans are performed.
+	PeriodicScanFrequency PeriodicScanFrequency
+
+	// The scope settings that define which repositories will be scanned. If the
+	// ScopeSetting parameter is ALL the scan configuration applies to all existing
+	// and future projects imported into Amazon Inspector.
+	ScopeSettings *ScopeSettings
+
+	// The tags associated with the scan configuration.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about any errors encountered while trying to retrieve a
 // code snippet.
 type CodeSnippetError struct {
@@ -1353,6 +1647,19 @@ type ComputePlatform struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for continuous integration scans that run automatically
+// when code changes are made.
+type ContinuousIntegrationScanConfiguration struct {
+
+	// The repository events that trigger continuous integration scans, such as pull
+	// requests or commits.
+	//
+	// This member is required.
+	SupportedEvents []ContinuousIntegrationScanEvent
+
+	noSmithyDocumentSerde
+}
+
 // a structure that contains information on the count of resources within a group.
 type Counts struct {
 
@@ -1382,6 +1689,17 @@ type CoverageFilterCriteria struct {
 
 	// An array of Amazon Web Services account IDs to return coverage statistics for.
 	AccountId []CoverageStringFilter
+
+	// Filter criteria for code repositories based on project name.
+	CodeRepositoryProjectName []CoverageStringFilter
+
+	// Filter criteria for code repositories based on provider type (such as GitHub,
+	// GitLab, etc.).
+	CodeRepositoryProviderType []CoverageStringFilter
+
+	// Filter criteria for code repositories based on visibility setting (public or
+	// private).
+	CodeRepositoryProviderTypeVisibility []CoverageStringFilter
 
 	// The Amazon EC2 instance tags to filter on.
 	Ec2InstanceTags []CoverageMapFilter
@@ -1416,6 +1734,10 @@ type CoverageFilterCriteria struct {
 	// Filters Amazon Web Services resources based on whether Amazon Inspector has
 	// checked them for vulnerabilities within the specified time range.
 	LastScannedAt []CoverageDateFilter
+
+	// Filter criteria for code repositories based on the ID of the last scanned
+	// commit.
+	LastScannedCommitId []CoverageStringFilter
 
 	// An array of Amazon Web Services resource IDs to return coverage statistics for.
 	ResourceId []CoverageStringFilter
@@ -1543,6 +1865,43 @@ type CreateCisTargets struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains details required to create an integration with a self-managed GitLab
+// instance.
+type CreateGitLabSelfManagedIntegrationDetail struct {
+
+	// The personal access token used to authenticate with the self-managed GitLab
+	// instance.
+	//
+	// This member is required.
+	AccessToken *string
+
+	// The URL of the self-managed GitLab instance.
+	//
+	// This member is required.
+	InstanceUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details required to create a code security integration with a specific
+// repository provider.
+//
+// The following types satisfy this interface:
+//
+//	CreateIntegrationDetailMemberGitlabSelfManaged
+type CreateIntegrationDetail interface {
+	isCreateIntegrationDetail()
+}
+
+// Details specific to creating an integration with a self-managed GitLab instance.
+type CreateIntegrationDetailMemberGitlabSelfManaged struct {
+	Value CreateGitLabSelfManagedIntegrationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*CreateIntegrationDetailMemberGitlabSelfManaged) isCreateIntegrationDetail() {}
 
 // The Common Vulnerability Scoring System (CVSS) version 2 details for the
 // vulnerability.
@@ -1709,6 +2068,24 @@ type Destination struct {
 
 	// The prefix that the findings will be written under.
 	KeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a request to disassociate a code repository from a scan
+// configuration.
+type DisassociateConfigurationRequest struct {
+
+	// Identifies a specific resource in a code repository that will be scanned.
+	//
+	// This member is required.
+	Resource CodeSecurityResource
+
+	// The Amazon Resource Name (ARN) of the scan configuration to disassociate from a
+	// code repository.
+	//
+	// This member is required.
+	ScanConfigurationArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1985,6 +2362,26 @@ type FailedAccount struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a failed attempt to associate or disassociate a code repository
+// with a scan configuration.
+type FailedAssociationResult struct {
+
+	// Identifies a specific resource in a code repository that will be scanned.
+	Resource CodeSecurityResource
+
+	// The Amazon Resource Name (ARN) of the scan configuration that failed to be
+	// associated or disassociated.
+	ScanConfigurationArn *string
+
+	// The status code indicating why the association or disassociation failed.
+	StatusCode AssociationResultStatusCode
+
+	// A message explaining why the association or disassociation failed.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains details about a member account in your organization
 // that failed to activate Amazon Inspector deep inspection.
 type FailedMemberAccountEc2DeepInspectionStatusState struct {
@@ -2061,6 +2458,13 @@ type FilterCriteria struct {
 
 	// Details of the Amazon Web Services account IDs used to filter findings.
 	AwsAccountId []StringFilter
+
+	// Filter criteria for findings based on the project name in a code repository.
+	CodeRepositoryProjectName []StringFilter
+
+	// Filter criteria for findings based on the repository provider type (such as
+	// GitHub, GitLab, etc.).
+	CodeRepositoryProviderType []StringFilter
 
 	// The name of the detector used to identify a code vulnerability in a Lambda
 	// function used to filter findings.
@@ -2994,6 +3398,22 @@ type PackageVulnerabilityDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for periodic scans that run on a scheduled basis.
+type PeriodicScanConfiguration struct {
+
+	// The frequency at which periodic scans are performed (such as weekly or monthly).
+	//
+	// If you don't provide the frequencyExpression Amazon Inspector chooses day for
+	// the scan to run. If you provide the frequencyExpression , the schedule must
+	// match the specified frequency .
+	Frequency PeriodicScanFrequency
+
+	// The schedule expression for periodic scans, in cron format.
+	FrequencyExpression *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information on the permissions an account has within Amazon Inspector.
 type Permission struct {
 
@@ -3035,6 +3455,46 @@ type PortRangeFilter struct {
 
 	// The port number the port range ends at.
 	EndInclusive *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains the scan configuration settings applied to a specific project in a
+// code repository.
+type ProjectCodeSecurityScanConfiguration struct {
+
+	// The continuous integration scan configurations applied to the project.
+	ContinuousIntegrationScanConfigurations []ProjectContinuousIntegrationScanConfiguration
+
+	// The periodic scan configurations applied to the project.
+	PeriodicScanConfigurations []ProjectPeriodicScanConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains the continuous integration scan configuration settings applied to a
+// specific project.
+type ProjectContinuousIntegrationScanConfiguration struct {
+
+	// The categories of security rules applied during continuous integration scans
+	// for the project.
+	RuleSetCategories []RuleSetCategory
+
+	// The repository event that triggers continuous integration scans for the project.
+	SupportedEvent ContinuousIntegrationScanEvent
+
+	noSmithyDocumentSerde
+}
+
+// Contains the periodic scan configuration settings applied to a specific project.
+type ProjectPeriodicScanConfiguration struct {
+
+	// The schedule expression for periodic scans, in cron format, applied to the
+	// project.
+	FrequencyExpression *string
+
+	// The categories of security rules applied during periodic scans for the project.
+	RuleSetCategories []RuleSetCategory
 
 	noSmithyDocumentSerde
 }
@@ -3140,6 +3600,9 @@ type ResourceDetails struct {
 	// affected by a finding.
 	AwsLambdaFunction *AwsLambdaFunctionDetails
 
+	// Contains details about a code repository resource associated with a finding.
+	CodeRepository *CodeRepositoryDetails
+
 	noSmithyDocumentSerde
 }
 
@@ -3195,6 +3658,9 @@ type ResourceMapFilter struct {
 // An object that contains details about the metadata for an Amazon ECR resource.
 type ResourceScanMetadata struct {
 
+	// Contains metadata about scan coverage for a code repository resource.
+	CodeRepository *CodeRepositoryMetadata
+
 	// An object that contains metadata details for an Amazon EC2 instance.
 	Ec2 *Ec2Metadata
 
@@ -3230,6 +3696,9 @@ type ResourceState struct {
 	Ecr *State
 
 	// An object that described the state of Amazon Inspector scans for an account.
+	CodeRepository *State
+
+	// An object that described the state of Amazon Inspector scans for an account.
 	Lambda *State
 
 	// An object that described the state of Amazon Inspector scans for an account.
@@ -3251,6 +3720,9 @@ type ResourceStatus struct {
 	//
 	// This member is required.
 	Ecr Status
+
+	// The status of Amazon Inspector scanning for code repositories.
+	CodeRepository Status
 
 	// The status of Amazon Inspector scanning for Amazon Web Services Lambda function.
 	Lambda Status
@@ -3283,35 +3755,72 @@ type ScanStatus struct {
 
 	// The scan status. Possible return values and descriptions are:
 	//
-	// PENDING_INITIAL_SCAN - This resource has been identified for scanning, results
-	// will be available soon.
-	//
 	// ACCESS_DENIED - Resource access policy restricting Amazon Inspector access.
 	// Please update the IAM policy.
+	//
+	// ACCESS_DENIED_TO_ENCRYPTION_KEY - The KMS key policy doesn't allow Amazon
+	// Inspector access. Update the key policy.
+	//
+	// DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED - Amazon Inspector failed to
+	// extract the package inventory because the package collection time exceeding the
+	// maximum threshold of 15 minutes.
+	//
+	// DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED - The SSM agent couldn't
+	// send inventory to Amazon Inspector because the SSM quota for Inventory data
+	// collected per instance per day has already been reached for this instance.
+	//
+	// DEEP_INSPECTION_NO_INVENTORY - The Amazon Inspector plugin hasn't yet been able
+	// to collect an inventory of packages for this instance. This is usually the
+	// result of a pending scan, however, if this status persists after 6 hours, use
+	// SSM to ensure that the required Amazon Inspector associations exist and are
+	// running for the instance.
+	//
+	// DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED - The instance has exceeded
+	// the 5000 package limit for Amazon Inspector Deep inspection. To resume Deep
+	// inspection for this instance you can try to adjust the custom paths associated
+	// with the account.
+	//
+	// EC2_INSTANCE_STOPPED - This EC2 instance is in a stopped state, therefore,
+	// Amazon Inspector will pause scanning. The existing findings will continue to
+	// exist until the instance is terminated. Once the instance is re-started,
+	// Inspector will automatically start scanning the instance again. Please note that
+	// you will not be charged for this instance while it's in a stopped state.
+	//
+	// EXCLUDED_BY_TAG - This resource was not scanned because it has been excluded by
+	// a tag.
+	//
+	// IMAGE_SIZE_EXCEEDED - Reserved for future use.
+	//
+	// INTEGRATION_CONNNECTION_LOST - Amazon Inspector couldn't communicate with the
+	// source code management platform.
 	//
 	// INTERNAL_ERROR - Amazon Inspector has encountered an internal error for this
 	// resource. Amazon Inspector service will automatically resolve the issue and
 	// resume the scanning. No action required from the user.
 	//
-	// UNMANAGED_EC2_INSTANCE - The EC2 instance is not managed by SSM, please use the
-	// following SSM automation to remediate the issue: [https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-awssupport-troubleshoot-managed-instance.html]. Once the instance becomes
-	// managed by SSM, Inspector will automatically begin scanning this instance.
+	// NO INVENTORY - Amazon Inspector couldn't find software application inventory to
+	// scan for vulnerabilities. This might be caused due to required Amazon Inspector
+	// associations being deleted or failing to run on your resource. Please verify the
+	// status of InspectorInventoryCollection-do-not-delete association in the SSM
+	// console for the resource. Additionally, you can verify the instance's inventory
+	// in the SSM Fleet Manager console.
 	//
-	// UNSUPPORTED_OS - Amazon Inspector does not support this OS, architecture, or
-	// image manifest type at this time. To see a complete list of supported operating
-	// systems see: [https://docs.aws.amazon.com/inspector/latest/user/supported.html].
+	// NO_RESOURCES_FOUND - Reserved for future use.
 	//
-	// SCAN_ELIGIBILITY_EXPIRED - The configured scan duration has lapsed for this
-	// image.
+	// NO_SCAN_CONFIGURATION_ASSOCIATED - The code repository resource doesn't have an
+	// associated scan configuration.
+	//
+	// PENDING_DISABLE - This resource is pending cleanup during disablement. The
+	// customer will not be billed while a resource is in the pending disable status.
+	//
+	// PENDING_INITIAL_SCAN - This resource has been identified for scanning, results
+	// will be available soon.
 	//
 	// RESOURCE_TERMINATED - This resource has been terminated. The findings and
 	// coverage associated with this resource are in the process of being cleaned up.
 	//
-	// SUCCESSFUL - The scan was successful.
-	//
-	// NO_RESOURCES_FOUND - Reserved for future use.
-	//
-	// IMAGE_SIZE_EXCEEDED - Reserved for future use.
+	// SCAN_ELIGIBILITY_EXPIRED - The configured scan duration has lapsed for this
+	// image.
 	//
 	// SCAN_FREQUENCY_MANUAL - This image will not be covered by Amazon Inspector due
 	// to the repository scan frequency configuration.
@@ -3319,55 +3828,32 @@ type ScanStatus struct {
 	// SCAN_FREQUENCY_SCAN_ON_PUSH - This image will be scanned one time and will not
 	// new findings because of the scan frequency configuration.
 	//
-	// EC2_INSTANCE_STOPPED - This EC2 instance is in a stopped state, therefore,
-	// Amazon Inspector will pause scanning. The existing findings will continue to
-	// exist until the instance is terminated. Once the instance is re-started,
-	// Inspector will automatically start scanning the instance again. Please note that
-	// you will not be charged for this instance while it’s in a stopped state.
+	// SCAN_IN_PROGRESS - The resource is currently being scanned.
 	//
-	// PENDING_DISABLE - This resource is pending cleanup during disablement. The
-	// customer will not be billed while a resource is in the pending disable status.
-	//
-	// NO INVENTORY - Amazon Inspector couldn’t find software application inventory to
-	// scan for vulnerabilities. This might be caused due to required Amazon Inspector
-	// associations being deleted or failing to run on your resource. Please verify the
-	// status of InspectorInventoryCollection-do-not-delete association in the SSM
-	// console for the resource. Additionally, you can verify the instance’s inventory
-	// in the SSM Fleet Manager console.
-	//
-	// STALE_INVENTORY - Amazon Inspector wasn’t able to collect an updated software
+	// STALE_INVENTORY - Amazon Inspector wasn't able to collect an updated software
 	// application inventory in the last 7 days. Please confirm the required Amazon
 	// Inspector associations still exist and you can still see an updated inventory in
 	// the SSM console.
 	//
-	// EXCLUDED_BY_TAG - This resource was not scanned because it has been excluded by
-	// a tag.
+	// SUCCESSFUL - The scan was successful.
 	//
-	// UNSUPPORTED_RUNTIME - The function was not scanned because it has an
-	// unsupported runtime. To see a complete list of supported runtimes see: [https://docs.aws.amazon.com/inspector/latest/user/supported.html].
-	//
-	// UNSUPPORTED_MEDIA_TYPE - The ECR image has an unsupported media type.
+	// UNMANAGED_EC2_INSTANCE - The EC2 instance is not managed by SSM, please use the
+	// following SSM automation to remediate the issue: [https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-awssupport-troubleshoot-managed-instance.html]. Once the instance becomes
+	// managed by SSM, Inspector will automatically begin scanning this instance.
 	//
 	// UNSUPPORTED_CONFIG_FILE - Reserved for future use.
 	//
-	// DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED - The instance has exceeded
-	// the 5000 package limit for Amazon Inspector Deep inspection. To resume Deep
-	// inspection for this instance you can try to adjust the custom paths associated
-	// with the account.
+	// UNSUPPORTED_LANGUAGE - The scan was unsuccessful because the repository
+	// contains files in an unsupported programming language.
 	//
-	// DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED - The SSM agent couldn't
-	// send inventory to Amazon Inspector because the SSM quota for Inventory data
-	// collected per instance per day has already been reached for this instance.
+	// UNSUPPORTED_MEDIA_TYPE - The ECR image has an unsupported media type.
 	//
-	// DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED - Amazon Inspector failed to
-	// extract the package inventory because the package collection time exceeding the
-	// maximum threshold of 15 minutes.
+	// UNSUPPORTED_OS - Amazon Inspector does not support this OS, architecture, or
+	// image manifest type at this time. To see a complete list of supported operating
+	// systems see: [https://docs.aws.amazon.com/inspector/latest/user/supported.html].
 	//
-	// DEEP_INSPECTION_NO_INVENTORY The Amazon Inspector plugin hasn't yet been able
-	// to collect an inventory of packages for this instance. This is usually the
-	// result of a pending scan, however, if this status persists after 6 hours, use
-	// SSM to ensure that the required Amazon Inspector associations exist and are
-	// running for the instance.
+	// UNSUPPORTED_RUNTIME - The function was not scanned because it has an
+	// unsupported runtime. To see a complete list of supported runtimes see: [https://docs.aws.amazon.com/inspector/latest/user/supported.html].
 	//
 	// [https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-awssupport-troubleshoot-managed-instance.html]: https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-awssupport-troubleshoot-managed-instance.html
 	// [https://docs.aws.amazon.com/inspector/latest/user/supported.html]: https://docs.aws.amazon.com/inspector/latest/user/supported.html
@@ -3430,6 +3916,17 @@ type ScheduleMemberWeekly struct {
 }
 
 func (*ScheduleMemberWeekly) isSchedule() {}
+
+// Defines the scope of repositories to be included in code security scans.
+type ScopeSettings struct {
+
+	// The scope of projects to be selected for scanning within the integrated
+	// repositories. Setting the value to ALL applies the scope settings to all
+	// existing and future projects imported into Amazon Inspector.
+	ProjectSelectionScope ProjectSelectionScope
+
+	noSmithyDocumentSerde
+}
 
 // Details on the criteria used to define the filter for a vulnerability search.
 type SearchVulnerabilitiesFilterCriteria struct {
@@ -3617,6 +4114,20 @@ type StringFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a successful association or disassociation between a code
+// repository and a scan configuration.
+type SuccessfulAssociationResult struct {
+
+	// Identifies a specific resource in a code repository that will be scanned.
+	Resource CodeSecurityResource
+
+	// The Amazon Resource Name (ARN) of the scan configuration that was successfully
+	// associated or disassociated.
+	ScanConfigurationArn *string
+
+	noSmithyDocumentSerde
+}
+
 // A suggested fix for a vulnerability in your Lambda function code.
 type SuggestedFix struct {
 
@@ -3722,6 +4233,64 @@ type UpdateCisTargets struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains details required to update an integration with GitHub.
+type UpdateGitHubIntegrationDetail struct {
+
+	// The authorization code received from GitHub to update the integration.
+	//
+	// This member is required.
+	Code *string
+
+	// The installation ID of the GitHub App associated with the integration.
+	//
+	// This member is required.
+	InstallationId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details required to update an integration with a self-managed GitLab
+// instance.
+type UpdateGitLabSelfManagedIntegrationDetail struct {
+
+	// The authorization code received from the self-managed GitLab instance to update
+	// the integration.
+	//
+	// This member is required.
+	AuthCode *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details required to update a code security integration with a specific
+// repository provider.
+//
+// The following types satisfy this interface:
+//
+//	UpdateIntegrationDetailsMemberGithub
+//	UpdateIntegrationDetailsMemberGitlabSelfManaged
+type UpdateIntegrationDetails interface {
+	isUpdateIntegrationDetails()
+}
+
+// Details specific to updating an integration with GitHub.
+type UpdateIntegrationDetailsMemberGithub struct {
+	Value UpdateGitHubIntegrationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateIntegrationDetailsMemberGithub) isUpdateIntegrationDetails() {}
+
+// Details specific to updating an integration with a self-managed GitLab instance.
+type UpdateIntegrationDetailsMemberGitlabSelfManaged struct {
+	Value UpdateGitLabSelfManagedIntegrationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateIntegrationDetailsMemberGitlabSelfManaged) isUpdateIntegrationDetails() {}
 
 // Contains usage information about the cost of Amazon Inspector operation.
 type Usage struct {
@@ -3905,7 +4474,10 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAggregationRequest()  {}
-func (*UnknownUnionMember) isAggregationResponse() {}
-func (*UnknownUnionMember) isClusterMetadata()     {}
-func (*UnknownUnionMember) isSchedule()            {}
+func (*UnknownUnionMember) isAggregationRequest()       {}
+func (*UnknownUnionMember) isAggregationResponse()      {}
+func (*UnknownUnionMember) isClusterMetadata()          {}
+func (*UnknownUnionMember) isCodeSecurityResource()     {}
+func (*UnknownUnionMember) isCreateIntegrationDetail()  {}
+func (*UnknownUnionMember) isSchedule()                 {}
+func (*UnknownUnionMember) isUpdateIntegrationDetails() {}

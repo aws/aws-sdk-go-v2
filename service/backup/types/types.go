@@ -1262,6 +1262,50 @@ type KeyValue struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the latest update to an MPA approval team
+// association.
+type LatestMpaApprovalTeamUpdate struct {
+
+	// The date and time when the MPA approval team update will expire.
+	ExpiryDate *time.Time
+
+	// The date and time when the MPA approval team update was initiated.
+	InitiationDate *time.Time
+
+	// The ARN of the MPA session associated with this update.
+	MpaSessionArn *string
+
+	// The current status of the MPA approval team update.
+	Status MpaSessionStatus
+
+	// A message describing the current status of the MPA approval team update.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the latest request to revoke access to a backup
+// vault.
+type LatestRevokeRequest struct {
+
+	// The date and time when the revoke request will expire.
+	ExpiryDate *time.Time
+
+	// The date and time when the revoke request was initiated.
+	InitiationDate *time.Time
+
+	// The ARN of the MPA session associated with this revoke request.
+	MpaSessionArn *string
+
+	// The current status of the revoke request.
+	Status MpaRevokeSessionStatus
+
+	// A message describing the current status of the revoke request.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // A legal hold is an administrative tool that helps prevent backups from being
 // deleted while under a hold. While the hold is in place, backups under a hold
 // cannot be deleted and lifecycle policies that would alter the backup status
@@ -1444,6 +1488,10 @@ type RecoveryPointByBackupVault struct {
 	// A string in the form of a detailed message explaining the status of a backup
 	// index associated with the recovery point.
 	IndexStatusMessage *string
+
+	// The date and time when the backup job that created this recovery point was
+	// initiated, in Unix format and Coordinated Universal Time (UTC).
+	InitiationDate *time.Time
 
 	// A Boolean value that is returned as TRUE if the specified recovery point is
 	// encrypted, or FALSE if the recovery point is not encrypted.
@@ -1812,6 +1860,27 @@ type ReportSetting struct {
 	//
 	// Use the wildcard as the string value to include all Regions.
 	Regions []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a restore access backup vault.
+type RestoreAccessBackupVaultListMember struct {
+
+	// The date and time when the restore access backup vault was approved.
+	ApprovalDate *time.Time
+
+	// The date and time when the restore access backup vault was created.
+	CreationDate *time.Time
+
+	// Information about the latest request to revoke access to this backup vault.
+	LatestRevokeRequest *LatestRevokeRequest
+
+	// The ARN of the restore access backup vault.
+	RestoreAccessBackupVaultArn *string
+
+	// The current state of the restore access backup vault.
+	VaultState VaultState
 
 	noSmithyDocumentSerde
 }

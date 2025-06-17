@@ -315,6 +315,7 @@ type ResourceManagedType string
 const (
 	ResourceManagedTypeAwsManagedThreatSignatures ResourceManagedType = "AWS_MANAGED_THREAT_SIGNATURES"
 	ResourceManagedTypeAwsManagedDomainLists      ResourceManagedType = "AWS_MANAGED_DOMAIN_LISTS"
+	ResourceManagedTypeActiveThreatDefense        ResourceManagedType = "ACTIVE_THREAT_DEFENSE"
 )
 
 // Values returns all known values for ResourceManagedType. Note that this can be
@@ -325,6 +326,7 @@ func (ResourceManagedType) Values() []ResourceManagedType {
 	return []ResourceManagedType{
 		"AWS_MANAGED_THREAT_SIGNATURES",
 		"AWS_MANAGED_DOMAIN_LISTS",
+		"ACTIVE_THREAT_DEFENSE",
 	}
 }
 
@@ -525,6 +527,27 @@ func (StreamExceptionPolicy) Values() []StreamExceptionPolicy {
 		"DROP",
 		"CONTINUE",
 		"REJECT",
+	}
+}
+
+type SummaryRuleOption string
+
+// Enum values for SummaryRuleOption
+const (
+	SummaryRuleOptionSid      SummaryRuleOption = "SID"
+	SummaryRuleOptionMsg      SummaryRuleOption = "MSG"
+	SummaryRuleOptionMetadata SummaryRuleOption = "METADATA"
+)
+
+// Values returns all known values for SummaryRuleOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SummaryRuleOption) Values() []SummaryRuleOption {
+	return []SummaryRuleOption{
+		"SID",
+		"MSG",
+		"METADATA",
 	}
 }
 

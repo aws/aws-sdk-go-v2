@@ -2,6 +2,25 @@
 
 package types
 
+type CertificateExport string
+
+// Enum values for CertificateExport
+const (
+	CertificateExportEnabled  CertificateExport = "ENABLED"
+	CertificateExportDisabled CertificateExport = "DISABLED"
+)
+
+// Values returns all known values for CertificateExport. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateExport) Values() []CertificateExport {
+	return []CertificateExport{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type CertificateManagedBy string
 
 // Enum values for CertificateManagedBy

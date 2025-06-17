@@ -11,8 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	End of support notice: On May 20, 2026, Amazon Web Services will end support
+//
+// for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no
+// longer be able to access the Amazon Web Services DMS Fleet Advisor; console or
+// Amazon Web Services DMS Fleet Advisor; resources. For more information, see [Amazon Web Services DMS Fleet Advisor end of support].
+//
 // Provides descriptions of the schemas discovered by your Fleet Advisor
 // collectors.
+//
+// [Amazon Web Services DMS Fleet Advisor end of support]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
 func (c *Client) DescribeFleetAdvisorSchemaObjectSummary(ctx context.Context, params *DescribeFleetAdvisorSchemaObjectSummaryInput, optFns ...func(*Options)) (*DescribeFleetAdvisorSchemaObjectSummaryOutput, error) {
 	if params == nil {
 		params = &DescribeFleetAdvisorSchemaObjectSummaryInput{}
@@ -40,7 +48,14 @@ type DescribeFleetAdvisorSchemaObjectSummaryInput struct {
 	// Name="schema-id",Values="50"
 	Filters []types.Filter
 
+	//  End of support notice: On May 20, 2026, Amazon Web Services will end support
+	// for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no
+	// longer be able to access the Amazon Web Services DMS Fleet Advisor; console or
+	// Amazon Web Services DMS Fleet Advisor; resources. For more information, see [Amazon Web Services DMS Fleet Advisor end of support].
+	//
 	// Sets the maximum number of records returned in the response.
+	//
+	// [Amazon Web Services DMS Fleet Advisor end of support]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
 	MaxRecords *int32
 
 	// If NextToken is returned by a previous response, there are more results
@@ -175,7 +190,14 @@ func (c *Client) addOperationDescribeFleetAdvisorSchemaObjectSummaryMiddlewares(
 // DescribeFleetAdvisorSchemaObjectSummaryPaginatorOptions is the paginator
 // options for DescribeFleetAdvisorSchemaObjectSummary
 type DescribeFleetAdvisorSchemaObjectSummaryPaginatorOptions struct {
+	//  End of support notice: On May 20, 2026, Amazon Web Services will end support
+	// for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no
+	// longer be able to access the Amazon Web Services DMS Fleet Advisor; console or
+	// Amazon Web Services DMS Fleet Advisor; resources. For more information, see [Amazon Web Services DMS Fleet Advisor end of support].
+	//
 	// Sets the maximum number of records returned in the response.
+	//
+	// [Amazon Web Services DMS Fleet Advisor end of support]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

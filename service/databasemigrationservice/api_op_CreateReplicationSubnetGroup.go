@@ -44,6 +44,8 @@ type CreateReplicationSubnetGroupInput struct {
 
 	// The description for the subnet group.
 	//
+	// Constraints: This parameter Must not contain non-printable control characters.
+	//
 	// This member is required.
 	ReplicationSubnetGroupDescription *string
 
