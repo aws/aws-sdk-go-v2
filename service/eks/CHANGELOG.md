@@ -1,3 +1,8 @@
+# v1.66.1 (2025-06-17)
+
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.66.0 (2025-06-11)
 
 * **Feature**: Release for EKS Pod Identity Cross Account feature and disableSessionTags flag.

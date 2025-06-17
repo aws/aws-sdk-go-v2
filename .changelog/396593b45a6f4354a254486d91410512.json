@@ -1,8 +1,0 @@
-{
-    "id": "396593b4-5a6f-4354-a254-486d91410512",
-    "type": "feature",
-    "description": "Adds operations, structures, and exceptions required for public preview release of Security Hub V2.",
-    "modules": [
-        "service/securityhub"
-    ]
-}

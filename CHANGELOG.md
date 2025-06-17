@@ -1,3 +1,38 @@
+# Release (2025-06-17)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.40.0](service/accessanalyzer/CHANGELOG.md#v1400-2025-06-17)
+  * **Feature**: We are launching a new analyzer type, internal access analyzer. The new analyzer will generate internal access findings, which help customers understand who within their AWS organization or AWS Account has access to their critical AWS resources.
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.33.0](service/acm/CHANGELOG.md#v1330-2025-06-17)
+  * **Feature**: Adds support for Exportable Public Certificates
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.43.0](service/backup/CHANGELOG.md#v1430-2025-06-17)
+  * **Feature**: AWS Backup is adding support for integration of its logically air-gapped vaults with the AWS Organizations Multi-party approval capability.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.35.1](service/bedrock/CHANGELOG.md#v1351-2025-06-17)
+  * **Documentation**: This release of the SDK has the API and documentation for the createcustommodel API. This feature lets you copy a trained model into Amazon Bedrock for inference.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.53.0](service/databasemigrationservice/CHANGELOG.md#v1530-2025-06-17)
+  * **Feature**: Add "Virtual" field to Data Provider as well as "S3Path" and "S3AccessRoleArn" fields to DataProvider settings
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.55.0](service/guardduty/CHANGELOG.md#v1550-2025-06-17)
+  * **Feature**: Adding support for extended threat detection for EKS Audit Logs and EKS Runtime Monitoring.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.38.0](service/inspector2/CHANGELOG.md#v1380-2025-06-17)
+  * **Feature**: Add Code Repository Scanning as part of AWS InspectorV2
+* `github.com/aws/aws-sdk-go-v2/service/mpa`: [v1.0.0](service/mpa/CHANGELOG.md#v100-2025-06-17)
+  * **Release**: New AWS service client module
+  * **Feature**: This release enables customers to create Multi-party approval teams and approval requests to protect supported operations.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.51.0](service/networkfirewall/CHANGELOG.md#v1510-2025-06-17)
+  * **Feature**: Release of Active Threat Defense in Network Firewall
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.39.0](service/organizations/CHANGELOG.md#v1390-2025-06-17)
+  * **Feature**: Add support for policy operations on the SECURITYHUB_POLICY policy type.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.58.0](service/securityhub/CHANGELOG.md#v1580-2025-06-17)
+  * **Feature**: Adds operations, structures, and exceptions required for public preview release of Security Hub V2.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.34.0](service/sts/CHANGELOG.md#v1340-2025-06-17)
+  * **Feature**: The AWS Security Token Service APIs AssumeRoleWithSAML and AssumeRoleWithWebIdentity can now be invoked without pre-configured AWS credentials in the SDK configuration.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.63.0](service/wafv2/CHANGELOG.md#v1630-2025-06-17)
+  * **Feature**: AWS WAF can now suggest protection packs for you based on the application information you provide when you create a webACL.
+
 # Release (2025-06-16)
 
 ## Module Highlights

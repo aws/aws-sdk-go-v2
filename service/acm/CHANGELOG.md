@@ -1,3 +1,9 @@
+# v1.33.0 (2025-06-17)
+
+* **Feature**: Adds support for Exportable Public Certificates
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.2 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

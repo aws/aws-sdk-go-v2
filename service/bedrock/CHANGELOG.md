@@ -1,3 +1,9 @@
+# v1.35.1 (2025-06-17)
+
+* **Documentation**: This release of the SDK has the API and documentation for the createcustommodel API. This feature lets you copy a trained model into Amazon Bedrock for inference.
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2025-06-16)
 
 * **Feature**: This release of the SDK has the API and documentation for the createcustommodel API. This feature lets you copy a Amazon SageMaker trained Amazon Nova model into Amazon Bedrock for inference.

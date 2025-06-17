@@ -1,8 +1,0 @@
-{
-    "id": "4e7b4eae-bb9b-425a-bcaa-cdb809c48b0a",
-    "type": "feature",
-    "description": "Add \"Virtual\" field to Data Provider as well as \"S3Path\" and \"S3AccessRoleArn\" fields to DataProvider settings",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

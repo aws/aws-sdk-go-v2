@@ -1,3 +1,8 @@
+# v1.52.1 (2025-06-17)
+
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2025-06-11)
 
 * **Feature**: Add support for the Assisted NLU feature to improve bot performance

@@ -1,3 +1,9 @@
+# v1.63.0 (2025-06-17)
+
+* **Feature**: AWS WAF can now suggest protection packs for you based on the application information you provide when you create a webACL.
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.62.0 (2025-06-11)
 
 * **Feature**: WAF now provides two DDoS protection options: resource-level monitoring for Application Load Balancers and the AWSManagedRulesAntiDDoSRuleSet managed rule group for CloudFront distributions.

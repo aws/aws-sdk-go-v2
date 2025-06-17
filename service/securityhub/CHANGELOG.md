@@ -1,3 +1,9 @@
+# v1.58.0 (2025-06-17)
+
+* **Feature**: Adds operations, structures, and exceptions required for public preview release of Security Hub V2.
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.5 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

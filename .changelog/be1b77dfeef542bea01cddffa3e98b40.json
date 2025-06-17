@@ -1,8 +1,0 @@
-{
-    "id": "be1b77df-eef5-42be-a01c-ddffa3e98b40",
-    "type": "feature",
-    "description": "Release of Active Threat Defense in Network Firewall",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

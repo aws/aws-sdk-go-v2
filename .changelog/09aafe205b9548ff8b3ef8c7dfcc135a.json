@@ -1,8 +1,0 @@
-{
-    "id": "09aafe20-5b95-48ff-8b3e-f8c7dfcc135a",
-    "type": "feature",
-    "description": "Adds support for Exportable Public Certificates",
-    "modules": [
-        "service/acm"
-    ]
-}

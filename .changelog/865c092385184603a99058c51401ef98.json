@@ -1,8 +1,0 @@
-{
-    "id": "865c0923-8518-4603-a990-58c51401ef98",
-    "type": "feature",
-    "description": "AWS Backup is adding support for integration of its logically air-gapped vaults with the AWS Organizations Multi-party approval capability.",
-    "modules": [
-        "service/backup"
-    ]
-}

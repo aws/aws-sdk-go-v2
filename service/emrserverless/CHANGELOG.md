@@ -1,3 +1,8 @@
+# v1.31.1 (2025-06-17)
+
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2025-06-12)
 
 * **Feature**: This release adds support for retrieval of the optional executionIamPolicy field in the GetJobRun API response.

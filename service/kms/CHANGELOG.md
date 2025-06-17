@@ -1,3 +1,8 @@
+# v1.41.1 (2025-06-17)
+
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2025-06-12)
 
 * **Feature**: AWS KMS announces the support of ML-DSA key pairs that creates post-quantum safe digital signatures.

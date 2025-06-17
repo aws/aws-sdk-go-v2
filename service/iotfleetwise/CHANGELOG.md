@@ -1,3 +1,8 @@
+# v1.27.1 (2025-06-17)
+
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2025-06-12)
 
 * **Feature**: Add new status READY_FOR_CHECKIN used for vehicle synchronisation

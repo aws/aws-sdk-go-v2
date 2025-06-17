@@ -1,3 +1,9 @@
+# v1.40.0 (2025-06-17)
+
+* **Feature**: We are launching a new analyzer type, internal access analyzer. The new analyzer will generate internal access findings, which help customers understand who within their AWS organization or AWS Account has access to their critical AWS resources.
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.2 (2025-06-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,9 @@
+# v1.51.0 (2025-06-17)
+
+* **Feature**: Release of Active Threat Defense in Network Firewall
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.0 (2025-06-16)
 
 * **Feature**: You can now create firewalls using a Transit Gateway instead of a VPC, resulting in a TGW attachment.

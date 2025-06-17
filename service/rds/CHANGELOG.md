@@ -1,3 +1,8 @@
+# v1.97.3 (2025-06-17)
+
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.97.2 (2025-06-11)
 
 * **Documentation**: Updates Amazon RDS documentation for Amazon RDS for Db2 cross-Region replicas in standby mode.

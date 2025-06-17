@@ -1,8 +1,0 @@
-{
-    "id": "e5f792ba-7c5b-4178-bdd9-6a8882caecd4",
-    "type": "feature",
-    "description": "Adding support for extended threat detection for EKS Audit Logs and EKS Runtime Monitoring.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

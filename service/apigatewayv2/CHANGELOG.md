@@ -1,3 +1,8 @@
+# v1.28.4 (2025-06-17)
+
+* **Dependency Update**: Update to smithy-go v1.22.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.3 (2025-06-12)
 
 * **Documentation**: Documentation updates for Amazon API Gateway
