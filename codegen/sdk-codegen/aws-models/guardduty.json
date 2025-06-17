@@ -323,7 +323,7 @@
                     "target": "com.amazonaws.guardduty#Email",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The email address of the member account.</p>",
+                        "smithy.api#documentation": "<p>The email address of the member account.</p>\n         <p>The rules for a valid email address:</p>\n         <ul>\n            <li>\n               <p>The email address must be a minimum of 6 and a maximum of 64 characters long.</p>\n            </li>\n            <li>\n               <p>All characters must be 7-bit ASCII characters.</p>\n            </li>\n            <li>\n               <p>There must be one and only one @ symbol, which separates the local name from the domain name.</p>\n            </li>\n            <li>\n               <p>The local name can't contain any of the following characters:</p>\n               <p>whitespace, \" ' ( ) < > [ ] : ' , \\ | % &</p>\n            </li>\n            <li>\n               <p>The local name can't begin with a dot (.).</p>\n            </li>\n            <li>\n               <p>The domain name can consist of only the characters [a-z], [A-Z], [0-9], hyphen (-), or dot (.).</p>\n            </li>\n            <li>\n               <p>The domain name can't begin or end with a dot (.) or hyphen (-).</p>\n            </li>\n            <li>\n               <p>The domain name must contain at least one dot. </p>\n            </li>\n         </ul>",
                         "smithy.api#jsonName": "email",
                         "smithy.api#required": {}
                     }
@@ -551,6 +551,13 @@
                         "smithy.api#documentation": "<p>Contains information about the user session where the activity initiated.</p>",
                         "smithy.api#jsonName": "session"
                     }
+                },
+                "Process": {
+                    "target": "com.amazonaws.guardduty#ActorProcess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the process associated with the threat actor.\n      This includes details such as process name, path, execution time, and\n      unique identifiers that help track the actor's activities within the system.</p>",
+                        "smithy.api#jsonName": "process"
+                    }
                 }
             },
             "traits": {
@@ -569,6 +576,39 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#ActorProcess": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#ProcessName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the process as it appears in the system.</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.guardduty#ProcessPath",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The full file path to the process executable on the system.</p>",
+                        "smithy.api#jsonName": "path",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sha256": {
+                    "target": "com.amazonaws.guardduty#ProcessSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA256 hash of the process executable file, which can be used for identification\n      and verification purposes.</p>",
+                        "smithy.api#jsonName": "sha256"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a process involved in a GuardDuty finding, including process identification,\n      execution details, and file information.</p>"
+            }
+        },
         "com.amazonaws.guardduty#Actors": {
             "type": "list",
             "member": {
@@ -579,6 +619,12 @@
                     "min": 0,
                     "max": 400
                 }
+            }
+        },
+        "com.amazonaws.guardduty#AdditionalSequenceTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#FindingType"
             }
         },
         "com.amazonaws.guardduty#AddonDetails": {
@@ -1161,6 +1207,47 @@
                 "smithy.api#documentation": "<p>Contains information on the status of CloudTrail as a data source for the detector.</p>"
             }
         },
+        "com.amazonaws.guardduty#ClusterStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                }
+            }
+        },
         "com.amazonaws.guardduty#Condition": {
             "type": "structure",
             "members": {
@@ -1340,6 +1427,39 @@
                 "smithy.api#documentation": "<p>Details of a container.</p>"
             }
         },
+        "com.amazonaws.guardduty#ContainerFindingResource": {
+            "type": "structure",
+            "members": {
+                "Image": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The container image information, including the image name and tag used to run the container\n      that was involved in the finding.</p>",
+                        "smithy.api#jsonName": "image",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImageUid": {
+                    "target": "com.amazonaws.guardduty#ContainerImageUid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID associated with the container image.</p>",
+                        "smithy.api#jsonName": "imageUid"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about container resources involved in a GuardDuty finding.\n      This structure provides details about containers that were identified as part of\n      suspicious or malicious activity.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ContainerImageUid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.guardduty#ContainerInstanceDetails": {
             "type": "structure",
             "members": {
@@ -1360,6 +1480,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the Amazon EC2 instance that is running \n    the Amazon ECS container.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ContainerUid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.guardduty#ContainerUids": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#ContainerUid"
             }
         },
         "com.amazonaws.guardduty#Containers": {
@@ -4746,6 +4881,27 @@
                 "smithy.api#documentation": "<p>Details about the potentially impacted Amazon EC2 instance resource.</p>"
             }
         },
+        "com.amazonaws.guardduty#Ec2InstanceUid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.guardduty#Ec2InstanceUids": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#Ec2InstanceUid"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
         "com.amazonaws.guardduty#Ec2NetworkInterface": {
             "type": "structure",
             "members": {
@@ -4951,6 +5107,49 @@
                 "smithy.api#documentation": "<p>Contains information about the task in an ECS cluster.</p>"
             }
         },
+        "com.amazonaws.guardduty#EksCluster": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the Amazon EKS cluster involved in the finding.</p>",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the Amazon EKS cluster was created, in UTC format.</p>",
+                        "smithy.api#jsonName": "createdAt"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.guardduty#ClusterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Amazon EKS cluster.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Virtual Private Cloud (Amazon VPC) associated with the Amazon EKS cluster.</p>",
+                        "smithy.api#jsonName": "vpcId"
+                    }
+                },
+                "Ec2InstanceUids": {
+                    "target": "com.amazonaws.guardduty#Ec2InstanceUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers for the Amazon EC2 instances that serve as worker nodes in the Amazon EKS cluster.</p>",
+                        "smithy.api#jsonName": "ec2InstanceUids"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Amazon EKS cluster involved in a GuardDuty finding,\n      including cluster identification, status, and network configuration.</p>"
+            }
+        },
         "com.amazonaws.guardduty#EksClusterDetails": {
             "type": "structure",
             "members": {
@@ -5005,9 +5204,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 6,
                     "max": 64
                 },
+                "smithy.api#pattern": "^See rules in parameter description$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -5257,7 +5457,7 @@
                 "CriterionKey": {
                     "target": "com.amazonaws.guardduty#CriterionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>An enum value representing possible scan properties to match with given scan\n      entries.</p>\n         <note>\n            <p>Replace the enum value <code>CLUSTER_NAME</code> with <code>EKS_CLUSTER_NAME</code>.\n      <code>CLUSTER_NAME</code> has been deprecated.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>An enum value representing possible scan properties to match with given scan\n      entries.</p>",
                         "smithy.api#jsonName": "criterionKey"
                     }
                 },
@@ -5388,7 +5588,7 @@
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Region where the finding was generated.</p>",
+                        "smithy.api#documentation": "<p>The Region where the finding was generated. For findings generated\n      from <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-global-service-events\">Global Service Events</a>, the Region value in the finding might differ from the Region where\n      GuardDuty identifies the potential threat. For more information,\n      see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html#cloudtrail_global\">How GuardDuty\n        handles Amazon Web Services CloudTrail global events</a> in the <i>Amazon GuardDuty User Guide</i>.</p>",
                         "smithy.api#jsonName": "region",
                         "smithy.api#required": {}
                     }
@@ -5552,6 +5752,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ACCESS_KEY"
+                    }
+                },
+                "EKS_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS_CLUSTER"
+                    }
+                },
+                "KUBERNETES_WORKLOAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KUBERNETES_WORKLOAD"
+                    }
+                },
+                "CONTAINER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINER"
                     }
                 }
             }
@@ -5855,7 +6073,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides the details of the GuardDuty administrator account associated with the current\n      GuardDuty member account.</p>\n         <note>\n            <p>If the organization's management account or a delegated administrator runs this API, \n    it will return success (<code>HTTP 200</code>) but no content.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Provides the details of the GuardDuty administrator account associated with the current\n      GuardDuty member account.</p>\n         <p>Based on the type of account that runs this API, the following list shows how the API behavior varies:</p>\n         <ul>\n            <li>\n               <p>When the GuardDuty administrator account runs this API, it will return success (<code>HTTP 200</code>) but no content.</p>\n            </li>\n            <li>\n               <p>When a member account runs this API, it will return the details of the GuardDuty administrator account that is associated\n        with this calling member account.</p>\n            </li>\n            <li>\n               <p>When an individual account (not associated with an organization) runs this API, it will return success (<code>HTTP 200</code>)\n        but no content.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/detector/{DetectorId}/administrator",
@@ -8751,6 +8969,42 @@
                     "traits": {
                         "smithy.api#enumValue": "UNUSUAL_ASN_FOR_USER"
                     }
+                },
+                "SUSPICIOUS_PROCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPICIOUS_PROCESS"
+                    }
+                },
+                "MALICIOUS_DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MALICIOUS_DOMAIN"
+                    }
+                },
+                "MALICIOUS_PROCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MALICIOUS_PROCESS"
+                    }
+                },
+                "CRYPTOMINING_IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRYPTOMINING_IP"
+                    }
+                },
+                "CRYPTOMINING_DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRYPTOMINING_DOMAIN"
+                    }
+                },
+                "CRYPTOMINING_PROCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRYPTOMINING_PROCESS"
+                    }
                 }
             }
         },
@@ -9441,6 +9695,59 @@
                 "smithy.api#documentation": "<p>Information about the Kubernetes API for which you check if you have permission to call.</p>"
             }
         },
+        "com.amazonaws.guardduty#KubernetesResourcesTypes": {
+            "type": "enum",
+            "members": {
+                "PODS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PODS"
+                    }
+                },
+                "JOBS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JOBS"
+                    }
+                },
+                "CRONJOBS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRONJOBS"
+                    }
+                },
+                "DEPLOYMENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPLOYMENTS"
+                    }
+                },
+                "DAEMONSETS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAEMONSETS"
+                    }
+                },
+                "STATEFULSETS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATEFULSETS"
+                    }
+                },
+                "REPLICASETS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICASETS"
+                    }
+                },
+                "REPLICATIONCONTROLLERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATIONCONTROLLERS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.guardduty#KubernetesRoleBindingDetails": {
             "type": "structure",
             "members": {
@@ -9554,6 +9861,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about the Kubernetes user involved in a Kubernetes finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#KubernetesWorkload": {
+            "type": "structure",
+            "members": {
+                "ContainerUids": {
+                    "target": "com.amazonaws.guardduty#ContainerUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers for the containers that are part of the Kubernetes workload.</p>",
+                        "smithy.api#jsonName": "containerUids"
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kubernetes namespace in which the workload is running, providing logical isolation within the cluster.</p>",
+                        "smithy.api#jsonName": "namespace"
+                    }
+                },
+                "KubernetesResourcesTypes": {
+                    "target": "com.amazonaws.guardduty#KubernetesResourcesTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of Kubernetes resources involved in the workload.</p>",
+                        "smithy.api#jsonName": "kubernetesResourcesTypes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about Kubernetes workloads involved in a GuardDuty finding,\n      including pods, deployments, and other Kubernetes resources.</p>"
             }
         },
         "com.amazonaws.guardduty#KubernetesWorkloadDetails": {
@@ -12698,6 +13034,33 @@
                 "smithy.api#documentation": "<p>Information about the observed process.</p>"
             }
         },
+        "com.amazonaws.guardduty#ProcessName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.guardduty#ProcessPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.guardduty#ProcessSha256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.guardduty#ProductCode": {
             "type": "structure",
             "members": {
@@ -13314,6 +13677,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the Amazon S3 object.</p>",
                         "smithy.api#jsonName": "s3Object"
+                    }
+                },
+                "EksCluster": {
+                    "target": "com.amazonaws.guardduty#EksCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about the Amazon EKS cluster associated with the activity that\n      prompted GuardDuty to generate a finding.</p>",
+                        "smithy.api#jsonName": "eksCluster"
+                    }
+                },
+                "KubernetesWorkload": {
+                    "target": "com.amazonaws.guardduty#KubernetesWorkload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about the Kubernetes workload associated with the activity that\n      prompted GuardDuty to generate a finding.</p>",
+                        "smithy.api#jsonName": "kubernetesWorkload"
+                    }
+                },
+                "Container": {
+                    "target": "com.amazonaws.guardduty#ContainerFindingResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about the container associated with the activity that\n      prompted GuardDuty to generate a finding.</p>",
+                        "smithy.api#jsonName": "container"
                     }
                 }
             },
@@ -14581,6 +14965,13 @@
                         "smithy.api#documentation": "<p>Contains information about the indicators observed in the attack sequence.</p>",
                         "smithy.api#jsonName": "sequenceIndicators"
                     }
+                },
+                "AdditionalSequenceTypes": {
+                    "target": "com.amazonaws.guardduty#AdditionalSequenceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional types of sequences that may be associated with the attack sequence finding,\n      providing further context about the nature of the detected threat.</p>",
+                        "smithy.api#jsonName": "additionalSequenceTypes"
+                    }
                 }
             },
             "traits": {
@@ -14959,6 +15350,30 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "S3_DATA_EVENTS"
+                    }
+                },
+                "EKS_AUDIT_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS_AUDIT_LOGS"
+                    }
+                },
+                "FLOW_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOW_LOGS"
+                    }
+                },
+                "DNS_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNS_LOGS"
+                    }
+                },
+                "RUNTIME_MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNTIME_MONITORING"
                     }
                 }
             }

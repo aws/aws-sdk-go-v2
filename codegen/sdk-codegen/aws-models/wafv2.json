@@ -1762,6 +1762,52 @@
                 "smithy.api#documentation": "<p>A logical rule statement used to combine other rule statements with AND logic. You provide more than one <a>Statement</a> within the <code>AndStatement</code>. </p>"
             }
         },
+        "com.amazonaws.wafv2#ApplicationAttribute": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.wafv2#AttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the attribute name.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.wafv2#AttributeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the attribute value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Application details defined during the web ACL creation process. Application attributes help WAF give recommendations for protection packs.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#ApplicationAttributes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#ApplicationAttribute"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.wafv2#ApplicationConfig": {
+            "type": "structure",
+            "members": {
+                "Attributes": {
+                    "target": "com.amazonaws.wafv2#ApplicationAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the attribute name and a list of values for that attribute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of <code>ApplicationAttribute</code>s that contains information about the application.</p>"
+            }
+        },
         "com.amazonaws.wafv2#AsnList": {
             "type": "list",
             "member": {
@@ -1900,6 +1946,37 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies custom configurations for the associations between the web ACL and protected resources.  </p>\n         <p>Use this to customize the maximum size of the request body that your protected resources forward to WAF for inspection. You can \n    customize this setting for CloudFront, API Gateway, Amazon Cognito, App Runner, or Verified Access resources. The default setting is 16 KB (16,384 bytes). </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>\n         <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>"
+            }
+        },
+        "com.amazonaws.wafv2#AttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\w\\-]+$"
+            }
+        },
+        "com.amazonaws.wafv2#AttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.wafv2#AttributeValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#AttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.wafv2#BlockAction": {
@@ -4433,6 +4510,12 @@
                     "target": "com.amazonaws.wafv2#OnSourceDDoSProtectionConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the type of DDoS protection to apply to web request data for a web ACL. For most scenarios, it is recommended to use the default protection level, <code>ACTIVE_UNDER_DDOS</code>. \n   If a web ACL is associated with multiple Application Load Balancers, the changes you make to DDoS protection in that web ACL will apply to all associated Application Load Balancers.</p>"
+                    }
+                },
+                "ApplicationConfig": {
+                    "target": "com.amazonaws.wafv2#ApplicationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures the ability for the WAF console to store and retrieve application attributes during the web ACL creation process. Application attributes help WAF give recommendations for protection packs.</p>"
                     }
                 }
             },
@@ -13497,6 +13580,12 @@
                     "target": "com.amazonaws.wafv2#OnSourceDDoSProtectionConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Configures the level of DDoS protection that applies to web ACLs associated with Application Load Balancers.</p>"
+                    }
+                },
+                "ApplicationConfig": {
+                    "target": "com.amazonaws.wafv2#ApplicationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of <code>ApplicationAttribute</code>s.</p>"
                     }
                 }
             },

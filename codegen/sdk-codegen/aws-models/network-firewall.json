@@ -1225,6 +1225,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to <code>TRUE</code>, Network Firewall runs the analysis and then creates the rule group for you. To run the stateless rule group analyzer without creating the rule group, set <code>DryRun</code> to <code>TRUE</code>.</p>"
                     }
+                },
+                "SummaryConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#SummaryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains a <code>RuleOptions</code> array of strings. \n         You use <code>RuleOptions</code> to determine which of the following <a>RuleSummary</a> values are returned in response to <code>DescribeRuleGroupSummary</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Metadata</code> - returns</p>\n            </li>\n            <li>\n               <p>\n                  <code>Msg</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SID</code>\n               </p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -1464,6 +1470,9 @@
                 "target": "com.amazonaws.networkfirewall#CustomAction"
             }
         },
+        "com.amazonaws.networkfirewall#DeepThreatInspection": {
+            "type": "boolean"
+        },
         "com.amazonaws.networkfirewall#DeleteFirewall": {
             "type": "operation",
             "input": {
@@ -1620,7 +1629,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a transit gateway attachment from a Network Firewall. Either the firewall owner or the transit gateway owner can delete the attachment.</p>\n         <important>\n            <p>After you delete a transit gateway attachment, traffic will no longer flow through the firewall endpoints.</p>\n         </important>\n         <p>After you initiate the delete operation, use <a>DescribeFirewall</a> to monitor the deletion status.</p>"
+                "smithy.api#documentation": "<p>Deletes a transit gateway attachment from a Network Firewall. Either the firewall owner or the transit gateway owner can delete the attachment.</p>\n         <important>\n            <p>After you delete a transit gateway attachment, raffic will no longer flow through the firewall endpoints.</p>\n         </important>\n         <p>After you initiate the delete operation, use <a>DescribeFirewall</a> to monitor the deletion status.</p>"
             }
         },
         "com.amazonaws.networkfirewall#DeleteNetworkFirewallTransitGatewayAttachmentRequest": {
@@ -2581,6 +2590,85 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The high-level properties of a rule group. This, along with the <a>RuleGroup</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#DescribeRuleGroupSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#DescribeRuleGroupSummaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#DescribeRuleGroupSummaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns detailed information for a stateful rule group.</p>\n         <p>For active threat defense Amazon Web Services managed rule groups, this operation provides insight into the protections enabled by the rule group, based on Suricata rule metadata fields. Summaries are available for rule groups you manage and for active threat defense Amazon Web Services managed rule groups.</p>\n         <p>To modify how threat information appears in summaries, use the <code>SummaryConfiguration</code> parameter in <a>UpdateRuleGroup</a>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#DescribeRuleGroupSummaryRequest": {
+            "type": "structure",
+            "members": {
+                "RuleGroupName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the rule group. You can't change the name of a rule group after you create it.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "RuleGroupArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The Amazon Resource Name (ARN) of the rule group.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.networkfirewall#RuleGroupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of rule group you want a summary for. This is a required field.</p>\n         <p>Valid value: <code>STATEFUL</code>\n         </p>\n         <p>Note that <code>STATELESS</code> exists but is not currently supported. If you provide <code>STATELESS</code>, an exception is returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#DescribeRuleGroupSummaryResponse": {
+            "type": "structure",
+            "members": {
+                "RuleGroupName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the rule group. You can't change the name of a rule group after you create it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.networkfirewall#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the rule group. </p>"
+                    }
+                },
+                "Summary": {
+                    "target": "com.amazonaws.networkfirewall#Summary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains rule information based on the rule group's configured summary settings. The content varies depending on the fields that you specified to extract in your SummaryConfiguration. When you haven't configured any summary settings, this returns an empty array. The response might include:</p>\n         <ul>\n            <li>\n               <p>Rule identifiers</p>\n            </li>\n            <li>\n               <p>Rule descriptions</p>\n            </li>\n            <li>\n               <p>Any metadata fields that you specified in your SummaryConfiguration</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -5165,6 +5253,9 @@
                     "target": "com.amazonaws.networkfirewall#DescribeRuleGroupMetadata"
                 },
                 {
+                    "target": "com.amazonaws.networkfirewall#DescribeRuleGroupSummary"
+                },
+                {
                     "target": "com.amazonaws.networkfirewall#DescribeTLSInspectionConfiguration"
                 },
                 {
@@ -6570,7 +6661,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Rejects a transit gateway attachment request for Network Firewall. When you reject the attachment request, Network Firewall cancels the creation of routing components between the transit gateway and firewall endpoints.</p>\n         <p>Only the transit gateway owner can reject the attachment. After rejection, no traffic will flow through the firewall endpoints for this attachment.</p>\n         <p>Use <a>DescribeFirewall</a> to monitor the rejection status. To accept the attachment instead of rejecting it, use <a>AcceptNetworkFirewallTransitGatewayAttachment</a>.</p>\n         <note>\n            <p>Once rejected, you cannot reverse this action. To establish connectivity, you must create a new transit gateway-attached firewall.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Rejects a transit gateway attachment request for Network Firewall. When you reject the attachment request, Network Firewall cancels the creation of routing components between the transit gateway and firewall endpoints.</p>\n         <p>Only the firewall owner can reject the attachment. After rejection, no traffic will flow through the firewall endpoints for this attachment.</p>\n         <p>Use <a>DescribeFirewall</a> to monitor the rejection status. To accept the attachment instead of rejecting it, use <a>AcceptNetworkFirewallTransitGatewayAttachment</a>.</p>\n         <note>\n            <p>Once rejected, you cannot reverse this action. To establish connectivity, you must create a new transit gateway-attached firewall.</p>\n         </note>"
             }
         },
         "com.amazonaws.networkfirewall#RejectNetworkFirewallTransitGatewayAttachmentRequest": {
@@ -6663,6 +6754,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AWS_MANAGED_DOMAIN_LISTS"
+                    }
+                },
+                "ACTIVE_THREAT_DEFENSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE_THREAT_DEFENSE"
                     }
                 }
             }
@@ -6920,6 +7017,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of analysis results for <code>AnalyzeRuleGroup</code>. If you set <code>AnalyzeRuleGroup</code> to <code>TRUE</code> in <a>CreateRuleGroup</a>, <a>UpdateRuleGroup</a>, or <a>DescribeRuleGroup</a>, Network Firewall analyzes the rule group and identifies the rules that might adversely effect your firewall's functionality. For example, if Network Firewall detects a rule that's routing traffic asymmetrically, which impacts the service's ability to properly process traffic, the service includes the rule in the list of analysis results.</p>"
                     }
+                },
+                "SummaryConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#SummaryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type containing the currently selected rule option fields that will be displayed for rule summarization returned by <a>DescribeRuleGroupSummary</a>.</p>\n         <ul>\n            <li>\n               <p>The <code>RuleOptions</code> specified in <a>SummaryConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>Rule metadata organization preferences</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -6997,6 +7100,38 @@
                         "smithy.api#enumValue": "STRICT_ORDER"
                     }
                 }
+            }
+        },
+        "com.amazonaws.networkfirewall#RuleSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#RuleSummary"
+            }
+        },
+        "com.amazonaws.networkfirewall#RuleSummary": {
+            "type": "structure",
+            "members": {
+                "SID": {
+                    "target": "com.amazonaws.networkfirewall#CollectionMember_String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (Signature ID) of the Suricata rule.</p>"
+                    }
+                },
+                "Msg": {
+                    "target": "com.amazonaws.networkfirewall#CollectionMember_String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contents taken from the rule's msg field.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.networkfirewall#CollectionMember_String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contents of the rule's metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type containing details about a Suricata rule. Contains:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Msg</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Metadata</code>\n               </p>\n            </li>\n         </ul>\n         <p>Summaries are available for rule groups you manage and for active threat defense Amazon Web Services managed rule groups.</p>"
             }
         },
         "com.amazonaws.networkfirewall#RuleTargets": {
@@ -7662,6 +7797,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The action that allows the policy owner to override the behavior of the rule group within a policy.</p>"
                     }
+                },
+                "DeepThreatInspection": {
+                    "target": "com.amazonaws.networkfirewall#DeepThreatInspection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Network Firewall plans to augment the active threat defense managed rule group with an additional deep threat inspection capability. When this capability is released, Amazon Web Services will analyze service logs of network traffic processed by these rule groups to identify threat indicators across customers. \n         Amazon Web Services will use these threat indicators to improve the active threat defense managed rule groups and protect the security of Amazon Web Services customers and services.</p>\n         <note>\n            <p>Customers can opt-out of deep threat inspection at any time through the Network Firewall console or API. When customers opt out, Network Firewall  will not use the network traffic processed by those customers' active threat defense rule groups for rule group improvement.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -7972,6 +8113,63 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.networkfirewall#SubnetMapping"
+            }
+        },
+        "com.amazonaws.networkfirewall#Summary": {
+            "type": "structure",
+            "members": {
+                "RuleSummaries": {
+                    "target": "com.amazonaws.networkfirewall#RuleSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <a>RuleSummary</a> objects containing individual rule details that had been configured by the rulegroup's SummaryConfiguration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type containing summaries of security protections provided by a rule group.</p>\n         <p>Network Firewall extracts this information from selected fields in the rule group's Suricata rules, based on your <a>SummaryConfiguration</a> settings.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#SummaryConfiguration": {
+            "type": "structure",
+            "members": {
+                "RuleOptions": {
+                    "target": "com.amazonaws.networkfirewall#SummaryRuleOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the selected rule options returned by <a>DescribeRuleGroupSummary</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type that specifies which Suricata rule metadata fields to use when displaying threat information. Contains:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RuleOptions</code> - The Suricata rule options fields to extract and display</p>\n            </li>\n         </ul>\n         <p>These settings affect how threat information appears in both the console and API responses. Summaries are available for rule groups you manage and for active threat defense Amazon Web Services managed rule groups.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#SummaryRuleOption": {
+            "type": "enum",
+            "members": {
+                "SID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SID"
+                    }
+                },
+                "MSG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MSG"
+                    }
+                },
+                "METADATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METADATA"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#SummaryRuleOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#SummaryRuleOption"
             }
         },
         "com.amazonaws.networkfirewall#SupportedAvailabilityZones": {
@@ -9471,6 +9669,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to <code>TRUE</code>, Network Firewall runs the analysis and then updates the rule group for you. To run the stateless rule group analyzer without updating the rule group, set <code>DryRun</code> to <code>TRUE</code>. </p>"
+                    }
+                },
+                "SummaryConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#SummaryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the selected summary configuration for a rule group.</p>\n         <p>Changes affect subsequent responses from <a>DescribeRuleGroupSummary</a>.</p>"
                     }
                 }
             },

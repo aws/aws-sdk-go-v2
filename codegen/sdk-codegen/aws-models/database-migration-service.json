@@ -1771,7 +1771,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the analysis of up to 20 source databases to recommend target engines for each\n            source database. This is a batch version of <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartRecommendations.html\">StartRecommendations</a>.</p>\n         <p>The result of analysis of each source database is reported individually in the\n            response. Because the batch request can result in a combination of successful and\n            unsuccessful actions, you should check for batch errors even when the call returns an\n            HTTP status code of <code>200</code>.</p>"
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Starts the analysis of up to 20 source databases to recommend target engines for each\n            source database. This is a batch version of <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartRecommendations.html\">StartRecommendations</a>.</p>\n         <p>The result of analysis of each source database is reported individually in the\n            response. Because the batch request can result in a combination of successful and\n            unsuccessful actions, you should check for batch errors even when the call returns an\n            HTTP status code of <code>200</code>.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#BatchStartRecommendationsErrorEntry": {
@@ -2562,6 +2562,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Virtual": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the data provider is virtual.</p>"
+                    }
+                },
                 "Settings": {
                     "target": "com.amazonaws.databasemigrationservice#DataProviderSettings",
                     "traits": {
@@ -3037,7 +3043,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Fleet Advisor collector using the specified parameters.</p>"
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Creates a Fleet Advisor collector using the specified parameters.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#CreateFleetAdvisorCollectorRequest": {
@@ -3173,7 +3179,6 @@
                         "output": {
                             "InstanceProfile": {
                                 "SubnetGroupIdentifier": "public-subnets",
-                                "VpcIdentifier": "vpc-0a1b2c3d4e5f6g7h8",
                                 "VpcSecurityGroups": [
                                     "sg-0123456"
                                 ],
@@ -3882,7 +3887,7 @@
                 "ReplicationSubnetGroupDescription": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description for the subnet group.</p>",
+                        "smithy.api#documentation": "<p>The description for the subnet group.\n      </p>\n         <p>Constraints: This parameter Must not contain non-printable control characters.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4361,6 +4366,12 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
+                    }
+                },
+                "Virtual": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the data provider is virtual.</p>"
                     }
                 },
                 "Settings": {
@@ -5166,7 +5177,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified Fleet Advisor collector.</p>"
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Deletes the specified Fleet Advisor collector.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#DeleteFleetAdvisorDatabases": {
@@ -5189,7 +5200,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified Fleet Advisor collector databases.</p>"
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Deletes the specified Fleet Advisor collector databases.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#DeleteFleetAdvisorDatabasesRequest": {
@@ -5255,7 +5266,6 @@
                         "output": {
                             "InstanceProfile": {
                                 "SubnetGroupIdentifier": "public-subnets",
-                                "VpcIdentifier": "vpc-0a1b2c3d4e5f6g7h8",
                                 "VpcSecurityGroups": [
                                     "sg-0123456"
                                 ],
@@ -7084,7 +7094,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the Fleet Advisor collectors in your account.</p>",
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Returns a list of the Fleet Advisor collectors in your account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7152,7 +7162,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of Fleet Advisor databases in your account.</p>",
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Returns a list of Fleet Advisor databases in your account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7220,7 +7230,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides descriptions of large-scale assessment (LSA) analyses produced by your Fleet\n            Advisor collectors. </p>",
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Provides descriptions of large-scale assessment (LSA) analyses produced by your Fleet\n            Advisor collectors. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7282,7 +7292,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides descriptions of the schemas discovered by your Fleet Advisor\n            collectors.</p>",
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Provides descriptions of the schemas discovered by your Fleet Advisor\n            collectors.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7302,7 +7312,7 @@
                 "MaxRecords": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the maximum number of records returned in the response.</p>"
+                        "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Sets the maximum number of records returned in the response.</p>"
                     }
                 },
                 "NextToken": {
@@ -7350,7 +7360,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of schemas detected by Fleet Advisor Collectors in your account.</p>",
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Returns a list of schemas detected by Fleet Advisor Collectors in your account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7446,7 +7456,6 @@
                             "InstanceProfiles": [
                                 {
                                     "SubnetGroupIdentifier": "public-subnets",
-                                    "VpcIdentifier": "vpc-0a1b2c3d4e5f6g7h8",
                                     "PubliclyAccessible": true,
                                     "KmsKeyArn": "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef",
                                     "InstanceProfileCreationTime": "2022-12-16T09:44:43.543246Z",
@@ -8320,7 +8329,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a paginated list of limitations for recommendations of target Amazon Web Services\n            engines.</p>",
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Returns a paginated list of limitations for recommendations of target Amazon Web Services\n            engines.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -8391,7 +8400,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a paginated list of target engine recommendations for your source\n            databases.</p>",
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Returns a paginated list of target engine recommendations for your source\n            databases.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -11257,6 +11266,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
                     }
+                },
+                "S3Path": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.</p>"
+                    }
+                },
+                "S3AccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11294,6 +11315,18 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
+                    }
+                },
+                "S3Path": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.</p>"
+                    }
+                },
+                "S3AccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>"
                     }
                 }
             },
@@ -12149,6 +12182,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
                     }
+                },
+                "S3Path": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.</p>"
+                    }
+                },
+                "S3AccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12328,6 +12373,18 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
+                    }
+                },
+                "S3Path": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.</p>"
+                    }
+                },
+                "S3AccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>"
                     }
                 }
             },
@@ -12701,6 +12758,12 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
+                    }
+                },
+                "Virtual": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the data provider is virtual.</p>"
                     }
                 },
                 "ExactSettings": {
@@ -13162,7 +13225,6 @@
                         "output": {
                             "InstanceProfile": {
                                 "SubnetGroupIdentifier": "public-subnets",
-                                "VpcIdentifier": "vpc-0a1b2c3d4e5f6g7h8",
                                 "VpcSecurityGroups": [
                                     "sg-0123456"
                                 ],
@@ -14311,6 +14373,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
                     }
+                },
+                "S3Path": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.</p>"
+                    }
+                },
+                "S3AccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14464,6 +14538,18 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the IAM role that provides access to the secret in Secrets Manager \n         that contains the TDE password.</p>"
+                    }
+                },
+                "S3Path": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.</p>"
+                    }
+                },
+                "S3AccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>"
                     }
                 }
             },
@@ -15156,6 +15242,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
                     }
+                },
+                "S3Path": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.</p>"
+                    }
+                },
+                "S3AccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15672,6 +15770,18 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The database name on the Amazon Redshift data provider.</p>"
+                    }
+                },
+                "S3Path": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.</p>"
+                    }
+                },
+                "S3AccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>"
                     }
                 }
             },
@@ -17477,7 +17587,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs large-scale assessment (LSA) analysis on every Fleet Advisor collector in your account.</p>"
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Runs large-scale assessment (LSA) analysis on every Fleet Advisor collector in your account.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#RunFleetAdvisorLsaAnalysisResponse": {
@@ -17752,7 +17862,7 @@
                 "DatePartitionTimezone": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When creating an S3 target endpoint, set <code>DatePartitionTimezone</code> to convert\n         the current UTC time into a specified time zone. The conversion occurs when a date\n         partition folder is created and a CDC filename is generated. The time zone format is\n         Area/Location. Use this parameter when <code>DatePartitionedEnabled</code> is set to\n            <code>true</code>, as shown in the following example.</p>\n         <p>\n            <code>s3-settings='{\"DatePartitionEnabled\": true, \"DatePartitionSequence\": \"YYYYMMDDHH\",\n            \"DatePartitionDelimiter\": \"SLASH\",\n               \"DatePartitionTimezone\":\"<i>Asia/Seoul</i>\", \"BucketName\":\n            \"dms-nattarat-test\"}'</code>\n         </p>"
+                        "smithy.api#documentation": "<p>When creating an S3 target endpoint, set <code>DatePartitionTimezone</code> to convert the current UTC time into a specified time zone. The conversion occurs when a date partition folder is created and a CDC filename is generated. The time zone format is Area/Location. Use this parameter when <code>DatePartitionedEnabled</code> is set to true, as shown in the following example:</p>\n         <p>\n            <code>s3-settings='{\"DatePartitionEnabled\": true, \"DatePartitionSequence\": \"YYYYMMDDHH\", \"DatePartitionDelimiter\": \"SLASH\", \"DatePartitionTimezone\":\"Asia/Seoul\", \"BucketName\": \"dms-nattarat-test\"}'</code>\n         </p>"
                     }
                 },
                 "AddTrailingPaddingCharacter": {
@@ -18753,7 +18863,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the analysis of your source database to provide recommendations of target\n            engines.</p>\n         <p>You can create recommendations for multiple source databases using <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_BatchStartRecommendations.html\">BatchStartRecommendations</a>.</p>"
+                "smithy.api#documentation": "<important>\n            <p>\nEnd of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html\">Amazon Web Services DMS Fleet Advisor end of support</a>.\n</p>\n         </important>\n         <p>Starts the analysis of your source database to provide recommendations of target\n            engines.</p>\n         <p>You can create recommendations for multiple source databases using <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_BatchStartRecommendations.html\">BatchStartRecommendations</a>.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#StartRecommendationsRequest": {
@@ -19164,7 +19274,7 @@
                 "StartReplicationTaskType": {
                     "target": "com.amazonaws.databasemigrationservice#StartReplicationTaskTypeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of replication task to start.</p>\n         <p>When the migration type is <code>full-load</code> or <code>full-load-and-cdc</code>, the\n         only valid value for the first run of the task is <code>start-replication</code>. This\n         option will start the migration.</p>\n         <p>You can also use <a>ReloadTables</a> to reload specific tables that failed\n         during migration instead of restarting the task.</p>\n         <p>The <code>resume-processing</code> option isn't applicable for a full-load task, because\n         you can't resume partially loaded tables during the full load phase.</p>\n         <p>For a <code>full-load-and-cdc</code> task, DMS migrates table data, and then applies\n         data changes that occur on the source. To load all the tables again, and start capturing\n         source changes, use <code>reload-target</code>. Otherwise use\n            <code>resume-processing</code>, to replicate the changes from the last stop\n         position.</p>",
+                        "smithy.api#documentation": "<p>The type of replication task to start.</p>\n         <p>\n            <code>start-replication</code> is the only valid action that can be used for the first time a task with the migration type of <code>full-load</code>full-load, <code>full-load-and-cdc</code> or <code>cdc</code> is run. Any other action used for the first time on a given task, such as <code>resume-processing</code> and reload-target will result in data errors.</p>\n         <p>You can also use <a>ReloadTables</a> to reload specific tables that failed during migration instead of restarting the task.</p>\n         <p>For a <code>full-load</code> task, the resume-processing option will reload any tables that were partially loaded or not yet loaded during the full load phase.</p>\n         <p>For a <code>full-load-and-cdc</code> task, DMS migrates table data, and then applies data changes that occur on the source. To load all the tables again, and start capturing source changes, use <code>reload-target</code>. Otherwise use <code>resume-processing</code>, to replicate the changes from the last stop position.</p>\n         <p>For a <code>cdc</code> only task, to start from a specific position, you must use start-replication and also specify the start position. Check the source endpoint DMS documentation for any limitations. For example, not all sources support starting from a time.</p>\n         <note>\n            <p>\n               <code>resume-processing</code> is only available for previously executed tasks.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },

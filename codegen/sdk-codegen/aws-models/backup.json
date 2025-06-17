@@ -126,6 +126,69 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.backup#AssociateBackupVaultMpaApprovalTeam": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#AssociateBackupVaultMpaApprovalTeamInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an MPA approval team with a backup vault.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/backup-vaults/{BackupVaultName}/mpaApprovalTeam",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.backup#AssociateBackupVaultMpaApprovalTeamInput": {
+            "type": "structure",
+            "members": {
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup vault to associate with the MPA approval team.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MpaApprovalTeamArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the MPA approval team to associate with the backup vault.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequesterComment": {
+                    "target": "com.amazonaws.backup#RequesterComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment provided by the requester explaining the association request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.backup#BackupJob": {
             "type": "structure",
             "members": {
@@ -1056,6 +1119,12 @@
                         "smithy.api#enumValue": "S3_RESTORE_OBJECT_FAILED"
                     }
                 },
+                "CONTINUOUS_BACKUP_INTERRUPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUOUS_BACKUP_INTERRUPTED"
+                    }
+                },
                 "RECOVERY_POINT_INDEX_COMPLETED": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -1880,7 +1949,8 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the request and allows failed requests to be retried without the risk of\n         running the operation twice. If the request includes a <code>CreatorRequestId</code> that\n         matches an existing backup plan, that plan is returned. This parameter is optional.</p>\n         <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>"
+                        "smithy.api#documentation": "<p>Identifies the request and allows failed requests to be retried without the risk of\n         running the operation twice. If the request includes a <code>CreatorRequestId</code> that\n         matches an existing backup plan, that plan is returned. This parameter is optional.</p>\n         <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -1982,7 +2052,8 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies the request and allows failed requests to be retried\n         without the risk of running the operation twice. This parameter is optional.</p>\n         <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>"
+                        "smithy.api#documentation": "<p>A unique string that identifies the request and allows failed requests to be retried\n         without the risk of running the operation twice. This parameter is optional.</p>\n         <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -2077,7 +2148,8 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies the request and allows failed requests to be retried\n         without the risk of running the operation twice. This parameter is optional.</p>\n         <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>"
+                        "smithy.api#documentation": "<p>A unique string that identifies the request and allows failed requests to be retried\n         without the risk of running the operation twice. This parameter is optional.</p>\n         <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -2259,7 +2331,8 @@
                 "IdempotencyToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is a user-chosen string used to distinguish between otherwise identical \n         calls. Retrying a successful request with the \n         same idempotency token results in a success message with no action taken.</p>"
+                        "smithy.api#documentation": "<p>This is a user-chosen string used to distinguish between otherwise identical \n         calls. Retrying a successful request with the \n         same idempotency token results in a success message with no action taken.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "RecoveryPointSelection": {
@@ -2387,7 +2460,8 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the creation request.</p>\n         <p>This parameter is optional. If used, this parameter must contain \n         1 to 50 alphanumeric or '-_.' characters.</p>"
+                        "smithy.api#documentation": "<p>The ID of the creation request.</p>\n         <p>This parameter is optional. If used, this parameter must contain \n         1 to 50 alphanumeric or '-_.' characters.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "MinRetentionDays": {
@@ -2543,6 +2617,119 @@
                     "target": "com.amazonaws.backup#timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time a backup vault is created, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#CreateRestoreAccessBackupVault": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#CreateRestoreAccessBackupVaultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#CreateRestoreAccessBackupVaultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.backup#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a restore access backup vault that provides temporary access to recovery points in a logically air-gapped backup vault, subject to MPA approval.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/restore-access-backup-vaults",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#CreateRestoreAccessBackupVaultInput": {
+            "type": "structure",
+            "members": {
+                "SourceBackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source backup vault containing the recovery points to which temporary access is requested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup vault to associate with an MPA approval team.</p>"
+                    }
+                },
+                "BackupVaultTags": {
+                    "target": "com.amazonaws.backup#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional tags to assign to the restore access backup vault.</p>"
+                    }
+                },
+                "CreatorRequestId": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "RequesterComment": {
+                    "target": "com.amazonaws.backup#RequesterComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment explaining the reason for requesting restore access to the backup vault.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#CreateRestoreAccessBackupVaultOutput": {
+            "type": "structure",
+            "members": {
+                "RestoreAccessBackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN that uniquely identifies the created restore access backup vault.</p>"
+                    }
+                },
+                "VaultState": {
+                    "target": "com.amazonaws.backup#VaultState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the restore access backup vault.</p>"
+                    }
+                },
+                "RestoreAccessBackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the created restore access backup vault.</p>"
+                    }
+                },
+                "CreationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>>The date and time when the restore access backup vault was created, in Unix format and Coordinated Universal Time </p>"
                     }
                 }
             },
@@ -2755,6 +2942,9 @@
             "version": "2018-11-15",
             "operations": [
                 {
+                    "target": "com.amazonaws.backup#AssociateBackupVaultMpaApprovalTeam"
+                },
+                {
                     "target": "com.amazonaws.backup#CancelLegalHold"
                 },
                 {
@@ -2777,6 +2967,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#CreateReportPlan"
+                },
+                {
+                    "target": "com.amazonaws.backup#CreateRestoreAccessBackupVault"
                 },
                 {
                     "target": "com.amazonaws.backup#CreateRestoreTestingPlan"
@@ -2849,6 +3042,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#DescribeRestoreJob"
+                },
+                {
+                    "target": "com.amazonaws.backup#DisassociateBackupVaultMpaApprovalTeam"
                 },
                 {
                     "target": "com.amazonaws.backup#DisassociateRecoveryPoint"
@@ -2959,6 +3155,9 @@
                     "target": "com.amazonaws.backup#ListReportPlans"
                 },
                 {
+                    "target": "com.amazonaws.backup#ListRestoreAccessBackupVaults"
+                },
+                {
                     "target": "com.amazonaws.backup#ListRestoreJobs"
                 },
                 {
@@ -2987,6 +3186,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#PutRestoreValidationResult"
+                },
+                {
+                    "target": "com.amazonaws.backup#RevokeRestoreAccessBackupVault"
                 },
                 {
                     "target": "com.amazonaws.backup#StartBackupJob"
@@ -4170,7 +4372,8 @@
                     "method": "DELETE",
                     "uri": "/backup-vaults/{BackupVaultName}",
                     "code": 200
-                }
+                },
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.backup#DeleteBackupVaultAccessPolicy": {
@@ -4970,6 +5173,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when Backup Vault Lock configuration cannot be changed or\n         deleted.</p>\n         <p>If you applied Vault Lock to your vault without specifying a lock date, you can change\n         any of your Vault Lock settings, or delete Vault Lock from the vault entirely, at any\n         time.</p>\n         <p>This value is in Unix format, Coordinated Universal Time (UTC), and accurate to\n         milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018\n         12:11:30.087 AM.</p>"
                     }
+                },
+                "SourceBackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source backup vault from which this restore access backup vault was created.</p>"
+                    }
+                },
+                "MpaApprovalTeamArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the MPA approval team associated with this backup vault.</p>"
+                    }
+                },
+                "MpaSessionArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the MPA session associated with this backup vault.</p>"
+                    }
+                },
+                "LatestMpaApprovalTeamUpdate": {
+                    "target": "com.amazonaws.backup#LatestMpaApprovalTeamUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the latest update to the MPA approval team association for this backup vault.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5435,6 +5662,12 @@
                         "smithy.api#documentation": "<p>The date and time that a recovery point is created, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
                     }
                 },
+                "InitiationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the backup job that created this recovery point was initiated, in\n         Unix format and Coordinated Universal Time (UTC).</p>"
+                    }
+                },
                 "CompletionDate": {
                     "target": "com.amazonaws.backup#timestamp",
                     "traits": {
@@ -5871,6 +6104,62 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#DisassociateBackupVaultMpaApprovalTeam": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#DisassociateBackupVaultMpaApprovalTeamInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the association between an MPA approval team and a backup vault, disabling the MPA approval workflow for restore operations.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backup-vaults/{BackupVaultName}/mpaApprovalTeam?delete",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.backup#DisassociateBackupVaultMpaApprovalTeamInput": {
+            "type": "structure",
+            "members": {
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup vault from which to disassociate the MPA approval team.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequesterComment": {
+                    "target": "com.amazonaws.backup#RequesterComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional comment explaining the reason for disassociating the MPA approval team from the backup vault.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DisassociateRecoveryPoint": {
@@ -7549,6 +7838,82 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.backup#KeyValue"
+            }
+        },
+        "com.amazonaws.backup#LatestMpaApprovalTeamUpdate": {
+            "type": "structure",
+            "members": {
+                "MpaSessionArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the MPA session associated with this update.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.backup#MpaSessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the MPA approval team update.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the current status of the MPA approval team update.</p>"
+                    }
+                },
+                "InitiationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the MPA approval team update was initiated.</p>"
+                    }
+                },
+                "ExpiryDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the MPA approval team update will expire.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the latest update to an MPA approval team association.</p>"
+            }
+        },
+        "com.amazonaws.backup#LatestRevokeRequest": {
+            "type": "structure",
+            "members": {
+                "MpaSessionArn": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the MPA session associated with this revoke request.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.backup#MpaRevokeSessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the revoke request.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the current status of the revoke request.</p>"
+                    }
+                },
+                "InitiationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the revoke request was initiated.</p>"
+                    }
+                },
+                "ExpiryDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the revoke request will expire.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the latest request to revoke access to a backup vault.</p>"
             }
         },
         "com.amazonaws.backup#LegalHold": {
@@ -9575,6 +9940,93 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.backup#ListRestoreAccessBackupVaults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListRestoreAccessBackupVaultsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListRestoreAccessBackupVaultsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of restore access backup vaults associated with a specified backup vault.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/logically-air-gapped-backup-vaults/{BackupVaultName}/restore-access-backup-vaults",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RestoreAccessBackupVaults",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.backup#ListRestoreAccessBackupVaultsInput": {
+            "type": "structure",
+            "members": {
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup vault for which to list associated restore access backup vaults.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#ListRestoreAccessBackupVaultsOutput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use in a subsequent request to retrieve the next set of results.</p>"
+                    }
+                },
+                "RestoreAccessBackupVaults": {
+                    "target": "com.amazonaws.backup#RestoreAccessBackupVaultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of restore access backup vaults associated with the specified backup vault.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.backup#ListRestoreJobSummaries": {
             "type": "operation",
             "input": {
@@ -10264,6 +10716,46 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.backup#MpaRevokeSessionStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#MpaSessionStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.backup#ParameterName": {
             "type": "string"
         },
@@ -10516,7 +11008,7 @@
                 "BackupVaultEvents": {
                     "target": "com.amazonaws.backup#BackupVaultEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of events that indicate the status of jobs to back up resources to the backup\n         vault.</p>\n         <p>For common use cases and code samples, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html\">Using Amazon SNS to\n            track Backup events</a>.</p>\n         <p>The following events are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BACKUP_JOB_STARTED</code> | <code>BACKUP_JOB_COMPLETED</code> | <code>BACKUP_JOB_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>COPY_JOB_STARTED</code> | <code>COPY_JOB_SUCCESSFUL</code> |\n                  <code>COPY_JOB_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTORE_JOB_STARTED</code> | <code>RESTORE_JOB_COMPLETED</code> |\n                  <code>RECOVERY_POINT_MODIFIED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>S3_BACKUP_OBJECT_FAILED</code> | <code>S3_RESTORE_OBJECT_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RECOVERY_POINT_INDEX_COMPLETED</code> | <code>RECOVERY_POINT_INDEX_DELETED</code> | \n               <code>RECOVERY_POINT_INDEXING_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The list below includes both supported events and deprecated events that are no longer\n            in use (for reference). Deprecated events do not return statuses or notifications. \n            Refer to the list above for the supported events.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>An array of events that indicate the status of jobs to back up resources to the backup\n         vault. For the list of supported events, common use cases, and code samples, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-notifications.html\">Notification options\n            with Backup</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10656,6 +11148,12 @@
                     "target": "com.amazonaws.backup#timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time a recovery point is created, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                },
+                "InitiationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the backup job that created this recovery point was initiated, in\n         Unix format and Coordinated Universal Time (UTC).</p>"
                     }
                 },
                 "CompletionDate": {
@@ -11237,6 +11735,12 @@
                 "smithy.api#documentation": "<p>Contains detailed information about a report setting.</p>"
             }
         },
+        "com.amazonaws.backup#RequesterComment": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.backup#ResourceArns": {
             "type": "list",
             "member": {
@@ -11310,6 +11814,50 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.backup#ResourceType"
+            }
+        },
+        "com.amazonaws.backup#RestoreAccessBackupVaultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#RestoreAccessBackupVaultListMember"
+            }
+        },
+        "com.amazonaws.backup#RestoreAccessBackupVaultListMember": {
+            "type": "structure",
+            "members": {
+                "RestoreAccessBackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the restore access backup vault.</p>"
+                    }
+                },
+                "CreationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the restore access backup vault was created.</p>"
+                    }
+                },
+                "ApprovalDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the restore access backup vault was approved.</p>"
+                    }
+                },
+                "VaultState": {
+                    "target": "com.amazonaws.backup#VaultState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the restore access backup vault.</p>"
+                    }
+                },
+                "LatestRevokeRequest": {
+                    "target": "com.amazonaws.backup#LatestRevokeRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the latest request to revoke access to this backup vault.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a restore access backup vault.</p>"
             }
         },
         "com.amazonaws.backup#RestoreDeletionStatus": {
@@ -12172,6 +12720,71 @@
                 }
             }
         },
+        "com.amazonaws.backup#RevokeRestoreAccessBackupVault": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#RevokeRestoreAccessBackupVaultInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Revokes access to a restore access backup vault, removing the ability to restore from its recovery points and permanently deleting the vault.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/logically-air-gapped-backup-vaults/{BackupVaultName}/restore-access-backup-vaults/{RestoreAccessBackupVaultArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backup#RevokeRestoreAccessBackupVaultInput": {
+            "type": "structure",
+            "members": {
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source backup vault associated with the restore access backup vault to be revoked.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreAccessBackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the restore access backup vault to revoke.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequesterComment": {
+                    "target": "com.amazonaws.backup#RequesterComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment explaining the reason for revoking access to the restore access backup vault.</p>",
+                        "smithy.api#httpQuery": "requesterComment"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.backup#SensitiveStringMap": {
             "type": "map",
             "key": {
@@ -12276,7 +12889,8 @@
                 "IdempotencyToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>StartBackupJob</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>"
+                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>StartBackupJob</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "StartWindowMinutes": {
@@ -12425,7 +13039,8 @@
                 "IdempotencyToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>StartCopyJob</code>. Retrying a successful request with the same idempotency\n         token results in a success message with no action taken.</p>"
+                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>StartCopyJob</code>. Retrying a successful request with the same idempotency\n         token results in a success message with no action taken.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "Lifecycle": {
@@ -12593,7 +13208,8 @@
                 "IdempotencyToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>StartRestoreJob</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>"
+                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>StartRestoreJob</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "ResourceType": {
@@ -13680,6 +14296,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
+                    }
+                },
+                "RESTORE_ACCESS_BACKUP_VAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTORE_ACCESS_BACKUP_VAULT"
                     }
                 }
             }
