@@ -976,6 +976,12 @@
                         "smithy.api#documentation": "<p>The names of the Auto Scaling groups. By default, you can only specify up to 50 names. You can\n            optionally increase this limit using the <code>MaxRecords</code> property.</p>\n         <p>If you omit this property, all Auto Scaling groups are described.</p>"
                     }
                 },
+                "IncludeInstances": {
+                    "target": "com.amazonaws.autoscaling#IncludeInstances",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether to include information about Amazon EC2 instances in the response. When set to <code>true</code> (default), the response includes instance details.\n        </p>"
+                    }
+                },
                 "NextToken": {
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
@@ -1355,7 +1361,7 @@
                     "name": "autoscaling"
                 },
                 "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>Amazon EC2 Auto Scaling</fullname>\n         <p>Amazon EC2 Auto Scaling is designed to automatically launch and terminate EC2 instances\n            based on user-defined scaling policies, scheduled actions, and health checks.</p>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html\">Amazon EC2 Auto Scaling User Guide</a> and the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/Welcome.html\">Amazon EC2 Auto Scaling API Reference</a>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon EC2 Auto Scaling</fullname>\n         <p>The <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingGroups.html\">DescribeAutoScalingGroups</a> API operation might be throttled when retrieving details for an Auto Scaling group that contains many instances. By default, this operation returns details for all instances in the group. \n            To help prevent throttling, you can set the <code>IncludeInstances</code> parameter to <code>false</code> to exclude instance details from the response.</p>\n         <p>Amazon EC2 Auto Scaling is designed to automatically launch and terminate EC2 instances\n            based on user-defined scaling policies, scheduled actions, and health checks.</p>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html\">Amazon EC2 Auto Scaling User Guide</a> and the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/Welcome.html\">Amazon EC2 Auto Scaling API Reference</a>.</p>",
                 "smithy.api#title": "Auto Scaling",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://autoscaling.amazonaws.com/doc/2011-01-01/"
@@ -6468,6 +6474,9 @@
             }
         },
         "com.amazonaws.autoscaling#IncludeDeletedGroups": {
+            "type": "boolean"
+        },
+        "com.amazonaws.autoscaling#IncludeInstances": {
             "type": "boolean"
         },
         "com.amazonaws.autoscaling#Instance": {

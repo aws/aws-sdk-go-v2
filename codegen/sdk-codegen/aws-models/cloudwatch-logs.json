@@ -4178,6 +4178,41 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.cloudwatchlogs#EventSource": {
+            "type": "enum",
+            "members": {
+                "CLOUD_TRAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CloudTrail"
+                    }
+                },
+                "ROUTE53_RESOLVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Route53Resolver"
+                    }
+                },
+                "VPC_FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPCFlow"
+                    }
+                },
+                "EKS_AUDIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKSAudit"
+                    }
+                },
+                "AWSWAF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSWAF"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#EventsLimit": {
             "type": "integer",
             "traits": {
@@ -8642,6 +8677,17 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchlogs#OCSFVersion": {
+            "type": "enum",
+            "members": {
+                "V1_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "V1.1"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#OpenSearchApplication": {
             "type": "structure",
             "members": {
@@ -9241,6 +9287,34 @@
                 "smithy.api#documentation": "<p>Use this processor to parse Route 53 vended logs, extract fields, and and convert them into a JSON format. This processor always\n       processes the entire log event message.\n       For more information about this processor including examples, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseRoute53\">\n         parseRoute53</a>.</p>\n         <important>\n            <p>If you use this processor, it must be the first processor in your transformer.</p>\n         </important>"
             }
         },
+        "com.amazonaws.cloudwatchlogs#ParseToOCSF": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.cloudwatchlogs#Source",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the field in the log event that you want to parse. If you omit this value, the whole log message is parsed.</p>"
+                    }
+                },
+                "eventSource": {
+                    "target": "com.amazonaws.cloudwatchlogs#EventSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the service or process that produces the log events that will be converted with this processor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ocsfVersion": {
+                    "target": "com.amazonaws.cloudwatchlogs#OCSFVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify which version of the OCSF schema to use for the transformed log events.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This processor converts logs into <a href=\"https://ocsf.io\">Open Cybersecurity Schema Framework (OCSF)</a> events.</p>\n         <p>For more information about this processor including examples, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseToOCSF\">\n      parseToOSCF</a> in the <i>CloudWatch Logs User Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#ParseVPC": {
             "type": "structure",
             "members": {
@@ -9500,6 +9574,12 @@
                     "target": "com.amazonaws.cloudwatchlogs#ParseRoute53",
                     "traits": {
                         "smithy.api#documentation": "<p>Use this parameter to include the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseRoute53\">\n       parseRoute53</a> processor in your transformer.</p>\n         <p>If you use this processor, it must be the first processor in your transformer.</p>"
+                    }
+                },
+                "parseToOCSF": {
+                    "target": "com.amazonaws.cloudwatchlogs#ParseToOCSF",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this processor to convert logs into Open Cybersecurity Schema Framework (OCSF) format</p>"
                     }
                 },
                 "parsePostgres": {
@@ -9925,7 +10005,7 @@
                 "logType": {
                     "target": "com.amazonaws.cloudwatchlogs#LogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending.</p>\n         <ul>\n            <li>\n               <p>For Amazon Bedrock, the valid value is \n         <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For CloudFront, the valid value is \n         <code>ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon CodeWhisperer, the valid value is \n        <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaPackage, the valid values are \n         <code>EGRESS_ACCESS_LOGS</code> and <code>INGRESS_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaTailor, the valid values are \n         <code>AD_DECISION_SERVER_LOGS</code>, <code>MANIFEST_SERVICE_LOGS</code>, and <code>TRANSCODE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For IAM Identity Center, the valid value is \n         <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q, the valid value is \n         <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon SES mail manager, the valid value is \n         <code>APPLICATION_LOG</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon WorkMail, the valid values are \n         <code>ACCESS_CONTROL_LOGS</code>, <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>, <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, \n         and <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending.</p>\n         <ul>\n            <li>\n               <p>For Amazon Bedrock, the valid value is \n         <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For CloudFront, the valid value is \n         <code>ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon CodeWhisperer, the valid value is \n        <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaPackage, the valid values are \n         <code>EGRESS_ACCESS_LOGS</code> and <code>INGRESS_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaTailor, the valid values are \n         <code>AD_DECISION_SERVER_LOGS</code>, <code>MANIFEST_SERVICE_LOGS</code>, and <code>TRANSCODE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Entity Resolution, the valid value is \n         <code>WORKFLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For IAM Identity Center, the valid value is \n         <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q, the valid value is \n         <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon SES mail manager, the valid values are \n         <code>APPLICATION_LOG</code> and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon WorkMail, the valid values are \n         <code>ACCESS_CONTROL_LOGS</code>, <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>, <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, \n         and <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10246,7 +10326,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Uploads a batch of log events to the specified log stream.</p>\n         <important>\n            <p>The sequence token is now ignored in <code>PutLogEvents</code>\n      actions. <code>PutLogEvents</code>\n      actions are always accepted and never return <code>InvalidSequenceTokenException</code> or\n      <code>DataAlreadyAcceptedException</code> even if the sequence token is not valid. You can use\n      parallel <code>PutLogEvents</code> actions on the same log stream. </p>\n         </important>\n         <p>The batch of events must satisfy the following constraints:</p>\n         <ul>\n            <li>\n               <p>The maximum batch size is 1,048,576 bytes. This size is calculated as the sum of\n          all event messages in UTF-8, plus 26 bytes for each log event.</p>\n            </li>\n            <li>\n               <p>None of the log events in the batch can be more than 2 hours in the future.</p>\n            </li>\n            <li>\n               <p>None of the log events in the batch can be more than 14 days in the past. Also,\n          none of the log events can be from earlier than the retention period of the log\n          group.</p>\n            </li>\n            <li>\n               <p>The log events in the batch must be in chronological order by their timestamp. The\n          timestamp is the time that the event occurred, expressed as the number of milliseconds\n          after <code>Jan 1, 1970 00:00:00 UTC</code>. (In Amazon Web Services Tools for PowerShell\n          and the Amazon Web Services SDK for .NET, the timestamp is specified in .NET format:\n            <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2017-09-15T13:45:30</code>.) </p>\n            </li>\n            <li>\n               <p>A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.</p>\n            </li>\n            <li>\n               <p>Each log event can be no larger than 1 MB.</p>\n            </li>\n            <li>\n               <p>The maximum number of log events in a batch is 10,000.</p>\n            </li>\n            <li>\n               <important>\n                  <p>The quota of five requests per second per log stream\n          has been removed. Instead, <code>PutLogEvents</code> actions are throttled based on a \n        per-second per-account quota. You can request an increase to the per-second throttling\n        quota by using the Service Quotas service.</p>\n               </important>\n            </li>\n         </ul>\n         <p>If a call to <code>PutLogEvents</code> returns \"UnrecognizedClientException\" the most\n      likely cause is a non-valid Amazon Web Services access key ID or secret key. </p>"
+                "smithy.api#documentation": "<p>Uploads a batch of log events to the specified log stream.</p>\n         <important>\n            <p>The sequence token is now ignored in <code>PutLogEvents</code>\n      actions. <code>PutLogEvents</code>\n      actions are always accepted and never return <code>InvalidSequenceTokenException</code> or\n      <code>DataAlreadyAcceptedException</code> even if the sequence token is not valid. You can use\n      parallel <code>PutLogEvents</code> actions on the same log stream. </p>\n         </important>\n         <p>The batch of events must satisfy the following constraints:</p>\n         <ul>\n            <li>\n               <p>The maximum batch size is 1,048,576 bytes. This size is calculated as the sum of\n          all event messages in UTF-8, plus 26 bytes for each log event.</p>\n            </li>\n            <li>\n               <p>Events more than 2 hours in the future are rejected while processing remaining valid events.</p>\n            </li>\n            <li>\n               <p>Events older than 14 days or preceding the log group's retention period are rejected while processing remaining valid events.</p>\n            </li>\n            <li>\n               <p>The log events in the batch must be in chronological order by their timestamp. The\n          timestamp is the time that the event occurred, expressed as the number of milliseconds\n          after <code>Jan 1, 1970 00:00:00 UTC</code>. (In Amazon Web Services Tools for PowerShell\n          and the Amazon Web Services SDK for .NET, the timestamp is specified in .NET format:\n            <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2017-09-15T13:45:30</code>.) </p>\n            </li>\n            <li>\n               <p> A batch of log events in a single request must be in a chronological order. Otherwise, the operation fails.</p>\n            </li>\n            <li>\n               <p>Each log event can be no larger than 1 MB.</p>\n            </li>\n            <li>\n               <p>The maximum number of log events in a batch is 10,000.</p>\n            </li>\n            <li>\n               <p>For valid events (within 14 days in the past to 2 hours in future), the time span in a single batch cannot exceed 24 hours. Otherwise, the operation fails.</p>\n            </li>\n         </ul>\n         <important>\n            <p>The quota of five requests per second per log stream\n      has been removed. Instead, <code>PutLogEvents</code> actions are throttled based on a \n      per-second per-account quota. You can request an increase to the per-second throttling\n      quota by using the Service Quotas service.</p>\n         </important>\n         <p>If a call to <code>PutLogEvents</code> returns \"UnrecognizedClientException\" the most\n      likely cause is a non-valid Amazon Web Services access key ID or secret key. </p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutLogEventsRequest": {

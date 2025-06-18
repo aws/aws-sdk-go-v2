@@ -7601,6 +7601,12 @@
                         "smithy.api#enumValue": "ml.p5en.48xlarge"
                     }
                 },
+                "ML_P6_B200_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p6-b200.48xlarge"
+                    }
+                },
                 "ML_TRN2_48XLARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
