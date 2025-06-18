@@ -1,8 +1,0 @@
-{
-    "id": "3572136e-0e40-4b32-a6fe-c802117f84a3",
-    "type": "feature",
-    "description": "Add support for p6-b200 instance type for SageMaker Hyperpod",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

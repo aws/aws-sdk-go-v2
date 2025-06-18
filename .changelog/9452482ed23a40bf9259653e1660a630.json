@@ -1,8 +1,0 @@
-{
-    "id": "9452482e-d23a-40bf-9259-653e1660a630",
-    "type": "feature",
-    "description": "Added support for renaming objects within the same bucket using the new RenameObject API.",
-    "modules": [
-        "service/s3"
-    ]
-}

@@ -1,3 +1,21 @@
+# Release (2025-06-18)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/aiops`: [v1.0.0](service/aiops/CHANGELOG.md#v100-2025-06-18)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for Amazon AI Operations (AIOps). AIOps is a generative AI-powered assistant that helps you respond to incidents in your system by scanning your system's telemetry and quickly surface suggestions that might be related to your issue.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.54.0](service/autoscaling/CHANGELOG.md#v1540-2025-06-18)
+  * **Feature**: Add IncludeInstances parameter to DescribeAutoScalingGroups API
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.51.0](service/cloudwatchlogs/CHANGELOG.md#v1510-2025-06-18)
+  * **Feature**: Added CloudWatch Logs Transformer support for converting CloudTrail, VPC Flow, EKS Audit, AWS WAF and Route53 Resolver logs to OCSF v1.1 format.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.81.0](service/s3/CHANGELOG.md#v1810-2025-06-18)
+  * **Feature**: Added support for renaming objects within the same bucket using the new RenameObject API.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.197.0](service/sagemaker/CHANGELOG.md#v11970-2025-06-18)
+  * **Feature**: Add support for p6-b200 instance type for SageMaker Hyperpod
+
 # Release (2025-06-17)
 
 ## General Highlights

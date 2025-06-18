@@ -1,3 +1,7 @@
+# v1.197.0 (2025-06-18)
+
+* **Feature**: Add support for p6-b200 instance type for SageMaker Hyperpod
+
 # v1.196.1 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

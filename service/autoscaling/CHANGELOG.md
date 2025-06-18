@@ -1,3 +1,7 @@
+# v1.54.0 (2025-06-18)
+
+* **Feature**: Add IncludeInstances parameter to DescribeAutoScalingGroups API
+
 # v1.53.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

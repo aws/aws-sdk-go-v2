@@ -1,3 +1,7 @@
+# v1.51.0 (2025-06-18)
+
+* **Feature**: Added CloudWatch Logs Transformer support for converting CloudTrail, VPC Flow, EKS Audit, AWS WAF and Route53 Resolver logs to OCSF v1.1 format.
+
 # v1.50.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

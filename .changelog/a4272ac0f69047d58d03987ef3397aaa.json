@@ -1,8 +1,0 @@
-{
-    "id": "a4272ac0-f690-47d5-8d03-987ef3397aaa",
-    "type": "feature",
-    "description": "Add IncludeInstances parameter to DescribeAutoScalingGroups API",
-    "modules": [
-        "service/autoscaling"
-    ]
-}
