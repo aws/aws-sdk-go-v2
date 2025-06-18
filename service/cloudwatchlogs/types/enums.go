@@ -148,6 +148,31 @@ func (EvaluationFrequency) Values() []EvaluationFrequency {
 	}
 }
 
+type EventSource string
+
+// Enum values for EventSource
+const (
+	EventSourceCloudTrail      EventSource = "CloudTrail"
+	EventSourceRoute53Resolver EventSource = "Route53Resolver"
+	EventSourceVpcFlow         EventSource = "VPCFlow"
+	EventSourceEksAudit        EventSource = "EKSAudit"
+	EventSourceAwswaf          EventSource = "AWSWAF"
+)
+
+// Values returns all known values for EventSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventSource) Values() []EventSource {
+	return []EventSource{
+		"CloudTrail",
+		"Route53Resolver",
+		"VPCFlow",
+		"EKSAudit",
+		"AWSWAF",
+	}
+}
+
 type ExportTaskStatusCode string
 
 // Enum values for ExportTaskStatusCode
@@ -286,6 +311,23 @@ func (LogGroupClass) Values() []LogGroupClass {
 		"STANDARD",
 		"INFREQUENT_ACCESS",
 		"DELIVERY",
+	}
+}
+
+type OCSFVersion string
+
+// Enum values for OCSFVersion
+const (
+	OCSFVersionV11 OCSFVersion = "V1.1"
+)
+
+// Values returns all known values for OCSFVersion. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OCSFVersion) Values() []OCSFVersion {
+	return []OCSFVersion{
+		"V1.1",
 	}
 }
 

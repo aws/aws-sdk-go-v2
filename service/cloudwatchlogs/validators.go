@@ -2021,6 +2021,24 @@ func validateOpenSearchResourceConfig(v *types.OpenSearchResourceConfig) error {
 	}
 }
 
+func validateParseToOCSF(v *types.ParseToOCSF) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParseToOCSF"}
+	if len(v.EventSource) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EventSource"))
+	}
+	if len(v.OcsfVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OcsfVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProcessor(v *types.Processor) error {
 	if v == nil {
 		return nil
@@ -2064,6 +2082,11 @@ func validateProcessor(v *types.Processor) error {
 	if v.MoveKeys != nil {
 		if err := validateMoveKeys(v.MoveKeys); err != nil {
 			invalidParams.AddNested("MoveKeys", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ParseToOCSF != nil {
+		if err := validateParseToOCSF(v.ParseToOCSF); err != nil {
+			invalidParams.AddNested("ParseToOCSF", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RenameKeys != nil {

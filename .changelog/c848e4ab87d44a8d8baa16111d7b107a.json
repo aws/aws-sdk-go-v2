@@ -1,0 +1,8 @@
+{
+    "id": "c848e4ab-87d4-4a8d-8baa-16111d7b107a",
+    "type": "feature",
+    "description": "Added CloudWatch Logs Transformer support for converting CloudTrail, VPC Flow, EKS Audit, AWS WAF and Route53 Resolver logs to OCSF v1.1 format.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

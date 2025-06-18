@@ -80,11 +80,14 @@ type PutDeliverySourceInput struct {
 	//   - For Elemental MediaTailor, the valid values are AD_DECISION_SERVER_LOGS ,
 	//   MANIFEST_SERVICE_LOGS , and TRANSCODE_LOGS .
 	//
+	//   - For Entity Resolution, the valid value is WORKFLOW_LOGS .
+	//
 	//   - For IAM Identity Center, the valid value is ERROR_LOGS .
 	//
 	//   - For Amazon Q, the valid value is EVENT_LOGS .
 	//
-	//   - For Amazon SES mail manager, the valid value is APPLICATION_LOG .
+	//   - For Amazon SES mail manager, the valid values are APPLICATION_LOG and
+	//   TRAFFIC_POLICY_DEBUG_LOGS .
 	//
 	//   - For Amazon WorkMail, the valid values are ACCESS_CONTROL_LOGS ,
 	//   AUTHENTICATION_LOGS , WORKMAIL_AVAILABILITY_PROVIDER_LOGS ,

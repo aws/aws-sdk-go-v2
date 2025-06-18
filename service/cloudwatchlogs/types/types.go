@@ -1814,6 +1814,33 @@ type ParseRoute53 struct {
 	noSmithyDocumentSerde
 }
 
+// This processor converts logs into [Open Cybersecurity Schema Framework (OCSF)] events.
+//
+// For more information about this processor including examples, see [parseToOSCF] in the
+// CloudWatch Logs User Guide.
+//
+// [parseToOSCF]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseToOCSF
+// [Open Cybersecurity Schema Framework (OCSF)]: https://ocsf.io
+type ParseToOCSF struct {
+
+	// Specify the service or process that produces the log events that will be
+	// converted with this processor.
+	//
+	// This member is required.
+	EventSource EventSource
+
+	// Specify which version of the OCSF schema to use for the transformed log events.
+	//
+	// This member is required.
+	OcsfVersion OCSFVersion
+
+	// The path to the field in the log event that you want to parse. If you omit this
+	// value, the whole log message is parsed.
+	Source *string
+
+	noSmithyDocumentSerde
+}
+
 // Use this processor to parse Amazon VPC vended logs, extract fields, and and
 // convert them into a JSON format. This processor always processes the entire log
 // event message.
@@ -1980,6 +2007,10 @@ type Processor struct {
 	//
 	// [parseRoute53]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseRoute53
 	ParseRoute53 *ParseRoute53
+
+	// Use this processor to convert logs into Open Cybersecurity Schema Framework
+	// (OCSF) format
+	ParseToOCSF *ParseToOCSF
 
 	// Use this parameter to include the [parseVPC] processor in your transformer.
 	//

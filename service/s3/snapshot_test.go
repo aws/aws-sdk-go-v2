@@ -1178,6 +1178,18 @@ func TestCheckSnapshot_PutPublicAccessBlock(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RenameObject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RenameObject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RenameObject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RestoreObject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RestoreObject(context.Background(), nil, func(o *Options) {
@@ -2346,6 +2358,18 @@ func TestUpdateSnapshot_PutPublicAccessBlock(t *testing.T) {
 	_, err := svc.PutPublicAccessBlock(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutPublicAccessBlock")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RenameObject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RenameObject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RenameObject")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

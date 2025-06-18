@@ -16929,6 +16929,64 @@ func awsAwsjson11_deserializeDocumentParseRoute53(v **types.ParseRoute53, value 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentParseToOCSF(v **types.ParseToOCSF, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ParseToOCSF
+	if *v == nil {
+		sv = &types.ParseToOCSF{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "eventSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventSource to be of type string, got %T instead", value)
+				}
+				sv.EventSource = types.EventSource(jtv)
+			}
+
+		case "ocsfVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OCSFVersion to be of type string, got %T instead", value)
+				}
+				sv.OcsfVersion = types.OCSFVersion(jtv)
+			}
+
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Source to be of type string, got %T instead", value)
+				}
+				sv.Source = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentParseVPC(v **types.ParseVPC, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17248,6 +17306,11 @@ func awsAwsjson11_deserializeDocumentProcessor(v **types.Processor, value interf
 
 		case "parseRoute53":
 			if err := awsAwsjson11_deserializeDocumentParseRoute53(&sv.ParseRoute53, value); err != nil {
+				return err
+			}
+
+		case "parseToOCSF":
+			if err := awsAwsjson11_deserializeDocumentParseToOCSF(&sv.ParseToOCSF, value); err != nil {
 				return err
 			}
 

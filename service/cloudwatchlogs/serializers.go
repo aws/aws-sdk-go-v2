@@ -6263,6 +6263,28 @@ func awsAwsjson11_serializeDocumentParseRoute53(v *types.ParseRoute53, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentParseToOCSF(v *types.ParseToOCSF, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EventSource) > 0 {
+		ok := object.Key("eventSource")
+		ok.String(string(v.EventSource))
+	}
+
+	if len(v.OcsfVersion) > 0 {
+		ok := object.Key("ocsfVersion")
+		ok.String(string(v.OcsfVersion))
+	}
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		ok.String(*v.Source)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentParseVPC(v *types.ParseVPC, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6385,6 +6407,13 @@ func awsAwsjson11_serializeDocumentProcessor(v *types.Processor, value smithyjso
 	if v.ParseRoute53 != nil {
 		ok := object.Key("parseRoute53")
 		if err := awsAwsjson11_serializeDocumentParseRoute53(v.ParseRoute53, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ParseToOCSF != nil {
+		ok := object.Key("parseToOCSF")
+		if err := awsAwsjson11_serializeDocumentParseToOCSF(v.ParseToOCSF, ok); err != nil {
 			return err
 		}
 	}
