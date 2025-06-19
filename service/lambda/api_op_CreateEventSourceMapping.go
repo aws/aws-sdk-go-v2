@@ -52,8 +52,8 @@ import (
 // For stream sources (DynamoDB, Kinesis, Amazon MSK, and self-managed Apache
 // Kafka), the following option is also available:
 //
-//   - DestinationConfig – Send discarded records to an Amazon SQS queue, Amazon
-//     SNS topic, or Amazon S3 bucket.
+//   - OnFailure – Send discarded records to an Amazon SQS queue, Amazon SNS topic,
+//     or Amazon S3 bucket. For more information, see [Adding a destination].
 //
 // For information about which configuration parameters apply to each event
 // source, see the following topics.
@@ -79,6 +79,7 @@ import (
 // [Amazon MQ and RabbitMQ]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params
 // [Apache Kafka]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms
 // [Amazon DocumentDB]: https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration
+// [Adding a destination]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations
 func (c *Client) CreateEventSourceMapping(ctx context.Context, params *CreateEventSourceMappingInput, optFns ...func(*Options)) (*CreateEventSourceMappingOutput, error) {
 	if params == nil {
 		params = &CreateEventSourceMappingInput{}
@@ -348,7 +349,7 @@ type CreateEventSourceMappingOutput struct {
 	// changed.
 	LastModified *time.Time
 
-	// The result of the last Lambda invocation of your function.
+	// The result of the event source mapping's last processing attempt.
 	LastProcessingResult *string
 
 	// The maximum amount of time, in seconds, that Lambda spends gathering records

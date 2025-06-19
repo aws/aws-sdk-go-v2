@@ -7934,6 +7934,116 @@ func validateCategoricalParameters(v []types.CategoricalParameter) error {
 	}
 }
 
+func validateCfnCreateTemplateProvider(v *types.CfnCreateTemplateProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CfnCreateTemplateProvider"}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
+	}
+	if v.TemplateURL == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateURL"))
+	}
+	if v.Parameters != nil {
+		if err := validateCfnStackCreateParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCfnStackCreateParameter(v *types.CfnStackCreateParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CfnStackCreateParameter"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCfnStackCreateParameters(v []types.CfnStackCreateParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CfnStackCreateParameters"}
+	for i := range v {
+		if err := validateCfnStackCreateParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCfnStackUpdateParameter(v *types.CfnStackUpdateParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CfnStackUpdateParameter"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCfnStackUpdateParameters(v []types.CfnStackUpdateParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CfnStackUpdateParameters"}
+	for i := range v {
+		if err := validateCfnStackUpdateParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCfnUpdateTemplateProvider(v *types.CfnUpdateTemplateProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CfnUpdateTemplateProvider"}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
+	}
+	if v.TemplateURL == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateURL"))
+	}
+	if v.Parameters != nil {
+		if err := validateCfnStackUpdateParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateChannel(v *types.Channel) error {
 	if v == nil {
 		return nil
@@ -8523,6 +8633,40 @@ func validateContinuousParameterRangeSpecification(v *types.ContinuousParameterR
 	}
 	if v.MaxValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateTemplateProvider(v *types.CreateTemplateProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTemplateProvider"}
+	if v.CfnTemplateProvider != nil {
+		if err := validateCfnCreateTemplateProvider(v.CfnTemplateProvider); err != nil {
+			invalidParams.AddNested("CfnTemplateProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateTemplateProviderList(v []types.CreateTemplateProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTemplateProviderList"}
+	for i := range v {
+		if err := validateCreateTemplateProvider(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13701,6 +13845,40 @@ func validateUpdateClusterSoftwareInstanceGroupSpecification(v *types.UpdateClus
 	}
 }
 
+func validateUpdateTemplateProvider(v *types.UpdateTemplateProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTemplateProvider"}
+	if v.CfnTemplateProvider != nil {
+		if err := validateCfnUpdateTemplateProvider(v.CfnTemplateProvider); err != nil {
+			invalidParams.AddNested("CfnTemplateProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateTemplateProviderList(v []types.UpdateTemplateProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTemplateProviderList"}
+	for i := range v {
+		if err := validateUpdateTemplateProvider(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUserSettings(v *types.UserSettings) error {
 	if v == nil {
 		return nil
@@ -15824,6 +16002,11 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TemplateProviders != nil {
+		if err := validateCreateTemplateProviderList(v.TemplateProviders); err != nil {
+			invalidParams.AddNested("TemplateProviders", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -19811,6 +19994,11 @@ func validateOpUpdateProjectInput(v *UpdateProjectInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TemplateProvidersToUpdate != nil {
+		if err := validateUpdateTemplateProviderList(v.TemplateProvidersToUpdate); err != nil {
+			invalidParams.AddNested("TemplateProvidersToUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -142,6 +142,7 @@ type KeyCheckValueAlgorithm string
 const (
 	KeyCheckValueAlgorithmCmac     KeyCheckValueAlgorithm = "CMAC"
 	KeyCheckValueAlgorithmAnsiX924 KeyCheckValueAlgorithm = "ANSI_X9_24"
+	KeyCheckValueAlgorithmHmac     KeyCheckValueAlgorithm = "HMAC"
 )
 
 // Values returns all known values for KeyCheckValueAlgorithm. Note that this can
@@ -152,6 +153,7 @@ func (KeyCheckValueAlgorithm) Values() []KeyCheckValueAlgorithm {
 	return []KeyCheckValueAlgorithm{
 		"CMAC",
 		"ANSI_X9_24",
+		"HMAC",
 	}
 }
 
@@ -376,11 +378,15 @@ type SymmetricKeyAlgorithm string
 
 // Enum values for SymmetricKeyAlgorithm
 const (
-	SymmetricKeyAlgorithmTdes2key SymmetricKeyAlgorithm = "TDES_2KEY"
-	SymmetricKeyAlgorithmTdes3key SymmetricKeyAlgorithm = "TDES_3KEY"
-	SymmetricKeyAlgorithmAes128   SymmetricKeyAlgorithm = "AES_128"
-	SymmetricKeyAlgorithmAes192   SymmetricKeyAlgorithm = "AES_192"
-	SymmetricKeyAlgorithmAes256   SymmetricKeyAlgorithm = "AES_256"
+	SymmetricKeyAlgorithmTdes2key   SymmetricKeyAlgorithm = "TDES_2KEY"
+	SymmetricKeyAlgorithmTdes3key   SymmetricKeyAlgorithm = "TDES_3KEY"
+	SymmetricKeyAlgorithmAes128     SymmetricKeyAlgorithm = "AES_128"
+	SymmetricKeyAlgorithmAes192     SymmetricKeyAlgorithm = "AES_192"
+	SymmetricKeyAlgorithmAes256     SymmetricKeyAlgorithm = "AES_256"
+	SymmetricKeyAlgorithmHmacSha256 SymmetricKeyAlgorithm = "HMAC_SHA256"
+	SymmetricKeyAlgorithmHmacSha384 SymmetricKeyAlgorithm = "HMAC_SHA384"
+	SymmetricKeyAlgorithmHmacSha512 SymmetricKeyAlgorithm = "HMAC_SHA512"
+	SymmetricKeyAlgorithmHmacSha224 SymmetricKeyAlgorithm = "HMAC_SHA224"
 )
 
 // Values returns all known values for SymmetricKeyAlgorithm. Note that this can
@@ -394,6 +400,10 @@ func (SymmetricKeyAlgorithm) Values() []SymmetricKeyAlgorithm {
 		"AES_128",
 		"AES_192",
 		"AES_256",
+		"HMAC_SHA256",
+		"HMAC_SHA384",
+		"HMAC_SHA512",
+		"HMAC_SHA224",
 	}
 }
 

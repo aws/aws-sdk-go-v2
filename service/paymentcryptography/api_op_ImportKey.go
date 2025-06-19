@@ -21,20 +21,20 @@ import (
 //
 // For symmetric key exchange, Amazon Web Services Payment Cryptography uses the
 // ANSI X9 TR-31 norm in accordance with PCI PIN guidelines. And for asymmetric key
-// exchange, Amazon Web Services Payment Cryptography supports ANSI X9 TR-34 norm
-// and RSA wrap and unwrap key exchange mechanisms. Asymmetric key exchange methods
-// are typically used to establish bi-directional trust between the two parties
-// exhanging keys and are used for initial key exchange such as Key Encryption Key
-// (KEK) or Zone Master Key (ZMK). After which you can import working keys using
-// symmetric method to perform various cryptographic operations within Amazon Web
-// Services Payment Cryptography.
+// exchange, Amazon Web Services Payment Cryptography supports ANSI X9 TR-34 norm,
+// RSA unwrap, and ECDH (Elliptic Curve Diffie-Hellman) key exchange mechanisms.
+// Asymmetric key exchange methods are typically used to establish bi-directional
+// trust between the two parties exhanging keys and are used for initial key
+// exchange such as Key Encryption Key (KEK) or Zone Master Key (ZMK). After which
+// you can import working keys using symmetric method to perform various
+// cryptographic operations within Amazon Web Services Payment Cryptography.
 //
-// The TR-34 norm is intended for exchanging 3DES keys only and keys are imported
-// in a WrappedKeyBlock format. Key attributes (such as KeyUsage, KeyAlgorithm,
-// KeyModesOfUse, Exportability) are contained within the key block. With RSA wrap
-// and unwrap, you can exchange both 3DES and AES-128 keys. The keys are imported
-// in a WrappedKeyCryptogram format and you will need to specify the key attributes
-// during import.
+// PCI requires specific minimum key strength of wrapping keys used to protect the
+// keys being exchanged electronically. These requirements can change when PCI
+// standards are revised. The rules specify that wrapping keys used for transport
+// must be at least as strong as the key being protected. For more information on
+// recommended key strength of wrapping keys and key exchange mechanism, see [Importing and exporting keys]in
+// the Amazon Web Services Payment Cryptography User Guide.
 //
 // You can also import a root public key certificate, used to sign other public
 // key certificates, or a trusted public key certificate under an already
@@ -92,7 +92,7 @@ import (
 // wrapping certificate) and the root certificate chain. The KDH must trust and
 // install the KRD wrapping certificate on its HSM and use it to encrypt (wrap) the
 // KDH key during TR-34 WrappedKeyBlock generation. The import token and associated
-// KRD wrapping certificate expires after 7 days.
+// KRD wrapping certificate expires after 30 days.
 //
 // Next the KDH generates a key pair for the purpose of signing the encrypted KDH
 // key and provides the public certificate of the signing key to Amazon Web
@@ -129,7 +129,7 @@ import (
 // encryption keypair for the purpose of key import, signs the key and returns back
 // the wrapping key certificate in PEM format (base64 encoded) and its root
 // certificate chain. The import token and associated KRD wrapping certificate
-// expires after 7 days.
+// expires after 30 days.
 //
 // You must trust and install the wrapping certificate and its certificate chain
 // on the sending HSM and use it to wrap the key under export for
@@ -153,6 +153,37 @@ import (
 //   - WrappingKeyIdentifier : The KeyArn of the KEK that Amazon Web Services
 //     Payment Cryptography uses to decrypt or unwrap the key under import.
 //
+// # To import working keys using ECDH
+//
+// You can also use ECDH key agreement to import working keys as a TR-31 keyblock,
+// where the wrapping key is an ECDH derived key.
+//
+// To initiate a TR-31 key import using ECDH, both sides must create an ECC key
+// pair with key usage K3 and exchange public key certificates. In Amazon Web
+// Services Payment Cryptography, you can do this by calling CreateKey and then
+// GetPublicKeyCertificate to retrieve its public key certificate. Next, you can
+// then generate a TR-31 WrappedKeyBlock using your own ECC key pair, the public
+// certificate of the service's ECC key pair, and the key derivation parameters
+// including key derivation function, hash algorithm, derivation data, and key
+// algorithm. If you have not already done so, you must import the CA chain that
+// issued the receiving public key certificate by calling ImportKey with input
+// RootCertificatePublicKey for root CA or TrustedPublicKey for intermediate CA.
+// To complete the TR-31 key import, you can use the following parameters. It is
+// important that the ECDH key derivation parameters you use should match those
+// used during import to derive the same shared wrapping key within Amazon Web
+// Services Payment Cryptography.
+//
+//   - KeyMaterial : Use DiffieHellmanTr31KeyBlock parameters.
+//
+//   - PrivateKeyIdentifier : The KeyArn of the ECC key pair created within Amazon
+//     Web Services Payment Cryptography to derive a shared KEK.
+//
+//   - PublicKeyCertificate : The public key certificate of the receiving ECC key
+//     pair in PEM format (base64 encoded) to derive a shared KEK.
+//
+//   - CertificateAuthorityPublicKeyIdentifier : The keyARN of the CA that signed
+//     the public key certificate of the receiving ECC key pair.
+//
 // Cross-account use: This operation can't be used across different Amazon Web
 // Services accounts.
 //
@@ -165,6 +196,7 @@ import (
 // [Importing symmetric keys]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-import.html
 // [ExportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ExportKey.html
 // [GetParametersForImport]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html
+// [Importing and exporting keys]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-importexport.html
 // [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
 func (c *Client) ImportKey(ctx context.Context, params *ImportKeyInput, optFns ...func(*Options)) (*ImportKeyOutput, error) {
 	if params == nil {

@@ -17,7 +17,7 @@ import (
 //
 // The signing key certificate signs the wrapped key under export within the TR-34
 // key payload. The export token and signing key certificate must be in place and
-// operational before calling [ExportKey]. The export token expires in 7 days. You can use
+// operational before calling [ExportKey]. The export token expires in 30 days. You can use
 // the same export token to export multiple keys from your service account.
 //
 // Cross-account use: This operation can't be used across different Amazon Web
@@ -68,8 +68,8 @@ type GetParametersForExportInput struct {
 type GetParametersForExportOutput struct {
 
 	// The export token to initiate key export from Amazon Web Services Payment
-	// Cryptography. The export token expires after 7 days. You can use the same export
-	// token to export multiple keys from the same service account.
+	// Cryptography. The export token expires after 30 days. You can use the same
+	// export token to export multiple keys from the same service account.
 	//
 	// This member is required.
 	ExportToken *string
@@ -86,7 +86,7 @@ type GetParametersForExportOutput struct {
 	SigningKeyAlgorithm types.KeyAlgorithm
 
 	// The signing key certificate in PEM format (base64 encoded) of the public key
-	// for signature within the TR-34 key block. The certificate expires after 7 days.
+	// for signature within the TR-34 key block. The certificate expires after 30 days.
 	//
 	// This member is required.
 	SigningKeyCertificate *string

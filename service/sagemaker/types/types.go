@@ -2887,6 +2887,137 @@ type CategoricalParameterRangeSpecification struct {
 	noSmithyDocumentSerde
 }
 
+//	The CloudFormation template provider configuration for creating infrastructure
+//
+// resources.
+type CfnCreateTemplateProvider struct {
+
+	//  A unique identifier for the template within the project.
+	//
+	// This member is required.
+	TemplateName *string
+
+	//  The Amazon S3 URL of the CloudFormation template.
+	//
+	// This member is required.
+	TemplateURL *string
+
+	//  An array of CloudFormation stack parameters.
+	Parameters []CfnStackCreateParameter
+
+	//  The IAM role that CloudFormation assumes when creating the stack.
+	RoleARN *string
+
+	noSmithyDocumentSerde
+}
+
+// A key-value pair that represents a parameter for the CloudFormation stack.
+type CfnStackCreateParameter struct {
+
+	//  The name of the CloudFormation parameter.
+	//
+	// This member is required.
+	Key *string
+
+	//  The value of the CloudFormation parameter.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the CloudFormation stack.
+type CfnStackDetail struct {
+
+	//  A human-readable message about the stack's current status.
+	//
+	// This member is required.
+	StatusMessage *string
+
+	//  The unique identifier of the CloudFormation stack.
+	Id *string
+
+	//  The name of the CloudFormation stack.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A key-value pair representing a parameter used in the CloudFormation stack.
+type CfnStackParameter struct {
+
+	//  The name of the CloudFormation parameter.
+	//
+	// This member is required.
+	Key *string
+
+	//  The value of the CloudFormation parameter.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A key-value pair representing a parameter used in the CloudFormation stack.
+type CfnStackUpdateParameter struct {
+
+	//  The name of the CloudFormation parameter.
+	//
+	// This member is required.
+	Key *string
+
+	//  The value of the CloudFormation parameter.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+//	Details about a CloudFormation template provider configuration and associated
+//
+// provisioning information.
+type CfnTemplateProviderDetail struct {
+
+	//  The unique identifier of the template within the project.
+	//
+	// This member is required.
+	TemplateName *string
+
+	//  The Amazon S3 URL of the CloudFormation template.
+	//
+	// This member is required.
+	TemplateURL *string
+
+	//  An array of CloudFormation stack parameters.
+	Parameters []CfnStackParameter
+
+	//  The IAM role used by CloudFormation to create the stack.
+	RoleARN *string
+
+	//  Information about the CloudFormation stack created by the template provider.
+	StackDetail *CfnStackDetail
+
+	noSmithyDocumentSerde
+}
+
+//	Contains configuration details for updating an existing CloudFormation
+//
+// template provider in the project.
+type CfnUpdateTemplateProvider struct {
+
+	//  The unique identifier of the template to update within the project.
+	//
+	// This member is required.
+	TemplateName *string
+
+	//  The Amazon S3 URL of the CloudFormation template.
+	//
+	// This member is required.
+	TemplateURL *string
+
+	//  An array of CloudFormation stack parameters.
+	Parameters []CfnStackUpdateParameter
+
+	noSmithyDocumentSerde
+}
+
 // A channel is a named input source that training algorithms can consume.
 type Channel struct {
 
@@ -4313,6 +4444,18 @@ type ConvergenceDetected struct {
 
 	// A flag to stop a tuning job once AMT has detected that the job has converged.
 	CompleteOnConvergence CompleteOnConvergence
+
+	noSmithyDocumentSerde
+}
+
+//	Contains configuration details for a template provider. Only one type of
+//
+// template provider can be specified.
+type CreateTemplateProvider struct {
+
+	//  The CloudFormation template provider configuration for creating infrastructure
+	// resources.
+	CfnTemplateProvider *CfnCreateTemplateProvider
 
 	noSmithyDocumentSerde
 }
@@ -15386,6 +15529,9 @@ type Project struct {
 	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []Tag
 
+	//  An array of template providers associated with the project.
+	TemplateProviderDetails []TemplateProviderDetail
+
 	noSmithyDocumentSerde
 }
 
@@ -16419,26 +16565,6 @@ type ResourceConfig struct {
 	InstanceGroups []InstanceGroup
 
 	// The ML compute instance type.
-	//
-	// SageMaker Training on Amazon Elastic Compute Cloud (EC2) P4de instances is in
-	// preview release starting December 9th, 2022.
-	//
-	// [Amazon EC2 P4de instances](currently in preview) are powered by 8 NVIDIA A100 GPUs with 80GB
-	// high-performance HBM2e GPU memory, which accelerate the speed of training ML
-	// models that need to be trained on large datasets of high-resolution data. In
-	// this preview release, Amazon SageMaker supports ML training jobs on P4de
-	// instances ( ml.p4de.24xlarge ) to reduce model training time. The
-	// ml.p4de.24xlarge instances are available in the following Amazon Web Services
-	// Regions.
-	//
-	//   - US East (N. Virginia) (us-east-1)
-	//
-	//   - US West (Oregon) (us-west-2)
-	//
-	// To request quota limit increase and start using P4de instances, contact the
-	// SageMaker Training service team through your account team.
-	//
-	// [Amazon EC2 P4de instances]: http://aws.amazon.com/ec2/instance-types/p4/
 	InstanceType TrainingInstanceType
 
 	// The duration of time in seconds to retain configured resources in a warm pool
@@ -18208,6 +18334,18 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	// The recommended target value to specify for the metric when creating a scaling
 	// policy.
 	TargetValue *float64
+
+	noSmithyDocumentSerde
+}
+
+//	Details about a template provider configuration and associated provisioning
+//
+// information.
+type TemplateProviderDetail struct {
+
+	//  Details about a CloudFormation template provider configuration and associated
+	// provisioning information.
+	CfnTemplateProviderDetail *CfnTemplateProviderDetail
 
 	noSmithyDocumentSerde
 }
@@ -20395,6 +20533,17 @@ type UpdateClusterSoftwareInstanceGroupSpecification struct {
 	//
 	// This member is required.
 	InstanceGroupName *string
+
+	noSmithyDocumentSerde
+}
+
+//	Contains configuration details for updating an existing template provider in
+//
+// the project.
+type UpdateTemplateProvider struct {
+
+	//  The CloudFormation template provider configuration to update.
+	CfnTemplateProvider *CfnUpdateTemplateProvider
 
 	noSmithyDocumentSerde
 }

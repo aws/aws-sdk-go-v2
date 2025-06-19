@@ -23340,6 +23340,119 @@ func awsAwsjson11_serializeDocumentCategoricalParameters(v []types.CategoricalPa
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCfnCreateTemplateProvider(v *types.CfnCreateTemplateProvider, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Parameters != nil {
+		ok := object.Key("Parameters")
+		if err := awsAwsjson11_serializeDocumentCfnStackCreateParameters(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleARN != nil {
+		ok := object.Key("RoleARN")
+		ok.String(*v.RoleARN)
+	}
+
+	if v.TemplateName != nil {
+		ok := object.Key("TemplateName")
+		ok.String(*v.TemplateName)
+	}
+
+	if v.TemplateURL != nil {
+		ok := object.Key("TemplateURL")
+		ok.String(*v.TemplateURL)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCfnStackCreateParameter(v *types.CfnStackCreateParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCfnStackCreateParameters(v []types.CfnStackCreateParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentCfnStackCreateParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCfnStackUpdateParameter(v *types.CfnStackUpdateParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCfnStackUpdateParameters(v []types.CfnStackUpdateParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentCfnStackUpdateParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCfnUpdateTemplateProvider(v *types.CfnUpdateTemplateProvider, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Parameters != nil {
+		ok := object.Key("Parameters")
+		if err := awsAwsjson11_serializeDocumentCfnStackUpdateParameters(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateName != nil {
+		ok := object.Key("TemplateName")
+		ok.String(*v.TemplateName)
+	}
+
+	if v.TemplateURL != nil {
+		ok := object.Key("TemplateURL")
+		ok.String(*v.TemplateURL)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentChannel(v *types.Channel, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24383,6 +24496,33 @@ func awsAwsjson11_serializeDocumentConvergenceDetected(v *types.ConvergenceDetec
 		ok.String(string(v.CompleteOnConvergence))
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCreateTemplateProvider(v *types.CreateTemplateProvider, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CfnTemplateProvider != nil {
+		ok := object.Key("CfnTemplateProvider")
+		if err := awsAwsjson11_serializeDocumentCfnCreateTemplateProvider(v.CfnTemplateProvider, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCreateTemplateProviderList(v []types.CreateTemplateProvider, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentCreateTemplateProvider(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -33732,6 +33872,33 @@ func awsAwsjson11_serializeDocumentUpdateClusterSoftwareInstanceGroupSpecificati
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentUpdateTemplateProvider(v *types.UpdateTemplateProvider, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CfnTemplateProvider != nil {
+		ok := object.Key("CfnTemplateProvider")
+		if err := awsAwsjson11_serializeDocumentCfnUpdateTemplateProvider(v.CfnTemplateProvider, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateTemplateProviderList(v []types.UpdateTemplateProvider, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentUpdateTemplateProvider(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentUSD(v *types.USD, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -36983,6 +37150,13 @@ func awsAwsjson11_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, v
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateProviders != nil {
+		ok := object.Key("TemplateProviders")
+		if err := awsAwsjson11_serializeDocumentCreateTemplateProviderList(v.TemplateProviders, ok); err != nil {
 			return err
 		}
 	}
@@ -45178,6 +45352,13 @@ func awsAwsjson11_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateProvidersToUpdate != nil {
+		ok := object.Key("TemplateProvidersToUpdate")
+		if err := awsAwsjson11_serializeDocumentUpdateTemplateProviderList(v.TemplateProvidersToUpdate, ok); err != nil {
 			return err
 		}
 	}

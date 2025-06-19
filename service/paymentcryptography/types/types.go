@@ -25,7 +25,7 @@ type Alias struct {
 	noSmithyDocumentSerde
 }
 
-// Derivation data used to derive an ECDH key.
+// The shared information used when deriving a key using ECDH.
 //
 // The following types satisfy this interface:
 //
@@ -34,13 +34,14 @@ type DiffieHellmanDerivationData interface {
 	isDiffieHellmanDerivationData()
 }
 
-// A byte string containing information that binds the ECDH derived key to the two
+// A string containing information that binds the ECDH derived key to the two
 // parties involved or to the context of the key.
 //
 // It may include details like identities of the two parties deriving the key,
 // context of the operation, session IDs, and optionally a nonce. It must not
-// contain zero bytes, and re-using shared information for multiple ECDH key
-// derivations is not recommended.
+// contain zero bytes. It is not recommended to reuse shared information for
+// multiple ECDH key derivations, as it could result in derived key material being
+// the same across different derivations.
 type DiffieHellmanDerivationDataMemberSharedInformation struct {
 	Value string
 
@@ -69,42 +70,44 @@ type ExportAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Parameter information for key material export using the asymmetric ECDH key
-// exchange method.
+// Key derivation parameter information for key material export using asymmetric
+// ECDH key exchange method.
 type ExportDiffieHellmanTr31KeyBlock struct {
 
-	// The keyARN of the certificate that signed the client's PublicKeyCertificate .
+	// The keyARN of the CA that signed the PublicKeyCertificate for the client's
+	// receiving ECC key pair.
 	//
 	// This member is required.
 	CertificateAuthorityPublicKeyIdentifier *string
 
-	// Derivation data used to derive an ECDH key.
+	// The shared information used when deriving a key using ECDH.
 	//
 	// This member is required.
 	DerivationData DiffieHellmanDerivationData
 
-	// The key algorithm of the derived ECDH key.
+	// The key algorithm of the shared derived ECDH key.
 	//
 	// This member is required.
 	DeriveKeyAlgorithm SymmetricKeyAlgorithm
 
-	// The key derivation function to use for deriving a key using ECDH.
+	// The key derivation function to use when deriving a key using ECDH.
 	//
 	// This member is required.
 	KeyDerivationFunction KeyDerivationFunction
 
-	// The hash type to use for deriving a key using ECDH.
+	// The hash type to use when deriving a key using ECDH.
 	//
 	// This member is required.
 	KeyDerivationHashAlgorithm KeyDerivationHashAlgorithm
 
-	// The keyARN of the asymmetric ECC key.
+	// The keyARN of the asymmetric ECC key created within Amazon Web Services Payment
+	// Cryptography.
 	//
 	// This member is required.
 	PrivateKeyIdentifier *string
 
-	// The client's public key certificate in PEM format (base64 encoded) to use for
-	// ECDH key derivation.
+	// The public key certificate of the client's receiving ECC key pair, in PEM
+	// format (base64 encoded), to use for ECDH key derivation.
 	//
 	// This member is required.
 	PublicKeyCertificate *string
@@ -166,8 +169,8 @@ type ExportKeyMaterial interface {
 	isExportKeyMaterial()
 }
 
-// Parameter information for key material export using the asymmetric ECDH key
-// exchange method.
+// Key derivation parameter information for key material export using asymmetric
+// ECDH key exchange method.
 type ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock struct {
 	Value ExportDiffieHellmanTr31KeyBlock
 
@@ -236,7 +239,7 @@ type ExportTr34KeyBlock struct {
 	// The export token to initiate key export from Amazon Web Services Payment
 	// Cryptography. It also contains the signing key certificate that will sign the
 	// wrapped key during TR-34 key block generation. Call [GetParametersForExport]to receive an export token.
-	// It expires after 7 days. You can use the same export token to export multiple
+	// It expires after 30 days. You can use the same export token to export multiple
 	// keys from the same service account.
 	//
 	// [GetParametersForExport]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html
@@ -268,42 +271,44 @@ type ExportTr34KeyBlock struct {
 	noSmithyDocumentSerde
 }
 
-// Parameter information for key material import using the asymmetric ECDH key
-// exchange method.
+// Key derivation parameter information for key material import using asymmetric
+// ECDH key exchange method.
 type ImportDiffieHellmanTr31KeyBlock struct {
 
-	// The keyARN of the certificate that signed the client's PublicKeyCertificate .
+	// The keyARN of the CA that signed the PublicKeyCertificate for the client's
+	// receiving ECC key pair.
 	//
 	// This member is required.
 	CertificateAuthorityPublicKeyIdentifier *string
 
-	// Derivation data used to derive an ECDH key.
+	// The shared information used when deriving a key using ECDH.
 	//
 	// This member is required.
 	DerivationData DiffieHellmanDerivationData
 
-	// The key algorithm of the derived ECDH key.
+	// The key algorithm of the shared derived ECDH key.
 	//
 	// This member is required.
 	DeriveKeyAlgorithm SymmetricKeyAlgorithm
 
-	// The key derivation function to use for deriving a key using ECDH.
+	// The key derivation function to use when deriving a key using ECDH.
 	//
 	// This member is required.
 	KeyDerivationFunction KeyDerivationFunction
 
-	// The hash type to use for deriving a key using ECDH.
+	// The hash type to use when deriving a key using ECDH.
 	//
 	// This member is required.
 	KeyDerivationHashAlgorithm KeyDerivationHashAlgorithm
 
-	// The keyARN of the asymmetric ECC key.
+	// The keyARN of the asymmetric ECC key created within Amazon Web Services Payment
+	// Cryptography.
 	//
 	// This member is required.
 	PrivateKeyIdentifier *string
 
-	// The client's public key certificate in PEM format (base64 encoded) to use for
-	// ECDH key derivation.
+	// The public key certificate of the client's receiving ECC key pair, in PEM
+	// format (base64 encoded), to use for ECDH key derivation.
 	//
 	// This member is required.
 	PublicKeyCertificate *string
@@ -326,7 +331,7 @@ type ImportKeyCryptogram struct {
 	Exportable *bool
 
 	// The import token that initiates key import using the asymmetric RSA wrap and
-	// unwrap key exchange method into AWS Payment Cryptography. It expires after 7
+	// unwrap key exchange method into AWS Payment Cryptography. It expires after 30
 	// days. You can use the same import token to import multiple keys to the same
 	// service account.
 	//
@@ -366,8 +371,8 @@ type ImportKeyMaterial interface {
 	isImportKeyMaterial()
 }
 
-// Parameter information for key material import using the asymmetric ECDH key
-// exchange method.
+// Key derivation parameter information for key material import using asymmetric
+// ECDH key exchange method.
 type ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock struct {
 	Value ImportDiffieHellmanTr31KeyBlock
 
@@ -454,7 +459,7 @@ type ImportTr34KeyBlock struct {
 
 	// The import token that initiates key import using the asymmetric TR-34 key
 	// exchange method into Amazon Web Services Payment Cryptography. It expires after
-	// 7 days. You can use the same import token to import multiple keys to the same
+	// 30 days. You can use the same import token to import multiple keys to the same
 	// service account.
 	//
 	// This member is required.

@@ -5761,6 +5761,13 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 	object := value.Object()
 	defer object.Close()
 
+	if v.AmazonManagedKafkaEventSourceConfig != nil {
+		ok := object.Key("AmazonManagedKafkaEventSourceConfig")
+		if err := awsRestjson1_serializeDocumentAmazonManagedKafkaEventSourceConfig(v.AmazonManagedKafkaEventSourceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BatchSize != nil {
 		ok := object.Key("BatchSize")
 		ok.Integer(*v.BatchSize)
@@ -5851,6 +5858,13 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 	if v.ScalingConfig != nil {
 		ok := object.Key("ScalingConfig")
 		if err := awsRestjson1_serializeDocumentScalingConfig(v.ScalingConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SelfManagedKafkaEventSourceConfig != nil {
+		ok := object.Key("SelfManagedKafkaEventSourceConfig")
+		if err := awsRestjson1_serializeDocumentSelfManagedKafkaEventSourceConfig(v.SelfManagedKafkaEventSourceConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -6513,6 +6527,13 @@ func awsRestjson1_serializeDocumentAmazonManagedKafkaEventSourceConfig(v *types.
 		ok.String(*v.ConsumerGroupId)
 	}
 
+	if v.SchemaRegistryConfig != nil {
+		ok := object.Key("SchemaRegistryConfig")
+		if err := awsRestjson1_serializeDocumentKafkaSchemaRegistryConfig(v.SchemaRegistryConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6904,6 +6925,92 @@ func awsRestjson1_serializeDocumentImageConfig(v *types.ImageConfig, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKafkaSchemaRegistryAccessConfig(v *types.KafkaSchemaRegistryAccessConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.URI != nil {
+		ok := object.Key("URI")
+		ok.String(*v.URI)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKafkaSchemaRegistryAccessConfigList(v []types.KafkaSchemaRegistryAccessConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentKafkaSchemaRegistryAccessConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKafkaSchemaRegistryConfig(v *types.KafkaSchemaRegistryConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessConfigs != nil {
+		ok := object.Key("AccessConfigs")
+		if err := awsRestjson1_serializeDocumentKafkaSchemaRegistryAccessConfigList(v.AccessConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.EventRecordFormat) > 0 {
+		ok := object.Key("EventRecordFormat")
+		ok.String(string(v.EventRecordFormat))
+	}
+
+	if v.SchemaRegistryURI != nil {
+		ok := object.Key("SchemaRegistryURI")
+		ok.String(*v.SchemaRegistryURI)
+	}
+
+	if v.SchemaValidationConfigs != nil {
+		ok := object.Key("SchemaValidationConfigs")
+		if err := awsRestjson1_serializeDocumentKafkaSchemaValidationConfigList(v.SchemaValidationConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKafkaSchemaValidationConfig(v *types.KafkaSchemaValidationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Attribute) > 0 {
+		ok := object.Key("Attribute")
+		ok.String(string(v.Attribute))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKafkaSchemaValidationConfigList(v []types.KafkaSchemaValidationConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentKafkaSchemaValidationConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLayerList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -7065,6 +7172,13 @@ func awsRestjson1_serializeDocumentSelfManagedKafkaEventSourceConfig(v *types.Se
 	if v.ConsumerGroupId != nil {
 		ok := object.Key("ConsumerGroupId")
 		ok.String(*v.ConsumerGroupId)
+	}
+
+	if v.SchemaRegistryConfig != nil {
+		ok := object.Key("SchemaRegistryConfig")
+		if err := awsRestjson1_serializeDocumentKafkaSchemaRegistryConfig(v.SchemaRegistryConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

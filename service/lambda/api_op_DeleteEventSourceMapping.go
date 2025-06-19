@@ -113,7 +113,7 @@ type DeleteEventSourceMappingOutput struct {
 	// changed.
 	LastModified *time.Time
 
-	// The result of the last Lambda invocation of your function.
+	// The result of the event source mapping's last processing attempt.
 	LastProcessingResult *string
 
 	// The maximum amount of time, in seconds, that Lambda spends gathering records

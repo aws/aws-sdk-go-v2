@@ -53,6 +53,10 @@ type CreateProjectInput struct {
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
 
+	//  An array of template provider configurations for creating infrastructure
+	// resources for the project.
+	TemplateProviders []types.CreateTemplateProvider
+
 	noSmithyDocumentSerde
 }
 

@@ -18,7 +18,7 @@ import (
 //
 // The wrapping key certificate wraps the key under import. The import token and
 // wrapping key certificate must be in place and operational before calling [ImportKey]. The
-// import token expires in 7 days. You can use the same import token to import
+// import token expires in 30 days. You can use the same import token to import
 // multiple keys into your service account.
 //
 // Cross-account use: This operation can't be used across different Amazon Web
@@ -75,8 +75,8 @@ type GetParametersForImportInput struct {
 type GetParametersForImportOutput struct {
 
 	// The import token to initiate key import into Amazon Web Services Payment
-	// Cryptography. The import token expires after 7 days. You can use the same import
-	// token to import multiple keys to the same service account.
+	// Cryptography. The import token expires after 30 days. You can use the same
+	// import token to import multiple keys to the same service account.
 	//
 	// This member is required.
 	ImportToken *string
@@ -93,7 +93,7 @@ type GetParametersForImportOutput struct {
 	WrappingKeyAlgorithm types.KeyAlgorithm
 
 	// The wrapping key certificate in PEM format (base64 encoded) of the wrapping key
-	// for use within the TR-34 key block. The certificate expires in 7 days.
+	// for use within the TR-34 key block. The certificate expires in 30 days.
 	//
 	// This member is required.
 	WrappingKeyCertificate *string

@@ -60,6 +60,9 @@ type UpdateProjectInput struct {
 	// [Amazon Web Services Service Catalog Tag Update Constraints]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-resourceupdate.html
 	Tags []types.Tag
 
+	//  The template providers to update in the project.
+	TemplateProvidersToUpdate []types.UpdateTemplateProvider
+
 	noSmithyDocumentSerde
 }
 

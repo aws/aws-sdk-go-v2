@@ -44426,6 +44426,215 @@ func awsAwsjson11_deserializeDocumentCategoricalParameters(v *[]types.Categorica
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCfnStackDetail(v **types.CfnStackDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CfnStackDetail
+	if *v == nil {
+		sv = &types.CfnStackDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CfnStackId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CfnStackName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "StatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CfnStackStatusMessage to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCfnStackParameter(v **types.CfnStackParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CfnStackParameter
+	if *v == nil {
+		sv = &types.CfnStackParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CfnStackParameterKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CfnStackParameterValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCfnStackParameters(v *[]types.CfnStackParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CfnStackParameter
+	if *v == nil {
+		cv = []types.CfnStackParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CfnStackParameter
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentCfnStackParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCfnTemplateProviderDetail(v **types.CfnTemplateProviderDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CfnTemplateProviderDetail
+	if *v == nil {
+		sv = &types.CfnTemplateProviderDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Parameters":
+			if err := awsAwsjson11_deserializeDocumentCfnStackParameters(&sv.Parameters, value); err != nil {
+				return err
+			}
+
+		case "RoleARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleARN = ptr.String(jtv)
+			}
+
+		case "StackDetail":
+			if err := awsAwsjson11_deserializeDocumentCfnStackDetail(&sv.StackDetail, value); err != nil {
+				return err
+			}
+
+		case "TemplateName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CfnTemplateName to be of type string, got %T instead", value)
+				}
+				sv.TemplateName = ptr.String(jtv)
+			}
+
+		case "TemplateURL":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CfnTemplateURL to be of type string, got %T instead", value)
+				}
+				sv.TemplateURL = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentChannel(v **types.Channel, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -76850,6 +77059,11 @@ func awsAwsjson11_deserializeDocumentProject(v **types.Project, value interface{
 				return err
 			}
 
+		case "TemplateProviderDetails":
+			if err := awsAwsjson11_deserializeDocumentTemplateProviderDetailList(&sv.TemplateProviderDetails, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -82991,6 +83205,76 @@ func awsAwsjson11_deserializeDocumentTaskKeywords(v *[]string, value interface{}
 			}
 			col = jtv
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTemplateProviderDetail(v **types.TemplateProviderDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TemplateProviderDetail
+	if *v == nil {
+		sv = &types.TemplateProviderDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CfnTemplateProviderDetail":
+			if err := awsAwsjson11_deserializeDocumentCfnTemplateProviderDetail(&sv.CfnTemplateProviderDetail, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTemplateProviderDetailList(v *[]types.TemplateProviderDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TemplateProviderDetail
+	if *v == nil {
+		cv = []types.TemplateProviderDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TemplateProviderDetail
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTemplateProviderDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -100803,6 +101087,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeProjectOutput(v **DescribeProject
 
 		case "ServiceCatalogProvisioningDetails":
 			if err := awsAwsjson11_deserializeDocumentServiceCatalogProvisioningDetails(&sv.ServiceCatalogProvisioningDetails, value); err != nil {
+				return err
+			}
+
+		case "TemplateProviderDetails":
+			if err := awsAwsjson11_deserializeDocumentTemplateProviderDetailList(&sv.TemplateProviderDetails, value); err != nil {
 				return err
 			}
 

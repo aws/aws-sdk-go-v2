@@ -51,6 +51,12 @@ type UpdateApplicationInput struct {
 	// amount of time being idle.
 	AutoStopConfiguration *types.AutoStopConfig
 
+	// Specifies the IAM Identity Center configuration used to enable or disable
+	// trusted identity propagation. When provided, this configuration determines how
+	// the application interacts with IAM Identity Center for user authentication and
+	// access control.
+	IdentityCenterConfiguration *types.IdentityCenterConfigurationInput
+
 	// The image configuration to be used for all worker types. You can either set
 	// this parameter or imageConfiguration for each worker type in
 	// WorkerTypeSpecificationInput .

@@ -87,6 +87,9 @@ type DescribeProjectOutput struct {
 	// [What is Amazon Web Services Service Catalog]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
 	ServiceCatalogProvisioningDetails *types.ServiceCatalogProvisioningDetails
 
+	//  An array of template providers associated with the project.
+	TemplateProviderDetails []types.TemplateProviderDetail
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

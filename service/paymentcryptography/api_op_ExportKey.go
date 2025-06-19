@@ -23,20 +23,20 @@ import (
 //
 // For symmetric key exchange, Amazon Web Services Payment Cryptography uses the
 // ANSI X9 TR-31 norm in accordance with PCI PIN guidelines. And for asymmetric key
-// exchange, Amazon Web Services Payment Cryptography supports ANSI X9 TR-34 norm
-// and RSA wrap and unwrap key exchange mechanism. Asymmetric key exchange methods
-// are typically used to establish bi-directional trust between the two parties
-// exhanging keys and are used for initial key exchange such as Key Encryption Key
-// (KEK). After which you can export working keys using symmetric method to perform
-// various cryptographic operations within Amazon Web Services Payment
-// Cryptography.
+// exchange, Amazon Web Services Payment Cryptography supports ANSI X9 TR-34 norm,
+// RSA unwrap, and ECDH (Elliptic Curve Diffie-Hellman) key exchange mechanisms.
+// Asymmetric key exchange methods are typically used to establish bi-directional
+// trust between the two parties exhanging keys and are used for initial key
+// exchange such as Key Encryption Key (KEK). After which you can export working
+// keys using symmetric method to perform various cryptographic operations within
+// Amazon Web Services Payment Cryptography.
 //
-// The TR-34 norm is intended for exchanging 3DES keys only and keys are imported
-// in a WrappedKeyBlock format. Key attributes (such as KeyUsage, KeyAlgorithm,
-// KeyModesOfUse, Exportability) are contained within the key block. With RSA wrap
-// and unwrap, you can exchange both 3DES and AES-128 keys. The keys are imported
-// in a WrappedKeyCryptogram format and you will need to specify the key attributes
-// during import.
+// PCI requires specific minimum key strength of wrapping keys used to protect the
+// keys being exchanged electronically. These requirements can change when PCI
+// standards are revised. The rules specify that wrapping keys used for transport
+// must be at least as strong as the key being protected. For more information on
+// recommended key strength of wrapping keys and key exchange mechanism, see [Importing and exporting keys]in
+// the Amazon Web Services Payment Cryptography User Guide.
 //
 // You can also use ExportKey functionality to generate and export an IPEK
 // (Initial Pin Encryption Key) from Amazon Web Services Payment Cryptography using
@@ -76,7 +76,7 @@ import (
 // sign the the export payload and the signing public key certificate is provided
 // to KRD to verify the signature. The KRD can import the root certificate into its
 // Hardware Security Module (HSM), as required. The export token and the associated
-// KDH signing certificate expires after 7 days.
+// KDH signing certificate expires after 30 days.
 //
 // Next the KRD generates a key pair for the the purpose of encrypting the KDH key
 // and provides the public key cerificate (also known as KRD wrapping certificate)
@@ -152,8 +152,36 @@ import (
 //
 //   - KeyMaterial : Use Tr31KeyBlock parameters.
 //
+// # To export working keys using ECDH
+//
+// You can also use ECDH key agreement to export working keys in a TR-31 keyblock,
+// where the wrapping key is an ECDH derived key.
+//
+// To initiate a TR-31 key export using ECDH, both sides must create an ECC key
+// pair with key usage K3 and exchange public key certificates. In Amazon Web
+// Services Payment Cryptography, you can do this by calling CreateKey . If you
+// have not already done so, you must import the CA chain that issued the receiving
+// public key certificate by calling ImportKey with input RootCertificatePublicKey
+// for root CA or TrustedPublicKey for intermediate CA. You can then complete a
+// TR-31 key export by deriving a shared wrapping key using the service ECC key
+// pair, public certificate of your ECC key pair outside of Amazon Web Services
+// Payment Cryptography, and the key derivation parameters including key derivation
+// function, hash algorithm, derivation data, key algorithm.
+//
+//   - KeyMaterial : Use DiffieHellmanTr31KeyBlock parameters.
+//
+//   - PrivateKeyIdentifier : The KeyArn of the ECC key pair created within Amazon
+//     Web Services Payment Cryptography to derive a shared KEK.
+//
+//   - PublicKeyCertificate : The public key certificate of the receiving ECC key
+//     pair in PEM format (base64 encoded) to derive a shared KEK.
+//
+//   - CertificateAuthorityPublicKeyIdentifier : The keyARN of the CA that signed
+//     the public key certificate of the receiving ECC key pair.
+//
 // When this operation is successful, Amazon Web Services Payment Cryptography
-// returns the working key or IPEK as a TR-31 WrappedKeyBlock.
+// returns the working key as a TR-31 WrappedKeyBlock, where the wrapping key is
+// the ECDH derived key.
 //
 // Cross-account use: This operation can't be used across different Amazon Web
 // Services accounts.
@@ -169,6 +197,7 @@ import (
 // [ImportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
 // [ASC X9.143-2022]: https://webstore.ansi.org/standards/ascx9/ansix91432022
 // [GetParametersForImport]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html
+// [Importing and exporting keys]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-importexport.html
 // [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
 func (c *Client) ExportKey(ctx context.Context, params *ExportKeyInput, optFns ...func(*Options)) (*ExportKeyOutput, error) {
 	if params == nil {

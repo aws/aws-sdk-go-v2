@@ -55,6 +55,12 @@ type CreateApplicationInput struct {
 	// amount of time being idle.
 	AutoStopConfiguration *types.AutoStopConfig
 
+	// The IAM Identity Center Configuration accepts the Identity Center instance
+	// parameter required to enable trusted identity propagation. This configuration
+	// allows identity propagation between integrated services and the Identity Center
+	// instance.
+	IdentityCenterConfiguration *types.IdentityCenterConfigurationInput
+
 	// The image configuration for all worker types. You can either set this parameter
 	// or imageConfiguration for each worker type in workerTypeSpecifications .
 	ImageConfiguration *types.ImageConfigurationInput

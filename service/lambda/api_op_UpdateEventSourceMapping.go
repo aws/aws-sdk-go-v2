@@ -52,8 +52,8 @@ import (
 // For stream sources (DynamoDB, Kinesis, Amazon MSK, and self-managed Apache
 // Kafka), the following option is also available:
 //
-//   - DestinationConfig – Send discarded records to an Amazon SQS queue, Amazon
-//     SNS topic, or Amazon S3 bucket.
+//   - OnFailure – Send discarded records to an Amazon SQS queue, Amazon SNS topic,
+//     or Amazon S3 bucket. For more information, see [Adding a destination].
 //
 // For information about which configuration parameters apply to each event
 // source, see the following topics.
@@ -79,6 +79,7 @@ import (
 // [Amazon MQ and RabbitMQ]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params
 // [Apache Kafka]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms
 // [Amazon DocumentDB]: https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration
+// [Adding a destination]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations
 func (c *Client) UpdateEventSourceMapping(ctx context.Context, params *UpdateEventSourceMappingInput, optFns ...func(*Options)) (*UpdateEventSourceMappingOutput, error) {
 	if params == nil {
 		params = &UpdateEventSourceMappingInput{}
@@ -100,6 +101,10 @@ type UpdateEventSourceMappingInput struct {
 	//
 	// This member is required.
 	UUID *string
+
+	// Specific configuration settings for an Amazon Managed Streaming for Apache
+	// Kafka (Amazon MSK) event source.
+	AmazonManagedKafkaEventSourceConfig *types.AmazonManagedKafkaEventSourceConfig
 
 	// The maximum number of records in each batch that Lambda pulls from your stream
 	// or queue and sends to your function. Lambda passes all of the records in the
@@ -222,6 +227,9 @@ type UpdateEventSourceMappingInput struct {
 	// [Configuring maximum concurrency for Amazon SQS event sources]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency
 	ScalingConfig *types.ScalingConfig
 
+	// Specific configuration settings for a self-managed Apache Kafka event source.
+	SelfManagedKafkaEventSourceConfig *types.SelfManagedKafkaEventSourceConfig
+
 	// An array of authentication protocols or VPC components required to secure your
 	// event source.
 	SourceAccessConfigurations []types.SourceAccessConfiguration
@@ -304,7 +312,7 @@ type UpdateEventSourceMappingOutput struct {
 	// changed.
 	LastModified *time.Time
 
-	// The result of the last Lambda invocation of your function.
+	// The result of the event source mapping's last processing attempt.
 	LastProcessingResult *string
 
 	// The maximum amount of time, in seconds, that Lambda spends gathering records

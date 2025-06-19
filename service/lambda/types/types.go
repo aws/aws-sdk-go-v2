@@ -109,6 +109,9 @@ type AmazonManagedKafkaEventSourceConfig struct {
 	// [Customizable consumer group ID]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id
 	ConsumerGroupId *string
 
+	// Specific configuration settings for a Kafka schema registry.
+	SchemaRegistryConfig *KafkaSchemaRegistryConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -219,7 +222,7 @@ type Cors struct {
 
 // The [dead-letter queue] for failed asynchronous invocations.
 //
-// [dead-letter queue]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
+// [dead-letter queue]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-dlq
 type DeadLetterConfig struct {
 
 	// The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
@@ -229,13 +232,16 @@ type DeadLetterConfig struct {
 }
 
 // A configuration object that specifies the destination of an event after Lambda
-// processes it.
+// processes it. For more information, see [Adding a destination].
+//
+// [Adding a destination]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations
 type DestinationConfig struct {
 
 	// The destination configuration for failed invocations.
 	OnFailure *OnFailure
 
-	// The destination configuration for successful invocations.
+	// The destination configuration for successful invocations. Not supported in
+	// CreateEventSourceMapping or UpdateEventSourceMapping .
 	OnSuccess *OnSuccess
 
 	noSmithyDocumentSerde
@@ -384,7 +390,7 @@ type EventSourceMappingConfiguration struct {
 	// changed.
 	LastModified *time.Time
 
-	// The result of the last Lambda invocation of your function.
+	// The result of the event source mapping's last processing attempt.
 	LastProcessingResult *string
 
 	// The maximum amount of time, in seconds, that Lambda spends gathering records
@@ -977,6 +983,72 @@ type InvokeWithResponseStreamResponseEventMemberPayloadChunk struct {
 func (*InvokeWithResponseStreamResponseEventMemberPayloadChunk) isInvokeWithResponseStreamResponseEvent() {
 }
 
+// Specific access configuration settings that tell Lambda how to authenticate
+// with your schema registry.
+//
+// If you're working with an Glue schema registry, don't provide authentication
+// details in this object. Instead, ensure that your execution role has the
+// required permissions for Lambda to access your cluster.
+//
+// If you're working with a Confluent schema registry, choose the authentication
+// method in the Type field, and provide the Secrets Manager secret ARN in the URI
+// field.
+type KafkaSchemaRegistryAccessConfig struct {
+
+	//  The type of authentication Lambda uses to access your schema registry.
+	Type KafkaSchemaRegistryAuthType
+
+	//  The URI of the secret (Secrets Manager secret ARN) to authenticate with your
+	// schema registry.
+	URI *string
+
+	noSmithyDocumentSerde
+}
+
+// Specific configuration settings for a Kafka schema registry.
+type KafkaSchemaRegistryConfig struct {
+
+	// An array of access configuration objects that tell Lambda how to authenticate
+	// with your schema registry.
+	AccessConfigs []KafkaSchemaRegistryAccessConfig
+
+	// The record format that Lambda delivers to your function after schema validation.
+	//
+	//   - Choose JSON to have Lambda deliver the record to your function as a standard
+	//   JSON object.
+	//
+	//   - Choose SOURCE to have Lambda deliver the record to your function in its
+	//   original source format. Lambda removes all schema metadata, such as the schema
+	//   ID, before sending the record to your function.
+	EventRecordFormat SchemaRegistryEventRecordFormat
+
+	// The URI for your schema registry. The correct URI format depends on the type of
+	// schema registry you're using.
+	//
+	//   - For Glue schema registries, use the ARN of the registry.
+	//
+	//   - For Confluent schema registries, use the URL of the registry.
+	SchemaRegistryURI *string
+
+	// An array of schema validation configuration objects, which tell Lambda the
+	// message attributes you want to validate and filter using your schema registry.
+	SchemaValidationConfigs []KafkaSchemaValidationConfig
+
+	noSmithyDocumentSerde
+}
+
+// Specific schema validation configuration settings that tell Lambda the message
+// attributes you want to validate and filter using your schema registry.
+type KafkaSchemaValidationConfig struct {
+
+	//  The attributes you want your schema registry to validate and filter for. If
+	// you selected JSON as the EventRecordFormat , Lambda also deserializes the
+	// selected message attributes.
+	Attribute KafkaSchemaValidationAttribute
+
+	noSmithyDocumentSerde
+}
+
 // An [Lambda layer].
 //
 // [Lambda layer]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
@@ -1124,7 +1196,9 @@ type LoggingConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A destination for events that failed processing.
+// A destination for events that failed processing. For more information, see [Adding a destination].
+//
+// [Adding a destination]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations
 type OnFailure struct {
 
 	// The Amazon Resource Name (ARN) of the destination resource.
@@ -1150,6 +1224,9 @@ type OnFailure struct {
 //
 // To retain records of successful [asynchronous invocations], you can configure an Amazon SNS topic, Amazon
 // SQS queue, Lambda function, or Amazon EventBridge event bus as the destination.
+//
+// OnSuccess is not supported in CreateEventSourceMapping or
+// UpdateEventSourceMapping requests.
 //
 // [asynchronous invocations]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations
 type OnSuccess struct {
@@ -1259,13 +1336,16 @@ type SelfManagedEventSource struct {
 // Specific configuration settings for a self-managed Apache Kafka event source.
 type SelfManagedKafkaEventSourceConfig struct {
 
-	// The identifier for the Kafka consumer group to join. The consumer group ID must
-	// be unique among all your Kafka event sources. After creating a Kafka event
+	//  The identifier for the Kafka consumer group to join. The consumer group ID
+	// must be unique among all your Kafka event sources. After creating a Kafka event
 	// source mapping with the consumer group ID specified, you cannot update this
 	// value. For more information, see [Customizable consumer group ID].
 	//
-	// [Customizable consumer group ID]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id
+	// [Customizable consumer group ID]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka-process.html#services-smaa-topic-add
 	ConsumerGroupId *string
+
+	// Specific configuration settings for a Kafka schema registry.
+	SchemaRegistryConfig *KafkaSchemaRegistryConfig
 
 	noSmithyDocumentSerde
 }

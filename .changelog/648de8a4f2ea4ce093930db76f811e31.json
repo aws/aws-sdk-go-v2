@@ -1,0 +1,8 @@
+{
+    "id": "648de8a4-f2ea-4ce0-9393-0db76f811e31",
+    "type": "feature",
+    "description": "Additional support for managing HMAC keys that adheres to changes documented in X9.143-2021 and provides better interoperability for key import/export",
+    "modules": [
+        "service/paymentcryptographydata"
+    ]
+}

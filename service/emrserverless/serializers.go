@@ -197,6 +197,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		ok.String(*v.ClientToken)
 	}
 
+	if v.IdentityCenterConfiguration != nil {
+		ok := object.Key("identityCenterConfiguration")
+		if err := awsRestjson1_serializeDocumentIdentityCenterConfigurationInput(v.IdentityCenterConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ImageConfiguration != nil {
 		ok := object.Key("imageConfiguration")
 		if err := awsRestjson1_serializeDocumentImageConfigurationInput(v.ImageConfiguration, ok); err != nil {
@@ -1505,6 +1512,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		ok.String(*v.ClientToken)
 	}
 
+	if v.IdentityCenterConfiguration != nil {
+		ok := object.Key("identityCenterConfiguration")
+		if err := awsRestjson1_serializeDocumentIdentityCenterConfigurationInput(v.IdentityCenterConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ImageConfiguration != nil {
 		ok := object.Key("imageConfiguration")
 		if err := awsRestjson1_serializeDocumentImageConfigurationInput(v.ImageConfiguration, ok); err != nil {
@@ -1727,6 +1741,18 @@ func awsRestjson1_serializeDocumentHive(v *types.Hive, value smithyjson.Value) e
 	if v.Query != nil {
 		ok := object.Key("query")
 		ok.String(*v.Query)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIdentityCenterConfigurationInput(v *types.IdentityCenterConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdentityCenterInstanceArn != nil {
+		ok := object.Key("identityCenterInstanceArn")
+		ok.String(*v.IdentityCenterInstanceArn)
 	}
 
 	return nil

@@ -15987,6 +15987,11 @@ func awsRestjson1_deserializeDocumentAmazonManagedKafkaEventSourceConfig(v **typ
 				sv.ConsumerGroupId = ptr.String(jtv)
 			}
 
+		case "SchemaRegistryConfig":
+			if err := awsRestjson1_deserializeDocumentKafkaSchemaRegistryConfig(&sv.SchemaRegistryConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -19213,6 +19218,222 @@ func awsRestjson1_deserializeDocumentInvalidZipFileException(v **types.InvalidZi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentKafkaSchemaRegistryAccessConfig(v **types.KafkaSchemaRegistryAccessConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KafkaSchemaRegistryAccessConfig
+	if *v == nil {
+		sv = &types.KafkaSchemaRegistryAccessConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KafkaSchemaRegistryAuthType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.KafkaSchemaRegistryAuthType(jtv)
+			}
+
+		case "URI":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.URI = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKafkaSchemaRegistryAccessConfigList(v *[]types.KafkaSchemaRegistryAccessConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.KafkaSchemaRegistryAccessConfig
+	if *v == nil {
+		cv = []types.KafkaSchemaRegistryAccessConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.KafkaSchemaRegistryAccessConfig
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentKafkaSchemaRegistryAccessConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKafkaSchemaRegistryConfig(v **types.KafkaSchemaRegistryConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KafkaSchemaRegistryConfig
+	if *v == nil {
+		sv = &types.KafkaSchemaRegistryConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessConfigs":
+			if err := awsRestjson1_deserializeDocumentKafkaSchemaRegistryAccessConfigList(&sv.AccessConfigs, value); err != nil {
+				return err
+			}
+
+		case "EventRecordFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SchemaRegistryEventRecordFormat to be of type string, got %T instead", value)
+				}
+				sv.EventRecordFormat = types.SchemaRegistryEventRecordFormat(jtv)
+			}
+
+		case "SchemaRegistryURI":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SchemaRegistryUri to be of type string, got %T instead", value)
+				}
+				sv.SchemaRegistryURI = ptr.String(jtv)
+			}
+
+		case "SchemaValidationConfigs":
+			if err := awsRestjson1_deserializeDocumentKafkaSchemaValidationConfigList(&sv.SchemaValidationConfigs, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKafkaSchemaValidationConfig(v **types.KafkaSchemaValidationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KafkaSchemaValidationConfig
+	if *v == nil {
+		sv = &types.KafkaSchemaValidationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Attribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KafkaSchemaValidationAttribute to be of type string, got %T instead", value)
+				}
+				sv.Attribute = types.KafkaSchemaValidationAttribute(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKafkaSchemaValidationConfigList(v *[]types.KafkaSchemaValidationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.KafkaSchemaValidationConfig
+	if *v == nil {
+		cv = []types.KafkaSchemaValidationConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.KafkaSchemaValidationConfig
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentKafkaSchemaValidationConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentKMSAccessDeniedException(v **types.KMSAccessDeniedException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20866,6 +21087,11 @@ func awsRestjson1_deserializeDocumentSelfManagedKafkaEventSourceConfig(v **types
 					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
 				}
 				sv.ConsumerGroupId = ptr.String(jtv)
+			}
+
+		case "SchemaRegistryConfig":
+			if err := awsRestjson1_deserializeDocumentKafkaSchemaRegistryConfig(&sv.SchemaRegistryConfig, value); err != nil {
+				return err
 			}
 
 		default:

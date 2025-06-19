@@ -2584,6 +2584,11 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				}
 			}
 
+		case "identityCenterConfiguration":
+			if err := awsRestjson1_deserializeDocumentIdentityCenterConfiguration(&sv.IdentityCenterConfiguration, value); err != nil {
+				return err
+			}
+
 		case "imageConfiguration":
 			if err := awsRestjson1_deserializeDocumentImageConfiguration(&sv.ImageConfiguration, value); err != nil {
 				return err
@@ -3286,6 +3291,55 @@ func awsRestjson1_deserializeDocumentHive(v **types.Hive, value interface{}) err
 					return fmt.Errorf("expected Query to be of type string, got %T instead", value)
 				}
 				sv.Query = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIdentityCenterConfiguration(v **types.IdentityCenterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IdentityCenterConfiguration
+	if *v == nil {
+		sv = &types.IdentityCenterConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "identityCenterApplicationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdentityCenterApplicationArn to be of type string, got %T instead", value)
+				}
+				sv.IdentityCenterApplicationArn = ptr.String(jtv)
+			}
+
+		case "identityCenterInstanceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdentityCenterInstanceArn to be of type string, got %T instead", value)
+				}
+				sv.IdentityCenterInstanceArn = ptr.String(jtv)
 			}
 
 		default:

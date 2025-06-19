@@ -56,6 +56,10 @@ type Application struct {
 	// amount of time being idle.
 	AutoStopConfiguration *AutoStopConfig
 
+	// The IAM Identity Center configuration applied to enable trusted identity
+	// propagation.
+	IdentityCenterConfiguration *IdentityCenterConfiguration
+
 	// The image configuration applied to all worker types.
 	ImageConfiguration *ImageConfiguration
 
@@ -261,6 +265,32 @@ type Hive struct {
 
 	// The parameters for the Hive job run.
 	Parameters *string
+
+	noSmithyDocumentSerde
+}
+
+// The IAM Identity Center Configuration that includes the Identify Center
+// instance and application ARNs that provide trusted-identity propagation.
+type IdentityCenterConfiguration struct {
+
+	// The ARN of the EMR Serverless created IAM Identity Center Application that
+	// provides trusted-identity propagation.
+	IdentityCenterApplicationArn *string
+
+	// The ARN of the IAM Identity Center instance.
+	IdentityCenterInstanceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the IAM Identity Center configuration used to enable or disable
+// trusted identity propagation. When provided, this configuration determines how
+// the application interacts with IAM Identity Center for user authentication and
+// access control.
+type IdentityCenterConfigurationInput struct {
+
+	// The ARN of the IAM Identity Center instance.
+	IdentityCenterInstanceArn *string
 
 	noSmithyDocumentSerde
 }
