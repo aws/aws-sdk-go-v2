@@ -38,7 +38,8 @@ type UploadDirectoryInput struct {
 	Callback PutRequestCallback
 
 	// The s3 delimeter contatenating each object key based on local file separator
-	// and file's relative path
+	// and file's relative path. If a non-defualt delimiter is used, it can not be
+	// included in any subfolders or files, which will cause error otherwise
 	S3Delimiter string
 }
 
@@ -107,7 +108,7 @@ type directoryUploader struct {
 
 func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirectoryOutput, error) {
 	u.init()
-	ch := make(chan fileChunk)
+	ch := make(chan fileEntry)
 
 	for i := 0; i < u.options.DirectoryConcurrency; i++ {
 		u.wg.Add(1)
@@ -149,9 +150,9 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 				break
 			}
 			if u.in.KeyPrefix == "" {
-				ch <- fileChunk{f, absPath}
+				ch <- fileEntry{f, absPath}
 			} else {
-				ch <- fileChunk{u.in.KeyPrefix + u.in.S3Delimiter + f, absPath}
+				ch <- fileEntry{u.in.KeyPrefix + u.in.S3Delimiter + f, absPath}
 			}
 		}
 	}
@@ -175,14 +176,14 @@ func (u *directoryUploader) init() {
 	u.traversed = make(map[string]interface{})
 }
 
-type fileChunk struct {
+type fileEntry struct {
 	key  string
 	path string
 }
 
 // traverse recursively visits each folder and sends each
 // valid file's request to worker goroutines
-func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileChunk) {
+func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileEntry) {
 	if u.getErr() != nil {
 		return
 	}
@@ -204,6 +205,10 @@ func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileChunk) 
 		key = keyPrefix + u.in.S3Delimiter + filepath.Base(path)
 	}
 	fileInfo, err := os.Lstat(absPath)
+	if err != nil {
+		u.setErr(err)
+		return
+	}
 	if fileInfo.IsDir() {
 		subFiles, err := u.traverseFolder(absPath)
 		if err != nil {
@@ -211,6 +216,10 @@ func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileChunk) 
 			return
 		}
 		for _, f := range subFiles {
+			if d := u.in.S3Delimiter; d != "/" && strings.Contains(f, d) {
+				u.setErr(fmt.Errorf("file %s contains delimiter %s", f, d))
+				return
+			}
 			u.traverse(filepath.Join(path, f), key, ch)
 		}
 	} else {
@@ -223,7 +232,7 @@ func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileChunk) 
 				return
 			}
 		}
-		ch <- fileChunk{key, absPath}
+		ch <- fileEntry{key, absPath}
 	}
 }
 
@@ -258,7 +267,7 @@ func (u *directoryUploader) traverseFolder(path string) ([]string, error) {
 	if err != nil {
 		return []string{}, err
 	}
-	subFiles, err := f.Readdir(0)
+	subFiles, err := f.ReadDir(0)
 	if err != nil {
 		return []string{}, err
 	}
@@ -296,7 +305,7 @@ func (u *directoryUploader) traverseSymlink(path string) (string, error) {
 	}
 }
 
-func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileChunk) {
+func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 	defer u.wg.Done()
 
 	for {
@@ -305,7 +314,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileChunk) {
 			break
 		}
 		if u.getErr() != nil {
-			continue
+			break
 		}
 		f, err := os.Open(data.path)
 		if err != nil {
@@ -328,13 +337,6 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileChunk) {
 			}
 		}
 	}
-}
-
-func (u *directoryUploader) mapKeyFromPath(fileName, keyPrefix string) (string, error) {
-	if u.in.S3Delimiter != "/" && strings.Contains(fileName, u.in.S3Delimiter) {
-		return "", fmt.Errorf("file %s contains the delimiter %s", fileName, u.in.S3Delimiter)
-	}
-	return keyPrefix + fileName, nil
 }
 
 func (u *directoryUploader) incrFilesUploaded(n int) {
