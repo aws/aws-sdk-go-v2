@@ -391,7 +391,6 @@ type uploadDirectoryTestData struct {
 	Delimiter           string
 	KeyPrefix           string
 	ExpectFilesUploaded int
-	ExpectFilesFailed   int
 	ExpectKeys          []string
 	ExpectError         string
 }
@@ -460,9 +459,6 @@ func testUploadDirectory(t *testing.T, bucket string, testData uploadDirectoryTe
 
 	if e, a := testData.ExpectFilesUploaded, out.ObjectsUploaded; e != a {
 		t.Errorf("expect %d files uploaded, got %d", e, a)
-	}
-	if e, a := testData.ExpectFilesFailed, out.ObjectsFailed; e != a {
-		t.Errorf("expect %d files failed, got %d", e, a)
 	}
 	for _, key := range testData.ExpectKeys {
 		resp, err := s3Client.GetObject(context.Background(),

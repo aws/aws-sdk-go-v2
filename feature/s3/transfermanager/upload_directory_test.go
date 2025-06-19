@@ -225,6 +225,12 @@ func TestUploadDirectory(t *testing.T) {
 			s3Delimiter: "@",
 			expectErr:   "contains delimiter @",
 		},
+		"error when a sub-folder contains customized delimiter": {
+			source:      filepath.Join(root, "folder-contains-non-default-delimiter"),
+			recursive:   true,
+			s3Delimiter: "@",
+			expectErr:   "contains delimiter @",
+		},
 		"error when a symlink refers to its upper dir": {
 			source:         filepath.Join(root, "multi-file-contain-symlink"),
 			followSymLinks: true,
