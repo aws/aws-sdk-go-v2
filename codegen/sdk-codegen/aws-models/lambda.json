@@ -2045,6 +2045,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources.\n  After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see\n  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id\">Customizable consumer group ID</a>.</p>"
                     }
+                },
+                "SchemaRegistryConfig": {
+                    "target": "com.amazonaws.lambda#KafkaSchemaRegistryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specific configuration settings for a Kafka schema registry.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2593,7 +2599,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and invokes the function.</p>\n         <p>For details about how to configure different event sources, see the following topics. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping\">\n            Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping\">\n            Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource\">\n            Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping\">\n            Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">\n            Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\">\n            Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html\">\n            Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>\n         <p>The following error handling options are available only for DynamoDB and Kinesis event sources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> – If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> – Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>\n         <p>For stream sources (DynamoDB, Kinesis, Amazon MSK, and self-managed Apache Kafka), the following option is also available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DestinationConfig</code> – Send discarded records to an Amazon SQS queue, Amazon SNS topic, or \n            Amazon S3 bucket.</p>\n            </li>\n         </ul>\n         <p>For information about which configuration parameters apply to each event source, see the following topics.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params\">\n          Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params\">\n          Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params\">\n          Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params\">\n          Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms\">\n          Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms\">\n          Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration\">\n          Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and invokes the function.</p>\n         <p>For details about how to configure different event sources, see the following topics. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping\">\n            Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping\">\n            Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource\">\n            Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping\">\n            Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">\n            Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\">\n            Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html\">\n            Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>\n         <p>The following error handling options are available only for DynamoDB and Kinesis event sources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> – If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> – Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>\n         <p>For stream sources (DynamoDB, Kinesis, Amazon MSK, and self-managed Apache Kafka), the following option is also available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>OnFailure</code> – Send discarded records to an Amazon SQS queue, Amazon SNS topic, or \n            Amazon S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations\">Adding a destination</a>.</p>\n            </li>\n         </ul>\n         <p>For information about which configuration parameters apply to each event source, see the following topics.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params\">\n          Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params\">\n          Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params\">\n          Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params\">\n          Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms\">\n          Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms\">\n          Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration\">\n          Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a mapping between an event source and an AWS Lambda function",
@@ -3202,7 +3208,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq\">dead-letter queue</a> for\n      failed asynchronous invocations.</p>"
+                "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-dlq\">dead-letter queue</a> for\n      failed asynchronous invocations.</p>"
             }
         },
         "com.amazonaws.lambda#DeleteAlias": {
@@ -3354,6 +3360,24 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html\">event source\n        mapping</a>. You can get the identifier of a mapping from the output of <a>ListEventSourceMappings</a>.</p>\n         <p>When you delete an event source mapping, it enters a <code>Deleting</code> state and might not be completely\n      deleted for several seconds.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a Lambda function event source mapping",
+                        "documentation": "The following example deletes an event source mapping. To get a mapping's UUID, use ListEventSourceMappings.",
+                        "input": {
+                            "UUID": "14e0db71-xmpl-4eb5-b481-8945cf9d10c2"
+                        },
+                        "output": {
+                            "UUID": "14e0db71-xmpl-4eb5-b481-8945cf9d10c2",
+                            "BatchSize": 5,
+                            "EventSourceArn": "arn:aws:sqs:us-west-2:123456789012:my-queue",
+                            "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
+                            "LastModified": "2016-11-21T19:49:20.006Z",
+                            "State": "Enabled",
+                            "StateTransitionReason": "USER_INITIATED"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2015-03-31/event-source-mappings/{UUID}",
@@ -3830,7 +3854,7 @@
                 "OnSuccess": {
                     "target": "com.amazonaws.lambda#OnSuccess",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination configuration for successful invocations.</p>"
+                        "smithy.api#documentation": "<p>The destination configuration for successful invocations. Not supported in <code>CreateEventSourceMapping</code> or <code>UpdateEventSourceMapping</code>.</p>"
                     }
                 },
                 "OnFailure": {
@@ -3841,7 +3865,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A configuration object that specifies the destination of an event after Lambda processes it.</p>"
+                "smithy.api#documentation": "<p>A configuration object that specifies the destination of an event after Lambda processes it. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations\">Adding a destination</a>.</p>"
             }
         },
         "com.amazonaws.lambda#DocumentDBEventSourceConfig": {
@@ -4231,7 +4255,7 @@
                 "LastProcessingResult": {
                     "target": "com.amazonaws.lambda#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The result of the last Lambda invocation of your function.</p>"
+                        "smithy.api#documentation": "<p>The result of the event source mapping's last processing attempt.</p>"
                     }
                 },
                 "State": {
@@ -5309,6 +5333,29 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns details about an event source mapping. You can get the identifier of a mapping from the output of\n        <a>ListEventSourceMappings</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a Lambda function's event source mapping",
+                        "documentation": "The following example returns details about an event source mapping. To get a mapping's UUID, use ListEventSourceMappings.",
+                        "input": {
+                            "UUID": "14e0db71-xmpl-4eb5-b481-8945cf9d10c2"
+                        },
+                        "output": {
+                            "UUID": "14e0db71-xmpl-4eb5-b481-8945cf9d10c2",
+                            "BatchSize": 500,
+                            "EventSourceArn": "arn:aws:sqs:us-east-2:123456789012:mySQSqueue",
+                            "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:myFunction",
+                            "LastModified": "2016-11-21T19:49:20.006Z",
+                            "LastProcessingResult": "No records processed",
+                            "State": "Creating",
+                            "StateTransitionReason": "User action",
+                            "DestinationConfig": {},
+                            "MaximumRecordAgeInSeconds": 604800,
+                            "BisectBatchOnFunctionError": false,
+                            "MaximumRetryAttempts": 10000
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-03-31/event-source-mappings/{UUID}",
@@ -5867,6 +5914,28 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the configuration for asynchronous invocation for a function, version, or alias.</p>\n         <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get an asynchronous invocation configuration",
+                        "documentation": "The following example returns the asynchronous invocation configuration for the BLUE alias of a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "BLUE"
+                        },
+                        "output": {
+                            "LastModified": "2016-11-21T19:49:20.006Z",
+                            "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE",
+                            "MaximumRetryAttempts": 0,
+                            "MaximumEventAgeInSeconds": 3600,
+                            "DestinationConfig": {
+                                "OnSuccess": {},
+                                "OnFailure": {
+                                    "Destination": "arn:aws:sqs:us-east-2:123456789012:failed-invocations"
+                                }
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
@@ -7645,6 +7714,124 @@
                 "smithy.api#documentation": "<p>Lambda couldn't decrypt the environment variables because the KMS key was not\n      found. Check the function's KMS key settings.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 502
+            }
+        },
+        "com.amazonaws.lambda#KafkaSchemaRegistryAccessConfig": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambda#KafkaSchemaRegistryAuthType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of authentication Lambda uses to access your schema registry.\n    </p>"
+                    }
+                },
+                "URI": {
+                    "target": "com.amazonaws.lambda#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specific access configuration settings that tell Lambda how to authenticate with your schema registry.</p>\n         <p>If you're working with an Glue schema registry, don't provide authentication details in this object.\n      Instead, ensure that your execution role has the required permissions for Lambda to access your cluster.</p>\n         <p>If you're working with a Confluent schema registry, choose the authentication method in the <code>Type</code> field,\n      and provide the Secrets Manager secret ARN in the <code>URI</code> field.</p>"
+            }
+        },
+        "com.amazonaws.lambda#KafkaSchemaRegistryAccessConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lambda#KafkaSchemaRegistryAccessConfig"
+            }
+        },
+        "com.amazonaws.lambda#KafkaSchemaRegistryAuthType": {
+            "type": "enum",
+            "members": {
+                "BASIC_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASIC_AUTH"
+                    }
+                },
+                "CLIENT_CERTIFICATE_TLS_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLIENT_CERTIFICATE_TLS_AUTH"
+                    }
+                },
+                "SERVER_ROOT_CA_CERTIFICATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVER_ROOT_CA_CERTIFICATE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lambda#KafkaSchemaRegistryConfig": {
+            "type": "structure",
+            "members": {
+                "SchemaRegistryURI": {
+                    "target": "com.amazonaws.lambda#SchemaRegistryUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.</p>\n         <ul>\n            <li>\n               <p>For Glue schema registries, use the ARN of the registry.</p>\n            </li>\n            <li>\n               <p>For Confluent schema registries, use the URL of the registry.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "EventRecordFormat": {
+                    "target": "com.amazonaws.lambda#SchemaRegistryEventRecordFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record format that Lambda delivers to your function after schema validation.</p>\n         <ul>\n            <li>\n               <p>Choose <code>JSON</code> to have Lambda deliver the record to your function as a standard JSON object.</p>\n            </li>\n            <li>\n               <p>Choose <code>SOURCE</code> to have Lambda deliver the record to your function in its original source format.\n          Lambda removes all schema metadata, such as the schema ID, before sending the record to your function.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "AccessConfigs": {
+                    "target": "com.amazonaws.lambda#KafkaSchemaRegistryAccessConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of access configuration objects that tell Lambda how to authenticate with your schema registry.</p>"
+                    }
+                },
+                "SchemaValidationConfigs": {
+                    "target": "com.amazonaws.lambda#KafkaSchemaValidationConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of schema validation configuration objects, which tell Lambda the message\n  attributes you want to validate and filter using your schema registry.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specific configuration settings for a Kafka schema registry.</p>"
+            }
+        },
+        "com.amazonaws.lambda#KafkaSchemaValidationAttribute": {
+            "type": "enum",
+            "members": {
+                "KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KEY"
+                    }
+                },
+                "VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lambda#KafkaSchemaValidationConfig": {
+            "type": "structure",
+            "members": {
+                "Attribute": {
+                    "target": "com.amazonaws.lambda#KafkaSchemaValidationAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The attributes you want your schema registry to validate and filter for. If you selected <code>JSON</code> as the\n        <code>EventRecordFormat</code>, Lambda also deserializes the selected message attributes.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specific schema validation configuration settings that tell Lambda the message\n  attributes you want to validate and filter using your schema registry.</p>"
+            }
+        },
+        "com.amazonaws.lambda#KafkaSchemaValidationConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lambda#KafkaSchemaValidationConfig"
             }
         },
         "com.amazonaws.lambda#LastUpdateStatus": {
@@ -9693,7 +9880,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A destination for events that failed processing.</p>"
+                "smithy.api#documentation": "<p>A destination for events that failed processing. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations\">Adding a destination</a>.</p>"
             }
         },
         "com.amazonaws.lambda#OnSuccess": {
@@ -9707,7 +9894,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A destination for events that were processed successfully.</p>\n         <p>To retain records of successful <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations\">asynchronous invocations</a>,\n      you can configure an Amazon SNS topic, Amazon SQS queue, Lambda function,\n      or Amazon EventBridge event bus as the destination.</p>"
+                "smithy.api#documentation": "<p>A destination for events that were processed successfully.</p>\n         <p>To retain records of successful <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations\">asynchronous invocations</a>,\n      you can configure an Amazon SNS topic, Amazon SQS queue, Lambda function,\n      or Amazon EventBridge event bus as the destination.</p>\n         <note>\n            <p>\n               <code>OnSuccess</code> is not supported in <code>CreateEventSourceMapping</code> or <code>UpdateEventSourceMapping</code> requests.</p>\n         </note>"
             }
         },
         "com.amazonaws.lambda#OrganizationId": {
@@ -10414,6 +10601,27 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Configures options for <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html\">asynchronous\n        invocation</a> on a function, version, or alias. If a configuration already exists for a function, version,\n      or alias, this operation overwrites it. If you exclude any settings, they are removed. To set one option without\n      affecting existing settings for other options, use <a>UpdateFunctionEventInvokeConfig</a>.</p>\n         <p>By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains\n      events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous\n      invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with\n        <a>UpdateFunctionConfiguration</a>.</p>\n         <p>To send an invocation record to a queue, topic, S3 bucket, function, or event bus, specify a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations\">destination</a>. You can configure separate destinations for successful invocations (on-success) and events\n      that fail all processing attempts (on-failure). You can configure destinations in addition to or instead of a\n      dead-letter queue.</p>\n         <note>\n            <p>S3 buckets are supported only for on-failure destinations. To retain records of successful invocations, use another destination type.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To configure error handling for asynchronous invocation",
+                        "documentation": "The following example sets a maximum event age of one hour and disables retries for the specified function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "MaximumRetryAttempts": 0,
+                            "MaximumEventAgeInSeconds": 3600
+                        },
+                        "output": {
+                            "LastModified": "2016-11-21T19:49:20.006Z",
+                            "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function:$LATEST",
+                            "MaximumRetryAttempts": 0,
+                            "MaximumEventAgeInSeconds": 3600,
+                            "DestinationConfig": {
+                                "OnSuccess": {},
+                                "OnFailure": {}
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
@@ -11468,6 +11676,33 @@
                 "smithy.api#documentation": "<p>(Amazon SQS only) The scaling configuration for the event source. To remove the configuration, pass an empty value.</p>"
             }
         },
+        "com.amazonaws.lambda#SchemaRegistryEventRecordFormat": {
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                },
+                "SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lambda#SchemaRegistryUri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10000
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$"
+            }
+        },
         "com.amazonaws.lambda#SecurityGroupId": {
             "type": "string"
         },
@@ -11503,7 +11738,13 @@
                 "ConsumerGroupId": {
                     "target": "com.amazonaws.lambda#URI",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources.\n  After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see\n  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id\">Customizable consumer group ID</a>.</p>"
+                        "smithy.api#documentation": "<p> The identifier for the Kafka consumer group to join. The consumer group ID must be unique\n      among all your Kafka event sources. After creating a Kafka event source mapping with the\n      consumer group ID specified, you cannot update this value. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka-process.html#services-smaa-topic-add\">Customizable consumer group ID</a>.</p>"
+                    }
+                },
+                "SchemaRegistryConfig": {
+                    "target": "com.amazonaws.lambda#KafkaSchemaRegistryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specific configuration settings for a Kafka schema registry.</p>"
                     }
                 }
             },
@@ -12645,7 +12886,29 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an event source mapping. You can change the function that Lambda invokes, or pause\n      invocation and resume later from the same location.</p>\n         <p>For details about how to configure different event sources, see the following topics. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping\">\n            Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping\">\n            Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource\">\n            Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping\">\n            Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">\n            Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\">\n            Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html\">\n            Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>\n         <p>The following error handling options are available only for DynamoDB and Kinesis event sources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> – If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> – Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>\n         <p>For stream sources (DynamoDB, Kinesis, Amazon MSK, and self-managed Apache Kafka), the following option is also available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DestinationConfig</code> – Send discarded records to an Amazon SQS queue, Amazon SNS topic, or \n            Amazon S3 bucket.</p>\n            </li>\n         </ul>\n         <p>For information about which configuration parameters apply to each event source, see the following topics.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params\">\n          Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params\">\n          Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params\">\n          Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params\">\n          Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms\">\n          Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms\">\n          Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration\">\n          Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Updates an event source mapping. You can change the function that Lambda invokes, or pause\n      invocation and resume later from the same location.</p>\n         <p>For details about how to configure different event sources, see the following topics. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping\">\n            Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping\">\n            Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource\">\n            Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping\">\n            Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">\n            Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\">\n            Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html\">\n            Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>\n         <p>The following error handling options are available only for DynamoDB and Kinesis event sources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> – If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> – Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>\n         <p>For stream sources (DynamoDB, Kinesis, Amazon MSK, and self-managed Apache Kafka), the following option is also available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>OnFailure</code> – Send discarded records to an Amazon SQS queue, Amazon SNS topic, or \n            Amazon S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations\">Adding a destination</a>.</p>\n            </li>\n         </ul>\n         <p>For information about which configuration parameters apply to each event source, see the following topics.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params\">\n          Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params\">\n          Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params\">\n          Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params\">\n          Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms\">\n          Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms\">\n          Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration\">\n          Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a Lambda function event source mapping",
+                        "documentation": "This operation updates a Lambda function event source mapping",
+                        "input": {
+                            "UUID": "1234xCy789012",
+                            "FunctionName": "myFunction",
+                            "Enabled": true,
+                            "BatchSize": 123
+                        },
+                        "output": {
+                            "UUID": "1234xCy789012",
+                            "BatchSize": 123,
+                            "EventSourceArn": "arn:aws:s3:::examplebucket/*",
+                            "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:myFunction",
+                            "LastModified": "2016-11-21T19:49:20.006Z",
+                            "LastProcessingResult": "",
+                            "State": "",
+                            "StateTransitionReason": ""
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2015-03-31/event-source-mappings/{UUID}",
@@ -12747,6 +13010,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>(Amazon SQS only) The scaling configuration for the event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency\">Configuring maximum concurrency for Amazon SQS event sources</a>.</p>"
                     }
+                },
+                "AmazonManagedKafkaEventSourceConfig": {
+                    "target": "com.amazonaws.lambda#AmazonManagedKafkaEventSourceConfig"
+                },
+                "SelfManagedKafkaEventSourceConfig": {
+                    "target": "com.amazonaws.lambda#SelfManagedKafkaEventSourceConfig"
                 },
                 "DocumentDBEventSourceConfig": {
                     "target": "com.amazonaws.lambda#DocumentDBEventSourceConfig",

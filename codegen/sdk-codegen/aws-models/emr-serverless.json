@@ -140,6 +140,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The scheduler configuration for batch and streaming jobs running on this application. Supported with release labels emr-7.0.0 and above.</p>"
                     }
+                },
+                "identityCenterConfiguration": {
+                    "target": "com.amazonaws.emrserverless#IdentityCenterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Identity Center configuration applied to enable trusted identity propagation. </p>"
+                    }
                 }
             },
             "traits": {
@@ -1524,6 +1530,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The scheduler configuration for batch and streaming jobs running on this application. Supported with release labels emr-7.0.0 and above.</p>"
                     }
+                },
+                "identityCenterConfiguration": {
+                    "target": "com.amazonaws.emrserverless#IdentityCenterConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Identity Center Configuration accepts the Identity Center instance parameter required to enable trusted identity propagation. This configuration allows identity propagation between integrated services and the Identity Center instance.</p>"
+                    }
                 }
             }
         },
@@ -1929,6 +1941,56 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):iam::([0-9]{12}):(role((\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F))[\\w+=,.@-]+)$"
+            }
+        },
+        "com.amazonaws.emrserverless#IdentityCenterApplicationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
+            }
+        },
+        "com.amazonaws.emrserverless#IdentityCenterConfiguration": {
+            "type": "structure",
+            "members": {
+                "identityCenterInstanceArn": {
+                    "target": "com.amazonaws.emrserverless#IdentityCenterInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance.</p>"
+                    }
+                },
+                "identityCenterApplicationArn": {
+                    "target": "com.amazonaws.emrserverless#IdentityCenterApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the EMR Serverless created IAM Identity Center Application that provides trusted-identity propagation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The IAM Identity Center Configuration that includes the Identify Center instance and application ARNs that provide trusted-identity propagation.</p>"
+            }
+        },
+        "com.amazonaws.emrserverless#IdentityCenterConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "identityCenterInstanceArn": {
+                    "target": "com.amazonaws.emrserverless#IdentityCenterInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the IAM Identity Center configuration used to enable or disable trusted identity propagation. When provided, this configuration determines how the application interacts with IAM Identity Center for user authentication and access control.</p>"
+            }
+        },
+        "com.amazonaws.emrserverless#IdentityCenterInstanceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
             }
         },
         "com.amazonaws.emrserverless#ImageConfiguration": {
@@ -4034,6 +4096,12 @@
                     "target": "com.amazonaws.emrserverless#SchedulerConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The scheduler configuration for batch and streaming jobs running on this application. Supported with release labels emr-7.0.0 and above.</p>"
+                    }
+                },
+                "identityCenterConfiguration": {
+                    "target": "com.amazonaws.emrserverless#IdentityCenterConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the IAM Identity Center configuration used to enable or disable trusted identity propagation. When provided, this configuration determines how the application interacts with IAM Identity Center for user authentication and access control.</p>"
                     }
                 }
             }

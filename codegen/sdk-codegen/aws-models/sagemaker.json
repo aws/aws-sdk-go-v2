@@ -5852,6 +5852,314 @@
         "com.amazonaws.sagemaker#CertifyForMarketplace": {
             "type": "boolean"
         },
+        "com.amazonaws.sagemaker#CfnCreateTemplateProvider": {
+            "type": "structure",
+            "members": {
+                "TemplateName": {
+                    "target": "com.amazonaws.sagemaker#CfnTemplateName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> A unique identifier for the template within the project. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateURL": {
+                    "target": "com.amazonaws.sagemaker#CfnTemplateURL",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The Amazon S3 URL of the CloudFormation template. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleARN": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The IAM role that CloudFormation assumes when creating the stack. </p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.sagemaker#CfnStackCreateParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of CloudFormation stack parameters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The CloudFormation template provider configuration for creating infrastructure resources. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnStackCreateParameter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.sagemaker#CfnStackParameterKey",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The name of the CloudFormation parameter. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#CfnStackParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The value of the CloudFormation parameter. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A key-value pair that represents a parameter for the CloudFormation stack. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnStackCreateParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CfnStackCreateParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 180
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CfnStackDetail": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#CfnStackName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the CloudFormation stack. </p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.sagemaker#CfnStackId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the CloudFormation stack. </p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.sagemaker#CfnStackStatusMessage",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> A human-readable message about the stack's current status. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Details about the CloudFormation stack. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnStackId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(?=.{1,256}$)arn:aws[a-z\\-]*:cloudformation:[a-z0-9\\-]*:[0-9]{12}:stack/[a-zA-Z][a-zA-Z0-9-]{0,127}/.*$"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnStackName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9-]{0,127}$"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnStackParameter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.sagemaker#CfnStackParameterKey",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The name of the CloudFormation parameter. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#CfnStackParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The value of the CloudFormation parameter. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A key-value pair representing a parameter used in the CloudFormation stack. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnStackParameterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^.{1,255}$"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnStackParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^.{0,4096}$"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnStackParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CfnStackParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 180
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CfnStackStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^.{1,4096}$"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnStackUpdateParameter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.sagemaker#CfnStackParameterKey",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The name of the CloudFormation parameter. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#CfnStackParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The value of the CloudFormation parameter. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A key-value pair representing a parameter used in the CloudFormation stack. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnStackUpdateParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CfnStackUpdateParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 180
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CfnTemplateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^(?=.{1,32}$)[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnTemplateProviderDetail": {
+            "type": "structure",
+            "members": {
+                "TemplateName": {
+                    "target": "com.amazonaws.sagemaker#CfnTemplateName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the template within the project. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateURL": {
+                    "target": "com.amazonaws.sagemaker#CfnTemplateURL",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The Amazon S3 URL of the CloudFormation template. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleARN": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The IAM role used by CloudFormation to create the stack. </p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.sagemaker#CfnStackParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of CloudFormation stack parameters.</p>"
+                    }
+                },
+                "StackDetail": {
+                    "target": "com.amazonaws.sagemaker#CfnStackDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Information about the CloudFormation stack created by the template provider. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Details about a CloudFormation template provider configuration and associated provisioning information. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnTemplateURL": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^(?=.{1,1024}$)(https)://([^/]+)/(.+)$"
+            }
+        },
+        "com.amazonaws.sagemaker#CfnUpdateTemplateProvider": {
+            "type": "structure",
+            "members": {
+                "TemplateName": {
+                    "target": "com.amazonaws.sagemaker#CfnTemplateName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the template to update within the project. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateURL": {
+                    "target": "com.amazonaws.sagemaker#CfnTemplateURL",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The Amazon S3 URL of the CloudFormation template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.sagemaker#CfnStackUpdateParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of CloudFormation stack parameters. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Contains configuration details for updating an existing CloudFormation template provider in the project. </p>"
+            }
+        },
         "com.amazonaws.sagemaker#Channel": {
             "type": "structure",
             "members": {
@@ -14758,6 +15066,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of key-value pairs that you want to use to organize and track your Amazon Web Services resource costs. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>"
                     }
+                },
+                "TemplateProviders": {
+                    "target": "com.amazonaws.sagemaker#CreateTemplateProviderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of template provider configurations for creating infrastructure resources for the project. </p>"
+                    }
                 }
             },
             "traits": {
@@ -14943,6 +15257,32 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#CreateTemplateProvider": {
+            "type": "structure",
+            "members": {
+                "CfnTemplateProvider": {
+                    "target": "com.amazonaws.sagemaker#CfnCreateTemplateProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The CloudFormation template provider configuration for creating infrastructure resources. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Contains configuration details for a template provider. Only one type of template provider can be specified. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CreateTemplateProviderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CreateTemplateProvider"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.sagemaker#CreateTrainingJob": {
@@ -26469,6 +26809,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The status of the project.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "TemplateProviderDetails": {
+                    "target": "com.amazonaws.sagemaker#TemplateProviderDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of template providers associated with the project. </p>"
                     }
                 },
                 "CreatedBy": {
@@ -58991,6 +59337,12 @@
                         "smithy.api#documentation": "<p>A timestamp specifying when the project was created.</p>"
                     }
                 },
+                "TemplateProviderDetails": {
+                    "target": "com.amazonaws.sagemaker#TemplateProviderDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of template providers associated with the project. </p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
@@ -61397,7 +61749,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.sagemaker#TrainingInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ML compute instance type. </p> <note> <p>SageMaker Training on Amazon Elastic Compute Cloud (EC2) P4de instances is in preview release starting December 9th, 2022. </p> <p> <a href=\"http://aws.amazon.com/ec2/instance-types/p4/\">Amazon EC2 P4de instances</a> (currently in preview) are powered by 8 NVIDIA A100 GPUs with 80GB high-performance HBM2e GPU memory, which accelerate the speed of training ML models that need to be trained on large datasets of high-resolution data. In this preview release, Amazon SageMaker supports ML training jobs on P4de instances (<code>ml.p4de.24xlarge</code>) to reduce model training time. The <code>ml.p4de.24xlarge</code> instances are available in the following Amazon Web Services Regions. </p> <ul> <li> <p>US East (N. Virginia) (us-east-1)</p> </li> <li> <p>US West (Oregon) (us-west-2)</p> </li> </ul> <p>To request quota limit increase and start using P4de instances, contact the SageMaker Training service team through your account team.</p> </note>"
+                        "smithy.api#documentation": "<p>The ML compute instance type. </p>"
                     }
                 },
                 "InstanceCount": {
@@ -68732,6 +69084,32 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128000
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#TemplateProviderDetail": {
+            "type": "structure",
+            "members": {
+                "CfnTemplateProviderDetail": {
+                    "target": "com.amazonaws.sagemaker#CfnTemplateProviderDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Details about a CloudFormation template provider configuration and associated provisioning information. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Details about a template provider configuration and associated provisioning information. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#TemplateProviderDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#TemplateProviderDetail"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
                 }
             }
         },
@@ -76346,6 +76724,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>. In addition, the project must have tag update constraints set in order to include this parameter in the request. For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-resourceupdate.html\">Amazon Web Services Service Catalog Tag Update Constraints</a>.</p>"
                     }
+                },
+                "TemplateProvidersToUpdate": {
+                    "target": "com.amazonaws.sagemaker#UpdateTemplateProviderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The template providers to update in the project. </p>"
+                    }
                 }
             },
             "traits": {
@@ -76439,6 +76823,32 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateTemplateProvider": {
+            "type": "structure",
+            "members": {
+                "CfnTemplateProvider": {
+                    "target": "com.amazonaws.sagemaker#CfnUpdateTemplateProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The CloudFormation template provider configuration to update. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Contains configuration details for updating an existing template provider in the project. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateTemplateProviderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#UpdateTemplateProvider"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.sagemaker#UpdateTrainingJob": {
