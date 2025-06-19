@@ -1,8 +1,0 @@
-{
-    "id": "043d3e40-706b-4f8f-a812-124e9a3b809b",
-    "type": "feature",
-    "description": "Support Schema Registry feature for Kafka Event Source Mapping. Customers can now configure a Schema Registry to enable schema validation and filtering for Avro, Protobuf, and JSON-formatted events in Lambda for Kafka Event Source.",
-    "modules": [
-        "service/lambda"
-    ]
-}

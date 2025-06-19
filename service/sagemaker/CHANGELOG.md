@@ -1,3 +1,7 @@
+# v1.198.0 (2025-06-19)
+
+* **Feature**: This release introduces alternative support for utilizing CFN templates from S3 for SageMaker Projects.
+
 # v1.197.0 (2025-06-18)
 
 * **Feature**: Add support for p6-b200 instance type for SageMaker Hyperpod

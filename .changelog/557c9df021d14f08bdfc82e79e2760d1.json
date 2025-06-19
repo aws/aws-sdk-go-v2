@@ -1,8 +1,0 @@
-{
-    "id": "557c9df0-21d1-4f08-bdfc-82e79e2760d1",
-    "type": "feature",
-    "description": "This release introduces alternative support for utilizing CFN templates from S3 for SageMaker Projects.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

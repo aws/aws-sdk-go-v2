@@ -1,3 +1,7 @@
+# v1.72.0 (2025-06-19)
+
+* **Feature**: Support Schema Registry feature for Kafka Event Source Mapping. Customers can now configure a Schema Registry to enable schema validation and filtering for Avro, Protobuf, and JSON-formatted events in Lambda for Kafka Event Source.
+
 # v1.71.5 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

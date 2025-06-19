@@ -1,3 +1,7 @@
+# v1.32.0 (2025-06-19)
+
+* **Feature**: This release adds the capability to enable IAM IdentityCenter Trusted Identity Propagation for users running Interactive Sessions on EMR Serverless Applications.
+
 # v1.31.1 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

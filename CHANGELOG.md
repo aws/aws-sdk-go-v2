@@ -1,3 +1,17 @@
+# Release (2025-06-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.32.0](service/emrserverless/CHANGELOG.md#v1320-2025-06-19)
+  * **Feature**: This release adds the capability to enable IAM IdentityCenter Trusted Identity Propagation for users running Interactive Sessions on EMR Serverless Applications.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.72.0](service/lambda/CHANGELOG.md#v1720-2025-06-19)
+  * **Feature**: Support Schema Registry feature for Kafka Event Source Mapping. Customers can now configure a Schema Registry to enable schema validation and filtering for Avro, Protobuf, and JSON-formatted events in Lambda for Kafka Event Source.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.19.0](service/paymentcryptography/CHANGELOG.md#v1190-2025-06-19)
+  * **Feature**: Additional support for managing HMAC keys that adheres to changes documented in X9.143-2021 and provides better interoperability for key import/export
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.18.0](service/paymentcryptographydata/CHANGELOG.md#v1180-2025-06-19)
+  * **Feature**: Additional support for managing HMAC keys that adheres to changes documented in X9.143-2021 and provides better interoperability for key import/export
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.198.0](service/sagemaker/CHANGELOG.md#v11980-2025-06-19)
+  * **Feature**: This release introduces alternative support for utilizing CFN templates from S3 for SageMaker Projects.
+
 # Release (2025-06-18)
 
 ## General Highlights

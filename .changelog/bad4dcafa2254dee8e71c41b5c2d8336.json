@@ -1,8 +1,0 @@
-{
-    "id": "bad4dcaf-a225-4dee-8e71-c41b5c2d8336",
-    "type": "feature",
-    "description": "This release of the SDK has the API and documentation for the createcustommodel API. This feature lets you copy a trained model into Amazon Bedrock for inference.",
-    "modules": [
-        "service/bedrock"
-    ]
-}
