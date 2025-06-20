@@ -9966,6 +9966,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>A request to create a data quality ruleset.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -13025,6 +13026,50 @@
                 "target": "com.amazonaws.glue#DataOperation"
             }
         },
+        "com.amazonaws.glue#DataQualityAggregatedMetrics": {
+            "type": "structure",
+            "members": {
+                "TotalRowsProcessed": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of rows that were processed during the data quality evaluation.</p>"
+                    }
+                },
+                "TotalRowsPassed": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of rows that passed all applicable data quality rules.</p>"
+                    }
+                },
+                "TotalRowsFailed": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of rows that failed one or more data quality rules.</p>"
+                    }
+                },
+                "TotalRulesProcessed": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of data quality rules that were evaluated.</p>"
+                    }
+                },
+                "TotalRulesPassed": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of data quality rules that passed their evaluation criteria.</p>"
+                    }
+                },
+                "TotalRulesFailed": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of data quality rules that failed their evaluation criteria.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of metrics showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results.</p>"
+            }
+        },
         "com.amazonaws.glue#DataQualityAnalyzerResult": {
             "type": "structure",
             "members": {
@@ -13316,6 +13361,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <code>DataQualityObservation</code> objects representing the observations generated after evaluating the rules and analyzers. </p>"
                     }
+                },
+                "AggregatedMetrics": {
+                    "target": "com.amazonaws.glue#DataQualityAggregatedMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A summary of <code>DataQualityAggregatedMetrics</code> objects showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results. </p>"
+                    }
                 }
             },
             "traits": {
@@ -13536,6 +13587,12 @@
                     "target": "com.amazonaws.glue#DataQualityRuleResultDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The evaluated rule.</p>"
+                    }
+                },
+                "RuleMetrics": {
+                    "target": "com.amazonaws.glue#RuleMetricsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map containing metrics associated with the evaluation of the rule based on row-level results. </p>"
                     }
                 }
             },
@@ -20429,9 +20486,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <code>DataQualityObservation</code> objects representing the observations generated after evaluating the rules and analyzers. </p>"
                     }
+                },
+                "AggregatedMetrics": {
+                    "target": "com.amazonaws.glue#DataQualityAggregatedMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A summary of <code>DataQualityAggregatedMetrics</code> objects showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results. </p>"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>The response for the data quality result.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -20566,6 +20630,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>The response for the Data Quality rule recommendation run.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -20803,6 +20868,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>Returns the data quality ruleset response.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -35164,6 +35230,18 @@
         "com.amazonaws.glue#RowTag": {
             "type": "string"
         },
+        "com.amazonaws.glue#RuleMetricsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#NameString"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#NullableDouble"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.glue#RulesetNames": {
             "type": "list",
             "member": {
@@ -38689,6 +38767,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>The request of the Data Quality rule recommendation request.</p>",
                 "smithy.api#input": {}
             }
         },

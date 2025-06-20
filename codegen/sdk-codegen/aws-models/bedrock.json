@@ -6845,6 +6845,56 @@
                 }
             }
         },
+        "com.amazonaws.bedrock#GuardrailContentFiltersTier": {
+            "type": "structure",
+            "members": {
+                "tierName": {
+                    "target": "com.amazonaws.bedrock#GuardrailContentFiltersTierName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier that your guardrail uses for content filters. Valid values include:</p> <ul> <li> <p> <code>CLASSIC</code> tier – Provides established guardrails functionality supporting English, French, and Spanish languages.</p> </li> <li> <p> <code>STANDARD</code> tier – Provides a more robust solution than the <code>CLASSIC</code> tier and has more comprehensive language support. This tier requires that your guardrail use <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html\">cross-Region inference</a>.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tier that your guardrail uses for content filters.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContentFiltersTierConfig": {
+            "type": "structure",
+            "members": {
+                "tierName": {
+                    "target": "com.amazonaws.bedrock#GuardrailContentFiltersTierName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier that your guardrail uses for content filters. Valid values include:</p> <ul> <li> <p> <code>CLASSIC</code> tier – Provides established guardrails functionality supporting English, French, and Spanish languages.</p> </li> <li> <p> <code>STANDARD</code> tier – Provides a more robust solution than the <code>CLASSIC</code> tier and has more comprehensive language support. This tier requires that your guardrail use <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html\">cross-Region inference</a>.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tier that your guardrail uses for content filters. Consider using a tier that balances performance, accuracy, and compatibility with your existing generative AI workflows.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContentFiltersTierName": {
+            "type": "enum",
+            "members": {
+                "CLASSIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLASSIC"
+                    }
+                },
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrock#GuardrailContentPolicy": {
             "type": "structure",
             "members": {
@@ -6852,6 +6902,12 @@
                     "target": "com.amazonaws.bedrock#GuardrailContentFilters",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the type of the content filter and how strongly it should apply to prompts and model responses.</p>"
+                    }
+                },
+                "tier": {
+                    "target": "com.amazonaws.bedrock#GuardrailContentFiltersTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier that your guardrail uses for content filters.</p>"
                     }
                 }
             },
@@ -6867,6 +6923,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the type of the content filter and how strongly it should apply to prompts and model responses.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tierConfig": {
+                    "target": "com.amazonaws.bedrock#GuardrailContentFiltersTierConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier that your guardrail uses for content filters.</p>"
                     }
                 }
             },
@@ -8201,6 +8263,12 @@
                         "smithy.api#documentation": "<p>A list of policies related to topics that the guardrail should deny.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "tier": {
+                    "target": "com.amazonaws.bedrock#GuardrailTopicsTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier that your guardrail uses for denied topic filters.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8215,6 +8283,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of policies related to topics that the guardrail should deny.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tierConfig": {
+                    "target": "com.amazonaws.bedrock#GuardrailTopicsTierConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier that your guardrail uses for denied topic filters.</p>"
                     }
                 }
             },
@@ -8255,6 +8329,56 @@
                     "min": 1,
                     "max": 30
                 }
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailTopicsTier": {
+            "type": "structure",
+            "members": {
+                "tierName": {
+                    "target": "com.amazonaws.bedrock#GuardrailTopicsTierName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier that your guardrail uses for denied topic filters. Valid values include:</p> <ul> <li> <p> <code>CLASSIC</code> tier – Provides established guardrails functionality supporting English, French, and Spanish languages.</p> </li> <li> <p> <code>STANDARD</code> tier – Provides a more robust solution than the <code>CLASSIC</code> tier and has more comprehensive language support. This tier requires that your guardrail use <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html\">cross-Region inference</a>.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tier that your guardrail uses for denied topic filters.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailTopicsTierConfig": {
+            "type": "structure",
+            "members": {
+                "tierName": {
+                    "target": "com.amazonaws.bedrock#GuardrailTopicsTierName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier that your guardrail uses for denied topic filters. Valid values include:</p> <ul> <li> <p> <code>CLASSIC</code> tier – Provides established guardrails functionality supporting English, French, and Spanish languages.</p> </li> <li> <p> <code>STANDARD</code> tier – Provides a more robust solution than the <code>CLASSIC</code> tier and has more comprehensive language support. This tier requires that your guardrail use <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html\">cross-Region inference</a>.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tier that your guardrail uses for denied topic filters. Consider using a tier that balances performance, accuracy, and compatibility with your existing generative AI workflows.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailTopicsTierName": {
+            "type": "enum",
+            "members": {
+                "CLASSIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLASSIC"
+                    }
+                },
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrock#GuardrailVersion": {
