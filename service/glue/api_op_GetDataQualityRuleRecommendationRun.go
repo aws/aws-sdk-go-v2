@@ -38,6 +38,7 @@ type GetDataQualityRuleRecommendationRunInput struct {
 	noSmithyDocumentSerde
 }
 
+// The response for the Data Quality rule recommendation run.
 type GetDataQualityRuleRecommendationRunOutput struct {
 
 	// The date and time when this run was completed.

@@ -218,6 +218,26 @@ func (GuardrailContentFilterAction) Values() []GuardrailContentFilterAction {
 	}
 }
 
+type GuardrailContentFiltersTierName string
+
+// Enum values for GuardrailContentFiltersTierName
+const (
+	GuardrailContentFiltersTierNameClassic  GuardrailContentFiltersTierName = "CLASSIC"
+	GuardrailContentFiltersTierNameStandard GuardrailContentFiltersTierName = "STANDARD"
+)
+
+// Values returns all known values for GuardrailContentFiltersTierName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailContentFiltersTierName) Values() []GuardrailContentFiltersTierName {
+	return []GuardrailContentFiltersTierName{
+		"CLASSIC",
+		"STANDARD",
+	}
+}
+
 type GuardrailContentFilterType string
 
 // Enum values for GuardrailContentFilterType
@@ -486,6 +506,25 @@ func (GuardrailTopicAction) Values() []GuardrailTopicAction {
 	return []GuardrailTopicAction{
 		"BLOCK",
 		"NONE",
+	}
+}
+
+type GuardrailTopicsTierName string
+
+// Enum values for GuardrailTopicsTierName
+const (
+	GuardrailTopicsTierNameClassic  GuardrailTopicsTierName = "CLASSIC"
+	GuardrailTopicsTierNameStandard GuardrailTopicsTierName = "STANDARD"
+)
+
+// Values returns all known values for GuardrailTopicsTierName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailTopicsTierName) Values() []GuardrailTopicsTierName {
+	return []GuardrailTopicsTierName{
+		"CLASSIC",
+		"STANDARD",
 	}
 }
 

@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use the SearchText operation to search for geocode and place information. You
-// can then complete a follow-up query suggested from the Suggest API via a query
-// id.
+// SearchText searches for geocode and place information. You can then complete a
+// follow-up query suggested from the Suggest API via a query id.
 func (c *Client) SearchText(ctx context.Context, params *SearchTextInput, optFns ...func(*Options)) (*SearchTextOutput, error) {
 	if params == nil {
 		params = &SearchTextInput{}
@@ -44,10 +43,17 @@ type SearchTextInput struct {
 	BiasPosition []float64
 
 	// A structure which contains a set of inclusion/exclusion properties that results
-	// must posses in order to be returned as a result.
+	// must possess in order to be returned as a result.
 	Filter *types.SearchTextFilter
 
 	// Indicates if the results will be stored. Defaults to SingleUse , if left empty.
+	//
+	// Storing the response of an SearchText query is required to comply with service
+	// terms, but charged at a higher cost per request. Please review the [user agreement]and [service pricing structure] to
+	// determine the correct setting for your use case.
+	//
+	// [service pricing structure]: https://aws.amazon.com/location/pricing/
+	// [user agreement]: https://aws.amazon.com/location/sla/
 	IntendedUse types.SearchTextIntendedUse
 
 	// Optional: The API key to be used for authorization. Either an API key or valid
@@ -73,11 +79,17 @@ type SearchTextInput struct {
 	// territorial claims through the point of view of the specified country.
 	PoliticalView *string
 
-	// The query Id.
+	// The query Id returned by the suggest API. If passed in the request, the
+	// SearchText API will preform a SearchText query with the improved query terms for
+	// the original query made to the suggest API.
+	//
+	// The fields QueryText , and QueryID are mutually exclusive.
 	QueryId *string
 
 	// The free-form text query to match addresses against. This is usually a
 	// partially typed address from an end user in an address box or form.
+	//
+	// The fields QueryText , and QueryID are mutually exclusive.
 	QueryText *string
 
 	noSmithyDocumentSerde
@@ -87,7 +99,7 @@ type SearchTextOutput struct {
 
 	// The pricing bucket for which the query is charged at.
 	//
-	// For more inforamtion on pricing, please visit [Amazon Location Service Pricing].
+	// For more information on pricing, please visit [Amazon Location Service Pricing].
 	//
 	// [Amazon Location Service Pricing]: https://aws.amazon.com/location/pricing/
 	//

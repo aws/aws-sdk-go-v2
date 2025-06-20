@@ -25,12 +25,12 @@ import (
 //
 // You can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume
 // when starting or running a task, or when creating or updating a service. For
-// more infomation, see [Amazon EBS volumes]in the Amazon Elastic Container Service Developer Guide.
+// more information, see [Amazon EBS volumes]in the Amazon Elastic Container Service Developer Guide.
 // You can update your volume configurations and trigger a new deployment.
 // volumeConfigurations is only supported for REPLICA service and not DAEMON
 // service. If you leave volumeConfigurations null , it doesn't trigger a new
-// deployment. For more infomation on volumes, see [Amazon EBS volumes]in the Amazon Elastic Container
-// Service Developer Guide.
+// deployment. For more information on volumes, see [Amazon EBS volumes]in the Amazon Elastic
+// Container Service Developer Guide.
 //
 // For services using the blue/green ( CODE_DEPLOY ) deployment controller, only
 // the desired count, deployment configuration, health check grace period, task
@@ -53,7 +53,7 @@ import (
 //
 // You can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume
 // when starting or running a task, or when creating or updating a service. For
-// more infomation, see [Amazon EBS volumes]in the Amazon Elastic Container Service Developer Guide.
+// more information, see [Amazon EBS volumes]in the Amazon Elastic Container Service Developer Guide.
 //
 // If you have updated the container image of your application, you can create a
 // new task definition with that image and deploy it to your service. The service
@@ -169,17 +169,19 @@ type UpdateServiceInput struct {
 	//
 	// The following list provides the valid transitions:
 	//
-	//   - Update the Fargate launch type to an EC2 capacity provider.
+	//   - Update the Fargate launch type to an Auto Scaling group capacity provider.
 	//
 	//   - Update the Amazon EC2 launch type to a Fargate capacity provider.
 	//
-	//   - Update the Fargate capacity provider to an EC2 capacity provider.
+	//   - Update the Fargate capacity provider to an Auto Scaling group capacity
+	//   provider.
 	//
 	//   - Update the Amazon EC2 capacity provider to a Fargate capacity provider.
 	//
-	//   - Update the EC2 or Fargate capacity provider back to the launch type.
+	//   - Update the Auto Scaling group or Fargate capacity provider back to the
+	//   launch type.
 	//
-	// Pass an empty list in the capacityProvider parameter.
+	// Pass an empty list in the capacityProviderStrategy parameter.
 	//
 	// For information about Amazon Web Services CDK considerations, see [Amazon Web Services CDK considerations].
 	//

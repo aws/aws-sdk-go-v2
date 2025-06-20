@@ -24,7 +24,7 @@ import (
 // information, see [Scheduling Tasks]in the Amazon Elastic Container Service Developer Guide.
 //
 // You can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume
-// when creating or updating a service. For more infomation, see [Amazon EBS volumes]in the Amazon
+// when creating or updating a service. For more information, see [Amazon EBS volumes]in the Amazon
 // Elastic Container Service Developer Guide.
 //
 // [Scheduling Tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html

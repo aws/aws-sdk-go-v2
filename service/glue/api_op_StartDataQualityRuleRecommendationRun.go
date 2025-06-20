@@ -32,6 +32,7 @@ func (c *Client) StartDataQualityRuleRecommendationRun(ctx context.Context, para
 	return out, nil
 }
 
+// The request of the Data Quality rule recommendation request.
 type StartDataQualityRuleRecommendationRunInput struct {
 
 	// The data source (Glue table) associated with this run.

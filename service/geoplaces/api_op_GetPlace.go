@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Finds a place by its unique ID. A PlaceId is returned by other place operations.
+// GetPlace finds a place by its unique ID. A PlaceId is returned by other place
+// operations.
 func (c *Client) GetPlace(ctx context.Context, params *GetPlaceInput, optFns ...func(*Options)) (*GetPlaceOutput, error) {
 	if params == nil {
 		params = &GetPlaceInput{}
@@ -39,6 +40,13 @@ type GetPlaceInput struct {
 	AdditionalFeatures []types.GetPlaceAdditionalFeature
 
 	// Indicates if the results will be stored. Defaults to SingleUse , if left empty.
+	//
+	// Storing the response of an GetPlace query is required to comply with service
+	// terms, but charged at a higher cost per request. Please review the [user agreement]and [service pricing structure] to
+	// determine the correct setting for your use case.
+	//
+	// [service pricing structure]: https://aws.amazon.com/location/pricing/
+	// [user agreement]: https://aws.amazon.com/location/sla/
 	IntendedUse types.GetPlaceIntendedUse
 
 	// Optional: The API key to be used for authorization. Either an API key or valid
@@ -74,7 +82,7 @@ type GetPlaceOutput struct {
 
 	// The pricing bucket for which the query is charged at.
 	//
-	// For more inforamtion on pricing, please visit [Amazon Location Service Pricing].
+	// For more information on pricing, please visit [Amazon Location Service Pricing].
 	//
 	// [Amazon Location Service Pricing]: https://aws.amazon.com/location/pricing/
 	//
@@ -113,6 +121,9 @@ type GetPlaceOutput struct {
 	// List of food types offered by this result.
 	FoodTypes []types.FoodType
 
+	// The main address corresponding to a place of type Secondary Address.
+	MainAddress *types.RelatedPlace
+
 	// The bounding box enclosing the geometric shape (area or line) that an
 	// individual result covers.
 	//
@@ -137,6 +148,11 @@ type GetPlaceOutput struct {
 
 	// Contains details about the postal code of the place/result.
 	PostalCodeDetails []types.PostalCodeDetails
+
+	// All secondary addresses that are associated with a main address. A secondary
+	// address is one that includes secondary designators, such as a Suite or Unit
+	// Number, Building, or Floor information.
+	SecondaryAddresses []types.RelatedPlace
 
 	// The time zone in which the place is located.
 	TimeZone *types.TimeZone

@@ -6189,6 +6189,18 @@ func awsRestjson1_serializeDocumentGuardrailContentFiltersConfig(v []types.Guard
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGuardrailContentFiltersTierConfig(v *types.GuardrailContentFiltersTierConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.TierName) > 0 {
+		ok := object.Key("tierName")
+		ok.String(string(v.TierName))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGuardrailContentPolicyConfig(v *types.GuardrailContentPolicyConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6196,6 +6208,13 @@ func awsRestjson1_serializeDocumentGuardrailContentPolicyConfig(v *types.Guardra
 	if v.FiltersConfig != nil {
 		ok := object.Key("filtersConfig")
 		if err := awsRestjson1_serializeDocumentGuardrailContentFiltersConfig(v.FiltersConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TierConfig != nil {
+		ok := object.Key("tierConfig")
+		if err := awsRestjson1_serializeDocumentGuardrailContentFiltersTierConfig(v.TierConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -6533,6 +6552,13 @@ func awsRestjson1_serializeDocumentGuardrailTopicPolicyConfig(v *types.Guardrail
 	object := value.Object()
 	defer object.Close()
 
+	if v.TierConfig != nil {
+		ok := object.Key("tierConfig")
+		if err := awsRestjson1_serializeDocumentGuardrailTopicsTierConfig(v.TierConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TopicsConfig != nil {
 		ok := object.Key("topicsConfig")
 		if err := awsRestjson1_serializeDocumentGuardrailTopicsConfig(v.TopicsConfig, ok); err != nil {
@@ -6553,6 +6579,18 @@ func awsRestjson1_serializeDocumentGuardrailTopicsConfig(v []types.GuardrailTopi
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailTopicsTierConfig(v *types.GuardrailTopicsTierConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.TierName) > 0 {
+		ok := object.Key("tierName")
+		ok.String(string(v.TierName))
+	}
+
 	return nil
 }
 

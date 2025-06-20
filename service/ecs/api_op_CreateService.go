@@ -30,7 +30,7 @@ import (
 //
 // You can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume
 // when creating or updating a service. volumeConfigurations is only supported for
-// REPLICA service and not DAEMON service. For more infomation, see [Amazon EBS volumes]in the Amazon
+// REPLICA service and not DAEMON service. For more information, see [Amazon EBS volumes]in the Amazon
 // Elastic Container Service Developer Guide.
 //
 // Tasks for services that don't use a load balancer are considered healthy if

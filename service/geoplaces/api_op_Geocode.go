@@ -11,8 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Geocode action allows you to obtain coordinates, addresses, and other
-// information about places.
+// Geocode converts a textual address or place into geographic coordinates. You
+// can obtain geographic coordinates, address component, and other related
+// information. It supports flexible queries, including free-form text or
+// structured queries with components like street names, postal codes, and regions.
+// The Geocode API can also provide additional features such as time zone
+// information and the inclusion of political views.
 func (c *Client) Geocode(ctx context.Context, params *GeocodeInput, optFns ...func(*Options)) (*GeocodeOutput, error) {
 	if params == nil {
 		params = &GeocodeInput{}
@@ -43,10 +47,17 @@ type GeocodeInput struct {
 	BiasPosition []float64
 
 	// A structure which contains a set of inclusion/exclusion properties that results
-	// must posses in order to be returned as a result.
+	// must possess in order to be returned as a result.
 	Filter *types.GeocodeFilter
 
 	// Indicates if the results will be stored. Defaults to SingleUse , if left empty.
+	//
+	// Storing the response of an Geocode query is required to comply with service
+	// terms, but charged at a higher cost per request. Please review the [user agreement]and [service pricing structure] to
+	// determine the correct setting for your use case.
+	//
+	// [service pricing structure]: https://aws.amazon.com/location/pricing/
+	// [user agreement]: https://aws.amazon.com/location/sla/
 	IntendedUse types.GeocodeIntendedUse
 
 	// Optional: The API key to be used for authorization. Either an API key or valid
@@ -74,6 +85,8 @@ type GeocodeInput struct {
 
 	// The free-form text query to match addresses against. This is usually a
 	// partially typed address from an end user in an address box or form.
+	//
+	// The fields QueryText , and QueryID are mutually exclusive.
 	QueryText *string
 
 	noSmithyDocumentSerde
@@ -83,7 +96,7 @@ type GeocodeOutput struct {
 
 	// The pricing bucket for which the query is charged at.
 	//
-	// For more inforamtion on pricing, please visit [Amazon Location Service Pricing].
+	// For more information on pricing, please visit [Amazon Location Service Pricing].
 	//
 	// [Amazon Location Service Pricing]: https://aws.amazon.com/location/pricing/
 	//

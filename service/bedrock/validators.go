@@ -1829,6 +1829,21 @@ func validateGuardrailContentFiltersConfig(v []types.GuardrailContentFilterConfi
 	}
 }
 
+func validateGuardrailContentFiltersTierConfig(v *types.GuardrailContentFiltersTierConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailContentFiltersTierConfig"}
+	if len(v.TierName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TierName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGuardrailContentPolicyConfig(v *types.GuardrailContentPolicyConfig) error {
 	if v == nil {
 		return nil
@@ -1839,6 +1854,11 @@ func validateGuardrailContentPolicyConfig(v *types.GuardrailContentPolicyConfig)
 	} else if v.FiltersConfig != nil {
 		if err := validateGuardrailContentFiltersConfig(v.FiltersConfig); err != nil {
 			invalidParams.AddNested("FiltersConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TierConfig != nil {
+		if err := validateGuardrailContentFiltersTierConfig(v.TierConfig); err != nil {
+			invalidParams.AddNested("TierConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2077,6 +2097,11 @@ func validateGuardrailTopicPolicyConfig(v *types.GuardrailTopicPolicyConfig) err
 			invalidParams.AddNested("TopicsConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TierConfig != nil {
+		if err := validateGuardrailTopicsTierConfig(v.TierConfig); err != nil {
+			invalidParams.AddNested("TierConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2093,6 +2118,21 @@ func validateGuardrailTopicsConfig(v []types.GuardrailTopicConfig) error {
 		if err := validateGuardrailTopicConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailTopicsTierConfig(v *types.GuardrailTopicsTierConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailTopicsTierConfig"}
+	if len(v.TierName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TierName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

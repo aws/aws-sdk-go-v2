@@ -569,7 +569,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.AddressNumberCorrected = ptr.Bool(jtv)
 			}
@@ -594,6 +594,11 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 				return err
 			}
 
+		case "MainAddress":
+			if err := awsRestjson1_deserializeDocumentRelatedPlace(&sv.MainAddress, value); err != nil {
+				return err
+			}
+
 		case "MapView":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.MapView, value); err != nil {
 				return err
@@ -613,7 +618,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
@@ -646,6 +651,11 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 				return err
 			}
 
+		case "SecondaryAddresses":
+			if err := awsRestjson1_deserializeDocumentRelatedPlaceList(&sv.SecondaryAddresses, value); err != nil {
+				return err
+			}
+
 		case "TimeZone":
 			if err := awsRestjson1_deserializeDocumentTimeZone(&sv.TimeZone, value); err != nil {
 				return err
@@ -655,7 +665,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Title = ptr.String(jtv)
 			}
@@ -1689,7 +1699,7 @@ func awsRestjson1_deserializeDocumentAccessRestriction(v **types.AccessRestricti
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.Restricted = ptr.Bool(jtv)
 			}
@@ -1763,7 +1773,7 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.AddressNumber = ptr.String(jtv)
 			}
@@ -1772,7 +1782,7 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Block = ptr.String(jtv)
 			}
@@ -1781,7 +1791,7 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Building = ptr.String(jtv)
 			}
@@ -1795,13 +1805,13 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.District = ptr.String(jtv)
 			}
 
 		case "Intersection":
-			if err := awsRestjson1_deserializeDocumentIntersectionList(&sv.Intersection, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentIntersectionStreetList(&sv.Intersection, value); err != nil {
 				return err
 			}
 
@@ -1809,7 +1819,7 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Label = ptr.String(jtv)
 			}
@@ -1818,7 +1828,7 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Locality = ptr.String(jtv)
 			}
@@ -1827,7 +1837,7 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.PostalCode = ptr.String(jtv)
 			}
@@ -1837,11 +1847,16 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				return err
 			}
 
+		case "SecondaryAddressComponents":
+			if err := awsRestjson1_deserializeDocumentSecondaryAddressComponentList(&sv.SecondaryAddressComponents, value); err != nil {
+				return err
+			}
+
 		case "Street":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Street = ptr.String(jtv)
 			}
@@ -1855,7 +1870,7 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.SubBlock = ptr.String(jtv)
 			}
@@ -1864,7 +1879,7 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.SubDistrict = ptr.String(jtv)
 			}
@@ -2180,6 +2195,11 @@ func awsRestjson1_deserializeDocumentAddressComponentMatchScores(v **types.Addre
 					return fmt.Errorf("expected MatchScore to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "SecondaryAddressComponents":
+			if err := awsRestjson1_deserializeDocumentSecondaryAddressComponentMatchScoreList(&sv.SecondaryAddressComponents, value); err != nil {
+				return err
 			}
 
 		case "SubBlock":
@@ -2569,7 +2589,7 @@ func awsRestjson1_deserializeDocumentAutocompleteResultItem(v **types.Autocomple
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
@@ -2596,7 +2616,7 @@ func awsRestjson1_deserializeDocumentAutocompleteResultItem(v **types.Autocomple
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Title = ptr.String(jtv)
 			}
@@ -2731,7 +2751,7 @@ func awsRestjson1_deserializeDocumentBusinessChain(v **types.BusinessChain, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -2740,7 +2760,7 @@ func awsRestjson1_deserializeDocumentBusinessChain(v **types.BusinessChain, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -2814,7 +2834,7 @@ func awsRestjson1_deserializeDocumentCategory(v **types.Category, value interfac
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -2823,7 +2843,7 @@ func awsRestjson1_deserializeDocumentCategory(v **types.Category, value interfac
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.LocalizedName = ptr.String(jtv)
 			}
@@ -2832,7 +2852,7 @@ func awsRestjson1_deserializeDocumentCategory(v **types.Category, value interfac
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -2841,7 +2861,7 @@ func awsRestjson1_deserializeDocumentCategory(v **types.Category, value interfac
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.Primary = ptr.Bool(jtv)
 			}
@@ -2990,7 +3010,7 @@ func awsRestjson1_deserializeDocumentContactDetails(v **types.ContactDetails, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Label = ptr.String(jtv)
 			}
@@ -2999,7 +3019,7 @@ func awsRestjson1_deserializeDocumentContactDetails(v **types.ContactDetails, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Value = ptr.String(jtv)
 			}
@@ -3142,7 +3162,7 @@ func awsRestjson1_deserializeDocumentCountry(v **types.Country, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -3223,7 +3243,7 @@ func awsRestjson1_deserializeDocumentFoodType(v **types.FoodType, value interfac
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -3232,7 +3252,7 @@ func awsRestjson1_deserializeDocumentFoodType(v **types.FoodType, value interfac
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.LocalizedName = ptr.String(jtv)
 			}
@@ -3241,7 +3261,7 @@ func awsRestjson1_deserializeDocumentFoodType(v **types.FoodType, value interfac
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.Primary = ptr.Bool(jtv)
 			}
@@ -3289,6 +3309,143 @@ func awsRestjson1_deserializeDocumentFoodTypeList(v *[]types.FoodType, value int
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGeocodeParsedQuery(v **types.GeocodeParsedQuery, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeocodeParsedQuery
+	if *v == nil {
+		sv = &types.GeocodeParsedQuery{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Address":
+			if err := awsRestjson1_deserializeDocumentGeocodeParsedQueryAddressComponents(&sv.Address, value); err != nil {
+				return err
+			}
+
+		case "Title":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.Title, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeocodeParsedQueryAddressComponents(v **types.GeocodeParsedQueryAddressComponents, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeocodeParsedQueryAddressComponents
+	if *v == nil {
+		sv = &types.GeocodeParsedQueryAddressComponents{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AddressNumber":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.AddressNumber, value); err != nil {
+				return err
+			}
+
+		case "Block":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.Block, value); err != nil {
+				return err
+			}
+
+		case "Building":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.Building, value); err != nil {
+				return err
+			}
+
+		case "Country":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.Country, value); err != nil {
+				return err
+			}
+
+		case "District":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.District, value); err != nil {
+				return err
+			}
+
+		case "Locality":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.Locality, value); err != nil {
+				return err
+			}
+
+		case "PostalCode":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.PostalCode, value); err != nil {
+				return err
+			}
+
+		case "Region":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.Region, value); err != nil {
+				return err
+			}
+
+		case "SecondaryAddressComponents":
+			if err := awsRestjson1_deserializeDocumentParsedQuerySecondaryAddressComponentList(&sv.SecondaryAddressComponents, value); err != nil {
+				return err
+			}
+
+		case "Street":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.Street, value); err != nil {
+				return err
+			}
+
+		case "SubBlock":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.SubBlock, value); err != nil {
+				return err
+			}
+
+		case "SubDistrict":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.SubDistrict, value); err != nil {
+				return err
+			}
+
+		case "SubRegion":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.SubRegion, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultItem, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3325,7 +3482,7 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.AddressNumberCorrected = ptr.Bool(jtv)
 			}
@@ -3353,6 +3510,16 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 				return err
 			}
 
+		case "Intersections":
+			if err := awsRestjson1_deserializeDocumentIntersectionList(&sv.Intersections, value); err != nil {
+				return err
+			}
+
+		case "MainAddress":
+			if err := awsRestjson1_deserializeDocumentRelatedPlace(&sv.MainAddress, value); err != nil {
+				return err
+			}
+
 		case "MapView":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.MapView, value); err != nil {
 				return err
@@ -3363,11 +3530,16 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 				return err
 			}
 
+		case "ParsedQuery":
+			if err := awsRestjson1_deserializeDocumentGeocodeParsedQuery(&sv.ParsedQuery, value); err != nil {
+				return err
+			}
+
 		case "PlaceId":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
@@ -3400,6 +3572,11 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 				return err
 			}
 
+		case "SecondaryAddresses":
+			if err := awsRestjson1_deserializeDocumentRelatedPlaceList(&sv.SecondaryAddresses, value); err != nil {
+				return err
+			}
+
 		case "TimeZone":
 			if err := awsRestjson1_deserializeDocumentTimeZone(&sv.TimeZone, value); err != nil {
 				return err
@@ -3409,7 +3586,7 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Title = ptr.String(jtv)
 			}
@@ -3509,7 +3686,7 @@ func awsRestjson1_deserializeDocumentHighlight(v **types.Highlight, value interf
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Value = ptr.String(jtv)
 			}
@@ -3597,6 +3774,101 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIntersection(v **types.Intersection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Intersection
+	if *v == nil {
+		sv = &types.Intersection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessPoints":
+			if err := awsRestjson1_deserializeDocumentAccessPointList(&sv.AccessPoints, value); err != nil {
+				return err
+			}
+
+		case "Address":
+			if err := awsRestjson1_deserializeDocumentAddress(&sv.Address, value); err != nil {
+				return err
+			}
+
+		case "Distance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DistanceMeters to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Distance = ptr.Int64(i64)
+			}
+
+		case "MapView":
+			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.MapView, value); err != nil {
+				return err
+			}
+
+		case "PlaceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.PlaceId = ptr.String(jtv)
+			}
+
+		case "Position":
+			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
+				return err
+			}
+
+		case "RouteDistance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DistanceMeters to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RouteDistance = ptr.Int64(i64)
+			}
+
+		case "Title":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Title = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIntersectionHighlightsList(v *[][]types.Highlight, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3629,7 +3901,41 @@ func awsRestjson1_deserializeDocumentIntersectionHighlightsList(v *[][]types.Hig
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentIntersectionList(v *[]string, value interface{}) error {
+func awsRestjson1_deserializeDocumentIntersectionList(v *[]types.Intersection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Intersection
+	if *v == nil {
+		cv = []types.Intersection{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Intersection
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentIntersection(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIntersectionStreetList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3837,7 +4143,7 @@ func awsRestjson1_deserializeDocumentOpeningHours(v **types.OpeningHours, value 
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.OpenNow = ptr.Bool(jtv)
 			}
@@ -3877,7 +4183,7 @@ func awsRestjson1_deserializeDocumentOpeningHoursComponents(v **types.OpeningHou
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.OpenDuration = ptr.String(jtv)
 			}
@@ -3886,7 +4192,7 @@ func awsRestjson1_deserializeDocumentOpeningHoursComponents(v **types.OpeningHou
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.OpenTime = ptr.String(jtv)
 			}
@@ -3895,7 +4201,7 @@ func awsRestjson1_deserializeDocumentOpeningHoursComponents(v **types.OpeningHou
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Recurrence = ptr.String(jtv)
 			}
@@ -4013,6 +4319,233 @@ func awsRestjson1_deserializeDocumentOpeningHoursList(v *[]types.OpeningHours, v
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentParsedQueryComponent(v **types.ParsedQueryComponent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ParsedQueryComponent
+	if *v == nil {
+		sv = &types.ParsedQueryComponent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndIndex = ptr.Int32(int32(i64))
+			}
+
+		case "QueryComponent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.QueryComponent = ptr.String(jtv)
+			}
+
+		case "StartIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartIndex = ptr.Int32(int32(i64))
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParsedQueryComponentList(v *[]types.ParsedQueryComponent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ParsedQueryComponent
+	if *v == nil {
+		cv = []types.ParsedQueryComponent{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ParsedQueryComponent
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentParsedQueryComponent(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParsedQuerySecondaryAddressComponent(v **types.ParsedQuerySecondaryAddressComponent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ParsedQuerySecondaryAddressComponent
+	if *v == nil {
+		sv = &types.ParsedQuerySecondaryAddressComponent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Designator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Designator = ptr.String(jtv)
+			}
+
+		case "EndIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndIndex = ptr.Int32(int32(i64))
+			}
+
+		case "Number":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Number = ptr.String(jtv)
+			}
+
+		case "StartIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartIndex = ptr.Int32(int32(i64))
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParsedQuerySecondaryAddressComponentList(v *[]types.ParsedQuerySecondaryAddressComponent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ParsedQuerySecondaryAddressComponent
+	if *v == nil {
+		cv = []types.ParsedQuerySecondaryAddressComponent{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ParsedQuerySecondaryAddressComponent
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentParsedQuerySecondaryAddressComponent(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPhonemeDetails(v **types.PhonemeDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4089,7 +4622,7 @@ func awsRestjson1_deserializeDocumentPhonemeTranscription(v **types.PhonemeTrans
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.Preferred = ptr.Bool(jtv)
 			}
@@ -4098,7 +4631,7 @@ func awsRestjson1_deserializeDocumentPhonemeTranscription(v **types.PhonemeTrans
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Value = ptr.String(jtv)
 			}
@@ -4242,7 +4775,7 @@ func awsRestjson1_deserializeDocumentPostalCodeDetails(v **types.PostalCodeDetai
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.PostalCode = ptr.String(jtv)
 			}
@@ -4348,7 +4881,7 @@ func awsRestjson1_deserializeDocumentQueryRefinement(v **types.QueryRefinement, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.OriginalTerm = ptr.String(jtv)
 			}
@@ -4357,7 +4890,7 @@ func awsRestjson1_deserializeDocumentQueryRefinement(v **types.QueryRefinement, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.RefinedTerm = ptr.String(jtv)
 			}
@@ -4444,7 +4977,7 @@ func awsRestjson1_deserializeDocumentRegion(v **types.Region, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Code = ptr.String(jtv)
 			}
@@ -4453,7 +4986,7 @@ func awsRestjson1_deserializeDocumentRegion(v **types.Region, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -4508,6 +5041,113 @@ func awsRestjson1_deserializeDocumentRegionHighlights(v **types.RegionHighlights
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRelatedPlace(v **types.RelatedPlace, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RelatedPlace
+	if *v == nil {
+		sv = &types.RelatedPlace{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessPoints":
+			if err := awsRestjson1_deserializeDocumentAccessPointList(&sv.AccessPoints, value); err != nil {
+				return err
+			}
+
+		case "Address":
+			if err := awsRestjson1_deserializeDocumentAddress(&sv.Address, value); err != nil {
+				return err
+			}
+
+		case "PlaceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.PlaceId = ptr.String(jtv)
+			}
+
+		case "PlaceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlaceType to be of type string, got %T instead", value)
+				}
+				sv.PlaceType = types.PlaceType(jtv)
+			}
+
+		case "Position":
+			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
+				return err
+			}
+
+		case "Title":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Title = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRelatedPlaceList(v *[]types.RelatedPlace, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RelatedPlace
+	if *v == nil {
+		cv = []types.RelatedPlace{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RelatedPlace
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRelatedPlace(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseGeocodeResultItem, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4544,7 +5184,7 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.AddressNumberCorrected = ptr.Bool(jtv)
 			}
@@ -4572,6 +5212,11 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 				return err
 			}
 
+		case "Intersections":
+			if err := awsRestjson1_deserializeDocumentIntersectionList(&sv.Intersections, value); err != nil {
+				return err
+			}
+
 		case "MapView":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.MapView, value); err != nil {
 				return err
@@ -4581,7 +5226,7 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
@@ -4623,7 +5268,7 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Title = ptr.String(jtv)
 			}
@@ -4712,7 +5357,7 @@ func awsRestjson1_deserializeDocumentSearchNearbyResultItem(v **types.SearchNear
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.AddressNumberCorrected = ptr.Bool(jtv)
 			}
@@ -4769,7 +5414,7 @@ func awsRestjson1_deserializeDocumentSearchNearbyResultItem(v **types.SearchNear
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
@@ -4806,7 +5451,7 @@ func awsRestjson1_deserializeDocumentSearchNearbyResultItem(v **types.SearchNear
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Title = ptr.String(jtv)
 			}
@@ -4895,7 +5540,7 @@ func awsRestjson1_deserializeDocumentSearchTextResultItem(v **types.SearchTextRe
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.AddressNumberCorrected = ptr.Bool(jtv)
 			}
@@ -4952,7 +5597,7 @@ func awsRestjson1_deserializeDocumentSearchTextResultItem(v **types.SearchTextRe
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
@@ -4989,7 +5634,7 @@ func awsRestjson1_deserializeDocumentSearchTextResultItem(v **types.SearchTextRe
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Title = ptr.String(jtv)
 			}
@@ -5037,6 +5682,179 @@ func awsRestjson1_deserializeDocumentSearchTextResultItemList(v *[]types.SearchT
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSecondaryAddressComponent(v **types.SecondaryAddressComponent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SecondaryAddressComponent
+	if *v == nil {
+		sv = &types.SecondaryAddressComponent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Number":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Number = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSecondaryAddressComponentList(v *[]types.SecondaryAddressComponent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SecondaryAddressComponent
+	if *v == nil {
+		cv = []types.SecondaryAddressComponent{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SecondaryAddressComponent
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSecondaryAddressComponent(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSecondaryAddressComponentMatchScore(v **types.SecondaryAddressComponentMatchScore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SecondaryAddressComponentMatchScore
+	if *v == nil {
+		sv = &types.SecondaryAddressComponentMatchScore{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Number":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Number = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Number = f64
+
+				default:
+					return fmt.Errorf("expected MatchScore to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSecondaryAddressComponentMatchScoreList(v *[]types.SecondaryAddressComponentMatchScore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SecondaryAddressComponentMatchScore
+	if *v == nil {
+		cv = []types.SecondaryAddressComponentMatchScore{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SecondaryAddressComponentMatchScore
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSecondaryAddressComponentMatchScore(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5063,7 +5881,7 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.BaseName = ptr.String(jtv)
 			}
@@ -5072,7 +5890,7 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Direction = ptr.String(jtv)
 			}
@@ -5090,7 +5908,7 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Prefix = ptr.String(jtv)
 			}
@@ -5099,7 +5917,7 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Suffix = ptr.String(jtv)
 			}
@@ -5108,7 +5926,7 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Type = ptr.String(jtv)
 			}
@@ -5200,7 +6018,7 @@ func awsRestjson1_deserializeDocumentSubRegion(v **types.SubRegion, value interf
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Code = ptr.String(jtv)
 			}
@@ -5209,7 +6027,7 @@ func awsRestjson1_deserializeDocumentSubRegion(v **types.SubRegion, value interf
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -5420,7 +6238,7 @@ func awsRestjson1_deserializeDocumentSuggestPlaceResult(v **types.SuggestPlaceRe
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
@@ -5488,7 +6306,7 @@ func awsRestjson1_deserializeDocumentSuggestQueryResult(v **types.SuggestQueryRe
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.QueryId = ptr.String(jtv)
 			}
@@ -5561,7 +6379,7 @@ func awsRestjson1_deserializeDocumentSuggestResultItem(v **types.SuggestResultIt
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Title = ptr.String(jtv)
 			}
@@ -5675,7 +6493,7 @@ func awsRestjson1_deserializeDocumentTimeZone(v **types.TimeZone, value interfac
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -5684,7 +6502,7 @@ func awsRestjson1_deserializeDocumentTimeZone(v **types.TimeZone, value interfac
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Offset = ptr.String(jtv)
 			}

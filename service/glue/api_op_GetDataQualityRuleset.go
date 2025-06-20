@@ -38,6 +38,7 @@ type GetDataQualityRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+// Returns the data quality ruleset response.
 type GetDataQualityRulesetOutput struct {
 
 	// A timestamp. The time and date that this data quality ruleset was created.

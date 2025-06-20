@@ -1,0 +1,8 @@
+{
+    "id": "1d048249-53ed-4165-bdf2-3803383b4c81",
+    "type": "feature",
+    "description": "Add ECS support for Windows Server 2025",
+    "modules": [
+        "service/ecs"
+    ]
+}

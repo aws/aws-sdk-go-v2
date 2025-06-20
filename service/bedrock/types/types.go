@@ -1185,6 +1185,48 @@ type GuardrailContentFilterConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The tier that your guardrail uses for content filters.
+type GuardrailContentFiltersTier struct {
+
+	// The tier that your guardrail uses for content filters. Valid values include:
+	//
+	//   - CLASSIC tier – Provides established guardrails functionality supporting
+	//   English, French, and Spanish languages.
+	//
+	//   - STANDARD tier – Provides a more robust solution than the CLASSIC tier and
+	//   has more comprehensive language support. This tier requires that your guardrail
+	//   use [cross-Region inference].
+	//
+	// [cross-Region inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+	//
+	// This member is required.
+	TierName GuardrailContentFiltersTierName
+
+	noSmithyDocumentSerde
+}
+
+// The tier that your guardrail uses for content filters. Consider using a tier
+// that balances performance, accuracy, and compatibility with your existing
+// generative AI workflows.
+type GuardrailContentFiltersTierConfig struct {
+
+	// The tier that your guardrail uses for content filters. Valid values include:
+	//
+	//   - CLASSIC tier – Provides established guardrails functionality supporting
+	//   English, French, and Spanish languages.
+	//
+	//   - STANDARD tier – Provides a more robust solution than the CLASSIC tier and
+	//   has more comprehensive language support. This tier requires that your guardrail
+	//   use [cross-Region inference].
+	//
+	// [cross-Region inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+	//
+	// This member is required.
+	TierName GuardrailContentFiltersTierName
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about how to handle harmful content.
 //
 // This data type is used in the following API operations:
@@ -1198,6 +1240,9 @@ type GuardrailContentPolicy struct {
 	// prompts and model responses.
 	Filters []GuardrailContentFilter
 
+	// The tier that your guardrail uses for content filters.
+	Tier *GuardrailContentFiltersTier
+
 	noSmithyDocumentSerde
 }
 
@@ -1209,6 +1254,9 @@ type GuardrailContentPolicyConfig struct {
 	//
 	// This member is required.
 	FiltersConfig []GuardrailContentFilterConfig
+
+	// The tier that your guardrail uses for content filters.
+	TierConfig *GuardrailContentFiltersTierConfig
 
 	noSmithyDocumentSerde
 }
@@ -2005,6 +2053,9 @@ type GuardrailTopicPolicy struct {
 	// This member is required.
 	Topics []GuardrailTopic
 
+	// The tier that your guardrail uses for denied topic filters.
+	Tier *GuardrailTopicsTier
+
 	noSmithyDocumentSerde
 }
 
@@ -2015,6 +2066,53 @@ type GuardrailTopicPolicyConfig struct {
 	//
 	// This member is required.
 	TopicsConfig []GuardrailTopicConfig
+
+	// The tier that your guardrail uses for denied topic filters.
+	TierConfig *GuardrailTopicsTierConfig
+
+	noSmithyDocumentSerde
+}
+
+// The tier that your guardrail uses for denied topic filters.
+type GuardrailTopicsTier struct {
+
+	// The tier that your guardrail uses for denied topic filters. Valid values
+	// include:
+	//
+	//   - CLASSIC tier – Provides established guardrails functionality supporting
+	//   English, French, and Spanish languages.
+	//
+	//   - STANDARD tier – Provides a more robust solution than the CLASSIC tier and
+	//   has more comprehensive language support. This tier requires that your guardrail
+	//   use [cross-Region inference].
+	//
+	// [cross-Region inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+	//
+	// This member is required.
+	TierName GuardrailTopicsTierName
+
+	noSmithyDocumentSerde
+}
+
+// The tier that your guardrail uses for denied topic filters. Consider using a
+// tier that balances performance, accuracy, and compatibility with your existing
+// generative AI workflows.
+type GuardrailTopicsTierConfig struct {
+
+	// The tier that your guardrail uses for denied topic filters. Valid values
+	// include:
+	//
+	//   - CLASSIC tier – Provides established guardrails functionality supporting
+	//   English, French, and Spanish languages.
+	//
+	//   - STANDARD tier – Provides a more robust solution than the CLASSIC tier and
+	//   has more comprehensive language support. This tier requires that your guardrail
+	//   use [cross-Region inference].
+	//
+	// [cross-Region inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+	//
+	// This member is required.
+	TierName GuardrailTopicsTierName
 
 	noSmithyDocumentSerde
 }

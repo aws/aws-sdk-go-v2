@@ -758,6 +758,8 @@ const (
 	OSFamilyWindowsServer2004Core OSFamily = "WINDOWS_SERVER_2004_CORE"
 	OSFamilyWindowsServer2022Core OSFamily = "WINDOWS_SERVER_2022_CORE"
 	OSFamilyWindowsServer2022Full OSFamily = "WINDOWS_SERVER_2022_FULL"
+	OSFamilyWindowsServer2025Core OSFamily = "WINDOWS_SERVER_2025_CORE"
+	OSFamilyWindowsServer2025Full OSFamily = "WINDOWS_SERVER_2025_FULL"
 	OSFamilyWindowsServer20h2Core OSFamily = "WINDOWS_SERVER_20H2_CORE"
 	OSFamilyLinux                 OSFamily = "LINUX"
 )
@@ -774,6 +776,8 @@ func (OSFamily) Values() []OSFamily {
 		"WINDOWS_SERVER_2004_CORE",
 		"WINDOWS_SERVER_2022_CORE",
 		"WINDOWS_SERVER_2022_FULL",
+		"WINDOWS_SERVER_2025_CORE",
+		"WINDOWS_SERVER_2025_FULL",
 		"WINDOWS_SERVER_20H2_CORE",
 		"LINUX",
 	}

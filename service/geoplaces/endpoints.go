@@ -464,7 +464,7 @@ func (r *resolver) ResolveEndpoint(
 							var out strings.Builder
 							out.WriteString("https://places.geo.")
 							out.WriteString(_Region)
-							out.WriteString(".us-gov.")
+							out.WriteString(".")
 							out.WriteString(_PartitionResult.DnsSuffix)
 							out.WriteString("/v2")
 							return out.String()
@@ -489,7 +489,7 @@ func (r *resolver) ResolveEndpoint(
 							var out strings.Builder
 							out.WriteString("https://places.geo-fips.")
 							out.WriteString(_Region)
-							out.WriteString(".us-gov.")
+							out.WriteString(".")
 							out.WriteString(_PartitionResult.DualStackDnsSuffix)
 							out.WriteString("/v2")
 							return out.String()
@@ -514,7 +514,7 @@ func (r *resolver) ResolveEndpoint(
 							var out strings.Builder
 							out.WriteString("https://places.geo-fips.")
 							out.WriteString(_Region)
-							out.WriteString(".us-gov.")
+							out.WriteString(".")
 							out.WriteString(_PartitionResult.DnsSuffix)
 							out.WriteString("/v2")
 							return out.String()
@@ -539,7 +539,7 @@ func (r *resolver) ResolveEndpoint(
 							var out strings.Builder
 							out.WriteString("https://places.geo.")
 							out.WriteString(_Region)
-							out.WriteString(".us-gov.")
+							out.WriteString(".")
 							out.WriteString(_PartitionResult.DualStackDnsSuffix)
 							out.WriteString("/v2")
 							return out.String()

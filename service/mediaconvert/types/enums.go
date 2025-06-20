@@ -2901,9 +2901,10 @@ type DvbddsHandling string
 
 // Enum values for DvbddsHandling
 const (
-	DvbddsHandlingNone            DvbddsHandling = "NONE"
-	DvbddsHandlingSpecified       DvbddsHandling = "SPECIFIED"
-	DvbddsHandlingNoDisplayWindow DvbddsHandling = "NO_DISPLAY_WINDOW"
+	DvbddsHandlingNone             DvbddsHandling = "NONE"
+	DvbddsHandlingSpecified        DvbddsHandling = "SPECIFIED"
+	DvbddsHandlingNoDisplayWindow  DvbddsHandling = "NO_DISPLAY_WINDOW"
+	DvbddsHandlingSpecifiedOptimal DvbddsHandling = "SPECIFIED_OPTIMAL"
 )
 
 // Values returns all known values for DvbddsHandling. Note that this can be
@@ -2915,6 +2916,7 @@ func (DvbddsHandling) Values() []DvbddsHandling {
 		"NONE",
 		"SPECIFIED",
 		"NO_DISPLAY_WINDOW",
+		"SPECIFIED_OPTIMAL",
 	}
 }
 

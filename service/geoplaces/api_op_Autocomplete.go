@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The autocomplete operation speeds up and increases the accuracy of entering
-// addresses by providing a list of address candidates matching a partially entered
-// address. Results are sorted from most to least matching. Filtering and biasing
-// can be used to increase the relevance of the results if additional search
-// context is known
+// Autocomplete completes potential places and addresses as the user types, based
+// on the partial input. The API enhances the efficiency and accuracy of address by
+// completing query based on a few entered keystrokes. It helps you by completing
+// partial queries with valid address completion. Also, the API supports the
+// filtering of results based on geographic location, country, or specific place
+// types, and can be tailored using optional parameters like language and political
+// views.
 func (c *Client) Autocomplete(ctx context.Context, params *AutocompleteInput, optFns ...func(*Options)) (*AutocompleteOutput, error) {
 	if params == nil {
 		params = &AutocompleteInput{}
@@ -36,6 +38,8 @@ type AutocompleteInput struct {
 	// The free-form text query to match addresses against. This is usually a
 	// partially typed address from an end user in an address box or form.
 	//
+	// The fields QueryText , and QueryID are mutually exclusive.
+	//
 	// This member is required.
 	QueryText *string
 
@@ -51,7 +55,7 @@ type AutocompleteInput struct {
 	BiasPosition []float64
 
 	// A structure which contains a set of inclusion/exclusion properties that results
-	// must posses in order to be returned as a result.
+	// must possess in order to be returned as a result.
 	Filter *types.AutocompleteFilter
 
 	// Indicates if the results will be stored. Defaults to SingleUse , if left empty.
@@ -74,13 +78,44 @@ type AutocompleteInput struct {
 	// The alpha-2 or alpha-3 character code for the political view of a country. The
 	// political view applies to the results of the request to represent unresolved
 	// territorial claims through the point of view of the specified country.
+	//
+	// The following political views are currently supported:
+	//
+	//   - ARG : Argentina's view on the Southern Patagonian Ice Field and Tierra Del
+	//   Fuego, including the Falkland Islands, South Georgia, and South Sandwich Islands
+	//
+	//   - EGY : Egypt's view on Bir Tawil
+	//
+	//   - IND : India's view on Gilgit-Baltistan
+	//
+	//   - KEN : Kenya's view on the Ilemi Triangle
+	//
+	//   - MAR : Morocco's view on Western Sahara
+	//
+	//   - RUS : Russia's view on Crimea
+	//
+	//   - SDN : Sudan's view on the Halaib Triangle
+	//
+	//   - SRB : Serbia's view on Kosovo, Vukovar, and Sarengrad Islands
+	//
+	//   - SUR : Suriname's view on the Courantyne Headwaters and Lawa Headwaters
+	//
+	//   - SYR : Syria's view on the Golan Heights
+	//
+	//   - TUR : Turkey's view on Cyprus and Northern Cyprus
+	//
+	//   - TZA : Tanzania's view on Lake Malawi
+	//
+	//   - URY : Uruguay's view on Rincon de Artigas
+	//
+	//   - VNM : Vietnam's view on the Paracel Islands and Spratly Islands
 	PoliticalView *string
 
 	// The PostalCodeMode affects how postal code results are returned. If a postal
 	// code spans multiple localities and this value is empty, partial district or
 	// locality information may be returned under a single postal code result entry. If
-	// it's populated with the value cityLookup , all cities in that postal code are
-	// returned.
+	// it's populated with the value EnumerateSpannedLocalities , all cities in that
+	// postal code are returned.
 	PostalCodeMode types.PostalCodeMode
 
 	noSmithyDocumentSerde
@@ -90,7 +125,7 @@ type AutocompleteOutput struct {
 
 	// The pricing bucket for which the query is charged at.
 	//
-	// For more inforamtion on pricing, please visit [Amazon Location Service Pricing].
+	// For more information on pricing, please visit [Amazon Location Service Pricing].
 	//
 	// [Amazon Location Service Pricing]: https://aws.amazon.com/location/pricing/
 	//

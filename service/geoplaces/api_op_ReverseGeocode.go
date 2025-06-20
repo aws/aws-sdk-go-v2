@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	The ReverseGeocode operation allows you to retrieve addresses and place
-//
-// information from coordinates.
+// ReverseGeocode converts geographic coordinates into a human-readable address or
+// place. You can obtain address component, and other related information such as
+// place type, category, street information. The Reverse Geocode API supports
+// filtering to on place type so that you can refine result based on your need.
+// Also, The Reverse Geocode API can also provide additional features such as time
+// zone information and the inclusion of political views.
 func (c *Client) ReverseGeocode(ctx context.Context, params *ReverseGeocodeInput, optFns ...func(*Options)) (*ReverseGeocodeOutput, error) {
 	if params == nil {
 		params = &ReverseGeocodeInput{}
@@ -31,7 +34,7 @@ func (c *Client) ReverseGeocode(ctx context.Context, params *ReverseGeocodeInput
 
 type ReverseGeocodeInput struct {
 
-	// The position, in [lng, lat] for which you are querying nearby resultsfor.
+	// The position, in [lng, lat] for which you are querying nearby results for.
 	// Results closer to the position will be ranked higher then results further away
 	// from the position
 	//
@@ -43,10 +46,17 @@ type ReverseGeocodeInput struct {
 	AdditionalFeatures []types.ReverseGeocodeAdditionalFeature
 
 	// A structure which contains a set of inclusion/exclusion properties that results
-	// must posses in order to be returned as a result.
+	// must possess in order to be returned as a result.
 	Filter *types.ReverseGeocodeFilter
 
 	// Indicates if the results will be stored. Defaults to SingleUse , if left empty.
+	//
+	// Storing the response of an ReverseGeocode query is required to comply with
+	// service terms, but charged at a higher cost per request. Please review the [user agreement]and [service pricing structure]
+	// to determine the correct setting for your use case.
+	//
+	// [service pricing structure]: https://aws.amazon.com/location/pricing/
+	// [user agreement]: https://aws.amazon.com/location/sla/
 	IntendedUse types.ReverseGeocodeIntendedUse
 
 	// Optional: The API key to be used for authorization. Either an API key or valid
@@ -79,7 +89,7 @@ type ReverseGeocodeOutput struct {
 
 	// The pricing bucket for which the query is charged at.
 	//
-	// For more inforamtion on pricing, please visit [Amazon Location Service Pricing].
+	// For more information on pricing, please visit [Amazon Location Service Pricing].
 	//
 	// [Amazon Location Service Pricing]: https://aws.amazon.com/location/pricing/
 	//

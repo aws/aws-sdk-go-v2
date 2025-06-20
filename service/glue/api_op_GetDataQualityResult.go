@@ -38,7 +38,13 @@ type GetDataQualityResultInput struct {
 	noSmithyDocumentSerde
 }
 
+// The response for the data quality result.
 type GetDataQualityResultOutput struct {
+
+	//  A summary of DataQualityAggregatedMetrics objects showing the total counts of
+	// processed rows and rules, including their pass/fail statistics based on
+	// row-level results.
+	AggregatedMetrics *types.DataQualityAggregatedMetrics
 
 	// A list of DataQualityAnalyzerResult objects representing the results for each
 	// analyzer.

@@ -31,6 +31,7 @@ func (c *Client) CreateDataQualityRuleset(ctx context.Context, params *CreateDat
 	return out, nil
 }
 
+// A request to create a data quality ruleset.
 type CreateDataQualityRulesetInput struct {
 
 	// A unique name for the data quality ruleset.

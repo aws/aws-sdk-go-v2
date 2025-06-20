@@ -3134,6 +3134,31 @@ type DatapointInclusionAnnotation struct {
 	noSmithyDocumentSerde
 }
 
+// A summary of metrics showing the total counts of processed rows and rules,
+// including their pass/fail statistics based on row-level results.
+type DataQualityAggregatedMetrics struct {
+
+	// The total number of rows that failed one or more data quality rules.
+	TotalRowsFailed *float64
+
+	// The total number of rows that passed all applicable data quality rules.
+	TotalRowsPassed *float64
+
+	// The total number of rows that were processed during the data quality evaluation.
+	TotalRowsProcessed *float64
+
+	// The total number of data quality rules that failed their evaluation criteria.
+	TotalRulesFailed *float64
+
+	// The total number of data quality rules that passed their evaluation criteria.
+	TotalRulesPassed *float64
+
+	// The total number of data quality rules that were evaluated.
+	TotalRulesProcessed *float64
+
+	noSmithyDocumentSerde
+}
+
 // Describes the result of the evaluation of a data quality analyzer.
 type DataQualityAnalyzerResult struct {
 
@@ -3221,6 +3246,11 @@ type DataQualityObservation struct {
 
 // Describes a data quality result.
 type DataQualityResult struct {
+
+	//  A summary of DataQualityAggregatedMetrics objects showing the total counts of
+	// processed rows and rules, including their pass/fail statistics based on
+	// row-level results.
+	AggregatedMetrics *DataQualityAggregatedMetrics
 
 	// A list of DataQualityAnalyzerResult objects representing the results for each
 	// analyzer.
@@ -3370,6 +3400,10 @@ type DataQualityRuleResult struct {
 
 	// A pass or fail status for the rule.
 	Result DataQualityRuleResultStatus
+
+	// A map containing metrics associated with the evaluation of the rule based on
+	// row-level results.
+	RuleMetrics map[string]float64
 
 	noSmithyDocumentSerde
 }

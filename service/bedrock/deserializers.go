@@ -13930,6 +13930,46 @@ func awsRestjson1_deserializeDocumentGuardrailContentFilters(v *[]types.Guardrai
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGuardrailContentFiltersTier(v **types.GuardrailContentFiltersTier, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GuardrailContentFiltersTier
+	if *v == nil {
+		sv = &types.GuardrailContentFiltersTier{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "tierName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailContentFiltersTierName to be of type string, got %T instead", value)
+				}
+				sv.TierName = types.GuardrailContentFiltersTierName(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGuardrailContentPolicy(v **types.GuardrailContentPolicy, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13954,6 +13994,11 @@ func awsRestjson1_deserializeDocumentGuardrailContentPolicy(v **types.GuardrailC
 		switch key {
 		case "filters":
 			if err := awsRestjson1_deserializeDocumentGuardrailContentFilters(&sv.Filters, value); err != nil {
+				return err
+			}
+
+		case "tier":
+			if err := awsRestjson1_deserializeDocumentGuardrailContentFiltersTier(&sv.Tier, value); err != nil {
 				return err
 			}
 
@@ -14999,6 +15044,11 @@ func awsRestjson1_deserializeDocumentGuardrailTopicPolicy(v **types.GuardrailTop
 
 	for key, value := range shape {
 		switch key {
+		case "tier":
+			if err := awsRestjson1_deserializeDocumentGuardrailTopicsTier(&sv.Tier, value); err != nil {
+				return err
+			}
+
 		case "topics":
 			if err := awsRestjson1_deserializeDocumentGuardrailTopics(&sv.Topics, value); err != nil {
 				return err
@@ -15044,6 +15094,46 @@ func awsRestjson1_deserializeDocumentGuardrailTopics(v *[]types.GuardrailTopic, 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGuardrailTopicsTier(v **types.GuardrailTopicsTier, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GuardrailTopicsTier
+	if *v == nil {
+		sv = &types.GuardrailTopicsTier{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "tierName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailTopicsTierName to be of type string, got %T instead", value)
+				}
+				sv.TierName = types.GuardrailTopicsTierName(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
