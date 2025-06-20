@@ -1,0 +1,9 @@
+{
+    "id": "3a4c3951-c250-4554-a64b-14ce2dddf6ef",
+    "type": "feature",
+    "description": "Support account ID retrieval in IMDS credentials provider, and support new IMDS profile name config:\n\n1. environment: `AWS_EC2_INSTANCE_PROFILE_NAME`\n2. shared config: `ec2_instance_profile_name`",
+    "modules": [
+        "config",
+        "credentials"
+    ]
+}
