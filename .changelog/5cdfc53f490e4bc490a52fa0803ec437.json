@@ -1,8 +1,0 @@
-{
-    "id": "5cdfc53f-490e-4bc4-90a5-2fa0803ec437",
-    "type": "feature",
-    "description": "Add support for tiers in Content Filters and Denied Topics for Amazon Bedrock Guardrails.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

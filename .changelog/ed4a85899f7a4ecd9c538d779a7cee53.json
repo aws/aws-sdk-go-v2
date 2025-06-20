@@ -1,8 +1,0 @@
-{
-    "id": "ed4a8589-9f7a-4ecd-9c53-8d779a7cee53",
-    "type": "feature",
-    "description": "This release adds a new SPECIFIED_OPTIMAL option for handling DDS when using DVB-Sub with high resolution video.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

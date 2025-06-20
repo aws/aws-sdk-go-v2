@@ -1,8 +1,0 @@
-{
-    "id": "2d8b0b48-79cc-4234-8adf-e72ca2f4c5f3",
-    "type": "feature",
-    "description": "AWS Glue Data Quality now provides aggregated metrics in evaluation results when publishAggregatedMetrics with row-level results are enabled. These metrics include summary statistics showing total counts of processed, passed, and failed rows and rules in a single view.",
-    "modules": [
-        "service/glue"
-    ]
-}

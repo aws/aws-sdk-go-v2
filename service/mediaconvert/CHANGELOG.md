@@ -1,3 +1,7 @@
+# v1.75.0 (2025-06-20)
+
+* **Feature**: This release adds a new SPECIFIED_OPTIMAL option for handling DDS when using DVB-Sub with high resolution video.
+
 # v1.74.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

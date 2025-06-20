@@ -1,3 +1,7 @@
+# v1.2.0 (2025-06-20)
+
+* **Feature**: Geocode, ReverseGeocode, and GetPlace APIs added Intersections and SecondaryAddresses. To use, add to the AdditionalFeatures list in your request. This provides info about nearby intersections and secondary addresses that are associated with a main address. Also added MainAddress and ParsedQuery.
+
 # v1.1.4 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

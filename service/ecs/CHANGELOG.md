@@ -1,3 +1,7 @@
+# v1.58.0 (2025-06-20)
+
+* **Feature**: Add ECS support for Windows Server 2025
+
 # v1.57.6 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

@@ -1,3 +1,7 @@
+# v1.36.0 (2025-06-20)
+
+* **Feature**: Add support for tiers in Content Filters and Denied Topics for Amazon Bedrock Guardrails.
+
 # v1.35.1 (2025-06-17)
 
 * **Documentation**: This release of the SDK has the API and documentation for the createcustommodel API. This feature lets you copy a trained model into Amazon Bedrock for inference.

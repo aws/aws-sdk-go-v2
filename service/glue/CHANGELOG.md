@@ -1,3 +1,7 @@
+# v1.114.0 (2025-06-20)
+
+* **Feature**: AWS Glue Data Quality now provides aggregated metrics in evaluation results when publishAggregatedMetrics with row-level results are enabled. These metrics include summary statistics showing total counts of processed, passed, and failed rows and rules in a single view.
+
 # v1.113.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

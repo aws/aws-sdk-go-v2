@@ -1,3 +1,17 @@
+# Release (2025-06-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.36.0](service/bedrock/CHANGELOG.md#v1360-2025-06-20)
+  * **Feature**: Add support for tiers in Content Filters and Denied Topics for Amazon Bedrock Guardrails.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.58.0](service/ecs/CHANGELOG.md#v1580-2025-06-20)
+  * **Feature**: Add ECS support for Windows Server 2025
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.2.0](service/geoplaces/CHANGELOG.md#v120-2025-06-20)
+  * **Feature**: Geocode, ReverseGeocode, and GetPlace APIs added Intersections and SecondaryAddresses. To use, add to the AdditionalFeatures list in your request. This provides info about nearby intersections and secondary addresses that are associated with a main address. Also added MainAddress and ParsedQuery.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.114.0](service/glue/CHANGELOG.md#v11140-2025-06-20)
+  * **Feature**: AWS Glue Data Quality now provides aggregated metrics in evaluation results when publishAggregatedMetrics with row-level results are enabled. These metrics include summary statistics showing total counts of processed, passed, and failed rows and rules in a single view.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.75.0](service/mediaconvert/CHANGELOG.md#v1750-2025-06-20)
+  * **Feature**: This release adds a new SPECIFIED_OPTIMAL option for handling DDS when using DVB-Sub with high resolution video.
+
 # Release (2025-06-19)
 
 ## Module Highlights
