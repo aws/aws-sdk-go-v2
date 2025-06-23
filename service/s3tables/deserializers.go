@@ -5224,6 +5224,15 @@ func awsRestjson1_deserializeDocumentIcebergCompactionSettings(v **types.Iceberg
 
 	for key, value := range shape {
 		switch key {
+		case "strategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IcebergCompactionStrategy to be of type string, got %T instead", value)
+				}
+				sv.Strategy = types.IcebergCompactionStrategy(jtv)
+			}
+
 		case "targetFileSizeMB":
 			if value != nil {
 				jtv, ok := value.(json.Number)

@@ -2717,6 +2717,11 @@ func awsRestjson1_serializeDocumentIcebergCompactionSettings(v *types.IcebergCom
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.Strategy) > 0 {
+		ok := object.Key("strategy")
+		ok.String(string(v.Strategy))
+	}
+
 	if v.TargetFileSizeMB != nil {
 		ok := object.Key("targetFileSizeMB")
 		ok.Integer(*v.TargetFileSizeMB)

@@ -1,0 +1,8 @@
+{
+    "id": "05b401cb-02f7-4859-ad5a-ee15889b339d",
+    "type": "feature",
+    "description": "S3 Tables now supports sort and z-order compaction strategies for Iceberg tables in addition to binpack.",
+    "modules": [
+        "service/s3tables"
+    ]
+}

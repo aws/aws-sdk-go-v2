@@ -1,0 +1,8 @@
+{
+    "id": "c3fbc4a0-33b3-497d-bd28-5d5b401c902f",
+    "type": "feature",
+    "description": "Added support for Amazon WorkSpaces Instances API",
+    "modules": [
+        "service/workspacesinstances"
+    ]
+}

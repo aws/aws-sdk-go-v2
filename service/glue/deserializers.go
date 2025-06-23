@@ -38268,6 +38268,42 @@ func awsAwsjson11_deserializeDocumentColumnValueStringList(v *[]string, value in
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCompactionConfiguration(v **types.CompactionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CompactionConfiguration
+	if *v == nil {
+		sv = &types.CompactionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "icebergConfiguration":
+			if err := awsAwsjson11_deserializeDocumentIcebergCompactionConfiguration(&sv.IcebergConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCompactionMetrics(v **types.CompactionMetrics, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -48427,6 +48463,46 @@ func awsAwsjson11_deserializeDocumentHudiTargetList(v *[]types.HudiTarget, value
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergCompactionConfiguration(v **types.IcebergCompactionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IcebergCompactionConfiguration
+	if *v == nil {
+		sv = &types.IcebergCompactionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "strategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CompactionStrategy to be of type string, got %T instead", value)
+				}
+				sv.Strategy = types.CompactionStrategy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -64281,6 +64357,11 @@ func awsAwsjson11_deserializeDocumentTableOptimizerConfiguration(v **types.Table
 
 	for key, value := range shape {
 		switch key {
+		case "compactionConfiguration":
+			if err := awsAwsjson11_deserializeDocumentCompactionConfiguration(&sv.CompactionConfiguration, value); err != nil {
+				return err
+			}
+
 		case "enabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -64348,6 +64429,15 @@ func awsAwsjson11_deserializeDocumentTableOptimizerRun(v **types.TableOptimizerR
 		case "compactionMetrics":
 			if err := awsAwsjson11_deserializeDocumentCompactionMetrics(&sv.CompactionMetrics, value); err != nil {
 				return err
+			}
+
+		case "compactionStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CompactionStrategy to be of type string, got %T instead", value)
+				}
+				sv.CompactionStrategy = types.CompactionStrategy(jtv)
 			}
 
 		case "endTimestamp":

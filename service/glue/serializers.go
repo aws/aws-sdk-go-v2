@@ -17451,6 +17451,20 @@ func awsAwsjson11_serializeDocumentColumnValueStringList(v []string, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCompactionConfiguration(v *types.CompactionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IcebergConfiguration != nil {
+		ok := object.Key("icebergConfiguration")
+		if err := awsAwsjson11_serializeDocumentIcebergCompactionConfiguration(v.IcebergConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentComputeEnvironmentList(v []types.ComputeEnvironment, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -19905,6 +19919,18 @@ func awsAwsjson11_serializeDocumentHudiTargetList(v []types.HudiTarget, value sm
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIcebergCompactionConfiguration(v *types.IcebergCompactionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Strategy) > 0 {
+		ok := object.Key("strategy")
+		ok.String(string(v.Strategy))
+	}
+
 	return nil
 }
 
@@ -24682,6 +24708,13 @@ func awsAwsjson11_serializeDocumentTableInput(v *types.TableInput, value smithyj
 func awsAwsjson11_serializeDocumentTableOptimizerConfiguration(v *types.TableOptimizerConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CompactionConfiguration != nil {
+		ok := object.Key("compactionConfiguration")
+		if err := awsAwsjson11_serializeDocumentCompactionConfiguration(v.CompactionConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Enabled != nil {
 		ok := object.Key("enabled")

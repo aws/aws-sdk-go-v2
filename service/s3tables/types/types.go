@@ -32,6 +32,10 @@ type EncryptionConfiguration struct {
 // Contains details about the compaction settings for an Iceberg table.
 type IcebergCompactionSettings struct {
 
+	// The compaction strategy to use for the table. This determines how files are
+	// selected and combined during compaction operations.
+	Strategy IcebergCompactionStrategy
+
 	// The target file size for the table in MB.
 	TargetFileSizeMB *int32
 

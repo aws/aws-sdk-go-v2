@@ -1743,6 +1743,17 @@ type ColumnStatisticsTaskSettings struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a compaction optimizer. This configuration defines how
+// data files in your table will be compacted to improve query performance and
+// reduce storage costs.
+type CompactionConfiguration struct {
+
+	// The configuration for an Iceberg compaction optimizer.
+	IcebergConfiguration *IcebergCompactionConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // A structure that contains compaction metrics for the optimizer run.
 type CompactionMetrics struct {
 
@@ -4872,6 +4883,35 @@ type HudiTarget struct {
 	//
 	// The crawler will scan all folders underneath a path for a Hudi folder.
 	Paths []string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an Iceberg compaction optimizer. This configuration
+// defines parameters for optimizing the layout of data files in Iceberg tables.
+type IcebergCompactionConfiguration struct {
+
+	// The strategy to use for compaction. Valid values are:
+	//
+	//   - binpack : Combines small files into larger files, typically targeting sizes
+	//   over 100MB, while applying any pending deletes. This is the recommended
+	//   compaction strategy for most use cases.
+	//
+	//   - sort : Organizes data based on specified columns which are sorted
+	//   hierarchically during compaction, improving query performance for filtered
+	//   operations. This strategy is recommended when your queries frequently filter on
+	//   specific columns. To use this strategy, you must first define a sort order in
+	//   your Iceberg table properties using the sort_order table property.
+	//
+	//   - z-order : Optimizes data organization by blending multiple attributes into a
+	//   single scalar value that can be used for sorting, allowing efficient querying
+	//   across multiple dimensions. This strategy is recommended when you need to query
+	//   data across multiple dimensions simultaneously. To use this strategy, you must
+	//   first define a sort order in your Iceberg table properties using the
+	//   sort_order table property.
+	//
+	// If an input is not provided, the default value 'binpack' will be used.
+	Strategy CompactionStrategy
 
 	noSmithyDocumentSerde
 }
@@ -10003,6 +10043,11 @@ type TableOptimizer struct {
 // configuration when creating or updating a table optimizer.
 type TableOptimizerConfiguration struct {
 
+	// The configuration for a compaction optimizer. This configuration defines how
+	// data files in your table will be compacted to improve query performance and
+	// reduce storage costs.
+	CompactionConfiguration *CompactionConfiguration
+
 	// Whether table optimization is enabled.
 	Enabled *bool
 
@@ -10031,6 +10076,28 @@ type TableOptimizerRun struct {
 
 	// A CompactionMetrics object containing metrics for the optimizer run.
 	CompactionMetrics *CompactionMetrics
+
+	// The strategy used for the compaction run. Indicates which algorithm was applied
+	// to determine how files were selected and combined during the compaction process.
+	// Valid values are:
+	//
+	//   - binpack : Combines small files into larger files, typically targeting sizes
+	//   over 100MB, while applying any pending deletes. This is the recommended
+	//   compaction strategy for most use cases.
+	//
+	//   - sort : Organizes data based on specified columns which are sorted
+	//   hierarchically during compaction, improving query performance for filtered
+	//   operations. This strategy is recommended when your queries frequently filter on
+	//   specific columns. To use this strategy, you must first define a sort order in
+	//   your Iceberg table properties using the sort_order table property.
+	//
+	//   - z-order : Optimizes data organization by blending multiple attributes into a
+	//   single scalar value that can be used for sorting, allowing efficient querying
+	//   across multiple dimensions. This strategy is recommended when you need to query
+	//   data across multiple dimensions simultaneously. To use this strategy, you must
+	//   first define a sort order in your Iceberg table properties using the
+	//   sort_order table property.
+	CompactionStrategy CompactionStrategy
 
 	// Represents the epoch timestamp at which the compaction job ended.
 	EndTimestamp *time.Time

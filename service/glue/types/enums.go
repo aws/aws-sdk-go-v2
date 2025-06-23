@@ -274,6 +274,27 @@ func (ColumnStatisticsType) Values() []ColumnStatisticsType {
 	}
 }
 
+type CompactionStrategy string
+
+// Enum values for CompactionStrategy
+const (
+	CompactionStrategyBinpack CompactionStrategy = "binpack"
+	CompactionStrategySort    CompactionStrategy = "sort"
+	CompactionStrategyZorder  CompactionStrategy = "z-order"
+)
+
+// Values returns all known values for CompactionStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CompactionStrategy) Values() []CompactionStrategy {
+	return []CompactionStrategy{
+		"binpack",
+		"sort",
+		"z-order",
+	}
+}
+
 type Comparator string
 
 // Enum values for Comparator
