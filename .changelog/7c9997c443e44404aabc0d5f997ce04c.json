@@ -1,8 +1,0 @@
-{
-    "id": "7c9997c4-43e4-4404-aabc-0d5f997ce04c",
-    "type": "feature",
-    "description": "AWS Glue now supports sort and z-order strategy for managed automated compaction for Iceberg tables in addition to binpack.",
-    "modules": [
-        "service/glue"
-    ]
-}

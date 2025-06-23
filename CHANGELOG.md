@@ -1,3 +1,14 @@
+# Release (2025-06-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.115.0](service/glue/CHANGELOG.md#v11150-2025-06-23)
+  * **Feature**: AWS Glue now supports sort and z-order strategy for managed automated compaction for Iceberg tables in addition to binpack.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.5.0](service/s3tables/CHANGELOG.md#v150-2025-06-23)
+  * **Feature**: S3 Tables now supports sort and z-order compaction strategies for Iceberg tables in addition to binpack.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesinstances`: [v1.0.0](service/workspacesinstances/CHANGELOG.md#v100-2025-06-23)
+  * **Release**: New AWS service client module
+  * **Feature**: Added support for Amazon WorkSpaces Instances API
+
 # Release (2025-06-20)
 
 ## Module Highlights

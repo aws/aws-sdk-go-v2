@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.7
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.41.3
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.5
-	github.com/aws/aws-sdk-go-v2/service/glue v1.114.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.115.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/iam v1.42.2
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.4

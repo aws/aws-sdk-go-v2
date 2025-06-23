@@ -1,8 +1,0 @@
-{
-    "id": "2476a4a9-f94c-40b8-acd9-c6b632ee4f91",
-    "type": "bugfix",
-    "description": "Remove integration tests for Timestream service",
-    "modules": [
-        "service/internal/integrationtest"
-    ]
-}

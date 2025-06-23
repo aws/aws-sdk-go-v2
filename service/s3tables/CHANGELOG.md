@@ -1,3 +1,7 @@
+# v1.5.0 (2025-06-23)
+
+* **Feature**: S3 Tables now supports sort and z-order compaction strategies for Iceberg tables in addition to binpack.
+
 # v1.4.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.
