@@ -23,7 +23,7 @@ import (
 // one or more locations.
 //
 // If successful, this operation returns the list of added locations with their
-// status set to NEW . Amazon GameLift initiates the process of starting an
+// status set to NEW . Amazon GameLift Servers initiates the process of starting an
 // instance in each added location. You can track the status of each new location
 // by monitoring location creation events using [DescribeFleetEvents].
 //
@@ -33,10 +33,10 @@ import (
 //
 // [Update fleet locations]
 //
-// [Amazon GameLift service locations]for managed hosting.
+// [Amazon GameLift Servers service locations]for managed hosting.
 //
 // [DescribeFleetEvents]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html
-// [Amazon GameLift service locations]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
+// [Amazon GameLift Servers service locations]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
 // [Update fleet locations]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-editing.html#fleets-update-locations
 // [Setting up fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) CreateFleetLocations(ctx context.Context, params *CreateFleetLocationsInput, optFns ...func(*Options)) (*CreateFleetLocationsOutput, error) {
@@ -63,9 +63,9 @@ type CreateFleetLocationsInput struct {
 	FleetId *string
 
 	// A list of locations to deploy additional instances to and manage as part of the
-	// fleet. You can add any Amazon GameLift-supported Amazon Web Services Region as a
-	// remote location, in the form of an Amazon Web Services Region code such as
-	// us-west-2 .
+	// fleet. You can add any Amazon GameLift Servers-supported Amazon Web Services
+	// Region as a remote location, in the form of an Amazon Web Services Region code
+	// such as us-west-2 .
 	//
 	// This member is required.
 	Locations []types.LocationConfiguration
@@ -75,7 +75,7 @@ type CreateFleetLocationsInput struct {
 
 type CreateFleetLocationsOutput struct {
 
-	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
 	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
 	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	//
@@ -87,9 +87,10 @@ type CreateFleetLocationsOutput struct {
 
 	// The remote locations that are being added to the fleet, and the life-cycle
 	// status of each location. For new locations, the status is set to NEW . During
-	// location creation, Amazon GameLift updates each location's status as instances
-	// are deployed there and prepared for game hosting. This list does not include the
-	// fleet home Region or any remote locations that were already added to the fleet.
+	// location creation, Amazon GameLift Servers updates each location's status as
+	// instances are deployed there and prepared for game hosting. This list does not
+	// include the fleet home Region or any remote locations that were already added to
+	// the fleet.
 	LocationStates []types.LocationState
 
 	// Metadata pertaining to the operation's result.

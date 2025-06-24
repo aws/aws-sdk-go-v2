@@ -12,8 +12,8 @@ import (
 )
 
 // Updates the runtime configuration for the specified fleet. The runtime
-// configuration tells Amazon GameLift how to launch server processes on computes
-// in managed EC2 and Anywhere fleets. You can update a fleet's runtime
+// configuration tells Amazon GameLift Servers how to launch server processes on
+// computes in managed EC2 and Anywhere fleets. You can update a fleet's runtime
 // configuration at any time after the fleet is created; it does not need to be in
 // ACTIVE status.
 //
@@ -29,9 +29,9 @@ import (
 //
 // # Learn more
 //
-// [Setting up Amazon GameLift fleets]
+// [Setting up Amazon GameLift Servers fleets]
 //
-// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+// [Setting up Amazon GameLift Servers fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) UpdateRuntimeConfiguration(ctx context.Context, params *UpdateRuntimeConfigurationInput, optFns ...func(*Options)) (*UpdateRuntimeConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateRuntimeConfigurationInput{}
@@ -56,9 +56,9 @@ type UpdateRuntimeConfigurationInput struct {
 	FleetId *string
 
 	// Instructions for launching server processes on fleet computes. Server processes
-	// run either a custom game build executable or a Amazon GameLift Realtime script.
-	// The runtime configuration lists the types of server processes to run, how to
-	// launch them, and the number of processes to run concurrently.
+	// run either a custom game build executable or a Amazon GameLift Servers Realtime
+	// script. The runtime configuration lists the types of server processes to run,
+	// how to launch them, and the number of processes to run concurrently.
 	//
 	// This member is required.
 	RuntimeConfiguration *types.RuntimeConfiguration

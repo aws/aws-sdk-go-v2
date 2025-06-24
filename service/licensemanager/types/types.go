@@ -473,6 +473,9 @@ type LicenseConfigurationUsage struct {
 // Information about a license type conversion task.
 type LicenseConversionContext struct {
 
+	// Product codes referred to in the license conversion process.
+	ProductCodes []ProductCodeListItem
+
 	// The Usage operation value that corresponds to the license type you are
 	// converting your resource from. For more information about which platforms
 	// correspond to which usage operation values see [Sample data: usage operation by platform]
@@ -634,6 +637,22 @@ type OrganizationConfiguration struct {
 	//
 	// This member is required.
 	EnableIntegration bool
+
+	noSmithyDocumentSerde
+}
+
+// A list item that contains a product code.
+type ProductCodeListItem struct {
+
+	// The product code ID
+	//
+	// This member is required.
+	ProductCodeId *string
+
+	// The product code type
+	//
+	// This member is required.
+	ProductCodeType ProductCodeType
 
 	noSmithyDocumentSerde
 }

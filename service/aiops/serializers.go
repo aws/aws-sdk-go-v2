@@ -95,6 +95,13 @@ func awsRestjson1_serializeOpDocumentCreateInvestigationGroupInput(v *CreateInve
 		}
 	}
 
+	if v.CrossAccountConfigurations != nil {
+		ok := object.Key("crossAccountConfigurations")
+		if err := awsRestjson1_serializeDocumentCrossAccountConfigurations(v.CrossAccountConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EncryptionConfiguration != nil {
 		ok := object.Key("encryptionConfiguration")
 		if err := awsRestjson1_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
@@ -924,6 +931,13 @@ func awsRestjson1_serializeOpDocumentUpdateInvestigationGroupInput(v *UpdateInve
 		}
 	}
 
+	if v.CrossAccountConfigurations != nil {
+		ok := object.Key("crossAccountConfigurations")
+		if err := awsRestjson1_serializeDocumentCrossAccountConfigurations(v.CrossAccountConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EncryptionConfiguration != nil {
 		ok := object.Key("encryptionConfiguration")
 		if err := awsRestjson1_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
@@ -974,6 +988,31 @@ func awsRestjson1_serializeDocumentChatConfigurationArns(v []string, value smith
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCrossAccountConfiguration(v *types.CrossAccountConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SourceRoleArn != nil {
+		ok := object.Key("sourceRoleArn")
+		ok.String(*v.SourceRoleArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCrossAccountConfigurations(v []types.CrossAccountConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCrossAccountConfiguration(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

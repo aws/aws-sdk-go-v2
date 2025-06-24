@@ -18,7 +18,7 @@ import (
 //
 // An EC2 fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances.
 // Your game server build is deployed to each fleet instance. Amazon GameLift
-// manages the fleet's instances and controls the lifecycle of game server
+// Servers manages the fleet's instances and controls the lifecycle of game server
 // processes, which host game sessions for players. EC2 fleets can have instances
 // in multiple locations. Each instance in the fleet is designated a Compute .
 //
@@ -39,10 +39,11 @@ import (
 //   - RuntimeConfiguration with at least one ServerProcesses configuration
 //
 // If successful, this operation creates a new fleet resource and places it in NEW
-// status while Amazon GameLift initiates the [fleet creation workflow]. To debug your fleet, fetch logs,
-// view performance metrics or other actions on the fleet, create a development
-// fleet with port 22/3389 open. As a best practice, we recommend opening ports for
-// remote access only when you need them and closing them when you're finished.
+// status while Amazon GameLift Servers initiates the [fleet creation workflow]. To debug your fleet, fetch
+// logs, view performance metrics or other actions on the fleet, create a
+// development fleet with port 22/3389 open. As a best practice, we recommend
+// opening ports for remote access only when you need them and closing them when
+// you're finished.
 //
 // When the fleet status is ACTIVE, you can adjust capacity settings and turn
 // autoscaling on/off for each location.
@@ -50,9 +51,9 @@ import (
 // # Anywhere fleet
 //
 // An Anywhere fleet represents compute resources that are not owned or managed by
-// Amazon GameLift. You might create an Anywhere fleet with your local machine for
-// testing, or use one to host game servers with on-premises hardware or other game
-// hosting solutions.
+// Amazon GameLift Servers. You might create an Anywhere fleet with your local
+// machine for testing, or use one to host game servers with on-premises hardware
+// or other game hosting solutions.
 //
 // To create an Anywhere fleet, provide these required parameters:
 //
@@ -100,20 +101,20 @@ type CreateFleetInput struct {
 	// This member is required.
 	Name *string
 
-	// Amazon GameLift Anywhere configuration options.
+	// Amazon GameLift Servers Anywhere configuration options.
 	AnywhereConfiguration *types.AnywhereConfiguration
 
 	// The unique identifier for a custom game server build to be deployed to a fleet
 	// with compute type EC2 . You can use either the build ID or ARN. The build must
-	// be uploaded to Amazon GameLift and in READY status. This fleet property can't
-	// be changed after the fleet is created.
+	// be uploaded to Amazon GameLift Servers and in READY status. This fleet property
+	// can't be changed after the fleet is created.
 	BuildId *string
 
-	// Prompts Amazon GameLift to generate a TLS/SSL certificate for the fleet. Amazon
-	// GameLift uses the certificates to encrypt traffic between game clients and the
-	// game servers running on Amazon GameLift. By default, the
-	// CertificateConfiguration is DISABLED . You can't change this property after you
-	// create the fleet.
+	// Prompts Amazon GameLift Servers to generate a TLS/SSL certificate for the
+	// fleet. Amazon GameLift Servers uses the certificates to encrypt traffic between
+	// game clients and the game servers running on Amazon GameLift Servers. By
+	// default, the CertificateConfiguration is DISABLED . You can't change this
+	// property after you create the fleet.
 	//
 	// Certificate Manager (ACM) certificates expire after 13 months. Certificate
 	// expiration can cause fleets to fail, preventing players from connecting to
@@ -146,16 +147,16 @@ type CreateFleetInput struct {
 	// managed EC2 fleets. You can leave this parameter empty when creating the fleet,
 	// but you must call [https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings]to set it before players can connect to game sessions. As a
 	// best practice, we recommend opening ports for remote access only when you need
-	// them and closing them when you're finished. For Amazon GameLift Realtime fleets,
-	// Amazon GameLift automatically sets TCP and UDP ranges.
+	// them and closing them when you're finished. For Amazon GameLift Servers Realtime
+	// fleets, Amazon GameLift Servers automatically sets TCP and UDP ranges.
 	//
 	// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings
 	EC2InboundPermissions []types.IpPermission
 
-	// The Amazon GameLift-supported Amazon EC2 instance type to use with managed EC2
-	// fleets. Instance type determines the computing resources that will be used to
-	// host your game servers, including CPU, memory, storage, and networking capacity.
-	// See [Amazon Elastic Compute Cloud Instance Types]for detailed descriptions of Amazon EC2 instance types.
+	// The Amazon GameLift Servers-supported Amazon EC2 instance type to use with
+	// managed EC2 fleets. Instance type determines the computing resources that will
+	// be used to host your game servers, including CPU, memory, storage, and
+	// networking capacity. See [Amazon Elastic Compute Cloud Instance Types]for detailed descriptions of Amazon EC2 instance types.
 	//
 	// [Amazon Elastic Compute Cloud Instance Types]: http://aws.amazon.com/ec2/instance-types/
 	EC2InstanceType types.EC2InstanceType
@@ -179,10 +180,10 @@ type CreateFleetInput struct {
 	// [Access external resources from a game server]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
 	InstanceRoleArn *string
 
-	// Prompts Amazon GameLift to generate a shared credentials file for the IAM role
-	// that's defined in InstanceRoleArn . The shared credentials file is stored on
-	// each fleet instance and refreshed as needed. Use shared credentials for
-	// applications that are deployed along with the game server executable, if the
+	// Prompts Amazon GameLift Servers to generate a shared credentials file for the
+	// IAM role that's defined in InstanceRoleArn . The shared credentials file is
+	// stored on each fleet instance and refreshed as needed. Use shared credentials
+	// for applications that are deployed along with the game server executable, if the
 	// game server is integrated with server SDK version 5.x. For more information
 	// about using shared credentials, see [Communicate with other Amazon Web Services resources from your fleets].
 	//
@@ -192,19 +193,20 @@ type CreateFleetInput struct {
 	// A set of remote locations to deploy additional instances to and manage as a
 	// multi-location fleet. Use this parameter when creating a fleet in Amazon Web
 	// Services Regions that support multiple locations. You can add any Amazon Web
-	// Services Region or Local Zone that's supported by Amazon GameLift. Provide a
-	// list of one or more Amazon Web Services Region codes, such as us-west-2 , or
-	// Local Zone names. When using this parameter, Amazon GameLift requires you to
-	// include your home location in the request. For a list of supported Regions and
-	// Local Zones, see [Amazon GameLift service locations]for managed hosting.
+	// Services Region or Local Zone that's supported by Amazon GameLift Servers.
+	// Provide a list of one or more Amazon Web Services Region codes, such as
+	// us-west-2 , or Local Zone names. When using this parameter, Amazon GameLift
+	// Servers requires you to include your home location in the request. For a list of
+	// supported Regions and Local Zones, see [Amazon GameLift Servers service locations]for managed hosting.
 	//
-	// [Amazon GameLift service locations]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
+	// [Amazon GameLift Servers service locations]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
 	Locations []types.LocationConfiguration
 
-	//  This parameter is no longer used. To specify where Amazon GameLift should
-	// store log files once a server process shuts down, use the Amazon GameLift server
-	// API ProcessReady() and specify one or more directory paths in logParameters .
-	// For more information, see [Initialize the server process]in the Amazon GameLift Developer Guide.
+	//  This parameter is no longer used. To specify where Amazon GameLift Servers
+	// should store log files once a server process shuts down, use the Amazon GameLift
+	// Servers server API ProcessReady() and specify one or more directory paths in
+	// logParameters . For more information, see [Initialize the server process] in the Amazon GameLift Servers
+	// Developer Guide.
 	//
 	// [Initialize the server process]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-initialize
 	LogPaths []string
@@ -226,18 +228,19 @@ type CreateFleetInput struct {
 	//   a scale-down event.
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 
-	// Used when peering your Amazon GameLift fleet with a VPC, the unique identifier
-	// for the Amazon Web Services account that owns the VPC. You can find your account
-	// ID in the Amazon Web Services Management Console under account settings.
+	// Used when peering your Amazon GameLift Servers fleet with a VPC, the unique
+	// identifier for the Amazon Web Services account that owns the VPC. You can find
+	// your account ID in the Amazon Web Services Management Console under account
+	// settings.
 	PeerVpcAwsAccountId *string
 
 	// A unique identifier for a VPC with resources to be accessed by your Amazon
-	// GameLift fleet. The VPC must be in the same Region as your fleet. To look up a
-	// VPC ID, use the [VPC Dashboard]in the Amazon Web Services Management Console. Learn more about
-	// VPC peering in [VPC Peering with Amazon GameLift Fleets].
+	// GameLift Servers fleet. The VPC must be in the same Region as your fleet. To
+	// look up a VPC ID, use the [VPC Dashboard]in the Amazon Web Services Management Console. Learn
+	// more about VPC peering in [VPC Peering with Amazon GameLift Servers Fleets].
 	//
 	// [VPC Dashboard]: https://console.aws.amazon.com/vpc/
-	// [VPC Peering with Amazon GameLift Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
+	// [VPC Peering with Amazon GameLift Servers Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
 	PeerVpcId *string
 
 	// A policy that limits the number of game sessions that an individual player can
@@ -246,10 +249,10 @@ type CreateFleetInput struct {
 
 	// Instructions for how to launch and run server processes on the fleet. Set
 	// runtime configuration for managed EC2 fleets. For an Anywhere fleets, set this
-	// parameter only if the fleet is running the Amazon GameLift Agent. The runtime
-	// configuration defines one or more server process configurations. Each server
-	// process identifies a game executable or Realtime script file and the number of
-	// processes to run concurrently.
+	// parameter only if the fleet is running the Amazon GameLift Servers Agent. The
+	// runtime configuration defines one or more server process configurations. Each
+	// server process identifies a game executable or Realtime script file and the
+	// number of processes to run concurrently.
 	//
 	// This parameter replaces the parameters ServerLaunchPath and
 	// ServerLaunchParameters , which are still supported for backward compatibility.
@@ -257,8 +260,8 @@ type CreateFleetInput struct {
 
 	// The unique identifier for a Realtime configuration script to be deployed to a
 	// fleet with compute type EC2 . You can use either the script ID or ARN. Scripts
-	// must be uploaded to Amazon GameLift prior to creating the fleet. This fleet
-	// property can't be changed after the fleet is created.
+	// must be uploaded to Amazon GameLift Servers prior to creating the fleet. This
+	// fleet property can't be changed after the fleet is created.
 	ScriptId *string
 
 	//  This parameter is no longer used. Specify server launch parameters using the
@@ -290,8 +293,8 @@ type CreateFleetOutput struct {
 
 	// The fleet's locations and life-cycle status of each location. For new fleets,
 	// the status of all locations is set to NEW . During fleet creation, Amazon
-	// GameLift updates each location status as instances are deployed there and
-	// prepared for game hosting. This list includes an entry for the fleet's home
+	// GameLift Servers updates each location status as instances are deployed there
+	// and prepared for game hosting. This list includes an entry for the fleet's home
 	// Region. For fleets with no remote locations, only one entry, representing the
 	// home Region, is returned.
 	LocationStates []types.LocationState

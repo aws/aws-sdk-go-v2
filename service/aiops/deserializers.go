@@ -620,6 +620,11 @@ func awsRestjson1_deserializeOpDocumentGetInvestigationGroupOutput(v **GetInvest
 				sv.CreatedBy = ptr.String(jtv)
 			}
 
+		case "crossAccountConfigurations":
+			if err := awsRestjson1_deserializeDocumentCrossAccountConfigurations(&sv.CrossAccountConfigurations, value); err != nil {
+				return err
+			}
+
 		case "encryptionConfiguration":
 			if err := awsRestjson1_deserializeDocumentEncryptionConfiguration(&sv.EncryptionConfiguration, value); err != nil {
 				return err
@@ -2163,6 +2168,80 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCrossAccountConfiguration(v **types.CrossAccountConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CrossAccountConfiguration
+	if *v == nil {
+		sv = &types.CrossAccountConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "sourceRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.SourceRoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCrossAccountConfigurations(v *[]types.CrossAccountConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CrossAccountConfiguration
+	if *v == nil {
+		cv = []types.CrossAccountConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CrossAccountConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCrossAccountConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

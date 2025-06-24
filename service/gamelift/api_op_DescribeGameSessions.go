@@ -42,7 +42,7 @@ import (
 // with DescribeGameSessions should only be used for games in development with low
 // game session usage.
 //
-// Available in Amazon GameLift Local.
+// Available in Amazon GameLift Servers Local.
 //
 // # Learn more
 //

@@ -25,9 +25,9 @@ import (
 //
 // To request player sessions, specify either a player session ID, game session
 // ID, or player ID. You can filter this request by player session status. If you
-// provide a specific PlayerSessionId or PlayerId , Amazon GameLift ignores the
-// filter criteria. Use the pagination parameters to retrieve results as a set of
-// sequential pages.
+// provide a specific PlayerSessionId or PlayerId , Amazon GameLift Servers ignores
+// the filter criteria. Use the pagination parameters to retrieve results as a set
+// of sequential pages.
 //
 // If successful, a PlayerSession object is returned for each session that matches
 // the request.

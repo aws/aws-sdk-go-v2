@@ -186,6 +186,7 @@ const (
 	LanguageCodeCsCz  LanguageCode = "cs-CZ"
 	LanguageCodeCyWl  LanguageCode = "cy-WL"
 	LanguageCodeElGr  LanguageCode = "el-GR"
+	LanguageCodeEtEe  LanguageCode = "et-EE"
 	LanguageCodeEtEt  LanguageCode = "et-ET"
 	LanguageCodeEuEs  LanguageCode = "eu-ES"
 	LanguageCodeFiFi  LanguageCode = "fi-FI"
@@ -298,6 +299,7 @@ func (LanguageCode) Values() []LanguageCode {
 		"cs-CZ",
 		"cy-WL",
 		"el-GR",
+		"et-EE",
 		"et-ET",
 		"eu-ES",
 		"fi-FI",

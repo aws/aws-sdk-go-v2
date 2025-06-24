@@ -38885,6 +38885,19 @@ func awsAwsquery_deserializeDocumentDBSnapshot(v **types.DBSnapshot, decoder smi
 				return err
 			}
 
+		case strings.EqualFold("SnapshotAvailabilityZone", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SnapshotAvailabilityZone = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("SnapshotCreateTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

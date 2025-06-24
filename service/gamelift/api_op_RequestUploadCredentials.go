@@ -12,8 +12,8 @@ import (
 )
 
 // Retrieves a fresh set of credentials for use when uploading a new set of game
-// build files to Amazon GameLift's Amazon S3. This is done as part of the build
-// creation process; see [CreateBuild].
+// build files to Amazon GameLift Servers's Amazon S3. This is done as part of the
+// build creation process; see [CreateBuild].
 //
 // To request new credentials, specify the build ID as returned with an initial
 // CreateBuild request. If successful, a new set of credentials are returned, along

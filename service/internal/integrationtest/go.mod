@@ -276,8 +276,6 @@ replace github.com/aws/aws-sdk-go-v2/service/sts => ../../../service/sts/
 
 replace github.com/aws/aws-sdk-go-v2/service/support => ../../../service/support/
 
-replace github.com/aws/aws-sdk-go-v2/service/timestreamwrite => ../../../service/timestreamwrite/
-
 replace github.com/aws/aws-sdk-go-v2/service/transcribestreaming => ../../../service/transcribestreaming/
 
 replace github.com/aws/aws-sdk-go-v2/service/waf => ../../../service/waf/

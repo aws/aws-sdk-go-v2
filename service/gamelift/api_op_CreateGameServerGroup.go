@@ -11,16 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation is used with the Amazon GameLift FleetIQ solution and game
+//	This operation is used with the Amazon GameLift Servers FleetIQ solution and
 //
-// server groups.
+// game server groups.
 //
-// Creates a Amazon GameLift FleetIQ game server group for managing game hosting
-// on a collection of Amazon Elastic Compute Cloud instances for game hosting. This
-// operation creates the game server group, creates an Auto Scaling group in your
-// Amazon Web Services account, and establishes a link between the two groups. You
-// can view the status of your game server groups in the Amazon GameLift console.
-// Game server group metrics and events are emitted to Amazon CloudWatch.
+// Creates a Amazon GameLift Servers FleetIQ game server group for managing game
+// hosting on a collection of Amazon Elastic Compute Cloud instances for game
+// hosting. This operation creates the game server group, creates an Auto Scaling
+// group in your Amazon Web Services account, and establishes a link between the
+// two groups. You can view the status of your game server groups in the Amazon
+// GameLift Servers console. Game server group metrics and events are emitted to
+// Amazon CloudWatch.
 //
 // Before creating a new game server group, you must have the following:
 //
@@ -29,30 +30,31 @@ import (
 //     more information, see [Launching an Instance from a Launch Template]in the Amazon Elastic Compute Cloud User Guide.
 //
 //   - An IAM role that extends limited access to your Amazon Web Services account
-//     to allow Amazon GameLift FleetIQ to create and interact with the Auto Scaling
-//     group. For more information, see [Create IAM roles for cross-service interaction]in the Amazon GameLift FleetIQ Developer
-//     Guide.
+//     to allow Amazon GameLift Servers FleetIQ to create and interact with the Auto
+//     Scaling group. For more information, see [Create IAM roles for cross-service interaction]in the Amazon GameLift Servers
+//     FleetIQ Developer Guide.
 //
 // To create a new game server group, specify a unique group name, IAM role and
 // Amazon Elastic Compute Cloud launch template, and provide a list of instance
 // types that can be used in the group. You must also set initial maximum and
 // minimum limits on the group's instance count. You can optionally set an Auto
-// Scaling policy with target tracking based on a Amazon GameLift FleetIQ metric.
+// Scaling policy with target tracking based on a Amazon GameLift Servers FleetIQ
+// metric.
 //
 // Once the game server group and corresponding Auto Scaling group are created,
 // you have full access to change the Auto Scaling group's configuration as needed.
 // Several properties that are set when creating a game server group, including
 // maximum/minimum size and auto-scaling policy settings, must be updated directly
 // in the Auto Scaling group. Keep in mind that some Auto Scaling group properties
-// are periodically updated by Amazon GameLift FleetIQ as part of its balancing
-// activities to optimize for availability and cost.
+// are periodically updated by Amazon GameLift Servers FleetIQ as part of its
+// balancing activities to optimize for availability and cost.
 //
 // # Learn more
 //
-// [Amazon GameLift FleetIQ Guide]
+// [Amazon GameLift Servers FleetIQ Guide]
 //
+// [Amazon GameLift Servers FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
 // [Create IAM roles for cross-service interaction]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-iam-permissions-roles.html
-// [Amazon GameLift FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
 // [Launching an Instance from a Launch Template]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
 func (c *Client) CreateGameServerGroup(ctx context.Context, params *CreateGameServerGroupInput, optFns ...func(*Options)) (*CreateGameServerGroupOutput, error) {
 	if params == nil {
@@ -73,19 +75,20 @@ type CreateGameServerGroupInput struct {
 
 	// An identifier for the new game server group. This value is used to generate
 	// unique ARN identifiers for the Amazon EC2 Auto Scaling group and the Amazon
-	// GameLift FleetIQ game server group. The name must be unique per Region per
-	// Amazon Web Services account.
+	// GameLift Servers FleetIQ game server group. The name must be unique per Region
+	// per Amazon Web Services account.
 	//
 	// This member is required.
 	GameServerGroupName *string
 
 	// The Amazon EC2 instance types and sizes to use in the Auto Scaling group. The
 	// instance definitions must specify at least two different instance types that are
-	// supported by Amazon GameLift FleetIQ. For more information on instance types,
-	// see [EC2 Instance Types]in the Amazon Elastic Compute Cloud User Guide. You can optionally specify
-	// capacity weighting for each instance type. If no weight value is specified for
-	// an instance type, it is set to the default value "1". For more information about
-	// capacity weighting, see [Instance Weighting for Amazon EC2 Auto Scaling]in the Amazon EC2 Auto Scaling User Guide.
+	// supported by Amazon GameLift Servers FleetIQ. For more information on instance
+	// types, see [EC2 Instance Types]in the Amazon Elastic Compute Cloud User Guide. You can optionally
+	// specify capacity weighting for each instance type. If no weight value is
+	// specified for an instance type, it is set to the default value "1". For more
+	// information about capacity weighting, see [Instance Weighting for Amazon EC2 Auto Scaling]in the Amazon EC2 Auto Scaling User
+	// Guide.
 	//
 	// [Instance Weighting for Amazon EC2 Auto Scaling]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html
 	// [EC2 Instance Types]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
@@ -103,8 +106,8 @@ type CreateGameServerGroupInput struct {
 	//
 	// If you specify network interfaces in your launch template, you must explicitly
 	// set the property AssociatePublicIpAddress to "true". If no network interface is
-	// specified in the launch template, Amazon GameLift FleetIQ uses your account's
-	// default VPC.
+	// specified in the launch template, Amazon GameLift Servers FleetIQ uses your
+	// account's default VPC.
 	//
 	// [Creating a Launch Template for an Auto Scaling Group]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html
 	//
@@ -112,26 +115,26 @@ type CreateGameServerGroupInput struct {
 	LaunchTemplate *types.LaunchTemplateSpecification
 
 	// The maximum number of instances allowed in the Amazon EC2 Auto Scaling group.
-	// During automatic scaling events, Amazon GameLift FleetIQ and EC2 do not scale up
-	// the group above this maximum. After the Auto Scaling group is created, update
-	// this value directly in the Auto Scaling group using the Amazon Web Services
-	// console or APIs.
+	// During automatic scaling events, Amazon GameLift Servers FleetIQ and EC2 do not
+	// scale up the group above this maximum. After the Auto Scaling group is created,
+	// update this value directly in the Auto Scaling group using the Amazon Web
+	// Services console or APIs.
 	//
 	// This member is required.
 	MaxSize *int32
 
 	// The minimum number of instances allowed in the Amazon EC2 Auto Scaling group.
-	// During automatic scaling events, Amazon GameLift FleetIQ and Amazon EC2 do not
-	// scale down the group below this minimum. In production, this value should be set
-	// to at least 1. After the Auto Scaling group is created, update this value
+	// During automatic scaling events, Amazon GameLift Servers FleetIQ and Amazon EC2
+	// do not scale down the group below this minimum. In production, this value should
+	// be set to at least 1. After the Auto Scaling group is created, update this value
 	// directly in the Auto Scaling group using the Amazon Web Services console or
 	// APIs.
 	//
 	// This member is required.
 	MinSize *int32
 
-	// The Amazon Resource Name ([ARN] ) for an IAM role that allows Amazon GameLift to
-	// access your Amazon EC2 Auto Scaling groups.
+	// The Amazon Resource Name ([ARN] ) for an IAM role that allows Amazon GameLift Servers
+	// to access your Amazon EC2 Auto Scaling groups.
 	//
 	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	//
@@ -146,9 +149,9 @@ type CreateGameServerGroupInput struct {
 	// Web Services console or APIs.
 	AutoScalingPolicy *types.GameServerGroupAutoScalingPolicy
 
-	// Indicates how Amazon GameLift FleetIQ balances the use of Spot Instances and
-	// On-Demand Instances in the game server group. Method options include the
-	// following:
+	// Indicates how Amazon GameLift Servers FleetIQ balances the use of Spot
+	// Instances and On-Demand Instances in the game server group. Method options
+	// include the following:
 	//
 	//   - SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot
 	//   Instances are unavailable or not viable for game hosting, the game server group
@@ -186,11 +189,12 @@ type CreateGameServerGroupInput struct {
 	Tags []types.Tag
 
 	// A list of virtual private cloud (VPC) subnets to use with instances in the game
-	// server group. By default, all Amazon GameLift FleetIQ-supported Availability
-	// Zones are used. You can use this parameter to specify VPCs that you've set up.
-	// This property cannot be updated after the game server group is created, and the
-	// corresponding Auto Scaling group will always use the property value that is set
-	// with this request, even if the Auto Scaling group is updated directly.
+	// server group. By default, all Amazon GameLift Servers FleetIQ-supported
+	// Availability Zones are used. You can use this parameter to specify VPCs that
+	// you've set up. This property cannot be updated after the game server group is
+	// created, and the corresponding Auto Scaling group will always use the property
+	// value that is set with this request, even if the Auto Scaling group is updated
+	// directly.
 	VpcSubnets []string
 
 	noSmithyDocumentSerde
@@ -199,9 +203,10 @@ type CreateGameServerGroupInput struct {
 type CreateGameServerGroupOutput struct {
 
 	// The newly created game server group object, including the new ARN value for the
-	// Amazon GameLift FleetIQ game server group and the object's status. The Amazon
-	// EC2 Auto Scaling group ARN is initially null, since the group has not yet been
-	// created. This value is added once the game server group status reaches ACTIVE .
+	// Amazon GameLift Servers FleetIQ game server group and the object's status. The
+	// Amazon EC2 Auto Scaling group ARN is initially null, since the group has not yet
+	// been created. This value is added once the game server group status reaches
+	// ACTIVE .
 	GameServerGroup *types.GameServerGroup
 
 	// Metadata pertaining to the operation's result.

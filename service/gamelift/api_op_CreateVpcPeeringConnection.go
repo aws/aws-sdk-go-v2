@@ -11,12 +11,12 @@ import (
 )
 
 // Establishes a VPC peering connection between a virtual private cloud (VPC) in
-// an Amazon Web Services account with the VPC for your Amazon GameLift fleet. VPC
-// peering enables the game servers on your fleet to communicate directly with
-// other Amazon Web Services resources. You can peer with VPCs in any Amazon Web
-// Services account that you have access to, including the account that you use to
-// manage your Amazon GameLift fleets. You cannot peer with VPCs that are in
-// different Regions. For more information, see [VPC Peering with Amazon GameLift Fleets].
+// an Amazon Web Services account with the VPC for your Amazon GameLift Servers
+// fleet. VPC peering enables the game servers on your fleet to communicate
+// directly with other Amazon Web Services resources. You can peer with VPCs in any
+// Amazon Web Services account that you have access to, including the account that
+// you use to manage your Amazon GameLift Servers fleets. You cannot peer with VPCs
+// that are in different Regions. For more information, see [VPC Peering with Amazon GameLift Servers Fleets].
 //
 // Before calling this operation to establish the peering connection, you first
 // need to use [CreateVpcPeeringAuthorization]and identify the VPC you want to peer with. Once the authorization
@@ -25,7 +25,7 @@ import (
 // acceptance, updating routing tables, etc.
 //
 // To establish the connection, call this operation from the Amazon Web Services
-// account that is used to manage the Amazon GameLift fleets. Identify the
+// account that is used to manage the Amazon GameLift Servers fleets. Identify the
 // following values: (1) The ID of the fleet you want to be enable a VPC peering
 // connection for; (2) The Amazon Web Services account with the VPC that you want
 // to peer with; and (3) The ID of the VPC you want to peer with. This operation is
@@ -39,7 +39,7 @@ import (
 //
 // [DescribeFleetEvents]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html
 // [CreateVpcPeeringAuthorization]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html
-// [VPC Peering with Amazon GameLift Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
+// [VPC Peering with Amazon GameLift Servers Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
 // [DescribeVpcPeeringConnections]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeVpcPeeringConnections.html
 // [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) CreateVpcPeeringConnection(ctx context.Context, params *CreateVpcPeeringConnectionInput, optFns ...func(*Options)) (*CreateVpcPeeringConnectionOutput, error) {
@@ -60,25 +60,25 @@ func (c *Client) CreateVpcPeeringConnection(ctx context.Context, params *CreateV
 type CreateVpcPeeringConnectionInput struct {
 
 	// A unique identifier for the fleet. You can use either the fleet ID or ARN
-	// value. This tells Amazon GameLift which GameLift VPC to peer with.
+	// value. This tells Amazon GameLift Servers which GameLift VPC to peer with.
 	//
 	// This member is required.
 	FleetId *string
 
 	// A unique identifier for the Amazon Web Services account with the VPC that you
-	// want to peer your Amazon GameLift fleet with. You can find your Account ID in
-	// the Amazon Web Services Management Console under account settings.
+	// want to peer your Amazon GameLift Servers fleet with. You can find your Account
+	// ID in the Amazon Web Services Management Console under account settings.
 	//
 	// This member is required.
 	PeerVpcAwsAccountId *string
 
 	// A unique identifier for a VPC with resources to be accessed by your Amazon
-	// GameLift fleet. The VPC must be in the same Region as your fleet. To look up a
-	// VPC ID, use the [VPC Dashboard]in the Amazon Web Services Management Console. Learn more about
-	// VPC peering in [VPC Peering with Amazon GameLift Fleets].
+	// GameLift Servers fleet. The VPC must be in the same Region as your fleet. To
+	// look up a VPC ID, use the [VPC Dashboard]in the Amazon Web Services Management Console. Learn
+	// more about VPC peering in [VPC Peering with Amazon GameLift Servers Fleets].
 	//
 	// [VPC Dashboard]: https://console.aws.amazon.com/vpc/
-	// [VPC Peering with Amazon GameLift Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
+	// [VPC Peering with Amazon GameLift Servers Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
 	//
 	// This member is required.
 	PeerVpcId *string

@@ -15,16 +15,16 @@ import (
 // to host your containerized game servers. Use this operation to define how to
 // deploy a container architecture onto each fleet instance and configure fleet
 // settings. You can create a container fleet in any Amazon Web Services Regions
-// that Amazon GameLift supports for multi-location fleets. A container fleet can
-// be deployed to a single location or multiple locations. Container fleets are
-// deployed with Amazon Linux 2023 as the instance operating system.
+// that Amazon GameLift Servers supports for multi-location fleets. A container
+// fleet can be deployed to a single location or multiple locations. Container
+// fleets are deployed with Amazon Linux 2023 as the instance operating system.
 //
 // Define the fleet's container architecture using container group definitions.
 // Each fleet can have one of the following container group types:
 //
 //   - The game server container group runs your game server build and dependent
-//     software. Amazon GameLift deploys one or more replicas of this container group
-//     to each fleet instance. The number of replicas depends on the computing
+//     software. Amazon GameLift Servers deploys one or more replicas of this container
+//     group to each fleet instance. The number of replicas depends on the computing
 //     capabilities of the fleet instance in use.
 //
 //   - An optional per-instance container group might be used to run other
@@ -97,9 +97,9 @@ type CreateContainerFleetInput struct {
 
 	// The unique identifier for an Identity and Access Management (IAM) role with
 	// permissions to run your containers on resources that are managed by Amazon
-	// GameLift. Use an IAM service role with the GameLiftContainerFleetPolicy managed
-	// policy attached. For more information, see [Set up an IAM service role]. You can't change this fleet
-	// property after the fleet is created.
+	// GameLift Servers. Use an IAM service role with the GameLiftContainerFleetPolicy
+	// managed policy attached. For more information, see [Set up an IAM service role]. You can't change this
+	// fleet property after the fleet is created.
 	//
 	// IAM role ARN values use the following pattern: arn:aws:iam::[Amazon Web
 	// Services account]:role/[role name] .
@@ -138,11 +138,12 @@ type CreateContainerFleetInput struct {
 	// The number of times to replicate the game server container group on each fleet
 	// instance.
 	//
-	// By default, Amazon GameLift calculates the maximum number of game server
-	// container groups that can fit on each instance. This calculation is based on the
-	// CPU and memory resources of the fleet's instance type). To use the calculated
-	// maximum, don't set this parameter. If you set this number manually, Amazon
-	// GameLift uses your value as long as it's less than the calculated maximum.
+	// By default, Amazon GameLift Servers calculates the maximum number of game
+	// server container groups that can fit on each instance. This calculation is based
+	// on the CPU and memory resources of the fleet's instance type). To use the
+	// calculated maximum, don't set this parameter. If you set this number manually,
+	// Amazon GameLift Servers uses your value as long as it's less than the calculated
+	// maximum.
 	GameServerContainerGroupsPerInstance *int32
 
 	// A policy that limits the number of game sessions that each individual player
@@ -154,12 +155,12 @@ type CreateContainerFleetInput struct {
 	// ports map to container ports that are configured in the fleet's container group
 	// definitions.
 	//
-	// By default, Amazon GameLift calculates an optimal port range based on your
-	// fleet configuration. To use the calculated range, don't set this parameter. The
-	// values are:
+	// By default, Amazon GameLift Servers calculates an optimal port range based on
+	// your fleet configuration. To use the calculated range, don't set this parameter.
+	// The values are:
 	//
 	//   - Port range: 4192 to a number calculated based on your fleet configuration.
-	//   Amazon GameLift uses the following formula: 4192 + [# of game server
+	//   Amazon GameLift Servers uses the following formula: 4192 + [# of game server
 	//   container groups per fleet instance] * [# of container ports in the game server
 	//   container group definition] + [# of container ports in the game server container
 	//   group definition]
@@ -168,8 +169,8 @@ type CreateContainerFleetInput struct {
 	// parameter, you must use port numbers that match the fleet's inbound permissions
 	// port range.
 	//
-	// If you set values manually, Amazon GameLift no longer calculates a port range
-	// for you, even if you later remove the manual settings.
+	// If you set values manually, Amazon GameLift Servers no longer calculates a port
+	// range for you, even if you later remove the manual settings.
 	InstanceConnectionPortRange *types.ConnectionPortRange
 
 	// The IP address ranges and port settings that allow inbound traffic to access
@@ -177,14 +178,14 @@ type CreateContainerFleetInput struct {
 	// when remotely accessing a fleet instance, we recommend opening ports only when
 	// you need them and closing them when you're finished.
 	//
-	// By default, Amazon GameLift calculates an optimal port range based on your
-	// fleet configuration. To use the calculated range, don't set this parameter. The
-	// values are:
+	// By default, Amazon GameLift Servers calculates an optimal port range based on
+	// your fleet configuration. To use the calculated range, don't set this parameter.
+	// The values are:
 	//
 	//   - Protocol: UDP
 	//
 	//   - Port range: 4192 to a number calculated based on your fleet configuration.
-	//   Amazon GameLift uses the following formula: 4192 + [# of game server
+	//   Amazon GameLift Servers uses the following formula: 4192 + [# of game server
 	//   container groups per fleet instance] * [# of container ports in the game server
 	//   container group definition] + [# of container ports in the game server container
 	//   group definition]
@@ -193,8 +194,8 @@ type CreateContainerFleetInput struct {
 	// parameter, you must use port numbers that match the fleet's connection port
 	// range.
 	//
-	// If you set values manually, Amazon GameLift no longer calculates a port range
-	// for you, even if you later remove the manual settings.
+	// If you set values manually, Amazon GameLift Servers no longer calculates a port
+	// range for you, even if you later remove the manual settings.
 	InstanceInboundPermissions []types.IpPermission
 
 	// The Amazon EC2 instance type to use for all instances in the fleet. For
@@ -203,10 +204,10 @@ type CreateContainerFleetInput struct {
 	// processing power that's available to host your game servers. This includes
 	// including CPU, memory, storage, and networking capacity.
 	//
-	// By default, Amazon GameLift selects an instance type that fits the needs of
-	// your container groups and is available in all selected fleet locations. You can
-	// also choose to manually set this parameter. See [Amazon Elastic Compute Cloud Instance Types]for detailed descriptions of
-	// Amazon EC2 instance types.
+	// By default, Amazon GameLift Servers selects an instance type that fits the
+	// needs of your container groups and is available in all selected fleet locations.
+	// You can also choose to manually set this parameter. See [Amazon Elastic Compute Cloud Instance Types]for detailed
+	// descriptions of Amazon EC2 instance types.
 	//
 	// You can't update this fleet property later.
 	//
@@ -214,18 +215,18 @@ type CreateContainerFleetInput struct {
 	InstanceType *string
 
 	// A set of locations to deploy container fleet instances to. You can add any
-	// Amazon Web Services Region or Local Zone that's supported by Amazon GameLift.
-	// Provide a list of one or more Amazon Web Services Region codes, such as
+	// Amazon Web Services Region or Local Zone that's supported by Amazon GameLift
+	// Servers. Provide a list of one or more Amazon Web Services Region codes, such as
 	// us-west-2 , or Local Zone names. Also include the fleet's home Region, which is
 	// the Amazon Web Services Region where the fleet is created. For a list of
-	// supported Regions and Local Zones, see [Amazon GameLift service locations]for managed hosting.
+	// supported Regions and Local Zones, see [Amazon GameLift Servers service locations]for managed hosting.
 	//
-	// [Amazon GameLift service locations]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
+	// [Amazon GameLift Servers service locations]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
 	Locations []types.LocationConfiguration
 
-	// A method for collecting container logs for the fleet. Amazon GameLift saves all
-	// standard output for each container in logs, including game session logs. You can
-	// select from the following methods:
+	// A method for collecting container logs for the fleet. Amazon GameLift Servers
+	// saves all standard output for each container in logs, including game session
+	// logs. You can select from the following methods:
 	//
 	//   - CLOUDWATCH -- Send logs to an Amazon CloudWatch log group that you define.
 	//   Each container emits a log stream, which is organized in the log group.
@@ -236,9 +237,9 @@ type CreateContainerFleetInput struct {
 	//
 	// By default, this property is set to CLOUDWATCH .
 	//
-	// Amazon GameLift requires permissions to send logs other Amazon Web Services
-	// services in your account. These permissions are included in the IAM fleet role
-	// for this container fleet (see FleetRoleArn) .
+	// Amazon GameLift Servers requires permissions to send logs other Amazon Web
+	// Services services in your account. These permissions are included in the IAM
+	// fleet role for this container fleet (see FleetRoleArn) .
 	LogConfiguration *types.LogConfiguration
 
 	// The name of an Amazon Web Services CloudWatch metric group to add this fleet
@@ -248,11 +249,11 @@ type CreateContainerFleetInput struct {
 	// at any time.
 	MetricGroups []string
 
-	// Determines whether Amazon GameLift can shut down game sessions on the fleet
-	// that are actively running and hosting players. Amazon GameLift might prompt an
-	// instance shutdown when scaling down fleet capacity or when retiring unhealthy
-	// instances. You can also set game session protection for individual game sessions
-	// using UpdateGameSession.
+	// Determines whether Amazon GameLift Servers can shut down game sessions on the
+	// fleet that are actively running and hosting players. Amazon GameLift Servers
+	// might prompt an instance shutdown when scaling down fleet capacity or when
+	// retiring unhealthy instances. You can also set game session protection for
+	// individual game sessions using UpdateGameSession.
 	//
 	//   - NoProtection -- Game sessions can be shut down during active gameplay.
 	//

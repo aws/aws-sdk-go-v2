@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateEvaluationJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateFoundationModelAgreement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFoundationModelAgreement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateFoundationModelAgreement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateGuardrail(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGuardrail(context.Background(), nil, func(o *Options) {
@@ -223,6 +235,18 @@ func TestCheckSnapshot_DeleteCustomModel(t *testing.T) {
 	_, err := svc.DeleteCustomModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteCustomModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteFoundationModelAgreement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFoundationModelAgreement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteFoundationModelAgreement")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -362,6 +386,18 @@ func TestCheckSnapshot_GetFoundationModel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetFoundationModelAvailability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFoundationModelAvailability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFoundationModelAvailability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetGuardrail(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetGuardrail(context.Background(), nil, func(o *Options) {
@@ -494,6 +530,18 @@ func TestCheckSnapshot_GetProvisionedModelThroughput(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetUseCaseForModelAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUseCaseForModelAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetUseCaseForModelAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCustomModels(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCustomModels(context.Background(), nil, func(o *Options) {
@@ -511,6 +559,18 @@ func TestCheckSnapshot_ListEvaluationJobs(t *testing.T) {
 	_, err := svc.ListEvaluationJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEvaluationJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListFoundationModelAgreementOffers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFoundationModelAgreementOffers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFoundationModelAgreementOffers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -674,6 +734,18 @@ func TestCheckSnapshot_PutModelInvocationLoggingConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutUseCaseForModelAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutUseCaseForModelAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutUseCaseForModelAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RegisterMarketplaceModelEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RegisterMarketplaceModelEndpoint(context.Background(), nil, func(o *Options) {
@@ -817,6 +889,18 @@ func TestUpdateSnapshot_CreateEvaluationJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateFoundationModelAgreement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFoundationModelAgreement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateFoundationModelAgreement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateGuardrail(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGuardrail(context.Background(), nil, func(o *Options) {
@@ -942,6 +1026,18 @@ func TestUpdateSnapshot_DeleteCustomModel(t *testing.T) {
 	_, err := svc.DeleteCustomModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCustomModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteFoundationModelAgreement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFoundationModelAgreement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteFoundationModelAgreement")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1081,6 +1177,18 @@ func TestUpdateSnapshot_GetFoundationModel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetFoundationModelAvailability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFoundationModelAvailability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFoundationModelAvailability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetGuardrail(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetGuardrail(context.Background(), nil, func(o *Options) {
@@ -1213,6 +1321,18 @@ func TestUpdateSnapshot_GetProvisionedModelThroughput(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetUseCaseForModelAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUseCaseForModelAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetUseCaseForModelAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCustomModels(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCustomModels(context.Background(), nil, func(o *Options) {
@@ -1230,6 +1350,18 @@ func TestUpdateSnapshot_ListEvaluationJobs(t *testing.T) {
 	_, err := svc.ListEvaluationJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEvaluationJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFoundationModelAgreementOffers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFoundationModelAgreementOffers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFoundationModelAgreementOffers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1386,6 +1518,18 @@ func TestUpdateSnapshot_PutModelInvocationLoggingConfiguration(t *testing.T) {
 	_, err := svc.PutModelInvocationLoggingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutModelInvocationLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutUseCaseForModelAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutUseCaseForModelAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutUseCaseForModelAccess")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

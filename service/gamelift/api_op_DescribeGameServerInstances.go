@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation is used with the Amazon GameLift FleetIQ solution and game
+//	This operation is used with the Amazon GameLift Servers FleetIQ solution and
 //
-// server groups.
+// game server groups.
 //
 // Retrieves status information about the Amazon EC2 instances associated with a
-// Amazon GameLift FleetIQ game server group. Use this operation to detect when
-// instances are active or not available to host new game servers.
+// Amazon GameLift Servers FleetIQ game server group. Use this operation to detect
+// when instances are active or not available to host new game servers.
 //
 // To request status for all instances in the game server group, provide a game
 // server group ID only. To request status for specific instances, provide the game
@@ -32,9 +32,9 @@ import (
 //
 // # Learn more
 //
-// [Amazon GameLift FleetIQ Guide]
+// [Amazon GameLift Servers FleetIQ Guide]
 //
-// [Amazon GameLift FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
+// [Amazon GameLift Servers FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
 func (c *Client) DescribeGameServerInstances(ctx context.Context, params *DescribeGameServerInstancesInput, optFns ...func(*Options)) (*DescribeGameServerInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerInstancesInput{}

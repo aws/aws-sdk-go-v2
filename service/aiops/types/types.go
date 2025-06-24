@@ -6,6 +6,17 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// This structure contains information about the cross-account configuration in
+// the account.
+type CrossAccountConfiguration struct {
+
+	// The ARN of an existing role which will be used to do investigations on your
+	// behalf.
+	SourceRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Use this structure to specify a customer managed KMS key to use to encrypt
 // investigation data.
 type EncryptionConfiguration struct {

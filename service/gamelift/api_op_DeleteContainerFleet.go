@@ -19,9 +19,9 @@ import (
 //
 // # Learn more
 //
-// [Setting up Amazon GameLift Fleets]
+// [Setting up Amazon GameLift Servers Fleets]
 //
-// [Setting up Amazon GameLift Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+// [Setting up Amazon GameLift Servers Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) DeleteContainerFleet(ctx context.Context, params *DeleteContainerFleetInput, optFns ...func(*Options)) (*DeleteContainerFleetOutput, error) {
 	if params == nil {
 		params = &DeleteContainerFleetInput{}

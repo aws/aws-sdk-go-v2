@@ -11,25 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation is used with the Amazon GameLift FleetIQ solution and game
+//	This operation is used with the Amazon GameLift Servers FleetIQ solution and
 //
-// server groups.
+// game server groups.
 //
-// Updates Amazon GameLift FleetIQ-specific properties for a game server group.
-// Many Auto Scaling group properties are updated on the Auto Scaling group
+// Updates Amazon GameLift Servers FleetIQ-specific properties for a game server
+// group. Many Auto Scaling group properties are updated on the Auto Scaling group
 // directly, including the launch template, Auto Scaling policies, and
 // maximum/minimum/desired instance counts.
 //
 // To update the game server group, specify the game server group ID and provide
 // the updated values. Before applying the updates, the new values are validated to
-// ensure that Amazon GameLift FleetIQ can continue to perform instance balancing
-// activity. If successful, a GameServerGroup object is returned.
+// ensure that Amazon GameLift Servers FleetIQ can continue to perform instance
+// balancing activity. If successful, a GameServerGroup object is returned.
 //
 // # Learn more
 //
-// [Amazon GameLift FleetIQ Guide]
+// [Amazon GameLift Servers FleetIQ Guide]
 //
-// [Amazon GameLift FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
+// [Amazon GameLift Servers FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
 func (c *Client) UpdateGameServerGroup(ctx context.Context, params *UpdateGameServerGroupInput, optFns ...func(*Options)) (*UpdateGameServerGroupOutput, error) {
 	if params == nil {
 		params = &UpdateGameServerGroupInput{}
@@ -52,9 +52,9 @@ type UpdateGameServerGroupInput struct {
 	// This member is required.
 	GameServerGroupName *string
 
-	// Indicates how Amazon GameLift FleetIQ balances the use of Spot Instances and
-	// On-Demand Instances in the game server group. Method options include the
-	// following:
+	// Indicates how Amazon GameLift Servers FleetIQ balances the use of Spot
+	// Instances and On-Demand Instances in the game server group. Method options
+	// include the following:
 	//
 	//   - SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot
 	//   Instances are unavailable or not viable for game hosting, the game server group
@@ -85,8 +85,8 @@ type UpdateGameServerGroupInput struct {
 
 	// An updated list of Amazon EC2 instance types to use in the Auto Scaling group.
 	// The instance definitions must specify at least two different instance types that
-	// are supported by Amazon GameLift FleetIQ. This updated list replaces the entire
-	// current list of instance definitions for the game server group. For more
+	// are supported by Amazon GameLift Servers FleetIQ. This updated list replaces the
+	// entire current list of instance definitions for the game server group. For more
 	// information on instance types, see [EC2 Instance Types]in the Amazon EC2 User Guide. You can
 	// optionally specify capacity weighting for each instance type. If no weight value
 	// is specified for an instance type, it is set to the default value "1". For more
@@ -97,8 +97,8 @@ type UpdateGameServerGroupInput struct {
 	// [EC2 Instance Types]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
 	InstanceDefinitions []types.InstanceDefinition
 
-	// The Amazon Resource Name ([ARN] ) for an IAM role that allows Amazon GameLift to
-	// access your Amazon EC2 Auto Scaling groups.
+	// The Amazon Resource Name ([ARN] ) for an IAM role that allows Amazon GameLift Servers
+	// to access your Amazon EC2 Auto Scaling groups.
 	//
 	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	RoleArn *string

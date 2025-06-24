@@ -11,8 +11,9 @@ import (
 )
 
 // Deletes a fleet scaling policy. Once deleted, the policy is no longer in force
-// and Amazon GameLift removes all record of it. To delete a scaling policy,
-// specify both the scaling policy name and the fleet ID it is associated with.
+// and Amazon GameLift Servers removes all record of it. To delete a scaling
+// policy, specify both the scaling policy name and the fleet ID it is associated
+// with.
 //
 // To temporarily suspend scaling policies, use [StopFleetActions]. This operation suspends all
 // policies for the fleet.

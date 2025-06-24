@@ -12406,6 +12406,16 @@ func awsAwsquery_serializeOpDocumentCopyDBSnapshotInput(v *CopyDBSnapshotInput, 
 		objectKey.String(*v.PreSignedUrl)
 	}
 
+	if v.SnapshotAvailabilityZone != nil {
+		objectKey := object.Key("SnapshotAvailabilityZone")
+		objectKey.String(*v.SnapshotAvailabilityZone)
+	}
+
+	if v.SnapshotTarget != nil {
+		objectKey := object.Key("SnapshotTarget")
+		objectKey.String(*v.SnapshotTarget)
+	}
+
 	if v.SourceDBSnapshotIdentifier != nil {
 		objectKey := object.Key("SourceDBSnapshotIdentifier")
 		objectKey.String(*v.SourceDBSnapshotIdentifier)
@@ -13351,6 +13361,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 	if v.AvailabilityZone != nil {
 		objectKey := object.Key("AvailabilityZone")
 		objectKey.String(*v.AvailabilityZone)
+	}
+
+	if v.BackupTarget != nil {
+		objectKey := object.Key("BackupTarget")
+		objectKey.String(*v.BackupTarget)
 	}
 
 	if v.CACertificateIdentifier != nil {

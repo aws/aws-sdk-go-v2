@@ -46,10 +46,13 @@ type CreateResolverEndpointInput struct {
 	// Specify the applicable value:
 	//
 	//   - INBOUND : Resolver forwards DNS queries to the DNS service for a VPC from
-	//   your network
+	//   your network.
 	//
 	//   - OUTBOUND : Resolver forwards DNS queries from the DNS service for a VPC to
-	//   your network
+	//   your network.
+	//
+	//   - INBOUND_DELEGATION : Resolver delegates queries to Route 53 private hosted
+	//   zones from your network.
 	//
 	// This member is required.
 	Direction types.ResolverEndpointDirection
@@ -95,9 +98,9 @@ type CreateResolverEndpointInput struct {
 	PreferredInstanceType *string
 
 	//  The protocols you want to use for the endpoint. DoH-FIPS is applicable for
-	// inbound endpoints only.
+	// default inbound endpoints only.
 	//
-	// For an inbound endpoint you can apply the protocols as follows:
+	// For a default inbound endpoint you can apply the protocols as follows:
 	//
 	//   - Do53 and DoH in combination.
 	//
@@ -110,6 +113,8 @@ type CreateResolverEndpointInput struct {
 	//   - DoH-FIPS alone.
 	//
 	//   - None, which is treated as Do53.
+	//
+	// For a delegation inbound endpoint you can use Do53 only.
 	//
 	// For an outbound endpoint you can apply the protocols as follows:
 	//

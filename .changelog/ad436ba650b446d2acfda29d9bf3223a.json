@@ -1,0 +1,8 @@
+{
+    "id": "ad436ba6-50b4-46d2-acfd-a29d9bf3223a",
+    "type": "feature",
+    "description": "Add support for UDP ping beacons to ListLocations API, including new PingBeacon and UDPEndpoint data types within its Locations return value. Use UDP ping beacon endpoints to help measure real-time network latency for multiplayer games.",
+    "modules": [
+        "service/gamelift"
+    ]
+}

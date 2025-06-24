@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays the tags associated with a Amazon Q Developer operational
-// investigations resource. Currently, investigation groups support tagging.
+// Displays the tags associated with a CloudWatch investigations resource.
+// Currently, investigation groups support tagging.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -29,9 +29,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the Amazon Q Developer operational investigations resource that you
-	// want to view tags for. You can use the [ListInvestigationGroups]operation to find the ARNs of
-	// investigation groups.
+	// The ARN of the CloudWatch investigations resource that you want to view tags
+	// for. You can use the [ListInvestigationGroups]operation to find the ARNs of investigation groups.
 	//
 	// The ARN format for an investigation group is
 	// arn:aws:aiops:Region:account-id:investigation-group:investigation-group-id .

@@ -3344,6 +3344,13 @@ func awsAwsjson11_serializeDocumentLicenseConversionContext(v *types.LicenseConv
 	object := value.Object()
 	defer object.Close()
 
+	if v.ProductCodes != nil {
+		ok := object.Key("ProductCodes")
+		if err := awsAwsjson11_serializeDocumentProductCodeList(v.ProductCodes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UsageOperation != nil {
 		ok := object.Key("UsageOperation")
 		ok.String(*v.UsageOperation)
@@ -3455,6 +3462,36 @@ func awsAwsjson11_serializeDocumentPrincipalArnList(v []string, value smithyjson
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProductCodeList(v []types.ProductCodeListItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentProductCodeListItem(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProductCodeListItem(v *types.ProductCodeListItem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ProductCodeId != nil {
+		ok := object.Key("ProductCodeId")
+		ok.String(*v.ProductCodeId)
+	}
+
+	if len(v.ProductCodeType) > 0 {
+		ok := object.Key("ProductCodeType")
+		ok.String(string(v.ProductCodeType))
+	}
+
 	return nil
 }
 

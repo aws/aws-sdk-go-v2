@@ -52,7 +52,7 @@ func (c *Client) ListContainerGroupDefinitions(ctx context.Context, params *List
 type ListContainerGroupDefinitionsInput struct {
 
 	// The type of container group to retrieve. Container group type determines how
-	// Amazon GameLift deploys the container group on each fleet instance.
+	// Amazon GameLift Servers deploys the container group on each fleet instance.
 	ContainerGroupType types.ContainerGroupType
 
 	// The maximum number of results to return. Use this parameter with NextToken to

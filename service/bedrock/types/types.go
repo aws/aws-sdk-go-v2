@@ -8,6 +8,20 @@ import (
 	"time"
 )
 
+// Information about the agreement availability
+type AgreementAvailability struct {
+
+	// Status of the agreement.
+	//
+	// This member is required.
+	Status AgreementStatus
+
+	// Error message.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details of an automated evaluation job. The
 // EvaluationDatasetMetricConfig object is used to specify the prompt datasets,
 // task type, and metric names.
@@ -329,6 +343,24 @@ type DataProcessingDetails struct {
 
 	// The status of the data processing sub-task of the job.
 	Status JobStatusDetails
+
+	noSmithyDocumentSerde
+}
+
+// Dimensional price rate.
+type DimensionalPriceRate struct {
+
+	// Description of the price rate.
+	Description *string
+
+	// Dimension for the price rate.
+	Dimension *string
+
+	// Single-dimensional rate information.
+	Price *string
+
+	// Unit associated with the price.
+	Unit *string
 
 	noSmithyDocumentSerde
 }
@@ -2538,6 +2570,15 @@ type KnowledgeBaseVectorSearchConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The legal term of the agreement.
+type LegalTerm struct {
+
+	// URL to the legal term document.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration fields for invocation logging.
 type LoggingConfig struct {
 
@@ -3007,6 +3048,25 @@ type ModelInvocationJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An offer dictates usage terms for the model.
+type Offer struct {
+
+	// Offer token.
+	//
+	// This member is required.
+	OfferToken *string
+
+	// Details about the terms of the offer.
+	//
+	// This member is required.
+	TermDetails *TermDetails
+
+	// Offer Id for a model offer.
+	OfferId *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details for the model to process the prompt prior to
 // retrieval and response generation.
 type OrchestrationConfiguration struct {
@@ -3036,6 +3096,17 @@ type PerformanceConfiguration struct {
 	// Specifies whether to use the latency-optimized or standard version of a model
 	// or inference profile.
 	Latency PerformanceConfigLatency
+
+	noSmithyDocumentSerde
+}
+
+// Describes the usage-based pricing term.
+type PricingTerm struct {
+
+	// Describes a usage price for each dimension.
+	//
+	// This member is required.
+	RateCard []DimensionalPriceRate
 
 	noSmithyDocumentSerde
 }
@@ -3696,6 +3767,15 @@ type StatusDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a support term.
+type SupportTerm struct {
+
+	// Describes the refund policy.
+	RefundPolicyDescription *string
+
+	noSmithyDocumentSerde
+}
+
 // Definition of the key/value pair for a tag.
 type Tag struct {
 
@@ -3723,6 +3803,30 @@ type TeacherModelConfig struct {
 	// The maximum number of tokens requested when the customization job invokes the
 	// teacher model.
 	MaxResponseLengthForInference *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the usage terms of an offer.
+type TermDetails struct {
+
+	// Describes the legal terms.
+	//
+	// This member is required.
+	LegalTerm *LegalTerm
+
+	// Describes the support terms.
+	//
+	// This member is required.
+	SupportTerm *SupportTerm
+
+	// Describes the usage-based pricing term.
+	//
+	// This member is required.
+	UsageBasedPricingTerm *PricingTerm
+
+	// Describes the validity terms.
+	ValidityTerm *ValidityTerm
 
 	noSmithyDocumentSerde
 }
@@ -3837,6 +3941,15 @@ type ValidatorMetric struct {
 
 	// The validation loss associated with this validator.
 	ValidationLoss *float32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the validity terms.
+type ValidityTerm struct {
+
+	// Describes the agreement duration.
+	AgreementDuration *string
 
 	noSmithyDocumentSerde
 }

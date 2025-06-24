@@ -488,3 +488,22 @@ func (RetryAction) Values() []RetryAction {
 		"EXIT",
 	}
 }
+
+type UserdataType string
+
+// Enum values for UserdataType
+const (
+	UserdataTypeEksBootstrapSh UserdataType = "EKS_BOOTSTRAP_SH"
+	UserdataTypeEksNodeadm     UserdataType = "EKS_NODEADM"
+)
+
+// Values returns all known values for UserdataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserdataType) Values() []UserdataType {
+	return []UserdataType{
+		"EKS_BOOTSTRAP_SH",
+		"EKS_NODEADM",
+	}
+}

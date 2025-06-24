@@ -1715,8 +1715,8 @@ type DBInstance struct {
 	// The number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod *int32
 
-	// The location where automated backups and manual snapshots are stored: Amazon
-	// Web Services Outposts or the Amazon Web Services Region.
+	// The location where automated backups and manual snapshots are stored: Dedicated
+	// Local Zones, Amazon Web Services Outposts or the Amazon Web Services Region.
 	BackupTarget *string
 
 	// The identifier of the CA certificate for this DB instance.
@@ -2136,8 +2136,8 @@ type DBInstanceAutomatedBackup struct {
 	// The retention period for the automated backups.
 	BackupRetentionPeriod *int32
 
-	// The location where automated backups are stored: Amazon Web Services Outposts
-	// or the Amazon Web Services Region.
+	// The location where automated backups are stored: Dedicated Local Zones, Amazon
+	// Web Services Outposts or the Amazon Web Services Region.
 	BackupTarget *string
 
 	// The Amazon Resource Name (ARN) for the automated backups.
@@ -2921,6 +2921,11 @@ type DBSnapshot struct {
 	// class of the DB instance when the DB snapshot was created.
 	ProcessorFeatures []ProcessorFeature
 
+	// Specifies the name of the Availability Zone where RDS stores the DB snapshot.
+	// This value is valid only for snapshots that RDS stores on a Dedicated Local
+	// Zone.
+	SnapshotAvailabilityZone *string
+
 	// Specifies when the snapshot was taken in Coordinated Universal Time (UTC).
 	// Changes for the copy when the snapshot is copied.
 	SnapshotCreateTime *time.Time
@@ -2937,8 +2942,8 @@ type DBSnapshot struct {
 	// the replica lag is two hours.
 	SnapshotDatabaseTime *time.Time
 
-	// Specifies where manual snapshots are stored: Amazon Web Services Outposts or
-	// the Amazon Web Services Region.
+	// Specifies where manual snapshots are stored: Dedicated Local Zones, Amazon Web
+	// Services Outposts or the Amazon Web Services Region.
 	SnapshotTarget *string
 
 	// Provides the type of the DB snapshot.

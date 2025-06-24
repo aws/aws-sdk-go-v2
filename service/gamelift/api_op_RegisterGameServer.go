@@ -11,16 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation is used with the Amazon GameLift FleetIQ solution and game
+//	This operation is used with the Amazon GameLift Servers FleetIQ solution and
 //
-// server groups.
+// game server groups.
 //
-// Creates a new game server resource and notifies Amazon GameLift FleetIQ that
-// the game server is ready to host gameplay and players. This operation is called
-// by a game server process that is running on an instance in a game server group.
-// Registering game servers enables Amazon GameLift FleetIQ to track available game
-// servers and enables game clients and services to claim a game server for a new
-// game session.
+// Creates a new game server resource and notifies Amazon GameLift Servers FleetIQ
+// that the game server is ready to host gameplay and players. This operation is
+// called by a game server process that is running on an instance in a game server
+// group. Registering game servers enables Amazon GameLift Servers FleetIQ to track
+// available game servers and enables game clients and services to claim a game
+// server for a new game session.
 //
 // To register a game server, identify the game server group and instance where
 // the game server is running, and provide a unique identifier for the game server.
@@ -33,9 +33,9 @@ import (
 //
 // # Learn more
 //
-// [Amazon GameLift FleetIQ Guide]
+// [Amazon GameLift Servers FleetIQ Guide]
 //
-// [Amazon GameLift FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
+// [Amazon GameLift Servers FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
 func (c *Client) RegisterGameServer(ctx context.Context, params *RegisterGameServerInput, optFns ...func(*Options)) (*RegisterGameServerOutput, error) {
 	if params == nil {
 		params = &RegisterGameServerInput{}

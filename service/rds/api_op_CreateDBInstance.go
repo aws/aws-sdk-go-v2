@@ -267,6 +267,8 @@ type CreateDBInstanceInput struct {
 	//
 	// Valid Values:
 	//
+	//   - local (Dedicated Local Zone)
+	//
 	//   - outposts (Amazon Web Services Outposts)
 	//
 	//   - region (Amazon Web Services Region)

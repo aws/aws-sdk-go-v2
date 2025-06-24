@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation is used with the Amazon GameLift FleetIQ solution and game
+//	This operation is used with the Amazon GameLift Servers FleetIQ solution and
 //
-// server groups.
+// game server groups.
 //
 // Terminates a game server group and permanently deletes the game server group
 // record. You have several options for how these resources are impacted when
@@ -34,16 +34,16 @@ import (
 // game server group status is changed to DELETE_SCHEDULED , which prevents new
 // game servers from being registered and stops automatic scaling activity. Once
 // all game servers in the game server group are deregistered, Amazon GameLift
-// FleetIQ can begin deleting resources. If any of the delete operations fail, the
-// game server group is placed in ERROR status.
+// Servers FleetIQ can begin deleting resources. If any of the delete operations
+// fail, the game server group is placed in ERROR status.
 //
-// Amazon GameLift FleetIQ emits delete events to Amazon CloudWatch.
+// Amazon GameLift Servers FleetIQ emits delete events to Amazon CloudWatch.
 //
 // # Learn more
 //
-// [Amazon GameLift FleetIQ Guide]
+// [Amazon GameLift Servers FleetIQ Guide]
 //
-// [Amazon GameLift FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
+// [Amazon GameLift Servers FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
 func (c *Client) DeleteGameServerGroup(ctx context.Context, params *DeleteGameServerGroupInput, optFns ...func(*Options)) (*DeleteGameServerGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGameServerGroupInput{}

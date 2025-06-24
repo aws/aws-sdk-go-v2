@@ -78,13 +78,13 @@ type UpdateMatchmakingConfigurationInput struct {
 	Description *string
 
 	// Indicates whether this matchmaking configuration is being used with Amazon
-	// GameLift hosting or as a standalone matchmaking solution.
+	// GameLift Servers hosting or as a standalone matchmaking solution.
 	//
 	//   - STANDALONE - FlexMatch forms matches and returns match information,
 	//   including players and team assignments, in a [MatchmakingSucceeded]event.
 	//
 	//   - WITH_QUEUE - FlexMatch forms matches and uses the specified Amazon GameLift
-	//   queue to start a game session for the match.
+	//   Servers queue to start a game session for the match.
 	//
 	// [MatchmakingSucceeded]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html#match-events-matchmakingsucceeded
 	FlexMatchMode types.FlexMatchMode
@@ -104,12 +104,12 @@ type UpdateMatchmakingConfigurationInput struct {
 	// [Start a game session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
 	GameSessionData *string
 
-	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift game session
-	// queue resource and uniquely identifies it. ARNs are unique across all Regions.
-	// Format is arn:aws:gamelift:::gamesessionqueue/ . Queues can be located in any
-	// Region. Queues are used to start new Amazon GameLift-hosted game sessions for
-	// matches that are created with this matchmaking configuration. If FlexMatchMode
-	// is set to STANDALONE , do not set this parameter.
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers game
+	// session queue resource and uniquely identifies it. ARNs are unique across all
+	// Regions. Format is arn:aws:gamelift:::gamesessionqueue/ . Queues can be located
+	// in any Region. Queues are used to start new Amazon GameLift Servers-hosted game
+	// sessions for matches that are created with this matchmaking configuration. If
+	// FlexMatchMode is set to STANDALONE , do not set this parameter.
 	//
 	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	GameSessionQueueArns []string

@@ -20962,6 +20962,11 @@ func awsAwsjson11_deserializeDocumentLocationModel(v **types.LocationModel, valu
 				sv.LocationName = ptr.String(jtv)
 			}
 
+		case "PingBeacon":
+			if err := awsAwsjson11_deserializeDocumentPingBeacon(&sv.PingBeacon, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -21921,6 +21926,42 @@ func awsAwsjson11_deserializeDocumentOutOfCapacityException(v **types.OutOfCapac
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPingBeacon(v **types.PingBeacon, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PingBeacon
+	if *v == nil {
+		sv = &types.PingBeacon{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "UDPEndpoint":
+			if err := awsAwsjson11_deserializeDocumentUDPEndpoint(&sv.UDPEndpoint, value); err != nil {
+				return err
 			}
 
 		default:
@@ -23918,6 +23959,59 @@ func awsAwsjson11_deserializeDocumentTerminalRoutingStrategyException(v **types.
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUDPEndpoint(v **types.UDPEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UDPEndpoint
+	if *v == nil {
+		sv = &types.UDPEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Domain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonZeroAndMaxString to be of type string, got %T instead", value)
+				}
+				sv.Domain = ptr.String(jtv)
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:

@@ -23,8 +23,8 @@ import (
 //   - Get a list of fleets filtered by container group definition. Provide the
 //     container group definition name or ARN value.
 //
-//   - To get a list of all Amazon GameLift Realtime fleets with a specific
-//     configuration script, provide the script ID.
+//   - To get a list of all Amazon GameLift Servers Realtime fleets with a
+//     specific configuration script, provide the script ID.
 //
 // Use the pagination parameters to retrieve results as a set of sequential pages.
 //

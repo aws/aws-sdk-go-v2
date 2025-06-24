@@ -35,35 +35,39 @@ type UpdateInvestigationGroupInput struct {
 	// This member is required.
 	Identifier *string
 
-	// Use this structure to integrate Amazon Q Developer operational investigations
-	// with Amazon Q in chat applications. This structure is a string array. For the
-	// first string, specify the ARN of an Amazon SNS topic. For the array of strings,
-	// specify the ARNs of one or more Amazon Q in chat applications configurations
-	// that you want to associate with that topic. For more information about these
-	// configuration ARNs, see [Getting started with Amazon Q in chat applications]and [Resource type defined by Amazon Web Services Chatbot].
+	// Use this structure to integrate CloudWatch investigations with Amazon Q in chat
+	// applications. This structure is a string array. For the first string, specify
+	// the ARN of an Amazon SNS topic. For the array of strings, specify the ARNs of
+	// one or more Amazon Q in chat applications configurations that you want to
+	// associate with that topic. For more information about these configuration ARNs,
+	// see [Getting started with Amazon Q in chat applications]and [Resource type defined by Amazon Web Services Chatbot].
 	//
 	// [Resource type defined by Amazon Web Services Chatbot]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awschatbot.html#awschatbot-resources-for-iam-policies
 	// [Getting started with Amazon Q in chat applications]: https://docs.aws.amazon.com/chatbot/latest/adminguide/getting-started.html
 	ChatbotNotificationChannel map[string][]string
 
+	// Used to configure cross-account access for an investigation group. It allows
+	// the investigation group to access resources in other accounts.
+	CrossAccountConfigurations []types.CrossAccountConfiguration
+
 	// Use this structure if you want to use a customer managed KMS key to encrypt
-	// your investigation data. If you omit this parameter, Amazon Q Developer
-	// operational investigations will use an Amazon Web Services key to encrypt the
-	// data. For more information, see [Encryption of investigation data].
+	// your investigation data. If you omit this parameter, CloudWatch investigations
+	// will use an Amazon Web Services key to encrypt the data. For more information,
+	// see [Encryption of investigation data].
 	//
 	// [Encryption of investigation data]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Investigations-Security.html#Investigations-KMS
 	EncryptionConfiguration *types.EncryptionConfiguration
 
-	// Specify true to enable Amazon Q Developer operational investigations to have
-	// access to change events that are recorded by CloudTrail. The default is true .
+	// Specify true to enable CloudWatch investigations to have access to change
+	// events that are recorded by CloudTrail. The default is true .
 	IsCloudTrailEventHistoryEnabled *bool
 
-	// Specify this field if you want to change the IAM role that Amazon Q Developer
-	// operational investigations will use when it gathers investigation data. To do
-	// so, specify the ARN of the new role.
+	// Specify this field if you want to change the IAM role that CloudWatch
+	// investigations will use when it gathers investigation data. To do so, specify
+	// the ARN of the new role.
 	//
-	// The permissions in this role determine which of your resources that Amazon Q
-	// Developer operational investigations will have access to during investigations.
+	// The permissions in this role determine which of your resources that CloudWatch
+	// investigations will have access to during investigations.
 	//
 	// For more information, see [EHow to control what data Amazon Q has access to during investigations].
 	//

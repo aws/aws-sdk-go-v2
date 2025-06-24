@@ -9010,6 +9010,11 @@ func awsAwsjson11_deserializeDocumentLicenseConversionContext(v **types.LicenseC
 
 	for key, value := range shape {
 		switch key {
+		case "ProductCodes":
+			if err := awsAwsjson11_deserializeDocumentProductCodeList(&sv.ProductCodes, value); err != nil {
+				return err
+			}
+
 		case "UsageOperation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9835,6 +9840,89 @@ func awsAwsjson11_deserializeDocumentOrganizationConfiguration(v **types.Organiz
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.EnableIntegration = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentProductCodeList(v *[]types.ProductCodeListItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ProductCodeListItem
+	if *v == nil {
+		cv = []types.ProductCodeListItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ProductCodeListItem
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentProductCodeListItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentProductCodeListItem(v **types.ProductCodeListItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProductCodeListItem
+	if *v == nil {
+		sv = &types.ProductCodeListItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ProductCodeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductCodeId to be of type string, got %T instead", value)
+				}
+				sv.ProductCodeId = ptr.String(jtv)
+			}
+
+		case "ProductCodeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductCodeType to be of type string, got %T instead", value)
+				}
+				sv.ProductCodeType = types.ProductCodeType(jtv)
 			}
 
 		default:

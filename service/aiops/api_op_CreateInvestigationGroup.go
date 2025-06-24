@@ -29,18 +29,18 @@ import (
 // Each investigation in a Region is a part of the investigation group in that
 // Region
 //
-// To create an investigation group and set up Amazon Q Developer operational
-// investigations, you must be signed in to an IAM principal that has the either
-// the AIOpsConsoleAdminPolicy or the AdministratorAccess IAM policy attached, or
-// to an account that has similar permissions.
+// To create an investigation group and set up CloudWatch investigations, you must
+// be signed in to an IAM principal that has the either the AIOpsConsoleAdminPolicy
+// or the AdministratorAccess IAM policy attached, or to an account that has
+// similar permissions.
 //
 // You can configure CloudWatch alarms to start investigations and add events to
 // investigations. If you create your investigation group with
 // CreateInvestigationGroup and you want to enable alarms to do this, you must use [PutInvestigationGroupPolicy]
 // to create a resource policy that grants this permission to CloudWatch alarms.
 //
-// For more information about configuring CloudWatch alarms to work with Amazon Q
-// Developer operational investigations, see
+// For more information about configuring CloudWatch alarms to work with
+// CloudWatch investigations, see
 //
 // [PutInvestigationGroupPolicy]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_PutInvestigationGroupPolicy.html
 func (c *Client) CreateInvestigationGroup(ctx context.Context, params *CreateInvestigationGroupInput, optFns ...func(*Options)) (*CreateInvestigationGroupOutput, error) {
@@ -60,15 +60,15 @@ func (c *Client) CreateInvestigationGroup(ctx context.Context, params *CreateInv
 
 type CreateInvestigationGroupInput struct {
 
-	// A name for the investigation group.
+	// Provides a name for the investigation group.
 	//
 	// This member is required.
 	Name *string
 
-	// Specify the ARN of the IAM role that Amazon Q Developer operational
-	// investigations will use when it gathers investigation data. The permissions in
-	// this role determine which of your resources that Amazon Q Developer operational
-	// investigations will have access to during investigations.
+	// Specify the ARN of the IAM role that CloudWatch investigations will use when it
+	// gathers investigation data. The permissions in this role determine which of your
+	// resources that CloudWatch investigations will have access to during
+	// investigations.
 	//
 	// For more information, see [How to control what data Amazon Q has access to during investigations].
 	//
@@ -77,27 +77,31 @@ type CreateInvestigationGroupInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Use this structure to integrate Amazon Q Developer operational investigations
-	// with Amazon Q in chat applications. This structure is a string array. For the
-	// first string, specify the ARN of an Amazon SNS topic. For the array of strings,
-	// specify the ARNs of one or more Amazon Q in chat applications configurations
-	// that you want to associate with that topic. For more information about these
-	// configuration ARNs, see [Getting started with Amazon Q in chat applications]and [Resource type defined by Amazon Web Services Chatbot].
+	// Use this structure to integrate CloudWatch investigations with Amazon Q in chat
+	// applications. This structure is a string array. For the first string, specify
+	// the ARN of an Amazon SNS topic. For the array of strings, specify the ARNs of
+	// one or more Amazon Q in chat applications configurations that you want to
+	// associate with that topic. For more information about these configuration ARNs,
+	// see [Getting started with Amazon Q in chat applications]and [Resource type defined by Amazon Web Services Chatbot].
 	//
 	// [Resource type defined by Amazon Web Services Chatbot]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awschatbot.html#awschatbot-resources-for-iam-policies
 	// [Getting started with Amazon Q in chat applications]: https://docs.aws.amazon.com/chatbot/latest/adminguide/getting-started.html
 	ChatbotNotificationChannel map[string][]string
 
+	// Number of sourceAccountId values that have been configured for cross-account
+	// access.
+	CrossAccountConfigurations []types.CrossAccountConfiguration
+
 	// Use this structure if you want to use a customer managed KMS key to encrypt
-	// your investigation data. If you omit this parameter, Amazon Q Developer
-	// operational investigations will use an Amazon Web Services key to encrypt the
-	// data. For more information, see [Encryption of investigation data].
+	// your investigation data. If you omit this parameter, CloudWatch investigations
+	// will use an Amazon Web Services key to encrypt the data. For more information,
+	// see [Encryption of investigation data].
 	//
 	// [Encryption of investigation data]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Investigations-Security.html#Investigations-KMS
 	EncryptionConfiguration *types.EncryptionConfiguration
 
-	// Specify true to enable Amazon Q Developer operational investigations to have
-	// access to change events that are recorded by CloudTrail. The default is true .
+	// Specify true to enable CloudWatch investigations to have access to change
+	// events that are recorded by CloudTrail. The default is true .
 	IsCloudTrailEventHistoryEnabled *bool
 
 	// Specify how long that investigation data is kept. For more information, see [Operational investigation data retention].

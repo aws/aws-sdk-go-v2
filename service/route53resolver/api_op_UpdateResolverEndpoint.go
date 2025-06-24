@@ -40,9 +40,9 @@ type UpdateResolverEndpointInput struct {
 	Name *string
 
 	//  The protocols you want to use for the endpoint. DoH-FIPS is applicable for
-	// inbound endpoints only.
+	// default inbound endpoints only.
 	//
-	// For an inbound endpoint you can apply the protocols as follows:
+	// For a default inbound endpoint you can apply the protocols as follows:
 	//
 	//   - Do53 and DoH in combination.
 	//
@@ -55,6 +55,8 @@ type UpdateResolverEndpointInput struct {
 	//   - DoH-FIPS alone.
 	//
 	//   - None, which is treated as Do53.
+	//
+	// For a delegation inbound endpoint you can use Do53 only.
 	//
 	// For an outbound endpoint you can apply the protocols as follows:
 	//

@@ -39,7 +39,7 @@ type CreateResolverRuleInput struct {
 	CreatorRequestId *string
 
 	// When you want to forward DNS queries for specified domain name to resolvers on
-	// your network, specify FORWARD .
+	// your network, specify FORWARD or DELEGATE .
 	//
 	// When you have a forwarding rule to forward DNS queries for a domain to your
 	// network and you want Resolver to process queries for a subdomain of that domain,
@@ -55,6 +55,10 @@ type CreateResolverRuleInput struct {
 	//
 	// This member is required.
 	RuleType types.RuleTypeOption
+
+	//  DNS queries with the delegation records that match this domain name are
+	// forwarded to the resolvers on your network.
+	DelegationRecord *string
 
 	// DNS queries for this domain name are forwarded to the IP addresses that you
 	// specify in TargetIps . If a query matches multiple Resolver rules (example.com

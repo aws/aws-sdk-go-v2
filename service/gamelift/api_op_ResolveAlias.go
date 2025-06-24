@@ -13,8 +13,8 @@ import (
 // Attempts to retrieve a fleet ID that is associated with an alias. Specify a
 // unique alias identifier.
 //
-// If the alias has a SIMPLE routing strategy, Amazon GameLift returns a fleet ID.
-// If the alias has a TERMINAL routing strategy, the result is a
+// If the alias has a SIMPLE routing strategy, Amazon GameLift Servers returns a
+// fleet ID. If the alias has a TERMINAL routing strategy, the result is a
 // TerminalRoutingStrategyException .
 //
 // # Related actions

@@ -17,11 +17,11 @@ import (
 // game session.
 //
 // A game session queue is configured with a set of destinations (Amazon GameLift
-// fleets or aliases) that determine where the queue can place new game sessions.
-// These destinations can span multiple Amazon Web Services Regions, can use
-// different instance types, and can include both Spot and On-Demand fleets. If the
-// queue includes multi-location fleets, the queue can place game sessions in any
-// of a fleet's remote locations.
+// Servers fleets or aliases) that determine where the queue can place new game
+// sessions. These destinations can span multiple Amazon Web Services Regions, can
+// use different instance types, and can include both Spot and On-Demand fleets. If
+// the queue includes multi-location fleets, the queue can place game sessions in
+// any of a fleet's remote locations.
 //
 // You can configure a queue to determine how it selects the best available
 // placement for a new game session. Queues can prioritize placement decisions
@@ -132,8 +132,8 @@ type CreateGameSessionQueueInput struct {
 
 	// A set of policies that enforce a sliding cap on player latency when processing
 	// game sessions placement requests. Use multiple policies to gradually relax the
-	// cap over time if Amazon GameLift can't make a placement. Policies are evaluated
-	// in order starting with the lowest maximum latency value.
+	// cap over time if Amazon GameLift Servers can't make a placement. Policies are
+	// evaluated in order starting with the lowest maximum latency value.
 	PlayerLatencyPolicies []types.PlayerLatencyPolicy
 
 	// Custom settings to use when prioritizing destinations and locations for game

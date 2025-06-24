@@ -20,9 +20,9 @@ import (
 // Use this operation to set these fleet capacity properties:
 //
 //   - Minimum/maximum size: Set hard limits on the number of Amazon EC2 instances
-//     allowed. If Amazon GameLift receives a request--either through manual update or
-//     automatic scaling--it won't change the capacity to a value outside of this
-//     range.
+//     allowed. If Amazon GameLift Servers receives a request--either through manual
+//     update or automatic scaling--it won't change the capacity to a value outside of
+//     this range.
 //
 //   - Desired capacity: As an alternative to automatic scaling, manually set the
 //     number of Amazon EC2 instances to be maintained. Before changing a fleet's
@@ -35,16 +35,16 @@ import (
 // To update capacity for a fleet's remote location, set the Location parameter to
 // the location to update. The location must be in ACTIVE status.
 //
-// If successful, Amazon GameLift updates the capacity settings and returns the
-// identifiers for the updated fleet and/or location. If a requested change to
-// desired capacity exceeds the instance type's limit, the LimitExceeded exception
-// occurs.
+// If successful, Amazon GameLift Servers updates the capacity settings and
+// returns the identifiers for the updated fleet and/or location. If a requested
+// change to desired capacity exceeds the instance type's limit, the LimitExceeded
+// exception occurs.
 //
 // Updates often prompt an immediate change in fleet capacity, such as when
 // current capacity is different than the new desired capacity or outside the new
-// limits. In this scenario, Amazon GameLift automatically initiates steps to add
-// or remove instances in the fleet location. You can track a fleet's current
-// capacity by calling [DescribeFleetCapacity]or [DescribeFleetLocationCapacity].
+// limits. In this scenario, Amazon GameLift Servers automatically initiates steps
+// to add or remove instances in the fleet location. You can track a fleet's
+// current capacity by calling [DescribeFleetCapacity]or [DescribeFleetLocationCapacity].
 //
 // # Learn more
 //
@@ -100,7 +100,7 @@ type UpdateFleetCapacityInput struct {
 
 type UpdateFleetCapacityOutput struct {
 
-	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
 	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
 	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	//

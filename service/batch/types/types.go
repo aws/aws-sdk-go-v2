@@ -1475,10 +1475,18 @@ type Ec2Configuration struct {
 	// EKS_AL2_NVIDIA [Amazon Linux 2 (accelerated)]: Default for all GPU instance families (for example, P4 and G4 )
 	// and can be used for all non Amazon Web Services Graviton-based instance types.
 	//
+	// EKS_AL2023 [Amazon Linux 2023]: Batch supports Amazon Linux 2023.
+	//
+	// Amazon Linux 2023 does not support A1 instances.
+	//
+	// EKS_AL2023_NVIDIA [Amazon Linux 2023 (accelerated)]: GPU instance families and can be used for all non Amazon
+	// Web Services Graviton-based instance types.
+	//
 	// [Amazon Linux AMI]: http://aws.amazon.com/amazon-linux-ami/
-	// [Amazon Linux 2023]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+	// [Amazon Linux 2023]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
 	// [Amazon EKS-optimized Amazon Linux AMI]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
 	// [Amazon Linux 2 (GPU)]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami
+	// [Amazon Linux 2023 (accelerated)]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
 	// [Amazon Linux 2 (accelerated)]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
 	// [Amazon ECS-optimized Amazon Linux 2 AMI]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
 	// [Amazon Linux 2]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
@@ -3305,6 +3313,12 @@ type LaunchTemplateSpecification struct {
 	// [UpdateComputeEnvironment.overrides]: https://docs.aws.amazon.com/batch/latest/APIReference/API_UpdateComputeEnvironment.html
 	Overrides []LaunchTemplateSpecificationOverride
 
+	// The EKS node initialization process to use. You only need to specify this value
+	// if you are using a custom AMI. The default value is EKS_BOOTSTRAP_SH . If
+	// imageType is a custom AMI based on EKS_AL2023 or EKS_AL2023_NVIDIA then you must
+	// choose EKS_NODEADM .
+	UserdataType UserdataType
+
 	// The version number of the launch template, $Default , or $Latest .
 	//
 	// If the value is $Default , the default version of the launch template is used.
@@ -3386,6 +3400,12 @@ type LaunchTemplateSpecificationOverride struct {
 	//
 	// [ComputeResource.instanceTypes]: https://docs.aws.amazon.com/batch/latest/APIReference/API_ComputeResource.html#Batch-Type-ComputeResource-instanceTypes
 	TargetInstanceTypes []string
+
+	// The EKS node initialization process to use. You only need to specify this value
+	// if you are using a custom AMI. The default value is EKS_BOOTSTRAP_SH . If
+	// imageType is a custom AMI based on EKS_AL2023 or EKS_AL2023_NVIDIA then you must
+	// choose EKS_NODEADM .
+	UserdataType UserdataType
 
 	// The version number of the launch template, $Default , or $Latest .
 	//
@@ -4726,7 +4746,7 @@ type UpdatePolicy struct {
 	// infrastructure is updated. The default value is 30.
 	JobExecutionTimeoutMinutes *int64
 
-	// Specifies whether jobs are automatically terminated when the computer
+	// Specifies whether jobs are automatically terminated when the compute
 	// environment infrastructure is updated. The default value is false .
 	TerminateJobsOnUpdate *bool
 

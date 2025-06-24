@@ -28,9 +28,9 @@ import (
 //
 // # Result
 //
-// If successful, Amazon GameLift removes the container group definition versions
-// that you request deletion for. This request will fail for any requested versions
-// if the following is true:
+// If successful, Amazon GameLift Servers removes the container group definition
+// versions that you request deletion for. This request will fail for any requested
+// versions if the following is true:
 //
 //   - If the version is being used in an active fleet
 //

@@ -4810,6 +4810,11 @@ func awsAwsjson11_serializeOpDocumentCreateResolverRuleInput(v *CreateResolverRu
 		ok.String(*v.CreatorRequestId)
 	}
 
+	if v.DelegationRecord != nil {
+		ok := object.Key("DelegationRecord")
+		ok.String(*v.DelegationRecord)
+	}
+
 	if v.DomainName != nil {
 		ok := object.Key("DomainName")
 		ok.String(*v.DomainName)

@@ -4656,6 +4656,11 @@ func awsRestjson1_serializeDocumentLaunchTemplateSpecification(v *types.LaunchTe
 		}
 	}
 
+	if len(v.UserdataType) > 0 {
+		ok := object.Key("userdataType")
+		ok.String(string(v.UserdataType))
+	}
+
 	if v.Version != nil {
 		ok := object.Key("version")
 		ok.String(*v.Version)
@@ -4683,6 +4688,11 @@ func awsRestjson1_serializeDocumentLaunchTemplateSpecificationOverride(v *types.
 		if err := awsRestjson1_serializeDocumentStringList(v.TargetInstanceTypes, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.UserdataType) > 0 {
+		ok := object.Key("userdataType")
+		ok.String(string(v.UserdataType))
 	}
 
 	if v.Version != nil {

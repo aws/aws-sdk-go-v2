@@ -59,13 +59,17 @@ type GetInvestigationGroupOutput struct {
 	// The name of the user who created the investigation group.
 	CreatedBy *string
 
+	// Lists the AWSAccountId of the accounts configured for cross-account access and
+	// the results of the last scan performed on each account.
+	CrossAccountConfigurations []types.CrossAccountConfiguration
+
 	// Specifies the customer managed KMS key that the investigation group uses to
 	// encrypt data, if there is one. If not, the investigation group uses an Amazon
 	// Web Services key to encrypt the data.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
-	// Specifies whether Amazon Q Developer operational investigationshas access to
-	// change events that are recorded by CloudTrail.
+	// Specifies whether CloudWatch investigationshas access to change events that are
+	// recorded by CloudTrail.
 	IsCloudTrailEventHistoryEnabled *bool
 
 	// The date and time that the investigation group was most recently modified.

@@ -1145,6 +1145,23 @@ func validateIssuer(v *types.Issuer) error {
 	}
 }
 
+func validateLicenseConversionContext(v *types.LicenseConversionContext) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LicenseConversionContext"}
+	if v.ProductCodes != nil {
+		if err := validateProductCodeList(v.ProductCodes); err != nil {
+			invalidParams.AddNested("ProductCodes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLicenseSpecification(v *types.LicenseSpecification) error {
 	if v == nil {
 		return nil
@@ -1182,6 +1199,41 @@ func validateOrganizationConfiguration(v *types.OrganizationConfiguration) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrganizationConfiguration"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProductCodeList(v []types.ProductCodeListItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProductCodeList"}
+	for i := range v {
+		if err := validateProductCodeListItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProductCodeListItem(v *types.ProductCodeListItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProductCodeListItem"}
+	if v.ProductCodeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductCodeId"))
+	}
+	if len(v.ProductCodeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductCodeType"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1463,9 +1515,17 @@ func validateOpCreateLicenseConversionTaskForResourceInput(v *CreateLicenseConve
 	}
 	if v.SourceLicenseContext == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceLicenseContext"))
+	} else if v.SourceLicenseContext != nil {
+		if err := validateLicenseConversionContext(v.SourceLicenseContext); err != nil {
+			invalidParams.AddNested("SourceLicenseContext", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.DestinationLicenseContext == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationLicenseContext"))
+	} else if v.DestinationLicenseContext != nil {
+		if err := validateLicenseConversionContext(v.DestinationLicenseContext); err != nil {
+			invalidParams.AddNested("DestinationLicenseContext", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

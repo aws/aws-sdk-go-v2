@@ -10319,6 +10319,15 @@ func awsRestjson1_deserializeDocumentLaunchTemplateSpecification(v **types.Launc
 				return err
 			}
 
+		case "userdataType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserdataType to be of type string, got %T instead", value)
+				}
+				sv.UserdataType = types.UserdataType(jtv)
+			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10380,6 +10389,15 @@ func awsRestjson1_deserializeDocumentLaunchTemplateSpecificationOverride(v **typ
 		case "targetInstanceTypes":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.TargetInstanceTypes, value); err != nil {
 				return err
+			}
+
+		case "userdataType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserdataType to be of type string, got %T instead", value)
+				}
+				sv.UserdataType = types.UserdataType(jtv)
 			}
 
 		case "version":

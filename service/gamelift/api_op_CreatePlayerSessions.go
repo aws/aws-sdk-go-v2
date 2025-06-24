@@ -23,7 +23,7 @@ import (
 // PlayerSession objects are returned with player session IDs. Each player
 // references their player session ID when sending a connection request to the game
 // session, and the game server can use it to validate the player reservation with
-// the Amazon GameLift service. Player sessions cannot be updated.
+// the Amazon GameLift Servers service. Player sessions cannot be updated.
 //
 // The maximum number of players per game session is 200. It is not adjustable.
 //
@@ -61,9 +61,10 @@ type CreatePlayerSessionsInput struct {
 	PlayerIds []string
 
 	// Map of string pairs, each specifying a player ID and a set of developer-defined
-	// information related to the player. Amazon GameLift does not use this data, so it
-	// can be formatted as needed for use in the game. Any player data strings for
-	// player IDs that are not included in the PlayerIds parameter are ignored.
+	// information related to the player. Amazon GameLift Servers does not use this
+	// data, so it can be formatted as needed for use in the game. Any player data
+	// strings for player IDs that are not included in the PlayerIds parameter are
+	// ignored.
 	PlayerDataMap map[string]string
 
 	noSmithyDocumentSerde

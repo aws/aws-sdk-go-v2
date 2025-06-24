@@ -391,6 +391,23 @@ func (LicenseStatus) Values() []LicenseStatus {
 	}
 }
 
+type ProductCodeType string
+
+// Enum values for ProductCodeType
+const (
+	ProductCodeTypeMarketplace ProductCodeType = "marketplace"
+)
+
+// Values returns all known values for ProductCodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProductCodeType) Values() []ProductCodeType {
+	return []ProductCodeType{
+		"marketplace",
+	}
+}
+
 type ReceivedStatus string
 
 // Enum values for ReceivedStatus

@@ -88,6 +88,15 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Example: us-east-1d
 	AvailabilityZone *string
 
+	// The location where RDS stores automated backups and manual snapshots.
+	//
+	// Valid Values:
+	//
+	//   - local for Dedicated Local Zones
+	//
+	//   - region for Amazon Web Services Region
+	BackupTarget *string
+
 	// The CA certificate identifier to use for the read replica's server certificate.
 	//
 	// This setting doesn't apply to RDS Custom DB instances.

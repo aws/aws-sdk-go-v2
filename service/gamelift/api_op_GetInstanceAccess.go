@@ -12,9 +12,9 @@ import (
 )
 
 // Requests authorization to remotely connect to an instance in an Amazon GameLift
-// managed fleet. Use this operation to connect to instances with game servers that
-// use Amazon GameLift server SDK 4.x or earlier. To connect to instances with game
-// servers that use server SDK 5.x or later, call [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess].
+// Servers managed fleet. Use this operation to connect to instances with game
+// servers that use Amazon GameLift Servers server SDK 4.x or earlier. To connect
+// to instances with game servers that use server SDK 5.x or later, call [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess].
 //
 // To request access to an instance, specify IDs for the instance and the fleet it
 // belongs to. You can retrieve instance IDs for a fleet by calling [DescribeInstances]with the fleet
@@ -70,7 +70,7 @@ type GetInstanceAccessInput struct {
 	// value.
 	//
 	// You can access fleets in ERROR status for a short period of time before Amazon
-	// GameLift deletes them.
+	// GameLift Servers deletes them.
 	//
 	// This member is required.
 	FleetId *string

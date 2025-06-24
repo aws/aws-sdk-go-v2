@@ -24,16 +24,16 @@ import (
 //   - To restart actions on instances in one of the fleet's remote locations,
 //     provide a fleet ID, a location name, and the type of actions to resume.
 //
-// If successful, Amazon GameLift once again initiates scaling events as triggered
-// by the fleet's scaling policies. If actions on the fleet location were never
-// stopped, this operation will have no effect.
+// If successful, Amazon GameLift Servers once again initiates scaling events as
+// triggered by the fleet's scaling policies. If actions on the fleet location were
+// never stopped, this operation will have no effect.
 //
 // # Learn more
 //
-// [Setting up Amazon GameLift fleets]
+// [Setting up Amazon GameLift Servers fleets]
 //
-// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 // [StopFleetActions]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopFleetActions.html
+// [Setting up Amazon GameLift Servers fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) StartFleetActions(ctx context.Context, params *StartFleetActionsInput, optFns ...func(*Options)) (*StartFleetActionsOutput, error) {
 	if params == nil {
 		params = &StartFleetActionsInput{}
@@ -71,7 +71,7 @@ type StartFleetActionsInput struct {
 
 type StartFleetActionsOutput struct {
 
-	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
 	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
 	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	//

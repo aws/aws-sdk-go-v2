@@ -100,11 +100,11 @@ type UpdateContainerFleetInput struct {
 	GameServerContainerGroupDefinitionName *string
 
 	// The number of times to replicate the game server container group on each fleet
-	// instance. By default, Amazon GameLift calculates the maximum number of game
-	// server container groups that can fit on each instance. You can remove this
+	// instance. By default, Amazon GameLift Servers calculates the maximum number of
+	// game server container groups that can fit on each instance. You can remove this
 	// property value to use the calculated value, or set it manually. If you set this
-	// number manually, Amazon GameLift uses your value as long as it's less than the
-	// calculated maximum.
+	// number manually, Amazon GameLift Servers uses your value as long as it's less
+	// than the calculated maximum.
 	GameServerContainerGroupsPerInstance *int32
 
 	// A policy that limits the number of game sessions that each individual player
@@ -113,7 +113,7 @@ type UpdateContainerFleetInput struct {
 	GameSessionCreationLimitPolicy *types.GameSessionCreationLimitPolicy
 
 	// A revised set of port numbers to open on each fleet instance. By default,
-	// Amazon GameLift calculates an optimal port range based on your fleet
+	// Amazon GameLift Servers calculates an optimal port range based on your fleet
 	// configuration. If you previously set this parameter manually, you can't reset
 	// this to use the calculated settings.
 	InstanceConnectionPortRange *types.ConnectionPortRange

@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves properties for a specific compute resource in an Amazon GameLift
-// fleet. You can list all computes in a fleet by calling [ListCompute].
+// Servers fleet. You can list all computes in a fleet by calling [ListCompute].
 //
 // # Request options
 //

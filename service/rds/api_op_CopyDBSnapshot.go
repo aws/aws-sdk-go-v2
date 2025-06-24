@@ -186,6 +186,22 @@ type CopyDBSnapshotInput struct {
 	// [Signature Version 4 Signing Process]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 	PreSignedUrl *string
 
+	// Specifies the name of the Availability Zone where RDS stores the DB snapshot.
+	// This value is valid only for snapshots that RDS stores on a Dedicated Local
+	// Zone.
+	SnapshotAvailabilityZone *string
+
+	// Configures the location where RDS will store copied snapshots.
+	//
+	// Valid Values:
+	//
+	//   - local (Dedicated Local Zone)
+	//
+	//   - outposts (Amazon Web Services Outposts)
+	//
+	//   - region (Amazon Web Services Region)
+	SnapshotTarget *string
+
 	// The AWS region the resource is in. The presigned URL will be created with this
 	// region, if the PresignURL member is empty set.
 	SourceRegion *string

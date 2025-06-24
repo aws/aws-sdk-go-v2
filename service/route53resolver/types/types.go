@@ -729,8 +729,8 @@ type ResolverConfig struct {
 	// The owner account ID of the Amazon Virtual Private Cloud VPC.
 	OwnerId *string
 
-	// The ID of the Amazon Virtual Private Cloud VPC that you're configuring Resolver
-	// for.
+	// The ID of the Amazon Virtual Private Cloud VPC or a Route 53 Profile that
+	// you're configuring Resolver for.
 	ResourceId *string
 
 	noSmithyDocumentSerde
@@ -793,6 +793,9 @@ type ResolverEndpoint struct {
 	//   - INBOUND : allows DNS queries to your VPC from your network
 	//
 	//   - OUTBOUND : allows DNS queries from your VPC to your network
+	//
+	//   - INBOUND_DELEGATION : Resolver delegates queries to Route 53 private hosted
+	//   zones from your network.
 	Direction ResolverEndpointDirection
 
 	// The ID of the VPC that you want to create the Resolver endpoint in.
@@ -820,8 +823,8 @@ type ResolverEndpoint struct {
 	//  The Amazon EC2 instance type.
 	PreferredInstanceType *string
 
-	//  Protocols used for the endpoint. DoH-FIPS is applicable for inbound endpoints
-	// only.
+	//  Protocols used for the endpoint. DoH-FIPS is applicable for a default inbound
+	// endpoints only.
 	//
 	// For an inbound endpoint you can apply the protocols as follows:
 	//
@@ -836,6 +839,8 @@ type ResolverEndpoint struct {
 	//   - DoH-FIPS alone.
 	//
 	//   - None, which is treated as Do53.
+	//
+	// For a delegation inbound endpoint you can use Do53 only.
 	//
 	// For an outbound endpoint you can apply the protocols as follows:
 	//
@@ -1047,6 +1052,10 @@ type ResolverRule struct {
 	// without the risk of running the operation twice.
 	CreatorRequestId *string
 
+	//  DNS queries with delegation records that point to this domain name are
+	// forwarded to resolvers on your network.
+	DelegationRecord *string
+
 	// DNS queries for this domain name are forwarded to the IP addresses that are
 	// specified in TargetIps . If a query matches multiple Resolver rules (example.com
 	// and www.example.com), the query is routed using the Resolver rule that contains
@@ -1072,7 +1081,9 @@ type ResolverRule struct {
 	ResolverEndpointId *string
 
 	// When you want to forward DNS queries for specified domain name to resolvers on
-	// your network, specify FORWARD .
+	// your network, specify FORWARD or DELEGATE . If a query matches multiple Resolver
+	// rules (example.com and www.example.com), outbound DNS queries are routed using
+	// the Resolver rule that contains the most specific domain name (www.example.com).
 	//
 	// When you have a forwarding rule to forward DNS queries for a domain to your
 	// network and you want Resolver to process queries for a subdomain of that domain,

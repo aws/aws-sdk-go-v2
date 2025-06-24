@@ -11,12 +11,12 @@ import (
 	"time"
 )
 
-// Requests an authentication token from Amazon GameLift for a compute resource in
-// an Amazon GameLift fleet. Game servers that are running on the compute use this
-// token to communicate with the Amazon GameLift service, such as when calling the
-// Amazon GameLift server SDK action InitSDK() . Authentication tokens are valid
-// for a limited time span, so you need to request a fresh token before the current
-// token expires.
+// Requests an authentication token from Amazon GameLift Servers for a compute
+// resource in an Amazon GameLift Servers fleet. Game servers that are running on
+// the compute use this token to communicate with the Amazon GameLift Servers
+// service, such as when calling the Amazon GameLift Servers server SDK action
+// InitSDK() . Authentication tokens are valid for a limited time span, so you need
+// to request a fresh token before the current token expires.
 //
 // Request options
 //
@@ -25,10 +25,10 @@ import (
 //     instances have access to a valid auth token.
 //
 //   - For Anywhere fleets (compute type ANYWHERE ), if you're using the Amazon
-//     GameLift Agent, auth token retrieval and refresh is handled automatically for
-//     any compute where the Agent is running. If you're not using the Agent, create a
-//     mechanism to retrieve and refresh auth tokens for computes that are running game
-//     server processes.
+//     GameLift Servers Agent, auth token retrieval and refresh is handled
+//     automatically for any compute where the Agent is running. If you're not using
+//     the Agent, create a mechanism to retrieve and refresh auth tokens for computes
+//     that are running game server processes.
 //
 // # Learn more
 //
@@ -79,9 +79,10 @@ type GetComputeAuthTokenOutput struct {
 	// A valid temporary authentication token.
 	AuthToken *string
 
-	// The Amazon Resource Name ([ARN] ) that is assigned to an Amazon GameLift compute
-	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
-	// is arn:aws:gamelift:::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to an Amazon GameLift Servers
+	// compute resource and uniquely identifies it. ARNs are unique across all Regions.
+	// Format is
+	// arn:aws:gamelift:::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	//
 	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	ComputeArn *string
@@ -92,7 +93,7 @@ type GetComputeAuthTokenOutput struct {
 	// The amount of time until the authentication token is no longer valid.
 	ExpirationTimestamp *time.Time
 
-	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
 	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
 	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	//

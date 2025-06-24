@@ -22,19 +22,19 @@ import (
 // updates to the script.
 //
 // If the call is successful, the updated metadata is stored in the script record
-// and a revised script is uploaded to the Amazon GameLift service. Once the script
-// is updated and acquired by a fleet instance, the new version is used for all new
-// game sessions.
+// and a revised script is uploaded to the Amazon GameLift Servers service. Once
+// the script is updated and acquired by a fleet instance, the new version is used
+// for all new game sessions.
 //
 // # Learn more
 //
-// [Amazon GameLift Amazon GameLift Realtime]
+// [Amazon GameLift Servers Amazon GameLift Servers Realtime]
 //
 // # Related actions
 //
 // [All APIs by task]
 //
-// [Amazon GameLift Amazon GameLift Realtime]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+// [Amazon GameLift Servers Amazon GameLift Servers Realtime]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
 // [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) UpdateScript(ctx context.Context, params *UpdateScriptInput, optFns ...func(*Options)) (*UpdateScriptOutput, error) {
 	if params == nil {
@@ -66,11 +66,11 @@ type UpdateScriptInput struct {
 	// The location of the Amazon S3 bucket where a zipped file containing your
 	// Realtime scripts is stored. The storage location must specify the Amazon S3
 	// bucket name, the zip file name (the "key"), and a role ARN that allows Amazon
-	// GameLift to access the Amazon S3 storage location. The S3 bucket must be in the
-	// same Region where you want to create a new script. By default, Amazon GameLift
-	// uploads the latest version of the zip file; if you have S3 object versioning
-	// turned on, you can use the ObjectVersion parameter to specify an earlier
-	// version.
+	// GameLift Servers to access the Amazon S3 storage location. The S3 bucket must be
+	// in the same Region where you want to create a new script. By default, Amazon
+	// GameLift Servers uploads the latest version of the zip file; if you have S3
+	// object versioning turned on, you can use the ObjectVersion parameter to specify
+	// an earlier version.
 	StorageLocation *types.S3Location
 
 	// Version information that is associated with a build or script. Version strings
@@ -96,7 +96,7 @@ type UpdateScriptOutput struct {
 	// from an S3 bucket under your account, the storage location reflects the
 	// information that was provided in the CreateScript request; (2) If the script
 	// file was uploaded from a local zip file, the storage location reflects an S3
-	// location controls by the Amazon GameLift service.
+	// location controls by the Amazon GameLift Servers service.
 	Script *types.Script
 
 	// Metadata pertaining to the operation's result.

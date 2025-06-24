@@ -23,9 +23,9 @@ import (
 // in this status result in an error.
 //
 // To register acceptance, specify the ticket ID, one or more players, and an
-// acceptance response. When all players have accepted, Amazon GameLift advances
-// the matchmaking tickets to status PLACING , and attempts to create a new game
-// session for the match.
+// acceptance response. When all players have accepted, Amazon GameLift Servers
+// advances the matchmaking tickets to status PLACING , and attempts to create a
+// new game session for the match.
 //
 // If any player rejects the match, or if acceptances are not received before a
 // specified timeout, the proposed match is dropped. Each matchmaking ticket in the

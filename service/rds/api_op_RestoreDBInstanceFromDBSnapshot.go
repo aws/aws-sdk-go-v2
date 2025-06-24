@@ -107,8 +107,8 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// Specifies where automated backups and manual snapshots are stored for the
 	// restored DB instance.
 	//
-	// Possible values are outposts (Amazon Web Services Outposts) and region (Amazon
-	// Web Services Region). The default is region .
+	// Possible values are local (Dedicated Local Zone), outposts (Amazon Web Services
+	// Outposts), and region (Amazon Web Services Region). The default is region .
 	//
 	// For more information, see [Working with Amazon RDS on Amazon Web Services Outposts] in the Amazon RDS User Guide.
 	//

@@ -70,6 +70,26 @@ func (m *validateOpCreateEvaluationJob) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFoundationModelAgreement struct {
+}
+
+func (*validateOpCreateFoundationModelAgreement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFoundationModelAgreement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFoundationModelAgreementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFoundationModelAgreementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGuardrail struct {
 }
 
@@ -290,6 +310,26 @@ func (m *validateOpDeleteCustomModel) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteFoundationModelAgreement struct {
+}
+
+func (*validateOpDeleteFoundationModelAgreement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFoundationModelAgreement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFoundationModelAgreementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFoundationModelAgreementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteGuardrail struct {
 }
 
@@ -465,6 +505,26 @@ func (m *validateOpGetEvaluationJob) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEvaluationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFoundationModelAvailability struct {
+}
+
+func (*validateOpGetFoundationModelAvailability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFoundationModelAvailability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFoundationModelAvailabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFoundationModelAvailabilityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -690,6 +750,26 @@ func (m *validateOpGetProvisionedModelThroughput) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListFoundationModelAgreementOffers struct {
+}
+
+func (*validateOpListFoundationModelAgreementOffers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFoundationModelAgreementOffers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFoundationModelAgreementOffersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFoundationModelAgreementOffersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -725,6 +805,26 @@ func (m *validateOpPutModelInvocationLoggingConfiguration) HandleInitialize(ctx 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutModelInvocationLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutUseCaseForModelAccess struct {
+}
+
+func (*validateOpPutUseCaseForModelAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutUseCaseForModelAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutUseCaseForModelAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutUseCaseForModelAccessInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -922,6 +1022,10 @@ func addOpCreateEvaluationJobValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateEvaluationJob{}, middleware.After)
 }
 
+func addOpCreateFoundationModelAgreementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFoundationModelAgreement{}, middleware.After)
+}
+
 func addOpCreateGuardrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGuardrail{}, middleware.After)
 }
@@ -966,6 +1070,10 @@ func addOpDeleteCustomModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCustomModel{}, middleware.After)
 }
 
+func addOpDeleteFoundationModelAgreementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFoundationModelAgreement{}, middleware.After)
+}
+
 func addOpDeleteGuardrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGuardrail{}, middleware.After)
 }
@@ -1000,6 +1108,10 @@ func addOpGetCustomModelValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetEvaluationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEvaluationJob{}, middleware.After)
+}
+
+func addOpGetFoundationModelAvailabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFoundationModelAvailability{}, middleware.After)
 }
 
 func addOpGetFoundationModelValidationMiddleware(stack *middleware.Stack) error {
@@ -1046,12 +1158,20 @@ func addOpGetProvisionedModelThroughputValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpGetProvisionedModelThroughput{}, middleware.After)
 }
 
+func addOpListFoundationModelAgreementOffersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFoundationModelAgreementOffers{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpPutModelInvocationLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutModelInvocationLoggingConfiguration{}, middleware.After)
+}
+
+func addOpPutUseCaseForModelAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutUseCaseForModelAccess{}, middleware.After)
 }
 
 func addOpRegisterMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -3099,6 +3219,24 @@ func validateOpCreateEvaluationJobInput(v *CreateEvaluationJobInput) error {
 	}
 }
 
+func validateOpCreateFoundationModelAgreementInput(v *CreateFoundationModelAgreementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFoundationModelAgreementInput"}
+	if v.OfferToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OfferToken"))
+	}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateGuardrailInput(v *CreateGuardrailInput) error {
 	if v == nil {
 		return nil
@@ -3479,6 +3617,21 @@ func validateOpDeleteCustomModelInput(v *DeleteCustomModelInput) error {
 	}
 }
 
+func validateOpDeleteFoundationModelAgreementInput(v *DeleteFoundationModelAgreementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFoundationModelAgreementInput"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteGuardrailInput(v *DeleteGuardrailInput) error {
 	if v == nil {
 		return nil
@@ -3606,6 +3759,21 @@ func validateOpGetEvaluationJobInput(v *GetEvaluationJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetEvaluationJobInput"}
 	if v.JobIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFoundationModelAvailabilityInput(v *GetFoundationModelAvailabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFoundationModelAvailabilityInput"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3779,6 +3947,21 @@ func validateOpGetProvisionedModelThroughputInput(v *GetProvisionedModelThroughp
 	}
 }
 
+func validateOpListFoundationModelAgreementOffersInput(v *ListFoundationModelAgreementOffersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFoundationModelAgreementOffersInput"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -3805,6 +3988,21 @@ func validateOpPutModelInvocationLoggingConfigurationInput(v *PutModelInvocation
 		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
 			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutUseCaseForModelAccessInput(v *PutUseCaseForModelAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutUseCaseForModelAccessInput"}
+	if v.FormData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FormData"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

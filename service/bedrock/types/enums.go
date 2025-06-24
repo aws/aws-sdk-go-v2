@@ -2,6 +2,29 @@
 
 package types
 
+type AgreementStatus string
+
+// Enum values for AgreementStatus
+const (
+	AgreementStatusAvailable    AgreementStatus = "AVAILABLE"
+	AgreementStatusPending      AgreementStatus = "PENDING"
+	AgreementStatusNotAvailable AgreementStatus = "NOT_AVAILABLE"
+	AgreementStatusError        AgreementStatus = "ERROR"
+)
+
+// Values returns all known values for AgreementStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgreementStatus) Values() []AgreementStatus {
+	return []AgreementStatus{
+		"AVAILABLE",
+		"PENDING",
+		"NOT_AVAILABLE",
+		"ERROR",
+	}
+}
+
 type ApplicationType string
 
 // Enum values for ApplicationType
@@ -18,6 +41,25 @@ func (ApplicationType) Values() []ApplicationType {
 	return []ApplicationType{
 		"ModelEvaluation",
 		"RagEvaluation",
+	}
+}
+
+type AuthorizationStatus string
+
+// Enum values for AuthorizationStatus
+const (
+	AuthorizationStatusAuthorized    AuthorizationStatus = "AUTHORIZED"
+	AuthorizationStatusNotAuthorized AuthorizationStatus = "NOT_AUTHORIZED"
+)
+
+// Values returns all known values for AuthorizationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthorizationStatus) Values() []AuthorizationStatus {
+	return []AuthorizationStatus{
+		"AUTHORIZED",
+		"NOT_AUTHORIZED",
 	}
 }
 
@@ -60,6 +102,25 @@ func (CustomizationType) Values() []CustomizationType {
 		"CONTINUED_PRE_TRAINING",
 		"DISTILLATION",
 		"IMPORTED",
+	}
+}
+
+type EntitlementAvailability string
+
+// Enum values for EntitlementAvailability
+const (
+	EntitlementAvailabilityAvailable    EntitlementAvailability = "AVAILABLE"
+	EntitlementAvailabilityNotAvailable EntitlementAvailability = "NOT_AVAILABLE"
+)
+
+// Values returns all known values for EntitlementAvailability. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EntitlementAvailability) Values() []EntitlementAvailability {
+	return []EntitlementAvailability{
+		"AVAILABLE",
+		"NOT_AVAILABLE",
 	}
 }
 
@@ -811,6 +872,25 @@ func (ModelStatus) Values() []ModelStatus {
 	}
 }
 
+type OfferType string
+
+// Enum values for OfferType
+const (
+	OfferTypeAll    OfferType = "ALL"
+	OfferTypePublic OfferType = "PUBLIC"
+)
+
+// Values returns all known values for OfferType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OfferType) Values() []OfferType {
+	return []OfferType{
+		"ALL",
+		"PUBLIC",
+	}
+}
+
 type PerformanceConfigLatency string
 
 // Enum values for PerformanceConfigLatency
@@ -903,6 +983,25 @@ const (
 func (QueryTransformationType) Values() []QueryTransformationType {
 	return []QueryTransformationType{
 		"QUERY_DECOMPOSITION",
+	}
+}
+
+type RegionAvailability string
+
+// Enum values for RegionAvailability
+const (
+	RegionAvailabilityAvailable    RegionAvailability = "AVAILABLE"
+	RegionAvailabilityNotAvailable RegionAvailability = "NOT_AVAILABLE"
+)
+
+// Values returns all known values for RegionAvailability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RegionAvailability) Values() []RegionAvailability {
+	return []RegionAvailability{
+		"AVAILABLE",
+		"NOT_AVAILABLE",
 	}
 }
 

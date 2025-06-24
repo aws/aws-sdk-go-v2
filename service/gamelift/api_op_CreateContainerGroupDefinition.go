@@ -12,12 +12,13 @@ import (
 )
 
 // Creates a ContainerGroupDefinition that describes a set of containers for
-// hosting your game server with Amazon GameLift managed containers hosting. An
-// Amazon GameLift container group is similar to a container task or pod. Use
-// container group definitions when you create a container fleet with [CreateContainerFleet].
+// hosting your game server with Amazon GameLift Servers managed containers
+// hosting. An Amazon GameLift Servers container group is similar to a container
+// task or pod. Use container group definitions when you create a container fleet
+// with [CreateContainerFleet].
 //
-// A container group definition determines how Amazon GameLift deploys your
-// containers to each instance in a container fleet. You can maintain multiple
+// A container group definition determines how Amazon GameLift Servers deploys
+// your containers to each instance in a container fleet. You can maintain multiple
 // versions of a container group definition.
 //
 // There are two types of container groups:
@@ -50,7 +51,7 @@ import (
 //	container group, you can define up to 10 support containers.
 //
 // This operation requires Identity and Access Management (IAM) permissions to
-// access container images in Amazon ECR repositories. See [IAM permissions for Amazon GameLift]for help setting the
+// access container images in Amazon ECR repositories. See [IAM permissions for Amazon GameLift Servers]for help setting the
 // appropriate permissions.
 //
 // # Request options
@@ -108,7 +109,7 @@ import (
 //
 // [UpdateContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html
 // [CreateContainerFleet]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerFleet.html
-// [IAM permissions for Amazon GameLift]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html
+// [IAM permissions for Amazon GameLift Servers]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html
 func (c *Client) CreateContainerGroupDefinition(ctx context.Context, params *CreateContainerGroupDefinitionInput, optFns ...func(*Options)) (*CreateContainerGroupDefinitionOutput, error) {
 	if params == nil {
 		params = &CreateContainerGroupDefinitionInput{}
@@ -139,11 +140,11 @@ type CreateContainerGroupDefinitionInput struct {
 	//
 	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
 	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use server SDK version 4.x
-	// for Amazon GameLift, first update the game server build to server SDK 5.x, and
-	// then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
+	// for Amazon GameLift Servers, first update the game server build to server SDK
+	// 5.x, and then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
 	//
 	// [Migrate to server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
-	// [Amazon Linux 2 FAQs]: https://aws.amazon.com/amazon-linux-2/faqs/
+	// [Amazon Linux 2 FAQs]: http://aws.amazon.com/amazon-linux-2/faqs/
 	//
 	// This member is required.
 	OperatingSystem types.ContainerOperatingSystem
@@ -169,7 +170,7 @@ type CreateContainerGroupDefinitionInput struct {
 	TotalVcpuLimit *float64
 
 	// The type of container group being defined. Container group type determines how
-	// Amazon GameLift deploys the container group on each fleet instance.
+	// Amazon GameLift Servers deploys the container group on each fleet instance.
 	//
 	// Default value: GAME_SERVER
 	ContainerGroupType types.ContainerGroupType

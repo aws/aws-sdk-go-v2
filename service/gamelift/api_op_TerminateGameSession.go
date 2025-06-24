@@ -16,9 +16,9 @@ import (
 // most efficient way to free up a server process when it's hosting a game session
 // that's in a bad state or not ending properly. You can use this action to
 // terminate a game session that's being hosted on any type of Amazon GameLift
-// fleet compute, including computes for managed EC2, managed container, and
-// Anywhere fleets. The game server must be integrated with Amazon GameLift server
-// SDK 5.x or greater.
+// Servers fleet compute, including computes for managed EC2, managed container,
+// and Anywhere fleets. The game server must be integrated with Amazon GameLift
+// Servers server SDK 5.x or greater.
 //
 // # Request options
 //
@@ -27,15 +27,15 @@ import (
 // session:
 //
 //   - Initiate a graceful termination using the normal game session shutdown
-//     sequence. With this mode, the Amazon GameLift service prompts the server process
-//     that's hosting the game session by calling the server SDK callback method
-//     OnProcessTerminate() . The callback implementation is part of the custom game
-//     server code. It might involve a variety of actions to gracefully end a game
-//     session, such as notifying players, before stopping the server process.
+//     sequence. With this mode, the Amazon GameLift Servers service prompts the server
+//     process that's hosting the game session by calling the server SDK callback
+//     method OnProcessTerminate() . The callback implementation is part of the
+//     custom game server code. It might involve a variety of actions to gracefully end
+//     a game session, such as notifying players, before stopping the server process.
 //
 //   - Force an immediate game session termination. With this mode, the Amazon
-//     GameLift service takes action to stop the server process, which ends the game
-//     session without the normal game session shutdown sequence.
+//     GameLift Servers service takes action to stop the server process, which ends the
+//     game session without the normal game session shutdown sequence.
 //
 // # Results
 //
@@ -48,14 +48,14 @@ import (
 //
 // # Learn more
 //
-// [Add Amazon GameLift to your game server]
+// [Add Amazon GameLift Servers to your game server]
 //
-// Amazon GameLift server SDK 5 reference guide for OnProcessTerminate() ([C++] ) ([C#] ) ([Unreal]
-// ) ([Go] )
+// Amazon GameLift Servers server SDK 5 reference guide for OnProcessTerminate() ([C++]
+// ) ([C#] ) ([Unreal] ) ([Go] )
 //
 // [C#]: https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-csharp-initsdk.html
 // [C++]: https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-cpp-initsdk.html
-// [Add Amazon GameLift to your game server]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html
+// [Add Amazon GameLift Servers to your game server]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html
 // [Unreal]: https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-unreal-initsdk.html
 // [Go]: https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk-go-initsdk.html
 func (c *Client) TerminateGameSession(ctx context.Context, params *TerminateGameSessionInput, optFns ...func(*Options)) (*TerminateGameSessionOutput, error) {
@@ -83,22 +83,23 @@ type TerminateGameSessionInput struct {
 
 	// The method to use to terminate the game session. Available methods include:
 	//
-	//   - TRIGGER_ON_PROCESS_TERMINATE – Prompts the Amazon GameLift service to send
-	//   an OnProcessTerminate() callback to the server process and initiate the normal
-	//   game session shutdown sequence. The OnProcessTerminate method, which is
-	//   implemented in the game server code, must include a call to the server SDK
-	//   action ProcessEnding() , which is how the server process signals to Amazon
-	//   GameLift that a game session is ending. If the server process doesn't call
-	//   ProcessEnding() , the game session termination won't conclude successfully.
+	//   - TRIGGER_ON_PROCESS_TERMINATE – Prompts the Amazon GameLift Servers service
+	//   to send an OnProcessTerminate() callback to the server process and initiate
+	//   the normal game session shutdown sequence. The OnProcessTerminate method,
+	//   which is implemented in the game server code, must include a call to the server
+	//   SDK action ProcessEnding() , which is how the server process signals to Amazon
+	//   GameLift Servers that a game session is ending. If the server process doesn't
+	//   call ProcessEnding() , the game session termination won't conclude
+	//   successfully.
 	//
-	//   - FORCE_TERMINATE – Prompts the Amazon GameLift service to stop the server
-	//   process immediately. Amazon GameLift takes action (depending on the type of
-	//   fleet) to shut down the server process without the normal game session shutdown
-	//   sequence.
+	//   - FORCE_TERMINATE – Prompts the Amazon GameLift Servers service to stop the
+	//   server process immediately. Amazon GameLift Servers takes action (depending on
+	//   the type of fleet) to shut down the server process without the normal game
+	//   session shutdown sequence.
 	//
 	// This method is not available for game sessions that are running on Anywhere
-	//   fleets unless the fleet is deployed with the Amazon GameLift Agent. In this
-	//   scenario, a force terminate request results in an invalid or bad request
+	//   fleets unless the fleet is deployed with the Amazon GameLift Servers Agent. In
+	//   this scenario, a force terminate request results in an invalid or bad request
 	//   exception.
 	//
 	// This member is required.
@@ -114,8 +115,8 @@ type TerminateGameSessionOutput struct {
 	// A game session in ACTIVE status can host players. When a game session ends, its
 	// status is set to TERMINATED .
 	//
-	// Amazon GameLift retains a game session resource for 30 days after the game
-	// session ends. You can reuse idempotency token values after this time. Game
+	// Amazon GameLift Servers retains a game session resource for 30 days after the
+	// game session ends. You can reuse idempotency token values after this time. Game
 	// session logs are retained for 14 days.
 	//
 	// [All APIs by task]

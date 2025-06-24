@@ -11625,6 +11625,15 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
 
+		case "DelegationRecord":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DelegationRecord to be of type string, got %T instead", value)
+				}
+				sv.DelegationRecord = ptr.String(jtv)
+			}
+
 		case "DomainName":
 			if value != nil {
 				jtv, ok := value.(string)
