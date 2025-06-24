@@ -1358,7 +1358,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-(cn|us-gov|iso-b|iso-c|iso-d))?:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
             }
         },
         "com.amazonaws.licensemanager#ArnList": {
@@ -5249,6 +5249,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Usage operation value that corresponds to the license type you are converting your resource from.  For more information about which platforms correspond to which usage operation values see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html#billing-info\">Sample data: usage operation by platform\n      </a>\n         </p>"
                     }
+                },
+                "ProductCodes": {
+                    "target": "com.amazonaws.licensemanager#ProductCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Product codes referred to in the license conversion process.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7078,6 +7084,51 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1
+                }
+            }
+        },
+        "com.amazonaws.licensemanager#ProductCodeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[A-Za-z0-9]{1,25}$"
+            }
+        },
+        "com.amazonaws.licensemanager#ProductCodeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanager#ProductCodeListItem"
+            }
+        },
+        "com.amazonaws.licensemanager#ProductCodeListItem": {
+            "type": "structure",
+            "members": {
+                "ProductCodeId": {
+                    "target": "com.amazonaws.licensemanager#ProductCodeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product code ID</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProductCodeType": {
+                    "target": "com.amazonaws.licensemanager#ProductCodeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product code type</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list item that contains a product code.</p>"
+            }
+        },
+        "com.amazonaws.licensemanager#ProductCodeType": {
+            "type": "enum",
+            "members": {
+                "MARKETPLACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "marketplace"
+                    }
                 }
             }
         },

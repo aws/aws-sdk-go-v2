@@ -2684,6 +2684,12 @@
                         "smithy.api#enumValue": "el-GR"
                     }
                 },
+                "ET_EE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "et-EE"
+                    }
+                },
                 "ET_ET": {
                     "target": "smithy.api#Unit",
                     "traits": {

@@ -3542,6 +3542,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to copy the DB option group associated with the source DB snapshot to the target \n            Amazon Web Services account and associate with the target DB snapshot. The associated option group can be copied only with \n            cross-account snapshot copy calls.</p>"
                     }
+                },
+                "SnapshotAvailabilityZone": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the Availability Zone where RDS stores the DB snapshot. This value is valid only for snapshots that RDS stores on a Dedicated Local Zone.</p>"
+                    }
+                },
+                "SnapshotTarget": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures the location where RDS will store copied snapshots.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>local</code> (Dedicated Local Zone)</p>\n            </li>\n            <li>\n               <p>\n                  <code>outposts</code> (Amazon Web Services Outposts)</p>\n            </li>\n            <li>\n               <p>\n                  <code>region</code> (Amazon Web Services Region)</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -5295,7 +5307,7 @@
                 "BackupTarget": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location for storing automated backups and manual snapshots.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>outposts</code> (Amazon Web Services Outposts)</p>\n            </li>\n            <li>\n               <p>\n                  <code>region</code> (Amazon Web Services Region)</p>\n            </li>\n         </ul>\n         <p>Default: <code>region</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working \n            with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The location for storing automated backups and manual snapshots.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>local</code> (Dedicated Local Zone)</p>\n            </li>\n            <li>\n               <p>\n                  <code>outposts</code> (Amazon Web Services Outposts)</p>\n            </li>\n            <li>\n               <p>\n                  <code>region</code> (Amazon Web Services Region)</p>\n            </li>\n         </ul>\n         <p>Default: <code>region</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working \n            with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "NetworkType": {
@@ -5709,6 +5721,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to enable a customer-owned IP address (CoIP) for an RDS\n            on Outposts read replica.</p>\n         <p>A <i>CoIP</i> provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the read replica from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n         <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>Amazon Web Services Outposts User Guide</i>.</p>"
+                    }
+                },
+                "BackupTarget": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location where RDS stores automated backups and manual snapshots.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>local</code> for Dedicated Local Zones</p>\n            </li>\n            <li>\n               <p>\n                  <code>region</code> for Amazon Web Services Region</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AllocatedStorage": {
@@ -9519,7 +9537,7 @@
                 "BackupTarget": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location where automated backups and manual snapshots are stored: Amazon Web Services Outposts or the Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>The location where automated backups and manual snapshots are stored: Dedicated Local Zones, Amazon Web Services Outposts or the Amazon Web Services Region.</p>"
                     }
                 },
                 "NetworkType": {
@@ -9778,7 +9796,7 @@
                 "BackupTarget": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location where automated backups are stored: Amazon Web Services Outposts or the Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>The location where automated backups are stored: Dedicated Local Zones, Amazon Web Services Outposts or the Amazon Web Services Region.</p>"
                     }
                 },
                 "StorageThroughput": {
@@ -11566,7 +11584,7 @@
                 "SnapshotTarget": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies where manual snapshots are stored: Amazon Web Services Outposts or the Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>Specifies where manual snapshots are stored: Dedicated Local Zones, Amazon Web Services Outposts or the Amazon Web Services Region.</p>"
                     }
                 },
                 "StorageThroughput": {
@@ -11591,6 +11609,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the snapshot is of a DB instance using the multi-tenant\n            configuration (TRUE) or the single-tenant configuration (FALSE).</p>"
+                    }
+                },
+                "SnapshotAvailabilityZone": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the Availability Zone where RDS stores the DB snapshot. This value is valid only for snapshots that RDS stores on a Dedicated Local Zone.</p>"
                     }
                 }
             },
@@ -28448,7 +28472,7 @@
                 "BackupTarget": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies where automated backups and manual snapshots are stored for the restored DB instance.</p>\n         <p>Possible values are <code>outposts</code> (Amazon Web Services Outposts) and <code>region</code> (Amazon Web Services Region). The default is <code>region</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working \n            with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies where automated backups and manual snapshots are stored for the restored DB instance.</p>\n         <p>Possible values are <code>local</code> (Dedicated Local Zone), <code>outposts</code> (Amazon Web Services Outposts), and <code>region</code> (Amazon Web Services Region). The default is <code>region</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working \n            with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "NetworkType": {
@@ -29356,7 +29380,7 @@
                 "BackupTarget": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location for storing automated backups and manual snapshots for the restored DB instance.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>outposts</code> (Amazon Web Services Outposts)</p>\n            </li>\n            <li>\n               <p>\n                  <code>region</code> (Amazon Web Services Region)</p>\n            </li>\n         </ul>\n         <p>Default: <code>region</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working \n            with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The location for storing automated backups and manual snapshots for the restored DB instance.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>local</code> (Dedicated Local Zone)</p>\n            </li>\n            <li>\n               <p>\n                  <code>outposts</code> (Amazon Web Services Outposts)</p>\n            </li>\n            <li>\n               <p>\n                  <code>region</code> (Amazon Web Services Region)</p>\n            </li>\n         </ul>\n         <p>Default: <code>region</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working \n            with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "NetworkType": {

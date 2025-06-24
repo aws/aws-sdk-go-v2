@@ -980,7 +980,7 @@
                 "Direction": {
                     "target": "com.amazonaws.route53resolver#ResolverEndpointDirection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the applicable value:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INBOUND</code>: Resolver forwards DNS queries to the DNS service for a VPC from your network</p>\n            </li>\n            <li>\n               <p>\n                  <code>OUTBOUND</code>: Resolver forwards DNS queries from the DNS service for a VPC to your network</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specify the applicable value:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INBOUND</code>: Resolver forwards DNS queries to the DNS service for a VPC from your network.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OUTBOUND</code>: Resolver forwards DNS queries from the DNS service for a VPC to your network.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INBOUND_DELEGATION</code>: Resolver delegates queries to Route 53 private hosted zones from your network.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1018,7 +1018,7 @@
                 "Protocols": {
                     "target": "com.amazonaws.route53resolver#ProtocolList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tThe protocols you want to use for the endpoint. DoH-FIPS is applicable for inbound endpoints only.\n\t\t</p>\n         <p>For an inbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53  and DoH-FIPS in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>DoH-FIPS alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <p>For an outbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n\t\t\tThe protocols you want to use for the endpoint. DoH-FIPS is applicable for default inbound endpoints only.\n\t\t</p>\n         <p>For a default inbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53  and DoH-FIPS in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>DoH-FIPS alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <p>For a delegation inbound endpoint you can use Do53 only.</p>\n         <p>For an outbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1188,7 +1188,7 @@
                 "RuleType": {
                     "target": "com.amazonaws.route53resolver#RuleTypeOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you want to forward DNS queries for specified domain name to resolvers on your network, specify <code>FORWARD</code>.</p>\n         <p>When you have a forwarding rule to forward DNS queries for a domain to your network and you want Resolver to process queries for \n\t\t\ta subdomain of that domain, specify <code>SYSTEM</code>.</p>\n         <p>For example, to forward DNS queries for example.com to resolvers on your network, you create a rule and specify <code>FORWARD</code> \n\t\t\tfor <code>RuleType</code>. To then have Resolver process queries for apex.example.com, you create a rule and specify \n\t\t\t<code>SYSTEM</code> for <code>RuleType</code>.</p>\n         <p>Currently, only Resolver can create rules that have a value of <code>RECURSIVE</code> for <code>RuleType</code>.</p>",
+                        "smithy.api#documentation": "<p>When you want to forward DNS queries for specified domain name to resolvers on your network, specify <code>FORWARD</code> or <code>DELEGATE</code>.</p>\n         <p>When you have a forwarding rule to forward DNS queries for a domain to your network and you want Resolver to process queries for \n\t\t\ta subdomain of that domain, specify <code>SYSTEM</code>.</p>\n         <p>For example, to forward DNS queries for example.com to resolvers on your network, you create a rule and specify <code>FORWARD</code> \n\t\t\tfor <code>RuleType</code>. To then have Resolver process queries for apex.example.com, you create a rule and specify \n\t\t\t<code>SYSTEM</code> for <code>RuleType</code>.</p>\n         <p>Currently, only Resolver can create rules that have a value of <code>RECURSIVE</code> for <code>RuleType</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1214,6 +1214,12 @@
                     "target": "com.amazonaws.route53resolver#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the tag keys and values that you want to associate with the endpoint.</p>"
+                    }
+                },
+                "DelegationRecord": {
+                    "target": "com.amazonaws.route53resolver#DelegationRecord",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tDNS queries with the delegation records that match this domain name are forwarded to the resolvers on your \n\t\t\tnetwork.\n\t\t</p>"
                     }
                 }
             },
@@ -1241,6 +1247,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#DelegationRecord": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
                 }
             }
         },
@@ -3904,6 +3919,12 @@
                     "traits": {
                         "smithy.api#enumValue": "UPDATE_FAILED"
                     }
+                },
+                "Isolated": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ISOLATED"
+                    }
                 }
             }
         },
@@ -5927,7 +5948,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.route53resolver#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Virtual Private Cloud VPC that you're configuring Resolver for.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Virtual Private Cloud VPC or a Route 53 Profile that you're configuring Resolver for.</p>"
                     }
                 },
                 "OwnerId": {
@@ -6068,7 +6089,7 @@
                 "Direction": {
                     "target": "com.amazonaws.route53resolver#ResolverEndpointDirection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the Resolver endpoint allows inbound or outbound DNS queries:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INBOUND</code>: allows DNS queries to your VPC from your network</p>\n            </li>\n            <li>\n               <p>\n                  <code>OUTBOUND</code>: allows DNS queries from your VPC to your network</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates whether the Resolver endpoint allows inbound or outbound DNS queries:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INBOUND</code>: allows DNS queries to your VPC from your network</p>\n            </li>\n            <li>\n               <p>\n                  <code>OUTBOUND</code>: allows DNS queries from your VPC to your network</p>\n            </li>\n            <li>\n               <p>\n                  <code>INBOUND_DELEGATION</code>: Resolver delegates queries to Route 53 private hosted zones from your network.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "IpAddressCount": {
@@ -6128,7 +6149,7 @@
                 "Protocols": {
                     "target": "com.amazonaws.route53resolver#ProtocolList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tProtocols used for the endpoint. DoH-FIPS is applicable for inbound endpoints only.\n\t\t</p>\n         <p>For an inbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53  and DoH-FIPS in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>DoH-FIPS alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <p>For an outbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n\t\t\tProtocols used for the endpoint. DoH-FIPS is applicable for a default inbound endpoints only.\n\t\t</p>\n         <p>For an inbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53  and DoH-FIPS in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>DoH-FIPS alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <p>For a delegation inbound endpoint you can use Do53 only.</p>\n         <p>For an outbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -6149,6 +6170,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OUTBOUND"
+                    }
+                },
+                "InboundDelegation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INBOUND_DELEGATION"
                     }
                 }
             }
@@ -6511,7 +6538,7 @@
                 "RuleType": {
                     "target": "com.amazonaws.route53resolver#RuleTypeOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you want to forward DNS queries for specified domain name to resolvers on your network, specify <code>FORWARD</code>.</p>\n         <p>When you have a forwarding rule to forward DNS queries for a domain to your network and you want Resolver to process queries for \n\t\t\ta subdomain of that domain, specify <code>SYSTEM</code>.</p>\n         <p>For example, to forward DNS queries for example.com to resolvers on your network, you create a rule and specify <code>FORWARD</code> \n\t\t\tfor <code>RuleType</code>. To then have Resolver process queries for apex.example.com, you create a rule and specify \n\t\t\t<code>SYSTEM</code> for <code>RuleType</code>.</p>\n         <p>Currently, only Resolver can create rules that have a value of <code>RECURSIVE</code> for <code>RuleType</code>.</p>"
+                        "smithy.api#documentation": "<p>When you want to forward DNS queries for specified domain name to resolvers on your network, specify <code>FORWARD</code> or <code>DELEGATE</code>. \n\t\t\tIf a query matches multiple Resolver rules (example.com and www.example.com), outbound DNS queries are routed using the Resolver rule that contains \n\t\t\tthe most specific domain name (www.example.com).</p>\n         <p>When you have a forwarding rule to forward DNS queries for a domain to your network and you want Resolver to process queries for \n\t\t\ta subdomain of that domain, specify <code>SYSTEM</code>.</p>\n         <p>For example, to forward DNS queries for example.com to resolvers on your network, you create a rule and specify <code>FORWARD</code> \n\t\t\tfor <code>RuleType</code>. To then have Resolver process queries for apex.example.com, you create a rule and specify \n\t\t\t<code>SYSTEM</code> for <code>RuleType</code>.</p>\n         <p>Currently, only Resolver can create rules that have a value of <code>RECURSIVE</code> for <code>RuleType</code>.</p>"
                     }
                 },
                 "Name": {
@@ -6554,6 +6581,12 @@
                     "target": "com.amazonaws.route53resolver#Rfc3339TimeString",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the Resolver rule was last updated, in Unix time format and Coordinated Universal Time (UTC).</p>"
+                    }
+                },
+                "DelegationRecord": {
+                    "target": "com.amazonaws.route53resolver#DelegationRecord",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tDNS queries with delegation records that point to this domain name are forwarded to resolvers on your network.\n\t\t</p>"
                     }
                 }
             },
@@ -8029,6 +8062,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RECURSIVE"
                     }
+                },
+                "Delegate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELEGATE"
+                    }
                 }
             }
         },
@@ -8942,7 +8981,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.route53resolver#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Resource ID of the Amazon VPC that you want to update the Resolver configuration for.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Virtual Private Cloud VPC or a Route 53 Profile that you're configuring Resolver for.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9103,7 +9142,7 @@
                 "Protocols": {
                     "target": "com.amazonaws.route53resolver#ProtocolList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tThe protocols you want to use for the endpoint. DoH-FIPS is applicable for inbound endpoints only.\n\t\t</p>\n         <p>For an inbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53  and DoH-FIPS in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>DoH-FIPS alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <p>For an outbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <important>\n            <p> You can't change the protocol of an inbound endpoint directly from only Do53 to only DoH, or DoH-FIPS.\n\t\t\tThis is to prevent a sudden disruption to incoming traffic that\n\t\t\trelies on Do53. To change the protocol from Do53 to DoH, or DoH-FIPS, you must\n\t\t\tfirst enable both Do53 and DoH, or Do53 and DoH-FIPS, to make sure that all incoming traffic\n\t\t\thas transferred to using the DoH protocol, or DoH-FIPS, and then remove the\n\t\t\tDo53.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>\n\t\t\tThe protocols you want to use for the endpoint. DoH-FIPS is applicable for default inbound endpoints only.\n\t\t</p>\n         <p>For a default inbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53  and DoH-FIPS in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>DoH-FIPS alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <p>For a delegation inbound endpoint you can use Do53 only.</p>\n         <p>For an outbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <important>\n            <p> You can't change the protocol of an inbound endpoint directly from only Do53 to only DoH, or DoH-FIPS.\n\t\t\tThis is to prevent a sudden disruption to incoming traffic that\n\t\t\trelies on Do53. To change the protocol from Do53 to DoH, or DoH-FIPS, you must\n\t\t\tfirst enable both Do53 and DoH, or Do53 and DoH-FIPS, to make sure that all incoming traffic\n\t\t\thas transferred to using the DoH protocol, or DoH-FIPS, and then remove the\n\t\t\tDo53.</p>\n         </important>"
                     }
                 }
             },
