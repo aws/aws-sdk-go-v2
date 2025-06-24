@@ -1,8 +1,0 @@
-{
-    "id": "cf595f30-d4f1-48a7-8926-7b1631db4553",
-    "type": "feature",
-    "description": "Add Paginator for DescribeAccountLimits, and fix Paginators for DescribeTrustStoreAssociations, DescribeTrustStoreRevocations, and DescribeTrustStores",
-    "modules": [
-        "service/elasticloadbalancingv2"
-    ]
-}

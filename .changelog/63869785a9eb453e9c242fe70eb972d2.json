@@ -1,8 +1,0 @@
-{
-    "id": "63869785-a9eb-453e-9c24-2fe70eb972d2",
-    "type": "feature",
-    "description": "Adds support for cross account investigations for CloudWatch investigations AI Operations (AIOps).",
-    "modules": [
-        "service/aiops"
-    ]
-}

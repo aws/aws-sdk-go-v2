@@ -1,3 +1,7 @@
+# v1.1.0 (2025-06-24)
+
+* **Feature**: Adds support for cross account investigations for CloudWatch investigations AI Operations (AIOps).
+
 # v1.0.0 (2025-06-18)
 
 * **Release**: New AWS service client module

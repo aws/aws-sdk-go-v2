@@ -1,3 +1,7 @@
+# v1.53.0 (2025-06-24)
+
+* **Feature**: Add userdataType to LaunchTemplateSpecification and LaunchTemplateSpecificationOverride.
+
 # v1.52.6 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

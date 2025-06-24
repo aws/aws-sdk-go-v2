@@ -1,3 +1,7 @@
+# v1.98.0 (2025-06-24)
+
+* **Feature**: Adding support for RDS on Dedicated Local Zones, including local backup target, snapshot availability zone and snapshot target
+
 # v1.97.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

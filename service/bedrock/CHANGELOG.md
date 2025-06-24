@@ -1,3 +1,7 @@
+# v1.37.0 (2025-06-24)
+
+* **Feature**: We are making ListFoundationModelAgreementOffers, DeleteFoundationModelAgreement, CreateFoundationModelAgreement, GetFoundationModelAvailability, PutUseCaseForModelAccess and GetUseCaseForModelAccess APIs public, previously they were console.
+
 # v1.36.0 (2025-06-20)
 
 * **Feature**: Add support for tiers in Content Filters and Denied Topics for Amazon Bedrock Guardrails.

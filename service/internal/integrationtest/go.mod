@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.45.5
 	github.com/aws/aws-sdk-go-v2/service/athena v1.51.2
-	github.com/aws/aws-sdk-go-v2/service/batch v1.52.6
+	github.com/aws/aws-sdk-go-v2/service/batch v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.60.3
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.46.3
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.30.4
@@ -29,19 +29,19 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.7
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.6
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.4
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.225.2
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.226.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.58.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.36.2
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.46.3
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.29.4
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.29.6
-	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.45.5
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.46.0
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.33.6
 	github.com/aws/aws-sdk-go-v2/service/emr v1.49.3
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.39.3
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.7
-	github.com/aws/aws-sdk-go-v2/service/gamelift v1.41.3
+	github.com/aws/aws-sdk-go-v2/service/gamelift v1.42.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.5
 	github.com/aws/aws-sdk-go-v2/service/glue v1.115.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.4
@@ -55,12 +55,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.37.3
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.24.4
 	github.com/aws/aws-sdk-go-v2/service/polly v1.48.4
-	github.com/aws/aws-sdk-go-v2/service/rds v1.97.3
+	github.com/aws/aws-sdk-go-v2/service/rds v1.98.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.54.6
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.47.2
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.52.2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.29.4
-	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.35.6
+	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.81.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.58.3
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.7

@@ -1,3 +1,7 @@
+# v1.47.0 (2025-06-24)
+
+* **Feature**: This Feature Adds Support for the "et-EE" Locale for Batch Operations
+
 # v1.46.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

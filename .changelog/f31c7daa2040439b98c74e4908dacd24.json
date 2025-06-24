@@ -1,8 +1,0 @@
-{
-    "id": "f31c7daa-2040-439b-98c7-4e4908dacd24",
-    "type": "feature",
-    "description": "Add userdataType to LaunchTemplateSpecification and LaunchTemplateSpecificationOverride.",
-    "modules": [
-        "service/batch"
-    ]
-}

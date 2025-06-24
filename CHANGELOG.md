@@ -1,3 +1,27 @@
+# Release (2025-06-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/aiops`: [v1.1.0](service/aiops/CHANGELOG.md#v110-2025-06-24)
+  * **Feature**: Adds support for cross account investigations for CloudWatch investigations AI Operations (AIOps).
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.53.0](service/batch/CHANGELOG.md#v1530-2025-06-24)
+  * **Feature**: Add userdataType to LaunchTemplateSpecification and LaunchTemplateSpecificationOverride.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.37.0](service/bedrock/CHANGELOG.md#v1370-2025-06-24)
+  * **Feature**: We are making ListFoundationModelAgreementOffers, DeleteFoundationModelAgreement, CreateFoundationModelAgreement, GetFoundationModelAvailability, PutUseCaseForModelAccess and GetUseCaseForModelAccess APIs public, previously they were console.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.226.0](service/ec2/CHANGELOG.md#v12260-2025-06-24)
+  * **Feature**: This release allows you to create and register AMIs while maintaining their underlying EBS snapshots within Local Zones.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.46.0](service/elasticloadbalancingv2/CHANGELOG.md#v1460-2025-06-24)
+  * **Feature**: Add Paginator for DescribeAccountLimits, and fix Paginators for DescribeTrustStoreAssociations, DescribeTrustStoreRevocations, and DescribeTrustStores
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.42.0](service/gamelift/CHANGELOG.md#v1420-2025-06-24)
+  * **Feature**: Add support for UDP ping beacons to ListLocations API, including new PingBeacon and UDPEndpoint data types within its Locations return value. Use UDP ping beacon endpoints to help measure real-time network latency for multiplayer games.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.32.0](service/licensemanager/CHANGELOG.md#v1320-2025-06-24)
+  * **Feature**: AWS License Manager now supports license type conversions for AWS Marketplace products. Customers can provide Marketplace codes in the source license context or destination license context in the CreateLicenseConversionTaskForResource requests.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.98.0](service/rds/CHANGELOG.md#v1980-2025-06-24)
+  * **Feature**: Adding support for RDS on Dedicated Local Zones, including local backup target, snapshot availability zone and snapshot target
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.36.0](service/route53resolver/CHANGELOG.md#v1360-2025-06-24)
+  * **Feature**: Add support for iterative DNS queries through the new INBOUND_DELEGATION endpoint. Add delegation support through the Outbound Endpoints with DELEGATE rules.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.47.0](service/transcribe/CHANGELOG.md#v1470-2025-06-24)
+  * **Feature**: This Feature Adds Support for the "et-EE" Locale for Batch Operations
+
 # Release (2025-06-23)
 
 ## Module Highlights

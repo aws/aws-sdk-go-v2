@@ -1,3 +1,7 @@
+# v1.36.0 (2025-06-24)
+
+* **Feature**: Add support for iterative DNS queries through the new INBOUND_DELEGATION endpoint. Add delegation support through the Outbound Endpoints with DELEGATE rules.
+
 # v1.35.6 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

@@ -1,8 +1,0 @@
-{
-    "id": "e6b6194b-9706-4f9c-961f-4006fb945dda",
-    "type": "feature",
-    "description": "Add support for iterative DNS queries through the new INBOUND_DELEGATION endpoint. Add delegation support through the Outbound Endpoints with DELEGATE rules.",
-    "modules": [
-        "service/route53resolver"
-    ]
-}

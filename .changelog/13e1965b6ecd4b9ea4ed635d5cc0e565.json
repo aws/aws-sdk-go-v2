@@ -1,8 +1,0 @@
-{
-    "id": "13e1965b-6ecd-4b9e-a4ed-635d5cc0e565",
-    "type": "feature",
-    "description": "We are making ListFoundationModelAgreementOffers, DeleteFoundationModelAgreement, CreateFoundationModelAgreement, GetFoundationModelAvailability, PutUseCaseForModelAccess and GetUseCaseForModelAccess APIs public, previously they were console.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

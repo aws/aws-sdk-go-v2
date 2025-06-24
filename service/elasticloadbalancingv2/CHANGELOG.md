@@ -1,3 +1,7 @@
+# v1.46.0 (2025-06-24)
+
+* **Feature**: Add Paginator for DescribeAccountLimits, and fix Paginators for DescribeTrustStoreAssociations, DescribeTrustStoreRevocations, and DescribeTrustStores
+
 # v1.45.5 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

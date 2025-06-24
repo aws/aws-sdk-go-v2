@@ -1,8 +1,0 @@
-{
-    "id": "95a479a4-1dfc-4369-a52b-ca6ceb070298",
-    "type": "feature",
-    "description": "This release allows you to create and register AMIs while maintaining their underlying EBS snapshots within Local Zones.",
-    "modules": [
-        "service/ec2"
-    ]
-}

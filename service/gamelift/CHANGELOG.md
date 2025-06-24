@@ -1,3 +1,7 @@
+# v1.42.0 (2025-06-24)
+
+* **Feature**: Add support for UDP ping beacons to ListLocations API, including new PingBeacon and UDPEndpoint data types within its Locations return value. Use UDP ping beacon endpoints to help measure real-time network latency for multiplayer games.
+
 # v1.41.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

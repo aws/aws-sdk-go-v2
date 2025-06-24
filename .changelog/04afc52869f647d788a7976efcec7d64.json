@@ -1,8 +1,0 @@
-{
-    "id": "04afc528-69f6-47d7-88a7-976efcec7d64",
-    "type": "feature",
-    "description": "Adding support for RDS on Dedicated Local Zones, including local backup target, snapshot availability zone and snapshot target",
-    "modules": [
-        "service/rds"
-    ]
-}
