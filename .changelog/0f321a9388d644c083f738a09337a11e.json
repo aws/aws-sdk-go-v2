@@ -1,8 +1,0 @@
-{
-    "id": "0f321a93-88d6-44c0-83f7-38a09337a11e",
-    "type": "feature",
-    "description": "Add RotationAngle field to Geometry of WORD blocks for Textract AnalyzeDocument API",
-    "modules": [
-        "service/textract"
-    ]
-}

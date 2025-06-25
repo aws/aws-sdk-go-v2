@@ -1,3 +1,24 @@
+# Release (2025-06-25)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.58.1](service/ecs/CHANGELOG.md#v1581-2025-06-25)
+  * **Documentation**: Updates for change to Amazon ECS default log driver mode from blocking to non-blocking
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.55.0](service/fsx/CHANGELOG.md#v1550-2025-06-25)
+  * **Feature**: Add support for the ability to create Amazon S3 Access Points for Amazon FSx for OpenZFS file systems.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.82.0](service/s3/CHANGELOG.md#v1820-2025-06-25)
+  * **Feature**: Adds support for additional server-side encryption mode and storage class values for accessing Amazon FSx data from Amazon S3 using S3 Access Points
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.59.0](service/s3control/CHANGELOG.md#v1590-2025-06-25)
+  * **Feature**: Add support for the ability to use Amazon S3 Access Points with Amazon FSx for OpenZFS file systems.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.38.0](service/storagegateway/CHANGELOG.md#v1380-2025-06-25)
+  * **Feature**: This release adds IPv6 support to the Storage Gateway APIs. APIs that previously only accept or return IPv4 address will now accept or return both IPv4 and IPv6 addresses.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.36.0](service/textract/CHANGELOG.md#v1360-2025-06-25)
+  * **Feature**: Add RotationAngle field to Geometry of WORD blocks for Textract AnalyzeDocument API
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.15.0](service/workspacesthinclient/CHANGELOG.md#v1150-2025-06-25)
+  * **Feature**: Remove Tags field from Get API responses
+
 # Release (2025-06-24)
 
 ## Module Highlights

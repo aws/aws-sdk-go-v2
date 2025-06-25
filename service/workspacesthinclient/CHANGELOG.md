@@ -1,3 +1,7 @@
+# v1.15.0 (2025-06-25)
+
+* **Feature**: Remove Tags field from Get API responses
+
 # v1.14.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

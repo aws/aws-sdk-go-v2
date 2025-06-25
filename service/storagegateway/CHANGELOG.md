@@ -1,3 +1,7 @@
+# v1.38.0 (2025-06-25)
+
+* **Feature**: This release adds IPv6 support to the Storage Gateway APIs. APIs that previously only accept or return IPv4 address will now accept or return both IPv4 and IPv6 addresses.
+
 # v1.37.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

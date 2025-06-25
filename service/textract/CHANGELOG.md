@@ -1,3 +1,7 @@
+# v1.36.0 (2025-06-25)
+
+* **Feature**: Add RotationAngle field to Geometry of WORD blocks for Textract AnalyzeDocument API
+
 # v1.35.4 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

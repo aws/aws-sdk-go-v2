@@ -1,3 +1,7 @@
+# v1.58.1 (2025-06-25)
+
+* **Documentation**: Updates for change to Amazon ECS default log driver mode from blocking to non-blocking
+
 # v1.58.0 (2025-06-20)
 
 * **Feature**: Add ECS support for Windows Server 2025

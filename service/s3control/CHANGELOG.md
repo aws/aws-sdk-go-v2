@@ -1,3 +1,7 @@
+# v1.59.0 (2025-06-25)
+
+* **Feature**: Add support for the ability to use Amazon S3 Access Points with Amazon FSx for OpenZFS file systems.
+
 # v1.58.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

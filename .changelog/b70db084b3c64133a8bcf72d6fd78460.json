@@ -1,8 +1,0 @@
-{
-    "id": "b70db084-b3c6-4133-a8bc-f72d6fd78460",
-    "type": "documentation",
-    "description": "Updates for change to Amazon ECS default log driver mode from blocking to non-blocking",
-    "modules": [
-        "service/ecs"
-    ]
-}

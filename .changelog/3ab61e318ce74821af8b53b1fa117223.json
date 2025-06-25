@@ -1,8 +1,0 @@
-{
-    "id": "3ab61e31-8ce7-4821-af8b-53b1fa117223",
-    "type": "feature",
-    "description": "Adds support for additional server-side encryption mode and storage class values for accessing Amazon FSx data from Amazon S3 using S3 Access Points",
-    "modules": [
-        "service/s3"
-    ]
-}
