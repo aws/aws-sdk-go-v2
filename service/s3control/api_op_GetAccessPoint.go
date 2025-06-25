@@ -106,6 +106,12 @@ type GetAccessPointOutput struct {
 	// The date and time when the specified access point was created.
 	CreationDate *time.Time
 
+	// The unique identifier for the data source of the access point.
+	DataSourceId *string
+
+	// The type of the data source that the access point is attached to.
+	DataSourceType *string
+
 	// The VPC endpoint for the access point.
 	Endpoints map[string]string
 

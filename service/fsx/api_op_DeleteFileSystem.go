@@ -18,6 +18,11 @@ import (
 // volumes and storage virtual machines (SVMs) on the file system. Then provide a
 // FileSystemId value to the DeleteFileSystem operation.
 //
+// Before deleting an Amazon FSx for OpenZFS file system, make sure that there
+// aren't any Amazon S3 access points attached to any volume. For more information
+// on how to list S3 access points that are attached to volumes, see [Listing S3 access point attachments]. For more
+// information on how to delete S3 access points, see [Deleting an S3 access point attachment].
+//
 // By default, when you delete an Amazon FSx for Windows File Server file system,
 // a final backup is created upon deletion. This final backup isn't subject to the
 // file system's retention policy, and must be manually deleted.
@@ -47,10 +52,12 @@ import (
 // The data in a deleted file system is also deleted and can't be recovered by any
 // means.
 //
+// [Deleting an S3 access point attachment]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/delete-points-list
 // [unmount]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/unmounting-fs.html
 // [AgeOfOldestQueuedMessage]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/monitoring-cloudwatch.html#auto-import-export-metrics
 // [DescribeFileSystems]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html
 // [export data repository task]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repo-task-dra.html
+// [Listing S3 access point attachments]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-list
 func (c *Client) DeleteFileSystem(ctx context.Context, params *DeleteFileSystemInput, optFns ...func(*Options)) (*DeleteFileSystemOutput, error) {
 	if params == nil {
 		params = &DeleteFileSystemInput{}

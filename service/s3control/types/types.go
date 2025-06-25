@@ -85,6 +85,12 @@ type AccessPoint struct {
 	// with this access point.
 	BucketAccountId *string
 
+	// A unique identifier for the data source of the access point.
+	DataSourceId *string
+
+	// The type of the data source that the access point is attached to.
+	DataSourceType *string
+
 	// The virtual private cloud (VPC) configuration for this access point, if one
 	// exists.
 	//
@@ -2610,9 +2616,9 @@ type S3Tag struct {
 // You can use the access point scope to restrict access to specific prefixes, API
 // operations, or a combination of both.
 //
-// For more information, see [Manage the scope of your access points for directory buckets.]
+// For more information, see [Manage the scope of your access points for directory buckets].
 //
-// [Manage the scope of your access points for directory buckets.]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets-manage-scope.html
+// [Manage the scope of your access points for directory buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets-manage-scope.html
 type Scope struct {
 
 	// You can include one or more API operations as permissions.

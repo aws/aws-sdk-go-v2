@@ -220,7 +220,7 @@ type CreateFileSystemInput struct {
 	// Server User Guide, [FSx for Lustre storage classes]in the FSx for Lustre User Guide, and [Working with Intelligent-Tiering] in the Amazon FSx for
 	// OpenZFS User Guide.
 	//
-	// [FSx for Lustre storage classes]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-storage-classes
+	// [FSx for Lustre storage classes]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html#lustre-storage-classes
 	// [Storage type options]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options
 	// [Working with Intelligent-Tiering]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance-intelligent-tiering
 	StorageType types.StorageType

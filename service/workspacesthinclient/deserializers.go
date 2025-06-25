@@ -2952,11 +2952,6 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				sv.Status = types.DeviceStatus(jtv)
 			}
 
-		case "tags":
-			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
-				return err
-			}
-
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3431,11 +3426,6 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 					return fmt.Errorf("expected SoftwareSetUpdateSchedule to be of type string, got %T instead", value)
 				}
 				sv.SoftwareSetUpdateSchedule = types.SoftwareSetUpdateSchedule(jtv)
-			}
-
-		case "tags":
-			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
-				return err
 			}
 
 		case "updatedAt":
@@ -4115,11 +4105,6 @@ func awsRestjson1_deserializeDocumentSoftwareSet(v **types.SoftwareSet, value in
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
-			}
-
-		case "tags":
-			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
-				return err
 			}
 
 		case "validationStatus":

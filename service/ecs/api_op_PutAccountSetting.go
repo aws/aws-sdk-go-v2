@@ -115,9 +115,9 @@ type PutAccountSettingInput struct {
 	//   logConfiguration , the mode you specify using this account setting will be
 	//   used as the default. For more information about log delivery modes, see [LogConfiguration].
 	//
-	// On June 25, 2025, Amazon ECS is changing the default log driver mode from
-	//   blocking to non-blocking to prioritize task availability over logging. To
-	//   continue using the blocking mode after this change, do one of the following:
+	// On June 25, 2025, Amazon ECS changed the default log driver mode from blocking
+	//   to non-blocking to prioritize task availability over logging. To continue
+	//   using the blocking mode after this change, do one of the following:
 	//
 	//   - Set the mode option in your container definition's logConfiguration as
 	//   blocking .

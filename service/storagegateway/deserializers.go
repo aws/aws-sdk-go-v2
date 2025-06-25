@@ -12504,7 +12504,7 @@ func awsAwsjson11_deserializeDocumentFileShareClientList(v *[]string, value inte
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected IPV4AddressCIDR to be of type string, got %T instead", value)
+				return fmt.Errorf("expected Ipv4OrIpv6AddressCIDR to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}

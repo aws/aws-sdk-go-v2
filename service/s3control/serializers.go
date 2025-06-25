@@ -5627,6 +5627,14 @@ func awsRestxml_serializeOpHttpBindingsListAccessPointsInput(v *ListAccessPoints
 		encoder.SetQuery("bucket").String(*v.Bucket)
 	}
 
+	if v.DataSourceId != nil {
+		encoder.SetQuery("dataSourceId").String(*v.DataSourceId)
+	}
+
+	if v.DataSourceType != nil {
+		encoder.SetQuery("dataSourceType").String(*v.DataSourceType)
+	}
+
 	if v.MaxResults != 0 {
 		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}

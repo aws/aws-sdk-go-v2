@@ -3089,12 +3089,12 @@ type LogConfiguration struct {
 	// You can set a default mode for all containers in a specific Amazon Web Services
 	// Region by using the defaultLogDriverMode account setting. If you don't specify
 	// the mode option or configure the account setting, Amazon ECS will default to
-	// the blocking mode. For more information about the account setting, see [Default log driver mode] in the
-	// Amazon Elastic Container Service Developer Guide.
+	// the non-blocking mode. For more information about the account setting, see [Default log driver mode] in
+	// the Amazon Elastic Container Service Developer Guide.
 	//
-	// On June 25, 2025, Amazon ECS is changing the default log driver mode from
-	// blocking to non-blocking to prioritize task availability over logging. To
-	// continue using the blocking mode after this change, do one of the following:
+	// On June 25, 2025, Amazon ECS changed the default log driver mode from blocking
+	// to non-blocking to prioritize task availability over logging. To continue using
+	// the blocking mode after this change, do one of the following:
 	//
 	//   - Set the mode option in your container definition's logConfiguration as
 	//   blocking .

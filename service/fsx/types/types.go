@@ -512,6 +512,42 @@ type CreateAggregateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the FSx for OpenZFS volume that the S3 access point will be attached
+// to, and the file system user identity.
+type CreateAndAttachS3AccessPointOpenZFSConfiguration struct {
+
+	// Specifies the file system user identity to use for authorizing file read and
+	// write requests that are made using this S3 access point.
+	//
+	// This member is required.
+	FileSystemIdentity *OpenZFSFileSystemIdentity
+
+	// The ID of the FSx for OpenZFS volume to which you want the S3 access point
+	// attached.
+	//
+	// This member is required.
+	VolumeId *string
+
+	noSmithyDocumentSerde
+}
+
+// Used to create an S3 access point that accepts requests only from a virtual
+// private cloud (VPC) to restrict data access to a private network.
+type CreateAndAttachS3AccessPointS3Configuration struct {
+
+	// Specifies an access policy to associate with the S3 access point configuration.
+	// For more information, see [Configuring IAM policies for using access points]in the Amazon Simple Storage Service User Guide.
+	//
+	// [Configuring IAM policies for using access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html
+	Policy *string
+
+	// If included, Amazon S3 restricts access to this S3 access point to requests
+	// made from the specified virtual private cloud (VPC).
+	VpcConfiguration *S3AccessPointVpcConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon File Cache configuration for the cache that you are creating.
 type CreateFileCacheLustreConfiguration struct {
 
@@ -3432,6 +3468,21 @@ type OpenZFSFileSystemConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the file system user identity that will be used for authorizing all
+// file access requests that are made using the S3 access point.
+type OpenZFSFileSystemIdentity struct {
+
+	// Specifies the FSx for OpenZFS user identity type, accepts only POSIX .
+	//
+	// This member is required.
+	Type OpenZFSFileSystemUserType
+
+	// Specifies the UID and GIDs of the file system POSIX user.
+	PosixUser *OpenZFSPosixFileSystemUser
+
+	noSmithyDocumentSerde
+}
+
 // The Network File System (NFS) configurations for mounting an Amazon FSx for
 // OpenZFS file system.
 type OpenZFSNfsExport struct {
@@ -3471,6 +3522,26 @@ type OpenZFSOriginSnapshotConfiguration struct {
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	SnapshotARN *string
+
+	noSmithyDocumentSerde
+}
+
+// The FSx for OpenZFS file system user that is used for authorizing all file
+// access requests that are made using the S3 access point.
+type OpenZFSPosixFileSystemUser struct {
+
+	// The GID of the file system user.
+	//
+	// This member is required.
+	Gid *int64
+
+	// The UID of the file system user.
+	//
+	// This member is required.
+	Uid *int64
+
+	// The list of secondary GIDs for the file system user.
+	SecondaryGids []int64
 
 	noSmithyDocumentSerde
 }
@@ -3693,6 +3764,100 @@ type RetentionPeriod struct {
 	//
 	//   - Years : 0 - 100
 	Value *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the S3 access point configuration of the S3 access point attachment.
+type S3AccessPoint struct {
+
+	// The S3 access point's alias.
+	Alias *string
+
+	// he S3 access point's ARN.
+	ResourceARN *string
+
+	// The S3 access point's virtual private cloud (VPC) configuration.
+	VpcConfiguration *S3AccessPointVpcConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// An S3 access point attached to an Amazon FSx volume.
+type S3AccessPointAttachment struct {
+
+	// The time that the resource was created, in seconds (since
+	// 1970-01-01T00:00:00Z), also known as Unix time.
+	CreationTime *time.Time
+
+	// The lifecycle status of the S3 access point attachment. The lifecycle can have
+	// the following values:
+	//
+	//   - AVAILABLE - the S3 access point attachment is available for use
+	//
+	//   - CREATING - Amazon FSx is creating the S3 access point and attachment
+	//
+	//   - DELETING - Amazon FSx is deleting the S3 access point and attachment
+	//
+	//   - FAILED - The S3 access point attachment is in a failed state. Delete and
+	//   detach the S3 access point attachment, and create a new one.
+	//
+	//   - UPDATING - Amazon FSx is updating the S3 access point attachment
+	Lifecycle S3AccessPointAttachmentLifecycle
+
+	// Describes why a resource lifecycle state changed.
+	LifecycleTransitionReason *LifecycleTransitionReason
+
+	// The name of the S3 access point attachment; also used for the name of the S3
+	// access point.
+	Name *string
+
+	// The OpenZFSConfiguration of the S3 access point attachment.
+	OpenZFSConfiguration *S3AccessPointOpenZFSConfiguration
+
+	// The S3 access point configuration of the S3 access point attachment.
+	S3AccessPoint *S3AccessPoint
+
+	// The type of Amazon FSx volume that the S3 access point is attached to.
+	Type S3AccessPointAttachmentType
+
+	noSmithyDocumentSerde
+}
+
+// A set of Name and Values pairs used to view a select set of S3 access point
+// attachments.
+type S3AccessPointAttachmentsFilter struct {
+
+	// The name of the filter.
+	Name S3AccessPointAttachmentsFilterName
+
+	// The values of the filter.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the FSx for OpenZFS attachment configuration of an S3 access point
+// attachment.
+type S3AccessPointOpenZFSConfiguration struct {
+
+	// The file system identity used to authorize file access requests made using the
+	// S3 access point.
+	FileSystemIdentity *OpenZFSFileSystemIdentity
+
+	// The ID of the FSx for OpenZFS volume that the S3 access point is attached to.
+	VolumeId *string
+
+	noSmithyDocumentSerde
+}
+
+// If included, Amazon S3 restricts access to this access point to requests from
+// the specified virtual private cloud (VPC).
+type S3AccessPointVpcConfiguration struct {
+
+	// Specifies the virtual private cloud (VPC) for the S3 access point VPC
+	// configuration, if one exists.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }

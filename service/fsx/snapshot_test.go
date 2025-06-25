@@ -110,6 +110,18 @@ func TestCheckSnapshot_CopySnapshotAndUpdateVolume(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAndAttachS3AccessPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAndAttachS3AccessPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAndAttachS3AccessPoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateBackup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBackup(context.Background(), nil, func(o *Options) {
@@ -386,6 +398,18 @@ func TestCheckSnapshot_DescribeFileSystems(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeS3AccessPointAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeS3AccessPointAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeS3AccessPointAttachments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeSharedVpcConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSharedVpcConfiguration(context.Background(), nil, func(o *Options) {
@@ -427,6 +451,18 @@ func TestCheckSnapshot_DescribeVolumes(t *testing.T) {
 	_, err := svc.DescribeVolumes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeVolumes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DetachAndDeleteS3AccessPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachAndDeleteS3AccessPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DetachAndDeleteS3AccessPoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -642,6 +678,18 @@ func TestUpdateSnapshot_CopySnapshotAndUpdateVolume(t *testing.T) {
 	_, err := svc.CopySnapshotAndUpdateVolume(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CopySnapshotAndUpdateVolume")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAndAttachS3AccessPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAndAttachS3AccessPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAndAttachS3AccessPoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -925,6 +973,18 @@ func TestUpdateSnapshot_DescribeFileSystems(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeS3AccessPointAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeS3AccessPointAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeS3AccessPointAttachments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeSharedVpcConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSharedVpcConfiguration(context.Background(), nil, func(o *Options) {
@@ -966,6 +1026,18 @@ func TestUpdateSnapshot_DescribeVolumes(t *testing.T) {
 	_, err := svc.DescribeVolumes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeVolumes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DetachAndDeleteS3AccessPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachAndDeleteS3AccessPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DetachAndDeleteS3AccessPoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

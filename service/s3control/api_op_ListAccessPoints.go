@@ -18,12 +18,13 @@ import (
 
 // This operation is not supported by directory buckets.
 //
-// Returns a list of the access points that are owned by the current account
-// that's associated with the specified bucket. You can retrieve up to 1000 access
-// points per call. If the specified bucket has more than 1,000 access points (or
-// the number specified in maxResults , whichever is less), the response will
-// include a continuation token that you can use to list the additional access
-// points.
+// Returns a list of the access points. You can retrieve up to 1,000 access points
+// per call. If the call returns more than 1,000 access points (or the number
+// specified in maxResults , whichever is less), the response will include a
+// continuation token that you can use to list the additional access points.
+//
+// Returns only access points attached to S3 buckets by default. To return all
+// access points specify DataSourceType as ALL .
 //
 // All Amazon S3 on Outposts REST API requests for this action require an
 // additional parameter of x-amz-outpost-id to be passed with the request. In
@@ -80,6 +81,14 @@ type ListAccessPointsInput struct {
 	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports .
 	// The value must be URL encoded.
 	Bucket *string
+
+	// The unique identifier for the data source of the access point.
+	DataSourceId *string
+
+	// The type of the data source that the access point is attached to. Returns only
+	// access points attached to S3 buckets by default. To return all access points
+	// specify DataSourceType as ALL .
+	DataSourceType *string
 
 	// The maximum number of access points that you want to include in the list. If
 	// the specified bucket has more than this number of access points, then the

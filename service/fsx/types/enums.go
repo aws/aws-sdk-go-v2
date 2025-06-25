@@ -824,6 +824,23 @@ func (OpenZFSDeploymentType) Values() []OpenZFSDeploymentType {
 	}
 }
 
+type OpenZFSFileSystemUserType string
+
+// Enum values for OpenZFSFileSystemUserType
+const (
+	OpenZFSFileSystemUserTypePosix OpenZFSFileSystemUserType = "POSIX"
+)
+
+// Values returns all known values for OpenZFSFileSystemUserType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OpenZFSFileSystemUserType) Values() []OpenZFSFileSystemUserType {
+	return []OpenZFSFileSystemUserType{
+		"POSIX",
+	}
+}
+
 type OpenZFSQuotaType string
 
 // Enum values for OpenZFSQuotaType
@@ -985,6 +1002,71 @@ func (RetentionPeriodType) Values() []RetentionPeriodType {
 		"YEARS",
 		"INFINITE",
 		"UNSPECIFIED",
+	}
+}
+
+type S3AccessPointAttachmentLifecycle string
+
+// Enum values for S3AccessPointAttachmentLifecycle
+const (
+	S3AccessPointAttachmentLifecycleAvailable S3AccessPointAttachmentLifecycle = "AVAILABLE"
+	S3AccessPointAttachmentLifecycleCreating  S3AccessPointAttachmentLifecycle = "CREATING"
+	S3AccessPointAttachmentLifecycleDeleting  S3AccessPointAttachmentLifecycle = "DELETING"
+	S3AccessPointAttachmentLifecycleUpdating  S3AccessPointAttachmentLifecycle = "UPDATING"
+	S3AccessPointAttachmentLifecycleFailed    S3AccessPointAttachmentLifecycle = "FAILED"
+)
+
+// Values returns all known values for S3AccessPointAttachmentLifecycle. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3AccessPointAttachmentLifecycle) Values() []S3AccessPointAttachmentLifecycle {
+	return []S3AccessPointAttachmentLifecycle{
+		"AVAILABLE",
+		"CREATING",
+		"DELETING",
+		"UPDATING",
+		"FAILED",
+	}
+}
+
+type S3AccessPointAttachmentsFilterName string
+
+// Enum values for S3AccessPointAttachmentsFilterName
+const (
+	S3AccessPointAttachmentsFilterNameFileSystemId S3AccessPointAttachmentsFilterName = "file-system-id"
+	S3AccessPointAttachmentsFilterNameVolumeId     S3AccessPointAttachmentsFilterName = "volume-id"
+	S3AccessPointAttachmentsFilterNameType         S3AccessPointAttachmentsFilterName = "type"
+)
+
+// Values returns all known values for S3AccessPointAttachmentsFilterName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3AccessPointAttachmentsFilterName) Values() []S3AccessPointAttachmentsFilterName {
+	return []S3AccessPointAttachmentsFilterName{
+		"file-system-id",
+		"volume-id",
+		"type",
+	}
+}
+
+type S3AccessPointAttachmentType string
+
+// Enum values for S3AccessPointAttachmentType
+const (
+	S3AccessPointAttachmentTypeOpenzfs S3AccessPointAttachmentType = "OPENZFS"
+)
+
+// Values returns all known values for S3AccessPointAttachmentType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3AccessPointAttachmentType) Values() []S3AccessPointAttachmentType {
+	return []S3AccessPointAttachmentType{
+		"OPENZFS",
 	}
 }
 

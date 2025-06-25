@@ -175,7 +175,7 @@ type Block struct {
 	//   - WORD - A word detected on a document page. A word is one or more ISO basic
 	//   Latin script characters that aren't separated by spaces.
 	//
-	//   - LINE - A string of tab-delimited, contiguous words that are detected on a
+	//   - LINE - A string of space-delimited, contiguous words that are detected on a
 	//   document page.
 	//
 	// In text analysis operations, the following types are returned:
@@ -636,6 +636,9 @@ type Geometry struct {
 	// Within the bounding box, a fine-grained polygon around the recognized item.
 	Polygon []Point
 
+	// Provides a numerical value corresponding to the rotation of the text.
+	RotationAngle *float32
+
 	noSmithyDocumentSerde
 }
 
@@ -1039,9 +1042,8 @@ type S3Object struct {
 	// name.
 	Bucket *string
 
-	// The file name of the input document. Synchronous operations can use image files
-	// that are in JPEG or PNG format. Asynchronous operations also support PDF and
-	// TIFF format files.
+	// The file name of the input document. Image files may be in PDF, TIFF, JPEG, or
+	// PNG format.
 	Name *string
 
 	// If the bucket has versioning enabled, you can specify the object version.

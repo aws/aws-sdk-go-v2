@@ -76,9 +76,10 @@ type PutAccessPointPolicyInput struct {
 	Name *string
 
 	// The policy that you want to apply to the specified access point. For more
-	// information about access point policies, see [Managing access to shared datasets in general purpose buckets with access points]or Managing access to shared datasets in directory bucekts with access points in the Amazon S3 User Guide.
+	// information about access point policies, see [Managing data access with Amazon S3 access points]or [Managing access to shared datasets in directory buckets with access points] in the Amazon S3 User Guide.
 	//
-	// [Managing access to shared datasets in general purpose buckets with access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
+	// [Managing data access with Amazon S3 access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
+	// [Managing access to shared datasets in directory buckets with access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html
 	//
 	// This member is required.
 	Policy *string

@@ -58,7 +58,7 @@ type UpdateNFSFileShareInput struct {
 	CacheAttributes *types.CacheAttributes
 
 	// The list of clients that are allowed to access the S3 File Gateway. The list
-	// must contain either valid IP addresses or valid CIDR blocks.
+	// must contain either valid IPv4/IPv6 addresses or valid CIDR blocks.
 	ClientList []string
 
 	// The default storage class for objects put into an Amazon S3 bucket by the S3

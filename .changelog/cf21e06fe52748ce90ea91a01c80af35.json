@@ -1,0 +1,8 @@
+{
+    "id": "cf21e06f-e527-48ce-90ea-91a01c80af35",
+    "type": "feature",
+    "description": "Remove Tags field from Get API responses",
+    "modules": [
+        "service/workspacesthinclient"
+    ]
+}

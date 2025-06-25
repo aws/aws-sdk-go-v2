@@ -4932,6 +4932,32 @@ func awsRestxml_deserializeOpDocumentGetAccessPointOutput(v **GetAccessPointOutp
 				sv.CreationDate = ptr.Time(t)
 			}
 
+		case strings.EqualFold("DataSourceId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DataSourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DataSourceType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DataSourceType = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("Endpoints", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentEndpoints(&sv.Endpoints, nodeDecoder); err != nil {
@@ -13630,6 +13656,32 @@ func awsRestxml_deserializeDocumentAccessPoint(v **types.AccessPoint, decoder sm
 			{
 				xtv := string(val)
 				sv.BucketAccountId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DataSourceId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DataSourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DataSourceType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DataSourceType = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):

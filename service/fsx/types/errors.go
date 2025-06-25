@@ -7,6 +7,35 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// An access point with that name already exists in the Amazon Web Services Region
+// in your Amazon Web Services account.
+type AccessPointAlreadyOwnedByYou struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ErrorCode_ *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccessPointAlreadyOwnedByYou) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessPointAlreadyOwnedByYou) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessPointAlreadyOwnedByYou) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "AccessPointAlreadyOwnedByYou"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *AccessPointAlreadyOwnedByYou) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An Active Directory error.
 type ActiveDirectoryError struct {
 	Message *string
@@ -412,6 +441,34 @@ func (e *InternalServerError) ErrorCode() string {
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The access point specified doesn't exist.
+type InvalidAccessPoint struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ErrorCode_ *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidAccessPoint) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidAccessPoint) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidAccessPoint) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidAccessPoint"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidAccessPoint) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // You have filtered the response to a data repository type that is not supported.
 type InvalidDataRepositoryType struct {
 	Message *string
@@ -599,6 +656,35 @@ func (e *InvalidRegion) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRegion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The action or operation requested is invalid. Verify that the action is typed
+// correctly.
+type InvalidRequest struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ErrorCode_ *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidRequest) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidRequest) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidRequest) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidRequest"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Key Management Service (KMS) key of the source backup is not valid.
 type InvalidSourceKmsKey struct {
@@ -789,6 +875,32 @@ func (e *ResourceNotFound) ErrorCode() string {
 }
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The access point specified was not found.
+type S3AccessPointAttachmentNotFound struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *S3AccessPointAttachmentNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *S3AccessPointAttachmentNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *S3AccessPointAttachmentNotFound) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "S3AccessPointAttachmentNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *S3AccessPointAttachmentNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An error indicating that a particular service limit was exceeded. You can
 // increase some service limits by contacting Amazon Web ServicesSupport.
 type ServiceLimitExceeded struct {
@@ -898,6 +1010,39 @@ func (e *StorageVirtualMachineNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *StorageVirtualMachineNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You have reached the maximum number of S3 access points attachments allowed for
+// your account in this Amazon Web Services Region, or for the file system. For
+// more information, or to request an increase, see [Service quotas on FSx resources]in the FSx for OpenZFS User
+// Guide.
+//
+// [Service quotas on FSx resources]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/limits.html
+type TooManyAccessPoints struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ErrorCode_ *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyAccessPoints) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyAccessPoints) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyAccessPoints) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TooManyAccessPoints"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TooManyAccessPoints) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested operation is not supported for this resource or API.
 type UnsupportedOperation struct {
