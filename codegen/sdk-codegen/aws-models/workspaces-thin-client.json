@@ -660,16 +660,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the device.</p>"
                     }
-                },
-                "tags": {
-                    "target": "com.amazonaws.workspacesthinclient#TagsMap",
-                    "traits": {
-                        "smithy.api#deprecated": {
-                            "message": "This field will be removed in future releases. Use ListTagsForResource API instead.",
-                            "since": "2025-03-25"
-                        },
-                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
-                    }
                 }
             },
             "traits": {
@@ -993,16 +983,6 @@
                     "target": "com.amazonaws.workspacesthinclient#KmsKeyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the environment.</p>"
-                    }
-                },
-                "tags": {
-                    "target": "com.amazonaws.workspacesthinclient#TagsMap",
-                    "traits": {
-                        "smithy.api#deprecated": {
-                            "message": "This field will be removed in future releases. Use ListTagsForResource API instead.",
-                            "since": "2025-03-25"
-                        },
-                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
                     }
                 },
                 "deviceCreationTags": {
@@ -1961,16 +1941,6 @@
                     "target": "com.amazonaws.workspacesthinclient#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the software set.</p>"
-                    }
-                },
-                "tags": {
-                    "target": "com.amazonaws.workspacesthinclient#TagsMap",
-                    "traits": {
-                        "smithy.api#deprecated": {
-                            "message": "This field will be removed in future releases. Use ListTagsForResource API instead.",
-                            "since": "2025-03-25"
-                        },
-                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
                     }
                 }
             },

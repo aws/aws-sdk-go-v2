@@ -8560,7 +8560,7 @@
                     }
                 },
                 "Bucket": {
-                    "target": "com.amazonaws.s3control#BucketName",
+                    "target": "com.amazonaws.s3control#AccessPointBucketName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the bucket associated with this access point.</p>",
                         "smithy.api#required": {}
@@ -8583,10 +8583,31 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the S3 bucket associated with this access point.</p>"
                     }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.s3control#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the data source of the access point.</p>"
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.s3control#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the data source that the access point is attached to.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An access point used to access a bucket.</p>"
+            }
+        },
+        "com.amazonaws.s3control#AccessPointBucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.s3control#AccessPointList": {
@@ -9596,7 +9617,7 @@
                 "target": "com.amazonaws.s3control#CreateAccessPointResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates an access point and associates it to a specified bucket. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">Managing\n               access to shared datasets in general purpose buckets with access points</a> or <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing\n                  access to shared datasets in directory buckets with access points</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p></p>\n         <note>\n            <p>S3 on Outposts only supports VPC-style access points. </p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\"> Accessing Amazon S3 on Outposts using\n               virtual private cloud (VPC) only access points</a> in the\n               <i>Amazon S3 User Guide</i>.</p>\n         </note>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples\">Examples</a> section.</p>\n         <p></p>\n         <p>The following actions are related to <code>CreateAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html\">GetAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html\">DeleteAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForDirectoryBuckets.html\">ListAccessPointsForDirectoryBuckets</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates an access point and associates it to a specified bucket. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">Managing\n            access to shared datasets with access points</a> or <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing access to\n            shared datasets in directory buckets with access points</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>To create an access point and attach it to a volume on an Amazon FSx file system, see <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateAndAttachS3AccessPoint.html\">CreateAndAttachS3AccessPoint</a> in the <i>Amazon FSx API\n         Reference</i>.</p>\n         <p></p>\n         <note>\n            <p>S3 on Outposts only supports VPC-style access points. </p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\"> Accessing Amazon S3 on Outposts using\n               virtual private cloud (VPC) only access points</a> in the\n               <i>Amazon S3 User Guide</i>.</p>\n         </note>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples\">Examples</a> section.</p>\n         <p></p>\n         <p>The following actions are related to <code>CreateAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html\">GetAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html\">DeleteAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForDirectoryBuckets.html\">ListAccessPointsForDirectoryBuckets</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -9710,7 +9731,7 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#AccessPointName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name you want to assign to this access point.</p>\n         <p>For directory buckets, the access point name must consist of a base name that you provide and suffix that includes the <code>ZoneID</code> (Amazon Web Services Availability Zone or Local Zone) of your bucket location, followed by <code>--xa-s3</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing access to shared datasets in directory buckets with access points</a> in the Amazon S3 User Guide.</p>",
+                        "smithy.api#documentation": "<p>The name you want to assign to this access point.</p>\n         <p>For directory buckets, the access point name must consist of a base name that you provide and\n         suffix that includes the <code>ZoneID</code> (Amazon Web Services Availability Zone or Local Zone) of your bucket location,\n         followed by <code>--xa-s3</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing access to shared datasets in directory buckets with\n            access points</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -9749,7 +9770,7 @@
                 "Scope": {
                     "target": "com.amazonaws.s3control#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>For directory buckets, you can filter access control to specific prefixes, API operations, or a combination of both. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing access to shared datasets in directory buckets with access points</a> in the Amazon S3 User Guide.</p>\n         <note>\n            <p>Scope is not supported for access points for general purpose buckets.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>For directory buckets, you can filter access control to specific prefixes, API\n         operations, or a combination of both. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing access to shared datasets in directory buckets with\n            access points</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <p>Scope is only supported for access points attached to directory buckets.</p>\n         </note>"
                     }
                 }
             },
@@ -10262,6 +10283,18 @@
                 "smithy.api#documentation": "<p>The Amazon Web Services Security Token Service temporary credential that S3 Access Grants vends to grantees and client applications. </p>",
                 "smithy.api#sensitive": {}
             }
+        },
+        "com.amazonaws.s3control#DataSourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 191
+                }
+            }
+        },
+        "com.amazonaws.s3control#DataSourceType": {
+            "type": "string"
         },
         "com.amazonaws.s3control#Date": {
             "type": "timestamp"
@@ -12826,7 +12859,7 @@
                     }
                 },
                 "Bucket": {
-                    "target": "com.amazonaws.s3control#BucketName",
+                    "target": "com.amazonaws.s3control#AccessPointBucketName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the bucket associated with the specified access point.</p>"
                     }
@@ -12874,6 +12907,18 @@
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the S3 bucket associated with this access point.</p>"
+                    }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.s3control#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the data source of the access point.</p>"
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.s3control#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the data source that the access point is attached to.</p>"
                     }
                 }
             },
@@ -15775,7 +15820,7 @@
                 "target": "com.amazonaws.s3control#ListAccessPointsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This operation is not supported by directory buckets.</p>\n         </note>\n         <p>Returns a list of the access points\n         that are\n         owned by the current account\n         that's\n         associated with the specified bucket. You can retrieve up to 1000 access points\n         per call. If the specified bucket has more than 1,000 access points (or the number specified in\n            <code>maxResults</code>, whichever is less), the response will include a continuation\n         token that you can use to list the additional access points.</p>\n         <p></p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>ListAccessPoints</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html\">DeleteAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html\">GetAccessPoint</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This operation is not supported by directory buckets.</p>\n         </note>\n         <p>Returns a list of the access points. You can retrieve up to 1,000 access points per call. If the call\n         returns more than 1,000 access points (or the number specified in <code>maxResults</code>,\n         whichever is less), the response will include a continuation token that you can use to list\n         the additional access points.</p>\n         <p>Returns only access points attached to S3 buckets by default. To return all access points specify\n            <code>DataSourceType</code> as <code>ALL</code>.</p>\n         <p></p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>ListAccessPoints</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html\">DeleteAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html\">GetAccessPoint</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -16013,6 +16058,20 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of access points that you want to include in the list. If the specified\n         bucket has more than this number of access points, then the response will include a continuation\n         token in the <code>NextToken</code> field that you can use to retrieve the next page of\n         access points.</p>",
                         "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.s3control#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the data source of the access point.</p>",
+                        "smithy.api#httpQuery": "dataSourceId"
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.s3control#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the data source that the access point is attached to. Returns only access points attached to S3 buckets by default. To return all access points specify\n         <code>DataSourceType</code> as <code>ALL</code>.</p>",
+                        "smithy.api#httpQuery": "dataSourceType"
                     }
                 }
             },
@@ -18139,7 +18198,7 @@
                 "Policy": {
                     "target": "com.amazonaws.s3control#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The policy that you want to apply to the specified access point. For more information about access point\n         policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">Managing access to shared datasets in general purpose buckets with\n            access points</a> or <a href=\"AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing access to shared datasets in directory bucekts with access points</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The policy that you want to apply to the specified access point. For more information about access point\n         policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">Managing data access with Amazon S3\n            access points</a> or <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing access to shared datasets in directory buckets with access points</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -20545,7 +20604,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You can use the access point scope to restrict access to specific prefixes, API operations, or a combination of both.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets-manage-scope.html\">Manage the scope of your access points for directory buckets.</a>\n         </p>"
+                "smithy.api#documentation": "<p>You can use the access point scope to restrict access to specific prefixes, API operations, or a combination of both.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets-manage-scope.html\">Manage the scope of your access points for directory buckets</a>.</p>"
             }
         },
         "com.amazonaws.s3control#ScopePermission": {

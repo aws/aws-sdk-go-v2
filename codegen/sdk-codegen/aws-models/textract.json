@@ -637,6 +637,9 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.textract#Angle": {
+            "type": "float"
+        },
         "com.amazonaws.textract#AutoUpdate": {
             "type": "enum",
             "members": {
@@ -675,7 +678,7 @@
                 "BlockType": {
                     "target": "com.amazonaws.textract#BlockType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of text item that's recognized. In operations for text detection, the following\n         types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of the LINE <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word detected on a document page. A word is one or\n               more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n         </ul>\n         <p>In text analysis operations, the following types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of child <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>KEY_VALUE_SET</i> - Stores the KEY and VALUE <code>Block</code>\n               objects for linked text that's detected on a document page. Use the\n                  <code>EntityType</code> field to determine if a KEY_VALUE_SET object is a KEY\n                  <code>Block</code> object or a VALUE <code>Block</code> object. </p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word that's detected on a document page. A word is\n               one or more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE</i> - A table that's detected on a document page. A table\n               is grid-based information with two or more rows or columns, with a cell span of one\n               row and one column each. </p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE_TITLE</i> - The title of a table. A title is typically a\n               line of text above or below a table, or embedded as the first row of a table. </p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE_FOOTER</i> - The footer associated with a table. A footer\n               is typically a line or lines of text below a table or embedded as the last row of a\n               table. </p>\n            </li>\n            <li>\n               <p>\n                  <i>CELL</i> - A cell within a detected table. The cell is the parent\n               of the block that contains the text in the cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>MERGED_CELL</i>  - A cell in a table whose content spans more than\n               one row or column. The <code>Relationships</code> array for this cell contain data\n               from individual cells.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SELECTION_ELEMENT</i> - A selection element such as an option\n               button (radio button) or a check box that's detected on a document page. Use the\n               value of <code>SelectionStatus</code> to determine the status of the selection\n               element.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SIGNATURE</i> - The location and confidence score of a signature detected on a\n               document page. Can be returned as part of a Key-Value pair or a detected cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY</i> - A question asked during the call of AnalyzeDocument. Contains an\n               alias and an ID that attaches it to its answer.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY_RESULT</i> - A response to a question asked during the call\n               of analyze document. Comes with an alias and ID for ease of locating in a \n               response. Also contains location and confidence score.</p>\n            </li>\n         </ul>\n         <p>The following BlockTypes are only returned for Amazon Textract Layout.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LAYOUT_TITLE</code> - The main title of the document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_HEADER</code> - Text located in the top margin of the document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_FOOTER</code> - Text located in the bottom margin of the document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_SECTION_HEADER</code> - The titles of sections within a document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_PAGE_NUMBER</code> - The page number of the documents.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_LIST</code> - Any information grouped together in list form. </p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_FIGURE</code> - Indicates the location of an image in a document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_TABLE</code> - Indicates the location of a table in the document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_KEY_VALUE</code> - Indicates the location of form key-values in a document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_TEXT</code> - Text that is present typically as a part of paragraphs in documents.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of text item that's recognized. In operations for text detection, the following\n         types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of the LINE <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word detected on a document page. A word is one or\n               more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of space-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n         </ul>\n         <p>In text analysis operations, the following types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of child <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>KEY_VALUE_SET</i> - Stores the KEY and VALUE <code>Block</code>\n               objects for linked text that's detected on a document page. Use the\n                  <code>EntityType</code> field to determine if a KEY_VALUE_SET object is a KEY\n                  <code>Block</code> object or a VALUE <code>Block</code> object. </p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word that's detected on a document page. A word is\n               one or more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE</i> - A table that's detected on a document page. A table\n               is grid-based information with two or more rows or columns, with a cell span of one\n               row and one column each. </p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE_TITLE</i> - The title of a table. A title is typically a\n               line of text above or below a table, or embedded as the first row of a table. </p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE_FOOTER</i> - The footer associated with a table. A footer\n               is typically a line or lines of text below a table or embedded as the last row of a\n               table. </p>\n            </li>\n            <li>\n               <p>\n                  <i>CELL</i> - A cell within a detected table. The cell is the parent\n               of the block that contains the text in the cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>MERGED_CELL</i>  - A cell in a table whose content spans more than\n               one row or column. The <code>Relationships</code> array for this cell contain data\n               from individual cells.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SELECTION_ELEMENT</i> - A selection element such as an option\n               button (radio button) or a check box that's detected on a document page. Use the\n               value of <code>SelectionStatus</code> to determine the status of the selection\n               element.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SIGNATURE</i> - The location and confidence score of a signature detected on a\n               document page. Can be returned as part of a Key-Value pair or a detected cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY</i> - A question asked during the call of AnalyzeDocument. Contains an\n               alias and an ID that attaches it to its answer.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY_RESULT</i> - A response to a question asked during the call\n               of analyze document. Comes with an alias and ID for ease of locating in a \n               response. Also contains location and confidence score.</p>\n            </li>\n         </ul>\n         <p>The following BlockTypes are only returned for Amazon Textract Layout.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LAYOUT_TITLE</code> - The main title of the document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_HEADER</code> - Text located in the top margin of the document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_FOOTER</code> - Text located in the bottom margin of the document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_SECTION_HEADER</code> - The titles of sections within a document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_PAGE_NUMBER</code> - The page number of the documents.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_LIST</code> - Any information grouped together in list form. </p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_FIGURE</code> - Indicates the location of an image in a document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_TABLE</code> - Indicates the location of a table in the document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_KEY_VALUE</code> - Indicates the location of form key-values in a document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_TEXT</code> - Text that is present typically as a part of paragraphs in documents.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Confidence": {
@@ -1955,6 +1958,12 @@
                     "target": "com.amazonaws.textract#Polygon",
                     "traits": {
                         "smithy.api#documentation": "<p>Within the bounding box, a fine-grained polygon around the recognized item.</p>"
+                    }
+                },
+                "RotationAngle": {
+                    "target": "com.amazonaws.textract#Angle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a numerical value corresponding to the rotation of the text.</p>"
                     }
                 }
             },
@@ -3957,7 +3966,7 @@
                 "Name": {
                     "target": "com.amazonaws.textract#S3ObjectName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file name of the input document. Synchronous operations can use image files that are\n         in JPEG or PNG format. Asynchronous operations also support PDF and TIFF format files.</p>"
+                        "smithy.api#documentation": "<p>The file name of the input document. Image files may be in PDF, TIFF, JPEG, or PNG format.</p>"
                     }
                 },
                 "Version": {
@@ -4254,7 +4263,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the asynchronous detection of text in a document. Amazon Textract can detect lines of\n         text and the words that make up a line of text.</p>\n         <p>\n            <code>StartDocumentTextDetection</code> can analyze text in documents that are in JPEG, PNG, TIFF, and PDF format. The\n        documents are stored in an Amazon S3 bucket. Use <a>DocumentLocation</a> to specify the bucket name and file name\n        of the document.\n     </p>\n         <p>\n            <code>StartTextDetection</code> returns a job identifier\n            (<code>JobId</code>) that you use to get the results of the operation. When text\n         detection is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS)\n         topic that you specify in <code>NotificationChannel</code>. To get the results of the text\n         detection operation, first check that the status value published to the Amazon SNS topic is\n            <code>SUCCEEDED</code>. If so, call <a>GetDocumentTextDetection</a>, and\n         pass the job identifier (<code>JobId</code>) from the initial call to\n            <code>StartDocumentTextDetection</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html\">Document Text Detection</a>.</p>"
+                "smithy.api#documentation": "<p>Starts the asynchronous detection of text in a document. Amazon Textract can detect lines of\n         text and the words that make up a line of text.</p>\n         <p>\n            <code>StartDocumentTextDetection</code> can analyze text in documents that are in JPEG, PNG, TIFF, and PDF format. The\n        documents are stored in an Amazon S3 bucket. Use <a>DocumentLocation</a> to specify the bucket name and file name\n        of the document.\n     </p>\n         <p>\n            <code>StartDocumentTextDetection</code> returns a job identifier\n            (<code>JobId</code>) that you use to get the results of the operation. When text\n         detection is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS)\n         topic that you specify in <code>NotificationChannel</code>. To get the results of the text\n         detection operation, first check that the status value published to the Amazon SNS topic is\n            <code>SUCCEEDED</code>. If so, call <a>GetDocumentTextDetection</a>, and\n         pass the job identifier (<code>JobId</code>) from the initial call to\n            <code>StartDocumentTextDetection</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html\">Document Text Detection</a>.</p>"
             }
         },
         "com.amazonaws.textract#StartDocumentTextDetectionRequest": {
@@ -4816,7 +4825,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -4859,7 +4867,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -4872,7 +4881,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -4886,7 +4894,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -4909,7 +4916,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -4944,7 +4950,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4955,14 +4960,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -4976,14 +4983,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -4992,11 +4997,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -5007,14 +5012,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -5028,7 +5035,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -5048,7 +5054,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -5059,14 +5064,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -5077,9 +5084,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],

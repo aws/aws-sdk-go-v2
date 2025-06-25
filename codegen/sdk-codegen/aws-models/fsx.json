@@ -57,6 +57,9 @@
                     "target": "com.amazonaws.fsx#CopySnapshotAndUpdateVolume"
                 },
                 {
+                    "target": "com.amazonaws.fsx#CreateAndAttachS3AccessPoint"
+                },
+                {
                     "target": "com.amazonaws.fsx#CreateBackup"
                 },
                 {
@@ -126,6 +129,9 @@
                     "target": "com.amazonaws.fsx#DescribeFileSystems"
                 },
                 {
+                    "target": "com.amazonaws.fsx#DescribeS3AccessPointAttachments"
+                },
+                {
                     "target": "com.amazonaws.fsx#DescribeSharedVpcConfiguration"
                 },
                 {
@@ -136,6 +142,9 @@
                 },
                 {
                     "target": "com.amazonaws.fsx#DescribeVolumes"
+                },
+                {
+                    "target": "com.amazonaws.fsx#DetachAndDeleteS3AccessPoint"
                 },
                 {
                     "target": "com.amazonaws.fsx#DisassociateFileSystemAliases"
@@ -1172,6 +1181,35 @@
                         }
                     ],
                     "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.fsx#AccessPointAlreadyOwnedByYou": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.fsx#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error code indicating that an access point with that name already exists in the Amazon Web Services Region in your Amazon Web Services account.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.fsx#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An access point with that name already exists in the Amazon Web Services Region in your Amazon Web Services account.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409,
+                "smithy.api#xmlName": "Error"
+            }
+        },
+        "com.amazonaws.fsx#AccessPointPolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200000
                 }
             }
         },
@@ -2509,6 +2547,147 @@
                 "smithy.api#documentation": "<p>Used to specify the configuration options for an FSx for ONTAP volume's storage aggregate or aggregates.</p>"
             }
         },
+        "com.amazonaws.fsx#CreateAndAttachS3AccessPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fsx#CreateAndAttachS3AccessPointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fsx#CreateAndAttachS3AccessPointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fsx#AccessPointAlreadyOwnedByYou"
+                },
+                {
+                    "target": "com.amazonaws.fsx#BadRequest"
+                },
+                {
+                    "target": "com.amazonaws.fsx#IncompatibleParameterError"
+                },
+                {
+                    "target": "com.amazonaws.fsx#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.fsx#InvalidAccessPoint"
+                },
+                {
+                    "target": "com.amazonaws.fsx#InvalidRequest"
+                },
+                {
+                    "target": "com.amazonaws.fsx#TooManyAccessPoints"
+                },
+                {
+                    "target": "com.amazonaws.fsx#UnsupportedOperation"
+                },
+                {
+                    "target": "com.amazonaws.fsx#VolumeNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an S3 access point and attaches it to an Amazon FSx volume. For FSx for OpenZFS file systems, the \n         volume must be hosted on a high-availability file system, either Single-AZ or Multi-AZ. For more information, \n         see <a href=\"fsx/latest/OpenZFSGuide/s3accesspoints-for-FSx.html\">Accessing your data using  access points</a> \n         in the Amazon FSx for OpenZFS User Guide.\n      </p>\n         <p>The requester requires the following permissions to perform these actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>fsx:CreateAndAttachS3AccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:CreateAccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:GetAccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:PutAccessPointPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:DeleteAccessPoint</code>\n               </p>\n            </li>\n         </ul>\n         <p>The following actions are related to <code>CreateAndAttachS3AccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DescribeS3AccessPointAttachments</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DetachAndDeleteS3AccessPoint</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.fsx#CreateAndAttachS3AccessPointOpenZFSConfiguration": {
+            "type": "structure",
+            "members": {
+                "VolumeId": {
+                    "target": "com.amazonaws.fsx#VolumeId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the FSx for OpenZFS volume to which you want the S3 access point attached.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileSystemIdentity": {
+                    "target": "com.amazonaws.fsx#OpenZFSFileSystemIdentity",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the file system user identity to use for authorizing file read and write requests that are made using this S3 access point.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the FSx for OpenZFS volume that the S3 access point will be attached to, and the file system user identity.</p>"
+            }
+        },
+        "com.amazonaws.fsx#CreateAndAttachS3AccessPointRequest": {
+            "type": "structure",
+            "members": {
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.fsx#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name you want to assign to this S3 access point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of S3 access point you want to create. Only <code>OpenZFS</code> is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OpenZFSConfiguration": {
+                    "target": "com.amazonaws.fsx#CreateAndAttachS3AccessPointOpenZFSConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the configuration to use when creating and attaching an S3 access point to an FSx for OpenZFS volume.</p>"
+                    }
+                },
+                "S3AccessPoint": {
+                    "target": "com.amazonaws.fsx#CreateAndAttachS3AccessPointS3Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the virtual private cloud (VPC) configuration if you're creating an access point that is restricted to a VPC. \n         For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-vpc.html\">Creating access points restricted to a virtual private cloud</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fsx#CreateAndAttachS3AccessPointResponse": {
+            "type": "structure",
+            "members": {
+                "S3AccessPointAttachment": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of the S3 access point created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.fsx#CreateAndAttachS3AccessPointS3Configuration": {
+            "type": "structure",
+            "members": {
+                "VpcConfiguration": {
+                    "target": "com.amazonaws.fsx#S3AccessPointVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If included, Amazon S3 restricts access to this S3 access point to requests made from the specified virtual private cloud (VPC).</p>"
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.fsx#AccessPointPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an access policy to associate with the S3 access point configuration. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html\">Configuring IAM policies for using access points</a> \n      in the Amazon Simple Storage Service User Guide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Used to create an S3 access point that accepts requests only from a virtual private cloud (VPC) to restrict data access to a private network.</p>"
+            }
+        },
         "com.amazonaws.fsx#CreateBackup": {
             "type": "operation",
             "input": {
@@ -3476,7 +3655,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.fsx#StorageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the storage class for the file system that you're creating. Valid values are\n                <code>SSD</code>, <code>HDD</code>, and <code>INTELLIGENT_TIERING</code>.</p>\n         <ul>\n            <li>\n               <p>Set to <code>SSD</code> to use solid state drive storage. SSD is supported on all Windows,\n                    Lustre, ONTAP, and OpenZFS deployment types.</p>\n            </li>\n            <li>\n               <p>Set to <code>HDD</code> to use hard disk drive storage, which is supported on \n                    <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types,\n                and on <code>PERSISTENT_1</code> Lustre file system deployment types.</p>\n            </li>\n            <li>\n               <p>Set to <code>INTELLIGENT_TIERING</code> to use fully elastic, intelligently-tiered storage.\n                    Intelligent-Tiering is only available for OpenZFS file systems with the Multi-AZ deployment type\n                    and for Lustre file systems with the Persistent_2 deployment type.</p>\n            </li>\n         </ul>\n         <p>Default value is <code>SSD</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options\"> Storage\n                type options</a> in the <i>FSx for Windows File Server User\n                Guide</i>, <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-storage-classes\">FSx for Lustre storage classes</a>\n            in the <i>FSx for Lustre User Guide</i>, and <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance-intelligent-tiering\">Working with Intelligent-Tiering</a>\n            in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Sets the storage class for the file system that you're creating. Valid values are\n                <code>SSD</code>, <code>HDD</code>, and <code>INTELLIGENT_TIERING</code>.</p>\n         <ul>\n            <li>\n               <p>Set to <code>SSD</code> to use solid state drive storage. SSD is supported on all Windows,\n                    Lustre, ONTAP, and OpenZFS deployment types.</p>\n            </li>\n            <li>\n               <p>Set to <code>HDD</code> to use hard disk drive storage, which is supported on \n                    <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types,\n                and on <code>PERSISTENT_1</code> Lustre file system deployment types.</p>\n            </li>\n            <li>\n               <p>Set to <code>INTELLIGENT_TIERING</code> to use fully elastic, intelligently-tiered storage.\n                    Intelligent-Tiering is only available for OpenZFS file systems with the Multi-AZ deployment type\n                    and for Lustre file systems with the Persistent_2 deployment type.</p>\n            </li>\n         </ul>\n         <p>Default value is <code>SSD</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options\"> Storage\n                type options</a> in the <i>FSx for Windows File Server User\n                Guide</i>, <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html#lustre-storage-classes\">FSx for Lustre storage classes</a>\n            in the <i>FSx for Lustre User Guide</i>, and <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance-intelligent-tiering\">Working with Intelligent-Tiering</a>\n            in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>"
                     }
                 },
                 "SubnetIds": {
@@ -5158,7 +5337,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a file system. After deletion, the file system no longer exists, and its data\n            is gone. Any existing automatic backups and snapshots are also deleted.</p>\n         <p>To delete an Amazon FSx for NetApp ONTAP file system, first delete all the\n            volumes and storage virtual machines (SVMs) on the file system. Then provide a\n                <code>FileSystemId</code> value to the <code>DeleteFileSystem</code> operation.</p>\n         <p>By default, when you delete an Amazon FSx for Windows File Server file system,\n            a final backup is created upon deletion. This final backup isn't subject to the file\n            system's retention policy, and must be manually deleted.</p>\n         <p>To delete an Amazon FSx for Lustre file system, first \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/unmounting-fs.html\">unmount</a>\n            it from every connected Amazon EC2 instance, then provide a <code>FileSystemId</code>\n            value to the <code>DeleteFileSystem</code> operation. By default, Amazon FSx will not\n            take a final backup when the <code>DeleteFileSystem</code> operation is invoked. On file systems\n            not linked to an Amazon S3 bucket, set <code>SkipFinalBackup</code> to <code>false</code>\n            to take a final backup of the file system you are deleting. Backups cannot be enabled on S3-linked\n            file systems. To ensure all of your data is written back to S3 before deleting your file system,\n            you can either monitor for the\n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/monitoring-cloudwatch.html#auto-import-export-metrics\">AgeOfOldestQueuedMessage</a>\n            metric to be zero (if using automatic export) or you can run an\n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repo-task-dra.html\">export data repository task</a>.\n            If you have automatic export enabled and want to use an export data repository task, you have\n            to disable automatic export before executing the export data repository task.</p>\n         <p>The <code>DeleteFileSystem</code> operation returns while the file system has the\n                <code>DELETING</code> status. You can check the file system deletion status by\n            calling the <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html\">DescribeFileSystems</a> operation, which returns a list of file systems in your\n            account. If you pass the file system ID for a deleted file system, the\n                <code>DescribeFileSystems</code> operation returns a <code>FileSystemNotFound</code>\n            error.</p>\n         <note>\n            <p>If a data repository task is in a <code>PENDING</code> or <code>EXECUTING</code> state,\n                deleting an Amazon FSx for Lustre file system will fail with an HTTP status\n                code 400 (Bad Request).</p>\n         </note>\n         <important>\n            <p>The data in a deleted file system is also deleted and can't be recovered by\n                any means.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Deletes a file system. After deletion, the file system no longer exists, and its data\n            is gone. Any existing automatic backups and snapshots are also deleted.</p>\n         <p>To delete an Amazon FSx for NetApp ONTAP file system, first delete all the\n            volumes and storage virtual machines (SVMs) on the file system. Then provide a\n                <code>FileSystemId</code> value to the <code>DeleteFileSystem</code> operation.</p>\n         <p>Before deleting an Amazon FSx for OpenZFS file system, make sure that there aren't \n        any Amazon S3 access points attached to any volume. For more information on how to list S3 \n        access points that are attached to volumes, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-list\">Listing S3 access point attachments</a>. \n        For more information on how to delete S3 access points, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/delete-points-list\">Deleting an S3 access point attachment</a>.</p>\n         <p>By default, when you delete an Amazon FSx for Windows File Server file system,\n            a final backup is created upon deletion. This final backup isn't subject to the file\n            system's retention policy, and must be manually deleted.</p>\n         <p>To delete an Amazon FSx for Lustre file system, first \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/unmounting-fs.html\">unmount</a>\n            it from every connected Amazon EC2 instance, then provide a <code>FileSystemId</code>\n            value to the <code>DeleteFileSystem</code> operation. By default, Amazon FSx will not\n            take a final backup when the <code>DeleteFileSystem</code> operation is invoked. On file systems\n            not linked to an Amazon S3 bucket, set <code>SkipFinalBackup</code> to <code>false</code>\n            to take a final backup of the file system you are deleting. Backups cannot be enabled on S3-linked\n            file systems. To ensure all of your data is written back to S3 before deleting your file system,\n            you can either monitor for the\n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/monitoring-cloudwatch.html#auto-import-export-metrics\">AgeOfOldestQueuedMessage</a>\n            metric to be zero (if using automatic export) or you can run an\n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repo-task-dra.html\">export data repository task</a>.\n            If you have automatic export enabled and want to use an export data repository task, you have\n            to disable automatic export before executing the export data repository task.</p>\n         <p>The <code>DeleteFileSystem</code> operation returns while the file system has the\n                <code>DELETING</code> status. You can check the file system deletion status by\n            calling the <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html\">DescribeFileSystems</a> operation, which returns a list of file systems in your\n            account. If you pass the file system ID for a deleted file system, the\n                <code>DescribeFileSystems</code> operation returns a <code>FileSystemNotFound</code>\n            error.</p>\n         <note>\n            <p>If a data repository task is in a <code>PENDING</code> or <code>EXECUTING</code> state,\n                deleting an Amazon FSx for Lustre file system will fail with an HTTP status\n                code 400 (Bad Request).</p>\n         </note>\n         <important>\n            <p>The data in a deleted file system is also deleted and can't be recovered by\n                any means.</p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete a file system",
@@ -6150,6 +6329,81 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.fsx#DescribeS3AccessPointAttachments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fsx#DescribeS3AccessPointAttachmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fsx#DescribeS3AccessPointAttachmentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fsx#BadRequest"
+                },
+                {
+                    "target": "com.amazonaws.fsx#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentNotFound"
+                },
+                {
+                    "target": "com.amazonaws.fsx#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more S3 access points attached to Amazon FSx volumes.</p>\n         <p>The requester requires the following permission to perform this action:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>fsx:DescribeS3AccessPointAttachments</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "S3AccessPointAttachments",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.fsx#DescribeS3AccessPointAttachmentsRequest": {
+            "type": "structure",
+            "members": {
+                "Names": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the S3 access point attachments whose descriptions you want to retrieve.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentsFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enter a filter Name and Values pair to view a select set of S3 access point attachments.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.fsx#MaxResults"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.fsx#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fsx#DescribeS3AccessPointAttachmentsResponse": {
+            "type": "structure",
+            "members": {
+                "S3AccessPointAttachments": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array of S3 access point attachments returned after a successful <code>DescribeS3AccessPointAttachments</code> operation.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.fsx#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.fsx#DescribeSharedVpcConfiguration": {
             "type": "operation",
             "input": {
@@ -6215,6 +6469,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Snapshots",
                     "pageSize": "MaxResults"
                 }
             }
@@ -6412,6 +6667,77 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.fsx#DetachAndDeleteS3AccessPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fsx#DetachAndDeleteS3AccessPointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fsx#DetachAndDeleteS3AccessPointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fsx#BadRequest"
+                },
+                {
+                    "target": "com.amazonaws.fsx#IncompatibleParameterError"
+                },
+                {
+                    "target": "com.amazonaws.fsx#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentNotFound"
+                },
+                {
+                    "target": "com.amazonaws.fsx#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Detaches an S3 access point from an Amazon FSx volume and deletes the S3 access point.</p>\n         <p>The requester requires the following permission to perform this action:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>fsx:DetachAndDeleteS3AccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:DeleteAccessPoint</code>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.fsx#DetachAndDeleteS3AccessPointRequest": {
+            "type": "structure",
+            "members": {
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.fsx#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the S3 access point attachment that you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fsx#DetachAndDeleteS3AccessPointResponse": {
+            "type": "structure",
+            "members": {
+                "Lifecycle": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentLifecycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle status of the S3 access point attachment.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 access point attachment being deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.fsx#DirectoryId": {
             "type": "string",
             "traits": {
@@ -6600,6 +6926,15 @@
         },
         "com.amazonaws.fsx#EndTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.fsx#ErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
         },
         "com.amazonaws.fsx#ErrorMessage": {
             "type": "string",
@@ -7251,6 +7586,15 @@
                 "smithy.api#documentation": "<p>A structure providing details of any failures that occurred.</p>"
             }
         },
+        "com.amazonaws.fsx#FileSystemGID": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 4294967295
+                }
+            }
+        },
         "com.amazonaws.fsx#FileSystemId": {
             "type": "string",
             "traits": {
@@ -7392,6 +7736,18 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.fsx#FileSystemSecondaryGIDs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fsx#FileSystemGID"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 15
+                }
+            }
+        },
         "com.amazonaws.fsx#FileSystemType": {
             "type": "enum",
             "members": {
@@ -7432,6 +7788,15 @@
                     "max": 20
                 },
                 "smithy.api#pattern": "^[0-9](.[0-9]*)*$"
+            }
+        },
+        "com.amazonaws.fsx#FileSystemUID": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 4294967295
+                }
             }
         },
         "com.amazonaws.fsx#FileSystems": {
@@ -7690,6 +8055,26 @@
                 "smithy.api#error": "server"
             }
         },
+        "com.amazonaws.fsx#InvalidAccessPoint": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.fsx#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error code indicating that the access point specified doesn't exist.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.fsx#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The access point specified doesn't exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400,
+                "smithy.api#xmlName": "Error"
+            }
+        },
         "com.amazonaws.fsx#InvalidDataRepositoryType": {
             "type": "structure",
             "members": {
@@ -7793,6 +8178,26 @@
             "traits": {
                 "smithy.api#documentation": "<p>The Region provided for <code>SourceRegion</code> is not valid or is in a different\n            Amazon Web Services partition.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.fsx#InvalidRequest": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.fsx#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error code indicating that the action or operation requested is invalid.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.fsx#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action or operation requested is invalid. Verify that the action is typed correctly.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400,
+                "smithy.api#xmlName": "Error"
             }
         },
         "com.amazonaws.fsx#InvalidSourceKmsKey": {
@@ -8987,6 +9392,39 @@
                 "smithy.api#documentation": "<p>The configuration for the Amazon FSx for OpenZFS file system. </p>"
             }
         },
+        "com.amazonaws.fsx#OpenZFSFileSystemIdentity": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.fsx#OpenZFSFileSystemUserType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the FSx for OpenZFS user identity type, accepts only <code>POSIX</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PosixUser": {
+                    "target": "com.amazonaws.fsx#OpenZFSPosixFileSystemUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the UID and GIDs of the file system POSIX user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the file system user identity that will be used for authorizing all file access requests that are made using the S3 access point.</p>"
+            }
+        },
+        "com.amazonaws.fsx#OpenZFSFileSystemUserType": {
+            "type": "enum",
+            "members": {
+                "POSIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POSIX"
+                    }
+                }
+            }
+        },
         "com.amazonaws.fsx#OpenZFSNfsExport": {
             "type": "structure",
             "members": {
@@ -9052,6 +9490,36 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The snapshot configuration used when creating an Amazon FSx for OpenZFS volume\n            from a snapshot.</p>"
+            }
+        },
+        "com.amazonaws.fsx#OpenZFSPosixFileSystemUser": {
+            "type": "structure",
+            "members": {
+                "Uid": {
+                    "target": "com.amazonaws.fsx#FileSystemUID",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The UID of the file system user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Gid": {
+                    "target": "com.amazonaws.fsx#FileSystemGID",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The GID of the file system user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecondaryGids": {
+                    "target": "com.amazonaws.fsx#FileSystemSecondaryGIDs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of secondary GIDs for the file system user. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The FSx for OpenZFS file system user that is used for authorizing all file access requests that are made using the S3 access point.</p>"
             }
         },
         "com.amazonaws.fsx#OpenZFSQuotaType": {
@@ -9756,6 +10224,289 @@
                     "min": 0,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPoint": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.fsx#GeneralARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>he S3 access point's ARN.</p>"
+                    }
+                },
+                "Alias": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 access point's alias.</p>"
+                    }
+                },
+                "VpcConfiguration": {
+                    "target": "com.amazonaws.fsx#S3AccessPointVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 access point's virtual private cloud (VPC) configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the S3 access point configuration of the S3 access point attachment.</p>"
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[0-9a-z\\\\-]{1,63}$"
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAttachment": {
+            "type": "structure",
+            "members": {
+                "Lifecycle": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentLifecycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle status of the S3 access point attachment. The lifecycle can have the following values:</p>\n         <ul>\n            <li>\n               <p>AVAILABLE - the S3 access point attachment is available for use</p>\n            </li>\n            <li>\n               <p>CREATING - Amazon FSx is creating the S3 access point and attachment</p>\n            </li>\n            <li>\n               <p>DELETING - Amazon FSx is deleting the S3 access point and attachment</p>\n            </li>\n            <li>\n               <p>FAILED - The S3 access point attachment is in a failed state. Delete and detach the S3 access \n               point attachment, and create a new one.</p>\n            </li>\n            <li>\n               <p>UPDATING - Amazon FSx is updating the S3 access point attachment</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "LifecycleTransitionReason": {
+                    "target": "com.amazonaws.fsx#LifecycleTransitionReason"
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.fsx#CreationTime"
+                },
+                "Name": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 access point attachment; also used for the name of the S3 access point.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Amazon FSx volume that the S3 access point is attached to. </p>"
+                    }
+                },
+                "OpenZFSConfiguration": {
+                    "target": "com.amazonaws.fsx#S3AccessPointOpenZFSConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OpenZFSConfiguration of the S3 access point attachment.</p>"
+                    }
+                },
+                "S3AccessPoint": {
+                    "target": "com.amazonaws.fsx#S3AccessPoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 access point configuration of the S3 access point attachment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An S3 access point attached to an Amazon FSx volume.</p>"
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAttachmentLifecycle": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAttachmentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^(?=[a-z0-9])[a-z0-9-]{1,48}[a-z0-9]$"
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAttachmentNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fsx#S3AccessPointAttachmentName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAttachmentNotFound": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.fsx#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The access point specified was not found.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAttachmentType": {
+            "type": "enum",
+            "members": {
+                "OPENZFS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPENZFS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAttachments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fsx#S3AccessPointAttachment"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAttachmentsFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentsFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.fsx#S3AccessPointAttachmentsFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values of the filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of Name and Values pairs used to view a select set of S3 access point attachments.</p>"
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAttachmentsFilterName": {
+            "type": "enum",
+            "members": {
+                "FILE_SYSTEM_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "file-system-id"
+                    }
+                },
+                "VOLUME_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "volume-id"
+                    }
+                },
+                "TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "type"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAttachmentsFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z\\*\\.\\\\/\\?\\-\\_]*$"
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAttachmentsFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fsx#S3AccessPointAttachmentsFilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointAttachmentsFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fsx#S3AccessPointAttachmentsFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointOpenZFSConfiguration": {
+            "type": "structure",
+            "members": {
+                "VolumeId": {
+                    "target": "com.amazonaws.fsx#VolumeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the FSx for OpenZFS volume that the S3 access point is attached to.</p>"
+                    }
+                },
+                "FileSystemIdentity": {
+                    "target": "com.amazonaws.fsx#OpenZFSFileSystemIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file system identity used to authorize file access requests made using the S3 access point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the FSx for OpenZFS attachment configuration of an S3 access point attachment.</p>"
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointVpcConfiguration": {
+            "type": "structure",
+            "members": {
+                "VpcId": {
+                    "target": "com.amazonaws.fsx#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the virtual private cloud (VPC) for the S3 access point VPC configuration, if one exists.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>If included, Amazon S3 restricts access to this access point to requests from the specified virtual private cloud (VPC).</p>"
             }
         },
         "com.amazonaws.fsx#S3DataRepositoryConfiguration": {
@@ -11153,6 +11904,26 @@
                         "smithy.api#enumValue": "NONE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.fsx#TooManyAccessPoints": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.fsx#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error code indicating that you have reached the maximum number of S3 access points attachments allowed for your account in this Amazon Web Services Region, or for the file system.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.fsx#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You have reached the maximum number of S3 access points attachments allowed for your account in this Amazon Web Services Region, or for the file system. For more information, or to request an increase, \n         see <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/limits.html\">Service quotas on FSx resources</a> in the FSx for OpenZFS User Guide.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400,
+                "smithy.api#xmlName": "Error"
             }
         },
         "com.amazonaws.fsx#TotalConstituents": {
