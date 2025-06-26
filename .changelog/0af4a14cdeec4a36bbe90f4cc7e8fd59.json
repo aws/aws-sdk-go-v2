@@ -1,8 +1,0 @@
-{
-    "id": "0af4a14c-deec-4a36-bbe9-0f4cc7e8fd59",
-    "type": "feature",
-    "description": "Added fields to track cumulative task retry attempts for steps and jobs",
-    "modules": [
-        "service/deadline"
-    ]
-}

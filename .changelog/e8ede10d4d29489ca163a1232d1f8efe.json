@@ -1,8 +1,0 @@
-{
-    "id": "e8ede10d-4d29-489c-a163-a1232d1f8efe",
-    "type": "feature",
-    "description": "This release provides change data capture (CDC) streams support through updates to the Amazon Keyspaces API.",
-    "modules": [
-        "service/keyspaces"
-    ]
-}

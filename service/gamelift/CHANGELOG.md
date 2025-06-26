@@ -1,3 +1,7 @@
+# v1.42.1 (2025-06-26)
+
+* No change notes available for this release.
+
 # v1.42.0 (2025-06-24)
 
 * **Feature**: Add support for UDP ping beacons to ListLocations API, including new PingBeacon and UDPEndpoint data types within its Locations return value. Use UDP ping beacon endpoints to help measure real-time network latency for multiplayer games.

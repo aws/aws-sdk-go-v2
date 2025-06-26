@@ -1,3 +1,7 @@
+# v1.41.2 (2025-06-26)
+
+* **Documentation**: This release updates AWS CLI examples for KMS APIs.
+
 # v1.41.1 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

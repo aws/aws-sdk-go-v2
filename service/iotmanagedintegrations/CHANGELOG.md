@@ -1,3 +1,7 @@
+# v1.1.0 (2025-06-26)
+
+* **Feature**: Adding managed integrations APIs for IoT Device Management to onboard and control devices across different manufacturers, connectivity protocols and third party vendor clouds. APIs include managed thing operations, provisioning profile management, and cloud connector operations.
+
 # v1.0.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

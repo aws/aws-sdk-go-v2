@@ -1,3 +1,7 @@
+# v1.27.0 (2025-06-26)
+
+* **Feature**: Added support for App level authentication for QBusiness DataAccessor using AWS IAM Identity center Trusted Token issuer
+
 # v1.26.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

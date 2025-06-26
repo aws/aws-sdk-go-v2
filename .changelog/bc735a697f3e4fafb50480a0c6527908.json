@@ -1,8 +1,0 @@
-{
-    "id": "bc735a69-7f3e-4faf-b504-80a0c6527908",
-    "type": "documentation",
-    "description": "This release updates AWS CLI examples for KMS APIs.",
-    "modules": [
-        "service/kms"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.58.0 (2025-06-26)
+
+* **Feature**: Updated modifyStreamingProperties to support PrivateLink VPC endpoints for directories
+
 # v1.57.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

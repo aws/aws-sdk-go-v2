@@ -1,3 +1,7 @@
+# v1.19.0 (2025-06-26)
+
+* **Feature**: This release provides change data capture (CDC) streams support through updates to the Amazon Keyspaces API.
+
 # v1.18.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

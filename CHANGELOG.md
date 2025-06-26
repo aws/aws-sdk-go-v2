@@ -1,3 +1,24 @@
+# Release (2025-06-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.14.0](service/deadline/CHANGELOG.md#v1140-2025-06-26)
+  * **Feature**: Added fields to track cumulative task retry attempts for steps and jobs
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.227.0](service/ec2/CHANGELOG.md#v12270-2025-06-26)
+  * **Feature**: This release adds support for OdbNetworkArn as a target in VPC Route Tables
+* `github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations`: [v1.1.0](service/iotmanagedintegrations/CHANGELOG.md#v110-2025-06-26)
+  * **Feature**: Adding managed integrations APIs for IoT Device Management to onboard and control devices across different manufacturers, connectivity protocols and third party vendor clouds. APIs include managed thing operations, provisioning profile management, and cloud connector operations.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.19.0](service/keyspaces/CHANGELOG.md#v1190-2025-06-26)
+  * **Feature**: This release provides change data capture (CDC) streams support through updates to the Amazon Keyspaces API.
+* `github.com/aws/aws-sdk-go-v2/service/keyspacesstreams`: [v1.0.0](service/keyspacesstreams/CHANGELOG.md#v100-2025-06-26)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds change data capture (CDC) streams support through the new Amazon Keyspaces Streams API.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.41.2](service/kms/CHANGELOG.md#v1412-2025-06-26)
+  * **Documentation**: This release updates AWS CLI examples for KMS APIs.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.27.0](service/qbusiness/CHANGELOG.md#v1270-2025-06-26)
+  * **Feature**: Added support for App level authentication for QBusiness DataAccessor using AWS IAM Identity center Trusted Token issuer
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.58.0](service/workspaces/CHANGELOG.md#v1580-2025-06-26)
+  * **Feature**: Updated modifyStreamingProperties to support PrivateLink VPC endpoints for directories
+
 # Release (2025-06-25)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "9af5b0f2-367e-4c2d-8bb9-0d2070e7670a",
-    "type": "feature",
-    "description": "Adding managed integrations APIs for IoT Device Management to onboard and control devices across different manufacturers, connectivity protocols and third party vendor clouds. APIs include managed thing operations, provisioning profile management, and cloud connector operations.",
-    "modules": [
-        "service/iotmanagedintegrations"
-    ]
-}

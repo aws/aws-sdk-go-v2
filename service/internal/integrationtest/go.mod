@@ -29,7 +29,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.7
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.6
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.4
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.226.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.227.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.58.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.36.2
@@ -41,14 +41,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/emr v1.49.3
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.39.3
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.7
-	github.com/aws/aws-sdk-go-v2/service/gamelift v1.42.0
+	github.com/aws/aws-sdk-go-v2/service/gamelift v1.42.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.5
 	github.com/aws/aws-sdk-go-v2/service/glue v1.115.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/iam v1.42.2
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.4
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.35.3
-	github.com/aws/aws-sdk-go-v2/service/kms v1.41.1
+	github.com/aws/aws-sdk-go-v2/service/kms v1.41.2
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.72.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.43.4
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.25.4
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/waf v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.26.4
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.57.2
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.58.0
 	github.com/aws/smithy-go v1.22.4
 )
 
