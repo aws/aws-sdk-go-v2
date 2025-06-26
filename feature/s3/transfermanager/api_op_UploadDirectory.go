@@ -62,9 +62,6 @@ type PutRequestCallback interface {
 type UploadDirectoryOutput struct {
 	// Total number of objects successfully uploaded
 	ObjectsUploaded int
-
-	// Total number of objects failed during upload
-	ObjectsFailed int
 }
 
 // UploadDirectory traverses a local directory recursively/non-recursively and intelligently
@@ -97,7 +94,6 @@ type directoryUploader struct {
 	in      *UploadDirectoryInput
 
 	filesUploaded int
-	filesFailed   int
 	traversed     map[string]interface{}
 
 	err error
@@ -131,7 +127,7 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 			path := filepath.Join(u.in.Source, f)
 			absPath, err := u.getAbsPath(path)
 			if err != nil {
-				u.setErr(fmt.Errorf("error when getting abs path of file %s", path))
+				u.setErr(fmt.Errorf("error when getting abs path of file %s: %v", path, err))
 				break
 			} else if absPath == "" {
 				continue
@@ -164,7 +160,6 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 	}
 	return &UploadDirectoryOutput{
 		ObjectsUploaded: u.filesUploaded,
-		ObjectsFailed:   u.filesFailed,
 	}, nil
 }
 
@@ -190,7 +185,7 @@ func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileEntry) 
 
 	absPath, err := u.getAbsPath(path)
 	if err != nil {
-		u.setErr(err)
+		u.setErr(fmt.Errorf("error when getting abs path of file %s: %v", path, err))
 		return
 	} else if absPath == "" {
 		return
@@ -206,13 +201,13 @@ func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileEntry) 
 	}
 	fileInfo, err := os.Lstat(absPath)
 	if err != nil {
-		u.setErr(err)
+		u.setErr(fmt.Errorf("error when stating file %s: %v", absPath, err))
 		return
 	}
 	if fileInfo.IsDir() {
 		subFiles, err := u.traverseFolder(absPath)
 		if err != nil {
-			u.setErr(err)
+			u.setErr(fmt.Errorf("error when traversing folder %s: %v", absPath, err))
 			return
 		}
 		for _, f := range subFiles {
@@ -241,7 +236,7 @@ func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileEntry) 
 func (u *directoryUploader) getAbsPath(path string) (string, error) {
 	fileInfo, err := os.Lstat(path)
 	if err != nil {
-		return "", fmt.Errorf("error when retrieving info of file %s: %v", path, err)
+		return "", fmt.Errorf("error when stating info of file %s: %v", path, err)
 	}
 
 	if fileInfo.Mode()&os.ModeSymlink == os.ModeSymlink {
@@ -281,10 +276,11 @@ func (u *directoryUploader) traverseFolder(path string) ([]string, error) {
 }
 
 func (u *directoryUploader) traverseSymlink(path string) (string, error) {
+	originPath := path
 	for {
 		dst, err := os.Readlink(path)
 		if err != nil {
-			return "", err
+			return "", fmt.Errorf("error when reading symlink of %s: %v", originPath, err)
 		}
 		if filepath.IsAbs(dst) {
 			path = dst
@@ -296,7 +292,7 @@ func (u *directoryUploader) traverseSymlink(path string) (string, error) {
 		}
 		fileInfo, err := os.Lstat(path)
 		if err != nil {
-			return "", err
+			return "", fmt.Errorf("error when stating linked path %s: %v", path, err)
 		}
 		if fileInfo.Mode()&os.ModeSymlink != os.ModeSymlink {
 			return path, nil
@@ -318,7 +314,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		}
 		f, err := os.Open(data.path)
 		if err != nil {
-			u.setErr(err)
+			u.setErr(fmt.Errorf("error when opening file %s: %v", data.path, err))
 		} else {
 			input := &PutObjectInput{
 				Bucket: u.in.Bucket,
@@ -330,8 +326,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 			}
 			_, err := u.c.PutObject(ctx, input)
 			if err != nil {
-				u.setErr(err)
-				u.incrFilesFailed(1)
+				u.setErr(fmt.Errorf("error when uploading file %s: %v", data.path, err))
 			} else {
 				u.incrFilesUploaded(1)
 			}
@@ -344,13 +339,6 @@ func (u *directoryUploader) incrFilesUploaded(n int) {
 	defer u.mu.Unlock()
 
 	u.filesUploaded += n
-}
-
-func (u *directoryUploader) incrFilesFailed(n int) {
-	u.mu.Lock()
-	defer u.mu.Unlock()
-
-	u.filesFailed += n
 }
 
 func (u *directoryUploader) setErr(err error) {
