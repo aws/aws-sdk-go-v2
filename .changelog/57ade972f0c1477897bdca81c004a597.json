@@ -1,0 +1,8 @@
+{
+    "id": "57ade972-f0c1-4778-97bd-ca81c004a597",
+    "type": "feature",
+    "description": "Added support for App level authentication for QBusiness DataAccessor using AWS IAM Identity center Trusted Token issuer",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

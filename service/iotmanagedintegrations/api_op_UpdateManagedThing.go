@@ -43,6 +43,10 @@ type UpdateManagedThingInput struct {
 	// A report of the capabilities for the managed thing.
 	CapabilityReport *types.CapabilityReport
 
+	// The updated capability schemas that define the functionality and features
+	// supported by the managed thing.
+	CapabilitySchemas []types.CapabilitySchemaItem
+
 	// The classification of the managed thing such as light bulb or thermostat.
 	Classification *string
 

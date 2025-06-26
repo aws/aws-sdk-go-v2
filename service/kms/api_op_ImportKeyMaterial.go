@@ -199,9 +199,10 @@ type ImportKeyMaterialInput struct {
 
 	// Indicates whether the key material being imported is previously associated with
 	// this KMS key or not. This parameter is optional and only usable with symmetric
-	// encryption keys. The default is EXISTING_KEY_MATERIAL . If no key material has
-	// ever been imported into the KMS key, and this parameter is omitted, the
-	// parameter defaults to NEW_KEY_MATERIAL .
+	// encryption keys. If no key material has ever been imported into the KMS key, and
+	// this parameter is omitted, the parameter defaults to NEW_KEY_MATERIAL . After
+	// the first key material is imported, if this parameter is omitted then the
+	// parameter defaults to EXISTING_KEY_MATERIAL .
 	ImportType types.ImportType
 
 	// Description for the key material being imported. This parameter is optional and

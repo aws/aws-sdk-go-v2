@@ -55,6 +55,9 @@ type GetManagedThingOutput struct {
 	// The classification of the managed thing such as light bulb or thermostat.
 	Classification *string
 
+	// The identifier of the connector destination associated with this managed thing.
+	ConnectorDestinationId *string
+
 	// The third-party device id as defined by the connector. This device id must not
 	// contain personal identifiable information (PII).
 	//
@@ -64,6 +67,8 @@ type GetManagedThingOutput struct {
 	// The id of the connector policy.
 	//
 	// This parameter is used for cloud-to-cloud devices only.
+	//
+	// Deprecated: ConnectorPolicyId is deprecated
 	ConnectorPolicyId *string
 
 	// The timestamp value of when the device creation request occurred.

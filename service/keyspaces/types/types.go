@@ -186,6 +186,72 @@ type CapacitySpecificationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The settings for the CDC stream of a table. For more information about CDC
+// streams, see [Working with change data capture (CDC) streams in Amazon Keyspaces]in the Amazon Keyspaces Developer Guide.
+//
+// [Working with change data capture (CDC) streams in Amazon Keyspaces]: https://docs.aws.amazon.com/keyspaces/latest/devguide/cdc.html
+type CdcSpecification struct {
+
+	// The status of the CDC stream. You can enable or disable a stream for a table.
+	//
+	// This member is required.
+	Status CdcStatus
+
+	// Specifies that the stream inherits the tags from the table.
+	PropagateTags CdcPropagateTags
+
+	// The tags (key-value pairs) that you want to apply to the stream.
+	Tags []Tag
+
+	// The view type specifies the changes Amazon Keyspaces records for each changed
+	// row in the stream. After you create the stream, you can't make changes to this
+	// selection.
+	//
+	// The options are:
+	//
+	//   - NEW_AND_OLD_IMAGES - both versions of the row, before and after the change.
+	//   This is the default.
+	//
+	//   - NEW_IMAGE - the version of the row after the change.
+	//
+	//   - OLD_IMAGE - the version of the row before the change.
+	//
+	//   - KEYS_ONLY - the partition and clustering keys of the row that was changed.
+	ViewType ViewType
+
+	noSmithyDocumentSerde
+}
+
+// The settings of the CDC stream of the table. For more information about CDC
+// streams, see [Working with change data capture (CDC) streams in Amazon Keyspaces]in the Amazon Keyspaces Developer Guide.
+//
+// [Working with change data capture (CDC) streams in Amazon Keyspaces]: https://docs.aws.amazon.com/keyspaces/latest/devguide/cdc.html
+type CdcSpecificationSummary struct {
+
+	// The status of the CDC stream. Specifies if the table has a CDC stream.
+	//
+	// This member is required.
+	Status CdcStatus
+
+	// The view type specifies the changes Amazon Keyspaces records for each changed
+	// row in the stream. This setting can't be changed, after the stream has been
+	// created.
+	//
+	// The options are:
+	//
+	//   - NEW_AND_OLD_IMAGES - both versions of the row, before and after the change.
+	//   This is the default.
+	//
+	//   - NEW_IMAGE - the version of the row after the change.
+	//
+	//   - OLD_IMAGE - the version of the row before the change.
+	//
+	//   - KEYS_ONLY - the partition and clustering keys of the row that was changed.
+	ViewType ViewType
+
+	noSmithyDocumentSerde
+}
+
 // The client-side timestamp setting of the table.
 //
 // For more information, see [How it works: Amazon Keyspaces client-side timestamps] in the Amazon Keyspaces Developer Guide.

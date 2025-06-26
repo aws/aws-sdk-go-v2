@@ -58,6 +58,10 @@ type CreateDataAccessorInput struct {
 	// This member is required.
 	Principal *string
 
+	// The authentication configuration details for the data accessor. This specifies
+	// how the ISV will authenticate when accessing data through this data accessor.
+	AuthenticationDetail *types.DataAccessorAuthenticationDetail
+
 	// A unique, case-sensitive identifier you provide to ensure idempotency of the
 	// request.
 	ClientToken *string

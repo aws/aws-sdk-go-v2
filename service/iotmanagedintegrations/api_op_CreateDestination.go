@@ -60,6 +60,8 @@ type CreateDestinationInput struct {
 	Description *string
 
 	// A set of key/value pairs that are used to manage the destination.
+	//
+	// Deprecated: Tags have been deprecated from this api
 	Tags map[string]string
 
 	noSmithyDocumentSerde

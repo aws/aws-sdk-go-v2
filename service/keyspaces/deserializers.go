@@ -2877,6 +2877,55 @@ func awsAwsjson10_deserializeDocumentCapacitySpecificationSummary(v **types.Capa
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCdcSpecificationSummary(v **types.CdcSpecificationSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CdcSpecificationSummary
+	if *v == nil {
+		sv = &types.CdcSpecificationSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CdcStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.CdcStatus(jtv)
+			}
+
+		case "viewType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViewType to be of type string, got %T instead", value)
+				}
+				sv.ViewType = types.ViewType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentClientSideTimestamps(v **types.ClientSideTimestamps, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4901,6 +4950,11 @@ func awsAwsjson10_deserializeOpDocumentGetTableOutput(v **GetTableOutput, value 
 				return err
 			}
 
+		case "cdcSpecification":
+			if err := awsAwsjson10_deserializeDocumentCdcSpecificationSummary(&sv.CdcSpecification, value); err != nil {
+				return err
+			}
+
 		case "clientSideTimestamps":
 			if err := awsAwsjson10_deserializeDocumentClientSideTimestamps(&sv.ClientSideTimestamps, value); err != nil {
 				return err
@@ -4952,6 +5006,15 @@ func awsAwsjson10_deserializeOpDocumentGetTableOutput(v **GetTableOutput, value 
 					return fmt.Errorf("expected KeyspaceName to be of type string, got %T instead", value)
 				}
 				sv.KeyspaceName = ptr.String(jtv)
+			}
+
+		case "latestStreamArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamArn to be of type string, got %T instead", value)
+				}
+				sv.LatestStreamArn = ptr.String(jtv)
 			}
 
 		case "pointInTimeRecovery":

@@ -1810,6 +1810,21 @@ func addOpUpdateWorkspacesPoolValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateWorkspacesPool{}, middleware.After)
 }
 
+func validateAccessEndpointConfig(v *types.AccessEndpointConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccessEndpointConfig"}
+	if v.AccessEndpoints == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessEndpoints"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateActiveDirectoryConfig(v *types.ActiveDirectoryConfig) error {
 	if v == nil {
 		return nil
@@ -2266,6 +2281,23 @@ func validateUserStorage(v *types.UserStorage) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UserStorage"}
 	if v.Capacity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Capacity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWorkspaceAccessProperties(v *types.WorkspaceAccessProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WorkspaceAccessProperties"}
+	if v.AccessEndpointConfig != nil {
+		if err := validateAccessEndpointConfig(v.AccessEndpointConfig); err != nil {
+			invalidParams.AddNested("AccessEndpointConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3337,6 +3369,10 @@ func validateOpModifyWorkspaceAccessPropertiesInput(v *ModifyWorkspaceAccessProp
 	}
 	if v.WorkspaceAccessProperties == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceAccessProperties"))
+	} else if v.WorkspaceAccessProperties != nil {
+		if err := validateWorkspaceAccessProperties(v.WorkspaceAccessProperties); err != nil {
+			invalidParams.AddNested("WorkspaceAccessProperties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

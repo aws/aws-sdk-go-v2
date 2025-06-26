@@ -96,7 +96,7 @@ type GetFleetOutput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The Auto Scaling status of the fleet.
+	// The status of the fleet.
 	//
 	// This member is required.
 	Status types.FleetStatus

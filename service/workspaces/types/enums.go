@@ -2,6 +2,23 @@
 
 package types
 
+type AccessEndpointType string
+
+// Enum values for AccessEndpointType
+const (
+	AccessEndpointTypeStreamingWsp AccessEndpointType = "STREAMING_WSP"
+)
+
+// Values returns all known values for AccessEndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessEndpointType) Values() []AccessEndpointType {
+	return []AccessEndpointType{
+		"STREAMING_WSP",
+	}
+}
+
 type AccessPropertyValue string
 
 // Enum values for AccessPropertyValue
@@ -700,6 +717,23 @@ func (ImageType) Values() []ImageType {
 	return []ImageType{
 		"OWNED",
 		"SHARED",
+	}
+}
+
+type InternetFallbackProtocol string
+
+// Enum values for InternetFallbackProtocol
+const (
+	InternetFallbackProtocolPcoip InternetFallbackProtocol = "PCOIP"
+)
+
+// Values returns all known values for InternetFallbackProtocol. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InternetFallbackProtocol) Values() []InternetFallbackProtocol {
+	return []InternetFallbackProtocol{
+		"PCOIP",
 	}
 }
 

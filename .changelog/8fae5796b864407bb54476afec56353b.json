@@ -1,0 +1,8 @@
+{
+    "id": "8fae5796-b864-407b-b544-76afec56353b",
+    "type": "feature",
+    "description": "Updated modifyStreamingProperties to support PrivateLink VPC endpoints for directories",
+    "modules": [
+        "service/workspaces"
+    ]
+}

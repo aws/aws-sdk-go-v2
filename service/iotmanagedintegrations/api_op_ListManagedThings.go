@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all of the associations and statuses for a managed thing by its owner.
+// Listing all managed things with provision for filters.
 func (c *Client) ListManagedThings(ctx context.Context, params *ListManagedThingsInput, optFns ...func(*Options)) (*ListManagedThingsOutput, error) {
 	if params == nil {
 		params = &ListManagedThingsInput{}
@@ -29,7 +29,16 @@ func (c *Client) ListManagedThings(ctx context.Context, params *ListManagedThing
 
 type ListManagedThingsInput struct {
 
+	// Filter managed things by the connector destination ID they are associated with.
+	ConnectorDestinationIdFilter *string
+
+	// Filter managed things by the connector device ID they are associated with. When
+	// specified, only managed things with this connector device ID will be returned.
+	ConnectorDeviceIdFilter *string
+
 	// Filter on a connector policy id for a managed thing.
+	//
+	// Deprecated: ConnectorPolicyIdFilter is deprecated
 	ConnectorPolicyIdFilter *string
 
 	// Filter on a credential locker for a managed thing.

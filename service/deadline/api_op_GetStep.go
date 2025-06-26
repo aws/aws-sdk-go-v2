@@ -118,6 +118,9 @@ type GetStepOutput struct {
 	// The task status with which the job started.
 	TargetTaskRunStatus types.StepTargetTaskRunStatus
 
+	// The total number of times tasks from the step failed and were retried.
+	TaskFailureRetryCount *int32
+
 	// The date and time the resource was updated.
 	UpdatedAt *time.Time
 

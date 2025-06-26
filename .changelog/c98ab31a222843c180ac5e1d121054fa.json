@@ -1,0 +1,8 @@
+{
+    "id": "c98ab31a-2228-43c1-80ac-5e1d121054fa",
+    "type": "feature",
+    "description": "This release adds support for OdbNetworkArn as a target in VPC Route Tables",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -39,7 +39,13 @@ type SendManagedThingCommandInput struct {
 	// This member is required.
 	ManagedThingId *string
 
+	// The identifier of the account association to use when sending a command to a
+	// managed thing.
+	AccountAssociationId *string
+
 	// The ID tracking the current discovery process for one connector association.
+	//
+	// Deprecated: ConnectorAssociationId has been deprecated
 	ConnectorAssociationId *string
 
 	noSmithyDocumentSerde

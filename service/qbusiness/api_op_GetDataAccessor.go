@@ -58,6 +58,10 @@ type GetDataAccessorOutput struct {
 	// data accessor.
 	ApplicationId *string
 
+	// The authentication configuration details for the data accessor. This specifies
+	// how the ISV authenticates when accessing data through this data accessor.
+	AuthenticationDetail *types.DataAccessorAuthenticationDetail
+
 	// The timestamp when the data accessor was created.
 	CreatedAt *time.Time
 

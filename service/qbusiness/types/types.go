@@ -1078,6 +1078,10 @@ type CustomPluginConfiguration struct {
 // Provides summary information about a data accessor.
 type DataAccessor struct {
 
+	// The authentication configuration details for the data accessor. This specifies
+	// how the ISV authenticates when accessing data through this data accessor.
+	AuthenticationDetail *DataAccessorAuthenticationDetail
+
 	// The timestamp when the data accessor was created.
 	CreatedAt *time.Time
 
@@ -1100,6 +1104,71 @@ type DataAccessor struct {
 
 	// The timestamp when the data accessor was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A union type that contains the specific authentication configuration based on
+// the authentication type selected.
+//
+// The following types satisfy this interface:
+//
+//	DataAccessorAuthenticationConfigurationMemberIdcTrustedTokenIssuerConfiguration
+type DataAccessorAuthenticationConfiguration interface {
+	isDataAccessorAuthenticationConfiguration()
+}
+
+// Configuration for IAM Identity Center Trusted Token Issuer (TTI) authentication
+// used when the authentication type is AWS_IAM_IDC_TTI .
+type DataAccessorAuthenticationConfigurationMemberIdcTrustedTokenIssuerConfiguration struct {
+	Value DataAccessorIdcTrustedTokenIssuerConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DataAccessorAuthenticationConfigurationMemberIdcTrustedTokenIssuerConfiguration) isDataAccessorAuthenticationConfiguration() {
+}
+
+// Contains the authentication configuration details for a data accessor. This
+// structure defines how the ISV authenticates when accessing data through the data
+// accessor.
+type DataAccessorAuthenticationDetail struct {
+
+	// The type of authentication to use for the data accessor. This determines how
+	// the ISV authenticates when accessing data. You can use one of two authentication
+	// types:
+	//
+	//   - AWS_IAM_IDC_TTI - Authentication using IAM Identity Center Trusted Token
+	//   Issuer (TTI). This authentication type allows the ISV to use a trusted token
+	//   issuer to generate tokens for accessing the data.
+	//
+	//   - AWS_IAM_IDC_AUTH_CODE - Authentication using IAM Identity Center
+	//   authorization code flow. This authentication type uses the standard OAuth 2.0
+	//   authorization code flow for authentication.
+	//
+	// This member is required.
+	AuthenticationType DataAccessorAuthenticationType
+
+	// The specific authentication configuration based on the authentication type.
+	AuthenticationConfiguration DataAccessorAuthenticationConfiguration
+
+	// A list of external identifiers associated with this authentication
+	// configuration. These are used to correlate the data accessor with external
+	// systems.
+	ExternalIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration details for IAM Identity Center Trusted Token Issuer (TTI)
+// authentication.
+type DataAccessorIdcTrustedTokenIssuerConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the IAM Identity Center Trusted Token Issuer
+	// that will be used for authentication.
+	//
+	// This member is required.
+	IdcTrustedTokenIssuerArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1873,7 +1942,7 @@ type HookConfiguration struct {
 	// date-time.
 	InvocationCondition *DocumentAttributeCondition
 
-	// The Amazon Resource Name (ARN) of the Lambda function sduring ingestion. For
+	// The Amazon Resource Name (ARN) of the Lambda function during ingestion. For
 	// more information, see [Using Lambda functions for Amazon Q Business document enrichment].
 	//
 	// [Using Lambda functions for Amazon Q Business document enrichment]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/cde-lambda-operations.html
@@ -2308,6 +2377,30 @@ type OrchestrationConfiguration struct {
 	//
 	// This member is required.
 	Control OrchestrationControl
+
+	noSmithyDocumentSerde
+}
+
+// Defines a condition that restricts when a permission is effective. Conditions
+// allow you to control access based on specific attributes of the request.
+type PermissionCondition struct {
+
+	// The key for the condition. This identifies the attribute that the condition
+	// applies to.
+	//
+	// This member is required.
+	ConditionKey *string
+
+	// The operator to use for the condition evaluation. This determines how the
+	// condition values are compared.
+	//
+	// This member is required.
+	ConditionOperator PermissionConditionOperator
+
+	// The values to compare against using the specified condition operator.
+	//
+	// This member is required.
+	ConditionValues []string
 
 	noSmithyDocumentSerde
 }
@@ -3207,20 +3300,21 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAPISchema()                              {}
-func (*UnknownUnionMember) isChatInputStream()                        {}
-func (*UnknownUnionMember) isChatModeConfiguration()                  {}
-func (*UnknownUnionMember) isChatOutputStream()                       {}
-func (*UnknownUnionMember) isContentSource()                          {}
-func (*UnknownUnionMember) isCopyFromSource()                         {}
-func (*UnknownUnionMember) isDocumentAttributeBoostingConfiguration() {}
-func (*UnknownUnionMember) isDocumentAttributeValue()                 {}
-func (*UnknownUnionMember) isDocumentContent()                        {}
-func (*UnknownUnionMember) isIdentityProviderConfiguration()          {}
-func (*UnknownUnionMember) isPluginAuthConfiguration()                {}
-func (*UnknownUnionMember) isPrincipal()                              {}
-func (*UnknownUnionMember) isRetrieverConfiguration()                 {}
-func (*UnknownUnionMember) isRuleConfiguration()                      {}
-func (*UnknownUnionMember) isSourceDetails()                          {}
-func (*UnknownUnionMember) isSubscriptionPrincipal()                  {}
-func (*UnknownUnionMember) isWebExperienceAuthConfiguration()         {}
+func (*UnknownUnionMember) isAPISchema()                               {}
+func (*UnknownUnionMember) isChatInputStream()                         {}
+func (*UnknownUnionMember) isChatModeConfiguration()                   {}
+func (*UnknownUnionMember) isChatOutputStream()                        {}
+func (*UnknownUnionMember) isContentSource()                           {}
+func (*UnknownUnionMember) isCopyFromSource()                          {}
+func (*UnknownUnionMember) isDataAccessorAuthenticationConfiguration() {}
+func (*UnknownUnionMember) isDocumentAttributeBoostingConfiguration()  {}
+func (*UnknownUnionMember) isDocumentAttributeValue()                  {}
+func (*UnknownUnionMember) isDocumentContent()                         {}
+func (*UnknownUnionMember) isIdentityProviderConfiguration()           {}
+func (*UnknownUnionMember) isPluginAuthConfiguration()                 {}
+func (*UnknownUnionMember) isPrincipal()                               {}
+func (*UnknownUnionMember) isRetrieverConfiguration()                  {}
+func (*UnknownUnionMember) isRuleConfiguration()                       {}
+func (*UnknownUnionMember) isSourceDetails()                           {}
+func (*UnknownUnionMember) isSubscriptionPrincipal()                   {}
+func (*UnknownUnionMember) isWebExperienceAuthConfiguration()          {}

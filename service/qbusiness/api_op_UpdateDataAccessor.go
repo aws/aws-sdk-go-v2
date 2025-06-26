@@ -48,6 +48,11 @@ type UpdateDataAccessorInput struct {
 	// This member is required.
 	DataAccessorId *string
 
+	// The updated authentication configuration details for the data accessor. This
+	// specifies how the ISV will authenticate when accessing data through this data
+	// accessor.
+	AuthenticationDetail *types.DataAccessorAuthenticationDetail
+
 	// The updated friendly name for the data accessor.
 	DisplayName *string
 

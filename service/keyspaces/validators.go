@@ -513,6 +513,26 @@ func validateCapacitySpecification(v *types.CapacitySpecification) error {
 	}
 }
 
+func validateCdcSpecification(v *types.CdcSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CdcSpecification"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateClientSideTimestamps(v *types.ClientSideTimestamps) error {
 	if v == nil {
 		return nil
@@ -980,6 +1000,11 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 			invalidParams.AddNested("ReplicaSpecifications", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CdcSpecification != nil {
+		if err := validateCdcSpecification(v.CdcSpecification); err != nil {
+			invalidParams.AddNested("CdcSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1351,6 +1376,11 @@ func validateOpUpdateTableInput(v *UpdateTableInput) error {
 	if v.ReplicaSpecifications != nil {
 		if err := validateReplicaSpecificationList(v.ReplicaSpecifications); err != nil {
 			invalidParams.AddNested("ReplicaSpecifications", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CdcSpecification != nil {
+		if err := validateCdcSpecification(v.CdcSpecification); err != nil {
+			invalidParams.AddNested("CdcSpecification", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

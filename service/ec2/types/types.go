@@ -16583,6 +16583,9 @@ type Route struct {
 	// The ID of the network interface.
 	NetworkInterfaceId *string
 
+	// The Amazon Resource Name (ARN) of the ODB network.
+	OdbNetworkArn *string
+
 	// Describes how the route was created.
 	//
 	//   - CreateRouteTable - The route was automatically created when the route table

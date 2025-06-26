@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-//	During user-guided setup, this is used to start device discovery. The
+//	This API is used to start device discovery for hub-connected and
 //
-// authentication material (install code) is passed as a message to the controller
-// telling it to start the discovery.
+// third-party-connected devices. The authentication material (install code) is
+// passed as a message to the controller telling it to start the discovery.
 func (c *Client) StartDeviceDiscovery(ctx context.Context, params *StartDeviceDiscoveryInput, optFns ...func(*Options)) (*StartDeviceDiscoveryOutput, error) {
 	if params == nil {
 		params = &StartDeviceDiscoveryInput{}
@@ -34,10 +34,14 @@ func (c *Client) StartDeviceDiscovery(ctx context.Context, params *StartDeviceDi
 type StartDeviceDiscoveryInput struct {
 
 	// The discovery type supporting the type of device to be discovered in the device
-	// discovery job request.
+	// discovery task request.
 	//
 	// This member is required.
 	DiscoveryType types.DiscoveryType
+
+	// The identifier of the cloud-to-cloud account association to use for discovery
+	// of third-party devices.
+	AccountAssociationId *string
 
 	// The authentication material required to start the local device discovery job
 	// request.
@@ -52,12 +56,23 @@ type StartDeviceDiscoveryInput struct {
 	ClientToken *string
 
 	// The id of the connector association.
+	//
+	// Deprecated: ConnectorAssociationIdentifier is deprecated
 	ConnectorAssociationIdentifier *string
 
 	// The id of the end-user's IoT hub.
 	ControllerIdentifier *string
 
+	// Additional protocol-specific details required for device discovery, which vary
+	// based on the discovery type.
+	//
+	// For a DiscoveryType of CUSTOM , the string-to-string map must have a key value
+	// of Name set to a non-empty-string.
+	CustomProtocolDetail map[string]string
+
 	// A set of key/value pairs that are used to manage the device discovery request.
+	//
+	// Deprecated: Tags have been deprecated from this api
 	Tags map[string]string
 
 	noSmithyDocumentSerde

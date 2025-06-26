@@ -48,7 +48,7 @@ type AcceleratorSelection struct {
 	// The name of the chip used by the GPU accelerator.
 	//
 	// If you specify l4 as the name of the accelerator, you must specify latest or
-	// grid:r550 as the runtime.
+	// grid:r570 as the runtime.
 	//
 	// The available GPU accelerators are:
 	//
@@ -72,7 +72,7 @@ type AcceleratorSelection struct {
 	//   latest and a new version of the runtime is released, the new version of the
 	//   runtime is used.
 	//
-	//   - grid:r550 - [NVIDIA vGPU software 17]
+	//   - grid:r570 - [NVIDIA vGPU software 18]
 	//
 	//   - grid:r535 - [NVIDIA vGPU software 16]
 	//
@@ -81,7 +81,7 @@ type AcceleratorSelection struct {
 	// leave others blank, Deadline Cloud raises an exception.
 	//
 	// [NVIDIA vGPU software 16]: https://docs.nvidia.com/vgpu/16.0/index.html
-	// [NVIDIA vGPU software 17]: https://docs.nvidia.com/vgpu/17.0/index.html
+	// [NVIDIA vGPU software 18]: https://docs.nvidia.com/vgpu/18.0/index.html
 	Runtime *string
 
 	noSmithyDocumentSerde
@@ -1510,6 +1510,9 @@ type JobSearchSummary struct {
 	// The task status to start with on the job.
 	TargetTaskRunStatus JobTargetTaskRunStatus
 
+	// The total number of times tasks from the job failed and were retried.
+	TaskFailureRetryCount *int32
+
 	// The task run status for the job.
 	//
 	//   - PENDING –pending and waiting for resources.
@@ -1605,6 +1608,9 @@ type JobSummary struct {
 
 	// The task status to start with on the job.
 	TargetTaskRunStatus JobTargetTaskRunStatus
+
+	// The total number of times tasks from the job failed and were retried.
+	TaskFailureRetryCount *int32
 
 	// The task run status for the job.
 	//
@@ -2902,6 +2908,9 @@ type StepSearchSummary struct {
 	// The task status to start with on the job.
 	TargetTaskRunStatus StepTargetTaskRunStatus
 
+	// The total number of times tasks from the step failed and were retried.
+	TaskFailureRetryCount *int32
+
 	// The task run status for the job.
 	//
 	//   - PENDING –pending and waiting for resources.
@@ -3003,6 +3012,9 @@ type StepSummary struct {
 
 	// The task status to start with on the job.
 	TargetTaskRunStatus StepTargetTaskRunStatus
+
+	// The total number of times tasks from the step failed and were retried.
+	TaskFailureRetryCount *int32
 
 	// The date and time the resource was updated.
 	UpdatedAt *time.Time

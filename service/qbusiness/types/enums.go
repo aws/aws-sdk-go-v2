@@ -300,6 +300,26 @@ func (CreatorModeControl) Values() []CreatorModeControl {
 	}
 }
 
+type DataAccessorAuthenticationType string
+
+// Enum values for DataAccessorAuthenticationType
+const (
+	DataAccessorAuthenticationTypeAwsIamIdcTti      DataAccessorAuthenticationType = "AWS_IAM_IDC_TTI"
+	DataAccessorAuthenticationTypeAwsIamIdcAuthCode DataAccessorAuthenticationType = "AWS_IAM_IDC_AUTH_CODE"
+)
+
+// Values returns all known values for DataAccessorAuthenticationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataAccessorAuthenticationType) Values() []DataAccessorAuthenticationType {
+	return []DataAccessorAuthenticationType{
+		"AWS_IAM_IDC_TTI",
+		"AWS_IAM_IDC_AUTH_CODE",
+	}
+}
+
 type DataSourceStatus string
 
 // Enum values for DataSourceStatus
@@ -774,6 +794,23 @@ func (OrchestrationControl) Values() []OrchestrationControl {
 	return []OrchestrationControl{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type PermissionConditionOperator string
+
+// Enum values for PermissionConditionOperator
+const (
+	PermissionConditionOperatorStringEquals PermissionConditionOperator = "StringEquals"
+)
+
+// Values returns all known values for PermissionConditionOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PermissionConditionOperator) Values() []PermissionConditionOperator {
+	return []PermissionConditionOperator{
+		"StringEquals",
 	}
 }
 

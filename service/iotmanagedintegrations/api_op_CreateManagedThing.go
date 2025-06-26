@@ -58,6 +58,11 @@ type CreateManagedThingInput struct {
 	// A report of the capabilities for the managed thing.
 	CapabilityReport *types.CapabilityReport
 
+	// The capability schemas that define the functionality and features supported by
+	// the managed thing, including device capabilities and their associated
+	// properties.
+	CapabilitySchemas []types.CapabilitySchemaItem
+
 	// The classification of the managed thing such as light bulb or thermostat.
 	Classification *string
 
@@ -70,6 +75,11 @@ type CreateManagedThingInput struct {
 	CredentialLockerId *string
 
 	// The metadata for the managed thing.
+	//
+	// The managedThing metadata parameter is used for associating attributes with a
+	// managedThing that can be used for grouping over-the-air (OTA) tasks. Name value
+	// pairs in metadata can be used in the OtaTargetQueryString parameter for the
+	// CreateOtaTask API operation.
 	MetaData map[string]string
 
 	// The model of the device.

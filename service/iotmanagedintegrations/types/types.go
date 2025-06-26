@@ -28,6 +28,61 @@ type AbortConfigCriteria struct {
 	noSmithyDocumentSerde
 }
 
+// Structure containing information about an account association, including its
+// identifier, state, and related metadata.
+type AccountAssociationItem struct {
+
+	// The unique identifier of the account association.
+	//
+	// This member is required.
+	AccountAssociationId *string
+
+	// The current state of the account association, indicating its status in the
+	// association lifecycle.
+	//
+	// This member is required.
+	AssociationState AssociationState
+
+	// The Amazon Resource Name (ARN) of the account association.
+	Arn *string
+
+	// The identifier of the connector destination associated with this account
+	// association.
+	ConnectorDestinationId *string
+
+	// A description of the account association.
+	Description *string
+
+	// The error message explaining any issues with the account association, if
+	// applicable.
+	ErrorMessage *string
+
+	// The name of the account association.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The authentication configuration details for a connector destination, including
+// OAuth settings and other authentication parameters.
+type AuthConfig struct {
+
+	// The OAuth configuration settings used for authentication with the third-party
+	// service.
+	OAuth *OAuthConfig
+
+	noSmithyDocumentSerde
+}
+
+// The updated authentication configuration details for a connector destination.
+type AuthConfigUpdate struct {
+
+	// The updated OAuth configuration settings for the authentication configuration.
+	OAuthUpdate *OAuthUpdate
+
+	noSmithyDocumentSerde
+}
+
 // Action for an Amazon Web Services capability, containing the action parameters
 // for control.
 type CapabilityAction struct {
@@ -125,6 +180,42 @@ type CapabilityReportEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+// Structure representing a capability schema item that defines the functionality
+// and features supported by a managed thing.
+type CapabilitySchemaItem struct {
+
+	// The unique identifier of the capability defined in the schema.
+	//
+	// This member is required.
+	CapabilityId *string
+
+	// The external identifier for the capability, used when referencing the
+	// capability outside of the AWS ecosystem.
+	//
+	// This member is required.
+	ExtrinsicId *string
+
+	// The version of the external capability definition, used to track compatibility
+	// with external systems.
+	//
+	// This member is required.
+	ExtrinsicVersion *int32
+
+	// The format of the capability schema, which defines how the schema is structured
+	// and interpreted.
+	//
+	// This member is required.
+	Format SchemaVersionFormat
+
+	// The actual schema definition that describes the capability's properties,
+	// actions, and events.
+	//
+	// This member is required.
+	Schema document.Interface
+
+	noSmithyDocumentSerde
+}
+
 // The command capabilities added for the managed thing
 type CommandCapability struct {
 
@@ -196,6 +287,55 @@ type ConfigurationStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Structure containing summary information about a connector destination, which
+// defines how a cloud-to-cloud connector connects to a customer's AWS account.
+type ConnectorDestinationSummary struct {
+
+	// The identifier of the cloud connector associated with this connector
+	// destination.
+	CloudConnectorId *string
+
+	// A description of the connector destination.
+	Description *string
+
+	// The unique identifier of the connector destination.
+	Id *string
+
+	// The display name of the connector destination.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Structure describing a connector.
+type ConnectorItem struct {
+
+	// The configuration details for the cloud connector endpoint, including
+	// connection parameters and authentication requirements.
+	//
+	// This member is required.
+	EndpointConfig *EndpointConfig
+
+	// The display name of the C2C connector.
+	//
+	// This member is required.
+	Name *string
+
+	// A description of the C2C connector.
+	Description *string
+
+	// The type of endpoint used for the C2C connector.
+	EndpointType EndpointType
+
+	// The identifier of the C2C connector.
+	Id *string
+
+	// The type of cloud connector created.
+	Type CloudConnectorType
+
+	noSmithyDocumentSerde
+}
+
 // Structure describing one Credential Locker.
 type CredentialLockerSummary struct {
 
@@ -236,6 +376,99 @@ type DestinationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Describe the device using the relevant metadata and supported clusters for
+// device discovery.
+type Device struct {
+
+	// The capability report for the device.
+	//
+	// This member is required.
+	CapabilityReport *MatterCapabilityReport
+
+	// The device id as defined by the connector.
+	//
+	// This parameter is used for cloud-to-cloud devices only.
+	//
+	// This member is required.
+	ConnectorDeviceId *string
+
+	// Report of all capabilities supported by the device.
+	CapabilitySchemas []CapabilitySchemaItem
+
+	// The name of the device as defined by the connector.
+	ConnectorDeviceName *string
+
+	// The metadata attributes for a device.
+	DeviceMetadata document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Structure containing summary information about a device discovery job,
+// including its identifier, type, and status.
+type DeviceDiscoverySummary struct {
+
+	// The type of discovery process used to find devices.
+	DiscoveryType DiscoveryType
+
+	// The unique identifier of the device discovery job.
+	Id *string
+
+	// The current status of the device discovery job.
+	Status DeviceDiscoveryStatus
+
+	noSmithyDocumentSerde
+}
+
+// Structure containing summary information about a device discovered during a
+// device discovery job.
+type DiscoveredDeviceSummary struct {
+
+	// The authentication material required for connecting to the discovered device,
+	// such as credentials or tokens.
+	AuthenticationMaterial *string
+
+	// The brand of the discovered device.
+	Brand *string
+
+	// The third-party device identifier as defined by the connector. This identifier
+	// must not contain personal identifiable information (PII).
+	ConnectorDeviceId *string
+
+	// The name of the device as defined by the connector or third-party system.
+	ConnectorDeviceName *string
+
+	// The list of device types or categories that the discovered device belongs to.
+	DeviceTypes []string
+
+	// The timestamp indicating when the device was discovered.
+	DiscoveredAt *time.Time
+
+	// The identifier of the managed thing created for this discovered device, if one
+	// exists.
+	ManagedThingId *string
+
+	// The model of the discovered device.
+	Model *string
+
+	// The status of the discovered device, indicating whether it has been added,
+	// removed, or modified since the last discovery.
+	Modification DiscoveryModification
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for an endpoint, which defines how to connect to and
+// communicate with external services.
+type EndpointConfig struct {
+
+	// The Lambda function configuration for the endpoint, used when the endpoint
+	// communicates through an AWS Lambda function.
+	Lambda *LambdaConfig
+
+	noSmithyDocumentSerde
+}
+
 // List of event log configurations.
 type EventLogConfigurationSummary struct {
 
@@ -267,6 +500,31 @@ type ExponentialRolloutRate struct {
 
 	// The criteria for increasing the rollout rate of an over-the-air (OTA) task.
 	RateIncreaseCriteria *RolloutRateIncreaseCriteria
+
+	noSmithyDocumentSerde
+}
+
+// Configuration details for an AWS Lambda function used as an endpoint for a
+// cloud connector.
+type LambdaConfig struct {
+
+	// The Amazon Resource Name (ARN) of the Lambda function used as an endpoint.
+	//
+	// This member is required.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// Structure representing an association between a managed thing and an account
+// association, which connects a device to a third-party account.
+type ManagedThingAssociation struct {
+
+	// The identifier of the account association in the association.
+	AccountAssociationId *string
+
+	// The identifier of the managed thing in the association.
+	ManagedThingId *string
 
 	noSmithyDocumentSerde
 }
@@ -304,6 +562,10 @@ type ManagedThingSummary struct {
 	// The classification of the managed thing such as light bulb or thermostat.
 	Classification *string
 
+	// The identifier of the connector destination associated with this managed thing,
+	// if applicable.
+	ConnectorDestinationId *string
+
 	// The third-party device id as defined by the connector. This device id must not
 	// contain personal identifiable information (PII).
 	//
@@ -313,6 +575,8 @@ type ManagedThingSummary struct {
 	// The id of the connector policy.
 	//
 	// This parameter is used for cloud-to-cloud devices only.
+	//
+	// Deprecated: ConnectorPolicyId has been deprecated
 	ConnectorPolicyId *string
 
 	// The timestamp value of when the device creation request occurred.
@@ -354,6 +618,146 @@ type ManagedThingSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Matter based capability report.
+type MatterCapabilityReport struct {
+
+	// The endpoints used in the capability report.
+	//
+	// This member is required.
+	Endpoints []MatterCapabilityReportEndpoint
+
+	// The version of the capability report.
+	//
+	// This member is required.
+	Version *string
+
+	// The numeric identifier of the node.
+	NodeId *string
+
+	noSmithyDocumentSerde
+}
+
+// Matter attribute used in capability report.
+type MatterCapabilityReportAttribute struct {
+
+	// The id of the Matter attribute.
+	Id *string
+
+	// Name for the Amazon Web Services Matter capability report attribute.
+	Name *string
+
+	// Value for the Amazon Web Services Matter capability report attribute.
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Capability used in Matter capability report.
+type MatterCapabilityReportCluster struct {
+
+	// The id of the Amazon Web Services Matter capability report cluster.
+	//
+	// This member is required.
+	Id *string
+
+	// The id of the revision for the Amazon Web Services Matter capability report.
+	//
+	// This member is required.
+	Revision *int32
+
+	// The attributes of the Amazon Web Services Matter capability report.
+	Attributes []MatterCapabilityReportAttribute
+
+	// The commands used with the Amazon Web Services Matter capability report.
+	Commands []string
+
+	// The events used with the Amazon Web Services Matter capability report.
+	Events []string
+
+	// The fabric index for the Amazon Web Services Matter capability report.
+	FabricIndex *int32
+
+	// 32 bit-map used to indicate which features a cluster supports.
+	FeatureMap *int64
+
+	// Matter clusters used in capability report.
+	GeneratedCommands []string
+
+	// The capability name used in the Amazon Web Services Matter capability report.
+	Name *string
+
+	// The id of the schema version.
+	PublicId *string
+
+	// The spec version used in the Amazon Web Services Matter capability report.
+	SpecVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Matter endpoint used in capability report.
+type MatterCapabilityReportEndpoint struct {
+
+	// Matter clusters used in capability report.
+	//
+	// This member is required.
+	Clusters []MatterCapabilityReportCluster
+
+	// The type of device.
+	//
+	// This member is required.
+	DeviceTypes []string
+
+	// The id of the Amazon Web Services Matter capability report endpoint.
+	//
+	// This member is required.
+	Id *string
+
+	// Semantic information related to endpoint.
+	ClientClusters []string
+
+	// Heirachy of child endpoints contained in the given endpoint.
+	Parts []string
+
+	// Semantic information related to endpoint.
+	SemanticTags []string
+
+	noSmithyDocumentSerde
+}
+
+// Describe a Matter cluster with an id, and the relevant attributes, commands,
+// and events.
+type MatterCluster struct {
+
+	// The Matter attributes.
+	Attributes document.Interface
+
+	// Describe the Matter commands with the Matter command identifier mapped to the
+	// command fields.
+	Commands map[string]document.Interface
+
+	// Describe the Matter events with the Matter event identifier mapped to the event
+	// fields.
+	Events map[string]document.Interface
+
+	// The cluster id.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Structure describing a managed thing.
+type MatterEndpoint struct {
+
+	// A list of Matter clusters for a managed thing.
+	Clusters []MatterCluster
+
+	// The Matter endpoint id.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // Structure describing a notification configuration.
 type NotificationConfigurationSummary struct {
 
@@ -363,6 +767,54 @@ type NotificationConfigurationSummary struct {
 	// The type of event triggering a device notification to the customer-managed
 	// destination.
 	EventType EventType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration details for OAuth authentication with a third-party service.
+type OAuthConfig struct {
+
+	// The authorization URL for the OAuth service, where users are directed to
+	// authenticate and authorize access.
+	//
+	// This member is required.
+	AuthUrl *string
+
+	// The authentication scheme used when requesting tokens from the token endpoint.
+	//
+	// This member is required.
+	TokenEndpointAuthenticationScheme TokenEndpointAuthenticationScheme
+
+	// The token URL for the OAuth service, where authorization codes are exchanged
+	// for access tokens.
+	//
+	// This member is required.
+	TokenUrl *string
+
+	// The URL where users are redirected after completing the OAuth authorization
+	// process.
+	OAuthCompleteRedirectUrl *string
+
+	// Configuration for proactively refreshing OAuth tokens before they expire.
+	ProactiveRefreshTokenRenewal *ProactiveRefreshTokenRenewal
+
+	// The OAuth scopes requested during authorization, which define the permissions
+	// granted to the application.
+	Scope *string
+
+	noSmithyDocumentSerde
+}
+
+// Structure containing updated OAuth configuration settings.
+type OAuthUpdate struct {
+
+	// The updated URL where users are redirected after completing the OAuth
+	// authorization process.
+	OAuthCompleteRedirectUrl *string
+
+	// Updated configuration for proactively refreshing OAuth tokens before they
+	// expire.
+	ProactiveRefreshTokenRenewal *ProactiveRefreshTokenRenewal
 
 	noSmithyDocumentSerde
 }
@@ -509,6 +961,20 @@ type OtaTaskTimeoutConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for proactively refreshing OAuth tokens before they
+// expire.
+type ProactiveRefreshTokenRenewal struct {
+
+	// The days before token expiration when the system should attempt to renew the
+	// token, specified in days.
+	DaysBeforeRenewal *int32
+
+	// Indicates whether proactive refresh token renewal is enabled.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // Structure describing a provisioning profile.
 type ProvisioningProfileSummary struct {
 
@@ -637,6 +1103,23 @@ type SchemaVersionListItem struct {
 
 	// The visibility of the schema version.
 	Visibility SchemaVersionVisibility
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for AWS Secrets Manager, used to securely store and manage
+// sensitive information for connector destinations.
+type SecretsManager struct {
+
+	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret.
+	//
+	// This member is required.
+	Arn *string
+
+	// The version ID of the AWS Secrets Manager secret.
+	//
+	// This member is required.
+	VersionId *string
 
 	noSmithyDocumentSerde
 }

@@ -71,6 +71,9 @@ type GetTableOutput struct {
 	//   - throughputMode:PROVISIONED
 	CapacitySpecification *types.CapacitySpecificationSummary
 
+	// The CDC stream settings of the table.
+	CdcSpecification *types.CdcSpecificationSummary
+
 	//  The client-side timestamps setting of the table.
 	ClientSideTimestamps *types.ClientSideTimestamps
 
@@ -85,6 +88,9 @@ type GetTableOutput struct {
 
 	// The encryption settings of the specified table.
 	EncryptionSpecification *types.EncryptionSpecification
+
+	// The Amazon Resource Name (ARN) of the stream.
+	LatestStreamArn *string
 
 	// The point-in-time recovery status of the specified table.
 	PointInTimeRecovery *types.PointInTimeRecoverySummary

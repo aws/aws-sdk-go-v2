@@ -130,6 +130,9 @@ type GetJobOutput struct {
 	// The task status with which the job started.
 	TargetTaskRunStatus types.JobTargetTaskRunStatus
 
+	// The total number of times tasks from the job failed and were retried.
+	TaskFailureRetryCount *int32
+
 	// The task run status for the job.
 	TaskRunStatus types.TaskRunStatus
 

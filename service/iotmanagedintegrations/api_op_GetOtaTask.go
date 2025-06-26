@@ -73,6 +73,9 @@ type GetOtaTaskOutput struct {
 	// The status of the over-the-air (OTA) task.
 	Status types.OtaStatus
 
+	// A set of key/value pairs that are used to manage the over-the-air (OTA) task.
+	Tags map[string]string
+
 	// The device targeted for the over-the-air (OTA) task.
 	Target []string
 

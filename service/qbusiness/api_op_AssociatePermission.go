@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +53,10 @@ type AssociatePermissionInput struct {
 	//
 	// This member is required.
 	StatementId *string
+
+	// The conditions that restrict when the permission is effective. These conditions
+	// can be used to limit the permission based on specific attributes of the request.
+	Conditions []types.PermissionCondition
 
 	noSmithyDocumentSerde
 }

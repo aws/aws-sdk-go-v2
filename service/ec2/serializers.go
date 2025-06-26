@@ -62927,6 +62927,11 @@ func awsEc2query_serializeOpDocumentCreateRouteInput(v *CreateRouteInput, value 
 		objectKey.String(*v.NetworkInterfaceId)
 	}
 
+	if v.OdbNetworkArn != nil {
+		objectKey := object.Key("OdbNetworkArn")
+		objectKey.String(*v.OdbNetworkArn)
+	}
+
 	if v.RouteTableId != nil {
 		objectKey := object.Key("RouteTableId")
 		objectKey.String(*v.RouteTableId)
@@ -79308,6 +79313,11 @@ func awsEc2query_serializeOpDocumentReplaceRouteInput(v *ReplaceRouteInput, valu
 	if v.NetworkInterfaceId != nil {
 		objectKey := object.Key("NetworkInterfaceId")
 		objectKey.String(*v.NetworkInterfaceId)
+	}
+
+	if v.OdbNetworkArn != nil {
+		objectKey := object.Key("OdbNetworkArn")
+		objectKey.String(*v.OdbNetworkArn)
 	}
 
 	if v.RouteTableId != nil {

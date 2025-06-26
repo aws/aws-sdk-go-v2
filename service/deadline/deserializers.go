@@ -6620,6 +6620,19 @@ func awsRestjson1_deserializeOpDocumentGetJobOutput(v **GetJobOutput, value inte
 				sv.TargetTaskRunStatus = types.JobTargetTaskRunStatus(jtv)
 			}
 
+		case "taskFailureRetryCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskFailureRetryCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TaskFailureRetryCount = ptr.Int32(int32(i64))
+			}
+
 		case "taskRunStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9440,6 +9453,19 @@ func awsRestjson1_deserializeOpDocumentGetStepOutput(v **GetStepOutput, value in
 					return fmt.Errorf("expected StepTargetTaskRunStatus to be of type string, got %T instead", value)
 				}
 				sv.TargetTaskRunStatus = types.StepTargetTaskRunStatus(jtv)
+			}
+
+		case "taskFailureRetryCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskFailureRetryCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TaskFailureRetryCount = ptr.Int32(int32(i64))
 			}
 
 		case "taskRunStatus":
@@ -23298,6 +23324,19 @@ func awsRestjson1_deserializeDocumentJobSearchSummary(v **types.JobSearchSummary
 				sv.TargetTaskRunStatus = types.JobTargetTaskRunStatus(jtv)
 			}
 
+		case "taskFailureRetryCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskFailureRetryCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TaskFailureRetryCount = ptr.Int32(int32(i64))
+			}
+
 		case "taskRunStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23529,6 +23568,19 @@ func awsRestjson1_deserializeDocumentJobSummary(v **types.JobSummary, value inte
 					return fmt.Errorf("expected JobTargetTaskRunStatus to be of type string, got %T instead", value)
 				}
 				sv.TargetTaskRunStatus = types.JobTargetTaskRunStatus(jtv)
+			}
+
+		case "taskFailureRetryCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskFailureRetryCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TaskFailureRetryCount = ptr.Int32(int32(i64))
 			}
 
 		case "taskRunStatus":
@@ -27587,6 +27639,19 @@ func awsRestjson1_deserializeDocumentStepSearchSummary(v **types.StepSearchSumma
 				sv.TargetTaskRunStatus = types.StepTargetTaskRunStatus(jtv)
 			}
 
+		case "taskFailureRetryCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskFailureRetryCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TaskFailureRetryCount = ptr.Int32(int32(i64))
+			}
+
 		case "taskRunStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -27762,6 +27827,19 @@ func awsRestjson1_deserializeDocumentStepSummary(v **types.StepSummary, value in
 					return fmt.Errorf("expected StepTargetTaskRunStatus to be of type string, got %T instead", value)
 				}
 				sv.TargetTaskRunStatus = types.StepTargetTaskRunStatus(jtv)
+			}
+
+		case "taskFailureRetryCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskFailureRetryCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TaskFailureRetryCount = ptr.Int32(int32(i64))
 			}
 
 		case "taskRunStatus":

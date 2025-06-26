@@ -156,6 +156,24 @@ func ExampleCopyFromSource_outputUsage() {
 
 var _ *types.ConversationSource
 
+func ExampleDataAccessorAuthenticationConfiguration_outputUsage() {
+	var union types.DataAccessorAuthenticationConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DataAccessorAuthenticationConfigurationMemberIdcTrustedTokenIssuerConfiguration:
+		_ = v.Value // Value is types.DataAccessorIdcTrustedTokenIssuerConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DataAccessorIdcTrustedTokenIssuerConfiguration
+
 func ExampleDocumentAttributeBoostingConfiguration_outputUsage() {
 	var union types.DocumentAttributeBoostingConfiguration
 	// type switches can be used to check the union value

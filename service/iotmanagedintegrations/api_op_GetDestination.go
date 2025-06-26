@@ -60,6 +60,8 @@ type GetDestinationOutput struct {
 
 	// A set of key/value pairs that are used to manage the customer-managed
 	// destination.
+	//
+	// Deprecated: Tags has been deprecated from this api
 	Tags map[string]string
 
 	// The timestamp value of when the destination update requset occurred.

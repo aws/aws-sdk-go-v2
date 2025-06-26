@@ -5020,6 +5020,11 @@ func awsRestjson1_deserializeOpDocumentGetDataAccessorOutput(v **GetDataAccessor
 				sv.ApplicationId = ptr.String(jtv)
 			}
 
+		case "authenticationDetail":
+			if err := awsRestjson1_deserializeDocumentDataAccessorAuthenticationDetail(&sv.AuthenticationDetail, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16363,6 +16368,11 @@ func awsRestjson1_deserializeDocumentDataAccessor(v **types.DataAccessor, value 
 
 	for key, value := range shape {
 		switch key {
+		case "authenticationDetail":
+			if err := awsRestjson1_deserializeDocumentDataAccessorAuthenticationDetail(&sv.AuthenticationDetail, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16438,6 +16448,172 @@ func awsRestjson1_deserializeDocumentDataAccessor(v **types.DataAccessor, value 
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataAccessorAuthenticationConfiguration(v *types.DataAccessorAuthenticationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.DataAccessorAuthenticationConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "idcTrustedTokenIssuerConfiguration":
+			var mv types.DataAccessorIdcTrustedTokenIssuerConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDataAccessorIdcTrustedTokenIssuerConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataAccessorAuthenticationConfigurationMemberIdcTrustedTokenIssuerConfiguration{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataAccessorAuthenticationDetail(v **types.DataAccessorAuthenticationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataAccessorAuthenticationDetail
+	if *v == nil {
+		sv = &types.DataAccessorAuthenticationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "authenticationConfiguration":
+			if err := awsRestjson1_deserializeDocumentDataAccessorAuthenticationConfiguration(&sv.AuthenticationConfiguration, value); err != nil {
+				return err
+			}
+
+		case "authenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataAccessorAuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationType = types.DataAccessorAuthenticationType(jtv)
+			}
+
+		case "externalIds":
+			if err := awsRestjson1_deserializeDocumentDataAccessorExternalIds(&sv.ExternalIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataAccessorExternalIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DataAccessorExternalId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataAccessorIdcTrustedTokenIssuerConfiguration(v **types.DataAccessorIdcTrustedTokenIssuerConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataAccessorIdcTrustedTokenIssuerConfiguration
+	if *v == nil {
+		sv = &types.DataAccessorIdcTrustedTokenIssuerConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "idcTrustedTokenIssuerArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdcTrustedTokenIssuerArn to be of type string, got %T instead", value)
+				}
+				sv.IdcTrustedTokenIssuerArn = ptr.String(jtv)
 			}
 
 		default:

@@ -2437,6 +2437,60 @@ func validateCustomPluginConfiguration(v *types.CustomPluginConfiguration) error
 	}
 }
 
+func validateDataAccessorAuthenticationConfiguration(v types.DataAccessorAuthenticationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataAccessorAuthenticationConfiguration"}
+	switch uv := v.(type) {
+	case *types.DataAccessorAuthenticationConfigurationMemberIdcTrustedTokenIssuerConfiguration:
+		if err := validateDataAccessorIdcTrustedTokenIssuerConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[idcTrustedTokenIssuerConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataAccessorAuthenticationDetail(v *types.DataAccessorAuthenticationDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataAccessorAuthenticationDetail"}
+	if len(v.AuthenticationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
+	}
+	if v.AuthenticationConfiguration != nil {
+		if err := validateDataAccessorAuthenticationConfiguration(v.AuthenticationConfiguration); err != nil {
+			invalidParams.AddNested("AuthenticationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataAccessorIdcTrustedTokenIssuerConfiguration(v *types.DataAccessorIdcTrustedTokenIssuerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataAccessorIdcTrustedTokenIssuerConfiguration"}
+	if v.IdcTrustedTokenIssuerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdcTrustedTokenIssuerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataSourceVpcConfiguration(v *types.DataSourceVpcConfiguration) error {
 	if v == nil {
 		return nil
@@ -3074,6 +3128,44 @@ func validateOrchestrationConfiguration(v *types.OrchestrationConfiguration) err
 	}
 }
 
+func validatePermissionCondition(v *types.PermissionCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PermissionCondition"}
+	if len(v.ConditionOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConditionOperator"))
+	}
+	if v.ConditionKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConditionKey"))
+	}
+	if v.ConditionValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConditionValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePermissionConditions(v []types.PermissionCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PermissionConditions"}
+	for i := range v {
+		if err := validatePermissionCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePersonalizationConfiguration(v *types.PersonalizationConfiguration) error {
 	if v == nil {
 		return nil
@@ -3558,6 +3650,11 @@ func validateOpAssociatePermissionInput(v *AssociatePermissionInput) error {
 	if v.Actions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
 	}
+	if v.Conditions != nil {
+		if err := validatePermissionConditions(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Principal == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
 	}
@@ -3793,6 +3890,11 @@ func validateOpCreateDataAccessorInput(v *CreateDataAccessorInput) error {
 	}
 	if v.DisplayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if v.AuthenticationDetail != nil {
+		if err := validateDataAccessorAuthenticationDetail(v.AuthenticationDetail); err != nil {
+			invalidParams.AddNested("AuthenticationDetail", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
@@ -4993,6 +5095,11 @@ func validateOpUpdateDataAccessorInput(v *UpdateDataAccessorInput) error {
 	} else if v.ActionConfigurations != nil {
 		if err := validateActionConfigurationList(v.ActionConfigurations); err != nil {
 			invalidParams.AddNested("ActionConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AuthenticationDetail != nil {
+		if err := validateDataAccessorAuthenticationDetail(v.AuthenticationDetail); err != nil {
+			invalidParams.AddNested("AuthenticationDetail", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

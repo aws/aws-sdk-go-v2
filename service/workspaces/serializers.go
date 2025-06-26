@@ -5444,6 +5444,57 @@ func (m *awsAwsjson11_serializeOpUpdateWorkspacesPool) HandleSerialize(ctx conte
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAccessEndpoint(v *types.AccessEndpoint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AccessEndpointType) > 0 {
+		ok := object.Key("AccessEndpointType")
+		ok.String(string(v.AccessEndpointType))
+	}
+
+	if v.VpcEndpointId != nil {
+		ok := object.Key("VpcEndpointId")
+		ok.String(*v.VpcEndpointId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAccessEndpointConfig(v *types.AccessEndpointConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessEndpoints != nil {
+		ok := object.Key("AccessEndpoints")
+		if err := awsAwsjson11_serializeDocumentAccessEndpointList(v.AccessEndpoints, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InternetFallbackProtocols != nil {
+		ok := object.Key("InternetFallbackProtocols")
+		if err := awsAwsjson11_serializeDocumentInternetFallbackProtocolList(v.InternetFallbackProtocols, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAccessEndpointList(v []types.AccessEndpoint, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAccessEndpoint(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentActiveDirectoryConfig(v *types.ActiveDirectoryConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5823,6 +5874,17 @@ func awsAwsjson11_serializeDocumentGlobalAcceleratorForWorkSpace(v *types.Global
 }
 
 func awsAwsjson11_serializeDocumentImageAssociatedResourceTypeList(v []types.ImageAssociatedResourceType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentInternetFallbackProtocolList(v []types.InternetFallbackProtocol, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -6426,6 +6488,13 @@ func awsAwsjson11_serializeDocumentUserStorage(v *types.UserStorage, value smith
 func awsAwsjson11_serializeDocumentWorkspaceAccessProperties(v *types.WorkspaceAccessProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccessEndpointConfig != nil {
+		ok := object.Key("AccessEndpointConfig")
+		if err := awsAwsjson11_serializeDocumentAccessEndpointConfig(v.AccessEndpointConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.DeviceTypeAndroid) > 0 {
 		ok := object.Key("DeviceTypeAndroid")

@@ -47,6 +47,8 @@ type CreateNotificationConfigurationInput struct {
 	ClientToken *string
 
 	// A set of key/value pairs that are used to manage the notification configuration.
+	//
+	// Deprecated: Tags has been deprecated from this api
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -52,6 +52,8 @@ type GetNotificationConfigurationOutput struct {
 	EventType types.EventType
 
 	// A set of key/value pairs that are used to manage the notification configuration.
+	//
+	// Deprecated: Tags has been deprecated for this api
 	Tags map[string]string
 
 	// The timestamp value of when the notification configuration was last updated.

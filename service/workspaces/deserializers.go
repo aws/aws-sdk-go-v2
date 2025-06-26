@@ -8047,6 +8047,15 @@ func awsAwsjson11_deserializeOpErrorModifyWorkspaceAccessProperties(response *sm
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterCombinationException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValuesException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValuesException(response, errorBody)
+
+	case strings.EqualFold("OperationNotSupportedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotSupportedException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -10925,6 +10934,41 @@ func awsAwsjson11_deserializeErrorInternalServerException(response *smithyhttp.R
 	return output
 }
 
+func awsAwsjson11_deserializeErrorInvalidParameterCombinationException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.InvalidParameterCombinationException{}
+	err := awsAwsjson11_deserializeDocumentInvalidParameterCombinationException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorInvalidParameterValuesException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -11522,6 +11566,130 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAccessEndpoint(v **types.AccessEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessEndpoint
+	if *v == nil {
+		sv = &types.AccessEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessEndpointType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessEndpointType to be of type string, got %T instead", value)
+				}
+				sv.AccessEndpointType = types.AccessEndpointType(jtv)
+			}
+
+		case "VpcEndpointId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AlphanumericDashUnderscoreNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VpcEndpointId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAccessEndpointConfig(v **types.AccessEndpointConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessEndpointConfig
+	if *v == nil {
+		sv = &types.AccessEndpointConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessEndpoints":
+			if err := awsAwsjson11_deserializeDocumentAccessEndpointList(&sv.AccessEndpoints, value); err != nil {
+				return err
+			}
+
+		case "InternetFallbackProtocols":
+			if err := awsAwsjson11_deserializeDocumentInternetFallbackProtocolList(&sv.InternetFallbackProtocols, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAccessEndpointList(v *[]types.AccessEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AccessEndpoint
+	if *v == nil {
+		cv = []types.AccessEndpoint{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AccessEndpoint
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAccessEndpoint(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -14283,6 +14451,82 @@ func awsAwsjson11_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInternetFallbackProtocolList(v *[]types.InternetFallbackProtocol, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InternetFallbackProtocol
+	if *v == nil {
+		cv = []types.InternetFallbackProtocol{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InternetFallbackProtocol
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected InternetFallbackProtocol to be of type string, got %T instead", value)
+			}
+			col = types.InternetFallbackProtocol(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInvalidParameterCombinationException(v **types.InvalidParameterCombinationException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidParameterCombinationException
+	if *v == nil {
+		sv = &types.InvalidParameterCombinationException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInvalidParameterValuesException(v **types.InvalidParameterValuesException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16792,6 +17036,11 @@ func awsAwsjson11_deserializeDocumentWorkspaceAccessProperties(v **types.Workspa
 
 	for key, value := range shape {
 		switch key {
+		case "AccessEndpointConfig":
+			if err := awsAwsjson11_deserializeDocumentAccessEndpointConfig(&sv.AccessEndpointConfig, value); err != nil {
+				return err
+			}
+
 		case "DeviceTypeAndroid":
 			if value != nil {
 				jtv, ok := value.(string)

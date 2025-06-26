@@ -163,6 +163,34 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Two or more of the selected parameter values cannot be used together.
+type InvalidParameterCombinationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidParameterCombinationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidParameterCombinationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidParameterCombinationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidParameterCombinationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // One or more parameter values are not valid.
 type InvalidParameterValuesException struct {
 	Message *string

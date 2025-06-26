@@ -113,6 +113,13 @@ func awsRestjson1_serializeOpDocumentAssociatePermissionInput(v *AssociatePermis
 		}
 	}
 
+	if v.Conditions != nil {
+		ok := object.Key("conditions")
+		if err := awsRestjson1_serializeDocumentPermissionConditions(v.Conditions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Principal != nil {
 		ok := object.Key("principal")
 		ok.String(*v.Principal)
@@ -1139,6 +1146,13 @@ func awsRestjson1_serializeOpDocumentCreateDataAccessorInput(v *CreateDataAccess
 	if v.ActionConfigurations != nil {
 		ok := object.Key("actionConfigurations")
 		if err := awsRestjson1_serializeDocumentActionConfigurationList(v.ActionConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AuthenticationDetail != nil {
+		ok := object.Key("authenticationDetail")
+		if err := awsRestjson1_serializeDocumentDataAccessorAuthenticationDetail(v.AuthenticationDetail, ok); err != nil {
 			return err
 		}
 	}
@@ -6708,6 +6722,13 @@ func awsRestjson1_serializeOpDocumentUpdateDataAccessorInput(v *UpdateDataAccess
 		}
 	}
 
+	if v.AuthenticationDetail != nil {
+		ok := object.Key("authenticationDetail")
+		if err := awsRestjson1_serializeDocumentDataAccessorAuthenticationDetail(v.AuthenticationDetail, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DisplayName != nil {
 		ok := object.Key("displayName")
 		ok.String(*v.DisplayName)
@@ -8531,6 +8552,73 @@ func awsRestjson1_serializeDocumentCustomPluginConfiguration(v *types.CustomPlug
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDataAccessorAuthenticationConfiguration(v types.DataAccessorAuthenticationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.DataAccessorAuthenticationConfigurationMemberIdcTrustedTokenIssuerConfiguration:
+		av := object.Key("idcTrustedTokenIssuerConfiguration")
+		if err := awsRestjson1_serializeDocumentDataAccessorIdcTrustedTokenIssuerConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataAccessorAuthenticationDetail(v *types.DataAccessorAuthenticationDetail, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthenticationConfiguration != nil {
+		ok := object.Key("authenticationConfiguration")
+		if err := awsRestjson1_serializeDocumentDataAccessorAuthenticationConfiguration(v.AuthenticationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("authenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
+	if v.ExternalIds != nil {
+		ok := object.Key("externalIds")
+		if err := awsRestjson1_serializeDocumentDataAccessorExternalIds(v.ExternalIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataAccessorExternalIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataAccessorIdcTrustedTokenIssuerConfiguration(v *types.DataAccessorIdcTrustedTokenIssuerConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdcTrustedTokenIssuerArn != nil {
+		ok := object.Key("idcTrustedTokenIssuerArn")
+		ok.String(*v.IdcTrustedTokenIssuerArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDataSourceConfiguration(v document.Interface, value smithyjson.Value) error {
 	if v == nil {
 		return nil
@@ -9326,6 +9414,54 @@ func awsRestjson1_serializeDocumentOrchestrationConfiguration(v *types.Orchestra
 		ok.String(string(v.Control))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPermissionCondition(v *types.PermissionCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConditionKey != nil {
+		ok := object.Key("conditionKey")
+		ok.String(*v.ConditionKey)
+	}
+
+	if len(v.ConditionOperator) > 0 {
+		ok := object.Key("conditionOperator")
+		ok.String(string(v.ConditionOperator))
+	}
+
+	if v.ConditionValues != nil {
+		ok := object.Key("conditionValues")
+		if err := awsRestjson1_serializeDocumentPermissionConditionValues(v.ConditionValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPermissionConditions(v []types.PermissionCondition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentPermissionCondition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPermissionConditionValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

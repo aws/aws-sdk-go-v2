@@ -82,6 +82,9 @@ type UpdateTableInput struct {
 	// [Read/write capacity modes]: https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html
 	CapacitySpecification *types.CapacitySpecification
 
+	// The CDC stream settings of the table.
+	CdcSpecification *types.CdcSpecification
+
 	// Enables client-side timestamps for the table. By default, the setting is
 	// disabled. You can enable client-side timestamps with the following option:
 	//

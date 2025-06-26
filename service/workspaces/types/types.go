@@ -7,6 +7,33 @@ import (
 	"time"
 )
 
+// Describes the access type and endpoint for a WorkSpace.
+type AccessEndpoint struct {
+
+	// Indicates the type of access endpoint.
+	AccessEndpointType AccessEndpointType
+
+	// Indicates the VPC endpoint to use for access.
+	VpcEndpointId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the access endpoint configuration for a WorkSpace.
+type AccessEndpointConfig struct {
+
+	// Indicates a list of access endpoints associated with this directory.
+	//
+	// This member is required.
+	AccessEndpoints []AccessEndpoint
+
+	// Indicates a list of protocols that fallback to using the public Internet when
+	// streaming over a VPC endpoint is not available.
+	InternetFallbackProtocols []InternetFallbackProtocol
+
+	noSmithyDocumentSerde
+}
+
 // Information about about the account link.
 type AccountLink struct {
 
@@ -1337,6 +1364,9 @@ type Workspace struct {
 //
 // [Amazon WorkSpaces Client Network Requirements]: https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-network-requirements.html
 type WorkspaceAccessProperties struct {
+
+	// Specifies the configuration for accessing the WorkSpace.
+	AccessEndpointConfig *AccessEndpointConfig
 
 	// Indicates whether users can use Android and Android-compatible Chrome OS
 	// devices to access their WorkSpaces.

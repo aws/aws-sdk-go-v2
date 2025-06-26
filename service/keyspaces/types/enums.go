@@ -2,6 +2,48 @@
 
 package types
 
+type CdcPropagateTags string
+
+// Enum values for CdcPropagateTags
+const (
+	CdcPropagateTagsTable CdcPropagateTags = "TABLE"
+	CdcPropagateTagsNone  CdcPropagateTags = "NONE"
+)
+
+// Values returns all known values for CdcPropagateTags. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CdcPropagateTags) Values() []CdcPropagateTags {
+	return []CdcPropagateTags{
+		"TABLE",
+		"NONE",
+	}
+}
+
+type CdcStatus string
+
+// Enum values for CdcStatus
+const (
+	CdcStatusEnabled   CdcStatus = "ENABLED"
+	CdcStatusEnabling  CdcStatus = "ENABLING"
+	CdcStatusDisabled  CdcStatus = "DISABLED"
+	CdcStatusDisabling CdcStatus = "DISABLING"
+)
+
+// Values returns all known values for CdcStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CdcStatus) Values() []CdcStatus {
+	return []CdcStatus{
+		"ENABLED",
+		"ENABLING",
+		"DISABLED",
+		"DISABLING",
+	}
+}
+
 type ClientSideTimestampsStatus string
 
 // Enum values for ClientSideTimestampsStatus
@@ -203,5 +245,28 @@ func (TypeStatus) Values() []TypeStatus {
 		"CREATING",
 		"DELETING",
 		"RESTORING",
+	}
+}
+
+type ViewType string
+
+// Enum values for ViewType
+const (
+	ViewTypeNewImage        ViewType = "NEW_IMAGE"
+	ViewTypeOldImage        ViewType = "OLD_IMAGE"
+	ViewTypeKeysOnly        ViewType = "KEYS_ONLY"
+	ViewTypeNewAndOldImages ViewType = "NEW_AND_OLD_IMAGES"
+)
+
+// Values returns all known values for ViewType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ViewType) Values() []ViewType {
+	return []ViewType{
+		"NEW_IMAGE",
+		"OLD_IMAGE",
+		"KEYS_ONLY",
+		"NEW_AND_OLD_IMAGES",
 	}
 }

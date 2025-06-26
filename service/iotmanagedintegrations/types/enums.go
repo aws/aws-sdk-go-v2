@@ -42,13 +42,40 @@ func (AbortCriteriaFailureType) Values() []AbortCriteriaFailureType {
 	}
 }
 
+type AssociationState string
+
+// Enum values for AssociationState
+const (
+	AssociationStateAssociationInProgress AssociationState = "ASSOCIATION_IN_PROGRESS"
+	AssociationStateAssociationFailed     AssociationState = "ASSOCIATION_FAILED"
+	AssociationStateAssociationSucceeded  AssociationState = "ASSOCIATION_SUCCEEDED"
+	AssociationStateAssociationDeleting   AssociationState = "ASSOCIATION_DELETING"
+	AssociationStateRefreshTokenExpired   AssociationState = "REFRESH_TOKEN_EXPIRED"
+)
+
+// Values returns all known values for AssociationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationState) Values() []AssociationState {
+	return []AssociationState{
+		"ASSOCIATION_IN_PROGRESS",
+		"ASSOCIATION_FAILED",
+		"ASSOCIATION_SUCCEEDED",
+		"ASSOCIATION_DELETING",
+		"REFRESH_TOKEN_EXPIRED",
+	}
+}
+
 type AuthMaterialType string
 
 // Enum values for AuthMaterialType
 const (
-	AuthMaterialTypeWifiSetupQrBarCode AuthMaterialType = "WIFI_SETUP_QR_BAR_CODE"
-	AuthMaterialTypeZwaveQrBarCode     AuthMaterialType = "ZWAVE_QR_BAR_CODE"
-	AuthMaterialTypeZigbeeQrBarCode    AuthMaterialType = "ZIGBEE_QR_BAR_CODE"
+	AuthMaterialTypeCustomProtocolQrBarCode AuthMaterialType = "CUSTOM_PROTOCOL_QR_BAR_CODE"
+	AuthMaterialTypeWifiSetupQrBarCode      AuthMaterialType = "WIFI_SETUP_QR_BAR_CODE"
+	AuthMaterialTypeZwaveQrBarCode          AuthMaterialType = "ZWAVE_QR_BAR_CODE"
+	AuthMaterialTypeZigbeeQrBarCode         AuthMaterialType = "ZIGBEE_QR_BAR_CODE"
+	AuthMaterialTypeDiscoveredDevice        AuthMaterialType = "DISCOVERED_DEVICE"
 )
 
 // Values returns all known values for AuthMaterialType. Note that this can be
@@ -57,9 +84,47 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthMaterialType) Values() []AuthMaterialType {
 	return []AuthMaterialType{
+		"CUSTOM_PROTOCOL_QR_BAR_CODE",
 		"WIFI_SETUP_QR_BAR_CODE",
 		"ZWAVE_QR_BAR_CODE",
 		"ZIGBEE_QR_BAR_CODE",
+		"DISCOVERED_DEVICE",
+	}
+}
+
+type AuthType string
+
+// Enum values for AuthType
+const (
+	AuthTypeOauth AuthType = "OAUTH"
+)
+
+// Values returns all known values for AuthType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthType) Values() []AuthType {
+	return []AuthType{
+		"OAUTH",
+	}
+}
+
+type CloudConnectorType string
+
+// Enum values for CloudConnectorType
+const (
+	CloudConnectorTypeListed   CloudConnectorType = "LISTED"
+	CloudConnectorTypeUnlisted CloudConnectorType = "UNLISTED"
+)
+
+// Values returns all known values for CloudConnectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CloudConnectorType) Values() []CloudConnectorType {
+	return []CloudConnectorType{
+		"LISTED",
+		"UNLISTED",
 	}
 }
 
@@ -81,6 +146,29 @@ func (ConfigurationState) Values() []ConfigurationState {
 		"ENABLED",
 		"UPDATE_IN_PROGRESS",
 		"UPDATE_FAILED",
+	}
+}
+
+type ConnectorEventOperation string
+
+// Enum values for ConnectorEventOperation
+const (
+	ConnectorEventOperationDeviceCommandResponse ConnectorEventOperation = "DEVICE_COMMAND_RESPONSE"
+	ConnectorEventOperationDeviceDiscovery       ConnectorEventOperation = "DEVICE_DISCOVERY"
+	ConnectorEventOperationDeviceEvent           ConnectorEventOperation = "DEVICE_EVENT"
+	ConnectorEventOperationDeviceCommandRequest  ConnectorEventOperation = "DEVICE_COMMAND_REQUEST"
+)
+
+// Values returns all known values for ConnectorEventOperation. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorEventOperation) Values() []ConnectorEventOperation {
+	return []ConnectorEventOperation{
+		"DEVICE_COMMAND_RESPONSE",
+		"DEVICE_DISCOVERY",
+		"DEVICE_EVENT",
+		"DEVICE_COMMAND_REQUEST",
 	}
 }
 
@@ -184,6 +272,27 @@ func (DiscoveryAuthMaterialType) Values() []DiscoveryAuthMaterialType {
 	}
 }
 
+type DiscoveryModification string
+
+// Enum values for DiscoveryModification
+const (
+	DiscoveryModificationDiscovered DiscoveryModification = "DISCOVERED"
+	DiscoveryModificationUpdated    DiscoveryModification = "UPDATED"
+	DiscoveryModificationNoChange   DiscoveryModification = "NO_CHANGE"
+)
+
+// Values returns all known values for DiscoveryModification. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DiscoveryModification) Values() []DiscoveryModification {
+	return []DiscoveryModification{
+		"DISCOVERED",
+		"UPDATED",
+		"NO_CHANGE",
+	}
+}
+
 type DiscoveryType string
 
 // Enum values for DiscoveryType
@@ -191,6 +300,7 @@ const (
 	DiscoveryTypeZwave  DiscoveryType = "ZWAVE"
 	DiscoveryTypeZigbee DiscoveryType = "ZIGBEE"
 	DiscoveryTypeCloud  DiscoveryType = "CLOUD"
+	DiscoveryTypeCustom DiscoveryType = "CUSTOM"
 )
 
 // Values returns all known values for DiscoveryType. Note that this can be
@@ -202,6 +312,7 @@ func (DiscoveryType) Values() []DiscoveryType {
 		"ZWAVE",
 		"ZIGBEE",
 		"CLOUD",
+		"CUSTOM",
 	}
 }
 
@@ -224,18 +335,37 @@ func (EncryptionType) Values() []EncryptionType {
 	}
 }
 
+type EndpointType string
+
+// Enum values for EndpointType
+const (
+	EndpointTypeLambda EndpointType = "LAMBDA"
+)
+
+// Values returns all known values for EndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointType) Values() []EndpointType {
+	return []EndpointType{
+		"LAMBDA",
+	}
+}
+
 type EventType string
 
 // Enum values for EventType
 const (
-	EventTypeDeviceCommand        EventType = "DEVICE_COMMAND"
-	EventTypeDeviceCommandRequest EventType = "DEVICE_COMMAND_REQUEST"
-	EventTypeDeviceEvent          EventType = "DEVICE_EVENT"
-	EventTypeDeviceLifeCycle      EventType = "DEVICE_LIFE_CYCLE"
-	EventTypeDeviceState          EventType = "DEVICE_STATE"
-	EventTypeDeviceOta            EventType = "DEVICE_OTA"
-	EventTypeConnectorAssociation EventType = "CONNECTOR_ASSOCIATION"
-	EventTypeConnectorErrorReport EventType = "CONNECTOR_ERROR_REPORT"
+	EventTypeDeviceCommand         EventType = "DEVICE_COMMAND"
+	EventTypeDeviceCommandRequest  EventType = "DEVICE_COMMAND_REQUEST"
+	EventTypeDeviceDiscoveryStatus EventType = "DEVICE_DISCOVERY_STATUS"
+	EventTypeDeviceEvent           EventType = "DEVICE_EVENT"
+	EventTypeDeviceLifeCycle       EventType = "DEVICE_LIFE_CYCLE"
+	EventTypeDeviceState           EventType = "DEVICE_STATE"
+	EventTypeDeviceOta             EventType = "DEVICE_OTA"
+	EventTypeConnectorAssociation  EventType = "CONNECTOR_ASSOCIATION"
+	EventTypeAccountAssociation    EventType = "ACCOUNT_ASSOCIATION"
+	EventTypeConnectorErrorReport  EventType = "CONNECTOR_ERROR_REPORT"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
@@ -246,11 +376,13 @@ func (EventType) Values() []EventType {
 	return []EventType{
 		"DEVICE_COMMAND",
 		"DEVICE_COMMAND_REQUEST",
+		"DEVICE_DISCOVERY_STATUS",
 		"DEVICE_EVENT",
 		"DEVICE_LIFE_CYCLE",
 		"DEVICE_STATE",
 		"DEVICE_OTA",
 		"CONNECTOR_ASSOCIATION",
+		"ACCOUNT_ASSOCIATION",
 		"CONNECTOR_ERROR_REPORT",
 	}
 }
@@ -573,5 +705,25 @@ func (SchemaVersionVisibility) Values() []SchemaVersionVisibility {
 	return []SchemaVersionVisibility{
 		"PUBLIC",
 		"PRIVATE",
+	}
+}
+
+type TokenEndpointAuthenticationScheme string
+
+// Enum values for TokenEndpointAuthenticationScheme
+const (
+	TokenEndpointAuthenticationSchemeHttpBasic              TokenEndpointAuthenticationScheme = "HTTP_BASIC"
+	TokenEndpointAuthenticationSchemeRequestBodyCredentials TokenEndpointAuthenticationScheme = "REQUEST_BODY_CREDENTIALS"
+)
+
+// Values returns all known values for TokenEndpointAuthenticationScheme. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TokenEndpointAuthenticationScheme) Values() []TokenEndpointAuthenticationScheme {
+	return []TokenEndpointAuthenticationScheme{
+		"HTTP_BASIC",
+		"REQUEST_BODY_CREDENTIALS",
 	}
 }
