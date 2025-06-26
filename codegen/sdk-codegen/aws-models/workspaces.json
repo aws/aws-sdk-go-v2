@@ -191,6 +191,64 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.workspaces#AccessEndpoint": {
+            "type": "structure",
+            "members": {
+                "AccessEndpointType": {
+                    "target": "com.amazonaws.workspaces#AccessEndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of access endpoint.</p>"
+                    }
+                },
+                "VpcEndpointId": {
+                    "target": "com.amazonaws.workspaces#AlphanumericDashUnderscoreNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the VPC endpoint to use for access.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the access type and endpoint for a WorkSpace.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#AccessEndpointConfig": {
+            "type": "structure",
+            "members": {
+                "AccessEndpoints": {
+                    "target": "com.amazonaws.workspaces#AccessEndpointList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates a list of access endpoints associated with this directory.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InternetFallbackProtocols": {
+                    "target": "com.amazonaws.workspaces#InternetFallbackProtocolList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates a list of protocols that fallback to using the public Internet when streaming over a VPC endpoint is not available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the access endpoint configuration for a WorkSpace.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#AccessEndpointList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#AccessEndpoint"
+            }
+        },
+        "com.amazonaws.workspaces#AccessEndpointType": {
+            "type": "enum",
+            "members": {
+                "STREAMING_WSP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STREAMING_WSP"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workspaces#AccessPropertyValue": {
             "type": "enum",
             "members": {
@@ -391,6 +449,12 @@
         },
         "com.amazonaws.workspaces#Alias": {
             "type": "string"
+        },
+        "com.amazonaws.workspaces#AlphanumericDashUnderscoreNonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9\\_\\-]{1,1000}$"
+            }
         },
         "com.amazonaws.workspaces#AmazonUuid": {
             "type": "string",
@@ -6216,6 +6280,38 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.workspaces#InternetFallbackProtocol": {
+            "type": "enum",
+            "members": {
+                "PCOIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCOIP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#InternetFallbackProtocolList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#InternetFallbackProtocol"
+            }
+        },
+        "com.amazonaws.workspaces#InvalidParameterCombinationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspaces#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception error message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Two or more of the selected parameter values cannot be used together.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.workspaces#InvalidParameterValuesException": {
             "type": "structure",
             "members": {
@@ -7228,6 +7324,15 @@
             "errors": [
                 {
                     "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
                 },
                 {
                     "target": "com.amazonaws.workspaces#ResourceNotFoundException"
@@ -10317,6 +10422,12 @@
                     "target": "com.amazonaws.workspaces#AccessPropertyValue",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether users can access their WorkSpaces through a WorkSpaces Thin Client.</p>"
+                    }
+                },
+                "AccessEndpointConfig": {
+                    "target": "com.amazonaws.workspaces#AccessEndpointConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the configuration for accessing the WorkSpace.</p>"
                     }
                 }
             },

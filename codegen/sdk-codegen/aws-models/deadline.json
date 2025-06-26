@@ -102,7 +102,7 @@
                 "name": {
                     "target": "com.amazonaws.deadline#AcceleratorName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the chip used by the GPU accelerator.</p> <p>If you specify <code>l4</code> as the name of the accelerator, you must specify <code>latest</code> or <code>grid:r550</code> as the runtime.</p> <p>The available GPU accelerators are:</p> <ul> <li> <p> <code>t4</code> - NVIDIA T4 Tensor Core GPU</p> </li> <li> <p> <code>a10g</code> - NVIDIA A10G Tensor Core GPU</p> </li> <li> <p> <code>l4</code> - NVIDIA L4 Tensor Core GPU</p> </li> <li> <p> <code>l40s</code> - NVIDIA L40S Tensor Core GPU</p> </li> </ul>",
+                        "smithy.api#documentation": "<p>The name of the chip used by the GPU accelerator.</p> <p>If you specify <code>l4</code> as the name of the accelerator, you must specify <code>latest</code> or <code>grid:r570</code> as the runtime.</p> <p>The available GPU accelerators are:</p> <ul> <li> <p> <code>t4</code> - NVIDIA T4 Tensor Core GPU</p> </li> <li> <p> <code>a10g</code> - NVIDIA A10G Tensor Core GPU</p> </li> <li> <p> <code>l4</code> - NVIDIA L4 Tensor Core GPU</p> </li> <li> <p> <code>l40s</code> - NVIDIA L40S Tensor Core GPU</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -110,7 +110,7 @@
                     "target": "com.amazonaws.deadline#AcceleratorRuntime",
                     "traits": {
                         "smithy.api#default": "latest",
-                        "smithy.api#documentation": "<p>Specifies the runtime driver to use for the GPU accelerator. You must use the same runtime for all GPUs. </p> <p>You can choose from the following runtimes:</p> <ul> <li> <p> <code>latest</code> - Use the latest runtime available for the chip. If you specify <code>latest</code> and a new version of the runtime is released, the new version of the runtime is used.</p> </li> <li> <p> <code>grid:r550</code> - <a href=\"https://docs.nvidia.com/vgpu/17.0/index.html\">NVIDIA vGPU software 17</a> </p> </li> <li> <p> <code>grid:r535</code> - <a href=\"https://docs.nvidia.com/vgpu/16.0/index.html\">NVIDIA vGPU software 16</a> </p> </li> </ul> <p>If you don't specify a runtime, Deadline Cloud uses <code>latest</code> as the default. However, if you have multiple accelerators and specify <code>latest</code> for some and leave others blank, Deadline Cloud raises an exception.</p>"
+                        "smithy.api#documentation": "<p>Specifies the runtime driver to use for the GPU accelerator. You must use the same runtime for all GPUs. </p> <p>You can choose from the following runtimes:</p> <ul> <li> <p> <code>latest</code> - Use the latest runtime available for the chip. If you specify <code>latest</code> and a new version of the runtime is released, the new version of the runtime is used.</p> </li> <li> <p> <code>grid:r570</code> - <a href=\"https://docs.nvidia.com/vgpu/18.0/index.html\">NVIDIA vGPU software 18</a> </p> </li> <li> <p> <code>grid:r535</code> - <a href=\"https://docs.nvidia.com/vgpu/16.0/index.html\">NVIDIA vGPU software 16</a> </p> </li> </ul> <p>If you don't specify a runtime, Deadline Cloud uses <code>latest</code> as the default. However, if you have multiple accelerators and specify <code>latest</code> for some and leave others blank, Deadline Cloud raises an exception.</p>"
                     }
                 }
             },
@@ -1271,7 +1271,13 @@
             "traits": {
                 "aws.iam#iamAction": {
                     "name": "AssumeQueueRoleForWorker",
-                    "documentation": "Grants permission to assume a queue role for a worker"
+                    "documentation": "Grants permission to assume a queue role for a worker",
+                    "resources": {
+                        "required": {
+                            "worker": {},
+                            "queue": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Allows a worker to assume a queue role.</p>",
                 "smithy.api#endpoint": {
@@ -1321,12 +1327,7 @@
                 }
             },
             "traits": {
-                "smithy.api#input": {},
-                "smithy.api#references": [
-                    {
-                        "resource": "com.amazonaws.deadline#QueueResource"
-                    }
-                ]
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.deadline#AssumeQueueRoleForWorkerResponse": {
@@ -3019,7 +3020,10 @@
                 }
             ],
             "traits": {
-                "aws.iam#conditionKeys": [],
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "aws.iam#iamAction": {
                     "name": "CreateMonitor",
                     "documentation": "Grants permission to create a monitor",
@@ -7746,7 +7750,7 @@
                 "status": {
                     "target": "com.amazonaws.deadline#FleetStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Auto Scaling status of the fleet.</p>",
+                        "smithy.api#documentation": "<p>The status of the fleet.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7871,7 +7875,12 @@
                     "documentation": "Grants permission to get a job",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Gets a Deadline Cloud job.</p>",
                 "smithy.api#endpoint": {
@@ -8109,6 +8118,12 @@
                     "target": "com.amazonaws.deadline#TaskRunStatusCounts",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of tasks running on the job.</p>"
+                    }
+                },
+                "taskFailureRetryCount": {
+                    "target": "com.amazonaws.deadline#TaskFailureRetryCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of times tasks from the job failed and were retried.</p>"
                     }
                 },
                 "storageProfileId": {
@@ -9338,7 +9353,12 @@
                     "documentation": "Grants permission to get a session for a job",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Gets a session.</p>",
                 "smithy.api#endpoint": {
@@ -9381,9 +9401,15 @@
                 "aws.iam#iamAction": {
                     "name": "GetSessionAction",
                     "documentation": "Grants permission to get a session action for a job",
+                    "relativeDocumentation": "API_GetSessionAction.html",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Gets a session action for the job.</p>",
                 "smithy.api#endpoint": {
@@ -9793,9 +9819,15 @@
                 "aws.iam#iamAction": {
                     "name": "GetStep",
                     "documentation": "Grants permission to get a step in a job",
+                    "relativeDocumentation": "API_GetStep.html",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Gets a step.</p>",
                 "smithy.api#endpoint": {
@@ -9891,6 +9923,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of tasks running on the job.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "taskFailureRetryCount": {
+                    "target": "com.amazonaws.deadline#TaskFailureRetryCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of times tasks from the step failed and were retried.</p>"
                     }
                 },
                 "targetTaskRunStatus": {
@@ -10237,9 +10275,15 @@
                 "aws.iam#iamAction": {
                     "name": "GetTask",
                     "documentation": "Grants permission to get a job task",
+                    "relativeDocumentation": "API_GetTask.html",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Gets a task.</p>",
                 "smithy.api#endpoint": {
@@ -10414,9 +10458,15 @@
                 "aws.iam#iamAction": {
                     "name": "GetWorker",
                     "documentation": "Grants permission to get a worker",
+                    "relativeDocumentation": "API_GetWorker.html",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "worker": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Gets a worker.</p>",
                 "smithy.api#endpoint": {
@@ -11491,6 +11541,12 @@
                         "smithy.api#documentation": "<p>The number of tasks running on the job.</p>"
                     }
                 },
+                "taskFailureRetryCount": {
+                    "target": "com.amazonaws.deadline#TaskFailureRetryCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of times tasks from the job failed and were retried.</p>"
+                    }
+                },
                 "priority": {
                     "target": "com.amazonaws.deadline#JobPriority",
                     "traits": {
@@ -11654,6 +11710,12 @@
                     "target": "com.amazonaws.deadline#TaskRunStatusCounts",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of tasks running on the job.</p>"
+                    }
+                },
+                "taskFailureRetryCount": {
+                    "target": "com.amazonaws.deadline#TaskFailureRetryCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of times tasks from the job failed and were retried.</p>"
                     }
                 },
                 "maxFailedTasksCount": {
@@ -13984,7 +14046,12 @@
                     "documentation": "Grants permission to list all session actions for a job",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Lists session actions.</p>",
                 "smithy.api#endpoint": {
@@ -14116,7 +14183,12 @@
                     "documentation": "Grants permission to list all sessions for a job",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Lists sessions.</p>",
                 "smithy.api#endpoint": {
@@ -14620,7 +14692,12 @@
                     "documentation": "Grants permission to list all steps for a job",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Lists steps for a job.</p>",
                 "smithy.api#endpoint": {
@@ -14953,7 +15030,17 @@
                 ],
                 "aws.iam#iamAction": {
                     "name": "ListTagsForResource",
-                    "documentation": "Grants permission to list all tags on specified Deadline Cloud resources"
+                    "documentation": "Grants permission to list all tags on specified Deadline Cloud resources",
+                    "resources": {
+                        "optional": {
+                            "farm": {},
+                            "fleet": {},
+                            "license-endpoint": {},
+                            "queue": {},
+                            "worker": {},
+                            "monitor": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Lists tags for a resource.</p>",
                 "smithy.api#endpoint": {
@@ -15015,6 +15102,12 @@
                             "fleetId": "resourceArn",
                             "workerId": "resourceArn"
                         }
+                    },
+                    {
+                        "resource": "com.amazonaws.deadline#MonitorResource",
+                        "ids": {
+                            "monitorId": "resourceArn"
+                        }
                     }
                 ]
             }
@@ -15064,7 +15157,12 @@
                     "documentation": "Grants permission to list all tasks for a job",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Lists tasks for a job.</p>",
                 "smithy.api#endpoint": {
@@ -15189,6 +15287,7 @@
                 "aws.iam#iamAction": {
                     "name": "ListWorkers",
                     "documentation": "Grants permission to list all workers in a fleet",
+                    "relativeDocumentation": "API_ListWorkers.html",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
                     ]
@@ -15673,7 +15772,9 @@
                 "aws.api#arn": {
                     "template": "monitor/{monitorId}"
                 },
-                "aws.iam#conditionKeys": [],
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
                     "name": "monitor"
@@ -18889,6 +18990,12 @@
                         "smithy.api#documentation": "<p>The number of tasks running on the job.</p>"
                     }
                 },
+                "taskFailureRetryCount": {
+                    "target": "com.amazonaws.deadline#TaskFailureRetryCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of times tasks from the step failed and were retried.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.deadline#CreatedAt",
                     "traits": {
@@ -18966,6 +19073,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of tasks running on the job.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "taskFailureRetryCount": {
+                    "target": "com.amazonaws.deadline#TaskFailureRetryCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of times tasks from the step failed and were retried.</p>"
                     }
                 },
                 "targetTaskRunStatus": {
@@ -19284,7 +19397,17 @@
                 ],
                 "aws.iam#iamAction": {
                     "name": "TagResource",
-                    "documentation": "Grants permission to add or overwrite one or more tags for the specified Deadline Cloud resource"
+                    "documentation": "Grants permission to add or overwrite one or more tags for the specified Deadline Cloud resource",
+                    "resources": {
+                        "optional": {
+                            "farm": {},
+                            "fleet": {},
+                            "license-endpoint": {},
+                            "queue": {},
+                            "worker": {},
+                            "monitor": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Tags a resource using the resource's ARN and desired tags.</p>",
                 "smithy.api#endpoint": {
@@ -19352,6 +19475,12 @@
                             "fleetId": "resourceArn",
                             "workerId": "resourceArn"
                         }
+                    },
+                    {
+                        "resource": "com.amazonaws.deadline#MonitorResource",
+                        "ids": {
+                            "monitorId": "resourceArn"
+                        }
                     }
                 ]
             }
@@ -19370,6 +19499,15 @@
             },
             "value": {
                 "target": "com.amazonaws.deadline#String"
+            }
+        },
+        "com.amazonaws.deadline#TaskFailureRetryCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 2147483647
+                }
             }
         },
         "com.amazonaws.deadline#TaskId": {
@@ -19884,7 +20022,17 @@
                 ],
                 "aws.iam#iamAction": {
                     "name": "UntagResource",
-                    "documentation": "Grants permission to disassociate one or more tags from the specified Deadline Cloud resource"
+                    "documentation": "Grants permission to disassociate one or more tags from the specified Deadline Cloud resource",
+                    "resources": {
+                        "optional": {
+                            "farm": {},
+                            "fleet": {},
+                            "license-endpoint": {},
+                            "queue": {},
+                            "worker": {},
+                            "monitor": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Removes a tag from a resource using the resource's ARN and tag to remove.</p>",
                 "smithy.api#endpoint": {
@@ -19954,6 +20102,12 @@
                             "farmId": "resourceArn",
                             "fleetId": "resourceArn",
                             "workerId": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.deadline#MonitorResource",
+                        "ids": {
+                            "monitorId": "resourceArn"
                         }
                     }
                 ]
@@ -20334,9 +20488,15 @@
                 "aws.iam#iamAction": {
                     "name": "UpdateJob",
                     "documentation": "Grants permission to update a job",
+                    "relativeDocumentation": "API_UpdateJob.html",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Updates a job. </p> <p>When you change the status of the job to <code>ARCHIVED</code>, the job can't be scheduled or archived.</p> <important> <p>An archived jobs and its steps and tasks are deleted after 120 days. The job can't be recovered.</p> </important>",
                 "smithy.api#endpoint": {
@@ -21157,9 +21317,15 @@
                 "aws.iam#iamAction": {
                     "name": "UpdateSession",
                     "documentation": "Grants permission to update a session for a job",
+                    "relativeDocumentation": "API_UpdateSession.html",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Updates a session.</p>",
                 "smithy.api#endpoint": {
@@ -21266,9 +21432,15 @@
                 "aws.iam#iamAction": {
                     "name": "UpdateStep",
                     "documentation": "Grants permission to update a step for a job",
+                    "relativeDocumentation": "API_UpdateStep.html",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Updates a step.</p>",
                 "smithy.api#endpoint": {
@@ -21484,9 +21656,15 @@
                 "aws.iam#iamAction": {
                     "name": "UpdateTask",
                     "documentation": "Grants permission to update a task",
+                    "relativeDocumentation": "API_UpdateTask.html",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember"
-                    ]
+                    ],
+                    "resources": {
+                        "required": {
+                            "job": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Updates a task.</p>",
                 "smithy.api#endpoint": {
@@ -22367,7 +22545,8 @@
                 },
                 "aws.iam#conditionKeys": [
                     "deadline:FarmMembershipLevels",
-                    "deadline:FleetMembershipLevels"
+                    "deadline:FleetMembershipLevels",
+                    "aws:ResourceTag/${TagKey}"
                 ],
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {

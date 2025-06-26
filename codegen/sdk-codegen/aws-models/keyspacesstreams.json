@@ -1,0 +1,1578 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.keyspacesstreams#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You don't have sufficient permissions to perform this action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AccessDeniedException",
+                    "httpResponseCode": 403
+                },
+                "smithy.api#documentation": "<p>You don't have sufficient access permissions to perform this operation. </p> <p>This exception occurs when your IAM user or role lacks the required permissions to access the Amazon Keyspaces resource or perform the requested action. Check your IAM policies and ensure they grant the necessary permissions.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.keyspacesstreams#Date": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.keyspacesstreams#GetRecords": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.keyspacesstreams#GetRecordsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.keyspacesstreams#GetRecordsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.keyspacesstreams#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves data records from a specified shard in an Amazon Keyspaces data stream. This operation returns a collection of data records from the shard, including the primary key columns and information about modifications made to the captured table data. Each record represents a single data modification in the Amazon Keyspaces table and includes metadata about when the change occurred.</p>"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#GetRecordsInput": {
+            "type": "structure",
+            "members": {
+                "shardIterator": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardIterator",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the shard iterator. A shard iterator specifies the position in the shard from which you want to start reading data records sequentially. You obtain this value by calling the <code>GetShardIterator</code> operation. Each shard iterator is valid for 5 minutes after creation. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of records to return in a single <code>GetRecords</code> request. Default value is 1000. You can specify a limit between 1 and 10000, but the actual number returned might be less than the specified maximum if the size of the data for the returned records exceeds the internal size limit. </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.keyspacesstreams#GetRecordsOutput": {
+            "type": "structure",
+            "members": {
+                "changeRecords": {
+                    "target": "com.amazonaws.keyspacesstreams#RecordList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of change data records retrieved from the specified shard. Each record represents a single data modification (insert, update, or delete) to a row in the Amazon Keyspaces table. Records include the primary key columns and information about what data was modified. </p>"
+                    }
+                },
+                "nextShardIterator": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardIterator",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The next position in the shard from which to start sequentially reading data records. If null, the shard has been closed and the requested iterator doesn't return any more data. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.keyspacesstreams#GetShardIterator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.keyspacesstreams#GetShardIteratorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.keyspacesstreams#GetShardIteratorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.keyspacesstreams#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a shard iterator that serves as a bookmark for reading data from a specific position in an Amazon Keyspaces data stream's shard. The shard iterator specifies the shard position from which to start reading data records sequentially. You can specify whether to begin reading at the latest record, the oldest record, or at a particular sequence number within the shard.</p>"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#GetShardIteratorInput": {
+            "type": "structure",
+            "members": {
+                "streamArn": {
+                    "target": "com.amazonaws.keyspacesstreams#StreamArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the stream for which to get the shard iterator. The ARN uniquely identifies the stream within Amazon Keyspaces. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shardId": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier of the shard within the stream. The shard ID uniquely identifies a subset of the stream's data records that you want to access. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shardIteratorType": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardIteratorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines how the shard iterator is positioned. Must be one of the following:</p> <ul> <li> <p> <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the shard, which is the oldest data record in the shard.</p> </li> <li> <p> <code>AT_SEQUENCE_NUMBER</code> - Start reading exactly from the specified sequence number.</p> </li> <li> <p> <code>AFTER_SEQUENCE_NUMBER</code> - Start reading right after the specified sequence number.</p> </li> <li> <p> <code>LATEST</code> - Start reading just after the most recent record in the shard, so that you always read the most recent data.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sequenceNumber": {
+                    "target": "com.amazonaws.keyspacesstreams#SequenceNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The sequence number of the data record in the shard from which to start reading. Required if <code>ShardIteratorType</code> is <code>AT_SEQUENCE_NUMBER</code> or <code>AFTER_SEQUENCE_NUMBER</code>. This parameter is ignored for other iterator types. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.keyspacesstreams#GetShardIteratorOutput": {
+            "type": "structure",
+            "members": {
+                "shardIterator": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardIterator",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier for the shard iterator. This value is used in the <code>GetRecords</code> operation to retrieve data records from the specified shard. Each shard iterator expires 5 minutes after it is returned to the requester. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.keyspacesstreams#GetStream": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.keyspacesstreams#GetStreamInput"
+            },
+            "output": {
+                "target": "com.amazonaws.keyspacesstreams#GetStreamOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.keyspacesstreams#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns detailed information about a specific data capture stream for an Amazon Keyspaces table. The information includes the stream's Amazon Resource Name (ARN), creation time, current status, retention period, shard composition, and associated table details. This operation helps you monitor and manage the configuration of your Amazon Keyspaces data streams.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "shards"
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#GetStreamInput": {
+            "type": "structure",
+            "members": {
+                "streamArn": {
+                    "target": "com.amazonaws.keyspacesstreams#StreamArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the stream for which detailed information is requested. This uniquely identifies the specific stream you want to get information about. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of shard objects to return in a single <code>GetStream</code> request. Default value is 100. The minimum value is 1 and the maximum value is 1000. </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "shardFilter": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Optional filter criteria to apply when retrieving shards. You can filter shards based on their state or other attributes to narrow down the results returned by the <code>GetStream</code> operation. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardIdToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An optional pagination token provided by a previous <code>GetStream</code> operation. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>maxResults</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.keyspacesstreams#GetStreamOutput": {
+            "type": "structure",
+            "members": {
+                "streamArn": {
+                    "target": "com.amazonaws.keyspacesstreams#StreamArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that uniquely identifies the stream within Amazon Keyspaces. This ARN can be used in other API operations to reference this specific stream. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "streamLabel": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A timestamp that serves as a unique identifier for this stream, used for debugging and monitoring purposes. The stream label represents the point in time when the stream was created. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "streamStatus": {
+                    "target": "com.amazonaws.keyspacesstreams#StreamStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the stream. Values can be <code>ENABLING</code>, <code>ENABLED</code>, <code>DISABLING</code>, or <code>DISABLED</code>. Operations on the stream depend on its current status. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "streamViewType": {
+                    "target": "com.amazonaws.keyspacesstreams#StreamViewType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The format of the data records in this stream. Currently, this can be one of the following options:</p> <ul> <li> <p> <code>NEW_AND_OLD_IMAGES</code> - both versions of the row, before and after the change. This is the default.</p> </li> <li> <p> <code>NEW_IMAGE</code> - the version of the row after the change.</p> </li> <li> <p> <code>OLD_IMAGE</code> - the version of the row before the change.</p> </li> <li> <p> <code>KEYS_ONLY</code> - the partition and clustering keys of the row that was changed.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationRequestDateTime": {
+                    "target": "com.amazonaws.keyspacesstreams#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The date and time when the request to create this stream was issued. The value is represented in ISO 8601 format. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "keyspaceName": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the keyspace containing the table associated with this stream. The keyspace name is part of the table's hierarchical identifier in Amazon Keyspaces. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tableName": {
+                    "target": "com.amazonaws.keyspacesstreams#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the table associated with this stream. The stream captures changes to rows in this Amazon Keyspaces table. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shards": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardDescriptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of shard objects associated with this stream. Each shard contains a subset of the stream's data records and has its own unique identifier. The collection of shards represents the complete stream data. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardIdToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A pagination token that can be used in a subsequent <code>GetStream</code> request. This token is returned if the response contains more shards than can be returned in a single response. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.keyspacesstreams#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service encountered an internal error. Try your request again.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InternalServerException",
+                    "httpResponseCode": 500
+                },
+                "smithy.api#documentation": "<p>The Amazon Keyspaces service encountered an unexpected error while processing the request. </p> <p>This internal server error is not related to your request parameters. Retry your request after a brief delay. If the issue persists, contact Amazon Web Services Support with details of your request to help identify and resolve the problem.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.keyspacesstreams#KeyspaceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 48
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{0,47}$"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#KeyspacesCell": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesCellValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value stored in this cell, which can be of various data types supported by Amazon Keyspaces.</p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata associated with this cell, such as time-to-live (TTL) expiration time and write timestamp.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a cell in an Amazon Keyspaces table, containing both the value and metadata about the cell.</p>"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#KeyspacesCellList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspacesstreams#KeyspacesCell"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#KeyspacesCellMap": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspacesstreams#KeyspacesCellMapDefinition"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#KeyspacesCellMapDefinition": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesCellValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of this map entry in the Amazon Keyspaces cell.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesCellValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value associated with the key in this map entry.</p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata for this specific key-value pair within the map, such as timestamps and TTL information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a key-value pair within a map data type in Amazon Keyspaces, including the associated metadata.</p>"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#KeyspacesCellValue": {
+            "type": "union",
+            "members": {
+                "asciiT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value of ASCII text type, containing US-ASCII characters. </p>"
+                    }
+                },
+                "bigintT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A 64-bit signed integer value. </p>"
+                    }
+                },
+                "blobT": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A binary large object (BLOB) value stored as a Base64-encoded string. </p>"
+                    }
+                },
+                "boolT": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value, either <code>true</code> or <code>false</code>. </p>"
+                    }
+                },
+                "counterT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A distributed counter value that can be incremented and decremented. </p>"
+                    }
+                },
+                "dateT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A date value without a time component, represented as days since epoch (January 1, 1970). </p>"
+                    }
+                },
+                "decimalT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A variable-precision decimal number value. </p>"
+                    }
+                },
+                "doubleT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A 64-bit double-precision floating point value. </p>"
+                    }
+                },
+                "floatT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A 32-bit single-precision floating point value. </p>"
+                    }
+                },
+                "inetT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An IP address value, either IPv4 or IPv6 format. </p>"
+                    }
+                },
+                "intT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A 32-bit signed integer value. </p>"
+                    }
+                },
+                "listT": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesCellList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ordered collection of elements that can contain duplicate values. </p>"
+                    }
+                },
+                "mapT": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesCellMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of key-value pairs where each key is unique. </p>"
+                    }
+                },
+                "setT": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesCellList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An unordered collection of unique elements. </p>"
+                    }
+                },
+                "smallintT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A 16-bit signed integer value. </p>"
+                    }
+                },
+                "textT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A UTF-8 encoded string value. </p>"
+                    }
+                },
+                "timeT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A time value without a date component, with nanosecond precision. </p>"
+                    }
+                },
+                "timestampT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp value representing date and time with millisecond precision. </p>"
+                    }
+                },
+                "timeuuidT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A universally unique identifier (UUID) that includes a timestamp component, ensuring both uniqueness and time ordering. </p>"
+                    }
+                },
+                "tinyintT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An 8-bit signed integer value. </p>"
+                    }
+                },
+                "tupleT": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesCellList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A fixed-length ordered list of elements, where each element can be of a different data type. </p>"
+                    }
+                },
+                "uuidT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A universally unique identifier (UUID) value. </p>"
+                    }
+                },
+                "varcharT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A UTF-8 encoded string value, functionally equivalent to text type. </p>"
+                    }
+                },
+                "varintT": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A variable precision integer value with arbitrary length. </p>"
+                    }
+                },
+                "udtT": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesUdtMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-defined type (UDT) value consisting of named fields, each with its own data type. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the value of a cell in an Amazon Keyspaces table, supporting various data types with type-specific fields.</p>"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#KeyspacesCells": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.keyspacesstreams#KeyspacesCell"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#KeyspacesKeysMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.keyspacesstreams#KeyspacesCellValue"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#KeyspacesMetadata": {
+            "type": "structure",
+            "members": {
+                "expirationTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the associated data will expire, based on the time-to-live (TTL) setting.</p>"
+                    }
+                },
+                "writeTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the associated data was written to the database.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata information associated with Amazon Keyspaces cells and rows.</p>"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#KeyspacesRow": {
+            "type": "structure",
+            "members": {
+                "valueCells": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesCells",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of regular (non-static) column cells in the row, where keys are column names and values are the corresponding cells.</p>"
+                    }
+                },
+                "staticCells": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesCells",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of static column cells shared by all rows with the same partition key, where keys are column names and values are the corresponding cells.</p>"
+                    }
+                },
+                "rowMetadata": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that applies to the entire row, such as timestamps and TTL information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a row in an Amazon Keyspaces table, containing regular column values, static column values, and row-level metadata.</p>"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#KeyspacesStreams": {
+            "type": "service",
+            "version": "2024-09-09",
+            "operations": [
+                {
+                    "target": "com.amazonaws.keyspacesstreams#GetRecords"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#GetShardIterator"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#GetStream"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ListStreams"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "KeyspacesStreams",
+                    "arnNamespace": "cassandra",
+                    "cloudTrailEventSource": "cassandra-streams.amazonaws.com",
+                    "endpointPrefix": "cassandra-streams"
+                },
+                "aws.auth#sigv4": {
+                    "name": "cassandra"
+                },
+                "aws.endpoints#dualStackOnlyEndpoints": {},
+                "aws.endpoints#standardRegionalEndpoints": {},
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>Amazon Keyspaces (for Apache Cassandra) change data capture (CDC) records change events for Amazon Keyspaces tables. The change events captured in a stream are time-ordered and de-duplicated write operations. Using stream data you can build event driven applications that incorporate near-real time change events from Amazon Keyspaces tables. </p> <p>Amazon Keyspaces CDC is serverless and scales the infrastructure for change events automatically based on the volume of changes on your table. </p> <p> This API reference describes the Amazon Keyspaces CDC stream API in detail. </p> <p>For more information about Amazon Keyspaces CDC, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cdc.html\">Working with change data capture (CDC) streams in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>To learn how Amazon Keyspaces CDC API actions are recorded with CloudTrail, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/logging-using-cloudtrail.html#service-name-info-in-cloudtrail\">Amazon Keyspaces information in CloudTrail</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>To see the metrics Amazon Keyspaces CDC sends to Amazon CloudWatch, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/metrics-dimensions.html#keyspaces-cdc-metrics\">Amazon Keyspaces change data capture (CDC) CloudWatch metrics</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>",
+                "smithy.api#title": "Amazon Keyspaces Streams",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://cassandra-streams-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://cassandra-streams.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams-fips.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-streams.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#KeyspacesUdtMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.keyspacesstreams#KeyspacesCell"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ListStreams": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.keyspacesstreams#ListStreamsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.keyspacesstreams#ListStreamsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.keyspacesstreams#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.keyspacesstreams#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all data capture streams associated with your Amazon Keyspaces account or for a specific keyspace or table. The response includes information such as stream ARNs, table associations, creation timestamps, and current status. This operation helps you discover and manage all active data streams in your Amazon Keyspaces environment.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "streams"
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListStreamsSuccess",
+                        "params": {},
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ListStreamsInput": {
+            "type": "structure",
+            "members": {
+                "keyspaceName": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the keyspace for which to list streams. If specified, only streams associated with tables in this keyspace are returned. If omitted, streams from all keyspaces are included in the results. </p>"
+                    }
+                },
+                "tableName": {
+                    "target": "com.amazonaws.keyspacesstreams#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the table for which to list streams. Must be used together with <code>keyspaceName</code>. If specified, only streams associated with this specific table are returned. </p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of streams to return in a single <code>ListStreams</code> request. Default value is 100. The minimum value is 1 and the maximum value is 1000. </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.keyspacesstreams#StreamArnToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An optional pagination token provided by a previous <code>ListStreams</code> operation. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>maxResults</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ListStreamsOutput": {
+            "type": "structure",
+            "members": {
+                "streams": {
+                    "target": "com.amazonaws.keyspacesstreams#StreamList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of stream objects, each containing summary information about a stream including its ARN, status, and associated table information. This list includes all streams that match the request criteria. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.keyspacesstreams#StreamArnToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A pagination token that can be used in a subsequent <code>ListStreams</code> request. This token is returned if the response contains more streams than can be returned in a single response based on the <code>MaxResults</code> parameter. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.keyspacesstreams#OriginType": {
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
+                    }
+                },
+                "REPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION"
+                    }
+                },
+                "TTL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TTL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#Record": {
+            "type": "structure",
+            "members": {
+                "eventVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the record format, used to track the evolution of the record structure over time.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.keyspacesstreams#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when this change data capture record was created.</p>"
+                    }
+                },
+                "origin": {
+                    "target": "com.amazonaws.keyspacesstreams#OriginType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin or source of this change data capture record.</p>"
+                    }
+                },
+                "partitionKeys": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesKeysMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partition key columns and their values for the affected row.</p>"
+                    }
+                },
+                "clusteringKeys": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesKeysMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The clustering key columns and their values for the affected row, which determine the order of rows within a partition.</p>"
+                    }
+                },
+                "newImage": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesRow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the row after the change operation that generated this record.</p>"
+                    }
+                },
+                "oldImage": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspacesRow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the row before the change operation that generated this record.</p>"
+                    }
+                },
+                "sequenceNumber": {
+                    "target": "com.amazonaws.keyspacesstreams#SequenceNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier assigned to this record within the shard, used for ordering and tracking purposes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a change data capture record for a row in an Amazon Keyspaces table, containing both the new and old states of the row.</p>"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#RecordList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspacesstreams#Record"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested resource wasn't found. Verify that the resource exists and try again.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFoundException",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The requested resource doesn't exist or could not be found. </p> <p>This exception occurs when you attempt to access a keyspace, table, stream, or other Amazon Keyspaces resource that doesn't exist or that has been deleted. Verify that the resource identifier is correct and that the resource exists in your account.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.keyspacesstreams#SequenceNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 21,
+                    "max": 48
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#SequenceNumberRange": {
+            "type": "structure",
+            "members": {
+                "startingSequenceNumber": {
+                    "target": "com.amazonaws.keyspacesstreams#SequenceNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting sequence number of the range.</p>"
+                    }
+                },
+                "endingSequenceNumber": {
+                    "target": "com.amazonaws.keyspacesstreams#SequenceNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ending sequence number of the range, which may be null for open-ended ranges.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a range of sequence numbers within a change data capture stream's shard for Amazon Keyspaces.</p>"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#Shard": {
+            "type": "structure",
+            "members": {
+                "shardId": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for this shard within the stream.</p>"
+                    }
+                },
+                "sequenceNumberRange": {
+                    "target": "com.amazonaws.keyspacesstreams#SequenceNumberRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The range of sequence numbers contained within this shard.</p>"
+                    }
+                },
+                "parentShardIds": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of parent shards that this shard evolved from, if this shard was created through resharding.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a uniquely identified group of change records within a change data capture stream for Amazon Keyspaces.</p>"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ShardDescriptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspacesstreams#Shard"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ShardFilter": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of shard filter to use, which determines how the shardId parameter is interpreted.</p>"
+                    }
+                },
+                "shardId": {
+                    "target": "com.amazonaws.keyspacesstreams#ShardId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a specific shard used to filter results based on the specified filter type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter used to limit the shards returned by a <code>GetStream</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ShardFilterType": {
+            "type": "enum",
+            "members": {
+                "CHILD_SHARDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHILD_SHARDS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ShardId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 28,
+                    "max": 65
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ShardIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspacesstreams#ShardId"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ShardIdToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 80,
+                    "max": 3000
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ShardIterator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ShardIteratorType": {
+            "type": "enum",
+            "members": {
+                "TRIM_HORIZON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRIM_HORIZON"
+                    }
+                },
+                "LATEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LATEST"
+                    }
+                },
+                "AT_SEQUENCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AT_SEQUENCE_NUMBER"
+                    }
+                },
+                "AFTER_SEQUENCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AFTER_SEQUENCE_NUMBER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#Stream": {
+            "type": "structure",
+            "members": {
+                "streamArn": {
+                    "target": "com.amazonaws.keyspacesstreams#StreamArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies this stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "keyspaceName": {
+                    "target": "com.amazonaws.keyspacesstreams#KeyspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the keyspace containing the table associated with this stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tableName": {
+                    "target": "com.amazonaws.keyspacesstreams#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table associated with this stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "streamLabel": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for this stream that can be used in stream operations.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a change data capture stream for an Amazon Keyspaces table, which enables tracking and processing of data changes.</p>"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#StreamArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 37,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#StreamArnToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 80,
+                    "max": 3000
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#StreamList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspacesstreams#Stream"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#StreamStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLING"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLING"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#StreamViewType": {
+            "type": "enum",
+            "members": {
+                "NEW_IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_IMAGE"
+                    }
+                },
+                "OLD_IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OLD_IMAGE"
+                    }
+                },
+                "NEW_AND_OLD_IMAGES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_AND_OLD_IMAGES"
+                    }
+                },
+                "KEYS_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KEYS_ONLY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.keyspacesstreams#TableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 48
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{0,47}$"
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request was denied due to request throttling. Reduce the frequency of requests and try again.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ThrottlingException",
+                    "httpResponseCode": 429
+                },
+                "smithy.api#documentation": "<p>The request rate is too high and exceeds the service's throughput limits. </p> <p>This exception occurs when you send too many requests in a short period of time. Implement exponential backoff in your retry strategy to handle this exception. Reducing your request frequency or distributing requests more evenly can help avoid throughput exceptions.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the service. Check the error details and modify your request.</p>"
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.keyspacesstreams#ValidationExceptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error occurred validating your request. See the error message for details.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ValidationException",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The request validation failed because one or more input parameters failed validation. </p> <p>This exception occurs when there are syntax errors in the request, field constraints are violated, or required parameters are missing. To help you fix the issue, the exception message provides details about which parameter failed and why.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.keyspacesstreams#ValidationExceptionType": {
+            "type": "enum",
+            "members": {
+                "InvalidFormat": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidFormat"
+                    }
+                },
+                "TrimmedDataAccess": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TrimmedDataAccess"
+                    }
+                },
+                "ExpiredIterator": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExpiredIterator"
+                    }
+                },
+                "ExpiredNextToken": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExpiredNextToken"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -37,12 +37,12 @@
                 "targetTrackingScalingPolicyConfiguration": {
                     "target": "com.amazonaws.keyspaces#TargetTrackingScalingPolicyConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Auto scaling scales up capacity automatically when traffic exceeds this target utilization rate, and then back down \n         when it falls below the target. A <code>double</code> between 20 and 90.</p>"
+                        "smithy.api#documentation": "<p>Auto scaling scales up capacity automatically when traffic exceeds this target utilization rate, and then back down when it falls below the target. A <code>double</code> between 20 and 90.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon Keyspaces supports the <code>target tracking</code> auto scaling policy. With this policy, Amazon Keyspaces auto scaling\n         ensures that the table's ratio of consumed to provisioned capacity stays at or near the target value that you specify. You \n         define the target value as a percentage between 20 and 90.</p>"
+                "smithy.api#documentation": "<p>Amazon Keyspaces supports the <code>target tracking</code> auto scaling policy. With this policy, Amazon Keyspaces auto scaling ensures that the table's ratio of consumed to provisioned capacity stays at or near the target value that you specify. You define the target value as a percentage between 20 and 90.</p>"
             }
         },
         "com.amazonaws.keyspaces#AutoScalingSettings": {
@@ -58,24 +58,24 @@
                 "minimumUnits": {
                     "target": "com.amazonaws.keyspaces#CapacityUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum level of throughput the table should always be ready to support. The value must be between 1 \n         and the max throughput per second quota for your account (40,000 by default).</p>"
+                        "smithy.api#documentation": "<p>The minimum level of throughput the table should always be ready to support. The value must be between 1 and the max throughput per second quota for your account (40,000 by default).</p>"
                     }
                 },
                 "maximumUnits": {
                     "target": "com.amazonaws.keyspaces#CapacityUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>Manage costs by specifying the maximum amount of throughput to provision. The value must be between 1 \n         and the max throughput per second quota for your account (40,000 by default).</p>"
+                        "smithy.api#documentation": "<p>Manage costs by specifying the maximum amount of throughput to provision. The value must be between 1 and the max throughput per second quota for your account (40,000 by default).</p>"
                     }
                 },
                 "scalingPolicy": {
                     "target": "com.amazonaws.keyspaces#AutoScalingPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Keyspaces supports the <code>target tracking</code> auto scaling policy. With this policy, Amazon Keyspaces auto scaling\n      ensures that the table's ratio of consumed to provisioned capacity stays at or near the target value that you specify. You \n      define the target value as a percentage between 20 and 90.</p>"
+                        "smithy.api#documentation": "<p>Amazon Keyspaces supports the <code>target tracking</code> auto scaling policy. With this policy, Amazon Keyspaces auto scaling ensures that the table's ratio of consumed to provisioned capacity stays at or near the target value that you specify. You define the target value as a percentage between 20 and 90.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The optional auto scaling settings for a table with provisioned throughput capacity.</p>\n         <p>To turn on auto scaling for a table in <code>throughputMode:PROVISIONED</code>, \n         you must specify the following parameters. </p>\n         <p>Configure the minimum and maximum capacity units. The auto scaling policy ensures that\n         capacity never goes below the minimum or above the maximum range.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>minimumUnits</code>: The minimum level of throughput the table should always be ready to support. The value must be between 1 \n            and the max throughput per second quota for your account (40,000 by default).</p>\n            </li>\n            <li>\n               <p>\n                  <code>maximumUnits</code>: The maximum level of throughput the table should always be ready to\n               support. The value must be between 1 and the max throughput per second quota for your\n               account (40,000 by default).</p>\n            </li>\n            <li>\n               <p>\n                  <code>scalingPolicy</code>: Amazon Keyspaces supports the <code>target tracking</code> scaling policy. \n           The auto scaling target is the provisioned capacity of the table. \n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>targetTrackingScalingPolicyConfiguration</code>: To define the target tracking policy, you must define the target value.\n               </p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>targetValue</code>: The target utilization rate of the table. Amazon Keyspaces auto scaling ensures that the ratio of\n                        consumed capacity to provisioned capacity stays at or near this value. You\n                        define <code>targetValue</code> as a percentage. A <code>double</code> between 20 and 90. (Required)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>disableScaleIn</code>: A <code>boolean</code> that specifies if <code>scale-in</code> is\n                           disabled or enabled for the table. This parameter is disabled by default.\n                           To turn on <code>scale-in</code>, set the <code>boolean</code> value to\n                              <code>FALSE</code>. This means that capacity for a table can be\n                           automatically scaled down on your behalf. (Optional) </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>scaleInCooldown</code>: A cooldown period in seconds between scaling activities that lets the table stabilize \n                        before another scale in activity starts. If no value is provided, the default is 0. (Optional) </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>scaleOutCooldown</code>: A cooldown period in seconds between scaling activities that lets the table stabilize \n                        before another scale out activity starts. If no value is provided, the default is 0. (Optional) </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The optional auto scaling settings for a table with provisioned throughput capacity.</p> <p>To turn on auto scaling for a table in <code>throughputMode:PROVISIONED</code>, you must specify the following parameters. </p> <p>Configure the minimum and maximum capacity units. The auto scaling policy ensures that capacity never goes below the minimum or above the maximum range.</p> <ul> <li> <p> <code>minimumUnits</code>: The minimum level of throughput the table should always be ready to support. The value must be between 1 and the max throughput per second quota for your account (40,000 by default).</p> </li> <li> <p> <code>maximumUnits</code>: The maximum level of throughput the table should always be ready to support. The value must be between 1 and the max throughput per second quota for your account (40,000 by default).</p> </li> <li> <p> <code>scalingPolicy</code>: Amazon Keyspaces supports the <code>target tracking</code> scaling policy. The auto scaling target is the provisioned capacity of the table. </p> <ul> <li> <p> <code>targetTrackingScalingPolicyConfiguration</code>: To define the target tracking policy, you must define the target value. </p> <ul> <li> <p> <code>targetValue</code>: The target utilization rate of the table. Amazon Keyspaces auto scaling ensures that the ratio of consumed capacity to provisioned capacity stays at or near this value. You define <code>targetValue</code> as a percentage. A <code>double</code> between 20 and 90. (Required)</p> </li> <li> <p> <code>disableScaleIn</code>: A <code>boolean</code> that specifies if <code>scale-in</code> is disabled or enabled for the table. This parameter is disabled by default. To turn on <code>scale-in</code>, set the <code>boolean</code> value to <code>FALSE</code>. This means that capacity for a table can be automatically scaled down on your behalf. (Optional) </p> </li> <li> <p> <code>scaleInCooldown</code>: A cooldown period in seconds between scaling activities that lets the table stabilize before another scale in activity starts. If no value is provided, the default is 0. (Optional) </p> </li> <li> <p> <code>scaleOutCooldown</code>: A cooldown period in seconds between scaling activities that lets the table stabilize before another scale out activity starts. If no value is provided, the default is 0. (Optional) </p> </li> </ul> </li> </ul> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#AutoScalingSpecification": {
@@ -110,25 +110,25 @@
                 "throughputMode": {
                     "target": "com.amazonaws.keyspaces#ThroughputMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n            <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p>\n            </li>\n         </ul>\n         <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p> <ul> <li> <p> <code>throughputMode:PAY_PER_REQUEST</code> and </p> </li> <li> <p> <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p> </li> </ul> <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "readCapacityUnits": {
                     "target": "com.amazonaws.keyspaces#CapacityUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>read</code> operations defined in <code>read capacity units</code>\n            <code>(RCUs)</code>.</p>"
+                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>read</code> operations defined in <code>read capacity units</code> <code>(RCUs)</code>.</p>"
                     }
                 },
                 "writeCapacityUnits": {
                     "target": "com.amazonaws.keyspaces#CapacityUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>write</code> operations defined in <code>write capacity units</code>\n            <code>(WCUs)</code>.</p>"
+                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>write</code> operations defined in <code>write capacity units</code> <code>(WCUs)</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon Keyspaces has two read/write capacity modes for processing reads and writes on your tables: </p>\n         <ul>\n            <li>\n               <p>On-demand (default)</p>\n            </li>\n            <li>\n               <p>Provisioned</p>\n            </li>\n         </ul>\n         <p>The read/write capacity mode that you choose controls how you are charged for read and\n         write throughput and how table throughput capacity is managed.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Amazon Keyspaces has two read/write capacity modes for processing reads and writes on your tables: </p> <ul> <li> <p>On-demand (default)</p> </li> <li> <p>Provisioned</p> </li> </ul> <p>The read/write capacity mode that you choose controls how you are charged for read and write throughput and how table throughput capacity is managed.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#CapacitySpecificationSummary": {
@@ -137,20 +137,20 @@
                 "throughputMode": {
                     "target": "com.amazonaws.keyspaces#ThroughputMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n            <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input. </p>\n            </li>\n         </ul>\n         <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p> <ul> <li> <p> <code>throughputMode:PAY_PER_REQUEST</code> and </p> </li> <li> <p> <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input. </p> </li> </ul> <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "readCapacityUnits": {
                     "target": "com.amazonaws.keyspaces#CapacityUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>read</code> operations defined in <code>read capacity units</code>\n            <code>(RCUs)</code>.</p>"
+                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>read</code> operations defined in <code>read capacity units</code> <code>(RCUs)</code>.</p>"
                     }
                 },
                 "writeCapacityUnits": {
                     "target": "com.amazonaws.keyspaces#CapacityUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>write</code> operations defined in <code>write capacity units</code>\n            <code>(WCUs)</code>.</p>"
+                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>write</code> operations defined in <code>write capacity units</code> <code>(WCUs)</code>.</p>"
                     }
                 },
                 "lastUpdateToPayPerRequestTimestamp": {
@@ -161,7 +161,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code>.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p> <ul> <li> <p> <code>throughputMode:PAY_PER_REQUEST</code> and </p> </li> <li> <p> <code>throughputMode:PROVISIONED</code>.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#CapacityUnits": {
@@ -170,6 +170,98 @@
                 "smithy.api#range": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.keyspaces#CdcPropagateTags": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TABLE",
+                        "name": "TABLE"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.keyspaces#CdcSpecification": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.keyspaces#CdcStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the CDC stream. You can enable or disable a stream for a table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "viewType": {
+                    "target": "com.amazonaws.keyspaces#ViewType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The view type specifies the changes Amazon Keyspaces records for each changed row in the stream. After you create the stream, you can't make changes to this selection. </p> <p>The options are:</p> <ul> <li> <p> <code>NEW_AND_OLD_IMAGES</code> - both versions of the row, before and after the change. This is the default.</p> </li> <li> <p> <code>NEW_IMAGE</code> - the version of the row after the change.</p> </li> <li> <p> <code>OLD_IMAGE</code> - the version of the row before the change.</p> </li> <li> <p> <code>KEYS_ONLY</code> - the partition and clustering keys of the row that was changed.</p> </li> </ul>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.keyspaces#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags (key-value pairs) that you want to apply to the stream.</p>"
+                    }
+                },
+                "propagateTags": {
+                    "target": "com.amazonaws.keyspaces#CdcPropagateTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the stream inherits the tags from the table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings for the CDC stream of a table. For more information about CDC streams, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cdc.html\">Working with change data capture (CDC) streams in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#CdcSpecificationSummary": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.keyspaces#CdcStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the CDC stream. Specifies if the table has a CDC stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "viewType": {
+                    "target": "com.amazonaws.keyspaces#ViewType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The view type specifies the changes Amazon Keyspaces records for each changed row in the stream. This setting can't be changed, after the stream has been created. </p> <p>The options are:</p> <ul> <li> <p> <code>NEW_AND_OLD_IMAGES</code> - both versions of the row, before and after the change. This is the default.</p> </li> <li> <p> <code>NEW_IMAGE</code> - the version of the row after the change.</p> </li> <li> <p> <code>OLD_IMAGE</code> - the version of the row before the change.</p> </li> <li> <p> <code>KEYS_ONLY</code> - the partition and clustering keys of the row that was changed.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings of the CDC stream of the table. For more information about CDC streams, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cdc.html\">Working with change data capture (CDC) streams in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#CdcStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "ENABLING",
+                        "name": "ENABLING"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "DISABLING",
+                        "name": "DISABLING"
+                    }
+                ]
             }
         },
         "com.amazonaws.keyspaces#ClientSideTimestamps": {
@@ -184,7 +276,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The client-side timestamp setting of the table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/client-side-timestamps-how-it-works.html\">How it works: Amazon Keyspaces client-side timestamps</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The client-side timestamp setting of the table.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/client-side-timestamps-how-it-works.html\">How it works: Amazon Keyspaces client-side timestamps</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#ClientSideTimestampsStatus": {
@@ -239,7 +331,7 @@
                 "type": {
                     "target": "com.amazonaws.keyspaces#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type of the column. For a list of available data types, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types\">Data types</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The data type of the column. For a list of available data types, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types\">Data types</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -289,7 +381,7 @@
                     "code": "ConflictException",
                     "httpResponseCode": 409
                 },
-                "smithy.api#documentation": "<p>Amazon Keyspaces couldn't complete the requested action. This error may occur if you try to \n         perform an action and the same or a different action is already\n         in progress, or if you try to create a resource that already exists. </p>",
+                "smithy.api#documentation": "<p>Amazon Keyspaces couldn't complete the requested action. This error may occur if you try to perform an action and the same or a different action is already in progress, or if you try to create a resource that already exists. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -320,7 +412,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreateKeyspace</code> operation adds a new keyspace to your account. In an Amazon Web Services account, keyspace names\n      must be unique within each Region.</p>\n         <p>\n            <code>CreateKeyspace</code> is an asynchronous operation. You can monitor the creation status of the new keyspace \n          by using the <code>GetKeyspace</code> operation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/getting-started.keyspaces.html\">Create a keyspace</a> in the <i>Amazon Keyspaces Developer\n             Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The <code>CreateKeyspace</code> operation adds a new keyspace to your account. In an Amazon Web Services account, keyspace names must be unique within each Region.</p> <p> <code>CreateKeyspace</code> is an asynchronous operation. You can monitor the creation status of the new keyspace by using the <code>GetKeyspace</code> operation.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/getting-started.keyspaces.html\">Create a keyspace</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#CreateKeyspaceRequest": {
@@ -336,13 +428,13 @@
                 "tags": {
                     "target": "com.amazonaws.keyspaces#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pair tags to be attached to the keyspace.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pair tags to be attached to the keyspace.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "replicationSpecification": {
                     "target": "com.amazonaws.keyspaces#ReplicationSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The replication specification of the keyspace includes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>replicationStrategy</code> - the required value is <code>SINGLE_REGION</code> or \n            <code>MULTI_REGION</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>regionList</code> - if the <code>replicationStrategy</code> is <code>MULTI_REGION</code>, the\n            <code>regionList</code> requires the current Region and at least one additional Amazon Web Services Region where \n            the keyspace is going to be replicated in.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> The replication specification of the keyspace includes:</p> <ul> <li> <p> <code>replicationStrategy</code> - the required value is <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>.</p> </li> <li> <p> <code>regionList</code> - if the <code>replicationStrategy</code> is <code>MULTI_REGION</code>, the <code>regionList</code> requires the current Region and at least one additional Amazon Web Services Region where the keyspace is going to be replicated in.</p> </li> </ul>"
                     }
                 }
             }
@@ -388,7 +480,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreateTable</code> operation adds a new table to the specified keyspace. Within a keyspace, table names\n         must be unique.</p>\n         <p>\n            <code>CreateTable</code> is an asynchronous operation. When the request is received, the status of the table is set to <code>CREATING</code>.\n         You can monitor the creation status of the new table by using the <code>GetTable</code> \n         operation, which returns the current <code>status</code> of the table. You can start using a table when the status is <code>ACTIVE</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/getting-started.tables.html\">Create a table</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The <code>CreateTable</code> operation adds a new table to the specified keyspace. Within a keyspace, table names must be unique.</p> <p> <code>CreateTable</code> is an asynchronous operation. When the request is received, the status of the table is set to <code>CREATING</code>. You can monitor the creation status of the new table by using the <code>GetTable</code> operation, which returns the current <code>status</code> of the table. You can start using a table when the status is <code>ACTIVE</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/getting-started.tables.html\">Create a table</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#CreateTableRequest": {
@@ -411,7 +503,7 @@
                 "schemaDefinition": {
                     "target": "com.amazonaws.keyspaces#SchemaDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>schemaDefinition</code> consists of the\n         following parameters.</p>\n         <p>For each column to be created:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code>  -  The name\n            of the column.</p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>  -  An Amazon Keyspaces\n            data type. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types\">Data types</a> in the <i>Amazon Keyspaces Developer\n                  Guide</i>.</p>\n            </li>\n         </ul>\n         <p>The primary key of the table consists of the\n                     following columns:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>partitionKeys</code> - The partition key can be a single column, or it can be a\n            compound value composed of two or more columns. The partition\n            key portion of the primary key is required and determines how\n            Amazon Keyspaces stores your data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of each partition key column.</p>\n            </li>\n            <li>\n               <p>\n                  <code>clusteringKeys</code> - The optional clustering column portion of your primary key\n            determines how the data is clustered and sorted within each\n            partition.</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of the clustering column. </p>\n            </li>\n            <li>\n               <p>\n                  <code>orderBy</code> - Sets the\n            ascendant (<code>ASC</code>) or descendant (<code>DESC</code>) order modifier.</p>\n               <p>To define a column as static use <code>staticColumns</code>  - \n               Static columns store values that are shared by all rows in the same partition:</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>  -  The name\n            of the column.</p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>  -  An Amazon Keyspaces\n            data type.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The <code>schemaDefinition</code> consists of the following parameters.</p> <p>For each column to be created:</p> <ul> <li> <p> <code>name</code> - The name of the column.</p> </li> <li> <p> <code>type</code> - An Amazon Keyspaces data type. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types\">Data types</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> </li> </ul> <p>The primary key of the table consists of the following columns:</p> <ul> <li> <p> <code>partitionKeys</code> - The partition key can be a single column, or it can be a compound value composed of two or more columns. The partition key portion of the primary key is required and determines how Amazon Keyspaces stores your data.</p> </li> <li> <p> <code>name</code> - The name of each partition key column.</p> </li> <li> <p> <code>clusteringKeys</code> - The optional clustering column portion of your primary key determines how the data is clustered and sorted within each partition.</p> </li> <li> <p> <code>name</code> - The name of the clustering column. </p> </li> <li> <p> <code>orderBy</code> - Sets the ascendant (<code>ASC</code>) or descendant (<code>DESC</code>) order modifier.</p> <p>To define a column as static use <code>staticColumns</code> - Static columns store values that are shared by all rows in the same partition:</p> </li> <li> <p> <code>name</code> - The name of the column.</p> </li> <li> <p> <code>type</code> - An Amazon Keyspaces data type.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -424,55 +516,61 @@
                 "capacitySpecification": {
                     "target": "com.amazonaws.keyspaces#CapacitySpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the read/write throughput capacity mode for the table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n            <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p>\n            </li>\n         </ul>\n         <p>The default is\n         <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the read/write throughput capacity mode for the table. The options are:</p> <ul> <li> <p> <code>throughputMode:PAY_PER_REQUEST</code> and </p> </li> <li> <p> <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p> </li> </ul> <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "encryptionSpecification": {
                     "target": "com.amazonaws.keyspaces#EncryptionSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how the encryption key for encryption at rest is managed for the table.  \n         You can choose one of the following KMS key (KMS key):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p>\n            </li>\n            <li>\n               <p>\n                  <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. \n            This option \n            requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input.</p>\n            </li>\n         </ul>\n         <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies how the encryption key for encryption at rest is managed for the table. You can choose one of the following KMS key (KMS key):</p> <ul> <li> <p> <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p> </li> <li> <p> <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. This option requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input.</p> </li> </ul> <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "pointInTimeRecovery": {
                     "target": "com.amazonaws.keyspaces#PointInTimeRecovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies if <code>pointInTimeRecovery</code> is enabled or disabled for the\n            table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status=ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status=DISABLED</code>\n               </p>\n            </li>\n         </ul>\n         <p>If it's not specified, the \n               default is <code>status=DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies if <code>pointInTimeRecovery</code> is enabled or disabled for the table. The options are:</p> <ul> <li> <p> <code>status=ENABLED</code> </p> </li> <li> <p> <code>status=DISABLED</code> </p> </li> </ul> <p>If it's not specified, the default is <code>status=DISABLED</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "ttl": {
                     "target": "com.amazonaws.keyspaces#TimeToLive",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables Time to Live custom settings for the\n            table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status:enabled</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status:disabled</code>\n               </p>\n            </li>\n         </ul>\n         <p>The default is <code>status:disabled</code>. After\n            <code>ttl</code> is enabled, you can't disable it\n            for the table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html\">Expiring data by using Amazon Keyspaces Time to Live (TTL)</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Enables Time to Live custom settings for the table. The options are:</p> <ul> <li> <p> <code>status:enabled</code> </p> </li> <li> <p> <code>status:disabled</code> </p> </li> </ul> <p>The default is <code>status:disabled</code>. After <code>ttl</code> is enabled, you can't disable it for the table.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html\">Expiring data by using Amazon Keyspaces Time to Live (TTL)</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "defaultTimeToLive": {
                     "target": "com.amazonaws.keyspaces#DefaultTimeToLive",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default Time to Live setting in seconds for the\n         table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL-how-it-works.html#ttl-howitworks_default_ttl\">Setting the default TTL value for a table</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The default Time to Live setting in seconds for the table.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL-how-it-works.html#ttl-howitworks_default_ttl\">Setting the default TTL value for a table</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.keyspaces#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pair tags to be\n         attached to the resource. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pair tags to be attached to the resource. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "clientSideTimestamps": {
                     "target": "com.amazonaws.keyspaces#ClientSideTimestamps",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Enables client-side timestamps for the table. By default, the setting is disabled. You can enable \n            client-side timestamps with the following option:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status: \"enabled\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>Once client-side timestamps are enabled for a table, this setting cannot be disabled.</p>"
+                        "smithy.api#documentation": "<p> Enables client-side timestamps for the table. By default, the setting is disabled. You can enable client-side timestamps with the following option:</p> <ul> <li> <p> <code>status: \"enabled\"</code> </p> </li> </ul> <p>Once client-side timestamps are enabled for a table, this setting cannot be disabled.</p>"
                     }
                 },
                 "autoScalingSpecification": {
                     "target": "com.amazonaws.keyspaces#AutoScalingSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional auto scaling settings for a table in provisioned capacity mode. Specifies if the service can manage throughput capacity \n         automatically on your behalf.</p>\n         <p>Auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing \n         your table's read and write capacity automatically in response to application traffic. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer\n               Guide</i>.</p>\n         <p>By default, auto scaling is disabled for a table. </p>"
+                        "smithy.api#documentation": "<p>The optional auto scaling settings for a table in provisioned capacity mode. Specifies if the service can manage throughput capacity automatically on your behalf.</p> <p>Auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing your table's read and write capacity automatically in response to application traffic. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>By default, auto scaling is disabled for a table. </p>"
                     }
                 },
                 "replicaSpecifications": {
                     "target": "com.amazonaws.keyspaces#ReplicaSpecificationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional Amazon Web Services Region specific settings of a multi-Region table.\n         These settings overwrite the general settings of the table for the specified Region. </p>\n         <p>For a multi-Region table in provisioned capacity mode, you can configure the table's read capacity differently for each Region's replica. The write capacity, however, \n         remains synchronized between all replicas to ensure that there's enough capacity to replicate writes across all Regions. To define the read capacity for a table \n         replica in a specific Region, you can do so by configuring the following parameters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>region</code>: The Region where these settings are applied. (Required)</p>\n            </li>\n            <li>\n               <p>\n                  <code>readCapacityUnits</code>: The provisioned read capacity units. (Optional)</p>\n            </li>\n            <li>\n               <p>\n                  <code>readCapacityAutoScaling</code>: The read capacity auto scaling settings for the table. (Optional) </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional Amazon Web Services Region specific settings of a multi-Region table. These settings overwrite the general settings of the table for the specified Region. </p> <p>For a multi-Region table in provisioned capacity mode, you can configure the table's read capacity differently for each Region's replica. The write capacity, however, remains synchronized between all replicas to ensure that there's enough capacity to replicate writes across all Regions. To define the read capacity for a table replica in a specific Region, you can do so by configuring the following parameters.</p> <ul> <li> <p> <code>region</code>: The Region where these settings are applied. (Required)</p> </li> <li> <p> <code>readCapacityUnits</code>: The provisioned read capacity units. (Optional)</p> </li> <li> <p> <code>readCapacityAutoScaling</code>: The read capacity auto scaling settings for the table. (Optional) </p> </li> </ul>"
+                    }
+                },
+                "cdcSpecification": {
+                    "target": "com.amazonaws.keyspaces#CdcSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CDC stream settings of the table.</p>"
                     }
                 }
             }
@@ -518,7 +616,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         The <code>CreateType</code> operation creates a new user-defined type in the specified keyspace.\n      </p>\n         <p>To configure the required permissions, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-create\">Permissions to create a UDT</a>\n         in the <i>Amazon Keyspaces Developer Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/udts.html\">User-defined types (UDTs)</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>. </p>"
+                "smithy.api#documentation": "<p> The <code>CreateType</code> operation creates a new user-defined type in the specified keyspace. </p> <p>To configure the required permissions, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-create\">Permissions to create a UDT</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/udts.html\">User-defined types (UDTs)</a> in the <i>Amazon Keyspaces Developer Guide</i>. </p>"
             }
         },
         "com.amazonaws.keyspaces#CreateTypeRequest": {
@@ -527,21 +625,21 @@
                 "keyspaceName": {
                     "target": "com.amazonaws.keyspaces#KeyspaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the keyspace.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the keyspace. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "typeName": {
                     "target": "com.amazonaws.keyspaces#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the user-defined type.\n      </p>\n         <p>UDT names must contain 48 characters or less, must begin with an alphabetic character, and \n         can only contain alpha-numeric characters and underscores. Amazon Keyspaces converts upper case characters automatically\n         into lower case characters. </p>\n         <p>Alternatively, you can declare a UDT name in double quotes. When declaring a UDT name inside double quotes,\n         Amazon Keyspaces preserves upper casing and allows special characters.</p>\n         <p>You can also use double quotes as part of the \n         name when you create the UDT, but you must escape each double quote character with an additional \n         double quote character.</p>",
+                        "smithy.api#documentation": "<p> The name of the user-defined type. </p> <p>UDT names must contain 48 characters or less, must begin with an alphabetic character, and can only contain alpha-numeric characters and underscores. Amazon Keyspaces converts upper case characters automatically into lower case characters. </p> <p>Alternatively, you can declare a UDT name in double quotes. When declaring a UDT name inside double quotes, Amazon Keyspaces preserves upper casing and allows special characters.</p> <p>You can also use double quotes as part of the name when you create the UDT, but you must escape each double quote character with an additional double quote character.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "fieldDefinitions": {
                     "target": "com.amazonaws.keyspaces#FieldList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The field definitions, consisting of names and types, that define this type. \n      </p>",
+                        "smithy.api#documentation": "<p> The field definitions, consisting of names and types, that define this type. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -556,14 +654,14 @@
                 "keyspaceArn": {
                     "target": "com.amazonaws.keyspaces#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The unique identifier of the keyspace that contains the new type in the format of an Amazon Resource Name (ARN). \n      </p>",
+                        "smithy.api#documentation": "<p> The unique identifier of the keyspace that contains the new type in the format of an Amazon Resource Name (ARN). </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "typeName": {
                     "target": "com.amazonaws.keyspaces#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The formatted name of the user-defined type that was created. Note that Amazon Keyspaces requires the formatted name of the type for\n         other operations, for example <code>GetType</code>.\n      </p>",
+                        "smithy.api#documentation": "<p> The formatted name of the user-defined type that was created. Note that Amazon Keyspaces requires the formatted name of the type for other operations, for example <code>GetType</code>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -658,7 +756,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>DeleteTable</code> operation deletes a table and all of its data. After a <code>DeleteTable</code> request is received, \n         the specified table is in the <code>DELETING</code> state until Amazon Keyspaces completes the deletion. If the table \n         is in the <code>ACTIVE</code> state, you can delete it. If a table is either in the <code>CREATING</code> or <code>UPDATING</code> states, then \n         Amazon Keyspaces returns a <code>ResourceInUseException</code>. If the specified table does not exist, Amazon Keyspaces returns\n         a <code>ResourceNotFoundException</code>. If the table is already in the <code>DELETING</code> state, no error is returned.</p>"
+                "smithy.api#documentation": "<p>The <code>DeleteTable</code> operation deletes a table and all of its data. After a <code>DeleteTable</code> request is received, the specified table is in the <code>DELETING</code> state until Amazon Keyspaces completes the deletion. If the table is in the <code>ACTIVE</code> state, you can delete it. If a table is either in the <code>CREATING</code> or <code>UPDATING</code> states, then Amazon Keyspaces returns a <code>ResourceInUseException</code>. If the specified table does not exist, Amazon Keyspaces returns a <code>ResourceNotFoundException</code>. If the table is already in the <code>DELETING</code> state, no error is returned.</p>"
             }
         },
         "com.amazonaws.keyspaces#DeleteTableRequest": {
@@ -713,7 +811,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         The <code>DeleteType</code> operation deletes a user-defined type (UDT). You can only delete a type that is not used in a table\n         or another UDT.\n      </p>\n         <p>To configure the required permissions, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-drop\">Permissions to delete a UDT</a>\n         in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p> The <code>DeleteType</code> operation deletes a user-defined type (UDT). You can only delete a type that is not used in a table or another UDT. </p> <p>To configure the required permissions, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-drop\">Permissions to delete a UDT</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#DeleteTypeRequest": {
@@ -722,14 +820,14 @@
                 "keyspaceName": {
                     "target": "com.amazonaws.keyspaces#KeyspaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the keyspace of the to be deleted type.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the keyspace of the to be deleted type. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "typeName": {
                     "target": "com.amazonaws.keyspaces#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the type to be deleted.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the type to be deleted. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -744,14 +842,14 @@
                 "keyspaceArn": {
                     "target": "com.amazonaws.keyspaces#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The unique identifier of the keyspace from which the type was deleted in the format of an Amazon Resource Name (ARN).\n      </p>",
+                        "smithy.api#documentation": "<p> The unique identifier of the keyspace from which the type was deleted in the format of an Amazon Resource Name (ARN). </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "typeName": {
                     "target": "com.amazonaws.keyspaces#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the type that was deleted.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the type that was deleted. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -778,7 +876,7 @@
                 "type": {
                     "target": "com.amazonaws.keyspaces#EncryptionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption option specified for the table. You can choose one of the following KMS keys (KMS keys):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p>\n            </li>\n            <li>\n               <p>\n                  <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. \n            This option \n            requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p>\n            </li>\n         </ul>\n         <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The encryption option specified for the table. You can choose one of the following KMS keys (KMS keys):</p> <ul> <li> <p> <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p> </li> <li> <p> <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. This option requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p> </li> </ul> <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -790,7 +888,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon Keyspaces encrypts and decrypts the table data at rest transparently and integrates with Key Management Service for storing and managing the encryption key. \n         You can choose one of the following KMS keys (KMS keys):</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services owned key - This is the default encryption type. The key is owned by Amazon Keyspaces (no additional charge). </p>\n            </li>\n            <li>\n               <p>Customer managed key - This key is stored in your account and is created, owned, and managed by you. You have full control over the customer \n            managed key (KMS charges apply).</p>\n            </li>\n         </ul>\n         <p>For more information about encryption at rest in Amazon Keyspaces, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>For more information about KMS, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">KMS management service concepts</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Amazon Keyspaces encrypts and decrypts the table data at rest transparently and integrates with Key Management Service for storing and managing the encryption key. You can choose one of the following KMS keys (KMS keys):</p> <ul> <li> <p>Amazon Web Services owned key - This is the default encryption type. The key is owned by Amazon Keyspaces (no additional charge). </p> </li> <li> <p>Customer managed key - This key is stored in your account and is created, owned, and managed by you. You have full control over the customer managed key (KMS charges apply).</p> </li> </ul> <p>For more information about encryption at rest in Amazon Keyspaces, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>For more information about KMS, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">KMS management service concepts</a> in the <i>Key Management Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#EncryptionType": {
@@ -814,7 +912,7 @@
                 "name": {
                     "target": "com.amazonaws.keyspaces#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The identifier.\n      </p>",
+                        "smithy.api#documentation": "<p> The identifier. </p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 128
@@ -825,13 +923,13 @@
                 "type": {
                     "target": "com.amazonaws.keyspaces#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Any supported Cassandra data type, including collections and other user-defined types that are \n         contained in the same keyspace.\n      </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html#cassandra-data-type\">Cassandra data type support</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p> Any supported Cassandra data type, including collections and other user-defined types that are contained in the same keyspace. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html#cassandra-data-type\">Cassandra data type support</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         A field definition consists out of a name and a type.\n      </p>"
+                "smithy.api#documentation": "<p> A field definition consists out of a name and a type. </p>"
             }
         },
         "com.amazonaws.keyspaces#FieldList": {
@@ -874,7 +972,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the name of the specified keyspace, the Amazon Resource Name (ARN), the replication strategy, the Amazon Web Services Regions of \n         a multi-Region keyspace, and the status of newly added Regions after an <code>UpdateKeyspace</code> operation.</p>"
+                "smithy.api#documentation": "<p>Returns the name of the specified keyspace, the Amazon Resource Name (ARN), the replication strategy, the Amazon Web Services Regions of a multi-Region keyspace, and the status of newly added Regions after an <code>UpdateKeyspace</code> operation.</p>"
             }
         },
         "com.amazonaws.keyspaces#GetKeyspaceRequest": {
@@ -909,20 +1007,20 @@
                 "replicationStrategy": {
                     "target": "com.amazonaws.keyspaces#rs",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Returns the replication strategy of the keyspace. The options are <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>.\n      </p>",
+                        "smithy.api#documentation": "<p> Returns the replication strategy of the keyspace. The options are <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "replicationRegions": {
                     "target": "com.amazonaws.keyspaces#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         If the <code>replicationStrategy</code> of the keyspace is <code>MULTI_REGION</code>, a list of replication Regions is returned. \n      </p>"
+                        "smithy.api#documentation": "<p> If the <code>replicationStrategy</code> of the keyspace is <code>MULTI_REGION</code>, a list of replication Regions is returned. </p>"
                     }
                 },
                 "replicationGroupStatuses": {
                     "target": "com.amazonaws.keyspaces#ReplicationGroupStatusList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A list of all Regions the keyspace is replicated in after the update keyspace operation and their status.\n      </p>"
+                        "smithy.api#documentation": "<p> A list of all Regions the keyspace is replicated in after the update keyspace operation and their status. </p>"
                     }
                 }
             }
@@ -953,7 +1051,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the table, including the table's name and current status, the keyspace name, \n         configuration settings, and metadata.</p>\n         <p>To read table metadata using <code>GetTable</code>, the \n            IAM principal needs <code>Select</code> action \n         permissions for the table and the system keyspace.</p>"
+                "smithy.api#documentation": "<p>Returns information about the table, including the table's name and current status, the keyspace name, configuration settings, and metadata.</p> <p>To read table metadata using <code>GetTable</code>, the IAM principal needs <code>Select</code> action permissions for the table and the system keyspace.</p>"
             }
         },
         "com.amazonaws.keyspaces#GetTableAutoScalingSettings": {
@@ -982,7 +1080,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns auto scaling related settings of the specified table in JSON format. If the table is a multi-Region table, the \n         Amazon Web Services Region specific auto scaling settings of the table are included.</p>\n         <p>Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing \n         your table's read and write capacity automatically in response to application traffic. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <important>\n            <p>\n               <code>GetTableAutoScalingSettings</code> can't be used as an action in an IAM policy.</p>\n         </important>\n         <p>To define permissions for <code>GetTableAutoScalingSettings</code>, you must allow the following two actions in the IAM policy statement's \n         <code>Action</code> element:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>application-autoscaling:DescribeScalableTargets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application-autoscaling:DescribeScalingPolicies</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Returns auto scaling related settings of the specified table in JSON format. If the table is a multi-Region table, the Amazon Web Services Region specific auto scaling settings of the table are included.</p> <p>Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing your table's read and write capacity automatically in response to application traffic. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <important> <p> <code>GetTableAutoScalingSettings</code> can't be used as an action in an IAM policy.</p> </important> <p>To define permissions for <code>GetTableAutoScalingSettings</code>, you must allow the following two actions in the IAM policy statement's <code>Action</code> element:</p> <ul> <li> <p> <code>application-autoscaling:DescribeScalableTargets</code> </p> </li> <li> <p> <code>application-autoscaling:DescribeScalingPolicies</code> </p> </li> </ul>"
             }
         },
         "com.amazonaws.keyspaces#GetTableAutoScalingSettingsRequest": {
@@ -1112,7 +1210,7 @@
                 "capacitySpecification": {
                     "target": "com.amazonaws.keyspaces#CapacitySpecificationSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p> <ul> <li> <p> <code>throughputMode:PAY_PER_REQUEST</code> </p> </li> <li> <p> <code>throughputMode:PROVISIONED</code> </p> </li> </ul>"
                     }
                 },
                 "encryptionSpecification": {
@@ -1148,13 +1246,25 @@
                 "clientSideTimestamps": {
                     "target": "com.amazonaws.keyspaces#ClientSideTimestamps",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The client-side timestamps setting of the table.</p>"
+                        "smithy.api#documentation": "<p> The client-side timestamps setting of the table.</p>"
                     }
                 },
                 "replicaSpecifications": {
                     "target": "com.amazonaws.keyspaces#ReplicaSpecificationSummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the Amazon Web Services Region specific settings of all Regions a multi-Region table is replicated in.</p>"
+                    }
+                },
+                "latestStreamArn": {
+                    "target": "com.amazonaws.keyspaces#StreamArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream.</p>"
+                    }
+                },
+                "cdcSpecification": {
+                    "target": "com.amazonaws.keyspaces#CdcSpecificationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CDC stream settings of the table.</p>"
                     }
                 }
             }
@@ -1185,7 +1295,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         The <code>GetType</code> operation returns information about the type, for example the field definitions, the timestamp when the type\n         was last modified, the level of nesting, the status, and details about if the type is used in other types and tables.\n      </p>\n         <p>To read keyspace metadata using <code>GetType</code>, the \n         IAM principal needs <code>Select</code> action \n         permissions for the system keyspace. To configure the required permissions, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-view\">Permissions to view a UDT</a>\n            in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p> The <code>GetType</code> operation returns information about the type, for example the field definitions, the timestamp when the type was last modified, the level of nesting, the status, and details about if the type is used in other types and tables. </p> <p>To read keyspace metadata using <code>GetType</code>, the IAM principal needs <code>Select</code> action permissions for the system keyspace. To configure the required permissions, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-view\">Permissions to view a UDT</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#GetTypeRequest": {
@@ -1194,14 +1304,14 @@
                 "keyspaceName": {
                     "target": "com.amazonaws.keyspaces#KeyspaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the keyspace that contains this type.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the keyspace that contains this type. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "typeName": {
                     "target": "com.amazonaws.keyspaces#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The formatted name of the type. For example, if the name of the type was created\n         without double quotes, Amazon Keyspaces saved the name in lower-case characters. If the name was\n         created in double quotes, you must use double quotes to specify the type name. </p>",
+                        "smithy.api#documentation": "<p>The formatted name of the type. For example, if the name of the type was created without double quotes, Amazon Keyspaces saved the name in lower-case characters. If the name was created in double quotes, you must use double quotes to specify the type name. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1216,58 +1326,58 @@
                 "keyspaceName": {
                     "target": "com.amazonaws.keyspaces#KeyspaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the keyspace that contains this type.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the keyspace that contains this type. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "typeName": {
                     "target": "com.amazonaws.keyspaces#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the type.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the type. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "fieldDefinitions": {
                     "target": "com.amazonaws.keyspaces#FieldList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The names and types that define this type.\n      </p>"
+                        "smithy.api#documentation": "<p> The names and types that define this type. </p>"
                     }
                 },
                 "lastModifiedTimestamp": {
                     "target": "com.amazonaws.keyspaces#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The timestamp that shows when this type was last modified.\n      </p>"
+                        "smithy.api#documentation": "<p> The timestamp that shows when this type was last modified. </p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.keyspaces#TypeStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The status of this type.\n      </p>"
+                        "smithy.api#documentation": "<p> The status of this type. </p>"
                     }
                 },
                 "directReferringTables": {
                     "target": "com.amazonaws.keyspaces#TableNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The tables that use this type.\n      </p>"
+                        "smithy.api#documentation": "<p> The tables that use this type. </p>"
                     }
                 },
                 "directParentTypes": {
                     "target": "com.amazonaws.keyspaces#TypeNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The types that use this type.\n      </p>"
+                        "smithy.api#documentation": "<p> The types that use this type. </p>"
                     }
                 },
                 "maxNestingDepth": {
                     "target": "com.amazonaws.keyspaces#Depth",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n         The level of nesting implemented for this type.\n      </p>"
+                        "smithy.api#documentation": "<p> The level of nesting implemented for this type. </p>"
                     }
                 },
                 "keyspaceArn": {
                     "target": "com.amazonaws.keyspaces#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The unique identifier of the keyspace that contains this type in the format of an Amazon Resource Name (ARN).\n      </p>",
+                        "smithy.api#documentation": "<p> The unique identifier of the keyspace that contains this type in the format of an Amazon Resource Name (ARN). </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1355,14 +1465,14 @@
                 "replicationStrategy": {
                     "target": "com.amazonaws.keyspaces#rs",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      This property specifies if a keyspace is a single Region keyspace or a multi-Region keyspace.  The available \n      values are <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>.\n   </p>",
+                        "smithy.api#documentation": "<p> This property specifies if a keyspace is a single Region keyspace or a multi-Region keyspace. The available values are <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "replicationRegions": {
                     "target": "com.amazonaws.keyspaces#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         If the <code>replicationStrategy</code> of the keyspace is <code>MULTI_REGION</code>, a list of replication Regions is returned. \n      </p>"
+                        "smithy.api#documentation": "<p> If the <code>replicationStrategy</code> of the keyspace is <code>MULTI_REGION</code>, a list of replication Regions is returned. </p>"
                     }
                 }
             },
@@ -1450,7 +1560,7 @@
                     "name": "cassandra"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Keyspaces (for Apache Cassandra) is a scalable,\n        highly available, and managed Apache Cassandra-compatible database service. Amazon Keyspaces makes it easy to migrate,\n        run, and scale Cassandra workloads in the Amazon Web Services Cloud. With just a few clicks on the Amazon Web Services Management Console or a few lines of code, \n        you can create keyspaces and tables in Amazon Keyspaces, without deploying any infrastructure or installing software. </p>\n         <p>In addition to supporting Cassandra Query Language (CQL) requests via open-source Cassandra drivers, \n           Amazon Keyspaces supports data definition language (DDL) operations to manage keyspaces and tables using the Amazon Web Services SDK and CLI, as well as\n           infrastructure as code (IaC) services and tools such as CloudFormation and Terraform. This API reference describes\n        the supported DDL operations in detail.</p>\n         <p>For the list of all supported CQL APIs, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html\">Supported Cassandra APIs, operations, and data types \n        in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer\n              Guide</i>.</p>\n         <p>To learn how Amazon Keyspaces API actions are recorded with CloudTrail, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/logging-using-cloudtrail.html#service-name-info-in-cloudtrail\">Amazon Keyspaces information in CloudTrail</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>For more information about Amazon Web Services APIs, for example how to implement retry logic or how to sign Amazon Web Services API requests, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">Amazon Web Services APIs</a> in the <i>General Reference</i>.</p>",
+                "smithy.api#documentation": "<p>Amazon Keyspaces (for Apache Cassandra) is a scalable, highly available, and managed Apache Cassandra-compatible database service. Amazon Keyspaces makes it easy to migrate, run, and scale Cassandra workloads in the Amazon Web Services Cloud. With just a few clicks on the Amazon Web Services Management Console or a few lines of code, you can create keyspaces and tables in Amazon Keyspaces, without deploying any infrastructure or installing software. </p> <p>In addition to supporting Cassandra Query Language (CQL) requests via open-source Cassandra drivers, Amazon Keyspaces supports data definition language (DDL) operations to manage keyspaces and tables using the Amazon Web Services SDK and CLI, as well as infrastructure as code (IaC) services and tools such as CloudFormation and Terraform. This API reference describes the supported DDL operations in detail.</p> <p>For the list of all supported CQL APIs, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html\">Supported Cassandra APIs, operations, and data types in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>To learn how Amazon Keyspaces API actions are recorded with CloudTrail, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/logging-using-cloudtrail.html#service-name-info-in-cloudtrail\">Amazon Keyspaces information in CloudTrail</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>For more information about Amazon Web Services APIs, for example how to implement retry logic or how to sign Amazon Web Services API requests, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">Amazon Web Services APIs</a> in the <i>General Reference</i>.</p>",
                 "smithy.api#title": "Amazon Keyspaces",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2414,7 +2524,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.keyspaces#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of keyspaces to return in the output. If the total number of keyspaces available \n         is more than the value specified, a <code>NextToken</code> is provided in the output. To resume pagination, \n         provide the <code>NextToken</code> value as an argument of a subsequent API invocation.</p>"
+                        "smithy.api#documentation": "<p>The total number of keyspaces to return in the output. If the total number of keyspaces available is more than the value specified, a <code>NextToken</code> is provided in the output. To resume pagination, provide the <code>NextToken</code> value as an argument of a subsequent API invocation.</p>"
                     }
                 }
             }
@@ -2463,7 +2573,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ListTables</code> operation returns a list of tables for a specified keyspace.</p>\n         <p>To read keyspace metadata using <code>ListTables</code>, the \n         IAM principal needs <code>Select</code> action \n         permissions for the system keyspace.</p>",
+                "smithy.api#documentation": "<p>The <code>ListTables</code> operation returns a list of tables for a specified keyspace.</p> <p>To read keyspace metadata using <code>ListTables</code>, the IAM principal needs <code>Select</code> action permissions for the system keyspace.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2484,7 +2594,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.keyspaces#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of tables to return in the output. If the total number of tables available \n         is more than the value specified, a <code>NextToken</code> is provided in the output. To resume pagination, \n         provide the <code>NextToken</code> value as an argument of a subsequent API invocation.</p>"
+                        "smithy.api#documentation": "<p>The total number of tables to return in the output. If the total number of tables available is more than the value specified, a <code>NextToken</code> is provided in the output. To resume pagination, provide the <code>NextToken</code> value as an argument of a subsequent API invocation.</p>"
                     }
                 },
                 "keyspaceName": {
@@ -2539,7 +2649,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of all tags associated with the specified Amazon Keyspaces resource.</p>\n         <p>To read keyspace metadata using <code>ListTagsForResource</code>, the \n         IAM principal needs <code>Select</code> action \n         permissions for the specified resource and the system keyspace.</p>",
+                "smithy.api#documentation": "<p>Returns a list of all tags associated with the specified Amazon Keyspaces resource.</p> <p>To read keyspace metadata using <code>ListTagsForResource</code>, the IAM principal needs <code>Select</code> action permissions for the specified resource and the system keyspace.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2567,7 +2677,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.keyspaces#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of tags to return in the output. If the total number of tags available \n         is more than the value specified, a <code>NextToken</code> is provided in the output. To resume pagination, \n         provide the <code>NextToken</code> value as an argument of a subsequent API invocation.</p>"
+                        "smithy.api#documentation": "<p>The total number of tags to return in the output. If the total number of tags available is more than the value specified, a <code>NextToken</code> is provided in the output. To resume pagination, provide the <code>NextToken</code> value as an argument of a subsequent API invocation.</p>"
                     }
                 }
             }
@@ -2615,7 +2725,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         The <code>ListTypes</code> operation returns a list of types for a specified keyspace.\n      </p>\n         <p>To read keyspace metadata using <code>ListTypes</code>, the \n         IAM principal needs <code>Select</code> action \n         permissions for the system keyspace. To configure the required permissions, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-view\">Permissions to view a UDT</a>\n         in the <i>Amazon Keyspaces Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p> The <code>ListTypes</code> operation returns a list of types for a specified keyspace. </p> <p>To read keyspace metadata using <code>ListTypes</code>, the IAM principal needs <code>Select</code> action permissions for the system keyspace. To configure the required permissions, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-view\">Permissions to view a UDT</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2630,19 +2740,19 @@
                 "nextToken": {
                     "target": "com.amazonaws.keyspaces#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The pagination token. To resume pagination, provide the <code>NextToken</code> value as an argument of a subsequent API invocation.\n      </p>"
+                        "smithy.api#documentation": "<p> The pagination token. To resume pagination, provide the <code>NextToken</code> value as an argument of a subsequent API invocation. </p>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.keyspaces#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The total number of types to return in the output. If the total number of types available is more than the value specified,\n         a <code>NextToken</code> is provided in the output. To resume pagination, provide the <code>NextToken</code> value as an \n         argument of a subsequent API invocation.\n      </p>"
+                        "smithy.api#documentation": "<p> The total number of types to return in the output. If the total number of types available is more than the value specified, a <code>NextToken</code> is provided in the output. To resume pagination, provide the <code>NextToken</code> value as an argument of a subsequent API invocation. </p>"
                     }
                 },
                 "keyspaceName": {
                     "target": "com.amazonaws.keyspaces#KeyspaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the keyspace that contains the listed types.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the keyspace that contains the listed types. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2657,13 +2767,13 @@
                 "nextToken": {
                     "target": "com.amazonaws.keyspaces#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The pagination token. To resume pagination, provide the <code>NextToken</code> value as an argument of a subsequent API invocation.\n      </p>"
+                        "smithy.api#documentation": "<p> The pagination token. To resume pagination, provide the <code>NextToken</code> value as an argument of a subsequent API invocation. </p>"
                     }
                 },
                 "types": {
                     "target": "com.amazonaws.keyspaces#TypeNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The list of types contained in the specified keyspace.\n      </p>",
+                        "smithy.api#documentation": "<p> The list of types contained in the specified keyspace. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2702,7 +2812,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The partition key portion of the primary key is required \n         and determines how Amazon Keyspaces stores the data. \n         The partition key can be a single column, or it can be a compound value composed of two or more columns.</p>"
+                "smithy.api#documentation": "<p>The partition key portion of the primary key is required and determines how Amazon Keyspaces stores the data. The partition key can be a single column, or it can be a compound value composed of two or more columns.</p>"
             }
         },
         "com.amazonaws.keyspaces#PartitionKeyList": {
@@ -2722,13 +2832,13 @@
                 "status": {
                     "target": "com.amazonaws.keyspaces#PointInTimeRecoveryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status=ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status=DISABLED</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The options are:</p> <ul> <li> <p> <code>status=ENABLED</code> </p> </li> <li> <p> <code>status=DISABLED</code> </p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Point-in-time recovery (PITR) helps protect your Amazon Keyspaces tables from accidental write or delete operations by providing you continuous backups of your table data.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Point-in-time recovery (PITR) helps protect your Amazon Keyspaces tables from accidental write or delete operations by providing you continuous backups of your table data.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#PointInTimeRecoveryStatus": {
@@ -2828,12 +2938,12 @@
                 "readCapacityAutoScaling": {
                     "target": "com.amazonaws.keyspaces#AutoScalingSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The read capacity auto scaling settings for the multi-Region\n         table in the specified Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>The read capacity auto scaling settings for the multi-Region table in the specified Amazon Web Services Region.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Web Services Region specific settings of a multi-Region table.</p>\n         <p>For a multi-Region table, you can configure the table's read capacity differently per Amazon Web Services Region. You can do this by configuring the following parameters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>region</code>: The Region where these settings are applied. (Required)</p>\n            </li>\n            <li>\n               <p>\n                  <code>readCapacityUnits</code>: The provisioned read capacity units. (Optional)</p>\n            </li>\n            <li>\n               <p>\n                  <code>readCapacityAutoScaling</code>: The read capacity auto scaling settings for the table. (Optional)</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The Amazon Web Services Region specific settings of a multi-Region table.</p> <p>For a multi-Region table, you can configure the table's read capacity differently per Amazon Web Services Region. You can do this by configuring the following parameters.</p> <ul> <li> <p> <code>region</code>: The Region where these settings are applied. (Required)</p> </li> <li> <p> <code>readCapacityUnits</code>: The provisioned read capacity units. (Optional)</p> </li> <li> <p> <code>readCapacityAutoScaling</code>: The read capacity auto scaling settings for the table. (Optional)</p> </li> </ul>"
             }
         },
         "com.amazonaws.keyspaces#ReplicaSpecificationList": {
@@ -2867,7 +2977,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Region-specific settings of a multi-Region table in the specified Amazon Web Services Region.</p>\n         <p>If the multi-Region table is using provisioned capacity and has optional auto scaling policies configured, note that\n      the Region specific summary returns both read and write capacity settings. But only Region specific read capacity settings can be configured for a \n      multi-Region table. In a multi-Region table, your write capacity units will be synced across all Amazon Web Services Regions to ensure that there is enough \n      capacity to replicate write events across Regions.</p>"
+                "smithy.api#documentation": "<p>The Region-specific settings of a multi-Region table in the specified Amazon Web Services Region.</p> <p>If the multi-Region table is using provisioned capacity and has optional auto scaling policies configured, note that the Region specific summary returns both read and write capacity settings. But only Region specific read capacity settings can be configured for a multi-Region table. In a multi-Region table, your write capacity units will be synced across all Amazon Web Services Regions to ensure that there is enough capacity to replicate write events across Regions.</p>"
             }
         },
         "com.amazonaws.keyspaces#ReplicaSpecificationSummaryList": {
@@ -2887,26 +2997,26 @@
                 "region": {
                     "target": "com.amazonaws.keyspaces#region",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the Region that was added to the keyspace.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the Region that was added to the keyspace. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "keyspaceStatus": {
                     "target": "com.amazonaws.keyspaces#KeyspaceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The status of the keyspace.\n      </p>",
+                        "smithy.api#documentation": "<p> The status of the keyspace. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "tablesReplicationProgress": {
                     "target": "com.amazonaws.keyspaces#TablesReplicationProgress",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         This shows the replication progress of tables in the keyspace. The value is expressed as a percentage of the newly replicated tables \n         with status <code>Active</code> compared to the total number of tables in the keyspace. \n      </p>"
+                        "smithy.api#documentation": "<p> This shows the replication progress of tables in the keyspace. The value is expressed as a percentage of the newly replicated tables with status <code>Active</code> compared to the total number of tables in the keyspace. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         This shows the summary status of the keyspace after a new Amazon Web Services Region was added.\n      </p>"
+                "smithy.api#documentation": "<p> This shows the summary status of the keyspace after a new Amazon Web Services Region was added. </p>"
             }
         },
         "com.amazonaws.keyspaces#ReplicationGroupStatusList": {
@@ -2926,19 +3036,19 @@
                 "replicationStrategy": {
                     "target": "com.amazonaws.keyspaces#rs",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The <code>replicationStrategy</code> of a keyspace, the required value is <code>SINGLE_REGION</code> or \n            <code>MULTI_REGION</code>.\n      </p>",
+                        "smithy.api#documentation": "<p> The <code>replicationStrategy</code> of a keyspace, the required value is <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "regionList": {
                     "target": "com.amazonaws.keyspaces#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The <code>regionList</code> contains the Amazon Web Services Regions where the keyspace is replicated in.\n      </p>"
+                        "smithy.api#documentation": "<p> The <code>regionList</code> contains the Amazon Web Services Regions where the keyspace is replicated in. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The replication specification of the keyspace includes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>regionList</code> - the Amazon Web Services Regions where the keyspace is replicated in.</p>\n            </li>\n            <li>\n               <p>\n                  <code>replicationStrategy</code> - the required value is <code>SINGLE_REGION</code> or \n               <code>MULTI_REGION</code>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p> The replication specification of the keyspace includes:</p> <ul> <li> <p> <code>regionList</code> - the Amazon Web Services Regions where the keyspace is replicated in.</p> </li> <li> <p> <code>replicationStrategy</code> - the required value is <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>.</p> </li> </ul>"
             }
         },
         "com.amazonaws.keyspaces#ResourceNotFoundException": {
@@ -2962,7 +3072,7 @@
                     "code": "ResourceNotFoundException",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p>The operation tried to access a keyspace, table, or type that doesn't exist. The resource might not be specified correctly, \n         or its status might not be <code>ACTIVE</code>.</p>",
+                "smithy.api#documentation": "<p>The operation tried to access a keyspace, table, or type that doesn't exist. The resource might not be specified correctly, or its status might not be <code>ACTIVE</code>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -2996,7 +3106,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Restores the table to the specified point in time within the\n         <code>earliest_restorable_timestamp</code> and the current time. For more information about restore points, see \n         <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_window\">\n            Time window for PITR continuous backups</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>\n         <p>Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.</p>\n         <p>When you restore using point in time recovery,\n         Amazon Keyspaces restores your source table's schema and data to the state \n         based on the selected timestamp <code>(day:hour:minute:second)</code> to a new table. The Time to Live (TTL) settings\n      are also restored to the state based on the selected timestamp.</p>\n         <p>In addition to the table's schema, data, and TTL settings,\n         <code>RestoreTable</code> restores the capacity mode, auto scaling settings, encryption settings, and\n         point-in-time recovery settings from the source table. \n         Unlike the table's schema data and TTL settings, which are restored based on the selected timestamp, \n         these settings are always restored based on the table's settings as of the current time or when the table was deleted.</p>\n         <p>You can also overwrite\n            these settings during restore:</p>\n         <ul>\n            <li>\n               <p>Read/write capacity mode</p>\n            </li>\n            <li>\n               <p>Provisioned throughput capacity units</p>\n            </li>\n            <li>\n               <p>Auto scaling settings</p>\n            </li>\n            <li>\n               <p>Point-in-time (PITR) settings</p>\n            </li>\n            <li>\n               <p>Tags</p>\n            </li>\n         </ul>\n         <p>For more \n               information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_settings\">PITR restore settings</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>Note that the following settings are not restored, and you must configure them manually for\n         the new table:</p>\n         <ul>\n            <li>\n               <p>Identity and Access Management (IAM) policies</p>\n            </li>\n            <li>\n               <p>Amazon CloudWatch metrics and alarms</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Restores the table to the specified point in time within the <code>earliest_restorable_timestamp</code> and the current time. For more information about restore points, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_window\"> Time window for PITR continuous backups</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.</p> <p>When you restore using point in time recovery, Amazon Keyspaces restores your source table's schema and data to the state based on the selected timestamp <code>(day:hour:minute:second)</code> to a new table. The Time to Live (TTL) settings are also restored to the state based on the selected timestamp.</p> <p>In addition to the table's schema, data, and TTL settings, <code>RestoreTable</code> restores the capacity mode, auto scaling settings, encryption settings, and point-in-time recovery settings from the source table. Unlike the table's schema data and TTL settings, which are restored based on the selected timestamp, these settings are always restored based on the table's settings as of the current time or when the table was deleted.</p> <p>You can also overwrite these settings during restore:</p> <ul> <li> <p>Read/write capacity mode</p> </li> <li> <p>Provisioned throughput capacity units</p> </li> <li> <p>Auto scaling settings</p> </li> <li> <p>Point-in-time (PITR) settings</p> </li> <li> <p>Tags</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_settings\">PITR restore settings</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>Note that the following settings are not restored, and you must configure them manually for the new table:</p> <ul> <li> <p>Identity and Access Management (IAM) policies</p> </li> <li> <p>Amazon CloudWatch metrics and alarms</p> </li> </ul>"
             }
         },
         "com.amazonaws.keyspaces#RestoreTableRequest": {
@@ -3039,31 +3149,31 @@
                 "capacitySpecificationOverride": {
                     "target": "com.amazonaws.keyspaces#CapacitySpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the read/write throughput capacity mode for the target table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n            <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p>\n            </li>\n         </ul>\n         <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the read/write throughput capacity mode for the target table. The options are:</p> <ul> <li> <p> <code>throughputMode:PAY_PER_REQUEST</code> </p> </li> <li> <p> <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p> </li> </ul> <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "encryptionSpecificationOverride": {
                     "target": "com.amazonaws.keyspaces#EncryptionSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the encryption settings for the target table. You can choose one of the following KMS key (KMS key):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p>\n            </li>\n            <li>\n               <p>\n                  <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. \n            This option \n            requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p>\n            </li>\n         </ul>\n         <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption settings for the target table. You can choose one of the following KMS key (KMS key):</p> <ul> <li> <p> <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p> </li> <li> <p> <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. This option requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p> </li> </ul> <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "pointInTimeRecoveryOverride": {
                     "target": "com.amazonaws.keyspaces#PointInTimeRecovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the <code>pointInTimeRecovery</code> settings for the target\n            table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status=ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status=DISABLED</code>\n               </p>\n            </li>\n         </ul>\n         <p>If it's not specified, the default is <code>status=DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n               Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the <code>pointInTimeRecovery</code> settings for the target table. The options are:</p> <ul> <li> <p> <code>status=ENABLED</code> </p> </li> <li> <p> <code>status=DISABLED</code> </p> </li> </ul> <p>If it's not specified, the default is <code>status=DISABLED</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "tagsOverride": {
                     "target": "com.amazonaws.keyspaces#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pair tags to be\n         attached to the restored table. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pair tags to be attached to the restored table. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "autoScalingSpecification": {
                     "target": "com.amazonaws.keyspaces#AutoScalingSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional auto scaling settings for the restored table in provisioned capacity mode. \n         Specifies if the service can manage throughput capacity of a provisioned table \n         automatically on your behalf.\n         Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing \n         your table's read and write capacity automatically in response to application traffic.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The optional auto scaling settings for the restored table in provisioned capacity mode. Specifies if the service can manage throughput capacity of a provisioned table automatically on your behalf. Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing your table's read and write capacity automatically in response to application traffic.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "replicaSpecifications": {
@@ -3135,7 +3245,7 @@
                     "code": "ServiceQuotaExceededException",
                     "httpResponseCode": 402
                 },
-                "smithy.api#documentation": "<p>The operation exceeded the service quota for this resource.  For more information on service quotas, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/quotas.html\">Quotas</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The operation exceeded the service quota for this resource. For more information on service quotas, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/quotas.html\">Quotas</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -3174,6 +3284,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.keyspaces#StaticColumn"
+            }
+        },
+        "com.amazonaws.keyspaces#StreamArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):cassandra:.+"
             }
         },
         "com.amazonaws.keyspaces#TableName": {
@@ -3278,7 +3398,7 @@
                 "key": {
                     "target": "com.amazonaws.keyspaces#TagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key of the tag. Tag keys are case sensitive. Each Amazon Keyspaces resource can only have up to one tag with the same key. If you try to add an \n         existing tag (same key), the existing tag value will be updated to the new value.</p>",
+                        "smithy.api#documentation": "<p>The key of the tag. Tag keys are case sensitive. Each Amazon Keyspaces resource can only have up to one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3291,7 +3411,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a tag. A tag is a key-value pair. You can add up to 50 tags to a single Amazon Keyspaces resource.</p>\n         <p>Amazon Web Services-assigned tag names and values are automatically assigned the <code>aws:</code> prefix, which the user cannot assign. \n         Amazon Web Services-assigned tag names do not count towards the tag limit of 50. User-assigned tag names have the \n         prefix <code>user:</code> in the Cost Allocation Report. You cannot backdate the application of a tag.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes a tag. A tag is a key-value pair. You can add up to 50 tags to a single Amazon Keyspaces resource.</p> <p>Amazon Web Services-assigned tag names and values are automatically assigned the <code>aws:</code> prefix, which the user cannot assign. Amazon Web Services-assigned tag names do not count towards the tag limit of 50. User-assigned tag names have the prefix <code>user:</code> in the Cost Allocation Report. You cannot backdate the application of a tag.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#TagKey": {
@@ -3344,7 +3464,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a set of tags with a Amazon Keyspaces resource. You can then \n         activate these user-defined tags so that they appear on the Cost Management Console for cost allocation tracking.\n      For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>For IAM policy examples that show how to control access to Amazon Keyspaces resources based on tags, \n         see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-tags\">Amazon Keyspaces resource access based on tags</a>\n         in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Associates a set of tags with a Amazon Keyspaces resource. You can then activate these user-defined tags so that they appear on the Cost Management Console for cost allocation tracking. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>For IAM policy examples that show how to control access to Amazon Keyspaces resources based on tags, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-tags\">Amazon Keyspaces resource access based on tags</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#TagResourceRequest": {
@@ -3386,28 +3506,28 @@
                     "target": "com.amazonaws.keyspaces#BooleanObject",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies if <code>scale-in</code> is enabled.</p>\n         <p>When auto scaling automatically decreases capacity for a table, \n         the table <i>scales in</i>. When scaling policies are set, they can't\n         scale in the table lower than its minimum capacity.</p>"
+                        "smithy.api#documentation": "<p>Specifies if <code>scale-in</code> is enabled.</p> <p>When auto scaling automatically decreases capacity for a table, the table <i>scales in</i>. When scaling policies are set, they can't scale in the table lower than its minimum capacity.</p>"
                     }
                 },
                 "scaleInCooldown": {
                     "target": "com.amazonaws.keyspaces#IntegerObject",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Specifies a <code>scale-in</code> cool down period.</p>\n         <p>A cooldown period in seconds between scaling activities that lets the table stabilize before another scaling activity starts. </p>"
+                        "smithy.api#documentation": "<p>Specifies a <code>scale-in</code> cool down period.</p> <p>A cooldown period in seconds between scaling activities that lets the table stabilize before another scaling activity starts. </p>"
                     }
                 },
                 "scaleOutCooldown": {
                     "target": "com.amazonaws.keyspaces#IntegerObject",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Specifies a scale out cool down period.</p>\n         <p>A cooldown period in seconds between scaling activities that lets the table stabilize before another scaling activity starts. </p>"
+                        "smithy.api#documentation": "<p>Specifies a scale out cool down period.</p> <p>A cooldown period in seconds between scaling activities that lets the table stabilize before another scaling activity starts. </p>"
                     }
                 },
                 "targetValue": {
                     "target": "com.amazonaws.keyspaces#DoubleObject",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Specifies the target value for the target tracking auto scaling policy.</p>\n         <p>Amazon Keyspaces auto scaling scales up capacity automatically when traffic exceeds this target utilization \n         rate, and then back down when it falls below the target. This ensures that the ratio of\n         consumed capacity to provisioned capacity stays at or near this value. You\n         define <code>targetValue</code> as a percentage. A <code>double</code> between 20 and 90.</p>",
+                        "smithy.api#documentation": "<p>Specifies the target value for the target tracking auto scaling policy.</p> <p>Amazon Keyspaces auto scaling scales up capacity automatically when traffic exceeds this target utilization rate, and then back down when it falls below the target. This ensures that the ratio of consumed capacity to provisioned capacity stays at or near this value. You define <code>targetValue</code> as a percentage. A <code>double</code> between 20 and 90.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3443,7 +3563,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Enable custom Time to Live (TTL) settings for rows and columns without setting a TTL default for the specified table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL-how-it-works.html#ttl-howitworks_enabling\">Enabling TTL on tables</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Enable custom Time to Live (TTL) settings for rows and columns without setting a TTL default for the specified table.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL-how-it-works.html#ttl-howitworks_enabling\">Enabling TTL on tables</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#TimeToLiveStatus": {
@@ -3582,7 +3702,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Adds a new Amazon Web Services Region to the keyspace.  You can add a new Region to a keyspace that is either a single or a multi-Region keyspace.\n         Amazon Keyspaces is going to replicate all tables in the keyspace to the new Region. To successfully replicate all tables to the new Region, they\n         must use client-side timestamps for conflict resolution. To enable client-side timestamps, specify <code>clientSideTimestamps.status = enabled</code>\n         when invoking the API. For more information about client-side timestamps, see\n         <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/client-side-timestamps.html\">Client-side timestamps in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer\n               Guide</i>.</p>\n         <p>To add a Region to a keyspace using the <code>UpdateKeyspace</code> API, the IAM principal needs permissions for the following IAM actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>cassandra:Alter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cassandra:AlterMultiRegionResource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cassandra:Create</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cassandra:CreateMultiRegionResource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cassandra:Select</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cassandra:SelectMultiRegionResource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cassandra:Modify</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cassandra:ModifyMultiRegionResource</code>\n               </p>\n            </li>\n         </ul>\n         <p>If the keyspace contains a table that is configured in provisioned mode with auto scaling enabled, \n         the following additional IAM actions need to be allowed.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>application-autoscaling:RegisterScalableTarget</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application-autoscaling:DeregisterScalableTarget</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application-autoscaling:DescribeScalableTargets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application-autoscaling:PutScalingPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application-autoscaling:DescribeScalingPolicies</code>\n               </p>\n            </li>\n         </ul>\n         <p>To use the <code>UpdateKeyspace</code> API, the IAM principal also needs permissions to\n        create a service-linked role with the following elements:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>iam:CreateServiceLinkedRole</code> - The <b>action</b> the principal can perform.</p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:iam::*:role/aws-service-role/replication.cassandra.amazonaws.com/AWSServiceRoleForKeyspacesReplication</code>\n               - The <b>resource</b> that the action can be\n               performed on. </p>\n            </li>\n            <li>\n               <p>\n                  <code>iam:AWSServiceName: replication.cassandra.amazonaws.com</code>\n               - The only Amazon Web Services service that this role can be attached to is Amazon Keyspaces.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/howitworks_replication_permissions_addReplica.html\">Configure the IAM permissions\n            required to add an Amazon Web Services Region to a keyspace</a>\n         in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p> Adds a new Amazon Web Services Region to the keyspace. You can add a new Region to a keyspace that is either a single or a multi-Region keyspace. Amazon Keyspaces is going to replicate all tables in the keyspace to the new Region. To successfully replicate all tables to the new Region, they must use client-side timestamps for conflict resolution. To enable client-side timestamps, specify <code>clientSideTimestamps.status = enabled</code> when invoking the API. For more information about client-side timestamps, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/client-side-timestamps.html\">Client-side timestamps in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>To add a Region to a keyspace using the <code>UpdateKeyspace</code> API, the IAM principal needs permissions for the following IAM actions:</p> <ul> <li> <p> <code>cassandra:Alter</code> </p> </li> <li> <p> <code>cassandra:AlterMultiRegionResource</code> </p> </li> <li> <p> <code>cassandra:Create</code> </p> </li> <li> <p> <code>cassandra:CreateMultiRegionResource</code> </p> </li> <li> <p> <code>cassandra:Select</code> </p> </li> <li> <p> <code>cassandra:SelectMultiRegionResource</code> </p> </li> <li> <p> <code>cassandra:Modify</code> </p> </li> <li> <p> <code>cassandra:ModifyMultiRegionResource</code> </p> </li> </ul> <p>If the keyspace contains a table that is configured in provisioned mode with auto scaling enabled, the following additional IAM actions need to be allowed.</p> <ul> <li> <p> <code>application-autoscaling:RegisterScalableTarget</code> </p> </li> <li> <p> <code>application-autoscaling:DeregisterScalableTarget</code> </p> </li> <li> <p> <code>application-autoscaling:DescribeScalableTargets</code> </p> </li> <li> <p> <code>application-autoscaling:PutScalingPolicy</code> </p> </li> <li> <p> <code>application-autoscaling:DescribeScalingPolicies</code> </p> </li> </ul> <p>To use the <code>UpdateKeyspace</code> API, the IAM principal also needs permissions to create a service-linked role with the following elements:</p> <ul> <li> <p> <code>iam:CreateServiceLinkedRole</code> - The <b>action</b> the principal can perform.</p> </li> <li> <p> <code>arn:aws:iam::*:role/aws-service-role/replication.cassandra.amazonaws.com/AWSServiceRoleForKeyspacesReplication</code> - The <b>resource</b> that the action can be performed on. </p> </li> <li> <p> <code>iam:AWSServiceName: replication.cassandra.amazonaws.com</code> - The only Amazon Web Services service that this role can be attached to is Amazon Keyspaces.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/howitworks_replication_permissions_addReplica.html\">Configure the IAM permissions required to add an Amazon Web Services Region to a keyspace</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#UpdateKeyspaceRequest": {
@@ -3591,7 +3711,7 @@
                 "keyspaceName": {
                     "target": "com.amazonaws.keyspaces#KeyspaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the keyspace.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the keyspace. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3615,7 +3735,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.keyspaces#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The unique identifier of the keyspace in the format of an Amazon Resource Name (ARN).\n      </p>",
+                        "smithy.api#documentation": "<p> The unique identifier of the keyspace in the format of an Amazon Resource Name (ARN). </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3653,7 +3773,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds new columns to the table or updates one of the table's settings, for example\n         capacity mode, auto scaling, encryption, point-in-time recovery, or ttl settings.\n      Note that you can only update one specific table setting per update operation.</p>"
+                "smithy.api#documentation": "<p>Adds new columns to the table or updates one of the table's settings, for example capacity mode, auto scaling, encryption, point-in-time recovery, or ttl settings. Note that you can only update one specific table setting per update operation.</p>"
             }
         },
         "com.amazonaws.keyspaces#UpdateTableRequest": {
@@ -3676,55 +3796,61 @@
                 "addColumns": {
                     "target": "com.amazonaws.keyspaces#ColumnDefinitionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>For each column to be added to the specified table:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code>  -  The name\n            of the column.</p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>  -  An Amazon Keyspaces\n            data type. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types\">Data types</a> in the <i>Amazon Keyspaces Developer\n                  Guide</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>For each column to be added to the specified table:</p> <ul> <li> <p> <code>name</code> - The name of the column.</p> </li> <li> <p> <code>type</code> - An Amazon Keyspaces data type. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types\">Data types</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> </li> </ul>"
                     }
                 },
                 "capacitySpecification": {
                     "target": "com.amazonaws.keyspaces#CapacitySpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Modifies the read/write throughput capacity mode for the table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n            <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p>\n            </li>\n         </ul>\n         <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Modifies the read/write throughput capacity mode for the table. The options are:</p> <ul> <li> <p> <code>throughputMode:PAY_PER_REQUEST</code> and </p> </li> <li> <p> <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p> </li> </ul> <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "encryptionSpecification": {
                     "target": "com.amazonaws.keyspaces#EncryptionSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Modifies the encryption settings of the table. You can choose one of the following KMS key (KMS key):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p>\n            </li>\n            <li>\n               <p>\n                  <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. \n            This option \n            requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p>\n            </li>\n         </ul>\n         <p>The default is <code>AWS_OWNED_KMS_KEY</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Modifies the encryption settings of the table. You can choose one of the following KMS key (KMS key):</p> <ul> <li> <p> <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p> </li> <li> <p> <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. This option requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p> </li> </ul> <p>The default is <code>AWS_OWNED_KMS_KEY</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "pointInTimeRecovery": {
                     "target": "com.amazonaws.keyspaces#PointInTimeRecovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>Modifies the <code>pointInTimeRecovery</code> settings of the table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status=ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status=DISABLED</code>\n               </p>\n            </li>\n         </ul>\n         <p>If it's not specified, the default is <code>status=DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Modifies the <code>pointInTimeRecovery</code> settings of the table. The options are:</p> <ul> <li> <p> <code>status=ENABLED</code> </p> </li> <li> <p> <code>status=DISABLED</code> </p> </li> </ul> <p>If it's not specified, the default is <code>status=DISABLED</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "ttl": {
                     "target": "com.amazonaws.keyspaces#TimeToLive",
                     "traits": {
-                        "smithy.api#documentation": "<p>Modifies Time to Live custom settings for the table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status:enabled</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status:disabled</code>\n               </p>\n            </li>\n         </ul>\n         <p>The default is <code>status:disabled</code>. After\n         <code>ttl</code> is enabled, you can't disable it\n         for the table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html\">Expiring data by using Amazon Keyspaces Time to Live (TTL)</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Modifies Time to Live custom settings for the table. The options are:</p> <ul> <li> <p> <code>status:enabled</code> </p> </li> <li> <p> <code>status:disabled</code> </p> </li> </ul> <p>The default is <code>status:disabled</code>. After <code>ttl</code> is enabled, you can't disable it for the table.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html\">Expiring data by using Amazon Keyspaces Time to Live (TTL)</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "defaultTimeToLive": {
                     "target": "com.amazonaws.keyspaces#DefaultTimeToLive",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default Time to Live setting in seconds for the table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL-how-it-works.html#ttl-howitworks_default_ttl\">Setting the default TTL value for a table</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The default Time to Live setting in seconds for the table.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL-how-it-works.html#ttl-howitworks_default_ttl\">Setting the default TTL value for a table</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "clientSideTimestamps": {
                     "target": "com.amazonaws.keyspaces#ClientSideTimestamps",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables client-side timestamps for the table. By default, the setting is disabled. You can enable \n            client-side timestamps with the following option:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status: \"enabled\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>Once client-side timestamps are enabled for a table, this setting cannot be disabled.</p>"
+                        "smithy.api#documentation": "<p>Enables client-side timestamps for the table. By default, the setting is disabled. You can enable client-side timestamps with the following option:</p> <ul> <li> <p> <code>status: \"enabled\"</code> </p> </li> </ul> <p>Once client-side timestamps are enabled for a table, this setting cannot be disabled.</p>"
                     }
                 },
                 "autoScalingSpecification": {
                     "target": "com.amazonaws.keyspaces#AutoScalingSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional auto scaling settings to update for a table in provisioned capacity mode. \n         Specifies if the service can manage throughput capacity of a provisioned table \n         automatically on your behalf.\n         Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing \n         your table's read and write capacity automatically in response to application traffic.</p>\n         <p>If auto scaling is already enabled for the table, you can use <code>UpdateTable</code> to update the minimum and maximum values or the \n      auto scaling policy settings independently.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The optional auto scaling settings to update for a table in provisioned capacity mode. Specifies if the service can manage throughput capacity of a provisioned table automatically on your behalf. Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing your table's read and write capacity automatically in response to application traffic.</p> <p>If auto scaling is already enabled for the table, you can use <code>UpdateTable</code> to update the minimum and maximum values or the auto scaling policy settings independently.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 },
                 "replicaSpecifications": {
                     "target": "com.amazonaws.keyspaces#ReplicaSpecificationList",
                     "traits": {
                         "smithy.api#documentation": "<p>The Region specific settings of a multi-Regional table.</p>"
+                    }
+                },
+                "cdcSpecification": {
+                    "target": "com.amazonaws.keyspaces#CdcSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CDC stream settings of the table.</p>"
                     }
                 }
             }
@@ -3758,6 +3884,29 @@
                 },
                 "smithy.api#documentation": "<p>The operation failed due to an invalid or malformed request.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.keyspaces#ViewType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NEW_IMAGE",
+                        "name": "NEW_IMAGE"
+                    },
+                    {
+                        "value": "OLD_IMAGE",
+                        "name": "OLD_IMAGE"
+                    },
+                    {
+                        "value": "KEYS_ONLY",
+                        "name": "KEYS_ONLY"
+                    },
+                    {
+                        "value": "NEW_AND_OLD_IMAGES",
+                        "name": "NEW_AND_OLD_IMAGES"
+                    }
+                ]
             }
         },
         "com.amazonaws.keyspaces#kmsKeyARN": {

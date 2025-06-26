@@ -780,6 +780,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "conditions": {
+                    "target": "com.amazonaws.qbusiness#PermissionConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditions that restrict when the permission is effective. These conditions can be used to limit the permission based on specific attributes of the request.</p>"
+                    }
+                },
                 "principal": {
                     "target": "com.amazonaws.qbusiness#PrincipalRoleArn",
                     "traits": {
@@ -2991,6 +2997,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "authenticationDetail": {
+                    "target": "com.amazonaws.qbusiness#DataAccessorAuthenticationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication configuration details for the data accessor. This specifies how the ISV will authenticate when accessing data through this data accessor.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.qbusiness#Tags",
                     "traits": {
@@ -4060,6 +4072,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for the ISV associated with this data accessor.</p>"
                     }
                 },
+                "authenticationDetail": {
+                    "target": "com.amazonaws.qbusiness#DataAccessorAuthenticationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication configuration details for the data accessor. This specifies how the ISV authenticates when accessing data through this data accessor.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.qbusiness#Timestamp",
                     "traits": {
@@ -4087,6 +4105,89 @@
                 "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
             }
         },
+        "com.amazonaws.qbusiness#DataAccessorAuthenticationConfiguration": {
+            "type": "union",
+            "members": {
+                "idcTrustedTokenIssuerConfiguration": {
+                    "target": "com.amazonaws.qbusiness#DataAccessorIdcTrustedTokenIssuerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for IAM Identity Center Trusted Token Issuer (TTI) authentication used when the authentication type is <code>AWS_IAM_IDC_TTI</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union type that contains the specific authentication configuration based on the authentication type selected.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#DataAccessorAuthenticationDetail": {
+            "type": "structure",
+            "members": {
+                "authenticationType": {
+                    "target": "com.amazonaws.qbusiness#DataAccessorAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication to use for the data accessor. This determines how the ISV authenticates when accessing data. You can use one of two authentication types:</p> <ul> <li> <p> <code>AWS_IAM_IDC_TTI</code> - Authentication using IAM Identity Center Trusted Token Issuer (TTI). This authentication type allows the ISV to use a trusted token issuer to generate tokens for accessing the data.</p> </li> <li> <p> <code>AWS_IAM_IDC_AUTH_CODE</code> - Authentication using IAM Identity Center authorization code flow. This authentication type uses the standard OAuth 2.0 authorization code flow for authentication.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "authenticationConfiguration": {
+                    "target": "com.amazonaws.qbusiness#DataAccessorAuthenticationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific authentication configuration based on the authentication type.</p>"
+                    }
+                },
+                "externalIds": {
+                    "target": "com.amazonaws.qbusiness#DataAccessorExternalIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of external identifiers associated with this authentication configuration. These are used to correlate the data accessor with external systems.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the authentication configuration details for a data accessor. This structure defines how the ISV authenticates when accessing data through the data accessor.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#DataAccessorAuthenticationType": {
+            "type": "enum",
+            "members": {
+                "AWS_IAM_IDC_TTI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_IAM_IDC_TTI"
+                    }
+                },
+                "AWS_IAM_IDC_AUTH_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_IAM_IDC_AUTH_CODE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of authentication mechanism used by the data accessor.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#DataAccessorExternalId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+            }
+        },
+        "com.amazonaws.qbusiness#DataAccessorExternalIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qbusiness#DataAccessorExternalId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.qbusiness#DataAccessorId": {
             "type": "string",
             "traits": {
@@ -4095,6 +4196,21 @@
                     "max": 36
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
+            }
+        },
+        "com.amazonaws.qbusiness#DataAccessorIdcTrustedTokenIssuerConfiguration": {
+            "type": "structure",
+            "members": {
+                "idcTrustedTokenIssuerArn": {
+                    "target": "com.amazonaws.qbusiness#IdcTrustedTokenIssuerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center Trusted Token Issuer that will be used for authentication.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration details for IAM Identity Center Trusted Token Issuer (TTI) authentication.</p>"
             }
         },
         "com.amazonaws.qbusiness#DataAccessorName": {
@@ -7338,6 +7454,12 @@
                         "smithy.api#documentation": "<p>The list of action configurations specifying the allowed actions and any associated filters.</p>"
                     }
                 },
+                "authenticationDetail": {
+                    "target": "com.amazonaws.qbusiness#DataAccessorAuthenticationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication configuration details for the data accessor. This specifies how the ISV authenticates when accessing data through this data accessor.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.qbusiness#Timestamp",
                     "traits": {
@@ -8633,7 +8755,7 @@
                 "lambdaArn": {
                     "target": "com.amazonaws.qbusiness#LambdaArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function sduring ingestion. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/cde-lambda-operations.html\">Using Lambda functions for Amazon Q Business document enrichment</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function during ingestion. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/cde-lambda-operations.html\">Using Lambda functions for Amazon Q Business document enrichment</a>.</p>"
                     }
                 },
                 "s3BucketName": {
@@ -8693,6 +8815,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the IAM Identity Center Application used to configure authentication for a plugin.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#IdcTrustedTokenIssuerArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1284
+                },
+                "smithy.api#pattern": "^arn:aws:sso::[0-9]{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.qbusiness#IdentityProviderConfiguration": {
@@ -11659,6 +11791,86 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.qbusiness#PermissionCondition": {
+            "type": "structure",
+            "members": {
+                "conditionOperator": {
+                    "target": "com.amazonaws.qbusiness#PermissionConditionOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use for the condition evaluation. This determines how the condition values are compared.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "conditionKey": {
+                    "target": "com.amazonaws.qbusiness#PermissionConditionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key for the condition. This identifies the attribute that the condition applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "conditionValues": {
+                    "target": "com.amazonaws.qbusiness#PermissionConditionValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to compare against using the specified condition operator.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a condition that restricts when a permission is effective. Conditions allow you to control access based on specific attributes of the request.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#PermissionConditionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^aws:PrincipalTag/qbusiness-dataaccessor:[a-zA-Z]+"
+            }
+        },
+        "com.amazonaws.qbusiness#PermissionConditionOperator": {
+            "type": "enum",
+            "members": {
+                "STRING_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringEquals"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#PermissionConditionValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+            }
+        },
+        "com.amazonaws.qbusiness#PermissionConditionValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qbusiness#PermissionConditionValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#PermissionConditions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qbusiness#PermissionCondition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.qbusiness#PersonalizationConfiguration": {
             "type": "structure",
             "members": {
@@ -14463,6 +14675,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated list of action configurations specifying the allowed actions and any associated filters.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "authenticationDetail": {
+                    "target": "com.amazonaws.qbusiness#DataAccessorAuthenticationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated authentication configuration details for the data accessor. This specifies how the ISV will authenticate when accessing data through this data accessor.</p>"
                     }
                 },
                 "displayName": {
