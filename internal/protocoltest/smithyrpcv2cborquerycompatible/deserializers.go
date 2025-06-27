@@ -106,8 +106,11 @@ func rpc2_deserializeOpErrorGetItem(resp *smithyhttp.Response) error {
 	}
 
 	_ = v
-	switch string(typ) {
-	case "smithy.protocoltests.rpcv2Cbor#ItemNotFound":
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "ItemNotFound":
 		verr, err := deserializeCBOR_ItemNotFound(v)
 		if err != nil {
 			return &smithy.DeserializationError{

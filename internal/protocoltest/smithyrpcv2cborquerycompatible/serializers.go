@@ -45,7 +45,6 @@ func (m *smithyRpcv2cbor_serializeOpGetItem) HandleSerialize(ctx context.Context
 
 	req.Header.Set("Content-Type", "application/cbor")
 	req.Header.Set("Accept", "application/cbor")
-
 	req.Header.Set("X-Amzn-Query-Mode", "true")
 
 	cv, err := serializeCBOR_GetItemInput(input)
