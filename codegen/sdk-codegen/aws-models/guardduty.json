@@ -9884,7 +9884,7 @@
                     "target": "com.amazonaws.guardduty#KubernetesResourcesTypes",
                     "traits": {
                         "smithy.api#documentation": "<p>The types of Kubernetes resources involved in the workload.</p>",
-                        "smithy.api#jsonName": "kubernetesResourcesTypes"
+                        "smithy.api#jsonName": "type"
                     }
                 }
             },

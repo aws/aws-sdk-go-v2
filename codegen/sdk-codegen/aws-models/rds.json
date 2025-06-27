@@ -30168,6 +30168,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#InvalidDBInstanceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBShardGroupStateFault"
                 }
             ],
             "traits": {
@@ -30655,6 +30658,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#InvalidDBInstanceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBShardGroupStateFault"
                 }
             ],
             "traits": {

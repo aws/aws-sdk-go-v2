@@ -10397,6 +10397,46 @@
                 "smithy.api#documentation": "<p>Specifies a <code>grok</code> classifier for <code>CreateClassifier</code>\n      to create.</p>"
             }
         },
+        "com.amazonaws.glue#CreateIcebergTableInput": {
+            "type": "structure",
+            "members": {
+                "Location": {
+                    "target": "com.amazonaws.glue#LocationString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location where the Iceberg table data will be stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.glue#IcebergSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema definition that specifies the structure, field types, and metadata for the Iceberg table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartitionSpec": {
+                    "target": "com.amazonaws.glue#IcebergPartitionSpec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partitioning specification that defines how the Iceberg table data will be organized and partitioned for optimal query performance.</p>"
+                    }
+                },
+                "WriteOrder": {
+                    "target": "com.amazonaws.glue#IcebergSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order specification that defines how data should be ordered within each partition to optimize query performance.</p>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.glue#StringToStringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs of additional table properties and configuration settings for the Iceberg table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog, \n      including table properties and metadata specifications.</p>"
+            }
+        },
         "com.amazonaws.glue#CreateIntegration": {
             "type": "operation",
             "input": {
@@ -12012,6 +12052,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The catalog database in which to create the new table. For Hive\n      compatibility, this name is entirely lowercase.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the table within the specified database that will be \n      created in the Glue Data Catalog.</p>"
                     }
                 },
                 "TableInput": {
@@ -17906,6 +17952,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the connection to an external data source, for example a Redshift-federated catalog.</p>"
                     }
+                },
+                "ConnectionType": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of connection used to access the federated catalog, specifying the protocol or method for connection to the \n    external data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17925,6 +17977,12 @@
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the connection to the external metastore.</p>"
+                    }
+                },
+                "ConnectionType": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of connection used to access the federated database, such as JDBC, ODBC, or other supported connection protocols.</p>"
                     }
                 }
             },
@@ -17972,6 +18030,12 @@
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the connection to the external metastore.</p>"
+                    }
+                },
+                "ConnectionType": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of connection used to access the federated table, specifying the protocol or method for connecting to the external data source.</p>"
                     }
                 }
             },
@@ -25927,6 +25991,9 @@
                 "smithy.api#documentation": "<p>Compaction metrics for Iceberg for the optimizer run.</p>"
             }
         },
+        "com.amazonaws.glue#IcebergDocument": {
+            "type": "document"
+        },
         "com.amazonaws.glue#IcebergInput": {
             "type": "structure",
             "members": {
@@ -25942,10 +26009,33 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The table version for the Iceberg table. Defaults to 2.</p>"
                     }
+                },
+                "CreateIcebergTableInput": {
+                    "target": "com.amazonaws.glue#CreateIcebergTableInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog, including table properties \n      and metadata specifications.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure that defines an Apache Iceberg metadata table to create in the catalog.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergNullOrder": {
+            "type": "enum",
+            "members": {
+                "NULLS_FIRST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nulls-first"
+                    }
+                },
+                "NULLS_LAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nulls-last"
+                    }
+                }
             }
         },
         "com.amazonaws.glue#IcebergOrphanFileDeletionConfiguration": {
@@ -26002,6 +26092,71 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Orphan file deletion metrics for Iceberg for the optimizer run.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergPartitionField": {
+            "type": "structure",
+            "members": {
+                "SourceId": {
+                    "target": "com.amazonaws.glue#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The identifier of the source field from the table schema that this partition field is based on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Transform": {
+                    "target": "com.amazonaws.glue#IcebergTransformString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transformation function applied to the source field to create the partition, such as identity, bucket, truncate, year, month, day, or hour.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#ColumnNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the partition field as it will appear in the partitioned table structure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FieldId": {
+                    "target": "com.amazonaws.glue#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The unique identifier assigned to this partition field within the Iceberg table's partition specification.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a single partition field within an Iceberg partition specification, including the source field, transformation function, partition name, \n      and unique identifier.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergPartitionSpec": {
+            "type": "structure",
+            "members": {
+                "Fields": {
+                    "target": "com.amazonaws.glue#IcebergPartitionSpecFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of partition fields that define how the table data should be partitioned, including source fields and their transformations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SpecId": {
+                    "target": "com.amazonaws.glue#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The unique identifier for this partition specification within the Iceberg table's metadata history.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the partitioning specification for an Iceberg table, determining how table data will be organized and partitioned for optimal query performance.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergPartitionSpecFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#IcebergPartitionField"
             }
         },
         "com.amazonaws.glue#IcebergRetentionConfiguration": {
@@ -26080,6 +26235,230 @@
                 "smithy.api#documentation": "<p>Snapshot retention metrics for Iceberg for the optimizer run.</p>"
             }
         },
+        "com.amazonaws.glue#IcebergSchema": {
+            "type": "structure",
+            "members": {
+                "SchemaId": {
+                    "target": "com.amazonaws.glue#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The unique identifier for this schema version within the Iceberg table's schema evolution history.</p>"
+                    }
+                },
+                "IdentifierFieldIds": {
+                    "target": "com.amazonaws.glue#IntegerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of field identifiers that uniquely identify records in the table, used for row-level operations and deduplication.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.glue#IcebergStructTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The root type of the schema structure, typically \"struct\" for Iceberg table schemas.</p>"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.glue#IcebergStructFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of field definitions that make up the table schema, including field names, types, and metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the schema structure for an Iceberg table, including field definitions, data types, and schema metadata.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergSortDirection": {
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "asc"
+                    }
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "desc"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#IcebergSortField": {
+            "type": "structure",
+            "members": {
+                "SourceId": {
+                    "target": "com.amazonaws.glue#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The identifier of the source field from the table schema that this sort field is based on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Transform": {
+                    "target": "com.amazonaws.glue#IcebergTransformString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transformation function applied to the source field before sorting, such as identity, bucket, or truncate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Direction": {
+                    "target": "com.amazonaws.glue#IcebergSortDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort direction for this field, either ascending or descending.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NullOrder": {
+                    "target": "com.amazonaws.glue#IcebergNullOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ordering behavior for null values in this field, specifying whether nulls should appear first or last in the sort order.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a single field within an Iceberg sort order specification, including the source field, transformation, sort direction, and null value ordering.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergSortOrder": {
+            "type": "structure",
+            "members": {
+                "OrderId": {
+                    "target": "com.amazonaws.glue#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The unique identifier for this sort order specification within the Iceberg table's metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.glue#IcebergSortOrderFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of fields and their sort directions that define the ordering criteria for the Iceberg table data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the sort order specification for an Iceberg table, determining how data should be ordered within partitions to \n      optimize query performance.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergSortOrderFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#IcebergSortField"
+            }
+        },
+        "com.amazonaws.glue#IcebergStructField": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The unique identifier assigned to this field within the Iceberg table schema, used for schema evolution and field tracking.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#ColumnNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field as it appears in the table schema and query operations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.glue#IcebergDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type definition for this field, specifying the structure and format of the data it contains.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Required": {
+                    "target": "com.amazonaws.glue#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether this field is required (non-nullable) or optional (nullable) in the table schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Doc": {
+                    "target": "com.amazonaws.glue#CommentString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional documentation or description text that provides additional context about the purpose and usage of this field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a single field within an Iceberg table schema, including its identifier, name, data type, nullability, and documentation.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergStructFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#IcebergStructField"
+            }
+        },
+        "com.amazonaws.glue#IcebergStructTypeEnum": {
+            "type": "enum",
+            "members": {
+                "STRUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "struct"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#IcebergTableUpdate": {
+            "type": "structure",
+            "members": {
+                "Schema": {
+                    "target": "com.amazonaws.glue#IcebergSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated schema definition for the Iceberg table, specifying any changes to field structure, data types, or schema metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartitionSpec": {
+                    "target": "com.amazonaws.glue#IcebergPartitionSpec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated partitioning specification that defines how the table data should be reorganized and partitioned.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.glue#IcebergSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated sort order specification that defines how data should be ordered within partitions for optimal query performance.</p>"
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.glue#LocationString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated S3 location where the Iceberg table data will be stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.glue#StringToStringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated key-value pairs of table properties and configuration settings for the Iceberg table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a complete set of updates to be applied to an Iceberg table, including schema changes, partitioning modifications, sort order \n      adjustments, location updates, and property changes.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergTableUpdateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#IcebergTableUpdate"
+            }
+        },
         "com.amazonaws.glue#IcebergTarget": {
             "type": "structure",
             "members": {
@@ -26146,6 +26525,9 @@
             "member": {
                 "target": "com.amazonaws.glue#IcebergTarget"
             }
+        },
+        "com.amazonaws.glue#IcebergTransformString": {
+            "type": "string"
         },
         "com.amazonaws.glue#IdString": {
             "type": "string",
@@ -26380,6 +26762,12 @@
                     "min": 0,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.glue#IntegerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#Integer"
             }
         },
         "com.amazonaws.glue#IntegerValue": {
@@ -39291,7 +39679,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the active learning workflow for your machine learning transform to improve the\n      transform's quality by generating label sets and adding labels.</p>\n         <p>When the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, Glue will have\n      generated a \"labeling set\" or a set of questions for humans to answer.</p>\n         <p>In the case of the <code>FindMatches</code> transform, these questions are of the form,\n      “What is the correct way to group these rows together into groups composed entirely of\n      matching records?” </p>\n         <p>After the labeling process is finished, you can upload your labels with a call to\n        <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes,\n      all future runs of the machine learning transform will use the new and improved labels and\n      perform a higher-quality transformation.</p>"
+                "smithy.api#documentation": "<p>Starts the active learning workflow for your machine learning transform to improve the\n      transform's quality by generating label sets and adding labels.</p>\n         <p>When the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, Glue will have\n      generated a \"labeling set\" or a set of questions for humans to answer.</p>\n         <p>In the case of the <code>FindMatches</code> transform, these questions are of the form,\n      “What is the correct way to group these rows together into groups composed entirely of\n      matching records?” </p>\n         <p>After the labeling process is finished, you can upload your labels with a call to\n        <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes,\n      all future runs of the machine learning transform will use the new and improved labels and\n      perform a higher-quality transformation.</p>\n         <p>Note: The role used to write the generated labeling set to the <code>OutputS3Path</code> is the role\n          associated with the Machine Learning Transform, specified in the <code>CreateMLTransform</code> API.</p>"
             }
         },
         "com.amazonaws.glue#StartMLLabelingSetGenerationTaskRunRequest": {
@@ -40461,6 +40849,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#GenericString"
+            }
+        },
+        "com.amazonaws.glue#StringToStringMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#NullableString"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#NullableString"
             }
         },
         "com.amazonaws.glue#SupportedDialect": {
@@ -43751,6 +44148,36 @@
                 "smithy.api#documentation": "<p>Specifies a grok classifier to update when passed to\n      <code>UpdateClassifier</code>.</p>"
             }
         },
+        "com.amazonaws.glue#UpdateIcebergInput": {
+            "type": "structure",
+            "members": {
+                "UpdateIcebergTableInput": {
+                    "target": "com.amazonaws.glue#UpdateIcebergTableInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific update operations to be applied to the Iceberg table, containing a \n      list of updates that define the new state of the table including schema, \n      partitions, and properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input parameters specific to updating Apache Iceberg tables in Glue Data \n      Catalog, containing the update operations to be applied to an existing Iceberg \n      table.</p>"
+            }
+        },
+        "com.amazonaws.glue#UpdateIcebergTableInput": {
+            "type": "structure",
+            "members": {
+                "Updates": {
+                    "target": "com.amazonaws.glue#IcebergTableUpdateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of table update operations that specify the changes to be made to the Iceberg table, including schema modifications, partition \n      specifications, and table properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the update operations to be applied to an existing Iceberg table in AWS Glue Data Catalog, defining the new state of the table metadata.\n    </p>"
+            }
+        },
         "com.amazonaws.glue#UpdateIntegrationResourceProperty": {
             "type": "operation",
             "input": {
@@ -44228,6 +44655,20 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#UpdateOpenTableFormatInput": {
+            "type": "structure",
+            "members": {
+                "UpdateIcebergInput": {
+                    "target": "com.amazonaws.glue#UpdateIcebergInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Apache Iceberg-specific update parameters that define the table modifications to \n      be applied, including schema changes, partition specifications, and table \n      properties.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input parameters for updating open table format tables in GlueData Catalog, \n      serving as a wrapper for format-specific update operations such as Apache Iceberg.</p>"
             }
         },
         "com.amazonaws.glue#UpdatePartition": {
@@ -44726,11 +45167,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the table within the specified database that will be \n      created in the Glue Data Catalog.</p>"
+                    }
+                },
                 "TableInput": {
                     "target": "com.amazonaws.glue#TableInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>An updated <code>TableInput</code> object to define the metadata table\n      in the catalog.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An updated <code>TableInput</code> object to define the metadata table\n      in the catalog.</p>"
                     }
                 },
                 "SkipArchive": {
@@ -44763,6 +45209,9 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that can be set to true to ignore matching storage descriptor and subobject matching requirements.</p>"
                     }
+                },
+                "UpdateOpenTableFormatInput": {
+                    "target": "com.amazonaws.glue#UpdateOpenTableFormatInput"
                 }
             },
             "traits": {
