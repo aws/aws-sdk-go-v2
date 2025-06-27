@@ -1,3 +1,7 @@
+# v1.99.0 (2025-06-27)
+
+* **Feature**: StartDBCluster and StopDBCluster can now throw InvalidDBShardGroupStateFault.
+
 # v1.98.0 (2025-06-24)
 
 * **Feature**: Adding support for RDS on Dedicated Local Zones, including local backup target, snapshot availability zone and snapshot target

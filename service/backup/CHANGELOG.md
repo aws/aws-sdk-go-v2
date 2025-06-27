@@ -1,3 +1,7 @@
+# v1.43.1 (2025-06-27)
+
+* No change notes available for this release.
+
 # v1.43.0 (2025-06-17)
 
 * **Feature**: AWS Backup is adding support for integration of its logically air-gapped vaults with the AWS Organizations Multi-party approval capability.

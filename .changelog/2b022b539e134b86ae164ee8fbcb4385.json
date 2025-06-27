@@ -1,8 +1,0 @@
-{
-    "id": "2b022b53-9e13-4b86-ae16-4ee8fbcb4385",
-    "type": "feature",
-    "description": "Update JSON target for Kubernetes workload resource type.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

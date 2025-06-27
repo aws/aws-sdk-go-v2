@@ -1,3 +1,7 @@
+# v1.56.0 (2025-06-27)
+
+* **Feature**: Update JSON target for Kubernetes workload resource type.
+
 # v1.55.0 (2025-06-17)
 
 * **Feature**: Adding support for extended threat detection for EKS Audit Logs and EKS Runtime Monitoring.

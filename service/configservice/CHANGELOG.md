@@ -1,3 +1,7 @@
+# v1.52.7 (2025-06-27)
+
+* **Documentation**: Added important considerations to the PutConformancePack and PutOrganizationConformancPack APIs.
+
 # v1.52.6 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

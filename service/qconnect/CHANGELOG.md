@@ -1,3 +1,7 @@
+# v1.18.0 (2025-06-27)
+
+* **Feature**: Adding UnauthorizedException to public SDK
+
 # v1.17.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

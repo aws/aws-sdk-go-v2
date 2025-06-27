@@ -1,8 +1,0 @@
-{
-    "id": "4e332316-3599-4f42-ad53-2ab82a2c61a5",
-    "type": "feature",
-    "description": "Adding UnauthorizedException to public SDK",
-    "modules": [
-        "service/qconnect"
-    ]
-}

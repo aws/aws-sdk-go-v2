@@ -21,7 +21,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.30.6
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.42.2
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.53.2
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.52.6
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.52.7
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.29.4
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.31.2
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.7
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.42.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.5
-	github.com/aws/aws-sdk-go-v2/service/glue v1.115.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.116.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/iam v1.42.2
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.4
@@ -53,9 +53,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.43.4
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.25.4
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.37.3
-	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.24.4
+	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.24.5
 	github.com/aws/aws-sdk-go-v2/service/polly v1.48.4
-	github.com/aws/aws-sdk-go-v2/service/rds v1.98.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.99.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.54.6
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.47.2
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.52.2
@@ -65,7 +65,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.59.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.7
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.34.2
-	github.com/aws/aws-sdk-go-v2/service/ses v1.30.4
+	github.com/aws/aws-sdk-go-v2/service/ses v1.30.5
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.35.7
 	github.com/aws/aws-sdk-go-v2/service/shield v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.31.5

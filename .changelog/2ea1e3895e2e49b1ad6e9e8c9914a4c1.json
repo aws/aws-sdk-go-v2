@@ -1,8 +1,0 @@
-{
-    "id": "2ea1e389-5e2e-49b1-ad6e-9e8c9914a4c1",
-    "type": "feature",
-    "description": "Added support for new SES regions",
-    "modules": [
-        "service/sesv2"
-    ]
-}

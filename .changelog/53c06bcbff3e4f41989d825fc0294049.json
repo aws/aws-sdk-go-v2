@@ -1,8 +1,0 @@
-{
-    "id": "53c06bcb-ff3e-4f41-989d-825fc0294049",
-    "type": "documentation",
-    "description": "Added important considerations to the PutConformancePack and PutOrganizationConformancPack APIs.",
-    "modules": [
-        "service/configservice"
-    ]
-}

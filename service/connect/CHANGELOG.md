@@ -1,3 +1,7 @@
+# v1.130.0 (2025-06-27)
+
+* **Feature**: This release adds the following value to an InitiateAs enum: COMPLETED
+
 # v1.129.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

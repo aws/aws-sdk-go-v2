@@ -1,3 +1,21 @@
+# Release (2025-06-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.52.7](service/configservice/CHANGELOG.md#v1527-2025-06-27)
+  * **Documentation**: Added important considerations to the PutConformancePack and PutOrganizationConformancPack APIs.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.130.0](service/connect/CHANGELOG.md#v11300-2025-06-27)
+  * **Feature**: This release adds the following value to an InitiateAs enum: COMPLETED
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.116.0](service/glue/CHANGELOG.md#v11160-2025-06-27)
+  * **Feature**: AWS Glue now supports schema, partition and sort management of Apache Iceberg tables using Glue SDK
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.56.0](service/guardduty/CHANGELOG.md#v1560-2025-06-27)
+  * **Feature**: Update JSON target for Kubernetes workload resource type.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.18.0](service/qconnect/CHANGELOG.md#v1180-2025-06-27)
+  * **Feature**: Adding UnauthorizedException to public SDK
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.99.0](service/rds/CHANGELOG.md#v1990-2025-06-27)
+  * **Feature**: StartDBCluster and StopDBCluster can now throw InvalidDBShardGroupStateFault.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.46.0](service/sesv2/CHANGELOG.md#v1460-2025-06-27)
+  * **Feature**: Added support for new SES regions
+
 # Release (2025-06-26)
 
 ## Module Highlights

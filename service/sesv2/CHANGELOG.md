@@ -1,3 +1,7 @@
+# v1.46.0 (2025-06-27)
+
+* **Feature**: Added support for new SES regions
+
 # v1.45.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.
