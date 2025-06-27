@@ -2394,7 +2394,10 @@ func rpc2_deserializeOpErrorEmptyInputOutput(resp *smithyhttp.Response) error {
 	}
 
 	_ = v
-	switch string(typ) {
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
 
 	default:
 
@@ -2421,7 +2424,10 @@ func rpc2_deserializeOpErrorFloat16(resp *smithyhttp.Response) error {
 	}
 
 	_ = v
-	switch string(typ) {
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
 
 	default:
 
@@ -2448,7 +2454,10 @@ func rpc2_deserializeOpErrorFractionalSeconds(resp *smithyhttp.Response) error {
 	}
 
 	_ = v
-	switch string(typ) {
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
 
 	default:
 
@@ -2475,8 +2484,11 @@ func rpc2_deserializeOpErrorGreetingWithErrors(resp *smithyhttp.Response) error 
 	}
 
 	_ = v
-	switch string(typ) {
-	case "smithy.protocoltests.rpcv2Cbor#InvalidGreeting":
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "InvalidGreeting":
 		verr, err := deserializeCBOR_InvalidGreeting(v)
 		if err != nil {
 			return &smithy.DeserializationError{
@@ -2486,7 +2498,7 @@ func rpc2_deserializeOpErrorGreetingWithErrors(resp *smithyhttp.Response) error 
 		}
 
 		return verr
-	case "smithy.protocoltests.rpcv2Cbor#ComplexError":
+	case "ComplexError":
 		verr, err := deserializeCBOR_ComplexError(v)
 		if err != nil {
 			return &smithy.DeserializationError{
@@ -2521,7 +2533,10 @@ func rpc2_deserializeOpErrorNoInputOutput(resp *smithyhttp.Response) error {
 	}
 
 	_ = v
-	switch string(typ) {
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
 
 	default:
 
@@ -2548,8 +2563,11 @@ func rpc2_deserializeOpErrorOperationWithDefaults(resp *smithyhttp.Response) err
 	}
 
 	_ = v
-	switch string(typ) {
-	case "smithy.framework#ValidationException":
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "ValidationException":
 		verr, err := deserializeCBOR_ValidationException(v)
 		if err != nil {
 			return &smithy.DeserializationError{
@@ -2584,7 +2602,10 @@ func rpc2_deserializeOpErrorOptionalInputOutput(resp *smithyhttp.Response) error
 	}
 
 	_ = v
-	switch string(typ) {
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
 
 	default:
 
@@ -2611,7 +2632,10 @@ func rpc2_deserializeOpErrorRecursiveShapes(resp *smithyhttp.Response) error {
 	}
 
 	_ = v
-	switch string(typ) {
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
 
 	default:
 
@@ -2638,8 +2662,11 @@ func rpc2_deserializeOpErrorRpcV2CborDenseMaps(resp *smithyhttp.Response) error 
 	}
 
 	_ = v
-	switch string(typ) {
-	case "smithy.framework#ValidationException":
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "ValidationException":
 		verr, err := deserializeCBOR_ValidationException(v)
 		if err != nil {
 			return &smithy.DeserializationError{
@@ -2674,8 +2701,11 @@ func rpc2_deserializeOpErrorRpcV2CborLists(resp *smithyhttp.Response) error {
 	}
 
 	_ = v
-	switch string(typ) {
-	case "smithy.framework#ValidationException":
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "ValidationException":
 		verr, err := deserializeCBOR_ValidationException(v)
 		if err != nil {
 			return &smithy.DeserializationError{
@@ -2710,8 +2740,11 @@ func rpc2_deserializeOpErrorRpcV2CborSparseMaps(resp *smithyhttp.Response) error
 	}
 
 	_ = v
-	switch string(typ) {
-	case "smithy.framework#ValidationException":
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "ValidationException":
 		verr, err := deserializeCBOR_ValidationException(v)
 		if err != nil {
 			return &smithy.DeserializationError{
@@ -2746,7 +2779,10 @@ func rpc2_deserializeOpErrorSimpleScalarProperties(resp *smithyhttp.Response) er
 	}
 
 	_ = v
-	switch string(typ) {
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
 
 	default:
 
@@ -2773,7 +2809,10 @@ func rpc2_deserializeOpErrorSparseNullsOperation(resp *smithyhttp.Response) erro
 	}
 
 	_ = v
-	switch string(typ) {
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
 
 	default:
 
