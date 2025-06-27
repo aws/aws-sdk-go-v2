@@ -31,7 +31,7 @@ func (c *Client) StartEmailContact(ctx context.Context, params *StartEmailContac
 
 type StartEmailContactInput struct {
 
-	// The email address associated with the instance.
+	// The email address associated with the Amazon Connect instance.
 	//
 	// This member is required.
 	DestinationEmailAddress *string

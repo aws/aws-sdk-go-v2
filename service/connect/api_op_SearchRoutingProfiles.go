@@ -13,6 +13,12 @@ import (
 
 // Searches routing profiles in an Amazon Connect instance, with optional
 // filtering.
+//
+// SearchRoutingProfiles does not populate LastModifiedRegion, LastModifiedTime,
+// MediaConcurrencies.CrossChannelBehavior, and AgentAvailabilityTimer in its
+// response, but [DescribeRoutingProfile]does.
+//
+// [DescribeRoutingProfile]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeRoutingProfile.html
 func (c *Client) SearchRoutingProfiles(ctx context.Context, params *SearchRoutingProfilesInput, optFns ...func(*Options)) (*SearchRoutingProfilesOutput, error) {
 	if params == nil {
 		params = &SearchRoutingProfilesInput{}

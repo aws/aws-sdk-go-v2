@@ -1,0 +1,8 @@
+{
+    "id": "690dc916-a512-4541-b3f7-54b1ff25ef1b",
+    "type": "feature",
+    "description": "This release adds the following value to an InitiateAs enum: COMPLETED",
+    "modules": [
+        "service/connect"
+    ]
+}

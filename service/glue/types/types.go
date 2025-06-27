@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/glue/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -2806,6 +2807,36 @@ type CreateGrokClassifierRequest struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration parameters required to create a new Iceberg table in the Glue
+// Data Catalog, including table properties and metadata specifications.
+type CreateIcebergTableInput struct {
+
+	// The S3 location where the Iceberg table data will be stored.
+	//
+	// This member is required.
+	Location *string
+
+	// The schema definition that specifies the structure, field types, and metadata
+	// for the Iceberg table.
+	//
+	// This member is required.
+	Schema *IcebergSchema
+
+	// The partitioning specification that defines how the Iceberg table data will be
+	// organized and partitioned for optimal query performance.
+	PartitionSpec *IcebergPartitionSpec
+
+	// Key-value pairs of additional table properties and configuration settings for
+	// the Iceberg table.
+	Properties map[string]string
+
+	// The sort order specification that defines how data should be ordered within
+	// each partition to optimize query performance.
+	WriteOrder *IcebergSortOrder
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a JSON classifier for CreateClassifier to create.
 type CreateJsonClassifierRequest struct {
 
@@ -4360,6 +4391,10 @@ type FederatedCatalog struct {
 	// Redshift-federated catalog.
 	ConnectionName *string
 
+	// The type of connection used to access the federated catalog, specifying the
+	// protocol or method for connection to the external data source.
+	ConnectionType *string
+
 	// A unique identifier for the federated catalog.
 	Identifier *string
 
@@ -4372,6 +4407,10 @@ type FederatedDatabase struct {
 	// The name of the connection to the external metastore.
 	ConnectionName *string
 
+	// The type of connection used to access the federated database, such as JDBC,
+	// ODBC, or other supported connection protocols.
+	ConnectionType *string
+
 	// A unique identifier for the federated database.
 	Identifier *string
 
@@ -4383,6 +4422,10 @@ type FederatedTable struct {
 
 	// The name of the connection to the external metastore.
 	ConnectionName *string
+
+	// The type of connection used to access the federated table, specifying the
+	// protocol or method for connecting to the external data source.
+	ConnectionType *string
 
 	// A unique identifier for the federated database.
 	DatabaseIdentifier *string
@@ -4946,6 +4989,10 @@ type IcebergInput struct {
 	// This member is required.
 	MetadataOperation MetadataOperation
 
+	// The configuration parameters required to create a new Iceberg table in the Glue
+	// Data Catalog, including table properties and metadata specifications.
+	CreateIcebergTableInput *CreateIcebergTableInput
+
 	// The table version for the Iceberg table. Defaults to 2.
 	Version *string
 
@@ -4981,6 +5028,53 @@ type IcebergOrphanFileDeletionMetrics struct {
 
 	// The number of orphan files deleted by the orphan file deletion job run.
 	NumberOfOrphanFilesDeleted int64
+
+	noSmithyDocumentSerde
+}
+
+// Defines a single partition field within an Iceberg partition specification,
+// including the source field, transformation function, partition name, and unique
+// identifier.
+type IcebergPartitionField struct {
+
+	// The name of the partition field as it will appear in the partitioned table
+	// structure.
+	//
+	// This member is required.
+	Name *string
+
+	// The identifier of the source field from the table schema that this partition
+	// field is based on.
+	//
+	// This member is required.
+	SourceId int32
+
+	// The transformation function applied to the source field to create the
+	// partition, such as identity, bucket, truncate, year, month, day, or hour.
+	//
+	// This member is required.
+	Transform *string
+
+	// The unique identifier assigned to this partition field within the Iceberg
+	// table's partition specification.
+	FieldId int32
+
+	noSmithyDocumentSerde
+}
+
+// Defines the partitioning specification for an Iceberg table, determining how
+// table data will be organized and partitioned for optimal query performance.
+type IcebergPartitionSpec struct {
+
+	// The list of partition fields that define how the table data should be
+	// partitioned, including source fields and their transformations.
+	//
+	// This member is required.
+	Fields []IcebergPartitionField
+
+	// The unique identifier for this partition specification within the Iceberg
+	// table's metadata history.
+	SpecId int32
 
 	noSmithyDocumentSerde
 }
@@ -5025,6 +5119,145 @@ type IcebergRetentionMetrics struct {
 
 	// The number of manifest lists deleted by the retention job run.
 	NumberOfManifestListsDeleted int64
+
+	noSmithyDocumentSerde
+}
+
+// Defines the schema structure for an Iceberg table, including field definitions,
+// data types, and schema metadata.
+type IcebergSchema struct {
+
+	// The list of field definitions that make up the table schema, including field
+	// names, types, and metadata.
+	//
+	// This member is required.
+	Fields []IcebergStructField
+
+	// The list of field identifiers that uniquely identify records in the table, used
+	// for row-level operations and deduplication.
+	IdentifierFieldIds []int32
+
+	// The unique identifier for this schema version within the Iceberg table's schema
+	// evolution history.
+	SchemaId int32
+
+	// The root type of the schema structure, typically "struct" for Iceberg table
+	// schemas.
+	Type IcebergStructTypeEnum
+
+	noSmithyDocumentSerde
+}
+
+// Defines a single field within an Iceberg sort order specification, including
+// the source field, transformation, sort direction, and null value ordering.
+type IcebergSortField struct {
+
+	// The sort direction for this field, either ascending or descending.
+	//
+	// This member is required.
+	Direction IcebergSortDirection
+
+	// The ordering behavior for null values in this field, specifying whether nulls
+	// should appear first or last in the sort order.
+	//
+	// This member is required.
+	NullOrder IcebergNullOrder
+
+	// The identifier of the source field from the table schema that this sort field
+	// is based on.
+	//
+	// This member is required.
+	SourceId int32
+
+	// The transformation function applied to the source field before sorting, such as
+	// identity, bucket, or truncate.
+	//
+	// This member is required.
+	Transform *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the sort order specification for an Iceberg table, determining how data
+// should be ordered within partitions to optimize query performance.
+type IcebergSortOrder struct {
+
+	// The list of fields and their sort directions that define the ordering criteria
+	// for the Iceberg table data.
+	//
+	// This member is required.
+	Fields []IcebergSortField
+
+	// The unique identifier for this sort order specification within the Iceberg
+	// table's metadata.
+	//
+	// This member is required.
+	OrderId int32
+
+	noSmithyDocumentSerde
+}
+
+// Defines a single field within an Iceberg table schema, including its
+// identifier, name, data type, nullability, and documentation.
+type IcebergStructField struct {
+
+	// The unique identifier assigned to this field within the Iceberg table schema,
+	// used for schema evolution and field tracking.
+	//
+	// This member is required.
+	Id int32
+
+	// The name of the field as it appears in the table schema and query operations.
+	//
+	// This member is required.
+	Name *string
+
+	// Indicates whether this field is required (non-nullable) or optional (nullable)
+	// in the table schema.
+	//
+	// This member is required.
+	Required bool
+
+	// The data type definition for this field, specifying the structure and format of
+	// the data it contains.
+	//
+	// This member is required.
+	Type document.Interface
+
+	// Optional documentation or description text that provides additional context
+	// about the purpose and usage of this field.
+	Doc *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines a complete set of updates to be applied to an Iceberg table, including
+// schema changes, partitioning modifications, sort order adjustments, location
+// updates, and property changes.
+type IcebergTableUpdate struct {
+
+	// The updated S3 location where the Iceberg table data will be stored.
+	//
+	// This member is required.
+	Location *string
+
+	// The updated schema definition for the Iceberg table, specifying any changes to
+	// field structure, data types, or schema metadata.
+	//
+	// This member is required.
+	Schema *IcebergSchema
+
+	// The updated partitioning specification that defines how the table data should
+	// be reorganized and partitioned.
+	PartitionSpec *IcebergPartitionSpec
+
+	// Updated key-value pairs of table properties and configuration settings for the
+	// Iceberg table.
+	Properties map[string]string
+
+	// The updated sort order specification that defines how data should be ordered
+	// within partitions for optimal query performance.
+	SortOrder *IcebergSortOrder
 
 	noSmithyDocumentSerde
 }
@@ -10755,6 +10988,35 @@ type UpdateGrokClassifierRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Input parameters specific to updating Apache Iceberg tables in Glue Data
+// Catalog, containing the update operations to be applied to an existing Iceberg
+// table.
+type UpdateIcebergInput struct {
+
+	// The specific update operations to be applied to the Iceberg table, containing a
+	// list of updates that define the new state of the table including schema,
+	// partitions, and properties.
+	//
+	// This member is required.
+	UpdateIcebergTableInput *UpdateIcebergTableInput
+
+	noSmithyDocumentSerde
+}
+
+// Contains the update operations to be applied to an existing Iceberg table in
+// AWS Glue Data Catalog, defining the new state of the table metadata.
+type UpdateIcebergTableInput struct {
+
+	// The list of table update operations that specify the changes to be made to the
+	// Iceberg table, including schema modifications, partition specifications, and
+	// table properties.
+	//
+	// This member is required.
+	Updates []IcebergTableUpdate
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a JSON classifier to be updated.
 type UpdateJsonClassifierRequest struct {
 
@@ -10768,6 +11030,19 @@ type UpdateJsonClassifierRequest struct {
 	//
 	// [Writing JsonPath Custom Classifiers]: https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json
 	JsonPath *string
+
+	noSmithyDocumentSerde
+}
+
+// Input parameters for updating open table format tables in GlueData Catalog,
+// serving as a wrapper for format-specific update operations such as Apache
+// Iceberg.
+type UpdateOpenTableFormatInput struct {
+
+	// Apache Iceberg-specific update parameters that define the table modifications
+	// to be applied, including schema changes, partition specifications, and table
+	// properties.
+	UpdateIcebergInput *UpdateIcebergInput
 
 	noSmithyDocumentSerde
 }

@@ -24,6 +24,10 @@ import (
 // to StartImportLabelsTaskRun . After StartImportLabelsTaskRun finishes, all
 // future runs of the machine learning transform will use the new and improved
 // labels and perform a higher-quality transformation.
+//
+// Note: The role used to write the generated labeling set to the OutputS3Path is
+// the role associated with the Machine Learning Transform, specified in the
+// CreateMLTransform API.
 func (c *Client) StartMLLabelingSetGenerationTaskRun(ctx context.Context, params *StartMLLabelingSetGenerationTaskRunInput, optFns ...func(*Options)) (*StartMLLabelingSetGenerationTaskRunOutput, error) {
 	if params == nil {
 		params = &StartMLLabelingSetGenerationTaskRunInput{}

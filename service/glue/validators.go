@@ -6307,6 +6307,38 @@ func validateCreateGrokClassifierRequest(v *types.CreateGrokClassifierRequest) e
 	}
 }
 
+func validateCreateIcebergTableInput(v *types.CreateIcebergTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIcebergTableInput"}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if v.Schema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
+	} else if v.Schema != nil {
+		if err := validateIcebergSchema(v.Schema); err != nil {
+			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PartitionSpec != nil {
+		if err := validateIcebergPartitionSpec(v.PartitionSpec); err != nil {
+			invalidParams.AddNested("PartitionSpec", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WriteOrder != nil {
+		if err := validateIcebergSortOrder(v.WriteOrder); err != nil {
+			invalidParams.AddNested("WriteOrder", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreateJsonClassifierRequest(v *types.CreateJsonClassifierRequest) error {
 	if v == nil {
 		return nil
@@ -7174,6 +7206,225 @@ func validateIcebergInput(v *types.IcebergInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "IcebergInput"}
 	if len(v.MetadataOperation) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MetadataOperation"))
+	}
+	if v.CreateIcebergTableInput != nil {
+		if err := validateCreateIcebergTableInput(v.CreateIcebergTableInput); err != nil {
+			invalidParams.AddNested("CreateIcebergTableInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergPartitionField(v *types.IcebergPartitionField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergPartitionField"}
+	if v.Transform == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Transform"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergPartitionSpec(v *types.IcebergPartitionSpec) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergPartitionSpec"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateIcebergPartitionSpecFieldList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergPartitionSpecFieldList(v []types.IcebergPartitionField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergPartitionSpecFieldList"}
+	for i := range v {
+		if err := validateIcebergPartitionField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergSchema(v *types.IcebergSchema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergSchema"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateIcebergStructFieldList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergSortField(v *types.IcebergSortField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergSortField"}
+	if v.Transform == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Transform"))
+	}
+	if len(v.Direction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Direction"))
+	}
+	if len(v.NullOrder) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("NullOrder"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergSortOrder(v *types.IcebergSortOrder) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergSortOrder"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateIcebergSortOrderFieldList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergSortOrderFieldList(v []types.IcebergSortField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergSortOrderFieldList"}
+	for i := range v {
+		if err := validateIcebergSortField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergStructField(v *types.IcebergStructField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergStructField"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergStructFieldList(v []types.IcebergStructField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergStructFieldList"}
+	for i := range v {
+		if err := validateIcebergStructField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergTableUpdate(v *types.IcebergTableUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergTableUpdate"}
+	if v.Schema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
+	} else if v.Schema != nil {
+		if err := validateIcebergSchema(v.Schema); err != nil {
+			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PartitionSpec != nil {
+		if err := validateIcebergPartitionSpec(v.PartitionSpec); err != nil {
+			invalidParams.AddNested("PartitionSpec", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortOrder != nil {
+		if err := validateIcebergSortOrder(v.SortOrder); err != nil {
+			invalidParams.AddNested("SortOrder", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergTableUpdateList(v []types.IcebergTableUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergTableUpdateList"}
+	for i := range v {
+		if err := validateIcebergTableUpdate(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8960,6 +9211,44 @@ func validateUpdateGrokClassifierRequest(v *types.UpdateGrokClassifierRequest) e
 	}
 }
 
+func validateUpdateIcebergInput(v *types.UpdateIcebergInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIcebergInput"}
+	if v.UpdateIcebergTableInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateIcebergTableInput"))
+	} else if v.UpdateIcebergTableInput != nil {
+		if err := validateUpdateIcebergTableInput(v.UpdateIcebergTableInput); err != nil {
+			invalidParams.AddNested("UpdateIcebergTableInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateIcebergTableInput(v *types.UpdateIcebergTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIcebergTableInput"}
+	if v.Updates == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Updates"))
+	} else if v.Updates != nil {
+		if err := validateIcebergTableUpdateList(v.Updates); err != nil {
+			invalidParams.AddNested("Updates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateJsonClassifierRequest(v *types.UpdateJsonClassifierRequest) error {
 	if v == nil {
 		return nil
@@ -8967,6 +9256,23 @@ func validateUpdateJsonClassifierRequest(v *types.UpdateJsonClassifierRequest) e
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateJsonClassifierRequest"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateOpenTableFormatInput(v *types.UpdateOpenTableFormatInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOpenTableFormatInput"}
+	if v.UpdateIcebergInput != nil {
+		if err := validateUpdateIcebergInput(v.UpdateIcebergInput); err != nil {
+			invalidParams.AddNested("UpdateIcebergInput", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12788,11 +13094,14 @@ func validateOpUpdateTableInput(v *UpdateTableInput) error {
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
-	if v.TableInput == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableInput"))
-	} else if v.TableInput != nil {
+	if v.TableInput != nil {
 		if err := validateTableInput(v.TableInput); err != nil {
 			invalidParams.AddNested("TableInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UpdateOpenTableFormatInput != nil {
+		if err := validateUpdateOpenTableFormatInput(v.UpdateOpenTableFormatInput); err != nil {
+			invalidParams.AddNested("UpdateOpenTableFormatInput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

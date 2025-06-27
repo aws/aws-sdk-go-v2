@@ -44,6 +44,10 @@ type CreateTableInput struct {
 	// the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
+	// The unique identifier for the table within the specified database that will be
+	// created in the Glue Data Catalog.
+	Name *string
+
 	// Specifies an OpenTableFormatInput structure when creating an open format table.
 	OpenTableFormatInput *types.OpenTableFormatInput
 

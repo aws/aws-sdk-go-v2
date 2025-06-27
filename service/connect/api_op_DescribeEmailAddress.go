@@ -55,7 +55,7 @@ type DescribeEmailAddressOutput struct {
 	// The display name of email address
 	DisplayName *string
 
-	// The email address with the instance, in [^\s@]+@[^\s@]+\.[^\s@]+ format.
+	// The email address, including the domain.
 	EmailAddress *string
 
 	// The Amazon Resource Name (ARN) of the email address.

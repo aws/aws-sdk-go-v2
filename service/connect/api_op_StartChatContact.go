@@ -106,8 +106,7 @@ type StartChatContactInput struct {
 	// customer number from your CRM.
 	CustomerId *string
 
-	// The initial message to be sent to the newly created chat. If you have a Lex bot
-	// in your flow, the initial message is not delivered to the Lex bot.
+	// The initial message to be sent to the newly created chat.
 	InitialMessage *types.ChatMessage
 
 	// Enable persistent chats. For more information about enabling persistent chat,

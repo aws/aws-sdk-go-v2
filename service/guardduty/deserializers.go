@@ -17878,7 +17878,7 @@ func awsRestjson1_deserializeDocumentKubernetesWorkload(v **types.KubernetesWork
 				return err
 			}
 
-		case "kubernetesResourcesTypes":
+		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

@@ -46405,6 +46405,15 @@ func awsAwsjson11_deserializeDocumentFederatedCatalog(v **types.FederatedCatalog
 				sv.ConnectionName = ptr.String(jtv)
 			}
 
+		case "ConnectionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.ConnectionType = ptr.String(jtv)
+			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -46452,6 +46461,15 @@ func awsAwsjson11_deserializeDocumentFederatedDatabase(v **types.FederatedDataba
 					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
 				}
 				sv.ConnectionName = ptr.String(jtv)
+			}
+
+		case "ConnectionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.ConnectionType = ptr.String(jtv)
 			}
 
 		case "Identifier":
@@ -46550,6 +46568,15 @@ func awsAwsjson11_deserializeDocumentFederatedTable(v **types.FederatedTable, va
 					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
 				}
 				sv.ConnectionName = ptr.String(jtv)
+			}
+
+		case "ConnectionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.ConnectionType = ptr.String(jtv)
 			}
 
 		case "DatabaseIdentifier":

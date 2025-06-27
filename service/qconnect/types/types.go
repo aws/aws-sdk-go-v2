@@ -659,10 +659,9 @@ type AnswerRecommendationAIAgentConfiguration struct {
 	// The locale to which specifies the language and region settings that determine
 	// the response language for [QueryAssistant].
 	//
-	// Changing this locale to anything other than en_US , en_GB , or en_AU will turn
-	// off recommendations triggered by contact transcripts for agent assistance, as
-	// this feature is not supported in multiple languages.
+	// For more information on supported locales, see [Language support for Amazon Q in Connect].
 	//
+	// [Language support for Amazon Q in Connect]: https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#qic-notes-languages
 	// [QueryAssistant]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html
 	Locale *string
 
@@ -2795,6 +2794,9 @@ type ManualSearchAIAgentConfiguration struct {
 	// The locale to which specifies the language and region settings that determine
 	// the response language for [QueryAssistant].
 	//
+	// For more information on supported locales, see [Language support for Amazon Q in Connect].
+	//
+	// [Language support for Amazon Q in Connect]: https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#qic-notes-languages
 	// [QueryAssistant]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html
 	Locale *string
 

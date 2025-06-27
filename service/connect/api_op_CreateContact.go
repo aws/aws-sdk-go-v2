@@ -121,6 +121,9 @@ type CreateContactInput struct {
 	SegmentAttributes map[string]types.SegmentAttributeValue
 
 	// User details for the contact
+	//
+	// UserInfo is required when creating an EMAIL contact with OUTBOUND and
+	// AGENT_REPLY contact initiation methods.
 	UserInfo *types.UserInfo
 
 	noSmithyDocumentSerde

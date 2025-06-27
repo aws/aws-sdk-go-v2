@@ -32,7 +32,7 @@ func (c *Client) CreateEmailAddress(ctx context.Context, params *CreateEmailAddr
 
 type CreateEmailAddressInput struct {
 
-	// The email address with the instance, in [^\s@]+@[^\s@]+\.[^\s@]+ format.
+	// The email address, including the domain.
 	//
 	// This member is required.
 	EmailAddress *string

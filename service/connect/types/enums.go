@@ -1076,6 +1076,7 @@ type InitiateAs string
 // Enum values for InitiateAs
 const (
 	InitiateAsConnectedToUser InitiateAs = "CONNECTED_TO_USER"
+	InitiateAsCompleted       InitiateAs = "COMPLETED"
 )
 
 // Values returns all known values for InitiateAs. Note that this can be expanded
@@ -1085,6 +1086,7 @@ const (
 func (InitiateAs) Values() []InitiateAs {
 	return []InitiateAs{
 		"CONNECTED_TO_USER",
+		"COMPLETED",
 	}
 }
 

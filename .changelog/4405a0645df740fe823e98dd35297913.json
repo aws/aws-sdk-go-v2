@@ -1,0 +1,8 @@
+{
+    "id": "4405a064-5df7-40fe-823e-98dd35297913",
+    "type": "feature",
+    "description": "StartDBCluster and StopDBCluster can now throw InvalidDBShardGroupStateFault.",
+    "modules": [
+        "service/rds"
+    ]
+}

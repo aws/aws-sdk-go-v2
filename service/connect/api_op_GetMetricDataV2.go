@@ -85,7 +85,7 @@ type GetMetricDataV2Input struct {
 	//   AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE |
 	//   ANSWERING_MACHINE_DETECTION_STATUS | BOT_ID | BOT_ALIAS | BOT_VERSION |
 	//   BOT_LOCALE | BOT_INTENT_NAME | CAMPAIGN | CAMPAIGN_DELIVERY_EVENT_TYPE |
-	//   CASE_TEMPLATE_ARN | CASE_STATUS | CHANNEL |
+	//   CAMPAIGN_EXCLUDED_EVENT_TYPE | CASE_TEMPLATE_ARN | CASE_STATUS | CHANNEL |
 	//   contact/segmentAttributes/connect:Subtype | DISCONNECT_REASON |
 	//   EVALUATION_FORM | EVALUATION_SECTION | EVALUATION_QUESTION | EVALUATION_SOURCE
 	//   | FEATURE | FLOW_ACTION_ID | FLOW_TYPE | FLOWS_MODULE_RESOURCE_ID |
@@ -544,6 +544,16 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Campaign interactions]
 	//
+	// CAMPAIGN_PROGRESS_RATE This metric is only available for outbound campaigns
+	// initiated using a customer segment. It is not available for event triggered
+	// campaigns.
+	//
+	// Unit: Percent
+	//
+	// Valid groupings and filters: Campaign, Campaign Execution Timestamp
+	//
+	// UI name: [Campaign progress rate]
+	//
 	// CAMPAIGN_SEND_ATTEMPTS This metric is available only for outbound campaigns.
 	//
 	// Unit: Count
@@ -552,6 +562,17 @@ type GetMetricDataV2Input struct {
 	// contact/segmentAttributes/connect:Subtype
 	//
 	// UI name: [Campaign send attempts]
+	//
+	// CAMPAIGN_SEND_EXCLUSIONS This metric is available only for outbound campaigns.
+	//
+	// Valid metric filter key: CAMPAIGN_EXCLUDED_EVENT_TYPE
+	//
+	// Unit: Count
+	//
+	// Valid groupings and filters: Campaign, Campaign Excluded Event Type, Campaign
+	// Execution Timestamp
+	//
+	// UI name: [Campaign send exclusions]
 	//
 	// CASES_CREATED Unit: Count
 	//
@@ -901,6 +922,39 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Customer talk time percent]
 	//
+	// RECIPIENTS_ATTEMPTED This metric is only available for outbound campaigns
+	// initiated using a customer segment. It is not available for event triggered
+	// campaigns.
+	//
+	// Unit: Count
+	//
+	// Valid groupings and filters: Campaign, Campaign Execution Timestamp
+	//
+	// UI name: [Recipients attempted]
+	//
+	// RECIPIENTS_INTERACTED This metric is only available for outbound campaigns
+	// initiated using a customer segment. It is not available for event triggered
+	// campaigns.
+	//
+	// Valid metric filter key: CAMPAIGN_INTERACTION_EVENT_TYPE
+	//
+	// Unit: Count
+	//
+	// Valid groupings and filters: Campaign, Channel,
+	// contact/segmentAttributes/connect:Subtype, Campaign Execution Timestamp
+	//
+	// UI name: [Recipients interacted]
+	//
+	// RECIPIENTS_TARGETED This metric is only available for outbound campaigns
+	// initiated using a customer segment. It is not available for event triggered
+	// campaigns.
+	//
+	// Unit: Count
+	//
+	// Valid groupings and filters: Campaign, Campaign Execution Timestamp
+	//
+	// UI name: [Recipients targeted]
+	//
 	// REOPENED_CASE_ACTIONS Unit: Count
 	//
 	// Required filter key: CASE_TEMPLATE_ARN
@@ -1089,7 +1143,9 @@ type GetMetricDataV2Input struct {
 	// [Average case resolution time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-case-resolution-time
 	// [Agent API connecting time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-api-connecting-time
 	// [Talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#talk-time-percent
+	// [Campaign progress rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-progress-rate
 	// [Average agent talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-talk-time
+	// [Recipients attempted]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-attempted
 	// [Average agent interruption time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruption-time
 	// [Contacts transferred out]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out
 	// [Campaign send attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-attempts
@@ -1101,6 +1157,7 @@ type GetMetricDataV2Input struct {
 	// [API contacts handled]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#api-contacts-handled
 	// [Agent non-response without customer abandons]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-response-without-customer-abandons
 	// [Service level X]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#service-level
+	// [Recipients interacted]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-interacted
 	// [Contact handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-handle-time
 	// [Agent idle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-idle-time
 	// [Adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#adherent-time
@@ -1151,6 +1208,7 @@ type GetMetricDataV2Input struct {
 	// [Contacts queued (enqueue timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued-by-enqueue
 	// [Online time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#online-time
 	// [Agent interaction time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-time
+	// [Recipients targeted]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-targeted
 	// [Average agent interruptions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruptions
 	// [Average dials per minute]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-dials-per-minute
 	// [Delivery attempt disposition rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempt-disposition-rate
@@ -1173,6 +1231,7 @@ type GetMetricDataV2Input struct {
 	// [Delivery attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempts
 	// [Contacts put on hold]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-put-on-hold
 	// [Automatic fails percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#automatic-fails-percent
+	// [Campaign send exclusions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-exclusions
 	// [Callback attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#callback-attempts
 	// [Forecasting, capacity planning, and scheduling]: https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region
 	//
@@ -1206,13 +1265,13 @@ type GetMetricDataV2Input struct {
 	// AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE |
 	// ANSWERING_MACHINE_DETECTION_STATUS | BOT_ID | BOT_ALIAS | BOT_VERSION |
 	// BOT_LOCALE | BOT_INTENT_NAME | CAMPAIGN | CAMPAIGN_DELIVERY_EVENT_TYPE |
-	// CASE_TEMPLATE_ARN | CASE_STATUS | CHANNEL |
-	// contact/segmentAttributes/connect:Subtype | DISCONNECT_REASON | EVALUATION_FORM
-	// | EVALUATION_SECTION | EVALUATION_QUESTION | EVALUATION_SOURCE |
-	// FLOWS_RESOURCE_ID | FLOWS_MODULE_RESOURCE_ID | FLOW_ACTION_ID | FLOW_TYPE |
-	// FLOWS_OUTCOME_TYPE | FORM_VERSION | INITIATION_METHOD |
-	// INVOKING_RESOURCE_PUBLISHED_TIMESTAMP | INVOKING_RESOURCE_TYPE |
-	// PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
+	// CAMPAIGN_EXCLUDED_EVENT_TYPE | CAMPAIGN_EXECUTION_TIMESTAMP | CASE_TEMPLATE_ARN
+	// | CASE_STATUS | CHANNEL | contact/segmentAttributes/connect:Subtype |
+	// DISCONNECT_REASON | EVALUATION_FORM | EVALUATION_SECTION | EVALUATION_QUESTION
+	// | EVALUATION_SOURCE | FLOWS_RESOURCE_ID | FLOWS_MODULE_RESOURCE_ID |
+	// FLOW_ACTION_ID | FLOW_TYPE | FLOWS_OUTCOME_TYPE | FORM_VERSION |
+	// INITIATION_METHOD | INVOKING_RESOURCE_PUBLISHED_TIMESTAMP |
+	// INVOKING_RESOURCE_TYPE | PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
 	// RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION
 	//
 	// Type: Array of strings

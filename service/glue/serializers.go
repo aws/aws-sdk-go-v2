@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/glue/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -18027,6 +18029,46 @@ func awsAwsjson11_serializeDocumentCreateGrokClassifierRequest(v *types.CreateGr
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCreateIcebergTableInput(v *types.CreateIcebergTableInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
+	}
+
+	if v.PartitionSpec != nil {
+		ok := object.Key("PartitionSpec")
+		if err := awsAwsjson11_serializeDocumentIcebergPartitionSpec(v.PartitionSpec, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsAwsjson11_serializeDocumentStringToStringMap(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Schema != nil {
+		ok := object.Key("Schema")
+		if err := awsAwsjson11_serializeDocumentIcebergSchema(v.Schema, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WriteOrder != nil {
+		ok := object.Key("WriteOrder")
+		if err := awsAwsjson11_serializeDocumentIcebergSortOrder(v.WriteOrder, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCreateJsonClassifierRequest(v *types.CreateJsonClassifierRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19417,6 +19459,11 @@ func awsAwsjson11_serializeDocumentFederatedCatalog(v *types.FederatedCatalog, v
 		ok.String(*v.ConnectionName)
 	}
 
+	if v.ConnectionType != nil {
+		ok := object.Key("ConnectionType")
+		ok.String(*v.ConnectionType)
+	}
+
 	if v.Identifier != nil {
 		ok := object.Key("Identifier")
 		ok.String(*v.Identifier)
@@ -19432,6 +19479,11 @@ func awsAwsjson11_serializeDocumentFederatedDatabase(v *types.FederatedDatabase,
 	if v.ConnectionName != nil {
 		ok := object.Key("ConnectionName")
 		ok.String(*v.ConnectionName)
+	}
+
+	if v.ConnectionType != nil {
+		ok := object.Key("ConnectionType")
+		ok.String(*v.ConnectionType)
 	}
 
 	if v.Identifier != nil {
@@ -19934,9 +19986,31 @@ func awsAwsjson11_serializeDocumentIcebergCompactionConfiguration(v *types.Icebe
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIcebergDocument(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIcebergInput(v *types.IcebergInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CreateIcebergTableInput != nil {
+		ok := object.Key("CreateIcebergTableInput")
+		if err := awsAwsjson11_serializeDocumentCreateIcebergTableInput(v.CreateIcebergTableInput, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.MetadataOperation) > 0 {
 		ok := object.Key("MetadataOperation")
@@ -19968,6 +20042,65 @@ func awsAwsjson11_serializeDocumentIcebergOrphanFileDeletionConfiguration(v *typ
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIcebergPartitionField(v *types.IcebergPartitionField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldId != 0 {
+		ok := object.Key("FieldId")
+		ok.Integer(v.FieldId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	{
+		ok := object.Key("SourceId")
+		ok.Integer(v.SourceId)
+	}
+
+	if v.Transform != nil {
+		ok := object.Key("Transform")
+		ok.String(*v.Transform)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIcebergPartitionSpec(v *types.IcebergPartitionSpec, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("Fields")
+		if err := awsAwsjson11_serializeDocumentIcebergPartitionSpecFieldList(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SpecId != 0 {
+		ok := object.Key("SpecId")
+		ok.Integer(v.SpecId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIcebergPartitionSpecFieldList(v []types.IcebergPartitionField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentIcebergPartitionField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIcebergRetentionConfiguration(v *types.IcebergRetentionConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19987,6 +20120,196 @@ func awsAwsjson11_serializeDocumentIcebergRetentionConfiguration(v *types.Iceber
 		ok.Integer(*v.SnapshotRetentionPeriodInDays)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIcebergSchema(v *types.IcebergSchema, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("Fields")
+		if err := awsAwsjson11_serializeDocumentIcebergStructFieldList(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IdentifierFieldIds != nil {
+		ok := object.Key("IdentifierFieldIds")
+		if err := awsAwsjson11_serializeDocumentIntegerList(v.IdentifierFieldIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaId != 0 {
+		ok := object.Key("SchemaId")
+		ok.Integer(v.SchemaId)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIcebergSortField(v *types.IcebergSortField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Direction) > 0 {
+		ok := object.Key("Direction")
+		ok.String(string(v.Direction))
+	}
+
+	if len(v.NullOrder) > 0 {
+		ok := object.Key("NullOrder")
+		ok.String(string(v.NullOrder))
+	}
+
+	{
+		ok := object.Key("SourceId")
+		ok.Integer(v.SourceId)
+	}
+
+	if v.Transform != nil {
+		ok := object.Key("Transform")
+		ok.String(*v.Transform)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIcebergSortOrder(v *types.IcebergSortOrder, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("Fields")
+		if err := awsAwsjson11_serializeDocumentIcebergSortOrderFieldList(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	{
+		ok := object.Key("OrderId")
+		ok.Integer(v.OrderId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIcebergSortOrderFieldList(v []types.IcebergSortField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentIcebergSortField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIcebergStructField(v *types.IcebergStructField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Doc != nil {
+		ok := object.Key("Doc")
+		ok.String(*v.Doc)
+	}
+
+	{
+		ok := object.Key("Id")
+		ok.Integer(v.Id)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	{
+		ok := object.Key("Required")
+		ok.Boolean(v.Required)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("Type")
+		if err := awsAwsjson11_serializeDocumentIcebergDocument(v.Type, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIcebergStructFieldList(v []types.IcebergStructField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentIcebergStructField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIcebergTableUpdate(v *types.IcebergTableUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
+	}
+
+	if v.PartitionSpec != nil {
+		ok := object.Key("PartitionSpec")
+		if err := awsAwsjson11_serializeDocumentIcebergPartitionSpec(v.PartitionSpec, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsAwsjson11_serializeDocumentStringToStringMap(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Schema != nil {
+		ok := object.Key("Schema")
+		if err := awsAwsjson11_serializeDocumentIcebergSchema(v.Schema, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SortOrder != nil {
+		ok := object.Key("SortOrder")
+		if err := awsAwsjson11_serializeDocumentIcebergSortOrder(v.SortOrder, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIcebergTableUpdateList(v []types.IcebergTableUpdate, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentIcebergTableUpdate(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -20043,6 +20366,17 @@ func awsAwsjson11_serializeDocumentInclusionAnnotationList(v []types.DatapointIn
 		if err := awsAwsjson11_serializeDocumentDatapointInclusionAnnotation(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIntegerList(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
 	}
 	return nil
 }
@@ -24563,6 +24897,17 @@ func awsAwsjson11_serializeDocumentStringList(v []string, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentStringToStringMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSupportedDialect(v *types.SupportedDialect, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25335,6 +25680,34 @@ func awsAwsjson11_serializeDocumentUpdateGrokClassifierRequest(v *types.UpdateGr
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentUpdateIcebergInput(v *types.UpdateIcebergInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UpdateIcebergTableInput != nil {
+		ok := object.Key("UpdateIcebergTableInput")
+		if err := awsAwsjson11_serializeDocumentUpdateIcebergTableInput(v.UpdateIcebergTableInput, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateIcebergTableInput(v *types.UpdateIcebergTableInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Updates != nil {
+		ok := object.Key("Updates")
+		if err := awsAwsjson11_serializeDocumentIcebergTableUpdateList(v.Updates, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentUpdateJsonClassifierRequest(v *types.UpdateJsonClassifierRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25347,6 +25720,20 @@ func awsAwsjson11_serializeDocumentUpdateJsonClassifierRequest(v *types.UpdateJs
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateOpenTableFormatInput(v *types.UpdateOpenTableFormatInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UpdateIcebergInput != nil {
+		ok := object.Key("UpdateIcebergInput")
+		if err := awsAwsjson11_serializeDocumentUpdateIcebergInput(v.UpdateIcebergInput, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -27137,6 +27524,11 @@ func awsAwsjson11_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 	if v.DatabaseName != nil {
 		ok := object.Key("DatabaseName")
 		ok.String(*v.DatabaseName)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
 	}
 
 	if v.OpenTableFormatInput != nil {
@@ -32191,6 +32583,11 @@ func awsAwsjson11_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 		ok.Boolean(v.Force)
 	}
 
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
 	if v.SkipArchive != nil {
 		ok := object.Key("SkipArchive")
 		ok.Boolean(*v.SkipArchive)
@@ -32206,6 +32603,13 @@ func awsAwsjson11_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 	if v.TransactionId != nil {
 		ok := object.Key("TransactionId")
 		ok.String(*v.TransactionId)
+	}
+
+	if v.UpdateOpenTableFormatInput != nil {
+		ok := object.Key("UpdateOpenTableFormatInput")
+		if err := awsAwsjson11_serializeDocumentUpdateOpenTableFormatInput(v.UpdateOpenTableFormatInput, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.VersionId != nil {

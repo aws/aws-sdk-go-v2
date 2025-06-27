@@ -35,11 +35,6 @@ type UpdateTableInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// An updated TableInput object to define the metadata table in the catalog.
-	//
-	// This member is required.
-	TableInput *types.TableInput
-
 	// The ID of the Data Catalog where the table resides. If none is provided, the
 	// Amazon Web Services account ID is used by default.
 	CatalogId *string
@@ -48,13 +43,25 @@ type UpdateTableInput struct {
 	// subobject matching requirements.
 	Force bool
 
+	// The unique identifier for the table within the specified database that will be
+	// created in the Glue Data Catalog.
+	Name *string
+
 	// By default, UpdateTable always creates an archived version of the table before
 	// updating it. However, if skipArchive is set to true, UpdateTable does not
 	// create the archived version.
 	SkipArchive *bool
 
+	// An updated TableInput object to define the metadata table in the catalog.
+	TableInput *types.TableInput
+
 	// The transaction ID at which to update the table contents.
 	TransactionId *string
+
+	// Input parameters for updating open table format tables in GlueData Catalog,
+	// serving as a wrapper for format-specific update operations such as Apache
+	// Iceberg.
+	UpdateOpenTableFormatInput *types.UpdateOpenTableFormatInput
 
 	// The version ID at which to update the table contents.
 	VersionId *string

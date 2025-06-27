@@ -1954,10 +1954,10 @@ type EffectiveHoursOfOperations struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a source or destination email address
+// Contains information about a source or destination email address.
 type EmailAddressInfo struct {
 
-	// The email address with the instance, in [^\s@]+@[^\s@]+\.[^\s@]+ format.
+	// The email address, including the domain.
 	//
 	// This member is required.
 	EmailAddress *string
@@ -1977,7 +1977,7 @@ type EmailAddressMetadata struct {
 	// The display name of email address.
 	DisplayName *string
 
-	// The email address with the instance, in [^\s@]+@[^\s@]+\.[^\s@]+ format.
+	// The email address, including the domain.
 	EmailAddress *string
 
 	// The Amazon Resource Name (ARN) of the email address.
@@ -3460,13 +3460,27 @@ type HoursOfOperationTimeSlice struct {
 	noSmithyDocumentSerde
 }
 
-// The additional TO CC recipients information of inbound email.
+// Information about the additional TO and CC recipients of an inbound email
+// contact.
+//
+// You can include up to 50 email addresses in total, distributed across [DestinationEmailAddress],
+// ToAddresses , and CcAddresses . This total must include one required
+// DestinationEmailAddress . You can then specify up to 49 addresses allocated
+// across ToAddresses and CcAddresses as needed.
+//
+// [DestinationEmailAddress]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartEmailContact.html#API_StartEmailContact_RequestBody
 type InboundAdditionalRecipients struct {
 
-	// The additional recipients information present in cc list.
+	// The additional recipients information present in cc list. You must have 1
+	// required recipient ( DestinationEmailAddress ). You can then specify up to 49
+	// additional recipients (across ToAddresses and CcAddresses ), for a total of 50
+	// recipients.
 	CcAddresses []EmailAddressInfo
 
-	// The additional recipients information present in to list.
+	// The additional recipients information present in to list. You must have 1
+	// required recipient ( DestinationEmailAddress ). You can then specify up to 49
+	// additional recipients (across ToAddresses and CcAddresses ), for a total of 50
+	// recipients.
 	ToAddresses []EmailAddressInfo
 
 	noSmithyDocumentSerde
@@ -4187,10 +4201,14 @@ type OperationalHour struct {
 	noSmithyDocumentSerde
 }
 
-// The additional recipients information of outbound email.
+// Information about the additional recipients of outbound email.
 type OutboundAdditionalRecipients struct {
 
-	// The additional CC email address recipients information.
+	// Information about the additional CC email address recipients. Email recipients
+	// are limited to 50 total addresses: 1 required recipient in the [DestinationEmailAddress]field and up to
+	// 49 recipients in the 'CcEmailAddresses' field.
+	//
+	// [DestinationEmailAddress]: https://docs.aws.amazon.com/connect/latest/APIReference/API_SendOutboundEmail.html#API_SendOutboundEmail_RequestBody
 	CcEmailAddresses []EmailAddressInfo
 
 	noSmithyDocumentSerde
@@ -4211,7 +4229,7 @@ type OutboundCallerConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The outbound email address Id.
+// The outbound email address ID.
 type OutboundEmailConfig struct {
 
 	// The identifier of the email address.
