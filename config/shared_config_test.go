@@ -806,6 +806,39 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 			Err: fmt.Errorf("invalid value for shared config profile field, response_checksum_validation=blabla, must be when_supported/when_required"),
 		},
+
+		"profile with ec2 instance profile name": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "ec2_instance_profile_name",
+			Expected: SharedConfig{
+				Profile:                "ec2_instance_profile_name",
+				EC2InstanceProfileName: "ProfileName",
+			},
+		},
+		"imds disabled = false": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "ec2-metadata-disabled-false",
+			Expected: SharedConfig{
+				Profile:                  "ec2-metadata-disabled-false",
+				EC2IMDSClientEnableState: imds.ClientEnabled,
+			},
+		},
+		"imds disabled = true": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "ec2-metadata-disabled-true",
+			Expected: SharedConfig{
+				Profile:                  "ec2-metadata-disabled-true",
+				EC2IMDSClientEnableState: imds.ClientDisabled,
+			},
+		},
+		"imds disabled = invalid": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "ec2-metadata-disabled-invalid",
+			Expected: SharedConfig{
+				Profile:                  "ec2-metadata-disabled-invalid",
+				EC2IMDSClientEnableState: imds.ClientDefaultEnableState,
+			},
+		},
 	}
 
 	for name, c := range cases {

@@ -80,7 +80,10 @@ const (
 
 	ec2MetadataServiceEndpointKey = "ec2_metadata_service_endpoint"
 
+	ec2MetadataDisabledKey   = "disable_ec2_metadata"
 	ec2MetadataV1DisabledKey = "ec2_metadata_v1_disabled"
+
+	ec2InstanceProfileNameKey = "ec2_instance_profile_name"
 
 	// Use DualStack Endpoint Resolution
 	useDualStackEndpoint = "use_dualstack_endpoint"
@@ -264,6 +267,11 @@ type SharedConfig struct {
 	// ec2_metadata_service_endpoint=http://fd00:ec2::254
 	EC2IMDSEndpoint string
 
+	// Specifies if the EC2 IMDS service client is enabled.
+	//
+	// disable_ec2_metadata=true
+	EC2IMDSClientEnableState imds.ClientEnableState
+
 	// Specifies that IMDS clients should not fallback to IMDSv1 if token
 	// requests fail.
 	//
@@ -357,6 +365,9 @@ type SharedConfig struct {
 
 	// ResponseChecksumValidation indicates if the response checksum should be validated
 	ResponseChecksumValidation aws.ResponseChecksumValidation
+
+	// Profile name used for fetching IMDS credentials.
+	EC2InstanceProfileName string
 }
 
 func (c SharedConfig) getDefaultsMode(ctx context.Context) (value aws.DefaultsMode, ok bool, err error) {
@@ -876,7 +887,9 @@ func mergeSections(dst *ini.Sections, src ini.Sections) error {
 			s3DisableMultiRegionAccessPointsKey,
 			ec2MetadataServiceEndpointModeKey,
 			ec2MetadataServiceEndpointKey,
+			ec2MetadataDisabledKey,
 			ec2MetadataV1DisabledKey,
+			ec2InstanceProfileNameKey,
 			useDualStackEndpoint,
 			useFIPSEndpointKey,
 			defaultsModeKey,
@@ -1110,6 +1123,8 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	updateString(&c.EC2IMDSEndpoint, section, ec2MetadataServiceEndpointKey)
 	updateBoolPtr(&c.EC2IMDSv1Disabled, section, ec2MetadataV1DisabledKey)
 
+	updateString(&c.EC2InstanceProfileName, section, ec2InstanceProfileNameKey)
+
 	updateUseDualStackEndpoint(&c.UseDualStackEndpoint, section, useDualStackEndpoint)
 	updateUseFIPSEndpoint(&c.UseFIPSEndpoint, section, useFIPSEndpointKey)
 
@@ -1151,6 +1166,8 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 		return fmt.Errorf("failed to load %s from shared config, %w", responseChecksumValidationKey, err)
 	}
 
+	updateEC2IMDSClientEnableState(&c.EC2IMDSClientEnableState, section, ec2MetadataDisabledKey)
+
 	// Shared Credentials
 	creds := aws.Credentials{
 		AccessKeyID:     section.String(accessKeyIDKey),
@@ -1167,6 +1184,21 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	updateString(&c.ServicesSectionName, section, servicesSectionKey)
 
 	return nil
+}
+
+func updateEC2IMDSClientEnableState(state *imds.ClientEnableState, sec ini.Section, key string) {
+	if !sec.Has(key) {
+		return
+	}
+
+	v := sec.String(key)
+	if strings.EqualFold(v, "true") {
+		*state = imds.ClientDisabled
+	} else if strings.EqualFold(v, "false") {
+		*state = imds.ClientEnabled
+	}
+
+	return
 }
 
 func updateRequestMinCompressSizeBytes(bytes **int64, sec ini.Section, key string) error {
@@ -1677,4 +1709,22 @@ func updateUseFIPSEndpoint(dst *aws.FIPSEndpointState, section ini.Section, key 
 	}
 
 	return
+}
+
+func (c SharedConfig) getEC2InstanceProfileName() (string, bool, error) {
+	if len(c.EC2InstanceProfileName) == 0 {
+		return "", false, nil
+	}
+
+	return c.EC2InstanceProfileName, true, nil
+}
+
+// GetEC2IMDSClientEnableState implements a EC2IMDSClientEnableState options
+// resolver interface.
+func (c SharedConfig) GetEC2IMDSClientEnableState() (imds.ClientEnableState, bool, error) {
+	if c.EC2IMDSClientEnableState == imds.ClientDefaultEnableState {
+		return imds.ClientDefaultEnableState, false, nil
+	}
+
+	return c.EC2IMDSClientEnableState, true, nil
 }
